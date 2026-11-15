@@ -54,7 +54,7 @@ public partial class GameController : Node3D
             return;
         }
 
-        var target = GridCoords.Pick(_camera, screen);
+        var target = GridCoords.Pick(_camera, screen, _board.DrawnHeight, BoardView.MaxDrawnHeight);
         if (target is null)
         {
             return;

@@ -12,7 +12,11 @@ public partial class BoardView : Node3D
     private const float WallHeight = 0.5f;
     private const float ShrineHeight = 0.2f;
 
+    /// <summary>The tallest block this view ever draws on a square.</summary>
+    public const float MaxDrawnHeight = WallHeight;
+
     private readonly Dictionary<GridPos, Node3D> _squares = new();
+    private readonly HashSet<GridPos> _wallBlocks = new();
 
     private readonly BoxMesh _floorMesh = Box(new Vector3(0.96f, FloorThickness, 0.96f), new Color(0.55f, 0.55f, 0.55f));
     private readonly BoxMesh _wallMesh = Box(new Vector3(1, WallHeight, 1), new Color(0.16f, 0.16f, 0.2f));
@@ -27,6 +31,7 @@ public partial class BoardView : Node3D
         }
 
         _squares.Clear();
+        _wallBlocks.Clear();
         for (int y = 0; y < map.Height; y++)
         {
             for (int x = 0; x < map.Width; x++)
@@ -45,11 +50,13 @@ public partial class BoardView : Node3D
             old.QueueFree();
         }
 
+        _wallBlocks.Remove(pos);
         var square = new Node3D { Position = GridCoords.ToWorld(pos) };
         switch (tile)
         {
             case Tile.Wall:
                 AddBox(square, _wallMesh, WallHeight / 2);
+                _wallBlocks.Add(pos);
                 break;
             case Tile.Shrine:
                 AddBox(square, _floorMesh, -FloorThickness / 2);
@@ -63,6 +70,13 @@ public partial class BoardView : Node3D
         AddChild(square);
         _squares[pos] = square;
     }
+
+    /// <summary>
+    /// How high the block drawn over the whole of square <paramref name="pos"/> stands above the
+    /// board plane, for picking: the wall height where a wall box is drawn, otherwise 0. The
+    /// shrine box does not fill its square, so it counts as 0.
+    /// </summary>
+    public float DrawnHeight(GridPos pos) => _wallBlocks.Contains(pos) ? WallHeight : 0;
 
     private static void AddBox(Node3D square, BoxMesh mesh, float centreY) =>
         square.AddChild(new MeshInstance3D { Mesh = mesh, Position = new Vector3(0, centreY, 0) });
