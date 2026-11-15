@@ -4,7 +4,7 @@ Date: 2026-11-15
 Status: awaiting final client approval
 
 Items marked **(decided)** were agreed with the client, either directly or
-by approving the lead's proposal. Items marked **(decided)** are the lead's
+by approving the lead's proposal. Items marked **(proposal)** are the lead's
 calls and have not been confirmed.
 
 ## 1. Intent
