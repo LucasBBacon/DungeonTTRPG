@@ -1,13 +1,10 @@
 using Xunit;
+using static Dungeon.Core.Tests.Fixtures;
 
 namespace Dungeon.Core.Tests;
 
 public class MoveTests
 {
-    private static readonly UnitId Hero = new(1);
-
-    private static Unit U(int id, int x, int y) => new(new UnitId(id), new(x, y), Faction.Party, []);
-
     private static GameState State(Unit? extra = null)
     {
         var map = GridMap.Parse("#####", "#...#", "#.#.#", "#...#", "#####");
@@ -62,11 +59,5 @@ public class MoveTests
         var map = GridMap.Parse("#.");
         Assert.Throws<ArgumentException>(() => GameState.Create(map, new[] { U(1, 1, 0), U(1, 1, 0) }, 7));
         Assert.Throws<ArgumentException>(() => GameState.Create(map, new[] { U(1, 0, 0) }, 7));
-    }
-
-    static void AssertRejected(GameState s, Command c, CommandError e)
-    {
-        var r = Engine.Apply(s, c);
-        Assert.Equal(e, r.Error); Assert.Empty(r.Events); Assert.Same(s, r.State);
     }
 }
