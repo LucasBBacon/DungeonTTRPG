@@ -31,6 +31,25 @@ public class Pcg32Tests
     public void NextInt_rejects_non_positive_bound(int bound) =>
         Assert.Throws<ArgumentOutOfRangeException>(() => Pcg32.NextInt(Pcg32.Seed(1, 1), bound));
 
+    // An even Inc (a zeroed or corrupt state) is not a full-period generator: without the
+    // guard the rejection loop in NextInt never terminates. NextUInt is listed first so a
+    // regression fails fast there rather than hanging the run.
+    [Theory] [InlineData(0UL, 0UL)] [InlineData(1UL << 62, 0UL)] [InlineData(5UL, 4UL)]
+    public void Draws_reject_state_with_even_inc(ulong state, ulong inc)
+    {
+        var bad = new RngState(state, inc);
+        Assert.Equal("s", Assert.Throws<ArgumentException>(() => Pcg32.NextUInt(bad)).ParamName);
+        Assert.Equal("s", Assert.Throws<ArgumentException>(() => Pcg32.NextInt(bad, 7)).ParamName);
+        Assert.Equal("s", Assert.Throws<ArgumentException>(() => Pcg32.Roll(bad, 20)).ParamName);
+    }
+
+    [Fact]
+    public void Draws_reject_default_state()
+    {
+        Assert.Throws<ArgumentException>(() => Pcg32.NextUInt(default));
+        Assert.Throws<ArgumentException>(() => Pcg32.NextInt(default, 7));
+    }
+
     [Fact]
     public void Streams_are_independent()
     {

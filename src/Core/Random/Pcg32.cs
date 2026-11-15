@@ -26,6 +26,14 @@ public static class Pcg32
 
     public static (uint Value, RngState Next) NextUInt(RngState s)
     {
+        // Only an odd increment gives a full-period generator. An even one (a zeroed or
+        // corrupt state) can sit on a fixed point, which would hang NextInt's rejection loop.
+        if ((s.Inc & 1) == 0)
+        {
+            throw new ArgumentException(
+                $"Invalid random state: Inc must be odd, got {s.Inc}.", nameof(s));
+        }
+
         unchecked
         {
             // The output is computed from the state before stepping.
