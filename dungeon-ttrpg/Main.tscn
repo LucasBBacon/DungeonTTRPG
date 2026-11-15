@@ -1,0 +1,57 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/GameController.cs" id="1_ctrl"]
+[ext_resource type="Script" path="res://scripts/BoardView.cs" id="2_board"]
+[ext_resource type="Script" path="res://scripts/IsoCamera.cs" id="3_cam"]
+[ext_resource type="Script" path="res://scripts/UnitView.cs" id="4_unit"]
+[ext_resource type="Script" path="res://scripts/DecisionPanel.cs" id="5_panel"]
+
+[sub_resource type="Environment" id="Environment_m0"]
+background_mode = 1
+background_color = Color(0.07, 0.08, 0.1, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.6
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_ctrl")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_m0")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 10, 0)
+
+[node name="BoardView" type="Node3D" parent="."]
+script = ExtResource("2_board")
+
+[node name="UnitView" type="MeshInstance3D" parent="."]
+script = ExtResource("4_unit")
+
+[node name="IsoCamera" type="Camera3D" parent="."]
+script = ExtResource("3_cam")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="DecisionPanel" type="PanelContainer" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_top = 24.0
+offset_right = 160.0
+offset_bottom = 104.0
+grow_horizontal = 2
+script = ExtResource("5_panel")
+
+[node name="Layout" type="VBoxContainer" parent="UI/DecisionPanel"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="UI/DecisionPanel/Layout"]
+layout_mode = 2
+text = "Choose a boon"
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="UI/DecisionPanel/Layout"]
+layout_mode = 2
+alignment = 1
