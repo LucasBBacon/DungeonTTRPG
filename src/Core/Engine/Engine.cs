@@ -60,32 +60,14 @@ public static class Engine
         }
 
         var unit = state.Units[index];
+        var error = CheckStep(state, unit, move.Dir);
+        if (error != CommandError.None)
+        {
+            return Reject(state, error);
+        }
+
         var from = unit.Pos;
-        var offset = move.Dir.Offset();
-        var to = new GridPos(from.X + offset.X, from.Y + offset.Y);
-
-        if (!state.Map.InBounds(to))
-        {
-            return Reject(state, CommandError.OutOfBounds);
-        }
-
-        if (!state.Map.IsWalkable(to))
-        {
-            return Reject(state, CommandError.Blocked);
-        }
-
-        // No corner cutting: a diagonal step needs both squares it passes between to be open.
-        if (offset.X != 0 && offset.Y != 0
-            && (!state.Map.IsWalkable(new GridPos(to.X, from.Y))
-                || !state.Map.IsWalkable(new GridPos(from.X, to.Y))))
-        {
-            return Reject(state, CommandError.CornerCut);
-        }
-
-        if (state.UnitAt(to) is not null)
-        {
-            return Reject(state, CommandError.Occupied);
-        }
+        var to = from.Step(move.Dir);
 
         long tick = state.Tick + 1;
         var next = state with
@@ -112,6 +94,42 @@ public static class Engine
         }
 
         return new StepResult(next, events.ToImmutable(), CommandError.None);
+    }
+
+    /// <summary>
+    /// Whether <paramref name="u"/> may step one square in direction <paramref name="d"/> from
+    /// where it stands: <see cref="CommandError.None"/> if so, otherwise the reason it may not.
+    /// Shared by <see cref="MoveCommand"/> and the path query so both obey the same rules.
+    /// </summary>
+    internal static CommandError CheckStep(GameState s, Unit u, Direction d)
+    {
+        var from = u.Pos;
+        var to = from.Step(d);
+
+        if (!s.Map.InBounds(to))
+        {
+            return CommandError.OutOfBounds;
+        }
+
+        if (!s.Map.IsWalkable(to))
+        {
+            return CommandError.Blocked;
+        }
+
+        // No corner cutting: a diagonal step needs both squares it passes between to be open.
+        if (d.IsDiagonal()
+            && (!s.Map.IsWalkable(new GridPos(to.X, from.Y))
+                || !s.Map.IsWalkable(new GridPos(from.X, to.Y))))
+        {
+            return CommandError.CornerCut;
+        }
+
+        if (s.UnitAt(to) is not null)
+        {
+            return CommandError.Occupied;
+        }
+
+        return CommandError.None;
     }
 
     private static StepResult ApplyAnswer(GameState state, AnswerDecisionCommand answer)

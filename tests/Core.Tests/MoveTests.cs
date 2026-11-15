@@ -5,17 +5,7 @@ namespace Dungeon.Core.Tests;
 
 public class MoveTests
 {
-    private static GameState State(Unit? extra = null)
-    {
-        var map = GridMap.Parse("#####", "#...#", "#.#.#", "#...#", "#####");
-        var units = new List<Unit> { U(1, 1, 1) };
-        if (extra is not null)
-        {
-            units.Add(extra);
-        }
-
-        return GameState.Create(map, units, 7);
-    }
+    private static GameState State(Unit? extra = null) => RingState(extra);
 
     [Fact]
     public void Move_onto_floor_succeeds()
