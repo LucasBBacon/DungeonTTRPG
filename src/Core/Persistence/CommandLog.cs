@@ -9,19 +9,29 @@ namespace Dungeon.Core;
 /// <summary>
 /// The run seed and every command applied so far. Together they reproduce a run exactly.
 /// Saved as single-line JSON in the same versioned style as <see cref="Snapshot"/>;
-/// <see cref="Load"/> reports problems with the same exceptions.
+/// <see cref="Load"/> reports problems with the same exceptions. Two logs with the same
+/// contents are not equal with <c>==</c> (the array compares by reference); compare their
+/// <see cref="Save"/> text instead.
 /// </summary>
 public sealed record CommandLog(ulong Seed, ImmutableArray<Command> Commands)
 {
     private const string MoveType = "move";
     private const string AnswerType = "answer";
 
-    public string Save() => PersistenceJson.Write(new LogDto
+    public string Save()
     {
-        Version = Snapshot.CurrentVersion,
-        Seed = Seed,
-        Commands = Commands.Select(ToDto).ToArray(),
-    });
+        if (Commands.IsDefault)
+        {
+            throw new InvalidOperationException("Cannot save a log whose Commands array is uninitialised.");
+        }
+
+        return PersistenceJson.Write(new LogDto
+        {
+            Version = Snapshot.CurrentVersion,
+            Seed = Seed,
+            Commands = Commands.Select(ToDto).ToArray(),
+        });
+    }
 
     public static CommandLog Load(string json) => PersistenceJson.Read<LogDto, CommandLog>(json, FromDto);
 
@@ -44,6 +54,9 @@ public sealed record CommandLog(ulong Seed, ImmutableArray<Command> Commands)
 
     private static CommandDto ToDto(Command command) => command switch
     {
+        // Written as a number, an undefined direction would give a log that Load refuses.
+        MoveCommand m when !Enum.IsDefined(m.Dir) =>
+            throw new InvalidOperationException($"Cannot save a move with undefined direction {(int)m.Dir}."),
         MoveCommand m => new CommandDto { Type = MoveType, Unit = m.Unit.Value, Dir = m.Dir.ToString() },
         AnswerDecisionCommand a => new CommandDto
         {

@@ -13,6 +13,12 @@ public static class Queries
     /// Returns an empty array if the unit is already there, and null if the unit is unknown or the
     /// target is off the map, not walkable, occupied or unreachable. Among equally short paths the
     /// result is fixed: squares are explored in <see cref="DirectionExt.All"/> order.
+    /// <para>
+    /// The path is a route, not a guarantee that every step will be accepted in one go: it may
+    /// cross a square that opens a decision (a shrine), after which moves are rejected until the
+    /// decision is answered, and a decision already pending in <paramref name="s"/> is not
+    /// considered. Apply the steps one at a time and stop when a decision becomes pending.
+    /// </para>
     /// </summary>
     public static ImmutableArray<Direction>? FindPath(GameState s, UnitId unit, GridPos target)
     {

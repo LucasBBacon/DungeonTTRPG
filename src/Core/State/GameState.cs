@@ -22,7 +22,9 @@ public sealed record PendingDecision(
 
 /// <summary>
 /// The complete immutable state of a run. <see cref="Units"/> is kept sorted by id so that
-/// every walk over it is in a fixed order.
+/// every walk over it is in a fixed order. Two states with the same contents are not equal
+/// with <c>==</c> or <c>Equals</c> (the map and the arrays compare by reference); compare
+/// their <see cref="Snapshot.Save"/> text instead.
 /// </summary>
 public sealed record GameState(
     GridMap Map,
@@ -35,7 +37,8 @@ public sealed record GameState(
     /// <summary>
     /// Builds the starting state of a run. Units are sorted by id. Throws an
     /// <see cref="ArgumentException"/> naming the problem if two units share an id, a unit
-    /// stands on a square that is not walkable, or two units share a square.
+    /// stands on a square that is not walkable, two units share a square, or a unit's
+    /// <see cref="Unit.Boons"/> is an uninitialised array.
     /// </summary>
     public static GameState Create(GridMap map, IEnumerable<Unit> units, ulong seed)
     {
@@ -54,6 +57,13 @@ public sealed record GameState(
             {
                 throw new ArgumentException(
                     $"Invalid units: duplicate unit id {unit.Id.Value}.", nameof(units));
+            }
+
+            if (unit.Boons.IsDefault)
+            {
+                throw new ArgumentException(
+                    $"Invalid units: unit {unit.Id.Value} has uninitialised boons; use an empty array.",
+                    nameof(units));
             }
 
             if (!map.IsWalkable(unit.Pos))

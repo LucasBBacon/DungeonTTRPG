@@ -57,4 +57,18 @@ public class Pcg32Tests
         Assert.NotEqual(Pcg32.NextUInt(r.Combat).Value, Pcg32.NextUInt(r.Loot).Value);
         Assert.Equal(r, RngStreams.FromSeed(99));
     }
+
+    [Fact]
+    public void Stream_ids_are_pinned() =>
+        Assert.Equal(
+            new RngStreams(Pcg32.Seed(99, 1), Pcg32.Seed(99, 2), Pcg32.Seed(99, 3)),
+            RngStreams.FromSeed(99));
+
+    [Fact]
+    public void Bound_errors_name_the_parameter()
+    {
+        var s = Pcg32.Seed(1, 1);
+        Assert.Equal("exclusiveMax", Assert.Throws<ArgumentOutOfRangeException>(() => Pcg32.NextInt(s, 0)).ParamName);
+        Assert.Equal("sides", Assert.Throws<ArgumentOutOfRangeException>(() => Pcg32.Roll(s, 0)).ParamName);
+    }
 }

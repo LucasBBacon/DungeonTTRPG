@@ -51,4 +51,33 @@ public class DecisionTests
     [Theory] [InlineData(-1)] [InlineData(3)]
     public void Answer_with_bad_option_is_rejected(int i) =>
         AssertRejected(AtShrine(), new AnswerDecisionCommand(new DecisionId(1), i), CommandError.InvalidOption);
+
+    // Golden values: a change here alters every seeded run.
+    [Fact]
+    public void Shrine_step_for_seed_7_is_pinned()
+    {
+        var r = Engine.Apply(State(), new MoveCommand(Hero, Direction.E));
+        Assert.Equal(new[] { 1, 8, 2 }, r.State.Pending!.Options);
+        Assert.Equal(2, r.State.NextDecisionId);
+        Assert.Equal(new GameEvent[] {
+            new UnitMoved(Hero, new(0, 0), new(1, 0)),
+            new TickAdvanced(1),
+            new DecisionRequested(r.State.Pending) }, r.Events);
+    }
+
+    [Fact]
+    public void Answer_to_an_unsupported_decision_kind_throws()
+    {
+        var s = AtShrine();
+        var odd = s with { Pending = s.Pending! with { Kind = (DecisionKind)99 } };
+        Assert.Throws<NotSupportedException>(() => Engine.Apply(odd, new AnswerDecisionCommand(new DecisionId(1), 0)));
+    }
+
+    [Fact]
+    public void Counters_at_their_limit_overflow_instead_of_wrapping()
+    {
+        var move = new MoveCommand(Hero, Direction.E);
+        Assert.Throws<OverflowException>(() => Engine.Apply(State() with { Tick = long.MaxValue }, move));
+        Assert.Throws<OverflowException>(() => Engine.Apply(State() with { NextDecisionId = int.MaxValue }, move));
+    }
 }

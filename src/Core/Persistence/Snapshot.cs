@@ -30,7 +30,7 @@ public sealed class SnapshotVersionException : Exception
         Found = found;
     }
 
-    /// <summary>The version number the save carries.</summary>
+    /// <summary>The version number the save carries, or <see cref="int.MaxValue"/> if it is larger than that.</summary>
     public int Found { get; }
 }
 
@@ -98,11 +98,13 @@ public static class Snapshot
                 throw new SnapshotFormatException("Invalid save: a unit is null.");
             }
 
-            units.Add(new Unit(
+            var unit = new Unit(
                 new UnitId(PersistenceJson.Need(u.Id, "unit id")),
                 new GridPos(PersistenceJson.Need(u.X, "unit x"), PersistenceJson.Need(u.Y, "unit y")),
                 PersistenceJson.ParseEnum<Faction>(u.Faction, "faction"),
-                [.. PersistenceJson.Need(u.Boons, "unit boons")]));
+                [.. PersistenceJson.Need(u.Boons, "unit boons")]);
+            NeedBoonIds(unit.Boons, $"unit {unit.Id.Value} boons");
+            units.Add(unit);
         }
 
         // Create applies the same placement rules as a new run: unique ids, walkable squares,
@@ -159,9 +161,43 @@ public static class Snapshot
                 throw new SnapshotFormatException(
                     $"Invalid save: pending decision source ({pending.Source.X}, {pending.Source.Y}) is outside the map.");
             }
+
+            // DecisionKind has one value, so ParseEnum above has already limited this to a
+            // shrine boon. Only a decision the rules can produce may be loaded, because
+            // answering it changes the source square and the unit.
+            if (map[pending.Source] != Tile.Shrine)
+            {
+                throw new SnapshotFormatException(
+                    $"Invalid save: pending decision source ({pending.Source.X}, {pending.Source.Y}) is not a shrine.");
+            }
+
+            if (state.FindUnit(pending.Unit)!.Pos != pending.Source)
+            {
+                throw new SnapshotFormatException(
+                    $"Invalid save: unit {pending.Unit.Value} is not standing on the pending decision's source.");
+            }
+
+            NeedBoonIds(pending.Options, "pending options");
+            if (pending.Options.Length != Engine.ShrineBoonChoices
+                || pending.Options.Distinct().Count() != pending.Options.Length)
+            {
+                throw new SnapshotFormatException(
+                    $"Invalid save: pending options must be {Engine.ShrineBoonChoices} different boons.");
+            }
         }
 
         return state with { Rng = rng, Pending = pending, Tick = tick, NextDecisionId = nextDecisionId };
+    }
+
+    private static void NeedBoonIds(ImmutableArray<int> boons, string name)
+    {
+        foreach (int boon in boons)
+        {
+            if (boon < 0 || boon >= Engine.BoonCount)
+            {
+                throw new SnapshotFormatException($"Invalid save: {name} holds unknown boon {boon}.");
+            }
+        }
     }
 
     private static RngDto ToDto(RngState s) => new() { State = s.State, Inc = s.Inc };
@@ -191,7 +227,8 @@ public static class Snapshot
         [JsonPropertyName("map"), JsonPropertyOrder(1)] public string[]? Map { get; set; }
         [JsonPropertyName("units"), JsonPropertyOrder(2)] public UnitDto?[]? Units { get; set; }
         [JsonPropertyName("rng"), JsonPropertyOrder(3)] public RngStreamsDto? Rng { get; set; }
-        [JsonPropertyName("pending"), JsonPropertyOrder(4)] public PendingDto? Pending { get; set; }
+        // Required: Save always writes it (as null when nothing is pending), so its absence means a damaged file.
+        [JsonPropertyName("pending"), JsonPropertyOrder(4), JsonRequired] public PendingDto? Pending { get; set; }
         [JsonPropertyName("tick"), JsonPropertyOrder(5)] public long? Tick { get; set; }
         [JsonPropertyName("nextDecisionId"), JsonPropertyOrder(6)] public int? NextDecisionId { get; set; }
     }
@@ -300,10 +337,13 @@ internal static class PersistenceJson
 
         if (!doc.RootElement.TryGetProperty("version", out var version)
             || version.ValueKind != JsonValueKind.Number
-            || !version.TryGetInt32(out int found))
+            || !version.TryGetInt64(out long wide))
         {
             throw new SnapshotFormatException("Invalid save: version is missing or not a whole number.");
         }
+
+        // A version too large for an int is still a newer version, not a damaged file.
+        int found = (int)Math.Clamp(wide, int.MinValue, int.MaxValue);
 
         if (found > Snapshot.CurrentVersion)
         {
@@ -313,6 +353,35 @@ internal static class PersistenceJson
         if (found < Snapshot.CurrentVersion)
         {
             throw new SnapshotFormatException($"Invalid save: unsupported version {found}.");
+        }
+
+        RejectDuplicateProperties(doc.RootElement);
+    }
+
+    // The JSON reader keeps the last of two properties with the same name. A save never
+    // repeats one, so a repeat means the file was altered and must not be half understood.
+    private static void RejectDuplicateProperties(JsonElement element)
+    {
+        if (element.ValueKind == JsonValueKind.Object)
+        {
+            var seen = new List<string>();
+            foreach (var property in element.EnumerateObject())
+            {
+                if (seen.Contains(property.Name))
+                {
+                    throw new SnapshotFormatException($"Invalid save: property '{property.Name}' appears twice.");
+                }
+
+                seen.Add(property.Name);
+                RejectDuplicateProperties(property.Value);
+            }
+        }
+        else if (element.ValueKind == JsonValueKind.Array)
+        {
+            foreach (var item in element.EnumerateArray())
+            {
+                RejectDuplicateProperties(item);
+            }
         }
     }
 }

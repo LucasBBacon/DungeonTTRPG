@@ -50,4 +50,37 @@ public class MoveTests
         Assert.Throws<ArgumentException>(() => GameState.Create(map, new[] { U(1, 1, 0), U(1, 1, 0) }, 7));
         Assert.Throws<ArgumentException>(() => GameState.Create(map, new[] { U(1, 0, 0) }, 7));
     }
+
+    [Fact] public void Create_rejects_duplicate_ids_on_different_squares() =>
+        Assert.Contains("duplicate unit id 1", Assert.Throws<ArgumentException>(
+            () => GameState.Create(GridMap.Parse(".."), new[] { U(1, 0, 0), U(1, 1, 0) }, 7)).Message);
+
+    [Fact] public void Create_rejects_two_units_on_one_square() =>
+        Assert.Contains("share square", Assert.Throws<ArgumentException>(
+            () => GameState.Create(GridMap.Parse(".."), new[] { U(1, 0, 0), U(2, 0, 0) }, 7)).Message);
+
+    [Fact] public void Create_rejects_a_unit_with_uninitialised_boons() =>
+        Assert.Contains("unit 1", Assert.Throws<ArgumentException>(
+            () => GameState.Create(GridMap.Parse("."), new[] { new Unit(Hero, new(0, 0), Faction.Party, default) }, 7)).Message);
+
+    [Fact] public void Diagonal_past_the_other_wall_corner_is_rejected()
+    {
+        // hero at (1,2): NE to (2,1) is floor but (2,2) is a wall
+        var s = Engine.Apply(State(), new MoveCommand(Hero, Direction.S)).State;
+        AssertRejected(s, new MoveCommand(Hero, Direction.NE), CommandError.CornerCut);
+    }
+
+    [Fact] public void Diagonal_move_across_open_floor_succeeds()
+    {
+        var s = GameState.Create(GridMap.Parse("..", ".."), new[] { U(1, 0, 0) }, 7);
+        var r = Engine.Apply(s, new MoveCommand(Hero, Direction.SE));
+        Assert.True(r.Ok);
+        Assert.Equal(new GridPos(1, 1), r.State.FindUnit(Hero)!.Pos);
+    }
+
+    // An undefined direction is a programming error, reported the same way whoever the unit is.
+    [Theory] [InlineData(1)] [InlineData(99)]
+    public void Undefined_direction_throws(int unit) =>
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => Engine.Apply(State(), new MoveCommand(new UnitId(unit), (Direction)99)));
 }

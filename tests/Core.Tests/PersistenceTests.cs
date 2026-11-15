@@ -171,6 +171,63 @@ public class PersistenceTests
             () => Snapshot.Load(json.Replace("\"kind\":\"ShrineBoon\"", "\"kind\":\"Riddle\"")));
     }
 
+    [Fact]
+    public void Load_rejects_a_pending_decision_the_rules_cannot_produce()
+    {
+        var start = GameState.Create(GridMap.Parse(".*.", "..#"), new[] { U(1, 0, 0), U(2, 0, 1) }, 7);
+        var s = Engine.Apply(start, Script[0]).State;
+        var p = s.Pending!;
+        Assert.Equal(Snapshot.Save(s), Snapshot.Save(Snapshot.Load(Snapshot.Save(s))));
+
+        var bad = new[]
+        {
+            s with { Pending = p with { Source = new GridPos(2, 1) } },         // a wall
+            s with { Pending = p with { Source = new GridPos(1, 1) } },         // plain floor
+            s with { Pending = p with { Unit = new UnitId(2) } },               // unit is not on the source
+            s with { Pending = p with { Options = [3, 3, 3] } },                // repeated option
+            s with { Pending = p with { Options = [-7, 1, 2] } },               // below the boon range
+            s with { Pending = p with { Options = [1, 2, 10] } },               // above the boon range
+            s with { Pending = p with { Options = [1] } },                      // too few
+            s with { Pending = p with { Options = [1, 2, 3, 4, 5, 6] } },       // too many
+            s with { Units = s.Units.SetItem(0, s.Units[0] with { Boons = [10] }) },    // unknown boon on a unit
+            s with { Units = s.Units.SetItem(0, s.Units[0] with { Boons = [-1] }) },
+        };
+        Assert.All(bad, b => Assert.Throws<SnapshotFormatException>(() => Snapshot.Load(Snapshot.Save(b))));
+    }
+
+    [Theory]
+    [InlineData("\"version\":1", "\"version\":2,\"version\":1")]
+    [InlineData("\"tick\":0", "\"tick\":5,\"tick\":0")]
+    [InlineData("\"x\":0", "\"x\":2,\"x\":0")]                        // inside a unit
+    [InlineData("\"pending\":null,", "")]                               // a field Save always writes
+    public void Load_rejects_duplicate_and_missing_properties(string find, string replace)
+    {
+        var good = Snapshot.Save(State());
+        Assert.Contains(find, good);
+        Assert.Throws<SnapshotFormatException>(() => Snapshot.Load(good.Replace(find, replace)));
+    }
+
+    [Fact]
+    public void Command_log_load_rejects_duplicate_properties() =>
+        Assert.Throws<SnapshotFormatException>(
+            () => CommandLog.Load("{\"version\":1,\"seed\":1,\"seed\":2,\"commands\":[]}"));
+
+    [Theory] [InlineData("2147483648")] [InlineData("3000000000")]
+    public void Version_too_large_for_an_int_is_still_a_newer_version(string version)
+    {
+        var json = Snapshot.Save(State()).Replace("\"version\":1", "\"version\":" + version);
+        Assert.Equal(int.MaxValue, Assert.Throws<SnapshotVersionException>(() => Snapshot.Load(json)).Found);
+    }
+
+    [Fact]
+    public void Command_log_save_names_the_problem_instead_of_crashing()
+    {
+        Assert.Contains("Commands", Assert.Throws<InvalidOperationException>(
+            () => new CommandLog(7, default).Save()).Message);
+        Assert.Contains("direction", Assert.Throws<InvalidOperationException>(
+            () => new CommandLog(7, [new MoveCommand(Hero, (Direction)99)]).Save()).Message);
+    }
+
     [Theory]
     [InlineData("")]
     [InlineData("{}")]

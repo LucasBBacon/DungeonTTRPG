@@ -16,9 +16,12 @@ public readonly record struct GridPos(int X, int Y)
     /// <summary>
     /// Number of steps between two squares when a diagonal step costs the same as an
     /// orthogonal one (Chebyshev distance): the larger of the two axis differences.
+    /// A distance too large for an int is reported as <see cref="int.MaxValue"/>.
     /// </summary>
     public static int Distance(GridPos a, GridPos b) =>
-        Math.Max(Math.Abs(a.X - b.X), Math.Abs(a.Y - b.Y));
+        (int)Math.Min(
+            int.MaxValue,
+            Math.Max(Math.Abs((long)a.X - b.X), Math.Abs((long)a.Y - b.Y)));
 }
 
 /// <summary>The eight step directions, clockwise from north.</summary>

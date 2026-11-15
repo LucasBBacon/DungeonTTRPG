@@ -69,6 +69,19 @@ public class GridTests
     }
 
     [Fact]
+    public void Diagonals_are_the_four_corner_directions() =>
+        Assert.Equal(
+            new[] { Direction.NE, Direction.SE, Direction.SW, Direction.NW },
+            DirectionExt.All.Where(d => d.IsDiagonal()));
+
+    [Fact]
+    public void Distance_saturates_instead_of_overflowing()
+    {
+        Assert.Equal(int.MaxValue, GridPos.Distance(new(-2_000_000_000, 0), new(2_000_000_000, 0)));
+        Assert.Equal(int.MaxValue, GridPos.Distance(new(0, int.MinValue), new(0, 0)));
+    }
+
+    [Fact]
     public void InBounds_covers_exactly_the_map()
     {
         var m = GridMap.Parse("..", "..", "..");
