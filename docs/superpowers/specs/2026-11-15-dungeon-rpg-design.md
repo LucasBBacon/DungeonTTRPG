@@ -1,10 +1,11 @@
 # Dungeon RPG: Design
 
 Date: 2026-11-15
-Status: awaiting client approval
+Status: awaiting final client approval
 
-Items marked **(decided)** were agreed with the client. Items marked
-**(proposal)** are the lead's calls and have not been explicitly confirmed.
+Items marked **(decided)** were agreed with the client, either directly or
+by approving the lead's proposal. Items marked **(decided)** are the lead's
+calls and have not been confirmed.
 
 ## 1. Intent
 
@@ -36,7 +37,6 @@ simulate and change.
 ### Non-goals
 
 - Multiplayer.
-- 3D presentation.
 - Console, mobile or browser releases. Target is PC. **(decided)**
 - Hex grids.
 - Full fidelity to the 5E rules. We borrow its shape, not its text.
@@ -62,62 +62,65 @@ These would make the game a failure even if everything works.
   **(decided)**
 - Engine: Godot 4 with C#. **(decided)**
 - Platform: PC. **(decided)**
-- Art budget is small. Presentation is 2D top-down. **(proposal)**
+- Presentation is isometric 3D. 3D artists are available. **(decided)**
+- During development the game uses a very simplified 3D version of that
+  style: placeholder meshes and flat materials. **(decided)**
+- Builds target Windows and Linux. **(decided)**
+- Input is mouse and keyboard, routed through remappable actions so
+  controller support can be added later. **(decided)**
 
 ## 4. Game design
 
 ### 4.1 The run
 
 - A run is 4–5 floors. Each floor takes roughly 15–20 minutes and ends in a
-  boss. **(proposal)**
+  boss. **(decided)**
 - The hero reaches about level 10 by the end of a run, so a level-up arrives
-  about every 8–10 minutes. **(decided: cap of about 10; pacing is a
-  proposal)**
+  about every 8–10 minutes. **(decided)**
 - Between floors the party reaches a camp: full rest, a shop or reward, and
-  a chance to recruit. **(proposal)**
+  a chance to recruit. **(decided)**
 - A run can be saved and resumed, but there is one save slot per run and it
-  is deleted on death. **(proposal)**
+  is deleted on death. **(decided)**
 
 ### 4.2 Party
 
 - The player builds one hero in full. **(decided)**
 - Up to 2–3 companions are recruited during the run. Companions have a fixed
   class and lighter progression: they level automatically, with a choice
-  only at a few key levels. **(decided: hero plus companions with lighter
-  progression; the detail is a proposal)**
+  only at a few key levels. **(decided)**
+- The player controls every party member in combat. **(decided)**
 - The run ends when the hero dies. A companion reduced to zero hit points is
   downed, and gets back up on 1 hit point if the party wins the fight.
-  **(proposal, expected to be tuned in playtests)**
+  **(decided, expected to be tuned in playtests)**
 
 ### 4.3 Grid, exploration and combat
 
 - Square grid. Movement in 8 directions. One diagonal rule everywhere: a
-  diagonal step costs the same as an orthogonal step. **(decided: square,
-  8-way, one fixed rule; the specific rule is a proposal)**
+  diagonal step costs the same as an orthogonal step. **(decided)**
 - Exploration and combat happen on the same map. Combat starts in place when
   enemies notice the party. There are no separate battle arenas.
   **(decided)**
 - Out of combat, the player moves the hero and companions follow. In combat,
-  all units act in initiative order. **(proposal)**
+  all units act in initiative order. **(decided)**
 - Exploration is turn-stepped: the world advances one tick for each hero
   step or action. Effect durations and short rests are counted in ticks.
-  **(proposal)**
+  **(decided)**
 - Enemies outside combat are asleep, stationary or patrolling, set per
-  monster in data. **(proposal)**
+  monster in data. **(decided)**
 - An enemy notices the party when it has line of sight and wins a
   perception check against the party's stealth. A side that is noticed
-  without noticing back is surprised and loses its first turn. **(proposal)**
+  without noticing back is surprised and loses its first turn. **(decided)**
 - Enemies within hearing range of a fight join it. Combat ends when no
   hostile unit is aware of the party, so fleeing by breaking line of sight
-  is possible. **(proposal)**
+  is possible. **(decided)**
 - Reactions resolve automatically by default, following a per-reaction
-  setting the player can change to "ask me". **(proposal)**
+  setting the player can change to "ask me". **(decided)**
 - A unit's turn has movement, one action, one bonus action, and one reaction
-  per round. **(proposal)**
+  per round. **(decided)**
 - Line of sight and fog of war use one symmetric visibility rule: if A can
-  see B, B can see A. **(proposal)**
+  see B, B can see A. **(decided)**
 - Core resolution is a d20 roll plus modifiers against a target number, with
-  advantage and disadvantage. **(proposal)**
+  advantage and disadvantage. **(decided)**
 
 ### 4.4 Resting and attrition
 
@@ -125,7 +128,7 @@ These would make the game a failure even if everything works.
   floors.
 - Short rests inside a floor are limited by a consumable supply.
 
-Both are proposals. The purpose is to make resource use across a floor a
+Both are decided. The purpose is to make resource use across a floor a
 real decision, which 5E relies on a DM to enforce.
 
 ### 4.5 Progression
@@ -149,11 +152,11 @@ real decision, which 5E relies on a DM to enforce.
 - Bosses are hand-designed. Which boss appears on a floor is drawn from a
   pool.
 
-All proposals.
+All decided.
 
 ### 4.7 Progress between runs
 
-**(proposal: recommended to the client, not yet explicitly confirmed)**
+**(decided)**
 
 - **Content unlocks lead.** Milestones add races, classes, subclasses,
   companions and loot to the pool. Examples: beat the floor 2 boss; win as a
@@ -293,6 +296,17 @@ monster in data.
 - Queues events so animations play in order while the core has already
   moved on.
 - Owns input, camera, UI, audio and visual effects only.
+- Renders in 3D with an orthographic camera at a fixed isometric angle.
+  **(decided)**
+- The rules grid stays flat: one level per floor, no height in the rules.
+  3D is how the map is drawn, not how it is simulated. **(proposal)**
+- The camera rotates in 90 degree steps, and walls between the camera and
+  the party are cut away or faded so units are never hidden. **(proposal)**
+- Each floor is assembled from 3D tile pieces chosen by the floor theme, so
+  placeholder pieces can be swapped for final art without code changes.
+  **(proposal)**
+- Mouse picking maps a screen position to a grid square in one place, used
+  by all movement and targeting.
 
 ## 7. Testing
 
@@ -323,7 +337,7 @@ monster in data.
 
 | Milestone | Contents | Question it answers |
 |---|---|---|
-| M0 Skeleton | Solution, automated tests, command and event loop, Godot draws a grid and moves a unit | Does the core and display split work? |
+| M0 Skeleton | Solution, automated tests, command and event loop, Godot draws a placeholder 3D isometric grid and moves a unit | Does the core and display split work? |
 | M1 Vertical slice | One class, levels 1–3, one generated floor, three enemy types, one boss, basic loot, permadeath | Is the loop fun? Does the effects system hold? |
 | M2 Full run | Four classes, companions, 4–5 floors, level 10, pick-one-of-three offers, save and resume | Does a 1–2 hour run hold together? |
 | M3 Between runs | Profile, unlocks, starting boons, difficulty ladder | Do players come back? |
@@ -344,8 +358,5 @@ arrive in M4.
 
 ## 11. Open items for the client
 
-- Confirm section 4.7, progress between runs.
-- Confirm 2D top-down presentation.
-- Confirm the companion and death rules in section 4.2.
-- Who controls companions in combat: the player or AI.
-- Which operating systems and input devices "PC" covers.
+- Confirm the three display proposals in section 6.8: flat rules grid,
+  camera rotation with wall cut-away, and tile-piece floors.
