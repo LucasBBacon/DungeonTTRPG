@@ -16,3 +16,12 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - run: dotnet test Dungeon.sln
+      # The Godot project is not in Dungeon.sln; compile it so a Core change cannot break it unseen.
+      - run: dotnet build dungeon-ttrpg/DungeonTTRPG.csproj
+      - name: Display layer decides no rule
+        shell: bash
+        run: |
+          if grep -rnE "IsWalkable|CheckStep|\.Step\(" dungeon-ttrpg/scripts; then
+            echo "Rule logic found in the display layer."
+            exit 1
+          fi

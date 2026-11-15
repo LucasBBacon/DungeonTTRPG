@@ -3,6 +3,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- Security advisories on packages arrive without a code change; report them, do not break the build. -->
+    <WarningsNotAsErrors>NU1901;NU1902;NU1903;NU1904</WarningsNotAsErrors>
     <LangVersion>12</LangVersion>
   </PropertyGroup>
 </Project>
