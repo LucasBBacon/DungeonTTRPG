@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Dungeon.Core</AssemblyName>
+    <RootNamespace>Dungeon.Core</RootNamespace>
+  </PropertyGroup>
+</Project>
