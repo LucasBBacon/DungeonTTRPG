@@ -2,3 +2,6 @@ bin/
 obj/
 .godot/
 *.user
+
+# Pre-existing Godot project: untracked pending the project owner's decision (plan puts the Godot project at game/, Task 8)
+/dungeon-ttrpg/
