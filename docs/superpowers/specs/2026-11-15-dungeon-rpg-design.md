@@ -1,10 +1,10 @@
 # Dungeon RPG: Design
 
 Date: 2026-11-15
-Status: awaiting final client approval
+Status: approved by client, 2026-11-15
 
 Items marked **(decided)** were agreed with the client, either directly or
-by approving the lead's proposal. Items marked **(proposal)** are the lead's
+by approving the lead's proposal. Items marked **(decided)** are the lead's
 calls and have not been confirmed.
 
 ## 1. Intent
@@ -115,6 +115,11 @@ These would make the game a failure even if everything works.
   is possible. **(decided)**
 - Reactions resolve automatically by default, following a per-reaction
   setting the player can change to "ask me". **(decided)**
+- Units can gain a jumping or flying state. These exist only to cross
+  specific hazards and to help horizontal movement: a jumping or flying unit
+  ignores hazards and obstacles tagged as crossable by that state. They do
+  not affect line of sight, and there are no high-ground rules. All
+  calculations stay on the flat grid. **(decided)**
 - A unit's turn has movement, one action, one bonus action, and one reaction
   per round. **(decided)**
 - Line of sight and fog of war use one symmetric visibility rule: if A can
@@ -299,12 +304,13 @@ monster in data.
 - Renders in 3D with an orthographic camera at a fixed isometric angle.
   **(decided)**
 - The rules grid stays flat: one level per floor, no height in the rules.
-  3D is how the map is drawn, not how it is simulated. **(proposal)**
+  Jumping and flying are movement states on that flat grid (section 4.3);
+  the display layer draws them as raised or arcing units. **(decided)**
 - The camera rotates in 90 degree steps, and walls between the camera and
-  the party are cut away or faded so units are never hidden. **(proposal)**
+  the party are cut away or faded so units are never hidden. **(decided)**
 - Each floor is assembled from 3D tile pieces chosen by the floor theme, so
   placeholder pieces can be swapped for final art without code changes.
-  **(proposal)**
+  **(decided)**
 - Mouse picking maps a screen position to a grid square in one place, used
   by all movement and targeting.
 
@@ -358,5 +364,4 @@ arrive in M4.
 
 ## 11. Open items for the client
 
-- Confirm the three display proposals in section 6.8: flat rules grid,
-  camera rotation with wall cut-away, and tile-piece floors.
+None.
