@@ -38,14 +38,18 @@ public partial class GameController : Node3D
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        if (@event is InputEventMouseButton click && click.IsActionPressed("select"))
+        // The action may be rebound to a key: then the target is whatever the pointer is over.
+        if (@event.IsActionPressed("select"))
         {
-            WalkTo(click.Position);
+            WalkTo(@event is InputEventMouse mouse ? mouse.Position : GetViewport().GetMousePosition());
         }
     }
 
     /// <summary>True while input must be ignored: events are still playing or a decision is pending.</summary>
-    private bool Busy => _playing || _events.Count > 0 || _state.Pending is not null;
+    private bool Busy => Animating || _state.Pending is not null;
+
+    /// <summary>True while events from an accepted command are still being shown.</summary>
+    private bool Animating => _playing || _events.Count > 0;
 
     private void WalkTo(Vector2 screen)
     {
@@ -68,7 +72,15 @@ public partial class GameController : Node3D
 
         foreach (var dir in path.Value)
         {
-            if (!Submit(new MoveCommand(DemoLevel.Hero, dir)) || _state.Pending is not null)
+            var error = Submit(new MoveCommand(DemoLevel.Hero, dir));
+            if (error != CommandError.None)
+            {
+                // The path came from the core's own query, so this means query and rules disagree.
+                GD.PushWarning($"Move {dir} rejected mid-path: {error}");
+                break;
+            }
+
+            if (_state.Pending is not null)
             {
                 break;
             }
@@ -79,24 +91,28 @@ public partial class GameController : Node3D
 
     private void Answer(int optionIndex)
     {
-        if (_playing || _events.Count > 0 || _state.Pending is not { } pending)
+        if (Animating || _state.Pending is not { } pending)
         {
             return;
         }
 
-        if (Submit(new AnswerDecisionCommand(pending.Id, optionIndex)))
+        // An option key outside the offered range is rejected by the core and quietly ignored.
+        if (Submit(new AnswerDecisionCommand(pending.Id, optionIndex)) == CommandError.None)
         {
             PlayNext();
         }
     }
 
-    /// <summary>Applies a command. If the core accepts it, adopts the new state and queues its events.</summary>
-    private bool Submit(Command command)
+    /// <summary>
+    /// Applies a command. If the core accepts it, adopts the new state and queues its events.
+    /// Returns the core's verdict: <see cref="CommandError.None"/> when accepted.
+    /// </summary>
+    private CommandError Submit(Command command)
     {
         var result = CoreEngine.Apply(_state, command);
         if (!result.Ok)
         {
-            return false;
+            return result.Error;
         }
 
         _state = result.State;
@@ -105,7 +121,7 @@ public partial class GameController : Node3D
             _events.Enqueue(e);
         }
 
-        return true;
+        return CommandError.None;
     }
 
     /// <summary>Plays queued events until one starts an animation; its end signal resumes playback.</summary>
@@ -128,7 +144,7 @@ public partial class GameController : Node3D
     {
         switch (e)
         {
-            case UnitMoved moved:
+            case UnitMoved moved when moved.Unit == DemoLevel.Hero:
                 _hero.MoveTo(moved.To);
                 return true;
             case DecisionRequested requested:
@@ -140,7 +156,10 @@ public partial class GameController : Node3D
             case TileChanged changed:
                 _board.SetTile(changed.Pos, changed.Tile);
                 return false;
+            case TickAdvanced:
+                return false;   // the clock is not shown in M0
             default:
+                GD.PushWarning($"No display for event {e}");
                 return false;
         }
     }
