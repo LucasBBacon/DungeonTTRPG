@@ -5,8 +5,7 @@ namespace Dungeon.Core.Tests;
 
 public class DecisionTests
 {
-    private static GameState State() =>
-        GameState.Create(GridMap.Parse(".*."), new[] { U(1, 0, 0) }, 7);
+    private static GameState State() => ShrineState();
 
     private static GameState AtShrine() =>
         Engine.Apply(State(), new MoveCommand(Hero, Direction.E)).State;
