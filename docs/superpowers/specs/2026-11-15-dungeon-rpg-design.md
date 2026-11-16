@@ -104,7 +104,8 @@ These would make the game a failure even if everything works.
   all units act in initiative order. **(decided)**
 - Exploration is turn-stepped: the world advances one tick for each hero
   step or action. Effect durations and short rests are counted in ticks.
-  **(decided)**
+  **(decided)** In combat, durations count in rounds; out of combat, one
+  round is one tick. See the ability and resource model, section 9.6.
 - Enemies outside combat are asleep, stationary or patrolling, set per
   monster in data. **(decided)**
 - An enemy notices the party when it has line of sight and wins a

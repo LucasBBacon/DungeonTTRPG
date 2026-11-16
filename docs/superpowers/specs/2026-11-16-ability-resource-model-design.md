@@ -1,7 +1,7 @@
 # Ability and Resource Model: Design
 
 Date: 2026-11-16
-Status: awaiting client approval
+Status: approved by client, 2026-11-16
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design) and
 `2026-11-16-character-stat-model-design.md` (stat model)
 
@@ -900,7 +900,7 @@ reason is the validation code from 14.3. **(lead's call)**
 
 ## 19. Changes this makes to the parent documents
 
-To be applied once this document is approved:
+Applied on 2026-11-16:
 
 - Stat model section 10: the ability and resource model is no longer
   pending; point to this document for skill action costs, which abilities

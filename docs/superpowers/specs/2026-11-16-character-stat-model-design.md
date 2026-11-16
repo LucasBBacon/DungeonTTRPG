@@ -394,8 +394,9 @@ step should leave a clear place for the rider to be added.
 
 Each item here is a commitment this model makes on another system's behalf.
 
-- **Ability and resource model.** What a skill use costs in a fight (action
-  or bonus action), which abilities carry riders, casting details.
+- **Ability and resource model.** Settled in
+  `2026-11-16-ability-resource-model-design.md`: skill action costs (its
+  7.2), which abilities carry riders (its 9), and casting (its 6.5).
 - **Death and healing.** Level 1 is fragile and death ends the run. The
   lead's proposal is a flat hit point bonus for the hero at level 1.
 - **Noticing.** Perception must not be rolled every tick. The lead's
