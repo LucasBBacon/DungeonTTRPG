@@ -10,7 +10,7 @@ calls and have not been confirmed.
 ## 1. Intent
 
 A turn-based RPG played in runs through a randomly generated dungeon. The
-appeal is building a character with tabletop-style depth (race, class,
+appeal is building a character with tabletop-style depth (species, class,
 multiclassing, a meaningful choice at almost every level) and seeing a
 different build and a different dungeon every run.
 
@@ -28,7 +28,7 @@ simulate and change.
 - Some progress carries between runs. **(decided)**
 - Every run plays differently: different dungeon, loot, enemies and build.
   **(decided)**
-- Progression in the style of 5E: race and class at creation, class
+- Progression in the style of 5E: species and class at creation, class
   progression, multiclassing, a choice at almost every level. **(decided)**
 - Dungeon has floors, bosses, and difficulty and rewards that scale with
   depth. **(decided)**
@@ -108,7 +108,9 @@ These would make the game a failure even if everything works.
 - Enemies outside combat are asleep, stationary or patrolling, set per
   monster in data. **(decided)**
 - An enemy notices the party when it has line of sight and wins a
-  perception check against the party's stealth. A side that is noticed
+  perception check against the party's stealth. This is one roll against
+  the party's passive stealth, never an opposed roll; see the character
+  stat model. A side that is noticed
   without noticing back is surprised and loses its first turn. **(decided)**
 - Enemies within hearing range of a fight join it. Combat ends when no
   hostile unit is aware of the party, so fleeing by breaking line of sight
@@ -138,7 +140,7 @@ real decision, which 5E relies on a DM to enforce.
 
 ### 4.5 Progression
 
-- At creation the player picks a race and a class. **(decided)**
+- At creation the player picks a species and a class. **(decided)**
 - The first release of the full run has four classes. More arrive through
   unlocks. **(decided)**
 - Every level offers a choice. Where the class table has nothing to offer,
@@ -163,7 +165,7 @@ All decided.
 
 **(decided)**
 
-- **Content unlocks lead.** Milestones add races, classes, subclasses,
+- **Content unlocks lead.** Milestones add species, classes, subclasses,
   companions and loot to the pool. Examples: beat the floor 2 boss; win as a
   multiclass character.
 - **One starting boon.** Before a run the player picks a single earned boon,
@@ -219,7 +221,7 @@ editor tool or C's adapter can be added later without touching the core.
 | `src/Sim` | C# console app | Runs headless fights and runs for balance |
 | `tests/Core.Tests` | C# test project | Unit, property and replay tests |
 | `game/` | Godot project | Rendering, input, audio, UI |
-| `content/` | JSON data files | Classes, races, feats, items, monsters, tables |
+| `content/` | JSON data files | Classes, species, feats, items, monsters, tables |
 
 `Core` targets the .NET version required by the Godot 4 release the team
 picks. `game/` references `Core` as a project reference.
@@ -347,12 +349,16 @@ monster in data.
 | M1 Vertical slice | One class, levels 1–3, one generated floor, three enemy types, one boss, basic loot, permadeath | Is the loop fun? Does the effects system hold? |
 | M2 Full run | Four classes, companions, 4–5 floors, level 10, pick-one-of-three offers, save and resume | Does a 1–2 hour run hold together? |
 | M3 Between runs | Profile, unlocks, starting boons, difficulty ladder | Do players come back? |
-| M4 Breadth | Races, multiclassing, more content, balance passes with the simulator | Is every run different? |
+| M4 Breadth | Species, multiclassing, more content, balance passes with the simulator | Is every run different? |
 
-M1 covers race selection only if it is trivial to include; otherwise races
-arrive in M4.
+M1 covers species selection only if it is trivial to include; otherwise
+species arrive in M4.
 
 ## 10. Left to the builders
+
+Abilities, derived numbers, skills, damage types and resistances are settled
+in `2026-11-16-character-stat-model-design.md`. What that document leaves
+open is listed in its own section 12.
 
 - Which four classes ship first, and their feature lists.
 - All numbers: hit points, damage, experience curve, loot rates.

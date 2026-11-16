@@ -1,7 +1,7 @@
 # Character Stat Model: Design
 
 Date: 2026-11-16
-Status: awaiting client approval
+Status: approved by client, 2026-11-16
 Parent: `2026-11-15-dungeon-rpg-design.md` (the main design)
 
 Items marked **(agreed)** were agreed with the client, either directly or by
@@ -434,12 +434,12 @@ Each item here is a commitment this model makes on another system's behalf.
 
 ## 13. Changes this makes to the main design
 
-To be applied to `2026-11-15-dungeon-rpg-design.md` once this is approved.
+Applied to `2026-11-15-dungeon-rpg-design.md` on 2026-11-16.
 
 - "Race" becomes "species" throughout.
 - Section 4.3: noticing uses one roll against a passive value, per
   section 6.
-- Section 10: remove the items this document now settles.
+- Section 10: points here for everything this document settles.
 
 ## 14. Open items for the client
 
