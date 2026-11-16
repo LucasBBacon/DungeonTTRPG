@@ -1,7 +1,7 @@
 # Enemies and Morale: Design
 
 Date: 2026-11-16
-Status: Draft, awaiting client approval, 2026-11-16
+Status: Approved, 2026-11-16
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model) and
@@ -242,8 +242,9 @@ Authored on the base type. The composed unit exists only at runtime.
 - Initiative = d20 + Intelligence.
 - Passive perception = 10 + Wisdom (+ proficiency if trained, double with
   mastery: change S-12), plus active effects.
-- **Guile** = 10 + Wisdom + role adjustment (13.3). **(agreed; change
-  S-11)**
+- **Guile** = 10 + Wisdom + proficiency + role adjustment (13.3), for
+  every enemy, whether or not it is trained in Perception. **(agreed;
+  change S-11)**
 - **AC uses the stat model's armour formula.** Natural armour uses the
   medium formula and counts as medium for every rule that reads the armour
   category. A shield adds on top. The table AC (6.2) is a **validation band
@@ -1167,9 +1168,12 @@ Further telegraphs, all **(lead's call)**:
 
 M2. **(agreed)**
 
-**Guile.** Every enemy has a derived guile:
+**Guile.** Every enemy has a derived guile **(agreed)**:
 
-guile = 10 + Wisdom modifier + role adjustment
+guile = 10 + Wisdom modifier + proficiency bonus + role adjustment
+
+Proficiency is added for **every** enemy, not only types trained in
+Perception, so guile grows with level. **(agreed)**
 
 | Unit | Adjustment |
 |---|---|
@@ -1181,22 +1185,22 @@ guile = 10 + Wisdom modifier + role adjustment
 - **Precedence (lead's call):** boss, then mindless, then role. Exactly one
   adjustment applies: a mindless controller is −2; a boss is +2 whatever its
   role. Elite rank, affixes and level shifts add nothing beyond the Wisdom
-  they change. A minion uses −2 whatever its role.
+  and proficiency they change. A minion uses −2 whatever its role.
 - Guile is a derived number, never stored (change S-11). In M2 no condition
   or item changes it. **(lead's call)**
-- Illustrative: a level 1 brute with Wisdom 0 has guile 8; a level 5
-  leader with Wisdom +2 has 14; a floor 5 controller with Wisdom +4 has 16.
-  A trained level 1 hero with Wisdom +1 reads 13; a trained level 10 hero
-  with Wisdom +3 reads 17, or 21 with mastery.
-- **Known risk:** as written, guile does not grow with level while the
-  reading score does, and most monsters' Wisdom is 0 or +1 (5.3). An
-  untrained party with Wisdom +3 (13) already reads most brutes, minions,
-  soldiers, artillery and skirmishers, and a trained one reads almost
-  everything by floor 3. The levers inside the agreed formula are the
-  role adjustments and monster Wisdom; the simulator gate in 20.3 checks
-  the result. Whether guile should also add proficiency for types trained
-  in Perception (mirroring the party's passive) is put to the client
-  (section 26).
+- Illustrative: a level 1 brute with Wisdom 0 has guile 10 (10 + 0 + 2
+  − 2); a level 5 soldier with Wisdom 0 has 13; a level 5 leader with
+  Wisdom +2 has 17; a level 9 lurker with Wisdom +1 has 17; a level 9
+  controller with Wisdom as its main ability (+5, 5.3) has 21. A trained
+  level 1 hero with Wisdom +1 reads 13; a trained level 10 hero with
+  Wisdom +3 reads 17, or 21 with mastery.
+- **Calibration:** because guile and a trained party's reading score both
+  grow with proficiency, Perception investment keeps its value with
+  depth: an untrained party reads mainly low-guile roles, a trained one
+  most enemies, and mastery nearly all. The role adjustments and monster
+  Wisdom are the levers; the readable-share gate in 20.3 (about 40%
+  untrained, 75% trained, 95% with mastery) checks the result in the
+  simulator.
 
 **The reading rule.**
 
@@ -2064,7 +2068,8 @@ same, which is what makes them learnable, and what makes intent reading
 - at least one tool against sustained effects **(settled)**;
 - tuned so that a 5–7 round fight is won by a party with about half its
   camp resources **(settled)**;
-- `fearless`; guile +2 with announced signature moves (13.2);
+- `fearless`; guile 10 + Wisdom + proficiency + 2, with announced
+  signature moves (13.2, 13.3);
 - never Death-warded **(settled)**; never affixed;
 - **HP** ≈ 6 × the party's typical damage per round × 0.85 (the rest of
   the budget is the escort). Illustratively about 40 on floor 1 (solo,
@@ -2219,8 +2224,8 @@ encounter or as a floor's boss.
   pips, Unyielding only by authored data, and Demand Surrender works on a
   rival once Routed. T7 does not apply: a rival party has no boss.
 - **Readability:** a class glyph replaces the role glyph; the plate
-  contract holds; the kit is listed on inspect. Guile is 10 + Wisdom + 2,
-  as for leaders.
+  contract holds; the kit is listed on inspect. Guile is 10 + Wisdom +
+  proficiency + 2, as for leaders (13.3).
 - **Content:** a handful of authored rival parties in total.
 - **Prerequisites:** the M2 party scorer, at least four classes, and
   companion kits proven in play.
@@ -2302,7 +2307,8 @@ The display asks; it never computes:
 - `ThreatReach(unit)` for the overlay (shares the party threat map).
 - `ReadIntent(enemy)` → `NotInScope` | `Hidden` | `Fleeing` |
   `Unreadable(guileIfLoreKnown)` | `Target(unit | none, ability?)`, the
-  ability only with Tactician; cached per state (13.3).
+  ability only with Tactician; cached per state (13.3). Guile is derived
+  on demand from Wisdom, level (proficiency) and role, never stored.
 - `ThreatPrice(unit)` → power and price in permille, pass or fail (6.5),
   for validation and the content tools.
 - `SignatureForecast(boss)` → the move and its target or area, if the boss
@@ -2388,7 +2394,11 @@ The build fails when:
   changes no state, and the read pass draws no random number (stream
   position unchanged; state hash unchanged except for Tactician
   reveals); the same command sequence with and without hovers gives the
-  same state; the guile threshold at equality reads; Tactician extends
+  same state; guile = 10 + Wisdom + proficiency + role adjustment for
+  every enemy, Perception-trained or not, matching the examples of 13.3
+  (a level 1 brute 10, a level 5 soldier 13, a level 5 leader with Wisdom
+  +2 17); guile rises when a level shift raises proficiency; the guile
+  threshold at equality reads; Tactician extends
   scope to 3 slots and shows the ability; a hidden enemy returns Hidden; a
   signature forecast shows whatever the guile.
 - **Steal:** the Dormant and Keen modifiers; disadvantage on an awake
@@ -2408,7 +2418,7 @@ The build fails when:
 | Templates and units | Rounds to resolution per template, with the share under 2 (and the share of Pack and leader-template fights ended by morale before round 2, under 10%); elite-room notables stolen without a fight (under 15%); cost residual per type (recalibrates the cost table and the minion and elite multipliers); damage share by role |
 | Affixes | Win rate by affix and by affix pair. Outliers block release. |
 | AI | Stall detector; decision time; joiner warning lead time (must be ≥1) |
-| Intent | Share of enemies readable by floor and party Perception investment, gated: targets about 40% for an untrained party, 75% trained, 95% with mastery (**lead's call**; outliers block release); read accuracy (a read matching the action taken, with and without intervening party actions, and with rolled turn-start steps as an expected mismatch); hero deaths with and without reading |
+| Intent | Share of enemies readable by floor and party Perception investment, with guile = 10 + Wisdom + proficiency + role adjustment (13.3), gated: targets about 40% for an untrained party, 75% trained, 95% with mastery (**lead's call**; outliers block release); read accuracy (a read matching the action taken, with and without intervening party actions, and with rolled turn-start steps as an expected mismatch); hero deaths with and without reading |
 | Morale | Share of fights ended by morale, and rounds saved; Rally uses, and the share undone by counters; Frighten, Demand Surrender and cow attempts and success by floor; **an Intimidation-focused hero against a baseline**; the share of enemies with no morale content, per theme |
 | Bosses | Boss kills involving re-engagement, and HP lost per reset |
 | Experience | Pool against need, with and without bypass and cow; catch-up frequency |
@@ -2486,12 +2496,12 @@ overlay, rather than 5 themes of about 27 types)**
   is cowable at 75% of the guard-post line. Mitigation: one attempt per
   group, failure starts a fight, and the item is forfeited. Watch cow
   success per floor, and tighten to 60% if needed.
-- **Intent reading is too strong or too weak.** Guile does not grow with
-  level while the reading score does (13.3), so even an untrained party
-  may read most enemies, and a trained one nearly all by floor 3.
-  Mitigation: the readable-share gate (20.3); guile adjustments and
-  Wisdom are the levers within the agreed formula; adding proficiency to
-  guile is put to the client (section 26). A read that often differs from
+- **Intent reading is too strong or too weak.** Guile and the party's
+  reading score both grow with proficiency (13.3), so the readable share
+  depends on monster Wisdom, the role adjustments and how much the party
+  invests in Perception. Mitigation: the readable-share gate (20.3; about
+  40% untrained, 75% trained, 95% with mastery); guile adjustments and
+  monster Wisdom are the levers within the agreed formula. A read that often differs from
   the action taken (because party actions intervene) may feel like a lie;
   the hover's "if its turn began now" wording and the turn log are the
   guard.
@@ -2547,8 +2557,8 @@ overlay, rather than 5 themes of about 27 types)**
 
 ## 24. Changes to approved documents
 
-To be applied when this document is approved. Each change names the exact
-section it touches.
+Applied on 2026-11-16, when this document was approved. Each change names
+the exact section it touches.
 
 **Main design (2026-11-15):**
 
@@ -2574,7 +2584,7 @@ section it touches.
 | S-8 | 7.1, Perception row, "In a fight" column | Add: read an enemy's intent when the party's best passive Perception is at least its guile (enemies 13.3) |
 | S-9 | 5.2, Wisdom row, "In a fight" column | "Divine casting; reading enemy intent (Perception against guile)". Lore (Intelligence) tells what an enemy is; Perception (Wisdom) tells what it is about to do. |
 | S-10 | 7.2, "Mastery" bullet; 12, bullet "The signature use for each skill's mastery" | Perception mastery's signature use is fixed as Tactician: readable enemies also show the ability, and reading extends to the next 3 enemies in initiative (enemies 13.4). The other skills' signature uses stay the builders'. |
-| S-11 | 6, derived numbers table (new row) | Guile (monsters): 10 + Wisdom + role adjustment (enemies 13.3) |
+| S-11 | 6, derived numbers table (new row) | Guile (monsters): 10 + Wisdom + proficiency + role adjustment, for every monster whether or not trained in Perception (enemies 13.3) |
 | S-12 | 6, Passive perception row and the bullet "A passive value includes proficiency…" | A passive value adds double proficiency with mastery. The party value is the maximum, over eligible members, of each member's full passive (10 + ability + proficiency or double proficiency + active effects). This also applies to party passive perception against lurkers (enemies 12.2, 13.3). |
 
 **Ability model (2026-11-16):**
@@ -2655,16 +2665,4 @@ committed wind-ups (13.2).
 
 ## 26. Open items for the client
 
-- Approval of this document, which confirms every **(lead's call)** and
-  applies the changes in section 24.
-- **Guile and level (13.3).** As agreed, guile = 10 + Wisdom + role
-  adjustment, which does not grow with level while the party's reading
-  score does. A play review found that an untrained party would read most
-  enemies on every floor, and a trained one nearly all by floor 3, so
-  Perception investment buys little and enemies rarely surprise. The
-  lead recommends adding **+ proficiency for types trained in
-  Perception** (mirroring the party's passive; illustratively a level 5
-  soldier 13, a level 9 leader with Wisdom +3 19, a Wisdom-main
-  controller 21), with the readable-share gate of 20.3 (about 40%
-  untrained, 75% trained, 95% mastery). Until the client decides, the
-  agreed formula stands and the gate reports the gap.
+None. Approved by the client on 2026-11-16.

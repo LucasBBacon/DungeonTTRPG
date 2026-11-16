@@ -340,10 +340,11 @@ Every ability declares exactly one cost **(lead's call)**:
 |---|---|
 | Attack (Extra Attack at level 5 for martial classes) | Action |
 | Dash, Disengage, Dodge, Help | Action |
-| Shove or grapple: Athletics against 10 + Fortitude **(settled)** | Replaces one attack |
+| Shove or grapple: Athletics against 10 + Fortitude **(settled)**; cannot target a unit more than one size larger than the user **(change A-10, enemies design 5.1)** | Replaces one attack |
 | Slip past an enemy: Acrobatics against 10 + Reflex **(settled)** | Part of movement, once per turn |
 | Escape a grapple | Action |
 | Hide: Stealth | Action; a bonus action with a class feature |
+| Search: Perception against the passive stealth of hidden units within line of sight. Monsters use it after losing the party; Keen gives advantage. **(change A-10, enemies design 11.1, 12.1)** | Action |
 | Frighten: Intimidation against 10 + Will **(settled)** | Action |
 | Rally: Leadership | Bonus action, once per ally per fight |
 | Study an enemy: Lore | Bonus action, once per enemy type per fight |
@@ -426,6 +427,10 @@ chance. The display computes nothing. **(settled principle)**
   weakness not yet revealed by Lore or seen in play is treated as unknown:
   damage is shown as normal and marked uncertain. Otherwise the preview
   would give away what Lore exists to reveal.
+- Intent reading (enemies design 13.3) is the one place the display shows
+  the monster AI's own output: gated by guile, computed live from the true
+  state filtered by the awareness record, with no roll and no commitment.
+  **(change A-8)**
 - The preview leaves out reactions it cannot predict: an enemy reaction the
   party has not seen, and any "ask me" reaction.
 - The property test in 16 compares preview and resolution with full
@@ -479,8 +484,9 @@ a ground zone (conditions design 11). **(change C11)**
   one not already Unfocused, and an application with `worsen` bypasses this
   gate (conditions design 6.2, 6.4). **(change C8)**
 - Rider strength is one table per damage type, indexed by proficiency band
-  (levels 1–4, 5–8, 9–10). The strengths themselves are the builders'.
-  **(settled that they are the builders')**
+  (levels 0–4, 5–8, 9–12). The strengths themselves are the builders'.
+  **(settled that they are the builders'; bands change A-1, enemies design
+  24)**
 
 ### 9.4 Where riders come from
 
@@ -661,7 +667,15 @@ are listed on the same screen above the choice. **(lead's call)**
   when a new fight starts. Fleeing and coming back gains the party nothing
   and costs the monster nothing.
 - `cooldown: N`: usable again N rounds after use, counted at the monster's
-  turn start. No recharge dice.
+  turn start. No recharge dice. The minimum cooldown is 2. **(change A-2,
+  enemies design 9.3)**
+- `readyAt: N` (default 1): first usable on the unit's Nth turn of the
+  current fight, counted by the unit's `turnsTaken`, reset to 0 at each
+  fight start. **(change A-2, enemies design 9.3)**
+- Cooldowns reset to ready at every combat end; `uses` never reset.
+  **(change A-2, enemies design 9.3)**
+- Party-facing hard-control abilities have `readyAt ≥ 2` and `cooldown ≥ 3`
+  and are never openers. **(change A-2, enemies design 9.3)**
 - Lore reveals uses left and cooldowns ("ready in 2"). Anything already seen
   in play is visible to everyone. **(settled)**
 
@@ -672,12 +686,18 @@ are listed on the same screen above the choice. **(lead's call)**
 - Boss fights are designed for 5–7 rounds, so a party's per-rest abilities
   run out and saved camp resources matter.
 - Boss actions: a boss may act at the end of other units' turns, N times
-  per round.
-- Resolve: two or three visible pips per fight. A pip is spent whenever a
+  per round, where N = min(1 on floors 1–2 or 2 on floors 3–5, the number
+  of party units). At most one at the end of any unit's turn, never after
+  the boss's own. Never hard control. **(change A-3, enemies design 17.5)**
+- Resolve: two or three visible pips per life. A pip is spent whenever a
   condition whose `controlRank` is at or above the boss's
   `resolveThreshold` (both static data) would land, by any route: a failed
   save, a successful skill check, or an automatic weak-target rider. It
   cancels only that condition. **(change C2, conditions design 12.3)**
+- Pips spent, phases passed and uses belong to the boss's **life**, not the
+  fight; cooldowns reset at combat end as for every monster. On a reset the
+  boss returns Wary and leashed, with hit points raised to the top of its
+  current phase band. **(change A-4, enemies design 17.5)**
 - Unyielding: every boss has it. Hard conditions downgrade once the pips
   are gone, a composure window follows some conditions, and it resists
   lockouts (conditions design 12.3). **(change C2)**
@@ -687,6 +707,11 @@ are listed on the same screen above the choice. **(lead's call)**
 - Every boss has at least one way to deal with sustained effects, such as
   breaking concentration or shedding a condition.
 - Boss actions are chosen by the same scorer as the boss's turns.
+- Each boss flags 1–2 limited abilities as `signature`. They are listed
+  from the boss's first turn and, whenever the boss would use one if its
+  turn began now, announced to everyone with target or area. A forecast,
+  not a wind-up: the deferral in 5 stands. **(change A-9, enemies design
+  13.2)**
 - Tuning target: a party with about half its camp resources wins with good
   play. **(agreed)**
 
@@ -721,7 +746,10 @@ score = expected damage (capped at the target's hit points)
   healing and damage prevented, defence and buff value, ending
   concentration, and position (exposure to enemies, opportunity attacks
   taken, allies in reach). A term is data where possible, a C# hook
-  otherwise.
+  otherwise. The monster AI adds the named data-weighted terms of enemies
+  design 11.1: approach, exposure, opportunity cost, range, target
+  preference, focus spread, Quarry, cohesion, body-block, area spread,
+  hold and leash. **(change A-6)**
 - **Units:** every term is in hit-point equivalents. A condition's control
   value is computed (conditions design 17.3); only its `denyPct` is set in
   the condition's data. **(change C14)**
@@ -730,7 +758,9 @@ score = expected damage (capped at the target's hit points)
 - **Search:** the scorer scores one step at a time, as pairs of a reachable
   square and an ability use from it (or either alone). It does not search
   whole-turn plans.
-- **Knowledge:** the monster AI reads the true state. The party scorer, and
+- **Knowledge:** the monster AI reads the true state, except that a party
+  unit's position is known only through that monster's awareness record
+  (enemies design 11.2). **(change A-5)** The party scorer, and
   so the suggestions and the simulator's party, uses only what the party
   knows (8.3).
 - **Spending policies** are settings of the same scorer: spend freely is a
@@ -945,9 +975,9 @@ Applied on 2026-11-16:
 - **Items and inventory:** weapons, armour values, Strength thresholds,
   weapon rider properties, starting gear, scrolls and wands. Class kits need
   a minimal starting-equipment set for M1.
-- **Enemies:** morale (agreed to be designed with enemies), behaviour after
-  losing sight of the party, and how a monster's cost against the floor's
-  difficulty budget is expressed.
+- **Enemies:** no longer pending. Monster cost is in enemies design 10.1,
+  behaviour after losing sight in 12.1, morale in 14 and experience on
+  resolution in 16 (`2026-11-16-enemies-design.md`). **(change A-7)**
 - **Content volume:** counts of companions, themes, monsters and bosses for
   M2, and which class is the M1 slice class.
 

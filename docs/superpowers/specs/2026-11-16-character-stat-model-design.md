@@ -129,8 +129,11 @@ fixing the abilities that have no job in this game.
 | Dexterity | Attack rolls with ranged and light weapons | Armour class in light armour; Reflex | Stealth |
 | Constitution | Holding concentration | Hit points; Fortitude | How much a short rest restores |
 | Intelligence | Initiative; arcane casting | Reflex | Traps, locks, secrets, identifying loot |
-| Wisdom | Divine casting | Will | Perception; not being surprised |
+| Wisdom | Divine casting; reading enemy intent (Perception against guile, enemies design 13.3) | Will | Perception; not being surprised |
 | Presence | Its own casters; frightening and rallying | Will | Companions, shop prices, event outcomes |
+
+Lore (Intelligence) tells what an enemy is; Perception (Wisdom) tells what
+it is about to do.
 
 ### 5.3 Departures from 5E
 
@@ -188,7 +191,7 @@ Formulas give the shape. Exact values are left to the builders.
 
 | Number | Shape |
 |---|---|
-| Proficiency bonus | +2 at levels 1–4, +3 at 5–8, +4 at 9–10 |
+| Proficiency bonus | +2 at levels 0–4, +3 at 5–8, +4 at 9–12 (levels 0, 11 and 12 are monster-only) |
 | Hit points | Fixed class amount per level + Constitution per level. Never rolled. |
 | Armour class | Unarmoured: 10 + Dexterity. Light: armour value + Dexterity. Medium: armour value + Dexterity up to +2. Heavy: flat armour value, needs a Strength threshold. A shield adds on top. |
 | Attack bonus | Ability + proficiency if trained in the weapon |
@@ -197,10 +200,11 @@ Formulas give the shape. Exact values are left to the builders.
 | Reflex | Better of Dexterity and Intelligence |
 | Will | Better of Wisdom and Presence |
 | Initiative | d20 + Intelligence, rolled once per fight |
-| Speed | 6 squares. Changed only by species traits, armour and conditions. |
-| Passive perception | 10 + Wisdom of the best party member |
+| Speed | 6 squares. Changed only by species traits, monster role or traits, armour and conditions; affixes are traits (enemies design 8.3). |
+| Passive perception | The best party member's full passive: 10 + Wisdom + proficiency if trained (double with mastery) + active effects (enemies design 12.2, 13.3) |
 | Passive stealth | 10 + Dexterity of the worst party member, less a heavy armour penalty |
 | Trap sense | 10 + Intelligence of the best party member |
+| Guile (monsters) | 10 + Wisdom + proficiency + role adjustment, for every monster whether or not trained in Perception (enemies design 13.3) |
 | Recovery | Hit points restored per short rest; grows with level and Constitution |
 | Carrying capacity | Item slots: base + Strength. No weights. |
 
@@ -222,7 +226,12 @@ Rules behind the table:
     Hiding and noticing meet passive perception or passive stealth.
 - **Each class is trained in one save**, which adds proficiency. **(agreed)**
 - **A passive value includes proficiency** when the member providing it is
-  trained in the matching skill. **(lead's call)**
+  trained in the matching skill, and double proficiency with mastery.
+  **(lead's call)** A party value taken from the best member is the
+  maximum, over eligible members, of each member's full passive (10 +
+  ability + proficiency or double proficiency + active effects). This also
+  applies to party passive perception against lurkers (enemies design
+  12.2, 13.3).
 - **Speed is not tied to an ability.** **(agreed)**
 - **Concentration is a Constitution check**, not a Fortitude save, so
   Strength cannot stand in for it. **(agreed)**
@@ -231,7 +240,9 @@ Rules behind the table:
   order held in the state. **(lead's call)**
 - **Natural 20 and natural 1** apply to attack rolls only: a 20 always hits
   and is a critical hit, a 1 always misses. Saves and skill checks have no
-  automatic results. **(lead's call)**
+  automatic results. **(lead's call)** *If adopted by death and healing
+  (enemies design 25):* a critical hit rolls all damage dice twice, for
+  every unit.
 - **Hit points gained per level are at least 1**, whatever the Constitution.
   **(lead's call)**
 
@@ -245,13 +256,13 @@ Rules behind the table:
 |---|---|---|---|
 | Athletics | Strength | Force doors, bars and chests (loud); jump crossable hazards | Shove, grapple, resist being moved |
 | Acrobatics | Dexterity | Cross narrow or unstable ground | Slip past enemies, escape grapples, avoid attacks when disengaging |
-| Stealth | Dexterity | Sneak past, set ambushes, steal from unaware enemies | Hide to break line of sight and strike unseen |
+| Stealth | Dexterity | Sneak past, set ambushes, steal from unaware enemies: only from a Dormant, Stationary or Patrolling carrier; adjacent; no other awake group member has line of sight; any party member's Stealth against the carrier's passive perception (−5 if Dormant, +5 if Keen), with disadvantage against an awake carrier; one try per carrier per floor; failure starts combat with nobody Surprised (enemies design 15.5) | Hide to break line of sight and strike unseen |
 | Mechanics | Intelligence | Find and disarm traps, pick locks (quiet), find secret doors | Re-arm or trigger traps against enemies |
 | Arcana | Intelligence | Identify magic items, read runes and shrines | Use scrolls and wands outside your class; recognise a spell being cast |
 | Lore | Intelligence | Know what a floor's theme is likely to hold | Reveal an enemy's traits, resistances, weaknesses and abilities |
-| Perception | Wisdom | Hear what is behind a door; spot hidden enemies | Avoid surprise; find hidden attackers |
+| Perception | Wisdom | Hear what is behind a door; spot hidden enemies | Avoid surprise; find hidden attackers; read an enemy's intent when the party's best passive Perception is at least its guile (enemies design 13.3) |
 | Medicine | Wisdom | Stretch short-rest supplies; cure poison and disease; at a short rest, Treat ends Diseased and Scarred (fixed difficulty, one attempt per Scarred unit per rest) | Get a downed companion back up; Treat (an action, adjacent): one roll against each instance's difficulty ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (conditions design 8) |
-| Intimidation | Presence | Make weak groups back off without a fight | Frighten enemies; break morale when a leader falls |
+| Intimidation | Presence | Make weak groups back off without a fight; cow eligibility and the `broken` flag (enemies design 14.8) | Frighten enemies; break morale when a leader falls; Demand Surrender (enemies design 14.6) |
 | Leadership | Presence | Better recruits, shop prices and event outcomes | Rally: steady an ally or give them a free step |
 
 Constitution has no skill; its three jobs are passive. Strength has one broad
@@ -268,6 +279,10 @@ skill.
   call)**
 - **Mastery** is a second tier: double proficiency plus one signature use
   per skill. It is earned through pick-one-of-three offers. **(agreed)**
+  Perception mastery's signature use is fixed as **Tactician**: readable
+  enemies also show the ability, and reading extends to the next 3 enemies
+  in initiative (enemies design 13.4). The other skills' signature uses
+  stay the builders'.
 - **Sources:** a class grants two or three skills from its own list. Offers
   and the starting boon add more. Companions come with fixed skills.
   **(agreed)**
@@ -418,11 +433,13 @@ Each item here is a commitment this model makes on another system's behalf.
   companion that gets up from its first downing on a floor gains Scarred
   (maximum hit points −10% until camp; Treat at a short rest removes it);
   settled in conditions design 18.10.
-- **Noticing.** Perception must not be rolled every tick. The lead's
-  proposal: roll once when line of sight is first made, and again only when
-  something changes, such as distance closing or noise.
-- **Morale.** Intimidation needs enemies that can flee or back down. To be
-  designed with enemies. **(agreed)**
+- **Noticing.** Settled in enemies design 12.2: each unaware group rolls
+  once per trigger with its best member in line of sight. Triggers: first
+  line of sight, 6- and 3-square bands, noise, attack. The party notices
+  non-hiding enemies automatically on line of sight; hiding enemies roll
+  Stealth against party passive perception.
+- **Morale.** Intimidation needs enemies that can flee or back down.
+  **(agreed)** Settled in enemies design 14.
 - **Dungeon content.** Locks, traps, secrets, noise and non-combat
   encounters must appear on most floors, or the skills are decoration.
 - **Items and inventory.** Slots, what counts as a spare weapon, armour
@@ -448,7 +465,8 @@ Each item here is a commitment this model makes on another system's behalf.
 - All numbers: class hit points, armour values, Strength thresholds, skill
   difficulties, rider strengths and durations, base carrying slots.
 - Which save each rider calls for.
-- The signature use for each skill's mastery.
+- The signature use for each skill's mastery, except Perception's
+  (Tactician, section 7.2).
 - The trait list and each trait's profile.
 - How far an effect can push an ability below −1.
 - The level-up and character sheet layout.

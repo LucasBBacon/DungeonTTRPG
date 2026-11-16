@@ -94,7 +94,9 @@ These would make the game a failure even if everything works.
 - The player controls every party member in combat. **(decided)**
 - The run ends when the hero dies. A companion reduced to zero hit points is
   downed, and gets back up on 1 hit point if the party wins the fight.
-  **(decided, expected to be tuned in playtests)** A companion that gets up
+  **(decided, expected to be tuned in playtests)** A fight ended by the
+  morale rule counts as a win for getting up (enemies design 14.6).
+  A companion that gets up
   from its first downing on a floor gains Scarred: maximum hit points −10%
   until camp, removed by Medicine Treat at a short rest. See the conditions
   design, section 14.
@@ -117,14 +119,22 @@ These would make the game a failure even if everything works.
 - Enemies outside combat are dormant, stationary or patrolling, set per
   monster in data. **(decided)** "Dormant" is a behaviour, not the Asleep
   condition (conditions design 5.5).
-- An enemy notices the party when it has line of sight and wins a
-  perception check against the party's stealth. This is one roll against
-  the party's passive stealth, never an opposed roll; see the character
-  stat model. A side that is noticed
+- Each unaware enemy group makes one perception check per trigger, using
+  its best member in line of sight, against the party's passive stealth,
+  never an opposed roll; see the character stat model. Triggers: first
+  line of sight, the party coming within 6 and then 3 squares, noise, and
+  an attack. The party notices non-hiding enemies automatically on line of
+  sight; hiding enemies roll Stealth against the party's passive
+  perception (enemies design 12.2). A side that is noticed
   without noticing back is surprised and loses its first turn. **(decided)**
-- Enemies within hearing range of a fight join it. Combat ends when no
-  hostile unit is aware of the party, so fleeing by breaking line of sight
-  is possible. **(decided)**
+- Enemies within hearing range of a fight join it. Joiners move at their
+  speed, are announced at least 1 round before they arrive (arrival is
+  delayed if needed to keep the warning), and enter at the next round
+  start. Joining groups are capped per fight: 1 on floors 1–2, 2 deeper;
+  groups beyond the cap do not change state. Combat ends when no hostile
+  unit is aware of the party, so fleeing by breaking line of sight is
+  possible. Combat also ends as a win when every hostile still in the
+  fight is Routed (enemies design 12.4, 14.6). **(decided)**
 - Reactions resolve automatically by default, following a per-reaction
   setting the player can change to "ask me". **(decided)**
 - Units can gain a jumping or flying state. These exist only to cross
@@ -165,8 +175,11 @@ real decision, which 5E relies on a DM to enforce.
   guaranteed path from entrance to boss.
 - Each floor has a theme that selects its tiles, enemies and hazards.
   Hazards include fixed condition terrain (conditions design 11).
-- Enemies are placed using a difficulty budget that grows with depth.
-- Loot comes from tables weighted by depth and rarity.
+- Enemies are placed using a difficulty budget that grows with depth:
+  party weight × band% × depth% × ladder% (enemies design 10.1).
+- Notable loot is a fixed per-floor budget, split by channel and pre-rolled
+  on the loot stream. Enemies carry part of it and never add to it
+  (enemies design 15.3).
 - Bosses are hand-designed. Which boss appears on a floor is drawn from a
   pool.
 

@@ -295,7 +295,8 @@ last initiative slot's turn-end step and the boss actions that follow it.
   or is the environment (11.6).
 - Surprised, Downed, and instances from the unit itself or its allies (an
   ally freezing it to protect it, a willing Banish) never count. Nor does an
-  own-turn hard condition (5.2), which never reaches a turn start.
+  own-turn hard condition (5.2), which never reaches a turn start. Nor do
+  morale states, which are not in the hard tier (enemies design 14.9).
 - Each lost turn start adds 1 to `hardTurnsLostThisFight`. When it reaches
   2, Unyielding (`combatOnly`) is applied at once. The hard instance
   already held runs its course.
@@ -367,7 +368,8 @@ last initiative slot's turn-end step and the boss actions that follow it.
 
 A unit under a hard condition, an instance marked hard as a composite
 lockout, or Surprised, cannot gain another hard condition (reason
-`alreadyControlled`).
+`alreadyControlled`). Morale states are not hard and are not blocked by
+it, nor by Steeled (enemies design 14.9).
 
 ### 6.7 The same-number rule
 
@@ -412,7 +414,7 @@ Gear and traits still stack as the stat model says.
 | Token | One stored payoff, used up by an event | Anyone |
 | Minor | A tax, or a shift in one number | Anyone, including at-will riders |
 | Major | Removes one part of the turn, or one category of options | Limited abilities, critical hits, weak targets; at-wills only rarely (ability model 9.4); plus the settled universal skill actions (grapple, Frighten), which are skill contests rather than riders |
-| Hard | Removes the whole turn, or takes over choices (`agency`) | **Only** limited abilities, monster `uses` or `cooldown` abilities, and traps and set pieces (11.6). Never at-wills, reactions or terrain squares. |
+| Hard | Removes the whole turn, or takes over choices (`agency`). Morale states (Routed included) are not in this tier (enemies design 14.9). | **Only** limited abilities, monster `uses` or `cooldown` abilities, and traps and set pieces (11.6). Never at-wills, reactions or terrain squares. |
 
 An ability with a property that can transform a condition into a hard one
 (`freezing`) counts as hard-capable for the depth gates and the hard row
@@ -447,7 +449,8 @@ above. **(lead's call)**
   in step 2 and the step 7 re-check, so a transform result (a Soaked hero
   frozen on floor 1 gets the fallback, Chilled) and a lockout built from
   monster majors are caught too. Content validation also checks the data.
-  Traps follow the same gates (11.6).
+  Traps follow the same gates (11.6). "Elite" means `rank: elite` on the
+  composed source unit, read at application (enemies design 7.1).
 - **Composure for the party (lead's call):** after a turn-part major
   (Dazed, Distracted, Nauseated, Hampered, Silenced) ends on a party unit,
   it is immune to hostile turn-part majors until the end of its next
@@ -473,8 +476,8 @@ above. **(lead's call)**
 
 Every harmful condition that can last more than 1 turn declares an in-fight
 end besides waiting. Validation enforces this. There are two exemptions:
-morale states (Demoralised, Routed), and lingering conditions, which end at
-rest.
+morale states (Emboldened, Demoralised, Routed, Cowed; enemies design
+14.9), and lingering conditions, which end at rest.
 
 | Cure tag | Cost | Ends |
 |---|---|---|
@@ -555,6 +558,19 @@ Each step that stops the pipeline emits `ConditionResisted {reason}`.
    order. A cancel ends processing.
 9. **Stacking** (6.3), then the instance is applied (a consumed transform
    source ends now), then `onApply` runs, then engine grants.
+   **Morale substitution (not a transform row):** when a Frighten or a
+   limited fear effect would be applied here to a Demoralised enemy that
+   is not Emboldened, the condition is discarded (no `onApply`; a step 6
+   transform it took part in is not applied and its source is not
+   consumed) and the morale engine applies Routed. Demoralised is not
+   consumed. Routed wins over the Frightened + limited fear → Panicked
+   transform (enemies design 14.3).
+
+**Morale states** (Emboldened, Demoralised, Routed, Cowed) are applied by
+the morale engine outside steps 2–7, so Steeled, hard exclusivity, wards,
+resolve and composure never see them. The Frighten of T5 and T6 still
+passes through the pipeline as Frightened; Routed is substituted only at
+step 9 (enemies design 14.3, 14.9).
 
 **Entry points** **(lead's call)**:
 
@@ -770,6 +786,10 @@ the outcome is the lead's call)**
 
 "Control" is a column of this table, not a tag.
 
+`fearless` is a morale profile read by the morale engine, not a tag
+immunity (the `morale` tag allows none). `mindless` implies `fearless`
+(enemies design 14.2).
+
 ### 12.2 Immunity budget
 
 **(change C6)**
@@ -912,10 +932,15 @@ Enforced by content validation. **(lead's call)**
 
 - At most 32 distinct conditions in M1 and M2 together, not counting engine
   states. Ids that share a `family` (Poisoned and its lingering form, the
-  Exposed and Cursed variants) count once.
+  Exposed and Cursed variants) count once. Separately, a budget of **4
+  morale states** (Emboldened, Demoralised, Routed, Cowed), hard-capped,
+  enemy-only, shown as a frame tint or banner (enemies design 14.9).
 - At most 6 distinct harmful conditions per floor theme. Conditions applied
-  by the theme's terrain squares count.
-- At most 2 conditions per enemy type.
+  by the theme's terrain squares count, and so do the implicit rider
+  conditions of every damage type the theme's monsters deal; the fire
+  rider's Burning and Smouldering count as 2 (enemies design 9.2).
+- At most 2 conditions per enemy type, counted by the rule of enemies
+  design 9.2. Bosses: at most 2 per phase kit, 3 across phases.
 - A theme that places water squares must also field a cold or lightning
   threat, and may not rely mainly on fire and acid enemies, because water
   would otherwise be a free cure and a fire resistance.
@@ -1067,10 +1092,12 @@ duration and ends, sources, and interactions.
 |---|---|---|
 | M1 | 10: Surprised, Prone, Grappled, Frightened, Hidden, Dodging, Stunned, Steeled, Dazed, Bleeding | 4: Incapacitated, Grappling, Concentrating (if the slice class casts), Unyielding |
 | M2 | 22: Staggered, Unfocused, Restrained, Chilled, Teetering, Spurred, Burning, Smouldering, Corroded, Withered, Poisoned (one family with its lingering form), Soaked, Oiled, Frozen, Blinded, Revealed, Rallied, Challenged, Helped, Warded, Weary, Scarred | 3: Downed, Flying, Jumping |
-| Later | 73, listed in each family below | 2: Levitating, Phasing |
+| M2 (morale) | 4 morale states, in their own budget (16): Emboldened, Demoralised, Routed, Cowed (enemies design 14) | — |
+| Later | 69, listed in each family below | 2: Levitating, Phasing |
 
 M1 and M2 together give 32 conditions, the budget's limit (16), with
-Scarred and Oiled included. **(lead's call)**
+Scarred and Oiled included. **(lead's call)** The morale states are outside
+it, in the separate morale budget.
 
 In M1, Bleeding comes from a non-rider monster claw and exercises ticks,
 values and re-application. Dazed exercises resolve, Unyielding and party
@@ -1338,7 +1365,10 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     switches to a spare. Units with natural weapons instead have
     disadvantage on weapon attacks until they recover (bonus action).
   - Intensity: binary.
-  - Duration: trigger, combatOnly. The weapon returns at combat end.
+  - Duration: trigger, combatOnly. An issue weapon returns at combat end
+    and cannot be taken. A dropped notable weapon may be seized with the
+    free interaction, becomes party loot and does not return at combat
+    end; the owner uses its `improvised` attack (enemies design 15.5).
   - Sources: disarm Techniques, whip or flail properties.
   - Interactions: Distracted prevents recovery.
 - **Harried** — minor · Later
@@ -1749,7 +1779,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Duration: `turns:2`, combatOnly. Ends on rally, Clear-minded or a
     tonic.
   - Sources:
-    - an ally within 3 squares downed or killed;
+    - an ally within 3 squares downed or killed (minion deaths do not
+      trigger it);
     - a **party** Frighten that misses by 4 or less;
     - fear auras (a successful save gives immunity for the fight).
   - Interactions: Frightened overrides it; suppresses Inspired.
@@ -1785,37 +1816,52 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Duration: `turns:2`, combatOnly.
   - Sources: Rally's "steady" option **(settled, stat model 7.1)**; enemy
     leader rallies (cooldown); courage potions.
-  - Interactions: Deafened units cannot be Rallied.
-- **Emboldened** — beneficial · Later
-  - Effect: while within 2 squares of its living leader: advantage on saves
-    against fear; Frighten against it has disadvantage; cannot be Panicked
-    or Routed.
+  - Interactions: Deafened units cannot be Rallied. An enemy leader's
+    Rally includes itself and keeps the once-per-ally-per-fight limit; a
+    Frightened leader cannot Rally (enemies design 14.4).
+- **Emboldened** — beneficial, morale state · **M2**
+  - Effect: while within 2 squares of its living leader, for members of
+    the leader's own group only: advantage on saves against fear; Frighten
+    against it has disadvantage; cannot be Panicked or Routed; shielded
+    from the loss triggers T2 and T3 (enemies design 14.3).
   - Intensity: binary, source-tied aura.
   - Duration: while in range.
-  - Sources: leader traits.
-  - Interactions: onEnd (`sourceGone`, enemy groups) gives Demoralised.
-- **Demoralised** — minor, morale state · Later (depends on the enemies
-  design)
-  - Effect: Intimidation against it has advantage; at or below half its hit
-    points it becomes Routed.
+  - Sources: the leader's aura (Command, enemies design 14.4).
+  - Interactions: ends with no `onEnd`; the morale engine's T1 Demoralises
+    the non-fearless members when the leader falls, whether it dies or is
+    Routed, Yielded or Fled (enemies design 14.3).
+- **Demoralised** — minor, morale state · **M2**
+  - Effect: Intimidation against it has advantage; at or below its morale
+    profile's rout line it becomes Routed: ½ hit points for `normal` and
+    `skittish`, ¼ for `steady`, at once for a minion Demoralised by T1 or
+    T2 (enemies design 14.3).
   - Intensity: binary.
   - Duration: combatOnly; ends when a living leader of its group Rallies
     it.
-  - Sources: its leader falls, or half its group is down.
-- **Routed** — morale state, agency, enemy-only · Later
+  - Sources: the morale engine's loss triggers T1–T4, cost-weighted and
+    edge-triggered (enemies design 14.3). The loss triggers skip
+    Emboldened members; `fearless` members are never Demoralised.
+- **Routed** — morale state, agency, enemy-only · **M2**
   - Effect: flees at full speed and Dashes; attacks only when cornered;
-    leaves the fight if it ends a turn unseen by the party.
+    makes no opportunity attacks; throws down its notable item; leaves the
+    fight and the floor if it ends a turn unseen by the party, without
+    warning anyone or returning (enemies design 14.5).
   - Intensity: binary.
-  - Duration: combatOnly; a leader's rally ends it.
-  - Sources: morale breaks.
-  - Interactions: bosses are immune.
-- **Cowed** — exploration state, enemy-only · Later
+  - Duration: combatOnly; a leader's rally ends it and removes its cost
+    from the group's losses.
+  - Sources: morale breaks; the morale substitution for a Frighten or a
+    limited fear effect on a Demoralised enemy that is not Emboldened
+    (9.2, step 9).
+  - Interactions: bosses are immune; wins over the Frightened + limited
+    fear → Panicked transform (enemies design 14.3).
+- **Cowed** — exploration state, morale state, enemy-only · **M2**
   - Effect: a weak group will not start combat and steps aside for the
     party. Any harmful act against a member breaks it, and the attacked
-    members become Shaken.
+    members become Shaken. Experience is paid once per member.
   - Intensity: binary, group-wide.
   - Duration: until the floor ends.
-  - Sources: out-of-combat Intimidation **(settled job, stat model 7.1)**.
+  - Sources: out-of-combat Intimidation **(settled job, stat model 7.1)**;
+    eligibility and the `broken` flag as in enemies design 14.8.
 - **Charmed** — major · Later
   - Effect: cannot attack or harm the source, or include it in a harmful
     area; no opportunity attacks against it; the source has advantage on
@@ -1924,7 +1970,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     or Surprised.
   - Intensity: 1–2 charges.
   - Duration: fallback 3 turns.
-  - Sources: ward spells; charms; bosses at phase change.
+  - Sources: ward spells; charms; bosses at phase change; monster affixes
+    (`oncePerLife`, enemies design 7.2).
   - Interactions: the preview says "will spend ward"; a warded boss keeps
     its pips.
 - **Shielded** — token · Later
@@ -1973,7 +2020,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Duration: `charges:1`, always combatOnly, so it needs no fallback
     (5.3).
   - Sources: Death-Ward-shaped tier 3 spell (SRD); rare charm; elite
-    enemies, never bosses.
+    enemies, never bosses (affix grants are `oncePerLife`, enemies design
+    7.2).
 - **Sanctified** — beneficial · Later
   - Effect: an enemy targeting it must first pass a Will save or choose
     another target (its pool is not spent).
@@ -2121,7 +2169,7 @@ Record of the catalogue's shaping. **(lead's call)**
 | Delayed, Off-Balance, Slick, Focused, Siphoning, Jinxed | Cut: no niche, or the scorer cannot value them |
 | Lean rest | Cut: a free refill |
 | Encumbered | Moved to the items design |
-| Quarry | Moved to the enemies design |
+| Quarry | Moved to the enemies design (11.4): a no-effect AI focus telegraph, not a condition |
 | Drained | Dropped as a name |
 
 ## 19. Interaction table
@@ -2138,7 +2186,6 @@ Record of the catalogue's shaping. **(lead's call)**
 | engine | Downed (got up, first downing this floor) | Scarred | Maximum hit points −10% (minimum 1) until camp |
 | onEnd | Hasted (any end except a cancel) | Dazed | Lethargy turn |
 | onEnd | Panicked | Frightened, 1 turn, same source | Steps down the fear ladder |
-| onEnd | Emboldened (`sourceGone`, enemy groups) | Demoralised | The pack breaks |
 | cancel | Hasted ↔ Chilled | | Both removed |
 | cancel | Blessed ↔ Baned | | Both removed |
 | cancel | Burning ↔ Chilled; Burning ↔ Soaked | | Both removed |
@@ -2331,7 +2378,7 @@ Each tied to a risk:
   Treat and tonics; Scarred and its rest-screen support; water, web, fire
   and oil-slick squares with the burn-away rule; hazard edges, landing and
   drags into hazards; boss shed actions; lingering conditions and rest
-  cures.
+  cures; the four morale states (enemies design 14).
 - **Later:** the remaining catalogue, each behind the simulator gate.
 
 ## 22. Risks
@@ -2366,7 +2413,7 @@ Each tied to a risk:
 - **Tonic supply becomes the real balance knob.** Track tonics used per
   fight; pricing belongs to the items design.
 - **Rules owned by designs that do not exist yet:** hazard placement
-  (dungeon generation); morale (enemies); Disarmed, Coated, Clinging,
+  (dungeon generation); Disarmed, Coated, Clinging,
   Pitted Armour and tonics (items); the rest of death and healing.
 - **Protected content.**
   - Generic names that match other games' conditions need a check before
@@ -2423,8 +2470,9 @@ the exact section it touches.
 
 - **Items and inventory:** tonics and their prices, Remedy, flasks (water,
   oil), Disarmed, Coated, Clinging, Pitted Armour.
-- **Enemies:** morale (Demoralised, Routed, Emboldened, Cowed), elite
-  definitions for the depth gates, enemy condition kits within the budget.
+- **Enemies:** morale (Demoralised, Routed, Emboldened, Cowed) is resolved
+  by enemies design 14; elite definitions for the depth gates (7.1) and
+  enemy condition kits within the budget (9.2) are settled there too.
 - **Dungeon content:** traps (11.6), their set-piece status for the depth
   gates, and which floors hold them.
 - **Dungeon generation:** hazard and terrain placement by theme, and the
