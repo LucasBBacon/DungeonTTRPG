@@ -1,7 +1,7 @@
 # Items and Inventory: Design
 
 Date: 2026-11-16
-Status: Draft, awaiting client approval, 2026-11-16
+Status: Approved, 2026-11-16
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model),
@@ -1505,8 +1505,8 @@ Tests:
 
 ## 23. Changes to approved documents
 
-Applied on approval of this document. Each change names the exact section
-it touches. I-14 and I-16 are applied as text marked Later.
+Applied on 2026-11-16, when this document was approved. Each change names
+the exact section it touches. I-14 and I-16 are applied as text marked Later.
 
 **Conditions design (2026-11-16):**
 
@@ -1586,5 +1586,4 @@ mundane bases are not loot, and family caps all stand.
 
 ## 25. Open items for the client
 
-None beyond approval of this document. Its lead's calls are confirmed on
-approval.
+None. Approved by the client on 2026-11-16.

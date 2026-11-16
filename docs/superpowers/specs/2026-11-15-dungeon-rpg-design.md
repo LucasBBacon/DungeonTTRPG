@@ -81,7 +81,11 @@ These would make the game a failure even if everything works.
 - The hero reaches about level 10 by the end of a run, so a level-up arrives
   about every 8–10 minutes. **(decided)**
 - Between floors the party reaches a camp: full rest, a shop or reward, and
-  a chance to recruit. **(decided)**
+  a chance to recruit. **(decided)** Every camp also has a basic vendor
+  (supply, potions in limited pre-rolled stock, tonics, Remedy, mundane
+  bases). "A shop or reward" is a choice between a notables shop (1–2
+  notables) and a camp reward card, separate from the boss reward card
+  (enemies design 17.5). **(decided)** (items design 10.3, 10.4)
 - A run can be saved and resumed, but there is one save slot per run and it
   is deleted on death. **(decided)**
 

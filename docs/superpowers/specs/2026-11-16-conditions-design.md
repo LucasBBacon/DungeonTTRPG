@@ -489,7 +489,7 @@ morale states (Emboldened, Demoralised, Routed, Cowed; enemies design
 | `shakeOff` | Half speed (the action at speed 0). One use ends every shake-off condition on the unit. | Burning, Smouldering, Corroded (rinse), Oiled (wipe), Mired |
 | `damageType:X` | Damage of type X, at least 1 | Fire ends Chilled, Frozen, Soaked and Oiled; cold ends Burning and Smouldering; bludgeoning ends Frozen; a binding's breaker type ends Restrained or Rooted |
 | `damage` | Any damage | Asleep |
-| `tonic` | A consumable (items design). As a bonus action it ends one minor condition; drunk as an action it ends one major. Thrown at an ally (action): minor only. Never hard or lingering. A `cureImmune` list lets a condition opt out. | By tier |
+| `tonic` | A consumable (items design). As a bonus action it ends one minor condition; drunk as an action it ends one major. Thrown at an ally (action): minor only. Given to an adjacent ally (action): minor only (items design 7.1). Never hard or lingering. A `cureImmune` list lets a condition opt out. | By tier |
 | `cleanse` | Spells that declare the tiers and tags they end | By content |
 | `sourceGone`, `combatEnd`, `rest`, `camp` | Automatic | By flag |
 | `bossShed` | Boss action (M2) | One condition of the boss's choice |
@@ -867,6 +867,9 @@ immunity (the `morale` tag allows none). `mindless` implies `fearless`
   blocked. A level gained by an existing instance (6.5) is not a new one.
   **Scarred is exempt:** it always lands and does not count toward the 2,
   because the client made it the fixed cost of a downing. **(lead's call)**
+  Later: an item curse's cost is a `whileEquipped` item property, not a
+  lingering condition, and **Cursed (Clinging) from an item is exempt from
+  the cap of 2**, as Scarred is (items design 13).
 - A camp-bought **Remedy** item ends one non-curse lingering condition.
 - **Cures:** Treat or a Mechanics repair during a rest; shrines or Arcana
   for curses; camp clears everything.
@@ -1369,6 +1372,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     and cannot be taken. A dropped notable weapon may be seized with the
     free interaction, becomes party loot and does not return at combat
     end; the owner uses its `improvised` attack (enemies design 15.5).
+    Party side: a party weapon still on the ground at combat end returns
+    to its owner (items design 7.1). A Clinging weapon is never dropped
+    (Later, items design 13).
   - Sources: disarm Techniques, whip or flail properties.
   - Interactions: Distracted prevents recovery.
 - **Harried** — minor · Later
@@ -2115,6 +2121,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Duration: `untilCamp`; a shrine, or Arcana at a rune (a failure gives
     Weary 1).
   - Sources: cursed loot, desecrated shrines.
+  - Interactions: an item curse's cost is a `whileEquipped` item property,
+    not a lingering condition. Clinging from an item is exempt from the cap
+    of 2 harmful lingering conditions, as Scarred is (items design 13).
 - **Restless** — minor · Later
   - Effect: its next short rest gives half Recovery and no Slot Recovery.
   - Duration: until that rest.
@@ -2168,7 +2177,7 @@ Record of the catalogue's shaping. **(lead's call)**
 | Entranced | Asleep with the `noProne` flag |
 | Delayed, Off-Balance, Slick, Focused, Siphoning, Jinxed | Cut: no niche, or the scorer cannot value them |
 | Lean rest | Cut: a free refill |
-| Encumbered | Moved to the items design |
+| Encumbered | Retired: the hard slot cap replaces it; additions are blocked, nothing is ejected (items design 5.4) |
 | Quarry | Moved to the enemies design (11.4): a no-effect AI focus telegraph, not a condition |
 | Drained | Dropped as a name |
 
@@ -2468,8 +2477,10 @@ the exact section it touches.
 
 ## 25. Depends on systems not yet designed
 
-- **Items and inventory:** tonics and their prices, Remedy, flasks (water,
-  oil), Disarmed, Coated, Clinging, Pitted Armour.
+- **Items and inventory:** the generic layer is settled by the items design
+  (2026-11-16). Open in its category designs (items design 17): tonics and
+  their prices, Remedy, flasks (water, oil), Disarmed, Coated, Clinging,
+  Pitted Armour.
 - **Enemies:** morale (Demoralised, Routed, Emboldened, Cowed) is resolved
   by enemies design 14; elite definitions for the depth gates (7.1) and
   enemy condition kits within the budget (9.2) are settled there too.

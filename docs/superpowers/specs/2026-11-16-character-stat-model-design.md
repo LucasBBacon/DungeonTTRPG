@@ -206,7 +206,7 @@ Formulas give the shape. Exact values are left to the builders.
 | Trap sense | 10 + Intelligence of the best party member |
 | Guile (monsters) | 10 + Wisdom + proficiency + role adjustment, for every monster whether or not trained in Perception (enemies design 13.3) |
 | Recovery | Hit points restored per short rest; grows with level and Constitution |
-| Carrying capacity | Item slots: base + Strength. No weights. |
+| Carrying capacity | Pack slots: max(2, 3 + Strength) *(illustr. base 3, minimum 2)*, holding items of size 1 or 2. Belt, trinkets, weapon sets (active and one spare set, shield included) and armour sit outside the pack. Reads Strength excluding conditions. No weights. (items design 5) |
 
 All rows **(agreed)**, with the unarmoured row a **(lead's call)**.
 
@@ -442,8 +442,14 @@ Each item here is a commitment this model makes on another system's behalf.
   **(agreed)** Settled in enemies design 14.
 - **Dungeon content.** Locks, traps, secrets, noise and non-combat
   encounters must appear on most floors, or the skills are decoration.
-- **Items and inventory.** Slots, what counts as a spare weapon, armour
-  values and Strength thresholds.
+- **Items and inventory.** Settled in
+  `2026-11-16-items-inventory-design.md`: a spare weapon is one spare
+  weapon set (main + off hand, shield included), and the pack holds
+  max(2, 3 + Strength) *(illustr.)* slots of size-1 or size-2 items, with
+  belt, trinkets, weapon sets and armour outside it (its 5). What remains
+  open moves to the category designs (its 17): weapons, armour values and
+  Strength thresholds, starting kits, tonics, Remedy and flasks, scrolls
+  and wands, Coated, Disarmed, Clinging and Pitted Armour.
 - **Conditions.** Settled in `2026-11-16-conditions-design.md`: bleed,
   burning, slow, stagger, blind, frightened and the rest are defined there;
   this document only names them.
@@ -463,7 +469,8 @@ Each item here is a commitment this model makes on another system's behalf.
 ## 12. Left to the builders
 
 - All numbers: class hit points, armour values, Strength thresholds, skill
-  difficulties, rider strengths and durations, base carrying slots.
+  difficulties, rider strengths and durations, base carrying slots (pack
+  base 3, minimum 2, *illustr.*; items design 5.1).
 - Which save each rider calls for.
 - The signature use for each skill's mastery, except Perception's
   (Tactician, section 7.2).

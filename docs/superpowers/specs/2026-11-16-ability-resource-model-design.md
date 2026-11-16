@@ -56,6 +56,8 @@ units in initiative order. **(agreed)**
   fight, the boss in particular.
 - **Free refills.** Any route that restores resources without the costs the
   rest rules impose: level-ups, fleeing and re-engaging, swapping items.
+  *Later:* one named exception, a wandering trader's paid Recharge of one
+  wand's `camp` pool, once per trader (change I-16, items design 10.9).
 - **Bookkeeping.** A number the player must track that the game could track
   for them.
 - **A guaranteed safe rest.** It would remove the decision this model exists
@@ -196,7 +198,7 @@ of consumables.
 | `turn` | The unit's turn start | Once-per-turn passives; the reaction |
 | `fight` | Combat start | Minor uses only, such as Rally once per ally. No major power is per-fight. |
 | `rest` | A completed short rest, and camp | Martial charges, Second Wind, caster rest recovery |
-| `camp` | Camp only | Spell slots, Surge, signature abilities, wand charges |
+| `camp` | Camp only. *Later:* one named exception, a wandering trader's paid **Recharge**, which resets one wand's `camp` pool, once per trader, priced in coin; the simulator reports wand charges per floor with and without it (change I-16, items design 10.9, 19.1, 19.3) | Spell slots, Surge, signature abilities, wand charges |
 | `never` | Never | Consumables |
 
 - There are no player cooldowns. Exploration ticks never refill a pool,
@@ -354,9 +356,17 @@ Every ability declares exactly one cost **(lead's call)**:
 | Disarm or re-arm a trap: Mechanics, trained only **(settled)** | Action |
 | Trigger a known trap against enemies: Mechanics | Action |
 | Use a scroll or wand outside your class: Arcana, trained only **(settled)** | Action. A failed check uses the scroll or charge up: no free retries **(settled)**. |
-| Drink a potion | Bonus action |
-| Switch the wielded weapon | Bonus action |
+| Drink a potion (a potion on your own belt) **(change I-5, items design 7.1)** | Bonus action |
+| Administer a belt potion or tonic to an adjacent ally: tonics minor only; a potion does not lift Downed **(change I-5, items design 7.1)** | Action (the giver's); the receiver spends nothing |
+| Hand over to an adjacent ally, from the belt or the weapon sets only, never the pack **(change I-5, items design 7.1)** | The giver's free interaction |
+| Take from a Downed adjacent ally, belt or weapon-set items only **(change I-5, items design 7.1)** | Free interaction |
+| Retrieve: pack to belt or to an empty spare set **(change I-5, items design 7.1)** | Action (`packInCombat` flag) |
+| Pick up or seize an item in or next to your square: to a free belt slot or matching stack, an empty spare set, or else `claimed` (unusable this fight) **(change I-5, items design 7.1)** | Free interaction |
+| Swap weapon sets (active and spare, shield included) **(change I-5, items design 5.2)** | Bonus action |
 | Opportunity attack | Reaction |
+
+There is no Drop command, and armour and trinkets cannot be changed in
+combat. **(change I-5, items design 7.1)**
 
 Switching weapons costs a bonus action so that a spare weapon is a fallback,
 not a key carried for each enemy. **(lead's call, from the stat model's
@@ -886,8 +896,8 @@ The build fails when:
 
 - The run starts with 2 supply. Each camp gives 1. Each floor holds 1–2
   more as loot, and more can be bought at camp.
-- The party carries at most 3. How supply uses carrying slots is for the
-  items design.
+- The party carries at most 3. Supply **uses no slots**: it is an integer
+  party counter, never an item. **(change I-6, items design 5.3)**
 - Target: about two short rests per floor of 4–6 fights plus the boss.
 
 ### 15.4 Unusable buttons
@@ -972,9 +982,13 @@ Applied on 2026-11-16:
 - **Conditions:** no longer pending. The list, rules and control values
   are in `2026-11-16-conditions-design.md` (conditions design).
   **(change C13)**
-- **Items and inventory:** weapons, armour values, Strength thresholds,
-  weapon rider properties, starting gear, scrolls and wands. Class kits need
-  a minimal starting-equipment set for M1.
+- **Items and inventory:** the generic layer is no longer pending. It is
+  in `2026-11-16-items-inventory-design.md` (items design). What remains
+  open moves to the category designs (items design 17): weapons (with
+  weapon rider properties), armour values and Strength thresholds, starting
+  kits (class kits need a minimal starting-equipment set for M1), tonics,
+  Remedy and flasks, scrolls and wands, Coated, Disarmed, Clinging and
+  Pitted Armour. **(change I-15)**
 - **Enemies:** no longer pending. Monster cost is in enemies design 10.1,
   behaviour after losing sight in 12.1, morale in 14 and experience on
   resolution in 16 (`2026-11-16-enemies-design.md`). **(change A-7)**

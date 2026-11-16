@@ -802,6 +802,7 @@ A floor holds 4–6 fights plus the boss **(settled)**:
 | Lair | 1 | Main path, past the midpoint |
 | Optional elite room | 1 (M2) | **Off the main path and visible before commitment.** Its carrier is Stationary and awake, never Dormant. |
 | Boss | 1 | An authored arena (17.5) |
+| Trader room (Later) | 0–1, floors 2–4 | An optional off-path side room that can host the wandering trader, a non-combatant map object outside the encounter and cluster budgets **(change I-14; items design 10.9)** |
 
 Floor guarantees (the generator content test asserts each one):
 
@@ -831,12 +832,24 @@ Deterministic:
 1. **Inputs:** rooms, main path, `expectedTenths` per room (6.3), party
    weight, ladder tier, theme.
 2. **Floor plan** (dungeon stream): assign slots to rooms; fix each slot's
-   homeRoom.
+   homeRoom. **Later (change I-14):** right after the slots are assigned,
+   two dungeon-stream draws for the trader, always both, whatever their
+   outcome: presence and stock count (items design 10.9).
 3. **Loot draw** (loot stream): the notable count per channel, then the
    items in channel order (containers, enemy-carried, boss), then wand
-   charges in item order (15.3). The only input from outside the loot
-   stream is the party's `requires` tags and owned bases. **The loot
-   stream is consumed only in this step.**
+   charges in item order (15.3), then the next camp's `camp` channel (its
+   count and notables) and the vendor's limited potions, still under the
+   same family caps and owned-base rerolls **(change I-10; items design
+   10.4)**. The only input from outside the loot stream is the party's
+   `requires` tags and owned bases (and, Later, trader presence and
+   count). **The loot stream is consumed only in this step.**
+   **Later (change I-14):** on a trader floor, the trader count is carved
+   first from the containers share, then the enemy-carried share, each
+   keeping at least 1 notable *(illustr.)*, never the boss; below 2 there
+   is no trader. The trader's notables are drawn after the boss channel,
+   then any returned trader slots on the containers channel, then wand
+   charges, the camp channel, the trader's tonic (moved from the
+   containers channel, no draw) and its service (items design 10.9).
 4. **Carrier reservation** (no random draw): each enemy-carried item takes
    the first free carrier room in a fixed order: the optional elite room,
    then the lair, then guard posts by main-path index, then the patrol.
@@ -1700,25 +1713,38 @@ reward card is a separate screen and does not count.
    tonics. Enemies carry *part of* this budget and never add to it.
    **(change M-5)** **M1's split** is its own: containers, at most 1
    enemy-carried weapon or armour notable, and the boss's signature item.
-   **(lead's call)**
+   **(lead's call)** The budget also holds a **`camp` channel** (1–2
+   notables, *illustr.*) for the next camp's notables shop, drawn whether
+   or not the shop is chosen. Camp stock counts toward later floors'
+   family caps only once bought. **(change I-10; items design 10.4)**
+   **Later (change I-14):** a `trader` channel, carved from the
+   containers and enemy-carried shares (10.5 step 3). Unbought trader
+   stock counts toward later floors' family caps only once bought or
+   bartered (items design 10.9).
 2. **Draws** (10.5 step 3): weighted toward the party's `requires` tags at
    generation ("smart loot"); a base the party already holds at equal or
-   better quality, or a base already drawn for this floor, is rerolled;
+   better quality (quality = rarity tier, then value; **change I-12**;
+   items design 12.5), or a base already drawn for this floor, is rerolled;
    each item family is capped per run. **(agreed)** **Termination (lead's
    call):** at most 8 rerolls per notable, each excluding capped families,
    owned bases and this floor's bases from the weight table. If the table
    is empty or the rerolls run out, a supply or tonic draw is substituted
    and flagged `substituted`, so the per-channel count still balances.
+   **Later (change I-14):** a trader slot is never substituted; it returns
+   to the containers channel (items design 10.9).
 3. **Carrier rooms are reserved before composition** (10.5 step 4). That
    room is filled against its budget minus the item's cost add, so the
    item makes its carrier more dangerous without breaking the budget (10.5
    step 6). **Cost add = item value × k encounter points per offer-value
-   unit.** The items design supplies k.
+   unit.** The items design supplies k. A boss signature item carries no
+   cost add; the boss guards validate it. **(change I-9)**
 4. **Assignment:** the first legal carrier in the order boss, elite,
    leader, standard. Legal means `usableBy` matches and the fully composed
    unit, item included, passes every budget, the threat band (6.5)
    included. Otherwise the next candidate is tried (10.5 step 8); if none
-   is legal, the item goes to a container in the same room.
+   is legal, the item goes to a container in the same room. If the cost
+   add is above 25% *(illustr.)* of the room's budget, the item also goes
+   to a container in that room. **(change I-9; items design 12.7)**
 5. **Locked in.** Item, properties and charges are fixed now. Kill order,
    save and resume, and the method of winning can never change what drops.
 
@@ -1740,7 +1766,7 @@ reward card is a separate screen and does not count.
 | Healing potion | `uses:1` bonus-action self-heal | Only at or below 50% HP | Nothing if drunk |
 | Tonic | `uses:1` cure of its own worst condition | When it holds a major condition | The tonic if unused |
 | Bomb or flask (floor 2+) | `uses:1` thrown area, opener-flagged | Normal | The bomb if unused |
-| Wand | `uses:N`, with charges pre-rolled | With thrift | The wand with its remaining charges, refilled at camp **(settled `camp` tag)** |
+| Wand | `uses:N`, with charges pre-rolled | With thrift | The wand with its remaining charges, refilled at camp **(settled `camp` tag)**; *Later:* a wandering trader's paid Recharge also resets one wand's `camp` pool, once per trader (change I-16; items design 10.9) |
 | Scroll | `uses:1`, caster-tagged carriers only | Normal | The scroll if unused |
 
 - **What is used is gone.** That creates a kill-the-carrier-first choice,
@@ -1814,9 +1840,10 @@ floor.
 - Each resolved **armed** unit (killed, Yielded or Routed) adds about 1 +
   level ÷ 2 coin to the fight's coin line. Cowed groups pay none.
 - Salvage is sized at about 10–15% of a floor's coin income: flavour and a
-  small "you won" signal.
-- If the items design decides there is no coin, salvage is cut and nothing
-  replaces it.
+  small "you won" signal. A floor's coin income means found coin; item
+  Sell and Scrap income is reported separately. **(change I-11; items
+  design 10.2)**
+- Coin exists (items design 10.1), so salvage stays as written.
 
 ### 15.8 The loot summary: one per fight
 
@@ -1831,10 +1858,18 @@ floor.
   "unidentified" mark if any remain; **core-computed comparisons against
   every party member** (AC change, expected damage change, proficiency
   fit, Strength threshold and slot cost).
-- **Actions:** Take (choose who), Leave, Take all. When slots are full, a
-  **swap** sends the displaced item to the leftovers. **This is the only
-  place in the dungeon where inventory is sorted.**
-- **Leftovers** become one map marker. Clicking it reopens the same screen.
+- **Actions:** Take (choose who), Leave, Take all. Take defaults to a
+  core-suggested recipient, and pack placement is party-wide. When slots
+  are full, a **swap** sends the displaced item to the leftovers. **This
+  is the only place in the dungeon where found items are sorted into
+  packs; mid-fight pickups go only to a free belt slot, an empty spare set
+  or `claimed`, and purchases at camp or a trader use the same Take
+  placement. Out of combat the party view rearranges weapon sets and belts
+  at any time, and armour and trinkets at a short rest or camp.**
+  **(change I-8; items design 6, 8)**
+- **Leftovers** become one fixed map marker per room, scrapped at the
+  stairs. Clicking it reopens the same screen. **(change I-8; items
+  design 9)**
 - **Mid-fight pickups:** a unit in or adjacent to a dropped item's square
   may pick it up with the free interaction. Wielding a picked-up weapon
   costs the settled bonus action.
@@ -1869,6 +1904,12 @@ floor.
 - Family caps per run and duplicate rerolls. **(agreed)**
 
 **Left for the items design to decide:**
+
+**Answered (change I-15):** the generic layer is no longer pending; see
+the items and inventory design (items design 16). What remains open moves
+to the category designs (items design 17): weapons, armour values and
+Strength thresholds, starting kits, tonics, Remedy and flasks, scrolls and
+wands, Coated, Disarmed, Clinging and Pitted Armour. The original list:
 
 - Slots: stacks of tonics and potions, and how supply uses slots
   **(settled as open)**.
@@ -2364,9 +2405,11 @@ The build fails when:
 - a leader type lacks Command;
 - an armed type lacks an `improvised` fallback;
 - a carried item breaks the composed budgets;
-- notable items across all channels, substitutions included, do not
-  exactly equal the floor loot budget's per-channel counts, two notables
-  on a floor share a base, or an encounter is assigned more than 3;
+- notable items across all channels (the `camp` channel included, change
+  I-10; and, Later, the `trader` channel, change I-14), substitutions
+  included, do not exactly equal the floor loot budget's per-channel
+  counts, two notables on a floor share a base, or an encounter is
+  assigned more than 3;
 - a morale state is applicable to a party unit, or the morale class holds
   more than 4 states;
 - any guarantee or the cluster budget fails per seed;
@@ -2631,7 +2674,12 @@ committed wind-ups (13.2).
 
 ## 25. Depends on systems not yet designed
 
-- **Items and inventory:** everything in 15.9.
+- **Items and inventory:** the generic layer is no longer pending: see the
+  items and inventory design (2026-11-16; its 16 answers 15.9). What
+  remains open moves to its category designs (items design 17): weapons,
+  armour values and Strength thresholds, starting kits, tonics, Remedy and
+  flasks, scrolls and wands, Coated, Disarmed, Clinging and Pitted Armour.
+  **(change I-15)**
 - **Death and healing** (the guards and AI depend on these):
 
 | Need | Why |
