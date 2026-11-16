@@ -131,7 +131,7 @@ From B:
 From C:
 
 - Monster abilities recharge on fixed countdowns, never on dice (12.1).
-- A greyed-out button always shows the one reason it cannot be used (15.3).
+- A greyed-out button always shows the one reason it cannot be used (15.4).
 - Level-up cards show exactly what changes (10.3).
 - Auras and fight-length effects attach to units, never to patches of
   ground (8.4).
@@ -163,15 +163,18 @@ effects.
 | At-will | Action cost only | Weapon attack, cantrip, Shove, Hide |
 | Limited | One pool: a slot tier, a named charge pool or an item stack | A tier 2 spell, Surge, a potion |
 | Passive | Nothing: a modifier or trigger in the effects system | Extra Attack; once-per-turn bonus damage |
-| Toggle | Switched on or off once per turn, as a free interaction; stays on across turns and fights until switched off | A reckless stance |
-| Sustained | Concentration, or its own stated end | A restraining spell; a rage-style buff |
+| Toggle | Switched on or off once per turn, without using the turn's free interaction; stays on across turns and fights until switched off | A reckless stance |
+| Sustained | Concentration, or its own stated end (short effects only, 9.6) | A restraining spell; a rage-style buff |
 | Reaction | The round's reaction, plus any pool cost | Opportunity attack, a protective ward |
 
 - Every unit has at least two at-wills, one of which deals damage. Content
   validation enforces this. **(lead's call)**
-- Sources: the class table (subclass at level 3), universal actions (7.2),
-  items, pick-one-of-three offers, the companion's fixed kit, the monster's
-  stat block. Species give traits only. **(settled)**
+- Sources: the class table, with the subclass at level 3 **(lead's call,
+  10.1)**; universal actions (7.2); items; pick-one-of-three offers; the
+  companion's kit (11.1); the monster's stat block.
+- Species give traits, never ability points. **(settled)** A trait is an
+  effect bundle and may grant an ability like any other effect. **(lead's
+  call)**
 
 ### 6.2 The pool rule
 
@@ -188,14 +191,16 @@ of consumables.
 
 | Tag | Spent count reset to zero at | Used for |
 |---|---|---|
-| `turn` | The unit's turn start | Once-per-turn passives |
-| `round` | The unit's turn start | The reaction |
+| `turn` | The unit's turn start | Once-per-turn passives; the reaction |
 | `fight` | Combat start | Minor uses only, such as Rally once per ally. No major power is per-fight. |
 | `rest` | A completed short rest, and camp | Martial charges, Second Wind, caster rest recovery |
 | `camp` | Camp only | Spell slots, Surge, signature abilities, wand charges |
 | `never` | Never | Consumables |
 
-- There are no player cooldowns. Exploration ticks never refill a pool.
+- There are no player cooldowns. Exploration ticks never refill a pool,
+  except `turn` pools, which reset each tick out of combat (6.8).
+- A pool's refill tag is read through a query that folds in effects, like
+  its maximum, because an offer can change it (10.2).
 - A level-up never refills anything. The spent count is unchanged, so only
   the increase in a maximum arrives ready to use.
 
@@ -208,14 +213,33 @@ Each class should draw roughly 40–60% of its limited power from camp pools
 **(lead's call, checked by the simulator)**. A change to the supply rate
 then moves every class, not half of them.
 
+**(lead's call)**
+
+- The share is measured in the offer value unit (10.2): each pool's uses
+  per floor, at about two short rests per floor, times the value of what a
+  use buys.
+- The examples in 6.5 and 6.6 show which pools exist, not the split. As
+  written the fighter is mostly rest-powered and the caster mostly
+  camp-powered; builders tune the counts into the band. Casters will need
+  `rest` features beyond Slot Recovery to get there.
+- The rule and the band apply to class data. Companions must have at least
+  one `rest` and one `camp` pool (11.1), but the band does not apply to
+  them.
+
 ### 6.4 One camp spend per turn
 
 **(agreed)**
 
-A unit may spend from a `camp` pool at most once per turn. A reaction taken
-on another unit's turn counts against that other turn's allowance, not the
-reacting unit's own. **(lead's call)** This caps the nova turn without
-banning big turns.
+A unit may spend from a `camp` pool at most once per turn. This caps the
+nova turn without banning big turns.
+
+**(lead's call)** The allowance is per unit, per turn of any unit: a unit may
+make one camp spend during each unit's turn, whether on its own turn or as a
+reaction on another's. Each unit's "camp spend used" flag clears at the start
+of every unit's turn. Out of combat it clears every tick (6.8).
+
+A pool changed to `rest` by the timescale offer no longer counts as a camp
+spend.
 
 ### 6.5 Spell slots
 
@@ -229,9 +253,11 @@ banning big turns.
 
   Values are illustrative; the shape is a new tier on each odd level from 3.
 - Slots are `camp` pools, one pool per tier.
-- Every caster also has a `rest` pool, **Recovery**, of 1. On a completed
-  short rest it regains one spent slot of tier 2 or lower, the highest such
-  tier spent. There is no choice to make.
+- **Slot Recovery:** when a short rest completes, a caster regains one spent
+  slot of tier 2 or lower, the highest such tier spent. It is automatic, not
+  a pool, and there is no choice to make. An offer may raise it to two
+  slots, regained one at a time by the same rule. The name keeps it apart
+  from the stat model's Recovery, which is hit points.
 - Spells are known, not prepared. A caster knows about seven spells by
   level 10 and may swap one at camp.
 - A spell can be cast with a higher slot only if its data declares what
@@ -253,21 +279,56 @@ A Strength fighter:
   square, or add 1d6 damage.
 - **Surge:** `camp` pool of 1, 2 at level 9. One extra action this turn.
 
-A martial class has at most two named pools besides universal ones.
-**(lead's call)**
+A martial class has at most three named pools, not counting its capstone
+(6.7). **(lead's call)**
 
 ### 6.7 Capstone
 
-At level 9 or 10 each class gains one signature ability with a `camp` pool
-of 1, in place of a fifth spell tier. **(lead's call)**
+At level 9 each class gains its capstone: one signature ability with a
+`camp` pool of 1, in place of a fifth spell tier. Level 10 is an ordinary
+level choice from the class table or an offer. **(lead's call)**
+
+### 6.8 Out of combat
+
+**(lead's call)**
+
+- Out of combat, any party member may act, one command at a time. Each
+  command (a step by the hero, or an ability by anyone) advances the world
+  one tick. **(settled: one tick per hero step or action)**
+- Each tick, every unit's `turn` pools and turn budget reset, including the
+  camp-spend flag. So a unit can use one action-cost ability per tick, and
+  four units buffing takes four ticks.
+- Pre-buffing before a fight is a legitimate tactic, bounded by the
+  concentration rule in 9.6.
+
+### 6.9 When a level-up happens
+
+**(lead's call)**
+
+Experience earned in a fight is banked. Level-ups, and companion choices at
+their key levels, are resolved when combat ends, never during it. They are
+presented together on one screen, hero first.
 
 ## 7. Action costs
 
 ### 7.1 Declared cost
 
-Every ability declares exactly one cost: `action`, `bonus`, `reaction`,
-`move:N` (spends N squares of movement), or `free`. A unit gets one free
-interaction per turn. **(lead's call)**
+Every ability declares exactly one cost **(lead's call)**:
+
+| Cost | Meaning |
+|---|---|
+| `action` | The turn's action |
+| `bonus` | The turn's bonus action |
+| `reaction` | The round's reaction |
+| `attack` | Replaces one attack of the Attack action |
+| `move:N` | Spends N squares of movement; `move:0` happens during movement |
+| `free` | The turn's one free interaction |
+| `onHit` | Spent after a hit is known and before damage is rolled; no action |
+| `none` | A passive check or threshold; nothing is spent |
+
+- A pool spend is separate from the cost.
+- A feature or offer may change an ability's declared cost. The cost offer
+  in 10.2 makes it a bonus action once per rest.
 
 ### 7.2 Universal and skill actions
 
@@ -284,9 +345,11 @@ interaction per turn. **(lead's call)**
 | Frighten: Intimidation against 10 + Will **(settled)** | Action |
 | Rally: Leadership | Bonus action, once per ally per fight |
 | Study an enemy: Lore | Bonus action, once per enemy type per fight |
-| Recognise a spell being cast: Arcana | No action; a threshold with no roll |
+| Recognise a spell being cast: Arcana | `none`: a threshold with no roll |
 | Get a downed companion up: Medicine, trained only **(settled)** | Action |
-| Use a trap, or a scroll or wand outside your class, trained only **(settled)** | Action. A failed check uses the scroll or charge up: no free retries **(settled)**. |
+| Disarm or re-arm a trap: Mechanics, trained only **(settled)** | Action |
+| Trigger a known trap against enemies: Mechanics | Action |
+| Use a scroll or wand outside your class: Arcana, trained only **(settled)** | Action. A failed check uses the scroll or charge up: no free retries **(settled)**. |
 | Drink a potion | Bonus action |
 | Switch the wielded weapon | Bonus action |
 | Opportunity attack | Reaction |
@@ -306,8 +369,17 @@ anti-goal)**
   - `whilePoolAtLeastHalf`, so that automatic reactions cannot quietly
     drain a pool;
   - `never`, for reactions only worth taking by choice.
-- The player can change any reaction's policy, including to "ask me".
-  **(settled)**
+- The player can change any reaction to "ask me". **(settled)** The player
+  can also switch it to any of the automatic policies above. **(lead's
+  call)**
+- Policies are set per unit, per reaction, and last for the run. Their
+  defaults come from data. **(lead's call)**
+- Monsters use their reactions' automatic policies; they have no "ask me".
+  **(lead's call)**
+- Reactions do not nest. A reaction, a boss action or an opportunity attack
+  cannot be triggered while another reaction is resolving, and boss actions
+  happen only between turns. So a pending decision is at most one level
+  deep inside an ability's resolution. **(lead's call)**
 
 ## 8. Targeting and areas
 
@@ -345,6 +417,17 @@ The core answers "what would this do?" for any ability and target: which
 units are affected, the odds for each, expected damage, and any rider
 chance. The display computes nothing. **(settled principle)**
 
+**(lead's call)**
+
+- The preview uses only what the party knows. A trait, resistance or
+  weakness not yet revealed by Lore or seen in play is treated as unknown:
+  damage is shown as normal and marked uncertain. Otherwise the preview
+  would give away what Lore exists to reveal.
+- The preview leaves out reactions it cannot predict: an enemy reaction the
+  party has not seen, and any "ask me" reaction.
+- The property test in 16 compares preview and resolution with full
+  knowledge and with reactions switched off.
+
 ### 8.4 No ground zones
 
 **(agreed)**
@@ -362,8 +445,12 @@ non-goal.
   exact meaning of "carries a rider". **(lead's call)**
 - A target weak to a part's type gets that type's rider automatically.
   **(settled)**
-- A critical hit attempts the rider of each damaging part that does not
-  already carry one, subject to the bounds below. **(lead's call)**
+- A critical hit attempts a rider even when no part is flagged, subject to
+  the bounds below. **(lead's call)**
+- Piercing is the exception in form: its rider is an always-on reduction to
+  the target's armour on the attack roll, larger against a weak target. It
+  needs no flag, has no save, and does not count toward the bounds in 9.3.
+  **(settled)**
 
 ### 9.2 Rider saves
 
@@ -377,8 +464,10 @@ non-goal.
 
 **(lead's call)**
 
-- At most one rider attempt per target per ability use: the first flagged
-  part in data order.
+- At most one rider per target per ability use. It is chosen in this
+  order: the first part, in data order, whose type the target is weak to
+  (automatic, no save); else the first flagged part; else, on a critical
+  hit, the first damaging part.
 - An at-will's rider is attempted at most once per turn per attacker.
 - Damage dealt by a rider never triggers another rider.
 - A rider is not attempted on a target that already has that condition.
@@ -415,11 +504,16 @@ non-goal.
 
 - An effect lasts `rounds:N`, `untilRest`, `untilCamp`, or until a stated
   trigger.
-- In combat, a round counts down at the end of the source unit's turn.
+- In combat, a round counts down at the end of the source unit's turn. If
+  the source is dead, downed, gone or not in the initiative order, it
+  counts down at the end of each round instead.
 - Out of combat, one round is one tick, so a buff of 10 rounds lasts 10
   steps. The main design counts durations in ticks; this fixes the ratio.
 - An effect records the source's ability difficulty when it is applied, so
   repeat saves are unchanged if the source dies or loses a buff.
+- A beneficial effect on an ally that lasts longer than 10 rounds, or until
+  a rest or camp, must use concentration. Content validation enforces this.
+  It is what bounds pre-buffing (6.8).
 
 ## 10. Scaling and offers
 
@@ -432,8 +526,8 @@ non-goal.
 | 1 | 1→3 | Tier 1 spells; tier 2 and subclass at level 3 |
 | 2 | 3→5 | +1 ability at level 4 **(settled)**; Extra Attack, tier 3, stronger cantrips at level 5 |
 | 3 | 5→7 | Tier 4 at level 7 |
-| 4 | 7→9 | +1 ability at level 8 **(settled)**; signature camp ability at level 9 |
-| 5 | 9→10 | Capstone pick |
+| 4 | 7→9 | +1 ability at level 8 **(settled)**; capstone at level 9 (6.7) |
+| 5 | 9→10 | Ordinary level choice: class table or offer |
 
 Proficiency raises attack and ability difficulty for everything at once.
 **(settled)**
@@ -454,14 +548,18 @@ that when setting numbers.
   - concentration training;
   - a damage type that ignores resistance **(settled, stat model 8.4)**;
   - skill mastery **(settled)**;
-  - timescale: one `camp` pool becomes a `rest` pool. At most one per run.
+  - timescale: one `camp` pool becomes a `rest` pool, never the unit's
+    last `camp` pool. At most one per run.
 - Every offer declares `requires` tags (what build it suits) and a value in
   a single unit, about one action's worth of effect. The offer draw filters
-  by both. **(agreed: one value unit)**
+  by both. **(lead's call)**
 - An upgrade is an effect, filtered by ability ID or tag. Upgrades are never
   data patches. **(lead's call)**
-- The hero has at most eight limited abilities. Past that, offers only
-  upgrade existing ones. **(lead's call)**
+- The hero has at most eight limited abilities from class and offers.
+  Abilities granted by items (potions, scrolls, wands) do not count. Past
+  that, offers only upgrade existing ones. **(lead's call)**
+- New spells are learnt through the same pick-one-of-three cards, drawn
+  from the class's spell list. **(lead's call)**
 
 ### 10.3 Level-up cards
 
@@ -469,6 +567,8 @@ that when setting numbers.
 
 Each option shows what changes, computed by the core: "Cleave: 2 → 3 uses",
 "Ember Burst: radius 1 → 2". The player never has to work it out.
+Automatic gains at that level (a new slot tier, Extra Attack, proficiency)
+are listed on the same screen above the choice. **(lead's call)**
 
 ## 11. Companions
 
@@ -476,7 +576,12 @@ Each option shows what changes, computed by the core: "Cleave: 2 → 3 uses",
 
 **(lead's call)**
 
+- A companion has a class for hit points, saves, skills and main ability
+  **(settled, stat model 5.5)**. Its kit is companion data of its own, not
+  the hero's class table.
 - Two at-wills, up to three limited abilities, one reaction, and passives.
+- At least one `rest` pool and one `camp` pool. The signature ability
+  below is usually the camp pool.
 - Limited abilities read as one line each: "2 per rest", "1 per camp".
 - Exactly one signature `camp` ability per companion.
 - The same pools, concentration and riders as the hero.
@@ -497,6 +602,16 @@ Each option shows what changes, computed by the core: "Cleave: 2 → 3 uses",
 - With it on, the game highlights the action it would take for the active
   companion, and one key accepts it. The player can always do something
   else.
+- A suggestion is one step: a destination square and one ability with its
+  target, or either alone. Accepting it carries out that step. After it,
+  the next step is suggested. **(lead's call)**
+- Suggestions use only what the party knows, as the preview does (8.3).
+  **(lead's call)**
+- The release bar **(lead's call)**: on a fixed set of test scenarios the
+  suggestion never hits allies for more than it gains, never spends a camp
+  pool when an at-will scores at least as well, and never walks into an
+  avoidable opportunity attack; in playtests, testers accept most
+  suggestions.
 - Nothing is ever taken without the player. The hero never gets
   suggestions.
 - The suggestion comes from the party scorer (section 13), the same one the
@@ -539,10 +654,13 @@ Each option shows what changes, computed by the core: "Cleave: 2 → 3 uses",
 - Boss actions: a boss may act at the end of other units' turns, N times
   per round.
 - Resolve: two or three visible pips per fight, each turning a failed save
-  into a success.
+  into a success. A pip is spent automatically on a failed save against an
+  effect whose control value is at or above a threshold in the boss's
+  data.
 - Phases triggered at hit point thresholds.
 - Every boss has at least one way to deal with sustained effects, such as
   breaking concentration or shedding a condition.
+- Boss actions are chosen by the same scorer as the boss's turns.
 - Tuning target: a party with about half its camp resources wins with good
   play. **(agreed)**
 
@@ -550,7 +668,8 @@ Each option shows what changes, computed by the core: "Cleave: 2 → 3 uses",
 
 **(lead's call)**
 
-One scoring formula, integers only, chances counted out of 20:
+One scoring formula, integers only, chances counted out of 20. These are
+its core terms:
 
 ```
 score = expected damage (capped at the target's hit points)
@@ -572,6 +691,25 @@ score = expected damage (capped at the target's hit points)
   boss.
 - Ties break by data order, then by unit order.
 - The AI never rolls dice. Odds come from the same queries as the preview.
+- **Open to more terms.** Builders add terms the core terms cannot express:
+  healing and damage prevented, defence and buff value, ending
+  concentration, and position (exposure to enemies, opportunity attacks
+  taken, allies in reach). A term is data where possible, a C# hook
+  otherwise.
+- **Units:** every term is in hit-point equivalents. A condition's control
+  value per round is set in the condition's data.
+- **Fight length** is estimated from the current state: the enemies' total
+  hit points over the party's expected damage per round, and the reverse.
+- **Search:** the scorer scores one step at a time, as pairs of a reachable
+  square and an ability use from it (or either alone). It does not search
+  whole-turn plans.
+- **Knowledge:** the monster AI reads the true state. The party scorer, and
+  so the suggestions and the simulator's party, uses only what the party
+  knows (8.3).
+- **Spending policies** are settings of the same scorer: spend freely is a
+  pressure of 0, hold everything is a very high pressure, hold half keeps a
+  boss reserve of half the camp pools. The scorer's own boss reserve is a
+  further term, so the reports can tell it apart from the fixed policies.
 
 ## 14. Data and the core
 
@@ -599,7 +737,8 @@ Illustrative:
 
 - Spent counts in a list sorted by pool ID.
 - The turn budget: movement left, action used, bonus used, reaction used,
-  camp spend used, free interaction used.
+  free interaction used, and the camp-spend flag, which clears at every
+  unit's turn start (6.4).
 - A concentration link to the effect it sustains.
 - Active toggles.
 - Monster cooldowns and uses, keyed by ability ID.
@@ -628,8 +767,8 @@ hit being decided.
 - Several triggers on one event run in order of priority, then source unit
   order, then effect creation order.
 - Every roll uses the combat stream. **(settled)**
-- C# hooks referenced by ID are used only for reaction policies and AI
-  terms that data cannot express. **(settled mechanism)**
+- Effects that data cannot express, including reaction policies and AI
+  terms, are C# hooks referenced from data by ID. **(settled)**
 
 ### 14.5 Content validation
 
@@ -641,7 +780,8 @@ The build fails when:
 - an area exceeds 25 squares at levels 1–6;
 - a reaction has no automatic policy;
 - a companion has other than one signature ability;
-- the hero's limited abilities can exceed eight;
+- a beneficial effect longer than 10 rounds lacks concentration;
+- a class's limited abilities from its table and offers can exceed eight;
 - an offer's `requires` tags do not resolve.
 
 ### 14.6 Staging
@@ -649,9 +789,13 @@ The build fails when:
 - **M1** (one class, levels 1–3): pools with `rest` and `camp` tags,
   at-wills, the slice class's slots or charges, short rests and supply,
   concentration if the class casts, bursts, cones and lines, monster uses
-  and cooldowns, boss resolve, the monster AI.
+  and cooldowns, boss resolve, the monster AI. The M1 simulator plays the
+  party with the same scorer at a fixed pressure, over single fights.
 - **M2:** riders on damage parts, offers, companion kits, boss actions, the
-  party scorer, suggestions, simulator spending policies.
+  party scorer's pressure and reserve, suggestions, simulator spending
+  policies, and whole-floor simulation. Out-of-combat choices in the
+  simulator (when to rest, which fights to skip, offers, recruits, supply
+  bought) are scripted policies, not the scorer.
 
 ## 15. Short rests and supply
 
@@ -672,7 +816,7 @@ The build fails when:
 
 - The party spends 1 supply.
 - Each unit regains its Recovery in hit points **(settled)** and its `rest`
-  pools reset.
+  pools reset. Then each caster's Slot Recovery (6.5) applies.
 - The best trained Medicine member adds Wisdom + proficiency to every
   unit's Recovery. Medicine mastery's signature use is the builders' to
   choose. **(settled that it is the builders')**
@@ -691,9 +835,13 @@ The build fails when:
 
 **(agreed)**
 
-A button that cannot be used is greyed and names its one reason: no slot,
-camp spend used this turn, out of range, no line of sight, and so on. The
-reason is the validation code from 14.3.
+A button that cannot be used is greyed and names its one reason. The
+reason is the validation code from 14.3. **(lead's call)**
+
+- The action bar shows only reasons that do not depend on a target: no
+  action left, no slot, camp spend already used this turn.
+- Reasons that do depend on a target (out of range, no line of sight) are
+  shown on the targeting cursor, not the bar.
 
 ## 16. Testing
 
@@ -726,8 +874,9 @@ reason is the validation code from 14.3.
   are only as good as the party scorer's spending choices. Compare it
   against the fixed spending policies.
 - **Pre-buffing at the boss door.** With one round per tick out of combat, a
-  party can cast buffs just before a boss. Long buffs need concentration,
-  and bosses carry a tool against sustained effects; watch it in playtests.
+  party can cast buffs just before a boss. Long buffs need concentration
+  (9.6), and bosses carry a tool against sustained effects; watch it in
+  playtests.
 - **Radius 2 bursts** (25 squares) may be too strong, and square areas must
   read clearly in isometric 3D.
 - **Rest interruptions** are luck. If they feel unfair, the patrol preview
@@ -743,7 +892,11 @@ reason is the validation code from 14.3.
 - Each rider's save type and strength table.
 - Spell and ability lists, names and descriptions.
 - The expected-need estimate inside the party scorer.
-- Hotbar and sheet layout.
+- Hotbar, sheet, level-up and rest screen layout, including whether a rest
+  plays out on the map.
+- What counts as one "thing to read" in the playtest target (11.4).
+- The JSON schema and effects vocabulary, built by the core developers with
+  the content designer.
 
 ## 19. Changes this makes to the parent documents
 
@@ -755,6 +908,20 @@ To be applied once this document is approved:
 - Main design section 4.3: durations in combat count in rounds; out of
   combat one round is one tick (9.6 here).
 
-## 20. Open items for the client
+## 20. Depends on systems not yet designed
+
+- **Conditions:** the list and rules for bleed, burning, slow, stagger,
+  frightened, grappled, blinded and the rest, including each one's control
+  value. Content authored before then uses placeholder conditions.
+- **Items and inventory:** weapons, armour values, Strength thresholds,
+  weapon rider properties, starting gear, scrolls and wands. Class kits need
+  a minimal starting-equipment set for M1.
+- **Enemies:** morale (agreed to be designed with enemies), behaviour after
+  losing sight of the party, and how a monster's cost against the floor's
+  difficulty budget is expressed.
+- **Content volume:** counts of companions, themes, monsters and bosses for
+  M2, and which class is the M1 slice class.
+
+## 21. Open items for the client
 
 None at the time of writing.
