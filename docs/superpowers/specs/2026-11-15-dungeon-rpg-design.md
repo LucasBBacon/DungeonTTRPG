@@ -42,6 +42,9 @@ simulate and change.
 - Full fidelity to the 5E rules. We borrow its shape, not its text.
 - A story campaign.
 - Official mod support. Data-driven content leaves the door open.
+- Spreading, evolving or player-placed ground surfaces. Fixed condition
+  squares placed by floor generation are allowed; see the conditions
+  design, section 11.
 
 ### Anti-goals
 
@@ -91,7 +94,10 @@ These would make the game a failure even if everything works.
 - The player controls every party member in combat. **(decided)**
 - The run ends when the hero dies. A companion reduced to zero hit points is
   downed, and gets back up on 1 hit point if the party wins the fight.
-  **(decided, expected to be tuned in playtests)**
+  **(decided, expected to be tuned in playtests)** A companion that gets up
+  from its first downing on a floor gains Scarred: maximum hit points −10%
+  until camp, removed by Medicine Treat at a short rest. See the conditions
+  design, section 14.
 
 ### 4.3 Grid, exploration and combat
 
@@ -104,10 +110,13 @@ These would make the game a failure even if everything works.
   all units act in initiative order. **(decided)**
 - Exploration is turn-stepped: the world advances one tick for each hero
   step or action. Effect durations and short rests are counted in ticks.
-  **(decided)** In combat, durations count in rounds; out of combat, one
-  round is one tick. See the ability and resource model, section 9.6.
-- Enemies outside combat are asleep, stationary or patrolling, set per
-  monster in data. **(decided)**
+  **(decided)** In combat, conditions on units count down on the wearer's
+  turns; windows, auras and concentration effects count on the source's.
+  Out of combat, one round is one tick. See the ability and resource
+  model, section 9.6, and the conditions design, sections 5.1–5.2.
+- Enemies outside combat are dormant, stationary or patrolling, set per
+  monster in data. **(decided)** "Dormant" is a behaviour, not the Asleep
+  condition (conditions design 5.5).
 - An enemy notices the party when it has line of sight and wins a
   perception check against the party's stealth. This is one roll against
   the party's passive stealth, never an opposed roll; see the character
@@ -155,6 +164,7 @@ real decision, which 5E relies on a DM to enforce.
 - Each floor is generated from the run seed as rooms and corridors, with a
   guaranteed path from entrance to boss.
 - Each floor has a theme that selects its tiles, enemies and hazards.
+  Hazards include fixed condition terrain (conditions design 11).
 - Enemies are placed using a difficulty budget that grows with depth.
 - Loot comes from tables weighted by depth and rarity.
 - Bosses are hand-designed. Which boss appears on a floor is drawn from a

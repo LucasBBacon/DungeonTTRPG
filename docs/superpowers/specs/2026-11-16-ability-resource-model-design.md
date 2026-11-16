@@ -43,8 +43,10 @@ units in initiative order. **(agreed)**
 ### Non-goals
 
 - 5E's spell list, spell levels 1–9, rituals, daily preparation.
-- Terrain surfaces and persistent ground zones. Held back by the stat model.
-  **(settled)**
+- Spreading, evolving or player-placed ground surfaces, and persistent
+  ground zones. Held back by the stat model. **(settled)** Fixed condition
+  squares placed by floor generation are allowed (conditions design 11).
+  **(agreed; change C11)**
 - Counter-casting and readied actions at launch. **(lead's call)**
 - Lair actions. **(lead's call)**
 
@@ -347,6 +349,7 @@ Every ability declares exactly one cost **(lead's call)**:
 | Study an enemy: Lore | Bonus action, once per enemy type per fight |
 | Recognise a spell being cast: Arcana | `none`: a threshold with no roll |
 | Get a downed companion up: Medicine, trained only **(settled)** | Action |
+| Treat: Medicine, one roll against each curable instance's recorded difficulty; ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (Diseased and Scarred only during a short rest) **(agreed; change C4, conditions design 8)** | Action, adjacent |
 | Disarm or re-arm a trap: Mechanics, trained only **(settled)** | Action |
 | Trigger a known trap against enemies: Mechanics | Action |
 | Use a scroll or wand outside your class: Arcana, trained only **(settled)** | Action. A failed check uses the scroll or charge up: no free retries **(settled)**. |
@@ -434,7 +437,8 @@ chance. The display computes nothing. **(settled principle)**
 
 Sustained areas are auras that move with a unit, or conditions placed on
 units. Nothing is left on the ground. This stays clear of the terrain
-non-goal.
+non-goal. Fixed map terrain that applies conditions is part of the map, not
+a ground zone (conditions design 11). **(change C11)**
 
 ## 9. Riders and damage
 
@@ -471,6 +475,9 @@ non-goal.
 - An at-will's rider is attempted at most once per turn per attacker.
 - Damage dealt by a rider never triggers another rider.
 - A rider is not attempted on a target that already has that condition.
+  Exceptions: the psychic rider is attempted on a concentrating target or
+  one not already Unfocused, and an application with `worsen` bypasses this
+  gate (conditions design 6.2, 6.4). **(change C8)**
 - Rider strength is one table per damage type, indexed by proficiency band
   (levels 1–4, 5–8, 9–10). The strengths themselves are the builders'.
   **(settled that they are the builders')**
@@ -490,7 +497,8 @@ non-goal.
 - The check is d20 + Constitution **(settled)**, against the higher of 10
   and half the damage taken **(lead's call)**.
 - One check per damage event. The parts of one hit are summed first.
-  **(lead's call)**
+  **(lead's call)** All turn-start ticks together are one damage event
+  (conditions design 6.8). **(change C10)**
 - Proficiency is added only from a feature or an offer. **(lead's call)**
 - A unit concentrates on one effect at a time. Starting another ends the
   first. **(lead's call)**
@@ -502,18 +510,30 @@ non-goal.
 
 **(lead's call)**
 
-- An effect lasts `rounds:N`, `untilRest`, `untilCamp`, or until a stated
-  trigger.
-- In combat, a round counts down at the end of the source unit's turn. If
-  the source is dead, downed, gone or not in the initiative order, it
-  counts down at the end of each round instead.
-- Out of combat, one round is one tick, so a buff of 10 rounds lasts 10
-  steps. The main design counts durations in ticks; this fixes the ratio.
+- An effect lasts `rounds:N`, `turns:N`, `untilRest`, `untilCamp`, or
+  until a stated trigger. A condition on a unit, sustained ones included,
+  uses `turns:N` or another model of conditions design 5.1, never
+  `rounds:N`. **(change C1)**
+- In combat, a `turns:N` condition counts down on the wearer's turns, by
+  the phase test of conditions design 5.2; windows
+  (`untilSourceTurnStart`/`End`) run on the source's turns. A hard
+  condition applied during the wearer's own turn ends at that turn's end,
+  and Steeled follows. **(change C1)**
+- `rounds:N` remains only for auras, concentration effects themselves and
+  effects not on a unit. Such a round counts down at the end of the source
+  unit's turn. If the source is dead, downed, gone or not in the initiative
+  order, it counts down at the end of each round instead.
+- Out of combat, one round, or one of the wearer's turns, is one tick, so a
+  buff of 10 turns lasts 10 steps (conditions design 5.5). The main design counts durations in ticks; this fixes the ratio.
 - An effect records the source's ability difficulty when it is applied, so
   repeat saves are unchanged if the source dies or loses a buff.
-- A beneficial effect on an ally that lasts longer than 10 rounds, or until
-  a rest or camp, must use concentration. Content validation enforces this.
-  It is what bounds pre-buffing (6.8).
+- A beneficial effect on an ally that lasts longer than 10 of the wearer's
+  turns **(change C1)**, or until a rest or camp, must use concentration.
+  Content validation enforces this. It is what bounds pre-buffing (6.8).
+  Exempt: boons from events (shrines, floor and camp events) and the
+  starting boon may last until rest or camp without concentration, one
+  lingering boon per unit; self-only toggles are exempt from the 10-turn
+  rule (conditions design 5.3, 13). **(change C5)**
 
 ## 10. Scaling and offers
 
@@ -653,11 +673,17 @@ are listed on the same screen above the choice. **(lead's call)**
   run out and saved camp resources matter.
 - Boss actions: a boss may act at the end of other units' turns, N times
   per round.
-- Resolve: two or three visible pips per fight, each turning a failed save
-  into a success. A pip is spent automatically on a failed save against an
-  effect whose control value is at or above a threshold in the boss's
-  data.
-- Phases triggered at hit point thresholds.
+- Resolve: two or three visible pips per fight. A pip is spent whenever a
+  condition whose `controlRank` is at or above the boss's
+  `resolveThreshold` (both static data) would land, by any route: a failed
+  save, a successful skill check, or an automatic weak-target rider. It
+  cancels only that condition. **(change C2, conditions design 12.3)**
+- Unyielding: every boss has it. Hard conditions downgrade once the pips
+  are gone, a composure window follows some conditions, and it resists
+  lockouts (conditions design 12.3). **(change C2)**
+- Phases triggered at hit point thresholds. A phase change ends all harmful
+  conditions and grants Steeled, after the ability use that caused it
+  (conditions design 9.3, 12.3). **(change C2)**
 - Every boss has at least one way to deal with sustained effects, such as
   breaking concentration or shedding a condition.
 - Boss actions are chosen by the same scorer as the boss's turns.
@@ -697,7 +723,8 @@ score = expected damage (capped at the target's hit points)
   taken, allies in reach). A term is data where possible, a C# hook
   otherwise.
 - **Units:** every term is in hit-point equivalents. A condition's control
-  value per round is set in the condition's data.
+  value is computed (conditions design 17.3); only its `denyPct` is set in
+  the condition's data. **(change C14)**
 - **Fight length** is estimated from the current state: the enemies' total
   hit points over the party's expected damage per round, and the reverse.
 - **Search:** the scorer scores one step at a time, as pairs of a reachable
@@ -780,7 +807,9 @@ The build fails when:
 - an area exceeds 25 squares at levels 1–6;
 - a reaction has no automatic policy;
 - a companion has other than one signature ability;
-- a beneficial effect longer than 10 rounds lacks concentration;
+- a beneficial effect on an ally longer than 10 of the wearer's turns, or
+  until rest or camp, lacks concentration, except event boons, the
+  starting boon and self-only toggles (changes C1, C5);
 - a class's limited abilities from its table and offers can exceed eight;
 - an offer's `requires` tags do not resolve.
 
@@ -910,9 +939,9 @@ Applied on 2026-11-16:
 
 ## 20. Depends on systems not yet designed
 
-- **Conditions:** the list and rules for bleed, burning, slow, stagger,
-  frightened, grappled, blinded and the rest, including each one's control
-  value. Content authored before then uses placeholder conditions.
+- **Conditions:** no longer pending. The list, rules and control values
+  are in `2026-11-16-conditions-design.md` (conditions design).
+  **(change C13)**
 - **Items and inventory:** weapons, armour values, Strength thresholds,
   weapon rider properties, starting gear, scrolls and wands. Class kits need
   a minimal starting-equipment set for M1.

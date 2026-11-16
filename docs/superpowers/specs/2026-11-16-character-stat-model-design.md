@@ -44,8 +44,11 @@ characters who differ in it. **(agreed)**
 
 - Fidelity to 5E numbers or wording.
 - Social skills and dialogue checks.
-- Terrain surfaces such as burning oil or conducting water. Held back until
-  riders and layers are proven. **(agreed)**
+- Spreading or evolving terrain surfaces, such as burning oil that spreads
+  or conducting water. Held back until riders and layers are proven.
+  **(agreed)** Fixed map squares that apply conditions are allowed; they
+  never spread or change, except that fire burns an oil square to plain
+  floor (conditions design 11).
 - The ability and resource model (spell slots, action costs). Designed
   next, separately.
 
@@ -247,7 +250,7 @@ Rules behind the table:
 | Arcana | Intelligence | Identify magic items, read runes and shrines | Use scrolls and wands outside your class; recognise a spell being cast |
 | Lore | Intelligence | Know what a floor's theme is likely to hold | Reveal an enemy's traits, resistances, weaknesses and abilities |
 | Perception | Wisdom | Hear what is behind a door; spot hidden enemies | Avoid surprise; find hidden attackers |
-| Medicine | Wisdom | Stretch short-rest supplies; cure poison and disease | Get a downed companion back up |
+| Medicine | Wisdom | Stretch short-rest supplies; cure poison and disease; at a short rest, Treat ends Diseased and Scarred (fixed difficulty, one attempt per Scarred unit per rest) | Get a downed companion back up; Treat (an action, adjacent): one roll against each instance's difficulty ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (conditions design 8) |
 | Intimidation | Presence | Make weak groups back off without a fight | Frighten enemies; break morale when a leader falls |
 | Leadership | Presence | Better recruits, shop prices and event outcomes | Rally: steady an ally or give them a free step |
 
@@ -285,13 +288,13 @@ its identity. Names are placeholders; theming comes later. **(agreed)**
 |---|---|---|
 | Physical | Slashing | Bleed: damage over time |
 | Physical | Piercing | Ignores part of the target's armour |
-| Physical | Bludgeoning | Stagger: target loses its reaction; shatters brittle or frozen targets |
+| Physical | Bludgeoning | Stagger: no reactions until the end of the target's next turn; shatters brittle or frozen targets |
 | Elemental | Fire | Burning: damage over time that can spread to adjacent units |
 | Elemental | Cold | Slows movement |
 | Elemental | Lightning | Arcs to an adjacent unit |
 | Elemental | Acid | Corrodes: lowers armour class and strips layers |
-| Spirit | Psychic | Breaks concentration |
-| Spirit | Radiant | Reveals hidden units and blinds |
+| Spirit | Psychic | Breaks concentration and applies Unfocused for 1 turn; attempted on a concentrating target or one not already Unfocused |
+| Spirit | Radiant | Revealed on a hidden or invisible target; Blinded otherwise |
 | Spirit | Necrotic | Blocks healing |
 
 Poison is a condition, not a damage type. **(agreed)**
@@ -339,11 +342,18 @@ Poison is a condition, not a damage type. **(agreed)**
   trait such as "skeletal" or "armoured" always means the same profile, so
   the player learns a few rules once. **(agreed)**
 - Budget per enemy: at most two resistances, and at least one weakness
-  alongside any resistance. **(agreed)**
+  alongside any resistance. **(agreed)** Ladder shifts that come from
+  conditions (Soaked, Oiled, Exposed, Resisting, Shredded, Sapped,
+  Shielded, Raging, Petrified, Ill-Starred and Frozen's shell) are not
+  traits or layers and do not count toward the two (conditions design
+  12.2).
+- Condition-tag immunities: at most two per non-boss trait set, at most one
+  of them a control tag; the theme rule below applies to them too
+  (conditions design 12.2).
 - No floor theme may have every enemy resist the same type. **(agreed)**
-- A "mindless" trait grants immunity to psychic. This is the one immunity
-  allowed outside bosses, and the theme rule above still applies to it.
-  **(lead's call)**
+- A "mindless" trait grants immunity to psychic and to the `mind`
+  condition tag. Psychic is the one damage-type immunity allowed outside
+  bosses, and the theme rule above still applies to it. **(lead's call)**
 - Specialists can buy through: an offer such as "your fire ignores
   resistance" exists for committed builds. **(agreed)**
 
@@ -359,7 +369,8 @@ stone shell cracks to bludgeoning; acid strips most layers.
   **(lead's call)**
 - A broken layer stays broken for the rest of the fight. **(lead's call)**
 - A layer's resistances count toward the enemy's budget of two. **(lead's
-  call)**
+  call)** A ladder shift from a condition is not a layer and does not count
+  (conditions design 12.2).
 
 ## 9. How this sits in the core
 
@@ -372,6 +383,11 @@ All **(lead's call)**, following the main design's architecture.
   Everything in section 6 is a query that folds in modifiers from active
   effects. The non-stacking rule for abilities lives in that query.
 - Other derived numbers stack normally unless a rule above says otherwise.
+  Modifiers from conditions follow the same-number rule instead: only the
+  worst penalty and the best bonus to each derived number apply, only the
+  highest dice bonus to a roll, advantage and disadvantage as in 5E, and at
+  most one speed halving, with speed 0 overriding everything (conditions
+  design 6.7). Gear and traits stack as before.
 - Damage travels as a list of typed parts. Each part passes through flat
   modifiers, then the target's ladder step for its type.
 - A trait is a named bundle of effects. A layer is an effect with a break
@@ -398,7 +414,10 @@ Each item here is a commitment this model makes on another system's behalf.
   `2026-11-16-ability-resource-model-design.md`: skill action costs (its
   7.2), which abilities carry riders (its 9), and casting (its 6.5).
 - **Death and healing.** Level 1 is fragile and death ends the run. The
-  lead's proposal is a flat hit point bonus for the hero at level 1.
+  lead's proposal is a flat hit point bonus for the hero at level 1. A
+  companion that gets up from its first downing on a floor gains Scarred
+  (maximum hit points −10% until camp; Treat at a short rest removes it);
+  settled in conditions design 18.10.
 - **Noticing.** Perception must not be rolled every tick. The lead's
   proposal: roll once when line of sight is first made, and again only when
   something changes, such as distance closing or noise.
@@ -408,8 +427,9 @@ Each item here is a commitment this model makes on another system's behalf.
   encounters must appear on most floors, or the skills are decoration.
 - **Items and inventory.** Slots, what counts as a spare weapon, armour
   values and Strength thresholds.
-- **Conditions.** Bleed, burning, slow, stagger, blind, frightened and the
-  rest are defined there; this document only names them.
+- **Conditions.** Settled in `2026-11-16-conditions-design.md`: bleed,
+  burning, slow, stagger, blind, frightened and the rest are defined there;
+  this document only names them.
 
 ## 11. Testing
 

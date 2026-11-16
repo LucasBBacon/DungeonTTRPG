@@ -1,7 +1,7 @@
 # Conditions: Design
 
 Date: 2026-11-16
-Status: Draft, awaiting client approval, 2026-11-16
+Status: Approved, 2026-11-16
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model) and
 `2026-11-16-ability-resource-model-design.md` (ability model)
@@ -2398,8 +2398,8 @@ Each tied to a risk:
 
 ## 24. Changes to approved documents
 
-To be applied when this document is approved. Each change names the exact
-section it touches.
+Applied on 2026-11-16, when this document was approved. Each change names
+the exact section it touches.
 
 | # | Change | Document and section |
 |---|---|---|
@@ -2434,4 +2434,4 @@ section it touches.
 
 ## 26. Open items for the client
 
-None at the time of writing.
+None. Approved by the client on 2026-11-16.
