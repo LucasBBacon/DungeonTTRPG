@@ -239,6 +239,12 @@ without migrating any data. **(agreed)**
     "charm": "none", "capacity": "none" },
   "wornLocations": { "head": 1, "hands": 1, "feet": 1, "back": 1,
     "neck": 1, "finger": 2, "none": 2 },
+  "trinketSubjects": ["Search", "…"],
+  "trinketDomains": { "props.trinket.head": ["Search", "…"], "…": ["…"] },
+  "sharedTrinketAllowlist": [], "copyRegistryAllowlist": ["…"],
+  "trinketRarePerFloorMax": 1, "trinketButtonCap": 1,
+  "trinketPolicyFilters": { "bigHitPermille": 200,
+    "channelDefaults": ["…"], "channelMandatory": ["…"] },
   "ePlusGate": { "minSimRuns": 200, "minPlaytestRuns": 10,
     "freeSlotPickMinPermille": 500, "fullSlotPickMaxRatioPermille": 500,
     "nearTieCampMaxPermille": 250, "nearTieValueMargin": 1,
@@ -254,7 +260,16 @@ A pre-approved lever may raise `trinketSlots` to 3 (armour design 5.10,
 E+); it is off by default, and the count stays 2 until the lead switches
 it on. **(change AR-47, conditional)**
 
-All values *(illustr.)*, except the `ePlusGate` block. `basePrice` (supply, Remedy, mundane bases) and
+The trinket keys are the trinkets design's (trinkets design 17.2, full
+values there). `trinketRarePerFloorMax` and `trinketButtonCap` are client
+decisions, **not tuning**: changing them needs client approval.
+`trinketSubjects`, `trinketDomains`, `sharedTrinketAllowlist`,
+`copyRegistryAllowlist` and the channel filter lists are a lead's-call
+block that only the lead changes; `bigHitPermille` is tuning.
+**(change TK-11)**
+
+All values *(illustr.)*, except the `ePlusGate` block and the trinket keys
+named above as not tuning. `basePrice` (supply, Remedy, mundane bases) and
 `size` stay on the records; `stackMax` is read from here by `kind`, and
 gear is always 1. A save records the hash of `inventory.json` and resumes
 only under the same file, so a tuning change (for example kill-switch
@@ -399,10 +414,10 @@ per unit). Only the placement rule and two sentences of enemies 15.5 and
 | Act | In combat | Out of combat |
 |---|---|---|
 | Use a belt item | Its declared cost. **(settled)** Potion: bonus action. Tonic on yourself: bonus action (minor) or action (major). Tonic thrown at an ally: action, minor only. Scroll or wand in class: its ability's cost. Outside your class: action + trained Arcana; a failure uses it up. | As any exploration action. Buffs obey the 10-turn cap. |
-| **Administer** a belt potion or tonic to an adjacent ally | The giver's **action**. The receiver spends nothing. Tonics are **minor only**, as when thrown. A potion does **not** lift Downed. **Its purpose** is a receiver that cannot act or whose bonus action is committed; when the receiver could drink a handed-over dose itself, the button carries the hint "Hand over is cheaper". **(lead's call)** | As above |
+| **Administer** a belt potion or tonic to an adjacent ally (a trinket reach step may extend "adjacent" to 2 squares; trinkets design 6.1) **(change TK-28)** | The giver's **action**. The receiver spends nothing. Tonics are **minor only**, as when thrown. A potion does **not** lift Downed. **Its purpose** is a receiver that cannot act or whose bonus action is committed; when the receiver could drink a handed-over dose itself, the button carries the hint "Hand over is cheaper". **(lead's call)** | As above |
 | Swap weapon sets | Bonus action **(settled)** | Free |
 | Pick up or seize an item in or next to your square | **Free interaction (settled); it always succeeds.** A consumable goes to a free belt slot or a matching stack. A weapon goes to an empty spare set; wielding it is the set swap (bonus action, settled). Otherwise the item (or a stack's remainder, 6.2) becomes **claimed**: the unit holds it, it is unusable this fight, and it is resolved at the summary. Disarm seizure (enemies 15.5) therefore always works for a full unit. **If the party flees**, every claimed item goes to the flee pile in its room (`ItemLeft`); belt and spare-set pickups stay where they are. **(lead's call)** | n/a (out-of-combat loot comes through a summary) |
-| **Hand over** to an adjacent ally | The giver's free interaction. **Only from the belt or the weapon sets, never from the pack.** One dose moves at a time. It lands on the receiver's belt or empty spare set, or is refused with a reason. | Free, at any distance, through the party view |
+| **Hand over** to an adjacent ally (a trinket reach step may extend "adjacent" to 2 squares; trinkets design 6.1) **(change TK-28)** | The giver's free interaction. **Only from the belt or the weapon sets, never from the pack.** One dose moves at a time. It lands on the receiver's belt or empty spare set, or is refused with a reason. | Free, at any distance, through the party view |
 | **Take from a Downed adjacent ally** | The taker's free interaction. Belt or weapon-set items only. Lets the party recover the last heal. | Free |
 | **Retrieve**: pack to belt or to an empty spare set | **Action** (`packInCombat: action`, a client decision). Were `freeOncePerFight` ever approved, the unit's fight state carries `retrieveFreeUsed`, cleared at combat start. | Free |
 | Belt to pack; reshuffling | Not allowed | Free |
@@ -437,9 +452,12 @@ Every greyed button names one reason **(settled, ability model 15.4)**:
 `NoFreeInteraction`, `StrengthThreshold`, `HardRequirement`, `Untrained`,
 `OverCapacity`, `RestOnly`, `Clinging` (Later), `NoCoin`, `Unsellable`,
 `SupplyFull`, `OutOfStock`, `CampChoiceMade`, `LocationOccupied`,
-`ReactionCap`, and Later `ServiceUsed` and `NotBarterable`. `Untrained`
+`ReactionCap`, `ButtonCap`, `DuplicateAnswer`, `AlreadyWarded`,
+`AlreadyWardedThisFight`, `TrinketHelpedLimit` (trinkets design 15)
+**(change TK-10)**, and Later `ServiceUsed` and `NotBarterable`. `Untrained`
 also covers armour and shield training (armour design 7.2, 16.3)
-**(change AR-33)**.
+**(change AR-33)**. `DeadLine` is a warning verdict, never a suppression
+(trinkets design 15) **(change TK-10)**.
 
 ## 8. The loot summary
 
@@ -945,7 +963,7 @@ family: { id: "family.longsword", category: "weapon", improvised: {...},
 | `identifyDifficulty` | int | Compared with the party's passive Arcana (section 11) |
 | `curse?` | object (Later) | `{variant: clinging, cost: prop.*}` |
 | `monsterProfile?` | object | `{effects, abilityShape: uses:N \| cooldown, useWhen, minFloor}`; overrides the family default |
-| `value` | int, checked at load | Σ fixed property values + rollable `count` × the table's `entryValue` + Σ values of the `use` ability and granted abilities, in offer-value units (12.6). Every roll gives the same value. |
+| `value` | int, checked at load | Σ fixed property values + rollable `count` × the table's `entryValue` + Σ values of the `use` ability and granted abilities, in offer-value units (12.6). Every roll gives the same value. A trinket button is a property whose effect is the grant; its value is counted once, inside that property (trinkets design 9.2) **(change TK-12)**. |
 | `basePrice?` | int | Required for mundane and shop-only records (supply, Remedy) |
 | `flags` | set | signature, heirloom, unsellable, noSteal, unique, srd (with `srdSource`) |
 | `display` | object | iconId, modelId, glint; `socket` (`head \| back \| none`, trinkets) (change AR-35). Never read by the rules. |
@@ -1011,7 +1029,10 @@ One `value` per record, in offer-value units (about one action's worth;
 ability model 10.2):
 
 - **gear:** the sum of its fixed property values, its rollable count times
-  the table's `entryValue`, and its granted-ability values;
+  the table's `entryValue`, and its granted-ability values; a trinket
+  button is a property whose effect is the grant, and its value is
+  counted once, inside that property; capacity: +1 pack = value 1, +2 =
+  value 2 (trinkets design 9.2, 14.1) **(change TK-12)**;
 - **consumables, scrolls and wands:** the value of the `use` ability, from
   a use-value table owned by the consumables design.
 
@@ -1232,7 +1253,7 @@ is original, so it carries no `srd` flag.
 | 3 | **Starting kits** (small; may fold into 1 and 2) | M1 | `kit` records per class and per companion: weapon sets, armour, belt contents, starting coin. Answers ability model 20's "a minimal starting-equipment set for M1". Armour kits as in armour design 13.6 **(change AR-37)**. |
 | 4 | **Consumables** (potions, tonics, flasks, coatings, Remedy) | M1 potions; M2 rest | Effects, `stackMax`, the use-value table, prices and pegs against supply, thrown flasks (bombs, oil, water; Oiled and Soaked), whether potions can be thrown (default no), Coated (Later), monster `useWhen`, banding |
 | 5 | **Scrolls and wands** | M2 | `classTags[]`, `use.difficulty: user \| fixed:N`, wand charge ranges and `camp` refill, the out-of-class Arcana rule (settled), property shapes |
-| 6 | **Trinkets** | M2 | Property tables (rings, amulets, charms, cloaks, helms, gloves, boots), capacity trinkets (at most +2), trinket families and caps. From the armour design **(change AR-37)**: piece kinds; location domains (armour design 5.6); the strict no-AC rule; the one-table rule; the reaction cap; pieces at Uncommon at most; at least 3 legal families per piece location per wave; `requires` tags for location hunger (armour design 5.7); the piece power target (armour design 17.3) |
+| 6 | **Trinkets** | M2 | **Designed:** `2026-11-17-trinkets-design.md` (trinkets design), approved 2026-11-17. Piece tables by location, jewellery tables by kind (trinkets design 14.1), capacity table **(change TK-9)**, capacity trinkets (at most +2), trinket families and caps. From the armour design **(change AR-37)**: piece kinds; location domains (armour design 5.6); the strict no-AC rule; the one-table rule; the reaction cap; pieces at Uncommon at most; at least 3 legal families per piece location per wave; `requires` tags for location hunger (armour design 5.7); the piece power target (armour design 17.3) |
 | 7 | **Heirlooms** | M3 | The template list, at Uncommon, banded |
 | 8 | **Curses** | Later | The variants used as item costs, the Clinging flow, cursed carriers, the "malign" hint |
 | 9 | **Wandering trader** (small) | Later | Service prices, presence chance, trader art and lines, within 10.9 |
@@ -1313,6 +1334,8 @@ are unit conditions.
   `ItemRevealed`, `ItemLeft`, `ItemSold`, `ItemBought`, `ItemScrapped`,
   `ItemDestroyed{reason: usedUp | lost}`, `ItemRecharged` (camp, and Later
   the trader), `ItemReturned` (Disarmed, Later); Later `ItemBartered`.
+- New trinket event: `TrinketPropertyFired{property, instanceId, unit,
+  result}` (trinkets design 17.3) **(change TK-15)**.
 - New state events **(lead's call)**: `CoinChanged{delta, source: found |
   salvage | sell | scrap | buy | barter | service}`, `SupplyChanged{delta,
   source}`, `MarkerCreated{kind: leftovers | pile | trader, room}`,
@@ -1352,13 +1375,17 @@ The build fails on any violation:
    equal it. `value` = Σ fixed property values + rollable `count` ×
    `entryValue` + use and granted-ability values, and it **equals** the
    tier budget (curse cost excluded; a signature item adds its authored
-   property, 12.5). Every vendor- or camp-sellable record has a price above
+   property, 12.5). A trinket button is a property whose effect is the
+   grant; its value is counted once, inside that property **(change
+   TK-12)**. Every vendor- or camp-sellable record has a price above
    0.
 3. Every property passes the buff test. No bare always-on numeric
    modifiers; nothing raises an ability past +5.
 4. Pool refills: consumables `never`, wands `camp` (the trader's Recharge
    is the one named exception, Later, change I-16), `rest` only with an
-   authoring reason.
+   authoring reason. Trinkets: `rest` and `fight` by default; `camp` only
+   at Rare; never `never`. Trinket `fight` uses use the armour 16.3
+   `fightUses` state (trinkets design 9.3) **(change TK-13)**.
 5. `size` ∈ {0, 1, `bulkySize`}. Two-handers, armour and shields are
    bulky. Size 0 only for party-counter categories (`supply`, `key`).
    Records carry no `stackMax` (5.1).
@@ -1388,6 +1415,45 @@ The build fails on any violation:
 14. `hiddenMax` is 0 below Uncommon, and count(non-`obvious` fixed
     properties) + (the rollable table contains a non-`obvious` entry ?
     rollable `count` : 0) ≤ `hiddenMax`.
+15. Trinket domain map: each (effect kind, target scope, subject token)
+    triple has one owning table, read from `trinketDomains` and the closed
+    `trinketSubjects` vocabulary (5.1), token by token; shared triples
+    only through `sharedTrinketAllowlist`.
+16. Trinket denylist on `effectKinds[]`; every effect kind is an allowed
+    kind (trinkets design 6.1, 6.2).
+17. Trinket combat-first: the `obvious` property binds a combat hook;
+    capacity exempt (also from armour 17.1 rule 14's zero-trigger-rate
+    failure).
+18. Class copy registry, bidirectional (trinkets design 11): a collision
+    fails both records unless the pair is in `copyRegistryAllowlist`.
+19. Trinket buttons: only on charms in M2, at most 1 per item; the button
+    is a property whose effect is the grant, and its `button.abilityId`
+    resolves to an ability-model record.
+20. Trinket pools: no `never`; `camp` only on Rare; majors 1 / 1 / 1.
+21. Rare trinkets: amulets only, `minFloor` 3+, never `signature`; pieces
+    at most Uncommon. The per-floor count is a 19.2 invariant.
+22. Trinket ally effects: `targets` is `self`, `adjacentAlly`, or
+    `reach2Ally` only on Hand over and Administer reach steps; one ally
+    per trigger.
+23. One cost step and one reach step per action; one channel per use; a
+    declared reach option is not a channel.
+24. Trinket outputs: minor or token conditions only; never an AC-writing
+    condition; zero added damage; every `channel` record carries
+    `hostileOnly` and `riderWouldBeAttempted`.
+25. Trinket carriers: `negates[]`, a role-answer pass, `carrier{}` limits,
+    the enemies 9.1 reaction and bonus-action caps, Wardstone and
+    Ward-Knot never with the Warded or Unbreakable affix, and the 6.4
+    guards at generation (enemies 15.3 step 4).
+26. Two classes: every trinket record declares `usefulFor[]` with at
+    least 2 launch classes or `anyCompanion`.
+27. Element families: at most 2 per wave per lane (finger, neck, back).
+28. Rolled lines: a rollable trinket table never offers the item's own
+    obvious line, a line sharing an `answers[]` key with it, a second
+    channel on a channel ring, or a second button; an obvious line with
+    no legal roll fails.
+
+Rules 15–28 are summaries; the full text is trinkets design 18.1.
+**(change TK-14)**
 
 Armour design 17.1 rules 10, 11, 13, 14 and 17 also apply (bulky armour
 and shields and no AC on trinkets; one table, one property; name
@@ -1407,6 +1473,11 @@ Invariants, asserted as property tests:
   short rest, at camp, or an item's first Take (Equip now, or Take's
   auto-equip, with `everHeld` unset);
 - `known` only grows; supply stays within 0 and `supplyCap`;
+- at most `trinketRarePerFloorMax` Rare trinkets per floor across all
+  channels; once the floor's count is reached, Rare trinket draws are
+  excluded from the weight table for the floor's remaining draws, in
+  channel order containers, carried, camp, boss (asserted by the
+  generator and a test) **(change TK-27)**;
 - nothing at camp goes to leftovers;
 - no inventory command draws a random number (stream positions unchanged);
 - coin never rises at a trader (Later).
@@ -1454,6 +1525,8 @@ Tests:
 | Later: free notables on a trader floor against a no-trader floor | Never fewer than 1 container and 1 carried notable; the gap is only the carved count |
 | Later: wand charges used per floor, with and without a Recharge trader | Recharge adds at most one wand's charges per trader floor |
 
+Trinket reports: see trinkets design 18.3 **(change TK-17)**.
+
 ## 20. Staging
 
 **(lead's call)**
@@ -1479,7 +1552,8 @@ Tests:
   - comparison strip with fit verdicts; pure-value swaps;
   - hand over, Administer and take-from-Downed;
   - trinkets, including worn-piece kinds, and capacity trinkets
-    **(change AR-39)**;
+    **(change AR-39)**; trinkets settled in the trinkets design
+    (`2026-11-17-trinkets-design.md`, 19) **(change TK-16)**;
   - tonics, flasks, scrolls and wands with camp refill;
   - rarity tiers and banded properties;
   - dormant properties and Arcana identification;
@@ -1621,7 +1695,11 @@ mundane bases are not loot, and family caps all stand.
   their category designs. **(change W-15)** Armour and shields are no
   longer pending: see the armour design (`2026-11-17-armour-design.md`),
   which also fixes the armour part of starting kits (13.6) and hands
-  worn-piece kinds to the trinkets design. **(change AR-39)**
+  worn-piece kinds to the trinkets design. **(change AR-39)** Trinkets
+  are no longer pending: see the trinkets design
+  (`2026-11-17-trinkets-design.md`), which settles the trinket category,
+  worn pieces included; what it still needs is in its section 23.
+  **(change TK-16)**
 - **Death and healing:** whether companions can die (15's conditional
   rule); whether any healing lifts Downed (Administer assumes potions do
   not).

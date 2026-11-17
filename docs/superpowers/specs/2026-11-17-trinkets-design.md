@@ -1,7 +1,7 @@
 # Trinkets and Worn Pieces: Design
 
 Date: 2026-11-17
-Status: Draft, awaiting client approval, 2026-11-17
+Status: Approved, 2026-11-17
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model),
@@ -1416,7 +1416,7 @@ except the landing envelope, whose numbers are the lead's (TK-4):
 
 ## 22. Changes to approved documents
 
-To be applied when the client approves this document. Each change names
+Applied on 2026-11-17, when the client approved this document. Each change names
 the exact section it touches. TK-1 carries the client's Q1 decision for
 the armour 13.4 cell, and the rider-ownership rule in TK-2 was signed off
 under Q1; the rest are the lead's, confirmed with this document.
@@ -1525,8 +1525,7 @@ grants.
 
 ### 24.1 This document
 
-Approval of this draft. The four questions (Q1–Q4) are answered; nothing
-else is open for the client before approval.
+Approved by the client on 2026-11-17.
 
 ### 24.2 Future design pass: charm abilities ("stored moments")
 

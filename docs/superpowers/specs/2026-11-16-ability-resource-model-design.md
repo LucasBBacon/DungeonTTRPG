@@ -196,7 +196,7 @@ of consumables.
 | Tag | Spent count reset to zero at | Used for |
 |---|---|---|
 | `turn` | The unit's turn start | Once-per-turn passives; the reaction |
-| `fight` | Combat start | Minor uses only, such as Rally once per ally. Every armour, shield and piece `fight` use is a minor use: cancelling one event per fight (Ringed, Double Ring, Proof, Twice-Proof), Shadowed, Warding Lining, Runner's Boots and Forewarned's fight-start window **(change AR-6, armour design 8.1 rule 5)**. No major power is per-fight. |
+| `fight` | Combat start | Minor uses only, such as Rally once per ally. Every armour, shield and piece `fight` use is a minor use: cancelling one event per fight (Ringed, Double Ring, Proof, Twice-Proof), Shadowed, Warding Lining, Runner's Boots and Forewarned's fight-start window **(change AR-6, armour design 8.1 rule 5)**, and every trinket `fight` use (trinkets design 9.3) **(change TK-18)**. No major power is per-fight. |
 | `rest` | A completed short rest, and camp | Martial charges, Second Wind, caster rest recovery |
 | `camp` | Camp only. *Later:* one named exception, a wandering trader's paid **Recharge**, which resets one wand's `camp` pool, once per trader, priced in coin; the simulator reports wand charges per floor with and without it (change I-16, items design 10.9, 19.1, 19.3) | Spell slots, Surge, signature abilities, wand charges |
 | `never` | Never | Consumables |
@@ -359,8 +359,8 @@ Every ability declares exactly one cost **(lead's call)**:
 | Trigger a known trap against enemies: Mechanics | Action |
 | Use a scroll or wand outside your class: Arcana, trained only **(settled)** | Action. A failed check uses the scroll or charge up: no free retries **(settled)**. |
 | Drink a potion (a potion on your own belt) **(change I-5, items design 7.1)** | Bonus action |
-| Administer a belt potion or tonic to an adjacent ally: tonics minor only; a potion does not lift Downed **(change I-5, items design 7.1)** | Action (the giver's); the receiver spends nothing |
-| Hand over to an adjacent ally, from the belt or the weapon sets only, never the pack **(change I-5, items design 7.1)** | The giver's free interaction |
+| Administer a belt potion or tonic to an adjacent ally: tonics minor only; a potion does not lift Downed (a trinket reach step may extend 'adjacent' to 2 squares; trinkets design 6.1) **(change I-5, items design 7.1; change TK-19)** | Action (the giver's); the receiver spends nothing |
+| Hand over to an adjacent ally, from the belt or the weapon sets only, never the pack (a trinket reach step may extend 'adjacent' to 2 squares; trinkets design 6.1) **(change I-5, items design 7.1; change TK-19)** | The giver's free interaction |
 | Take from a Downed adjacent ally, belt or weapon-set items only **(change I-5, items design 7.1)** | Free interaction |
 | Retrieve: pack to belt or to an empty spare set **(change I-5, items design 7.1)** | Action (`packInCombat` flag) |
 | Pick up or seize an item in or next to your square: to a free belt slot or matching stack, an empty spare set, or else `claimed` (unusable this fight) **(change I-5, items design 7.1)** | Free interaction |
@@ -628,8 +628,10 @@ that when setting numbers.
 - An upgrade is an effect, filtered by ability ID or tag. Upgrades are never
   data patches. **(lead's call)**
 - The hero has at most eight limited abilities from class and offers.
-  Abilities granted by items (potions, scrolls, wands) do not count. Past
-  that, offers only upgrade existing ones. **(lead's call)**
+  Abilities granted by items (potions, scrolls, wands, trinkets) do not count;
+  trinket buttons are capped at one per unit (trinkets design 9.2)
+  **(change TK-20)**. Past that, offers only upgrade existing ones.
+  **(lead's call)**
 - New spells are learnt through the same pick-one-of-three cards, drawn
   from the class's spell list. **(lead's call)**
 

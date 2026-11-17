@@ -542,10 +542,22 @@ Each step that stops the pipeline emits `ConditionResisted {reason}`.
 3. **Contest:** a save, a skill check against the defence, or automatic on
    a weak target.
    **Gear prevention (between steps 3 and 4; change AR-51; armour design
-   14.1):** after a failed contest or an automatic landing, gear that
-   stops the condition (Ringed and Double Ring against Bleeding, Unbowed
-   against Prone) stops it here, before a ward is spent. Emits
-   `ConditionResisted {reason: ArmourVerb}`.
+   14.1; change TK-21; trinkets design 7.3):** after a failed contest or an
+   automatic landing, gear that stops the condition (Ringed and Double Ring
+   against Bleeding, Unbowed against Prone) and trinket properties
+   (Graveward, Kinward, Heartward) stop it here, before a ward is spent.
+   Emits `ConditionResisted {reason: ArmourVerb}` or
+   `ConditionResisted {reason: TrinketProperty}`. Candidates are tried in
+   order, and the first that fires stops the condition (the rest are not
+   evaluated or spent): armour and shield verbs on the target, in slot
+   order; then the target's own trinket preventions, in slot order; then
+   ally preventions, in ascending unit order of the wearers. Per-round
+   limits: a unit receives at most one trinket prevention per round, from
+   any wearer, counted only when a trinket stops a condition; an ally
+   prevention yields only when step 4 would actually spend a Warded charge
+   on this application; a unit gains at most one Helped per round from a
+   trinket source. Outside combat, each condition application is its own
+   round.
 4. **Ward:** a Warded charge is spent here, at most once per ability use
    per target.
 5. **Boss resolve, then Unyielding downgrade** (12.3). A pip cancels only
@@ -555,8 +567,9 @@ Each step that stops the pipeline emits `ConditionResisted {reason}`.
    first match wins. If the result is a tier the source may not apply to
    this target (Steeled, hard exclusivity, the depth gates, the
    party-facing limits), the fallback is used.
-7. **Re-check:** if step 5 or step 6 changed the condition, steps 2, 4 and
-   5 run once more against the new condition; a downgraded condition gets
+7. **Re-check:** if step 5 or step 6 changed the condition, steps 2, the
+   gear step, 4 and 5 run once more against the new condition
+   **(change TK-21)**; a downgraded condition gets
    its own resolve check. A second change is not re-checked: the fallback
    is used, or the condition is resisted if there is none.
 8. **Cancel**, then **override**, against existing instances in creation
@@ -579,16 +592,16 @@ step 9 (enemies design 14.3, 14.9).
 
 **Entry points** **(lead's call)**:
 
-| Origin | Enters at | Skips |
-|---|---|---|
-| Ability use (rider or not) | Step 1 (non-riders pass it) | — |
-| Universal skill actions (grapple, Frighten) | Step 2 | — |
-| Terrain square or trap (11) | Step 2 | Contest as the square's data says |
-| Aura pulse | Step 2 | — |
-| Burning's spread | Step 2 | Contest is a Reflex save |
-| `onApply` and `onEnd` relations | Step 2 | Contest and ward |
-| Staged last stage (Calcifying) | Step 2 | Contest (already made) and ward |
-| Engine grants: Steeled, Unyielding, Surprised, Downed, Scarred | Step 9 | Everything before it |
+| Origin | Enters at | Skips | Gear step **(change TK-21)** |
+|---|---|---|---|
+| Ability use (rider or not) | Step 1 (non-riders pass it) | — | Runs |
+| Universal skill actions (grapple, Frighten) | Step 2 | — | Runs |
+| Terrain square or trap (11) | Step 2 | Contest as the square's data says | Runs (no contest: an automatic landing) |
+| Aura pulse | Step 2 | — | Runs |
+| Burning's spread | Step 2 | Contest is a Reflex save | Runs |
+| `onApply` and `onEnd` relations | Step 2 | Contest and ward | Skipped |
+| Staged last stage (Calcifying) | Step 2 | Contest (already made) and ward | Skipped |
+| Engine grants: Steeled, Unyielding, Surprised, Downed, Scarred | Step 9 | Everything before it | Skipped |
 
 ### 9.3 Damage events
 
@@ -1692,7 +1705,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     from a hit on it reach every adjacent unit (arcs never re-arc).
   - Intensity: binary.
   - Duration: `turns:3`. Ends on fire damage (that hit attempts no Burning
-    rider) or a tonic.
+    rider) or a tonic. A ring-shifted fire part ends Soaked and attempts no
+    Burning rider, as any fire hit **(change TK-25; trinkets design 9.4)**.
   - Sources: water monsters and spells; water flasks, which can be thrown
     at an ally to put out Burning; water squares (11.2).
   - Interactions: cancels Burning and Smouldering; overrides Corroded and
@@ -1707,7 +1721,10 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     it. Only a fire hit pays it out; ticks never do (6.8).
   - Interactions: with Soaked, fire is normal and no automatic Burning
     lands; the fire hit that pays out Oiled also burns away an oil square
-    under the unit (11.4).
+    under the unit (11.4). A ring-shifted fire part (trinkets design 9.4)
+    does not pay out Oiled: no +half, no band-higher Burning, Oiled stays
+    and no oil square burns; Burning lands as an ordinary automatic rider
+    at its normal band **(change TK-25)**.
 - **Frozen** — hard · **M2**
   - Effect: implies Incapacitated; an ice shell (a condition ladder shift,
     not a layer, C7) resists every type except fire and bludgeoning and is
@@ -1989,7 +2006,10 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     From the Vex verb the fallback is `untilSourceTurnEnd`, with the wearer
     as source, so it ends at the end of its next turn **(change W-7)**.
   - Sources: the Help action **(settled, ability model 7.2)**; the Vex verb
-    **(change W-7; weapons design 7.1)**.
+    **(change W-7; weapons design 7.1)**; trinkets (Trophy Tally, fallback
+    `untilSourceTurnEnd` with the wearer as source; Help made cheaper by
+    Sigil of Aid counts under the trinket limit) **(change TK-22; trinkets
+    design 7.1, 13.7)**.
 - **Spotted** — harmful token · Later
   - Effect: the next attack roll against it has advantage.
   - Duration: `charges:1`, fallback `untilSourceTurnStart`.
@@ -2014,7 +2034,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Sources: ward spells; charms; bosses at phase change; monster affixes
     (`oncePerLife`, enemies design 7.2).
   - Interactions: the preview says "will spend ward"; a warded boss keeps
-    its pips.
+    its pips. A trinket-granted Warded has no effect on a unit already
+    Warded; a unit receives at most one trinket-granted Warded per fight
+    **(change TK-22; trinkets design 7.1)**.
 - **Shielded** — token · Later
   - Effect: its next damage event resolves each part one ladder step toward
     resistant. Used only if it changes something.
@@ -2325,7 +2347,7 @@ Record of the catalogue's shaping. **(lead's call)**
 | transform | Frightened + a limited fear effect (enemy target) | Panicked | Consumes Frightened. Fallback: no effect |
 | transform | Squinting + limited `searing` radiant | Blinded | Consumes Squinting. Fallback: no effect |
 | staged | Calcifying stage 2 + failed save | Petrified | Not a transform (6.5). Ends Calcifying; Petrified enters at step 2; if blocked, stays at stage 2 |
-| damage end | Fire ≥1 | Chilled, Frozen, Soaked, Oiled | Ends; on Oiled the hit takes +half and applies Burning one band higher; on Soaked the hit attempts no Burning rider |
+| damage end | Fire ≥1 | Chilled, Frozen, Soaked, Oiled | Ends; on Oiled the hit takes +half and applies Burning one band higher; on Soaked the hit attempts no Burning rider. A ring-shifted fire part (trinkets design 9.4) does not pay out or end Oiled (Burning lands at its normal band) but ends Soaked as any fire hit **(change TK-25)** |
 | damage end | Cold ≥1 | Burning, Smouldering | Ends |
 | tick | Any harmful tick | Oiled, oil squares | Never: ticks are not hits (6.8) |
 | damage end | Bludgeoning ≥1 | Frozen | Shatter: the shell's weakness (+half, once) and automatic Stagger |

@@ -998,7 +998,10 @@ rescores with what is left of its turn, so it can retreat after striking.
 
 - The AI reads the true state, **except that a party unit's position is
   known only through that monster's awareness record**: `unnoticed`,
-  `noticed(square)` or `lastKnown(square)`.
+  `noticed(square)` or `lastKnown(square)`. Each group's record also
+  holds a per-fight flag `everNoticed[partyUnit]`: set on the first
+  `noticed`, reset at fight start (trinkets design 13.4). **(change
+  TK-26)**
 - The record is shared within the group.
 - A Hidden hero stays at its last known square for that observer. An area
   aimed there hits whatever is really there.
@@ -1806,6 +1809,14 @@ reward card is a separate screen and does not count.
    armour never matches) or the same shield kind; its derived AC is
    unchanged; its rolled properties pass the role-answer rule; reaction
    properties fit the 9.1 caps (armour design 12.6). **(change AR-26)**
+   For a notable trinket, legal also means: with its rolled properties in
+   place it passes the 6.4 guards; its output conditions fit 9.2; a
+   reaction-shaped line is the unit's one reaction beyond the opportunity
+   attack and a button is its bonus-action ability (9.1); its role answers
+   pass; no suppression conflict with the issue gear; Wardstone and
+   Ward-Knot never with the Warded or Unbreakable affix; its `carrier`
+   limits hold (trinkets design 12). Carried wards and ally preventions
+   count toward the encounter's control defence. **(change TK-23)**
    Otherwise the next candidate is tried (10.5 step 8); if none
    is legal, the item goes to a container in the same room. If the cost
    add is above 25% *(illustr.)* of the room's budget, the item also goes

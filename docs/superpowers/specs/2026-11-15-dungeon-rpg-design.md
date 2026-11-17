@@ -60,9 +60,9 @@ These would make the game a failure even if everything works.
   (CC-BY-4.0). Anything taken from the SRD carries the required attribution.
   The credits carry the verbatim SRD 5.2 (weapon masteries) and SRD 5.1
   (rarity names) CC-BY-4.0 attributions, and confirm they cover the armour
-  table and the adapted magic-item mechanisms; adapted SRD records,
-  armour included, carry an `adapted` flag (weapons design 19, armour
-  design 15).
+  table, the adapted magic-item mechanisms and the adapted trinket
+  mechanisms; adapted SRD records, armour and trinkets included, carry an
+  `adapted` flag (weapons design 19, armour design 15, trinkets design 16).
 
 ## 3. Constraints
 
@@ -400,6 +400,9 @@ designs (weapons design 25, 26).
 
 Armour and shields are settled in `2026-11-17-armour-design.md`; they are
 no longer pending (armour design 21, 22).
+
+Trinkets are settled in `2026-11-17-trinkets-design.md`; they are no
+longer pending (trinkets design 22).
 
 - Which four classes ship first, and their feature lists.
 - All numbers: hit points, damage, experience curve, loot rates.

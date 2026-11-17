@@ -331,12 +331,20 @@ holds (AR-30). **(agreed)**
   effect kind that reads or writes AC, charged or conditional included.
 - Pieces have no training, Strength need, Clatter or Stiff.
 - **Reaction cap:** at most one reaction-granting property per unit across
-  its armour, shield and trinkets. **(lead's call)** The equip is legal;
+  its armour, shield and trinkets. An automatic trigger that fires off the
+  wearer's turn to protect or affect another unit counts as
+  reaction-granting for the cap, though it spends no reaction (trinkets
+  design 7.1). **(lead's call)** The equip is legal;
   the cap is a suppression, never a refusal. `ActiveReactionProperty(unit)`
   picks the one that works by fixed slot order (body armour, then the
   shield in the active set, then trinket slot 1, then trinket slot 2); the
   others are shown greyed with the reason `ReactionCap`. The verdict says so
   before the equip ("Shelter would be greyed: one reaction property").
+- **`ButtonCap` and `DuplicateAnswer`** suppressions use the same fixed
+  slot order and pre-equip verdict as `ReactionCap`. `DuplicateAnswer`
+  counts armour and shield prevent properties, each declaring `answers[]`
+  (trinkets design 17.1); they win by slot order (trinkets design 7.1).
+  **(lead's call)**
 - **One-table rule:** each property lives in exactly one table across the
   weapon, armour, shield and trinket tables, and no always-on piece
   property copies an armour verb, weapon verb or another table's effect
@@ -352,11 +360,13 @@ M2 and *(illustr.)*. **(lead's call)**
 
 | Location | Domain | Examples (one location verb each) |
 |---|---|---|
-| Head | Senses, mind, critical hits | **Visored Helm:** a critical hit against you attempts no rider. **Warden's Coif — Unshaken:** Frighten attempts against you have disadvantage, and you have advantage on saves against Frightened (moved here from armour). **Barred Helm:** advantage on saves against Dazed. |
-| Hands | Grapple, handling, giving | **Grappler's Gauntlets:** escaping a grapple is a bonus action. **Deft Gloves:** Administer costs a bonus action instead of an action. |
-| Feet | Movement, Prone, hazards | **Strider's Boots:** standing from Prone costs 1 square. **Ledgewalker's Boots:** advantage on saves against Teetering. **Runner's Boots:** once per fight (`fight` pool, minor; AR-6), Disengage as a bonus action. |
-| Back | Elements, stealth | **Weathered Cloak:** advantage on saves against one element's rider (moved here from armour). **Grey Mantle:** your Hide checks against a unit that has not seen you this fight have advantage. |
-| Neck, finger, none | Elements, saves, pools, capacity | Trinkets design |
+| Head | Senses, mind, critical hits | **Visored Helm:** a critical hit against you attempts no rider; also, once per fight (`fight` minor), the first hit from an attacker you could not see that would attempt a rider attempts none (trinkets design 13.1). **Warden's Coif — Unshaken:** Frighten attempts against you have disadvantage, and you have advantage on saves against Frightened (moved here from armour). **Barred Helm:** advantage on saves against Dazed. |
+| Hands | Grapple, handling, giving | **Grappler's Gauntlets:** escaping Grappled or Restrained costs a bonus action. **Deft Gloves:** Administer costs a bonus action instead of an action. |
+| Feet | Movement, Prone, hazards | **Strider's Boots:** standing from Prone costs 1 square. **Ledgewalker's Boots:** advantage on hazard-edge and landing saves. **Runner's Boots:** once per fight (`fight` pool, minor; AR-6), Disengage as a bonus action. |
+| Back | Elements, stealth | **Weathered Cloak:** advantage on saves against one element's rider: Burning or Chilled in M2, under the rider-ownership rule (trinkets design 5.7) (moved here from armour). **Grey Mantle:** your Hide checks against a unit that has not seen you this fight have advantage. |
+| Neck | Life and the body | Trinkets design 5.5 |
+| Finger | Your strike | Trinkets design 5.5 |
+| None | Stored moments (charm); carrying (capacity) | Trinkets design 5.5 |
 
 ### 5.7 Loot
 
@@ -437,7 +447,7 @@ Display:
   of these holds, measured over at least **200** simulated M2 runs with
   the current trinket roster, or over at least **10** playtest runs:
   1. **Displaced, not unwanted:** for pieces, or for jewellery (amulets,
-     rings, charms), the pick rate when the recipient has a free slot is
+     rings, charms) excluding Rare-tier records, the pick rate when the recipient has a free slot is
      at least **50%**, and the pick rate when both slots are full is less
      than **half** of that. A kind group picked rarely even into free
      slots fails the 17.3 power target instead and goes to trinket tuning.
@@ -455,12 +465,16 @@ Display:
   "ePlusGate": { "minSimRuns": 200, "minPlaytestRuns": 10,
     "freeSlotPickMinPermille": 500, "fullSlotPickMaxRatioPermille": 500,
     "nearTieCampMaxPermille": 250, "nearTieValueMargin": 1,
-    "playtesterAsks": [3, 10], "vetoBindMaxPermille": 100 }
+    "playtesterAsks": [3, 10], "vetoBindMaxPermille": 100,
+    "landingEnvelopeMinPermille": 600, "bossHardLandMinPermille": 500 }
   ```
 - **Safety veto:** E+ is not switched on if, with 3 slots, the enemies 6.4
   guards, the conditions 7.2 control guards or the AC envelope (11, item
-  1) fail, or the `ReactionCap` and roll-mode cap (11, items 4 and 7) bind
-  on more than **10%** of fights.
+  1) fail, or the condition landing envelope or its hero row (trinkets
+  design 18.3) fails, or the `ReactionCap` and roll-mode cap (11, items 4
+  and 7), `ButtonCap`, `DuplicateAnswer`, reaction-shaped triggers or the
+  per-round and per-fight trinket limits bind on more than **10%** of
+  fights, or the carrier 6.4 rerun fails.
 - **Loot when on:** the trinket share rises by 1–2 notables per run,
   taken from weapons and consumables, inside the existing budget.
 - **Approved changes when on:** AR-47 applies (section 21); the loot share
@@ -1141,7 +1155,7 @@ Best at / worst at / monster use:
 | Gloves, gauntlets, bracers | hands | Grapple, handling, Administer | Tint and icon |
 | Boots | feet | Movement, Prone, hazards | Tint and icon |
 | Cloak | back | Elements, stealth | 2–3 bone chain |
-| Amulet / ring / charm | neck / finger (2) / none | Trinkets design | Icon |
+| Amulet / ring / charm | neck / finger (2) / none | Neck: life and the body · Finger: your strike · None: stored moments, capacity | Icon |
 
 Examples are in 5.6.
 
@@ -1209,7 +1223,9 @@ warhammer-and-shield soldier, the sling artillery and the claw brute.
   an automatic landing, before a Warded charge is spent. So neither the
   ward nor the gear use is spent when the save succeeds, and a ward is
   never spent on a condition the gear then stops. It emits
-  `ConditionResisted{reason: ArmourVerb}` and `ArmourVerbFired`. A charge
+  `ConditionResisted{reason: ArmourVerb}` and `ArmourVerbFired`. Trinket
+  properties also act at this step and emit `ConditionResisted{reason:
+  TrinketProperty}` and `TrinketPropertyFired` (trinkets design 7.3). A charge
   prevention has a data policy, `always` by default, which the player may
   change to "ask me" like a reaction (ability model 7.3); `fight` uses
   always fire.
@@ -1248,7 +1264,7 @@ warhammer-and-shield soldier, the sling artillery and the claw brute.
 | Shoulder | **Bull Rush:** once per turn, a Shove that pushes moves the target 2 squares (verb-sourced under weapons 7.2 rule 4 as amended by AR-49, so the verb-sourced once-per-round rule and the 3-square cap apply) |
 | Stalwart | **Immovable:** 2 squares shorter (b3: verb-sourced movement cannot move you) |
 | Proof | **Twice-Proof:** the first two critical hits each fight (inside the crit cap) |
-| Enclosed | **Sealed:** also advantage on saves against Poisoned (Later) |
+| Enclosed | **Sealed:** Poisoned never lingers on you (blocks the lingering form; trinkets design F2) (Later) |
 
 ### 14.5 `props.shield_minor` (value 1)
 
@@ -1387,8 +1403,11 @@ file's hash, as `inventory.json` does. **(lead's call)**
 | `overlapCount` | integer 0–2 | Round start | Overlap, Tight Overlap |
 | `bullRushSpent` | bool | Start of the unit's own turn | Bull Rush |
 | `critDowngradesThisFight` | integer 0–2 | Fight start | Crit cap (8.1 rule 7) |
-| `fightUses` | integer per property or verb (Ringed 1, Double Ring 2, or 3 at b3; Proof 1, Twice-Proof 2; Shadowed, Warding Lining, Runner's Boots 1) | Fight start | `fight` uses |
+| `fightUses` | integer per property or verb (Ringed 1, Double Ring 2, or 3 at b3; Proof 1, Twice-Proof 2; Shadowed, Warding Lining 1; trinket `fight` properties Visor's unseen branch, Runner, Oilskin, Duskhem, Lifeline, Aid and Tally 1, keyed by (unit, property id); trinkets design 17.3) | Fight start | `fight` uses |
 | `forewarnedOpen` | bool | Set at fight start, cleared at the unit's first own turn | Forewarned |
+| `trinketPreventionReceivedThisRound` | bool | Round start | One received trinket prevention per round (trinkets design 7.3) |
+| `trinketHelpedThisRound` | bool | Round start | One trinket Helped per round (trinkets design 7.1) |
+| `trinketWardedThisFight` | bool | Fight start | One trinket Warded per fight (trinkets design 7.1) |
 
 - Queries: `AC(unit, attack)`, `VisibleAC(unit)`, `PiercingReduction(attack,
   target)`, `CountsAsHeavy(unit)`, `heavySpeedPenalty(unit)`,
@@ -1400,7 +1419,9 @@ file's hash, as `inventory.json` does. **(lead's call)**
   +1"), never a refusal. `ReactionCap` is not a `CanWear` reason; it greys
   the suppressed property after the equip (5.5).
 - Events: `ArmourVerbFired{verb, unit, result}`;
-  `ConditionResisted{reason: ArmourVerb}` (14.1).
+  `ConditionResisted{reason: ArmourVerb}` (14.1);
+  `TrinketPropertyFired{property, instanceId, unit, result}` (trinkets
+  design 17.3).
 
 ### 16.4 Suggested recipient
 
@@ -1530,6 +1551,7 @@ The build fails when **(lead's call)**:
 | Piece property trigger rate | Fires or prevents at least once per 3 fights for its wearer, or the family is flagged for redesign. A family cut instead is replaced in the same location before the build ships, so validation rule 17 always holds |
 | Acrobatics checks per floor | At least the 7.3 requirement (3 Acrobatics-gated choices per floor); a miss after content tuning triggers the named Stiff fallback (7.3) |
 | Pitted and Corroded co-occurrence (Later) | Reported |
+| The trinket rows of trinkets design 18.3, including the condition landing envelope and its hero row (release gate; in the E+ veto) | As trinkets design 18.3 |
 
 ## 18. Staging
 
@@ -1737,10 +1759,11 @@ Stat model 6's AC formula and "Armour is hit or miss" and stat model 8.1
   class with a ceiling below light, with simulator evidence (11, item 2);
   the "armour training" and "shield training" offer kinds; capstone heavy
   training.
-- **Trinkets:** the location tables and families (at least 3 legal
-  families per piece location, as a running total each wave), within
-  5.4–5.6; neck, finger and none domains; capacity trinkets; the piece
-  power target (17.3).
+- **Trinkets:** settled in `2026-11-17-trinkets-design.md` (approved
+  2026-11-17; changes TK-1 to TK-8): the location tables and families (at
+  least 3 legal families per piece location, as a running total each
+  wave), within 5.4–5.6; neck, finger and none domains; capacity
+  trinkets; the piece power target (17.3).
 - **Starting kits:** armour per class and companion (13.6; items 17,
   row 3).
 - **Companions:** armour kits; companions without ability increases and
