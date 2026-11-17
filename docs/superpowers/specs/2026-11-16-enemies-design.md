@@ -333,8 +333,9 @@ illustrative)**
 
 ### 6.1 Reference hero
 
-Used by every guard and by validation. The level 1 figure assumes the stat
-model's proposed level 1 HP bonus (dependency, section 25).
+Used by every guard and by validation. Reference hero = class HP tier 6,
+Con +1, under 11 + level × max(1, tier + Con) (death and healing design
+7); the lowest legal hero is tier 6, Con −1. **(change DH-25)**
 
 | Level | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -440,6 +441,12 @@ round-1 row.
 | Boss: expected damage to one unit per round (its turn plus boss actions) | ≤ 35% |
 | Boss: worst spike (dice at maximum, a crit, one boss action) | ≤ 70% |
 | Boss: a full-HP hero cannot be reduced to 0 in one round | Unless at least one crit lands |
+| Lowest legal hero (lowest HP, tier 6 Con −1, at the AR-20 lowest legal AC): a non-boss unit's maximum damage on its turn, with a crit **(change DH-26)** | ≤ 75% |
+| Lowest legal hero: chance that a full-HP hero is reduced to 0 in round 1 (same definition as the reference row), per encounter, floors 2–5 **(change DH-26)** | < 2% *(illustr.)* |
+| Floor 1, solo boss: expected damage to the hero per round (its turn plus boss actions); the 35% boss row stays for every other boss **(change DH-26)** | ≤ 25% *(illustr.)* |
+| Floor 1, solo boss at the lowest legal hero: worst spike (dice at maximum, a crit, one boss action) **(change DH-26)** | ≤ 75% |
+| Floor 1, solo boss at the lowest legal hero: a full-HP hero cannot be reduced to 0 in one round **(change DH-26)** | Even with one crit *(illustr.)* |
+| Floor 1 cumulative round-1 budget, reference and lowest legal hero: the sum over floor 1's encounter slots of the highest round-1 death chance among the templates the generator can emit there, plus the floor-1 boss's one-round death chance (`guard.floor1CumulativeRoundOnePermille`) **(change DH-26)** | ≤ 2.5% *(illustr.)* |
 | AC envelope, levels 1–10: the 6.2 table attack's hit chance against the maximum sustained party AC, normal roll mode **(change AR-20)** | ≥ 35% |
 | AC envelope: against the maximum charged AC (Raise or Fortified, plus one reaction), normal roll mode **(change AR-20)** | ≥ 15% |
 | AC envelope: against the maximum sustained AC with the one allowed gear roll-mode effect **(change AR-20)** | ≥ 10% |
@@ -451,9 +458,15 @@ round-1 row.
   that attacker's piercing R), Puncture included (armour design 9.1). The
   AC envelope rows are read at levels 1–10 against the maximum party AC,
   not at the reference hero.
-- The guards assume the **SRD double-dice crit** for every unit. That rule
-  is not yet settled (section 25; change S-3). The guards are
-  parameterised on whatever crit rule is adopted.
+- The guards assume the **SRD double-dice crit** for every unit
+  **(settled; change S-3, death and healing design 9)**.
+- **(change DH-26)** All rows are computed without party consumables or
+  the talisman. "Before the hero's first turn" replaces "round 1" for
+  ambush-eligible templates only after the surprise model is reconciled
+  and the 10.2 worked examples pass (death and healing design 21.1). The
+  floor-1 boss sustain check (`Floor1BossSustain`) reads consumables, so
+  it is a content-validation code, not a 6.4 guard (death and healing
+  design 21.1 step 6).
 - **"On its turn" means the whole kit**, limited abilities included,
   each checked at its best case; the per-unit rows are checked for every
   ability, not only the at-will. **(lead's call)**
@@ -851,7 +864,7 @@ A floor holds 4–6 fights plus the boss **(settled)**:
 
 | Slot | Count | Placement |
 |---|---|---|
-| Patrol | 1 | Loops through 2–4 rooms, never the entry or boss room, and stays clear of the first two main-path rooms for the first 20 ticks |
+| Patrol | 1 | Loops through 2–4 rooms, never the entry or boss room, and stays clear of main-path rooms 1 and 2 for the first 20 ticks **(change DH-28)** |
 | Guard post | 3 | Main path, at chokepoints and doors |
 | Lair | 1 | Main path, past the midpoint |
 | Optional elite room | 1 (M2) | **Off the main path and visible before commitment.** Its carrier is Stationary and awake, never Dormant. |
@@ -908,9 +921,11 @@ Deterministic:
    on the loot stream, decides whether it appears, its floor and its
    channel; it replaces one notable draw of that floor and channel (a
    `campReward` phial takes a container draw of that floor). A declined
-   offer is lost for the run (consumables design 14.7). While gated, the
-   pre-roll still runs but places nothing (consumables design 10).
-   **(change CN-27; gated on the death and healing design)**
+   offer is lost for the run (consumables design 14.7). **(change CN-27)**
+   After the notable items and before the wand charges, the sundry and
+   found-supply block runs in the order of the death and healing design
+   12.5 (guaranteed potions and supply first among the sundries, fixed
+   draw counts). **(change DH-27)**
 4. **Carrier reservation** (no random draw): each enemy-carried item takes
    the first free carrier room in a fixed order: the optional elite room,
    then the lair, then guard posts by main-path index, then the patrol.
@@ -1019,13 +1034,17 @@ rescores with what is left of its turn, so it can retreat after striking.
 These hold on every difficulty tier and are asserted by property tests:
 
 1. No term reads hero status, class or level.
-2. **Monsters never target downed units and never aim areas at them** (a
-   requirement on death and healing, section 25).
+2. **Monsters never target downed units and never aim areas at them**.
+   Also enforced by the core: Downed units are inert (death and healing
+   design 11.4). **(change DH-28)**
 3. Focus spread applies as above.
 4. No knowledge of hidden positions.
 5. Reinforcements are announced at least 1 round before they arrive.
-6. No limited abilities in floor 1 surprise rounds, and no hidden lurkers
-   in floor 1's first two rooms.
+6. No limited abilities in floor 1 surprise rounds, no hidden lurkers in
+   floor 1's main-path rooms 0–2, and the solo hero is never Surprised on
+   floor-1 squares with main-path index 0 or 1 (death and healing design
+   17.1). Main-path rooms are indexed from 0, the entry. **(change
+   DH-28)**
 7. Stupidity floors: never enter a hazard that could kill it; no
    net-negative friendly fire; no control on a target that zeroes it; never
    idle with a reachable target.
@@ -1130,6 +1149,8 @@ then Searching, then Wary, with no healing and no refill.
   3-square bands.
 - **Surprise** **(settled)**: a group noticed without noticing back is
   Surprised. Joining groups are never Surprised and never Surprise.
+  Exception: the solo hero is never surprised in floor 1's first two
+  main-path rooms (death and healing design 17.1). **(change DH-29)**
 
 ### 12.3 Noise
 
@@ -1612,6 +1633,8 @@ every hostile unit still in the fight is Routed.
 
 - Routers still in sight Yield. Unseen ones are removed as Fled.
 - Downed companions get up, as on any win. **(change M-1)**
+- If the hero reaches 0 HP in the event that ends the fight, the run
+  ends (death and healing design 10.3). **(change DH-30)**
 - Simulator target: zero party movement after the last non-routed enemy
   falls.
 
@@ -1801,7 +1824,9 @@ reward card is a separate screen and does not count.
    call):** at most 8 rerolls per notable, each excluding capped families,
    owned bases and this floor's bases from the weight table. If the table
    is empty or the rerolls run out, a supply or tonic draw is substituted
-   and flagged `substituted`, so the per-channel count still balances.
+   and flagged `substituted`, so the per-channel count still balances. A
+   guaranteed draw is never substituted (death and healing design 12.5).
+   **(change DH-27)**
    **Later (change I-14):** a trader slot is never substituted; it returns
    to the containers channel (items design 10.9).
    **The Reprieve Phial is never a weighted draw.** One pre-roll per run,
@@ -1809,7 +1834,7 @@ reward card is a separate screen and does not count.
    channel; it replaces one notable draw of that floor and channel (a
    `campReward` phial takes a container draw of that floor). A declined
    offer is lost for the run (consumables design 14.7). **(change CN-27;
-   gated on the death and healing design)**
+   DH-27)**
 3. **Carrier rooms are reserved before composition** (10.5 step 4). That
    room is filled against its budget minus the item's cost add, so the
    item makes its carrier more dangerous without breaking the budget (10.5
@@ -2088,7 +2113,7 @@ elite room, which is extra by design. **(lead's call)**
 | **Skirmisher** | 80% / 100% / +1 / 0; speed 8 | Melee + thrown | Slips past; Disengage as its bonus action; M2 Help sets up allies (Helped) | Reach, opportunity-attack zones, Grapple, Chilled, close formation | Raider | 0 | M2 |
 | **Controller** | 90% / 70% / 0 / 0; concentrates | Damage + a minor (Chilled, Poisoned or Corroded) | One limited control ability. Hard control only where the gates allow. Carries the type's 2 conditions. At most 1 per encounter on floors 1–2. | Focus it, psychic rider, Treat, Rally | Disruptor | +2 | M2 |
 | **Leader** | 110% / 80% / 0 / 0; trained Will and Intimidation | Weapon + Frighten | **Command** (Rally or Order, cooldown 3); Emboldened aura; Quarry | Kill it first; Frighten the Demoralised; Frighten the leader to stop its Rally | Commander | +2 | M2 |
-| **Lurker** | 80% / 100% (150% on its opener) / 0 / 0 | Melee + Hide | Starts Hidden; **Ambush Strike** (`uses:1`, +2 dice); Poisoned, Bleeding or Blinded. Never in floor 1's first two rooms. | Perception, the radiant rider (Revealed), staying grouped, reading the tell | Ambusher | +2 | M2 |
+| **Lurker** | 80% / 100% (150% on its opener) / 0 / 0 | Melee + Hide | Starts Hidden; **Ambush Strike** (`uses:1`, +2 dice); Poisoned, Bleeding or Blinded. Never in floor 1's main-path rooms 0–2 **(change DH-28)**. | Perception, the radiant rider (Revealed), staying grouped, reading the tell | Ambusher | +2 | M2 |
 | Support | — | — | One `uses:1` heal or buff; at most 1 per encounter | Withered, focus | — | — | Later |
 | Summoner | — | — | Calls a pre-paid reserved pack, with a visible countdown | Kill it before the countdown ends | — | — | Later |
 | Thief | — | — | Steals and flees; must be visibly flagged and drop its haul when Routed | — | — | — | Later |
@@ -2673,8 +2698,8 @@ overlay, rather than 5 themes of about 27 types)**
 - **Experience level scaling** may feel opaque. Mitigation: show the
   adjustment in the loot summary. Catch-up should fire in under 20% of
   runs.
-- **Dependencies.** Items (k, records, coin), death and healing (crit rule,
-  hero HP) and generation (anchors, routes, tells) are not yet designed.
+- **Dependencies.** Items (k, records, coin) and generation (anchors,
+  routes, tells) are not yet designed. **(change DH-31)**
   The guards and loot numbers are provisional until they are.
 - **Precedent.** The morale-state budget raise could invite more
   relabelling. Mitigation: a hard cap of 4 on the morale class, recorded in
@@ -2792,16 +2817,18 @@ committed wind-ups (13.2).
   loadouts (its 12) and Pitted Armour (Later, its 9.4). **(change AR-29)**
   Consumables, scrolls and wands are settled in the consumables design
   (2026-11-17); coatings and Coated stay Later. **(change CN-26)**
-- **Death and healing** (the guards and AI depend on these):
+- **Death and healing** (the guards and AI depend on these): settled in
+  the death and healing design (2026-11-17); every row below is answered
+  there (its 25.1). **(change DH-31)**
 
-| Need | Why |
-|---|---|
-| Hero HP at level 1 of about 18 (the proposed flat bonus) | Or the floor 1 table rows must shrink |
-| **A crit damage rule.** Recommended: SRD double dice, applied to everyone (S-3). | Every guard is computed with it |
-| Confirmation that the hero has no downed state | Boss and encounter guards read "reduced to 0" |
-| Whether damage on a downed companion kills it | The AI invariant "never target or aim areas at downed units" is required either way |
-| A morale win counts as a win | For getting up (M-1) |
-| **The Reprieve Phial (talisman) needs** (consumables design 24): its final leave-HP; whether it fires out of combat; the owner order of Death-warded, Last Ward, Last-Breath Charm and the phial; whether companions can die (then the phial also covers "would die") **(change CN-21; gated on the death and healing design)** | The save runs in the damage pipeline before HP is lowered; the 6.4 guards are computed without it (consumables design 14.4, 14.9) |
+| Need | Why | Answer (death and healing design) |
+|---|---|---|
+| Hero HP at level 1 of about 18 (the proposed flat bonus) | Or the floor 1 table rows must shrink | 18 for the reference hero (tier 6, Con +1): 11 + 7; the bonus persists at every level, so the 6.1 table matches; lowest legal 16, covered by new 6.4 rows (7, 21.1) |
+| **A crit damage rule.** Recommended: SRD double dice, applied to everyone (S-3). | Every guard is computed with it | Adopted: double dice for every unit, attack rolls only (9) |
+| Confirmation that the hero has no downed state | Boss and encounter guards read "reduced to 0" | Confirmed: 0 HP ends the run (10) |
+| Whether damage on a downed companion kills it | The AI invariant "never target or aim areas at downed units" is required either way | No: a Downed unit is inert; invariant 2 is now also a core rule (11.4) |
+| A morale win counts as a win | For getting up (M-1) | Yes (11.2) |
+| **The Reprieve Phial (talisman) needs** (consumables design 24): its final leave-HP; whether it fires out of combat; the owner order of Death-warded, Last Ward, Last-Breath Charm and the phial; whether companions can die (then the phial also covers "would die") **(change CN-21)** | The save runs in the damage pipeline before HP is lowered; the 6.4 guards are computed without it (consumables design 14.4, 14.9) | Leave-HP 334‰; fires from any source, but the floors come first; owner the death and healing design, order Death-warded → phial, Last Ward and Last-Breath Charm retired; companions never die, no would-die coverage (15, 16, 11.6) |
 
 - **Dungeon generation** (the generator content test asserts each):
 
@@ -2810,7 +2837,7 @@ committed wind-ups (13.2).
 | Expected party level per room along the critical path, in tenths | Budget, room level, experience scaling | M1 |
 | Floor plan slots, with the elite room off the path and visible before commitment | Encounters, loot | M1 / M2 |
 | Path-distance hearing through doors (−3 per closed door); locked doors block monster paths | Joining, cluster budget | M1 |
-| Patrol loops that avoid the entry room and the first two main-path rooms for the first 20 ticks | Awareness | M1 |
+| Patrol loops that avoid the entry room and stay clear of main-path rooms 1 and 2 for the first 20 ticks **(change DH-28)** | Awareness | M1 |
 | Retreat anchors (unexplored rooms reachable away from the party) | Routed | M2 |
 | A second route around at least one fight | Stealth guarantee | M1 |
 | A cover room on at least one patrol route | Party ambush | M1 |
@@ -2818,6 +2845,9 @@ committed wind-ups (13.2).
 | Containers and lair caches for the loot channels | Loot | M1 |
 | Boss arena templates: at least 2 entrances, line-of-sight blockers, a counterplay feature | Bosses | M1 |
 | Hazard placement within theme budgets | Conditions 11 | M2 |
+| When laying out the main path, reserve at least 2 containers openable with no check in main-path rooms before the boss room, one in the first half; a run-time assertion and one retry with the dungeon stream at seed + 1 (death and healing design 12.4 HE-7) **(change DH-32)** | Healing guarantee | M1 |
+| A `mainPathIndex` on every square, corridors taking the lower index of the rooms they join (death and healing design 17.1) **(change DH-32)** | Floor-1 surprise rule (11.3 invariant 6, 12.2) | M1 |
+| Trap ids and a detection snapshot when a trap fires (death and healing design 10.4) **(change DH-32)** | Party trap floor | M1 |
 
 - **Companions:** captives as recruits (Later, optional); the rival party's
   dependence on companion kits (18.1).

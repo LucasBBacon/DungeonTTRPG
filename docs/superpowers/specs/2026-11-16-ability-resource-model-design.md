@@ -280,8 +280,9 @@ spend.
 
 A Strength fighter:
 
-- **Second Wind:** bonus action, heal 1d10 + level. `rest` pool of 1, 2 from
-  level 6.
+- **Second Wind:** bonus action, regain your Recovery (the Medicine bonus
+  excluded). `rest` pool of 1, 2 from level 6. **(change DH-10, death and
+  healing design 8, 12.1)**
 - **Techniques:** `rest` pool of 2, 3 at level 5, 4 at level 9. One is spent
   after a hit is known and before damage is rolled, so it is never wasted on
   a miss. It makes that hit carry the weapon's rider, push the target 1
@@ -292,6 +293,11 @@ A Strength fighter:
 
 A martial class has at most three named pools, not counting its capstone
 (6.7). **(lead's call)**
+
+Full Recovery as a self-heal is for the fighter-type Second Wind only.
+Every other class's `rest` defensive tool (at most half Recovery, or a
+defensive or prevention effect) is a requirement on the classes design,
+inside 6.3's band. **(change DH-10, death and healing design 12.1)**
 
 ### 6.7 Capstone
 
@@ -358,8 +364,8 @@ Every ability declares exactly one cost **(lead's call)**:
 | Rally: Leadership | Bonus action, once per ally per fight |
 | Study an enemy: Lore | Bonus action, once per enemy type per fight |
 | Recognise a spell being cast: Arcana | `none`: a threshold with no roll |
-| Get a downed companion up: Medicine, trained only **(settled)** | Action |
-| Treat: Medicine, one roll against each curable instance's recorded difficulty; ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (Diseased and Scarred at a rest, except a `treatProof` Scarred **(gated on the death and healing design)**) **(agreed; change C4, conditions design 8; change CN-12, consumables design 14.6)** | Action, adjacent |
+| Get a downed companion up: Medicine, trained only **(settled)**; at most once per companion per fight (a Lifeline get-up counts) **(change DH-11, death and healing design 11.2)** | Action |
+| Treat: Medicine, one roll against each curable instance's recorded difficulty; ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (Diseased and Scarred at a rest, except a `treatProof` Scarred) **(agreed; change C4, conditions design 8; change CN-12, consumables design 14.6; change DH-11)** | Action, adjacent |
 | Disarm or re-arm a trap: Mechanics, trained only **(settled)** | Action |
 | Trigger a known trap against enemies: Mechanics | Action |
 | Use a scroll or wand outside your class: Arcana, trained only, against 10 + tier; in class, no slot is spent **(settled; change CN-12, consumables design 13.2)** | Action. A failed check uses the scroll or charge up: no free retries **(settled)**. |
@@ -367,9 +373,9 @@ Every ability declares exactly one cost **(lead's call)**:
 | Administer a belt potion or tonic to an adjacent ally: tonics minor only; a potion does not lift Downed; not a potion or healing scroll on a Downed unit (a trinket reach step may extend 'adjacent' to 2 squares; trinkets design 6.1) **(change I-5, items design 7.1; change TK-19; change CN-12, consumables design 11)** | Action (the giver's); the receiver spends nothing |
 | Throw a belt potion at an ally: range 5, line of sight, no roll, `thrownPotionPermille`; never lifts Downed; not on a Downed unit **(agreed; change CN-12, consumables design 11)** | Action |
 | Throw a belt flask: range 5, no attack roll; at most one offensive flask per turn **(change CN-12, consumables design 12)** | Action |
-| Hand over to an adjacent ally, from the belt or the weapon sets only, never the pack; never a talisman in combat **(gated on the death and healing design)** (a trinket reach step may extend 'adjacent' to 2 squares; trinkets design 6.1) **(change I-5, items design 7.1; change TK-19; change CN-12, consumables design 14)** | The giver's free interaction |
-| Take from a Downed adjacent ally, belt or weapon-set items only; never a talisman in combat **(gated on the death and healing design)** **(change I-5, items design 7.1; change CN-12, consumables design 14)** | Free interaction |
-| Retrieve: pack to belt or to an empty spare set; never a talisman in combat **(gated on the death and healing design)** **(change I-5, items design 7.1; change CN-12, consumables design 14)** | Action (`packInCombat` flag) |
+| Hand over to an adjacent ally, from the belt or the weapon sets only, never the pack; never a talisman in combat (a trinket reach step may extend 'adjacent' to 2 squares; trinkets design 6.1) **(change I-5, items design 7.1; change TK-19; change CN-12, consumables design 14; change DH-11)** | The giver's free interaction |
+| Take from a Downed adjacent ally, belt or weapon-set items only; never a talisman in combat **(change I-5, items design 7.1; change CN-12, consumables design 14; change DH-11)** | Free interaction |
+| Retrieve: pack to belt or to an empty spare set; never a talisman in combat **(change I-5, items design 7.1; change CN-12, consumables design 14; change DH-11)** | Action (`packInCombat` flag) |
 | Pick up or seize an item in or next to your square: to a free belt slot or matching stack, an empty spare set, or else `claimed` (unusable this fight) **(change I-5, items design 7.1)** | Free interaction |
 | Swap weapon sets (active and spare, shield included) **(change I-5, items design 5.2)** | Bonus action |
 | Shield bash (the Shield kind, in the active set; bucklers, Reliquary and tower shields have none): 1d4 bludgeoning, Push; Strength + proficiency to hit, Strength to damage; not an off-hand attack **(change AR-7, armour design 10.2)** | Replaces one attack |
@@ -933,8 +939,10 @@ The build fails when:
 **(lead's call unless marked)**
 
 - The party spends 1 supply.
-- Each unit regains its Recovery in hit points **(settled)** and its `rest`
-  pools reset. Then each caster's Slot Recovery (6.5) applies.
+- Order: Downed companions get up on 1 hit point → Treat attempts →
+  each unit regains its Recovery in hit points **(settled)** plus the
+  Medicine bonus → `rest` pools reset → each caster's Slot Recovery (6.5).
+  **(change DH-12, death and healing design 11.3)**
 - The best trained Medicine member adds Wisdom + proficiency to every
   unit's Recovery. Medicine mastery's signature use is the builders' to
   choose. **(settled that it is the builders')**
@@ -948,6 +956,14 @@ The build fails when:
 - The party carries at most 3. Supply **uses no slots**: it is an integer
   party counter, never an item. **(change I-6, items design 5.3)**
 - Target: about two short rests per floor of 4–6 fights plus the boss.
+- `supplyMainPathMin` 1: at least one found supply cache is in a
+  main-path container before the boss room, needing no optional fight and
+  no check. **(client, agreed 2026-11-17, Q3; change DH-13, death and
+  healing design 5.7, 12.4)**
+- A rests-per-floor report gates on a median of at most 3 *(illustr.)*.
+  Lever order if it fires: found supply 1 per floor; limited vendor supply
+  stock (back to the client); supply cap 2. A higher supply price is not a
+  lever. **(change DH-13, death and healing design 5.7)**
 
 ### 15.4 Unusable buttons
 

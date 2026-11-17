@@ -901,7 +901,7 @@ Uncommon pieces add one roll from their location table. **(lead's call)**
 |---|---|---|---|---|
 | **Antidote Locket** | C | **Antidote:** advantage on saves against `poison`-tag conditions | M2 | Sealed reworded (TK-6, F2). Overlaps Inured (Later) as Weathered overlaps Resisting (approved precedent). Container-only; trigger rate reported per floor theme |
 | **Graveward Amulet** | C | **Graveward:** 1 / 1 / 2 per rest, Withered does not land on you | M2 | Gear-prevention step (7.3). Container-only; trigger rate reported per floor theme |
-| **Lifeline Pendant** | C | **Lifeline:** once per fight, getting a Downed adjacent companion up (Medicine, trained) costs a bonus action | M2 | `fight` minor (no revive nova before the death and healing design), offered as an action variant (9.1). `requires: skill.medicine.trained`; a warning verdict when the wearer is not Medicine-trained (15); companions only (a hero downing ends the run); container-only |
+| **Lifeline Pendant** | C | **Lifeline:** once per fight, getting a Downed adjacent companion up (Medicine, trained) costs a bonus action | M2 | `fight` minor (counts toward Medicine's once per companion per fight; death and healing design 11.2), offered as an action variant (9.1). `requires: skill.medicine.trained`; a warning verdict when the wearer is not Medicine-trained (15); companions only (a hero downing ends the run); container-only |
 | **Emberward Amulet** | U (major) | **Emberward:** 1 / 1 / 1 per rest, the fire parts of one damage event against you resolve one ladder step toward resistant; never past resistant, never to immune, and never combined with another step source on the same event (the strongest applies) | M2 | The client's "resistance", reading R-b. Bounds **(lead's call, new)**: acts on all fire parts of the event together; `bigHit` is true when the sum of the fire parts, after crit doubling and before any ladder step, is at least `FloorDiv(maxHP × bigHitPermille, 1000)`; the charge is spent only if the final ladder step of some fire part changes (as Shielded's "used only if it changes something"). A fire Resistant source in an earlier slot (Resistant armour) draws the warning verdict `DeadLine`, which is not a suppression |
 | **Kinward Torc** | U (major) | **Kinward:** 1 / 1 / 1 per rest, automatic: when Poisoned, Bleeding or Withered would land on an adjacent ally (a failed save or an automatic landing), it does not land | M2 | Narrowed to the neck's own subjects (5.5, 5.7): Burning and Chilled are back's **(lead's call)**. Trigger `allyConditionWouldLand` (7.3). Reaction-shaped (counts under `ReactionCap`); yields to a ward step 4 would spend (7.1); one received prevention per round |
 | **Heartward Torc** | **R** (floor 3+) | Fixed Kinward + one rolled neck minor (Antidote, Graveward or Lifeline), which may be dormant | M2 | The only M2 Rare family. Kinward answers `ally:` keys and the rolled minors `self:` keys, so all three rolls stay legal under rule 28. Elites only as carriers (12; a Lifeline roll is container-only); Later curse host |
@@ -936,7 +936,7 @@ Uncommon pieces add one roll from their location table. **(lead's call)**
 | Bloodknot | C | Once per fight: first drop to half HP or below, gain Warded | Later | Held so M2 has at most two ward charms |
 | Kinstone | C | Move a Warded charge between you and an adjacent ally | Later | Needs a `sourceTied` ruling; only if the ward non-stacking rule holds |
 | Scrollwright's Token | C | Advantage on the next off-class scroll Arcana or trap Mechanics check | Later | Trigger-rate risk |
-| Last-Breath Charm | R | 1 per camp: at fight start gain Death-warded | Later | Reopens Q2 for charms; shares a trigger with armour's Last Ward (14.3); the death and healing design picks owners |
+| Last-Breath Charm | R | 1 per camp: at fight start gain Death-warded | Later, retired | Retired (Later; nothing shipped changes): it duplicates Death-warded on a timer and the Reprieve Phial owns the extra-life fantasy (death and healing design 15.3, Q7) |
 | Muse's Token | R | 1 per camp: gain Inspired | Later | Only with the Leadership-mastery owner's agreement; reopens Q2 |
 
 All Later charm entries go through the charm-abilities pass (24.2) before
@@ -1346,7 +1346,7 @@ except the landing envelope, whose numbers are the lead's (TK-4):
 | Party trinket preventions per fight | Ceiling *(illustr. 3)* |
 | Precision class damage with best trinkets | At most +10% over trinket-free |
 | Rare amulet, reported separately; effect on boss win rate | Reported |
-| Antidote, Graveward and Lifeline against tonic, Remedy and Treat use; companion deaths with and without Lifeline | Reported |
+| Antidote, Graveward and Lifeline against tonic, Remedy and Treat use; companion downings with and without Lifeline | Reported |
 | Element share of finger and neck picks; second same-element offer in a run | De-weighted by smart loot |
 | Companion slot fill at the boss | ≤ 25% empty **(settled)** |
 | Piece against jewellery; the E+ rows | **(settled, armour 17.3)** |
@@ -1391,7 +1391,7 @@ except the landing envelope, whose numbers are the lead's (TK-4):
 | **New greyed reasons to teach** | Pre-equip verdicts; one line each |
 | **Charms feel thin** with two ward buttons and Tally in M2 | The charm-abilities pass (24.2), with the button press-rate report as its input |
 | **Bring-the-key** (element amulets and cloaks by floor theme) | Rest gate; charged, single-event effects; Torc of Seasons Later |
-| **Unruled dependencies** | Duskhem against Hidden's end rules; Leaper's against Jumping; Last Ward against Death-warded; Inspired owner; Storm and Dawn rings; Kinstone `sourceTied` |
+| **Unruled dependencies** | Duskhem against Hidden's end rules; Leaper's against Jumping; Inspired owner; Storm and Dawn rings; Kinstone `sourceTied` |
 | **Class copies discovered late** | The bidirectional registry makes the second-authored record change; Runner's pre-cleared |
 | **SRD shapes from memory** | Check against SRD 5.2.1 before any record (header, section 16) |
 
@@ -1504,10 +1504,12 @@ grants.
   report's reference builds.
 - **Companions:** kits and choices at 3, 6 and 9; Medicine and Lore
   training spread (Lifeline steering).
-- **Death and healing:** whether anything lifts Downed beyond Medicine
-  (Lifeline); Death-warded, Last Ward, Last-Breath Charm and Reprieve
-  Phial (talisman) owners (Later; the talisman part gated on the death and
-  healing design; change CN-22; consumables design 14.9, 14.10).
+- **Death and healing:** answered by the death and healing design
+  (settled): nothing lifts Downed beyond Medicine (Lifeline counts toward
+  its once per companion per fight), a won fight, a completed short rest
+  or camp; the drop-prevention chain is Death-warded → Reprieve Phial
+  (talisman), owned there; Last Ward and Last-Breath Charm retired (death
+  and healing design 11, 15; consumables design 14.9, 14.10).
 - **Consumables:** the flask throw is designed (consumables design 11);
   Slinger's Bracers numbers stay Later **(change CN-22)**.
 - **Conditions content (Later):** Veiled (Smoke Cloak), Shielded (Bulwark
@@ -1560,10 +1562,9 @@ it:
 
 - **Shared jewellery pool or C-split:** only if the lane-prediction
   playtest holds at 80% *(illustr.)* (19).
-- **Rare charms or rings:** reopen Q2 (curses, Last-Breath Charm, Muse's
-  Token). Last-Breath Charm is flagged for retirement: the Reprieve Phial
-  owns the party's extra-life fantasy (gated on the death and healing
-  design; change CN-22; consumables design 14.9).
+- **Rare charms or rings:** reopen Q2 (curses, Muse's Token). Last-Breath
+  Charm is retired: the Reprieve Phial owns the party's extra-life fantasy
+  (death and healing design 15.3; consumables design 14.9).
 - **One aura per party on a Rare amulet:** a Later option, not
   recommended for M2 (section 4, decision 7).
 - **The element major moving off neck,** if the neck pick share is too
@@ -1638,7 +1639,7 @@ it:
 | M9 | Shifting Band vs the buy-through offer | Cut |
 | M10 | Torc of Seasons needs instance state | Later; if revived, an items 18.1 change |
 | L1 | 5.6 and 13.4 pointer cells; an unnecessary 5.7 change | TK-1 completes both; no 5.7 change (5.7 binds `worn.open.*` only on piece records) |
-| L2 | Rare charms contradict the rarity rule | Recorded as a Later reopening of Q2 (24.3); Last Ward ownership to death and healing |
+| L2 | Rare charms contradict the rarity rule | Recorded as a Later reopening of Q2 (24.3); Last Ward ownership to death and healing, which retired Last Ward and Last-Breath Charm (death and healing design 15.3) |
 | L3 | Leaper's vs Athletics jump use | Later, dependent on main design 4.3 and an Athletics check |
 | L4 | Capacity value undefined | +1 = 1, +2 = 2 (TK-12) |
 | L5 | `charm` kind near the Charmed condition | "charm (none)" on the card |

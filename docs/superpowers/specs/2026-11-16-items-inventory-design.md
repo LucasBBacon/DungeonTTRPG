@@ -274,14 +274,21 @@ The `consumables` block is the consumables design's (consumables design
 18.1, full keys there, including which are not tuning). The talisman
 keys (`stackMax.talisman` 1, `categoryPermille.talisman` 1500,
 `familyCapPerRun.talisman` 1; "1 per run" is a cap, not a promise,
-consumables design 14.7) are gated on the death and healing design
-(consumables design 14.10). **(change CN-2)** `rarity.*.props` ranges apply to gear;
+consumables design 14.7) are settled with the talisman by the death and
+healing design (death and healing design 15, 16). **(change CN-2; change
+DH-33)** The block also holds the death and healing design's loot, kit
+and camp keys as bare keys beside `offensiveSundryMin`:
+`healingSundryMin`, `healingSundryMax`, `healingOffPathPermille`,
+`supplyMainPathMin`, `heroKitPotions`, `recruitKitPotions` and
+`campHeroPotionTopUp`; all are client numbers, **not tuning**, except
+`healingOffPathPermille` (death and healing design 20.1). **(change
+DH-33)** `rarity.*.props` ranges apply to gear;
 a use-only record meets 19.1 rule 1 with its `use` (12.5). **(change
 CN-6)**
 
-All values *(illustr.)*, except the `ePlusGate` block and the trinket keys
-named above as not tuning. `basePrice` (supply, Remedy, mundane bases) and
-`size` stay on the records; `stackMax` is read from here by `kind`, and
+All values *(illustr.)*, except the `ePlusGate` block and the trinket and
+death and healing keys named above as not tuning. `basePrice` (supply,
+Remedy, mundane bases) and `size` stay on the records; `stackMax` is read from here by `kind`, and
 gear is always 1. A save records the hash of `inventory.json` and resumes
 only under the same file, so a tuning change (for example kill-switch
 lever 3) applies to new runs and never reinterprets a saved `spent`.
@@ -300,7 +307,7 @@ how Retrieve works is a tuning change, not a redesign. **Its value
 | **Spare weapon set** (1) | A second full loadout, shield included. This is what "a spare weapon" means (change I-7). It is **empty** only when both hands are empty. | No | The settled **bonus action** swaps the two whole sets, so it is always clear where the shield goes |
 | **Armour** (1) | Body armour | No | Passive. Cannot be changed in combat. |
 | **Trinkets** (2) | Worn items: rings, amulets, charms, cloaks, helms, gloves, boots; at most one per body location (rings two); never AC (armour design 5.4) **(change AR-30)** | No | Passive plus granted abilities. Cannot be changed in combat. |
-| **Belt** (2; a feature or offer may add a 3rd; hard maximum 3) | `beltable` items only: consumables (not Remedy), scrolls, wands and talismans, one stack per slot **(change CN-1; talismans gated on the death and healing design)** | No | **The only place consumables, scrolls, wands and talismans are used from in combat** |
+| **Belt** (2; a feature or offer may add a 3rd; hard maximum 3) | `beltable` items only: consumables (not Remedy), scrolls, wands and talismans, one stack per slot **(change CN-1; change DH-33)** | No | **The only place consumables, scrolls, wands and talismans are used from in combat** |
 | **Pack**: max(2, 3 + Strength) slots | Anything. Size-1 items cost 1 slot; bulky items cost 2. Bulky means two-handers, armour and shields, and only while in the pack. Occupancy is the sum of sizes; a pack index is only an ordering key. | It is the pack | Only through Retrieve (an action) |
 
 Pack sizes *(illustr.)*: Strength −1 gives 2, 0 gives 3, +1 gives 4, +3
@@ -429,9 +436,9 @@ per unit). Only the placement rule and two sentences of enemies 15.5 and
 | **Potion thrown at an ally** | The thrower's **action**, range 5 (`potionThrowRange`), line of sight, no roll, a willing ally only, never yourself; heals `thrownPotionPermille`. It never lifts Downed and is not used on a Downed unit (consumables design 11). **(change CN-4, agreed 2026-11-17, Q4; change CN-3)** | Not offered (Hand over is free) |
 | Swap weapon sets | Bonus action **(settled)** | Free |
 | Pick up or seize an item in or next to your square | **Free interaction (settled); it always succeeds.** A consumable goes to a free belt slot or a matching stack. A weapon goes to an empty spare set; wielding it is the set swap (bonus action, settled). Otherwise the item (or a stack's remainder, 6.2) becomes **claimed**: the unit holds it, it is unusable this fight, and it is resolved at the summary. Disarm seizure (enemies 15.5) therefore always works for a full unit. **If the party flees**, every claimed item goes to the flee pile in its room (`ItemLeft`); belt and spare-set pickups stay where they are. **(lead's call)** | n/a (out-of-combat loot comes through a summary) |
-| **Hand over** to an adjacent ally (a trinket reach step may extend "adjacent" to 2 squares; trinkets design 6.1) **(change TK-28)** | The giver's free interaction. **Only from the belt or the weapon sets, never from the pack.** Never a talisman in combat **(change CN-3, gated on the death and healing design)**. One dose moves at a time. It lands on the receiver's belt or empty spare set, or is refused with a reason. | Free, at any distance, through the party view |
-| **Take from a Downed adjacent ally** | The taker's free interaction. Belt or weapon-set items only; never a talisman in combat **(change CN-3, gated on the death and healing design)**. Lets the party recover the last heal. | Free |
-| **Retrieve**: pack to belt or to an empty spare set | **Action** (`packInCombat: action`, a client decision). Were `freeOncePerFight` ever approved, the unit's fight state carries `retrieveFreeUsed`, cleared at combat start. Never a talisman in combat **(change CN-3, gated on the death and healing design)**. | Free |
+| **Hand over** to an adjacent ally (a trinket reach step may extend "adjacent" to 2 squares; trinkets design 6.1) **(change TK-28)** | The giver's free interaction. **Only from the belt or the weapon sets, never from the pack.** Never a talisman in combat **(change CN-3; change DH-34)**. One dose moves at a time. It lands on the receiver's belt or empty spare set, or is refused with a reason. | Free, at any distance, through the party view |
+| **Take from a Downed adjacent ally** | The taker's free interaction. Belt or weapon-set items only; never a talisman in combat **(change CN-3; change DH-34)**. Lets the party recover the last heal. | Free |
+| **Retrieve**: pack to belt or to an empty spare set | **Action** (`packInCombat: action`, a client decision). Were `freeOncePerFight` ever approved, the unit's fight state carries `retrieveFreeUsed`, cleared at combat start. Never a talisman in combat **(change CN-3; change DH-34)**. | Free |
 | Belt to pack; reshuffling | Not allowed | Free |
 | Equip or remove armour or trinkets | Not allowed (`NotInCombat`) | **Only at a short rest, at camp, or with "Equip now" on a newly taken item at its summary** **(agreed)**. "Newly taken" means the item's first entry into the party this run (8.3). |
 | Drop | **No command** | No command. Items are shed by Leave or Swap at a summary, Sold at camp, or bartered (Later). |
@@ -739,8 +746,8 @@ slots, camp-only and run-scoped. **(lead's call for the revisit shape)**
 - **Limited potion stock per camp,** pre-rolled.
 - **Potion healing per coin below supply.**
 - **The companion scorer suggests "drink it"** when it values the potion.
-- **Automatic triggers** for insurance (the talisman, gated on the death
-  and healing design; consumables design 14) **(change CN-9)**.
+- **Automatic triggers** for insurance (the talisman; consumables design
+  14; death and healing design 15, 16) **(change CN-9; change DH-35)**.
 - **A simulator report** of consumables unused at each camp, and of
   coin-funded against supply-funded HP (19.3).
 
@@ -965,7 +972,7 @@ family: { id: "family.longsword", category: "weapon", improvised: {...},
 | `id`, `nameKey`, `flavourKey` | string | Stable ID and localisation keys |
 | `family` | `family.*` | Cap key, duplicate rerolls, `improvised`, default monster profile |
 | `base` | item ID or null | The mundane base it builds on. Null for mundanes and consumables. |
-| `category` | enum | weapon, focus, shield, armour, trinket, consumable, scroll, wand, talisman (**change CN-1**, gated on the death and healing design), key; `supply` is a counter record only, never instantiated (5.3) |
+| `category` | enum | weapon, focus, shield, armour, trinket, consumable, scroll, wand, talisman (**change CN-1**; death and healing design 15, 16; **change DH-35**), key; `supply` is a counter record only, never instantiated (5.3) |
 | `kind` | enum (consumables) | potion, tonic, flask, coating, remedy |
 | `tags[]` | strings | Read by effects and offers: `twoHanded`, `versatile`, `thrown`, `fire`, `bulky`… |
 | `rarity` | enum | mundane, common, uncommon, rare, veryRare (12.5) |
@@ -980,7 +987,7 @@ family: { id: "family.longsword", category: "weapon", improvised: {...},
 | `usableBy` | object | `party`, `monster`, `monsterTags[]` |
 | `properties` | object | `fixed[]`, `rollable {table, count}`, `hiddenMax` (0 or 1; 0 below Uncommon). Every rollable table declares one `entryValue` that all its entries equal. |
 | `grants` | object | `whileEquipped[]` (effects), `whileCarried[]` (rare: party-wide), `abilities[] {ability, cost, pool}` |
-| `use` | object | `{ability, targets[] {mode: self \| adjacentAlly \| thrown, cost, tierLimit?}, difficulty: user \| fixed:N}`. One entry per way to use it, each with its own cost. Each entry also declares `side` (self \| ally \| enemy \| any) and `area` (unit \| burst:N), and optionally `range` and `potencyPermille` (`int` or a tuning-key reference); beneficial is derived from `side`. `use` gains `trigger` (talisman only; always automatic; gated on the death and healing design). `difficulty` is unchanged (consumables design 18.2). **(change CN-1)** |
+| `use` | object | `{ability, targets[] {mode: self \| adjacentAlly \| thrown, cost, tierLimit?}, difficulty: user \| fixed:N}`. One entry per way to use it, each with its own cost. Each entry also declares `side` (self \| ally \| enemy \| any) and `area` (unit \| burst:N), and optionally `range` and `potencyPermille` (`int` or a tuning-key reference); beneficial is derived from `side`. `use` gains `trigger` (talisman only; always automatic; death and healing design 15.2) **(change DH-35)**. `difficulty` is unchanged (consumables design 18.2). **(change CN-1)** |
 | `pools[]` | object | `{id, max, refill: never \| rest \| camp}` |
 | `charges` | `{min, max}` | Wands: the pre-rolled charge range |
 | `identifyDifficulty` | int | Compared with the party's passive Arcana (section 11) |
@@ -1237,12 +1244,15 @@ is original, so it carries no `srd` flag.
 
 - **A Downed companion keeps everything** (settled, main design 4.2:
   companions are downed, not killed). An adjacent ally may take its belt or
-  weapon-set items (7.1). If the party flees, it stays Downed in the party
-  with its gear.
+  weapon-set items (7.1). It stays Downed in the party with its gear until
+  Medicine, a won fight, a completed short rest or camp (death and healing
+  design 11.2). **(change DH-36, agreed 2026-11-17, Q2, Q4)**
 - **Conditional:** if the death and healing design ever allows companion
   death (enemies 25), the dead unit's equipment, belt and pack join **that
   fight's summary** as cards outside the 3-item cap. Its capacity ends, and
-  nothing is ejected from anyone else.
+  nothing is ejected from anyone else. The rule stays dormant: companions
+  never die at launch (death and healing design 6.4, 11). **(change
+  DH-36)**
 - **A recruit** arrives with its kit record (mundane bases, full pools,
   settled ability model 11.2), and the party view opens.
 - **Run end:** every item, all coin and all supply are gone. Only heirloom
@@ -1279,7 +1289,7 @@ is original, so it carries no `srd` flag.
 |---|---|---|---|
 | 1 | **Weapons (with foci)** | M1 | **Designed:** `2026-11-17-weapons-design.md` (weapons design), approved 2026-11-17, which adopts the no-ammunition-tracking recommendation (weapons design 9.4). Disarmed and Coated stay Later. **(change W-15)** |
 | 2 | **Armour and shields** | M1 | **Designed:** `2026-11-17-armour-design.md` (armour design), approved 2026-11-17, which takes the weapons design 17.9 inputs **(change W-13)**. Pitted Armour and the tower shield stay Later. **(change AR-37)** |
-| 3 | **Starting kits** (small; may fold into 1 and 2) | M1 | `kit` records per class and per companion: weapon sets, armour, belt contents, starting coin. Answers ability model 20's "a minimal starting-equipment set for M1". Armour kits as in armour design 13.6 **(change AR-37)**. |
+| 3 | **Starting kits** (small; may fold into 1 and 2) | M1 | `kit` records per class and per companion: weapon sets, armour, belt contents, starting coin. Answers ability model 20's "a minimal starting-equipment set for M1". Armour kits as in armour design 13.6 **(change AR-37)**. Every hero class kit holds 2 healing potions on the belt; every recruit kit 1; the hero's camp top-up of 1 (death and healing design 12.4, 13.2) **(change DH-37, agreed 2026-11-17, Q3)**. |
 | 4 | **Consumables** (potions, tonics, flasks, coatings, Remedy) | M1 potions; M2 rest | **Designed:** `2026-11-17-consumables-design.md` (consumables design), approved 2026-11-17 **(change CN-8)**: effects, `stackMax`, the use-value table, prices and pegs against supply, thrown flasks, monster `useWhen`, banding. Potions can be thrown at a willing ally: action, range 5, `thrownPotionPermille`, never lifts Downed (consumables design 11) **(change CN-4)**. Coatings and Coated stay Later. |
 | 5 | **Scrolls and wands** | M2 | **Designed:** in the consumables design (section 13), approved 2026-11-17 **(change CN-8)** |
 | 6 | **Trinkets** | M2 | **Designed:** `2026-11-17-trinkets-design.md` (trinkets design), approved 2026-11-17. Piece tables by location, jewellery tables by kind (trinkets design 14.1), capacity table **(change TK-9)**, capacity trinkets (at most +2), trinket families and caps. From the armour design **(change AR-37)**: piece kinds; location domains (armour design 5.6); the strict no-AC rule; the one-table rule; the reaction cap; pieces at Uncommon at most; at least 3 legal families per piece location per wave; `requires` tags for location hunger (armour design 5.7); the piece power target (armour design 17.3) |
@@ -1366,8 +1376,8 @@ are unit conditions.
 - Consumable events (consumables design 18.4): `ItemUsed` gains `mode:
   self | adjacentAlly | thrown | inClass | outOfClass`; new
   `ItemReadFailed{instance, unit}` and `ItemTriggered{instance, unit,
-  trigger}` (the talisman, gated on the death and healing design)
-  **(change CN-9)**.
+  trigger}` (the talisman; death and healing design 15.5)
+  **(change CN-9; change DH-35)**.
 - New trinket event: `TrinketPropertyFired{property, instanceId, unit,
   result}` (trinkets design 17.3) **(change TK-15)**.
 - New state events **(lead's call)**: `CoinChanged{delta, source: found |
@@ -1416,8 +1426,7 @@ The build fails on any violation:
 3. Every property passes the buff test. No bare always-on numeric
    modifiers; nothing raises an ability past +5.
 4. Pool refills: consumables `never`, talismans `never` (a derived stack
-   pool and no other pool; gated on the death and healing design) **(change
-   CN-7)**, wands `camp` (the trader's Recharge
+   pool and no other pool) **(change CN-7; change DH-35)**, wands `camp` (the trader's Recharge
    is the one named exception, Later, change I-16), `rest` only with an
    authoring reason. Trinkets: `rest` and `fight` by default; `camp` only
    at Rare; never `never`. Trinket `fight` uses use the armour 16.3
@@ -1499,8 +1508,8 @@ collisions; hooks and dead properties; piece rules). **(change AR-38)**
 
 Consumables design 19.1 rules 1–16 also apply (consumables, scrolls,
 wands, coatings (Later), value and pegs, `useWhen` and tuning
-references); its talisman rule is gated on the death and healing design.
-**(change CN-7)**
+references), its talisman rule included; so do the death and healing
+design's 21.2 codes. **(change CN-7; change DH-35)**
 
 ### 19.2 Run-time invariants and tests
 
@@ -1601,8 +1610,8 @@ Consumable, scroll, wand and talisman reports: see consumables design
     (`2026-11-17-trinkets-design.md`, 19) **(change TK-16)**;
   - tonics, flasks, scrolls and wands with camp refill; consumables staged
     as in the consumables design (`2026-11-17-consumables-design.md`,
-    20), the Reprieve Phial gated on the death and healing design
-    **(change CN-9)**;
+    20), the Reprieve Phial at 334‰ as consumables design 14.10 and the
+    death and healing design 22 stage it **(change CN-9; change DH-35)**;
   - rarity tiers and banded properties;
   - dormant properties and Arcana identification;
   - coin, the basic vendor, the notables shop or reward card, Sell;
@@ -1655,9 +1664,10 @@ Consumable, scroll, wand and talisman reports: see consumables design
 - **Barter could become a laundering route** (turning unwanted loot into
   wanted loot above Sell value). Mitigation: one-for-one, no change given,
   and the barter rate is a tuning value.
-- **Dependencies.** Category designs, death and healing, and dungeon
-  generation are not yet designed (section 24). Numbers here are
-  provisional until they are.
+- **Dependencies.** Category designs and dungeon generation are not yet
+  designed (section 24). Numbers here are provisional until they are.
+  Death and healing is settled in the death and healing design
+  (`2026-11-17-death-healing-design.md`). **(change DH-35)**
 - **Protected content.** SRD tier names and any SRD item are attributed
   (CC-BY-4.0). The bag of holding is cited as a banned shape, not used.
   Other games are mechanism references only.
@@ -1750,9 +1760,11 @@ mundane bases are not loot, and family caps all stand.
   see the consumables design (`2026-11-17-consumables-design.md`);
   coatings and Coated stay Later, and what it still needs is in its
   section 24. **(change CN-8)**
-- **Death and healing:** whether companions can die (15's conditional
-  rule); whether any healing lifts Downed (Administer assumes potions do
-  not).
+- **Death and healing:** no longer pending: see the death and healing
+  design (`2026-11-17-death-healing-design.md`). Companions cannot die at
+  launch, so 15's conditional rule stays dormant (death and healing design
+  6.4, 11); no healing lifts Downed, as Administer assumes (death and
+  healing design 11.5). **(change DH-35)**
 - **Dungeon generation:**
 
 | Requirement | Consumers | Wave |

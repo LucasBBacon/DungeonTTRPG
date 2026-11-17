@@ -186,7 +186,7 @@ the lead's calls, which the client said stand.
 | # | Decision | Chosen | Rejected, and why |
 |---|---|---|---|
 | 1 | Idea 1, scrolls (Q1) | **(a) Keep the Arcana requirement (option B):** in class = the reader's class is in `classTags`, any spell on the list, the spell's own cost, no slot spent, cast at the scroll's tier, never upcast; out of class = action + trained Arcana against 10 + tier, always rolled, a failure burns it. Untrained members have no scroll route; flasks are their one-use power. **(agreed)** | (b) D′, an untrained tier-1 flat roll: changes the trained-only list and thins Arcana's job where scrolls are commonest; **rejected by the client**. (c) A, anyone reads, no check: empties Arcana's agreed item job. C (plain scrolls) kept as a Later hook; D (untrained with disadvantage) a trap |
-| 2 | Idea 2, save item (Q2) | **(a) The Reprieve Phial (option B):** talisman category, belt, holder only, automatic when the holder would drop to 0 HP (order Last Ward → Death-warded → talisman), leaves 25% of max HP, Rare, floor 3+, 1 per run, unique, never bought; **can save the hero**. Principle approved now; gated on the death and healing design for its final numbers and owner order. **(agreed)** | (b) No item, the extra life left to death and healing. Option A as stated (party-wide, fires on a downing): can never save the hero and is spent on the first harmless companion downing. Option C (smelling salts): undercuts Medicine and Lifeline |
+| 2 | Idea 2, save item (Q2) | **(a) The Reprieve Phial (option B):** talisman category, belt, holder only, automatic when the holder would drop to 0 HP (order Death-warded → talisman), leaves 334‰ of max HP, Rare, floor 3+, 1 per run, unique, never bought; **can save the hero**. Principle approved now; final numbers and owner order set by the death and healing design (15, 16). **(agreed; change DH-38)** | (b) No item, the extra life left to death and healing. Option A as stated (party-wide, fires on a downing): can never save the hero and is spent on the first harmless companion downing. Option C (smelling salts): undercuts Medicine and Lifeline |
 | 3 | The phial's cost (Q3) | **(a) Scarred, the hero included, with `treatProof`:** Treat cannot end it; a Remedy or camp does; it does not set `downedThisFloor`. **(agreed)** | (b) Standard Scarred: one Treat roll at the next rest buys a life. (c) No Scarred: a free life |
 | 4 | Idea 3, thrown flasks (Q4) | **(a) No glass damage;** potions throwable at a willing ally for the thrower's action, range 5, line of sight, no roll, at `thrownPotionPermille` 750 *(illustr.; knob 500–1000, merge rule at 1000)*; never lifts Downed; tonics unchanged (minor only), range `throwAllyRange`. **(agreed)** | (b) Keep potions unthrowable. (c) Glass damage as proposed: a tax that can down a 1-HP ally or end the run, breaks concentration and needs an AI friendly-fire term |
 | 5 | Healing shape | **One Recovery-linked record** (`potionPermille` 1000) **(lead's call)** | Banded dice per drinker band (the named fallback, 7.2); tiered records (fragment the belt and stock) |
@@ -239,7 +239,7 @@ small.
 | Idea | Verdict | Decision |
 |---|---|---|
 | 1. Scrolls for members who cannot cast | **Adapt** | A caster out of slots reads any in-class scroll slot-free; a member trained in Arcana reads any scroll; an untrained member has no scroll route, and flasks are its one-use power **(agreed, Q1)** |
-| 2. An item that saves a downed member | **Adapt** | Not a revive: the **Reprieve Phial** fires when its holder would drop to 0 HP, leaves it on 25% of maximum HP and Scars it; it can save the hero **(agreed, Q2, Q3)**; gated on the death and healing design |
+| 2. An item that saves a downed member | **Adapt** | Not a revive: the **Reprieve Phial** fires when its holder would drop to 0 HP, leaves it on 334‰ of maximum HP and Scars it; it can save the hero **(agreed, Q2, Q3)** (death and healing design 16) **(change DH-38)** |
 | 3. Thrown beneficial flasks that hurt | **Adapt, decline the damage** | Potions become throwable at an ally for the thrower's action, range 5, at 75% strength; no glass damage **(agreed, Q4)** |
 
 ### 5.1 Idea 1: scrolls for members who cannot cast
@@ -324,7 +324,9 @@ usual, no Scarred, or another balancing cost.
   (conditions 18.9); armour Last Ward (1 per camp, a hit that would drop
   you to 0 misses; armour 14.3); Last-Breath Charm (1 per camp,
   Death-warded at fight start; trinkets 13.7). Trinkets 23 (Death and
-  healing bullet) leaves owners to the death and healing design.
+  healing bullet) leaves owners to the death and healing design, which
+  has since retired Last Ward and Last-Breath Charm (death and healing
+  design 15.3).
 - **The belt** is the only place consumables act in combat (items 5.2);
   `whileCarried` party-wide grants are banned for trinkets in M2.
 
@@ -340,15 +342,17 @@ usual, no Scarred, or another balancing cost.
 **Decision (agreed, Q2, Q3).** The **Reprieve Phial** (section 14):
 
 - talisman category; on the belt; protects its holder only;
-- fires automatically when the holder would drop to 0 HP, after Last Ward
-  and Death-warded;
-- leaves the holder on 25% of its maximum HP *(illustr.)*;
+- fires automatically when the holder would drop to 0 HP, after
+  Death-warded;
+- leaves the holder on 334‰ of its maximum HP (a client number, death
+  and healing Q8; death and healing design 16) **(change DH-38)**;
 - the holder gains Scarred, **the hero included**, with `treatProof`: Treat
   cannot end it; a Remedy or camp does; it does not set `downedThisFloor`
   **(agreed, Q3)**;
 - Rare, floor 3+, 1 per run, unique, never bought;
-- **the principle is approved now; it ships with the death and healing
-  design**, which sets its final numbers and owner order (14.10).
+- **the principle is approved now;** the death and healing design sets
+  its final numbers and owner order (14.10; death and healing design 15,
+  16).
 
 **On "who carries it":** on a companion it only saves the Downed turns and
 a Medicine action, at the cost of a Scar. Players will belt it on the hero
@@ -450,7 +454,7 @@ spending nothing.
 | consumable / coating | Temporary weapon rider through Coated | 2 | Later |
 | scroll | One cast of a class spell | 1 | M2 |
 | wand | A small camp-refilled spell pool | 1 | M2 |
-| **talisman** (new category) | A belt item that fires itself on a trigger | 1 | Gated (14.10) |
+| **talisman** (new category) | A belt item that fires itself on a trigger | 1 | M2, else Later (14.10) |
 
 `stackMax` values are the settled tuning values **(settled, items 5.1)**,
 with `talisman: 1` added (CN-2).
@@ -540,16 +544,12 @@ Relaxed for consumables only, and only for the named categories.
 - Recovery here excludes the rest-only Medicine bonus (ability model
   15.2). Recovery is a settled stat ("hit points restored per short rest;
   grows with level and Constitution", stat model 6) that M1 needs for
-  short rests anyway, so the record shape is buildable in M1; its number
-  is not yet approved (next bullet). If Recovery is about 7 at level 1, the
-  potion matches SRD 2d4+2.
-- **Recovery has no approved formula yet** (stat model 6 names the stat
-  only). Its owner is the death and healing design (24), and M1 potion
-  data waits for it or uses the M1 placeholder in the tuning file:
-  `recoveryPlaceholder` = 5 + 2 per level above 1 + Constitution modifier,
-  minimum 1 *(illustr.; about 7 at level 1 with Constitution +2)*. The
-  placeholder is replaced, not tuned, when the owner lands. **(new lead's
-  call)**
+  short rests anyway, so the record shape is buildable in M1. Recovery is
+  7 at level 1 with Constitution +1, so the potion matches SRD 2d4+2.
+- **Recovery = 4 + 2 × level + Constitution modifier, minimum 1**
+  (`recovery.base` 4, `recovery.perLevel` 2; the lead's numbers, owned by
+  the death and healing design 8). It replaces `recoveryPlaceholder`,
+  which is removed. **(change DH-39)**
 - **The heal effect** is one effect kind, `healRecovery {permille,
   monsterPermille}`, whose fields name tuning keys. `monsterPermille` is
   required whenever the record is `usableBy.monster` (validation rule 13).
@@ -712,7 +712,7 @@ Items 10.5 formula; `coinPerValue` 20 *(illustr.)*. **(lead's call)**
 | Channel | What |
 |---|---|
 | Basic vendor **(agreed, unchanged)** | Supply; healing potions in pre-rolled stock of 2–3 *(illustr.)*; tonics and Remedy, unlimited (price is the knob) |
-| Sundries (new loot class, CN-19) | Common consumables: healing potion, tonic, water, oil; Fire Bomb from floor 2. Drawn per floor **outside the notable count**, inside the fixed budget (items 2), illustratively 3–5 doses per floor (`sundriesPerFloor`). From floor 2, **at least 1 and at most 2 offensive flasks** per floor (`offensiveSundryMin`, `offensiveSundryMax`), the minimum drawn before the other sundries **(lead's call)**. Mostly containers, plus the settled single carried consumable per encounter |
+| Sundries (new loot class, CN-19) | Common consumables: healing potion, tonic, water, oil; Fire Bomb from floor 2. Drawn per floor **outside the notable count**, inside the fixed budget (items 2), `sundriesPerFloor` doses set per floor *(illustr. 3–5 on floors 1–2, 4–5 on floors 3–5)*. **At least 1 healing potion per floor** (`healingSundryMin` 1, drawn first; 2 on floors 4–5 only through the pre-authorised raise) and **at most 3** (`healingSundryMax`) **(client, Q3)**: the guaranteed potion goes in a main-path container in the first half of the main path, openable with no check, and is never substituted; random potions lean off-path (`healingOffPathPermille` 600) (death and healing design 12.4, 12.5) **(change DH-40)**. From floor 2, **at least 1 and at most 2 offensive flasks** per floor (`offensiveSundryMin`, `offensiveSundryMax`), the minimum drawn before the other sundries **(lead's call)**. Mostly containers, plus the settled single carried consumable per encounter |
 | Notables | Scrolls, wands, the Greater Fire Bomb and the talisman count in the 6–8 notables per floor and the camp channel |
 | Camp channel (notables shop, camp reward card) | Scrolls (never healing scrolls, P1), wands, the Greater Fire Bomb, all with channel `camp` (shop and reward card); the talisman **only** through `campReward` (the reward card, never the shop; CN-1) |
 | Boss reward card | Scrolls, wands; the talisman from floor 3 |
@@ -729,10 +729,8 @@ Items 10.5 formula; `coinPerValue` 20 *(illustr.)*. **(lead's call)**
   in play.
 - **The phial is never a weighted draw.** It is placed by one pre-roll
   per run (14.7), which replaces one notable draw of the chosen floor and
-  channel, so the fixed budget never has a hole. **While the phial is
-  gated (new lead's call),** the pre-roll still runs on the loot stream
-  (so seeds keep their other draws when it ships) but places nothing, and
-  every draw stays ordinary. No slot is reserved on any floor.
+  channel, so the fixed budget never has a hole. No slot is reserved on
+  any floor. **(change DH-40)**
 
 ## 11. Delivering potions and tonics
 
@@ -1018,21 +1016,21 @@ protected-name check still runs before data.
 - Only from the holder's own belt **(agreed, Q2)**. A phial in the pack
   does nothing.
 - Never on a unit already Downed; it never lifts Downed.
-- **In and out of combat** (a trap that kills the hero ends the run too).
-  This is a recorded difference from Death-warded's `combatOnly`, and a
-  death and healing question (section 24).
+- **In and out of combat** (the floors of death and healing 10.4 run
+  first, so it never fires on floored damage). This is a recorded
+  difference from Death-warded's `combatOnly`; the out-of-combat question
+  is closed (death and healing design 16). **(change DH-41)**
 
 ### 14.3 Resolution order
 
-**(agreed, Q2, for the order; CN-15)** It is spent only if nothing free
-saved the unit:
+**(agreed, Q2, for the order; CN-15; final, death and healing Q7)** It is
+spent only if nothing free saved the unit:
 
-1. armour Last Ward at the attack step;
-2. a Death-warded token at the drop;
-3. the phial.
+1. a Death-warded token at the drop;
+2. the phial.
 
-Whether Last Ward is automatic or policy-driven is a death and healing
-dependency (armour 14.3 does not say).
+The order is final: Death-warded → phial; Last Ward is retired (death and
+healing design 15.2, 15.3). **(change DH-41)**
 
 ### 14.4 Where the check runs, and the effect
 
@@ -1047,9 +1045,6 @@ each Scorching Rays hit and Frost Shard's burst are separate events.
 2. **Save chain.** If the unit is not Downed and current HP minus the
    total is 0 or less, the chain runs in order, and the first link that
    fires ends it:
-   - **Last Ward** (attack events only, checked with the total known,
-     before the hit is final): the hit becomes a miss: no damage and no
-     riders;
    - **Death-warded:** HP is left on 1;
    - **the phial:** steps 3 to 5.
 3. **Scarred, synchronously.** The holder gains **Scarred** as an engine
@@ -1060,10 +1055,11 @@ each Scorching Rays hit and Frost Shard's burst are separate events.
    only a Remedy or camp ends it, never Treat **(agreed, Q3)**. If the
    holder is already Scarred, the existing instance gains the flag.
 4. **HP** is set to `max(1, FloorDiv(new maximum HP × leaveHpPermille,
-   1000))`, `leaveHpPermille` 250 *(illustr.; agreed in principle, Q2;
-   final value death and healing)*, and the rest of the event's damage,
-   every part of it, is discarded. A share of maximum HP does not depend
-   on undesigned Recovery and has no monster or companion edge cases. It
+   1000))`, `leaveHpPermille` 334 (a client number, death and healing
+   Q8; death and healing design 16) **(change DH-41)**, and the rest of
+   the event's damage, every part of it, is discarded. A share of maximum
+   HP does not depend on Recovery and has no monster or companion edge
+   cases. It
    differs from Death-warded's "on 1" on purpose: under the 6.4 guards one
    enemy turn may deal 25% expected and 40% maximum of hero HP, and the
    save usually fires with more enemies to act, so 1 HP mostly delays
@@ -1156,7 +1152,8 @@ channels and placement lead's call; CN-1, CN-2, CN-27)**
 - **AI:** the monster scorer reads the preview, so a hit on the holder
   loses its kill bonus. Because the holder is in practice the hero, the
   scorer gains a term that values "spends a Rare save" at about the kill
-  bonus *(illustr.)*, so targeting does not shift away from the hero.
+  bonus *(illustr.)*, extended to Death-warded (death and healing design
+  16) **(change DH-41)**, so targeting does not shift away from the hero.
   Nothing reads "is the hero" (fairness invariant 1 holds). The report
   "share of monster attacks on the holder, with and without a phial"
   checks it.
@@ -1166,30 +1163,27 @@ channels and placement lead's call; CN-1, CN-2, CN-27)**
 - **Guards:** the enemies 6.4 permadeath guards are computed **without**
   any party consumable or talisman; the phial only adds survival on top of
   guarded fights.
-- **Death-ward family (input to the death and healing design, not a
-  change):** Last Ward and Last-Breath Charm recharge per camp, roughly a
-  free life per floor, much stronger than a single-use phial. Recommended:
-  the consumable owns the party's extra-life fantasy; retire Last-Breath
-  Charm (a duplicate trigger, already flagged); keep Last Ward only as a
-  narrowed gear variant (for example once per run); at most one
-  **recharging** drop-prevention (Last Ward, Death-warded, Last-Breath
-  Charm) fires per unit per fight. **The single-use phial is outside that
-  cap and always fires when armed** (agreed Q2: it comes after the free
-  sources in the order). Any cap that included the phial would change Q2
-  and go back to the client.
+- **Death-ward family:** Recommendation superseded: Last-Breath Charm
+  retired as recommended, and Last Ward also retired (death and healing
+  design 15.3, Q7). The cap reads: at most one **recharging** drop
+  prevention (today Death-warded) per unit per fight; **the phial is
+  outside it** and always fires when armed (agreed Q2: it comes after the
+  free sources in the order). Any cap that included the phial would change
+  Q2 and go back to the client. **(change DH-41)**
 
 ### 14.10 Gating and staging
 
 **(agreed, Q2: principle now, ships with death and healing)**
 
 - The principle is approved with this document; the per-run pre-roll
-  (14.7) runs but places nothing until the phial ships (section 10), and
-  the save-chain hook (14.4) exists in the damage pipeline.
-- The death and healing design sets `leaveHpPermille`, the owner order
-  with Last Ward and Death-warded, and whether the phial fires out of
-  combat.
-- Built in M2 if the death and healing design is approved before M2
-  content lock; otherwise Later, with Death-warded. Not in M1.
+  (14.7) places the phial, and the save-chain hook (14.4) exists in the
+  damage pipeline.
+- The death and healing design sets `leaveHpPermille` 334, the owner
+  order Death-warded → phial, and that the phial fires from any source,
+  in and out of combat (death and healing design 15, 16).
+- Ships in M2 if the death and healing design is approved before M2
+  content lock; otherwise Later, with Death-warded. Not in M1. **(change
+  DH-41)**
 
 ## 15. Monster use
 
@@ -1264,6 +1258,7 @@ classes design**; the tradition in brackets is an authoring hint only.
 | Record | Rarity, value | Use | Effect | Channels | Wave |
 |---|---|---|---|---|---|
 | **Healing Potion** | C, 1; floor 1+ | Bonus action (own belt); action to Administer or throw | Heals the receiver's Recovery; thrown at 750; monsters heal 25% max HP; never lifts Downed | 12 coin; vendor stock 2–3; kit; containers; sundries; carriers from M2 | **M1** |
+| **Healing potion (camp issue)** | Flag `unsellable`; stacks only with itself | As the Healing Potion | As the Healing Potion | Camp top-up only (death and healing design 13.2) **(change DH-40)** | M2 |
 | **Tonic** | C, 1 | Bonus action minor / action major / thrown (range 5) or Administered minor | Settled shape; `cureImmune` respected; also ends Soaked and Oiled **(settled)** | 12 coin; vendor unlimited; sundries; substitution | M2 |
 | **Remedy** | `basePrice` 30 | Out of combat, from the pack | Ends one non-curse lingering condition (Scarred, including `treatProof`; Weary in full) | Vendor only; never loot or carried | M2 |
 | Antitoxin | C, 1 | Bonus action | Inured, up to 10 turns | Loot | Later (Inured) |
@@ -1354,7 +1349,7 @@ channel; floor 2+.
 
 | Record | Rarity, value | Effect | Wave |
 |---|---|---|---|
-| **Reprieve Phial** | R, 3; floor 3+; 1 per run; unique **(agreed, Q2)** | Section 14 | Gated (14.10) |
+| **Reprieve Phial** | R, 3; floor 3+; 1 per run; unique **(agreed, Q2)** | Section 14 | M2, else Later (14.10) |
 
 ### 16.7 Cut or declined
 
@@ -1426,7 +1421,6 @@ gated.
 ```json
 { "consumables": {
     "potionPermille": 1000, "monsterPotionPermille": 250,
-    "recoveryPlaceholder": { "base": 5, "perLevel": 2, "conMult": 1 },
     "thrownPotionPermille": 750, "thrownPotionPermilleRange": [500, 1000],
     "potionThrowRange": 5, "flaskRange": 5, "throwAllyRange": 5,
     "pegMarginPermille": 800,
@@ -1438,9 +1432,12 @@ gated.
     "wandValue": [ { "tier": 1, "max": 2, "value": 2 },
                    { "tier": 1, "max": 3, "value": 3 },
                    { "tier": 2, "max": 2, "value": 3 } ],
-    "sundriesPerFloor": [3, 5],
+    "sundriesPerFloor": [[3, 5], [3, 5], [4, 5], [4, 5], [4, 5]],
     "offensiveSundryMin": 1, "offensiveSundryMax": 2,
-    "talisman": { "leaveHpPermille": 250, "minFloor": 3,
+    "healingSundryMin": [1, 1, 1, 1, 1], "healingSundryMax": 3,
+    "healingOffPathPermille": 600, "supplyMainPathMin": 1,
+    "heroKitPotions": 2, "recruitKitPotions": 1, "campHeroPotionTopUp": 1,
+    "talisman": { "leaveHpPermille": 334, "minFloor": 3,
                   "offerChancePermille": 500,
                   "channelWeights": { "container": 2, "boss": 1,
                                       "campReward": 1 } } } }
@@ -1450,16 +1447,20 @@ gated.
   lead's call)**:
   - **client numbers:** `scrollArcana` (10 + tier, Q1),
     `potionThrowRange` 5 and `thrownPotionPermilleRange` (Q4);
+    `talisman.leaveHpPermille` 334 (death and healing Q8); `healingSundryMin`
+    (floors 4–5 may rise to 2), `healingSundryMax`, `supplyMainPathMin`,
+    `heroKitPotions`, `recruitKitPotions` and `campHeroPotionTopUp`
+    (death and healing Q3; death and healing design 20.1) **(change
+    DH-42)**;
   - **engine switches:** `scrollReadSetsCampSpend` (13.5, `true`; CN-11 client-approved
     2026-11-17);
     `tier4ScrollsPerRunBeforeFinalBoss` (the lead's pre-agreed lever,
     section 21: `null` = off, 1 when engaged; the loot generator reads it);
-  - **a placeholder:** `recoveryPlaceholder` (7.2), replaced when the
-    Recovery formula's owner lands;
-  - **owned elsewhere:** `talisman.leaveHpPermille` (the death and healing
-    design).
-- `scrollFloorCap` is read at index floor − 1; its length equals the floor
-  count.
+  - **owned elsewhere:** `talisman.leaveHpPermille`, whose value the
+    death and healing design owns (16). `recoveryPlaceholder` is removed
+    (7.2). **(change DH-42)**
+- `scrollFloorCap`, `sundriesPerFloor` and `healingSundryMin` are read at
+  index floor − 1; their length equals the floor count. **(change DH-42)**
 - `throwAllyRange` (tonics) and `flaskRange` start equal to the potion's
   fixed range 5, so every belt throw has one range; a builder who moves
   them apart says why in the reports. **(new lead's call)**
@@ -1621,6 +1622,10 @@ derived (18.2).
 16. `useWhen` is from the closed vocabulary (section 15); every
     `tuningKeyRef` resolves to a key of the `consumables` block.
     **(new lead's call)**
+17. The death and healing codes on this block's data (death and healing
+    design 21.2): `HealPerTargetAboveRecovery` (healing scrolls),
+    `GuaranteedItemUnreachable`, `SundryOverfull` and
+    `HealingFloorUnmet`. **(change DH-43)**
 
 ### 19.2 Run-time invariants and tests
 
@@ -1630,8 +1635,8 @@ spends in one turn, a wand charge always counting as one, and a scroll
 read counting as one while `scrollReadSetsCampSpend` is true; at most one
 offensive flask per unit per turn; a scroll is never upcast; an untrained
 out-of-class read is never attempted; a talisman fires at most once, only
-from its holder's belt, never on a Downed unit, only after Last Ward and
-Death-warded had their chance, and never changes place in combat; the
+from its holder's belt, never on a Downed unit, only after Death-warded
+had its chance **(change DH-43)**, and never changes place in combat; the
 hero's HP never shows 0 while a phial is armed on its belt.
 
 **Tests (new lead's call):**
@@ -1652,8 +1657,8 @@ hero's HP never shows 0 while a phial is armed on its belt.
   blocked, and a wand charge still is**;
 - `FlaskThisTurn` after one Fire Bomb; water and oil are not blocked; the
   flag resets at the unit's next turn start and binds monsters;
-- the phial: the order Last Ward → Death-warded → phial; Last Ward turns
-  the hit into a miss with no riders; HP set to the share of the new
+- the phial: the order Death-warded → phial **(change DH-43)**; HP set
+  to the share of the new
   maximum; the concentration DC from the pre-save total; `treatProof`
   Scarred on the hero and on an already-Scarred unit; `downedThisFloor`
   untouched; no move in combat; a pack phial does nothing; the red area
@@ -1661,8 +1666,8 @@ hero's HP never shows 0 while a phial is armed on its belt.
 - **the rest screen:** a `treatProof` Scarred is not offered for Treat and
   uses no attempt; a standard Scarred on another unit at the same rest
   still gets its attempt; a Remedy ends the instance and the flag;
-- the phial pre-roll: deterministic per seed; places nothing while gated;
-  a declined reward card loses it for the run;
+- the phial pre-roll: deterministic per seed; a declined reward card
+  loses it for the run;
 - pegs P1, P2, P4 at every Leadership discount step and at `minPrice`;
 - replay tests across throws, reads, failed reads and a phial firing,
   rebuilt from the 18.4 events, including **a two-part hit** (Icefall)
@@ -1698,10 +1703,15 @@ hero's HP never shows 0 while a phial is armed on its belt.
 - Talisman: runs offered a phial, and offers declined; fires per 100
   runs and by floor; runs saved per 100 (watch above about 15%: the
   first lever is `offerChancePermille`); same-fight deaths after a save
-  (above about 50% → raise `leaveHpPermille`); hero share of fires; win
+  (above about 50% → raise `leaveHpPermille`, which now goes to the
+  client, death and healing design 16); hero share of fires; win
   rate with and without (target a lift of at most +10 points); potion
   doses not carried while it is belted; share of monster attacks on the
   holder.
+- The death and healing reports on this design's items (death and healing
+  design 21.5): guaranteed-potion and camp top-up counts, potions unused at
+  camp, potions drunk per boss fight, Death-warded and phial fire rates.
+  **(change DH-43)**
 
 ## 20. Staging
 
@@ -1715,9 +1725,8 @@ hero's HP never shows 0 while a phial is armed on its belt.
   oil, Fire Bomb, Greater Fire Bomb; sundries; scrolls tiers 1–4 and the
   four wands with camp refill; the scroll camp-spend switch (13.5);
   vendor and camp pricing; monster use from floor 2; validation; reports.
-- **Gated:** the Reprieve Phial (M2 if the death and healing design is
-  approved before M2 content lock, otherwise Later). Until then its
-  per-run pre-roll runs and places nothing (section 10, 14.7).
+- **The Reprieve Phial:** M2 if the death and healing design is approved
+  before M2 content lock, otherwise Later (14.10). **(change DH-44)**
 - **Later:** coatings, special arrows and Coated; Quivered; Slinger's
   Bracers; Scrollwright's Token; sidegrade potions with their conditions;
   holy water, sticky flask, net, thunderstone; teleport scrolls (with a
@@ -1733,7 +1742,7 @@ hero's HP never shows 0 while a phial is armed on its belt.
 | **CN-11 declined at approval** (closed: the client approved CN-11 on 2026-11-17) | Not in force. Recorded only: `scrollReadSetsCampSpend: false` with the 25.2 fallback bounds, the pre-agreed lever set at once, the boss-damage alarm a release gate |
 | **The non-caster scroll route is empty** | DEP-1 (13.8); at least 1 and at most 2 offensive sundries per floor from floor 2; the no-flask report; revisit trigger at 5% |
 | **Thrown potion unused** | Starts at 750; the knob runs to 1000, where Administer merges into the throw |
-| **The phial fires too often or too little** (undesigned crit rule and level-1 HP) | Reports; `offerChancePermille` first, then `leaveHpPermille`; gated on death and healing |
+| **The phial fires too often or too little** (crit rule and level-1 HP, death and healing design 7, 9) | Reports; `offerChancePermille` first, then `leaveHpPermille` (a client number, death and healing design 16) **(change DH-44)** |
 | **Monsters retarget away from the hero** | The "spends a Rare save" scorer term; holder-attack report |
 | **The phial burned by the party's own area** | Red area preview; the suggester never proposes it; deliberate (a death would end the run) |
 | **A Scarred hero carries a weaker HP pool into the next fights** | Agreed price (Q3); Remedy at the vendor; same-fight-death report |
@@ -1766,18 +1775,20 @@ hero's HP never shows 0 while a phial is armed on its belt.
   and never bought, and its holder-only belt trigger (Q2); `treatProof`
   (Q3); no damage on beneficial throws, `potionThrowRange` 5 and
   `thrownPotionPermilleRange` (Q4); `scrollReadSetsCampSpend` (`true`;
-  CN-11 client-approved 2026-11-17); `tier4ScrollsPerRunBeforeFinalBoss` (the lead's lever); the
-  `recoveryPlaceholder` (replaced, not tuned); the denylist and
-  relaxations, one offensive flask per turn and the wand tier cap (the
-  lead's); `leaveHpPermille` and the save order (death and healing
-  design).
+  CN-11 client-approved 2026-11-17); `tier4ScrollsPerRunBeforeFinalBoss` (the lead's lever);
+  Recovery (the lead's numbers, death and healing design 8); the denylist
+  and relaxations, one offensive flask per turn and the wand tier cap (the
+  lead's); `leaveHpPermille` 334 (a client number, death and healing Q8)
+  and the save order (death and healing design 15, 16). **(change
+  DH-44)**
 
 ## 23. Changes to approved documents
 
 Applied on 2026-11-17, when the client approved this document. The
-changes that serve the Reprieve Phial (talisman) are applied as text
-marked gated on the death and healing design (14.10), which sets the
-phial's final numbers and owner order. Each change names the exact
+changes that serve the Reprieve Phial (talisman) were applied as text
+marked as waiting for the death and healing design (14.10), which sets the
+phial's final numbers and owner order; those markers were removed when
+that design was approved on 2026-11-17 (its changes DH-14 to DH-44). Each change names the exact
 section it touches. Ids are provisional and match the proposal;
 CN-10 and CN-13 were merged into other changes during review and are not
 reused, and CN-25 (the D′ trained-only change) lapsed when the client
@@ -1875,19 +1886,18 @@ family caps; belt counts; `packInCombat`; the 6.4 guards; main design
 
 ## 24. Depends on systems not yet designed
 
-- **Death and healing:** confirmation that the hero has no downed state;
-  the crit rule (S-3) and level-1 hero HP (about 18); whether companions
-  can die (if yes, the phial also covers "would die"); whether damage on a
-  Downed unit kills it; whether anything lifts Downed; massive-damage or
-  instant-death exceptions; the final leave-HP (25% against 1 HP plus
-  Dodging); whether the phial fires out of combat; the owner split and
-  order of Death-warded, Last Ward, Last-Breath Charm and the phial;
-  whether Last Ward is automatic; at most one recharging drop-prevention
-  per unit per fight (the phial outside that cap, 14.9).
-- **Recovery formula (death and healing, or the stat model's numbers if
-  that design hands it back):** stat model 6 names Recovery but gives no
-  formula. **Required before M1 potion data**; until then M1 uses the
-  `recoveryPlaceholder` (7.2, 18.1).
+- **Death and healing: answered** (death and healing design 25.2): the
+  hero has no downed state; crits double the dice (S-3) and level-1 hero
+  HP is 18 at the reference; companions cannot die (no would-die
+  coverage); a Downed unit is inert; nothing but a win, Medicine, a
+  completed short rest or camp lifts Downed; no massive-damage rule; the
+  leave-HP is 334‰; the phial fires from any source; the order is
+  Death-warded → phial, Last Ward and Last-Breath Charm retired; at most
+  one recharging drop prevention per unit per fight, the phial outside it.
+  **(change DH-44)**
+- **Recovery formula: answered:** 4 + 2 × level + Constitution, minimum 1
+  (death and healing design 8); `recoveryPlaceholder` removed (7.2, 18.1).
+  **(change DH-44)**
 - **Classes:** the four launch classes and spell lists (the source of
   `classTags`); DEP-1 (13.8); whether any class needs a teleport rule.
 - **Companions:** caster kits; Arcana-trained recruits (DEP-1).
@@ -1956,9 +1966,9 @@ it:
   classes design proposes it (it changes Q1's "always rolled").
 - **`thrownPotionPermille` outside 500–1000,** or any change to the
   no-damage rule (Q4).
-- **The phial's final numbers and the death-ward owners,** with the death
-  and healing design (14.10, 14.9), including the recommended retirement
-  of Last-Breath Charm and the narrowing of Last Ward.
+- **The phial's final numbers and the death-ward owners: answered** by
+  the death and healing design (15, 16): `leaveHpPermille` 334;
+  Last-Breath Charm and Last Ward retired. **(change DH-44)**
 - **Monster ally throws** (11), if the delivery-mix report shows the party
   throw is healthy.
 
@@ -2017,7 +2027,7 @@ it:
 | CO-13 | Smoke Pellet breaks the denylist | Cut |
 | CO-14 | No teleport rule | Teleport scrolls Later with a dependency |
 | CO-15 | Tradition tags not in the schema | Class ids only; tags TBD |
-| CO-16 | Talisman fires out of combat | Recorded difference; deferred to death and healing |
+| CO-16 | Talisman fires out of combat | Recorded difference; closed by the death and healing design 16 (any source; moot under its floors) **(change DH-44)** |
 | CO-17 | Tonic range changes a settled row | CN-3, CN-17 |
 | CO-18 | Remedy's "best use" wrong; Weary ruling | Mid-floor niche; Weary in full marked lead's call |
 | CO-19 | Save order not tied to approved rules | Last Ward automatic-or-policy recorded as a dependency (24, CN-23) |

@@ -221,10 +221,11 @@ bounds, not illustrative)**
 3. Harmful ticks resolve as one batch (6.8), Engulfed's damage included.
 4. **Zero-hit-point check.** A unit at 0 hit points is downed or dies now,
    and the rest of its turn-start step is skipped. A downed unit still runs
-   its turn-end steps (8). **Gated on the death and healing design (change
-   CN-15):** the tick batch's save chain (9.3) runs where the damage lands,
-   before hit points are lowered, so a saved unit never reaches this check
-   at 0.
+   its turn-end steps (8). The tick batch's save chain (9.3) runs where the
+   damage lands, before hit points are lowered, so a saved unit never
+   reaches this check at 0; at 0 the hero ends the run and a companion is
+   Downed. This check is the backstop **(change CN-15, DH-14; death and
+   healing design 20.3)**.
 5. Beneficial ticks (Regenerating).
 6. Aura pulses that reach the unit (pipeline step 2; aura immunity, 7.3).
 7. Start-of-turn triggers and checks: Burning's spread, Tormented's line of
@@ -259,6 +260,10 @@ last initiative slot's turn-end step and the boss actions that follow it.
   **(lead's call)**
 - Harmful ticks out of combat cannot take a unit below 1 hit point.
   Condemned's burst counts as a tick for this rule. **(lead's call)**
+  All damage to a party unit that resolves while no combat is active, and
+  damage from an undetected trap in or out of combat, cannot take it below
+  1 hit point (death and healing design 10.4); monsters keep this tick
+  rule. **(change DH-15)**
 - **Out-of-combat limit:** a non-lingering harmful condition lasts at most
   20 ticks out of combat. **(lead's call)**
 - **Combat start:** an instance on an `outOfCombat` duration switches to its
@@ -270,7 +275,9 @@ last initiative slot's turn-end step and the boss actions that follow it.
 - **Combat end:** the current unit's turn-end step completes, then
   `combatOnly` instances end (reason `combatEnd`). A downed companion gets
   up only when the party wins **(settled, main design 4.2)**; after any
-  other end it stays Downed until Medicine gets it up.
+  other end it stays Downed until Medicine, a completed short rest or camp.
+  If the hero reaches 0 in the event that ends the fight, the run ends
+  **(change DH-15; death and healing design 10.3, 11.2)**.
 - A 20-tick short rest outlasts every turn-counted condition. **(follows
   from ability model 15.1)**
 
@@ -485,7 +492,7 @@ morale states (Emboldened, Demoralised, Routed, Cowed; enemies design
 | Cure tag | Cost | Ends |
 |---|---|---|
 | `heal` | Any hit point gain | Bleeding, Condemned |
-| `treat` | **Medicine Treat (change C4):** an action, adjacent. One Medicine roll is compared with each curable instance's recorded difficulty, and every instance the roll meets ends. The action is spent either way. | Every `poison` condition, Bleeding, Withered, Hobbled, Condemned, Calcifying at stages 1–2; Diseased and Scarred during a rest, except a `treatProof` Scarred (gated on the death and healing design; change CN-14) |
+| `treat` | **Medicine Treat (change C4):** an action, adjacent. One Medicine roll is compared with each curable instance's recorded difficulty, and every instance the roll meets ends. The action is spent either way. | Every `poison` condition, Bleeding, Withered, Hobbled, Condemned, Calcifying at stages 1–2; Diseased and Scarred during a rest, except a `treatProof` Scarred (change CN-14, DH-16) |
 | `rally` | Rally: a bonus action, once per ally per fight **(settled)** | The `fear` tag |
 | `escape` | An action: Athletics or Acrobatics against 10 + the holder's Fortitude, or against the binding's difficulty | Grappled, Restrained, Rooted, Engulfed |
 | `stand` | Half the current effective speed, minimum 1 (6.7). **At speed 0, standing costs the action.** | Prone |
@@ -605,7 +612,7 @@ step 9 (enemies design 14.3, 14.9).
 | `onApply` and `onEnd` relations | Step 2 | Contest and ward | Skipped |
 | Staged last stage (Calcifying) | Step 2 | Contest (already made) and ward | Skipped |
 | Engine grants: Steeled, Unyielding, Surprised, Downed, Scarred | Step 9 | Everything before it | Skipped |
-| A talisman's Scarred (gated on the death and healing design; change CN-15; consumables design 14.4) | Applied at once, outside the step 9 queue | Everything | Skipped |
+| A talisman's Scarred (change CN-15, DH-16; consumables design 14.4) | Applied at once, outside the step 9 queue | Everything | Skipped |
 
 ### 9.3 Damage events
 
@@ -619,14 +626,21 @@ For each damage part, in data order:
 2. `damageType` ends and layer breaks run.
 3. Damage-triggered transforms run.
 
-**Save chain (gated on the death and healing design; change CN-15;
-consumables design 14.3, 14.4):** after these per-part steps, the event's
-damage is summed over all its parts, before hit points are lowered. If the
-unit is not Downed and the total would take it to 0 or less, the chain runs
-in order and the first link that fires ends it: Last Ward (attack events;
-the hit becomes a miss) → Death-warded → talisman. The concentration
-difficulty uses the pre-save total. Final owner order: death and healing
-design.
+**Save chain (change CN-15, DH-17; consumables design 14.3, 14.4; death
+and healing design 15.2, 20.3):** in order, before hit points are lowered:
+a Downed target discards the event → these per-part steps, temporary hit
+points included → the event's damage is summed over all its parts → the
+floors (out-of-combat and undetected-trap damage to a party unit clamps at
+1 hit point) on the post-absorption total → the chain. If the total would
+still take the unit to 0 or less, the chain runs in order and the first
+link that fires ends it: Death-warded → talisman. Each link declares
+`recharging` in data (Death-warded true, the talisman false). At most one
+recharging prevention fires per unit per fight; a recharging link capped
+by this rule is skipped without spending its charge. The talisman is
+outside the cap. Last Ward is removed (retired, death and healing design
+15.3). The concentration difficulty uses the pre-save total (the summed
+total, before the floors and the chain). Owner of the order: the death and
+healing design (15.1).
 
 - At most one transform per damage event, and a transform never triggers
   another.
@@ -697,7 +711,10 @@ Reflex save. On a success it lands Prone on the nearest safe square.
 ### 10.4 Hazard lethality
 
 Hazard design must guarantee that no single failed save, and no entry
-without a save, is lethal to the hero. This holds in every wave.
+without a save, is lethal to the hero. This holds in every wave. It is a
+hazard-design guideline under the party floor: damage to a party unit out
+of combat, or from an undetected trap, cannot take it below 1 hit point
+(death and healing design 10.4) **(change DH-18)**.
 
 ## 11. Fixed terrain
 
@@ -799,7 +816,10 @@ the outcome is the lead's call)**
 - **Traps are not terrain squares.** They are one-shot dungeon content,
   owned by dungeon generation and the stat model's Mechanics uses, and they
   can be sprung, disarmed and re-armed. Their conditions enter the pipeline
-  at step 2 with source `environment`.
+  at step 2 with source `environment`. Damage from a trap the party had
+  not detected cannot take a party unit below 1 hit point, in or out of
+  combat; detected traps are ordinary damage **(change DH-18; death and
+  healing design 10.4)**.
 - **Trap hard control against the party** fires on being sprung only,
   follows the own-turn rule, never appears on floor 1, appears on floor 2
   only in set-piece traps, and counts toward the per-fight cap whenever it
@@ -910,8 +930,9 @@ immunity (the `morale` tag allows none). `mindless` implies `fearless`
   blocked. A level gained by an existing instance (6.5) is not a new one.
   **Scarred is exempt:** it always lands and does not count toward the 2,
   because the client made it the fixed cost of a downing or a talisman
-  save. **(lead's call; the talisman part gated on the death and healing
-  design, change CN-14)**
+  save. **(lead's call; the talisman part: change CN-14, DH-19)** The
+  Weary lever for repeat downings (`downed.repeatDowningWeary`, off) is
+  exempt in the same way when on (death and healing design 11.6).
   Later: an item curse's cost is a `whileEquipped` item property, not a
   lingering condition, and **Cursed (Clinging) from an item is exempt from
   the cap of 2**, as Scarred is (items design 13).
@@ -923,8 +944,7 @@ immunity (the `morale` tag allows none). `mindless` implies `fearless`
   points −10% until camp. Only the first downing of a unit on each floor
   gives it. Medicine Treat during a short rest removes it, except a
   talisman's `treatProof` Scarred. Details in catalogue I. **(The talisman
-  parts gated on the death and healing design; change CN-14, consumables
-  design 14.4, 14.6)**
+  parts: change CN-14, DH-19; consumables design 14.4, 14.6)**
 
 ## 15. Display and knowledge
 
@@ -939,6 +959,11 @@ immunity (the `morale` tag allows none). `mindless` implies `fearless`
 - Links draw as lines: Grappling, Concentrating, source-tied conditions.
 - Steeled, Unyielding and Vigilant draw as rings.
 - Bolstered is a segment of the hit point bar.
+- Party plates show a "bloodied" mark at 50% of maximum hit points and a
+  "low" mark at 25% (not "critical", which reads as a crit). The Downed
+  marker reads "gets up if you win, or at a rest". Armed saves
+  (Death-warded, Reprieve) are shown **(change DH-20; death and healing
+  design 17.8)**.
 - Lingering conditions show on the party bar, with one grey pip on the
   battlefield plate.
 - Frame shape shows polarity: square for harmful, round for beneficial,
@@ -1188,20 +1213,27 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Effect: implies Incapacitated; onApply Prone; suppresses harmful
     turn-counted conditions (8: their countdowns, saves and decay
     continue); ends concentration. It keeps its initiative slot and runs
-    its turn steps.
+    its turn steps. It is inert **(change DH-21; death and healing design
+    11.4, 20.5)**: it takes no damage, gains no harmful condition and no
+    temporary hit points; every forced movement except an ally's
+    grapple-drag skips it, and so does every area; it is not a unit for
+    forced-movement stopping; it is greyed as a target of harmful party
+    effects. It does not block movement, but no unit ends a move on its
+    square. After a combat end other than a win the body stays until a
+    party unit picks it up. Its current hit points stay 0 while Downed.
   - Intensity: binary.
-  - Duration: trigger. Ends on Medicine (trained, action) or a won fight,
-    getting up on 1 hit point **(settled)**; after any other combat end it
-    stays Downed until Medicine (5.5). For the hero, the run ends
-    **(settled)**.
+  - Duration: trigger. Ends on Medicine (trained, action, once per
+    companion per fight) or a won fight **(settled)**, or a completed short
+    rest **(change DH-21)**, getting up on 1 hit point, or at camp (5.5).
+    For the hero, the run ends **(settled)**.
   - Sources: 0 hit points (companions), at the zero-hit-point check or
-    when damage lands; an engine grant (9.2). **Gated on the death and
-    healing design (change CN-15):** where damage lands, the save chain
-    (9.3) runs first, so a saved unit is not downed.
+    when damage lands; an engine grant (9.2). Where damage lands, the save
+    chain (9.3) runs first, so a saved unit is not downed **(change CN-15,
+    DH-21)**.
   - Interactions: the first downing on a floor sets `downedThisFloor`, and
     getting up from it grants Scarred **(agreed)** (engine grant, 18.10).
-    **Gated on the death and healing design (change CN-14):** a talisman
-    save does not set `downedThisFloor` (consumables design 14.4).
+    A talisman save does not set `downedThisFloor` (consumables design
+    14.4) **(change CN-14, DH-21)**.
 - **Concentrating** — state · **M1** if the slice class casts
   - Effect: draws a link to each instance it sustains; the tooltip shows
     the check difficulty.
@@ -2088,9 +2120,12 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Interactions: Withered suppresses it.
 - **Bolstered** — beneficial · Later
   - Effect: N temporary hit points (shown on the hit point bar); a higher
-    value replaces.
+    value replaces. A single grant is at most the target's Recovery. It is
+    not healing **(Later; change DH-22; death and healing design 14)**.
   - Duration: combatOnly, or 10 turns.
-  - Interactions: Withered blocks gaining it.
+  - Sources: class features and spells only **(Later; change DH-22)**.
+  - Interactions: Withered blocks gaining it. A Downed unit never gains it
+    **(Later; change DH-22)**.
 - **Empowered** — token · Later
   - Effect: its next damaging hit is one ladder step weaker for that
     target, so its rider lands automatically (within ability model 9.3's
@@ -2118,14 +2153,13 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Effect: the first drop to 0 hit points leaves it on 1 instead.
   - Duration: `charges:1`, always combatOnly, so it needs no fallback
     (5.3).
-  - Sources: Death-Ward-shaped tier 3 spell (SRD); rare charm; elite
-    enemies, never bosses (affix grants are `oncePerLife`, enemies design
-    7.2).
-  - Interactions: **gated on the death and healing design (change
-    CN-15):** second link of the save chain (9.3), after Last Ward and
-    before the talisman. The talisman also fires out of combat, unlike
-    `combatOnly` Death-warded; recorded, deferred to the death and healing
-    design (consumables design 14.2).
+  - Sources: Death-Ward-shaped tier 3 spell (SRD); elite enemies, never
+    bosses (affix grants are `oncePerLife`, enemies design 7.2). The "rare
+    charm" source is removed with Last-Breath Charm **(Later; change DH-22;
+    death and healing design 15.2)**.
+  - Interactions: first link of the save chain (9.3), before the talisman;
+    at most one recharging prevention per unit per fight **(Later; change
+    CN-15, DH-22; death and healing design 15.2, 15.4)**.
 - **Sanctified** — beneficial · Later
   - Effect: an enemy targeting it must first pass a Will save or choose
     another target (its pool is not spent).
@@ -2192,18 +2226,19 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     fixed difficulty in the rest data (illustrative 10 + floor). Treat
     resolves before Recovery at rest completion. A failed attempt can be
     tried again only at the next short rest **(lead's call, from stat model
-    7.2's no free retries)**. A Remedy also ends it. **Gated on the death
-    and healing design (change CN-14):** a `treatProof` instance (a
-    talisman save) is not offered for Treat and uses no attempt; a Remedy
-    or camp ends it and its flag (consumables design 14.6).
+    7.2's no free retries)**. A Remedy also ends it. A `treatProof`
+    instance (a talisman save) is not offered for Treat and uses no
+    attempt; a Remedy or camp ends it and its flag (consumables design
+    14.6) **(change CN-14, DH-23)**.
   - Sources: an engine grant (9.2) when a companion gets up from Downed, by
-    either route (Medicine or a won fight), after its first downing of this
-    floor. `downedThisFloor` is set by that first downing and resets on a
-    floor change. Later downings on the same floor give nothing. **Gated on
-    the death and healing design (change CN-14):** a talisman save (the
-    holder, the hero included; consumables design 14.4). The hero is never
-    Scarred by a downing (its downing ends the run); a talisman save may
-    Scar it.
+    any get-up route (Medicine, a won fight, a completed short rest, camp,
+    where camp clears it at once) **(change DH-23; death and healing design
+    11.6)**, after its first downing of this floor. `downedThisFloor` is
+    set by that first downing and resets on a floor change. Later downings
+    on the same floor give nothing. A talisman save (the holder, the hero
+    included; consumables design 14.4) **(change CN-14, DH-23)**. The hero
+    is never Scarred by a downing (its downing ends the run); a talisman
+    save may Scar it.
   - Interactions: exempt from the cap of 2 harmful lingering conditions:
     it always lands and does not count toward the cap **(lead's call, 14)**;
     Warded does not block it; while a companion is downed its harmful
@@ -2570,8 +2605,8 @@ Each tied to a risk:
 - **Rules owned by designs that do not exist yet:** hazard placement
   (dungeon generation); Disarmed, Coated, Clinging,
   Pitted Armour and tonics (items; Disarmed's rules are now in weapons
-  design 16 and Pitted Armour's in armour design 9.4, both still Later);
-  the rest of death and healing.
+  design 16 and Pitted Armour's in armour design 9.4, both still Later)
+  **(change DH-24: death and healing is settled)**.
 - **Protected content.**
   - Generic names that match other games' conditions need a check before
     shipping. Dazed is the one kept; the fallback name is "Addled".
@@ -2642,7 +2677,9 @@ the exact section it touches.
   gates, and which floors hold them.
 - **Dungeon generation:** hazard and terrain placement by theme, and the
   hazard lethality guarantee.
-- **Death and healing:** the rest of it. Scarred is settled here.
+- **Death and healing:** no longer pending: settled in the death and
+  healing design (2026-11-17), which owns the save chain order, the
+  floors and Downed's routes. Scarred is settled here **(change DH-24)**.
 - **Boss actions** (M2): the shed action.
 
 ## 26. Open items for the client

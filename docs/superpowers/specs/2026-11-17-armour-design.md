@@ -1249,12 +1249,11 @@ warhammer-and-shield soldier, the sling artillery and the claw brute.
 | Muffled | prevent | Heavy only: no Clatter (passive or checks). Never on the same item as Fitted. | M1 |
 | Resistant (element) | type | Fire, cold, lightning, acid, radiant or necrotic; never physical or psychic. On M1 notables only if the floor's theme deals that element. | M1 |
 | Reprisal (element) | charge | 1 / 1 / 2 per rest, reaction when a melee attack hits you: the attacker takes 1d6 / 2d6 / 3d6 of the element (counts under the reaction cap) | M2 |
-| Last Ward | charge (`camp`) | 1 per camp: a hit that would drop you to 0 HP misses instead; Rare and above | Later (depends on death and healing) |
 
-**Last Ward (Later; gated on the death and healing design; change
-CN-23):** owner and order with the talisman: death and healing design;
-recommended narrowed (for example once per run) (consumables design
-14.3, 14.9).
+**Last Ward (retired; change CN-23 superseded by DH-45):** removed from
+this table and retired (death and healing design 15.3, Q7); drop
+prevention is owned by that design's chain, and the name is not reused
+for a drop-prevention effect (`RetiredDropPrevention`).
 
 ### 14.4 Armour verb signatures `props.averb.<verb>` (value 1)
 
@@ -1583,7 +1582,7 @@ The build fails when **(lead's call)**:
   cap; Corroded; the M2 properties; worn-piece trinket kinds,
   `kindToLocation` and `wornLocations`; the E+ gate reports.
 - **Later:** half plate (Enclosed, optional), tower shield, Pitted Armour,
-  Blued, Last Ward, theme-tag synergy.
+  Blued, theme-tag synergy.
 
 ## 19. Risks
 
@@ -1773,8 +1772,10 @@ Stat model 6's AC formula and "Armour is hit or miss" and stat model 8.1
   row 3).
 - **Companions:** armour kits; companions without ability increases and
   the light-armour case.
-- **Death and healing:** the crit rule (Proof, Adamant and every guard
-  assume SRD double dice); Last Ward (Later).
+- **Death and healing:** settled in `2026-11-17-death-healing-design.md`
+  (approved 2026-11-17; change DH-45): the crit rule is S-3, double dice
+  (death and healing design 9), as Proof, Adamant and every guard
+  assume.
 - **Dungeon generation and encounter content:** the **binding**
   Acrobatics requirement (at least 3 Acrobatics-gated choices per floor
   from M2, with simulator evidence; 7.3); stealth content for Clatter.

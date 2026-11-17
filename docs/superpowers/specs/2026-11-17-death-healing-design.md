@@ -1,7 +1,7 @@
 # Death and Healing: Design
 
 Date: 2026-11-17
-Status: Draft, awaiting client approval, 2026-11-17
+Status: Approved, 2026-11-17
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model),
@@ -176,9 +176,9 @@ lead's calls, which the client said stand.
 | 4 | Getting up (Q4) | **A win, Medicine (once per companion per fight), a completed short rest, camp;** all on 1 HP except camp (full) **(agreed)** | Any heal lifts Downed (yo-yo); Medicine only (soft lock after a flee) |
 | 5 | HP shape (Q5) | **11 + level × max(1, class HP tier + Con)** at every level for every party unit; tiers slight 6 / standard 7 / sturdy 8 (the client's "bands"; renamed here only to avoid a clash with the proficiency and encounter bands, lead's call); `hp.companionBonus` a separate key **(agreed)** | Bands 5/6/7 with a middle reference (a Con −1 light hero at 15 HP; a soldier crit is 67% of it). 5E max die at level 1 + 7 (a d6 Con −1 caster at 12 HP). Level-1-only bonus (the 6.1 table would not match). Hero-only bonus (companions become downing magnets) |
 | 6 | Out-of-combat damage (Q6) | **Never below 1 HP for a party unit;** undetected traps never below 1, even in combat; spotted traps stay lethal in a fight, with a warning **(agreed)** | Traps may kill with a cap and a warning (hidden information kills); detected traps floored in combat (traps become a safe tool) |
-| 7 | Death-ward owners (Q7) | **Retire Last Ward and Last-Breath Charm.** Order: Downed discard → temporary HP (per part) → floors → Death-warded → Reprieve Phial; at most one recharging prevention per unit per fight **(agreed)**. Q7 listed the steps before the chain as a group; their order among themselves is fixed by the damage function (20.3) **(lead's call)** | Last Ward armed above half HP (almost never fires); Last Ward per camp (a free life per floor); Last Ward once per run (kept only as the recorded fallback, now moot) |
+| 7 | Death-ward owners (Q7) | **Retire Last Ward and Last-Breath Charm.** Order: Downed discard → temporary HP (per part) → floors → Death-warded → Reprieve Phial; at most one recharging prevention per unit per fight **(agreed)**. Q7 listed the steps before the chain as a group; their order among themselves is fixed by the damage function (20.3) **(lead's call; reading confirmed by the client on 2026-11-17)** | Last Ward armed above half HP (almost never fires); Last Ward per camp (a free life per floor); Last Ward once per run (kept only as the recorded fallback, now moot) |
 | 8 | Phial leave-HP (Q8) | **334‰** of maximum HP after Scarred, minimum 1 **(agreed)** | 250 (a saved hero dropped by the next 1–2 attacks 36–75% of the time); 1 HP plus Dodging (only delays death) |
-| 9 | Floor-1 surprise (Q9) | **The solo hero is never Surprised in floor 1's first two main-path rooms** (17.1) **(agreed)** | Guards alone (the 6.4 rows bound round-1 death but cannot make it zero for a level-1 hero in the rooms every run passes through first). The rule does not reach the floor-1 lair in room 2; that failure is closed by the surprise reconciliation and the floor-1 budgets (21.1) |
+| 9 | Floor-1 surprise (Q9) | **The solo hero is never Surprised in floor 1's first two main-path rooms** (17.1), read as rooms 0 (the entry) and 1 (reading confirmed by the client on 2026-11-17) **(agreed)** | Guards alone (the 6.4 rows bound round-1 death but cannot make it zero for a level-1 hero in the rooms every run passes through first). The rule does not reach the floor-1 lair in room 2; that failure is closed by the surprise reconciliation and the floor-1 budgets (21.1) |
 | 10 | Healer class (Q10) | **No required healer;** heals = one Recovery per target, higher tiers add targets; win-rate gap with and without a healer at most 10 points (a client number) **(agreed)** | A dedicated healer class (compulsory pick); heals sized by caster ability (breaks "scroll = potion") |
 | 11 | Target death rate (Q11) | **Calibration targets:** floor-1 hero deaths under about 5% of runs; most deaths on floors 3–5 at elites and bosses; a competent player wins roughly a quarter to a third of runs (18.2) **(agreed)** | — |
 | 12 | Movement undo (Q12) | **Later, in combat only,** for a move that revealed nothing and rolled nothing (17.13) **(agreed)** | At launch; out of combat (every command advances a tick and can roll noticing) |
@@ -1049,9 +1049,10 @@ order: death and healing design". **(lead's call)**
    Q7 listed these steps as a group ("floors and Downed discard →
    temporary HP"); it did not order them among themselves. Clamping
    before absorption is not possible, because the floors test the summed
-   total after resistances **(lead's call)**. Example: HP 5, temporary
-   HP 3, an undetected trap deals 10: temporary HP absorbs 3, the total of
-   7 clamps to 4, and the unit ends on HP 1, temporary HP 0.
+   total after resistances **(lead's call; reading confirmed by the
+   client on 2026-11-17)**. Example: HP 5, temporary HP 3, an undetected
+   trap deals 10: temporary HP absorbs 3, the total of 7 clamps to 4, and
+   the unit ends on HP 1, temporary HP 0.
 2. **Death-warded:** left on 1 HP; `combatOnly`, `charges:1`,
    `recharging: true`. Sources: the tier-3 Death-Ward-shaped class spell
    (Later) and the elite affix. The "rare charm" source is removed with
@@ -1165,7 +1166,7 @@ bought, never moves in combat, `treatProof` Scarred.
 - **Indexing (stated once, used everywhere in this document):** the main
   path's rooms are numbered from 0, the entry. "Floor 1's first two
   main-path rooms" are **main-path rooms 0 and 1** **(lead's call, the
-  reading of Q9)**.
+  reading of Q9; confirmed by the client on 2026-11-17)**.
 - **Rule:** while the hero is the only party unit, the party is never
   Surprised when combat starts with the hero standing on a floor-1 square
   whose `mainPathIndex` is 0 or 1. When the rule applies, the party side is
@@ -1879,8 +1880,8 @@ is not a guard.
 
 ## 26. Changes to approved documents
 
-To be applied when the client approves this document. Each change names
-the exact section it touches; ids are provisional. **Agreed, decided and
+Applied on 2026-11-17, when the client approved this document. Each
+change names the exact section it touches; ids are provisional. **Agreed, decided and
 settled rows are flagged**; the client's Q1–Q12 answers approve the ones
 that name a question, and the rest are confirmed with the document. Every
 change removes the "gated on the death and healing design" marker in its
@@ -2039,25 +2040,18 @@ values; the phial's rarity, floor, channels, `offerChancePermille` and
 
 ### 28.1 This document
 
-Q1–Q12 were answered on 2026-11-17 (the lead's recommendation in each
-case), and the client said everything else in the proposal stands. What
-remains is approval of the document as a whole, including:
+None. Approved by the client on 2026-11-17.
 
-- the new lead's calls marked in sections 5.5, 5.8, 7.1, 7.3, 8, 10.4,
-  11.2, 11.4, 11.6, 12.4, 12.5, 13.2, 15, 16, 17.1–17.4, 17.13, 18, 19.3,
-  20.3, 20.5 and 21.1–21.2;
-- DH-27, the narrowing of enemies 15.3's settled substitution sentence,
-  which was not asked as a separate question;
-- **one confirmation of reading:** Q7's agreed order listed "floors and
-  Downed discard → temporary HP" as a group. This document runs the
-  floors **after** temporary HP (15.2, 20.3), because the floors test the
-  summed total after resistances. It only matters when temporary HP and a
-  floor meet in one event (HP 5, temporary HP 3, an undetected trap for
-  10: this reading leaves HP 1; clamping first would leave HP 4). If the
-  client meant the other order, 20.3 changes;
-- **one reading of Q9:** "floor 1's first two main-path rooms" are rooms
-  0 (the entry) and 1, so the rule does not reach the floor-1 lair in
-  room 2 (17.1).
+The approval covers the document as a whole: the new lead's calls, DH-27
+(the narrowing of enemies 15.3's settled substitution sentence) and both
+readings put to the client, which the client confirmed:
+
+- **Q7 order:** the floors run **after** temporary HP (15.2, 20.3),
+  because the floors test the summed total after resistances (HP 5,
+  temporary HP 3, an undetected trap for 10 leaves HP 1);
+- **Q9 rooms:** "floor 1's first two main-path rooms" are rooms 0 (the
+  entry) and 1, so the rule does not reach the floor-1 lair in room 2
+  (17.1).
 
 ### 28.2 Future items triggered by reports
 
@@ -2187,9 +2181,9 @@ triggers it:
 | Q4 | Getting up | A Downed companion also gets up at a completed short rest or at camp; Medicine once per companion per fight | 11.2 |
 | Q5 | HP | 11 + level × max(1, class band + Con) at every level for every party unit; `hp.companionBonus` separate; bands 6 / 7 / 8 (called HP tiers in this document, a name only) | 7 |
 | Q6 | Out-of-combat and trap damage | Never below 1 HP for a party unit; undetected traps likewise; spotted traps lethal in a fight with a warning | 10.4 |
-| Q7 | Last Ward and Last-Breath Charm | Both retired; order floors and Downed discard → temporary HP → Death-warded → phial; one recharging prevention per unit per fight. The steps before the chain run Downed discard → temporary HP (per part) → floors (20.3; lead's call, 15.2) | 15 |
+| Q7 | Last Ward and Last-Breath Charm | Both retired; order floors and Downed discard → temporary HP → Death-warded → phial; one recharging prevention per unit per fight. The steps before the chain run Downed discard → temporary HP (per part) → floors (20.3; lead's call, 15.2; reading confirmed by the client on 2026-11-17) | 15 |
 | Q8 | Phial leave-HP | 334‰, replacing 25% | 16 |
-| Q9 | Floor-1 surprise | No surprise of the solo hero in floor 1's first two main-path rooms | 17.1 |
+| Q9 | Floor-1 surprise | No surprise of the solo hero in floor 1's first two main-path rooms, read as rooms 0 (the entry) and 1 (reading confirmed by the client on 2026-11-17) | 17.1 |
 | Q10 | Healer class | Spread thin; one Recovery per target, higher tiers add targets; gap at most 10 points (client number) | 12.2, 18.1 |
 | Q11 | Target death rate | Floor-1 hero deaths under about 5% of runs; most deaths on floors 3–5 at elites and bosses; a competent player wins about a quarter to a third | 18.2 |
 | Q12 | Movement undo | Yes, Later, in combat only | 17.13 |

@@ -2030,8 +2030,10 @@ left as they are (7.2 rule 9).
 - **Starting kits:** weapon sets per class and companion (items design 17,
   row 3).
 - **Companions:** kits drawn from these families; the D-c playtest.
-- **Death and healing:** the crit rule. Every guard and parity figure here
-  assumes SRD double dice for every unit (enemies 25, S-3).
+- **Death and healing:** designed in `2026-11-17-death-healing-design.md`:
+  the crit rule is settled (S-3, death and healing design 9). Every guard
+  and parity figure here assumes SRD double dice for every unit (enemies
+  25, S-3) **(change DH-48)**.
 - **Dungeon generation:** a cover decision in M2 (9.5); room shapes that
   give corridors and open rooms (Skewer, Cleave, reach).
 - **Enemy content:** the rust, acid and ooze types that Notch (Later), and

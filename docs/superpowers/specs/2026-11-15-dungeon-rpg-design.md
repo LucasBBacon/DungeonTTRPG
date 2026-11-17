@@ -111,7 +111,10 @@ These would make the game a failure even if everything works.
   from its first downing on a floor gains Scarred: maximum hit points −10%
   until camp, removed by Medicine Treat at a short rest. See the conditions
   design, section 14. Items that prevent a drop to 0 (consumables design
-  14) do not change this rule. **(gated on the death and healing design)**
+  14) do not change this rule. A downed companion also gets up on 1 hit
+  point when the party completes a short rest, and at camp; Medicine gets
+  the same companion up at most once per fight; companions are never
+  killed (death and healing design 11).
 
 ### 4.3 Grid, exploration and combat
 
@@ -139,6 +142,8 @@ These would make the game a failure even if everything works.
   sight; hiding enemies roll Stealth against the party's passive
   perception (enemies design 12.2). A side that is noticed
   without noticing back is surprised and loses its first turn. **(decided)**
+  Exception: the solo hero is never surprised in floor 1's first two
+  main-path rooms (death and healing design 17.1).
 - Enemies within hearing range of a fight join it. Joiners move at their
   speed, are announced at least 1 round before they arrive (arrival is
   delayed if needed to keep the warning), and enter at the next round
@@ -410,8 +415,13 @@ Consumables, scrolls and wands are settled in
 `2026-11-17-consumables-design.md`; they are no longer pending. Coatings
 and Coated stay Later (consumables design 23, 24).
 
+Hit points, Recovery, crits, the hero's death, Downed companions, the
+healing guarantee and drop prevention are settled in
+`2026-11-17-death-healing-design.md`; they are no longer pending (death
+and healing design 26, 27).
+
 - Which four classes ship first, and their feature lists.
-- All numbers: hit points, damage, experience curve, loot rates.
+- All numbers: hit points (shape settled there), damage, experience curve, loot rates.
 - The dungeon generation algorithm.
 - The JSON schema details.
 - The random number algorithm.

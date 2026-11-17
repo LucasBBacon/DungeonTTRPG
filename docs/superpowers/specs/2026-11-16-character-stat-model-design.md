@@ -151,8 +151,9 @@ All **(agreed)**.
 - **Three saves, not six**, each using the better of two abilities
   (section 6).
 - **Constitution stays** despite being the ability nobody picks for fun,
-  because it owns short-rest recovery. Class supplies most hit points and
-  Constitution the smaller share.
+  because it owns short-rest recovery. Class supplies most hit points over a
+  run, and Constitution the smaller share; at level 1 the flat bonus is the
+  larger share (death and healing design 7.2).
 
 ### 5.4 Party rule
 
@@ -197,7 +198,7 @@ Formulas give the shape. Exact values are left to the builders.
 | Number | Shape |
 |---|---|
 | Proficiency bonus | +2 at levels 0–4, +3 at 5–8, +4 at 9–12 (levels 0, 11 and 12 are monster-only) |
-| Hit points | Fixed class amount per level + Constitution per level. Never rolled. |
+| Hit points | Flat adventurer bonus (11) + class amount per level (HP tier 6 / 7 / 8) + Constitution per level, at least 1 per level in total; never rolled; at least 1 per level; heroes and companions alike (death and healing design 7) |
 | Armour class | Unarmoured: 10 + Dexterity. Light: armour value + Dexterity. Medium: armour value + Dexterity up to +2. Heavy: flat armour value; heavy ignores Dexterity, negative included; below the Strength threshold the wearer is Strained. Values by category and proficiency band (armour design 6.2). A shield adds on top. |
 | Attack bonus | Ability + proficiency if trained in the weapon |
 | Ability difficulty | 8 + proficiency + the class's main ability. One formula for spells and martial abilities. |
@@ -210,7 +211,7 @@ Formulas give the shape. Exact values are left to the builders.
 | Passive stealth | 10 + Dexterity of the worst party member, less a heavy armour penalty (sized in armour design 7.3) |
 | Trap sense | 10 + Intelligence of the best party member |
 | Guile (monsters) | 10 + Wisdom + proficiency + role adjustment, for every monster whether or not trained in Perception (enemies design 13.3) |
-| Recovery | Hit points restored per short rest; grows with level and Constitution |
+| Recovery | Hit points restored per short rest; grows with level and Constitution = `recovery.base` + `recovery.perLevel` × level + Constitution, minimum 1 (values in the death and healing design 8) |
 | Carrying capacity | Pack slots: max(2, 3 + Strength) *(illustr. base 3, minimum 2)*, holding items of size 1 or 2. Belt, trinkets, weapon sets (active and one spare set, shield included) and armour sit outside the pack. Reads Strength excluding conditions. No weights. (items design 5) |
 
 All rows **(agreed)**, with the unarmoured row a **(lead's call)**.
@@ -245,9 +246,8 @@ Rules behind the table:
   order held in the state. **(lead's call)**
 - **Natural 20 and natural 1** apply to attack rolls only: a 20 always hits
   and is a critical hit, a 1 always misses. Saves and skill checks have no
-  automatic results. **(lead's call)** *If adopted by death and healing
-  (enemies design 25):* a critical hit rolls all damage dice twice, for
-  every unit.
+  automatic results. **(lead's call)** A critical hit rolls all damage dice twice, for
+  every unit (death and healing design 9).
 - **Hit points gained per level are at least 1**, whatever the Constitution.
   **(lead's call)**
 
@@ -266,7 +266,7 @@ Rules behind the table:
 | Arcana | Intelligence | Identify magic items, read runes and shrines | Use scrolls and wands outside your class; recognise a spell being cast |
 | Lore | Intelligence | Know what a floor's theme is likely to hold | Reveal an enemy's traits, resistances, weaknesses and abilities |
 | Perception | Wisdom | Hear what is behind a door; spot hidden enemies | Avoid surprise; find hidden attackers; read an enemy's intent when the party's best passive Perception is at least its guile (enemies design 13.3) |
-| Medicine | Wisdom | Stretch short-rest supplies; cure poison and disease; at a short rest, Treat ends Diseased and Scarred (fixed difficulty, one attempt per Scarred unit per rest), except a talisman's `treatProof` Scarred, which is not offered and uses no attempt (consumables design 14.6; gated on the death and healing design) | Get a downed companion back up; Treat (an action, adjacent): one roll against each instance's difficulty ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (conditions design 8) |
+| Medicine | Wisdom | Stretch short-rest supplies; cure poison and disease; at a short rest, Treat ends Diseased and Scarred (fixed difficulty, one attempt per Scarred unit per rest), except a talisman's `treatProof` Scarred, which is not offered and uses no attempt (consumables design 14.6) | Get a downed companion back up, at most once per companion per fight (death and healing design 11.2); Treat (an action, adjacent): one roll against each instance's difficulty ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (conditions design 8) |
 | Intimidation | Presence | Make weak groups back off without a fight; cow eligibility and the `broken` flag (enemies design 14.8) | Frighten enemies; break morale when a leader falls; Demand Surrender (enemies design 14.6) |
 | Leadership | Presence | Better recruits, shop prices and event outcomes | Rally: steady an ally or give them a free step |
 
@@ -438,8 +438,9 @@ Each item here is a commitment this model makes on another system's behalf.
 - **Ability and resource model.** Settled in
   `2026-11-16-ability-resource-model-design.md`: skill action costs (its
   7.2), which abilities carry riders (its 9), and casting (its 6.5).
-- **Death and healing.** Level 1 is fragile and death ends the run. The
-  lead's proposal is a flat hit point bonus for the hero at level 1. A
+- **Death and healing.** Settled in `2026-11-17-death-healing-design.md`.
+  Level 1 is fragile and death ends the run. Every party unit gets a flat
+  hit point bonus (11) at every level (agreed 2026-11-17). A
   companion that gets up from its first downing on a floor gains Scarred
   (maximum hit points −10% until camp; Treat at a short rest removes it);
   settled in conditions design 18.10.
