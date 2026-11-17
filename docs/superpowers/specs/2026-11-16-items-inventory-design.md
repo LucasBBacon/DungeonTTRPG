@@ -75,7 +75,8 @@ to sort a bag. **(agreed)**
 
 ### Non-goals
 
-- Weight, bulk, durability or wear. **(settled, stat model 6; enemies 2)**
+- Weight, bulk, durability or wear. **(settled: weights, stat model 6;
+  durability and wear, enemies 2, 15.9; change W-6)**
 - A spatial inventory grid. **(agreed, 4.1)**
 - A stash or any storage that outlives a camp visit. **(agreed)**
 - A meta currency or any coin that survives the run. **(agreed)**
@@ -250,7 +251,7 @@ how Retrieve works is a tuning change, not a redesign. **Its value
 
 | Place | Contents | Counts against the pack? | In combat |
 |---|---|---|---|
-| **Active weapon set** (main hand + off hand) | A weapon; weapon + shield; weapon + focus; or a two-hander, stored at `main` with `off` derived as blocked | No | Attacks and granted abilities |
+| **Active weapon set** (main hand + off hand) | A weapon; weapon + shield; weapon + focus; light + light; a focus alone; rod + shield; rod + off-hand focus; or a two-hander, the staff or the two-handed instrument, stored at `main` with `off` derived as blocked. Slot rules: weapons design 11.1 **(change W-6)** | No | Attacks and granted abilities |
 | **Spare weapon set** (1) | A second full loadout, shield included. This is what "a spare weapon" means (change I-7). It is **empty** only when both hands are empty. | No | The settled **bonus action** swaps the two whole sets, so it is always clear where the shield goes |
 | **Armour** (1) | Body armour | No | Passive. Cannot be changed in combat. |
 | **Trinkets** (2) | Rings, amulets, cloaks, charms: one slot type, an attunement-style cap | No | Passive plus granted abilities. Cannot be changed in combat. |
@@ -443,8 +444,8 @@ wandering trader reuse its card and comparison components.
 │   • Hits apply Burning            ? 1 dormant property (Arcana 13 vs 15)        │
 ├──────────────┬──────────────┬──────────────┬────────────────────────────────────┤
 │ HERO ★       │ C1           │ C2           │ C3                                 │
-│ +21 (tenths) │ +4           │ untrained    │ cannot wear: Str +2 needed         │
-│ fits: spare  │ fits: pack   │ fits: pack   │ fits: pack (carry only)            │
+│ +21 (tenths) │ +4           │ untrained    │ Strained: needs Str +1             │
+│ fits: spare  │ fits: pack   │ fits: pack   │ fits: pack                         │
 ├──────────────┴──────────────┴──────────────┴────────────────────────────────────┤
 │ [Take → Hero] [Equip now] [Leave]       Pack 11/14 (C1 6)    [Take all] [Done]  │
 └─────────────────────────────────────────────────────────────────────────────────┘
@@ -463,7 +464,8 @@ wandering trader reuse its card and comparison components.
   gain (6.3), training and Strength fit, and a **fit verdict**: "fits:
   spare"; "fits: pack"; "fits if Longsword leaves" (the core suggests the
   lowest-value displacement: bulky first, then value, then instanceId);
-  "cannot wear: needs Str +2" (the item can still be carried).
+  "Strained: needs Str +1" (the soft threshold, weapons design 10.1; the
+  item can still be carried and wielded) **(change W-6)**.
 - **Suggested recipient (★):** 6.3.
 
 ### 8.3 Actions
@@ -869,9 +871,13 @@ rules for the trader-as-unit case and is out of scope here.
 
 ```
 family: { id: "family.longsword", category: "weapon", improvised: {...},
-          defaultMonsterProfile: {...} }
+          defaultMonsterProfile: {...}, training: "martial", wave: "M1",
+          tags: ["blade"], strengthClass: "none" }
 ```
 
+- Weapon and focus families also hold `training` (`simple | martial |
+  exotic`), `wave`, group tags and `strengthClass`, as in weapons design
+  20.1. **(change W-6)**
 - Family caps per run come from `familyCapPerRun` by the family's
   category *(illustr.)*: weapons and armour 2, trinkets 1, consumables
   unlimited. A cap of 2 lets a committed build find a higher-rarity
@@ -893,9 +899,9 @@ family: { id: "family.longsword", category: "weapon", improvised: {...},
 | `channels[]` | enum | container, carried, boss, camp (the shop and the camp reward card, 10.4), vendor, kit, boon; `trader` (Later, 10.9) |
 | `minFloor`, `maxFloor?` | int | Depth gates |
 | `size` | 0, 1 or `bulkySize` | Pack cost. 0 = party counter; `bulkySize` (2) = bulky. Stack size is not on the record: `stackMax` by `kind` in `inventory.json`, 1 for gear. |
-| `equip.slot` | enum | mainHand, offHand, either, twoHand, armour, trinket, none |
+| `equip.slot` | enum | mainHand, offHand, either, twoHand, armour, trinket, none. A focus's `hands` maps `off`, `main` and `two` to `off`, `main` and `twoHand` (bulky) (weapons design 11.1; change W-6). |
 | `beltable` | bool | Only for consumable, scroll and wand. A wand is used from the belt, never wielded. |
-| `requirements` | object | `strength {min, mode}`, `training {group, mode}`; `hard` = cannot be equipped, `soft` = a named penalty set by the category design |
+| `requirements` | object | `strength {min, mode}`, `training {group, mode}`; `hard` = cannot be equipped, `soft` = a named penalty set by the category design. Weapon and focus items write neither: training lives on the family, and Strength comes from the family's `strengthClass` through `weapons.json` (weapons design 10, 20.1; change W-6). |
 | `classTags[]` | strings | Scrolls and wands: which classes use it "in class" |
 | `requires[]` | build tags | Smart-loot weighting (the offers vocabulary) |
 | `usableBy` | object | `party`, `monster`, `monsterTags[]` |
@@ -911,7 +917,7 @@ family: { id: "family.longsword", category: "weapon", improvised: {...},
 | `basePrice?` | int | Required for mundane and shop-only records (supply, Remedy) |
 | `flags` | set | signature, heirloom, unsellable, noSteal, unique, srd (with `srdSource`) |
 | `display` | object | iconId, modelId, glint. Never read by the rules. |
-| `weapon{}`, `armour{}`… | sub-records | Owned by the category designs (section 17) |
+| `weapon{}`, `armour{}`… | sub-records | Owned by the category designs (section 17). `weapon{}` and `focus{}`: weapons design 20.1 (change W-6). |
 
 ### 12.4 Properties and the buff test
 
@@ -1039,6 +1045,8 @@ to a container in that room.
 - An item's `camp` spends count toward the one-camp-spend-per-turn rule
   (settled, ability model 6.4).
 - Equipping, unequipping or handing over an item never touches `spent`.
+- **Later (change W-6):** a weapon is destroyed when a `never` pool
+  reaches 0 (Shatter, weapons design 18.3).
 
 ### 12.9 Requirements
 
@@ -1056,13 +1064,17 @@ to a container in that room.
   "tags": ["versatile", "metal", "fire"], "rarity": "uncommon",
   "channels": ["container", "carried"], "minFloor": 1, "size": 1,
   "equip": { "slot": "either" }, "beltable": false,
-  "requirements": { "training": { "group": "martial", "mode": "soft" } },
   "requires": ["build.melee", "build.fire"],
   "usableBy": { "party": true, "monster": true, "monsterTags": ["armed"] },
-  "properties": { "fixed": ["prop.burning_rider"],
+  "properties": { "fixed": ["prop.ember_edge"],
                   "rollable": { "table": "props.weapon_minor", "count": 1 }, "hiddenMax": 1 },
   "identifyDifficulty": 13, "value": 2, "flags": [],
-  "weapon": { "dice": ["1d8"], "versatileDice": ["1d10"], "damageType": "slashing" } }
+  "weapon": { "dice": ["1d8"], "versatileDice": ["1d10"], "damageType": "slashing",
+              "altDamageType": null, "riderFlag": false,
+              "hands": "versatile", "light": false, "finesse": false,
+              "reach": 1, "minReach": 1, "range": null,
+              "thrown": null, "loading": false, "pointBlank": false,
+              "verb": "verb.parry" } }
 ```
 ```json
 { "id": "item.tonic_minor", "family": "family.tonic", "category": "consumable", "kind": "tonic",
@@ -1078,10 +1090,15 @@ to a container in that room.
   "monsterProfile": { "effects": [], "abilityShape": "uses:1", "useWhen": "holdsMajorCondition", "minFloor": 1 } }
 ```
 ```json
-{ "id": "prop.burning_rider", "value": 1, "obvious": true, "test": ["rider"],
-  "bands": { "b1": { "effect": "eff.rider_burning_1" }, "b2": { "effect": "eff.rider_burning_2" },
-             "b3": { "effect": "eff.rider_burning_3" } } }
+{ "id": "prop.ember_edge", "value": 1, "obvious": true, "test": ["type", "rider"],
+  "bands": { "b1": { "effect": "eff.ember_edge_1" }, "b2": { "effect": "eff.ember_edge_2" },
+             "b3": { "effect": "eff.ember_edge_3" } } }
 ```
+
+The ember longsword is an **Ember Edge** card (M2): Edge (fire) with the
+element part rider-flagged (weapons design 18.2). Training (martial) and
+the Strength threshold come from `family.longsword`, so the record writes
+no `requirements` (weapons design 20.1). **(change W-6)**
 
 `props.weapon_minor` declares `entryValue: 1`, so the ember longsword's
 value is 1 + 1 × 1 = 2, the Uncommon budget; its one possible dormant
@@ -1153,7 +1170,7 @@ is original, so it carries no `srd` flag.
 
 | 15.9 item | Generic-layer answer | Category design that owns the detail |
 |---|---|---|
-| Weapon records, incl. multi-die (one-die conversion) | The weapon sub-record carries `dice[]` (a list, so "one die of the weapon's largest size" is computable), `damageType`, `riderFlag` and tags | Weapons |
+| Weapon records, incl. multi-die (one-die conversion) | The weapon sub-record carries `dice[]` (a list, so "one die of the weapon's largest size", capped by the row die since enemies change W-5, is computable), `damageType`, `riderFlag` and tags | Weapons |
 | Armour records in the table AC bands with monster Dexterity | The armour sub-record carries `category`, `value`, `dexCap` and `strengthThreshold`, plus a content test against the enemies 6.2 bands | Armour and shields |
 | Strength thresholds | Generic `requirements.strength {min, mode: hard\|soft}`, gating **wearing, never carrying** | Weapons; armour |
 | `improvised` attack per weapon family | On the **family record**; required for every weapon family | Weapons |
@@ -1178,8 +1195,8 @@ is original, so it carries no `srd` flag.
 
 | # | Category design | Wave | Must decide |
 |---|---|---|---|
-| 1 | **Weapons (with foci)** | M1 | Families, `dice[]`, damage types, training groups, rider flags, `improvised` per family, Strength thresholds, two-handed and versatile rules, thrown and ranged (**recommended: no ammunition tracking**; thrown weapons stay with the thrower; ammunition effects are properties on the weapon), property tables per band, monster profiles, M1 notables |
-| 2 | **Armour and shields** | M1 | Categories, values, Dexterity caps (against enemies 6.2), Strength thresholds, the heavy-armour stealth penalty (stat model 6), shields in weapon sets, armour property tables, Pitted Armour (Later) |
+| 1 | **Weapons (with foci)** | M1 | **Designed:** `2026-11-17-weapons-design.md` (weapons design), approved 2026-11-17, which adopts the no-ammunition-tracking recommendation (weapons design 9.4). Disarmed and Coated stay Later. **(change W-15)** |
+| 2 | **Armour and shields** | M1 | Categories, values, Dexterity caps (against enemies 6.2), Strength thresholds, the heavy-armour stealth penalty (stat model 6), shields in weapon sets, armour property tables, Pitted Armour (Later). Inputs from the weapons design 17.9 **(change W-13)**: the shield `bash{}` sub-record (1d4 B, Push, riderFlag false); the buckler grip recommendation; the Reliquary Shield with a `focus{}` sub-record; the tower shield (Later) |
 | 3 | **Starting kits** (small; may fold into 1 and 2) | M1 | `kit` records per class and per companion: weapon sets, armour, belt contents, starting coin. Answers ability model 20's "a minimal starting-equipment set for M1". |
 | 4 | **Consumables** (potions, tonics, flasks, coatings, Remedy) | M1 potions; M2 rest | Effects, `stackMax`, the use-value table, prices and pegs against supply, thrown flasks (bombs, oil, water; Oiled and Soaked), whether potions can be thrown (default no), Coated (Later), monster `useWhen`, banding |
 | 5 | **Scrolls and wands** | M2 | `classTags[]`, `use.difficulty: user \| fixed:N`, wand charge ranges and `camp` refill, the out-of-class Arcana rule (settled), property shapes |
@@ -1561,6 +1578,10 @@ mundane bases are not loot, and family caps all stand.
 
 - **Category designs** (section 17): every sub-record, property table,
   use-value table and price peg. The generic layer fixes only their shape.
+  Weapons and foci are no longer pending: see the weapons design
+  (`2026-11-17-weapons-design.md`). Disarmed and Coated stay Later; armour,
+  starting kits, consumables (coatings), scrolls and wands remain open in
+  their category designs. **(change W-15)**
 - **Death and healing:** whether companions can die (15's conditional
   rule); whether any healing lifts Downed (Administer assumes potions do
   not).

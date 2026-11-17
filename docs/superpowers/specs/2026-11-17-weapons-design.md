@@ -1,8 +1,7 @@
 # Weapons and Foci: Design
 
 Date: 2026-11-17
-Status: Draft, awaiting client approval, 2026-11-17 (revised the same day
-after the builder, consistency and play checks; Appendix A)
+Status: Approved, 2026-11-17
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model),
@@ -179,6 +178,18 @@ And on Dexterity damage (client question 3) **(agreed)**:
   approval cycle on a gap the numbers already predict; (c) no
   Dexterity-keyed damage at all, which leaves Dexterity at 40–80% of the
   reference with weapons alone (6.4).
+
+And on Aim (client question 4, raised by the play check; answered on
+2026-11-17) **(agreed)**:
+
+- **Option (a).** Aim is rewritten as "On your own turn, your first attack
+  made before you move counts as having advantage for Exploit (it does not
+  gain advantage)", and the keep-higher damage roll is dropped (7.1). It
+  widens the trigger of the approved Exploit rule (6.3) to an Aim attack,
+  so the longbow can trigger Exploit by itself (6.4).
+- Rejected: (b) keep Aim as written, which left the longbow falling from
+  52% to 38% of the reference with level, under the per-family floor, with
+  only a chassis re-tune to fix it.
 
 Everything else in the lead's proposal stands as written, and is recorded
 below as **(lead's call)** unless a parent settles it. **(agreed)**
@@ -392,7 +403,7 @@ only on a critical hit, against a weak target, or when something flags it
   - **Formula,** integers only (3.2): for each ability,
     `E = hitPermille × avgHitX2 + critPermille × critExtraX2`, where
     `avgHitX2` is twice the average damage of a hit (dice, ability term,
-    Exploit if the attack has net advantage, Precision if on) and
+    Exploit if the attack qualifies for it (6.3), Precision if on) and
     `critExtraX2` twice the extra average a crit adds. Compared as
     integers; no division is needed.
   - **Knowledge:** a party unit uses the preview's knowledge state
@@ -419,20 +430,30 @@ only on a critical hit, against a weak target, or when something flags it
 
 ### 6.3 Exploit
 
-**(agreed: rule and level scaling; details lead's call)**
+**(agreed: rule, level scaling and the Aim trigger; details lead's call)**
 
 > **Exploit.** When an attack rolled with Dexterity hits with advantage,
 > it deals extra weapon dice: 1 at levels 0–4, 2 at levels 5–8, 3 at
 > levels 9–12. Once per turn per attacker.
+
+- **Trigger: advantage OR an Aim attack (agreed, client question 4).** An
+  attack qualifies if it has net advantage (below) **or** it is an Aim
+  attack: the first attack of the wielder's own turn, made before the
+  wielder moves (7.1, 7.6). An Aim attack counts as having advantage **for
+  Exploit only**: its roll mode is unchanged, so it rolls one d20, and Vex
+  and every other rule that reads the roll mode see its real net mode. An
+  Aim attack with net disadvantage still qualifies; one with net advantage
+  qualifies once, as any attack does.
 
 - **Every unit**, monsters included, **counted at expected value** in a
   monster's validation, in the at-will band and in the permadeath guards
   alike (15.1). **(agreed)**
 - **Bands (lead's call):** the proficiency bands; levels 0, 11 and 12 are
   monster-only.
-- **Advantage is the net roll mode (lead's call):** Exploit needs net
-  advantage after one advantage cancels one disadvantage (conditions
-  design); an attack with both is a normal roll and does not qualify.
+- **Advantage is the net roll mode (lead's call):** outside Aim, Exploit
+  needs net advantage after one advantage cancels one disadvantage
+  (conditions design); an attack with both is a normal roll and does not
+  qualify unless it is an Aim attack.
 - **Which die (lead's call):** each Exploit die is the attack's actual
   damage die after every size change (versatile grip, Notched; 6.6), or a
   monster's one-die-rule die (15.1), dealing the weapon's damage type. It
@@ -449,11 +470,13 @@ only on a critical hit, against a weak target, or when something flags it
 - **The source of advantage does not matter:** a Vex Helped, a Lunge, a
   Prone target, an ally's Help. If team simulator gates (21.3) show
   overshoot, the named fallback is "Exploit counts only advantage the
-  attacker generated itself". **(lead's call)**
+  attacker generated itself"; an Aim attack is self-generated and still
+  qualifies under it. **(lead's call)**
 - **Validation rates (lead's call):** a monster's expected Exploit per hit
   is `exploitAdvantageRatePermille` × the die average, from `weapons.json`
   (20.2): 250‰ by default, 1000‰ when the unit's own kit can give itself
-  advantage (Lunge, Help, Charge, its own Topple or other Prone source).
+  advantage (Lunge, Help, Charge, its own Topple or other Prone source) or
+  carries Aim (a longbow).
   The tail is left to the round-1 0.5% guard (enemies 6.4), which
   simulates the real advantage sources.
 
@@ -473,15 +496,21 @@ Attack at level 5; crits roll double dice; Dexterity builds have Strength
 | Same, Exploit fixed at 1 die | 79% | 59% | 53% |
 | Rapier (Lunge on half of turns) | 76% | 66% | 70% |
 | Shortbow (Vex) | 53% | 64% | 72% |
-| Longbow (Aim) | 52% | 42% | 38% |
+| Longbow (Aim, agreed rewrite)* | ~74% | ~68% | ~76% |
+
+\* The longbow row is the lead's estimate for the agreed Aim (7.1; client
+question 4), assuming the first shot of each turn is planted *(illustr.)*;
+it is not from the Monte Carlo run. Under the earlier keep-higher Aim the
+run gave 52% / 42% / 38%.
 
 - Weapons bring Dexterity melee to about 75–80% of the reference and
-  launchers to 40–70%. A fixed one-die Exploit collapses at level 5, which
-  is why it scales.
-- Launchers trade damage for range and safety. The longbow is the
-  lowest-damage, safest family. It cannot trigger Exploit by itself, so
-  its share falls with level; it is on the dead-weapon watch list, held to
-  the per-family floor below, and a fix to Aim awaits the client (27).
+  launchers to about 50–75%. A fixed one-die Exploit collapses at level 5,
+  which is why it scales.
+- Launchers trade damage for range and safety. The longbow is the safest
+  family. Aim lets its planted shot trigger Exploit by itself, so its
+  share holds with level instead of falling **(agreed, client question
+  4)**; it stays on the dead-weapon watch list and is held to the
+  per-family floor below.
 
 **Parity targets (lead's call, illustr.):** with class features included,
 at levels 1, 5 and 10, against the greatsword reference built on the same
@@ -560,9 +589,11 @@ and, if not, why. **(lead's call on the evidence asked for)**
   one-die-rule die (15.1).
 - **Crit doubling** doubles the weapon dice and the Exploit dice; flat
   terms (ability, Precision, row flat) are not doubled.
-- **Aim and Executioner's Stroke** re-roll the **weapon dice part only**
-  (crit dice included; Exploit and Precision excluded) and keep the
-  higher total. If both apply, roll it three times and keep the highest.
+- **Executioner's Stroke** re-rolls the **weapon dice part only** (crit
+  dice included; Exploit and Precision excluded) and keeps the higher
+  total. Aim changes no dice: it only makes an attack qualify for Exploit
+  (6.3), whose dice follow the bullets above. **(agreed, client question
+  4, for Aim)**
 - The total is at least 1 unless the target is immune (settled, stat model
   8.3).
 
@@ -584,7 +615,7 @@ records reference a verb and cannot override its text.
 | Tempo | **Vex** | SRD 5.2, adapted | Once per turn, on a damaging hit made **without advantage** (net roll mode normal or disadvantage), gain Helped. It ends at the end of your next turn (W-7). | M2 |
 | Tempo | **Lunge** | original | On your own turn: if you moved at least 2 squares this turn and are adjacent to a target you were not adjacent to at turn start, your first attack against it after that movement has advantage (7.6). | M1 |
 | Tempo | **Flourish** | original | On your own turn, once per turn, after a melee hit, you may step 1 square without spending speed. The unit you hit makes no opportunity attack for that step; other units do. | M2 |
-| Tempo | **Aim** | original | On your own turn, attacks you make **before you move** roll their weapon damage dice twice and keep the higher total (6.6, 7.6). | M1 |
+| Tempo | **Aim** **(agreed)** | original | On your own turn, your first attack made **before you move** counts as having advantage for Exploit (it does not gain advantage) (6.3, 7.6). | M1 |
 | Guard | **Parry** | original | Reaction, policy `ifItChangesOutcome` with target filter `nonMinion`: +2 AC against one melee attack roll. | M1 |
 | Guard | **Set** | original | Reaction: when a hostile enters your threatened zone from outside it by its own movement, make one attack with this weapon. Default policy `always` with target filter `nonMinion`. | M1 |
 | Penetrate | **Graze** | SRD 5.2, adapted | Once per turn, when a Strength attack with this weapon misses, the target takes your Strength modifier (if positive) as the weapon's damage type. No rider, no verb. Never on a miss caused by a reaction (Parry, Interpose; exact test in 7.6). A natural 1 allows it. Minions take none. | M1 |
@@ -633,8 +664,9 @@ records reference a verb and cannot override its text.
    design grounds:** Slow duplicates Chilled (cold's identity); Sap
    collides with the condition Sapped and the deliberately cut Off-Balance.
 7. **Preview hint.** Every conditional verb declares a `previewHint`:
-   Lunge, an icon on qualifying squares; Aim, a "planted" badge that clears
-   when you move; Skewer and Cleave, the second target highlighted; Set and
+   Lunge, an icon on qualifying squares; Aim, a "planted" badge, with the
+   Exploit dice in the damage preview, that clears when you move or make an
+   attack; Skewer and Cleave, the second target highlighted; Set and
    reach, rings on the threat overlay; Push and Hook, the landing square;
    Parry, the attack previewed at AC + 2.
 8. **Class abilities and spells.** A class ability that makes a weapon
@@ -687,7 +719,9 @@ these steps, in this order:
    off-hand, opportunity attack or Set.
 2. **Fix the roll mode:** collect advantage and disadvantage from every
    source, net them (one cancels one), and consume Helped if it applies.
-   Exploit (6.3) and Vex read this net mode.
+   Exploit (6.3) and Vex read this net mode; Aim (7.6) is recorded here
+   as a separate flag that qualifies the attack for Exploit and does not
+   change the mode.
 3. **Choose the ability** (6.2) and record it, with the mode, in
    `AttackDeclared`.
 4. **Roll** the attack.
@@ -698,8 +732,8 @@ these steps, in this order:
 7. **On-hit spends:** Techniques and `onHit` charge properties
    (Executioner's Stroke, Thunderous, Quake, Crushing, Pinning, Shatter)
    are chosen now, before damage.
-8. **Damage** (6.6): the weapon dice with Aim or Executioner's Stroke,
-   then Exploit dice, then crit doubling, then the ability term, Precision
+8. **Damage** (6.6): the weapon dice with Executioner's Stroke, then
+   Exploit dice (from net advantage or Aim), then crit doubling, then the ability term, Precision
    and flat terms; minimum 1. Then any concentration check.
 9. **Rider attempt, or Topple** in the shared save slot (7.2 rule 1).
 10. **Forced movement:** every forced movement this hit causes is summed
@@ -757,7 +791,12 @@ attack of the same Attack action, a Nick attack included.
   (Flourish, Driving, Lunging). Forced movement, a shift, standing up from
   Prone, and steps taken on another unit's turn (Kiter's Step) are
   excluded.
-  - **Aim** applies while that count is 0 (Steady Aim: at most 1).
+  - **Aim** applies to the first attack the unit declares on its own
+    turn, if that count is 0 at declaration (Steady Aim: at most 1). Any
+    earlier attack that turn, hit or miss, a class ability with
+    `weaponAttack: true` included, spends it; a miss gives no Exploit and
+    passes nothing on. **(agreed rule, client question 4; timing lead's
+    call)**
   - **Lunge** qualifies at declaration if the count is at least 2 (Quick
     Lunge: 1), the target is adjacent, the target was not adjacent at
     turn start, and no attack has been made against it since the
@@ -1049,6 +1088,10 @@ design 12.2)**
   row's die.** Row dice *(illustr.)*, from the enemies 6.2 example column:
   levels 0–1 d4, 2–3 d6, 4–6 d8, 7–9 d10, 10–12 d12.
 - Flat damage comes from the row as now, and is **never below 0**.
+- **Minions (W-17, lead's call)** roll that die **one size smaller,
+  minimum d4**, with the flat set to keep their 50% band. At level 0, where
+  a d4 with flat 0 is already above the band, the minion rolls d4 with
+  flat 0 and passes the band; the 6.4 guards still apply.
 - **Why:** under the unrevised rule plus "flat ≥ 0", the pike soldier
   (d10), the greatclub brute (d8) and d8 artillery are illegal on floor 1
   under the 6.2 band and the 6.4 crit guard. The revised rule keeps every
@@ -1108,9 +1151,10 @@ design 12.2)**
   Dexterity-rolled, Exploit makes it 3.125 and fails. **Minion dagger
   at-wills are authored as Strength** (6.2: monsters declare the ability),
   and the band check catches any that are not. A level 0 minion's d4 alone
-  (2.5) is already above its 50% band (1.75); that is the enemies design's
-  minimum-die question, validated there by rank rule (enemies 6.5), and is
-  not changed here.
+  (2.5) is above its 50% band (target 1.75, ceiling 2.01), and a level 2
+  minion's d6 (3.5) above its own (ceiling 3.16); W-17 settles both: the
+  level 2 minion rolls d4 (2.5, in band) and the level 0 minion d4 with
+  flat 0 as the stated exception.
 
 ### 15.2 Identity, caps and counting
 
@@ -1165,7 +1209,9 @@ design 12.2)**
 - **No reaction priority rule.** Set, opportunity attacks and Parry trigger
   at different moments and never compete at one decision point; each
   follows its own policy and filter (7.1, ability model 7.3).
-- **Aim** is valued only when the destination is the current square.
+- **Aim** is valued as the expected Exploit dice on the turn's first
+  attack, and only when that attack is made from the current square before
+  moving (Steady Aim: a destination at most 1 square away).
 - **Lunge** is scored inside the square-plus-ability pairs (ability model
   13).
 
@@ -1362,9 +1408,10 @@ design 12.2)**
 
 No two launchers share a verb.
 
-- **Longbow.** The planted sniper: shoot before you move, then reposition;
-  holds a chokepoint from 14 squares. Worst when engaged, for Strength −1
-  builds, and at damage per round. Monsters: from floor 2, artillery with
+- **Longbow.** The planted sniper: shoot before you move, and the planted
+  shot counts for Exploit (Aim), then reposition; holds a chokepoint from
+  14 squares. Worst when engaged, for Strength −1 builds, and on turns it
+  must move before it shoots. Monsters: from floor 2, artillery with
   range capped by the role band (W-5).
 - **Light crossbow.** The sidearm for casters, companions and untrained
   units, with no Strength need; Skewer repays Loading in corridors. Worst
@@ -1514,7 +1561,7 @@ whenever the verb is off (10.2).
 | Vex | **Shared Vex** (M2): give the Helped to an adjacent ally instead |
 | Lunge | **Quick Lunge**: needs 1 square of movement. **Lunge Guard**: the Lunge target makes no opportunity attack against you this turn. |
 | Flourish | **Long Flourish**: step 2; at b3 no one gets an opportunity attack |
-| Aim | **Steady Aim**: Aim survives 1 square of movement |
+| Aim | **Steady Aim**: Aim survives 1 square of movement (the first attack still counts for Exploit after moving 1 square) |
 | Parry | **Deflect**: also against ranged weapon attacks. **Binding Parry**: a successful Parry pushes the attacker 1. **Riposte** (M2, charge 1 / 1 / 2 per rest): a successful Parry lets you attack the attacker in the same reaction. **Warding Staff** (staff): Parry may protect an adjacent ally. |
 | Set | **Short Grip** (pike): may attack adjacent, with disadvantage. **Keep Back** (charge 2 per rest): a Set or opportunity-attack hit pushes 1. |
 | Graze | **Driving Graze**: a Graze may also push 1 |
@@ -1667,14 +1714,14 @@ for `inventory.json` (items design 5.1).
   two verbs are separate keys), the off-hand attack, and each
   once-per-turn property in use (Shove-through, Repeater, Spare).
 - **Own-turn movement state,** reset at the unit's own turn start:
-  `squaresMovedOwnThisTurn` (int), `adjacentAtTurnStart` (unitIds) and
-  `lungeUsedTargets` (unitIds), for Aim, Steady Aim, Lunge and Quick Lunge
-  (7.6).
+  `squaresMovedOwnThisTurn` (int), `attacksDeclaredOwnThisTurn` (int),
+  `adjacentAtTurnStart` (unitIds) and `lungeUsedTargets` (unitIds), for
+  Aim, Steady Aim, Lunge and Quick Lunge (7.6).
 - **Per-target round state** records Topple attempts and verb-sourced
   forced movement (7.2 rules 2 and 4), cleared at round start.
 - **Events:** `AttackDeclared{source, target, mode, ability, weapon}`,
   `VerbFired{verb, source, targets, result}` and
-  `ExploitApplied{source, dice}` for the log, replays and the preview
+  `ExploitApplied{source, dice, viaAim}` for the log, replays and the preview
   property test; Strained and Notched appear through the existing
   attack-resolution events.
 
@@ -1743,8 +1790,12 @@ The build fails when:
   with empty, wall, unseen and ally squares; the shift path around the
   source; forced-movement summing, verb-sourced once per round and
   collision only from non-verb parts (Push with Thunderous); the damage
-  dice rule (6.6: Aim, Executioner's Stroke, Exploit on Notched and
-  versatile dice, crit doubling); Exploit and Vex on the net roll mode;
+  dice rule (6.6: Executioner's Stroke, Exploit on Notched and versatile
+  dice, crit doubling); Exploit and Vex on the net roll mode; Aim
+  qualifying only the turn's first attack before movement for Exploit,
+  with one d20 and the roll mode unchanged (Vex still fires on it), with
+  net disadvantage, spent by an earlier miss, and with Steady Aim after 1
+  square; minion dice one size smaller and the level 0 exception (W-17);
   Graze's reaction test and natural 1; the shooting-in-melee hostile test;
   the off-hand attack with negative Strength and as a hand crossbow shot;
   hands in a light + light set; staff focus only two-handed; turn ids
@@ -1771,7 +1822,7 @@ The build fails when:
 | Weapon swaps per fight | Low but non-zero (settled, ability model 16) | M1 |
 | Damage share by range band (melee, reach 2–3, ranged) | Each band's share of party damage within ±25% of its share of party members; feeds the M2 cover decision (9.5) | M2 |
 | **Damage taken by range band** (party damage taken per fight by the unit's main band, reach 3 units reported apart) | Launcher-main units take at least 50% of what melee-main units take; the safety veto on the Precision gate (6.5) | M2 |
-| Launcher family floor (6.4) | Every launcher family ≥ 60% of the reference at levels 1, 5 and 10 | M2 |
+| Launcher family floor (6.4) | Every launcher family ≥ 60% of the reference at levels 1, 5 and 10; the longbow measured with the agreed Aim (7.1), checking the estimate in 6.4 and the 110% cap | M2 |
 | Families never equipped after floor 2 | None; the dead-weapon watch | M2 |
 | Off-hand attack share of companion turn time | Feeds the D-c fallback (11.3) | M2 |
 | Notched: instances per floor and repairs attempted, and how often a Notched unit's cap of 2 blocked another lingering condition | Reported (Later) | Later |
@@ -1790,8 +1841,9 @@ The build fails when:
     geometry (7.6); verbs and bounds; Strained; training; dual wielding
     (dagger and handaxe); the threatened zone and movement timing (8);
     ranged disadvantage in melee; thrown and Loading; improvised and
-    unarmed; Exploit (1 die at levels 1–3); type properties; the revised
-    one-die rule and the round guard for Set (15.1).
+    unarmed; Exploit (1 die at levels 1–3), with Aim as a trigger; type
+    properties; the revised one-die rule, minion dice (W-17) and the round
+    guard for Set (15.1).
   - Monsters: claw brute (or the greatclub brute), warhammer-and-shield
     soldier (or the pike soldier from room level 2), sling artillery,
     Strength-rolled dagger or spear minions.
@@ -1811,11 +1863,12 @@ The build fails when:
 ## 23. Risks
 
 - **Dexterity parity** depends on the class designs' precision features
-  (6.4). Launchers are the weakest point, and the longbow is the
-  lowest-damage family by design and falls with level. Mitigations: the
-  binding requirement, the parity reports, the per-family launcher floor,
-  the per-class Precision gate with its safety veto, and the Aim
-  question (27).
+  (6.4). Launchers are the weakest point. Mitigations: the binding
+  requirement, the parity reports, the per-family launcher floor, the
+  per-class Precision gate with its safety veto, and Aim counting for
+  Exploit (agreed, client question 4), which keeps the longbow from
+  falling with level. Its figures are an estimate (6.4) until the M2
+  parity reports measure it.
 - **The monster one-die change (W-5)** moves monster weapon identity onto
   verbs. Players may read a pike as hitting no harder than a dagger on
   floor 1. The gear line and verb previews carry the read.
@@ -1824,7 +1877,9 @@ The build fails when:
   reactions, the stall and lockout reports, the floor-1 soldier cap.
 - **Overshoot from team advantage** (a Topple user plus Exploit users).
   Gated by team reports; the named fallback limits Exploit to
-  self-generated advantage (6.3).
+  self-generated advantage (6.3), which still includes Aim. A longbow
+  user with Precision on and a class precision feature stacks three
+  damage rules on its planted shot; the 110% cap (6.4, 6.5) bounds it.
 - **Learnability:** 15 verbs in 5 kinds. Mitigations: one line each, the
   gear line, mandatory preview hints, and monsters teaching verbs first.
 - **Ranged dominance with no cover** depends on dungeon generation;
@@ -1866,8 +1921,8 @@ The build fails when:
 
 ## 25. Changes to approved documents
 
-To be applied when this document is approved. Each change names the exact
-section it touches. W-1 and W-12 were approved by the client on
+Applied on 2026-11-17, when this document was approved. Each change names
+the exact section it touches. W-1 and W-12 were approved by the client on
 2026-11-17; the rest are the lead's, confirmed with this document.
 
 **Stat model (2026-11-16):**
@@ -1889,6 +1944,7 @@ section it touches. W-1 and W-12 were approved by the client on
 | # | Section | Change | Approved by |
 |---|---|---|---|
 | W-5 | 5.3, Dexterity-main bullet; 5.4, first and second bullets; 5.6, gear line row; 6.4, guards table and notes; 9.1, reaction column; 9.2, "Counts toward the type's 2"; 11.1, Opportunity cost row; 15.2, first bullet; 15.4, first table row; 15.5, Disarm seizure, first bullet; 17.1, Brute, Soldier and Artillery rows | 5.4 first bullet adds: "Crit dice, Exploit and Precision are core rules outside this limit (weapons 15.1)." Monster die = min(weapon's largest die, row die); flat ≥ 0. Each monster at-will declares its attack ability; flat damage is unaffected by weapons 6.2. Exploit and (if on) Precision count at expected value, at the `weapons.json` rates, in the band and the guards. New 6.4 row: a non-boss unit's maximum damage to one hero across one round, its turn plus its Set attack: ≤ 50% no crit, ≤ 70% with one crit; per-unit guards count one hero. The gear line shows the verb. Verb effects count in the band and guards; monster Graze uses the monster's Strength. Guard verbs are the reaction beyond the opportunity attack; condition verbs count toward the 2; both inert on minions. Set-zone entry cost only while the reaction is unspent, for the first unit each round that would trigger Set under its policy. Carried properties map pools to uses (weapons 15.2). Disarm seizure: a party unit on the square blocks recovery once the owner has moved off it. Unarmed types use `natural.*` templates (Strength unless declared). Brute: heavy **or two-handed** weapon. Soldier: Interpose **or** a Guard-verb weapon. Artillery range band 8–14 from floor 2. (weapons 6.2, 15, 16, 17.10) | Lead |
+| W-17 | 5.4, second bullet ("A monster rolls one die of the weapon's largest size", as revised by W-5); 7.1, ranks table, Minion row, "Damage is 50% of the row" | A minion rolls the W-5 die **one size smaller, minimum d4**, and its flat (≥ 0) is set to keep its at-will in the 50% band (6.2, ±15%). Exception: at level 0, where a d4 with flat 0 (2.5) is above the band (ceiling 2.01), the minion rolls d4 with flat 0 and passes the band; the 6.4 guards still apply. This fixes the level 0 minion (d4 above its band) and the level 2 minion (d6 above its band). (weapons 15.1) | Lead |
 
 **Items design (2026-11-16):**
 
@@ -1952,23 +2008,7 @@ left as they are (7.2 rule 9).
 
 ## 27. Open items for the client
 
-Client questions 1–3 were answered on 2026-11-17 and are recorded in
-section 4. One confirmation remains, raised by the play check:
-
-- **Aim and Exploit (client question 4).** The longbow cannot trigger
-  Exploit by itself, so its share of the reference falls from 52% to 38%
-  with level (6.4). The lead's recommended fix rewrites Aim as: "On your
-  own turn, your first attack made before you move counts as having
-  advantage for Exploit (it does not gain advantage)", dropping the
-  keep-higher roll. Estimated at about 74% / 68% / 76% of the reference at
-  levels 1 / 5 / 10 *(illustr.)*. Because it widens the trigger of the
-  approved Exploit rule, it needs the client.
-  - **Recommended: (a) approve the rewrite.**
-  - (b) Keep Aim as written; the longbow stays under the per-family floor
-    report (6.4), and if it fails, the lead re-tunes its chassis (die and
-    range) within this document's authority.
-  - Until answered, Aim stays as written in 7.1. The answer changes only
-    the longbow's verb record, so it does not block any other M1 work.
+None. Approved by the client on 2026-11-17.
 
 ## Appendix A: how the review findings were resolved
 
@@ -2059,17 +2099,19 @@ section 4. One confirmation remains, raised by the play check:
 | Training on items versus families | W-6 extended |
 | Missing change rows | W-4 (7.3 filter), W-5 (5.4 bullets, 15.5, Brute row), W-6 (mock-up), W-16 (Pitted Armour) |
 | Precision would break monster validation; gate used a median | Precision folded into monster flats; per-class gate; safety veto (6.5) |
-| Longbow falls with level | Per-family launcher floor; client question 4 (27); Hunter's Longbow takes Steady Aim |
+| Longbow falls with level | Per-family launcher floor; Aim rewritten to count for Exploit, keep-higher roll dropped (client question 4, option a, agreed 2026-11-17; 6.3, 6.6, 7.1); Hunter's Longbow takes Steady Aim |
 | Warhammer dominated the greatclub | Greatclub takes Topple; rule 13 ignores training |
 | M1 monster verbs could not fire solo | Warhammer soldier and sling artillery by default (15.3); party and monster trigger rows |
 | Launcher safety unmeasured | Damage-taken report and the gate's safety veto (21.3) |
 | Dual wielding in M1 had one light family | Handaxe moved to M1 |
 | Exotic training empty until Later | Stated; builders do not gate on it (7.3) |
+| A level 0 minion's d4 exceeds its 50% band (enemies 5.4) | Minions roll one die size smaller, minimum d4, with a level 0 exception (W-17, 15.1) |
 
 ## Appendix B: sources
 
 - The six parent documents, all in `docs/superpowers/specs/`.
 - The lead's weapons proposal and review findings (2026-11-17), with the
-  client's answers to questions 1–3.
+  client's answers to questions 1–4.
 - The parity figures in 6.4 come from a Monte Carlo script that is not part
-  of the project; the simulator replaces them from M2.
+  of the project, except the longbow row, which is the lead's estimate for
+  the agreed Aim; the simulator replaces them from M2.

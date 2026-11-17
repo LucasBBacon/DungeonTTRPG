@@ -633,6 +633,16 @@ on an attack that already has disadvantage from another source.
   damage. A collision never applies Prone unless the ability says so.
 - It never provokes opportunity attacks.
 - Rooted, Restrained and Anchored units are not moved.
+- **Shift (change W-8):** a third kind beside push and pull. The unit steps
+  along the ring of squares adjacent to the source, each step to a ring
+  square 8-adjacent to the current one; never through the source's square.
+  It stops at units and walls, is blocked by Rooted, Restrained and
+  Anchored, never provokes, and in M1 stops before hazards (weapons design
+  7.6).
+- **One move per hit (change W-8):** all forced movement one hit causes
+  sums to at most 3 squares and resolves once. Collision damage applies
+  only if a non-verb source contributed to the move; verb-sourced movement
+  moves a unit at most once per round (weapons design 7.2 rule 4).
 - **Drags:** a holder dragging a Grappled unit (18.4) is forced movement
   for opportunity attacks, the triggers in 9.4, hazard edges and terrain.
 - **M1:** pushes and drags stop before hazard squares, including terrain
@@ -1096,11 +1106,12 @@ duration and ends, sources, and interactions.
 | M1 | 10: Surprised, Prone, Grappled, Frightened, Hidden, Dodging, Stunned, Steeled, Dazed, Bleeding | 4: Incapacitated, Grappling, Concentrating (if the slice class casts), Unyielding |
 | M2 | 22: Staggered, Unfocused, Restrained, Chilled, Teetering, Spurred, Burning, Smouldering, Corroded, Withered, Poisoned (one family with its lingering form), Soaked, Oiled, Frozen, Blinded, Revealed, Rallied, Challenged, Helped, Warded, Weary, Scarred | 3: Downed, Flying, Jumping |
 | M2 (morale) | 4 morale states, in their own budget (16): Emboldened, Demoralised, Routed, Cowed (enemies design 14) | — |
-| Later | 69, listed in each family below | 2: Levitating, Phasing |
+| Later | 70, listed in each family below (Notched added, change W-12) | 2: Levitating, Phasing |
 
 M1 and M2 together give 32 conditions, the budget's limit (16), with
 Scarred and Oiled included. **(lead's call)** The morale states are outside
-it, in the separate morale budget.
+it, in the separate morale budget. Later conditions are outside the
+32-condition budget (16) **(change W-12)**.
 
 In M1, Bleeding comes from a non-rider monster claw and exercises ticks,
 values and re-application. Dazed exercises resolve, Unyielding and party
@@ -1333,7 +1344,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Intensity: binary.
   - Duration: `turns:1`, combatOnly.
   - Sources: bludgeoning rider (Fortitude) **(change C9)**; automatic on
-    bludgeoning-weak, Brittle or shattered Frozen targets; shield bashes.
+    bludgeoning-weak, Brittle or shattered Frozen targets; shield bashes
+    with the Bashing Rim property or a Technique, not the base bash
+    **(change W-9; weapons design 17.9)**.
   - Interactions: does not release grapples.
 - **Silenced** — major · Later
   - Effect: cannot use limited `spell` abilities or `vocal` abilities
@@ -1374,9 +1387,16 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     end; the owner uses its `improvised` attack (enemies design 15.5).
     Party side: a party weapon still on the ground at combat end returns
     to its owner (items design 7.1). A Clinging weapon is never dropped
-    (Later, items design 13).
-  - Sources: disarm Techniques, whip or flail properties.
-  - Interactions: Distracted prevents recovery.
+    (Later, items design 13). Monster side: a party unit on the square
+    blocks recovery only once the owner has moved off it **(change W-9)**.
+  - Save: Fortitude against the source's ability difficulty, with
+    advantage when wielding two-handed **(change W-9)**.
+  - Sources: disarm Techniques, whip or flail properties, monster cooldown
+    abilities **(change W-9)**.
+  - Interactions: Distracted prevents recovery. Only the main hand drops;
+    shields are never Disarmed. A Disarmed focus loses only its verb and
+    properties; casting continues. Sure Grip and Clinging are immune
+    **(change W-9; weapons design 16)**.
 - **Harried** — minor · Later
   - Effect: its ranged attacks, and abilities aimed more than 1 square
     away, provoke opportunity attacks from adjacent hostiles.
@@ -1409,7 +1429,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Duration: trigger until it stands (self-ended, no cap, 5.3);
     combatOnly.
   - Sources, tagged `shove`, `trip`, `collision` or `onApply`: Shove, trip
-    Techniques, Asleep, Downed, Grovel.
+    Techniques, the Topple verb (tagged `trip`), Asleep, Downed, Grovel.
+    Topple applies at most once per round per target; condition verbs
+    never fire on reactions **(change W-10; weapons design 7.2)**.
   - Interactions: `prone` immunity; Anchored blocks shove, trip and
     collision sources; Levitating blocks it.
 - **Grappled** — major · **M1**
@@ -1954,7 +1976,10 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Effect: its next attack roll or skill check has advantage; a roll that
     already has advantage does not use it.
   - Duration: `charges:1`, fallback `untilSourceTurnStart`, sourceTied.
-  - Sources: the Help action **(settled, ability model 7.2)**.
+    From the Vex verb the fallback is `untilSourceTurnEnd`, with the wearer
+    as source, so it ends at the end of its next turn **(change W-7)**.
+  - Sources: the Help action **(settled, ability model 7.2)**; the Vex verb
+    **(change W-7; weapons design 7.1)**.
 - **Spotted** — harmful token · Later
   - Effect: the next attack roll against it has advantage.
   - Duration: `charges:1`, fallback `untilSourceTurnStart`.
@@ -2014,7 +2039,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Effect: its next 3 weapon hits carry the oil's rider.
   - Intensity: charges, cap 3.
   - Duration: `charges:3`, fallback `turns:3`.
-  - Sources: consumable oils.
+  - Sources: consumable oils: `coating` consumables tagged `launcher`
+    (special arrows and bolts) or `blade` (edge oils) (consumables design)
+    **(change W-11)**.
 - **Heightened (ability)** — beneficial · Later
   - Effect: +2 to one ability, within the +5 cap, and advantage on checks
     with that ability.
@@ -2143,7 +2170,33 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Effect: the worn armour's value −1 per level (a gear-layer change).
   - Intensity: cap 2.
   - Duration: `untilCamp`; a Mechanics repair during a rest.
-  - Sources: rust monster (SRD).
+  - Sources: rust monster (SRD); the Crushing weapon property
+    (enemy-facing; reduces the monster's armour value, natural armour
+    included; Later); the acid ooze touch (Later) **(change W-16; weapons
+    design 5.5, 17.10, 18.3)**.
+- **Notched** — minor · Later **(agreed; change W-12; weapons design 5.6)**
+  - Effect: the weapons in the weapon set that was active when Notched
+    landed roll their dice one size smaller (minimum d4) and lose their
+    verb. On a focus it suppresses only the focus verb. Shields and natural
+    weapons are unaffected.
+  - Intensity: binary. The instance records the instanceIds of the items
+    in that set when it lands (as Teetering records its hazard), not the
+    set's slot. It applies only if the active set holds at least one weapon
+    or focus it would affect (not a shield, a natural weapon or a Sure Grip
+    weapon); otherwise it does not apply, takes no lingering slot, and the
+    rider or effect counts as not attempted. A unit that already has
+    Notched cannot gain it again ("No effect: already Notched", 6.3).
+  - Duration: `untilCamp`. A Mechanics repair during a short rest ends it:
+    fixed difficulty (`notchedRepairDifficulty`), one attempt per instance
+    per rest, no free retry (stat model 7.2); any party member may attempt
+    it, trained or not; the instance stores `lastRepairRestId`.
+  - Sources: rust, acid and ooze-themed monsters only, floor 2 and deeper,
+    visible from the monster type ("Notches weapons"); counts toward that
+    type's 2 conditions (enemies design 9.2). Party-facing only.
+  - Interactions: counts toward the cap of 2 harmful lingering conditions
+    (14); swapping to the spare set (a bonus action) escapes it, as does
+    handing a recorded weapon to an ally; the Sure Grip property makes a
+    weapon immune. A condition on the unit, never item state.
 
 ### 18.11 Merged or cut
 
@@ -2423,7 +2476,8 @@ Each tied to a risk:
   fight; pricing belongs to the items design.
 - **Rules owned by designs that do not exist yet:** hazard placement
   (dungeon generation); Disarmed, Coated, Clinging,
-  Pitted Armour and tonics (items); the rest of death and healing.
+  Pitted Armour and tonics (items; Disarmed's rules are now in weapons
+  design 16, still Later); the rest of death and healing.
 - **Protected content.**
   - Generic names that match other games' conditions need a check before
     shipping. Dazed is the one kept; the fallback name is "Addled".
@@ -2480,7 +2534,10 @@ the exact section it touches.
 - **Items and inventory:** the generic layer is settled by the items design
   (2026-11-16). Open in its category designs (items design 17): tonics and
   their prices, Remedy, flasks (water, oil), Disarmed, Coated, Clinging,
-  Pitted Armour.
+  Pitted Armour. Weapons and foci are no longer pending: see the weapons
+  design (2026-11-17). Disarmed and Coated stay Later; armour, starting
+  kits, consumables (coatings), scrolls and wands remain open in their
+  category designs **(change W-15)**.
 - **Enemies:** morale (Demoralised, Routed, Emboldened, Cowed) is resolved
   by enemies design 14; elite definitions for the depth gates (7.1) and
   enemy condition kits within the budget (9.2) are settled there too.

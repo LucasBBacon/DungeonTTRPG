@@ -125,8 +125,8 @@ fixing the abilities that have no job in this game.
 
 | Ability | In a fight | Defence | In the dungeon |
 |---|---|---|---|
-| Strength | Melee and thrown attacks and damage; shoving and grappling | Fortitude; heavy armour requirement | Carrying capacity; forcing doors and obstacles |
-| Dexterity | Attack rolls with ranged and light weapons | Armour class in light armour; Reflex | Stealth |
+| Strength | Melee and thrown attacks and damage, except light and finesse attacks rolled with Dexterity; shoving and grappling (weapons design 6.2) | Fortitude; heavy armour requirement | Carrying capacity; forcing doors and obstacles |
+| Dexterity | Attack rolls with ranged, light and finesse weapons (weapons design 6.2) | Armour class in light armour; Reflex | Stealth |
 | Constitution | Holding concentration | Hit points; Fortitude | How much a short rest restores |
 | Intelligence | Initiative; arcane casting | Reflex | Traps, locks, secrets, identifying loot |
 | Wisdom | Divine casting; reading enemy intent (Perception against guile, enemies design 13.3) | Will | Perception; not being surprised |
@@ -141,8 +141,13 @@ All **(agreed)**.
 
 - **Initiative uses Intelligence**, not Dexterity.
 - **Dexterity adds to hit but not to damage.** Strength adds to both for
-  melee and thrown weapons. The strong character hits hard; the nimble one
-  hits often.
+  melee and thrown attacks rolled with Strength; a Dexterity-rolled attack
+  adds only a negative Strength. The strong character hits hard; the
+  nimble one hits often. `light` means dual-wieldable and
+  Dexterity-eligible, `finesse` Dexterity-eligible only. Exploit (weapons
+  design 6.3) and the default-off launcher Precision (weapons design 6.5)
+  are the only **core** Dexterity-keyed damage rules; class precision
+  features (weapons design 6.4) are the class designs' own.
 - **Three saves, not six**, each using the better of two abilities
   (section 6).
 - **Constitution stays** despite being the ability nobody picks for fun,
@@ -446,10 +451,12 @@ Each item here is a commitment this model makes on another system's behalf.
   `2026-11-16-items-inventory-design.md`: a spare weapon is one spare
   weapon set (main + off hand, shield included), and the pack holds
   max(2, 3 + Strength) *(illustr.)* slots of size-1 or size-2 items, with
-  belt, trinkets, weapon sets and armour outside it (its 5). What remains
-  open moves to the category designs (its 17): weapons, armour values and
-  Strength thresholds, starting kits, tonics, Remedy and flasks, scrolls
-  and wands, Coated, Disarmed, Clinging and Pitted Armour.
+  belt, trinkets, weapon sets and armour outside it (its 5). Weapons and
+  foci are settled in `2026-11-17-weapons-design.md`; Disarmed and Coated
+  stay Later. What remains open moves to the category designs (items
+  design 17): armour values and Strength thresholds, starting kits,
+  tonics, Remedy and flasks, consumables (coatings), scrolls and wands,
+  Clinging and Pitted Armour.
 - **Conditions.** Settled in `2026-11-16-conditions-design.md`: bleed,
   burning, slow, stagger, blind, frightened and the rest are defined there;
   this document only names them.

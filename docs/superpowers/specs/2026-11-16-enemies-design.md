@@ -270,7 +270,9 @@ Authored on the base type. The composed unit exists only at runtime.
   Will"). A boss has no save below mid, because resolve covers that gap.
 - **Dexterity-main monsters** add Dexterity to hit, not to damage
   **(settled)**. Their flat damage is declared on the attack, so they are
-  not underpowered.
+  not underpowered. Each monster at-will declares its attack ability in
+  data; its flat damage is not touched by the weapons design's no-ability
+  rule for Dexterity-rolled attacks (weapons 6.2). **(change W-5)**
 
 ### 5.4 Damage shape
 
@@ -278,11 +280,20 @@ Authored on the base type. The composed unit exists only at runtime.
 
 - Each at-will damage part has **at most one die**. The rest of its average
   is flat. Limited abilities may roll more dice. This keeps the one crit
-  rule working and cuts spikes under permadeath.
+  rule working and cuts spikes under permadeath. Crit dice, Exploit and
+  Precision are core rules outside this limit (weapons 15.1). **(change
+  W-5)**
 - Issue gear sets the damage **type, die, properties (reach, thrown), rider
-  flag and armour category**. A monster rolls **one die of the weapon's
-  largest size** (a greatsword brute rolls 1d6). The flat amount comes from
-  its table row.
+  flag and armour category**. A monster rolls **one die: the smaller of
+  the weapon's largest die and its row's die** (row dice *(illustr.)*, from
+  the 6.2 example column: levels 0–1 d4, 2–3 d6, 4–6 d8, 7–9 d10, 10–12
+  d12; a greatsword brute rolls at most 1d6). The flat amount comes from
+  its table row and is **never below 0**. **(change W-5; weapons 15.1)**
+- **Minions** roll that die **one size smaller, minimum d4**, with the flat
+  (≥ 0) set to keep the at-will in the minion's 50% band (6.2, ±15%).
+  Exception: at level 0, where a d4 with flat 0 (2.5) is already above the
+  band (ceiling 2.01), the minion rolls d4 with flat 0 and passes the band;
+  the 6.4 guards still apply. **(change W-17; weapons 15.1)**
 - So a dropped weapon has the same type, properties and rider it had when
   it hit you. Its numbers depend on who wields it.
 
@@ -307,7 +318,7 @@ Authored on the base type. The composed unit exists only at runtime.
 | Always | (3) The condition row, under the settled icon rules |
 | Always | (4) Affix names, one word each |
 | Once seen | One "ready" marker for a seen hard-control or area ability that is ready next turn |
-| On hover or inspect | Gear line ("Spear: piercing, reach · Hide: light"), "Carries: …", cooldowns and uses, the morale profile and break line, traits once revealed by Lore, the intent line (13.3) |
+| On hover or inspect | Gear line, with the weapon's verb ("Pike: piercing, reach 2, Set · Hide: light"; change W-5), "Carries: …", cooldowns and uses, the morale profile and break line, traits once revealed by Lore, the intent line (13.3) |
 
 A UI test renders the worst legal composed elite on each floor at minimum
 zoom.
@@ -420,6 +431,7 @@ round-1 row.
 | A non-boss unit's maximum damage on its turn, no crit | ≤ 40% |
 | A non-boss unit's maximum damage on its turn, with a crit | ≤ 60% |
 | A non-boss unit's maximum damage on its turn plus its own death effect (Volatile), no crit | ≤ 60% |
+| A non-boss unit's maximum damage to one hero across one round, its turn plus its Set attack, no crit / with one crit **(change W-5)** | ≤ 50% / ≤ 70% |
 | Chance that a full-HP hero is reduced to 0 in round 1, for **every** template × band × composition the generator can emit on that floor, with surprise wherever the template's awareness allows and every focus term on (Quarry, kill bonus, setup), death effects included | < 0.5% each |
 | Floor 1, solo: an encounter's summed round-1 expected damage to the hero (surprise included where allowed) | ≤ 50% of the hero's HP |
 | Boss: expected damage to one unit per round (its turn plus boss actions) | ≤ 35% |
@@ -432,6 +444,17 @@ round-1 row.
 - **"On its turn" means the whole kit**, limited abilities included,
   each checked at its best case; the per-unit rows are checked for every
   ability, not only the at-will. **(lead's call)**
+- **Weapon verbs and core damage rules (change W-5; weapons 15.1, 15.2):**
+  verb effects count in the at-will band and in these guards, including
+  advantage handed to later units (Prone); a monster's Graze deals its own
+  Strength modifier. Exploit and, if on, Precision count at expected value,
+  at the `weapons.json` rates, in the band and the guards; in the "with a
+  crit" rows the Exploit value is doubled with the dice, Precision is not. The per-unit guards count
+  only damage dealt to one hero (Skewer only with the hero as the primary
+  target; Cleave's second target excluded). The opportunity attack is not
+  added to the Set round row; the floor 1 summed round-1 guard and the
+  round-1 simulation include Set and opportunity attacks under the AI's
+  movement.
 - The encounter rows were tightened from a median encounter because
   permadeath deaths come from the tail (lairs, elite rooms, ambushes,
   maximum fills), and three units each at 25% can sum past a solo hero's
@@ -499,7 +522,7 @@ gates read the **source unit's rank at the moment a condition is applied**.
 
 | Rank | Definition | Cost multiplier | Wave |
 |---|---|---|---|
-| **Minion** | HP 1. Any damage kills it, including ticks. It takes no damage from a miss, and none on a successful save against "half on success" effects. This is a rank rule, not a resistance. Damage is 50% of the row. Two at-wills; no limited abilities, no harmful conditions, no reaction beyond the opportunity attack, no bonus-action ability. **Same-type minions in one group share one initiative slot** and act in unit order. Never an elite, an item carrier, affixed or a concentrator. Morale profile `normal` by default. **At most 2 minions in a solo encounter.** | max(2, `FloorDiv(levelCost, 3)`) + costAdd (always 0) | M1 |
+| **Minion** | HP 1. Any damage kills it, including ticks. It takes no damage from a miss, and none on a successful save against "half on success" effects. This is a rank rule, not a resistance. Damage is 50% of the row; it rolls the 5.4 die one size smaller, minimum d4, with the flat set to keep that band (level 0: d4, flat 0, the stated exception) **(change W-17)**. Two at-wills; no limited abilities, no harmful conditions, no reaction beyond the opportunity attack, no bonus-action ability. **Same-type minions in one group share one initiative slot** and act in unit order. Never an elite, an item carrier, affixed or a concentrator. Morale profile `normal` by default. **At most 2 minions in a solo encounter.** | max(2, `FloorDiv(levelCost, 3)`) + costAdd (always 0) | M1 |
 | **Standard** | The table row, shaped by its role | ×1 | M1 |
 | **Elite** | The template in 7.2 | ×2, including the first affix; a second affix ×1.2 | M2 |
 | **Boss** | Hand-designed, from a pool per floor **(settled)** (17.5) | Authored budget | M1 |
@@ -656,6 +679,10 @@ Build order:
 A carried notable item may add one limited ability beyond the cap. Its
 conditions still count.
 
+A **Guard verb** on a weapon (Parry, Set) is the unit's one reaction beyond
+the opportunity attack. On minions, guard and condition verbs are inert and
+shown greyed. **(change W-5; weapons 15.2)**
+
 ### 9.2 Counting conditions
 
 The single counting rule for "2 conditions per enemy type". **(change C-2)**
@@ -664,6 +691,8 @@ The single counting rule for "2 conditions per enemy type". **(change C-2)**
   can apply. That means its ability effects, its declared universal verbs
   (Shove gives Prone, Grapple gives Grappled, Frighten gives Frightened),
   flagged weapon riders (issue gear or carried), affixes and carried items.
+  Condition verbs on a weapon (Topple) count here too; they are inert on
+  minions. **(change W-5; weapons 15.2)**
 - **Counts toward the theme's 6, but not the type's 2:** the *implicit*
   riders of every damage type the theme's monsters deal, which fire on a
   crit or against a weak target. The fire rider brings Burning and
@@ -913,7 +942,7 @@ The added terms are data-weighted percentages. **(change A-6)**
 |---|---|---|---|
 | Approach | The best expected score reachable *next* turn from the destination, half-discounted | A one-step scorer otherwise stands still when nothing is in reach | M1 |
 | Exposure | − the party's expected damage against this square next round × `caution%` | Artillery stays back | M1 |
-| Opportunity cost | − the opportunity attacks the path provokes × `oaAversion%` (higher means it avoids them) | Brutes plough through; skirmishers Disengage or slip past | M1 |
+| Opportunity cost | − the opportunity attacks the path provokes × `oaAversion%` (higher means it avoids them). Entering a Set zone costs the same way, but only while the zone owner's reaction is unspent, and only for the first unit each round that would trigger the owner's Set under its policy (by default the first non-minion) **(change W-5; weapons 15.4)** | Brutes plough through; skirmishers Disengage or slip past; no Set-zone stall | M1 |
 | Range | − \|distance to the nearest noticed target − `preferredRange`\| × step | Kiting | M1 |
 | Hazard path | Settled 17.3 term; a cost of at least 100% for any hazard that could kill the mover | Never suicidal | M1 |
 | Target preference | + bonus% × expected damage when the target matches the preference, capped at 25% of its best at-will | Personality without exclusivity | M1 (nearest); M2 (others) |
@@ -1689,7 +1718,9 @@ reward card is a separate screen and does not count.
 
 - **Only types flagged `armed` have gear slots:** main hand, off hand or
   shield, armour, and one carried slot. Humanoids and armed constructs are
-  armed. Beasts, oozes and natural-weapon users are not.
+  armed. Beasts, oozes and natural-weapon users are not. Unarmed types
+  attack with `natural.*` ability templates (weapons 17.10), rolled with
+  Strength unless the template declares Dexterity. **(change W-5)**
 - Monsters are **trained in their loadout weapons and armour**, and
   **Strength thresholds bind them as they bind the party** (checked at
   authoring).
@@ -1761,7 +1792,7 @@ reward card is a separate screen and does not count.
 
 | Item kind | On the carrier | AI use | What the party gets |
 |---|---|---|---|
-| Rider or property weapon | Its weapon at-will gains the property or rider flag | Normal | The weapon |
+| Rider or property weapon | Its weapon at-will gains the property or rider flag. A property's pool maps to uses for the monster's life: `rest` N and `camp` N become `uses:N`; `never` and `fight` become `uses:1` **(change W-5; weapons 15.2)** | Normal | The weapon |
 | Notable armour or shield | Its effect applies, inside the threat band | Passive | The armour |
 | Healing potion | `uses:1` bonus-action self-heal | Only at or below 50% HP | Nothing if drunk |
 | Tonic | `uses:1` cure of its own worst condition | When it holds a major condition | The tonic if unused |
@@ -1810,7 +1841,9 @@ S-5)**:
 **Disarm seizure** (Later, with Disarmed) **(change C-17)**:
 
 - A dropped *issue* weapon stays issue gear, as settled. A party unit
-  standing on its square blocks recovery.
+  standing on its square blocks recovery once the owner has moved off it,
+  so an owner still on its own weapon can pick it up. **(change W-5;
+  weapons 16)**
 - A dropped *notable* weapon may be seized with the free interaction and
   becomes party loot for good. The owner falls back to its `improvised`
   at-will (same family, −30% damage, no rider).
@@ -1909,7 +1942,9 @@ floor.
 the items and inventory design (items design 16). What remains open moves
 to the category designs (items design 17): weapons, armour values and
 Strength thresholds, starting kits, tonics, Remedy and flasks, scrolls and
-wands, Coated, Disarmed, Clinging and Pitted Armour. The original list:
+wands, Coated, Disarmed, Clinging and Pitted Armour. Weapons and foci are
+since settled by the weapons and foci design (2026-11-17); Disarmed and
+Coated stay Later **(change W-15)**. The original list:
 
 - Slots: stacks of tonics and potions, and how supply uses slots
   **(settled as open)**.
@@ -1981,9 +2016,9 @@ elite room, which is extra by design. **(lead's call)**
 
 | Role | HP / damage / AC / attack | At-will 1 + at-will 2 (verb) | Signature | Party's answer | Profile | Guile adj. | Wave |
 |---|---|---|---|---|---|---|---|
-| **Brute** | 130% / 120% / −2 / −1 | Heavy weapon + Shove | **Charge** (cooldown 3: a straight-line move, then its at-will with advantage; from floor 2 a type may instead add +1 die, guards permitting; 6.4). Conditions under 9.2, at most 2, Shove's Prone included: the M1 brute is Bleeding claw + Shove (Prone); an M2 brute keeps Shove plus one of Grapple (Grappled) or Staggered on its limited ability, never both, and takes Bleeding only if it drops Shove. Earliest room level by guard. At most 2 per floor 1 encounter. | Kite it, use opportunity-attack zones, Prone it, punish its low AC and Will | Charger | −2 | M1 |
-| **Soldier** | 100% / 90% / +2 / 0 | Reach weapon or shield + Shove | **Interpose** reaction (`ifItChangesOutcome`: +2 AC for an adjacent ally against one attack). Challenge only as an elite (Bodyguard) **(settled source)**. At most 1 per floor 1 encounter. | Go around it (slip past), Shove it out of the doorway, piercing or acid, kill what it guards | Holder | 0 | M1 |
-| **Artillery** | 70% / 110% / −1 / 0 | Ranged (8–12) + weak melee | M2: a limited area on cooldown 3 (burst 1 or line 4), not selective; elemental riders. Never hard control. | Close distance, break line of sight, spread out, dive past the soldier | Kiter | 0 | M1 |
+| **Brute** | 130% / 120% / −2 / −1 | Heavy or two-handed weapon + Shove **(change W-5)** | **Charge** (cooldown 3: a straight-line move, then its at-will with advantage; from floor 2 a type may instead add +1 die, guards permitting; 6.4). Conditions under 9.2, at most 2, Shove's Prone included: the M1 brute is Bleeding claw + Shove (Prone); an M2 brute keeps Shove plus one of Grapple (Grappled) or Staggered on its limited ability, never both, and takes Bleeding only if it drops Shove. Earliest room level by guard. At most 2 per floor 1 encounter. | Kite it, use opportunity-attack zones, Prone it, punish its low AC and Will | Charger | −2 | M1 |
+| **Soldier** | 100% / 90% / +2 / 0 | Reach weapon or shield + Shove | **Interpose** reaction (`ifItChangesOutcome`: +2 AC for an adjacent ally against one attack), **or** a Guard-verb weapon (Parry, Set) instead, never both **(change W-5)**. Challenge only as an elite (Bodyguard) **(settled source)**. At most 1 per floor 1 encounter. | Go around it (slip past), Shove it out of the doorway, piercing or acid, kill what it guards | Holder | 0 | M1 |
+| **Artillery** | 70% / 110% / −1 / 0 | Ranged (8–12; 8–14 from floor 2, **change W-5**) + weak melee | M2: a limited area on cooldown 3 (burst 1 or line 4), not selective; elemental riders. Never hard control. | Close distance, break line of sight, spread out, dive past the soldier | Kiter | 0 | M1 |
 | **Minion** | Rank rule | Attack + a second attack or Help | Packs share one initiative slot; at most 4 per pack (2 in a solo encounter) | Areas, cleaves, chokepoints | Mob | −2 | M1 (template) |
 | **Skirmisher** | 80% / 100% / +1 / 0; speed 8 | Melee + thrown | Slips past; Disengage as its bonus action; M2 Help sets up allies (Helped) | Reach, opportunity-attack zones, Grapple, Chilled, close formation | Raider | 0 | M2 |
 | **Controller** | 90% / 70% / 0 / 0; concentrates | Damage + a minor (Chilled, Poisoned or Corroded) | One limited control ability. Hard control only where the gates allow. Carries the type's 2 conditions. At most 1 per encounter on floors 1–2. | Focus it, psychic rider, Treat, Rally | Disruptor | +2 | M2 |
@@ -2676,10 +2711,13 @@ committed wind-ups (13.2).
 
 - **Items and inventory:** the generic layer is no longer pending: see the
   items and inventory design (2026-11-16; its 16 answers 15.9). What
-  remains open moves to its category designs (items design 17): weapons,
-  armour values and Strength thresholds, starting kits, tonics, Remedy and
+  remains open moves to its category designs (items design 17): armour
+  values and Strength thresholds, starting kits, tonics, Remedy and
   flasks, scrolls and wands, Coated, Disarmed, Clinging and Pitted Armour.
-  **(change I-15)**
+  **(change I-15)** Weapons and foci are no longer pending: see the weapons
+  and foci design (2026-11-17). Disarmed and Coated stay Later; armour,
+  starting kits, consumables (coatings), scrolls and wands remain open in
+  their category designs. **(change W-15)**
 - **Death and healing** (the guards and AI depend on these):
 
 | Need | Why |

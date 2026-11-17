@@ -280,7 +280,9 @@ A Strength fighter:
 - **Techniques:** `rest` pool of 2, 3 at level 5, 4 at level 9. One is spent
   after a hit is known and before damage is rolled, so it is never wasted on
   a miss. It makes that hit carry the weapon's rider, push the target 1
-  square, or add 1d6 damage.
+  square, add 1d6 damage, or empower the weapon's verb (for example Push 2,
+  Topple with disadvantage on the save). **(change W-3, weapons design
+  7.3)**
 - **Surge:** `camp` pool of 1, 2 at level 9. One extra action this turn.
 
 A martial class has at most three named pools, not counting its capstone
@@ -364,6 +366,14 @@ Every ability declares exactly one cost **(lead's call)**:
 | Pick up or seize an item in or next to your square: to a free belt slot or matching stack, an empty spare set, or else `claimed` (unusable this fight) **(change I-5, items design 7.1)** | Free interaction |
 | Swap weapon sets (active and spare, shield included) **(change I-5, items design 5.2)** | Bonus action |
 | Opportunity attack | Reaction |
+| Off-hand attack with a light weapon, after at least one Attack-action attack this turn; Nick moves it into the Attack action, once per turn **(change W-2, weapons design 11.3)** | Bonus action, once per turn |
+| Threatened zone: an opportunity attack when a hostile leaves it by its own movement, Set when a hostile enters it from outside; they share the round's one reaction, and Disengage stops both. Movement resolves square by square, with the trigger timing of weapons design 8 **(change W-2)** | Reaction |
+| Ranged or thrown **weapon** attack with a hostile adjacent: disadvantage (spell attacks unaffected) **(change W-2, weapons design 9.2)** | Replaces one attack |
+| Loading weapon: at most one attack with it per action, bonus action or reaction **(change W-2, weapons design 9.3)** | Replaces one attack |
+| Throw: an attack mode of a thrown-capable melee weapon; it stays with the thrower, no pickup **(change W-2, weapons design 9.3)** | Replaces one attack |
+| Reach attack: passes over units, needs line of sight **(change W-2, weapons design 8)** | Replaces one attack |
+| Unarmed strike: 1 + Strength bludgeoning, no verb **(change W-2, weapons design 13)** | Replaces one attack |
+| Improvised attack: bludgeoning, each die one size smaller (minimum d4), reach 1, Strength; no verb, rider, Exploit or properties **(change W-2, weapons design 13)** | Replaces one attack |
 
 There is no Drop command, and armour and trinkets cannot be changed in
 combat. **(change I-5, items design 7.1)**
@@ -388,6 +398,9 @@ anti-goal)**
   call)**
 - Policies are set per unit, per reaction, and last for the run. Their
   defaults come from data. **(lead's call)**
+- A policy may carry a target filter (`nonMinion`), set in data and
+  changeable by the player like the policy. **(change W-4, weapons design
+  7.1)**
 - Monsters use their reactions' automatic policies; they have no "ask me".
   **(lead's call)**
 - Reactions do not nest. A reaction, a boss action or an opportunity attack
@@ -486,8 +499,13 @@ a ground zone (conditions design 11). **(change C11)**
 - At most one rider per target per ability use. It is chosen in this
   order: the first part, in data order, whose type the target is weak to
   (automatic, no save); else the first flagged part; else, on a critical
-  hit, the first damaging part.
-- An at-will's rider is attempted at most once per turn per attacker.
+  hit, the first damaging part. The verb Topple shares this save slot: if
+  a rider is attempted on that target in that use, Topple is not.
+  **(change W-4, weapons design 7.2)**
+- An at-will's rider is attempted at most once per turn per attacker. This
+  covers flagged and critical-hit riders on Cleave and Skewer second
+  targets; weak-target riders are untouched (stat model 8.2). **(change
+  W-4, weapons design 7.2)**
 - Damage dealt by a rider never triggers another rider.
 - A rider is not attempted on a target that already has that condition.
   Exceptions: the psychic rider is attempted on a concentrating target or
@@ -584,6 +602,8 @@ that when setting numbers.
   - concentration training;
   - a damage type that ignores resistance **(settled, stat model 8.4)**;
   - skill mastery **(settled)**;
+  - verb training (family): training, and so the verb, in one named
+    weapon family **(change W-3, weapons design 7.3)**;
   - timescale: one `camp` pool becomes a `rest` pool, never the unit's
     last `camp` pool. At most one per run.
 - Every offer declares `requires` tags (what build it suits) and a value in
@@ -759,7 +779,9 @@ score = expected damage (capped at the target's hit points)
   otherwise. The monster AI adds the named data-weighted terms of enemies
   design 11.1: approach, exposure, opportunity cost, range, target
   preference, focus spread, Quarry, cohesion, body-block, area spread,
-  hold and leash. **(change A-6)**
+  hold and leash. **(change A-6)** Every weapon verb adds a static
+  scorer value in hit-point equivalents. **(change W-4, weapons design
+  15.4)**
 - **Units:** every term is in hit-point equivalents. A condition's control
   value is computed (conditions design 17.3); only its `denyPct` is set in
   the condition's data. **(change C14)**
@@ -822,6 +844,8 @@ effects system:
 4. Targets locked, in unit order.
 5. For each target: attack roll or save, then damage (then any
    concentration check), then the rider attempt, then effects applied.
+   For weapon attacks this step expands into the weapon attack pipeline.
+   **(change W-4, weapons design 7.5)**
 6. Resolved.
 
 Reactions hook in at named points, such as between an attack roll and the
@@ -984,11 +1008,13 @@ Applied on 2026-11-16:
   **(change C13)**
 - **Items and inventory:** the generic layer is no longer pending. It is
   in `2026-11-16-items-inventory-design.md` (items design). What remains
-  open moves to the category designs (items design 17): weapons (with
-  weapon rider properties), armour values and Strength thresholds, starting
-  kits (class kits need a minimal starting-equipment set for M1), tonics,
-  Remedy and flasks, scrolls and wands, Coated, Disarmed, Clinging and
-  Pitted Armour. **(change I-15)**
+  open moves to the category designs (items design 17): armour values and
+  Strength thresholds, starting kits (class kits need a minimal
+  starting-equipment set for M1), tonics, Remedy and flasks, consumables
+  (coatings), scrolls and wands, Clinging and Pitted Armour. **(change
+  I-15)** Weapons and foci are no longer pending: they are in
+  `2026-11-17-weapons-design.md` (weapons design). Disarmed and Coated stay
+  Later. **(change W-15)**
 - **Enemies:** no longer pending. Monster cost is in enemies design 10.1,
   behaviour after losing sight in 12.1, morale in 14 and experience on
   resolution in 16 (`2026-11-16-enemies-design.md`). **(change A-7)**

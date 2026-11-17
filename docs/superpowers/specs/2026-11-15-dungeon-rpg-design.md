@@ -58,6 +58,9 @@ These would make the game a failure even if everything works.
   script defeats the architecture.
 - **Protected content.** No D&D name, and nothing outside the 5E SRD
   (CC-BY-4.0). Anything taken from the SRD carries the required attribution.
+  The credits carry the verbatim SRD 5.2 (weapon masteries) and SRD 5.1
+  (rarity names) CC-BY-4.0 attributions; adapted SRD records carry an
+  `adapted` flag (weapons design 19).
 
 ## 3. Constraints
 
@@ -387,6 +390,11 @@ species arrive in M4.
 Abilities, derived numbers, skills, damage types and resistances are settled
 in `2026-11-16-character-stat-model-design.md`. What that document leaves
 open is listed in its own section 12.
+
+Weapons and foci are settled in `2026-11-17-weapons-design.md`; they are no
+longer pending. Disarmed and Coated stay Later; armour, starting kits,
+consumables (coatings), scrolls and wands remain open in their category
+designs (weapons design 25, 26).
 
 - Which four classes ship first, and their feature lists.
 - All numbers: hit points, damage, experience curve, loot rates.
