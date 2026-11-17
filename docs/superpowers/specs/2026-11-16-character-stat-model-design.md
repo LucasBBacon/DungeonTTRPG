@@ -266,7 +266,7 @@ Rules behind the table:
 | Arcana | Intelligence | Identify magic items, read runes and shrines | Use scrolls and wands outside your class; recognise a spell being cast |
 | Lore | Intelligence | Know what a floor's theme is likely to hold | Reveal an enemy's traits, resistances, weaknesses and abilities |
 | Perception | Wisdom | Hear what is behind a door; spot hidden enemies | Avoid surprise; find hidden attackers; read an enemy's intent when the party's best passive Perception is at least its guile (enemies design 13.3) |
-| Medicine | Wisdom | Stretch short-rest supplies; cure poison and disease; at a short rest, Treat ends Diseased and Scarred (fixed difficulty, one attempt per Scarred unit per rest) | Get a downed companion back up; Treat (an action, adjacent): one roll against each instance's difficulty ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (conditions design 8) |
+| Medicine | Wisdom | Stretch short-rest supplies; cure poison and disease; at a short rest, Treat ends Diseased and Scarred (fixed difficulty, one attempt per Scarred unit per rest), except a talisman's `treatProof` Scarred, which is not offered and uses no attempt (consumables design 14.6; gated on the death and healing design) | Get a downed companion back up; Treat (an action, adjacent): one roll against each instance's difficulty ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (conditions design 8) |
 | Intimidation | Presence | Make weak groups back off without a fight; cow eligibility and the `broken` flag (enemies design 14.8) | Frighten enemies; break morale when a leader falls; Demand Surrender (enemies design 14.6) |
 | Leadership | Presence | Better recruits, shop prices and event outcomes | Rally: steady an ally or give them a free step |
 
@@ -460,9 +460,10 @@ Each item here is a commitment this model makes on another system's behalf.
   foci are settled in `2026-11-17-weapons-design.md`; Disarmed and Coated
   stay Later. Armour and shields, including armour values and Strength
   thresholds, are settled in `2026-11-17-armour-design.md` (its 6.2, 7.1).
-  What remains open moves to the category designs (items design 17):
-  starting kits, tonics, Remedy and flasks, consumables (coatings), scrolls
-  and wands, Clinging and Pitted Armour.
+  Consumables, scrolls and wands are settled in the consumables design
+  (2026-11-17); coatings and Coated stay Later. What remains open moves to
+  the category designs (items design 17): starting kits, Clinging and
+  Pitted Armour.
 - **Conditions.** Settled in `2026-11-16-conditions-design.md`: bleed,
   burning, slow, stagger, blind, frightened and the rest are defined there;
   this document only names them.

@@ -211,24 +211,26 @@ without migrating any data. **(agreed)**
 { "packBase": 3, "packMin": 2, "bulkySize": 2, "supplyCap": 3,
   "beltSlots": 2, "beltSlotsMax": 3, "trinketSlots": 2, "weaponSets": 2,
   "stackMax": { "potion": 3, "tonic": 3, "flask": 2, "coating": 2,
-                "remedy": 1, "scroll": 1, "wand": 1 },
+                "remedy": 1, "scroll": 1, "wand": 1, "talisman": 1 },
   "packInCombat": "action",
   "coinPerValue": 20, "minPrice": 1,
   "categoryPermille": { "weapon": 1000, "focus": 1000, "shield": 1000,
                         "armour": 1000, "trinket": 1200, "consumable": 600,
-                        "scroll": 800, "wand": 1000 },
+                        "scroll": 800, "wand": 1000, "talisman": 1500 },
   "leadershipDiscount": { "permillePerPoint": 30, "capPermille": 250 },
   "dormantAllowancePermille": 500,
   "sellPermille": 400, "scrapPermille": 100, "leftoversScope": "room",
   "roomGuardPermille": 250,
   "familyCapPerRun": { "weapon": 2, "armour": 2, "shield": 2, "focus": 2,
-                       "trinket": 1, "scroll": 2, "wand": 2, "consumable": null },
+                       "trinket": 1, "scroll": 2, "wand": 2, "consumable": null,
+                       "talisman": 1 },
   "rarity": { "common":   { "budget": 1, "props": [1, 1], "minFloor": 1 },
               "uncommon": { "budget": 2, "props": [1, 2], "minFloor": 1 },
               "rare":     { "budget": 3, "props": [2, 3], "minFloor": 3 },
               "veryRare": { "budget": 4, "props": [2, 3], "minFloor": 4, "perFloorMax": 1 } },
   "vendor": { "potionStock": [2, 3], "bases": ["item.longsword", "…"] },
   "notablesShop": [1, 2],
+  "consumables": { "potionPermille": 1000, "…": "…" },
   "trader": { "floors": [2, 4], "presencePermille": 500, "stock": [2, 3],
               "containersFloor": 1, "carriedFloor": 1,
               "pricePermille": 1250, "barterPermille": 600, "tonicMax": 1,
@@ -268,6 +270,15 @@ decisions, **not tuning**: changing them needs client approval.
 block that only the lead changes; `bigHitPermille` is tuning.
 **(change TK-11)**
 
+The `consumables` block is the consumables design's (consumables design
+18.1, full keys there, including which are not tuning). The talisman
+keys (`stackMax.talisman` 1, `categoryPermille.talisman` 1500,
+`familyCapPerRun.talisman` 1; "1 per run" is a cap, not a promise,
+consumables design 14.7) are gated on the death and healing design
+(consumables design 14.10). **(change CN-2)** `rarity.*.props` ranges apply to gear;
+a use-only record meets 19.1 rule 1 with its `use` (12.5). **(change
+CN-6)**
+
 All values *(illustr.)*, except the `ePlusGate` block and the trinket keys
 named above as not tuning. `basePrice` (supply, Remedy, mundane bases) and
 `size` stay on the records; `stackMax` is read from here by `kind`, and
@@ -289,7 +300,7 @@ how Retrieve works is a tuning change, not a redesign. **Its value
 | **Spare weapon set** (1) | A second full loadout, shield included. This is what "a spare weapon" means (change I-7). It is **empty** only when both hands are empty. | No | The settled **bonus action** swaps the two whole sets, so it is always clear where the shield goes |
 | **Armour** (1) | Body armour | No | Passive. Cannot be changed in combat. |
 | **Trinkets** (2) | Worn items: rings, amulets, charms, cloaks, helms, gloves, boots; at most one per body location (rings two); never AC (armour design 5.4) **(change AR-30)** | No | Passive plus granted abilities. Cannot be changed in combat. |
-| **Belt** (2; a feature or offer may add a 3rd; hard maximum 3) | `beltable` items only: consumables, scrolls and wands, one stack per slot | No | **The only place consumables, scrolls and wands are used from in combat** |
+| **Belt** (2; a feature or offer may add a 3rd; hard maximum 3) | `beltable` items only: consumables (not Remedy), scrolls, wands and talismans, one stack per slot **(change CN-1; talismans gated on the death and healing design)** | No | **The only place consumables, scrolls, wands and talismans are used from in combat** |
 | **Pack**: max(2, 3 + Strength) slots | Anything. Size-1 items cost 1 slot; bulky items cost 2. Bulky means two-handers, armour and shields, and only while in the pack. Occupancy is the sum of sizes; a pack index is only an ordering key. | It is the pack | Only through Retrieve (an action) |
 
 Pack sizes *(illustr.)*: Strength −1 gives 2, 0 gives 3, +1 gives 4, +3
@@ -413,13 +424,14 @@ per unit). Only the placement rule and two sentences of enemies 15.5 and
 
 | Act | In combat | Out of combat |
 |---|---|---|
-| Use a belt item | Its declared cost. **(settled)** Potion: bonus action. Tonic on yourself: bonus action (minor) or action (major). Tonic thrown at an ally: action, minor only. Scroll or wand in class: its ability's cost. Outside your class: action + trained Arcana; a failure uses it up. | As any exploration action. Buffs obey the 10-turn cap. |
-| **Administer** a belt potion or tonic to an adjacent ally (a trinket reach step may extend "adjacent" to 2 squares; trinkets design 6.1) **(change TK-28)** | The giver's **action**. The receiver spends nothing. Tonics are **minor only**, as when thrown. A potion does **not** lift Downed. **Its purpose** is a receiver that cannot act or whose bonus action is committed; when the receiver could drink a handed-over dose itself, the button carries the hint "Hand over is cheaper". **(lead's call)** | As above |
+| Use a belt item | Its declared cost. **(settled)** Potion: bonus action. Tonic on yourself: bonus action (minor) or action (major). Tonic thrown at an ally: action, range `throwAllyRange`, minor only. Scroll or wand in class (the reader's class is in `classTags`, any spell on its list): its ability's cost; no slot is spent; a scroll casts at its own tier and is never upcast. Outside your class: action + trained Arcana against 10 + tier; a failure uses it up. **(change CN-3)** | As any exploration action. Buffs obey the 10-turn cap. |
+| **Administer** a belt potion or tonic to an adjacent ally (a trinket reach step may extend "adjacent" to 2 squares; trinkets design 6.1) **(change TK-28)** | The giver's **action**. The receiver spends nothing. Tonics are **minor only**, as when thrown. A potion does **not** lift Downed. Not on a Downed unit (a potion or healing scroll; a tonic stays legal, minor only) **(change CN-3)**. **Its purpose** is a receiver that cannot act or whose bonus action is committed; when the receiver could drink a handed-over dose itself, the button carries the hint "Hand over is cheaper". **(lead's call)** | As above |
+| **Potion thrown at an ally** | The thrower's **action**, range 5 (`potionThrowRange`), line of sight, no roll, a willing ally only, never yourself; heals `thrownPotionPermille`. It never lifts Downed and is not used on a Downed unit (consumables design 11). **(change CN-4, agreed 2026-11-17, Q4; change CN-3)** | Not offered (Hand over is free) |
 | Swap weapon sets | Bonus action **(settled)** | Free |
 | Pick up or seize an item in or next to your square | **Free interaction (settled); it always succeeds.** A consumable goes to a free belt slot or a matching stack. A weapon goes to an empty spare set; wielding it is the set swap (bonus action, settled). Otherwise the item (or a stack's remainder, 6.2) becomes **claimed**: the unit holds it, it is unusable this fight, and it is resolved at the summary. Disarm seizure (enemies 15.5) therefore always works for a full unit. **If the party flees**, every claimed item goes to the flee pile in its room (`ItemLeft`); belt and spare-set pickups stay where they are. **(lead's call)** | n/a (out-of-combat loot comes through a summary) |
-| **Hand over** to an adjacent ally (a trinket reach step may extend "adjacent" to 2 squares; trinkets design 6.1) **(change TK-28)** | The giver's free interaction. **Only from the belt or the weapon sets, never from the pack.** One dose moves at a time. It lands on the receiver's belt or empty spare set, or is refused with a reason. | Free, at any distance, through the party view |
-| **Take from a Downed adjacent ally** | The taker's free interaction. Belt or weapon-set items only. Lets the party recover the last heal. | Free |
-| **Retrieve**: pack to belt or to an empty spare set | **Action** (`packInCombat: action`, a client decision). Were `freeOncePerFight` ever approved, the unit's fight state carries `retrieveFreeUsed`, cleared at combat start. | Free |
+| **Hand over** to an adjacent ally (a trinket reach step may extend "adjacent" to 2 squares; trinkets design 6.1) **(change TK-28)** | The giver's free interaction. **Only from the belt or the weapon sets, never from the pack.** Never a talisman in combat **(change CN-3, gated on the death and healing design)**. One dose moves at a time. It lands on the receiver's belt or empty spare set, or is refused with a reason. | Free, at any distance, through the party view |
+| **Take from a Downed adjacent ally** | The taker's free interaction. Belt or weapon-set items only; never a talisman in combat **(change CN-3, gated on the death and healing design)**. Lets the party recover the last heal. | Free |
+| **Retrieve**: pack to belt or to an empty spare set | **Action** (`packInCombat: action`, a client decision). Were `freeOncePerFight` ever approved, the unit's fight state carries `retrieveFreeUsed`, cleared at combat start. Never a talisman in combat **(change CN-3, gated on the death and healing design)**. | Free |
 | Belt to pack; reshuffling | Not allowed | Free |
 | Equip or remove armour or trinkets | Not allowed (`NotInCombat`) | **Only at a short rest, at camp, or with "Equip now" on a newly taken item at its summary** **(agreed)**. "Newly taken" means the item's first entry into the party this run (8.3). |
 | Drop | **No command** | No command. Items are shed by Leave or Swap at a summary, Sold at camp, or bartered (Later). |
@@ -454,7 +466,8 @@ Every greyed button names one reason **(settled, ability model 15.4)**:
 `SupplyFull`, `OutOfStock`, `CampChoiceMade`, `LocationOccupied`,
 `ReactionCap`, `ButtonCap`, `DuplicateAnswer`, `AlreadyWarded`,
 `AlreadyWardedThisFight`, `TrinketHelpedLimit` (trinkets design 15)
-**(change TK-10)**, and Later `ServiceUsed` and `NotBarterable`. `Untrained`
+**(change TK-10)**, `FlaskThisTurn` (consumables design 18.4) **(change
+CN-9)**, and Later `ServiceUsed` and `NotBarterable`. `Untrained`
 also covers armour and shield training (armour design 7.2, 16.3)
 **(change AR-33)**. `DeadLine` is a warning verdict, never a suppression
 (trinkets design 15) **(change TK-10)**.
@@ -686,7 +699,13 @@ deterministic. The run state keeps the per-family count.
 - **Pegs:**
   - healing per coin from potions is always **below** what a supply buys
     (one short rest's Recovery for the whole party), so coin cannot replace
-    the agreed attrition limit;
+    the agreed attrition limit. **P1:** `supply.basePrice × potionPermille ≤
+    potionPrice × pegMarginPermille`, checked at party size 1 on camp
+    prices after the Leadership discount and `minPrice` (consumables
+    design 9.3) **(change CN-5)**;
+  - **P2:** the Remedy price is above the supply price **(change CN-5)**;
+  - **P4:** the basic vendor never sells a damage record **(change
+    CN-5)**;
   - tonic and Remedy prices are the condition-economy knob (conditions 22:
     "tonic supply becomes the real balance knob").
 - Every vendor- or camp-sellable record has a price above 0 (19.1).
@@ -712,12 +731,16 @@ slots, camp-only and run-scoped. **(lead's call for the revisit shape)**
 
 ### 10.8 Anti-hoarding (consumables)
 
-- **Belt cap:** only the belt is cheap to use in combat.
+- **Belt cap:** only the belt is cheap to use in combat. Out of combat the
+  pack, not the belt, holds scrolls, so the belt does not bound them
+  (consumables design 8). **(change CN-9)**
 - **`stackMax` per kind.**
 - **No stash.**
 - **Limited potion stock per camp,** pre-rolled.
 - **Potion healing per coin below supply.**
 - **The companion scorer suggests "drink it"** when it values the potion.
+- **Automatic triggers** for insurance (the talisman, gated on the death
+  and healing design; consumables design 14) **(change CN-9)**.
 - **A simulator report** of consumables unused at each camp, and of
   coin-funded against supply-funded HP (19.3).
 
@@ -942,28 +965,28 @@ family: { id: "family.longsword", category: "weapon", improvised: {...},
 | `id`, `nameKey`, `flavourKey` | string | Stable ID and localisation keys |
 | `family` | `family.*` | Cap key, duplicate rerolls, `improvised`, default monster profile |
 | `base` | item ID or null | The mundane base it builds on. Null for mundanes and consumables. |
-| `category` | enum | weapon, focus, shield, armour, trinket, consumable, scroll, wand, key; `supply` is a counter record only, never instantiated (5.3) |
+| `category` | enum | weapon, focus, shield, armour, trinket, consumable, scroll, wand, talisman (**change CN-1**, gated on the death and healing design), key; `supply` is a counter record only, never instantiated (5.3) |
 | `kind` | enum (consumables) | potion, tonic, flask, coating, remedy |
 | `tags[]` | strings | Read by effects and offers: `twoHanded`, `versatile`, `thrown`, `fire`, `bulky`… |
 | `rarity` | enum | mundane, common, uncommon, rare, veryRare (12.5) |
-| `channels[]` | enum | container, carried, boss, camp (the shop and the camp reward card, 10.4), vendor, kit, boon; `trader` (Later, 10.9) |
+| `channels[]` | enum | container, carried, boss, camp (the shop and the camp reward card, 10.4), `campReward` (the camp reward card only, never the notables shop) **(change CN-1)**, vendor, kit, boon; `trader` (Later, 10.9) |
 | `minFloor`, `maxFloor?` | int | Depth gates |
 | `size` | 0, 1 or `bulkySize` | Pack cost. 0 = party counter; `bulkySize` (2) = bulky. Stack size is not on the record: `stackMax` by `kind` in `inventory.json`, 1 for gear. |
 | `equip.slot` | enum | mainHand, offHand, either, twoHand, armour, trinket, none. A focus's `hands` maps `off`, `main` and `two` to `off`, `main` and `twoHand` (bulky) (weapons design 11.1; change W-6). |
-| `beltable` | bool | Only for consumable, scroll and wand. A wand is used from the belt, never wielded. |
+| `beltable` | bool | Only for consumable, scroll, wand and talisman; Remedy is not beltable **(change CN-1)**. A wand is used from the belt, never wielded. |
 | `requirements` | object | `strength {min, mode}`, `training {group, mode}`; `hard` = cannot be equipped, `soft` = a named penalty set by the category design. Weapon and focus items write neither: training lives on the family, and Strength comes from the family's `strengthClass` through `weapons.json` (weapons design 10, 20.1; change W-6). |
-| `classTags[]` | strings | Scrolls and wands: which classes use it "in class" |
+| `classTags[]` | strings | Scrolls and wands: which classes use it "in class"; real class ids only **(change CN-1)** |
 | `requires[]` | build tags | Smart-loot weighting (the offers vocabulary) |
 | `usableBy` | object | `party`, `monster`, `monsterTags[]` |
 | `properties` | object | `fixed[]`, `rollable {table, count}`, `hiddenMax` (0 or 1; 0 below Uncommon). Every rollable table declares one `entryValue` that all its entries equal. |
 | `grants` | object | `whileEquipped[]` (effects), `whileCarried[]` (rare: party-wide), `abilities[] {ability, cost, pool}` |
-| `use` | object | `{ability, targets[] {mode: self \| adjacentAlly \| thrown, cost, tierLimit?}, difficulty: user \| fixed:N}`. One entry per way to use it, each with its own cost. |
+| `use` | object | `{ability, targets[] {mode: self \| adjacentAlly \| thrown, cost, tierLimit?}, difficulty: user \| fixed:N}`. One entry per way to use it, each with its own cost. Each entry also declares `side` (self \| ally \| enemy \| any) and `area` (unit \| burst:N), and optionally `range` and `potencyPermille` (`int` or a tuning-key reference); beneficial is derived from `side`. `use` gains `trigger` (talisman only; always automatic; gated on the death and healing design). `difficulty` is unchanged (consumables design 18.2). **(change CN-1)** |
 | `pools[]` | object | `{id, max, refill: never \| rest \| camp}` |
 | `charges` | `{min, max}` | Wands: the pre-rolled charge range |
 | `identifyDifficulty` | int | Compared with the party's passive Arcana (section 11) |
 | `curse?` | object (Later) | `{variant: clinging, cost: prop.*}` |
-| `monsterProfile?` | object | `{effects, abilityShape: uses:N \| cooldown, useWhen, minFloor}`; overrides the family default |
-| `value` | int, checked at load | Σ fixed property values + rollable `count` × the table's `entryValue` + Σ values of the `use` ability and granted abilities, in offer-value units (12.6). Every roll gives the same value. A trinket button is a property whose effect is the grant; its value is counted once, inside that property (trinkets design 9.2) **(change TK-12)**. |
+| `monsterProfile?` | object | `{effects, abilityShape: uses:N \| cooldown, useWhen, minFloor}`; overrides the family default. `useWhen` is a closed vocabulary (consumables design 15) **(change CN-1)** |
+| `value` | int, checked at load | Σ fixed property values + rollable `count` × the table's `entryValue` + Σ values of the `use` ability and granted abilities, in offer-value units (12.6). Every roll gives the same value. A trinket button is a property whose effect is the grant; its value is counted once, inside that property (trinkets design 9.2) **(change TK-12)**. Each `ability.item.*` declares its offer value; the load check compares a scroll's value with its tier, a wand's with `wandValue(tier, pool max)`, and every other use-only record's with its rarity budget (consumables design 9.1) **(change CN-6)**. |
 | `basePrice?` | int | Required for mundane and shop-only records (supply, Remedy) |
 | `flags` | set | signature, heirloom, unsellable, noSteal, unique, srd (with `srdSource`) |
 | `display` | object | iconId, modelId, glint; `socket` (`head \| back \| none`, trinkets) (change AR-35). Never read by the rules. |
@@ -1010,7 +1033,9 @@ recommendation)**
 Budgets, property counts and depths *(illustr.)* live in
 `inventory.json` (`rarity`). **A record's `value` equals its tier's budget
 exactly** (curse cost excluded), so rarity always means the same amount of
-power. **(lead's call)**
+power. **(lead's call)** The `props` ranges apply to gear; a use-only
+record meets 19.1 rule 1 with its `use` (consumables design 9.1).
+**(change CN-6)**
 
 - **Signature items are independent of rarity.** A boss signature item uses
   the floor's top allowed tier plus one hand-authored property, so its
@@ -1033,8 +1058,12 @@ ability model 10.2):
   button is a property whose effect is the grant, and its value is
   counted once, inside that property; capacity: +1 pack = value 1, +2 =
   value 2 (trinkets design 9.2, 14.1) **(change TK-12)**;
-- **consumables, scrolls and wands:** the value of the `use` ability, from
-  a use-value table owned by the consumables design.
+- **consumables, scrolls, wands and talismans:** the value of the `use`
+  ability, from a use-value table owned by the consumables design
+  (consumables design 9.1). Each `ability.item.*` declares its value; the
+  load check compares a scroll's with its tier, a wand's with
+  `wandValue(tier, pool max)`, every other use-only record's with its
+  rarity budget; Remedy keeps its `basePrice` **(change CN-6)**.
 
 The same number drives loot weighting, cost add, and (through the assessed
 value of 10.5 while a property is dormant) shop price, Sell and Scrap
@@ -1251,8 +1280,8 @@ is original, so it carries no `srd` flag.
 | 1 | **Weapons (with foci)** | M1 | **Designed:** `2026-11-17-weapons-design.md` (weapons design), approved 2026-11-17, which adopts the no-ammunition-tracking recommendation (weapons design 9.4). Disarmed and Coated stay Later. **(change W-15)** |
 | 2 | **Armour and shields** | M1 | **Designed:** `2026-11-17-armour-design.md` (armour design), approved 2026-11-17, which takes the weapons design 17.9 inputs **(change W-13)**. Pitted Armour and the tower shield stay Later. **(change AR-37)** |
 | 3 | **Starting kits** (small; may fold into 1 and 2) | M1 | `kit` records per class and per companion: weapon sets, armour, belt contents, starting coin. Answers ability model 20's "a minimal starting-equipment set for M1". Armour kits as in armour design 13.6 **(change AR-37)**. |
-| 4 | **Consumables** (potions, tonics, flasks, coatings, Remedy) | M1 potions; M2 rest | Effects, `stackMax`, the use-value table, prices and pegs against supply, thrown flasks (bombs, oil, water; Oiled and Soaked), whether potions can be thrown (default no), Coated (Later), monster `useWhen`, banding |
-| 5 | **Scrolls and wands** | M2 | `classTags[]`, `use.difficulty: user \| fixed:N`, wand charge ranges and `camp` refill, the out-of-class Arcana rule (settled), property shapes |
+| 4 | **Consumables** (potions, tonics, flasks, coatings, Remedy) | M1 potions; M2 rest | **Designed:** `2026-11-17-consumables-design.md` (consumables design), approved 2026-11-17 **(change CN-8)**: effects, `stackMax`, the use-value table, prices and pegs against supply, thrown flasks, monster `useWhen`, banding. Potions can be thrown at a willing ally: action, range 5, `thrownPotionPermille`, never lifts Downed (consumables design 11) **(change CN-4)**. Coatings and Coated stay Later. |
+| 5 | **Scrolls and wands** | M2 | **Designed:** in the consumables design (section 13), approved 2026-11-17 **(change CN-8)** |
 | 6 | **Trinkets** | M2 | **Designed:** `2026-11-17-trinkets-design.md` (trinkets design), approved 2026-11-17. Piece tables by location, jewellery tables by kind (trinkets design 14.1), capacity table **(change TK-9)**, capacity trinkets (at most +2), trinket families and caps. From the armour design **(change AR-37)**: piece kinds; location domains (armour design 5.6); the strict no-AC rule; the one-table rule; the reaction cap; pieces at Uncommon at most; at least 3 legal families per piece location per wave; `requires` tags for location hunger (armour design 5.7); the piece power target (armour design 17.3) |
 | 7 | **Heirlooms** | M3 | The template list, at Uncommon, banded |
 | 8 | **Curses** | Later | The variants used as item costs, the Clinging flow, cursed carriers, the "malign" hint |
@@ -1334,6 +1363,11 @@ are unit conditions.
   `ItemRevealed`, `ItemLeft`, `ItemSold`, `ItemBought`, `ItemScrapped`,
   `ItemDestroyed{reason: usedUp | lost}`, `ItemRecharged` (camp, and Later
   the trader), `ItemReturned` (Disarmed, Later); Later `ItemBartered`.
+- Consumable events (consumables design 18.4): `ItemUsed` gains `mode:
+  self | adjacentAlly | thrown | inClass | outOfClass`; new
+  `ItemReadFailed{instance, unit}` and `ItemTriggered{instance, unit,
+  trigger}` (the talisman, gated on the death and healing design)
+  **(change CN-9)**.
 - New trinket event: `TrinketPropertyFired{property, instanceId, unit,
   result}` (trinkets design 17.3) **(change TK-15)**.
 - New state events **(lead's call)**: `CoinChanged{delta, source: found |
@@ -1381,7 +1415,9 @@ The build fails on any violation:
    0.
 3. Every property passes the buff test. No bare always-on numeric
    modifiers; nothing raises an ability past +5.
-4. Pool refills: consumables `never`, wands `camp` (the trader's Recharge
+4. Pool refills: consumables `never`, talismans `never` (a derived stack
+   pool and no other pool; gated on the death and healing design) **(change
+   CN-7)**, wands `camp` (the trader's Recharge
    is the one named exception, Later, change I-16), `rest` only with an
    authoring reason. Trinkets: `rest` and `fight` by default; `camp` only
    at Rare; never `never`. Trinket `fight` uses use the armour 16.3
@@ -1389,7 +1425,8 @@ The build fails on any violation:
 5. `size` ∈ {0, 1, `bulkySize`}. Two-handers, armour and shields are
    bulky. Size 0 only for party-counter categories (`supply`, `key`).
    Records carry no `stackMax` (5.1).
-6. `beltable` ⇒ category ∈ {consumable, scroll, wand}. No record is both
+6. `beltable` ⇒ category ∈ {consumable, scroll, wand, talisman} **(change
+   CN-7)**. No record is both
    beltable and hand-equippable.
 7. `monsterProfile` (own or family default) exists exactly when
    `usableBy.monster`. On the reference standard carrier for `minFloor`,
@@ -1398,10 +1435,11 @@ The build fails on any violation:
    reference carriers are test-only records in the items test content,
    `ref.carrier.standard.f{N}`, built from the enemies 6.2 standard row
    at floor N's standard room level. **(lead's call)**
-8. Consumable buffs last 10 turns or fewer. Floor-1 carried consumables are
-   self-targeting (settled, enemies 15.3).
-9. Curses only on Rare or higher, never on signature, heirloom or
-   consumable records.
+8. Buffs on consumable, scroll, wand and talisman records last 10 turns
+   or fewer; no concentration on non-spell consumables **(change CN-7)**.
+   Floor-1 carried consumables are self-targeting (settled, enemies 15.3).
+9. Curses only on Rare or higher, never on signature, heirloom,
+   consumable, scroll, wand or talisman records **(change CN-7)**.
 10. Heirlooms: `unsellable`, `noSteal`, `identifyDifficulty` 0, uncursed.
 11. Every weapon family has an `improvised` attack. Family caps resolve.
 12. Records flagged `srd` cite `srdSource`. Infinite-storage records are
@@ -1458,6 +1496,11 @@ Rules 15–28 are summaries; the full text is trinkets design 18.1.
 Armour design 17.1 rules 10, 11, 13, 14 and 17 also apply (bulky armour
 and shields and no AC on trinkets; one table, one property; name
 collisions; hooks and dead properties; piece rules). **(change AR-38)**
+
+Consumables design 19.1 rules 1–16 also apply (consumables, scrolls,
+wands, coatings (Later), value and pegs, `useWhen` and tuning
+references); its talisman rule is gated on the death and healing design.
+**(change CN-7)**
 
 ### 19.2 Run-time invariants and tests
 
@@ -1526,6 +1569,8 @@ Tests:
 | Later: wand charges used per floor, with and without a Recharge trader | Recharge adds at most one wand's charges per trader floor |
 
 Trinket reports: see trinkets design 18.3 **(change TK-17)**.
+Consumable, scroll, wand and talisman reports: see consumables design
+19.3 **(change CN-9)**.
 
 ## 20. Staging
 
@@ -1554,7 +1599,10 @@ Trinket reports: see trinkets design 18.3 **(change TK-17)**.
   - trinkets, including worn-piece kinds, and capacity trinkets
     **(change AR-39)**; trinkets settled in the trinkets design
     (`2026-11-17-trinkets-design.md`, 19) **(change TK-16)**;
-  - tonics, flasks, scrolls and wands with camp refill;
+  - tonics, flasks, scrolls and wands with camp refill; consumables staged
+    as in the consumables design (`2026-11-17-consumables-design.md`,
+    20), the Reprieve Phial gated on the death and healing design
+    **(change CN-9)**;
   - rarity tiers and banded properties;
   - dormant properties and Arcana identification;
   - coin, the basic vendor, the notables shop or reward card, Sell;
@@ -1691,15 +1739,17 @@ mundane bases are not loot, and family caps all stand.
   use-value table and price peg. The generic layer fixes only their shape.
   Weapons and foci are no longer pending: see the weapons design
   (`2026-11-17-weapons-design.md`). Disarmed and Coated stay Later;
-  starting kits, consumables (coatings), scrolls and wands remain open in
-  their category designs. **(change W-15)** Armour and shields are no
+  starting kits remain open in their category designs. **(change W-15)** Armour and shields are no
   longer pending: see the armour design (`2026-11-17-armour-design.md`),
   which also fixes the armour part of starting kits (13.6) and hands
   worn-piece kinds to the trinkets design. **(change AR-39)** Trinkets
   are no longer pending: see the trinkets design
   (`2026-11-17-trinkets-design.md`), which settles the trinket category,
   worn pieces included; what it still needs is in its section 23.
-  **(change TK-16)**
+  **(change TK-16)** Consumables, scrolls and wands are no longer pending:
+  see the consumables design (`2026-11-17-consumables-design.md`);
+  coatings and Coated stay Later, and what it still needs is in its
+  section 24. **(change CN-8)**
 - **Death and healing:** whether companions can die (15's conditional
   rule); whether any healing lifts Downed (Administer assumes potions do
   not).

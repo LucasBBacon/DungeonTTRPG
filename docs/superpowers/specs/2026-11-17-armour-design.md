@@ -1251,6 +1251,11 @@ warhammer-and-shield soldier, the sling artillery and the claw brute.
 | Reprisal (element) | charge | 1 / 1 / 2 per rest, reaction when a melee attack hits you: the attacker takes 1d6 / 2d6 / 3d6 of the element (counts under the reaction cap) | M2 |
 | Last Ward | charge (`camp`) | 1 per camp: a hit that would drop you to 0 HP misses instead; Rare and above | Later (depends on death and healing) |
 
+**Last Ward (Later; gated on the death and healing design; change
+CN-23):** owner and order with the talisman: death and healing design;
+recommended narrowed (for example once per run) (consumables design
+14.3, 14.9).
+
 ### 14.4 Armour verb signatures `props.averb.<verb>` (value 1)
 
 | Verb | Signature |

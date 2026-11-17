@@ -242,6 +242,11 @@ make one camp spend during each unit's turn, whether on its own turn or as a
 reaction on another's. Each unit's "camp spend used" flag clears at the start
 of every unit's turn. Out of combat it clears every tick (6.8).
 
+**(agreed; change CN-11, consumables design 13.5)** A scroll read (in or
+out of class, including a failed attempt) uses the unit's camp spend for
+that turn: it is greyed if the flag is set, and sets it when its cost is
+paid. (A wand charge is already a camp spend: its pool is `camp`.)
+
 A pool changed to `rest` by the timescale offer no longer counts as a camp
 spend.
 
@@ -354,15 +359,17 @@ Every ability declares exactly one cost **(lead's call)**:
 | Study an enemy: Lore | Bonus action, once per enemy type per fight |
 | Recognise a spell being cast: Arcana | `none`: a threshold with no roll |
 | Get a downed companion up: Medicine, trained only **(settled)** | Action |
-| Treat: Medicine, one roll against each curable instance's recorded difficulty; ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (Diseased and Scarred only during a short rest) **(agreed; change C4, conditions design 8)** | Action, adjacent |
+| Treat: Medicine, one roll against each curable instance's recorded difficulty; ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (Diseased and Scarred at a rest, except a `treatProof` Scarred **(gated on the death and healing design)**) **(agreed; change C4, conditions design 8; change CN-12, consumables design 14.6)** | Action, adjacent |
 | Disarm or re-arm a trap: Mechanics, trained only **(settled)** | Action |
 | Trigger a known trap against enemies: Mechanics | Action |
-| Use a scroll or wand outside your class: Arcana, trained only **(settled)** | Action. A failed check uses the scroll or charge up: no free retries **(settled)**. |
+| Use a scroll or wand outside your class: Arcana, trained only, against 10 + tier; in class, no slot is spent **(settled; change CN-12, consumables design 13.2)** | Action. A failed check uses the scroll or charge up: no free retries **(settled)**. |
 | Drink a potion (a potion on your own belt) **(change I-5, items design 7.1)** | Bonus action |
-| Administer a belt potion or tonic to an adjacent ally: tonics minor only; a potion does not lift Downed (a trinket reach step may extend 'adjacent' to 2 squares; trinkets design 6.1) **(change I-5, items design 7.1; change TK-19)** | Action (the giver's); the receiver spends nothing |
-| Hand over to an adjacent ally, from the belt or the weapon sets only, never the pack (a trinket reach step may extend 'adjacent' to 2 squares; trinkets design 6.1) **(change I-5, items design 7.1; change TK-19)** | The giver's free interaction |
-| Take from a Downed adjacent ally, belt or weapon-set items only **(change I-5, items design 7.1)** | Free interaction |
-| Retrieve: pack to belt or to an empty spare set **(change I-5, items design 7.1)** | Action (`packInCombat` flag) |
+| Administer a belt potion or tonic to an adjacent ally: tonics minor only; a potion does not lift Downed; not a potion or healing scroll on a Downed unit (a trinket reach step may extend 'adjacent' to 2 squares; trinkets design 6.1) **(change I-5, items design 7.1; change TK-19; change CN-12, consumables design 11)** | Action (the giver's); the receiver spends nothing |
+| Throw a belt potion at an ally: range 5, line of sight, no roll, `thrownPotionPermille`; never lifts Downed; not on a Downed unit **(agreed; change CN-12, consumables design 11)** | Action |
+| Throw a belt flask: range 5, no attack roll; at most one offensive flask per turn **(change CN-12, consumables design 12)** | Action |
+| Hand over to an adjacent ally, from the belt or the weapon sets only, never the pack; never a talisman in combat **(gated on the death and healing design)** (a trinket reach step may extend 'adjacent' to 2 squares; trinkets design 6.1) **(change I-5, items design 7.1; change TK-19; change CN-12, consumables design 14)** | The giver's free interaction |
+| Take from a Downed adjacent ally, belt or weapon-set items only; never a talisman in combat **(gated on the death and healing design)** **(change I-5, items design 7.1; change CN-12, consumables design 14)** | Free interaction |
+| Retrieve: pack to belt or to an empty spare set; never a talisman in combat **(gated on the death and healing design)** **(change I-5, items design 7.1; change CN-12, consumables design 14)** | Action (`packInCombat` flag) |
 | Pick up or seize an item in or next to your square: to a free belt slot or matching stack, an empty spare set, or else `claimed` (unusable this fight) **(change I-5, items design 7.1)** | Free interaction |
 | Swap weapon sets (active and spare, shield included) **(change I-5, items design 5.2)** | Bonus action |
 | Shield bash (the Shield kind, in the active set; bucklers, Reliquary and tower shields have none): 1d4 bludgeoning, Push; Strength + proficiency to hit, Strength to damage; not an off-hand attack **(change AR-7, armour design 10.2)** | Replaces one attack |
@@ -1027,14 +1034,16 @@ Applied on 2026-11-16:
 - **Items and inventory:** the generic layer is no longer pending. It is
   in `2026-11-16-items-inventory-design.md` (items design). What remains
   open moves to the category designs (items design 17): starting kits
-  (class kits need a minimal starting-equipment set for M1), tonics,
-  Remedy and flasks, consumables (coatings), scrolls and wands, and
+  (class kits need a minimal starting-equipment set for M1) and
   Clinging. **(change
   I-15)** Weapons and foci are no longer pending: they are in
   `2026-11-17-weapons-design.md` (weapons design). Disarmed and Coated stay
   Later. **(change W-15)** Armour and shields are no longer pending:
   armour values, Strength thresholds and Pitted Armour (Later) are in
   `2026-11-17-armour-design.md` (armour design). **(change AR-10)**
+  Consumables, scrolls and wands are settled in the consumables design
+  (`2026-11-17-consumables-design.md`, 2026-11-17); coatings and Coated
+  stay Later. **(change CN-26)**
 - **Enemies:** no longer pending. Monster cost is in enemies design 10.1,
   behaviour after losing sight in 12.1, morale in 14 and experience on
   resolution in 16 (`2026-11-16-enemies-design.md`). **(change A-7)**

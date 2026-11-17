@@ -904,6 +904,13 @@ Deterministic:
    then any returned trader slots on the containers channel, then wand
    charges, the camp channel, the trader's tonic (moved from the
    containers channel, no draw) and its service (items design 10.9).
+   **The Reprieve Phial is never a weighted draw.** One pre-roll per run,
+   on the loot stream, decides whether it appears, its floor and its
+   channel; it replaces one notable draw of that floor and channel (a
+   `campReward` phial takes a container draw of that floor). A declined
+   offer is lost for the run (consumables design 14.7). While gated, the
+   pre-roll still runs but places nothing (consumables design 10).
+   **(change CN-27; gated on the death and healing design)**
 4. **Carrier reservation** (no random draw): each enemy-carried item takes
    the first free carrier room in a fixed order: the optional elite room,
    then the lair, then guard posts by main-path index, then the patrol.
@@ -1773,8 +1780,10 @@ reward card is a separate screen and does not count.
    comes only from each item's record. The split is about 40% containers
    and secrets, 40% enemy-carried, 20% boss. Illustratively, 6–8 notables
    per floor, of which 2–3 are enemy-carried, plus 1–2 supply and a few
-   tonics. Enemies carry *part of* this budget and never add to it.
-   **(change M-5)** **M1's split** is its own: containers, at most 1
+   sundries (Common consumables, outside the notable count, inside the
+   fixed budget; from floor 2 at least 1 offensive flask; consumables
+   design 10). Enemies carry *part of* this budget and never add to it.
+   **(change M-5; change CN-19)** **M1's split** is its own: containers, at most 1
    enemy-carried weapon or armour notable, and the boss's signature item.
    **(lead's call)** The budget also holds a **`camp` channel** (1–2
    notables, *illustr.*) for the next camp's notables shop, drawn whether
@@ -1795,6 +1804,12 @@ reward card is a separate screen and does not count.
    and flagged `substituted`, so the per-channel count still balances.
    **Later (change I-14):** a trader slot is never substituted; it returns
    to the containers channel (items design 10.9).
+   **The Reprieve Phial is never a weighted draw.** One pre-roll per run,
+   on the loot stream, decides whether it appears, its floor and its
+   channel; it replaces one notable draw of that floor and channel (a
+   `campReward` phial takes a container draw of that floor). A declined
+   offer is lost for the run (consumables design 14.7). **(change CN-27;
+   gated on the death and healing design)**
 3. **Carrier rooms are reserved before composition** (10.5 step 4). That
    room is filled against its budget minus the item's cost add, so the
    item makes its carrier more dangerous without breaking the budget (10.5
@@ -1833,17 +1848,18 @@ reward card is a separate screen and does not count.
 
 ### 15.4 Carriers use what they carry
 
-**(agreed)** Each item declares a `monsterProfile`.
+**(agreed)** Each item declares a `monsterProfile`. **(change CN-20,
+client-approved 2026-11-17; consumables design 15)**
 
 | Item kind | On the carrier | AI use | What the party gets |
 |---|---|---|---|
 | Rider or property weapon | Its weapon at-will gains the property or rider flag. A property's pool maps to uses for the monster's life: `rest` N and `camp` N become `uses:N`; `never` and `fight` become `uses:1` **(change W-5; weapons 15.2)** | Normal | The weapon |
 | Notable armour or shield | Its effect applies, inside the threat band | Passive | The armour |
-| Healing potion | `uses:1` bonus-action self-heal | Only at or below 50% HP | Nothing if drunk |
+| Healing potion | `uses:1` bonus-action self-heal; heals `monsterPotionPermille` of max HP | Only at or below 50% HP | Nothing if drunk |
 | Tonic | `uses:1` cure of its own worst condition | When it holds a major condition | The tonic if unused |
-| Bomb or flask (floor 2+) | `uses:1` thrown area, opener-flagged | Normal | The bomb if unused |
+| Bomb or flask (floor 2+) | `uses:1` thrown area **or a single party unit**; bombs opener-flagged; setup flasks by `useWhen` | Normal | The bomb if unused |
 | Wand | `uses:N`, with charges pre-rolled | With thrift | The wand with its remaining charges, refilled at camp **(settled `camp` tag)**; *Later:* a wandering trader's paid Recharge also resets one wand's `camp` pool, once per trader (change I-16; items design 10.9) |
-| Scroll | `uses:1`, caster-tagged carriers only | Normal | The scroll if unused |
+| Scroll | `uses:1`, caster-tagged carriers only; the carried spell passes the 6.4 guards on the reference carrier | Normal | The scroll if unused |
 
 - **What is used is gone.** That creates a kill-the-carrier-first choice,
   the DCSS lesson.
@@ -1991,7 +2007,9 @@ wands, Coated, Disarmed, Clinging and Pitted Armour. Weapons and foci are
 since settled by the weapons and foci design (2026-11-17); Disarmed and
 Coated stay Later **(change W-15)**. Armour values, Strength thresholds
 and Pitted Armour (Later) are since settled by the armour and shields
-design (2026-11-17) **(change AR-29)**. The original list:
+design (2026-11-17) **(change AR-29)**. Consumables, scrolls and wands
+are since settled by the consumables design (2026-11-17); coatings and
+Coated stay Later **(change CN-26)**. The original list:
 
 - Slots: stacks of tonics and potions, and how supply uses slots
   **(settled as open)**.
@@ -2765,15 +2783,15 @@ committed wind-ups (13.2).
 - **Items and inventory:** the generic layer is no longer pending: see the
   items and inventory design (2026-11-16; its 16 answers 15.9). What
   remains open moves to its category designs (items design 17): starting
-  kits, tonics, Remedy and flasks, scrolls and wands, Coated, Disarmed and
-  Clinging.
+  kits, Coated, Disarmed and Clinging.
   **(change I-15)** Weapons and foci are no longer pending: see the weapons
   and foci design (2026-11-17). Disarmed and Coated stay Later; starting
-  kits, consumables (coatings), scrolls and wands remain open in
-  their category designs. **(change W-15)** Armour and shields are no
+  kits remain open in their category designs. **(change W-15)** Armour and shields are no
   longer pending: see the armour and shields design (2026-11-17), which
   sets armour values, Strength thresholds, natural armour and monster
   loadouts (its 12) and Pitted Armour (Later, its 9.4). **(change AR-29)**
+  Consumables, scrolls and wands are settled in the consumables design
+  (2026-11-17); coatings and Coated stay Later. **(change CN-26)**
 - **Death and healing** (the guards and AI depend on these):
 
 | Need | Why |
@@ -2783,6 +2801,7 @@ committed wind-ups (13.2).
 | Confirmation that the hero has no downed state | Boss and encounter guards read "reduced to 0" |
 | Whether damage on a downed companion kills it | The AI invariant "never target or aim areas at downed units" is required either way |
 | A morale win counts as a win | For getting up (M-1) |
+| **The Reprieve Phial (talisman) needs** (consumables design 24): its final leave-HP; whether it fires out of combat; the owner order of Death-warded, Last Ward, Last-Breath Charm and the phial; whether companions can die (then the phial also covers "would die") **(change CN-21; gated on the death and healing design)** | The save runs in the damage pipeline before HP is lowered; the 6.4 guards are computed without it (consumables design 14.4, 14.9) |
 
 - **Dungeon generation** (the generator content test asserts each):
 

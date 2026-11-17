@@ -872,7 +872,7 @@ Uncommon pieces add one roll from their location table. **(lead's call)**
 | **Deft Gloves** | gloves | **Deft** (approved): Administer costs a bonus action | M2 | Container-only |
 | **Catcher's Bracers** | bracers | **Catcher:** Hand over and Administer may target an ally within 2 squares in line of sight | M2 | Reach step (6.1 item 4); container-only |
 | Clenching Gauntlets | gauntlets | **Clench:** once per fight, a unit you grapple has disadvantage on its first escape check | Later | Renamed from "Holder" (behaviour-profile clash); `fight` minor, for the conditions 7.2 anti-lock spirit; container-only |
-| Slinger's Bracers | bracers | Once per fight, throwing a belt flask or tonic costs a bonus action | Later | Waits for the consumables design's flask throw |
+| Slinger's Bracers | bracers | Once per fight, throwing a belt flask, tonic or potion costs a bonus action | Later | **(change CN-22)** The flask throw and the potion throw at an ally are designed (consumables design 11) |
 
 ### 13.3 Feet (3 M2)
 
@@ -1505,8 +1505,11 @@ grants.
 - **Companions:** kits and choices at 3, 6 and 9; Medicine and Lore
   training spread (Lifeline steering).
 - **Death and healing:** whether anything lifts Downed beyond Medicine
-  (Lifeline); Death-warded, Last Ward and Last-Breath Charm owners (Later).
-- **Consumables:** the flask throw (Slinger's Bracers, Later).
+  (Lifeline); Death-warded, Last Ward, Last-Breath Charm and Reprieve
+  Phial (talisman) owners (Later; the talisman part gated on the death and
+  healing design; change CN-22; consumables design 14.9, 14.10).
+- **Consumables:** the flask throw is designed (consumables design 11);
+  Slinger's Bracers numbers stay Later **(change CN-22)**.
 - **Conditions content (Later):** Veiled (Smoke Cloak), Shielded (Bulwark
   Locket), Inspired and its Leadership-mastery owner (Muse's Token),
   Bolstered.
@@ -1558,7 +1561,9 @@ it:
 - **Shared jewellery pool or C-split:** only if the lane-prediction
   playtest holds at 80% *(illustr.)* (19).
 - **Rare charms or rings:** reopen Q2 (curses, Last-Breath Charm, Muse's
-  Token).
+  Token). Last-Breath Charm is flagged for retirement: the Reprieve Phial
+  owns the party's extra-life fantasy (gated on the death and healing
+  design; change CN-22; consumables design 14.9).
 - **One aura per party on a Rare amulet:** a Later option, not
   recommended for M2 (section 4, decision 7).
 - **The element major moving off neck,** if the neck pick share is too

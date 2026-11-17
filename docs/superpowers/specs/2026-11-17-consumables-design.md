@@ -1,7 +1,7 @@
 # Consumables, Scrolls and Wands: Design
 
 Date: 2026-11-17
-Status: Draft, awaiting client approval, 2026-11-17
+Status: Approved, 2026-11-17
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model),
@@ -19,16 +19,17 @@ client approved the **principle** of the save item now; it ships with the
 death and healing design, which sets its final numbers and owner order.
 Items marked **(lead's call)** were filled in by the design lead; the
 client said on 2026-11-17 that everything else in the lead's proposal
-stands, and they are confirmed when this document is approved. Items marked
+stands, and they were confirmed when the client approved this document on
+2026-11-17. Items marked
 **(settled)** restate a rule from a parent document; **(decided)** marks a
 main-design client decision. Items marked **(change)** amend an approved
-document and are listed, with an id, in section 23. Once approved, every
-item here is binding on the builders.
+document and are listed, with an id, in section 23. Every item here is
+binding on the builders.
 
 **Two changes to agreed rows were not put to the client as separate
-questions** (CN-11, ability model 6.4; CN-20, enemies 15.4). They are
-written here as the **lead's recommendation, pending client sign-off at
-document approval**, and are flagged in section 23 and section 25.2.
+questions** (CN-11, ability model 6.4; CN-20, enemies 15.4). They were
+written as the lead's recommendation and were **approved by the client on
+2026-11-17** with this document (section 23, section 25.2).
 
 This is the **category design** for rows 4 and 5 of the items design's
 roadmap: row 4 (consumables: potions, tonics, flasks, coatings, Remedy) and
@@ -169,13 +170,13 @@ Gaps found while designing; each is fixed by a change in section 23.
 |---|---|---|
 | F1 | No document says that an in-class scroll read spends no slot, though it follows from items 7.1 and ability model 7.1 | Stated outright (CN-3, CN-12) |
 | F2 | The tonic's "thrown at an ally" row has no range | `throwAllyRange` (CN-3, CN-17) |
-| F3 | A scroll's pool is `never`, so ability model 6.4's camp-spend sentence does not cover scrolls; a caster could cast a slot spell and read a bonus-action scroll in one turn. (A wand charge is already covered: its pool is `camp`, items 12.8) | An explicit engine rule for scroll reads (13.5; CN-11, pending client sign-off) |
+| F3 | A scroll's pool is `never`, so ability model 6.4's camp-spend sentence does not cover scrolls; a caster could cast a slot spell and read a bonus-action scroll in one turn. (A wand charge is already covered: its pool is `camp`, items 12.8) | An explicit engine rule for scroll reads (13.5; CN-11, client-approved 2026-11-17) |
 | F8 | The approved Administer row allows a potion on a Downed ally ("does not lift Downed"), and Hand over, Take from Downed and Retrieve allow any belt item in combat | Narrowed for potions, healing scrolls and the talisman (11, 14.5; CN-3, CN-12) |
 | F9 | No approved document gives a Recovery formula (stat model 6 names the stat only) | An M1 placeholder and a dependency (7.2, 24) |
 | F4 | Several condition sources name potions that this design cuts (Hasted, Fleet, Heightened, Unfettered, Invisible, Rallied) | Struck (CN-16) |
 | F5 | Items 12.5 and 5.1 `rarity.props` ranges read as if a use-only record needed 2–3 properties at Rare | Ranges apply to gear only (CN-6) |
 | F6 | Items 19.1 rules 8 and 9 key on `consumable`, not scroll or wand | Extended (CN-7) |
-| F7 | Enemies 15.4's healing-potion row assumes a monster heal number that does not exist (monsters have no Recovery) | `monsterPotionPermille` (CN-20, pending client sign-off) |
+| F7 | Enemies 15.4's healing-potion row assumes a monster heal number that does not exist (monsters have no Recovery) | `monsterPotionPermille` (CN-20, client-approved 2026-11-17) |
 
 ## 4. Framework decisions
 
@@ -190,7 +191,7 @@ the lead's calls, which the client said stand.
 | 4 | Idea 3, thrown flasks (Q4) | **(a) No glass damage;** potions throwable at a willing ally for the thrower's action, range 5, line of sight, no roll, at `thrownPotionPermille` 750 *(illustr.; knob 500–1000, merge rule at 1000)*; never lifts Downed; tonics unchanged (minor only), range `throwAllyRange`. **(agreed)** | (b) Keep potions unthrowable. (c) Glass damage as proposed: a tax that can down a 1-HP ally or end the run, breaks concentration and needs an AI friendly-fire term |
 | 5 | Healing shape | **One Recovery-linked record** (`potionPermille` 1000) **(lead's call)** | Banded dice per drinker band (the named fallback, 7.2); tiered records (fragment the belt and stock) |
 | 6 | Effect difficulty | **`user` for every item effect**, the existing schema default **(lead's call)** | New `tier` or `band` values (a schema change for no gain); fixed per-tier scroll DCs (a fighter's scroll would out-DC its own abilities) |
-| 7 | Scroll nova guard | **A scroll read sets the camp-spend flag** **(lead's recommendation; CN-11 pending client sign-off, 25.2)**; a wand charge already does **(settled, items 12.8)** | Belt slots alone (four readers × 2–3 slots at the boss); every scroll costs an action (kills in-class bonus-action spells) |
+| 7 | Scroll nova guard | **A scroll read sets the camp-spend flag** **(lead's recommendation; CN-11 client-approved 2026-11-17, 25.2)**; a wand charge already does **(settled, items 12.8)** | Belt slots alone (four readers × 2–3 slots at the boss); every scroll costs an action (kills in-class bonus-action spells) |
 | 8 | In class | **The reader's class is in `classTags`**; any spell on the list; no "has reached that tier" test **(lead's call)** | A tier test (misfires on companion kits; the floor cap already tracks tiers) |
 | 9 | Loot classes | **Sundries** (Common consumables, outside the notable count, inside the fixed budget) and **notables** (scrolls, wands, Greater Fire Bomb, talisman) **(lead's call)** | Every consumable a notable (a bomb displaces a sword); consumables only by substitution (too scarce) |
 | 10 | Fire bomb strength | **Fixed dice per record**; one-shots never banded **(lead's call)** | Banded 2d6/3d6/4d6 at value 1 (out-damages a tier-1 scroll at band 3) |
@@ -294,7 +295,7 @@ fighter does not read scrolls.
 **What it changes in agreed or settled rules:** wording only in items 7.1
 and ability model 7.2 (CN-3, CN-12); one new sentence in ability model
 6.4, an **agreed row**, which makes a scroll read count as a camp spend
-(CN-11, **pending client sign-off**, 25.2; a wand charge already counts,
+(CN-11, **client-approved 2026-11-17**, 25.2; a wand charge already counts,
 items 12.8). The trained-only list (stat model 7.2) is **unchanged**.
 
 **Gained for the client:** slot-free in-class reads stated outright; any
@@ -888,8 +889,8 @@ An engine rule keyed on category `scroll` or `wand`, never per-record data.
 
 ### 13.5 The nova guard
 
-**(lead's recommendation; CN-11 changes an agreed row and is pending
-client sign-off, 25.2)**
+**(lead's recommendation; CN-11 changes an agreed row and was approved by
+the client on 2026-11-17, 25.2)**
 
 - **A scroll read** (in class or out of class, including a failed
   out-of-class attempt) **uses the unit's camp spend** for that turn.
@@ -911,9 +912,11 @@ client sign-off, 25.2)**
 - **Build so either answer costs no rework (new lead's call):** the rule
   is one engine predicate, `scrollReadSetsCampSpend`, read from the
   `consumables` block (18.1) and **not tuning**. It governs scroll reads
-  only. It is `true` under the recommendation. If the client declines
-  CN-11 at approval, it is `false`: scroll reads neither check nor set the
-  flag, wand charges still do, and the fallback bounds of 25.2 apply.
+  only. It is `true`: the client approved CN-11 on 2026-11-17. Had CN-11
+  been declined it would be `false` (scroll reads neither check nor set
+  the flag, wand charges still do, and the fallback bounds of 25.2 would
+  apply); those fallback bounds are recorded only and are **not in
+  force**.
 
 ### 13.6 Wands
 
@@ -1119,7 +1122,8 @@ channels and placement lead's call; CN-1, CN-2, CN-27)**
 - Never the basic vendor, the notables shop, the trader, a carrier, a
   starting boon or a meta reward. `familyCapPerRun` 1.
 - **Placement: one pre-roll per run (new lead's call; CN-27).** "1 per
-  run" is a cap, not a promise. At run generation, on the loot stream:
+  run" is a cap, not a promise **(confirmed by the client, 2026-11-17)**.
+  At run generation, on the loot stream:
   1. roll `talisman.offerChancePermille` *(illustr. 500)*; on a failure
      the run has no phial;
   2. otherwise roll its floor, uniform over `talisman.minFloor` to the
@@ -1190,7 +1194,8 @@ channels and placement lead's call; CN-1, CN-2, CN-27)**
 ## 15. Monster use
 
 **(agreed rows of enemies 15.4 stand in substance; CN-20 refines their
-wording and is pending client sign-off, 25.2; the rest lead's call)**
+wording and was approved by the client on 2026-11-17, 25.2; the rest
+lead's call)**
 
 | Item | Carrier use | `useWhen` |
 |---|---|---|
@@ -1239,13 +1244,13 @@ wording and is pending client sign-off, 25.2; the rest lead's call)**
 - **Risk:** items 19.1 rule 7 (carrier power ÷ price within 90–110%) may
   not land for a `uses:1` item at k = 1. The simulator reports it; a
   sundry exemption is the lead's fallback.
-- **If CN-20 is declined (new lead's call):** oil and water are not
-  carried (the agreed row says "thrown area") and stay party loot only.
-  The potion row stays as written ("bonus-action self-heal"), and
-  `monsterPotionPermille` remains the engine's number for it, since
-  monsters have no Recovery. The scroll row stays as written. The guard
-  check on carried damaging items is this design's validation (19.1) and
-  applies whether CN-20 is accepted or not.
+- **Had CN-20 been declined (recorded only; CN-20 was approved on
+  2026-11-17, so this does not apply):** oil and water would not be
+  carried (the agreed row says "thrown area") and would stay party loot
+  only. The potion and scroll rows would stay as written, with
+  `monsterPotionPermille` still the engine's number for the potion, since
+  monsters have no Recovery. The guard check on carried damaging items is
+  this design's validation (19.1) and applies in either case.
 
 ## 16. Catalogue
 
@@ -1291,7 +1296,7 @@ Each coating has a `blade` record (edge oil) and a `launcher` record
 ### 16.4 Scrolls (M2)
 
 All: in class = the spell's cost, slot-free, sets the camp-spend flag
-while `scrollReadSetsCampSpend` is true (13.5, pending CN-11); out of
+while `scrollReadSetsCampSpend` is true (13.5, CN-11 client-approved 2026-11-17); out of
 class = action + trained Arcana against 10 + tier (11/12/13/14), about
 50–60% for a trained non-caster with Intelligence +0; a failure burns
 it. Prices 16 / 32 / 48 / 64. Channels: containers,
@@ -1445,7 +1450,8 @@ gated.
   lead's call)**:
   - **client numbers:** `scrollArcana` (10 + tier, Q1),
     `potionThrowRange` 5 and `thrownPotionPermilleRange` (Q4);
-  - **engine switches:** `scrollReadSetsCampSpend` (13.5, pending CN-11);
+  - **engine switches:** `scrollReadSetsCampSpend` (13.5, `true`; CN-11 client-approved
+    2026-11-17);
     `tier4ScrollsPerRunBeforeFinalBoss` (the lead's pre-agreed lever,
     section 21: `null` = off, 1 when engaged; the loot generator reads it);
   - **a placeholder:** `recoveryPlaceholder` (7.2), replaced when the
@@ -1591,8 +1597,8 @@ derived (18.2).
    resolving to launch class ids (no `any`, no tradition tags in M2); the
    spell is not on the never-list (13.7); healing scrolls exclude the
    `camp` channel and are `usableBy.monster` false; monster-usable scrolls
-   pass the 6.4 guards and items 19.1 rule 7. This rule applies whether or
-   not CN-20 is accepted.
+   pass the 6.4 guards and items 19.1 rule 7. (CN-20 was approved on
+   2026-11-17; this rule would apply without it too.)
 9. Wands: tier ≤ 2; pool `camp`; 1 ≤ `charges.min` ≤ `charges.max` ≤ the
    pool's `max`; (tier, pool `max`) has a `wandValue` row; `minFloor` ≥ 2;
    no healing; a monster-usable damaging wand passes the 6.4 guards.
@@ -1723,8 +1729,8 @@ hero's HP never shows 0 while a phial is armed on its belt.
 
 | Risk | Mitigation |
 |---|---|
-| **Scroll nova at the boss** (packs hold scrolls; four readers) | Camp-spend flag (13.5, CN-11); family caps; 1 Very rare per floor; boss-damage share alarm at 25%. **Pre-agreed lever:** at most 1 tier-4 scroll per run before the floor-5 boss (`tier4ScrollsPerRunBeforeFinalBoss` 1) |
-| **CN-11 declined at approval** | `scrollReadSetsCampSpend: false` (wand charges stay camp spends) with the 25.2 fallback bounds; the pre-agreed lever is set at once; the boss-damage alarm is a release gate |
+| **Scroll nova at the boss** (packs hold scrolls; four readers) | Camp-spend flag (13.5, CN-11, client-approved 2026-11-17); family caps; 1 Very rare per floor; boss-damage share alarm at 25%. **Pre-agreed lever:** at most 1 tier-4 scroll per run before the floor-5 boss (`tier4ScrollsPerRunBeforeFinalBoss` 1) |
+| **CN-11 declined at approval** (closed: the client approved CN-11 on 2026-11-17) | Not in force. Recorded only: `scrollReadSetsCampSpend: false` with the 25.2 fallback bounds, the pre-agreed lever set at once, the boss-damage alarm a release gate |
 | **The non-caster scroll route is empty** | DEP-1 (13.8); at least 1 and at most 2 offensive sundries per floor from floor 2; the no-flask report; revisit trigger at 5% |
 | **Thrown potion unused** | Starts at 750; the knob runs to 1000, where Administer merges into the throw |
 | **The phial fires too often or too little** (undesigned crit rule and level-1 HP) | Reports; `offerChancePermille` first, then `leaveHpPermille`; gated on death and healing |
@@ -1759,8 +1765,8 @@ hero's HP never shows 0 while a phial is armed on its belt.
   10 + tier (Q1); the phial's rarity, floor, one per run (a cap), unique
   and never bought, and its holder-only belt trigger (Q2); `treatProof`
   (Q3); no damage on beneficial throws, `potionThrowRange` 5 and
-  `thrownPotionPermilleRange` (Q4); `scrollReadSetsCampSpend` (pending
-  CN-11); `tier4ScrollsPerRunBeforeFinalBoss` (the lead's lever); the
+  `thrownPotionPermilleRange` (Q4); `scrollReadSetsCampSpend` (`true`;
+  CN-11 client-approved 2026-11-17); `tier4ScrollsPerRunBeforeFinalBoss` (the lead's lever); the
   `recoveryPlaceholder` (replaced, not tuned); the denylist and
   relaxations, one offensive flask per turn and the wand tier cap (the
   lead's); `leaveHpPermille` and the save order (death and healing
@@ -1768,12 +1774,16 @@ hero's HP never shows 0 while a phial is armed on its belt.
 
 ## 23. Changes to approved documents
 
-To be applied when the client approves this document. Each change names
-the exact section it touches. Ids are provisional and match the proposal;
+Applied on 2026-11-17, when the client approved this document. The
+changes that serve the Reprieve Phial (talisman) are applied as text
+marked gated on the death and healing design (14.10), which sets the
+phial's final numbers and owner order. Each change names the exact
+section it touches. Ids are provisional and match the proposal;
 CN-10 and CN-13 were merged into other changes during review and are not
 reused, and CN-25 (the D′ trained-only change) lapsed when the client
 rejected D′ and is not reused either; CN-26 and CN-27 were added in the
-final review. **Agreed or decided rows are flagged.**
+final review. **Agreed or decided rows are flagged.** CN-11 and CN-20
+were approved by the client on 2026-11-17.
 
 **Narrowings recorded inside this design (no change id, no approved text
 changes):** the consumable denylist (6.2); no healing on wands; wands tier
@@ -1800,7 +1810,7 @@ never moves in combat) change approved text and are in CN-3 and CN-12.
 
 | # | Section | Change | Approved by |
 |---|---|---|---|
-| CN-11 | 6.4, **agreed row**, new sentence after the lead's-call paragraph | "A scroll read (in or out of class, including a failed attempt) uses the unit's camp spend for that turn: it is greyed if the flag is set, and sets it when its cost is paid. (A wand charge is already a camp spend: its pool is `camp`.)" The agreed sentence is unchanged, but its scope widens beyond `camp` pools to scroll reads | **Client: lead's recommendation, pending sign-off at document approval (25.2)** |
+| CN-11 | 6.4, **agreed row**, new sentence after the lead's-call paragraph | "A scroll read (in or out of class, including a failed attempt) uses the unit's camp spend for that turn: it is greyed if the flag is set, and sets it when its cost is paid. (A wand charge is already a camp spend: its pool is `camp`.)" The agreed sentence is unchanged, but its scope widens beyond `camp` pools to scroll reads | **Client (approved 2026-11-17; lead's recommendation, 25.2)** |
 | CN-12 | 7.2, scroll row; Treat row **(agreed, C4)**; Administer, Hand over, Take from a Downed ally and Retrieve rows (I-5); new rows | Scroll row: "against 10 + tier; in class, no slot is spent" (wording). Treat row: "Diseased and Scarred at a rest, except a `treatProof` Scarred". Administer: "not a potion or healing scroll on a Downed unit". Hand over, Take from a Downed ally, Retrieve: "never a talisman in combat". New rows: "Throw a belt flask: action, range 5, no attack roll; at most one offensive flask per turn"; "Throw a belt potion at an ally: action, range 5, line of sight, no roll, `thrownPotionPermille`; never lifts Downed; not on a Downed unit" | Lead; scroll wording **client (agreed, Q1)**; potion row **client (agreed, Q4)**; Treat row **client (agreed, Q3)** |
 
 **Conditions design (2026-11-16):**
@@ -1818,7 +1828,7 @@ never moves in combat) change approved text and are in CN-3 and CN-12.
 | # | Section | Change | Approved by |
 |---|---|---|---|
 | CN-19 | 15.3 step 1 (the M-5 sentence) and Caps | "plus 1–2 supply and a few tonics" becomes "plus 1–2 supply and a few sundries (Common consumables, outside the notable count, inside the fixed budget; from floor 2 at least 1 offensive flask; consumables design 10)". Caps unchanged | Lead |
-| CN-20 | 15.4, **agreed table** | Healing potion row: "heals `monsterPotionPermille` of max HP". "Bomb or flask" row: "thrown area **or a single party unit**; bombs opener-flagged; setup flasks by `useWhen`". Scroll row: "the carried spell passes the 6.4 guards on the reference carrier". "What the party gets" unchanged | **Client: lead's recommendation, pending sign-off at document approval (25.2)** |
+| CN-20 | 15.4, **agreed table** | Healing potion row: "heals `monsterPotionPermille` of max HP". "Bomb or flask" row: "thrown area **or a single party unit**; bombs opener-flagged; setup flasks by `useWhen`". Scroll row: "the carried spell passes the 6.4 guards on the reference carrier". "What the party gets" unchanged | **Client (approved 2026-11-17; lead's recommendation, 25.2)** |
 | CN-27 | 15.3 step 2; 10.5 step 3 | "The Reprieve Phial is never a weighted draw. One pre-roll per run, on the loot stream, decides whether it appears, its floor and its channel; it replaces one notable draw of that floor and channel (a `campReward` phial takes a container draw of that floor). A declined offer is lost for the run (consumables design 14.7)" | Lead (inside agreed Q2) |
 | CN-21 | 25, death and healing table | Adds the talisman needs (consumables design 24) | Lead |
 
@@ -1850,8 +1860,8 @@ Scarred rows, the conditions 8 `treat` row and stat model 7.1's Medicine
 row (below) under the client's Q2 and Q3 answers; CN-24 adds a sentence
 beside the decided 4.2 text without changing it. **CN-11 (ability model
 6.4) and CN-20 (enemies 15.4) change agreed rows and were not separately
-asked: they are the lead's recommendation, pending client sign-off at
-document approval.**
+asked: they were the lead's recommendation, approved by the client on
+2026-11-17.**
 
 **Stat model 7.1, Medicine row (agreed; under Q3, with CN-14):** "at a
 short rest, Treat ends Diseased and Scarred (fixed difficulty, one attempt
@@ -1892,21 +1902,24 @@ family caps; belt counts; `packInCombat`; the 6.4 guards; main design
 
 ## 25. Open items for the client
 
+None. Approved by the client on 2026-11-17.
+
 ### 25.1 This document
 
-Awaiting client approval. Q1–Q4 were answered on 2026-11-17 (the lead's
-recommendation in each case); the client said everything else in the
-proposal stands. A final review made builder-level fixes inside those
-answers (lead's calls, marked where they appear); none reopens a client
-decision. One reading to confirm at approval: the lead reads Q2's "1 per
-run" as a cap, with the phial offered in about half of runs
-(`offerChancePermille`, 14.7). If the client meant one phial in every
-run, the value is 1000 and nothing else changes.
+Approved by the client on 2026-11-17, as a whole, including the lead's
+calls. Q1–Q4 were answered on 2026-11-17 (the lead's recommendation in
+each case). At approval the client also confirmed:
 
-### 25.2 Two agreed-row wordings for sign-off at approval
+- **Q2's "1 per run" is a cap, not a guarantee** (confirmed by the
+  client, 2026-11-17): the phial is offered in about half of runs
+  (`offerChancePermille` *(illustr.)* 500, 14.7), as written.
+- **CN-11 and CN-20 are approved** (25.2).
 
-**(lead's recommendation; not separately asked)** Approving this document
-approves both unless the client says otherwise:
+### 25.2 Two agreed-row wordings (approved 2026-11-17)
+
+**(lead's recommendation; not separately asked; approved by the client on
+2026-11-17)** The "if declined" notes below are recorded only and are
+**not in force**:
 
 - **CN-11, ability model 6.4 (agreed row):** a scroll read (in or out of
   class, including a failed attempt) uses the turn's camp spend. A wand
@@ -1919,6 +1932,8 @@ approves both unless the client says otherwise:
   family caps, 1 Very rare per floor and the boss-damage alarm, and the
   pre-agreed lever (at most 1 tier-4 scroll per run before the floor-5
   boss; `tier4ScrollsPerRunBeforeFinalBoss` 1) applies from the start.
+  **Approved 2026-11-17:** `scrollReadSetsCampSpend` defaults to `true`,
+  so these fallback limits are not in force.
 - **CN-20, enemies 15.4 (agreed table):** flasks may be single-target
   setup items, monster potions heal a share of maximum HP, carried scrolls
   pass the permadeath guards. **Why:** monsters have no Recovery, and the
@@ -1926,7 +1941,8 @@ approves both unless the client says otherwise:
   are party loot only; the potion and scroll rows stay as written, the
   engine still heals monsters by `monsterPotionPermille`, and the guard
   check on carried damaging items still applies, since it is this
-  design's validation (section 15; 19.1).
+  design's validation (section 15; 19.1). **Approved 2026-11-17:** the
+  CN-20 wording applies; the "if declined" note is not in force.
 
 ### 25.3 Future items triggered by reports
 
@@ -1989,10 +2005,10 @@ it:
 | CO-1 | Eight contradictory numbers | Resolved in BA-2 and sections 8–14; Heightened cut |
 | CO-2 | The talisman does not fit the schema | New category `talisman`; rules 4, 6, 8, 9 extended (CN-1, CN-2, CN-7) |
 | CO-3 | The Scarred change touches more text | CN-14 cites 18.10, 14 (agreed), 18.2; `downedThisFloor` untouched; deep Scarred is an instance flag, not a condition |
-| CO-4 | The nova guard changes an agreed row | CN-11 flagged; lead's recommendation pending client sign-off (25.2) |
+| CO-4 | The nova guard changes an agreed row | CN-11 flagged; lead's recommendation, client-approved 2026-11-17 (25.2) |
 | CO-5 | Change ids collide | One list (section 23) |
 | CO-6 | Condition source lines contradict | CN-16 covers potions, flash powder, nets |
-| CO-7 | Enemies 15.3 and 15.4 changes; M1 carriers | CN-19 cites M-5; CN-20 flagged (25.2); M1 has no carried consumables |
+| CO-7 | Enemies 15.3 and 15.4 changes; M1 carriers | CN-19 cites M-5; CN-20 flagged and client-approved 2026-11-17 (25.2); M1 has no carried consumables |
 | CO-8 | Coatings duplicate Ember Ring and break TK-25 | Named rider only; Quivered launcher only (CN-18) |
 | CO-9 | Name collisions | Renamed: Fan of Cinders, Shockwave, Trembling Word, Flicker Step, Icefall, Elemental Endurance, Serrating Oil, Reprieve Phial; Ward Draught cut; protected-name check before data |
 | CO-10 | Rules 8 and 9 key on `consumable` | Extended (CN-7) |
@@ -2029,8 +2045,9 @@ inside the client's answers)**
 | Q2 | An item that saves someone from dropping | (a) The Reprieve Phial; principle now, gated on death and healing | 5.2, 14 |
 | Q3 | The phial's cost | (a) Scarred, the hero included, `treatProof` | 14.4, 14.6 |
 | Q4 | Thrown beneficial flasks | (a) No glass damage; throwable potions at 750 | 5.3, 11 |
-| — | Everything else in the proposal | Stands as written | Throughout |
-| — | CN-11, CN-20 (agreed-row wordings) | Not separately asked; pending sign-off at approval | 25.2 |
+| — | Everything else in the proposal | Stands as written; document approved as a whole, including the lead's calls | Throughout |
+| — | Q2 "1 per run" | A cap, not a guarantee; `offerChancePermille` as written (about half of runs) | 14.7, 25.1 |
+| — | CN-11, CN-20 (agreed-row wordings) | Not separately asked; approved at document approval | 25.2 |
 
 ## Appendix B: sources
 

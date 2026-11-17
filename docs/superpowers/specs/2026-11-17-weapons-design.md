@@ -309,7 +309,7 @@ gear. **(agreed)**
 | Substitute | What it gives | Rule | Wave |
 |---|---|---|---|
 | **Charged weapon powers** | Use-or-save tension with no permanent loss | Notable properties with a `rest` or `camp` pool (buff-test tag `charge`), through `grants.abilities {ability, cost, pool}` (items design 12.3). Listed in 18.2–18.4. | M1 |
-| **Consumable coatings** | Spending special ammunition and oils | Special arrows and bolts, and edge oils, are `coating` consumables (items design 5.1 `stackMax`) that apply Coated: "its next 3 weapon hits carry the oil's rider" (conditions 18.9). Tagged `launcher` or `blade` (W-11). Never both beltable and wieldable (items design 19.1 rule 6). | Later |
+| **Consumable coatings** | Spending special ammunition and oils | Special arrows and bolts, and edge oils, are `coating` consumables (items design 5.1 `stackMax`) that apply Coated: "its next 3 weapon hits that attempt the coating's rider; a charge is spent only on such a hit (ability model 9.3 gates apply)" (conditions 18.9; consumables design 7.5) **(change CN-18)**. Tagged `launcher` or `blade` (W-11). Never both beltable and wieldable (items design 19.1 rule 6). | Later |
 | **Wear on enemies** | "Break their gear" without item churn | **Sundering** (18.3): an armed monster uses its improvised attack for the fight. **Crushing** (18.3): Pitted Armour 1. | Later |
 | **Opt-in Shatter** | A big, chosen sacrifice | **Shatter** (18.3): once, destroy this weapon as part of a hit, which becomes a critical and pushes 2. Rare and above only, never on heirlooms or signature items. The player chooses, so it is never a tax (W-6, items design 12.8). | Later |
 | **Notched** | Grit from rust and acid monsters | 5.6 | Later |
@@ -2024,8 +2024,9 @@ left as they are (7.2 rule 9).
   `2026-11-17-armour-design.md`: the bash sub-record, buckler, Reliquary
   Shield and tower shield (17.9, W-13; armour design 10) and Pitted
   Armour (Crushing, Later; armour design 9.4) **(change AR-44)**.
-- **Consumables:** coatings (special arrows, edge oils), their riders and
-  `stackMax`, and Coated (Later; W-11).
+- **Consumables:** consumables, scrolls and wands are settled in the
+  consumables design (2026-11-17); coatings and Coated stay Later (W-11)
+  **(change CN-26)**.
 - **Starting kits:** weapon sets per class and companion (items design 17,
   row 3).
 - **Companions:** kits drawn from these families; the D-c playtest.

@@ -221,7 +221,10 @@ bounds, not illustrative)**
 3. Harmful ticks resolve as one batch (6.8), Engulfed's damage included.
 4. **Zero-hit-point check.** A unit at 0 hit points is downed or dies now,
    and the rest of its turn-start step is skipped. A downed unit still runs
-   its turn-end steps (8).
+   its turn-end steps (8). **Gated on the death and healing design (change
+   CN-15):** the tick batch's save chain (9.3) runs where the damage lands,
+   before hit points are lowered, so a saved unit never reaches this check
+   at 0.
 5. Beneficial ticks (Regenerating).
 6. Aura pulses that reach the unit (pipeline step 2; aura immunity, 7.3).
 7. Start-of-turn triggers and checks: Burning's spread, Tormented's line of
@@ -482,14 +485,14 @@ morale states (Emboldened, Demoralised, Routed, Cowed; enemies design
 | Cure tag | Cost | Ends |
 |---|---|---|
 | `heal` | Any hit point gain | Bleeding, Condemned |
-| `treat` | **Medicine Treat (change C4):** an action, adjacent. One Medicine roll is compared with each curable instance's recorded difficulty, and every instance the roll meets ends. The action is spent either way. | Every `poison` condition, Bleeding, Withered, Hobbled, Condemned, Calcifying at stages 1–2; Diseased and Scarred during a rest |
+| `treat` | **Medicine Treat (change C4):** an action, adjacent. One Medicine roll is compared with each curable instance's recorded difficulty, and every instance the roll meets ends. The action is spent either way. | Every `poison` condition, Bleeding, Withered, Hobbled, Condemned, Calcifying at stages 1–2; Diseased and Scarred during a rest, except a `treatProof` Scarred (gated on the death and healing design; change CN-14) |
 | `rally` | Rally: a bonus action, once per ally per fight **(settled)** | The `fear` tag |
 | `escape` | An action: Athletics or Acrobatics against 10 + the holder's Fortitude, or against the binding's difficulty | Grappled, Restrained, Rooted, Engulfed |
 | `stand` | Half the current effective speed, minimum 1 (6.7). **At speed 0, standing costs the action.** | Prone |
 | `shakeOff` | Half speed (the action at speed 0). One use ends every shake-off condition on the unit. | Burning, Smouldering, Corroded (rinse), Oiled (wipe), Mired |
 | `damageType:X` | Damage of type X, at least 1 | Fire ends Chilled, Frozen, Soaked and Oiled; cold ends Burning and Smouldering; bludgeoning ends Frozen; a binding's breaker type ends Restrained or Rooted |
 | `damage` | Any damage | Asleep |
-| `tonic` | A consumable (items design). As a bonus action it ends one minor condition; drunk as an action it ends one major. Thrown at an ally (action): minor only. Given to an adjacent ally (action): minor only (items design 7.1). Never hard or lingering. A `cureImmune` list lets a condition opt out. | By tier |
+| `tonic` | A consumable (items design). As a bonus action it ends one minor condition; drunk as an action it ends one major. Thrown at an ally (action, range `throwAllyRange`): minor only **(change CN-17; consumables design 11)**. Given to an adjacent ally (action): minor only (items design 7.1). Never hard or lingering. A `cureImmune` list lets a condition opt out. | By tier |
 | `cleanse` | Spells that declare the tiers and tags they end | By content |
 | `sourceGone`, `combatEnd`, `rest`, `camp` | Automatic | By flag |
 | `bossShed` | Boss action (M2) | One condition of the boss's choice |
@@ -602,6 +605,7 @@ step 9 (enemies design 14.3, 14.9).
 | `onApply` and `onEnd` relations | Step 2 | Contest and ward | Skipped |
 | Staged last stage (Calcifying) | Step 2 | Contest (already made) and ward | Skipped |
 | Engine grants: Steeled, Unyielding, Surprised, Downed, Scarred | Step 9 | Everything before it | Skipped |
+| A talisman's Scarred (gated on the death and healing design; change CN-15; consumables design 14.4) | Applied at once, outside the step 9 queue | Everything | Skipped |
 
 ### 9.3 Damage events
 
@@ -614,6 +618,15 @@ For each damage part, in data order:
 1. Ladder shifts and shells apply during the damage step.
 2. `damageType` ends and layer breaks run.
 3. Damage-triggered transforms run.
+
+**Save chain (gated on the death and healing design; change CN-15;
+consumables design 14.3, 14.4):** after these per-part steps, the event's
+damage is summed over all its parts, before hit points are lowered. If the
+unit is not Downed and the total would take it to 0 or less, the chain runs
+in order and the first link that fires ends it: Last Ward (attack events;
+the hit becomes a miss) → Death-warded → talisman. The concentration
+difficulty uses the pre-save total. Final owner order: death and healing
+design.
 
 - At most one transform per damage event, and a transform never triggers
   another.
@@ -896,17 +909,22 @@ immunity (the `morale` tag allows none). `mindless` implies `fearless`
 - **At most 2 harmful lingering conditions per unit.** Further ones are
   blocked. A level gained by an existing instance (6.5) is not a new one.
   **Scarred is exempt:** it always lands and does not count toward the 2,
-  because the client made it the fixed cost of a downing. **(lead's call)**
+  because the client made it the fixed cost of a downing or a talisman
+  save. **(lead's call; the talisman part gated on the death and healing
+  design, change CN-14)**
   Later: an item curse's cost is a `whileEquipped` item property, not a
   lingering condition, and **Cursed (Clinging) from an item is exempt from
   the cap of 2**, as Scarred is (items design 13).
 - A camp-bought **Remedy** item ends one non-curse lingering condition.
 - **Cures:** Treat or a Mechanics repair during a rest; shrines or Arcana
   for curses; camp clears everything.
-- **Scarred (agreed):** a companion that is downed and gets up gains
-  Scarred: maximum hit points −10% until camp. Only the first downing of a
-  unit on each floor gives it. Medicine Treat during a short rest removes
-  it. Details in catalogue I.
+- **Scarred (agreed):** a companion that is downed and gets up, or any
+  unit saved by a talisman (the hero included), gains Scarred: maximum hit
+  points −10% until camp. Only the first downing of a unit on each floor
+  gives it. Medicine Treat during a short rest removes it, except a
+  talisman's `treatProof` Scarred. Details in catalogue I. **(The talisman
+  parts gated on the death and healing design; change CN-14, consumables
+  design 14.4, 14.6)**
 
 ## 15. Display and knowledge
 
@@ -1177,9 +1195,13 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     stays Downed until Medicine (5.5). For the hero, the run ends
     **(settled)**.
   - Sources: 0 hit points (companions), at the zero-hit-point check or
-    when damage lands; an engine grant (9.2).
+    when damage lands; an engine grant (9.2). **Gated on the death and
+    healing design (change CN-15):** where damage lands, the save chain
+    (9.3) runs first, so a saved unit is not downed.
   - Interactions: the first downing on a floor sets `downedThisFloor`, and
     getting up from it grants Scarred **(agreed)** (engine grant, 18.10).
+    **Gated on the death and healing design (change CN-14):** a talisman
+    save does not set `downedThisFloor` (consumables design 14.4).
 - **Concentrating** — state · **M1** if the slice class casts
   - Effect: draws a link to each instance it sustains; the tooltip shows
     the check difficulty.
@@ -1485,7 +1507,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     - Unfettered;
     - `sourceGone` for coils.
   - Sources: webs (including web squares, 11.2), Entangle-shaped spells
-    (SRD), nets, constrictor coils.
+    (SRD), nets (monster and trap sources; the party net is a Later
+    consumable, consumables design 16.2) **(change CN-16)**, constrictor
+    coils.
   - Interactions: overrides a stored Rooted; Reflex disadvantage sets up
     areas; speed 0 gained mid-move ends the move (11.2).
 - **Rooted** — major · Later
@@ -1540,8 +1564,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Effect: +3 speed; Dash or Disengage as a bonus action; **no extra
     action**.
   - Intensity: binary.
-  - Duration: sustained up to 10 turns; potion `turns:3`.
-  - Sources: Haste-shaped spell (SRD, camp tier); potions.
+  - Duration: sustained up to 10 turns.
+  - Sources: Haste-shaped spell (SRD, camp tier) **(change CN-16)**.
   - Interactions: onEnd for any reason except a cancel gives Dazed for its
     next turn; cancels Chilled; Mired blocks the bonus actions.
 - **Fleet** — beneficial · Later
@@ -1549,7 +1573,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     advantage on slip-past checks.
   - Intensity: binary.
   - Duration: up to 10 turns.
-  - Sources: Longstrider-shaped spell (SRD), potions.
+  - Sources: Longstrider-shaped spell (SRD) **(change CN-16)**.
 - **Spurred** — token · **M2**
   - Effect: one free move of up to 2 squares during its next turn; costs no
     speed and provokes no opportunity attacks.
@@ -1570,7 +1594,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     `restraint` conditions, Chilled and Mired; standing costs 1 square.
     Never Engulfed (hard).
   - Intensity: binary.
-  - Duration: sustained up to 10 turns; potion `turns:3`.
+  - Duration: sustained up to 10 turns **(change CN-16; no potion grants
+    it, consumables design 16.7)**.
   - Sources: Freedom-of-Movement-shaped spell (SRD).
   - Interactions: does not stop forced movement, Prone or Grounded.
 - **Movement states:**
@@ -1752,7 +1777,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     `saveEnds {Fortitude, cap 2}`. Ends on a tonic drunk as an action, or a
     cleanse.
   - Sources: radiant rider on a target that is not hidden **(change C9)**;
-    flash powder; glare traps.
+    flash powder (monster and trap sources) **(change CN-16)**; glare
+    traps.
   - Interactions: overrides and blocks Squinting; suppresses Frightened
     and Charmed unless the source is adjacent; `sight` tag.
 - **Squinting** — minor · Later
@@ -1791,7 +1817,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Effect: hidden from every enemy with no check; Search fails against it;
     it does not end near enemies.
   - Intensity: binary.
-  - Duration: sustained up to 10 turns; potion `turns:3`. Ends after it
+  - Duration: sustained up to 10 turns **(change CN-16)**. Ends after it
     attacks or uses a harmful ability, or on Revealed or Incapacitated.
   - Sources: Invisibility-shaped spell (SRD).
   - Interactions: Vigilant enemies within 3 squares ignore it.
@@ -1870,7 +1896,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Intensity: binary.
   - Duration: `turns:2`, combatOnly.
   - Sources: Rally's "steady" option **(settled, stat model 7.1)**; enemy
-    leader rallies (cooldown); courage potions.
+    leader rallies (cooldown) **(change CN-16)**.
   - Interactions: Deafened units cannot be Rallied. An enemy leader's
     Rally includes itself and keeps the once-per-ally-per-fight limit; a
     Frightened leader cannot Rally (enemies design 14.4).
@@ -2072,17 +2098,21 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Duration: `charges:1`, fallback 3 turns; used on the first target hit.
   - Interactions: cancels Sapped.
 - **Coated** — token · Later (needs the items design)
-  - Effect: its next 3 weapon hits carry the oil's rider.
+  - Effect: its next 3 weapon hits that attempt the coating's rider; a
+    charge is spent only on such a hit (ability model 9.3 gates apply)
+    **(Later; change CN-18)**.
   - Intensity: charges, cap 3.
   - Duration: `charges:3`, fallback `turns:3`.
   - Sources: consumable oils: `coating` consumables tagged `launcher`
     (special arrows and bolts) or `blade` (edge oils) (consumables design)
-    **(change W-11)**.
+    **(change W-11)**. Coatings carry a named condition rider only; no
+    element shift and no own-type rider flag (consumables design 7.5)
+    **(Later; change CN-18)**.
 - **Heightened (ability)** — beneficial · Later
   - Effect: +2 to one ability, within the +5 cap, and advantage on checks
     with that ability.
   - Duration: up to 10 turns.
-  - Sources: Enhance-Ability-shaped spell (SRD); potions.
+  - Sources: Enhance-Ability-shaped spell (SRD) **(change CN-16)**.
   - Interactions: the highest bonus only **(settled, stat model 5.1)**.
 - **Death-warded** — token · Later
   - Effect: the first drop to 0 hit points leaves it on 1 instead.
@@ -2091,6 +2121,11 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Sources: Death-Ward-shaped tier 3 spell (SRD); rare charm; elite
     enemies, never bosses (affix grants are `oncePerLife`, enemies design
     7.2).
+  - Interactions: **gated on the death and healing design (change
+    CN-15):** second link of the save chain (9.3), after Last Ward and
+    before the talisman. The talisman also fires out of combat, unlike
+    `combatOnly` Death-warded; recorded, deferred to the death and healing
+    design (consumables design 14.2).
 - **Sanctified** — beneficial · Later
   - Effect: an enemy targeting it must first pass a Will save or choose
     another target (its pool is not spent).
@@ -2157,12 +2192,18 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     fixed difficulty in the rest data (illustrative 10 + floor). Treat
     resolves before Recovery at rest completion. A failed attempt can be
     tried again only at the next short rest **(lead's call, from stat model
-    7.2's no free retries)**. A Remedy also ends it.
+    7.2's no free retries)**. A Remedy also ends it. **Gated on the death
+    and healing design (change CN-14):** a `treatProof` instance (a
+    talisman save) is not offered for Treat and uses no attempt; a Remedy
+    or camp ends it and its flag (consumables design 14.6).
   - Sources: an engine grant (9.2) when a companion gets up from Downed, by
     either route (Medicine or a won fight), after its first downing of this
     floor. `downedThisFloor` is set by that first downing and resets on a
-    floor change. Later downings on the same floor give nothing. The hero
-    is never Scarred: its downing ends the run.
+    floor change. Later downings on the same floor give nothing. **Gated on
+    the death and healing design (change CN-14):** a talisman save (the
+    holder, the hero included; consumables design 14.4). The hero is never
+    Scarred by a downing (its downing ends the run); a talisman save may
+    Scar it.
   - Interactions: exempt from the cap of 2 harmful lingering conditions:
     it always lands and does not count toward the cap **(lead's call, 14)**;
     Warded does not block it; while a companion is downed its harmful
@@ -2585,14 +2626,15 @@ the exact section it touches.
 ## 25. Depends on systems not yet designed
 
 - **Items and inventory:** the generic layer is settled by the items design
-  (2026-11-16). Open in its category designs (items design 17): tonics and
-  their prices, Remedy, flasks (water, oil), Disarmed, Coated, Clinging.
+  (2026-11-16). Open in its category designs (items design 17): Disarmed,
+  Coated, Clinging.
   Weapons and foci are no longer pending: see the weapons
   design (2026-11-17). Disarmed and Coated stay Later; starting
-  kits, consumables (coatings), scrolls and wands remain open in their
-  category designs **(change W-15)**. Armour and shields are no longer
+  kits remain open in their category designs **(change W-15)**. Armour and shields are no longer
   pending, and Pitted Armour is settled: see the armour design
-  (2026-11-17, 9.4) **(change AR-16)**.
+  (2026-11-17, 9.4) **(change AR-16)**. Consumables, scrolls and wands
+  are settled in the consumables design (2026-11-17); coatings and Coated
+  stay Later **(change CN-26)**.
 - **Enemies:** morale (Demoralised, Routed, Emboldened, Cowed) is resolved
   by enemies design 14; elite definitions for the depth gates (7.1) and
   enemy condition kits within the budget (9.2) are settled there too.
