@@ -1,7 +1,7 @@
 # Armour and Shields: Design
 
 Date: 2026-11-17
-Status: Draft, awaiting client approval, 2026-11-17
+Status: Approved, 2026-11-17
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model),
@@ -1626,11 +1626,12 @@ The build fails when **(lead's call)**:
 
 ## 21. Changes to approved documents
 
-To be applied when this document is approved. Each change names the exact
-section it touches. AR-1, AR-3 and AR-30 carry the client's Q1–Q3
-decisions; AR-47 is pre-approved by the client and applies only when the
-lead switches E+ on; the rest are the lead's, confirmed with this
-document.
+Applied on 2026-11-17, when the client approved this document, except
+AR-47. Each change names the exact section it touches. AR-1, AR-3 and
+AR-30 carry the client's Q1–Q3 decisions; the rest are the lead's,
+confirmed with this document. AR-47 (E+) is recorded as pre-approved by
+the client and is applied only if the lead switches E+ on through the
+5.10 gate; until then the approved documents keep 2 trinket slots.
 
 **Stat model (2026-11-16):**
 
@@ -1756,25 +1757,18 @@ Stat model 6's AC formula and "Armour is hit or miss" and stat model 8.1
 
 ## 23. Open items for the client
 
-- **Approve this document.** It records the client's Q1–Q3 decisions of
-  2026-11-17 and the lead's calls the client confirmed; the calls new in
-  this write-up are those marked **(lead's call)** in 5.10 (the E+ gate),
-  6.1 (band from the wearer's level), 6.4 (card ladder), 9.1 (what counts
-  as an armour value, the order, the preview), 16.2, 16.3, 17.2 and AR-47.
-  The check round added further lead's calls, each marked in place: the AC
-  query's `traits` term and the Raise expression (6.1); the declared
-  buckler grip (10.2, AR-43, AR-48); the reaction window algorithm (10.4);
-  the roll-mode cap's priority and charged exclusion, and the crit order
-  (8.1); the gear-prevention step (14.1, AR-51); the hit-chance envelope
-  with its roll-mode floor and the lowest-legal-AC definition (11); the
-  Acrobatics requirement on dungeon generation and the Stiff fallback
-  (7.3); the E+ gate's revised measures and fixed numbers (5.10); state
-  fields and the round definition (16.3); and AR-48 to AR-53.
-- The client-locked values are unchanged: model E with `trinket{kind,
-  wornOn}`, E+ pre-approved and off; the banded values and the medium cap;
-  P-mid with the shared reduction cap of 4 (now listed as client-locked in
-  16.2 and 20).
-- No other open questions.
+None. Approved by the client on 2026-11-17.
+
+Future items that come back to the client only if the simulator or
+pick-rate reports trigger them:
+
+- **E+ switch (AR-47):** if the lead switches E+ on through the 5.10
+  gate, the switch and its evidence are reported to the client.
+- **Reduction cap 3:** if the 9.2 swing report exceeds its trigger, the
+  lead proposes cap 3 to the client with the report.
+- **Heavy armour costs:** if pick-rate reports show heavy armour
+  under-picked, the lead proposes each softening step (drop Weighty, then
+  reduce Clatter) to the client with the report (section 19).
 
 ## Appendix A: how the review findings were resolved
 

@@ -198,7 +198,7 @@ Formulas give the shape. Exact values are left to the builders.
 |---|---|
 | Proficiency bonus | +2 at levels 0–4, +3 at 5–8, +4 at 9–12 (levels 0, 11 and 12 are monster-only) |
 | Hit points | Fixed class amount per level + Constitution per level. Never rolled. |
-| Armour class | Unarmoured: 10 + Dexterity. Light: armour value + Dexterity. Medium: armour value + Dexterity up to +2. Heavy: flat armour value, needs a Strength threshold. A shield adds on top. |
+| Armour class | Unarmoured: 10 + Dexterity. Light: armour value + Dexterity. Medium: armour value + Dexterity up to +2. Heavy: flat armour value; heavy ignores Dexterity, negative included; below the Strength threshold the wearer is Strained. Values by category and proficiency band (armour design 6.2). A shield adds on top. |
 | Attack bonus | Ability + proficiency if trained in the weapon |
 | Ability difficulty | 8 + proficiency + the class's main ability. One formula for spells and martial abilities. |
 | Fortitude | Better of Strength and Constitution |
@@ -207,7 +207,7 @@ Formulas give the shape. Exact values are left to the builders.
 | Initiative | d20 + Intelligence, rolled once per fight |
 | Speed | 6 squares. Changed only by species traits, monster role or traits, armour and conditions; affixes are traits (enemies design 8.3). |
 | Passive perception | The best party member's full passive: 10 + Wisdom + proficiency if trained (double with mastery) + active effects (enemies design 12.2, 13.3) |
-| Passive stealth | 10 + Dexterity of the worst party member, less a heavy armour penalty |
+| Passive stealth | 10 + Dexterity of the worst party member, less a heavy armour penalty (sized in armour design 7.3) |
 | Trap sense | 10 + Intelligence of the best party member |
 | Guile (monsters) | 10 + Wisdom + proficiency + role adjustment, for every monster whether or not trained in Perception (enemies design 13.3) |
 | Recovery | Hit points restored per short rest; grows with level and Constitution |
@@ -332,8 +332,11 @@ Poison is a condition, not a damage type. **(agreed)**
   **(agreed that a save is needed; when it is attempted is the lead's
   call)**
 - Piercing is the exception in form: its rider acts on the attack roll, so
-  it is an always-on reduction to the target's armour value, larger against
-  a weak target. **(lead's call)**
+  it is an always-on reduction to the target's armour value: 1 against any
+  armour value, +1 against `CountsAsHeavy`, +1 against a weak target, ×2
+  with Puncture; it shares a reduction cap of 4 with Pitted Armour (armour
+  design 9.1). **(lead's call; sizing agreed 2026-11-17, armour design
+  Q3)**
 
 ### 8.3 The ladder
 
@@ -360,7 +363,9 @@ Poison is a condition, not a damage type. **(agreed)**
 
 - Resistances and weaknesses come from **traits**, not per-monster lists. A
   trait such as "skeletal" or "armoured" always means the same profile, so
-  the player learns a few rules once. **(agreed)**
+  the player learns a few rules once. **(agreed)** The `armoured` trait's
+  profile makes `CountsAsHeavy` true (Corroded, piercing, Clatter); it
+  never costs speed (armour design 7.3).
 - Budget per enemy: at most two resistances, and at least one weakness
   alongside any resistance. **(agreed)** Ladder shifts that come from
   conditions (Soaked, Oiled, Exposed, Resisting, Shredded, Sapped,
@@ -453,10 +458,11 @@ Each item here is a commitment this model makes on another system's behalf.
   max(2, 3 + Strength) *(illustr.)* slots of size-1 or size-2 items, with
   belt, trinkets, weapon sets and armour outside it (its 5). Weapons and
   foci are settled in `2026-11-17-weapons-design.md`; Disarmed and Coated
-  stay Later. What remains open moves to the category designs (items
-  design 17): armour values and Strength thresholds, starting kits,
-  tonics, Remedy and flasks, consumables (coatings), scrolls and wands,
-  Clinging and Pitted Armour.
+  stay Later. Armour and shields, including armour values and Strength
+  thresholds, are settled in `2026-11-17-armour-design.md` (its 6.2, 7.1).
+  What remains open moves to the category designs (items design 17):
+  starting kits, tonics, Remedy and flasks, consumables (coatings), scrolls
+  and wands, Clinging and Pitted Armour.
 - **Conditions.** Settled in `2026-11-16-conditions-design.md`: bleed,
   burning, slow, stagger, blind, frightened and the rest are defined there;
   this document only names them.
@@ -475,9 +481,10 @@ Each item here is a commitment this model makes on another system's behalf.
 
 ## 12. Left to the builders
 
-- All numbers: class hit points, armour values, Strength thresholds, skill
-  difficulties, rider strengths and durations, base carrying slots (pack
-  base 3, minimum 2, *illustr.*; items design 5.1).
+- All numbers: class hit points, skill difficulties, rider strengths and
+  durations, base carrying slots (pack base 3, minimum 2, *illustr.*; items
+  design 5.1). Armour values and Strength thresholds are set in the armour
+  design (6.2, 7.1).
 - Which save each rider calls for.
 - The signature use for each skill's mastery, except Perception's
   (Tactician, section 7.2).

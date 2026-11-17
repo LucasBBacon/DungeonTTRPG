@@ -541,6 +541,11 @@ Each step that stops the pipeline emits `ConditionResisted {reason}`.
    lingering cap (14). No roll is made.
 3. **Contest:** a save, a skill check against the defence, or automatic on
    a weak target.
+   **Gear prevention (between steps 3 and 4; change AR-51; armour design
+   14.1):** after a failed contest or an automatic landing, gear that
+   stops the condition (Ringed and Double Ring against Bleeding, Unbowed
+   against Prone) stops it here, before a ward is spent. Emits
+   `ConditionResisted {reason: ArmourVerb}`.
 4. **Ward:** a Warded charge is spent here, at most once per ability use
    per target.
 5. **Boss resolve, then Unyielding downgrade** (12.3). A pip cancels only
@@ -642,7 +647,9 @@ on an attack that already has disadvantage from another source.
 - **One move per hit (change W-8):** all forced movement one hit causes
   sums to at most 3 squares and resolves once. Collision damage applies
   only if a non-verb source contributed to the move; verb-sourced movement
-  moves a unit at most once per round (weapons design 7.2 rule 4).
+  moves a unit at most once per round (weapons design 7.2 rule 4). Armour
+  verb signatures that move a target (Bull Rush) are verb-sourced
+  **(change AR-52; armour design 14.4)**.
 - **Drags:** a holder dragging a Grappled unit (18.4) is forced movement
   for opportunity attacks, the triggers in 9.4, hazard edges and terrain.
 - **M1:** pushes and drags stop before hazard squares, including terrain
@@ -1625,14 +1632,16 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     Condemned and Withered needs content review; Frozen's shell resists the
     burst.
 - **Corroded** — minor · **M2**
-  - Effect: armour class −N (+1 against heavy armour or armoured traits).
+  - Effect: armour class −N (+1 against heavy armour or armoured traits,
+    read as `CountsAsHeavy`; armour design 6.1) **(change AR-12)**.
     On application it strips one unbroken layer not tagged acidproof.
   - Intensity: valued by band (illustrative 1/2/3).
   - Duration: `turns:3`. Ends on shakeOff (rinse), a tonic, or Soaked
     (override).
   - Sources: acid rider, oozes, rust-themed monsters.
   - Interactions: shares the armour class slot under the same-number rule;
-    ends Frozen; Warded absorbs it at step 4 (it does not strip wards).
+    outside the reduction cap (armour design 9.2); ends Frozen; Warded
+    absorbs it at step 4 (it does not strip wards).
 - **Exposed (type)** — minor · Later
   - Effect: one ladder step weaker to the named type; never past weak;
     immunity unaffected.
@@ -1791,7 +1800,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Sources: thunderclap spells; wax-plug consumables.
 - **Hushed** — beneficial · Later
   - Effect: its actions make no noise for hearing range; loud checks become
-    quiet; its stealth ignores the heavy armour penalty.
+    quiet; it ignores the heavy armour stealth penalty, passive and checks
+    (Clatter) **(change AR-13; armour design 7.3)**.
   - Intensity: binary.
   - Duration: sustained, or event `untilRest`. Ends when it attacks or
     combat starts.
@@ -2012,6 +2022,10 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Sources: defensive Techniques; stoneskin-style potions.
 - **Fortified** — beneficial · Later
   - Effect: +2 armour class; critical hits against it count as normal hits.
+    Does not stack with the Raise shield property: the bonus is
+    max(Fortified 2, Raise 2 unless Pry), so Fortified applies against Pry
+    (armour design 6.1). Its crit downgrade comes first and spends nothing
+    (armour design 8.1 rule 7) **(change AR-14)**.
   - Duration: up to 10 turns.
   - Sources: Shield-of-Faith-shaped spell (SRD); stances.
 - **Resisting (type)** — beneficial · Later
@@ -2166,19 +2180,35 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Duration: until the first short rest or the next camp (event source,
     C5).
   - Sources: camp meal events.
-- **Pitted Armour** — minor · Later (needs the items design)
-  - Effect: the worn armour's value −1 per level (a gear-layer change).
-  - Intensity: cap 2.
-  - Duration: `untilCamp`; a Mechanics repair during a rest.
+- **Pitted Armour** — minor · Later **(change AR-11; armour design 9.4)**
+  - Effect: the worn or natural armour value −1 per level (a gear-layer
+    change), never below 10; never Dexterity, the shield or the unarmoured
+    base. It does not land on a unit with no armour value; the rider then
+    counts as not attempted.
+  - Intensity: one instance with intensity 1–2 (6.5); a second landing
+    raises it.
+  - Duration: `untilCamp`; a Mechanics repair during a short rest
+    (`pittedRepairDifficulty`), any member, one attempt per instance per
+    rest (`lastRepairRestId`). A success removes the whole instance.
   - Sources: rust monster (SRD); the Crushing weapon property
     (enemy-facing; reduces the monster's armour value, natural armour
     included; Later); the acid ooze touch (Later) **(change W-16; weapons
-    design 5.5, 17.10, 18.3)**.
+    design 5.5, 17.10, 18.3)**. Rust lands only on `metal` armour (worn
+    armour tagged `metal`, or natural armour by its `metal` flag); acid and
+    Crushing land on any armour. Floor 2 and deeper, visible from the type
+    ("Pits armour"); counts toward that type's 2 conditions.
+  - Interactions: Blued (Later) makes an armour immune; stacks with
+    Corroded (a different layer); shares the reduction cap of 4 with
+    piercing by the reduction it actually applies (armour design 9.1);
+    counts toward the cap of 2 harmful lingering conditions (14) and
+    follows the unit.
 - **Notched** — minor · Later **(agreed; change W-12; weapons design 5.6)**
   - Effect: the weapons in the weapon set that was active when Notched
     landed roll their dice one size smaller (minimum d4) and lose their
     verb. On a focus it suppresses only the focus verb. Shields and natural
-    weapons are unaffected.
+    weapons are unaffected, except that a Reliquary Shield is a focus:
+    Notched may land through it and suppresses Spare only, never the AC
+    **(change AR-15; armour design 10.2)**.
   - Intensity: binary. The instance records the instanceIds of the items
     in that set when it lands (as Teetering records its hazard), not the
     set's slot. It applies only if the active set holds at least one weapon
@@ -2477,7 +2507,8 @@ Each tied to a risk:
 - **Rules owned by designs that do not exist yet:** hazard placement
   (dungeon generation); Disarmed, Coated, Clinging,
   Pitted Armour and tonics (items; Disarmed's rules are now in weapons
-  design 16, still Later); the rest of death and healing.
+  design 16 and Pitted Armour's in armour design 9.4, both still Later);
+  the rest of death and healing.
 - **Protected content.**
   - Generic names that match other games' conditions need a check before
     shipping. Dazed is the one kept; the fallback name is "Addled".
@@ -2533,11 +2564,13 @@ the exact section it touches.
 
 - **Items and inventory:** the generic layer is settled by the items design
   (2026-11-16). Open in its category designs (items design 17): tonics and
-  their prices, Remedy, flasks (water, oil), Disarmed, Coated, Clinging,
-  Pitted Armour. Weapons and foci are no longer pending: see the weapons
-  design (2026-11-17). Disarmed and Coated stay Later; armour, starting
+  their prices, Remedy, flasks (water, oil), Disarmed, Coated, Clinging.
+  Weapons and foci are no longer pending: see the weapons
+  design (2026-11-17). Disarmed and Coated stay Later; starting
   kits, consumables (coatings), scrolls and wands remain open in their
-  category designs **(change W-15)**.
+  category designs **(change W-15)**. Armour and shields are no longer
+  pending, and Pitted Armour is settled: see the armour design
+  (2026-11-17, 9.4) **(change AR-16)**.
 - **Enemies:** morale (Demoralised, Routed, Emboldened, Cowed) is resolved
   by enemies design 14; elite definitions for the depth gates (7.1) and
   enemy condition kits within the budget (9.2) are settled there too.

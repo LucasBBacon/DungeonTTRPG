@@ -232,10 +232,29 @@ without migrating any data. **(agreed)**
   "trader": { "floors": [2, 4], "presencePermille": 500, "stock": [2, 3],
               "containersFloor": 1, "carriedFloor": 1,
               "pricePermille": 1250, "barterPermille": 600, "tonicMax": 1,
-              "servicePrice": { "identify": 20, "recharge": 40, "tend": 40 } } }
+              "servicePrice": { "identify": 20, "recharge": 40, "tend": 40 } },
+  "kindToLocation": { "helm": "head", "hood": "head", "circlet": "head",
+    "gloves": "hands", "gauntlets": "hands", "bracers": "hands",
+    "boots": "feet", "cloak": "back", "amulet": "neck", "ring": "finger",
+    "charm": "none", "capacity": "none" },
+  "wornLocations": { "head": 1, "hands": 1, "feet": 1, "back": 1,
+    "neck": 1, "finger": 2, "none": 2 },
+  "ePlusGate": { "minSimRuns": 200, "minPlaytestRuns": 10,
+    "freeSlotPickMinPermille": 500, "fullSlotPickMaxRatioPermille": 500,
+    "nearTieCampMaxPermille": 250, "nearTieValueMargin": 1,
+    "playtesterAsks": [3, 10], "vetoBindMaxPermille": 100 } }
 ```
 
-All values *(illustr.)*. `basePrice` (supply, Remedy, mundane bases) and
+`kindToLocation` and `wornLocations` are the armour design's location
+rule (armour design 5.4); `ePlusGate` is its E+ gate (armour design 5.10),
+whose numbers are the lead's binding numbers, **not tuning**: only the
+lead changes them. **(change AR-31)**
+
+A pre-approved lever may raise `trinketSlots` to 3 (armour design 5.10,
+E+); it is off by default, and the count stays 2 until the lead switches
+it on. **(change AR-47, conditional)**
+
+All values *(illustr.)*, except the `ePlusGate` block. `basePrice` (supply, Remedy, mundane bases) and
 `size` stay on the records; `stackMax` is read from here by `kind`, and
 gear is always 1. A save records the hash of `inventory.json` and resumes
 only under the same file, so a tuning change (for example kill-switch
@@ -254,7 +273,7 @@ how Retrieve works is a tuning change, not a redesign. **Its value
 | **Active weapon set** (main hand + off hand) | A weapon; weapon + shield; weapon + focus; light + light; a focus alone; rod + shield; rod + off-hand focus; or a two-hander, the staff or the two-handed instrument, stored at `main` with `off` derived as blocked. Slot rules: weapons design 11.1 **(change W-6)** | No | Attacks and granted abilities |
 | **Spare weapon set** (1) | A second full loadout, shield included. This is what "a spare weapon" means (change I-7). It is **empty** only when both hands are empty. | No | The settled **bonus action** swaps the two whole sets, so it is always clear where the shield goes |
 | **Armour** (1) | Body armour | No | Passive. Cannot be changed in combat. |
-| **Trinkets** (2) | Rings, amulets, cloaks, charms: one slot type, an attunement-style cap | No | Passive plus granted abilities. Cannot be changed in combat. |
+| **Trinkets** (2) | Worn items: rings, amulets, charms, cloaks, helms, gloves, boots; at most one per body location (rings two); never AC (armour design 5.4) **(change AR-30)** | No | Passive plus granted abilities. Cannot be changed in combat. |
 | **Belt** (2; a feature or offer may add a 3rd; hard maximum 3) | `beltable` items only: consumables, scrolls and wands, one stack per slot | No | **The only place consumables, scrolls and wands are used from in combat** |
 | **Pack**: max(2, 3 + Strength) slots | Anything. Size-1 items cost 1 slot; bulky items cost 2. Bulky means two-handers, armour and shields, and only while in the pack. Occupancy is the sum of sizes; a pack index is only an ordering key. | It is the pack | Only through Retrieve (an action) |
 
@@ -354,8 +373,12 @@ counters.
 The summary marks one member with ★: usable first, then the largest gain,
 then free room, then unit order. **Gain** is an integer: tenths of expected
 damage per turn against `floorTypicalAc` (the enemies 6.2 target-table AC
-at the floor's standard room level, lead's call) for weapons, or the AC
-change for armour and shields; other items rank by value. One click on
+at the floor's standard room level, lead's call) for weapons; for armour
+and shields, AC change × 10 + value difference − the stealth term (−10 if
+the item would newly make the recipient the party's worst stealth
+member); other items rank by value. Strained recipients rank after every
+usable, unstrained one; for pieces, a member with a free slot and a free
+matching location comes first (armour design 16.4) **(change AR-32)**. One click on
 another portrait overrides it. Suggestion quality is a release
 requirement (19.3: Take all agrees with the scorer's best placement at
 least 90% of the time).
@@ -413,8 +436,10 @@ Every greyed button names one reason **(settled, ability model 15.4)**:
 `NotInCombat`, `BeltFull`, `PackFull`, `NotBeltable`, `NotAdjacent`,
 `NoFreeInteraction`, `StrengthThreshold`, `HardRequirement`, `Untrained`,
 `OverCapacity`, `RestOnly`, `Clinging` (Later), `NoCoin`, `Unsellable`,
-`SupplyFull`, `OutOfStock`, `CampChoiceMade`, and Later `ServiceUsed` and
-`NotBarterable`.
+`SupplyFull`, `OutOfStock`, `CampChoiceMade`, `LocationOccupied`,
+`ReactionCap`, and Later `ServiceUsed` and `NotBarterable`. `Untrained`
+also covers armour and shield training (armour design 7.2, 16.3)
+**(change AR-33)**.
 
 ## 8. The loot summary
 
@@ -465,7 +490,10 @@ wandering trader reuse its card and comparison components.
   spare"; "fits: pack"; "fits if Longsword leaves" (the core suggests the
   lowest-value displacement: bulky first, then value, then instanceId);
   "Strained: needs Str +1" (the soft threshold, weapons design 10.1; the
-  item can still be carried and wielded) **(change W-6)**.
+  item can still be carried and wielded) **(change W-6)**. For armour,
+  shields and worn items: "cannot wear: untrained"; "Strained: needs Str
+  +1" or "+2" (a warning, never a refusal); "replaces X (feet)" (armour
+  design 5.8, 16.3) **(change AR-33)**.
 - **Suggested recipient (★):** 6.3.
 
 ### 8.3 Actions
@@ -882,6 +910,10 @@ family: { id: "family.longsword", category: "weapon", improvised: {...},
   category *(illustr.)*: weapons and armour 2, trinkets 1, consumables
   unlimited. A cap of 2 lets a committed build find a higher-rarity
   upgrade of its weapon. How shop and trader stock count: 10.4.
+- Trinket families are finer than trinket kinds (`family.visored_helm`,
+  never `family.helm`): at least 3 legal families per piece location, as
+  a running total in each wave from M2. The Reliquary Shield counts under
+  `shield` (armour design 5.4, 10.2) **(change AR-34)**.
 - `improvised` lives on the family; validation requires it for every
   weapon family (settled, enemies 15.9).
 
@@ -916,8 +948,8 @@ family: { id: "family.longsword", category: "weapon", improvised: {...},
 | `value` | int, checked at load | Σ fixed property values + rollable `count` × the table's `entryValue` + Σ values of the `use` ability and granted abilities, in offer-value units (12.6). Every roll gives the same value. |
 | `basePrice?` | int | Required for mundane and shop-only records (supply, Remedy) |
 | `flags` | set | signature, heirloom, unsellable, noSteal, unique, srd (with `srdSource`) |
-| `display` | object | iconId, modelId, glint. Never read by the rules. |
-| `weapon{}`, `armour{}`… | sub-records | Owned by the category designs (section 17). `weapon{}` and `focus{}`: weapons design 20.1 (change W-6). |
+| `display` | object | iconId, modelId, glint; `socket` (`head \| back \| none`, trinkets) (change AR-35). Never read by the rules. |
+| `weapon{}`, `armour{}`… | sub-records | Owned by the category designs (section 17). `weapon{}` and `focus{}`: weapons design 20.1 (change W-6). `armour{armourCategory, verb}`, `shield{}` and `trinket{kind, wornOn}`: armour design 16.1; `armourValue` is derived and never stored (change AR-35). |
 
 ### 12.4 Properties and the buff test
 
@@ -1171,7 +1203,7 @@ is original, so it carries no `srd` flag.
 | 15.9 item | Generic-layer answer | Category design that owns the detail |
 |---|---|---|
 | Weapon records, incl. multi-die (one-die conversion) | The weapon sub-record carries `dice[]` (a list, so "one die of the weapon's largest size", capped by the row die since enemies change W-5, is computable), `damageType`, `riderFlag` and tags | Weapons |
-| Armour records in the table AC bands with monster Dexterity | The armour sub-record carries `category`, `value`, `dexCap` and `strengthThreshold`, plus a content test against the enemies 6.2 bands | Armour and shields |
+| Armour records in the table AC bands with monster Dexterity | The armour sub-record carries `armourCategory` and `verb`; value, Dexterity cap and Strength threshold are derived from `armour.json`, never written on the record (armour design 16.1; change AR-36), plus a content test against the enemies 6.2 bands | Armour and shields |
 | Strength thresholds | Generic `requirements.strength {min, mode: hard\|soft}`, gating **wearing, never carrying** | Weapons; armour |
 | `improvised` attack per weapon family | On the **family record**; required for every weapon family | Weapons |
 | `monsterProfile`, `usableBy`, `family`, `requires`, `identifyDifficulty` | A **family default profile**, overridable per record; required exactly when `usableBy.monster`; applies benefits only | Each category |
@@ -1196,11 +1228,11 @@ is original, so it carries no `srd` flag.
 | # | Category design | Wave | Must decide |
 |---|---|---|---|
 | 1 | **Weapons (with foci)** | M1 | **Designed:** `2026-11-17-weapons-design.md` (weapons design), approved 2026-11-17, which adopts the no-ammunition-tracking recommendation (weapons design 9.4). Disarmed and Coated stay Later. **(change W-15)** |
-| 2 | **Armour and shields** | M1 | Categories, values, Dexterity caps (against enemies 6.2), Strength thresholds, the heavy-armour stealth penalty (stat model 6), shields in weapon sets, armour property tables, Pitted Armour (Later). Inputs from the weapons design 17.9 **(change W-13)**: the shield `bash{}` sub-record (1d4 B, Push, riderFlag false); the buckler grip recommendation; the Reliquary Shield with a `focus{}` sub-record; the tower shield (Later) |
-| 3 | **Starting kits** (small; may fold into 1 and 2) | M1 | `kit` records per class and per companion: weapon sets, armour, belt contents, starting coin. Answers ability model 20's "a minimal starting-equipment set for M1". |
+| 2 | **Armour and shields** | M1 | **Designed:** `2026-11-17-armour-design.md` (armour design), approved 2026-11-17, which takes the weapons design 17.9 inputs **(change W-13)**. Pitted Armour and the tower shield stay Later. **(change AR-37)** |
+| 3 | **Starting kits** (small; may fold into 1 and 2) | M1 | `kit` records per class and per companion: weapon sets, armour, belt contents, starting coin. Answers ability model 20's "a minimal starting-equipment set for M1". Armour kits as in armour design 13.6 **(change AR-37)**. |
 | 4 | **Consumables** (potions, tonics, flasks, coatings, Remedy) | M1 potions; M2 rest | Effects, `stackMax`, the use-value table, prices and pegs against supply, thrown flasks (bombs, oil, water; Oiled and Soaked), whether potions can be thrown (default no), Coated (Later), monster `useWhen`, banding |
 | 5 | **Scrolls and wands** | M2 | `classTags[]`, `use.difficulty: user \| fixed:N`, wand charge ranges and `camp` refill, the out-of-class Arcana rule (settled), property shapes |
-| 6 | **Trinkets** | M2 | Property tables (rings, amulets, cloaks, charms), capacity trinkets (at most +2), trinket families and caps |
+| 6 | **Trinkets** | M2 | Property tables (rings, amulets, charms, cloaks, helms, gloves, boots), capacity trinkets (at most +2), trinket families and caps. From the armour design **(change AR-37)**: piece kinds; location domains (armour design 5.6); the strict no-AC rule; the one-table rule; the reaction cap; pieces at Uncommon at most; at least 3 legal families per piece location per wave; `requires` tags for location hunger (armour design 5.7); the piece power target (armour design 17.3) |
 | 7 | **Heirlooms** | M3 | The template list, at Uncommon, banded |
 | 8 | **Curses** | Later | The variants used as item costs, the Clinging flow, cursed carriers, the "malign" hint |
 | 9 | **Wandering trader** (small) | Later | Service prices, presence chance, trader art and lines, within 10.9 |
@@ -1357,6 +1389,10 @@ The build fails on any violation:
     properties) + (the rollable table contains a non-`obvious` entry ?
     rollable `count` : 0) ≤ `hiddenMax`.
 
+Armour design 17.1 rules 10, 11, 13, 14 and 17 also apply (bulky armour
+and shields and no AC on trinkets; one table, one property; name
+collisions; hooks and dead properties; piece rules). **(change AR-38)**
+
 ### 19.2 Run-time invariants and tests
 
 Invariants, asserted as property tests:
@@ -1442,7 +1478,8 @@ Tests:
   - party view, party-wide placement, suggested recipient;
   - comparison strip with fit verdicts; pure-value swaps;
   - hand over, Administer and take-from-Downed;
-  - trinkets and capacity trinkets;
+  - trinkets, including worn-piece kinds, and capacity trinkets
+    **(change AR-39)**;
   - tonics, flasks, scrolls and wands with camp refill;
   - rarity tiers and banded properties;
   - dormant properties and Arcana identification;
@@ -1579,9 +1616,12 @@ mundane bases are not loot, and family caps all stand.
 - **Category designs** (section 17): every sub-record, property table,
   use-value table and price peg. The generic layer fixes only their shape.
   Weapons and foci are no longer pending: see the weapons design
-  (`2026-11-17-weapons-design.md`). Disarmed and Coated stay Later; armour,
+  (`2026-11-17-weapons-design.md`). Disarmed and Coated stay Later;
   starting kits, consumables (coatings), scrolls and wands remain open in
-  their category designs. **(change W-15)**
+  their category designs. **(change W-15)** Armour and shields are no
+  longer pending: see the armour design (`2026-11-17-armour-design.md`),
+  which also fixes the armour part of starting kits (13.6) and hands
+  worn-piece kinds to the trinkets design. **(change AR-39)**
 - **Death and healing:** whether companions can die (15's conditional
   rule); whether any healing lifts Downed (Administer assumes potions do
   not).

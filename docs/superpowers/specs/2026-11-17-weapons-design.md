@@ -618,7 +618,7 @@ records reference a verb and cannot override its text.
 | Tempo | **Aim** **(agreed)** | original | On your own turn, your first attack made **before you move** counts as having advantage for Exploit (it does not gain advantage) (6.3, 7.6). | M1 |
 | Guard | **Parry** | original | Reaction, policy `ifItChangesOutcome` with target filter `nonMinion`: +2 AC against one melee attack roll. | M1 |
 | Guard | **Set** | original | Reaction: when a hostile enters your threatened zone from outside it by its own movement, make one attack with this weapon. Default policy `always` with target filter `nonMinion`. | M1 |
-| Penetrate | **Graze** | SRD 5.2, adapted | Once per turn, when a Strength attack with this weapon misses, the target takes your Strength modifier (if positive) as the weapon's damage type. No rider, no verb. Never on a miss caused by a reaction (Parry, Interpose; exact test in 7.6). A natural 1 allows it. Minions take none. | M1 |
+| Penetrate | **Graze** | SRD 5.2, adapted | Once per turn, when a Strength attack with this weapon misses, the target takes your Strength modifier (if positive) as the weapon's damage type. No rider, no verb. Never on a miss caused by a reaction (Parry, Interpose or any reaction AC bonus; exact test in 7.6) **(change AR-42)**. A natural 1 allows it. Minions take none. | M1 |
 | Penetrate | **Pry** | original | This attack ignores the target's shield bonus and Interpose. | M1 |
 | Penetrate | **Puncture** | original | This attack doubles piercing's armour reduction. | M2 (with riders) |
 
@@ -646,7 +646,9 @@ records reference a verb and cannot override its text.
    hit cannot combine, and the shift is dropped.
    - **Verb-sourced** movement is: the verbs in 7.1, the verb signatures
      in 18.4 (Heavy Push, Long Hook, Crack, Keep Back, Binding Parry,
-     Driving Graze) and the shield bash's Push (17.9). Everything else
+     Driving Graze), the shield bash's Push (17.9) and armour verb
+     signatures that move a target (Bull Rush) **(change AR-49; armour
+     design 14.4)**. Everything else
      (a Technique push, Thunderous, Shatter) is **not verb-sourced**.
    - **Once per round** applies to verb-sourced movement only: a target
      already moved by a verb-sourced move this round ignores any further
@@ -716,17 +718,33 @@ records reference a verb and cannot override its text.
 these steps, in this order:
 
 1. **Declare** the attack and its mode: melee, reach, throw, launcher,
-   off-hand, opportunity attack or Set.
+   off-hand, opportunity attack or Set. **Grip (change AR-48; armour
+   design 10.2):** declaration gains a `grip` input (`oneHand` or
+   `twoHand`), legal only for a versatile weapon in a set whose off hand
+   is empty or holds a buckler; it defaults to `oneHand` with a buckler,
+   and the AI picks it by the scorer. `twoHand` with a buckler sets
+   `bucklerOffUntilOwnTurnStart` at declaration, hit or miss, reactions
+   and opportunity attacks included.
 2. **Fix the roll mode:** collect advantage and disadvantage from every
    source, net them (one cancels one), and consume Helped if it applies.
    Exploit (6.3) and Vex read this net mode; Aim (7.6) is recorded here
    as a separate flag that qualifies the attack for Exploit and does not
-   change the mode.
+   change the mode. **Gear roll-mode cap (change AR-40; armour design 8.1
+   rule 6):** at most one gear-sourced roll-mode effect applies to an
+   attack against a unit, chosen by priority (unlimited passives, then
+   once-per-round, then charges; ties by slot order); suppressed effects
+   are not spent; Overlap qualifies only on net advantage; gear roll-mode
+   effects are suppressed while the target has Raise or Fortified.
+   Hailguard is fixed here, never after the roll.
 3. **Choose the ability** (6.2) and record it, with the mode, in
    `AttackDeclared`.
 4. **Roll** the attack.
 5. **Reaction window:** the target side's reactions (Parry, Interpose)
-   resolve here (ability model 14.3).
+   resolve here (ability model 14.3). **One reaction AC bonus per attack
+   (change AR-41; armour design 10.4):** by the window algorithm, in the
+   order pool-free target, then pool-free allies in unit order, then
+   charges with the target's own first; no reaction AC bonus is offered
+   after a gear-sourced disadvantage.
 6. **Hit or miss, and crit.** On a miss: Graze (7.6), then stop. A
    natural 20 hits and crits.
 7. **On-hit spends:** Techniques and `onHit` charge properties
@@ -984,8 +1002,10 @@ maps as `off` → `off`, `main` → `main`, `two` → `twoHand` (bulky).
 
 ### 11.2 Grips
 
-- **Versatile:** uses `versatileDice` when the set's off hand is empty.
-  Derived, never stored. A shield or focus blocks it.
+- **Versatile:** uses `versatileDice` when the set's off hand is empty,
+  or holds a buckler and the declared grip is `twoHand` (armour design
+  10.2). Derived, never stored. Any other shield, or a focus, blocks it
+  **(change AR-43)**.
 - **Two-handed:** `equip.slot: twoHand`, off hand blocked, bulky (size 2)
   in the pack. **(settled, items design 5.2, 12.3)**
 - **Guard verbs** (Parry) work from either hand.
@@ -1067,7 +1087,9 @@ design 12.2)**
 
 - A focus takes a hand (17.8), gives a **focus verb** to spells of its
   tradition, and carries properties. **Casting never requires one.**
-- Untrained in the tradition: no focus verb, and its properties are inert.
+- Untrained in the tradition: no focus verb, and its properties are inert,
+  except a Reliquary Shield, whose properties follow shield training
+  (armour design 10.2) **(change AR-44)**.
 - Every focus declares a **1d4 bludgeoning improvised bash**.
 - Hands and legal sets: 11.1. The staff's focus side works only
   two-handed (11.2).
@@ -1206,9 +1228,10 @@ design 12.2)**
   trigger the owner's Set under its current policy (by default the first
   non-minion). This prevents a stall exploit without letting a minion
   "spend" a zone it cannot trigger.
-- **No reaction priority rule.** Set, opportunity attacks and Parry trigger
-  at different moments and never compete at one decision point; each
-  follows its own policy and filter (7.1, ability model 7.3).
+- **No reaction priority rule except the AC-reaction order in 7.5 step 5
+  (change AR-41; armour design 10.4).** Set, opportunity attacks and Parry
+  trigger at different moments and never compete at one decision point;
+  each follows its own policy and filter (7.1, ability model 7.3).
 - **Aim** is valued as the expected Exploit dice on the turn's first
   attack, and only when that attack is made from the current square before
   moving (Steady Aim: a destination at most 1 square away).
@@ -1436,7 +1459,7 @@ No two launchers share a verb.
 | Orb (arcane) | M2 | off | **Reach Out:** cantrip range +4 (targeting) | The back-line artillery caster |
 | Rod (arcane) | M2 | **main** | **Shape:** line and cone cantrips +2 length, inside the area cap (targeting) | Rod and shield |
 | Tome (arcane) | M2 | off | **Annotate:** swap one known spell at a short rest instead of camp (economy) | The planning focus |
-| Holy symbol (divine) | M2 | off | **Spare:** once per turn, one area spell leaves out one ally square (targeting) | A divine caster with a shield instead takes a **Reliquary Shield** (an armour-design shield with a `focus{}` sub-record), so no new placement rule is needed |
+| Holy symbol (divine) | M2 | off | **Spare:** once per turn, one area spell leaves out one ally square (targeting) | A divine caster with a shield instead takes a **Reliquary Shield** (an armour-design shield with a `focus{}` sub-record), so no new placement rule is needed. The Reliquary Shield is notable-only; rod + Reliquary is legal (armour design 10.2; change AR-44) |
 | Totem (presence) | M2 | off | **Loom:** Frighten and presence ranges +3 (targeting) | Breaks morale from range |
 | Instrument (presence) | Later | two | **Carry:** Rally and presence buffs +3 range | Costs both hands for no weapon |
 
@@ -1452,6 +1475,8 @@ No two launchers share a verb.
 - **Buckler (recommended to the armour design):** does not block versatile
   dice, and grants **no** Parry, to limit Parry sources.
 - **Tower shield (Later):** grants Interpose; soft Strength +1.
+- **Designed in the armour design** (section 10; the Reliquary Shield in
+  10.2) **(change AR-44)**.
 
 ### 17.10 Natural weapons (monster ability templates, never items)
 
@@ -1516,7 +1541,7 @@ Templates are `natural.*` ability records, used by unarmed types (enemies
 | Honed | rider | The weapon part carries its type's rider flag | any | M2 |
 | Long Haft | targeting | Reach +1: maximum 2, or 3 on a `minReach` 2 weapon (8) | reach families, spear | M1 |
 | Far-flight | targeting | Range +4 / +6 / +8 (cap 20); thrown range +3 / +4 / +5 | launchers, thrown | M1 |
-| Quickdraw | economy (`fight` pool, minor) | Swapping to this set is free once per fight | never with a `type` property | M1 |
+| Quickdraw | economy (`fight` pool, minor) | Swapping to this set is free once per fight | never with a `type` property; also shields, since it acts on the set (armour design 14.5; change AR-50) | M1 |
 | Opener | charge (`fight` pool, minor) | Your first attack each fight has advantage | any | M1 |
 | Parrying | prevent, charge | Parry reaction 1 / 2 / 3 per rest | non-Parry families | M1 |
 | Lunging | charge, targeting | 1 / 2 / 2 per rest: move 2 squares as part of an attack; the target makes no opportunity attack | melee | M1 |
@@ -1530,6 +1555,9 @@ Templates are `natural.*` ability records, used by unarmed types (enemies
 | Sure Grip | prevent | Cannot be Disarmed; immune to Notched | any | Later |
 | Quivered | economy | Applying a coating is a free interaction | launchers | Later |
 | Bloodletter | rider, cost | Slashing rider on every hit; you take 1 / 2 / 3 at turn start while your Bleed runs | slashing | Later |
+
+A shield may also roll `props.verb.push` (18.4) through its bash's Push
+(armour design 14.5) **(change AR-50)**.
 
 ### 18.3 `props.weapon_major` (value 2)
 
@@ -1992,8 +2020,10 @@ left as they are (7.2 rule 9).
   (6.4); each class's training lists; the Technique option and the "verb
   training (family)" offer (7.3); subclasses keyed to verbs or groups; disarm Techniques
   (Later); the M1 slice class, which decides whether the staff ships in M1.
-- **Armour and shields:** the bash sub-record, buckler, Reliquary Shield
-  and tower shield (17.9, W-13); Pitted Armour (Crushing, Later).
+- **Armour and shields:** designed in
+  `2026-11-17-armour-design.md`: the bash sub-record, buckler, Reliquary
+  Shield and tower shield (17.9, W-13; armour design 10) and Pitted
+  Armour (Crushing, Later; armour design 9.4) **(change AR-44)**.
 - **Consumables:** coatings (special arrows, edge oils), their riders and
   `stackMax`, and Coated (Later; W-11).
 - **Starting kits:** weapon sets per class and companion (items design 17,

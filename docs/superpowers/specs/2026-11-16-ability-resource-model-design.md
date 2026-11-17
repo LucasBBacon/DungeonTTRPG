@@ -196,7 +196,7 @@ of consumables.
 | Tag | Spent count reset to zero at | Used for |
 |---|---|---|
 | `turn` | The unit's turn start | Once-per-turn passives; the reaction |
-| `fight` | Combat start | Minor uses only, such as Rally once per ally. No major power is per-fight. |
+| `fight` | Combat start | Minor uses only, such as Rally once per ally. Every armour, shield and piece `fight` use is a minor use: cancelling one event per fight (Ringed, Double Ring, Proof, Twice-Proof), Shadowed, Warding Lining, Runner's Boots and Forewarned's fight-start window **(change AR-6, armour design 8.1 rule 5)**. No major power is per-fight. |
 | `rest` | A completed short rest, and camp | Martial charges, Second Wind, caster rest recovery |
 | `camp` | Camp only. *Later:* one named exception, a wandering trader's paid **Recharge**, which resets one wand's `camp` pool, once per trader, priced in coin; the simulator reports wand charges per floor with and without it (change I-16, items design 10.9, 19.1, 19.3) | Spell slots, Surge, signature abilities, wand charges |
 | `never` | Never | Consumables |
@@ -365,6 +365,10 @@ Every ability declares exactly one cost **(lead's call)**:
 | Retrieve: pack to belt or to an empty spare set **(change I-5, items design 7.1)** | Action (`packInCombat` flag) |
 | Pick up or seize an item in or next to your square: to a free belt slot or matching stack, an empty spare set, or else `claimed` (unusable this fight) **(change I-5, items design 7.1)** | Free interaction |
 | Swap weapon sets (active and spare, shield included) **(change I-5, items design 5.2)** | Bonus action |
+| Shield bash (the Shield kind, in the active set; bucklers, Reliquary and tower shields have none): 1d4 bludgeoning, Push; Strength + proficiency to hit, Strength to damage; not an off-hand attack **(change AR-7, armour design 10.2)** | Replaces one attack |
+| Wear armour or a shield: armour and shield training are hard; untrained, it cannot be worn (`Untrained`) **(change AR-7, armour design 7.2)** | None; armour is never changed in combat |
+| Strained: below a worn armour's or active shield's Strength threshold, speed −2, once per unit however many items are Strained **(change AR-7, armour design 7.1)** | None; a derived penalty, never a condition |
+| Stiff: worn medium or heavy armour gives disadvantage on Acrobatics checks (slip past, escape a grapple by Acrobatics, narrow ground) **(change AR-7, armour design 7.3)** | None; a standing modifier |
 | Opportunity attack | Reaction |
 | Off-hand attack with a light weapon, after at least one Attack-action attack this turn; Nick moves it into the Attack action, once per turn **(change W-2, weapons design 11.3)** | Bonus action, once per turn |
 | Threatened zone: an opportunity attack when a hostile leaves it by its own movement, Set when a hostile enters it from outside; they share the round's one reaction, and Disengage stops both. Movement resolves square by square, with the trigger timing of weapons design 8 **(change W-2)** | Reaction |
@@ -407,6 +411,11 @@ anti-goal)**
   cannot be triggered while another reaction is resolving, and boss actions
   happen only between turns. So a pending decision is at most one level
   deep inside an ability's resolution. **(lead's call)**
+- At most one reaction AC bonus applies to any attack roll, resolved by the
+  window algorithm in armour design 10.4: candidates in order, skipping any
+  the attack ignores or whose unit has no reaction left; each candidate's
+  policy (or "ask me") is evaluated in turn, and the first that fires
+  closes the window. The rest are not taken and not spent. **(change AR-8)**
 
 ## 8. Targeting and areas
 
@@ -482,7 +491,10 @@ a ground zone (conditions design 11). **(change C11)**
 - Piercing is the exception in form: its rider is an always-on reduction to
   the target's armour on the attack roll, larger against a weak target. It
   needs no flag, has no save, and does not count toward the bounds in 9.3.
-  **(settled)**
+  **(settled)** Sizing: 1 against any armour value, +1 against
+  `CountsAsHeavy`, +1 against a weak target, ×2 with Puncture; shares a cap
+  of 4 with Pitted (stat model 8.2, change AR-3; armour design 9.1).
+  **(change AR-10)**
 
 ### 9.2 Rider saves
 
@@ -604,6 +616,10 @@ that when setting numbers.
   - skill mastery **(settled)**;
   - verb training (family): training, and so the verb, in one named
     weapon family **(change W-3, weapons design 7.3)**;
+  - armour training: the next category, up to the class's ceiling
+    **(change AR-9, armour design 7.2)**;
+  - shield training: only for a class whose `shieldTraining` is `allowed`
+    **(change AR-9, armour design 7.2)**;
   - timescale: one `camp` pool becomes a `rest` pool, never the unit's
     last `camp` pool. At most one per run.
 - Every offer declares `requires` tags (what build it suits) and a value in
@@ -1008,13 +1024,15 @@ Applied on 2026-11-16:
   **(change C13)**
 - **Items and inventory:** the generic layer is no longer pending. It is
   in `2026-11-16-items-inventory-design.md` (items design). What remains
-  open moves to the category designs (items design 17): armour values and
-  Strength thresholds, starting kits (class kits need a minimal
-  starting-equipment set for M1), tonics, Remedy and flasks, consumables
-  (coatings), scrolls and wands, Clinging and Pitted Armour. **(change
+  open moves to the category designs (items design 17): starting kits
+  (class kits need a minimal starting-equipment set for M1), tonics,
+  Remedy and flasks, consumables (coatings), scrolls and wands, and
+  Clinging. **(change
   I-15)** Weapons and foci are no longer pending: they are in
   `2026-11-17-weapons-design.md` (weapons design). Disarmed and Coated stay
-  Later. **(change W-15)**
+  Later. **(change W-15)** Armour and shields are no longer pending:
+  armour values, Strength thresholds and Pitted Armour (Later) are in
+  `2026-11-17-armour-design.md` (armour design). **(change AR-10)**
 - **Enemies:** no longer pending. Monster cost is in enemies design 10.1,
   behaviour after losing sight in 12.1, morale in 14 and experience on
   resolution in 16 (`2026-11-16-enemies-design.md`). **(change A-7)**

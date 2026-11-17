@@ -212,12 +212,12 @@ Authored on the base type. The composed unit exists only at runtime.
 | `nativeLevel` 0–12 | Plus a legal `levelShift` range of −2 to +2 | M1 (shift M2) |
 | `role` | Brute, soldier, skirmisher, artillery, controller, leader, lurker or minion (17.1) | M1: brute, soldier, artillery, minion |
 | `rank` | Minion, standard, elite or boss (7) | M1: minion, standard, boss |
-| `abilities` | Main and secondary follow the spread table (5.3). Intelligence (initiative) and Wisdom (perception and guile) are authored; the others default to 0. Range −3 to +5. | M1 |
+| `abilities` | Main and secondary follow the spread table (5.3). Intelligence (initiative) and Wisdom (perception and guile) are authored; the others default to 0. Range −3 to +5. The type declares Dexterity's spread slot (`main`, `secondary` or `other`), which armour validation reads at every shift (armour design 12.2). **(change AR-53)** | M1 |
 | `hp` | Within the band of the table row | M1 |
 | `trainedSave` | Exactly one | M1 |
 | `skills` | 0–2 from Perception, Stealth, Athletics, Acrobatics and Intimidation, and only skills the rules or the AI use | M1 |
-| `armour` | Natural armour (medium formula), or from loadout | M1 |
-| `speed` | Default 6; range 3–8; 0 only if `immobile` | M1 |
+| `armour` | Natural armour `{natural: offset, metal?}`: the medium band value + offset (armour design 12.1), or from loadout. Armed types may use natural armour for display-only issue hides (furs). **(change AR-17)** | M1 |
+| `speed` | Default 6, authored before armour penalties; the derived speed stays within 3–8 (armour design 7.3); 0 only if `immobile` **(change AR-53)** | M1 |
 | `size` | Field only. A unit cannot shove or grapple a target more than one size larger; this binds the party too **(change A-10)**. Multi-square bosses are Later. | M1 |
 | `senses` | 0–1 sense trait: **Keen** (advantage on the group's noticing roll and on Search; +5 to its passive perception) or **Sightless N** (treats Hidden units within N squares as noticed; immune to `sight`, which uses its 1 control-tag immunity). No darkvision, because there is no light model. | M2 |
 | `traits` | Within the settled budgets | M1 |
@@ -247,12 +247,15 @@ Authored on the base type. The composed unit exists only at runtime.
   change S-11)**
 - **AC uses the stat model's armour formula.** Natural armour uses the
   medium formula and counts as medium for every rule that reads the armour
-  category. A shield adds on top. The table AC (6.2) is a **validation band
+  category, except that the armoured trait or Plated makes `CountsAsHeavy`
+  true for Corroded, piercing and Clatter; the AC formula is unchanged
+  (armour design 6.1). A shield adds on top. The table AC (6.2) is a **validation band
   of ±1**, not a top-up target. The loadout picks an armour record and a
   Dexterity that land in the band, using lighter armour when a shield is
-  carried. The band is checked on the base type after its level shift; an
-  affix's AC change is governed by the threat band (6.5) instead.
-  **(lead's call)**
+  carried. The band is checked on the base type at every legal level
+  shift (armour design 12.2); an affix's AC change is governed by the
+  threat band (6.5) instead. Issued armour verbs obey the role-answer rule
+  (armour design 8.1 rule 10). **(lead's call; change AR-18)**
 
 ### 5.3 Ability spread by level
 
@@ -318,7 +321,7 @@ Authored on the base type. The composed unit exists only at runtime.
 | Always | (3) The condition row, under the settled icon rules |
 | Always | (4) Affix names, one word each |
 | Once seen | One "ready" marker for a seen hard-control or area ability that is ready next turn |
-| On hover or inspect | Gear line, with the weapon's verb ("Pike: piercing, reach 2, Set · Hide: light"; change W-5), "Carries: …", cooldowns and uses, the morale profile and break line, traits once revealed by Lore, the intent line (13.3) |
+| On hover or inspect | Gear line, with the weapon's verb ("Pike: piercing, reach 2, Set · Chain mail: heavy, Ringed"; changes W-5, AR-19), "Carries: …", cooldowns and uses, the morale profile and break line, traits once revealed by Lore, the intent line (13.3) |
 
 A UI test renders the worst legal composed elite on each floor at minimum
 zoom.
@@ -437,7 +440,17 @@ round-1 row.
 | Boss: expected damage to one unit per round (its turn plus boss actions) | ≤ 35% |
 | Boss: worst spike (dice at maximum, a crit, one boss action) | ≤ 70% |
 | Boss: a full-HP hero cannot be reduced to 0 in one round | Unless at least one crit lands |
+| AC envelope, levels 1–10: the 6.2 table attack's hit chance against the maximum sustained party AC, normal roll mode **(change AR-20)** | ≥ 35% |
+| AC envelope: against the maximum charged AC (Raise or Fortified, plus one reaction), normal roll mode **(change AR-20)** | ≥ 15% |
+| AC envelope: against the maximum sustained AC with the one allowed gear roll-mode effect **(change AR-20)** | ≥ 10% |
 
+- **Armour (change AR-20; armour design 11, items 1 and 2):** the guards
+  are also evaluated at the lowest legal party AC as armour design 11
+  item 2 defines it, and a failure fails the build. From M2 each guard
+  runs per attacker at the minimum over party members of (visible AC −
+  that attacker's piercing R), Puncture included (armour design 9.1). The
+  AC envelope rows are read at levels 1–10 against the maximum party AC,
+  not at the reference hero.
 - The guards assume the **SRD double-dice crit** for every unit. That rule
   is not yet settled (section 25; change S-3). The guards are
   parameterised on whatever crit rule is adopted.
@@ -489,11 +502,18 @@ integers, per 3.1.
   cooldown and uses allow, its at-wills otherwise. Hit chances are out of
   20 against the hero's AC, crits included; saves use the hero's best
   save. Each harmful condition it applies adds its scorer control value
-  (conditions 17.3) × the chance it lands.
+  (conditions 17.3) × the chance it lands. A piercing attacker's hit
+  chances are computed at the reference AC − its R (armour design 9.1).
+  **(change AR-21)**
 - **Defence** (tenths of HP): `FloorDiv(HP × 40, h + f)`, where h is the
   reference hero's hit chance out of 20 against the unit's AC, and f is the
   chance out of 20 that the unit fails its middle save against the hero's
-  ability difficulty. Attacks and saves are weighted equally.
+  ability difficulty. Attacks and saves are weighted equally. Armour
+  verbs price the defence term through `verbDefencePermille`
+  (provisional), later measured per floor theme (armour design 12.5).
+  Reaction non-stacking (at most one reaction AC bonus per attack, armour
+  design 10.4) applies when pricing leader-and-soldier pairs. **(change
+  AR-21)**
 - **Threat** (permille) = `FloorDiv(offence × defence × 1000, offenceRef ×
   defenceRef)`, where the reference values are those of the on-level
   standard soldier row (6.2) at the same level. That row's threat is 1000.
@@ -583,7 +603,8 @@ M2. A deterministic transform by k rows, −2 to +2:
 - HP and flat damage scale by the ratio of the new row to the native row,
   as `FloorDiv(value × newRow, nativeRow)` (3.1), and the die is
   unchanged;
-- AC moves by the table's AC change;
+- AC is recomputed from the loadout; a shift whose AC leaves the band is
+  illegal (armour design 12.2) **(change AR-22)**;
 - at −2 the type also drops its second limited ability, which is the
   difference the player notices.
 
@@ -602,8 +623,9 @@ override profile weights within ±50% of the role default; validation checks
 the composed unit.
 
 **Silhouette rule:** a unit's role must be readable at isometric zoom from
-its model and issue gear, before any Lore. A bow means artillery, a tower
-shield means soldier, a banner means leader.
+its model and issue gear, before any Lore. A bow means artillery, a tall
+shield means soldier, a banner means leader. Issue helms (crests on
+leaders) are display-only props. **(change AR-23)**
 
 ### 8.2 Composition order
 
@@ -675,6 +697,9 @@ Build order:
 | Standard | 2 | 0–2 | ≤1 | ≤1 | ≤2 | Controllers and caster leaders |
 | Elite | 2 (+ multiattack) | 0–2 (+1 with option b) | ≤1 | ≤1 | ≤2 | Controllers and caster leaders |
 | Boss | 2 | 2–4 | ≤1 | ≤1 | ≤2 per phase kit, ≤3 across phases **(change C-2)** | Yes |
+
+A shield bash exists for a monster only if it is authored as one of its
+two at-wills (armour design 10.5). **(change AR-24)**
 
 A carried notable item may add one limited ability beyond the cap. Its
 conditions still count.
@@ -951,6 +976,10 @@ The added terms are data-weighted percentages. **(change A-6)**
 | Quarry | +40% to the group's expected damage against the Quarry. The declarer's own attacks are exempt from focus spread. | Honest, telegraphed focus | M2 |
 | Cohesion, body-block, area spread, hold | Stay inside the leader's aura; guard a ward; spread out against the party's *known* areas; hold chokepoints | Formation | M2 |
 | Leash | Candidate squares beyond `leash` of the post are dropped. **Sentinel profile and bosses only.** | Guards and arenas | M2 (bosses M1) |
+
+Candidates are scored through the resolve preview, with armour verbs
+and their spent state applied (Ringed, Proof); "lowest AC" means visible
+AC (armour design 12.5). **(change AR-25)**
 
 **Kill bonus** = min(`killBonus%` × the target's T, 1.5 × the attacker's
 best at-will score). T is the target's best expected one-step score
@@ -1772,7 +1801,12 @@ reward card is a separate screen and does not count.
 4. **Assignment:** the first legal carrier in the order boss, elite,
    leader, standard. Legal means `usableBy` matches and the fully composed
    unit, item included, passes every budget, the threat band (6.5)
-   included. Otherwise the next candidate is tried (10.5 step 8); if none
+   included. For a notable armour or shield, legal also means: the
+   carrier's worn issue armour has the same `armourCategory` (natural
+   armour never matches) or the same shield kind; its derived AC is
+   unchanged; its rolled properties pass the role-answer rule; reaction
+   properties fit the 9.1 caps (armour design 12.6). **(change AR-26)**
+   Otherwise the next candidate is tried (10.5 step 8); if none
    is legal, the item goes to a container in the same room. If the cost
    add is above 25% *(illustr.)* of the room's budget, the item also goes
    to a container in that room. **(change I-9; items design 12.7)**
@@ -1944,7 +1978,9 @@ to the category designs (items design 17): weapons, armour values and
 Strength thresholds, starting kits, tonics, Remedy and flasks, scrolls and
 wands, Coated, Disarmed, Clinging and Pitted Armour. Weapons and foci are
 since settled by the weapons and foci design (2026-11-17); Disarmed and
-Coated stay Later **(change W-15)**. The original list:
+Coated stay Later **(change W-15)**. Armour values, Strength thresholds
+and Pitted Armour (Later) are since settled by the armour and shields
+design (2026-11-17) **(change AR-29)**. The original list:
 
 - Slots: stacks of tonics and potions, and how supply uses slots
   **(settled as open)**.
@@ -2039,7 +2075,7 @@ affix costs ×1.2. **Gentle** means legal on floor 1.
 | Group | Affix | Effect | Floor | Roles | Wave |
 |---|---|---|---|---|---|
 | Defence | **Warded** (gentle) | Warded with 1 charge (2 on floors 4–5), `oncePerLife` | 1+ | Any | M2 |
-| Defence | **Plated** (gentle) | Armour counts as **heavy** (so Corroded's +1, the piercing rider and the stealth penalty apply), +2 AC (outside the ±1 base band, governed by the threat band: 5.2, 6.5), speed −1 | 1+ | Brute, soldier, leader | M2 |
+| Defence | **Plated** (gentle) | Armour counts as **heavy** for category-reading rules only (so Corroded's +1, the piercing rider and the stealth penalty apply), +2 AC as the `traits` term of the AC query, never part of the armour value (outside the ±1 base band, governed by the threat band: 5.2, 6.5), speed −1 as the heavy speed penalty, paid once (armour design 6.1, 7.3) **(change AR-27)** | 1+ | Brute, soldier, leader | M2 |
 | Defence | **Hardened** | One theme layer with its breaker shown. Inside the 2-resistance budget, with a weakness alongside. | 2+ | Any | M2 |
 | Defence | Blurred | 3 charges, `oncePerLife` | 3+ | Skirmisher, lurker, controller | Later |
 | Mobility | **Swift** (gentle) | Speed +2 | 1+ | Brute, skirmisher, lurker | M2 |
@@ -2084,11 +2120,11 @@ in percent, all illustrative.
 |---|---|---|---|---|---|---|
 | **Charger** | Brute | 150 / 30 / 30 | 1 | Nearest, last attacker; kill bonus 130% | Walks through opportunity attacks to reach you; never retreats | M1 |
 | **Holder** | Soldier | 100 / 80 / 100 | 1 | Nearest to its ward | Holds the doorway; shoves toward hazards (M2) | M1 (hold term M2) |
-| **Kiter** | Artillery | 60 / 150 / 200 | 5 | Lowest AC in range; concentrating units | Keeps 4–6 squares away; steps back when engaged; falls back at 50% HP | M1 |
+| **Kiter** | Artillery | 60 / 150 / 200 | 5 | Lowest visible AC in range; concentrating units **(change AR-25)** | Keeps 4–6 squares away; steps back when engaged; falls back at 50% HP | M1 |
 | **Mob** | Minion | 150 / 0 / 0 | 1 | Nearest; spreads to free adjacent squares | Surrounds you; ignores danger | M1 |
 | **Automaton** | Mindless | 120 / 0 / 0 | 1 | Nearest, then unit order | No exposure or cohesion terms; walks through minor hazards (the lethal floor still holds) | M1 |
 | **Boss** | Bosses | Authored; `leash: room` | — | Authored | A phase may swap the profile | M1 (M2 adds boss actions) |
-| **Raider** | Skirmisher | 120 / 120 / 200 | 1 | Lowest AC; concentrating units | Hits, then uses leftover movement to leave reach; slips past | M2 |
+| **Raider** | Skirmisher | 120 / 120 / 200 | 1 | Lowest visible AC; concentrating units **(change AR-25)** | Hits, then uses leftover movement to leave reach; slips past | M2 |
 | **Protector** | Bodyguard elites | 80 / 60 / 120 | 1 | Whoever threatens its ward | Body-blocks; Challenges the unit nearest the leader | M2 |
 | **Disruptor** | Controller | 80 / 120 / 150 | 3 | Highest T | Spends control on the most dangerous unit; setup at 150% | M2 |
 | **Commander** | Leader | 70 / 120 / 150 | 2 | Quarry, else nearest | Stays behind its line; uses Command; declares Quarry | M2 |
@@ -2359,7 +2395,7 @@ Illustrative:
   "limited": [], "reaction": "react.interpose",
   "behaviour": "holder", "awareness": "stationary", "morale": "normal",
   "armed": true,
-  "loadout": { "mainHand": "item.spear", "offHand": null, "armour": "item.hide_coat", "carried": null },
+  "loadout": { "mainHand": "item.spear", "offHand": "item.shield", "armour": "item.gambeson", "carried": null },
   "improvised": "atk.improvised_pierce", "notableSlot": true, "salvageCoin": "byLevel",
   "themes": ["theme.raiders"] }
 ```
@@ -2450,7 +2486,12 @@ The build fails when:
 - any guarantee or the cluster budget fails per seed;
 - floor experience, without the optional elite room, falls outside
   110–135% of need after one bypass (seeded generator test; 16);
-- a template's encounter breaks the 3-type cap or the role rule (10.3).
+- a template's encounter breaks the 3-type cap or the role rule (10.3);
+- an armour rule fails: armour design 17.1 rules 4 (AC band and derived
+  speed at every legal shift), 5 (role-answer rule), 6 (notable armour
+  and shield carriers), 8 (minion armour verbs inert), 15 (AC envelope;
+  6.4 guards at the lowest legal party AC) and 19 (an issued loadout
+  Strained at any legal shift). **(change AR-29)**
 
 ### 20.2 Tests
 
@@ -2502,6 +2543,7 @@ The build fails when:
 | Experience | Pool against need, with and without bypass and cow; catch-up frequency |
 | Loot | Notables placed against the floor budget; loot summary size |
 | Plate | Maximum plate elements on the worst composed unit per floor |
+| Armour | The armour design's 17.3 reports, monster rows included: 6.4 guards at the party's lowest AC; verb trigger rate with monster rows; piercing hit gain by target category and the combined reduction swing; how often the reaction rule and the roll-mode cap bind **(change AR-29)** |
 
 ## 21. Staging
 
@@ -2711,13 +2753,16 @@ committed wind-ups (13.2).
 
 - **Items and inventory:** the generic layer is no longer pending: see the
   items and inventory design (2026-11-16; its 16 answers 15.9). What
-  remains open moves to its category designs (items design 17): armour
-  values and Strength thresholds, starting kits, tonics, Remedy and
-  flasks, scrolls and wands, Coated, Disarmed, Clinging and Pitted Armour.
+  remains open moves to its category designs (items design 17): starting
+  kits, tonics, Remedy and flasks, scrolls and wands, Coated, Disarmed and
+  Clinging.
   **(change I-15)** Weapons and foci are no longer pending: see the weapons
-  and foci design (2026-11-17). Disarmed and Coated stay Later; armour,
-  starting kits, consumables (coatings), scrolls and wands remain open in
-  their category designs. **(change W-15)**
+  and foci design (2026-11-17). Disarmed and Coated stay Later; starting
+  kits, consumables (coatings), scrolls and wands remain open in
+  their category designs. **(change W-15)** Armour and shields are no
+  longer pending: see the armour and shields design (2026-11-17), which
+  sets armour values, Strength thresholds, natural armour and monster
+  loadouts (its 12) and Pitted Armour (Later, its 9.4). **(change AR-29)**
 - **Death and healing** (the guards and AI depend on these):
 
 | Need | Why |
