@@ -475,6 +475,11 @@ above. **(lead's call)**
 
 - **Auras:** a unit that succeeds on its save against an aura's condition
   is immune to that aura for the rest of the fight.
+- **Shrugged Off:** if a target succeeds on its save against a
+  repeatable Poisoned source (an at-will, a turn allowance, a dice
+  trade, or a `repeatable` bite), it is immune to that source unit's
+  repeatable Poisoned for the fight. Held as a source-held set
+  **(change SH-14; Shade design 9.1)**.
 - **Agency** (the condition chooses the unit's actions) is enemy-only,
   enforced by validation, because the player controls every party member
   (main design 4.2). Monster versions are written directly in their
@@ -726,7 +731,8 @@ Hazard design must guarantee that no single failed save, and no entry
 without a save, is lethal to the hero. This holds in every wave. It is a
 hazard-design guideline under the party floor: damage to a party unit out
 of combat, or from an undetected trap, cannot take it below 1 hit point
-(death and healing design 10.4) **(change DH-18)**.
+(death and healing design 10.4) **(change DH-18)**. Known armed traps are hazards
+for 10.1–10.4 (11.3) **(change SH-15; Shade design 9.1, NM-1)**.
 
 ## 11. Fixed terrain
 
@@ -795,6 +801,11 @@ Every square that applies a harmful condition is a hazard for:
   enter a hazard;
 - followers' pathing out of combat (5.5).
 
+**Known armed traps (change SH-15; Shade design 9.1, NM-1; M2,
+whatever the Trapwright's wave):** a known armed trap's trigger squares
+are hazards for the same rules. The rules of 10.1 and 10.2 are not
+changed; known traps simply become hazards they apply to.
+
 ### 11.4 Fire on oil
 
 The single exception to "squares never change". **(agreed that it exists;
@@ -831,11 +842,15 @@ the outcome is the lead's call)**
   at step 2 with source `environment`. Damage from a trap the party had
   not detected cannot take a party unit below 1 hit point, in or out of
   combat; detected traps are ordinary damage **(change DH-18; death and
-  healing design 10.4)**.
+  healing design 10.4)**. Known armed traps are hazards (11.3)
+  **(change SH-15)**.
 - **Trap hard control against the party** fires on being sprung only,
   follows the own-turn rule, never appears on floor 1, appears on floor 2
   only in set-piece traps, and counts toward the per-fight cap whenever it
   costs a turn start.
+- The rest of SH-15 (the hand trigger, Trigger Shot, re-arm at 500‰ and
+  a hard part at most once per fight) applies when the Trapwright ships
+  (Shade design 14).
 
 ## 12. Immunities and bosses
 
@@ -1773,7 +1788,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Intensity: binary each.
   - Sources: monster bites (on-hit traits gated like riders), traps.
   - Interactions: `poison` tag; a condition, not a damage type **(settled,
-    stat model 8.1)**.
+    stat model 8.1)**; a save against a repeatable source gives Shrugged
+    Off (7.3) **(change SH-14; Shade design 9.1)**.
 
 ### 18.6 E. Elemental combos
 
@@ -1863,7 +1879,10 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
       Perception against the hider's passive stealth);
     - on Revealed or Incapacitated.
   - Sources: Hide (Stealth against each enemy's passive perception; the
-    settled one-roll form, stat model 6).
+    settled one-roll form, stat model 6); a Hide made as part of an
+    attack (No Witnesses) resolves after that attack (weapons 7.5 step
+    15), so that attack does not end it **(change SH-12; Shade design
+    8.1)**.
   - Interactions: `awareness` tag, so only its own side sees it.
 - **Invisible** — beneficial · Later
   - Effect: hidden from every enemy with no check; Search fails against it;
@@ -1927,7 +1946,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     tonic drunk as an action; breaking line of sight switches its penalties
     off.
   - Sources: Frighten (Intimidation against 10 + Will) **(settled)**;
-    Fear-shaped spells (SRD); boss roars (cooldown).
+    Fear-shaped spells (SRD); boss roars (cooldown); Make an Example
+    (Tricks-paid, so legal under 7.1) **(change SH-13; Shade design
+    8.1)**.
   - Interactions: after it ends, further Frighten attempts by the same
     source have disadvantage for the fight; overrides Shaken; a limited
     fear effect on an enemy raises it to Panicked.

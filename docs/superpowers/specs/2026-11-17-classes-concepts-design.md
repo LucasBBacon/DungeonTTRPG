@@ -169,7 +169,7 @@ Gaps found while designing; each is fixed by a change in section 18.
 |---|---|---|
 | PF1 | Enemies 14.3 makes T6 (a limited fear effect on a Demoralised enemy) "Later (spells)", so a Presence caster's fear spells cannot rout at M2 | T6 for class fear spells moves to M2 (CL-1) |
 | PF2 | Ability 10.2's cap of eight counts every limited ability but names no unit; a caster's slot tiers plus spells known would pass it by level 7, and abilities sharing one pool are counted in different ways | One unit: a named pool, with every ability drawing on it as an option, counts as one limited ability; a slot tier is such a pool (CL-2) |
-| PF3 | Offers can only raise numbers or add abilities; levels 6–8 have no offer, and a unit at its reading limit (7.6) can take no new ability, so the middle levels flatten | A "trigger" offer kind, legal at any level and below the cap, with a trigger option on every level-7 talent menu and spell-card draw (CL-3; 7.5) |
+| PF3 | Offers can only raise numbers or add abilities; levels 6–8 have no offer, and a unit at its reading limit (7.6) can take no new ability, so the middle levels flatten | A "trigger" offer kind, legal at any level and below the cap, with a trigger option on every level-7 talent menu and spell-card draw (CL-3; 7.5). Added Opening triggers arrive at level 5 (`TriggerFromFive`; change SH-23, Shade design 6.6) |
 | PF4 | Ability 6.7 makes level 9 an automatic capstone with no choice, against "a choice every level" | Level 9 adds a pick-one-of-three offer; 6.7 unchanged (CL-4, agreed Q4) |
 | PF5 | Spurred has one source (Rally); a class cannot grant it | A class and presence-spell source (CL-5) |
 | PF6 | A move-ending opportunity attack has no rule; speed may be changed only by species, armour and conditions | A class reaction may set the mover's remaining movement for the turn to 0 without changing speed (CL-6) |
@@ -205,7 +205,11 @@ Gaps found while designing; each is fixed by a change in section 18.
   ability to an existing pool adds an option, not a limited ability. The
   per-rest sub-limit of a `restDefensiveTool` (8.2) is not a named pool
   and is not counted. **(change VG-10)** Nor is a per-rest sub-limit on
-  one option of a named pool (the Vanguard's Hew-use cap).
+  one option of a named pool (the Vanguard's Hew-use cap). **(change
+  SH-4)** A per-rest counter on one named pool's record, spent by records
+  tagged with its one declared tag, whether or not they spend from the
+  pool, is a frequency limit and counts 0; it is not a named pool (the
+  Shade's strike limit, Shade design 7.9).
 - **Turn allowance and per-target round count (change VG-10):** a turn
   allowance (a `turn` pool of 1 on its owner that only limits an option,
   passive or reaction to once per round) and a per-target round count
@@ -459,7 +463,10 @@ statement in five lines:
 - **A lean** is a record {`utilityId`, `weight`: primary, secondary or
   ribbon, `source`: class or subclass id} (12.1). A tool that a class
   merely has, such as a pool-backed reaction ward, is not a lean unless it
-  is recorded as one; 6.4 shows such tools as "tool", not as leans.
+  is recorded as one; 6.4 shows such tools as "tool", not as leans. The
+  Shade's Duck, Tainted Blade's Poisoned, Make an Example's Frightened,
+  Tripline's Prone and Drag Line's movement are recorded as tools
+  (change SH-27; Shade design 7.1).
 - **For the spread rule, a class and its subclasses count as one class.**
 - No utility is the *primary* lean of more than one launch class.
 - No utility is leaned on by more than two classes (each with its
@@ -492,7 +499,11 @@ grant any of the following:
 - more loot or gold;
 - changed potion or tonic values;
 - party passive stealth above the worst member's;
-- AI targeting overrides other than conditions (Challenged);
+- AI targeting overrides other than conditions (Challenged).
+  **Reading (change SH-20):** writing `lastKnown` into a group's shared
+  awareness record (False Trail, only when you are Hidden from every
+  watching member) is information, not an AI targeting override; it is
+  an enumerated `ForbiddenClassGrant` exemption (Shade design 7.11, 9.1);
 - extra units or companions;
 - a freshly created action for an ally;
 - `liftsDowned` (client approval required, DH 11.5);
@@ -513,7 +524,7 @@ lens, **C** companion kits. Caps are **(settled)** unless marked.
 
 | Utility | Universal baseline (every party) | How a class leans | The cap (no class goes past it) | Launch lean |
 |---|---|---|---|---|
-| Single-target damage | 2 at-wills, one damaging (ability 6.1); weapon verbs; crits; Exploit on Dexterity-rolled hits with advantage or Aim; Extra Attack at 5 for martials | Precision dice; Techniques +1d6; Surge; ignore-resistance offers | Every build ≤ 110% of the greatsword reference (as measured by weapons 6.4, VG-12: rest-pool damage floor-averaged at the worst legal build; camp-pool damage bounded by the nova bound and `SurgeOptionBound`, Vanguard design 10.1); Dexterity-main melee ≥ 90%; launchers reported against 75%; all with empty trinket slots; every launcher family ≥ 60% (M2 parity set); trinkets +10% at most (weapons 6.4, trinkets 11 rule 6); one camp spend per turn; capstone turn damage ≤ 2× the 95th-percentile non-capstone turn of the same unit (12.3) *(illustr.; lead's call)* | S s, V s |
+| Single-target damage | 2 at-wills, one damaging (ability 6.1); weapon verbs; crits; Exploit on Dexterity-rolled hits with advantage or Aim; Extra Attack at 5 for martials | Precision dice; Techniques +1d6; Surge; ignore-resistance offers | Every build ≤ 110% of the greatsword reference (as measured by weapons 6.4, VG-12: rest-pool damage floor-averaged at the worst legal build; camp-pool damage bounded by the nova bound and `CampOptionBound`, formerly `SurgeOptionBound`, renamed and generalised by SH-5, Vanguard design 10.1, Shade design 7.5); Dexterity-main melee ≥ 90%; launchers reported against 75%; all with empty trinket slots; every launcher family ≥ 60% (M2 parity set); trinkets +10% at most (weapons 6.4, trinkets 11 rule 6); one camp spend per turn; capstone turn damage ≤ 2× the 95th-percentile non-capstone turn of the same unit (12.3) *(illustr.; lead's call)* | S s, V s |
 | Area damage | Flasks (one offensive per turn; none on floor 1), scrolls, sweeping verbs | Slot areas; shape (+1 radius, `selective`) | ≤ 25 squares at levels 1–6; allies hit unless `selective`; at-wills never hit allies; no ground zones (ability 8) | A P |
 | Damage types and riders | Weapon types; weak targets take riders; crits attempt riders; terrain combos | Riders on demand (Techniques); an element pair; ignore-resistance offers | One rider per target per use; at-will riders rare and once per turn (ability 9.3–9.4); **no single-type kit, no switching types per enemy** (lead's call; stat model 2) | A s, V s |
 | Conditions and control | Shove, grapple, Frighten, Topple and Push verbs, scrolls, wands | Limited major or hard control; repeat-save pressure; priming | Hard control only from limited abilities; agency conditions enemy-only (cond 7.1, 7.3); Steeled, Unyielding, boss pips and the shed action; the 32-condition budget full (cond 16); a controller ranks up through duration and reliability, never chained lockouts (lead's call) | A P, H s |
@@ -631,7 +642,10 @@ All **(lead's call)** except the level, which is **(settled, ability
   alone and now picks the lens for the party game.
 - **Two per class at M2.** The Vanguard has a third, because the
   Weaponmaster ships in M1. Further subclasses come through unlocks (main
-  4.7), as "aspects" that change one rule.
+  4.7), as "aspects" that change one rule. **(change SH-30)** A launch
+  class's stage-1-named third subclass (the Shade's Trapwright or
+  Swordsworn, whichever does not ship in M2) ships as a full subclass, as
+  the Vanguard's three do, not as an aspect (Shade design 14).
 - **A subclass re-points the lean.** It either deepens the primary lean
   through a mechanic the class does not have at level 1, or picks the
   class's second utility; it never adds a role. It adds **triggers and
@@ -705,7 +719,11 @@ above the level's single choice (ability 10.3).
   of a named pool (the Hew-use cap), turn allowances or per-target round
   counts: they are frequency limits, outside the cap and the
   three-named-pool limit, count 0, stay outside the camp-share ratio and
-  sit inside the 60% formula (3.4; Vanguard design 7.9).
+  sit inside the 60% formula (3.4; Vanguard design 7.9). **(change
+  SH-4)** Nor is a per-rest counter on one named pool's record, spent by
+  records tagged with its one declared tag, whether or not they spend
+  from the pool: a frequency limit that counts 0, not a named pool (the
+  Shade's strike limit; 3.4; Shade design 7.9).
 
   | Class | Limited abilities by level 10 | Cap room | Reading room (7.6) |
   |---|---|---|---|
@@ -734,7 +752,12 @@ above the level's single choice (ability 10.3).
   counts Restrained targets". A trigger offer picks one trigger the unit
   does not own and never repeats it. It is legal at any level, below the
   cap as well as past it, so offers reshape verbs rather than only raising
-  numbers.
+  numbers. **(change SH-23)** `TriggerFromFive` scopes this for
+  Opening-trigger records only: an added Opening trigger has
+  `minClassLevel` ≥ 5 (Caught the one listed exception), its tier is
+  fixed by `TriggerTierFixed` with its allow-list, and
+  `OpeningTriggersAdded` ≤ 3; "legal at any level" stays true for every
+  other trigger offer (Shade design 6.6).
 - **The Herald is excluded from the `cost` offer on Frighten**
   (`offerExcludes`), because Cadence already makes it a bonus action and
   the two would double-dip.
@@ -899,7 +922,9 @@ Every class meets the fixed chassis rules **(settled)**:
   counts the `restDefensiveTool` at half value; all three measures (full,
   half, excluded) are reported, Momentum included; the band holds at
   levels 5 and 10; the level-1 martial miss is accepted (Vanguard design
-  10.4);
+  10.4), and for the Shade it is extended to levels 1–4 **(client, with
+  the Shade design's approval on 2026-11-18; change SH-28: this widens
+  an agreed reading; Shade design 10.5)**;
 - exactly one `restDefensiveTool`;
 - subclass at level 3 and capstone at level 9;
 - the cap of eight limited abilities;
@@ -1103,24 +1128,36 @@ saves.
   - **Once per round** (3.4): a pool of 1 with refill `turn`, from the
     start of your turn to the start of your next. That is stricter than
     once per turn, so reaction attacks cannot fire it a second time.
-    +Nd6 on a Dexterity-rolled weapon hit, banded by **Shade level**
-    *(illustr. 1d6 at 1, one more die at 3, 5, 7 and 9)*. The dice are a
-    separate damage part, doubled on a crit.
+    On a Dexterity-rolled weapon hit it adds the **tiered band**, by
+    **Shade level** **(agreed 2026-11-18, Shade Q1; change SH-1)**: the
+    **stealth** amount (1d6 at levels 1–4, 2d6 at 5–10) if any
+    stealth-tier trigger is met, otherwise the **open** amount (+2 flat
+    at 1–4, 1d6 at 5–10) *(illustr.)*; no further steps. It replaces the
+    stage-1 band (1d6 at 1, one more die at 3, 5, 7 and 9) (Shade design
+    6.4). The dice are a separate damage part, doubled on a crit; the
+    flat +2 is not doubled.
   - **Applying it (lead's call):** the player may decline Opening on a
     qualifying hit; the automatic policy is
     `applyOnFirstQualifyingHitOnOwnTurn`, so an opportunity attack does
     not spend it unless the policy is changed.
-  - **Triggers:**
-    1. **First strike:** the target has not yet acted this fight, or is
-       Surprised.
-    2. **Hidden:** you are Hidden from the target.
-    3. **Opening:** the target is Prone, Staggered or Grappled; or another
+  - **Triggers** (each trigger's tier, `stealth` or `open`, is data;
+    change SH-2; Shade design 6.5, 6.6):
+    1. **Unready** (open): the target has not started a turn this fight.
+       **Surprised** (stealth): the target is Surprised. (Stage-1
+       trigger 1, split; **agreed 2026-11-18, Shade Q1; SH-2**.)
+    2. **Hidden** (stealth): you are Hidden from the target.
+    3. **Beset** (open; stage-1 trigger 3, renamed, **agreed, Shade Q1;
+       SH-2**): the target is Prone, Staggered or Grappled; or another
        unit's melee weapon hit landed on it since the end of your previous
        turn, and your attack is melee.
-    4. **Answer (lead's call):** the target missed you with an attack, or
-       you Ducked one of its hits, since the end of your previous turn.
-       This is the trigger that works solo and in melee against a boss.
-  - **Launchers** qualify on first strike and Hidden only.
+    4. **Answer (lead's call)** (open): the target missed you with an
+       attack roll, or you Ducked one of its hits, since the end of your
+       previous turn (SH-2). This is the trigger that works solo and in
+       melee against a boss.
+  - **Launchers** qualify on Unready, Surprised, Hidden and the Vanish
+    carry (the stage-1 rule restated for the split; SH-2; Shade design
+    6.4). Caught is added when the Trapwright ships (SH-17; Shade design
+    14).
   - **Opening and Exploit may both fire.** Parity is proven with both,
     including the worst case of Hidden plus Vanish and the Answer trigger,
     solo and in the reference party, with reaction attacks modelled
@@ -1129,9 +1166,11 @@ saves.
     Techniques or any other class rider. Exploit applies to them as
     weapons 6.3 states.
 - **Pools:**
-  - **Tricks** (`rest` 2 / 3 / 4 *(illustr.)*). Three separate abilities
-    draw on it:
-    - a bonus-action Hide, Disengage or Dash: the Cunning-Action shape,
+  - **Tricks** (`rest` 2 / 3 / 4 at levels 1 / 3 / 8 *(illustr.; change
+    SH-24)*). Three separate abilities draw on it:
+    - **Fade** (change SH-32; Shade design 7.4): a bonus-action Hide,
+      Disengage or Dash, pooled, its Hide mode strike-limited (tagged
+      `strike`, Shade design 7.9): the Cunning-Action shape,
       pre-cleared against Runner's Boots; a pooled bonus-action Hide is
       the class hook of ability 7.2 (Shadowed armour gives one per fight,
       armour 14.2: a charged echo checked in the registry pass);
@@ -1139,13 +1178,17 @@ saves.
       Dodging; registry check pending;
     - **Catch Breath:** a bonus action that heals half Recovery; the
       tagged `restDefensiveTool`, once per rest (twice from level 6; 8.2).
-  - **Vanish** (`camp` 2 *(illustr.)*, so the camp share reaches the
-    band): a bonus action. You Hide **without needing to break line of
-    sight**, still rolling Stealth against passive perception (CL-12c);
+  - **Vanish** (`camp` 2, 3 from level 2 *(illustr.; change SH-24)*, so
+    the camp share reaches the band from level 5, SH-28): a bonus
+    action. You Hide **without needing to break line of sight**, still
+    rolling Stealth against passive perception (CL-12c);
     Hidden's own end rules (conditions 18.7) still apply, so in melee
     reach it usually ends at the end of your turn. **Whether or not the
-    Hide succeeds,** your first hit before the end of your next turn,
-    against any target, counts as a first strike; that hit consumes it.
+    Hide succeeds,** your first Dexterity-rolled weapon hit on your own
+    turn to which you apply Opening before the end of your next turn,
+    against any target, counts as **Hidden for Opening** (the stealth
+    tier) **(agreed 2026-11-18, Shade Q1; change SH-2)**; that hit
+    consumes it (Shade design 7.5).
     So "strike, then Vanish" sets up next round's Opening even in melee.
     No "maximised dice" option.
 - **At-wills:** a melee weapon attack and a thrown or launcher attack.
@@ -1156,17 +1199,34 @@ saves.
 - **Growth:**
   - level 2: a talent, for example *Deep Pockets* (belt +1, hard maximum
     3; items 24), *Light Fingers* (advantage on Steal) or *Tainted Blade*
-    (Opening may apply Poisoned instead of its dice);
+    (Opening may apply Poisoned instead of its stealth-tier dice only;
+    change SH-32; Shade design 7.6);
   - level 5: Extra Attack and an Opening step;
-  - level 9: capstone, for example *From Nowhere*: this turn, Opening
-    applies on every hit, inside the capstone nova bound.
+  - level 9: capstone, for example *From Nowhere*: this turn, every
+    Dexterity-rolled weapon hit takes Opening at the stealth die,
+    triggers waived, inside the capstone nova bound (SH-32; Shade design
+    7.7).
 - **Subclasses:**
-  - **Cutthroat** (M2): silent kills mark groups `broken`; one more
-    Opening die against Surprised targets (a trigger on Opening).
-  - **Trapwright** (M2): trigger or re-arm a known trap as a Tricks option
-    (stat model 7.1); a Mechanics-mastery lane.
-  - **Swordsworn** (unlock): a pooled reaction strike after a Parry
-    (Riposting is Later).
+  - **Cutthroat** (M2): **card revised (change SH-31; Shade design
+    8.1):** **Quiet Work**, a silent kill of a non-minion member marks
+    its group `broken`; and the **Surprised part** on Opening against
+    Surprised targets, +1 at levels 3–4 and +1d4 from 5 (a stealth-tier
+    extra part on Opening).
+  - **Trapwright** (M2 only if trap records, DEP-S1, land in M2;
+    otherwise the first Shade unlock, the expected default) **(agreed
+    2026-11-18, Shade Q2; change SH-30; Shade design 8.2, 14)**: **card
+    revised (SH-31):** **Jury-Rig**, a Tricks option that springs or
+    re-arms a known trap (stat model 7.1), and the **Caught** trigger on
+    Opening; a Mechanics-mastery lane.
+  - **Swordsworn** (the first unlock; promoted to M2 under the
+    fallback) **(agreed 2026-11-18, Shade Q2; change SH-30)**: **Sworn
+    Guard**, a Tricks-paid ward that counts as a Parry, with
+    **Counterstroke**, a pooled reaction strike after a turned blow
+    **(agreed, Shade Q3; change SH-31: the mechanism of the stage-1 "a
+    pooled reaction strike after a Parry" changes, not its intent;
+    Shade design 8.3)** (Riposting is Later).
+  - Each subclass record carries `wave` and `fallbackWave` (SH-30;
+    Shade design 13.1).
 - **Cut:** "Quiet Company" (it bends worst-member Stealth) and "Feint" (a
   Steady-Aim and Luckstone copy).
 - **Weaknesses:** fragile once found; solo boss rounds 3 and later lean
@@ -1178,7 +1238,9 @@ saves.
   hook; Perception (so Tactician is reachable); Medicine (DH 8, "close to
   compulsory" on solo floor 1).
 - **Fallback type:** piercing or slashing by weapon set.
-- **Signature events (12.1):** Opening dice dealt; a Vanish used.
+- **Signature events (12.1):** Opening dealt or traded; a Vanish or Art
+  used; a Duck that set Answer; a subclass signature applied; a From
+  Nowhere hit (change SH-32; Shade design 7.1).
   `seedTarget`: `enemyNotYetActed` (an unaware first target).
 
 ### 8.5 ARCANIST: controller (Intelligence full arcane caster)
@@ -1376,7 +1438,7 @@ saves.
 | **Holdfast** (pure defender) | Con / 8 / Fortitude / heavy + shield | Interpose, Challenge and a hold stance | A Constitution main; its natural states (Guarded, Fortified) are Later |
 | **Berserker** | Str or Con / 8 / Fortitude / medium | *Fury,* a self-only toggle with a cost | Raging and Reckless are Later; needs a ruling on self-only toggles as modifiers outside the 32 |
 | **Adept** (monk-type) | Dex (Wis second) / 7 / Reflex / none + unarmoured defence | Stances that rewrite its at-wills; precision keyed to Staggered or Prone | Needs caster-style AC evidence (armour 11 item 2) and unarmed upgrades |
-| **Sapper** (alchemist or engineer) | Int non-caster / 7 / Reflex / light | Belt +1; class bombs (a class pool, never an item); trap rigging | Overlaps the Trapwright; depends on trap density |
+| **Sapper** (alchemist or engineer) | Int non-caster / 7 / Reflex / light | Belt +1; class bombs (a class pool, never an item); trap rigging | Overlaps the Trapwright; depends on trap density. SH-26 applies here when the Trapwright ships (Shade design 14) |
 | **Marshal** (commander) | Int or Pre / 7 / Will / medium + shield | Orders that move the giver's action to an ally, with a self mode | Weak on solo floor 1; lengthens companion turns |
 | **Hexer** (setup curse) | Pre / 6 / Will / light | A Baned-based curse (Hexed was folded into Baned, conditions 18.11; Baned is Later, so it needs the budget ruling, 9.3), or a change to conditions 18.11 when the Hexer is designed | Folded into Herald Dirge for now; a later Presence alternative |
 | **Beastbound** | — | A bonded companion in one of the 3 slots | Floor 1 is solo; needs proven companion kits |
@@ -1407,7 +1469,9 @@ call)**
 **(lead's call)** Votary → Tracker → Rootwarden → Adept → Hexer,
 Holdfast and Berserker (after the condition-budget ruling) → Sapper →
 Marshal. How many ship at M3 is a content-volume decision for the M3
-plan.
+plan. **(change SH-30)** The first Shade unlock subclass is whichever of
+the Trapwright and the Swordsworn did not ship in M2: the Trapwright,
+the expected default, once DEP-S1 lands (Shade design 14).
 
 ## 10. Names
 
@@ -1473,7 +1537,7 @@ tables; **Companions** = a requirement passed to the companions design.
 
 | Requirement | Source | How met | Status |
 |---|---|---|---|
-| A `rest` and a `camp` pool; 40–60% camp; caster rest features beyond Slot Recovery | Ability 6.3 (agreed) | Every class has both; Weft and Cadence; Shade Vanish at camp 2; Vanguard camp-weighted features. Measured with the `restDefensiveTool` at half value; level-1 martial miss accepted (8.2; VG-13, agreed Vanguard Q1) | Stage 2 (simulator at levels 1, 5, 10) |
+| A `rest` and a `camp` pool; 40–60% camp; caster rest features beyond Slot Recovery | Ability 6.3 (agreed) | Every class has both; Weft and Cadence; Shade Vanish at camp 2, 3 from level 2 (SH-24); Vanguard camp-weighted features. Measured with the `restDefensiveTool` at half value; level-1 martial miss accepted (8.2; VG-13, agreed Vanguard Q1), extended to levels 1–4 for the Shade (8.2; SH-28, client with the Shade design's approval; Shade design 10.5) | Stage 2 (simulator at levels 1, 5, 10) |
 | One camp spend per turn, scroll reads included | Ability 6.4; consumables 13.5 | No feature grants a second; capstones use the turn's spend | Met |
 | At least 2 at-wills, one damaging | Ability 6.1 | Listed per class | Met |
 | No cooldowns; no major power per fight | Ability 6.2 | `rest` and `camp` only | Met |
@@ -1621,7 +1685,8 @@ companion-kit id, read by `LeanWithoutBaseline`.
   record grants anything on the list in 6.3. Enumerated checks: the
   `effectKinds` for a second reaction, teleport, speed change (not for
   species), rest or supply generation, loot or gold, potion or tonic
-  values, party stealth, AI targeting, extra units, a created ally
+  values, party stealth, AI targeting (with the enumerated False Trail
+  `lastKnown` exemption, SH-20, 6.3), extra units, a created ally
   action and `liftsDowned`; any condition id outside the M1/M2 budget;
   any pool or ability that raises Rally above once per ally per fight;
   any refill-tag override (a `rest` refill outside a rest; a cost
@@ -1651,8 +1716,9 @@ companion-kit id, read by `LeanWithoutBaseline`.
 - **(change VG-11)** Stage-2 validators are data predicates, added per
   class: for the Vanguard `RankAddsNoDice`, `RankKeepsBounds`,
   `HewCeiling` (a static formula), `TechniquePickerSize` (over every
-  reachable option set), `SurgeOptionBound` (with `actionsGranted` and
-  the reference encounter), `TurnAllowanceNoDamage` (with its
+  reachable option set), `CampOptionBound` (`SurgeOptionBound` renamed
+  and generalised by SH-5: `actionsGranted` ≤ the base option's, with
+  the reference encounter; Shade design 7.5), `TurnAllowanceNoDamage` (with its
   allow-list) and `FlagNotCondition` (with the condition equivalence
   table) (Vanguard design 6.4 rule 8, 7.3, 7.9, 9.2).
 
@@ -1697,8 +1763,8 @@ lead's call)**
 | Wave | Content |
 |---|---|
 | **M1** | The Vanguard, levels 1–3: Second Wind, Techniques (Press, Hew 1d4, Empower with the M1 lines; no riders in M1), Surge, Momentum (agreed 2026-11-18, Vanguard Q2; VG-6), Hold the Line, the Weaponmaster; the M1 level-2 talent menu (8.3); M1 conditions only; the class record shape; `restDefensiveTool`; `ForbiddenClassGrant`, `NameCollision`, `ClassGatedContent`; `Floor1BossSustain` for the Vanguard |
-| **M2** | All four classes, levels 1–10, two subclasses each (the Vanguard three); spell lists and the `classTags` audit; Shieldwall; offers with lanes and the trigger kind (CL-3); companion kits as signature slices and the recruit-pool rules; T6 for fear spells (CL-1); the remaining checks and every report in 12.3 |
-| **M3** | The unlock mechanism with the first candidates in the order of 9.4 (Votary first); unlock aspects (Elementalist, Swordsworn, Loremaster, Warcaller, Pennant) as content allows |
+| **M2** | All four classes, levels 1–10, two subclasses each (the Vanguard three; the Shade's Cutthroat and either the Trapwright, only if DEP-S1 lands in M2, or the Swordsworn, the expected default: agreed 2026-11-18, Shade Q2; SH-30; Shade design 14); spell lists and the `classTags` audit; Shieldwall; offers with lanes and the trigger kind (CL-3); companion kits as signature slices and the recruit-pool rules; T6 for fear spells (CL-1); the remaining checks and every report in 12.3 |
+| **M3** | The unlock mechanism with the first candidates in the order of 9.4 (Votary first); the first Shade unlock subclass, a full subclass (the Trapwright, expected, once DEP-S1 lands; or the Swordsworn if the Trapwright made M2; SH-30); unlock aspects (Elementalist, Loremaster, Warcaller, Pennant) as content allows |
 | **M4** | Multiclassing, model chosen then (7.7), with the separate multiclass precision report (CL-8); species on baseline axes (7.9; CL-11); more unlocks |
 | **Later** | Classes whose identity is a Later condition (Holdfast, Berserker, Hexer) after a budget ruling; Riposting; the Death-Ward-shaped spell; summons |
 
@@ -1763,11 +1829,11 @@ tell the classes apart in the first fight".
 |---|---|
 | ~~The T6 change is refused~~ (closed: CL-1 approved and applied 2026-11-18) | Recorded only. Had it been refused, the Herald's routs would run on T5 only; fallback Cadence Frighten as the whole rout engine |
 | **Floor-1 spread:** the Vanguard (full Second Wind, sturdy 8, AC 18) is structurally favoured; the Herald depends on the roster's non-fearless share and the escort | `Floor1ClassSpread` inside every split, with the headroom measures; CL-10; a creation pick-rate measure per class (playtest). Levers are any class's data, the Vanguard's own included (Techniques size, Surge timing, shield AC through starting kits); only the existence of the one full-Recovery Second Wind is protected |
-| **The Shade's solo rounds 3 and later** | The Answer trigger (8.4) and Vanish's carried first strike; the per-round breakdown, boss-only rounds separate, run before stage 2 sets the Tricks size; then stage 2 raises Tricks |
+| **The Shade's solo rounds 3 and later** | The Answer trigger (8.4) and the Vanish carry (Hidden for Opening; SH-2); the per-round breakdown, boss-only rounds separate, run before stage 2 sets the Tricks size; then stage 2 raises Tricks |
 | **Camp share for the martials** | Both may miss 40–60% after the fixes. The pool cap stops new pools, so the lever is weighting capstone and subclass value toward camp |
 | **The healer gap** | The DH 18.1 gate, with the Herald arms and healer count beside it (CL-9). Lever order (DH 18.1): heal-card targets (Hearth) and the Herald's slot pool sizes in class and companion data; then random potion weight for everyone. Never the guarantee |
 | **Caster sheets** are the busiest | The counting rule and the spellbook row hold them at 3; spell cards add the most options per level |
-| **The level 6–8 plateau** | The level-6 feature changes a verb; a trigger option on every level-7 talent menu and spell-card draw (7.4); trigger offers legal at any level. Still the weakest-felt band |
+| **The level 6–8 plateau** | The level-6 feature changes a verb; a trigger option on every level-7 talent menu and spell-card draw (7.4); trigger offers legal at any level (added Opening triggers from level 5, `TriggerFromFive`; SH-23, Shade design 6.6). Still the weakest-felt band |
 | **Dip pressure at M4** | The guards contain it but do not remove it; front-loaded identity makes every signature verb attractive alone |
 | **The registry** | Duck, Vanish, Tricks' Hide, priming, Stand Fast, Spurred grants and the Totem-or-shield kits need clean results; late collisions force renames or reshapes after stage-2 data exists |
 | **Condition budget** | No launch class uses a Later condition; unlocks with a "natural" kit (Berserker, Holdfast, the Hexer's Baned) wait for a ruling |
@@ -1843,6 +1909,18 @@ Square Up own turn only; one free effect per hit; the Hew-use cap; Twin
 Verb's verb list; Brink's chosen distance is Wrecker-only; Earthshaker 3
 targets; Square Up without a hit only from Called Out and Step In
 (Vanguard design 17).
+
+**Narrowings recorded inside the Shade design (SH-23; no approved text
+changes):** Opening is never applied by default on reaction attacks
+(except Counterstroke, at the open tier), and reaction hits never consume
+a carry; condition-applying Tricks options never fire on reaction
+attacks; Tainted Blade trades stealth-tier dice only; Throat-Cut out of
+combat and silent-only; Make an Example and Tripline immunity after a
+save; Jury-Rig re-arm once per trap per floor; Drag Line gives
+disadvantage on the hazard-edge save, with no auto-entry (conditions
+10.1 and 10.2 unchanged); Lone Blade a swap, not an addition; False Trail
+only for a group from whose every watching member you are Hidden (Shade
+design 17).
 
 **Main design (2026-11-15):**
 

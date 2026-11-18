@@ -806,6 +806,8 @@ Items 10.5 formula; `coinPerValue` 20 *(illustr.)*. **(lead's call)**
 - **Conditions:** minor or setup only in M2; never hard. One named major
   flask (the net) is Later under the conditions 7.2 guards.
 - **At an ally:** only water among flasks; automatic, no roll, no splash.
+- **Trapwright (pending):** Toss, Dust and the ruling against Slinger's
+  Bracers (SH-25) apply when the Trapwright ships (Shade design 8.2, 14).
 
 **Water on a Burning ally (honest):** a thrown tonic already ends Burning
 (a minor) for the same action and range, with no Soaked weakness. Water's

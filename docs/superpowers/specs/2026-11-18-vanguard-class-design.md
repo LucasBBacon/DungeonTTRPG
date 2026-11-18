@@ -245,12 +245,12 @@ client said stand.
 | 2 | Camp share at level 1 (Q1) | **Accept the level-1 miss.** Measure with the `restDefensiveTool` (Second Wind) at half value and report all three measures; hold the 40–60% band at levels 5 and 10 (about 45% and 40%) (10.4; VG-13) **(agreed)**. With Momentum counted and the lever applied: 41% and 40% | Surge 2 from level 1 (adds floor-1 power to the class already safest there and widens the floor-1 spread) |
 | 3 | Momentum in M1 (Q2) | **Momentum ships in the M1 slice Vanguard.** A paid Press or Empower sets it; the next hit on that target before the end of your next turn may take Press or Empower free; it never chains and never pays for Hew; from level 3 in M2 it may take the subclass signature instead (6.7) **(agreed)** | Momentum at M2 only (a thinner floor 1: the signature fires in about 15% of rounds instead of about 37%) |
 | 4 | Stance re-pick (Q3) | **The stance may be re-picked once per camp**, rest-gated, never in combat; Stance Drill at level 7 still makes both stances live (7.5; VG-17) **(agreed)** | A permanent pick with Stance Drill as the only way to the second stance (a solo Hold the Line Vanguard could not switch to Shieldwall when companions join) |
-| 5 | Parity reading for class pools | **VG-12:** rest-pool damage measured floor-averaged at the worst legal build against weapons 6.4's ≤ 110%; camp-pool damage bounded by the nova bound and `SurgeOptionBound` (10.1) **(lead's call; the client was told plainly and approved proceeding)** | The row as written (every plan fails it, this one included). A per-fight measure (126–164%; meaningless for rest pools) |
+| 5 | Parity reading for class pools | **VG-12:** rest-pool damage measured floor-averaged at the worst legal build against weapons 6.4's ≤ 110%; camp-pool damage bounded by the nova bound and `CampOptionBound` (10.1) **(lead's call; the client was told plainly and approved proceeding)** | The row as written (every plan fails it, this one included). A per-fight measure (126–164%; meaningless for rest pools) |
 | 6 | Pools | **Techniques 2 / 3 from level 5 / 3 at level 9; Surge 1 / 2 from level 5; Second Wind 1 / 2 from level 6; Stand Fast camp 1 at level 9** (7.8; VG-6) **(lead's call)** | Stage-1 Techniques 4 at level 9 (parity). Surge 2 at level 9 (camp share at level 5 out of band) |
 | 7 | Hew | **1d4 at levels 1–4, 1d6 from level 5** (its rank II); Hews per rest capped at the class-table pool; Deep Reserves' use deals no damage; Technique capacity offers excluded (6.4 rule 7; 7.11; VG-6) **(lead's call; the last two from the revision)** | 1d6 from level 1 (Hew dominates every hit; parity) |
 | 8 | Empower | **One canonical table; no line adds dice or flat damage; every line tagged with a `payable` flag** (6.6) **(lead's call)** | Damage lines (beat Hew 1d4 and fail `HewCeiling`) |
 | 9 | Free effects | **At most one free effect per hit, and it is that hit's Technique;** the spare-verb fire (Twin Verb, Arsenal II, the Weaponmaster's Stand Fast rider) is the one exception, control verbs only (6.4 rule 3) **(lead's call)** | Per-feature slot rules (unreadable; stacked free effects) |
-| 10 | Surge Arts | **One Art per subclass from class level 5, rank II at 9, under `SurgeOptionBound`** (7.3; 8) **(lead's call)** | Arts from level 3 (floor-1 power). Two-attack Arsenal (2000‰). Blade Storm (fails at level 3) |
+| 10 | Surge Arts | **One Art per subclass from class level 5, rank II at 9, under `CampOptionBound`** (7.3; 8) **(lead's call)** | Arts from level 3 (floor-1 power). Two-attack Arsenal (2000‰). Blade Storm (fails at level 3) |
 | 11 | Stances | **Learned, never toggled** (7.4, 7.5) **(lead's call; re-pick agreed, Q3)** | In-fight toggles (a fifth reading row) |
 | 12 | Starting kit | **Chain mail; warhammer + shield active; greataxe spare; 2 potions**; for the M2 Weaponmaster, a recommended one-handed spare with a borrowable verb (7.10; VG-21) **(lead's call)** | Longsword + shield / greatsword (no on-hit verb to empower, D6). Kit presets at creation (a second level-1 pick) |
 | 13 | Capstone | **Stand Fast as a window fill over every attack roll against adjacent allies for one round, shield required, with a solo clause and an automatic subclass rider** (7.7; VG-4, VG-15) **(lead's call)** | The stage-1 "first attack roll" form (invisible; dead in two of three builds) |
@@ -525,13 +525,13 @@ without its repertoire.
 
      An Art is checked per target line: the damage one target's line
      adds, with its collision. The Art as a whole falls under
-     `SurgeOptionBound` (7.3).
+     `CampOptionBound` (7.3).
 
      The pass table is in 10.1;
    - `TechniquePickerSize`: every reachable known-option set, built from
      the option sources and `offerExcludes`, has at most 6 options, and
      the picker shows legal options only (6.8).
-   - `TurnAllowanceNoDamage` (7.9), `SurgeOptionBound` (7.3) and
+   - `TurnAllowanceNoDamage` (7.9), `CampOptionBound` (7.3) and
      `FlagNotCondition` (9.2) are stated as predicates where they are
      defined.
 9. **Rank and dip guards.** Every rank, Hew's die step and every
@@ -755,16 +755,18 @@ the claim is checked, not assumed (6.4 rule 8).
   Art never combines with the extra action.
 - **Denial:** greyed while any condition denies your action (Stunned,
   Incapacitated, a Dazed that took your action).
-- **`SurgeOptionBound`** (new; VG-11), a data predicate over the Art
-  record:
+- **`CampOptionBound`** (new; VG-11; renamed from `SurgeOptionBound`
+  and generalised to every camp pool's options, Shade design 7.5;
+  SH-5), a data predicate over the Art record:
   - **expected damage ≤ 1200‰** *(illustr.)* of one Attack action at
     that level. It is computed by a fixed formula against the
     **reference encounter** in the tuning file: the weapons 6.4 hit and
     crit rates, 3 adjacent hostiles, and `collisionRate` (10.1). It is
     not a simulator result. The simulator reports the observed value
     beside it;
-  - **tempo clause:** the record's `actionsGranted` is at most 1; option
-    effects ride on that action;
+  - **tempo clause:** the record's `actionsGranted` is at most the
+    pool's base option's (Surge 1; SH-5); option effects ride on that
+    action;
   - areas ≤ 25 squares, `selective` only;
   - no hard-control `condition.apply` kind;
   - forced movement ≤ 3 per unit;
@@ -1023,14 +1025,27 @@ A turn allowance or per-target count:
 - stays outside the camp-share ratio, and inside the 60% formula as a
   level-3 or level-6 increment.
 
+**Per-rest tagged counters (lead's call; SH-4):** "A per-rest counter on
+one named pool's record, spent by records tagged with its one declared
+tag, whether or not they spend from the pool, is a frequency limit and
+counts 0; it is not a named pool" (the Shade's `strikeLimit`; Shade
+design 7.9). This extends VG-10 from one option to one tag. The
+Shade's `strikeLimit` (with its level-4 signature pip), the static
+`HideLimit` validator with its waiver allow-list, and `costByTrigger` and
+`costWaivers[]` (a cost waiver is not a refill) are defined in Shade
+design 7.3 and 7.9.
+
 **Priority (lead's call):** turn-start refills run at a higher priority
 than `onEvent:turnStart` spends (ability 14.4), so Called Out spends the
 fresh Square Up allowance.
 
 **`TurnAllowanceNoDamage`** (new validator, a data predicate): the
 effects a turn allowance grants carry no `damage.*` effectKind, except
-allow-listed ids. The allow-list holds one id, Battering Force's
-`collision.damage`, which `HewCeiling` bounds (10.1). Verbs, Shoves and
+allow-listed ids. The allow-list holds Battering Force's
+`collision.damage`, which `HewCeiling` bounds (10.1), and the Shade's
+Opening terms `damage.extraDice.opening` and `damage.flat.opening`,
+which `OpeningCeiling` bounds (Shade design 6.4; SH-3); the weapons 6.5
+Precision term is not on it. Verbs, Shoves and
 conditions that an allowance fires (Twin Verb, Drive Through, Square Up)
 are allowed, because they carry no `damage.*` kind.
 
@@ -1626,7 +1641,7 @@ turn, your first Ram costs nothing (a free effect, not a refill).
 
 **Rejected or Later for the Wrecker:**
 - `domino.secondLink` (rejected);
-- Avalanche (fails `SurgeOptionBound` under the dice band; redundant);
+- Avalanche (fails `CampOptionBound` under the dice band; redundant);
 - collision + Strength (parity);
 - ignoring a size step (breaks the settled A-10);
 - Throw (Later: needs a free-hand grapple rule);
@@ -1672,7 +1687,7 @@ anything on the forbidden list (classes 6.3).
 | # | Mechanic | What it adds | Cost | Touches | Decision |
 |---|---|---|---|---|---|
 | N1 | Technique ranks | Visible growth, 0 reading | S: data field, upgrade effects, 2 validators | ability 6.6, 10.2–10.3; classes 7.4 | **Adopted:** rank I in M1, II/III in M2 |
-| N2 | Surge Arts + `SurgeOptionBound` | Signature moves; camp-share lever | S–M | ability 6.4; classes 8.3, 12.2–12.3 | **Adopted M2**, `minClassLevel 5` |
+| N2 | Surge Arts + `CampOptionBound` | Signature moves; camp-share lever | S–M | ability 6.4; classes 8.3, 12.2–12.3 | **Adopted M2**, `minClassLevel 5` |
 | N3 | Off-timing spends (`onShoveSuccess`, `onGrappleSuccess`, `onGraze`, `turnStart`) | "Decide after the result"; grapple debt | M | ability 7.1; weapons 7.5, 17.11; classes 8.3 | **Adopted M2** as triggers and Called Out. `onParrySuccess` (riposte) reserved for the Swordsworn |
 | N4 | Verb borrowing | Two-set toolkit | M | weapons 7.1, 7.3, 11; ability 7.2 | **Adopted M2** (VG-19) |
 | N5 | Intercept / Take the Blow | Bodyguard redirect | M | classes 6.3; armour 14.5; conditions 18.9 | **Later** with Guarded or Holdfast |
@@ -1718,7 +1733,7 @@ anything on the forbidden list (classes 6.3).
 - An Art is an option on the Surge pool, own turn, using the camp spend.
 - It grants only what it states and is greyed under action denial.
 - One per subclass from class level 5; rank II at level 9.
-- `SurgeOptionBound` as in 7.3.
+- `CampOptionBound` as in 7.3.
 
 **Window fill (N6).**
 - Armour 10.4 gains step 0: fills from camp-pool abilities, which close
@@ -1792,7 +1807,7 @@ spent on Attack:
   client was told plainly on 2026-11-18 and approved proceeding)**:
   - rest-pool damage is counted floor-averaged;
   - camp-pool damage is bounded by the nova bound and
-    `SurgeOptionBound`;
+    `CampOptionBound`;
   - parity is measured at the **worst legal build**: every legal
     capacity step (Deep Reserves; Technique capacity offers are excluded
     in the revision), and R at the simulator's observed lower bound.
@@ -1836,7 +1851,7 @@ spent on Attack:
   | Domino link with Battering Force (up to 3 hostiles: the moved unit, the linked hostile, the unit the link strikes) | — | — | 3.6 / 3 | Pass, with little room |
   | Skittles, Upend, Brink | 0 / 0 (Prone and Teetering deal no damage) | 0 / 0 | 0 / 0 | Pass |
   | Wrecker Stand Fast rider, `pushOnTurnedMiss` (1 square, non-verb) | 1.6 / 2 | 2.4 / 3 | 2.4 / 3 | Pass |
-  | Earthshaker, per target line (pushed unit + struck unit) | — | 2.4 / 3 | 2.4 / 3 | Pass; the whole Art falls under `SurgeOptionBound` |
+  | Earthshaker, per target line (pushed unit + struck unit) | — | 2.4 / 3 | 2.4 / 3 | Pass; the whole Art falls under `CampOptionBound` |
   | The draft band 2 / 4 / 6, Press | 1.6 / 2 | 3.2 / **4** | **4.8** / **6** | **Fail** at levels 5 and 10; hence 2 / 3 / 3 |
 
   - The Domino row sets the ceiling on the band: a level-9–10 band of 4
@@ -1923,7 +1938,7 @@ the lever it would take levels 5 and 10 below the band (39% and 37%).
   HP-equivalents per use (5.6). The texts in 8.1–8.3 and 7.7 are the
   ones this weight is measured on. The Weaponmaster rider's spare verb
   (7.7) is part of that weight. The weight is utility, not damage: no
-  Art gains dice, and `SurgeOptionBound` is unchanged. The simulator
+  Art gains dice, and `CampOptionBound` is unchanged. The simulator
   checks it (13.3).
 - **Level 5 sits near the band's lower edge (41%), and level 10 at it
   (40%),** rather than at the draft's 45% and 40%; the agreed decision (hold the band at levels 5 and 10) is
@@ -1937,6 +1952,9 @@ the lever it would take levels 5 and 10 below the band (39% and 37%).
   adding floor-1 power. The band holds at levels 5 and 10 (about 45% and
   40% in the draft; 41% and 40% with Momentum counted and the lever
   applied, as tabled above). Raising Surge to 2 from level 1 is rejected.
+- **(client, 2026-11-18; SH-28)** The accepted martial miss is extended
+  to levels 1–4 for the Shade (Shade design 10.5). The Vanguard's own
+  miss stays at level 1.
 - Arts at class level 5 do not affect level 1.
 - The camp-share pass does not rely on camp damage being exempt from
   parity: Arts are valued at their utility, not as damage.
@@ -2093,7 +2111,7 @@ Each case states its expected outcome; the test confirms it.
   (per rest, by level), `stances[]` with the `stance` record kind;
 - on subclasses: `offerLaneAdjust`, `artId`, `standFastRiderId`;
 - `turnAllowance` and `perTargetRoundCount` records (7.9);
-- in the tuning file: `collisionRate` and the `SurgeOptionBound`
+- in the tuning file: `collisionRate` and the `CampOptionBound`
   reference encounter (6.4 rule 8; 7.3);
 - the condition equivalence table, `conditions.equiv.json` (9.2);
 - cost timing `onEvent:<id>` (VG-7) and trigger kind
@@ -2120,7 +2138,7 @@ pool (6.4 rule 7).
 
 The build fails when any of these fail (VG-11): `RankAddsNoDice`,
 `RankKeepsBounds`, `HewCeiling`, `TechniquePickerSize`,
-`SurgeOptionBound`, `TurnAllowanceNoDamage`, `FlagNotCondition`; and the
+`CampOptionBound`, `TurnAllowanceNoDamage`, `FlagNotCondition`; and the
 stage-1 checks as written (`ForbiddenClassGrant`, `LeanSpread`,
 `SubclassCopiesBaseLean`, `SubclassAddsPool`, `NameCollision`, the cap
 of eight, the copy registry).
@@ -2191,7 +2209,7 @@ of eight, the copy registry).
 - Every *(illustr.)* value: Hew's die (inside "1d4 then 1d6" unless the
   fallback lever fires), pool sizes inside the shape of 7.8, the
   collision band's values inside `HewCeiling`, `collisionRate`, the Art
-  and Stand Fast utility weight (10.4), `SurgeOptionBound`'s permille
+  and Stand Fast utility weight (10.4), `CampOptionBound`'s permille
   and reference encounter, the Momentum scorer term and conversion
   rates, lane weights and `offerLaneAdjust`, trigger ids, the starting
   coin, the report thresholds.
@@ -2238,17 +2256,17 @@ recorded in classes 18 by VG-1):**
 | VG-7 | Ability 7.1, declared costs; classes 8.3, Technique timing | `onEvent:<id>` cost timing (Shove, grapple, Graze, turn start) | Lead |
 | VG-8 | Weapons 7.2 rule 4; weapons 7.5 steps 6 and 9–11, new steps 6a and 10b; conditions 10.1, the "One move per hit" bullet | Empowered movement stays verb-sourced; the Battering Force exception; the 3-square sum across all moved units, counted in squares actually moved, with the part order, truncation and "contributes" rule of 6.4 rule 6; "stopped early" defined (3.4); the save slot reserved at step 9 and rolled at step 11 for collision-conditional effects (Thunderous precedent), a reserved slot blocking riders and Topple; `sharesToppleCount`; a Ram suppresses the Topple verb on its hit; **step 6a**, Sure Form's verb on a miss (8.1); the Upend order, with Topple II's push dropped under Upend; **step 10b**, the Domino link (inside the remainder, colliding only through Battering Force, then Brink) | Lead |
 | VG-9 | Ability 7.2, Shove row | Write the push as "push 1 or Prone" | Lead. **The Shove contest is settled; only the push wording changes** |
-| VG-10 | Classes 3.4 (terms), 7.5 (counting); ability 6.6 (the three-pool sentence), 10.2 (the CL-2 text) | Turn allowances and per-target round counts are frequency limits, not named pools; outside the cap and the three-pool limit; count 0; outside the camp-share ratio, inside the 60% formula. **A per-rest sub-limit on one option of a named pool (the Hew-use cap) is not a named pool and is not counted**, as the `restDefensiveTool` sub-limit is not | Lead |
-| VG-11 | Classes 12.1, 12.2, 12.3, 7.6; ability 7.3 (policy filters) | `rankSchedule` (a validator input) and `rankCategory`; `offerLaneAdjust`; `triggerMenu` ids; validators as data predicates (`RankAddsNoDice`, `RankKeepsBounds`, `HewCeiling` as the static formula, `TechniquePickerSize` over reachable option sets, `SurgeOptionBound` with `actionsGranted` and the reference encounter, `TurnAllowanceNoDamage` with its allow-list, `FlagNotCondition` with the condition equivalence table); `collisionRate` in the tuning file; the nova bound with Arts; the policy filter `notWhileSquaredUpElsewhere`; a row-modifier passive or glint counts 0; a cost waiver is not a refill (the 6.3 reading) | Lead |
-| VG-12 | Weapons 6.4, parity targets table, "Any build ≤ 110%" row; classes 6.4, the single-target damage cap cell ("Every build ≤ 110% of the greatsword reference", read "as measured by weapons 6.4, VG-12") | Measured floor-averaged at the worst legal build for rest pools; camp-pool damage bounded by the nova bound and `SurgeOptionBound`. This **changes the row's meaning** | Lead (the row is the lead's call); **the client was told plainly on 2026-11-18 and approved proceeding** |
-| VG-13 | Ability 6.3, the measure bullet ("The share is measured in the offer value unit"); **classes 8.2, the camp-pool chassis bullet (settled)**; **classes 8.3, the "Camp share" bullet (settled)**; classes 11.B, the camp-share row (a note: "level-1 martial miss accepted") | The camp share counts the `restDefensiveTool` at half value; all three measures reported, Momentum included; the band holds at levels 5 and 10; the level-1 martial miss accepted. **Both classes rows are settled rows changed by the client** | **Client (agreed 2026-11-18, Q1): the measure and the level-1 miss** |
+| VG-10 | Classes 3.4 (terms), 7.5 (counting); ability 6.6 (the three-pool sentence), 10.2 (the CL-2 text) | Turn allowances and per-target round counts are frequency limits, not named pools; outside the cap and the three-pool limit; count 0; outside the camp-share ratio, inside the 60% formula. **A per-rest sub-limit on one option of a named pool (the Hew-use cap) is not a named pool and is not counted**, as the `restDefensiveTool` sub-limit is not. Extended from one option to one tag by SH-4 (Shade design 7.9) | Lead |
+| VG-11 | Classes 12.1, 12.2, 12.3, 7.6; ability 7.3 (policy filters) | `rankSchedule` (a validator input) and `rankCategory`; `offerLaneAdjust`; `triggerMenu` ids; validators as data predicates (`RankAddsNoDice`, `RankKeepsBounds`, `HewCeiling` as the static formula, `TechniquePickerSize` over reachable option sets, `SurgeOptionBound` (now `CampOptionBound`, SH-5) with `actionsGranted` and the reference encounter, `TurnAllowanceNoDamage` with its allow-list, `FlagNotCondition` with the condition equivalence table); `collisionRate` in the tuning file; the nova bound with Arts; the policy filter `notWhileSquaredUpElsewhere`; a row-modifier passive or glint counts 0; a cost waiver is not a refill (the 6.3 reading) | Lead |
+| VG-12 | Weapons 6.4, parity targets table, "Any build ≤ 110%" row; classes 6.4, the single-target damage cap cell ("Every build ≤ 110% of the greatsword reference", read "as measured by weapons 6.4, VG-12") | Measured floor-averaged at the worst legal build for rest pools; camp-pool damage bounded by the nova bound and `SurgeOptionBound` (now `CampOptionBound`, SH-5). This **changes the row's meaning**. The trap-damage content reading (SH-16) applies when the Trapwright ships (Shade design 14) | Lead (the row is the lead's call); **the client was told plainly on 2026-11-18 and approved proceeding** |
+| VG-13 | Ability 6.3, the measure bullet ("The share is measured in the offer value unit"); **classes 8.2, the camp-pool chassis bullet (settled)**; **classes 8.3, the "Camp share" bullet (settled)**; classes 11.B, the camp-share row (a note: "level-1 martial miss accepted") | The camp share counts the `restDefensiveTool` at half value; all three measures reported, Momentum included; the band holds at levels 5 and 10; the level-1 martial miss accepted (extended to levels 1–4 for the Shade by SH-28, Shade design 10.5). **Both classes rows are settled rows changed by the client** | **Client (agreed 2026-11-18, Q1): the measure and the level-1 miss** |
 | VG-14 | Classes 12.1, subclass fields | Subclass field `offerLaneAdjust` (one name) | Lead |
 | VG-15 | Classes 8.3, Growth bullet, level 9 (Stand Fast); classes 14, registry list | Stand Fast "every roll", shield required, solo clause, subclass riders | Lead |
-| VG-16 | Enemies 11.1, the opportunity-cost term | Prices known reaction triggers (the Hold the Line stop, Retort Strike) as state; never class | Lead |
+| VG-16 | Enemies 11.1, the opportunity-cost term | Prices known reaction triggers (the Hold the Line stop, Retort Strike) as state; never class. Counterstroke added by SH-29 (Shade design 8.3) | Lead |
 | VG-17 | Classes 8.3, Creation pick bullet ("a **permanent** creation pick"); classes 18, narrowings paragraph ("the stance a permanent creation pick"); armour 14.5, Guarding row | The stance may be re-picked once per camp, never in combat; Guarding gains a runtime-inert state with a warning | **Client (agreed 2026-11-18, Q3)**, since the permanent pick was confirmed with stage 1; armour row: Lead |
-| VG-18 | Classes 14, "Registry pass" bullet; trinkets 11 rule 1 (the registry's scope, as amended by CL-11: "It also covers ... weapon verb signatures") | Weapon verb signatures join the registry list. Class features never match armour or shield signatures (trinkets 11 rule 1). Payable lines prefer original effects. Echoes of verb signatures (Warding Staff) need a ruling | Lead |
+| VG-18 | Classes 14, "Registry pass" bullet; trinkets 11 rule 1 (the registry's scope, as amended by CL-11: "It also covers ... weapon verb signatures") | Weapon verb signatures join the registry list. Class features never match armour or shield signatures (trinkets 11 rule 1). Payable lines prefer original effects. Echoes of verb signatures (Warding Staff) need a ruling; the Riposte echo ruling is SH-8 (Shade design 8.3) | Lead |
 | VG-19 | Weapons 7.3, class hooks; ability 7.2, a note | A subclass may apply the canonical verb of a trained, non-Strained weapon in the wielder's own spare set. Signatures, dice, type, reach and properties never travel. A note says why this is not a key per enemy | Lead (7.3 is a lead's call) |
-| VG-20 | Weapons 8, "Movement and reactions" bullets; ability 7.2, threatened-zone row | New trigger kind `attackAgainstOther` (a reaction attack, not an opportunity attack), hooked after weapons 7.5 step 15, or after ability 14.3 step 6 per attack roll, with legality re-checked then; the `slipPast` opportunity-attack trigger point (before the step past, after a successful check; 7.4) | Lead |
+| VG-20 | Weapons 8, "Movement and reactions" bullets; ability 7.2, threatened-zone row | New trigger kind `attackAgainstOther` (a reaction attack, not an opportunity attack), hooked after weapons 7.5 step 15, or after ability 14.3 step 6 per attack roll, with legality re-checked then; the `slipPast` opportunity-attack trigger point (before the step past, after a successful check; 7.4); the sibling trigger kind `missedBy` is SH-8 (Shade design 8.3) | Lead |
 | VG-21 | Armour 13.6, "Starting kits" bullet (illustrative) | Vanguard kit: chain mail, warhammer + shield / greataxe | Lead |
 | VG-22 | Conditions 10.1; classes 6.3 (reading) | Ally swap primitive (1 square of forced movement on the ally; not a teleport or a speed change) | Lead (ruling pending; Step In works without it) |
 | VG-23 | Conditions 18.3, Staggered, "Sources" line | Clarify that collision damage is not a hit, so the "automatic on bludgeoning-weak" source does not fire from it. **Stat model 8.2 (agreed) is unchanged**: it reads "any hit". If the lead reads 8.2 otherwise, this becomes a client item | Lead (clarification only) |
@@ -2320,7 +2338,8 @@ every lead's call in it. The three questions it raised were answered on
 
 The client was also told plainly about **VG-12** (weapons 6.4 parity
 measured floor-averaged at the worst legal build for rest pools;
-camp-pool damage bounded by the nova bound and `SurgeOptionBound`) and
+camp-pool damage bounded by the nova bound and `SurgeOptionBound`,
+now `CampOptionBound`, SH-5) and
 approved proceeding with it as the lead's call. Under it, the worst
 legal build now sits at 109.6–110.0% at level 10, because the revision
 excludes Technique capacity offers (10.1). The approval of 2026-11-18
@@ -2407,7 +2426,7 @@ triggers them:
 | C-17 | Hew 1d4 needs rows; Deep Reserves a hidden sub-pool | VG-6; allow-list in `RankAddsNoDice`; the Hew-use cap (6.4 rule 7), a sub-limit exempt under VG-10 |
 | C-18 | Condition-on-reaction narrowings | Recorded in classes 18 (VG-1) |
 | C-19 | Camp re-pick amends a recorded narrowing; Guarding inert state | Agreed by the client (Q3); VG-17 |
-| C-20 | Swap conflict (Later or M2); tempo clause | Add-on pending VG-22; tempo clause in `SurgeOptionBound`; Step In buys one Dash |
+| C-20 | Swap conflict (Later or M2); tempo clause | Add-on pending VG-22; tempo clause in `SurgeOptionBound` (now `CampOptionBound`, SH-5); Step In buys one Dash |
 | C-21 | `retortBeforeTheBlow` reintroduces prevention | Rejected |
 | C-22 | Brink ordering; 18.4 source | VG-5 |
 | C-23 | Chosen distance needs rows | Wrecker-only, so it lives in the subclass text; Push's canonical text untouched |

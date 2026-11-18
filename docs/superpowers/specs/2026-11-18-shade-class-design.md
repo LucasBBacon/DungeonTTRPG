@@ -1,7 +1,7 @@
 # Classes, Stage 2: The Shade: Design
 
 Date: 2026-11-18
-Status: Draft, awaiting client approval, 2026-11-18
+Status: Approved, 2026-11-18
 Parents: `2026-11-17-classes-concepts-design.md` (classes stage 1,
 approved; the direct parent), `2026-11-18-vanguard-class-design.md`
 (the approved stage-2 template; "Vanguard design" below), and through
@@ -32,18 +32,20 @@ records that **the unlock fallback is the expected default if trap
 records are not ready** (14). The client also said that everything else
 in the lead's proposal stands as written.
 
-Items marked **(lead's call)** were filled in by the design lead; they
-become binding when the client approves this document. Items marked
+Items marked **(lead's call)** were filled in by the design lead; the
+client confirmed them all on 2026-11-18, when it approved this document
+as a whole, and they are binding. Items marked
 **(settled)** restate a rule from an approved document; **(decided)**
 marks a main-design client decision. Items marked **(change SH-n)**
 amend an approved document and are listed, with an id and the exact
-section they touch, in section 17. Once approved, every item here is
-binding on the builders.
+section they touch, in section 17. Every item here is binding on the
+builders.
 
 This revision applies the check round's findings (Appendix A, "Check
 round"). Its new judgement calls are marked **(lead's call)**; none
-changes a Q1–Q3 answer, and the two moved pool steps are told plainly to
-the client with the approval request (19.1).
+changes a Q1–Q3 answer. The two moved pool steps, the level-4 strike
+pip and SH-28 were told plainly to the client with the approval request,
+and the client confirmed them with the document on 2026-11-18 (19.1).
 
 This is **stage 2 of the classes design for the Shade**, the launch
 Dexterity martial: its full table for levels 1–10, its signature verb
@@ -1943,8 +1945,8 @@ Offer units; Catch Breath at half value (the measure, VG-13).
 
 - Levels 5–10 are in band.
 - Levels 1–4 miss (32–37%). This needs the accepted martial level-1 miss
-  (VG-13) extended to levels 1–4 (SH-28, told plainly to the client,
-  19.1). Vanish 3 at level 2 raises level 2 (levels 3–4 already had it);
+  (VG-13) extended to levels 1–4 (SH-28, told plainly to the client and
+  confirmed by the client on 2026-11-18, 19.1). Vanish 3 at level 2 raises level 2 (levels 3–4 already had it);
   the figures above were run with it from level 3, and the level-2 cell
   is rerun.
 - **60% rule:** the earlier figures (level 1 = 123‰ of level 10;
@@ -2016,7 +2018,7 @@ Bleeding, Challenged and Frightened (triggers). No new condition.
 | Perception for Tactician | On the list and a default; mastery in `delve`; never copied | Met |
 | Medicine on solo floor 1 (DH 8) | On the list and a default; `Floor1BossSustain` passes at both Con values | Met |
 | One `restDefensiveTool`; 2 potions (classes 8.2; DH 12.4) | Catch Breath, half Recovery, 1 / 2 per rest, `chassisOnly`; both kits | Met |
-| Rest and camp pools; 40–60% camp (ability 6.3) | Vanish 3 from L2; Arts; From Nowhere | Levels 5–10 in band; levels 1–4 miss, accepted under SH-28 (client told plainly, 19.1) |
+| Rest and camp pools; 40–60% camp (ability 6.3) | Vanish 3 from L2; Arts; From Nowhere | Levels 5–10 in band; levels 1–4 miss, accepted under SH-28 (client told plainly; confirmed 2026-11-18, 19.1) |
 | One camp spend per turn (ability 6.4) | Vanish, Arts, From Nowhere and scroll reads share it | Met |
 | Lean, never require (classes 6) | Every Shade lean has a universal baseline (Hide, Steal, the trap hand-trigger, Lure); doors are not a recorded lean, so Wedge needs none | Met |
 | Forbidden grants (classes 6.3) | No speed change (Dash is the universal action); no teleport (Vanish is a Hide); no second reaction; no refills (cost waivers are not refills, VG-11); one camp spend; no new condition. **False Trail** writes the awareness record (information the AI reads under enemies 11.2), not an AI targeting override: the AI still scores freely on what it knows; an enumerated `ForbiddenClassGrant` exemption (SH-20) **(lead's call)** | Met |
@@ -2288,9 +2290,13 @@ registry).
 
 ## 17. Changes to approved documents
 
-Applied when the client approves this document. Each change names the
-exact section it touches. The client's Q1–Q3 answers approve the rows
-that name a question; the rest are confirmed with the document.
+Applied on 2026-11-18, when the client approved this document, except
+the Trapwright-only rows (SH-15 beyond its hazard ruling, SH-16 to
+SH-19, SH-25 and SH-26), which are recorded now and apply only when the
+Trapwright ships. The hazard ruling in SH-15 (known traps are hazards,
+M2, regardless) applies now. Each change names the exact section it
+touches. The client's Q1–Q3 answers approve the rows that name a
+question; the rest were confirmed with the document on 2026-11-18.
 
 **Narrowings recorded inside this design (no approved text changes;
 recorded in classes 18 by SH-23's row):**
@@ -2336,7 +2342,7 @@ recorded in classes 18 by SH-23's row):**
 | SH-25 | Consumables 12, flasks (lead's call); registry | Toss (setup only), Dust (no item, Caught only) and the ruling against Slinger's Bracers | Lead |
 | SH-26 | Classes 9.1, Sapper row (lead's call) | The Sapper never copies Jury-Rig or Tripline | Lead |
 | SH-27 | Classes 6.2 `LeanSpread` (lead's call) | The Shade's tools recorded as tools | Lead |
-| SH-28 | Classes 8.2, camp-pool chassis bullet (settled; VG-13); classes 11.B, camp-share row; Vanguard design 10.4 (the level-1 miss **agreed** there) | The accepted martial camp-share miss extended to levels 1–4 for the Shade. **This widens an agreed reading** | **Client, with this document's approval (told plainly, 19.1)** |
+| SH-28 | Classes 8.2, camp-pool chassis bullet (settled; VG-13); classes 11.B, camp-share row; Vanguard design 10.4 (the level-1 miss **agreed** there) | The accepted martial camp-share miss extended to levels 1–4 for the Shade. **This widens an agreed reading** | **Client, with this document's approval on 2026-11-18 (told plainly, 19.1)** |
 | SH-29 | Enemies 11.1, opportunity-cost term (lead's call; VG-16) | Counterstroke priced as state | Lead |
 | SH-30 | Classes 8.4, Subclasses bullets ("Cutthroat (M2)", "Trapwright (M2)", "Swordsworn (unlock)"); classes 13, M2 and M3 rows; classes 9.4; classes 7.3, the "Two per class at M2 ... aspects that change one rule" bullet (lead's call) | The Trapwright's wave becomes conditional (M2 only with DEP-S1; otherwise the first Shade unlock, the expected default); the Swordsworn is promoted to M2 under the fallback; the subclass `wave` / `fallbackWave` fields; a launch class's stage-1-named third subclass ships as a full subclass (as the Vanguard's three do), not as an aspect | **Client (agreed 2026-11-18, Q2)**; Lead for the 7.3 note |
 | SH-31 | Classes 8.4, Subclasses bullets: the Cutthroat ("one more Opening die against Surprised targets"), Trapwright ("trigger or re-arm a known trap as a Tricks option") and Swordsworn ("a pooled reaction strike after a Parry") cards | Cutthroat: Quiet Work and the Surprised part (+1 / +1d4); Trapwright: Jury-Rig and Caught; **Swordsworn: Sworn Guard, a Tricks-paid ward that counts as a Parry, with Counterstroke** (the mechanism, not the intent) | **Client (agreed, Q3)** for the Swordsworn; Lead for the others |
@@ -2391,7 +2397,8 @@ finds the `TriggerFromFive` scope note; a grep for
 - **Rulings owed by the lead:** the Duskhem ruling (No Witnesses III),
   VG-18 (Toss and Dust against Slinger's Bracers; the Riposte echo).
   SH-11 is now written as a clarification (declaration-time reading);
-  SH-28 goes to the client with the approval request (19.1).
+  SH-28 was confirmed by the client with the document on 2026-11-18
+  (19.1).
 - **Lead's checks before data:** every SRD shape in this document
   (Opening against Sneak Attack, Fade against Cunning Action, Duck
   against Uncanny Dodge, Tumble Clear against Evasion, Extra Attack, the
@@ -2400,10 +2407,14 @@ finds the `TriggerFromFive` scope note; a grep for
 
 ## 19. Open items for the client
 
+None. Approved by the client on 2026-11-18. The future items in 19.2,
+which come back only if a report or a later design triggers them, and
+the naming pass remain future items.
+
 ### 19.1 This document
 
-The document as a whole awaits the client's approval, including every
-lead's call in it. The three questions it raised were answered on
+The client approved the document as a whole on 2026-11-18, including
+every lead's call in it. The three questions it raised were answered on
 2026-11-18 **(agreed)**, each with the recommended option:
 
 - **Q1, Opening's band and triggers:** the tiered band (stealth tier:
@@ -2427,7 +2438,8 @@ lead's call in it. The three questions it raised were answered on
   from level 5; every Counterstroke spends the strike limit. The client
   was told this changes the stage-1 card's mechanism, not its intent.
 
-**To tell the client plainly with the approval request (lead's call):**
+**Told plainly to the client with the approval request, and confirmed by
+the client with the document on 2026-11-18:**
 - SH-28 extends the accepted level-1 martial camp-share miss to levels
   1–4 for the Shade (32–37% against the 40% floor).
 - The check round moved two pool steps one level earlier, with the pool
@@ -2436,6 +2448,8 @@ lead's call in it. The three questions it raised were answered on
   the level-8 trough); and it added a level-4 strike pip that only the
   subclass signature strike may spend. None changes a Q1–Q3 answer;
   every Counterstroke still spends the strike limit.
+
+All three are confirmed by the client (2026-11-18).
 
 ### 19.2 Future items triggered by reports
 

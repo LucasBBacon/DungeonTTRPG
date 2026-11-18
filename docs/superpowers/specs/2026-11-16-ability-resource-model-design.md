@@ -370,7 +370,7 @@ Every ability declares exactly one cost **(lead's call)**:
 | Shove or grapple: Athletics against 10 + Fortitude **(settled)**; cannot target a unit more than one size larger than the user **(change A-10, enemies design 5.1)**. A successful Shove: push 1 or Prone **(change VG-9, Vanguard design 7.1)** | Replaces one attack |
 | Slip past an enemy: Acrobatics against 10 + Reflex **(settled)** | Part of movement, once per turn |
 | Escape a grapple | Action |
-| Hide: Stealth | Action; a bonus action with a class feature |
+| Hide: Stealth | Action; a bonus action with a class feature; or part of an attack with a class feature (No Witnesses: on a kill, no bonus action, resolved after weapons design 7.5 step 15 so the killing attack does not end it; conditions design 18.7) **(change SH-12, Shade design 8.1)** |
 | Search: Perception against the passive stealth of hidden units within line of sight. Monsters use it after losing the party; Keen gives advantage. **(change A-10, enemies design 11.1, 12.1)** | Action |
 | Frighten: Intimidation against 10 + Will **(settled)** | Action |
 | Rally: Leadership | Bonus action, once per ally per fight |
@@ -379,7 +379,8 @@ Every ability declares exactly one cost **(lead's call)**:
 | Get a downed companion up: Medicine, trained only **(settled)**; at most once per companion per fight (a Lifeline get-up counts) **(change DH-11, death and healing design 11.2)** | Action |
 | Treat: Medicine, one roll against each curable instance's recorded difficulty; ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (Diseased and Scarred at a rest, except a `treatProof` Scarred) **(agreed; change C4, conditions design 8; change CN-12, consumables design 14.6; change DH-11)** | Action, adjacent |
 | Disarm or re-arm a trap: Mechanics, trained only **(settled)** | Action |
-| Trigger a known trap against enemies: Mechanics | Action |
+| Trigger a known trap against enemies: Mechanics. A known armed trap is a hazard for forced movement (conditions design 10, 11.3; the rules of 10.1 and 10.2 unchanged) **(change SH-15, Shade design 9.1)** | Action |
+| Lure: choose a square you can see within 6; it emits noise radius 4 (enemies design 12.3). A group with no member in line of sight to you becomes Alerted toward it with no roll; a group that can see you makes its noticing roll. Once per group per floor (`luredThisFloor`). Only if the enemies owner accepts **(change SH-21, Shade design 9.1)** | Exploration action (1 tick) |
 | Use a scroll or wand outside your class: Arcana, trained only, against 10 + tier; in class, no slot is spent **(settled; change CN-12, consumables design 13.2)** | Action. A failed check uses the scroll or charge up: no free retries **(settled)**. |
 | Drink a potion (a potion on your own belt) **(change I-5, items design 7.1)** | Bonus action |
 | Administer a belt potion or tonic to an adjacent ally: tonics minor only; a potion does not lift Downed; not a potion or healing scroll on a Downed unit (a trinket reach step may extend 'adjacent' to 2 squares; trinkets design 6.1) **(change I-5, items design 7.1; change TK-19; change CN-12, consumables design 11)** | Action (the giver's); the receiver spends nothing |
@@ -396,7 +397,7 @@ Every ability declares exactly one cost **(lead's call)**:
 | Stiff: worn medium or heavy armour gives disadvantage on Acrobatics checks (slip past, escape a grapple by Acrobatics, narrow ground) **(change AR-7, armour design 7.3)** | None; a standing modifier |
 | Opportunity attack | Reaction |
 | Off-hand attack with a light weapon, after at least one Attack-action attack this turn; Nick moves it into the Attack action, once per turn **(change W-2, weapons design 11.3)** | Bonus action, once per turn |
-| Threatened zone: an opportunity attack when a hostile leaves it by its own movement, Set when a hostile enters it from outside; they share the round's one reaction, and Disengage stops both. Movement resolves square by square, with the trigger timing of weapons design 8 **(change W-2)**. A slip-past trigger (`slipPast`) resolves after a successful slip-past check and before the step that moves the hostile through or past the square, as an opportunity attack. A separate trigger kind, `attackAgainstOther`, is a **reaction attack**, not an opportunity attack: it hooks after weapons design 7.5 step 15 for a weapon attack, or after 14.3 step 6 for each attack roll of a non-weapon attack, and its legality is re-checked then **(change VG-20, Vanguard design 7.4, 8.2)** | Reaction |
+| Threatened zone: an opportunity attack when a hostile leaves it by its own movement, Set when a hostile enters it from outside; they share the round's one reaction, and Disengage stops both. Movement resolves square by square, with the trigger timing of weapons design 8 **(change W-2)**. A slip-past trigger (`slipPast`) resolves after a successful slip-past check and before the step that moves the hostile through or past the square, as an opportunity attack. A separate trigger kind, `attackAgainstOther`, is a **reaction attack**, not an opportunity attack: it hooks after weapons design 7.5 step 15 for a weapon attack, or after 14.3 step 6 for each attack roll of a non-weapon attack, and its legality is re-checked then **(change VG-20, Vanguard design 7.4, 8.2)**. A third, `missedBy`, is also a reaction attack: it hooks after weapons design 7.5 step 6 / 6a, in the order the miss → Graze → `answeredBy[]` written → step 6a → the hook, where legality is re-checked. With `sameReactionFollowUp`, a follow-up on `onParrySuccess` (a Parry or a `countsAsParry` ward was applied and the roll missed) runs in the same reaction when the ward spent or carried the reaction, and spends the reaction after a step-0 fill. One reaction makes one attack: with the Riposte signature (weapons design 18.4) the player picks it or the follow-up **(change SH-8, Shade design 8.3)** | Reaction |
 | Ranged or thrown **weapon** attack with a hostile adjacent: disadvantage (spell attacks unaffected) **(change W-2, weapons design 9.2)** | Replaces one attack |
 | Loading weapon: at most one attack with it per action, bonus action or reaction **(change W-2, weapons design 9.3)** | Replaces one attack |
 | Throw: an attack mode of a thrown-capable melee weapon; it stays with the thrower, no pickup **(change W-2, weapons design 9.3)** | Replaces one attack |
@@ -406,6 +407,10 @@ Every ability declares exactly one cost **(lead's call)**:
 
 There is no Drop command, and armour and trinkets cannot be changed in
 combat. **(change I-5, items design 7.1)**
+
+The Trapwright's trap rows (the hand-trigger clarified, Trigger Shot,
+re-arm at 500‰, the hard part once per fight) and Wedge apply when the
+Trapwright ships **(changes SH-15, SH-18; Shade design 14)**.
 
 Switching weapons costs a bonus action so that a spare weapon is a fallback,
 not a key carried for each enemy. **(lead's call, from the stat model's
@@ -438,6 +443,18 @@ each use costs a Technique. **(change VG-19, Vanguard design 8.1)**
   7.1)** A second filter, `notWhileSquaredUpElsewhere`: while the unit has
   an active Square Up, the reaction is not taken against a unit other
   than the Squared-Up one. **(change VG-11, Vanguard design 7.12)**
+  Further filters **(change SH-7, Shade design 6.4, 7.12)**: `bigHit`
+  (read on the death and healing design 20.3 step-3 total against
+  current HP: the total is ≥ 250‰ of max HP, or it would drop the unit
+  to 0 and the halved total would not); `noAllyHarm` (not taken when it
+  would harm an ally); `ifOpeningUnavailable` (only if no known Opening
+  trigger is live on a reachable target); and, on the Opening policy,
+  `preferStealthTarget` (hold the allowance for a stealth-tier target
+  this turn) and `holdCarryOnOverkill` (while a carry is live, no
+  Opening on a minion or on a hit whose weapon damage already drops the
+  target). `whilePoolAtLeastHalf`, for a pool with a strike counter,
+  also needs a strike left (`remaining ≥ ceil(max / 2)` and
+  `strike.remaining ≥ 1`).
 - Monsters use their reactions' automatic policies; they have no "ask me".
   **(lead's call)**
 - Reactions do not nest. A reaction, a boss action or an opportunity attack
@@ -662,7 +679,9 @@ that when setting numbers.
     last `camp` pool. At most one per run.
   - trigger: an ability gains one named extra trigger from its class's
     `triggerMenu`, never repeated; legal at any level (classes design 7.5)
-    **(change CL-3)**.
+    **(change CL-3)**, except an added Opening trigger record, which has
+    `minClassLevel ≥ 5` (`TriggerFromFive`, with one stated exception)
+    **(change SH-23, Shade design 6.6)**.
 - Every offer declares `requires` tags (what build it suits) and a value in
   a single unit, about one action's worth of effect. The offer draw filters
   by both. **(lead's call)**
@@ -914,11 +933,17 @@ effects system:
 5. For each target: attack roll or save, then damage (then any
    concentration check), then the rider attempt, then effects applied.
    For weapon attacks this step expands into the weapon attack pipeline.
-   **(change W-4, weapons design 7.5)**
+   **(change W-4, weapons design 7.5)** A hit by a non-weapon attack roll
+   flags the damage event as Duck-eligible and records the attacker, as
+   weapons design 7.5 step 8a does; nothing is offered here (the offer
+   and halving are death and healing design 20.3, before and at step
+   3a), and the concentration check uses the step-3a value **(change
+   SH-6, Shade design 7.4)**.
 6. Resolved.
 
 Reactions hook in at named points, such as between an attack roll and the
-hit being decided.
+hit being decided. The `missedBy` hook and its order at a miss are in
+7.2's threatened-zone row **(change SH-8, Shade design 8.3)**.
 
 ### 14.4 Rules in the core
 

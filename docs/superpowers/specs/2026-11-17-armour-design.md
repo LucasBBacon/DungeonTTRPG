@@ -898,13 +898,21 @@ As enemies 17.1 defines it **(settled; party wording lead's call)**:
 - **Candidate order:**
   0. **step 0, window fills** (Vanguard design 7.7; VG-4): a reaction AC
      bonus from a camp-pool ability that applies without a reaction being spent
-     (Stand Fast, Step In II). Several fills on one roll are ordered by
+     (Stand Fast, Step In II), or the Shade's Blade Dance (a Vanish-pool
+     option; Shade design 8.3; SH-9). Several fills on one roll are ordered by
      source unit order, then by creation order; they come ahead of the
      target's own candidates;
+  0b. **step 0b, carried ward** (Shade design 8.3; SH-9): a ward carried
+     forward from a reaction already spent (Held Guard: Sworn Guard's +2
+     against that hostile's later melee rolls this turn), after the step-0
+     fills and before step 1. It spends nothing;
   1. the target's own pool-free reactions (Parry);
   2. allies' pool-free reactions (Interpose), in unit order;
-  3. charge reactions: the target's own first (the Parrying property),
-     then allies' (Guarding), in unit order.
+  3. charge reactions, split (Shade design 8.3; SH-9):
+     - **3a**, the target's own Tricks-paid wards (Sworn Guard,
+       `countsAsParry: true`);
+     - **3b**, the target's own Parrying property;
+     - then allies' (Guarding), in unit order.
 
   **Unit order** is the fixed unit order held in the state (stat model 6,
   initiative ties), the same order every other "unit order" rule uses.
@@ -916,7 +924,11 @@ As enemies 17.1 defines it **(settled; party wording lead's call)**:
      spent. A step-0 fill inherits these skips (Pry ignores it; none after
      a gear-sourced disadvantage), is suppressed while its source is
      Staggered or Incapacitated, and is never skipped for "no reaction
-     left", since it spends none (Vanguard design 7.7; VG-4);
+     left", since it spends none (Vanguard design 7.7; VG-4). A step-0b
+     carried ward is likewise exempt from the "no reaction left" skip and
+     inherits the other skips (Pry Deep ignores it; suppressed while its
+     unit is Staggered; none after a gear-sourced disadvantage) (Shade
+     design 8.3; SH-9);
   2. **evaluate its policy** (ability model 7.3): `always` fires;
      `ifItChangesOutcome` fires only if its bonus turns this hit into a
      miss; `whilePoolAtLeastHalf` fires while its pool is at least half;
@@ -924,7 +936,8 @@ As enemies 17.1 defines it **(settled; party wording lead's call)**:
      with the roll known;
   3. the **first that fires closes the window**. The rest are not taken
      and not spent. A step-0 fill that applies closes the window and
-     counts as "the one reaction" (11 item 1; VG-4).
+     counts as "the one reaction" (11 item 1; VG-4); so does a step-0b
+     carried ward (SH-9).
 
   So a player who sets Parry to `always` accepts that a Parry that changes
   nothing still closes the window before an ally's Interpose; the preview

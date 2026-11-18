@@ -991,7 +991,7 @@ The added terms are data-weighted percentages. **(change A-6)**
 |---|---|---|---|
 | Approach | The best expected score reachable *next* turn from the destination, half-discounted | A one-step scorer otherwise stands still when nothing is in reach | M1 |
 | Exposure | − the party's expected damage against this square next round × `caution%` | Artillery stays back | M1 |
-| Opportunity cost | − the opportunity attacks the path provokes × `oaAversion%` (higher means it avoids them). Entering a Set zone costs the same way, but only while the zone owner's reaction is unspent, and only for the first unit each round that would trigger the owner's Set under its policy (by default the first non-minion) **(change W-5; weapons 15.4)**. Other *known* reaction triggers (the Hold the Line stop, Retort Strike) are priced the same way, as state, as Interpose is previewed; the term never reads class (Vanguard design 7.4) **(change VG-16)** | Brutes plough through; skirmishers Disengage or slip past; no Set-zone stall | M1 |
+| Opportunity cost | − the opportunity attacks the path provokes × `oaAversion%` (higher means it avoids them). Entering a Set zone costs the same way, but only while the zone owner's reaction is unspent, and only for the first unit each round that would trigger the owner's Set under its policy (by default the first non-minion) **(change W-5; weapons 15.4)**. Other *known* reaction triggers (the Hold the Line stop, Retort Strike, the Swordsworn's Counterstroke) are priced the same way, as state, as Interpose is previewed; the term never reads class (Vanguard design 7.4; Shade design 8.3) **(change VG-16; change SH-29)** | Brutes plough through; skirmishers Disengage or slip past; no Set-zone stall | M1 |
 | Range | − \|distance to the nearest noticed target − `preferredRange`\| × step | Kiting | M1 |
 | Hazard path | Settled 17.3 term; a cost of at least 100% for any hazard that could kill the mover | Never suicidal | M1 |
 | Target preference | + bonus% × expected damage when the target matches the preference, capped at 25% of its best at-will | Personality without exclusivity | M1 (nearest); M2 (others) |
@@ -1004,6 +1004,9 @@ The added terms are data-weighted percentages. **(change A-6)**
 Candidates are scored through the resolve preview, with armour verbs
 and their spent state applied (Ringed, Proof); "lowest AC" means visible
 AC (armour design 12.5). **(change AR-25)**
+
+The AI force-door term (Wedge, change SH-18) is added only when the
+Trapwright ships (Shade design 14).
 
 **Kill bonus** = min(`killBonus%` × the target's T, 1.5 × the attacker's
 best at-will score). T is the target's best expected one-step score
@@ -1027,6 +1030,18 @@ rescores with what is left of its turn, so it can retreat after striking.
   `noticed`, reset at fight start (trinkets design 13.4). **(change
   TK-26)**
 - The record is shared within the group.
+- **False Trail** **(change SH-20; Shade design 9.1)**: a class may
+  write `lastKnown(square)` into a group's shared record for itself only
+  when it is Hidden from every member of that group with line of sight
+  to it; otherwise the record is unchanged. This is information the AI
+  reads under this rule, not a targeting override: the AI still scores
+  freely on what it knows (an enumerated `ForbiddenClassGrant`
+  exemption, classes design 6.3).
+- **Wise to You** **(change SH-22; Shade design 9.1)**: each group also
+  holds `wise[partyUnit]` per fight, rising by 1 each time that unit's
+  Hidden against a group member ends, up to `wiseMax`; that unit's later
+  Hide or Vanish rolls against the group take −`wiseStep` × `wise`.
+  Tuning: `wiseStep` 0 (ships off; a lever), `wiseMax` 2.
 - A Hidden hero stays at its last known square for that observer. An area
   aimed there hits whatever is really there.
 - Without this rule, Hide and Stealth do nothing against the AI.
@@ -1123,6 +1138,9 @@ Each shows as a corner glyph.
 This answers ability model 20's "behaviour after losing sight": Pursuing,
 then Searching, then Wary, with no healing and no refill.
 
+The Cutthroat's "unaware" set is Dormant, Stationary or Patrolling, never
+Alerted, Searching or Wary (12.2; Shade design 3.4) **(change SH-11)**.
+
 ### 12.2 Noticing
 
 **(change M-2, S-6)**
@@ -1141,7 +1159,17 @@ then Searching, then Wary, with no healing and no refill.
   awake member of the group has line of sight to the target or the
   attacker, is not noticed automatically. It is the only exception to the
   automatic notice, and the only way to set the `broken` flag's stealth
-  source (14.8).
+  sources (14.8): a leader's silent kill and the Cutthroat's Quiet Work
+  **(change SH-10; Shade design 8.1)**.
+- **Declaration-time reading** **(change SH-11; Shade design 8.1)**:
+  Throat-Cut and the Cutthroat's unaware branch read the target's
+  awareness, its group's record and `combatActive` at declaration
+  (weapons 7.5 step 1), before the combat-start step of death and
+  healing design 10.4. The blow stays in-combat damage. A clarification
+  only: main 4.3 and death and healing 10.4 are unchanged.
+- **Body noticed** (only if Quiet Work's second route ships in M2;
+  otherwise Later) **(change SH-10; Shade design 8.1)**: a patrol that
+  sees a corpse becomes Alerted to its square.
 - The 6- and 3-square bands use the same grid distance as ranges.
   Noticing, lurker Stealth and Steal rolls use the **combat stream**,
   in the order the triggers occur. **(lead's call)**
@@ -1165,6 +1193,7 @@ Measured as path distance, never through walls:
 | Loud checks (force a door, Athletics) | 6 |
 | Each combat round | 8 |
 | A loud trap or a shattered door | 10 |
+| Lure: an exploration action at a seen square within 6; a group can be lured once per floor (`luredThisFloor`, 14.2) **(change SH-21; Shade design 9.1; if the enemies owner accepts)** | 4 |
 
 Modifiers: each closed door on the path −3; Conspicuous +3 **(settled)**;
 Hushed silent **(settled)**; Dormant groups hear at half radius.
@@ -1204,7 +1233,8 @@ Hushed silent **(settled)**; Dormant groups hear at half radius.
 
 **Doors:** monsters open unlocked doors (1 square of movement) and never
 close or lock them. Locked doors stop monster paths, which is a Mechanics
-payoff.
+payoff. (Wedge and the force-door term, change SH-18, apply when the
+Trapwright ships; Shade design 14.)
 
 ### 12.5 Pursuit
 
@@ -1436,7 +1466,9 @@ Perception, so guile grows with level. **(agreed)**
 ### 14.2 Groups and profiles
 
 **The group** is the morale unit. Record: `{groupId, homeRoom, members,
-leader?, startCost, lossCost, flags}` (19.1).
+leader?, startCost, lossCost, flags}` (19.1). Flags include
+`luredThisFloor` (Lure, 12.3; reset at floor end) **(change SH-21; Shade
+design 13.1)**.
 
 - `startCost` is the sum of the members' frozen `cost` (10.1) when the
   group **enters** the fight; members already resolved earlier on the
@@ -1674,8 +1706,14 @@ Intimidation never cost levels.
 
 **The `broken` flag** is a group flag, not a condition. It is set when the
 group's leader died, or its losses crossed ½, in a fight the party then
-broke off; or its leader was removed by a silent kill (12.2). It persists
-for the floor. It is how "Demoralised", which is `combatOnly`, carries into
+broke off; or its leader was removed by a silent kill (12.2); or, by the
+Cutthroat's Quiet Work, a non-minion member was removed by a silent kill,
+or (only with the body-noticed rule, 12.2) the same party unit's second
+silent kill against the group this floor (`silentKillsBy[partyUnit]`)
+landed; never against a boss, a group with a living elite or boss
+(evaluated after the kill), or a `fearless` group **(change SH-10; Shade
+design 8.1)**. It persists for the floor. It is how "Demoralised", which
+is `combatOnly`, carries into
 exploration.
 
 **Success:**

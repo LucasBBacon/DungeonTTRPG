@@ -209,7 +209,7 @@ Formulas give the shape. Exact values are left to the builders.
 | Speed | 6 squares. Changed only by species traits, monster role or traits, armour and conditions; affixes are traits (enemies design 8.3). |
 | Passive perception | The best party member's full passive: 10 + Wisdom + proficiency if trained (double with mastery) + active effects (enemies design 12.2, 13.3) |
 | Passive stealth | 10 + Dexterity of the worst party member, less a heavy armour penalty (sized in armour design 7.3) |
-| Trap sense | 10 + Intelligence of the best party member |
+| Trap sense | 10 + Intelligence of the best party member. When the Trapwright ships, its Trap Eye proficiency lean applies here (Shade design 8.2, 14; SH-19) |
 | Guile (monsters) | 10 + Wisdom + proficiency + role adjustment, for every monster whether or not trained in Perception (enemies design 13.3) |
 | Recovery | Hit points restored per short rest; grows with level and Constitution = `recovery.base` + `recovery.perLevel` × level + Constitution, minimum 1 (values in the death and healing design 8) |
 | Carrying capacity | Pack slots: max(2, 3 + Strength) *(illustr. base 3, minimum 2)*, holding items of size 1 or 2. Belt, trinkets, weapon sets (active and one spare set, shield included) and armour sit outside the pack. Reads Strength excluding conditions. No weights. (items design 5) |

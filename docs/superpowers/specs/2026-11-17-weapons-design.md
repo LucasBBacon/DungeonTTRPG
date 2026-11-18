@@ -521,7 +521,7 @@ class's Strength-main spread:
 | Best Dexterity melee build of each Dexterity-main class | ≥ 90% |
 | Best launcher build of each Dexterity-main class | ≥ 75% |
 | Every launcher family, trained wielder, its best class build (M2 parity set) | ≥ 60% |
-| Any build, measured as VG-12: rest-pool damage floor-averaged at the worst legal build (every legal capacity step); camp-pool damage bounded by the nova bound and `SurgeOptionBound` instead **(change VG-12; Vanguard design 10.1)** | ≤ 110% |
+| Any build, measured as VG-12: rest-pool damage floor-averaged at the worst legal build (every legal capacity step); camp-pool damage bounded by the nova bound and `CampOptionBound` (`actionsGranted` ≤ the base option's; was `SurgeOptionBound`) instead **(change VG-12; Vanguard design 10.1; renamed by change SH-5, Shade design 17)** | ≤ 110% |
 
 **Binding requirement on the class designs (agreed):** every class whose
 main ability is Dexterity has at least one **precision feature**: a class
@@ -592,8 +592,11 @@ CL-8)**.
   one-handed `dice`, never the versatile die (9.3).
 - **Exploit dice** are that actual die (6.3); a monster's are its
   one-die-rule die (15.1).
-- **Crit doubling** doubles the weapon dice and the Exploit dice; flat
-  terms (ability, Precision, row flat) are not doubled.
+- **Crit doubling** doubles the weapon dice, the Exploit dice and a
+  class's dice part placed before it (Opening's `damage.extraDice.opening`);
+  flat terms (ability, Precision, row flat, Opening's rank-I
+  `damage.flat.opening`) are not doubled. Opening's effectKinds are named
+  apart from Precision (6.5) **(change SH-3; Shade design 6.4)**.
 - **Executioner's Stroke** re-rolls the **weapon dice part only** (crit
   dice included; Exploit and Precision excluded) and keeps the higher
   total. Aim changes no dice: it only makes an attack qualify for Exploit
@@ -773,24 +776,43 @@ these steps, in this order:
    order step 0 window fills (reaction AC bonuses from camp-pool
    abilities, no reaction spent, ordered by source unit order then
    creation order; the first fill closes the window and counts as "the
-   one reaction") **(change VG-4; Vanguard design 7.7)**, then pool-free
+   one reaction") **(change VG-4; Vanguard design 7.7)**, then a step-0b
+   carried ward (Held Guard), then pool-free
    target, then pool-free allies in unit order, then
-   charges with the target's own first; no reaction AC bonus is offered
+   charges with the target's own first (3a its Tricks-paid wards, such as
+   Sworn Guard, then 3b its Parrying property) **(change SH-9; armour
+   design 10.4)**; no reaction AC bonus is offered
    after a gear-sourced disadvantage.
-6. **Hit or miss, and crit.** On a miss: Graze (7.6), then step 6a, then
-   stop. A natural 20 hits and crits.
+6. **Hit or miss, and crit.** On a miss: Graze (7.6), then the target's
+   `answeredBy[]` is written, then step 6a, then step 6b, then stop. A
+   natural 20 hits and crits **(change SH-8; Shade design 8.3)**.
    - **6a. Verb on a miss** (Sure Form, Weaponmaster): on a qualifying
      miss, only the verb's own effect runs, at its normal step (forced
      movement at step 10, a Cleave follow-up at step 12, Lunge's carried
      advantage at step 13), with no damage step, no save slot and no
      Empower line. The miss is not a hit for any rule **(change VG-8;
      Vanguard design 8.1)**.
+   - **6b. `missedBy` hook:** reactions keyed to the miss (Counterstroke)
+     are offered here, with legality re-checked (reaction left, not
+     Staggered, attacker in reach, HP above 0), so a Graze that drops or
+     Staggers the unit removes the offer. `onParrySuccess` means a Parry,
+     or a `countsAsParry` ward, was applied and the roll missed. With
+     `sameReactionFollowUp`, the follow-up runs in the same reaction when
+     the ward spent the reaction or carries one forward, and spends the
+     reaction when the ward was a step-0 fill that spent none **(change
+     SH-8; Shade design 8.3)**.
 7. **On-hit spends:** Techniques and `onHit` charge properties
    (Executioner's Stroke, Thunderous, Quake, Crushing, Pinning, Shatter)
    are chosen now, before damage.
 8. **Damage** (6.6): the weapon dice with Executioner's Stroke, then
-   Exploit dice (from net advantage or Aim), then crit doubling, then the ability term, Precision
-   and flat terms; minimum 1. Then any concentration check.
+   Exploit dice (from net advantage or Aim), then Opening's dice, then crit doubling, then the ability term, Precision
+   and flat terms (Opening's rank-I flat +2 among them); minimum 1 **(change
+   SH-3; Shade design 6.4)**. Then step 8a, then any concentration check, which uses the
+   DH 20.3 step-3a value **(change SH-6; Shade design 7.4)**.
+   - **8a. Duck marker:** when the attack hits, the damage event is only
+     flagged as Duck-eligible and the attacker recorded; nothing is
+     offered here (the offer and the halving are DH 20.3, steps 3 and 3a)
+     **(change SH-6; Shade design 7.4)**.
 9. **Rider attempt, or Topple** in the shared save slot (7.2 rule 1).
    A save that depends on the movement (Ram's collision Prone, Topple
    under Upend) **reserves** the slot here and is rolled at step 11, as
@@ -1660,7 +1682,7 @@ whenever the verb is off (10.2).
 | Lunge | **Quick Lunge**: needs 1 square of movement. **Lunge Guard**: the Lunge target makes no opportunity attack against you this turn. |
 | Flourish | **Long Flourish**: step 2; at b3 no one gets an opportunity attack |
 | Aim | **Steady Aim**: Aim survives 1 square of movement (the first attack still counts for Exploit after moving 1 square) |
-| Parry | **Deflect**: also against ranged weapon attacks. **Binding Parry**: a successful Parry pushes the attacker 1. **Riposte** (M2, charge 1 / 1 / 2 per rest): a successful Parry lets you attack the attacker in the same reaction. **Warding Staff** (staff): Parry may protect an adjacent ally. |
+| Parry | **Deflect**: also against ranged weapon attacks. **Binding Parry**: a successful Parry pushes the attacker 1. **Riposte** (M2, charge 1 / 1 / 2 per rest): a successful Parry lets you attack the attacker in the same reaction; one reaction makes one attack, so where a Counterstroke is also offered the player picks one (the VG-18 echo ruling; change SH-8, Shade design 8.3). **Warding Staff** (staff): Parry may protect an adjacent ally. |
 | Set | **Short Grip** (pike): may attack adjacent, with disadvantage. **Keep Back** (charge 2 per rest): a Set or opportunity-attack hit pushes 1. |
 | Graze | **Driving Graze**: a Graze may also push 1 |
 | Pry | **Pry Deep** (M2): also ignores Parry |

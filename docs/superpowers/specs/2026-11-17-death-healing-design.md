@@ -1523,9 +1523,13 @@ save hash covers both files.
 1. If the target is Downed: discard, `DamageDiscarded{downedInert}`, stop.
 2. Per-part steps: ladder shifts and shells, type ends and layer breaks,
    transforms, temporary HP **(settled steps)**.
-3. Sum the event's total. This value is the **pre-save total** that
-   concentration uses.
-4. Floors, on the post-absorption total of step 3: for a party unit, if
+3. Sum the event's total. Duck (a reaction) is offered here, with this
+   total known, if the event is Duck-eligible and the total is above 0
+   (Shade design 7.4, SH-6).
+   3a. If Ducked: total = max(1, FloorDiv(total, 2)). This step-3a value
+   is the **pre-save total** that concentration uses; steps 4 onward read
+   it.
+4. Floors, on the post-absorption total of step 3a: for a party unit, if
    `combatActive` is false (20.5) or the event carries undetected-trap
    parts (10.4, with the mixed-event rule), clamp so HP stays ≥ 1,
    `DamageClamped{outOfCombat | undetectedTrap}`.
@@ -1540,7 +1544,7 @@ save hash covers both files.
    combat-end step is processed. `killingEventId` is the damage event's
    sequence id. The host deletes the save slot on that event.
 8. Otherwise the event continues (riders, on-damage triggers);
-   concentration uses step 3's value.
+   concentration uses step 3a's value.
 
 The turn-start zero-HP check (conditions 5.4 step 4) stays as the backstop
 for tick batches, whose chain already ran where the damage landed.
