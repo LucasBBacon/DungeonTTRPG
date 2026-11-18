@@ -605,7 +605,7 @@ a ground zone (conditions design 11). **(change C11)**
 | 1 | 1→3 | Tier 1 spells; tier 2 and subclass at level 3 |
 | 2 | 3→5 | +1 ability at level 4 **(settled)**; Extra Attack, tier 3, stronger cantrips at level 5 |
 | 3 | 5→7 | Tier 4 at level 7 |
-| 4 | 7→9 | +1 ability at level 8 **(settled)**; capstone at level 9 (6.7) |
+| 4 | 7→9 | +1 ability at level 8 **(settled)**; capstone at level 9 (6.7), plus a pick-one-of-three offer **(agreed, change CL-4, classes design)** |
 | 5 | 9→10 | Ordinary level choice: class table or offer |
 
 Proficiency raises attack and ability difficulty for everything at once.
@@ -635,6 +635,9 @@ that when setting numbers.
     **(change AR-9, armour design 7.2)**;
   - timescale: one `camp` pool becomes a `rest` pool, never the unit's
     last `camp` pool. At most one per run.
+  - trigger: an ability gains one named extra trigger from its class's
+    `triggerMenu`, never repeated; legal at any level (classes design 7.5)
+    **(change CL-3)**.
 - Every offer declares `requires` tags (what build it suits) and a value in
   a single unit, about one action's worth of effect. The offer draw filters
   by both. **(lead's call)**
@@ -643,8 +646,15 @@ that when setting numbers.
 - The hero has at most eight limited abilities from class and offers.
   Abilities granted by items (potions, scrolls, wands, trinkets) do not count;
   trinket buttons are capped at one per unit (trinkets design 9.2)
-  **(change TK-20)**. Past that, offers only upgrade existing ones.
+  **(change TK-20)**. Past that, offers only upgrade existing ones;
+  trigger offers stay in the draw beside upgrades **(change CL-3)**.
   **(lead's call)**
+  A limited ability is one named pool: every ability drawing on that pool
+  is an option of it, and a spell tier's slot pool counts as one, with its
+  known spells as options; an upcast is an option of the higher pool. An
+  offer or talent that adds an ability to an existing pool adds an option,
+  not a limited ability. A rest tool's per-rest sub-limit is not counted
+  (classes design 3.4, 7.5, 8.2). **(change CL-2)**
 - New spells are learnt through the same pick-one-of-three cards, drawn
   from the class's spell list. **(lead's call)**
 
@@ -905,7 +915,9 @@ The build fails when:
 - a beneficial effect on an ally longer than 10 of the wearer's turns, or
   until rest or camp, lacks concentration, except event boons, the
   starting boon and self-only toggles (changes C1, C5);
-- a class's limited abilities from its table and offers can exceed eight;
+- a class's limited abilities from its table and offers can exceed eight,
+  counted as the distinct pool ids reachable from the class table plus the
+  offers that create pools (10.2) **(change CL-2)**;
 - an offer's `requires` tags do not resolve.
 
 ### 14.6 Staging
@@ -1022,13 +1034,16 @@ reason is the validation code from 14.3. **(lead's call)**
 
 - All numbers: slot counts, pool sizes, dice, ranges, durations, supply
   rates and prices, thrift and pressure values, boss resolve and actions.
-- The four launch classes' kits, within the rules above.
+- The four launch classes' kits, within the rules above: at the classes
+  design's stage 2 (`2026-11-17-classes-concepts-design.md`) **(change
+  CL-13b)**.
 - Each rider's save type and strength table.
 - Spell and ability lists, names and descriptions.
 - The expected-need estimate inside the party scorer.
 - Hotbar, sheet, level-up and rest screen layout, including whether a rest
   plays out on the map.
-- What counts as one "thing to read" in the playtest target (11.4).
+- What counts as one "thing to read" in the playtest target (11.4):
+  answered by the counting rule in classes design 7.6 **(change CL-13b)**.
 - The JSON schema and effects vocabulary, built by the core developers with
   the content designer.
 
@@ -1064,7 +1079,8 @@ Applied on 2026-11-16:
   behaviour after losing sight in 12.1, morale in 14 and experience on
   resolution in 16 (`2026-11-16-enemies-design.md`). **(change A-7)**
 - **Content volume:** counts of companions, themes, monsters and bosses for
-  M2, and which class is the M1 slice class.
+  M2. The M1 slice class is the Vanguard (classes design) **(change
+  CL-13b)**.
 
 ## 21. Open items for the client
 

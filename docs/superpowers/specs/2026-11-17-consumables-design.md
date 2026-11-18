@@ -827,9 +827,13 @@ An engine rule keyed on category `scroll` or `wand`, never per-record data.
   the hero, the hero class; for a companion, its class (ability model
   11.1: a companion has a class). **(agreed, Q1)**
 - `classTags[]` = every launch class whose spell list holds the spell.
-  Validation resolves them to real class ids. Until the classes design
-  lands, catalogue tags are **TBD** (the tradition notes in section 16 are
-  authoring hints, not data; no tradition tags in the schema).
+  Validation resolves them to real class ids: the launch ids `vanguard`,
+  `shade`, `arcanist`, `herald` *(ids illustr.)*. The
+  coverage-or-cut audit maps every M2 scroll and wand to the Arcanist or
+  Herald list or moves it to Later (classes design 14). The tradition
+  notes in section 16 are authoring hints, not data; no tradition tags in
+  the schema; [primal] stays an authoring hint until the Rootwarden.
+  **(change CL-12a)**
 - In class covers **any spell on the class list, known or not** (ability
   model 6.5: about 7 known by level 10): a scroll is a spell you do not
   know, for one cast. **(agreed, Q1)**
@@ -1249,9 +1253,12 @@ lead's call)**
 ## 16. Catalogue
 
 One roster, one ruling per entry. Numbers *(illustr.)*. "User difficulty"
-means the user's ability difficulty (13.3). `classTags` are **TBD by the
-classes design**; the tradition in brackets is an authoring hint only.
-**(lead's call)**
+means the user's ability difficulty (13.3). `classTags` resolve to the
+launch ids `vanguard`, `shade`, `arcanist`, `herald` *(ids illustr.)*;
+the coverage-or-cut audit maps every M2 scroll and wand here to the
+Arcanist or Herald list or moves it to Later (classes design 14). The
+tradition in brackets is an authoring hint only; [primal] stays one until
+the Rootwarden. **(lead's call; change CL-12a)**
 
 ### 16.1 Potions, tonic, Remedy
 
@@ -1898,10 +1905,15 @@ family caps; belt counts; `packInCombat`; the 6.4 guards; main design
 - **Recovery formula: answered:** 4 + 2 × level + Constitution, minimum 1
   (death and healing design 8); `recoveryPlaceholder` removed (7.2, 18.1).
   **(change DH-44)**
-- **Classes:** the four launch classes and spell lists (the source of
-  `classTags`); DEP-1 (13.8); whether any class needs a teleport rule.
+- **Classes: answered** (classes design 11.G): the four launch classes
+  are the Vanguard, Shade, Arcanist and Herald; their spell lists (the
+  source of `classTags`) and the coverage-or-cut audit are its stage 2
+  (CL-12a); DEP-1 (13.8) is met by the Shade; no launch class needs a
+  teleport rule (classes design 11.G). **(change CL-12b)**
 - **Companions:** caster kits; Arcana-trained recruits (DEP-1).
-- **Ability model:** a teleport rule (Flicker Step, Far Step).
+- **Ability model:** a teleport rule (Flicker Step, Far Step). No launch
+  class needs a teleport rule (classes design 11.G); teleport scrolls stay
+  Later. **(change CL-12b)**
 - **Conditions content (Later):** Inured, Resisting, Shielded, Mired,
   Asleep, Held, Silenced, Blessed, Banished, Coated.
 - **Trinkets (Later):** Slinger's Bracers and Scrollwright's Token numbers.

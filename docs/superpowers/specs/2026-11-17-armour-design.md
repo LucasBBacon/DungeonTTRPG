@@ -1277,7 +1277,7 @@ for a drop-prevention effect (`RetiredDropPrevention`).
 | Spiked Boss | type | shield | The bash deals piercing (never with Quickdraw on one item; a set holding both suppresses Quickdraw, `QuickdrawTypeConflict`) | M1 |
 | Raise | charge, prevent | any | 1 / 1 / 2 per rest, bonus action: +2 AC until the start of your next turn (`raiseActiveUntilOwnTurnStart`, 16.3; never a condition); part of the shield part (Pry ignores it); does not stack with Fortified (6.1) | M1 |
 | Hailguard | charge | shield, tower | 1 / 1 / 2 per rest, automatic at weapons 7.5 step 2 (no reaction; policy `always` with the target filter `nonMinion`, which the player may change like a reaction policy, ability model 7.3): a ranged weapon attack roll against you whose net mode would not already be disadvantage has disadvantage. Inside the roll-mode cap, where it has the lowest priority and is not spent when suppressed (8.1 rule 6) | M1 |
-| Guarding | charge | shield, buckler, reliquary | 1 / 1 / 2 per rest: Interpose (illegal on a tower shield or on a carrier that already has Interpose or a Guard verb) | M2 |
+| Guarding | charge | shield, buckler, reliquary | 1 / 1 / 2 per rest: Interpose (illegal on a tower shield or on a carrier that already has Interpose or a Guard verb; "has Interpose" reads a **learned** class Interpose, such as Shieldwall, learned exactly when it is the Vanguard's stance pick, whether or not it is used; classes design 8.3, CL-7) | M2 |
 | Bashing Rim | rider | shield | The bash carries the Stagger rider (settled source) | M2 |
 | Shelter | charge | shield, tower | 1 / 1 / 2 per rest, reaction: a ranged weapon attack against an adjacent ally targets you instead (arrow-catching-shaped, renamed). It resolves at weapons 7.5 step 1, after declaration and before step 2, so the new target's roll mode, AC and reaction window apply; it spends your reaction and counts under the reaction cap (5.5) | M2 |
 | Bulwark Stance | tower signature | tower | If you did not move on your last own turn, Interpose may instead give an adjacent ally advantage on one Reflex save against an area | Later |
@@ -1762,7 +1762,11 @@ Stat model 6's AC formula and "Armour is hit or miss" and stat model 8.1
   `armourTrainingCeiling` and `shieldTraining`; the binding caster-defence feature for every
   class with a ceiling below light, with simulator evidence (11, item 2);
   the "armour training" and "shield training" offer kinds; capstone heavy
-  training.
+  training. Launch classes settled in
+  `2026-11-17-classes-concepts-design.md` (approved 2026-11-18; CL-13e):
+  ceilings heavy / light / light / medium (Vanguard, Shade, Arcanist,
+  Herald); no class below light at launch, so 11 item 2 is not triggered
+  (classes design 8, 11.D).
 - **Trinkets:** settled in `2026-11-17-trinkets-design.md` (approved
   2026-11-17; changes TK-1 to TK-8): the location tables and families (at
   least 3 legal families per piece location, as a running total each

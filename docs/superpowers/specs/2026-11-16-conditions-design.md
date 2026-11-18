@@ -1611,7 +1611,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     speed and provokes no opportunity attacks.
   - Intensity: 1 charge.
   - Duration: fallback is the end of its next turn.
-  - Sources: Rally's free-step option **(settled, stat model 7.1)**.
+  - Sources: Rally's free-step option **(settled, stat model 7.1)**;
+    class features, companion kits of the Herald class and presence spells
+    **(change CL-5; classes design 7.8, 8.6)**.
   - Interactions: unusable at speed 0 or while Prone; Rally gives this or
     Rallied, never both.
 - **Anchored** — beneficial · Later

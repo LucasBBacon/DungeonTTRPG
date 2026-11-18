@@ -1,7 +1,7 @@
 # Classes, Stage 1: General Class Concepts: Design
 
 Date: 2026-11-17
-Status: Draft, awaiting client approval, 2026-11-17; revised 2026-11-18 (appendix A, R-n)
+Status: Approved, 2026-11-18 (drafted 2026-11-17; revised 2026-11-18, appendix A, R-n)
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model),
@@ -18,8 +18,8 @@ Items marked **(agreed)** were decided by the client on 2026-11-17 for
 the five questions this design raised (Q1–Q5, section 4 and section 20),
 by choosing the lead's recommendation in each case; the client also said
 that everything else in the lead's proposal stands. Items marked
-**(lead's call)** were filled in by the design lead; they stand unless
-the client objects, and are confirmed when this document is approved.
+**(lead's call)** were filled in by the design lead; the client
+confirmed all of them when approving this document on 2026-11-18.
 Items marked **(settled)** restate a rule from a parent document;
 **(decided)** marks a main-design client decision. Items marked
 **(change CL-n)** amend an approved document and are listed, with an id
@@ -407,7 +407,9 @@ tolerance and the miss rules lead's call)**
   the lead applies the lever order in 15; if the levers run out, it goes
   to the client. The 60% share and the per-round breakdown are reports to
   the lead, who answers each miss with a stage-2 data change. The
-  reliance reports stay reports (Q3). **(lead's call)**
+  reliance reports stay reports (Q3). **(lead's call; reading
+  `Floor1ClassSpread` as an M2 release gate confirmed by the client,
+  2026-11-18)**
 
 ## 6. Lean, never require
 
@@ -1229,8 +1231,9 @@ saves.
     healing exactly the target's Recovery; higher tiers add targets, never
     HP per target. A single-class Herald may take it from level 1 (7.7
     guard 4 binds only a second class). **It may target the Herald
-    itself (lead's call)**: it is a `camp` slot spell under DH 12.2, not a
-    rest tool, so Second Wind stays the one full-Recovery *rest* tool.
+    itself (lead's call; confirmed by the client, 2026-11-18)**: it is a
+    `camp` slot spell under DH 12.2, not a rest tool, so Second Wind
+    stays the one full-Recovery *rest* tool.
     `Floor1BossSustain` and `Floor1ClassSpread` are run for the Herald
     with and without a heal card. A Herald who never takes a heal card
     counts as a party without a healer under DH 18.1; one who does counts
@@ -1576,9 +1579,10 @@ companion-kit id, read by `LeanWithoutBaseline`.
 lead's call)**
 
 - `Floor1ClassSpread` (≤ 10 points, client number; a gate on the M2
-  release, 5.6) inside every split, with the per-class death share and
-  the headroom measures; the per-round signature firing in each class's
-  floor-1 boss fight, boss-only rounds separate (a report).
+  release, 5.6, confirmed by the client 2026-11-18) inside every split,
+  with the per-class death share and the headroom measures; the
+  per-round signature firing in each class's floor-1 boss fight,
+  boss-only rounds separate (a report).
 - Reliance reports per leaned utility (6.6; ≤ 10 points, reports).
 - Healing: the DH 18.1 gate as defined there; beside it, as reports, the
   Herald arms (no Herald / Herald without heal cards / Herald with heal
@@ -1664,7 +1668,7 @@ tell the classes apart in the first fight".
 
 | Risk | Mitigation, report and lever |
 |---|---|
-| **The T6 change is refused** | The Herald's routs run on T5 only and its fear spells are weaker at M2. Fallback: Cadence Frighten as the whole rout engine; the Scatter capstone held back until approval |
+| ~~The T6 change is refused~~ (closed: CL-1 approved and applied 2026-11-18) | Recorded only. Had it been refused, the Herald's routs would run on T5 only; fallback Cadence Frighten as the whole rout engine |
 | **Floor-1 spread:** the Vanguard (full Second Wind, sturdy 8, AC 18) is structurally favoured; the Herald depends on the roster's non-fearless share and the escort | `Floor1ClassSpread` inside every split, with the headroom measures; CL-10; a creation pick-rate measure per class (playtest). Levers are any class's data, the Vanguard's own included (Techniques size, Surge timing, shield AC through starting kits); only the existence of the one full-Recovery Second Wind is protected |
 | **The Shade's solo rounds 3 and later** | The Answer trigger (8.4) and Vanish's carried first strike; the per-round breakdown, boss-only rounds separate, run before stage 2 sets the Tricks size; then stage 2 raises Tricks |
 | **Camp share for the martials** | Both may miss 40–60% after the fixes. The pool cap stops new pools, so the lever is weighting capstone and subclass value toward camp |
@@ -1721,10 +1725,10 @@ tell the classes apart in the first fight".
 
 ## 18. Changes to approved documents
 
-To be applied when the client approves this document. Each change names
-the exact section it touches; ids are provisional. **Agreed, decided and
-settled rows are flagged**; the client's Q1–Q5 answers approve the ones
-that name a question, and the rest are confirmed with the document.
+Applied on 2026-11-18, when the client approved this document. Each
+change names the exact section it touches. **Agreed, decided and settled
+rows are flagged**; the client's Q1–Q5 answers approved the ones that
+name a question, and the rest were confirmed with the document.
 
 **Narrowings recorded inside this design (no change id, no approved text
 changes):** the "lean, never require" rule; the forbidden grants;
@@ -1850,10 +1854,12 @@ shows the Vanish clause.
 
 ## 20. Open items for the client
 
-### 20.1 This document
+None. Approved by the client on 2026-11-18.
 
-Approval of the document as a whole. The five questions are answered
-**(agreed, 2026-11-17)**:
+### 20.1 What the approval covered
+
+The client approved the document as a whole on 2026-11-18. The five
+questions were answered **(agreed, 2026-11-17)**:
 
 - **Q1, launch four:** Vanguard, Shade, Arcanist, Herald, with the single
   light healing lean on the Herald's spell cards and its Hearth subclass.
@@ -1865,19 +1871,25 @@ Approval of the document as a whole. The five questions are answered
 - **Q5, Arcanist armour:** light ceiling; the Spellguard glass mage
   rejected.
 
-The approval also covers the new lead's calls in this document, the most
+The approval also confirmed every lead's call in this document, the most
 visible being Hold the Line's meaning (8.3; CL-6), the Arcana-mastery
 reading (8.5), the corrected section targets of CL-6, CL-10, CL-12c and
 CL-13, and the revision of 2026-11-18 (appendix A, R-n): the pool as the
-unit of the cap of eight, one rest-tool use per rest, `Floor1ClassSpread`
-as an M2 release gate inside every split, Opening's fourth trigger,
-Vanish's carried first strike, Mending Word on self, the Stand Fast,
-Overchannel and Scatter examples, and the placeholder renames.
+unit of the cap of eight, one rest-tool use per rest, Opening's fourth
+trigger, Vanish's carried first strike, the Stand Fast, Overchannel and
+Scatter examples, and the placeholder renames. The two readings flagged
+for the client's review were confirmed by the client:
 
-### 20.2 Future items triggered by reports or later stages
+- **`Floor1ClassSpread` as an M2 release gate** inside every split (5.6,
+  12.3);
+- **Mending Word may target the Herald itself** (8.6).
 
-Each comes back to the client only if a report or a later design
-triggers it:
+### 20.2 Future items
+
+These are not open items for this document. Stage 2 (section 14: the
+full class tables and all evidence) is the next stage of the classes
+design and stays future work. The rest come back to the client only if
+a report or a later design triggers them:
 
 - a reliance report the lead proposes to turn into a gate;
 - a failed 10-point healer gate whose levers run out;

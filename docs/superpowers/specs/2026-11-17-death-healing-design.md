@@ -1375,6 +1375,12 @@ Treat and Recovery, plus the supply left and the patrol warning
 - **Levers if it fails,** in order: heal-spell targets or pool sizes in
   class and companion data; then random potion weight for everyone. Never
   the guarantee, and never by class (5.6).
+- **Reports beside the gate (classes design 12.3):** three Herald arms
+  (no Herald / Herald without heal cards / Herald with heal cards), a
+  healer-count breakdown (0 / 1 / 2+) and a heal-source breakdown (Herald
+  hero card, Herald recruit, heal-kit recruit). They are reports only:
+  the gate stays exactly as defined above, and 18.2's "at least a
+  quarter" reads the gate's no-healer arm. **(change CL-9)**
 
 ### 18.2 Target death rate
 
@@ -1762,7 +1768,9 @@ is not a guard.
   saved per 100.
 - **Win rate with and without a healer** (gate 10 points, 18.1) and with
   and without a Medicine member; floor-1 hero deaths Medicine-trained
-  against untrained.
+  against untrained. Beside the gate, as reports: the three Herald arms,
+  the healer count (0 / 1 / 2+) and the heal-source breakdown (18.1;
+  classes design 12.3) **(change CL-9)**.
 - Coin at camp 1 against 2 potions + 1 supply (≥ 32 coin).
 - Hero level minus room level at fight start (under-levelled stealth
   heroes void the guards).
@@ -2023,7 +2031,12 @@ values; the phial's rarity, floor, channels, `offerChancePermille` and
   `rest` defensive tool, tagged `restDefensiveTool`
   (`MissingRestDefensiveTool`); heal spells at Recovery per target; the
   tier-3 Death-Ward-shaped spell (Later); which class may lean on healing;
-  any `liftsDowned` proposal (client approval).
+  any `liftsDowned` proposal (client approval). Answered by the classes
+  design (`2026-11-17-classes-concepts-design.md`, 8, 11.E): tiers
+  8 / 7 / 6 / 7 (Vanguard / Shade / Arcanist / Herald); four half- or
+  full-Recovery heal tools, one per class; the Herald the one healing
+  lean, on its heal cards only; no `liftsDowned` proposal. **(change
+  CL-13g)**
 - **Companions:** kits with protector tools (guard, intercept,
   body-block); Medicine training spread; recruit kits with 1 potion.
 - **Dungeon generation:** HE-7's constructive container reservation and

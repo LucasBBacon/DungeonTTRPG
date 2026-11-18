@@ -1774,9 +1774,14 @@ mundane bases are not loot, and family caps all stand.
 | A stairs transition that runs the left-behind warning and Scrap | Stairs | M1 |
 | An off-path side room per floor that can host the trader, and its presence and stock-count draws at the floor plan | Wandering trader | Later |
 
-- **Classes and offers:** the belt +1 feature or offer (hard maximum 3);
-  capacity offers; `classTags` for scrolls and wands; Arcana mastery's
-  signature use (it could interact with identification).
+- **Classes and offers:** see the classes design
+  (`2026-11-17-classes-concepts-design.md`). The belt +1 is the Shade's
+  *Deep Pockets* talent (hard maximum 3; classes design 8.4); capacity
+  offers are unchanged; `classTags` for scrolls and wands resolve to the
+  launch class ids (consumables design 13.1, change CL-12a); Arcana
+  mastery's signature use (it could interact with identification) goes to
+  the classes design's stage 2 (classes design 8.5, 14). **(change
+  CL-13h)**
 - **Companions:** companion kits; the companion scorer's "drink it"
   suggestion and its placement preferences.
 - **Camp and hub screens:** the camp layout that hosts the vendor, the

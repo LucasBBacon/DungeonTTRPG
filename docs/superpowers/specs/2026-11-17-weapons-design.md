@@ -531,7 +531,12 @@ target), such as once-per-turn extra dice. Each such class design shows,
 with simulator numbers, that its best Dexterity melee build meets the
 target above from M2, and reports its best launcher build against the 75%
 target, stating whether its precision feature applies to launcher attacks
-and, if not, why. **(lead's call on the evidence asked for)**
+and, if not, why. **(lead's call on the evidence asked for)** The
+parity runs model reaction attacks, Opening's Answer trigger and both
+contexts (solo floor 1, reference party); precision dice scale by class
+level; the evidence is single-class, and multiclass Dexterity builds get a
+separate M4 report against ≤ 110% (classes design 7.7, 8.4) **(change
+CL-8)**.
 
 ### 6.5 Precision for launchers (pre-approved, off by default)
 
@@ -873,6 +878,11 @@ attack of the same Attack action, a Nick attack included.
     the only self-step on another unit's turn is the Kiter's Step reaction,
     which does not provoke. Reactions do not nest (ability model 7.3), so
     a reaction's push or step cannot itself trigger a reaction.
+  - A class reaction may set the mover's remaining movement for this
+    turn to 0; its speed is unchanged and it keeps its action and bonus
+    action. Movement granted afterwards by Dash (whatever its action cost)
+    or by Spurred is added as normal; forced movement is unaffected
+    (classes design 8.3, Hold the Line) **(change CL-6)**.
 - **Prone and reach:** a reach attack at distance 2 or more against a
   Prone target has disadvantage (conditions 18.4). Reach weapons therefore
   carry no Topple.
@@ -2015,11 +2025,13 @@ left as they are (7.2 rule 9).
 
 ## 26. Depends on systems not yet designed
 
-- **Classes and offers:** the binding precision feature of each
-  Dexterity-main class with its simulator evidence, melee and launcher
-  (6.4); each class's training lists; the Technique option and the "verb
-  training (family)" offer (7.3); subclasses keyed to verbs or groups; disarm Techniques
-  (Later); the M1 slice class, which decides whether the staff ships in M1.
+- **Classes and offers:** concepts settled in
+  `2026-11-17-classes-concepts-design.md`; its stage 2 owes the binding
+  precision feature of each Dexterity-main class with its simulator
+  evidence, melee and launcher (6.4); each class's training lists; the
+  Technique option and the "verb training (family)" offer (7.3);
+  subclasses keyed to verbs or groups; disarm Techniques (Later). The M1
+  slice class is the Vanguard, so no staff ships in M1 **(change CL-13d)**.
 - **Armour and shields:** designed in
   `2026-11-17-armour-design.md`: the bash sub-record, buckler, Reliquary
   Shield and tower shield (17.9, W-13; armour design 10) and Pitted

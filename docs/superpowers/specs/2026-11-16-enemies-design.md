@@ -879,7 +879,9 @@ Floor guarantees (the generator content test asserts each one):
 - an awareness mix: at least one patrolling, one stationary and one dormant
   group;
 - **M2:** at least one cowable group, and at least one leader group from
-  floor 2 (morale ships in M2, so this is unconditional);
+  floor 2 (morale ships in M2, so this is unconditional); floor 1's
+  guaranteed cowable group lies on the main path before the boss room
+  (classes design 8.6) **(change CL-10)**;
 - **M2:** at least one steal target.
 
 **Cluster budget** (M1): the groups within hearing of any room sum to at
@@ -1491,7 +1493,7 @@ because a count sits at a threshold.
 | T3 | **The group's first non-minion loss** | Demoralises its `skittish` members that are not Emboldened | M2 |
 | T4 | **Last survivor:** a loss leaves one non-lost member, in a group that had ≥2 members at fight start | That member is Demoralised if it is non-fearless. A lone unit is never Demoralised at fight start. | M2 |
 | T5 | **A Frighten would land on a Demoralised enemy** | **Routed** instead of Frightened, by morale-engine substitution (below). Demoralised is not consumed. The roll already has advantage **(settled)**. | M2 |
-| T6 | **A limited fear effect would land on a Demoralised enemy** | Routed, by the same substitution | M2 (scrolls), Later (spells) |
+| T6 | **A limited fear effect would land on a Demoralised enemy** | Routed, by the same substitution | M2 (scrolls and class fear spells) **(change CL-1; classes design)** |
 | T7 | **The boss falls** | Every non-fearless escort member (the boss's group, its reserve groups included; not ordinary joiners) is Routed. Mindless servants go **inert** and are removed as resolved. | M2 |
 | T8 | An ally within 3 squares is downed or killed | Shaken **(settled)**. **Minion deaths do not trigger it.** | Later |
 | T9 | A party Frighten misses by 4 or less | Shaken **(settled)**. On a leader, Shaken blocks Rally. | Later |
@@ -1700,7 +1702,8 @@ exploit.
 target number. The preview gives the chance.
 
 **Guarantee:** at least one cowable group per floor in M2. The Scavengers
-template is built for it.
+template is built for it. Floor 1's guaranteed cowable group lies on the
+main path before the boss room (classes design 8.6) **(change CL-10)**.
 
 ### 14.9 How morale states sit in the existing rules
 
@@ -2642,7 +2645,7 @@ The build fails when:
     and the morale scorer term.
   - **Loot:** carried consumables, stealing, smart loot, duplicate
     rerolls, family caps, salvage, comparisons and swap.
-- **Later:** Shaken with T8 and T9; fear spells (T6); support, summoner and
+- **Later:** Shaken with T8 and T9; support, summoner and
   thief roles; Later affixes; the Feud template; Disarm seizure; oils;
   cursed carried items; multi-square bosses; committed boss signature moves
   (a scripted area marked at the end of the boss's turn, resolving at its
@@ -2853,6 +2856,8 @@ committed wind-ups (13.2).
   dependence on companion kits (18.1).
 - **Classes and offers:** Perception mastery offered through the
   pick-one-of-three pool, so Tactician is reachable in a run (13.4).
+  Settled in the classes design (2026-11-17): Perception mastery sits in
+  the Shade and Herald offer lanes and the universal draw. **(change CL-13c)**
 
 ## 26. Open items for the client
 

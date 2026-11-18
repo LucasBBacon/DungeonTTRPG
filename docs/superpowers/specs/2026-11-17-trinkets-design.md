@@ -745,7 +745,9 @@ About one action's worth each. **(lead's call)**
    whichever was authored first, and the lead resolves it by changing one
    or by an entry in the lead-owned `copyRegistryAllowlist` (17.2) that
    records the accepted pair and the reason (rule 18). The registry is
-   empty until the class records land (23).
+   empty until the class records land (23). It also covers species traits
+   and armour and shield signature properties (for example Bulwark
+   Stance) in every direction **(change CL-11; classes design 3.3)**.
 2. **Weapon, armour, shield and focus properties keep weapons 18.1:**
    charged echoes are legal (Ember Ring echoes Ember Edge; Longreach
    echoes Long Haft); always-on copies are not.
@@ -1499,9 +1501,12 @@ grants.
 
 - **Classes and offers:** every class, subclass and companion feature
   declares `effectKinds[]`, subject and trigger for the copy registry
-  (11); the four launch classes for the two-class rule (rule 26); whether
-  at least 2 launch classes concentrate (Stillmind, Later); the ceiling
-  report's reference builds.
+  (11); the ceiling report's reference builds. Answered by the classes
+  design (`2026-11-17-classes-concepts-design.md`) **(change CL-13f)**:
+  the four launch classes for the two-class rule (rule 26) are the
+  Vanguard, Shade, Arcanist and Herald; at least 2 launch classes
+  concentrate (Arcanist and Herald), so Stillmind's condition is met
+  (Later) (classes design 8.7, 11.G).
 - **Companions:** kits and choices at 3, 6 and 9; Medicine and Lore
   training spread (Lifeline steering).
 - **Death and healing:** answered by the death and healing design

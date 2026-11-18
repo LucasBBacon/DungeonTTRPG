@@ -420,7 +420,12 @@ healing guarantee and drop prevention are settled in
 `2026-11-17-death-healing-design.md`; they are no longer pending (death
 and healing design 26, 27).
 
-- Which four classes ship first, and their feature lists.
+The four launch classes (Vanguard, Shade, Arcanist, Herald), class
+structure and concepts are settled in
+`2026-11-17-classes-concepts-design.md`; the feature lists are its
+stage 2 (classes design 14, 19; change CL-13a).
+
+- The four launch classes' feature lists (classes design, stage 2).
 - All numbers: hit points (shape settled there), damage, experience curve, loot rates.
 - The dungeon generation algorithm.
 - The JSON schema details.
