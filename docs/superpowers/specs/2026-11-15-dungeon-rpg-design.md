@@ -10,7 +10,7 @@ calls and have not been confirmed.
 ## 1. Intent
 
 A turn-based RPG played in runs through a randomly generated dungeon. The
-appeal is building a character with tabletop-style depth (race, class,
+appeal is building a character with tabletop-style depth (species, class,
 multiclassing, a meaningful choice at almost every level) and seeing a
 different build and a different dungeon every run.
 
@@ -28,7 +28,7 @@ simulate and change.
 - Some progress carries between runs. **(decided)**
 - Every run plays differently: different dungeon, loot, enemies and build.
   **(decided)**
-- Progression in the style of 5E: race and class at creation, class
+- Progression in the style of 5E: species and class at creation, class
   progression, multiclassing, a choice at almost every level. **(decided)**
 - Dungeon has floors, bosses, and difficulty and rewards that scale with
   depth. **(decided)**
@@ -42,6 +42,9 @@ simulate and change.
 - Full fidelity to the 5E rules. We borrow its shape, not its text.
 - A story campaign.
 - Official mod support. Data-driven content leaves the door open.
+- Spreading, evolving or player-placed ground surfaces. Fixed condition
+  squares placed by floor generation are allowed; see the conditions
+  design, section 11.
 
 ### Anti-goals
 
@@ -55,6 +58,13 @@ These would make the game a failure even if everything works.
   script defeats the architecture.
 - **Protected content.** No D&D name, and nothing outside the 5E SRD
   (CC-BY-4.0). Anything taken from the SRD carries the required attribution.
+  The credits carry the verbatim SRD 5.2 (weapon masteries) and SRD 5.1
+  (rarity names) CC-BY-4.0 attributions, and confirm they cover the armour
+  table, the adapted magic-item mechanisms, the adapted trinket
+  mechanisms and the adapted consumable, scroll and wand mechanisms;
+  adapted SRD records, armour and trinkets included, carry an `adapted`
+  flag (weapons design 19, armour design 15, trinkets design 16,
+  consumables design 17).
 
 ## 3. Constraints
 
@@ -78,7 +88,11 @@ These would make the game a failure even if everything works.
 - The hero reaches about level 10 by the end of a run, so a level-up arrives
   about every 8–10 minutes. **(decided)**
 - Between floors the party reaches a camp: full rest, a shop or reward, and
-  a chance to recruit. **(decided)**
+  a chance to recruit. **(decided)** Every camp also has a basic vendor
+  (supply, potions in limited pre-rolled stock, tonics, Remedy, mundane
+  bases). "A shop or reward" is a choice between a notables shop (1–2
+  notables) and a camp reward card, separate from the boss reward card
+  (enemies design 17.5). **(decided)** (items design 10.3, 10.4)
 - A run can be saved and resumed, but there is one save slot per run and it
   is deleted on death. **(decided)**
 
@@ -91,7 +105,16 @@ These would make the game a failure even if everything works.
 - The player controls every party member in combat. **(decided)**
 - The run ends when the hero dies. A companion reduced to zero hit points is
   downed, and gets back up on 1 hit point if the party wins the fight.
-  **(decided, expected to be tuned in playtests)**
+  **(decided, expected to be tuned in playtests)** A fight ended by the
+  morale rule counts as a win for getting up (enemies design 14.6).
+  A companion that gets up
+  from its first downing on a floor gains Scarred: maximum hit points −10%
+  until camp, removed by Medicine Treat at a short rest. See the conditions
+  design, section 14. Items that prevent a drop to 0 (consumables design
+  14) do not change this rule. A downed companion also gets up on 1 hit
+  point when the party completes a short rest, and at camp; Medicine gets
+  the same companion up at most once per fight; companions are never
+  killed (death and healing design 11).
 
 ### 4.3 Grid, exploration and combat
 
@@ -104,15 +127,31 @@ These would make the game a failure even if everything works.
   all units act in initiative order. **(decided)**
 - Exploration is turn-stepped: the world advances one tick for each hero
   step or action. Effect durations and short rests are counted in ticks.
-  **(decided)**
-- Enemies outside combat are asleep, stationary or patrolling, set per
-  monster in data. **(decided)**
-- An enemy notices the party when it has line of sight and wins a
-  perception check against the party's stealth. A side that is noticed
+  **(decided)** In combat, conditions on units count down on the wearer's
+  turns; windows, auras and concentration effects count on the source's.
+  Out of combat, one round is one tick. See the ability and resource
+  model, section 9.6, and the conditions design, sections 5.1–5.2.
+- Enemies outside combat are dormant, stationary or patrolling, set per
+  monster in data. **(decided)** "Dormant" is a behaviour, not the Asleep
+  condition (conditions design 5.5).
+- Each unaware enemy group makes one perception check per trigger, using
+  its best member in line of sight, against the party's passive stealth,
+  never an opposed roll; see the character stat model. Triggers: first
+  line of sight, the party coming within 6 and then 3 squares, noise, and
+  an attack. The party notices non-hiding enemies automatically on line of
+  sight; hiding enemies roll Stealth against the party's passive
+  perception (enemies design 12.2). A side that is noticed
   without noticing back is surprised and loses its first turn. **(decided)**
-- Enemies within hearing range of a fight join it. Combat ends when no
-  hostile unit is aware of the party, so fleeing by breaking line of sight
-  is possible. **(decided)**
+  Exception: the solo hero is never surprised in floor 1's first two
+  main-path rooms (death and healing design 17.1).
+- Enemies within hearing range of a fight join it. Joiners move at their
+  speed, are announced at least 1 round before they arrive (arrival is
+  delayed if needed to keep the warning), and enter at the next round
+  start. Joining groups are capped per fight: 1 on floors 1–2, 2 deeper;
+  groups beyond the cap do not change state. Combat ends when no hostile
+  unit is aware of the party, so fleeing by breaking line of sight is
+  possible. Combat also ends as a win when every hostile still in the
+  fight is Routed (enemies design 12.4, 14.6). **(decided)**
 - Reactions resolve automatically by default, following a per-reaction
   setting the player can change to "ask me". **(decided)**
 - Units can gain a jumping or flying state. These exist only to cross
@@ -138,7 +177,7 @@ real decision, which 5E relies on a DM to enforce.
 
 ### 4.5 Progression
 
-- At creation the player picks a race and a class. **(decided)**
+- At creation the player picks a species and a class. **(decided)**
 - The first release of the full run has four classes. More arrive through
   unlocks. **(decided)**
 - Every level offers a choice. Where the class table has nothing to offer,
@@ -152,8 +191,12 @@ real decision, which 5E relies on a DM to enforce.
 - Each floor is generated from the run seed as rooms and corridors, with a
   guaranteed path from entrance to boss.
 - Each floor has a theme that selects its tiles, enemies and hazards.
-- Enemies are placed using a difficulty budget that grows with depth.
-- Loot comes from tables weighted by depth and rarity.
+  Hazards include fixed condition terrain (conditions design 11).
+- Enemies are placed using a difficulty budget that grows with depth:
+  party weight × band% × depth% × ladder% (enemies design 10.1).
+- Notable loot is a fixed per-floor budget, split by channel and pre-rolled
+  on the loot stream. Enemies carry part of it and never add to it
+  (enemies design 15.3).
 - Bosses are hand-designed. Which boss appears on a floor is drawn from a
   pool.
 
@@ -163,7 +206,7 @@ All decided.
 
 **(decided)**
 
-- **Content unlocks lead.** Milestones add races, classes, subclasses,
+- **Content unlocks lead.** Milestones add species, classes, subclasses,
   companions and loot to the pool. Examples: beat the floor 2 boss; win as a
   multiclass character.
 - **One starting boon.** Before a run the player picks a single earned boon,
@@ -219,7 +262,7 @@ editor tool or C's adapter can be added later without touching the core.
 | `src/Sim` | C# console app | Runs headless fights and runs for balance |
 | `tests/Core.Tests` | C# test project | Unit, property and replay tests |
 | `game/` | Godot project | Rendering, input, audio, UI |
-| `content/` | JSON data files | Classes, races, feats, items, monsters, tables |
+| `content/` | JSON data files | Classes, species, feats, items, monsters, tables |
 
 `Core` targets the .NET version required by the Godot 4 release the team
 picks. `game/` references `Core` as a project reference.
@@ -347,15 +390,43 @@ monster in data.
 | M1 Vertical slice | One class, levels 1–3, one generated floor, three enemy types, one boss, basic loot, permadeath | Is the loop fun? Does the effects system hold? |
 | M2 Full run | Four classes, companions, 4–5 floors, level 10, pick-one-of-three offers, save and resume | Does a 1–2 hour run hold together? |
 | M3 Between runs | Profile, unlocks, starting boons, difficulty ladder | Do players come back? |
-| M4 Breadth | Races, multiclassing, more content, balance passes with the simulator | Is every run different? |
+| M4 Breadth | Species, multiclassing, more content, balance passes with the simulator | Is every run different? |
 
-M1 covers race selection only if it is trivial to include; otherwise races
-arrive in M4.
+M1 covers species selection only if it is trivial to include; otherwise
+species arrive in M4.
 
 ## 10. Left to the builders
 
-- Which four classes ship first, and their feature lists.
-- All numbers: hit points, damage, experience curve, loot rates.
+Abilities, derived numbers, skills, damage types and resistances are settled
+in `2026-11-16-character-stat-model-design.md`. What that document leaves
+open is listed in its own section 12.
+
+Weapons and foci are settled in `2026-11-17-weapons-design.md`; they are no
+longer pending. Disarmed and Coated stay Later; starting kits remain
+open in their category designs (weapons design 25, 26).
+
+Armour and shields are settled in `2026-11-17-armour-design.md`; they are
+no longer pending (armour design 21, 22).
+
+Trinkets are settled in `2026-11-17-trinkets-design.md`; they are no
+longer pending (trinkets design 22).
+
+Consumables, scrolls and wands are settled in
+`2026-11-17-consumables-design.md`; they are no longer pending. Coatings
+and Coated stay Later (consumables design 23, 24).
+
+Hit points, Recovery, crits, the hero's death, Downed companions, the
+healing guarantee and drop prevention are settled in
+`2026-11-17-death-healing-design.md`; they are no longer pending (death
+and healing design 26, 27).
+
+The four launch classes (Vanguard, Shade, Arcanist, Herald), class
+structure and concepts are settled in
+`2026-11-17-classes-concepts-design.md`; the feature lists are its
+stage 2 (classes design 14, 19; change CL-13a).
+
+- The four launch classes' feature lists (classes design, stage 2).
+- All numbers: hit points (shape settled there), damage, experience curve, loot rates.
 - The dungeon generation algorithm.
 - The JSON schema details.
 - The random number algorithm.
