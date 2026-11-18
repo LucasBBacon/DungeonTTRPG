@@ -1632,8 +1632,9 @@ for tick batches, whose chain already ran where the damage landed.
 6. **Floor-1 boss sustain check (`Floor1BossSustain`; new lead's call).**
    It reads party consumables, so it is **not** a 6.4 guard: it is a
    content-validation code (21.2) and leaves consumables 14.9 untouched.
-   For every launch class, at the floor-1 boss room's level, at the
-   reference and the lowest legal Con:
+   For every launch class, at hero level 3, the floor-1 boss-door level
+   (lead's call; Vanguard design 10.3, VG-24), at the reference and the
+   lowest legal Con:
 
    `bossExpectedPerRound × guard.floor1BossRounds ≤
    FloorDiv(maxHp × guard.floor1BossDoorHpPermille, 1000) +

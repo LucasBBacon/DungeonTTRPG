@@ -204,7 +204,15 @@ Gaps found while designing; each is fixed by a change in section 18.
   and a slot tier's pool counts as one. An offer or talent that adds an
   ability to an existing pool adds an option, not a limited ability. The
   per-rest sub-limit of a `restDefensiveTool` (8.2) is not a named pool
-  and is not counted.
+  and is not counted. **(change VG-10)** Nor is a per-rest sub-limit on
+  one option of a named pool (the Vanguard's Hew-use cap).
+- **Turn allowance and per-target round count (change VG-10):** a turn
+  allowance (a `turn` pool of 1 on its owner that only limits an option,
+  passive or reaction to once per round) and a per-target round count
+  (Topple's) are frequency limits, not named pools. They are outside the
+  cap of eight and the three-named-pool limit, count 0 to read when
+  shown as a glint, stay outside the camp-share ratio and sit inside the
+  60% formula (Vanguard design 3.4, 7.9).
 - **A signature fires** in a round when any event in the class's
   `signatureEvents[]` (12.1) occurs in that round.
 
@@ -475,7 +483,10 @@ grant any of the following:
 - teleport; and, for a class, subclass or companion kit, +speed or a
   change to speed (stat model 6; a reaction that sets a mover's remaining
   movement to 0 is allowed: CL-6). Species traits stay one of stat model
-  6's approved speed sources and are bound by that row as written;
+  6's approved speed sources and are bound by that row as written.
+  **Reading (change VG-22; ruling pending):** an ally swap is 1 square
+  of forced movement on the ally, not a teleport or a speed change
+  (Vanguard design 8.2, Step In);
 - free or guaranteed-safe rests, supply generation, or `rest` refills
   outside rests;
 - more loot or gold;
@@ -502,13 +513,13 @@ lens, **C** companion kits. Caps are **(settled)** unless marked.
 
 | Utility | Universal baseline (every party) | How a class leans | The cap (no class goes past it) | Launch lean |
 |---|---|---|---|---|
-| Single-target damage | 2 at-wills, one damaging (ability 6.1); weapon verbs; crits; Exploit on Dexterity-rolled hits with advantage or Aim; Extra Attack at 5 for martials | Precision dice; Techniques +1d6; Surge; ignore-resistance offers | Every build ≤ 110% of the greatsword reference; Dexterity-main melee ≥ 90%; launchers reported against 75%; all with empty trinket slots; every launcher family ≥ 60% (M2 parity set); trinkets +10% at most (weapons 6.4, trinkets 11 rule 6); one camp spend per turn; capstone turn damage ≤ 2× the 95th-percentile non-capstone turn of the same unit (12.3) *(illustr.; lead's call)* | S s, V s |
+| Single-target damage | 2 at-wills, one damaging (ability 6.1); weapon verbs; crits; Exploit on Dexterity-rolled hits with advantage or Aim; Extra Attack at 5 for martials | Precision dice; Techniques +1d6; Surge; ignore-resistance offers | Every build ≤ 110% of the greatsword reference (as measured by weapons 6.4, VG-12: rest-pool damage floor-averaged at the worst legal build; camp-pool damage bounded by the nova bound and `SurgeOptionBound`, Vanguard design 10.1); Dexterity-main melee ≥ 90%; launchers reported against 75%; all with empty trinket slots; every launcher family ≥ 60% (M2 parity set); trinkets +10% at most (weapons 6.4, trinkets 11 rule 6); one camp spend per turn; capstone turn damage ≤ 2× the 95th-percentile non-capstone turn of the same unit (12.3) *(illustr.; lead's call)* | S s, V s |
 | Area damage | Flasks (one offensive per turn; none on floor 1), scrolls, sweeping verbs | Slot areas; shape (+1 radius, `selective`) | ≤ 25 squares at levels 1–6; allies hit unless `selective`; at-wills never hit allies; no ground zones (ability 8) | A P |
 | Damage types and riders | Weapon types; weak targets take riders; crits attempt riders; terrain combos | Riders on demand (Techniques); an element pair; ignore-resistance offers | One rider per target per use; at-will riders rare and once per turn (ability 9.3–9.4); **no single-type kit, no switching types per enemy** (lead's call; stat model 2) | A s, V s |
 | Conditions and control | Shove, grapple, Frighten, Topple and Push verbs, scrolls, wands | Limited major or hard control; repeat-save pressure; priming | Hard control only from limited abilities; agency conditions enemy-only (cond 7.1, 7.3); Steeled, Unyielding, boss pips and the shed action; the 32-condition budget full (cond 16); a controller ranks up through duration and reliability, never chained lockouts (lead's call) | A P, H s |
 | Forced movement and terrain | Shove, Push, Hook, Topple, shield bash, fixed hazards | Technique pushes (not verb-sourced, so collisions apply); hazard edges | ≤ 3 squares per hit; a verb moves a target once per round; fixed terrain only; M1 pushes stop before hazards (weapons 7.2) | V sub (Wrecker) |
 | Reach, zones, opportunity attacks | Everyone threatens; Set; reach weapons; Disengage | A movement-ending opportunity attack; Challenged | One reaction per round; Disengage stops both triggers | V s |
-| Protection (guard, intercept, body-block) | Positioning; Dodge; Guarding shields; Parry and Set | A pool-free class Interpose; Challenge; heavy armour and shield | One reaction AC bonus per attack (armour 10.4); Pry; Staggered; Challenged's own end rules; never "untargetable"; the AI never reads class (enemies 11.3) | V P, C (required, DH 27) |
+| Protection (guard, intercept, body-block) | Positioning; Dodge; Guarding shields; Parry and Set | A pool-free class Interpose; Square Up (Vanguard design 8.2); heavy armour and shield | One reaction AC bonus per attack (armour 10.4); Pry; Staggered; Challenged's own end rules; never "untargetable"; the AI never reads class (enemies 11.3) | V P, C (required, DH 27) |
 | Reactions | Opportunity attack, Parry, Set | Pool-backed reaction wards or strikes | No second reaction; no nesting; a policy on every reaction (ability 7.3) | V s; tools, not leans: S (Duck), A (Flare) |
 | Own tempo | Move, action, bonus action; the cost offer | Bonus-action Hide, Disengage, Dash (pooled); Surge | One camp spend per turn; Runner's Boots pre-cleared; bonus-action Dodge held (trinkets 11 rule 3) | S P, V (Surge) |
 | Ally tempo | Help; Rally (Rallied or Spurred, never both) | Spurred grants; Helped at range only if the registry clears it | Ally effects transfer an action or spend the ally's own reaction; never create an action; never fire the ally's limited ability (lead's call) | H s |
@@ -690,7 +701,11 @@ above the level's single choice (ability 10.3).
   options; an upcast is an option of the higher pool. An offer or talent
   that adds an ability to an existing pool adds an option, not a limited
   ability. A `restDefensiveTool`'s per-rest sub-limit (8.2) is not
-  counted.
+  counted. **(change VG-10)** Nor are a per-rest sub-limit on one option
+  of a named pool (the Hew-use cap), turn allowances or per-target round
+  counts: they are frequency limits, outside the cap and the
+  three-named-pool limit, count 0, stay outside the camp-share ratio and
+  sit inside the 60% formula (3.4; Vanguard design 7.9).
 
   | Class | Limited abilities by level 10 | Cap room | Reading room (7.6) |
   |---|---|---|---|
@@ -737,6 +752,9 @@ read")** The target is at most four per unit (ability 11.4, settled).
 - A passive counts as 0 if it marks the battlefield (a glint, a ring);
   otherwise 1. Opening and Exploit mark every qualifying target with a
   glint (shown on the target and in the attack preview), so both count 0.
+  **(change VG-11)** A row-modifier passive (one that only changes how an
+  existing row's options resolve, such as Momentum, Practised Hand or
+  Twin Verb) or a glint counts 0 (Vanguard design 10.5).
 - A pool-free reaction with an automatic policy (Hold the Line,
   Shieldwall) counts 0.
 - A capstone is shown on the row of the pool it extends, and adds no row:
@@ -877,7 +895,11 @@ Every class meets the fixed chassis rules **(settled)**:
 - HP tier 6 / 7 / 8; one trained save; 2–3 skills; one main ability;
 - at least 2 at-wills, one of them damaging;
 - a `rest` pool and a `camp` pool, with 40–60% of limited power from
-  camp;
+  camp. **(agreed 2026-11-18, Vanguard Q1; change VG-13)** The share
+  counts the `restDefensiveTool` at half value; all three measures (full,
+  half, excluded) are reported, Momentum included; the band holds at
+  levels 5 and 10; the level-1 martial miss is accepted (Vanguard design
+  10.4);
 - exactly one `restDefensiveTool`;
 - subclass at level 3 and capstone at level 9;
 - the cap of eight limited abilities;
@@ -933,22 +955,33 @@ saves.
   - **Second Wind:** `rest` 1, 2 from level 6. A bonus action that
     regains your Recovery. The tagged `restDefensiveTool` and **the one
     full-Recovery rest tool** (DH 12.1).
-  - **Techniques:** `rest` 2 / 3 / 4 *(illustr.)*: push 1, +1d6, empower
-    the weapon's verb, or (from M2) carry the weapon's rider.
-    **Timing (lead's call):** at most one Technique per hit; spent after
+  - **Techniques:** `rest` 2 / 3 / 3 *(illustr.)* (3 from level 5;
+    VG-6): **Press** (push 1), **Hew** (+1d4 at levels 1–4, +1d6 from
+    level 5; Hews per rest at most the class-table pool), **Empower**
+    (apply the weapon's canonical Empower line), or (from M2) **Bite
+    Deep** (the weapon's rider). For a Wrecker, Ram stands in for Press.
+    At most one free effect per hit, and it is that hit's Technique
+    (VG-2; Vanguard design 6.4–6.6).
+    **Timing (lead's call):** at most one Technique per hit, with one
+    carve-out, the Bastion's Square Up II pairing (VG-2; Vanguard design
+    6.4 rule 2, 8.2); spent after
     the hit and the crit are known, before damage is rolled (ability 6.6);
-    +1d6 is a separate damage part, doubled on a crit. Usable on reaction
+    Hew is a separate damage part, doubled on a crit. A Technique spent
+    on an event other than a hit (a Shove, a grapple, a Graze, turn
+    start) uses the `onEvent:<id>` cost timing (VG-7). Usable on reaction
     attacks. On another unit's turn a Technique follows a per-unit policy
     {never, ifKills, always, ask}, default `never`; companions and the
     automatic flows use the same policy.
-  - **Surge:** `camp` 1, 2 at level 9. One extra action, using the turn's
-    camp spend.
+  - **Surge:** `camp` 1, 2 from level 5 (VG-6). One extra action, using
+    the turn's camp spend.
   - These are 3 named pools, the martial maximum.
 - **At-wills:** a weapon attack with its verb, and a shield bash or a
   second weapon mode.
-- **Creation pick, a stance (lead's call):** a **permanent** creation
-  pick, not a toggle: it has no on/off state and is never in
-  `activeToggles`. Both stances are pool-free reactions with automatic
+- **Creation pick, a stance (lead's call):** a creation pick, not a
+  toggle: it has no on/off state and is never in `activeToggles`. **It
+  is no longer permanent: the stance may be re-picked once per camp**, on
+  the camp screen, never in combat (agreed 2026-11-18, Vanguard Q3;
+  VG-17; Vanguard design 7.5). Both stances are pool-free reactions with automatic
   policies, so they count 0 toward reading (7.6). At M1 the pick has one
   option, Hold the Line; the ladder's "2–3" applies from M2.
   - **Hold the Line** (M1): an opportunity attack that hits **sets the
@@ -957,57 +990,94 @@ saves.
     afterwards by Dash (whatever its action cost) or by Spurred is added
     as normal; forced movement is unaffected. So escaping costs the mover
     an action or a granted move, and the composite goad-plus-move-stop
-    lock stays out of reach.
+    lock stays out of reach. **Keyed to `{leaveZone, slipPast, setHit}`**
+    (VG-2): an opportunity attack on a hostile leaving your zone or
+    slipping past you (`slipPast` needs the Bastion clause or
+    `slipPastProvokes`), or your Set hit (`setHit` needs the Bastion
+    clause or `onSetHit`) (Vanguard design 7.4).
   - **Shieldwall** (M2): a pool-free Interpose reaction for an adjacent
     ally, **+2 AC (the settled Interpose value, armour 10.3; enemies
     17.1)** against one attack roll, policy `ifItChangesOutcome`. It is
     **learned** exactly when picked; for Guarding shields, legality reads
     "learned" (CL-7), so a Shieldwall Vanguard can never carry Guarding.
     A Vanguard who wants Guarding gear picks Hold the Line.
+    **Requires a shield** in the active set. **Solo clause:** while no
+    ally is within 2 squares of you, it may instead cover you against a
+    ranged weapon attack roll (VG-3; registry pending VG-18; Vanguard
+    design 7.5).
 - **Level-1 identity:** "I hit, *then* decide what the hit does." Four
   things to read.
 - **Growth:**
   - level 2: a talent. **The M1 menu uses M1 conditions only** *(names
-    and texts illustr.)*: *Drive Through* (after a Technique push, Shove
-    the same target; the Shove replaces nothing and costs no Technique,
-    once per round), *Pivot* (the push may instead pull 1 or shift the
+    and texts illustr.)*: *Drive Through* (once per round, when the hit's
+    combined move includes a Press, Ram or Empower push part, Shove the
+    target as part of that hit at step 10, before the movement; on a
+    success choose Prone, own turn only, or +1 square to the push, a
+    non-verb part; it costs no Technique and replaces no attack), *Pivot*
+    (the push may instead pull 1 or shift the
     target 1 square sideways) and *Grim Resolve* (Second Wind also ends
-    Frightened or Dazed on you). *Low Cut* (a Staggered option on a
-    Technique) enters the menu at M2;
+    one of Frightened, Dazed or Bleeding on you, and you stand from Prone
+    at no movement cost). **The M2 menu** is Drive Through, Pivot and
+    *Low Cut* (a Staggered option on a Technique); Grim Resolve moves to
+    level 7 (VG-2; Vanguard design 7.6);
   - level 3: subclass;
-  - level 5: Extra Attack, Techniques 3;
+  - level 5: Extra Attack, Techniques 3, Surge 2 (VG-6);
   - level 6: subclass feature;
   - level 7: talent;
-  - level 9: capstone, for example *Stand Fast* *(illustr.)*: until the
-    start of your next turn, the first attack roll against each ally
-    adjacent to you takes Interpose's +2 (settled), inside that attack's
-    one reaction-AC-bonus window, with no reaction spent. **(lead's
+  - level 9: capstone, for example *Stand Fast* *(illustr.)*: a bonus
+    action and the turn's camp spend, **shield required**; until the
+    start of your next turn, **every** attack roll against an ally
+    adjacent to you takes Interpose's +2 (settled) as a window fill
+    inside that attack's one reaction-AC-bonus window, with no reaction
+    spent. **Solo clause:** with no ally in range, it covers you against
+    ranged weapon attack rolls. An automatic **subclass rider** at level
+    9 (Bastion: allies within 2 squares; Wrecker: push a missing melee
+    attacker 1; Weaponmaster: a free payable Empower line on that
+    attacker) (VG-15; Vanguard design 7.7). **(lead's
     call: it is a capstone effect, not a reaction, so it is no second
     reaction; the stage-2 registry and envelope checks confirm it.)**
 - **Subclasses:**
-  - **Weaponmaster** (M1): keyed to weapon group tags; once per round,
-    empower the verb without spending a Technique.
-  - **Bastion** (M2): **Challenge** as a Technique option, applying
-    Challenged on a hit (M2; source "tank challenges", settled); at most
-    one Challenge per round. A feature for each stance: with Shieldwall,
+  - **Weaponmaster** (M1): keyed to weapon verb ids, with group tags as
+    `requires` filters (VG-2); once per round (Practised Hand), apply the
+    hit's payable Empower line without spending a Technique, as that
+    hit's free effect. M2 signature: Borrowed Form (Vanguard design 8.1).
+  - **Bastion** (M2): **Square Up** (stage 1's Challenge, renamed) as a
+    Technique option, own turn only, applying Challenged on a hit (M2;
+    source "tank challenges", settled); at most one Square Up per round
+    across every source. Only Called Out and Step In may apply it without
+    a hit. A feature for each stance: with Shieldwall,
     its reach grows to allies within 2 squares; with Hold the Line, the
-    move-stop also applies when your Set hits.
-  - **Wrecker** (M2): Technique pushes deal collision damage; pushes onto
-    hazard edges cause Teetering.
+    move-stop also applies when your Set hits, and a hostile that slips
+    past you provokes you (VG-2; Vanguard design 8.2).
+  - **Wrecker** (M2): **card replaced (VG-2; Vanguard design 8.3).**
+    Battering Force (a verb-only move stopped early deals collision
+    damage, once per round), Brink (choose the forced-movement distance;
+    a hostile left beside a hazard edge becomes Teetering), Ram (replaces
+    Press: push 1; Prone on a failed Fortitude save if stopped early),
+    then Domino or Upend at level 6. Prone from Wrecker features is a
+    tool of the forced-movement lean, not a control lean (lead's ruling).
+    The stage-1 clauses (Technique pushes collide; Teetering on hazard
+    edges) are base rules for every unit.
 - **Weaknesses:** ranged enemies and fliers; slow to reach artillery;
   loud (Clatter); few skills.
 - **Cap respected:**
-  - Challenge is pooled, never applied at will on every hit.
+  - Square Up is pooled, never applied at will on every hit.
   - Challenged keeps its own end rules: 2 turns; it ends at more than 6
-    squares or when the challenger harms another unit; the boss shed
-    action removes it.
+    squares or when the challenger **targets** another unit with a
+    harmful effect (conditions 18.8; the paraphrase corrected, VG-2); the
+    boss shed action removes it.
   - One reaction AC bonus per attack.
   - Surge competes with scroll reads for the camp spend.
-- **Camp share:** the 6.6 template is rest-heavy (ability 6.3 flags
-  this). Stage 2 weights the capstone and the subclass features toward
-  camp, with simulator evidence at levels 1, 5 and 10.
-- **M1 content:** M1 conditions only; Hold the Line; push, +1d6 and
-  empower-verb Techniques only. M1 has no riders (conditions 18.1;
+- **Camp share (agreed 2026-11-18, Vanguard Q1; change VG-13):** the
+  6.6 template is rest-heavy (ability 6.3 flags this). Measured with
+  Second Wind at half value (all three measures reported, Momentum
+  included), the 40–60% band holds at levels 5 and 10 (41% and 40%
+  *(illustr.)*) through Surge 2 from level 5, the Arts and Stand Fast;
+  the level-1 martial miss is accepted. Simulator evidence at levels 1,
+  5 and 10 (Vanguard design 10.4).
+- **M1 content:** M1 conditions only; Hold the Line; Press, Hew (1d4)
+  and Empower (M1 lines) Techniques only; Momentum (agreed 2026-11-18,
+  Vanguard Q2; VG-6). M1 has no riders (conditions 18.1;
   ability 14.6), so the rider option and rider talents such as Low Cut
   arrive at M2. No staff, no Concentrating.
 - **Fallback type:** its weapon's physical type, with a second physical
@@ -1403,7 +1473,7 @@ tables; **Companions** = a requirement passed to the companions design.
 
 | Requirement | Source | How met | Status |
 |---|---|---|---|
-| A `rest` and a `camp` pool; 40–60% camp; caster rest features beyond Slot Recovery | Ability 6.3 (agreed) | Every class has both; Weft and Cadence; Shade Vanish at camp 2; Vanguard camp-weighted features | Stage 2 (simulator at levels 1, 5, 10) |
+| A `rest` and a `camp` pool; 40–60% camp; caster rest features beyond Slot Recovery | Ability 6.3 (agreed) | Every class has both; Weft and Cadence; Shade Vanish at camp 2; Vanguard camp-weighted features. Measured with the `restDefensiveTool` at half value; level-1 martial miss accepted (8.2; VG-13, agreed Vanguard Q1) | Stage 2 (simulator at levels 1, 5, 10) |
 | One camp spend per turn, scroll reads included | Ability 6.4; consumables 13.5 | No feature grants a second; capstones use the turn's spend | Met |
 | At least 2 at-wills, one damaging | Ability 6.1 | Listed per class | Met |
 | No cooldowns; no major power per fight | Ability 6.2 | `rest` and `camp` only | Met |
@@ -1426,7 +1496,7 @@ tables; **Companions** = a requirement passed to the companions design.
 | A precision feature for every Dexterity-main class; evidence: melee ≥ 90%, launchers reported against 75%, every launcher family ≥ 60% (M2 parity set), ≤ 110%, empty trinket slots, trinkets ≤ +10% | Weapons 6.4 (agreed); trinkets 11 rule 6 | Opening (four triggers, once per round); launcher applicability stated; solo and party contexts; reactions modelled | Stage 2 (CL-8) |
 | The launcher Precision gate waits on these features | Weapons 6.5 | The Shade's launcher statement; Tracker later | Stage 2 |
 | Exploit is core; do not duplicate it | Weapons 6.3 | Opening's triggers differ; parity proven with both; Exploit unchanged, granted attacks included | Met |
-| Classes own depth, never access | Weapons 3, 7.3 | Techniques empower verbs; Weaponmaster keyed to groups | Met |
+| Classes own depth, never access | Weapons 3, 7.3 | Techniques empower verbs; Weaponmaster keyed to weapon verb ids, group tags as `requires` filters (VG-2) | Met |
 | Training lists; exotic only from a feature or offer; `weaponAttack: true` | Weapons 10.2; 7.2 rule 8 | Chassis; training filters resolved to family id lists at build time (12.1); stage 2 data | Stage 2 |
 | Grappling belongs to the class designs | Weapons 17.11 | Opening counts Grappled; grapple talents at stage 2 | Stage 2 |
 | The M1 slice class decides whether the staff ships in M1 | Weapons 26 | Vanguard: no staff in M1 | Met |
@@ -1460,7 +1530,7 @@ tables; **Companions** = a requirement passed to the companions design.
 | Requirement | Source | How met | Status |
 |---|---|---|---|
 | Fixed class; kit as its own data | Main 4.2; ability 11.1 | Class ids = launch ids; kit = signature slice | Met |
-| Protector tools on classes and companion kits; the AI never reads class | DH 5.8 item 8, 27; enemies 11.3 | Vanguard (Shieldwall, Bastion Challenge); a protector kit in every recruit pool, on at least two classes; taunt only via Challenged | Met |
+| Protector tools on classes and companion kits; the AI never reads class | DH 5.8 item 8, 27; enemies 11.3 | Vanguard (Shieldwall, Bastion Square Up); a protector kit in every recruit pool, on at least two classes; taunt only via Challenged | Met |
 | DEP-1 recruit with Arcana | Consumables 13.8 | Recruit-pool rule (7.8) | Companions |
 | Medicine spread across recruits | DH 27 | Recruit-pool rule, plus Mechanics | Companions |
 | Under 10 seconds per companion turn; at most 4 things to read | Ability 11.4 | Counting rule (7.6); M2 playtest gate | Stage 2 / playtest |
@@ -1515,14 +1585,19 @@ everything else (main 6.5). Its record names, at least:
 - `offerLanes: [{tag, weightPermille}]` (2–3 lanes) and `offerExcludes:
   [offerId or tag]` (7.5);
 - `triggerMenu: {abilityId: [triggerId…]}`, the named extra triggers a
-  trigger offer or option may grant (7.5);
+  trigger offer or option may grant (7.5); trigger ids are listed per
+  class in stage 2 (VG-11; Vanguard design 7.11);
+- `rankSchedule` on the class (a validator input, not read at runtime)
+  and `rankCategory` on option records (VG-11; Vanguard design 9.1);
 - `effectKinds[]`, subject and trigger on every feature (trinkets 11
   rule 1);
 - `leans[]`: records {`utilityId`, `weight` (primary, secondary or
   ribbon), `source` (class or subclass id)}, read by the reliance reports
   and the spread rule (6.2);
 - `level1MechanicIds[]` on the class and `mechanicIds[]` on each
-  subclass (7.3);
+  subclass (7.3); `offerLaneAdjust` on each subclass, a weight
+  multiplier on one of the class's `offerLanes` (VG-14; Vanguard design
+  7.11);
 - `fallbackDamageTypes[]` (6.5);
 - `signatureEvents[]`: the events that count as the signature firing
   (3.4; 5.6), and `seedTarget`, a predicate id for `SeedHasTarget` (for
@@ -1549,7 +1624,8 @@ companion-kit id, read by `LeanWithoutBaseline`.
   values, party stealth, AI targeting, extra units, a created ally
   action and `liftsDowned`; any condition id outside the M1/M2 budget;
   any pool or ability that raises Rally above once per ally per fight;
-  any refill-tag override (a `rest` refill outside a rest); and any
+  any refill-tag override (a `rest` refill outside a rest; a cost
+  waiver, such as a free effect, is not a refill, VG-11); and any
   camp-spend override;
 - `LeanWithoutBaseline`: a utility in a class's `leans[]` has an empty
   `baselineRoutes[]` in `utilities.json` (12.1);
@@ -1572,6 +1648,13 @@ companion-kit id, read by `LeanWithoutBaseline`.
   CL-2 as distinct pool ids reachable from the class table plus the
   offers that create pools (ability 14.5), the copy registry (trinkets
   11).
+- **(change VG-11)** Stage-2 validators are data predicates, added per
+  class: for the Vanguard `RankAddsNoDice`, `RankKeepsBounds`,
+  `HewCeiling` (a static formula), `TechniquePickerSize` (over every
+  reachable option set), `SurgeOptionBound` (with `actionsGranted` and
+  the reference encounter), `TurnAllowanceNoDamage` (with its
+  allow-list) and `FlagNotCondition` (with the condition equivalence
+  table) (Vanguard design 6.4 rule 8, 7.3, 7.9, 9.2).
 
 ### 12.3 Simulator reports
 
@@ -1594,7 +1677,10 @@ lead's call)**
   composition.
 - The capstone nova bound: capstone turn damage ≤ 2 × the 95th-percentile
   non-capstone turn damage of the same unit, over the same seed set, at
-  the same level, with one camp spend *(illustr.)*.
+  the same level, with one camp spend *(illustr.)*; reported with Surge
+  Arts included and without them (VG-11). Tuning inputs such as
+  `collisionRate` sit in the tuning file (VG-11; Vanguard design 6.4
+  rule 8).
 - Power after level 1 (about 60%; the formula in 5.6).
 - Offer-lane variety: over 100 simulated runs of each class × subclass,
   the median pairwise Jaccard distance of offer and talent picks is ≥ 0.5
@@ -1610,7 +1696,7 @@ lead's call)**
 
 | Wave | Content |
 |---|---|
-| **M1** | The Vanguard, levels 1–3: Second Wind, Techniques (push, +1d6, empower verb; no riders in M1), Surge, Hold the Line, the Weaponmaster; the M1 level-2 talent menu (8.3); M1 conditions only; the class record shape; `restDefensiveTool`; `ForbiddenClassGrant`, `NameCollision`, `ClassGatedContent`; `Floor1BossSustain` for the Vanguard |
+| **M1** | The Vanguard, levels 1–3: Second Wind, Techniques (Press, Hew 1d4, Empower with the M1 lines; no riders in M1), Surge, Momentum (agreed 2026-11-18, Vanguard Q2; VG-6), Hold the Line, the Weaponmaster; the M1 level-2 talent menu (8.3); M1 conditions only; the class record shape; `restDefensiveTool`; `ForbiddenClassGrant`, `NameCollision`, `ClassGatedContent`; `Floor1BossSustain` for the Vanguard |
 | **M2** | All four classes, levels 1–10, two subclasses each (the Vanguard three); spell lists and the `classTags` audit; Shieldwall; offers with lanes and the trigger kind (CL-3); companion kits as signature slices and the recruit-pool rules; T6 for fear spells (CL-1); the remaining checks and every report in 12.3 |
 | **M3** | The unlock mechanism with the first candidates in the order of 9.4 (Votary first); unlock aspects (Elementalist, Swordsworn, Loremaster, Warcaller, Pennant) as content allows |
 | **M4** | Multiclassing, model chosen then (7.7), with the separate multiclass precision report (CL-8); species on baseline axes (7.9; CL-11); more unlocks |
@@ -1644,11 +1730,18 @@ Also owed at stage 2:
   consumables 16 to the Arcanist or Herald list, or move it to Later
   (CL-12a).
 - **Registry pass:** against all trinkets, armour and shield signatures,
-  species (CL-11) and consumables (consumables 6.4). Named first: Vanish
+  weapon verb signatures (VG-18), species (CL-11) and consumables
+  (consumables 6.4). Class features never match armour or shield
+  signatures (trinkets 11 rule 1); payable lines prefer original
+  effects; echoes of verb signatures (Warding Staff) need a ruling
+  (VG-18). Named first: Vanish
   against Veiled (Smoke Cloak), Shadowed and Duskhem; Tricks' bonus-action
   Hide against Shadowed (a charged echo, weapons 18.1, trinkets 11 rule
   2); the Alembic's priming against the Water and Oil Flasks; Stand Fast
-  against the reaction-AC window and the armour 11 item 1 envelope.
+  against the reaction-AC window and the armour 11 item 1 envelope, and
+  against Raise, Guarding, Bulwark Stance and Warding Lining, with its
+  "every roll" fill, shield requirement, solo clause and subclass riders
+  (VG-15; Vanguard design 7.7, 7.13).
 - **Composite-lockout test:** Hold the Line (CL-6) with Challenged,
   covering every movement source after the stop: a Dash for an action, a
   bonus-action Dash (Tricks, monster kits, Surge-granted), the Spurred
@@ -1736,11 +1829,20 @@ changes):** the "lean, never require" rule; the forbidden grants;
 `NameCollision`, `LeanSpread`, `SeedHasTarget`; Opening once per round;
 granted attacks (`grantedBy`) fire no class riders, while Exploit stays
 as weapons 6.3 states; heals only on cards; each rest tool once per rest
-(twice from level 6); the stance a permanent creation pick; the element
+(twice from level 6); the stance a creation pick, re-pickable once per
+camp and never in combat (no longer permanent: agreed 2026-11-18,
+Vanguard Q3; VG-17); the element
 pair fixed for the run; the save principle; the dip guards; the
 recruit-pool rules and `companionMainAbility` (requirements on the
 companions design). Species speed is untouched: stat model 6's Speed row
 stands as written.
+
+**Narrowings recorded inside the Vanguard design (VG-1; no approved
+text changes):** condition options never fire on reaction attacks;
+Square Up own turn only; one free effect per hit; the Hew-use cap; Twin
+Verb's verb list; Brink's chosen distance is Wrecker-only; Earthshaker 3
+targets; Square Up without a hit only from Called Out and Step In
+(Vanguard design 17).
 
 **Main design (2026-11-15):**
 

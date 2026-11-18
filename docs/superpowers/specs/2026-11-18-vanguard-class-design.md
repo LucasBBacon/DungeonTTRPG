@@ -1,7 +1,7 @@
 # Classes, Stage 2: The Vanguard: Design
 
 Date: 2026-11-18
-Status: Draft, awaiting client approval, 2026-11-18
+Status: Approved, 2026-11-18
 Parents: `2026-11-17-classes-concepts-design.md` (classes stage 1,
 approved; the direct parent), and through it
 `2026-11-15-dungeon-rpg-design.md` (main design),
@@ -22,8 +22,8 @@ the three questions this design raised (Q1–Q3, section 4 and section
 said that everything else in the lead's proposal stands, and approved
 proceeding with change VG-12 after being told plainly what it changes
 (10.1). Items marked **(lead's call)** were filled in by the design lead;
-they stand unless the client objects, and are confirmed when this
-document is approved. Items marked **(settled)** restate a rule from an
+they were confirmed when the client approved this document on
+2026-11-18. Items marked **(settled)** restate a rule from an
 approved document; **(decided)** marks a main-design client decision.
 Items marked **(change VG-n)** amend an approved document and are listed,
 with an id and the exact section they touch, in section 17. Once
@@ -2210,8 +2210,8 @@ of eight, the copy registry).
 
 ## 17. Changes to approved documents
 
-Applied when the client approves this document. Each change names the
-exact section it touches. **Agreed and settled rows are flagged**; the
+Applied on 2026-11-18, when the client approved this document. Each
+change names the exact section it touches. **Agreed and settled rows are flagged**; the
 client's Q1–Q3 answers approve the rows that name a question, the client
 approved proceeding with VG-12 after being told what it changes, and the
 rest are confirmed with the document.
@@ -2299,17 +2299,21 @@ hit" in conditions 10.1 shows the VG-8 sum.
 
 ## 19. Open items for the client
 
+None. Approved by the client on 2026-11-18.
+
 ### 19.1 This document
 
-Approval of the document as a whole. The three questions it raised were
-answered on 2026-11-18 **(agreed)**, each with the recommended option:
+The client approved the document as a whole on 2026-11-18, including
+every lead's call in it. The three questions it raised were answered on
+2026-11-18 **(agreed)**, each with the recommended option:
 
 - **Q1, camp share at level 1:** accept the level-1 miss; measure with
   the `restDefensiveTool` (Second Wind) at half value and report all
   three measures; hold the 40–60% band at levels 5 and 10 (about 45%
   and 40%). Raising Surge to 2 from level 1 is rejected. With Momentum
   counted, as it ships, and the named lever applied, the figures are 41%
-  and 40% (10.4): the band holds, as agreed.
+  and 40% (10.4): the band holds, as agreed. The client confirmed these
+  figures on 2026-11-18.
 - **Q2, Momentum in M1:** Momentum ships in the M1 slice Vanguard.
 - **Q3, the stance re-pick:** once per camp, rest-gated, never in combat;
   Stance Drill at level 7 still makes both stances live.
@@ -2319,14 +2323,15 @@ measured floor-averaged at the worst legal build for rest pools;
 camp-pool damage bounded by the nova bound and `SurgeOptionBound`) and
 approved proceeding with it as the lead's call. Under it, the worst
 legal build now sits at 109.6–110.0% at level 10, because the revision
-excludes Technique capacity offers (10.1). Approval of this document
-confirms every lead's call in it.
+excludes Technique capacity offers (10.1). The approval of 2026-11-18
+confirmed every lead's call in it.
 
-**The revision of 2026-11-18 needs no new client decision.** It changes
-lead's calls only (appendix A, K-n). Two of them are worth noting
+**The revision of 2026-11-18 needed no new client decision.** It changed
+lead's calls only (appendix A, K-n). Two of them were worth noting
 because the client saw the earlier figures: the collision band is now
 2 / 3 / 3 (was 2 / 4 / 6), and the camp share, with Momentum counted,
-is 41% and 40% at levels 5 and 10 (was about 45% and 40%).
+is 41% and 40% at levels 5 and 10 (was about 45% and 40%). The client
+confirmed both revised figures with the approval on 2026-11-18.
 
 ### 19.2 Future items triggered by reports
 

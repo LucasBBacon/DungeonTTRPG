@@ -221,7 +221,11 @@ then moves every class, not half of them.
 
 - The share is measured in the offer value unit (10.2): each pool's uses
   per floor, at about two short rests per floor, times the value of what a
-  use buys.
+  use buys. The `restDefensiveTool` (6.6) counts at half value, and all
+  three measures (full, half, excluded) are reported, combo flags such as
+  Momentum included. The band holds at levels 5 and 10; a martial
+  class's level-1 miss is accepted. **(agreed; change VG-13, Vanguard
+  design 10.4)**
 - The examples in 6.5 and 6.6 show which pools exist, not the split. As
   written the fighter is mostly rest-powered and the caster mostly
   camp-powered; builders tune the counts into the band. Casters will need
@@ -283,16 +287,23 @@ A Strength fighter:
 - **Second Wind:** bonus action, regain your Recovery (the Medicine bonus
   excluded). `rest` pool of 1, 2 from level 6. **(change DH-10, death and
   healing design 8, 12.1)**
-- **Techniques:** `rest` pool of 2, 3 at level 5, 4 at level 9. One is spent
+- **Techniques:** `rest` pool of 2, 3 at level 5. One is spent
   after a hit is known and before damage is rolled, so it is never wasted on
   a miss. It makes that hit carry the weapon's rider, push the target 1
-  square, add 1d6 damage, or empower the weapon's verb (for example Push 2,
-  Topple with disadvantage on the save). **(change W-3, weapons design
-  7.3)**
-- **Surge:** `camp` pool of 1, 2 at level 9. One extra action this turn.
+  square, add 1d4 damage (1d6 from level 5), or empower the weapon's verb
+  (for example Push 2, Topple with disadvantage on the save). **(change
+  W-3, weapons design 7.3; change VG-6, Vanguard design 7.8)**
+- **Surge:** `camp` pool of 1, 2 at level 5. One extra action this turn.
+  **(change VG-6)**
 
 A martial class has at most three named pools, not counting its capstone
-(6.7). **(lead's call)**
+(6.7). **(lead's call)** Turn allowances and per-target round counts are
+frequency limits, not named pools: they are outside this limit and the
+cap of eight (10.2), count 0 to read, and stay outside the camp-share
+ratio (6.3) but inside the 60% formula. A per-rest sub-limit on one
+option of a named pool (the Hew-use cap) is not a named pool and is not
+counted, like the `restDefensiveTool` sub-limit. **(change VG-10,
+Vanguard design 3.4, 7.9)**
 
 Full Recovery as a self-heal is for the fighter-type Second Wind only.
 Every other class's `rest` defensive tool (at most half Recovery, or a
@@ -341,6 +352,7 @@ Every ability declares exactly one cost **(lead's call)**:
 | `move:N` | Spends N squares of movement; `move:0` happens during movement |
 | `free` | The turn's one free interaction |
 | `onHit` | Spent after a hit is known and before damage is rolled; no action |
+| `onEvent:<id>` | Spent when the named event occurs (a Shove or grapple succeeds, a Graze fires, turn start), and never before it; no action **(change VG-7, Vanguard design 7.11, 8.2)** |
 | `none` | A passive check or threshold; nothing is spent |
 
 - A pool spend is separate from the cost.
@@ -355,7 +367,7 @@ Every ability declares exactly one cost **(lead's call)**:
 |---|---|
 | Attack (Extra Attack at level 5 for martial classes) | Action |
 | Dash, Disengage, Dodge, Help | Action |
-| Shove or grapple: Athletics against 10 + Fortitude **(settled)**; cannot target a unit more than one size larger than the user **(change A-10, enemies design 5.1)** | Replaces one attack |
+| Shove or grapple: Athletics against 10 + Fortitude **(settled)**; cannot target a unit more than one size larger than the user **(change A-10, enemies design 5.1)**. A successful Shove: push 1 or Prone **(change VG-9, Vanguard design 7.1)** | Replaces one attack |
 | Slip past an enemy: Acrobatics against 10 + Reflex **(settled)** | Part of movement, once per turn |
 | Escape a grapple | Action |
 | Hide: Stealth | Action; a bonus action with a class feature |
@@ -384,7 +396,7 @@ Every ability declares exactly one cost **(lead's call)**:
 | Stiff: worn medium or heavy armour gives disadvantage on Acrobatics checks (slip past, escape a grapple by Acrobatics, narrow ground) **(change AR-7, armour design 7.3)** | None; a standing modifier |
 | Opportunity attack | Reaction |
 | Off-hand attack with a light weapon, after at least one Attack-action attack this turn; Nick moves it into the Attack action, once per turn **(change W-2, weapons design 11.3)** | Bonus action, once per turn |
-| Threatened zone: an opportunity attack when a hostile leaves it by its own movement, Set when a hostile enters it from outside; they share the round's one reaction, and Disengage stops both. Movement resolves square by square, with the trigger timing of weapons design 8 **(change W-2)** | Reaction |
+| Threatened zone: an opportunity attack when a hostile leaves it by its own movement, Set when a hostile enters it from outside; they share the round's one reaction, and Disengage stops both. Movement resolves square by square, with the trigger timing of weapons design 8 **(change W-2)**. A slip-past trigger (`slipPast`) resolves after a successful slip-past check and before the step that moves the hostile through or past the square, as an opportunity attack. A separate trigger kind, `attackAgainstOther`, is a **reaction attack**, not an opportunity attack: it hooks after weapons design 7.5 step 15 for a weapon attack, or after 14.3 step 6 for each attack roll of a non-weapon attack, and its legality is re-checked then **(change VG-20, Vanguard design 7.4, 8.2)** | Reaction |
 | Ranged or thrown **weapon** attack with a hostile adjacent: disadvantage (spell attacks unaffected) **(change W-2, weapons design 9.2)** | Replaces one attack |
 | Loading weapon: at most one attack with it per action, bonus action or reaction **(change W-2, weapons design 9.3)** | Replaces one attack |
 | Throw: an attack mode of a thrown-capable melee weapon; it stays with the thrower, no pickup **(change W-2, weapons design 9.3)** | Replaces one attack |
@@ -398,6 +410,12 @@ combat. **(change I-5, items design 7.1)**
 Switching weapons costs a bonus action so that a spare weapon is a fallback,
 not a key carried for each enemy. **(lead's call, from the stat model's
 anti-goal)**
+
+A subclass may apply the canonical verb of a trained, non-Strained weapon
+in the wielder's own spare set (weapons design 7.3). Signatures, dice,
+damage type, reach and properties never travel. This is not a key per
+enemy: only the verb travels, from the wielder's one spare set, and
+each use costs a Technique. **(change VG-19, Vanguard design 8.1)**
 
 ### 7.3 Reaction policies
 
@@ -417,7 +435,9 @@ anti-goal)**
   defaults come from data. **(lead's call)**
 - A policy may carry a target filter (`nonMinion`), set in data and
   changeable by the player like the policy. **(change W-4, weapons design
-  7.1)**
+  7.1)** A second filter, `notWhileSquaredUpElsewhere`: while the unit has
+  an active Square Up, the reaction is not taken against a unit other
+  than the Squared-Up one. **(change VG-11, Vanguard design 7.12)**
 - Monsters use their reactions' automatic policies; they have no "ask me".
   **(lead's call)**
 - Reactions do not nest. A reaction, a boss action or an opportunity attack
@@ -425,7 +445,12 @@ anti-goal)**
   happen only between turns. So a pending decision is at most one level
   deep inside an ability's resolution. **(lead's call)**
 - At most one reaction AC bonus applies to any attack roll, resolved by the
-  window algorithm in armour design 10.4: candidates in order, skipping any
+  window algorithm in armour design 10.4. Step 0: window fills (a reaction
+  AC bonus from a camp-pool ability, such as Stand Fast, that spends no
+  reaction), ordered by source unit order, then creation order; the first
+  applies, counts as the one reaction AC bonus and closes the window.
+  Fills inherit the other skip rules, but not "no reaction left". **(change
+  VG-4, Vanguard design 7.7)** Then candidates in order, skipping any
   the attack ignores or whose unit has no reaction left; each candidate's
   policy (or "ask me") is evaluated in turn, and the first that fires
   closes the window. The rest are not taken and not spent. **(change AR-8)**
@@ -654,7 +679,10 @@ that when setting numbers.
   known spells as options; an upcast is an option of the higher pool. An
   offer or talent that adds an ability to an existing pool adds an option,
   not a limited ability. A rest tool's per-rest sub-limit is not counted
-  (classes design 3.4, 7.5, 8.2). **(change CL-2)**
+  (classes design 3.4, 7.5, 8.2). **(change CL-2)** Nor is a per-rest
+  sub-limit on one option of a named pool (the Hew-use cap); turn
+  allowances and per-target round counts are frequency limits, not named
+  pools, and count 0 here. **(change VG-10, Vanguard design 3.4, 7.9)**
 - New spells are learnt through the same pick-one-of-three cards, drawn
   from the class's spell list. **(lead's call)**
 

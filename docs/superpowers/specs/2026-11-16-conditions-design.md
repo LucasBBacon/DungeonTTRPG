@@ -685,11 +685,23 @@ on an attack that already has disadvantage from another source.
   Anchored, never provokes, and in M1 stops before hazards (weapons design
   7.6).
 - **One move per hit (change W-8):** all forced movement one hit causes
-  sums to at most 3 squares and resolves once. Collision damage applies
-  only if a non-verb source contributed to the move; verb-sourced movement
+  sums to at most 3 squares actually moved, across all moved units, and
+  resolves once; the parts' order, the cut to 3 and which parts
+  contribute follow Vanguard design 6.4 rule 6, and "stopped early" is
+  defined in Vanguard design 3.4 **(change VG-8)**. Collision damage applies
+  only if a non-verb source contributed to the move (Battering Force is
+  the one verb-only exception, Vanguard design 8.3); verb-sourced movement
   moves a unit at most once per round (weapons design 7.2 rule 4). Armour
   verb signatures that move a target (Bull Rush) are verb-sourced
   **(change AR-52; armour design 14.4)**.
+- **Ally swap (change VG-22; M2 add-on, pending the lead's ruling):** a
+  unit may swap places with a willing, non-Downed adjacent ally; for the
+  ally this is 1 square of forced movement, not a teleport or a speed
+  change. It never provokes, never collides and never enters a hazard
+  square or a square adjacent to one; it is illegal while either unit is
+  Grappled, Grappling, Restrained, Rooted or Anchored, or if the size
+  does not fit. Not in force until the ruling (Vanguard design 8.2, Step
+  In).
 - **Drags:** a holder dragging a Grappled unit (18.4) is forced movement
   for opportunity attacks, the triggers in 9.4, hazard edges and terrain.
 - **M1:** pushes and drags stop before hazard squares, including terrain
@@ -1418,7 +1430,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Intensity: binary.
   - Duration: `turns:1`, combatOnly.
   - Sources: bludgeoning rider (Fortitude) **(change C9)**; automatic on
-    bludgeoning-weak, Brittle or shattered Frozen targets; shield bashes
+    bludgeoning-weak, Brittle or shattered Frozen targets (on a hit:
+    collision damage is not a hit, so it never fires this source; stat
+    model 8.2 unchanged) **(change VG-23; Vanguard design 8.3)**; shield bashes
     with the Bashing Rim property or a Technique, not the base bash
     **(change W-9; weapons design 17.9)**.
   - Interactions: does not release grapples.
@@ -1583,7 +1597,11 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     movement resolves (not the one that created it). The instance stores
     the hazard.
   - Sources: a successful hazard-edge save (10.2), including against
-    terrain squares.
+    terrain squares; Brink, when forced movement the Wrecker causes ends
+    with a hostile adjacent to a hazard square it did not enter (no save;
+    allies never; M2 hazards only). A later push's edge save is made at
+    disadvantage before that movement ends Teetering **(change VG-5;
+    Vanguard design 8.3)**.
   - Interactions: Rooted and Anchored make the edge safe.
 - **Hobbled** — minor · Later
   - Effect: the first time each turn it moves 3+ squares by its own

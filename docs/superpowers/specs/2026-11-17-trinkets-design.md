@@ -747,7 +747,11 @@ About one action's worth each. **(lead's call)**
    records the accepted pair and the reason (rule 18). The registry is
    empty until the class records land (23). It also covers species traits
    and armour and shield signature properties (for example Bulwark
-   Stance) in every direction **(change CL-11; classes design 3.3)**.
+   Stance) in every direction **(change CL-11; classes design 3.3)**,
+   and weapon verb signatures **(change VG-18; Vanguard design 7.13)**.
+   Class features never match armour or shield signatures. Payable
+   lines prefer original effects. Echoes of verb signatures (for
+   example Warding Staff) need a lead's ruling.
 2. **Weapon, armour, shield and focus properties keep weapons 18.1:**
    charged echoes are legal (Ember Ring echoes Ember Edge; Longreach
    echoes Long Haft); always-on copies are not.

@@ -896,6 +896,11 @@ As enemies 17.1 defines it **(settled; party wording lead's call)**:
 
 - At most **one** reaction AC bonus applies to any attack roll.
 - **Candidate order:**
+  0. **step 0, window fills** (Vanguard design 7.7; VG-4): a reaction AC
+     bonus from a camp-pool ability that applies without a reaction being spent
+     (Stand Fast, Step In II). Several fills on one roll are ordered by
+     source unit order, then by creation order; they come ahead of the
+     target's own candidates;
   1. the target's own pool-free reactions (Parry);
   2. allies' pool-free reactions (Interpose), in unit order;
   3. charge reactions: the target's own first (the Parrying property),
@@ -908,14 +913,18 @@ As enemies 17.1 defines it **(settled; party wording lead's call)**:
      Guarding; Pry Deep also ignores Parry), if its unit has no reaction
      left, or if the attack was rolled with a gear-sourced disadvantage
      (8.1 rule 6). A skipped reaction is not offered, not prompted and not
-     spent;
+     spent. A step-0 fill inherits these skips (Pry ignores it; none after
+     a gear-sourced disadvantage), is suppressed while its source is
+     Staggered or Incapacitated, and is never skipped for "no reaction
+     left", since it spends none (Vanguard design 7.7; VG-4);
   2. **evaluate its policy** (ability model 7.3): `always` fires;
      `ifItChangesOutcome` fires only if its bonus turns this hit into a
      miss; `whilePoolAtLeastHalf` fires while its pool is at least half;
      `never` does not fire; "ask me" prompts the player at this point,
      with the roll known;
   3. the **first that fires closes the window**. The rest are not taken
-     and not spent.
+     and not spent. A step-0 fill that applies closes the window and
+     counts as "the one reaction" (11 item 1; VG-4).
 
   So a player who sets Parry to `always` accepts that a Parry that changes
   nothing still closes the window before an ally's Interpose; the preview
@@ -939,7 +948,8 @@ All checked by validation (17.1). **(lead's call, confirmed to stand)**
    - the maximum **sustained** party AC, with a normal roll mode, leaves
      at least a **35%** hit chance;
    - the maximum **charged** AC (+ Raise or Fortified, + one reaction),
-     with a normal roll mode, leaves at least **15%**;
+     with a normal roll mode, leaves at least **15%**; a step-0 window fill
+     (10.4) counts as "the one reaction" (Vanguard design 7.7; VG-4);
    - **(lead's call)** the maximum sustained AC **with the one allowed gear
      roll-mode effect** (disadvantage computed exactly) leaves at least
      **10%** *(illustr.)*. A gear roll-mode effect never combines with a
@@ -1196,7 +1206,8 @@ warhammer-and-shield soldier, the sling artillery and the claw brute.
 - **Starting kits *(illustr.)*:**
   - heavy-trained class: chain mail, with longsword + shield in one set
     and a two-hander or versatile weapon in the other (AC 18 or 16; this
-    teaches the active-set rule);
+    teaches the active-set rule). The Vanguard's kit: chain mail,
+    warhammer + shield / greataxe (Vanguard design 7.10; VG-21);
   - medium-trained class: chain shirt or hide;
   - light-trained class: leather;
   - classes with no training: robes (unarmoured) plus their class defence
@@ -1277,7 +1288,7 @@ for a drop-prevention effect (`RetiredDropPrevention`).
 | Spiked Boss | type | shield | The bash deals piercing (never with Quickdraw on one item; a set holding both suppresses Quickdraw, `QuickdrawTypeConflict`) | M1 |
 | Raise | charge, prevent | any | 1 / 1 / 2 per rest, bonus action: +2 AC until the start of your next turn (`raiseActiveUntilOwnTurnStart`, 16.3; never a condition); part of the shield part (Pry ignores it); does not stack with Fortified (6.1) | M1 |
 | Hailguard | charge | shield, tower | 1 / 1 / 2 per rest, automatic at weapons 7.5 step 2 (no reaction; policy `always` with the target filter `nonMinion`, which the player may change like a reaction policy, ability model 7.3): a ranged weapon attack roll against you whose net mode would not already be disadvantage has disadvantage. Inside the roll-mode cap, where it has the lowest priority and is not spent when suppressed (8.1 rule 6) | M1 |
-| Guarding | charge | shield, buckler, reliquary | 1 / 1 / 2 per rest: Interpose (illegal on a tower shield or on a carrier that already has Interpose or a Guard verb; "has Interpose" reads a **learned** class Interpose, such as Shieldwall, learned exactly when it is the Vanguard's stance pick, whether or not it is used; classes design 8.3, CL-7) | M2 |
+| Guarding | charge | shield, buckler, reliquary | 1 / 1 / 2 per rest: Interpose (illegal on a tower shield or on a carrier that already has Interpose or a Guard verb; "has Interpose" reads a **learned** class Interpose, such as Shieldwall, learned exactly when it is the Vanguard's stance pick, whether or not it is used; classes design 8.3, CL-7). The stance may be re-picked once per camp, never in combat: a Guarding shield carried by a Vanguard who re-picks Shieldwall becomes **runtime-inert**, with a warning on the camp screen before the re-pick is confirmed, and wakes again if the stance returns to Hold the Line (Vanguard design 7.5; VG-17) | M2 |
 | Bashing Rim | rider | shield | The bash carries the Stagger rider (settled source) | M2 |
 | Shelter | charge | shield, tower | 1 / 1 / 2 per rest, reaction: a ranged weapon attack against an adjacent ally targets you instead (arrow-catching-shaped, renamed). It resolves at weapons 7.5 step 1, after declaration and before step 2, so the new target's roll mode, AC and reaction window apply; it spends your reaction and counts under the reaction cap (5.5) | M2 |
 | Bulwark Stance | tower signature | tower | If you did not move on your last own turn, Interpose may instead give an adjacent ally advantage on one Reflex save against an area | Later |

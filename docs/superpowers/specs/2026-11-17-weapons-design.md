@@ -521,7 +521,7 @@ class's Strength-main spread:
 | Best Dexterity melee build of each Dexterity-main class | ≥ 90% |
 | Best launcher build of each Dexterity-main class | ≥ 75% |
 | Every launcher family, trained wielder, its best class build (M2 parity set) | ≥ 60% |
-| Any build | ≤ 110% |
+| Any build, measured as VG-12: rest-pool damage floor-averaged at the worst legal build (every legal capacity step); camp-pool damage bounded by the nova bound and `SurgeOptionBound` instead **(change VG-12; Vanguard design 10.1)** | ≤ 110% |
 
 **Binding requirement on the class designs (agreed):** every class whose
 main ability is Dexterity has at least one **precision feature**: a class
@@ -649,18 +649,37 @@ records reference a verb and cannot override its text.
    conditions 10.1, at step 10 of the pipeline (7.5). Opposite directions
    cancel square for square; a shift (7.6) and a push or pull on the same
    hit cannot combine, and the shift is dropped.
+   - **The 3-square sum** counts squares **actually moved, across all
+     moved units** (a Domino link at step 10b uses only the remainder).
+     Parts are listed in data order, non-verb parts first, then verb
+     parts; a verb part whose target was already verb-moved this round is
+     dropped first and is not a stop; the total is cut to 3 by trimming
+     from the last part, and a part **contributes** if it keeps at least
+     1 square after the cut. Only contributing parts count for collision
+     eligibility and the verb-moved-this-round mark **(change VG-8;
+     Vanguard design 6.4 rule 6)**.
+   - **Stopped early:** at least 1 square of a move's chosen distance was
+     blocked by a wall, obstacle or unit, a 0-square blocked move
+     included; an ignored verb part is not a stop, and stopping before a
+     hazard is not stopping early **(change VG-8; Vanguard design 3.4)**.
    - **Verb-sourced** movement is: the verbs in 7.1, the verb signatures
      in 18.4 (Heavy Push, Long Hook, Crack, Keep Back, Binding Parry,
      Driving Graze), the shield bash's Push (17.9) and armour verb
      signatures that move a target (Bull Rush) **(change AR-49; armour
-     design 14.4)**. Everything else
+     design 14.4)**, and every **Empower** effect (the "empower the
+     weapon's verb" Technique, 7.3) **(change VG-8; Vanguard design
+     6.6)**. Everything else
      (a Technique push, Thunderous, Shatter) is **not verb-sourced**.
    - **Once per round** applies to verb-sourced movement only: a target
      already moved by a verb-sourced move this round ignores any further
      verb-sourced part; the per-target round state records only those.
    - **Collision damage** applies to the combined move only if a
      non-verb-sourced part contributed to it; a move made only of
-     verb-sourced parts never deals it.
+     verb-sourced parts never deals it. The one exception is the
+     Wrecker's Battering Force: once per round, a verb-only move stopped
+     early deals collision damage as if a non-verb part had contributed,
+     and its parts stay verb-sourced for every other rule **(change VG-8;
+     Vanguard design 8.3)**.
 5. **A verb is off** when the wielder is untrained (10.2) or Strained
    (10.1), and on improvised and unarmed attacks (13).
 6. **Existing conditions only.** A verb applies only positional effects,
@@ -704,6 +723,10 @@ records reference a verb and cannot override its text.
   simple and martial families only, and builders do not gate on the exotic
   branch;
 - subclasses that key off verb ids or group tags;
+- **verb borrowing:** a subclass may apply the canonical verb of a
+  trained, non-Strained weapon in the wielder's own spare set (11.1).
+  Signatures, dice, type, reach and properties never travel **(change
+  VG-19; Vanguard design 8.1, 9.1)**;
 - the binding precision feature of each Dexterity-main class (6.4).
 
 ### 7.4 Names
@@ -747,11 +770,21 @@ these steps, in this order:
 5. **Reaction window:** the target side's reactions (Parry, Interpose)
    resolve here (ability model 14.3). **One reaction AC bonus per attack
    (change AR-41; armour design 10.4):** by the window algorithm, in the
-   order pool-free target, then pool-free allies in unit order, then
+   order step 0 window fills (reaction AC bonuses from camp-pool
+   abilities, no reaction spent, ordered by source unit order then
+   creation order; the first fill closes the window and counts as "the
+   one reaction") **(change VG-4; Vanguard design 7.7)**, then pool-free
+   target, then pool-free allies in unit order, then
    charges with the target's own first; no reaction AC bonus is offered
    after a gear-sourced disadvantage.
-6. **Hit or miss, and crit.** On a miss: Graze (7.6), then stop. A
-   natural 20 hits and crits.
+6. **Hit or miss, and crit.** On a miss: Graze (7.6), then step 6a, then
+   stop. A natural 20 hits and crits.
+   - **6a. Verb on a miss** (Sure Form, Weaponmaster): on a qualifying
+     miss, only the verb's own effect runs, at its normal step (forced
+     movement at step 10, a Cleave follow-up at step 12, Lunge's carried
+     advantage at step 13), with no damage step, no save slot and no
+     Empower line. The miss is not a hit for any rule **(change VG-8;
+     Vanguard design 8.1)**.
 7. **On-hit spends:** Techniques and `onHit` charge properties
    (Executioner's Stroke, Thunderous, Quake, Crushing, Pinning, Shatter)
    are chosen now, before damage.
@@ -759,10 +792,24 @@ these steps, in this order:
    Exploit dice (from net advantage or Aim), then crit doubling, then the ability term, Precision
    and flat terms; minimum 1. Then any concentration check.
 9. **Rider attempt, or Topple** in the shared save slot (7.2 rule 1).
+   A save that depends on the movement (Ram's collision Prone, Topple
+   under Upend) **reserves** the slot here and is rolled at step 11, as
+   Thunderous's Dazed save is; a reserved slot blocks riders and Topple
+   on that target even when no save is rolled. Every Prone source whose
+   record has `sharesToppleCount: true` shares Topple's once-per-round
+   count (7.2 rule 2), and a Ram suppresses the weapon's Topple verb on
+   its hit. Under Upend, Topple II's push is dropped **(change VG-8;
+   Vanguard design 6.4 rule 6, 8.3)**.
 10. **Forced movement:** every forced movement this hit causes is summed
-    (7.2 rule 4) and resolved once.
+    (7.2 rule 4, across all moved units) and resolved once.
+    - **10b. Domino link** (Wrecker): when the combined move is stopped
+      early by a hostile, that hostile is pushed 1 square the same way,
+      inside the remainder of the 3-square sum; the link collides only
+      through Battering Force, then Brink applies **(change VG-8;
+      Vanguard design 8.3)**.
 11. **Other on-hit effects** in data order (Thunderous's Dazed save after
-    its push, Quake, Pitted Armour, Rooted).
+    its push, the reserved saves of step 9, Quake, Pitted Armour,
+    Rooted).
 12. **Secondary targets:** Skewer first, then Cleave, with geometry read
     **after** step 10. A secondary attack re-enters the pipeline at step 2
     with its own restrictions (7.6); Skewer reuses the step 4 roll.
@@ -770,7 +817,8 @@ these steps, in this order:
 14. **Self-movement:** Flourish, then Driving.
 15. **Events:** `VerbFired` and `ExploitApplied` (20.3).
 
-So Topple lands before a push (Prone, then pushed), Skewer and Cleave read
+So Topple lands before a push (Prone, then pushed; under Upend its save
+follows the push, step 9), Skewer and Cleave read
 the board after the push, and Vex's Helped is in place before the next
 attack of the same Attack action, a Nick attack included.
 
@@ -883,6 +931,18 @@ attack of the same Attack action, a Nick attack included.
     action. Movement granted afterwards by Dash (whatever its action cost)
     or by Spurred is added as normal; forced movement is unaffected
     (classes design 8.3, Hold the Line) **(change CL-6)**.
+  - **Slip past:** where a feature makes a slip-past provoke (the
+    `slipPast` trigger), it resolves after a successful slip-past check
+    (ability model 7.2), before the step that moves the hostile through
+    or past the unit's square, and spends the reaction as an opportunity
+    attack **(change VG-20; Vanguard design 7.4)**.
+  - **Reaction attack on another's attack** (trigger kind
+    `attackAgainstOther`): a reaction attack, **not** an opportunity
+    attack, hooked after step 15 of the weapon pipeline (7.5), or after
+    ability model 14.3 step 6 for each attack roll of a non-weapon
+    attack. A legal attack on the attacker must exist at that moment;
+    otherwise it is not taken and not spent **(change VG-20; Vanguard
+    design 8.2)**.
 - **Prone and reach:** a reach attack at distance 2 or more against a
   Prone target has disadvantage (conditions 18.4). Reach weapons therefore
   carry no Topple.
