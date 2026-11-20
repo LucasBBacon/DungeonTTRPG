@@ -488,6 +488,8 @@ without its repertoire.
      from 1 to the cut total, trimming from the last part again.
    - **Collisions.** A move collides if any non-verb part contributes;
      Battering Force (8.3) is the one verb-only exception.
+   - **Save areas (ARC-22, SP-5; Arcanist design 8.2).** Each target of
+     a save area is its own hit for the 3-square sum.
 
    **`sharesToppleCount` values (lead's call):** Topple (and Upend), Ram,
    Skittles, Drive Through's Prone, Earthshaker's Prone and Shield
@@ -770,7 +772,11 @@ the claim is checked, not assumed (6.4 rule 8).
   - areas ≤ 25 squares, `selective` only;
   - no hard-control `condition.apply` kind;
   - forced movement ≤ 3 per unit;
-  - M1/M2 conditions only.
+  - M1/M2 conditions only;
+  - **scope (2026-11-20; ARC-2, Arcanist design 11.2):** non-slot,
+    non-slotless camp pools only. Slot pools fall under
+    `SpellTierBound` and slotless casts (Overchannel) under
+    `SlotlessCastBound`.
 - **Nova bound:** reported with Arts included and without them.
 
 ### 7.4 Hold the Line (stance, M1)
@@ -1023,7 +1029,9 @@ A turn allowance or per-target count:
   three-pool limit;
 - counts 0 to read when shown as a glint;
 - stays outside the camp-share ratio, and inside the 60% formula as a
-  level-3 or level-6 increment.
+  level-3 or level-6 increment;
+- is never the target of a capacity or timescale offer (2026-11-20;
+  ARC-26, Arcanist design 7.8).
 
 **Per-rest tagged counters (lead's call; SH-4):** "A per-rest counter on
 one named pool's record, spent by records tagged with its one declared
@@ -1781,7 +1789,9 @@ Each criterion is a data predicate over the flag's record: `heldBy`
 fields, its `effectKinds`, and a `display` of `glint` or `row`.
 
 Momentum, Hold the Line's stop, the Stand Fast state and the source-held
-`empowerMarks` (13.1) pass. Take the Blow and Brace fail.
+`empowerMarks` (13.1) pass. Take the Blow and Brace fail. The Binder's
+source-held `slippedFrom`, `boundBy` and `cinched` pass (2026-11-20;
+BN-3, Arcanist design 9.1).
 
 ## 10. Numbers
 
@@ -1807,10 +1817,17 @@ spent on Attack:
   client was told plainly on 2026-11-18 and approved proceeding)**:
   - rest-pool damage is counted floor-averaged;
   - camp-pool damage is bounded by the nova bound and
-    `CampOptionBound`;
+    `CampOptionBound`, or for slot pools `SpellTierBound` and for
+    slotless casts `SlotlessCastBound` (2026-11-20; ARC-2, Arcanist
+    design 11.2);
   - parity is measured at the **worst legal build**: every legal
     capacity step (Deep Reserves; Technique capacity offers are excluded
-    in the revision), and R at the simulator's observed lower bound.
+    in the revision), and R at the simulator's observed lower bound;
+  - **(2026-11-20; ARC-3, ARC-16, Arcanist design 11.1)** Slot
+    Recovery counts as rest power, floor-averaged, here as in the camp
+    share; under `SetupAttribution` the value a camp-sourced condition
+    adds to your own at-wills is charged to the source spell's row, not
+    to the at-will's (the static `SpellTierBound` is unchanged by it).
 - **Why the worst legal build still holds (revised):**
   - the all-Hew plan is the worst pool plan. A paid Press with its
     Momentum cash-in is worth less than a Hew: 1.2 + 0.7 against 2.7 at
@@ -1955,6 +1972,8 @@ the lever it would take levels 5 and 10 below the band (39% and 37%).
 - **(client, 2026-11-18; SH-28)** The accepted martial miss is extended
   to levels 1–4 for the Shade (Shade design 10.5). The Vanguard's own
   miss stays at level 1.
+- **(client, 2026-11-20; ARC-4)** The accepted miss is extended to
+  Arcanist levels 1–2 (26% and 35%; Arcanist design 11.8).
 - Arts at class level 5 do not affect level 1.
 - The camp-share pass does not rely on camp damage being exempt from
   parity: Arts are valued at their utility, not as damage.
@@ -2256,10 +2275,10 @@ recorded in classes 18 by VG-1):**
 | VG-7 | Ability 7.1, declared costs; classes 8.3, Technique timing | `onEvent:<id>` cost timing (Shove, grapple, Graze, turn start) | Lead |
 | VG-8 | Weapons 7.2 rule 4; weapons 7.5 steps 6 and 9–11, new steps 6a and 10b; conditions 10.1, the "One move per hit" bullet | Empowered movement stays verb-sourced; the Battering Force exception; the 3-square sum across all moved units, counted in squares actually moved, with the part order, truncation and "contributes" rule of 6.4 rule 6; "stopped early" defined (3.4); the save slot reserved at step 9 and rolled at step 11 for collision-conditional effects (Thunderous precedent), a reserved slot blocking riders and Topple; `sharesToppleCount`; a Ram suppresses the Topple verb on its hit; **step 6a**, Sure Form's verb on a miss (8.1); the Upend order, with Topple II's push dropped under Upend; **step 10b**, the Domino link (inside the remainder, colliding only through Battering Force, then Brink) | Lead |
 | VG-9 | Ability 7.2, Shove row | Write the push as "push 1 or Prone" | Lead. **The Shove contest is settled; only the push wording changes** |
-| VG-10 | Classes 3.4 (terms), 7.5 (counting); ability 6.6 (the three-pool sentence), 10.2 (the CL-2 text) | Turn allowances and per-target round counts are frequency limits, not named pools; outside the cap and the three-pool limit; count 0; outside the camp-share ratio, inside the 60% formula. **A per-rest sub-limit on one option of a named pool (the Hew-use cap) is not a named pool and is not counted**, as the `restDefensiveTool` sub-limit is not. Extended from one option to one tag by SH-4 (Shade design 7.9) | Lead |
-| VG-11 | Classes 12.1, 12.2, 12.3, 7.6; ability 7.3 (policy filters) | `rankSchedule` (a validator input) and `rankCategory`; `offerLaneAdjust`; `triggerMenu` ids; validators as data predicates (`RankAddsNoDice`, `RankKeepsBounds`, `HewCeiling` as the static formula, `TechniquePickerSize` over reachable option sets, `SurgeOptionBound` (now `CampOptionBound`, SH-5) with `actionsGranted` and the reference encounter, `TurnAllowanceNoDamage` with its allow-list, `FlagNotCondition` with the condition equivalence table); `collisionRate` in the tuning file; the nova bound with Arts; the policy filter `notWhileSquaredUpElsewhere`; a row-modifier passive or glint counts 0; a cost waiver is not a refill (the 6.3 reading) | Lead |
-| VG-12 | Weapons 6.4, parity targets table, "Any build ≤ 110%" row; classes 6.4, the single-target damage cap cell ("Every build ≤ 110% of the greatsword reference", read "as measured by weapons 6.4, VG-12") | Measured floor-averaged at the worst legal build for rest pools; camp-pool damage bounded by the nova bound and `SurgeOptionBound` (now `CampOptionBound`, SH-5). This **changes the row's meaning**. The trap-damage content reading (SH-16) applies when the Trapwright ships (Shade design 14) | Lead (the row is the lead's call); **the client was told plainly on 2026-11-18 and approved proceeding** |
-| VG-13 | Ability 6.3, the measure bullet ("The share is measured in the offer value unit"); **classes 8.2, the camp-pool chassis bullet (settled)**; **classes 8.3, the "Camp share" bullet (settled)**; classes 11.B, the camp-share row (a note: "level-1 martial miss accepted") | The camp share counts the `restDefensiveTool` at half value; all three measures reported, Momentum included; the band holds at levels 5 and 10; the level-1 martial miss accepted (extended to levels 1–4 for the Shade by SH-28, Shade design 10.5). **Both classes rows are settled rows changed by the client** | **Client (agreed 2026-11-18, Q1): the measure and the level-1 miss** |
+| VG-10 | Classes 3.4 (terms), 7.5 (counting); ability 6.6 (the three-pool sentence), 10.2 (the CL-2 text) | Turn allowances and per-target round counts are frequency limits, not named pools; outside the cap and the three-pool limit; count 0; outside the camp-share ratio, inside the 60% formula. **A per-rest sub-limit on one option of a named pool (the Hew-use cap) is not a named pool and is not counted**, as the `restDefensiveTool` sub-limit is not. Extended from one option to one tag by SH-4 (Shade design 7.9). No capacity or timescale offer targets a turn allowance (ARC-26, Arcanist design 7.8) | Lead |
+| VG-11 | Classes 12.1, 12.2, 12.3, 7.6; ability 7.3 (policy filters) | `rankSchedule` (a validator input) and `rankCategory`; `offerLaneAdjust`; `triggerMenu` ids; validators as data predicates (`RankAddsNoDice`, `RankKeepsBounds`, `HewCeiling` as the static formula, `TechniquePickerSize` over reachable option sets, `SurgeOptionBound` (now `CampOptionBound`, SH-5) with `actionsGranted` and the reference encounter, `TurnAllowanceNoDamage` with its allow-list, `FlagNotCondition` with the condition equivalence table; `slippedFrom`, `boundBy` and `cinched` pass, BN-3, Arcanist design 9.1); `collisionRate` in the tuning file; the nova bound with Arts; the policy filter `notWhileSquaredUpElsewhere`; a row-modifier passive or glint counts 0; a cost waiver is not a refill (the 6.3 reading) | Lead |
+| VG-12 | Weapons 6.4, parity targets table, "Any build ≤ 110%" row; classes 6.4, the single-target damage cap cell ("Every build ≤ 110% of the greatsword reference", read "as measured by weapons 6.4, VG-12") | Measured floor-averaged at the worst legal build for rest pools; camp-pool damage bounded by the nova bound and `SurgeOptionBound` (now `CampOptionBound`, SH-5), or for slot pools `SpellTierBound` and for slotless casts `SlotlessCastBound` (ARC-2); Slot Recovery read as rest power (ARC-3) and `SetupAttribution` (ARC-16) (Arcanist design 11.1). This **changes the row's meaning**. The trap-damage content reading (SH-16) applies when the Trapwright ships (Shade design 14) | Lead (the row is the lead's call); **the client was told plainly on 2026-11-18 and approved proceeding** |
+| VG-13 | Ability 6.3, the measure bullet ("The share is measured in the offer value unit"); **classes 8.2, the camp-pool chassis bullet (settled)**; **classes 8.3, the "Camp share" bullet (settled)**; classes 11.B, the camp-share row (a note: "level-1 martial miss accepted") | The camp share counts the `restDefensiveTool` at half value; all three measures reported, Momentum included; the band holds at levels 5 and 10; the level-1 martial miss accepted (extended to levels 1–4 for the Shade by SH-28, Shade design 10.5, and to Arcanist levels 1–2 by ARC-4, Arcanist design 11.8). **Both classes rows are settled rows changed by the client** | **Client (agreed 2026-11-18, Q1): the measure and the level-1 miss** |
 | VG-14 | Classes 12.1, subclass fields | Subclass field `offerLaneAdjust` (one name) | Lead |
 | VG-15 | Classes 8.3, Growth bullet, level 9 (Stand Fast); classes 14, registry list | Stand Fast "every roll", shield required, solo clause, subclass riders | Lead |
 | VG-16 | Enemies 11.1, the opportunity-cost term | Prices known reaction triggers (the Hold the Line stop, Retort Strike) as state; never class. Counterstroke added by SH-29 (Shade design 8.3) | Lead |

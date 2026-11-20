@@ -219,6 +219,13 @@ Gaps found while designing; each is fixed by a change in section 18.
   60% formula (Vanguard design 3.4, 7.9).
 - **A signature fires** in a round when any event in the class's
   `signatureEvents[]` (12.1) occurs in that round.
+- **Interplay (change ARC-18):** the Arcanist's base passive
+  (`interplay.enabled`, on by default). Damage of one pair family to a
+  hostile on your turn sets your one source-held mark on it; your next
+  hit on it with a part of the other family, before the end of your next
+  turn, is rider-flagged. **Fused:** an Overchannel cast's pair-family
+  parts count as both families for Interplay (Arcanist design 7.9,
+  10.3).
 
 ## 4. Framework decisions
 
@@ -387,6 +394,12 @@ tolerance and the miss rules lead's call)**
     with each class's `suggestedArray`, under the reference policy (DH
     19.3) on the release seed set. A class's rate is the mean over its
     picks and subclasses; each pick and subclass is also printed.
+    **(change ARC-15)** For the Arcanist a creation pick is pair × Mote
+    key (12 picks), crossed with the level-3 subclass as above; starters
+    are held at `pairDefaults`, every legal starter combination is
+    printed as its own row (outside the mean), and the class mean is
+    unweighted. Content check `StarterDefaultsHaveAnswer` and the
+    starter rule (Arcanist design 7.7).
   - **Splits:** every boss is `fearless` (enemies 14.2), so the report
     splits by what does vary: the floor-1 theme's non-fearless share of
     its roster (enemies 10.4 allows 50–100%; bands *(illustr.)* 50–74%
@@ -524,8 +537,8 @@ lens, **C** companion kits. Caps are **(settled)** unless marked.
 
 | Utility | Universal baseline (every party) | How a class leans | The cap (no class goes past it) | Launch lean |
 |---|---|---|---|---|
-| Single-target damage | 2 at-wills, one damaging (ability 6.1); weapon verbs; crits; Exploit on Dexterity-rolled hits with advantage or Aim; Extra Attack at 5 for martials | Precision dice; Techniques +1d6; Surge; ignore-resistance offers | Every build ≤ 110% of the greatsword reference (as measured by weapons 6.4, VG-12: rest-pool damage floor-averaged at the worst legal build; camp-pool damage bounded by the nova bound and `CampOptionBound`, formerly `SurgeOptionBound`, renamed and generalised by SH-5, Vanguard design 10.1, Shade design 7.5); Dexterity-main melee ≥ 90%; launchers reported against 75%; all with empty trinket slots; every launcher family ≥ 60% (M2 parity set); trinkets +10% at most (weapons 6.4, trinkets 11 rule 6); one camp spend per turn; capstone turn damage ≤ 2× the 95th-percentile non-capstone turn of the same unit (12.3) *(illustr.; lead's call)* | S s, V s |
-| Area damage | Flasks (one offensive per turn; none on floor 1), scrolls, sweeping verbs | Slot areas; shape (+1 radius, `selective`) | ≤ 25 squares at levels 1–6; allies hit unless `selective`; at-wills never hit allies; no ground zones (ability 8) | A P |
+| Single-target damage | 2 at-wills, one damaging (ability 6.1); weapon verbs; crits; Exploit on Dexterity-rolled hits with advantage or Aim; Extra Attack at 5 for martials | Precision dice; Techniques +1d6; Surge; ignore-resistance offers | Every build ≤ 110% of the greatsword reference (as measured by weapons 6.4, VG-12: rest-pool damage floor-averaged at the worst legal build; camp-pool damage bounded by the nova bound and `CampOptionBound` (formerly `SurgeOptionBound`, renamed and generalised by SH-5, Vanguard design 10.1, Shade design 7.5), or for slot pools `SpellTierBound` and for slotless casts `SlotlessCastBound` (change ARC-2)); Dexterity-main melee ≥ 90%; launchers reported against 75%; all with empty trinket slots; every launcher family ≥ 60% (M2 parity set); trinkets +10% at most (weapons 6.4, trinkets 11 rule 6); one camp spend per turn; capstone turn damage ≤ 2× the 95th-percentile non-capstone turn of the same unit (12.3) *(illustr.; lead's call)*. **(change ARC-2)** `SpellTierBound` holds slot pools to ≤ 2000‰ single target, `SlotlessCastBound` holds Overchannel, `PayoffBound` allows one setup step per target, and `CampOptionBound` is scoped to non-slot, non-slotless camp pools (12.2; Arcanist design 11.2). **(change ARC-3)** Slot Recovery counts as rest power here and in the camp share alike (Arcanist design 7.4) | S s, V s |
+| Area damage | Flasks (one offensive per turn; none on floor 1), scrolls, sweeping verbs | Slot areas; shape (+1 radius, `selective`) | ≤ 25 squares at levels 1–6; allies hit unless `selective`; at-wills never hit allies; no ground zones (ability 8); slot areas ≤ 1250‰ per target under `SpellTierBound` (change ARC-2; Arcanist design 11.2) | A P |
 | Damage types and riders | Weapon types; weak targets take riders; crits attempt riders; terrain combos | Riders on demand (Techniques); an element pair; ignore-resistance offers | One rider per target per use; at-will riders rare and once per turn (ability 9.3–9.4); **no single-type kit, no switching types per enemy** (lead's call; stat model 2) | A s, V s |
 | Conditions and control | Shove, grapple, Frighten, Topple and Push verbs, scrolls, wands | Limited major or hard control; repeat-save pressure; priming | Hard control only from limited abilities; agency conditions enemy-only (cond 7.1, 7.3); Steeled, Unyielding, boss pips and the shed action; the 32-condition budget full (cond 16); a controller ranks up through duration and reliability, never chained lockouts (lead's call) | A P, H s |
 | Forced movement and terrain | Shove, Push, Hook, Topple, shield bash, fixed hazards | Technique pushes (not verb-sourced, so collisions apply); hazard edges | ≤ 3 squares per hit; a verb moves a target once per round; fixed terrain only; M1 pushes stop before hazards (weapons 7.2) | V sub (Wrecker) |
@@ -642,7 +655,11 @@ All **(lead's call)** except the level, which is **(settled, ability
   alone and now picks the lens for the party game.
 - **Two per class at M2.** The Vanguard has a third, because the
   Weaponmaster ships in M1. Further subclasses come through unlocks (main
-  4.7), as "aspects" that change one rule. **(change SH-30)** A launch
+  4.7), as "aspects" that change one rule. **(change AS-1)** An aspect
+  hangs its features off one rule but keeps the full ladder shape (for
+  the Arcanist: a level-3 tier-2 spell and the rule, a signature Weft
+  option at 3 / 5 / 7, a level-6 choice of 2, a level-9 Overchannel
+  rider; Arcanist design 9.3). **(change SH-30)** A launch
   class's stage-1-named third subclass (the Shade's Trapwright or
   Swordsworn, whichever does not ship in M2) ships as a full subclass, as
   the Vanguard's three do, not as an aspect (Shade design 14).
@@ -679,7 +696,7 @@ above the level's single choice (ability 10.3).
 
 | Lvl | Floor | Automatic beat | The choice: martial | The choice: caster |
 |---|---|---|---|---|
-| 1 | 1 | Full class kit (8) | Creation pick, 1 of 2–3 from M2 (stance, kit style); at M1 the Vanguard's stance pick has one option | Creation picks: Arcanist, the element pair; Herald, the Totem-or-shield kit (no tradition lean); each plus 2 starter spells |
+| 1 | 1 | Full class kit (8) | Creation pick, 1 of 2–3 from M2 (stance, kit style); at M1 the Vanguard's stance pick has one option | Creation picks: Arcanist, the element pair and its Mote key (one choice, pair × key; ARC-15, Arcanist design 7.3); Herald, the Totem-or-shield kit (no tradition lean); each plus 2 starter spells |
 | 2 | 1 | Pool steps per table | **Class talent**, 1 of 3, reshaping the signature verb | **Spell card**, 1 of 3, from the class list |
 | 3 | 1→2 | Tier 2 (casters) | **Subclass** (1 of 2) | **Subclass** (1 of 2); it grants its own tier-2 spell, which is the level-3 known spell |
 | 4 | 2 | — | **+1 ability**, the only choice **(settled, stat 5.1; lead's call that it stands alone)** | same |
@@ -694,16 +711,33 @@ above the level's single choice (ability 10.3).
   the player takes the spell card there, 10: 7 by level 10, or 6 if the
   level-10 pick is an offer. Both match "about seven" (ability 6.5). One
   swap at camp stays **(settled)**. The level-3 spell is the subclass's
-  own: always known, never swapped **(lead's call)**.
+  own: always known, never swapped **(lead's call)**. **(change ARC-21)**
+  The Arcanist's spells known by level are 2 / 3 / 4 / 4 / 5 / 5 / 6 /
+  6 / 6 / 7, one less from level 7 if the level-7 trigger option is
+  taken, and one less at level 10 if the offer is taken (Arcanist design
+  7.7).
 - **The spell-card draw (lead's call):** 3 distinct cards from the class
   list, a weighted sample without replacement by each spell's
   `drawWeight`, excluding known spells and spells whose minimum tier is
-  above the caster's highest slot tier.
+  above the caster's highest slot tier. **(change ARC-21)** For the
+  Arcanist the draw deals variants (template × family, the family fixed
+  on the card), at most one variant per template (SP-4); soft
+  constraints `drawRequires: offFamily`, a Recommended card, no Expert
+  card in the level-2 draw and a tier-4 signature at level 10, relaxed
+  in a fixed order and checked by `DrawSatisfiable`; every tier-1 card in
+  the level-2 draw plays alone (`L2DrawPlaysAlone`) (Arcanist design
+  7.7).
 - **Trigger options at level 7 (lead's call):** every level-7 talent menu
   and every level-7 spell-card draw includes at least one trigger option
   (7.5) from the class's `triggerMenu`, in place of one of the three.
 - **A preview of the ladder** is shown at creation for every class, with
   recommended defaults for every creation choice. **(lead's call)**
+  **(change ARC-13)** The Arcanist's defaults are data: `castDefaults`
+  (visible pre-ticks), `defaultRotation`, `pairDefaults` and
+  `recommendedPickOrder`, with Recommended and Expert card badges,
+  creation warnings that never block, the starter rule, the last-slot
+  confirmation, the pip glint and, if its lever 1 is used, a default
+  target filter (Arcanist design 5.2, 7.7, 7.14, 11.8).
 
 ### 7.5 The cap of eight and offers
 
@@ -735,7 +769,9 @@ above the level's single choice (ability 10.3).
   So an offer that creates a new pool fits the cap for every class, but
   the reading limit is the real bound: the Vanguard takes only options,
   upgrades and triggers, and the others take at most one new pool
-  **(lead's call)**. The validator (ability 14.5) counts the distinct pool
+  **(lead's call)**. **(change ARC-21)** If the Arcanist's Knit lever
+  (8.5) is used, its `offerExcludes` gains every offer that adds a row,
+  since the lever spends the spare row (Arcanist design 7.5). The validator (ability 14.5) counts the distinct pool
   ids reachable from the class table plus the offers that create pools.
 - **Offers are class-weighted.** Each class names 2–3 **offer lanes**,
   `offerLanes: [{tag, weightPermille}]` (12.1): a weight multiplier on
@@ -777,7 +813,10 @@ read")** The target is at most four per unit (ability 11.4, settled).
   glint (shown on the target and in the attack preview), so both count 0.
   **(change VG-11)** A row-modifier passive (one that only changes how an
   existing row's options resolve, such as Momentum, Practised Hand or
-  Twin Verb) or a glint counts 0 (Vanguard design 10.5).
+  Twin Verb) or a glint counts 0 (Vanguard design 10.5). **(change
+  ARC-18)** Interplay (3.4) marks its target with a glint and so counts
+  0; Fused sits on the spellbook row with Overchannel (Arcanist design
+  7.1).
 - A pool-free reaction with an automatic policy (Hold the Line,
   Shieldwall) counts 0.
 - A capstone is shown on the row of the pool it extends, and adds no row:
@@ -924,7 +963,10 @@ Every class meets the fixed chassis rules **(settled)**:
   levels 5 and 10; the level-1 martial miss is accepted (Vanguard design
   10.4), and for the Shade it is extended to levels 1–4 **(client, with
   the Shade design's approval on 2026-11-18; change SH-28: this widens
-  an agreed reading; Shade design 10.5)**;
+  an agreed reading; Shade design 10.5)**, and for the Arcanist it is
+  extended to levels 1–2 (26% and 35%) **(agreed 2026-11-20, Arcanist
+  Q2; change ARC-4: this widens an agreed reading; Arcanist design
+  11.8)**;
 - exactly one `restDefensiveTool`;
 - subclass at level 3 and capstone at level 9;
 - the cap of eight limited abilities;
@@ -937,7 +979,7 @@ Every class meets the fixed chassis rules **(settled)**:
 |---|---|---|---|
 | Vanguard | Techniques | What does this hit buy? | Second Wind: full Recovery (the one fighter-type tool) |
 | Shade | Tricks | Escape, soak or mend? | Catch Breath: half Recovery |
-| Arcanist | Weft | Shape, guard or mend? | Knit: half Recovery |
+| Arcanist | Weft | Sculpt, guard or mend? (ARC-1) | Knit: half Recovery |
 | Herald | Cadence | Frighten, move or mend? | Rekindle: half Recovery |
 
 Every rest defensive tool heals, so no class pulls the shared floor-1
@@ -1272,40 +1314,61 @@ saves.
 - **Pools:**
   - **Slots:** a `camp` pool per tier, with automatic Slot Recovery
     (settled, ability 6.5).
-  - **Weft** (`rest` 2 / 3 / 4 *(illustr.)*): the rest feature beyond Slot
+  - **Weft** (`rest` 3 / 4 / 5 / 6 at levels 1 / 5 / 7 / 9 *(illustr.;
+    change ARC-11, replacing the earlier 2 / 3 / 4; Arcanist design
+    7.5)*; Sculpt II at 5, Flare II at 8): the rest feature beyond Slot
     Recovery that ability 6.3 asks for. Three abilities draw on it:
-    - **Shape,** with modes: make an area `selective`, +1 radius inside
-      the cap, or give a cantrip its rider flag for one cast;
+    - **Sculpt** (renamed from "Shape", which collides with the rod's
+      focus verb, weapons 17.8; change ARC-1), with modes: make an area
+      `selective`, +1 radius inside the cap, or give a cantrip its rider
+      flag for one cast;
     - **Flare:** a reaction for at most +2 AC against one attack, policy
       `ifItChangesOutcome`, inside the one-reaction-AC-bonus window and
       the armour 11 item 1 envelope;
     - **Knit:** a bonus action that heals half Recovery; the tagged
       `restDefensiveTool`, once per rest (twice from level 6; 8.2).
   - **Weft report and lever (lead's call):** the simulator reports the
-    Arcanist's friendly-fire damage share and its Weft spend split (Shape,
+    Arcanist's friendly-fire damage share and its Weft spend split (Sculpt,
     Flare, Knit) in the reference party. The named lever: Knit moves to
-    its own `rest` pool of 1, leaving Weft for Shape and Flare (the
+    its own `rest` pool of 1, leaving Weft for Sculpt and Flare (the
     Arcanist then counts 7 toward the cap of eight and has 4 things to
     read, using its one spare row).
 - **At-wills:** an element bolt (a rider only on weak targets and crits),
   and a utility cantrip (a minor effect such as push 1, never hard
-  control).
+  control). **(change ARC-10)** The bolt is **Mote**, 1d10 + Int of the
+  Mote key's family, two beams from level 5; the cantrip is **Gust**, a
+  line L4 that pushes the first hostile 1 square on a failed Fortitude
+  save (Arcanist design 7.2).
+- **Interplay** (base passive, `interplay.enabled`, on by default;
+  change ARC-18): damage of one pair family marks a hostile, and your
+  next hit on it with the other family is rider-flagged (3.4; Arcanist
+  design 10.3).
 - **Concentrator** 1 of 2 (Stillmind, Later).
 - **Level-1 identity:** "I shape where damage goes and what it leaves
   behind." Three things to read.
 - **Growth:** spell cards at levels 2, 5, 7 (and 10); the subclass at 3
   grants its tier-2 spell (the level-3 known spell, 7.4); tier 3 at 5;
   tier 4 at 7; capstone at 9, for example *Overchannel* *(illustr.)*:
-  cast a known spell of tier 3 or lower without a slot, with a free Shape,
-  still using the turn's camp spend.
+  cast a known spell of tier 3 or lower without a slot, with one free
+  Sculpt mode (ARC-1), still using the turn's camp spend; **Fused**: its
+  pair-family parts count as both families for Interplay (ARC-18;
+  Arcanist design 7.9).
 - **Subclasses:**
   - **Binder** (M2): longer and more reliable control, never chained on
     one target.
   - **Alembic** (M2): **priming.** Once per round, through a Weft option
     (an option of the Weft pool, not a new limited ability), a cantrip hit
     makes its target Soaked or Oiled (minor), so the party's typed hits
-    land riders. An Oiled-plus-fire chain needs a slot. The Water and Oil
-    Flasks are checked against it first in the registry pass (14).
+    land riders. **(change ALM-9)** Priming may also ride the Alembic's
+    slot spells, Overchannel and named triggers; still once per round,
+    still a Weft option (Arcanist design 9.2). An Oiled-plus-fire chain
+    needs a slot: **(agreed 2026-11-20, Arcanist Q3; change ALM-1)** the
+    inert rule widens this to every prime and every at-will reading: your
+    own primes are treated as absent by your own at-wills, and your
+    at-will's rider is not attempted where a cancel, override or wash row
+    would fire against your inert reagent (Arcanist design 9.2). The
+    Water and Oil Flasks are checked against it first in the registry
+    pass (14).
   - **Loremaster** (unlock): Study as a free rider on the first hit.
   - **Elementalist** (unlock aspect): ignore resistance in one family.
 - **Arcana mastery (new lead's call):** the Loremaster's Study rider is
@@ -1322,7 +1385,8 @@ saves.
 - **Weaknesses:** low HP; friendly fire; concentration under focus fire;
   single-target bosses (resolve pips, Unyielding).
 - **Signature events (12.1):** a damage part typed from the pair dealt by
-  any ability; a Shape used. `seedTarget`: `twoEnemiesWithinRadius1`.
+  any ability; a Sculpt used (ARC-1); an Interplay rider landed (ARC-18;
+  Arcanist design 7.1). `seedTarget`: `twoEnemiesWithinRadius1`.
 
 ### 8.6 HERALD: morale and support (Presence full caster; the single light healing lean)
 
@@ -1480,9 +1544,14 @@ subclass, ability or spell name may equal any condition, verb, property,
 affix, AI profile, enemy ability, morale event or display term, trinket
 or item id or name in the approved documents, or a name used in a
 condition's source list. The one exception is a class spell whose own
-scroll carries its name (consumables 17). It also **warns** on a near
-collision: two names in the class layer that share their head word (the
-rest tools are named apart for this reason). All names are placeholders
+scroll carries its name (consumables 17), **extended to a class spell
+whose own wand carries its name (change ARC-20)**. It also **warns** on
+a near collision: two names in the class layer that share their head
+word (the rest tools are named apart for this reason). **(change
+ARC-20)** An Arcanist spell variant's display name is its template name
+plus a family tag ("Fan (cold)"); the variants of one template are one
+spell family in data, exempt from the head-word warning (SP-3;
+Arcanist design 8.1). All names are placeholders
 pending the naming pass, which gives the four rest tools distinct first
 words.
 
@@ -1490,7 +1559,7 @@ words.
 |---|---|---|
 | Quarry (mark) / Stalker (class) / Hunter | The enemy focus mechanic; the Stalker AI profile; the Hunter affix (enemies 11.4) | Prey / Tracker |
 | Weave | Gambeson armour property | Spellguard (rejected alternative) / Weft (pool) |
-| Shaping | Weapon property ("Shaping: +1 radius") | Weft: Shape |
+| Shaping | Weapon property ("Shaping: +1 radius") | Weft: Sculpt (was "Shape", which collides with the rod's focus verb Shape, weapons 17.8; ARC-1) |
 | Shoulder | Breastplate property; armour verb Bull Rush | Drive Through (talent) |
 | Bulwark | The tower shield's Bulwark Stance; Bulwark Locket | Bastion (subclass) / Holdfast (unlock) |
 | Breaker | The conditions' "breaker types" | Wrecker |
@@ -1537,7 +1606,7 @@ tables; **Companions** = a requirement passed to the companions design.
 
 | Requirement | Source | How met | Status |
 |---|---|---|---|
-| A `rest` and a `camp` pool; 40–60% camp; caster rest features beyond Slot Recovery | Ability 6.3 (agreed) | Every class has both; Weft and Cadence; Shade Vanish at camp 2, 3 from level 2 (SH-24); Vanguard camp-weighted features. Measured with the `restDefensiveTool` at half value; level-1 martial miss accepted (8.2; VG-13, agreed Vanguard Q1), extended to levels 1–4 for the Shade (8.2; SH-28, client with the Shade design's approval; Shade design 10.5) | Stage 2 (simulator at levels 1, 5, 10) |
+| A `rest` and a `camp` pool; 40–60% camp; caster rest features beyond Slot Recovery | Ability 6.3 (agreed) | Every class has both; Weft and Cadence; Shade Vanish at camp 2, 3 from level 2 (SH-24); Vanguard camp-weighted features. Measured with the `restDefensiveTool` at half value; level-1 martial miss accepted (8.2; VG-13, agreed Vanguard Q1), extended to levels 1–4 for the Shade (8.2; SH-28, client with the Shade design's approval; Shade design 10.5) and to levels 1–2 for the Arcanist (8.2; ARC-4, agreed Arcanist Q2; Arcanist design 11.8) | Stage 2 (simulator at levels 1, 5, 10) |
 | One camp spend per turn, scroll reads included | Ability 6.4; consumables 13.5 | No feature grants a second; capstones use the turn's spend | Met |
 | At least 2 at-wills, one damaging | Ability 6.1 | Listed per class | Met |
 | No cooldowns; no major power per fight | Ability 6.2 | `rest` and `camp` only | Met |
@@ -1671,7 +1740,12 @@ everything else (main 6.5). Its record names, at least:
   `chassisOnly: true` on the `restDefensiveTool`, armour, save, skill
   count and kit; `minClassLevel` on heal cards and the capstone;
   `scalesBy: classLevel` on pools and dice;
-- `complexity` (simple / medium / complex), shown at creation.
+- `complexity` (simple / medium / complex), shown at creation;
+- **(change ARC-13)** creation and cast defaults as data, for the
+  Arcanist: `castDefaults`, `defaultRotation` (rules over a closed
+  predicate vocabulary), `pairDefaults`, `recommendedPickOrder`,
+  `creationWarnings[]`, and `badge` on spell records (Arcanist design
+  5.2, 14.1).
 
 Also new: `utilities.json`, one record per 6.4 row, {`id`,
 `baselineRoutes[]`}, each route an action, offer skill, verb, item or
@@ -1718,9 +1792,25 @@ companion-kit id, read by `LeanWithoutBaseline`.
   `HewCeiling` (a static formula), `TechniquePickerSize` (over every
   reachable option set), `CampOptionBound` (`SurgeOptionBound` renamed
   and generalised by SH-5: `actionsGranted` ≤ the base option's, with
-  the reference encounter; Shade design 7.5), `TurnAllowanceNoDamage` (with its
+  the reference encounter; Shade design 7.5; scoped by ARC-2, below), `TurnAllowanceNoDamage` (with its
   allow-list) and `FlagNotCondition` (with the condition equivalence
   table) (Vanguard design 6.4 rule 8, 7.3, 7.9, 9.2).
+- **(change ARC-2)** For slot pools, **`SpellTierBound`** (≤ 2000‰
+  single target, ≤ 1250‰ per target for areas, a stated departure from
+  enemies 6.2's 120%; its hard clause covers unconditional hard control
+  only, SP-1); for slotless casts (Overchannel), **`SlotlessCastBound`**;
+  and **`PayoffBound`** (one setup step per target, save penalties
+  included; ALM-3). `CampOptionBound` is scoped to non-slot, non-slotless
+  camp pools (Arcanist design 11.2, 14.2).
+- **(change ARC-22)** SP-1 as above; SP-2, upcasts checked at the
+  higher tier's arrival level, with `AreaUpcastSkipsFlatTier`; SP-5,
+  each target of a save area is its own hit for the 3-square sum; SP-7,
+  `VariantIsScroll` over the compared field set (Arcanist design 8.1).
+- **(change ARC-27)** `ArcanistDamageTypes`: every damage part on an
+  Arcanist class record is fire, cold, lightning, acid or physical. The
+  runtime invariant `KnownVariantInPair` (asserted in play and property
+  tested, not a content check) keeps every known variant in the pair;
+  gear shifts are the only exempt path (Arcanist design 7.3).
 
 ### 12.3 Simulator reports
 
@@ -1752,6 +1842,14 @@ lead's call)**
   the median pairwise Jaccard distance of offer and talent picks is ≥ 0.5
   *(illustr.)*.
 - The Arcanist's friendly-fire share and Weft spend split (8.5).
+- **(change ARC-29)** `SkillExpressionReport` for the Arcanist: four
+  arms (novice, basic, reference, expert), each with a modifiers-off
+  run, its targets and its dominant-combo and trap-card flags. The
+  novice floor-1 row is required, and a class-mean novice row more than
+  8 points behind the basic row escalates through the lever order
+  **(agreed 2026-11-20, Arcanist Q1, for the row's status)**. **No new
+  gate:** 5.6 is unchanged, and the reference arm stays the one
+  `Floor1ClassSpread` gates (Arcanist design 5.4).
 - Creation pick rate per class (playtest and telemetry, 15).
 - `Floor1BossSustain` per class at the reference and the lowest legal Con
   (DH 21.1 step 6), the Herald with and without a heal card.
@@ -1921,6 +2019,15 @@ disadvantage on the hazard-edge save, with no auto-entry (conditions
 10.1 and 10.2 unchanged); Lone Blade a swap, not an addition; False Trail
 only for a group from whose every watching member you are Hidden (Shade
 design 17).
+
+**Narrowings recorded inside the Arcanist design (no approved text
+changes; Arcanist design 18):** priming stays once per round;
+Overchannel stays tier ≤ 3 with one free Sculpt; the pair is never
+re-chosen, and the camp swap is one spell inside the pair; Shocked stays
+Later, and the arc is the lightning rider; Binder stops gain reliability
+only, never duration; Afterhold never applies to Dazed, other turn-part
+majors or hard instances; the ignore-resistance offer is excluded while
+the Elementalist owns Purity.
 
 **Main design (2026-11-15):**
 

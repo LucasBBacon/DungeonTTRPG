@@ -225,7 +225,11 @@ then moves every class, not half of them.
   three measures (full, half, excluded) are reported, combo flags such as
   Momentum included. The band holds at levels 5 and 10; a martial
   class's level-1 miss is accepted. **(agreed; change VG-13, Vanguard
-  design 10.4)**
+  design 10.4)** The Arcanist's miss at levels 1–2 (26% and 35%) is
+  accepted too **(agreed; change ARC-4, Arcanist design 11.8)**. Slot
+  Recovery counts as `rest` power, in the camp share and in the VG-12
+  parity reading alike, never one without the other **(change ARC-3,
+  Arcanist design 7.4)**.
 - The examples in 6.5 and 6.6 show which pools exist, not the split. As
   written the fighter is mostly rest-powered and the caster mostly
   camp-powered; builders tune the counts into the band. Casters will need
@@ -269,7 +273,12 @@ spend.
 - **Slot Recovery:** when a short rest completes, a caster regains one spent
   slot of tier 2 or lower, the highest such tier spent. It is automatic, not
   a pool, and there is no choice to make. An offer may raise it to two
-  slots, regained one at a time by the same rule. The name keeps it apart
+  slots, regained one at a time by the same rule. The Arcanist instead
+  gains two slots per short rest as a class feature from class level 9
+  (Slot Recovery 2), and that offer is excluded for it
+  (`offerExcludes: slotRecovery+1`), as are `timescale:slots.*` and
+  capacity and timescale on Overchannel **(change ARC-12, Arcanist
+  design 7.4, 7.9)**. The name keeps it apart
   from the stat model's Recovery, which is hit points.
 - Spells are known, not prepared. A caster knows about seven spells by
   level 10 and may swap one at camp.
@@ -356,6 +365,9 @@ Every ability declares exactly one cost **(lead's call)**:
 | `none` | A passive check or threshold; nothing is spent |
 
 - A pool spend is separate from the cost.
+- A pool spend may also be made on the unit's own turn with no action
+  to mark a target (the Binder's Cinch (b), source-held `cinched[]`)
+  **(change BN-4, Arcanist design 9.1)**.
 - A feature or offer may change an ability's declared cost. The cost offer
   in 10.2 makes it a bonus action once per rest.
 
@@ -455,6 +467,17 @@ each use costs a Technique. **(change VG-19, Vanguard design 8.1)**
   target). `whilePoolAtLeastHalf`, for a pool with a strike counter,
   also needs a strike left (`remaining ≥ ceil(max / 2)` and
   `strike.remaining ≥ 1`).
+  A further filter, `reserveForRestTool`: reserve 1 Weft while a Knit
+  use is left; a pre-tick that protects an ally ignores it **(change
+  ARC-6, Arcanist design 7.5, 7.14)**.
+- A second policy class, **cast-option defaults** (`castDefaults`),
+  sits beside reaction policies: visible defaults on the hero's own
+  cast, shown ticked, which the player can untick; computed from static
+  predicates only, never from scorer terms. They are not suggestions
+  under 11.3 **(change ARC-6, Arcanist design 7.14)**. The Alembic's
+  `castDefaults.prime` is one: no displaced rider, a payer actually
+  available, own at-wills excluded, once per fight solo, a per-pair
+  default reagent **(change ALM-8, Arcanist design 9.2)**.
 - Monsters use their reactions' automatic policies; they have no "ask me".
   **(lead's call)**
 - Reactions do not nest. A reaction, a boss action or an opportunity attack
@@ -471,6 +494,8 @@ each use costs a Technique. **(change VG-19, Vanguard design 8.1)**
   the attack ignores or whose unit has no reaction left; each candidate's
   policy (or "ask me") is evaluated in turn, and the first that fires
   closes the window. The rest are not taken and not spent. **(change AR-8)**
+- At most one reaction save bonus applies to any save (the trigger kind
+  `ownSave`, 14.3) **(change ARC-19, Arcanist design 7.5)**.
 
 ## 8. Targeting and areas
 
@@ -494,13 +519,21 @@ diagonal step costing 1.
 - An area includes a square only if the area's origin can see it, using the
   symmetric visibility rule. **(settled rule, applied here)**
 - Squares are enumerated in a fixed order (row by row), for determinism.
-- No area covers more than 25 squares at levels 1–6. Content validation
-  enforces this.
+- No area covers more than 25 squares at levels 1–6, or more than 49 at
+  levels 7–10 **(change ARC-9, Arcanist design 8.1)**. Content
+  validation enforces this.
 
 ### 8.2 Friendly fire
 
 Areas hit allies unless the ability is tagged `selective`. At-wills never
 hit allies. **(lead's call)**
+
+At-will arcs never reach allies either; this rule wins over the Soaked
+arc. A `selective` cast leaves allies out of all its effects, arcs,
+forks and forced movement included, and selective may be taken on any
+slot cast whose arcs or forks reach an ally. A caster is never affected
+by its own casts' areas, arcs and forks. **(change ARC-8, Arcanist
+design 8.1, 8.2)**
 
 ### 8.3 Preview
 
@@ -574,6 +607,16 @@ a ground zone (conditions design 11). **(change C11)**
   targets; weak-target riders are untouched (stat model 8.2). **(change
   W-4, weapons design 7.2)**
 - Damage dealt by a rider never triggers another rider.
+- The lightning arc deals the rider strength band as lightning, one
+  damage event per arced unit, with no crit, no rider flag and no
+  re-arc. An at-will's Soaked arc spread happens at most once per turn
+  across its beams. **(change ARC-14, Arcanist design 8.1)**
+- Interplay's rider flag and Fused follow the one-rider order above; a
+  Mote cash-in counts as the at-will's one rider attempt that turn
+  **(change ARC-18, Arcanist design 10.3)**.
+- Note: the Alembic's Prime is the hit's rider (gate and slot), offered
+  once the hit is known, but outside the at-will once-per-turn bound
+  **(change ALM-5, Arcanist design 9.2)**.
 - A rider is not attempted on a target that already has that condition.
   Exceptions: the psychic rider is attempted on a concentrating target or
   one not already Unfocused, and an application with `worsen` bypasses this
@@ -606,6 +649,13 @@ a ground zone (conditions design 11). **(change C11)**
 - Concentration ends when the unit is downed or incapacitated, when a
   psychic rider lands on it **(settled)**, when its duration ends, or when
   the player ends it as a free interaction. **(lead's call)**
+- Handoffs: Afterhold (a trigger offer) turns the ended effect's
+  sustained minor and fetter-type instances into `turns:1` when you end
+  concentration voluntarily on your own turn by starting another; never
+  Dazed or hard instances, and barred for the Binder **(change ARC-28,
+  Arcanist design 10.3)**. The Binder's Belay turns the fetters it
+  sustains into unlinked `turns:1` when concentration ends for any
+  reason but its own `max` **(change BN-2, Arcanist design 9.1)**.
 
 ### 9.6 Durations
 
@@ -677,6 +727,8 @@ that when setting numbers.
     **(change AR-9, armour design 7.2)**;
   - timescale: one `camp` pool becomes a `rest` pool, never the unit's
     last `camp` pool. At most one per run.
+  - No capacity or timescale offer targets a turn allowance (`prime`
+    included) **(change ARC-26, Arcanist design 7.8)**.
   - trigger: an ability gains one named extra trigger from its class's
     `triggerMenu`, never repeated; legal at any level (classes design 7.5)
     **(change CL-3)**, except an added Opening trigger record, which has
@@ -867,7 +919,9 @@ score = expected damage (capped at the target's hit points)
   otherwise. The monster AI adds the named data-weighted terms of enemies
   design 11.1: approach, exposure, opportunity cost, range, target
   preference, focus spread, Quarry, cohesion, body-block, area spread,
-  hold and leash. **(change A-6)** Every weapon verb adds a static
+  hold and leash. **(change A-6)** The Loremaster's Unpick scorer
+  term is added when the Loremaster ships (change LM-2, Arcanist design
+  9.3). Every weapon verb adds a static
   scorer value in hit-point equivalents. **(change W-4, weapons design
   15.4)**
 - **Units:** every term is in hit-point equivalents. A condition's control
@@ -943,7 +997,11 @@ effects system:
 
 Reactions hook in at named points, such as between an attack roll and the
 hit being decided. The `missedBy` hook and its order at a miss are in
-7.2's threatened-zone row **(change SH-8, Shade design 8.3)**.
+7.2's threatened-zone row **(change SH-8, Shade design 8.3)**. A
+reaction trigger kind `ownSave` hooks when the unit rolls an initial save
+against a hostile ability, with the roll known (not repeat saves,
+hazard-edge saves or concentration checks) **(change ARC-19, Arcanist
+design 7.5)**.
 
 ### 14.4 Rules in the core
 

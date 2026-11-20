@@ -311,7 +311,7 @@ its identity. Names are placeholders; theming comes later. **(agreed)**
 | Physical | Bludgeoning | Stagger: no reactions until the end of the target's next turn; shatters brittle or frozen targets |
 | Elemental | Fire | Burning: damage over time that can spread to adjacent units |
 | Elemental | Cold | Slows movement |
-| Elemental | Lightning | Arcs to an adjacent unit |
+| Elemental | Lightning | Arcs to an adjacent unit. The arc deals the rider strength as lightning, one damage event per arced unit, no crit, no rider flag, never re-arcs; an at-will's Soaked arc spread happens at most once per turn across beams (Arcanist design 8.1; ARC-14, lead's call) |
 | Elemental | Acid | Corrodes: lowers armour class and strips layers |
 | Spirit | Psychic | Breaks concentration and applies Unfocused for 1 turn; attempted on a concentrating target or one not already Unfocused |
 | Spirit | Radiant | Revealed on a hidden or invisible target; Blinded otherwise |
@@ -337,6 +337,16 @@ Poison is a condition, not a damage type. **(agreed)**
   with Puncture; it shares a reduction cap of 4 with Pitted Armour (armour
   design 9.1). **(lead's call; sizing agreed 2026-11-17, armour design
   Q3)**
+- Alembic exception, "your mix needs a spark" (Arcanist design 9.2;
+  ALM-1): a condition instance with `origin: prime` and `source: you` is
+  treated as absent by every damage part of your own at-wills (weapon
+  attacks included), so it grants no automatic rider. A rider your own
+  at-will would apply is not attempted on a target holding your inert
+  reagent where a conditions 19 cancel, override or wash row would fire
+  against it; the once-per-turn rider attempt is not spent. Your slot
+  spells, Catalyse, Overchannel, allies and consumables read it normally.
+  **(agreed 2026-11-20, Arcanist Q3; the rider sentence told plainly and
+  confirmed by the client 2026-11-20)**
 
 ### 8.3 The ladder
 
@@ -358,6 +368,17 @@ Poison is a condition, not a damage type. **(agreed)**
   and fire portions each meet their own step. **(agreed)**
 - The party follows the same rules. Armour and items grant resistances.
   **(agreed)**
+- Your own inert prime (Alembic, 8.2) gives your own at-wills no weakness
+  step and no resistance, and your at-will damage does not end it
+  (Arcanist design 9.2; ALM-1). **(agreed 2026-11-20, Arcanist Q3)**
+- Arcs and allies (Arcanist design 8.1; ARC-8): at-will arcs never reach
+  allies, the Soaked "arcs to every adjacent unit" row included (ability
+  8.2 wins); a selective cast leaves allies out of all its effects, arcs,
+  forks and forced movement included, and selective may be taken on any
+  slot cast whose arcs or forks reach an ally; you are never affected by
+  your own casts' areas, arcs and forks. This narrows how the ladder reads
+  for allies and changes no number. **(lead's call; told plainly and
+  confirmed by the client 2026-11-20)**
 
 ### 8.4 Enemy traits
 
@@ -380,7 +401,14 @@ Poison is a condition, not a damage type. **(agreed)**
   condition tag. Psychic is the one damage-type immunity allowed outside
   bosses, and the theme rule above still applies to it. **(lead's call)**
 - Specialists can buy through: an offer such as "your fire ignores
-  resistance" exists for committed builds. **(agreed)**
+  resistance" exists for committed builds. **(agreed)** "Ignores
+  resistance" applies after the ladder and the cancel rule: a final
+  Resistant reads Normal, never Weak; it covers trait and layer
+  resistance (the layer stays unbroken); never condition-based shifts
+  (Soaked's fire resistance, Frozen's shell, Resisting, Shielded); never
+  immunity; `IgnoreResistanceSources ≤ 1` per hero (Arcanist design 9.4;
+  EL-1, owed at M2). **(lead's call)** The Elementalist's Purity applies
+  it to its heart family when that aspect ships (Arcanist design 9.4).
 
 ### 8.5 Layers
 

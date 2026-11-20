@@ -521,7 +521,7 @@ class's Strength-main spread:
 | Best Dexterity melee build of each Dexterity-main class | ≥ 90% |
 | Best launcher build of each Dexterity-main class | ≥ 75% |
 | Every launcher family, trained wielder, its best class build (M2 parity set) | ≥ 60% |
-| Any build, measured as VG-12: rest-pool damage floor-averaged at the worst legal build (every legal capacity step); camp-pool damage bounded by the nova bound and `CampOptionBound` (`actionsGranted` ≤ the base option's; was `SurgeOptionBound`) instead **(change VG-12; Vanguard design 10.1; renamed by change SH-5, Shade design 17)** | ≤ 110% |
+| Any build, measured as VG-12: rest-pool damage floor-averaged at the worst legal build (every legal capacity step), Slot Recovery counted as rest power **(change ARC-3; Arcanist design 11.1)**; camp-pool damage bounded by the nova bound and `CampOptionBound` (`actionsGranted` ≤ the base option's; was `SurgeOptionBound`; scoped to non-slot, non-slotless camp pools), or for slot pools `SpellTierBound` and for slotless casts `SlotlessCastBound`, instead **(change VG-12; Vanguard design 10.1; renamed by change SH-5, Shade design 17; change ARC-2, Arcanist design 11.1, 11.2)**; the value a camp-sourced condition adds to your own at-wills is charged to the source spell's row in the parity accounting, not the at-will's (`SetupAttribution`; the static `SpellTierBound` is unchanged by it) **(change ARC-16; Arcanist design 11.1)** | ≤ 110% |
 
 **Binding requirement on the class designs (agreed):** every class whose
 main ability is Dexterity has at least one **precision feature**: a class
@@ -779,9 +779,9 @@ these steps, in this order:
    one reaction") **(change VG-4; Vanguard design 7.7)**, then a step-0b
    carried ward (Held Guard), then pool-free
    target, then pool-free allies in unit order, then
-   charges with the target's own first (3a its Tricks-paid wards, such as
-   Sworn Guard, then 3b its Parrying property) **(change SH-9; armour
-   design 10.4)**; no reaction AC bonus is offered
+   charges with the target's own first (3a its class-pool-paid wards,
+   such as Sworn Guard or Flare, then 3b its Parrying property) **(change
+   SH-9; ARC-5; armour design 10.4)**; no reaction AC bonus is offered
    after a gear-sourced disadvantage.
 6. **Hit or miss, and crit.** On a miss: Graze (7.6), then the target's
    `answeredBy[]` is written, then step 6a, then step 6b, then stop. A

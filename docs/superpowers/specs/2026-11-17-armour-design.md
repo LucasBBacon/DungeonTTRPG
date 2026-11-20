@@ -909,8 +909,9 @@ As enemies 17.1 defines it **(settled; party wording lead's call)**:
   1. the target's own pool-free reactions (Parry);
   2. allies' pool-free reactions (Interpose), in unit order;
   3. charge reactions, split (Shade design 8.3; SH-9):
-     - **3a**, the target's own Tricks-paid wards (Sworn Guard,
-       `countsAsParry: true`);
+     - **3a**, the target's own class-pool-paid wards (Sworn Guard,
+       `countsAsParry: true`; Flare, `countsAsParry: false`) (Arcanist
+       design 7.5; ARC-5);
      - **3b**, the target's own Parrying property;
      - then allies' (Guarding), in unit order.
 
@@ -944,6 +945,9 @@ As enemies 17.1 defines it **(settled; party wording lead's call)**:
   says so.
 - Graze's reaction test (weapons 7.6) already covers every AC increase in
   the window.
+- **Saves (analogue; Arcanist design 7.5; ARC-19):** at most one reaction
+  save bonus applies to any save; such a bonus (Flare II) uses the
+  reaction trigger kind `ownSave` (ability model 14.3).
 
 ### 10.5 Monster bash
 

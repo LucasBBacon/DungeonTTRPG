@@ -1,7 +1,7 @@
 # Classes, Stage 2: The Arcanist: Design
 
 Date: 2026-11-20
-Status: Draft, awaiting client approval, 2026-11-20
+Status: Approved, 2026-11-20
 Parents: `2026-11-17-classes-concepts-design.md` (classes stage 1,
 approved; the direct parent), `2026-11-18-vanguard-class-design.md` and
 `2026-11-18-shade-class-design.md` (the approved stage-2 templates;
@@ -31,18 +31,24 @@ level-3 subclass, ARC-15) together with `SetupAttribution` (ARC-16). The
 client accepted all four with Q1. The client was told plainly, before
 answering Q3, that the inert rule re-reads agreed stat model 8.2 and 8.3
 for one subclass's own at-wills. The client also said that everything
-else in the lead's proposal stands as written.
+else in the lead's proposal stands as written. With the approval request
+the client was told plainly the two items in 20.1 (ARC-8, and the inert
+rule's rider sentence extended to the conditions 19 cancel, override and
+wash rows); the client confirmed both on 2026-11-20 when it approved
+this document as a whole.
 
-Items marked **(lead's call)** were filled in by the design lead and
-become binding when the client approves this document. Items marked
+Items marked **(lead's call)** were filled in by the design lead; the
+client confirmed them all on 2026-11-20, when it approved this document
+as a whole, and they are binding. Items marked
 **(settled)** restate a rule from an approved document; **(decided)**
 marks a main-design client decision. Items marked **(change ARC-n)**,
 and the subclass and aspect ids **BN-n**, **ALM-n**, **AS-1**, **LM-n**
 and **EL-n**, amend an approved document and are listed, with the exact
 section they touch, in section 18. Items marked **(told plainly)**
-narrow or re-read agreed text and are told to the client in plain words
-with the approval request (20.1). Every item here is binding on the
-builders once the document is approved.
+narrow or re-read agreed text and were told to the client in plain
+words, before Q1 or Q3 or with the approval request (20.1); the client
+confirmed them all on 2026-11-20. Every item here is binding on the
+builders.
 
 This is **stage 2 of the classes design for the Arcanist**, the launch
 Intelligence full arcane caster: its full table for levels 1–10, its
@@ -296,7 +302,7 @@ stage-1 terms (classes 3.4) and the Vanguard and Shade designs' terms
 
 The client chose Q1–Q3 on 2026-11-20, each time the lead's
 recommendation. **(agreed)** The rest are the lead's calls, which the
-client said stand.
+client said stand and confirmed with the document on 2026-11-20.
 
 | # | Decision | Chosen | Rejected, and why |
 |---|---|---|---|
@@ -892,7 +898,7 @@ is the other rank II.
 
 | Option | Wave, level | Cost | Rules text |
 |---|---|---|---|
-| **Sculpt** (rank I) | M2, 1 | 1 Weft, declared with the cast; no action | "Choose one mode. **Selective:** allies are left out of this cast, every effect included (damage, conditions, riders, arcs, forks, forced movement); it may be taken on an area cast, or on any slot cast whose preview shows an arc or fork reaching an ally **(new lead's call)**. **Widen:** +1 radius on a burst or aura, or +1 length on a cone or line, never past the area cap for your level (at L1–6 only an r1 burst, a cone up to L3 or a line can widen). **Charge:** this Mote cast's damage part is rider-flagged; the at-will rider is still attempted at most once per turn; greyed if the part is already flagged." |
+| **Sculpt** (rank I) | M2, 1 | 1 Weft, declared with the cast; no action | "Choose one mode. **Selective:** allies are left out of this cast, every effect included (damage, conditions, riders, arcs, forks, forced movement); it may be taken on an area cast, or on any slot cast whose preview shows an arc or fork reaching an ally **(new lead's call; ARC-8, told plainly and confirmed by the client on 2026-11-20)**. **Widen:** +1 radius on a burst or aura, or +1 length on a cone or line, never past the area cap for your level (at L1–6 only an r1 burst, a cone up to L3 or a line can widen). **Charge:** this Mote cast's damage part is rider-flagged; the at-will rider is still attempted at most once per turn; greyed if the part is already flagged." |
 | **Sculpt II** | M2, 5 | 1 Weft per mode | "Choose two different Sculpt modes on one cast." Adds no dice (`RankAddsNoDice`) |
 | **Flare** (rank I) | M2, 1 | Reaction, 1 Weft | "When an attack roll is made against you, before its result applies, gain +2 AC against that attack." Joins the armour 10.4 window at **step 3a** as the target's own class-pool-paid ward (ARC-5; `countsAsParry: false`), before step 3b (the Parrying property). Staff Parry (step 1, pool-free) is evaluated first. One reaction AC bonus per attack. Skipped after a gear-sourced disadvantage (Supple) |
 | **Flare II** | M2, 8 | Reaction, 1 Weft | "Flare may instead be taken when you roll an **initial save** against a hostile ability, with the roll known: +2 to that save." Same reaction. Not on repeat saves, hazard-edge saves or concentration checks. At most one reaction save bonus per save. Needs the reaction trigger kind `ownSave` (ARC-19). The package's Insulate folded into a rank, so there is one save ward |
@@ -1225,7 +1231,8 @@ it).
   from any slot spell's hit on a Soaked target still reaches adjacent
   allies unless the cast is selective (Sculpt allows selective on such a
   cast, 7.5).
-- **You and your own casts (new lead's call):** you are never affected
+- **You and your own casts (new lead's call; part of ARC-8, told
+  plainly and confirmed by the client on 2026-11-20, 20.1):** you are never affected
   by your own casts' areas, arcs and forks (damage, conditions, riders,
   forced movement), as Shockwave already states; Tincture is the one way
   to Soak yourself. The preview and the friendly-fire lines count you as
@@ -1257,7 +1264,8 @@ it).
   re-arcs. The caster picks the arced unit for an ordinary arc (the
   scorer for companions); on a Soaked target it reaches every adjacent
   unit. At-will arcs skip allies (ARC-8); a selective cast leaves allies
-  out of its arcs and forks (SP-6).
+  out of its arcs and forks (SP-6) (ARC-8 told plainly and confirmed by
+  the client on 2026-11-20, 20.1).
 - **Upcasts (SP-2):** checked at the higher tier's arrival level.
   Because L1 and L3 share a reference (7.9 dpr) and L5 and L7 share one
   (17.3), area upcasts skip the flat tier. Validator
@@ -1735,7 +1743,8 @@ second prime per round.
   > Your slot spells, Catalyse, Overchannel, every ally's hit and
   > consumables read it normally.
   - **Rider application (new lead's call, extending ALM-1 by one
-    sentence; told plainly with the approval request, 20.1):** a rider your own at-will would apply is **not
+    sentence; told plainly with the approval request and confirmed by
+    the client on 2026-11-20, 20.1):** a rider your own at-will would apply is **not
     attempted** on a target holding your inert reagent when a conditions
     19 cancel, override or wash row would fire between that rider and
     the reagent (Burning or Smouldering against your Soaked; Corroded
@@ -2599,13 +2608,17 @@ tested, not a content check.
 
 ## 18. Changes to approved documents
 
-Applied when the client approves this document. Each change names the
-exact section it touches. The client's Q1–Q3 answers (2026-11-20)
-approve the rows that name a question; rows marked "told plainly" were
-accepted with Q1 or are told with the approval request (20.1); the rest
-are confirmed with the document. **This document edits no parent
-document itself**; the rows are applied by the owners when it is
-approved **(lead's call)**.
+Applied on 2026-11-20, when the client approved this document. **This
+document edits no parent document itself**; the rows are applied by the
+owners of the sections they touch **(lead's call)**, and the rows owed by
+other owners (19; LM-0 and EL-1 are owed at M2 whatever ships, 15) are
+recorded as such. The unlock-only rows (LM-1 and LM-2 for the
+Loremaster, EL-2 for the Elementalist) are recorded now and apply only
+when that aspect ships. Each change names the exact section it touches.
+The client's Q1–Q3 answers (2026-11-20) approve the rows that name a
+question; rows marked "told plainly" were accepted with Q1 or told with
+the approval request (20.1) and confirmed by the client on 2026-11-20;
+the rest were confirmed with the document on 2026-11-20.
 
 **Narrowings recorded inside this design (no approved text changes;
 recorded in classes 18):**
@@ -2629,7 +2642,7 @@ recorded in classes 18):**
 | ARC-5 | Armour 10.4, "Candidate order" step 3a; Shade design 8.3 (the SH-9 definition) | Step 3a becomes "the target's own class-pool-paid wards" (Sworn Guard, `countsAsParry: true`; Flare, `countsAsParry: false`), both before step 3b | Lead |
 | ARC-6 | Ability 7.3, policy filters and policy classes; ability 11.3 (**agreed**, reading only) | New filter `reserveForRestTool` (reserve 1 Weft while a Knit use is left; a pre-tick that protects an ally ignores it); a new policy class **cast-option defaults** (visible, shown ticked, the player can untick them; static predicates only); the reading that these are not suggestions under 11.3 | Lead; **told plainly, accepted with Q1 (2026-11-20)** |
 | ARC-7 | Conditions 10.1 (verb-sourced collisions) | Gust and Reel count as verb-sourced for collisions, with the source-held `movedByYou` round count instead of the shared verb mark | Lead |
-| ARC-8 | Ability 8.2 (at-wills never hit allies); stat 8.3 ladder (**agreed**); conditions 18.6 Soaked "Effect" line and 19 "ladder" Soaked row | At-will arcs never reach allies (8.2 wins); a selective cast leaves allies out of all its effects, arcs, forks and forced movement included (SP-6), and selective may be taken on any slot cast whose arcs or forks reach an ally; you are never affected by your own casts' areas, arcs and forks | Lead; **told plainly with the approval request (20.1)** |
+| ARC-8 | Ability 8.2 (at-wills never hit allies); stat 8.3 ladder (**agreed**); conditions 18.6 Soaked "Effect" line and 19 "ladder" Soaked row | At-will arcs never reach allies (8.2 wins); a selective cast leaves allies out of all its effects, arcs, forks and forced movement included (SP-6), and selective may be taken on any slot cast whose arcs or forks reach an ally; you are never affected by your own casts' areas, arcs and forks | Lead; **told plainly with the approval request (20.1); confirmed by the client 2026-11-20** |
 | ARC-9 | Ability 8.1, area cap | Area ceiling 49 squares at L7–10 | Lead |
 | ARC-10 | Classes 8.5, "At-wills" bullet | Mote = 1d10 + Int, two beams from L5; Gust a line L4 push 1 | Lead |
 | ARC-11 | Classes 8.5, Pools bullet, Weft sub-bullet (*illustr.*) | Weft 3 / 4 / 5 / 6 at L1 / 5 / 7 / 9; Sculpt II at 5; Flare II at 8 | Lead |
@@ -2655,7 +2668,7 @@ recorded in classes 18):**
 | BN-2 | Conditions 18.2; ability 9.5 | Belay | Lead |
 | BN-3 | Vanguard design VG-11, `FlagNotCondition` list | `slippedFrom`, `boundBy`, `cinched` | Lead |
 | BN-4 | Ability 14, cost timings | An own-turn, no-action Weft spend that marks a target | Lead |
-| ALM-1 | Classes 8.5, Alembic bullet ("An Oiled-plus-fire chain needs a slot"); **stat 8.2 and 8.3 (agreed)**; conditions 18.6 Soaked and Oiled rows and 19 ladder, cancel and override rows (readings) | The inert rule widened from Oiled-plus-fire to every prime and every at-will reading (9.2), with the rider sentence: your at-will's rider is not attempted where a cancel, override or wash row would fire against your inert reagent (lead's call, inside the agreed rule) | **Client (agreed 2026-11-20, Q3; told plainly)**; the rider sentence told plainly with the approval request (20.1) |
+| ALM-1 | Classes 8.5, Alembic bullet ("An Oiled-plus-fire chain needs a slot"); **stat 8.2 and 8.3 (agreed)**; conditions 18.6 Soaked and Oiled rows and 19 ladder, cancel and override rows (readings) | The inert rule widened from Oiled-plus-fire to every prime and every at-will reading (9.2), with the rider sentence: your at-will's rider is not attempted where a cancel, override or wash row would fire against your inert reagent (lead's call, inside the agreed rule) | **Client (agreed 2026-11-20, Q3; told plainly)**; the rider sentence told plainly with the approval request (20.1) and confirmed by the client 2026-11-20 |
 | ALM-3 | (folded into ARC-2) | `PayoffBound` | Lead |
 | ALM-4 | Conditions 17.2, instance fields | Instance field `origin: prime` | Lead |
 | ALM-5 | Ability 9.3, note | Prime is the hit's rider (gate and slot), offered once the hit is known, outside the at-will once-per-turn bound | Lead |
@@ -2664,8 +2677,8 @@ recorded in classes 18):**
 | ALM-8 | Ability 7.3 (with ARC-6) | `castDefaults.prime` as a static predicate (9.2: no displaced rider, a payer actually available, own at-wills excluded, once per fight solo, per-pair default reagent) | Lead |
 | ALM-9 | Classes 8.5, Alembic bullet ("a cantrip hit makes its target Soaked or Oiled") | Priming may also ride the Alembic's slot spells, Overchannel and named triggers (9.2); still once per round, still a Weft option | Lead |
 | AS-1 | Classes 7.3, the "aspects that change one rule" bullet | The aspect shape: one rule, the full ladder | Lead |
-| LM-0, LM-1, LM-2 | Enemies (Study persistence and difficulty); enemies 9.3 (`cooldown.delay`); ability 11, 13 (scorer term) | Study persistence; `cooldown.delay`; the scorer term | Enemies owner / lead |
-| EL-1, EL-2 | Stat 8.4; the aspect | The meaning of "ignores resistance"; the heart family is not the Mote key | Lead |
+| LM-0, LM-1, LM-2 | Enemies (Study persistence and difficulty); enemies 9.3 (`cooldown.delay`); ability 11, 13 (scorer term) | Study persistence; `cooldown.delay`; the scorer term (LM-0 owed at M2; LM-1 and LM-2 unlock-only, applied when the Loremaster ships) | Enemies owner / lead |
+| EL-1, EL-2 | Stat 8.4; the aspect | The meaning of "ignores resistance"; the heart family is not the Mote key (EL-1 owed at M2 whatever ships; EL-2 unlock-only, applied when the Elementalist ships) | Lead |
 
 **Not changed (checked):** DH 21.1 step 6 (it already reads static keys;
 variants are reports); armour 11 item 2 and AR-20 (11 stands); the HP
@@ -2719,6 +2732,10 @@ may raise it to two" in ability 6.5 finds the Arcanist exclusion.
 
 ## 20. Open items for the client
 
+None. Approved by the client on 2026-11-20. The future items in 20.2,
+which come back only if a report or a later design triggers them, and
+the naming pass remain future items.
+
 ### 20.1 This document
 
 The three questions this design raised were answered on 2026-11-20
@@ -2745,16 +2762,19 @@ The three questions this design raised were answered on 2026-11-20
   stat 8.2 and 8.3 for one subclass's own at-wills. Rejected: the
   reagent restriction.
 
-**To be told plainly with the approval request (new lead's call):**
+**Told plainly with the approval request (new lead's call); confirmed
+by the client on 2026-11-20:**
 ARC-8 reconciles agreed texts: ability 8.2's "at-wills never hit allies"
 wins over the Soaked "arcs to every adjacent unit" row for at-wills, and
 a selective cast leaves allies out of every effect, arcs and forced
 movement included, and selective may be paid on a single-target slot
 cast whose arc on a Soaked target would reach an ally (unselected, that
 arc still reaches allies as the row says). It narrows how the agreed
-stat 8.3 ladder row reads for allies; it changes no number.
+stat 8.3 ladder row reads for allies; it changes no number. With it,
+you are never affected by your own casts' areas, arcs and forks (8.1).
 
-Also told plainly: the inert rule's rider sentence (9.2; ALM-1) applies
+Also told plainly and confirmed by the client on 2026-11-20: the inert
+rule's rider sentence (9.2; ALM-1) applies
 the agreed Q3 rule to condition-to-condition rows as well. A rider your
 own at-will would apply is not attempted where a conditions 19 cancel,
 override or wash row would fire against your inert reagent, so the bolt
@@ -2763,7 +2783,8 @@ conditions 19 rows for one subclass's own at-wills, as Q3 already does
 for the damage rows, and changes no number.
 
 **New lead's calls in this revision** (beyond the proposal the client
-said stands; listed so the approval covers them):
+said stands; listed so the approval covers them; confirmed by the
+client with the document on 2026-11-20):
 - the escalation's procedure (5.4): when the novice row is read, that
   the class mean escalates and per-row misses get per-row changes, and
   one lever at a time with a rerun after each;
@@ -2779,7 +2800,8 @@ said stands; listed so the approval covers them):
   preview line (10.2).
 
 **Further new lead's calls from the check round** (each makes agreed or
-standing text buildable; none changes a client decision):
+standing text buildable; none changes a client decision; confirmed by
+the client with the document on 2026-11-20):
 - one spell-card model, the draw dealing variants, with a relaxation
   order and `DrawSatisfiable` (7.3, 7.7); Streak a full template (8.4);
 - `boundModel`, `AreaUpcastSkipsFlatTier` and the `VariantIsScroll`
@@ -2809,7 +2831,8 @@ standing text buildable; none changes a client decision):
 - the starter rule disables a no-damage start; the Opposed starters
   (7.7, 7.14); Knit has no hero auto-policy (7.14).
 
-The document is awaiting the client's approval as a whole.
+The client approved the document as a whole on 2026-11-20, including
+every lead's call and both told-plainly items above.
 
 ### 20.2 Future items triggered by reports
 
@@ -2912,7 +2935,7 @@ on Dazed, pip-aware defaults.
 | 10 | NameCollision gaps | ARC-20 wand exception; ARC-1 places listed; internal collisions renamed |
 | 11 | Rod verb dead | Gust as a line L4 |
 | 12 | Source lists | ARC-23 |
-| 13 | Arcs and allies | ARC-8 (told plainly, 20.1), ARC-14 |
+| 13 | Arcs and allies | ARC-8 (told plainly, 20.1; confirmed by the client 2026-11-20), ARC-14 |
 | 14 | Handoffs | Belay (Binder) and Afterhold (base), ARC-28, BN-2 |
 | 15 | Armour 10.4 step 3a wording | ARC-5 with Shade 8.3 |
 | 16 | Depth gates misread | Claim removed; Rime Lance note updated (ARC-24) |

@@ -121,7 +121,7 @@ The client also answered three questions **(agreed)**:
 |---|---|---|
 | `turns:N` | Wearer clock, counted by the test in 5.2. The own-turn rule (5.2) applies to hard conditions. | Most conditions |
 | `untilSourceTurnStart` / `untilSourceTurnEnd` | A window the source opens, on the source's clock (5.6). | Marks, guards, Dodging (with the wearer as source) |
-| `saveEnds {save, cap}` | A repeat save at the end of the wearer's turn, against the difficulty recorded at application. The cap, in wearer turns, is mandatory. The save may not be one the condition itself auto-fails. | Hard control on enemies; strong mind effects |
+| `saveEnds {save, cap, graceTurns?}` | A repeat save at the end of the wearer's turn, against the difficulty recorded at application. The cap, in wearer turns, is mandatory. The save may not be one the condition itself auto-fails. With `graceTurns: N`, the repeat save is first rolled at the end of the wearer's Nth turn, so the instance lasts at least N turns, never past the cap **(change BN-1; Arcanist design 9.1, Fastness)**. | Hard control on enemies; strong mind effects |
 | `charges:N {on, fallback}` | Used up by a named event. The fallback is mandatory and may be any duration model except `charges`; it is validated against the token band. | Tokens |
 | `decay` | The value acts at turn start, then drops by 1 at the end of each wearer turn; the condition ends at 0. It lasts at most `value` turns, so validation caps the starting value at the tier's maximum turns. | Envenomed |
 | `trigger {event, cap}` | Ends on an event, optionally with a cap in wearer turns. | Hidden, Prone, Grappled, Asleep |
@@ -698,7 +698,11 @@ on an attack that already has disadvantage from another source.
   the one verb-only exception, Vanguard design 8.3); verb-sourced movement
   moves a unit at most once per round (weapons design 7.2 rule 4). Armour
   verb signatures that move a target (Bull Rush) are verb-sourced
-  **(change AR-52; armour design 14.4)**.
+  **(change AR-52; armour design 14.4)**. The Arcanist's Gust and Reel
+  count as verb-sourced for collisions, but use the source-held
+  per-target round count `movedByYou` instead of the shared verb mark, so
+  they never block an ally's verb push that round **(change ARC-7;
+  Arcanist design 7.2, 9.1)**.
 - **Ally swap (change VG-22; M2 add-on, pending the lead's ruling):** a
   unit may swap places with a willing, non-Downed adjacent ally; for the
   ally this is 1 square of forced movement, not a teleport or a speed
@@ -908,7 +912,8 @@ immunity (the `morale` tag allows none). `mindless` implies `fearless`
   a condition whose rank is at or above the threshold would land, by any
   route: a failed save, a successful skill check, or an automatic
   weak-target rider. The test is static data, so the rules core never runs
-  the AI to decide it. **(change C2)**
+  the AI to decide it. **(change C2)** Restrained's `controlRank` is at or
+  above Dazed's **(change ARC-17; Arcanist design 8.9)**.
 - **Unyielding** is shown from the start, because it is a basic rule (stat
   model 7.2):
   - after the pips are gone, a hard condition becomes its downgrade (map in
@@ -1101,7 +1106,9 @@ validated against the tier band for the side it targets (5.3).
   `environment`), `recordedDifficulty?`, `sustainedBy?`, `markedHard`
   (lockout), `binding?` with its breakers, `damageType?` and `amount?`
   (Condemned, Exposed, Resisting), `hazardId?` (Teetering), `charges?`,
-  `pendingBurst?`, `extraSaveUsedThisRound`.
+  `pendingBurst?`, `extraSaveUsedThisRound`, `origin?` (`prime`: set by
+  the Alembic's Prime and read by its inert rule) **(change ALM-4;
+  Arcanist design 9.2)**.
 - **Per unit, per fight:** `hardTurnsLostThisFight`, aura immunities,
   composure and Challenged immunity timers, Rally used, the same-source
   Frighten penalty.
@@ -1127,7 +1134,9 @@ offensive    = T − target's best score with the condition (computed, minimum 0
 setup        = payoff ability's added score × allies with a known payoff acting before expiry
 fail20       = the condition's fail chance, out of 20
 roundsLeft   = estimated fight length (ability model 13) − current round, minimum 1
-effTurns20   = 20 × min(turns, roundsLeft); saveEnds: 20 + (min(cap, roundsLeft) − 1) × fail20
+effTurns20   = 20 × min(turns, roundsLeft); saveEnds: 20 + (min(cap, roundsLeft) − 1) × fail20;
+               saveEnds with graceTurns g: 20 × min(g, roundsLeft) + max(0, min(cap, roundsLeft) − g) × fail20
+               (change BN-1; Arcanist design 9.1)
 term         = (T × denyPct + 100 × (defensive + offensive + setup)) × effTurns20 × fail20 / 40000
 ```
 
@@ -1267,7 +1276,21 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Intensity: one per unit **(settled)**.
   - Duration: ends on downed or incapacitated, the psychic rider, a failed
     check, a new concentration effect, or by choice **(settled)**. Linked
-    instances end with `concentrationBroken`.
+    instances end with `concentrationBroken`, except under two handoffs:
+    - **Afterhold** (Arcanist trigger; barred for the Binder): when the
+      caster ends concentration voluntarily, on its own turn, by starting
+      another concentration effect, each `sustained` minor or fetter-type
+      major instance (a major that denies no turn part and is not hard:
+      Restrained and Blinded at M2) of the ended effect becomes `turns:1`
+      (5.2 test), never past its remaining `max`. Never Dazed or other
+      turn-part majors, never hard instances, never when concentration
+      ended by damage, Downed, Incapacitated or Unfocused **(change
+      ARC-28; Arcanist design 10.3)**.
+    - **Belay** (Binder passive): when the Binder's concentration ends
+      for any reason except its own `max` running out, each fetter it
+      sustains on a non-Unyielding hostile becomes unlinked `turns:1`,
+      marked `belayed`, never re-sustained or lengthened **(change BN-2;
+      Arcanist design 9.1)**.
   - Interactions: Unfocused and Shaken give disadvantage on its checks.
 - **Grappling** — holder state · **M1**
   - Effect: linked to one Grappled unit. It can drag it: each square
@@ -1570,7 +1593,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Sources: webs (including web squares, 11.2), Entangle-shaped spells
     (SRD), nets (monster and trap sources; the party net is a Later
     consumable, consumables design 16.2) **(change CN-16)**, constrictor
-    coils.
+    coils; Arcanist spells Snaring, Shackle and Cordon **(change ARC-23;
+    Arcanist design 8.2, 8.5, 9.1)**.
   - Interactions: overrides a stored Rooted; Reflex disadvantage sets up
     areas; speed 0 gained mid-move ends the move (11.2).
 - **Rooted** — major · Later
@@ -1795,29 +1819,41 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
 
 - **Soaked** — minor · **M2**
   - Effect: weak to cold and lightning; resistant to fire; lightning arcs
-    from a hit on it reach every adjacent unit (arcs never re-arc).
+    from a hit on it reach every adjacent unit (arcs never re-arc), except
+    that an at-will's arcs never reach allies, a selective cast leaves
+    allies out of its arcs and forks, and a caster is never affected by
+    its own casts' arcs **(change ARC-8; Arcanist design 7.2, 8.1)**.
   - Intensity: binary.
   - Duration: `turns:3`. Ends on fire damage (that hit attempts no Burning
     rider) or a tonic. A ring-shifted fire part ends Soaked and attempts no
     Burning rider, as any fire hit **(change TK-25; trinkets design 9.4)**.
   - Sources: water monsters and spells; water flasks, which can be thrown
-    at an ally to put out Burning; water squares (11.2).
+    at an ally to put out Burning; water squares (11.2); the Arcanist's
+    Drench, Undertow, Prime and Tincture **(change ARC-23; Arcanist design
+    8.2, 8.4, 9.2)**.
   - Interactions: cancels Burning and Smouldering; overrides Corroded and
     Conspicuous; Chilled from a `freezing` source becomes Frozen (fallback
     Chilled), which consumes Soaked.
+  - Reading (change ALM-1; Arcanist design 9.2): an instance with
+    `origin: prime` is inert to its source's own at-wills (19, note
+    below the table).
 - **Oiled** — minor · **M2**
   - Effect: weak to fire until a fire hit lands. That hit takes +half,
     applies Burning automatically one band higher, and ends Oiled.
   - Intensity: binary.
   - Duration: `turns:3`; shakeOff or a tonic.
   - Sources: oil flasks, slimes; oil-slick squares (11.2), which ship with
-    it. Only a fire hit pays it out; ticks never do (6.8).
+    it; the Arcanist's Prime and Wide Mix **(change ARC-23; Arcanist design
+    9.2)**. Only a fire hit pays it out; ticks never do (6.8).
   - Interactions: with Soaked, fire is normal and no automatic Burning
     lands; the fire hit that pays out Oiled also burns away an oil square
     under the unit (11.4). A ring-shifted fire part (trinkets design 9.4)
     does not pay out Oiled: no +half, no band-higher Burning, Oiled stays
     and no oil square burns; Burning lands as an ordinary automatic rider
     at its normal band **(change TK-25)**.
+  - Reading (change ALM-1; Arcanist design 9.2): an instance with
+    `origin: prime` is inert to its source's own at-wills (19, note
+    below the table).
 - **Frozen** — hard · **M2**
   - Effect: implies Incapacitated; an ice shell (a condition ladder shift,
     not a layer, C7) resists every type except fire and bludgeoning and is
@@ -1828,7 +1864,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     +half and no more; Stagger lands automatically) or when Corroded is
     applied. Steeled follows.
   - Sources: transform only, from a limited `freezing` cold ability on a
-    Soaked or Chilled unit; the transform consumes Soaked or Chilled. The
+    Soaked or Chilled unit (the Arcanist's Rime Lance and Deep Freeze
+    **(change ARC-23; Arcanist design 8.3, 8.4)**); the transform consumes
+    Soaked or Chilled. The
     depth gates apply at runtime (7.2): on floor 1 a monster's freezing
     attack on a Soaked hero gives Chilled.
   - Interactions: suppresses Bleeding; freezing an ally protects it (only
@@ -2471,7 +2509,7 @@ Record of the catalogue's shaping. **(lead's call)**
 | damage end | Breaker type | Restrained, Rooted | Ends (the unit's condition, never a web square) |
 | damage end | Any damage | Asleep | Wakes after the damage resolves |
 | apply end | Corroded applied | Frozen | Ends; also strips one layer |
-| ladder | Soaked | Cold, lightning weak; fire resistant | Cold and lightning riders automatic; lightning arcs to all adjacent |
+| ladder | Soaked | Cold, lightning weak; fire resistant | Cold and lightning riders automatic; lightning arcs to all adjacent (at-will arcs skip allies; a selective cast leaves allies out; never the caster) **(change ARC-8)** |
 | ladder | Soaked + Oiled | Fire | Normal: no automatic Burning |
 | ladder | Exposed or Brittle + Resisting or Shielded | | Net normal |
 | ladder | Empowered + Shielded | | Net normal |
@@ -2489,6 +2527,18 @@ Record of the catalogue's shaping. **(lead's call)**
 | combo | Staggered | Opportunity attacks, Guarded, Riposting, Challenged and Harried punishments | All switched off |
 | combo | Distracted + Nauseated | | Composite lockout: treated as hard, including the depth gates and the per-fight cap |
 | combo | Unfocused after the psychic rider | | Concentration broken and cannot restart |
+
+**Reading, the Alembic's inert rule (change ALM-1; Arcanist design 9.2):**
+a Soaked or Oiled instance with `origin: prime` and `source: you` is
+treated as absent by every damage part of your own at-wills (weapon
+attacks included): the Soaked and Soaked + Oiled ladder rows, the Soaked
+arc spread and the Oiled payout do not apply, and your at-will damage
+does not end it. A rider your own at-will would apply is not attempted
+on that target when a cancel, override or wash row (Burning ↔ Soaked,
+Smouldering ↔ Soaked, Soaked over Corroded) would fire between the rider
+and the reagent; the at-will's once-per-turn rider attempt is not spent.
+Your slot spells, allies and consumables read the rows normally, and a
+reagent re-applied by another source is no longer yours.
 
 ## 20. Validation, testing and simulator
 

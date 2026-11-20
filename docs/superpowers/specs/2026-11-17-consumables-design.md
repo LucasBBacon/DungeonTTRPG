@@ -1331,6 +1331,16 @@ excepted). Effects use user difficulty and the item spell attack.
 The names in brackets are the SRD shapes each entry adapts; they are
 authoring references, never shown in game (section 17).
 
+**`classTags` (the coverage-or-cut audit, closed; Arcanist design 8.10;
+change ARC-24):** `arcanist`: Fan of Cinders, Shockwave, Grasping Roots,
+Frost Shard, Scorching Rays, Fireball, Lightning Line, Slowing, Icefall;
+`arcanist` (+`herald` if the Herald lists it): Blinding Flash, Unweaving;
+`herald`: Mending Word; `herald`, **Later** if the Herald declines:
+Trembling Word, Terror; `herald` if the Herald's stage 2 claims it, else
+**Later**: Jarring Whispers, Guiding Radiance, Withering Touch, Blight
+(Blight's Later home: the Rootwarden). Unclaimed Herald-dependent items
+default to Later.
+
 **Later scrolls** (each waits for its condition or rule): Blessing (Bless,
 Blessed; t1); Slumber (Sleep, Asleep; t1); Holding (Hold Person, Held;
 t2); Hushing (Silence on a unit, Silenced; t2); Flicker Step (Misty Step;
@@ -1352,7 +1362,11 @@ channel; floor 2+.
 | **Wand of Sparks** (Magic Missile; our types have no force) [arcane] | (T1, 2) = 2, U, 40 coin | 3 / 4 / 5 lightning darts by user band, 1d4+1 each, split among visible enemies within 12; no attack roll, no save; not rider-flagged; each dart is its own damage event | Best: finishing minions; breaking concentration |
 | **Wand of Outlining** (Faerie Fire) [arcane, divine, primal] | (T1, 2) = 2, U, 40 coin | Burst r1 within 12, not selective: Reflex save or Revealed, 2 turns | Best: ambush floors. Reveals hidden allies too |
 | **Wand of Snaring** [primal] | (T1, 2) = 2, U, 40 coin | One enemy within 8: Reflex save or Restrained (cords; breakers slashing, fire), `turns:2`, no concentration | Never on floor-1 carriers |
-| **Wand of Rime Lance** [arcane, primal] | (T2, 2) = 3, R, floor 3+, 60 coin | Item spell attack, range 10: cold 3d8, rider-flagged; `freezing` **only on a Soaked target** (Soaked + Chilled → Frozen, fallback Chilled; Steeled, depth gates and resolve apply); otherwise Chilled | The only repeatable hard-capable item: `usableBy.monster: false` in M2; freeze rate reported |
+| **Wand of Rime Lance** [arcane, primal] | (T2, 2) = 3, R, floor 3+, 60 coin | Item spell attack, range 10: cold 3d8, rider-flagged; `freezing` **only on a Soaked target** (Soaked + Chilled → Frozen, fallback Chilled; Steeled and resolve apply (ARC-24; Arcanist design 8.10)); otherwise Chilled | The only repeatable hard-capable item (the class Rime Lance also exists from Arcanist L3, Arcanist design 8.10; ARC-24): `usableBy.monster: false` in M2; freeze rate reported |
+
+**`classTags` (Arcanist design 8.10; change ARC-24):** `arcanist`: Wand
+of Sparks, Wand of Snaring, Wand of Rime Lance; `arcanist` (+`herald` if
+the Herald lists it): Wand of Outlining.
 
 ### 16.6 Talisman
 
@@ -1604,7 +1618,8 @@ derived (18.2).
    `minFloor` (section 15).
 8. Scrolls: rarity = tier; tier ≤ `scrollFloorCap[minFloor − 1]`, and
    the array's length equals the floor count; `classTags` non-empty and
-   resolving to launch class ids (no `any`, no tradition tags in M2); the
+   resolving to launch class ids (no `any`, no tradition tags in M2; the
+   M2 mapping is Arcanist design 8.10, ARC-24); the
    spell is not on the never-list (13.7); healing scrolls exclude the
    `camp` channel and are `usableBy.monster` false; monster-usable scrolls
    pass the 6.4 guards and items 19.1 rule 7. (CN-20 was approved on

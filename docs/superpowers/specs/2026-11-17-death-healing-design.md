@@ -707,7 +707,9 @@ lethal to you" (Volatile kill preview, enemies 14).
   party-only.
 - Conditions 10.4 ("no single failed save or entry is lethal to the hero")
   stays as a hazard-design guideline under the new floor. Trap content is
-  owned by dungeon generation (conditions 11.6).
+  owned by dungeon generation (conditions 11.6). Moving an ally into a
+  hazard square or over a hazard edge asks for confirmation (17.7;
+  Arcanist design 7.14, ARC-25).
 - The floors apply after temporary HP and **before** the save chain
   (20.3), so the phial is never spent on floored damage.
 
@@ -1307,6 +1309,13 @@ that could be lethal.
 A party action whose maximum damage could kill the hero needs an explicit
 confirmation. The suggester never proposes one (extends consumables 14.8
 and ability 8.2).
+
+Separately, a party action that would move an ally into a hazard square
+or over a hazard edge asks for confirmation, lethal or not (10.4 is the
+related hazard section); the lethal test above is unchanged (Arcanist
+design 7.14, ARC-25). This confirmation pattern is also the model for
+the Arcanist's last-slot confirmation, a confirmation of the player's own
+action (Arcanist design 5.2, ARC-13).
 
 ### 17.8 Plates
 

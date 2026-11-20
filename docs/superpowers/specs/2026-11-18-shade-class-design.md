@@ -859,6 +859,9 @@ outside parity under VG-12, and the step also raises the camp share.
   action against the reference encounter; `actionsGranted` ≤ the pool's
   base option (Surge 1, **Vanish 0**); areas ≤ 25 squares, selective
   only; no hard control; forced movement ≤ 3; M1/M2 conditions only.
+  `CampOptionBound` is scoped to non-slot, non-slotless camp pools;
+  slot pools are bounded by `SpellTierBound` and slotless casts by
+  `SlotlessCastBound` instead (ARC-2; Arcanist design 8.1, 11.2).
 
 **Catalogue: the Vanish row**
 
@@ -1544,12 +1547,13 @@ none is held):
 - **I (L3):**
   - **Guard:** when a hostile's melee attack roll targets you, with the
     roll known, +2 AC against that roll. It is a window candidate at the
-    new armour 10.4 **step 3a** (the target's own Tricks-paid wards),
-    ahead of **3b**, the target's own Parrying property, and then allies'
-    charges (SH-9), with `countsAsParry: true`. Every window rule
-    applies: one reaction AC bonus per roll **(settled)**. Pry Deep
-    ignores it. It is unavailable while you are Staggered. A miss it
-    causes sets Answer.
+    new armour 10.4 **step 3a** (the target's own class-pool-paid wards;
+    the Arcanist's Flare joins it with `countsAsParry: false`, ARC-5,
+    Arcanist design 7.5), ahead of **3b**, the target's own Parrying
+    property, and then allies' charges (SH-9), with `countsAsParry: true`.
+    Every window rule applies: one reaction AC bonus per roll
+    **(settled)**. Pry Deep ignores it. It is unavailable while you are
+    Staggered. A miss it causes sets Answer.
   - **Window order is intended (lead's call):** pool-free candidates
     come first, as armour 10.4 orders them, so an ally's Interpose that
     fires closes the window before Sworn Guard is offered. That miss is
@@ -2319,11 +2323,11 @@ recorded in classes 18 by SH-23's row):**
 | SH-2 | Classes 8.4, "Triggers" sub-bullets 1–4 and the Vanish bullet (lead's calls on the CL-8 basis) | Trigger 1 splits into Unready (open; "has not started a turn this fight") and Surprised (stealth); trigger 3 renamed Beset; tier as data; the Vanish carry counts as Hidden for Opening; consumption wording ("first Dexterity-rolled weapon hit on your own turn to which you apply Opening"); Answer narrowed to "attack roll" | **Client (agreed, Q1)** for the split, the rename and the carry; Lead for the wording |
 | SH-3 | Vanguard 7.9 `TurnAllowanceNoDamage` (lead's call); weapons 6.6 and 7.5 step 8 (lead's call) | Allow-list `damage.extraDice.opening` and `damage.flat.opening` (named apart from the weapons 6.5 Precision term, which is not allow-listed); new `OpeningCeiling` and `StrikeOptionCeiling` with tuning tables; in step 8, Opening's dice go after Exploit dice and before crit doubling, and the flat +2 goes with the flat terms after doubling | Lead |
 | SH-4 | Classes 3.4 (limited-ability bullet), 7.5 (counting); Vanguard 7.9 / VG-10 (lead's call) | "A per-rest counter on one named pool's record, spent by records tagged with its one declared tag, whether or not they spend from the pool, is a frequency limit and counts 0; it is not a named pool"; `strikeLimit` with the level-4 signature pip; the static `HideLimit` with its waiver list; `costByTrigger` and `costWaivers` (a waiver is not a refill) | Lead |
-| SH-5 | Vanguard 7.3 `SurgeOptionBound`; weapons 6.4, parity targets, "Any build ≤ 110%" row (the VG-12 text); classes 6.4, single-target damage cap cell; classes 12.2, validator list (lead's calls) | Renamed and generalised to `CampOptionBound` (`actionsGranted` ≤ the base option's) in every approved document | Lead |
+| SH-5 | Vanguard 7.3 `SurgeOptionBound`; weapons 6.4, parity targets, "Any build ≤ 110%" row (the VG-12 text); classes 6.4, single-target damage cap cell; classes 12.2, validator list (lead's calls) | Renamed and generalised to `CampOptionBound` (`actionsGranted` ≤ the base option's) in every approved document; scoped to non-slot, non-slotless camp pools beside `SpellTierBound` and `SlotlessCastBound` by ARC-2 (Arcanist design 11.2) | Lead |
 | SH-6 | Weapons 7.5 (new step 8a, a marker only; step 8's "then any concentration check" points to DH 20.3); ability 14.3; DH 20.3 (the Duck offer between steps 3 and 3a; new step 3a; step 3's and step 8's "concentration uses step 3's value" read the step-3a value) (lead's calls) | The Duck marker, offer and halving step (7.4) | Lead |
 | SH-7 | Ability 7.3, policy filters (lead's call) | `bigHit` (on the DH 20.3 step-3 total), `noAllyHarm`, `preferStealthTarget`, `holdCarryOnOverkill`, `ifOpeningUnavailable`; `whilePoolAtLeastHalf` read for a pool with a strike counter | Lead |
 | SH-8 | Weapons 7.5 step 6/6a, 8, 18.4; ability 7.2 threatened-zone row, 14.3 step 6; VG-18/20 (lead's calls) | `missedBy` and its order at a miss (Graze → `answeredBy` → 6a → the hook, re-checked); `sameReactionFollowUp` (same reaction after a reaction-spending or carried ward; spends the reaction after a fill); the `onParrySuccess` definition; the Riposte echo ruling | Lead; the Sworn Guard route **client (agreed, Q3)** |
-| SH-9 | Armour 10.4, "Candidate order" and "Window algorithm" (lead's call) | Step 3 split: **3a** the target's own Tricks-paid wards (Sworn Guard, `countsAsParry`), **3b** the target's own Parrying property, then allies' charges; Blade Dance as a step-0 fill; a **step-0b** carried ward (Held Guard) that spends nothing, is exempt from the "no reaction left" skip, inherits the other skips and counts as the one reaction AC bonus | Lead; **client (agreed, Q3)** for the ward |
+| SH-9 | Armour 10.4, "Candidate order" and "Window algorithm" (lead's call) | Step 3 split: **3a** the target's own class-pool-paid wards (Sworn Guard, `countsAsParry: true`; Flare, `countsAsParry: false`; ARC-5, Arcanist design 7.5), **3b** the target's own Parrying property, then allies' charges; Blade Dance as a step-0 fill; a **step-0b** carried ward (Held Guard) that spends nothing, is exempt from the "no reaction left" skip, inherits the other skips and counts as the one reaction AC bonus | Lead; **client (agreed, Q3)** for the ward |
 | SH-10 | Enemies 12.2, silent kill (lead's call, "the only exception"); 14.8 `broken` | Quiet Work sources; the body-noticed rule if the second-kill route ships | Lead |
 | SH-11 | Enemies 12.1–12.2; main 4.3 (**decided**) combat start; DH 10.4 (**agreed**, Q6) | A clarification: Throat-Cut and the Cutthroat's unaware branch read the target's awareness, its group's record and `combatActive` at declaration (weapons 7.5 step 1), before DH 10.4's combat-start step; the blow stays in-combat damage, and DH 10.4's damage-floor reading is unchanged. The Cutthroat "unaware" set (Dormant / Stationary / Patrolling). **Main 4.3 and DH 10.4 are not changed.** If the lead's reading would change DH 10.4, this row needs the client | Lead (clarification) |
 | SH-12 | Ability 7.2, Hide row; conditions 18.7 (lead's calls) | A Hide made as part of an attack (No Witnesses) and its end-rule ordering | Lead |
@@ -2342,7 +2346,7 @@ recorded in classes 18 by SH-23's row):**
 | SH-25 | Consumables 12, flasks (lead's call); registry | Toss (setup only), Dust (no item, Caught only) and the ruling against Slinger's Bracers | Lead |
 | SH-26 | Classes 9.1, Sapper row (lead's call) | The Sapper never copies Jury-Rig or Tripline | Lead |
 | SH-27 | Classes 6.2 `LeanSpread` (lead's call) | The Shade's tools recorded as tools | Lead |
-| SH-28 | Classes 8.2, camp-pool chassis bullet (settled; VG-13); classes 11.B, camp-share row; Vanguard design 10.4 (the level-1 miss **agreed** there) | The accepted martial camp-share miss extended to levels 1–4 for the Shade. **This widens an agreed reading** | **Client, with this document's approval on 2026-11-18 (told plainly, 19.1)** |
+| SH-28 | Classes 8.2, camp-pool chassis bullet (settled; VG-13); classes 11.B, camp-share row; Vanguard design 10.4 (the level-1 miss **agreed** there) | The accepted martial camp-share miss extended to levels 1–4 for the Shade (and to Arcanist levels 1–2 by ARC-4, Arcanist design 11.8). **This widens an agreed reading** | **Client, with this document's approval on 2026-11-18 (told plainly, 19.1)** |
 | SH-29 | Enemies 11.1, opportunity-cost term (lead's call; VG-16) | Counterstroke priced as state | Lead |
 | SH-30 | Classes 8.4, Subclasses bullets ("Cutthroat (M2)", "Trapwright (M2)", "Swordsworn (unlock)"); classes 13, M2 and M3 rows; classes 9.4; classes 7.3, the "Two per class at M2 ... aspects that change one rule" bullet (lead's call) | The Trapwright's wave becomes conditional (M2 only with DEP-S1; otherwise the first Shade unlock, the expected default); the Swordsworn is promoted to M2 under the fallback; the subclass `wave` / `fallbackWave` fields; a launch class's stage-1-named third subclass ships as a full subclass (as the Vanguard's three do), not as an aspect | **Client (agreed 2026-11-18, Q2)**; Lead for the 7.3 note |
 | SH-31 | Classes 8.4, Subclasses bullets: the Cutthroat ("one more Opening die against Surprised targets"), Trapwright ("trigger or re-arm a known trap as a Tricks option") and Swordsworn ("a pooled reaction strike after a Parry") cards | Cutthroat: Quiet Work and the Surprised part (+1 / +1d4); Trapwright: Jury-Rig and Caught; **Swordsworn: Sworn Guard, a Tricks-paid ward that counts as a Parry, with Counterstroke** (the mechanism, not the intent) | **Client (agreed, Q3)** for the Swordsworn; Lead for the others |

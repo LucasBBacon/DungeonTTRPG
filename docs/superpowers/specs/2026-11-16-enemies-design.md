@@ -761,6 +761,9 @@ The single counting rule for "2 conditions per enemy type". **(change C-2)**
   opening. `uses` never reset. **(lead's call; change A-2, A-4)**
 - `uses:1` signature moves are flagged as openers. On floor 1, no limited
   ability fires in a surprise round.
+- **Later (change LM-1; Arcanist design 9.3):** a `cooldown.delay` hook
+  (the Loremaster's Unpick pushes a revealed `cooldown` or `readyAt` back),
+  applied when the Loremaster ships.
 
 ### 9.4 Hard control
 
@@ -1254,6 +1257,10 @@ enemy is** (traits, resistances, abilities, cooldowns). Wisdom and
 Perception tell it **what an enemy is about to do**. Enemies keep some
 ability to surprise mid-combat: a guileful enemy's intent stays unreadable
 to a party that has not invested in Perception.
+
+**Owed at M2 (change LM-0; Arcanist design 9.3):** the enemies owner sets
+Study's difficulty (Lore, ability model 7.2) and how long a Study's
+reveal persists; the Loremaster's free Study rider reads both.
 
 ### 13.1 Baseline for everyone
 

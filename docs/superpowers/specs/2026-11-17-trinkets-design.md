@@ -751,7 +751,15 @@ About one action's worth each. **(lead's call)**
    and weapon verb signatures **(change VG-18; Vanguard design 7.13)**.
    Class features never match armour or shield signatures. Payable
    lines prefer original effects. Echoes of verb signatures (for
-   example Warding Staff) need a lead's ruling.
+   example Warding Staff) need a lead's ruling. The Arcanist's records
+   and its registry pass are in Arcanist design 7.15. The Ember and Frost
+   Rings (and the focus property Attuned) are the only path that may
+   shift an Arcanist Mote part off its pair: `ArcanistDamageTypes` is
+   scoped to class records and `KnownVariantInPair` exempts this gear
+   shift **(change ARC-27; Arcanist design 7.3)**. Tincture (Alembic
+   Prime III) against the Water Flask's ally use awaits the registry's
+   ruling; if it fails, the Alembic takes Seal instead **(change ALM-7;
+   Arcanist design 9.2)**.
 2. **Weapon, armour, shield and focus properties keep weapons 18.1:**
    charged echoes are legal (Ember Ring echoes Ember Edge; Longreach
    echoes Long Haft); always-on copies are not.
@@ -926,7 +934,7 @@ Uncommon pieces add one roll from their location table. **(lead's call)**
 | **Whetstone Ring** | C | **Whetstone:** 1 / 1 / 2 per rest: one part of your damaging use carries its own type's rider flag, only for slashing (Bleeding), fire (Burning), cold (Chilled), necrotic (Withered) and psychic (Unfocused) | M2 | Charged echo of Honed; a channel under 9.4 (same filters and precondition). Excludes bludgeoning and radiant (major riders), acid (AC write), lightning (arc damage), piercing (always-on already). A verdict warns on a Honed single-part weapon, where it never fires; container-only |
 | **Sigil of Aid** | C | **Aid:** once per fight, Help costs a bonus action | M2 | Cost step, not a button, offered as a variant (9.1); hidden with reason `TrinketHelpedLimit` when its Helped would be blocked. Help sets up an ally's strike, which keeps it in the finger lane **(lead's call)**; container-only |
 | **Longreach Band** | C | **Longreach:** 1 / 1 / 2 per rest, when you declare a melee weapon attack or touch-range damaging ability against a target beyond your normal reach, you may give it +1 reach (maximum 2, or 3 on a `minReach` 2 weapon); the charge is paid on declaration, hit or miss | M2 | A declared option, not a channel (6.1 item 11, 9.4). Charged echo of Long Haft; melee and touch casters; container-only |
-| Storm, Grave, Dawn Rings | C | As Ember for other elements | Later | 2 element rings per wave. Storm needs a ruling (arc damage breaks zero added damage); Dawn restricted to its Revealed branch (Hidden's targeting rule) |
+| Storm, Grave, Dawn Rings | C | As Ember for other elements | Later | 2 element rings per wave. Storm needs a ruling (arc damage breaks zero added damage; the arc itself is now defined: the rider strength band, one damage event per arced unit, no crit, flag or re-arc **(change ARC-14; Arcanist design 8.1)**); Dawn restricted to its Revealed branch (Hidden's targeting rule) |
 | Seeker's Band | C | **Sightline:** once per rest, one ranged weapon attack ignores the adjacent-hostile disadvantage | Later | Charged echo of Seeking; dead on a Seeking weapon and for casters |
 | Caustic Ring | C | Acid shift | **Blocked** | Outputs Corroded, which writes AC (rule 24) |
 
@@ -1533,7 +1541,7 @@ grants.
 - **Curses:** whether Rare rings or charms are needed, which reopens Q2.
 - **Lead's checks before data** (existing designs, not new systems):
   Duskhem against Hidden's end rules and Shadowed; Storm Ring against arc
-  damage; Dawn Ring against Hidden's targeting rule; Kinstone `sourceTied`.
+  damage (the arc defined by ARC-14, Arcanist design 8.1); Dawn Ring against Hidden's targeting rule; Kinstone `sourceTied`.
 
 ## 24. Open items for the client
 
