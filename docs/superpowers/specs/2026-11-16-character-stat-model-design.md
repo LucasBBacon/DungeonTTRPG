@@ -400,6 +400,10 @@ Poison is a condition, not a damage type. **(agreed)**
 - A "mindless" trait grants immunity to psychic and to the `mind`
   condition tag. Psychic is the one damage-type immunity allowed outside
   bosses, and the theme rule above still applies to it. **(lead's call)**
+  The floor-1 boss is never `mindless` and never psychic-immune
+  (class-blind; a `mind` immunity alone is allowed), checked by
+  `Floor1BossMindReachable` (enemies design 17.5, 20.1; Herald design
+  7.16, HR-21). **(agreed 2026-11-20, Herald Q3)**
 - Specialists can buy through: an offer such as "your fire ignores
   resistance" exists for committed builds. **(agreed)** "Ignores
   resistance" applies after the ladder and the cancel rule: a final

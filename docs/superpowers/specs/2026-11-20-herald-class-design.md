@@ -1,7 +1,7 @@
 # Classes, Stage 2: The Herald: Design
 
 Date: 2026-11-20
-Status: Draft, awaiting client approval, 2026-11-20
+Status: Approved, 2026-11-20
 Parents: `2026-11-17-classes-concepts-design.md` (classes stage 1,
 approved; the direct parent), `2026-11-18-vanguard-class-design.md`,
 `2026-11-18-shade-class-design.md` and
@@ -32,17 +32,19 @@ Hearth's own records heal nothing** (`HearthNoHeal`); and that **the DH
 18.1 healer gate itself is unchanged**. Before answering Q3 the client
 was told plainly that the floor-1 boss content rule is class-blind but
 **motivated by the Herald**. The client also said that everything else
-in the lead's proposal stands as written.
+in the lead's proposal stands as written. The client approved this
+document as a whole on 2026-11-20.
 
-Items marked **(lead's call)** were filled in by the design lead. They
-become binding when the client approves this document. Items marked
+Items marked **(lead's call)** were filled in by the design lead; the
+client confirmed them all on 2026-11-20, when it approved this document
+as a whole, and they are binding. Items marked
 **(settled)** restate a rule from an approved document; **(decided)**
 marks a main-design client decision. Items marked **(change HR-n)** amend
 an approved document and are listed, with the exact section they touch,
 in section 18. Items marked **(told plainly)** narrow or re-read agreed
-or settled text; they are told to the client in plain words with the
-approval request (20.1), apart from those already accepted with Q1 or Q3
-above.
+or settled text and were told to the client in plain words, with Q1 or
+Q3 above or with the approval request (20.1); the client confirmed them
+all on 2026-11-20. Every item here is binding on the builders.
 
 This is **stage 2 of the classes design for the Herald**, the launch
 Presence full caster for morale and support: its full table for levels
@@ -299,7 +301,8 @@ stand **(settled)**.
 
 The client chose Q1–Q3 on 2026-11-20, each time the lead's
 recommendation. **(agreed)** The rest are the lead's calls, which the
-client said stand.
+client said stand and confirmed when it approved this document on
+2026-11-20.
 
 | # | Decision | Chosen | Rejected, and why |
 |---|---|---|---|
@@ -1093,8 +1096,9 @@ No capacity or timescale offer targets an allowance (ARC-26).
   - The first clause's save is this document's reading of "through the
     pipeline". It answers the early-end risk (11.9) instead of an
     automatic rout.
-  - **Fallback:** if the client refuses the second clause at approval,
-    the Dirge's Last Toll modifies the first clause instead (it marks
+  - **Fallback (not needed):** the client confirmed the second clause
+    on 2026-11-20 with the approval request (20.1). Had it been refused,
+    the Dirge's Last Toll would have modified the first clause instead (it marks
     every hostile clause 1 targeted as `tolled`; its `turns:2` has no
     clause left to lengthen), and the Hearth's Watchfire, which modifies
     neither clause, is unchanged (9).
@@ -1373,8 +1377,8 @@ It needs no expertise and does not depend on healing **(lead's call)**.
   `falterVsImmune` if taken, and otherwise the at-will without
   disadvantage. The trap-room report prints a fear-immune floor-1 boss
   row; its first lever is `falterVsImmune` built into Plain Speech
-  (5.4). This is a gap the content rule does not close, and the client
-  is told so plainly (20.1).
+  (5.4). This is a gap the content rule does not close; the client was
+  told so plainly (20.1) and confirmed it on 2026-11-20.
 - **Content rule (Q3, agreed; HR-21):** the floor-1 boss is never
   `mindless` and never psychic-immune. It is class-blind;
   `ClassGatedContent` is untouched. **It is motivated by one class, the
@@ -2849,13 +2853,19 @@ half is `HealUpcastCapDeclared` above.
 
 ## 18. Changes to approved documents
 
-To be applied when the client approves this document. **This document
-edits no parent document itself**; the rows are applied by the owners
-of the sections they touch **(lead's call)**, and the rows owed by other
-owners (19) are recorded as such. Every row names the exact section it
-touches. Rows that touch **agreed** or **settled** lines are flagged in
-bold. The client's Q1–Q3 answers (2026-11-20) approve the rows that name
-a question; the rest are approved with the document.
+Applied on 2026-11-20, when the client approved this document. **This
+document edits no parent document itself**; the rows are applied by the
+owners of the sections they touch **(lead's call)**, and the rows owed
+by other owners (19; listed below) are recorded as such. The unlock-only
+parts are recorded now and apply only when that aspect ships: the M3
+event kind `heraldFearLands` in HR-29 (the Warcaller, 9.3), and the
+Warcaller and Pennant rows of the heal-isolation gate (HR-38; 5.4).
+Every row names the exact section it touches. Rows that touch **agreed**
+or **settled** lines are flagged in bold. The client's Q1–Q3 answers
+(2026-11-20) approve the rows that name a question; rows marked "told
+plainly" were accepted with Q1 or Q3 or told with the approval request
+(20.1) and confirmed by the client on 2026-11-20; the rest were
+confirmed with the document on 2026-11-20.
 
 **Narrowings recorded inside this design (no approved text changes;
 recorded in classes 18):**
@@ -2962,10 +2972,11 @@ consumables 16.8 finds none, and "15 scrolls" is found there.
 
 ## 20. Open items for the client
 
-**Approval of this document as a whole**, including every lead's call,
-the told-plainly items in 20.1 and the new lead's calls listed there.
-The future items in 20.2 come back only if a report or a later design
-triggers them.
+None. Approved by the client on 2026-11-20, as a whole, including every
+lead's call, the told-plainly items in 20.1 and the new lead's calls
+listed there. The future items in 20.2, which come back only if a report
+or a later design triggers them, and the naming pass remain future
+items.
 
 ### 20.1 This document
 
@@ -2995,7 +3006,8 @@ The three questions this design raised were answered on 2026-11-20
   rule is motivated by the Herald. Rejected: B (no rule; rely on Plain
   Speech and a rerun).
 
-**Told plainly with the approval request:**
+**Told plainly with the approval request; confirmed by the client on
+2026-11-20:**
 - universal Frighten range 6 (HR-14);
 - the Loom reading (HR-15);
 - Spur's `onEvent` cost and the narrowed conflict line (HR-2);
@@ -3026,7 +3038,8 @@ The three questions this design raised were answered on 2026-11-20
 - Spur on a Rallied ally is legal (7.4).
 
 **New lead's calls in this document** (beyond the proposal the client
-said stands; listed so the approval covers them):
+said stands; listed so the approval covers them; confirmed by the
+client with the document on 2026-11-20):
 - **the heal-isolation gate's status and reading** (5.4): an M2 release
   gate on the reference arm, read at the first M2 simulator run with
   the listed items in data; each subclass passes on its own; a gap
@@ -3257,6 +3270,10 @@ resolved inside the client's decisions: Plain Speech and the
 Speech is the first trap-room lever rather than an M2 change; and Parley
 stays a bonus action, recorded as the one exception to the subclass
 rule (9). The new lead's calls this check produced are listed in 20.1.
+
+**Client approval (2026-11-20):** the client approved this document as
+a whole, confirming every lead's call, every told-plainly item and the
+new lead's calls listed in 20.1.
 
 ## Appendix B: sources
 

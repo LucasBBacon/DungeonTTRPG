@@ -1552,7 +1552,7 @@ No two launchers share a verb.
 | Rod (arcane) | M2 | **main** | **Shape:** line and cone cantrips +2 length, inside the area cap (targeting) | Rod and shield |
 | Tome (arcane) | M2 | off | **Annotate:** swap one known spell at a short rest instead of camp (economy) | The planning focus |
 | Holy symbol (divine) | M2 | off | **Spare:** once per turn, one area spell leaves out one ally square (targeting) | A divine caster with a shield instead takes a **Reliquary Shield** (an armour-design shield with a `focus{}` sub-record), so no new placement rule is needed. The Reliquary Shield is notable-only; rod + Reliquary is legal (armour design 10.2; change AR-44) |
-| Totem (presence) | M2 | off | **Loom:** Frighten and presence ranges +3 (targeting) | Breaks morale from range |
+| Totem (presence) | M2 | off | **Loom:** Frighten and hostile-facing presence effects range +3 (targeting); never heals, calls, Spur, Rally or Demand Surrender **(change HR-15; Herald design 7.1, 8.1)** | Breaks morale from range |
 | Instrument (presence) | Later | two | **Carry:** Rally and presence buffs +3 range | Costs both hands for no weapon |
 
 ### 17.9 Shields as weapons (handed to the armour design)

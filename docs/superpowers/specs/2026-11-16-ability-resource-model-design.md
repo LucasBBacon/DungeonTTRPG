@@ -226,7 +226,10 @@ then moves every class, not half of them.
   Momentum included. The band holds at levels 5 and 10; a martial
   class's level-1 miss is accepted. **(agreed; change VG-13, Vanguard
   design 10.4)** The Arcanist's miss at levels 1–2 (26% and 35%) is
-  accepted too **(agreed; change ARC-4, Arcanist design 11.8)**. Slot
+  accepted too **(agreed; change ARC-4, Arcanist design 11.8)**. The
+  Herald's miss at levels 1–3 is accepted too, and its levels 3–4 are
+  read on the class mean over both subclasses, subclass rows printed
+  **(agreed; change HR-31, Herald design 11.10)**. Slot
   Recovery counts as `rest` power, in the camp share and in the VG-12
   parity reading alike, never one without the other **(change ARC-3,
   Arcanist design 7.4)**.
@@ -278,12 +281,22 @@ spend.
   (Slot Recovery 2), and that offer is excluded for it
   (`offerExcludes: slotRecovery+1`), as are `timescale:slots.*` and
   capacity and timescale on Overchannel **(change ARC-12, Arcanist
-  design 7.4, 7.9)**. The name keeps it apart
+  design 7.4, 7.9)**. The Herald has no Slot Recovery 2 and the offer is
+  excluded for it from the start (`offerExcludes: slotRecovery+1`)
+  **(change HR-35, Herald design 7.5)**. The name keeps it apart
   from the stat model's Recovery, which is hit points.
 - Spells are known, not prepared. A caster knows about seven spells by
   level 10 and may swap one at camp.
 - A spell can be cast with a higher slot only if its data declares what
-  that adds. The lowest slot that works is the default.
+  that adds. The lowest slot that works is the default. A declared entry
+  may add nothing: Mending Word's tier-2 entry adds no target, so a
+  tier-2 slot is legal and casts the tier-1 effect; the cast's tier is
+  the slot spent **(reading; change HR-6, Herald design 8.1)**. Every
+  heal card carries `upcastCap: classSlotTable` now (content check
+  `HealUpcastCapDeclared`); at M4 the runtime check
+  `HealUpcastByClassSlots` caps a heal card's effective tier at the
+  Herald's own class-level slot table **(change HR-34, Herald design
+  5.3)**.
 - No half casters or pact casters at launch. When multiclassing arrives,
   slots combine through a caster-level table, which is data.
 
@@ -384,11 +397,11 @@ Every ability declares exactly one cost **(lead's call)**:
 | Escape a grapple | Action |
 | Hide: Stealth | Action; a bonus action with a class feature; or part of an attack with a class feature (No Witnesses: on a kill, no bonus action, resolved after weapons design 7.5 step 15 so the killing attack does not end it; conditions design 18.7) **(change SH-12, Shade design 8.1)** |
 | Search: Perception against the passive stealth of hidden units within line of sight. Monsters use it after losing the party; Keen gives advantage. **(change A-10, enemies design 11.1, 12.1)** | Action |
-| Frighten: Intimidation against 10 + Will **(settled)** | Action |
+| Frighten: Intimidation against 10 + Will **(settled)**; range 6, line of sight **(change HR-14, Herald design 3.3)** | Action |
 | Rally: Leadership | Bonus action, once per ally per fight |
 | Study an enemy: Lore | Bonus action, once per enemy type per fight |
 | Recognise a spell being cast: Arcana | `none`: a threshold with no roll |
-| Get a downed companion up: Medicine, trained only **(settled)**; at most once per companion per fight (a Lifeline get-up counts) **(change DH-11, death and healing design 11.2)** | Action |
+| Get a downed companion up: Medicine, trained only **(settled)**; at most once per companion per fight (a Lifeline get-up counts) **(change DH-11, death and healing design 11.2)**. Reach the Fallen (Hearth L6 option): range 2, and the same action Treats that companion (only when taken as an action, never through the Lifeline bonus-action variant); 1 HP and Prone unchanged **(change HR-28, Herald design 9.2)** | Action |
 | Treat: Medicine, one roll against each curable instance's recorded difficulty; ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (Diseased and Scarred at a rest, except a `treatProof` Scarred) **(agreed; change C4, conditions design 8; change CN-12, consumables design 14.6; change DH-11)** | Action, adjacent |
 | Disarm or re-arm a trap: Mechanics, trained only **(settled)** | Action |
 | Trigger a known trap against enemies: Mechanics. A known armed trap is a hazard for forced movement (conditions design 10, 11.3; the rules of 10.1 and 10.2 unchanged) **(change SH-15, Shade design 9.1)** | Action |
@@ -532,8 +545,9 @@ At-will arcs never reach allies either; this rule wins over the Soaked
 arc. A `selective` cast leaves allies out of all its effects, arcs,
 forks and forced movement included, and selective may be taken on any
 slot cast whose arcs or forks reach an ally. A caster is never affected
-by its own casts' areas, arcs and forks. **(change ARC-8, Arcanist
-design 8.1, 8.2)**
+by its own casts' areas, arcs and forks, except presence call or cure
+areas whose record names the caster (Rouse, Hearthsong). **(change ARC-8,
+Arcanist design 8.1, 8.2; change HR-13, Herald design 8.1)**
 
 ### 8.3 Preview
 
@@ -551,6 +565,11 @@ chance. The display computes nothing. **(settled principle)**
   the monster AI's own output: gated by guile, computed live from the true
   state filtered by the awareness record, with no roll and no commitment.
   **(change A-8)**
+- The Break-chain preview (on hover only) shows the loss cascade from
+  party knowledge; one morale overlay family, at most one glint per
+  unit, in the priority rout-ready, faltering, Frightened tether; the
+  Spurred trail only on its holder's turn; the readability playtest gate
+  counts glints per screen **(change HR-37, Herald design 7.14, 10.3)**.
 - The preview leaves out reactions it cannot predict: an enemy reaction the
   party has not seen, and any "ask me" reaction.
 - The property test in 16 compares preview and resolution with full
@@ -1001,7 +1020,9 @@ hit being decided. The `missedBy` hook and its order at a miss are in
 reaction trigger kind `ownSave` hooks when the unit rolls an initial save
 against a hostile ability, with the roll known (not repeat saves,
 hazard-edge saves or concentration checks) **(change ARC-19, Arcanist
-design 7.5)**.
+design 7.5)**. Event kinds `harrowingWordFailedSave`, `ownActionResolved`
+and `combatStart` are added for `onEvent` costs; `heraldFearLands` joins
+when the Warcaller ships (M3) **(change HR-29, Herald design 14.1, 9.3)**.
 
 ### 14.4 Rules in the core
 

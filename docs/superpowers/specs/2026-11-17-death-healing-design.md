@@ -734,7 +734,7 @@ concentration and keeps its initiative slot **(settled, conditions
 | Route | Result |
 |---|---|
 | A won fight, morale win included **(decided, main 4.2; M-1)** | Up on 1 HP |
-| Trained Medicine, an action (Lifeline Pendant: a bonus action, once per fight) **(settled route)** | Up on 1 HP, Prone. **At most once per companion per fight** (Lifeline counts); a second attempt is greyed `AlreadyGotUpThisFight` |
+| Trained Medicine, an action (Lifeline Pendant: a bonus action, once per fight) **(settled route)** | Up on 1 HP, Prone. **At most once per companion per fight** (Lifeline counts); a second attempt is greyed `AlreadyGotUpThisFight`. **Reach the Fallen** (Hearth L6 option): the get-up reaches 2 squares, and the same action also Treats that companion (only when taken as an action, never through the Lifeline bonus-action variant); still once per fight, up on 1 HP, Prone unchanged (Herald design 9.2) **(touches agreed Q4; change HR-28)** |
 | **A completed short rest** (out of combat) | Up on 1 HP, then the normal rest order (11.3) |
 | **Camp** | Up, full heal (13.1) |
 
@@ -853,7 +853,7 @@ until the classes design proposes one and the client approves it.
 | **Healing potion** | In-fight tempo; the hero's lifeline | Recovery, bonus action; Hand over, Administer, or throw at 750‰ **(agreed, consumables Q4)**; never on a Downed unit |
 | **Fighter-type Second Wind** | Self-sufficiency | **Regain your Recovery**, `rest` pool (DH-10). The 1d10 + level example drifts from 36% of HP to 19% |
 | **Other classes' rest tool** | Self-sufficiency, solo floor 1 | A `rest`-pool defensive tool tagged `restDefensiveTool: true` (exactly one per launch class): a self-heal of at most FloorDiv(Recovery, 2), or an effect kind on the approved defensive list (21.2), inside the 40–60% band of ability 6.3. **Requirement on the classes design** |
-| **Class heal spells** | Optional healer power | **Tier 1: the target's Recovery, exactly.** Higher tiers add targets, range or riders, never more HP per target. `rest` or `camp` pools only; never at-will; never on wands |
+| **Class heal spells** | Optional healer power | **Tier 1: the target's Recovery, exactly.** Higher tiers add targets, range or riders, never more HP per target; a declared upcast entry may add nothing (Mending Word targets 1 / 1 / 2 / 3, its tier-2 entry adds no target; the cast's tier is the slot spent; Herald design 8.1, a reading; change HR-6). `rest` or `camp` pools only; never at-will; never on wands |
 | **Healing scroll** | A potion bought with a camp spend | One cast of the tier-1 heal = a potion's heal (P1 holds); loot only, never the camp channel |
 | **Medicine** | Getting up, Treat, the rest bonus | Trained only for getting up **(settled)**; once per companion per fight **(agreed, Q4)**; "stretch supplies" stays the builders' choice and must never mean free rests |
 | **Hungering, Regenerating** | Small extras | As designed; Withered blocks both |
@@ -1382,14 +1382,26 @@ Treat and Recovery, plus the supply left and the patrol warning
   Second Wind do not count. Both arms use the same seeds and the reference
   policy (19.3).
 - **Levers if it fails,** in order: heal-spell targets or pool sizes in
-  class and companion data; then random potion weight for everyone. Never
+  class and companion data (for the Herald, heal-specific sub-limits in
+  Herald data; never the Herald's slot or Cadence pools; Herald design
+  5.4, change HR-38); then random potion weight for everyone. Never
   the guarantee, and never by class (5.6).
-- **Reports beside the gate (classes design 12.3):** three Herald arms
-  (no Herald / Herald without heal cards / Herald with heal cards), a
-  healer-count breakdown (0 / 1 / 2+) and a heal-source breakdown (Herald
-  hero card, Herald recruit, heal-kit recruit). They are reports only:
-  the gate stays exactly as defined above, and 18.2's "at least a
-  quarter" reads the gate's no-healer arm. **(change CL-9)**
+- **Reports beside the gate (classes design 12.3; Herald design 5.4):**
+  the Herald arms, policy forced per subclass with the Herald design 5.4
+  construction (no Herald / Herald without heal cards, with a "Hearth,
+  no card" row / Herald with heal cards / Herald, free draws / Herald,
+  card added), healer classification columns ("ever held an ally heal"
+  per run and per fight), a healer-count breakdown (0 / 1 / 2+, the 2+
+  row read first, with escalation) and a heal-source breakdown (Herald
+  hero card, Hearth widening, Herald recruit, heal-kit recruit, scroll
+  reads, get-ups by route), with `MoraleValueReport`,
+  `AllyTempoValueReport`, heal telemetry and the trap-room report. They
+  are reports only: the gate stays exactly as defined above, its kit
+  snapshot read per fight (Herald design 5.4, a reading), and 18.2's "at
+  least a quarter" reads the gate's no-healer arm. The Herald's
+  heal-isolation gate (classes design 12.3; Herald design 5.4) is a
+  separate gate and does not change this one. **(change CL-9, HR-26,
+  HR-38)**
 
 ### 18.2 Target death rate
 

@@ -399,7 +399,14 @@ tolerance and the miss rules lead's call)**
     are held at `pairDefaults`, every legal starter combination is
     printed as its own row (outside the mean), and the class mean is
     unweighted. Content check `StarterDefaultsHaveAnswer` and the
-    starter rule (Arcanist design 7.7).
+    starter rule (Arcanist design 7.7). **(change HR-10; told plainly,
+    accepted with Herald Q1)** For the Herald a creation pick is kit ×
+    level-3 subclass (4 rows); starters are held at the **no-heal
+    defaults**, every legal starter combination is printed as its own
+    row outside the mean, heal-card rows first, and the class mean is
+    unweighted (Herald design 7.7). Lever only, if used (HR-10b, told
+    plainly then): a creation pick may carry its own `suggestedArray`
+    (Totem Dex +2) (Herald design 7.16).
   - **Splits:** every boss is `fearless` (enemies 14.2), so the report
     splits by what does vary: the floor-1 theme's non-fearless share of
     its roster (enemies 10.4 allows 50–100%; bands *(illustr.)* 50–74%
@@ -434,7 +441,12 @@ tolerance and the miss rules lead's call)**
   the lead, who answers each miss with a stage-2 data change. The
   reliance reports stay reports (Q3). **(lead's call; reading
   `Floor1ClassSpread` as an M2 release gate confirmed by the client,
-  2026-11-18)**
+  2026-11-18)** **(agreed 2026-11-20, Herald Q1; change HR-38)** The
+  **heal-isolation gate** (per M2 Herald subclass, "Herald with heal
+  cards" − "Herald without heal cards" ≤ 10 points win rate, on the
+  reference arm) also blocks the M2 release; the Herald reliance and
+  desirability reports stay reports, with escalation thresholds (Herald
+  design 5.4).
 
 ## 6. Lean, never require
 
@@ -467,7 +479,8 @@ statement in five lines:
    leans on, the simulator compares win rates with and without that lean
    (6.6). Target: at most **10 points**, the client's healer number
    reused. **These are reports, not gates (agreed, Q3).** Healing keeps
-   its approved gate (DH 18.1, agreed).
+   its approved gate (DH 18.1, agreed) and gains the heal-isolation gate
+   (Herald design 5.4). **(agreed 2026-11-20, Herald Q1; change HR-38)**
 
 ### 6.2 The spread rule
 
@@ -538,8 +551,8 @@ lens, **C** companion kits. Caps are **(settled)** unless marked.
 | Utility | Universal baseline (every party) | How a class leans | The cap (no class goes past it) | Launch lean |
 |---|---|---|---|---|
 | Single-target damage | 2 at-wills, one damaging (ability 6.1); weapon verbs; crits; Exploit on Dexterity-rolled hits with advantage or Aim; Extra Attack at 5 for martials | Precision dice; Techniques +1d6; Surge; ignore-resistance offers | Every build ≤ 110% of the greatsword reference (as measured by weapons 6.4, VG-12: rest-pool damage floor-averaged at the worst legal build; camp-pool damage bounded by the nova bound and `CampOptionBound` (formerly `SurgeOptionBound`, renamed and generalised by SH-5, Vanguard design 10.1, Shade design 7.5), or for slot pools `SpellTierBound` and for slotless casts `SlotlessCastBound` (change ARC-2)); Dexterity-main melee ≥ 90%; launchers reported against 75%; all with empty trinket slots; every launcher family ≥ 60% (M2 parity set); trinkets +10% at most (weapons 6.4, trinkets 11 rule 6); one camp spend per turn; capstone turn damage ≤ 2× the 95th-percentile non-capstone turn of the same unit (12.3) *(illustr.; lead's call)*. **(change ARC-2)** `SpellTierBound` holds slot pools to ≤ 2000‰ single target, `SlotlessCastBound` holds Overchannel, `PayoffBound` allows one setup step per target, and `CampOptionBound` is scoped to non-slot, non-slotless camp pools (12.2; Arcanist design 11.2). **(change ARC-3)** Slot Recovery counts as rest power here and in the camp share alike (Arcanist design 7.4) | S s, V s |
-| Area damage | Flasks (one offensive per turn; none on floor 1), scrolls, sweeping verbs | Slot areas; shape (+1 radius, `selective`) | ≤ 25 squares at levels 1–6; allies hit unless `selective`; at-wills never hit allies; no ground zones (ability 8); slot areas ≤ 1250‰ per target under `SpellTierBound` (change ARC-2; Arcanist design 11.2) | A P |
-| Damage types and riders | Weapon types; weak targets take riders; crits attempt riders; terrain combos | Riders on demand (Techniques); an element pair; ignore-resistance offers | One rider per target per use; at-will riders rare and once per turn (ability 9.3–9.4); **no single-type kit, no switching types per enemy** (lead's call; stat model 2) | A s, V s |
+| Area damage | Flasks (one offensive per turn; none on floor 1), scrolls, sweeping verbs | Slot areas; shape (+1 radius, `selective`) | ≤ 25 squares at levels 1–6; allies hit unless `selective`; at-wills never hit allies; no ground zones (ability 8); slot areas ≤ 1250‰ per target under `SpellTierBound` (change ARC-2; Arcanist design 11.2). **(change HR-13)** `PresenceAreaSide`: a presence area with no damage part affects one side by data (fear and push areas enemies only; call and cure areas allies only), so no Herald area needs friendly-fire shaping (Herald design 8.1) | A P |
+| Damage types and riders | Weapon types; weak targets take riders; crits attempt riders; terrain combos | Riders on demand (Techniques); an element pair; ignore-resistance offers | One rider per target per use; at-will riders rare and once per turn (ability 9.3–9.4); **no single-type kit, no switching types per enemy** (lead's call; stat model 2). **Reading (change HR-3; told plainly):** the Herald's Plain Speech (Harrowing Word deals bludgeoning against a psychic-immune target) is an automatic fallback on immunity, never a player switch (Herald design 7.2) | A s, V s |
 | Conditions and control | Shove, grapple, Frighten, Topple and Push verbs, scrolls, wands | Limited major or hard control; repeat-save pressure; priming | Hard control only from limited abilities; agency conditions enemy-only (cond 7.1, 7.3); Steeled, Unyielding, boss pips and the shed action; the 32-condition budget full (cond 16); a controller ranks up through duration and reliability, never chained lockouts (lead's call) | A P, H s |
 | Forced movement and terrain | Shove, Push, Hook, Topple, shield bash, fixed hazards | Technique pushes (not verb-sourced, so collisions apply); hazard edges | ≤ 3 squares per hit; a verb moves a target once per round; fixed terrain only; M1 pushes stop before hazards (weapons 7.2) | V sub (Wrecker) |
 | Reach, zones, opportunity attacks | Everyone threatens; Set; reach weapons; Disengage | A movement-ending opportunity attack; Challenged | One reaction per round; Disengage stops both triggers | V s |
@@ -550,7 +563,7 @@ lens, **C** companion kits. Caps are **(settled)** unless marked.
 | Healing and Recovery | The class-blind guarantee: 2 kit potions, the floor potion, camp top-up, rests, the Medicine bonus, every class's rest tool (DH 12) | Recovery-sized heals with better tempo: bonus action, range, more targets per tier | Exactly the target's Recovery; `rest` or `camp` pools only; never at will or on wands; one class at most; healer gap ≤ 10 points (DH 12.2, 18.1, agreed Q10); no-healer arm at least a quarter of runs (DH 18.2, agreed Q11); no class changes potion values | H (spell cards; Hearth sub) |
 | Medicine, Treat, getting up | Anyone trained; once per companion per fight; the cost offer can make Treat a bonus action | Treat at range 2; an extra cure | Once per companion per fight stays; no free rests; `liftsDowned` reserved | H sub (Hearth) |
 | Drop prevention | Reprieve Phial | None at launch (the Death-Ward-shaped spell is Later) | One recharging prevention per unit per fight (DH 15.4) | — |
-| Wards and Helped (tokens) | Help, Vex, trinket wards | Grant tokens; build on token outputs | Tokens are charges; one trinket Warded per fight; classes build on outputs, never on trinket ids (trinkets 11 rule 8) | — at launch (Votary unlock) |
+| Wards and Helped (tokens) | Help, Vex, trinket wards | Grant tokens; build on token outputs | Tokens are charges; one trinket Warded per fight; classes build on outputs, never on trinket ids (trinkets 11 rule 8) | — at launch (Votary unlock). **(change HR-33)** Any Herald Helped would sit under ally tempo; none ships at M2 (CO-B3 stands; Herald design 8.3) |
 | Stealth, surprise, Steal | Worst-member passive stealth; Hide (action); silent kills; a second route per floor | A pooled bonus-action Hide (the class hook of ability 7.2; Shadowed armour gives it once per fight, armour 14.2); opener damage | Worst member stays; Clatter stays; no automatic surprise of bosses or elites (lead's call) | S P |
 | Morale | The hero's Intimidation; Frighten; Demand Surrender (Demoralised or Routed only); cowing; Rally | Cheaper, ranged or two-target Frighten; routs through T5 and T6 (limited fear effects) | No meter; Demoralised only from T1–T4 (enemies 14.3); `fearless` units exempt; never bosses; elites only when Routed; one cow attempt per group; the 75% / 100% cow cap; equal experience (enemies 14) | H P |
 | Information | Best passive Perception against guile; Study (Lore); Arcana recognises spells | A free Study rider; revealing resistances | Tactician stays the Perception mastery offer and is never copied (stat model 7.2, enemies 25); Lore never hides basics | A sub (Loremaster, unlock) |
@@ -573,7 +586,10 @@ fallback from the ten damage types of stat model 8.1, in the field
 damage type;** no class ability deals it. The Arcanist's fallback is
 physical, through its simple weapon or staff. A psychic fallback is a
 control rider (Unfocused), not a neutral one, so it never serves as a
-class's only fallback.
+class's only fallback. **Reading (change HR-3; told plainly):** the
+Herald's fallback is its weapon's physical type; its Plain Speech makes
+Harrowing Word bludgeoning against a psychic-immune target, an
+automatic fallback on immunity, not a switch (Herald design 7.1, 7.2).
 
 ### 6.6 Reliance reports
 
@@ -601,6 +617,18 @@ class's only fallback.
   parties with at least one, recruit heal kits included). The Herald arms
   and the healer count of CL-9 are reports beside it, broken down by heal
   source (Herald hero card, Herald recruit, heal-kit recruit).
+  **(change HR-26; told plainly, accepted with Herald Q1)** The reports
+  beside it gain the healer classification columns (report only), the
+  policy-forced Herald arms per subclass (Herald design 5.4's
+  construction), the "Hearth, no card" row, the 2+ row with its
+  escalation, source rows (Hearth, scroll, get-ups by route),
+  `MoraleValueReport`, `AllyTempoValueReport`, heal telemetry and the
+  trap-room report. **(agreed 2026-11-20, Herald Q1; change HR-38)**
+  Healing also gains the **heal-isolation gate** (per M2 Herald
+  subclass, with heal cards − without ≤ 10 points; an M2 release gate,
+  5.6); the Herald reliance and desirability reports are required
+  reports with escalation thresholds. The DH 18.1 gate itself is
+  unchanged (Herald design 5.4).
 
 ## 7. Structure
 
@@ -796,7 +824,10 @@ above the level's single choice (ability 10.3).
   other trigger offer (Shade design 6.6).
 - **The Herald is excluded from the `cost` offer on Frighten**
   (`offerExcludes`), because Cadence already makes it a bonus action and
-  the two would double-dip.
+  the two would double-dip. **(change HR-11)** The Dirge's Refrain
+  (`onEvent`, sharing the `frighten` allowance) and Parley (Demand
+  Surrender as a bonus action) are subclass verb changes, not cost
+  offers; the exclusion stands (Herald design 9.1).
 
 ### 7.6 What counts as a "thing to read"
 
@@ -854,7 +885,11 @@ call):**
    that class** (`scalesBy: classLevel`, 12.1).
 4. **A heal spell card from a class other than the first class needs class
    level 3 in that class** (`minClassLevel`, 12.1). A single-class Herald
-   may take Mending Word from level 1.
+   may take Mending Word from level 1. **(change HR-34)** Data now: every
+   heal card carries `upcastCap: classSlotTable` (`HealUpcastCapDeclared`);
+   runtime at M4: `HealUpcastByClassSlots` caps a heal card's effective
+   tier at the Herald's own class-level slot table (Herald design 5.3,
+   7.1).
 5. **The capstone needs class level 9** (`minClassLevel`). In a 10-level
    run a multiclass character gives it up; that is the intended, visible
    cost.
@@ -900,7 +935,11 @@ multiclass character" (main 4.7) works with both.
   read Presence (Intimidation, Leadership, Rally, cowing) stay the hero's
   (stat 5.4), and the universal Frighten action is unchanged. Their signature is tempo: a "Drummer"
   kit that grants Spurred (CL-5 names companion kits of the Herald class
-  as a source).
+  as a source). **(change HR-12)** Herald recruits are non-casters at M2;
+  no Herald recruit kit heals (`NoHealOnHeraldKit`), so CL-9's "Herald
+  recruit" heal-source row is a permanent 0; their "different slice" is
+  no Frighten or Rekindle, with Spurred shared (CL-5) (Herald design
+  7.17).
 - **Recruit-pool rules per floor** (requirements on the companions
   design, lead's call):
   - at least one kit with protector tools (DH 27), and protector kits
@@ -966,7 +1005,10 @@ Every class meets the fixed chassis rules **(settled)**:
   an agreed reading; Shade design 10.5)**, and for the Arcanist it is
   extended to levels 1–2 (26% and 35%) **(agreed 2026-11-20, Arcanist
   Q2; change ARC-4: this widens an agreed reading; Arcanist design
-  11.8)**;
+  11.8)**, and for the Herald it is extended to levels 1–3, with levels
+  3–4 read on the class mean over both subclasses, subclass rows printed
+  **(agreed 2026-11-20, Herald Q2; change HR-31: this widens an agreed
+  reading; Herald design 11.10)**;
 - exactly one `restDefensiveTool`;
 - subclass at level 3 and capstone at level 9;
 - the cap of eight limited abilities;
@@ -1394,8 +1436,8 @@ saves.
 |---|---|
 | Main / suggested second | Presence / Wisdom |
 | HP tier, save | Standard 7; Will |
-| Armour, shield, weapons | Medium ceiling; shield allowed (a Totem-or-shield kit choice); `weaponTraining: {simple: all, martial: hands == 1}`, resolved to a family id list at build time (12.1) |
-| Foci | Presence tradition: Totem (Loom, +3 range on fear); never required |
+| Armour, shield, weapons | Medium ceiling; shield allowed (a Totem-or-shield kit choice); `weaponTraining: {simple: all, martial: hands == 1}`, read as one-handed and versatile (`hands ∈ {oneHanded, versatile}`; change HR-9; Herald design 7.1), resolved to a family id list at build time (12.1) |
+| Foci | Presence tradition: Totem (Loom, +3 range on Frighten and on hostile-facing presence effects only; change HR-15; Herald design 7.1); never required |
 | Skills | 2 of Leadership, Intimidation, Medicine, Lore, Perception |
 | Complexity | Medium |
 
@@ -1403,29 +1445,42 @@ saves.
   model 5.4). Ally tempo, secondary. Healing only through **spell cards**
   and the **Hearth** subclass. **(agreed, Q1)**
 - **Signature verb: Cadence, "break them before you kill them".**
-  - **Cadence** (`rest` 2 / 3 / 4 *(illustr.)*). Three abilities draw on
-    it:
+  - **Cadence** (`rest` 4 / 4 / 5 / 7 / 8 at levels 1–4 / 5–6 / 7–8 / 9
+    / 10 *(illustr.; levels 1–4 agreed 2026-11-20, Herald Q2; change
+    HR-1, replacing the earlier 2 / 3 / 4; Herald design 7.3)*). Three
+    abilities draw on it:
     - **Frighten as a bonus action** at range 6: the T5 route, already M2
       **(settled)**;
     - **you or one ally gains Spurred:** a new class source (CL-5);
       Spurred costs no speed, so it is not +speed, and on solo floor 1 the
-      Herald grants it to itself;
+      Herald grants it to itself. **(change HR-2; told plainly)** This is
+      **Spur**: no action, cost `onEvent: ownActionResolved`, once per
+      round; after your action resolves, you or one ally within 6 gains
+      Spurred. Spur on a Rallied ally is legal (Herald design 7.3, 7.4);
     - **Rekindle:** a bonus action that heals half Recovery; the tagged
       `restDefensiveTool`, once per rest (twice from level 6; 8.2); it
       feeds `Floor1BossSustain`.
   - **Rally is unchanged:** once per ally per fight. Cadence makes the
     Herald's turns richer, never Rally more frequent.
-- **At-wills:** **Harrowing Word** (psychic, Will save, +1 die
-  *(illustr.)* against a target that is Frightened or that spent a resolve
-  pip since your last turn, so fear also pays as damage, bosses included;
-  it never applies Frightened itself) and a weapon attack.
+- **At-wills:** **Harrowing Word** (psychic, Will save; **(change HR-3;
+  told plainly)** 1d10 + Pre on a failure, Pre on a success (Undertone;
+  minions none); a **Faltering** target, one that is Frightened or that
+  spent a resolve pip since your last turn, makes the save with
+  disadvantage, replacing the earlier "+1 die" (fallback +1d4), so fear
+  also pays as damage, bosses included; **Plain Speech:** bludgeoning
+  against a psychic-immune target, failure and Undertone damage alike; it
+  never applies Frightened itself; Herald design 7.2) and a weapon
+  attack.
 - **Slots and spells:** `camp` slots.
   - The fear spells need **T6 moved to M2 (CL-1).** Until that is
     approved, the Herald's routs run on T5 alone.
   - Marching calls grant Spurred to several allies.
   - **Heal cards:** *Mending Word*, tier 1, a bonus action at range 6,
     healing exactly the target's Recovery; higher tiers add targets, never
-    HP per target. A single-class Herald may take it from level 1 (7.7
+    HP per target: **(change HR-6; told plainly)** targets 1 / 1 / 2 / 3
+    at tiers 1–4; its tier-2 upcast entry is declared and adds no target,
+    so a tier-2 slot is legal, and the cast's tier is the slot spent
+    (Herald design 5.3, 8.1). A single-class Herald may take it from level 1 (7.7
     guard 4 binds only a second class). **It may target the Herald
     itself (lead's call; confirmed by the client, 2026-11-18)**: it is a
     `camp` slot spell under DH 12.2, not a rest tool, so Second Wind
@@ -1442,36 +1497,53 @@ saves.
   has a cowable group on the main path before the boss room (enemies
   10.4, 14.8; CL-10). Three things to read.
 - **Growth:** spell cards at 2, 5, 7 and 10; capstone *Scatter* at 9: a
-  limited fear effect on each Demoralised enemy in sight that is not a
-  boss. Each goes through the pipeline and routs by T6 substitution, so
-  wards, fear immunity, `fearless` and Rallied block it as they block T6,
-  and "Routed wins" over Panicked. Gated on CL-1.
+  limited fear effect through the pipeline. **(change HR-5; told
+  plainly)** Each Demoralised enemy in sight that is neither a boss nor
+  fearless makes a Will save with disadvantage and on a failure routs by
+  T6 substitution; every other hostile in sight, **bosses and fearless
+  units included**, makes a Will save or is Frightened `turns:1`, and is
+  never routed (Herald design 7.9). Wards, fear and mind immunity,
+  Rallied and Emboldened block or resist it as usual, and "Routed wins"
+  over Panicked. Gated on CL-1.
 - **Subclasses:**
-  - **Dirge** (M2): Cadence's Frighten may target two enemies within 2
-    squares of each other (T5 for each); Demand Surrender at range 4 with
-    the Totem. It works only through the existing triggers T1–T6; it adds
+  - **Dirge** (M2): **Antiphon** (not "Two Voices"; change HR-8):
+    Cadence's Frighten may target two enemies within 2 squares of each
+    other, one roll per target (T5 for each); the tier-2 spell **Toll**
+    with **Mourners**; **Knell**; Demand Surrender at range 4 with the
+    Totem; **Refrain** or **Parley** at level 6; **Last Toll** at 9
+    (Herald design 9.1). It works only through the existing triggers T1–T6; it adds
     **no new Demoralise trigger** (enemies 14.3 stays fixed), and a class
     Demoralise trigger would need its own change row.
-  - **Hearth** (M2): heal tiers add targets; Treat at range 2; Mending
-    Word also ends one poison or Bleeding instance. **The healer-gap
-    lever.**
+  - **Hearth** (M2): **(change HR-7; told plainly; `HearthNoHeal`
+    accepted with Herald Q1)** **Hearthkeeper:** +1 side-by-side target
+    on class heal-card casts at tier 2+ in combat, and on Soothe; the
+    heal card also ends one poison condition, and on a Withered target
+    ends Withered instead of healing. No Hearth record heals
+    (`HearthNoHeal`). Cures with no HP may ride Spur; heals may not.
+    Treat at range 2 (Herald design 9.2). **The healer-gap lever.**
   - **Warcaller** (unlock): an ally attacks with its *own reaction*, once
     per ally per round; the attack carries `grantedBy` (3.4), so no class
     riders apply.
   - **Pennant** (unlock): a concentration aura of tempo.
-- **Bonus-action conflict:** Mending Word and Cadence both use the bonus
-  action, so they cannot share a turn. The level-up card and the preview
-  say so.
+- **Bonus-action conflict (change HR-2; told plainly):** Mending Word,
+  Cadence's Frighten and Rekindle, and Rally share the bonus action, so
+  only one of them fits a turn; Spur rides the action. The level-up card
+  and the preview say so (Herald design 7.3).
 - **Weaknesses:** bosses (always `fearless`, enemies 14.2) and
   fearless-heavy rosters (undead, constructs) mute its morale half;
   modest damage; as a companion it loses Presence.
 - **Floor-1 guarantee:** floor 1's guaranteed cowable group lies on the
   main path before the boss room (CL-10).
 - **Fallback type:** its weapon's physical type; Harrowing Word's psychic
-  is a control rider, not its fallback (6.5).
+  is a control rider, not its fallback (6.5). **(change HR-3)** Plain
+  Speech makes Harrowing Word bludgeoning against a psychic-immune
+  target (Herald design 7.1).
 - **Signature events (12.1):** Frightened or Routed applied by the
-  Herald, or a Demoralise its loss event triggered; Harrowing Word's
-  bonus die dealt. `seedTarget`: `cowableGroup`.
+  Herald, or a Demoralise its loss event triggered; a Faltering save
+  rolled with disadvantage (change HR-4, replacing "Harrowing Word's
+  bonus die dealt"); a resolve pip spent to the Herald's fear or Dazed
+  effect (its own row; HR-4; Herald design 7.1). `seedTarget`:
+  `cowableGroup`.
 
 ### 8.7 The four at a glance
 
@@ -1577,8 +1649,18 @@ words.
 | Hamstring | Hobbled's source "hamstring Techniques" (conditions 18.4) | Low Cut |
 | Command spells | The enemy leader ability and affix Command; the Commanded condition (enemies 14.4, 17.2) | Marching calls |
 | Rout (capstone) | The morale loss event "a Rout" and the Routed state (enemies 14.3) | Scatter |
-| Banner (subclass) | The morale-state display banner and the group banner (enemies 14.8, 14.9) | Pennant |
+| Banner (subclass) | The morale-state display banner and the group banner (enemies 14.8, 14.9) | Pennant (restated for the brief's "Banner"; HR-30; Herald design 9.4) |
 | Second Breath | Near collision with Second Wind (shared head word) | Rekindle |
+| Dread (Herald keyword) | Enemy aura; banned head word (above) | Faltering (HR-30) |
+| Two Voices | Head word shared with Harrowing Word's "two words" | Antiphon (HR-30) |
+| Graze (success damage) | The greatsword's weapon verb | Undertone (HR-30) |
+| Steadying Spur / Steady Measure | Rally's Steady option and a morale profile | Soothe (HR-30) |
+
+**(change HR-30)** The Herald design freezes its new names (Faltering,
+Undertone, Plain Speech, Spur, Antiphon, Toll, Soothe and the rest) and
+records its avoided names (Grim Refrain, Tend, Order, Falter, Kindle,
+Field Dressing, Halting Word and others) in its front matter (Herald
+design, front matter).
 
 ## 11. Binding requirements and how they are met
 
@@ -1606,7 +1688,7 @@ tables; **Companions** = a requirement passed to the companions design.
 
 | Requirement | Source | How met | Status |
 |---|---|---|---|
-| A `rest` and a `camp` pool; 40–60% camp; caster rest features beyond Slot Recovery | Ability 6.3 (agreed) | Every class has both; Weft and Cadence; Shade Vanish at camp 2, 3 from level 2 (SH-24); Vanguard camp-weighted features. Measured with the `restDefensiveTool` at half value; level-1 martial miss accepted (8.2; VG-13, agreed Vanguard Q1), extended to levels 1–4 for the Shade (8.2; SH-28, client with the Shade design's approval; Shade design 10.5) and to levels 1–2 for the Arcanist (8.2; ARC-4, agreed Arcanist Q2; Arcanist design 11.8) | Stage 2 (simulator at levels 1, 5, 10) |
+| A `rest` and a `camp` pool; 40–60% camp; caster rest features beyond Slot Recovery | Ability 6.3 (agreed) | Every class has both; Weft and Cadence; Shade Vanish at camp 2, 3 from level 2 (SH-24); Vanguard camp-weighted features. Measured with the `restDefensiveTool` at half value; level-1 martial miss accepted (8.2; VG-13, agreed Vanguard Q1), extended to levels 1–4 for the Shade (8.2; SH-28, client with the Shade design's approval; Shade design 10.5), to levels 1–2 for the Arcanist (8.2; ARC-4, agreed Arcanist Q2; Arcanist design 11.8) and to levels 1–3 for the Herald, levels 3–4 read on the class mean over both subclasses (8.2; HR-31, agreed Herald Q2; Herald design 11.10) | Stage 2 (simulator at levels 1, 5, 10) |
 | One camp spend per turn, scroll reads included | Ability 6.4; consumables 13.5 | No feature grants a second; capstones use the turn's spend | Met |
 | At least 2 at-wills, one damaging | Ability 6.1 | Listed per class | Met |
 | No cooldowns; no major power per fight | Ability 6.2 | `rest` and `camp` only | Met |
@@ -1688,7 +1770,7 @@ tables; **Companions** = a requirement passed to the companions design.
 |---|---|---|---|
 | Mastery only through offers; Tactician reachable | Stat 7.2; enemies 25 | Perception mastery in the Shade and Herald offer lanes; nobody copies Tactician | Met |
 | Presence is always the hero's | Stat 5.4 | Herald recruits use `companionMainAbility` (Wisdom), have no presence spells and no Frighten feature, and have a tempo signature (7.8) | Met |
-| Demand Surrender only on Demoralised or Routed; never bosses | Enemies 14.6 | Unchanged | Met |
+| Demand Surrender only on Demoralised or Routed; never bosses | Enemies 14.6 | Changed for the Dirge: range 4 with the Totem (Terms of Surrender; Loom does not stack) and Parley's bonus-action cost; targets and failure rule unchanged (Herald design 9.1) | Met (HR-19) |
 | T6 for fear spells | Enemies 14.3 | Needed for the Herald | Met (CL-1) |
 | A cowable group per floor | Enemies 10.4, 14.8 | Unchanged; floor 1's group lies on the main path before the boss room (bosses are always fearless) | Met (CL-10) |
 
@@ -1733,7 +1815,9 @@ everything else (main 6.5). Its record names, at least:
   7.11);
 - `fallbackDamageTypes[]` (6.5);
 - `signatureEvents[]`: the events that count as the signature firing
-  (3.4; 5.6), and `seedTarget`, a predicate id for `SeedHasTarget` (for
+  (3.4; 5.6; the Herald's, with "a resolve pip spent to the Herald's
+  fear or Dazed effect" as its own row: change HR-4, Herald design 7.1),
+  and `seedTarget`, a predicate id for `SeedHasTarget` (for
   example `cowableGroup`, `enemyNotYetActed`, `twoEnemiesWithinRadius1`,
   `anyEnemyInMelee`);
 - dip-guard fields (7.7): `signatureVerb: [abilityId or poolId]`;
@@ -1811,6 +1895,19 @@ companion-kit id, read by `LeanWithoutBaseline`.
   runtime invariant `KnownVariantInPair` (asserted in play and property
   tested, not a content check) keeps every known variant in the pair;
   gear shifts are the only exempt path (Arcanist design 7.3).
+- **(change HR-27)** For the Herald: `HeraldDamageTypes`,
+  `RoutOnlyBySubstitution`, `NoClassDemoraliseTrigger`, `ScatterTargets`,
+  `NoHeraldRallied`, `SpurredSources`, `AllyUpliftBound`,
+  `PresenceAreaSide`, `LoomHostileOnly`, `OneCadenceFrightenPerTurn`,
+  `NoHealInDefaults`, `NoHealTrigger`, `HealGrowsOnlyByTierOrHearth`,
+  `NoHealOnHeraldKit`, `HeraldHealSources`, `HearthNoHeal`,
+  `HearthCureList`, `SideBySideTarget`, `HearthkeeperClassCastOnly`,
+  `HealUpcastCapDeclared`, `HeraldStarterHasAnswer`,
+  `HeraldL2PlaysAlone`, `DrawSatisfiable` (s1–s4), `MournersWithinUse`,
+  `DirgeNoDemoralise`, `SurrenderTargetsLegal`, `YieldTargetsOnlyBroken`
+  and `Floor1BossMindReachable` (HR-21), plus the Arcanist and Vanguard
+  checks that apply. `HealUpcastByClassSlots` is a runtime rule at M4,
+  not a content check (Herald design 14.2).
 
 ### 12.3 Simulator reports
 
@@ -1826,7 +1923,19 @@ lead's call)**
 - Healing: the DH 18.1 gate as defined there; beside it, as reports, the
   Herald arms (no Herald / Herald without heal cards / Herald with heal
   cards), the healer count (0 / 1 / 2+) and the heal-source breakdown
-  (CL-9).
+  (CL-9). **(change HR-26; told plainly, accepted with Herald Q1)** The
+  reports gain the healer classification columns, the policy-forced
+  arms per subclass, the "Hearth, no card" row, the 2+ row with its
+  escalation, source rows (Hearth, scroll, get-ups by route),
+  `MoraleValueReport`, `AllyTempoValueReport`, heal telemetry and the
+  trap-room report (Herald design 5.4, 14.3).
+- **(agreed 2026-11-20, Herald Q1; change HR-38)** **The heal-isolation
+  gate:** per M2 Herald subclass, win rate with heal cards − without ≤
+  10 points (lead's target 5), an M2 release gate on the reference arm
+  (5.6); Warcaller and Pennant rows join when they ship (M3). **The
+  Herald reliance and desirability reports** are required reports with
+  escalation thresholds. The DH 18.1 gate is unchanged (Herald design
+  5.4).
 - Camp share per class at levels 1, 5 and 10 (ability 6.3).
 - Precision parity, solo and in the reference party, with reactions and
   Opening's Answer trigger modelled (CL-8); Exploit uptime by party
@@ -1882,7 +1991,10 @@ Builders and the lead produce, per launch class:
   the forbidden grants (no refills, no second reaction, no second camp
   spend);
 - the spell list per caster;
-- starting kits (weapons, armour, belt, coin, 2 potions);
+- starting kits (weapons, armour, belt, coin, 2 potions); **(change
+  HR-36; told plainly)** the Herald's kits carry a longsword (Parry), not
+  the draft's mace, so no Topple; on solo floor 1 its escort answer is
+  Shove or the shield bash's Push at Str 0 (Herald design 7.11, 7.16);
 - `effectKinds`, subject and trigger on every feature;
 - offer lanes with `requires` tags;
 - default reaction policies;
@@ -1929,7 +2041,7 @@ tell the classes apart in the first fight".
 | **Floor-1 spread:** the Vanguard (full Second Wind, sturdy 8, AC 18) is structurally favoured; the Herald depends on the roster's non-fearless share and the escort | `Floor1ClassSpread` inside every split, with the headroom measures; CL-10; a creation pick-rate measure per class (playtest). Levers are any class's data, the Vanguard's own included (Techniques size, Surge timing, shield AC through starting kits); only the existence of the one full-Recovery Second Wind is protected |
 | **The Shade's solo rounds 3 and later** | The Answer trigger (8.4) and the Vanish carry (Hidden for Opening; SH-2); the per-round breakdown, boss-only rounds separate, run before stage 2 sets the Tricks size; then stage 2 raises Tricks |
 | **Camp share for the martials** | Both may miss 40–60% after the fixes. The pool cap stops new pools, so the lever is weighting capstone and subclass value toward camp |
-| **The healer gap** | The DH 18.1 gate, with the Herald arms and healer count beside it (CL-9). Lever order (DH 18.1): heal-card targets (Hearth) and the Herald's slot pool sizes in class and companion data; then random potion weight for everyone. Never the guarantee |
+| **The healer gap** | The DH 18.1 gate, with the Herald arms and healer count beside it (CL-9), and the heal-isolation gate (HR-38; 12.3). Lever order (DH 18.1): heal-card targets (Hearth) and heal-specific sub-limits in Herald and companion data, never the Herald's slot or Cadence pools (change HR-38; Herald design 5.4); then random potion weight for everyone. Never the guarantee |
 | **Caster sheets** are the busiest | The counting rule and the spellbook row hold them at 3; spell cards add the most options per level |
 | **The level 6–8 plateau** | The level-6 feature changes a verb; a trigger option on every level-7 talent menu and spell-card draw (7.4); trigger offers legal at any level (added Opening triggers from level 5, `TriggerFromFive`; SH-23, Shade design 6.6). Still the weakest-felt band |
 | **Dip pressure at M4** | The guards contain it but do not remove it; front-loaded identity makes every signature verb attractive alone |
@@ -2028,6 +2140,14 @@ Later, and the arc is the lightning rider; Binder stops gain reliability
 only, never duration; Afterhold never applies to Dazed, other turn-part
 majors or hard instances; the ignore-resistance offer is excluded while
 the Elementalist owns Purity.
+
+**Narrowings recorded inside the Herald design (no approved text
+changes; Herald design 18):** Rally stays once per ally per fight, and
+no Herald record grants Rallied; Rekindle stays self-only, and Mending
+Word never targets Downed; healing grows only by a heal card's tier or
+the Hearth's one widening; the Dirge adds no Demoralise trigger (T1–T7
+fixed); Scatter never routs a boss or a fearless unit; "Banner" stays
+rejected (Pennant).
 
 **Main design (2026-11-15):**
 

@@ -1314,32 +1314,33 @@ excepted). Effects use user difficulty and the item spell attack.
 | **Trembling Word** (Cause Fear) [arcane] | 1, C | One enemy within 6: Will save or Frightened of the reader (saveEnds Will, cap 3); a Demoralised enemy is Routed instead (T6) | Best: a group whose leader fell. Worst: fearless enemies, bosses |
 | **Grasping Roots** (Entangle, on units only) [primal] | 1, C | Burst r1 within 8, not selective: Reflex save or Restrained (roots; breakers slashing, fire), sustained up to 3, concentration | Best: stopping a rush; setting up Reflex areas. Worst: ranged enemies; a reader already concentrating |
 | **Jarring Whispers** (Dissonant Whispers) [arcane] | 1, C | One enemy within 8: psychic 3d6, Will half, rider-flagged (ends concentration or Unfocused) | Best: breaking an enemy caster's concentration |
-| **Guiding Radiance** (Guiding Bolt) [divine] | 1, C | Item spell attack, range 8: radiant 4d6, rider-flagged (Blinded, or Revealed on a hidden target); a miss uses it up | Best: undead; blinding an archer. Worst: out of class (two failure points) |
-| **Withering Touch** (Inflict Wounds) [divine] | 1, C | Melee item spell attack: necrotic 3d10, rider-flagged (Withered) | Best: a regenerating enemy or potion carrier. Worst: undead |
+| **Guiding Radiance** (Guiding Bolt) [divine] | 1, C; **Later** (Votary or Hexer; Herald design 8.8, HR-24) | Item spell attack, range 8: radiant 4d6, rider-flagged (Blinded, or Revealed on a hidden target); a miss uses it up | Best: undead; blinding an archer. Worst: out of class (two failure points) |
+| **Withering Touch** (Inflict Wounds) [divine] | 1, C; **Later** (Votary or Hexer; Herald design 8.8, HR-24) | Melee item spell attack: necrotic 3d10, rider-flagged (Withered) | Best: a regenerating enemy or potion carrier. Worst: undead |
 | **Frost Shard** (Ice Knife shape) [arcane, primal] | 1, C | Item spell attack, range 8: piercing 1d10; hit or miss, cold 2d6 burst r1 around the target, Reflex half, rider-flagged (Chilled), not selective | Best: a cluster of Soaked targets. Worst: a target in melee with allies |
 | **Mending Word** (Healing Word) [divine] | 1, C | One ally within 6: heals its Recovery (the potion's number, 7.2); Withered blocks it; never lifts Downed; never on a Downed unit. In class a bonus action. `usableBy.monster: false` | Best: a healer out of slots. Loot only (never the camp channel, P1; never carried); counted in the delivery mix. Not the answer to idea 3 |
 | **Scorching Rays** (Scorching Ray) [arcane] | 2, U | Three item spell attacks within 8: fire 2d6 each, rider-flagged; one Burning attempt per target per use; only the first hit pays out Oiled | Best: finishing spread-out wounded enemies |
 | **Blinding Flash** (Blindness) [arcane, divine] | 2, U | One enemy within 8: Fortitude save or Blinded (saveEnds Fortitude, cap 2); no concentration | Best: shutting down an elite archer or caster |
 | **Fireball** [arcane] | 3, R | Burst r2 within 12, not selective: fire 8d6, Reflex half, rider-flagged; pays out Oiled; burns oil squares | Best: packs at range. Worst: mixed melee |
 | **Lightning Line** (Lightning Bolt) [arcane, primal] | 3, R | Line L10: lightning 8d6, Reflex half; Soaked hits arc (settled) | Best: a corridor queue; Soaked clusters |
-| **Terror** (Fear) [arcane] | 3, R | Cone L3: Will save or Frightened (saveEnds Will, cap 3), concentration; Demoralised → Routed | Best: collapsing a group's morale |
+| **Terror** (Fear) [arcane] | 3, R | Cone L3, **enemies only** for every reader (Herald design 8.8, HR-24): Will save or Frightened (saveEnds Will, cap 3), concentration; Demoralised → Routed | Best: collapsing a group's morale |
 | **Slowing** (Slow) [arcane] | 3, R | Up to 3 enemies in a burst r2 within 12: Will save or Slowed (Chilled + Dazed, conditions "Slowed (spell)" row), concentration | Best: an elite trio or a boss's escort |
 | **Unweaving** (Dispel Magic) [arcane, divine] | 3, R | One unit within 12. Enemy: ends spell-sourced beneficial conditions and its concentration. Ally: ends spell-sourced harmful conditions below hard. Never hard conditions, curses, lingering conditions, `oncePerLife` affixes or boss phase wards | Best: an enemy caster's buffs. Worst: fights with no spell effects |
 | **Icefall** (Ice Storm) [arcane, primal] | 4, VR (1 per floor) | Burst r2 within 12, not selective: bludgeoning 2d8 and cold 4d6, Reflex half; cold rider-flagged (Chilled); bludgeoning shatters Frozen | Best: large late packs |
-| **Blight** [primal] | 4, VR (1 per floor) | One creature within 8: necrotic 8d8, Fortitude half, rider-flagged (Withered); plants are weak | Best: bosses and regenerators. Worst: undead, constructs |
+| **Blight** [primal] | 4, VR (1 per floor); **Later** (Rootwarden; Herald design 8.8, HR-24) | One creature within 8: necrotic 8d8, Fortitude half, rider-flagged (Withered); plants are weak | Best: bosses and regenerators. Worst: undead, constructs |
 
 The names in brackets are the SRD shapes each entry adapts; they are
 authoring references, never shown in game (section 17).
 
 **`classTags` (the coverage-or-cut audit, closed; Arcanist design 8.10;
-change ARC-24):** `arcanist`: Fan of Cinders, Shockwave, Grasping Roots,
-Frost Shard, Scorching Rays, Fireball, Lightning Line, Slowing, Icefall;
-`arcanist` (+`herald` if the Herald lists it): Blinding Flash, Unweaving;
-`herald`: Mending Word; `herald`, **Later** if the Herald declines:
-Trembling Word, Terror; `herald` if the Herald's stage 2 claims it, else
-**Later**: Jarring Whispers, Guiding Radiance, Withering Touch, Blight
-(Blight's Later home: the Rootwarden). Unclaimed Herald-dependent items
-default to Later.
+change ARC-24; Herald design 8.8; change HR-24):** `arcanist`: Fan of
+Cinders, Shockwave, Grasping Roots, Frost Shard, Scorching Rays,
+Fireball, Lightning Line, Slowing, Icefall, Blinding Flash (the Herald
+declined); `arcanist` + `herald` (one shared record): Unweaving;
+`herald`: Mending Word, Trembling Word, Jarring Whispers, Terror;
+**Later**: Guiding Radiance, Withering Touch (Votary or Hexer), Blight
+(the Rootwarden). The M2 tier-4 pool holds only Icefall; optional lever
+(lead's call, not required): a `herald`-tagged Pall scroll at tier 4,
+Very rare (Herald design 8.8).
 
 **Later scrolls** (each waits for its condition or rule): Blessing (Bless,
 Blessed; t1); Slumber (Sleep, Asleep; t1); Holding (Hold Person, Held;
@@ -1365,8 +1366,8 @@ channel; floor 2+.
 | **Wand of Rime Lance** [arcane, primal] | (T2, 2) = 3, R, floor 3+, 60 coin | Item spell attack, range 10: cold 3d8, rider-flagged; `freezing` **only on a Soaked target** (Soaked + Chilled → Frozen, fallback Chilled; Steeled and resolve apply (ARC-24; Arcanist design 8.10)); otherwise Chilled | The only repeatable hard-capable item (the class Rime Lance also exists from Arcanist L3, Arcanist design 8.10; ARC-24): `usableBy.monster: false` in M2; freeze rate reported |
 
 **`classTags` (Arcanist design 8.10; change ARC-24):** `arcanist`: Wand
-of Sparks, Wand of Snaring, Wand of Rime Lance; `arcanist` (+`herald` if
-the Herald lists it): Wand of Outlining.
+of Sparks, Wand of Snaring, Wand of Rime Lance, Wand of Outlining (the
+Herald declined; Herald design 8.8, HR-24).
 
 ### 16.6 Talisman
 
@@ -1411,8 +1412,8 @@ the Herald lists it): Wand of Outlining.
 
 ### 16.8 M2 roster count
 
-1 potion, 1 tonic, Remedy, 4 flasks, 18 scrolls, 4 wands; the phial
-gated.
+1 potion, 1 tonic, Remedy, 4 flasks, 15 scrolls (Herald design 8.8;
+change HR-24), 4 wands; the phial gated.
 
 ## 17. Licensing
 
@@ -1619,7 +1620,8 @@ derived (18.2).
 8. Scrolls: rarity = tier; tier ≤ `scrollFloorCap[minFloor − 1]`, and
    the array's length equals the floor count; `classTags` non-empty and
    resolving to launch class ids (no `any`, no tradition tags in M2; the
-   M2 mapping is Arcanist design 8.10, ARC-24); the
+   M2 mapping is Arcanist design 8.10, ARC-24, and Herald design 8.8,
+   HR-24); the
    spell is not on the never-list (13.7); healing scrolls exclude the
    `camp` channel and are `usableBy.monster` false; monster-usable scrolls
    pass the 6.4 guards and items 19.1 rule 7. (CN-20 was approved on

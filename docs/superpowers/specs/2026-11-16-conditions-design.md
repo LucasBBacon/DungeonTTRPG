@@ -913,7 +913,13 @@ immunity (the `morale` tag allows none). `mindless` implies `fearless`
   route: a failed save, a successful skill check, or an automatic
   weak-target rider. The test is static data, so the rules core never runs
   the AI to decide it. **(change C2)** Restrained's `controlRank` is at or
-  above Dazed's **(change ARC-17; Arcanist design 8.9)**.
+  above Dazed's **(change ARC-17; Arcanist design 8.9)**. Frightened's
+  `controlRank` equals Dazed's, so a fear effect on a boss with pips
+  spends a pip instead, by any route, and lands once the pips are gone;
+  this is universal (every hero's Frighten, Make an Example, scroll
+  fear), and its adoption carries the four-class `Floor1ClassSpread`
+  and Arcanist pip-trap and novice reruns **(change HR-16a; Herald
+  design 10.2)**.
 - **Unyielding** is shown from the start, because it is a basic rule (stat
   model 7.2):
   - after the pips are gone, a hard condition becomes its downgrade (map in
@@ -1162,7 +1168,8 @@ term         = (T × denyPct + 100 × (defensive + offensive + setup)) × effTur
   Levitating's push-and-drop combo) are left out of monster kits and
   suggestions.
 - **Authoring default:** a boss's `resolveThreshold` defaults to the
-  `controlRank` of Dazed. Builders may check it against the scorer (a pip
+  `controlRank` of Dazed, which Frightened's equals **(change HR-16a;
+  Herald design 10.2)**. Builders may check it against the scorer (a pip
   should be worth spending on conditions worth about half the boss's own
   T), but the scorer never decides a pip.
 
@@ -1441,7 +1448,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Intensity: binary.
   - Duration: `turns:1`.
   - Sources: concussive Techniques, limited bludgeoning abilities, Hasted's
-    onEnd, the Stunned downgrade.
+    onEnd, the Stunned downgrade; presence spells (Bewilder, Overwhelm)
+    **(change HR-18; Herald design 8.2, 8.5)**.
   - Interactions: Dazed + Distracted leaves the action only; its
     `controlRank` is the default `resolveThreshold` (17.3), so it strips
     pips; a turn-part major, so party composure follows it (7.2).
@@ -1673,6 +1681,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     **(change CL-5; classes design 7.8, 8.6)**.
   - Interactions: unusable at speed 0 or while Prone; Rally gives this or
     Rallied, never both.
+  - Display: the Spurred trail (a dotted 2-square ring) shows only on its
+    holder's turn, inside the morale overlay family **(change HR-37;
+    Herald design 7.14)**.
 - **Anchored** — beneficial · Later
   - Effect: not moved by forced movement; cannot be knocked Prone by shove,
     trip or collision; cannot Dash or Jump.
@@ -1707,7 +1718,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     layers).
   - Intensity: valued by band (illustrative 2/4/6). `worsen` only from
     limited or cooldown abilities.
-  - Duration: `turns:3`. Ends on any hit point gain, Treat or a tonic. In
+  - Duration: `turns:3`. Ends on any hit point gain, Treat, a tonic or a
+    Hearth cure (Herald design 9.2) **(change HR-16c)**. In
     M1, any hit point gain is the in-fight end; Treat and tonics arrive in
     M2. **(lead's call)**
   - Sources: a non-rider monster claw in M1; the slashing rider in M2;
@@ -1789,8 +1801,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
 - **Withered** — minor · **M2**
   - Effect: cannot regain hit points or gain temporary hit points.
   - Intensity: binary.
-  - Duration: `turns:2`. Ends on Treat, a tonic, or a radiant-tagged heal
-    (which ends Withered instead of healing).
+  - Duration: `turns:2`. Ends on Treat, a tonic, a Hearth cure, or a
+    radiant-tagged heal or a Hearth heal card (either ends Withered
+    instead of healing) **(change HR-16c; Herald design 9.2)**.
   - Sources: necrotic rider; undead claws.
   - Interactions: the stat model's "blocks healing" (8.1); suppresses
     Regenerating and the heal ends of Bleeding and Condemned; does not
@@ -1805,7 +1818,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Two ids in one `family` (16), so they never share an instance and the
     effects never depend on the duration **(lead's call)**:
     - `cond.poisoned`: disadvantage on attack rolls and skill checks;
-      `turns:3`; ends on Treat or a tonic;
+      `turns:3`; ends on Treat, a tonic or a Hearth cure (never the
+      lingering id) **(change HR-16c; Herald design 9.2)**;
     - `cond.poisoned.lingering`: disadvantage on skill checks and −2 to
       passive values; `untilRest`; ends on Treat during a rest, a Remedy,
       or a short rest.
@@ -1980,16 +1994,25 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     closer to the source; no opportunity attacks against it.
   - Intensity: binary, one source.
   - Duration: `turns:2`, combatOnly, sourceTied; enemy-facing spells use
-    `saveEnds {Will, cap 3}`. Ends on rally, Clear-minded, `sourceGone` or a
-    tonic drunk as an action; breaking line of sight switches its penalties
-    off.
+    `saveEnds {Will, cap 3}`. Ends on rally, Clear-minded, `sourceGone`, a
+    tonic drunk as an action, Rouse (allies) or Watchfire (allies, a
+    hostile source) **(change HR-16c; Herald design 8.2, 9.2)**; breaking
+    line of sight switches its penalties off.
   - Sources: Frighten (Intimidation against 10 + Will) **(settled)**;
     Fear-shaped spells (SRD); boss roars (cooldown); Make an Example
     (Tricks-paid, so legal under 7.1) **(change SH-13; Shade design
     8.1)**.
   - Interactions: after it ends, further Frighten attempts by the same
-    source have disadvantage for the fight; overrides Shaken; a limited
-    fear effect on an enemy raises it to Panicked.
+    source have disadvantage for the fight **(settled)**, and every later
+    fear effect from that source gives the target advantage on its save
+    **(change HR-16b; Herald design 10.2)**. Only a Frightened that landed
+    and then ended starts this; a pip spent does not. The repeat set
+    (source ids) is kept on the unit's life state beside its resolve pips,
+    so a boss's persists with its pips across combat ends **(change
+    HR-16d)**. Its `controlRank` equals Dazed's (12.3) **(change HR-16a)**.
+    Overrides Shaken. A limited fear effect on an enemy raises it to
+    Panicked: Later, shipping with Panicked; in M2 re-application follows
+    6.3 **(change HR-17; Herald design 10.2)**.
 - **Panicked** — hard, agency, enemy-only · Later
   - Effect: Dashes as far from the source as it can; no attacks or
     reactions; takes the Dodge action if cornered. Its movement never
@@ -2021,7 +2044,12 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Sources: the leader's aura (Command, enemies design 14.4).
   - Interactions: ends with no `onEnd`; the morale engine's T1 Demoralises
     the non-fearless members when the leader falls, whether it dies or is
-    Routed, Yielded or Fled (enemies design 14.3).
+    Routed, Yielded or Fled (enemies design 14.3). **Waver:** while the
+    leader's Frightened penalties are active, its aura is suppressed
+    (members gain no Emboldened; Frighten has no aura disadvantage;
+    Routed, T2 and T3 are no longer blocked); suppression is not an end,
+    so no `onEnd` and no T1 **(change HR-20; Herald design 10.4;
+    recommended to the enemies owner, whose decision it is)**.
 - **Demoralised** — minor, morale state · **M2**
   - Effect: Intimidation against it has advantage; at or below its morale
     profile's rout line it becomes Routed: ½ hit points for `normal` and
@@ -2499,7 +2527,7 @@ Record of the catalogue's shaping. **(lead's call)**
 | blocks | Two harmful lingering conditions | A third harmful lingering condition (never Scarred) | |
 | transform | Soaked + Chilled from a `freezing` source | Frozen | Consumes Soaked. Fallback Chilled; re-checked against Steeled, the depth gates and resolve |
 | transform | Chilled + `freezing` cold | Frozen | Consumes Chilled. Fallback: no effect |
-| transform | Frightened + a limited fear effect (enemy target) | Panicked | Consumes Frightened. Fallback: no effect |
+| transform | Frightened + a limited fear effect (enemy target) | Panicked | Later: ships with Panicked; in M2 re-application follows 6.3 **(change HR-17; Herald design 10.2)**. Consumes Frightened. Fallback: no effect |
 | transform | Squinting + limited `searing` radiant | Blinded | Consumes Squinting. Fallback: no effect |
 | staged | Calcifying stage 2 + failed save | Petrified | Not a transform (6.5). Ends Calcifying; Petrified enters at step 2; if blocked, stays at stage 2 |
 | damage end | Fire ≥1 | Chilled, Frozen, Soaked, Oiled | Ends; on Oiled the hit takes +half and applies Burning one band higher; on Soaked the hit attempts no Burning rider. A ring-shifted fire part (trinkets design 9.4) does not pay out or end Oiled (Burning lands at its normal band) but ends Soaked as any fire hit **(change TK-25)** |

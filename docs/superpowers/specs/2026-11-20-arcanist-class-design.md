@@ -1284,8 +1284,9 @@ it).
   item's resolve data exactly in the compared fields: base-tier damage
   dice, shape and size, range, save, rider flag, conditions applied and
   the `freezing` gate. Not compared: `upcasts[]`, the attack and
-  difficulty source (the caster's, not the item's) and Sculpt
-  eligibility (SP-7) **(new lead's call)**.
+  difficulty source (the caster's, not the item's), Sculpt
+  eligibility (SP-7) **(new lead's call)**, the `faltering` field and
+  whether the caster may be a target (HR-25; Herald design 8.1, 8.8).
 - **Durations** ≤ 10 turns. **Conditions used:** Burning, Smouldering,
   Chilled, Frozen, Soaked, Oiled (payout), Corroded, Restrained,
   Stunned, Dazed, Blinded, Revealed, Prone, Teetering, Staggered; engine

@@ -940,7 +940,10 @@ Deterministic:
    a slot whose role and `usableBy` fit its item.
 6. **Fill** each slot against *budget − the item's cost add*, from the
    fill minimum to the budget (3.1), honouring `earliestRoomLevel` and the
-   caps. Candidates are tried in a fixed order.
+   caps. Candidates are tried in a fixed order. A boss is drawn only from
+   records whose `eligibleFloors` include the floor; on floor 1 only bosses
+   passing `Floor1BossMindReachable` (17.5) are placed **(change HR-21;
+   Herald design 7.16)**.
 7. **Compose:** affixes, overlay, loadout; freeze each unit's `cost`.
 8. **Validate.** On a failure, try the next candidate, up to K tries, then
    fall back to a Picket of the theme's cheapest legal type.
@@ -957,7 +960,10 @@ Content test: for every theme × floor in its range × party size 1–4 × band
 × ladder tier, every allowed template fills within tolerance, and every
 slot of the floor plan has at least one allowed template. The test runs on
 the M1 roster and templates separately, so the M1 floor is proven fillable
-on its own. The fallback should therefore never fire in practice.
+on its own. The fallback should therefore never fire in practice. Every
+theme that can appear on floor 1 has at least one compliant floor-1 boss
+(17.5), since there is no fallback for bosses **(change HR-21; Herald
+design 7.16)**.
 
 ### 10.6 Floor themes
 
@@ -979,6 +985,9 @@ M2.
   expressed through existing rules (for example, webs and Restrained); on
   floor entry, a party member trained in Lore sees the roster's types and
   roles.
+- **Next-floor line at camp:** every party sees the next floor's theme and
+  its non-fearless band ("Next floor: theme X, about Y% non-fearless"),
+  class-blind and information only **(change HR-23; Herald design 5.7)**.
 
 ## 11. Enemy AI
 
@@ -1590,7 +1599,16 @@ condition transforms:
   - **shields members from T2 and T3** **(change C-9)**;
   - offers no shield against T1, because the aura ends when the leader
     falls. It ends with no `onEnd` relation; T1 does the Demoralising,
-    so fearless members are never Demoralised by it **(change C-18)**.
+    so fearless members are never Demoralised by it **(change C-18)**;
+  - **Waver:** while the leader's Frightened penalties are active (its
+    source in line of sight), its aura is **suppressed**: members gain no
+    Emboldened, Frighten has no aura disadvantage, and Routed, T2 and T3
+    are no longer blocked. Suppression is not an end: no `onEnd` and no
+    T1 (C-18 unchanged); members Demoralised during the gap stay so until
+    a Rally. The aura returns when the leader stops being Frightened or
+    loses sight of its source. Lever: suppression only from round 2.
+    **(change HR-20, HX-2; Herald design 10.4; recommended to the enemies
+    owner; touches the settled "blocks Routed")**
 
   The positional play is to pull or shove members out of the banner's
   reach before breaking them.
@@ -1638,9 +1656,12 @@ condition transforms:
 
 **Demand Surrender** (a new Intimidation use) **(change S-4)**:
 
-- **Cost:** an action.
+- **Cost:** an action. The Dirge Herald's Parley makes it a bonus action
+  for 1 Cadence, once per round (Herald design 9.1) **(change HR-19)**.
 - **Roll:** Intimidation against 10 + Will.
-- **Range:** within 2 squares.
+- **Range:** within 2 squares; 4 for a Dirge Herald with Terms of
+  Surrender and the Totem in its active set (Loom does not stack)
+  **(change HR-19; Herald design 9.1)**.
 - **Targets:** a Demoralised or Routed unit. Never a boss. An elite only
   when Routed.
 - **Advantage** comes from Demoralised **(settled)**.
@@ -1652,19 +1673,25 @@ condition transforms:
 
 | | Frighten → Routed | Demand Surrender → Yielded |
 |---|---|---|
-| Range | Frighten's range | 2 squares |
+| Range | Frighten's range (6, line of sight) **(change HR-14; Herald design 18)** | 2 squares (4 with Terms of Surrender; HR-19) |
 | Can be undone | A Rally undoes it | Permanent |
 | Payoff | Opportunity attacks as it flees | Information (below) |
 
 **Yielded** is a *disposition*, like dead, not a condition. There is one
 disposition, reached two ways: Demand Surrender, or the end-of-fight rule.
+A third route is either the Herald's Lay Down Arms or the universal Offer
+Terms (HX-5, the enemies owner's decision; if adopted, Lay Down Arms is
+cut), never both **(change HR-19; Herald design 8.3, 10.1)**.
 
 - A yielded unit drops its notable item and salvage at once.
 - It is removed as resolved, with its full experience share.
 - **Interrogation is automatic: one floor fact per fight**, however many
   enemies yield. In priority order: the nearest undiscovered trap on the
   path to the stairs, an undiscovered secret, the boss's Lore entry, one
-  unexplored room's layout. It is shown in the loot summary.
+  unexplored room's layout. **The player picks the category** from this
+  list; the priority order is the default selection (Pick the Question,
+  HX-6; Herald design 10.5) **(change HR-19)**. It is shown in the loot
+  summary.
 - There is no spare, rob or execute menu. A choice with no mechanical
   difference is noise, and a reward for executing would make mercy a trap.
 - Captives as recruits are a Later idea for the companions design.
@@ -1699,6 +1726,9 @@ Intimidation never cost levels.
   exploration action, against a group the party can see.
 - The attempt makes the group aware.
 - **One attempt per group** **(settled: no free retries)**.
+- The Herald's **Show of Force** (exploration, a tier-1 slot) gives
+  advantage on one cow attempt against one eligible group this floor;
+  never a retry, caps unchanged **(change HR-22; Herald design 8.2)**.
 
 **Eligible groups:**
 
@@ -1784,6 +1814,16 @@ main path before the boss room (classes design 8.6) **(change CL-10)**.
   A unit an action would Rout or make Yield, cascades included, scores as
   if killed × 90% (tunable). It reads only what the party knows, and
   profiles and break lines are always visible.
+- **Break-chain preview** (universal, hover only): any preview whose
+  resolution causes loss events shows the FIFO cascade (14.3) from party
+  knowledge only, with "aura drops" (Waver), "Fearless: Frightens only"
+  and "Immune (known)"; unrevealed immunities show as "uncertain"
+  **(change HR-37, HX-7; Herald design 10.3)**.
+- **Morale overlay:** one family of enemy markers, at most one glint per
+  unit, in priority rout-ready, faltering, the Frightened tether to its
+  source; the Spurred trail shows only on its holder's turn; glints name
+  no ability. The readability playtest gate counts glints per screen with
+  four units **(change HR-37, CM-4; Herald design 7.14)**.
 
 ### 14.11 Rejected: morale in Later
 
@@ -2271,12 +2311,16 @@ same, which is what makes them learnable, and what makes intent reading
 
 **Anatomy** (settled items marked):
 
-- hand-designed, from a pool per floor **(settled)**;
+- hand-designed, from a pool per floor **(settled)**; boss pool records
+  carry `eligibleFloors` **(change HR-21; Herald design 7.16)**;
 - the same stat model as every unit **(settled)**;
 - **Unyielding** permanently **(settled)**;
 - **resolve pips:** 2 on floor 1, 2–3 on floors 2–3, 3 on floors 4–5.
   `resolveThreshold` defaults to Dazed's `controlRank` **(settled
-  mechanism)**;
+  mechanism)**. A fear effect that would land on a boss with pips spends a
+  pip instead (Frightened's `controlRank` equals Dazed's), and the fear
+  repeat set persists on the boss's life state beside its pips (the
+  conditions owner's ruling, HR-16a/d; HX-1, HX-1b; Herald design 10.2);
 - **phases** **(settled)**. Phase changes end harmful conditions and grant
   Steeled;
 - at least one tool against sustained effects **(settled)**;
@@ -2284,6 +2328,11 @@ same, which is what makes them learnable, and what makes intent reading
   camp resources **(settled)**;
 - `fearless`; guile 10 + Wisdom + proficiency + 2, with announced
   signature moves (13.2, 13.3);
+- **a floor-1 boss** (`eligibleFloors` includes floor 1) is never
+  `mindless` and never psychic-immune; class-blind, and a `mind`
+  immunity alone passes (`Floor1BossMindReachable`, 20.1). Escort and
+  reserve groups are not constrained **(change HR-21; Herald design 7.16;
+  client agreed 2026-11-20, Q3)**;
 - never Death-warded **(settled)**; never affixed;
 - **HP** ≈ 6 × the party's typical damage per round × 0.85 (the rest of
   the budget is the escort). Illustratively about 40 on floor 1 (solo,
@@ -2574,6 +2623,10 @@ The build fails when:
 - an affix grant is not `oncePerLife`;
 - minion rules or solo minion caps are broken;
 - a mindless type is not fearless, or a boss is not fearless;
+- a boss whose `eligibleFloors` includes floor 1 is `mindless` or
+  psychic-immune (`Floor1BossMindReachable`; a `mind` immunity alone
+  passes), or a theme that can appear on floor 1 has no compliant
+  floor-1 boss **(change HR-21; Herald design 7.16)**;
 - a boss has no `signature` ability, or more than 2;
 - a leader type lacks Command;
 - an armed type lacks an `improvised` fallback;
@@ -2640,7 +2693,7 @@ The build fails when:
 | Affixes | Win rate by affix and by affix pair. Outliers block release. |
 | AI | Stall detector; decision time; joiner warning lead time (must be ≥1) |
 | Intent | Share of enemies readable by floor and party Perception investment, with guile = 10 + Wisdom + proficiency + role adjustment (13.3), gated: targets about 40% for an untrained party, 75% trained, 95% with mastery (**lead's call**; outliers block release); read accuracy (a read matching the action taken, with and without intervening party actions, and with rolled turn-start steps as an expected mismatch); hero deaths with and without reading |
-| Morale | Share of fights ended by morale, and rounds saved; Rally uses, and the share undone by counters; Frighten, Demand Surrender and cow attempts and success by floor; **an Intimidation-focused hero against a baseline**; the share of enemies with no morale content, per theme |
+| Morale | Share of fights ended by morale, and rounds saved; Rally uses, and the share undone by counters; Frighten, Demand Surrender and cow attempts and success by floor; **an Intimidation-focused hero against a baseline**; the share of enemies with no morale content, per theme; the early-end target (14.3) with every adopted morale mechanic on (Antiphon, Mourners, Scatter, Waver, Offer Terms if adopted), with and without a Dirge **(change HR-32; Herald design 11.9)** |
 | Bosses | Boss kills involving re-engagement, and HP lost per reset |
 | Experience | Pool against need, with and without bypass and cow; catch-up frequency |
 | Loot | Notables placed against the floor budget; loot summary size |
