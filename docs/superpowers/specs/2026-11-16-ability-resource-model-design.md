@@ -807,6 +807,12 @@ are listed on the same screen above the choice. **(lead's call)**
 - The choice is one of two or three kit upgrades, at levels 3, 6 and 9.
   **(lead's call)**
 - A recruit joins at camp with full pools. **(lead's call)**
+- A companion's level always equals the hero's; a recruit joins at the
+  hero's level with missed choices defaulted on the join card; one
+  2-option 3/6/9 grammar (numeric steps only); Rethink: one choice
+  re-picked per companion per camp, never a stance; no ability increases
+  (fixed array; `companion.mainIncreases` off). **(change CMP-16,
+  companions design 8.2)**
 
 ### 11.3 Suggested actions
 
@@ -829,6 +835,11 @@ are listed on the same screen above the choice. **(lead's call)**
   suggestions.
 - Nothing is ever taken without the player. The hero never gets
   suggestions.
+- An optional accept-rest-of-turn key (player-pressed each turn; never
+  the hero) is prototyped in M2 behind a playtest flag, off in every
+  release build, and ships only if the client says yes after the M2
+  prototype. **(agreed 2026-11-20 for the prototype; change CMP-19,
+  companions design 8.6)**
 - The suggestion comes from the party scorer (section 13), the same one the
   simulator uses. A poor suggestion is visible to players, so its quality is
   a release requirement.
@@ -1063,7 +1074,11 @@ The build fails when:
   party scorer's pressure and reserve, suggestions, simulator spending
   policies, and whole-floor simulation. Out-of-combat choices in the
   simulator (when to rest, which fights to skip, offers, recruits, supply
-  bought) are scripted policies, not the scorer.
+  bought) are scripted policies, not the scorer. The recruit policy is
+  `MusterBestFit`, written in full in companions design 11.3 (with
+  `combatValuePermille`), with the simulator arms there; the DH 18.1,
+  classes 6.6 and Herald design 5.4 readings pin to the reference
+  schedule and this policy. **(change CMP-18)**
 
 ## 15. Short rests and supply
 

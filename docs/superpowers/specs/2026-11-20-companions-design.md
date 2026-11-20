@@ -1,7 +1,7 @@
 # Companions: Design
 
 Date: 2026-11-20
-Status: Draft, awaiting client approval, 2026-11-20
+Status: Approved, 2026-11-20
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model),
@@ -29,29 +29,30 @@ full decline is a real challenge at roughly half the reference win rate,
 never parity**; that **the Lone Road and the milestones (M3) unlock
 content, never stats**; and that **the numbers are a direction until the
 M2 simulator sets them**. The client also said that everything else in
-the lead's proposal stands as written. **The document as a whole awaits
-the client's approval.**
+the lead's proposal stands as written. The client approved this
+document as a whole on 2026-11-20.
 
 Items marked **(lead's call)** were filled in by the design lead inside
-approved rules; they become binding when the client approves this
-document. Items marked **(settled)** restate a rule from an approved
+approved rules; the client confirmed them all on 2026-11-20, when it
+approved this document as a whole, and they are binding. Items marked **(settled)** restate a rule from an approved
 document; **(decided)** marks a main-design client decision. Items marked
 **(change CMP-n)** amend an approved document and are listed, with the
 exact section they touch, in section 16; rows that touch **decided** or
 **agreed** text are flagged there, and the client's approval of this
-document (with Q1–Q3 where a row names one) covers them. Items marked
-**(told plainly)** narrow or re-read agreed or settled text and are told
-to the client in plain words with Q1 above or with the approval request
-(18.1). Once approved, every item here is binding on the builders.
+document on 2026-11-20 (with Q1–Q3 where a row names one) covers them.
+Items marked **(told plainly)** narrow or re-read agreed or settled text
+and were told to the client in plain words, with Q1 above or with the
+approval request (18.1); the client confirmed them all on 2026-11-20.
+Every item here is binding on the builders.
 
 | Marking | Meaning |
 |---|---|
 | **(settled)** | Restates a rule from an approved document |
 | **(decided)** | A main-design client decision, restated |
 | **(agreed)** | A client answer: Q1–Q3 of this document (2026-11-20), or one recorded in an approved document, restated |
-| **(lead's call)** | Filled in by the design lead inside approved rules; binding when the client approves this document |
+| **(lead's call)** | Filled in by the design lead inside approved rules; confirmed by the client with this document on 2026-11-20 |
 | **(change CMP-n)** | Amends an approved document; listed with its exact section in 16 |
-| **(told plainly)** | Narrows or re-reads agreed or settled text; told to the client in plain words (18.1) |
+| **(told plainly)** | Narrows or re-reads agreed or settled text; told to the client in plain words (18.1) and confirmed by the client on 2026-11-20 |
 | *(illustr.)* | An illustrative number, owned by the builders and calibrated by the simulator (15) |
 
 This is **the companions design**: how often companions are offered,
@@ -373,8 +374,8 @@ stand **(settled)**.
 
 The client chose Q1–Q3 on 2026-11-20, each time the lead's
 recommendation **(agreed)**. The rest are the lead's calls, which the
-client said stand as written; they become binding with this document's
-approval.
+client said stand as written; the client confirmed them with this
+document on 2026-11-20, and they are binding.
 
 | # | Decision | Chosen | Rejected, and why |
 |---|---|---|---|
@@ -2063,12 +2064,21 @@ comparison use the same seeds.
 
 ## 16. Changes to approved documents
 
-**This document edits no parent document.** The rows are applied by the
-owners of the sections they touch once the client approves this document
-**(lead's call)**. Every row names the exact section it touches. Rows
-that touch **decided** or **agreed** text are flagged in bold; **the
-client's approval covers them** (with Q1–Q3 where a row names one; the
-told-plainly rows with the approval request, 18.1).
+Applied on 2026-11-20, when the client approved this document. **This
+document edits no parent document itself**; the rows are applied by the
+owners of the sections they touch **(lead's call)**, and the rows owed
+by other owners (17; listed below) are recorded as such. No row applies
+only when an unlock ships: the M3 unlock content (Lone Road, milestones,
+Old Friend, kit unlocks) needs no row here (12). The conditional rows
+are recorded now and apply only when their condition is met: CMP-19
+only if the client says yes after the M2 prototype; CMP-10 records a
+Later idea and changes no wave; CMP-20 is withdrawn. Every row names the
+exact section it touches. Rows that touch **decided** or **agreed** text
+are flagged in bold; **the client's approval of 2026-11-20 covers
+them** (with Q1–Q3 where a row names one); the told-plainly rows were
+told with Q1 or with the approval request (18.1) and confirmed by the
+client on 2026-11-20; the rest were confirmed with the document on
+2026-11-20.
 
 **Narrowings recorded inside this design (no approved text changes):**
 - no kit grants Dash or any extra movement (classes 6.3, "+speed"),
@@ -2178,9 +2188,12 @@ The owed rows are the single list in 16 (and 12); by owner:
 
 ## 18. Open items for the client
 
-**The approval of this document as a whole,** including every lead's
-call, the told-plainly items in 18.1 and the new lead's calls listed
-there. The three questions are answered **(agreed, 2026-11-20)**.
+None. Approved by the client on 2026-11-20, as a whole, including every
+lead's call, the told-plainly items in 18.1 and the new lead's calls
+listed there. The three questions were answered **(agreed,
+2026-11-20)**. The future items in 18.2, which come back only if a
+report or a later design triggers them, and the naming pass remain
+future items.
 
 ### 18.1 This document
 
@@ -2216,7 +2229,8 @@ The three questions this design raised were answered on 2026-11-20
   sub-limit 1, never the signature) is kept written as a Later reserve.
   Rejected: B (Poultice at M2).
 
-**Told plainly with the approval request:**
+**Told plainly with the approval request; confirmed by the client on
+2026-11-20:**
 - companion skills: "fixed" now means fixed once chosen on the join card
   (CMP-13, touching agreed stat model 7.2);
 - the 10 s per companion turn target alone cannot fit a party of 4 into
@@ -2247,10 +2261,12 @@ The three questions this design raised were answered on 2026-11-20
 - the companions toy's healer figures are not evidence for any gate
   (10.7);
 - CMP-1, CMP-3 and CMP-4 touch decided or agreed text (main 4.1, main
-  6.3, enemies 10.1) as wording or extensions; the approval covers them.
+  6.3, enemies 10.1) as wording or extensions; the client's approval
+  on 2026-11-20 covers them.
 
 **New lead's calls in this document** (beyond the proposal the client
-said stands; listed so the approval covers them):
+said stands; listed so the approval covers them; confirmed by the
+client with the document on 2026-11-20):
 - **the Arcana need's gap card is a non-caster** (the Scout, or the
   Outrider through its flex), so DEP-1's "recruitable non-caster" is met
   literally on every board where Arcana is the first need left; the

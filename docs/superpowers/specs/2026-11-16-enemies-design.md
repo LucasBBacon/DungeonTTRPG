@@ -176,7 +176,8 @@ The client also answered three questions **(agreed)**:
    enemy-only morale states**: Emboldened, Demoralised, Routed, Cowed
    (14.9).
 2. **Party weight grows sublinearly:** hero 15 + 8 per companion, using the
-   actual party, fixed at floor generation (10.1).
+   actual party, fixed at floor generation, less the shortfall term on
+   floors 2–5 (10.1; companions design, Q1) **(change CMP-5)**.
 3. **Intent display:** a baseline for everyone in M1 (threat-reach overlay,
    turn log, announced boss signature moves, reinforcement warnings), plus
    **intent reading** in M2: when the party's best passive Perception is at
@@ -421,7 +422,9 @@ damage, flat steps for AC and attack (17.1).
 
 The floor 1 boss stays at proficiency +2, so it hits at +4 or +5, not +6.
 "Expected size" is a calibration assumption only; budgets use the actual
-party (10.1).
+party (10.1). The shortfall term in 10.1 reads `expectedCompanions(floor)`,
+computed from the slot schedule and the cap, not this column **(change
+CMP-6; companions design 7.7)**.
 
 ### 6.4 Permadeath guards
 
@@ -451,6 +454,10 @@ round-1 row.
 | AC envelope: against the maximum charged AC (Raise or Fortified, plus one reaction), normal roll mode **(change AR-20)** | ≥ 15% |
 | AC envelope: against the maximum sustained AC with the one allowed gear roll-mode effect **(change AR-20)** | ≥ 10% |
 
+- **Party sizes (change CMP-8; companions design 7.9):** every guard is
+  evaluated at every reachable party size and weight, down to the
+  shortfall minimum (10.1); the floor-1 solo round-1 row also applies to
+  solo parties on floors 2–5. **(told plainly)**
 - **Armour (change AR-20; armour design 11, items 1 and 2):** the guards
   are also evaluated at the lowest legal party AC as armour design 11
   item 2 defines it, and a failure fails the build. From M2 each guard
@@ -803,7 +810,18 @@ call)**
 
 **Party weight** = 15 for the hero + 8 per companion: solo 15, duo 23, trio
 31, four 39. **(agreed)** It uses the **actual** party, fixed when the floor
-is generated, so recruiting a fourth companion is a net gain. A companion
+is generated, so recruiting a fourth party member is a net gain **(change
+CMP-4)**. On floors 2–5, less `partyWeight.shortfall[expected − actual]`
+(config per cap, *illustr.* [0, 2, 3, 4] at cap 3), where expected is
+`expectedCompanions(floor)`, computed from the companions design's slot
+schedule for the floor being generated; shipped with the deterministic
+solo composition table and `SoloBudgetMonotone` **(change CMP-5;
+companions design 7.7; client agreed 2026-11-20, Q1)**. Solo
+composition rule: a solo party on floors 2–5 meets at most 1 standard
+unit plus the minion cap, the remainder spent by a deterministic table
+(no RNG) owned here, mapping (floor, band, weight) to one composition;
+`SoloBudgetMonotone` checks its fill and expected round damage are
+non-decreasing in weight (companions design 7.7). A companion
 lost mid-floor does not lower the floor's budgets. **(lead's call)**
 
 **Encounter budget** = weight × band% × depth% × ladder% ÷ 1,000,000,
@@ -956,8 +974,10 @@ Deterministic:
 Every step except 3 draws only from the dungeon stream, in the order
 listed. **(lead's call)**
 
-Content test: for every theme × floor in its range × party size 1–4 × band
-× ladder tier, every allowed template fills within tolerance, and every
+Content test: for every theme × floor in its range × party size 1–4 (at
+every reachable party weight, down to the shortfall minimum, 10.1;
+**change CMP-8**) × band × ladder tier, every allowed template fills
+within tolerance, and every
 slot of the floor plan has at least one allowed template. The test runs on
 the M1 roster and templates separately, so the M1 floor is proven fillable
 on its own. The fallback should therefore never fire in practice. Every
@@ -1694,7 +1714,9 @@ cut), never both **(change HR-19; Herald design 8.3, 10.1)**.
   summary.
 - There is no spare, rob or execute menu. A choice with no mechanical
   difference is noise, and a reward for executing would make mercy a trap.
-- Captives as recruits are a Later idea for the companions design.
+- Captives as next-camp Pledges, never mid-floor joins (Later): Meet at
+  camp, or Send home for a Parting Word from the categories above
+  **(change CMP-10; companions design 7.12)**.
 
 **End of fight** **(change M-3)**: combat also ends, **as a win**, when
 every hostile unit still in the fight is Routed.
@@ -2182,7 +2204,8 @@ The 110–135% validation check (20.1) runs on the pool without the optional
 elite room, which is extra by design. **(lead's call)**
 
 - **Camp catch-up:** at camp the hero is raised to at least the next
-  floor's entry level. Target: this fires in under 20% of runs.
+  floor's entry level, and companions with it, before the camp restore
+  and the Muster (companions design 7.11) **(change CMP-17)**. Target: this fires in under 20% of runs.
 - **Banking:** experience is banked and resolved at combat end
   **(settled)**.
 
@@ -2286,7 +2309,7 @@ same, which is what makes them learnable, and what makes intent reading
 | **Picket** | 1–2 standards + 0–2 minions (≤2 when solo) | Patrol or guard post | 1+ | Patrol or stationary | The universal fallback. On floor 1 solo, budgets make a patrol one standard: the floor's Stealth and ambush teaching target. | M1 |
 | **Pack** | 1 brute (M2: or skirmisher) + 2–4 minions of one family (2 when solo) | Patrol, guard post or lair | 1+ | Patrol or dormant | Minions share one initiative slot | M1 |
 | **Line and Bow** | 1–2 soldiers or brutes + 1 artillery | Guard post or lair | 1+ | Stationary at a chokepoint | Teaches "go around" | M1 |
-| **Boss Court** | Boss + escort (0–2 standards or a minion pack; no elite on floor 1) | Boss | All | Wary from the start | Boss alone in M1 | M1 / M2 |
+| **Boss Court** | Boss + escort (0–2 standards or a minion pack; no elite on floor 1) | Boss | All | Wary from the start | Boss alone in M1. Escort budget: the shortfall-adjusted party weight × 200% × depth% × ladder%; boss HP ignores the shortfall (17.5) **(change CMP-7)** | M1 / M2 |
 | **Champion** | 1 elite + 1–2 minions or standards, at least one of them an awake **watcher** placed with line of sight to every square adjacent to the elite | Elite room | 1+ (second half of floor 1) | Stationary, awake, visible from the approach | Guaranteed notable item or cache; Steal needs the watcher drawn off first (15.5) | M2 |
 | **Warband** | Leader + 1–2 front + 0–4 minions | Guard post or lair | 2+ | Stationary or dormant | Morale showcase; the usual carrier | M2 |
 | **Den** | Leader-role "mother" (a beast silhouette is allowed) + 1 non-minion standard + 2–4 minions | Lair | 2+ | Dormant | Stealth-bypass candidate. The extra standard keeps one kill from ending the lair (14.3). | M2 |
@@ -2304,7 +2327,8 @@ same, which is what makes them learnable, and what makes intent reading
   promoted elite wherever the floor's elite cap (10.3) allows, unless the
   template names the slot's rank.
 - Content test: each template's own encounter, at every party size and
-  floor in its range, fills within tolerance and keeps the 3-type cap and
+  floor in its range (and every reachable party weight, down to the
+  shortfall minimum, 10.1; **change CMP-8**), fills within tolerance and keeps the 3-type cap and
   the role rule (10.3).
 
 ### 17.5 Boss framework
@@ -2335,7 +2359,12 @@ same, which is what makes them learnable, and what makes intent reading
   client agreed 2026-11-20, Q3)**;
 - never Death-warded **(settled)**; never affixed;
 - **HP** ≈ 6 × the party's typical damage per round × 0.85 (the rest of
-  the budget is the escort). Illustratively about 40 on floor 1 (solo,
+  the budget is the escort), of the **actual** party at floor generation,
+  stored per boss as `hpByPartySize[1..4]` (authored to this formula,
+  simulator-calibrated) and read by the actual size; the escort budget
+  uses the shortfall-adjusted weight × 200% × depth% × ladder%; HP ignores
+  the shortfall. Content test: a row per boss per party size **(change
+  CMP-7; companions design 7.9)**. Illustratively about 40 on floor 1 (solo,
   level 3), 265 on floor 3 (trio, level 7), 430 on floor 5 (four, level
   10).
 
@@ -2687,7 +2716,7 @@ The build fails when:
 
 | Area | Report |
 |---|---|
-| Combat | Hit rates both ways by floor; rounds per fight by band (patrol about 2, guard post about 3, lair about 4, boss 5–7); HP-equivalents spent per band at party sizes 1–4 (flat across sizes validates the party weights); round-1 downs |
+| Combat | Hit rates both ways by floor; rounds per fight by band (patrol about 2, guard post about 3, lair about 4, boss 5–7); HP-equivalents spent per band at party sizes 1–4, read against an expected curve; hero death per fight by party size **(change CMP-9; companions design 7.9)**; round-1 downs |
 | Deaths | Hero deaths by cause: surprise, joiners, chain-pull, affix, focus, hazard push, brute pair |
 | Templates and units | Rounds to resolution per template, with the share under 2 (and the share of Pack and leader-template fights ended by morale before round 2, under 10%); elite-room notables stolen without a fight (under 15%); cost residual per type (recalibrates the cost table and the minion and elite multipliers); damage share by role |
 | Affixes | Win rate by affix and by affix pair. Outliers block release. |
@@ -2748,7 +2777,7 @@ The build fails when:
   cursed carried items; multi-square bosses; committed boss signature moves
   (a scripted area marked at the end of the boss's turn, resolving at its
   next turn start, at most one per boss); the runner role; captives as
-  recruits; intent reads feeding companion suggestions; **the rival
+  next-camp Pledges, never mid-floor joins **(change CMP-10)**; intent reads feeding companion suggestions; **the rival
   adventuring party (stretch goal, section 18)**.
 
 Content volume: M1 = 3 types and 1 boss. M2 = 4 themes of 5–6 types (about
@@ -2950,8 +2979,10 @@ committed wind-ups (13.2).
 | A `mainPathIndex` on every square, corridors taking the lower index of the rooms they join (death and healing design 17.1) **(change DH-32)** | Floor-1 surprise rule (11.3 invariant 6, 12.2) | M1 |
 | Trap ids and a detection snapshot when a trap fires (death and healing design 10.4) **(change DH-32)** | Party trap floor | M1 |
 
-- **Companions:** captives as recruits (Later, optional); the rival party's
-  dependence on companion kits (18.1).
+- **Companions:** captives as next-camp Pledges, never mid-floor joins
+  (Later, optional; Meet at camp and Send home / Parting Word, companions
+  design 7.12) **(change CMP-10)**; the rival party's dependence on
+  companion kits (18.1).
 - **Classes and offers:** Perception mastery offered through the
   pick-one-of-three pool, so Tactician is reachable in a run (13.4).
   Settled in the classes design (2026-11-17): Perception mastery sits in

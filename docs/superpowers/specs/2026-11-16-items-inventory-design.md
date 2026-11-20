@@ -721,7 +721,10 @@ deterministic. The run state keeps the per-family count.
 
 - **Sell** happens at camp only, at one flat rate *(illustr. 40% of
   price)*, with no haggling. **(agreed)** Heirlooms, keys and `unsellable`
-  items sell for 0 and show `Unsellable`. Camp identifies everything first
+  items sell for 0 and show `Unsellable`. A `kitBound` instance
+  (`boundToUnitId` set, 18.1) gets the same `unsellable` treatment: it
+  sells and scraps for 0 and shows "Unsellable: kit" (companions design
+  7.6) **(change CMP-21)**. Camp identifies everything first
   (section 11), so Sell always reads the true value.
 - **Scrap** applies only to leftovers and flee piles at the stairs
   *(illustr. 10%)* (section 9). **(agreed)**
@@ -995,7 +998,7 @@ family: { id: "family.longsword", category: "weapon", improvised: {...},
 | `monsterProfile?` | object | `{effects, abilityShape: uses:N \| cooldown, useWhen, minFloor}`; overrides the family default. `useWhen` is a closed vocabulary (consumables design 15) **(change CN-1)** |
 | `value` | int, checked at load | Σ fixed property values + rollable `count` × the table's `entryValue` + Σ values of the `use` ability and granted abilities, in offer-value units (12.6). Every roll gives the same value. A trinket button is a property whose effect is the grant; its value is counted once, inside that property (trinkets design 9.2) **(change TK-12)**. Each `ability.item.*` declares its offer value; the load check compares a scroll's value with its tier, a wand's with `wandValue(tier, pool max)`, and every other use-only record's with its rarity budget (consumables design 9.1) **(change CN-6)**. |
 | `basePrice?` | int | Required for mundane and shop-only records (supply, Remedy) |
-| `flags` | set | signature, heirloom, unsellable, noSteal, unique, srd (with `srdSource`) |
+| `flags` | set | signature, heirloom, unsellable, noSteal, unique, srd (with `srdSource`). The `unsellable` treatment also applies to any instance with `boundToUnitId` set (18.1; companions design 7.6) **(change CMP-21)**. |
 | `display` | object | iconId, modelId, glint; `socket` (`head \| back \| none`, trinkets) (change AR-35). Never read by the rules. |
 | `weapon{}`, `armour{}`… | sub-records | Owned by the category designs (section 17). `weapon{}` and `focus{}`: weapons design 20.1 (change W-6). `armour{armourCategory, verb}`, `shield{}` and `trinket{kind, wornOn}`: armour design 16.1; `armourValue` is derived and never stored (change AR-35). |
 
@@ -1123,8 +1126,9 @@ to a container in that room.
   free slot or stays at its source (6.2) (`ItemMerged`).
 - **Hand over or Administer** moves one dose, splitting off a new instance
   (`ItemSplit`).
-- Stacks merge only when the record, rolled properties and known state are
-  identical. Gear never stacks.
+- Stacks merge only when the record, rolled properties, known state and
+  `boundToUnitId` are identical, so two companions' kit potions stay two
+  stacks (companions design 7.6) **(change CMP-21)**. Gear never stacks.
 - **Wands:** charges are pre-rolled at generation (enemies 10.5 step 3),
   stored as `spent = max − rolled`, and refill at camp (settled `camp`
   tag; `ItemRecharged`). Vendor and shop wands start full (10.3). The one
@@ -1254,7 +1258,12 @@ is original, so it carries no `srd` flag.
   never die at launch (death and healing design 6.4, 11). **(change
   DH-36)**
 - **A recruit** arrives with its kit record (mundane bases, full pools,
-  settled ability model 11.2), and the party view opens.
+  settled ability model 11.2), and the party view opens. Every instance
+  its kit issues is `kitBound` (`boundToUnitId` set to the recruit,
+  18.1): it sells for 0 (10.6), anyone may equip it while its unit is in
+  the party, and it is deleted from wherever it is in the party when its
+  unit is dismissed or its hire undone (companions design 7.6) **(change
+  CMP-21)**.
 - **Run end:** every item, all coin and all supply are gone. Only heirloom
   *templates* persist (section 14).
 
@@ -1323,6 +1332,7 @@ ItemInstance {
                      //   pile(markerId) | shop(campId) | trader(markerId)
   origin { channel, floor }
   substituted        // enemies 15.3 step 2
+  boundToUnitId      // null unless issued by a recruit kit; kitBound is derived from it (companions design 7.6; change CMP-21)
 }
 ```
 
@@ -1340,6 +1350,7 @@ no other occurs.
 |---|---|---|---|---|
 | generation | `container`, `carried`, `shop`, `trader` | floor loot draw | generation | `ItemCreated` |
 | vendor (unlimited goods) | 6.2 placement | Buy | camp | `ItemCreated`, `ItemBought` |
+| kit issue | 6.2 placement | on hire (companions design 7.6) **(change CMP-21)** | camp | `ItemCreated{kit}` |
 | `carried` | `ground` | the monster dies or drops it (enemies 15.6) | combat | `ItemDropped` |
 | `container`, `leftovers`, `pile`, `ground`, `claimed` | `summary` | summary opens (8.1) | out of combat | `ItemMoved` |
 | `carried` | thief's `pack`, else `leftovers` | Steal (8.1) | out of combat | `ItemTaken` or `ItemLeft` |
@@ -1355,6 +1366,7 @@ no other occurs.
 | any party place | any party place | party view | out of combat (armour and trinkets only at a rest, camp or Equip now) | `ItemMoved`, `ItemEquipped` |
 | `shop`, `trader` | 6.2 placement (armour and trinkets to a pack at a trader) | Buy, barter | camp; trader (Later) | `ItemBought`, `CoinChanged` |
 | party place | deleted | use to 0, Sell, barter offer | any; camp; trader | `ItemDestroyed{usedUp}`, `ItemSold`, `ItemBartered` |
+| party place (`boundToUnitId` set) | deleted | on dismissal or same-visit undo of its unit (companions design 7.6) **(change CMP-21)** | camp | `ItemDestroyed{dismissed}` |
 | `leftovers`, `pile` | deleted | stairs | descent | `ItemScrapped` (heirloom: `ItemDestroyed{lost}`) |
 | `container`, `carried`, `ground`, `trader`, `party(keys)` | deleted | stairs | descent | `ItemDestroyed{lost}` |
 | `shop` | deleted | leaving camp | camp end | `ItemDestroyed{lost}` |

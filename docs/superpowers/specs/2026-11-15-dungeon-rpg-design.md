@@ -88,9 +88,11 @@ These would make the game a failure even if everything works.
 - The hero reaches about level 10 by the end of a run, so a level-up arrives
   about every 8–10 minutes. **(decided)**
 - Between floors the party reaches a camp: full rest, a shop or reward, and
-  a chance to recruit. **(decided)** Every camp also has a basic vendor
-  (supply, potions in limited pre-rolled stock, tonics, Remedy, mundane
-  bases). "A shop or reward" is a choice between a notables shop (1–2
+  a **Muster**: a recruit offer at every camp while the party has an open
+  slot, a swap offer otherwise; hiring is optional. **(decided)**
+  (companions design 7.1, 7.11; change CMP-1) Every camp also has a basic
+  vendor (supply, potions in limited pre-rolled stock, tonics, Remedy,
+  mundane bases). "A shop or reward" is a choice between a notables shop (1–2
   notables) and a camp reward card, separate from the boss reward card
   (enemies design 17.5). **(decided)** (items design 10.3, 10.4)
 - A run can be saved and resumed, but there is one save slot per run and it
@@ -99,9 +101,14 @@ These would make the game a failure even if everything works.
 ### 4.2 Party
 
 - The player builds one hero in full. **(decided)**
-- Up to 2–3 companions are recruited during the run. Companions have a fixed
-  class and lighter progression: they level automatically, with a choice
-  only at a few key levels. **(decided)**
+- Up to 3 companions (a party of 4). One slot opens at each of camps 1–3;
+  at most one hire per camp plus one carried hire; any offer may be
+  declined; one dismissal or swap per camp, at camp only. If the M2
+  floor-time gate fails after the levers, the cap is 2: no new slot opens
+  at camp 3, and a party below the cap there still gets a hire board.
+  **(agreed 2026-11-20, Q2)** (companions design 7.1, 7.4–7.6; change
+  CMP-2) Companions have a fixed class and lighter progression: they level
+  automatically, with a choice only at a few key levels. **(decided)**
 - The player controls every party member in combat. **(decided)**
 - The run ends when the hero dies. A companion reduced to zero hit points is
   downed, and gets back up on 1 hit point if the party wins the fight.
@@ -293,7 +300,10 @@ computes rules.
 - The core uses its own seeded random number generator, not the platform
   one, so results do not change between runtime versions.
 - Separate random streams for dungeon generation, combat rolls and loot.
-  Opening a chest must not change the next attack roll.
+  Opening a chest must not change the next attack roll. A `recruit` stream
+  sits beside them, with per-camp, per-slot and gap substreams and
+  `armReroll`, `eyeReroll`, `cosmetic` and reserved `pledge` (Later)
+  children (companions design 7.2; change CMP-3).
 - Rules use integer arithmetic only.
 - No reliance on unordered collection iteration.
 

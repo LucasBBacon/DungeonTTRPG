@@ -510,7 +510,9 @@ Herald arm printed per subclass:
   heal card, because no Herald recruit kit heals), and the level-3
   subclass is forced to the row's subclass.
 - **Recruits:** every arm draws recruits from the full pool under the
-  scripted recruit policy (ability 14.6). In the no-Herald arm only, a
+  scripted recruit policy (ability 14.6), pinned to the reference slot
+  schedule and the written `MusterBestFit` policy (companions design
+  11.3; change CMP-18). In the no-Herald arm only, a
   drawn Herald kit is replaced by a re-roll on a dedicated random
   substream, so every other recruit draw, heal-kit recruits included, is
   the same on the same seeds in every arm.
@@ -606,8 +608,8 @@ pattern):**
 | Report | Construction |
 |---|---|
 | Healer classification columns | "Ever held an ally heal" per run and per fight, printed beside the gate's per-fight kit snapshot. A Herald who first takes Mending Word at L7 holds it in no fight snapshot on floors 1–3 |
-| Healer count 0 / 1 / 2+ | Read the **2+ row first**, de-confounded from Herald morale. Escalation: 2+ minus 1 > 5 points → the healing levers (1–8) → back to the client |
-| Heal-source breakdown | Herald hero card; Hearth widening; Herald recruit (always 0, printed); heal-kit recruit; scroll reads; **get-ups by route** (Medicine, Lifeline, Reach the Fallen) |
+| Healer count 0 / 1 / 2+ | Read the **2+ row first**, de-confounded from Herald morale. Escalation: 2+ minus 1 > 5 points → the healing levers (1–8) → back to the client. **While no heal kit ships, the 2+ row prints N/A**, and the DH 18.1 healer arm is exactly a Herald hero holding a heal card; the gate text is unchanged (companions design 5.4; change CMP-23, **agreed** Q3) |
+| Heal-source breakdown | Herald hero card; Hearth widening; Herald recruit (always 0, printed); heal-kit recruit (prints 0 while no heal kit ships; companions design 5.4, CMP-23); scroll reads; **get-ups by route** (Medicine, Lifeline, Reach the Fallen) |
 | `MoraleValueReport` | Per fight: enemy attack rolls removed by Rout, Yield, flight and Frightened disadvantage; rounds saved; potions saved |
 | `AllyTempoValueReport` | Spurred moves used by allies; opportunity attacks avoided; attacks the step alone enabled; **party-wide Spurred moves per ally-turn** (escalation 0.4 *(illustr.)*); **Cadence spent per option** (Frighten and Antiphon, Spur and Soothe, Rekindle, Refrain), with an escalation if Spur's share is above 50% at L1–4 on the novice or basic arm *(illustr.)*, answered first by the Spur pre-tick conditions (7.14) |
 | Heal telemetry | Heal-card pick rate (on the free-draws arm); Mending Word turns against Cadence Frighten turns; overheal share; the out-of-combat heal-card share |
@@ -1427,12 +1429,15 @@ design (CL-5 names a Herald kit that grants Spurred).
 | Kit | Gear | At-wills | Reaction | Pools | Choices |
 |---|---|---|---|---|---|
 | **Drummer** (the CL-5 kit) | Hide (Sure-Footed), spear | Weapon attack; Help | Opportunity attack (`nonMinion`) | `rest` 2 **Quickstep** (bonus action: one ally within 6 gains Spurred); `camp` 1 signature **Drumroll** (bonus action: up to 3 party units within 6, itself included, gain Spurred) | L3 Quickstep 3, or Drumroll range 8; L6 Quickstep on 2 allies, or Drumroll 4 targets; L9 Drumroll 2 per camp, or Quickstep 4 |
-| **Shieldbearer** (the second protector class, 7.8) | Chain shirt, shield, mace | Weapon attack; Shove | Interpose (pool-free, `ifItChangesOutcome`); a Guarding shield is illegal on it (CL-7) | `rest` 2 **Guard Step** (gain Spurred yourself); `camp` 1 signature **Form Up** (up to 2 allies within 6 gain Spurred) | As the Drummer's pattern |
+| **Shieldbearer** (the second protector class, 7.8) | Chain shirt, shield, mace | Weapon attack; Shove | Interpose (pool-free, `ifItChangesOutcome`); a Guarding shield is illegal on it (CL-7) | `rest` 2 **Guard Step** (gain Spurred yourself); `camp` 1 signature **Form Up** (up to 2 allies within 6 gain Spurred) | L3 Guard Step 3 uses, or Form Up range 8; L6 Guard Step also gives Spurred to one adjacent ally, or Form Up 3 targets; L9 Form Up 2 per camp, or Guard Step 4 uses (companions design 8.3; change CMP-25) |
 
 - Spurred never stacks and is never granted to the whole party every
   turn.
-- Recruiter's Eye (HX-10) is handed to the companions design as
-  optional.
+- Recruiter's Eye (HX-10): **Adopted (companions design 9.2)**
+  (change CMP-15). If the hero is trained in Leadership, each Muster
+  shows one extra free card; with Leadership mastery, the player may
+  also re-roll one free card once per camp. It never adds a unit, a
+  hire or a slot, and never changes party weight.
 
 ### 7.18 `effectKinds` and registry
 
@@ -2239,7 +2244,7 @@ boss-only rounds (the trap-room report, 5.4).
 | HX-7 | **Break-chain preview** | Display | S–M | Enemies 14.10; ability 8.3 | **Adopted, required** (HR-37) |
 | HX-8 | **Opening Cry** | Offer | S | Ability 7.1 | **Adopted (M2), `voice` lane** |
 | HX-9 | **Double Time / Spurred-now** | Cast option | M | Conditions 18.4; companion turns | **Later** |
-| HX-10 | **Recruiter's Eye** | Universal | S | Stat model 7.1 | **Handed to the companions design (optional)** |
+| HX-10 | **Recruiter's Eye** | Universal | S | Stat model 7.1 | **Adopted (companions design 9.2)** (CMP-15): with Leadership training, one extra free Muster card; with mastery, one free-card re-roll per camp; never a unit, hire or slot, never party weight |
 | CM-1 | **Undertone** | At-will | S | Classes 8.6 | **Adopted** (HR-3) |
 | CM-2 | **Faltering as save disadvantage** | Keyword | S | Classes 8.6; `PayoffBound` | **Adopted;** fallback +1d4 (HR-3) |
 | CM-3 | **Plain Speech** | At-will clause | S | Classes 8.6, 6.5 | **Adopted** (HR-3) |
@@ -2956,7 +2961,9 @@ consumables 16.8 finds none, and "15 scrolls" is found there.
   and Recoil against Shockwave's shape; Reach the Fallen against the
   Lifeline Pendant.
 - **Companions:** the Drummer and Shieldbearer kits (7.17); Recruiter's
-  Eye (optional).
+  Eye **adopted (companions design 9.2; CMP-15)**: one extra free
+  Muster card with Leadership training, one free-card re-roll per camp
+  with mastery, never a unit, hire, slot or party weight.
 - **The simulator:** the heal-isolation gate; the three arms; reliance
   and desirability; `Floor1ClassSpread` on the reference arm; parity,
   camp share, sustain, early-end, trap-room and skill-expression

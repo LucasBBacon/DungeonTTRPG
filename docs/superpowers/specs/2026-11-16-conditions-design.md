@@ -1480,7 +1480,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     collision damage is not a hit, so it never fires this source; stat
     model 8.2 unchanged) **(change VG-23; Vanguard design 8.3)**; shield bashes
     with the Bashing Rim property or a Technique, not the base bash
-    **(change W-9; weapons design 17.9)**.
+    **(change W-9; weapons design 17.9)**; companion kit signatures
+    (Staggering Shot; M2) **(change CMP-32; companions design 8.3)**.
   - Interactions: does not release grapples.
 - **Silenced** — major · Later
   - Effect: cannot use limited `spell` abilities or `vocal` abilities
@@ -1563,9 +1564,10 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Duration: trigger until it stands (self-ended, no cap, 5.3);
     combatOnly.
   - Sources, tagged `shove`, `trip`, `collision` or `onApply`: Shove, trip
-    Techniques, the Topple verb (tagged `trip`), Asleep, Downed, Grovel.
-    Topple applies at most once per round per target; condition verbs
-    never fire on reactions **(change W-10; weapons design 7.2)**.
+    Techniques, the Topple verb (tagged `trip`), Asleep, Downed, Grovel;
+    kit riders (Barge), tagged `trip` **(change CMP-32; companions design
+    8.3)**. Topple applies at most once per round per target; condition
+    verbs never fire on reactions **(change W-10; weapons design 7.2)**.
   - Interactions: `prone` immunity; Anchored blocks shove, trip and
     collision sources; Levitating blocks it.
 - **Grappled** — major · **M1**

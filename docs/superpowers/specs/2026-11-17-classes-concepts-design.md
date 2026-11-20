@@ -447,6 +447,10 @@ tolerance and the miss rules lead's call)**
   reference arm) also blocks the M2 release; the Herald reliance and
   desirability reports stay reports, with escalation thresholds (Herald
   design 5.4).
+- **(change CMP-29)** The companions reports are added (companions design
+  11.4), and **`FloorTimeByPartySize`** is the first M2 gate (agreed
+  2026-11-20, companions Q2; companions design 7.4). Pass or fail
+  verdicts read the M2 simulator only, never a toy.
 
 ## 6. Lean, never require
 
@@ -607,7 +611,9 @@ automatic fallback on immunity, not a switch (Herald design 7.1, 7.2).
 - **Composition sampler:** party arms use the scripted recruit policy
   (ability 14.6) and the reference party policy (DH 19.3) over the
   release seed set. On solo floor 1, "without" a class means the mean of
-  the other three launch classes.
+  the other three launch classes. **(change CMP-18)** The reading pins to
+  the reference slot schedule and `MusterBestFit` (companions design
+  11.3).
 - **Target 10 points,** as a **report**. A miss goes to the lead, whose
   lever order is: the class's lean size (pool, range, targets), then the
   universal baseline route's content density, never a forbidden grant.
@@ -628,7 +634,17 @@ automatic fallback on immunity, not a switch (Herald design 7.1, 7.2).
   subclass, with heal cards − without ≤ 10 points; an M2 release gate,
   5.6); the Herald reliance and desirability reports are required
   reports with escalation thresholds. The DH 18.1 gate itself is
-  unchanged (Herald design 5.4).
+  unchanged (Herald design 5.4). **(change CMP-23; agreed 2026-11-20,
+  companions Q3)** While no heal kit ships, the "heal-kit recruit" row
+  prints 0 and the "healer count 2+" row prints N/A; the gate text is
+  unchanged, and at M2 its healer arm is exactly a Herald hero holding a
+  heal card (companions design 5.4).
+- **(change CMP-29)** The companions reports join these (companions
+  design 11.4), with `FloorTimeByPartySize` as the first M2 gate (agreed
+  2026-11-20, companions Q2). The DH 18.1 and 18.2 pass or fail verdicts
+  read the M2 simulator only, never a toy; DH 18.2's "checked against
+  playtests" stands as a check beside the verdict, and a disagreement
+  goes to the client.
 
 ## 7. Structure
 
@@ -951,8 +967,12 @@ multiclass character" (main 4.7) works with both.
     waives this rule (6.6);
   - at least one Medicine-trained recruit and one Mechanics-trained
     recruit;
-  - **at most one kit with an ally heal** in each floor's pool, and that
-    heal is never the kit's signature.
+  - **at most one kit with an ally heal** per board (zero at M2), and
+    that heal is never the kit's signature.
+  - **(change CMP-11)** "Each floor's pool" is read as each Muster board
+    together with the current party: a gap card fills the first unmet
+    need; needs already met are waived and printed; the Arcana need's
+    gap card is a non-caster (companions design 7.3).
 - **Optional (lead's call):** recruits of classes not yet unlocked for
   the hero, as previews; only non-casters until their spell lists exist,
   because of `classTags`.
@@ -1009,7 +1029,8 @@ Every class meets the fixed chassis rules **(settled)**:
   3–4 read on the class mean over both subclasses, subclass rows printed
   **(agreed 2026-11-20, Herald Q2; change HR-31: this widens an agreed
   reading; Herald design 11.10)**;
-- exactly one `restDefensiveTool`;
+- exactly one `restDefensiveTool` **(change CMP-24)** (binds class
+  records, not companion kits);
 - subclass at level 3 and capstone at level 9;
 - the cap of eight limited abilities;
 - `effectKinds` declared for the copy registry;
@@ -2249,7 +2270,9 @@ shows the Vanish clause.
   kits on at least two classes), an Arcana-trained non-caster, Medicine
   and Mechanics recruits, at most one ally-heal kit per floor pool;
   Herald recruits on `companionMainAbility` with a tempo signature and no
-  presence spells; same-class weighting.
+  presence spells; same-class weighting. Designed in the companions
+  design (approved 2026-11-20): pool rules read per Muster board plus
+  party (CMP-11; companions design 7.3).
 - **Species (M4):** traits on baseline axes, in the copy registry.
 - **Multiclassing (M4):** the model, inside the dip guards (7.7).
 - **Dungeon generation:** `SeedHasTarget` and its `seedTarget`

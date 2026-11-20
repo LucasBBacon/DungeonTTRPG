@@ -984,7 +984,10 @@ designs:
 - the hero can always gain Arcana through skill offers (settled sources:
   "offers and the starting boon add more", stat model 7.2);
 - at least one recruitable non-caster companion per floor's recruit pool
-  is trained in Arcana *(illustr.)*;
+  is trained in Arcana *(illustr.)*; read as met by a Muster board card (a
+  non-caster) **or** any party member trained in Arcana, the hero
+  included (the party can read any scroll) (companions design 7.3)
+  **(change CMP-12)**;
 - at least one launch non-caster class has Arcana on its skill list.
 
 **Revisit trigger:** if non-caster out-of-class reads are under about 5%
@@ -1929,7 +1932,9 @@ family caps; belt counts; `packInCombat`; the 6.4 guards; main design
   source of `classTags`) and the coverage-or-cut audit are its stage 2
   (CL-12a); DEP-1 (13.8) is met by the Shade; no launch class needs a
   teleport rule (classes design 11.G). **(change CL-12b)**
-- **Companions:** caster kits; Arcana-trained recruits (DEP-1).
+- **Companions: answered** (companions design 7.3): caster kits;
+  Arcana-trained recruits (DEP-1), read as met by a non-caster board card
+  or any party member trained in Arcana. **(change CMP-12)**
 - **Ability model:** a teleport rule (Flicker Step, Far Step). No launch
   class needs a teleport rule (classes design 11.G); teleport scrolls stay
   Later. **(change CL-12b)**

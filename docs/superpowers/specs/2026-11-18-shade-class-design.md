@@ -634,6 +634,13 @@ Trick Shot (8.2).
 | `aloneCounts` | open | 5+ | M2 | "A target with no other hostile within 2 squares of it counts." | melee |
 | `dreadCounts` | open | 5+, `requires: subclass:cutthroat` | M2 | "A Frightened target counts." | melee |
 | `launcherOpening` | — | — | — | **Barred** (114% raw at level 10) | — |
+| `gapSight` (**Gap Sight**) | open | kit only: the Scout companion kit; never a hero trigger (CMP-33) | M2 | "Once per round, your launcher or thrown hit is against an Unready or Staggered target." (companions design 8.3) | thrown, launcher |
+| `knifeWork` (**Knife Work**) | open | kit only: the Outrider companion kit's signature; never a hero trigger (CMP-33) | M2 | "Your action's two melee attacks against one target each count as against a Beset target, and Flank Sense's once-per-round limit is lifted for that action." (companions design 8.3) | melee |
+
+The two kit-only rows (CMP-33 of the companions design) are not hero
+triggers: they are never offered, never on `triggerMenu` and never
+counted by `TriggerFromFive` or `OpeningTriggersAdded` (6.6); they were
+checked against Lone Blade and Caught.
 
 ### 6.6 Trigger rules
 

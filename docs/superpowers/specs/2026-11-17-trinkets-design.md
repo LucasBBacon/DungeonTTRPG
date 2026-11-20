@@ -1362,7 +1362,7 @@ except the landing envelope, whose numbers are the lead's (TK-4):
 | Rare amulet, reported separately; effect on boss win rate | Reported |
 | Antidote, Graveward and Lifeline against tonic, Remedy and Treat use; companion downings with and without Lifeline | Reported |
 | Element share of finger and neck picks; second same-element offer in a run | De-weighted by smart loot |
-| Companion slot fill at the boss | ≤ 25% empty **(settled)** |
+| Companion slot fill at the boss, reported by join camp (companions design 8.4; change CMP-30) | ≤ 25% empty **(settled)**, the metric unchanged; lever if late recruits miss it: `anyCompanion` loot weighting (CMP-30) |
 | Piece against jewellery; the E+ rows | **(settled, armour 17.3)** |
 
 ## 19. Staging
@@ -1520,7 +1520,11 @@ grants.
   concentrate (Arcanist and Herald), so Stillmind's condition is met
   (Later) (classes design 8.7, 11.G).
 - **Companions:** kits and choices at 3, 6 and 9; Medicine and Lore
-  training spread (Lifeline steering).
+  training spread (Lifeline steering). Answered by the companions design
+  (`2026-11-20-companions-design.md`): eight M2 kits with 3/6/9 choices
+  and Medicine and Lore spread across kits (companions design 8.2, 8.3);
+  no kit trinket (8.4); the slot-fill report by join camp **(change
+  CMP-30)** (18.3).
 - **Death and healing:** answered by the death and healing design
   (settled): nothing lifts Downed beyond Medicine (Lifeline counts toward
   its once per companion per fight), a won fight, a completed short rest

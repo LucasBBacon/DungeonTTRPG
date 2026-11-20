@@ -852,7 +852,7 @@ until the classes design proposes one and the client approves it.
 | **Short rest** (1 supply, 20 ticks, no aware hostile, no guaranteed safe spot) | The floor's main healing | The order of 11.3 **(settled shape)** |
 | **Healing potion** | In-fight tempo; the hero's lifeline | Recovery, bonus action; Hand over, Administer, or throw at 750‰ **(agreed, consumables Q4)**; never on a Downed unit |
 | **Fighter-type Second Wind** | Self-sufficiency | **Regain your Recovery**, `rest` pool (DH-10). The 1d10 + level example drifts from 36% of HP to 19% |
-| **Other classes' rest tool** | Self-sufficiency, solo floor 1 | A `rest`-pool defensive tool tagged `restDefensiveTool: true` (exactly one per launch class): a self-heal of at most FloorDiv(Recovery, 2), or an effect kind on the approved defensive list (21.2), inside the 40–60% band of ability 6.3. **Requirement on the classes design** |
+| **Other classes' rest tool** | Self-sufficiency, solo floor 1 | A `rest`-pool defensive tool tagged `restDefensiveTool: true` (exactly one per launch class): a self-heal of at most FloorDiv(Recovery, 2), or an effect kind on the approved defensive list (21.2), inside the 40–60% band of ability 6.3. **Requirement on the classes design.** Binds class records, not companion kits (companions design 8.1; change CMP-24) |
 | **Class heal spells** | Optional healer power | **Tier 1: the target's Recovery, exactly.** Higher tiers add targets, range or riders, never more HP per target; a declared upcast entry may add nothing (Mending Word targets 1 / 1 / 2 / 3, its tier-2 entry adds no target; the cast's tier is the slot spent; Herald design 8.1, a reading; change HR-6). `rest` or `camp` pools only; never at-will; never on wands |
 | **Healing scroll** | A potion bought with a camp spend | One cast of the tier-1 heal = a potion's heal (P1 holds); loot only, never the camp channel |
 | **Medicine** | Getting up, Treat, the rest bonus | Trained only for getting up **(settled)**; once per companion per fight **(agreed, Q4)**; "stretch supplies" stays the builders' choice and must never mean free rests |
@@ -977,11 +977,15 @@ strongest guarantee. In order:
 
 1. Downed companions get up **(agreed, Q4)**, wherever their bodies lay
    (11.4); a first downing sets Scarred, which step 3 clears (11.6).
+   - Then camp catch-up for the hero and companions, with their choices
+     (enemies 16; companions design 7.11) **(change CMP-31)**.
 2. All HP and every pool are restored.
 3. Every lingering condition ends, Scarred and `treatProof` Scarred
    included.
 4. +1 supply.
 5. The hero's potion top-up (13.2).
+   - Then the Muster (companions design 7.11), revisitable until leaving
+     camp **(change CMP-31)**.
 6. The vendor opens.
 
 Recruits arrive with full HP and pools and a kit holding 1 potion.
@@ -993,7 +997,13 @@ Recruits arrive with full HP and pools and a kit holding 1 potion.
 - **Checked on arrival at camp, over the whole party.** A "healing potion"
   here is the ordinary healing potion or the camp-issue record below, on
   any belt or in any pack; a healing scroll or the phial does not count.
-  If the hero holds one, nothing happens.
+  A kit-issued ordinary healing potion (`boundToUnitId` set) counts as a
+  healing potion (companions design 7.6; change CMP-21). If the hero
+  holds one, nothing happens. Run again on leaving camp only if a
+  dismissal there deleted a healing potion the hero held (a kit-bound
+  dose); it then moves a companion's dose first and issues only if no
+  unit holds one. Selling, handing over or drinking potions at camp never
+  triggers it (companions design 7.6) **(change CMP-22)**.
 - **If the hero holds none but a companion does,** camp moves one dose to
   the hero, with no new potion created: from the companion holding the
   most doses, ties by party order, belt before pack (`PotionMovedAtCamp`).
@@ -1402,6 +1412,16 @@ Treat and Recovery, plus the supply left and the patrol warning
   heal-isolation gate (classes design 12.3; Herald design 5.4) is a
   separate gate and does not change this one. **(change CL-9, HR-26,
   HR-38)**
+- **While no heal kit ships (companions design 5.4):** "heal-kit recruit"
+  prints 0 and "healer count 2+" prints N/A; the gate text is unchanged,
+  and at M2 its healer arm is exactly a Herald hero holding a heal card
+  **(agreed, companions Q3; change CMP-23)**.
+- **M2 reading (companions design 11.3, 11.4):** the gate's pass or fail
+  verdict reads the M2 simulator only, never a toy, pinned to the
+  reference schedule (party 1 / 2 / 3 / 4 / 4) and the written recruit
+  policy `MusterBestFit` (the `Reference` arm); the companions design's
+  11.4 reports (healer counts by party size, small parties reported
+  separately) sit beside it as reports **(change CMP-18, CMP-29)**.
 
 ### 18.2 Target death rate
 
@@ -1430,6 +1450,10 @@ Treat and Recovery, plus the supply left and the patrol warning
 - These are **calibration targets, not validation gates**: a miss is
   reported to the client with the report that shows it, not a build
   failure.
+- **M2 reading (companions design 11.4):** the pass or fail verdicts read
+  the M2 simulator only, never a toy; "checked against playtests" stands
+  as a check beside the verdict, and a disagreement goes to the client
+  **(change CMP-29)**.
 - **Lever order when a target is missed:**
   - floor-1 deaths at 5% or more: floor-1 ambush and lair budgets, the
     floor-1 cumulative budget, the floor-1 solo boss rows (21.1), then the
@@ -1682,6 +1706,11 @@ for tick batches, whose chain already ran where the damage landed.
 The 6.4 guards are still computed **without** any party consumable or
 talisman (consumables 14.9) **(settled)**; only step 6 reads them, and it
 is not a guard.
+
+**Party sizes (companions design 7.7, 7.9; change CMP-8):** these rows
+are evaluated at every reachable party size and weight, down to the
+shortfall minimum, and the floor-1 solo round-1 row also applies to solo
+parties on floors 2–5.
 
 ### 21.2 Content validation
 

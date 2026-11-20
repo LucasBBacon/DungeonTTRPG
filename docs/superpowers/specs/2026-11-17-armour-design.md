@@ -978,6 +978,8 @@ All checked by validation (17.1). **(lead's call, confirmed to stand)**
      stat model's best legal array plus both increases: +3 at levels 1–3,
      +4 at 4–7, +5 at 8–10 (stat model 5.1). The maxima include every
      class defence feature (an unarmoured defence or a ward) and every
+     companion kit defence feature (Interpose, Flare, Close Ranks as a
+     step-0 window fill, 10.4) (companions design 8.3; CMP-34), and every
      training reachable under each class's `armourTrainingCeiling` and
      `shieldTraining` (7.2), shield training included.
 2. **Low end:**
@@ -989,7 +991,10 @@ All checked by validation (17.1). **(lead's call, confirmed to stand)**
      companions. A member who chooses to take armour off is not the
      bound. From M2 each guard runs per attacker at the minimum over party
      members of (that visible AC − the attacker's piercing R), Puncture
-     included where it has it (9.1);
+     included where it has it (9.1). These runs are evaluated at every
+     reachable party size and weight, down to the shortfall minimum, and
+     the floor-1 solo round-1 row also applies to solo parties on floors
+     2–5 (companions design 7.9; CMP-8);
    - **binding requirement on class designs:** every class with an armour
      ceiling below light ships a defensive feature (an unarmoured defence
      or a ward) that keeps its sustained AC no more than 3 below the
@@ -1045,7 +1050,7 @@ they are its native level plus `levelShift`. **(lead's call)**
 | Claw brute | Natural, offset −2 | `other` 0 | 11 at L0–4 (band 9–11 / 10–12 / 11–13): in band | — |
 | Greatclub brute (alt) | Natural (furs), offset −2 | `other` 0 | 11 at L0–4: in band | — (not leather: Supple would negate "opportunity-attack zones") |
 | Warhammer-and-shield soldier | Chain shirt + shield | `other` +1 | 16 at L1–4 (bands 14–16 at L1–2, 15–17 at L3–4): in band; legal at L1–4 only (16 is above the L0 band 13–15) | Ringed (left off the M1 gear line: no Bleed riders yet, 6.4) |
-| Recruit soldier (M2; a separate L0 type, not one of M1's three) | Leather + shield | `other` +1 | 15 at L0 (13–15): in band | Supple |
+| Levy soldier (M2; a separate L0 type, not one of M1's three) | Leather + shield | `other` +1 | 15 at L0 (13–15): in band | Supple |
 | Pike soldier (room level 2+) | Chain mail, Strength +2 (main) | — (heavy ignores it) | 16 at L1–4: in band; legal at L1–4 only; authored speed 6, derived 5 (Weighty) | Ringed (left off the M1 gear line) |
 | Sling artillery | Unarmoured | `main` (+2 at L0–2, +3 at L3–4) | 12 at L0–2, 13 at L3–4 (bands 10–12, 11–13, 12–14): in band | — |
 | Minions | Leather | `other` +1 | 13 at L0–2: in band | Supple, inert (left off the gear line) |
@@ -1132,8 +1137,8 @@ Best at / worst at / monster use:
 
 - **Leather.** Best: Dexterity skirmishers moving through zones;
   rustproof. Worst: standing fights; companions without ability
-  increases. Monsters: minions (inert); never brutes or skirmishers
-  (role-answer rule).
+  increases (all of them; companions design 8.1). Monsters: minions
+  (inert); never brutes or skirmishers (role-answer rule).
 - **Gambeson.** Best: kiters crossing open ground on artillery floors;
   rustproof. Worst: holding a chokepoint; Prone and Grappled shut it off.
   Monsters: skirmishers and raiders.
@@ -1802,8 +1807,11 @@ Stat model 6's AC formula and "Armour is hit or miss" and stat model 8.1
   trinkets; the piece power target (17.3).
 - **Starting kits:** armour per class and companion (13.6; items 17,
   row 3).
-- **Companions:** armour kits; companions without ability increases and
-  the light-armour case.
+- **Companions:** settled in `2026-11-20-companions-design.md` (approved
+  2026-11-20; changes CMP-8, CMP-27, CMP-34): no ability increases (a
+  fixed array per kit) and kit AC at or above the lowest legal AC
+  (`CompanionAcFloor`) (companions design 8.1); kit defence features in
+  the charged envelope (11 item 1; companions design 8.3).
 - **Death and healing:** settled in `2026-11-17-death-healing-design.md`
   (approved 2026-11-17; change DH-45): the crit rule is S-3, double dice
   (death and healing design 9), as Proof, Adamant and every guard

@@ -1238,7 +1238,7 @@ ability 7.3; defaults lead's call)**.
 | Array | Str +3, Con +2, Wis +1, Pre +1, Int 0, Dex −1 | Heavy armour ignores Dex; Wis feeds Medicine and Will |
 | Skills | Athletics, Medicine | DH 8 calls Medicine "close to compulsory" on solo floor 1 |
 | Stance | Hold the Line | Works solo; keeps Guarding legal |
-| Level 2 | Drive Through (M1; M2 solo or with one companion). **Pivot in M2 when two or more companions are recruited at the level-up** | Pivot keeps foes inside your zone instead of pushing them toward the back line (7.4) **(lead's call)** |
+| Level 2 | Drive Through (M1 and M2) | Level 2 always falls on solo floor 1, so the M2 Pivot clause could never fire and is deleted (companions design 16, CMP-26) **(lead's call)** |
 | Level 3 | Weaponmaster | Fewest decisions; M1 |
 | Level 6 | Twin Verb / Retort Strike / Domino with a shield active, otherwise Upend | — |
 | Level 7 | Grim Resolve II | Stance Drill flagged as "the defender pick" |

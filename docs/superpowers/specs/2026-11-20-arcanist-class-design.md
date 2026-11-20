@@ -2722,7 +2722,10 @@ may raise it to two" in ability 6.5 finds the Arcanist exclusion.
 - **The floor-pacing owner:** lever 5 (boss door at level 3), shared
   with the Shade's request.
 - **Companions:** an Arcanist recruit kit as a signature slice that does
-  not copy Overchannel or the subclass Arts.
+  not copy Overchannel or the subclass Arts. Answered by the companions
+  design (`2026-11-20-companions-design.md`, approved 2026-11-20): the
+  Tinker and Hedgemage kits carry no Overchannel or Arts (8.3);
+  scorer-chosen beam order and Prime's solo clause read as in its 8.6.
 - **The simulator:** the four arms, parity, nova, spread, camp share,
   sustain sensitivity.
 - **The ability 8.4 aura ruling:** AM-6 and the self-aura reserve.

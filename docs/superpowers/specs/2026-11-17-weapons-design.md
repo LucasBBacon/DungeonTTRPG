@@ -1141,6 +1141,11 @@ maps as `off` → `off`, `main` → `main`, `two` → `twoHand` (bulky).
   call)** The lead switches to it only if the M2 companion-turn playtest
   median exceeds 10 seconds and turns with an off-hand attack are
   measurably slower; the switch is reported to the client.
+- **Companion lever `companion.extraAttackAsDie` (off) (lead's call;
+  CMP-28):** a companion turn-time lever, applied before D-c in the
+  companions design's lever order (companions design 7.4); D-c keeps its
+  own trigger above. No M2 kit dual-wields, so D-c speeds the hero's turns
+  only.
 
 ## 12. Damage types and riders
 

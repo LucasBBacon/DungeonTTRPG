@@ -268,7 +268,7 @@ Rules behind the table:
 | Perception | Wisdom | Hear what is behind a door; spot hidden enemies | Avoid surprise; find hidden attackers; read an enemy's intent when the party's best passive Perception is at least its guile (enemies design 13.3) |
 | Medicine | Wisdom | Stretch short-rest supplies; cure poison and disease; at a short rest, Treat ends Diseased and Scarred (fixed difficulty, one attempt per Scarred unit per rest), except a talisman's `treatProof` Scarred, which is not offered and uses no attempt (consumables design 14.6) | Get a downed companion back up, at most once per companion per fight (death and healing design 11.2); Treat (an action, adjacent): one roll against each instance's difficulty ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (conditions design 8) |
 | Intimidation | Presence | Make weak groups back off without a fight; cow eligibility and the `broken` flag (enemies design 14.8) | Frighten enemies; break morale when a leader falls; Demand Surrender (enemies design 14.6) |
-| Leadership | Presence | Better recruits, shop prices and event outcomes | Rally: steady an ally or give them a free step |
+| Leadership | Presence | Better recruits (Recruiter's Eye, companions design 9.2), shop prices and event outcomes | Rally: steady an ally or give them a free step |
 
 Constitution has no skill; its three jobs are passive. Strength has one broad
 skill.
@@ -289,8 +289,9 @@ skill.
   in initiative (enemies design 13.4). The other skills' signature uses
   stay the builders'.
 - **Sources:** a class grants two or three skills from its own list. Offers
-  and the starting boon add more. Companions come with fixed skills.
-  **(agreed)**
+  and the starting boon add more. Companions come with fixed skills,
+  plus one flex skill chosen on the join card from two options on its
+  class list, fixed from then on (companions design 8.1). **(agreed)**
 - **No free retries.** Exploration has no clock, so a failed check always
   costs something: noise, a sprung trap, a jammed lock. Where no cost fits,
   the check is a threshold with no roll. **(agreed)**
