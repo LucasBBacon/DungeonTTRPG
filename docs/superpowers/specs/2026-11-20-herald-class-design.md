@@ -1702,6 +1702,13 @@ required): a herald-tagged Pall scroll at tier 4, very rare. The
 Arcanist audit is untouched apart from resolving its "+herald if listed"
 and "herald if claimed" entries.
 
+**Pending request (traps and locks design 9.2; TL-35; M3):**
+Unbolting, a new tier-2 arcane and divine scroll (opens one lock or
+Jammed lock without its consequence; never the Bossgate), needs a CN
+16.4 `classTags` entry and this owner's sign-off, since this audit is
+closed (HR-24). Not ruled here; until the Herald owner rules, the table
+above is unchanged and Unbolting carries no `herald` tag.
+
 ### 8.9 Spell tests owed
 
 1. **Pall, Fallen Idol, Recoil or Toll on a Frightened, non-Demoralised,

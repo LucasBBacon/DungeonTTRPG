@@ -1522,6 +1522,15 @@ cleanse-lean ruling), readied casts (non-goal).
 unless the Herald's stage 2 claims it. Off-pair reads are in class by
 rule (8.1, 7.3). DEP-1 is untouched (the Shade carries it).
 
+**Pending request (traps and locks design TL-35, 2026-11-21; M3; the
+Arcanist owner signs off, with the consumables and Herald owners):** a
+new tier-2 scroll, **Unbolting** (arcane and divine; action, range 6,
+noise 10; opens one lock or Jammed lock without its consequence; never
+the Bossgate), needs a CN 16.4 `classTags` entry although this audit is
+closed; and the Unweaving scroll and the class Unweaving (8.4) turn a
+Runed lock Plain (traps and locks design 9.2). Not decided here until
+the owners rule.
+
 ## 9. The subclasses
 
 Each subclass adds one Weft option (0 rows), a tier-2 spell on the

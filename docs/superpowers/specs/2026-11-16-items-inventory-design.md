@@ -83,7 +83,9 @@ to sort a bag. **(agreed)**
 - Ammunition tracking. **(lead's call, recommended to the weapons
   design)**
 - Tools as a category. Dungeon checks are party-best skills (stat model
-  5.4), and tools would only add bookkeeping. **(lead's call)**
+  5.4), and tools would only add bookkeeping. **(lead's call)** There
+  are no lockpicks either (traps and locks design 6.11, BQ6).
+  **(change TL-26, kept)**
 
 ### Anti-goals
 
@@ -94,7 +96,10 @@ to sort a bag. **(agreed)**
   the camp channel (10.4) and, Later, the trader (10.9). **(settled, main
   design 2; enemies 2; budget wording lead's call)** The basic vendor's
   supply, tonics, Remedy and mundane bases are priced goods, not loot, and
-  are held in check by price and caps (10.3, 10.5).
+  are held in check by price and caps (10.3, 10.5). The Ticket lock
+  (coin) and the Fed sphincter (supply) buy access to a cache, never loot
+  beyond the budget (traps and locks design 7.7, 7.9). **(change TL-32;
+  M3)**
 - **Bring-the-right-key play.** Carrying one of each resistance item and
   swapping per encounter. **(settled, stat model 2)**
 - **Free refills.** Any route that restores a pool without the rest rules'
@@ -329,6 +334,13 @@ about 14 slots, so a recruit is also a gain in capacity.
   name, icon and `basePrice` and is never instantiated.
 - **Keys and floor tokens:** one row, shown once. They **are** instances,
   at location `party(keys)`, floor-scoped and destroyed at the stairs.
+  A floor key is carried by the floor's Keybearer and used automatically
+  on walk-in (traps and locks design 6.11). **(change TL-23, kept)**
+- **Wax Keys (M2):** a run-scoped party counter, `party.waxKeys`, cap 2,
+  size 0. It is never an item instance and not `category: key`, so it
+  survives the stairs. It opens one ordinary lock out of combat; its
+  rules, channels and depth price are the traps and locks design's
+  (6.11). **(change TL-24)**
 
 Records for party counters have `size: 0` (12.3).
 
@@ -624,10 +636,18 @@ Later; details lead's call unless marked)**
   greyed `OutOfStock` when sold out);
 - tonics and Remedy;
 - mundane bases (`vendor.bases`), which come only from here and from kits
-  **(settled, enemies 15.9)**.
+  **(settled, enemies 15.9)**;
+- **(agreed 2026-11-21, Q3; M2)** 1 Wax Key, **only when the party has no
+  Mechanics-trained member**: the stock reads the companions gap card's
+  "Mechanics met" test on its camp-entry snapshot (CMP 7.3 G2) and draws
+  nothing. Limited stock of 1 (`vendor.waxKeyStock`) at that camp's depth
+  price; greyed `OutOfStock` when sold and `WaxKeysFull` at the cap of 2;
+  a purchase raises `party.waxKeys` and creates no instance. Hiring a
+  Mechanics companion at that Muster does not withdraw it (traps and
+  locks design 6.11). **(change TL-25)**
 
-**(lead's call)** Only the potions are limited stock, as the client
-decided; tonics, Remedy and bases are not stock-limited, and their price is
+**(lead's call)** Only the potions and the conditional Wax Key are limited
+stock, as the client decided; tonics, Remedy and bases are not stock-limited, and their price is
 the knob (10.5; conditions 22). Unlimited goods are created at purchase
 (`ItemCreated`, no random draw). Vendor and shop wands and scrolls start
 full (`spent = 0`), since camp refills wands anyway.
@@ -640,7 +660,8 @@ equips armour and trinkets freely, but an equip there that displaces an
 item needs room for it (otherwise greyed `PackFull`).
 
 **Leaving camp:** unbought stock (vendor potions, shop notables) is
-destroyed (`ItemDestroyed{lost}`).
+destroyed (`ItemDestroyed{lost}`); an unbought vendor Wax Key lapses with
+`vendor.waxKeyStock` (no instance, no event). **(change TL-25)**
 
 ### 10.4 Shop or reward
 
@@ -989,7 +1010,7 @@ family: { id: "family.longsword", category: "weapon", improvised: {...},
 | `id`, `nameKey`, `flavourKey` | string | Stable ID and localisation keys |
 | `family` | `family.*` | Cap key, duplicate rerolls, `improvised`, default monster profile |
 | `base` | item ID or null | The mundane base it builds on. Null for mundanes and consumables. |
-| `category` | enum | weapon, focus, shield, armour, trinket, consumable, scroll, wand, talisman (**change CN-1**; death and healing design 15, 16; **change DH-35**), key; `supply` is a counter record only, never instantiated (5.3) |
+| `category` | enum | weapon, focus, shield, armour, trinket, consumable, scroll, wand, talisman (**change CN-1**; death and healing design 15, 16; **change DH-35**), key; `supply` is a counter record only, never instantiated (5.3); so is `waxKey` (M2), which is not `key` (5.3; traps and locks design 6.11) **(change TL-24)** |
 | `kind` | enum (consumables) | potion, tonic, flask, coating, remedy |
 | `tags[]` | strings | Read by effects and offers: `twoHanded`, `versatile`, `thrown`, `fire`, `bulky`… |
 | `rarity` | enum | mundane, common, uncommon, rare, veryRare (12.5) |
@@ -1321,7 +1342,10 @@ is original, so it carries no `srd` flag.
 | 9 | **Wandering trader** (small) | Later | Service prices, presence chance, trader art and lines, within 10.9 |
 
 `tool` is cut from the generic layer (section 2). Reinstate it only if a
-category design shows a need.
+category design shows a need. The traps and locks design keeps it cut:
+no lockpicks; if the client ever reopens BQ6, the fallback is a size-0
+party counter spent only on a Botch (traps and locks design 6.11, 19.2).
+**(change TL-26, kept)**
 
 ## 18. Data and the core
 
@@ -1356,6 +1380,13 @@ occupancy is the sum of sizes. An instance that leaves the run (used up,
 sold, scrapped, bartered, lost) is **deleted**, and its `ItemDestroyed`,
 `ItemSold`, `ItemScrapped` or `ItemBartered` event is the record. Supply and
 coin are integers in party state, never instances (5.3). **(lead's call)**
+So is `party.waxKeys` (M2; 5.3) **(change TL-24)**. The vendor's
+`vendor.waxKeyStock` (0 or 1) is set at camp entry from the gap card's
+party snapshot and draws nothing (10.3; traps and locks design 11.1)
+**(change TL-25)**. An instance at `container(containerId)` is never
+destroyed by a lock or trap result, and a container's own additions
+(`lockId?`, `trapId?`, `heldWaxKey`) are segment 7's (traps and locks
+design 6.13, 11.1). **(change TL-27, kept)**
 
 **Location transitions (lead's call).** Every legal move; 19.2 asserts that
 no other occurs.
@@ -1458,7 +1489,8 @@ The build fails on any violation:
    at Rare; never `never`. Trinket `fight` uses use the armour 16.3
    `fightUses` state (trinkets design 9.3) **(change TK-13)**.
 5. `size` ∈ {0, 1, `bulkySize`}. Two-handers, armour and shields are
-   bulky. Size 0 only for party-counter categories (`supply`, `key`).
+   bulky. Size 0 only for party-counter categories (`supply`, `key`,
+   `waxKey` **(change TL-24)**).
    Records carry no `stackMax` (5.1).
 6. `beltable` ⇒ category ∈ {consumable, scroll, wand, talisman} **(change
    CN-7)**. No record is both

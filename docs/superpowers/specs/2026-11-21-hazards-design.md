@@ -306,7 +306,9 @@ client accepted them with Q1–Q4):**
 1. **No hero dies to a fall.** "I was shoved off by the AI" is the most
    resented permadeath death there is.
 2. **Nothing acts on a square it did not announce, and nothing draws a
-   random number at act time** (saves excepted).
+   random number at act time** (saves excepted). Read as "hazards make
+   no act-time draws; traps' object checks use `checks`" (traps and
+   locks design 6.22; change TL-3).
 3. **No spreading surfaces.**
 4. **Floor 1 stays dry for the solo hero in the base game.**
 5. **Escalation is in kind, not damage:** nothing deals more than the
@@ -708,13 +710,18 @@ in M2 only if the reading-time playtest measures it well under the toy
 
 **Grey cases:**
 - An **open** trapdoor or shaft is a Void (a hazard). A **closed**
-  trapdoor that springs is a trap.
+  trapdoor that springs is a trap. No unit falls at the spring; from F2,
+  in a V10-proven Void room (`SnagProven`) of a theme with a Void skin,
+  its squares then open as an ordinary Void (6.4); on F1 and elsewhere
+  it recloses (traps and locks design 6.3; change TL-31; M2).
 - A visible device with a countdown, meter or rhythm is a Stir. Its
   hidden or sprung twin stays segment 5's: the toppling-shelf tripwire
   (the Leaning Stacks are its Stir twin), the dumbwaiter drop (the
   Courses), the sluice one-shot Soak (the Sluice Wheel Cord), the icicle
   chandelier, the acid geyser, trapdoor stages, the bell tripwire, the
-  portcullis, the Appeals trapdoor and the Kennel horn tripwires.
+  portcullis, the Appeals trapdoor and the Kennel horn tripwires. These
+  sprung twins are segment 5's traps; the Stir and Cord twins named here
+  are unchanged (traps and locks design 6.3, 7; change TL-10).
 - A Cord that arms or disarms a trap is segment 5's. **Cords never arm
   traps.**
 - A horn post anyone may blow is a Cord (or a Landmark tick on floor
@@ -726,6 +733,8 @@ in M2 only if the reading-time playtest measures it well under the toy
   pendulum. Segment 4 supplies only the Stir and Cord machinery.
   Non-arena look-alikes get distinct skins and names (the Choir's
   **hymn bellows** and **clapper chain**, never "the bell rope").
+  Arena trap devices are segment-9 instances in segment 5's TrapRecord
+  format (traps and locks design 7.8; change TL-40; with segment 9).
 - The FL owner is told that a sluice *wheel* is a piece, not the FL 7.5
   sluice-gate Door skin.
 
@@ -783,8 +792,10 @@ Now (6.3.4), and the Landmark ticks with a
 rhythm or dial (the Small Hour Strikes, Guttering Candles). Remnant
 countdowns, Cord recharges and uses, and vent trigger counts are drawn
 as **pips, never digits**, so a digit on the map always means "the
-room's clock". **Voids are static, not clocks**, but a Void never shares
-a room with a Lurch Stir, at any tier. In M2 a room holds at most one
+room's clock". A Wager room's Disturbance track is that room's one
+clock (traps and locks design 6.15; change TL-29; M3). **Voids are
+static, not clocks**, but a Void never shares a room with a Lurch Stir,
+at any tier. In M2 a room holds at most one
 Void region (lead's call, after the check).
 
 **Tableaux (lead's call; HZ-8).** A Tableau is a named, static
@@ -851,6 +862,11 @@ hazards present at every party size, solo on F2–5 included (CMP-8)
 - **VP10. Planks** may cross a Void. A Plank failure stops before it,
   with no fall **(settled, RT 6.2.6)**. Forced movement onto a Plank
   over a Void treats the Plank as floor.
+
+Traps add their own rules TP1–TP12 (V11) on top of these: no trigger
+square on a Snag, a Stir footprint, a Plank or a Hinge or Postern
+radius, or within 1 of a Void edge (2 on F2–3) (traps and locks design
+6.20; change TL-20; M2).
 
 ### 6.3 The Dream step, Stirs and telegraphs (agreed, Q1; change HZ-12 to HZ-15; M2 gated, else M3)
 
@@ -1059,6 +1075,10 @@ The rule is **shown**:
 
 Monsters get no floor; that is the party's exploit.
 
+Segment 5 follows this rule as the precedent for a shown Hunch zone: a
+warning, floored only out of combat, by forced movement or in its first
+round (traps and locks design 6.5; change TL-8).
+
 #### 6.3.3 Lurch (change HZ-17; M3; a C 10.1 change)
 
 Lurch is environment forced movement used only by Stirs: the third
@@ -1158,8 +1178,9 @@ record (verb, effect, timing, recharge, use scope, noise) and one verb.
 | F4 | 14 |
 | F5 | 15 |
 
-Indexed one above RT 6.2.6's Plank difficulty of 12. Segment 5's ladder,
-when written, should cite this. **New lead's call:** floor-1 Nightmare
+Indexed one above RT 6.2.6's Plank difficulty of 12. Segment 5's ladder
+cites this: its Standard DC is EnvDC on F2–5 (traps and locks design
+6.2; change TL-2). **New lead's call:** floor-1 Nightmare
 content (6.19) uses EnvDC 13. The landing save over a Void (6.4) uses
 the floor's EnvDC (lead's call, after the check; C 10.3 sets none).
 
@@ -1326,6 +1347,13 @@ whose hold has expired counts as that elite's Clutch for the fight
 - **M3:** the Gut's Gullet, the Carnival's High Wire, the Heart; up to
   40% of non-patrol fight rooms in drop themes.
 - **M4:** the Inverted Cathedral, up to 50%.
+- **Trapdoor Voids (change TL-31; M2; touches the agreed Q2 gates,
+  approved by the client 2026-11-21):** a segment-5 trapdoor that
+  springs from F2 inside a V10-proven Void room (`SnagProven`) of a
+  theme with a Void skin opens its squares as a runtime Void. It sits inside that proven room, counts toward these
+  Void-room quotas, and from then on is an ordinary Void (edge save,
+  Dreamfall to the Snag, `voidFall`). No unit falls at the spring; on
+  F1 and elsewhere the trapdoor recloses (traps and locks design 6.3).
 
 **Ship gates for Voids in any theme (agreed, Q2):**
 - `ClassThemeSpread` with Voids on: Vanguard–Shade gap in run death
@@ -1521,7 +1549,9 @@ Mood.
 ### 6.10 Hazard rooms: Dare rooms and Plunge (change HZ-21, HZ-23; M3)
 
 **Dare room:**
-- A side-room Site on F2–5, ≤ 1 per floor, never critical, ≤ 9×9.
+- A side-room Site on F2–5, ≤ 1 Dare-or-Wager per floor (a Wager room
+  shares the slot; traps and locks design 6.15; change TL-29; M3),
+  never critical, ≤ 9×9.
 - **Signposted** before entry: a hazard glyph on its Portal, Listen
   hears the Stir's tell, and a line on the Stratum Card.
 - One showcase Stir (one clock, never two), double points, and a
@@ -1553,6 +1583,12 @@ Mood.
   un-engaged group. Never the Sanctum, never past the antechamber.
 - ≤ 1 per floor. `NoSealedPocket` and `PartyEscape` hold.
 - It is the only hazard that saves clock. In combat it is a plain Void.
+- **Pending request (TL-41, M3; traps and locks design 6.3, 7):**
+  segment-5 relocation traps (the Dumbwaiter Drop to its linked room out
+  of combat; in combat within the same room only, so the in-combat
+  Swallow rejection of 6.4 holds) beside Plunge and FL's Chute; they
+  wait for the ability model's teleport rule (ABL 8), else they stay
+  Prone in place; not yet ruled.
 
 ### 6.11 Caps and fairness
 
@@ -1565,9 +1601,14 @@ Mood.
      for the floor's level band, using the RT 6.4 top-up mechanic at
      round scope;
    - **included:** collision, contact, harm, Keg, Stir acts and falls,
-     and the first Remnant application of a monster-push struck vent;
+     the first Remnant application of a monster-push struck vent, and
+     involuntary trap damage to a party unit (traps and locks design
+     6.10; change TL-18; M2);
    - **outside:** `onTurnEnd` ticks (Burning) and other Remnant
-     applications;
+     applications; self-caused trap damage (Bear it, a party-caused
+     spring on oneself, a Botch the unit itself rolled, a chosen
+     in-combat entry into a shown Hunch zone) is counted in full and
+     does not fill the cap (change TL-18);
    - monsters are uncapped (Clutch damage is therefore never capped).
    - **The pipeline per instance (lead's call, after the check):** the
      final amount after save, weakness and resistance; then the
@@ -1856,6 +1897,9 @@ the first choice and the Carnival's Pit Breathes the alternative (6.3).
   - It is the room's clock (6.2.2).
   - An FL-8 Portal-source flag. `Floor1ClassSpread` and the DH 18.2
     floor-1 rows are re-run with it on.
+  - Segment 5's Hour lock (Gaol, Wake) also opens itself on the floor's
+    Landmark tick; its glyph is an hourglass, never a clock face
+    (traps and locks design 6.11; change TL-22; M3).
 - **The Lockdown Lever.** A standalone Cord: one Operate shuts or opens
   every unoccupied, unlocked cell door in the room, at once (6.3.4).
   Noise 4. Party-only.
@@ -2418,6 +2462,10 @@ budget existed. **After the check (lead's calls):**
 - **The combined gate:** terrain plus hazards, `FloorMinutesDelta` (RT,
   read with segment 4 on) ≤ +1.6 min. This is what makes "inside"
   enforceable: terrain at +1.5 and hazards at +0.3 fails it.
+- **Segment 5's line is separate:** traps and locks are a new budget
+  line outside this envelope (on top of FL-16's commitment), reported
+  apart with their own cut order (traps and locks design 6.21; change
+  TL-38; M2).
 - **The split** *(illustr.)*: static density (Voids, Tableaux, bile,
   vents) ≤ +0.2; the Stir's increment over static-on
   (`StirMinutesDelta`) ≤ +0.1, on Stir floors.
@@ -2644,7 +2692,7 @@ M3 instead; the client is told (19.2).
 |---|---|
 | **Segment 3 (room terrain)** | The piece and square classes, bands, caps, the Clearway, layers, the knock-into system, the combo table, the Remnant system, arena terrain rules and caps (RT 13, TR-1) **(settled)** |
 | **Segment 4 (this)** | Floor-scale density (hazard points, roles, quotas); placement rules VP1–VP10; Voids and falls; bile density; Teetering counting (as a request); vents; Stirs, Cords, Tides, Lurch and the Dream step's content; Landmark ticks; Moods; Dare rooms and Plunge; per-theme catalogues and Tableaux; the `hazards` stream, V10 and the reports |
-| **Segment 5 (traps, locks, checks)** | Traps (hidden, armed, sprung, one-shot), including the sprung twins listed in 6.1; door verbs (FL-8); the DC ladder |
+| **Segment 5 (traps, locks, checks)** | Traps (hidden, armed, sprung, one-shot), including the sprung twins listed in 6.1; door verbs (FL-8); the DC ladder (traps and locks design 6.2, 6.3, 13; change TL-10) |
 
 **Rule of thumb:**
 - a static piece or an object anyone can use in a room: segment 3;

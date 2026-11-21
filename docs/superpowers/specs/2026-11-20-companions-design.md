@@ -808,6 +808,16 @@ slot}` **(lead's call)**.
     with a board header such as "Your party lacks: Medicine". There is no
     single "correct card" ribbon. Waivers are printed ("Arcana: covered
     by your hero").
+  - **The vendor's Wax Key line (agreed 2026-11-21, traps and locks
+    design Q3; change TL-25; M2).** When the party does not meet the
+    Mechanics need, the basic vendor stocks 1 Wax Key (items 10.3),
+    read from this card's own "Mechanics met" test on the same
+    camp-entry snapshot; it draws nothing and the `recruit` substream is
+    untouched. The coverage strip then prints "Mechanics: Wax Key
+    stocked at the vendor" beside the Mechanics need, whether or not
+    card A offers a Mechanics kit. Hiring a Mechanics companion at that
+    Muster does not withdraw the stocked key; the next camp reads the
+    new party (traps and locks design 6.11).
   - **Never healing** (`GapCardNeverHeal`). Coverage is guaranteed on
     the **offer**, never on the party.
   - **Feasibility:** `RecruitPoolSatisfiable` runs **this exact
@@ -875,6 +885,19 @@ Q2):**
   fires the hazards cut order (extending room terrain design risk 7's).
   **No hazard lever** is added to the lever order below (agreed
   Q2 levers untouched).
+- **Traps and locks in the time model (change TL-38, traps and locks
+  design 6.21; told plainly; M2).** Segment 5 takes its own budget line
+  of ≤ +0.3 min `ExploreSeconds` and ≤ +5 `ExploreClicks` per floor at
+  party 4 on floors 4–5, on top of layout's commitment and reported
+  separately (`TrapLockSeconds`, `ExploreClicksDelta`), so the layout
+  total there may reach 3.8 min and 45 clicks for segment-5 content
+  only. Cost-table rows (clicks / ticks): the lock card 1 / 1 (Take
+  time 8); disarm 1 / 2; Probe inside the Hunch stop 0 / 2 (auto-Probe
+  0 / 2); Pole it 1 / 1; force 1 / 1 per try; re-arm 1 / 2; the vendor
+  Wax Key adds no dungeon clicks. The whole floor still answers to the
+  gate; a miss with segment 5 over its line fires that design's cut
+  order (6.21). **No trap or lock lever** is added to the lever order
+  below (agreed Q2 levers untouched).
 - **Definition.** Floor time is the **active time** from the core's
   timestamped `FloorEntered` event to its `BossDefeated` event on that
   floor (every floor ends at its boss), excluding camp screens, pause

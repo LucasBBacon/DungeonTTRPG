@@ -1,7 +1,7 @@
 # Traps, Locks and Checks: Design (Dungeon Generation, Segment 5)
 
 Date: 2026-11-21
-Status: Draft, revised after the design check, awaiting client approval, 2026-11-21
+Status: Approved, 2026-11-21
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model, "STAT"),
 `2026-11-16-ability-resource-model-design.md` (ability model, "ABL"),
@@ -43,47 +43,51 @@ ten themes, readability, art, VFX and audio, the adopted, deferred and
 rejected mechanics, the numbers and fixes, data, V11, reports and arms,
 the staging, ownership and hooks, the binding requirements, the TL-n
 changes, the told-plainly items, the future items, the risks and the
-critique resolutions and names. **This document is a draft: it binds
-once the client approves it as a whole.**
+critique resolutions and names. The client approved this document as a
+whole on 2026-11-21.
 
 **The nine brief questions** (BQ1–BQ9 here, to keep them apart from this
 document's client questions Q1–Q3) were answered by the lead in the
 proposal (0.1). The client accepted those answers by proceeding to
-Q1–Q3; they are recorded as the **lead's answers**, confirmed with this
-document on approval. **BQ6 ("no consumable lockpicks") is contested by
-the lead** against the brief's suggestion, and approval of this document
-confirms it (19.1).
+Q1–Q3; they are recorded as the **lead's answers**, and the client
+confirmed them all on 2026-11-21, when it approved this document as a
+whole. **BQ6 ("no consumable lockpicks") was contested by the lead**
+against the brief's suggestion; the client confirmed it with this
+document on 2026-11-21 (19.1).
 
 Items marked **(lead's call)** were filled in by the design lead inside
-approved rules and were in the proposal the client answered; they bind
-once the client approves this document. Items marked **new lead's call**
-were made while writing this document, beyond that proposal; they are
-listed in 19.1 for the client's confirmation with this document. Items
-marked **(lead's call, after the check)** were made while revising this
+approved rules and were in the proposal the client answered; the client
+confirmed them all on 2026-11-21, when it approved this document as a
+whole, and they are binding. Items marked **new lead's call** were made
+while writing this document, beyond that proposal; they are listed in
+19.1 and the client confirmed them all on 2026-11-21. Items marked
+**(lead's call, after the check)** were made while revising this
 document after the design check that followed the client's Q1–Q3
-answers; they are listed in 19.1 for confirmation with this document and
-never override a client answer. Items
+answers; they are listed in 19.1, the client confirmed them all on
+2026-11-21, and they never override a client answer. Items
 marked **(settled)** restate a rule from an approved document;
 **(decided)** marks a main-design client decision. Items marked
 **(change TL-n)** amend an approved document and are listed, with the
 exact section they touch, in section 17; rows that touch **decided** or
 **agreed** text are flagged there, and the client's approval of this
-document (with Q1–Q3 where a row names one) will cover them. Items
-marked **(told plainly)** narrow or re-read agreed or settled text, or
-state an unwelcome forecast, and are told to the client in plain words
-(19.1). Once approved, every item here is binding on the builders.
+document on 2026-11-21 (with Q1–Q3 where a row names one) covers them.
+Items marked **(told plainly)** narrow or re-read agreed or settled
+text, or state an unwelcome forecast, and were told to the client in
+plain words (19.1, including those told after the check); the client
+confirmed them all on 2026-11-21. Every item here is binding on the
+builders.
 
 | Marking | Meaning |
 |---|---|
 | **(settled)** | Restates a rule from an approved document |
 | **(decided)** | A main-design client decision, restated |
 | **(agreed)** | A client answer: Q1–Q3 of this document (2026-11-21), or one recorded in an approved document, restated |
-| **lead's answer (BQn)** | The lead's answer to brief question n, accepted by the client by proceeding; confirmed with this document. BQ6 is contested by the lead and confirmed on approval |
-| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal; binding once the client approves this document |
-| **new lead's call** | A lead's call made while writing this document, beyond the answered proposal; listed in 19.1 for confirmation with this document |
-| **(lead's call, after the check)** | A lead's call made in response to the design check that followed the client's answers; listed in 19.1 for confirmation with this document; never overrides a client answer |
+| **lead's answer (BQn)** | The lead's answer to brief question n, accepted by the client by proceeding; confirmed by the client with this document on 2026-11-21. BQ6 was contested by the lead and was confirmed on 2026-11-21 |
+| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal; confirmed by the client with this document on 2026-11-21 |
+| **new lead's call** | A lead's call made while writing this document, beyond the answered proposal; listed in 19.1 and confirmed by the client on 2026-11-21 |
+| **(lead's call, after the check)** | A lead's call made in response to the design check that followed the client's answers; listed in 19.1 and confirmed by the client on 2026-11-21; never overrides a client answer |
 | **(change TL-n)** | Amends an approved document; listed with its exact section in 17 |
-| **(told plainly)** | Narrows or re-reads agreed or settled text, or states an unwelcome forecast; told to the client in plain words (19.1) |
+| **(told plainly)** | Narrows or re-reads agreed or settled text, or states an unwelcome forecast; told to the client in plain words (19.1) and confirmed by the client on 2026-11-21 |
 | *(illustr.)* | An illustrative number, owned by the builders and calibrated by the M2 simulator (10, 11). Never binding |
 
 **The client's brief:** dungeon generation segment 5 of 12, traps, locks
@@ -319,7 +323,7 @@ as a gotcha), floor-wide alarms (FL 9.1), destroyed contents (ENM 15.6)
 and broken picks (there are none).
 
 **BQ6. Should lockpicking require consumable lockpicks? No (lead's
-answer, contested; confirmed on approval; change TL-26).**
+answer, contested; confirmed by the client on 2026-11-21; change TL-26).**
 - ITEMS 2 (lead's call) cut "tools as a category: dungeon checks are
   party-best skills and tools would only add bookkeeping". "Who has the
   key" is a settled anti-goal.
@@ -333,9 +337,10 @@ answer, contested; confirmed on approval; change TL-26).**
 The consumable fantasy goes to the **Wax Key** (BQ8), which serves the
 parties that *lack* the skill instead of taxing those that have it, and
 to the optional **Oil the Works** (M3: an existing oil flask gives
-advantage and a silent Jam). If the client still wants picks at
-approval, the least harmful form is a size-0 party counter spent only on
-a Botch (TL-26; 19.2). The lead rates it lower.
+advantage and a silent Jam). The client confirmed "no lockpicks" on
+2026-11-21. If the client ever reopens BQ6, the least harmful form of
+picks is a size-0 party counter spent only on a Botch (TL-26; 19.2). The
+lead rates it lower.
 
 **BQ7. Mimic chests: trigger on a lockpick attempt, or only when opened?
 Any touch wakes it (open, pick, force, key or attack); adjacency never
@@ -1560,9 +1565,9 @@ G2). The merge rules are **new lead's calls**:
 
 **No lockpicks (lead's answer, BQ6, contested; TL-26).** Oil the Works
 is an M3 option: spend an existing oil flask on one rolled attempt for
-advantage, and a failed roll makes no noise. The fallback if the client
-insists on picks at approval: a size-0 "Picks" counter, spent only on a
-Botch (19.2).
+advantage, and a failed roll makes no noise. The client confirmed BQ6
+on 2026-11-21; the fallback, if the client ever reopens it: a size-0
+"Picks" counter, spent only on a Botch (19.2).
 
 ### 6.12 Doors, stuck and barred doors, secrets, readings (lead's call; changes TL-33, TL-34)
 
@@ -3040,14 +3045,14 @@ as 6.20 lists (lead's call, after the check):
 
 ## 17. Changes to approved documents
 
-To be applied when the client approves this document. **This document
-edits no parent document itself**; the rows are applied by the owners of
-the sections they touch **(lead's call)**, and rows owed by other owners
-are listed again in 18. Every row names the exact section it touches.
-Rows that touch **decided** or **agreed** text are flagged in the "Flag"
-column; the client's approval of this document will cover them (with
-Q1–Q3 where a row names one; the answers of 2026-11-21 already agree
-TL-8, TL-25 and TL-28 in substance). **New lead's call:** the Flag
+Applied on 2026-11-21, when the client approved this document. **This
+document edits no parent document itself**; the rows are applied by the
+owners of the sections they touch **(lead's call)**, and rows owed by
+other owners are listed again in 18. Every row names the exact section
+it touches. Rows that touch **decided** or **agreed** text are flagged
+in the "Flag" column; **the client's approval of 2026-11-21 covers
+them** (with Q1–Q3 where a row names one; the answers of 2026-11-21
+already agreed TL-8, TL-25 and TL-28 in substance). **New lead's call:** the Flag
 column also marks rows that only *read* agreed text without changing it
 (TL-1, TL-4, TL-5, TL-10, TL-16, TL-21, TL-22, TL-31), beyond the
 proposal's ⚑ set, so that every touch of agreed text is visible.
@@ -3055,11 +3060,13 @@ proposal's ⚑ set, so that every touch of agreed text is visible.
 agreed STAT 6 trap-sense row, which the proposal had marked a lead's
 call), TL-23 names ENM 14.8, TL-31 names HZ 6.4 and its gates, and TL-42
 and TL-43 are added; every row touched after the check says so.
-Told-plainly rows are told in 19.1. TL-16, TL-17, TL-30, TL-34, TL-35,
+Told-plainly rows were told in 19.1 and confirmed by the client on
+2026-11-21. TL-16, TL-17, TL-30, TL-34, TL-35,
 TL-39, TL-41, TL-42 and TL-43 are requests to other owners, recorded as
 pending requests; they change nothing until their owner rules, and 19.2
-names each fallback. M3 and M4 rows are recorded now as applied text marked
-with their wave and take effect at that wave.
+names each fallback. M3, M4 and Later rows are recorded now as applied
+text marked with their wave and take effect at that wave; TL-37 takes
+effect at the M2 gate.
 
 **Narrowings recorded inside this design (no approved text changes):**
 - STAT 7.2's "No free retries" is met by the Margin rule, per-try force
@@ -3071,7 +3078,7 @@ with their wave and take effect at that wave.
 - the sprung twins of HZ 6.1 are this segment's traps, with HZ's Stir
   and Cord twins unchanged.
 
-| # | Document / section (current status) | Change | Flag | Approval |
+| # | Document / section (current status) | Change | Flag | Approved by |
 |---|---|---|---|---|
 | TL-1 | STAT 7.2 "No free retries" (**agreed**; a reading); ABL 7.2 | Check charter CC1–CC8; three check families (6.1) | **Agreed** (read, not changed) | Lead's call, with this document |
 | TL-2 | HZ 6.3.5 (cited); RT 6.2.6 Plank (kept); FL 9.2 Locked row "DCs to segment 5" | DC ladder; force +2 (6.2) | — | Lead's call |
@@ -3098,7 +3105,7 @@ with their wave and take effect at that wave.
 | **TL-23** | ITEMS 5.3 (kept); RS 8.3 / 8.10; **ENM 14.6 category list (agreed; adds a category)**; **ENM 14.6 Yield drop bullet and ENM 14.8 Cowed success ("keeps its notable item") (named after the check; a new outcome: the floor key is handed over)**; ENM 15.5; FL-18 | Keybearers; automatic keys; `KeyReachable` (bound in `trapsResolve`); the interrogation category; the key on Yield and Cow (fallback: Cow does not yield it); Lockside Listen (6.11) | **Agreed** (ENM 14.6; 14.8 as its status stands) | Client, with this document; enemies and FL owners apply |
 | TL-24 | ITEMS 5.3 counter list, 18.1, 19.1, category enum (lead's calls); CN 9 / 10 | Wax Key (run-scoped counter, cap 2, depth price, pegs K1 and K2) (6.11) | — | Lead's answer, BQ8; items and consumables owners apply |
 | **TL-25** | **ITEMS 10.3 basic vendor list (agreed)**; ITEMS 18.1 (`vendor.waxKeyStock`); CMP 7.3 G2 gap card (the coverage strip line) | The basic vendor stocks 1 Wax Key only when the party has no Mechanics-trained member, read from the gap card's snapshot and printed on its strip (6.11) | **Agreed** (ITEMS 10.3); **Q3** | **Client (agreed 2026-11-21, Q3)**, with this document; items and companions owners apply |
-| TL-26 | ITEMS 2 and 17 (kept); CN 16 oil uses | No lockpicks; Oil the Works; the Pick-counter fallback (6.11) | — | Lead's answer, BQ6 (contested), confirmed on approval; M3 for Oil the Works |
+| TL-26 | ITEMS 2 and 17 (kept); CN 16 oil uses | No lockpicks; Oil the Works; the Pick-counter fallback (6.11) | — | Lead's answer, BQ6 (contested), confirmed by the client on 2026-11-21; M3 for Oil the Works |
 | TL-27 | HE-3/4/7 (**agreed**; kept); ENM 15.6; ITEMS 18.1 | Container kinds; contents never destroyed (6.13) | — (kept) | Lead's call; segment 7 |
 | **TL-28** | ENM 17.4; ENM lurker row and guile / Stealth (container placements); **RS 7.4 RC1 / RC2 (agreed; reading)**; RS 7.4 RC8 (read, not changed: "feels teeth" is a callout, not a bark); RS 8.7 / 8.10; **DH 10.4 (agreed; extended to openers)**; V7; STAT 7.1 and ENM 10.6 (read, not changed: Lore shows the type only) | The boxed lurker: presentation, marking timing, the unmarked-attack row, open routing for all containers (after the check) (6.13, 6.14) | **Agreed** (RC, DH 10.4); **Q2** | **Client (agreed 2026-11-21, Q2)**, with this document; enemies and RS owners, art; M3 |
 | TL-29 | HZ 6.10 / HZ-21 cap; HZ HF11 (one clock per room; read); FL Strongroom row (lead's call); DH 10.4 Dare bullet (kept); DH 18 reports | Wager rooms; after the check: the TP3 exception and `WagerNonSkillLine`, the one-rule Disturbance track, `gradeAtLift`, distinct caged notables, the Hunch override, greed plates on pips (6.15) | — | Lead's answer, BQ9; HZ and FL owners; M3 |
@@ -3173,15 +3180,19 @@ The owed rows are the single list in 17; by owner:
 
 ## 19. Open items for the client
 
-**This document awaits the client's approval as a whole.** The three
-questions it raised were answered on 2026-11-21 **(agreed)**, and the
-client said everything else in the proposal stands as written. Approval
-will confirm the lead's answers to the nine brief questions (BQ6
-contested), every lead's call (those of the answered proposal, the new
-lead's calls and the lead's calls made after the check, below), the
-told-plainly items (including those told after the check), the
-narrowings recorded in 17 and the flagged rows of 17. The future items in 19.2 come back
-only if a report, an owner's refusal or a later design triggers them.
+None. Approved by the client on 2026-11-21.
+
+The client approved this document as a whole on 2026-11-21, including
+the lead's answers to the nine brief questions BQ1–BQ9 (including the
+contested BQ6, "no consumable lockpicks"), every lead's call (the lead's
+calls of the answered proposal, the new lead's calls in 19.1 and the
+lead's calls after the check in 19.1), the told-plainly items (including
+"Told plainly after the check" in 19.1) and the narrowings recorded in
+17, and its approval covers the flagged rows of 17. The three questions
+it raised were answered on 2026-11-21 **(agreed)**; the client also said
+everything else in the proposal stands as written. The future items in
+19.2, which come back only if a report, an owner's refusal, a wave or a
+later design triggers them, and the naming pass remain future items.
 
 ### 19.1 This document
 
@@ -3204,7 +3215,7 @@ only if a report, an owner's refusal or a later design triggers them.
   list (6.11; TL-25). Rejected: B, loot and camp notables only.
 
 **The lead's answers to the brief (accepted by the client by proceeding;
-confirmed with this document):**
+confirmed by the client on 2026-11-21, with this document):**
 - **BQ1:** a failed disarm springs the trap only on a Botch (fail by
   5+); a Jam (fail by 1–4) is noise 4 and closes hand work for the floor
   (0.1, 6.6).
@@ -3219,9 +3230,10 @@ confirmed with this document):**
 - **BQ5:** consequence locks (Crier, Barb, Tattle in M2; Runed, Hour in
   M3), each with a glyph and a rule card (0.1, 6.11).
 - **BQ6 (contested by the lead):** no consumable lockpicks; the
-  consumable fantasy goes to the Wax Key and Oil the Works. **Approval
-  of this document confirms it**; if the client wants picks instead, the
-  fallback is a size-0 counter spent only on a Botch (19.2).
+  consumable fantasy goes to the Wax Key and Oil the Works. **The client
+  confirmed it on 2026-11-21, with this document**; if the client ever
+  reopens it, the fallback is a size-0 counter spent only on a Botch
+  (19.2).
 - **BQ7:** any touch wakes a mimic, adjacency never does; a trained pick
   "feels teeth" safely; the route is Q2's boxed lurker (0.1, 6.14).
 - **BQ8:** the Wax Key, a run-scoped counter, cap 2, out of combat,
@@ -3230,7 +3242,7 @@ confirmed with this document):**
 - **BQ9:** Wager rooms, M3, sharing the Dare slot, with the risk running
   through combat (0.1, 6.15).
 
-**Told plainly** (to be confirmed with this document):
+**Told plainly; confirmed by the client on 2026-11-21:**
 - **Take time makes BQ1 bite mostly on Hard devices, in combat, on
   consequence locks and in Wager rooms** (0.1, 6.6).
 - **Bear it is not the universal answer for parties without Mechanics;**
@@ -3256,7 +3268,8 @@ confirmed with this document):**
   owed to the M2 simulator (10).
 
 **New lead's calls made while writing this document** (beyond the
-answered proposal; for confirmation with this document):
+answered proposal; confirmed by the client on 2026-11-21, with this
+document):
 1. **Brief questions are labelled BQ1–BQ9** to keep them apart from this
    document's Q1–Q3 (front matter).
 2. **The Supper's Wager room is renamed the Top Table** (the proposal's
@@ -3304,7 +3317,8 @@ answered proposal; for confirmation with this document):
     patch for a zone that appears mid-round (6.5; TL-8).
 
 **Told plainly after the check** (the design check that followed the
-client's Q1–Q3 answers; to be confirmed with this document):
+client's Q1–Q3 answers; confirmed by the client on 2026-11-21, with
+this document):
 - **Lore does not say whether a boxed lurker is on the floor.** The
   proposal's "a floor without one carries no paranoia" is withdrawn:
   the agreed Lore reveal shows roster types only, and making it show
@@ -3317,7 +3331,7 @@ client's Q1–Q3 answers; to be confirmed with this document):
   minimum, but it is not the SH-16 check (0.1, 6.16).
 - **TL-6 changes agreed text.** The STAT 6 trap-sense row is agreed
   ("All rows (agreed)"); the proposal had marked it a lead's call. It
-  is now flagged, and approval of this document covers it (17).
+  is now flagged, and the client's approval of 2026-11-21 covers it (17).
 - **The Gaol's F1 Circuit takes no tripwire.** FL 7.2's request for
   Circuit tripwires is met only by Bypass alarms on F1 (6.19; TL-20).
 - **The clock line sits on top of FL's commitment:** F4–5 at party 4
@@ -3340,7 +3354,8 @@ client's Q1–Q3 answers; to be confirmed with this document):
   (6.7; TL-42).
 
 **Lead's calls made after the check** (each is marked "lead's call,
-after the check" where it falls; for confirmation with this document;
+after the check" where it falls; confirmed by the client on 2026-11-21,
+with this document;
 none overrides a client answer):
 1. **Two generation passes:** `traps` (geometry and kinds) and
    `trapsResolve` (after segment 6), with a named failure action per
@@ -3438,7 +3453,7 @@ later design triggers them:
 - **If `RouteChoiceMix` shows the hand-trigger is never used:** allow it
   to replace one attack (a settled ABL row; the Shade owner's parity
   rerun first).
-- **If the client rejects BQ6 at approval:** the size-0 "Picks" counter
+- **If the client reopens BQ6 (confirmed on 2026-11-21):** the size-0 "Picks" counter
   spent only on a Botch (TL-26).
 - **If the enemies owner refuses TL-16:** rigged share × party-hit ≤
   0.03 (NF-e).

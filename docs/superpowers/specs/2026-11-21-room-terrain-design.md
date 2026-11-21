@@ -1116,12 +1116,16 @@ PhaseSocket { socket: Socket, phase, off: PieceKind|SquareClass|none, on: PieceK
   and ends within 2 of an enemy cover line or flank square (KP7), so it
   is a tactical choice, not a pathing tax.
 - **In combat:** entering the first Plank square needs Acrobatics
-  against the segment-5 ladder (DC 12, *illustr.*).
+  against the segment-5 ladder (DC 12, *illustr.*; the flat Plank row,
+  12 on every floor, change TL-2; traps and locks design 6.2).
   - Pass: continue.
   - Fail: movement ends on the square before; no retry that round; no
     fall and no damage (10.4-safe).
 - **Out of combat:** one check by the leading unit, with the Squeeze
   row's failure cost (segment 5).
+- **Rolls (change TL-3; decided):** Plank checks roll on the keyed
+  `checks` stream by the Plank's `traversalIndex`, once per traversal,
+  in and out of combat (traps and locks design 6.12, 6.22).
 - Stiff gives disadvantage (armour 7.3). Forced movement onto a Plank
   needs no check. Monsters may use Planks; the AI costs the path by its
   fail chance.
@@ -1243,7 +1247,9 @@ core cost.
     no blocking. Debris is the Furnishing's own saved state, a map
     change in substance (TR-8, not a clarification).
 - **Never breaks:** walls, partitions, Tall and Low pieces, hazard
-  pieces and Portals (RS 7.6 kept). Door shattering stays segment 5's.
+  pieces and Portals (RS 7.6 kept). Door shattering stays segment 5's
+  (force and Splinter, read against RS 7.6: change TL-21; traps and
+  locks design 6.11).
 - **Furnishings never hold loot.** Containers stay segment 7's and HE-7
   sockets, so there is no smash-everything chore.
 
@@ -1326,9 +1332,13 @@ the toy). The
 static `WayRound` (≤ 6) and the CV8 flank reachability are initial-state
 guarantees proven by V9; at runtime these two rules hold their place.
 
-A Furnishing may end on a trap's trigger square, known or not; it never
-springs the trap and never hides a known trap's marker (segment 5 may
-narrow this; 13).
+A Furnishing may end on a trap's trigger square, known or not, and
+never hides a known trap's marker. **Narrowed by segment 5 (change
+TL-14; M2): weighted plates.** A Furnishing whose Shunt, Kick or
+Overturn **ends** on a plate or trapdoor springs it, with the mover as
+causer; squares it only passes over spring nothing; wires and glyphs
+ignore pieces; Kegs stay sturdy. So one act springs at most one trap
+(traps and locks design 6.7; 13).
 
 An illegal destination means the move does not happen. The preview greys
 the option out with "Would block the way" or "Hazard".
@@ -1415,7 +1425,11 @@ the option out with "Would block the way" or "Hazard".
     so at most once per use.
   - **Also outside the cap:** `onTurnEnd` effects, M3 Remnant
     applications and trap damage (traps are segment 5's and keep their
-    own lethality rules, conditions 11.6).
+    own lethality rules, conditions 11.6; kept by TL-18). A piece's own
+    collision instance is unaffected by a spring; when one act both
+    collides and springs a weighted plate, both go through EnvRound in a
+    fixed order, collision first, then the spring (change TL-14; M2;
+    traps and locks design 6.7).
   - **Setup payouts are not environment instances.** Oiled's fire
     payout, triggered by a Keg or by K1, resolves under its own rule and
     is not capped here (6.5.2).
@@ -1430,7 +1444,12 @@ the option out with "Would block the way" or "Hazard".
     *(illustr.)* of the lowest legal hero's maximum HP for the floor's
     level band, by this top-up mechanic at round scope, applied after
     the per-use top-up; Stir acts and falls are included, monsters are
-    uncapped (hazards design 6.11 item 2).
+    uncapped (hazards design 6.11 item 2). **Extended by segment 5
+    (change TL-18; M2):** involuntary trap damage to a party unit is
+    included; self-caused trap damage (Bear it, a party-caused spring on
+    oneself, a Botch the unit itself rolled, a chosen in-combat entry
+    into a shown Hunch zone) is counted in full outside the cap and does
+    not fill it (traps and locks design 6.10).
   - **Dream-step acts (change HZ-15; M2 (gated), else M3):** each Stir act, and every combo
     it triggers, is one use for this cap. An act set by an Operated Cord
     credits the operator for experience and morale, but on-kill hooks
@@ -1630,6 +1649,10 @@ So a refusal costs the same fallback drop with or without harm squares.
   and obviously the intended play **(lead's call, after the check:** the
   proposal's "drives a lone enemy into a wall" described a Shove, but
   Attack Shunt never moves the unit**)**.
+- **Traps on floor 1 (read by segment 5; no change here):** RT-20 reads
+  "traps are devices, not terrain hazards" on F1; pushes stop before F1
+  trigger squares, so TR-29 stays true, and F1 trapdoors reclose
+  (changes TL-19, TL-31; traps and locks design 6.19, 6.3).
 
 #### 6.5.7 Chasms and drops (segment 4)
 
@@ -1798,6 +1821,10 @@ creates a square kind outside its theme's home set.
   bonus for that hero. The candidate stays in the list and is still
   chosen if it wins on its other terms. It applies to non-boss monsters
   and to every trigger they cause: push, Shunt, Kick, Keg and Conduct.
+  **Pending request (change TL-16; the enemies owner rules; M2):**
+  segment 5 extends it to trap springs a monster causes, with monster
+  pushes and Shunts scoring only traps the party has Revealed (traps
+  and locks design 6.8). Nothing changes until that owner rules.
 - **`usesFurnishings` kit tag** (Strongman, Fire-Eater, Glutton, a Gaol
   warden brute, Gut Ooze *(illustr.)*): Attack Shunt, Kick and Smash of
   heavy pieces, valued by the existing forced-movement, collision and
@@ -1865,7 +1892,9 @@ collision, the per-use damage for each hostile it can move becomes:
 Segment 3 sets **caps and kind rules only**. The counterplay identity of
 each boss stays with RS 13 and segment 9; the Supper's is the chandelier
 of icicles, a segment-5 trap. Braziers may be extra arena pieces, never
-the counterplay.
+the counterplay. Arena devices are segment-9 instances in segment 5's
+TrapRecord format (change TL-40; with segment 9; traps and locks design
+7.8).
 
 - ≥ 2 Tall pieces or clusters that block line of sight (enemies 17.5); ≥
   4 cover-giving squares per half *(illustr.)*; clutter 5–12%.
@@ -2278,6 +2307,11 @@ damage type.
   hazard (the Wheel of Knives always has its knife-wheel face, drawn as
   a blade rim on a post, never a flat round board that echoes the
   Knife-Thrower's target board, RC2).
+  **Pending request (change TL-43; the RS owner and art rule; M2):**
+  each theme's reserved trap-tell and device-body silhouette families
+  join this rule; device bodies follow RC2's piece bans, and trap tells
+  never idle and never reuse hazard prop families (traps and locks
+  design 7, 8).
 - **Liquid-holding pieces** are drawn dry or lidded, with no reflective
   fill, and their break leaves no liquid on the floor (RC1; the VFX
   residue rule, 8.2).
@@ -2616,7 +2650,7 @@ Segment 3 takes the knock-into *system*, not drop hazards.
 | Segment | Receives from segment 3 | Owns |
 |---|---|---|
 | 4 Hazards | The piece and square classes, bands, caps, `ThemeSix`, the Remnant record and its environment-only source rule | Catalogues and density inside the caps; drops; bile; Teetering counting; vents |
-| 5 Traps, locks, checks | Plank and Shunt checks naming the ladder; Overturn strips that never include a Clearway square; **traps and pieces (lead's call, after the check):** a Furnishing may end on a trap's trigger square, never springs a trap and never hides a known trap's marker; trap damage is outside the one-instance cap (6.3.6, 6.4); segment 5 may narrow both | DCs; traps; door verbs; the out-of-combat Plank cost; how traps and pieces interact beyond these defaults |
+| 5 Traps, locks, checks | Plank and Shunt checks naming the ladder; Overturn strips that never include a Clearway square; **traps and pieces (lead's call, after the check):** a Furnishing may end on a trap's trigger square, never springs a trap and never hides a known trap's marker; trap damage is outside the one-instance cap (6.3.6, 6.4); segment 5 may narrow both. **Narrowed by segment 5 (change TL-14; M2):** weighted plates (a piece ending on a plate or trapdoor springs it; one act springs at most one trap); the cap exclusion kept (TL-18) (traps and locks design 6.7, 6.10) | DCs; traps; door verbs; the out-of-combat Plank cost; how traps and pieces interact beyond these defaults |
 | 6 Encounter placement | Start sockets with cover data; `Floor1NoCoveredStarts`; KP5's ambush clause; nooks as lurker sockets; the terrain-using enemy per theme | Who starts where; ambush templates |
 | 7 Loot | Furnishings never hold loot | Containers and contents |
 | 8 Events | Furnishing kinds by id | Events that name a Furnishing kind |

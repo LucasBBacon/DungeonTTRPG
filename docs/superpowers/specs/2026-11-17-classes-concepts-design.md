@@ -713,7 +713,9 @@ All **(lead's call)** except the level, which is **(settled, ability
   rider; Arcanist design 9.3). **(change SH-30)** A launch
   class's stage-1-named third subclass (the Shade's Trapwright or
   Swordsworn, whichever does not ship in M2) ships as a full subclass, as
-  the Vanguard's three do, not as an aspect (Shade design 14).
+  the Vanguard's three do, not as an aspect (Shade design 14). With the
+  DEP-S1 fallback applied, that is the Trapwright, in M3 (change TL-37;
+  traps and locks design 6.16).
 - **A subclass re-points the lean.** It either deepens the primary lean
   through a mechanic the class does not have at level 1, or picks the
   class's second utility; it never adds a role. It adds **triggers and
@@ -1326,12 +1328,15 @@ saves.
     extra part on Opening).
   - **Trapwright** (M2 only if trap records, DEP-S1, land in M2;
     otherwise the first Shade unlock, the expected default) **(agreed
-    2026-11-18, Shade Q2; change SH-30; Shade design 8.2, 14)**: **card
-    revised (SH-31):** **Jury-Rig**, a Tricks option that springs or
+    2026-11-18, Shade Q2; change SH-30; Shade design 8.2, 14)**; **the
+    fallback is applied: the first Shade unlock, M3** (2026-11-21;
+    change TL-37; traps and locks design 6.16): **card revised
+    (SH-31):** **Jury-Rig**, a Tricks option that springs or
     re-arms a known trap (stat model 7.1), and the **Caught** trigger on
     Opening; a Mechanics-mastery lane.
   - **Swordsworn** (the first unlock; promoted to M2 under the
-    fallback) **(agreed 2026-11-18, Shade Q2; change SH-30)**: **Sworn
+    fallback, applied 2026-11-21, change TL-37) **(agreed 2026-11-18,
+    Shade Q2; change SH-30)**: **Sworn
     Guard**, a Tricks-paid ward that counts as a Parry, with
     **Counterstroke**, a pooled reaction strike after a turned blow
     **(agreed, Shade Q3; change SH-31: the mechanism of the stage-1 "a
@@ -1587,7 +1592,7 @@ saves.
 | Signature verb | Techniques | Opening | Element pair | Cadence |
 | `rest` pool | Techniques (+ Second Wind) | Tricks | Weft | Cadence |
 | `camp` pool | Surge | Vanish | Slots | Slots |
-| M2 subclasses | Weaponmaster (M1), Bastion, Wrecker | Cutthroat, Trapwright | Binder, Alembic | Dirge, Hearth |
+| M2 subclasses | Weaponmaster (M1), Bastion, Wrecker | Cutthroat, Swordsworn (the DEP-S1 fallback, applied; the Trapwright is M3; change TL-37) | Binder, Alembic | Dirge, Hearth |
 | Things to read at level 1 | 4 | 3 | 3 | 3 |
 | Complexity | Simple | Medium | Complex | Medium |
 
@@ -1638,7 +1643,9 @@ Holdfast and Berserker (after the condition-budget ruling) → Sapper →
 Marshal. How many ship at M3 is a content-volume decision for the M3
 plan. **(change SH-30)** The first Shade unlock subclass is whichever of
 the Trapwright and the Swordsworn did not ship in M2: the Trapwright,
-the expected default, once DEP-S1 lands (Shade design 14).
+the expected default, once DEP-S1 lands (Shade design 14). Resolved
+2026-11-21: the fallback applies and the Trapwright is the first Shade
+unlock, in M3 (change TL-37; traps and locks design 6.16).
 
 ## 10. Names
 
@@ -2001,8 +2008,8 @@ lead's call)**
 | Wave | Content |
 |---|---|
 | **M1** | The Vanguard, levels 1–3: Second Wind, Techniques (Press, Hew 1d4, Empower with the M1 lines; no riders in M1), Surge, Momentum (agreed 2026-11-18, Vanguard Q2; VG-6), Hold the Line, the Weaponmaster; the M1 level-2 talent menu (8.3); M1 conditions only; the class record shape; `restDefensiveTool`; `ForbiddenClassGrant`, `NameCollision`, `ClassGatedContent`; `Floor1BossSustain` for the Vanguard |
-| **M2** | All four classes, levels 1–10, two subclasses each (the Vanguard three; the Shade's Cutthroat and either the Trapwright, only if DEP-S1 lands in M2, or the Swordsworn, the expected default: agreed 2026-11-18, Shade Q2; SH-30; Shade design 14); spell lists and the `classTags` audit; Shieldwall; offers with lanes and the trigger kind (CL-3); companion kits as signature slices and the recruit-pool rules; T6 for fear spells (CL-1); the remaining checks and every report in 12.3 |
-| **M3** | The unlock mechanism with the first candidates in the order of 9.4 (Votary first); the first Shade unlock subclass, a full subclass (the Trapwright, expected, once DEP-S1 lands; or the Swordsworn if the Trapwright made M2; SH-30); unlock aspects (Elementalist, Loremaster, Warcaller, Pennant) as content allows |
+| **M2** | All four classes, levels 1–10, two subclasses each (the Vanguard three; the Shade's Cutthroat and the Swordsworn: the DEP-S1 fallback is applied (agreed 2026-11-18, Shade Q2; SH-30; Shade design 14; applied 2026-11-21, change TL-37; traps and locks design 6.16)); the trap record fields the Trapwright needs ship now, with `TrapwrightHasMechanism` and `SpringContentBound` as M2 reports, not gates (change TL-37); spell lists and the `classTags` audit; Shieldwall; offers with lanes and the trigger kind (CL-3); companion kits as signature slices and the recruit-pool rules; T6 for fear spells (CL-1); the remaining checks and every report in 12.3 |
+| **M3** | The unlock mechanism with the first candidates in the order of 9.4 (Votary first); the first Shade unlock subclass, a full subclass: the Trapwright (the DEP-S1 fallback applied; SH-30; change TL-37; traps and locks design 6.16), with `TrapwrightHasMechanism` and `SpringContentBound` now gates; unlock aspects (Elementalist, Loremaster, Warcaller, Pennant) as content allows |
 | **M4** | Multiclassing, model chosen then (7.7), with the separate multiclass precision report (CL-8); species on baseline axes (7.9; CL-11); more unlocks |
 | **Later** | Classes whose identity is a Later condition (Holdfast, Berserker, Hexer) after a budget ruling; Riposting; the Death-Ward-shaped spell; summons |
 

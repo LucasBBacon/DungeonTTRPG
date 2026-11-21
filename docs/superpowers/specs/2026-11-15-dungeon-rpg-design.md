@@ -345,6 +345,17 @@ computes rules.
   layout with fixed counts, places room terrain; every piece on a
   walkable square comes from it, not from dressing (room terrain design
   6.2.5; change TR-17).
+  A `traps` child of each floor's dungeon substream, drawn after
+  hazards and before encounter placement with fixed counts, draws trap
+  and lock geometry and kinds; a `trapsResolve` child with fixed draws
+  runs after encounters are placed and binds traps and locks to them.
+  Object checks (pick, disarm, force and the like) draw from a keyed
+  `checks` stream with no unit in the key and an `attemptIndex` per
+  check kind; out-of-combat saves forced by traps or consequence locks
+  (keyed by `springIndex`) and out-of-combat attacks on objects also
+  draw from `checks`, so a trap or lock handled between fights never
+  moves the next fight's rolls (traps and locks design 6.22; change
+  TL-3, M1).
 - Rules use integer arithmetic only.
 - No reliance on unordered collection iteration.
 

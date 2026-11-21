@@ -402,30 +402,36 @@ Every ability declares exactly one cost **(lead's call)**:
 | Slip past an enemy: Acrobatics against 10 + Reflex **(settled)** | Part of movement, once per turn |
 | Escape a grapple | Action |
 | Hide: Stealth | Action; a bonus action with a class feature; or part of an attack with a class feature (No Witnesses: on a kill, no bonus action, resolved after weapons design 7.5 step 15 so the killing attack does not end it; conditions design 18.7) **(change SH-12, Shade design 8.1)** |
-| Search: Perception against the passive stealth of hidden units within line of sight. Monsters use it after losing the party; Keen gives advantage. **(change A-10, enemies design 11.1, 12.1)** | Action |
+| Search: Perception against the passive stealth of hidden units within line of sight. Monsters use it after losing the party; Keen gives advantage. **(change A-10, enemies design 11.1, 12.1)** It is for hidden units only: there is no search-for-traps verb (traps and locks design 6.4; change TL-7) | Action |
 | Frighten: Intimidation against 10 + Will **(settled)**; range 6, line of sight **(change HR-14, Herald design 3.3)** | Action |
 | Rally: Leadership | Bonus action, once per ally per fight |
 | Study an enemy: Lore | Bonus action, once per enemy type per fight |
 | Recognise a spell being cast: Arcana | `none`: a threshold with no roll |
 | Get a downed companion up: Medicine, trained only **(settled)**; at most once per companion per fight (a Lifeline get-up counts) **(change DH-11, death and healing design 11.2)**. Reach the Fallen (Hearth L6 option): range 2, and the same action Treats that companion (only when taken as an action, never through the Lifeline bonus-action variant); 1 HP and Prone unchanged **(change HR-28, Herald design 9.2)** | Action |
 | Treat: Medicine, one roll against each curable instance's recorded difficulty; ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (Diseased and Scarred at a rest, except a `treatProof` Scarred) **(agreed; change C4, conditions design 8; change CN-12, consumables design 14.6; change DH-11)** | Action, adjacent |
-| Disarm or re-arm a trap: Mechanics, trained only **(settled)** | Action |
-| Trigger a known trap against enemies: Mechanics. A known armed trap is a hazard for forced movement (conditions design 10, 11.3; the rules of 10.1 and 10.2 unchanged) **(change SH-15, Shade design 9.1)** | Action |
+| Disarm or re-arm a trap: Mechanics, trained only **(settled)**; Arcana disarms glyphs. Disarm is an object check on the keyed `checks` stream under the Margin rule: one roll per object per hand verb per floor; a Jam (fail by 1–4) is noise 4 and ends hand work on that object to the end of the floor; a Botch (fail by 5 or more) springs it with no hard part **(change TL-4, traps and locks design 6.6; M2)**. Re-arm: adjacent; the trap fires at 500‰ with no hard part, never stacking; once per trap per floor (`rearmUsedThisFloor`); not while any group the trap has hit is Alerted or in combat **(change TL-15, traps and locks design 6.6; M2)** | Out of combat 2 ticks; in combat, action |
+| Trigger a known trap against enemies: Mechanics, untrained allowed. A known armed trap is a hazard for forced movement (conditions design 10, 11.3; the rules of 10.1 and 10.2 unchanged) **(change SH-15, Shade design 9.1)**. Universal; an object check on `checks` under the Margin rule (a Jam or Botch is noise 4 and a Jam); a mechanism tagged `handle` springs with an action and no check **(change TL-13, traps and locks design 6.6, 6.7; M2)** | Action (out of combat 1 tick) |
+| Trigger Shot: a thrown or launcher attack against AC 10 + 2 × tier at a known trigger square or mechanism; a hit springs it, a miss is noise 4. Out of combat an object check on `checks`, one try per trap per floor. *Pending request (TL-42, weapons owner):* an improvised throw of a held weapon or item for Trigger Shot alone (range 4, no damage); if refused, it needs a thrown weapon or a launcher **(change TL-13, traps and locks design 6.7; M2)** | Replaces one attack |
+| Pole it: a unit with a reach weapon springs a known plate, wire or catch host within 2 squares; no roll; the trap's noise **(change TL-13, traps and locks design 6.7; M2)** | Out of combat 1 tick; in combat, action |
+| Probe: any unit, from a square inside a shown Hunch zone or orthogonally adjacent to it; offered only at a Hunch zone; no roll, noise 0; reveals every trap whose trigger squares lie in the zone **(change TL-7, traps and locks design 6.4; M2)** | Out of combat 2 ticks; in combat, action |
+| Pick a lock: Mechanics, trained only; an object check on `checks` under the Margin rule, one roll per lock per floor; a Jam is noise 4 and closes picking this floor; a Botch adds the lock's consequence **(change TL-21, traps and locks design 6.6, 6.11; M1)** | Out of combat 1 tick; in combat, action |
+| Force a lock: Athletics, anyone, against the lock's DC + 2; noise 6 per try (or the kind's); each failure lowers the DC by 2 and the third try opens with no roll; from F2 a force Botch on a Door Splinters it and opens it **(change TL-21, traps and locks design 6.6, 6.11; M1)** | Out of combat 1 tick; in combat, action |
+| Take time: out of combat only; no roll, the result is 10 + bonus; offered only when it succeeds, on Easy or Standard devices and Plain locks; never on Hard, a consequence lock, a `noTakeTime` object, a Squeeze or a Plank; a channelled act (interrupted, it has no result and spends nothing) **(change TL-5, traps and locks design 6.6; M1, traps' part M2)** | Exploration action (8 ticks *(illustr.)*) |
 | Lure: choose a square you can see within 6; it emits noise radius 4 (enemies design 12.3). A group with no member in line of sight to you becomes Alerted toward it with no roll; a group that can see you makes its noticing roll. Once per group per floor (`luredThisFloor`). Only if the enemies owner accepts **(change SH-21, Shade design 9.1)** | Exploration action (1 tick) |
 | Open an unlocked door: move into it, as monsters do **(change FL-8, floor layout design 9.2; M1)** | 1 square of movement |
-| Close an open, unlocked door: adjacent, the door's square empty; in combat once per door per round, never while a hostile is adjacent to the doorway or threatens it with reach. Monster door rules unchanged (enemies design 12.4); the rule is owned by dungeon generation segment 5 **(change FL-8, floor layout design 9.2; M2)** | Out of combat 1 tick; in combat, action |
+| Close an open, unlocked door: adjacent, the door's square empty; in combat once per door per round, never while a hostile is adjacent to the doorway or threatens it with reach. Monster door rules unchanged (enemies design 12.4); the rule is owned by dungeon generation segment 5 **(change FL-8, floor layout design 9.2; M2)**. Refused on a Splintered Door (traps and locks design 6.11, 6.12; change TL-33) | Out of combat 1 tick; in combat, action |
 | Draw or open a Drape: in combat, drawing is once per Drape per round, never while a hostile is adjacent to it or threatens it with reach **(change FL-7, floor layout design 9.2; M2)** | Free out of combat; drawing in combat, action |
-| Squeeze (1–3 narrow squares): Acrobatics on the existing check stream. Out of combat the leading unit makes one check, no retry; on a pass the party goes through, on a failure it still goes through after +4 ticks *(illustr.)* with noise 4 at the mouth nearest the party. In combat each unit checks as it enters: a pass moves it in and ends its movement there (it continues next turn with no new check); a failure ends its movement at the mouth, no retry that round. Monsters never use a Squeeze **(change FL-7, floor layout design 9.2; M2)** | Out of combat one party check; in combat part of movement |
+| Squeeze (1–3 narrow squares): Acrobatics on the keyed `checks` stream, keyed by the object's `traversalIndex` (traps and locks design 6.12, 6.22; change TL-3). Out of combat the leading unit makes one check, no retry; on a pass the party goes through, on a failure it still goes through after +4 ticks *(illustr.)* with noise 4 at the mouth nearest the party. In combat each unit checks as it enters: a pass moves it in and ends its movement there (it continues next turn with no new check); a failure ends its movement at the mouth, no retry that round. Monsters never use a Squeeze **(change FL-7, floor layout design 9.2; M2)** | Out of combat one party check; in combat part of movement |
 | Lift a Latch, from the bar side only: no check, silent; it then becomes a Door. Monsters never lift it **(change FL-19, floor layout design 9.2; M2)** | Out of combat 1 tick; in combat 1 square of movement |
 | Listen at a closed door: out of combat; no roll, no stream draw, noise 0; reports each non-Hidden group in the room beyond at that moment (trained Perception adds the size band and "passing"); once per door per floor. Information only **(change FL-18, floor layout design 9.2; M2; owned by dungeon generation segment 10)** | Exploration action (2 ticks); passive and free for a party with a member trained in Perception when auto-walk pauses at the door |
 | Sound the wall: only at a wall square showing the Hairline tell (or 8-adjacent to the secret Portal's squares); opens it, no roll; out of combat only **(change FL-17, floor layout design 9.2; M2)** | Exploration action (6 ticks) |
 | Move Shunt: an adjacent light, non-sturdy Furnishing moves 1 square straight away from the user; no check; never collides (not choosable if that square holds a unit). Once per piece per round across both Shunt modes; combat only; noise 4; does not end Hidden; never onto a square `FurnishingNeverSeals` forbids **(change TR-6, room terrain design 6.3.2, 6.3.6; M2)** | 2 movement *(illustr.)* |
 | Attack Shunt: an adjacent non-sturdy Furnishing (light automatic; heavy Athletics against heft) moves 1 square straight away; into a unit, the piece stops, the unit takes the collision band once, is not moved, and makes a Reflex save against 8 + the Shunter's Athletics bonus *(illustr.)* or falls Prone (size rule applied to the piece); a light piece breaks on the hit. Once per piece per round; combat only; noise 4; ends Hidden like an attack **(change TR-6, room terrain design 6.3.2; M2)** | Replaces one attack |
 | Kick: an adjacent `round`, non-sturdy Furnishing (light automatic; heavy Athletics against heft) travels straight away up to 4 squares *(illustr.)*, stopping before blocking squares or at the first unit (collision band, Reflex or Prone, as Attack Shunt); never ends on a square 6.3.6 forbids. Noise 4; ends Hidden **(change TR-6, room terrain design 6.3.3; M2)** | Replaces one attack |
-| Smash: an adjacent Furnishing or Keg (light breaks automatically; heavy, sturdy included, Athletics against heft); a broken light piece is gone, a heavy one becomes Rough debris; a Smashed Keg bursts, the Smasher outside its burst. Noise 6 *(illustr.)*; ends Hidden **(change TR-6, room terrain design 6.3.4, 6.3.5; M2)** | Replaces one attack |
+| Smash: an adjacent Furnishing or Keg (light breaks automatically; heavy, sturdy included, Athletics against heft); a broken light piece is gone, a heavy one becomes Rough debris; a Smashed Keg bursts, the Smasher outside its burst. Noise 6 *(illustr.)*; ends Hidden **(change TR-6, room terrain design 6.3.4, 6.3.5; M2)**. The Supper's Iced padlock: a bludgeoning Smash shatters it at Athletics Easy, noise 6, one roll on the `checks` stream (a Botch is a Jam), out of combat 1 tick; it opens its host like a force, with no Splinter **(change TL-32, traps and locks design 7.8; M2)** | Replaces one attack |
 | Overturn: orthogonally adjacent to a `tippable` Tall Furnishing, Athletics against heft 15 *(illustr.)*; it falls into the 1×2 strip straight away from the user (Reflex: failure 2× collision band plus Prone, success half), then becomes debris and opens sight **(change TR-6, room terrain design 6.3.7; M3)** | Action |
 | Haul: drag an adjacent light Furnishing into the square you left; provokes as normal movement **(change TR-6, room terrain design 6.3.7; M3)** | 2 movement per square |
-| Cross a Plank (narrow ground): in combat, entering the first Plank square needs Acrobatics against the segment-5 ladder (DC 12, *illustr.*); a failure ends movement on the square before, no retry that round, no fall and no damage. Out of combat one check by the leading unit, with the Squeeze row's failure cost. Stiff gives disadvantage; forced movement onto a Plank needs no check **(change TR-12, room terrain design 6.2.6; M2)** | In combat part of movement; out of combat one party check |
+| Cross a Plank (narrow ground): in combat, entering the first Plank square needs Acrobatics against the segment-5 ladder (DC 12, *illustr.*); a failure ends movement on the square before, no retry that round, no fall and no damage. Out of combat one check by the leading unit, with the Squeeze row's failure cost. Stiff gives disadvantage; forced movement onto a Plank needs no check **(change TR-12, room terrain design 6.2.6; M2)**. The check is on the keyed `checks` stream, keyed by the Plank's `traversalIndex`; per-traversal rolls kept (traps and locks design 6.12, 6.22; change TL-3) | In combat part of movement; out of combat one party check |
 | Operate a Cord (a Low piece face or wall socket; each Cord has exactly one verb): from an adjacent square, no check, noise 4 *(illustr.)*. A bound Cord re-times one Stir (Now, Hold); Reverse, Flip and Kick, and standalone Cords, are M3. An act set by an Operated Cord credits the operator for experience and morale; on-kill hooks never fire from a Dream-step act **(change HZ-15, hazards design 6.3.4; re-time verbs with the Stirs: M2 (gated), else M3)**. *Pending request (HZ-15), not a rule until the ability model owner rules:* a unit that starts its turn adjacent to a Cord may Operate it as its bonus action | Action |
 | Use a scroll or wand outside your class: Arcana, trained only, against 10 + tier; in class, no slot is spent **(settled; change CN-12, consumables design 13.2)** | Action. A failed check uses the scroll or charge up: no free retries **(settled)**. |
 | Drink a potion (a potion on your own belt) **(change I-5, items design 7.1)** | Bonus action |
@@ -455,9 +461,24 @@ Every ability declares exactly one cost **(lead's call)**:
 There is no Drop command, and armour and trinkets cannot be changed in
 combat. **(change I-5, items design 7.1)**
 
-The Trapwright's trap rows (the hand-trigger clarified, Trigger Shot,
-re-arm at 500‰, the hard part once per fight) and Wedge apply when the
-Trapwright ships **(changes SH-15, SH-18; Shade design 14)**.
+The Trapwright's trap rows (the hard part once per fight) and Wedge
+apply when the Trapwright ships **(changes SH-15, SH-18; Shade design
+14)**. The hand-trigger, Trigger Shot and re-arm at 500‰ are universal
+rows above from M2 **(changes TL-13, TL-15, traps and locks design 6.6,
+6.7)**.
+
+Traps and movement **(change TL-7, TL-12, traps and locks design 6.4,
+6.7; M2)**:
+- Trap detection runs after every square of party movement; a new
+  Revealed or Hunch result interrupts the move (manual or auto-walk) and
+  the unit keeps its remaining movement.
+- Known triggers are hazards for pathing, auto-walk and followers; walk
+  round is the default. Moving through a known wire square steps over
+  it at +1 movement; if that cannot be paid, the move stops before the
+  wire.
+- Bear it: entering a known trigger by your own movement springs it with
+  advantage on its save (on a wire, only by an explicit choice); the
+  first entry per trap asks for confirmation.
 
 Switching weapons costs a bonus action so that a spare weapon is a fallback,
 not a key carried for each enemy. **(lead's call, from the stat model's
@@ -568,6 +589,11 @@ diagonal step costing 1.
   *illustr.*), with no riders, Prime, arcs or forks and no cover; it
   ends Hidden **(change TR-28, room terrain design 6.2.1, 6.3.7; M3)**.
 - Squares are enumerated in a fixed order (row by row), for determinism.
+- *Pending request (TL-41), not a rule until the ability model owner
+  rules:* a teleport rule, which the model does not yet have. The M3
+  relocation traps (in combat, same room only) and the Mirror Glyph wait
+  for it; without it they fall back to Prone in place and the Mirror
+  Glyph is cut (traps and locks design 6.3, 7; M3).
 - No area covers more than 25 squares at levels 1–6, or more than 49 at
   levels 7–10 **(change ARC-9, Arcanist design 8.1)**. Content
   validation enforces this.
@@ -1101,7 +1127,12 @@ when the Warcaller ships (M3) **(change HR-29, Herald design 14.1, 9.3)**.
   entered. A level-up needs no refill code.
 - Several triggers on one event run in order of priority, then source unit
   order, then effect creation order.
-- Every roll uses the combat stream. **(settled)**
+- Every roll uses the combat stream. **(settled)** Narrowed: unit
+  attacks, saves in combat and contests use the combat stream; act-time
+  object checks, out-of-combat saves forced by traps or locks and
+  out-of-combat attacks on objects use the keyed `checks` stream, with
+  no unit in the key (traps and locks design 6.22). **(change TL-3,
+  decided main 6.3 extended; M1)**
 - Effects that data cannot express, including reaction policies and AI
   terms, are C# hooks referenced from data by ID. **(settled)**
 
@@ -1157,6 +1188,10 @@ The build fails when:
   the patrol is dead it is a cleared room like any other); floor 1's
   Forecourt is near-safe only by RS 9.4's approved exception, told
   plainly. **(change FL-5, floor layout design 6.11; agreed rule kept)**
+- There is no party relock verb, so a lock never makes a safe spot;
+  Wedge stays the Trapwright's, and a Drop-bar, if the client adopts it
+  (M3), never satisfies "no hostile aware" by itself (traps and locks
+  design 6.11, 6.12). **(change TL-33)**
 
 ### 15.2 On completion
 
@@ -1306,6 +1341,19 @@ Applied on 2026-11-16:
   else M3) and the Snatch reaction row (M3) to 7.2. Pending with the
   ability model owner: bonus-action Operate. **(changes HZ-12, HZ-15,
   HZ-22)**
+- **Traps, locks and checks:** settled in
+  `2026-11-21-traps-locks-design.md` (traps and locks design, dungeon
+  generation segment 5, 2026-11-21). Its check charter (6.1) is read
+  with 7.2, unchanged (TL-1). It narrows 14.4 to the keyed `checks`
+  stream for object checks (TL-3); adds the Probe, Pick, Force, Take
+  time, Trigger Shot and Pole it rows and the traps-and-movement rules
+  to 7.2 and extends the disarm, re-arm, hand-trigger, Squeeze, Plank,
+  close and Smash rows (TL-4, TL-5, TL-7, TL-12, TL-13, TL-15, TL-21,
+  TL-32, TL-33); adds the no-relock line to 15.1 (TL-33). Pending with
+  the ability model owner: the teleport rule (8.1; TL-41, M3). Pending
+  with the weapons owner: the Trigger Shot improvised throw (TL-42).
+  **(changes TL-1, TL-3, TL-4, TL-5, TL-7, TL-12, TL-13, TL-15, TL-21,
+  TL-32, TL-33, TL-41)**
 - **Content volume:** counts of companions, themes, monsters and bosses for
   M2. The M1 slice class is the Vanguard (classes design) **(change
   CL-13b)**.

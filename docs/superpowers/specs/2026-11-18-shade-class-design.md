@@ -400,7 +400,7 @@ that otherwise gains only +1 Dexterity and sits in a parity trough
 | Subclass | Specs into | Signature Tricks option | Vanish Art | Level 6 (1 of 2) | From Nowhere rider |
 |---|---|---|---|---|---|
 | **Cutthroat** (M2) | The quiet kill between fights; the ambush opener; kill-then-fade; perfect stealth or terror | No Witnesses | Ambuscade | Throat-Cut / Make an Example | The first kill takes No Witnesses free |
-| **Trapwright** (M2 if DEP-S1 lands in M2; otherwise an unlock, the expected default) | Known traps as weapons; setup-flask tempo; Caught; forced movement onto traps; doors | Jury-Rig (Spring, Re-arm, Toss and Dust; Wedge; Killing Ground) | Tripline | Drag Line / Trick Shot | Caught Out: a free Killing Ground, and one stealth-die hit on a Caught hostile next turn |
+| **Trapwright** (M2 if DEP-S1 lands in M2; otherwise an unlock, the expected default; resolved 2026-11-21: the fallback applies, the first unlock in M3, TL-37) | Known traps as weapons; setup-flask tempo; Caught; forced movement onto traps; doors | Jury-Rig (Spring, Re-arm, Toss and Dust; Wedge; Killing Ground) | Tripline | Drag Line / Trick Shot | Caught Out: a free Killing Ground, and one stealth-die hit on a Caught hostile next turn |
 | **Swordsworn** (first unlock, M3; promoted to M2 under the fallback) | One-on-one melee; the reaction economy; Answer as the engine; finesse and light blades | Sworn Guard (with Counterstroke, Open Guard, Held Guard) | Blade Dance | Cross Steel / Turn Aside | One Counterstroke before your next turn costs no Trick and takes the stealth die |
 
 ### 5.5 Level table *(illustr.)*
@@ -1029,7 +1029,7 @@ two are honest utility, as the Vanguard's Grim Resolve was.
 |---|---|---|
 | `shadow` | 1500‰ | Stealth and Acrobatics mastery; Fade, Vanish and From Nowhere trigger offers; Cutthroat Intimidation training and mastery (`requires: subclass:cutthroat`) |
 | `precision` | 1300‰ | Opening and Duck triggers; Draw Out (from level 5); verb training in a light, finesse or launcher family; physical damage that ignores resistance |
-| `delve` | 1200‰ | Mechanics, Arcana (DEP-1) and Perception mastery (Tactician reachable, never copied); Medicine; Sure Hands (out of combat, Mechanics and Acrobatics treat a d20 of 7 or less as 8; never Stealth, never in combat) |
+| `delve` | 1200‰ | Mechanics, Arcana (DEP-1) and Perception mastery (Tactician reachable, never copied); Medicine; Sure Hands (out of combat, Mechanics and Acrobatics treat a d20 of 7 or less as 8; never Stealth, never in combat; also cuts Take time to 3 ticks: traps and locks design 6.6, TL-5) |
 
 - **`offerLaneAdjust` ×1333‰:** Cutthroat on `shadow`, Trapwright on
   `delve`, Swordsworn on `precision`.
@@ -1307,7 +1307,9 @@ trap records (DEP-S1) land in M2 with dungeon generation, with the
 content reading of trap damage (`SpringContentBound`). Otherwise it
 moves to the unlocks and the Swordsworn is promoted to M2. **The unlock
 fallback is the expected default** (the client: "keep it for later").
-How the call is made is in 14.
+How the call is made is in 14. **Resolved (2026-11-21; TL-37):** the
+fallback applies; the Swordsworn ships in M2 and the Trapwright is the
+first Shade unlock in M3 (traps and locks design 0.1, 6.16).
 
 **Specs into:** known traps as weapons (remote springing, re-arming and
 reaction timing); setup-flask tempo (oil before fire, water before cold
@@ -1322,7 +1324,8 @@ movement onto traps (L6); doors (Wedge); Mechanics and Intelligence (the
 - **Trap records:** `triggerSquares`, `mechanismSquare` (where Spring and
   the hand-trigger act), `area`, `effect`, `tier`, `detectDifficulty`,
   `disarmDifficulty`, `armed`, `knownToParty`, `loud`, `rearmable`,
-  `hardPart` + `hardFallback`.
+  `hardPart` + `hardFallback`. (Shipped in M2 inside the trap record
+  superset: traps and locks design 11.1; TL-10.)
 - **`TrapwrightHasMechanism`** reads generated floors, which change by
   seed, so it is split in two **(lead's call)**:
   - **(a) a generator constraint, checked by a property test** over N
@@ -1358,6 +1361,11 @@ tripline, caughtOut, dust, dragLine | trickShot]`.
     proficiency, used when it is higher than the best member's (stat
     model 6 trap-sense row; SH-19). Only party passive *stealth* is
     barred from leans; trap sense is not.
+  - **Re-scope owed (TL-6; with the Trapwright, M3):** the changed stat
+    model 6 trap-sense row already gives 10 + Intelligence + proficiency
+    to every Mechanics-trained unit, so (b) adds nothing as written. The
+    re-scope is the Shade owner's call, pending; the recommendation is
+    double proficiency on trap sense (traps and locks design 6.4).
 - **Caught** (Opening trigger, open tier; launchers and thrown attacks
   qualify; SH-17):
   - A hostile counts if, since the end of your previous turn, it took
@@ -1380,14 +1388,19 @@ content; one picker entry with modes):
     against its `disarmDifficulty` (as the NM-1 hand-trigger). On a
     failure the Trick is spent, noise 4, and the trap **jams**: for this
     fight in combat, or until floor end out of combat (`jammedUntil`,
-    13.1; no free retries). The trap resolves with its own data at
+    13.1; no free retries). Universal Jams last to floor end; only this
+    Jury-Rig jam keeps the per-fight scope (traps and locks design 6.6;
+    TL-4). The trap resolves with its own data at
     source `environment`, you as causer. It is not selective, and the
     preview carries the lethal tag (DH 10.4).
   - **Re-arm:** an adjacent sprung or disarmed trap, trained Mechanics.
     No roll if you disarmed it yourself this floor (the trap's
     `disarmedBy`, 13.1). Once per trap per floor through Jury-Rig
-    (`juryRigRearmedThisFloor`); the universal action route stays
-    unlimited at its action cost.
+    (`juryRigRearmedThisFloor`); the universal action route is also once
+    per trap per floor (`rearmUsedThisFloor`), not while a group the trap
+    has hit is Alerted or in combat, so a Trapwright re-arms one trap at
+    most twice per floor, once by each route (traps and locks design 6.6;
+    TL-15).
   - **Toss:** throw a belt **setup flask** (water or oil in M2) as the
     universal throw. Offensive flasks stay an action, one per turn.
   - **Dust (Toss mode; lead's call, check round):** with no flask, throw
@@ -1416,7 +1429,9 @@ content; one picker entry with modes):
 - **Trap rules (SH-15):** a re-armed trap, by anyone, fires at 500‰
   damage and without its hard part; the multiplier never stacks (a trap
   re-armed twice still fires at 500‰); a trap's hard part fires at most
-  once per fight.
+  once per fight. The 500‰ re-arm, the hand-trigger and Trigger Shot
+  ship universally in M2 (traps and locks design 6.6, 6.7; TL-13,
+  TL-15).
 - **First lever:** if Jury-Rig use pushes the content bound or parity,
   apply a `springLimit` per-rest sub-limit on Spring (1, then 2; one
   option, so VG-10 covers it). The fallback is to tag Spring `strike`.
@@ -1508,7 +1523,9 @@ against Brink; Killing Ground against Set.
 trap-light floors (floor 1 gives Caught, Toss and Dust only); loud; friendly
 fire; bosses (Unyielding; no guaranteed boss-room traps); two key
 abilities; a contested bonus action; monsters avoid known traps (true
-state, enemies 11.2).
+state, enemies 11.2; natives avoiding triggers and trusting areas, Once
+Bitten and the mindless blunder are a pending request to the enemies
+owner: traps and locks design 6.8, TL-16).
 
 **Later:** Drag Line auto-entry (with Over the Edge, pending hazard
 caps), chained springs, monster trap use, Holy Water and Sticky
@@ -1741,7 +1758,7 @@ their bounds and a recommendation. Cost: S small, M medium.
 | N-1 | **Tiered Opening band** (stealth / open, from level 1) and the trigger-1 split | S | classes 8.4 | `OpeningCeiling`, `TriggerTierFixed` | **Adopted (agreed, Q1)** |
 | N-2 | **Strike limit** (a shared tagged counter on the pool record) | S | classes 3.4, 7.5; Vanguard 7.9 | `HideLimit`, `StrikeOptionCeiling` | **Adopted** (SH-4) |
 | N-3 | `OpeningCeiling`, `StrikeOptionCeiling`, `TriggerFromFive`, `TriggerTierFixed`, `CampOptionBound` | S | classes 12.2; VG-10/11/12 | static predicates | **Adopted** |
-| NM-1 | **Trap rulings package:** known armed traps are hazards for forced movement (conditions 10, 11.3); a clarified hand-trigger row (action, adjacent, Mechanics against `disarmDifficulty`, failure noise 4); **Trigger Shot** (replaces an attack: thrown or launcher roll against AC 10 + 2 × tier at a trigger square; a hit springs it, a miss makes noise 4; no Opening or Exploit); re-arm at 500‰ with no hard part | M | conditions 10, 11.3, 11.6; ability 7.2; enemies 11.1; DH-18 unchanged | one spring per trap per round; the 3-square forced-movement sum | **Required with the Trapwright** in whatever wave it ships. **The hazard ruling ships in M2 regardless** (14). "Monsters know their floor's traps" is already true (enemies 11.2, 11.3 invariant 7) and is not a change |
+| NM-1 | **Trap rulings package:** known armed traps are hazards for forced movement (conditions 10, 11.3); a clarified hand-trigger row (action, adjacent, Mechanics against `disarmDifficulty`, failure noise 4); **Trigger Shot** (replaces an attack: thrown or launcher roll against AC 10 + 2 × tier at a trigger square; a hit springs it, a miss makes noise 4; no Opening or Exploit); re-arm at 500‰ with no hard part | M | conditions 10, 11.3, 11.6; ability 7.2; enemies 11.1; DH-18 unchanged | one spring per trap per round; the 3-square forced-movement sum | **Required with the Trapwright** in whatever wave it ships. **The hazard ruling ships in M2 regardless** (14); the hand-trigger (kept an action; handles and Pole it added), Trigger Shot (mechanisms included) and the 500‰ re-arm ship universally in M2 (traps and locks design 6.7; TL-13). "Monsters know their floor's traps" is already true (enemies 11.2, 11.3 invariant 7) and is not a change |
 | NM-2 | **`missedBy` trigger kind** + `sameReactionFollowUp`; `onParrySuccess` defined | S–M | weapons 7.5 step 6/6a, 8, 18.4; ability 7.2, 7.3, 14.3; VG-18/20 | one reaction; no nesting; Staggered stops it | **Engine in M2; ships with the Swordsworn** |
 | NM-3 | **False Trail** (a class writes `lastKnown`) | S | enemies 11.2 | only groups from whose every member with line of sight you became Hidden; Search, Revealed and the 3-square rule untouched; information, not a targeting override (12) | **Adopted in M2** as a Vanish `triggerMenu` entry |
 | NM-4 | **Lure** (exploration: noise radius 4 at a seen square within 6; once per group per floor) | S | enemies 12.1–12.3, 15.5; ability 7.2 | exploration only; no Wary; `luredThisFloor` | **Adopted in M2, universal**, if the enemies owner accepts; report elite-room notables taken without a fight |
@@ -2016,11 +2033,12 @@ engine work below is on the M1 path.
 - Draw Out, False Trail, Shrugged Off, Lure (if the enemies owner accepts
   it), and Wise to You switched off;
 - the NM-1 hazard ruling (known armed traps are hazards for forced
-  movement), whatever the Trapwright's wave;
+  movement), whatever the Trapwright's wave; on floor 1, pushes stop
+  before trigger squares (traps and locks design 6.19; TL-19);
 - the NM-2 engine (`missedBy`, `sameReactionFollowUp`);
 - **two subclasses** (classes 13, M2 row): the Cutthroat, and
   **either** the Trapwright (if DEP-S1 lands in M2) **or** the Swordsworn
-  (the expected default) (14).
+  (the expected default) (14). Resolved: the Swordsworn (TL-37).
 
 **Conditions the Shade touches:** applies Poisoned (Tainted Blade),
 Frightened (Make an Example), Prone (Tripline; Drag Line through
@@ -2241,8 +2259,8 @@ registry).
 | Wave | Content |
 |---|---|
 | **M1** | Nothing. No M1 rule is needed for the Shade |
-| **M2** | Section 11: the whole core; the strike limit and validators; Draw Out, False Trail, Shrugged Off, Lure (if accepted), Wise to You off; the NM-1 hazard ruling; the NM-2 engine; **the Cutthroat** (its second-kill route only with the body-noticed rule); **and one of:** the **Swordsworn** (the expected default) **or** the **Trapwright** with NM-1 in full, DEP-S1 and `SpringContentBound` |
-| **M3** | The other one of the pair as the **first Shade unlock**: the Trapwright (expected) once DEP-S1 and NM-1 are in, or the Swordsworn (stage-1 order) if the Trapwright made M2 |
+| **M2** | Section 11: the whole core; the strike limit and validators; Draw Out, False Trail, Shrugged Off, Lure (if accepted), Wise to You off; the NM-1 hazard ruling; the NM-2 engine; **the Cutthroat** (its second-kill route only with the body-noticed rule); **and the Swordsworn** (the fallback, applied 2026-11-21; TL-37). The trap records the Trapwright needs, the universal hand-trigger, Trigger Shot and 500‰ re-arm, and the `TrapwrightHasMechanism`, `SpringContentBound` and dead-room reports ship with traps (traps and locks design 0.1, 6.16) |
+| **M3** | The **Trapwright** as the **first Shade unlock** (TL-37), with the density reports as gates, per-group belief and witness-only secrecy for party-armed traps, and the Trap Eye re-scope; level-3 parity is rerun with the universal trap rows present before M3 (traps and locks design 6.16) |
 | **Later** | Pinch, Lie in Wait, Gloom squares (with the Wise to You trial), Vault, Stake Out, the body-noticed rule if not taken in M2, Drag Line auto-entry (with Over the Edge), chained springs, monster trap use, Holy Water and Sticky flasks as Toss fuel, coatings |
 
 **How the Trapwright call is made (lead's call):**
@@ -2259,11 +2277,20 @@ registry).
   ships in the first wave in which DEP-S1 and NM-1 land (M3 at the
   earliest; Later if they do not). Its rows SH-15 (beyond the hazard
   ruling), SH-16, SH-17, SH-18, SH-19, SH-25 and SH-26 are applied when
-  it ships, not before.
+  it ships, not before, except that SH-15's hand-trigger, Trigger Shot
+  and 500‰ re-arm rules ship universally in M2 with traps (traps and
+  locks design 6.6, 6.7; TL-13, TL-15).
 - The creation default at level 3 stays the Cutthroat in either case.
 - The level-3 subclass screen shows only the subclasses of the current
   wave; the ladder preview's Trapwright line is hidden while it is not
   offered (7.14).
+- **Resolved (2026-11-21; TL-37, agreed Q2 applied):** the traps and
+  locks design (dungeon generation segment 5) does not put the SH-16
+  density check in the M2 gate set, so the fallback applies: the
+  Swordsworn ships in M2 and the Trapwright in M3. TP12's main-path
+  minimums are an M2 gate for every party, not the SH-16 check. "The
+  Trapwright places traps" is rejected (8.2; SH-26) (traps and locks
+  design 0.1, 6.16).
 
 ## 15. Risks
 
@@ -2401,7 +2428,11 @@ finds the `TriggerFromFive` scope note; a grep for
 
 - **Dungeon generation and trap content (DEP-S1):** trap records,
   density (`TrapwrightHasMechanism`), boss-room rules, closed doors;
-  decides the Trapwright's wave (14).
+  decides the Trapwright's wave (14). **Resolved with the fallback
+  (TL-37):** the traps and locks design ships the records in M2, the
+  density checks as M2 reports and M3 gates; the Trapwright is M3 (14).
+  Owed by the Shade owner before M3: the level-3 parity rerun with the
+  universal trap rows present, and the Trap Eye re-scope (TL-6; 8.2).
 - **The enemies owner:** the body-noticed rule (the Cutthroat
   second-kill route); the AI force-door term (Wedge); Lure acceptance;
   Counterstroke deterrence pricing.

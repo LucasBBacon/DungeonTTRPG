@@ -232,12 +232,14 @@ Formulas give the shape. Exact values are left to the builders.
 | Speed | 6 squares. Changed only by species traits, monster role or traits, armour and conditions; affixes are traits (enemies design 8.3). |
 | Passive perception | The best party member's full passive: 10 + Wisdom + proficiency if trained (double with mastery) + active effects (enemies design 12.2, 13.3) |
 | Passive stealth | 10 + Dexterity of the worst party member, less a heavy armour penalty (sized in armour design 7.3) |
-| Trap sense | 10 + Intelligence of the best party member. When the Trapwright ships, its Trap Eye proficiency lean applies here (Shade design 8.2, 14; SH-19) |
+| Trap sense | The highest, over the living, non-Downed units in the party roster (companions included, whichever unit has line of sight), of the formulas that apply to each trap: 10 + Intelligence for anyone; 10 + Intelligence + proficiency for a Mechanics-trained unit (double with mastery); for traps tagged `rune`, also 10 + Intelligence + Arcana proficiency; for `poison` traps, also passive Medicine (10 + Wisdom + proficiency). Detection grades never drop. Perception finds lurkers, not traps. Trap Eye (SH-19) is re-scoped by the Shade owner (recommended: double proficiency on trap sense). M2 (traps and locks design 6.4; TL-6) |
 | Guile (monsters) | 10 + Wisdom + proficiency + role adjustment, for every monster whether or not trained in Perception (enemies design 13.3) |
 | Recovery | Hit points restored per short rest; grows with level and Constitution = `recovery.base` + `recovery.perLevel` × level + Constitution, minimum 1 (values in the death and healing design 8) |
 | Carrying capacity | Pack slots: max(2, 3 + Strength) *(illustr. base 3, minimum 2)*, holding items of size 1 or 2. Belt, trinkets, weapon sets (active and one spare set, shield included) and armour sit outside the pack. Reads Strength excluding conditions. No weights. (items design 5) |
 
-All rows **(agreed)**, with the unarmoured row a **(lead's call)**.
+All rows **(agreed)**, with the unarmoured row a **(lead's call)**. The trap-sense
+row was changed by TL-6 (traps and locks design 6.4), agreed by the client
+on 2026-11-21.
 
 Rules behind the table:
 
@@ -261,6 +263,11 @@ Rules behind the table:
   ability + proficiency or double proficiency + active effects). This also
   applies to party passive perception against lurkers (enemies design
   12.2, 13.3).
+- **Pending request (TL-34; segment 8; M3):** readings, one-off room
+  checks, as no-roll thresholds on passives: Arcana reads runes and
+  shrines, Lore reads inscriptions, Mechanics reads mechanisms, each
+  yielding a floor fact. Nothing changes here until segment 8 rules
+  (traps and locks design 6.12).
 - **Speed is not tied to an ability.** **(agreed)**
 - **Concentration is a Constitution check**, not a Fortitude save, so
   Strength cannot stand in for it. **(agreed)**
@@ -282,14 +289,14 @@ Rules behind the table:
 
 | Skill | Ability | In the dungeon | In a fight |
 |---|---|---|---|
-| Athletics | Strength | Force doors, bars and chests (loud); jump crossable hazards | Shove, grapple, resist being moved; M2: Shunt, Kick and Smash Furnishings (heavy pieces against heft; Attack Shunt's Prone save is against 8 + the Shunter's Athletics bonus); M3: Overturn a tippable Tall Furnishing (heft 15, *illustr.*) and Haul (room terrain design 6.3) |
+| Athletics | Strength | Force doors, bars and chests (loud; noise per try, each failure lowers the difficulty and the third try always opens, M1; traps and locks design 6.11; TL-21); jump crossable hazards | Shove, grapple, resist being moved; M2: Shunt, Kick and Smash Furnishings (heavy pieces against heft; Attack Shunt's Prone save is against 8 + the Shunter's Athletics bonus); M3: Overturn a tippable Tall Furnishing (heft 15, *illustr.*) and Haul (room terrain design 6.3) |
 | Acrobatics | Dexterity | Cross narrow or unstable ground: from M2, entering a Plank (narrow ground) in combat needs Acrobatics against the segment-5 ladder; a failure ends movement on the square before, with no retry that round, no fall and no damage; out of combat the leading unit checks once (room terrain design 6.2.6); pass a Squeeze: out of combat the leading unit makes one check for the party, and a failure still gets through, at a time and noise cost; in combat each unit checks as it enters; monsters never use one (floor layout design 9.2) | Slip past enemies, escape grapples, avoid attacks when disengaging |
 | Stealth | Dexterity | Sneak past, set ambushes, steal from unaware enemies: only from a Dormant, Stationary or Patrolling carrier; adjacent; no other awake group member has line of sight; any party member's Stealth against the carrier's passive perception (−5 if Dormant, +5 if Keen), with disadvantage against an awake carrier; one try per carrier per floor; failure starts combat with nobody Surprised (enemies design 15.5) | Hide to break line of sight and strike unseen. A class feature may let Hide succeed without breaking line of sight (classes design 8.4, Vanish); the Stealth roll and Hidden's end rules (conditions 18.7) stay |
-| Mechanics | Intelligence | Find and disarm traps, pick locks (quiet; a Locked door is a Door with the padlock decal, on optional content only; floor layout design 9.2), find secret doors: a member trained in Mechanics within 3 squares with line of sight to a Hairline secret's tell reveals the secret automatically, and Sound the wall opens a secret only at its tell (no roll; floor layout design 9.2) | Re-arm or trigger traps against enemies |
-| Arcana | Intelligence | Identify magic items, read runes and shrines | Use scrolls and wands outside your class; recognise a spell being cast |
-| Lore | Intelligence | Know what a floor's theme is likely to hold: the roster's types and roles are revealed on entry (enemies design 10.6); M3: the next floor's roles are also shown at camp (run structure design 6.9; RT-10) | Reveal an enemy's traits, resistances, weaknesses and abilities |
+| Mechanics | Intelligence | Find and disarm traps, pick locks (quiet; a Locked door is a Door with the padlock decal, on optional content only; floor layout design 9.2; one roll per lock per floor under the Margin rule, M1; traps and locks design 6.6, 6.11; TL-21), find secret doors: a member trained in Mechanics within 3 squares with line of sight to a Hairline secret's tell reveals the secret automatically, and Sound the wall opens a secret only at its tell (no roll; floor layout design 9.2) | Re-arm or trigger traps against enemies |
+| Arcana | Intelligence | Identify magic items, read runes and shrines (also trap sense against `rune` traps; traps and locks design 6.4) | Use scrolls and wands outside your class; recognise a spell being cast |
+| Lore | Intelligence | Know what a floor's theme is likely to hold: the roster's types and roles are revealed on entry (enemies design 10.6); M3: the next floor's roles are also shown at camp (run structure design 6.9; RT-10). It shows types only, never whether a boxed lurker is on the floor (traps and locks design 6.14; read, not changed) | Reveal an enemy's traits, resistances, weaknesses and abilities |
 | Perception | Wisdom | Hear what is behind a door: Listen at a closed door (no roll) reports the groups in the room beyond at that moment, passively for a party with a member trained in Perception, who also hears their size band (floor layout design 9.2); spot hidden enemies | Avoid surprise; find hidden attackers; read an enemy's intent when the party's best passive Perception is at least its guile (enemies design 13.3) |
-| Medicine | Wisdom | Stretch short-rest supplies; cure poison and disease; at a short rest, Treat ends Diseased and Scarred (fixed difficulty, one attempt per Scarred unit per rest), except a talisman's `treatProof` Scarred, which is not offered and uses no attempt (consumables design 14.6) | Get a downed companion back up, at most once per companion per fight (death and healing design 11.2); Treat (an action, adjacent): one roll against each instance's difficulty ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (conditions design 8) |
+| Medicine | Wisdom | Stretch short-rest supplies; cure poison and disease (passive Medicine also counts as trap sense against `poison` traps; traps and locks design 6.4); at a short rest, Treat ends Diseased and Scarred (fixed difficulty, one attempt per Scarred unit per rest), except a talisman's `treatProof` Scarred, which is not offered and uses no attempt (consumables design 14.6) | Get a downed companion back up, at most once per companion per fight (death and healing design 11.2); Treat (an action, adjacent): one roll against each instance's difficulty ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (conditions design 8) |
 | Intimidation | Presence | Make weak groups back off without a fight; cow eligibility and the `broken` flag (enemies design 14.8) | Frighten enemies; break morale when a leader falls; Demand Surrender (enemies design 14.6) |
 | Leadership | Presence | Better recruits (Recruiter's Eye, companions design 9.2), shop prices and event outcomes | Rally: steady an ally or give them a free step |
 
@@ -310,14 +317,18 @@ skill.
   Perception mastery's signature use is fixed as **Tactician**: readable
   enemies also show the ability, and reading extends to the next 3 enemies
   in initiative (enemies design 13.4). The other skills' signature uses
-  stay the builders'.
+  stay the builders'. For Mechanics, Second Nature is proposed to the
+  builders (traps and locks design 9.2; TL-36, M2).
 - **Sources:** a class grants two or three skills from its own list. Offers
   and the starting boon add more. Companions come with fixed skills,
   plus one flex skill chosen on the join card from two options on its
   class list, fixed from then on (companions design 8.1). **(agreed)**
 - **No free retries.** Exploration has no clock, so a failed check always
   costs something: noise, a sprung trap, a jammed lock. Where no cost fits,
-  the check is a threshold with no roll. **(agreed)**
+  the check is a threshold with no roll. **(agreed)** For traps and locks
+  this is met by the Margin rule, one roll per object per hand verb per
+  floor, per-try force noise and Take time's ticks (traps and locks
+  design 6.1, 6.6; TL-1, TL-4, TL-5; read, not changed).
 - **Lore never hides the basics.** Hit points and anything already seen in
   play are visible to everyone. Lore reveals the rest early. **(agreed)**
 
@@ -515,6 +526,8 @@ Each item here is a commitment this model makes on another system's behalf.
   **(agreed)** Settled in enemies design 14.
 - **Dungeon content.** Locks, traps, secrets, noise and non-combat
   encounters must appear on most floors, or the skills are decoration.
+  Traps, locks, doors and containers are settled in
+  `2026-11-21-traps-locks-design.md` (its 6, 17).
 - **Items and inventory.** Settled in
   `2026-11-16-items-inventory-design.md`: a spare weapon is one spare
   weapon set (main + off hand, shield included), and the pack holds

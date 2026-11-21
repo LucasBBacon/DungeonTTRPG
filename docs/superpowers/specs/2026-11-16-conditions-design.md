@@ -275,7 +275,9 @@ sub-steps, in order:
 
 ### 5.5 Out of combat
 
-- One round is one tick. **(settled)**
+- One round is one tick. **(settled)** Trap and lock hand work out of
+  combat is counted in these ticks, inside segment 5's clock allowance
+  (traps and locks design 6.6, 6.21) **(change TL-38; M2)**.
 - **Every unit in the loaded level ticks,** including monsters the party
   fled. A tick runs every unit's turn-start step in unit order, then the
   step phase (the hero's step or action, follower moves and monster
@@ -842,7 +844,11 @@ stops on the last safe square and gains Teetering.
   its first turn after placement, and is not dropped again that fight.
   A rescue push by an ally lands on the secondary Snag and costs the
   faller its next action. Flying units cross; Downed units are never
-  moved.
+  moved. A sprung trapdoor's Void (from floor 2, only in a V10-proven
+  Void room of a theme with a Void skin; elsewhere it recloses) is an
+  ordinary Void for this branch; the spring itself never includes a
+  fall, and units on it are placed on the nearest square **(change
+  TL-31; traps and locks design 6.3; M2 (gated))**.
 - **Shortened moves** (Stalwart and similar): the shortened move is
   computed first; the save is made only if it still reaches the hazard.
 
@@ -867,6 +873,9 @@ hazard-design guideline under the party floor: damage to a party unit out
 of combat, or from an undetected trap, cannot take it below 1 hit point
 (death and healing design 10.4) **(change DH-18)**. Known armed traps are hazards
 for 10.1–10.4 (11.3) **(change SH-15; Shade design 9.1, NM-1)**.
+Every damaging trap has a save, and entering a known trigger by a unit's
+own movement (Bear it) springs it with advantage on that save **(change
+TL-12; traps and locks design 6.7; M2)**.
 
 - **FallFloor (change HZ-10; hazards design 6.4; agreed by the client
   2026-11-21, Q2; M2 (gated), else M3):** Void fall damage can never
@@ -877,13 +886,21 @@ for 10.1–10.4 (11.3) **(change SH-15; Shade design 9.1, NM-1)**.
   `CapRound` (30% *(illustr.)* of the lowest legal hero's maximum hit
   points for the floor's level band), using the one-instance cap's
   top-up at round scope. Included: collision, contact, harm, Keg, Stir
-  acts and falls, and the first Remnant application of a monster-push
-  struck vent. Outside it: `onTurnEnd` ticks and other Remnant
-  applications. Monsters are uncapped. Per instance: the amount after
+  acts and falls, the first Remnant application of a monster-push
+  struck vent, and involuntary trap damage **(change TL-18; traps and
+  locks design 6.10; M2)**. Outside it: `onTurnEnd` ticks and other
+  Remnant applications, and self-caused trap damage (Bear it, a
+  party-caused spring on oneself, a Botch the unit itself rolled, and a
+  chosen in-combat entry into a shown Hunch zone), which is counted in
+  full and does not fill the cap **(change TL-18)**. Monsters are uncapped. Per instance: the amount after
   save, weakness and resistance; then the per-use top-up; then the
   round-scope top-up; then the 1 hit point floors last. Out of combat,
   one tick is one round; the Dream step that ends round R charges round
   R (5.4).
+- **`TrapLethalityBound` (change TL-18; traps and locks design 6.10;
+  M2):** every trap spring's maximum after weakness (through its own
+  theme's conditions) is at most `CapRound`, set pieces included. With
+  every damaging trap having a save (TL-12), this meets the rule above.
 
 **(agreed unless marked)**
 
@@ -998,7 +1015,10 @@ Every square that applies a harmful condition is a hazard for:
 **Known armed traps (change SH-15; Shade design 9.1, NM-1; M2,
 whatever the Trapwright's wave):** a known armed trap's trigger squares
 are hazards for the same rules. The rules of 10.1 and 10.2 are not
-changed; known traps simply become hazards they apply to.
+changed; known traps simply become hazards they apply to. **On floor 1,
+pushes and drags stop before trap trigger squares** (the M1 rule kept on
+F1), narrowing this and SH-15 on floor 1 **(change TL-19; traps and
+locks design 6.19; M2)**.
 
 **Contact hazards and harm squares (change TR-10; room terrain design
 6.5; M2):** contact hazards (hazard pieces and hazard faces) and harm
@@ -1080,19 +1100,33 @@ that it exists; the outcome is the lead's call)**
   at step 2 with source `environment`. Damage from a trap the party had
   not detected cannot take a party unit below 1 hit point, in or out of
   combat; detected traps are ordinary damage **(change DH-18; death and
-  healing design 10.4)**. Known armed traps are hazards (11.3)
-  **(change SH-15)**.
+  healing design 10.4)**. Which traps count as undetected follows each
+  trap's own grade (traps and locks design 6.5, 6.10). Known armed traps
+  are hazards (11.3) **(change SH-15)**.
 - **Trap hard control against the party** fires on being sprung only,
   follows the own-turn rule, never appears on floor 1, appears on floor 2
   only in set-piece traps, and counts toward the per-fight cap whenever it
-  costs a turn start.
-- The rest of SH-15 (the hand trigger, Trigger Shot, re-arm at 500‰ and
-  a hard part at most once per fight) applies when the Trapwright ships
-  (Shade design 14).
+  costs a turn start. In M2, floor-2 set pieces ship with `hardPart: null`
+  until the death report clears (a reading; traps and locks design 6.3;
+  TL-18).
+- **Trap conditions on floor 1 end when combat starts** **(change TL-19;
+  traps and locks design 6.19; M2)**.
+- The rest of SH-15 applies to every party from M2, whatever the
+  Trapwright's wave **(change TL-15; traps and locks design 6.6, 6.7;
+  M2)**: the universal hand-trigger and Trigger Shot, and re-arm by a
+  trained Mechanics unit at 500‰ with no hard part, never stacking, once
+  per trap per floor, and not while any group the trap has hit is
+  Alerted or in combat; the Trapwright's Jury-Rig keeps its own counter
+  (Shade design 8.2). A hard part fires at most once per fight, and
+  never on a Botch, a re-arm or a reaction; a Botch lands by the trap's
+  `botchHits` (a reading; traps and locks design 6.6, 6.9; TL-11).
 - **Open item, pending ruling (RT-16):** whether a trap's conditions must
   come from the floor theme's 6 (16), or the trap is damage-only. Not yet
   ruled; nothing changes until the conditions owner rules (run structure
-  design 8.0, 17).
+  design 8.0, 17). **Requested again (TL-39; traps and locks design 7;
+  M2):** the theme's 6, otherwise damage only, ruled before M2 rosters
+  freeze; until it is ruled, Barb and spray effects are damage-only, and
+  if it rules damage-only every trap condition drops.
 
 ## 12. Immunities and bosses
 
@@ -1429,6 +1463,11 @@ term         = (T × denyPct + 100 × (defensive + offensive + setup)) × effTur
   6.9):** destination value: the scorer adds the destination square's
   `onEnter` and `onTurnEnd` value, extending the terrain bullets above.
   Requested, not yet ruled.
+- **Open item, pending the enemies owner (TL-16; traps and locks design
+  6.8; M2):** natives treat armed trap trigger squares as hazards, lethal
+  ones barred and non-lethal ones costed by the terrain-on-a-path term
+  above; monster pushes and Shunts score only traps the party has
+  Revealed. Requested, not yet ruled.
 - **Conditions the one-step scorer cannot value** (Commanded's word choice,
   Levitating's push-and-drop combo) are left out of monster kits and
   suggestions.

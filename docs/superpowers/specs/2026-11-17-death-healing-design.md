@@ -669,7 +669,9 @@ lethal to you" (Volatile kill preview, enemies 14).
 
 ### 10.4 Out-of-combat and trap floors
 
-**(agreed, Q6; change DH-15, DH-18)**
+**(agreed, Q6; change DH-15, DH-18; narrowed for traps by change TL-8,
+agreed, traps and locks Q1; extended to openers by change TL-28, agreed,
+traps and locks Q2)**
 
 - Damage to a **party unit** that resolves while **`combatActive` is
   false** (20.5) cannot take it below 1 HP. This covers traps, hazards,
@@ -684,23 +686,48 @@ lethal to you" (Volatile kill preview, enemies 14).
   closes the free-damage loophole.
 - **Undetected traps:** damage from a trap the party had not detected when
   it fired cannot take a party unit below 1 HP, **in or out of combat**. A
-  trap that starts combat counts here.
+  trap that starts combat counts here. "Undetected" means a Hidden trap,
+  or a Hunch trap in the floored cases below (change TL-8; traps and
+  locks design 6.5).
 - **Trap provenance (lead's call).** When a trap fires, every damage event
-  it causes carries `source {kind: trap, trapId, detectedAtFire}`, a
-  snapshot. The undetected-trap floor covers every event carrying a
-  `trapId` with `detectedAtFire` false: the trap's direct damage,
-  collision damage from its push (to the pushed unit only), and the tick
-  parts of condition instances it applied, which store
-  `sourceTrapUndetected` for their lifetime. Detecting the trap later does
+  it causes carries `source {kind: trap, trapId, detectionAtFire}`, a
+  snapshot, where `detectionAtFire` is the enum `{hidden | hunchFloored
+  | hunchWarned | revealed}` set by the trap's own grade at fire time
+  (widened from the boolean `detectedAtFire`: change TL-8; traps and
+  locks design 6.5). The undetected-trap floor covers every event
+  carrying a `trapId` with `detectionAtFire` `hidden` or `hunchFloored`:
+  the trap's direct damage, collision damage from its push (to the
+  pushed unit only), and the tick parts of condition instances it
+  applied, which store the same `detectionAtFire` value for their
+  lifetime. Detecting the trap later does
   not change a snapshot. Terrain or hazard squares the trap creates are
   ordinary hazards once visible, and a monster pushed into a trap gets no
   floor (the floor is party-only).
+- **Warned or floored for traps (agreed, traps and locks Q1; change
+  TL-8; M2).** A shown Hunch zone is a **warning**. The floor follows
+  each trap's own grade at fire time, never the zone a square lies in:
+  - a **Hidden** trap is always floored, even inside another trap's
+    zone;
+  - damage from a **Hunch** trap whose shown zone the unit entered is
+    floored only when combat is not active, when the unit was moved in
+    by forced movement, or when the zone first appeared this round (a
+    lead's call of the traps and locks design); a unit entering a shown
+    zone by its own movement in combat sees the floor's worst trap as
+    "up to X" with the lethal tag (17.5, 17.6), and the damage is then
+    ordinary and self-caused (counted in full, outside the EnvRound
+    cap);
+  - a **Revealed** trap is a detected trap (below);
+  - a trap whose grade changed during the current move or action counts
+    as undetected for that action;
+  - a spring the party causes that starts combat is floored for party
+    units; monsters have no floor
+  (traps and locks design 6.5).
 - **Mixed events (lead's call):** in an event or tick batch that holds both
   undetected-trap parts and other parts, the floor protects against the
   trap parts only. If the other parts alone would take the unit to 0, the
   event is not clamped; otherwise it is clamped so HP stays ≥ 1.
-- **Detected traps in combat** are ordinary damage: lethal, and shown with
-  a lethal tag on the move preview (17.6). Hidden information never kills,
+- **Detected traps in combat** (Revealed traps; change TL-8) are ordinary
+  damage: lethal, and shown with a lethal tag on the move preview (17.6). Hidden information never kills,
   and a known trap is never a safe tool.
 - **Falls: the FallFloor (agreed, Q6 extended; hazards Q2; change HZ-10;
   M2 (gated), else M3).** Fall damage (a Dreamfall's fall band, and the
@@ -728,6 +755,15 @@ lethal to you" (Volatile kill preview, enemies 14).
   per out-of-combat tick, so its damage to the dare-taker is out of
   combat and this floor applies; a taker reduced to 1 HP by the room is
   returned to the threshold and the dare resets (hazards design 6.10).
+  This bullet is kept: Wager rooms share the Dare slot, their risk runs
+  through combat (the room's guard), and no trap inside one is Hidden
+  (change TL-29, M3; traps and locks design 6.15).
+- **Boxed lurker openers (agreed, traps and locks Q2; change TL-28;
+  M3).** An untrained Open, Force or floor key on a boxed lurker the
+  party had not marked: its Ambush Strike (and the Grappled) lands, and
+  the strike's damage to the opener cannot take it below 1 HP and is
+  capped at 20% of the lowest legal hero's HP (traps and locks design
+  6.14).
 - The floors apply after temporary HP and **before** the save chain
   (20.3), so the phial is never spent on floored damage.
 
@@ -1260,6 +1296,9 @@ bought, never moves in combat, `treatProof` Scarred.
   movement) legal on floor 1; at Nightmare tier 2+ floor-1 hazard
   packages place no Void, Stir or Lurch in main-path rooms 0–1 (hazards
   design 6.1, 6.19, 7.2–7.4).
+- **Traps (lead's call; change TL-19; M2):** this rule is unchanged.
+  Floor 1 places no trap in main-path rooms 0–1 and no damaging trap in
+  rooms 0–2, mirroring it (traps and locks design 6.19).
 
 ### 17.2 What the telegraphs compute
 
@@ -1370,6 +1409,14 @@ floored party unit on a due square carries a bracketed "1" pip under
 its HP bar and "floored this time" (never a shield); a Warned unit
 carries the lethal tag (10.4; hazards design 6.3.2, 6.18).
 
+**Hunch entries (agreed, traps and locks Q1; change TL-8; M2):** a
+unit entering a shown Hunch zone by its own movement in combat sees "up
+to X", the highest maximum (after its weakness) among the floor's traps
+the party has not Revealed, never above `CapRound`, with the lethal tag
+showing that the entry is not floored; the tag turns red and takes a
+cracked-heart shape when "up to X" would take the unit to 0 (10.4;
+traps and locks design 6.5).
+
 *Pending request (change HZ-13; the DH owner rules):* lethal tags
 extend to Stir acts due on due squares and to fall branches (hazards
 design 6.3.1, 6.18).
@@ -1385,6 +1432,13 @@ terrain design 6.12, `2026-11-21-room-terrain-design.md`) **(change
 TR-23)**. *Pending request (change HZ-13; the DH owner rules):* due
 squares count as hazards here, and the preview shows the act's result
 ("Lands on due square: …") (hazards design 6.3.1, 6.18).
+
+**Own movement onto traps (change TL-8, TL-12; M2):** shown Hunch zones
+count here in combat (17.5). Entering a known trigger by the unit's own
+movement (Bear it) shows "floored" out of combat and the lethal tag in
+combat, plus "HP after: X, until next rest"; if a failed save would
+leave the unit below 50% HP the preview warns, never blocks (traps and
+locks design 6.5, 6.7).
 
 ### 17.7 Friendly fire
 
@@ -1408,6 +1462,11 @@ also loses its next action (Groggy as normal); the FallFloor (10.4)
 still holds (hazards design 6.4). *Pending request (change HZ-13; the
 DH owner rules):* due squares count as hazards for this confirmation
 (hazards design 6.3.1).
+
+**Known traps (change TL-12; M2):** the confirmation extends to the
+unit's own movement: the first entry per known trap by its own movement
+asks for confirmation, and moving an ally onto a known trigger asks too
+(traps and locks design 6.7).
 
 ### 17.8 Plates
 
@@ -1559,6 +1618,8 @@ Treat and Recovery, plus the supply left and the patrol warning
     then, **only if its own 5.5 report trigger has fired**, the
     pre-authorised potion raise; otherwise the miss goes to the client
     (28.2).
+- **Wager rooms (M3; change TL-29):** `WagerDeathShare` is reported
+  against these targets (traps and locks design 6.15).
 
 ## 19. AI
 
@@ -1659,7 +1720,8 @@ save hash covers both files.
 - `dropPreventionFiredThisFight` per unit (reset at combat start);
 - `heroPotionTopUpPending` on the camp state (13.2);
 - a Downed companion's body: its square, or `carriedBy` (11.4);
-- `sourceTrapUndetected` on condition instances a trap applied (10.4);
+- `detectionAtFire` on condition instances a trap applied (10.4; it
+  replaces `sourceTrapUndetected`, change TL-8);
 - Bolstered as a condition instance holding its value.
 
 ### 20.3 One damage function
@@ -2201,7 +2263,9 @@ values; the phial's rarity, floor, channels, `offerChancePermille` and
   (12.5). HE-7's reservation, retry sharing and `mainPathIndex` are
   answered by the floor layout design
   (`2026-11-21-floor-layout-design.md`, 6.1, 6.5, 11.2) **(change FL-3,
-  FL-13, FL-15)**.
+  FL-13, FL-15)**. Trap ids and the detection snapshot (DH-32), now the
+  enum `detectionAtFire`, are answered by the traps and locks design
+  (`2026-11-21-traps-locks-design.md`, 6.5, 12 M1) **(change TL-8)**.
 - **Camp and hub screens:** the top-up step and the floor-entry card.
 - **Experience:** keep hero level minus room level at 0 or above
   (under-levelled stealth heroes void the guards).

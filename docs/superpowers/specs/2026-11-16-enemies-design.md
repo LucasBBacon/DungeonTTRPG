@@ -1225,6 +1225,24 @@ rescores with what is left of its turn, so it can retreat after striking.
 - A Hidden hero stays at its last known square for that observer. An area
   aimed there hits whatever is really there.
 - Without this rule, Hide and Stealth do nothing against the AI.
+- **Pending request (TL-16, M2; traps and locks design 6.8):** natives
+  (every generated group and its joiners) read the floor's trap states
+  as true state: trigger squares of armed traps are hazards (lethal ones
+  barred by invariant 7, non-lethal ones costed, conditions design
+  17.3), they step over known wires, and they trust device areas
+  (entering one springs nothing); mindless types treat non-lethal traps
+  as floor and spring them; **Once Bitten**: a group with any member
+  inside the area of a device spring that resolves treats every known
+  device area on the floor as a hazard for the rest of the floor (one
+  bit, `bitten`, inherited by joiners); the opener rule (a spring that
+  affects an unaware group starts combat as the springing unit's
+  surprise action); monster pushes and Shunts score only traps the party
+  has Revealed; not yet ruled. If refused: rigged-fight density drops
+  until rigged share × party-hit ≤ 0.03 (traps and locks design 19.2).
+- **Pending request (TL-17, M3; traps and locks design 6.8):** per-group
+  trap belief (`armed`/`spent`) and witness-only secrecy: a trap the
+  party re-arms out of a group's sight is unknown to that group, an A-5
+  narrowing like this rule's; not yet ruled.
 
 ### 11.3 Fairness invariants
 
@@ -1242,7 +1260,9 @@ These hold on every difficulty tier and are asserted by property tests:
    floor-1 squares with main-path index 0 or 1 (death and healing design
    17.1). Main-path rooms are indexed from 0, the entry. **(change
    DH-28)** Floor-1 Landmark ticks are not hazards and leave it unchanged
-   (hazards design 6.1, 7.2–7.4; change HZ-19; M3).
+   (hazards design 6.1, 7.2–7.4; change HZ-19; M3). Floor-1 traps keep
+   it: no trap in main-path rooms 0–1 and no damaging trap in rooms 0–2
+   (traps and locks design 6.19; change TL-19).
 7. Stupidity floors: never enter a hazard that could kill it; no
    net-negative friendly fire; no control on a target that zeroes it; never
    idle with a reachable target. **Pending request (TR-15, M3; room
@@ -1253,7 +1273,12 @@ These hold on every difficulty tier and are asserted by property tests:
    are hazards for this invariant (hazards design 6.3.1); never end a
    turn on a due square whose act could kill this unit; routed units
    never path adjacent to a Void and treat due squares as hazards; not
-   yet ruled.
+   yet ruled. **Pending request (TL-16, M2; traps and locks design
+   6.8):** armed trap trigger squares are hazards under this invariant
+   (lethal ones barred, read on true state); `NoCheapKill` (agreed, room
+   terrain design) extends to trap springs a monster causes; a monster
+   with no path while under attack breaks line of sight and reroutes, or
+   returns home, rather than standing still; not yet ruled.
 8. No healing or refill of uses out of sight. The one bounded exception is
    the boss reset rule in 17.5.
 9. Affixes are always visible.
@@ -1379,13 +1404,21 @@ Measured as path distance, never through walls:
 |---|---|
 | Walking; quiet checks | 0 |
 | A failed quiet check | 4 |
-| Loud checks (force a door, Athletics) | 6 |
+| Loud checks (force a door, Athletics); each force try on a lock **(change TL-21; traps and locks design 6.11, 6.18)** | 6 |
 | Each combat round | 8 |
-| A loud trap or a shattered door | 10 |
+| A loud trap or a shattered door (a loud spring, an alarm effect, a Crier or a Splinter; traps and locks design 6.18) | 10 |
 | Lure: an exploration action at a seen square within 6; a group can be lured once per floor (`luredThisFloor`, 14.2) **(change SH-21; Shade design 9.1; if the enemies owner accepts)** | 4 |
 
 Modifiers: each closed door on the path −3; Conspicuous +3 **(settled)**;
 Hushed silent **(settled)**; Dormant groups hear at half radius.
+
+**Pending request (TL-30, M2; traps and locks design 6.18, 6.11):**
+alarm traps are one-shot, or re-arm at most once per floor; groups that
+arrive because of an alarm or a Crier arrive Alerted and cannot be
+Surprised that fight; not yet ruled. **Pending request (TL-41, M3; traps
+and locks design 6.3, 7):** a scent modifier: the `scent` trigger's
+noise (the Scent Bladder's 8) is heard by hound families only; not yet
+ruled.
 
 Portal kinds **(change FL-7; floor layout design 9.2)**: a closed Door,
 Locked Portal or latched Latch is a closed door (−3); Arches, drawn
@@ -1733,7 +1766,9 @@ or turn-end phase, or one boss action. **(lead's call)**
   and a unit never routs partway through an area's per-target resolution.
 - A Void fall (`voidFall`) is a removal loss event, and the Dream step's
   sub-step 2b is a checkpoint **(change HZ-10; hazards design 6.3, 6.4;
-  M2 (gated), else M3)**.
+  M2 (gated), else M3)**. A trapdoor's runtime Void (F2+, V10-proven
+  Void rooms only) is an ordinary Void, and its `voidFall` reads as
+  written (traps and locks design 6.3; change TL-31; M2).
 
 **Every trigger is edge-triggered**: it fires on the event, never merely
 because a count sits at a threshold.
@@ -1755,6 +1790,11 @@ edge-triggered event, **Startle**, fired by a Stir act or a Cord: the
 named groups' skittish, non-Emboldened members become Demoralised, at
 the same FIFO checkpoint; fearless and mindless units are unaffected;
 not yet ruled.
+
+**Pending request (TL-30, M2 or M3 as the owner rules; traps and locks
+design 7):** a new morale trigger, the Rattle Wire's "rudely woken"
+rider; not yet ruled. If refused, the Rattle Wire is noise 10 only
+(traps and locks design 19.2).
 
 **The T5/T6 substitution** **(lead's call; change C-12)**. These are not
 condition transforms:
@@ -1903,14 +1943,18 @@ A third route is either the Herald's Lay Down Arms or the universal Offer
 Terms (HX-5, the enemies owner's decision; if adopted, Lay Down Arms is
 cut), never both **(change HR-19; Herald design 8.3, 10.1)**.
 
-- A yielded unit drops its notable item and salvage at once.
+- A yielded unit drops its notable item and salvage at once; a
+  Keybearer also hands over the floor key **(change TL-23; traps and
+  locks design 6.11; M2)**.
 - It is removed as resolved, with its full experience share.
 - **Interrogation is automatic: one floor fact per fight**, however many
   enemies yield. In priority order: the nearest undiscovered trap on the
   path to the stairs (the Stairhead; on floor 5, the main path to the
   arena; floor layout design 6.11; **change FL-6**), an undiscovered
   secret (a Hairline secret; floor layout design 9.2; **change FL-17**),
-  the boss's Lore entry, one unexplored room's layout. **The player picks the category** from this
+  the boss's Lore entry, one unexplored room's layout, the floor key:
+  its carrier and its lock **(change TL-23; traps and locks design
+  6.11; M2)**. **The player picks the category** from this
   list; the priority order is the default selection (Pick the Question,
   HX-6; Herald design 10.5) **(change HR-19)**. It is shown in the loot
   summary.
@@ -1982,7 +2026,10 @@ exploration.
 - the group steps aside, never joins fights by hearing, does not block
   short rests and leaves the cluster budget;
 - it pays its unpaid experience shares at once;
-- it **keeps its notable item**, so safety and loot are a real trade.
+- it **keeps its notable item**, so safety and loot are a real trade;
+  a Keybearer's group hands over the floor key **(change TL-23; traps
+  and locks design 6.11; M2)**. If the enemies owner refuses this
+  outcome, Cow does not yield the key (traps and locks design 19.2).
 
 **Failure:** combat starts, nobody is Surprised, and the group can never be
 cowed again.
@@ -2231,6 +2278,9 @@ S-5)**:
   fight noise.
 - **One try per carrier per floor**, recorded as a `stealAttempted` flag on
   the carrier.
+- **The floor key (change TL-23; M2; traps and locks design 6.11):** a
+  Keybearer's floor key can be taken by Steal under these rules, with
+  the same one try per carrier.
 - **The elite room:** the carrier is never Dormant, so Steal has
   disadvantage, and the Champion's watcher (17.4) sees every square
   adjacent to it. Stealing there takes a Stealth play first, such as
@@ -2259,14 +2309,16 @@ floor.
   square is a hazard or impassable. Safe means passable and not a hazard
   square. Nearest is by grid distance, then a fixed neighbour order (N,
   NE, E, SE, S, SW, W, NW), then square index. **(lead's call)** **Loot
-  is never destroyed** by terrain, damage type or kill method. A monster
+  is never destroyed** by terrain, damage type or kill method, nor
+  container contents by traps, locks or force (traps and locks design
+  6.13; TL-27). A monster
   removed by a Void fall drops its carried loot on the last safe square;
   summons and Figments drop none **(change HZ-10; hazards design 6.4; M2
   (gated), else M3)**.
 - **Routed:** thrown down the moment it routs. Unused uses are lost from
   the carrier's kit.
 - **Yielded:** drops at once.
-- **Cowed:** kept.
+- **Cowed:** kept (the floor key excepted, 14.8; change TL-23).
 - **Party flees:** the carrier keeps any unused item. Items already on the
   ground stay as a pile marker.
 
@@ -2450,7 +2502,7 @@ one Dormant lair", or rely on the camp catch-up, measured by
 | **Skirmisher** | 80% / 100% / +1 / 0; speed 8 | Melee + thrown | Slips past; Disengage as its bonus action; M2 Help sets up allies (Helped) | Reach, opportunity-attack zones, Grapple, Chilled, close formation | Raider | 0 | M2 |
 | **Controller** | 90% / 70% / 0 / 0; concentrates | Damage + a minor (Chilled, Poisoned or Corroded) | One limited control ability. Hard control only where the gates allow. Carries the type's 2 conditions. At most 1 per encounter on floors 1–2. | Focus it, psychic rider, Treat, Rally | Disruptor | +2 | M2 |
 | **Leader** | 110% / 80% / 0 / 0; trained Will and Intimidation | Weapon + Frighten | **Command** (Rally or Order, cooldown 3); Emboldened aura; Quarry | Kill it first; Frighten the Demoralised; Frighten the leader to stop its Rally | Commander | +2 | M2 |
-| **Lurker** | 80% / 100% (150% on its opener) / 0 / 0 | Melee + Hide | Starts Hidden; **Ambush Strike** (`uses:1`, +2 dice); Poisoned, Bleeding or Blinded. Never in floor 1's main-path rooms 0–2 **(change DH-28)**. | Perception, the radiant rider (Revealed), staying grouped, reading the tell | Ambusher | +2 | M2 |
+| **Lurker** | 80% / 100% (150% on its opener) / 0 / 0 | Melee + Hide | Starts Hidden; **Ambush Strike** (`uses:1`, +2 dice); Poisoned, Bleeding or Blinded. Never in floor 1's main-path rooms 0–2 **(change DH-28)**. **M3:** a theme's lurker may be placed as a **boxed lurker** (`containerForm`, F2–5, at most 1 per floor): no placement Stealth roll; marked when party passive Perception ≥ 10 + its proficiency, checked with trap detection **(change TL-28; traps and locks design 6.14)**. | Perception, the radiant rider (Revealed), staying grouped, reading the tell | Ambusher | +2 | M2 |
 | Support | — | — | One `uses:1` heal or buff; at most 1 per encounter | Withered, focus | — | — | Later |
 | Summoner | — | — | Calls a pre-paid reserved pack, with a visible countdown | Kill it before the countdown ends | — | — | Later |
 | Thief | — | — | Steals and flees; must be visibly flagged and drop its haul when Routed | — | — | — | Later |
@@ -2513,7 +2565,7 @@ in percent, all illustrative.
 | **Holder** | Soldier | 100 / 80 / 100 | 1 | Nearest to its ward | Holds the doorway; shoves toward hazards (M2). **Pending request (TR-15, M2; room terrain design 6.9):** "hazards" includes contact hazards; not yet ruled. **Pending request (hazards design 6.12; M2 (gated), else M3):** also toward due footprints and Voids, the intent reading "pushes toward the edge"; not yet ruled | M1 (hold term M2) |
 | **Kiter** | Artillery | 60 / 150 / 200 | 5 | Lowest visible AC in range; concentrating units **(change AR-25)** | Keeps 4–6 squares away; steps back when engaged; falls back at 50% HP | M1 |
 | **Mob** | Minion | 150 / 0 / 0 | 1 | Nearest; spreads to free adjacent squares | Surrounds you; ignores danger | M1 |
-| **Automaton** | Mindless | 120 / 0 / 0 | 1 | Nearest, then unit order | No exposure or cohesion terms; walks through minor hazards (the lethal floor still holds). **Pending request (hazards design 6.12; M2 (gated), else M3):** ignores non-lethal due squares, keeping the lethal floor (shown on its card); segment 4 does not raise the mindless share and asks this owner; not yet ruled | M1 |
+| **Automaton** | Mindless | 120 / 0 / 0 | 1 | Nearest, then unit order | No exposure or cohesion terms; walks through minor hazards (the lethal floor still holds). **Pending request (hazards design 6.12; M2 (gated), else M3):** ignores non-lethal due squares, keeping the lethal floor (shown on its card); segment 4 does not raise the mindless share and asks this owner; not yet ruled. **Pending request (TL-16, M2; traps and locks design 6.8):** mindless types treat non-lethal traps as floor and spring them (the mindless blunder), lethal ones still barred; not yet ruled | M1 |
 | **Boss** | Bosses | Authored; `leash: room` | — | Authored | A phase may swap the profile. **Pending request (FL-21 (a), M1; floor layout design 6.11):** a Provoked analogue that extends the leash to the Sanctum when the boss is damaged from outside its reach; not yet ruled | M1 (M2 adds boss actions) |
 | **Raider** | Skirmisher | 120 / 120 / 200 | 1 | Lowest visible AC; concentrating units **(change AR-25)** | Hits, then uses leftover movement to leave reach; slips past | M2 |
 | **Protector** | Bodyguard elites | 80 / 60 / 120 | 1 | Whoever threatens its ward | Body-blocks; Challenges the unit nearest the leader | M2 |
@@ -2548,7 +2600,7 @@ under ability 8.4); a request to this owner, not yet a rule.
 | **Warband** | Leader + 1–2 front + 0–4 minions | Guard post or lair | 2+ | Stationary or dormant | Morale showcase; the usual carrier | M2 |
 | **Den** | Leader-role "mother" (a beast silhouette is allowed) + 1 non-minion standard + 2–4 minions | Lair | 2+ | Dormant | Stealth-bypass candidate. The extra standard keeps one kill from ending the lair (14.3). **Pending request (FL-21 (d)):** in-room sneaks against 20.1 (16) | M2 |
 | **Skirmish Screen** | 2–3 skirmishers | Patrol or guard post | 2+ | Patrol | Tests formation | M2 |
-| **Ambush** | Bait (1 standard or a container) + 1–2 lurkers as a separate group | Guard post × 0.85 | 1+ (after room 2) | Hidden | A visible **tell** within 6 squares; trained Perception marks it on the map | M2 |
+| **Ambush** | Bait (1 standard or a container) + 1–2 lurkers as a separate group | Guard post × 0.85 | 1+ (after room 2) | Hidden | A visible **tell** within 6 squares; trained Perception marks it on the map. **M3:** the bait container may be the lurker itself, a boxed lurker (17.1) **(change TL-28; traps and locks design 6.14)** | M2 |
 | **Battery** | 2 artillery + 1 soldier (optionally an elite bodyguard) | Guard post | 3+ | Stationary | Banned on floors 1–2 by the ranged cap | M2 |
 | **Honour Guard** | Bodyguard elite + artillery or controller + 0–2 minions | Lair | 2+ | Stationary | Challenged showcase | M2 |
 | **Gauntlet** | Controller + 2 brutes | Lair | 3+ | Dormant or stationary | Hard control on the controller only | M2 |

@@ -1029,6 +1029,12 @@ One range ring per weapon, in squares; no long-range band *(illustr.)*:
   Extra Attack may be a throw.
 - The verb applies to throws, except that Cleave is melee only.
 - There is no improvised throw of a non-thrown weapon.
+  **Pending request (change TL-42; M2; traps and locks design 6.7):** a
+  narrow exception for **Trigger Shot** alone: any unit may throw a held
+  weapon or item as an improvised throw, range 4, no damage, the item
+  landing on the target square. It changes nothing here until the
+  weapons owner rules; if refused, Trigger Shot needs a thrown weapon or
+  a launcher (traps and locks design 19.2).
 - **On non-light weapons, thrown costs a die step:** a thrown-capable
   family's dice sit one step below its non-thrown peer in both grips. The
   spear and the trident (1d6 / v1d8) are one step below the longsword
@@ -2176,6 +2182,9 @@ left as they are (7.2 rule 9).
   `2026-11-21-room-terrain-design.md` (room terrain design 6.1; TR-2,
   TR-3); room shapes that give corridors and open rooms (Skewer, Cleave,
   reach) are met by its Lane and 5×5 core (room terrain design 6.2.3).
+  The traps and locks design (`2026-11-21-traps-locks-design.md`) asks
+  for the Trigger Shot improvised-throw exception to 9.3 (TL-42, pending;
+  M2) and uses reach weapons for Pole it (traps and locks design 6.7).
 - **Enemy content:** the rust, acid and ooze types that Notch (Later), and
   monster cooldown disarms (Later).
 

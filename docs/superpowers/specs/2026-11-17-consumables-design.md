@@ -678,6 +678,12 @@ Items 10.5 formula; `coinPerValue` 20 *(illustr.)*. **(lead's call)**
 | talisman | 1500 (new, CN-2) | 30 | Base 90; Sell at 40% = 36. Never bought **(agreed, Q2)**; the permille sets only Sell and budget accounting |
 | `basePrice` | — | — | Supply 8, Remedy 30 *(illustr.)* |
 
+**The Wax Key (M2; traps and locks design 6.11; change TL-24):** a
+run-scoped party counter `waxKeys` (cap 2, size 0, no carrier), not a
+consumable record, so it has no use-value row in 9.1. Priced by camp
+depth 24 / 28 / 32 / 36 coin *(illustr.)*, after the Leadership discount;
+checked against pegs K1 and K2 (9.3).
+
 ### 9.3 Pegs, as validation inequalities
 
 **(lead's call; CN-5)**
@@ -704,6 +710,10 @@ Items 10.5 formula; `coinPerValue` 20 *(illustr.)*. **(lead's call)**
 - **Wand value covers its charges:** the `wandValue` lookup (13.6).
 - **Thrown potions** heal less than drinking (`thrownPotionPermille` ≤
   1000), so they never widen P1. **(lead's call)**
+- **K1 and K2, the Wax Key (M2; traps and locks design 6.11; change
+  TL-24).** Checked per camp on the depth price after the Leadership
+  discount: K1, Wax Key price ≥ 2 × healing potion price; K2, Wax Key
+  price ≤ the mean value of a locked cache on the next floor.
 
 ## 10. Channels and per-floor budgets
 
@@ -711,7 +721,7 @@ Items 10.5 formula; `coinPerValue` 20 *(illustr.)*. **(lead's call)**
 
 | Channel | What |
 |---|---|
-| Basic vendor **(agreed, unchanged)** | Supply; healing potions in pre-rolled stock of 2–3 *(illustr.)*; tonics and Remedy, unlimited (price is the knob) |
+| Basic vendor **(agreed)** | Supply; healing potions in pre-rolled stock of 2–3 *(illustr.)*; tonics and Remedy, unlimited (price is the knob); 1 Wax Key only when the party has no Mechanics-trained member (M2; items 10.3; traps and locks design 6.11; change TL-25, **agreed, Q3 of 2026-11-21**) |
 | Sundries (new loot class, CN-19) | Common consumables: healing potion, tonic, water, oil; Fire Bomb from floor 2. Drawn per floor **outside the notable count**, inside the fixed budget (items 2), `sundriesPerFloor` doses set per floor *(illustr. 3–5 on floors 1–2, 4–5 on floors 3–5)*. **At least 1 healing potion per floor** (`healingSundryMin` 1, drawn first; 2 on floors 4–5 only through the pre-authorised raise) and **at most 3** (`healingSundryMax`) **(client, Q3)**: the guaranteed potion goes in a main-path container in the first half of the main path, openable with no check, and is never substituted; random potions lean off-path (`healingOffPathPermille` 600) (death and healing design 12.4, 12.5) **(change DH-40)**. From floor 2, **at least 1 and at most 2 offensive flasks** per floor (`offensiveSundryMin`, `offensiveSundryMax`), the minimum drawn before the other sundries **(lead's call)**. Mostly containers, plus the settled single carried consumable per encounter |
 | Notables | Scrolls, wands, the Greater Fire Bomb and the talisman count in the 6–8 notables per floor and the camp channel |
 | Camp channel (notables shop, camp reward card) | Scrolls (never healing scrolls, P1), wands, the Greater Fire Bomb, all with channel `camp` (shop and reward card); the talisman **only** through `campReward` (the reward card, never the shop; CN-1) |
@@ -731,6 +741,12 @@ Items 10.5 formula; `coinPerValue` 20 *(illustr.)*. **(lead's call)**
   per run (14.7), which replaces one notable draw of the chosen floor and
   channel, so the fixed budget never has a hole. No slot is reserved on
   any floor. **(change DH-40)**
+- **The Wax Key (M2; traps and locks design 6.11; change TL-24):** a
+  run-scoped party counter, not a consumable record (9.2). Channels:
+  sundries from floor 2 (at most 1 per floor), one camp notables slot
+  (one Wax Key at most), and the basic vendor's stock of 1 when the
+  party has no Mechanics-trained member (TL-25). Out of combat only; at
+  the cap of 2 a dropped key stays in its container.
 
 ## 11. Delivering potions and tonics
 
@@ -1287,7 +1303,7 @@ the Rootwarden. **(lead's call; change CL-12a)**
 | Record | Rarity, value | Effect | Best / worst | Wave |
 |---|---|---|---|---|
 | **Water Flask** | C, 1; floor 1+ | Single unit within 5. Enemy: Reflex save or Soaked. Willing ally: automatic (cancels Burning and Smouldering, overrides Corroded; leaves cold and lightning weakness). No square | Best: setting up a cold or lightning caster on a packed group. Worst: fire-themed enemies (it gives fire resistance) | M2 |
-| **Oil Flask** | C, 1; floor 1+ | Single unit within 5: Reflex save or Oiled (the next fire hit takes +half and applies Burning one band higher). No square | Best: a boss or brute before a fire spell or bomb the same round. Worst: parties with no fire source. Watched as a possible dead slot (19.3) | M2 |
+| **Oil Flask** | C, 1; floor 1+ | Single unit within 5: Reflex save or Oiled (the next fire hit takes +half and applies Burning one band higher). No square. **Oil the Works (M3; traps and locks design 6.11; change TL-26):** an oil flask can instead be spent on one rolled lock or trap attempt for advantage; a failed roll makes no noise | Best: a boss or brute before a fire spell or bomb the same round. Worst: parties with no fire source. Watched as a possible dead slot (19.3) | M2 (Oil the Works M3) |
 | **Fire Bomb** | C, 1; floor 2+ | Square within 5: burst r1, not selective, fire 2d6, Reflex half; fire part rider-flagged (Burning); pays out Oiled; ends Soaked; burns oil squares (conditions 11.4) | Best: a non-caster's area answer to a clustered swarm. Worst: melee scrums with allies adjacent | M2 |
 | **Greater Fire Bomb** | U, 2; floor 4+ | As Fire Bomb, fire 4d6 | Best: late packs. Worst: as above | M2 |
 | Holy Water | C, 1; floor 2+ | Single unit: radiant 2d6, Reflex half; radiant-weak targets get the automatic rider (Blinded or Revealed) | Needs the named-major-flask ruling | Later |
@@ -1348,16 +1364,30 @@ declined); `arcanist` + `herald` (one shared record): Unweaving;
 **Later**: Guiding Radiance, Withering Touch (Votary or Hexer), Blight
 (the Rootwarden). The M2 tier-4 pool holds only Icefall; optional lever
 (lead's call, not required): a `herald`-tagged Pall scroll at tier 4,
-Very rare (Herald design 8.8).
+Very rare (Herald design 8.8). **Pending request (M3; traps and locks
+design 9.2; change TL-35):** Unbolting [arcane, divine] needs a
+`classTags` entry here; since the audit is closed, it waits
+for the Arcanist (8.10) and Herald (8.8) owners' sign-off and changes
+nothing until they rule.
 
 **Later scrolls** (each waits for its condition or rule): Blessing (Bless,
 Blessed; t1); Slumber (Sleep, Asleep; t1); Holding (Hold Person, Held;
 t2); Hushing (Silence on a unit, Silenced; t2); Flicker Step (Misty Step;
 t2) and Far Step (Dimension Door; t4), both waiting for a teleport rule in
-ability model 8; Elemental Endurance (Protection from Energy, Resisting;
+ability model 8 (the traps and locks design's relocation traps and
+Mirror Glyph wait for the same rule; traps and locks design 7; TL-41);
+Elemental Endurance (Protection from Energy, Resisting;
 t3); Banishing (Banishment, Banished; t4). Tier 2 is thin in M2 (two
 scrolls plus the Rime Lance wand); Holding, Hushing and Flicker Step are
 its reserves.
+
+**Pending request (M3; traps and locks design 9.2; change TL-35;
+consumables, Arcanist and Herald owners):** a tier-2 reserve,
+**Unbolting** [arcane, divine]: action, range 6, opens one lock or Jammed
+lock without its consequence, noise 10; never the Bossgate; off-class
+readers use Arcana against 10 + tier as usual. With it, **Unweaving**
+also turns a Runed lock Plain. Until the `classTags` entry (above)
+is ruled, Unbolting is not in the roster and Unweaving is unchanged.
 
 ### 16.5 Wands (M2)
 
