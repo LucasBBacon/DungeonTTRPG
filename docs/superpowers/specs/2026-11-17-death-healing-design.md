@@ -161,7 +161,7 @@ Ids PF1–PF9 (parent findings) are local to this table.
 | PF6 | The reference hero is not the frailest legal hero | Lowest-legal-hero guard rows (21.1; DH-26) |
 | PF7 | Last Ward on a camp recharge is a free life per floor; narrowed to "above half HP" it almost never fires | Retired (15.3; DH-38, DH-45) |
 | PF8 | The phial at 25% leaves a saved hero dead to the next one or two attacks most of the time | 334‰ (16; DH-38, DH-41) |
-| PF9 | The review's surprise model gives the reference hero 0.87% in the floor-1 lair (main-path room 2), above the approved < 0.5% row | Reconcile with the core's real surprise rule before any guard row is written (21.1); then floor-1 ambush and lair budgets and the floor-1 cumulative budget (21.1). The Q9 rule (17.1) covers rooms 0 and 1 only and does not reach this lair |
+| PF9 | The review's surprise model gives the reference hero 0.87% in the floor-1 lair (main-path room 2), above the approved < 0.5% row (the lair is read at enemies 10.2 room level 2, not `mainPathIndex` 2; floor layout design 3.4, **change FL-4**) | Reconcile with the core's real surprise rule before any guard row is written (21.1); then floor-1 ambush and lair budgets and the floor-1 cumulative budget (21.1). The Q9 rule (17.1) covers rooms 0 and 1 only and does not reach this lair |
 
 ## 4. Framework decisions
 
@@ -908,14 +908,20 @@ returns. Not on at launch: the floor-1 boss needs 3–5 heals (5.8).
 - **HE-5 Camp top-up.** `campHeroPotionTopUp` 1 (13.2).
 - **HE-6 Healing floor.** A build check (21.3).
 - **HE-7 Generation requirement (constructive).** When the dungeon
-  stream lays out the main path (enemies 10.5 step 2), it **reserves** at
+  stream lays out the main path (enemies 10.5 step 1a; floor layout
+  design 6.1, LS11) **(change FL-3)**, it **reserves** at
   least 2 containers openable with no check in main-path rooms before the
   boss room, at least one with an index in the first half (12.5). A
   run-time assertion checks the plan before the loot step; if it fails,
   the attempt is discarded and the floor is regenerated once with the
   dungeon stream reseeded at seed + 1, logged `GenerationRetried`; a
   second failure is a crash bug, never a silent fallback **(lead's
-  call)**. Build-time checks cover every room template and the release
+  call)**. The floor layout runtime assertions run with this check at
+  one floor assertion point before the loot step and share its single
+  retry, which re-derives every child stream of the dungeon substream;
+  only assertions proven structurally at build time may trigger it, and
+  there is no other retry policy (floor layout design 6.1, 11.2)
+  **(change FL-15)**. Build-time checks cover every room template and the release
   seed set (21.2); they cannot prove every seed, which is why the
   requirement is constructive (DH-32).
 - **M1 slice:** hero kit 2, plus 1 guaranteed main-path container potion
@@ -932,7 +938,11 @@ draw count below is fixed per item, whatever the outcome, so seeds stay
 stable.
 
 Definitions: the main path's rooms have indices 0 … n − 1, with 0 the
-entry and n − 1 the boss room. A room is in the **first half** when its
+entry and n − 1 the boss room. n counts `mainPathIndex` 0 (the entry)
+to n − 1 (the arena), the floor-1 antechamber (RS 6.6's extra room)
+included; the Bypass arm, Alcoves, corridors and the Stairhead are not
+counted rooms, and "room k" means `mainPathIndex` k (floor layout design
+3.4, 6.3) **(change FL-4)**. A room is in the **first half** when its
 index < FloorDiv(n − 1, 2). An **eligible guaranteed container** is a
 container in a main-path room, openable with no check, never a carrier.
 A container holds any number of items.
@@ -947,7 +957,10 @@ A container holds any number of items.
    containers in the first half. A second potion (floors 4–5 after the
    raise) may share the first's container.
 4. **Guaranteed supply:** one draw chooses uniformly among eligible
-   guaranteed containers with index < n − 1, excluding a container that
+   guaranteed containers with index < n − 1 that are HE-4-eligible:
+   never in the bypassed guard post's (Gb) room or a Circuit room, the
+   floors 2–5 Forecourt included, so G2's "no optional fight" holds on
+   every seed (floor layout design 6.5) **(change FL-3)**; excluding a container that
    already holds a guaranteed item when another exists.
 5. **Second found supply:** one draw, always; when step 2 gave 2, it
    chooses uniformly among all containers of the floor (when step 2 gave
@@ -1185,14 +1198,21 @@ bought, never moves in combat, `treatProof` Scarred.
   treated as having noticed (no Surprised); the monsters' surprise is
   computed normally, so they may still be Surprised by the hero.
 - **`mainPathIndex` per square,** filled in by dungeon generation: a
-  room's squares take the room's index; a corridor or doorway square takes
-  the lower index of the rooms it connects; a square off the main path
-  has none.
+  room's squares, and the squares of a main-path room's Alcoves, take the
+  room's index; a Portal (corridor or doorway) takes an index only if it
+  joins consecutive main-path rooms, and then the lower one, except that
+  arena-adjacent squares take the arena's index; every other square has
+  none, so the floor-1 Bypass arm has none. Every square also carries an
+  `effectiveIndex`, which `expectedTenths`, Keepsakes and leftovers read;
+  this rule reads `mainPathIndex` only (none = not 0–1) (floor layout
+  design 3.4, 6.1 LS10) **(change FL-13)**.
 - **Judged by the hero's square** at the moment the noticing that starts
   combat resolves, not by the group's `homeRoom`; a patrol or joiner that
   reaches those squares is covered too.
 - **Scope:** the rule does **not** reach room 2. The floor-1 lair of the
-  enemies 10.2 worked example sits in room 2; that failure is closed by
+  enemies 10.2 worked example sits in room 2, read as an example at
+  enemies 10.2's room level 2, not `mainPathIndex` 2 (floor layout
+  design 3.4) **(change FL-4)**; that failure is closed by
   the surprise reconciliation and the floor-1 budgets (21.1), not by this
   rule. Widening the rule would change Q9 and goes back to the client.
 - It extends enemies invariant 6 (no limited abilities in floor-1 surprise
@@ -1362,7 +1382,10 @@ Treat and Recovery, plus the supply left and the patrol warning
 - **Floor-entry card** headed by the **Stratum Card** (theme name, act,
   signature line, damage types, non-fearless band, boss name; run
   structure design 6.9) above the guaranteed counts (G6) **(change
-  RT-12)**, and a party-bar tally "found 1 of at least 1": the healing
+  RT-12)**, then the floor count line "Main path: n rooms; side rooms: k;
+  secrets: s" (s from floor 2; the floor-1 card omits it), with its
+  party-bar tally, counts only, never locations (floor layout design 9.2)
+  **(change FL-20, M2)**, and a party-bar tally "found 1 of at least 1": the healing
   potions picked up this floor from containers and carriers, whatever their source. The `guaranteed`
   flag on `LootTaken` stays for reports only.
 
@@ -1859,7 +1882,7 @@ parties on floors 2–5.
 
 | Risk | Mitigation, report and lever |
 |---|---|
-| **Floor-1 surprise exceeds the guards** (the reference lair in room 2 at 0.87% under the review's model, the lowest legal hero 7–9%) | Reconcile the surprise model first; floor-1 ambush and lair budgets; the floor-1 cumulative budget (21.1 step 5); never loosen the row. The 17.1 rule covers rooms 0–1 only and does not reach the lair |
+| **Floor-1 surprise exceeds the guards** (the reference lair in room 2, an example read at enemies 10.2 room level 2 (**change FL-4**), at 0.87% under the review's model, the lowest legal hero 7–9%) | Reconcile the surprise model first; floor-1 ambush and lair budgets; the floor-1 cumulative budget (21.1 step 5); never loosen the row. The 17.1 rule covers rooms 0–1 only and does not reach the lair |
 | **The solo floor-1 boss needs 3–5 heals** | The floor-1 solo boss row of ≤ 25% per round, the lowest-legal boss rows and `Floor1BossSustain` (21.1); boss-door reports calibrate its inputs; no drink limit there |
 | **Supply gives 4–5 rests per floor,** so "limited" leaks | Rests gate median ≤ 3; lever order (5.7) |
 | **Boss potion-chugging** on floors 2–5 | Boss potion report; `potion.laterInFightPermille` lever (off) |
@@ -2110,7 +2133,10 @@ values; the phial's rarity, floor, channels, `offerChancePermille` and
 - **Dungeon generation:** HE-7's constructive container reservation and
   retry policy (12.4); `mainPathIndex` per square for 17.1; trap ids and
   the detection snapshot for 10.4; containers known before the loot step
-  (12.5).
+  (12.5). HE-7's reservation, retry sharing and `mainPathIndex` are
+  answered by the floor layout design
+  (`2026-11-21-floor-layout-design.md`, 6.1, 6.5, 11.2) **(change FL-3,
+  FL-13, FL-15)**.
 - **Camp and hub screens:** the top-up step and the floor-entry card.
 - **Experience:** keep hero level minus room level at 0 or above
   (under-levelled stealth heroes void the guards).

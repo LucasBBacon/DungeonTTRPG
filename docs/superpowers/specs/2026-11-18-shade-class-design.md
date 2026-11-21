@@ -1158,6 +1158,12 @@ noWitnesses, throatCut, makeAnExample, ambuscade]`.
     with a "body noticed" rule** in M2: a patrol that sees a corpse
     becomes Alerted to its square. That rule is owed by the enemies
     owner. Without it, the non-minion route alone ships.
+  - **Layout (FL-9):** the floor offers exactly one route-avoidable
+    fight, a guard post skipped by the Bypass; the lair and every other
+    main-chain fight host are cut vertices, so `SkippablePool` holds at
+    ≥ preBossPool − 100 with the patrol counted present (floor layout
+    design 6.8). The second-kill route and the fights-avoided threshold
+    below are read against that.
   - Never against a boss, a group with a living elite or boss, or a
     `fearless` group. **Evaluated after the kill resolves** (DH 20.3
     step 7): a silent kill of a group's only elite may set the flag if no

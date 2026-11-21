@@ -403,7 +403,7 @@ section 14 consolidates them.
 | **Stratum Card** | The floor-entry card header (6.9; DH 17.12) |
 | **Dream track** | The five-stratum route display on the HUD and pause screen (6.9) |
 | **Keepsakes** | Floor-5 dressing and one arena prop drawn from the run's visited themes (9.3) |
-| **Antechamber** | The empty main-path room or corridor immediately before the floor-1 boss arena (9.4) |
+| **Antechamber** | The main-path room immediately before the boss arena, the Forecourt, on every floor: empty on floor 1 (9.4); on floors 2–5 a patrol Circuit waypoint (floor layout design 6.11; change FL-5) |
 | **Law / Obsession** | A theme's signature mechanic / its faction's absurd vow (7.3) |
 | **Free 4** | A theme's harmful conditions other than the universal Prone and Frightened tax (8.0) |
 | **Reference chooser** | The simulator's door policy used for calibration when Two Doors is on (6.11) |
@@ -534,7 +534,10 @@ more theme to build); C, variable 4–5 floors.
   on *one* of them per run.
 - **No mid-floor transitions.** Later "seams" are display-only: the boss
   arena's far exit shows the next theme's palette, with no enemies or
-  rules from it (M3).
+  rules from it (M3). The far exit is the Bossgate to the Stairhead,
+  which opens on `BossDefeated` (floors 1–4); floor 5 has none, and a
+  waking-light window dresses its far wall (M3, display only) (change
+  FL-6; floor layout design 6.11).
 - **Acts are presentation only (lead's call).** One canonical set is
   used on the dream track, cards and music:
 
@@ -581,7 +584,10 @@ more theme to build); C, variable 4–5 floors.
   generates from a dungeon child keyed by **floor index**, and the theme
   is an input (enemies 10.5 step 1). The route stream is consumed only at
   run start, so no generation retry (HE-7's seed + 1), player action or
-  door choice can perturb it.
+  door choice can perturb it. Each floor's dungeon child has a `layout`
+  child, drawn with fixed counts per Blueprint; dressing draws from a
+  display-side stream the core never reads (change FL-2; floor layout
+  design 6.1).
 - **R-SEED-2, when.** The draw happens at run start, after hero
   creation. Hero creation stays theme-blind, so the class pick is not
   made against a known floor-1 theme and `Floor1ClassSpread` stays
@@ -594,7 +600,9 @@ more theme to build); C, variable 4–5 floors.
   **(settled, main 6.3)**. Every bounded integer is drawn with **one
   64-bit draw per index** by a fixed method (multiply-shift), never by
   rejection sampling, so the number of draws never depends on the data.
-  In order:
+  The floor `layout` child follows the same rule: a fixed draw count per
+  Blueprint, every draw consumed even when one option is legal (change
+  FL-2; floor layout design 6.1). In order:
   1. **the permutation:** a Fisher–Yates permutation of the **whole theme
      catalogue in the manifest, locked, held and cut themes included**;
      the drawable set filters it afterwards, so unlocking a theme never
@@ -656,7 +664,8 @@ more theme to build); C, variable 4–5 floors.
     configuration-snapshot hash, unlock-snapshot hash). The
     **configuration snapshot** holds `route.twoDoorsEnabled`,
     `route.lastHollowChoiceEnabled`, `route.doorCamps[]`,
-    `pacing.trimmedFloors[]` and `party.cap` (11.1). It is fixed at run
+    `pacing.trimmedFloors[]` and `party.cap` (11.1), and the `layout.*`
+    fields of 11.1 (change FL-14). It is fixed at run
     start; **a run never changes mode mid-run (new lead's call)**.
   - **Shared and daily seeds use the canonical unlock set** (all content
     of the current M-wave unlocked), never the sharing player's own
@@ -746,7 +755,18 @@ more theme to build); C, variable 4–5 floors.
   The floor-plan step reads guard-post count and boss or lair
   experience from it **(lead's call)**.
 - Between 1 and 3 main-path rooms per floor are empty or special (the
-  OSR stocking lesson; placement hook).
+  OSR stocking lesson; placement hook). On floors 2–5 the antechamber
+  (the Forecourt, 9.4) counts as one, read as **special** (it is the
+  patrol's homeRoom and fight host), so untrimmed floor 5 has no empty
+  room **(told plainly; change FL-5)**.
+- **Counting (change FL-4; floor layout design 3.4):** n main-path rooms
+  count entry (index 0) through arena (n−1); the floor-1 antechamber is
+  extra to the table's 7 but inside n (n = 8, the antechamber at n−2);
+  the floors 2–5 antechamber is inside the table's count. The elite room and
+  Circuit side rooms count as side rooms; the Bypass arm, Alcoves,
+  corridors and the Stairhead are not counted rooms; the Circuit counts
+  Room nodes. "Room k" means `mainPathIndex` k everywhere, except
+  enemies 10.2, whose "Room N" stays room level as defined there.
 
 ### 6.7 Run length
 
@@ -773,7 +793,7 @@ one step **(lead's call; the step number is a new lead's call)**:
 | 8 | Muster |
 | 9 | Vendor |
 | 10 | Shop or reward **(decided)** |
-| 11 | Travel on, which commits the door; floor N + 1 is then generated (items 10.4) |
+| 11 | Travel on, which commits the door; floor N + 1 is then generated (items 10.4). Its room graph is party-agnostic; the party band picks only room size classes **(told plainly; change FL-2; floor layout design 6.1)** |
 
 Information comes before the Muster, so hires, swaps, purchases and
 Herald card swaps can respond to it. The chosen door can be changed
@@ -790,7 +810,7 @@ until Travel on (the camp state `nextTheme`).
 |---|---|---|
 | Run-start card | Floor-1 theme name, vignette, HR-23 line | Same |
 | Camp next-floor card | Name, vignette, the approved HR-23 line "Next floor: theme X, about Y% non-fearless" | Per door: name, vignette, HR-23 line, signature line, at-will damage icons, square-kind icon, boss name and silhouette |
-| Floor-entry **Stratum Card** (DH 17.12 header) | Name, act, signature line, damage types, non-fearless band, boss name | Same |
+| Floor-entry **Stratum Card** (DH 17.12 header) | Name, act, signature line, damage types, non-fearless band, boss name; the floor count line "Main path: n rooms; side rooms: k; secrets: s" (s from floor 2; counts only, never locations; change FL-20, floor layout design 9.2) | Same |
 | Lore reveal on entry | Roster types and roles **(settled, enemies 10.6)** | Same; M3: roles shown at camp too |
 | **Dream track** (HUD, pause) | 5 strata: visited floors named; the next floor named at its camp; later floors show only their tier glyph; floor 5 reads "The Dreamer's Heart" from minute one | Plus "the road not taken": the declined door, shown on the run summary too |
 
@@ -976,7 +996,7 @@ Q3:** B, no premise; C, folk horror; D, full absurdism.
 |---|---|
 | RC1 | **Mechanics never joke:** no fake tiles, no lying UI, no hidden rules, no "wild" random effects for flavour. **Dressing never mimics a unit, a square kind or a rule (lead's call, after the check):** statues and props share no silhouette with a roster type; a square kind's material (water, web, sheet, oil, bile) appears only on its squares and on walls above head height; no floor-level particle implies a condition; frost, rain and liquid read only as backdrop |
 | RC2 | **Role prop grammar** (extends enemies 8.1): leaders carry a vertical emblem; soldiers a tall flat object (shield, door, tray, coffin lid, chair); artillery points something forward; brutes are oversized mass inside one square; skirmishers lean low; controllers have an orbiting element; lurkers show a tell at rest; minions are small and share one palette |
-| RC3 | **Faces mean minds:** mindless types show one cross-theme mind tell (a hollow keyhole motif) and no face; fearless-but-minded types are masked or veiled; non-fearless types have faces and visibly cower, flee and kneel (animations duplicate approved states, never replace them). **(Lead's calls, after the check.)** Bosses are exempt: the boss plate and pips carry their read, and the face grammar applies to non-boss types only. Helms on non-fearless types are open-faced (raised visor or none); veils on non-fearless types are lifted or pinned back. The keyhole silhouette is reserved: no environment, prop or non-mindless unit uses it (locks read as padlocks and bars). A Routed or Cowed animation never moves a unit through a door or changes a door |
+| RC3 | **Faces mean minds:** mindless types show one cross-theme mind tell (a hollow keyhole motif) and no face; fearless-but-minded types are masked or veiled; non-fearless types have faces and visibly cower, flee and kneel (animations duplicate approved states, never replace them). **(Lead's calls, after the check.)** Bosses are exempt: the boss plate and pips carry their read, and the face grammar applies to non-boss types only. Helms on non-fearless types are open-faced (raised visor or none); veils on non-fearless types are lifted or pinned back. The keyhole silhouette is reserved: no environment, prop or non-mindless unit uses it (locks read as padlocks; change FL-7, told plainly). A Routed or Cowed animation never moves a unit through a door or changes a door |
 | RC4 | **Damage language:** family by shape (physical streaks and impacts; elemental fluids, particles, crystals; spirit rings and ripples); type by hue *plus* pattern, so it survives colour-blind simulation; no theme uses an undesaturated damage hue as its dominant environment colour. **The damage-hue key** (10 types, hue plus pattern) is owned by art and due before the first Tone Sheet. A theme whose Law is a damage type (Gut, Supper, Carnival) dresses its environment in a desaturated, off-key variant and keeps the saturated key for its hazard squares and attacks (lead's call) |
 | RC5 | **One glyph per square rule:** each square kind has one cross-theme rim and icon; a theme reskins only the fill (bedsheets read as web because they *are* web) |
 | RC6 | **Value hierarchy:** units > telegraph overlays > hazards > floor > walls, checked on a greyscale screenshot per theme; surreal texture only on walls, ceilings and skyboxes, never on walkable squares; scale distortion in architecture only, every unit true to its square. **Boss scale (lead's call):** a boss may stand up to about 1.5 times standard height, but its footprint and silhouette stay within its square at minimum zoom and never hide a unit on an adjacent square; height is shown by proportion, not size |
@@ -1114,7 +1134,8 @@ after the check):**
   traps and terrain), `teeteringFallbackDrop` (the condition dropped if
   RT-14 is refused);
 - `terrainSquares[]` plus density per floor, `trapFlavours[]`,
-  `coverProps[]`, `layoutArchetype`, `dressingSets[floor]`;
+  `coverProps[]`, `layoutGrammar` (was `layoutArchetype`; change
+  FL-14; floor layout design 7, 11.1), `dressingSets[floor]`;
 - **`placementRules[]`**: typed constraints the placement and terrain
   segments read (entry-square exclusions, dry islands, start-square
   shares, per-encounter unit caps such as the Gut's acid cap, Frozen
@@ -1260,8 +1281,9 @@ is not re-tested inside M2.
 
 - **Look:** a prison tower lying on its side, where it is always 3 a.m.
   Cell doors are clock faces with still hands (the ticking lives only in
-  the boss arena, where the Countdown is); locks are padlocks and bars,
-  never keyholes (RC3). Palette: iron grey and whitewash with rust
+  the boss arena, where the Countdown is); locks are padlocks; bars
+  appear only on Grilles; never keyholes (RC3; change FL-7, floor layout
+  design 8.1). Palette: iron grey and whitewash with rust
   accents, under pale gaslight (moved off amber after the check, so the
   floor-1 pair and the Gaol–Silk adjacency differ). *One wrong detail,
   in every room:* every clock shows a different hour.
@@ -1289,13 +1311,19 @@ is not re-tested inside M2.
     per closed door (enemies 12.3), so sneaking is easy and noise is the
     risk;
   - bell tripwires (noise; floor-1 joining cap 1);
+  - one shut-door pair (a guard post and a neighbour through a `pairDoor`
+    that starts propped open) **pending the enemies owner's ruling on the
+    `pairDoor` reading**; if refused, one near pair instead (change
+    FL-11; floor layout design 6.6, 7.2);
   - the Turnkey's keyring is the floor's steal target and opens a cell
     cache (locks hook);
   - Cowed inmates step aside and kneel at the bars, facing the wall;
     they never pass through or change a door (RC3);
   - Escapee and Inmate Scavengers fill the cowable guarantee.
-- **`signatureFeature`:** cell doors the party can shut to cut a
-  joiner's path (doors segment, existing door rules).
+- **`signatureFeature`:** cell doors the party can shut against a
+  joiner (the party close action, FL-8; shutting mutes and
+  delays; it does not cut a path unless locked; floor layout design
+  7.2, 9.2).
 - **Hooks:** cell-block grid layout; traps: bell tripwire (noise),
   portcullis (damage only), "Appeals" trapdoor (Prone), no hard control;
   cover: cell bars and desks.
@@ -1356,7 +1384,10 @@ is not re-tested inside M2.
 - **`signatureFeature`:** kennel gates and fallen logs (cover; an arena
   gate can cut the escort's approach).
 - **Hooks:** glades joined by narrow trails (open rooms and corridors,
-  as weapons 9.5 and 26 need); traps: snares (Grappled), alarm horns
+  as weapons 9.5 and 26 need), partitioned in the rules into ordinary
+  rooms joined by Portals and read as one wood on screen (`beads`;
+  change FL-1, floor layout design 7.3); one horn near pair at index ≥ 4
+  (FL-11, floor layout design 6.6); traps: snares (Grappled), alarm horns
   (noise); staked pits are Later (drop hazard).
 - **Bosses:**
   - **Old Ragged:** a huge hound in the dead lord's coat. It is the
@@ -1411,7 +1442,9 @@ is not re-tested inside M2.
   0–2** (balance critique; a `placementRules` entry); the floor-1 death
   share is reported per theme.
 - **`signatureFeature`:** closable coffins (cover and hiding spots) and
-  drawn curtains (line-of-sight blockers the party can open or close).
+  drawn curtains (line-of-sight blockers the party can open or close:
+  the Drape Portal kind; drawing one in combat costs the action; change
+  FL-7, floor layout design 9.2).
 - **Hooks:** manor-and-crypt layout (galleries with niches); traps: a
   creaking floorboard (noise), a falling coffin lid (damage only); cover:
   coffins, pews and catafalques.
@@ -1514,7 +1547,9 @@ is not re-tested inside M2.
   Legal overlay: Inkling piercing → psychic. Teetering fallback: drop
   Grappled.
 - **Law, webs and silence:** webs choke the aisles; a Keen-heavy
-  awareness mix makes noise draw joiners within the caps; the Shade
+  awareness mix makes noise draw joiners within the caps (near pairs at
+  the top of the band, +1 to the cap; FL-11, floor layout design 6.6,
+  7.6); the Shade
   shines and loud parties pay. **Fire is the key** (web breakers and the
   paper weakness): the mirror of the Choir.
 - **`signatureFeature`:** full-height stacks (line-of-sight walls,
@@ -1573,8 +1608,11 @@ is not re-tested inside M2.
   flask-then-breath combo counted as a spike.
 - **`signatureFeature`:** oil slicks and fire pits; a Wheel of Knives
   set piece.
-- **Hooks:** ring-plaza layout (open rooms for Cleave and reach); cover
-  from wagons; trapdoor stages (Prone).
+- **Hooks:** ring-plaza layout (open rooms for Cleave and reach), the
+  plaza partitioned in the rules into 2–3 ordinary rooms by full-height
+  wagon and booth rows and read as one fairground on screen (`hubRim`;
+  change FL-1, floor layout design 7.7); one plaza near pair (FL-11,
+  floor layout design 6.6); cover from wagons; trapdoor stages (Prone).
 - **Bosses:**
   - **The Strongest Man Who Ever Lived** (F2): Hold Aloft throw (Prone
     signature; the name never appears in the banner, RC7); at 66%, (e)
@@ -1631,6 +1669,9 @@ is not re-tested inside M2.
   walls, corridor play, Skewer) and braziers as cover props.
 - **Hooks:** traps: falling icicles (damage) and a dumbwaiter drop
   (Prone).
+- **M3:** the Supper's floor-3 window waits for M3; its layout (`axis`,
+  ring Blueprints around a kitchen hub) already reads apart from the
+  Choir under `LayoutDistinct` (floor layout design 7.8, 12).
 - **Role props (RC2):** Butler-at-Arms, the salver shield; the
   Seneschal, a tall white steward's rod; Sommelier, an orbit of frosted
   glasses; minions carry decanters, never trays. **Faction motif:**
@@ -1678,8 +1719,9 @@ is not re-tested inside M2.
 - **Bile squares** (Corroded on entry; change RT-13). If they are
   declined, the Gut is dry in M2 and bile moves to M3.
 - **`signatureFeature`:** bile pools and sphincter doors (locks hook).
-- **Hooks:** looping tube layout; rib-pillar cover; acid-geyser trap
-  (one-shot Corroded).
+- **Hooks:** looping tube layout; one resonance near pair (FL-11, floor
+  layout design 6.6, 7.1); rib-pillar cover; acid-geyser trap (one-shot
+  Corroded).
 - **Bosses (two, because the Gut carries floor 4 in half of runs):**
   - **The Pylorus**, a door that is a mouth: Swallow (Grappled
     signature); at 66%, (e) bile; at 33%, (d) Tenants.
@@ -1702,6 +1744,10 @@ is not re-tested inside M2.
   are played sinister, never cute. *Dream device:* the room's far wall
   is always the same distance away.
 - **Keepsakes** (9.3) dress it with the visited themes' props.
+- **Hooks:** the single bedchamber is partitioned in the rules into
+  ordinary rooms by full-height giant furniture and read as one place on
+  screen; the main path spirals inward to the bed arena (`spiral`;
+  change FL-1, floor layout design 7.10).
 - **Obsession:** to keep sleeping (rest). **Grim reading:** the tomb of a
   sleeping god.
 
@@ -1849,8 +1895,11 @@ compliant floor-1 bosses; determinism.
 - **Trigger (lead's call on the details, after the check):** the event
   `AntechamberCatchUp` fires on the earlier of (a) the hero's first
   out-of-combat turn with its square in the floor-1 **antechamber**, the
-  empty main-path room or corridor immediately before the boss arena
-  (layout hook), and (b) any attempt to enter an arena square. The
+  empty main-path room immediately before the boss arena (the Forecourt;
+  (a) fires on squares whose `roomId` is the Forecourt), and (b) any
+  attempt to enter an arena square, which covers the arena-owned
+  doorway squares (change FL-5, read with FL-13; floor layout design
+  6.11). The
   hero's experience becomes max(current, 540). It is **idempotent**: the
   floor-1 run state holds `antechamberCatchUpApplied`, and it never
   fires twice.
@@ -1869,6 +1918,17 @@ compliant floor-1 bosses; determinism.
   in the floor-1 room graph the antechamber is a cut vertex, so every
   path from the start to the arena passes through it, with no side
   room, second entrance or forced-movement route around it.
+- **Every floor has the antechamber (change FL-5, agreed in the floor
+  layout design Q2; floor layout design 6.11):** `AntechamberDominatesArena`
+  holds on every floor, judged on the pre-boss graph; both arena
+  entrances are dog-leg Arches from it, at least 5 apart, with the
+  symmetric `AntechamberScreened`. On floor 1 it stays empty,
+  single-inbound and off the Circuit, and stays near-safe by this
+  section's approved exception (the "short safe walk"). On floors 2–5 it
+  is always a patrol Circuit waypoint, the patrol's homeRoom and fight
+  host at the floor's fight-room size, with at most two Circuit side
+  rooms; it is never guaranteed safe while the patrol lives (told
+  plainly). The Catch-up stays floor 1 only.
 - **Reports:** `AntechamberCatchUpRate` per class *(illustr.: about 100%
   of bypass runs, about 5% of full clears)*; the camp catch-up's "under
   20%" target (enemies 16) applies to **camps 2–4**.
@@ -1919,6 +1979,12 @@ All model numbers are *(illustr.)*. They come from toy scripts
   gated (11.4).
 - The human gate slice uses the slowest floor-4 theme by simulator turn
   count.
+- **Layout commitments (change FL-16; floor layout design 6.10, 11.4):**
+  at party 4 on floors 4–5, `ExploreSeconds` ≤ 3.5 min and
+  `ExploreClicks` ≤ 40, as medians of the layout walker's lean policy,
+  plus Circuit isolation. The walker's terms and cost table feed the
+  companions 7.4 time model; layout adds **no** lever to the lever
+  order.
 
 ### 10.2 Experience
 
@@ -2071,8 +2137,13 @@ Supper is drawn. No card relies on terrain until the report passes
   `route.twoDoorsEnabled`, `route.lastHollowChoiceEnabled` (both false
   by default; 6.11), `route.doorCamps[]` (M2: [1, 2]),
   `pacing.trimmedFloors[]` (default empty; lever 3: [4, 5]; 10.2
-  response: [3, 4, 5]), `party.cap` (3, or 2 under the fallback).
-  Loading rejects `lastHollowChoiceEnabled` true with `twoDoorsEnabled`
+  response: [3, 4, 5]), `party.cap` (3, or 2 under the fallback);
+  `layout.mainPathRooms`, `layout.mainPathRoomsTrimmed`,
+  `layout.sideRooms`, `layout.sideRoomsTrimmed`, `layout.secrets`,
+  `layout.hearingGapMin`, `layout.nearPairsMax`,
+  `layout.lastTurningWeight` and `layout.wayBack` (default off, M3), all
+  hashed into the reproducibility key (change FL-14; floor layout design
+  11.1). Loading rejects `lastHollowChoiceEnabled` true with `twoDoorsEnabled`
   false. `route.streakRedrawMax` 8 *(illustr.)* is launcher-only and not
   in the snapshot.
 - **Route state** in the run save (lead's call, after the check): the
@@ -2101,6 +2172,7 @@ The build fails when one of these fails:
 | V5 | RouteEnumeration | Enumerated over **histories**, not permutations: for floor 1, each drawable floor-1 theme; for floors 2–4, each ordered choice of survivors the walk can produce (Door A and Door B where doors apply). Run once for **every drawable set the manifest can produce**: every subset of unlockable themes, crossed with the Wake verdict, the cut states and any held theme. The build fails if any history breaks RP1–RP5 or RouteSufficiency (RP4), or a Two Doors floor has fewer than 2 candidates. The 10.3 counts are published from the all-unlocked set |
 | V6 | RouteDeterminism | The same reproducibility key (seed, manifest hash, configuration-snapshot hash, unlock-snapshot hash) gives the same route; shared and daily seeds use the canonical unlock set; perturbing any floor substream or a generation retry never changes the route; unlocking a theme never changes another theme's position or the boss orders; a doors-on run choosing Door A at every camp is identical to the doors-off run; LootDoorInvariant holds for both doors, including the Resistant-element draw and its n = 0 fallback |
 | V7 | CharterChecks | Every bark trigger is in RC8's list; one glyph per square kind (RC5); a Tone Sheet referenced; every non-final theme authors `keepsakeProps` and `keepsakeArenaDressing`; no frozen-name collision; no keyhole silhouette outside mindless tells (RC3). The "signature type placed at least twice per floor" check (enemies 10.4) is a **generation assertion** over a fixed seed sample per (theme, floor, party size), owned by the seeds and validation segment |
+| V8 | LayoutGrammar (change FL-14; floor layout design 11.2) | Every theme's `layoutGrammar`, Blueprints, rules and templates, with the named sub-checks of floor layout design 11.2 (LG1–LG20, `HearingGap`, Circuit isolation, `LayoutDistinct`, config nesting and others) |
 
 ### 11.3 Simulator arms
 
@@ -2162,11 +2234,12 @@ holds that theme (`shipStatus = held`, 7.4) until tuning passes;
 | Per-build theme coverage | Gate for Two Doors | Within about 20% of random-draw coverage, per class |
 | `FloorTimeByTheme` | Gate (theme hold) | ≤ +10% of the floors 2–5 median at the same party size |
 | `LevelAtDoorByFloor` | Report, with a stated response | Step ≤ 0.7 level |
+| `ExploreSeconds`, `ExploreClicks` (layout walker, lean policy; change FL-16, floor layout design 6.10, 11.4) | Layout commitment feeding the companions 7.4 floor-time gate; the heavy and hunt figures reported | ≤ 3.5 min and ≤ 40 clicks, medians at party 4 on floors 4–5 |
 | `Level10BeforeFinalBoss` | Gate whenever lever 3 applies; report otherwise | ≥ 95% of runs at minimum arrival with one bypass |
 | `AntechamberCatchUpRate` per class | Report | — |
 | Floor-1 death share per theme | Report against DH 18.2 | — |
 | `NeckLineByRun`; terrain presence per theme (DEP-A1) | Report | — |
-| DistinctnessCheck | Report | Score = shared free-4 conditions + 1 if the same `squareKind` (not `none`) + 1 if the same `signatureFamily`, over every pair of themes that share a pool or can sit on adjacent floors; pairs scoring 3 or more go to the lead |
+| DistinctnessCheck | Report | Score = shared free-4 conditions + 1 if the same `squareKind` (not `none`) + 1 if the same `signatureFamily` + 1 if the same `topologyClass` (`LayoutDistinct` feeds it; change FL-14, floor layout design 7.1), over every pair of themes that share a pool or can sit on adjacent floors; pairs scoring 3 or more go to the lead |
 | Carrier-fallback rate per theme | Report | — |
 | Per-class door pick rate (humans) | Report | — |
 | Bring-the-key watch (purchases and hires by next theme) | Report | — |
@@ -2204,13 +2277,13 @@ they are built first.
 
 | Segment | Hook |
 |---|---|
-| Floor layout | Room counts (6.6); the floor-1 **antechamber** (empty, main path, immediately before the arena, a cut vertex of the room graph; `AntechamberDominatesArena`); layout archetype per theme (cell grid, glades and trails, galleries with niches, nave with chapels, stacks and aisles, ring plaza, long hall, looping tubes, bedchamber); per-floor dressing sets; 1–3 empty or special main-path rooms |
-| Room shapes and terrain | `terrainSquares` and density per floor; one home theme per square kind; water and oil placement caps (8.6, 8.8); cover props per theme (the weapons 9.5 decision); wall and edge density for the Wrecker; at least 3 Acrobatics-gated choices per floor (armour 7.3) |
+| Floor layout | Room counts (6.6); the floor-1 **antechamber** (empty, main path, immediately before the arena, a cut vertex of the room graph; `AntechamberDominatesArena`); layout archetype per theme (cell grid, glades and trails, galleries with niches, nave with chapels, stacks and aisles, ring plaza, long hall, looping tubes, bedchamber); per-floor dressing sets; 1–3 empty or special main-path rooms. **Filled by the floor layout design (change FL-1, FL-5, FL-14, FL-22):** rooms joined by Portals, open-plan themes partitioned into ordinary rooms (FL-1); the antechamber (the Forecourt) on every floor, on the patrol Circuit on floors 2–5 (FL-5); the layout archetype is the theme's `layoutGrammar` (FL-14); layout supplies sockets and minimum counts, and the named segments below keep their rules (FL-22) |
+| Room shapes and terrain | `terrainSquares` and density per floor; one home theme per square kind; water and oil placement caps (8.6, 8.8); cover props per theme (the weapons 9.5 decision); wall and edge density for the Wrecker; at least 3 Acrobatics-gated choices per floor (armour 7.3); this segment keeps the ≥ 3 total, of which layout supplies 2 Squeezes (change FL-22) |
 | Hazards | The bile square (RT-13); the drop hazard needed by the Inverted Cathedral and staked pits; Teetering counting (RT-14) |
-| Traps and locks | `trapFlavours` per theme (Shade DEP-S1 records with `mechanismSquare`); trap conditions drawn from the theme's 6 or damage-only (RT-16); no trap hard control on F1, set pieces only on F2; the Gaol keyring and cell caches; sphincter doors; closable cell doors |
-| Encounter, loot and event placement | Each theme's `placementRules[]` (8.0); lesson axes per floor-1 theme; the Pack one-family rule; Scavengers at the F1 patrol budget; the Wake's dormant bias kept away from rooms 0–2; the Heart's morale shape by room and psychic cap; the signature type at least twice (a generation assertion, V7); Corroded caps; Frozen source caps; Keepsake slot dressing (9.3); loot stays theme-blind (LootDoorInvariant) |
+| Traps and locks | `trapFlavours` per theme (Shade DEP-S1 records with `mechanismSquare`); trap conditions drawn from the theme's 6 or damage-only (RT-16); no trap hard control on F1, set pieces only on F2; the Gaol keyring and cell caches; sphincter doors; closable cell doors. Keeps the door, lock and secret rules, including the party door verbs (open in M1, close in M2; change FL-8) and Hairline secrets with Sound the wall (change FL-17); layout supplies the slots and minimum counts (change FL-22; floor layout design 9.2, 13) |
+| Encounter, loot and event placement | Each theme's `placementRules[]` (8.0); lesson axes per floor-1 theme; the Pack one-family rule; Scavengers at the F1 patrol budget; the Wake's dormant bias kept away from rooms 0–2; the Heart's morale shape by room and psychic cap; the signature type at least twice (a generation assertion, V7); Corroded caps; Frozen source caps; Keepsake slot dressing (9.3); loot stays theme-blind (LootDoorInvariant). Keeps the Wake dormant rule, read from layout's `nearStart` tag, and Keepsake dressing (change FL-22) |
 | Boss rooms | One counterplay feature per boss (pendulum, kennel gate, sluice and bell rope, cage, dunk tank, chandelier of icicles, the Pylorus mouth, the bed); Keepsake dressing; phase option (e) never on party squares |
-| Exploration and information | Camp card, Two Doors cards, Stratum Card, dream track, Lore reveal, road not taken; Dream Fragments (M3); the Lucid Key secret (Later) |
+| Exploration and information | Camp card, Two Doors cards, Stratum Card, dream track, Lore reveal, road not taken; Dream Fragments (M3); the Lucid Key secret (Later). Keeps the Stratum Card, including the floor count line (change FL-20), the Listen and Hairline displays (FL-18, FL-17), and the Lucid Key, whose Site layout reserves (change FL-22; floor layout design 9.2, 13) |
 | Seeds and validation | The `route` stream and R-SEED-1 to 6; `drawableSet` and the reproducibility key; V1–V7; the signature-type placement assertion; the RouteSample, fixed-arrival and chooser arms; LootDoorInvariant; the reports in 10 and 11 |
 
 ---
@@ -2253,7 +2326,7 @@ they are built first.
 | Resistant-target share | Arcanist 9.4 | Per theme |
 | Single-type builds "slowed, not stopped" | stat model 11 | Per theme, with Soaked modelled |
 | Pledge rooms F2–4 (Later) | companions 7.12 | Slot reserved; placement segment |
-| Stairs, left-behind warning, Scrap | items 24 | Layout segment |
+| Stairs, left-behind warning, Scrap | items 24 | Layout segment: the Stairhead behind the arena, through a Bossgate that opens on `BossDefeated`; none on floor 5 (change FL-6; floor layout design 6.11) |
 | Non-combat content on most floors | stat model 10 | Placement segment; Dream Fragments M3 |
 | Arcana-trained non-caster in recruit pools | consumables DEP-1 | Unaffected; the Muster stays theme-blind |
 | Bring-the-key anti-goal | stat model 2; items 2; trinkets 2 | Class-blind cards; vendor pre-rolled; bring-the-key watch report |

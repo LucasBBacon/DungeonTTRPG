@@ -151,7 +151,7 @@ call)**:
   reaction policy (7.3); lines in the 8 directions only (8.1).
 
 Rejected from the drafts **(lead's call)**: a guaranteed safe room before the
-boss; companion turns played automatically; in-fight resource income;
+boss (the rejection kept: floor layout design 6.11, change FL-5); companion turns played automatically; in-fight resource income;
 player cooldowns; telegraphed monster wind-ups (deferred: the AI scorer
 cannot reason about them yet); upgrades written as data patches instead of
 effects.
@@ -406,6 +406,13 @@ Every ability declares exactly one cost **(lead's call)**:
 | Disarm or re-arm a trap: Mechanics, trained only **(settled)** | Action |
 | Trigger a known trap against enemies: Mechanics. A known armed trap is a hazard for forced movement (conditions design 10, 11.3; the rules of 10.1 and 10.2 unchanged) **(change SH-15, Shade design 9.1)** | Action |
 | Lure: choose a square you can see within 6; it emits noise radius 4 (enemies design 12.3). A group with no member in line of sight to you becomes Alerted toward it with no roll; a group that can see you makes its noticing roll. Once per group per floor (`luredThisFloor`). Only if the enemies owner accepts **(change SH-21, Shade design 9.1)** | Exploration action (1 tick) |
+| Open an unlocked door: move into it, as monsters do **(change FL-8, floor layout design 9.2; M1)** | 1 square of movement |
+| Close an open, unlocked door: adjacent, the door's square empty; in combat once per door per round, never while a hostile is adjacent to the doorway or threatens it with reach. Monster door rules unchanged (enemies design 12.4); the rule is owned by dungeon generation segment 5 **(change FL-8, floor layout design 9.2; M2)** | Out of combat 1 tick; in combat, action |
+| Draw or open a Drape: in combat, drawing is once per Drape per round, never while a hostile is adjacent to it or threatens it with reach **(change FL-7, floor layout design 9.2; M2)** | Free out of combat; drawing in combat, action |
+| Squeeze (1–3 narrow squares): Acrobatics on the existing check stream. Out of combat the leading unit makes one check, no retry; on a pass the party goes through, on a failure it still goes through after +4 ticks *(illustr.)* with noise 4 at the mouth nearest the party. In combat each unit checks as it enters: a pass moves it in and ends its movement there (it continues next turn with no new check); a failure ends its movement at the mouth, no retry that round. Monsters never use a Squeeze **(change FL-7, floor layout design 9.2; M2)** | Out of combat one party check; in combat part of movement |
+| Lift a Latch, from the bar side only: no check, silent; it then becomes a Door. Monsters never lift it **(change FL-19, floor layout design 9.2; M2)** | Out of combat 1 tick; in combat 1 square of movement |
+| Listen at a closed door: out of combat; no roll, no stream draw, noise 0; reports each non-Hidden group in the room beyond at that moment (trained Perception adds the size band and "passing"); once per door per floor. Information only **(change FL-18, floor layout design 9.2; M2; owned by dungeon generation segment 10)** | Exploration action (2 ticks); passive and free for a party with a member trained in Perception when auto-walk pauses at the door |
+| Sound the wall: only at a wall square showing the Hairline tell (or 8-adjacent to the secret Portal's squares); opens it, no roll; out of combat only **(change FL-17, floor layout design 9.2; M2)** | Exploration action (6 ticks) |
 | Use a scroll or wand outside your class: Arcana, trained only, against 10 + tier; in class, no slot is spent **(settled; change CN-12, consumables design 13.2)** | Action. A failed check uses the scroll or charge up: no free retries **(settled)**. |
 | Drink a potion (a potion on your own belt) **(change I-5, items design 7.1)** | Bonus action |
 | Administer a belt potion or tonic to an adjacent ally: tonics minor only; a potion does not lift Downed; not a potion or healing scroll on a Downed unit (a trinket reach step may extend 'adjacent' to 2 squares; trinkets design 6.1) **(change I-5, items design 7.1; change TK-19; change CN-12, consumables design 11)** | Action (the giver's); the receiver spends nothing |
@@ -531,6 +538,10 @@ diagonal step costing 1.
   squares, so aiming diagonally is never a trick.
 - An area includes a square only if the area's origin can see it, using the
   symmetric visibility rule. **(settled rule, applied here)**
+- A Grille passes sight and noticing only: no attack, ability, spell,
+  skill action, aura or other effect may target, originate or extend
+  through it (symmetric, so main 4.3 is kept). **(change FL-7, floor
+  layout design 9.2; clarification; M2)**
 - Squares are enumerated in a fixed order (row by row), for determinism.
 - No area covers more than 25 squares at levels 1–6, or more than 49 at
   levels 7–10 **(change ARC-9, Arcanist design 8.1)**. Content
@@ -1092,6 +1103,11 @@ The build fails when:
 - There is no guaranteed safe spot. **(agreed)** Before the player confirms,
   the core reports any patrol route already seen that passes within hearing
   range. **(lead's call)**
+- The pre-boss Forecourt keeps this: on floors 2–5 it is always on the
+  patrol's Circuit and never guaranteed safe while the patrol lives (once
+  the patrol is dead it is a cleared room like any other); floor 1's
+  Forecourt is near-safe only by RS 9.4's approved exception, told
+  plainly. **(change FL-5, floor layout design 6.11; agreed rule kept)**
 
 ### 15.2 On completion
 
@@ -1225,6 +1241,10 @@ Applied on 2026-11-16:
 - **Enemies:** no longer pending. Monster cost is in enemies design 10.1,
   behaviour after losing sight in 12.1, morale in 14 and experience on
   resolution in 16 (`2026-11-16-enemies-design.md`). **(change A-7)**
+- **Floor layout:** settled in `2026-11-21-floor-layout-design.md`
+  (floor layout design, 2026-11-21). It adds the door, Drape, Squeeze,
+  Latch, Listen and Sound the wall rows to 7.2 and the Grille clause to
+  8.1. **(changes FL-7, FL-8, FL-17, FL-18, FL-19)**
 - **Content volume:** counts of companions, themes, monsters and bosses for
   M2. The M1 slice class is the Vanguard (classes design) **(change
   CL-13b)**.

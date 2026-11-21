@@ -1561,7 +1561,10 @@ saves.
   fearless-heavy rosters (undead, constructs) mute its morale half;
   modest damage; as a companion it loses Presence.
 - **Floor-1 guarantee:** floor 1's guaranteed cowable group lies on the
-  main path before the boss room (CL-10).
+  main path before the boss room (CL-10). Layout hosts it on the floor-1
+  Circuit, which always includes main-path Q room 3, and the floor's one
+  route-avoidable fight is a guard post (changes FL-9, FL-10; floor
+  layout design 6.7, 6.8).
 - **Fallback type:** its weapon's physical type; Harrowing Word's psychic
   is a control rider, not its fallback (6.5). **(change HR-3)** Plain
   Speech makes Harrowing Word bludgeoning against a psychic-immune

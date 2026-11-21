@@ -566,15 +566,24 @@ wandering trader reuse its card and comparison components.
   existing marker **only if it is in the same room** (`leftoversScope:
   room`); otherwise they start a new marker. Reopening a marker means
   walking back to it. This closes the "marker follows you" free stash.
-  (change I-8)
+  (change I-8) "Same room" means the same `roomId`: an Alcove shares its
+  parent's, a Portal's squares belong to the lower-index adjacent room
+  (off-path: the lower `branchIndex`), arena-adjacent doorway squares
+  belong to the arena, and the floor-1 Bypass arm's squares to room
+  Gb−1; leftovers read `effectiveIndex` (change FL-13; floor layout
+  design 3.4, 11.1).
 - **Flee pile (settled, enemies 15.6):** items on the ground when the party
   flees stay as a pile marker in that room. It never merges. Enemies never
   take it, but reaching it means going back past whatever is still there.
 - **A leftovers marker may also hold supply** as an integer `supplyCount`
   (5.3). Reopening it banks the supply up to the cap.
-- **At the stairs:** a warning lists what is left behind. On descending,
-  leftovers and flee piles are **scrapped** to coin at the scrap rate
-  *(illustr. 10% of price)* (10.6). A marker's `supplyCount` and keys are
+- **At the stairs:** the stairs stand in the **Stairhead**, a small room
+  behind the arena, reached through the Bossgate once `BossDefeated`
+  opens it; floor 5 has none (the run ends) (change FL-6; floor layout
+  design 6.11). **M3:** a Way Back Latch from the Stairhead, built off by
+  default (floor layout design 6.9). A warning lists what is left
+  behind. On descending, leftovers and flee piles are **scrapped** to
+  coin at the scrap rate *(illustr. 10% of price)* (10.6). A marker's `supplyCount` and keys are
   simply lost. **An heirloom is lost, never scrapped.** **(agreed: Scrap)**
   Every other floor-scoped instance (in an unopened container, carried by
   a living monster, on the ground, or in trader stock) is destroyed
@@ -662,6 +671,11 @@ The camp channel is part of the fixed, pre-rolled budget, so the anti-goal
 "never beyond the budget" holds (section 2). It is drawn whether or not the
 shop is chosen. Stock is deterministic and cannot be save-scummed.
 **(lead's call)**
+
+**Secret caches:** a cache behind a Hairline secret counts as a
+container in the containers-and-secrets channel (enemies 15.3); secrets
+are optional content only
+(change FL-17; floor layout design 9.2).
 
 **Family caps for stock (lead's call):** within floor N's own draw, every
 drawn item (camp and trader stock included) counts for duplicate-base
@@ -1783,7 +1797,7 @@ mundane bases are not loot, and family caps all stand.
 |---|---|---|
 | Containers and lair caches for the loot channels | Loot | M1 |
 | Room identity for leftovers merging and flee piles | Leftovers | M1 |
-| A stairs transition that runs the left-behind warning and Scrap | Stairs | M1 |
+| A stairs transition that runs the left-behind warning and Scrap: the Stairhead behind the arena, through a Bossgate that opens on `BossDefeated`; none on floor 5 (floor layout design 6.11, change FL-6) | Stairs | M1 |
 | An off-path side room per floor that can host the trader, and its presence and stock-count draws at the floor plan | Wandering trader | Later |
 
 - **Classes and offers:** see the classes design

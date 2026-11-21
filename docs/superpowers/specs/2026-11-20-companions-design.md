@@ -853,6 +853,21 @@ Q2):**
 - The gate is read on **human playtest sessions** of the vertical slice,
   not on the toy or the simulator's time model; the simulator's turn
   counts are a report beside it.
+- **Exploration terms in the time model (change FL-16, floor layout
+  design 6.10, 11.4).** The simulator's time model takes the floor
+  layout walker's terms: seconds per tick and a cost table per action
+  *(illustr.; the companions owner calibrates)*: a step 1 tick; open a
+  door 1 click; a container N clicks by type; Listen 1 click and 2 ticks
+  (0 ticks when passive); Sound the wall 1 click and 6 ticks; a Squeeze
+  1 click, +4 ticks on a failure; a Latch 1 click and 1 tick; a reveal 1
+  click; each auto-walk stop 1 click. Layout commits, at party 4 on
+  floors 4–5, to `ExploreSeconds` ≤ 3.5 min and `ExploreClicks` ≤ 40 as
+  medians of the walker's lean policy over the release seed set, and to
+  Circuit isolation; these are layout reports beside the gate, not the
+  gate. Layout is a gate input, and floors 4–5 at party 4 pass only
+  narrowly on the toy, so the cap-2 fallback stays likely (floor layout
+  design 10.2). **No layout lever** is added to the lever order below
+  (agreed Q2 levers untouched).
 - **Definition.** Floor time is the **active time** from the core's
   timestamped `FloorEntered` event to its `BossDefeated` event on that
   floor (every floor ends at its boss), excluding camp screens, pause

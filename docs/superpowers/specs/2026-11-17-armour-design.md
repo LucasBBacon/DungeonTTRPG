@@ -656,14 +656,17 @@ Corrected for F9; monster hit chance against the enemies 6.2 table attack.
   within enemies 5.1's range of 3–8 (validation rule 4). So the pike
   soldier is authored at speed 6 and moves 5.
 - **Stiff:** worn medium or heavy armour gives disadvantage on Acrobatics
-  checks (slip past, escape a grapple by Acrobatics, narrow ground).
+  checks (slip past, escape a grapple by Acrobatics, narrow ground, a
+  Squeeze (floor layout design 9.2; FL-7)).
 - **Binding requirement on dungeon generation and encounter content
   (lead's call),** the same way 11 item 2 binds the class designs: because
   Stiff is light armour's only lasting edge over medium (6.3), every floor
   from M2 offers at least **3** *(illustr.)* Acrobatics-gated choices
-  (slip-past routes, narrow ground, grapplers that can be escaped by
-  Acrobatics), with simulator evidence in the "Acrobatics checks per
-  floor" report (17.3). **Named fallback** if that report misses its
+  (slip-past routes, narrow ground, Squeezes, grapplers that can be
+  escaped by Acrobatics), with simulator evidence in the "Acrobatics
+  checks per floor" report (17.3). Floor layout supplies 2 Squeezes per
+  floor from M2 through a dedicated Site; dungeon generation segment 3's
+  narrow ground supplies the rest (floor layout design 6.4, 9.2; FL-7). **Named fallback** if that report misses its
   target after content tuning: Stiff also gives disadvantage on Reflex
   saves against hazards (hazard edges, traps and hazard squares,
   conditions 10.2–10.4). The armour values are not touched.

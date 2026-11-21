@@ -405,9 +405,22 @@ damage, flat steps for AC and attack (17.1).
   - **M2:** `start + FloorDiv(10 × X, 270)`, where X is the nominal
     experience (16) of every band placed strictly earlier on this floor's
     main path, capped at `end`. On floor 5 the divisor is 540 (16).
+  - **Counting (change FL-4; floor layout design 3.4, 6.3):** n counts
+    the entry (0) through the arena (n − 1), the antechamber (n − 2)
+    included; the floor-1 antechamber is an extra room (beyond run
+    structure design 6.6's 7, so floor 1's n is 8), and the floors
+    2–5 antechamber counts as an empty or special room. The elite room
+    and Circuit side rooms count as side rooms; the Bypass arm, Alcoves,
+    corridors and the Stairhead are not counted rooms. "Room k" means
+    `mainPathIndex` k throughout this document, except 10.2, whose
+    "Room N" stays a room level as defined there.
 - **Off-path rooms** (the optional elite room, side rooms, cache rooms)
   inherit the value of the main-path room they branch from. **(lead's
-  call)**
+  call)** Every square carries an `effectiveIndex` (its `mainPathIndex`
+  where it has one, otherwise the attachment index of its room or
+  branch; Alcoves take their parent's), and `expectedTenths` reads it;
+  the Surprise rule (11.3 invariant 6, 12.2) reads `mainPathIndex`
+  **(change FL-13; floor layout design 3.4)**.
 - **Every group has a `homeRoom`**, fixed at generation: its placement room,
   or, for a patrol, the route room with the highest `expectedTenths`.
   **Cost, `earliestRoomLevel` checks, experience scaling and cow
@@ -881,7 +894,7 @@ A minion counts as ½ a unit.
 
 | Floor | Units | Elites per encounter | Hard-control sources | Controllers | Ranged share | Ambushes per floor | Joining groups per fight |
 |---|---|---|---|---|---|---|---|
-| 1 | 4; ≤2 minions in a solo encounter; ≤2 brutes | Elite room only | 0 **(settled)** | ≤1, not in rooms 1–2 | ≤ ½ | ≤1, not in rooms 1–2 | ≤1 |
+| 1 | 4; ≤2 minions in a solo encounter; ≤2 brutes | Elite room only | 0 **(settled)** | ≤1, not in rooms 1–2 (`mainPathIndex` 1–2; change FL-4) | ≤ ½ | ≤1, not in rooms 1–2 (`mainPathIndex` 1–2; change FL-4) | ≤1 |
 | 2 | 5 | 1 | ≤1, elites and bosses only **(settled)** | ≤1 | ≤ ½ | ≤1 | ≤1 |
 | 3 | 6 | 1 (2 in the elite room) | ≤1 | ≤2 | — | ≤2 | ≤2 |
 | 4–5 | 6 | 2 | ≤1 (≤2 in the boss encounter) | ≤2 | — | ≤2 | ≤2 |
@@ -902,29 +915,53 @@ A floor holds 4–6 fights plus the boss **(settled)**:
 
 | Slot | Count | Placement |
 |---|---|---|
-| Patrol | 1 | Loops through 2–4 rooms, never the entry or boss room, and stays clear of main-path rooms 1 and 2 for the first 20 ticks **(change DH-28)** |
-| Guard post | 3 (2 on a trimmed floor, read from `pacing.trimmedFloors[]`, when lever 3 applies in the lever order of companions 7.4; **change RT-7**; run structure design 6.6) | Main path, at chokepoints and doors |
-| Lair | 1 | Main path, past the midpoint |
-| Optional elite room | 1 (M2) | **Off the main path and visible before commitment.** Its carrier is Stationary and awake, never Dormant. |
+| Patrol | 1 | Loops through 2–4 rooms, never the entry or boss room, and stays clear of main-path rooms 1 and 2 for the first 20 ticks **(change DH-28)**. Realised as the **Circuit**: 2–4 Room nodes, never rooms 0–2, the entry, the arena or the floor-1 antechamber; always the floors 2–5 antechamber, where it lives in the post-lair tail; at least one cover room; on floor 1 it hosts the CL-10 group; every Circuit square at effective path > 8 from each fight host under `hearingState(k)`, with the sight clause and the near-pass rule (floor layout design 6.7) **(change FL-10)** |
+| Guard post | 3 (2 on a trimmed floor, read from `pacing.trimmedFloors[]`, when lever 3 applies in the lever order of companions 7.4; **change RT-7**; run structure design 6.6) | Main path, at chokepoints and doors. Exactly one is route-avoidable (the Bypass target, Gb); every other main-chain fight host is a cut vertex (floor layout design 6.8) **(change FL-9)** |
+| Lair | 1 | Main path, past the midpoint; a cut vertex between the entry and the antechamber (floor layout design 6.2 LG6) **(change FL-9)** |
+| Optional elite room | 1 (M2) | **Off the main path and visible before commitment** (seen through a Grille vantage, which passes sight and noticing only; floor layout design 6.5, 9.2; **change FL-7**). Its carrier is Stationary and awake, never Dormant. |
 | Boss | 1 | An authored arena (17.5) |
 | Trader room (Later) | 0–1, floors 2–4 | An optional off-path side room that can host the wandering trader, a non-combatant map object outside the encounter and cluster budgets **(change I-14; items design 10.9)** |
 
+The placements are unchanged; layout realises them as slot hosts and
+`equivalentHosts` (floor layout design 6.5) **(change FL-3)**.
+
 Floor guarantees (the generator content test asserts each one):
 
-- at least one route where Stealth bypasses a fight;
+- exactly one route-avoidable fight, a guard post: the Bypass (a quiet
+  closed-Door corridor on floor 1; a Squeeze or a quiet two-door
+  corridor on floors 2–5), with Last Turning drawn over the Blueprint's
+  `bypassTargets[]` (floor layout design 6.8) **(change FL-9)**;
 - at least one patrol routed through a room with cover, so the party can
-  set an ambush;
+  set an ambush (the Circuit's `coverRoom`; floor layout design 6.7;
+  **change FL-10**);
 - an awareness mix: at least one patrolling, one stationary and one dormant
   group;
 - **M2:** at least one cowable group, and at least one leader group from
   floor 2 (morale ships in M2, so this is unconditional); floor 1's
   guaranteed cowable group lies on the main path before the boss room
-  (classes design 8.6) **(change CL-10)**;
+  (classes design 8.6) **(change CL-10)**, on main-path Q room 3, which
+  floor 1's Circuit includes (floor layout design 6.5, 6.7; **change
+  FL-10**);
 - **M2:** at least one steal target.
 
 **Cluster budget** (M1): the groups within hearing of any room sum to at
 most 1.5 × that room's budget (`2 × sum ≤ 3 × budget`). For a patrol, use
 the worst point on its route.
+
+Layout proves it statically **(change FL-11; floor layout design
+6.6)**: under `hearingState(k)` (main-path Doors with index < k open;
+in proofs every Door that is not `forcedClosed` counts open), with
+Circuit-internal Doors open, plus generated-state and all-doors-open
+reports; `HearingGap` > 8 effective path between every pair of slot
+homes, repaired draw-free in LS12 over its repairable set; near pairs
+only at effective path 9–10, capped per floor, with `nearPairMinIndex`.
+At runtime noise and pathing read the live graphs. `ChainPullRate`
+target 0.3–0.6 joins per floor *(illustr.)*.
+**Pending (FL-11, the enemies owner's call):** the Gaol `pairDoor`
+reading (a guard post and a neighbour at open path 6–8 through one
+propped-open `pairDoor`, counted closed by the static check; a loosening,
+told plainly) applies only if this owner accepts it; otherwise the Gaol
+uses its one near pair.
 
 **Variety:** no template twice in a row on the main path; each template at
 most 2 times per floor (Picket is exempt on floor 1, where the solo budgets
@@ -942,8 +979,11 @@ Deterministic:
    consumed only at run start; each floor generates from a dungeon child
    stream keyed by floor index **(change RT-3; run structure design
    6.4)**.
-2. **Floor plan** (dungeon stream): assign slots to rooms; fix each slot's
-   homeRoom. **Later (change I-14):** right after the slots are assigned,
+1a. **Layout** (the `layout` child of the floor's dungeon substream):
+   the floor layout design 6.1 runs here and outputs the rooms, main
+   path, slot hosts and `equivalentHosts` **(change FL-3)**.
+2. **Floor plan** (dungeon stream): assign slots to layout's slot hosts;
+   fix each slot's homeRoom **(change FL-3)**. **Later (change I-14):** right after the slots are assigned,
    two dungeon-stream draws for the trader, always both, whatever their
    outcome: presence and stock count (items design 10.9).
 3. **Loot draw** (loot stream): the notable count per channel, then the
@@ -989,14 +1029,19 @@ Deterministic:
 8. **Validate.** On a failure, try the next candidate, up to K tries, then
    fall back to a Picket of the theme's cheapest legal type.
 9. **Cluster pass:** downgrade or move the cheaper neighbour when the
-   cluster budget is exceeded.
+   cluster budget is exceeded. A move stays within the group's slot host
+   or goes to a host layout lists as equivalent for that role
+   (`equivalentHosts`), never off a proven host; the pass is the
+   backstop to layout's `HearingGap` **(change FL-3, FL-11; floor layout
+   design 6.1, 6.6)**.
 10. **Awareness:** set states, patrol routes, lurker placement rolls and
     ambush tells.
 11. **Experience:** fix each group's experience shares (16).
 
 Every step except 3 draws only from the dungeon stream (the floor's
 substream keyed by floor index; **change RT-3**), in the order listed.
-**(lead's call)**
+**(lead's call)** Step 1a draws only from that substream's `layout`
+child (floor layout design 6.1) **(change FL-3)**.
 
 Content test: for every theme × floor in its range × party size 1–4 (at
 every reachable party weight, down to the shortfall minimum, 10.1;
@@ -1080,6 +1125,10 @@ AC (armour design 12.5). **(change AR-25)**
 
 The AI force-door term (Wedge, change SH-18) is added only when the
 Trapwright ships (Shade design 14).
+
+**Pending request (FL-21 (c), M2; floor layout design 15):** a
+doorway-hold AI term, against parties holding a chokepoint doorway; a
+request to this owner, not yet a rule.
 
 **Kill bonus** = min(`killBonus%` × the target's T, 1.5 × the attacker's
 best at-will score). T is the target's best expected one-step score
@@ -1271,6 +1320,13 @@ Measured as path distance, never through walls:
 Modifiers: each closed door on the path −3; Conspicuous +3 **(settled)**;
 Hushed silent **(settled)**; Dormant groups hear at half radius.
 
+Portal kinds **(change FL-7; floor layout design 9.2)**: a closed Door,
+Locked Portal or latched Latch is a closed door (−3); Arches, drawn
+Drapes and Squeezes add 0; corridors add their length; Grilles, the
+Bossgate and unfound secrets are not hearing paths. At runtime the
+radius reads the live hearing graph, each Portal in its current state
+**(change FL-11; floor layout design 6.6)**.
+
 ### 12.4 Joining a fight
 
 **(change M-3)**
@@ -1302,12 +1358,22 @@ Hushed silent **(settled)**; Dormant groups hear at half radius.
    round, at round start, after the joiner checks. **(lead's call)**
 6. **Hearing outline** (M2): out of combat, the map shows which known
    groups a fight *here* would draw in. A chain-pull is then a decision,
-   not an ambush.
+   not an ambush. Listen at a closed door feeds it (floor layout design
+   9.2) **(change FL-18)**.
 
 **Doors:** monsters open unlocked doors (1 square of movement) and never
 close or lock them. Locked doors stop monster paths, which is a Mechanics
 payoff. (Wedge and the force-door term, change SH-18, apply when the
-Trapwright ships; Shade design 14.)
+Trapwright ships; Shade design 14.) Monsters move on the monster
+movement graph: they pass Arches, corridors and Drapes (leaving Drapes
+open) and never use a Squeeze, a Grille, the Bossgate, an unfound secret
+or an unlifted Latch; a Grille passes sight and noticing only **(change
+FL-7; floor layout design 6.6, 9.2)**. Monsters never lift a Latch; its
+`barSideRoomId` is the deeper end, by the return-Portal principle
+**(change FL-19; floor layout design 9.2)**. The party opens unlocked
+doors by moving into them (M1) and may close them (M2) under the party
+door verbs; monster door rules are unchanged **(change FL-8; floor
+layout design 9.2)**.
 
 ### 12.5 Pursuit
 
@@ -1696,8 +1762,14 @@ condition transforms:
 
 ### 14.5 Routed in practice
 
-- **A fixed flee policy, not the scorer:** it Dashes toward the nearest
-  **retreat anchor** marked by generation; it never enters a hazard; it
+- **A fixed flee policy, not the scorer:** it Dashes toward a **retreat
+  anchor** taken from generation's ranking for its fight host and the
+  party's entry Portal (rooms reachable without crossing that Portal,
+  through non-door Portals first; homeRooms of un-engaged groups
+  excluded unless nothing else qualifies): the first anchor the party
+  has not explored, else the farthest, else it is Cornered. Every non-elite
+  fight host has a non-door flee exit (`fleeExit`) **(change FL-12; floor
+  layout design 6.8)**. It never enters a hazard; it
   does **not** Disengage, so leaving the party's reach provokes an
   opportunity attack: a payoff without a chase.
 - **Routed units make no opportunity attacks.** The party may move through
@@ -1748,8 +1820,10 @@ cut), never both **(change HR-19; Herald design 8.3, 10.1)**.
 - It is removed as resolved, with its full experience share.
 - **Interrogation is automatic: one floor fact per fight**, however many
   enemies yield. In priority order: the nearest undiscovered trap on the
-  path to the stairs, an undiscovered secret, the boss's Lore entry, one
-  unexplored room's layout. **The player picks the category** from this
+  path to the stairs (the Stairhead; on floor 5, the main path to the
+  arena; floor layout design 6.11; **change FL-6**), an undiscovered
+  secret (a Hairline secret; floor layout design 9.2; **change FL-17**),
+  the boss's Lore entry, one unexplored room's layout. **The player picks the category** from this
   list; the priority order is the default selection (Pick the Question,
   HX-6; Herald design 10.5) **(change HR-19)**. It is shown in the loot
   summary.
@@ -1952,7 +2026,8 @@ reward card is a separate screen and does not count.
 
 1. **The floor loot budget is a count of notables per channel.** Value
    comes only from each item's record. The split is about 40% containers
-   and secrets, 40% enemy-carried, 20% boss. Illustratively, 6–8 notables
+   and secrets (secret caches count as containers; floor layout design
+   9.2; **change FL-17**), 40% enemy-carried, 20% boss. Illustratively, 6–8 notables
    per floor, of which 2–3 are enemy-carried, plus 1–2 supply and a few
    sundries (Common consumables, outside the notable count, inside the
    fixed budget; from floor 2 at least 1 offensive flask; consumables
@@ -2252,6 +2327,14 @@ covers one level.
 The 110–135% validation check (20.1) runs on the pool without the optional
 elite room, which is extra by design. **(lead's call)**
 
+**Pending request (FL-21 (d), M2; floor layout design 6.8):** a party
+that takes the Bypass **and** times the patrol reaches 540 counting the
+boss (100%), below the 20.1 band, and Den and Sleeper lairs can be
+sneaked past in-room. Options for this owner: drop "Stealth-bypass
+candidate" from the lair templates, re-read 20.1 as "one guard post or
+one Dormant lair", or rely on the camp catch-up, measured by
+`MultiBypassRate`. Not yet ruled.
+
 - **Camp catch-up:** at camp the hero is raised to at least the next
   floor's entry level, and companions with it, before the camp restore
   and the Muster (companions design 7.11) **(change CMP-17)**. Target: this fires in under 20% of runs at camps 2–4
@@ -2339,7 +2422,7 @@ in percent, all illustrative.
 | **Kiter** | Artillery | 60 / 150 / 200 | 5 | Lowest visible AC in range; concentrating units **(change AR-25)** | Keeps 4–6 squares away; steps back when engaged; falls back at 50% HP | M1 |
 | **Mob** | Minion | 150 / 0 / 0 | 1 | Nearest; spreads to free adjacent squares | Surrounds you; ignores danger | M1 |
 | **Automaton** | Mindless | 120 / 0 / 0 | 1 | Nearest, then unit order | No exposure or cohesion terms; walks through minor hazards (the lethal floor still holds) | M1 |
-| **Boss** | Bosses | Authored; `leash: room` | — | Authored | A phase may swap the profile | M1 (M2 adds boss actions) |
+| **Boss** | Bosses | Authored; `leash: room` | — | Authored | A phase may swap the profile. **Pending request (FL-21 (a), M1; floor layout design 6.11):** a Provoked analogue that extends the leash to the Sanctum when the boss is damaged from outside its reach; not yet ruled | M1 (M2 adds boss actions) |
 | **Raider** | Skirmisher | 120 / 120 / 200 | 1 | Lowest visible AC; concentrating units **(change AR-25)** | Hits, then uses leftover movement to leave reach; slips past | M2 |
 | **Protector** | Bodyguard elites | 80 / 60 / 120 | 1 | Whoever threatens its ward | Body-blocks; Challenges the unit nearest the leader | M2 |
 | **Disruptor** | Controller | 80 / 120 / 150 | 3 | Highest T | Spends control on the most dangerous unit; setup at 150% | M2 |
@@ -2347,7 +2430,7 @@ in percent, all illustrative.
 | **Stalker** | Hunter affix, pack beasts | 130 / 80 / 80 | 1 | Its own Quarry | Picks one unit and keeps after it | M2 |
 | **Ambusher** | Lurker | 100 / 150 / 200 | 1 | Lowest HP fraction in reach | Waits Hidden, opens, retreats and Hides again | M2 |
 | **Opportunist** | Skittish scavengers | 100 / 150 / 150 | 1 | Lowest HP fraction above 0 | Picks off the wounded and breaks early | M2 |
-| **Sentinel** | Door, treasure and shrine guards | 80 / 100 / 100 | By kit | Nearest inside its leash | Never leaves its 6-square leash while it can answer. **Provoked (lead's call):** when damaged by a unit it cannot reach from inside its leash, it drops the leash for that fight and switches to Holder with pursuit 2, shown on the plate ("Provoked: leaves post"). Plinking from outside the leash is therefore never free. | M2 |
+| **Sentinel** | Door, treasure and shrine guards | 80 / 100 / 100 | By kit | Nearest inside its leash | Never leaves its 6-square leash while it can answer. **Provoked (lead's call):** when damaged by a unit it cannot reach from inside its leash, it drops the leash for that fight and switches to Holder with pursuit 2, shown on the plate ("Provoked: leaves post"). Plinking from outside the leash is therefore never free. **Pending request (FL-21 (b), M2; floor layout design 6.5):** the Champion's elite uses a Sentinel-style hold, so noticing through a Grille leaves it Alerted but holding; not yet ruled | M2 |
 
 **No per-instance randomness.** Two units of the same type behave the
 same, which is what makes them learnable, and what makes intent reading
@@ -2361,16 +2444,16 @@ same, which is what makes them learnable, and what makes intent reading
 | **Pack** | 1 brute (M2: or skirmisher) + 2–4 minions of one family (2 when solo) | Patrol, guard post or lair | 1+ | Patrol or dormant | Minions share one initiative slot | M1 |
 | **Line and Bow** | 1–2 soldiers or brutes + 1 artillery | Guard post or lair | 1+ | Stationary at a chokepoint | Teaches "go around" | M1 |
 | **Boss Court** | Boss + escort (0–2 standards or a minion pack; no elite on floor 1) | Boss | All | Wary from the start | Boss alone in M1. Escort budget: the shortfall-adjusted party weight × 200% × depth% × ladder%; boss HP ignores the shortfall (17.5) **(change CMP-7)** | M1 / M2 |
-| **Champion** | 1 elite + 1–2 minions or standards, at least one of them an awake **watcher** placed with line of sight to every square adjacent to the elite | Elite room | 1+ (second half of floor 1) | Stationary, awake, visible from the approach | Guaranteed notable item or cache; Steal needs the watcher drawn off first (15.5) | M2 |
+| **Champion** | 1 elite + 1–2 minions or standards, at least one of them an awake **watcher** placed with line of sight to every square adjacent to the elite | Elite room | 1+ (second half of floor 1) | Stationary, awake, visible from the approach (through the Grille vantage behind an opt-in vantage Door; floor layout design 6.5; **change FL-7**) | Guaranteed notable item or cache; Steal needs the watcher drawn off first (15.5). **Pending request (FL-21 (b)):** a Sentinel-style hold for the elite (17.3) | M2 |
 | **Warband** | Leader + 1–2 front + 0–4 minions | Guard post or lair | 2+ | Stationary or dormant | Morale showcase; the usual carrier | M2 |
-| **Den** | Leader-role "mother" (a beast silhouette is allowed) + 1 non-minion standard + 2–4 minions | Lair | 2+ | Dormant | Stealth-bypass candidate. The extra standard keeps one kill from ending the lair (14.3). | M2 |
+| **Den** | Leader-role "mother" (a beast silhouette is allowed) + 1 non-minion standard + 2–4 minions | Lair | 2+ | Dormant | Stealth-bypass candidate. The extra standard keeps one kill from ending the lair (14.3). **Pending request (FL-21 (d)):** in-room sneaks against 20.1 (16) | M2 |
 | **Skirmish Screen** | 2–3 skirmishers | Patrol or guard post | 2+ | Patrol | Tests formation | M2 |
 | **Ambush** | Bait (1 standard or a container) + 1–2 lurkers as a separate group | Guard post × 0.85 | 1+ (after room 2) | Hidden | A visible **tell** within 6 squares; trained Perception marks it on the map | M2 |
 | **Battery** | 2 artillery + 1 soldier (optionally an elite bodyguard) | Guard post | 3+ | Stationary | Banned on floors 1–2 by the ranged cap | M2 |
 | **Honour Guard** | Bodyguard elite + artillery or controller + 0–2 minions | Lair | 2+ | Stationary | Challenged showcase | M2 |
 | **Gauntlet** | Controller + 2 brutes | Lair | 3+ | Dormant or stationary | Hard control on the controller only | M2 |
 | **Scavengers** | 2–3 skittish standards or minions; no elite or leader | Patrol | 1+ | Patrol | Always cowable (content test); fills the cowing guarantee | M2 |
-| **Sleeper** | 1 dormant elite at room level +0 to +2 (its legal elite range, 6.3) + 0–2 dormant standards or minions to reach the fill | Lair | 2+ | Dormant | Stealth bypass or steal target; never cowable (it holds an elite) | M2 |
+| **Sleeper** | 1 dormant elite at room level +0 to +2 (its legal elite range, 6.3) + 0–2 dormant standards or minions to reach the fill | Lair | 2+ | Dormant | Stealth bypass or steal target; never cowable (it holds an elite). **Pending request (FL-21 (d)):** in-room sneaks against 20.1 (16) | M2 |
 | Summoner Circle; Mender's Band; Feud | — | — | 3+ | — | Feud needs AI for monsters hostile to each other | Later |
 | Rival Party | See section 18 | Boss or elite room | 3+ | Wary | At most one per run | Later (stretch) |
 
@@ -2408,7 +2491,9 @@ same, which is what makes them learnable, and what makes intent reading
   Steeled;
 - at least one tool against sustained effects **(settled)**;
 - tuned so that a 5–7 round fight is won by a party with about half its
-  camp resources **(settled)**;
+  camp resources **(settled)**. **Pending request (FL-21 (e), M2; floor
+  layout design 6.8):** tune it including the floors 2–5 patrol arriving
+  as an ordinary joiner, measured by `BossFightJoinRate`; not yet ruled;
 - `fearless`; guile 10 + Wisdom + proficiency + 2, with announced
   signature moves (13.2, 13.3);
 - **a floor-1 boss** (`eligibleFloors` includes floor 1) is never
@@ -2485,12 +2570,18 @@ immunities, never `goad` (Challenged is the tank's settled tool).
   progress it earned, but it cannot whittle a boss down through repeated
   pokes.
 - The exits are never sealed, so fleeing by breaking line of sight still
-  works **(settled)**.
+  works **(settled)**. "Exits" means the arena entrances; the Bossgate to
+  the Stairhead behind the arena is not an entrance and opens on
+  `BossDefeated` (none on floor 5) (floor layout design 6.11) **(change
+  FL-6; a clarification)**.
 
 **The arena** is an authored room template stamped into generation; there
 are no separate arenas **(settled)**:
 
-- at least 2 entrances;
+- at least 2 entrances (kept; realised as two dog-leg Arches from the
+  Forecourt antechamber, ≥ 5 apart, never Doors, with the symmetric
+  `AntechamberScreened`; `AntechamberDominatesArena` on every floor;
+  floor layout design 6.11) **(change FL-5)**;
 - pillars or cover that block line of sight;
 - at least one feature tied to the boss's counterplay (a brazier against an
   ice layer, a chasm edge for shoves);
@@ -2738,7 +2829,15 @@ The build fails when:
 - floor experience, without the optional elite room, falls outside
   110–135% of need after one bypass (seeded generator test; 16); on
   floor 5 only experience earned before the final boss counts **(change
-  RT-7; run structure design 10.2)**;
+  RT-7; run structure design 10.2)**; the bypass case is `SkippablePool`
+  in its structural form (every main-chain fight host but one guard post
+  a cut vertex), read as every entry→antechamber path passing ≥
+  `preBossPool` − 100, with the patrol counted present (floor layout
+  design 6.8) **(change FL-9)**. **Pending request (FL-21 (d)):** the
+  540 multi-bypass case and Den and Sleeper in-room sneaks (16);
+- a Portal breaks `PortalKindsLegal` (the return-Portal principle; a
+  Latch's `barSideRoomId` is its deeper end) (floor layout design 9.2,
+  11.2) **(change FL-19)**;
 - a template's encounter breaks the 3-type cap or the role rule (10.3);
 - an armour rule fails: armour design 17.1 rules 4 (AC band and derived
   speed at every legal shift), 5 (role-answer rule), 6 (notable armour
@@ -3045,16 +3144,16 @@ committed wind-ups (13.2).
 | Expected party level per room along the critical path, in tenths | Budget, room level, experience scaling | M1 |
 | Floor plan slots, with the elite room off the path and visible before commitment | Encounters, loot | M1 / M2 |
 | Path-distance hearing through doors (−3 per closed door); locked doors block monster paths | Joining, cluster budget | M1 |
-| Patrol loops that avoid the entry room and stay clear of main-path rooms 1 and 2 for the first 20 ticks **(change DH-28)** | Awareness | M1 |
-| Retreat anchors (unexplored rooms reachable away from the party) | Routed | M2 |
-| A second route around at least one fight | Stealth guarantee | M1 |
-| A cover room on at least one patrol route | Party ambush | M1 |
+| Patrol loops that avoid the entry room and stay clear of main-path rooms 1 and 2 for the first 20 ticks **(change DH-28)**; answered by the Circuit and Circuit isolation (floor layout design 6.7) **(change FL-10)** | Awareness | M1 |
+| Retreat anchors, ranked per (fight host, party-entry Portal), non-door paths first, with the runtime unexplored filter and fallbacks; a non-door `fleeExit` per fight host, never repaired into a Door; `PartyEscape` and the LG20 entry landing (floor layout design 6.2, 6.8) **(change FL-12)** | Routed | M2 (the flee exit M1) |
+| Exactly one route-avoidable fight, a guard post (the Bypass; floor layout design 6.8) **(change FL-9)** | Stealth guarantee | M1 |
+| A cover room on at least one patrol route; answered by the Circuit's `coverRoom` (floor layout design 6.7) **(change FL-10)** | Party ambush | M1 |
 | Ambush tells within 6 squares; lurker placement | Ambush | M2 |
 | Containers and lair caches for the loot channels | Loot | M1 |
 | Boss arena templates: at least 2 entrances, line-of-sight blockers, a counterplay feature | Bosses | M1 |
 | Hazard placement within theme budgets | Conditions 11 | M2 |
 | When laying out the main path, reserve at least 2 containers openable with no check in main-path rooms before the boss room, one in the first half; a run-time assertion and one retry with the dungeon stream at seed + 1 (death and healing design 12.4 HE-7) **(change DH-32)** | Healing guarantee | M1 |
-| A `mainPathIndex` on every square, corridors taking the lower index of the rooms they join (death and healing design 17.1) **(change DH-32)** | Floor-1 surprise rule (11.3 invariant 6, 12.2) | M1 |
+| A `mainPathIndex` on main-chain rooms, their Alcoves and the Portals joining consecutive main-path rooms (the lower index; arena-adjacent squares take the arena's), null elsewhere, and an `effectiveIndex` on every square (death and healing design 17.1) **(change DH-32; change FL-13; floor layout design 3.4)** | Floor-1 surprise rule (11.3 invariant 6, 12.2) | M1 |
 | Trap ids and a detection snapshot when a trap fires (death and healing design 10.4) **(change DH-32)** | Party trap floor | M1 |
 
 - **Companions:** captives as next-camp Pledges, never mid-floor joins

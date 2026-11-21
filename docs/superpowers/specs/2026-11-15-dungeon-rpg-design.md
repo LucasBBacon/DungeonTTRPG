@@ -201,7 +201,10 @@ real decision, which 5E relies on a DM to enforce.
 ### 4.6 Dungeon, enemies and loot
 
 - Each floor is generated from the run seed as rooms and corridors, with a
-  guaranteed path from entrance to boss.
+  guaranteed path from entrance to boss. Rooms are joined by Portals
+  (doorways, doors, Arches, flaps and corridors of length 0 or more);
+  open-plan themes are partitioned into ordinary rooms that read as one
+  place on screen (floor layout design 6, 7; change FL-1).
 - Each floor has a theme that selects its tiles, enemies and hazards.
   Hazards include fixed condition terrain (conditions design 11).
   Themes are drawn per floor from tiered pools (floor 1; floors 2–3
@@ -321,7 +324,11 @@ computes rules.
   children (companions design 7.2; change CMP-3). A `route` child of
   the dungeon stream is consumed only at run start and draws each
   floor's theme and boss; each floor generates from a dungeon substream
-  keyed by floor index (run structure design 6.4; change RT-3).
+  keyed by floor index (run structure design 6.4; change RT-3). Each
+  floor's dungeon substream has a `layout` child, drawn with fixed counts
+  per Blueprint; the party-agnostic graph is drawn first and the party
+  band picks only size classes; dressing draws from a display-side
+  stream the core never reads (floor layout design 6.1; change FL-2).
 - Rules use integer arithmetic only.
 - No reliance on unordered collection iteration.
 

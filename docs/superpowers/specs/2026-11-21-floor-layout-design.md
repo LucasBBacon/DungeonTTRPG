@@ -1,8 +1,7 @@
 # Floor Layout: Design (Dungeon Generation, Segment 2)
 
 Date: 2026-11-21
-Status: Draft, revised after the design check, awaiting client approval,
-2026-11-21
+Status: Approved, 2026-11-21
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model),
@@ -33,34 +32,37 @@ rules, hearing, the Circuit, stealth, flee and retreat, the per-theme
 grammars, the art kit rules, the adopted mechanics and rejections, the
 clock commitments, the told-plainly items, the FL-n changes, the
 ownership split and hooks, the risks and the critique resolutions.
-**This document as a whole awaits the client's approval.**
+The client approved this document as a whole on 2026-11-21.
 
 Items marked **(lead's call)** were filled in by the design lead inside
-approved rules; they become binding when the client approves this
-document. Items marked **new lead's call** were made while writing this
-document, beyond the proposal the client answered; they are listed in
-19.1 for the client to confirm with the document. Items marked **(lead's
-call, after the check)** were made in the revision that answered the
-design check; they too are listed in 19.1. Items marked
-**(settled)** restate a rule from an approved document; **(decided)**
-marks a main-design client decision. Items marked **(change FL-n)**
-amend an approved document and are listed, with the exact section they
-touch, in section 17; rows that touch **decided** or **agreed** text are
-flagged there, and the client's approval of this document (with Q1–Q3
-where a row names one) covers them. Items marked **(told plainly)**
-narrow or re-read agreed or settled text, or state an unwelcome
-forecast, and are told to the client in plain words in 19.1.
+approved rules; the client confirmed them all on 2026-11-21, when it
+approved this document as a whole, and they are binding. Items marked
+**new lead's call** were made while writing this document, beyond the
+proposal the client answered; they are listed in 19.1 and the client
+confirmed them all on 2026-11-21. Items marked **(lead's call, after
+the check)** were made in the revision that answered the design check;
+they too are listed in 19.1 and the client confirmed them all on
+2026-11-21. Items marked **(settled)** restate a rule from an approved
+document; **(decided)** marks a main-design client decision. Items
+marked **(change FL-n)** amend an approved document and are listed,
+with the exact section they touch, in section 17; rows that touch
+**decided** or **agreed** text are flagged there, and the client's
+approval of this document on 2026-11-21 (with Q1–Q3 where a row names
+one) covers them. Items marked **(told plainly)** narrow or re-read
+agreed or settled text, or state an unwelcome forecast, and were told
+to the client in plain words (19.1); the client confirmed them all on
+2026-11-21. Every item here is binding on the builders.
 
 | Marking | Meaning |
 |---|---|
 | **(settled)** | Restates a rule from an approved document |
 | **(decided)** | A main-design client decision, restated |
 | **(agreed)** | A client answer: Q1–Q3 of this document (2026-11-21), or one recorded in an approved document, restated |
-| **(lead's call)** | Filled in by the design lead inside approved rules; binding once the client approves this document |
-| **new lead's call** | A lead's call made while writing this document, beyond the answered proposal; listed in 19.1 for the client to confirm |
-| **(lead's call, after the check)** | A lead's call made when revising the document after the design check; listed in 19.1 for the client to confirm |
+| **(lead's call)** | Filled in by the design lead inside approved rules; confirmed by the client with this document on 2026-11-21 |
+| **new lead's call** | A lead's call made while writing this document, beyond the answered proposal; listed in 19.1 and confirmed by the client on 2026-11-21 |
+| **(lead's call, after the check)** | A lead's call made when revising the document after the design check; listed in 19.1 and confirmed by the client on 2026-11-21 |
 | **(change FL-n)** | Amends an approved document; listed with its exact section in 17 |
-| **(told plainly)** | Narrows or re-reads agreed or settled text, or states an unwelcome forecast; told to the client in plain words (19.1) |
+| **(told plainly)** | Narrows or re-reads agreed or settled text, or states an unwelcome forecast; told to the client in plain words (19.1) and confirmed by the client on 2026-11-21 |
 | *(illustr.)* | An illustrative number, owned by the builders and calibrated by the M2 simulator (10, 11) |
 
 The client's brief: dungeon generation segment 2 of 12, floor layout.
@@ -1047,7 +1049,8 @@ zero. Joiners stay a real, player-caused experience.
     stock back to the client; supply cap 2 last.
   - The Forecourt is never guaranteed safe while the patrol lives. Once
     the party has defeated the patrol, the Forecourt is as restable as
-    any cleared room, one step from the arena. `PreBossRestSafety` is
+    any cleared room, one step from the arena (the reading of Q2
+    confirmed by the client on 2026-11-21, 19.1). `PreBossRestSafety` is
     therefore a **gated report**: if parties rest in a cleared Forecourt
     on more than 50% *(illustr.)* of floors 2–5, it comes back to the
     client with the options in 19.2.
@@ -2223,18 +2226,23 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
 
 ## 17. Changes to approved documents
 
-To be applied when the client approves this document. **This document
-edits no parent document itself**; the rows are applied by the owners
-of the sections they touch **(lead's call)**, and rows owed by other
-owners are listed again in 18. Every row names the exact section it
-touches. Rows that touch **decided** or **agreed** text are flagged in
-the "Flag" column; **the client's approval of this document covers
-them** (with Q1–Q3 where a row names one). Rows that touch the RS
-catalogue (agreed, RS Q4) or charter (agreed, RS Q3) are flagged too
-**(new lead's call)**, although each only renames a field, fills a hook
-or restates a reading. Told-plainly rows are told in 19.1. FL-21 is a
-set of requests to the enemies owner and changes nothing until that
-owner rules.
+Applied on 2026-11-21, when the client approved this document. **This
+document edits no parent document itself**; the rows are applied by the
+owners of the sections they touch **(lead's call)**, and rows owed by
+other owners are listed again in 18 and recorded as such. Every row
+names the exact section it touches. Rows that touch **decided** or
+**agreed** text are flagged in the "Flag" column; **the client's
+approval of 2026-11-21 covers them** (with Q1–Q3 where a row names
+one). Rows that touch the RS catalogue (agreed, RS Q4) or charter
+(agreed, RS Q3) are flagged too **(new lead's call)**, although each
+only renames a field, fills a hook or restates a reading. Told-plainly
+rows were told in 19.1 and confirmed by the client on 2026-11-21.
+FL-21 is a set of requests to the enemies owner, recorded as requests;
+it changes nothing until that owner rules. Conditional rows are
+recorded now and apply only when their condition is met: FL-11's Gaol
+`pairDoor` reading only if the enemies owner accepts it. M3 items are
+recorded as M3 items and apply at M3: FL-6's Way Back (built off by
+default) and the Supper's floor-3 window (RS 8.9).
 
 **Narrowings recorded inside this design (no approved text changes):**
 - the floor-1 Forecourt's "short safe walk" stays near-safe by RS 9.4's
@@ -2312,10 +2320,15 @@ The owed rows are the single list in 17; by owner:
 
 ## 19. Open items for the client
 
-**This document awaits the client's approval as a whole.** The three
-questions were answered on 2026-11-21 **(agreed)**; the told-plainly
-items, the new lead's calls and the lead's calls after the check below
-are put to the client with the document.
+None. Approved by the client on 2026-11-21.
+
+The client approved this document as a whole on 2026-11-21, including
+every lead's call (the new lead's calls and the lead's calls after the
+check in 19.1), the told-plainly items (including "Told plainly after
+the check") and the lead's reading of Q2. The three questions were
+answered on 2026-11-21 **(agreed)**. The future items in 19.2, which
+come back only if a report or a later design triggers them, and the
+naming pass remain future items.
 
 ### 19.1 This document
 
@@ -2346,7 +2359,7 @@ option:**
 The client also said everything else in the proposal stands as written
 (front matter).
 
-**Told plainly:**
+**Told plainly; confirmed by the client on 2026-11-21:**
 - **floor 3 runs over its 19–22 min target at heavy exploration**
   (20.5–22.9 on the toy, 10.3);
 - **floors 4–5 at party 4 pass the clock gate only narrowly** (lean
@@ -2383,7 +2396,8 @@ The client also said everything else in the proposal stands as written
   (7.6).
 
 **New lead's calls made while writing this document** (beyond the
-answered proposal; for the client to confirm with the document):
+answered proposal; confirmed by the client on 2026-11-21, with this
+document):
 1. **Arch replaces "Opening"** as the name of the open-doorway Portal
    kind, because "Opening" is the Shade's precision feature; the
    proposal's Opening and Arch are one kind (3.4, 9.2).
@@ -2417,7 +2431,8 @@ answered proposal; for the client to confirm with the document):
     and floor-1 secrets going unfound (15).
 
 **Told plainly after the check** (the design check of 2026-11-21 found
-these; none overrides a client answer):
+these; none overrides a client answer); confirmed by the client on
+2026-11-21, with this document:
 - **On floors 2–5 the patrol always lives in the post-lair tail.** The
   Circuit must hold the Forecourt and no other fight host, the lair is a
   cut vertex and only one fight is route-avoidable, so no lap can reach
@@ -2469,14 +2484,15 @@ these; none overrides a client answer):
 - **A failed out-of-combat Squeeze costs time, not a retry loop** (+4
   ticks, then the party is through) (9.2).
 
-**One reading for the client to confirm:** the lead reads Q2's "never
-guaranteed safe" as "never safe while its patrol lives", so a party that
-kills the patrol may rest in the Forecourt, as in any cleared room. If
-the client meant more (the Forecourt contested even after the patrol
-dies), the options are in 19.2; option (c) needs the enemies owner.
+**The lead's reading of Q2, confirmed by the client on 2026-11-21:**
+"never guaranteed safe" means "never safe while its patrol lives", so a
+party that kills the patrol may rest in the Forecourt, as in any
+cleared room. The remedies in 19.2 (options (a) to (c) under
+`PreBossRestSafety`; (c) needs the enemies owner) stay future items,
+triggered only by a report.
 
-**Lead's calls after the check** (for the client to confirm with the
-document; each is marked in the text):
+**Lead's calls after the check** (confirmed by the client on 2026-11-21,
+with this document; each is marked in the text):
 1. Stream derivation, retry re-derivation and the weighted-pick method;
    fixed slot lists and the per-Blueprint draw count; the canonical node
    order (6.1).
