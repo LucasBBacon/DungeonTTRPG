@@ -232,7 +232,7 @@ Vanguard 16, conditions 14, enemies 13, stat model 11, weapons 11, main
 
 | Source | Binding text | What it means here |
 |---|---|---|
-| Main 4.1 **(decided)** | Camps give "full rest, a shop or reward, and a chance to recruit"; a run is 4–5 floors of 15–20 minutes; one save slot per run | Recruiting is a camp service apart from the shop-or-reward choice (items 10.4, I-13); the clock (7.4) |
+| Main 4.1 **(decided)** | Camps give "full rest, a shop or reward, and a chance to recruit"; a run is 5 floors of 15–20 minutes **(change RT-1, run structure design 6.1)**; one save slot per run | Recruiting is a camp service apart from the shop-or-reward choice (items 10.4, I-13); the clock (7.4) |
 | Main 4.2 **(decided)** | "Up to 2–3 companions"; fixed class; automatic levelling with a choice at a few key levels; the player controls every member; companions are downed, never killed | Cap 3 inside "2–3" (7.4); 8.1–8.2; 8.5 |
 | Main 4.7 **(decided)** | Unlocks add companions; one starting boon; no permanent stat boosts | Kit unlocks and Lone Road recognition (M3), never stats (7.7) |
 | Main 6.3 **(decided)** | One seed; separate random streams | The `recruit` stream (7.2; CMP-3) |
@@ -624,19 +624,18 @@ preview**. Its Hold card is not needed, because nothing is missable.
 | Camp | Reached after | Ladder | Muster shown | Hires this visit |
 |---|---|---|---|---|
 | — | — (floor 1) | 0 | never | 0 |
-| Camp 1 | Floor-1 boss (hero at level 3, subclass just chosen, classes 7.3) | 1 | always | 1 |
+| Camp 1 | Floor-1 boss (hero at level 3 since the floor-1 antechamber, subclass chosen there before the boss, classes 7.3; change RT-8, run structure design 9.4) | 1 | always | 1 |
 | Camp 2 | Floor-2 boss | 2 | always (open slot, or swap) | 1, or 2 with a carried hire |
 | Camp 3 | Floor-3 boss | 3 | always (open slot, or swap) | 1, or 2 with a carried hire |
-| Camp 4 (5-floor runs) | Floor-4 boss | 3 | open slot or swap | 1, or 2 with a carried hire |
+| Camp 4 | Floor-4 boss | 3 | open slot or swap | 1, or 2 with a carried hire |
 
 - An always-hiring player is at 1 / 2 / 3 / 4 / 4: the enemies 6.3
   column, the Herald design 5.4 toy schedule, HE-6's n = 4 cells and
   items 5.2's "party of four".
-- **Stranded slot (told plainly, on the forecast).** The carried hire
-  holds one hire only. A player who declines at camps 1 and 2 can hire at
-  most 2 at camp 3; on a 4-floor run the third slot is then out of reach.
-  The Travel-on forecast says so ("Next camp: up to 2 hires; 1 slot will
-  stay empty on a 4-floor run").
+- **Stranded slot (told plainly).** The carried hire holds one hire
+  only. A player who declines at camps 1 and 2 can hire at most 2 at
+  camp 3; with 5 floors the third slot is always reachable through camp 4
+  **(change RT-1, run structure design 6.1)**.
 - **Under the cap-2 fallback** (7.4) the ladder is `min(k, 2)`,
   `slotOpensAtCamp` becomes [1, 2] and `expectedCompanions` becomes 0 /
   1 / 2 / 2 / 2. **No new slot opens at camp 3.** A party below the cap
@@ -895,7 +894,11 @@ Q2)**:
    "ready" glint (the internal design target is a 5–6 s companion turn);
 2. enemy playback fast-forward and **grouped playback by intent** (all
    minions animate together; an M2 requirement);
-3. fewer or shorter fights on floors 4–5 (enemies owner);
+3. fewer or shorter fights on floors 4–5 (enemies owner): floors 4–5
+   drop to 2 guard posts, the floor-4 boss pays 300 experience and the
+   floor-5 lair 240, read from `pacing.trimmedFloors`; applied only in
+   this order, never by default **(change RT-7, run structure design
+   6.6)**;
 4. `companion.extraAttackAsDie` (CMP-28); the weapons D-c fallback only
    when its own weapons 11.3 trigger fires (companion-turn median over 10
    s and off-hand turns measurably slower); no M2 kit dual-wields, so D-c
@@ -944,8 +947,8 @@ internal design target; ability 11.4's playtest target is unchanged.
   companion and hire one.
 - **Swap forecast (new lead's call).** A swap made while the party has an
   open slot shows on its confirmation: "Swapping uses this camp's hire:
-  your party stays at N" and, when it applies, "1 slot will stay empty on
-  a 4-floor run" (no carried hire is earned, because someone was hired).
+  your party stays at N" (no carried hire is earned, because someone was
+  hired; the 4-floor line is deleted, change RT-1).
 - **A plain dismissal** (no newcomer) frees the slot; the ladder lets a
   later camp refill it. Its confirmation says "X leaves for good".
 - **What leaves (change CMP-21):** every item instance issued by a
@@ -1135,7 +1138,8 @@ solo floor, just before the first recruit. A Pledge found on floor 1
 
 ### 7.11 The camp and the Muster screen
 
-**Camp order (lead's call; change CMP-31 on DH 13.1):**
+**Camp order (lead's call; change CMP-31 on DH 13.1; step 6a and the
+door commit at step 11 change RT-10, RT-11, run structure design 6.8):**
 1. Downed companions get up (DH 13.1 step 1);
 2. **camp catch-up** (enemies 16) for the hero and every companion, with
    their level-up choices and any skill offer resolved here, hero first
@@ -1145,6 +1149,12 @@ solo floor, just before the first recruit. A Pledge found on floor 1
 4. every lingering condition ends, Scarred included (DH 13.1 step 3);
 5. +1 supply (DH 13.1 step 4);
 6. the hero's potion top-up (DH 13.1 step 5; DH 13.2);
+6a. **the next-floor card** (random build); when route choice is on (run
+    structure design 6.11), **both door cards** at camps 1–2; at
+    camp 4, **the final-boss card**, or **the Last Hollow choice** when
+    the Last Hollow choice is on (run structure design 6.11). Information
+    comes before the Muster, so hires, swaps, purchases and Herald card
+    swaps can respond to it;
 7. the party's skills, the hero's Leadership training and mastery are
    snapshotted; card A is resolved (7.3) and the Eye's card shown or
    skipped (9.2);
@@ -1152,11 +1162,14 @@ solo floor, just before the first recruit. A Pledge found on floor 1
    at the vendor); a recruit joins at the post-catch-up hero level;
 9. vendor (DH 13.1 step 6);
 10. shop or reward (unchanged, **decided**, main 4.1; items 10.4);
-11. Travel on (the narrowed top-up re-check, 7.6; floor N + 1 is
-    generated with the final party).
+11. Travel on (the narrowed top-up re-check, 7.6; when route choice is
+    on (run structure design 6.11), it commits the chosen door, which can
+    be changed until then; floor N + 1 is generated with the final
+    party).
 
-A hero who reaches camp 1 at level 2 is raised to 3 at step 2, before the
-Muster, and the recruit's join card shows the L3 choice; a skill the
+The hero already reached level 3 at the floor-1 antechamber **(change
+RT-8, run structure design 9.4)**, so the recruit's join card at camp 1
+shows the L3 choice; a skill the
 catch-up grants (say Medicine) moves card A to the next need (11.5).
 
 **Two-tier card (lead's call):**
@@ -1178,7 +1191,8 @@ on) **(lead's call)**:
 - worst-member Stealth ("Party Stealth +4 → +1");
 - turn load ("+1 turn per round");
 - on Travel on: "Fewer companions: smaller fights, but every blow lands
-  on fewer of you", and the carried-hire and stranded-slot lines (7.1);
+  on fewer of you", and the carried-hire line (7.1; the stranded-slot
+  line is deleted, change RT-1);
 - on a swap made while a slot is open: the swap forecast lines (7.6).
 
 **First-recruit beat (M2, cosmetic; lead's call):** on a run's first
@@ -2256,8 +2270,9 @@ The three questions this design raised were answered on 2026-11-20
   (7.1; CMP-2);
 - DH 18.1 and 18.2 verdicts read the M2 simulator only; DH 18.2's
   "checked against playtests" stands beside them (CMP-29);
-- the stranded slot: a player who declines camps 1 and 2 cannot fill the
-  third slot on a 4-floor run, and the forecast says so (7.1);
+- the stranded slot: a player who declines camps 1 and 2 can hire at
+  most 2 at camp 3, and with 5 floors the third slot is always reachable
+  through camp 4 (7.1; change RT-1, run structure design 6.1);
 - the companions toy's healer figures are not evidence for any gate
   (10.7);
 - CMP-1, CMP-3 and CMP-4 touch decided or agreed text (main 4.1, main

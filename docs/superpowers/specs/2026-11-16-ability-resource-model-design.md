@@ -80,8 +80,8 @@ From the parents:
   stored; rules in the pure C# core; content in data. **(settled)**
 - 8-direction square grid; a diagonal step costs 1; symmetric visibility.
   **(settled)**
-- Levels 1–10 over 4–5 floors; a level-up about every 8–10 minutes.
-  **(settled)**
+- Levels 1–10 over 5 floors (run structure design 6.1); a level-up
+  about every 8–10 minutes. **(settled)**
 
 ## 4. Approaches considered
 

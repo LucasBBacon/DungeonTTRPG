@@ -83,8 +83,8 @@ These would make the game a failure even if everything works.
 
 ### 4.1 The run
 
-- A run is 4–5 floors. Each floor takes roughly 15–20 minutes and ends in a
-  boss. **(decided)**
+- A run is 5 floors. Each floor takes roughly 15–20 minutes and ends in a
+  boss. **(decided)** (run structure design 6.1; change RT-1)
 - The hero reaches about level 10 by the end of a run, so a level-up arrives
   about every 8–10 minutes. **(decided)**
 - Between floors the party reaches a camp: full rest, a shop or reward, and
@@ -94,7 +94,12 @@ These would make the game a failure even if everything works.
   vendor (supply, potions in limited pre-rolled stock, tonics, Remedy,
   mundane bases). "A shop or reward" is a choice between a notables shop (1–2
   notables) and a camp reward card, separate from the boss reward card
-  (enemies design 17.5). **(decided)** (items design 10.3, 10.4)
+  (enemies design 17.5). **(decided)** (items design 10.3, 10.4) Each
+  camp shows the next floor's theme; when route choice is on (run
+  structure design 6.11), camps 1–2 offer a choice of two next floors
+  (run structure design 6.8–6.11; change RT-10), and when the Last
+  Hollow choice is on (run structure design 6.11), camp 4 offers a pick
+  of the final boss (change RT-11).
 - A run can be saved and resumed, but there is one save slot per run and it
   is deleted on death. **(decided)**
 
@@ -199,13 +204,19 @@ real decision, which 5E relies on a DM to enforce.
   guaranteed path from entrance to boss.
 - Each floor has a theme that selects its tiles, enemies and hazards.
   Hazards include fixed condition terrain (conditions design 11).
+  Themes are drawn per floor from tiered pools (floor 1; floors 2–3
+  band; floor 4), or picked from two drawn candidates when route choice
+  is on (run structure design 6.11), with no repeat in a run; floor 5 is
+  always the fixed final theme with a final-boss pool (run structure
+  design 6.3–6.5; change RT-2).
 - Enemies are placed using a difficulty budget that grows with depth:
   party weight × band% × depth% × ladder% (enemies design 10.1).
 - Notable loot is a fixed per-floor budget, split by channel and pre-rolled
   on the loot stream. Enemies carry part of it and never add to it
   (enemies design 15.3).
 - Bosses are hand-designed. Which boss appears on a floor is drawn from a
-  pool.
+  pool; the final boss may be picked at camp 4 when the Last Hollow
+  choice is on (run structure design 6.11; change RT-11).
 
 All decided.
 
@@ -215,11 +226,15 @@ All decided.
 
 - **Content unlocks lead.** Milestones add species, classes, subclasses,
   companions and loot to the pool. Examples: beat the floor 2 boss; win as a
-  multiclass character.
+  multiclass character. From M3, themes and final bosses also join the
+  unlockable content, never power (run structure design 8.12; change
+  RT-18, M3).
 - **One starting boon.** Before a run the player picks a single earned boon,
   such as an heirloom item or a background perk. Boons add variety and do
   not stack.
-- **Difficulty ladder.** Each win unlocks an optional harder tier.
+- **Difficulty ladder.** Each win unlocks an optional harder tier. From
+  M3, Nightmare tiers add kind, not stats, and the Perilous Door makes
+  the ladder per-floor (run structure design 9.1; change RT-21, M3).
 - **No permanent stat boosts.**
 - **Hub.** A simple camp screen to begin with. A richer hub is out of scope
   until the run itself is proven.
@@ -303,7 +318,10 @@ computes rules.
   Opening a chest must not change the next attack roll. A `recruit` stream
   sits beside them, with per-camp, per-slot and gap substreams and
   `armReroll`, `eyeReroll`, `cosmetic` and reserved `pledge` (Later)
-  children (companions design 7.2; change CMP-3).
+  children (companions design 7.2; change CMP-3). A `route` child of
+  the dungeon stream is consumed only at run start and draws each
+  floor's theme and boss; each floor generates from a dungeon substream
+  keyed by floor index (run structure design 6.4; change RT-3).
 - Rules use integer arithmetic only.
 - No reliance on unordered collection iteration.
 
@@ -398,8 +416,8 @@ monster in data.
 |---|---|---|
 | M0 Skeleton | Solution, automated tests, command and event loop, Godot draws a placeholder 3D isometric grid and moves a unit | Does the core and display split work? |
 | M1 Vertical slice | One class, levels 1–3, one generated floor, three enemy types, one boss, basic loot, permadeath | Is the loop fun? Does the effects system hold? |
-| M2 Full run | Four classes, companions, 4–5 floors, level 10, pick-one-of-three offers, save and resume | Does a 1–2 hour run hold together? |
-| M3 Between runs | Profile, unlocks, starting boons, difficulty ladder | Do players come back? |
+| M2 Full run | Four classes, companions, 5 floors (change RT-1), level 10, pick-one-of-three offers, save and resume | Does a 1–2 hour run hold together? |
+| M3 Between runs | Profile, unlocks, starting boons, difficulty ladder; in-run content: Two Doors at camp 3, Omens, Seams, Nightmare tiers (run structure design 12; change RT-19, M3) | Do players come back? |
 | M4 Breadth | Species, multiclassing, more content, balance passes with the simulator | Is every run different? |
 
 M1 covers species selection only if it is trivial to include; otherwise

@@ -138,7 +138,7 @@ All **(settled)**:
 
 | Source | Binding text | What it means here |
 |---|---|---|
-| Main design 4.1, 4.5, 4.7, 9 (decided) | 4–5 floors, about level 10, a level-up every 8–10 minutes; species and class at creation; four classes in the first full run, more through unlocks; a choice every level; multiclassing only once single-class paths are fun | Launch four (7.1); the ladder (7.4); unlocks (9); multiclass guards (7.7) |
+| Main design 4.1, 4.5, 4.7, 9 (decided) | 5 floors **(change RT-1; run structure design 6.1)**, about level 10, a level-up every 8–10 minutes; species and class at creation; four classes in the first full run, more through unlocks; a choice every level; multiclassing only once single-class paths are fun | Launch four (7.1); the ladder (7.4); unlocks (9); multiclass guards (7.7) |
 | Main design 4.2 | The player builds one hero in full; companions have a fixed class and lighter progression | Companion kits (7.8) |
 | Stat model 5.1, 5.4–5.6 | Starting spread, the class suggests where values go; species give no points; Presence is always the hero's; each ability a main or a sensible second (target) | Suggested arrays (8); Herald (8.6); species (7.9) |
 | Stat model 6, 7.2 | One trained save per class; ability difficulty from the class's main ability; 2–3 skills from the class list; mastery only through offers | Save principle (8.2); skill lists (8) |
@@ -411,6 +411,12 @@ tolerance and the miss rules lead's call)**
     splits by what does vary: the floor-1 theme's non-fearless share of
     its roster (enemies 10.4 allows 50–100%; bands *(illustr.)* 50–74%
     and 75–100%) and whether the boss's escort can be cowed or routed.
+    **(change RT-9)** The floor-1 pool defaults to 750‰ or more
+    non-fearless (inside the 50–100% bands), except that a theme below
+    75% non-fearless joins the floor-1 pool only with `F1EscortBreakable`
+    (every escort and reserve group of its floor-1 bosses drawn from
+    non-fearless types) and a passing reference-arm `Floor1ClassSpread`
+    in its split (run structure design 8.2).
     **The 10-point limit applies inside every split,** not only to the
     pooled number.
   - **Per-class floor-1 death share** (report): each class's floor-1
@@ -694,9 +700,10 @@ Why A:
 All **(lead's call)** except the level, which is **(settled, ability
 10.1)**.
 
-- **At level 3,** as approved. The subclass lands at the end of the solo
-  floor, just before the first recruit: the player has played the verb
-  alone and now picks the lens for the party game.
+- **At level 3,** as approved. The subclass lands at the floor-1
+  antechamber, before the boss **(change RT-8; Antechamber Catch-up, run
+  structure design 9.4)**: the player has played the verb alone and now
+  picks the lens for the party game.
 - **Two per class at M2.** The Vanguard has a third, because the
   Weaponmaster ships in M1. Further subclasses come through unlocks (main
   4.7), as "aspects" that change one rule. **(change AS-1)** An aspect

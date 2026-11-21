@@ -762,6 +762,7 @@ Illustrative set:
 | Web | Restrained (the web is the binding; breakers fire and slashing) | Restrained | M2 |
 | Fire | Burning | Burning | M2 |
 | Oil slick | Oiled | Oiled | M2 |
+| Bile | Corroded | — | M2 **(change RT-13; run structure design 8.10)** |
 
 - A square's data names the condition, its trigger (`onEnter`,
   `onTurnEnd` or both), its contest (a save type and difficulty, or
@@ -828,9 +829,10 @@ the outcome is the lead's call)**
 
 - **M1:** no condition terrain. Pushes and drags stop before hazard
   squares.
-- **M2:** water, web, fire and oil-slick squares; their condition data;
-  Oiled and the burn-away rule; the hazard-edge, landing and
-  drag-into-hazard rules. **(agreed)**
+- **M2:** water, web, fire, oil-slick and bile squares; their condition
+  data; Oiled and the burn-away rule; the hazard-edge, landing and
+  drag-into-hazard rules. **(agreed; bile squares added by change RT-13,
+  approved by the client 2026-11-21; run structure design 8.10)**
 
 ### 11.6 Sources, and traps
 
@@ -855,6 +857,10 @@ the outcome is the lead's call)**
 - The rest of SH-15 (the hand trigger, Trigger Shot, re-arm at 500‰ and
   a hard part at most once per fight) applies when the Trapwright ships
   (Shade design 14).
+- **Open item, pending ruling (RT-16):** whether a trap's conditions must
+  come from the floor theme's 6 (16), or the trap is damage-only. Not yet
+  ruled; nothing changes until the conditions owner rules (run structure
+  design 8.0, 17).
 
 ## 12. Immunities and bosses
 
@@ -1058,6 +1064,17 @@ Enforced by content validation. **(lead's call)**
 - A theme that places water squares must also field a cold or lightning
   threat, and may not rely mainly on fire and acid enemies, because water
   would otherwise be a free cure and a fire resistance.
+- **Open items, pending rulings (requested by the run structure design
+  17; not yet ruled, nothing changes until the conditions owner rules):**
+  - **RT-14** (needed before M2 rosters freeze): whether conditions granted
+    by the universal hazard-edge and landing rules (10.2, 10.3), such as
+    Teetering, do not count toward a theme's 6. Until ruled, themes count
+    Teetering and name a fallback drop (run structure design 8.0).
+  - **RT-15:** whether radiant counts 2 toward a theme's 6, and whether
+    Revealed is harmful at all. No M2 theme deals radiant; it blocks only
+    the M3 Mirror Court and Moth Wedding (run structure design 8.0, 8.12).
+  - **RT-16:** whether trap conditions come from the theme's 6 or the trap
+    is damage-only (11.6).
 
 ## 17. Data and the core
 

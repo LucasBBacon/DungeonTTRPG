@@ -224,7 +224,7 @@ Each piece as its own slot is a good fantasy and the wrong rule here, for
 reasons of arithmetic:
 
 1. **Loot volume.** About 33–42 notables per run (6–8 per floor across
-   4–5 floors, plus camp 1–2; roughly one per fight; settled, enemies
+   5 floors (run structure design 6.1), plus camp 1–2; roughly one per fight; settled, enemies
    15.1, 15.3). A unit has 5 notable-holding places today (2 weapon sets,
    armour, 2 trinkets), 20 for a party of four. Head, hands and feet add
    12 places (+60%); one real offer per new place needs about +12

@@ -1359,9 +1359,11 @@ Treat and Recovery, plus the supply left and the patrol warning
   chain with every roll and its odds; the band at the hero's last turn
   end (recomputed by replay, 17.2); what was left unspent, worded
   neutrally ("2 potions on the belt"), never as blame.
-- **Floor-entry card** with the guaranteed counts (G6), and a party-bar
-  tally "found 1 of at least 1": the healing potions picked up this floor
-  from containers and carriers, whatever their source. The `guaranteed`
+- **Floor-entry card** headed by the **Stratum Card** (theme name, act,
+  signature line, damage types, non-fearless band, boss name; run
+  structure design 6.9) above the guaranteed counts (G6) **(change
+  RT-12)**, and a party-bar tally "found 1 of at least 1": the healing
+  potions picked up this floor from containers and carriers, whatever their source. The `guaranteed`
   flag on `LootTaken` stays for reports only.
 
 ### 17.13 Movement undo (Later)
@@ -1434,7 +1436,10 @@ Treat and Recovery, plus the supply left and the patrol warning
 | Win rate, competent player | Roughly a quarter to a third of runs |
 
 - **"Competent player"** is the simulator's reference party policy (19.3)
-  over the release seed set, checked against playtests.
+  over the release seed set, checked against playtests. When route choice
+  is on (`route.twoDoorsEnabled`; run structure design 6.11), it picks
+  doors with the Reference chooser inside that policy, and the
+  random-draw baseline is stated beside it **(change RT-10)**.
 - **Reading (lead's call):**
   - floor 1 passes when the upper bound of a 95% interval on the floor-1
     hero-death share, over the release seed set, is under 5%;
@@ -1498,6 +1503,14 @@ the boss; drinks at Risky; opens every main-path container. **One enemy
 round** = FloorDiv(max HP × `sim.restRoundPermille`, 1000), with
 `sim.restRoundPermille` 250 *(illustr.; the 6.4 per-turn expected guard)*
 **(lead's call)**.
+
+**When route choice is on (`route.twoDoorsEnabled`; run structure design
+6.11):** the reference policy picks the next floor at each door camp with
+the **Reference chooser**: the door whose theme has the higher floor-clear
+rate in the ThemeParity table for (hero class, party size, floor), read at
+that floor's fixed arrival state; ties go to Door A. Random and Oracle
+choosers are reported beside it. With the switch off, every floor takes
+Door A (the random draw) **(change RT-10)**.
 
 ## 20. Data and the core
 

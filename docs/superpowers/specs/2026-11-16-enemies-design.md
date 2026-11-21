@@ -325,7 +325,10 @@ Authored on the base type. The composed unit exists only at runtime.
 | On hover or inspect | Gear line, with the weapon's verb ("Pike: piercing, reach 2, Set · Chain mail: heavy, Ringed"; changes W-5, AR-19), "Carries: …", cooldowns and uses, the morale profile and break line, traits once revealed by Lore, the intent line (13.3) |
 
 A UI test renders the worst legal composed elite on each floor at minimum
-zoom.
+zoom. From M2 it runs per theme, beside the readability charter's gates
+(a greyscale value test per theme, a silhouette lineup of all factions ×
+roles at minimum zoom, colour-blind simulation of the damage types and
+square kinds) **(change RT-17; run structure design 7.4)**.
 
 ## 6. Power scale and guards
 
@@ -645,7 +648,13 @@ the composed unit.
 **Silhouette rule:** a unit's role must be readable at isometric zoom from
 its model and issue gear, before any Lore. A bow means artillery, a tall
 shield means soldier, a banner means leader. Issue helms (crests on
-leaders) are display-only props. **(change AR-23)**
+leaders) are display-only props. **(change AR-23)** The readability
+charter's **role prop grammar** extends it: leaders carry a vertical
+emblem; soldiers a tall flat object (shield, door, tray, coffin lid,
+chair); artillery points something forward; brutes are oversized mass
+inside one square; skirmishers lean low; controllers have an orbiting
+element; lurkers show a tell at rest; minions are small and share one
+palette **(change RT-17; run structure design 7.4 RC2)**.
 
 ### 8.2 Composition order
 
@@ -656,7 +665,8 @@ Fixed, and run on the dungeon random stream:
 3. rank template (minion or elite);
 4. affixes (elites only);
 5. theme overlay (M2: swaps one damage part's type and adds the matching
-   trait profile);
+   trait profile; drawn only from the theme's `legalOverlays[]`, each of
+   which keeps the theme's 6) **(change RT-6; run structure design 8.0)**;
 6. loadout, including the notable item pre-assigned by the loot plan (15.3).
 
 ### 8.3 Affix rules
@@ -689,8 +699,9 @@ The catalogue is in 17.2.
   4–5; each affix at most once per encounter and at most once per floor;
   at most one aura affix per encounter.
 - **Content tests** enumerate every legal base × level shift × elite × affix
-  (and affix pair) × theme overlay. A broken combination fails the build,
-  not a run.
+  (and affix pair) × theme overlay (every entry of the theme's
+  `legalOverlays[]`; **change RT-6**). A broken combination fails the
+  build, not a run.
 
 ## 9. Kit-building rules
 
@@ -745,6 +756,10 @@ The single counting rule for "2 conditions per enemy type". **(change C-2)**
   Terrain conditions also count toward the 6 **(settled)**. **(change C-4)**
   In practice this pushes each theme to 2–3 damage types, which also helps
   readability.
+  **Pending ruling (RT-15, conditions owner):** whether the radiant
+  rider counts 2 toward the theme's 6, and whether Revealed is harmful
+  at all. Not decided here; no M2 theme deals radiant, so it blocks only
+  M3 themes that do (run structure design 8.0).
 - **Counts toward neither:** own-side buffs (Rallied, Spurred, Helped,
   Warded on itself). They do count toward the wave's condition budget and
   the plate.
@@ -832,7 +847,9 @@ with `FloorDiv` (3.1). **(change M-4)**
 - depth%: 80 / 90 / 100 / 105 / 110 for floors 1–5. This meets main design
   4.6's "grows with depth" and cools the solo floor 1;
 - ladder%: 100 at the base tier, +10 per difficulty tier. The ladder never
-  raises caps or raw stats.
+  raises caps or raw stats. **M3:** Nightmare tiers add kind, not stats,
+  and the Perilous Door (+1 ladder on one floor) makes the ladder
+  per-floor **(change RT-21, client, M3; run structure design 9.1)**.
 
 The generator fills each encounter to **85–100%** of its budget, never
 over: from the fill minimum of 3.1 (⌈85%⌉) up to the budget. An **ambush**
@@ -886,7 +903,7 @@ A floor holds 4–6 fights plus the boss **(settled)**:
 | Slot | Count | Placement |
 |---|---|---|
 | Patrol | 1 | Loops through 2–4 rooms, never the entry or boss room, and stays clear of main-path rooms 1 and 2 for the first 20 ticks **(change DH-28)** |
-| Guard post | 3 | Main path, at chokepoints and doors |
+| Guard post | 3 (2 on a trimmed floor, read from `pacing.trimmedFloors[]`, when lever 3 applies in the lever order of companions 7.4; **change RT-7**; run structure design 6.6) | Main path, at chokepoints and doors |
 | Lair | 1 | Main path, past the midpoint |
 | Optional elite room | 1 (M2) | **Off the main path and visible before commitment.** Its carrier is Stationary and awake, never Dormant. |
 | Boss | 1 | An authored arena (17.5) |
@@ -920,7 +937,11 @@ appears at least twice.
 Deterministic:
 
 1. **Inputs:** rooms, main path, `expectedTenths` per room (6.3), party
-   weight, ladder tier, theme.
+   weight, ladder tier, theme, and the floor's boss. Theme and boss come
+   from the route pre-roll on the `route` child of the dungeon stream,
+   consumed only at run start; each floor generates from a dungeon child
+   stream keyed by floor index **(change RT-3; run structure design
+   6.4)**.
 2. **Floor plan** (dungeon stream): assign slots to rooms; fix each slot's
    homeRoom. **Later (change I-14):** right after the slots are assigned,
    two dungeon-stream draws for the trader, always both, whatever their
@@ -958,10 +979,12 @@ Deterministic:
    a slot whose role and `usableBy` fit its item.
 6. **Fill** each slot against *budget − the item's cost add*, from the
    fill minimum to the budget (3.1), honouring `earliestRoomLevel` and the
-   caps. Candidates are tried in a fixed order. A boss is drawn only from
-   records whose `eligibleFloors` include the floor; on floor 1 only bosses
+   caps. Candidates are tried in a fixed order. The boss is not drawn
+   here: it is the step-1 input, the first drawable entry of the route
+   pre-roll's boss order for the (theme, floor) cell, over records whose
+   `themes[]` and `eligibleFloors` match the cell; on floor 1 only bosses
    passing `Floor1BossMindReachable` (17.5) are placed **(change HR-21;
-   Herald design 7.16)**.
+   Herald design 7.16; change RT-3; run structure design 6.4 R-SEED-3)**.
 7. **Compose:** affixes, overlay, loadout; freeze each unit's `cost`.
 8. **Validate.** On a failure, try the next candidate, up to K tries, then
    fall back to a Picket of the theme's cheapest legal type.
@@ -971,12 +994,15 @@ Deterministic:
     ambush tells.
 11. **Experience:** fix each group's experience shares (16).
 
-Every step except 3 draws only from the dungeon stream, in the order
-listed. **(lead's call)**
+Every step except 3 draws only from the dungeon stream (the floor's
+substream keyed by floor index; **change RT-3**), in the order listed.
+**(lead's call)**
 
 Content test: for every theme × floor in its range × party size 1–4 (at
 every reachable party weight, down to the shortfall minimum, 10.1;
-**change CMP-8**) × band × ladder tier, every allowed template fills
+**change CMP-8**) × band × ladder tier (and, since the boss is an input,
+every boss record of that (theme, floor) cell; **change RT-3**), every
+allowed template fills
 within tolerance, and every
 slot of the floor plan has at least one allowed template. The test runs on
 the M1 roster and templates separately, so the M1 floor is proven fillable
@@ -1008,6 +1034,21 @@ M2.
 - **Next-floor line at camp:** every party sees the next floor's theme and
   its non-fearless band ("Next floor: theme X, about Y% non-fearless"),
   class-blind and information only **(change HR-23; Herald design 5.7)**.
+  When route choice is on (`route.twoDoorsEnabled`, run structure design
+  6.11), a door camp shows one such line per door **(change RT-10)**.
+- **Theme record:** the record of run structure design 8.0, including
+  `tier` (a pool and presentation tag), `eligibleFloors` (at most 2
+  adjacent), `pairKey` (`primaryDamageType`, `squareKind`), `final`,
+  `shipStatus`, `counterType`, `themeDamage`, `hardenedLayer`, `frost`,
+  `legalOverlays[]`, `placementRules[]` and the Keepsake fields
+  (`keepsakeProps`, `keepsakeArenaDressing`) **(change RT-2, RT-4)**.
+- **Pools:** themes are drawn per floor from tiered pools (floor 1;
+  floors 2–3 band; floor 4), or picked from two drawn candidates when
+  route choice is on, with no repeat in a run; floor 5 is always the
+  fixed final theme with a final-boss pool. Pool rules RP1–RP6 (no
+  repeat, ContrastAdjacent, morale floor, RouteSufficiency, weakness
+  coverage, damage spread) bind every theme **(change RT-2; run structure
+  design 6.3–6.5)**.
 
 ## 11. Enemy AI
 
@@ -2173,7 +2214,13 @@ Coated stay Later **(change CN-26)**. The original list:
 - patrol 70, guard post 100, lair 140, elite room 160, boss 200 (escort and
   reserves included);
 - ambushes pay their band's value even though they are filled at 85%;
-- joiners keep their own value.
+- joiners keep their own value;
+- **on a trimmed floor** (`pacing.trimmedFloors[]`, lever 3, applied only
+  in the lever order of companions 7.4): a trimmed floor 4 pays boss 300,
+  a trimmed floor 5 pays lair 240 (boss 200); a trimmed floor 3 (when
+  the list is [3, 4, 5]) is paid as floor 4. The 10.1 budget bands (boss
+  200, lair 140) are unchanged **(change RT-7; run structure design 6.6,
+  10.2)**.
 
 It is split into **per-member shares** by frozen `cost` (10.1): integer
 arithmetic, with the remainder going to the highest-cost member, then unit
@@ -2199,13 +2246,17 @@ covers one level.
 | Baseline: patrol + 3 guard posts + lair + boss | 710 | 131% |
 | One guard post bypassed | 610 | 113% |
 | Plus the optional elite room | 870 | 161%, which level scaling damps |
+| Trimmed floor 4: 2 guard posts, boss 300 **(change RT-7)** | 710; 610 after one bypass | 131%; 113% |
+| Trimmed floor 5: 2 guard posts, lair 240 **(change RT-7)** | 510 before the final boss; 410 after one bypass | Only experience earned before the final boss counts |
 
 The 110–135% validation check (20.1) runs on the pool without the optional
 elite room, which is extra by design. **(lead's call)**
 
 - **Camp catch-up:** at camp the hero is raised to at least the next
   floor's entry level, and companions with it, before the camp restore
-  and the Muster (companions design 7.11) **(change CMP-17)**. Target: this fires in under 20% of runs.
+  and the Muster (companions design 7.11) **(change CMP-17)**. Target: this fires in under 20% of runs at camps 2–4
+  **(change RT-8)**; the floor-1 Antechamber Catch-up raises the hero to level 3 before the floor-1 boss
+  **(change RT-8; run structure design 9.4)**.
 - **Banking:** experience is banked and resolved at combat end
   **(settled)**.
 
@@ -2241,7 +2292,7 @@ affix costs ×1.2. **Gentle** means legal on floor 1.
 |---|---|---|---|---|---|
 | Defence | **Warded** (gentle) | Warded with 1 charge (2 on floors 4–5), `oncePerLife` | 1+ | Any | M2 |
 | Defence | **Plated** (gentle) | Armour counts as **heavy** for category-reading rules only (so Corroded's +1, the piercing rider and the stealth penalty apply), +2 AC as the `traits` term of the AC query, never part of the armour value (outside the ±1 base band, governed by the threat band: 5.2, 6.5), speed −1 as the heavy speed penalty, paid once (armour design 6.1, 7.3) **(change AR-27)** | 1+ | Brute, soldier, leader | M2 |
-| Defence | **Hardened** | One theme layer with its breaker shown. Inside the 2-resistance budget, with a weakness alongside. | 2+ | Any | M2 |
+| Defence | **Hardened** | One theme layer (the theme's `hardenedLayer`, whose shown breaker is its `counterType`; **change RT-4**) with its breaker shown. Inside the 2-resistance budget, with a weakness alongside. | 2+ | Any | M2 |
 | Defence | Blurred | 3 charges, `oncePerLife` | 3+ | Skirmisher, lurker, controller | Later |
 | Mobility | **Swift** (gentle) | Speed +2 | 1+ | Brute, skirmisher, lurker | M2 |
 | Mobility | **Slippery** | Immune to `restraint` (its 1 control immunity) | 2+ | Skirmisher, lurker | M2 |
@@ -2249,7 +2300,7 @@ affix costs ×1.2. **Gentle** means legal on floor 1.
 | Sustain | **Vampiric** | On a melee at-will hit, regains half the damage. Withered counters it. | 2+ | Brute, skirmisher | M2 |
 | Sustain | Relentless | Death-warded, `oncePerLife` | 2+ | Not minions | Later |
 | Sustain | Regenerating | Regains 10% of max HP at turn start; Withered suppresses it | 3+ | Brute, soldier | Later |
-| Punish | **Volatile** | Death burst, radius 1, theme damage, Reflex for half. The kill preview shows it. Counted in the guards with its turn maximum (6.4). | 2+ | Brute, leader | M2 |
+| Punish | **Volatile** | Death burst, radius 1, theme damage (the theme's `themeDamage` = its `primaryDamageType`; **change RT-4**), Reflex for half. The kill preview shows it. Counted in the guards with its turn maximum (6.4). | 2+ | Brute, leader | M2 |
 | Punish | Thorned | Retaliating | 3+ | Soldier, brute | Later |
 | Punish | Riposting | Riposting while its reaction is unused | 3+ | Soldier, skirmisher | Later |
 | Command | **Commanding** | Becomes its group's leader: Command (cooldown 3) and the Emboldened aura. Never in a group that already has a leader (8.3). | 2+ | Soldier, controller | M2 |
@@ -2259,7 +2310,7 @@ affix costs ×1.2. **Gentle** means legal on floor 1.
 | Goad | Protector | Guarded on an adjacent ally | 3+ | Soldier | Later |
 | Rider | **Honed** | Its weapon at-will carries its damage type's rider | 2+ | Armed types | M2 |
 | Rider | **Venomous** | Its damaging at-will applies Poisoned on a failed Fortitude save | 2+ | Skirmisher, lurker | M2 |
-| Aura | **Chilling** | Turn-start Fortitude save within 1 square or Chilled; a success gives immunity for the fight **(settled aura rule)** | 3+, frost themes | Brute, soldier | M2 |
+| Aura | **Chilling** | Turn-start Fortitude save within 1 square or Chilled; a success gives immunity for the fight **(settled aura rule)** | 3+, frost themes (themes with `frost`; **change RT-4**) | Brute, soldier | M2 |
 | Aura | Dread | The same shape, Will save or Shaken | 3+ | Leader, controller | Later |
 | Control defence | **Unbreakable** | Unyielding, permanent | 2+ | Any | M2 |
 | Control defence | **Steadfast** | Advantage on saves against `fear` and `goad`; morale profile becomes `fearless`. Not legal if it would break the theme's non-fearless half. | 2+ | Leader, soldier | M2 |
@@ -2336,7 +2387,15 @@ same, which is what makes them learnable, and what makes intent reading
 **Anatomy** (settled items marked):
 
 - hand-designed, from a pool per floor **(settled)**; boss pool records
-  carry `eligibleFloors` **(change HR-21; Herald design 7.16)**;
+  carry `eligibleFloors` **(change HR-21; Herald design 7.16)**, and
+  `themes[]`, `final` and `shipStatus` **(change RT-4; run structure
+  design 6.4, 8.0)**;
+- **the final-boss pool:** floor 5's boss comes from the records marked
+  `final` (2 in M2), drawn by the route pre-roll; when the Last Hollow
+  choice is on (`route.lastHollowChoiceEnabled`, run structure design
+  6.11), the final boss is instead picked at camp 4 from the first two
+  drawable entries of that order **(change RT-11; run structure design
+  6.5)**;
 - the same stat model as every unit **(settled)**;
 - **Unyielding** permanently **(settled)**;
 - **resolve pips:** 2 on floor 1, 2–3 on floors 2–3, 3 on floors 4–5.
@@ -2356,7 +2415,11 @@ same, which is what makes them learnable, and what makes intent reading
   `mindless` and never psychic-immune; class-blind, and a `mind`
   immunity alone passes (`Floor1BossMindReachable`, 20.1). Escort and
   reserve groups are not constrained **(change HR-21; Herald design 7.16;
-  client agreed 2026-11-20, Q3)**;
+  client agreed 2026-11-20, Q3)**, except that a theme below 75%
+  non-fearless joins the floor-1 pool only with `F1EscortBreakable`
+  (every escort and reserve group of its floor-1 bosses drawn from
+  non-fearless types) and a passing reference-arm `Floor1ClassSpread` in
+  its split **(change RT-9; run structure design 8.2)**;
 - never Death-warded **(settled)**; never affixed;
 - **HP** ≈ 6 × the party's typical damage per round × 0.85 (the rest of
   the budget is the escort), of the **actual** party at floor generation,
@@ -2369,7 +2432,8 @@ same, which is what makes them learnable, and what makes intent reading
   10).
 
 **Immunities:** at most 1 damage-type immunity, never to the theme's
-counter type; at least one weakness; at most 2 resistances; at most 2 tag
+counter type (its `counterType`; **change RT-4**; run structure design
+8.0); at least one weakness; at most 2 resistances; at most 2 tag
 immunities, never `goad` (Challenged is the tank's settled tool).
 
 **Kit:**
@@ -2655,7 +2719,10 @@ The build fails when:
 - a boss whose `eligibleFloors` includes floor 1 is `mindless` or
   psychic-immune (`Floor1BossMindReachable`; a `mind` immunity alone
   passes), or a theme that can appear on floor 1 has no compliant
-  floor-1 boss **(change HR-21; Herald design 7.16)**;
+  floor-1 boss **(change HR-21; Herald design 7.16)**, or a theme below
+  75% non-fearless is in the floor-1 pool without `F1EscortBreakable` and
+  a passing reference-arm `Floor1ClassSpread` in its split **(change
+  RT-9; run structure design 8.2)**;
 - a boss has no `signature` ability, or more than 2;
 - a leader type lacks Command;
 - an armed type lacks an `improvised` fallback;
@@ -2669,13 +2736,19 @@ The build fails when:
   more than 4 states;
 - any guarantee or the cluster budget fails per seed;
 - floor experience, without the optional elite room, falls outside
-  110–135% of need after one bypass (seeded generator test; 16);
+  110–135% of need after one bypass (seeded generator test; 16); on
+  floor 5 only experience earned before the final boss counts **(change
+  RT-7; run structure design 10.2)**;
 - a template's encounter breaks the 3-type cap or the role rule (10.3);
 - an armour rule fails: armour design 17.1 rules 4 (AC band and derived
   speed at every legal shift), 5 (role-answer rule), 6 (notable armour
   and shield carriers), 8 (minion armour verbs inert), 15 (AC envelope;
   6.4 guards at the lowest legal party AC) and 19 (an issued loadout
   Strained at any legal shift). **(change AR-29)**
+- a theme validator fails: V1 ThemeBudget, V2 BossCoverage, V3
+  PoolRules, V4 ThemeFloorFill, V5 RouteEnumeration, V6
+  RouteDeterminism, V7 CharterChecks **(change RT-17; run structure
+  design 11.2)**.
 
 ### 20.2 Tests
 
@@ -2727,6 +2800,7 @@ The build fails when:
 | Experience | Pool against need, with and without bypass and cow; catch-up frequency |
 | Loot | Notables placed against the floor budget; loot summary size |
 | Plate | Maximum plate elements on the worst composed unit per floor |
+| Themes | ThemeParity, ClassThemeSpread, FloorTimeByTheme and LevelAtDoorByFloor, read from fixed arrival states at both caps; the charter's readability gates; the other reports of run structure design 11.4 **(change RT-17; run structure design 7.4, 11.4)** |
 | Armour | The armour design's 17.3 reports, monster rows included: 6.4 guards at the party's lowest AC; verb trigger rate with monster rows; piercing hit gain by target category and the combined reduction swing; how often the reaction rule and the roll-mode cap bind **(change AR-29)** |
 
 ## 21. Staging
@@ -2758,7 +2832,9 @@ The build fails when:
 - **M2:**
   - **Types and ranks:** roles skirmisher, controller, leader and lurker;
     elite rank and promotion; the M2 affixes; level shifts and tints;
-    themes (4 themes plus a deep overlay on floor 5).
+    themes (8 themes of 5–7 types, 56 types, and 15 bosses; the floor-5
+    deep overlay retires and returns as Nightmare tier 3 in M3)
+    **(change RT-5; run structure design 8.1, 12)**.
   - **AI:** the remaining profiles; Quarry, focus spread, setup, hold and
     leash; the hearing outline.
   - **Intent reading:** guile, the reading rule, Tactician as Perception
@@ -2780,9 +2856,10 @@ The build fails when:
   next-camp Pledges, never mid-floor joins **(change CMP-10)**; intent reads feeding companion suggestions; **the rival
   adventuring party (stretch goal, section 18)**.
 
-Content volume: M1 = 3 types and 1 boss. M2 = 4 themes of 5–6 types (about
-22 types) plus a deep overlay on floor 5. **(lead's call: 4 themes plus the
-overlay, rather than 5 themes of about 27 types)**
+Content volume: M1 = 3 types and 1 boss. M2 = 8 themes of 5–7 types (56
+types) and 15 bosses, with the pre-authorised Cut 1 and Cut 2 as the
+lever; the floor-5 deep overlay retires (Nightmare tier 3, M3). **(change
+RT-5; client agreed 2026-11-21, Q4; run structure design 8.1, 12)**
 
 ## 22. Risks
 
@@ -2834,8 +2911,9 @@ overlay, rather than 5 themes of about 27 types)**
 - **Precedent.** The morale-state budget raise could invite more
   relabelling. Mitigation: a hard cap of 4 on the morale class, recorded in
   conditions 16.
-- **M2 content volume.** About 22 types, plus affixes, elites and four
-  themes, is the largest M2 content cost. The deep overlay is the lever.
+- **M2 content volume.** 56 types and 15 bosses, plus affixes, elites
+  and eight themes, is the largest M2 content cost. Cut 1 and Cut 2 are
+  the lever **(change RT-5; run structure design 12)**.
 - **The rival party** could pull scope forward. It stays Later and behind
   its prerequisites (18.1).
 - **Protected content.** All content is original or SRD 5.1/5.2-shaped

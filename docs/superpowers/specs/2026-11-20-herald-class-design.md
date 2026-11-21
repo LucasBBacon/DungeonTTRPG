@@ -1398,13 +1398,20 @@ It needs no expertise and does not depend on healing **(lead's call)**.
     non-mindless leader without a psychic immunity to appear on floor 1);
   - the check reads exactly the agreed wording: a `mind` immunity alone
     (for example a fear-immune, non-mindless boss) does not fail it;
-  - escort and reserve groups are not constrained by it.
+  - escort and reserve groups are not constrained by it, except that a
+    theme below 75% non-fearless joins the floor-1 pool only with
+    `F1EscortBreakable` (every escort and reserve group of its floor-1
+    bosses drawn from non-fearless types) and a passing reference-arm
+    `Floor1ClassSpread` in its split (run structure design 8.2; change
+    RT-9, approved by the client 2026-11-21).
 - **Levers if the spread misses,** in order (never healing; never asking
   the generator for a non-fearless boss):
   1. the Totem array default (a per-pick `suggestedArray`, HR-10b);
   2. `stareDown` built in at L1;
   3. Earned Spur;
   4. Faltering reverted to +1d4 plus 1d10 parity checks.
+- **Open item (owed by the Herald owner):** the lever list above for a
+  50–74% non-fearless floor-1 theme (run structure design 8.2 (c), 18).
 
 ### 7.17 Herald companions (requirements for the companions design)
 

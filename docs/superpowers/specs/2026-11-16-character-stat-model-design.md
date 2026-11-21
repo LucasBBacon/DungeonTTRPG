@@ -264,7 +264,7 @@ Rules behind the table:
 | Stealth | Dexterity | Sneak past, set ambushes, steal from unaware enemies: only from a Dormant, Stationary or Patrolling carrier; adjacent; no other awake group member has line of sight; any party member's Stealth against the carrier's passive perception (−5 if Dormant, +5 if Keen), with disadvantage against an awake carrier; one try per carrier per floor; failure starts combat with nobody Surprised (enemies design 15.5) | Hide to break line of sight and strike unseen. A class feature may let Hide succeed without breaking line of sight (classes design 8.4, Vanish); the Stealth roll and Hidden's end rules (conditions 18.7) stay |
 | Mechanics | Intelligence | Find and disarm traps, pick locks (quiet), find secret doors | Re-arm or trigger traps against enemies |
 | Arcana | Intelligence | Identify magic items, read runes and shrines | Use scrolls and wands outside your class; recognise a spell being cast |
-| Lore | Intelligence | Know what a floor's theme is likely to hold | Reveal an enemy's traits, resistances, weaknesses and abilities |
+| Lore | Intelligence | Know what a floor's theme is likely to hold: the roster's types and roles are revealed on entry (enemies design 10.6); M3: the next floor's roles are also shown at camp (run structure design 6.9; RT-10) | Reveal an enemy's traits, resistances, weaknesses and abilities |
 | Perception | Wisdom | Hear what is behind a door; spot hidden enemies | Avoid surprise; find hidden attackers; read an enemy's intent when the party's best passive Perception is at least its guile (enemies design 13.3) |
 | Medicine | Wisdom | Stretch short-rest supplies; cure poison and disease; at a short rest, Treat ends Diseased and Scarred (fixed difficulty, one attempt per Scarred unit per rest), except a talisman's `treatProof` Scarred, which is not offered and uses no attempt (consumables design 14.6) | Get a downed companion back up, at most once per companion per fight (death and healing design 11.2); Treat (an action, adjacent): one roll against each instance's difficulty ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (conditions design 8) |
 | Intimidation | Presence | Make weak groups back off without a fight; cow eligibility and the `broken` flag (enemies design 14.8) | Frighten enemies; break morale when a leader falls; Demand Surrender (enemies design 14.6) |
@@ -319,6 +319,12 @@ its identity. Names are placeholders; theming comes later. **(agreed)**
 | Spirit | Necrotic | Blocks healing |
 
 Poison is a condition, not a damage type. **(agreed)**
+
+- **Open, pending ruling (RT-15; conditions owner):** whether radiant's
+  rider counts 2 toward a theme's 6 harmful conditions, and whether
+  Revealed is "harmful" at all. No M2 theme deals radiant; the ruling
+  blocks only the M3 Mirror Court and Moth Wedding (run structure design
+  8.0, 8.12).
 
 ### 8.2 When a rider applies
 

@@ -1,7 +1,7 @@
 # Run Structure and Floor Themes: Design (Dungeon Generation, Segment 1)
 
 Date: 2026-11-21
-Status: Draft, awaiting client approval, 2026-11-21
+Status: Approved, 2026-11-21
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model),
@@ -28,31 +28,34 @@ client answer recorded in an approved document. The client also said
 that everything else in the lead's proposal stands as written,
 including the told-plainly list, the catalogue, the hooks, the binding
 requirements, the RT-n changes, the risks and the critique resolutions.
+The client approved this document as a whole on 2026-11-21.
 
 Items marked **(lead's call)** were filled in by the design lead inside
-approved rules; they are confirmed when the client approves this
-document. Items marked **new lead's call** were made while writing this
-document, beyond the proposal the client answered; they are listed in
-19.1. Items marked **(settled)** restate a rule from an approved
+approved rules; the client confirmed them all on 2026-11-21, when it
+approved this document as a whole, and they are binding. Items marked
+**new lead's call** were made while writing this document, beyond the
+proposal the client answered; they are listed in 19.1 and the client
+confirmed them all on 2026-11-21. Items marked **(settled)** restate a rule from an approved
 document; **(decided)** marks a main-design client decision. Items
 marked **(change RT-n)** amend an approved document and are listed, with
 the exact section they touch, in section 17; rows that touch
 **decided** or **agreed** text are flagged there, and the client's
-approval of this document (with Q1–Q4 where a row names one) covers
-them. Items marked **(told plainly)** narrow or re-read agreed or
-settled text, or state an unwelcome forecast, and were told to the
-client in plain words with the questions (19.1). Once approved, every
-item here is binding on the builders.
+approval of this document on 2026-11-21 (with Q1–Q4 where a row names
+one) covers them. Items marked **(told plainly)** narrow or re-read
+agreed or settled text, or state an unwelcome forecast, and were told to
+the client in plain words with the questions or after the check (19.1);
+the client confirmed them all on 2026-11-21. Every item here is binding
+on the builders.
 
 | Marking | Meaning |
 |---|---|
 | **(settled)** | Restates a rule from an approved document |
 | **(decided)** | A main-design client decision, restated |
 | **(agreed)** | A client answer: Q1–Q4 of this document (2026-11-21), or one recorded in an approved document, restated |
-| **(lead's call)** | Filled in by the design lead inside approved rules; confirmed with this document |
-| **new lead's call** | A lead's call made while writing this document, beyond the answered proposal; listed in 19.1 |
+| **(lead's call)** | Filled in by the design lead inside approved rules; confirmed by the client with this document on 2026-11-21 |
+| **new lead's call** | A lead's call made while writing this document, beyond the answered proposal; listed in 19.1 and confirmed by the client on 2026-11-21 |
 | **(change RT-n)** | Amends an approved document; listed with its exact section in 17 |
-| **(told plainly)** | Narrows or re-reads agreed or settled text, or states an unwelcome forecast; told to the client in plain words (19.1) |
+| **(told plainly)** | Narrows or re-reads agreed or settled text, or states an unwelcome forecast; told to the client in plain words (19.1) and confirmed by the client on 2026-11-21 |
 | *(illustr.)* | An illustrative number, owned by the builders and calibrated by the M2 simulator (10, 11) |
 
 **Design-check revision (2026-11-21).** After the client's answers, a
@@ -62,8 +65,9 @@ judgement; none changes a Q1–Q4 answer. The id schemes were renamed so
 they collide with no approved id: the charter is **RC1–RC9** (the
 questions called it C1–C9), the pool rules **RP1–RP6**, the tensions
 **RE1–RE18**, and the Appendix A.4 findings **CF-H**, **CF-M** and
-**CF-L**. Changes the client should hear about are listed in 19.1 under
-"Told plainly after the check".
+**CF-L**. Changes told to the client are listed in 19.1 under
+"Told plainly after the check"; the client confirmed them on 2026-11-21,
+with this document.
 
 This is **segment 1 of 12 of dungeon generation**: how a run is shaped
 (floors, cadence, camps, length), how floor themes are chosen, what the
@@ -2310,18 +2314,22 @@ they are built first.
 
 ## 17. Changes to approved documents
 
-To be applied when the client approves this document. **This document
-edits no parent document itself**; the rows are applied by the owners of
-the sections they touch **(lead's call)**, and rows owed by other owners
-are listed again in 18. Every row names the exact section it touches.
-Rows that touch **decided** or **agreed** text are flagged in the
-"Flag" column; **the client's approval of this document covers them**
-(with Q1–Q4 where a row names one). Told-plainly rows were told with the
-questions (19.1). Conditional rows apply only when their condition is
-met: RT-11 and the door parts of RT-10 only when the switches go on
-(6.11); RT-13 only if bile is accepted (the client with this document,
-then the conditions owner); RT-18, RT-19
-and RT-21 at M3.
+Applied on 2026-11-21, when the client approved this document. **This
+document edits no parent document itself**; the rows are applied by the
+owners of the sections they touch **(lead's call)**, and rows owed by
+other owners are listed again in 18 and recorded as such. Every row
+names the exact section it touches. Rows that touch **decided** or
+**agreed** text are flagged in the "Flag" column; **the client's
+approval of 2026-11-21 covers them** (with Q1–Q4 where a row names one).
+Told-plainly rows were told with the questions or after the check
+(19.1) and confirmed by the client on 2026-11-21. The rulings requested
+from other owners (RT-14, RT-15, RT-16) are recorded as requests and
+change nothing until those owners rule. Conditional rows are recorded
+now and apply only when their condition is met: RT-11 and the door parts
+of RT-10 only when the switches go on (6.11). RT-13 (bile) was accepted
+by the client with this document on 2026-11-21; the conditions owner
+applies it. RT-18, RT-19 and RT-21 are recorded as M3 rows and apply at
+M3.
 
 **Narrowings recorded inside this design (no approved text changes):**
 - the floor-1 pool's 750‰ default sits inside the settled 50–100%
@@ -2341,17 +2349,17 @@ and RT-21 at M3.
 | RT-6 | Enemies 8.2 step 5; 8.3 content tests | Step 5 **stays in M2**; each theme lists `legalOverlays` that keep its 6. Restated, no rule change; the 17.2 affix cut stands | — | Enemies owner |
 | RT-7 | Enemies 10.4 slot table (floors 4–5: guard posts 2 when lever 3 applies, read from `pacing.trimmedFloors`); enemies 16 experience list (floor-4 boss 300 and floor-5 lair 240 on trimmed floors; the 10.1 budget bands of 200 and 140 unchanged) and its floor pool check table; 20.1 pool check (on floor 5, only experience earned before the final boss counts); companions 7.4 lever 3 wording | The concrete lever-3 form, applied only in the lever order of companions 7.4 | Touches lead's-call lever text next to agreed levers 5–6 (companions Q2) | Enemies owner; **client told plainly** (the floor-5 form told again after the check, 19.1) |
 | RT-8 | Enemies 16 "Camp catch-up" bullet and its target ("under 20% of runs" → "under 20% of runs at camps 2–4"); classes 7.3 subclass timing ("at the floor-1 antechamber, before the boss"); companions 7.1 camp-1 row; companions 7.11 camp-1 catch-up paragraph ("A hero who reaches camp 1 at level 2 is raised to 3 at step 2 …" → "the hero already reached level 3 at the floor-1 antechamber") | Antechamber Catch-up (9.4) | — | Lead; classes, Shade and Arcanist owners told; **client told plainly** |
-| **RT-9** | Enemies 17.5 floor-1 boss bullet ("Escort and reserve groups are not constrained", **agreed**, Herald Q3); enemies 20.1 floor-1 boss rule; Herald 7.16 content-rule bullet "escort and reserve groups are not constrained by it"; classes 5.6 | Add: "except that a theme below 75% non-fearless joins the floor-1 pool only with `F1EscortBreakable` (every escort and reserve group of its floor-1 bosses drawn from non-fearless types) and a passing reference-arm `Floor1ClassSpread` in its split"; the floor-1 pool's 750‰ default | **Agreed** (HR-21, Herald Q3) | **Client, with this document; told plainly** |
+| **RT-9** | Enemies 17.5 floor-1 boss bullet ("Escort and reserve groups are not constrained", **agreed**, Herald Q3); enemies 20.1 floor-1 boss rule; Herald 7.16 content-rule bullet "escort and reserve groups are not constrained by it"; classes 5.6 | Add: "except that a theme below 75% non-fearless joins the floor-1 pool only with `F1EscortBreakable` (every escort and reserve group of its floor-1 bosses drawn from non-fearless types) and a passing reference-arm `Floor1ClassSpread` in its split"; the floor-1 pool's 750‰ default | **Agreed** (HR-21, Herald Q3) | **Client, with this document (approved 2026-11-21); told plainly and confirmed** |
 | **RT-10** | Main 4.1 camp bullet "Between floors the party reaches a camp: full rest, a shop or reward, and a **Muster** ..." (**decided**, as amended by CMP-1); enemies 10.6 next-floor line (HR-23: one line per door when Two Doors is on); companions 7.11 camp order (new step 6a; step 11 Travel on commits the door); DH 18.2 "competent player" reading and **DH 19.3** (the Reference chooser inside the reference party policy when Two Doors is on); stat model 7.1 (Lore roster preview at camp, M3) | Add to main 4.1: "Each camp shows the next floor's theme; when route choice is on, camps 1–2 offer a choice of two next floors (run structure design 6.8–6.11)". The camp card, door cards and their place in the camp order | **Decided** (main 4.1 camp bullet) | **Client (agreed 2026-11-21, Q2)**; the door parts apply only when `route.twoDoorsEnabled` is on |
 | **RT-11** | Main 4.1 camp bullet (**decided**); main 4.6 boss bullet "Which boss appears on a floor is drawn from a pool." (**decided**); enemies 17.5 (a final-boss pool); companions 7.11 camp 4 | The Last Hollow choice at camp 4; main 4.6 reads "... drawn from a pool; the final boss may be picked at camp 4 when the Last Hollow choice is on" | **Decided** (main 4.1, 4.6) | **Client (agreed 2026-11-21, Q2)**; applies only when `route.lastHollowChoiceEnabled` is on |
 | RT-12 | DH 17.12 floor-entry card | The Stratum Card header (6.9) above the guaranteed counts | — | Lead; DH owner applies |
-| **RT-13** | Conditions 11.2, 11.5 (the M2 square set "water, web, fire and oil-slick squares", **agreed**) | The bile square (Corroded on entry) added to the M2 square set; no new condition id | **Agreed** (conditions 11.5) | **Client, with this document; conditions owner applies**; told plainly (19.1) |
+| **RT-13** | Conditions 11.2, 11.5 (the M2 square set "water, web, fire and oil-slick squares", **agreed**) | The bile square (Corroded on entry) added to the M2 square set; no new condition id | **Agreed** (conditions 11.5) | **Client, with this document (approved 2026-11-21); conditions owner applies**; told plainly and confirmed (19.1) |
 | RT-14 | Conditions 16 | Ruling requested: "conditions granted by the universal hazard-edge and landing rules (10.2, 10.3) do not count toward a theme's 6". Fallback drops listed per theme | — | Conditions owner (needed before M2 rosters freeze) |
 | RT-15 | Enemies 9.2; conditions 16; stat model 8.1 | Ruling requested: whether radiant counts 2, and whether Revealed is "harmful" at all. Blocks the M3 Mirror Court and Moth Wedding only | — | Conditions owner |
 | RT-16 | Conditions 11.6, 16 | Ruling requested: trap conditions come from the theme's 6, or the trap is damage-only | — | Conditions owner |
 | RT-17 | Enemies 8.1 (role prop grammar, extending AR-23), 5.6 UI test, 20.1, 20.3 | Charter gates (7.4); V1–V7; ThemeParity; ClassThemeSpread; FloorTimeByTheme; LevelAtDoorByFloor; the reports of 11.4 | — | Lead; **client (agreed 2026-11-21, Q3)** for the charter |
 | **RT-18** | Main 4.7 "Content unlocks lead" (**decided**) | Themes and final bosses join the unlockable content (M3), never power | **Decided** | **Client (M3)** |
-| **RT-19** | Main 9 M3 row (**decided**) | M3 also carries in-run content: Two Doors at camp 3, Omens, Seams, Nightmare tiers | **Decided** | **Client, told with this document** |
+| **RT-19** | Main 9 M3 row (**decided**) | M3 also carries in-run content: Two Doors at camp 3, Omens, Seams, Nightmare tiers | **Decided** | **Client, told with this document (approved 2026-11-21)**; applies at M3 |
 | RT-20 | Trinkets 23 | The hazard-edge ask applies from floor 2 (floor 1 is dry by design) | — | Trinkets owner; **told plainly** |
 | **RT-21** | Main 4.7 "Difficulty ladder" (**decided**); enemies 10.1 ladder% ("never raises caps or raw stats" kept) | Nightmare tiers add kind, not stats; the Perilous Door makes the ladder per-floor | **Decided** | **Client (M3)** |
 
@@ -2393,9 +2401,14 @@ The owed rows are the single list in 17; by owner:
 
 ## 19. Open items for the client
 
-Awaiting approval of this document as a whole, including every lead's
-call, the told-plainly items and the new lead's calls in 19.1. The four
-questions were answered on 2026-11-21 **(agreed)**.
+None. Approved by the client on 2026-11-21.
+
+The client approved this document as a whole on 2026-11-21, including
+every lead's call, the told-plainly items (including "Told plainly after
+the check") and the new lead's calls in 19.1. The four questions were
+answered on 2026-11-21 **(agreed)**. The future items in 19.2, which
+come back only if a report or a later design triggers them, and the
+naming pass remain future items.
 
 ### 19.1 This document
 
@@ -2431,7 +2444,8 @@ questions were answered on 2026-11-21 **(agreed)**.
   schedule fallbacks; build order Heart and Gut first. Rejected: B, plan
   Cut 1; C, plan Cut 2; D, the approved scope.
 
-**Told plainly with the questions:**
+**Told plainly with the questions; confirmed by the client on
+2026-11-21:**
 - the companions toy predicts the floor-time gate fails at a cap of 3,
   so the cap-2 fallback is likely; levers 1–2 are mandatory; theme
   choice cannot fix the clock (10.1);
@@ -2451,14 +2465,15 @@ questions were answered on 2026-11-21 **(agreed)**.
 - the M2 core is about 2.8× the approved content cost (10.4).
 
 **Told plainly after the check** (fixes the lead applied after the
-answers; none changes a Q1–Q4 answer):
+answers; none changes a Q1–Q4 answer); confirmed by the client on
+2026-11-21, with this document:
 - **lever 3 on floor 5:** the final boss's experience is paid when the
   run ends, so on floor 5 the trimmed 100 moves to the lair (240)
   instead of the boss; floor 4 keeps boss 300. `Level10BeforeFinalBoss`
   becomes a gate whenever lever 3 applies (6.6, 10.2, RT-7);
 - **bile squares touch agreed text:** the M2 square set of conditions
-  11.5 is agreed, so RT-13 is now flagged and covered by the client's
-  approval of this document (17);
+  11.5 is agreed, so RT-13 is flagged and covered by the client's
+  approval of this document on 2026-11-21 (17);
 - **ThemeParity is a build gate under the random draw too** (8 points),
   so a matchup gap cannot ship as a dice tax; a theme that fails is held
   until tuning passes, and a hold that matches no pre-authorised cut
@@ -2481,7 +2496,8 @@ answers; none changes a Q1–Q4 answer):
   (8.0); the id schemes became RC, RP, RE and CF (front matter).
 
 **New lead's calls made while writing this document** (beyond the
-answered proposal; confirmed with the document):
+answered proposal; confirmed by the client with the document on
+2026-11-21):
 1. **Two switches:** `route.twoDoorsEnabled` and
    `route.lastHollowChoiceEnabled` are separate; the Last Hollow choice
    goes on only with Two Doors and only if BossParity also passes, so

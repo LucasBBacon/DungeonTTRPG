@@ -1537,8 +1537,9 @@ grants.
   Locket), Inspired and its Leadership-mastery owner (Muse's Token),
   Bolstered.
 - **Dungeon generation:** hazard edges and crossable hazards per floor
-  (Ledgewalker, Leaper's); water and oil squares (Wader's); Jumping
-  sources (main design 4.3).
+  (Ledgewalker, Leaper's), from floor 2: floor 1 is dry by design
+  **(change RT-20)** (run structure design 6.3, 14); water and oil
+  squares (Wader's); Jumping sources (main design 4.3).
 - **Enemy content:** the Support role (Graveward exclusions, Later);
   grapplers and web or net users (Grappler's Gauntlets); lurkers (Watcher's
   Hood, Visored Helm).
