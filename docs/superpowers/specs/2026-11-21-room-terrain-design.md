@@ -1,7 +1,7 @@
 # Room Shapes and Tactical Terrain: Design (Dungeon Generation, Segment 3)
 
 Date: 2026-11-21
-Status: Draft, awaiting client approval, 2026-11-21
+Status: Approved, 2026-11-21
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model),
@@ -39,37 +39,39 @@ interactions, the readability and art kit rules, the adopted, deferred
 and rejected mechanics, the numbers, the staging, the ownership split
 with segments 4 and 5, the binding requirements, the TR-n changes, the
 told-plainly items, the future items, the risks and the critique
-resolutions. **The document as a whole awaits the client's approval.**
+resolutions. The client approved this document as a whole on 2026-11-21.
 
 Items marked **(lead's call)** were filled in by the design lead inside
 approved rules and were in the proposal the client answered; the client
-confirms them by approving this document. Items marked **new lead's
-call** were made while writing this document, beyond that proposal; they
-are listed in 19.1 for the client to confirm with this document. Items
-marked **(lead's call, after the check)** were made while revising this
+confirmed them all on 2026-11-21, when it approved this document as a
+whole, and they are binding. Items marked **new lead's call** were made
+while writing this document, beyond that proposal; they are listed in
+19.1 and the client confirmed them all on 2026-11-21. Items marked
+**(lead's call, after the check)** were made while revising this
 document after the builder, consistency, play and art check of
-2026-11-21; they are listed in 19.3, for the client to confirm with this
-document. Items
-marked **(settled)** restate a rule from an approved document;
+2026-11-21; they are listed in 19.3 and the client confirmed them all on
+2026-11-21. Items marked **(settled)** restate a rule from an approved document;
 **(decided)** marks a main-design client decision. Items marked
 **(change TR-n)** amend an approved document and are listed, with the
 exact section they touch, in section 17; rows that touch **decided** or
 **agreed** text are flagged there, and the client's approval of this
-document (with Q1–Q5 where a row names one) will cover them. Items
-marked **(told plainly)** narrow or re-read agreed or settled text, or
-state an unwelcome forecast, in plain words; they are listed in 19.1.
-Once approved, every item here is binding on the builders.
+document on 2026-11-21 (with Q1–Q5 where a row names one) covers them.
+Items marked **(told plainly)** narrow or re-read agreed or settled
+text, or state an unwelcome forecast, and were told to the client in
+plain words (19.1, and 19.3 for those told after the check); the client
+confirmed them all on 2026-11-21. Every item here is binding on the
+builders.
 
 | Marking | Meaning |
 |---|---|
 | **(settled)** | Restates a rule from an approved document |
 | **(decided)** | A main-design client decision, restated |
 | **(agreed)** | A client answer: Q1–Q5 of this document (2026-11-21), or one recorded in an approved document, restated |
-| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal; confirmed by the client with this document |
-| **new lead's call** | A lead's call made while writing this document, beyond the answered proposal; listed in 19.1 for the client to confirm with this document |
-| **(lead's call, after the check)** | A lead's call made while revising this document after the 2026-11-21 check; listed in 19.3; never overrides a client answer |
+| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal; confirmed by the client with this document on 2026-11-21 |
+| **new lead's call** | A lead's call made while writing this document, beyond the answered proposal; listed in 19.1 and confirmed by the client on 2026-11-21 |
+| **(lead's call, after the check)** | A lead's call made while revising this document after the 2026-11-21 check; listed in 19.3 and confirmed by the client on 2026-11-21; never overrides a client answer |
 | **(change TR-n)** | Amends an approved document; listed with its exact section in 17 |
-| **(told plainly)** | Narrows or re-reads agreed or settled text, or states an unwelcome forecast; told to the client in plain words (19.1) |
+| **(told plainly)** | Narrows or re-reads agreed or settled text, or states an unwelcome forecast; told to the client in plain words (19.1) and confirmed by the client on 2026-11-21 |
 | *(illustr.)* | An illustrative number, owned by the builders and calibrated by the M2 simulator (10, 11) |
 
 The client's brief: dungeon generation segment 3 of 12, room shapes and
@@ -167,7 +169,7 @@ TR-3, TR-4): yes from M2, none in M1.**
   cover-giver stands on a square next to the target that faces the
   attacker, within 45 degrees of the line to it (the integer dot-product
   facing test, CV2; the 45-degree bound is a lead's call after the
-  check, told plainly).
+  check, told plainly and confirmed by the client on 2026-11-21).
 - **No three-quarter tier.** "Full cover" stays what it is today: no
   line of sight.
 - **The effect is −2 to the attack roll** *(illustr., a lever)*:
@@ -280,7 +282,8 @@ TR-18, TR-19).**
   of a floor's fight rooms; a reservation step makes this and every
   other floor-level quota hold on every seed (6.2.5).
 
-**Told plainly** (19.1): cover is symmetric and can raise enemy
+**Told plainly** (19.1; confirmed by the client on 2026-11-21): cover
+is symmetric and can raise enemy
 artillery damage; the terrain packages cost about +0.8 to +1.6 min per
 floor on floors already over the clock gate, held by a net rounds gate;
 the Vanguard rejection is reversed for objects; decided main 2 changes
@@ -2585,18 +2588,25 @@ Segment 3 takes the knock-into *system*, not drop hazards.
 
 ## 17. Changes to approved documents
 
-To be applied when the client approves this document. **This document
-edits no parent document itself**; the rows are applied by the owners of
-the sections they touch **(lead's call)**, and rows owed by other owners
-are listed again in 18. Every row names the exact section it touches.
-Rows that touch **decided** or **agreed** text are flagged in the "Flag"
-column; **the client's approval of this document will cover them** (with
-Q1–Q5 where a row names one; the answers of 2026-11-21 already agree
-each of those rows in substance). Requests (TR-13, TR-14, TR-15, TR-21)
-change nothing until their owner rules; TR-13's one-instance cap and
-TR-15's `NoCheapKill` are agreed in substance by Q3, so only their
-conditions and enemies wording awaits the owners. Conditional rows apply only when
-their condition is met. M3 rows are recorded now and apply at M3.
+Applied on 2026-11-21, when the client approved this document. **This
+document edits no parent document itself**; the rows are applied by the
+owners of the sections they touch **(lead's call)**, and rows owed by
+other owners are listed again in 18 and recorded as such. Every row
+names the exact section it touches. Rows that touch **decided** or
+**agreed** text are flagged in the "Flag" column; **the client's
+approval of 2026-11-21 covers them** (with Q1–Q5 where a row names one;
+the answers of 2026-11-21 already agreed each of those rows in
+substance). Told-plainly rows were told in 19.1 and 19.3 and confirmed
+by the client on 2026-11-21. TR-13, TR-14, TR-15 and TR-21 are requests
+to other owners, recorded as requests; they change nothing until their
+owner rules. TR-13's one-instance cap and TR-15's `NoCheapKill` are
+agreed in substance by Q3, so only their conditions and enemies wording
+waits on those owners. Conditional rows are recorded now and apply only
+when their condition is met: the Supper Poisoned rows that TR-14 ties
+to the RT-14 ruling, including every M3 row that uses Poisoned in the
+Supper (6.5.5). M3 items are recorded as M3
+items and apply at M3: TR-27 (Remnants and the main 2 exception), TR-28,
+and TR-6's Overturn and Haul.
 
 **Narrowings recorded inside this design (no approved text changes):**
 - Brink reads harm squares but not contact hazards (read literally);
@@ -2684,14 +2694,18 @@ The owed rows are the single list in 17; by owner:
 
 ## 19. Open items for the client
 
-**One: approval of this document as a whole.** The five questions were
-answered on 2026-11-21 **(agreed)**; the client also said everything
-else in the proposal stands as written. Approving this document confirms
-every lead's call, the new lead's calls below, the lead's calls made
-after the check (19.3) and the told-plainly items, and covers the
-flagged rows of 17. The future items in 19.2,
-which come back only if a report or a later design triggers them, and
-the naming pass remain future items.
+None. Approved by the client on 2026-11-21.
+
+The client approved this document as a whole on 2026-11-21, including
+every lead's call (the lead's calls of the answered proposal, the new
+lead's calls in 19.1 and the lead's calls after the check in 19.3), the
+told-plainly items (including "Told plainly after the check" in 19.3,
+notably the 45-degree bound on the cover test) and the partial
+rejections in 19.3, and its approval covers the flagged rows of 17. The
+five questions were answered on 2026-11-21 **(agreed)**; the client also
+said everything else in the proposal stands as written. The future items
+in 19.2, which come back only if a report or a later design triggers
+them, and the naming pass remain future items.
 
 ### 19.1 This document
 
@@ -2734,7 +2748,7 @@ the naming pass remain future items.
   party-triggered cloud is player-made ground effect in substance (told
   plainly) (6.6). Rejected: B, never.
 
-**Told plainly** (for the client to confirm with this document):
+**Told plainly; confirmed by the client on 2026-11-21:**
 - **the clock:** the adopted terrain package is estimated at +0.8 to
   +1.6 min per floor *(illustr.)*, on floors already over the 20-minute
   gate on the toy; it ships only under a net rounds gate (net
@@ -2773,7 +2787,8 @@ the naming pass remain future items.
   lower bounds (10).
 
 **New lead's calls made while writing this document** (beyond the
-answered proposal; for the client to confirm with this document):
+answered proposal; confirmed by the client on 2026-11-21, with this
+document):
 1. **Shockwave and Squall are non-verb pushes** and take the contact
    band on a failed save, under the area cap of 2; the proposal had
    listed them as verb-only. The Arcanist design (8.2, 8.3) makes both
@@ -2846,7 +2861,8 @@ findings. Every one was fixed, merged into another fix, or (in part)
 rejected with a reason; no client answer was overridden.
 
 **Lead's calls made after the check** (marked **(lead's call, after the
-check)** in the text; for the client to confirm with this document):
+check)** in the text; confirmed by the client on 2026-11-21, with this
+document):
 1. **Floor-level quotas are constructive:** KP1 and KP2 hold in every
    F2–5 fight layer on mandatory sockets; a reservation step in the
    `terrain` stream assigns `teaching` or `signature`, `plank` and
@@ -2931,7 +2947,8 @@ check)** in the text; for the client to confirm with this document):
     Spiked); the spiked cell door skin is removed.
 27. **A segment-5 hook** for traps and pieces (13).
 
-**Told plainly after the check:**
+**Told plainly after the check** (none overrides a client answer);
+confirmed by the client on 2026-11-21, with this document:
 - **cover is narrower than the proposal's test:** the client chose the
   dot-product facing test; the lead keeps it and adds a 45-degree bound,
   because the bare test covered a target from about 270 degrees and made
@@ -2964,7 +2981,8 @@ check)** in the text; for the client to confirm with this document):
 - **harm squares no longer depend on RT-14,** and the earlier
   withholding rule is dropped (6.5.5).
 
-**Rejected in part, with reasons:**
+**Rejected in part, with reasons** (confirmed by the client on
+2026-11-21, with this document):
 - raising the contact band to 2× collision (4/6/6): it would fail
   `HewCeiling` further and reverse the TN7 and TB5 resolutions the
   client let stand; the harm-square stop fix and the "+1" preview

@@ -666,7 +666,9 @@ Corrected for F9; monster hit chance against the enemies 6.2 table attack.
   escaped by Acrobatics), with simulator evidence in the "Acrobatics
   checks per floor" report (17.3). Floor layout supplies 2 Squeezes per
   floor from M2 through a dedicated Site; dungeon generation segment 3's
-  narrow ground supplies the rest (floor layout design 6.4, 9.2; FL-7). **Named fallback** if that report misses its
+  narrow ground supplies the rest: at least 1 Plank per floor on floors
+  1–5 from M2, by a reserved `plank` slot, where Stiff gives disadvantage
+  on the entry check (room terrain design 6.2.6; TR-12) (floor layout design 6.4, 9.2; FL-7). **Named fallback** if that report misses its
   target after content tuning: Stiff also gives disadvantage on Reflex
   saves against hazards (hazard edges, traps and hazard squares,
   conditions 10.2–10.4). The armour values are not touched.
@@ -710,6 +712,10 @@ Corrected for F9; monster hit chance against the enemies 6.2 table attack.
      (Raise or Fortified), and no reaction AC bonus is offered in the step
      5 window against an attack rolled with a gear-sourced disadvantage.
      The preview names it ("Parry not offered: Supple already applies").
+     The charged exclusion extends to **cover** (from M2): cover's −2 is
+     suppressed against a target whose charged AC bonus is active, and in
+     the step 5 window the larger of cover 2 and the reaction AC bonus
+     applies, never both (room terrain design 6.1, CV4, CV5; TR-4).
 7. **Crit cap (lead's call):** at most 2 critical hits per unit per fight
    are downgraded by gear, counted in `critDowngradesThisFight` (16.3). At
    weapons 7.5 step 6, in this order:
@@ -975,6 +981,12 @@ All checked by validation (17.1). **(lead's call, confirmed to stand)**
      **10%** *(illustr.)*. A gear roll-mode effect never combines with a
      charged bonus or a reaction AC bonus (8.1 rule 6, charged exclusion),
      so there is no fourth case.
+   - **Positional row (M2; TR-4):** the maximum sustained AC **+ cover**
+     (−2 to the roll), with a normal roll mode, leaves at least **25%**;
+     met exactly at level 1 (18 against +4). Cover is ignored when the
+     attack already has disadvantage, so the 10% row stays at 12.25%, and
+     is suppressed against a charged bonus (8.1 rule 6), so the 15% row
+     stands (room terrain design 6.1, CV5).
    - Heavy + shield at level 1 is 18 against +4: 35% normal, 12.25% with
      disadvantage. The worst charged stack is 22: exactly 15%. All pass.
    - **Inputs (lead's call).** Maximum Dexterity by level comes from the
@@ -1212,7 +1224,7 @@ Examples are in 5.6.
 | Lookout Rim | No buff-test tag fits; cut against surprise |
 | Spiked shield | The Spiked Boss property |
 | Round, heater and kite shields | Skins |
-| Pavise | Needs a cover rule |
+| Pavise | Needs a cover rule; the M2 cover rule now exists, so it becomes designable (Later, armour owner; room terrain design 6.1, CV7; TR-2) |
 | Parrying shield, main-gauche | Parry sources are capped |
 | Lantern and hook shields | No supporting systems |
 

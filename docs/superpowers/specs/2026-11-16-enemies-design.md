@@ -311,6 +311,13 @@ Authored on the base type. The composed unit exists only at runtime.
 - An enemy has no rest or camp pools, level-ups, offers, "ask me"
   reactions, mastery, or Lore, Arcana or Medicine uses.
 
+**Pending request (TR-15, M2; room terrain design 6.9):** a
+`usesFurnishings` kit tag (Strongman, Fire-Eater, Glutton, a Gaol warden
+brute, Gut Ooze *(illustr.)*) for Attack Shunt, Kick and Smash of heavy
+pieces, never Move-Shunt to barricade; and a universal light Smash: every
+monster with a melee attack may Smash an adjacent light Furnishing; a
+request to this owner, not yet a rule.
+
 ### 5.6 Plate contract
 
 **(lead's call)** This applies the settled "four things to read".
@@ -490,6 +497,12 @@ round-1 row.
   floor-1 boss sustain check (`Floor1BossSustain`) reads consumables, so
   it is a content-validation code, not a 6.4 guard (death and healing
   design 21.1 step 6).
+- **Terrain (change TR-9, TR-26; room terrain design 6.3.5, 6.8):**
+  every round in which a monster-triggerable Keg is in range of
+  party-reachable squares counts in the guards, not round 1 only (a Keg
+  burst is a one-shot area, source `environment`, sturdy in M2, and no
+  burst triggers a burst in M2); Conduct (K3) counts in the guards too.
+  **(M2)**
 - **"On its turn" means the whole kit**, limited abilities included,
   each checked at its best case; the per-unit rows are checked for every
   ability, not only the at-will. **(lead's call)**
@@ -1130,6 +1143,22 @@ Trapwright ships (Shade design 14).
 doorway-hold AI term, against parties holding a chokepoint doorway; a
 request to this owner, not yet a rule.
 
+**Pending request (TR-15, M2; room terrain design 6.9):** terrain terms,
+not yet ruled: `NoCheapKill` with the exact text of room terrain design
+6.9 (for each hero a candidate would damage, if the hero's current HP
+minus the action's non-environment expected damage is ≤ the candidate's
+maximum environment damage to that hero, that environment damage scores
+0 and the candidate gets no kill or down bonus for that hero; non-boss
+monsters, every trigger they cause: push, Shunt, Kick, Keg and Conduct;
+agreed in substance, Q3); a destination value (the destination square's
+`onEnter` and `onTurnEnd` value); Furnishing verbs valued by the existing
+forced-movement, collision and area terms, light Smash by the reduction
+in next-turn path length to the preferred target; a Keg trigger valued as
+an area under the friendly-fire floor and `NoCheapKill`, and counted as
+an attack in the intent read and focus spread; Shunt and Kick ties by the
+fixed square order (ability 8.1). Cover adds no term: Exposure reads the
+resolve preview.
+
 **Kill bonus** = min(`killBonus%` × the target's T, 1.5 × the attacker's
 best at-will score). T is the target's best expected one-step score
 (conditions 17.3). So a dangerous unit is worth more, and **nothing reads
@@ -1186,7 +1215,9 @@ These hold on every difficulty tier and are asserted by property tests:
    DH-28)**
 7. Stupidity floors: never enter a hazard that could kill it; no
    net-negative friendly fire; no control on a target that zeroes it; never
-   idle with a reachable target.
+   idle with a reachable target. **Pending request (TR-15, M3; room
+   terrain design 6.6, 6.9):** routed units never enter hazards, except
+   non-lethal Remnants; not yet ruled.
 8. No healing or refill of uses out of sight. The one bounded exception is
    the boss reset rule in 17.5.
 9. Affixes are always visible.
@@ -1769,7 +1800,9 @@ condition transforms:
   excluded unless nothing else qualifies): the first anchor the party
   has not explored, else the farthest, else it is Cornered. Every non-elite
   fight host has a non-door flee exit (`fleeExit`) **(change FL-12; floor
-  layout design 6.8)**. It never enters a hazard; it
+  layout design 6.8)**. It never enters a hazard (**pending request
+  (TR-15, M3; room terrain design 6.6):** except a non-lethal Remnant,
+  which it treats as passable; not yet ruled); it
   does **not** Disengage, so leaving the party's reach provokes an
   opportunity attack: a payoff without a chase.
 - **Routed units make no opportunity attacks.** The party may move through
@@ -2418,7 +2451,7 @@ in percent, all illustrative.
 | Profile | Default for | Approach / caution / oaAversion | Range | Targeting | What the player notices | Wave |
 |---|---|---|---|---|---|---|
 | **Charger** | Brute | 150 / 30 / 30 | 1 | Nearest, last attacker; kill bonus 130% | Walks through opportunity attacks to reach you; never retreats | M1 |
-| **Holder** | Soldier | 100 / 80 / 100 | 1 | Nearest to its ward | Holds the doorway; shoves toward hazards (M2) | M1 (hold term M2) |
+| **Holder** | Soldier | 100 / 80 / 100 | 1 | Nearest to its ward | Holds the doorway; shoves toward hazards (M2). **Pending request (TR-15, M2; room terrain design 6.9):** "hazards" includes contact hazards; not yet ruled | M1 (hold term M2) |
 | **Kiter** | Artillery | 60 / 150 / 200 | 5 | Lowest visible AC in range; concentrating units **(change AR-25)** | Keeps 4–6 squares away; steps back when engaged; falls back at 50% HP | M1 |
 | **Mob** | Minion | 150 / 0 / 0 | 1 | Nearest; spreads to free adjacent squares | Surrounds you; ignores danger | M1 |
 | **Automaton** | Mindless | 120 / 0 / 0 | 1 | Nearest, then unit order | No exposure or cohesion terms; walks through minor hazards (the lethal floor still holds) | M1 |
@@ -2435,6 +2468,14 @@ in percent, all illustrative.
 **No per-instance randomness.** Two units of the same type behave the
 same, which is what makes them learnable, and what makes intent reading
 (13.3) worth learning.
+
+**Pending request (TR-15, M2; room terrain design 6.9, 6.6):** one
+visible terrain-using enemy per F2–5 theme, with a telegraphed intent (a
+Strongman Shunts a crate at the backline; a Glutton Kicks a trolley; a
+Fire-Eater breathes on a Keg; a Gut Ooze shoves toward molars); and one
+gas-aura monster each in the Gut, Silk and Heart (a Gut spore-bloat, a
+Silk mildew moth, a Heart sleeping-draught nurse; unit auras are legal
+under ability 8.4); a request to this owner, not yet a rule.
 
 ### 17.4 Encounter templates
 
@@ -2555,7 +2596,10 @@ immunities, never `goad` (Challenged is the tank's settled tool).
   the boss budget, excluded from the cluster and joining caps, announced a
   round early, and created in the boss's group as escort (14.2); (e)
   change arena terrain within the theme's 6, never on a party unit's
-  square.
+  square, only through pre-placed phase sockets: existing kinds only,
+  announced one round ahead, never on the Clearway, and proven in both
+  states by V9 (room terrain design 6.11) **(change TR-16)**; at M3 it may
+  also create a Remnant (room terrain design 6.6, 6.11) **(M3; agreed, Q5)**.
 - **Never on entry:** regain HP or pips, or refresh uses.
 
 **Boss state belongs to its life, not the fight** **(change A-4)**:
@@ -2582,10 +2626,15 @@ are no separate arenas **(settled)**:
   Forecourt antechamber, ≥ 5 apart, never Doors, with the symmetric
   `AntechamberScreened`; `AntechamberDominatesArena` on every floor;
   floor layout design 6.11) **(change FL-5)**;
-- pillars or cover that block line of sight;
+- pillars or cover that block line of sight (at least 2 Tall pieces or
+  clusters; cover has the rules meaning of room terrain design 6.1:
+  directional one-tier cover, M2) **(change TR-2)**;
 - at least one feature tied to the boss's counterplay (a brazier against an
   ice layer, a chasm edge for shoves);
 - optional set-piece hazards within the theme's 6;
+- terrain caps and kind rules: room terrain design 6.11 (contact
+  hazards, Furnishings, Kegs, cover-giving squares, clutter); the
+  counterplay identity is unchanged **(change TR-16)**;
 - the boss and escort start **Wary**, so the boss room never surprises the
   party and is never Surprised.
 

@@ -1332,7 +1332,12 @@ Death-warded / Reprieve fires"; "will Down X"; on the hero's own attack,
 ### 17.6 Move preview
 
 Flags opportunity attacks, Set triggers and **known** hazards and traps
-that could be lethal.
+that could be lethal. Known contact hazards and harm squares count as
+hazards here: the move preview sums harm-square damage per square
+entered, with a lethal tag, and lethal tags (17.5) extend to contact
+hazards, harm squares, Kegs, Kick lines and Overturn strips (M3) (room
+terrain design 6.12, `2026-11-21-room-terrain-design.md`) **(change
+TR-23)**.
 
 ### 17.7 Friendly fire
 
@@ -1343,7 +1348,9 @@ and ability 8.2).
 Separately, a party action that would move an ally into a hazard square
 or over a hazard edge asks for confirmation, lethal or not (10.4 is the
 related hazard section); the lethal test above is unchanged (Arcanist
-design 7.14, ARC-25). This confirmation pattern is also the model for
+design 7.14, ARC-25). The same confirmation covers contact hazards, harm
+squares, Keg footprints, Kick lines and Overturn strips (M3) (room
+terrain design 6.5.4, 6.12) **(change TR-23)**. This confirmation pattern is also the model for
 the Arcanist's last-slot confirmation, a confirmation of the player's own
 action (Arcanist design 5.2, ARC-13).
 

@@ -44,11 +44,23 @@ characters who differ in it. **(agreed)**
 
 - Fidelity to 5E numbers or wording.
 - Social skills and dialogue checks.
-- Spreading or evolving terrain surfaces, such as burning oil that spreads
-  or conducting water. Held back until riders and layers are proven.
-  **(agreed)** Fixed map squares that apply conditions are allowed; they
-  never spread or change, except that fire burns an oil square to plain
-  floor (conditions design 11).
+- Spreading or evolving terrain surfaces, such as burning oil that spreads.
+  Held back until riders and layers are proven. **(agreed)** Conduct
+  (lightning through connected water) is not held back: it arrives in M2,
+  before this gate, because it is instantaneous and makes no square
+  (room terrain design 6.8, K3). Fixed map squares that apply conditions
+  are allowed; they never spread or change, except for the sanctioned map
+  changes: fire burns an oil square to plain floor (conditions design 11);
+  from M2, Furnishing debris and removal, boss phase sockets, and fire
+  burning a web or bedsheet square to plain floor; from M3, Overturn
+  debris and sight change, and Remnants (room terrain design 6.6, 6.7,
+  6.8). **(agreed)**
+- **M3 exception:** environment-made Remnant clouds (Miasma only) with a
+  fixed footprint and a short countdown, which never drift, spread or
+  grow (room terrain design 6.6). "Until riders and layers are proven"
+  is read as the M2 rider and layer reports passing, recorded by the
+  lead in writing before Remnant work starts (room terrain design 6.6).
+  **(agreed)** Applies at M3.
 - The ability and resource model (spell slots, action costs). Designed
   next, separately.
 
@@ -259,8 +271,8 @@ Rules behind the table:
 
 | Skill | Ability | In the dungeon | In a fight |
 |---|---|---|---|
-| Athletics | Strength | Force doors, bars and chests (loud); jump crossable hazards | Shove, grapple, resist being moved |
-| Acrobatics | Dexterity | Cross narrow or unstable ground; pass a Squeeze: out of combat the leading unit makes one check for the party, and a failure still gets through, at a time and noise cost; in combat each unit checks as it enters; monsters never use one (floor layout design 9.2) | Slip past enemies, escape grapples, avoid attacks when disengaging |
+| Athletics | Strength | Force doors, bars and chests (loud); jump crossable hazards | Shove, grapple, resist being moved; M2: Shunt, Kick and Smash Furnishings (heavy pieces against heft; Attack Shunt's Prone save is against 8 + the Shunter's Athletics bonus); M3: Overturn a tippable Tall Furnishing (heft 15, *illustr.*) and Haul (room terrain design 6.3) |
+| Acrobatics | Dexterity | Cross narrow or unstable ground: from M2, entering a Plank (narrow ground) in combat needs Acrobatics against the segment-5 ladder; a failure ends movement on the square before, with no retry that round, no fall and no damage; out of combat the leading unit checks once (room terrain design 6.2.6); pass a Squeeze: out of combat the leading unit makes one check for the party, and a failure still gets through, at a time and noise cost; in combat each unit checks as it enters; monsters never use one (floor layout design 9.2) | Slip past enemies, escape grapples, avoid attacks when disengaging |
 | Stealth | Dexterity | Sneak past, set ambushes, steal from unaware enemies: only from a Dormant, Stationary or Patrolling carrier; adjacent; no other awake group member has line of sight; any party member's Stealth against the carrier's passive perception (−5 if Dormant, +5 if Keen), with disadvantage against an awake carrier; one try per carrier per floor; failure starts combat with nobody Surprised (enemies design 15.5) | Hide to break line of sight and strike unseen. A class feature may let Hide succeed without breaking line of sight (classes design 8.4, Vanish); the Stealth roll and Hidden's end rules (conditions 18.7) stay |
 | Mechanics | Intelligence | Find and disarm traps, pick locks (quiet; a Locked door is a Door with the padlock decal, on optional content only; floor layout design 9.2), find secret doors: a member trained in Mechanics within 3 squares with line of sight to a Hairline secret's tell reveals the secret automatically, and Sound the wall opens a secret only at its tell (no roll; floor layout design 9.2) | Re-arm or trigger traps against enemies |
 | Arcana | Intelligence | Identify magic items, read runes and shrines | Use scrolls and wands outside your class; recognise a spell being cast |

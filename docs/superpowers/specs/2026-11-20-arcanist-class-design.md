@@ -1149,7 +1149,9 @@ scorer terms:
 - DH 17.7's lethal friendly-fire confirmation stays, its lethal test
   unchanged. Separately, a cast that would move an ally into a hazard
   square or over a hazard edge asks for confirmation whether or not it
-  could kill (ARC-25; DH 10.4 is the related hazard section). A
+  could kill (ARC-25; DH 10.4 is the related hazard section); the
+  confirmation extends to contact hazards, harm squares and Keg
+  footprints (room terrain design 6.12, TR-23). A
   non-lethal friendly-fire line ("hits Bram (ally) for about 9") is
   always in the preview (AM-1 line 1).
 - The last-slot confirmation (5.2; ARC-13).
@@ -1237,8 +1239,11 @@ it).
   forced movement), as Shockwave already states; Tincture is the one way
   to Soak yourself. The preview and the friendly-fire lines count you as
   unaffected.
-- **Never:** ground zones (the one terrain change is the settled fire on
-  oil); teleport; summons; AC on anyone; temporary HP; healing (Knit
+- **Never:** ground zones (terrain changes only through the one
+  consolidated list of sanctioned map changes, room terrain design TR-8:
+  the settled fire on oil; Furnishing debris and removal, boss phase
+  sockets, and web and bedsheet burn-away (M2); Overturn debris and
+  sight change, and Remnants (M3)); teleport; summons; AC on anyone; temporary HP; healing (Knit
   stays the only heal); psychic, radiant or necrotic parts; fear or
   morale (the Herald's primary lean, `LeanSpread`); Shocked or any Later
   condition **(settled)**.
@@ -2570,7 +2575,7 @@ tested, not a content check.
 |---|---|
 | **Novice floor 1.** The real gap is slot discipline and the pip trap; the defaults may not close it | The novice row with its escalation threshold (5.4, **agreed** Q1); the lever order (11.8); back to the client if the levers run out |
 | **Pick-mean drag.** Six pairs, two keys, two subclasses: a trapped pair (Opposed, Etch) or subclass can pull the class mean below the Shade's line | Per-row reports (Opposed rows first); `StarterDefaultsHaveAnswer`; the Opposed starters chosen not to cancel (7.14); honest pair cards; AM-12 lever |
-| **Terrain dependency.** E3–E4 need water, oil, fire, web and hazard squares near fights; no document commits the generator | DEP-A1 with a requested target *(illustr.)* of at least one interactive square within 6 of the start in about 40% of non-boss rooms on floors 2–5; until then no card relies on terrain (Squall is Expert for this reason) |
+| **Terrain dependency.** E3–E4 need water, oil, fire, web and hazard squares near fights; no document commits the generator | DEP-A1 with a requested target *(illustr.)* of at least one interactive square within 6 of the start in about 40% of non-boss rooms on floors 2–5; until then no card relies on terrain (Squall is Expert for this reason). **Pending request (room terrain design TR-21, 2026-11-21; the Arcanist owner rules):** DEP-A1 counts interactive features (condition squares, contact hazards, harm squares, Kegs); the 3–6 ring rule (KP2: every F2–5 fight-room layer has a mandatory interactive feature at path distance 3–6 from some `partyEntrySquares` square); which "start" is meant (the report reads party entry until ruled; room terrain design 6.2.4, 11.3, TN14). Told plainly: E3 combos still need condition squares, which the Supper never has |
 | **Sustain recalibration.** The Arcanist at Con −1 passes `Floor1BossSustain` by 1; an upward key recalibration fails it first | Door-HP medians reported separately (11.3) |
 | **Ceiling invisible on run 1.** Floor 1 is mostly Mote turns | The ladder preview and Interplay sell the later depth |
 | **Interplay unproven.** It may mostly fire cancels in the Opposed pair, or drift parity | Modifiers-off rows; the lever (10.3) |
@@ -2702,7 +2707,10 @@ may raise it to two" in ability 6.5 finds the Arcanist exclusion.
 
 - **Dungeon generation and terrain (DEP-A1):** a per-theme
   terrain-presence report and the requested target (16); no card relies
-  on terrain until then.
+  on terrain until then. **Pending request from segment 3 (room terrain
+  design TR-21):** rule whether DEP-A1 counts interactive features, the
+  3–6 ring rule, and which "start" is meant (16); the floor-4 miss is
+  likely closed by the Supper's pieces (room terrain design 7.8).
 - **The enemies owner:** LM-0 (Study persistence), LM-1
   (`cooldown.delay`); Fray's mirror never in floor-1 monster kits; the
   AI pricing of Afterhold and Belay.

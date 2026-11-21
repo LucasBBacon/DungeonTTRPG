@@ -803,6 +803,11 @@ Items 10.5 formula; `coinPerValue` 20 *(illustr.)*. **(lead's call)**
   ability model 8.2).
 - **Never terrain:** flasks act on units only. Existing terrain rules
   apply untouched: a fire area burns away oil squares (conditions 11.4).
+  **(change TR-9, clarification; nothing changed)** A fire flask's area
+  that includes a Keg's square bursts it once (M2: Carnival, Gut); the
+  burst is the Keg's own one-shot area, source `environment`, and leaves
+  nothing on the ground, so the flask still makes no terrain (room
+  terrain design 6.3.5).
 - **Conditions:** minor or setup only in M2; never hard. One named major
   flask (the net) is Later under the conditions 7.2 guards.
 - **At an ally:** only water among flasks; automatic, no roll, no splash.

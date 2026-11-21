@@ -47,8 +47,9 @@ without ever letting control decide a permadeath run on its own. **(agreed)**
 ### Non-goals
 
 - Spreading, evolving or player-placed ground surfaces. Fixed map squares
-  may apply conditions (section 11); they never spread or change, with the
-  single exception of oil burning away. **(agreed)**
+  may apply conditions (section 11); they never spread or change, except
+  by the sanctioned map changes listed in 11.1. **(agreed; change TR-8,
+  TR-25, TR-27; room terrain design 6.6–6.8)**
 - 5E's condition list or wording. We borrow its shape. **(settled)**
 - Random condition tables (random Confusion, berserk rolls). **(lead's
   call)**
@@ -248,6 +249,12 @@ own-turn rule (5.2).
 **After the turn-end step,** boss actions resolve. A round ends after the
 last initiative slot's turn-end step and the boss actions that follow it.
 
+**Round-end environment step (M3; change TR-27; room terrain design
+6.6):** runs after the last turn's turn-end step and before the next
+round starts. It decrements every Remnant in `createdSeq` order, skips
+Remnants created this round, and removes any at 0. All Remnants end when
+combat ends.
+
 ### 5.5 Out of combat
 
 - One round is one tick. **(settled)**
@@ -307,6 +314,9 @@ last initiative slot's turn-end step and the boss actions that follow it.
   ally freezing it to protect it, a willing Banish) never count. Nor does an
   own-turn hard condition (5.2), which never reaches a turn start. Nor do
   morale states, which are not in the hard tier (enemies design 14.9).
+- **M3 (change TR-27; room terrain design 6.6):** an instance from a
+  Remnant that a party unit's action created counts as party-sourced for
+  this cap, not as the environment (11.6).
 - Each lost turn start adds 1 to `hardTurnsLostThisFight`. When it reaches
   2, Unyielding (`combatOnly`) is applied at once. The hard instance
   already held runs its course.
@@ -653,6 +663,25 @@ healing design (15.1).
 - **Phase changes** (12.3) resolve after the whole ability use, once every
   target's damage, riders and effects have resolved. Riders from the hit
   that crosses the threshold land first and are then cleared.
+- **`causedBy` (M2; change TR-24; room terrain design 9.2):** every
+  environment damage event (collision, contact, harm square, Keg,
+  ignition, Conduct) records the unit whose action began the resolution.
+  "On a kill" features fire for that unit only when the killing damage
+  resolves inside that same action, never from ticks or later turns. A
+  monster-triggered Keg that kills a monster credits no party unit. The
+  kill log and the simulator's death-cause rows use it.
+- **Open item, pending ruling (TR-13; room terrain design 6.4, 6.5.2,
+  6.8):** requested of the conditions owner, not yet ruled (the
+  one-instance cap is agreed in substance by the client, 2026-11-21):
+  environment damage is rider-free (no riders, no weak-target automatic
+  riders, no arcs or forks; 9.2 step 1); the damage-end row and setup
+  payouts (Oiled) still apply, and payouts are not environment instances;
+  one environment damage instance per unit per action by the top-up rule,
+  with "action" as one use, and voluntary harm-square entries, turn-end
+  effects, Remnants and traps outside the cap, non-damage effects
+  resolving under their own rules; Conduct's base is taken before the
+  origin's weakness, then each recipient applies its own weakness and
+  halves. The cap's wording also touches 11.6.
 
 ### 9.4 Triggered free attacks and redirects
 
@@ -677,10 +706,17 @@ on an attack that already has disadvantage from another source.
   it (pull). On ties, the square on the straight line from the source is
   used, then the fixed square order (ability model 8.1); the player, or the
   AI, may pick another tied square as an input.
-- It stops at walls, obstacles and units. If stopped early, the moved unit
+- It stops at walls, obstacles and units. An **obstacle** is a wall, a
+  partition, a Tall or Low piece, a Furnishing, a Keg or a hazard piece;
+  every movement-blocking square blocks a diagonal step exactly as a wall
+  does, for forced movement too **(change TR-5; room terrain design
+  6.2.1)**. If stopped early, the moved unit
   and any unit it hits each take band bludgeoning damage once. This is not a
   rider. Stopping before a hazard is not stopping early and deals no
-  damage. A collision never applies Prone unless the ability says so.
+  damage, except that a successful hazard-edge save against a contact
+  hazard or a harm square is an ordinary obstacle stop (10.2) **(change
+  TR-10; room terrain design 6.5.2)**. A collision never applies Prone
+  unless the ability says so.
 - It never provokes opportunity attacks.
 - Rooted, Restrained and Anchored units are not moved.
 - **Shift (change W-8):** a third kind beside push and pull. The unit steps
@@ -724,6 +760,36 @@ on an attack that already has disadvantage from another source.
 Forced movement into a hazard gives a Reflex save. On a success the unit
 stops on the last safe square and gains Teetering.
 
+**(change TR-10; room terrain design 6.4, 6.5.2; M2)**
+
+- **Difficulty, name and timing:** the difficulty is the pusher's ability
+  difficulty when the push comes from an ability that has one, otherwise
+  8 + the pusher's Athletics bonus; a drag uses the holder's. It is the
+  hazard-edge save for every rule keyed on that name. It is rolled at
+  weapons design 7.5 step 10, square by square as the move resolves,
+  never in the step-9 rider slot; non-weapon pushes roll it at the same
+  point of their own resolution (ability model 14.3).
+- **Contact hazards** (a hazard piece or a hazard face): when the next
+  square of a forced move holds one, the unit stops on its current square
+  and saves. Success: an ordinary obstacle stop (10.1), no Teetering.
+  Failure: typed contact damage instead of collision damage, never both:
+  the contact band if a non-verb part contributed (Battering Force counts
+  as non-verb here), otherwise the collision band, typed (a second named
+  exception class beside Battering Force, weapons design 7.2 rule 4).
+- **Harm squares:** success: stop on the last safe square as an ordinary
+  obstacle stop, no Teetering. Failure: enter and take the harm band; the
+  push continues, and each further harm square gives a new save. The
+  damage stays under the one-environment-instance cap (room terrain
+  design 6.4).
+- **Damage-only hazards never give Teetering.** Condition squares keep
+  the rule above.
+- **Area cap:** an area-shaped forced movement gives the save to at most
+  2 units per action, the first 2, in the fixed square order of their
+  starting squares, whose move reaches a contact hazard or a harm square.
+  Later units stop as against an ordinary obstacle.
+- **Shortened moves** (Stalwart and similar): the shortened move is
+  computed first; the save is made only if it still reaches the hazard.
+
 ### 10.3 Landing
 
 When Flying, Jumping or Levitating ends over a hazard, the unit makes a
@@ -749,8 +815,21 @@ for 10.1–10.4 (11.3) **(change SH-15; Shade design 9.1, NM-1)**.
 - The squares are placed by floor generation from the theme (main design
   4.6) and are part of the map. Abilities still leave nothing on the ground
   (ability model 8.4). **(lead's call; change C11)**
-- **Squares never spread or change**, with one exception (11.4). This keeps
-  the non-goal on spreading and evolving surfaces.
+- **Squares never spread or change**, except by the sanctioned map
+  changes below. This keeps the non-goal on spreading and evolving
+  surfaces. **(change TR-8; room terrain design 6.7, 6.8, 6.11; approved
+  by the client 2026-11-21)** The consolidated list, by wave:
+  - fire on oil (11.4; existing);
+  - Furnishing debris and removal (M2; room terrain design 6.3, 6.7):
+    Furnishings and Kegs are objects, not squares; walls never break;
+  - boss phase sockets (M2; room terrain design 6.11): pre-placed,
+    existing kinds only, announced one round ahead, proven in both
+    states;
+  - web and bedsheet burn-away (M2; 11.4; change TR-25);
+  - Overturn debris and sight change (M3; room terrain design 6.3.7);
+  - Remnants (M3; change TR-27; room terrain design 6.6): environment-made
+    Miasma clouds with a fixed footprint and a short countdown, which
+    never drift, spread or grow.
 
 ### 11.2 Squares
 
@@ -758,7 +837,7 @@ Illustrative set:
 
 | Square | On enter | On turn end there | Wave |
 |---|---|---|---|
-| Water | Soaked | Soaked | M2 |
+| Water | Soaked | Soaked | M2; Conduct (below) **(change TR-26)** |
 | Web | Restrained (the web is the binding; breakers fire and slashing) | Restrained | M2 |
 | Fire | Burning | Burning | M2 |
 | Oil slick | Oiled | Oiled | M2 |
@@ -768,7 +847,14 @@ Illustrative set:
   `onTurnEnd` or both), its contest (a save type and difficulty, or
   automatic), its value and duration, and for a binding its breakers and
   escape difficulty. The value may not exceed the band of the floor's
-  expected levels. **(lead's call)**
+  expected levels. **(lead's call)** A condition-free class names no
+  condition (below).
+- **Condition-free square classes (M2; change TR-11; room terrain design
+  6.2.1, 6.2.6, 6.5):** harm squares (walkable; the harm band on entry; a
+  hazard, 11.3; floors 2–5), Rough (entering costs 2 movement; not a
+  hazard) and Plank (narrow ground; Acrobatics on entry; not a hazard)
+  apply no condition. Movement cost modifiers never stack above 2: Rough,
+  Prone crawl and drag do not multiply.
 - **Squares apply minor and major conditions only, never hard ones.**
   Validation enforces this. **(lead's call)**
 - **Entry** is any change of a unit's square to this square: its own
@@ -788,7 +874,20 @@ Illustrative set:
   (6.3). Standing in water keeps Soaked at its full duration; it never
   extends past it.
 - Breaking a binding ends the unit's Restrained, never the square: a web
-  square still applies Restrained to the next unit. **(lead's call)**
+  square still applies Restrained to the next unit. **(lead's call)** Only
+  fire burns a web or bedsheet square away (11.4) **(change TR-25)**.
+- **Conduct (M2; change TR-26; room terrain design 6.8 K3):** a lightning
+  part on a unit standing in water makes every other unit on water
+  squares orthogonally connected to it within path 3 take the lightning
+  part, rider-free, cap 6 extra units. Instantaneous; no square changes.
+  It never starts from a monster at-will, and it follows ability model
+  8.2: an at-will's or a selective cast's Conduct skips the caster's
+  allies and never reaches the caster. One Conduct per action per
+  lightning source; recipients are units the triggering area did not
+  already damage. The base is the struck unit's lightning part before its
+  own weakness; each recipient applies its own weakness (Soaked), then
+  halves, rounding down. The Soaked arc (18.6) resolves first, and a unit
+  it hit in the same event is not Conducted to.
 - Out of combat, squares apply on entry and at every tick's turn-end step,
   as in combat, and their damage over time follows the 1 hit point floor
   (5.5).
@@ -811,19 +910,34 @@ whatever the Trapwright's wave):** a known armed trap's trigger squares
 are hazards for the same rules. The rules of 10.1 and 10.2 are not
 changed; known traps simply become hazards they apply to.
 
+**Contact hazards and harm squares (change TR-10; room terrain design
+6.5; M2):** contact hazards (hazard pieces and hazard faces) and harm
+squares are hazards for the same rules, though they apply no condition.
+A successful save against them gives no Teetering (10.2).
+
 ### 11.4 Fire on oil
 
-The single exception to "squares never change". **(agreed that it exists;
-the outcome is the lead's call)**
+The first of the sanctioned map changes (11.1) **(change TR-8)**. **(agreed
+that it exists; the outcome is the lead's call)**
 
 - An oil square burns away when a fire area includes it, or when a fire
   damage part of at least 1 from a hit is dealt to a unit standing on it.
   Ticks never burn it away (6.8).
 - **The square becomes plain floor.** It never becomes a fire square. This
   keeps every square free of timers: the payoff lives on the unit, through
-  Oiled (catalogue E). **(lead's call)**
+  Oiled (catalogue E). **(lead's call)** M3 exception: Remnant clouds
+  carry an integer countdown (5.4 round-end environment step) **(change
+  TR-27; room terrain design 6.6)**.
 - Burn-aways resolve after the damage event, in the fixed square order
   (ability model 8.1).
+- **Web and bedsheet burn-away (M2; change TR-25; room terrain design
+  6.8 K2):** the same fire trigger burns a web or bedsheet square to plain
+  floor, and a unit Restrained by that web is freed. No timer.
+- **Kegs (sibling rule; change TR-9; room terrain design 6.3.5):** a Keg
+  burst is a one-shot area with source `environment`; it leaves nothing
+  on the ground and never creates a square. A lamp-oil keg's fire burst
+  burns away oil squares under this section, never making a fire square.
+  Kegs are sturdy in M2, and no burst triggers another burst in M2.
 
 ### 11.5 Staging
 
@@ -832,7 +946,10 @@ the outcome is the lead's call)**
 - **M2:** water, web, fire, oil-slick and bile squares; their condition
   data; Oiled and the burn-away rule; the hazard-edge, landing and
   drag-into-hazard rules. **(agreed; bile squares added by change RT-13,
-  approved by the client 2026-11-21; run structure design 8.10)**
+  approved by the client 2026-11-21; run structure design 8.10)** Also
+  harm squares (change TR-11) and the obstacle-hazard branch for contact
+  hazards (10.2; change TR-10) **(agreed, extended by the room terrain
+  design, approved by the client 2026-11-21)**.
 
 ### 11.6 Sources, and traps
 
@@ -841,7 +958,14 @@ the outcome is the lead's call)**
 - **Source `environment`:** terrain applications have this source. It
   counts as hostile to every unit, for the per-fight cap (5.7), the
   party-facing limits and composure (7.2). It is never `sourceTied`, and
-  its difficulty comes from the square's data.
+  its difficulty comes from the square's data. Keg bursts have this
+  source too **(change TR-9; room terrain design 6.3.5)**.
+- **M3 Remnants (change TR-27; room terrain design 6.6):** a Remnant's
+  applications have source `environment`, but one created by a party
+  unit's action (`causedBy`) counts as party-sourced for the per-fight
+  cap (5.7), not hostile to every unit.
+- **Open item, pending ruling (TR-13):** the one environment damage
+  instance per unit per action (9.3).
 - **Traps are not terrain squares.** They are one-shot dungeon content,
   owned by dungeon generation and the stat model's Mechanics uses, and they
   can be sprung, disarmed and re-armed. Their conditions enter the pipeline
@@ -1069,7 +1193,12 @@ Enforced by content validation. **(lead's call)**
   - **RT-14** (needed before M2 rosters freeze): whether conditions granted
     by the universal hazard-edge and landing rules (10.2, 10.3), such as
     Teetering, do not count toward a theme's 6. Until ruled, themes count
-    Teetering and name a fallback drop (run structure design 8.0).
+    Teetering and name a fallback drop (run structure design 8.0). The
+    room terrain design repeats the request (change TR-14; room terrain
+    design 6.5.5): rule "does not count" before M2 rosters freeze. Contact
+    hazards and harm squares never give Teetering on a save, so they do
+    not depend on it; the Supper's Poisoned rows (including every M3 row
+    that uses Poisoned in the Supper) are conditional on it.
   - **RT-15:** whether radiant counts 2 toward a theme's 6, and whether
     Revealed is harmful at all. No M2 theme deals radiant; it blocks only
     the M3 Mirror Court and Moth Wedding (run structure design 8.0, 8.12).
@@ -1181,6 +1310,10 @@ term         = (T × denyPct + 100 × (defensive + offensive + setup)) × effTur
   the term adds the control value and damage over time of the conditions
   that square would apply to the moved unit, multiplied by the chance the
   hazard-edge save fails. **(lead's call)**
+- **Open item, pending the enemies owner (TR-15; room terrain design
+  6.9):** destination value: the scorer adds the destination square's
+  `onEnter` and `onTurnEnd` value, extending the terrain bullets above.
+  Requested, not yet ruled.
 - **Conditions the one-step scorer cannot value** (Commanded's word choice,
   Levitating's push-and-drop combo) are left out of monster kits and
   suggestions.
@@ -1572,7 +1705,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     - adjacent attackers have advantage; attackers at 2+ squares have
       disadvantage;
     - its own attacks have disadvantage;
-    - it crawls at 2 movement per square;
+    - it crawls at 2 movement per square; crawl, Rough and drag costs
+      never multiply, so a square never costs more than 2 movement
+      **(change TR-11; room terrain design 6.2.1)**;
     - standing costs half its current effective speed, minimum 1, or the
       action at speed 0 (6.7);
     - applying it ends Flying and Jumping (landing rule);
@@ -1667,7 +1802,10 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     with a hostile adjacent to a hazard square it did not enter (no save;
     allies never; M2 hazards only). A later push's edge save is made at
     disadvantage before that movement ends Teetering **(change VG-5;
-    Vanguard design 8.3)**.
+    Vanguard design 8.3)**. Sources unchanged by the room terrain design:
+    contact hazards and harm squares never give it on a save (10.2), and
+    Brink is read literally, so it reads harm squares but not contact
+    hazards **(change TR-10; room terrain design 6.5.2)**.
   - Interactions: Rooted and Anchored make the edge safe.
 - **Hobbled** — minor · Later
   - Effect: the first time each turn it moves 3+ squares by its own
@@ -1855,7 +1993,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     from a hit on it reach every adjacent unit (arcs never re-arc), except
     that an at-will's arcs never reach allies, a selective cast leaves
     allies out of its arcs and forks, and a caster is never affected by
-    its own casts' arcs **(change ARC-8; Arcanist design 7.2, 8.1)**.
+    its own casts' arcs **(change ARC-8; Arcanist design 7.2, 8.1)**. The
+    arc resolves before Conduct, and a unit it hit is not Conducted to in
+    the same event (11.2) **(change TR-26; room terrain design 6.8)**.
   - Intensity: binary.
   - Duration: `turns:3`. Ends on fire damage (that hit attempts no Burning
     rider) or a tonic. A ring-shifted fire part ends Soaked and attempts no
@@ -1944,7 +2084,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     provokes no opportunity attacks from them.
   - Intensity: binary per observer; nothing is stored.
   - Duration: trigger. Ends:
-    - after it resolves an attack or harmful ability;
+    - after it resolves an attack or harmful ability (M3: Shoot an
+      object is an attack and ends it; change TR-28; room terrain design
+      6.3.7);
     - if it ends its turn in line of sight of an enemy within 3 squares;
     - for one enemy, when that enemy Searches successfully (its action,
       Perception against the hider's passive stealth);
@@ -2553,7 +2695,7 @@ Record of the catalogue's shaping. **(lead's call)**
 | damage end | Cold ≥1 | Burning, Smouldering | Ends |
 | tick | Any harmful tick | Oiled, oil squares | Never: ticks are not hits (6.8) |
 | damage end | Bludgeoning ≥1 | Frozen | Shatter: the shell's weakness (+half, once) and automatic Stagger |
-| damage end | Breaker type | Restrained, Rooted | Ends (the unit's condition, never a web square) |
+| damage end | Breaker type | Restrained, Rooted | Ends (the unit's condition, never a web square; only fire burns a web square away, 11.4, change TR-25) |
 | damage end | Any damage | Asleep | Wakes after the damage resolves |
 | apply end | Corroded applied | Frozen | Ends; also strips one layer |
 | ladder | Soaked | Cold, lightning weak; fire resistant | Cold and lightning riders automatic; lightning arcs to all adjacent (at-will arcs skip allies; a selective cast leaves allies out; never the caster) **(change ARC-8)** |
@@ -2561,10 +2703,12 @@ Record of the catalogue's shaping. **(lead's call)**
 | ladder | Exposed or Brittle + Resisting or Shielded | | Net normal |
 | ladder | Empowered + Shielded | | Net normal |
 | terrain | Water square | Soaked | On enter and turn end; a Burning unit entering loses both (cancel) |
-| terrain | Web square | Restrained | On enter and turn end; the square is never destroyed |
+| terrain | Web square | Restrained | On enter and turn end; the square is never destroyed except by fire burn-away (11.4) **(change TR-25)** |
 | terrain | Fire square | Burning | On enter and turn end |
 | terrain | Oil-slick square (M2) | Oiled | On enter and turn end |
 | terrain | Fire area or fire damage ≥1 on an oil square | The square | Becomes plain floor (11.4) |
+| terrain | The same fire trigger on a web or bedsheet square (M2) | The square | Becomes plain floor; a unit Restrained by that web is freed (11.4) **(change TR-25)** |
+| terrain | Lightning part on a unit standing in water (M2) | Connected water squares | Conduct (11.2): rider-free, after the Soaked arc **(change TR-26)** |
 | combo | Prone + any speed-0 condition | | Standing costs the action |
 | combo | Grappled + hazard or terrain square | | M1: the drag stops before it. M2: a drag into it gives the hazard-edge save; a success ends the grapple (10.1) |
 | combo | Teetering + forced movement | | Hazard save at disadvantage |

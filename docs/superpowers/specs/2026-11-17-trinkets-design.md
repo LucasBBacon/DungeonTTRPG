@@ -1539,7 +1539,14 @@ grants.
 - **Dungeon generation:** hazard edges and crossable hazards per floor
   (Ledgewalker, Leaper's), from floor 2: floor 1 is dry by design
   **(change RT-20)** (run structure design 6.3, 14); water and oil
-  squares (Wader's); Jumping sources (main design 4.3).
+  squares (Wader's); Jumping sources (main design 4.3). Hazard edges
+  answered by the room terrain design
+  (`2026-11-21-room-terrain-design.md`) **(change TR-29)**: contact
+  hazards and harm squares from floor 2 (M2), and their push save is a
+  hazard-edge save for Ledgewalker (room terrain design 6.5.2, 14);
+  floor 1 still has no hazard edges: the Gaol warden's stove and the
+  Wake candle rack are typed Low pieces, not hazards, with no edge save
+  (room terrain design 6.5.6).
 - **Enemy content:** the Support role (Graveward exclusions, Later);
   grapplers and web or net users (Grappler's Gauntlets); lurkers (Watcher's
   Hood, Visored Helm).

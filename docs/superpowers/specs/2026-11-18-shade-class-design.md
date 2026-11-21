@@ -1205,6 +1205,12 @@ modes are Hide, the II carry-only mode and, if taken, Make an Example):
   3-square-rule waiver from the drafts is **held** pending the Duskhem
   ruling (trinkets 11 rule 1); if the lead rules it distinct from
   Duskhem and Long Shadow, it replaces this text.
+- **Environment kills (M2; TR-24, room terrain design 9.2):** a kill by
+  environment damage (collision, contact, harm, Keg, ignition, Conduct)
+  is credited by `causedBy` to the unit whose action began it. No
+  Witnesses and Make an Example fire for that unit only when the killing
+  damage resolves inside that same action; never from ticks or later
+  turns. A monster-triggered Keg credits no party unit.
 
 **Level 6 (choose 1):**
 - **Throat-Cut** (rewrites Opening; out of combat only; spends the
@@ -1748,7 +1754,7 @@ their bounds and a recommendation. Cost: S small, M medium.
 | NM-11 | Vault (Acrobatics jumps) | S | stat 7.1 | tagged crossings only | **Later** ribbon |
 | — | Seam/Coup combo flag | M | replaces Answer | — | **Rejected** (112–114% at L9–10; changes an approved trigger) |
 | — | In-combat auto-crit on Surprised | — | — | — | **Rejected** (115–121%; nova 1.9) |
-| — | Flanking, facing, vision cones, a light model, smoke clouds, placed snares, enemy swaps, Shade marks, poison stacking, flashbacks, Withdraw moves, a generic Ready | — | non-goals or forbidden grants | — | **Rejected** |
+| — | Flanking, facing, vision cones, a light model, smoke clouds (rejection untouched by the M3 Remnants; Haze, smoke that blocks sight, is Later with NM-9: room terrain design 6.6, TR-27), placed snares, enemy swaps, Shade marks, poison stacking, flashbacks, Withdraw moves, a generic Ready | — | non-goals or forbidden grants | — | **Rejected** |
 
 ### 9.1 Adopted mechanics in full
 

@@ -360,7 +360,9 @@ stealth and cover, and each hit was read in context.
 
 - **Grid (main 4.3, decided):**
   - flat square grid, 8 directions, diagonal costs 1, no corner cutting
-    (M0 plan);
+    (M0 plan; its `CornerCut` covered walls only and now covers every
+    movement-blocking square, forced moves and a piece's own travel
+    included: room terrain design 6.2.1, TR-5);
   - one map for exploration and combat, "no separate battle arenas";
   - turn-stepped exploration; symmetric line of sight and fog;
   - no high ground;
@@ -579,9 +581,13 @@ lead's calls after the check):**
 - Dressing (art variants and props with no rules effect) draws from a
   display-side child, `Derive(parentState, FNV-1a("dressing"))`, that
   the core never reads. Art growth never moves a rules seed.
+- **Terrain (TR-17):** segment 3's rules pieces draw from a sibling
+  child, `terrain = Derive(parentState, FNV-1a("terrain"))`, after LS13
+  and before enemies 10.5 step 2; rules pieces never come from the
+  `dressing` child (room terrain design 6.2.5).
 - **Retry:** HE-7's retry reseeds the floor's dungeon substream at
-  seed + 1, and every child, `layout` and `dressing` included, is
-  re-derived from it.
+  seed + 1, and every child, `layout`, `terrain` and `dressing`
+  included, is re-derived from it, with nothing carried over.
 - **Weighted picks** (rule weights, `bypassTargets[]`, `closedShare`)
   use one 64-bit draw, multiply-shifted into [0, the sum of the integer
   per-mille weights), scanning the cumulative list sorted by id. This is
@@ -649,7 +655,13 @@ rule is needed to forbid it.
 1. **Segment 3 terrain** runs after LS13 and before enemies 10.5 step 2.
    It never blocks `protectedSquares` and never stands on a
    `protectedSightLines` square. Segment 3 may move its step with the
-   lead, as long as it stays before the assertion point.
+   lead, as long as it stays before the assertion point. **(TR-17:)**
+   it draws from the `terrain` child (reservation step, then per node
+   slot a layer pick, on/off and skin draws), places one of the
+   template's terrain layers, and keeps each layer's **Clearway**, a
+   connected superset of `protectedSquares` at least 2 wide in fight
+   rooms, free of anything that blocks movement (room terrain design
+   6.2.2, 6.2.5).
 2. **Enemies 10.5 step 2** fixes homeRooms from the slot hosts and draws
    the trader (Later); steps 3–11 follow as approved. Step 9's cluster
    pass may move a group only within its slot host, or to a host that
@@ -740,7 +752,8 @@ The trimmed floor-3 row serves RS 10.2's floor-3 extension
 **Free-space rule:** a fight room keeps ≥ 6 free squares per unit at
 party size + the floor's unit cap + one 3-unit joiner group. That is why
 floor-3 fight rooms are at least 11×11. It applies to the floors 2–5
-Forecourt.
+Forecourt. Every terrain piece square is non-free (TR-19; room terrain
+design 6.2.1, V9 `FreeSpaceAfterClutter`).
 
 **Other bounds:**
 - Corridors ≤ 30% of walkable squares (35–40% in the Silk and the Gut).
@@ -777,7 +790,10 @@ This is not a count change.
 - Every corridor is a legal fight space **(decided, main 4.3)**.
 - **`RoomMix`** (weapons 26): every floor has ≥ 1 open fight room
   ≥ 11×11 (Cleave, reach) and ≥ 1 guard post whose forward Portal is a
-  door kind or ≤ 2 wide (Skewer, spears, Lightning Line).
+  door kind or ≤ 2 wide (Skewer, spears, Lightning Line). Terrain pieces
+  are non-free, and the open room keeps a clear 5×5 core and a lane
+  (3×6 *illustr.*) after clutter (TR-19; room terrain design 6.2.3, V9
+  `RoomMixAfterClutter`).
 
 **Doors:**
 - Door-share bands per theme are in 7.1, measured after LS12 repair.
@@ -859,6 +875,11 @@ target, which LS5 draws from the Blueprint's `bypassTargets[]` (6.8).
   current state). The static matrices are build-check, report and
   hearing-outline inputs only, recomputed on `SecretFound` and
   `LatchLifted` **(lead's call, after the check)**.
+- **Terrain (TR-17):** the static movement matrices, joiner timing,
+  `HearingGap`, Circuit isolation, `AntechamberScreened` and the Grille
+  vantage stay proven on walls and Portals only. Terrain pieces only add
+  blocking and no proof relies on one; hearing ignores pieces (room
+  terrain design 6.2.1).
 
 **Static conventions:**
 - `hearingState(k)`: for a fight in main-path room k, main-path Doors with
@@ -1283,9 +1304,10 @@ Forecourt cluster. Blueprints:
 
 **Risks:**
 - **Told plainly:** open glades on the solo floor raise ranged dominance
-  while there is no cover rule. The thicket and trail bends give
+  while there is no cover rule (M1; the M2 cover rule is room terrain
+  design 6.1, TR-2). The thicket and trail bends give
   line-of-sight breaks, and the per-grammar `DamageShareByRangeBand` arm
-  runs with segment 3 before the weapons 9.5 decision.
+  runs with segment 3 with the cover arm (room terrain design 11.4).
 - Mask variants snap to the grid with no single-square notches; the edge
   tile set covers exactly the allowed configurations (8.2).
 - No walkable hunting stands (RC1).
@@ -1425,8 +1447,11 @@ Blueprints:
 - Door share 0.45–0.50, inside the floors 4–5 ≤ 0.5 cap; open-room share
   about 5%; mean corridor about 3. Against the Choir (0.33–0.43, 30%,
   1) that is three different bins.
-- Deliberately dry. **Told plainly:** floor 4 misses DEP-A1 when the
-  Supper is drawn.
+- Deliberately dry, read as "no condition squares": condition-free harm,
+  Rough and Plank squares appear (TR-22; room terrain design 7.8).
+  **Told plainly:** floor 4 misses DEP-A1 when the Supper is drawn,
+  likely closed if DEP-A1 counts interactive features (TR-21, pending
+  the Arcanist owner).
 
 **Risks:**
 - Chandeliers over fight squares must be the icicle trap (pillar 1).
@@ -1543,7 +1568,9 @@ greybox code are binding.
 **Cutaway (lead's call; the visible-space rule is a lead's call after the
 check):**
 - Every wall and tall piece ships full and stub states (4-way rotation
-  makes every wall a front wall).
+  makes every wall a front wall). Segment 3's Tall pieces stand at full
+  wall height, and their stub state carries the "blocks sight" stub
+  glyph, from M1 (TR-19; room terrain design 6.2.1, 8.1).
 - Camera-side walls render as stubs for the party's own space **and for
   every room or corridor holding a square in the party's current line of
   sight**. A corridor counts as its own space. Far walls stay full.
@@ -1686,7 +1713,8 @@ socket classes. Budgets count templates, then size classes.
   combine into 5–41 graph shapes per theme cell against B's 1–8, so A
   buys far more variety per piece (0.1).
 - Each template has 2 dressing variants and 2–3 segment-3 terrain
-  layers.
+  layers (`TerrainLayer`, each with its Clearway and sockets; room
+  terrain design 6.2.5, TR-17).
 - Tooling (M1): a Godot editor plugin authors templates as scenes,
   exports integer outlines to core data, and runs the template checks
   and a 4-angle cutaway preview on save. A Blueprint editor shows live V8
@@ -1934,6 +1962,8 @@ FloorLayout (output)
     fields in the order above and arrays in roomId / portalId / square order
 Save: the seed and configuration regenerate the static part, checked against layoutDigest;
   the save stores only dynamic per-Portal state (open, closed, drawn, found, lifted)
+  and, beside it, dynamic Furnishing state {id, square, state: intact|debris|gone,
+  burstSpent}; terrainDigest sits beside layoutDigest (TR-17; room terrain design 6.2.5)
 Configuration snapshot (RS 11.1; hashed into the reproducibility key, RS 6.4 R-SEED-5; FL-14)
   layout.mainPathRooms[floor], layout.mainPathRoomsTrimmed[floor], layout.sideRooms[floor],
   layout.sideRoomsTrimmed[floor], layout.secrets[floor], layout.hearingGapMin,
@@ -2006,6 +2036,12 @@ with named sub-checks:
 
 Rules per Site type are capped at about 4 in M2.
 
+**V9 `RoomTerrain` (TR-18):** segment 3's build validator joins RS
+11.2's list beside V8, per template × orientation × layer × floor band ×
+theme plus floor-level capacity rows per Blueprint and rule choice
+(room terrain design 11.2). Its runtime is a lookup that cannot fail
+(FL-15).
+
 **Runtime assertions** at the floor assertion point (6.1), each with a
 build-time structural proof; anything else is a report:
 - `MainPathConnected`, `NothingInWalls`, `AntechamberDominatesArena`,
@@ -2015,7 +2051,10 @@ build-time structural proof; anything else is a report:
   `RoomCounts` (LG19);
 - `ProtectedIntact`: no terrain or moved group blocks `protectedSquares`
   or a `protectedSightLines` square, and every slot-hosted group stands
-  on its host or an equivalent host.
+  on its host or an equivalent host. Segment 3's Clearway extends it:
+  nothing that blocks movement is placed on, or moved onto, a Clearway
+  square, and V9 proves the no-piece part at build time (TR-17; room
+  terrain design 6.2.2, 11.2).
 
 Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
 
@@ -2114,9 +2153,9 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
 
 | Segment | Receives from layout | Owns |
 |---|---|---|
-| 3 Room shapes and terrain | Template footprints, start zones, `partyEntrySquares`, the `coverRoom` tag, wet/dry/web/slick/bile region tags, `lessonTag`, `protectedSquares` and `protectedSightLines`; the terrain step's place in the order (after LS13, before enemies 10.5 step 2; 6.1) | Interiors, terrain squares and density, cover props and **the weapons 9.5 cover decision** (with the per-grammar range-band arm, including cover through Grilles if sight-only is reopened), DEP-A1, Wrecker walls and edges, narrow ground toward armour 7.3's ≥ 3, the Choir and Carnival entry caps |
-| 4 Hazards | Region tags; "no hazard" Hinge and Postern squares; no crossable bridge into the Sanctum | Bile, drop hazards, Teetering |
-| 5 Traps, locks, checks | Locked, Hairline, Squeeze, Latch and Door slots; `PortalMinimums`; trap sockets within 6 of fight hosts, and from floor 2 one before the first fight (room 0 or the 0→1 Portal, Shade DEP-S1(a)) | DCs; trap records (DEP-S1); keyring and cell caches; sphincters; **the party door verbs as rules (FL-8)**; the Squeeze check on the existing check stream and its failure cost; Drop-bar (M3); Wedge (SH-18); Hairline check variants |
+| 3 Room shapes and terrain | Template footprints, start zones, `partyEntrySquares`, the `coverRoom` tag, wet/dry/web/slick/bile region tags, `lessonTag`, `protectedSquares` and `protectedSightLines`; the terrain step's place in the order (after LS13, before enemies 10.5 step 2; 6.1) | The room-terrain system and the knock-into system (TR-1; room terrain design 13): interiors, in-room terrain squares and placement, cover props and **the weapons 9.5 cover decision** (with the per-grammar range-band arm, including cover through Grilles if sight-only is reopened), DEP-A1, Wrecker walls and edges, narrow ground toward armour 7.3's ≥ 3, the Choir and Carnival entry caps |
+| 4 Hazards | Region tags; "no hazard" Hinge and Postern squares; no crossable bridge into the Sanctum | Floor-scale hazard density (inside segment 3's caps), bile, drop hazards, Teetering counting, vents (TR-1; room terrain design 13) |
+| 5 Traps, locks, checks | Locked, Hairline, Squeeze, Latch and Door slots; `PortalMinimums`; trap sockets within 6 of fight hosts, and from floor 2 one before the first fight (room 0 or the 0→1 Portal, Shade DEP-S1(a)) | DCs; traps and trap records (DEP-S1; TR-1); keyring and cell caches; sphincters; **the party door verbs as rules (FL-8)**; the Squeeze check on the existing check stream and its failure cost; Drop-bar (M3); Wedge (SH-18); Hairline check variants |
 | 6 Encounter placement | Slot hosts, `equivalentHosts`, the Circuit with phase, the Bypass, near pairs, matrices, start zones, `nearStart`, `skittishShape` / `ledShape` | Enemies 10.5 steps 2–11 (step 9 moves only within a host or to an equivalent host, 6.1), `placementRules`, the reinforcement and Dormant partners for near pairs, Rival Party fit in elite templates |
 | 7 Loot | Container, Alcove and secret-cache sockets; HE-7 and HE-4 reservations | Contents and channel counts |
 | 8 Non-combat rooms | Q rooms, the floors 2–5 antechamber micro-event socket, trader and Pledge tags, signature rooms | Fills, trader, shrines, Dream Fragments |
@@ -2155,7 +2194,7 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
 | An interactive square near the start in about 40% of rooms | Arcanist DEP-A1 | Region tags for segment 3; the Supper miss told plainly |
 | Walls and edges near fights | Vanguard design | Chokepoints and flank pairs; segment 3 density |
 | Corridors and open rooms | weapons 26 | `RoomMix` |
-| Cover decision in M2 | weapons 9.5 | Segment 3, with the per-grammar arm |
+| Cover decision in M2 | weapons 9.5 | Segment 3, with the per-grammar arm; decided by room terrain design 6.1 (TR-2) |
 | Secrets and unexplored rooms exist | enemies 14.6; stat model 7.1, 10 | Hairline counts (**agreed Q3**); the floor count line |
 | Trader in an off-path side room | items 10.9 | The `traderEligible` tag |
 | Leftovers by room | items 9 | Room identity (FL-13) |
@@ -2184,7 +2223,7 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
 | 8 | Multi-bypass experience below 20.1 | `MultiBypassRate` | `SkippablePool`; the Bypass meets the Circuit; FL-21(d) |
 | 9 | V8 combinatorial blow-up | Build time | Per-Site enumeration, composed floor-wide bounds, a capped product only over declared `interacting` Sites (11.2); ≤ 4 rules per Site type in M2 |
 | 10 | Runtime crash from unprovable asserts | Any `GenerationRetried` in the release seed set | FL-15: only structurally proven asserts at runtime |
-| 11 | Kennel ranged dominance on the solo floor | `DamageShareByRangeBand` | Thicket and trail bends; the joint range-band arm before the cover decision |
+| 11 | Kennel ranged dominance on the solo floor | `DamageShareByRangeBand` | Thicket and trail bends; the joint range-band arm with the cover arm (cover decided: room terrain design 6.1, TR-2) |
 | 12 | Cutaway failures in tall themes | `CutawayPockets` | The stub kit |
 | 13 | Authoring and tooling cost | M2 schedule review | A shared socket standard; editor tooling from M1; the eager art team is the enabling assumption |
 | 14 | Partitioned open themes read as boxes | Playtest notes | Continuous floor art across Arches; full-height partitions; organic masks **(agreed Q1)** **(new lead's call: row added)** |

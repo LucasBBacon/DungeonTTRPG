@@ -46,7 +46,9 @@ units in initiative order. **(agreed)**
 - Spreading, evolving or player-placed ground surfaces, and persistent
   ground zones. Held back by the stat model. **(settled)** Fixed condition
   squares placed by floor generation are allowed (conditions design 11).
-  **(agreed; change C11)**
+  **(agreed; change C11)** *M3:* environment-made Remnant clouds with a
+  fixed footprint and a short countdown, which never drift, spread or
+  grow, are an exception **(change TR-27, room terrain design 6.6; M3)**.
 - Counter-casting and readied actions at launch. **(lead's call)**
 - Lair actions. **(lead's call)**
 
@@ -413,6 +415,13 @@ Every ability declares exactly one cost **(lead's call)**:
 | Lift a Latch, from the bar side only: no check, silent; it then becomes a Door. Monsters never lift it **(change FL-19, floor layout design 9.2; M2)** | Out of combat 1 tick; in combat 1 square of movement |
 | Listen at a closed door: out of combat; no roll, no stream draw, noise 0; reports each non-Hidden group in the room beyond at that moment (trained Perception adds the size band and "passing"); once per door per floor. Information only **(change FL-18, floor layout design 9.2; M2; owned by dungeon generation segment 10)** | Exploration action (2 ticks); passive and free for a party with a member trained in Perception when auto-walk pauses at the door |
 | Sound the wall: only at a wall square showing the Hairline tell (or 8-adjacent to the secret Portal's squares); opens it, no roll; out of combat only **(change FL-17, floor layout design 9.2; M2)** | Exploration action (6 ticks) |
+| Move Shunt: an adjacent light, non-sturdy Furnishing moves 1 square straight away from the user; no check; never collides (not choosable if that square holds a unit). Once per piece per round across both Shunt modes; combat only; noise 4; does not end Hidden; never onto a square `FurnishingNeverSeals` forbids **(change TR-6, room terrain design 6.3.2, 6.3.6; M2)** | 2 movement *(illustr.)* |
+| Attack Shunt: an adjacent non-sturdy Furnishing (light automatic; heavy Athletics against heft) moves 1 square straight away; into a unit, the piece stops, the unit takes the collision band once, is not moved, and makes a Reflex save against 8 + the Shunter's Athletics bonus *(illustr.)* or falls Prone (size rule applied to the piece); a light piece breaks on the hit. Once per piece per round; combat only; noise 4; ends Hidden like an attack **(change TR-6, room terrain design 6.3.2; M2)** | Replaces one attack |
+| Kick: an adjacent `round`, non-sturdy Furnishing (light automatic; heavy Athletics against heft) travels straight away up to 4 squares *(illustr.)*, stopping before blocking squares or at the first unit (collision band, Reflex or Prone, as Attack Shunt); never ends on a square 6.3.6 forbids. Noise 4; ends Hidden **(change TR-6, room terrain design 6.3.3; M2)** | Replaces one attack |
+| Smash: an adjacent Furnishing or Keg (light breaks automatically; heavy, sturdy included, Athletics against heft); a broken light piece is gone, a heavy one becomes Rough debris; a Smashed Keg bursts, the Smasher outside its burst. Noise 6 *(illustr.)*; ends Hidden **(change TR-6, room terrain design 6.3.4, 6.3.5; M2)** | Replaces one attack |
+| Overturn: orthogonally adjacent to a `tippable` Tall Furnishing, Athletics against heft 15 *(illustr.)*; it falls into the 1×2 strip straight away from the user (Reflex: failure 2× collision band plus Prone, success half), then becomes debris and opens sight **(change TR-6, room terrain design 6.3.7; M3)** | Action |
+| Haul: drag an adjacent light Furnishing into the square you left; provokes as normal movement **(change TR-6, room terrain design 6.3.7; M3)** | 2 movement per square |
+| Cross a Plank (narrow ground): in combat, entering the first Plank square needs Acrobatics against the segment-5 ladder (DC 12, *illustr.*); a failure ends movement on the square before, no retry that round, no fall and no damage. Out of combat one check by the leading unit, with the Squeeze row's failure cost. Stiff gives disadvantage; forced movement onto a Plank needs no check **(change TR-12, room terrain design 6.2.6; M2)** | In combat part of movement; out of combat one party check |
 | Use a scroll or wand outside your class: Arcana, trained only, against 10 + tier; in class, no slot is spent **(settled; change CN-12, consumables design 13.2)** | Action. A failed check uses the scroll or charge up: no free retries **(settled)**. |
 | Drink a potion (a potion on your own belt) **(change I-5, items design 7.1)** | Bonus action |
 | Administer a belt potion or tonic to an adjacent ally: tonics minor only; a potion does not lift Downed; not a potion or healing scroll on a Downed unit (a trinket reach step may extend 'adjacent' to 2 squares; trinkets design 6.1) **(change I-5, items design 7.1; change TK-19; change CN-12, consumables design 11)** | Action (the giver's); the receiver spends nothing |
@@ -542,6 +551,16 @@ diagonal step costing 1.
   skill action, aura or other effect may target, originate or extend
   through it (symmetric, so main 4.3 is kept). **(change FL-7, floor
   layout design 9.2; clarification; M2)**
+- Lines and area origin sight: a Tall piece is a wall for lines, reach
+  and area origin sight; Low pieces, Furnishings, Kegs and hazard pieces
+  never stop a line or reach, and their squares are included in areas
+  (for breakers). Corner cutting is blocked by every movement-blocking
+  square **(change TR-5, room terrain design 6.2.1)**.
+- No piece is ever a unit for targeting, riders, conditions or auras;
+  there are no attacks against objects in M2. *M3:* Shoot an object, a
+  ranged or thrown weapon attack against a Furnishing or Keg (AC 12,
+  *illustr.*), with no riders, Prime, arcs or forks and no cover; it
+  ends Hidden **(change TR-28, room terrain design 6.2.1, 6.3.7; M3)**.
 - Squares are enumerated in a fixed order (row by row), for determinism.
 - No area covers more than 25 squares at levels 1–6, or more than 49 at
   levels 7–10 **(change ARC-9, Arcanist design 8.1)**. Content
@@ -559,6 +578,11 @@ slot cast whose arcs or forks reach an ally. A caster is never affected
 by its own casts' areas, arcs and forks, except presence call or cure
 areas whose record names the caster (Rouse, Hearthsong). **(change ARC-8,
 Arcanist design 8.1, 8.2; change HR-13, Herald design 8.1)**
+
+Conduct through connected water (combo K3) follows this rule unchanged:
+an at-will's or a selective cast's Conduct skips the caster's allies,
+and it never reaches the caster **(change TR-26, room terrain design
+6.8; read, not changed)**.
 
 ### 8.3 Preview
 
@@ -583,6 +607,12 @@ chance. The display computes nothing. **(settled principle)**
   counts glints per screen **(change HR-37, Herald design 7.14, 10.3)**.
 - The preview leaves out reactions it cannot predict: an enemy reaction the
   party has not seen, and any "ask me" reaction.
+- Lethal tags, ally confirmations and previews extend to contact
+  hazards, harm squares, Keg footprints, Kick lines and Overturn strips
+  (M3). Push, Shunt, Kick and Smash previews, and the move preview's "in
+  cover from N of M known enemies", use party knowledge only: squares
+  the party cannot see are marked "unknown" and never show a unit
+  **(change TR-23, room terrain design 6.12)**.
 - The property test in 16 compares preview and resolution with full
   knowledge and with reactions switched off.
 
@@ -594,6 +624,15 @@ Sustained areas are auras that move with a unit, or conditions placed on
 units. Nothing is left on the ground. This stays clear of the terrain
 non-goal. Fixed map terrain that applies conditions is part of the map, not
 a ground zone (conditions design 11). **(change C11)**
+
+A Keg's burst is a one-shot area with source `environment`; it leaves
+nothing on the ground and never creates a square. This clarifies the
+rule; it does not change it **(change TR-9, room terrain design 6.3.5)**.
+
+*M3:* environment-made Remnant clouds (Miasma) with a fixed footprint
+and a short countdown, which never drift, spread or grow, are the one
+exception. Never from party abilities, monster at-wills or flasks
+**(change TR-27, room terrain design 6.6; M3)**.
 
 ## 9. Riders and damage
 
@@ -1033,7 +1072,11 @@ effects system:
    weapons design 7.5 step 8a does; nothing is offered here (the offer
    and halving are death and healing design 20.3, before and at step
    3a), and the concentration check uses the step-3a value **(change
-   SH-6, Shade design 7.4)**.
+   SH-6, Shade design 7.4)**. For a ranged spell attack, cover is
+   computed after the net roll mode is fixed and before the roll, the
+   matching point of weapons design 7.5 step 2b, and recorded with the
+   mode; it is ignored when the net mode is disadvantage **(change TR-2,
+   room terrain design 6.1; M2)**.
 6. Resolved.
 
 Reactions hook in at named points, such as between an attack roll and the
@@ -1245,6 +1288,12 @@ Applied on 2026-11-16:
   (floor layout design, 2026-11-21). It adds the door, Drape, Squeeze,
   Latch, Listen and Sound the wall rows to 7.2 and the Grille clause to
   8.1. **(changes FL-7, FL-8, FL-17, FL-18, FL-19)**
+- **Room terrain:** settled in `2026-11-21-room-terrain-design.md` (room
+  terrain design, 2026-11-21). It adds the Shunt, Kick, Smash, Plank
+  (M2), Overturn and Haul (M3) rows to 7.2, the line and object clauses
+  to 8.1, the cover step to 14.3 and clarifications to 8.2–8.4, and the
+  M3 Remnant exception to 2 and 8.4. **(changes TR-2, TR-5, TR-6, TR-9,
+  TR-12, TR-23, TR-26, TR-27, TR-28)**
 - **Content volume:** counts of companions, themes, monsters and bosses for
   M2. The M1 slice class is the Vanguard (classes design) **(change
   CL-13b)**.

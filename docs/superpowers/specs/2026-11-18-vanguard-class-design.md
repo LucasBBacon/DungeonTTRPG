@@ -523,7 +523,24 @@ without its repertoire.
      - its per-use damage ≤ Hew's expected damage (die average × (1000
        + crit permille ÷ hit permille) ÷ 1000);
      - no single unit takes more from one use than Hew's expected
-       damage.
+       damage. **This clause reads the collision band only (2026-11-21;
+       TR-30, room terrain design 6.10):** the contact surplus is
+       bounded per unit by `ContactLethalityBound` and the
+       one-instance top-up rule instead.
+
+     **Contact term (lead's call, 2026-11-21; TR-30, room terrain
+     design 6.10).** For a line whose payoff is a collision, the per-use
+     damage for each hostile it can move is:
+
+         collision × (collisionRate − contactRate)
+           + contactRate × (collision × P(save) + contact × (1 − P(save)))
+
+     `contactRate` *(illustr. 100‰)* is the share of uses whose move
+     meets a contact hazard or a harm square; it sits in the tuning
+     file beside `collisionRate`. P(save) is the reference target's
+     Reflex save against the reference difficulty of room terrain
+     design 6.5.2 *(illustr. 500‰)*. For a harm square, "contact" reads
+     the harm band.
 
      An Art is checked per target line: the damage one target's line
      adds, with its collision. The Art as a whole falls under
@@ -1655,7 +1672,9 @@ turn, your first Ram costs nothing (a free effect, not a refill).
 - Throw (Later: needs a free-hand grapple rule);
 - Over the Edge auto-entry (Later: needs hazard caps);
 - lethal chasms (Later: dungeon generation);
-- breakable terrain (rejected: the fixed-terrain non-goal);
+- breakable terrain: **reversed for objects (client, 2026-11-21; TR-7,
+  room terrain design 6.7)**. Furnishings and Kegs break and move;
+  walls never break (RS 7.6's refusal stands);
 - carom pushes (Later).
 
 **Collision band (lead's call):** flat 2 / 3 / 3 at levels 1–4 / 5–8 /
@@ -1716,7 +1735,8 @@ anything on the forbidden list (classes 6.3).
 | — | Universal sweep / Blade Storm | Crowd answer | Area lean; 2241‰ at level 3 | classes 6.4 | **Rejected** |
 | — | Masterstroke, Combination | Crit and combo spends | Carve-outs | classes 8.3 | **Rejected** |
 | — | Damage reduction | Tankiness | Stat model 6 bars DR; Shielded Later | — | **Rejected** |
-| — | Kill refunds; free swaps outside a camp spend; destructible terrain | — | Forbidden refill; anti-goal; non-goal | — | **Rejected** |
+| — | Kill refunds; free swaps outside a camp spend | — | Forbidden refill; anti-goal | — | **Rejected** |
+| — | Destructible terrain | Objects as weapons | Main 2 non-goal reading | room terrain design 6.3, 6.7 | **Reversed for objects (client, 2026-11-21; TR-7, room terrain design 6.7):** breakable and movable Furnishings and Kegs; walls never break |
 
 ### 9.1 Adopted mechanics in full
 
@@ -1876,6 +1896,11 @@ spent on Attack:
   - Owed in the simulator: the observed collision rate per subclass and
     theme. If it exceeds `collisionRate`, the tuning value is raised and
     the table rerun.
+  - **(2026-11-21; TR-30, room terrain design 6.10)** The cells above
+    are at `contactRate` 0. The table is re-run with the contact term
+    of 6.4 rule 8, using the observed `collisionRate` and `contactRate`
+    per theme; the "most one unit takes" figure reads the collision
+    band only.
 
 ### 10.2 Nova bound
 
@@ -2130,8 +2155,9 @@ Each case states its expected outcome; the test confirms it.
   (per rest, by level), `stances[]` with the `stance` record kind;
 - on subclasses: `offerLaneAdjust`, `artId`, `standFastRiderId`;
 - `turnAllowance` and `perTargetRoundCount` records (7.9);
-- in the tuning file: `collisionRate` and the `CampOptionBound`
-  reference encounter (6.4 rule 8; 7.3);
+- in the tuning file: `collisionRate`, `contactRate` (TR-30, room
+  terrain design 6.10) and the `CampOptionBound` reference encounter
+  (6.4 rule 8; 7.3);
 - the condition equivalence table, `conditions.equiv.json` (9.2);
 - cost timing `onEvent:<id>` (VG-7) and trigger kind
   `attackAgainstOther` (VG-20).
@@ -2166,7 +2192,8 @@ of eight, the copy registry).
 
 - parity at the worst legal build, with real R;
 - the observed collision rate per subclass and theme, against
-  `collisionRate` (10.1);
+  `collisionRate`, and the observed `contactRate` per theme (10.1;
+  TR-30, room terrain design 6.10);
 - camp share under three measures, with Momentum counted and the
   revised Art and Stand Fast weight (10.4);
 - the 60% rule in the offer value unit;

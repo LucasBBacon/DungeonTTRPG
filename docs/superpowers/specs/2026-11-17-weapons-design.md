@@ -682,7 +682,12 @@ records reference a verb and cannot override its text.
      Wrecker's Battering Force: once per round, a verb-only move stopped
      early deals collision damage as if a non-verb part had contributed,
      and its parts stay verb-sourced for every other rule **(change VG-8;
-     Vanguard design 8.3)**.
+     Vanguard design 8.3)**. A second named exception class (M2): a
+     purely verb-sourced push that fails its hazard-edge save against a
+     contact hazard deals the collision band, typed by the hazard (a push
+     with a non-verb part deals the contact band instead); a successful
+     save is an ordinary obstacle stop **(change TR-10; agreed by the
+     client 2026-11-21, Q3; room terrain design 6.5.2)**.
 5. **A verb is off** when the wielder is untrained (10.2) or Strained
    (10.1), and on improvised and unarmed attacks (13).
 6. **Existing conditions only.** A verb applies only positional effects,
@@ -767,6 +772,12 @@ these steps, in this order:
    are not spent; Overlap qualifies only on net advantage; gear roll-mode
    effects are suppressed while the target has Raise or Fortified.
    Hailguard is fixed here, never after the roll.
+   - **2b. Cover (M2):** right after the net mode is fixed, cover is
+     computed (9.5): −2 to the roll if the target is Covered, ignored if
+     the net mode is disadvantage, suppressed against an active charged
+     AC bonus. It is recorded with the mode in `AttackDeclared`; the
+     matching step sits in ability model 14.3 for spell attacks
+     **(change TR-2; room terrain design 6.1 CV4)**.
 3. **Choose the ability** (6.2) and record it, with the mode, in
    `AttackDeclared`.
 4. **Roll** the attack.
@@ -782,7 +793,11 @@ these steps, in this order:
    charges with the target's own first (3a its class-pool-paid wards,
    such as Sworn Guard or Flare, then 3b its Parrying property) **(change
    SH-9; ARC-5; armour design 10.4)**; no reaction AC bonus is offered
-   after a gear-sourced disadvantage.
+   after a gear-sourced disadvantage. **Against a Covered attack (M2)**
+   the protection is max(cover 2, the reaction AC bonus), never the sum:
+   offers are evaluated against the roll with cover applied, and a
+   reaction or step-0 fill whose bonus is ≤ 2 is not offered (not spent,
+   window not closed) **(change TR-2; room terrain design 6.1 CV4)**.
 6. **Hit or miss, and crit.** On a miss: Graze (7.6), then the target's
    `answeredBy[]` is written, then step 6a, then step 6b, then stop. A
    natural 20 hits and crits **(change SH-8; Shade design 8.3)**.
@@ -823,7 +838,11 @@ these steps, in this order:
    its hit. Under Upend, Topple II's push is dropped **(change VG-8;
    Vanguard design 6.4 rule 6, 8.3)**.
 10. **Forced movement:** every forced movement this hit causes is summed
-    (7.2 rule 4, across all moved units) and resolved once.
+    (7.2 rule 4, across all moved units) and resolved once. **M2:** the
+    hazard-edge save against a contact hazard or harm square is rolled
+    here, square by square as the move resolves, before step 11's
+    reserved saves; it never uses the step-9 slot **(change TR-10; room
+    terrain design 6.5.2)**.
     - **10b. Domino link** (Wrecker): when the combined move is stopped
       early by a hostile, that hostile is pushed 1 square the same way,
       inside the remainder of the 3-square sum; the link collides only
@@ -855,7 +874,9 @@ attack of the same Attack action, a Nick attack included.
   square. This gives the obvious square for the 8 directions and one
   defined square for any ranged offset, such as (5, 2) or a knight's move.
   - An empty square, a wall, or a square the attacker cannot see
-    (symmetric visibility) ends the effect; it never carries on.
+    (symmetric visibility) ends the effect; it never carries on. A Tall
+    piece is a wall for the line; Low pieces, Furnishings and hazard
+    pieces never stop it **(change TR-5; room terrain design 6.2.1)**.
   - An ally on that square stops it. **Long Skewer** b1 skips exactly one
     ally square and checks the square after it; b3 then checks one more
     square beyond the second unit, under the same rules.
@@ -1022,10 +1043,23 @@ Special arrows and bolts are `coating` consumables tagged `launcher`
 
 ### 9.5 Cover
 
-- No cover rule in M1. Obstacles block line of sight only, and units never
-  give cover.
-- Revisit in M2 with the dungeon generation design, using the simulator's
-  party damage share by range band (21.3).
+- No cover rule in M1. Tall pieces block sight and movement; Low pieces
+  block movement only; nothing gives cover; units never give cover
+  **(change TR-3; room terrain design 6.1 CV1)**.
+- **M2:** directional one-tier cover, as room terrain design 6.1 (CV2 to
+  CV4). A ranged attack roll (ranged or thrown weapon attack, or ranged
+  spell attack) at Chebyshev distance ≥ 2 is Covered when a cover-giver
+  8-adjacent to the target faces the attacker within 45 degrees (the
+  dot-product test), is not 8-adjacent to the attacker, and the target is
+  not on a Portal square. Effect: −2 to the attack roll *(illustr.;
+  lever `cover.effect` = off | minus2 | disadvantage)*, computed at step
+  2b (7.5); never stacks; ignored when the net mode already has
+  disadvantage; suppressed against a target whose charged AC bonus is
+  active (Raise, Fortified); against a reaction AC bonus the larger
+  applies, never both (step 5). Walls, partitions, units and Grilles
+  never give cover; melee, reach, opportunity attacks, saves and areas
+  never face it **(change TR-2; agreed by the client 2026-11-21, Q1;
+  room terrain design 6.1)**.
 - A unit holding only a launcher threatens adjacent squares through its
   improvised stock or stave blow (13).
 
@@ -1602,7 +1636,7 @@ Templates are `natural.*` ability records, used by unarmed types (enemies
 | Net (as a party weapon) | Restrained on a `fight` pool breaks ability model 6.2. A monster cooldown-3 ability (M2) and a Later consumable instead. |
 | Darts, throwing knives | Dagger skins |
 | Chakram, repeating crossbow, atlatl, warbow, harpoon, boomerang | The Ricochet, Repeater and Far-flight properties, or the longbow, the trident and the default no-pickup throw |
-| Blowgun, staff sling | Deferred: they need Coated plus a stealth rule, or a cover rule |
+| Blowgun, staff sling | Deferred: they need Coated plus a stealth rule, or a cover rule (the M2 cover rule now exists, room terrain design 6.1; revisit when the weapons owner next extends the roster) |
 | Scimitar, gladius, estoc, partisan, bo staff | Folded into the sabre, shortsword, war pick, spear and staff; the names live on as notables and skins |
 
 ## 18. Notable properties
@@ -1945,7 +1979,7 @@ The build fails when:
 | Rounds a melee unit ends unable to attack because of forced movement or Prone | Low; a lockout watch | M1 |
 | Set-zone stalls (fights where no unit enters a zone for 3+ rounds) | Rare | M1 |
 | Weapon swaps per fight | Low but non-zero (settled, ability model 16) | M1 |
-| Damage share by range band (melee, reach 2–3, ranged) | Each band's share of party damage within ±25% of its share of party members; feeds the M2 cover decision (9.5) | M2 |
+| Damage share by range band (melee, reach 2–3, ranged) | Each band's share of party damage within ±25% of its share of party members; feeds the M2 cover decision (9.5); run with the cover arm `cover.effect` off / minus2 / disadvantage per layout grammar **(change TR-2; room terrain design 11.4)** | M2 |
 | **Damage taken by range band** (party damage taken per fight by the unit's main band, reach 3 units reported apart) | Launcher-main units take at least 50% of what melee-main units take; the safety veto on the Precision gate (6.5) | M2 |
 | Launcher family floor (6.4) | Every launcher family ≥ 60% of the reference at levels 1, 5 and 10; the longbow measured with the agreed Aim (7.1), checking the estimate in 6.4 and the 110% cap | M2 |
 | Families never equipped after floor 2 | None; the dead-weapon watch | M2 |
@@ -2133,8 +2167,10 @@ left as they are (7.2 rule 9).
   the crit rule is settled (S-3, death and healing design 9). Every guard
   and parity figure here assumes SRD double dice for every unit (enemies
   25, S-3) **(change DH-48)**.
-- **Dungeon generation:** a cover decision in M2 (9.5); room shapes that
-  give corridors and open rooms (Skewer, Cleave, reach).
+- **Dungeon generation:** the M2 cover decision is made in
+  `2026-11-21-room-terrain-design.md` (room terrain design 6.1; TR-2,
+  TR-3); room shapes that give corridors and open rooms (Skewer, Cleave,
+  reach) are met by its Lane and 5×5 core (room terrain design 6.2.3).
 - **Enemy content:** the rust, acid and ooze types that Notch (Later), and
   monster cooldown disarms (Later).
 

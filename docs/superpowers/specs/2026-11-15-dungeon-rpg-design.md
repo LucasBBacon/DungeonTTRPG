@@ -44,7 +44,9 @@ simulate and change.
 - Official mod support. Data-driven content leaves the door open.
 - Spreading, evolving or player-placed ground surfaces. Fixed condition
   squares placed by floor generation are allowed; see the conditions
-  design, section 11.
+  design, section 11. Exception (M3): environment-made Remnant clouds
+  with a fixed footprint and a short countdown, which never drift,
+  spread or grow (room terrain design 6.6; change TR-27, M3).
 
 ### Anti-goals
 
@@ -329,6 +331,10 @@ computes rules.
   per Blueprint; the party-agnostic graph is drawn first and the party
   band picks only size classes; dressing draws from a display-side
   stream the core never reads (floor layout design 6.1; change FL-2).
+  A `terrain` child of each floor's dungeon substream, drawn after
+  layout with fixed counts, places room terrain; every piece on a
+  walkable square comes from it, not from dressing (room terrain design
+  6.2.5; change TR-17).
 - Rules use integer arithmetic only.
 - No reliance on unordered collection iteration.
 
