@@ -893,7 +893,7 @@ Uncommon pieces add one roll from their location table. **(lead's call)**
 | Family | Line | Wave | Notes |
 |---|---|---|---|
 | **Strider's Boots** | **Strider** (approved): standing from Prone costs 1 square | M2 | Movement-cost step (6.1 item 3). Carried: never on brutes |
-| **Ledgewalker's Boots** | **Ledgewalker:** your hazard-edge and landing saves have advantage | M2 | **(change TK-2)** F1; container-only |
+| **Ledgewalker's Boots** | **Ledgewalker:** your hazard-edge and landing saves have advantage | M2 | **(change TK-2)** F1; container-only. **(change HZ-10; M2 (gated), else M3)** Also reads Void saves: the edge save into a Void and the landing save over one (hazards design 6.4); Teetering's disadvantage does not apply to the Void-fall save. Trigger rate reported on Void floors (hazards design 11.4) |
 | **Runner's Boots** | **Runner** (approved): once per fight, Disengage as a bonus action | M2 | Offered as an action variant (9.1). Pre-cleared on the class copy registry against Cunning-Action shapes (`copyRegistryAllowlist`); container-only |
 | Wader's Boots | 1 / 1 / 2 per rest: entering a water or oil square applies nothing to you this turn | Later (feet reserve) | Recast as a charge (an always-on full prevention is outside 6.1) |
 | Leaper's Boots | 1 / 1 / 2 per rest: Jumping over one crossable hazard as part of movement | Later (feet reserve) | Depends on main design 4.3 Jumping sources and on Athletics's agreed jump use staying useful |
@@ -1538,7 +1538,8 @@ grants.
   Bolstered.
 - **Dungeon generation:** hazard edges and crossable hazards per floor
   (Ledgewalker, Leaper's), from floor 2: floor 1 is dry by design
-  **(change RT-20)** (run structure design 6.3, 14); water and oil
+  **(change RT-20)** below Nightmare tier 2 **(change HZ-25)** (run
+  structure design 6.3, 14); water and oil
   squares (Wader's); Jumping sources (main design 4.3). Hazard edges
   answered by the room terrain design
   (`2026-11-21-room-terrain-design.md`) **(change TR-29)**: contact
@@ -1546,7 +1547,15 @@ grants.
   hazard-edge save for Ledgewalker (room terrain design 6.5.2, 14);
   floor 1 still has no hazard edges: the Gaol warden's stove and the
   Wake candle rack are typed Low pieces, not hazards, with no edge save
-  (room terrain design 6.5.6).
+  (room terrain design 6.5.6). Answered further by the hazards design
+  (`2026-11-21-hazards-design.md`): Void squares are hazard edges for
+  Ledgewalker (edge and landing saves; **change HZ-10**; M2 (gated),
+  else M3; hazards design 6.4); the floor-1 Landmark ticks are not
+  hazards, so floor 1 stays without hazard edges in the base game
+  (**change HZ-19**, told; M3; hazards design 6.1); at Nightmare tier 2+
+  each floor-1 theme gains one damaging hazard package with hazard
+  edges (the Treadwheel's Hot stove, staked pits, the Open Grave Void)
+  **(change HZ-25; M3)** (hazards design 6.19).
 - **Enemy content:** the Support role (Graveward exclusions, Later);
   grapplers and web or net users (Grappler's Gauntlets); lurkers (Watcher's
   Hood, Visored Helm).

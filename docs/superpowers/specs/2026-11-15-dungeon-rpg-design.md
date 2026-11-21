@@ -47,6 +47,12 @@ simulate and change.
   design, section 11. Exception (M3): environment-made Remnant clouds
   with a fixed footprint and a short countdown, which never drift,
   spread or grow (room terrain design 6.6; change TR-27, M3).
+  Exception (M3; the reversal round M4): environment square changes
+  only through pre-proven Stir states (Tides held whole in their two
+  states, Cord Flips, Turning Ring boards, environment-moved
+  Furnishings, environment Overturn), using existing square kinds,
+  announced a round ahead, never spreading or growing (hazards design
+  6.3, 7; change HZ-18, M3). **(agreed 2026-11-21, Q3)**
 
 ### Anti-goals
 
@@ -172,7 +178,9 @@ These would make the game a failure even if everything works.
   specific hazards and to help horizontal movement: a jumping or flying unit
   ignores hazards and obstacles tagged as crossable by that state. They do
   not affect line of sight, and there are no high-ground rules. All
-  calculations stay on the flat grid. **(decided)**
+  calculations stay on the flat grid. **(decided)** Void squares are
+  flat hazards crossable by both states (hazards design 6.4; change
+  HZ-9, M2 (gated), else M3).
 - A unit's turn has movement, one action, one bonus action, and one reaction
   per round. **(decided)**
 - Line of sight and fog of war use one symmetric visibility rule: if A can
@@ -240,6 +248,8 @@ All decided.
 - **Difficulty ladder.** Each win unlocks an optional harder tier. From
   M3, Nightmare tiers add kind, not stats, and the Perilous Door makes
   the ladder per-floor (run structure design 9.1; change RT-21, M3).
+  Hazards escalate in kind under this rule (hazards design 6.19;
+  change HZ-25, M3).
 - **No permanent stat boosts.**
 - **Hub.** A simple camp screen to begin with. A richer hub is out of scope
   until the run itself is proven.

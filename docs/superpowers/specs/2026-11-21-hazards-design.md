@@ -1,8 +1,7 @@
 # Hazards: Design (Dungeon Generation, Segment 4)
 
 Date: 2026-11-21
-Status: Draft, awaiting client approval, 2026-11-21 (revised after the
-design check that followed the client's Q1–Q4 answers; 19.1)
+Status: Approved, 2026-11-21
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model, "ABL"),
@@ -44,33 +43,42 @@ themes, readability, art, VFX and audio, the adopted, deferred and
 rejected mechanics, the numbers and fixes, data, validators and the
 simulator, the staging, the segment 4 / segment 5 line and the later
 hooks, the binding requirements, the HZ-n changes, the told-plainly
-items, the risks and the critique resolutions and names.
+items, the risks and the critique resolutions and names. The client
+approved this document as a whole on 2026-11-21, and answered the one
+item left for it, Q1's reach in M2, by accepting the lead's
+recommendation (19.1).
 
 Items marked **(lead's call)** were filled in by the design lead inside
 approved rules and were in the proposal the client answered; the client
-said they stand as written. Items marked **new lead's call** were made
+confirmed them all on 2026-11-21, when it approved this document as a
+whole, and they are binding. Items marked **new lead's call** were made
 while writing this document, beyond that proposal; they are listed in
-19.1 for the client's approval with this document. Items marked
-**(settled)** restate a rule from an approved document; **(decided)**
-marks a main-design client decision. Items marked **(change HZ-n)**
-amend an approved document and are listed, with the exact section they
-touch, in section 17; rows that touch **decided** or **agreed** text are
-flagged there, and Q1–Q4 cover the rows that name them. Items marked
-**(told plainly)** narrow or re-read agreed or settled text, or state an
-unwelcome forecast, and are told to the client in plain words (19.1).
-Nothing here is binding on the builders until the client approves this
-document.
+19.1 and the client confirmed them all on 2026-11-21. Items marked
+**(lead's call, after the check)** were made while revising this
+document after the design check that followed the client's Q1–Q4
+answers; they are listed in 19.1 and the client confirmed them all on
+2026-11-21. Items marked **(settled)** restate a rule from an approved
+document; **(decided)** marks a main-design client decision. Items
+marked **(change HZ-n)** amend an approved document and are listed,
+with the exact section they touch, in section 17; rows that touch
+**decided** or **agreed** text are flagged there, and the client's
+approval of this document on 2026-11-21 (with Q1–Q4 where a row names
+one) covers them. Items marked **(told plainly)** narrow or re-read
+agreed or settled text, or state an unwelcome forecast, and were told to
+the client in plain words (19.1, including those told after the check);
+the client confirmed them all on 2026-11-21. Every item here is binding
+on the builders.
 
 | Marking | Meaning |
 |---|---|
 | **(settled)** | Restates a rule from an approved document |
 | **(decided)** | A main-design client decision, restated |
 | **(agreed)** | A client answer: Q1–Q4 of this document (2026-11-21), or one recorded in an approved document, restated |
-| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal; the client said it stands as written |
-| **new lead's call** | A lead's call made while writing this document, beyond the answered proposal; listed in 19.1 for approval |
-| **(lead's call, after the check)** | A lead's call made in response to the design check that followed the client's answers; listed in 19.1 for approval |
+| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal; confirmed by the client with this document on 2026-11-21 |
+| **new lead's call** | A lead's call made while writing this document, beyond the answered proposal; listed in 19.1 and confirmed by the client on 2026-11-21 |
+| **(lead's call, after the check)** | A lead's call made in response to the design check that followed the client's answers; listed in 19.1 and confirmed by the client on 2026-11-21; never overrides a client answer |
 | **(change HZ-n)** | Amends an approved document; listed with its exact section in 17 |
-| **(told plainly)** | Narrows or re-reads agreed or settled text, or states an unwelcome forecast; told to the client in plain words (19.1) |
+| **(told plainly)** | Narrows or re-reads agreed or settled text, or states an unwelcome forecast; told to the client in plain words (19.1) and confirmed by the client on 2026-11-21 |
 | *(illustr.)* | An illustrative number, owned by the builders and calibrated by the M2 simulator (10, 11). Never binding |
 
 **The client's brief:** dungeon generation segment 4 of 12, hazards.
@@ -207,7 +215,10 @@ trap.
   floor. If both pass their gates (6.3), every run has one or two Stir
   floors (two in about a third of runs, when the Silk is not drawn); the
   Silk floor and F4–5 have none. Q1's "one per F2–5 floor" is therefore
-  a cap in M2, not one on every floor (19.1). On toy numbers the Stir
+  a cap in M2, not one on every floor. **The client accepted this on
+  2026-11-21 (19.1):** Q1 stays a cap in M2, both pilots may ship on
+  their own gates (one or two Stir floors per run), and F4–5 Stirs
+  arrive at M3. On toy numbers the Stir
   is also likely to miss the clock gate unless its measured reading
   cost comes in well under the toy's (10), in which case Q1's own
   fallback sends it to M3.
@@ -2744,16 +2755,20 @@ M3 instead; the client is told (19.2).
 
 ## 17. Changes to approved documents
 
-**This document edits no parent document itself**; the rows are applied
-by the owners of the sections they touch, once the client approves this
-document **(lead's call)**. Every row names the exact section it
-touches. Rows that touch **decided** or **agreed** text are flagged in
-the "Flag" column; Q1–Q4 agreed each flagged row in substance where the
-row names one, and the client's approval of this document covers them.
-Told-plainly rows are listed in 19.1. HZ-6, HZ-13, HZ-15, HZ-17, HZ-24
-and HZ-30 are requests to other owners; they change nothing until their
-owner rules. M2 (gated) rows apply only if their gates pass, else at M3;
-M3 and M4 rows apply at their wave.
+Applied on 2026-11-21, when the client approved this document. **This
+document edits no parent document itself**; the rows are applied by the
+owners of the sections they touch **(lead's call)**, and rows owed by
+other owners are listed again in 18. Every row names the exact section
+it touches. Rows that touch **decided** or **agreed** text are flagged
+in the "Flag" column; **the client's approval of 2026-11-21 covers
+them** (with Q1–Q4 where a row names one; the answers of 2026-11-21
+already agreed each of those rows in substance). Told-plainly rows were
+told in 19.1 and confirmed by the client on 2026-11-21. HZ-6, HZ-13,
+HZ-15, HZ-17, HZ-24 and HZ-30 are requests to other owners, recorded as
+pending requests; they change nothing until their owner rules. M2
+(gated), M3 and M4 rows are recorded now as applied text marked with
+their wave: an M2 (gated) row takes effect in M2 only if its gates pass,
+else at M3 (19.2), and M3 and M4 rows take effect at their wave.
 
 **Narrowings recorded inside this design (no approved text changes):**
 - Brink reads Voids, because they are squares (Vanguard unchanged);
@@ -2844,10 +2859,20 @@ The owed rows are the single list in 17; by owner:
 
 ## 19. Open items for the client
 
-The four questions were answered on 2026-11-21 **(agreed)**, and the
-client said everything else in the proposal stands as written. Open:
-the client's approval of this document as a whole, including the new
-lead's calls and the told-plainly items below.
+None. Approved by the client on 2026-11-21.
+
+The client approved this document as a whole on 2026-11-21, including
+every lead's call (the lead's calls of the answered proposal, the new
+lead's calls in 19.1 and the lead's calls after the check in 19.1), the
+told-plainly items (including "Told plainly after the check" in 19.1,
+notably that Q1 is a cap in M2) and the partial narrowings recorded in
+17, and its approval covers the flagged rows of 17. The four questions
+were answered on 2026-11-21 **(agreed)**; the client also said
+everything else in the proposal stands as written. The one item that
+needed the client, Q1's reach in M2, was answered on 2026-11-21 with the
+lead's recommendation (19.1). The future items in 19.2, which come back
+only if a report or a later design triggers them, and the naming pass
+remain future items.
 
 ### 19.1 This document
 
@@ -2893,7 +2918,7 @@ the client accepted: no hero dies to a fall; nothing acts on unannounced
 squares and nothing draws at act time; no spreading surfaces; floor 1
 dry for the solo hero in the base game; escalation in kind, not damage.
 
-**Told plainly, for the client's confirmation with this document:**
+**Told plainly; confirmed by the client on 2026-11-21:**
 - **M2's dynamic vision is at most one breathing room per floor.** Stirs
   barely move kills or fight length; they buy a changing best square at
   a reading cost (0.1, 5.2).
@@ -2924,7 +2949,8 @@ dry for the solo hero in the base game; escalation in kind, not damage.
 - **RS 8.10's acid cap is re-read** from units to sources (HZ-5).
 
 **New lead's calls made while writing this document** (beyond the
-answered proposal; for the client's approval with this document):
+answered proposal; confirmed by the client on 2026-11-21, with this
+document):
 1. **Both pilot Stirs are built to the playtest, and each ships on its
    own theme gates** (`FootprintValue`, its spike row,
    `StirBothWaysShare` on its theme) while the shared gates pass (6.3,
@@ -2975,7 +3001,8 @@ answered proposal; for the client's approval with this document):
     Depends on.
 
 **Told plainly after the check** (the design check that followed the
-client's answers; for the client's confirmation with this document):
+client's answers; confirmed by the client on 2026-11-21, with this
+document):
 - **Q1 in M2 is a cap, not one Stir on every floor.** Both named
   candidates are F2–3 themes, so a Stir can appear only on a Choir or
   Carnival floor. With both allowed to ship on their own gates, every M2
@@ -3013,9 +3040,9 @@ client's answers; for the client's confirmation with this document):
 - **The Supper's Last Orders is not a Mood** but a Courses menu rule
   under the same Omen (6.9, 7.8).
 
-**Lead's calls made after the check** (for the client's approval with
-this document; each is marked "lead's call, after the check" where it
-sits):
+**Lead's calls made after the check** (each is marked "lead's call,
+after the check" where it sits; confirmed by the client on 2026-11-21,
+with this document):
 1. The countdown C and the exact Now, Hold, Stoke, Flip and Kick rules
    (6.3, 6.3.4, 9.2).
 2. The computable Warned definition, with voluntary entry counted as
@@ -3086,14 +3113,19 @@ sits):
 36. New lead's call 1 revised: both pilot Stirs may ship, each on its own
     theme gates (6.3).
 
-**Needs the client:** one item.
-- **Q1's reach in M2.** As written, Q1 gives at most one Stir floor per
+**Q1's reach in M2 (answered by the client, 2026-11-21):** the one item
+that needed the client.
+- **The question.** As written, Q1 gives at most one Stir floor per
   F2–5 floor and in practice one or two per run (Choir and Carnival
-  floors only). If the client wants a Stir on every F2–5 floor in M2,
-  that needs new M2 (gated) Stirs for the Silk, Supper, Gut and Heart,
-  which adds build, art and clock cost and runs into SC14 (Strike-only
-  Stirs with no payoff are cut). The lead recommends keeping Q1 as a
-  cap in M2 and filling F4–5 at M3.
+  floors only). A Stir on every F2–5 floor in M2 would need new M2
+  (gated) Stirs for the Silk, Supper, Gut and Heart, which adds build,
+  art and clock cost and runs into SC14 (Strike-only Stirs with no
+  payoff are cut). The lead recommended keeping Q1 as a cap in M2 and
+  filling F4–5 at M3.
+- **The answer (2026-11-21):** the client accepted the recommendation.
+  Q1 stays a cap in M2: Stirs appear only on Choir and Carnival floors,
+  both pilots may ship on their own gates, so an M2 run has one or two
+  Stir floors; F4–5 Stirs arrive at M3.
 
 ### 19.2 Future items triggered by reports or later designs
 
@@ -3240,8 +3272,10 @@ enemies owner. Named in the text: F-b (perimeter and flank Voids), F-c
 A design check (builder, consistency, play and art lenses) followed the
 client's Q1–Q4 answers. Its findings were applied in place and marked
 "after the check"; none overrides a client answer. The resulting
-told-plainly items, the lead's calls and the one item that needs the
-client are listed in 19.1.
+told-plainly items, the lead's calls and the one item that needed the
+client (Q1's reach in M2, answered on 2026-11-21) are listed in 19.1;
+the client confirmed them all when it approved this document on
+2026-11-21.
 
 ---
 

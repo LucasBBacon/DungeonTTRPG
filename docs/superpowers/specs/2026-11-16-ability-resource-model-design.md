@@ -50,7 +50,10 @@ units in initiative order. **(agreed)**
   fixed footprint and a short countdown, which never drift, spread or
   grow, are an exception **(change TR-27, room terrain design 6.6; M3)**.
 - Counter-casting and readied actions at launch. **(lead's call)**
-- Lair actions. **(lead's call)**
+- Lair actions. **(lead's call)** A hazard Stir acting at the round-end
+  Dream step is not a lair action: it has no creature, no choice and no
+  initiative slot, and is a clock (hazards design 6.3, 3.3 HT3) **(change
+  HZ-12, a flagged reading; M2 (gated), else M3)**.
 
 ### Anti-goals
 
@@ -155,8 +158,9 @@ call)**:
 Rejected from the drafts **(lead's call)**: a guaranteed safe room before the
 boss (the rejection kept: floor layout design 6.11, change FL-5); companion turns played automatically; in-fight resource income;
 player cooldowns; telegraphed monster wind-ups (deferred: the AI scorer
-cannot reason about them yet); upgrades written as data patches instead of
-effects.
+cannot reason about them yet; a hazard Stir's announced act is not a
+monster wind-up, hazards design 6.3, **change HZ-12; M2 (gated), else
+M3**); upgrades written as data patches instead of effects.
 
 ## 6. Abilities and resources
 
@@ -422,6 +426,7 @@ Every ability declares exactly one cost **(lead's call)**:
 | Overturn: orthogonally adjacent to a `tippable` Tall Furnishing, Athletics against heft 15 *(illustr.)*; it falls into the 1×2 strip straight away from the user (Reflex: failure 2× collision band plus Prone, success half), then becomes debris and opens sight **(change TR-6, room terrain design 6.3.7; M3)** | Action |
 | Haul: drag an adjacent light Furnishing into the square you left; provokes as normal movement **(change TR-6, room terrain design 6.3.7; M3)** | 2 movement per square |
 | Cross a Plank (narrow ground): in combat, entering the first Plank square needs Acrobatics against the segment-5 ladder (DC 12, *illustr.*); a failure ends movement on the square before, no retry that round, no fall and no damage. Out of combat one check by the leading unit, with the Squeeze row's failure cost. Stiff gives disadvantage; forced movement onto a Plank needs no check **(change TR-12, room terrain design 6.2.6; M2)** | In combat part of movement; out of combat one party check |
+| Operate a Cord (a Low piece face or wall socket; each Cord has exactly one verb): from an adjacent square, no check, noise 4 *(illustr.)*. A bound Cord re-times one Stir (Now, Hold); Reverse, Flip and Kick, and standalone Cords, are M3. An act set by an Operated Cord credits the operator for experience and morale; on-kill hooks never fire from a Dream-step act **(change HZ-15, hazards design 6.3.4; re-time verbs with the Stirs: M2 (gated), else M3)**. *Pending request (HZ-15), not a rule until the ability model owner rules:* a unit that starts its turn adjacent to a Cord may Operate it as its bonus action | Action |
 | Use a scroll or wand outside your class: Arcana, trained only, against 10 + tier; in class, no slot is spent **(settled; change CN-12, consumables design 13.2)** | Action. A failed check uses the scroll or charge up: no free retries **(settled)**. |
 | Drink a potion (a potion on your own belt) **(change I-5, items design 7.1)** | Bonus action |
 | Administer a belt potion or tonic to an adjacent ally: tonics minor only; a potion does not lift Downed; not a potion or healing scroll on a Downed unit (a trinket reach step may extend 'adjacent' to 2 squares; trinkets design 6.1) **(change I-5, items design 7.1; change TK-19; change CN-12, consumables design 11)** | Action (the giver's); the receiver spends nothing |
@@ -437,6 +442,7 @@ Every ability declares exactly one cost **(lead's call)**:
 | Strained: below a worn armour's or active shield's Strength threshold, speed −2, once per unit however many items are Strained **(change AR-7, armour design 7.1)** | None; a derived penalty, never a condition |
 | Stiff: worn medium or heavy armour gives disadvantage on Acrobatics checks (slip past, escape a grapple by Acrobatics, narrow ground) **(change AR-7, armour design 7.3)** | None; a standing modifier |
 | Opportunity attack | Reaction |
+| Snatch: on a failed Void save (the edge-save Void branch), a party unit or a monster leader adjacent to the faller's last safe square at that moment, and not Prone, Restrained, Grappled or Groggy; the faller stops on that square, Prone and Teetering, with no damage, and the rest of the forced move ends. A Snatched failure is not a Dreamfall. For a monster leader, Snatching an elite whose hold has expired counts as that elite's Clutch for the fight **(change HZ-22, hazards design 6.4; M3)** | Reaction |
 | Off-hand attack with a light weapon, after at least one Attack-action attack this turn; Nick moves it into the Attack action, once per turn **(change W-2, weapons design 11.3)** | Bonus action, once per turn |
 | Threatened zone: an opportunity attack when a hostile leaves it by its own movement, Set when a hostile enters it from outside; they share the round's one reaction, and Disengage stops both. Movement resolves square by square, with the trigger timing of weapons design 8 **(change W-2)**. A slip-past trigger (`slipPast`) resolves after a successful slip-past check and before the step that moves the hostile through or past the square, as an opportunity attack. A separate trigger kind, `attackAgainstOther`, is a **reaction attack**, not an opportunity attack: it hooks after weapons design 7.5 step 15 for a weapon attack, or after 14.3 step 6 for each attack roll of a non-weapon attack, and its legality is re-checked then **(change VG-20, Vanguard design 7.4, 8.2)**. A third, `missedBy`, is also a reaction attack: it hooks after weapons design 7.5 step 6 / 6a, in the order the miss → Graze → `answeredBy[]` written → step 6a → the hook, where legality is re-checked. With `sameReactionFollowUp`, a follow-up on `onParrySuccess` (a Parry or a `countsAsParry` ward was applied and the roll missed) runs in the same reaction when the ward spent or carried the reaction, and spends the reaction after a step-0 fill. One reaction makes one attack: with the Riposte signature (weapons design 18.4) the player picks it or the follow-up **(change SH-8, Shade design 8.3)** | Reaction |
 | Ranged or thrown **weapon** attack with a hostile adjacent: disadvantage (spell attacks unaffected) **(change W-2, weapons design 9.2)** | Replaces one attack |
@@ -1294,6 +1300,12 @@ Applied on 2026-11-16:
   to 8.1, the cover step to 14.3 and clarifications to 8.2–8.4, and the
   M3 Remnant exception to 2 and 8.4. **(changes TR-2, TR-5, TR-6, TR-9,
   TR-12, TR-23, TR-26, TR-27, TR-28)**
+- **Hazards:** settled in `2026-11-21-hazards-design.md` (hazards
+  design, 2026-11-21). It adds the "not a lair action" reading to 2 and
+  5 (M2 (gated), else M3), the Operate row (re-time verbs M2 (gated),
+  else M3) and the Snatch reaction row (M3) to 7.2. Pending with the
+  ability model owner: bonus-action Operate. **(changes HZ-12, HZ-15,
+  HZ-22)**
 - **Content volume:** counts of companions, themes, monsters and bosses for
   M2. The M1 slice class is the Vanguard (classes design) **(change
   CL-13b)**.

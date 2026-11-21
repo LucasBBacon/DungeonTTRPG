@@ -702,6 +702,20 @@ lethal to you" (Volatile kill preview, enemies 14).
 - **Detected traps in combat** are ordinary damage: lethal, and shown with
   a lethal tag on the move preview (17.6). Hidden information never kills,
   and a known trap is never a safe tool.
+- **Falls: the FallFloor (agreed, Q6 extended; hazards Q2; change HZ-10;
+  M2 (gated), else M3).** Fall damage (a Dreamfall's fall band, and the
+  fall band of a later Void failure that leaves the unit on the edge)
+  can never take a party unit below 1 HP, **in or out of combat**
+  (hazards design 6.4, `2026-11-21-hazards-design.md`).
+- **Stir acts: Warned or floored (agreed, Q6 extended; hazards Q1;
+  change HZ-14; M2 (gated), else M3).** A Stir act cannot take a party
+  unit (hero or companion) below 1 HP unless the unit is **Warned** for
+  that act: it took an unlost turn after the announcement, not under
+  hard control, ended it on a due square of that Stir having entered by
+  its own movement or with a legal move out of the footprint available,
+  and has not been moved since. Every other case is **floored**. The
+  flag is computed at the unit's turn end and shown (17.5); monsters get
+  no floor (hazards design 6.3.2).
 - **Monsters keep the existing tick rule** (harmful ticks out of combat
   cannot take any unit below 1, conditions 5.5). The new floor is
   party-only.
@@ -710,6 +724,10 @@ lethal to you" (Volatile kill preview, enemies 14).
   owned by dungeon generation (conditions 11.6). Moving an ally into a
   hazard square or over a hazard edge asks for confirmation (17.7;
   Arcanist design 7.14, ARC-25).
+- **Dare rooms (M3; change HZ-21).** An unguarded Dare room's Stir runs
+  per out-of-combat tick, so its damage to the dare-taker is out of
+  combat and this floor applies; a taker reduced to 1 HP by the room is
+  returned to the threshold and the dare resets (hazards design 6.10).
 - The floors apply after temporary HP and **before** the save chain
   (20.3), so the phial is never spent on floored damage.
 
@@ -864,6 +882,10 @@ until the classes design proposes one and the client approves it.
 - Using limited heals out of combat is allowed, because it spends pools.
 - **Monsters:** no healing out of sight (enemies invariant 8). A monster's
   potion heals 25% of its max HP **(settled, consumables 7.2)**.
+- **Pending request (change HZ-30; M3; the DH owner rules; not a source
+  until ruled):** the Forbidden Course, a party-only environment heal in
+  the Long Supper (an Operate on a covered plate, ≤ 2 per fight, half a
+  potion's heal plus Poisoned) (hazards design 7.8).
 
 ### 12.2 Why heal spells scale by targets
 
@@ -907,6 +929,9 @@ returns. Not on at launch: the floor-1 boss needs 3–5 heals (5.8).
   unchanged. Overflow follows items 5.3 and 9.
 - **HE-5 Camp top-up.** `campHeroPotionTopUp` 1 (13.2).
 - **HE-6 Healing floor.** A build check (21.3).
+  *Pending request (change HZ-30; M3; the DH owner rules):* how the
+  Forbidden Course's environment heal is counted in the floor's healing
+  supply (`HealSupplyPerFloor`, as the hazards design names it; 7.8).
 - **HE-7 Generation requirement (constructive).** When the dungeon
   stream lays out the main path (enemies 10.5 step 1a; floor layout
   design 6.1, LS11) **(change FL-3)**, it **reserves** at
@@ -1230,6 +1255,11 @@ bought, never moves in combat, `treatProof` Scarred.
   effect; DH-28 restates it with indices (rooms 0, 1 and 2).
 - **Why:** a level-1 hero dying before its first turn is the death most
   likely to stop new players coming back.
+- **Hazards (told plainly; change HZ-19, M3):** this rule is unchanged.
+  Landmark ticks are a non-hazard class (no damage, condition or unit
+  movement) legal on floor 1; at Nightmare tier 2+ floor-1 hazard
+  packages place no Void, Stir or Lurch in main-path rooms 0–1 (hazards
+  design 6.1, 6.19, 7.2–7.4).
 
 ### 17.2 What the telegraphs compute
 
@@ -1275,6 +1305,9 @@ Recomputed after every command, **only while `combatActive` is true**
    announced joiners and boss actions due before the hero's next turn;
    and the **hero's own next turn-start tick batch**, with the batch cap,
    since it lands before the hero can act.
+   *Pending request (change HZ-13; the DH owner rules):* the threat list
+   gains environment acts due before the hero's next turn (hazards
+   design 6.3.1, 6.11).
 3. **Each threat is evaluated independently** against the hero's current
    state: no cross-threat conditions (one threat's Prone does not grant
    the next advantage). Attack: hit chance from d20 + bonus against the
@@ -1322,12 +1355,24 @@ Recomputed after every command, **only while `combatActive` is true**
   and leaks no AI intent. Switch it on if the danger calibration report
   (21.5) shows Deadly on more than its target share of party-fight turn
   ends.
+- *Pending request (change HZ-13; the DH owner rules):* due squares
+  count as hazards for the move candidates, and the warning reads
+  environment acts through 17.3's band (hazards design 6.3.1, 6.18).
 
 ### 17.5 Lethal tags
 
 On every damage preview, outgoing and incoming: "lethal"; "lethal →
 Death-warded / Reprieve fires"; "will Down X"; on the hero's own attack,
 "killing this triggers a burst that is lethal to you".
+
+**Warned or floored marks (change HZ-14; M2 (gated), else M3):** a
+floored party unit on a due square carries a bracketed "1" pip under
+its HP bar and "floored this time" (never a shield); a Warned unit
+carries the lethal tag (10.4; hazards design 6.3.2, 6.18).
+
+*Pending request (change HZ-13; the DH owner rules):* lethal tags
+extend to Stir acts due on due squares and to fall branches (hazards
+design 6.3.1, 6.18).
 
 ### 17.6 Move preview
 
@@ -1337,7 +1382,9 @@ hazards here: the move preview sums harm-square damage per square
 entered, with a lethal tag, and lethal tags (17.5) extend to contact
 hazards, harm squares, Kegs, Kick lines and Overturn strips (M3) (room
 terrain design 6.12, `2026-11-21-room-terrain-design.md`) **(change
-TR-23)**.
+TR-23)**. *Pending request (change HZ-13; the DH owner rules):* due
+squares count as hazards here, and the preview shows the act's result
+("Lands on due square: …") (hazards design 6.3.1, 6.18).
 
 ### 17.7 Friendly fire
 
@@ -1353,6 +1400,14 @@ squares, Keg footprints, Kick lines and Overturn strips (M3) (room
 terrain design 6.5.4, 6.12) **(change TR-23)**. This confirmation pattern is also the model for
 the Arcanist's last-slot confirmation, a confirmation of the player's own
 action (Arcanist design 5.2, ARC-13).
+
+**Rescue push (agreed, hazards Q2; change HZ-10; M2 (gated), else
+M3):** pushing an ally into a Void is legal behind this confirmation.
+The Dreamfall it causes lands on the secondary Snag, and the faller
+also loses its next action (Groggy as normal); the FallFloor (10.4)
+still holds (hazards design 6.4). *Pending request (change HZ-13; the
+DH owner rules):* due squares count as hazards for this confirmation
+(hazards design 6.3.1).
 
 ### 17.8 Plates
 
@@ -1386,6 +1441,9 @@ Treat and Recovery, plus the supply left and the patrol warning
   chain with every roll and its odds; the band at the hero's last turn
   end (recomputed by replay, 17.2); what was left unspent, worded
   neutrally ("2 potions on the belt"), never as blame.
+  *Pending request (change HZ-13; the DH owner rules):* the recap names
+  the Stir when an environment act is in the killing chain (hazards
+  design 6.18).
 - **Floor-entry card** headed by the **Stratum Card** (theme name, act,
   signature line, damage types, non-fearless band, boss name; run
   structure design 6.9) above the guaranteed counts (G6) **(change

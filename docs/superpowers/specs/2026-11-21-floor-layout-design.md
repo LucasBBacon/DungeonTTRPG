@@ -690,7 +690,7 @@ at runtime at the floor assertion point (6.1, 11.2).
 |---|---|---|
 | LG1† | Main chain 0..n−1, designated in the Blueprint, not a computed shortest path. 0 = entry, n−2 = antechamber (Forecourt), n−1 = arena | enemies 6.3; FL-4 |
 | LG2† | Connected; every walkable square reachable from the entry. Required content (main path, HE-7 and HE-4 sockets, elite room, anchors, Stairhead after the boss) is reachable without Locked, unfound secret, Squeeze or unlifted Latch Portals. Nothing in walls | main 4.6, 7 |
-| LG3† | **`AntechamberDominatesArena` on every floor**, judged on the pre-boss graph. No walkable square of another room lies within 3 squares across a wall of the arena or Stairhead; no crossable hazard bridges them | RS 9.4 extended (FL-5) |
+| LG3† | **`AntechamberDominatesArena` on every floor**, judged on the pre-boss graph. No walkable square of another room lies within 3 squares across a wall of the arena or Stairhead; no crossable hazard bridges them (no Void or crossable hazard region between the antechamber and the Sanctum; V10 `NoSanctumBridge`, HZ-3, hazards design 6.2.2) | RS 9.4 extended (FL-5) |
 | LG4† | Both arena entrances open from the antechamber, ≥ 5 apart, and are **dog-leg Arches, never Doors**, screened both ways (`AntechamberScreened`, 6.11). The arena's only other Portal is the Bossgate; on floor 5 there is none **(new lead's call; the dog-leg is a lead's call after the check)** | enemies 17.5; FL-5, FL-6 |
 | LG5 | Floor 1: the antechamber has exactly 1 inbound Portal and the 2 arena Portals; no side room, no Alcove, not on the Circuit. Floors 2–5: 1–2 inbound main Portals (a Bypass arm landing in the Forecourt counts as one); **always a Circuit waypoint**; at most **two** Circuit side rooms attach, and neither touches the arena **(two: lead's call, after the check)** | RS 9.4; FL-5 |
 | LG6 | The lair is a cut vertex between the entry and the antechamber; lair index in [FloorDiv(n−1, 2) + 1, n−3] | enemies 10.4; FL-9 |
@@ -701,13 +701,20 @@ at runtime at the floor assertion point (6.1, 11.2).
 | LG11 | Elite spur (6.5) | enemies 10.4, 17.4 |
 | LG12 | Fight-host exits: guard posts, the lair and Circuit rooms (the floors 2–5 Forecourt included) have ≥ 2 Portals, including a **non-door flee exit** (an Arch or a corridor, 3.4) away from the party-entry side, recorded as the host's `fleeExit`. The elite room may be a leaf | enemies 14.5; RC3; FL-12 |
 | LG13 | Flank entry: on ≥ 50% of main-path fight rooms *(illustr.)*, the approach side has a flank pair (two entry Portals ≥ 5 apart, joined outside the room within ≤ 12 squares) | Model C; FF-3; FB-6 |
-| LG14 | Locked, secret, Squeeze (other than the Bypass arm), Latch and Chute Portals sit only on optional content and obey the **return-Portal principle**: the far end lies at a lower (attachment index, depth) than the near end (3.4 `branchIndex`). **`NoSealedPocket`:** every Room node and Alcove has a Portal on the monster movement graph once Locked Portals, Latches and secrets are opened, so no space is reachable only through Squeezes or seen only through Grilles. **`HairlineCue`:** every Hairline has its dead-end stub (9.2), and no other dead-end stub of ≤ 3 squares exists **(both lead's calls, after the check)** | mechanics pass; FL-19; ability 15.1 |
+| LG14 | Locked, secret, Squeeze (other than the Bypass arm), Latch and Chute Portals sit only on optional content and obey the **return-Portal principle**: the far end lies at a lower (attachment index, depth) than the near end (3.4 `branchIndex`). **`NoSealedPocket`:** every Room node and Alcove has a Portal on the monster movement graph once Locked Portals, Latches and secrets are opened, so no space is reachable only through Squeezes or seen only through Grilles. **`HairlineCue`:** every Hairline has its dead-end stub (9.2), and no other dead-end stub of ≤ 3 squares exists **(both lead's calls, after the check)**. **Pending request (HZ-23; M3):** an explicit exception to the return-Portal principle for Plunge, a Chute skin whose far end lies deeper on the main path (hazards design 6.10); not a rule until the FL owner rules | mechanics pass; FL-19; ability 15.1 |
 | LG15 | Floor 1: rooms 0–2 form a linear chain. Only Alcoves and the Bypass arm (leaving room 1) attach to rooms 0–1. No Circuit room among 0–2 on any floor | DH 17.1; RS 8.2(d); DH-28 |
 | LG16† | HE-7 and HE-4 sockets reserved (6.5) | DH 12.4 |
 | LG17† | `PortalMinimums` (6.4), structural through `forcedClosed` edges | DEP-S1; armour 7.3 |
 | LG18 | Flat: one walkable square per (x, y); walkable squares exactly coplanar (8.1) | main 6.8; RS 7.6; RC1 |
 | LG19† | Exactly n main-path rooms and k side rooms (LS1), counted as in 3.4 | RS 6.6; FL-4 |
 | LG20 | Entry rules: each fight host's party-entry Portal is a door kind or has a bend within 6; a 3×3 landing on the corridor side; start zones ≥ 7 from the entry mouth; no width-1 corridor longer than 2 ends at a fight-host Portal, and a width-1 chokepoint mouth (≤ 2 deep) opens onto the landing | numbers pass; FB-13 |
+
+**Pending request (HZ-23; M3):** the hazards design asks the FL owner to
+admit Plunge, a one-way, out-of-combat link from a side room or Dare
+room to a cleared or non-combat room deeper on the main path (never the
+Sanctum, never past the antechamber, ≤ 1 per floor), into the graph
+invariants, with `NoSealedPocket` and `PartyEscape` holding (hazards
+design 6.10; LG14 above). It changes nothing until the FL owner rules.
 
 ### 6.3 Sizes by depth *(illustr.)*
 
@@ -748,6 +755,7 @@ The trimmed floor-3 row serves RS 10.2's floor-3 extension
 | Antechamber (Forecourt), floors 2–5 | The floor's fight-room size, because it is the patrol's fight host (6.11) **(lead's call, after the check)** |
 | Stairhead | about 5×5 |
 | Elite room | 10×10–13×15, ≥ 10 deep |
+| Dare room (M3; HZ-21) | ≤ 9×9; a side-room Site on floors 2–5, ≤ 1 per floor, never critical, signposted on its Portal (hazards design 6.10) |
 
 **Free-space rule:** a fight room keeps ≥ 6 free squares per unit at
 party size + the floor's unit cap + one 3-unit joiner group. That is why
@@ -758,7 +766,10 @@ design 6.2.1, V9 `FreeSpaceAfterClutter`).
 **Other bounds:**
 - Corridors ≤ 30% of walkable squares (35–40% in the Silk and the Gut).
 - Floor area scales with depth. The party band picks only the template
-  size class.
+  size class. Hazards never scale with party size (count, footprint,
+  band or period); their footprints scale with room size only, and
+  their hazard points, quotas and `clock` and `void` reservation tags
+  sit on top of segment 3's layers (HZ-2; hazards design 6.2).
 
 **Trimmed floors stay inside the RS 6.6 bands.** The third reward becomes
 a main-path-visible Alcove, so the content stays and the detour goes.
@@ -880,6 +891,10 @@ target, which LS5 draws from the Blueprint's `bypassTargets[]` (6.8).
   vantage stay proven on walls and Portals only. Terrain pieces only add
   blocking and no proof relies on one; hearing ignores pieces (room
   terrain design 6.2.1).
+- **Landmark ticks (M3; HZ-19; told plainly):** the Small Hour Strikes'
+  mute round stops party-verb noise from propagating until the end of
+  the next round; combat noise and the graphs are unaffected (hazards
+  design 7.2).
 
 **Static conventions:**
 - `hearingState(k)`: for a fight in main-path room k, main-path Doors with
@@ -1060,6 +1075,11 @@ zero. Joiners stay a real, player-caused experience.
 - Floors 2–5 antechambers are always on the Circuit **(agreed, Q2)**.
 - `NoSealedPocket` (LG14) means no Squeeze-only or Grille-only space can
   shelter a rest from patrols.
+- **Dare rooms (M3; HZ-21):** an unguarded Dare room's Stir runs per
+  out-of-combat tick (C 5.5) with auto-walk off inside; no short rest
+  inside the room; a taker reduced to 1 HP is returned to the threshold
+  and the dare resets; two attempts per floor, then the container seals
+  for the floor (anti-brute-force; hazards design 6.10).
 - **Told plainly (after the check):**
   - On floors 2–5 the patrol lives in the post-lair tail (6.7), so every
     room cleared before the lair is patrol-free and restable. DH counts
@@ -1102,6 +1122,9 @@ zero. Joiners stay a real, player-caused experience.
 - The post-boss walk is 60–97 squares (11–17 s) on the toy. The Way Back
   Latch is built in M3 and off by default (`PostBossBacktrack`
   decides).
+- **Pending request (HZ-23; M3):** Plunge, a one-way out-of-combat link
+  forward (a Chute skin), the only hazard that saves clock (hazards
+  design 6.10). Nothing here changes until the FL owner rules.
 
 ### 6.10 Clock (change FL-16)
 
@@ -1356,7 +1379,8 @@ restated after the check, 6.7)**. Blueprints:
 - Every fight room's party entry opens from a dry edge, which supports
   RS 8.6's entry-square and dry-island caps.
 - Sluice gates are Door skins between wet and dry (segment 5 owns the
-  Soak).
+  Soak). A sluice *wheel* is a hazard piece (a Cord), not this Door skin
+  **(told plainly; HZ-1, hazards design 6.1)**.
 
 **Risks:**
 - No wet sheen on dry squares (RC1).
@@ -1419,7 +1443,9 @@ and reads as one fairground on screen **(agreed, Q1)**. Blueprints:
 **Risks:**
 - Saturated fire hue only on fire squares (RC4).
 - Open plazas need wagon cover (segment 3).
-- Carousel horses always on poles.
+- Carousel horses always on poles. **M3 (HZ-18):** the letter holds; the
+  Turning Ring turns boards only, never the horses, and its spirit is
+  contested **(told plainly; hazards design 7.7)**.
 
 ### 7.8 The Long Supper (F4): `axis`
 
@@ -1738,12 +1764,12 @@ socket classes. Budgets count templates, then size classes.
 | Last Turning | Route choice before the boss | **M2** (FL-9) |
 | Floor count line | Pacing information | **M2** (FL-20) |
 | Overlook (mapped layer) | A planning aid | **M3** (needs segment 10's mapped layer; Yield prefers unmapped rooms) |
-| Chute (directed edge) | Spurs with no walk back | **M3** (pathfinder testing cost) |
+| Chute (directed edge) | Spurs with no walk back | **M3** (pathfinder testing cost). **Pending request (HZ-23):** Plunge as a Chute skin (hazards design 6.10) |
 | Strongroom spur | Fight, steal or pick for one reward | **M3**, floors 2–3 only |
 | Drop-bar doors (the party bars a door; locked for monsters) | Real joiner cuts | **M3**, Gaol only, after SH-18 and the Shade owner. They create safe rest cells against ability 15.1, so they return to the client before they ship **(new lead's call)** |
 | Way Back (Stairhead Latch) | A cheap post-boss return | **M3**, built off by default |
 | Spyhole / Peer | Unit information without line of sight | **Rejected:** strains decided symmetric fog; Grille + Listen cover it |
-| Collapsing routes; floor-wide alarm; shifting rooms | — | **Rejected** (RS 7.6, conditions 11.1, joiner caps). An "On Watch" Omen is possible Later |
+| Collapsing routes; floor-wide alarm; shifting rooms | — | **Rejected** (RS 7.6, conditions 11.1, joiner caps). An "On Watch" Omen is possible Later. Hazard Moods (M3, Omen and Nightmare only) are not a floor-wide alarm: they change hazard states only, never awareness, joiners, hearing, Portals or monster stats (HZ-20; hazards design 6.9) |
 | Camp-exit choice | — | **Rejected** (main 4.1 decided; Two Doors owns it) |
 | Split-level sub-grids | — | **Rejected** (main 6.8 decided); the client may refuse it explicitly Later |
 
@@ -1761,6 +1787,14 @@ socket classes. Budgets count templates, then size classes.
     reach.
   - This stops door-dancing and keeps Wedge (which locks) distinct.
 - Monster door rules are unchanged **(settled, enemies 12.4)**.
+- **Landmark ticks (M3; HZ-19; told plainly):** the Gaol's Small Hour
+  Strikes is a flagged non-party Portal source: every 4 rounds it swings
+  shut every open, unoccupied, unlocked cell door in its room; never
+  locked, never the `fleeExit`, held while occupied. Landmark ticks are
+  not hazards (no damage, condition or unit movement) and are legal on
+  floor 1. The Lockdown Lever and the Mourning Cord stay party-only;
+  monsters changing Portals remains an FL-8 change (hazards design 7.2,
+  7.4).
 - The rule is owned by segment 5; layout consumes it.
 
 **Portal kinds (FL-7):**
@@ -1963,7 +1997,10 @@ FloorLayout (output)
 Save: the seed and configuration regenerate the static part, checked against layoutDigest;
   the save stores only dynamic per-Portal state (open, closed, drawn, found, lifted)
   and, beside it, dynamic Furnishing state {id, square, state: intact|debris|gone,
-  burstSpent}; terrainDigest sits beside layoutDigest (TR-17; room terrain design 6.2.5)
+  burstSpent}; terrainDigest sits beside layoutDigest (TR-17; room terrain design 6.2.5);
+  hazardDigest sits beside terrainDigest, and the save adds FloorHazardState (Mood stage
+  and counter, menu index, Stir phases, Tides, Cord uses, vent triggers) and UnitFallState
+  (HZ-28, HZ-20; hazards design 11.1, 11.2)
 Configuration snapshot (RS 11.1; hashed into the reproducibility key, RS 6.4 R-SEED-5; FL-14)
   layout.mainPathRooms[floor], layout.mainPathRoomsTrimmed[floor], layout.sideRooms[floor],
   layout.sideRoomsTrimmed[floor], layout.secrets[floor], layout.hearingGapMin,
@@ -2041,6 +2078,12 @@ Rules per Site type are capped at about 4 in M2.
 theme plus floor-level capacity rows per Blueprint and rule choice
 (room terrain design 11.2). Its runtime is a lookup that cannot fail
 (FL-15).
+
+**V10 `RoomHazards` (HZ-28):** segment 4's build validator joins RS
+11.2's list beside V8 and V9 and runs after V9, including
+`HingePosternClear` and `NoSanctumBridge` (LG3); its draws come from a
+`hazards` child of the `terrain` stream with fixed counts. Its runtime
+is a lookup that cannot fail (FL-15; hazards design 11.2, 11.3).
 
 **Runtime assertions** at the floor assertion point (6.1), each with a
 build-time structural proof; anything else is a report:
@@ -2154,7 +2197,7 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
 | Segment | Receives from layout | Owns |
 |---|---|---|
 | 3 Room shapes and terrain | Template footprints, start zones, `partyEntrySquares`, the `coverRoom` tag, wet/dry/web/slick/bile region tags, `lessonTag`, `protectedSquares` and `protectedSightLines`; the terrain step's place in the order (after LS13, before enemies 10.5 step 2; 6.1) | The room-terrain system and the knock-into system (TR-1; room terrain design 13): interiors, in-room terrain squares and placement, cover props and **the weapons 9.5 cover decision** (with the per-grammar range-band arm, including cover through Grilles if sight-only is reopened), DEP-A1, Wrecker walls and edges, narrow ground toward armour 7.3's ≥ 3, the Choir and Carnival entry caps |
-| 4 Hazards | Region tags; "no hazard" Hinge and Postern squares; no crossable bridge into the Sanctum | Floor-scale hazard density (inside segment 3's caps), bile, drop hazards, Teetering counting, vents (TR-1; room terrain design 13) |
+| 4 Hazards | Region tags; "no hazard" Hinge and Postern squares (radius filled: no hazard on the square or its 8 neighbours, no Void within 2; V10 `HingePosternClear`; HZ-3, hazards design 6.2.2); no crossable bridge into the Sanctum (no Void or crossable hazard region; V10 `NoSanctumBridge`; HZ-3) | Floor-scale hazard density (inside segment 3's caps), bile, drop hazards, Teetering counting, vents (TR-1; room terrain design 13); the hazard / trap / terrain line: an open trapdoor is a Void, a closed one that springs is a trap; a horn post is a Cord, a horn tripwire a trap; the sprung twins stay segment 5's and boss counterplay segment 9's (HZ-1; hazards design 6.1) |
 | 5 Traps, locks, checks | Locked, Hairline, Squeeze, Latch and Door slots; `PortalMinimums`; trap sockets within 6 of fight hosts, and from floor 2 one before the first fight (room 0 or the 0→1 Portal, Shade DEP-S1(a)) | DCs; traps and trap records (DEP-S1; TR-1); keyring and cell caches; sphincters; **the party door verbs as rules (FL-8)**; the Squeeze check on the existing check stream and its failure cost; Drop-bar (M3); Wedge (SH-18); Hairline check variants |
 | 6 Encounter placement | Slot hosts, `equivalentHosts`, the Circuit with phase, the Bypass, near pairs, matrices, start zones, `nearStart`, `skittishShape` / `ledShape` | Enemies 10.5 steps 2–11 (step 9 moves only within a host or to an equivalent host, 6.1), `placementRules`, the reinforcement and Dormant partners for near pairs, Rival Party fit in elite templates |
 | 7 Loot | Container, Alcove and secret-cache sockets; HE-7 and HE-4 reservations | Contents and channel counts |

@@ -1592,6 +1592,9 @@ baseline behaviour for every unit.
   - **Ordering:** a later push's edge save is made at disadvantage
     before that movement ends Teetering.
   - M2 hazards only. Allies are never made Teetering.
+  - Brink reads Voids, because they are squares; Brink is unchanged
+    (hazards design 6.4, a narrowing; the Void-fall save ignores
+    Teetering's disadvantage, a conditions row, HZ-9).
 - **Ram** (signature; replaces Press for the Wrecker, so the picker does
   not grow).
   - **I:** push 1, not verb-sourced. If that move is stopped early, the

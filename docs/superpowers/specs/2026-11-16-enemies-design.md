@@ -318,6 +318,15 @@ pieces, never Move-Shunt to barricade; and a universal light Smash: every
 monster with a melee attack may Smash an adjacent light Furnishing; a
 request to this owner, not yet a rule.
 
+**Cords (change HZ-15; hazards design 6.3.4; M2, with the Stirs):** the
+tag is extended by `usesCords`: one monster type per F2–5 theme may
+Operate a Cord, with telegraphed intent, valued through the preview,
+under `NoCheapKill`. An act set by an Operated Cord credits the operator
+for experience and morale; on-kill hooks never fire from a Dream-step
+act. **Pending request (HZ-15; ability model 7.2):** a unit that starts
+its turn adjacent to a Cord may Operate it as its bonus action; the
+ability model owner rules, not yet a rule.
+
 ### 5.6 Plate contract
 
 **(lead's call)** This applies the settled "four things to read".
@@ -503,6 +512,15 @@ round-1 row.
   burst is a one-shot area, source `environment`, sturdy in M2, and no
   burst triggers a burst in M2); Conduct (K3) counts in the guards too.
   **(M2)**
+- **Hazards (change HZ-7; hazards design 6.11):** Stir acts count in the
+  guards in the rounds they are due (the Keg and Conduct precedent;
+  **M2 (gated), else M3**); round 1 never has an act (`firstAct` ≥ 2),
+  so the round-1 rows are unchanged. Deep falls count in the Choir
+  lightning spike row and environment Chilled in the Supper freeze-spike
+  row. Beside the guards, the **EnvRound cap** is a resolution rule:
+  environment damage to one party unit within one round is capped at
+  `CapRound` by a round-scope top-up (room terrain design 6.4's
+  mechanic); monsters are uncapped. **(M2)**
 - **"On its turn" means the whole kit**, limited abilities included,
   each checked at its best case; the per-unit rows are checked for every
   ability, not only the at-will. **(lead's call)**
@@ -718,6 +736,10 @@ The catalogue is in 17.2.
 
   An affix that pushes a base outside the threat band is illegal on that
   base.
+
+  **Pending request (HZ-24, M3; hazards design 9.2):** `floorborn`, an
+  immunity to the theme's Stir acts, counts as one tag immunity, with no
+  horizon-2 read; not yet ruled.
 - **Commanding** is never applied to a member of a group that already has
   a leader, so a group has at most one (14.4). Validation checks it.
   **(lead's call)**
@@ -1159,6 +1181,13 @@ an attack in the intent read and focus spread; Shunt and Kick ties by the
 fixed square order (ability 8.1). Cover adds no term: Exposure reads the
 resolve preview.
 
+**Pending request (hazards design 6.12, extends TR-15; M2 (gated), else
+M3):** the destination value adds the value of an act due at this
+round's end on that square (one step, no horizon-2 read); `NoCheapKill`
+extends to due footprints, monster Cord use and vent mouths; the fall
+value toward a given hero is scored once per fight (a board-history
+term, so invariant 1 holds); not yet ruled.
+
 **Kill bonus** = min(`killBonus%` × the target's T, 1.5 × the attacker's
 best at-will score). T is the target's best expected one-step score
 (conditions 17.3). So a dangerous unit is worth more, and **nothing reads
@@ -1212,12 +1241,19 @@ These hold on every difficulty tier and are asserted by property tests:
    floor 1's main-path rooms 0–2, and the solo hero is never Surprised on
    floor-1 squares with main-path index 0 or 1 (death and healing design
    17.1). Main-path rooms are indexed from 0, the entry. **(change
-   DH-28)**
+   DH-28)** Floor-1 Landmark ticks are not hazards and leave it unchanged
+   (hazards design 6.1, 7.2–7.4; change HZ-19; M3).
 7. Stupidity floors: never enter a hazard that could kill it; no
    net-negative friendly fire; no control on a target that zeroes it; never
    idle with a reachable target. **Pending request (TR-15, M3; room
    terrain design 6.6, 6.9):** routed units never enter hazards, except
-   non-lethal Remnants; not yet ruled.
+   non-lethal Remnants; not yet ruled. Never enter a Void **(change
+   HZ-10; hazards design 6.4; M2 (gated), else M3)**. **Pending request
+   (HZ-13 and hazards design 6.12; M2 (gated), else M3):** due squares
+   are hazards for this invariant (hazards design 6.3.1); never end a
+   turn on a due square whose act could kill this unit; routed units
+   never path adjacent to a Void and treat due squares as hazards; not
+   yet ruled.
 8. No healing or refill of uses out of sight. The one bounded exception is
    the boss reset rule in 17.5.
 9. Affixes are always visible.
@@ -1469,6 +1505,13 @@ Further telegraphs, all **(lead's call)**:
 - It is a forecast, not a commitment. If the party changes the state, the
   banner updates. The settled deferral of scripted wind-ups (ability model
   5) is unchanged; committed signature moves stay a Later option (21).
+  A Stir's announced act (the Dream step) is an environment act, not a
+  wind-up, so the deferral stands **(change HZ-12; hazards design 6.3;
+  M2 (gated), else M3)**. **Pending request (HZ-24, M3; hazards design
+  9.2):** Stoke, a monster kit action that moves a Stir's countdown 1
+  toward acting (C becomes max(2, C − 1); never makes an act due in a
+  round where it was not due at round start), with telegraphed intent,
+  one Stoker type per theme; not yet ruled.
 - Boss actions (M2) that use a Signature are announced the same way before
   the turn they would follow.
 
@@ -1688,6 +1731,9 @@ or turn-end phase, or one boss action. **(lead's call)**
 - HP-line Rout checks for Demoralised units run in the same pass.
 - It stops when the queue is empty, so cascades resolve deterministically
   and a unit never routs partway through an area's per-target resolution.
+- A Void fall (`voidFall`) is a removal loss event, and the Dream step's
+  sub-step 2b is a checkpoint **(change HZ-10; hazards design 6.3, 6.4;
+  M2 (gated), else M3)**.
 
 **Every trigger is edge-triggered**: it fires on the event, never merely
 because a count sits at a threshold.
@@ -1703,6 +1749,12 @@ because a count sits at a threshold.
 | T7 | **The boss falls** | Every non-fearless escort member (the boss's group, its reserve groups included; not ordinary joiners) is Routed. Mindless servants go **inert** and are removed as resolved. | M2 |
 | T8 | An ally within 3 squares is downed or killed | Shaken **(settled)**. **Minion deaths do not trigger it.** | Later |
 | T9 | A party Frighten misses by 4 or less | Shaken **(settled)**. On a leader, Shaken blocks Rally. | Later |
+
+**Pending request (HZ-24, M3; hazards design 9.2):** a new
+edge-triggered event, **Startle**, fired by a Stir act or a Cord: the
+named groups' skittish, non-Emboldened members become Demoralised, at
+the same FIFO checkpoint; fearless and mindless units are unaffected;
+not yet ruled.
 
 **The T5/T6 substitution** **(lead's call; change C-12)**. These are not
 condition transforms:
@@ -1802,7 +1854,9 @@ condition transforms:
   fight host has a non-door flee exit (`fleeExit`) **(change FL-12; floor
   layout design 6.8)**. It never enters a hazard (**pending request
   (TR-15, M3; room terrain design 6.6):** except a non-lethal Remnant,
-  which it treats as passable; not yet ruled); it
+  which it treats as passable; not yet ruled; **pending request (hazards
+  design 6.12, M2 (gated), else M3):** it never paths adjacent to a Void
+  and treats due squares as hazards; not yet ruled); it
   does **not** Disengage, so leaving the party's reach provokes an
   opportunity attack: a payoff without a chase.
 - **Routed units make no opportunity attacks.** The party may move through
@@ -2205,7 +2259,10 @@ floor.
   square is a hazard or impassable. Safe means passable and not a hazard
   square. Nearest is by grid distance, then a fixed neighbour order (N,
   NE, E, SE, S, SW, W, NW), then square index. **(lead's call)** **Loot
-  is never destroyed** by terrain, damage type or kill method.
+  is never destroyed** by terrain, damage type or kill method. A monster
+  removed by a Void fall drops its carried loot on the last safe square;
+  summons and Figments drop none **(change HZ-10; hazards design 6.4; M2
+  (gated), else M3)**.
 - **Routed:** thrown down the moment it routs. Unused uses are lost from
   the carrier's kit.
 - **Yielded:** drops at once.
@@ -2313,7 +2370,9 @@ Coated stay Later **(change CN-26)**. The original list:
 **(lead's call)** The parents leave the source open.
 
 - **Experience on resolution:** a member pays out when it is killed,
-  Routed and fled, Yielded or Cowed. In M1, only kills exist.
+  Routed and fled, Yielded or Cowed. In M1, only kills exist. A member
+  removed by a Void fall pays out as killed (the `voidFall` trigger;
+  **change HZ-10; hazards design 6.4; M2 (gated), else M3**).
 - Sneaking past pays nothing, but the group's experience stays available.
   Monsters never respawn, so experience is finite and cannot be ground.
 
@@ -2451,10 +2510,10 @@ in percent, all illustrative.
 | Profile | Default for | Approach / caution / oaAversion | Range | Targeting | What the player notices | Wave |
 |---|---|---|---|---|---|---|
 | **Charger** | Brute | 150 / 30 / 30 | 1 | Nearest, last attacker; kill bonus 130% | Walks through opportunity attacks to reach you; never retreats | M1 |
-| **Holder** | Soldier | 100 / 80 / 100 | 1 | Nearest to its ward | Holds the doorway; shoves toward hazards (M2). **Pending request (TR-15, M2; room terrain design 6.9):** "hazards" includes contact hazards; not yet ruled | M1 (hold term M2) |
+| **Holder** | Soldier | 100 / 80 / 100 | 1 | Nearest to its ward | Holds the doorway; shoves toward hazards (M2). **Pending request (TR-15, M2; room terrain design 6.9):** "hazards" includes contact hazards; not yet ruled. **Pending request (hazards design 6.12; M2 (gated), else M3):** also toward due footprints and Voids, the intent reading "pushes toward the edge"; not yet ruled | M1 (hold term M2) |
 | **Kiter** | Artillery | 60 / 150 / 200 | 5 | Lowest visible AC in range; concentrating units **(change AR-25)** | Keeps 4–6 squares away; steps back when engaged; falls back at 50% HP | M1 |
 | **Mob** | Minion | 150 / 0 / 0 | 1 | Nearest; spreads to free adjacent squares | Surrounds you; ignores danger | M1 |
-| **Automaton** | Mindless | 120 / 0 / 0 | 1 | Nearest, then unit order | No exposure or cohesion terms; walks through minor hazards (the lethal floor still holds) | M1 |
+| **Automaton** | Mindless | 120 / 0 / 0 | 1 | Nearest, then unit order | No exposure or cohesion terms; walks through minor hazards (the lethal floor still holds). **Pending request (hazards design 6.12; M2 (gated), else M3):** ignores non-lethal due squares, keeping the lethal floor (shown on its card); segment 4 does not raise the mindless share and asks this owner; not yet ruled | M1 |
 | **Boss** | Bosses | Authored; `leash: room` | — | Authored | A phase may swap the profile. **Pending request (FL-21 (a), M1; floor layout design 6.11):** a Provoked analogue that extends the leash to the Sanctum when the boss is damaged from outside its reach; not yet ruled | M1 (M2 adds boss actions) |
 | **Raider** | Skirmisher | 120 / 120 / 200 | 1 | Lowest visible AC; concentrating units **(change AR-25)** | Hits, then uses leftover movement to leave reach; slips past | M2 |
 | **Protector** | Bodyguard elites | 80 / 60 / 120 | 1 | Whoever threatens its ward | Body-blocks; Challenges the unit nearest the leader | M2 |
@@ -2630,7 +2689,9 @@ are no separate arenas **(settled)**:
   clusters; cover has the rules meaning of room terrain design 6.1:
   directional one-tier cover, M2) **(change TR-2)**;
 - at least one feature tied to the boss's counterplay (a brazier against an
-  ice layer, a chasm edge for shoves);
+  ice layer, a chasm edge for shoves; the chasm edge is met by the
+  arena Void line from M2 (gated), not counted as a contact hazard, and
+  by a contact hazard otherwise: change HZ-11; hazards design 6.4);
 - optional set-piece hazards within the theme's 6;
 - terrain caps and kind rules: room terrain design 6.11 (contact
   hazards, Furnishings, Kegs, cover-giving squares, clutter); the

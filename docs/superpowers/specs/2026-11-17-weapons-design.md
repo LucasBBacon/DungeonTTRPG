@@ -688,6 +688,11 @@ records reference a verb and cannot override its text.
      with a non-verb part deals the contact band instead); a successful
      save is an ordinary obstacle stop **(change TR-10; agreed by the
      client 2026-11-21, Q3; room terrain design 6.5.2)**.
+     **Pending request (change HZ-17; M3; hazards design 6.3.3):** a
+     third named exception class, **Lurch** (environment forced movement
+     used only by Stirs; soft stops only, never collision damage), is
+     requested of the conditions owner for conditions 10.1; it changes
+     nothing here until that owner rules.
 5. **A verb is off** when the wielder is untrained (10.2) or Strained
    (10.1), and on improvised and unarmed attacks (13).
 6. **Existing conditions only.** A verb applies only positional effects,

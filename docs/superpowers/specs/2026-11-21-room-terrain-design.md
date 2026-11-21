@@ -263,6 +263,13 @@ environment-only Miasma Remnants in M3.**
   - made only by the environment (Kegs, boss phases, segment-4 vents).
 - **Told plainly:** this changes decided main 2 (flagged, TR-27), and a
   party-triggered cloud is player-made ground effect in substance.
+- **Narrowed by segment 4 (change HZ-12; agreed, hazards Q1; M2
+  (gated), else M3):** "nothing timed in M2" no longer covers one
+  signature Stir per F2–5 floor at most (the Choir's Organ Swells, the
+  Carnival's Pit Breathes). It acts in this round-end environment step
+  (the Dream step), brought to M2 for Stirs only, announced a full
+  round ahead and never in round 1; if its gates fail it falls back to
+  M3 (hazards design 6.3).
 - **Rejected outright:** drifting gas, spreading fire, blood slicks,
   player-made surfaces, and ice in the Supper.
 - *Rejected:* B, never.
@@ -305,7 +312,7 @@ in M3; and the rest of the list in 19.1.
 | 10 | AI: `NoCheapKill` (a scorer term, 6.9); destination square value; `usesFurnishings`; universal Smash of light pieces scored by path gain | M2 | **agreed, Q3** (`NoCheapKill`) and **Q2** (monster Smash); the rest lead's call; TR-15 (requests) |
 | 11 | Boss phase (e) through phase sockets proven in both states; arena caps here, counterplay identity stays RS 13 and segment 9 | M2 | lead's call; TR-16, TR-8 |
 | 12 | Web and bedsheet burn-away; instant Conduct through water; closed 5-row combo table | M2 | **agreed, Q4**; TR-25, TR-26 |
-| 13 | Remnants (Miasma only), environment-only, fixed footprint, countdown, ignite once | M3 | **agreed, Q5**; TR-27 (decided text) |
+| 13 | Remnants (Miasma only), environment-only, fixed footprint, countdown, ignite once; the round-end environment step comes to M2 for one signature Stir per F2–5 floor at most (hazards design 6.3) | M3; the Stir step M2 (gated), else M3 | **agreed, Q5**; TR-27 (decided text); narrowed by HZ-12 (**agreed**, hazards Q1) |
 | 14 | Overturn (tippable Tall Furnishings), Haul, Shoot an object, Kegs in the other themes, depth-1 chains | M3 | lead's call; TR-6, TR-28 |
 | 15 | Ownership: segment 3 owns the room-terrain system; segment 4 owns floor-scale density, drops, bile, Teetering counting and vents; segment 5 owns traps | — | lead's call; TR-1 |
 | 16 | Floor-level quotas made constructive by a reservation step; sockets carry a rules key; contact and harm saves defined; cover placed in the attack pipeline | M1 / M2 | lead's call, after the check (19.3) |
@@ -362,7 +369,9 @@ a path, surprising the player or spreading across the floor.**
 - **Height, stand-on pieces, multi-level rules geometry.** Main 6.8
   **(decided)**.
 - **Anything timed or spreading on the ground in M2.** Main 2
-  **(decided)**; conditions 11.1 and ability 8.4 **(agreed)**.
+  **(decided)**; conditions 11.1 and ability 8.4 **(agreed)**. Narrowed
+  by segment 4: one gated signature Stir per F2–5 floor at most, which
+  changes no square (change HZ-12; M2 (gated), else M3; 6.6).
 - **Final names, numbers and art:** the naming pass, the simulator and
   the art team.
 
@@ -952,6 +961,12 @@ Clutter share = blocked interior squares ÷ interior squares.
 only, 6.5.6); F2 1–2; F3 1–2; F4 1–3; F5 1–3 (F2–3 raised from 0–2 by
 KP1, below).
 
+**Hazard points (change HZ-2):** segment 4 lays hazard points per
+fight room, room roles, floor quotas and a party-size rule (hazards
+never scale with party size) on top of this table; the zero-hazard
+roles here stay at 0, and KP1–KP9 and the class caps of this document
+still bind (hazards design 6.2).
+
 **Placement rules (V9).** Every floor-level quota is **constructive**
 **(lead's call, after the check):** KP1 and KP2 hold in every eligible
 layer on its own, and KP3, KP8, KP9 and the Plank minimum are met by the
@@ -975,14 +990,20 @@ asserts nothing it has not proven (FL-15).
 - **KP5.** No contact hazard, harm square or Keg within 2 of
   `partyEntrySquares` or on the landing; Kegs ≥ 3 from party entry and ≥
   2 from enemy start zones; none adjacent to party start squares in
-  ambush templates (segment 6 hook).
+  ambush templates (segment 6 hook). **Extended by VP1 (change HZ-3):**
+  no condition patch or bile within 2 of `partyEntrySquares`; no Void,
+  vent mouth, Stir footprint or Cord within 3 (hazards design 6.2.4).
 - **KP6.** Kegs ≥ 2 from each other.
 - **KP7.** Plank and harm-square shortcuts end within 2 of an enemy
   cover line or a flank square (6.2.6).
 - **KP8.** Floor 1: one teaching room per floor (6.5.6), by a
   reserved `teaching` slot.
 - **KP9.** Every F2–5 floor has its theme's signature interaction (7) in
-  ≥ 1 fight room, by a reserved `signature` slot.
+  ≥ 1 fight room, by a reserved `signature` slot. In M2 a segment-4
+  **Tableau** fills this slot (change HZ-8; hazards design 6.2.2).
+
+Segment 4's placement rules VP1–VP10 (V10) bind beside KP1–KP9 (change
+HZ-3; hazards design 6.2.4).
 
 #### 6.2.5 Layers, sockets and the stream (change TR-17)
 
@@ -1029,12 +1050,14 @@ PhaseSocket { socket: Socket, phase, off: PieceKind|SquareClass|none, on: PieceK
   1. **Reservation:** fight-room slots, sorted by (`effectiveIndex`,
      `roomId`), receive tags in the fixed order `teaching` (floor 1) or
      `signature` (floors 2–5), then `plank`, then `cluttered` × ⌊0.3 ×
-     the floor's fight-room count⌋. Each tag takes one R-SEED-3 bounded
-     draw over the still-untagged slots whose template has a candidate
-     layer carrying that tag (any cluttered layer, for `cluttered`); if
+     the floor's fight-room count⌋, then segment 4's `clock` and `void`
+     tags (change HZ-2; hazards design 6.2.3, 11.2). Each tag takes one
+     R-SEED-3 bounded draw over the still-untagged slots whose template
+     has a candidate layer carrying that tag (any cluttered layer, for `cluttered`); if
      no such slot is left, the draw is a dummy. A slot takes at most one
      tag. The count is fixed at 2 + ⌊0.3 ×
-     `maxFightSlots`⌋ draws per floor; unused ones are dummies.
+     `maxFightSlots`⌋ draws per floor, plus segment 4's fixed count for
+     its tags; unused ones are dummies.
   2. **Per node slot up to `maxNodes`:** 1 layer pick; `maxSockets`
      on/off draws; `maxSockets` skin draws. Unused slots and sockets
      spend dummy draws (R-SEED-3).
@@ -1127,6 +1150,22 @@ A Furnishing is an **object with a position**. It has:
 
 **All Furnishings are Low in M2**, so moving one never changes sight or
 fog.
+
+**Furnishings move only by verbs, with one M3 exception (change HZ-18;
+agreed, hazards Q3; M3):** the environment may move a Furnishing along
+a pre-proven rail as an announced Stir act, held while occupied (the
+Returns Trolley; a bound Cord's Kick), and a Stir's Overturn part may
+tip a tippable Tall Furnishing along a pre-proven strip (6.3.7; hazards
+design 6.3, 6.3.4, 7.6).
+
+**Cords (change HZ-15; with Stirs, M2 (gated), else M3):** a Cord is a
+Low piece face or wall socket with exactly one verb, used by
+**Operate**, a new ability 7.2 object action (one action, from an
+adjacent square, no check, noise 4 *(illustr.)*). In M2 bound Cords
+only re-time their Stir (Now, Hold); Reverse, Flip, Kick and the
+standalone Cords are M3. **Pending request (the ability owner rules):**
+a unit that starts its turn adjacent to a Cord may Operate it as its
+bonus action (hazards design 6.3.4).
 
 It is not a ground surface and leaves nothing on the ground, so moving
 one engages none of the surface non-goals. Breaking one is a map change
@@ -1241,7 +1280,8 @@ core cost.
   - **a burst never triggers another burst in M2**;
   - Kegs are sturdy in M2, so they cannot be walked into a pack;
   - ≤ 2 per Carnival room, ≤ 1 per Gut room (the sac counts toward the
-    Gut's "≤ 2 acid sources per encounter");
+    Gut's "≤ 2 acid sources per encounter"; bile squares never count,
+    change HZ-5, hazards design 6.5);
   - spacing and distances per KP5–KP6;
   - none on floor 1.
 - **Lethality:** `BurstLethalityBound` (V9): the Keg band is ≤ 25% of
@@ -1309,7 +1349,10 @@ the option out with "Would block the way" or "Hazard".
   - a Hidden unit behind it is re-tested at its own turn end under
     conditions 18.7, not immediately;
   - ≤ 1 tippable piece per room; V9 proves `coverRoom` cover,
-    `PartyEscape` and Hide minimums **without** tippable pieces.
+    `PartyEscape` and Hide minimums **without** tippable pieces;
+  - **environment Overturn (change HZ-18; agreed, hazards Q3; M3):** a
+    Stir's Overturn part rides this verb along a pre-proven strip
+    (hazards design 6.3).
 - **M3 Haul:** drag an adjacent light Furnishing into the square you
   left, at 2 movement per square. It provokes as normal movement.
 - **M3 Shoot an object (TR-28):**
@@ -1382,6 +1425,17 @@ the option out with "Would block the way" or "Hazard".
     the per-fight condition cap **(new lead's call)**.
   - The triggering attack's or spell's own damage is never environment
     damage and is not capped by this rule.
+  - **The EnvRound cap (change HZ-7):** for party units, environment
+    damage within one round is also capped at `CapRound`, 30%
+    *(illustr.)* of the lowest legal hero's maximum HP for the floor's
+    level band, by this top-up mechanic at round scope, applied after
+    the per-use top-up; Stir acts and falls are included, monsters are
+    uncapped (hazards design 6.11 item 2).
+  - **Dream-step acts (change HZ-15; M2 (gated), else M3):** each Stir act, and every combo
+    it triggers, is one use for this cap. An act set by an Operated Cord
+    credits the operator for experience and morale, but on-kill hooks
+    never fire from a Dream-step act: they fire only inside an action
+    (hazards design 6.3.4, 6.11 item 1).
 
 ### 6.5 Knock-into hazards and fairness (agreed, Q3; change TR-10, TR-11)
 
@@ -1395,7 +1449,7 @@ One glyph per class; themes reskin the fill.
 | **Hot hazard piece / face** | Non-walkable obstacle; fire (lightning for the storm-glass pipe, acid for the Gut's acid-scald fold) | Brazier, plate-warmer, boiling tureen or cauldron, stove, lamp sconce, fireplace grate |
 | **Harm square** | Walkable; damage on entry; a hazard | Thorny vines (the client's ask: the Heart's thorn-rose vines), broken glass and bottles, shattered crystal, bone shards, spilled nibs |
 | Existing condition squares | Walkable; conditions 11.2 | Water, web, fire, oil, bile, bedsheets |
-| Drop hazards | Segment 4 | Chasm, pit, deep water |
+| Drop hazards | Segment 4: **Void** squares, non-walkable, crossable by Jumping and Flying (change HZ-9; M2 (gated), else M3; hazards design 6.4) | Chasm, shaft, open trapdoor; deep water as the Drowned Crypt Void |
 
 **Contact hazard** means a hazard piece or a hazard face.
 
@@ -1538,6 +1592,12 @@ So a refusal costs the same fallback drop with or without harm squares.
 **Condition squares** still give Teetering through 10.2, as today.
 - TR-14 asks the conditions owner to rule "does not count" before M2
   rosters freeze (RS 14).
+- **Pending request (change HZ-6; the conditions owner rules, before M2
+  rosters freeze):** segment 4 asks for the same ruling with two
+  guards: no monster, boss, trap, Stir, Cord or square record may apply
+  Teetering directly (party abilities such as Brink excepted), and
+  bosses gain no Teetering from a Void-edge success or from Clutch
+  (hazards design 6.8). Nothing changes until that owner rules.
 - **(lead's call, after the check)** The proposal's `ThemeSix`
   withholding of harm squares under a refusal is dropped: it bought
   nothing for the budget and only stripped content (the Supper's
@@ -1547,13 +1607,22 @@ So a refusal costs the same fallback drop with or without harm squares.
 
 #### 6.5.6 Floor 1 (RT-20; enemies 6.4 guard rows, DH-26; DH 17.1)
 
-- **No hazards of any kind.**
+- **No hazards of any kind** in the base game. M3 Landmark ticks are
+  not hazards (no damage, condition or unit movement), so this stands
+  (change HZ-19; hazards design 6.1). **Exception at Nightmare tier 2+
+  only (change HZ-25; agreed, hazards Q4; M3):** each floor-1 theme
+  gains one damaging hazard package (the Gaol Treadwheel; the Kennel's
+  staked pits with the Painted Hunt, the Stampede replacing the Painted
+  Hunt at tier 3; the Wake's Open Grave), with DH 17.1 and the floor-1
+  guard rows still holding (hazards design 6.19).
 - **Typed Low pieces:** the Gaol warden's stove and the Wake candle rack
   are ordinary Low pieces whose collision damage is fire-typed. They are
   not hazards, have no edge save and no saturated hue, but carry a
   visible ember tell. This satisfies RS pillar 1 ("if it looks like it
   matters, it matters") without breaking RT-20 **(told plainly** to the
-  trinkets owner: floor 1 still has no hazard edges; TR-29**)**.
+  trinkets owner: floor 1 still has no hazard edges; TR-29**)**. At
+  Nightmare tier 2+ only, the stove is promoted to a Hot piece for the
+  Treadwheel and floor 1 gains hazard edges (HZ-25; 7.2).
 - **Teaching room (KP8):** one `lessonTag` fight room per floor-1 theme
   authors a light piece in line with a lone enemy, so that an Attack
   Shunt (or a Kick, where the piece is round) drives the piece into the
@@ -1564,21 +1633,40 @@ So a refusal costs the same fallback drop with or without harm squares.
 
 #### 6.5.7 Chasms and drops (segment 4)
 
-Legal under one flat rules level as non-walkable void squares, crossable
-by Jumping and Flying. Suggestion to segment 4:
-- a monster that falls is removed and counts as defeated; bosses are
-  `noDrop`;
-- a party unit takes the contact band and lands Prone on the nearest
-  safe square, which keeps 10.4.
+Legal under one flat rules level as non-walkable **Void** squares,
+crossable by Jumping and Flying. Ruled by segment 4 (change HZ-9,
+HZ-10; agreed, hazards Q2; M2 (gated), else M3; hazards design 6.4),
+replacing this section's earlier suggestion:
+- a non-elite monster that falls is removed and defeated (`voidFall`,
+  paid as a kill); elites and group leaders **Clutch** the edge once
+  per fight; bosses are `noDrop`;
+- a party unit **Dreamfalls**: it takes the fall band (the contact
+  band), which can never take it below 1 HP (the FallFloor), and is
+  placed Prone on the room's **Snag**, a proven landing on the party
+  side, chosen by the Snag rule (primary, secondary, overflow), not on
+  the nearest safe square; it is Groggy until the end of its first turn
+  that starts after the placement;
+- Teetering's disadvantage does not apply to the Void-fall save.
 
-Enemies 17.5's "a chasm edge for shoves" is met in M2 by a contact
-hazard.
+Enemies 17.5's "a chasm edge for shoves" is met by a Void from M2
+(gated), and by a contact hazard otherwise (hazards design 6.4).
 
 ### 6.6 Lingering effects and their (absent) spread (change TR-25, TR-26, TR-27)
 
-**M2: nothing timed and nothing spreads.** The decided main 2 non-goal
-and agreed conditions 11.1, 11.4 and ability 8.4 stand for M2. The legal
-M2 lingering experience is **one package**:
+**M2: nothing timed and nothing spreads**, except one gated signature
+Stir (below). The decided main 2 non-goal
+and agreed conditions 11.1, 11.4 and ability 8.4 stand for M2.
+**Narrowed (change HZ-12; agreed, hazards Q1; M2 (gated), else M3):**
+at most one signature Stir per F2–5 floor (the Choir's Organ Swells,
+the Carnival's Pit Breathes) acts in M2, in the round-end environment
+step below (the Dream step), brought from M3 to M2 for Stirs only. It
+changes no square, is announced a full round ahead on exact squares and
+never acts in round 1. It ships only if the reading-time playtest, the
+TR-27 written report pass (brought forward for the Dream step alone),
+and the clock and fight-length gates pass; otherwise it falls back to
+M3 (hazards design 6.3).
+
+Otherwise the legal M2 lingering experience is **one package**:
 - static harm squares (thorny vines on a cell: the Heart's thorn-rose
   vines, 7.1; never growing) **(agreed, Q3)**;
 - one-shot Kegs (Carnival oil, Gut gas sac with Poisoned) **(agreed,
@@ -1603,10 +1691,10 @@ report holds Remnants back and the client is told.
 
 | Rule | Value |
 |---|---|
-| Sources | Environment only: a gas Keg's burst (M3 Silk ink cask, Gut sac upgrade, Heart dust pillow), boss phase (e), segment-4 vents. Never party abilities, monster at-wills or flasks |
+| Sources | Environment only: a gas Keg's burst (M3 Silk ink cask, Gut sac upgrade, Heart dust pillow), boss phase (e), segment-4 vents (struck vents emit when struck, `causedBy` the triggering unit; a breathing vent is its room's one Stir, `causedBy` `environment` or the Cord's operator; change HZ-16, hazards design 6.7). Never party abilities, monster at-wills or flasks |
 | Kind | **Miasma only** (gas, spores, ink fumes, sleeping dust): `onEnter` and `onTurnEnd`, Fortitude save or Poisoned. Only in themes whose 6 holds Poisoned (Silk, Gut, Heart; the Supper only if RT-14 is ruled "does not count") |
 | Footprint | Fixed at creation, ≤ radius 1 (9 squares), **clipped** off walls, pieces, condition squares, harm squares, Portal squares, the Clearway, `fleeExit` and in-room chokes. **Never drifts, spreads or grows** |
-| Duration | Integer countdown: `roundsLeft` = 2 at creation *(illustr.)*. A new **round-end environment step** runs after the last turn's turn-end step (conditions 5.4) and before the next round starts; it decrements every Remnant in `createdSeq` order, skips Remnants created this round, and removes any at 0. Shown as a number on the glyph. All Remnants end when combat ends **(lead's call, after the check)** |
+| Duration | Integer countdown: `roundsLeft` = 2 at creation *(illustr.)*. A new **round-end environment step** (from M2 (gated) for Stirs only, HZ-12) runs after the last turn's turn-end step (conditions 5.4) and before the next round starts; it decrements every Remnant in `createdSeq` order, skips Remnants created this round, and removes any at 0. Shown as a number on the glyph. All Remnants end when combat ends **(lead's call, after the check)** |
 | Stacking | ≤ 1 per room. A new one from a **different** `sourceId` fails if one exists, and the preview says so; one from the **same** `sourceId` refreshes `roundsLeft` to full and never past it |
 | Ignition (the headline) | A fire area overlapping it, or a fire part dealt to a unit inside, turns the whole cloud into **one** fire damage event (Keg band, Reflex for half) on every unit on its squares; then it ends. No fire squares; Burning only where it is in the theme's 6. The preview shows "Ignite: N damage to M units" whenever a fire area touches Miasma |
 | Status | A hazard (11.3) for pathing and stupidity floors. **Routed units treat a non-lethal Remnant as passable** |
@@ -1655,7 +1743,7 @@ this cap, reach 1, exactly its duration, no cascades (TN8).
 | K2 | Same fire trigger | Web or bedsheet square | Burns to plain floor; a unit Restrained by that web is freed. No timer, existing code | M2 | **agreed, Q4**; TR-25 |
 | K3 | Lightning part on a unit standing in water | Connected water | **Conduct:** every other unit on water squares orthogonally connected to it within path 3 takes the lightning part, rider-free, cap 6 extra units. Instantaneous; no square changes. **Never starts from a monster at-will.** It follows ability 8.2: an at-will's or a selective cast's Conduct skips the caster's allies, and it **never reaches the caster**. Counts in the enemies 6.4 guards and the Choir lightning spike row. Details below the table | M2 | **agreed, Q4**; TR-26 |
 | K4 | Fire area | Keg | Bursts it (6.3.5) | M2 | **agreed, Q2**; TR-9 |
-| K5 | Fire area or fire part | Miasma | Ignition (6.6) | M3 | **agreed, Q5**; TR-27 |
+| K5 | Fire area or fire part | Miasma | Ignition (6.6), vent Remnants included (HZ-16; hazards design 6.7) | M3 | **agreed, Q5**; TR-27 |
 
 **Conduct in detail (lead's call, after the check):**
 - one Conduct per action per lightning source; a lightning area that
@@ -1684,7 +1772,8 @@ this cap, reach 1, exactly its duration, no cascades (TN8).
 
 Bounds:
 - **The table is closed at 5 rows. Any new row needs a client
-  question.**
+  question.** Segment 4's Stir acts are new sources for K1, K2, K4 and
+  K5 only, never K3 (hazards design 6.11 item 6).
 - Each unit is still capped by the one-instance top-up rule (6.4,
   TR-13).
 
@@ -1713,7 +1802,10 @@ creates a square kind outside its theme's home set.
   warden brute, Gut Ooze *(illustr.)*): Attack Shunt, Kick and Smash of
   heavy pieces, valued by the existing forced-movement, collision and
   area terms. Monsters never Move-Shunt to barricade: a one-step scorer
-  cannot value it (conditions 17.3).
+  cannot value it (conditions 17.3). **Extended by `usesCords` (change
+  HZ-15; with Stirs; the enemies owner applies):** one type per F2–5
+  theme Operates Cords as a telegraphed intent, valued through the
+  preview, under `NoCheapKill` (hazards design 6.3.4).
 - **Universal light Smash:** every monster with a melee attack may Smash
   an adjacent light Furnishing, scored by the reduction in its next-turn
   path length to its preferred target (a one-step quantity). This stops
@@ -1780,6 +1872,9 @@ the counterplay.
 - Contact hazards ≤ 4; none within 3 of the Forecourt Arches, either
   arena entrance or the arena start zones.
 - Furnishings ≤ 4; Kegs ≤ 1 (Carnival or Gut only in M2).
+- **Voids (change HZ-11; M2 (gated), else M3):** at most 1 Void region,
+  ≥ 3 from the Arches, either entrance, the start zones and boss lanes;
+  its own line, not counted as a contact hazard (hazards design 6.4).
 - **Phase (e)** "change arena terrain within the theme's 6, never on a
   party unit's square" (settled) uses **phase sockets**:
   - pre-placed piece or square sockets that V9 proves in both states;
@@ -1791,6 +1886,9 @@ the counterplay.
   11.1 change (TR-8), which reconciles RS 8.6–8.11 bosses that flood or
   add webs, oil, fire, bile or bedsheets mid-fight.
 - M3: phase (e) may also create a Remnant **(agreed, Q5)**.
+- Phase sockets are the precedent for segment 4's M3 pre-proven Stir
+  states (Tides, Cord Flips, Turning Ring boards), under the same rules
+  (change HZ-18; agreed, hazards Q3; hazards design 6.3).
 - Bosses use authored, forecast terrain moves. Each arena should give
   its boss one, authored by segment 9.
 
@@ -1831,6 +1929,10 @@ the counterplay.
   No extra clicks.
 - **Ally confirmation** (DH 17.7) for contact hazards, harm squares, Keg
   footprints, Kick lines and Overturn strips.
+- **Pending request (change HZ-13; the DH and enemies owners rule):** a
+  Stir's **due squares** join these previews and are hazards for
+  pathing, and the DH 17.3 danger band would include environment acts
+  due before the hero's next turn (hazards design 6.3.1, 6.18).
 - **`PreviewExactness`** **(lead's call, after the check):** a preview
   is a function of the **party-knowledge state** plus one branch per
   save outcome. Squares of a Kick line, push path or Keg footprint that
@@ -1903,7 +2005,11 @@ the counterplay.
   Landmark clock is a piece; straw never reads as the Penitent's hood
   tell.
 - **M3:** the stove may become a Hot hazard piece if floor-1
-  `HazardPushDeaths` passes and RT-20 is reopened (19.2).
+  `HazardPushDeaths` passes and RT-20 is reopened (19.2). **Applied at
+  Nightmare tier 2+ only (change HZ-25; agreed, hazards Q4; M3):** the
+  stove is promoted to a Hot piece, typed bludgeoning ("scalding iron"),
+  for the Treadwheel package, under its floor-1 `HazardPushDeaths` gate;
+  below tier 2 it stays a typed Low piece (hazards design 6.19).
 
 ### 7.3 The Kennel Wood (F1; M1 subset)
 
@@ -1988,6 +2094,10 @@ the counterplay.
   toward.
 - **Rulings:** carousel horses stay on poles and never move (FL 7.7); no
   circus cannon (an artillery silhouette); no spreading fire.
+  **Told plainly (change HZ-18; agreed, hazards Q3; M3):** segment 4's
+  Turning Ring (F3) moves units on ring boards around the hub while the
+  horses stay on their poles, so FL 7.7's letter holds and the
+  carousel's spirit is contested (hazards design 7.7).
 - **Readability:** saturated fire hue only on fire squares, braziers and
   attacks (RC4); no loose chairs (Lion-Tamer, RC2).
 
@@ -2014,8 +2124,12 @@ the counterplay.
 - **Law:** attrition. **The 6:** full; the kit uses Corroded (bile) and
   Poisoned.
 - Bile rules and density are segment 4's (RT-13); segment 3 shapes bile
-  pools in rooms. The swollen sac counts toward "≤ 2 acid sources per
-  encounter".
+  pools in rooms. **Set by segment 4 (change HZ-4):** 6–12% of a Gut
+  fight room's walkable squares *(illustr.)* in pools of 3–8, Corroded
+  on entry, a Fortitude save negates it, with a dry route at most 2
+  squares longer (hazards design 6.5). The swollen sac counts toward "≤
+  2 acid sources per encounter"; bile squares are never a source
+  (change HZ-5; hazards design 6.5).
 - **Readability:** saturated bile green only on bile and acid; sacs in
   off-key olive with the hazard ring; wall pulses never read as shifting
   rooms (RS 7.6); no orbiting spores (Spore-Priest, RC2).
@@ -2145,6 +2259,12 @@ damage type.
 
   The cover mark is one separate layer: off in M1 (CV1), on for every
   cover-giver from M2.
+
+  **Extended by segment 4 (change HZ-29):** the hazards design's RC5+
+  extension table adds rows in the same four marks for the Void (lip
+  glyph and a new drop rim), Snag, Cord, vent, latent footprint, due
+  square, Tide socket, Lurch lane, Handhold, Chainpost and staked pit,
+  each in its own wave (hazards design 8).
 - **Hazard faces read from the floor.** Every hazard face projects a
   floor decal onto its one front square: a half-rim along that square's
   edge facing the face, plus the type icon, drawn at hazard tier
@@ -2315,7 +2435,7 @@ rates as lower bounds.
 | TN10 | Keg chains: 4–23% chance with ≤ 2–3 per room; 0 with spacing ≥ 2 | Spacing ≥ 2 **and** sturdy Kegs in M2 **and** no burst triggers a burst (movable Kegs would undo spacing) |
 | TN11 | Combo frequency under B/C would be routine (30–58% of fire casts touch a combo square) | Closed 5-row table; only K2 and K3 new in M2 |
 | TN12 | Conduct: mean 0.27 extra units, P(≥ 1) 23%, max 3; the cap of 6 never binds | Adopted (Q4), halved after weakness |
-| TN13 | Clock: packages add +0.5 to +3.5 min per floor, on floors already 3–9 min over the gate. Model A ~+0.5 to +1.2; the adopted package is estimated at +0.8 to +1.6 | Combat-only verbs; hover-only or payoff chips; move shields only in the move tool; gates: net `FightRoundsByTheme` ≤ +1% rounds for the M2 package (Kegs and contact shorten fights, cover lengthens them) **and** `FloorMinutesDelta` ≤ +1.6 min per floor, the top of the told-plainly forecast, measured on the companions 7.4 time model with the verbs and reads as terms; a miss fires the risk-7 cut order **(told plainly; the minutes gate is a lead's call after the check)** |
+| TN13 | Clock: packages add +0.5 to +3.5 min per floor, on floors already 3–9 min over the gate. Model A ~+0.5 to +1.2; the adopted package is estimated at +0.8 to +1.6 | Combat-only verbs; hover-only or payoff chips; move shields only in the move tool; gates: net `FightRoundsByTheme` ≤ +1% rounds for the M2 package (Kegs and contact shorten fights, cover lengthens them) **and** `FloorMinutesDelta` ≤ +1.6 min per floor, the top of the told-plainly forecast, measured on the companions 7.4 time model with the verbs and reads as terms; a miss fires the risk-7 cut order **(told plainly; the minutes gate is a lead's call after the check)**. Segment 4's `HazardMinutesDelta` ≤ +0.3 min per floor sits **inside** this +1.6, and `FloorMinutesDelta` read with segment 4 on is the combined gate (change HZ-27, told plainly; hazards design 10) |
 | TN14 | DEP-A1 (party-entry reading): Gut 0.38 and Heart 0.36 today; the Supper 0. With features counted, the Supper reaches 0.41–0.52 and a Heart with RT-14 refused 0.39–0.51 | TR-21 "interactive feature"; KP2 in every F2–5 fight layer at path distance 3–6 from party entry; the report uses that reading until the Arcanist owner rules which "start" is meant (11.3) |
 | TN15 | 49 terrain condition sources checked: 0 new ids; 1 violation (B's overturned Supper brazier spilling a fire square) | Hot pieces never tip; no square creation by pieces |
 | TN16 | A ranged scorer ended 0.4% of turns on harm squares | Destination value in the scorer (6.9) |
@@ -2347,6 +2467,7 @@ SquareClass   += Rough {moveCost:2}, Harm {onEnter:{band:"harm", type}, hazard:t
                  Plank {check:{skill:"acrobatics", dc:"ladder"}}
 ThemeRecord.terrainKit { tall[], low[], furnishings[], kegs[], hazardPieces[], hazardFaces[],
                  harmSkin, roughSkin, plankSkin, signatureLaw, usesFurnishingsKits[] }   // replaces RS 8.0 coverProps[]
+                 // beside it, segment 4's hazardKit lists the theme's Tableaux (HZ-8; hazards design 6.2.2, 11.1)
 TerrainLayer, Socket, PhaseSocket                      // 6.2.5
 FurnishingState { furnishingId, square, state: intact|debris|gone, burstSpent }   // saved; terrainDigest
 RemnantState (M3) { id, kind, sourceId, squares[], roundsLeft, createdSeq, causedBy }
@@ -2369,6 +2490,11 @@ Tuning: cover.effect = minus2|disadvantage|off; cover.penalty = 2;
 - Every push source declares `verbSourced: bool` in data, which picks
   the contact band or the typed collision band (6.5.2) **(new lead's
   call)**.
+- **Segment 4 (change HZ-28):** a `hazards` child of the `terrain`
+  stream draws after the 6.2.5 reservation step with fixed draw counts;
+  `hazardDigest` sits beside `terrainDigest`; V10 `RoomHazards` runs
+  after V9 at build time; its reports, arms and save records are
+  segment 4's (hazards design 11).
 
 ### 11.2 V9 `RoomTerrain` (change TR-18)
 
@@ -2410,7 +2536,7 @@ validator list beside V8.
 |---|---|
 | `DamageShareByRangeBand` per grammar × cover arm (off / minus2 / disadvantage) | ±25%; launcher families ≥ 60%; damage-taken ≥ 50%; Precision re-run |
 | `WorstCoveredHitChance` | Information, read against the armour 11 rows |
-| Net `FightRoundsByTheme`; `FloorMinutesDelta`; `ExploreClicks`, `ExploreSeconds` | ≤ +1% rounds and ≤ +1.6 min per floor for the M2 package, both against the **baseline arm**: the same seeds and layers with `cover.effect` = off, Furnishings static, contact hazards and harm squares as plain obstacles and floor, and Kegs inert; reported as mean rounds per fight and floor-median minutes by theme, on minus off. A miss fires the risk-7 cut order; FL-16 |
+| Net `FightRoundsByTheme`; `FloorMinutesDelta`; `ExploreClicks`, `ExploreSeconds` | ≤ +1% rounds and ≤ +1.6 min per floor for the M2 package, both against the **baseline arm**: the same seeds and layers with `cover.effect` = off, Furnishings static, contact hazards and harm squares as plain obstacles and floor, and Kegs inert; reported as mean rounds per fight and floor-median minutes by theme, on minus off. A miss fires the risk-7 cut order; FL-16. With segment 4 on, `FloorMinutesDelta` is read as the combined terrain-plus-hazards gate, ≤ +1.6 min (change HZ-27; hazards design 10, 11.4) |
 | `Floor1ClassSpread` with cover on | Classes 5.6 (10 points); the enemies 6.4 floor-1 guard rows (DH-26) |
 | `CoverUseRate`, `HideSpotsPerRoom`, Shade Hide rate | Shade D4 |
 | `WreckerCollisionRate`, `contactRate` by theme; `HewCeiling` with contact | Vanguard 10.1; the formula of 6.10 |
@@ -2460,7 +2586,7 @@ into one list; the clutter and AI-aim arms are added**)**
 |---|---|
 | **M1** | Tall and Low pieces as blockers; the obstacle definition, corner rule and lines rule (TR-5); non-free pieces, the open room's 5×5 core and lane, Tall pieces at full wall height with the stub glyph (TR-19, TR-20's stub-glyph rule); the Clearway; the `terrain` stream with its reservation step, layers in greybox, `terrainDigest`; V9 partial (`ClearwayConnected`, `ProtectedIntact`, `FreeSpaceAfterClutter`, `RoomMixAfterClutter`, `ClutterBand`, `ReservationCapacity` for the `cluttered` tag, `WayRound`, `CutawayWithTall`, `TerrainDrawCount`); the Kennel `coverRoom` from Tall trunks and root plates. **No cover rule, nothing movable, no hazards** |
 | **M2** | Cover (**Q1**); Furnishings with Shunt, Kick, Smash (**Q2**); Kegs in the Carnival and Gut (**Q2**); contact hazards and harm squares on floors 2–5 (**Q3**); Rough; Plank; floor-1 teaching rooms and typed Low pieces; condition-square placement and entry caps; arena caps and phase sockets; the AI requests; previews, chips, charter extensions; full V9 and reports; K2 burn-away and K3 Conduct (**Q4**) |
-| **M3** | Remnants (**Q5**, after the M2 rider and layer reports, 6.6); Overturn; Haul; Shoot an object; Kegs in the Choir, Silk, Supper and Heart; depth-1 chains; Briar (own question); floor-1 Hot pieces only after floor-1 `HazardPushDeaths` and an RT-20 reopening |
+| **M3** | Remnants (**Q5**, after the M2 rider and layer reports, 6.6); Overturn; Haul; Shoot an object; Kegs in the Choir, Silk, Supper and Heart; depth-1 chains; Briar (own question); floor-1 Hot pieces only after floor-1 `HazardPushDeaths` and an RT-20 reopening (applied at Nightmare tier 2+ only, for the Gaol stove: HZ-25, hazards design 6.19) |
 | **M3+ / M4** | Glaze for a frost theme; Mist if needed; powder-keg blast push |
 | **Later** | Haze with NM-9; hide in cover; Pavise; carom and Over the Edge; lethal chasms; Hurl; multi-square Furnishings; ability-created surfaces (a separate client question) |
 
@@ -2473,7 +2599,7 @@ into one list; the clutter and AI-aim arms are added**)**
 | Owner | Owns |
 |---|---|
 | **Segment 3 (this)** | Piece and square classes and the obstacle definition; terrain layers, sockets, the Clearway, clutter bands, chokes, lanes, nooks; the cover rule; Furnishings, Kegs and their verbs; the knock-into **system** (contact hazards, harm squares: rules, bands, caps, in-room placement grammar); Rough and Plank; in-room placement of existing condition squares and the Choir and Carnival entry caps; the combo table; the Remnant system; arena terrain **rules and caps**; DEP-A1 presence; the `terrain` stream, V9 and the reports |
-| **Segment 4 (hazards)** | Per-theme hazard catalogues and floor-wide density built from segment 3's classes, inside its caps; drop hazards, chasms, pits and what a fall does (6.5.7 suggestion); bile (RT-13); Teetering counting (RT-14); theme-scale self-acting set pieces (vents that emit Remnants, flooding); Hinge and Postern no-hazard squares |
+| **Segment 4 (hazards)** | Per-theme hazard catalogues and floor-wide density built from segment 3's classes, inside its caps; drop hazards, chasms, pits and what a fall does (Voids and the Snag, 6.5.7); bile (RT-13); Teetering counting (RT-14); theme-scale self-acting set pieces (vents that emit Remnants, flooding; Stirs, Cords and the Dream step's content); Hinge and Postern no-hazard squares. The hazard / trap line: a hazard is visible from reveal, acts by a rule and is never found or disarmed; "would detection change anything?" If yes, it is a segment-5 trap (change HZ-1; hazards design 6.1, 13) |
 | **Segment 5 (traps, locks, checks)** | Traps (hidden, armed, sprung, one-shot), including the toppling shelf, icicles, chandelier and dumbwaiter; door verbs (FL-8); the DC ladder that Shunt, Smash, Plank and Overturn read; the out-of-combat Plank failure cost |
 
 **Rule of thumb:**
@@ -2513,7 +2639,7 @@ Segment 3 takes the knock-into *system*, not drop hazards.
 | One flat rules level; coplanar squares; no high ground | main 4.3, 6.8 **(decided)**; LG18 | No stand-on pieces; Planks coplanar; drops are flat voids (segment 4) |
 | Symmetric line of sight | main 4.3 **(decided)** | Cover is roll maths; Furnishings never block sight in M2; M3 Overturn changes sight symmetrically |
 | No corner cutting | the M0 skeleton plan's `CornerCut` (FL 3.1) | Every movement-blocking square blocks diagonals, including forced moves and a piece's own travel (TR-5) |
-| No spreading, evolving or player-placed surfaces | main 2 **(decided)**; conditions 11.1, ability 8.4 **(agreed)** | Nothing timed in M2; Remnants only from M3 (**agreed, Q5**; TR-27 flagged); Kegs leave nothing on the ground |
+| No spreading, evolving or player-placed surfaces | main 2 **(decided)**; conditions 11.1, ability 8.4 **(agreed)** | Nothing timed in M2, except one gated signature Stir per F2–5 floor that changes no square (HZ-12; M2 (gated), else M3; 6.6); Remnants only from M3 (**agreed, Q5**; TR-27 flagged); Kegs leave nothing on the ground |
 | Condition budget 32; theme 6 | conditions 16, 18.1 | 0 new ids; damage-only pieces; V9 `ThemeSix` |
 | No single failed save lethal to the hero | conditions 10.4 | Contact ≤ 20% of hero HP; Keg ≤ 25%; failures on Planks stop, never fall |
 | Lethal tags; ally confirmation; party floors | DH 17.6, 17.7, 10.4 | Extended (TR-23) |
@@ -2547,7 +2673,7 @@ Segment 3 takes the knock-into *system*, not drop hazards.
 | 4 | Arcanist push payoff: Gust now deals the typed collision band against contact hazards; Shockwave and Squall the contact band | The at-will rider bound; `ArcanistComboShare` | Counted in the rider bound; area cap of 2 |
 | 5 | AI uses objects worse than players | `FurnishingUseRate` (AI) | Accepted as player power; universal light Smash; one terrain-using enemy per theme |
 | 6 | Readability load: cover pips, rims, Keg rings, harm squares and stub glyphs stack up | Greyscale and role-ID gates | One glyph per class; RC6+ order; a failing theme is held |
-| 7 | Clock: every package spends time on floors already over the gate | Net `FightRoundsByTheme`; `FloorMinutesDelta`; `ExploreSeconds` | Combat-only verbs; chips only on payoff. The cut order fires automatically, one step per failed run of either gate: Kick, Move Shunt, Rough density, harm squares |
+| 7 | Clock: every package spends time on floors already over the gate | Net `FightRoundsByTheme`; `FloorMinutesDelta`; `ExploreSeconds` | Combat-only verbs; chips only on payoff. The cut order fires automatically, one step per failed run of either gate: Kick, Move Shunt, Rough density, harm squares. **Extended by segment 4 (change HZ-27):** then Moods, Dare rooms, second Stir kinds, Lurch and Prone Stirs, Tides, Void density 40% → 30%, and the signature Stir reverting to static density; segment 4's steps fire first when `HazardMinutesDelta` or the combined gate misses, these steps first when the terrain package misses with segment 4 off (hazards design 10) |
 | 8 | RT-14 refusal costs the Heart's bedsheets and each full-6 theme's named fallback drop | The RT-14 ruling | Floor 5 keeps contact hazards, Furnishings, Planks and harm squares; harm squares no longer depend on it (6.5.5) |
 | 9 | Approved-text footprint: several agreed texts and one decided text (M3) change | — | Each is flagged (17); the M2 package touches main 2 only by consolidating and clarifying (TR-8, TR-9) |
 | 10 | Art volume: about 12–14 rules pieces per theme on top of 41–50 templates | M2 schedule review | The art team's stated appetite is the enabling assumption |
@@ -2836,7 +2962,8 @@ triggers them:
 - Briar with Bleeding in the Kennel (M3; touches RS 6.3, 8.4, RT-20 and
   conditions 11.2), as its own question;
 - floor-1 Hot hazard pieces (M3; reopens RT-20) if floor-1
-  `HazardPushDeaths` passes;
+  `HazardPushDeaths` passes (applied at Nightmare tier 2+ only, for the
+  Gaol stove under the Treadwheel: HZ-25, hazards design 6.19);
 - Glaze for a future frost theme;
 - Haze with NM-9 Gloom;
 - hide in cover;

@@ -868,6 +868,13 @@ Q2):**
   narrowly on the toy, so the cap-2 fallback stays likely (floor layout
   design 10.2). **No layout lever** is added to the lever order below
   (agreed Q2 levers untouched).
+- **Hazards in the time model (change HZ-27, hazards design 10; told
+  plainly).** Hazards take `HazardMinutesDelta` ≤ +0.3 min per floor
+  *inside* the terrain package's +1.6 min tolerance (room terrain
+  design TN13), gated together as terrain plus hazards ≤ +1.6; a miss
+  fires the hazards cut order (extending room terrain design risk 7's).
+  **No hazard lever** is added to the lever order below (agreed
+  Q2 levers untouched).
 - **Definition.** Floor time is the **active time** from the core's
   timestamped `FloorEntered` event to its `BossDefeated` event on that
   floor (every floor ends at its boss), excluding camp screens, pause

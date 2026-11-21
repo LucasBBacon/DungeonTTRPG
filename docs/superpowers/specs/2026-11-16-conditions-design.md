@@ -255,6 +255,24 @@ round starts. It decrements every Remnant in `createdSeq` order, skips
 Remnants created this round, and removes any at 0. All Remnants end when
 combat ends.
 
+**The Dream step (change HZ-12; hazards design 6.3; agreed by the
+client 2026-11-21, Q1; M2 (gated), else M3):** the round-end
+environment step is brought forward to M2 for Stirs only, for one
+signature Stir per F2–5 floor, if its ship gates pass; else it stays
+M3. The step that ends round R belongs to round R. Conditions it
+applies count as applied outside the unit's own turn (5.2). Its
+sub-steps, in order:
+1. Acts: each Stir due to act, in `stirId` order: per unit on the
+   footprint, in fixed square order, the save, damage through the
+   pipeline (9.2, 9.3), then non-damage parts; then forced movement
+   (Lurch, M3) and Dreamfall placements (10.2); then a zero-hit-point
+   sweep; then the Stir countdowns.
+2. Combos it triggers (never Conduct, 11.2); then (2b) the morale
+   checkpoint and experience credit.
+3. Remnant countdowns (M3), as above.
+4. New announcements: footprints due next round become due squares
+   (11.3).
+
 ### 5.5 Out of combat
 
 - One round is one tick. **(settled)**
@@ -287,6 +305,11 @@ combat ends.
   **(change DH-15; death and healing design 10.3, 11.2)**.
 - A 20-tick short rest outlasts every turn-counted condition. **(follows
   from ability model 15.1)**
+- **Dare rooms (M3; change HZ-21; hazards design 6.10):** an unguarded
+  Dare room's Stir runs per out-of-combat tick (one round is one tick);
+  there is no new round mode. The 1 hit point floor applies; a
+  dare-taker reduced to 1 hit point by the room is returned to the
+  threshold and the dare resets.
 
 ### 5.6 Windows
 
@@ -754,6 +777,17 @@ on an attack that already has disadvantage from another source.
   with it: the drag stops at the edge.
 - **M2:** a unit dragged into a hazard gets the hazard-edge save (10.2); on
   a success it stops on the last safe square and the grapple ends.
+- **Open item, pending ruling (change HZ-17; hazards design 6.3.3; M3):**
+  Lurch, environment forced movement used only by Stirs, as a third
+  named exception class beside Battering Force and verb pushes: soft
+  stops only (no collision damage); a benign form that stops before
+  hazards and a hazardous form that makes the full hazard-edge save at
+  EnvDC; the area cap counted in downstream-first order; Rooted,
+  Restrained, Hidden and Handhold-adjacent units, and Anchored units
+  once Anchored ships, hold fast. Requested of the conditions owner;
+  not yet ruled, nothing changes until it is. If ruled, Lurch also runs
+  on floor 1 at Nightmare tier 2+ for the packages that name it **(change
+  HZ-25; hazards design 6.19; agreed by the client 2026-11-21, Q4; M3)**.
 
 ### 10.2 Hazard edge
 
@@ -785,8 +819,30 @@ stops on the last safe square and gains Teetering.
   the rule above.
 - **Area cap:** an area-shaped forced movement gives the save to at most
   2 units per action, the first 2, in the fixed square order of their
-  starting squares, whose move reaches a contact hazard or a harm square.
+  starting squares, whose move reaches a contact hazard, harm square or
+  Void, one shared counter per use **(change HZ-9; hazards design 6.4)**.
   Later units stop as against an ordinary obstacle.
+- **Voids (change HZ-9, HZ-10; hazards design 6.4; agreed by the client
+  2026-11-21, Q2; M2 (gated), else M3):** forced entry into a Void
+  square (11.3) by push, pull, drag or Lurch saves square by square at
+  the pusher's difficulty (EnvDC for a Lurch). The last safe square is
+  the last walkable square before the first Void square, a Plank over
+  the Void included. Teetering's disadvantage does not apply to this
+  save (18.4). Success: stop on the last safe square, plus Teetering
+  only if RT-14 is ruled "does not count" (16), never on a boss.
+  Failure: a boss (`noDrop`) takes the contact band and is Prone, with
+  no Teetering, and is never removed; an elite or group leader Clutches
+  once per fight (the contact band, Prone, Teetering, holding on) and
+  cannot fall until it has taken a turn after the Clutch; another
+  monster falls (removed and defeated, `voidFall` paid as a kill,
+  `causedBy` the pusher); a party unit Dreamfalls: it takes the fall
+  band (never below 1 hit point, 10.4), leaves the grid at once, is
+  placed Prone on the room's Snag at the end of the use (an entry, but
+  Snags are never hazards; grapples end), is Groggy until the end of
+  its first turn after placement, and is not dropped again that fight.
+  A rescue push by an ally lands on the secondary Snag and costs the
+  faller its next action. Flying units cross; Downed units are never
+  moved.
 - **Shortened moves** (Stalwart and similar): the shortened move is
   computed first; the save is made only if it still reaches the hazard.
 
@@ -794,6 +850,14 @@ stops on the last safe square and gains Teetering.
 
 When Flying, Jumping or Levitating ends over a hazard, the unit makes a
 Reflex save. On a success it lands Prone on the nearest safe square.
+
+**Void failure branch (change HZ-10; hazards design 6.4; agreed by the
+client 2026-11-21, Q2; M2 (gated), else M3):** over a Void the save is
+at the floor's EnvDC (hazards design 6.3.5). A failure is a failed
+edge save (10.2, Voids); its edge, for the second-fall rule, is the
+nearest walkable non-hazard square, ties in fixed square order. No
+voluntary Jump, Flight or Levitation may end its movement over a Void,
+so this branch comes only from forced moves and states that expire.
 
 ### 10.4 Hazard lethality
 
@@ -804,7 +868,22 @@ of combat, or from an undetected trap, cannot take it below 1 hit point
 (death and healing design 10.4) **(change DH-18)**. Known armed traps are hazards
 for 10.1–10.4 (11.3) **(change SH-15; Shade design 9.1, NM-1)**.
 
-## 11. Fixed terrain
+- **FallFloor (change HZ-10; hazards design 6.4; agreed by the client
+  2026-11-21, Q2; M2 (gated), else M3):** Void fall damage can never
+  take a party unit below 1 hit point, in or out of combat (a death and
+  healing design 10.4 row).
+- **The EnvRound cap (change HZ-7; hazards design 6.11 item 2; M2):**
+  environment damage to one party unit within one round is capped at
+  `CapRound` (30% *(illustr.)* of the lowest legal hero's maximum hit
+  points for the floor's level band), using the one-instance cap's
+  top-up at round scope. Included: collision, contact, harm, Keg, Stir
+  acts and falls, and the first Remnant application of a monster-push
+  struck vent. Outside it: `onTurnEnd` ticks and other Remnant
+  applications. Monsters are uncapped. Per instance: the amount after
+  save, weakness and resistance; then the per-use top-up; then the
+  round-scope top-up; then the 1 hit point floors last. Out of combat,
+  one tick is one round; the Dream step that ends round R charges round
+  R (5.4).
 
 **(agreed unless marked)**
 
@@ -829,7 +908,16 @@ for 10.1–10.4 (11.3) **(change SH-15; Shade design 9.1, NM-1)**.
   - Overturn debris and sight change (M3; room terrain design 6.3.7);
   - Remnants (M3; change TR-27; room terrain design 6.6): environment-made
     Miasma clouds with a fixed footprint and a short countdown, which
-    never drift, spread or grow.
+    never drift, spread or grow. Struck and breathing vents emit them
+    (M3; change HZ-16; hazards design 6.7);
+  - pre-proven Stir states (M3, the reversal round M4; change HZ-18;
+    hazards design 6.3, 7; agreed by the client 2026-11-21, Q3): Tides
+    toggled whole between their 2 proven states (held whole if a
+    changing socket is occupied), Cord Flips, Turning Ring boards,
+    Furnishings moved by the environment along pre-proven rails,
+    environment Overturn along a pre-proven strip, and the reversal
+    round (only the push direction reverses). M2 Stirs change no
+    square.
 
 ### 11.2 Squares
 
@@ -841,7 +929,7 @@ Illustrative set:
 | Web | Restrained (the web is the binding; breakers fire and slashing) | Restrained | M2 |
 | Fire | Burning | Burning | M2 |
 | Oil slick | Oiled | Oiled | M2 |
-| Bile | Corroded | — | M2 **(change RT-13; run structure design 8.10)** |
+| Bile | Corroded (Fortitude negates, once per entry; on forced entry, after a failed edge save) | — | M2 **(change RT-13; run structure design 8.10; save and density: change HZ-4, hazards design 6.5)** |
 
 - A square's data names the condition, its trigger (`onEnter`,
   `onTurnEnd` or both), its contest (a save type and difficulty, or
@@ -860,7 +948,9 @@ Illustrative set:
 - **Entry** is any change of a unit's square to this square: its own
   movement, forced movement, a drag, placement, a return from Banished or
   an expulsion. Units standing on a square when combat starts have not
-  entered it. `onEnter` fires once per entry. **(lead's call)**
+  entered it. `onEnter` fires once per entry. **(lead's call)** A
+  square's state changing under a unit (a Tide turning between walkable
+  kinds) is not an entry **(M3; change HZ-18; hazards design 6.3)**.
 - Squares a Jumping or Flying unit crosses are ignored. Its landing
   square, and a Flying unit's square at the end of its turn, apply only if
   the square is not tagged as crossable by that state. **(settled
@@ -915,6 +1005,21 @@ changed; known traps simply become hazards they apply to.
 squares are hazards for the same rules, though they apply no condition.
 A successful save against them gives no Teetering (10.2).
 
+**Void squares (change HZ-9; hazards design 6.4; agreed by the client
+2026-11-21, Q2; M2 (gated), else M3):** a Void square is a
+non-walkable, condition-free hazard, in regions of 2–10 squares,
+crossable by Jumping and Flying, with line of sight passing over it.
+It is a hazard for the same rules; forced entry uses the Void branch
+of 10.2. No unit, Furnishing, Keg or Downed body ever stands on one;
+Furnishings and Kegs pushed in are removed. Snags are never hazards.
+
+**Open item, pending ruling (change HZ-13; hazards design 6.3.1;
+requested of the death and healing and enemies owners):** a Stir's due
+squares are hazards for this section's pathing, Commanded and Confused
+movement, and follower and companion pathing, but not for the
+stop-before-hazard rule (10.1), the hazard-edge save (10.2) or the
+landing save (10.3). Nothing changes until the owners rule.
+
 ### 11.4 Fire on oil
 
 The first of the sanctioned map changes (11.1) **(change TR-8)**. **(agreed
@@ -927,7 +1032,9 @@ that it exists; the outcome is the lead's call)**
   keeps every square free of timers: the payoff lives on the unit, through
   Oiled (catalogue E). **(lead's call)** M3 exception: Remnant clouds
   carry an integer countdown (5.4 round-end environment step) **(change
-  TR-27; room terrain design 6.6)**.
+  TR-27; room terrain design 6.6)**. Stir square changes (11.1) run on
+  the Stir's countdown, not a square timer **(M3; change HZ-18; hazards
+  design 6.3)**.
 - Burn-aways resolve after the damage event, in the fixed square order
   (ability model 8.1).
 - **Web and bedsheet burn-away (M2; change TR-25; room terrain design
@@ -949,7 +1056,8 @@ that it exists; the outcome is the lead's call)**
   approved by the client 2026-11-21; run structure design 8.10)** Also
   harm squares (change TR-11) and the obstacle-hazard branch for contact
   hazards (10.2; change TR-10) **(agreed, extended by the room terrain
-  design, approved by the client 2026-11-21)**.
+  design, approved by the client 2026-11-21)**. Bile density and its
+  Fortitude save: hazards design 6.5 **(change HZ-4)**.
 
 ### 11.6 Sources, and traps
 
@@ -1198,7 +1306,14 @@ Enforced by content validation. **(lead's call)**
     design 6.5.5): rule "does not count" before M2 rosters freeze. Contact
     hazards and harm squares never give Teetering on a save, so they do
     not depend on it; the Supper's Poisoned rows (including every M3 row
-    that uses Poisoned in the Supper) are conditional on it.
+    that uses Poisoned in the Supper) are conditional on it. The hazards
+    design repeats the request **(change HZ-6; hazards design 6.8)** with
+    offered ruling text: conditions granted only by the universal
+    positional rules (10.2, 10.3, the Void branch, Clutch and Brink) form
+    an uncounted universal-positional class, and no monster, boss, trap,
+    Stir, Cord or square record may apply Teetering directly; with a boss
+    guard (no Teetering on bosses from a Void-edge success or Clutch).
+    Pending; nothing changes until the conditions owner rules.
   - **RT-15:** whether radiant counts 2 toward a theme's 6, and whether
     Revealed is harmful at all. No M2 theme deals radiant; it blocks only
     the M3 Mirror Court and Moth Wedding (run structure design 8.0, 8.12).
@@ -1791,7 +1906,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Sources: bolas, harpoons.
 - **Teetering** — minor · **M2**
   - Effect: on a hazard's edge; its attacks have disadvantage; its next
-    save against being forced into that hazard has disadvantage.
+    save against being forced into that hazard has disadvantage, except
+    the Void-fall save **(change HZ-9; hazards design 6.4; agreed by the
+    client 2026-11-21, Q2; M2 (gated), else M3)**.
   - Intensity: binary, tied to one hazard.
   - Duration: trigger (self-ended, no cap, 5.3). Ends when it moves to a
     square not adjacent to the hazard, enters the hazard, or a later forced
@@ -1805,7 +1922,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     Vanguard design 8.3)**. Sources unchanged by the room terrain design:
     contact hazards and harm squares never give it on a save (10.2), and
     Brink is read literally, so it reads harm squares but not contact
-    hazards **(change TR-10; room terrain design 6.5.2)**.
+    hazards **(change TR-10; room terrain design 6.5.2)**. A Void-edge
+    success (only if RT-14 is ruled "does not count"; never on a boss)
+    and an elite's Clutch also give it (10.2) **(change HZ-9)**.
   - Interactions: Rooted and Anchored make the edge safe.
 - **Hobbled** — minor · Later
   - Effect: the first time each turn it moves 3+ squares by its own
@@ -2711,7 +2830,7 @@ Record of the catalogue's shaping. **(lead's call)**
 | terrain | Lightning part on a unit standing in water (M2) | Connected water squares | Conduct (11.2): rider-free, after the Soaked arc **(change TR-26)** |
 | combo | Prone + any speed-0 condition | | Standing costs the action |
 | combo | Grappled + hazard or terrain square | | M1: the drag stops before it. M2: a drag into it gives the hazard-edge save; a success ends the grapple (10.1) |
-| combo | Teetering + forced movement | | Hazard save at disadvantage |
+| combo | Teetering + forced movement | | Hazard save at disadvantage; not the Void-fall save (10.2) **(change HZ-9)** |
 | combo | Stunned or Frozen ally + Reflex area | | Automatic fail (Stunned) or resistance (Frozen) |
 | combo | Withered + Bleeding or Condemned | | The heal end is locked out (slashing plus necrotic) |
 | combo | Restrained + area | | Reflex disadvantage |

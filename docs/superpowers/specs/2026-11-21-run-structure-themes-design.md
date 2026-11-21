@@ -580,7 +580,9 @@ more theme to build); C, variable 4–5 floors.
   are deliberately dry, read as "no condition squares": condition-free
   squares appear there (the Supper's shattered-crystal harm squares;
   Rough and Plank in all three; change TR-22, told plainly; room terrain
-  design 7.1); their identity comes from a visible
+  design 7.1; kept for the Kennel's Nightmare tier 2+ staked pits, which
+  are condition-free harm squares, change HZ-25, hazards design 6.19);
+  their identity comes from a visible
   `signatureFeature` (8.0).
 
 ### 6.4 Selection and seeding (agreed, Q1; change RT-3; seeds-segment hook)
@@ -608,7 +610,9 @@ more theme to build); C, variable 4–5 floors.
   rejection sampling, so the number of draws never depends on the data.
   The floor `layout` child follows the same rule: a fixed draw count per
   Blueprint, every draw consumed even when one option is legal (change
-  FL-2; floor layout design 6.1). In order:
+  FL-2; floor layout design 6.1). So does the `hazards` child of the
+  `terrain` stream, with fixed draw counts and no draws at act time
+  except saves (change HZ-28; hazards design 11.2). In order:
   1. **the permutation:** a Fisher–Yates permutation of the **whole theme
      catalogue in the manifest, locked, held and cut themes included**;
      the drawable set filters it afterwards, so unlocking a theme never
@@ -817,7 +821,7 @@ until Travel on (the camp state `nextTheme`).
 |---|---|---|
 | Run-start card | Floor-1 theme name, vignette, HR-23 line | Same |
 | Camp next-floor card | Name, vignette, the approved HR-23 line "Next floor: theme X, about Y% non-fearless" | Per door: name, vignette, HR-23 line, signature line, at-will damage icons, square-kind icon, boss name and silhouette |
-| Floor-entry **Stratum Card** (DH 17.12 header) | Name, act, signature line, damage types, non-fearless band, boss name; the floor count line "Main path: n rooms; side rooms: k; secrets: s" (s from floor 2; counts only, never locations; change FL-20, floor layout design 9.2) | Same |
+| Floor-entry **Stratum Card** (DH 17.12 header) | Name, act, signature line, damage types, non-fearless band, boss name; the floor count line "Main path: n rooms; side rooms: k; secrets: s" (s from floor 2; counts only, never locations; change FL-20, floor layout design 9.2); **M3:** the floor's Mood, Omen and Nightmare only, with its stage and every threshold visible from floor entry (change HZ-20; hazards design 6.9) | Same |
 | Lore reveal on entry | Roster types and roles **(settled, enemies 10.6)** | Same; M3: roles shown at camp too |
 | **Dream track** (HUD, pause) | 5 strata: visited floors named; the next floor named at its camp; later floors show only their tier glyph; floor 5 reads "The Dreamer's Heart" from minute one | Plus "the road not taken": the declined door, shown on the run summary too |
 
@@ -1001,14 +1005,14 @@ Q3:** B, no premise; C, folk horror; D, full absurdism.
 
 | # | Rule |
 |---|---|
-| RC1 | **Mechanics never joke:** no fake tiles, no lying UI, no hidden rules, no "wild" random effects for flavour. **Dressing never mimics a unit, a square kind or a rule (lead's call, after the check):** statues and props share no silhouette with a roster type; a square kind's material (water, web, sheet, oil, bile) appears only on its squares and on walls above head height; no floor-level particle implies a condition; frost, rain and liquid read only as backdrop. **RC1+ (change TR-20; room terrain design 8.1, 8.2):** every object on a walkable square is a rules piece; dressing lives only on walls, backdrop, non-walkable squares or above head height; liquid-holding pieces are drawn dry or lidded; residue rule: nothing remains on the floor after an event resolves, except debris as Rough. **M3:** Remnant volumes are the one floor-level particle allowed to imply a condition (TR-27) |
+| RC1 | **Mechanics never joke:** no fake tiles, no lying UI, no hidden rules, no "wild" random effects for flavour. **Dressing never mimics a unit, a square kind or a rule (lead's call, after the check):** statues and props share no silhouette with a roster type; a square kind's material (water, web, sheet, oil, bile) appears only on its squares and on walls above head height; no floor-level particle implies a condition; frost, rain and liquid read only as backdrop. **RC1+ (change TR-20; room terrain design 8.1, 8.2):** every object on a walkable square is a rules piece; dressing lives only on walls, backdrop, non-walkable squares or above head height; liquid-holding pieces are drawn dry or lidded; residue rule: nothing remains on the floor after an event resolves, except debris as Rough. **M3:** Remnant volumes are the one floor-level particle allowed to imply a condition (TR-27). **Hazards (change HZ-29; hazards design 8):** every Void is a Void, no fake holes; backdrop depth never reads as walkable; a fall leaves no residue; motion on walkable squares happens only during an act animation (≤ 1.0 s), never at idle, and only for the Turning Ring's rotation, Peristalsis's band step, a Tide's fill change and the Dreamer's heave; figments (the Stampede herd, Counting Sheep) exist only during their act, flat, translucent, non-unit and below unit value |
 | RC2 | **Role prop grammar** (extends enemies 8.1): leaders carry a vertical emblem; soldiers a tall flat object (shield, door, tray, coffin lid, chair); artillery points something forward; brutes are oversized mass inside one square; skirmishers lean low; controllers have an orbiting element; lurkers show a tell at rest; minions are small and share one palette. **Pieces (change TR-20; room terrain design 8.1):** no terrain piece uses a chair, tray, door, upright coffin lid, shield, tall staff, forward-pointing tube, orbiting element or unit silhouette; chairs appear only tucked into tables; Low pieces that could read as shields come only as multi-square runs; no Furnishing or Low piece shares a silhouette family with its theme's current or planned Kegs |
 | RC3 | **Faces mean minds:** mindless types show one cross-theme mind tell (a hollow keyhole motif) and no face; fearless-but-minded types are masked or veiled; non-fearless types have faces and visibly cower, flee and kneel (animations duplicate approved states, never replace them). **(Lead's calls, after the check.)** Bosses are exempt: the boss plate and pips carry their read, and the face grammar applies to non-boss types only. Helms on non-fearless types are open-faced (raised visor or none); veils on non-fearless types are lifted or pinned back. The keyhole silhouette is reserved: no environment, prop or non-mindless unit uses it (locks read as padlocks; change FL-7, told plainly). A Routed or Cowed animation never moves a unit through a door or changes a door |
-| RC4 | **Damage language:** family by shape (physical streaks and impacts; elemental fluids, particles, crystals; spirit rings and ripples); type by hue *plus* pattern, so it survives colour-blind simulation; no theme uses an undesaturated damage hue as its dominant environment colour. **The damage-hue key** (10 types, hue plus pattern) is owned by art and due before the first Tone Sheet. A theme whose Law is a damage type (Gut, Supper, Carnival) dresses its environment in a desaturated, off-key variant and keeps the saturated key for its hazard squares and attacks (lead's call). **RC4+ (change TR-20; room terrain design 8.1):** the saturated damage hue is also allowed on contact hazards in every F2–5 theme; fire hue stays limited to fire squares, Hot pieces and attacks. **M3:** Miasma Remnants take their own hue and pattern (a desaturated violet with a stipple, never bile green; room terrain design 6.6) |
-| RC5 | **One glyph per square rule:** each square kind has one cross-theme rim and icon; a theme reskins only the fill (bedsheets read as web because they *are* web). **RC5+ (change TR-20; room terrain design 8.1):** one glyph set per piece class and square class across themes, built from four composable marks (base, motion, danger, cover); every hazard face projects a floor decal onto its one front square; the stub-glyph rule (the "blocks sight" cap on a Tall piece's stub state) applies from M1 |
-| RC6 | **Value hierarchy:** units > telegraph overlays > hazards > floor > walls, checked on a greyscale screenshot per theme; surreal texture only on walls, ceilings and skyboxes, never on walkable squares; scale distortion in architecture only, every unit true to its square. **Boss scale (lead's call):** a boss may stand up to about 1.5 times standard height, but its footprint and silhouette stay within its square at minimum zoom and never hide a unit on an adjacent square; height is shown by proportion, not size. **RC6+ (change TR-20; room terrain design 8.1):** units > telegraph overlays (including Keg footprints while a preview or intent would burst them) > hazards (including contact hazards, harm squares, Kegs and their idle footprints) > cover shields > Furnishings and Low pieces > Tall pieces > floor (Rough, Plank) > walls. Rules pieces count as architecture for the scale clause (room terrain design 7.10) |
-| RC7 | **Tone-free UI:** plates, threat overlays, signature banners, joiner footsteps and condition icons use one global skin; boss moves may have diegetic names but use the universal banner and sting. **Gameplay cue sounds** (door open and close, joiner footsteps and horns, alarm bells, trap triggers, and the Choir's fallen-bell struck-bronze cue, kept distinct from the alarm bell; change TR-20, room terrain design 7.5) are reserved and never appear in a music bed or ambience (lead's call) |
-| RC8 | **Barks** fire only on floor entry, idle, rout, Yield, Cowed, and boss phase entry after the banner; never on attack resolution, downings or deaths. A content test checks every bark trigger. **Diegetic ambience follows the same rule (lead's call):** comic or laughing ambience ducks to silence on any downing or death and during the death recap |
+| RC4 | **Damage language:** family by shape (physical streaks and impacts; elemental fluids, particles, crystals; spirit rings and ripples); type by hue *plus* pattern, so it survives colour-blind simulation; no theme uses an undesaturated damage hue as its dominant environment colour. **The damage-hue key** (10 types, hue plus pattern) is owned by art and due before the first Tone Sheet. A theme whose Law is a damage type (Gut, Supper, Carnival) dresses its environment in a desaturated, off-key variant and keeps the saturated key for its hazard squares and attacks (lead's call). **RC4+ (change TR-20; room terrain design 8.1):** the saturated damage hue is also allowed on contact hazards in every F2–5 theme; fire hue stays limited to fire squares, Hot pieces and attacks. **M3:** Miasma Remnants take their own hue and pattern (a desaturated violet with a stipple, never bile green; room terrain design 6.6). **Hazards (change HZ-29; hazards design 8):** Voids carry the drop rim but no damage-hue fill; bile green stays reserved (the Gullet backdrop uses flesh tones); due overlays and latent footprints use the telegraph-tier pattern and colour with the damage-type icon; the fire hue appears only in act VFX and on fire squares or Hot pieces |
+| RC5 | **One glyph per square rule:** each square kind has one cross-theme rim and icon; a theme reskins only the fill (bedsheets read as web because they *are* web). **RC5+ (change TR-20; room terrain design 8.1):** one glyph set per piece class and square class across themes, built from four composable marks (base, motion, danger, cover); every hazard face projects a floor decal onto its one front square; the stub-glyph rule (the "blocks sight" cap on a Tall piece's stub state) applies from M1. **Hazards (change HZ-29; hazards design 8):** one Void lip glyph, one Snag glyph, one Cord glyph with used and unused pips and one vent glyph with trigger pips across themes; a Stir uses its host's glyph plus a countdown numeral on the host's floor decal; the four-mark table gains the hazards design's RC5+ rows (Void, Snag, Cord, vent, latent footprint, due square, Tide socket, Lurch lane, Handhold, Chainpost, staked pit) and one pattern registry, in which no two patterns differ only by hue |
+| RC6 | **Value hierarchy:** units > telegraph overlays > hazards > floor > walls, checked on a greyscale screenshot per theme; surreal texture only on walls, ceilings and skyboxes, never on walkable squares; scale distortion in architecture only, every unit true to its square. **Boss scale (lead's call):** a boss may stand up to about 1.5 times standard height, but its footprint and silhouette stay within its square at minimum zoom and never hide a unit on an adjacent square; height is shown by proportion, not size. **RC6+ (change TR-20; room terrain design 8.1):** units > telegraph overlays (including Keg footprints while a preview or intent would burst them) > hazards (including contact hazards, harm squares, Kegs and their idle footprints) > cover shields > Furnishings and Low pieces > Tall pieces > floor (Rough, Plank) > walls. Rules pieces count as architecture for the scale clause (room terrain design 7.10). **Hazards (change HZ-29; hazards design 8):** telegraph overlays include due overlays and push and fall previews; hazards include latent footprints; a new bottom tier, the **Void backdrop**, sits below walls, its value ceiling below the floor's darkest walkable tone, rendered as a sealed shaft below the floor plane so nothing shows through at any of the 4 camera rotations |
+| RC7 | **Tone-free UI:** plates, threat overlays, signature banners, joiner footsteps and condition icons use one global skin; boss moves may have diegetic names but use the universal banner and sting. **Gameplay cue sounds** (door open and close, joiner footsteps and horns, alarm bells, trap triggers, and the Choir's fallen-bell struck-bronze cue, kept distinct from the alarm bell; change TR-20, room terrain design 7.5) are reserved and never appear in a music bed or ambience (lead's call). **Hazards (change HZ-29; hazards design 8):** the reserved cues gain the party fall, a monster-removal cue, Cord Operated, the theme-neutral **Dream tick**, two layers per Stir (an announcement sting and an act cue) and the floor-1 small-hour chime, Horn Post rattle and candle exhale, each in a timbre family no music bed uses (the hazards design's timbre table); skipping or batching cuts animation, never cues |
+| RC8 | **Barks** fire only on floor entry, idle, rout, Yield, Cowed, and boss phase entry after the banner; never on attack resolution, downings or deaths. A content test checks every bark trigger. **Diegetic ambience follows the same rule (lead's call):** comic or laughing ambience ducks to silence on any downing or death and during the death recap. **Hazards (change HZ-29; hazards design 6.16):** a companion may call a Stir's first due round, once per fight; never on telegraphs |
 | RC9 | **Names may be whimsical but never lie** about threat or role |
 
 **M2 readability gates** *(illustr. thresholds)*:
@@ -1025,7 +1029,12 @@ Q3:** B, no premise; C, folk horror; D, full absurdism.
   with terrain pieces in frame, and the role-ID gate includes "Keg or
   Furnishing" (change TR-20; room terrain design 8.1);
 - a tone-by-depth review of boss and signature names and of the bark
-  sets per (theme, floor) cell (7.7).
+  sets per (theme, floor) cell (7.7);
+- the hazard additions (change HZ-29; hazards design 8): "water square
+  against Void" joins the greyscale gate; "herd or sheep figment
+  against monster" joins the role-ID gate; the colour-blind and
+  greyscale passes run with every hazard state in frame; an audio
+  blind-ID test names each reserved cue from the bed mix at 85% or more.
 
 A theme that fails a gate is not shipped until its art passes; the gate
 never changes a rule **(lead's call)**. **A held theme (lead's call,
@@ -1064,8 +1073,15 @@ matches no cut goes to the client (19.2).
 ### 7.6 What to avoid
 
 - **Rule-touching surreal ideas are refused for M2**, and may appear
-  Later only as flagged changes: shifting rooms (conditions 11.1);
-  gravity or height (main 4.3, 6.8); darkness or light mechanics
+  Later only as flagged changes: shifting rooms (conditions 11.1;
+  **M3** exception: pre-proven Stir states, namely Tides held whole in
+  2 states, Cord Flips, the Turning Ring's boards and
+  environment-moved Furnishings such as the Returns Trolley, every
+  state proven by V10; change HZ-18, agreed, hazards Q3; hazards
+  design 6.3, 7); gravity or height (main 4.3, 6.8; **M4** exception:
+  the Inverted Cathedral's reversal round, in which pushes resolve as
+  pulls; the rules stay flat, only the push direction reverses; change
+  HZ-18, agreed, hazards Q3; hazards design 7.11); darkness or light mechanics
   (enemies 5.1); breakable walls (Vanguard 8.3; kept refused: walls
   never break, while M2 Furnishings and Kegs may break and move, change
   TR-7, room terrain design 6.7); spreading surfaces (main 2; **M3**
@@ -1152,6 +1168,9 @@ after the check):**
   `terrainKit` (was `coverProps[]`: Tall, Low, Furnishing, Keg, hazard
   piece and hazard face kinds, harm, Rough and Plank skins and the
   theme's terrain Law; change TR-22; room terrain design 7, 11.1),
+  `hazardKit` (the theme's Tableaux, Void skin and drop-theme flag,
+  Stirs, Cords, vent, Mood and Omen, with minimum tiers; change HZ-8;
+  hazards design 6.2.2, 11.1),
   `layoutGrammar` (was `layoutArchetype`; change
   FL-14; floor layout design 7, 11.1), `dressingSets[floor]`;
 - **`placementRules[]`**: typed constraints the placement and terrain
@@ -1176,7 +1195,18 @@ after the check):**
   before M2 rosters freeze. Contact hazards and harm squares never give
   Teetering on a save (a harm square reaches it only through Brink), so
   harm squares stay in every case; if RT-14 is refused, every M3 row
-  that uses Poisoned in the Supper (its fallback drop) is conditional;
+  that uses Poisoned in the Supper (its fallback drop) is conditional.
+  **Pending request (change HZ-6; hazards design 6.8; conditions owner,
+  before M2 rosters freeze):** the ruling offered for conditions 16
+  makes conditions granted only by the universal positional rules (the
+  10.2 hazard-edge success, 10.3 landing, the Void branch, Clutch and
+  Brink) an uncounted class, with no monster, boss, trap, Stir, Cord or
+  square record applying Teetering directly, plus a boss guard (no
+  Teetering from a Void-edge success or Clutch). Nothing changes until
+  the owner rules. If refused, a Void-edge success is a plain stop, the
+  fallback drops apply, every drop theme names its
+  `teeteringFallbackDrop` in V1 before it ships, and the Supper vent and
+  the Heart's Toss and Turn are cut;
 - no M2 theme deals radiant, so ruling RT-15 blocks only M3 themes.
 
 **Names avoided because they collide (lead's call; whole-word grep):**
@@ -1296,6 +1326,18 @@ Every floor-1 theme meets all of these:
   the Gaol warden's stove and the Wake candle rack are ordinary Low
   pieces whose collision damage is fire-typed, with a visible ember
   tell, and are not hazards (no edge save, no saturated hue).
+  **M3 Landmark ticks (change HZ-19, told plainly; hazards design 6.1,
+  7.2–7.4):** harmless rhythms and dials (doors, a mute round,
+  countdowns, a startle; no damage, condition or unit movement) are not
+  hazards and are legal on floor 1, at most 1 per room at main-path
+  index 3 or more, so floor 1 stays dry in the base game.
+  **Nightmare tier 2+ (change HZ-25; agreed, hazards Q4; M3; hazards
+  design 6.19):** below tier 2 floor 1 stays hazard-free; from tier 2
+  each floor-1 theme gains one damaging hazard package (the Gaol's
+  Treadwheel, with the warden's stove promoted to a Hot piece; the
+  Kennel's staked pits with the Painted Hunt, the Stampede replacing the
+  Painted Hunt at tier 3; the Wake's Open Grave Void), in at most 2
+  rooms per floor at main-path index 3 or more, on floor 1's own bands.
 
 Effect: the 50–74% split of `Floor1ClassSpread` has no floor-1 data in
 M2 unless the Wake passes **(told plainly)**. The gate is read per split
@@ -1423,7 +1465,9 @@ is not re-tested inside M2.
   rooms joined by Portals and read as one wood on screen (`beads`;
   change FL-1, floor layout design 7.3); one horn near pair at index ≥ 4
   (FL-11, floor layout design 6.6); traps: snares (Grappled), alarm horns
-  (noise); staked pits are Later (drop hazard).
+  (noise); staked pits are a walkable harm square (piercing, damage
+  only, no Teetering) at Nightmare tier 2+, M3 (re-read from "Later
+  (drop hazard)"; change HZ-25, told plainly; hazards design 6.19).
 - **Bosses:**
   - **Old Ragged:** a huge hound in the dead lord's coat. It is the
     approved M1 boss kit **(settled, enemies 17.5)**: Bleeding claw,
@@ -1543,7 +1587,9 @@ is not re-tested inside M2.
   dry island within 2 of each entrance; at most half of an encounter's
   enemy start squares in water; the enemies 6.4 round-1 guards computed
   with the party Soaked and the arc fan-out counted, and Conduct (K3)
-  counted (change TR-26; room terrain design 6.8).
+  counted (change TR-26; room terrain design 6.8). These caps hold in
+  every hazard state, Tide states included (change HZ-3; hazards design
+  6.2.4, 11.3 `EntryCapsAllStates`).
 - **`signatureFeature`:** dry pews and dais islands; sluice gates.
 - **Hooks:** nave layout with side chapels; traps: sluice (one-shot
   Soak), falling chandelier (damage); cover: pillars; Wrecker: shoving
@@ -1618,7 +1664,10 @@ is not re-tested inside M2.
 
 - **Look:** a funfair at permanent dusk; bruise-purple and faded
   red-and-cream tents pegged to stone; carousel horses fixed on poles
-  that never move or breathe (the living Carousel Horse is a unit, RC1).
+  that never move or breathe (the living Carousel Horse is a unit, RC1;
+  at M3 the F3 Turning Ring rotates only the ring boards, a pre-proven
+  Stir state, with the horses on their poles, change HZ-18, told
+  plainly; hazards design 7.7).
   Fire's saturated hue appears only on fire squares, Hot pieces and
   attacks (RC4; change TR-20, room terrain design 8.1).
   *Dream device:* the dusk sky's sun is a painted backdrop that never
@@ -1650,7 +1699,9 @@ is not re-tested inside M2.
   squares.
 - **Placement:** no oil or fire squares under or adjacent to party entry
   squares; the 6.4 guards computed with the party Oiled; the two-turn
-  flask-then-breath combo counted as a spike.
+  flask-then-breath combo counted as a spike; the entry caps hold in
+  every hazard state (change HZ-3; hazards design 6.2.4, 11.3
+  `EntryCapsAllStates`).
 - **`signatureFeature`:** oil slicks and fire pits; a Wheel of Knives
   set piece.
 - **Hooks:** ring-plaza layout (open rooms for Cleave and reach), the
@@ -1770,8 +1821,11 @@ is not re-tested inside M2.
 - **Law, attrition before the final:** Corroded strips layers and
   armour, Withered blocks healing, poison makes Antidote and Remedy
   matter.
-- **Balance caps (balance critique; illustr.):** at most 2 acid-dealing
-  units per encounter, besides bile squares; armour
+- **Balance caps (balance critique; illustr.):** at most 2 acid
+  sources per encounter (a source is an acid-dealing unit, a swollen
+  sac, Brim or the Gullet; bile squares, and so the Acid Tide, are never
+  counted; change HZ-5, agreed text, told plainly; hazards design 6.5);
+  armour
   `verbDefencePermille` measured on this theme first; ClassThemeSpread
   must hold for the Vanguard.
 - **Bile squares** (Corroded on entry; change RT-13). If they are
@@ -1875,7 +1929,8 @@ is not re-tested inside M2.
   Engine → the Tomb Clock; Law "waking" → "the god's slumber: its
   servants break when disturbed".
 - **Sound:** the lullaby leitmotif heard whole for the first time, then
-  broken; distorted quotes of every visited floor's score.
+  broken; distorted quotes of every visited floor's score, stripped of
+  every reserved cue timbre (RC7; change HZ-29; hazards design 8).
 
 ### 8.12 Later themes and unlock order (lead's call)
 
@@ -1890,7 +1945,7 @@ The unlock order spends breadth on the deep floors first (fun critique).
 | 5 | Moth Wedding | Middle Dream, F2–3 | M3 | Light against stealth | Radiant ruling; dark side routes keep the Stealth guarantee |
 | 6 | Ministry of Small Mercies | Shallows, F1–2 | M3 | Due process (morale-maximal, Weary attrition) | Psychic on floor 1 needs its own `Floor1ClassSpread` row |
 | 7 | Tallow Abbey | Shallows, F1–2 | M3–M4 | Oil and censer fire | Church cap: never in a pool set with the Choir; overlaps the Carnival's square kind |
-| — | Inverted Cathedral | Deep, F3–4 | M4 / Later | Edges and light | Needs a lethal-safe drop hazard (hazards segment); church cap |
+| — | Inverted Cathedral | Deep, F3–4 | M4 | Edges and light | The lethal-safe drop hazard is supplied (change HZ-26; hazards design 6.4, 7.11): rose-window Voids you fall upward from to the chandelier Snag, up to 50% of rooms, Plank catwalks, the censer-rope Cord, and the Chimes Ring Upward reversal round; its "light" Law waits for NM-9; church cap |
 | — | Orchard of Teeth, Night Market, Marionette Grove ("Strung Marionette"), Ledger Halls | various | M4 | — | Each needs a compliant floor-1 boss where floor-1 eligible |
 | — | The Waking City (alternate final) | F5 | M4 | — | Offered at camp 4 after a first win |
 
@@ -1914,8 +1969,8 @@ Unlockable themes and final bosses are main 4.7 content, never power
 | Door bounties | Reward bias by door | 0 | **Rejected** (stream complexity; no gain once milestones give pull) |
 | Theme milestones (profile marks) | A positive pull into hard themes | 0 | M2 marks; M3 unlocks |
 | Dream Fragments (off-path Lore checks for boss intel) | Lore gets a dungeon use; a tone outlet | 0.5–1 min per floor | **M3** (it counts against the failing floor-time gate) |
-| Omens (per-theme generator mutators inside the 6) | Variety inside a theme | 0 | M3 (test matrix × 4) |
-| Nightmare tiers (ladder tiers that add kind, not stats) | Harder modes; the old deep overlay returns at tier 3 | 0 | M3 tiers 1–3; Later 4–5 (RT-21, client) |
+| Omens (per-theme generator mutators inside the 6) | Variety inside a theme | 0 | M3 (test matrix × 4); a theme's Omen may switch on its one hazard Mood (an integer stage 0–2, capped at +1 per two rooms; change HZ-20; hazards design 6.9) |
+| Nightmare tiers (ladder tiers that add kind, not stats) | Harder modes; the old deep overlay returns at tier 3 | 0 | M3 tiers 1–3; Later 4–5 (RT-21, client); hazards escalate in kind only (a kind added, a period shortened by at most 1, or a Mood stage higher; never a band), and each floor-1 theme gains its hazard package from tier 2 (change HZ-25; agreed, hazards Q4; hazards design 6.19) |
 | Perilous Door (+1 ladder on one floor) | Risk for choice | 0 | M3 with full Two Doors; client (a per-floor ladder, RT-21) |
 | Unlockable strata | Return play through content | 0 | M3 (client, main 4.7; RT-18) |
 | Alternate final | Variety at the finale | 0 | M4 |
@@ -2245,6 +2300,7 @@ The build fails when one of these fails:
 | V7 | CharterChecks | Every bark trigger is in RC8's list; one glyph per square kind (RC5); a Tone Sheet referenced; every non-final theme authors `keepsakeProps` and `keepsakeArenaDressing`; no frozen-name collision; no keyhole silhouette outside mindless tells (RC3). The "signature type placed at least twice per floor" check (enemies 10.4) is a **generation assertion** over a fixed seed sample per (theme, floor, party size), owned by the seeds and validation segment |
 | V8 | LayoutGrammar (change FL-14; floor layout design 11.2) | Every theme's `layoutGrammar`, Blueprints, rules and templates, with the named sub-checks of floor layout design 11.2 (LG1–LG20, `HearingGap`, Circuit isolation, `LayoutDistinct`, config nesting and others) |
 | V9 | RoomTerrain (change TR-18; room terrain design 11.2) | Every template × orientation × layer × floor band × theme, plus the floor-level capacity rows per Blueprint and rule choice, with the named checks of room terrain design 11.2 (`ClearwayConnected`, `ProtectedIntact`, `KitCoversRulesKeys`, `EntryCaps`, `ThemeSix`, `HomeTheme`, `PhaseSocketsBoth`, `TerrainDrawCount` and others); partial in M1, full in M2 |
+| V10 | RoomHazards (change HZ-28; hazards design 11.3) | After V9, every template × orientation × layer × state × floor band × theme × Mood stage × tier class, with the named checks of hazards design 11.3 (`HazardPointsWithinBudget`, `OneClockPerRoom`, `F1NoHazards`, `EntryCapsAllStates`, `VoidQuotasAndGeometry`, `SnagProven`, `PushLaneExists` and others); `EnvRoundBound` is a report, not pass/fail |
 
 ### 11.3 Simulator arms
 
@@ -2332,7 +2388,7 @@ Two Doors switch agreed, Q2)**
 | **M2 prerequisites owed by other owners, before rosters freeze** | RT-3 (enemies 10.5 steps 1 and 6), RT-4, RT-6, RT-7, RT-8 (enemies 16), the RT-9 rows in enemies 17.5 and 20.1, RT-17's enemies rows (enemies owner); RT-8 (classes 7.3: classes owner; companions 7.1 and 7.11: companions owner); RT-9's Herald 7.16 sentence (Herald owner); RT-13, RT-14, RT-16 (conditions owner); RT-12 and the DH 19.3 row of RT-10 (DH owner); RT-20 (trinkets owner) | — |
 | **M2 cut lines** | **Cut 1:** drop the extra bosses of Gaol, Kennel and Gut. **Cut 2:** Cut 1, and drop the Supper (floor 4 fixed Gut). Both **pre-authorised (agreed, Q4)**. Below Cut 2, the approved-scope floor (Gaol and Kennel on F1, Choir and Silk on F2–3, Gut on F4, floor 5 as a step-5 deep overlay of the floor-4 theme not drawn, re-passing its 6) needs the client | Under Cut 2, floor 4 has no choice anyway; under the approved-scope floor, random draws only |
 | **M3** | Unlocks in 8.12's order; the Supper's F3–4 band and its F3 boss; a second boss for every M2 (theme, floor) cell that has only one; the third final boss; the Lore roster preview at camp; Dream Fragments plus codex; bile squares if deferred | Two Doors (if its gates failed in M2) and at camp 3 once the floor-4 pool is 3 or more; Omens; Nightmare tiers 1–3; Perilous Door; Seams; profile-side anti-streak outside seeded runs |
-| **M4** | Pools of 3–4 per tier; the Waking City alternate final; Keepsake echo types; the Inverted Cathedral if the drop hazard exists | Three-door camps (optional) |
+| **M4** | Pools of 3–4 per tier; the Waking City alternate final; Keepsake echo types; the Inverted Cathedral with its hazard package (the drop hazard now exists; change HZ-26; hazards design 7.11, 12) | Three-door camps (optional) |
 | **Later** | The Lucid Key; Other Dreamers; Nightmare tiers 4–5; daily seeds (already supported); seams that bleed the chosen door's palette | — |
 
 **How a cut is applied (new lead's call).** The lead applies Cut 1, then
@@ -2351,8 +2407,8 @@ they are built first.
 |---|---|
 | Floor layout | Room counts (6.6); the floor-1 **antechamber** (empty, main path, immediately before the arena, a cut vertex of the room graph; `AntechamberDominatesArena`); layout archetype per theme (cell grid, glades and trails, galleries with niches, nave with chapels, stacks and aisles, ring plaza, long hall, looping tubes, bedchamber); per-floor dressing sets; 1–3 empty or special main-path rooms. **Filled by the floor layout design (change FL-1, FL-5, FL-14, FL-22):** rooms joined by Portals, open-plan themes partitioned into ordinary rooms (FL-1); the antechamber (the Forecourt) on every floor, on the patrol Circuit on floors 2–5 (FL-5); the layout archetype is the theme's `layoutGrammar` (FL-14); layout supplies sockets and minimum counts, and the named segments below keep their rules (FL-22) |
 | Room shapes and terrain | `terrainSquares` and density per floor; one home theme per square kind; water and oil placement caps (8.6, 8.8); cover props per theme (the weapons 9.5 decision); wall and edge density for the Wrecker; at least 3 Acrobatics-gated choices per floor (armour 7.3); this segment keeps the ≥ 3 total, of which layout supplies 2 Squeezes (change FL-22). **Filled by the room terrain design (change TR-1; room terrain design 13):** segment 3 owns the room-terrain system (piece and square classes, layers and sockets, the Clearway, the cover rule, Furnishings, Kegs and their verbs, Rough and Plank, arena terrain rules and caps, the Remnant system at M3) and the knock-into system (contact hazards and harm squares: rules, bands, caps and in-room placement); cover props per theme become the theme's `terrainKit` (change TR-22) |
-| Hazards | The bile square (RT-13); the drop hazard needed by the Inverted Cathedral and staked pits; Teetering counting (RT-14). **Ownership (change TR-1; room terrain design 13):** segment 4 owns per-theme hazard catalogues and floor-scale density built from segment 3's classes inside its caps, drops, bile, Teetering counting and vents; segment 5 owns traps |
-| Traps and locks | `trapFlavours` per theme (Shade DEP-S1 records with `mechanismSquare`); trap conditions drawn from the theme's 6 or damage-only (RT-16); no trap hard control on F1, set pieces only on F2; the Gaol keyring and cell caches; sphincter doors; closable cell doors. Keeps the door, lock and secret rules, including the party door verbs (open in M1, close in M2; change FL-8) and Hairline secrets with Sound the wall (change FL-17); layout supplies the slots and minimum counts (change FL-22; floor layout design 9.2, 13) |
+| Hazards | The bile square (RT-13); the drop hazard needed by the Inverted Cathedral and staked pits; Teetering counting (RT-14). **Ownership (change TR-1; room terrain design 13):** segment 4 owns per-theme hazard catalogues and floor-scale density built from segment 3's classes inside its caps, drops, bile, Teetering counting and vents; segment 5 owns traps. **Filled by the hazards design (change HZ-1, a reading of this hook; hazards design 6.1, 13):** segment 4 owns hazard points, roles and quotas, VP1–VP10, Voids and falls (the drop hazard), bile density, Teetering counting (as a request, HZ-6), vents, Stirs, Cords, Tides, Lurch and the Dream step, Landmark ticks (not hazards), Moods, Dare rooms and Plunge, per-theme catalogues and Tableaux (`hazardKit`); a hazard is visible from reveal and never disarmed; boss counterplay features stay the boss rooms' (segment 9), which take only the Stir and Cord machinery; the staked pits are re-read as a walkable harm square at Nightmare tier 2+, not a drop hazard (change HZ-25, told plainly; hazards design 6.19) |
+| Traps and locks | `trapFlavours` per theme (Shade DEP-S1 records with `mechanismSquare`); trap conditions drawn from the theme's 6 or damage-only (RT-16); no trap hard control on F1, set pieces only on F2; the Gaol keyring and cell caches; sphincter doors; closable cell doors. Keeps the door, lock and secret rules, including the party door verbs (open in M1, close in M2; change FL-8) and Hairline secrets with Sound the wall (change FL-17); layout supplies the slots and minimum counts (change FL-22; floor layout design 9.2, 13). **The line with hazards (change HZ-1; hazards design 6.1):** traps are hidden until detected, or known armed devices, and are sprung; the sprung twins of hazard Stirs stay traps (the toppling-shelf tripwire, the dumbwaiter drop, the sluice one-shot Soak, the icicle chandelier, the acid geyser, trapdoor stages, the bell tripwire, the portcullis, the Appeals trapdoor, the Kennel horn tripwires); an open trapdoor or shaft is a Void (a hazard), a closed one that springs is a trap; Cords never arm traps; known armed traps stay hazards for conditions 10.1–10.4 (conditions 11.3) without moving ownership |
 | Encounter, loot and event placement | Each theme's `placementRules[]` (8.0); lesson axes per floor-1 theme; the Pack one-family rule; Scavengers at the F1 patrol budget; the Wake's dormant bias kept away from rooms 0–2; the Heart's morale shape by room and psychic cap; the signature type at least twice (a generation assertion, V7); Corroded caps; Frozen source caps; Keepsake slot dressing (9.3); loot stays theme-blind (LootDoorInvariant). Keeps the Wake dormant rule, read from layout's `nearStart` tag, and Keepsake dressing (change FL-22) |
 | Boss rooms | One counterplay feature per boss (pendulum, kennel gate, sluice and bell rope, cage, dunk tank, chandelier of icicles, the Pylorus mouth, the bed); Keepsake dressing; phase option (e) never on party squares. Arena terrain caps are segment 3's; (e) uses pre-placed phase sockets of existing kinds only, announced a round ahead and proven in both states; the counterplay identity is unchanged (change TR-16, told plainly; room terrain design 6.11) |
 | Exploration and information | Camp card, Two Doors cards, Stratum Card, dream track, Lore reveal, road not taken; Dream Fragments (M3); the Lucid Key secret (Later). Keeps the Stratum Card, including the floor count line (change FL-20), the Listen and Hairline displays (FL-18, FL-17), and the Lucid Key, whose Site layout reserves (change FL-22; floor layout design 9.2, 13) |
@@ -2386,7 +2442,7 @@ they are built first.
 | Loot theme-blind; the Resistant filter | enemies 15.3; trinkets R-23; armour 14.3 | 6.4 LootDoorInvariant |
 | Carrier legality inside the 6 | enemies 15 | Carrier-fallback report per theme |
 | Rare and very rare by floor; trader F2–4 | items 12.5, 10.9 | Unchanged |
-| Hazard edges per floor | trinkets 23 | Floors 2–5; floor 1 exempt (RT-20, **told plainly**); the floor-1 stove and candle rack are typed Low pieces, not hazards (change TR-29, told plainly; room terrain design 6.5.6) |
+| Hazard edges per floor | trinkets 23 | Floors 2–5; floor 1 exempt (RT-20, **told plainly**); the floor-1 stove and candle rack are typed Low pieces, not hazards (change TR-29, told plainly; room terrain design 6.5.6); floor 1 gains hazard edges at Nightmare tier 2+ only (change HZ-25; hazards design 6.19) |
 | Neck-line trigger rates by theme | trinkets 18.3, 20 | 10.7 |
 | Terrain presence | Arcanist DEP-A1 | Report; 10.7 |
 | Wrecker hazard and wall density | Vanguard 8.3, 18 | Hook; per-theme report |

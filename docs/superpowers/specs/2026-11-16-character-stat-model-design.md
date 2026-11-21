@@ -53,14 +53,25 @@ characters who differ in it. **(agreed)**
   changes: fire burns an oil square to plain floor (conditions design 11);
   from M2, Furnishing debris and removal, boss phase sockets, and fire
   burning a web or bedsheet square to plain floor; from M3, Overturn
-  debris and sight change, and Remnants (room terrain design 6.6, 6.7,
-  6.8). **(agreed)**
+  debris and sight change, Remnants (room terrain design 6.6, 6.7,
+  6.8), and pre-proven Stir states (hazards design 6.3). **(agreed)**
 - **M3 exception:** environment-made Remnant clouds (Miasma only) with a
   fixed footprint and a short countdown, which never drift, spread or
   grow (room terrain design 6.6). "Until riders and layers are proven"
   is read as the M2 rider and layer reports passing, recorded by the
   lead in writing before Remnant work starts (room terrain design 6.6).
   **(agreed)** Applies at M3.
+- **M3 exception (hazards design 6.3, 7; agreed 2026-11-21, its Q3):**
+  pre-proven Stir states. At the round-end Dream step a Stir may change
+  squares only between states proven in advance by the hazards
+  validator (V10), using existing square kinds only, announced a round
+  ahead and held while occupied where needed: Tides (held whole, so
+  only their 2 proven states exist), Cord Flips, Turning Ring boards,
+  environment-moved Furnishings (the Returns Trolley) and environment
+  Overturn along a pre-proven strip. The flee and escape proofs hold in
+  every state; nothing spreads, drifts or grows. **(agreed)** Applies at
+  M3; the Inverted Cathedral's reversal round at M4 (the rules stay
+  flat, only the push direction reverses).
 - The ability and resource model (spell slots, action costs). Designed
   next, separately.
 
