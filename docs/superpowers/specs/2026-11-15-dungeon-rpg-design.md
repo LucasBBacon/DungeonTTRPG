@@ -264,6 +264,8 @@ All decided.
   the ladder per-floor (run structure design 9.1; change RT-21, M3).
   Hazards escalate in kind under this rule (hazards design 6.19;
   change HZ-25, M3).
+  Unlocks, the ladder and Nightmare tiers leave the loot economy
+  unchanged (loot economy design 6.12; change LE-19, M3).
 - **No permanent stat boosts.**
 - **Hub.** A simple camp screen to begin with. A richer hub is out of scope
   until the run itself is proven.
@@ -375,6 +377,14 @@ computes rules.
   places enemy groups, so a placement retry never moves layout,
   terrain, hazards or traps (encounter placement design 6.1; change
   EP-1, M1).
+  A `lootPlan` child of the loot stream, keyed by floor index, is
+  drawn in a new LootPlan step before the approved loot draws, which
+  keep their order and positions (count draws become dummy draws); each
+  consumer draws from its own keyed grandchild with fixed counts, so
+  adding a consumer never shifts another's draws. A draw-free LootBind
+  step runs after `trapsResolve`, and floor N+1's generation and the
+  camp-exit save are one write (loot economy design 6.10; change
+  LE-14, M1).
 - Rules use integer arithmetic only.
 - No reliance on unordered collection iteration.
 

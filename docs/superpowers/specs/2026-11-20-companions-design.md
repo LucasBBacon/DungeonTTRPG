@@ -831,7 +831,9 @@ slot}` **(lead's call)**.
     cards Brawler + Drummer, open need protector: card A is a Gatekeeper
     or Shieldbearer (tier iii, printed)".
 - **G3, no pity timer.** DH 5.4(f)'s reasons apply. The only memory is
-  the visible carried hire. **(lead's call)**
+  the visible carried hire. **(lead's call)** (Read by change LE-13: the
+  Dream's Due is a loot rule, not recruitment pity; G3 unchanged; loot
+  economy design 6.6.)
 - **G4, no "party ≥ N by floor X".** Budgets use the actual party; what
   is required instead is that every reachable size is fair (7.9).
   **(lead's call)**
@@ -931,7 +933,8 @@ Q2):**
   stubbed only where it does not take player time.
 - **The drop to cap 2 is pre-authorised** by the agreed Q2 answer: if the
   gate still fails after the levers, the lead applies it and reports it to
-  the client; it is not asked again.
+  the client; it is not asked again. (Read by change LE-7: the cap-2 coin
+  pool row follows `companionCap`; loot economy design 6.4.)
 - **Lever 5 needs the client first.** If the client declines the
   accept-rest-of-turn key after seeing the prototype, lever 5 is skipped
   and the gate is read after lever 4.
@@ -1099,7 +1102,10 @@ internal design target; ability 11.4's playtest target is unchanged.
    - **What it does not touch (new lead's call):** experience (fixed at
      the band's nominal value, enemies 16) and the per-floor loot budget
      (main 4.6; enemies 15.3) are unchanged by the shortfall; only
-     encounter budgets move.
+     encounter budgets move. Found coin is part of that budget: a
+     fixed pool per party, keyed by the active `companionCap` (the
+     expected-party count above read at that cap), never the actual party (change LE-7, read; **agreed 2026-11-22, loot economy
+     Q4**; loot economy design 6.4, 6.8).
 2. **Fairness (change CMP-8):** the enemies 6.4 guards and the DH 21.1
    rows at every reachable party size; the solo round-1 row also on solo
    floors 2–5. Kept as fairness only: the toy shows it never binds (solo

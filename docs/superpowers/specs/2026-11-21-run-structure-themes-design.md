@@ -403,7 +403,7 @@ section 14 consolidates them.
 | **Stratum Card** | The floor-entry card header (6.9; DH 17.12) |
 | **Dream track** | The five-stratum route display on the HUD and pause screen (6.9) |
 | **Keepsakes** | Floor-5 dressing and one arena prop drawn from the run's visited themes (9.3) |
-| **Antechamber** | The main-path room immediately before the boss arena, the Forecourt, on every floor: empty on floor 1 (9.4); on floors 2–5 a patrol Circuit waypoint (floor layout design 6.11; change FL-5) |
+| **Antechamber** | The main-path room immediately before the boss arena, the Forecourt, on every floor: empty on floor 1 (9.4); on floors 2–5 a patrol Circuit waypoint (floor layout design 6.11; change FL-5); the floor-5 Viaticum is never placed in it (read, not changed; change LE-5; loot economy design 6.11) |
 | **Law / Obsession** | A theme's signature mechanic / its faction's absurd vow (7.3) |
 | **Free 4** | A theme's harmful conditions other than the universal Prone and Frightened tax (8.0) |
 | **Reference chooser** | The simulator's door policy used for calibration when Two Doors is on (6.11) |
@@ -616,7 +616,13 @@ more theme to build); C, variable 4–5 floors.
   `encounters` child of the floor's dungeon substream, drawn after
   `traps` and before `trapsResolve`, with fixed draw counts and dummy
   draws, and its one retry on a keyed child of it (change EP-1; M1;
-  encounter placement design 6.1, 6.19; segment 11 owns the tree). In
+  encounter placement design 6.1, 6.19; segment 11 owns the tree). So
+  does the `lootPlan` child of the loot stream, one per floor keyed by
+  floor index, each consumer on its own keyed grandchild with a
+  reserved draw count (9 per identity draw) consumed even when unused,
+  and the approved enemies 10.5 step 3 parent draws kept as dummy and
+  ghost draws; floor N+1's generation is committed with the camp-exit
+  save (change LE-14; M1; loot economy design 6.10). In
   order:
   1. **the permutation:** a Fisher–Yates permutation of the **whole theme
      catalogue in the manifest, locked, held and cut themes included**;
@@ -710,7 +716,15 @@ more theme to build); C, variable 4–5 floors.
     a fixed non-theme fallback element with no extra draw (lead's call;
     V6 checks it);
   - loot stays theme-blind **(settled, enemies 15.3; trinkets R-23)**;
-  - the Muster's recruit draw never reads the next theme.
+  - the Muster's recruit draw never reads the next theme;
+  - **the Perilous Door (read, not changed; change LE-19; agreed, loot
+    Q5; M3; loot economy design 6.12):** the fourth dreamed option of
+    every width-3 offer is drawn on `lootPlan` from M2 on every seed,
+    door or no door; the door only reveals it on that floor's boss
+    reward card, so it changes what is shown, never what is drawn, and
+    the invariant holds. **Pending request (change LE-19; RS owner):**
+    confirm this reading; if refused, the door pays a profile mark and a
+    memento-wall frame only (loot economy design 18.2).
 
 **Pool rules (lead's call; validated by V3 and V5):**
 
@@ -736,6 +750,9 @@ more theme to build); C, variable 4–5 floors.
   pre-rolled final boss (the first drawable entry of the final-boss
   order, R-SEED-3 step 4); when the Last Hollow choice is on (6.11), it
   instead offers the first two drawable entries of that order (RT-11).
+  It is the deliberate spend-down camp: no camp follows floor 5, and
+  coin left at its exit is lost (read, not changed; change LE-5; agreed,
+  loot Q1; M2; loot economy design 6.11).
 - **The approved floor-5 facts hold (settled):** the trader on floors
   2–4 only; Pledges on floors 2–4 (Later); the tier-4 scroll "before the
   floor-5 boss"; boss level 12.
@@ -826,7 +843,7 @@ until Travel on (the camp state `nextTheme`).
 |---|---|---|
 | Run-start card | Floor-1 theme name, vignette, HR-23 line | Same |
 | Camp next-floor card | Name, vignette, the approved HR-23 line "Next floor: theme X, about Y% non-fearless" | Per door: name, vignette, HR-23 line, signature line, at-will damage icons, square-kind icon, boss name and silhouette |
-| Floor-entry **Stratum Card** (DH 17.12 header) | Name, act, signature line, damage types, non-fearless band, boss name; the floor count line "Main path: n rooms; side rooms: k; secrets: s" (s from floor 2; counts only, never locations; change FL-20, floor layout design 9.2); **M3:** the floor's Mood, Omen and Nightmare only, with its stage and every threshold visible from floor entry (change HZ-20; hazards design 6.9) | Same |
+| Floor-entry **Stratum Card** (DH 17.12 header) | Name, act, signature line, damage types, non-fearless band, boss name; the floor count line "Main path: n rooms; side rooms: k; secrets: s" (s from floor 2; counts only, never locations; change FL-20, floor layout design 9.2); **M3:** the floor's Mood, Omen and Nightmare only, with its stage and every threshold visible from floor entry (change HZ-20; hazards design 6.9); **loot lines (M2; loot economy design 6.15),** at most 1 line each, after the RS facts and the DH guarantees: the count "Treasures: n" (change LE-15; loot economy design 8.2), then announcements: the Dream's Due line naming its target, never the item ("The dream owes Brask something."), turning to a "paid" state once shown (change LE-13; the Due itself on floor 1 from M1; loot economy design 6.6); on floors 2–4 "A heavy purse walks this floor" (change LE-16; loot economy design 8.3); on floor 5 "Before the Heart's chamber, the dream sets out provisions: choose one" (the Viaticum; change LE-5; loot economy design 6.11) | Same |
 | Lore reveal on entry | Roster types and roles **(settled, enemies 10.6)** | Same; M3: roles shown at camp too |
 | **Dream track** (HUD, pause) | 5 strata: visited floors named; the next floor named at its camp; later floors show only their tier glyph; floor 5 reads "The Dreamer's Heart" from minute one | Plus "the road not taken": the declined door, shown on the run summary too |
 
@@ -834,7 +851,12 @@ Why the random build shows less at camp: full foresight with no lever is
 a "foretold dice tax" (fun critique). The signature and boss arrive on
 the Stratum Card instead. Every displayed fact is a public rule;
 nothing hides a rule change. All of it is class-blind and
-information-only.
+information-only. **The elite intel line (change LE-18; M2; loot
+economy design 6.9, 6.15):** when a floor's elite is resolved or its
+notable is stolen, the party learns one non-power boss fact for that
+floor (the boss signature item's card), shown in the loot summary's
+floor-fact slot (enemies 15.8) and kept under the boss name on the
+pause screen's floor-info panel; it is not a Stratum Card line.
 
 ### 6.10 How runs differ
 
@@ -1034,7 +1056,9 @@ Q3:** B, no premise; C, folk horror; D, full absurdism.
   with terrain pieces in frame, and the role-ID gate includes "Keg or
   Furnishing" (change TR-20; room terrain design 8.1);
 - a tone-by-depth review of boss and signature names and of the bark
-  sets per (theme, floor) cell (7.7);
+  sets per (theme, floor) cell (7.7), and of the floor-5 Memento's
+  premise-neutral caption ("carried out of the Heart"; change LE-5; M2;
+  loot economy design 6.11);
 - the hazard additions (change HZ-29; hazards design 8): "water square
   against Void" joins the greyscale gate; "herd or sheep figment
   against monster" joins the role-ID gate; the colour-blind and
@@ -2050,12 +2074,12 @@ Unlockable themes and final bosses are main 4.7 content, never power
 | **Keepsakes** (finale dressing plus one prop) | A personal finale | 0 | **Adopted, M2** (echo *types* M4) |
 | **Two Doors** (camps 1–2) | One real decision per camp | about 15 s per camp | **Built M2; on only if the gates pass; else M3 (agreed, Q2)** |
 | **Last Hollow choice** (final boss at camp 4) | A final decision | about 10 s | **With Two Doors, plus BossParity (agreed, Q2)** |
-| Door bounties | Reward bias by door | 0 | **Rejected** (stream complexity; no gain once milestones give pull) |
+| Door bounties | Reward bias by door | 0 | **Rejected** (stream complexity; no gain once milestones give pull). The Perilous Door's reveal is not one: it adds no draw (read, not changed; change LE-19; loot economy design 6.12) |
 | Theme milestones (profile marks) | A positive pull into hard themes | 0 | M2 marks; M3 unlocks |
 | Dream Fragments (off-path Lore checks for boss intel) | Lore gets a dungeon use; a tone outlet | 0.5–1 min per floor | **M3** (it counts against the failing floor-time gate). Pending request (change TL-34; segment 8; M3; traps and locks design 6.12): readings, Dream Fragments included, become no-roll thresholds that each yield a floor fact |
-| Omens (per-theme generator mutators inside the 6) | Variety inside a theme | 0 | M3 (test matrix × 4); a theme's Omen may switch on its one hazard Mood (an integer stage 0–2, capped at +1 per two rooms; change HZ-20; hazards design 6.9) |
+| Omens (per-theme generator mutators inside the 6) | Variety inside a theme | 0 | M3 (test matrix × 4); a theme's Omen may switch on its one hazard Mood (an integer stage 0–2, capped at +1 per two rooms; change HZ-20; hazards design 6.9); Omens never touch the spoils list (LootDoorInvariant; read, not changed; change LE-19; loot economy design 6.12) |
 | Nightmare tiers (ladder tiers that add kind, not stats) | Harder modes; the old deep overlay returns at tier 3 | 0 | M3 tiers 1–3; Later 4–5 (RT-21, client); hazards escalate in kind only (a kind added, a period shortened by at most 1, or a Mood stage higher; never a band), and each floor-1 theme gains its hazard package from tier 2 (change HZ-25; agreed, hazards Q4; hazards design 6.19) |
-| Perilous Door (+1 ladder on one floor) | Risk for choice | 0 | M3 with full Two Doors; client (a per-floor ladder, RT-21) |
+| Perilous Door (+1 ladder on one floor) | Risk for choice | 0 | M3 with full Two Doors; client (a per-floor ladder, RT-21). Loot (agreed, loot Q5; change LE-19; M3; loot economy design 6.12): on its floor the boss reward card (enemies 17.5) reveals the pre-drawn fourth dreamed option, choose 1 of 4; no extra draw (6.4 LootDoorInvariant) |
 | Unlockable strata | Return play through content | 0 | M3 (client, main 4.7; RT-18) |
 | Alternate final | Variety at the finale | 0 | M4 |
 | Lucid Key secret route | A secret floor-4 door | 0 (replaces a floor) | Later (needs a quest-item slot from items) |
@@ -2387,6 +2411,7 @@ The build fails when one of these fails:
 | V10 | RoomHazards (change HZ-28; hazards design 11.3) | After V9, every template × orientation × layer × state × floor band × theme × Mood stage × tier class, with the named checks of hazards design 11.3 (`HazardPointsWithinBudget`, `OneClockPerRoom`, `F1NoHazards`, `EntryCapsAllStates`, `VoidQuotasAndGeometry`, `SnagProven`, `PushLaneExists` and others); `EnvRoundBound` is a report, not pass/fail |
 | V11 | TrapsLocks (change TL-20; M2; traps and locks design 6.20, 6.22, 11.3) | In two passes (`traps`, then `trapsResolve` after encounter placement), the named checks of traps and locks design 11.3: TP1–TP12, `HunchTrue`, `WagerNonSkillLine` and the Tattle host rule, `HiddenTrapBound`, `TrapLethalityBound`, `EveryDamagingTrapHasSave`, `F1TrapRules`, `MimicPlacement`, `RiskRoomShare`, `HardControlGates`, `HarmfulConditionsRecount` (with V1), `NoKeyholeOnContainers` (with V7) and `ReservedTellSilhouettes` (with V9); with the retry and terminal fallback of traps and locks design 6.20 |
 | V12 | EncounterPlacement (change EP-32; static parts M1, the rest M2; encounter placement design 6.1, 11.2) | In three parts (build time on the worst case, generation time per seed, runtime assertions), the named checks of encounter placement design 11.2, with the per-slot fallback chain, one segment-6 retry and the terminal floor fallback of encounter placement design 6.1 |
+| V13 | LootEconomy (change LE-23; V13s (a), (c), the floor-1 V13g (g), (i) and the (m) test M1, the rest M2; loot economy design 10.2) | In three parts: V13s, static over the data (every floor × party size × cap × variant × unlock set); V13g, at generation at the shared floor assertion point after LootBind, each check with its named action; and the (m) integration test (fixed, identical draw counts across seeds, doors, waves and opening methods); the named checks of loot economy design 10.2 |
 
 ### 11.3 Simulator arms
 

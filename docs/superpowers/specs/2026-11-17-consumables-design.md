@@ -675,7 +675,7 @@ Items 10.5 formula; `coinPerValue` 20 *(illustr.)*. **(lead's call)**
 | consumable | 600 **(settled)** | 12 | Potion, tonic, water, oil, Fire Bomb 12; Greater Fire Bomb 24 |
 | scroll | 800 **(settled)** | 16 | 16 / 32 / 48 / 64 by tier |
 | wand | 1000 **(settled)** | 20 | Uncommon 40; Rare 60 |
-| talisman | 1500 (new, CN-2) | 30 | Base 90; Sell at 40% = 36. Never bought **(agreed, Q2)**; the permille sets only Sell and budget accounting |
+| talisman | 1500 (new, CN-2) | 30 | Base 90; Sell at 25% = 22 (Sell 250‰, M2; loot economy design 6.4; change LE-9). Never bought **(agreed, Q2)**; the permille sets only Sell and budget accounting |
 | `basePrice` | — | — | Supply 8, Remedy 30 *(illustr.)* |
 
 **The Wax Key (M2; traps and locks design 6.11; change TL-24):** a
@@ -714,6 +714,15 @@ checked against pegs K1 and K2 (9.3).
   TL-24).** Checked per camp on the depth price after the Leadership
   discount: K1, Wax Key price ≥ 2 × healing potion price; K2, Wax Key
   price ≤ the mean value of a locked cache on the next floor.
+  **K2 defined; K2b added (M2; loot economy design 6.4 item 9; change
+  LE-12):** floor N+1 does not exist when the key is priced, so "the mean
+  value of a locked cache on the next floor" is a rule-derived expected
+  Wax-Key value per floor, computed from data over TL 6.20's expected lock
+  mix (a consequence cache counted at its Wax-Key identity). K2 compares
+  the **undiscounted** price with that value; **K2b**, the price after
+  the 25% Leadership discount ≥ 50% of that value (the key is never a
+  must-buy). Both checked statically for camps 1–4 (camp 4 against
+  F5).
 
 ## 10. Channels and per-floor budgets
 
@@ -723,9 +732,9 @@ checked against pegs K1 and K2 (9.3).
 |---|---|
 | Basic vendor **(agreed)** | Supply; healing potions in pre-rolled stock of 2–3 *(illustr.)*; tonics and Remedy, unlimited (price is the knob); 1 Wax Key only when the party has no Mechanics-trained member (M2; items 10.3; traps and locks design 6.11; change TL-25, **agreed, Q3 of 2026-11-21**) |
 | Sundries (new loot class, CN-19) | Common consumables: healing potion, tonic, water, oil; Fire Bomb from floor 2. Drawn per floor **outside the notable count**, inside the fixed budget (items 2), `sundriesPerFloor` doses set per floor *(illustr. 3–5 on floors 1–2, 4–5 on floors 3–5)*. **At least 1 healing potion per floor** (`healingSundryMin` 1, drawn first; 2 on floors 4–5 only through the pre-authorised raise) and **at most 3** (`healingSundryMax`) **(client, Q3)**: the guaranteed potion goes in a main-path container in the first half of the main path, openable with no check, and is never substituted; random potions lean off-path (`healingOffPathPermille` 600) (death and healing design 12.4, 12.5) **(change DH-40)**. From floor 2, **at least 1 and at most 2 offensive flasks** per floor (`offensiveSundryMin`, `offensiveSundryMax`), the minimum drawn before the other sundries **(lead's call)**. Mostly containers, plus the settled single carried consumable per encounter |
-| Notables | Scrolls, wands, the Greater Fire Bomb and the talisman count in the 6–8 notables per floor and the camp channel |
+| Notables | Scrolls, wands, the Greater Fire Bomb and the talisman count in the 6–8 notables per floor and the camp channel; their share steered by category weights by depth and the F5 tactical cap, ranges unchanged (M2; loot economy design 6.2; change LE-17) |
 | Camp channel (notables shop, camp reward card) | Scrolls (never healing scrolls, P1), wands, the Greater Fire Bomb, all with channel `camp` (shop and reward card); the talisman **only** through `campReward` (the reward card, never the shop; CN-1) |
-| Boss reward card | Scrolls, wands; the talisman from floor 3 |
+| Boss reward card | Scrolls, wands; the talisman from floor 3. Floors 1–4 only: no final-boss card; on floor 5 the Viaticum (choose 1 of 3 Rare wands and tier-3 scrolls, usable options, never the phial) takes the boss share (M2; loot economy design 6.11; change LE-5, **agreed, Q1 of 2026-11-22**). **Usability fallback (M2; loot economy design 6.3; change LE-3):** if no option is usable by a member in the party snapshot at generation, all three are redrawn at the same tier as fit-premium gear notables, logged `BossCardUsabilityFallback` |
 | Carried | Healing potion, tonic (any floor from M2; floor 1 self-targeting only, settled); flasks and scrolls floor 2+; wands floor 2+; never the talisman, Remedy or coatings |
 | Substitution fallback | Supply or tonic **(settled, enemies 15.3)** |
 | Trader (Later) | Never healing potions (settled); never the talisman |
@@ -743,7 +752,9 @@ checked against pegs K1 and K2 (9.3).
   any floor. **(change DH-40)**
 - **The Wax Key (M2; traps and locks design 6.11; change TL-24):** a
   run-scoped party counter, not a consumable record (9.2). Channels:
-  sundries from floor 2 (at most 1 per floor), one camp notables slot
+  sundries from floor 2 (at most 1 per floor, outside the
+  `sundriesPerFloor` doses; a reading, loot economy design 6.2, change
+  LE-17), one camp notables slot
   (one Wax Key at most), and the basic vendor's stock of 1 when the
   party has no Mechanics-trained member (TL-25). Out of combat only; at
   the cap of 2 a dropped key stays in its container.
@@ -1143,8 +1154,9 @@ Remedy. It is an instance flag on Scarred, not a new condition
 **(agreed, Q2, for Rare, floor 3+, 1 per run, unique, never bought;
 channels and placement lead's call; CN-1, CN-2, CN-27)**
 
-- Containers (floor 3+), the boss reward card, the camp reward card
-  (channel `campReward`, CN-1).
+- Containers (floor 3+), the boss reward card (floors 3–4: no final-boss
+  card; M2; loot economy design 6.11; change LE-5, **agreed, Q1 of
+  2026-11-22**), the camp reward card (channel `campReward`, CN-1).
 - Never the basic vendor, the notables shop, the trader, a carrier, a
   starting boon or a meta reward. `familyCapPerRun` 1.
 - **Placement: one pre-roll per run (new lead's call; CN-27).** "1 per
@@ -1156,12 +1168,14 @@ channels and placement lead's call; CN-1, CN-2, CN-27)**
      last floor *(illustr.)*, and its channel by
      `talisman.channelWeights` *(illustr. container 2, boss 1,
      campReward 1)*, leaving out a channel the floor does not offer (the
-     last floor has no camp after it, and its boss card comes too late to
-     matter);
+     last floor has no camp after it and no boss reward card; LE-5);
   3. on that floor, one notable draw of that channel is replaced by the
      phial. For `campReward`, one of that floor's container draws moves to
      the camp reward card as the phial, so the notables shop's stock is
-     untouched and the floor's count still balances.
+     untouched and the floor's count still balances. Which card the phial
+     takes, and its Ledger A count, are set in loot economy design 6.13;
+     a camp's phial `minFloor` reads the generated floor N, not N+1 (a
+     reading; loot economy design 6.3; change LE-6).
 - **A declined offer is lost for the run:** a reward card is a choice, and
   so is choosing the notables shop over the reward card. A returning offer
   would make the phial near-certain. A phial in a container stays there
@@ -1776,6 +1790,10 @@ hero's HP never shows 0 while a phial is armed on its belt.
   design 21.5): guaranteed-potion and camp top-up counts, potions unused at
   camp, potions drunk per boss fight, Death-warded and phial fire rates.
   **(change DH-43)**
+- The loot economy reports (M2; loot economy design 10.3; change LE-24):
+  these reports are kept; `ViaticumBossShare` is read against the 25%
+  scroll-and-bomb alarm above, and `BossCardUsabilityFallback` (by class)
+  and `PotionsHeldAtDeath` are read beside them.
 
 ## 20. Staging
 

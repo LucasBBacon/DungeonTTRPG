@@ -1562,6 +1562,13 @@ Mood.
   hears the Stir's tell, and a line on the Stratum Card.
 - One showcase Stir (one clock, never two), double points, and a
   reserved reward container (segment 7, +1 rarity step *(illustr.)*).
+  **The step (loot economy design 6.9; change LE-10; M3):** the Dare
+  cache is an SR5 step socket under the one step rule that also reads
+  traps and locks design 6.11 and 6.15: its card is at least one tier
+  above the floor's reference tier, by allocation first, else a raise
+  from the step allowance (≤ 2 per floor), else a fit premium at a gate.
+  It sits behind a hazard, not a lock or trap, so it is outside the
+  locked-or-trapped quota.
 - **Two forms:**
   - **(a) Unguarded, "the rhythm is the lock".** The Stir runs per
     out-of-combat tick (C 5.5: one round is one tick), so there is no
@@ -1572,13 +1579,19 @@ Mood.
       returned to the threshold and the dare resets. No short rest
       inside the room. Two attempts per floor; after the second failure
       the container seals for the floor.
+    - **Open item (loot economy design 6.9 item 6, 8.1; M3):** reward
+      width by first attempt is left to this document's owner; not
+      adopted, not yet ruled.
   - **(b) Guarded:** the floor's **Annex** group, Dormant among the
     devices (the party may wake it, sneak, or turn the room on it),
     funded as one extra encounter budget at the patrol band at the host
     room's level, 0 XP (its reward is the Dare cache), in ordinary
     combat once woken. If the Annex serves a higher-priority need, the
     Dare room is unguarded (encounter placement design 6.13; change
-    EP-26; **agreed, Q2**; M3).
+    EP-26; **agreed, Q2**; M3). The Annex adds no prize of its own: the
+    Dare cache keeps its one step, never a second, and a Dare whose
+    garrison is dropped keeps its card (loot economy design 6.9 items 1,
+    7; change LE-10; M3).
 - Measured on the "taken" arm of `FloorTimeByTheme`, target ≤ 60 s per
   dare. `DareBruteForceRate` reported.
 
@@ -2727,7 +2740,7 @@ M3 instead; the client is told (19.2).
 |---|---|---|
 | **5 Traps, locks, checks** | The HZ-1 line. Traps kept: the dumbwaiter drop, the toppling-shelf tripwire, the icicle chandelier, the sluice Soak, the acid geyser, trapdoor stages, the bell tripwire, the portcullis, the Appeals trapdoor, horn tripwires. EnvDC as a reference for the DC ladder. Cords never arm traps and need no check | DCs; traps; door verbs; how traps and hazards share a room beyond these defaults |
 | 6 Encounter placement | Start sockets outside footprints and Tide states at fight start; ≤ 2 starts within 2 of a Void edge; ≤ 1 flyer, ≤ 1 shover type and ≤ 2 shover units within 4 of a Void edge in Void rooms; the `usesCords`, `singer` and Stoker tags; Wake candle racks on Dormant groups (index ≥ 3, ≤ 1 per room); Dare garrisons; the mindless share (the enemies owner). **Filled by the encounter placement design (6.1 exclusions, 6.6.8 Terrain Pairings, 6.13):** the guarded Dare garrison is the floor's Annex (change EP-26; agreed, Q2; M3) | Who starts where |
-| 7 Loot | Fallen loot on the edge; Dare containers (+1 rarity step); no item loss | Containers and contents |
+| 7 Loot | Fallen loot on the edge; Dare containers (+1 rarity step); no item loss. **Filled by the loot economy design (6.9, 6.14; change LE-10; M3):** the Dare cache is an SR5 step socket under the one step rule; fallen loot on the edge, no item loss (7c) | Containers and contents |
 | 8 Events | Unguarded Dare forms; Moods on the Stratum Card; empty Tide naves as non-combat puzzles; the Gaol's small hours | Event content |
 | 9 Boss arenas | 6.17: one clock and one Void line per arena inside RT 6.11, under the room rules; `noDrop`; the boss Teetering guard; counterplay identities kept | Interiors, counterplay, phases |
 | 10 Exploration and UI | Stir rule cards on reveal; due overlays; countdown glyphs; the menu card; Snag glyphs; Portal hazard and Dare signposts; Listen hears tells; Plunge links | Overlays and UI |
@@ -2801,7 +2814,8 @@ M3 instead; the client is told (19.2).
 
 - Every *(illustr.)* value: hazard points and budgets, quotas, bile
   density, EnvDC, the EnvRound cap's 30%, periods, `maxActs`, footprint
-  sizes, Snag distances, noise values, Dare budgets and reward steps,
+  sizes, Snag distances, noise values, Dare budgets and reward steps
+  (the step itself: loot economy design 6.9),
   report thresholds other than the stated gates.
 - The layer sockets, footprints and Snags themselves, within 6.2 and
   V10.

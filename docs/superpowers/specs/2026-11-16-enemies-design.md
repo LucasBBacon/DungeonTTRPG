@@ -333,12 +333,12 @@ ability model owner rules, not yet a rule.
 
 | Shown | Item |
 |---|---|
-| Always | (1) Name, with the **rank frame** and **role glyph**. The morale state **tints the frame strip** rather than adding an icon; the morale profile is shown on hover, not on the plate. Awareness is a **small corner glyph**. A notable item adds **one glint icon**. |
+| Always | (1) Name, with the **rank frame** and **role glyph**. The morale state **tints the frame strip** rather than adding an icon; the morale profile is shown on hover, not on the plate. Awareness is a **small corner glyph**. A notable item adds **one glint icon**. **The loot mark is one badge (change LE-16; loot economy design 6.15, 8.3; M2):** the notable's star, a coin disc for the Heavy Purse, or both merged into one "loot" badge with a count; with the key pip, a plate carries at most 2 marks; purse badges count in the glints-per-screen gate (14.10). |
 | Always | (2) HP bar, with boss phase marks and resolve pips |
 | Always | (3) The condition row, under the settled icon rules |
 | Always | (4) Affix names, one word each |
 | Once seen | One "ready" marker for a seen hard-control or area ability that is ready next turn |
-| On hover or inspect | Gear line, with the weapon's verb ("Pike: piercing, reach 2, Set · Chain mail: heavy, Ringed"; changes W-5, AR-19), "Carries: …", cooldowns and uses, the morale profile and break line, traits once revealed by Lore, the intent line (13.3) |
+| On hover or inspect | Gear line, with the weapon's verb ("Pike: piercing, reach 2, Set · Chain mail: heavy, Ringed"; changes W-5, AR-19), "Carries: …" (a purse reads, for example, "Carries: 12 coin"; change LE-16), cooldowns and uses, the morale profile and break line, traits once revealed by Lore, the intent line (13.3) |
 
 A UI test renders the worst legal composed elite on each floor at minimum
 zoom. From M2 it runs per theme, beside the readability charter's gates
@@ -1083,6 +1083,15 @@ Deterministic:
    fix each slot's homeRoom **(change FL-3)**. **Later (change I-14):** right after the slots are assigned,
    two dungeon-stream draws for the trader, always both, whatever their
    outcome: presence and stock count (items design 10.9).
+3a. **LootPlan** (the floor's keyed `lootPlan` child of the loot stream,
+   before step 3): over the provisional socket set (layout's containers
+   and caches, the `traps` pass's lock kinds, step 2's slot plan and the
+   carrier sockets predicted from step 4's fixed order), pick the
+   floor's rarity-deck variant, deal the cards onto sockets by tier and
+   socket rank, reserve the Dream's Due, and pre-draw dual identities
+   and offer options. Fixed draw counts on keyed grandchildren; step 4
+   takes no draw, so the prediction is exact. **(change LE-14; loot
+   economy design 6.9 item 2, 6.10; M1)**
 3. **Loot draw** (loot stream): the notable count per channel, then the
    items in channel order (containers, enemy-carried, boss), then wand
    charges in item order (15.3), then the next camp's `camp` channel (its
@@ -1090,7 +1099,17 @@ Deterministic:
    same family caps and owned-base rerolls **(change I-10; items design
    10.4)**. The only input from outside the loot stream is the party's
    `requires` tags and owned bases (and, Later, trader presence and
-   count). **The loot stream is consumed only in this step.**
+   count). **The loot stream is consumed only in steps 3a and 3.**
+   **(change LE-14)** The approved draw order above is unchanged: the
+   count draws are consumed as dummy draws and their results ignored,
+   since the deck of step 3a fixes the counts; channel slot *i* draws its
+   ordinary identity on the *i*-th socket of that channel in allocation
+   order, filtered to that socket's tier; the boss channel draws only the
+   signature (the reward card's options are drawn in step 3a). The Due's
+   slot is a ghost draw (15.3 step 2). The party snapshot at generation
+   (owned gear, levels, training, living members) is also read, for the
+   Due, fit premiums and usability fallbacks. **(change LE-2, LE-14; loot
+   economy design 6.3, 6.10 items 2, 3, 7; M1 for F1, M2)**
    **Later (change I-14):** on a trader floor, the trader count is carved
    first from the containers share, then the enemy-carried share, each
    keeping at least 1 notable *(illustr.)*, never the boss; below 2 there
@@ -1148,14 +1167,20 @@ Deterministic:
     M2)**.
 11. **Experience:** fix each group's experience shares (16).
 
-Every step except 3 draws only from the dungeon stream (the floor's
+Every step except 3a and 3 draws only from the dungeon stream (the floor's
 substream keyed by floor index; **change RT-3**), in the order listed.
 **(lead's call)** Step 1a draws only from that substream's `layout`
 child (floor layout design 6.1) **(change FL-3)**. Steps 2 and 4–11
 (dungeon generation segment 6) draw only from that substream's
 `encounters` child, after the `traps` pass and before `trapsResolve`,
 with fixed draw counts and dummy draws **(change EP-1; encounter
-placement design 6.1; M1)**.
+placement design 6.1; M1)**. After `trapsResolve`, the draw-free
+**LootBind** pass reads the final socket set: it applies the named
+remaps (a carrier that falls back to a container in step 8, or whose
+group moves in step 9, passes its card to a same-room container at its
+tier), and computes salvage shares, the Heavy Purse and coin lumps
+(15.7) **(change LE-14; loot economy design 6.9 item 7, 6.10 item 4;
+M1)**.
 
 Content test: for every theme × floor in its range × party size 1–4 (at
 every reachable party weight, down to the shortfall minimum, 10.1;
@@ -2274,13 +2299,14 @@ The client chose M2. **(agreed)**
 
 | Gear | Becomes an item? | What the player sees |
 |---|---|---|
-| **Issue gear** (the weapon, armour and shield an enemy fights with) | **Never** | The model, plus the gear line on hover. It drives damage type, die, properties and armour category. On resolution, armed units add a little salvage coin. |
+| **Issue gear** (the weapon, armour and shield an enemy fights with) | **Never** | The model, plus the gear line on hover. It drives damage type, die, properties and armour category. On resolution, armed units pay their pre-assigned share of the floor's salvage coin (15.7; change LE-8). |
 | **Notable items** (pre-placed from the floor budget) | **Yes** | A glint icon, "Carries: …" on hover. The enemy uses it. It drops on death, rout or yield, or can be stolen. |
 
 Five rules prevent clutter **(agreed)**:
 
 1. **Issue gear never drops.** It is part of the stat block and the model.
-   At most it becomes one line of coin.
+   At most it becomes one line of coin, paid from the floor's fixed
+   salvage share (15.7; change LE-8).
 2. **Notable items come from a fixed per-floor budget**, pre-rolled when
    the floor is generated. Enemies carry part of that budget, so killing
    more never gives more items.
@@ -2295,7 +2321,10 @@ Five rules prevent clutter **(agreed)**:
 Target: **1 item or fewer per loot summary on average.** Hard rule **(lead's
 call)**: the loot plan assigns at most **3 notable items to any one
 encounter** (carried, room containers and caches together). The boss's
-reward card is a separate screen and does not count.
+reward card is a separate screen and does not count. It stays outside
+the floor's notable count (Ledger A), but its taken option counts in the
+floor's value (Ledger B) and toward family caps **(change LE-3; loot
+economy design 6.1 item 2, 6.3; M2)**.
 
 ### 15.2 Who carries
 
@@ -2313,26 +2342,56 @@ reward card is a separate screen and does not count.
 | Minion | Yes, if armed | Never |
 | Standard | Yes | Only from the enemy-carried quota, and only when no elite or leader in the encounter can take it |
 | Leader | Yes, with a banner, horn or staff prop | Second priority. The banner or horn may *be* the item. |
-| Elite | Yes | First priority for the quota. **Guaranteed only in the optional elite room.** An unarmed elite there guards a **lair cache** instead ("Guards: cache"). Other elites without a quota item show nothing. |
-| Boss | Yes, if armed | **Guaranteed** signature item, visibly carried, plus the boss reward card |
+| Elite | Yes | First priority for the quota. **Guaranteed only in the optional elite room**, met by allocation: the elite-room carrier takes the floor's highest carrier-legal **gear** card (weapon or focus, armour or shield, trinket), never a consumable; a consumable top card goes to the elite room's lair cache **(change LE-10, LE-18; loot economy design 6.9 items 2, 6; M2)**. An unarmed elite there guards a **lair cache** instead ("Guards: cache"). Other elites without a quota item show nothing. Resolving the elite (killed, Yielded, Routed or Cowed) or stealing its notable, whichever comes first, gives the **elite intel line** (15.8) **(change LE-18; M2)**. |
+| Boss | Yes, if armed | **Guaranteed** signature item, visibly carried, plus the boss reward card (17.5). The signature is at the top tier that has a legal record for its category, plus its authored property **(change LE-3; loot economy design 6.3; M2)**. **Floor 5:** no reward card; the final boss still carries and uses its signature, which drops as a **Memento** (a run-record item card, 0 value, shown on the victory screen and run record only) **(agreed, Q1; change LE-5; loot economy design 6.11; M2)**. |
+
+**Heavy Purse (change LE-16; loot economy design 8.3; M2):** on floors
+2–4, about 20% of the floor's found coin *(illustr.)* is carried as coin
+only by one unit, bound in LootBind (10.5): the Keybearer, else the lair
+leader, else the highest-level non-elite unit in the lair, else the
+highest-level non-elite non-minion unit on the floor (ties by unitId);
+**never the elite**; if no unit qualifies, its coin returns to the
+found-coin lumps. It drops on resolve (killed, Yielded, Routed); a
+Cowed carrier keeps it. Never on floors 1 or 5.
+
+**Pending request (agreed, Q6; loot economy design 6.9 item 8):** if the
+M2 simulator's `EliteNetWinDelta` misses −5 to +2, the elite room's
+death cost (budget, watcher rules) and experience (16) are tuned here,
+not loot; open until the M2 report.
 
 ### 15.3 Notable items
 
 **Generation** (loot random stream **(settled)**; deterministic):
 
-1. **The floor loot budget is a count of notables per channel.** Value
-   comes only from each item's record. The split is about 40% containers
+1. **The floor loot budget is a count of notables per channel.** Each
+   entry's tier is fixed by the floor's spoils list; identity and
+   properties come from the record. **(change LE-1; loot economy design
+   6.1; M1)** The split is about 40% containers
    and secrets (secret caches count as containers; floor layout design
    9.2; **change FL-17**), 40% enemy-carried, 20% boss. Illustratively, 6–8 notables
    per floor, of which 2–3 are enemy-carried, plus 1–2 supply and a few
    sundries (Common consumables, outside the notable count, inside the
    fixed budget; from floor 2 at least 1 offensive flask; consumables
    design 10). Enemies carry *part of* this budget and never add to it.
-   **(change M-5; change CN-19)** **M1's split** is its own: containers, at most 1
+   **(change M-5; change CN-19)** The tiers come from a fixed **rarity
+   deck** per floor: a binding base variant and, where the depth gates
+   allow, an alternate variant of exactly equal value, picked by one
+   fixed draw; carried cards are 2 / 2 / 3 / 3 / 3 per floor
+   *(illustr.)* within the per-encounter caps below **(change LE-2; loot
+   economy design 6.3, 6.9 item 2; M1 for F1, M2)**. **M1's split** is its own: containers, at most 1
    enemy-carried weapon or armour notable, and the boss's signature item.
-   **(lead's call)** The budget also holds a **`camp` channel** (1–2
-   notables, *illustr.*) for the next camp's notables shop, drawn whether
-   or not the shop is chosen. Camp stock counts toward later floors'
+   **(lead's call)** **Floor 5:** the boss share is the **Viaticum**, a
+   choose-1-of-3 offer at Rare (Rare wands and tier-3 scrolls, every
+   option usable by the party snapshot), in a main-path Plain container
+   after the lair, outside the Antechamber, Circuit rooms and fight
+   hosts, else in the lair room; it counts 1 notable. The room is pending
+   the FL and enemies owners' confirmation. **(agreed, Q1; change LE-5;
+   loot economy design 6.11; M2)** The budget also holds a **`camp`
+   channel** (**2** notables at every camp 1–4, inside the approved
+   1–2; graded for floor N+1, never Very rare; *illustr.*; **change
+   LE-6; loot economy design 6.3; M2**) for the next camp's notables shop, drawn whether
+   or not the shop is chosen. No camp channel follows floor 5 **(change
+   LE-5)**. Camp stock counts toward later floors'
    family caps only once bought. **(change I-10; items design 10.4)**
    **Later (change I-14):** a `trader` channel, carved from the
    containers and enemy-carried shares (10.5 step 3). Unbought trader
@@ -2351,6 +2410,26 @@ reward card is a separate screen and does not count.
    **(change DH-27)**
    **Later (change I-14):** a trader slot is never substituted; it returns
    to the containers channel (items design 10.9).
+   **Weights (change LE-17; loot economy design 6.2; M2):** a legal
+   record's weight is its category multiplier for the floor
+   (`loot.categoryWeight[f]`) × the `requires` bias (3; 4 for the boss
+   card's options) × the companion lever (1 by default), normalised per
+   `requires` lane. Filters are not weights: the Dream's Due, a fit
+   premium and the per-run arms floor restrict the candidates first.
+   **The Dream's Due (change LE-13; loot economy design 6.6, 6.10 item
+   3; M1 for the F1 hero arms, M2):** the floor's first container-channel
+   slot is constrained to one announced upgrade for a fixed target (F1,
+   F3, F5 the hero; F2, F4 the member with the largest gear deficit). Its
+   approved parent draw is still made as a **ghost draw** at the Due's
+   tier with the ordinary weight table, then discarded and never counted
+   toward caps or same-floor bases; the Due's identity is drawn on
+   `lootPlan`, and later items treat it as this floor's base. The F2
+   arms-floor card is drawn the same way **(change LE-17)**.
+   **Offer sets (change LE-4; loot economy design 6.3; M2):** a
+   choose-1-of-N offer (the boss reward card, the Viaticum and others)
+   counts once; its unchosen options are dreamed options, pre-rolled,
+   outside value and family caps, and destroyed when the choice resolves
+   (`ItemDestroyed{dreamedAway}`).
    **The Reprieve Phial is never a weighted draw.** One pre-roll per run,
    on the loot stream, decides whether it appears, its floor and its
    channel; it replaces one notable draw of that floor and channel (a
@@ -2432,6 +2511,11 @@ S-5)**:
   the roll. **(lead's call)**
 - **Noticing:** moving adjacent uses the normal band triggers (12.2); the
   Steal itself causes no extra noticing roll.
+- **What is taken (change LE-16; loot economy design 8.3, 6.15; M2):** a
+  successful Steal takes **one** of {notable, purse, key}, the thief's
+  choice; the action's hover previews the carrier's stealable items as
+  rows (notable, purse with its amount, key). A stolen purse forfeits
+  that unit's salvage share (15.7).
 - **Success:** the carrier's awareness is unchanged. The item moves to the
   thief's free slot, or to the leftovers marker if none is free; the
   carrier's `linkedAbilityId` is removed from its kit; its frozen `cost`
@@ -2442,7 +2526,8 @@ S-5)**:
   the carrier.
 - **The floor key (change TL-23; M2; traps and locks design 6.11):** a
   Keybearer's floor key can be taken by Steal under these rules, with
-  the same one try per carrier.
+  the same one try per carrier (one of the three choices above; change
+  LE-16).
 - **The elite room:** the carrier is never Dormant, so Steal has
   disadvantage, and the Champion's watcher (17.4) sees every square
   adjacent to it. Stealing there takes a Stealth play first, such as
@@ -2486,13 +2571,34 @@ floor.
 
 ### 15.7 Salvage coin
 
-- Each resolved **armed** unit (killed, Yielded or Routed) adds about 1 +
-  level ÷ 2 coin to the fight's coin line. Cowed groups pay none.
-- Salvage is sized at about 10–15% of a floor's coin income: flavour and a
+- Salvage is a **12% (120‰) share of the floor's fixed coin pool**,
+  pre-assigned at generation (LootBind, 10.5) to the floor's armed units
+  that are not summoned or joining later: each encounter group with an
+  armed unit gets 1 coin, in main-path order then by groupId, while the
+  share lasts; the rest is split over those groups by Σ armed level, then
+  inside a group over its armed units by level (largest remainder, ties
+  by id). Each resolved **armed** unit (killed, Yielded or Routed) pays
+  its share on the fight's coin line. Cowed groups pay none, and their
+  share is lost. Killing more never pays more than the pool. **(agreed,
+  Q3; change LE-8; loot economy design 6.4 item 2; M1 for the F1 share,
+  M2)**
+- The coin pool is per party *(illustr.)*: **35 / 50 / 70 / 90 / 0** per
+  floor at `companionCap` 3 and 35 / 50 / 70 / 75 / 0 at cap 2, keyed by
+  the cap, never by the actual party. Salvage = `FloorDiv(pool × 120,
+  1000)` (4 / 6 / 8 / 10 / 0); the rest is found coin in containers and
+  caches. Salvage is therefore about 10–15% of a floor's coin income by
+  construction: flavour and a
   small "you won" signal. A floor's coin income means found coin; item
   Sell and Scrap income is reported separately. **(change I-11; items
-  design 10.2)**
-- Coin exists (items design 10.1), so salvage stays as written.
+  design 10.2; agreed, Q4; change LE-7; loot economy design 6.4 items 1,
+  3; M1 for the F1 pool, M2)**
+- Coin exists (items design 10.1); salvage is its pre-assigned share of
+  the pool. The loot summary's coin line shows the fight's salvage total
+  with one per-unit line for each unit whose share is non-zero; a fight
+  whose total is 0 shows no salvage line. **(change LE-8)**
+- **Floor 5:** pool and salvage 0; the coin and salvage lines are hidden
+  rather than shown at 0. **(agreed, Q1; change LE-5; loot economy design
+  6.4 item 5, 6.11)**
 
 ### 15.8 The loot summary: one per fight
 
@@ -2502,7 +2608,12 @@ floor.
   comparisons use the new levels.
 - **Gathering:** every item dropped in the fight is gathered automatically,
   wherever it fell, with the coin line, the experience line with its level
-  scaling (16) and any floor fact.
+  scaling (16) and any floor fact. The floor-fact slot also carries the
+  **elite intel line** when it fires (15.2): one non-power fact about that
+  floor's boss (its signature item's card), kept afterwards under the
+  boss name on the pause screen's floor-info panel; if segment 8 claims
+  that fact, the line takes another from the same family. **(change
+  LE-18; loot economy design 6.9 item 6, 6.15; M2)**
 - **Each entry shows:** name and family; known properties, with an
   "unidentified" mark if any remain; **core-computed comparisons against
   every party member** (AC change, expected damage change, proficiency
@@ -2954,7 +3065,23 @@ are no separate arenas **(settled)**:
 inert (T7).
 
 **Signature item:** visibly carried and guaranteed, plus a pick-one-of-three
-reward card that reuses the offer UI.
+reward card that reuses the offer UI. **(change LE-3; loot economy design
+6.3; M2)** The signature is at the top tier that has a legal record for
+its category, plus its authored property. The card is one offer set at
+C / U / R / R on floors 1–4 *(illustr.)*, **never Very rare**; it is
+outside the floor's notable count and the 3-per-encounter cap, and its
+taken option counts in the floor's value and toward family caps. Its
+options must be usable by a member in the party snapshot at generation;
+if none is, all three are redrawn at the same tier as fit-premium gear
+for the member with the largest gear deficit
+(`BossCardUsabilityFallback`). Unchosen options are dreamed away (15.3
+step 2). **Floor 5:** no reward card; the signature drops as the
+Memento (15.2), and the Viaticum takes the boss share (15.3 step 1)
+**(agreed, Q1; change LE-5; loot economy design 6.11)**. **Perilous floor
+(M3):** on a floor entered through the Perilous Door, this card shows its
+pre-drawn fourth option and becomes choose 1 of 4 (a reading accepted by
+the client on 2026-11-22; agreed, Q5; change LE-19; loot economy design
+6.12).
 
 **M1 boss:** resolve, Unyielding and one phase at 50%; no boss actions;
 **no hard control**, which the floor 1 gate forbids. Its kit keeps the

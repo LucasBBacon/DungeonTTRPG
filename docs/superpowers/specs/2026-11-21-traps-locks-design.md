@@ -1498,17 +1498,44 @@ per room). The full glyph set is in 8.
 
 - Take time is never offered on Crier (spent or not), Barb or Tattle
   locks. That is where BQ5 lives: roll it, force it, Wax-Key it, or
-  leave it.
+  leave it. Roll or force pays the cache's stepped identity, a Wax Key
+  its Wax-Key identity (agreed, loot economy design Q2; change LE-11;
+  below).
 - **Set off a Crier:** any unit may deliberately sound one (1 tick,
   noise 10). After that the lock behaves as Plain for picking and
-  forcing (`crierSpent`), but Take time stays barred. Groups drawn by a
-  Crier, sounded, picked or forced, arrive **Alerted and cannot be
-  Surprised** that fight, as for alarm traps (6.18; TL-30) **(lead's
+  forcing (`crierSpent`, which counts as exposure for the consequence
+  cache; loot economy design 6.9 item 4), but Take time stays barred.
+  Groups drawn by a Crier, sounded, picked or forced, arrive **Alerted
+  and cannot be Surprised** that fight, as for alarm traps (6.18; TL-30) **(lead's
   call, after the check:** otherwise a Crier is a once-per-lock lure
   better than any alarm**)**.
-- A consequence lock's container draws +1 rarity step inside the budget
-  (a segment 7 hook). The lock card hints at its contents ("holds a
-  notable").
+- A consequence lock's container (socket rank SR3) draws +1 rarity step
+  inside the budget (a segment 7 hook), read as the one step rule of the
+  loot economy design 6.9 item 3: a tier above the floor's reference
+  tier, by allocation first, else from the step allowance (at most 2 per
+  floor), else a fit premium (change LE-10; M2). The lock card hints at
+  its contents with a tier mark (loot economy design 6.15): "holds a
+  rare notable; by key, an uncommon one"; a fit step reads "holds an
+  uncommon notable, chosen for <name>; by key, an ordinary uncommon
+  notable".
+- **Two identities (agreed, loot economy design Q2; change LE-11; M2):**
+  a consequence cache that holds a card holds two pre-rolled identities:
+  the **stepped identity**, paid when the lock is opened by roll or
+  force, and the **Wax-Key identity** (one tier below, never below C;
+  for a fit step, the same tier without the fit filter), paid when it is
+  opened by a Wax Key. `consequenceExposed` turns true on any pick or
+  force try made while the lock still has its consequence, and when a
+  Crier is sounded (`crierSpent`); at opening the stepped identity is
+  paid if it is true, else the Wax-Key identity. Unbolting, and a Runed
+  lock turned Plain by Unweaving, with no earlier try, pay the Wax-Key
+  identity. For a consequence-locked Portal the two identities apply
+  only to the highest-ranked card socket in the room beyond. The unused
+  identity is a dreamed option. A coin-only consequence lock pays its
+  step in coin (loot economy design 6.4 item 9, 6.9 item 4).
+  - *Pending request (loot economy design 6.9 item 4, 17):* if
+    `WaxKeyConsequenceUse` shows Barb forcing dominates, the TL owner may
+    give the Barb a force consequence; until then a Barb never fires on
+    force, so forcing it buys the stepped identity at force's noise.
 
 **Floor keys and Keybearers (TL-23):**
 - Keys stay `party(keys)`, size 0, floor-scoped (ITEMS 5.3 kept).
@@ -1516,7 +1543,14 @@ per room). The full glyph set is in 8.
   generalises the Gaol Turnkey (RS 8.3) and the Gut's "house keys on
   strings".
 - The key is gained by kill, Steal (one try per carrier, **agreed**),
-  Yield, Cow, or the Gut's key tripwire. Handing over the key on a Yield
+  Yield, Cow, or the Gut's key tripwire. A successful Steal takes one of
+  {notable, purse, key}, the thief's choice, listed in the Steal preview
+  (ENM 15.5; loot economy design 8.3; change LE-16; M2).
+- **Heavy Purse (loot economy design 8.3; change LE-16; M2):** on F2–F4
+  the Keybearer bound by `trapsResolve` is the first carrier in the
+  purse's chain, bound in the LootBind pass; a key that fell back to a
+  container takes no purse with it. With the key pip, a plate carries at
+  most 2 marks (loot economy design 6.15). Handing over the key on a Yield
   and on a Cow is a new outcome for ENM 14.6 (the Yield drop) and ENM
   14.8 (a Cowed group "keeps its notable item"), asked of the enemies
   owner in TL-23; if refused, Cow does not yield the key, and the key
@@ -1546,9 +1580,12 @@ per room). The full glyph set is in 8.
 - a run-scoped party counter `waxKeys`, cap 2, size 0, not `category:
   key`, so it survives the stairs;
 - out of combat only;
-- price by camp 24 / 28 / 32 / 36 *(illustr.)*, checked per camp after
-  the Leadership discount against peg K1 (≥ 2 × potion) and peg K2 (≤
-  the mean value of a locked cache on the next floor);
+- price by camp 24 / 28 / 32 / 36 *(illustr.)*, checked per camp
+  against peg K1 (≥ 2 × potion, after the Leadership discount), peg K2
+  (the undiscounted price ≤ the rule-derived expected Wax-Key value of a
+  lock on the next floor) and peg K2b (the price after the Leadership
+  discount ≥ 50% of that value) (loot economy design 6.4 item 9; change
+  LE-12; M2);
 - at cap, a dropped key stays in its container;
 - it is refused, before any spend, on anything without a lock
   (`WaxKeyRefused`), judged on the presented state, boxed lurkers
@@ -1556,7 +1593,8 @@ per room). The full glyph set is in 8.
 - never opens the Bossgate, Grilles, a Latch from its blind side,
   secrets, Riddle locks or Wager cages; never locks anything;
 - channels: sundries from F2 (at most 1 per floor), one camp notables
-  slot, and the basic vendor under Q3 (below).
+  slot (read as a third camp display entry outside the loot ledgers;
+  loot economy design 6.3), and the basic vendor under Q3 (below).
 
 **The Wax Key at the basic vendor (agreed, Q3; change TL-25).** The
 basic vendor stocks **1 Wax Key only when the party has no
@@ -1630,9 +1668,15 @@ on 2026-11-21; the fallback, if the client ever reopens it: a size-0
 | **Catch** | A trap on the lid: detected like a snare (a Hunch shows as a badge on the host); disarm, Bear it, Pole it (springs it with no hand on the lid) |
 | **Keyed** | A floor key, or the general routes |
 | **Boxed lurker** | M3 (6.14) |
+| **Twin Coffer** | M3 (loot economy design 8.4; change LE-21): 2 pre-rolled notables of the same card tier and different categories; taking one dissolves the other ("it was only a dream") inside the loot summary; counts 1. At most 1 per floor, F2+, off-path, never an HE socket |
 
 - Contents are never destroyed by any result. A Jammed container can
-  always be forced or Wax-Keyed.
+  always be forced or Wax-Keyed. A Twin Coffer's untaken alternate is a
+  dreamed option, not contents (loot economy design 8.4).
+- **Socket ranks (loot economy design 6.9 item 1; change LE-10; M2):**
+  segment 7c tags every socket: a consequence-lock cache is SR3;
+  Padlocked, Catch and Keyed caches, the Keybearer cache and the boxed
+  lurker are SR2.
 - Locked containers show a padlock base decal on the hasp, with the
   kind glyph (8), and never a keyhole. Unlocked containers show no
   padlock.
@@ -1718,7 +1762,11 @@ on 2026-11-21; the fallback, if the client ever reopens it: a size-0
     confirmed against the budget in the `trapsResolve` pass (dropped, as
     a real container, if it does not fit, or if the Annex or the ambush
     cap is spent; 6.22);
-  - drops its socket's reserved contents plus its carried item.
+  - drops its socket's reserved contents plus its carried item: a +0
+    entry at SR2, the carried item read as its one carried consumable (a
+    sundry dose), so no new carrier slot exists; if it is dropped, the
+    real container keeps the entry and the dose (loot economy design 6.9
+    items 1, 6 and 7; changes LE-10, LE-20; M3).
 - The "keyhole = mouth" line is not used.
 
 *Rejected (Q2):* B, a cross-theme mindless mimic wearing the keyhole (it
@@ -1796,6 +1844,15 @@ under RC3 by giving a minded, hungry thing the mindless mark).
     many are offered, and only one is ever taken **(lead's call, after
     the check:** the proposal's "previews of one pre-rolled notable"
     emptied the choice**)**.
+  - **Loot economy (loot economy design 6.9; change LE-10; M3):** the
+    cage set is an SR5 socket and "+1 rarity step" reads as the one step
+    rule (6.9 item 3); its 3 records sit at the stepped tier, at most 1
+    VR, the others fit premiums; the set counts 1 and takes the floor's
+    locked-or-trapped quota first (6.4 item 9); the untaken options are
+    dreamed options outside VP and caps (6.3; LE-4). If the Site reverts
+    to a side room, its first option moves to the room's lowest-id
+    container and the step stays spent (6.9 item 7). The tier mark sits
+    on the offer card, never beside the Disturbance meter (6.15).
 - **Exits are never sealed.** No short rest inside.
 - **Reports:** `WagerTakenRate`, `WagerWakeRate`, `WagerDeathShare`
   (against DH 18.2), `WagerXpDelta` (must be 0), `WagerWalkRoundRate`
@@ -1845,7 +1902,11 @@ timing, not raw odds.
 
 **Loot target (one target, KB16):** notables behind locks or traps ≤ 20%
 per floor, ≥ 80% of those reachable without Mechanics, and a value loss
-≤ 10% for no-Mechanics parties.
+≤ 10% for no-Mechanics parties. Read as the locked-or-trapped quota,
+`FloorDiv(200 × Ledger A, 1000)` (1 on every floor at 6–8), given to the
+Wager first, then a consequence lock, then any other lock; every other
+locked socket holds coin and a sundry (loot economy design 6.4 item 9;
+change LE-10; M2).
 
 ### 6.18 Noise, hearing and patrols (lead's call; change TL-30)
 
@@ -1911,6 +1972,12 @@ per floor, ≥ 80% of those reachable without Mechanics, and a value loss
 | Keybearer | ≤ 1 (the Gaol's guaranteed; Kennel and Wake may place theirs) | ≤ 1 | ≤ 1 |
 | Boxed lurker (M3) | 0 | ≤ 1 (Silk) | ≤ 1 (Gut) |
 | Dare-or-Wager (M3) | 0 | ≤ 1 | ≤ 1 |
+
+Lock counts are read with one quota card per floor: at most one locked
+or trapped socket holds a notable (6.17; loot economy design 6.4 item 9;
+change LE-10; M2). *Pending request (loot economy design 6.4 items 4, 5 and
+9; 17):* where the coin carve cap or the F5 fillers bind, segment 7c
+asks this pass to place fewer locks inside these ranges.
 
 **Placement rules TP1–TP12 (V11):**
 - **TP1 Exclusions.** No trigger square on:
@@ -2044,6 +2111,13 @@ distance and guard, and the boxed-lurker budget.
     2 rooms, else the lock becomes Plain. Wager distance or guard: the
     Site reverts to an ordinary side room. Boxed lurker over budget: the
     socket becomes a real container.
+  - **Loot (loot economy design 6.9 item 7, 6.10 item 4; changes LE-10,
+    LE-14; M1):** LootPlan (ENM 10.5 step 3a) reads the `traps` pass's
+    provisional sockets; the draw-free **LootBind** pass runs after
+    `trapsResolve` and applies a named remap for each failure action
+    above (a lock made Plain keeps its card, a consequence cache paying
+    its Wax-Key identity; a Tattle resolved to a Crier changes nothing),
+    before the V13g checks. The generation order is otherwise unchanged.
   - **Retry and terminal fallback:** a V11 failure retries only the pass
     that failed, once, at seed + 1 (HE-7 style). If the retry also
     fails, the failing traps are removed and failing locks become Plain,
@@ -2996,7 +3070,7 @@ as 6.20 lists (lead's call, after the check):
 | Segment | Receives from segment 5 |
 |---|---|
 | **6 Encounters** | The `trapsResolve` pass runs after segment 6's placement and may ask it to re-place a group (TP2); groups never start on triggers; areas allowed; Keybearer tag; Tattle Dormant group (the Annex); boxed-lurker budget (the Annex); Wager guards (the Annex, one extra patrol-band budget, 0 XP; M3); rigged-fight trap damage charged to the budget; alarm and Crier arrivals Alerted (answered in encounter placement design 6.13; EP-25, EP-26) |
-| **7 Loot** | Container kinds; `lockable` sockets; +1 rarity step behind consequence locks and in Wagers; graded cages; Wax Key draws; boxed-lurker drops |
+| **7 Loot** | Container kinds; `lockable` sockets; +1 rarity step behind consequence locks and in Wagers; graded cages; Wax Key draws; boxed-lurker drops. **Filled in part by the loot economy design (6.9, 6.4 item 9; changes LE-10, LE-11, LE-12, LE-20):** the one step rule and socket ranks, the two identities of a consequence cache, the K2 / K2b pegs, the cage set and boxed-lurker contents (6.11, 6.13–6.15 here) |
 | **8 Events** | Readings; Riddle-lock clues; Hour locks on Landmark ticks; Dream Fragments read the threshold rule |
 | **9 Boss arenas** | No guaranteed boss-room traps; arena devices use the TrapRecord format (the Supper chandelier); Clearways stay clear; the Bossgate never opens by Wax Key or Unbolting |
 | **10 Information** | Every display in 6.23; Listen "a mechanism"; Lockside Listen; the codex pages; the camp's Wax Key line (Q3) |

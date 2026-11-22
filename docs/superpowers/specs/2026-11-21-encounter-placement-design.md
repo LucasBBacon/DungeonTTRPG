@@ -645,7 +645,10 @@ of grafts only.**
 `terrain` → `hazards` → `traps` (segment 5, pass 1) → **segment 6
 `encounters`** → `trapsResolve` (segment 5, pass 2) → the shared floor
 assertion point (V8–V12). The loot draw (ENM 10.5 step 3) keeps the loot
-stream.
+stream. **Read (change LE-14; M1):** loot is now steps 3a (LootPlan, on
+the keyed `lootPlan` child stream) and 3, and the draw-free LootBind
+pass runs after `trapsResolve`, before the V13g checks at the shared
+assertion point; this order is unchanged (loot economy design 6.10).
 
 **Stream (change EP-1).** Segment 6 draws only from `encounters =
 Derive(floorDungeonSubstream, FNV-1a("encounters"))`, written as RT and
@@ -663,7 +666,7 @@ never perturbs segments 3–5.
 |---|---|---|
 | 2 | Slots to hosts; homeRooms frozen (FL-3) | 0 |
 | 2a | **EncounterPlan** (below): ambush count, form and host per ambush, the Annex purpose; the Tattle-bias set read only | 1 + 2 × floor cap + 1 per floor, dummies when unused |
-| 3 | Loot (loot stream; unchanged) | — |
+| 3 | Loot (loot stream; unchanged; step 3a, LootPlan, before it on `lootPlan`: loot economy design 6.10, LE-14) | — |
 | 4 | Carrier reservation (elite room, lair, guard posts by index, patrol; unchanged) | 0 |
 | 5 | Template choice, weighted by tier and position (6.2) under the variety rules, the Keybearer filter (6.13) and the 2a form as **hard filters**; yields a ranked list (below) | 1 per slot |
 | 5b | **Formation choice** from the legal list filtered by tier, floor, `partyCountAtGeneration`, host kind, theme, socket-class coverage and the 2a ambush form; yields a ranked list (lead's call, after the check) | 1 per slot |
@@ -1455,7 +1458,10 @@ honest, so looting does not become paranoid (XF9). **Bait-cache rules
 (lead's call, after the check):** a bait cache never moves at idle; it
 never uses a silhouette family used by that theme's boxed-lurker hosts
 or loot containers; it carries one cross-theme bait mark registered in
-RC5+; all three are V7 `CharterChecks`. **New lead's call:**
+RC5+; all three are V7 `CharterChecks`. **Bait-cache contents (change
+LE-20; M2):** a real ordinary entry at SR2 ("the cheese is real"), so a
+Mousetrap lure is worth taking; bait value is party-size dependent and
+reported (loot economy design 6.9 item 6). **New lead's call:**
 an ambush form with no legal fill in its window at the floor's weight is
 simply not drawn on that floor (the ENM 10.3 cap is a maximum, never a
 quota). **New lead's call:**
@@ -1844,7 +1850,11 @@ check are lead's calls, after the check):
   floor**, F2–5 only; Dormant; Sleeping Ward start shape; funded at the
   **patrol band** at the host room's level (a boxed lurker: one lurker at
   room level); **0 XP** (its reward is the Wager prize, the Dare cache or
-  the box contents), so `WagerXpDelta` = 0 and the 710 pool and ENM 20.1
+  the box contents; **read (LE-10; M3):** the Annex has no prize socket
+  of its own: its prize is the prize of what it serves, the Wager or Dare
+  socket with that socket's one step, never a second, the boxed lurker's
+  +0 entry, or nothing extra for the Tattle form; loot economy design 6.9
+  item 1), so `WagerXpDelta` = 0 and the 710 pool and ENM 20.1
   hold; never a lurker (except as the boxed lurker), elite or leader on
   F2; it serves exactly one of: the Tattle beyond-room, the Wager guard,
   the guarded Dare garrison, the boxed lurker. Report `AnnexEngageRate`.
@@ -2857,7 +2867,7 @@ sockets and pieces (RT); hazards (HZ); traps, locks and `trapsResolve`
 
 | Segment | Hook |
 |---|---|
-| **7 Loot** | Carriers on sockets the party can reach for Steal (never a nook; never a ward behind two fronts on F1–2); the Champion notable; the bait-cache prop family; activity containers (a dice pot, a feast plate); Annex prizes; boxed-lurker contents |
+| **7 Loot** | Carriers on sockets the party can reach for Steal (never a nook; never a ward behind two fronts on F1–2); the Champion notable; the bait-cache prop family; activity containers (a dice pot, a feast plate); Annex prizes (none of its own: loot economy design 6.9 item 1); boxed-lurker contents (loot economy design 6.9, LE-20) |
 | **8 Events** | Activity vignettes in Q rooms ("remains of a revel"); no event spawns or moves units; Cowed kneeling never crosses a door |
 | **9 Boss arenas** | Retinue escorts, arena start zones ≥ 9, the patrol joiner, Keepsake dressing |
 | **10 Information** | Formation and Keystone chips (`ChipNoLeak`; the read-surface table of 6.20); the Read card; the Perception hold overlay; the Lore counter line; the Listen activity word and watched Portal; Spoor marks; arrival-Portal arrows; the seen-tell band marker (6.20); rest-preview movers; the Lore roster preview of formations; "Line broken" and "Caught facing the door" |
@@ -3417,6 +3427,11 @@ wave or a later design triggers them; each fallback is a new lead's call
 - **If the clock line misses:** the cut order of 6.18, before release.
 - **If `LairSneakRate` exceeds 25%:** the enemies owner re-reads ENM 20.1
   (6.10).
+- **If the M2 simulator still shows the Annex as a large net loss
+  (`RiskSocketNetWinDelta` below −5; pending request from the loot
+  economy owner, agreed there as Q6):** the fix comes from encounter and
+  experience tuning (the Annex's funding and band, 6.13; ENM 15.2, 16;
+  DH 18.2), not loot (loot economy design 6.9 item 8).
 - **If the client wants hidden whole groups after all (CQ1):** they need
   non-lurker Stealth (an ENM 12.2 change), a new DH 10.4 reading and the
   6.4 surprise rows per group member; the toy cost about 4 points of win

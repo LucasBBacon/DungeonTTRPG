@@ -1,7 +1,7 @@
 # Loot Economy and Curves: Design (Dungeon Generation, Segment 7a)
 
 Date: 2026-11-22
-Status: Draft, revised after the design check, awaiting client approval, 2026-11-22
+Status: Approved, 2026-11-22
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design, "MAIN"),
 `2026-11-16-character-stat-model-design.md` (stat model, "STAT"),
 `2026-11-16-ability-resource-model-design.md` (ability model, "ABL"),
@@ -48,38 +48,43 @@ the M3 meta hooks; real entries in the bait cache and the boxed lurker;
 the Twin Coffer (M3); Curses at a discount (Later); V13 `LootEconomy`,
 the reports, loot last in the DH 18.2 lever order and kPC first; the
 camp sinks passed as hooks; the told-plainly items; the risks; and the
-appendix resolutions and names. **This document is a draft: it binds
-once the client approves it as a whole.**
+appendix resolutions and names. The client approved this document as a
+whole on 2026-11-22, including the Q5 wording: "that floor's camp card"
+reads as the Perilous floor's ENM 17.5 boss reward card, shown before
+its camp, which becomes choose 1 of 4 (6.12, 18.1).
 
 Items marked **(lead's call)** were filled in by the design lead inside
-approved rules and were in the proposal the client answered; they bind
-once the client approves this document. Items marked **(new lead's
-call)** were made while writing this document, beyond that proposal;
-they are listed in 18.1 for the client's confirmation with this document.
-Items marked **(lead's call, after the check)** were made when the design
-check of this draft was answered; they are listed in 18.1 with the
-"Told plainly after the check" list, for confirmation with this
-document. Items marked **(settled)** restate a rule from an approved document;
+approved rules and were in the proposal the client answered; the client
+confirmed them all on 2026-11-22, when it approved this document as a
+whole, and they are binding. Items marked **(new lead's call)** were
+made while writing this document, beyond that proposal; they are listed
+in 18.1 and the client confirmed them all on 2026-11-22. Items marked
+**(lead's call, after the check)** were made when this document was
+revised after its design check; they are listed in 18.1 with the "Told
+plainly after the check" list, the client confirmed them all on
+2026-11-22, and they never override a client answer. Items marked
+**(settled)** restate a rule from an approved document;
 **(decided)** marks a main-design client decision. Items marked
 **(change LE-n)** amend an approved document and are listed, with the
 exact section they touch, in section 16; rows that touch **decided** or
 **agreed** text are flagged there, and the client's approval of this
-document (with Q1–Q6 where a row names one) will cover them. Items
-marked **(told plainly)** narrow or re-read agreed or settled text,
-contest a judge, a critic or the brief, or state an unwelcome forecast;
-they are told to the client in plain words in 18.1. Once approved, every
-item here is binding on the builders.
+document on 2026-11-22 (with Q1–Q6 where a row names one) covers them.
+Items marked **(told plainly)** narrow or re-read agreed or settled
+text, contest a judge, a critic or the brief, or state an unwelcome
+forecast, and were told to the client in plain words (18.1, including
+those told after the check); the client confirmed them all on
+2026-11-22. Every item here is binding on the builders.
 
 | Marking | Meaning |
 |---|---|
 | **(settled)** | Restates a rule from an approved document |
 | **(decided)** | A main-design client decision, restated |
 | **(agreed)** | A client answer: Q1–Q6 of this document (2026-11-22), or one recorded in an approved document, restated |
-| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal; binding once the client approves this document |
-| **(new lead's call)** | A lead's call made while writing this document, beyond the answered proposal; listed in 18.1 for confirmation with this document |
-| **(lead's call, after the check)** | A lead's call made answering the design check of this draft; listed in 18.1 for confirmation with this document |
+| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal; confirmed by the client with this document on 2026-11-22 |
+| **(new lead's call)** | A lead's call made while writing this document, beyond the answered proposal; listed in 18.1 and confirmed by the client on 2026-11-22 |
+| **(lead's call, after the check)** | A lead's call made when revising this document after its design check; listed in 18.1 and confirmed by the client on 2026-11-22; never overrides a client answer |
 | **(change LE-n)** | Amends an approved document; listed with its exact section in 16 |
-| **(told plainly)** | Narrows or re-reads approved text, contests a judge, a critic or the brief, or states an unwelcome forecast; listed in 18.1 |
+| **(told plainly)** | Narrows or re-reads approved text, contests a judge, a critic or the brief, or states an unwelcome forecast; told to the client in plain words (18.1) and confirmed by the client on 2026-11-22 |
 | **(hook)** | Owned by another segment or design; 7a states only what it needs |
 | *(illustr.)* | An illustrative number, owned by the builders and calibrated by the M2 simulator (9, 10). Never binding |
 
@@ -258,7 +263,8 @@ the death curve.*
    dreamed option **(agreed, Q5)**, read as the Perilous floor's boss
    reward card (ENM 17.5), shown before its camp; because that reading
    names a different screen from the agreed words "that floor's camp
-   card", it is put to the client for confirmation (6.12, 18.1).
+   card", it was put to the client, who accepted it on 2026-11-22
+   (6.12, 18.1).
 
 ### 0.2 The client's six decisions (agreed, 2026-11-22)
 
@@ -268,7 +274,7 @@ the death curve.*
 | Q2 | Should a Wax Key still buy the consequence-lock premium safely? | **A.** The cache holds two pre-rolled identities; roll or force pays the stepped one, a Wax Key the ordinary one (6.9) | B: the consequence still fires on a Wax Key (changes TL 6.11's table); C: leave it (the Wax Key becomes a must-buy without Mechanics and K2 bounds nothing) | LE-11 ⚑ |
 | Q3 | Should salvage become a share of a fixed coin pool? | **A.** 12% of the floor pool, pre-assigned to armed units; the per-unit line still shows; Cowed groups pay none (6.4) | B: keep the per-unit formula (read literally with the 10–15% ratio, about 2,000+ coin per run) | LE-8 ⚑ |
 | Q4 | Should coin follow the party? | **A.** Coin per party from the expected-party table; solo and full parties get the same coin (CMP 7.7 holds) (6.4, 6.8) | B: +15% per actual companion (pays hiring; changes the budget under a shortfall) | LE-7 |
-| Q5 | What does the Perilous Door pay in loot? (M3) | **A.** It reveals the pre-drawn fourth shadow option on that floor's camp card; draws are door-independent; the RS owner confirms (6.12; which screen "camp card" names is put to the client for confirmation, 18.1) | B: a profile mark and a memento-wall frame only | LE-19 ⚑ |
+| Q5 | What does the Perilous Door pay in loot? (M3) | **A.** It reveals the pre-drawn fourth shadow option on that floor's camp card; draws are door-independent; the RS owner confirms (6.12; "camp card" read as the Perilous floor's ENM 17.5 boss reward card, choose 1 of 4, accepted by the client on 2026-11-22, 18.1) | B: a profile mark and a memento-wall frame only | LE-19 ⚑ |
 | Q6 | If the M2 simulator still shows the elite room and the Annex as a large net loss, where does the fix come from? | **A.** From encounter and experience tuning (ENM 15.2, 16; EP; DH 18.2); loot stays fixed, paying risk only in allocation, the elite intel line, tier pips and choice width (6.9) | B: raise the step allowance to 3 on floors with an elite room or Annex | — (a request to the ENM, EP and DH owners, 17) |
 
 ### 0.3 Decisions in brief
@@ -294,7 +300,7 @@ the death curve.*
 | 17 | Heavy Purse on F2–F4 | M2 | lead's call; LE-16 ⚑ |
 | 18 | Category weights by depth; F5 tactical cap; `foundSupplyPerFloor` pre-wired | M2 | lead's call; LE-17 |
 | 19 | Elite intel line (a boss fact when the elite resolves or its notable is stolen) | M2 | lead's call; LE-18 |
-| 20 | M3 meta hooks; the Perilous Door reveal (the fourth option drawn from M2, shown in M3) | M3 | **agreed, Q5**; the screen it names goes to the client (18.1); LE-19 ⚑ |
+| 20 | M3 meta hooks; the Perilous Door reveal (the fourth option drawn from M2, shown in M3) | M3 | **agreed, Q5**; the screen it names (the boss reward card) accepted by the client on 2026-11-22 (18.1); LE-19 ⚑ |
 | 21 | The bait cache and the boxed lurker hold real +0 entries; the Annex has no prize of its own | M2/M3 | lead's call; LE-20 ⚑ |
 | 22 | Twin Coffer | M3 | lead's call; LE-21 |
 | 23 | Curses at a discount | Later | lead's call; LE-22 |
@@ -1598,8 +1604,8 @@ matter".
   "switching Two Doors on changes no seed", RS 6.4) **(drawn from M2:
   lead's call, after the check)**. On a floor entered through the
   Perilous Door, that floor's camp card reveals the fourth option.
-  - **Reading (new lead's call; told plainly after the check, and put to
-    the client):** "that floor's camp card" is read as the **Perilous
+  - **Reading (new lead's call; told plainly after the check; accepted
+    by the client on 2026-11-22):** "that floor's camp card" is read as the **Perilous
     floor's boss reward card (ENM 17.5)**, shown at the end of that
     floor, before its camp: it becomes choose 1 of 4. Three approved
     screens could answer to "camp card": the ENM 17.5 boss reward card;
@@ -1610,12 +1616,12 @@ matter".
     a pre-drawn fourth option; the ITEMS 10.4 camp reward card's content
     belongs to the camp and hub owner and 7a pre-draws nothing for it;
     the RS 6.9 card shows no loot. Because this names a different screen
-    from the agreed words, it is listed in 18.1 under its own heading
-    for the client to confirm. **If the client means the ITEMS 10.4
-    camp reward card,** the reveal becomes a hook to the camp and hub
-    owner (that card would need its own pre-drawn fourth option on a
-    `lootPlan` grandchild, `campRewardReveal`), and the boss card stays
-    width 3.
+    from the agreed words, it was listed in 18.1 under its own heading;
+    **the client accepted this reading on 2026-11-22.** The alternative
+    specified before approval (the reveal on the ITEMS 10.4 camp reward
+    card, as a hook to the camp and hub owner with its own pre-drawn
+    fourth option on a `lootPlan` grandchild, `campRewardReveal`, the
+    boss card staying width 3) is not adopted.
   - The Wager keeps its pip grading; F5 has no card and no door. The
     taken option counts as the card's one pick (Ledger B, family caps);
     the rest stay dreamed options.
@@ -2239,7 +2245,7 @@ shop presentation and camp sinks (camp and hub); the display (segment
 | 9 | **Hoarding** may persist despite the cap and suggester | `HoardIndex`; use-side levers first |
 | 10 | **Owner dependencies:** DH (the Due reading), TL (the mixed-route rule, Unbolting), FL (the Viaticum room), ITEMS (signature VR), RS (Q5), camp and hub (hooks) | Each has a fallback in 18.2 |
 | 13 | **Two generation passes.** LootPlan predicts sockets that later passes can change | Named LootBind remaps, logged; V13g after LootBind; `LootBindRemap` rate |
-| 14 | **The Q5 screen.** The client may have meant the ITEMS 10.4 camp reward card | Put to the client (18.1); the alternative is specified (6.12) |
+| 14 | **The Q5 screen.** The client may have meant the ITEMS 10.4 camp reward card | Closed: the client accepted the boss reward card reading on 2026-11-22 (6.12, 18.1) |
 | 11 | **Clock:** the Treasure count may invite completionism | `TallyChaseSeconds` |
 | 12 | **All evidence is toy** | Every number is owed a simulator re-run before it settles |
 
@@ -2276,20 +2282,22 @@ shop presentation and camp sinks (camp and hub); the display (segment
 
 ## 16. Changes to approved documents
 
-To be applied when the client approves this document. **This document
-edits no parent document itself**; the rows are applied by the owners of
-the sections they touch **(lead's call)**, and rows owed by other owners
-are listed again in 17. Every row names the exact section it touches.
-Rows that touch **decided** or **agreed** text are flagged in the "Flag"
-column; **the client's approval will cover them** (with Q1–Q6 where a row
-names one). **New lead's call:** as in the TL and EP precedents, the
+Applied on 2026-11-22, when the client approved this document. **This
+document edits no parent document itself**; the rows are applied by the
+owners of the sections they touch **(lead's call)**, and rows owed by
+other owners are listed again in 17. Every row names the exact section
+it touches. Rows that touch **decided** or **agreed** text are flagged
+in the "Flag" column; **the client's approval of 2026-11-22 covers
+them** (with Q1–Q6 where a row names one). **New lead's call:** as in the TL and EP precedents, the
 Flag column also marks rows that only *read* agreed or decided text
 without changing it, so that every touch of agreed text is visible; and
 LE-8, LE-10, LE-13, LE-16, LE-20 and LE-24 are flagged although the
-proposal's 0.2 had not flagged them all. Rows marked "request" are
-requests to other owners; they change nothing until their owner rules,
-and 18.2 names each fallback. M3 and Later rows are recorded now as text
-marked with their wave and take effect at that wave.
+proposal's 0.2 had not flagged them all. Told-plainly rows were told in
+18.1 and confirmed by the client on 2026-11-22. Rows marked "request"
+are requests to other owners, recorded as pending requests; they change
+nothing until their owner rules, and 18.2 names each fallback. M3, M4
+and Later rows are recorded now as applied text marked with their wave
+and take effect at that wave.
 
 **Readings recorded inside this design (no approved text changes):**
 - ITEMS 12.5's "the floor's top allowed tier" reads "the top tier that
@@ -2308,7 +2316,8 @@ marked with their wave and take effect at that wave.
 - `tier4ScrollsPerRunBeforeFinalBoss` is off by default and binds only
   when engaged (3.4);
 - Q5's "that floor's camp card" reads as the Perilous floor's boss
-  reward card (ENM 17.5), put to the client (6.12, 18.1);
+  reward card (ENM 17.5), accepted by the client on 2026-11-22 (6.12,
+  18.1);
 - Q2's "roll or force pays the stepped one" covers forcing a Barb, whose
   consequence never fires on force (6.9 item 4);
 - EP-26's "its prize is the reward" reads as the prize of what the Annex
@@ -2336,7 +2345,7 @@ marked with their wave and take effect at that wave.
 | **LE-16** | ITEMS 10.2 (found coin gains carriers); ENM 15.2 (coin only); **ENM 15.5 Steal (agreed; change S-5)**: "one of {notable, purse, key}"; TL 6.11 / TL-23 Keybearer; ENM 5.6 loot-mark slot and the glints-per-screen gate; RS 6.9 Stratum Card row ("A heavy purse walks this floor") | The Heavy Purse, bound in LootBind; Steal takes one of three, with a preview; one merged loot badge (8.3, 6.15) | **Agreed** (ENM 15.5, one-try spirit kept) | Lead's call; enemies owner applies |
 | LE-17 | ENM 15.3 step 2 (a category multiplier); CN 10 (ranges unchanged); DH 5.7 lever 1 (pre-wired); FL 6.8 forecast (read) | Category weights by depth and the weight composition; the per-run arms floor; the F5 tactical cap; Wax Key sundries outside doses; `foundSupplyPerFloor` (6.2) | — | Lead's call; enemies owner applies |
 | LE-18 | ENM 15.2 Elite row (the elite carries gear only); ENM 15.8 floor-fact slot; RS 6.9 | The elite intel line, fired when the elite resolves or its notable is stolen (6.9) | — | Lead's call; enemies owner applies; segment 8 told |
-| **LE-19** | **MAIN 4.7 (decided; consistent, read)**; RS 6.4 LootDoorInvariant (read), RS 9.1 Perilous Door, Omens and "Door bounties" rows (read: the reveal adds no draw and is not a bounty); **RT-21 (decided)**; ITEMS 14 (read: the heirloom counts as owned for the Due) | M3 meta: unlock normalisation (the Due pool included), zero Nightmare and ladder effect, Omens never touch spoils, the fourth dreamed option drawn from M2, the Perilous Door reveal on the boss card (the screen put to the client, 18.1) (6.12) | **Decided** (MAIN 4.7, RT-21, read); **Q5** | **Client (agreed 2026-11-22, Q5)**, with this document; RS owner confirms the reading; M3 |
+| **LE-19** | **MAIN 4.7 (decided; consistent, read)**; RS 6.4 LootDoorInvariant (read), RS 9.1 Perilous Door, Omens and "Door bounties" rows (read: the reveal adds no draw and is not a bounty); **RT-21 (decided)**; ITEMS 14 (read: the heirloom counts as owned for the Due) | M3 meta: unlock normalisation (the Due pool included), zero Nightmare and ladder effect, Omens never touch spoils, the fourth dreamed option drawn from M2, the Perilous Door reveal on the boss card (the screen accepted by the client on 2026-11-22, 18.1) (6.12) | **Decided** (MAIN 4.7, RT-21, read); **Q5** | **Client (agreed 2026-11-22, Q5)**, with this document; RS owner confirms the reading; M3 |
 | **LE-20** | EP 6.8.1 (bait cache contents); **TL 6.14 (agreed, TL Q2: the boxed lurker; contents read)** | Bait cache and boxed lurker contents (6.9) | **Agreed** (TL 6.14, read) | Lead's call; EP and TL owners apply; M2 / M3 |
 | LE-21 | TL 6.13 (a new container kind); TL-27 (contents never destroyed: the alternate is a dreamed option, read); ITEMS 18.3 (`dreamedAway`) | The Twin Coffer (8.4) | — | Lead's call; TL owner applies; M3 |
 | LE-22 | ITEMS 12.5 ("value equals tier budget exactly" gains a cursed exception); ITEMS 13 | Curses at a discount (8.5) | — | Lead's call; Later |
@@ -2394,8 +2403,9 @@ The owed rows are the single list in 16; by owner:
   (6.8); no change row.
 - **Dungeon generation segments 7b, 7c, 8–12:** every hook in 12.
 - **The camp and hub design:** the sinks, coverage targets and vendor
-  scaling of 6.4 and 6.8; the camp-4 warning; if the client reads Q5 as
-  the ITEMS 10.4 camp reward card, that card's fourth option (6.12).
+  scaling of 6.4 and 6.8; the camp-4 warning. The ITEMS 10.4 camp
+  reward card owes no fourth option: the client read Q5 as the boss
+  reward card on 2026-11-22 (6.12).
 - **The simulator:** the arms of 10.4 and the reports of 10.3, kPC
   first; the toy re-run on the adopted coin table.
 - **Naming pass:** every placeholder name here.
@@ -2404,15 +2414,22 @@ The owed rows are the single list in 16; by owner:
 
 ## 18. Open items for the client
 
-**This document awaits the client's approval as a whole.** The six
-questions it raised were answered on 2026-11-22 **(agreed)**, and the
-client said everything else in the proposal stands as written. Approval
-will confirm every lead's call (those of the answered proposal, the
-new lead's calls and the lead's calls after the check below), the
-told-plainly items, the readings recorded in 16 and the flagged rows of
-16. **One item needs the client's explicit answer:** which screen Q5's
-"camp card" names (below). The future items in 18.2 come back
-only if a report, an owner's refusal or a later design triggers them.
+None. Approved by the client on 2026-11-22.
+
+The client approved this document as a whole on 2026-11-22, including
+every lead's call (the lead's calls of the answered proposal, the new
+lead's calls in 18.1 and the lead's calls after the check in 18.1), the
+told-plainly items (including "Told plainly after the check" in 18.1)
+and the readings recorded in 16, and its approval covers the flagged
+rows of 16. The one item that needed the client's explicit answer, which
+screen Q5's "camp card" names, was answered on 2026-11-22: the client
+accepted this document's reading, the Perilous floor's ENM 17.5 boss
+reward card, shown before its camp, which becomes choose 1 of 4 (18.1,
+6.12). The six questions it raised were answered on 2026-11-22
+**(agreed)**; the client also said everything else in the proposal
+stands as written. The future items in 18.2, which come back only if a
+report, an owner's refusal, a wave or a later design triggers them, and
+the naming pass remain future items.
 
 ### 18.1 This document
 
@@ -2437,8 +2454,10 @@ only if a report, an owner's refusal or a later design triggers them.
   holds) (6.4, 6.8; LE-7). Rejected: B, +15% per companion.
 - **Q5, Perilous Door loot (M3):** option A. It reveals the pre-drawn
   fourth shadow option on that floor's camp card; draws are
-  door-independent; the RS owner confirms (6.12; LE-19). Rejected: B, a
-  profile mark only.
+  door-independent; the RS owner confirms (6.12; LE-19). The screen:
+  the Perilous floor's ENM 17.5 boss reward card, choose 1 of 4
+  (accepted by the client on 2026-11-22; below). Rejected: B, a profile
+  mark only.
 - **Q6, the risk incentive fix:** option A. If the M2 simulator still
   shows the elite room and the Annex as a large net loss, the fix comes
   from encounter and experience tuning (ENM 15.2, 16; EP; DH 18.2); loot
@@ -2451,8 +2470,8 @@ Hmid fix (35 / 45 / 55 / 65 / 0 with +15% per companion). This document
 adopts the per-party pool the proposal recommended; Hmid stays as toy
 evidence in 9 (6.4 item 1).
 
-**New lead's calls (made while writing; to be confirmed with this
-document):**
+**New lead's calls (made while writing; confirmed by the client on
+2026-11-22, with this document):**
 1. **Exact-VP variants and fixed alternate shapes** (6.3; V13s (b)): F1
    one variant; F2 and F4 a fit variant (the same cards, one card a
    fit premium); F3 spiky C U R R R R; F5 spiky C R R R R VR. The
@@ -2486,8 +2505,8 @@ document):**
     flagged, and reads of agreed or decided text flagged, as in the TL
     and EP precedents.
 
-**Differs from the wording of an agreed answer (Q5): for the client to
-confirm.** The client agreed that the Perilous Door "reveals the
+**Differs from the wording of an agreed answer (Q5): accepted by the
+client on 2026-11-22.** The client agreed that the Perilous Door "reveals the
 pre-drawn fourth shadow option on that floor's camp card". Three
 approved screens could be called a camp card: the **ENM 17.5 boss reward
 card** (the width-3 offer at the end of the floor, before its camp); the
@@ -2496,15 +2515,19 @@ which ITEMS 10.4 says is not the boss reward card, and whose content
 belongs to the camp and hub owner); and the **RS 6.9 camp next-floor
 card** (no loot). This document reads the words as the **boss reward
 card**, the only width-3 offer shown before that camp with a pre-drawn
-fourth option, and builds it so (6.12). If the client meant the ITEMS
-10.4 camp reward card, the reveal becomes a hook to the camp and hub
-owner with its own pre-drawn fourth option, and the boss card stays
-width 3; nothing else in this document changes. The client is asked to
-confirm which screen with this document. (Also: the client's "shadow
-option" is renamed "dreamed option", and "tier pips" "tier marks", as
+fourth option, and builds it so (6.12). Had the client meant the ITEMS
+10.4 camp reward card, the reveal would have become a hook to the camp
+and hub owner with its own pre-drawn fourth option, and the boss card
+would have stayed width 3. **The client's answer (2026-11-22):** the
+client accepted this document's reading: the Perilous floor's ENM 17.5
+boss reward card, shown before its camp, becomes choose 1 of 4; the
+camp reward card alternative is not adopted. (Also: the client's
+"shadow option" is renamed "dreamed option", and "tier pips" "tier marks", as
 placeholder names only, 3.5.)
 
-**Lead's calls after the check (to be confirmed with this document):**
+**Lead's calls after the check** (each marked "(lead's call, after the
+check)" where it stands; confirmed by the client on 2026-11-22, with
+this document; none overrides a client answer):
 1. **Generation in two steps:** LootPlan (step 3a, on `lootPlan`, over
    the provisional socket set) and the draw-free LootBind pass after
    `trapsResolve`, with named remaps; V13g after LootBind (6.9 items 2,
@@ -2588,7 +2611,7 @@ placeholder names only, 3.5.)
 26. **The camp ledger recomputed per body;** camp 2's first lever is its
     first entry R → U (7).
 
-**Told plainly** (to be confirmed with this document):
+**Told plainly; confirmed by the client on 2026-11-22:**
 - The proposal's draft variant cells did not all sum (its F3 spiky came
   to 13); the fixed shapes replace them (6.3).
 - The adopted coin table is not the toy's tested arm; the toy must be
@@ -2617,13 +2640,14 @@ placeholder names only, 3.5.)
 - The corrections to the brief in 3.4 ("Pilfer", hire cost, pity
   timers, Dream Fragments, TL 6.11 not 6.12, the Dreamer's Heart).
 
-**Told plainly after the check:**
+**Told plainly after the check** (confirmed by the client on
+2026-11-22, with this document; none changes a client answer):
 - **The draft's generation order did not work.** It drew loot tiers in
   ENM 10.5 step 3, before carriers, composition and `trapsResolve`
   existed, and had no rule for sockets those later passes change. The
   LootPlan step and the LootBind pass fix this (6.9, 6.10).
 - **Q5 names a screen this document reads differently** (the heading
-  above).
+  above; the client accepted the reading on 2026-11-22).
 - **Q2's words are kept for the Barb:** forcing a Barb pays the stepped
   identity though the Barb never fires on force; the exposure is force's
   noise. The TL owner may add a force consequence if the report fires
@@ -2661,8 +2685,9 @@ placeholder names only, 3.5.)
 
 ### 18.2 Future items triggered by reports, owners or later designs
 
-These come back to the client only if a report, an owner's refusal or a
-later design triggers them; each fallback is a new lead's call:
+These come back to the client only if a report, an owner's refusal, a
+wave or a later design triggers them; each fallback is a new lead's call
+(confirmed by the client on 2026-11-22, with this document):
 - **If the M2 simulator still shows the elite room or the Annex as a
   large net loss (`EliteNetWinDelta` below −5):** the ENM, EP and DH
   owners tune the elite room's cost and experience (agreed, Q6); if they
@@ -2690,8 +2715,9 @@ later design triggers them; each fallback is a new lead's call:
 - **If the RS owner refuses the Perilous Door reading (LE-19):** option B
   applies (a profile mark and a memento-wall frame), since a door that
   changes draws would break LootDoorInvariant.
-- **If the client reads Q5 as the ITEMS 10.4 camp reward card:** the
-  reveal moves to that card as a hook to the camp and hub owner (6.12).
+- *(Closed on 2026-11-22: the client accepted the boss reward card
+  reading of Q5, so the ITEMS 10.4 camp reward card fallback is not
+  needed, 6.12.)*
 - **If the FL owner cannot place the Viaticum on the main path after the
   lair outside the Circuit and fight hosts:** a container in the lair
   room, never a side room, never the Antechamber.

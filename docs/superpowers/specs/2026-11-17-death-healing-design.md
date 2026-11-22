@@ -107,7 +107,9 @@ after it. **(lead's call)**
 - **Yo-yo healing:** any heal lifting a Downed unit, so a body bounces up
   and down every round. **(settled, conditions 18.2; lead's call to keep)**
 - **Pity timers:** hidden mercy keyed to low HP or dry spells.
-  **(lead's call)**
+  **(lead's call)** *Reading (change LE-13; M1, M2; lead's call, the DH
+  owner confirms):* a standing, announced rule fixed at generation, such
+  as the Dream's Due, is not a pity timer (loot economy design 6.6).
 - **Free between-fight healing** that moves all stakes into each fight.
   **(settled, main design 4.4)**
 - **A free life per floor** from a recharging drop prevention. **(agreed,
@@ -287,7 +289,7 @@ help the hero, and a seed could produce a floor with no potion at all.
 | (c) More guaranteed supply | A **placement** rule instead | Extra supply overflows the cap of 3; what helps is one cache always reachable on the main path |
 | (d) A full heal at camp | Already decided | The strongest guarantee in the game |
 | (e) A healing source in every fight | Rejected | Healing becomes a drip, rests become pointless, and the floor-long decision of main 4.4 disappears |
-| (f) Pity timers | Rejected | Hidden state; exploitable (skip pickups, bleed on purpose); rewards playing at low HP; the same seed would give different loot |
+| (f) Pity timers | Rejected | Hidden state; exploitable (skip pickups, bleed on purpose); rewards playing at low HP; the same seed would give different loot. *Reading (change LE-13; the DH owner confirms):* the Dream's Due is standing and announced, so outside this; declining pickups can steer which member the F2 or F4 Due names, never how much the floor holds (loot economy design 6.6) |
 | (g) A generator floor in Recovery units | A **build check** only (21.3) | Proves the guarantee at every floor and party size; too opaque for players |
 | (h) Fully random healing | Rejected | Under permadeath, deaths come from the tail |
 | (i) Healing only from rests and classes | Rejected | The hero has nothing to drink; a healer becomes compulsory |
@@ -317,6 +319,8 @@ raise without the client.
 counts (2 / 1), `healingSundryMin` 1 (2 on floors 4–5 only through the
 raise), `healingSundryMax` 3, `supplyMainPathMin` 1 and the top-up of 1
 are not tuning. `healingOffPathPermille` and `sundriesPerFloor` are.
+The loot economy leaves the package untouched (change LE-13, read; loot
+economy design 6.6).
 
 ### 5.6 How the guarantee fits approved rules
 
@@ -366,7 +370,9 @@ are not tuning. `healingOffPathPermille` and `sundriesPerFloor` are.
   during the 20-tick rest holds that back.
 - So "limited" is enforced on supply. A rests-per-floor report has a gate
   of median ≤ 3 *(illustr.)*. Lever order if it fires:
-  1. found supply 1 per floor instead of 1–2 (a lead's call row);
+  1. found supply 1 per floor instead of 1–2 (a lead's call row;
+     pre-wired as `foundSupplyPerFloor`, so a tuning change only; change
+     LE-17, M2; loot economy design 6.2);
   2. limited vendor supply stock of 2–3, like potions (changes the agreed
      vendor row, so it goes back to the client);
   3. supply cap 2.
@@ -984,7 +990,9 @@ returns. Not on at launch: the floor-1 boss needs 3–5 heals (5.8).
   there is no other retry policy (floor layout design 6.1, 11.2)
   **(change FL-15)**. Build-time checks cover every room template and the release
   seed set (21.2); they cannot prove every seed, which is why the
-  requirement is constructive (DH-32).
+  requirement is constructive (DH-32). The Dream's Due may share an
+  HE-7 socket; the package, its draws and its order are untouched
+  (change LE-13, read; loot economy design 6.6).
 - **M1 slice:** hero kit 2, plus 1 guaranteed main-path container potion
   and `supplyMainPathMin` 1 on floor 1, so the floor-1 HE-6 cell and the
   floor-1 boss check rest on what M1 ships. Sundries proper, the offensive
@@ -1037,6 +1045,16 @@ A container holds any number of items.
    path when the floor has no off-path container; (c) the container,
    uniform among the chosen side's containers for a potion, among all
    containers otherwise.
+
+**Doses re-placed by LootBind (change LE-5, agreed Q1; change LE-12;
+M2).** Lock sundries, coin-overflow sundries and, on floor 5, every coin
+fallback (1 dose per 12 coin) are doses of this block, inside
+`sundriesPerFloor`, `offensiveSundryMax` and `healingSundryMax`; the
+count is unchanged. The block draws them as above; the draw-free
+LootBind pass only re-places them, non-healing doses first in this
+order, and their step 7(c) draws are still consumed, their results
+ignored for re-placed doses, logged (loot economy design 6.4 items 4–5,
+6.11).
 
 A guaranteed draw is never substituted (DH-27). The validation code
 `GuaranteedItemUnreachable` is a run-time assertion on the result of
@@ -1519,7 +1537,11 @@ seen patrol routes (encounter placement design 6.20, 6.21).
 - **Death recap** from the event log: the last two rounds; the killing
   chain with every roll and its odds; the band at the hero's last turn
   end (recomputed by replay, 17.2); what was left unspent, worded
-  neutrally ("2 potions on the belt"), never as blame.
+  neutrally ("2 potions on the belt"), never as blame. Its run-record
+  form, for wins and losses, is **Grave Goods** in the same neutral
+  voice ("Still carried when the dream closed: …"; on a win "Carried
+  out: …"), profile-side, never a score (change LE-15, M2; loot economy
+  design 8.2).
   *Pending request (change HZ-13; the DH owner rules):* the recap names
   the Stir when an environment act is in the killing chain (hazards
   design 6.18).
@@ -1529,7 +1551,9 @@ seen patrol routes (encounter placement design 6.20, 6.21).
   RT-12)**, then the floor count line "Main path: n rooms; side rooms: k;
   secrets: s" (s from floor 2; the floor-1 card omits it), with its
   party-bar tally, counts only, never locations (floor layout design 9.2)
-  **(change FL-20, M2)**, and a party-bar tally "found 1 of at least 1": the healing
+  **(change FL-20, M2)**, the treasure count "Treasures: n" with its
+  strip "k / n" **(change LE-15, M2; loot economy design 8.2, 6.15)**,
+  and a party-bar tally "found 1 of at least 1": the healing
   potions picked up this floor from containers and carriers, whatever their source. The `guaranteed`
   flag on `LootTaken` stays for reports only.
 
@@ -1637,7 +1661,20 @@ seen patrol routes (encounter placement design 6.20, 6.21).
     gate (5.7); win rate below a quarter: guard rows and boss rows first;
     then, **only if its own 5.5 report trigger has fired**, the
     pre-authorised potion raise; otherwise the miss goes to the client
-    (28.2).
+    (28.2);
+  - **loot last (change LE-24, M2; the lever list extended, targets
+    unchanged):** enemy budgets and guard rows first, then the Dream's
+    Due count and fit, then the rarity decks; loot is never a lever for
+    floor-1 deaths. Its trip-wire (F3–5's share of deaths in the
+    reference arm below 60%) follows this order: the floor-1 and
+    encounter-tail rows above, then the Due and fit, then the camp
+    channel's second-entry tier, then the F2–F3 decks; never the
+    healing package (loot economy design 6.5, 10.3).
+- *Pending request (agreed, loot economy Q6; M2; the DH owner rules):*
+  if the M2 simulator shows the elite room or the Annex as a large net
+  loss (`EliteNetWinDelta` below −5), the fix comes from encounter and
+  experience tuning (the elite room's death cost) with the enemies and
+  encounter placement owners, not loot (loot economy design 6.9 item 8).
 - **Wager rooms (M3; change TL-29):** `WagerDeathShare` is reported
   against these targets (traps and locks design 6.15).
 
@@ -2016,7 +2053,10 @@ parties on floors 2–5.
   against untrained. Beside the gate, as reports: the three Herald arms,
   the healer count (0 / 1 / 2+) and the heal-source breakdown (18.1;
   classes design 12.3) **(change CL-9)**.
-- Coin at camp 1 against 2 potions + 1 supply (≥ 32 coin).
+- Coin at camp 1 against 2 potions + 1 supply (≥ 32 coin); the F1
+  main-path coin floor of 17 meets it with the kit's 15 (change LE-24,
+  M2; loot economy design 6.4 item 4). The loot economy's reports, kPC
+  first, are read against 18.2 beside these (loot economy design 10.3).
 - Hero level minus room level at fight start (under-levelled stealth
   heroes void the guards).
 - Deaths by class HP tier (flat-bonus compression).

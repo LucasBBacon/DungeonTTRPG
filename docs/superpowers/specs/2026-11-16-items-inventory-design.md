@@ -224,7 +224,7 @@ without migrating any data. **(agreed)**
                         "scroll": 800, "wand": 1000, "talisman": 1500 },
   "leadershipDiscount": { "permillePerPoint": 30, "capPermille": 250 },
   "dormantAllowancePermille": 500,
-  "sellPermille": 400, "scrapPermille": 100, "leftoversScope": "room",
+  "sellPermille": 250, "scrapPermille": 100, "leftoversScope": "room",
   "roomGuardPermille": 250,
   "familyCapPerRun": { "weapon": 2, "armour": 2, "shield": 2, "focus": 2,
                        "trinket": 1, "scroll": 2, "wand": 2, "consumable": null,
@@ -233,8 +233,9 @@ without migrating any data. **(agreed)**
               "uncommon": { "budget": 2, "props": [1, 2], "minFloor": 1 },
               "rare":     { "budget": 3, "props": [2, 3], "minFloor": 3 },
               "veryRare": { "budget": 4, "props": [2, 3], "minFloor": 4, "perFloorMax": 1 } },
+  "loot": { "rarityDeck": "…", "coinPool": "…", "salvagePermille": 120, "…": "…" },
   "vendor": { "potionStock": [2, 3], "bases": ["item.longsword", "…"] },
-  "notablesShop": [1, 2],
+  "notablesShop": 2,
   "consumables": { "potionPermille": 1000, "…": "…" },
   "trader": { "floors": [2, 4], "presencePermille": 500, "stock": [2, 3],
               "containersFloor": 1, "carriedFloor": 1,
@@ -290,6 +291,14 @@ and camp keys as bare keys beside `offensiveSundryMin`:
 DH-33)** `rarity.*.props` ranges apply to gear;
 a use-only record meets 19.1 rule 1 with its `use` (12.5). **(change
 CN-6)**
+
+The `loot` block is the loot economy design's (loot economy design 10.1,
+full keys there, including which are not tuning): the rarity decks
+`loot.rarityDeck` beside `rarity` (12.5), the coin pool and salvage share
+(10.2) and the camp channel (10.4). **(change LE-2; M1 on floor 1, M2)** `sellPermille` is
+250 *(illustr.)*; Sell 200‰ is the fallback if `SellShareOfCoin` passes
+40% (10.6; loot economy design 6.4). `notablesShop` is 2, set inside the
+agreed 1–2 (10.4). **(change LE-9; change LE-6; M2)**
 
 All values *(illustr.)*, except the `ePlusGate` block and the trinket and
 death and healing keys named above as not tuning. `basePrice` (supply,
@@ -618,10 +627,34 @@ Later; details lead's call unless marked)**
 
 ### 10.2 Coin income
 
-- **Found coin:** containers and caches.
-- **Salvage (enemies 15.7):** 10–15% of found coin (change I-11 fixes the
-  base as found coin). Found coin is therefore about 87–91% of found plus
-  salvage *(illustr.)*.
+- **Found coin:** containers and caches. Each floor has a fixed coin pool
+  per party, 35 / 50 / 70 / 90 / 0 *(illustr.)* at `companionCap` 3 and
+  35 / 50 / 70 / 75 / 0 at cap 2, keyed by the build's `companionCap` and
+  never by the actual party **(agreed 2026-11-22, Q4)**. Found coin is the
+  pool less the salvage share, split into integer lumps by socket rank
+  over containers and caches in the draw-free LootBind pass, with a
+  main-path floor of 17 on floor 1 and lock lumps carved first (loot
+  economy design 6.4). **(change LE-7; M1: the floor 1 pool and
+  main-path floor; M2)** **M2:** on floors 2–4, 20% of
+  found coin *(illustr.)* is carved onto one carrier, the **Heavy Purse**,
+  dropped on resolve; a Steal takes one of {notable, purse, key} (loot
+  economy design 8.3). **(change LE-16)**
+- **Salvage (enemies 15.7):** a 12% share (`loot.salvagePermille` 120
+  *(illustr.)*) of the fixed per-party coin pool, pre-assigned at
+  generation in LootBind per fight, then per armed unit; each resolved
+  unit pays its share, Cowed groups pay none, and killing more never pays
+  more than the pool **(agreed 2026-11-22, Q3)**. The loot summary shows
+  the fight's salvage total plus a line per non-zero share. The I-11
+  ratio (10–15% of found coin; change I-11 fixes the base as found coin)
+  holds by construction (loot economy design 6.4). **(change LE-8; M1:
+  the floor 1 share; M2)**
+- **Floor 5 pays before the arena (agreed 2026-11-22, Q1):** no camp
+  follows it, so its coin pool and salvage are 0 and their lines are
+  hidden; every coin fallback there becomes sundry doses. The floor 5
+  boss share is the **Viaticum**, a choose-1-of-3 offer of Rare wands and
+  tier-3 scrolls usable by the party, in a main-path container after the
+  lair; the final signature drops as a **Memento** (12.5) (loot economy
+  design 6.11). **(change LE-5; M2)**
 - **Sell and Scrap** are a **separate stream**, reported separately.
   "Salvage" keeps its 15.7 meaning only; the item actions are called
   **Sell** and **Scrap**.
@@ -668,7 +701,8 @@ destroyed (`ItemDestroyed{lost}`); an unbought vendor Wax Key lapses with
 **(agreed; change I-13)** The main design's "a shop or reward" is a choice
 at each camp between:
 
-- a **notables shop**: 1–2 notables *(illustr.)* for coin; or
+- a **notables shop**: 2 notables *(illustr.; set inside the agreed 1–2,
+  change LE-6)* for coin; or
 - a **reward card**.
 
 **(lead's call)** The **camp reward card** is a separate screen from the
@@ -693,6 +727,13 @@ The camp channel is part of the fixed, pre-rolled budget, so the anti-goal
 shop is chosen. Stock is deterministic and cannot be save-scummed.
 **(lead's call)**
 
+**Camp channel (change LE-6; M2):** 2 entries at every camp 1–4, **graded for
+floor N+1** (tier and `minFloor` read N+1; family caps and owned bases
+read N), never Very rare; bought camp stock never counts toward floor
+N+1's per-floor tier caps. A Wax Key drawn for TL's camp notables slot is
+a third display entry outside the budget (loot economy design 6.3). **No
+camp channel after floor 5 (agreed 2026-11-22, Q1; change LE-5).**
+
 **Secret caches:** a cache behind a Hairline secret counts as a
 container in the containers-and-secrets channel (enemies 15.3); secrets
 are optional content only
@@ -703,10 +744,13 @@ drawn item (camp and trader stock included) counts for duplicate-base
 rerolls and family caps, so one draw never repeats itself. For later
 floors' draws, camp and trader stock counts toward family caps **only once
 bought or bartered**, so an item the party could not afford never closes a
-family for the rest of the run. Floor N+1 is generated when the party
+family for the rest of the run. Dreamed options (the unchosen options
+of an offer set) never count (loot economy design 6.3, change LE-4; M2).
+Floor N+1 is generated when the party
 leaves camp for it (it already reads owned bases, enemies 10.5 step 3),
 after every purchase on floor N and at its camp is known, so this stays
-deterministic. The run state keeps the per-family count.
+deterministic; that generation and the camp-exit save are one atomic
+write (loot economy design 6.10) **(change LE-14; M1)**. The run state keeps the per-family count.
 
 ### 10.5 Prices and pegs
 
@@ -754,8 +798,9 @@ deterministic. The run state keeps the per-family count.
 
 ### 10.6 Sell and Scrap
 
-- **Sell** happens at camp only, at one flat rate *(illustr. 40% of
-  price)*, with no haggling. **(agreed)** Heirlooms, keys and `unsellable`
+- **Sell** happens at camp only, at one flat rate *(illustr. 25% of
+  price; Sell 200‰ as the fallback, loot economy design 6.4)*, with no
+  haggling. **(agreed)** **(change LE-9; M2)** Heirlooms, keys and `unsellable`
   items sell for 0 and show `Unsellable`. A `kitBound` instance
   (`boundToUnitId` set, 18.1) gets the same `unsellable` treatment: it
   sells and scraps for 0 and shows "Unsellable: kit" (companions design
@@ -871,7 +916,7 @@ and one service, for coin or barter.
   *(illustr. 60%)* of its undiscounted base (10.5 step 6, using its
   assessed value if it is not identified); if the credit is below the
   trader's price, the party pays the difference in coin; a surplus is
-  **lost** (no change is given). The rate sits between Sell (40%) and full
+  **lost** (no change is given). The rate sits between Sell (25%, change LE-9) and full
   price, so barter is the trader's better deal, but it never pays out coin.
 - **Barter limits (lead's call):** one item for one item. The offered item
   must be in a pack, on a belt or in a spare weapon set; worn armour,
@@ -1076,9 +1121,16 @@ recommendation)**
 | Very rare | 4 | 2–3 | floor 4+ | At most 1 per floor |
 
 Budgets, property counts and depths *(illustr.)* live in
-`inventory.json` (`rarity`). **A record's `value` equals its tier's budget
+`inventory.json` (`rarity`). Which tiers each floor deals is fixed by its
+rarity deck, `loot.rarityDeck` beside `rarity` (base and alternate
+variants of exactly equal value; `minFloor` kept as the depth gate; loot
+economy design 6.3) **(change LE-2; M1 on floor 1, M2)**; a camp channel entry reads the
+Depth column at floor N+1 (10.4, change LE-6). **A record's `value` equals its tier's budget
 exactly** (curse cost excluded), so rarity always means the same amount of
-power. **(lead's call)** The `props` ranges apply to gear; a use-only
+power. **(lead's call)** **Later:** a cursed record keeps its deck tier
+for value, price, Sell and Scrap while its benefit is authored to the next
+tier's budget (13; loot economy design 8.5) **(change LE-22, Later)**.
+The `props` ranges apply to gear; a use-only
 record meets 19.1 rule 1 with its `use` (consumables design 9.1).
 **(change CN-6)**
 
@@ -1087,6 +1139,16 @@ record meets 19.1 rule 1 with its `use` (consumables design 9.1).
   value is that tier's budget plus the authored property's value. It is
   never cursed and carries **no cost add**, because bosses are validated by the
   boss guards (enemies 6.5 scope) (change I-9). "Legendary" is not used.
+  "The floor's top allowed tier" reads as the top tier that has a legal
+  record for the signature's category, and signatures are exempt from the
+  Very rare `perFloorMax` **(reading, change LE-3; pending the items
+  owner's confirmation; if refused, a floor whose field deck holds a Very
+  rare draws its signature at Rare plus the authored property; loot
+  economy design 6.3, 18.2; M2)**. **Floor 5 (agreed 2026-11-22, Q1):** the
+  final boss still carries and uses its signature, but on death it drops
+  as a **Memento**: a run-record item card with full stats and a
+  premise-neutral caption, 0 VP, shown on the victory screen and the run
+  record only (loot economy design 6.11). **(change LE-5; M2)**
 - **Quality**, used by duplicate rerolls ("equal or better quality",
   enemies 15.3), is (rarity tier, then value). A higher-tier item of an
   owned base is therefore a legal draw (change I-12).
@@ -1259,6 +1321,10 @@ is original, so it carries no `srd` flag.
   carrier applies only the benefit, so its cost add uses the benefit-only
   value. Hover shows "Carries: X" with **no curse mark**: finding it is the
   party's Arcana job.
+- **Curses at a discount (change LE-22, Later):** a cursed card keeps
+  its deck tier T for VP, price, Sell and Scrap; its benefit is authored
+  to T+1's budget and the curse pays the difference. Never on a Dream's
+  Due (loot economy design 8.5).
 - Once known, a curse shows a cursed badge everywhere.
 
 ## 14. Heirlooms (M3)
@@ -1273,7 +1339,8 @@ is original, so it carries no `srd` flag.
 - Flags: `heirloom`, `unsellable`, `noSteal`. Never cursed. Outside the
   floor loot budget. Its value is for display only. It cannot be bartered.
 - It **does not consume its family's cap**, but it **does block duplicate
-  bases** (it counts as owned).
+  bases** (it counts as owned), and it counts as party-owned for the
+  Dream's Due (loot economy design 6.12; change LE-19, read; M3).
 - Left in leftovers, it is lost at the stairs, never scrapped. The profile
   keeps the template.
 
@@ -1314,7 +1381,7 @@ is original, so it carries no `srd` flag.
 | k | **k = 1, provisional** (12.7) | Generic; the simulator owns the number |
 | Stacks of tonics and potions | One stack per belt or pack slot, per-kind `stackMax` *(illustr. 3)*; gear never stacks | Consumables |
 | How supply uses slots | **None.** A party counter, settled cap 3 (5.3) | Generic (done) |
-| Coin, salvage, prices, stash, selling | Coin: yes. 15.7 salvage sized against found coin (I-11). Prices from value and the hero's Leadership. Sell 40% and Scrap 10% *(illustr.)*. No stash. (Section 10) | Generic; consumables (pegs) |
+| Coin, salvage, prices, stash, selling | Coin: yes. 15.7 salvage sized against found coin (I-11). Prices from value and the hero's Leadership. Sell 25% (change LE-9; M2) and Scrap 10% *(illustr.)*. No stash. (Section 10) | Generic; consumables (pegs) |
 | Rarity tiers ("avoid flat +N") | SRD tier names as value budgets, never a +N ladder (12.5) | Generic (done) |
 | Identification flow | Section 11 | Generic (done) |
 | Cursed carried items (Clinging) | **Yes,** a carrier may hold one, applying only the benefit; **unmarked** on hover (section 13) | Curses (Later) |
@@ -1428,7 +1495,10 @@ are unit conditions.
 - New item events: `ItemCreated`, `ItemTaken`, `ItemMoved`,
   `ItemEquipped`, `ItemUsed`, `ItemSplit`, `ItemMerged`, `ItemClaimed`,
   `ItemRevealed`, `ItemLeft`, `ItemSold`, `ItemBought`, `ItemScrapped`,
-  `ItemDestroyed{reason: usedUp | lost}`, `ItemRecharged` (camp, and Later
+  `ItemDestroyed{reason: usedUp | lost | dreamedAway}` (`dreamedAway`: an
+  unchosen option of an offer set dissolving when the choice resolves;
+  loot economy design 6.3) **(change LE-4, M2; change LE-21, the Twin
+  Coffer, M3)**, `ItemRecharged` (camp, and Later
   the trader), `ItemReturned` (Disarmed, Later); Later `ItemBartered`.
 - Consumable events (consumables design 18.4): `ItemUsed` gains `mode:
   self | adjacentAlly | thrown | inClass | outOfClass`; new
@@ -1458,6 +1528,12 @@ are unit conditions.
   fixed at floor generation on the loot stream, and trader presence and
   stock count on the dungeon stream (both always drawn, 10.9), so kill order, save and resume, and inventory choices can
   never change what drops or what is for sale.
+- The loot plan is drawn on the keyed `lootPlan` child of the loot
+  stream (enemies 10.5 step 3a); coin lumps, salvage shares and the Heavy
+  Purse are bound in the draw-free LootBind pass; floor N+1's generation
+  and the camp-exit save are one atomic write (10.4); a `LootLedger` per
+  floor is saved for reports and V13 (loot economy design 6.10, 10.1).
+  **(change LE-14; M1)**
 
 ## 19. Validation, testing and simulator
 
@@ -1636,6 +1712,11 @@ Tests:
 | Later: wand charges used per floor, with and without a Recharge trader | Recharge adds at most one wand's charges per trader floor |
 
 Trinket reports: see trinkets design 18.3 **(change TK-17)**.
+Loot economy reports (`kPC`, `SellShareOfCoin`, `CampCoverage` and the
+rest): see loot economy design 10.3; this table's reports are kept. On
+floors 4–5 the "≥ 70%" notables row will likely fail; `LateFindRelevance`
+≥ 50% is the working target there (loot economy design 6.5).
+**(change LE-24; M2)**
 Consumable, scroll, wand and talisman reports: see consumables design
 19.3 **(change CN-9)**.
 

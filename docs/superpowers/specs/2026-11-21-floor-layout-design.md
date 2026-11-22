@@ -773,7 +773,9 @@ design 6.2.1, V9 `FreeSpaceAfterClutter`).
 
 **Trimmed floors stay inside the RS 6.6 bands.** The third reward becomes
 a main-path-visible Alcove, so the content stays and the detour goes.
-This is not a count change.
+This is not a count change. **Its contents (LE-10, M2; loot economy
+design 6.9 item 2 (d)):** the visible Alcove is an SR1 socket and never
+takes the floor's top card, which goes on the elite or lair carrier.
 
 ### 6.4 Corridors and doors
 
@@ -978,6 +980,8 @@ zero. Joiners stay a real, player-caused experience.
   action: the next Circuit side room, else the floor is logged and the
   patrol is a Picket); not a layout rule until the FL owner rules.
 - Floor 1: includes main-path Q room 3 (CL-10).
+- The F5 Viaticum is never in a Circuit room (LE-5, read; loot economy
+  design 6.11; 6.11 here).
 - **Floors 2–5: the Circuit lives in the post-lair tail (told plainly,
   after the check).** It must hold the Forecourt and no other fight host,
   the lair is a cut vertex, and only one fight is route-avoidable, so no
@@ -1110,7 +1114,9 @@ zero. Joiners stay a real, player-caused experience.
     per floor) is **likely to fire**. The DH owner is handed that
     forecast now, so the DH 5.7 lever order is queued rather than found
     by the report: found supply 1 per floor first; limited vendor supply
-    stock back to the client; supply cap 2 last.
+    stock back to the client; supply cap 2 last. The approved 1–2 found
+    supply per floor is pre-wired as `foundSupplyPerFloor`, so lever 1 is
+    a tuning change only (LE-17, read; loot economy design 6.2).
   - The Forecourt is never guaranteed safe while the patrol lives. Once
     the party has defeated the patrol, the Forecourt is as restable as
     any cleared room, one step from the arena (the reading of Q2
@@ -1223,6 +1229,16 @@ Portal's squares belong to room n−3 and the arena-adjacent doorway
 squares belong to the arena, so trigger (b) ("any attempt to enter an
 arena square") covers the arena doorways. RS 3.4's glossary wording
 "room or corridor" becomes "room" (FL-5).
+
+**The Viaticum (F5; LE-5, M2; read; loot economy design 6.11, agreed
+Q1):** the F5 boss share sits in a main-path Plain container after the
+lair that is not in a Circuit room, not in a fight host (HE-4's
+exclusion) and not in the Forecourt; else a container in the lair room.
+Never a side room (the whole F5 boss share must not be missable), never
+a Furnishing (ROOM 6.3.4). It is counted on the lean route. **Pending
+(LE-5):** the FL owner confirms the room; if no such container can be
+placed, the fallback is the lair-room container, never a side room and
+never the Forecourt (loot economy design 18.2).
 
 ---
 
@@ -1826,7 +1842,7 @@ socket classes. Budgets count templates, then size classes.
 | Floor count line | Pacing information | **M2** (FL-20) |
 | Overlook (mapped layer) | A planning aid | **M3** (needs segment 10's mapped layer; Yield prefers unmapped rooms) |
 | Chute (directed edge) | Spurs with no walk back | **M3** (pathfinder testing cost). **Pending request (HZ-23):** Plunge as a Chute skin (hazards design 6.10). **Pending request (TL-41; M3):** segment 5's relocation traps (in combat, same room only; the Supper's Dumbwaiter Drop out of combat to its linked scullery) wait for the ability model's teleport rule (ABL 8); fallback Prone in place (traps and locks design 6.3, 7.8) |
-| Strongroom spur | Fight, steal or pick for one reward | **M3**, floors 2–3 only. **Pending (TL-29; M3):** segment 5's Wager room may take this Site (traps and locks design 6.15); the FL owner's call, not yet ruled |
+| Strongroom spur | Fight, steal or pick for one reward | **M3**, floors 2–3 only. Its reward socket is rank SR4 (LE-10, M3; loot economy design 6.9). **Pending (TL-29; M3):** segment 5's Wager room may take this Site (traps and locks design 6.15); the FL owner's call, not yet ruled |
 | Drop-bar doors (the party bars a door; locked for monsters) | Real joiner cuts | **M3**, Gaol only, after SH-18 and the Shade owner. They create safe rest cells against ability 15.1, so they return to the client before they ship **(new lead's call)**. If adopted, segment 5 recommends M3 with the anti-rest guard: monsters force it at 10 + the dropper's Athletics (loud 6), a patrol whose Circuit hits it forces it, and it never satisfies a short rest's "no aware hostile" by itself (TL-33; traps and locks design 6.12) |
 | Way Back (Stairhead Latch) | A cheap post-boss return | **M3**, built off by default |
 | Spyhole / Peer | Unit information without line of sight | **Rejected:** strains decided symmetric fog; Grille + Listen cover it |
@@ -1994,7 +2010,12 @@ public-rule display). The floor-1 card omits the secret count, so the
 floor-1 Gaol or Wake secret is a find, not a chore (lead's call, as
 proposed; Q3 kept it). From floor 2 segment 5 adds "traps found: k ·
 open Hunch zones: h", with no total (TL-9, M2; traps and locks design
-6.4).
+6.4). **The line gains a Treasure count field (LE-15, M2; loot economy
+design 8.2):** "treasures: k / n", field notables found of field
+notables (containers, secret caches, carried; plus the Viaticum on
+floor 5); counts only, never locations. On floor 1 the secret cache is
+excluded, so a found floor-1 secret-cache notable raises neither k nor
+n and shows as "+1 secret".
 
 ---
 
