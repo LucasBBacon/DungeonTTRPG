@@ -1299,6 +1299,13 @@ bought, never moves in combat, `treatProof` Scarred.
 - **Traps (lead's call; change TL-19; M2):** this rule is unchanged.
   Floor 1 places no trap in main-path rooms 0–1 and no damaging trap in
   rooms 0–2, mirroring it (traps and locks design 6.19).
+- **Encounters (agreed, encounter placement Q1; change EP-2, EP-11;
+  M2):** this rule is unchanged. Party surprise is read per side: the
+  party is Surprised only if no party unit has noticed any hostile unit
+  taking part in that combat, and this rule's exemption is checked in
+  the same step (encounter placement design 6.8.2). A floor-1 lurker
+  never uses Ambush Strike, and floor 1 places no lurker or ambush in
+  rooms 0–2 (encounter placement design 6.17).
 
 ### 17.2 What the telegraphs compute
 
@@ -1313,7 +1320,10 @@ end), it replays the event log to that point and recomputes it
 ### 17.3 Hero danger band
 
 Recomputed after every command, **only while `combatActive` is true**
-(20.5); out of combat no band is shown.
+(20.5); out of combat no band is shown. *Recorded (change EP-41; M3, a
+later client decision):* an approach band out of combat; until the
+client rules, this sentence stands (encounter placement design 6.20,
+9.1).
 
 - **Inputs:** each visible enemy whose threat reach covers the hero before
   the hero's next turn, using **known** kits only (seen at-wills, seen
@@ -1329,6 +1339,13 @@ Recomputed after every command, **only while `combatActive` is true**
 - **Unknown kits:** a visible enemy with an unseen kit adds nothing to the
   number and sets an "unknown threats" marker on the band. It is never
   estimated.
+- **Seen lurker tells (agreed, encounter placement Q3; change EP-14;
+  M2):** a tell that has been in a party unit's line of sight counts as
+  a known threat using the lurker type's card; a marked lurker counts
+  fully; a tell nobody saw adds nothing. Reach is taken from the tell
+  square, never the lurker's: the hero is in reach whenever within 6 +
+  the lurker type's move + its reach of the tell square. No hidden
+  position is read (17.2) (encounter placement design 6.20).
 - Shown on the portrait and the initiative bar; the tooltip gives the
   exact % and "known threats only". Companions show "can be Downed" on the
   same basis.
@@ -1338,7 +1355,8 @@ Recomputed after every command, **only while `combatActive` is true**
 1. **Reach:** an enemy threatens the hero if a path from its square to a
    square from which a known ability reaches the hero costs at most its
    speed (no Dash), over current occupancy and known terrain. Opportunity
-   attacks on its way are ignored.
+   attacks on its way are ignored. A seen lurker tell is measured from
+   the tell square, as above (change EP-14).
 2. **Threat list:** every reaching enemy's best-damage known ability
    (one use per enemy turn, its whole turn as enemies 6.4 counts it);
    announced joiners and boss actions due before the hero's next turn;
@@ -1492,7 +1510,9 @@ path.
 The heal preview shows overheal, Withered and other blocks, and "cannot
 lift Downed". The rest screen shows, for each member, HP after get-up,
 Treat and Recovery, plus the supply left and the patrol warning
-**(settled)**.
+**(settled)**. *Pending request (change EP-16; M2; the DH owner rules):*
+the rest preview adds Alerted, Searching and Pursuing groups to the
+seen patrol routes (encounter placement design 6.20, 6.21).
 
 ### 17.12 Death recap and floor-entry card
 
@@ -1806,7 +1826,12 @@ for tick batches, whose chain already ran where the damage landed.
    real surprise rule (enemies 12.2 and the turn order), or approved
    content fails a guard it claims to pass. Re-run the enemies 10.2 worked
    examples on the core's actual rule, with 17.1 applied, before any row is
-   written.
+   written. **The core's rule is the per-side reading** (agreed,
+   encounter placement Q1; change EP-2; recorded in M1, in effect in M2;
+   encounter placement design 6.8.2): the party is Surprised only if no
+   party unit has noticed any hostile unit in the combat. **No lurker
+   ambush ships before this step passes;** if it fails on the per-side
+   reading, only the Waylay ships and the step 4 levers apply.
 2. **The reference rows stay verbatim,** including the round-1 row at
    < 0.5%. No row is loosened.
 3. **New lowest-legal-hero rows,** at lowest HP (tier 6, Con −1)
@@ -1819,8 +1844,9 @@ for tick batches, whose chain already ran where the damage landed.
      instead, which is the stricter test.
 4. **"Before the hero's first turn"** replaces "round 1" for
    ambush-eligible templates **only after** step 1 shows the 10.2 worked
-   examples pass. If they fail, the levers are floor-1 ambush and lair
-   budgets, never a looser threshold. The 17.1 rule is not a lever for the
+   examples pass; under the per-side reading those rows then bind only
+   fights containing Hidden units (change EP-2). If they fail, the
+   levers are floor-1 ambush and lair budgets, never a looser threshold. The 17.1 rule is not a lever for the
    room-2 lair: it covers main-path rooms 0 and 1 only.
 5. **Floor-1 rows (new; lead's call):**
    - **Floor-1 solo boss, expected damage to the hero per round** (its
@@ -1959,7 +1985,8 @@ parties on floors 2–5.
 - Hero deaths by floor, cause (crit, focus, own area, detected trap,
   surprise) and band at the previous turn end, each split by whether a
   save (Death-warded or the phial) was armed. **Deaths from Safe should
-  be about 0.**
+  be about 0,** ambush deaths included: seen lurker tells count in the
+  band (17.3; change EP-14; M2).
 - **Danger calibration:** among hero turn ends shown Deadly in party
   fights, the share that ended in hero death that round; and the share of
   party-fight hero turn ends shown Deadly at all (target ≤ 25%

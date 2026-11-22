@@ -936,6 +936,12 @@ target, which LS5 draws from the Blueprint's `bypassTargets[]` (6.8).
   floor 2 ≤ 1; floors 3–5 ≤ 2; the Silk and the Carnival +1. Each
   grammar's `nearPairsMax[floor]` lies inside `layout.nearPairsMax[floor]`
   (V8).
+- **Pending requests (EP-22, M2; encounter placement design 6.12):**
+  near-pair partners at the far end (10) of the 9–10 band, behind a
+  closed door where layout allows; and, only if `ChainPullRate` still
+  misses after segment 6's own levers, dropping the Silk and Carnival
+  +1 on floors 4–5 or the floors 3–5 cap. Not rules until the FL owner
+  rules.
 - A Dormant-partner variant (half radius) is also allowed.
 
 **Gaol shut-door pairs (the enemies owner's call):**
@@ -964,6 +970,13 @@ zero. Joiners stay a real, player-caused experience.
   antechamber; on floors 2–5 **always** the antechamber **(agreed, Q2)**.
 - Includes ≥ 1 `coverRoom` (segment 3 gives it cover) and no fight host
   other than the patrol's own.
+- **Pending request (EP-17, M2; encounter placement design 6.9):** a
+  **cover-room window**: the Circuit `coverRoom` holds ≥ 2 Hide spots
+  (RT KP4) with line of sight to a lane square within 4, out of the
+  lane's sight from the previous waypoint; on floors 2–5 in a Circuit
+  side room, never the Forecourt. Segment 6's V12 checks it (failure
+  action: the next Circuit side room, else the floor is logged and the
+  patrol is a Picket); not a layout rule until the FL owner rules.
 - Floor 1: includes main-path Q room 3 (CL-10).
 - **Floors 2–5: the Circuit lives in the post-lair tail (told plainly,
   after the check).** It must hold the Forecourt and no other fight host,
@@ -975,7 +988,9 @@ zero. Joiners stay a real, player-caused experience.
 - Layout emits waypoints and a start phase that keeps the first 20 ticks
   outside rooms 0–2 (DH-28). The patrol's waypoints and pauses in the
   Forecourt sit on its far side from the arena Arches **(lead's call,
-  after the check)**.
+  after the check)**. The patrol's marching order on the route is
+  segment 6's Patrol File (EP-18, a reading; M1; encounter placement
+  design 6.9).
 - **Isolation:** for each fight host k, under `hearingState(k)` and the
   proof state of 6.6, every Circuit square is at effective path > 8 from
   that host's start zone, the arena's included. This needs at least one
@@ -1070,6 +1085,10 @@ zero. Joiners stay a real, player-caused experience.
 - Every non-elite fight host has a non-door flee exit (LG12). RC3
   ("never moves a unit through a door") therefore stays literal, with
   "door" read as door kinds (3.4; told plainly).
+- **Deferred (EP-35, M3; encounter placement design 9.1):** segment 6's
+  Messenger (a skittish runner who runs for help) would need a flagged
+  exception to this anchor ranking; nothing changes until it is taken
+  up.
 - `CorneredRate` and `FrightenFleeSuccess` are reported by theme. If the
   Gaol or the Heart runs more than 15 points below the median, add flee
   exits there.
@@ -1148,12 +1167,27 @@ zero. Joiners stay a real, player-caused experience.
   3.8 min and 45 clicks for segment-5 content only; the whole floor
   still answers to the companions floor-time gate, with segment 5's
   binding cut order on a miss.
+- **Segment 6's line (EP-33, M2; told plainly; encounter placement
+  design 6.18):** beside TL-38's, ≤ +0.2 rounds per fight on average
+  and no net minutes at party 4 on floors 4–5 *(illustr.)*; activities,
+  chips and the Read card add 0 clicks, Listen costs are unchanged and
+  Hold the Hide is 1 click. On a miss, segment 6's cut order applies
+  before release: (1) no Crossfire or Kill Box on floors 4–5 guard
+  posts at party 4; (2) `maxRounds` 3 → 2; (3) halve the Waylay share;
+  (4) Revel and Bout start in Posted formation. The companions 7.4
+  levers stay untouched.
 - **Auto-walk at doors (lead's call, after the check):** auto-walk
   pauses at each closed door on its path. A trained party's passive
   Listen resolves there (FL-18). Auto-walk then opens the door and walks
   on, unless a group was heard, the party itself closed that door, or
   the far side holds a known un-engaged group; in those cases it stops.
   Each stop counts in `ExploreClicks`.
+- **Pending request (EP-17, M2; encounter placement design 6.9): Hold
+  the Hide** as an auto-walk entry: in the cover-room window only, once
+  per floor, 1 click; ticks pass until a patrol unit enters a party
+  unit's line of sight, any noticing roll, any group turns Alerted, or
+  20 ticks *(illustr.)*; the ticks count toward the clock, not as a
+  rest. Not a rule until the FL and ability 7.2 owners rule.
 - **Auto-walk and traps (TL-7, M2; traps and locks design 6.4):**
   detection runs after every square of party movement, and a new
   Revealed or Hunch result interrupts auto-walk. Auto-walk stops on the
@@ -1214,7 +1248,7 @@ to every theme:**
 
 | Theme (floor) | `topologyClass` | Door share *(illustr.)* | Open-room share | Mean corridor | Cycles | Near pairs | Compass toward the boss |
 |---|---|---|---|---|---|---|---|
-| Gaol (F1) | grid | 0.75–0.85 | 10% | 2 | 3–4 | 1 shut-door pair (or 1 near pair under the 6.6 fallback) | The Landmark clock of each room shows a later hour along the main path |
+| Gaol (F1) | grid | 0.75–0.85 | 10% | 2 | 3–4 | 1 shut-door pair (or 1 near pair under the 6.6 fallback); none on hooded-cot seeds (EP-13, M2; encounter placement design 6.17) | The Landmark clock of each room shows a later hour along the main path |
 | Kennel (F1; M1 subset) | beads | 0.10–0.20 | 50% | 8 | 2 | 1 horn | The painted moon over the lodge; shadows point to it |
 | Wake (F1, conditional) | courtyard | 0.45–0.60 incl. Drapes | 20% | 4 | 2 | 0 | Sconces lit along the main path |
 | Choir (F2–3) | comb | 0.33–0.43 | 30% | 1 | 2–3 | 1 | The water line rises toward the quire |
@@ -1276,7 +1310,10 @@ wings joined through junction guard rooms. Blueprints:
   corridors pay back the door-opening time.
 - One shut-door pair (or one near pair; 6.6) makes the `signatureFeature`
   playable with the close verb. **Told plainly:** shutting mutes and
-  delays; it does not cut a path unless locked (segment 5).
+  delays; it does not cut a path unless locked (segment 5). **On
+  hooded-cot seeds (EP-13, M2; told plainly; encounter placement design
+  6.17)** the floor has no shut-door pair, and the Law shows through the
+  door network and the bell tripwires.
 - The keyring cell cache sits within 1 room of the Turnkey's homeRoom;
   it never gates the main path.
 - Tripwire-eligible thresholds on the Circuit and the Bypass go to
@@ -1299,7 +1336,7 @@ checks both) **(lead's call, after the check)**:
 | 1 (the first G) | Doors isolate |
 | 2 (Gb) | The quiet bypass |
 | 3 (Q) | A padlocked cache seen through a Grille (keys) |
-| The guard post adjacent to the lair | The shut-door pair |
+| The guard post adjacent to the lair | The shut-door pair **or** the hooded cot, one per seed (EP-13, M2; encounter placement design 6.17) |
 | The lair | The lair |
 
 The shut-door pair is self-teaching: its door starts propped, and the
@@ -1894,6 +1931,11 @@ the check):**
   Trained Perception adds the size band, plus "passing" if the patrol's
   deterministic waypoint schedule brings it into that room within the
   next 20 ticks.
+- **Pending requests (EP-9, EP-12; M2; encounter placement design 6.7,
+  6.8.6):** trained Perception would also add the group's activity word
+  ("dice", "snoring", "chanting") beside the size band, and, when a
+  Waylay lies beyond, which Portal it watches; not rules until the FL
+  owner rules (the activity word also with ability 7.2 and segment 10).
 - Once per door per floor (heard doors are marked).
 - Hidden lurkers are never reported.
 - Feeds the enemies 12.4 step-6 hearing outline. Information only.
@@ -2152,7 +2194,9 @@ build-time structural proof; anything else is a report:
   on its host or an equivalent host. Segment 3's Clearway extends it:
   nothing that blocks movement is placed on, or moved onto, a Clearway
   square, and V9 proves the no-piece part at build time (TR-17; room
-  terrain design 6.2.2, 11.2).
+  terrain design 6.2.2, 11.2). Segment 6 reads it as written: no unit
+  starts on a Clearway square (EP-24, a reading; M1; encounter placement
+  design 6.6.5).
 
 Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
 
@@ -2254,7 +2298,7 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
 | 3 Room shapes and terrain | Template footprints, start zones, `partyEntrySquares`, the `coverRoom` tag, wet/dry/web/slick/bile region tags, `lessonTag`, `protectedSquares` and `protectedSightLines`; the terrain step's place in the order (after LS13, before enemies 10.5 step 2; 6.1) | The room-terrain system and the knock-into system (TR-1; room terrain design 13): interiors, in-room terrain squares and placement, cover props and **the weapons 9.5 cover decision** (with the per-grammar range-band arm, including cover through Grilles if sight-only is reopened), DEP-A1, Wrecker walls and edges, narrow ground toward armour 7.3's ≥ 3, the Choir and Carnival entry caps |
 | 4 Hazards | Region tags; "no hazard" Hinge and Postern squares (radius filled: no hazard on the square or its 8 neighbours, no Void within 2; V10 `HingePosternClear`; HZ-3, hazards design 6.2.2); no crossable bridge into the Sanctum (no Void or crossable hazard region; V10 `NoSanctumBridge`; HZ-3) | Floor-scale hazard density (inside segment 3's caps), bile, drop hazards, Teetering counting, vents (TR-1; room terrain design 13); the hazard / trap / terrain line: an open trapdoor is a Void, a closed one that springs is a trap; a horn post is a Cord, a horn tripwire a trap; the sprung twins stay segment 5's and boss counterplay segment 9's (HZ-1; hazards design 6.1) |
 | 5 Traps, locks, checks | Locked, Hairline, Squeeze, Latch and Door slots; `PortalMinimums`; trap sockets within 6 of fight hosts, and from floor 2 one before the first fight (room 0 or the 0→1 Portal, Shade DEP-S1(a)), the 0→1 Portal socket filled by a Door catch or a threshold wire outside the Portal square (TL-20; traps and locks design 6.20) | DCs (the ladder, TL-2); traps and trap records (DEP-S1; TR-1; taxonomy, tells and records, TL-10; traps and locks design 6.2, 6.3, 11.1); keyring and cell caches; sphincters; **the party door verbs as rules (FL-8)**; the Squeeze check on the keyed `checks` stream (TL-3) and its failure cost; Drop-bar (M3); Wedge (SH-18); Hairline check variants |
-| 6 Encounter placement | Slot hosts, `equivalentHosts`, the Circuit with phase, the Bypass, near pairs, matrices, start zones, `nearStart`, `skittishShape` / `ledShape` | Enemies 10.5 steps 2–11 (step 9 moves only within a host or to an equivalent host, 6.1), `placementRules`, the reinforcement and Dormant partners for near pairs, Rival Party fit in elite templates |
+| 6 Encounter placement | Slot hosts, `equivalentHosts`, the Circuit with phase, the Bypass, near pairs, matrices, start zones, `nearStart`, `skittishShape` / `ledShape` | Enemies 10.5 steps 2–11 (step 9 moves only within a host or to an equivalent host, 6.1), `placementRules`, the reinforcement and Dormant partners for near pairs (encounter placement design 6.12), Rival Party fit in elite templates (a Later stub, EP-34; encounter placement design 6.14) |
 | 7 Loot | Container, Alcove and secret-cache sockets; HE-7 and HE-4 reservations | Contents and channel counts |
 | 8 Non-combat rooms | Q rooms, the floors 2–5 antechamber micro-event socket, trader and Pledge tags, signature rooms | Fills, trader, shrines, Dream Fragments |
 | 9 Boss rooms | The 2×2-cell socket, two dog-leg Forecourt Arches ≥ 5 apart, the Bossgate, start-zone depth ≥ 9, the symmetric `AntechamberScreened` (6.11), the arena pull-back zoom bound (8.1) | Interior, counterplay feature, phases, Keepsake arena dressing; boss tuning with a patrol joiner (FL-21 (e)) |

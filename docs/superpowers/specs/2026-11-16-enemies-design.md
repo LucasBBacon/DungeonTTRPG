@@ -490,6 +490,15 @@ round-1 row.
   evaluated at every reachable party size and weight, down to the
   shortfall minimum (10.1); the floor-1 solo round-1 row also applies to
   solo parties on floors 2–5. **(told plainly)**
+- **Pending request (EP-30, M1 static parts, M2 the rest; encounter
+  placement design 6.2, 9.2, 10):** the rows are enumerated over placed
+  geometry (formations, start squares and Billets on), beside segment
+  6's own `LandingShooters` (1/2/2/2/2 on the entry lane) and its F4–5
+  fill cap (a +2-level unit on a back or overwatch position fills at ≤
+  925‰); a pre-existing gap is flagged: the toy's F4–5 control fights at
+  maximum fills with +2 units showed a 1.8–3.4% round-1 death chance
+  against the < 0.5% row; this owner rules the gap; not yet ruled.
+  **(told plainly)**
 - **Armour (change AR-20; armour design 11, items 1 and 2):** the guards
   are also evaluated at the lowest legal party AC as armour design 11
   item 2 defines it, and a failure fails the build. From M2 each guard
@@ -830,7 +839,9 @@ The single counting rule for "2 conditions per enemy type". **(change C-2)**
   turns out of combat, and `readyAt` already guards the next fight's
   opening. `uses` never reset. **(lead's call; change A-2, A-4)**
 - `uses:1` signature moves are flagged as openers. On floor 1, no limited
-  ability fires in a surprise round.
+  ability fires in a surprise round, and a floor-1 lurker never uses
+  Ambush Strike in any round (its opener is its at-will at 150%, 17.1)
+  **(change EP-11; encounter placement design 6.17; M2)**.
 - **Later (change LM-1; Arcanist design 9.3):** a `cooldown.delay` hook
   (the Loremaster's Unpick pushes a revealed `cooldown` or `readyAt` back),
   applied when the Loremaster ships.
@@ -886,6 +897,17 @@ unit plus the minion cap, the remainder spent by a deterministic table
 `SoloBudgetMonotone` checks its fill and expected round damage are
 non-decreasing in weight (companions design 7.7). A companion
 lost mid-floor does not lower the floor's budgets. **(lead's call)**
+The solo table gains a formation column (Picket Line, Crescent or Door
+Line with a front standard; a solo shooter is a minion-cost unit), and
+`SoloShapeMonotone` extends `SoloBudgetMonotone`: as weight rises the
+standard's level never falls, threat lanes at fight start never
+decrease, and front positions ≥ back positions. Formations declare core
+and growth positions, filled core first. A solo hero on floors 2–5
+meets no ambush form (no Cuckoo, Mousetrap or Waylay) and no Kill Box,
+Crossfire, Pincer or Bait and Nook; `billetScale` is 0 for a solo hero
+on floors 2–5 and 500‰ on floor 1. Every placement gate on party size
+reads `partyCountAtGeneration` **(change EP-19; encounter placement
+design 6.3; M1 static parts, M2 the rest)**.
 
 **Encounter budget** = weight × band% × depth% × ladder% ÷ 1,000,000,
 with `FloorDiv` (3.1). **(change M-4)**
@@ -900,8 +922,14 @@ with `FloorDiv` (3.1). **(change M-4)**
   per-floor **(change RT-21, client, M3; run structure design 9.1)**.
 
 The generator fills each encounter to **85–100%** of its budget, never
-over: from the fill minimum of 3.1 (⌈85%⌉) up to the budget. An **ambush**
-uses 85% of its band.
+over: from the fill minimum of 3.1 (⌈85%⌉) up to the budget. Inside that
+window the fill target rises along the main path: `fillTarget‰ = 850 +
+FloorDiv(150 × mainPathIndex, max(1, n − 1))`, the minimum accepted
+cost, with the lair at ≥ 925‰ and the elite room at 950–1000‰ *(illustr.)*
+**(change EP-20; encounter placement design 6.2; M2)**. A **Mousetrap**
+Ambush uses 85% of its band (`FloorDiv(guard × 85, 100)`); the Cuckoo and
+the Waylay fill at their full band **(change EP-10; encounter placement
+design 6.8.1; M2)**.
 
 ### 10.2 Worked examples
 
@@ -941,12 +969,37 @@ On every floor:
 - every encounter of 3 or more units (counted whole) has at least 2
   distinct roles, except Pack, Skirmish Screen and Scavengers; Picket and
   Sleeper are exempt **(lead's call)**;
-- on floors 1–3, an encounter with a hard-control source or an ambush has
-  no Quarry declarer (11.4).
+- on floors 1–3, an encounter with a hard-control source or an ambush
+  (the Waylay included) has no Quarry declarer (11.4) **(change EP-12;
+  encounter placement design 6.8.1; M2)**;
+- an **ambush** (the Ambushes per floor column) is one of four forms: the
+  **Cuckoo** (a standard bait + 1–2 lurkers; full guard band; floor 1
+  solo, or floors 2–5 at party ≥ 2), the **Mousetrap** (a bait cache + 1
+  lurker, 2 from floor 3 at party ≥ 3; 85% band; floors 2–5, party ≥ 2,
+  ≤ 1 per floor and ≤ 2 per run), the **Waylay** (an ordinary Stationary
+  group in the Kill Box; full band; floors 2–5, party ≥ 2) and the
+  **boxed lurker** (M3), which counts first. Only the Mousetrap can
+  Surprise the party. The cap is a maximum, never a quota **(change
+  EP-10; encounter placement design 6.8.1; M2)**;
+- the **fairness bundle** holds for every placed encounter: `FirstSight`,
+  `LandingShooters` (1/2/2/2/2 on the entry lane), `StartArc`,
+  `BacklineReach`, `LeaderReach` and `AuraCover`, `CounterPresent`,
+  `CounterCost`, the Kiter doorway lane, the LOS breaker, `LurkBlind`,
+  `AmbushStandoff`, `TellSight` and KP5 (encounter placement design 9.2,
+  6.8.3) **(change EP-8; M1 static parts, M2 the rest)**.
 
 ### 10.4 Floor plan and guarantees
 
-A floor holds 4–6 fights plus the boss **(settled)**:
+A floor holds 4–6 fights plus the boss **(settled)**. **M3:** floors 2–5
+may also hold at most one **Annex** group, outside the slots: Dormant
+(Sleeping Ward; a boxed lurker keeps its traps and locks 6.14 state),
+one extra encounter budget at the patrol band at its
+host room's level, deducted from no slot, inside the cluster budget, the
+joiner cap and the 6.4 rows, paying 0 experience (16), never a lurker
+(except as the boxed lurker), elite or leader on floor 2; it serves
+exactly one of the boxed lurker, the Wager guard, the guarded Dare
+garrison or the Tattle beyond-room, in that priority **(change EP-26;
+client agreed 2026-11-21, Q2; encounter placement design 6.13)**:
 
 | Slot | Count | Placement |
 |---|---|---|
@@ -1002,7 +1055,16 @@ uses its one near pair.
 most 2 times per floor (Picket is exempt on floor 1, where the solo budgets
 allow little else; **lead's call**); each type in at most 3 encounters per
 floor (the theme's minion type is exempt); the theme's signature type
-appears at least twice.
+appears at least twice. Also no (template, battle formation) pair twice
+in a row on the main path; each battle formation at most 2 times per
+floor; at least 2 activity kinds per floor when 2 or more non-patrol
+awake groups exist; all are hard assertions **(change EP-20; encounter
+placement design 6.2; M2)**.
+
+**Later (EP-38, client only; encounter placement design 9.1):** the
+Errant, an out-of-depth elite walking a side loop, telegraphed from
+floor entry; its "deaf to the din" would change main design 4.3's
+joining, so it comes back only as a client decision; not adopted.
 
 ### 10.5 Generator procedure
 
@@ -1051,7 +1113,12 @@ Deterministic:
    The boss item goes to the boss room.
 5. **Template choice** (dungeon stream): pick per slot, weighted,
    respecting the no-repeat rules. A carrier room's template must include
-   a slot whose role and `usableBy` fit its item.
+   a slot whose role and `usableBy` fit its item. The weights read the
+   formation tier and the slot's position (the first main-path fight
+   FT1; the lair its highest legal tier; from floor 2 the last guard
+   post before the Forecourt FT2 or FT3); one draw picks the first of a
+   ranked list **(change EP-20; encounter placement design 6.1, 6.2;
+   M2)**.
 6. **Fill** each slot against *budget − the item's cost add*, from the
    fill minimum to the budget (3.1), honouring `earliestRoomLevel` and the
    caps. Candidates are tried in a fixed order. The boss is not drawn
@@ -1062,7 +1129,13 @@ Deterministic:
    Herald design 7.16; change RT-3; run structure design 6.4 R-SEED-3)**.
 7. **Compose:** affixes, overlay, loadout; freeze each unit's `cost`.
 8. **Validate.** On a failure, try the next candidate, up to K tries, then
-   fall back to a Picket of the theme's cheapest legal type.
+   fall back to a Picket of the theme's cheapest legal type. Validation
+   includes V12 `EncounterPlacement`, and the fallback chain is: the
+   next-ranked formation for the same template, then the next template
+   candidate, then the theme's cheapest legal Picket in Picket Line, then
+   that Picket placed role-blind under the hard constraints only; every
+   retry is logged **(change EP-32; encounter placement design 6.1, 11.2;
+   M1 static parts, M2 the rest)**.
 9. **Cluster pass:** downgrade or move the cheaper neighbour when the
    cluster budget is exceeded. A move stays within the group's slot host
    or goes to a host layout lists as equivalent for that role
@@ -1070,13 +1143,19 @@ Deterministic:
    backstop to layout's `HearingGap` **(change FL-3, FL-11; floor layout
    design 6.1, 6.6)**.
 10. **Awareness:** set states, patrol routes, lurker placement rolls and
-    ambush tells.
+    ambush tells. Lurker placement Stealth takes no stream draw: it is a
+    keyed hash (12.2) **(change EP-3; encounter placement design 6.8.5;
+    M2)**.
 11. **Experience:** fix each group's experience shares (16).
 
 Every step except 3 draws only from the dungeon stream (the floor's
 substream keyed by floor index; **change RT-3**), in the order listed.
 **(lead's call)** Step 1a draws only from that substream's `layout`
-child (floor layout design 6.1) **(change FL-3)**.
+child (floor layout design 6.1) **(change FL-3)**. Steps 2 and 4–11
+(dungeon generation segment 6) draw only from that substream's
+`encounters` child, after the `traps` pass and before `trapsResolve`,
+with fixed draw counts and dummy draws **(change EP-1; encounter
+placement design 6.1; M1)**.
 
 Content test: for every theme × floor in its range × party size 1–4 (at
 every reachable party weight, down to the shortfall minimum, 10.1;
@@ -1110,7 +1189,9 @@ M2.
 - **Readability:** one visual faction per theme; one signature mechanic
   expressed through existing rules (for example, webs and Restrained); on
   floor entry, a party member trained in Lore sees the roster's types and
-  roles.
+  roles. **Pending request (EP-28, M2; encounter placement design
+  6.20):** the preview also lists the theme's formations and activities
+  by name; not yet ruled.
 - **Next-floor line at camp:** every party sees the next floor's theme and
   its non-fearless band ("Next floor: theme X, about Y% non-fearless"),
   class-blind and information only **(change HR-23; Herald design 5.7)**.
@@ -1163,7 +1244,27 @@ Trapwright ships (Shade design 14).
 
 **Pending request (FL-21 (c), M2; floor layout design 15):** a
 doorway-hold AI term, against parties holding a chokepoint doorway; a
-request to this owner, not yet a rule.
+request to this owner, not yet a rule. The Billet term below (EP-6) is
+offered as its answer.
+
+**Pending request (EP-6, M2; encounter placement design 6.6.3):** the
+**Billet term** specifies the "hold" and "cohesion" half of the M2
+"Cohesion, body-block, area spread, hold" row: while the group's
+formation holds, each candidate end square inside the unit's Billet hold
+squares gains, once, `billet%` × `billetBase` × `billetScale`
+(`billetBase` frozen per unit at composition, `billetScale` frozen per
+group; weights *(illustr.)* Holder 40, Commander 30, Kiter 25, Raider 15
+until its first attack, Charger 10, all others 0); the **invariant-7
+guard** (when any candidate this turn attacks or deals damage,
+candidates without an action lose the bonus); the **Stung rule** (a
+unit's Billet weight is 0 for the rest of the fight once it takes damage
+from a source it cannot answer from its hold squares; melee positions
+also when no ally can damage that source); a **fall-back square**
+destination bonus for Kiters and Commanders on a break, at ≤ 50% HP
+(Kiter) or when adjacent to a noticed party unit; weights 0 after a
+formation break (6.6.4 of that design). Invariants 1, 4, 7 and 10 (11.3)
+are kept; not a leash. Not yet ruled. If refused, formations ship as
+static starts with no AI term (encounter placement design 19.2).
 
 **Pending request (TR-15, M2; room terrain design 6.9):** terrain terms,
 not yet ruled: `NoCheapKill` with the exact text of room terrain design
@@ -1255,11 +1356,19 @@ These hold on every difficulty tier and are asserted by property tests:
 3. Focus spread applies as above.
 4. No knowledge of hidden positions.
 5. Reinforcements are announced at least 1 round before they arrive.
+   Asserted at runtime as `ArrivalThroughPortal`: every non-Hidden unit
+   entering a room containing a party unit enters through a Portal after
+   its footsteps; no generated rest, camp or backtrack threats and no
+   off-map reinforcements **(change EP-16; encounter placement design
+   6.12, 6.21; M1 static parts, M2 the rest)**.
 6. No limited abilities in floor 1 surprise rounds, no hidden lurkers in
    floor 1's main-path rooms 0–2, and the solo hero is never Surprised on
    floor-1 squares with main-path index 0 or 1 (death and healing design
    17.1). Main-path rooms are indexed from 0, the entry. **(change
-   DH-28)** Floor-1 Landmark ticks are not hazards and leave it unchanged
+   DH-28)** A floor-1 lurker never uses Ambush Strike, surprise round
+   or not, and the floor-1 ambush is a Cuckoo only, only in the role
+   order E G Gb Q L G F B **(change EP-11; encounter placement design
+   6.17; M2)**. Floor-1 Landmark ticks are not hazards and leave it unchanged
    (hazards design 6.1, 7.2–7.4; change HZ-19; M3). Floor-1 traps keep
    it: no trap in main-path rooms 0–1 and no damaging trap in rooms 0–2
    (traps and locks design 6.19; change TL-19).
@@ -1355,6 +1464,28 @@ then Searching, then Wary, with no healing and no refill.
 The Cutthroat's "unaware" set is Dormant, Stationary or Patrolling, never
 Alerted, Searching or Wary (12.2; Shade design 3.4) **(change SH-11)**.
 
+**Start states and activities** **(change EP-9; client agreed
+2026-11-21, Q4; encounter placement design 6.4, 6.7; M2)**: no new state.
+Each type carries `allowedAwareness[]` (19.1); a group's start state lies
+in its template's Awareness (17.4) ∩ every member type's
+`allowedAwareness[]`, so the same type can be on guard in one room and
+asleep in another. Each group's activity maps 1:1 onto an existing state
+through a posture (Posted and Busy are Stationary, Dormant is Dormant,
+Afoot is Patrolling) and changes no noticing value.
+
+**Pending request (EP-15, M2; encounter placement design 6.21):** the
+Wary row's "back at its post" reads "its Billet hold squares" (the
+Hedgehog: the group re-forms in its battle formation's defensive
+variant, facing the Portal where the party was last seen; a group that
+lost ⅓ of its members or its Keystone re-forms without Billets and
+watches every Portal); not yet ruled. If refused, Wary groups return to
+their start squares.
+
+**Deferred (M3; encounter placement design 9.1):** the Messenger (EP-35:
+a runner Rousing a target group to Stationary, a new Dormant→Stationary
+route here) and the Wake Order (EP-37: per-member Dormant waking); not
+adopted.
+
 ### 12.2 Noticing
 
 **(change M-2, S-6)**
@@ -1385,14 +1516,25 @@ Alerted, Searching or Wary (12.2; Shade design 3.4) **(change SH-11)**.
   otherwise Later) **(change SH-10; Shade design 8.1)**: a patrol that
   sees a corpse becomes Alerted to its square.
 - The 6- and 3-square bands use the same grid distance as ranges.
-  Noticing, lurker Stealth and Steal rolls use the **combat stream**,
-  in the order the triggers occur. **(lead's call)**
+  Noticing and Steal rolls use the **combat stream**, in the order the
+  triggers occur. **(lead's call)** Lurker Stealth uses a keyed hash per
+  roll, `H(floorSeed, unitId, "lurkStealth", band)` with band ∈
+  {placement, 6, 3}, d20 = 1 + (hash mod 20), replay-stable and
+  independent of draw order **(change EP-3; encounter placement design
+  6.8.5; M2)**.
 - **The party notices non-hiding monsters automatically on line of sight.**
   Only hiding monsters (lurkers) roll Stealth against the party's passive
   perception. They roll once at placement, and again only at the 6- and
-  3-square bands.
-- **Surprise** **(settled)**: a group noticed without noticing back is
-  Surprised. Joining groups are never Surprised and never Surprise.
+  3-square bands. At a band the roll is compared against the highest
+  passive Perception among party units with line of sight to the lurker;
+  with none in line of sight, that band is spent **(change EP-3;
+  encounter placement design 6.8.5)**.
+- **Surprise** **(settled)**: a monster group noticed without noticing
+  back is Surprised. The party is read per side: it is Surprised only if
+  no party unit has noticed any hostile unit taking part in that combat;
+  a marked tell does not count as noticing **(change EP-2; client agreed
+  2026-11-21, Q1; encounter placement design 6.8.2; recorded in M1, in
+  effect in M2)**. Joining groups are never Surprised and never Surprise.
   Exception: the solo hero is never surprised in floor 1's first two
   main-path rooms (death and healing design 17.1). **(change DH-29)**
 
@@ -1461,6 +1603,14 @@ radius reads the live hearing graph, each Portal in its current state
    not an ambush. Listen at a closed door feeds it (floor layout design
    9.2) **(change FL-18)**.
 
+Placement keeps this model unchanged and adds only its own levers and
+assertions (Dormant near-pair partners, `JoinedRangedShare`,
+`JoinedUnitsCap`, at most one placed call source per encounter,
+arrival-Portal arrows; encounter placement design 6.12; EP-22, a
+reading; M2). **Deferred (M3; EP-36; encounter placement design 9.1):** the
+Call Post, a bell rope or gong sounding noise 10 within these joiner
+rules; not adopted. The Errant (EP-38) is a Later client item (10.4).
+
 **Doors:** monsters open unlocked doors (1 square of movement) and never
 close or lock them. Locked doors stop monster paths, which is a Mechanics
 payoff. (Wedge and the force-door term, change SH-18, apply when the
@@ -1518,6 +1668,14 @@ Further telegraphs, all **(lead's call)**:
   (M2).
 - Boss phase marks, resolve pips and the boss-action count on the
   initiative bar (M1 marks and pips; M2 boss actions).
+- The formation chip and the Keystone chip on the plate (never on the
+  model), and the public break triggers: Keystone lost, leader falls,
+  line crossed, Demoralised, a third of the group's members down
+  (counted in noticed members, never HP), the end of its third contact
+  round; on a break the chip reads "Line broken"; a chip names a
+  formation only once every member of its encounter has been noticed
+  (`ChipNoLeak`) **(change EP-7; encounter placement design 6.6.4, 6.20;
+  M2)**.
 
 ### 13.2 Announced boss signature moves
 
@@ -1682,7 +1840,11 @@ Perception, so guile grows with level. **(agreed)**
   13.4.
 - The preview (ability model 8.3) keeps using only what the party knows. An
   intent read is the one place the display shows the monster AI's own
-  output. **(change A-8)**
+  output. **(change A-8)** **Pending request (EP-28, M2; encounter
+  placement design 6.20):** a second place: the Encounter Read card shows
+  a group's Billet hold squares and fall-back square to parties with a
+  Perception-trained member (display only; the AI never reads whether it
+  is shown, invariant 10); not yet ruled. If refused, no hold overlay.
 
 ### 13.6 Rejected alternatives
 
@@ -2432,8 +2594,13 @@ Coated stay Later **(change CN-26)**. The original list:
 
 - patrol 70, guard post 100, lair 140, elite room 160, boss 200 (escort and
   reserves included);
-- ambushes pay their band's value even though they are filled at 85%;
+- a **Mousetrap** Ambush pays its band's value even though it is filled
+  at 85% **(change EP-10; encounter placement design 6.8.1; M2)**;
 - joiners keep their own value;
+- **M3:** the Annex group (10.4) pays 0 experience; its reward is the
+  Wager prize, the Dare cache or the box contents, so the floor pool and
+  the 20.1 check are unchanged **(change EP-26; client agreed
+  2026-11-21, Q2; encounter placement design 6.13)**;
 - **on a trimmed floor** (`pacing.trimmedFloors[]`, lever 3, applied only
   in the lever order of companions 7.4): a trimmed floor 4 pays boss 300,
   a trimmed floor 5 pays lair 240 (boss 200); a trimmed floor 3 (when
@@ -2478,6 +2645,13 @@ sneaked past in-room. Options for this owner: drop "Stealth-bypass
 candidate" from the lair templates, re-read 20.1 as "one guard post or
 one Dormant lair", or rely on the camp catch-up, measured by
 `MultiBypassRate`. Not yet ruled.
+**Pending request (EP-23, M2; encounter placement design 6.10):** the
+**Sleeping Ward sneak line** answers it: Den, Sleeper and Dormant Pack,
+Gauntlet and Warband lairs seat sleepers beside the lair's Clearway, so
+every route through passes within 3 of at least one sleeper (two band
+rolls at Dormant −5); `LairSneakRate` is reported, and above 25%
+*(illustr.)* this owner re-reads 20.1 as "one guard post or one Dormant
+lair" skippable; not yet ruled.
 
 - **Camp catch-up:** at camp the hero is raised to at least the next
   floor's entry level, and companions with it, before the camp restore
@@ -2502,7 +2676,7 @@ one Dormant lair", or rely on the camp catch-up, measured by
 | **Skirmisher** | 80% / 100% / +1 / 0; speed 8 | Melee + thrown | Slips past; Disengage as its bonus action; M2 Help sets up allies (Helped) | Reach, opportunity-attack zones, Grapple, Chilled, close formation | Raider | 0 | M2 |
 | **Controller** | 90% / 70% / 0 / 0; concentrates | Damage + a minor (Chilled, Poisoned or Corroded) | One limited control ability. Hard control only where the gates allow. Carries the type's 2 conditions. At most 1 per encounter on floors 1–2. | Focus it, psychic rider, Treat, Rally | Disruptor | +2 | M2 |
 | **Leader** | 110% / 80% / 0 / 0; trained Will and Intimidation | Weapon + Frighten | **Command** (Rally or Order, cooldown 3); Emboldened aura; Quarry | Kill it first; Frighten the Demoralised; Frighten the leader to stop its Rally | Commander | +2 | M2 |
-| **Lurker** | 80% / 100% (150% on its opener) / 0 / 0 | Melee + Hide | Starts Hidden; **Ambush Strike** (`uses:1`, +2 dice); Poisoned, Bleeding or Blinded. Never in floor 1's main-path rooms 0–2 **(change DH-28)**. **M3:** a theme's lurker may be placed as a **boxed lurker** (`containerForm`, F2–5, at most 1 per floor): no placement Stealth roll; marked when party passive Perception ≥ 10 + its proficiency, checked with trap detection **(change TL-28; traps and locks design 6.14)**. | Perception, the radiant rider (Revealed), staying grouped, reading the tell | Ambusher | +2 | M2 |
+| **Lurker** | 80% / 100% (150% on its opener) / 0 / 0 | Melee + Hide | Starts Hidden; **Ambush Strike** (`uses:1`, +2 dice); Poisoned, Bleeding or Blinded. Never in floor 1's main-path rooms 0–2 **(change DH-28)**. On floor 1 it never uses Ambush Strike: it opens with its at-will at 150%, stated plainly on its card **(change EP-11; encounter placement design 6.17; M2)**. **M3:** a theme's lurker may be placed as a **boxed lurker** (`containerForm`, F2–5, at most 1 per floor): no placement Stealth roll; marked when party passive Perception ≥ 10 + its proficiency, checked with trap detection **(change TL-28; traps and locks design 6.14)**. | Perception, the radiant rider (Revealed), staying grouped, reading the tell | Ambusher | +2 | M2 |
 | Support | — | — | One `uses:1` heal or buff; at most 1 per encounter | Withered, focus | — | — | Later |
 | Summoner | — | — | Calls a pre-paid reserved pack, with a visible countdown | Kill it before the countdown ends | — | — | Later |
 | Thief | — | — | Steals and flees; must be visibly flagged and drop its haul when Routed | — | — | — | Later |
@@ -2532,7 +2706,7 @@ affix costs ×1.2. **Gentle** means legal on floor 1.
 | Punish | Riposting | Riposting while its reaction is unused | 3+ | Soldier, skirmisher | Later |
 | Command | **Commanding** | Becomes its group's leader: Command (cooldown 3) and the Emboldened aura. Never in a group that already has a leader (8.3). | 2+ | Soldier, controller | M2 |
 | Command | **Hunter** | Declares Quarry | 2+ | Skirmisher, artillery, leader | M2 |
-| Command | **Horn-bearer** | `uses:1` at or below half HP: the nearest unaware group in hearing becomes Alerted and joins, announced a round early. Only where the cluster budget and the joining cap allow. | 3+ | Leader, artillery | M2 |
+| Command | **Horn-bearer** | `uses:1` at or below half HP: the nearest unaware group in hearing becomes Alerted and joins, announced a round early. Only where the cluster budget and the joining cap allow. At most one placed call source per encounter **(change EP-22; encounter placement design 6.12; M2)**. | 3+ | Leader, artillery | M2 |
 | Goad | **Bodyguard** | Challenge: bonus action, cooldown 3, applies Challenged to an adjacent enemy | 2+ | Soldier | M2 |
 | Goad | Protector | Guarded on an adjacent ally | 3+ | Soldier | Later |
 | Rider | **Honed** | Its weapon at-will carries its damage type's rider | 2+ | Armed types | M2 |
@@ -2562,19 +2736,19 @@ in percent, all illustrative.
 | Profile | Default for | Approach / caution / oaAversion | Range | Targeting | What the player notices | Wave |
 |---|---|---|---|---|---|---|
 | **Charger** | Brute | 150 / 30 / 30 | 1 | Nearest, last attacker; kill bonus 130% | Walks through opportunity attacks to reach you; never retreats | M1 |
-| **Holder** | Soldier | 100 / 80 / 100 | 1 | Nearest to its ward | Holds the doorway; shoves toward hazards (M2). **Pending request (TR-15, M2; room terrain design 6.9):** "hazards" includes contact hazards; not yet ruled. **Pending request (hazards design 6.12; M2 (gated), else M3):** also toward due footprints and Voids, the intent reading "pushes toward the edge"; not yet ruled | M1 (hold term M2) |
-| **Kiter** | Artillery | 60 / 150 / 200 | 5 | Lowest visible AC in range; concentrating units **(change AR-25)** | Keeps 4–6 squares away; steps back when engaged; falls back at 50% HP | M1 |
+| **Holder** | Soldier | 100 / 80 / 100 | 1 | Nearest to its ward | Holds the doorway; shoves toward hazards (M2). **Pending request (TR-15, M2; room terrain design 6.9):** "hazards" includes contact hazards; not yet ruled. **Pending request (hazards design 6.12; M2 (gated), else M3):** also toward due footprints and Voids, the intent reading "pushes toward the edge"; not yet ruled. **Pending request (EP-6, M2; encounter placement design 6.6.3):** the hold is the Billet term (11.1) on the choke square, weight 40; not yet ruled | M1 (hold term M2) |
+| **Kiter** | Artillery | 60 / 150 / 200 | 5 | Lowest visible AC in range; concentrating units **(change AR-25)** | Keeps 4–6 squares away; steps back when engaged; falls back at 50% HP. **Pending request (EP-6, M2; encounter placement design 6.6.3):** "falls back" gains a destination, its fall-back square (also on a formation break or when adjacent to a noticed party unit), and a Billet weight 25; not yet ruled | M1 |
 | **Mob** | Minion | 150 / 0 / 0 | 1 | Nearest; spreads to free adjacent squares | Surrounds you; ignores danger | M1 |
 | **Automaton** | Mindless | 120 / 0 / 0 | 1 | Nearest, then unit order | No exposure or cohesion terms; walks through minor hazards (the lethal floor still holds). **Pending request (hazards design 6.12; M2 (gated), else M3):** ignores non-lethal due squares, keeping the lethal floor (shown on its card); segment 4 does not raise the mindless share and asks this owner; not yet ruled. **Pending request (TL-16, M2; traps and locks design 6.8):** mindless types treat non-lethal traps as floor and spring them (the mindless blunder), lethal ones still barred; not yet ruled | M1 |
 | **Boss** | Bosses | Authored; `leash: room` | — | Authored | A phase may swap the profile. **Pending request (FL-21 (a), M1; floor layout design 6.11):** a Provoked analogue that extends the leash to the Sanctum when the boss is damaged from outside its reach; not yet ruled | M1 (M2 adds boss actions) |
 | **Raider** | Skirmisher | 120 / 120 / 200 | 1 | Lowest visible AC; concentrating units **(change AR-25)** | Hits, then uses leftover movement to leave reach; slips past | M2 |
 | **Protector** | Bodyguard elites | 80 / 60 / 120 | 1 | Whoever threatens its ward | Body-blocks; Challenges the unit nearest the leader | M2 |
 | **Disruptor** | Controller | 80 / 120 / 150 | 3 | Highest T | Spends control on the most dangerous unit; setup at 150% | M2 |
-| **Commander** | Leader | 70 / 120 / 150 | 2 | Quarry, else nearest | Stays behind its line; uses Command; declares Quarry | M2 |
+| **Commander** | Leader | 70 / 120 / 150 | 2 | Quarry, else nearest | Stays behind its line; uses Command; declares Quarry. **Pending request (EP-6, M2; encounter placement design 6.6.3):** a Billet weight 30 and a fall-back square on a formation break or when adjacent to a noticed party unit; not yet ruled | M2 |
 | **Stalker** | Hunter affix, pack beasts | 130 / 80 / 80 | 1 | Its own Quarry | Picks one unit and keeps after it | M2 |
-| **Ambusher** | Lurker | 100 / 150 / 200 | 1 | Lowest HP fraction in reach | Waits Hidden, opens, retreats and Hides again | M2 |
+| **Ambusher** | Lurker | 100 / 150 / 200 | 1 | Lowest HP fraction in reach | Waits Hidden, opens, retreats and Hides again. **Pending request (encounter placement design 6.8.3, 6.15):** "waits Hidden" made precise as "until a party unit is within 3 squares and in its line of sight, or its group or the bait is attacked or notices"; not yet ruled | M2 |
 | **Opportunist** | Skittish scavengers | 100 / 150 / 150 | 1 | Lowest HP fraction above 0 | Picks off the wounded and breaks early | M2 |
-| **Sentinel** | Door, treasure and shrine guards | 80 / 100 / 100 | By kit | Nearest inside its leash | Never leaves its 6-square leash while it can answer. **Provoked (lead's call):** when damaged by a unit it cannot reach from inside its leash, it drops the leash for that fight and switches to Holder with pursuit 2, shown on the plate ("Provoked: leaves post"). Plinking from outside the leash is therefore never free. **Pending request (FL-21 (b), M2; floor layout design 6.5):** the Champion's elite uses a Sentinel-style hold, so noticing through a Grille leaves it Alerted but holding; not yet ruled | M2 |
+| **Sentinel** | Door, treasure and shrine guards | 80 / 100 / 100 | By kit | Nearest inside its leash | Never leaves its 6-square leash while it can answer. **Provoked (lead's call):** when damaged by a unit it cannot reach from inside its leash, it drops the leash for that fight and switches to Holder with pursuit 2, shown on the plate ("Provoked: leaves post"). Plinking from outside the leash is therefore never free. **Pending request (FL-21 (b), M2; floor layout design 6.5):** the Champion's elite uses a Sentinel-style hold, so noticing through a Grille leaves it Alerted but holding; not yet ruled. The elite's Billet is offered as that hold if EP-6 is accepted (11.1; encounter placement design 6.10) | M2 |
 
 **No per-instance randomness.** Two units of the same type behave the
 same, which is what makes them learnable, and what makes intent reading
@@ -2590,28 +2764,53 @@ under ability 8.4); a request to this owner, not yet a rule.
 
 ### 17.4 Encounter templates
 
-| Template | Slots | Band | Floors | Awareness | Notes | Wave |
-|---|---|---|---|---|---|---|
-| **Picket** | 1–2 standards + 0–2 minions (≤2 when solo) | Patrol or guard post | 1+ | Patrol or stationary | The universal fallback. On floor 1 solo, budgets make a patrol one standard: the floor's Stealth and ambush teaching target. | M1 |
-| **Pack** | 1 brute (M2: or skirmisher) + 2–4 minions of one family (2 when solo) | Patrol, guard post or lair | 1+ | Patrol or dormant | Minions share one initiative slot | M1 |
-| **Line and Bow** | 1–2 soldiers or brutes + 1 artillery | Guard post or lair | 1+ | Stationary at a chokepoint | Teaches "go around" | M1 |
-| **Boss Court** | Boss + escort (0–2 standards or a minion pack; no elite on floor 1) | Boss | All | Wary from the start | Boss alone in M1. Escort budget: the shortfall-adjusted party weight × 200% × depth% × ladder%; boss HP ignores the shortfall (17.5) **(change CMP-7)** | M1 / M2 |
-| **Champion** | 1 elite + 1–2 minions or standards, at least one of them an awake **watcher** placed with line of sight to every square adjacent to the elite | Elite room | 1+ (second half of floor 1) | Stationary, awake, visible from the approach (through the Grille vantage behind an opt-in vantage Door; floor layout design 6.5; **change FL-7**) | Guaranteed notable item or cache; Steal needs the watcher drawn off first (15.5). **Pending request (FL-21 (b)):** a Sentinel-style hold for the elite (17.3) | M2 |
-| **Warband** | Leader + 1–2 front + 0–4 minions | Guard post or lair | 2+ | Stationary or dormant | Morale showcase; the usual carrier | M2 |
-| **Den** | Leader-role "mother" (a beast silhouette is allowed) + 1 non-minion standard + 2–4 minions | Lair | 2+ | Dormant | Stealth-bypass candidate. The extra standard keeps one kill from ending the lair (14.3). **Pending request (FL-21 (d)):** in-room sneaks against 20.1 (16) | M2 |
-| **Skirmish Screen** | 2–3 skirmishers | Patrol or guard post | 2+ | Patrol | Tests formation | M2 |
-| **Ambush** | Bait (1 standard or a container) + 1–2 lurkers as a separate group | Guard post × 0.85 | 1+ (after room 2) | Hidden | A visible **tell** within 6 squares; trained Perception marks it on the map. **M3:** the bait container may be the lurker itself, a boxed lurker (17.1) **(change TL-28; traps and locks design 6.14)** | M2 |
-| **Battery** | 2 artillery + 1 soldier (optionally an elite bodyguard) | Guard post | 3+ | Stationary | Banned on floors 1–2 by the ranged cap | M2 |
-| **Honour Guard** | Bodyguard elite + artillery or controller + 0–2 minions | Lair | 2+ | Stationary | Challenged showcase | M2 |
-| **Gauntlet** | Controller + 2 brutes | Lair | 3+ | Dormant or stationary | Hard control on the controller only | M2 |
-| **Scavengers** | 2–3 skittish standards or minions; no elite or leader | Patrol | 1+ | Patrol | Always cowable (content test); fills the cowing guarantee | M2 |
-| **Sleeper** | 1 dormant elite at room level +0 to +2 (its legal elite range, 6.3) + 0–2 dormant standards or minions to reach the fill | Lair | 2+ | Dormant | Stealth bypass or steal target; never cowable (it holds an elite). **Pending request (FL-21 (d)):** in-room sneaks against 20.1 (16) | M2 |
-| Summoner Circle; Mender's Band; Feud | — | — | 3+ | — | Feud needs AI for monsters hostile to each other | Later |
-| Rival Party | See section 18 | Boss or elite room | 3+ | Wary | At most one per run | Later (stretch) |
+| Template | Slots | Band | Floors | Awareness | Notes | Formations **(change EP-4)** | Wave |
+|---|---|---|---|---|---|---|---|
+| **Picket** | 1–2 standards + 0–2 minions (≤2 when solo) | Patrol or guard post | 1+ | Patrol or stationary | The universal fallback. On floor 1 solo, budgets make a patrol one standard: the floor's Stealth and ambush teaching target. | Picket Line; Door Line (front + artillery standard); Kill Box (Waylay, F2+). Patrol File; Revel, Bout | M1 |
+| **Pack** | 1 brute (M2: or skirmisher) + 2–4 minions of one family (2 when solo) | Patrol, guard post or lair | 1+ | Patrol or dormant | Minions share one initiative slot | Crescent; Pincer (F3+). Patrol File; Sleeping Ward; gorged Revel | M1 |
+| **Line and Bow** | 1–2 soldiers or brutes + 1 artillery | Guard post or lair | 1+ | Stationary at a chokepoint | Teaches "go around" | Door Line; Phalanx (2 soldiers, F2+); Kill Box (Waylay, F2+). Revel, Bout | M1 |
+| **Boss Court** | Boss + escort (0–2 standards or a minion pack; no elite on floor 1) | Boss | All | Wary from the start | Boss alone in M1. Escort budget: the shortfall-adjusted party weight × 200% × depth% × ladder%; boss HP ignores the shortfall (17.5) **(change CMP-7)** | Retinue for the escort (segment 9 owns the arena set) | M1 / M2 |
+| **Champion** | 1 elite + 1–2 minions or standards, at least one of them an awake **watcher** placed with line of sight to every square adjacent to the elite | Elite room | 1+ (second half of floor 1) | Stationary, awake, visible from the approach (through the Grille vantage behind an opt-in vantage Door; floor layout design 6.5; **change FL-7**) | Guaranteed notable item or cache; Steal needs the watcher drawn off first (15.5). **Pending request (FL-21 (b)):** a Sentinel-style hold for the elite (17.3) | Champion Watch | M2 |
+| **Warband** | Leader + 1–2 front + 0–4 minions | Guard post or lair | 2+ | Stationary or dormant | Morale showcase; the usual carrier | Retinue; Phalanx (2 front); Pincer (F3+); Kill Box (Waylay); **M3:** Ritual (the Choir only, F3; change EP-27). Revel, Bout; Sleeping Ward | M2 |
+| **Den** | Leader-role "mother" (a beast silhouette is allowed) + 1 non-minion standard + 2–4 minions | Lair | 2+ | Dormant | Stealth-bypass candidate. The extra standard keeps one kill from ending the lair (14.3). **Pending request (FL-21 (d)):** in-room sneaks against 20.1 (16); the Sleeping Ward sneak line (EP-23, pending; 16) | Crescent (the mother as alpha). Sleeping Ward | M2 |
+| **Skirmish Screen** | 2–3 skirmishers | Patrol or guard post | 2+ | Patrol | Tests formation | Skirmish Spread (patrol only; never a Waylay). Patrol File | M2 |
+| **Ambush** | Bait (1 standard or a container) + 1–2 lurkers as a separate group | Guard post; × 0.85 for a Mousetrap **(change EP-10)** | 1+ (after room 2) | The lurker group Stationary and Hidden at start; the bait group Stationary **(change EP-10)** | A visible **tell** within 6 squares; trained Perception marks it (the tell) on the map (encounter placement design 6.8.4). A container bait (the Mousetrap's reserved bait cache) only on floors 2–5 at party ≥ 2, at most 1 per floor and 2 per run *(illustr.)* **(change EP-10; encounter placement design 6.8.1)**. **M3:** the bait container may be the lurker itself, a boxed lurker (17.1) **(change TL-28; traps and locks design 6.14)** | Bait and Nook (Cuckoo or Mousetrap) | M2 |
+| **Battery** | 2 artillery + 1 soldier (optionally an elite bodyguard) | Guard post | 3+ | Stationary | Banned on floors 1–2 by the ranged cap | Crossfire (F3+, party ≥ 3); Kill Box (Waylay) | M2 |
+| **Honour Guard** | Bodyguard elite + artillery or controller + 0–2 minions | Lair | 2+ | Stationary | Challenged showcase | Honour Ring | M2 |
+| **Gauntlet** | Controller + 2 brutes | Lair | 3+ | Dormant or stationary | Hard control on the controller only | Grindstone. Sleeping Ward | M2 |
+| **Scavengers** | 2–3 skittish standards or minions; no elite or leader | Patrol | 1+ | Patrol | Always cowable (content test); fills the cowing guarantee | Scramble. Patrol File | M2 |
+| **Sleeper** | 1 dormant elite at room level +0 to +2 (its legal elite range, 6.3) + 0–2 dormant standards or minions to reach the fill | Lair | 2+ | Dormant | Stealth bypass or steal target; never cowable (it holds an elite). **Pending request (FL-21 (d)):** in-room sneaks against 20.1 (16); the Sleeping Ward sneak line (EP-23, pending; 16) | Picket Line (the elite as the front Keystone). Sleeping Ward; gorged Revel | M2 |
+| Summoner Circle; Mender's Band; Feud | — | — | 3+ | — | Feud needs AI for monsters hostile to each other. **Later (EP-40; encounter placement design 9.1):** Standoff / Riot, Gaol Jailers against Inmates, a three-sided fight, waits on Feud | — | Later |
+| Rival Party | See section 18 | Boss or elite room | 3+ | Wary | At most one per run | — | Later (stretch) |
 
 - **Promotion in templates (lead's call):** a standard slot may hold a
   promoted elite wherever the floor's elite cap (10.3) allows, unless the
   template names the slot's rank.
+- **Formations (change EP-4; encounter placement design 6.4, 6.6.6,
+  11.1; M1 static parts, M2 the rest):** the column lists each
+  template's battle formations, then (after the full stop) its start
+  shapes; the `FormationDef` table of the encounter placement design
+  owns their positions, Keystones, breaks and counters. A Den fights as
+  a Crescent and a Sleeper as a Picket Line once Engaged.
+- **Waylay (change EP-12; encounter placement design 6.8.6; M2):** an
+  ordinary Stationary Line and Bow, Picket, Warband or Battery (minded
+  members, at least one ranged or skirmisher member, no elite) in the
+  **Kill Box** at a guard post on floors 2–5 at party ≥ 2, watching a
+  Portal whose approach side is a Door that starts closed; never
+  Surprises the party; its tell is the **Spoor mark** on the watched
+  Portal's frame, present if and only if a Waylay lies beyond; it counts
+  as an ambush (10.3).
+- **Class answers (change EP-29; encounter placement design 6.16; M2):**
+  each formation record carries `answers{shade, vanguard, arcanist,
+  herald}`; a formation leaves at most one class without a lever, and
+  each class has a showcase on at least one main-path fight on floors
+  1–3.
+- **Per-theme eligibility (change EP-31; encounter placement design 6.4;
+  M2):** a per-theme template eligibility table is a content-test input
+  (for example, no Ambush in the Choir, Carnival, Supper or Heart);
+  `TemplateLegal`, `AcidSourcesAfterOverlay`, one shover type per
+  encounter in Void and clock rooms, and Busy barred for an all-mindless
+  group.
 - Content test: each template's own encounter, at every party size and
   floor in its range (and every reachable party weight, down to the
   shortfall minimum, 10.1; **change CMP-8**), fills within tolerance and keeps the 3-type cap and
@@ -2890,7 +3089,7 @@ Illustrative:
   "hp": 15, "trainedSave": "fortitude", "skills": ["perception"],
   "speed": 6, "traits": [], "atWills": ["atk.spear", "act.shove"],
   "limited": [], "reaction": "react.interpose",
-  "behaviour": "holder", "awareness": "stationary", "morale": "normal",
+  "behaviour": "holder", "allowedAwareness": ["stationary"], "morale": "normal",
   "armed": true,
   "loadout": { "mainHand": "item.spear", "offHand": "item.shield", "armour": "item.gambeson", "carried": null },
   "improvised": "atk.improvised_pierce", "notableSlot": true, "salvageCoin": "byLevel",
@@ -2901,8 +3100,21 @@ Illustrative:
   overlay, `carriedItem { itemId, rolledProperties, chargesOrUses,
   linkedAbilityId }`, `costAdd`, **`cost`** (frozen unit cost at its
   homeRoom, costAdd included; 10.1), `groupId`, `earliestRoomLevel`.
+- **Type awareness:** `allowedAwareness[]` replaces a single
+  `awareness`; the group's start state is chosen within it (12.1)
+  **(change EP-9; client agreed 2026-11-21, Q4; encounter placement
+  design 6.7; M2)**.
 - **Group record:** `{groupId, homeRoom, members, leader?, startCost,
-  lossCost, flags, awareness, experienceShares, paidShares}`.
+  lossCost, flags, awareness, experienceShares, paidShares}`. It gains
+  the placement fields `encounterId`, `linkedGroupIds[]`, `formationId`,
+  `startShapeId`, `activityId`, `posture`, `watchedPortal?`,
+  `openZone[]?`, `ambushForm?`, `tellSquare?`, `spoorPortalId?`,
+  `pairings[]`, `defensiveVariantId`, `billetScale`,
+  `nearPairPartnerGroupId?`, `callSourceUnitId?`, `annex?`, per unit
+  `billet`, `keystone`, `facing` (presentation only), `leaderId?` and
+  `wardOf?`, and a reserved `captiveSocket?` (Later) **(change EP-4;
+  encounter placement design 6.13, 11.1; M1 static parts, M2 the
+  rest)**.
 - **Unit state additions:** awareness record per party unit, morale state,
   `oncePerLife` grants used, `turnsTaken` (9.3), `stealAttempted` (15.5),
   "Rally used" (14.4), boss life state (pips, phase, uses).
@@ -2996,7 +3208,9 @@ The build fails when:
   a cut vertex), read as every entry→antechamber path passing ≥
   `preBossPool` − 100, with the patrol counted present (floor layout
   design 6.8) **(change FL-9)**. **Pending request (FL-21 (d)):** the
-  540 multi-bypass case and Den and Sleeper in-room sneaks (16);
+  540 multi-bypass case and Den and Sleeper in-room sneaks (16), with
+  the "one guard post or one Dormant lair" re-reading if `LairSneakRate`
+  exceeds 25% (EP-23, pending; 16);
 - a Portal breaks `PortalKindsLegal` (the return-Portal principle; a
   Latch's `barSideRoomId` is its deeper end) (floor layout design 9.2,
   11.2) **(change FL-19)**;
@@ -3009,7 +3223,14 @@ The build fails when:
 - a theme validator fails: V1 ThemeBudget, V2 BossCoverage, V3
   PoolRules, V4 ThemeFloorFill, V5 RouteEnumeration, V6
   RouteDeterminism, V7 CharterChecks **(change RT-17; run structure
-  design 11.2)**.
+  design 11.2)**;
+- V12 `EncounterPlacement` fails: its build-time geometry checks, its
+  generation-time re-checks and floor assertions (the 10.3 caps with the
+  ambush definition, the 10.4 guarantees and variety, state in the
+  group's legal state set, `TemplateLegal`, the floor-1 package) or its
+  runtime assertions, after its fallback chain (10.5 step 8) **(change
+  EP-32; encounter placement design 11.2; M1 static parts, M2 the
+  rest)**.
 
 ### 20.2 Tests
 
@@ -3310,7 +3531,7 @@ committed wind-ups (13.2).
 | Retreat anchors, ranked per (fight host, party-entry Portal), non-door paths first, with the runtime unexplored filter and fallbacks; a non-door `fleeExit` per fight host, never repaired into a Door; `PartyEscape` and the LG20 entry landing (floor layout design 6.2, 6.8) **(change FL-12)** | Routed | M2 (the flee exit M1) |
 | Exactly one route-avoidable fight, a guard post (the Bypass; floor layout design 6.8) **(change FL-9)** | Stealth guarantee | M1 |
 | A cover room on at least one patrol route; answered by the Circuit's `coverRoom` (floor layout design 6.7) **(change FL-10)** | Party ambush | M1 |
-| Ambush tells within 6 squares; lurker placement | Ambush | M2 |
+| Ambush tells within 6 squares; lurker placement; answered by lurker geometry and `TellSight` (encounter placement design 6.8.3) | Ambush | M2 |
 | Containers and lair caches for the loot channels | Loot | M1 |
 | Boss arena templates: at least 2 entrances, line-of-sight blockers, a counterplay feature | Bosses | M1 |
 | Hazard placement within theme budgets | Conditions 11 | M2 |

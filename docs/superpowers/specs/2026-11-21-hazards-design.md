@@ -840,18 +840,24 @@ hazards present at every party size, solo on F2–5 included (CMP-8)
   - ≤ half on or adjacent to a condition patch;
   - ≤ 2 start squares within 2 of a Void edge;
   - every start zone has a hazard-free path to the party side ≤ the
-    shortest path + 2.
+    shortest path + 2;
+  - no Billet hold square within 2 of a Void edge or lethal hazard
+    (encounter placement design 6.6.3, 6.6.8; change EP-21; M2).
 - **VP4. Push lanes:** every Void region and contact piece has a push
   lane (`PushLaneExists`): a pair of adjacent walkable, non-hazard
   squares, pusher square P and target square T, such that a push from P
   through T under C 10.1's direction rule (ties broken in fixed square
   order), with no other unit on the path, reaches the hazard within 3
-  steps, in every state.
+  steps, in every state. Segment 6 seats shovers on front sockets with a
+  push lane, within VP3 and the shover caps (a Terrain Pairing;
+  encounter placement design 6.6.8; change EP-21; M2).
 - **VP5. Void geometry:** the room's perimeter third, or 1-wide flank
   strips beside the Clearway, never mid-room (F-b). Runs ≤ 2 wide
   wherever a Jump crossing is offered.
 - **VP6. Hide spots:** never adjacent to a Void, never in a Stir
-  footprint, never a Tide socket (Shade parity).
+  footprint, never a Tide socket (Shade parity). Segment 6's nook
+  sockets obey the same rule (encounter placement design 6.6.1; change
+  EP-21; M2).
 - **VP7. Boss lanes:** no Void within 3 of a boss start zone or boss
   lane (F-c).
 - **VP8. Flee and escape:** `fleeExit`, `PartyEscape` and
@@ -1566,8 +1572,13 @@ Mood.
       returned to the threshold and the dare resets. No short rest
       inside the room. Two attempts per floor; after the second failure
       the container seals for the floor.
-  - **(b) Guarded:** a garrison at −30% budget *(illustr.)* in ordinary
-    combat.
+  - **(b) Guarded:** the floor's **Annex** group, Dormant among the
+    devices (the party may wake it, sneak, or turn the room on it),
+    funded as one extra encounter budget at the patrol band at the host
+    room's level, 0 XP (its reward is the Dare cache), in ordinary
+    combat once woken. If the Annex serves a higher-priority need, the
+    Dare room is unguarded (encounter placement design 6.13; change
+    EP-26; **agreed, Q2**; M3).
 - Measured on the "taken" arm of `FloorTimeByTheme`, target ≤ 60 s per
   dare. `DareBruteForceRate` reported.
 
@@ -1629,7 +1640,9 @@ Mood.
      rooms, and **at most 2 units with Shove-type kits starting within
      4 of a Void edge** (lead's call, after the check; VP3 already caps
      starts within 2 at 2). `PartyFallsPerFight` is reported by shover
-     count.
+     count. Segment 6 counts every brute and soldier as a shover type,
+     since every such at-will carries Shove (encounter placement design
+     6.4, 6.6.8; changes EP-21, EP-31; M2).
 4. **Guards:** Stir acts are counted in the ENM 6.4 guard rows in the
    rounds they are due (the Keg and Conduct precedent). Deep falls count
    in the Choir lightning spike row. Environment Chilled counts in the
@@ -1673,6 +1686,10 @@ Mood.
    floor (readable stupidity on their card). The mindless share is
    **not** raised by segment 4; the enemies owner is asked.
 7. **Flying:** ≤ 1 flyer per Void-room encounter (a segment-6 hook).
+8. **Terrain Pairings (encounter placement design 6.6.8; change EP-21; M2):**
+   segment 6 seats shovers by a VP4 push lane, never with a Billet
+   within 2 of the edge. **M3 / pending, on their owners' rulings:**
+   `usesCords` types by their Cord; Stoker types by their vent (HZ-24).
 
 ### 6.13 Party exploitation and levers
 
@@ -2002,6 +2019,10 @@ a dry causeway Plank, storm-glass faces as Conduct bait, RS 8.6 islands.
 - **The Hymn Must Never Stop.** An in-room trigger Tide (Q3). WetEdge
   sockets rise one round after the last `singer` falls. Routed or
   Yielded singers count as stopped. A backstop at the end of round 4.
+  Segment 6 seats the singers as the Choir Ritual, a Warband formation
+  on a Tide WetEdge host (encounter placement design 6.6.7; change
+  EP-27; M3). **Pending request (EP-27, Later):** a singer Tide in any
+  other theme needs a new HZ singer entry; not yet ruled.
   - Framed as a reward option for lightning parties, never as a floor
     meter.
   - The **Sluice Wheel** Cord (Flip, Q3: the Tide turns at the end of
@@ -2705,7 +2726,7 @@ M3 instead; the client is told (19.2).
 | Segment | Receives from segment 4 | Owns |
 |---|---|---|
 | **5 Traps, locks, checks** | The HZ-1 line. Traps kept: the dumbwaiter drop, the toppling-shelf tripwire, the icicle chandelier, the sluice Soak, the acid geyser, trapdoor stages, the bell tripwire, the portcullis, the Appeals trapdoor, horn tripwires. EnvDC as a reference for the DC ladder. Cords never arm traps and need no check | DCs; traps; door verbs; how traps and hazards share a room beyond these defaults |
-| 6 Encounter placement | Start sockets outside footprints and Tide states at fight start; ≤ 2 starts within 2 of a Void edge; ≤ 1 flyer, ≤ 1 shover type and ≤ 2 shover units within 4 of a Void edge in Void rooms; the `usesCords`, `singer` and Stoker tags; Wake candle racks on Dormant groups (index ≥ 3, ≤ 1 per room); Dare garrisons; the mindless share (the enemies owner) | Who starts where |
+| 6 Encounter placement | Start sockets outside footprints and Tide states at fight start; ≤ 2 starts within 2 of a Void edge; ≤ 1 flyer, ≤ 1 shover type and ≤ 2 shover units within 4 of a Void edge in Void rooms; the `usesCords`, `singer` and Stoker tags; Wake candle racks on Dormant groups (index ≥ 3, ≤ 1 per room); Dare garrisons; the mindless share (the enemies owner). **Filled by the encounter placement design (6.1 exclusions, 6.6.8 Terrain Pairings, 6.13):** the guarded Dare garrison is the floor's Annex (change EP-26; agreed, Q2; M3) | Who starts where |
 | 7 Loot | Fallen loot on the edge; Dare containers (+1 rarity step); no item loss | Containers and contents |
 | 8 Events | Unguarded Dare forms; Moods on the Stratum Card; empty Tide naves as non-combat puzzles; the Gaol's small hours | Event content |
 | 9 Boss arenas | 6.17: one clock and one Void line per arena inside RT 6.11, under the room rules; `noDrop`; the boss Teetering guard; counterplay identities kept | Interiors, counterplay, phases |

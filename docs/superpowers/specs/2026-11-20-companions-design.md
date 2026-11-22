@@ -898,6 +898,13 @@ Q2):**
   gate; a miss with segment 5 over its line fires that design's cut
   order (6.21). **No trap or lock lever** is added to the lever order
   below (agreed Q2 levers untouched).
+- **Encounter placement in the time model (change EP-33, encounter
+  placement design 6.18; told plainly; M2).** Segment 6 takes its own
+  clock line beside TL-38's: ≤ +0.2 rounds per fight on average and no
+  net minutes at party 4 on floors 4–5 *(illustr.)*, reported
+  separately; a miss fires that design's cut order before release.
+  **No encounter-placement lever** is added to the lever order below
+  (agreed Q2 levers untouched).
 - **Definition.** Floor time is the **active time** from the core's
   timestamped `FloorEntered` event to its `BossDefeated` event on that
   floor (every floor ends at its boss), excluding camp screens, pause
@@ -1082,6 +1089,13 @@ internal design target; ability 11.4's playtest target is unchanged.
      are **non-decreasing in *w***, where ERD = Σ over units of (hit
      permille against the reference solo hero's AC at the floor's entry
      level × mean damage per round). It enumerates every cell exactly.
+   - **Formations on the solo table (change EP-19, encounter placement
+     design 6.3; M1 static parts, M2 the rest).** The solo table gains a
+     formation column; `SoloShapeMonotone` extends `SoloBudgetMonotone`
+     (as weight rises, the standard's level never falls, threat lanes at
+     fight start never decrease, front positions ≥ back positions); a
+     solo hero on floors 2–5 meets no ambush form and `billetScale` 0
+     (500‰ on floor 1); placement gates read `partyCountAtGeneration`.
    - **What it does not touch (new lead's call):** experience (fixed at
      the band's nominal value, enemies 16) and the per-floor loot budget
      (main 4.6; enemies 15.3) are unchanged by the shortfall; only
@@ -1168,7 +1182,11 @@ experience share** (breaks the enemies 16 curve).
 - The enemies 10.5 generator and 17.4 template content tests, the 6.4
   permadeath guards and the AR-20 lowest-legal-AC runs are **re-run at
   every weight the run can reach**, including the shortfall minimum
-  (CMP-8) **(told plainly)**.
+  (CMP-8) **(told plainly)**. The CMP-8 tests extend to formations and
+  the solo column: a formation is drawable at a weight only if its core
+  positions fit the fill down to the shortfall minimum
+  (`FormationSurvivesFill`; encounter placement design 6.3, 11.2;
+  EP-19; M2).
 - Enemies 20.3's "flat across sizes" row is re-read against an expected
   curve, plus a hero-death-per-fight row by party size (CMP-9).
 
@@ -1253,6 +1271,9 @@ offers to turn on companion suggestions; the default stays off
   a wanderer or a shrine gives a named candidate who waits at the
   **next** camp as an extra card outside the 3, marked "Met on floor N".
   It never joins mid-floor, never fights and is never in the weight.
+  The captive is the encounter placement design's Captive form (a
+  chained non-combatant behind a formation; `captiveSocket` reserved;
+  EP-39, encounter placement design 9.1; Later).
 - On freeing: **Meet at camp** (nothing freed is missable) or **Send
   home**, which gives a **Parting Word**: one floor fact chosen from the
   enemies 14.6 categories (information, inside the loot budget, not a
@@ -2240,7 +2261,8 @@ The owed rows are the single list in 16 (and 12); by owner:
 - **Playtests:** the floor-time gate and the blind party-of-3 vs
   party-of-4 arm (**agreed** Q2); the accept-rest-of-turn prototype;
   companion-turn time by kit; suggestion accept rate; human kit picks.
-- **Dungeon generation (Later):** captive rooms and shrines for Pledges.
+- **Dungeon generation (Later):** captive rooms and shrines for Pledges
+  (captives: encounter placement design 9.1, EP-39).
 - **The profile (M3):** Lone Road, milestones, Old Friend, Veteran, kit
   unlocks.
 - **Naming pass:** every placeholder name here; CMP-27.

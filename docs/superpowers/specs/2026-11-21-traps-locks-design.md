@@ -409,7 +409,9 @@ kill. So "risking the whole party" has to run through combat:
   any act of noise 4 or more, each use of Take time, every 8 ticks of
   other careful work, and the lift of the prize (the greed trigger)
   **(one rule: lead's call, after the check; 6.15)**. At 3 pips it wakes
-  a full-strength guard group from the floor's own budget, and the party
+  a full-strength guard group from the floor's own budget (re-read in
+  6.15 as the floor's Annex, a patrol-band group funded as one extra
+  budget; change EP-26, agreed encounter placement Q2; M3), and the party
   fights hurt on ground whose traps are now known and lethal to both
   sides. The reward is graded on the pips before the lift: 0 pips,
   choose 1 of 3 caged prizes; 1–2 pips, choose 1 of 2; guard woken, the
@@ -1320,7 +1322,9 @@ Botch (a hidden second rule).
      group, combat starts with that group, and the spring *was* the
      springing unit's surprise action. Other party units take surprise
      actions only if their own ABL conditions hold. It never adds a
-     round, and it never stacks with Ambush;
+     round, and it never stacks with Ambush, read as **at most one
+     surprise opener per side per combat** (encounter placement design
+     6.8.7, 6.8.8; a reading recorded there for this owner);
   3. if no unit was affected (a snare or alarm, or the group outside the
      area), the result is only the spring's noise.
 - **AI fairness:**
@@ -1358,7 +1362,9 @@ it as a control, 11.5).
   - a fight host carries 0–2 traps, at most 1 of them a Device;
   - device bodies are visible from the doorway;
   - segment 6 may start groups in device areas (at most half a group's
-    members), never on trigger squares.
+    members), never on trigger squares. Its Terrain Pairings read this
+    rule: natives in known device areas only after TL-16, never on F1
+    (encounter placement design 6.6.8; change EP-21, read; M3).
 - **Device value (NF-f):** fight-room devices use a fixed band of about
   0.9 × `CapRound`, max ≤ `CapRound` after weakness (6.10), with Reflex
   half. Riders (Prone,
@@ -1373,7 +1379,8 @@ it as a control, 11.5).
   fight. Never on a Botch, a re-arm or a reaction.
 - **Budget:** each rigged fight's expected party-side trap damage is
   charged to segment 6's encounter budget, so DH 18.2 calibration holds
-  (NF-d).
+  (NF-d). Segment 6 converts it to levelCost units as `trapChargeCost`
+  and subtracts it before fill (encounter placement design 6.1, 6.13).
 - **Rounds:** a rigged fight adds at most +0.1 rounds
   (`RoundsPerFightDelta`).
 
@@ -1469,6 +1476,9 @@ always Plain).
   joins per floor). It is checked in the `trapsResolve` pass, after
   segment 6 places groups (6.22); a failing lock is downgraded to Plain
   with its consequence dropped, or segment 6 is asked to re-place.
+  TP10 binds the Tattle's binding to the floor's Annex as it binds any
+  Dormant home (encounter placement design 6.13; changes EP-25, EP-26;
+  the Annex M3).
 
 **Consequence lock kinds (TL-22):**
 
@@ -1477,7 +1487,7 @@ always Plain).
 | **Plain** | none | F1 | Jam only | normal | M1 |
 | **Crier** | sound-wave arcs | F2 (the Gaol may place 1 on F1, after room 2) | Noise 10 at the lock (RC7 alarm cue); the hearing outline previews who comes; joiner caps hold | every try is noise 10 | M2 |
 | **Barb** | a barb | F2 | Picker takes the harm band (2/3/3) plus the theme's poison condition (RT-16, else damage only), Fortitude half; floored out of combat | never fires | M2 |
-| **Tattle** | a door with an exclamation bar ("the room beyond hears") | F3 (the Wake's Viewing Door on F1, after room 2; 7.4) | The pre-placed Dormant group in the room beyond becomes Alerted. Listen reports it first. Never spawns. **Portal hosts only** (V11). Bound in the `trapsResolve` pass: a candidate with no group beyond resolves to a Crier with no extra draw | any try wakes it | M2 |
+| **Tattle** | a door with an exclamation bar ("the room beyond hears") | F3 (the Wake's Viewing Door on F1, after room 2; 7.4) | The pre-placed Dormant group in the room beyond becomes Alerted. Listen reports it first. Never spawns. **Portal hosts only** (V11). Bound in the `trapsResolve` pass: a candidate with no group beyond resolves to a Crier with no extra draw. The group beyond is the floor's **Annex** (F2–5; M3), and no slot host lies beyond a Tattle, so every F1 Tattle (the Wake's Viewing Door included) and every Tattle before the Annex ships in M3 is a Crier, told plainly (encounter placement design 6.13; change EP-26; agreed, Q2) | any try wakes it | M2 |
 | **Runed** | one angular sigil in a square frame (no ring) | F4 | Pick with Mechanics or Arcana; Botch is a harm-band sting plus Jam; Unweaving turns it Plain | each try stings | M3 |
 | **Hour** | an hourglass (no clock hands or digits) | Gaol, Wake | Plain behaviour; also opens itself on the floor's Landmark tick (HZ-19) | normal | M3 |
 
@@ -1522,6 +1532,13 @@ per room). The full glyph set is in 8.
   `trapsResolve` pass binds it to a placed unit and checks the distance.
   If no placed unit fits, the key goes to a container within 2 rooms
   (`carrier: containerId`), else the lock is downgraded to Plain (6.22).
+  Segment 6 writes only each group's ordered `keybearerCandidates[]`
+  (leader > soldier > artillery > other non-minion, by path to the lock;
+  never a ward behind two fronts on F1–2, never a nook) and guarantees a
+  Keybearer-capable candidate within 2 rooms of each lock (the Gaol
+  Turnkey within 1 room of its lock and of the keyring cache); this pass
+  binds, and this fallback stays (encounter placement design 6.13;
+  change EP-25; M1).
 - **Lockside Listen:** a pick, or opening any door lock, also Listens
   through that door (an FL-18 addition; segment 10 owns the display).
 
@@ -1693,10 +1710,14 @@ on 2026-11-21; the fallback, if the client ever reopens it: a size-0
   - F2–5, at most 1 per floor;
   - never F1, never in main-path rooms 0–2, the Sanctum, HE sockets, a
     Wager reward or a key's target;
-  - budgeted by segment 6 as a lurker encounter; the socket is drawn in
-    the `traps` pass and confirmed against the budget in the
-    `trapsResolve` pass (dropped, as a real container, if it does not
-    fit; 6.22);
+  - budgeted by segment 6 as the floor's **Annex** group (one lurker at
+    room level, 0 XP; it counts first toward the ENM 10.3 ambush cap),
+    keeping this section's state: Hidden in its container, no placement
+    roll, no start shape (encounter placement design 6.13; change EP-26;
+    agreed, Q2; M3); the socket is drawn in the `traps` pass and
+    confirmed against the budget in the `trapsResolve` pass (dropped, as
+    a real container, if it does not fit, or if the Annex or the ambush
+    cap is spent; 6.22);
   - drops its socket's reserved contents plus its carried item.
 - The "keyhole = mouth" line is not used.
 
@@ -1745,14 +1766,25 @@ under RC3 by giving a minded, hungry thing the mindless mark).
     tick countdown (or at once if the lift's pip woke the guard). The
     Disturbance track is the room's one clock (HF11), so no other
     countdown runs in a Wager room;
-  - at 3 pips, the room's guard (a **full-strength group from the
-    floor's own segment-6 budget**, placed Dormant in the room's Alcove;
-    waking it moves it, it does not add one) wakes;
+  - at 3 pips, the room's guard (the floor's **Annex**, a **patrol-band
+    group** funded as one extra segment-6 encounter budget at the patrol
+    band of its host room's level, deducted from no slot, 0 XP, placed
+    Dormant in the room's Alcove; waking it moves it, it adds no further
+    group) wakes (encounter placement design 6.13; change EP-26; agreed,
+    Q2; M3);
   - the guard takes the room's joiner slot, so F3–5 allows at most 1
     more joiner.
-- **Guarded form:** a garrison from the floor's budget stands among 3–4
-  revealed devices (natives in the areas). This is the true whole-party
-  wager.
+- **Guarded form:** the floor's Annex stands **Dormant among** 3–4
+  revealed devices (natives in the areas); the party may wake it, sneak,
+  or turn the room on it (encounter placement design 6.13; change EP-26;
+  M3). This is the true whole-party wager.
+- **The Annex (encounter placement design 6.13; change EP-26; agreed,
+  Q2; M3):** at most 1 per floor, F2–5; it serves exactly one of the
+  boxed lurker, the Wager guard, the guarded Dare garrison or the Tattle
+  beyond-room, in that priority (then the lowest roomId). A need not
+  served falls to its approved failure action (here the Site reverts to
+  an ordinary side room). Segment 6's choice is final; the
+  `trapsResolve` pass only confirms or drops it.
 - **Persistence:** pips and revealed state persist for the floor, and
   there is no second attempt once the guard has woken.
 - **Reward (segment 7), read from `gradeAtLift`:**
@@ -1835,7 +1867,9 @@ per floor, ≥ 80% of those reachable without Mechanics, and a value loss
   has `detectDifficulty` ≤ Easy or is `alwaysKnown`, and is never within
   hearing of a group whose join would exceed the floor's joiner cap (the
   hearing part is checked in the `trapsResolve` pass; a failing trap is
-  dropped; 6.22). Hidden information never starts a lethal fight.
+  dropped; 6.22). Hidden information never starts a lethal fight. A
+  TP8 noise trap in hearing of an encounter counts as its one placed
+  call source (encounter placement design 6.12; change EP-22; M2).
 
 ### 6.19 Floor 1 (lead's call; change TL-19)
 
@@ -1893,7 +1927,11 @@ per floor, ≥ 80% of those reachable without Mechanics, and a value loss
     check).
 - **TP2 Start squares.** No group starts on a trigger square (checked in
   `trapsResolve`; on failure segment 6 re-places that group, else the
-  trap is dropped).
+  trap is dropped). Segment 6 removes trigger squares before it seats
+  units, so this check is an assertion and the re-place a backstop: if
+  it fires, segment 6 re-seats that group draw-free with the trigger
+  squares excluded and re-runs its V12 checks, else the trap is dropped
+  (encounter placement design 6.13; change EP-25; M1).
 - **TP3 `TrapNeverSeals`.** Every trigger has a walk-round of +4 squares
   or less, and never fills a main-path corridor's width or a doorway.
   **Wager exception (lead's call, after the check):** inside a Wager
@@ -1993,11 +2031,15 @@ distance and guard, and the boxed-lurker budget.
   2. **`trapsResolve`**, a second child stream with fixed draws, run
      after segment 6 places encounters. It resolves each Tattle
      candidate (its group, or a Crier), binds each Keybearer slot to a
-     placed unit, confirms boxed lurkers against the budget, and checks
+     placed unit from segment 6's ordered `keybearerCandidates[]` (its
+     `GroupPlacement` hand-off record), confirms boxed lurkers against
+     the budget and confirms or drops segment 6's Annex choice (M3), and
+     checks
      TP2, TP8's hearing clause, TP10, `KeyReachable` and the Wager
      distance and guard.
-  - **Failure actions, per rule:** TP2: segment 6 re-places that group,
-    else the trap is dropped. TP8: the trap is dropped. TP10: the lock
+  - **Failure actions, per rule:** TP2: segment 6 re-places that group
+    draw-free (encounter placement design 6.13; change EP-25), else the
+    trap is dropped. TP8: the trap is dropped. TP10: the lock
     becomes Plain. `KeyReachable`: the key moves to a container within
     2 rooms, else the lock becomes Plain. Wager distance or guard: the
     Site reverts to an ordinary side room. Boxed lurker over budget: the
@@ -2743,7 +2785,8 @@ Further toy results:
   not per tick, after the check: Sure Hands and Second Nature would
   otherwise bring the 0% back).
 - A −30% guard is safer than an ordinary fight. That is why the guard is
-  full-strength.
+  full-strength (re-read as a patrol-band group, the Annex; encounter
+  placement design 6.13; change EP-26).
 - No-Mechanics parties bearing 30% of route traps: −5 to −7.6 pp. That
   is why walk-round is the default.
 - **Told plainly:** the Q3 vendor key is not in the toy. Its effect on
@@ -2952,7 +2995,7 @@ as 6.20 lists (lead's call, after the check):
 
 | Segment | Receives from segment 5 |
 |---|---|
-| **6 Encounters** | The `trapsResolve` pass runs after segment 6's placement and may ask it to re-place a group (TP2); groups never start on triggers; areas allowed; Keybearer tag; Tattle Dormant group; boxed-lurker budget; Wager guards from the floor budget; rigged-fight trap damage charged to the budget; alarm and Crier arrivals Alerted |
+| **6 Encounters** | The `trapsResolve` pass runs after segment 6's placement and may ask it to re-place a group (TP2); groups never start on triggers; areas allowed; Keybearer tag; Tattle Dormant group (the Annex); boxed-lurker budget (the Annex); Wager guards (the Annex, one extra patrol-band budget, 0 XP; M3); rigged-fight trap damage charged to the budget; alarm and Crier arrivals Alerted (answered in encounter placement design 6.13; EP-25, EP-26) |
 | **7 Loot** | Container kinds; `lockable` sockets; +1 rarity step behind consequence locks and in Wagers; graded cages; Wax Key draws; boxed-lurker drops |
 | **8 Events** | Readings; Riddle-lock clues; Hour locks on Landmark ticks; Dream Fragments read the threshold rule |
 | **9 Boss arenas** | No guaranteed boss-room traps; arena devices use the TrapRecord format (the Supper chandelier); Clearways stay clear; the Bossgate never opens by Wax Key or Unbolting |

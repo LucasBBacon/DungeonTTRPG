@@ -844,11 +844,21 @@ rule 6's charged exclusion is extended to cover (TR-4, armour owner;
   has a flank square** that is not Covered against it, reachable in ≤ 6
   path squares from the Clearway *(illustr.)*. Every start socket is
   treated as possibly artillery or a Kiter, because who stands on it is
-  decided after terrain (enemies 10.5, segment 6);
+  decided after terrain (enemies 10.5, segment 6). **Start sockets
+  (reading, change EP-5):** this rule and the floor-1 rule below range
+  over the start sockets segment 6 derives from FL `startZone` squares
+  (walkable, off the Clearway, never a socket piece's square)
+  (encounter placement design 6.6.1). **Pending request (change EP-6;
+  the enemies owner rules; M2):** the rule extends to segment 6's
+  fall-back squares, each with a flank square within 6 (encounter
+  placement design 6.6.3). Nothing changes until that owner rules;
 - **floor 1: no monster start socket is Covered against the landing:**
   for every landing square L and every start socket S with line of sight
   from L and Chebyshev distance ≥ 2, CV2 with A = L and T = S is false.
   This keeps the solo floor fair; it is a hook for segment 6.
+  **Reading (change EP-6; the RT owner confirms):** it governs start
+  sockets only; an F1 fall-back square may be Covered (encounter
+  placement design 6.6.3).
 - **These are initial-state guarantees.** Furnishings move in play; the
   runtime keeps the rules of 6.3.6, not these counts.
 
@@ -986,11 +996,20 @@ asserts nothing it has not proven (FL-15).
   report.
 - **KP4.** Hide spots (Tall-piece nooks and peeks that break sight from
   the room's enemy half): 1–3 per standard room, ≤ 4 cluttered (Shade
-  parity).
+  parity). **Pending request (change EP-17; with FL 6.7; M2):** the
+  Circuit `coverRoom` holds ≥ 2 Hide spots with line of sight to a
+  patrol-lane square within 4, out of the lane's sight from the previous
+  waypoint; on F2–5 in a Circuit side room, never the Forecourt; failure
+  action: the next Circuit side room, else the patrol is a Picket
+  (encounter placement design 6.9). Nothing changes until this owner
+  rules.
 - **KP5.** No contact hazard, harm square or Keg within 2 of
   `partyEntrySquares` or on the landing; Kegs ≥ 3 from party entry and ≥
-  2 from enemy start zones; none adjacent to party start squares in
-  ambush templates (segment 6 hook). **Extended by VP1 (change HZ-3):**
+  2 from enemy start zones; none, and no trap trigger, adjacent to the
+  entry lane or, for lurkers, the open zone in ambush templates (change
+  EP-8; M2; encounter placement design 6.6.1, 6.8.3). Segment 6's
+  Terrain Pairings also keep Kegs ≥ 2 from the entry lane (change EP-21;
+  M2; encounter placement design 6.6.8). **Extended by VP1 (change HZ-3):**
   no condition patch or bile within 2 of `partyEntrySquares`; no Void,
   vent mouth, Stir footprint or Cord within 3 (hazards design 6.2.4).
 - **KP6.** Kegs ≥ 2 from each other.
@@ -1044,6 +1063,10 @@ PhaseSocket { socket: Socket, phase, off: PieceKind|SquareClass|none, on: PieceK
   matching FL 13 region tag (wet, dry, web, slick, bile, fire-pit), and
   a `hazardFace` socket names its host side, so the face's one front
   square is derived from the rotated template.
+- **Pending request (change EP-5; M3):** an optional `roleHint` on
+  `Socket`, used by segment 6 only to break ties between its derived
+  start sockets; no other authored start-socket field (encounter
+  placement design 6.6.1). Nothing changes until this owner rules.
 - **Stream:** `terrain = Derive(floorDungeonSubstream,
   FNV-1a("terrain"))`, after LS13 and before enemies 10.5 step 2. It
   draws, in this order **(lead's call, after the check)**:
@@ -1844,7 +1867,11 @@ creates a square kind outside its theme's home set.
 - **One visible terrain-using enemy per F2–5 theme**, with a telegraphed
   intent (a Strongman Shunts a crate at the backline; a Glutton Kicks a
   trolley; a Fire-Eater breathes on a Keg; a Gut Ooze shoves toward
-  molars).
+  molars). **M3 (change EP-21; on the TR-15 ruling):** segment 6's
+  Terrain Pairings seat the terrain-using enemy by its Furnishing; the
+  Call Post (a bell rope or gong) is deferred to M3 until these
+  Furnishings exist (change EP-36) (encounter placement design 6.6.8,
+  9.1).
 - **Tie-breaks:** Shunt and Kick ties use the fixed square order
   (ability 8.1).
 - **Stupidity floors hold:** never enter a hazard that could kill;
@@ -2651,7 +2678,7 @@ Segment 3 takes the knock-into *system*, not drop hazards.
 |---|---|---|
 | 4 Hazards | The piece and square classes, bands, caps, `ThemeSix`, the Remnant record and its environment-only source rule | Catalogues and density inside the caps; drops; bile; Teetering counting; vents |
 | 5 Traps, locks, checks | Plank and Shunt checks naming the ladder; Overturn strips that never include a Clearway square; **traps and pieces (lead's call, after the check):** a Furnishing may end on a trap's trigger square, never springs a trap and never hides a known trap's marker; trap damage is outside the one-instance cap (6.3.6, 6.4); segment 5 may narrow both. **Narrowed by segment 5 (change TL-14; M2):** weighted plates (a piece ending on a plate or trapdoor springs it; one act springs at most one trap); the cap exclusion kept (TL-18) (traps and locks design 6.7, 6.10) | DCs; traps; door verbs; the out-of-combat Plank cost; how traps and pieces interact beyond these defaults |
-| 6 Encounter placement | Start sockets with cover data; `Floor1NoCoveredStarts`; KP5's ambush clause; nooks as lurker sockets; the terrain-using enemy per theme | Who starts where; ambush templates |
+| 6 Encounter placement | Start sockets with cover data (derived by segment 6 from FL `startZone` squares; change EP-5); `Floor1NoCoveredStarts`; KP5's ambush clause (defined, change EP-8); nooks as lurker sockets; the terrain-using enemy per theme (encounter placement design 6.6.1, 6.8.3) | Who starts where; ambush templates |
 | 7 Loot | Furnishings never hold loot | Containers and contents |
 | 8 Events | Furnishing kinds by id | Events that name a Furnishing kind |
 | 9 Boss rooms | 6.11's caps, phase sockets and `PhaseSocketsBoth` | Interiors, counterplay identity, each boss's one authored terrain move |

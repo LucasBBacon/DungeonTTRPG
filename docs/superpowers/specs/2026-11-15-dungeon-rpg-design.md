@@ -152,8 +152,11 @@ These would make the game a failure even if everything works.
   Out of combat, one round is one tick. See the ability and resource
   model, section 9.6, and the conditions design, sections 5.1–5.2.
 - Enemies outside combat are dormant, stationary or patrolling, set per
-  monster in data. **(decided)** "Dormant" is a behaviour, not the Asleep
-  condition (conditions design 5.5).
+  group within a per-monster set in data: each monster type lists
+  `allowedAwareness[]`, and the encounter template and the group's
+  activity choose within it (encounter placement design 6.7; change
+  EP-9, agreed Q4, M2). **(decided)** "Dormant" is a behaviour, not the
+  Asleep condition (conditions design 5.5).
 - Each unaware enemy group makes one perception check per trigger, using
   its best member in line of sight, against the party's passive stealth,
   never an opposed roll; see the character stat model. Triggers: first
@@ -162,13 +165,24 @@ These would make the game a failure even if everything works.
   sight; hiding enemies roll Stealth against the party's passive
   perception (enemies design 12.2). A side that is noticed
   without noticing back is surprised and loses its first turn. **(decided)**
+  Surprise is judged per side for the party and per group for monsters:
+  the party is surprised only if no party unit has noticed any hostile
+  unit taking part in that combat; each monster group is surprised if
+  the party noticed it and it is unaware (encounter placement design
+  6.8.2; change EP-2, agreed Q1; recorded M1, in effect M2).
   Exception: the solo hero is never surprised in floor 1's first two
-  main-path rooms (death and healing design 17.1).
+  main-path rooms (death and healing design 17.1). A note only, Later:
+  if `SurpriseDeathShare` misses, a 2024-style surprise (disadvantage on
+  initiative instead of a lost turn) goes to the client as a fallback
+  (encounter placement design 9.1; EP-41 note, Later).
 - Enemies within hearing range of a fight join it. Joiners move at their
   speed, are announced at least 1 round before they arrive (arrival is
   delayed if needed to keep the warning), and enter at the next round
   start. Joining groups are capped per fight: 1 on floors 1–2, 2 deeper;
-  groups beyond the cap do not change state. Combat ends when no hostile
+  groups beyond the cap do not change state (encounter placement
+  design 6.12). An Errant that ignores this joining rule is recorded
+  only as a Later item for the client (encounter placement design 9.1;
+  EP-38, Later). Combat ends when no hostile
   unit is aware of the party, so fleeing by breaking line of sight is
   possible. Combat also ends as a win when every hostile still in the
   fight is Routed (enemies design 12.4, 14.6). **(decided)**
@@ -356,6 +370,11 @@ computes rules.
   draw from `checks`, so a trap or lock handled between fights never
   moves the next fight's rolls (traps and locks design 6.22; change
   TL-3, M1).
+  An `encounters` child of each floor's dungeon substream, drawn after
+  `traps` and before `trapsResolve` with fixed counts and dummy draws,
+  places enemy groups, so a placement retry never moves layout,
+  terrain, hazards or traps (encounter placement design 6.1; change
+  EP-1, M1).
 - Rules use integer arithmetic only.
 - No reliance on unordered collection iteration.
 

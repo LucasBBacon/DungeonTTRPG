@@ -1,8 +1,7 @@
 # Encounter Placement: Design (Dungeon Generation, Segment 6)
 
 Date: 2026-11-21
-Status: Draft, revised after the design check, awaiting client approval,
-2026-11-22
+Status: Approved, 2026-11-22
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design, "MAIN"),
 `2026-11-16-character-stat-model-design.md` (stat model, "STAT"),
 `2026-11-16-ability-resource-model-design.md` (ability model, "ABL"),
@@ -55,46 +54,51 @@ adopted, deferred and rejected mechanics; the numbers and fixes (toy);
 data, V12 `EncounterPlacement`, reports and arms; the staging; ownership
 and hooks; the binding requirements; the EP-1 to EP-41 changes; the
 told-plainly items; the risks; and the appendix resolutions and names.
-**This document is a draft: it binds once the client approves it as a
-whole.**
+The client approved this document as a whole on 2026-11-22.
 
 **The two brief questions** (CQ1–CQ2 here, to keep them apart from this
 document's client questions Q1–Q4) were answered by the lead in the
 proposal (0.1). The client accepted those answers by proceeding to
-Q1–Q4; they are recorded as the **lead's answers**, confirmed with this
-document on approval. **Two parts of them are contested by the lead:**
-"no hidden whole groups" (CQ1) and "no glued archers" (CQ2), each
-against a reading the brief invited; approval of this document confirms
-them (19.1).
+Q1–Q4; they are recorded as the **lead's answers**, and the client
+confirmed them all on 2026-11-22, when it approved this document as a
+whole. **Two parts of them were contested by the lead:** "no hidden
+whole groups" (CQ1) and "no glued archers" (CQ2), each against a reading
+the brief invited; the client confirmed both with this document on
+2026-11-22 (19.1).
 
 Items marked **(lead's call)** were filled in by the design lead inside
-approved rules and were in the proposal the client answered; they bind
-once the client approves this document. Items marked **new lead's call**
-were made while writing this document, beyond that proposal; items
-marked **(lead's call, after the check)** were made when revising it
-after the design check. Both are listed in 19.1 for the client's
-confirmation with this document. Items
+approved rules and were in the proposal the client answered; the client
+confirmed them all on 2026-11-22, when it approved this document as a
+whole, and they are binding. Items marked **new lead's call** were made
+while writing this document, beyond that proposal; they are listed in
+19.1 and the client confirmed them all on 2026-11-22. Items marked
+**(lead's call, after the check)** were made when revising this
+document after the design check that followed the client's Q1–Q4
+answers; they are listed in 19.1, the client confirmed them all on
+2026-11-22, and they never override a client answer. Items
 marked **(settled)** restate a rule from an approved document;
 **(decided)** marks a main-design client decision. Items marked
 **(change EP-n)** amend an approved document and are listed, with the
 exact section they touch, in section 17; rows that touch **decided** or
 **agreed** text are flagged there, and the client's approval of this
-document (with Q1–Q4 where a row names one) will cover them. Items
-marked **(told plainly)** narrow or re-read agreed or settled text, or
-state an unwelcome forecast, and are told to the client in plain words
-(19.1). Once approved, every item here is binding on the builders.
+document on 2026-11-22 (with Q1–Q4 where a row names one) covers them.
+Items marked **(told plainly)** narrow or re-read agreed or settled
+text, or state an unwelcome forecast, and were told to the client in
+plain words (19.1, including those told after the check); the client
+confirmed them all on 2026-11-22. Every item here is binding on the
+builders.
 
 | Marking | Meaning |
 |---|---|
 | **(settled)** | Restates a rule from an approved document |
 | **(decided)** | A main-design client decision, restated |
 | **(agreed)** | A client answer: Q1–Q4 of this document (2026-11-21), or one recorded in an approved document, restated |
-| **lead's answer (CQn)** | The lead's answer to brief question n, accepted by the client by proceeding; confirmed with this document. Its two contested parts are confirmed on approval |
-| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal; binding once the client approves this document |
-| **new lead's call** | A lead's call made while writing this document, beyond the answered proposal; listed in 19.1 for confirmation with this document |
-| **(lead's call, after the check)** | A lead's call made when revising this document after the design check (builder, consistency, play and art lenses); listed in 19.1 for confirmation with this document; never overrides a client answer |
+| **lead's answer (CQn)** | The lead's answer to brief question n, accepted by the client by proceeding; confirmed by the client with this document on 2026-11-22. Its two contested parts were confirmed on 2026-11-22 |
+| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal; confirmed by the client with this document on 2026-11-22 |
+| **new lead's call** | A lead's call made while writing this document, beyond the answered proposal; listed in 19.1 and confirmed by the client on 2026-11-22 |
+| **(lead's call, after the check)** | A lead's call made when revising this document after the design check (builder, consistency, play and art lenses); listed in 19.1 and confirmed by the client on 2026-11-22; never overrides a client answer |
 | **(change EP-n)** | Amends an approved document; listed with its exact section in 17 |
-| **(told plainly)** | Narrows or re-reads agreed or settled text, or states an unwelcome forecast; told to the client in plain words (19.1) |
+| **(told plainly)** | Narrows or re-reads agreed or settled text, or states an unwelcome forecast; told to the client in plain words (19.1) and confirmed by the client on 2026-11-22 |
 | *(illustr.)* | An illustrative number, owned by the builders and calibrated by the M2 simulator (10, 11). Never binding |
 
 **The client's brief:** dungeon generation segment 6 of 12, encounter
@@ -2950,22 +2954,23 @@ three lurker Stealth rolls; Billets lose to invariant 7
 
 ## 17. Changes to approved documents
 
-To be applied when the client approves this document. **This document
-edits no parent document itself**; the rows are applied by the owners of
+Applied on 2026-11-22, when the client approved this document. **This
+document edits no parent document itself**; the rows are applied by the owners of
 the sections they touch **(lead's call)**, and rows owed by other owners
 are listed again in 18. Every row names the exact section it touches.
 Rows that touch **decided** or **agreed** text are flagged in the "Flag"
-column; the client's approval of this document will cover them (with
-Q1–Q4 where a row names one; the answers of 2026-11-21 already agree
+column; **the client's approval of 2026-11-22 covers them** (with
+Q1–Q4 where a row names one; the answers of 2026-11-21 already agreed
 EP-2, EP-9, EP-14 and EP-26 in substance). **New lead's call:** as in
 the TL precedent, the Flag column also marks rows that only *read*
 agreed or decided text without changing it, so that every touch of
 agreed text is visible; and EP-1 is flagged for extending MAIN 6.3
-(decided), which the proposal had not flagged. Told-plainly rows are
-told in 19.1. Rows marked "request" change nothing until their owner
-rules, and 19.2 names each fallback. M3, M4 and Later rows are recorded
-now as applied text marked with their wave and take effect at that
-wave.
+(decided), which the proposal had not flagged. Told-plainly rows were
+told in 19.1 and confirmed by the client on 2026-11-22. Rows marked
+"request" are requests to other owners, recorded as pending requests;
+they change nothing until their owner rules, and 19.2 names each
+fallback. M3, M4 and Later rows are recorded now as applied text marked
+with their wave and take effect at that wave.
 
 **Readings recorded inside this design (no approved text changes):**
 - ENM 12.1's "back at its post" reads "its Billet hold squares" (EP-15);
@@ -3090,16 +3095,20 @@ The owed rows are the single list in 17; by owner:
 
 ## 19. Open items for the client
 
-**This document awaits the client's approval as a whole.** The four
-questions it raised were answered on 2026-11-21 **(agreed)**, and the
-client said everything else in the proposal stands as written. Approval
-will confirm the lead's answers to the two brief questions (their two
-contested parts included), every lead's call (those of the answered
-proposal, the new lead's calls and the lead's calls after the check
-below), the told-plainly items, the
-readings recorded in 17 and the flagged rows of 17. The future items in
-19.2 come back only if a report, an owner's refusal or a later design
-triggers them.
+None. Approved by the client on 2026-11-22.
+
+The client approved this document as a whole on 2026-11-22, including
+the lead's answers to the two brief questions CQ1–CQ2 (including their
+two contested parts, "no hidden whole groups" and "no glued archers"),
+every lead's call (the lead's calls of the answered proposal, the other
+contested lead's calls, the new lead's calls in 19.1 and the lead's
+calls after the check in 19.1), the told-plainly items (including "Told
+plainly after the check" in 19.1) and the readings recorded in 17, and
+its approval covers the flagged rows of 17. The four questions it raised
+were answered on 2026-11-21 **(agreed)**; the client also said
+everything else in the proposal stands as written. The future items in
+19.2, which come back only if a report, an owner's refusal, a wave or a
+later design triggers them, and the naming pass remain future items.
 
 ### 19.1 This document
 
@@ -3126,25 +3135,25 @@ triggers them.
   decided). Rejected: B, one state per type.
 
 **The lead's answers to the brief (accepted by the client by proceeding;
-confirmed with this document):**
+confirmed by the client on 2026-11-22, with this document):**
 - **CQ1:** yes to ambushes in three forms, the Cuckoo, the Mousetrap and
   the Waylay (with the M3 boxed lurker), under the one ENM 10.3 cap; **no
   hidden whole groups (contested by the lead)**; no generated rest or
   backtrack ambushes; the Hedgehog; the party as the better ambusher,
-  bounded by `PartySurpriseShare` (0.1, 6.8, 6.21). **Approval of this
-  document confirms the contested part**; if the client wants hidden
-  groups after all, 19.2 names the cost.
+  bounded by `PartySurpriseShare` (0.1, 6.8, 6.21). **The client
+  confirmed the contested part on 2026-11-22, with this document**; if
+  the client ever wants hidden groups after all, 19.2 names the cost.
 - **CQ2:** very tactical at the opening: named formations with soft
   Billets, Keystones, public breaks and validator-proven counters;
   archers start at the back and prefer to stay there; **no glued archers
-  (contested by the lead)** (0.1, 6.6). **Approval of this document
-  confirms the contested part.**
+  (contested by the lead)** (0.1, 6.6). **The client confirmed the
+  contested part on 2026-11-22, with this document.**
 
-**Other contested lead's calls** (in the proposal; confirmed with this
-document): guard posts never start Wary and no ordinary group starts
+**Other contested lead's calls** (in the proposal; confirmed by the
+client on 2026-11-22, with this document): guard posts never start Wary and no ordinary group starts
 Wary or Alerted (6.5); no noticing modifier for Busy groups in M2 (6.7).
 
-**Told plainly** (to be confirmed with this document):
+**Told plainly; confirmed by the client on 2026-11-22:**
 - **The boxed lurker never Surprises the party** under its approved
   touch table; the drafts listed it as a party-Surprise source (6.8.1).
 - **The themes differ in kind:** the Choir, Carnival, Supper and Heart
@@ -3182,8 +3191,9 @@ Wary or Alerted (6.5); no noticing modifier for Busy groups in M2 (6.7).
   "60–80% HP at the boss door" (10).
 - **The catalogue corrections are not in the toy** (7, 10).
 
-**Told plainly after the check** (to be confirmed with this document;
-none changes a client answer):
+**Told plainly after the check** (the design check that followed the
+client's Q1–Q4 answers; confirmed by the client on 2026-11-22, with this
+document; none changes a client answer):
 - **The catalogue holds 19 entries, not 17.** The client's "stands as
   written" list says "the 17-formation catalogue"; the entries are as
   written, the count was wrong. They are now read as **15 battle
@@ -3233,7 +3243,8 @@ none changes a client answer):
   lair's tier rule is read per template (6.2, 7).
 
 **New lead's calls made while writing this document** (beyond the
-answered proposal; for confirmation with this document):
+answered proposal; confirmed by the client on 2026-11-22, with this
+document):
 1. **Formation tiers are labelled FT1–FT3**, since "Tier 1–3" collides
    with the ability model's spell tiers (front matter, 6.2).
 2. **"Disposition" is renamed "posture"** (ENM 14.6 uses "disposition"
@@ -3278,8 +3289,9 @@ answered proposal; for confirmation with this document):
     decided), not "main 6.8" as the proposal had it (4).
 16. **The fallbacks of 19.2** for each request to another owner.
 
-**Lead's calls after the check** (for confirmation with this document;
-each marked "(lead's call, after the check)" where it stands):
+**Lead's calls after the check** (each marked "(lead's call, after the
+check)" where it stands; confirmed by the client on 2026-11-22, with
+this document; none overrides a client answer):
 1. **Pipeline:** formation choice moved to a new step 5b, before fill;
    ranked candidate lists from the single weighted draw; step 2a's exact
    schedule (the boxed lurker first on the cap; a failed form becomes a
@@ -3359,8 +3371,9 @@ each marked "(lead's call, after the check)" where it stands):
 
 ### 19.2 Future items triggered by reports, owners or later designs
 
-These come back to the client only if a report, an owner's refusal or a
-later design triggers them; each fallback is a new lead's call:
+These come back to the client only if a report, an owner's refusal, a
+wave or a later design triggers them; each fallback is a new lead's call
+(confirmed by the client on 2026-11-22, with this document):
 - **If the RT owner refuses the start-socket reading (EP-5):** RT adds a
   `StartSocket {socketId, square, coverFrom[], nook}` record to the
   TerrainLayer, and 6.6.1 reads it instead; nothing else changes.
