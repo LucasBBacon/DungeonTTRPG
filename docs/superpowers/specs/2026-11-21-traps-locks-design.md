@@ -603,7 +603,8 @@ are honoured as written.
   - Locked Portals stop monster paths (12.4);
   - interrogation names "the nearest undiscovered trap" (14.6);
   - Steal is one try per carrier per floor (15.5, **agreed**);
-  - loot is never destroyed (15.6);
+  - loot is never destroyed (15.6), the sole exception a Windfall that
+    gets away (M3; loot sources design 4.7.7; change LP-2);
   - XP comes only from monster groups (16);
   - the Ambush template's bait may be a container (17.4).
 - **FL:**
@@ -1674,9 +1675,14 @@ on 2026-11-21; the fallback, if the client ever reopens it: a size-0
 | **Catch** | A trap on the lid: detected like a snare (a Hunch shows as a badge on the host); disarm, Bear it, Pole it (springs it with no hand on the lid) |
 | **Keyed** | A floor key, or the general routes |
 | **Boxed lurker** | M3 (6.14) |
-| **Twin Coffer** | M3 (loot economy design 8.4; change LE-21): 2 pre-rolled notables of the same card tier and different categories; taking one dissolves the other ("it was only a dream") inside the loot summary; counts 1. At most 1 per floor, F2+, off-path, never an HE socket |
+| **Twin Coffer** | M3 (loot economy design 8.4; change LE-21): 2 pre-rolled notables of the same card tier and different categories; taking one dissolves the other ("it was only a dream") inside the loot summary; counts 1. At most 1 per floor, F2+, off-path, never an HE socket. Its RC5 base mark is the **twin-lid kind mark** (loot sources design 5.1 CT8, 6; change LP-26; M3) |
+| **Ebb** | M4 (loot sources design 4.7.11; change LP-34; agreed, loot sources Q3): a Plain, never-locked fading container on a dry plain square in an off-path side room or Alcove, visible from the threshold with its digit; its count (C = 8–12 ticks *(illustr.)*) starts when a party unit first crosses the threshold, it fades one notch per tick (an act of ≤ 1.0 s), and at 0 its contents get away (`gotAway`). Only on forking geometry (safe route ≥ fast route + 2; the fast route crosses one shown risk) |
 
-- Contents are never destroyed by any result. A Jammed container can
+- Contents are never destroyed by any result. **Sole exception (loot
+  sources design 4.7.7; change LP-2; agreed, loot sources Q1; M3):** a
+  Windfall's card and coin leave the floor when its shown count ends
+  (`ItemDestroyed{gotAway}`); kill method, damage, terrain, traps, locks
+  and force still never destroy loot. A Jammed container can
   always be forced or Wax-Keyed. A Twin Coffer's untaken alternate is a
   dreamed option, not contents (loot economy design 8.4).
 - **Socket ranks (loot economy design 6.9 item 1; change LE-10; M2):**
@@ -1686,6 +1692,14 @@ on 2026-11-21; the fallback, if the client ever reopens it: a size-0
 - Locked containers show a padlock base decal on the hasp, with the
   kind glyph (8), and never a keyhole. Unlocked containers show no
   padlock.
+- **Inset host (loot sources design 4.3, 5.2; change LP-12; M2):** a
+  container may be set into a wall face, waist-high on a wall-set
+  bracket, at most half a wall square wide, with its open square in
+  front; SR0, Alcove and secret sockets prefer it where the template
+  offers a wall face. It is never a Furnishing and never a hidden stash
+  (ROOM 6.3.4, 13, reaffirmed), and its RC5 mark is the wall-set mark
+  (a solid base bracket, also projected onto the open square), never a
+  dashed rim.
 - **Open routing (moved here from 6.14; lead's call, after the
   check):** opening any container, real or not, routes to the best
   Mechanics member, otherwise to the highest-HP member. The same rule
@@ -1701,7 +1715,22 @@ on 2026-11-21; the fallback, if the client ever reopens it: a size-0
      first, then the catch springs. A Jam springs nothing.
   3. The lock card shows "the catch will spring" whenever it would.
      `LockRecord.catchTrapId` links the two.
-- Opening gives one loot summary (ITEMS 8.1).
+- Opening gives one loot summary (ITEMS 8.1). **Out of combat, a quiet
+  summary auto-closes** (loot sources design 4.6; change LP-8; M2): a
+  summary holding only coin and non-healing sundries that all fit
+  (party-wide placement) takes everything after 1.5 s *(illustr.)* and
+  closes, logging to the floor strip; one with a notable, a healing
+  sundry or any choice stays open. The timer pauses on focus, and a
+  settings toggle (on by default) is offered.
+- **Glean (loot sources design 4.6; change LP-9; M2, optional):** out
+  of combat, with no awake un-Cowed hostile in sight, one click opens
+  every visible Plain unlocked container in the room in `socketId`
+  order into one merged summary (still one screen, ITEMS 8.1), each
+  open routed as above. Locked, Catch and consequence containers, bait
+  caches, Twin Coffers, Wager and Dare prizes, Windfalls and
+  offer-UI containers are excluded. An unmarked boxed-lurker host is
+  included and springs as a single open would, stopping the Glean;
+  Glean never reveals what a single open would not (V15 `GleanNoLeak`).
 
 ### 6.14 Mimics: the boxed lurker (lead's answer, BQ7; agreed, Q2; change TL-28; M3)
 
@@ -1859,6 +1888,11 @@ under RC3 by giving a minded, hungry thing the mindless mark).
     to a side room, its first option moves to the room's lowest-id
     container and the step stays spent (6.9 item 7). The tier mark sits
     on the offer card, never beside the Disturbance meter (6.15).
+  - **Offer pacing (loot sources design 7; change LP-30; M3):** at
+    most 2 offer-form field sources per floor among Wager, Twin Coffer
+    and Viaticum. LootBind's draw-free trim never drops the Viaticum,
+    drops a Twin Coffer first (it reverts to a plain container), then a
+    Wager (the Site reverts as above).
 - **Exits are never sealed.** No short rest inside.
 - **Reports:** `WagerTakenRate`, `WagerWakeRate`, `WagerDeathShare`
   (against DH 18.2), `WagerXpDelta` (must be 0), `WagerWalkRoundRate`
@@ -1983,7 +2017,10 @@ Lock counts are read with one quota card per floor: at most one locked
 or trapped socket holds a notable (6.17; loot economy design 6.4 item 9;
 change LE-10; M2). *Pending request (loot economy design 6.4 items 4, 5 and
 9; 17):* where the coin carve cap or the F5 fillers bind, segment 7c
-asks this pass to place fewer locks inside these ranges.
+asks this pass to place fewer locks inside these ranges. *(Segment 7c's
+reading, loot sources design 4.2 rule 5, 4.8: fewer locks is a
+design-time TL tuning lever if the walker shows the cap binding, never a
+generation-time request.)*
 
 **Placement rules TP1–TP12 (V11):**
 - **TP1 Exclusions.** No trigger square on:
@@ -2141,7 +2178,10 @@ distance and guard, and the boxed-lurker budget.
   - Squeeze and Plank: the object's `traversalIndex`, incremented on
     every check in and out of combat (6.12);
   - out-of-combat Trigger Shot (6.7): always 0, kind `triggerShot`;
-  - the Iced padlock's Smash (7.8): always 0.
+  - the Iced padlock's Smash (7.8): always 0;
+  - Steal on a Dormant Truant: `H(floorSeed, windfallId,
+    "windfallSteal", 0, die)`, `die` 0, and 0 and 1 for advantage
+    (loot sources design 4.7.8; change LP-6; M3).
 - **Out-of-combat saves forced by traps or consequence locks** draw
   `H(floorSeed, objectId, 'save', unitId, springIndex, die)`, where
   `springIndex` counts the trap's springs (or the lock's consequence
@@ -2293,7 +2333,8 @@ Mindless types: 0.
     cell-tagged lock;
   - Hour lock: hourglass-plated cell doors that open when the Small
     Hour Strikes (M3); no clock faces on doors (HF11; lead's call, after
-    the check).
+    the check). *Reading (loot sources design 5.3, 13; TL and LE
+    owners):* its cell cache is SR2, not SR3.
 - **Reserved:** wall-bracket hand-bells, brass plaques over hinge-rod
   covers, hanging iron weights, speaking grilles, spiked lintel frames.
   Non-device clocks never hang over walkable squares.
@@ -2338,6 +2379,10 @@ The Late Uncle owns the "coffin with a lurker" tell (RC2). Trapped
 coffins show a pulley cord, cache coffins show the container marker, and
 a coffin never shows two of these at once. Coffin lids stay horizontal
 (RC2).
+*Pending request (loot sources design 5.3; change LP-18; M2 cond.):*
+Wake loot sits in knee-high grave-goods caskets, and full coffins never
+hold loot, which removes the three-way coffin read (cover, lurker tell,
+loot).
 
 - **Creaking board** (plate; lesson trap): a rucked runner rug. Noise 6;
   Dormant guests hear at half radius.
@@ -2484,6 +2529,9 @@ Staggered, Prone, Frightened.
     moves at rest (idle motion is the lurker's grammar; 6.3). Never a
     keyhole.
   - Oiled, push 1, honk (noise 6).
+  - *Pending request (loot sources design 5.3; change LP-17; M2):* the
+    host is a prize hamper (the Carnival Plain family), not a costume
+    trunk (a Furnishing).
 - **Oil Bucket** (catch on a Door):
   - Tell: a bucket rim over the lintel.
   - Oiled to the opener and the square behind.
@@ -2524,7 +2572,9 @@ Poisoned, Prone, Frightened.
     It waits for the ability model's teleport rule (ABL 8; TL-41);
     otherwise it stays Prone in place.
 - **Taster's Plate** (catch, `poison`): silver tarnished black round one
-  fork. Medicine smells it.
+  fork. Medicine smells it. *Pending request (loot sources design 5.3;
+  change LP-19; M2):* read as one tarnished fork in a silver canteen's
+  velvet (the Supper Plain family).
 - **Cold Seat** (plate; the head-of-table square, a "Reserved" card):
   Chilled plus Staggered.
 - **Locks:**
@@ -2565,6 +2615,9 @@ Prone, Frightened.
   HZ name):
   - Tell: stained lips and a bile drip line. No twitch: idle motion is
     the lurker's grammar (6.3; lead's call, after the check).
+  - *Pending request (loot sources design 5.3; change LP-20; M2):*
+    Plain sphincter caches carry a pale dry rim, so lips and drip lines
+    stay the Lip Catch's alone.
   - Acid damage plus Grappled. While a unit is clamped, the Portal is
     blocked and counts as closed for hearing.
   - Shove a monster in to plug the doorway.
@@ -2599,7 +2652,8 @@ Prone, Frightened.
   motion is never used for it (lead's call, after the check). The
   Antibody Knights are the guard.
 - **Reserved:** stained lips with drip lines, wall valve-knots, strings
-  of keys, spore bladders.
+  of keys, spore bladders. (*Pending request,* LP-20: the pale dry rim
+  is the Plain sphincter cache's.)
 
 ### 7.10 The Dreamer's Heart (F5)
 
@@ -2690,6 +2744,14 @@ format)**
     no padlock, only the Wager glyph;
   - no lock glyph uses a face part, a ring or a clock face (6.11);
   - V7 adds "no keyhole on any container".
+  - **Container families (loot sources design 5.1 CT1, CT2, CT15;
+    change LP-15; M2):** V15 `ContainerFamilyDistinct` (with V7) keeps
+    loot containers, catch hosts, bait caches, Truants and the
+    cross-theme variants in distinct silhouette families within a
+    theme, and insets never share a silhouette with the theme's Latch,
+    Door or Hairline skins; `ContainerArtBlind` gives two variants per
+    family by display hash, with no size step by rank, glow or tinted
+    lid.
 - **Hazard/trap line:** no trap tell, mechanism or device body reuses an
   HZ Cord, vent or Snag prop family. Trap cords are thin taut wire with
   a brass eye; the thick rope-with-handle read stays HZ's Cords. The
@@ -2757,7 +2819,10 @@ lines):
 | Boxed lurker reveal | The lurker's own reveal cue | — |
 
 The alarm is no longer pitched per theme: one reserved cue cannot be
-ten variants. Each row joins the audio blind-ID gate (85%).
+ten variants. Each row joins the audio blind-ID gate (85%). The
+container-open cue follows this precedent: one global cue plus an
+optional quiet theme foley tail (loot sources design 5.1 CT12; change
+LP-23; M2).
 
 - **"Feels teeth"** is a UI callout over the opener (global skin) plus
   the boxed lurker's reveal cue, never a bark (RC8; 6.14).
@@ -3076,7 +3141,7 @@ as 6.20 lists (lead's call, after the check):
 | Segment | Receives from segment 5 |
 |---|---|
 | **6 Encounters** | The `trapsResolve` pass runs after segment 6's placement and may ask it to re-place a group (TP2); groups never start on triggers; areas allowed; Keybearer tag; Tattle Dormant group (the Annex); boxed-lurker budget (the Annex); Wager guards (the Annex, one extra patrol-band budget, 0 XP; M3); rigged-fight trap damage charged to the budget; alarm and Crier arrivals Alerted (answered in encounter placement design 6.13; EP-25, EP-26) |
-| **7 Loot** | Container kinds; `lockable` sockets; +1 rarity step behind consequence locks and in Wagers; graded cages; Wax Key draws; boxed-lurker drops. **Filled in part by the loot economy design (6.9, 6.4 item 9; changes LE-10, LE-11, LE-12, LE-20):** the one step rule and socket ranks, the two identities of a consequence cache, the K2 / K2b pegs, the cage set and boxed-lurker contents (6.11, 6.13–6.15 here) |
+| **7 Loot** | Container kinds; `lockable` sockets; +1 rarity step behind consequence locks and in Wagers; graded cages; Wax Key draws; boxed-lurker drops. **Filled in part by the loot economy design (6.9, 6.4 item 9; changes LE-10, LE-11, LE-12, LE-20):** the one step rule and socket ranks, the two identities of a consequence cache, the K2 / K2b pegs, the cage set and boxed-lurker contents (6.11, 6.13–6.15 here). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 5, 11):** container hosts and kinds (inset hosts, LP-12; the twin-lid mark, LP-26, M3; the Ebb, LP-34, M4), auto-close and Glean (LP-8, LP-9), offer pacing (LP-30, M3) and the Windfall's sole exception to "contents never destroyed" (LP-2, M3); LP-17 to LP-20 are pending requests |
 | **8 Events** | Readings; Riddle-lock clues; Hour locks on Landmark ticks; Dream Fragments read the threshold rule |
 | **9 Boss arenas** | No guaranteed boss-room traps; arena devices use the TrapRecord format (the Supper chandelier); Clearways stay clear; the Bossgate never opens by Wax Key or Unbolting |
 | **10 Information** | Every display in 6.23; Listen "a mechanism"; Lockside Listen; the codex pages; the camp's Wax Key line (Q3) |
@@ -3104,7 +3169,7 @@ as 6.20 lists (lead's call, after the check):
 | Keyhole reserved; locks are padlocks | RC3 | No keyhole anywhere in segment 5 |
 | ≤ 1 mindless type per theme | RE9 | `containerForm` uses existing lurkers **(agreed, Q2)** |
 | No safe rest | ABL 15.1 **(agreed)** | No relock; Drop-bar guard |
-| Loot never destroyed | ENM 15.6 | Force and Wax Key always remain |
+| Loot never destroyed (sole exception: a Windfall that gets away, M3; loot sources design 4.7.7; change LP-2) | ENM 15.6 | Force and Wax Key always remain |
 | XP only from monsters | ENM 16 | Wager guard from the budget; Feed gives no XP |
 | Never scale by party size | HZ 6.2.3 | CC6 |
 | No content needs a class | CL 6.1 rule 4 | CC4; solo guarantee |

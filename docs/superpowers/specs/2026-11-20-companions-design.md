@@ -869,7 +869,12 @@ Q2):**
   design 6.10, 11.4).** The simulator's time model takes the floor
   layout walker's terms: seconds per tick and a cost table per action
   *(illustr.; the companions owner calibrates)*: a step 1 tick; open a
-  door 1 click; a container N clicks by type; Listen 1 click and 2 ticks
+  door 1 click; a container N clicks by type (filled by change LP-8,
+  loot sources design 4.6; M2: a quiet Plain open 1 click, auto-closing;
+  a Plain open with a notable or healing sundry 2; Twin Coffer 2; Glean
+  1 + 1 per notable decision; Steal 2; Viaticum or boss card offer 2; a
+  consequence lock 3; values *(illustr.)* until the walker measures
+  them); Listen 1 click and 2 ticks
   (0 ticks when passive); Sound the wall 1 click and 6 ticks; a Squeeze
   1 click, +4 ticks on a failure; a Latch 1 click and 1 tick; a reveal 1
   click; each auto-walk stop 1 click. Layout commits, at party 4 on
@@ -907,6 +912,15 @@ Q2):**
   separately; a miss fires that design's cut order before release.
   **No encounter-placement lever** is added to the lever order below
   (agreed Q2 levers untouched).
+- **Loot sources in the time model (change LP-10, loot sources design
+  4.6; read; M2 / M3).** Segment 7c takes its own clock line beside
+  TL-38's and EP-33's: net ≤ 0 minutes and ≤ 0 clicks on floor 3 heavy
+  and floors 4–5 at party 4, against a re-run walker baseline, until
+  this gate passes with margin; Windfall rounds are converted at this
+  time model's seconds per tick (the companions owner calibrates). A
+  miss fires that design's cut order **before** any lever below. **No
+  loot lever** is added to the lever order below (agreed Q2 levers
+  untouched).
 - **Definition.** Floor time is the **active time** from the core's
   timestamped `FloorEntered` event to its `BossDefeated` event on that
   floor (every floor ends at its boss), excluding camp screens, pause
@@ -1615,6 +1629,16 @@ preview and 17.3 danger band cover four units.
   mode stays rejected (ability 5).
 - **Arcanist Prime's solo clause** ("no companion in the fight") reads
   the actual roster per fight **(settled)**.
+- **Pending request (change LP-33, loot sources design 4.7.8; M3):** add
+  a `targetRule` value `windfall` to the closed enum, so the Windfall
+  Truant is a legal target for suggestions (off by default) and for the
+  simulator's companion policy, with the condition "reachable this turn
+  without ending in the reach of more than 1 hostile". Never an
+  autonomous act and no "Nab it" order (the player controls every unit,
+  decided, main 4.2). Not a rule until the companions owner rules; if
+  refused, no suggestion points at a Truant and the simulator's policy
+  targets it only in its own arm (loot sources design 14.2). Reported:
+  `CompanionChaseDowns`.
 
 ### 8.7 Readability and attachment
 
@@ -1994,6 +2018,11 @@ comparison use the same seeds.
   size; healer counts by party size, small parties reported separately.
 - Enemies 20.3 HP-equivalents against the expected curve and hero death
   per fight by party size (CMP-9).
+- Loot sources reports and arms (change LP-32, loot sources design 9.3,
+  9.4; read; M2, with M3 Windfall rows): `LootClicksPerFloor`,
+  `WindfallSeconds` and `WindfallRoundsDelta` inside the 7c clock line
+  (7.4), `CompanionChaseDowns`, and the party-size-by-floor arm under the
+  7.1 ladder.
 
 ### 11.5 Test additions
 

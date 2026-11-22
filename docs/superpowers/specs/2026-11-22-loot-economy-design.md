@@ -169,7 +169,9 @@ the death curve.*
    - **Ledger A, the count:** the approved count of notables per channel
      (ENM 15.3 step 1, **settled**; 6–8 per floor including the boss
      signature *(illustr.)*). It is the clutter and click contract and
-     never grows. An offer set (choose 1 of N) counts as 1.
+     never grows. An offer set (choose 1 of N) counts as 1. (Read and
+     kept by change LP-11; 7c's click table fills it, loot sources
+     design 4.6.)
    - **Ledger B, value:** the VP of the notables, C1 / U2 / R3 / VR4
      (ITEMS 12.5–12.6, **settled**), fixed per floor by a **rarity
      deck**. It moves only by the **step allowance** (at most +2 per
@@ -485,7 +487,7 @@ curve so deaths land where DH 18.2 wants them.**
 | LX8 | Boss share 20% against the card and a VR signature on F4–5 | Card outside Ledger A, never VR; signature at the top legal tier for its category (LE-3) |
 | LX9 | Shops are hooks, yet ITEMS, CN and TL fix vendor rows | 7a sets loot-channel counts and pegs only; presentation to camp and hub |
 | LX10 | Pity rejected (DH 5.4) against "no dead runs" | Deck plus the Dream's Due, a standing announced rule (LE-13) |
-| LX11 | Containers against clicks and the clock (FL 6.10, TL-38) | No new containers; the Due shares an HE-7 socket; `TallyChaseSeconds` |
+| LX11 | Containers against clicks and the clock (FL 6.10, TL-38) | No new containers; the Due shares an HE-7 socket; `TallyChaseSeconds`. (Read and kept by change LP-1: the Windfall is a unit socket, so no container is added; loot sources design 4.7.6) |
 | LX12 | Sell 40% + Scrap 10% pays hauling | Sell 250‰ (LE-9) |
 | LX13 | K1 sits on its edge at the 25% discount (18 = 18) | Kept (≥ holds), told plainly; V13 warns on re-pricing |
 | LX14 | F5 coin, Sell, final card and signature are dead value | LE-5 (agreed, Q1) |
@@ -955,7 +957,11 @@ premium and is logged; its VP is unchanged.
    **(lead's call, after the check)**.
    - **Coin sockets** are containers and caches only (ITEMS 10.2: found
      coin comes from containers and caches), including HE containers
-     beside their DH entries; never carriers, except the Heavy Purse.
+     beside their DH entries; never carriers, except the Heavy Purse
+     and the Windfall (M3, change LP-1: an SR2 unit socket taking a
+     weight-3 share, never a K2 lump; carved in LootBind after the
+     Windfall is final, on the pre-escape pool, never re-carved; loot
+     sources design 4.4, 4.7.6).
      Weights by rank: SR0 1, SR1 2, SR2 3, SR3–SR5 4
      (`loot.rankWeights`); minimum lump 3 (`loot.coinLumpMin`); largest
      remainder, ties by socketId.
@@ -1282,9 +1288,17 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    | SR5 | Wager cage set, Dare cache (M3) |
    | SR4 | Elite-room carrier or lair cache; Strongroom (M3, F2–3) |
    | SR3 | Consequence-lock cache; for a consequence-locked Portal, the highest-ranked container in the room beyond |
-   | SR2 | Padlocked, Catch or Keyed caches; secret caches; the bait cache; the boxed lurker (M3); the Keybearer cache |
+   | SR2 | Padlocked, Catch or Keyed caches; secret caches; the bait cache; the boxed lurker (M3); the Keybearer cache; **the Windfall (M3, change LP-1; agreed, loot sources Q1):** a unit socket outside the lock quota, inside the premium share, with no step, created only in step 8 (item 2) |
    | SR1 | Off-path containers, Alcoves, optional-fight carriers |
    | SR0 | Main-path containers and carriers |
+
+   **Readings (loot sources design 4.1, 13; to this owner):** "lair
+   cache" here and in 6.14 means the *elite room's* SR4 cache; the
+   main-path lair's container is SR0 (`lairContainer`). Gb guard-post
+   carriers are optional-fight carriers (SR1). The Gaol Hour-lock cell
+   cache is SR2, not SR3. The F5 **Viaticum** is **unranked** (boss
+   channel; change LP-1): an offer outside the deal and the within-rank
+   shuffles (6.11 item 5).
 
    **The Annex has no prize socket of its own (lead's call, after the
    check).** A boxed lurker is always the floor's Annex (TL 6.14; EP-26),
@@ -1352,10 +1366,39 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
       not (LF4).
    7. **Steps** (item 3) are then applied in socket order (SR5, then
       SR3, then socketId) until the allowance is spent.
+   8. **The Windfall card move (M3; change LP-1; agreed, loot sources
+      Q1; loot sources design 4.7.6).** Draw-free, after step 7, so the
+      step-6 shuffles and step-7 swap never touch it; the `windfall`
+      socket is created here and is never in the steps 1–7 socket list.
+      The `windfall` grandchild's 4 draws are taken at its start (6.10
+      item 1). The first that exists: (i) the lowest-tier carried card
+      of the host encounter, never the elite's, passing (f1) and (g),
+      ties to the highest deck index; (ii) else the lowest-tier card on
+      a plain SR1 container passing (f1) and (g), that container keeping
+      coin plus 1 non-healing sundry; (iii) else no Windfall on this
+      floor (its draws consumed, `windfallCarry` set). New filters:
+      - (f1), card-level, at step 8: exactly 1 card; never the deck's
+        top card or a VR; the Due, the DH block or the Viaticum; a key,
+        a signature or a step card; a dual-identity card;
+      - (f2), identity-level, at the parent draw: the Windfall's slot is
+        drawn filter-first (6.10 item 1) with `oncePerRun` records
+        excluded;
+      - (g): never a card from a secret, the quota socket, a trimmed
+        floor's Alcove reward, a Wager, Dare or Strongroom, or the elite
+        carrier.
+
+      The card is tallied in its **origin channel** with an `onWindfall`
+      tag (ENM 15.3 split unchanged). Filters (a)–(g) are asserted
+      **after step 8** ((f2) after the parent draw), by V13g and V15.
    - **Parent channel slots.** The parent stream's channel slot *i*
      (ENM 10.5 step 3) maps to the *i*-th socket of that channel in this
      allocation order; its ordinary identity is drawn there, filtered to
-     that socket's tier (6.10 item 2).
+     that socket's tier (6.10 item 2). **The mapping is fixed at the end
+     of step 7** (change LP-1): the Windfall keeps its origin socket's
+     slot index *i*, and no slot is recounted after the card moves.
+   - *Hook (a reading, to this owner; loot sources design 4.11):* the
+     same latent shuffle issue exists, pre-existing, for secret filter
+     (b) and the quota card at steps 6–7.
 3. **The step rule (one reading of TL 6.11, TL 6.15 and HZ 6.10).** A
    step socket's card must be at least one tier above the **reference
    tier**: the lower median of the floor's SR0 ordinary card tiers,
@@ -1486,6 +1529,8 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      real"), so Mousetrap lures are worth taking; the separate prop family
      keeps ordinary chests honest (EP 6.8.1). A solo party never meets a
      Mousetrap (EP), so bait value is party-size dependent: reported.
+     (Read: the bait cache and its placement are M2, with the Mousetrap;
+     loot sources design 4.1, 13.)
    - **Strongroom (M3, F2–3):** SR4.
 7. **LootBind remaps (lead's call, after the check).** After
    `trapsResolve`, the draw-free LootBind pass (6.10) applies these named
@@ -1520,9 +1565,28 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      LootDoorInvariant holds; each swap is logged `KinSwap`. A carried
      line the final carrier rejects is replaced, draw-free, by its
      pre-picked alternate line, else the same-room container fallback
-     above (item rolls design 4.12).
+     above (item rolls design 4.12). The Windfall's card is excluded
+     from KinSwap and the carrier fallback (change LP-1).
+   - **Offer pacing trim (change LP-30; M3):** at most 2 offer-form
+     field sources per floor among the Wager, the Twin Coffer and the
+     Viaticum; draw-free, after the reverts above: the Viaticum is never
+     dropped; the Twin Coffer is dropped first (it reverts to a plain
+     container keeping its Yours identity; Wayward becomes a dreamed
+     option); then the Wager (the revert above) (loot sources design 7).
+   - **A Windfall moved or dropped (change LP-1; M3):**
+     `WindfallMoved{from,to}` when its host room can no longer hold it
+     (the card returns to its origin as resolved above, then the
+     draw-free step-8 source order is re-run on the next eligible host);
+     `WindfallDropped` when no host passes (the card stays at its
+     origin; `windfallCarry` set) (loot sources design 4.3 step 3).
    - **Salvage, the Heavy Purse and the coin lumps** are computed here
      (6.4 items 2, 4; 8.3).
+   - **LootBind's numbered order (change LP-1; loot sources design
+     4.3):** these remaps and the offer-pacing trim; container squares;
+     the Windfall host check, move or drop; home, Rathole and route;
+     container merges; Proprietor tags; coin lumps, the Heavy Purse and
+     salvage (after the Windfall is final); then the V13g and V15g
+     checks.
 8. **Risk does not pay in loot (told plainly; agreed, Q6).** In the toy
    (no experience or skill modelled) the elite room costs 16–17 win
    points against +0.8 from its loot; experience does not pay either
@@ -1570,6 +1634,7 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    | `campWaxKey` | 1 | 1 per camp 1–4 |
    | `lineRoll:<source>` | 4: line, alternate line, element, wand charges | 1 per identity of every source, dreamed options and unused fallbacks included; keyed `entryIndex × 16 + optionIndex` (change IR-14; reserved M1, inert; used M2) |
    | `curseGate` | 2 | 1 per floor (change IR-20; reserved M2, used Later) |
+   | `windfall` | 4: presence, host, pad, pad | 1 per floor, F1–F5, consumed on every floor, door, party size and theme, at the start of 6.9 item 2 step 8 (change LP-1; M3; loot sources design 4.7.10) |
 
    The table is the segment-11 hand-off; entry indices follow the
    allocation order (6.9 item 2). **Filter-first (change IR-14; M1):**
@@ -1607,11 +1672,14 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    items treat it as this floor's base for rerolls. The arms-floor card
    (6.2) is drawn the same way.
 4. **Generation order (lead's call, after the check).** Layout →
-   `hazards` → `traps` → ENM 10.5 step 2 → **step 3a, LootPlan** (on
-   `lootPlan`: variant, deal, steps, the Due, dual identities, offer
-   options; 6.9 item 2) → step 3 (parent loot stream, as approved) →
+   `hazards` → `traps` → ENM 10.5 step 2 → **SocketPlan** (7c,
+   draw-free, builds the provisional socket set; change LP-1) → **step
+   3a, LootPlan** (on `lootPlan`: variant, deal, steps, the Due, dual
+   identities, offer options; 6.9 item 2; then the Windfall's step 8
+   inside step 3a, M3) → step 3 (parent loot stream, as approved) →
    steps 4–11 → `trapsResolve` → **LootBind** (draw-free: remaps,
-   salvage, the purse, coin lumps; 6.9 item 7) → the V13g checks at the
+   salvage, the purse, coin lumps; 6.9 item 7, in its numbered
+   sub-order, loot sources design 4.3) → the V13g checks at the
    shared floor assertion point. LootPlan reads only the provisional
    socket set; LootBind reads the final one. ENM 10.5 step 3's "the loot
    stream is consumed only in this step" becomes "only in steps 3a and
@@ -1696,7 +1764,15 @@ matter".
      patrol Circuit waypoint, RS; FL 6.7, 6.11); else a container in the
      lair room. Never a side room (the whole F5 boss share must not be
      missable), never a Furnishing (ROOM 6.3.4). The FL and ENM owners
-     confirm the room. It is counted on the lean route.
+     confirm the room. It is counted on the lean route. *(Reading, loot
+     sources design 4.4, 4.10: on F5 nothing lies between L and F, so
+     the fallback is the real rule; the Viaticum takes the lair room's
+     host socket, kind `viaticum`, on its exit side toward the
+     Forecourt, outside the start zone, on the walk line; pending FL and
+     ENM confirmation, 18.2.)* **Host (change LP-14; agreed, loot
+     sources Q5; M2):** the Bedside Stand, a nightstand with three
+     drawers, whose silhouette hosts nothing else. Offer pacing never
+     drops it (change LP-30; 6.9 item 7).
    - **Surfaces (lead's call, after the check):** the F5 Stratum Card
      says it exists ("Before the Heart's chamber, the dream sets out
      provisions: choose one"); opening its container opens the
@@ -1821,6 +1897,10 @@ how each hook below is met; the content requests stay open.
 
 ### 6.14 Hooks to 7c (what each source receives)
 
+Taken up by the loot sources design (`2026-11-22-loot-sources-design.md`,
+segment 7c, approved 2026-11-22; changes LP-1 to LP-34), which states
+how each hook below is met (its 4.4); its pending requests stay open.
+
 | Source | Receives |
 |---|---|
 | HE-7 main-path Plain containers | The DH block (approved) and the Due; coin weight 1 |
@@ -1831,21 +1911,24 @@ how each hook below is met; the content requests stay open.
 | SR2 locked, secret, Keybearer caches | The quota card (6.4 item 9; ≤ 1 notable in secrets, never the top) or a K2-sized coin lump + 1 non-healing sundry; coin 3 |
 | SR3 consequence-lock caches | The quota card as stepped identity + Wax-Key identity, or a coin-only lump at the next lump step; coin 4 |
 | SR4 elite carrier | The highest carrier-legal gear card; the elite intel line |
-| SR4 elite-room lair cache, Strongroom | A consumable top card if one is dealt; coin 4 |
+| SR4 elite-room lair cache, Strongroom | A consumable top card if one is dealt; coin 4. ("Lair cache" is the *elite room's* cache; the main-path lair's SR0 container is `lairContainer`, a reading, loot sources design 4.1) |
 | SR5 Wager, Dare (M3) | Stepped cards / triples; coin 4. The Annex has no prize of its own (6.9 item 1) |
 | Bait cache, boxed lurker | Real SR2 entries (the boxed lurker + its carried sundry) |
 | Activity containers | Coin and sundries |
 | Heavy Purse carrier (F2–F4) | 20% of found coin, bound in LootBind (8.3) |
 | Boss | Signature (+ the counted card); F5 the Memento |
-| F5 main path after the lair | The Viaticum (6.11 item 5) |
+| F5 main path after the lair | The Viaticum (6.11 item 5); by the reading recorded there, the lair room's host socket, kind `viaticum`, unranked, on the Bedside Stand (changes LP-1, LP-14; loot sources design 4.10) |
+| SR2 Windfall (M3, change LP-1) | 1 card under (f)/(g) from the host's carried allotment or a plain SR1 container (6.9 item 2 step 8); coin weight 3, never a lump; no salvage, no purse (loot sources design 4.4, 4.7.6) |
 | Encounters | Salvage shares, per fight then per unit (6.4 item 2) |
 | Every container | Never empty (6.4 items 4–5) |
 
-Caps 7c keeps: 3 notables per encounter; carried 1 per encounter on
+Caps 7c keeps (the Windfall's card counts toward its **final** host
+encounter's 3 notables and carried cap, M3, change LP-1): 3 notables per encounter; carried 1 per encounter on
 F1–2, 2 deeper; at least 1 Steal target (M2, **settled**); a carrier
 fallback to a same-room container keeps its card (6.9 item 7); trimmed
 floors keep the full deck as visible Alcoves, the top card on a carrier;
-HZ 13 fallen loot on the edge, no item loss; TL 11.1 container fields
+HZ 13 fallen loot on the edge, no item loss (the sole exception a
+Windfall that gets away, M3, change LP-2); TL 11.1 container fields
 (`noCheck`, `heldWaxKey`, `lockId`); on F5 at most 1 non-notable lock and
 no more loot-bearing containers than fillers (6.4 item 5).
 
@@ -1861,10 +1944,15 @@ no more loot-bearing containers than fillers (6.4 item 5).
   its target; on F2–F4 "A heavy purse walks this floor"; on F5 "Before
   the Heart's chamber, the dream sets out provisions: choose one" and the
   pressed-moth line ("in the Dreamer's Heart, coins are pressed moths"),
-  told once there.
+  told once there. On a Windfall floor (M3) the Treasure line reads
+  "Treasures: 7 · one may get away", no new line (loot sources design
+  4.5).
 - **Treasure strip:** "k / n" (8.2); once k ≥ n / 2 it adds "best
   remaining: <tier word>", computed from unfound entries and hidden when
-  none remain, so floor entry is not a spoiler.
+  none remain, so floor entry is not a spoiler. **By source (change
+  LP-28; M2):** hover breaks n into counts only (open, locked, hidden,
+  carried, prize, windfall), never tier, item family or room (loot
+  sources design 4.5).
 - **The Dream's Due:** the loot-summary entry is tagged "The dream's due:
   for <name>", with Take defaulted to that member. Once shown, the
   Stratum and strip line turns to a "paid" state. If the target has left
@@ -1876,7 +1964,9 @@ no more loot-bearing containers than fillers (6.4 item 5).
   diamonds (C / U / R / VR), each with its tier word, a shape distinct
   from every existing pip family (the Wager's Disturbance meter, Cord
   pips, vent trigger pips, the Keybearer pip, boss pips). Added to the
-  RC5 pattern registry. Rarity is never carried by hue alone, and any
+  RC5 pattern registry. Container art never reads rarity (read by
+  change LP-15: CT2 `ContainerArtBlind`, loot sources design 5.1).
+  Rarity is never carried by hue alone, and any
   rarity tint stays off the RC4 damage-hue key. On Wager cages the tier
   mark sits on the offer card, never beside the Disturbance meter. Never
   the category. Lock-card wording per 6.9 item 4, including the fit
@@ -1897,7 +1987,10 @@ no more loot-bearing containers than fillers (6.4 item 5).
   slot (ENM 15.8) when it fires (6.9 item 6), and kept afterwards under
   the boss name on the pause screen's floor-info panel.
 - **The Viaticum:** opens the boss-reward offer UI at width 3, not the
-  loot summary (6.11 item 5).
+  loot summary (6.11 item 5). Its host is the **Bedside Stand** (change
+  LP-14; agreed, loot sources Q5; M2), the second named exception to IR
+  4.18's "container art never implies contents" (loot sources design
+  4.10).
 - **Camp:** the coin ledger; "the Hollow ahead sells rare" (the next
   camp's top tier); "unused since floor N" tags. **Camp 4 (the Last
   Hollow):** a plain line on the coin ledger, "No camp after floor 5.
@@ -1911,7 +2004,11 @@ no more loot-bearing containers than fillers (6.4 item 5).
   `dreamedAway` dissolve are short UI stings in the global UI timbre, not
   reserved gameplay cues; the purse drop reuses the existing coin pickup
   sound. No loot cue joins the RC7 reserved list unless the RS owner asks
-  for one.
+  for one. *Pending request to the RS owner (change LP-7; M3):* a
+  Windfall timbre row (a plucked, dry string family) and 6 reserved
+  Windfall cues (loot sources design 6). **Container opens (change
+  LP-23; M2):** one global open cue plus a theme foley tail (CT12; loot
+  sources design 5.1).
 
 ---
 
@@ -2010,7 +2107,13 @@ The Dream's Due is in full in 6.6; the Viaticum and the Memento in 6.11.
   **only when the use is seen** (line of sight or a combat-log line:
   "a treasure was spent by its bearer"); a Dare sealed after two
   failures; the Twin Coffer's untaken alternate (it counts 1 already, so
-  it never inflates n). An unseen use leaves n as it is, so k / n can
+  it never inflates n); **a Windfall that gets away** (M3; change LP-2;
+  agreed, loot sources Q1), by any cause of `WindfallGotAway{cause}`
+  (Rathole, faded, party fled), with "The <skin> got away with a <tier
+  word> treasure" and `ItemDestroyed{gotAway}`, the sole exception to
+  "loot is never destroyed" (n counts the Windfall's card; a Steal on
+  it raises k; one left Dormant at the stairs leaves n unchanged; loot
+  sources design 4.5, 4.7.7). An unseen use leaves n as it is, so k / n can
   stay short, which the count states plainly ("some treasures may be
   gone") rather than hiding. Carriers only consume consumable notables;
   gear is never consumed (ENM 15.3–15.4, **settled**), and the elite
@@ -2024,7 +2127,15 @@ The Dream's Due is in full in 6.6; the Viaticum and the Memento in 6.11.
   scroll" (on a win, "Carried out: …"); with "Treasures found 31 of 38"
   and "Spent 212 coin". The draft's "Buried with …" is dropped: nothing
   is buried in a dream, and the premise's death line is "You did not
-  wake" (RS 7.5). Profile-side, never a score.
+  wake" (RS 7.5). Profile-side, never a score. **From M3 (change
+  LP-29):** Grave Goods gains "Windfalls nabbed k of m" and "Got away:
+  <tier word>" (the tier word of each, never its family or identity),
+  never a profile achievement or completion stat (loot sources design
+  4.5, 7).
+- **Treasure strip by source (change LP-28; M2):** see 6.15; the
+  "windfall" count drops by 1 on a nab, a Steal or a getaway, and a
+  nabbed card counts under "carried" until it is taken (loot sources
+  design 4.5).
 - **Report:** `TallyChaseSeconds` (time after the last main-path room
   spent only raising k), median ≤ 30 s.
 
@@ -2046,6 +2157,12 @@ The Dream's Due is in full in 6.6; the Viaticum and the Memento in 6.11.
   change LE-16); the Steal preview lists them (6.15). A stolen purse
   forfeits that unit's salvage share. Report `StealCoinShare`, ≤ 25% of
   found coin for a Shade party.
+- **Steal on a Dormant Truant (M3; change LP-6; agreed, loot sources
+  Q1):** card only (this rule holds); its coin spills as a pile,
+  "guarded" until the host group resolves, then Taken. The party has
+  the room's one Steal try (`stealTryUsed`): a host carrier or the
+  Truant, not both. `StealCoinShare` counts nothing from a Windfall,
+  because its coin is Taken, not stolen (loot sources design 4.7.8).
 - Never on F1 or F5.
 
 ### 8.4 Twin Coffer (lead's call; change LE-21; M3)
@@ -2054,6 +2171,12 @@ A container kind (TL 6.13) holding 2 pre-rolled notables of the same card
 tier and different categories; taking one dissolves the other ("it was
 only a dream") inside the loot summary; counts 1; the alternate is a
 dreamed option. At most 1 per floor, F2+, off-path, never an HE socket.
+It carries a twin-lid kind mark (change LP-26, CT8; M3). **Offer pacing
+(change LP-30; M3):** at most 2 offer-form field sources per floor among
+the Wager, the Twin Coffer and the Viaticum; the Twin Coffer is the
+first dropped by the draw-free trim (6.9 item 7), reverting to a plain
+container that keeps its Yours identity, its Wayward a dreamed option.
+Report `OffersPerFloor` (loot sources design 6, 7).
 
 ### 8.5 Curses at a discount (lead's call; change LE-22; Later)
 
@@ -2280,6 +2403,13 @@ the draw-count test; the rest M2)** runs beside V13 and checks 7b's
 records, lanes, weights, memory, offers and signatures (item rolls
 design 9.2).
 
+**V15 `LootSources` (change LP-31; M1 rows on F1, M2, M3 Windfall
+rows)** runs beside V13 and V14, split the same way (V15s, V15g, V15t)
+at the shared assertion point after V13g, and checks 7c's sockets,
+squares, role table, caps, offer pacing, Proprietor tags and the
+Windfall; it asserts filters (a)–(g) after step 8 (loot sources design
+9.2).
+
 ### 10.3 Simulator reports (calibration, read against DH 18.2)
 
 - **Power:** `kPC` (step 1, per ladder tier, measured as in 6.5),
@@ -2308,6 +2438,10 @@ design 9.2).
   `RelaxationStepRate`, `StepDownPerRun`, `ShrugShare`,
   `EliteShowsInUseRate`); 7a re-runs `SellShareOfCoin`, K1/K2,
   `CampCoverage` and `LootMixByCategory` against them.
+- **7c reports (change LP-32; M2, with M3 Windfall rows):** loot
+  sources design 9.3 (among them `LootClicksPerFloor`,
+  `ContainersPerFloor`, `OffersPerFloor`, `WindfallEscapedVP`,
+  `WindfallEscapedCoin`, `WindfallsPerRun`), with its arms (9.4).
 
 ### 10.4 Simulator arms
 
@@ -2343,7 +2477,7 @@ shop presentation and camp sinks (camp and hub); the display (segment
 | Owner | Hook |
 |---|---|
 | **7b, item rolls and tables** | Records per (tier, category); smart-loot and category weights; the Due, fit, triple and dreamed-option filters; substitution; VR gear content (6.13) |
-| **7c, sources and placement** | Socket tags and ranks (the input to 7a's allocation, 6.9 item 2); lump placement; the Viaticum room; Twin Coffer placement; trimmed-floor sockets; per-encounter caps; trimming containers on F5 and on coin overflow (6.4, 6.14) |
+| **7c, sources and placement** | Socket tags and ranks (the input to 7a's allocation, 6.9 item 2); lump placement; the Viaticum room; Twin Coffer placement; trimmed-floor sockets; per-encounter caps; trimming containers on F5 and on coin overflow (6.4, 6.14). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 11)** |
 | **Camp and hub** | Shop presentation; the camp reward card's content; vendor stock scaling; the Wish, the Tithe Bowl, the Ferryman's Note, Blood Price; the coverage targets as design intent |
 | **Segment 8 (Dream Fragments)** | The boss-fact family the elite intel line shares |
 | **Segment 9 (bosses)** | Signature records; the Memento card |
@@ -2383,7 +2517,7 @@ shop presentation and camp sinks (camp and hub); the display (segment
 | Death targets | DH 18.2 (**agreed**) | Loot last; kPC; trip-wire |
 | Hire free; shortfall leaves loot unchanged; `SwapChurn`; cap 2 pre-authorised | CMP 7.4, 7.7 (**agreed**, CMP Q1, Q2), 7.8, 9.3 | Per party, never the actual party (agreed, Q4); the pool keyed by `companionCap` |
 | A Steal target per floor; elite Steal < 15% | ENM 10.4, 15.5 | Kept; the purse never on the elite |
-| Locks optional; HE containers Plain; contents never destroyed | TL 6.11, 6.13, TL-27 | Kept |
+| Locks optional; HE containers Plain; contents never destroyed | TL 6.11, 6.13, TL-27 | Kept (the sole exception, a Windfall that gets away, is not a container: M3, change LP-2, loot sources design 4.7.7) |
 | ≤ 20% notables behind locks; no-Mechanics loss ≤ 10% | TL 6.17 | The quota (6.4 item 9); V13g (f) |
 | +1 step (consequence lock, Dare, Wager) | TL 6.11, 6.15; HZ 6.10 | One reading (6.9) |
 | Annex 0 experience, its prize is the reward | EP-26 (**agreed**) | The prize of what it serves (Wager or Dare SR5 step, boxed lurker +0); no second step (6.9 item 1) |
@@ -2893,7 +3027,11 @@ wave or a later design triggers them; each fallback is a new lead's call
   needed, 6.12.)*
 - **If the FL owner cannot place the Viaticum on the main path after the
   lair outside the Circuit and fight hosts:** a container in the lair
-  room, never a side room, never the Antechamber.
+  room, never a side room, never the Antechamber. *(Read by 7c: on F5
+  nothing lies between L and F, so this fallback is the real rule, the
+  lair room's host socket; pending FL and ENM confirmation. If they
+  refuse the reading, the primary rule stands and segment 2 adds a
+  post-lair main-path container on F5; loot sources design 4.10, 14.2.)*
 - **If F5 K2 or the F5 fillers cannot be met:** segment 5 drops the
   extra F5 lock, and 7c the extra container (6.4).
 - **If `TonicShareOfSpend` exceeds 25%:** one camp hook is promoted to M2

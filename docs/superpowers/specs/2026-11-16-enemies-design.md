@@ -622,6 +622,7 @@ gates read the **source unit's rank at the moment a condition is applied**.
 | **Standard** | The table row, shaped by its role | ×1 | M1 |
 | **Elite** | The template in 7.2 | ×2, including the first affix; a second affix ×1.2 | M2 |
 | **Boss** | Hand-designed, from a pool per floor **(settled)** (17.5) | Authored budget | M1 |
+| **Windfall** (non-combatant) | The Truant: a **non-combatant unit**, not a roster type, minion, monster or group member; faction "dream". One square; units may move through it but not end a move there; no cover; never provokes or makes opportunity attacks. 0 XP, 0 salvage; never a purse or key carrier; no morale (never Routed, Cowed or Yielded); **never counts as a hostile** (14.6). It is **nabbed**, not killed: once awake, any action that targets it (an attack, an action-cost spell or ability, a thrown item, or Grab from an adjacent square), any area or effect including its square, any damage or any forced movement nabs it; bonus actions and reactions cannot target it; while Dormant with its host group unresolved only Steal touches it (15.5), and Grab and attacks are greyed "guarded". A nab is not an attack roll, a hit, damage dealt or a kill: no on-hit, on-damage, on-kill or morale trigger, no XP or salvage. **(change LP-3; loot sources design 4.7.1, 4.7.5; agreed, Q1, Q2; M3)** | None: outside the encounter budget, the ambush cap and the joiner caps | M3 |
 
 The "weak" rank is cut. Padding uses a −1 or −2 level shift with the
 "ragged" tint.
@@ -2110,7 +2111,9 @@ condition transforms:
 - **If it ends a turn unseen, it leaves the fight and the floor**
   **(settled + change C-8)**. It never warns other groups, never joins a
   later fight and never returns healed. A visibly flagged "runner" role is
-  a Later option.
+  a Later option; **a non-hostile runner, the Windfall Truant (7.1), is
+  pulled forward to M3**, and the hostile Thief stays Later (17.1)
+  **(change LP-3; loot sources design 4.7; agreed, Q1, Q2; M3)**.
 - A Routed unit's intent read (13.3) returns `Fleeing`. **(lead's call)**
 
 ### 14.6 Surrender, Yield and the end of the fight
@@ -2174,6 +2177,13 @@ every hostile unit still in the fight is Routed.
   ends (death and healing design 10.3). **(change DH-30)**
 - Simulator target: zero party movement after the last non-routed enemy
   falls.
+- **A Windfall (7.1) never counts as a hostile**, so it never keeps
+  combat alive. The combat-end check runs **after each Dream sub-step**,
+  not only between Dream steps: combat ends the moment the last hostile
+  resolves (a down, Rout or Yield included); if it ends before the
+  Windfall hop sub-step (3b), 3b and 4 are skipped and a live Windfall in
+  the fight's room is nabbed (15.8) **(change LP-5; loot sources design
+  4.7.4; M3)**.
 
 ### 14.7 What the party gains from morale
 
@@ -2355,7 +2365,7 @@ economy design 6.1 item 2, 6.3; M2)**.
 |---|---|---|
 | Minion | Yes, if armed | Never |
 | Standard | Yes | Only from the enemy-carried quota, and only when no elite or leader in the encounter can take it |
-| Leader | Yes, with a banner, horn or staff prop | Second priority. The banner or horn may *be* the item. |
+| Leader | Yes, with a banner, horn or staff prop | Second priority. The banner may *be* the item; a horn never is, because horns are reserved for joiners (the Kennel Houndmaster's horn included) **(change LP-21; loot sources design 5.3; M2)**. |
 | Elite | Yes | First priority for the quota. **Guaranteed only in the optional elite room**, met by allocation: the elite-room carrier takes the floor's highest carrier-legal **gear** card (weapon or focus, armour or shield, trinket), never a consumable; a consumable top card goes to the elite room's lair cache **(change LE-10, LE-18; loot economy design 6.9 items 2, 6; M2)**. The elite's gear card is filtered to records whose lines show in use (`showsInUse`) when that set is non-empty, so the prize is presented in use **(change IR-12; item rolls design 4.12; M2)**. An unarmed elite there guards a **lair cache** instead ("Guards: cache"). Other elites without a quota item show nothing. Resolving the elite (killed, Yielded, Routed or Cowed) or stealing its notable, whichever comes first, gives the **elite intel line** (15.8) **(change LE-18; M2)**. |
 | Boss | Yes, if armed | **Guaranteed** signature item, visibly carried by an armed boss, plus the boss reward card (17.5). An **unarmed** boss **guards** its signature in a **signature cache** in its lair (the "Guards: cache" precedent of the elite row; not a ranked socket, not the elite lair cache), and its plate reads **"Guards: <signature name>"**; M1: Old Ragged guards Bellwarden's Mail in its den **(agreed, Q5; change IR-13; item rolls design 4.13; M1)**. The signature is the boss's authored form for the top tier of the floor's drawn deck variant (one form per top tier its floors can need), with at most 2 base lines plus one authored value-1 line echoing the boss's fight or kit (≤ 3 lines; M1 records grandfathered); a boss that carries one form guards any second form, and "Carries: …" and "Guards: …" always name the chosen form; a draw-free second form in another lane is required for specialist chassis in M2 and every boss in M3; a Very rare signature consumes the floor's VR slot, pending the ITEMS owner **(change LE-3; loot economy design 6.3; change IR-13; item rolls design 4.13; M1 / M2 / M3)**. **Floor 5:** no reward card; the final boss still carries and uses its signature, which drops as a **Memento** (a run-record item card, 0 value, shown on the victory screen and run record only) **(agreed, Q1; change LE-5; loot economy design 6.11; M2)**; an unarmed final boss (none in M2) guards it in its cache and it drops as the Memento at victory **(change IR-13; item rolls design 4.13)**. |
 
@@ -2372,6 +2382,10 @@ Cowed carrier keeps it. Never on floors 1 or 5.
 M2 simulator's `EliteNetWinDelta` misses −5 to +2, the elite room's
 death cost (budget, watcher rules) and experience (16) are tuned here,
 not loot; open until the M2 report.
+
+**Pending request (LP-27, M2 if agreed; loot sources design 7):** the
+Uncorked glint state on carriers of consumable notables (15.4); not yet
+ruled.
 
 ### 15.3 Notable items
 
@@ -2400,7 +2414,11 @@ not loot; open until the M2 report.
    after the lair, outside the Antechamber, Circuit rooms and fight
    hosts, else in the lair room; it counts 1 notable. The room is pending
    the FL and enemies owners' confirmation. **(agreed, Q1; change LE-5;
-   loot economy design 6.11; M2)** The budget also holds a **`camp`
+   loot economy design 6.11; M2)** *Reading recorded for this owner's
+   confirmation (loot sources design 4.10, 13; LP-14; LE 18.2):* nothing
+   lies between the lair and the Forecourt on floor 5, so the fallback is
+   the real rule: the Viaticum is the lair room's card-bearing container,
+   hosted on the Bedside Stand **(agreed, Q5; M2)**. The budget also holds a **`camp`
    channel** (**2** notables at every camp 1–4, inside the approved
    1–2; graded for floor N+1, never Very rare; *illustr.*; **change
    LE-6; loot economy design 6.3; M2**) for the next camp's notables shop, drawn whether
@@ -2411,6 +2429,9 @@ not loot; open until the M2 report.
    containers and enemy-carried shares (10.5 step 3). Unbought trader
    stock counts toward later floors' family caps only once bought or
    bartered (items design 10.9).
+   **Windfall (change LP-1; loot sources design 4.7.6; agreed, Q1;
+   M3):** a card moved to a Windfall (7.1) stays tallied in its origin
+   channel, tagged `onWindfall`; the split above is unchanged.
 2. **Draws** (10.5 step 3): weighted toward the party's `requires` tags at
    generation ("smart loot"); a base the party already holds at equal or
    better quality (quality = rarity tier, then value; **change I-12**;
@@ -2567,6 +2588,15 @@ client-approved 2026-11-17; consumables design 15)**
 - The AI never values an item as loot. It drinks the potion because the
   scorer says so, never to deny it to the party.
 
+**Pending request (LP-27, M2 if agreed; loot sources design 7):**
+**Uncorked.** A carried consumable notable gets a data use threshold
+(such as the HP fraction at which a self-heal fires); while the carrier
+is at or below it, its existing glint shows an "uncorked" shape
+sub-state (the glint glyph with an open stopper notch, never a hue
+change). Hover: "Uncorked: may use its <tier word> <noun>". A state
+read, not a new mark and not an intent read; it counts in the
+glints-per-screen gate (14.10). Not yet ruled.
+
 ### 15.5 Getting items from living enemies
 
 **Steal** (Stealth's settled use, defined here; M2) **(agreed; change
@@ -2606,6 +2636,21 @@ S-5)**:
   adjacent to it. Stealing there takes a Stealth play first, such as
   luring the watcher away with noise. Target: under 15% of elite-room
   notables are taken without a fight.
+- **Steal on a Dormant Truant (change LP-6; loot sources design 4.7.8;
+  agreed, Q1; M3):** the Windfall (7.1) can be stolen from while Dormant.
+  Adjacent, and no awake un-Cowed hostile in its room has line of sight
+  to the thief. Stealth against its fixed passive **20, −5 Dormant = 15**
+  *(illustr.)*, a fixed row, not Keen; Light Fingers gives advantage.
+  The roll is the keyed hash `H(floorSeed, windfallId, "windfallSteal",
+  0, die)` on `checks`, never the combat stream. **The room's one Steal
+  try:** the party steals either a carrier in the host group or the
+  Truant, not both (`stealTryUsed` on the host group, set and checked by
+  both paths). Success takes **the card only**; its coin spills as a
+  dropped pile, "guarded" while the host group is unresolved, then a
+  1-tick Take or auto-gathered at fight end; the Truant leaves.
+  Failure starts the fight as any failed Steal (nobody Surprised) and the
+  Truant wakes at its starting count after the live-party-size check.
+  The elite-room metric above excludes it.
 
 **Disarm seizure** (Later, with Disarmed) **(change C-17)**:
 
@@ -2631,7 +2676,10 @@ floor.
   NE, E, SE, S, SW, W, NW), then square index. **(lead's call)** **Loot
   is never destroyed** by terrain, damage type or kill method, nor
   container contents by traps, locks or force (traps and locks design
-  6.13; TL-27). A monster
+  6.13; TL-27). **Sole exception (change LP-2; loot sources design
+  4.7.7; agreed, Q1; M3):** a Windfall's card and coin leave the floor
+  when its shown count ends (`ItemDestroyed{gotAway}`); kill method,
+  damage, terrain, traps, locks and force still never destroy loot. A monster
   removed by a Void fall drops its carried loot on the last safe square;
   summons and Figments drop none **(change HZ-10; hazards design 6.4; M2
   (gated), else M3)**.
@@ -2640,7 +2688,9 @@ floor.
 - **Yielded:** drops at once.
 - **Cowed:** kept (the floor key excepted, 14.8; change TL-23).
 - **Party flees:** the carrier keeps any unused item. Items already on the
-  ground stay as a pile marker.
+  ground stay as a pile marker. A live Windfall (7.1) gets away at once
+  with its bundle (`WindfallGotAway{cause: partyFled}`) **(change LP-5;
+  loot sources design 4.7.4, 4.7.7; M3)**.
 
 ### 15.7 Salvage coin
 
@@ -2687,6 +2737,9 @@ floor.
   boss name on the pause screen's floor-info panel; if segment 8 claims
   that fact, the line takes another from the same family. **(change
   LE-18; loot economy design 6.9 item 6, 6.15; M2)**
+  A live Windfall (7.1) in the fight's room at combat end is nabbed, and
+  its card and coin are gathered with the rest **(change LP-5; loot
+  sources design 4.7.4, 4.7.5; M3)**.
 - **Each entry shows:** name and family; known properties, with an
   "unidentified" mark if any remain; **core-computed comparisons against
   every party member** (AC change, expected damage change, proficiency
@@ -2863,7 +2916,7 @@ lair" skippable; not yet ruled.
 | **Lurker** | 80% / 100% (150% on its opener) / 0 / 0 | Melee + Hide | Starts Hidden; **Ambush Strike** (`uses:1`, +2 dice); Poisoned, Bleeding or Blinded. Never in floor 1's main-path rooms 0–2 **(change DH-28)**. On floor 1 it never uses Ambush Strike: it opens with its at-will at 150%, stated plainly on its card **(change EP-11; encounter placement design 6.17; M2)**. **M3:** a theme's lurker may be placed as a **boxed lurker** (`containerForm`, F2–5, at most 1 per floor): no placement Stealth roll; marked when party passive Perception ≥ 10 + its proficiency, checked with trap detection **(change TL-28; traps and locks design 6.14)**. | Perception, the radiant rider (Revealed), staying grouped, reading the tell | Ambusher | +2 | M2 |
 | Support | — | — | One `uses:1` heal or buff; at most 1 per encounter | Withered, focus | — | — | Later |
 | Summoner | — | — | Calls a pre-paid reserved pack, with a visible countdown | Kill it before the countdown ends | — | — | Later |
-| Thief | — | — | Steals and flees; must be visibly flagged and drop its haul when Routed | — | — | — | Later |
+| Thief | — | — | Steals and flees; must be visibly flagged and drop its haul when Routed. Stays Later; the non-hostile Windfall (7.1, M3) is not a Thief (loot sources design 4.7.1; LP-3, read) | — | — | — | Later |
 
 **Swarm units are cut.** They would need a new resolution rule. A minion
 pack sharing one initiative slot gives the same feel.
@@ -3546,7 +3599,9 @@ The build fails when:
   thief roles; Later affixes; the Feud template; Disarm seizure; oils;
   cursed carried items; multi-square bosses; committed boss signature moves
   (a scripted area marked at the end of the boss's turn, resolving at its
-  next turn start, at most one per boss); the runner role; captives as
+  next turn start, at most one per boss); the hostile runner role (the
+  non-hostile Windfall runner is pulled to M3: 7.1, 14.5; **change LP-3;
+  loot sources design 4.7**); captives as
   next-camp Pledges, never mid-floor joins **(change CMP-10)**; intent reads feeding companion suggestions; **the rival
   adventuring party (stretch goal, section 18)**.
 

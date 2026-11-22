@@ -270,6 +270,10 @@ environment-only Miasma Remnants in M3.**
   (the Dream step), brought to M2 for Stirs only, announced a full
   round ahead and never in round 1; if its gates fail it falls back to
   M3 (hazards design 6.3).
+- **Read by segment 7c (change LP-4; reading, no change):** "nothing
+  timed in M2" holds. The Windfall's count runs in the Dream step from
+  M3 only, as its room's one clock, and reopens nothing agreed (loot
+  sources design 0.1, 4.7.4).
 - **Rejected outright:** drifting gas, spreading fire, blood slicks,
   player-made surfaces, and ice in the Supper.
 - *Rejected:* B, never.
@@ -1274,7 +1278,10 @@ core cost.
   (force and Splinter, read against RS 7.6: change TL-21; traps and
   locks design 6.11).
 - **Furnishings never hold loot.** Containers stay segment 7's and HE-7
-  sockets, so there is no smash-everything chore.
+  sockets, so there is no smash-everything chore. **Reaffirmed by
+  segment 7c (change LP-12; settled, read; M2):** loot set into a room's
+  walls uses **inset containers**, never a Furnishing or a hidden stash
+  (loot sources design 4.3).
 
 #### 6.3.5 Kegs (M2: Carnival, Gut; change TR-9)
 
@@ -2098,6 +2105,11 @@ TrapRecord format (change TL-40; with segment 9; traps and locks design
   out, no fire).
 - **Readability:** no upright coffin lid anywhere (Pallbearer, RC2); no
   veiled figures (RC3); no plumed staffs (Undertaker).
+- **Loot (change LP-18; lead's call; M2 cond.):** loot sits in
+  knee-high grave-goods caskets with a horizontal lid; **full coffins
+  never hold loot**, so a coffin reads only as cover or a lurker tell.
+  **Pending request (traps owner, TL 7.4 opening paragraph):** the
+  same wording there (loot sources design 5.3).
 
 ### 7.5 The Drowned Choir (F2–3)
 
@@ -2339,6 +2351,16 @@ damage type.
   join this rule; device bodies follow RC2's piece bans, and trap tells
   never idle and never reuse hazard prop families (traps and locks
   design 7, 8).
+  **Extended by segment 7c (change LP-15; lead's call; M2):** loot
+  containers, catch hosts, the bait cache, Truants (M3) and the
+  cross-theme variants (signature cache, Wager cages, Viaticum host)
+  join this rule: within a theme no family shares a silhouette with
+  Furnishings, Low pieces or Kegs; container art is rank-blind
+  (`ContainerArtBlind`); an inset container never shares a silhouette
+  with the theme's Latch, Door or Hairline skins, and its wall-set mark
+  is a solid bracket, never the harm square's inset dashed rim. V15
+  `ContainerFamilyDistinct` checks it (loot sources design 4.3, 5.1
+  CT1, CT2, CT15).
 - **Liquid-holding pieces** are drawn dry or lidded, with no reflective
   fill, and their break leaves no liquid on the floor (RC1; the VFX
   residue rule, 8.2).
@@ -2357,7 +2379,9 @@ damage type.
 - **Gates:** the greyscale, colour-blind (now including harm squares,
   Rough, Kegs, the VFX of 8.2 and, at M3, Miasma over harm squares and
   Rough) and 85% role-ID screenshot gates run with pieces in frame, and
-  the role-ID gate includes "Keg or Furnishing". A failing theme is
+  the role-ID gate includes "Keg or Furnishing". **Segment 7c adds
+  (change LP-15; the RS owner applies; M2):** "container or Furnishing"
+  and its other CT1 rows (loot sources design 5.1). A failing theme is
   held; the gate never changes a rule.
 
 ### 8.2 Art kit budget *(illustr.)*
@@ -2679,7 +2703,7 @@ Segment 3 takes the knock-into *system*, not drop hazards.
 | 4 Hazards | The piece and square classes, bands, caps, `ThemeSix`, the Remnant record and its environment-only source rule | Catalogues and density inside the caps; drops; bile; Teetering counting; vents |
 | 5 Traps, locks, checks | Plank and Shunt checks naming the ladder; Overturn strips that never include a Clearway square; **traps and pieces (lead's call, after the check):** a Furnishing may end on a trap's trigger square, never springs a trap and never hides a known trap's marker; trap damage is outside the one-instance cap (6.3.6, 6.4); segment 5 may narrow both. **Narrowed by segment 5 (change TL-14; M2):** weighted plates (a piece ending on a plate or trapdoor springs it; one act springs at most one trap); the cap exclusion kept (TL-18) (traps and locks design 6.7, 6.10) | DCs; traps; door verbs; the out-of-combat Plank cost; how traps and pieces interact beyond these defaults |
 | 6 Encounter placement | Start sockets with cover data (derived by segment 6 from FL `startZone` squares; change EP-5); `Floor1NoCoveredStarts`; KP5's ambush clause (defined, change EP-8); nooks as lurker sockets; the terrain-using enemy per theme (encounter placement design 6.6.1, 6.8.3) | Who starts where; ambush templates |
-| 7 Loot | Furnishings never hold loot | Containers and contents |
+| 7 Loot | Furnishings never hold loot (reaffirmed, change LP-12; inset containers instead). **Pending request (change LP-11; segment 7c asks; M2):** set pieces an Alcove can take as its default occupant when a container would exceed the floor's container cap; if none are offered, the Alcove keeps a container and the cap is logged, not enforced (loot sources design 4.2, 14.2) | Containers and contents |
 | 8 Events | Furnishing kinds by id | Events that name a Furnishing kind |
 | 9 Boss rooms | 6.11's caps, phase sockets and `PhaseSocketsBoth` | Interiors, counterplay identity, each boss's one authored terrain move |
 | 10 Exploration and information | The previews and chips of 6.12; the "Needs a tall piece to hide" reason; glyphs | Overlays, chips and UI |

@@ -1,7 +1,7 @@
 # Loot Sources and Placement: Design (Dungeon Generation, Segment 7c)
 
 Date: 2026-11-22
-Status: Draft, awaiting client approval, 2026-11-22
+Status: Approved, 2026-11-22
 Parents (immediate): `2026-11-22-loot-economy-design.md` (loot economy design, "LE", segment 7a, approved 2026-11-22) and `2026-11-22-item-rolls-design.md` (item rolls design, "IR", segment 7b, approved 2026-11-22, **the most recent template**). Both are **the key parents**.
 Other parents: `2026-11-15-dungeon-rpg-design.md` (main design, "MAIN"),
 `2026-11-16-character-stat-model-design.md` (stat model, "STAT"),
@@ -27,32 +27,32 @@ and `2026-11-20-herald-class-design.md` ("HR"),
 `2026-11-21-traps-locks-design.md` ("TL", segment 5) and
 `2026-11-21-encounter-placement-design.md` ("EP", segment 6).
 
-Items marked **(agreed)** are the client's answers of 2026-11-22 to the five questions this design raised (Q1–Q5, sections 0.2 and 14.1), each answered with the lead's recommendation (option A), or restate a client answer recorded in an approved document. The client also said that everything else in the lead's proposal stands as written: Model A (sockets by room role) as the skeleton, with grafts from Models B and C, the fleeting-loot draft and the catalogue; the 25-kind source taxonomy with ranks; socket derivation and the role table; LootBind square legality, draw-free, after `trapsResolve`; every 7a and 7b channel landing (the LE 6.14 and IR 4.18 hooks); visibility, Proprietor tags, tier marks on hover and the Treasure strip; clutter, the numbered click table, auto-close of quiet summaries, optional Glean, the container count cut and the 7c clock line at net ≤ 0; Furnishing stashes rejected in favour of inset containers; the Windfall in full; traps, hazards, encounters, stealth, Steal and Cow; floor 1; floor 5 and the Viaticum in the F5 lair room by the exit, with the Bedside Stand; determinism (the keyed Windfall grandchild of `lootPlan` with 4 draws on every floor); UI and segment hooks; CT1–CT14 and the five collision fixes; the per-theme catalogue for every theme; readability, art and audio; the new mechanics adopted, held and rejected (Trove, Crannies, Tip-offs, Tattler and Hawker held); the numbers and fixes (toy, PT1–PT15); data, V15 `LootSources`, reports and arms; staging; ownership and hooks; the binding requirements; LP-1 to LP-34; the told-plainly items; the risks; and the appendix resolutions and names. **This document awaits the client's approval as a whole.**
+Items marked **(agreed)** are the client's answers of 2026-11-22 to the six questions this design raised (Q1–Q5 before the document was written, and Q6, raised by the check, with the approval of this document; sections 0.2 and 14.1), each answered with the lead's recommendation (option A), or restate a client answer recorded in an approved document. The client also said that everything else in the lead's proposal stands as written: Model A (sockets by room role) as the skeleton, with grafts from Models B and C, the fleeting-loot draft and the catalogue; the 25-kind source taxonomy with ranks; socket derivation and the role table; LootBind square legality, draw-free, after `trapsResolve`; every 7a and 7b channel landing (the LE 6.14 and IR 4.18 hooks); visibility, Proprietor tags, tier marks on hover and the Treasure strip; clutter, the numbered click table, auto-close of quiet summaries, optional Glean, the container count cut and the 7c clock line at net ≤ 0; Furnishing stashes rejected in favour of inset containers; the Windfall in full; traps, hazards, encounters, stealth, Steal and Cow; floor 1; floor 5 and the Viaticum in the F5 lair room by the exit, with the Bedside Stand; determinism (the keyed Windfall grandchild of `lootPlan` with 4 draws on every floor); UI and segment hooks; CT1–CT14 and the five collision fixes; the per-theme catalogue for every theme; readability, art and audio; the new mechanics adopted, held and rejected (Trove, Crannies, Tip-offs, Tattler and Hawker held); the numbers and fixes (toy, PT1–PT15); data, V15 `LootSources`, reports and arms; staging; ownership and hooks; the binding requirements; LP-1 to LP-34; the told-plainly items; the risks; and the appendix resolutions and names. The client approved this document as a whole on 2026-11-22, with Q6 answered with option A.
 
-Items marked **(lead's call)** were filled in by the design lead inside approved rules and were in the proposal the client answered; they are binding once the client approves this document. Items marked **(new lead's call)** were made while writing this document, beyond that proposal; they are listed in 14.1 for the client's approval. Items marked **(lead's call, after the check)** were made when the written document was checked by the builder, consistency, play and art-and-UX lenses; none changes a client answer, and they are listed in 14.1 with the check's "told plainly" items. Items marked **(settled)** restate a rule from an approved document; **(decided)** marks a main-design client decision. Items marked **(change LP-n)** amend an approved document and are listed, with the exact sections they touch, in 13; rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there, and the client's approval of this document (with Q1–Q5 where a row names one) will cover them. Items marked **(told plainly)** narrow or re-read approved text, contest the brief, the client, a judge or a critic, or state an unwelcome forecast, and are told to the client in plain words (14.1). Once approved, every item here is binding on the builders.
+Items marked **(lead's call)** were filled in by the design lead inside approved rules and were in the proposal the client answered; the client confirmed them all on 2026-11-22, when it approved this document as a whole, and they are binding. Items marked **(new lead's call)** were made while writing this document, beyond that proposal; they are listed in 14.1 and the client confirmed them all on 2026-11-22. Items marked **(lead's call, after the check)** were made when the written document was checked by the builder, consistency, play and art-and-UX lenses; they are listed in 14.1 with the check's "told plainly" items, the client confirmed them all on 2026-11-22, and none changes a client answer. Items marked **(settled)** restate a rule from an approved document; **(decided)** marks a main-design client decision. Items marked **(change LP-n)** amend an approved document and are listed, with the exact sections they touch, in 13; rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there, and the client's approval of this document on 2026-11-22 (with Q1–Q6 where a row names one) covers them. Items marked **(told plainly)** narrow or re-read approved text, contest the brief, the client, a judge or a critic, or state an unwelcome forecast, and were told to the client in plain words (14.1, including those told after the check); the client confirmed them all on 2026-11-22. Every item here is binding on the builders.
 
 | Marking | Meaning |
 |---|---|
 | **(settled)** | Restates a rule from an approved document |
 | **(decided)** | A main-design client decision, restated |
-| **(agreed)** | A client answer: Q1–Q5 of this document (2026-11-22), or one recorded in an approved document, restated |
-| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal; binding once the client approves this document |
-| **(new lead's call)** | A lead's call made while writing this document, beyond the answered proposal; listed in 14.1 for the client's approval |
-| **(lead's call, after the check)** | A lead's call made when the written document was checked; listed in 14.1 for the client's approval |
+| **(agreed)** | A client answer: Q1–Q6 of this document (2026-11-22), or one recorded in an approved document, restated |
+| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal; confirmed by the client with this document on 2026-11-22 |
+| **(new lead's call)** | A lead's call made while writing this document, beyond the answered proposal; listed in 14.1 and confirmed by the client on 2026-11-22 |
+| **(lead's call, after the check)** | A lead's call made when the written document was checked; never overrides a client answer; listed in 14.1 and confirmed by the client on 2026-11-22 |
 | **(change LP-n)** | Amends an approved document; listed with its exact sections in 13. Rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there |
-| **(told plainly)** | Narrows or re-reads approved text, contests the brief, the client, a judge or a critic, or states an unwelcome forecast; told to the client in plain words (14.1) |
+| **(told plainly)** | Narrows or re-reads approved text, contests the brief, the client, a judge or a critic, or states an unwelcome forecast; told to the client in plain words (14.1) and confirmed by the client on 2026-11-22 |
 | **(hook)** | Owned by another segment or design; 7c states only what it needs |
 | *(illustr.)* | An illustrative number, owned by the builders and calibrated by the simulator (8, 9). Never binding |
 
 **The client's brief.** Dungeon generation segment 7c: **loot sources and placement**, the last part of loot. 7a owns value, 7b owns identity, 7c owns where every source sits and what it looks like. Shops stay hooks. The client also asked directly: *should there be loot that disappears after a certain number of turns: a container or one-hit entity that appears in combat or exploration and must be broken or reached in time?* Standing guidance: not an exact 5E port; design is not limited by quantity; the art team is eager; combat is key; contest the client or approved views where warranted.
 
-The client's five answers (Q1–Q5, **agreed**, 2026-11-22) are in 0.2: **fleeting loot is the Windfall Truant, an in-combat M3 pilot on F2–F4 holding a real card from the fixed deck, lost visibly if it gets away (Q1); the pilot runs at party ≥ 3, solo opens on its own simulator arm, duo is held (Q2); the exploration forms (the Ebb and the exploration Truant) are M4 (Q3); the Rabbit, the Crumb Mouse and the Alms Crab are the pilot skins, with the client's other skins re-skinned, kept as M4 Ebbs or excluded (Q4); and the Bedside Stand is the second named exception to "container art never implies contents" (Q5).**
+The client's five answers (Q1–Q5, **agreed**, 2026-11-22) are in 0.2: **fleeting loot is the Windfall Truant, an in-combat M3 pilot on F2–F4 holding a real card from the fixed deck, lost visibly if it gets away (Q1); the pilot runs at party ≥ 3, solo opens on its own simulator arm, duo is held (Q2); the exploration forms (the Ebb and the exploration Truant) are M4 (Q3); the Rabbit, the Crumb Mouse and the Alms Crab are the pilot skins, with the client's other skins re-skinned, kept as M4 Ebbs or excluded (Q4); and the Bedside Stand is the second named exception to "container art never implies contents" (Q5).** The check raised a sixth question, the Windfall frequency; the client answered it on 2026-11-22, with its approval of this document: **about 0.6–0.9 Windfalls per run *(illustr.)* for the M3 pilot, with presence 1000‰ on F3–F4; the simulator owns the figure** (Q6, **agreed**, option A).
 
 **Change prefix.** This design uses **LP-n** ("loot placement"). A case-insensitive grep for `\bLP-[0-9]` across the 25 approved documents finds 0 hits (re-run while writing). This document issues one register, **LP-1 to LP-34** (13); no id has two meanings. The research and model drafts used colliding local LP numbers; all are renumbered into this register (A.6).
 
 **Validator.** **V15 `LootSources`** is free: V1–V7 RS, V8 FL, V9 ROOM, V10 HZ, V11 TL, V12 EP, V13 LE, V14 IR; a grep for `\bV15` finds 0 hits (re-run while writing).
 
-**Local id schemes** (each whole-word grep-checked, 0 hits): tensions **PX1–PX18**; toy failures **PT1–PT15**; cross-theme catalogue rules **CT1–CT15** (CT15 added after the check); Appendix A findings **CF** (fun), **CB** (balance) and **CK** (consistency). The draft id "PF" was rejected (7 hits). This document's client questions **Q1–Q6** are local, as in every parent (Q6 raised by the check).
+**Local id schemes** (each whole-word grep-checked, 0 hits): tensions **PX1–PX18**; toy failures **PT1–PT15**; cross-theme catalogue rules **CT1–CT15** (CT15 added after the check); Appendix A findings **CF** (fun), **CB** (balance) and **CK** (consistency). The draft id "PF" was rejected (7 hits). This document's client questions **Q1–Q6** are local, as in every parent (Q6 raised by the check and answered with the approval of this document).
 
 **Names are placeholders** until the client naming pass. Every new name was grep-checked case-insensitively as a whole word across the 25 approved documents (A.5). While writing, four collisions forced renames **(new lead's call)**: the Truant's route marks are the **scurry trail** (the draft's "route footprints" collides with the Stir and Keg *footprint*, 50 hits); the ledger tag is **`onWindfall`** (the draft's `heldBy` is a VG data predicate); the inset container's RC5 mark is the **wall-set mark** ("inset dashed" is the harm-square rim, ROOM 8.1 and HZ 8); and the escape cue is the **got-away cue** (IR renamed "sting" away from loot cues; "sting" stays the boss and Stir telegraph word).
 
@@ -86,7 +86,7 @@ Abbreviations: F1–F5 = floors 1–5; C / U / R / VR = Common, Uncommon, Rare, 
   - The realistic expected loss is about **0.1–0.15 VP per run** *(illustr.)*. It is a tempo decision rather than a value tax, which is right under permadeath.
 - **How often.** At most 1 per floor, on **F2–F4 only**, with a draw-free carry to the next floor when a host is lost. The proposal's toy gave about **1.2–1.4 per run** *(illustr.)*, the figure the client agreed with Q1.
   - **Told plainly after the check: that figure is out of reach as agreed.** The toy assumed party 4 on every floor and a Truant skin on every theme. Under the companion ladder (CMP 7.1: party at most 1 / 2 / 3 / 4 / 4 on F1–F5) and Q2's party ≥ 3, **F2 is never eligible unless the solo arm opens**, F3 is eligible only for a party with two companions by camp 2 (a hire at each camp, or a carried hire), and F4 only for a party of 3 or more. Under Q4 only the Choir, the Carnival and the Supper have M3 skins, so **Silk and Gut floors host no Truant** (4.7.2), and under RS Cut 2 (no Supper) F4 never does.
-  - The lead therefore raises F3 and F4 presence to 1000‰ *(illustr.)* (lead's call, after the check). The lead's re-estimate for an always-hiring party is about **0.6–0.9 per run** *(illustr.)*, about 0.3–0.5 at the old 500‰, and lower for a player who declines a hire. The simulator owns the figure (9.4). **The frequency returns to the client** (Q6, 14.1).
+  - The lead therefore raises F3 and F4 presence to 1000‰ *(illustr.)* (lead's call, after the check). The lead's re-estimate for an always-hiring party is about **0.6–0.9 per run** *(illustr.)*, about 0.3–0.5 at the old 500‰, and lower for a player who declines a hire. The simulator owns the figure (9.4). **The client accepted this frequency for the M3 pilot on 2026-11-22** **(agreed, Q6**, option A; 14.1**)**.
   - It never appears on F1, F5 or trimmed floors.
   - It never appears in the elite room, the arena, the Forecourt, Sanctum or Antechamber, Circuit rooms, ambush forms, Kill Box, Crossfire or Pincer, Wager, Dare or Strongroom Sites, or any room with another clock.
 - **Fairness.** It deals no damage, so Warned or floored and the EnvRound cap are untouched.
@@ -126,7 +126,7 @@ Abbreviations: F1–F5 = floors 1–5; C / U / R / VR = Common, Uncommon, Rare, 
 - Route, Rathole and C are bound draw-free in LootBind, in a fixed numbered order (4.3).
 - At runtime nothing is drawn except the existing Steal check, moved to a keyed hash.
 
-### 0.2 The client's five decisions (agreed, 2026-11-22)
+### 0.2 The client's six decisions (agreed, 2026-11-22)
 
 | # | Question | Answer **(agreed)** | Rejected | Change |
 |---|---|---|---|---|
@@ -135,8 +135,7 @@ Abbreviations: F1–F5 = floors 1–5; C / U / R / VR = Common, Uncommon, Rare, 
 | Q3 | The exploration form | **A.** The Ebb (forking geometry only) and the exploration Truant in M4 (4.7.11) | B: the Ebb in M3 after the Truant pilot passes | LP-34 |
 | Q4 | Skins | **A.** Rabbit (Carnival), Crumb Mouse (Supper) and Alms Crab (Choir) are the Truant pilot; balloon, plate and bauble kept as M4 Ebbs; Gaol prisoner, Supper trolley, Heart toy and Silk page contested and excluded; F1 and F5 themes excluded (5) | B: an M4 F1 coin-only teaching Ebb (a Gaol confiscation sack, outside n) on top of A | LP-7 ⚑ |
 | Q5 | The Bedside Stand | **A.** Accepted as a second named exception to "container art never implies contents", because it opens a different UI (4.10, 5.3) | B: an ordinary biscuit tin opens the offer UI | LP-14 ⚑ |
-
-**One open question, raised by the check: Q6, the Windfall frequency** (14.1). Q1's "about 1.2–1.4 per run" cannot be met under Q2, Q4 and the companion ladder; the lead recommends accepting about 0.6–0.9 for the M3 pilot.
+| Q6 | The Windfall frequency (raised by the check; answered with the approval of this document) | **A.** Accept about 0.6–0.9 Windfalls per run *(illustr.)* for the M3 pilot, with presence 1000‰ *(illustr.)* on F3–F4; the simulator owns the figure (`WindfallsPerRun`), and the pilot's gates decide whether to widen it in M4. Q1's "about 1.2–1.4 per run" cannot be met under Q2, Q4 and the companion ladder (4.7.2, 14.1) | B: Silverfish (Silk) and Rent Snail (Gut) in the M3 pilot (changes Q4); C: a duo arm in M3 at C = 4 (changes Q2) | — |
 
 ### 0.3 Decisions in brief
 
@@ -151,7 +150,7 @@ Abbreviations: F1–F5 = floors 1–5; C / U / R / VR = Common, Uncommon, Rare, 
 | 7 | Proprietor tags on container hover and summary header (4.5) | M2 | lead's call; LP-13 |
 | 8 | Viaticum in the F5 lair room by the exit (a reading); Bedside Stand host (4.10) | M2 | reading; **agreed, Q5**; LP-14 ⚑ |
 | 9 | Catalogue rules CT1–CT14 and five collision fixes (5); CT15, inset forms and signature-moment deliverables (after the check) | M2 | lead's call; LP-15 to LP-25 |
-| 10 | **Windfall Truant pilot**: in-combat, party ≥ 3, C = 3, action nab, fight-end nab, slip once, real card from the host's carried allotment (4.7); frequency open (Q6) | M3 | **agreed, Q1, Q2**; Q6 open; LP-1 to LP-7 ⚑ |
+| 10 | **Windfall Truant pilot**: in-combat, party ≥ 3, C = 3, action nab, fight-end nab, slip once, real card from the host's carried allotment (4.7); about 0.6–0.9 per run *(illustr.)*, 1000‰ on F3–F4 (Q6) | M3 | **agreed, Q1, Q2, Q6**; LP-1 to LP-7 ⚑ |
 | 11 | Ebb and the exploration Truant (4.7.11) | M4 | **agreed, Q3**; LP-34 |
 | 12 | Pilot skins Rabbit, Crumb Mouse, Alms Crab; Ebb skins kept; contested skins excluded (5) | M3 / M4 | **agreed, Q4** |
 | 13 | Uncorked glint state; Treasure strip by source (7) | M2 | lead's call; LP-27, LP-28 |
@@ -595,7 +594,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
    2. Alcove set-piece share up;
    3. only then the Windfall: presence −250‰ on F3 and F4. **Any Windfall step that would take its frequency lower, or turn it off, returns to the client** (14.2), because the Windfall is the client's agreed answer (Q1). The proposal's "Windfall on F2 only" step is struck: F2 is not reachable at party ≥ 3, so it meant "Windfall off".
 
-### 4.7 Fleeting loot: the Windfall in full (M3; agreed, Q1, Q2; changes LP-1 to LP-7)
+### 4.7 Fleeting loot: the Windfall in full (M3; agreed, Q1, Q2, Q6; changes LP-1 to LP-7)
 
 #### 4.7.1 What it is
 
@@ -613,7 +612,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 
 #### 4.7.2 Where (hosts and exclusions)
 
-- **Floors.** F2–F4, at most 1 per floor, presence `loot.windfallPermille` = 0 / 500 / 1000 / 1000 / 0 *(illustr.)*. Never on trimmed floors. **(Lead's call, after the check:** F3 and F4 raised from 500‰, because the party and skin rules below already make the Windfall rare and the agreed frequency was otherwise far out of reach; F2 stays at 500‰ and is reached only through the solo arm.**)**
+- **Floors.** F2–F4, at most 1 per floor, presence `loot.windfallPermille` = 0 / 500 / 1000 / 1000 / 0 *(illustr.)*. Never on trimmed floors. **(Lead's call, after the check:** F3 and F4 raised from 500‰, because the party and skin rules below already make the Windfall rare and the agreed frequency was otherwise far out of reach; F2 stays at 500‰ and is reached only through the solo arm.**)** The client accepted the resulting frequency, about 0.6–0.9 per run *(illustr.)* for the M3 pilot with 1000‰ on F3–F4, on 2026-11-22 **(agreed, Q6**, option A**)**; the simulator owns the figure (9.3 `WindfallsPerRun`).
 - **Party** **(agreed, Q2)**. Live party size ≥ 3, read at generation (the LootDoorInvariant input "same seed and party") **and** again when it would wake (combat start or its host group becoming Engaged, 4.7.4; CB8).
   - **Live party size (lead's call, after the check)** = the hero plus companions who are not dead; downed members count. At generation it is the party leaving camp.
   - If the live size at that moment is below the allowed size, the Truant **never wakes**. It stays Dormant and is a plain Take after the fight (1 click, 1 tick, nabbed).
@@ -781,7 +780,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
   - It **survives** floors that are ineligible by party or skin (it waits for an eligible floor).
   - It is **cleared at the end of F4 generation** whatever happens.
   - Set and clear are written in the same atomic camp-exit save.
-  - Toy: about 1.2 per run without carry, about 1.4 with it, **at party 4 and with every theme skinned**. The lead's re-estimate under the party ladder and the M3 skins is in 0.1; the simulator reports the real figure by theme mix (9.3 `WindfallsPerRun`).
+  - Toy: about 1.2 per run without carry, about 1.4 with it, **at party 4 and with every theme skinned**. The lead's re-estimate under the party ladder and the M3 skins, about 0.6–0.9 per run *(illustr.)*, is in 0.1 and was accepted for the M3 pilot (agreed, Q6); the simulator reports the real figure by theme mix (9.3 `WindfallsPerRun`).
 - **Runtime.** No draws at wake, hop, nab, slip or escape. The only roll is the keyed-hash Steal. Save and resume mid-fight persist `WindfallState{c, state, square, slipUsed, heldSteps}` and the host group's `stealTryUsed`. Reload changes nothing.
 - **LootDoorInvariant.** Card identities never change by door. Presence and host may differ by door (placement), which is logged. V15 golden seeds check this.
 
@@ -1238,7 +1237,7 @@ The scripts and outputs are listed in Appendix B.
 
 **Other toy results:**
 - Realistic escaped VP is about 0.10–0.15 per run.
-- Expected Windfalls per run are about 1.2, or about 1.4 with carry, **at party 4 on every floor and with every F2–F4 theme skinned**. Told plainly after the check: neither holds in M3 (0.1, 4.7.2); the lead's re-estimate is about 0.6–0.9 per run at the raised presence, for an always-hiring party.
+- Expected Windfalls per run are about 1.2, or about 1.4 with carry, **at party 4 on every floor and with every F2–F4 theme skinned**. Told plainly after the check: neither holds in M3 (0.1, 4.7.2); the lead's re-estimate is about 0.6–0.9 per run at the raised presence, for an always-hiring party, the figure the client accepted for the M3 pilot (agreed, Q6).
 - Loot clicks are 19–21 of the 40-click budget **before** walker confirmation, which is the largest unknown on the floor clock (told plainly).
 - Full-clear rate (k = n) at party 4 is about 0.71.
 
@@ -1364,7 +1363,7 @@ Split like V13 and run at the shared assertion point after V13g:
 | `WindfallNabRate` | 80–95% |
 | `WindfallNabByClass` | No class < 0.6× the best |
 | `WindfallGreedDowns` / `WindfallChaseDeathShare` | ≤ +1 pp at party ≥ 3; solo arm ≤ +2 pp to open (agreed, Q2). Defined in 4.7.9 |
-| `WindfallsPerRun` | Report, by theme mix, party schedule and RS cut (added after the check; returns to the client against Q1's band) |
+| `WindfallsPerRun` | Report, by theme mix, party schedule and RS cut (added after the check; measured against the about 0.6–0.9 per run agreed with Q6) |
 | `WindfallFirstActionShare` | ≤ 40% |
 | `FightEndNabShare` | Report only |
 | `WindfallStealShare` | ≤ 40% Shade parties |
@@ -1447,7 +1446,7 @@ Split like V13 and run at the shared assertion point after V13g:
 
 ## 13. Changes to approved documents
 
-To be applied when the client approves this document. **This document edits no parent document itself**; the rows are applied by the owners of the sections they touch **(lead's call)**, and rows owed by other owners are listed again in 17. Every row names the exact sections it touches. Rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ in the "Flag" column; **the client's approval of this document will cover them** (with Q1–Q5 where a row names one). As in the LE, TL, EP and IR precedents, the Flag column also marks rows that only *read* agreed, decided or settled text without changing it, so that every touch of such text is visible **(new lead's call:** this adds flags to LP-7, LP-10, LP-12, LP-14, LP-15, LP-21, LP-24, LP-25 and LP-34, which the proposal's register did not flag**)**. **After the check (lead's call, after the check),** flags are added to LP-3, LP-5, LP-8, LP-9, LP-13, LP-32 and LP-33, which touched agreed or settled text without one, and LP-1 also flags LE 6.10. Told-plainly rows are told in 14.1. Rows marked "request" are requests to other owners; they change nothing until their owner rules, and 14.2 names each fallback. M3, M4 and Later rows are recorded as text marked with their wave and take effect at that wave.
+Applied on 2026-11-22, when the client approved this document. **This document edits no parent document itself**; the rows are applied by the owners of the sections they touch **(lead's call)**, and rows owed by other owners are listed again in 17. Every row names the exact sections it touches. Rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ in the "Flag" column; **the client's approval of 2026-11-22 covers them** (with Q1–Q6 where a row names one). As in the LE, TL, EP and IR precedents, the Flag column also marks rows that only *read* agreed, decided or settled text without changing it, so that every touch of such text is visible **(new lead's call:** this adds flags to LP-7, LP-10, LP-12, LP-14, LP-15, LP-21, LP-24, LP-25 and LP-34, which the proposal's register did not flag**)**. **After the check (lead's call, after the check),** flags are added to LP-3, LP-5, LP-8, LP-9, LP-13, LP-32 and LP-33, which touched agreed or settled text without one, and LP-1 also flags LE 6.10. Told-plainly rows were told in 14.1 and confirmed by the client on 2026-11-22. Rows marked "request" are requests to other owners, recorded as pending requests; they change nothing until their owner rules, and 14.2 names each fallback. M3, M4 and Later rows are recorded now as applied text marked with their wave and take effect at that wave.
 
 **Readings recorded inside this design (no approved text changes; each goes to its owner for confirmation):**
 - Gb carriers are SR1 (LE 6.9 item 1; LE owner).
@@ -1502,11 +1501,13 @@ Waves: LP-31 (V15 M1 rows) and the M1 subsets of 4.2 to 4.4 in M1; LP-8 to LP-28
 
 ## 14. Open items for the client
 
-**This document awaits the client's approval as a whole.** The five questions it raised were answered on 2026-11-22 **(agreed)**, each with the recommended option (A); the client also said everything else in the proposal stands as written. Approval would cover every lead's call (the lead's calls of the answered proposal, the new lead's calls and the lead's calls after the check in 14.1), the told-plainly items, the readings recorded in 13 and the flagged rows of 13. No new client question arose while writing. **The check raised one item that needs the client (Q6 below): the Windfall frequency agreed with Q1 cannot be met under Q2, Q4 and the companion ladder.** Every other lead's call after the check sits inside the five answers, keeps an approved rule, or is flagged against the text it touches. The future items in 14.2, which come back only if a report, an owner's refusal, a wave or a later design triggers them, and the naming pass remain future items.
+None. Approved by the client on 2026-11-22.
+
+The client approved this document as a whole on 2026-11-22, including every lead's call (the lead's calls of the answered proposal, the new lead's calls in 14.1 and the lead's calls after the check in 14.1), the told-plainly items (including "Told plainly after the check" in 14.1: among them that Q1's "about 1.2–1.4 per run" is out of reach, the container-first cut order, the lowest-tier card rule and the dropped "Nab it" order), the readings recorded in 13, and its approval covers the flagged rows of 13. The five questions raised before writing were answered on 2026-11-22 **(agreed)**, each with the recommended option (A); the client also said everything else in the proposal stands as written. The check raised one further question, Q6, the Windfall frequency; the client answered it with the approval of this document, with the recommended option (A): about 0.6–0.9 Windfalls per run *(illustr.)* for the M3 pilot, with presence 1000‰ on F3–F4, the simulator owning the figure **(agreed, Q6)**. Every other lead's call after the check sits inside the six answers, keeps an approved rule, or is flagged against the text it touches. The future items in 14.2, which come back only if a report, an owner's refusal, a wave or a later design triggers them, and the naming pass remain future items.
 
 ### 14.1 This document
 
-**The five answers (agreed, 2026-11-22), each the recommended option:**
+**The six answers (agreed, 2026-11-22), each the recommended option:**
 
 - **Q1, fleeting loot form and budget (LP-1 to LP-7):** option A. The Windfall Truant in M3, in combat, F2–F4, about 1.2–1.4 per run, holding a real card from the fixed deck (from its host fight's carried allotment), lost visibly if it gets away, nabbed by any action or by winning the fight; pre-placed and visible at reveal (never spawned); C = 3; route outlined a turn ahead; slip once when blocked; Shade Steal while Dormant (4.7). Rejected: B, coin and sundry only; C, extra value; D, none.
 - **Q2, party size (LP-3):** option A. Pilot at party ≥ 3; solo opens on its own simulator arm (C = 4) if greed downs ≤ +2 pp; duo held (4.7.2). Rejected: B, all sizes.
@@ -1514,7 +1515,7 @@ Waves: LP-31 (V15 M1 rows) and the M1 subsets of 4.2 to 4.4 in M1; LP-8 to LP-28
 - **Q4, skins (LP-7):** option A. Rabbit (Carnival), Crumb Mouse (Supper) and Alms Crab (Choir) are the Truant pilot; balloon, plate and bauble kept as M4 Ebbs; Gaol prisoner, Supper trolley, Heart toy and Silk page contested and excluded; F1 and F5 themes excluded (5). Rejected: B, an F1 coin-only teaching Ebb.
 - **Q5, the Bedside Stand (LP-14):** option A. Accepted as a second named exception to "container art never implies contents" because it opens a different UI (4.10, 5.3). Rejected: B, an ordinary biscuit tin.
 
-**New lead's calls (made while writing; for the client's approval with this document):**
+**New lead's calls (made while writing; confirmed by the client on 2026-11-22, with this document):**
 1. **Document shape:** the proposal's section numbers 0–13 are kept so every cross-reference holds; intent, goals and anti-goals sit in 0 as 0.4 (non-goals added); the client questions become 14 (open items); the closing parts follow as 15 (risks), 16 (left to the builders), 17 (depends on) and Appendix B (sources), as in IR.
 2. **Scurry trail** names the Truant's route marks; the draft's "route footprints" collides with the Stir and Keg *footprint* (50 hits) (0.1, 4.7.3, 6).
 3. **`onWindfall`** names the ledger tag; the draft's `heldBy` is an existing VG data predicate (4.7.6, 9.1).
@@ -1531,7 +1532,7 @@ Waves: LP-31 (V15 M1 rows) and the M1 subsets of 4.2 to 4.4 in M1; LP-8 to LP-28
 14. **`ProprietorFallbackRate`** (≤ 10%, from the risk list) joins the reports (9.3).
 15. **Owner-refusal fallbacks** in 14.2, each stated so a refusal never blocks M2 or the M3 pilot.
 
-**Lead's calls after the check (for the client's approval with this document):**
+**Lead's calls after the check (confirmed by the client on 2026-11-22, with this document):**
 1. **LootBind runs in a fixed numbered order** (item-7 remaps and the offer-pacing trim; container squares and their fallbacks; the Windfall host check, move or drop; home, Rathole and route; merges; Proprietors; coin, purse and salvage). The Windfall card is excluded from KinSwap and carrier fallback; a moved Windfall re-sources its card against the new host; a drop returns the card to its origin as resolved and its coin weight to the pool (4.3).
 2. **Traps-bound sockets keep their square;** other sockets use a four-step square fallback ending in a hard failure, `LootBindUnplaceable`; HE and Due sockets never leave their room (4.3).
 3. **The walk line is defined,** and each role's square choice has a scoring tuple (4.2, 4.3).
@@ -1573,20 +1574,19 @@ Waves: LP-31 (V15 M1 rows) and the M1 subsets of 4.2 to 4.4 in M1; LP-8 to LP-28
 39. **The art budget** has asset counts per wave and a cut order (6).
 40. **Corrections:** the bait cache is M2 (as EP and LE already say); "by family" becomes "by source"; the "Got away" line shows the tier word only; the signature cache's "lair" is read as the arena (13); missed flags added to LP-3, LP-5, LP-8, LP-9, LP-13, LP-32 and LP-33; four catalogue names added to A.5.
 
-**Q6, for the client (raised by the check).** **The Windfall frequency.** Q1 agreed "about 1.2–1.4 per run". That figure came from a toy at party 4 on every floor with every theme skinned. Under Q2 (party ≥ 3, duo held), the companion ladder (party at most 1 / 2 / 3 / 4 / 4) and Q4 (M3 skins only for the Choir, the Carnival and the Supper), F2 is never eligible without the solo arm, and Silk and Gut floors never host a Truant. Even with presence raised to 1000‰ on F3 and F4, the lead's estimate is **about 0.6–0.9 per run for an always-hiring party** *(illustr.)*, lower for a player who declines a hire; under RS Cut 2 only F3 can host one.
-- **A (recommended).** Accept about 0.6–0.9 per run for the M3 pilot, with 1000‰ on F3–F4; the simulator reports `WindfallsPerRun`, and the pilot's gates decide whether to widen it in M4.
-- **B.** Bring the Silverfish (Silk) and the Rent Snail (Gut) into the M3 pilot (changes Q4; +2 skins and their role-ID passes); about 0.9–1.3 per run *(illustr.)*.
-- **C.** Open a duo arm in M3 at C = 4 like solo (changes Q2), so F2 can host; only if it passes ≤ +1 pp.
+**Q6, the Windfall frequency (raised by the check; agreed, 2026-11-22, with the approval of this document):** option A. Q1 agreed "about 1.2–1.4 per run". That figure came from a toy at party 4 on every floor with every theme skinned. Under Q2 (party ≥ 3, duo held), the companion ladder (party at most 1 / 2 / 3 / 4 / 4) and Q4 (M3 skins only for the Choir, the Carnival and the Supper), F2 is never eligible without the solo arm, and Silk and Gut floors never host a Truant. Even with presence raised to 1000‰ on F3 and F4, the lead's estimate is **about 0.6–0.9 per run for an always-hiring party** *(illustr.)*, lower for a player who declines a hire; under RS Cut 2 only F3 can host one.
+- **A (agreed).** Accept about 0.6–0.9 per run *(illustr.)* for the M3 pilot, with 1000‰ on F3–F4; the simulator owns the figure and reports `WindfallsPerRun`, and the pilot's gates decide whether to widen it in M4.
+- Rejected: **B**, bring the Silverfish (Silk) and the Rent Snail (Gut) into the M3 pilot (changes Q4; +2 skins and their role-ID passes); about 0.9–1.3 per run *(illustr.)*. **C**, open a duo arm in M3 at C = 4 like solo (changes Q2), so F2 can host; only if it passes ≤ +1 pp.
 
-**Told plainly after the check:**
-- The agreed "about 1.2–1.4 per run" is out of reach under Q2, Q4 and the companion ladder; F2 is never eligible without the solo arm; Silk and Gut floors host no Truant in M3; under RS Cut 2 F4 never hosts one (0.1, 4.7.2, Q6).
+**Told plainly after the check (confirmed by the client on 2026-11-22):**
+- The agreed "about 1.2–1.4 per run" is out of reach under Q2, Q4 and the companion ladder; F2 is never eligible without the solo arm; Silk and Gut floors host no Truant in M3; under RS Cut 2 F4 never hosts one (0.1, 4.7.2); the client accepted about 0.6–0.9 for the M3 pilot (agreed, Q6).
 - The proposal's cut order turned the Windfall off before trimming containers; that is not the lead's call, so containers are cut first and any Windfall cut returns to the client (4.6).
 - The lowest-tier card rule makes the visible stake usually a Common; the lead keeps it (the client accepted the Windfall as written) and runs richer variants as report-only arms (4.7.6).
 - Companions never chase the Truant by themselves: the player controls every unit (MAIN 4.2), so the proposal's "Nab it" order and autonomous rule are dropped (4.7.8).
 - Two pilot skins borrowed their faction's motif and the Alms Crab's cup read as a moving container; the Rabbit's tent flap was the Carnival's Drape Portal and the Crab's crack a decoy Hairline. All are re-specified inside Q4's choice of animals (5.3).
 - The bait cache was mis-staged as M3; it is M2 with the Mousetrap, as approved (4.1, 10).
 
-**Told plainly (gathered from where they stand):**
+**Told plainly (gathered from where they stand; confirmed by the client on 2026-11-22):**
 - The Windfall never "appears": RC1, EP 13 and determinism require it to be pre-placed and visible at reveal; the dream logic is in how it wakes and leaves (0.1).
 - No extra value: its card comes out of the fixed deck; extra value would break Ledger A, MAIN 4.6 and "harder is not richer" (0.1, 4.7.6).
 - In M3 a solo-hero or duo run never sees fleeting loot unless the solo arm passes; duo is held (0.1, 4.7.2).
@@ -1610,12 +1610,14 @@ Waves: LP-31 (V15 M1 rows) and the M1 subsets of 4.2 to 4.4 in M1; LP-8 to LP-28
 
 ### 14.2 Future items triggered by reports, owners or later designs
 
+These come back to the client only if a report, an owner's refusal, a wave or a later design triggers them; each fallback is a new lead's call or a lead's call after the check (confirmed by the client on 2026-11-22, with this document):
+
 | Item | Trigger | What happens | Owner / approval |
 |---|---|---|---|
 | Solo Windfalls | The solo arm (C = 4) shows `WindfallGreedDowns` ≤ +2 pp | `windfallParties` gains 1; solo uses C = 4 (agreed, Q2) | Lead (pre-approved by Q2) |
 | Duo Windfalls | A later duo arm passes ≤ +1 pp | Returns to the client (held under Q2) | Client |
 | Windfall gate miss at party ≥ 3 | `WindfallGreedDowns` > +1 pp or `WindfallRoundsDelta` > +0.2 | Route geometry first (lead); any lower frequency, turning it off or any change to C returns to the client (changed after the check: the proposal's "F2 only, then off" was a client matter) | Lead for geometry; client otherwise |
-| Windfall frequency | `WindfallsPerRun` from the first M3 arm, by theme mix and party schedule | Measured against the client's Q6 answer | Client (Q6) |
+| Windfall frequency | `WindfallsPerRun` from the first M3 arm, by theme mix and party schedule | Measured against the about 0.6–0.9 per run agreed with Q6 (option A); widening it in M4 follows the pilot's gates, and any lower frequency or turning it off returns to the client (row above) | Client (agreed, Q6) |
 | Richer Windfall stake | The highest-eligible-tier or width-2 offer arm passes ≤ +1 pp | Returns to the client before adoption (the Windfall was accepted as written) | Client |
 | Width-2 offer on nab | `WindfallIgnoreShare` high | Its own keyed grandchild; offer pacing counts it; adoption returns to the client (row above) | Lead (M4 lever); client |
 | Lost Property buy-back | Greed gates miss | Camp hook tested | Camp and hub owner |
@@ -1646,7 +1648,7 @@ Waves: LP-31 (V15 M1 rows) and the M1 subsets of 4.2 to 4.4 in M1; LP-8 to LP-28
 | 1 | **The Truant is a small tempo tax more than a decision** (nab rate 0.97). The stake is real but rarely lost, and the lowest-tier rule makes it usually a Common. It is the most expensive part of 7c per appearance | Route geometry; the highest-tier and width-2 report arms in M3 (4.7.6); any richer stake or cut returns to the client |
 | 2 | **The carried-card source is unsimulated.** It may thin a fight's visible carried loot or interact with the Steal-target count | The first M3 arm; V15 ≥ 1 Steal target after step 8 |
 | 3 | **Clicks are unmeasured.** Loot takes about 19–21 of the 40-click budget in the toy, and CMP 7.4 already fails the lean case. The walker re-baseline may force deeper container cuts | Walker first; net ≤ 0 line; cut order |
-| 4 | **Party-size and skin limits** leave solo and duo players without the feature in M3, make F2 ineligible for everyone, and leave Silk and Gut floors without it: about 0.6–0.9 Windfalls per run against the agreed 1.2–1.4 | The solo arm (agreed, Q2); presence 1000‰ on F3–F4; Q6 to the client |
+| 4 | **Party-size and skin limits** leave solo and duo players without the feature in M3, make F2 ineligible for everyone, and leave Silk and Gut floors without it: about 0.6–0.9 Windfalls per run against Q1's 1.2–1.4 | The solo arm (agreed, Q2); presence 1000‰ on F3–F4; the client accepted about 0.6–0.9 for the M3 pilot (agreed, Q6), and the simulator owns the figure |
 | 5 | **The Dream card gets busier** | A glance-test row; one clock per room keeps each room readable |
 | 6 | **RC7 cues** need the RS owner. Until then the telegraph relies on visuals | Request; fallback in 14.2 |
 | 7 | **The Alcove set-piece default** depends on segment 3 supplying set pieces. If none exist, the cap is logged, not enforced | Request; fallback in 14.2 |

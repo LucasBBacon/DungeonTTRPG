@@ -793,7 +793,10 @@ rhythm or dial (the Small Hour Strikes, Guttering Candles). Remnant
 countdowns, Cord recharges and uses, and vent trigger counts are drawn
 as **pips, never digits**, so a digit on the map always means "the
 room's clock". A Wager room's Disturbance track is that room's one
-clock (traps and locks design 6.15; change TL-29; M3). **Voids are
+clock (traps and locks design 6.15; change TL-29; M3). A Windfall's
+countdown digit is its room's one clock: a Windfall host holds no other
+clock, and a clock Landmark is never placed in a `windfallHost` room
+(loot sources design 4.7.2, 4.7.4; change LP-4; M3). **Voids are
 static, not clocks**, but a Void never shares a room with a Lurch Stir,
 at any tier. In M2 a room holds at most one
 Void region (lead's call, after the check).
@@ -903,6 +906,12 @@ the check)**:
    - **2b.** The morale checkpoint (ENM 14.3's FIFO: removal events,
      Startle) and experience credit (`voidFall`, kills).
 3. **Remnant countdowns** (M3), skipping Remnants created this round.
+   - **3b. Windfall hops** (M3; loot sources design 4.7.4; change
+     LP-4). Each awake Windfall Truant hops up to `hop` squares along
+     its route and its C falls by 1 (the round-1 step only stands it
+     up). The first blocked hop holds C once (the Turn slip precedent,
+     below); on any later blocked hop C falls anyway. At C = 0 it gets
+     away.
 4. **New announcements:** every footprint whose C is now 1 becomes
    **due squares** for the coming round, with its announcement sting
    (8).
@@ -985,7 +994,9 @@ next act:
 | **Mute round** | Party-*verb* noise (Smash, Shunt, Kick, loud checks) in the room is not propagated until the end of the next round. Combat-round noise is unaffected, so ENM 12.3 and the FL hearing proofs stand | M3 |
 | **Startle** | The new ENM 14.3 morale event (9.2) for named groups in the room | M3 |
 | **Emit** | One Miasma Remnant (breathing vent) | M3 |
-| **Turn** | Toggles Tide sockets between the Tide's 2 whole states (Q3). **Held whole (lead's call, after the check):** if any socket that would change to a non-walkable kind, or to a kind the record flags `holdIfOccupied`, is occupied at Dream step 1, the whole Turn slips one round and is re-announced. Sockets changing between walkable kinds (dry to water) change under units, and that is not an entry (HZ-18). So only the 2 proven states ever exist | M3 |
+| **Turn** | Toggles Tide sockets between the Tide's 2 whole states (Q3). **Held whole (lead's call, after the check):** if any socket that would change to a non-walkable kind, or to a kind the record flags `holdIfOccupied`, is occupied at Dream step 1, the whole Turn slips one round and is re-announced (a Windfall's
+blocked hop extends this precedent: it slips once, then C falls; loot
+sources design 4.7.4; change LP-4; M3). Sockets changing between walkable kinds (dry to water) change under units, and that is not an entry (HZ-18). So only the 2 proven states ever exist | M3 |
 | **Overturn** | A tippable Tall Furnishing falls along a pre-proven strip (rides RT's M3 Overturn) **(new lead's call:** renamed from the proposal's "Topple", the weapon verb**)** | M3 |
 
 **Never:**
@@ -1128,7 +1139,9 @@ the verb rules are a lead's call after the check):
   organ is already swelling"). Never a same-round act. At most once per
   Stir per round.
 - **Hold:** C rises by `holdSlip` (1; the Alarm Clock's Wind Back is
-  Hold with a slip of 3), and every later act shifts with it. If the
+  Hold with a slip of 3), and every later act shifts with it. (The
+  Windfall's one blocked-hop slip extends this precedent: loot sources
+  design 4.7.4; change LP-4; M3.) If the
   Stir is due, its due marks are withdrawn at once and Warned or
   floored is not evaluated that round. Once per Stir per fight.
 - **Reverse:** a Lurch direction reverses (M3).
@@ -1571,7 +1584,8 @@ Mood.
   locked-or-trapped quota.
 - **Two forms:**
   - **(a) Unguarded, "the rhythm is the lock".** The Stir runs per
-    out-of-combat tick (C 5.5: one round is one tick), so there is no
+    out-of-combat tick (C 5.5: one round is one tick; read by the M4
+    Ebb, loot sources design 4.7.11, change LP-34), so there is no
     new round mode and no contest of main 4.3. Auto-walk is off inside.
     One chosen dare-taker; the others wait at the threshold. DH 10.4's
     1-HP floor applies.
@@ -2740,7 +2754,7 @@ M3 instead; the client is told (19.2).
 |---|---|---|
 | **5 Traps, locks, checks** | The HZ-1 line. Traps kept: the dumbwaiter drop, the toppling-shelf tripwire, the icicle chandelier, the sluice Soak, the acid geyser, trapdoor stages, the bell tripwire, the portcullis, the Appeals trapdoor, horn tripwires. EnvDC as a reference for the DC ladder. Cords never arm traps and need no check | DCs; traps; door verbs; how traps and hazards share a room beyond these defaults |
 | 6 Encounter placement | Start sockets outside footprints and Tide states at fight start; ≤ 2 starts within 2 of a Void edge; ≤ 1 flyer, ≤ 1 shover type and ≤ 2 shover units within 4 of a Void edge in Void rooms; the `usesCords`, `singer` and Stoker tags; Wake candle racks on Dormant groups (index ≥ 3, ≤ 1 per room); Dare garrisons; the mindless share (the enemies owner). **Filled by the encounter placement design (6.1 exclusions, 6.6.8 Terrain Pairings, 6.13):** the guarded Dare garrison is the floor's Annex (change EP-26; agreed, Q2; M3) | Who starts where |
-| 7 Loot | Fallen loot on the edge; Dare containers (+1 rarity step); no item loss. **Filled by the loot economy design (6.9, 6.14; change LE-10; M3):** the Dare cache is an SR5 step socket under the one step rule; fallen loot on the edge, no item loss (7c) | Containers and contents |
+| 7 Loot | Fallen loot on the edge; Dare containers (+1 rarity step); no item loss. **Filled by the loot economy design (6.9, 6.14; change LE-10; M3):** the Dare cache is an SR5 step socket under the one step rule; fallen loot on the edge, no item loss (7c). **Changed by the loot sources design (4.7.7; change LP-2; agreed, Q1; M3):** the sole exception is that a Windfall's card and coin leave the floor when its shown count ends (`ItemDestroyed{gotAway}`); kill method, damage, terrain, traps, locks and force still never destroy loot | Containers and contents |
 | 8 Events | Unguarded Dare forms; Moods on the Stratum Card; empty Tide naves as non-combat puzzles; the Gaol's small hours | Event content |
 | 9 Boss arenas | 6.17: one clock and one Void line per arena inside RT 6.11, under the room rules; `noDrop`; the boss Teetering guard; counterplay identities kept | Interiors, counterplay, phases |
 | 10 Exploration and UI | Stir rule cards on reveal; due overlays; countdown glyphs; the menu card; Snag glyphs; Portal hazard and Dare signposts; Listen hears tells; Plunge links | Overlays and UI |
@@ -2773,7 +2787,7 @@ M3 instead; the client is told (19.2).
 | Guards every round | ENM 6.4 | 6.11 |
 | No single failed save lethal to the hero | C 10.4 | FallFloor; Warned or floored; bands unchanged |
 | Party floors | DH 10.4 | Extended (HZ-10, HZ-14) |
-| Loot never destroyed | ENM 15.6 | Loot on the edge |
+| Loot never destroyed (sole exception: a Windfall that gets away, M3; loot sources design 4.7.7; change LP-2) | ENM 15.6 | Loot on the edge |
 | Experience sources | ENM 16 | The `voidFall` trigger |
 | Clock gate | companions 7.4, RT TN13 | +0.3 allowance with its static and Stir shares; the combined terrain-plus-hazards gate; the cut order |
 | Readability | RC1–RC9 | Section 8 |

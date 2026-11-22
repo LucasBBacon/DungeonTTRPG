@@ -185,7 +185,9 @@ These would make the game a failure even if everything works.
   EP-38, Later). Combat ends when no hostile
   unit is aware of the party, so fleeing by breaking line of sight is
   possible. Combat also ends as a win when every hostile still in the
-  fight is Routed (enemies design 12.4, 14.6). **(decided)**
+  fight is Routed (enemies design 12.4, 14.6). **(decided)** A Windfall
+  Truant is never a hostile unit, so this rule holds as written (loot
+  sources design 4.7.4; change LP-5, read, M3).
 - Reactions resolve automatically by default, following a per-reaction
   setting the player can change to "ask me". **(decided)**
 - Units can gain a jumping or flying state. These exist only to cross
@@ -240,7 +242,9 @@ real decision, which 5E relies on a DM to enforce.
   party weight × band% × depth% × ladder% (enemies design 10.1).
 - Notable loot is a fixed per-floor budget, split by channel and pre-rolled
   on the loot stream. Enemies carry part of it and never add to it
-  (enemies design 15.3).
+  (enemies design 15.3). A Windfall Truant's card comes out of this
+  budget, never on top of it (loot sources design 4.7.6; change LP-1,
+  read, M3).
 - Bosses are hand-designed. Which boss appears on a floor is drawn from a
   pool; the final boss may be picked at camp 4 when the Last Hollow
   choice is on (run structure design 6.11; change RT-11).

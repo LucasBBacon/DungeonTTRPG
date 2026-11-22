@@ -475,6 +475,13 @@ per unit). Only the placement rule and two sentences of enemies 15.5 and
 "Drink a potion" (ability model 7.2) means a potion on your own belt
 (change I-5).
 
+Opening a container out of combat costs the clicks of the loot sources
+design's click table, and a quiet summary auto-closes (8.1; loot sources
+design 4.6) **(change LP-8; M2)**. **Pending request (loot sources design
+4.6, 11):** the items owner confirms that a Plain open costs an action in
+combat; until it rules, container work in combat follows traps and locks
+design 6.11 and 6.13 as written.
+
 ### 7.2 Why these rules
 
 - **Retrieve has no bypass.** No in-combat command moves an item between a
@@ -502,7 +509,10 @@ Every greyed button names one reason **(settled, ability model 15.4)**:
 `ReactionCap`, `ButtonCap`, `DuplicateAnswer`, `AlreadyWarded`,
 `AlreadyWardedThisFight`, `TrinketHelpedLimit` (trinkets design 15)
 **(change TK-10)**, `FlaskThisTurn` (consumables design 18.4) **(change
-CN-9)**, and Later `ServiceUsed` and `NotBarterable`. `Untrained`
+CN-9)**, `Guarded` (Grab and attacks on a Dormant Windfall Truant, and
+Take on its spilled coin, while its host group is unresolved; Steal is
+the only verb; loot sources design 4.7.5, 4.7.8) **(change LP-3; M3)**,
+and Later `ServiceUsed` and `NotBarterable`. `Untrained`
 also covers armour and shield training (armour design 7.2, 16.3)
 **(change AR-33)**. `DeadLine` is a warning verdict, never a suppression
 (trinkets design 15) **(change TK-10)**.
@@ -520,10 +530,29 @@ also covers armour and shield training (armour design 7.2, 16.3)
 A Steal result does **not** open a summary: the item goes to the thief's
 pack if it has room for the item's size, otherwise to the leftovers marker
 in that room, exactly as enemies 15.5 says, and the party can reopen that
-marker at once. **(settled; size reading lead's call)**
+marker at once. **(settled; size reading lead's call)** A Steal on a
+Dormant Windfall Truant takes its card only, by the same rule (18.1;
+loot sources design 4.7.8) **(change LP-6; M3)**.
+
+**Auto-close of quiet summaries (loot sources design 4.6; change LP-8;
+M2).** Out of combat, a summary holding only coin and non-healing
+sundries that all fit takes everything and closes itself after
+`loot.summaryAutoCloseMs` *(illustr. 1.5 s)*, logging to the floor strip
+(`SummaryAutoClosed{containerIds, coin, sundries}`). "All fit" uses
+party-wide placement (6.2): each sundry goes to the suggested recipient
+(6.3), else the next member with room; if any item fails to place, the
+summary stays open. A summary with a notable, a healing sundry or any
+choice stays open. The timer pauses while pointer or controller focus is
+on the summary; a settings toggle (on by default) and the duration
+setting are offered; each auto-closed summary's log line reopens a
+reassign view for its sundries until the party leaves the room.
 
 There is one screen and never a second UI. The camp shop and, Later, the
-wandering trader reuse its card and comparison components.
+wandering trader reuse its card and comparison components. **Glean**
+(optional; ships only if playtest shows players want it) opens every
+visible Plain unlocked container in a room into **one merged summary**,
+still this one screen, and it auto-closes under the same test (loot
+sources design 4.6) **(change LP-9; M2)**.
 
 ### 8.2 Layout
 
@@ -1503,7 +1532,8 @@ ItemInstance {
                      //   belt(unit, i) | pack(unit, i) | party(keys) |
                      //   container(containerId) | carried(monsterId) | ground(square, fightId) |
                      //   claimed(unit, fightId) | summary(summaryId) | leftovers(markerId) |
-                     //   pile(markerId) | shop(campId) | trader(markerId)
+                     //   pile(markerId) | shop(campId) | trader(markerId) |
+                     //   windfall(unitId)  // on a Windfall Truant (change LP-2; M3)
   origin { channel, floor }
   substituted        // enemies 15.3 step 2
   boundToUnitId      // null unless issued by a recruit kit; kitBound is derived from it (companions design 7.6; change CMP-21)
@@ -1522,19 +1552,27 @@ party snapshot and draws nothing (10.3; traps and locks design 11.1)
 **(change TL-25)**. An instance at `container(containerId)` is never
 destroyed by a lock or trap result, and a container's own additions
 (`lockId?`, `trapId?`, `heldWaxKey`) are segment 7's (traps and locks
-design 6.13, 11.1). **(change TL-27, kept)**
+design 6.13, 11.1). **(change TL-27, kept)** `windfall(unitId)` is the
+card on a Windfall Truant (`carried(monsterId)` is for monsters). **Loot
+is never destroyed, with one exception:** a Windfall's card and coin
+leave the floor when its shown count ends (`ItemDestroyed{gotAway}`);
+kill method, damage, terrain, traps, locks and force still never destroy
+loot (loot sources design 4.7.7) **(change LP-2; M3)**.
 
 **Location transitions (lead's call).** Every legal move; 19.2 asserts that
 no other occurs.
 
 | From | To | Command or trigger | When | Event |
 |---|---|---|---|---|
-| generation | `container`, `carried`, `shop`, `trader` | floor loot draw | generation | `ItemCreated` |
+| generation | `container`, `carried`, `shop`, `trader`, `windfall` **(change LP-2; M3)** | floor loot draw | generation | `ItemCreated` |
 | vendor (unlimited goods) | 6.2 placement | Buy | camp | `ItemCreated`, `ItemBought` |
 | kit issue | 6.2 placement | on hire (companions design 7.6) **(change CMP-21)** | camp | `ItemCreated{kit}` |
 | `carried` | `ground` | the monster dies or drops it (enemies 15.6) | combat | `ItemDropped` |
 | `container`, `leftovers`, `pile`, `ground`, `claimed` | `summary` | summary opens (8.1) | out of combat | `ItemMoved` |
 | `carried` | thief's `pack`, else `leftovers` | Steal (8.1) | out of combat | `ItemTaken` or `ItemLeft` |
+| `windfall` | `ground` | nab (loot sources design 4.7.5) **(change LP-2; M3)** | combat | `ItemDropped` |
+| `windfall` | thief's `pack`, else `leftovers` | Steal on a Dormant Truant, card only (8.1; loot sources design 4.7.8) **(change LP-2; change LP-6; M3)** | out of combat | `ItemTaken` or `ItemLeft` |
+| `windfall` | deleted | the Truant gets away (`rathole`, `faded` or `partyFled`; loot sources design 4.7.7) **(change LP-2; M3)** | combat | `ItemDestroyed{gotAway}` |
 | `summary` | equip, set, belt or pack (6.2) | Take, Take all, Equip now | out of combat | `ItemTaken`, `ItemEquipped` |
 | `summary` | `leftovers` | Leave, Swap displacement, Done | out of combat | `ItemLeft` |
 | pack, belt or spare set | `leftovers` | Swap or Equip-now displacement (dungeon only) | out of combat | `ItemLeft` |
@@ -1549,7 +1587,7 @@ no other occurs.
 | party place | deleted | use to 0, Sell, barter offer | any; camp; trader | `ItemDestroyed{usedUp}`, `ItemSold`, `ItemBartered` |
 | party place (`boundToUnitId` set) | deleted | on dismissal or same-visit undo of its unit (companions design 7.6) **(change CMP-21)** | camp | `ItemDestroyed{dismissed}` |
 | `leftovers`, `pile` | deleted | stairs | descent | `ItemScrapped` (heirloom: `ItemDestroyed{lost}`) |
-| `container`, `carried`, `ground`, `trader`, `party(keys)` | deleted | stairs | descent | `ItemDestroyed{lost}` |
+| `container`, `carried`, `ground`, `trader`, `party(keys)`, `windfall` **(change LP-2; M3)** | deleted | stairs | descent | `ItemDestroyed{lost}` |
 | `shop` | deleted | leaving camp | camp end | `ItemDestroyed{lost}` |
 
 ### 18.2 Derived, never stored
@@ -1564,10 +1602,12 @@ are unit conditions.
 - New item events: `ItemCreated`, `ItemTaken`, `ItemMoved`,
   `ItemEquipped`, `ItemUsed`, `ItemSplit`, `ItemMerged`, `ItemClaimed`,
   `ItemRevealed`, `ItemLeft`, `ItemSold`, `ItemBought`, `ItemScrapped`,
-  `ItemDestroyed{reason: usedUp | lost | dreamedAway}` (`dreamedAway`: an
+  `ItemDestroyed{reason: usedUp | lost | dreamedAway | gotAway}` (`dreamedAway`: an
   unchosen option of an offer set dissolving when the choice resolves;
   loot economy design 6.3) **(change LE-4, M2; change LE-21, the Twin
-  Coffer, M3)**, `ItemRecharged` (camp, and Later
+  Coffer, M3)** (`gotAway`: a Windfall's card leaving with its Truant;
+  not a dreamed option, never in Scion memory or "What the dream kept";
+  loot sources design 4.7.7) **(change LP-2; M3)**, `ItemRecharged` (camp, and Later
   the trader), `ItemReturned` (Disarmed, Later); Later `ItemBartered`.
 - Consumable events (consumables design 18.4): `ItemUsed` gains `mode:
   self | adjacentAlly | thrown | inClass | outOfClass`; new
@@ -1728,7 +1768,8 @@ design's 21.2 codes. **(change CN-7; change DH-35)**
 Invariants, asserted as property tests:
 
 - exactly one location per instance;
-- every location change matches a row of the transition table (18.1);
+- every location change matches a row of the transition table (18.1),
+  the `windfall` rows included **(change LP-2; M3)**;
 - 0 ≤ spent ≤ max;
 - the belt holds only beltable items, and never more than `beltSlotsMax`;
 - over capacity only ever arises from a capacity loss;

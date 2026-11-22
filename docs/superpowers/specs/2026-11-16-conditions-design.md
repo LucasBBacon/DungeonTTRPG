@@ -270,6 +270,11 @@ sub-steps, in order:
 2. Combos it triggers (never Conduct, 11.2); then (2b) the morale
    checkpoint and experience credit.
 3. Remnant countdowns (M3), as above.
+   (3b) Windfall hops **(M3; change LP-4; loot sources design 4.7.4)**:
+   each awake Windfall Truant stands up (round 1) or hops along its
+   route square by square, and its countdown C falls by 1; at 0 it gets
+   away. It is its room's one clock (hazards design 6.2.2); the first
+   blocked hop holds C once (the hazards design 6.3 slip).
 4. New announcements: footprints due next round become due squares
    (11.3).
 
@@ -312,6 +317,10 @@ sub-steps, in order:
   there is no new round mode. The 1 hit point floor applies; a
   dare-taker reduced to 1 hit point by the room is returned to the
   threshold and the dare resets.
+- **Ebb (M4; change LP-34, reading; loot sources design 4.7.11):** an
+  Ebb container's count runs in out-of-combat ticks (one round is one
+  tick); if a fight starts in its room, the remaining count converts to
+  Dream steps. No rule here changes.
 
 ### 5.6 Windows
 

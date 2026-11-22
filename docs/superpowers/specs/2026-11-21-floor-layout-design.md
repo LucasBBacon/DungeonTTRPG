@@ -869,9 +869,9 @@ target, which LS5 draws from the Blueprint's `bypassTargets[]` (6.8).
 |---|---|
 | Patrol | The Circuit (6.7). Floor 1's cowable Scavengers (CL-10) sit on main-path Q room 3. On floors 2–5 the patrol's homeRoom is the Forecourt, since enemies 6.3 homes a patrol in its route room with the highest `expectedTenths` and Circuit side rooms inherit the Forecourt's; the patrol is levelled and paid at room n−2 **(told plainly, after the check)** |
 | Guard posts | Chokepoint rooms: one forward Portal that is a door kind or ≤ 2 wide, plus an entry side of at most a flank pair |
-| Lair | The L position, a cut vertex. May be `deadEndAllowed` only for a Den or Sleeper template, where Cornered is the intended payoff |
+| Lair | The L position, a cut vertex. May be `deadEndAllowed` only for a Den or Sleeper template, where Cornered is the intended payoff. **Reading to confirm (LP-14, M2; loot sources design 4.10; LE 18.2):** on floor 5 the L room's host socket holds the Viaticum (Bedside Stand host, agreed loot sources Q5) on its exit side toward the Forecourt, outside the start zone, on the walk line, because nothing lies between L and F on floor 5; the FL and enemies owners confirm. If refused, segment 2 adds a post-lair main-path container on floor 5 (loot sources design 14.2) |
 | Elite room | A depth-1 spur from a main-path room with index ≥ FloorDiv(n−1, 2), not the antechamber or arena (floor 1: second half, enemies 17.4). Entered by a Door. Its **Grille vantage** sits in a vantage Alcove of the parent room, behind a Door the party opens only when it wants to look, so a peek is always a choice; from it the party sees ≥ half of the elite start zone at distance ≥ 7, and the two sides are walkably joined within ≤ 12 (`GrilleReach`). No square on the parent's main walk line sees the start zone. **If the enemies owner refuses FL-21 (b),** a noticed Champion may come, so the hearing outline marks the vantage Door as a noticing risk before the party opens it; the opt-in Door is the layout fallback and needs no enemies rule **(vantage Alcove and fallback: lead's calls, after the check)**. Templates also fit the floor-3+ Rival Party (2–3 units, enemies 18.1). Inherits `expectedTenths` through `branchIndex` |
-| Boss | Arena socket: the Blueprint's 2×2-cell `arenaCell`; two dog-leg Forecourt Arches; the Bossgate on the far wall (none on floor 5). Arena start zones sit ≥ 9 path squares from both entrances (segment 9 hook) |
+| Boss | Arena socket: the Blueprint's 2×2-cell `arenaCell`; two dog-leg Forecourt Arches; the Bossgate on the far wall (none on floor 5). Arena start zones sit ≥ 9 path squares from both entrances (segment 9 hook). A guarded boss's signature cache sits in the arena, never the L room (a reading of IR 4.13 and 4.18; loot sources design 4.4) |
 | Empty or special | Q positions, and the antechamber on floors 2–5, which is also the patrol's fight host and homeRoom (RS 6.6's "empty or special" reads it as special; told plainly, FL-5). Segment 8 fills Q rooms; floors 2–5 antechambers may host non-encounter micro-events |
 | Side rewards | Loop-back Sites first, then spurs and Alcoves. Off-path potions (600‰ lean) and secret caches |
 | HE-7 / HE-4 | Socket 1: a no-check socket in a traversed room with index < FloorDiv(n−1, 2), not in the Gb room. Socket 2: a traversed room with FloorDiv(n−1, 2) ≤ index ≤ n−2 (the antechamber allowed; on floor 1 "empty" means no encounter, so a container is legal). HE-4: a traversed no-check socket before the arena, not in the Gb room and not in a Circuit room (the floors 2–5 Forecourt included), so no optional fight stands in front of it. Entry templates, every Q template and **every Forecourt template** carry ≥ 1 no-check socket, so reservation is constructive on every role order, floor 5 included (V8 `HE7Sockets`). DH 12.5 step 4 draws the supply among these HE-4-eligible containers only (FL-3) **(lead's calls, after the check)** |
@@ -1142,7 +1142,13 @@ zero. Joiners stay a real, player-caused experience.
 - The structural fixes are the loop-back Sites (LG10) and a Latch at the
   end of the one deep spur.
 - `EmptyDeadEndRate` target 0: every leaf holds a container, a cache or
-  a set piece.
+  a set piece. **Pending request (LP-11, M2; loot sources design 4.2):**
+  an Alcove's default occupant is a set piece where segment 3 offers
+  one, so an Alcove whose container would exceed 7c's `containerCap`
+  takes its set piece; 7c never trims a leaf to empty, so the target
+  stays 0. If segment 3 offers no set pieces, the Alcove stays a
+  container and the cap is logged, not enforced (loot sources design
+  14.2).
 - Detours are legible before commitment (floor count line, Listen,
   containers seen through Grilles and Arches).
 - Travel-to-explored-square auto-walk is requested of segment 10 **in
@@ -1182,6 +1188,19 @@ zero. Joiners stay a real, player-caused experience.
   posts at party 4; (2) `maxRounds` 3 → 2; (3) halve the Waylay share;
   (4) Revel and Bout start in Posted formation. The companions 7.4
   levers stay untouched.
+- **Segment 7c's line (LP-10, M2 / M3; loot sources design 4.6):**
+  beside TL-38's and EP-33's, net ≤ 0 minutes and ≤ 0 clicks on floor 3
+  heavy and floors 4–5 at party 4 until the companions 7.4 gate passes
+  with margin. It is measured against a re-run of the 11.4 walker with
+  container clicks made explicit (baseline: the loot economy's container
+  counts with no cap or merges, the 7c click table, auto-close and Glean
+  off, no Windfall), never against an assumed 2 clicks per container;
+  net = the 7c arm − that baseline. Auto-close is booked as a credit,
+  and the Windfall's cost (M3) sits inside the line. On a miss, before
+  any companions 7.4 lever: (1) `containerCap` −1 on floors 3–5; (2) the
+  Alcove set-piece share up; (3) only then Windfall presence −250‰ on
+  floors 3 and 4; any lower Windfall frequency, or turning it off,
+  returns to the client (agreed, loot sources Q1).
 - **Auto-walk at doors (lead's call, after the check):** auto-walk
   pauses at each closed door on its path. A trained party's passive
   Listen resolves there (FL-18). Auto-walk then opens the door and walks
@@ -1428,7 +1447,10 @@ material on a flat floor, 8.1). Blueprints:
   (floor 1).
 - Secrets: 0–1 on floor 1 **(agreed, Q3)**. The theme dressing beside
   the universal tell (lead's call): the one portrait whose eyes are
-  open. It is dressing only; the universal glyph is the rule.
+  open. It is dressing only; the universal glyph is the rule. **This
+  precedent is extended to every theme (LP-22, M2 optional art; loot
+  sources design CT13, 5.3):** per-theme Hairline dressing beside the
+  universal tell, only where a Hairline exists, never a decoy.
 
 **Risks:**
 - Upright coffin lids mimicking the Pallbearer prop (RC2) are forbidden.
@@ -1976,7 +1998,9 @@ after the check):**
   8-adjacent to the Portal's squares) and opens it: out of combat, 6
   ticks, no roll. There is nothing to sound anywhere else, so wall
   combing is never a strategy.
-- There are no decoy tells and no decoy stubs (RC1).
+- There are no decoy tells and no decoy stubs (RC1). Per-theme
+  dressing beside the tell follows 7.4 (LP-22; loot sources design
+  CT13).
 - Counts *(illustr.)*: floor 1 0–1, in the Gaol and the Wake only (the
   Kennel none); floors 2–3 1; floors 4–5 1–2.
 - Optional content only (`SecretNeverCritical`). Secret caches count as
@@ -2095,7 +2119,7 @@ SiteRule
 RoomTemplate
   id, theme, role, sizeClass, partyBands, lessonTag, footprintShape,
   sockets[] {cell, side, offset, width}, orientations[], startZone, partyEntrySquares[socket],
-  postSquares, patrolWaypoints, containerSockets[] {noCheck}, trapSockets, landmarkSocket,
+  postSquares, patrolWaypoints, containerSockets[] {noCheck, face?}, trapSockets, landmarkSocket,
   socketToStartZoneMin[socket], fleeExit, vantageSquares?, maskVariants[]?
 FloorLayout (output)
   static (regenerable from the seed; covered by layoutDigest):
@@ -2136,6 +2160,13 @@ Events: GenerationRetried (existing); DoorClosed; DrapeDrawn; LatchLifted; Liste
   `effectiveIndex` is defined for every square (3.4). The Surprise rule
   reads `mainPathIndex` (null means "not 0–1"); `expectedTenths`,
   Keepsake order and leftovers read `effectiveIndex`.
+- **Inset container sockets (LP-12, M2; loot sources design 4.3):** a
+  `containerSockets[]` entry may name a wall `face`; segment 7c prefers
+  such an inset host for SR0, Alcove and secret sockets. An inset
+  container is set into the wall face, waist-high on its wall-set
+  bracket, with its open square in front; it is never a Furnishing, a
+  hidden stash or a Portal skin (ROOM 6.3.4, settled; loot sources
+  design CT15).
 
 ### 11.2 Validators and assertions (change FL-14, FL-15)
 
@@ -2242,6 +2273,11 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
   **(new lead's call: the report that tells whether Q3's floor-1 count
   is worth its cost)**.
 - **Shared:** the DEP-S1 dead-room rate, with segment 5.
+- **Loot (LP-32, M2, with M3 Windfall rows; loot sources design 9.3,
+  9.4):** segment 7c's reports sit beside these, among them
+  `LootClicksPerFloor` and `WindfallSeconds` (inside the 7c line, 6.10),
+  `LootDetourSquares` (SR0 median ≤ 2), `ContainersPerFloor` and
+  `ContainerCapTrim`; the walker re-baseline is one of 7c's arms.
 
 ### 11.4 Simulator arms
 
@@ -2254,10 +2290,21 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
      count line's s secrets are found).
    - Seconds per tick and a cost table per action *(illustr., the
      companions owner calibrates)*: a step 1 tick; open a door 1 click;
-     a container N clicks by type; Listen 1 click and 2 ticks (0 ticks
+     a container N clicks by type (below); Listen 1 click and 2 ticks (0 ticks
      when passive); Sound the wall 1 click and 6 ticks; a Squeeze 1
      click, +4 ticks on a failure; a Latch 1 click and 1 tick; a reveal
      1 click; each auto-walk stop 1 click.
+   - **Container clicks by type (LP-8, M2; loot sources design 4.6;
+     *illustr.* until the walker measures them):** a Plain container
+     with a quiet summary (coin and non-healing sundries only, which
+     auto-closes) 1 click; a Plain container with a notable or a
+     healing sundry 2; a lock card +1 click and +1 tick plus hand work
+     (TL 6.21); a key walk-in or an Easy Plain auto-pick 0; a
+     consequence lock 3; a Twin Coffer 2; a secret, Sound the wall plus
+     open, 1 + 1–2; Glean (optional) 1, +1 per notable decision; Steal
+     2; the Windfall (M3) 0 extra; the Viaticum or a boss card offer 2. The
+     7c clock line re-runs this walker with these clicks explicit
+     (6.10; LP-10).
    - Statistic: the median over the release seed set at party 4, per
      (theme, floor). The 6.10 gate passes when the lean median is ≤ 3.5
      min and ≤ 40 clicks. The heavy and hunt figures are reported.
@@ -2320,7 +2367,7 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
 | 4 Hazards | Region tags; "no hazard" Hinge and Postern squares (radius filled: no hazard on the square or its 8 neighbours, no Void within 2; V10 `HingePosternClear`; HZ-3, hazards design 6.2.2); no crossable bridge into the Sanctum (no Void or crossable hazard region; V10 `NoSanctumBridge`; HZ-3) | Floor-scale hazard density (inside segment 3's caps), bile, drop hazards, Teetering counting, vents (TR-1; room terrain design 13); the hazard / trap / terrain line: an open trapdoor is a Void, a closed one that springs is a trap; a horn post is a Cord, a horn tripwire a trap; the sprung twins stay segment 5's and boss counterplay segment 9's (HZ-1; hazards design 6.1) |
 | 5 Traps, locks, checks | Locked, Hairline, Squeeze, Latch and Door slots; `PortalMinimums`; trap sockets within 6 of fight hosts, and from floor 2 one before the first fight (room 0 or the 0→1 Portal, Shade DEP-S1(a)), the 0→1 Portal socket filled by a Door catch or a threshold wire outside the Portal square (TL-20; traps and locks design 6.20) | DCs (the ladder, TL-2); traps and trap records (DEP-S1; TR-1; taxonomy, tells and records, TL-10; traps and locks design 6.2, 6.3, 11.1); keyring and cell caches; sphincters; **the party door verbs as rules (FL-8)**; the Squeeze check on the keyed `checks` stream (TL-3) and its failure cost; Drop-bar (M3); Wedge (SH-18); Hairline check variants |
 | 6 Encounter placement | Slot hosts, `equivalentHosts`, the Circuit with phase, the Bypass, near pairs, matrices, start zones, `nearStart`, `skittishShape` / `ledShape` | Enemies 10.5 steps 2–11 (step 9 moves only within a host or to an equivalent host, 6.1), `placementRules`, the reinforcement and Dormant partners for near pairs (encounter placement design 6.12), Rival Party fit in elite templates (a Later stub, EP-34; encounter placement design 6.14) |
-| 7 Loot | Container, Alcove and secret-cache sockets; HE-7 and HE-4 reservations | Contents and channel counts |
+| 7 Loot | Container, Alcove and secret-cache sockets (inset faces, LP-12); HE-7 and HE-4 reservations; room roles (6.5) | Contents and channel counts; **SocketPlan (LP-11, M2; loot sources design 4.2)** selects from `containerSockets[]` by a role table held as data and never creates a container square: one card-bearing container per room (`cardEligible`), ≤ 1 coin-only container per room, `containerCap` in two phases with merges, the binding definition of the walk line, side-room and Alcove containers previewed from the threshold |
 | 8 Non-combat rooms | Q rooms, the floors 2–5 antechamber micro-event socket, trader and Pledge tags, signature rooms | Fills, trader, shrines, Dream Fragments |
 | 9 Boss rooms | The 2×2-cell socket, two dog-leg Forecourt Arches ≥ 5 apart, the Bossgate, start-zone depth ≥ 9, the symmetric `AntechamberScreened` (6.11), the arena pull-back zoom bound (8.1) | Interior, counterplay feature, phases, Keepsake arena dressing; boss tuning with a patrol joiner (FL-21 (e)) |
 | 10 Exploration and information | Minimap nodes and explored-room outlines, Portal glyph kinds, Landmarks, tints, travel paths, count-line data, the patrol waypoint schedule (Listen's "passing") | Fog, minimap UI and the rules-room overlay, Listen UI (occupancy, 9.2), Hairline display, the hearing outline (including the self-teaching shut-door prompt and the elite vantage risk), interrogation facts, auto-walk (pausing at doors, 6.10), Overlook (M3), the Stratum Card line |

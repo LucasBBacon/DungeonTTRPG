@@ -1458,7 +1458,10 @@ honest, so looting does not become paranoid (XF9). **Bait-cache rules
 (lead's call, after the check):** a bait cache never moves at idle; it
 never uses a silhouette family used by that theme's boxed-lurker hosts
 or loot containers; it carries one cross-theme bait mark registered in
-RC5+; all three are V7 `CharterChecks`. **Bait-cache contents (change
+RC5+; all three are V7 `CharterChecks`. **Generalised (change LP-15;
+M2):** the no-shared-silhouette rule now covers every container family
+under CT1 `ContainerFamilyDistinct` (with V7), with the role-ID gate row
+"container or bait" (loot sources design 5.1). **Bait-cache contents (change
 LE-20; M2):** a real ordinary entry at SR2 ("the cheese is real"), so a
 Mousetrap lure is worth taking; bait value is party-size dependent and
 reported (loot economy design 6.9 item 6). **New lead's call:**
@@ -1467,7 +1470,13 @@ simply not drawn on that floor (the ENM 10.3 cap is a maximum, never a
 quota). **New lead's call:**
 the Mousetrap ships in M2 with the Cuckoo (both after DH 21.1 step 1,
 12); the proposal's Silk entry called its bait-cache reading tray an
-"M3 variant", which is corrected to M2 (7.6).
+"M3 variant", which is corrected to M2 (7.6; the loot sources design
+reads the bait cache and its placement as M2, 13). **Pending request
+(LP-16; M2):** the loot sources design asks the EP owner to re-skin two
+bait caches, the Silk one as an ink-lacquered document case (not a
+reading tray: RC2 tray ban, a second Silk tray) and the Gut one as a
+tenant's sewing basket (not a third strongbox); 7.6 and 7.9 stand until
+the EP owner rules (loot sources design 5.3).
 
 **Host rules** (the Cuckoo, Mousetrap and Waylay): a guard-post host;
 never Gb (the Bypass stays a stealth choice, not a trap), the Forecourt,
@@ -2329,7 +2338,9 @@ Shusher (soldier), Misprint (artillery, fearless), Head Archivist
   0 (10) + Margin-Crawler 0 (10) = 20; F3 (31): bait Shusher −1 (7) + 2
   Margin-Crawlers 0 (20) = 27 **(new lead's call:** the proposal's "bait
   at −2" gives 25, below the 27–31 window**)**. A page that turns by
-  itself within 6. **Mousetrap form (M2):** a bait-cache reading tray +
+  itself within 6. **Mousetrap form (M2):** a bait-cache reading tray
+  (pending request LP-16, M2: an ink-lacquered document case; loot
+  sources design 5.3) +
   1 Margin-Crawler, F2–3 at party ≥ 2, or 2 Margin-Crawlers from F3 at
   party ≥ 3 (for example F3 party 3, budget 26, window 23–26: Crawler 0
   (10) + Crawler +1 (14) = 24; after the check), fill per CMP-8 **(new lead's
@@ -2435,7 +2446,8 @@ composition is checked with `AcidSourcesAfterOverlay`.
   below the 34–40 full-band window; the +1 shooter keeps the F4–5 ≤ 925‰
   rule moot**)**; a pulsing bulge within 6; off Stir footprints.
   **Mousetrap form (F4; 2 lurkers only at party ≥ 3):** a bait-cache
-  strongbox + Gutworm +2 (20) + Gutworm +1 (14) = 34, the full
+  strongbox (pending request LP-16, M2: a tenant's sewing basket; loot
+  sources design 5.3) + Gutworm +2 (20) + Gutworm +1 (14) = 34, the full
   Mousetrap budget at party 4 (85% of 40; window 29–34).
 - **GU5 Sated Den** (the lair, Den): Landlord +2 (20) + Bile Ooze +2
   (20) + 4 Tenants +1 (16) = 56; a Sleeping Ward start shape, digesting (a
@@ -2867,7 +2879,7 @@ sockets and pieces (RT); hazards (HZ); traps, locks and `trapsResolve`
 
 | Segment | Hook |
 |---|---|
-| **7 Loot** | Carriers on sockets the party can reach for Steal (never a nook; never a ward behind two fronts on F1–2); the Champion notable; the bait-cache prop family; activity containers (a dice pot, a feast plate); Annex prizes (none of its own: loot economy design 6.9 item 1); boxed-lurker contents (loot economy design 6.9, LE-20) |
+| **7 Loot** | Carriers on sockets the party can reach for Steal (never a nook; never a ward behind two fronts on F1–2); the Champion notable; the bait-cache prop family (CT1, LP-15; re-skins LP-16 pending; loot sources design 5.1, 5.3); activity containers (a dice pot, a feast plate); Annex prizes (none of its own: loot economy design 6.9 item 1); boxed-lurker contents (loot economy design 6.9, LE-20). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 4.8, 5)** |
 | **8 Events** | Activity vignettes in Q rooms ("remains of a revel"); no event spawns or moves units; Cowed kneeling never crosses a door |
 | **9 Boss arenas** | Retinue escorts, arena start zones ≥ 9, the patrol joiner, Keepsake dressing |
 | **10 Information** | Formation and Keystone chips (`ChipNoLeak`; the read-surface table of 6.20); the Read card; the Perception hold overlay; the Lore counter line; the Listen activity word and watched Portal; Spoor marks; arrival-Portal arrows; the seen-tell band marker (6.20); rest-preview movers; the Lore roster preview of formations; "Line broken" and "Caught facing the door" |
