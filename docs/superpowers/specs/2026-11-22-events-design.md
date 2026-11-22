@@ -575,6 +575,7 @@ All three judges independently chose the same winner:
   - One fact per option, naming its **target** by a selector: the option's referent, the next unvisited room by main-path index, the player's choice, the arena path, or the arena (4.4.2).
   - **`GainMix` (restated after the check):** a **deck** is a theme's `curiosityKit` Curiosity cards (standard, MECH and rare), or one shared Curiosity pool (Shallows, Middle). Its options are every priced, lit and rolled option; Leave is excluded, and so are Interludes, which are fact-only by definition. An option is fact-only when its one rules gain is a fact (an M3 codex page does not count). Fact-only options are **at most 40%** of a deck's options *(illustr.)*. On the **Graces-off fallback deck** (4.4.3) the ceiling is **50%** *(illustr.)*, a separate threshold **(lead's call, after the check;** told plainly in 14.1**)**. 5.2 lists the per-pool counts, so V16s and the catalogue agree.
   - **F-BOSS is run-specific** where segment 9 exposes 2–3 seeded boss variables (phase variant, move order, escort, arena hazard placement). Otherwise it is the boss's Lore entry (hook). A veteran still gains something, and it is information, not power.
+  - **Answered by segment 9 (BR-29; M2):** two seeded values per boss, the **Rendition** and the **mirror** (where the Rendition leaves it open), yield three run-specific fact lines: the Rendition and its phase change, the **Guise** (Device and reserve-socket side, worded relative to the entrance) and the **formation**, all draw-free from `BossVariantKey`; each boss authors ≥ 4 facts plus mirror-aware variants (boss rooms design 4.12, 4.10.1).
 - **Route.** Reveal an existing Hairline or a Latch's far side. A priced extra route to an existing lock (4.4.5). M3: skin an FL-generated Chute (EV-36).
 - **Grace** (4.4.3). From Curiosity cards only, never Interludes.
 - **Strand** (4.5.7). M3: a codex page beside the one rules gain. Later: a Pledge or a curse ended.
@@ -582,6 +583,7 @@ All three judges independently chose the same winner:
 #### 4.4.2 The FactLedger (change EV-8)
 - One **per-floor, in-run** ledger shared by Yield interrogation, the elite intel line (LE-18), Curiosities, Fragments, Parting Words and the Tithe Bowl.
 - **It records fact instances, not categories (lead's call, after the check):** `known[{category, targetId}]` plus the floor's `bossQueue[]`. Learning one room's Listen never blocks another room's.
+- **`bossQueue` order per floor (BR-29; M2):** no repeats, information only: (1) the signature card (the elite intel line, LE-18, unchanged, first); (2) the Rendition fact; (3) the Guise fact; (4) the formation fact; (5) fixed Lore facts (Rhythm, Device rule, weakness). The Playbill is their home (boss rooms design 4.12).
 - **Fall-through.** Each fact gain carries `fallThrough: [category…]`, by default its own category followed by F-ROOM, F-SECRET, F-TRAP. When the named target is already known, the option takes the next **unknown instance**: first other targets of the same category under the same selector (by main-path index, then room id), then the next category in the list. The preview shows which. If nothing is left, the option shows "Nothing left to learn" and is disabled (honest).
 - **Targets are draw-free.** "The next unvisited room" is the lowest main-path index not yet entered; a referent comes from EventPlace (4.5.5); "of your choice" lets the player pick among unknown instances at resolve time.
 - **The codex is write-only from the run's point of view.** Dedup never reads profile memory, so the same seed gives the same facts to a veteran and a new player (BC2). Flagged to the enemies owner (HX-6, TL-23).
@@ -601,11 +603,12 @@ All three judges independently chose the same winner:
 - **Carrier.** A Grace is the unit's C5 lingering event boon, carried by a new duration form (EV-11, flagged to conditions 13 and 17), specified after the check **(lead's call, after the check)**:
   `eventBoon{payload, trigger: nextCombatStart | nextAttackOrCheck | nextCheck | nextHarm, endsOn: [fired, shortRest, floorExit, arenaSeal]}`. G-Help uses `nextAttackOrCheck`.
 - **Order at the arena.** The arena seal is processed **before** the arena's combat start, so a Grace never fires in the arena: a G-Spur or G-Steady carried to the boss door expires there.
+  - **The arena seal is `ArenaEngaged` (BR-3; M1/M2):** it fires once per floor, at the first of a party unit entering an arena square (doorway squares included) or the boss group noticing a party unit; order on the tick: Antechamber Catch-up (F1, M2+) → `ArenaEngaged` (Graces and event riders end) → Take Places → combat start. A re-engagement fires no new `ArenaEngaged`, but **every arena combat start while `sanctumEngaged` is set processes `endsOn: arenaSeal` again**, so a Grace or rider taken elsewhere on the floor between engagements still ends before the arena fight; Graces cannot be regained in the Sanctum. `arenaSeal` stays as the data id in `endsOn` (an alias); display never says "seal" (boss rooms design 4.2.1).
 - **Target.** Each Grace option names `graceTarget: player | hero | worstStealth`; "player" lets the player pick the unit at resolve time, defaulting to a unit with an empty boon slot (KC4).
 - **Replacement.** Per C5, a new boon **replaces** the old. The card names what it would replace ("replaces: <starting boon>").
 - **Telemetry.** `GraceGranted{id, unit, replaced}` and `GraceEnded{id, reason: fired | shortRest | floorExit | arenaSeal | replaced}`.
 - **Cap.** At most 1 Grace per party per floor. Once the cap is reached, a card's Grace option **converts** to its authored `graceFallbackGain` instead of greying out (FC13). The fallback prefers a route or a Strand wherever a fact would push the deck past its fallback `GainMix` ceiling; 5.3 prints every fallback as "[fb: …]".
-- **Ends** at the first of `endsOn`. No exceptions in M2; segment 9 may declare some later (BC4).
+- **Ends** at the first of `endsOn`. No exceptions in M2; segment 9 may declare some later (BC4). **Answered: no Grace exceptions in M2** (BR-3; boss rooms design 4.2.1).
 - **Prices (restated after the check).** A Grace is **never free and never priced in ticks alone**, on a priced or a lit option. Its price includes at least one of: an offered item, noise of 4 or more bound to a forecast, HP, Weary, or a theme condition or carried rider; ticks may be added. On the rest-adjacent policy arm, `GraceValue` checks that Weary and HP costs are not paid for free by a planned rest (BC6). A Weary "kept through your next short rest" form is offered to the conditions owner as an option (EV-34). V16s `GracePriceNotFree` checks the whole rule.
 - **Never** heals, prevents a drop (DH 15), adds actions or grants Cow advantage. HUD chip: "ends at the boss door".
 - **Gates:** `EventDeathShareDelta` ≤ +0.5 pp on the **novice** arm, **on F1 at party 1, and on F2 at party 1 and party 2**, the only party sizes CMP 7.1 allows there (NoFloor1Companion; at most 2 on F2) **(lead's call, after the check:** the proposal's "party 1 and party 4" cannot occur on F1–2**)**. `Floor1BossSustain` is re-run.
@@ -719,6 +722,7 @@ So a second meeting shows R2 in full, as the toy assumed when it counted R2 as f
 - **Rule.** The launcher, not the rules core, redraws an OS-entropy seed when the forecast F1 Curiosity is in the profile's **Fallow set** (cards displayed in the last **K = 3** personal runs **(agreed, Q1)**; `recentRuns`, 9.1).
   - It shares R-SEED-6's budget of at most 8 redraws.
   - **Order per candidate (lead's call, after the check):** (1) the R-SEED-6 theme rule; (2) Fallow; (3) the onboarding preference, which only scores candidates and never forces a redraw that Fallow does not need.
+  - **Segment 9's F1-boss streak rule (BR-25; agreed, boss rooms Q1; M2)** sits between Fallow and onboarding: (theme, Fallow, boss rule, onboarding), inside the same budget of 8, and in the same place in the exhaustion tie-break (theme, Fallow, boss rule, onboarding, earliest) (boss rooms design 4.10.3). RS owner applies.
   - **On exhaustion** the launcher keeps the best candidate by (passes the theme rule, passes Fallow, passes onboarding, earliest). If no candidate passed the theme rule, it keeps the original seed; R-SEED-6 states no rule for that case, so this reading goes to the RS owner with EV-20.
   - Bypassed for shared seeds, daily seeds and the simulator.
   - It applies to the **F1 Curiosity only** **(agreed, Q1)**; no other floor's slot is forecast or redrawn.
@@ -960,13 +964,13 @@ Floor-entry Strand cashes are untouched by every step, and the Coat Hooks surviv
 ### 4.13 Hooks to other segments
 
 - **Segment 9 (bosses):**
-  - expose 2–3 seeded variables per boss for run-specific F-BOSS;
-  - no Curiosities in arenas; Graces end at the seal;
-  - the boss-fact queue in the FactLedger;
+  - expose 2–3 seeded variables per boss for run-specific F-BOSS (answered: Rendition and mirror, three fact lines; BR-29, boss rooms design 4.12);
+  - no Curiosities in arenas; Graces end at the seal (answered: the seal is `ArenaEngaged`, `arenaSeal` processed at every arena combat start while `sanctumEngaged`; no Grace exceptions in M2; BR-3, boss rooms design 4.2.1);
+  - the boss-fact queue in the FactLedger (answered: the `bossQueue` order, 4.4.2; BR-29);
   - the Carnival rare's poster as an arena Glimpse;
   - Forecourt Interludes keep `AntechamberScreened`;
   - the Coat Hooks payoffs on F5;
-  - floor-1 boss variety as a production priority (agreed, Q2).
+  - floor-1 boss variety as a production priority (agreed, Q2) (answered: 3 Renditions per F1 boss in M2, the launcher F1-boss streak rule and RS 12 Cut 1 graded; agreed, boss rooms Q1; BR-23 to BR-26, boss rooms design 4.10).
 - **Segment 10:** 4.12.
 - **Segments 11–12:**
   - the `curiosities` stream, its draw count and draw map; EventDraw and EventPlace order;
@@ -1410,7 +1414,7 @@ Run save   += curiosityDigest[floor] = {slot → (curiosityId, referentRef, opti
 Profile (MAIN 6.6 change) curiosityMemory {
   version, checksum,
   shownCount[id], fullShown[id] (bitmask of Retellings displayed in full; bit 1 = First Telling),
-  recentRuns: ring[K]{runId, seedMode, shownIds[]},
+  recentRuns: ring[K]{runId, seedMode, shownIds[], f1BossId},   // f1BossId: BR-25, M2 (boss rooms design 4.10.3)
   last[id]{optionId|left, targetRole, replacedBoon, litMet[], unaffordable[], runId},
   autoAnswer[id], afterwordSeen[], genericAfterwordLastRun[], pendingClosure[strandId],
   chainStage[]  // chainStage enters the unlock snapshot in M3 only
@@ -1430,6 +1434,7 @@ Config (tuning): curiosity.rarePermille; curiosityValueTable (4.4.9)
   - `shown` becomes `shownCount`, and `retellingShown` is dropped for `fullShown` (4.5.2);
   - `lastOption` becomes `last`, which also keeps what the Twice-Told delta needs;
   - `pendingClosure` feeds the closure line; `version` and `checksum` detect a bad file, which then reads as empty (4.10).
+- **`f1BossId` (BR-25; agreed, boss rooms Q1; M2):** written at run start from the pre-rolled F1 boss record for every launched personal run, abandoned or not; shared, daily and simulator runs never write it; outside the reproducibility key (boss rooms design 4.10.3).
 - **Which runs write memory.** Personal runs write every field and advance `recentRuns` on run end or abandon. Shared and daily runs write `shownCount` and `fullShown` only (their display may change; their draws never do) and never advance `recentRuns`. The simulator writes nothing, except the scripted-memory arm (9.4).
 
 ### 9.2 V16 `Curiosities` (change EV-38)
@@ -1539,7 +1544,7 @@ No wave carries a least-seen draw inside the key (rejected, Q1).
 | Owner | What |
 |---|---|
 | **Segment 8** | Curiosity content and forms; their placement in Q rooms, Forecourts, F1 Alcove set pieces and side rooms, and signature rooms; the cost and gain palette; `curiosityValueTable`; the FactLedger rule; Graces (content), Strands, Retellings, Twice-Told, Fallow, Sequels, Ripening, Afterword and the Unwoken Roll; the segment 8 clock line; V16; the reports; Readings content (TL-34); Fragments content; guaranteed Riddle-clue hosts (4.13); the writing and Glimpse briefs (6); co-ownership of the codex's Curiosity pages |
-| **Segment 9** | Seeded boss variables; the arena seal; the F-BOSS queue; poster Glimpses; floor-1 boss variety as a production priority (agreed, Q2); the carried RS Cut 1 question, a future item for the client (14.2) |
+| **Segment 9** | Seeded boss variables; the arena seal; the F-BOSS queue; poster Glimpses; floor-1 boss variety as a production priority (agreed, Q2); the carried RS Cut 1 question, a future item for the client (14.2). **Answered by the boss rooms design (segment 9, approved 2026-11-22; BR-3, BR-23 to BR-26, BR-29):** the seal is `ArenaEngaged`; F-BOSS facts from the Rendition and mirror in the `bossQueue` order; 3 Renditions per F1 boss and the graded RS Cut 1 (agreed, boss rooms Q1) |
 | **Segment 10** | 4.12 |
 | **Segments 11–12** | The stream, its draw map, pass order, safe point, memory field, launcher, V16 and arms |
 | **Camp and hub** | Afterword and keeper lines; Pledges; Testimony; the Hawker's Hour; Tithe Bowl dedup; coin owed |
@@ -1731,7 +1736,7 @@ The client approved this document as a whole on 2026-11-22, including every lead
 4. **Lit options now cost something.** A free lit option beat its priced twin on most cards and made the pilot Strands dead options (4.3.1).
 5. **The budget was well short of the real one.** About 11–12k words and 400–450 art states in M2 with the Wake, not about 7k and 105: the words about 60% of the real figure, the art about a quarter (0.1, 6).
 6. **The second meeting with a card costs a full read** of R2 before repeats get cheap; the toy priced every repeat at 6 s and was not re-run (4.7).
-7. **RS Cut 1 still removes floor-1 boss variety first.** Q2 made F1 boss variety a production priority, but RS 12's pre-authorised Cut 1 **(agreed, RS Q4)** drops the Gaol's and the Kennel's extra bosses first. Only a client reorder of the RS cut lines changes that, and that would be an RS change. The client did not reorder them on 2026-11-22: the question is carried to segment 9 (boss rooms) as a future item for the client, with no RS change now (14.2).
+7. **RS Cut 1 still removes floor-1 boss variety first.** Q2 made F1 boss variety a production priority, but RS 12's pre-authorised Cut 1 **(agreed, RS Q4)** drops the Gaol's and the Kennel's extra bosses first. Only a client reorder of the RS cut lines changes that, and that would be an RS change. The client did not reorder them on 2026-11-22: the question is carried to segment 9 (boss rooms) as a future item for the client, with no RS change now (14.2). **Answered by segment 9 (agreed, boss rooms Q1, 2026-11-22; BR-26, RS owner applies; M2):** Cut 1 is graded, 1a (the Appetite, only if not yet built), 1b (the Thing in Cell Zero, folded into the Jailer's "Cell Zero Opens"), Cut 2 with Cut 2R, then 1c (the Master in the Frame) client-only below Cut 2 (boss rooms design 4.10.4).
 8. **"Help in the visible ladder" is a future decision.** MAIN 4.7 **(decided)** has only harder tiers; no approved document has an easier rung or assist setting. Q4's "difficulty help belongs in the visible ladder" therefore points at a future ladder or difficulty decision owned by the main design and RS, not segment 8; nothing changes now (14.2).
 9. **F2 band cards are dry in text.** Cards drawable on F2 and F3 are written in the dry register; the F2 joke lives in Glimpse art (4.11).
 10. **The rejected Q1-B's figures were overstated** in 0.1: the row labelled Q1-B was an all-floors, from-M2 bound; the closest measured case is Fallow F1 plus a seeded Fallow on F2–3 (0.93 / 1.00 / 0.00 at 10 runs) (0.1).
@@ -1755,12 +1760,12 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 | **Enemies or EP owner refuses** the noise reading (EV-14) | — | Noise prices become bound tick costs; any Grace then priced in noise is re-priced in HP, Weary or an item (never ticks alone), and any lit option whose price would then share a kind with its priced option is re-priced to keep them disjoint | Enemies, EP owners |
 | **7c or LE refuses** `stepFunded` | — | No priced lock routes: G3 gains F-SECRET (else F-ROOM); Gu2 (M3) is cut | 7c, LE owners |
 | **LE or 7c refuses** F-CACHE | — | S2 gains F-ROOM (as catalogued) | LE, 7c owners |
-| **Segment 9 exposes no seeded boss variables** | — | F-BOSS is the boss's Lore entry (4.4.1); H5 becomes F-ROOM | Segment 9 |
+| **Segment 9 exposes no seeded boss variables** | — | F-BOSS is the boss's Lore entry (4.4.1); H5 becomes F-ROOM. **Not triggered:** segment 9 exposes the Rendition and mirror (BR-29; boss rooms design 4.12) | Segment 9 |
 | **Segment 3 offers no Alcove set pieces** | — | F1 host order falls to a free leaf side room, then none, logged | Segment 3 |
 | **RS owner refuses** the Fallow extension | — | Returns to the client (Q1 was agreed) | RS owner; client |
 | **Main design owner refuses** the safe-point reading | — | Returns to the client: without it a reload can undo a cost (BC12) | Main design owner; client |
 | **Herald owner refuses** EV-13's variant | — | The variant is not shipped; nothing else changes | Herald owner |
-| **The F1-boss cut order (carried to segment 9)** | Segment 9 (boss rooms) is designed, or the schedule slips into RS Cut 1 (RS 12 cut lines, **agreed, RS Q4**) | The client did not reorder Cut 1 on 2026-11-22; RS 12 is unchanged now. Cut 1 still drops the Gaol's and the Kennel's extra bosses first, against Q2's priority. The question returns to the client with segment 9; the lead may then recommend moving F1 bosses below Cut 1, and any reorder is an RS change | Client; segment 9, RS owner |
+| **The F1-boss cut order (carried to segment 9)** | Segment 9 (boss rooms) is designed, or the schedule slips into RS Cut 1 (RS 12 cut lines, **agreed, RS Q4**) | The client did not reorder Cut 1 on 2026-11-22; RS 12 is unchanged now. Cut 1 still drops the Gaol's and the Kennel's extra bosses first, against Q2's priority. The question returns to the client with segment 9; the lead may then recommend moving F1 bosses below Cut 1, and any reorder is an RS change. **Answered (agreed, boss rooms Q1, 2026-11-22):** graded Cut 1 (1a, 1b, Cut 2 with Cut 2R, 1c client-only), an RS change applied by the RS owner (BR-26; boss rooms design 4.10.4) | Client; segment 9, RS owner |
 | **A future ladder or difficulty decision** | The main design or RS takes up the M3 ladder | Q4's "difficulty help in the visible ladder" is handed to the main design owner and the client; segment 8 changes nothing | Main design owner; client |
 | **The worst-case card does not fit** | Segment 10's layout test (4.3.1) | The rare body cap is lowered before any chip rule changes | Lead; segment 10 |
 | **Referents fall back often** | `ReferentAvailability` high on a Blueprint | Re-author the tied option's referent kind, or ask FL for the referent | Lead; FL |
@@ -1783,7 +1788,7 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 | 8 | **Story creep from Sequels** (RS risk 14) | Tone review on every chain |
 | 9 | **The comic register on the most-repeated floors** | Mitigated by Retellings; not cured |
 | 10 | **Toy crudeness** | The simulator replaces every figure here |
-| 11 | **Floor-1 variety outside segment 8.** The streak arm's biggest repeat is fights, Blueprints and bosses, which segment 8 does not own; RS Cut 1 removes F1 bosses first | Flagged as a production priority (agreed, Q2); the cut-order conflict told plainly (14.1) and carried to segment 9 as a future item for the client (14.2) |
+| 11 | **Floor-1 variety outside segment 8.** The streak arm's biggest repeat is fights, Blueprints and bosses, which segment 8 does not own; RS Cut 1 removes F1 bosses first (answered: Cut 1 is graded and every F1 boss ships 3 Renditions; agreed, boss rooms Q1; BR-23, BR-26) | Flagged as a production priority (agreed, Q2); the cut-order conflict told plainly (14.1) and carried to segment 9 as a future item for the client (14.2) |
 | 12 | **The re-authored catalogue is untested.** Priced lit options, floor-entry Strands and the new rows change take rates the toy never measured | `OptionTakeRate`, `LitDominanceShare`, `StrandCashRate`; the simulator before pools freeze |
 
 ---
@@ -1819,7 +1824,7 @@ The owed rows are the single list in 13; by owner:
 - **The companions owner:** EV-41.
 - **The items owner:** EV-9, EV-42, EV-43.
 - **The HZ owner:** EV-31, EV-35, EV-36 (HZ-23).
-- **Segment 9 (bosses):** seeded boss variables; the arena seal; floor-1 boss variety (EV-44); the carried RS Cut 1 question, a future item for the client (14.2).
+- **Segment 9 (bosses):** seeded boss variables; the arena seal; floor-1 boss variety (EV-44); the carried RS Cut 1 question, a future item for the client (14.2). Answered by the boss rooms design (approved 2026-11-22; BR-3, BR-23 to BR-26, BR-29; its 4.2.1, 4.10, 4.12).
 - **Segment 10 (UI):** 4.12; EV-17.
 - **Segment 11 (seeds):** the `curiosities` stream and its draw map, the pass order, the launcher order (EV-20, EV-21, EV-40).
 - **Segment 12 (validation):** V16 and the reports (EV-38, EV-39).

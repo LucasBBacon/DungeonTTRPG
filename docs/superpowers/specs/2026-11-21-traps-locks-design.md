@@ -2096,7 +2096,11 @@ generation-time request.)*
   - If nothing fits, no trap is placed (KF3). The F1 lesson trap is
     exempt (6.19).
 - **TP6** At most 2 traps per fight host; at most 1 Device. Boss rooms
-  carry none (segment 9).
+  carry none (segment 9). *(Reading, boss rooms design 4.7.1; BR-16;
+  M2; pending the TL owner's confirmation:* a boss arena's Device, a
+  segment-9 TrapRecord instance of kind `arenaDevice` in TL-40 format
+  for data and preview only, is not a trap under this section: no
+  trigger plate, no hiding, no Botch, never armed by monsters.*)*
 - **TP7 `BypassClean`.** Bypass and Circuit traps are alarms at Easy
   detect or `alwaysKnown`.
 - **TP8 `NoiseTrapVisible`** (6.18).
@@ -2602,7 +2606,8 @@ Poisoned, Prone, Frightened.
   - **Hard part:** Frozen on the centre square, once per fight. Never on
     a Botch or a re-arm.
   - The boss-arena instance belongs to segment 9 and uses this record
-    (TL-40).
+    (TL-40); it is the Head of the Table's `arenaDevice` (boss rooms
+    design 4.7.1, 5.5; BR-16; M2).
 - **Dumbwaiter Drop** (trapdoor):
   - M2: Prone in place.
   - M3 relocation: out of combat to the linked scullery; in combat only
@@ -3181,7 +3186,7 @@ as 6.20 lists (lead's call, after the check):
 | **6 Encounters** | The `trapsResolve` pass runs after segment 6's placement and may ask it to re-place a group (TP2); groups never start on triggers; areas allowed; Keybearer tag; Tattle Dormant group (the Annex); boxed-lurker budget (the Annex); Wager guards (the Annex, one extra patrol-band budget, 0 XP; M3); rigged-fight trap damage charged to the budget; alarm and Crier arrivals Alerted (answered in encounter placement design 6.13; EP-25, EP-26) |
 | **7 Loot** | Container kinds; `lockable` sockets; +1 rarity step behind consequence locks and in Wagers; graded cages; Wax Key draws; boxed-lurker drops. **Filled in part by the loot economy design (6.9, 6.4 item 9; changes LE-10, LE-11, LE-12, LE-20):** the one step rule and socket ranks, the two identities of a consequence cache, the K2 / K2b pegs, the cage set and boxed-lurker contents (6.11, 6.13–6.15 here). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 5, 11):** container hosts and kinds (inset hosts, LP-12; the twin-lid mark, LP-26, M3; the Ebb, LP-34, M4), auto-close and Glean (LP-8, LP-9), offer pacing (LP-30, M3) and the Windfall's sole exception to "contents never destroyed" (LP-2, M3); LP-17 to LP-20 are pending requests |
 | **8 Events** | Readings; Riddle-lock clues; Hour locks on Landmark ticks; Dream Fragments read the threshold rule. **Taken up by the events design (segment 8, approved 2026-11-22; its 4.9, 4.13):** Readings accepted (TL-34; EV-30; M3); each Riddle lock (Hymn, Index, Place-Setting, Story) gets a guaranteed, check-free clue host (a wall Glimpse or clue prop), placed by EventPlace whenever the lock exists on the floor and never a Curiosity option (M3); Hour locks on Landmark ticks stay with TL and HZ, and segment 8 places no Landmark (EV-35); Dream Fragments fold into F-BOSS options on Lore thresholds (EV-29; M3); Curiosity checks follow 6.1 and 6.2 (EV-4, EV-5); the priced lock route (6.11; EV-15); the shared FactLedger (6.11; EV-8) |
-| **9 Boss arenas** | No guaranteed boss-room traps; arena devices use the TrapRecord format (the Supper chandelier); Clearways stay clear; the Bossgate never opens by Wax Key or Unbolting |
+| **9 Boss arenas** | No guaranteed boss-room traps; arena devices use the TrapRecord format (the Supper chandelier); Clearways stay clear; the Bossgate never opens by Wax Key or Unbolting. **Taken up by the boss rooms design (segment 9, approved 2026-11-22; its 4.7.1, 6, 11; change BR-16; M2, the Den's Device M1):** one Device per boss (F5: plus the Heavy Thing), each a segment-9 TrapRecord instance of kind `arenaDevice` in TL-40 format for data and preview only; *pending reading for 6.20 (TL owner confirms):* an `arenaDevice` is not a trap (no trigger plate, no hiding, no Botch, never armed by monsters); fallback: Devices are authored as segment-9 pieces with their own preview record, same rules; Device bodies obey RC2 and TL-43; no trap in the Sanctum; the Bossgate never by Wax Key **(settled)** |
 | **10 Information** | Every display in 6.23; Listen "a mechanism"; Lockside Listen; the codex pages; the camp's Wax Key line (Q3) |
 | **11–12 Seeds and validation** | The streams, V11, `trapDigest`, save fields, the reports, `FloorTimeByTheme` with segment-5 rows |
 
@@ -3705,6 +3710,9 @@ later design triggers them:
   per floor (risk 6).
 - **If `V11Fallback` is non-zero in the simulator:** the failing rules
   are retuned before M2 content locks.
+- **If the TL owner refuses the `arenaDevice` reading (boss rooms design
+  4.7.1, 14.2; BR-16; M2):** arena Devices are authored as segment-9
+  pieces with their own preview record, same rules (6.20, TL-40).
 - **The naming pass.**
 
 ---

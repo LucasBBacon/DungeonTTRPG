@@ -1605,7 +1605,7 @@ Harm squares are squares, so it does.
 |---|---|
 | Party | Shove; weapon Push and Hook; shield bash; Bull Rush; Wrecker Ram, Domino, Battering Force; Arcanist Gust, Reel, Shockwave, Squall; Herald Give Ground; companion Jostle, Heave, Barge; Attack Shunt and Kick (collision; Prone) |
 | Enemies | Kit Shove users; the Holder ("shoves toward hazards", M2, now including contact hazards); Carnival Strongmen toward fire; one visible terrain-using enemy per F2–5 theme (6.9) |
-| Bosses | Authored, forecast signatures only, inside the 3-square cap and the edge save. Bosses are pushed into hazards like anyone else and are `noDrop` (segment 4) |
+| Bosses | Authored, forecast signatures only, inside the 3-square cap and the edge save. Bosses are pushed into hazards like anyone else and are `noDrop` (segment 4); no `fixedInPlace` exception: a `chain(n)` leash limits a unit's own movement only, never forced movement (change BR-14; boss rooms design 4.6) |
 | Environment | M3 powder-keg blast push 1 (non-verb), if adopted from Model B's later catalogue |
 
 #### 6.5.4 Fairness
@@ -1926,14 +1926,18 @@ collision, the per-use damage for each hostile it can move becomes:
 Segment 3 sets **caps and kind rules only**. The counterplay identity of
 each boss stays with RS 13 and segment 9; the Supper's is the chandelier
 of icicles, a segment-5 trap. Braziers may be extra arena pieces, never
-the counterplay. Arena devices are segment-9 instances in segment 5's
-TrapRecord format (change TL-40; with segment 9; traps and locks design
-7.8).
+the counterplay (read by change BR-16: a boss Device is never a brazier;
+boss rooms design 4.7.1). Arena devices are segment-9 instances in
+segment 5's TrapRecord format (change TL-40; with segment 9; traps and
+locks design 7.8), of kind `arenaDevice`, one per boss (F5: two)
+(change BR-16; M1 for the Den, M2; boss rooms design 4.7.1).
 
 - ≥ 2 Tall pieces or clusters that block line of sight (enemies 17.5); ≥
   4 cover-giving squares per half *(illustr.)*; clutter 5–12%.
 - Contact hazards ≤ 4; none within 3 of the Forecourt Arches, either
-  arena entrance or the arena start zones.
+  arena entrance or the arena start zones, nor within 3 of a boss lane
+  (VP7 `BossLaneClear` extended to contact hazards); 0 on F1 (RT-20)
+  (change BR-1; boss rooms design 4.1.1, 4.1.4).
 - Furnishings ≤ 4; Kegs ≤ 1 (Carnival or Gut only in M2).
 - **Voids (change HZ-11; M2 (gated), else M3):** at most 1 Void region,
   ≥ 3 from the Arches, either entrance, the start zones and boss lanes;
@@ -1953,7 +1957,16 @@ TrapRecord format (change TL-40; with segment 9; traps and locks design
   states (Tides, Cord Flips, Turning Ring boards), under the same rules
   (change HZ-18; agreed, hazards Q3; hazards design 6.3).
 - Bosses use authored, forecast terrain moves. Each arena should give
-  its boss one, authored by segment 9.
+  its boss one, authored by segment 9 (boss rooms design 4.1, 5).
+- **Arena templates (change BR-1; lead's call; M1 for Old Ragged's
+  Den, M2 for all; approved 2026-11-22):** segment 9 stamps each arena
+  from an authored `ArenaTemplate` Guise at one authored size per
+  (Guise, floor band), inside these caps; generated arena fill is
+  rejected; the stamp runs V9 (with `PhaseSocketsBoth`) before V17g
+  (boss rooms design 4.1). **M1 reading (told plainly):** Old Ragged's
+  root-columns are template walls, not RT pieces, and count as its Tall
+  clusters and line-of-sight Deny under RS 12's M1 "No terrain" (boss
+  rooms design 5.3).
 
 ### 6.12 Previews and UI (no rules in display; change TR-23)
 
@@ -2705,7 +2718,7 @@ Segment 3 takes the knock-into *system*, not drop hazards.
 | 6 Encounter placement | Start sockets with cover data (derived by segment 6 from FL `startZone` squares; change EP-5); `Floor1NoCoveredStarts`; KP5's ambush clause (defined, change EP-8); nooks as lurker sockets; the terrain-using enemy per theme (encounter placement design 6.6.1, 6.8.3) | Who starts where; ambush templates |
 | 7 Loot | Furnishings never hold loot (reaffirmed, change LP-12; inset containers instead). **Pending request (change LP-11; segment 7c asks; M2):** set pieces an Alcove can take as its default occupant when a container would exceed the floor's container cap; if none are offered, the Alcove keeps a container and the cap is logged, not enforced (loot sources design 4.2, 14.2) | Containers and contents |
 | 8 Events | Furnishing kinds by id. **Pending request (change EV-2; segment 8 asks; M2):** wall-mounted (RC1+) Alcove set pieces that can host the floor-1 Curiosity, first in the F1 host order; such a set piece takes the set-piece slot LP-11 prefers, never empties a leaf, never displaces a container 7c's cap needs and never sits on a walkable square; if none are offered, the F1 host falls to a free leaf side room, then none, logged; `F1CuriosityPresence` is reported to FL and segment 3 before F1 pool sizes freeze (events design 4.2, 14.2) | Events that name a Furnishing kind; Curiosity content and placement |
-| 9 Boss rooms | 6.11's caps, phase sockets and `PhaseSocketsBoth` | Interiors, counterplay identity, each boss's one authored terrain move |
+| 9 Boss rooms | 6.11's caps, phase sockets and `PhaseSocketsBoth` | Interiors, counterplay identity, each boss's one authored terrain move (arena templates and Guises, change BR-1; boss rooms design 4.1, 5) |
 | 10 Exploration and information | The previews and chips of 6.12; the "Needs a tall piece to hide" reason; glyphs | Overlays, chips and UI |
 | 11–12 Seeds and validation | The `terrain` stream and its draw counts, `terrainDigest`, V9 enumeration, `PreviewExactness` | The stream tree, release seed set, retry logging |
 

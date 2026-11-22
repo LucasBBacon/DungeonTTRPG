@@ -53,7 +53,10 @@ units in initiative order. **(agreed)**
 - Lair actions. **(lead's call)** A hazard Stir acting at the round-end
   Dream step is not a lair action: it has no creature, no choice and no
   initiative slot, and is a clock (hazards design 6.3, 3.3 HT3) **(change
-  HZ-12, a flagged reading; M2 (gated), else M3)**.
+  HZ-12, a flagged reading; M2 (gated), else M3)**. A boss Gambit is not
+  a lair action either: it is the boss's own signature, committed and
+  resolved on its own turns (boss rooms design 4.14.3) **(change BR-32,
+  a flagged reading; agreed, Q3; M3 (gated), else Later)**.
 
 ### Anti-goals
 
@@ -160,7 +163,13 @@ boss (the rejection kept: floor layout design 6.11, change FL-5); companion turn
 player cooldowns; telegraphed monster wind-ups (deferred: the AI scorer
 cannot reason about them yet; a hazard Stir's announced act is not a
 monster wind-up, hazards design 6.3, **change HZ-12; M2 (gated), else
-M3**); upgrades written as data patches instead of effects.
+M3**; a boss's Rhythm is a preference order over its own turns, not a
+wind-up, boss rooms design 4.3.1, **change BR-6, a flagged reading; M2**;
+one exception for bosses: a `gambit` signature, never on floor 1, commits
+its squares at the end of the boss's turn and resolves at the start of its
+next, the escape guarantee a runtime constraint on the scorer, boss rooms
+design 4.14.3, **change BR-32; agreed, Q3; M3 (gated), else Later**);
+upgrades written as data patches instead of effects.
 
 ## 6. Abilities and resources
 
@@ -209,6 +218,12 @@ of consumables.
 
 - There are no player cooldowns. Exploration ticks never refill a pool,
   except `turn` pools, which reset each tick out of combat (6.8).
+- The one-fight rule: while `sanctumEngaged` is set and the boss lives, a
+  combat in the Sanctum does not reset the party's `fight` pools or other
+  once-per-fight counters; they reset at `BossDefeated`, or at the party's
+  next combat start after a combat that ended outside the Sanctum. It
+  mirrors the boss's life state (12.2) (boss rooms design 4.2.5) **(change
+  BR-31; told plainly; M2)**.
 - A pool's refill tag is read through a query that folds in effects, like
   its maximum, because an offer can change it (10.2).
 - A level-up never refills anything. The spent count is unchanged, so only
@@ -994,7 +1009,8 @@ are listed on the same screen above the choice. **(lead's call)**
   from the boss's first turn and, whenever the boss would use one if its
   turn began now, announced to everyone with target or area. A forecast,
   not a wind-up: the deferral in 5 stands. **(change A-9, enemies design
-  13.2)**
+  13.2)** *M3 (gated), else Later:* the committed Gambit exception in 5
+  (boss rooms design 4.14.3). **(change BR-32; agreed, Q3)**
 - Tuning target: a party with about half its camp resources wins with good
   play. **(agreed)**
 
@@ -1198,6 +1214,12 @@ The build fails when:
   Wedge stays the Trapwright's, and a Drop-bar, if the client adopts it
   (M3), never satisfies "no hostile aware" by itself (traps and locks
   design 6.11, 6.12). **(change TL-33)**
+- No short rest while `sanctumEngaged` is set, the boss lives and any
+  party unit stands on a Sanctum square (Forecourt, arena, Stairhead).
+  It is a location ban, not an awareness reading; rests before the first
+  `ArenaEngaged` stay legal. The Rest button shows it as its reason
+  (15.4): "The Sanctum will not let you sleep." (boss rooms design
+  4.2.5) **(change BR-31; agreed, Q2; M2)**
 
 ### 15.2 On completion
 
@@ -1367,6 +1389,13 @@ Applied on 2026-11-16:
   Pending with the ability model owner (M2): the Listen activity word
   (7.2; EP-9), Hold the Hide (7.2; EP-17) and the rest-preview movers
   (15.1; EP-16). **(changes EP-9, EP-16, EP-17)**
+- **Boss rooms:** settled in `2026-11-22-boss-rooms-design.md` (boss
+  rooms design, dungeon generation segment 9, approved 2026-11-22). It
+  adds the Sanctum rest condition to 15.1 (agreed, Q2; M2) and the
+  one-fight rule to 6.2 (M2), reads a boss's Rhythm as not a wind-up
+  under 5 (M2), and adds the Gambit exception to 5 and 12.2 and the
+  not-a-lair-action reading to 2 (agreed, Q3; M3 (gated), else Later).
+  **(changes BR-6, BR-31, BR-32)**
 - **Content volume:** counts of companions, themes, monsters and bosses for
   M2. The M1 slice class is the Vanguard (classes design) **(change
   CL-13b)**.

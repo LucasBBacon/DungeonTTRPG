@@ -192,7 +192,10 @@ arena through a **Bossgate** that opens on `BossDefeated`.
   of "a guaranteed safe room before the boss" intact. It is also the
   patrol's fight host, so it takes the floor's fight-room size.
   **Told plainly (after the check):** once the patrol is defeated, the
-  Forecourt is as restable as any cleared room (6.8).
+  Forecourt is as restable as any cleared room (6.8), until the first
+  `ArenaEngaged`: from then until `BossDefeated` no short rest is taken
+  in the Sanctum (the Sanctum rest rule; BR-31, agreed boss rooms Q2,
+  2026-11-22; M2; boss rooms design 4.2.5; 6.11).
 - *Rejected:* B, an antechamber on floor 1 only; C, a guaranteed safe
   antechamber everywhere.
 
@@ -725,7 +728,8 @@ node's footprint, so a footprint holds the room's interior plus one wall
 square on each side (8.0). Room sizes below are interior walkable
 squares. Fight-room long axis ≤ 18 and arena ≤ 21 stay as authoring
 caps; fight rooms and arenas also meet the projected screen-fit bound of
-8.1.
+8.1. Segment 9 authors one arena size per (Guise, floor band) inside the
+Arena column (read; BR-1, M1/M2; boss rooms design 4.1.1).
 
 **Counting (lead's call, after the check):** Room nodes = n + k (side
 rooms) + the Stairhead. The elite room and Circuit side rooms count as
@@ -871,7 +875,7 @@ target, which LS5 draws from the Blueprint's `bypassTargets[]` (6.8).
 | Guard posts | Chokepoint rooms: one forward Portal that is a door kind or ≤ 2 wide, plus an entry side of at most a flank pair |
 | Lair | The L position, a cut vertex. May be `deadEndAllowed` only for a Den or Sleeper template, where Cornered is the intended payoff. **Reading to confirm (LP-14, M2; loot sources design 4.10; LE 18.2):** on floor 5 the L room's host socket holds the Viaticum (Bedside Stand host, agreed loot sources Q5) on its exit side toward the Forecourt, outside the start zone, on the walk line, because nothing lies between L and F on floor 5; the FL and enemies owners confirm. If refused, segment 2 adds a post-lair main-path container on floor 5 (loot sources design 14.2) |
 | Elite room | A depth-1 spur from a main-path room with index ≥ FloorDiv(n−1, 2), not the antechamber or arena (floor 1: second half, enemies 17.4). Entered by a Door. Its **Grille vantage** sits in a vantage Alcove of the parent room, behind a Door the party opens only when it wants to look, so a peek is always a choice; from it the party sees ≥ half of the elite start zone at distance ≥ 7, and the two sides are walkably joined within ≤ 12 (`GrilleReach`). No square on the parent's main walk line sees the start zone. **If the enemies owner refuses FL-21 (b),** a noticed Champion may come, so the hearing outline marks the vantage Door as a noticing risk before the party opens it; the opt-in Door is the layout fallback and needs no enemies rule **(vantage Alcove and fallback: lead's calls, after the check)**. Templates also fit the floor-3+ Rival Party (2–3 units, enemies 18.1). Inherits `expectedTenths` through `branchIndex` |
-| Boss | Arena socket: the Blueprint's 2×2-cell `arenaCell`; two dog-leg Forecourt Arches; the Bossgate on the far wall (none on floor 5). Arena start zones sit ≥ 9 path squares from both entrances (segment 9 hook). A guarded boss's signature cache sits in the arena, never the L room (a reading of IR 4.13 and 4.18; loot sources design 4.4) |
+| Boss | Arena socket: the Blueprint's 2×2-cell `arenaCell`, sized to contain the boss's authored arena at its floor band, into which segment 9 stamps its `ArenaTemplate` Guise draw-free, rotated to face the Forecourt (BR-1, BR-2; M1/M2; boss rooms design 4.1.1, 4.1.3); two dog-leg Forecourt Arches; the Bossgate on the far wall (none on floor 5). Arena start zones sit ≥ 9 path squares from both entrances (segment 9 hook). A guarded boss's signature cache sits in the arena, never the L room (a reading of IR 4.13 and 4.18; loot sources design 4.4) |
 | Empty or special | Q positions, and the antechamber on floors 2–5, which is also the patrol's fight host and homeRoom (RS 6.6's "empty or special" reads it as special; told plainly, FL-5). Segment 8 fills Q rooms; floors 2–5 antechambers may host non-encounter micro-events. **Segment 8's hosts (EV-2, M2; events design 0.1, 4.2):** about one Curiosity per floor on floors 1–3 (floor 4: a Glimpse in M2; M3 one if segment 8's clock line holds), in rooms layout already rations, never an added room; on floors 2–4 a Q room hosts it, on floor 3 the Q room the tie-break picks, the other Q a Glimpse; a floors 2–5 Forecourt micro-event is a 1-click Interlude when drawn; floor-1 hosts as in 6.9, with main-path Q room 3 carrying a wall Glimpse only (it keeps the CL-10 Circuit and its one lesson); never an arena, the Sanctum, the Annex, a Dare or Wager room, the elite room, a boxed-lurker host or floor-1 main-path rooms 0–2, never on a walkable square, at most one per room. **Tie-break:** wherever several hosts qualify, the lowest main-path index, then the lowest room id (side rooms take the index of the room they hang from); no draw |
 | Side rewards | Loop-back Sites first, then spurs and Alcoves. Off-path potions (600‰ lean) and secret caches |
 | HE-7 / HE-4 | Socket 1: a no-check socket in a traversed room with index < FloorDiv(n−1, 2), not in the Gb room. Socket 2: a traversed room with FloorDiv(n−1, 2) ≤ index ≤ n−2 (the antechamber allowed; on floor 1 "empty" means no encounter, so a container is legal). HE-4: a traversed no-check socket before the arena, not in the Gb room and not in a Circuit room (the floors 2–5 Forecourt included), so no optional fight stands in front of it. Entry templates, every Q template and **every Forecourt template** carry ≥ 1 no-check socket, so reservation is constructive on every role order, floor 5 included (V8 `HE7Sockets`). DH 12.5 step 4 draws the supply among these HE-4-eligible containers only (FL-3) **(lead's calls, after the check)** |
@@ -1069,6 +1073,11 @@ zero. Joiners stay a real, player-caused experience.
   ordinary joiners there; the joiner cap applies). `BossFightJoinRate` is
   reported, the simulator's boss arm includes the case, and FL-21 (e)
   asks the enemies owner to tune the boss with it.
+  **Pending request (BR-13, M2; boss rooms design 4.5.4):** segment 9's
+  proposal answering FL-21 (e): the patrol joins as an ordinary joiner
+  under the 1/1/2/2/2 caps, through an Arch after footsteps, counts in
+  AddCap, is enumerated at its worst arrival round, and never counts as
+  the Q4 group; not a rule until the enemies owner rules.
 
 **Party flight:**
 - `PartyEscape`: a line-of-sight break (closable door or bend) within 6
@@ -1120,7 +1129,10 @@ zero. Joiners stay a real, player-caused experience.
   - The Forecourt is never guaranteed safe while the patrol lives. Once
     the party has defeated the patrol, the Forecourt is as restable as
     any cleared room, one step from the arena (the reading of Q2
-    confirmed by the client on 2026-11-21, 19.1). `PreBossRestSafety` is
+    confirmed by the client on 2026-11-21, 19.1), until the first
+    `ArenaEngaged`; from then until `BossDefeated` the Sanctum rest rule
+    bars short rests there (BR-31, agreed boss rooms Q2, 2026-11-22; M2;
+    6.11). `PreBossRestSafety` is
     therefore a **gated report**: if parties rest in a cleared Forecourt
     on more than 50% *(illustr.)* of floors 2–5, it comes back to the
     client with the options in 19.2.
@@ -1261,8 +1273,8 @@ or a slot rule above.
 | **Forecourt** (antechamber) | Main-path room n−2, always a Room node, never a corridor **(new lead's call)**; every path to the arena passes through it (LG3); themed per Blueprint | All |
 | Floor-1 Forecourt | Empty (no encounter), 5×9–7×11, one inbound Portal, no side room, no Alcove, off the Circuit; near-safe by RS 9.4's approved exception; hosts the `AntechamberCatchUp` (RS 9.4). **Reading to confirm (EV-2, M2; events design 4.2):** its walls may carry segment-8 Glimpses, read as "empty" because a Glimpse has no rules, no square and no click; the FL and RS owners confirm | 1 |
 | Floors 2–5 Forecourt | Counted as an empty or special room; 1–2 inbound main Portals; **always a Circuit waypoint** and the patrol's homeRoom and fight host, never guaranteed safe while the patrol lives; at most two Circuit side rooms attach, never touching the arena; the floor's fight-room size, with the free-space rule, LG12 flee exits and LG20 entry rules; may host a segment-8 micro-event, a 1-click Interlude with arena-facing facts only, `AntechamberScreened` kept (EV-2, EV-23; events design 4.1, 4.7) **(size and fight-host rules: lead's calls, after the check)** | 2–5 |
-| **Arena entrances** | Two **dog-leg** Arches from the Forecourt, ≥ 5 apart, never Doors; arena start zones ≥ 9 path squares from both. **`AntechamberScreened`, symmetric:** no Forecourt square more than 2 beyond an entrance has line of sight to any arena square more than 2 beyond that entrance, in either direction; a baffle or bend inside each Arch does it. The boss can therefore be shot from the Forecourt only while it stands in its own doorway band, where its reach covers the Arch **(symmetric form: lead's call, after the check)** | All |
-| **Bossgate** | On the arena's far wall; blocks movement and sight and is not a hearing path until `BossDefeated`, then an Arch. Not an entrance: "the exits are never sealed" refers to the entrances (enemies 17.5, clarified) | 1–4 |
+| **Arena entrances** | Two **dog-leg** Arches from the Forecourt, ≥ 5 apart, never Doors; arena start zones ≥ 9 path squares from both. **`AntechamberScreened`, symmetric:** no Forecourt square more than 2 beyond an entrance has line of sight to any arena square more than 2 beyond that entrance, in either direction; a baffle or bend inside each Arch does it. The boss can therefore be shot from the Forecourt only while it stands in its own doorway band, where its reach covers the Arch **(symmetric form: lead's call, after the check)**. Segment 9 authors each Arch socket's baffle and reads the screen for Take Places (BR-1, BR-4; boss rooms design 4.1.1, 4.2.2) | All |
+| **Bossgate** | On the arena's far wall; blocks movement and sight and is not a hearing path until `BossDefeated` (canonical; LP's `BossResolved` is its alias, BR-37, M2; boss rooms design 4.2.4), then an Arch. Not an entrance: "the exits are never sealed" refers to the entrances (enemies 17.5, clarified) | 1–4 |
 | **Stairhead** | About 5×5 behind the Bossgate; the stairs, the left-behind warning and Scrap (items 9, 24); the floor fact "path to the stairs" means the Stairhead (enemies 14.6) | 1–4 |
 | Floor 5 | No Stairhead and no Bossgate: the run ends; a waking-light window dresses the far wall (display only, M3 seams). The floor fact "path to the stairs" reads as the main path to the arena | 5 |
 
@@ -1272,6 +1284,22 @@ Portal's squares belong to room n−3 and the arena-adjacent doorway
 squares belong to the arena, so trigger (b) ("any attempt to enter an
 arena square") covers the arena doorways. RS 3.4's glossary wording
 "room or corridor" becomes "room" (FL-5).
+
+**`ArenaEngaged` (BR-3, M1; read; boss rooms design 4.2.1):** segment
+9's once-per-floor engagement event, which replaces the "arena seal"
+wording (the data id `arenaSeal` stays an alias; display never says
+"seal"); it fires when a party unit enters an arena square, doorway
+squares included (FL-13), or the boss group notices one, after the
+floor-1 Catch-up on the same tick. The Arches stay open throughout.
+
+**The Sanctum rest rule (BR-31; agreed, boss rooms Q2, 2026-11-22; M2;
+boss rooms design 4.2.5):** from the first `ArenaEngaged` until
+`BossDefeated`, no short rest is taken while the boss lives and any party
+unit stands on a Sanctum square (Forecourt, arena, Stairhead). It
+narrows the client reading of 2026-11-21 (6.8): a floors 2–5 Forecourt
+cleared of its patrol is restable only before first engagement, and
+rests before it stay legal (`PreBossRestSafety`). Rests elsewhere on the
+floor stay legal. The rule is the same on floor 1.
 
 **The Viaticum (F5; LE-5, M2; read; loot economy design 6.11, agreed
 Q1):** the F5 boss share sits in a main-path Plain container after the
@@ -2343,6 +2371,9 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
    *(illustr., builders)*, flank reach is too long.
 6. **`BossDamageFromOutsideLeash`:** target 0 for melee-capable bosses,
    which the symmetric `AntechamberScreened` delivers without FL-21 (a).
+   **Pending request (BR-14, M2; boss rooms design 4.6):** segment 9 asks
+   the enemies owner for FL-21 (a)'s narrow form (pursuit to the Arch
+   squares, never into the Forecourt), beside its doorway-band AI term.
 7. **Boss arm with a patrol joiner** on floors 2–5 (`BossFightJoinRate`,
    FL-21 (e)).
 8. **Rest arm** (DH 5.7).
@@ -2393,7 +2424,7 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
 | 6 Encounter placement | Slot hosts, `equivalentHosts`, the Circuit with phase, the Bypass, near pairs, matrices, start zones, `nearStart`, `skittishShape` / `ledShape` | Enemies 10.5 steps 2–11 (step 9 moves only within a host or to an equivalent host, 6.1), `placementRules`, the reinforcement and Dormant partners for near pairs (encounter placement design 6.12), Rival Party fit in elite templates (a Later stub, EP-34; encounter placement design 6.14) |
 | 7 Loot | Container, Alcove and secret-cache sockets (inset faces, LP-12); HE-7 and HE-4 reservations; room roles (6.5) | Contents and channel counts; **SocketPlan (LP-11, M2; loot sources design 4.2)** selects from `containerSockets[]` by a role table held as data and never creates a container square: one card-bearing container per room (`cardEligible`), ≤ 1 coin-only container per room, `containerCap` in two phases with merges, the binding definition of the walk line, side-room and Alcove containers previewed from the threshold |
 | 8 Non-combat rooms | Q rooms, the floors 2–5 antechamber micro-event socket, trader and Pledge tags, signature rooms (the `curiosityHost` tag), floor-1 Alcove set pieces and free leaf side rooms as Curiosity hosts (EV-2; events design 4.2) | Fills (Curiosities, Interludes and Glimpses; events design 11), trader, shrines, Dream Fragments. Segment 8 places no Landmarks: layout owns the sockets, segment 4 the ticks (EV-35; events design 4.2) |
-| 9 Boss rooms | The 2×2-cell socket, two dog-leg Forecourt Arches ≥ 5 apart, the Bossgate, start-zone depth ≥ 9, the symmetric `AntechamberScreened` (6.11), the arena pull-back zoom bound (8.1) | Interior, counterplay feature, phases, Keepsake arena dressing; boss tuning with a patrol joiner (FL-21 (e)) |
+| 9 Boss rooms | The 2×2-cell socket, two dog-leg Forecourt Arches ≥ 5 apart, the Bossgate, start-zone depth ≥ 9, the symmetric `AntechamberScreened` (6.11), the arena pull-back zoom bound (8.1) | Interior, counterplay feature, phases, Keepsake arena dressing; boss tuning with a patrol joiner (FL-21 (e); answered by the BR-13 proposal, pending); the authored arena stamped draw-free into an `arenaCell` sized to contain it (BR-1, BR-2; boss rooms design 4.1); `ArenaEngaged` and the Sanctum rest rule (BR-3, BR-31; boss rooms design 4.2) |
 | 10 Exploration and information | Minimap nodes and explored-room outlines, Portal glyph kinds, Landmarks, tints, travel paths, count-line data, the patrol waypoint schedule (Listen's "passing") | Fog, minimap UI and the rules-room overlay, Listen UI (occupancy, 9.2), Hairline display, the hearing outline (including the self-teaching shut-door prompt and the elite vantage risk), interrogation facts, auto-walk (pausing at doors, 6.10), Overlook (M3), the Stratum Card line |
 | 11–12 Seeds and validation | The `layout` and `dressing` children and their derivation, draw counts, V8 and its enumeration, the assertion list and the shared floor assertion point | The stream tree, release seed set, retry logging |
 
@@ -2835,7 +2866,8 @@ triggers them:
   DH 5.7 lever order: found supply 1 per floor first; vendor stock back
   to the client; supply cap 2 last);
 - `PreBossRestSafety` showing parties camping in a cleared Forecourt on
-  floors 2–5: the options are (a) a rest preview warning that the
+  floors 2–5 (before first engagement only, under the Sanctum rest rule;
+  BR-31, boss rooms design 4.2.5): the options are (a) a rest preview warning that the
   Forecourt is within hearing of a Wary boss, (b) the DH lever order, or
   (c) a second pressure that survives the patrol's death (for example
   the boss's reserve group arriving on a Forecourt rest), which needs

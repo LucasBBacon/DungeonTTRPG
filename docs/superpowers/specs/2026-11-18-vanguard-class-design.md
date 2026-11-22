@@ -2353,7 +2353,11 @@ hit" in conditions 10.1 shows the VG-8 sum.
   not copy the hero's Momentum or Arts; protector kits on at least two
   classes (classes 7.8).
 - **Dungeon generation:** hazard density by theme (Wrecker value);
-  walls and edges near main-path fights.
+  walls and edges near main-path fights. **Pending confirmation from the
+  boss rooms design (segment 9, approved 2026-11-22; change BR-18; M2;
+  its 4.7.6):** every M1–M2 boss is rules-size ≤ Large, and each floor-1
+  theme with two bosses has a Medium one; the Vanguard owner confirms
+  which Vanguard verbs beyond Shove are size-gated.
 - **Camp and hub screens:** the stance re-pick step and its Guarding
   and stance-bound trigger warning; the level-3 spare-weapon suggestion
   for the Weaponmaster (7.10).

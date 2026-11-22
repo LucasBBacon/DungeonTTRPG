@@ -142,7 +142,10 @@ These would make the game a failure even if everything works.
   diagonal step costs the same as an orthogonal step. **(decided)**
 - Exploration and combat happen on the same map. Combat starts in place when
   enemies notice the party. There are no separate battle arenas.
-  **(decided)**
+  **(decided)** A party unit on a boss arena square counts as noticed
+  by the boss's group, and Take Places is the placement step of that
+  combat (boss rooms design 4.2.1, 4.2.2; changes BR-3, M1, and BR-4,
+  M2, a reading).
 - Out of combat, the player moves the hero and companions follow. In combat,
   all units act in initiative order. **(decided)**
 - Exploration is turn-stepped: the world advances one tick for each hero
@@ -268,6 +271,10 @@ All decided.
   the ladder per-floor (run structure design 9.1; change RT-21, M3).
   Hazards escalate in kind under this rule (hazards design 6.19;
   change HZ-25, M3).
+  Bosses escalate in kind too: each boss authors a Nightmare
+  Rendition, the Perilous Door uses it one tier up, and HP, damage,
+  pips and thresholds never change (boss rooms design 4.14.2; change
+  BR-34, M3).
   Unlocks, the ladder and Nightmare tiers leave the loot economy
   unchanged (loot economy design 6.12; change LE-19, M3).
   Events never ease a run for a losing streak: no mercy through events,
@@ -402,6 +409,10 @@ computes rules.
   EventDraw after layout and before hazards; the draw-free EventPlace
   runs after LootBind, and loot never reads Curiosities (events design
   4.10; change EV-21, M2).
+  A per-record `boss9` keyed child of the route seed, 4 fixed draws,
+  never consumed on the route stream, draws each boss's Rendition and
+  mirror bit; arena stamping makes no draws (boss rooms design 4.10.1,
+  4.15; change BR-2, M2).
 - Rules use integer arithmetic only.
 - No reliance on unordered collection iteration.
 
@@ -447,6 +458,14 @@ largely to prove it.
   runs write every field; shared and daily runs write `shownCount` and
   `fullShown` only; the simulator writes nothing (events design 4.5.1,
   4.10, 9.1; change EV-19, agreed 2026-11-22, Q1, M2).
+  Each `recentRuns` entry also holds `f1BossId`, written at run start
+  for every launched personal run and read by the launcher's F1-boss
+  streak rule (memory 2); outside the reproducibility key (boss rooms
+  design 4.10.3; change BR-25, agreed 2026-11-22, Q1, M2). From M3 it
+  also holds `bossMemory {bossId: lastOutcome, renditionsSeen[]}`,
+  display only for the Boss Ledger and Grudge, read as a snapshot at
+  run start and never by draws, stats or AI (boss rooms design 7;
+  change BR-35, M3).
 - Saves carry a version number.
 
 ### 6.7 Enemy AI

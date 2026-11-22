@@ -926,7 +926,9 @@ Q2):**
   untouched).
 - **Definition.** Floor time is the **active time** from the core's
   timestamped `FloorEntered` event to its `BossDefeated` event on that
-  floor (every floor ends at its boss), excluding camp screens, pause
+  floor (every floor ends at its boss; `BossDefeated` is canonical and
+  loot sources' `BossResolved` is its alias, boss rooms design 4.2.4;
+  BR-37), excluding camp screens, pause
   menus and any idle gap over 60 s *(illustr.)*. The gate value is the
   **median over floors 4 and 5** of at least 12 sessions *(illustr.)*
   per cap arm. The core emits these telemetry events from M2-first.
@@ -986,6 +988,13 @@ LP-10's (floor layout design 6.10): ≤ +0.5 min and ≤ +4 clicks per
 floor on floors 1–3 (floor 3's heavy arm uses the Twice-Told format),
 and net ≤ 0 and ≤ +1 click on floors 4–5 at party 4; a Curiosity's
 first telling costs about 2 clicks *(illustr.)*.
+
+Segment 9 adds no lever here either (boss rooms design 9.3, 9.4; BR-40,
+read; M2). Its clock line sits beside TL-38's, EP-33's, LP-10's and
+EV-23's: `BossMinutes` median ≤ 7 min at party 4 on floors 4–5
+*(illustr.)*, p75 reported; its own levers in order are AddCap, grouped
+escort playback, reserve size, phase option (c) → (a) and the arena
+Stir moved to M3, never boss HP first.
 
 **Told plainly:** the 10 s per companion turn target (ability 11.4) does
 not fit a party of 4 into a 20-minute floor. Either the per-turn time,
@@ -1210,6 +1219,19 @@ experience share** (breaks the enemies 16 curve).
     every band; boss HP **ignores** the shortfall. A declined party meets a
     smaller escort and a boss sized for its real body count.
   - A content test row per boss per party size 1–4 (CMP-8).
+  - **Segment 9 (boss rooms design 4.8.2; BR-21; told plainly; M2;
+    pending the companions owner's confirmation of the reading):** the
+    floor-1 rows `hpByPartySize[2..4]` are filled by the formula and not
+    tuned, because floor 1 is always solo (7.10). The drafts'
+    "Shorthanded" kit downgrade at party ≤ 2 is **rejected** as an
+    empty-slot bonus (2, anti-goals); small-party relief goes only
+    through per-size data (`hpByPartySize[1..2]`, the solo composition
+    table, escort fill). **Small-party bound (lead's call, after the
+    check):** `BossDeathShare` at party ≤ 2 is never below party 4's on
+    the same floor, and on floors 2–5 is ≤ 1.5 × party 4's, with ≤ 45
+    per 100 on floor 5 *(illustr.)*; a lower `hpByPartySize[1]` is the
+    first lever. Boss actions count non-Downed party units at round
+    start.
 - The enemies 10.5 generator and 17.4 template content tests, the 6.4
   permadeath guards and the AR-20 lowest-legal-AC runs are **re-run at
   every weight the run can reach**, including the shortfall minimum
@@ -2524,6 +2546,9 @@ triggers them:
 - promoting any 7.7 target to a gate;
 - an owner declining CMP-5–CMP-9 or CMP-12 in a way the design cannot
   absorb;
+- the boss small-party bound (7.9) failing after per-size data: back to
+  the client, Shorthanded stays rejected (boss rooms design 4.8.2, 14.2;
+  BR-21);
 - the naming pass.
 
 ## Appendix A: how the critique findings were resolved

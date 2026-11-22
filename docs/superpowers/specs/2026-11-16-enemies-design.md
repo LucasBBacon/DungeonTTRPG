@@ -219,7 +219,7 @@ Authored on the base type. The composed unit exists only at runtime.
 | `skills` | 0–2 from Perception, Stealth, Athletics, Acrobatics and Intimidation, and only skills the rules or the AI use | M1 |
 | `armour` | Natural armour `{natural: offset, metal?}`: the medium band value + offset (armour design 12.1), or from loadout. Armed types may use natural armour for display-only issue hides (furs). **(change AR-17)** | M1 |
 | `speed` | Default 6, authored before armour penalties; the derived speed stays within 3–8 (armour design 7.3); 0 only if `immobile` **(change AR-53)** | M1 |
-| `size` | Field only. A unit cannot shove or grapple a target more than one size larger; this binds the party too **(change A-10)**. Multi-square bosses are Later. | M1 |
+| `size` | Field only. A unit cannot shove or grapple a target more than one size larger; this binds the party too **(change A-10)**. Multi-square bosses are Later. Every M1–M2 boss is ≤ Large, and each floor-1 theme with two bosses has a Medium one (boss rooms design 4.7.6; read). | M1 |
 | `senses` | 0–1 sense trait: **Keen** (advantage on the group's noticing roll and on Search; +5 to its passive perception) or **Sightless N** (treats Hidden units within N squares as noticed; immune to `sight`, which uses its 1 control-tag immunity). No darkvision, because there is no light model. | M2 |
 | `traits` | Within the settled budgets | M1 |
 | `atWills`, `limited`, `reaction`, `bonus` | Ability ids, within the kit caps (9.1) | M1 |
@@ -481,6 +481,8 @@ round-1 row.
 | Floor 1, solo boss: expected damage to the hero per round (its turn plus boss actions); the 35% boss row stays for every other boss **(change DH-26)** | ≤ 25% *(illustr.)* |
 | Floor 1, solo boss at the lowest legal hero: worst spike (dice at maximum, a crit, one boss action) **(change DH-26)** | ≤ 75% |
 | Floor 1, solo boss at the lowest legal hero: a full-HP hero cannot be reduced to 0 in one round **(change DH-26)** | Even with one crit *(illustr.)* |
+| Boss: `NoUntelegraphedSpike`: any boss or boss-action effect whose maximum without a crit exceeds 30% of the floor's reference hero *(illustr.)* is a bannered signature on its Downbeat, a Gambit (M3) or an announced arena act **(change BR-8; boss rooms design 4.3.3; M2)** | Else rejected |
+| Boss: a forecast Downbeat signature's maximum without a crit, at the lowest legal hero **(change BR-8; boss rooms design 4.3.3; M2)** | ≤ 45% *(illustr.)* |
 | Floor 1 cumulative round-1 budget, reference and lowest legal hero: the sum over floor 1's encounter slots of the highest round-1 death chance among the templates the generator can emit there, plus the floor-1 boss's one-round death chance (`guard.floor1CumulativeRoundOnePermille`) **(change DH-26)** | ≤ 2.5% *(illustr.)* |
 | AC envelope, levels 1–10: the 6.2 table attack's hit chance against the maximum sustained party AC, normal roll mode **(change AR-20)** | ≥ 35% |
 | AC envelope: against the maximum charged AC (Raise or Fortified, plus one reaction), normal roll mode **(change AR-20)** | ≥ 15% |
@@ -506,6 +508,14 @@ round-1 row.
   that attacker's piercing R), Puncture included (armour design 9.1). The
   AC envelope rows are read at levels 1–10 against the maximum party AC,
   not at the reference hero.
+- **Boss spike rows (change BR-8; boss rooms design 4.3.3; M2):** the
+  worst-spike rows read the boss's worst own-turn effect with a crit plus
+  the worst boss action that can hit the same unit that round (on floor 1,
+  whose menu has no Strike, the boss's own turn). On floors 3–5, focus
+  spread (11.1) is read to forbid two boss actions on the same unit in one
+  round, so the rows enumerate one boss action per target (a reading sent
+  to this owner for confirmation). The round in which a phase entry occurs
+  is enumerated with the new kit.
 - The guards assume the **SRD double-dice crit** for every unit
   **(settled; change S-3, death and healing design 9)**.
 - **(change DH-26)** All rows are computed without party consumables or
@@ -847,6 +857,15 @@ The single counting rule for "2 conditions per enemy type". **(change C-2)**
   ability fires in a surprise round, and a floor-1 lurker never uses
   Ambush Strike in any round (its opener is its at-will at 150%, 17.1)
   **(change EP-11; encounter placement design 6.17; M2)**.
+- **Pending request (BR-22, M2; boss rooms design 4.9):** every floor-1
+  boss limited ability has `readyAt` ≥ 2, so with floor-1 Rhythm loops of
+  ≥ 3 beats the first signature lands on boss turn ≥ 3; not yet ruled.
+- **Pending request (BR-33, M3; boss rooms design 4.14.1):** a new
+  readiness source: where a hazards design 6.17 Stir ships in an arena,
+  one non-hard-control boss signature may be Keynote-bound, ready only in
+  the round after each strike; a boss on its own due squares is Overtaken
+  and its bound signature misses its next window, once per phase, no pip
+  loss; not yet ruled (the HZ owner rules the Stir side).
 - **Later (change LM-1; Arcanist design 9.3):** a `cooldown.delay` hook
   (the Loremaster's Unpick pushes a revealed `cooldown` or `readyAt` back),
   applied when the Loremaster ships.
@@ -1329,6 +1348,16 @@ extends to due footprints, monster Cord use and vent mouths; the fall
 value toward a given hero is scored once per fight (a board-history
 term, so invariant 1 holds); not yet ruled.
 
+**Pending request (BR-6, BR-14, M2; boss rooms design 4.3.1, 4.6):**
+bosses only: the **Rhythm**, a per-band loop of Off, Lead and Down beats
+read as a per-turn preference order over the scorer (never a wind-up,
+no new search depth; it reads only the boss's own turn count and move
+legality), with a Rhythm strip on the plate and initiative entry; and
+per-boss data weights (Rhythm obedience, Device-face avoidance, lane
+preference, escort Command toward screening the Device), `deviceBait`
+and the doorway band; not yet ruled. If the Rhythm is refused, bosses
+keep cooldowns only, with ready-state pips (13.2).
+
 **Kill bonus** = min(`killBonus%` × the target's T, 1.5 × the attacker's
 best at-will score). T is the target's best expected one-step score
 (conditions 17.3). So a dangerous unit is worth more, and **nothing reads
@@ -1577,6 +1606,14 @@ adopted.
   effect in M2)**. Joining groups are never Surprised and never Surprise.
   Exception: the solo hero is never surprised in floor 1's first two
   main-path rooms (death and healing design 17.1). **(change DH-29)**
+- **Pending request (BR-3, BR-4; boss rooms design 4.2.1, 4.2.2; M1 /
+  M2):** a party unit entering an arena square (doorway squares included)
+  counts as noticed by the boss's group, so the boss fight starts by
+  noticing (`ArenaEngaged`, once per floor); from M2, when combat is not
+  already active, **Take Places** (the player places each party unit
+  out of combat in the Forecourt or on an arena square on either Arch's
+  doorway band or placement squares, within its Speed) is the placement
+  step of that combat start, before initiative; not yet ruled.
 
 ### 12.3 Noise
 
@@ -1636,6 +1673,10 @@ radius reads the live hearing graph, each Portal in its current state
    initiative on the combat stream at the start of its entry round, after
    the round-start effects and in unit order; a shared minion slot rolls
    once, with its lowest-id member's Intelligence. **(lead's call)**
+   **Pending request (BR-3, M2; boss rooms design 4.2.1):** if combat is
+   already active when `ArenaEngaged` fires (a floors 2–5 Forecourt patrol
+   fight), the boss group joins it as joiners under this item and Take
+   Places is skipped; not yet ruled.
 5. **Other groups during a fight:** while combat is active, every group not
    in it (patrols, Alerted and Searching groups) advances one tick per
    round, at round start, after the joiner checks. **(lead's call)**
@@ -1728,7 +1769,9 @@ Further telegraphs, all **(lead's call)**:
 - **From the boss's first turn,** the signature moves in its current kit
   are listed on its plate and initiative entry with name, shape and ready
   state, without waiting to be seen or revealed by Lore. A phase that
-  swaps one in lists it on entry.
+  swaps one in lists it on entry. From M2 the boss's Playbill also lists
+  them, with their shapes, before the fight, from the Stratum Card
+  **(change BR-5; boss rooms design 4.12; M2)**.
 - **Whenever the boss would use a signature move if its turn began now**
   (computed live by the real AI, with exactly the read simulation of
   13.3), a banner on the initiative bar shows the move and its target or
@@ -1736,7 +1779,13 @@ Further telegraphs, all **(lead's call)**:
   party could otherwise read it.
 - It is a forecast, not a commitment. If the party changes the state, the
   banner updates. The settled deferral of scripted wind-ups (ability model
-  5) is unchanged; committed signature moves stay a Later option (21).
+  5) is unchanged; committed signature moves stay a Later option (21),
+  except **Gambits**: one `gambit`-flagged boss signature per boss, never
+  on floor 1, committed at the end of the boss's own turn on squares the
+  existing area scorer picks one-step, resolved at its next turn start,
+  with an escape guarantee and no digit on the map **(change BR-32; boss
+  rooms design 4.14.3; client agreed 2026-11-22, Q3; M3 gated, else
+  Later)**.
   A Stir's announced act (the Dream step) is an environment act, not a
   wind-up, so the deferral stands **(change HZ-12; hazards design 6.3;
   M2 (gated), else M3)**. **Pending request (HZ-24, M3; hazards design
@@ -1893,6 +1942,10 @@ Perception, so guile grows with level. **(agreed)**
   Perception would have had no fight job, and enemies no way to surprise.
 - **Committed intents** (Into the Breach): every enemy would need a
   wind-up the one-step scorer cannot reason about **(settled deferral)**.
+  Boss Gambits (13.2) are the one exception: their squares are picked
+  one-step on present occupants, so this objection does not apply
+  **(change BR-32; boss rooms design 4.14.3; agreed, Q3; M3 gated, else
+  Later)**.
 - **A rolled Insight check:** a die the player cannot plan around, and a
   free retry each hover.
 - **Reach overlay only:** kept as the baseline, but alone it gives
@@ -3002,7 +3055,7 @@ in percent, all illustrative.
 | **Kiter** | Artillery | 60 / 150 / 200 | 5 | Lowest visible AC in range; concentrating units **(change AR-25)** | Keeps 4–6 squares away; steps back when engaged; falls back at 50% HP. **Pending request (EP-6, M2; encounter placement design 6.6.3):** "falls back" gains a destination, its fall-back square (also on a formation break or when adjacent to a noticed party unit), and a Billet weight 25; not yet ruled | M1 |
 | **Mob** | Minion | 150 / 0 / 0 | 1 | Nearest; spreads to free adjacent squares | Surrounds you; ignores danger | M1 |
 | **Automaton** | Mindless | 120 / 0 / 0 | 1 | Nearest, then unit order | No exposure or cohesion terms; walks through minor hazards (the lethal floor still holds). **Pending request (hazards design 6.12; M2 (gated), else M3):** ignores non-lethal due squares, keeping the lethal floor (shown on its card); segment 4 does not raise the mindless share and asks this owner; not yet ruled. **Pending request (TL-16, M2; traps and locks design 6.8):** mindless types treat non-lethal traps as floor and spring them (the mindless blunder), lethal ones still barred; not yet ruled | M1 |
-| **Boss** | Bosses | Authored; `leash: room` | — | Authored | A phase may swap the profile. **Pending request (FL-21 (a), M1; floor layout design 6.11):** a Provoked analogue that extends the leash to the Sanctum when the boss is damaged from outside its reach; not yet ruled | M1 (M2 adds boss actions) |
+| **Boss** | Bosses | Authored; `leash: room` | — | Authored | A phase may swap the profile. **Pending request (FL-21 (a), M1; floor layout design 6.11):** a Provoked analogue that extends the leash to the Sanctum when the boss is damaged from outside its reach; not yet ruled; segment 9 asks for the narrow form, pursuit to the Arch squares, never into the Forecourt (boss rooms design 4.6). **Pending request (BR-6, BR-14, M2; boss rooms design 4.3.1, 4.6):** the Rhythm and per-boss data weights (11.1), and a narrower leash value `chain(n)` that limits the unit's own movement only (forced movement unaffected; a unit pushed beyond it returns toward its anchor), replacing a `fixedInPlace` exception; not yet ruled | M1 (M2 adds boss actions) |
 | **Raider** | Skirmisher | 120 / 120 / 200 | 1 | Lowest visible AC; concentrating units **(change AR-25)** | Hits, then uses leftover movement to leave reach; slips past | M2 |
 | **Protector** | Bodyguard elites | 80 / 60 / 120 | 1 | Whoever threatens its ward | Body-blocks; Challenges the unit nearest the leader | M2 |
 | **Disruptor** | Controller | 80 / 120 / 150 | 3 | Highest T | Spends control on the most dangerous unit; setup at 150% | M2 |
@@ -3031,7 +3084,7 @@ under ability 8.4); a request to this owner, not yet a rule.
 | **Picket** | 1–2 standards + 0–2 minions (≤2 when solo) | Patrol or guard post | 1+ | Patrol or stationary | The universal fallback. On floor 1 solo, budgets make a patrol one standard: the floor's Stealth and ambush teaching target. | Picket Line; Door Line (front + artillery standard); Kill Box (Waylay, F2+). Patrol File; Revel, Bout | M1 |
 | **Pack** | 1 brute (M2: or skirmisher) + 2–4 minions of one family (2 when solo) | Patrol, guard post or lair | 1+ | Patrol or dormant | Minions share one initiative slot | Crescent; Pincer (F3+). Patrol File; Sleeping Ward; gorged Revel | M1 |
 | **Line and Bow** | 1–2 soldiers or brutes + 1 artillery | Guard post or lair | 1+ | Stationary at a chokepoint | Teaches "go around" | Door Line; Phalanx (2 soldiers, F2+); Kill Box (Waylay, F2+). Revel, Bout | M1 |
-| **Boss Court** | Boss + escort (0–2 standards or a minion pack; no elite on floor 1) | Boss | All | Wary from the start | Boss alone in M1. Escort budget: the shortfall-adjusted party weight × 200% × depth% × ladder%; boss HP ignores the shortfall (17.5) **(change CMP-7)** | Retinue for the escort (segment 9 owns the arena set) | M1 / M2 |
+| **Boss Court** | Boss + escort (0–2 standards or a minion pack; no elite on floor 1) | Boss | All | Wary from the start | Boss alone in M1. Escort budget: the shortfall-adjusted party weight × 200% × depth% × ladder%; boss HP ignores the shortfall (17.5) **(change CMP-7)**. Floors 2–5: ≥ 1 non-fearless group (17.5) **(change BR-19; agreed, Q4; M2)**. **Pending request (BR-12, M2; boss rooms design 4.5.3):** AddCap, a per-arena headcount trimming reserves (17.5) | Retinue for the escort (segment 9 owns the arena set) | M1 / M2 |
 | **Champion** | 1 elite + 1–2 minions or standards, at least one of them an awake **watcher** placed with line of sight to every square adjacent to the elite | Elite room | 1+ (second half of floor 1) | Stationary, awake, visible from the approach (through the Grille vantage behind an opt-in vantage Door; floor layout design 6.5; **change FL-7**) | Guaranteed notable item or cache; Steal needs the watcher drawn off first (15.5). **Pending request (FL-21 (b)):** a Sentinel-style hold for the elite (17.3) | Champion Watch | M2 |
 | **Warband** | Leader + 1–2 front + 0–4 minions | Guard post or lair | 2+ | Stationary or dormant | Morale showcase; the usual carrier | Retinue; Phalanx (2 front); Pincer (F3+); Kill Box (Waylay); **M3:** Ritual (the Choir only, F3; change EP-27). Revel, Bout; Sleeping Ward | M2 |
 | **Den** | Leader-role "mother" (a beast silhouette is allowed) + 1 non-minion standard + 2–4 minions | Lair | 2+ | Dormant | Stealth-bypass candidate. The extra standard keeps one kill from ending the lair (14.3). **Pending request (FL-21 (d)):** in-room sneaks against 20.1 (16); the Sleeping Ward sneak line (EP-23, pending; 16) | Crescent (the mother as alpha). Sleeping Ward | M2 |
@@ -3106,7 +3159,13 @@ under ability 8.4); a request to this owner, not yet a rule.
 - tuned so that a 5–7 round fight is won by a party with about half its
   camp resources **(settled)**. **Pending request (FL-21 (e), M2; floor
   layout design 6.8):** tune it including the floors 2–5 patrol arriving
-  as an ordinary joiner, measured by `BossFightJoinRate`; not yet ruled;
+  as an ordinary joiner, measured by `BossFightJoinRate`; not yet ruled.
+  **Pending request (BR-13, M2; boss rooms design 4.5.4):** segment 9's
+  answer: the patrol joins through an Arch after footsteps under the
+  1/1/2/2/2 caps, counts in AddCap, is enumerated in the 35% row at its
+  worst arrival round, slips a (d) reserve due the same round by one
+  round, and never counts as the floors 2–5 non-fearless group; not yet
+  ruled;
 - `fearless`; guile 10 + Wisdom + proficiency + 2, with announced
   signature moves (13.2, 13.3);
 - **a floor-1 boss** (`eligibleFloors` includes floor 1) is never
@@ -3117,7 +3176,13 @@ under ability 8.4); a request to this owner, not yet a rule.
   non-fearless joins the floor-1 pool only with `F1EscortBreakable`
   (every escort and reserve group of its floor-1 bosses drawn from
   non-fearless types) and a passing reference-arm `Floor1ClassSpread` in
-  its split **(change RT-9; run structure design 8.2)**;
+  its split **(change RT-9; run structure design 8.2)**. **Floors 2–5
+  narrow this:** every Boss Court, in every formation at every party size
+  after AddCap, holds at least one **non-fearless group** (an escort group
+  or the (d) reserve group all of whose members are non-fearless types;
+  `mindless` types never count, nor does the patrol joiner), placed in the
+  escort at fight start wherever the escort budget allows **(change BR-19;
+  boss rooms design 4.7.4; client agreed 2026-11-22, Q4; M2)**;
 - never Death-warded **(settled)**; never affixed;
 - **HP** ≈ 6 × the party's typical damage per round × 0.85 (the rest of
   the budget is the escort), of the **actual** party at floor generation,
@@ -3133,6 +3198,10 @@ under ability 8.4); a request to this owner, not yet a rule.
 counter type (its `counterType`; **change RT-4**; run structure design
 8.0); at least one weakness; at most 2 resistances; at most 2 tag
 immunities, never `goad` (Challenged is the tank's settled tool).
+**Pending request (BR-20, M2; boss rooms design 4.7.5):** `final` records
+and floor-1 bosses take no damage-type immunity; no boss resists its
+theme's `counterType`; no boss is immune or resistant to its own arena
+clock's damage type; not yet ruled.
 
 **Kit:**
 
@@ -3142,6 +3211,11 @@ immunities, never `goad` (Challenged is the tank's settled tool).
 - at most 2 harmful conditions per phase kit and 3 across phases;
 - **at most one party-facing hard-control ability**, with cooldown ≥ 3 and
   `readyAt` 2, lasting 1 turn, behind the depth gates (none on floor 1).
+  Gambits (13.2) are never hard control, except the Head of the Table's
+  Frozen Toast, whose Frozen lands only on a unit still standing on its
+  one committed square; it remains the boss's one hard-control ability
+  **(change BR-32; boss rooms design 4.14.3; client agreed 2026-11-22, Q3;
+  M3 gated, else Later)**.
 
 **Boss actions** (M2) **(change A-3)**:
 
@@ -3155,6 +3229,22 @@ immunities, never `goad` (Challenged is the tank's settled tool).
   ability, announced per 13.2).
 - **Never hard control.** Hampered never blocks boss actions
   **(settled)**.
+- **Pending request (BR-7, BR-17, M2; boss rooms design 4.8.1, 4.7.2):**
+  Signature is never a boss action (every boss authors its 1–3 options
+  from Strike, Reposition, Shed and Command; floor 1: Reposition, Shed,
+  Command); Shed ends only a condition on the boss at the start of the
+  round; no two boss actions on the same unit in one round; none on a
+  unit in a live Gambit footprint (M3); a forced spend before the boss's
+  turn; and **Upended**, a boss state from a Device's Expose payoff (no
+  boss actions until the end of the boss's next turn, once per phase,
+  applied whatever its save or a Prone immunity), which with the denial
+  budget are the only boss-action denial sources; not yet ruled.
+- **Pending request (BR-21, M2; boss rooms design 4.8.2):** "party
+  units" in the count is read as non-Downed party units at round start;
+  not yet ruled.
+- **Pending request (BR-41, M3 option; boss rooms design 7):** each
+  boss-action option carries one Prompt on the unit whose turn just
+  ended, gated on `ThreatMix`; not yet ruled.
 
 **Phases:**
 
@@ -3172,6 +3262,23 @@ immunities, never `goad` (Challenged is the tank's settled tool).
   announced one round ahead, never on the Clearway, and proven in both
   states by V9 (room terrain design 6.11) **(change TR-16)**; at M3 it may
   also create a Remnant (room terrain design 6.6, 6.11) **(M3; agreed, Q5)**.
+- **Timing of (d) and (e) (change BR-10; boss rooms design 4.3.4; M2):**
+  an entry in round R is announced at once and resolves at step 1 of
+  round R+1's arena round-end step (hazards design 6.3's round-end Dream
+  step). At most one headline (a due (d) arrival, a due (e) change, a due
+  Stir act or a live Gambit) is announced and unresolved at a time; the
+  newer one slips, and a headline takes at most 2 rounds of delay in
+  total.
+- **Pending request (BR-9, BR-11, BR-12, M2; boss rooms design 4.4,
+  4.5.2, 4.5.3):** triggers stay HP-only; the last threshold (50% on
+  floor 1, 33% on floors 2–5) uses only (a), (d) or (e), (b) and (c) only
+  at 66%; phase marks show their change type from turn 1 (13.1); a (d)
+  reserve waits in a visible, inert reserve socket in the arena, never
+  acts in its arrival round and rolls initiative as a joiner (12.4 item
+  4) in round R+2; reserves count in **AddCap** (non-boss hostile units in
+  the arena ≤ arena party size + 1 *(illustr.)*), trimmed with the cost
+  buying Few-and-Strong, never trimming the last non-fearless group; not
+  yet ruled.
 - **Never on entry:** regain HP or pips, or refresh uses.
 
 **Boss state belongs to its life, not the fight** **(change A-4)**:
@@ -3185,6 +3292,13 @@ immunities, never `goad` (Challenged is the tank's settled tool).
 - Retreat-rest-return therefore costs the party supply and keeps the phase
   progress it earned, but it cannot whittle a boss down through repeated
   pokes.
+- **Pending request (BR-6, BR-14, M2; boss rooms design 4.3.1, 4.6):**
+  the life state also holds the Rhythm pointer and any pending signature,
+  Device charges, reserve state and the Rendition; not yet ruled. Beside
+  this rule, segment 9 bans short rests in the Sanctum while the boss
+  lives and holds party per-fight resources across Sanctum combat ends
+  (the ability model and death and healing owners apply it; boss rooms
+  design 4.2.5); this rule is read, unchanged.
 - The exits are never sealed, so fleeing by breaking line of sight still
   works **(settled)**. "Exits" means the arena entrances; the Bossgate to
   the Stairhead behind the arena is not an entrance and opens on
@@ -3192,7 +3306,8 @@ immunities, never `goad` (Challenged is the tank's settled tool).
   FL-6; a clarification)**.
 
 **The arena** is an authored room template stamped into generation; there
-are no separate arenas **(settled)**:
+are no separate arenas **(settled)**; its template grammar and Guises are
+boss rooms design 4.1 (read):
 
 - at least 2 entrances (kept; realised as two dog-leg Arches from the
   Forecourt antechamber, ≥ 5 apart, never Doors, with the symmetric
@@ -3257,6 +3372,10 @@ condition caps (2 per phase kit, 3 across phases). **(lead's call)**
   soldier's Shove.
 - Both signature moves are flagged and announced (13.2): the roar from the
   first turn, the Dazed from phase 2's entry.
+- **Pending request (BR-22, M2; boss rooms design 4.9):** M1 unchanged; in
+  M2 the roar takes `readyAt` 2 (9.3), with the M1 values re-run; if
+  refused, this boss is exempt and its Rhythm opens on the roar; not yet
+  ruled.
 
 ## 18. Later stretch goal: the rival adventuring party
 
@@ -3627,7 +3746,9 @@ The build fails when:
   thief roles; Later affixes; the Feud template; Disarm seizure; oils;
   cursed carried items; multi-square bosses; committed boss signature moves
   (a scripted area marked at the end of the boss's turn, resolving at its
-  next turn start, at most one per boss); the hostile runner role (the
+  next turn start, at most one per boss), pulled to M3 as boss Gambits if
+  their gates pass, else kept here (13.2) **(change BR-32; boss rooms
+  design 4.14.3; agreed, Q3)**; the hostile runner role (the
   non-hostile Windfall runner is pulled to M3: 7.1, 14.5; **change LP-3;
   loot sources design 4.7**); captives as
   next-camp Pledges, never mid-floor joins **(change CMP-10)**; intent reads feeding companion suggestions; **the rival

@@ -1245,7 +1245,13 @@ immunity (the `morale` tag allows none). `mindless` implies `fearless`
   goes to one unit (`graceTarget`); at most 1 Grace per party per floor,
   and past that cap the option converts to its authored fallback gain. It
   ends at the first of: fired, short rest, floor exit, arena seal, so it
-  never fires in the arena. It replaces the unit's boon as C5 says, and the
+  never fires in the arena. The arena seal is `ArenaEngaged` (once per
+  floor), and it is processed again at every arena combat start while
+  `sanctumEngaged` is set, so a Grace taken elsewhere between engagements
+  ends before the arena fight; a Grace cannot be regained in the Sanctum,
+  and there are no Grace exceptions in M2 **(change BR-3; lead's call,
+  approved by the client 2026-11-22; M1/M2; boss rooms design 4.2.1)**.
+  It replaces the unit's boon as C5 says, and the
   card names what it would replace. It is never free and never priced in
   ticks alone; it never heals, prevents a drop, or adds actions. It ships
   in M2 only if EV-11 below is ruled and the F1/F2 death-share gates pass;
@@ -1256,7 +1262,10 @@ immunity (the `morale` tag allows none). `mindless` implies `fearless`
   `eventBoon{payload, trigger: nextCombatStart | nextAttackOrCheck |
   nextCheck | nextHarm, endsOn: [fired, shortRest, floorExit,
   arenaSeal]}` to carry a Grace in the C5 slot, with the arena seal
-  processed before the arena's combat start; and a separate
+  processed before the arena's combat start (from BR-3: at every arena
+  combat start while `sanctumEngaged` is set; `arenaSeal` stays the data
+  id as an alias of `ArenaEngaged`, and display never says "seal"; boss
+  rooms design 4.2.1); and a separate
   `eventRider{condition, trigger: nextCombatStart, endsOn: [...]}` carrier
   for carried riders (Soaked, Oiled, Chilled), outside the C5 slot, so a
   rider cost never replaces a boon; when it fires it is a harmful

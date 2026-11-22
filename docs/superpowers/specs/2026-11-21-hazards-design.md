@@ -769,6 +769,15 @@ in M2 only if the reading-time playtest measures it well under the toy
 | Dare room (M3) | ×2 | |
 | Arena | segment 9, inside RT 6.11 | + at most 1 Stir and 1 Void region (HZ-11) |
 
+**Clock readings from the boss rooms design (change BR-6, BR-32):**
+- **Pending request (BR-6, M2; boss rooms design 4.3.1):** the boss's
+  Rhythm strip is not a clock under "one clock per room": it sits on the
+  plate and initiative entry, not the map, and counts the boss's own
+  turns, not rounds; the HZ owner confirms the reading; not yet ruled.
+- **A Gambit footprint is not a clock (agreed, boss rooms design Q3;
+  change BR-32; M3 gated, else Later; boss rooms design 4.14.3):** it
+  shows no digit or meter on the map and is bounded by OneDueThing.
+
 #### 6.2.2 Room roles
 
 | Role | Rule |
@@ -931,6 +940,21 @@ never more than one new rhythm per floor. If a shared gate fails, both
 fall back to M3. (This document's draft shipped one kind only; that
 left about a third of runs with no Stir at all, against Q1's "one per
 floor".)
+
+- **Pending request (BR-10, M2; boss rooms design 4.3.4):** the round-end
+  Dream step also runs in boss arenas for phase headlines (ENM 17.5 (d)
+  and (e)), independent of the Stir gates, as segment 9's arena
+  round-end step: (d)/(e) headlines resolve at step 1 under OneDueThing
+  and are announced at step 4; if the Dream step does not ship in a
+  wave, the arena round-end step is the step after the last turn-end
+  step of the round, with the same slots; not yet ruled.
+- **Pending request (BR-33, M2g; boss rooms design 4.14.1):** the
+  Precentor's arena may host the Organ Swells, and Madame Ashes's arena
+  Pit Breathes, as that floor's one signature Stir instead of the
+  signature room; "never more than one new rhythm per floor" and the
+  ship gates above are unchanged in wording, with BX8's glance test and
+  `StirRoundsDelta` ≤ 0 added; fallback: the signature room keeps it;
+  not yet ruled.
 
 **The ship gates for the M2 Stir:**
 - **the client's gates (agreed, Q1):**
@@ -1553,9 +1577,9 @@ theme, announced at floor entry) or Nightmare content.
 |---|---|---|---|
 | Choir | High Water ("Spring Tide") | every two fights won | later rooms' Tide starts one band higher (max +1) |
 | Silk | Silence Kept ("Overdue") | every three out-of-combat loud events | Leaning Stacks start one notch lower |
-| Carnival | The Last Evening ("Encore") | every two fights won | Pit period 3 → 2; Act III sets the arena (segment 9) |
-| Gut | Digestion ("Fasting") | each fight that reaches round 6, capped +1 per two rooms | stage 1: Brim period −1 (Peristalsis is exempt: its Lurch floor is 3); stage 2: Pylorus bile phase at 75% (segment 9) |
-| Heart | Nearer Waking ("Fitful Sleep") | `mainPathIndex` past the elite room | Dreamer period 3 → 2 |
+| Carnival | The Last Evening ("Encore") | every two fights won | Pit period 3 → 2; Act III sets the arena (segment 9: it selects the Carnival boss's Act III Guise; boss rooms design 4.14.2, BR-34) |
+| Gut | Digestion ("Fasting") | each fight that reaches round 6, capped +1 per two rooms | stage 1: Brim period −1 (Peristalsis is exempt: its Lurch floor is 3); stage 2: Pylorus bile phase at 75% (segment 9: the Pylorus's first (e) bile set is pre-armed, announced at `ArenaEngaged` and fires at round 2's arena round-end step; its 66/33 thresholds stay and no true 75% threshold is added; boss rooms design 4.14.2, BR-34) |
+| Heart | Nearer Waking ("Fitful Sleep") | `mainPathIndex` past the elite room | Dreamer period 3 → 2 (in a boss arena too, still under OneDueThing; boss rooms design 4.14.2, BR-34) |
 
 **New lead's call:** the Carnival Mood keeps its name "The Last
 Evening" only as the Mood's display line under the Omen "Encore"; the
@@ -1796,7 +1820,9 @@ RT 6.11's caps and phase sockets, under every room rule (one clock per
 room; no Void with a Lurch Stir). Bosses are `noDrop`, are moved by
 Lurch like anyone, and never gain Teetering from Voids or Clutch. Each
 row is one clock **(lead's call, after the check: the proposal's
-paired rows broke the one-clock and Void rules)**.
+paired rows broke the one-clock and Void rules)**. Segment 9's arena
+templates and Guises are authored inside these caps (boss rooms design
+4.1; change BR-1).
 
 | Boss | Arena rhythm option |
 |---|---|
@@ -1807,9 +1833,28 @@ paired rows broke the one-clock and Void rules)**.
 | Madame Ashes | Pit Breathes; or, in an F3 arena only, the Turning Ring (6.2.2), with the pit as static fire on the hub |
 | The Head of the Table | Courses; the final course |
 | The Pylorus | Brim, with the Gullet in phase (e) (no Lurch Stir in a Void arena, so Peristalsis is not used here) |
-| The Night Governess | The Dreamer Turns Over (with Handholds) |
+| The Night Governess | The Dreamer Turns Over (with Handholds). **Tone flag (change BR-30; boss rooms design 4.13):** the name goes to the tone-by-depth review with the rule card's fiction line "The bed heaves"; suggested fallback display name **"The Bed Turns Over"** (HZ owner decides) |
 | The Rousing Engine | The Alarm Clock made boss |
-| The Master in the Frame (Kennel, F1) | The Kennel gate (segment 9) |
+| The Master in the Frame (Kennel, F1) | The pen bar (segment 9; the "kennel gate" renamed, a two-state piece on the Whelping Pen, not a Portal; boss rooms design 4.7.1, change BR-16) |
+
+- **Pending request (BR-33, M3; boss rooms design 4.14.1):** the rows
+  for the other bosses: the Thing in Cell Zero, Old Ragged, the Weaver
+  of the Index, the Strongest Man, the Appetite and the Guest of Honour
+  / Executor have no arena clock; the Master in the Frame's pen bar
+  becomes the arena's one clock as a **Landmark tick** (a door on a
+  3-round dial; the pen bar can be dropped only while the pen stands
+  open; harmless, HT7). Where a row's Stir ships in an arena, one
+  non-hard-control boss signature may be **Keynote-bound** (ready only
+  in the round after each strike); a boss on its own due squares takes
+  the act and is **Overtaken** (its bound signature misses its next
+  window, once per phase, no pip loss). The Heart Act Keynotes keep
+  their own gates; no Pit Breathes row for the Strongest Man; not yet
+  ruled.
+- **Nightmare tiers (change BR-34; M3; boss rooms design 4.14.2):** at
+  tier 2, F2+ arenas gain their row's clock (or a Gambit, BR-32); the
+  F1 arenas use a Rhythm or formation change only. Bosses escalate in
+  kind through a Nightmare Rendition; HP, damage, pips and thresholds
+  never change.
 
 ### 6.18 Previews and UI (change HZ-29)
 
@@ -1902,6 +1947,10 @@ floor-1 theme has one damaging package at any tier.
   harm square at M3, Nightmare tier 2+ only **(told plainly)**. RT
   19.2's Briar (Bleeding vines in the Kennel) stays its own future
   question.
+- **Pending request (BR-22, M2; boss rooms design 4.9, a reading of
+  HZ-25):** the F1 boss arena takes no hazard at any tier: these tier-2+
+  packages never pick the arena; it may hold its one Landmark tick from
+  M3 (the Master's pen bar only, 6.17); not yet ruled.
 
 ---
 
@@ -2222,7 +2271,9 @@ pincushion faces); bedsheet squares if RT-14 keeps them.
   - **Gate:** a hero-to-monster Prone ratio ≤ 1.2; otherwise it moves to
     Nightmare tiers.
   - The breath cue; the mattress heaves only during the act (8); never
-    a body (RS 7.5).
+    a body (RS 7.5). The dry-breath family stays this Heart Stir cue in
+    the final-boss arenas too, never in a bed or ambience stem (boss
+    rooms design 4.13; change BR-30, read).
 - **The Alarm Clock.** A Stir with a 6-round countdown (`firstAct` 6,
   `maxActs` 1). Its footprint is the ring of 3 around the clock (under
   the 6.3 exclusions): units on it make Will or are Dazed. The same act
@@ -2768,7 +2819,7 @@ M3 instead; the client is told (19.2).
 | 6 Encounter placement | Start sockets outside footprints and Tide states at fight start; ≤ 2 starts within 2 of a Void edge; ≤ 1 flyer, ≤ 1 shover type and ≤ 2 shover units within 4 of a Void edge in Void rooms; the `usesCords`, `singer` and Stoker tags; Wake candle racks on Dormant groups (index ≥ 3, ≤ 1 per room); Dare garrisons; the mindless share (the enemies owner). **Filled by the encounter placement design (6.1 exclusions, 6.6.8 Terrain Pairings, 6.13):** the guarded Dare garrison is the floor's Annex (change EP-26; agreed, Q2; M3) | Who starts where |
 | 7 Loot | Fallen loot on the edge; Dare containers (+1 rarity step); no item loss. **Filled by the loot economy design (6.9, 6.14; change LE-10; M3):** the Dare cache is an SR5 step socket under the one step rule; fallen loot on the edge, no item loss (7c). **Changed by the loot sources design (4.7.7; change LP-2; agreed, Q1; M3):** the sole exception is that a Windfall's card and coin leave the floor when its shown count ends (`ItemDestroyed{gotAway}`); kill method, damage, terrain, traps, locks and force still never destroy loot | Containers and contents |
 | 8 Events | Unguarded Dare forms; Moods on the Stratum Card; empty Tide naves as non-combat puzzles; the Gaol's small hours. **Filled by the events design (4.2, 4.9, 4.13; changes EV-31, EV-35):** no Curiosity is placed in a Dare or Wager room, which stays segment 4's (M2); segment 8 places no Landmark and no clock Landmark: FL owns the sockets, segment 4 the ticks (EV-35; M2); no Mood on the Stratum Card in M2, handed to segment 10 and segment 4, and in M3 an Omen card's cost may be the named, visible event that advances a Mood within 6.9's cap (EV-31; M3); empty Tide naves are not M2 Curiosities, and an empty nave may be an M3 Curiosity host only if segment 4 offers it (**open item**, segment 4's to offer; M3 option); the Gaol's small hours are a Glimpse and Retelling motif only, no rule (events design 5.3; M2) | Event content |
-| 9 Boss arenas | 6.17: one clock and one Void line per arena inside RT 6.11, under the room rules; `noDrop`; the boss Teetering guard; counterplay identities kept | Interiors, counterplay, phases |
+| 9 Boss arenas | 6.17: one clock and one Void line per arena inside RT 6.11, under the room rules; `noDrop`; the boss Teetering guard; counterplay identities kept. **Filled by the boss rooms design (4.1, 4.7.1, 4.13, 4.14; changes BR-1, BR-16, BR-30, BR-32, BR-34):** arena templates inside the 6.17 caps; bosses `noDrop` (read); the Kennel gate renamed the pen bar; the Governess row's tone flag; the Gambit footprint not a clock (M3 gated); Mood readings (M3). **Pending requests (BR-6, BR-10, BR-22, BR-33):** 6.2.1, 6.3, 6.17, 6.19 | Interiors, counterplay, phases |
 | 10 Exploration and UI | Stir rule cards on reveal; due overlays; countdown glyphs; the menu card; Snag glyphs; Portal hazard and Dare signposts; Listen hears tells; Plunge links | Overlays and UI |
 | 11–12 Seeds and validation | The `hazards` stream; V10; `hazardDigest`; save fields; reports and arms | The stream tree, release seed set, retry logging |
 | 2 Floor layout | Plunge as a Chute skin with an LG14 exception; the Hinge and Postern radius; the sluice-wheel piece reading | Graph invariants |

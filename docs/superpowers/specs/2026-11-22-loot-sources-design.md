@@ -512,7 +512,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 | **The Dream's Due** | **First HE-7 in main-path order**, with the DH block | No special host (CT6). Hover "The dream's due: for <name>" |
 | DH HE-3/4/7 | Layout reservations (7c never moves them) | Plain, no check |
 | **Viaticum (F5)** | **The lair room's host socket (kind `viaticum`, replacing `lairContainer` on F5), exit side toward the Forecourt, outside the start zone, on the walk line** | **A reading** of LE 6.11 item 5 (its fallback is the real rule, because nothing lies between L and F on F5). The FL and ENM owners confirm (LE 18.2). Opens the width-3 offer UI. Host skin: the Bedside Stand (LP-14; **agreed, Q5**) |
-| **Signature cache** | In the boss's arena, for `guarded` forms (a reading: IR 4.13 and 4.18's "the lair of every boss" means the boss arena, not FL 6.5's L room; 13, lead's call, after the check) | ≥ 3 squares from both entrance Arches, outside the boss start zone and arena-clock footprints, visible from the entry. Barred until `BossResolved`. Segment 9 owns the final square |
+| **Signature cache** | In the boss's arena, for `guarded` forms (a reading: IR 4.13 and 4.18's "the lair of every boss" means the boss arena, not FL 6.5's L room; 13, lead's call, after the check; confirmed by segment 9, boss rooms design 4.11.1; BR-27, M2) | ≥ 3 squares from both entrance Arches, outside the boss start zone and arena-clock footprints, visible from the entry. Barred until `BossDefeated` (`BossResolved` is its alias; boss rooms design 4.2.4; BR-37, M2). Segment 9 owns the final square: each arena template's `cacheCandidates[]` applies these filters (boss rooms design 4.1.1) |
 | Boss card, Memento | Screens | No placement |
 | Coin pool, lumps | By weight: SR0 1, SR1 2, SR2 3, SR3–5 4 | **Windfall: weight-3 share, never a K2 lump** (toy: a lump fails `StealCoinShare` at 45%). Carved in LootBind step 7, after the Windfall is final (4.3) |
 | Heavy Purse | LE 8.3 chain | Never on the elite or a Windfall |
@@ -531,7 +531,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 | Carried | ENM glint, purse badge, key pip (≤ 2 plate marks) | "Carries: …" | Use reveals the item |
 | Elite | Item shown in use | — | Elite intel line |
 | Wager / Dare | Portal glyph, Listen, Stratum line, prize through the Grille | Offer card tier marks | — |
-| Signature cache | Barred lid, item-icon plate | "Guards: <name>" | Opens on `BossResolved` |
+| Signature cache | Barred lid, item-icon plate | "Guards: <name>" | Opens on `BossDefeated` (`BossResolved` is its alias; BR-37) |
 | **Truant (M3)** | Unit plate with the **Windfall mark**; Dormant glyph; digit at its start value on a hollow floor ring | "Carries: <tier word> <fine-category noun> and coin · runs when a fight starts · gets away in <c0>"; the scurry trail and Rathole decal | Awake: digit on a solid floor ring and the Dream card; next hop outlined |
 
 - **Truant hover (lead's call, after the check).** `<c0>` is the displayed start digit, 3 (`WindfallInstance.c0`); held steps from a Surprised start or the solo arm show as a "held" badge, never a higher number (4.7.4). If the live party falls below the allowed size, the hover drops "runs when a fight starts · gets away in …" and reads "Carries: …" only, and the Stratum suffix is dropped for that floor.
@@ -576,7 +576,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 
 **Glean** (LP-9; M2, optional; lead's call).
 - **When:** out of combat, in a room with no awake un-Cowed hostile in sight. One click opens every **visible Plain unlocked** container in `socketId` order into **one merged summary** (still one screen, ITEMS 8.1). Each open routes per TL 6.13.
-- **Excluded:** locked, Catch or consequence containers, bait caches, Twin Coffers, Wager and Dare prizes, the signature cache before `BossResolved`, Windfalls, and the Viaticum and any other container that opens an offer UI (it cannot join a merged summary; added after the check).
+- **Excluded:** locked, Catch or consequence containers, bait caches, Twin Coffers, Wager and Dare prizes, the signature cache before `BossDefeated`, Windfalls, and the Viaticum and any other container that opens an offer UI (it cannot join a merged summary; added after the check).
 - **No-leak rule (Model C):** an **unmarked boxed-lurker host is included**, because it reads as Plain. If Glean reaches it, it springs exactly as a single open would, and Glean stops with the rest unopened. Glean never reveals what a single open would not (V15 `GleanNoLeak`).
 - **Also stops on:** a new Revealed or Hunch result, a noticing roll, or a patrol forecast crossing within 2 ticks.
 - Told plainly: the toy saving is about 0.25 clicks per floor. Glean ships only if playtest shows players want it.
@@ -873,8 +873,8 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
   - **Scale and open act (lead's call, after the check).** The proposal's "child-scale" means the scale of a child's furniture to a unit, never the Heart's giant nursery scale: it fits one square, stands below unit shoulder height, and has three short drawers stacked on legs with an open underside, so it never reads as a Tall piece (ROOM's wardrobe and block tower). Its open act: the three drawers slide out together in ≤ 1.0 s, then the width-3 offer UI opens; the opened state shows three empty drawers. **The Heart's drawer-slide Latch skin is banned from every F5 lair room**, and the role-ID gate adds "Bedside Stand or Latch, Furnishing".
   - **The Bedside Stand silhouette hosts only the Viaticum** **(new lead's call)**: no other container, Furnishing, piece or Keepsake on any floor uses it (V15s `BedsideStandOnly`), so the exception never leaks.
   - The lean band is computed with the Viaticum counted in every arm, stealth or fight (CB10).
-- **Signature cache.** One per guarded-form boss, in its arena, per 4.4. Unranked, never locked or trapped, holds nothing else, opens on `BossResolved`.
-- **Armed boss:** carries its signature. **Boss card:** C/U/R/R on F1–F4, separate screen. **Memento:** victory screen.
+- **Signature cache.** One per guarded-form boss, in its arena, per 4.4. Unranked, never locked or trapped, holds nothing else, opens on `BossDefeated` (boss rooms design 4.2.4; BR-37, M2).
+- **Armed boss:** carries its signature. Segment 9 authors each boss's `armed` flag and issue gear so a carried form is the piece the boss visibly uses, chassis only; no second form is chosen on F5 (boss rooms design 4.11.1; BR-27, M2). **Boss card:** C/U/R/R on F1–F4, separate screen. **Memento:** victory screen.
 
 ### 4.11 Determinism (lead's call; LE 6.10, RS 6.4)
 
@@ -921,9 +921,9 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
     - `stepFunded`, a LootBind flag for priced extra routes to unstepped ordinary locks (4.3; events design 4.4.5; EV-15, M2). If refused: no priced lock routes (events design 14.2).
     - F-CACHE, a fact naming the contents of one optional, unstepped, non-HE, non-Due container, counted as exposure under LE 6.9 and respecting CT2 `ContainerArtBlind` and the `known` field (events design 4.4.1; EV-7, M2; with the LE owner). If refused: S2 gains F-ROOM (events design 14.2).
 - **Segment 9 (boss rooms).**
-  - The signature cache's arena square list, using 4.4's filters, and confirmation of the reading that IR 4.13 and 4.18's "lair of every boss" means the arena (13).
-  - The boss card screen and the Memento.
-  - No Windfall or other loot clock in arenas, the Antechamber or the Sanctum.
+  - The signature cache's arena square list, using 4.4's filters, and confirmation of the reading that IR 4.13 and 4.18's "lair of every boss" means the arena (13). **Answered:** `cacheCandidates[]` per arena template (boss rooms design 4.1.1); "lair = arena" confirmed (boss rooms design 4.11.1; BR-27, M2).
+  - The boss card screen and the Memento (boss rooms design 4.11.2).
+  - No Windfall or other loot clock in arenas, the Antechamber or the Sanctum. **Answered:** no Windfall in arenas (boss rooms design 11).
   - The Viaticum sits in the lair before the Forecourt.
 - **Segment 10 (UI).** 4.12.
 
@@ -1462,7 +1462,7 @@ Applied on 2026-11-22, when the client approved this document. **This document e
 - "Nothing timed in M2" holds: the Windfall is M3 (RT 0.1 item 5, RT Q5, TR-27, HZ-12).
 - The latent step-6 shuffle issue for secret filter (b) and the quota card is pre-existing (LE 6.9 item 2; LE owner).
 - "Lair cache" in LE 6.9 item 1 and LE 6.14 means the *elite room's* SR4 cache; the main-path lair's SR0 container is `lairContainer` (told plainly).
-- **(Added after the check.)** "The lair of every boss" in IR 4.13 and 4.18 means the boss's **arena**, not FL 6.5's L room, which 7c uses for `lairContainer` (IR owner and segment 9).
+- **(Added after the check.)** "The lair of every boss" in IR 4.13 and 4.18 means the boss's **arena**, not FL 6.5's L room, which 7c uses for `lairContainer` (IR owner and segment 9; confirmed by segment 9, boss rooms design 4.11.1; BR-27).
 - **(Added after the check.)** The bait cache and its placement are M2, with the Mousetrap (EP 6.8.1, LE 6.9 item 6, LE-20); the proposal's M3 wave was an error, not a change.
 
 | # | Document / section (current status) | Change | Flag | Approval | Wave |
@@ -1694,7 +1694,7 @@ The owed rows are the single list in 13; by owner:
 - **Dungeon generation 7b (IR):** LP-13, LP-14.
 - **The companions owner:** LP-8 (7.4), LP-33 (8.6).
 - **The class owners:** `ignoresWindfall` (V15s).
-- **Segment 8 (events), segment 9 (bosses), segment 10 (UI) and audio:** 4.12, 4.13, 6; segment 8's no-clock-Landmark rule in Windfall rooms; segment 9's arena reading. Segment 8 is now designed (events design, approved 2026-11-22): its EV-2, EV-7, EV-15, EV-21, EV-25, EV-35 and EV-42 rows touch 7c (4.13); `stepFunded` and F-CACHE are pending requests to 7c.
+- **Segment 8 (events), segment 9 (bosses), segment 10 (UI) and audio:** 4.12, 4.13, 6; segment 8's no-clock-Landmark rule in Windfall rooms; segment 9's arena reading. Segment 8 is now designed (events design, approved 2026-11-22): its EV-2, EV-7, EV-15, EV-21, EV-25, EV-35 and EV-42 rows touch 7c (4.13); `stepFunded` and F-CACHE are pending requests to 7c. Segment 9 is now designed (boss rooms design, approved 2026-11-22): its BR-27 and BR-37 rows touch 7c (4.4, 4.10, 4.13).
 - **Segment 11 (seeds):** the `windfall` grandchild (LE 6.10 item 1's new row), SocketPlan, step 8 and LootBind's sub-order in the frozen generation order (LE 6.10 item 4).
 - **Segment 12 (validation):** V15 and the 7c reports.
 - **The camp and hub design:** Lost Property; the Hawker's Hour with segment 8 (Later; events design EV-42).

@@ -826,12 +826,30 @@ concentration and keeps its initiative slot **(settled, conditions
   Scarred on the first downing of the floor. It does not increment
   `medicineGetUpsThisFight`, which is read only while `combatActive` is
   true and resets at combat start.
+- **One fight in the Sanctum (change BR-31; M2; lead's call, after the
+  check; told plainly, confirmed by the client 2026-11-22):** while
+  `sanctumEngaged` is set and the boss lives, a combat end in the Sanctum
+  does not end the fight for Medicine: the next combat start there does
+  not reset `medicineGetUpsThisFight`. It resets at `BossDefeated`, or at
+  the first combat start after the party ends a combat outside the
+  Sanctum. This closes the threshold dip (step out through an Arch, come
+  back with Medicine ready). If refused, no rule, and `ThresholdDipRate`
+  is reported beside `BossCheeseRate` (boss rooms design 4.2.5, 14.2).
 
 ### 11.3 Order at rest completion
 
 **(lead's call; change DH-12)** Get up → Treat attempts → Recovery +
 Medicine bonus → `rest` pools reset → Slot Recovery. A fresh Scarred from
 this get-up can be Treated at the same rest.
+
+**Sanctum rest rule (agreed, boss rooms Q2; change BR-31; M2):** a short
+rest is refused while `sanctumEngaged` is set, the boss lives and any
+party unit stands on a Sanctum square (Forecourt, arena, Stairhead); rest
+is party-wide, so one unit there blocks it. Rests before the first
+`ArenaEngaged`, and elsewhere on the floor, stay legal. A location ban,
+not an awareness reading: combat end and the enemies' A-4 reset are
+untouched. The Rest button shows the rule as its unusable reason, never
+hidden (boss rooms design 4.2.5).
 
 ### 11.4 A Downed unit is inert
 
@@ -1707,6 +1725,11 @@ seen patrol routes (encounter placement design 6.20, 6.21).
   encounter placement owners, not loot (loot economy design 6.9 item 8).
 - **Wager rooms (M3; change TL-29):** `WagerDeathShare` is reported
   against these targets (traps and locks design 6.15).
+- **Boss rooms (change BR-40; M2; the DH owner confirms the bands):**
+  `BossDeathShare` per 100 arrivals feeds these targets: F1 ≤ 2.5 (a
+  simulated gate, per Rendition); F2 3–7; F3 7–15; F4 11–23; F5 27–40;
+  the floor-1 solo boss reported separately (21.5; boss rooms design 4.9,
+  9.3).
 - **Curiosities (changes EV-3, EV-12; M2):** floor-1 hero deaths stay
   under 5% with Curiosities on. `EventDeathShareDelta` (novice arm,
   events on minus off) ≤ +0.5 pp on F1 at party 1 (EV-3) and, for
@@ -1809,7 +1832,8 @@ save hash covers both files.
 - `currentHp` per unit;
 - `downedThisFloor` (existing);
 - `downingCountThisFloor` (for the Weary lever);
-- `medicineGetUpsThisFight` per unit (reset at combat start);
+- `medicineGetUpsThisFight` per unit (reset at combat start, except in
+  the Sanctum under 11.2's one-fight rule; change BR-31);
 - `dropPreventionFiredThisFight` per unit (reset at combat start);
 - `heroPotionTopUpPending` on the camp state (13.2);
 - a Downed companion's body: its square, or `carriedBy` (11.4);
@@ -1876,6 +1900,8 @@ for tick batches, whose chain already ran where the damage landed.
   `medicineGetUpsThisFight` read this flag.
 - **At combat start:** `medicineGetUpsThisFight` and
   `dropPreventionFiredThisFight` reset; carried bodies are placed (11.4).
+  `medicineGetUpsThisFight` does not reset in the Sanctum under 11.2's
+  one-fight rule (change BR-31; M2; boss rooms design 4.2.5).
 - **Combat end, in order:**
   1. the current unit's turn-end step (conditions 5.5);
   2. `combatOnly` instances end;
@@ -1966,6 +1992,10 @@ for tick batches, whose chain already ran where the damage landed.
    boss's real ceiling. Floor-1 Curiosities leave its inputs unchanged
    (change EV-3; M2); it is re-run when Graces ship (change EV-12; events
    design 4.4.3, 4.6).
+   *Pending request (change BR-22; M2; the DH owner rules):*
+   `guard.floor1BossRounds` is set to the measured p90 floor-1 boss fight
+   length, bounded by the floor-1 length target at 8 rounds, so the check
+   reads the fight that actually happens (boss rooms design 4.9 item 5).
 
 The 6.4 guards are still computed **without** any party consumable or
 talisman (consumables 14.9) **(settled)**; only step 6 reads them, and it
@@ -2081,7 +2111,7 @@ parties on floors 2–5.
 - Healing available per floor ÷ party max HP, with a `levelUpHp` column
   (non-guaranteed).
 - **Boss fights:** potions drunk per fight; fights that needed more than 4
-  heals; the floor-1 solo boss separately.
+  heals; the floor-1 solo boss separately (boss rooms design 9.3).
 - Companion downings per fight and per floor; Medicine get-ups per fight;
   the share of enemy turns spent on units at 1–3 HP.
 - Death-warded and phial fire rates; same-fight deaths after a save; runs

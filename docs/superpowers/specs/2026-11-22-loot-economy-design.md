@@ -849,6 +849,8 @@ premium and is logged; its VP is unchanged.
   wands; the talisman from F3, **settled**). Counted in Ledger B and
   toward family caps once taken; outside Ledger A and the
   3-per-encounter cap (ENM 15.1, kept). No final-boss card (6.11).
+  Offered in the arena after `BossDefeated`, beside the opened cache
+  (read unchanged by the boss rooms design 4.11.2; change BR-28).
   - **Usability (lead's call, after the check).** "Usable" reads the
     party snapshot at generation (camp exit), the only party state any
     draw may read; a death on the floor does not re-roll the card. Outside
@@ -1520,7 +1522,10 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      interrogation, Curiosities, Fragments, Parting Words and the Tithe
      Bowl); if that fact is already known, the line takes the next
      unknown instance by the ledger's fall-through (change EV-8; M2;
-     events design 4.4.2). Surfaces in 6.15.
+     events design 4.4.2). Surfaces in 6.15. The intel line stays first
+     in each floor's `bossQueue`, ahead of the Rendition, Guise,
+     formation and Lore facts (read unchanged; change BR-29; M2; boss
+     rooms design 4.12).
    - **Wager (M3):** 3 distinct records at the stepped tier, at most 1
      VR, the others fit premiums; counts 1; pips grade width (approved).
      It takes the locked-or-trapped quota first (6.4 item 9).
@@ -1813,6 +1818,10 @@ matter".
      (`ItemDestroyed{dreamedAway}`).
    - **Report:** `ViaticumBossShare`, read against CN 19.3's 25% alarm on
      scroll-and-bomb boss damage.
+   - **Boss side (read; change BR-28; M2; boss rooms design 4.11.2):**
+     every final Rendition is simulated with each of the three Rare
+     tools held in turn; each final boss's 33% (d) arrival is clustered
+     so area tools score; no final boss is damage-immune (BR-20).
    - **Later (7b content):** arena-keyed single-use tools ("only in the
      Heart's arena") are the cleanest anti-hoard shape; not adopted now.
 6. **Effect:** the Last Hollow (camp 4) is the deliberate spend-down camp.
@@ -1845,6 +1854,10 @@ matter".
   "switching Two Doors on changes no seed", RS 6.4) **(drawn from M2:
   lead's call, after the check)**. On a floor entered through the
   Perilous Door, that floor's camp card reveals the fourth option.
+  On that floor the boss uses its Nightmare Rendition one tier up (cap
+  3), never an extra boss action, and the Stratum Card and Playbill show
+  it before commitment; this design's 1-of-4 card is read unchanged
+  (change BR-34; M3; boss rooms design 4.14.2).
   **The fourth and memory (change IR-6; agreed, item rolls Q2; M2):**
   the fourth is drawn by the Wayward rule, never a `oncePerRun` record
   (it might never be presented), and it writes Scion-line memory and
@@ -2521,7 +2534,7 @@ shop presentation and camp sinks (camp and hub); the display (segment
 | **7c, sources and placement** | Socket tags and ranks (the input to 7a's allocation, 6.9 item 2); lump placement; the Viaticum room; Twin Coffer placement; trimmed-floor sockets; per-encounter caps; trimming containers on F5 and on coin overflow (6.4, 6.14). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 11)** |
 | **Camp and hub** | Shop presentation; the camp reward card's content; vendor stock scaling; the Wish, the Tithe Bowl, the Ferryman's Note, Blood Price; the coverage targets as design intent |
 | **Segment 8 (Dream Fragments)** | The boss-fact family the elite intel line shares. **Taken up by the events design (segment 8, approved 2026-11-22; changes EV-7, EV-8, EV-15):** the per-floor FactLedger (6.9 item 6); its pending requests to 7a and 7c, `stepFunded` and F-CACHE, stay open (events design 4.4, 11) |
-| **Segment 9 (bosses)** | Signature records; the Memento card |
+| **Segment 9 (bosses)** | Signature records; the Memento card. **Taken up by the boss rooms design (segment 9, approved 2026-11-22; changes BR-28, BR-29, BR-34, all reading this design unchanged):** the card, Viaticum and Memento interplay (its 4.11.2); the `bossQueue` order behind the elite intel line (its 4.12); the Perilous Door's Nightmare Rendition beside the 1-of-4 card (its 4.14.2; M3) |
 | **Segment 10 (UI) and audio** | The Stratum Card order, the floor strip, tier marks, plate loot badges, the Steal preview, the Dream's Due tags, the Viaticum offer UI, the camp-4 warning, ledgers, tags, the audio stings (6.15) |
 | **Segment 11 (seeds)** | The `lootPlan` derivation and keyed grandchildren, the draw table (6.10 item 1), step 3a and the LootBind position, the ghost and dummy draws, the atomic commit |
 | **Segment 12 (validation)** | V13s, V13g, the (m) integration test, and the reports |

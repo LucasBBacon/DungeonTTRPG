@@ -1809,7 +1809,11 @@ counted in `StealthOpenable`. Its XP stays in the pool (`SkippablePool`,
   party sees where a joiner would come in, and Set and Hold the Line has
   a door to hold.
 - **No off-map reinforcements on any floor.** Boss reserves stay with
-  segment 9 (ENM 17.5).
+  segment 9 (ENM 17.5). **Reading (BR-11; M2; pending the EP owner's
+  confirmation, with the enemies owner):** segment 9's reserve sockets
+  keep this rule and `ArrivalThroughPortal`, because the (d) reserve
+  units wait inert inside the arena from reveal and are already in the
+  room; a socket is not a Portal (boss rooms design 4.5.2).
 
 ### 6.13 Hand-offs to traps and locks (lead's call; EP-25, EP-26)
 
@@ -1916,6 +1920,18 @@ no elite. Keepsake slot dressing (RS 9.3) is never a table socket.
 **Rival Party fit** in elite templates (FL 13): a Later stub (EP-34), so
 the hand-off is not lost.
 
+**Pending request (BR-19; M2):** the boss rooms design asks the EP owner
+to change "Boss Court escorts use Retinue" to "Boss Court escorts use
+segment 9's `ArenaFormation`s; EP's Retinue is one allowed shape on
+F2–5" (2–3 authored formations per boss, each pinned by a Rendition).
+This rule stands until the EP owner rules; if refused, arena formations
+are authored as Retinue variants inside this shape on F2–5 (boss rooms
+design 4.5.1, 14.2). **Agreed (Q4 of the boss rooms design,
+2026-11-22; BR-19, narrowing HR-21; M2):** on F2–5 every Boss Court
+formation, at every party size after AddCap, holds ≥ 1 non-fearless
+escort or reserve group, in the escort at fight start wherever the
+escort budget allows (boss rooms design 4.5.1, 4.7.4).
+
 ### 6.15 AI hand-off (summary)
 
 | Datum | Read by | Rule |
@@ -1936,7 +1952,11 @@ Each formation record carries an `answers{shade, vanguard, arcanist,
 herald}` field naming each class's lever. **A formation may leave at
 most one class without a lever**, and a per-floor V12 assertion requires
 each class to have a **showcase** (a formation whose written counter is
-its lever) on ≥ 1 main-path fight on F1–3 (XF8).
+its lever) on ≥ 1 main-path fight on F1–3 (XF8). **Extended to bosses
+(BR-19; agreed, Q4 of the boss rooms design; M2):** every boss authors
+one answer window per launch class in segment 9's `BossAnswerMatrix`,
+which V17 checks; the Herald row on F2–5 is the non-fearless Boss Court
+group of 6.14 (boss rooms design 4.7.4).
 
 | Class | Levers placement guarantees | Watch |
 |---|---|---|
@@ -2881,7 +2901,7 @@ sockets and pieces (RT); hazards (HZ); traps, locks and `trapsResolve`
 |---|---|
 | **7 Loot** | Carriers on sockets the party can reach for Steal (never a nook; never a ward behind two fronts on F1–2); the Champion notable; the bait-cache prop family (CT1, LP-15; re-skins LP-16 pending; loot sources design 5.1, 5.3); activity containers (a dice pot, a feast plate); Annex prizes (none of its own: loot economy design 6.9 item 1); boxed-lurker contents (loot economy design 6.9, LE-20). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 4.8, 5)** |
 | **8 Events** | Activity vignettes in Q rooms ("remains of a revel"); no event spawns or moves units; Cowed kneeling never crosses a door. **Taken up by the events design (segment 8, approved 2026-11-22; its 4.13):** vignettes are Glimpse dressing beside the Q room's Curiosity, under RC1+, never a second decision (M2); "no event spawns or moves units" is held: Curiosity noise is generic noise that moves units only through the hearing rules, never a Lure and never sets `luredThisFloor` (EV-14, a reading pending the EP owner's confirmation, with the enemies owner; M2); figures are framed non-unit map objects, never on a walkable square (events design 4.11; EV-45; M2 implied figures, M3 frame); M3 Overtures may apply Soaked, Oiled or Revealed to a tied group at its fight's first round, never on the elite, the Annex, the boss or a lurker host (for Revealed) (EV-32, a reading of this row pending the EP owner, enemies owner request; M3; events design 4.9) |
-| **9 Boss arenas** | Retinue escorts, arena start zones ≥ 9, the patrol joiner, Keepsake dressing |
+| **9 Boss arenas** | Retinue escorts, arena start zones ≥ 9, the patrol joiner, Keepsake dressing. **Taken up by the boss rooms design (segment 9, approved 2026-11-22; its 4.5, 4.7.4):** arena escorts use segment 9's `ArenaFormation`s, Retinue one allowed shape on F2–5 (BR-19, a request pending the EP owner, 6.14; M2); every F2–5 Boss Court holds ≥ 1 non-fearless group (agreed, Q4; M2); `answers{}` extended to bosses as `BossAnswerMatrix` (BR-19, 6.16; M2); reserve sockets read as keeping "no off-map reinforcements" and `ArrivalThroughPortal` (BR-11, a reading pending the EP owner's confirmation, 6.12; M2); the patrol joiner joins under the 1/1/2/2/2 caps and counts in AddCap (BR-13, an FL-21(e) proposal the enemies owner rules) |
 | **10 Information** | Formation and Keystone chips (`ChipNoLeak`; the read-surface table of 6.20); the Read card; the Perception hold overlay; the Lore counter line; the Listen activity word and watched Portal; Spoor marks; arrival-Portal arrows; the seen-tell band marker (6.20); rest-preview movers; the Lore roster preview of formations; "Line broken" and "Caught facing the door" |
 | **11 Seeds** | The `encounters` node, its draw table, the `retry1` child, the per-band `lurkStealth` keys |
 | **12 Validation** | V12, the reports, the CMP-8 tests extended to formations and the solo column |
@@ -3455,6 +3475,13 @@ wave or a later design triggers them; each fallback is a new lead's call
   enemies owner refuses EV-14, Curiosity noise prices become bound tick
   costs and the events design re-prices (events design 14.2); if EV-32
   is refused, no Overtures ship.
+- **Pending from the boss rooms design (segment 9, approved
+  2026-11-22):** the EP owner rules BR-19's 6.14 request (segment 9's
+  `ArenaFormation`s, Retinue one allowed shape on F2–5) and confirms
+  BR-11's reading of 6.12 and EP-16 (reserve sockets are already in the
+  room) (M2). If the 6.14 request is refused, arena formations are
+  authored as Retinue variants inside 6.14's shape on F2–5 (boss rooms
+  design 14.2).
 - **At M3:** the approach band out of combat (EP-41); two-group "watched
   sleep" rooms.
 - **Later:** the Errant (a MAIN 4.3 change, client only); a Rumour-like

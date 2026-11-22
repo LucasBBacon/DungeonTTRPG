@@ -1403,7 +1403,14 @@ It needs no expertise and does not depend on healing **(lead's call)**.
     `F1EscortBreakable` (every escort and reserve group of its floor-1
     bosses drawn from non-fearless types) and a passing reference-arm
     `Floor1ClassSpread` in its split (run structure design 8.2; change
-    RT-9, approved by the client 2026-11-21).
+    RT-9, approved by the client 2026-11-21). **Narrowed for floors 2–5
+    (M2; change BR-19, agreed by the client 2026-11-22, boss rooms Q4):**
+    every F2–5 Boss Court, in every formation at every party size after
+    AddCap, includes at least one non-fearless escort or reserve group
+    (all members non-fearless types; `mindless` types and the patrol
+    joiner never count), placed in the escort at fight start wherever
+    the escort budget allows; checked by V17s (i) `BossCourtBreakable`
+    (boss rooms design 4.7.4).
 - **Levers if the spread misses,** in order (never healing; never asking
   the generator for a non-fearless boss):
   1. the Totem array default (a per-pick `suggestedArray`, HR-10b);
@@ -2977,6 +2984,11 @@ consumables 16.8 finds none, and "15 scrolls" is found there.
 - **The events design (segment 8):** EV-13, the Herald-lit "Show of
   Force costs no slot this floor" variant, a pending request to this
   owner and the enemies owner (M3 if ruled; 8.2; events design 4.8).
+- **The boss rooms design (segment 9):** BR-19 narrows HR-21's
+  escort-and-reserve clause for floors 2–5 (**agreed**, boss rooms Q4,
+  2026-11-22; M2; 7.16); the Herald answer windows, the "Resolve
+  Broken" beat and `ClassBossContribution`'s fear-target availability
+  row are segment 9's (boss rooms design 4.7.4, 9.3).
 - **The ability owner:** HR-14 (universal Frighten range); HR-29 event
   kinds.
 - **The consumables owner:** HR-24 (Terror enemies-only, the `classTags`

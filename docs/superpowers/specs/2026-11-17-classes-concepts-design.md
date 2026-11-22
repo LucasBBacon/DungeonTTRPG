@@ -457,6 +457,18 @@ tolerance and the miss rules lead's call)**
   11.4), and **`FloorTimeByPartySize`** is the first M2 gate (agreed
   2026-11-20, companions Q2; companions design 7.4). Pass or fail
   verdicts read the M2 simulator only, never a toy.
+- **(change BR-40; M2)** The boss-room reports and arms join these
+  (boss rooms design 9.3, 9.4): `ClassBossContribution` (clear rate of
+  the fixed arrival state per class, spread ≤ 10 points across classes,
+  beside `ClassThemeSpread`; the Herald row adds fear-target
+  availability on F2–5) and the boss arm per class × size × floor ×
+  Rendition at both Con values. `BossDeathShare` F1 ≤ 2.5 per 100
+  arrivals *(illustr.)* is a simulated gate per class at the reference
+  and lowest legal Con, beside `Floor1ClassSpread` (boss rooms design
+  4.9 item 8); the signature-share row (≥ 40% *(illustr.)* of boss-side
+  damage in rounds 2+, "Device used once" arm) reads beside the
+  per-round breakdown above (boss rooms design 4.9 item 7). The guards
+  above are unchanged.
 
 ## 6. Lean, never require
 
