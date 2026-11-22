@@ -619,6 +619,9 @@ Each step that stops the pipeline emits `ConditionResisted {reason}`.
    round.
 4. **Ward:** a Warded charge is spent here, at most once per ability use
    per target.
+   **Open item, pending ruling (change EV-11; events design 4.4.6):**
+   requested of the conditions owner, not yet ruled: an instance sourced
+   by a Curiosity's cost (a carried rider) is not blocked by Warded.
 5. **Boss resolve, then Unyielding downgrade** (12.3). A pip cancels only
    this condition application, never the damage or other effects of the
    same use.
@@ -1235,6 +1238,31 @@ immunity (the `morale` tag allows none). `mindless` implies `fearless`
   - consumables keep the 10-turn cap;
   - one lingering boon per unit; a new one replaces the old;
   - Death-warded is always `combatOnly`.
+- **Graces (change EV-12; events design 4.4.3; agreed by the client
+  2026-11-22, Q3; M2 (gated), else M3):** a Curiosity's Grace is an
+  `event`-sourced lingering boon under C5, built only from existing M2 ids
+  (Warded 1 charge, Helped 1 charge, Spurred, Rallied; Rallied F2+). It
+  goes to one unit (`graceTarget`); at most 1 Grace per party per floor,
+  and past that cap the option converts to its authored fallback gain. It
+  ends at the first of: fired, short rest, floor exit, arena seal, so it
+  never fires in the arena. It replaces the unit's boon as C5 says, and the
+  card names what it would replace. It is never free and never priced in
+  ticks alone; it never heals, prevents a drop, or adds actions. It ships
+  in M2 only if EV-11 below is ruled and the F1/F2 death-share gates pass;
+  otherwise in M3 with the fallback deck.
+- **Open item, pending ruling (change EV-11; events design 4.4.3, 4.4.6;
+  requested of the conditions owner, not yet ruled; the wave rule agreed
+  by the client 2026-11-22, Q3):** a deferred duration form
+  `eventBoon{payload, trigger: nextCombatStart | nextAttackOrCheck |
+  nextCheck | nextHarm, endsOn: [fired, shortRest, floorExit,
+  arenaSeal]}` to carry a Grace in the C5 slot, with the arena seal
+  processed before the arena's combat start; and a separate
+  `eventRider{condition, trigger: nextCombatStart, endsOn: [...]}` carrier
+  for carried riders (Soaked, Oiled, Chilled), outside the C5 slot, so a
+  rider cost never replaces a boon; when it fires it is a harmful
+  lingering condition under the cap of 2 (14). Nothing changes until the
+  conditions owner rules; if refused, Graces and riders are M3 and the
+  events design's fallbacks ship.
 - **Universal actions as visible states:** Dodging, Helped, Hidden,
   Concentrating.
 
@@ -1258,6 +1286,16 @@ immunity (the `morale` tag allows none). `mindless` implies `fearless`
 - A camp-bought **Remedy** item ends one non-curse lingering condition.
 - **Cures:** Treat or a Mechanics repair during a rest; shrines or Arcana
   for curses; camp clears everything.
+- **Curiosity costs (change EV-9; events design 4.4.4, 4.4.7):** a Weary
+  or theme-condition price is lingering and is offered only while the cap
+  of 2 would not block it (payment feasibility); never Scarred.
+- **Easing (M3; change EV-33; events design 4.9; requested of the
+  conditions and death and healing owners, not yet ruled):** a priced
+  Curiosity service that relieves Weary or rest ticks, as a
+  `cleanse`-tagged source; never hit points. Nothing changes until ruled.
+- **Shrine curse cures and curse bargains (Later; change EV-43; with the
+  items owner):** Curiosities may host shrine curse cures and curse
+  bargains (events design 13).
 - **Scarred (agreed):** a companion that is downed and gets up, or any
   unit saved by a talisman (the hero included), gains Scarred: maximum hit
   points −10% until camp. Only the first downing of a unit on each floor
@@ -1362,6 +1400,15 @@ Enforced by content validation. **(lead's call)**
     the M3 Mirror Court and Moth Wedding (run structure design 8.0, 8.12).
   - **RT-16:** whether trap conditions come from the theme's 6 or the trap
     is damage-only (11.6).
+  - **EV-34 (events design 4.4.3, 4.4.4; requested for an M2 ruling):**
+    whether conditions a Curiosity applies (costs, carried riders) count
+    toward the theme's 6 (they may only come from the theme's declared
+    harmful conditions); whether Weary is a universal event cost outside
+    the theme's 6; and an optional Weary form "kept through your next short
+    rest". Until ruled, Weary is priced only on the catalogued cards (one
+    per F1 theme, plus S3, S5, S6).
+- **Graces (change EV-12; events design 4.4.3):** use existing M2 ids only
+  and add none to the 32 (13).
 
 ## 17. Data and the core
 
@@ -1408,6 +1455,11 @@ Condition data also holds, where the condition uses them:
 **Application-level overrides:** an ability's `apply[]` entry, a trait or a
 terrain square may override `duration` and `value`. Each override is
 validated against the tier band for the side it targets (5.3).
+
+**Open item, pending ruling (change EV-11; events design 4.4.3, 4.4.6):**
+the duration vocabulary would gain the deferred `eventBoon` form and the
+`eventRider` carrier (13). Requested of the conditions owner, not yet
+ruled; nothing changes until ruled.
 
 ### 17.2 State
 
@@ -2170,7 +2222,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Sources: water monsters and spells; water flasks, which can be thrown
     at an ally to put out Burning; water squares (11.2); the Arcanist's
     Drench, Undertow, Prime and Tincture **(change ARC-23; Arcanist design
-    8.2, 8.4, 9.2)**.
+    8.2, 8.4, 9.2)**. A Curiosity's Overture may apply it to a tied group at
+    its fight's first round (M3; change EV-32; events design 4.9; pending
+    the enemies owner).
   - Interactions: cancels Burning and Smouldering; overrides Corroded and
     Conspicuous; Chilled from a `freezing` source becomes Frozen (fallback
     Chilled), which consumes Soaked.
@@ -2184,7 +2238,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Duration: `turns:3`; shakeOff or a tonic.
   - Sources: oil flasks, slimes; oil-slick squares (11.2), which ship with
     it; the Arcanist's Prime and Wide Mix **(change ARC-23; Arcanist design
-    9.2)**. Only a fire hit pays it out; ticks never do (6.8).
+    9.2)**. Only a fire hit pays it out; ticks never do (6.8). A Curiosity's
+    Overture may apply it to a tied group at its fight's first round (M3;
+    change EV-32; events design 4.9; pending the enemies owner).
   - Interactions: with Soaked, fire is normal and no automatic Burning
     lands; the fire hit that pays out Oiled also burns away an oil square
     under the unit (11.4). A ring-shifted fire part (trinkets design 9.4)
@@ -2244,7 +2300,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Duration: `turns:2`; tonic.
   - Sources: radiant rider on a hidden or invisible target **(change C9)**
     (normal rider rules; automatic only on radiant-weak targets);
-    Faerie-Fire-shaped outline spells (SRD).
+    Faerie-Fire-shaped outline spells (SRD); a Curiosity's Overture, at
+    its tied group's first round, never on a lurker host (M3; change EV-32;
+    events design 4.9; pending the enemies owner).
 - **Hidden** — beneficial · **M1**
   - Effect: binary per observer. Unnoticing enemies cannot single-target it
     (areas still hit it); its attacks against them have advantage; it

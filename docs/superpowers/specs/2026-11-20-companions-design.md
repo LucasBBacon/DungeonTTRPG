@@ -619,7 +619,10 @@ preview**. Its Hold card is not needed, because nothing is missable.
   them (7.7); `SlotScheduleMatchesCap` checks both.
 - **Hires per camp.** At most **one**, plus the **carried hire** (7.5).
 - **Floor 1 has no companion source of any kind** (`NoFloor1Companion`).
-  No boon, event, Pledge or offer places a unit before camp 1.
+  No boon, event, Pledge or offer places a unit before camp 1. Segment 8
+  reads this as written: no Curiosity offers or places a companion or
+  Pledge on floor 1, and nothing joins mid-floor or before camp 1 (events
+  design 4.6, 4.8; EV-3, read).
 
 | Camp | Reached after | Ladder | Muster shown | Hires this visit |
 |---|---|---|---|---|
@@ -976,6 +979,14 @@ Q2)**:
    flag; ships only on the client's yes; CMP-19);
 6. cap 2.
 
+Segment 8 adds no lever here: its Curiosities cut themselves, in the
+events design's own order, before any lever above (events design 4.7;
+EV-23, read; M2). Its clock line sits beside TL-38's, EP-33's and
+LP-10's (floor layout design 6.10): ≤ +0.5 min and ≤ +4 clicks per
+floor on floors 1–3 (floor 3's heavy arm uses the Twice-Told format),
+and net ≤ 0 and ≤ +1 click on floors 4–5 at party 4; a Curiosity's
+first telling costs about 2 clicks *(illustr.)*.
+
 **Told plainly:** the 10 s per companion turn target (ability 11.4) does
 not fit a party of 4 into a 20-minute floor. Either the per-turn time,
 the late fight count or the cap must give. The 5–6 s figure is an
@@ -1297,7 +1308,8 @@ offers to turn on companion suggestions; the default stays off
 - On freeing: **Meet at camp** (nothing freed is missable) or **Send
   home**, which gives a **Parting Word**: one floor fact chosen from the
   enemies 14.6 categories (information, inside the loot budget, not a
-  class grant).
+  class grant), written to the one per-floor FactLedger shared with
+  Curiosities (events design 4.4.2; EV-8).
 - At most 1 Pledge per floor; a Pledge adds a card, never a hire.
 - **Yielded monsters: rejected** (no class, stat model 5.5; class ids are
   launch ids, classes 7.8; mercy would become a lottery, enemies 14.6).
@@ -1309,6 +1321,13 @@ offers to turn on companion suggestions; the default stays off
   recruit, floor, pledge)` is reserved and used by no M2 code, so adding
   Pledges later changes no schema, no save and no M2 draw **(new lead's
   call)**. Promoting captives to M4 is a future item for the client.
+- **Pending request (change EV-41, events design 4.8; Later):** segment 8
+  hosts the wanderer and shrine Pledge sources (the Night Usher is the
+  wanderer), and a freed captive may also offer **Testimony** (one boss
+  fact through the FactLedger's boss queue, events design 4.4.2) beside
+  Meet at camp and Send home. Not a rule until the companions owner
+  rules; if refused, Pledges (Later) ship without Testimony (events
+  design 14.2).
 
 ## 8. What a companion is
 
@@ -2299,7 +2318,9 @@ The owed rows are the single list in 16 (and 12); by owner:
   party-of-4 arm (**agreed** Q2); the accept-rest-of-turn prototype;
   companion-turn time by kit; suggestion accept rate; human kit picks.
 - **Dungeon generation (Later):** captive rooms and shrines for Pledges
-  (captives: encounter placement design 9.1, EP-39).
+  (captives: encounter placement design 9.1, EP-39; wanderer and shrine
+  sources hosted by segment 8, events design 4.8, EV-41, a pending
+  request, 7.12).
 - **The profile (M3):** Lone Road, milestones, Old Friend, Veteran, kit
   unlocks.
 - **Naming pass:** every placeholder name here; CMP-27.

@@ -186,6 +186,13 @@ All **(agreed)**.
   forcing doors, and so on.
 - Stealth uses the worst member.
 - Presence is always the hero's. The hero is the leader.
+- **Curiosity checks (events design 4.3.2; EV-5; M2; agreed
+  2026-11-22):** dungeon skills use the best eligible member, companions
+  included; party-movement Stealth ("slip past") uses the worst member;
+  Leadership and Intimidation use the hero. A single-actor manipulation
+  ("lift the key off its string") uses the acting unit's Stealth, a
+  reading under the Steal precedent in 7.1 (pending confirmation by this
+  document's owner).
 
 Companions are therefore how a hero covers a weak ability, and a recruit can
 carry a cost as well as a benefit.
@@ -263,11 +270,14 @@ Rules behind the table:
   ability + proficiency or double proficiency + active effects). This also
   applies to party passive perception against lurkers (enemies design
   12.2, 13.3).
-- **Pending request (TL-34; segment 8; M3):** readings, one-off room
+- **Readings (TL-34; segment 8; M3; accepted by segment 8, events
+  design 4.9, EV-30, 2026-11-22):** readings, one-off room
   checks, as no-roll thresholds on passives: Arcana reads runes and
   shrines, Lore reads inscriptions, Mechanics reads mechanisms, each
-  yielding a floor fact. Nothing changes here until segment 8 rules
-  (traps and locks design 6.12).
+  yielding a floor fact. One Reading per room, the second F3 Q room's M3
+  use; content is segment 8's (traps and locks design 6.12). From M2,
+  Curiosity options use the same threshold principle, passive = 10 +
+  modifier (events design 4.3.2; EV-5).
 - **Speed is not tied to an ability.** **(agreed)**
 - **Concentration is a Constitution check**, not a Fortitude save, so
   Strength cannot stand in for it. **(agreed)**
@@ -300,6 +310,12 @@ Rules behind the table:
 | Intimidation | Presence | Make weak groups back off without a fight; cow eligibility and the `broken` flag (enemies design 14.8) | Frighten enemies; break morale when a leader falls; Demand Surrender (enemies design 14.6) |
 | Leadership | Presence | Better recruits (Recruiter's Eye, companions design 9.2), shop prices and event outcomes | Rally: steady an ally or give them a free step |
 
+Leadership's "event outcomes" (and Presence's in 5.2) are one hero-only
+threshold on one Curiosity option, with no dialogue tree and no roll, so
+the social-skills non-goal in 2 stands (events design 4.3.2; EV-6; M2;
+agreed 2026-11-22, a reading pending confirmation by this document's
+owner).
+
 Constitution has no skill; its three jobs are passive. Strength has one broad
 skill.
 
@@ -328,7 +344,10 @@ skill.
   the check is a threshold with no roll. **(agreed)** For traps and locks
   this is met by the Margin rule, one roll per object per hand verb per
   floor, per-try force noise and Take time's ticks (traps and locks
-  design 6.1, 6.6; TL-1, TL-4, TL-5; read, not changed).
+  design 6.1, 6.6; TL-1, TL-4, TL-5; read, not changed). For Curiosities
+  it is met by a printed price on every option but the free Leave, which
+  closes the card without resolving it, and one attempt only (events
+  design 4.3.1; EV-4; read, not changed).
 - **Lore never hides the basics.** Hit points and anything already seen in
   play are visible to everyone. Lore reveals the rest early. **(agreed)**
 
@@ -527,7 +546,9 @@ Each item here is a commitment this model makes on another system's behalf.
 - **Dungeon content.** Locks, traps, secrets, noise and non-combat
   encounters must appear on most floors, or the skills are decoration.
   Traps, locks, doors and containers are settled in
-  `2026-11-21-traps-locks-design.md` (its 6, 17).
+  `2026-11-21-traps-locks-design.md` (its 6, 17). Non-combat encounters
+  are settled in `2026-11-22-events-design.md`: about one Curiosity per
+  floor on F1–3 and Interludes on F2–5 (its 4.2, 4.13; M2).
 - **Items and inventory.** Settled in
   `2026-11-16-items-inventory-design.md`: a spare weapon is one spare
   weapon set (main + off hand, shield included), and the pack holds

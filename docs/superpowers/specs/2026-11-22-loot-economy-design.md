@@ -689,6 +689,10 @@ C as a base: it overpowers through selection (F3 party gear 18.7 against
    spoils list; identity and properties come from the record" (LE-1:
    step 1 carries change M-5, derived from the decided MAIN 4.6; the
    meaning of MAIN 4.6 is kept and strengthened).
+7. **Curiosities add nothing to the ledgers (read by change EV-7; M2).**
+   Segment 8's gains are facts, Graces, routes and Strands only: no VP,
+   notables, rarity steps, offer widths, sockets, redraws or coin, so
+   Ledgers A, B and C are unchanged (events design 4.4.1, 4.4.8).
 
 ### 6.2 Category split (lead's call; change LE-17)
 
@@ -1511,8 +1515,12 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      Yielded, Routed or Cowed) or its notable is stolen, whichever comes
      first, the party learns one non-power boss fact for that floor (the
      boss signature item's card) **(trigger: lead's call, after the
-     check)**. If segment 8 (Dream Fragments) claims that fact, the line
-     takes another from the same family. Surfaces in 6.15.
+     check)**. The fact is recorded in the floor's one **FactLedger**
+     (fact instances and the `bossQueue`, shared with Yield
+     interrogation, Curiosities, Fragments, Parting Words and the Tithe
+     Bowl); if that fact is already known, the line takes the next
+     unknown instance by the ledger's fall-through (change EV-8; M2;
+     events design 4.4.2). Surfaces in 6.15.
    - **Wager (M3):** 3 distinct records at the stepped tier, at most 1
      VR, the others fit premiums; counts 1; pips grade width (approved).
      It takes the locked-or-trapped quota first (6.4 item 9).
@@ -1532,6 +1540,26 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      (Read: the bait cache and its placement are M2, with the Mousetrap;
      loot sources design 4.1, 13.)
    - **Strongroom (M3, F2–3):** SR4.
+   - **Curiosities (segment 8; changes EV-7, EV-15; M2; events design
+     4.4.1, 4.4.5):** a card may frame its room's container with
+     dressing, never reshape it (`CuriosityLootBlind`); that container
+     opens with no check whatever is chosen, and its contents are never
+     an option outcome. No priced access to a socket that is otherwise
+     free.
+     - *Pending request (EV-15, to 7c and this owner):* a LootBind flag
+       `stepFunded`; a card's priced extra route may open early only an
+       ordinary lock with `stepFunded = false` (no value step under item
+       3), never HE, the Due or a boxed lurker, never priced in ticks
+       alone, contents unchanged. If refused: no priced lock routes
+       (events design 14.2).
+     - *Pending (EV-7, to this owner and 7c):* the F-CACHE fact (the
+       contents of one optional, unstepped, non-HE, non-Due container)
+       counted as exposure under this section, respecting CT2
+       `ContainerArtBlind` and the `known` field. If refused, its card
+       gains F-ROOM (events design 14.2).
+     - *M3 if HZ-23 (EV-36):* bypass routes only as skins of FL-generated
+       Chutes (`GraphUnchanged`, `XpBandAfterEvents`; events design
+       4.4.1, 9.2).
 7. **LootBind remaps (lead's call, after the check).** After
    `trapsResolve`, the draw-free LootBind pass (6.10) applies these named
    remaps, logs each as `LootBindRemap` in `LootLedger`, and only then
@@ -1683,7 +1711,10 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    shared floor assertion point. LootPlan reads only the provisional
    socket set; LootBind reads the final one. ENM 10.5 step 3's "the loot
    stream is consumed only in this step" becomes "only in steps 3a and
-   3" (LE-14).
+   3" (LE-14). Segment 8 reads this order unchanged: EventDraw runs
+   after layout, and the draw-free EventPlace after LootBind, before the
+   V13g checks; neither reads nor changes loot (`NoEventLoot`; read by
+   change EV-21; events design 4.10, 9.2).
 5. **Nothing rolls** at open, kill order, Steal, pick or reload (ENM 15.3
    step 5, **settled**). The opening history selects between two
    pre-rolled identities (6.9 item 4); it never draws.
@@ -1800,7 +1831,9 @@ matter".
   design 4.2, 4.16; M3.)
 - **Ladder and Nightmare tiers:** zero economy effect (decks, coin, camp
   channel, allowance). The ladder's +10% encounter budgets widen the gap
-  against a fixed loot curve, so kPC is reported per tier.
+  against a fixed loot curve, so kPC is reported per tier. Segment 8's
+  Nightmare **Provisos** add printed Curiosity costs only, never better
+  gains (M3; change EV-31; events design 4.9).
 - **Omens never touch the spoils list** (LootDoorInvariant; RS 9.1
   "theme-keyed loot" rejected). The research ideas of Omen reshapes and
   an interest Omen are dropped unless the RS owner rules otherwise.
@@ -1848,7 +1881,9 @@ matter".
   - The RS owner confirms the LootDoorInvariant reading (the door
     changes what is shown, never what is drawn).
   - *Rejected (Q5):* B, a profile mark and a memento-wall frame only.
-- **Dream Fragments:** 0 VP, 0 coin. **Heirloom:** outside the budget
+- **Dream Fragments:** 0 VP, 0 coin; folded into segment 8's F-BOSS
+  options on Lore thresholds, one boss-fact queue in the FactLedger
+  (M3; change EV-29; events design 4.9). **Heirloom:** outside the budget
   (**settled**); counts as party-owned for the Due.
 - **Daily and shared seeds (Later):** fix class and species so smart-loot
   runs are comparable (R-SEED-5 hook).
@@ -2081,7 +2116,7 @@ card); the toy must be re-run on this configuration before M2 (6.4 item
 | Twin Coffer | Choice width at no value | Low | M3 | **Adopted** (8.4; LE-21) |
 | Curses at a discount | "Cursed items worth more", safely priced | Medium | Later | **Adopted with Curses** (8.5; LE-22) |
 | The Wish (a paid camp mark steering the Due) | Agency; a late sink | Low | M3 | **Hook** to camp and hub (adds a third outside input to ENM 10.5 step 3; that owner flags it) |
-| The Tithe Bowl (coin buys one Stratum fact) | An information sink | Low | M3 | **Hook** (names socket classes "behind risk", never "behind a lock"; unavailable when the party holds a Wax Key) |
+| The Tithe Bowl (coin buys one Stratum fact) | An information sink | Low | M3 | **Hook** (names socket classes "behind risk", never "behind a lock"; unavailable when the party holds a Wax Key; its fact deduplicated through segment 8's per-floor FactLedger, change EV-8, events design 4.4.2) |
 | The Ferryman's Note (borrow against the next floor's coin) | Spend-now tension | Low | M3 | **Hook**, capped: ≤ 30% of the next pool, once per run, never camp 4; replaces interest |
 | Blood Price (a `treatProof` Scarred for +1 step on the camp item) | Pay in blood | Low | M3 | **Hook**: uses one of the next floor's 2 allowance steps (no swap-down); once per run; never camp 4; never VR (the camp cap) |
 | Wager Pot | Stakes at the Wager | Very low | Later | **Parked** (creates coin; a hoarding pull) |
@@ -2131,7 +2166,10 @@ The Dream's Due is in full in 6.6; the Viaticum and the Memento in 6.11.
   LP-29):** Grave Goods gains "Windfalls nabbed k of m" and "Got away:
   <tier word>" (the tier word of each, never its family or identity),
   never a profile achievement or completion stat (loot sources design
-  4.5, 7).
+  4.5, 7). Segment 8's display-only **Afterword** line reads the same
+  death key (floor, theme, killer category) as this record, and never
+  changes what is drawn or offered (read by change EV-26; M2 lean;
+  events design 4.5.10).
 - **Treasure strip by source (change LP-28; M2):** see 6.15; the
   "windfall" count drops by 1 on a nab, a Steal or a getaway, and a
   nabbed card counts under "carried" until it is taken (loot sources
@@ -2192,6 +2230,9 @@ gear field cards, F2+; also barred from fit premiums, the arms floor,
 every offer option and the fourth, the Viaticum, camp entries,
 signatures, heirlooms, consumables and rings; a cursed carrier's cost
 add uses the benefit's T+1 value (item rolls design 4.15).
+**Later (change EV-43):** segment 8's shrine curse cures and curse
+bargains touch these curses; conditions and items owners (events design
+13).
 
 ---
 
@@ -2479,7 +2520,7 @@ shop presentation and camp sinks (camp and hub); the display (segment
 | **7b, item rolls and tables** | Records per (tier, category); smart-loot and category weights; the Due, fit, triple and dreamed-option filters; substitution; VR gear content (6.13) |
 | **7c, sources and placement** | Socket tags and ranks (the input to 7a's allocation, 6.9 item 2); lump placement; the Viaticum room; Twin Coffer placement; trimmed-floor sockets; per-encounter caps; trimming containers on F5 and on coin overflow (6.4, 6.14). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 11)** |
 | **Camp and hub** | Shop presentation; the camp reward card's content; vendor stock scaling; the Wish, the Tithe Bowl, the Ferryman's Note, Blood Price; the coverage targets as design intent |
-| **Segment 8 (Dream Fragments)** | The boss-fact family the elite intel line shares |
+| **Segment 8 (Dream Fragments)** | The boss-fact family the elite intel line shares. **Taken up by the events design (segment 8, approved 2026-11-22; changes EV-7, EV-8, EV-15):** the per-floor FactLedger (6.9 item 6); its pending requests to 7a and 7c, `stepFunded` and F-CACHE, stay open (events design 4.4, 11) |
 | **Segment 9 (bosses)** | Signature records; the Memento card |
 | **Segment 10 (UI) and audio** | The Stratum Card order, the floor strip, tier marks, plate loot badges, the Steal preview, the Dream's Due tags, the Viaticum offer UI, the camp-4 warning, ledgers, tags, the audio stings (6.15) |
 | **Segment 11 (seeds)** | The `lootPlan` derivation and keyed grandchildren, the draw table (6.10 item 1), step 3a and the LootBind position, the ghost and dummy draws, the atomic commit |
@@ -3040,6 +3081,10 @@ wave or a later design triggers them; each fallback is a new lead's call
   UI move first, never the DH package (6.7).
 - **If `HeroDreamsDueShare` exceeds 70% at party size 4:** ties in the
   F2 / F4 target go to the lowest-level member instead of the hero.
+- **Pending requests from segment 8 (changes EV-7, EV-15; to this owner
+  and 7c):** if `stepFunded` is refused, there are no priced lock routes;
+  if F-CACHE is refused, its card gains F-ROOM (6.9 item 6; events
+  design 14.2).
 - **The naming pass** renames every placeholder.
 
 ---

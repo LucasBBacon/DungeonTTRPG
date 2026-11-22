@@ -1,7 +1,7 @@
 # Events and Curiosities: Design (Dungeon Generation, Segment 8)
 
 Date: 2026-11-22
-Status: Draft, revised after the check, awaiting client approval, 2026-11-22
+Status: Approved, 2026-11-22
 Parents (immediate): `2026-11-22-loot-sources-design.md` (loot sources design, "LP" in change ids, "7c" in prose, approved 2026-11-22, **the most recent template**), `2026-11-22-loot-economy-design.md` (loot economy design, "LE", segment 7a, approved 2026-11-22) and `2026-11-22-item-rolls-design.md` (item rolls design, "IR", segment 7b, approved 2026-11-22).
 Other parents: `2026-11-15-dungeon-rpg-design.md` (main design, "MAIN"),
 `2026-11-16-character-stat-model-design.md` (stat model, "STAT"),
@@ -27,20 +27,20 @@ and `2026-11-20-herald-class-design.md` ("HR"),
 `2026-11-21-traps-locks-design.md` ("TL", segment 5) and
 `2026-11-21-encounter-placement-design.md` ("EP", segment 6).
 
-Items marked **(agreed)** are the client's answers of 2026-11-22 to the four questions this design raised (Q1–Q4; sections 0.2 and 14.1), each answered with the lead's recommendation (option A), or restate a client answer recorded in an approved document. The client also said that everything else in the lead's proposal stands as written: the rules noun Curiosity (card, Interlude, Glimpse; MECH and rare tags); Model A as the chassis with the lead catalogue's content and grafts; the placement table per floor; the card shape with printed chips, a free Leave and a lit sidegrade option; checks as no-roll thresholds; the gains (the FactLedger, Graces, route reveals, priced routes to unstepped ordinary locks, Strands, the codex in M3); the costs; the Never list; the loot touches; the within-run caps; the Twice-Told card; Retellings; the profile memory `curiosityMemory`; Launcher Fallow; determinism (the `curiosities` stream, EventDraw, EventPlace); Strands; the clock lines and the self-cut order; the register by floor; the tone guards and premise tags; the Afterword, Sequels and the Unwoken Roll; the M3 meta; the Later items; the per-theme catalogue for all themes with its content budget; writing, art and audio; the new mechanics adopted, held and rejected; the numbers and the losing-streak table (toy); data, V16 `Curiosities`, reports and arms; staging; ownership and hooks; the binding requirements; EV-1 to EV-45; the told-plainly items; the risks; and the appendix resolutions and names.
+Items marked **(agreed)** are the client's answers of 2026-11-22 to the four questions this design raised (Q1–Q4; sections 0.2 and 14.1), each answered with the lead's recommendation (option A), or restate a client answer recorded in an approved document. The client also said that everything else in the lead's proposal stands as written: the rules noun Curiosity (card, Interlude, Glimpse; MECH and rare tags); Model A as the chassis with the lead catalogue's content and grafts; the placement table per floor; the card shape with printed chips, a free Leave and a lit sidegrade option; checks as no-roll thresholds; the gains (the FactLedger, Graces, route reveals, priced routes to unstepped ordinary locks, Strands, the codex in M3); the costs; the Never list; the loot touches; the within-run caps; the Twice-Told card; Retellings; the profile memory `curiosityMemory`; Launcher Fallow; determinism (the `curiosities` stream, EventDraw, EventPlace); Strands; the clock lines and the self-cut order; the register by floor; the tone guards and premise tags; the Afterword, Sequels and the Unwoken Roll; the M3 meta; the Later items; the per-theme catalogue for all themes with its content budget; writing, art and audio; the new mechanics adopted, held and rejected; the numbers and the losing-streak table (toy); data, V16 `Curiosities`, reports and arms; staging; ownership and hooks; the binding requirements; EV-1 to EV-45; the told-plainly items; the risks; and the appendix resolutions and names. The client approved this document as a whole on 2026-11-22.
 
-Items marked **(lead's call)** were filled in by the design lead inside approved rules and were in the proposal the client answered. Items marked **(new lead's call)** were made while writing this document, beyond that proposal; they are listed in 14.1 for the client's confirmation. Items marked **(lead's call, after the check)** were made when the written document was checked by the builder, consistency, play and art-and-writing lenses; none changes a client answer, and they are listed in 14.1 with the check's "told plainly" items. All three kinds become binding when the client approves this document. Items marked **(settled)** restate a rule from an approved document; **(decided)** marks a main-design client decision. Items marked **(change EV-n)** amend an approved document and are listed, with the exact sections they touch, in 13; rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there. Items marked **(told plainly)** narrow or re-read approved text, contest the brief, the client, a judge, a critic or a draft, or state an unwelcome forecast; they are told to the client in plain words and listed in 14.1. **Nothing here is binding until the client approves this document**, except the (settled), (decided) and (agreed) items, which are binding already.
+Items marked **(lead's call)** were filled in by the design lead inside approved rules and were in the proposal the client answered; the client confirmed them all on 2026-11-22, when it approved this document as a whole, and they are binding. Items marked **(new lead's call)** were made while writing this document, beyond that proposal; they are listed in 14.1 and the client confirmed them all on 2026-11-22. Items marked **(lead's call, after the check)** were made when the written document was checked by the builder, consistency, play and art-and-writing lenses; they are listed in 14.1 with the check's "told plainly" items, the client confirmed them all on 2026-11-22, and none changes a client answer. Items marked **(settled)** restate a rule from an approved document; **(decided)** marks a main-design client decision. Items marked **(change EV-n)** amend an approved document and are listed, with the exact sections they touch, in 13; rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there, and the client's approval of this document on 2026-11-22 (with Q1–Q4 where a row names one) covers them. Items marked **(told plainly)** narrow or re-read approved text, contest the brief, the client, a judge, a critic or a draft, or state an unwelcome forecast, and were told to the client in plain words (14.1, including those told after the check); the client confirmed them all on 2026-11-22. Every item here is binding on the builders.
 
 | Marking | Meaning |
 |---|---|
 | **(settled)** | Restates a rule from an approved document |
 | **(decided)** | A main-design client decision, restated |
 | **(agreed)** | A client answer: Q1–Q4 of this document (2026-11-22), or one recorded in an approved document, restated |
-| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal; binding once the client approves this document |
-| **(new lead's call)** | A lead's call made while writing this document, beyond the answered proposal; listed in 14.1; binding once the client approves this document |
-| **(lead's call, after the check)** | A lead's call made when the written document was checked; never overrides a client answer; listed in 14.1; binding once the client approves this document |
+| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal; confirmed by the client with this document on 2026-11-22 |
+| **(new lead's call)** | A lead's call made while writing this document, beyond the answered proposal; listed in 14.1 and confirmed by the client on 2026-11-22 |
+| **(lead's call, after the check)** | A lead's call made when the written document was checked; never overrides a client answer; listed in 14.1 and confirmed by the client on 2026-11-22 |
 | **(change EV-n)** | Amends an approved document; listed with its exact sections in 13. Rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there |
-| **(told plainly)** | Narrows or re-reads approved text, contests the brief, the client, a judge, a critic or a draft, or states an unwelcome forecast; said in plain words here and listed in 14.1 |
+| **(told plainly)** | Narrows or re-reads approved text, contests the brief, the client, a judge, a critic or a draft, or states an unwelcome forecast; told to the client in plain words (14.1) and confirmed by the client on 2026-11-22 |
 | **(hook)** | Owned by another segment or design; segment 8 states only what it needs |
 | *(illustr.)* | An illustrative number, owned by the builders and calibrated by the simulator (8, 9). Never binding |
 
@@ -812,7 +812,7 @@ A MECH card, and any option marked as tied, is tied at generation to a named **r
 - **Comic register,** with punchlines in Retellings and Glimpse art.
 - **Nightmare tier 2+ (M3)** may add a cost, never a gain.
 - **Gate:** F1 hero deaths stay under 5%. `EventDeathShareDelta` (F1, party 1) ≤ +0.5 pp on the novice arm. `Floor1BossSustain` is unchanged.
-- **Floor-1 variety in parallel (agreed, Q2).** The Endless Wake joins the M2 F1 pool when its RS 8.2 gate passes, at `F1PoolParity`; its catalogue (5.3) is authored to parity in M2 so promotion costs no event work late. F1 Blueprint and boss variety are a production priority flagged to the RS, FL and segment 9 owners (EV-44); segment 8 changes none of their text. **Told plainly after the check:** RS 12's pre-authorised Cut 1 **(agreed, RS Q4)** drops the extra bosses of the Gaol and the Kennel first, which is floor-1 boss variety. If the schedule slips, that cut still applies first unless the client reorders the RS cut lines, and any reorder is an RS change that returns to the client (14.1, 14.2).
+- **Floor-1 variety in parallel (agreed, Q2).** The Endless Wake joins the M2 F1 pool when its RS 8.2 gate passes, at `F1PoolParity`; its catalogue (5.3) is authored to parity in M2 so promotion costs no event work late. F1 Blueprint and boss variety are a production priority flagged to the RS, FL and segment 9 owners (EV-44); segment 8 changes none of their text. **Told plainly after the check:** RS 12's pre-authorised Cut 1 **(agreed, RS Q4)** drops the extra bosses of the Gaol and the Kennel first, which is floor-1 boss variety. If the schedule slips, that cut still applies first unless the client reorders the RS cut lines, and any reorder is an RS change that returns to the client (14.1, 14.2). The client did not reorder the cut lines when it approved this document: the F1-boss cut-order question is carried to segment 9 (boss rooms) as a future item for the client, with no RS change now (14.2).
 
 ### 4.7 Clock and reading load (change EV-23)
 
@@ -1539,7 +1539,7 @@ No wave carries a least-seen draw inside the key (rejected, Q1).
 | Owner | What |
 |---|---|
 | **Segment 8** | Curiosity content and forms; their placement in Q rooms, Forecourts, F1 Alcove set pieces and side rooms, and signature rooms; the cost and gain palette; `curiosityValueTable`; the FactLedger rule; Graces (content), Strands, Retellings, Twice-Told, Fallow, Sequels, Ripening, Afterword and the Unwoken Roll; the segment 8 clock line; V16; the reports; Readings content (TL-34); Fragments content; guaranteed Riddle-clue hosts (4.13); the writing and Glimpse briefs (6); co-ownership of the codex's Curiosity pages |
-| **Segment 9** | Seeded boss variables; the arena seal; the F-BOSS queue; poster Glimpses; floor-1 boss variety as a production priority (agreed, Q2) |
+| **Segment 9** | Seeded boss variables; the arena seal; the F-BOSS queue; poster Glimpses; floor-1 boss variety as a production priority (agreed, Q2); the carried RS Cut 1 question, a future item for the client (14.2) |
 | **Segment 10** | 4.12 |
 | **Segments 11–12** | The stream, its draw map, pass order, safe point, memory field, launcher, V16 and arms |
 | **Camp and hub** | Afterword and keeper lines; Pledges; Testimony; the Hawker's Hour; Tithe Bowl dedup; coin owed |
@@ -1572,7 +1572,7 @@ No wave carries a least-seen draw inside the key (rejected, Q1).
 
 ## 13. Changes to approved documents
 
-Applied when the client approves this document. **This document edits no parent document itself**; the rows are applied by the owners of the sections they touch **(lead's call)**, and rows owed by other owners are listed again in 17. Every row names the exact sections it touches. Rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ in the "Flag" column; the client's approval of this document covers them, with Q1–Q4 where a row names one. As in the LE, TL, EP, IR and LP precedents, the Flag column also marks rows that only *read* agreed, decided or settled text without changing it, so that every touch of such text is visible **(new lead's call:** this adds flags to EV-3, EV-7, EV-15, EV-18, EV-22, EV-25, EV-26 and EV-44, which the proposal's register did not flag; **after the check** it also adds them to EV-4, EV-6, EV-12, EV-14, EV-17 and EV-45, which the written register had missed**)**. Rows marked "request" are requests to other owners; they change nothing until their owner rules, and 14.2 names each fallback. M3, M4 and Later rows are recorded now as text marked with their wave and take effect at that wave.
+Applied on 2026-11-22, when the client approved this document. **This document edits no parent document itself**; the rows are applied by the owners of the sections they touch **(lead's call)**, and rows owed by other owners are listed again in 17. Every row names the exact sections it touches. Rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ in the "Flag" column; **the client's approval of 2026-11-22 covers them** (with Q1–Q4 where a row names one). As in the LE, TL, EP, IR and LP precedents, the Flag column also marks rows that only *read* agreed, decided or settled text without changing it, so that every touch of such text is visible **(new lead's call:** this adds flags to EV-3, EV-7, EV-15, EV-18, EV-22, EV-25, EV-26 and EV-44, which the proposal's register did not flag; **after the check** it also adds them to EV-4, EV-6, EV-12, EV-14, EV-17 and EV-45, which the written register had missed**)**. Told-plainly rows were told in 14.1 and confirmed by the client on 2026-11-22. Rows marked "request" are requests to other owners, recorded as pending requests; they change nothing until their owner rules, and 14.2 names each fallback. M3, M4 and Later rows are recorded now as applied text marked with their wave and take effect at that wave.
 
 **Readings recorded inside this design (no approved text changes; each goes to its owner for confirmation):**
 - The F1 Forecourt's walls may carry Glimpses under RS 9.4 and FL 6.11's "empty" (a Glimpse has no rules, no square and no click; RS and FL owners).
@@ -1638,7 +1638,9 @@ Waves: EV-40's stub in M1; EV-1 to EV-10, EV-14 to EV-25, EV-26 (M2 lean), EV-34
 
 ## 14. Open items for the client
 
-**Open: approval of this document as a whole.** The four questions raised before writing were answered on 2026-11-22 **(agreed)**, each with the recommended option (A), and the client said everything else in the proposal stands as written. Writing raised no new client question, and neither did the check: every fix it needed sits inside the four answers, keeps an approved rule, or is flagged against the text it touches. The client is asked to approve the document, which would confirm the new lead's calls, the lead's calls after the check and the told-plainly items in 14.1 (including those told after the check), the readings recorded in 13, and the flagged rows of 13. The future items in 14.2 come back only if a report, an owner's refusal, a wave or a later design triggers them; the naming pass remains a future item.
+None. Approved by the client on 2026-11-22.
+
+The client approved this document as a whole on 2026-11-22, including every lead's call (the lead's calls of the answered proposal, the new lead's calls in 14.1 and the lead's calls after the check in 14.1), the told-plainly items (including "Told plainly after the check" in 14.1: among them the re-authored catalogue, the 50% ceiling on the Graces-off fallback deck, Strands paying on entering the next floor, the priced lit options, the M2 budget of about 11–12k words and 400–450 art states, the full read on a second meeting with a card, RS Cut 1 still cutting floor-1 bosses first, help in the visible ladder being a future decision, and F2 band cards being dry in text), the readings recorded in 13, and its approval covers the flagged rows of 13. The four questions raised before writing were answered on 2026-11-22 **(agreed)**, each with the recommended option (A); the client also said everything else in the proposal stands as written. Writing raised no new client question, and neither did the check: every lead's call after the check sits inside the four answers, keeps an approved rule, or is flagged against the text it touches. The client did not choose to reorder RS 12's Cut 1 now: the F1-boss cut-order question is carried to segment 9 (boss rooms) as a future item for the client, with no RS change now (14.2). The future items in 14.2, which come back only if a report, an owner's refusal, a wave or a later design triggers them, the carried Cut 1 question and the naming pass remain future items.
 
 ### 14.1 This document
 
@@ -1649,7 +1651,7 @@ Waves: EV-40's stub in M1; EV-1 to EV-10, EV-14 to EV-25, EV-26 (M2 lean), EV-34
 - **Q3, Graces (EV-11, EV-12):** option A. M2 only if the conditions owner rules the `eventBoon` form and the F1/F2 death-share gates pass; otherwise M3. Rejected: B, M3 regardless.
 - **Q4, no mercy (EV-10):** option A confirmed. Losing streaks get novelty and memory relief only, never easier odds or richer outcomes (DH 5.4(f) **(agreed)**; MAIN 4.7 **(decided)**); difficulty help belongs in the visible ladder. Rejected: B, visible opt-in streak help through events.
 
-**New lead's calls (made while writing; for the client's confirmation with this document):**
+**New lead's calls (made while writing; confirmed by the client on 2026-11-22, with this document):**
 1. **Document shape:** the proposal's section numbers 0–13 are kept so every cross-reference holds; intent, goals, non-goals and anti-goals sit in 0 as 0.4; the client questions become 14 (open items); the closing parts follow as 15 (risks), 16 (left to the builders), 17 (depends on) and Appendix B (sources), as in LP.
 2. **Name re-check:** "Seating Chart" and "Last Page" hit the Supper's and the Silk Archive's own Obsession prose and are kept as theme callbacks; "strands" hits only as an ordinary verb (header).
 3. **K = 3 and F1-only Fallow are client keys, not tuning** (`curiosity.fallowK`, `curiosity.fallowFloors`); a gate miss that would move them returns to the client (header, 9.1, 14.2).
@@ -1669,7 +1671,7 @@ Waves: EV-40's stub in M1; EV-1 to EV-10, EV-14 to EV-25, EV-26 (M2 lean), EV-34
 17. **Critic ids normalised:** the proposal's partial "BC… S2-5"-style cross-references are written as their Appendix A.2 ids (BC6, BC9, BC12) (4.4.5, 4.5.4, 4.5.7, 4.8, 4.10).
 18. **Owner-refusal fallbacks** in 14.2, each stated so a refusal never blocks M2.
 
-**Told plainly (for confirmation with the document):**
+**Told plainly (confirmed by the client on 2026-11-22):**
 1. The hot spot is F1 and theme frequency. Fights and floor-1 themes repeat more than events do (0.1).
 2. "Done properly" does not mean more events (0.1).
 3. Display-only Retellings sit outside the key, against three drafts (4.5.3).
@@ -1688,7 +1690,7 @@ Waves: EV-40's stub in M1; EV-1 to EV-10, EV-14 to EV-25, EV-26 (M2 lean), EV-34
 16. **(Added while writing.)** "Start the Clocks" as written broke the Wake's approved wrong detail (14.1 call 14).
 17. **(Added while writing.)** If Graces miss M2, the M2 decks lean further on facts; `GainMix` and `OptionTakeRate` are the watch (4.4.3, risk 1).
 
-**Lead's calls after the check (for confirmation with the document; none changes a client answer):**
+**Lead's calls after the check (confirmed by the client on 2026-11-22, with this document; none changes a client answer):**
 1. **Interlude coverage:** each band theme gets 2 F2–3 Forecourt Interludes (6 near-wordless cards); the shared share is a per-slot pool probability (≤ 400‰ for Curiosities, ≤ 200‰ for Interludes); an empty slot is logged as `CuriosityAbsent` and shows a Glimpse; `PoolCoverage(interlude, floor)` (4.2, 5.3).
 2. **Forecourt Interludes face the arena:** F-BOSS (F2–3 only), F-LISTEN on the arena, arena-path F-TRAP, arena F-ROOM; on F4–5 only the substitutive three, each row marked; Gu-I3, H1, H5 and H6 re-authored (4.1, 4.7, 5.3; `ForecourtGainFacesArena`).
 3. **`GainMix` defined and met:** a deck is a theme's Curiosity cards or a shared Curiosity pool, Leave and Interludes excluded; ≤ 40% fact-only, ≤ 50% on the Graces-off fallback deck; the catalogue re-authored to meet both, with per-pool counts in 5.2 (4.4.1).
@@ -1722,14 +1724,14 @@ Waves: EV-40's stub in M1; EV-1 to EV-10, EV-14 to EV-25, EV-26 (M2 lean), EV-34
 31. **Riddle clues** are guaranteed, check-free placements whenever the Riddle lock exists, the Place-Setting clue included, never lit options; a hook-answer table answers every parent hook (4.13).
 32. **Naming notes:** "Q room 3" is written out; the `Event*` identifiers keep "event" on purpose (0).
 
-**Told plainly after the check (for confirmation with the document):**
+**Told plainly after the check (confirmed by the client on 2026-11-22):**
 1. **The catalogue broke its own rules as written.** `GainMix` failed in most pools, several Grace prices broke 4.4.3, lit options were free, some options paid two gains, and many props mimicked Portals, containers or reserved cues. The rows were re-authored (5.3); the toy was not re-run on them (8).
 2. **The Graces-off fallback deck cannot meet 40%.** It gets its own ceiling of 50% *(illustr.)*: if Graces miss M2, the F1 decks are half facts (4.4.1).
 3. **Strands no longer pay at the Forecourt.** A fact about the floor given at room n−2 was nearly worthless; Strands now cash on entering the next floor, which the proposal's D1 already did (4.5.7).
 4. **Lit options now cost something.** A free lit option beat its priced twin on most cards and made the pilot Strands dead options (4.3.1).
 5. **The budget was well short of the real one.** About 11–12k words and 400–450 art states in M2 with the Wake, not about 7k and 105: the words about 60% of the real figure, the art about a quarter (0.1, 6).
 6. **The second meeting with a card costs a full read** of R2 before repeats get cheap; the toy priced every repeat at 6 s and was not re-run (4.7).
-7. **RS Cut 1 still removes floor-1 boss variety first.** Q2 made F1 boss variety a production priority, but RS 12's pre-authorised Cut 1 **(agreed, RS Q4)** drops the Gaol's and the Kennel's extra bosses first. Only a client reorder of the RS cut lines changes that, and that would be an RS change (14.2).
+7. **RS Cut 1 still removes floor-1 boss variety first.** Q2 made F1 boss variety a production priority, but RS 12's pre-authorised Cut 1 **(agreed, RS Q4)** drops the Gaol's and the Kennel's extra bosses first. Only a client reorder of the RS cut lines changes that, and that would be an RS change. The client did not reorder them on 2026-11-22: the question is carried to segment 9 (boss rooms) as a future item for the client, with no RS change now (14.2).
 8. **"Help in the visible ladder" is a future decision.** MAIN 4.7 **(decided)** has only harder tiers; no approved document has an easier rung or assist setting. Q4's "difficulty help belongs in the visible ladder" therefore points at a future ladder or difficulty decision owned by the main design and RS, not segment 8; nothing changes now (14.2).
 9. **F2 band cards are dry in text.** Cards drawable on F2 and F3 are written in the dry register; the F2 joke lives in Glimpse art (4.11).
 10. **The rejected Q1-B's figures were overstated** in 0.1: the row labelled Q1-B was an all-floors, from-M2 bound; the closest measured case is Fallow F1 plus a seeded Fallow on F2–3 (0.93 / 1.00 / 0.00 at 10 runs) (0.1).
@@ -1738,7 +1740,7 @@ Waves: EV-40's stub in M1; EV-1 to EV-10, EV-14 to EV-25, EV-26 (M2 lean), EV-34
 
 ### 14.2 Future items triggered by reports, owners or later designs
 
-These come back to the client only if a report, an owner's refusal, a wave or a later design triggers them; each fallback is a new lead's call (for confirmation with this document) unless marked:
+These come back to the client only if a report, an owner's refusal, a wave or a later design triggers them; each fallback is a new lead's call or a lead's call after the check (confirmed by the client on 2026-11-22, with this document) unless marked:
 
 | Item | Trigger | What happens | Owner / approval |
 |---|---|---|---|
@@ -1758,7 +1760,7 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 | **RS owner refuses** the Fallow extension | — | Returns to the client (Q1 was agreed) | RS owner; client |
 | **Main design owner refuses** the safe-point reading | — | Returns to the client: without it a reload can undo a cost (BC12) | Main design owner; client |
 | **Herald owner refuses** EV-13's variant | — | The variant is not shipped; nothing else changes | Herald owner |
-| **The schedule slips into RS Cut 1** | RS 12 cut lines **(agreed, RS Q4)** | Cut 1 drops the Gaol's and the Kennel's extra bosses first, against Q2's priority. The lead may recommend moving F1 bosses below Cut 1; any reorder is an RS change that returns to the client | RS owner; client |
+| **The F1-boss cut order (carried to segment 9)** | Segment 9 (boss rooms) is designed, or the schedule slips into RS Cut 1 (RS 12 cut lines, **agreed, RS Q4**) | The client did not reorder Cut 1 on 2026-11-22; RS 12 is unchanged now. Cut 1 still drops the Gaol's and the Kennel's extra bosses first, against Q2's priority. The question returns to the client with segment 9; the lead may then recommend moving F1 bosses below Cut 1, and any reorder is an RS change | Client; segment 9, RS owner |
 | **A future ladder or difficulty decision** | The main design or RS takes up the M3 ladder | Q4's "difficulty help in the visible ladder" is handed to the main design owner and the client; segment 8 changes nothing | Main design owner; client |
 | **The worst-case card does not fit** | Segment 10's layout test (4.3.1) | The rare body cap is lowered before any chip rule changes | Lead; segment 10 |
 | **Referents fall back often** | `ReferentAvailability` high on a Blueprint | Re-author the tied option's referent kind, or ask FL for the referent | Lead; FL |
@@ -1781,7 +1783,7 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 | 8 | **Story creep from Sequels** (RS risk 14) | Tone review on every chain |
 | 9 | **The comic register on the most-repeated floors** | Mitigated by Retellings; not cured |
 | 10 | **Toy crudeness** | The simulator replaces every figure here |
-| 11 | **Floor-1 variety outside segment 8.** The streak arm's biggest repeat is fights, Blueprints and bosses, which segment 8 does not own; RS Cut 1 removes F1 bosses first | Flagged as a production priority (agreed, Q2); the cut-order conflict told plainly (14.1) |
+| 11 | **Floor-1 variety outside segment 8.** The streak arm's biggest repeat is fights, Blueprints and bosses, which segment 8 does not own; RS Cut 1 removes F1 bosses first | Flagged as a production priority (agreed, Q2); the cut-order conflict told plainly (14.1) and carried to segment 9 as a future item for the client (14.2) |
 | 12 | **The re-authored catalogue is untested.** Priced lit options, floor-entry Strands and the new rows change take rates the toy never measured | `OptionTakeRate`, `LitDominanceShare`, `StrandCashRate`; the simulator before pools freeze |
 
 ---
@@ -1817,7 +1819,7 @@ The owed rows are the single list in 13; by owner:
 - **The companions owner:** EV-41.
 - **The items owner:** EV-9, EV-42, EV-43.
 - **The HZ owner:** EV-31, EV-35, EV-36 (HZ-23).
-- **Segment 9 (bosses):** seeded boss variables; the arena seal; floor-1 boss variety (EV-44).
+- **Segment 9 (bosses):** seeded boss variables; the arena seal; floor-1 boss variety (EV-44); the carried RS Cut 1 question, a future item for the client (14.2).
 - **Segment 10 (UI):** 4.12; EV-17.
 - **Segment 11 (seeds):** the `curiosities` stream and its draw map, the pass order, the launcher order (EV-20, EV-21, EV-40).
 - **Segment 12 (validation):** V16 and the reports (EV-38, EV-39).

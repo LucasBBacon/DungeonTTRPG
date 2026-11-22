@@ -457,7 +457,7 @@ Each is met in section 14:
 | LT13 | DH 17.1's corridor index rule would give the floor-1 Bypass arm index 1, widening Surprise immunity | Only Portals between consecutive main-path rooms take a `mainPathIndex`; every square has an `effectiveIndex` (FL-13, told plainly) |
 | LT14 | RC3: Routed units never go "through a door", but they flee through doors | Every fight host gets a non-door flee exit; RC3 stays literal (FL-12) |
 | LT15 | The Gaol `signatureFeature` "existing door rules" has no rule behind it | The party close verb (FL-8); RS 8.3 text amended. Shutting mutes and delays; it does not cut a path unless locked (told plainly) |
-| LT16 | Side-room claimants exceed 2–3 side rooms on floors 1 and 5 | Alcoves carry caches and do not count; the two-room Circuit ring |
+| LT16 | Side-room claimants exceed 2–3 side rooms on floors 1 and 5 | Alcoves carry caches and do not count; the two-room Circuit ring; segment 8's floor-1 Curiosity takes an Alcove set piece first and a free leaf side room only as the lowest-priority claimant (EV-2; events design 4.2) |
 | LT17 | Floor time | Commitments, not a lever (FL-16) |
 | LT18 | Main 6.8 flat rules against "vertical stacking" | Backdrop only; walkable squares exactly coplanar (8.1) |
 | LT19 | RS 13 gives door rules, secrets, Acrobatics counts and the Stratum Card to other segments | Layout supplies sockets and minimums only (FL-22) |
@@ -872,12 +872,12 @@ target, which LS5 draws from the Blueprint's `bypassTargets[]` (6.8).
 | Lair | The L position, a cut vertex. May be `deadEndAllowed` only for a Den or Sleeper template, where Cornered is the intended payoff. **Reading to confirm (LP-14, M2; loot sources design 4.10; LE 18.2):** on floor 5 the L room's host socket holds the Viaticum (Bedside Stand host, agreed loot sources Q5) on its exit side toward the Forecourt, outside the start zone, on the walk line, because nothing lies between L and F on floor 5; the FL and enemies owners confirm. If refused, segment 2 adds a post-lair main-path container on floor 5 (loot sources design 14.2) |
 | Elite room | A depth-1 spur from a main-path room with index ≥ FloorDiv(n−1, 2), not the antechamber or arena (floor 1: second half, enemies 17.4). Entered by a Door. Its **Grille vantage** sits in a vantage Alcove of the parent room, behind a Door the party opens only when it wants to look, so a peek is always a choice; from it the party sees ≥ half of the elite start zone at distance ≥ 7, and the two sides are walkably joined within ≤ 12 (`GrilleReach`). No square on the parent's main walk line sees the start zone. **If the enemies owner refuses FL-21 (b),** a noticed Champion may come, so the hearing outline marks the vantage Door as a noticing risk before the party opens it; the opt-in Door is the layout fallback and needs no enemies rule **(vantage Alcove and fallback: lead's calls, after the check)**. Templates also fit the floor-3+ Rival Party (2–3 units, enemies 18.1). Inherits `expectedTenths` through `branchIndex` |
 | Boss | Arena socket: the Blueprint's 2×2-cell `arenaCell`; two dog-leg Forecourt Arches; the Bossgate on the far wall (none on floor 5). Arena start zones sit ≥ 9 path squares from both entrances (segment 9 hook). A guarded boss's signature cache sits in the arena, never the L room (a reading of IR 4.13 and 4.18; loot sources design 4.4) |
-| Empty or special | Q positions, and the antechamber on floors 2–5, which is also the patrol's fight host and homeRoom (RS 6.6's "empty or special" reads it as special; told plainly, FL-5). Segment 8 fills Q rooms; floors 2–5 antechambers may host non-encounter micro-events |
+| Empty or special | Q positions, and the antechamber on floors 2–5, which is also the patrol's fight host and homeRoom (RS 6.6's "empty or special" reads it as special; told plainly, FL-5). Segment 8 fills Q rooms; floors 2–5 antechambers may host non-encounter micro-events. **Segment 8's hosts (EV-2, M2; events design 0.1, 4.2):** about one Curiosity per floor on floors 1–3 (floor 4: a Glimpse in M2; M3 one if segment 8's clock line holds), in rooms layout already rations, never an added room; on floors 2–4 a Q room hosts it, on floor 3 the Q room the tie-break picks, the other Q a Glimpse; a floors 2–5 Forecourt micro-event is a 1-click Interlude when drawn; floor-1 hosts as in 6.9, with main-path Q room 3 carrying a wall Glimpse only (it keeps the CL-10 Circuit and its one lesson); never an arena, the Sanctum, the Annex, a Dare or Wager room, the elite room, a boxed-lurker host or floor-1 main-path rooms 0–2, never on a walkable square, at most one per room. **Tie-break:** wherever several hosts qualify, the lowest main-path index, then the lowest room id (side rooms take the index of the room they hang from); no draw |
 | Side rewards | Loop-back Sites first, then spurs and Alcoves. Off-path potions (600‰ lean) and secret caches |
 | HE-7 / HE-4 | Socket 1: a no-check socket in a traversed room with index < FloorDiv(n−1, 2), not in the Gb room. Socket 2: a traversed room with FloorDiv(n−1, 2) ≤ index ≤ n−2 (the antechamber allowed; on floor 1 "empty" means no encounter, so a container is legal). HE-4: a traversed no-check socket before the arena, not in the Gb room and not in a Circuit room (the floors 2–5 Forecourt included), so no optional fight stands in front of it. Entry templates, every Q template and **every Forecourt template** carry ≥ 1 no-check socket, so reservation is constructive on every role order, floor 5 included (V8 `HE7Sockets`). DH 12.5 step 4 draws the supply among these HE-4-eligible containers only (FL-3) **(lead's calls, after the check)** |
 | Trader (Later), Pledge (Later) | A `traderEligible` / `pledgeEligible` loop-back side room on floors 2–4, not on the Circuit, not the elite room |
 | Keepsake slots | Numbered from 0: main path by index, then side rooms by `branchIndex` (3.4), then `roomId` (RS 9.3) |
-| Signature room | Each Blueprint authors one theme set piece unique to that Blueprint (e.g. the Gaol's Cell Zero door, the Heart's music-box clearing). It can host any role. `SignatureRoomRepeatRate` report |
+| Signature room | Each Blueprint authors one theme set piece unique to that Blueprint (e.g. the Gaol's Cell Zero door, the Heart's music-box clearing). It can host any role. `SignatureRoomRepeatRate` report. A signature room tagged `curiosityHost` is **always** the floor's Curiosity host when the floor has one, instead of the Q or leaf host, never an extra one (EV-2, M2; events design 4.2) |
 
 ### 6.6 Hearing (change FL-11)
 
@@ -1149,6 +1149,17 @@ zero. Joiners stay a real, player-caused experience.
   stays 0. If segment 3 offers no set pieces, the Alcove stays a
   container and the cap is logged, not enforced (loot sources design
   14.2).
+- **Floor-1 Curiosity host (EV-2, M2; events design 4.2):** after a
+  `curiosityHost` signature room (6.5), the host order is (1) an Alcove
+  set piece, wall-mounted (RC1+), taking the set-piece slot LP-11
+  prefers; it never empties a leaf and never displaces a container
+  7c's cap needs; (2) a free leaf side room, as the lowest-priority
+  claimant (LT16); (3) else none, logged as
+  `CuriosityAbsent{slot: curiosity, reason: noHost, blueprintId}`.
+  Alcove set pieces are a request to segment 3 (pending). Segment 8
+  reports `F1CuriosityPresence` per Blueprint to the FL owner and
+  segment 3 before floor-1 pool sizes are frozen (target ≥ 800‰
+  *(illustr.)*).
 - Detours are legible before commitment (floor count line, Listen,
   containers seen through Grilles and Arches).
 - Travel-to-explored-square auto-walk is requested of segment 10 **in
@@ -1201,6 +1212,19 @@ zero. Joiners stay a real, player-caused experience.
   Alcove set-piece share up; (3) only then Windfall presence −250‰ on
   floors 3 and 4; any lower Windfall frequency, or turning it off,
   returns to the client (agreed, loot sources Q1).
+- **Segment 8's line (EV-23, M2; events design 4.7):** beside TL-38's,
+  EP-33's and LP-10's, measured on `FloorTimeByTheme` on a
+  first-10-runs arm: floors 1–2, and floor 3 on the light and median
+  arms, ≤ +0.5 min and ≤ +4 clicks per floor; floor 3 on the heavy arm,
+  the Curiosity in the Twice-Told format on first sight; floors 4–5 at
+  party 4, net ≤ 0 and ≤ +1 click, with Forecourt Interludes only from
+  substitutive families (F-LISTEN on the arena, arena-path F-TRAP,
+  arena F-ROOM) and a measured net before any ships. Binding cut order,
+  before any companions 7.4 lever (agreed levers untouched): (1) F4–5
+  Interludes become Glimpses; (2) the F3 Curiosity uses the Twice-Told
+  format on first sight on every arm; (3) the F2 Forecourt Interlude
+  becomes a Glimpse; (4) M3 F4 Curiosities are dropped. Floor-entry
+  Strand cashes are untouched by every step.
 - **Auto-walk at doors (lead's call, after the check):** auto-walk
   pauses at each closed door on its path. A trained party's passive
   Listen resolves there (FL-18). Auto-walk then opens the door and walks
@@ -1235,8 +1259,8 @@ or a slot rule above.
 | Piece | Rule | Floors |
 |---|---|---|
 | **Forecourt** (antechamber) | Main-path room n−2, always a Room node, never a corridor **(new lead's call)**; every path to the arena passes through it (LG3); themed per Blueprint | All |
-| Floor-1 Forecourt | Empty (no encounter), 5×9–7×11, one inbound Portal, no side room, no Alcove, off the Circuit; near-safe by RS 9.4's approved exception; hosts the `AntechamberCatchUp` (RS 9.4) | 1 |
-| Floors 2–5 Forecourt | Counted as an empty or special room; 1–2 inbound main Portals; **always a Circuit waypoint** and the patrol's homeRoom and fight host, never guaranteed safe while the patrol lives; at most two Circuit side rooms attach, never touching the arena; the floor's fight-room size, with the free-space rule, LG12 flee exits and LG20 entry rules; may host a segment-8 micro-event **(size and fight-host rules: lead's calls, after the check)** | 2–5 |
+| Floor-1 Forecourt | Empty (no encounter), 5×9–7×11, one inbound Portal, no side room, no Alcove, off the Circuit; near-safe by RS 9.4's approved exception; hosts the `AntechamberCatchUp` (RS 9.4). **Reading to confirm (EV-2, M2; events design 4.2):** its walls may carry segment-8 Glimpses, read as "empty" because a Glimpse has no rules, no square and no click; the FL and RS owners confirm | 1 |
+| Floors 2–5 Forecourt | Counted as an empty or special room; 1–2 inbound main Portals; **always a Circuit waypoint** and the patrol's homeRoom and fight host, never guaranteed safe while the patrol lives; at most two Circuit side rooms attach, never touching the arena; the floor's fight-room size, with the free-space rule, LG12 flee exits and LG20 entry rules; may host a segment-8 micro-event, a 1-click Interlude with arena-facing facts only, `AntechamberScreened` kept (EV-2, EV-23; events design 4.1, 4.7) **(size and fight-host rules: lead's calls, after the check)** | 2–5 |
 | **Arena entrances** | Two **dog-leg** Arches from the Forecourt, ≥ 5 apart, never Doors; arena start zones ≥ 9 path squares from both. **`AntechamberScreened`, symmetric:** no Forecourt square more than 2 beyond an entrance has line of sight to any arena square more than 2 beyond that entrance, in either direction; a baffle or bend inside each Arch does it. The boss can therefore be shot from the Forecourt only while it stands in its own doorway band, where its reach covers the Arch **(symmetric form: lead's call, after the check)** | All |
 | **Bossgate** | On the arena's far wall; blocks movement and sight and is not a hearing path until `BossDefeated`, then an Arch. Not an entrance: "the exits are never sealed" refers to the entrances (enemies 17.5, clarified) | 1–4 |
 | **Stairhead** | About 5×5 behind the Bossgate; the stairs, the left-behind warning and Scrap (items 9, 24); the floor fact "path to the stairs" means the Stairhead (enemies 14.6) | 1–4 |
@@ -1863,7 +1887,7 @@ socket classes. Budgets count templates, then size classes.
 | Last Turning | Route choice before the boss | **M2** (FL-9) |
 | Floor count line | Pacing information | **M2** (FL-20) |
 | Overlook (mapped layer) | A planning aid | **M3** (needs segment 10's mapped layer; Yield prefers unmapped rooms) |
-| Chute (directed edge) | Spurs with no walk back | **M3** (pathfinder testing cost). **Pending request (HZ-23):** Plunge as a Chute skin (hazards design 6.10). **Pending request (TL-41; M3):** segment 5's relocation traps (in combat, same room only; the Supper's Dumbwaiter Drop out of combat to its linked scullery) wait for the ability model's teleport rule (ABL 8); fallback Prone in place (traps and locks design 6.3, 7.8) |
+| Chute (directed edge) | Spurs with no walk back | **M3** (pathfinder testing cost). **Pending request (HZ-23):** Plunge as a Chute skin (hazards design 6.10). **Pending request (TL-41; M3):** segment 5's relocation traps (in combat, same room only; the Supper's Dumbwaiter Drop out of combat to its linked scullery) wait for the ability model's teleport rule (ABL 8); fallback Prone in place (traps and locks design 6.3, 7.8). **Recorded (EV-36, M3 if HZ-23; events design 4.4.1):** segment 8's bypass routes come only as Curiosity skins of FL-generated Chutes, never a new edge (`GraphUnchanged`, `XpBandAfterEvents`); waits on HZ-23 and the FL and enemies owners |
 | Strongroom spur | Fight, steal or pick for one reward | **M3**, floors 2–3 only. Its reward socket is rank SR4 (LE-10, M3; loot economy design 6.9). **Pending (TL-29; M3):** segment 5's Wager room may take this Site (traps and locks design 6.15); the FL owner's call, not yet ruled |
 | Drop-bar doors (the party bars a door; locked for monsters) | Real joiner cuts | **M3**, Gaol only, after SH-18 and the Shade owner. They create safe rest cells against ability 15.1, so they return to the client before they ship **(new lead's call)**. If adopted, segment 5 recommends M3 with the anti-rest guard: monsters force it at 10 + the dropper's Athletics (loud 6), a patrol whose Circuit hits it forces it, and it never satisfies a short rest's "no aware hostile" by itself (TL-33; traps and locks design 6.12) |
 | Way Back (Stairhead Latch) | A cheap post-boss return | **M3**, built off by default |
@@ -2368,7 +2392,7 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
 | 5 Traps, locks, checks | Locked, Hairline, Squeeze, Latch and Door slots; `PortalMinimums`; trap sockets within 6 of fight hosts, and from floor 2 one before the first fight (room 0 or the 0→1 Portal, Shade DEP-S1(a)), the 0→1 Portal socket filled by a Door catch or a threshold wire outside the Portal square (TL-20; traps and locks design 6.20) | DCs (the ladder, TL-2); traps and trap records (DEP-S1; TR-1; taxonomy, tells and records, TL-10; traps and locks design 6.2, 6.3, 11.1); keyring and cell caches; sphincters; **the party door verbs as rules (FL-8)**; the Squeeze check on the keyed `checks` stream (TL-3) and its failure cost; Drop-bar (M3); Wedge (SH-18); Hairline check variants |
 | 6 Encounter placement | Slot hosts, `equivalentHosts`, the Circuit with phase, the Bypass, near pairs, matrices, start zones, `nearStart`, `skittishShape` / `ledShape` | Enemies 10.5 steps 2–11 (step 9 moves only within a host or to an equivalent host, 6.1), `placementRules`, the reinforcement and Dormant partners for near pairs (encounter placement design 6.12), Rival Party fit in elite templates (a Later stub, EP-34; encounter placement design 6.14) |
 | 7 Loot | Container, Alcove and secret-cache sockets (inset faces, LP-12); HE-7 and HE-4 reservations; room roles (6.5) | Contents and channel counts; **SocketPlan (LP-11, M2; loot sources design 4.2)** selects from `containerSockets[]` by a role table held as data and never creates a container square: one card-bearing container per room (`cardEligible`), ≤ 1 coin-only container per room, `containerCap` in two phases with merges, the binding definition of the walk line, side-room and Alcove containers previewed from the threshold |
-| 8 Non-combat rooms | Q rooms, the floors 2–5 antechamber micro-event socket, trader and Pledge tags, signature rooms | Fills, trader, shrines, Dream Fragments |
+| 8 Non-combat rooms | Q rooms, the floors 2–5 antechamber micro-event socket, trader and Pledge tags, signature rooms (the `curiosityHost` tag), floor-1 Alcove set pieces and free leaf side rooms as Curiosity hosts (EV-2; events design 4.2) | Fills (Curiosities, Interludes and Glimpses; events design 11), trader, shrines, Dream Fragments. Segment 8 places no Landmarks: layout owns the sockets, segment 4 the ticks (EV-35; events design 4.2) |
 | 9 Boss rooms | The 2×2-cell socket, two dog-leg Forecourt Arches ≥ 5 apart, the Bossgate, start-zone depth ≥ 9, the symmetric `AntechamberScreened` (6.11), the arena pull-back zoom bound (8.1) | Interior, counterplay feature, phases, Keepsake arena dressing; boss tuning with a patrol joiner (FL-21 (e)) |
 | 10 Exploration and information | Minimap nodes and explored-room outlines, Portal glyph kinds, Landmarks, tints, travel paths, count-line data, the patrol waypoint schedule (Listen's "passing") | Fog, minimap UI and the rules-room overlay, Listen UI (occupancy, 9.2), Hairline display, the hearing outline (including the self-teaching shut-door prompt and the elite vantage risk), interrogation facts, auto-walk (pausing at doors, 6.10), Overlook (M3), the Stratum Card line |
 | 11–12 Seeds and validation | The `layout` and `dressing` children and their derivation, draw counts, V8 and its enumeration, the assertion list and the shared floor assertion point | The stream tree, release seed set, retry logging |

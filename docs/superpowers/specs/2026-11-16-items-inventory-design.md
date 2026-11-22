@@ -1014,6 +1014,10 @@ carried to camp.
   stays at camp;
 - it is a short, single-screen visit with the summary's own components.
 
+**The Hawker's Hour (change EV-42, Later):** a segment 8 skin of this
+trader (events design 4.13; loot sources design 4.7.12). The rules above
+are unchanged; the items owner and the camp and hub design apply it.
+
 **Possible later flavour (not designed):** a Yielded enemy (enemies 14.6)
 or a Cowed group's leader (14.8) as the trader. It would need its own
 rules for the trader-as-unit case and is out of scope here.
@@ -1422,6 +1426,9 @@ is original, so it carries no `srd` flag.
   to T+1's budget and the curse pays the difference. Never on a Dream's
   Due (loot economy design 8.5).
 - Once known, a curse shows a cursed badge everywhere.
+- **Shrine curse cures and curse bargains (change EV-43, Later):** hosted
+  by segment 8 Curiosities (events design 10); never on floor 1 (events
+  design 4.6). The conditions and items owners apply the rules.
 
 ## 14. Heirlooms (M3)
 
@@ -1585,6 +1592,7 @@ no other occurs.
 | any party place | any party place | party view | out of combat (armour and trinkets only at a rest, camp or Equip now) | `ItemMoved`, `ItemEquipped` |
 | `shop`, `trader` | 6.2 placement (armour and trinkets to a pack at a trader) | Buy, barter | camp; trader (Later) | `ItemBought`, `CoinChanged` |
 | party place | deleted | use to 0, Sell, barter offer | any; camp; trader | `ItemDestroyed{usedUp}`, `ItemSold`, `ItemBartered` |
+| unequipped carried item | deleted | offered as a Curiosity's price (events design 4.4.4) **(change EV-9, M2)** | out of combat | `ItemDestroyed{offered}` |
 | party place (`boundToUnitId` set) | deleted | on dismissal or same-visit undo of its unit (companions design 7.6) **(change CMP-21)** | camp | `ItemDestroyed{dismissed}` |
 | `leftovers`, `pile` | deleted | stairs | descent | `ItemScrapped` (heirloom: `ItemDestroyed{lost}`) |
 | `container`, `carried`, `ground`, `trader`, `party(keys)`, `windfall` **(change LP-2; M3)** | deleted | stairs | descent | `ItemDestroyed{lost}` |
@@ -1602,12 +1610,15 @@ are unit conditions.
 - New item events: `ItemCreated`, `ItemTaken`, `ItemMoved`,
   `ItemEquipped`, `ItemUsed`, `ItemSplit`, `ItemMerged`, `ItemClaimed`,
   `ItemRevealed`, `ItemLeft`, `ItemSold`, `ItemBought`, `ItemScrapped`,
-  `ItemDestroyed{reason: usedUp | lost | dreamedAway | gotAway}` (`dreamedAway`: an
+  `ItemDestroyed{reason: usedUp | lost | dreamedAway | gotAway | offered}` (`dreamedAway`: an
   unchosen option of an offer set dissolving when the choice resolves;
   loot economy design 6.3) **(change LE-4, M2; change LE-21, the Twin
   Coffer, M3)** (`gotAway`: a Windfall's card leaving with its Truant;
   not a dreamed option, never in Scion memory or "What the dream kept";
-  loot sources design 4.7.7) **(change LP-2; M3)**, `ItemRecharged` (camp, and Later
+  loot sources design 4.7.7) **(change LP-2; M3)** (`offered`: an unequipped
+  carried item the player gives up as a Curiosity's printed price; never a
+  healing item, an HE-3/4 item, the Due, a quest item or a curse; not
+  `dreamedAway`; events design 4.4.4) **(change EV-9, M2)**, `ItemRecharged` (camp, and Later
   the trader), `ItemReturned` (Disarmed, Later); Later `ItemBartered`.
 - Consumable events (consumables design 18.4): `ItemUsed` gains `mode:
   self | adjacentAlly | thrown | inClass | outOfClass`; new
@@ -2051,7 +2062,8 @@ mundane bases are not loot, and family caps all stand.
   shop-or-reward choice, Sell and the party view; **what the camp reward
   card offers** (any item it offers comes from the `camp` channel, 10.4).
 - **Dungeon content:** runes and shrines that identify items or end
-  Clinging (Later).
+  Clinging (Later). Shrine curse cures and bargains are hosted by the
+  events design (`2026-11-22-events-design.md`; change EV-43, Later).
 
 ## 25. Open items for the client
 

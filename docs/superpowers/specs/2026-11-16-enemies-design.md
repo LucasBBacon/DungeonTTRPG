@@ -1590,6 +1590,7 @@ Measured as path distance, never through walls:
 | Each combat round | 8 |
 | A loud trap or a shattered door (a loud spring, an alarm effect, a Crier or a Splinter; traps and locks design 6.18) | 10 |
 | Lure: an exploration action at a seen square within 6; a group can be lured once per floor (`luredThisFloor`, 14.2) **(change SH-21; Shade design 9.1; if the enemies owner accepts)** | 4 |
+| A Curiosity's priced noise: generic noise at the card's square only, resolved by these hearing rules with the joining caps (12.4); never a Lure and never sets `luredThisFloor`; it moves units only through the hearing rules (the EP 13 reading) **(change EV-14; events design 4.4.4, 4.8; M2)** | As printed (≤ 4 on floor 1, never reaching a Circuit square: `F1NoiseClearOfCircuit`) |
 
 Modifiers: each closed door on the path −3; Conspicuous +3 **(settled)**;
 Hushed silent **(settled)**; Dormant groups hear at half radius.
@@ -2162,8 +2163,21 @@ cut), never both **(change HR-19; Herald design 8.3, 10.1)**.
   list; the priority order is the default selection (Pick the Question,
   HX-6; Herald design 10.5) **(change HR-19)**. It is shown in the loot
   summary.
+  The five categories are the shared fact family (F-TRAP, F-SECRET,
+  F-BOSS, F-ROOM, F-KEY); Curiosities also use F-LISTEN and F-CACHE,
+  which interrogation does not (events design 4.4.1) **(change EV-7;
+  M2)**. Each fact is recorded as an instance (`{category, targetId}`)
+  in the floor's **FactLedger**, one per-floor, in-run ledger shared
+  with the elite intel line (15.8), Curiosities, Fragments, Parting
+  Words and the Tithe Bowl; a category whose default target is already
+  known falls through to the next unknown instance, and dedup never
+  reads profile memory (the codex is write-only), so a seed gives the
+  same facts to every player (events design 4.4.2) **(change EV-8;
+  M2)**.
 - There is no spare, rob or execute menu. A choice with no mechanical
   difference is noise, and a reward for executing would make mercy a trap.
+  Curiosity options follow the same rule: no two share an effect set
+  (`MechanicalDifference`; events design 4.3.1) **(change EV-4)**.
 - Captives as next-camp Pledges, never mid-floor joins (Later): Meet at
   camp, or Send home for a Parting Word from the categories above
   **(change CMP-10; companions design 7.12)**.
@@ -2208,6 +2222,10 @@ Intimidation never cost levels.
 - The Herald's **Show of Force** (exploration, a tier-1 slot) gives
   advantage on one cow attempt against one eligible group this floor;
   never a retry, caps unchanged **(change HR-22; Herald design 8.2)**.
+  Events grant no Cow-advantage Grace and never offer cow menus
+  (events design 4.8). **Pending request (EV-13, M3 if ruled; events
+  design 4.8):** a Herald-lit Curiosity option, "your Show of Force
+  costs no slot this floor"; not yet ruled (with the Herald owner).
 
 **Eligible groups:**
 
@@ -2734,9 +2752,13 @@ floor.
   scaling (16) and any floor fact. The floor-fact slot also carries the
   **elite intel line** when it fires (15.2): one non-power fact about that
   floor's boss (its signature item's card), kept afterwards under the
-  boss name on the pause screen's floor-info panel; if segment 8 claims
-  that fact, the line takes another from the same family. **(change
-  LE-18; loot economy design 6.9 item 6, 6.15; M2)**
+  boss name on the pause screen's floor-info panel; the line takes the
+  next unknown instance from the floor's boss-fact queue (`bossQueue`)
+  in the shared FactLedger (14.6), so it never repeats a fact a
+  Curiosity already gave; F-BOSS is run-specific where segment 9
+  exposes seeded boss variables. **(change LE-18; loot economy design
+  6.9 item 6, 6.15; M2) (change EV-7, EV-8; events design 4.4.1,
+  4.4.2; M2)**
   A live Windfall (7.1) in the fight's room at combat end is nabbed, and
   its card and coin are gathered with the rest **(change LP-5; loot
   sources design 4.7.4, 4.7.5; M3)**.
@@ -2838,6 +2860,9 @@ Coated stay Later **(change CN-26)**. The original list:
   Wager prize, the Dare cache or the box contents, so the floor pool and
   the 20.1 check are unchanged **(change EP-26; client agreed
   2026-11-21, Q2; encounter placement design 6.13)**;
+- Curiosities and Interludes pay 0 experience, on the Annex precedent,
+  so the floor pool and the 20.1 check are unchanged (events design
+  4.4.8) **(change EV-7; M2)**;
 - **on a trimmed floor** (`pacing.trimmedFloors[]`, lever 3, applied only
   in the lever order of companions 7.4): a trimmed floor 4 pays boss 300,
   a trimmed floor 5 pays lair 240 (boss 200); a trimmed floor 3 (when
@@ -3475,7 +3500,10 @@ The build fails when:
   design 6.8) **(change FL-9)**. **Pending request (FL-21 (d)):** the
   540 multi-bypass case and Den and Sleeper in-room sneaks (16), with
   the "one guard post or one Dormant lair" re-reading if `LairSneakRate`
-  exceeds 25% (EP-23, pending; 16);
+  exceeds 25% (EP-23, pending; 16). **M3 if HZ-23 (change EV-36;
+  events design 4.4.1, 9.2):** a Curiosity bypass route only skins an
+  FL-generated Chute (`GraphUnchanged`), and the band is re-checked
+  with segment 8's passes on (`XpBandAfterEvents`);
 - a Portal breaks `PortalKindsLegal` (the return-Portal principle; a
   Latch's `barSideRoomId` is its deeper end) (floor layout design 9.2,
   11.2) **(change FL-19)**;

@@ -1532,6 +1532,10 @@ itself would need a Vanguard row, and none is proposed.
   FL 9.1's rejected floor-wide alarm.
 - Saved in `hazardDigest`.
 - **Gate:** no Mood may raise the F2 death share beyond noise (DH 18.2).
+- **Curiosity costs (events design 4.9; change EV-31; M3):** on an Omen
+  floor a Curiosity option's printed cost may be the named, visible
+  event that advances the theme's Mood, inside the cap above; an Omen
+  floor may also swap a card for its Omen Retelling (kind, not stats).
 
 **Delivery:** the base game has none. Each Mood is an Omen (one per
 theme, announced at floor entry) or Nightmare content.
@@ -1621,6 +1625,10 @@ Mood.
   un-engaged group. Never the Sanctum, never past the antechamber.
 - ≤ 1 per floor. `NoSealedPocket` and `PartyEscape` hold.
 - It is the only hazard that saves clock. In combat it is a plain Void.
+- **Curiosity bypass routes (events design 4.4.1; change EV-36; M3 if
+  HZ-23):** segment 8 adds no link of its own; a Curiosity route may
+  only skin an FL-generated Chute, under `GraphUnchanged`, and waits on
+  HZ-23 like Plunge.
 - **Pending request (TL-41, M3; traps and locks design 6.3, 7):**
   segment-5 relocation traps (the Dumbwaiter Drop to its linked room out
   of combat; in combat within the same room only, so the in-combat
@@ -2156,7 +2164,11 @@ plate-warmers (Hot) every 3 squares, the carving-station face. Dry.
   party-only Operate on a covered plate served with Soup or Roast, ≤ 2
   per fight. Heals half a potion (DH 12.1) and gives Poisoned
   automatically (Chilled if RT-14 removes Poisoned). The Glutton's
-  reach for it is an intent.
+  reach for it is an intent. **Pointer (events design 4.9; change
+  EV-33, a request to the DH and conditions owners; M3):** segment 8's
+  Easing (priced Weary or rest-tick relief, never HP) follows this
+  HZ-30 path and is counted in `HealSupplyPerFloor`; no Curiosity
+  option heals (events design 5.3, Su4).
 - **The Carving Hound.** A Chainpost under the table.
 
 **Later:** the Service Lift (cross-room).
@@ -2755,7 +2767,7 @@ M3 instead; the client is told (19.2).
 | **5 Traps, locks, checks** | The HZ-1 line. Traps kept: the dumbwaiter drop, the toppling-shelf tripwire, the icicle chandelier, the sluice Soak, the acid geyser, trapdoor stages, the bell tripwire, the portcullis, the Appeals trapdoor, horn tripwires. EnvDC as a reference for the DC ladder. Cords never arm traps and need no check | DCs; traps; door verbs; how traps and hazards share a room beyond these defaults |
 | 6 Encounter placement | Start sockets outside footprints and Tide states at fight start; ≤ 2 starts within 2 of a Void edge; ≤ 1 flyer, ≤ 1 shover type and ≤ 2 shover units within 4 of a Void edge in Void rooms; the `usesCords`, `singer` and Stoker tags; Wake candle racks on Dormant groups (index ≥ 3, ≤ 1 per room); Dare garrisons; the mindless share (the enemies owner). **Filled by the encounter placement design (6.1 exclusions, 6.6.8 Terrain Pairings, 6.13):** the guarded Dare garrison is the floor's Annex (change EP-26; agreed, Q2; M3) | Who starts where |
 | 7 Loot | Fallen loot on the edge; Dare containers (+1 rarity step); no item loss. **Filled by the loot economy design (6.9, 6.14; change LE-10; M3):** the Dare cache is an SR5 step socket under the one step rule; fallen loot on the edge, no item loss (7c). **Changed by the loot sources design (4.7.7; change LP-2; agreed, Q1; M3):** the sole exception is that a Windfall's card and coin leave the floor when its shown count ends (`ItemDestroyed{gotAway}`); kill method, damage, terrain, traps, locks and force still never destroy loot | Containers and contents |
-| 8 Events | Unguarded Dare forms; Moods on the Stratum Card; empty Tide naves as non-combat puzzles; the Gaol's small hours | Event content |
+| 8 Events | Unguarded Dare forms; Moods on the Stratum Card; empty Tide naves as non-combat puzzles; the Gaol's small hours. **Filled by the events design (4.2, 4.9, 4.13; changes EV-31, EV-35):** no Curiosity is placed in a Dare or Wager room, which stays segment 4's (M2); segment 8 places no Landmark and no clock Landmark: FL owns the sockets, segment 4 the ticks (EV-35; M2); no Mood on the Stratum Card in M2, handed to segment 10 and segment 4, and in M3 an Omen card's cost may be the named, visible event that advances a Mood within 6.9's cap (EV-31; M3); empty Tide naves are not M2 Curiosities, and an empty nave may be an M3 Curiosity host only if segment 4 offers it (**open item**, segment 4's to offer; M3 option); the Gaol's small hours are a Glimpse and Retelling motif only, no rule (events design 5.3; M2) | Event content |
 | 9 Boss arenas | 6.17: one clock and one Void line per arena inside RT 6.11, under the room rules; `noDrop`; the boss Teetering guard; counterplay identities kept | Interiors, counterplay, phases |
 | 10 Exploration and UI | Stir rule cards on reveal; due overlays; countdown glyphs; the menu card; Snag glyphs; Portal hazard and Dare signposts; Listen hears tells; Plunge links | Overlays and UI |
 | 11–12 Seeds and validation | The `hazards` stream; V10; `hazardDigest`; save fields; reports and arms | The stream tree, release seed set, retry logging |

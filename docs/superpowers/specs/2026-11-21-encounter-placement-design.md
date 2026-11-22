@@ -2607,7 +2607,7 @@ run with the RS role-ID gate.
 | EP-36 | Call Post: a bell rope or gong that sounds noise 10 within joiner rules; Muffle out of combat | M3 | Deferred until TR-15 Furnishings; one call source per encounter |
 | EP-37 | Wake Order: sleepers wake one by one by distance, damage or adjacency | M3 | Deferred; per-member awareness is a core change to ENM 12 |
 | EP-38 | Errant: an out-of-depth elite walking a side loop, telegraphed from floor entry | Later | Its "deaf to the din" changes decided MAIN 4.3 joining; client only |
-| EP-39 | Captive: a chained non-combatant behind a formation (Parting Word, Pledge) | Later (reserve `captiveSocket` now) | With CMP 7.12 Pledges; **new lead's call:** it uses CMP's own "captive" (the same concept), not a new name |
+| EP-39 | Captive: a chained non-combatant behind a formation (Parting Word, Pledge) | Later (reserve `captiveSocket` now) | With CMP 7.12 Pledges; **new lead's call:** it uses CMP's own "captive" (the same concept), not a new name. Segment 8 hosts the Pledge wanderer and shrine sources and a freed captive's Testimony (EV-41, a request to the companions owner; Later; events design 4.8); the events design declines Model C's M3 Parting-Word Captive, so Pledges stay one Later package |
 | EP-40 | Standoff / Riot: Gaol Jailers vs Inmates, a three-sided fight | Later | ENM 17.4 Feud is Later; a three-sided 6.4 enumeration |
 | EP-41 | Approach band out of combat | M3 | A DH 17.3 change; a later client decision. Also records the 2024-style surprise as a Later fallback, only if `SurpriseDeathShare` misses |
 | — | Rumour floor meter; the Prowl hunter | — | **Rejected** (FL 9.1; toy: overshoot, then inert) |
@@ -2880,7 +2880,7 @@ sockets and pieces (RT); hazards (HZ); traps, locks and `trapsResolve`
 | Segment | Hook |
 |---|---|
 | **7 Loot** | Carriers on sockets the party can reach for Steal (never a nook; never a ward behind two fronts on F1–2); the Champion notable; the bait-cache prop family (CT1, LP-15; re-skins LP-16 pending; loot sources design 5.1, 5.3); activity containers (a dice pot, a feast plate); Annex prizes (none of its own: loot economy design 6.9 item 1); boxed-lurker contents (loot economy design 6.9, LE-20). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 4.8, 5)** |
-| **8 Events** | Activity vignettes in Q rooms ("remains of a revel"); no event spawns or moves units; Cowed kneeling never crosses a door |
+| **8 Events** | Activity vignettes in Q rooms ("remains of a revel"); no event spawns or moves units; Cowed kneeling never crosses a door. **Taken up by the events design (segment 8, approved 2026-11-22; its 4.13):** vignettes are Glimpse dressing beside the Q room's Curiosity, under RC1+, never a second decision (M2); "no event spawns or moves units" is held: Curiosity noise is generic noise that moves units only through the hearing rules, never a Lure and never sets `luredThisFloor` (EV-14, a reading pending the EP owner's confirmation, with the enemies owner; M2); figures are framed non-unit map objects, never on a walkable square (events design 4.11; EV-45; M2 implied figures, M3 frame); M3 Overtures may apply Soaked, Oiled or Revealed to a tied group at its fight's first round, never on the elite, the Annex, the boss or a lurker host (for Revealed) (EV-32, a reading of this row pending the EP owner, enemies owner request; M3; events design 4.9) |
 | **9 Boss arenas** | Retinue escorts, arena start zones ≥ 9, the patrol joiner, Keepsake dressing |
 | **10 Information** | Formation and Keystone chips (`ChipNoLeak`; the read-surface table of 6.20); the Read card; the Perception hold overlay; the Lore counter line; the Listen activity word and watched Portal; Spoor marks; arrival-Portal arrows; the seen-tell band marker (6.20); rest-preview movers; the Lore roster preview of formations; "Line broken" and "Caught facing the door" |
 | **11 Seeds** | The `encounters` node, its draw table, the `retry1` child, the per-band `lurkStealth` keys |
@@ -3448,6 +3448,13 @@ wave or a later design triggers them; each fallback is a new lead's call
   non-lurker Stealth (an ENM 12.2 change), a new DH 10.4 reading and the
   6.4 surprise rows per group member; the toy cost about 4 points of win
   rate.
+- **Pending from the events design (segment 8, approved 2026-11-22):**
+  the EP owner confirms two readings of the segment-8 hook (13): EV-14,
+  Curiosity noise as generic noise under "no event spawns or moves
+  units" (M2); and EV-32, M3 Overtures on tied groups. If the EP or
+  enemies owner refuses EV-14, Curiosity noise prices become bound tick
+  costs and the events design re-prices (events design 14.2); if EV-32
+  is refused, no Overtures ship.
 - **At M3:** the approach band out of combat (EP-41); two-group "watched
   sleep" rooms.
 - **Later:** the Errant (a MAIN 4.3 change, client only); a Rumour-like

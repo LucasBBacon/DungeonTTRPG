@@ -1569,7 +1569,9 @@ saves.
   main path before the boss room (CL-10). Layout hosts it on the floor-1
   Circuit, which always includes main-path Q room 3, and the floor's one
   route-avoidable fight is a guard post (changes FL-9, FL-10; floor
-  layout design 6.7, 6.8).
+  layout design 6.7, 6.8). Curiosity noise is generic noise at its own
+  square, never a Lure, and its radius may not reach a Circuit square
+  (`F1NoiseClearOfCircuit`; change EV-14, events design 4.4.4).
 - **Fallback type:** its weapon's physical type; Harrowing Word's psychic
   is a control rider, not its fallback (6.5). **(change HR-3)** Plain
   Speech makes Harrowing Word bludgeoning against a psychic-immune

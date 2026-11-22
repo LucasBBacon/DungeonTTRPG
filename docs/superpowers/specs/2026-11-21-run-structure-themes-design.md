@@ -602,7 +602,11 @@ more theme to build); C, variable 4–5 floors.
   honest. **The one exception is a launcher streak** (R-SEED-6): after
   three runs on the same floor-1 theme the next one is forecastable; the
   forecastable share is recorded in the `Floor1ClassSpread` notes
-  **(told plainly after the check)**.
+  **(told plainly after the check)**. **Launcher Fallow (change EV-20;
+  agreed, events Q1; M2; events design 4.5.4):** a Fallow redraw
+  (R-SEED-6) is recorded in the same notes; it reads the forecast F1
+  Curiosity, not the class, and `Floor1ThemeShare` keeps each drawable
+  floor-1 theme within 1/n ± 5 points.
 - **R-SEED-3, fixed-count draw order (lead's call on the details).** All
   lists are sorted by stable id, with no unordered iteration
   **(settled, main 6.3)**. Every bounded integer is drawn with **one
@@ -622,7 +626,13 @@ more theme to build); C, variable 4–5 floors.
   reserved draw count (9 per identity draw) consumed even when unused,
   and the approved enemies 10.5 step 3 parent draws kept as dummy and
   ghost draws; floor N+1's generation is committed with the camp-exit
-  save (change LE-14; M1; loot economy design 6.10). In
+  save (change LE-14; M1; loot economy design 6.10). So does the
+  `curiosities` child of each floor's dungeon substream: a fixed 12
+  draws per floor *(illustr.)* in a fixed draw map, every draw consumed
+  whatever the floor hosts; EventDraw runs after layout and before
+  hazards and reads no host, loot, party, run choice or profile memory,
+  and EventPlace after LootBind is draw-free (change EV-21; M2; events
+  design 4.10; segment 11 owns the tree). In
   order:
   1. **the permutation:** a Fisher–Yates permutation of the **whole theme
      catalogue in the manifest, locked, held and cut themes included**;
@@ -689,6 +699,12 @@ more theme to build); C, variable 4–5 floors.
     fields of 11.1 (change FL-14), and the `terrain.*` and `cover.*`
     tuning of 11.1 (change TR-17; room terrain design 11.1). It is fixed at run
     start; **a run never changes mode mid-run (new lead's call)**.
+  - **Display memory (read, not changed; change EV-18; agreed, events
+    Q1; M2, R3 in M3; events design 4.5.3, 4.10):** Curiosity
+    Retellings, the Twice-Told card and Afterword lines are display only
+    and sit outside the reproducibility key (`RetellingParity`,
+    `DisplayMemoryInert`); M3 Sequel and Ripening stages enter only
+    through the unlock snapshot (9.1).
   - **Shared and daily seeds use the canonical unlock set** (all content
     of the current M-wave unlocked), never the sharing player's own
     profile, so two players with one shared seed get one route.
@@ -700,8 +716,26 @@ more theme to build); C, variable 4–5 floors.
   lead's call on adoption; streak length revised after the check).** The
   launcher, not the rules core, may redraw a fresh OS-entropy seed (up
   to 8 times) if its floor-1 theme equals that of **each of the three
-  previous runs**, so streaks cap at 3. Shared and daily seeds and the
+  previous runs**, **or if the forecast F1 Curiosity is in the
+  profile's Fallow set (K = 3)** (change EV-20; agreed, events Q1; M2;
+  events design 4.5.4), so theme streaks cap at 3. Shared and daily seeds and the
   simulator bypass it. It never touches seed purity.
+  - **Launcher Fallow (change EV-20; agreed, events Q1; M2; events
+    design 4.5.4):** the forecast is the first draw on F1's
+    `curiosities` child; the Fallow set is the cards displayed in the
+    last 3 personal runs (`curiosityMemory.recentRuns`). Fallow shares
+    the budget of 8 redraws and applies to the F1 Curiosity only. Per
+    candidate the order is (1) the theme rule above, (2) Fallow, (3) the
+    onboarding preference (a profile's first 2 runs prefer a MECH or
+    short F1 card), which only scores candidates and never forces a
+    redraw. On exhaustion the launcher keeps the best candidate by
+    (passes the theme rule, passes Fallow, passes onboarding, earliest);
+    if no candidate passed the theme rule, it keeps the original seed
+    (a reading, since this rule states no such case; the RS owner
+    confirms).
+    Guards: `LauncherLootNeutral`, `Floor1ThemeShare`, `F1PoolParity`,
+    `LauncherRedrawRate` and `LauncherCheckMs`. This pulls 12's M3 row
+    "profile-side anti-streak outside seeded runs" into M2.
 - **Switching Two Doors on changes no seed (agreed, Q2).** The walk
   produces Door A and Door B in both builds; only who picks changes.
 - **LootDoorInvariant (lead's call):**
@@ -740,6 +774,11 @@ more theme to build); C, variable 4–5 floors.
     unchanged; default off (`loot.elementEcho = false`), and a release
     build ships it off until the client adopts it (V14 (j));
   - the Muster's recruit draw never reads the next theme;
+  - **Curiosities (read, not changed; change EV-7, EV-21, EV-22; M2;
+    events design 4.4.1, 4.5.7, 4.10):** Curiosities grant no VP, coin,
+    experience or draws; loot never reads them, EventPlace after
+    LootBind is draw-free, and Strands read only committed run state at
+    floor entry or at offer time, so the invariant holds;
   - **the Perilous Door (read, not changed; change LE-19; agreed, loot
     Q5; M3; loot economy design 6.12):** the fourth dreamed option of
     every width-3 offer is drawn on `lootPlan` from M2 on every seed,
@@ -814,7 +853,14 @@ more theme to build); C, variable 4–5 floors.
   OSR stocking lesson; placement hook). On floors 2–5 the antechamber
   (the Forecourt, 9.4) counts as one, read as **special** (it is the
   patrol's homeRoom and fight host), so untrimmed floor 5 has no empty
-  room **(told plainly; change FL-5)**.
+  room **(told plainly; change FL-5)**. **Curiosities (change EV-2;
+  M2; events design 0.1, 4.2):** about one Curiosity per floor on
+  floors 1–3 (floor 1: a `curiosityHost` signature room, else an Alcove
+  set piece, else a free leaf side room, never main-path rooms 0–2;
+  floors 2–3: a Q room, one of these empty or special rooms; floor
+  layout design 6.5), a Forecourt Interlude on floors 2–5, and Glimpses
+  on walls; in rooms layout already rations, never an added room; never
+  in an arena; one per room.
 - **Counting (change FL-4; floor layout design 3.4):** n main-path rooms
   count entry (index 0) through arena (n−1); the floor-1 antechamber is
   extra to the table's 7 but inside n (n = 8, the antechamber at n−2);
@@ -858,6 +904,12 @@ until Travel on (the camp state `nextTheme`).
 - Camps 1 and 3 are dressed in the current act's palette; camp 2
   carries a bigger act-change moment; camp 4 is the Last Hollow.
 - A recurring wakeful camp keeper runs the vendor (display only).
+  **Afterword (change EV-26; agreed, events Q1 for the memory model;
+  M2 lean, M3; events design 4.5.10):** in M2 the run-start card shows
+  at most one Afterword line keyed to how the last personal run ended
+  and at most one Strand closure line; in M3 the keeper gains lines
+  that name carried Strands, and the Unwoken Roll; all display only,
+  never humour on death, never the Dreamer.
 - A lullaby on a music box plays at every camp and degrades with depth.
 
 ### 6.9 What the player sees ahead (change RT-10, RT-12)
@@ -1043,6 +1095,11 @@ Q3:** B, no premise; C, folk horror; D, full absurdism.
    - **dry:** deadpan sincerity, no punchline ("The hymn continues. You
      will not.");
    - **absent:** no wordplay and no comic premise ("Sleep.").
+
+   **Curiosities (read, not changed; change EV-24; M2; events design
+   4.11):** they keep this register; punchlines live in Retellings and
+   Glimpse art, and a card drawable on floors of two registers is
+   written register-neutral, in the drier one.
 5. **Read it at a glance.** One visual grammar across every faction.
 6. **Obsessions differ in shape (lead's call).** Each Obsession is
    tagged by kind (vow, debt, duty, grief, craft, vanity, hunger, rest).
@@ -1055,15 +1112,15 @@ Q3:** B, no premise; C, folk horror; D, full absurdism.
 
 | # | Rule |
 |---|---|
-| RC1 | **Mechanics never joke:** no fake tiles, no lying UI, no hidden rules, no "wild" random effects for flavour. **Dressing never mimics a unit, a square kind or a rule (lead's call, after the check):** statues and props share no silhouette with a roster type; a square kind's material (water, web, sheet, oil, bile) appears only on its squares and on walls above head height; no floor-level particle implies a condition; frost, rain and liquid read only as backdrop. **RC1+ (change TR-20; room terrain design 8.1, 8.2):** every object on a walkable square is a rules piece; dressing lives only on walls, backdrop, non-walkable squares or above head height; liquid-holding pieces are drawn dry or lidded; residue rule: nothing remains on the floor after an event resolves, except debris as Rough. **M3:** Remnant volumes are the one floor-level particle allowed to imply a condition (TR-27). **Hazards (change HZ-29; hazards design 8):** every Void is a Void, no fake holes; backdrop depth never reads as walkable; a fall leaves no residue; motion on walkable squares happens only during an act animation (≤ 1.0 s), never at idle, and only for the Turning Ring's rotation, Peristalsis's band step, a Tide's fill change and the Dreamer's heave; figments (the Stampede herd, Counting Sheep) exist only during their act, flat, translucent, non-unit and below unit value; **M4 (change LP-34; agreed, loot sources Q3; loot sources design 4.7.11):** the Ebb's fade, one notch per tick as an act of ≤ 1.0 s, joins this closed motion list. **Traps and locks (change TL-10; M2; traps and locks design 6.3, 8):** every device body over walkable squares is rigged, with no decoys; Hunch zones always contain a trap; no fake plates, empty "trapped" chests or lying hovers; every trap carries a diegetic tell on a wall, above head height or on the device body, never on a fake floor tile; snare and catch tells render only from Revealed, through a Reveal transition that reads as the object settling, never as a spawn; a forced lock shows a hanging padlock and a Splinter an empty frame with a jagged edge, with no floor debris; no trap tell moves at idle (idle motion on containers and Furnishings stays the lurkers', boxed lurkers included; change TL-28, a reading, M3). **Encounters (read, not changed; change EP-9, EP-12; M2; encounter placement design 6.7, 6.8.6, 8):** activities and postures keep their props on the model and off walkable squares; the Waylay's Spoor mark sits only on door frames and walls, never on floor squares. **Loot sources (change LP-7; agreed, loot sources Q1, Q4; M3; loot sources design 4.7.1, 6):** the Windfall Truant is a pre-placed unit, present at reveal, never a spawn, with a Dormant breathing idle and motion only in its closed act table of ≤ 1.0 s acts that reuse approved states (dormant, stand, hop, held, wait-at-hole, leave-by-Rathole, fade-with-bundle, nabbed, stolen); a loss always takes the bundle and plays the got-away cue, a gain always leaves a pile, and nothing remains after it resolves except a gain's pile; it cowers only while awake or held, never while Dormant. **Keepsakes (change LP-24; M2; loot sources design 5.1):** Keepsake dressing never uses a container, bait-cache, Windfall or Bedside Stand silhouette (9.3) |
-| RC2 | **Role prop grammar** (extends enemies 8.1): leaders carry a vertical emblem; soldiers a tall flat object (shield, door, tray, coffin lid, chair); artillery points something forward; brutes are oversized mass inside one square; skirmishers lean low; controllers have an orbiting element; lurkers show a tell at rest; minions are small and share one palette. **Pieces (change TR-20; room terrain design 8.1):** no terrain piece uses a chair, tray, door, upright coffin lid, shield, tall staff, forward-pointing tube, orbiting element or unit silhouette; chairs appear only tucked into tables; Low pieces that could read as shields come only as multi-square runs; no Furnishing or Low piece shares a silhouette family with its theme's current or planned Kegs. **Boxed lurkers (change TL-28, a reading; agreed, traps and locks Q2; M3; traps and locks design 6.14, 8):** a boxed lurker shows its own lurker's rest tell, re-authored at container scale and readable from 6 squares, and a face once revealed. **Pending request (change TL-43; RS owner and art; M2; traps and locks design 6.3, 8):** trap device bodies follow the piece bans above (no chair, tray, door, upright coffin lid, shield, tall staff, forward-pointing tube, orbiting element or roster prop). **Truants (change LP-7; agreed, loot sources Q1, Q4; M3; loot sources design 4.7.1, 5.3):** every Truant is a small, faced, non-fearless animal (RC3), never an object and never humanoid, hauling the one cross-theme bundle (undyed sackcloth tied with the Windfall mark, larger than the animal, visible in every pose, never an item silhouette); its eyes and limbs stay out in every pose, Dormant included; a Truant, its bundle and its Rathole never use its theme's faction motif or minion palette, so theme identity goes on the animal only (M3 pilot skins: the Choir's Alms Crab, the Carnival's Conjuror's Rabbit, the Supper's Crumb Mouse) |
-| RC3 | **Faces mean minds:** mindless types show one cross-theme mind tell (a hollow keyhole motif) and no face; fearless-but-minded types are masked or veiled; non-fearless types have faces and visibly cower, flee and kneel (animations duplicate approved states, never replace them). **(Lead's calls, after the check.)** Bosses are exempt: the boss plate and pips carry their read, and the face grammar applies to non-boss types only. Helms on non-fearless types are open-faced (raised visor or none); veils on non-fearless types are lifted or pinned back. The keyhole silhouette is reserved: no environment, prop or non-mindless unit uses it (locks read as padlocks; change FL-7, told plainly). A Routed or Cowed animation never moves a unit through a door or changes a door. **Locks (change TL-22; traps and locks design 6.11, 8):** every lock reads as a padlock base decal plus a kind glyph, and theme locks are skins on that base (webbing over a padlock, a padlock on a sphincter's rim, a frosted padlock); no lock glyph uses a face part, a ring or a clock face; Wager cages carry no padlock, only the Wager glyph (M3); no container carries a keyhole (V7). **Encounters (read, not changed; change EP-9; M2; encounter placement design 6.7, 8):** Busy and Dormant postures duplicate approved states (the Dormant glyph stays) |
+| RC1 | **Mechanics never joke:** no fake tiles, no lying UI, no hidden rules, no "wild" random effects for flavour. **Dressing never mimics a unit, a square kind or a rule (lead's call, after the check):** statues and props share no silhouette with a roster type; a square kind's material (water, web, sheet, oil, bile) appears only on its squares and on walls above head height; no floor-level particle implies a condition; frost, rain and liquid read only as backdrop. **RC1+ (change TR-20; room terrain design 8.1, 8.2):** every object on a walkable square is a rules piece; dressing lives only on walls, backdrop, non-walkable squares or above head height; liquid-holding pieces are drawn dry or lidded; residue rule: nothing remains on the floor after an event resolves, except debris as Rough. **M3:** Remnant volumes are the one floor-level particle allowed to imply a condition (TR-27). **Hazards (change HZ-29; hazards design 8):** every Void is a Void, no fake holes; backdrop depth never reads as walkable; a fall leaves no residue; motion on walkable squares happens only during an act animation (≤ 1.0 s), never at idle, and only for the Turning Ring's rotation, Peristalsis's band step, a Tide's fill change and the Dreamer's heave; figments (the Stampede herd, Counting Sheep) exist only during their act, flat, translucent, non-unit and below unit value; **M4 (change LP-34; agreed, loot sources Q3; loot sources design 4.7.11):** the Ebb's fade, one notch per tick as an act of ≤ 1.0 s, joins this closed motion list. **Traps and locks (change TL-10; M2; traps and locks design 6.3, 8):** every device body over walkable squares is rigged, with no decoys; Hunch zones always contain a trap; no fake plates, empty "trapped" chests or lying hovers; every trap carries a diegetic tell on a wall, above head height or on the device body, never on a fake floor tile; snare and catch tells render only from Revealed, through a Reveal transition that reads as the object settling, never as a spawn; a forced lock shows a hanging padlock and a Splinter an empty frame with a jagged edge, with no floor debris; no trap tell moves at idle (idle motion on containers and Furnishings stays the lurkers', boxed lurkers included; change TL-28, a reading, M3). **Encounters (read, not changed; change EP-9, EP-12; M2; encounter placement design 6.7, 6.8.6, 8):** activities and postures keep their props on the model and off walkable squares; the Waylay's Spoor mark sits only on door frames and walls, never on floor squares. **Loot sources (change LP-7; agreed, loot sources Q1, Q4; M3; loot sources design 4.7.1, 6):** the Windfall Truant is a pre-placed unit, present at reveal, never a spawn, with a Dormant breathing idle and motion only in its closed act table of ≤ 1.0 s acts that reuse approved states (dormant, stand, hop, held, wait-at-hole, leave-by-Rathole, fade-with-bundle, nabbed, stolen); a loss always takes the bundle and plays the got-away cue, a gain always leaves a pile, and nothing remains after it resolves except a gain's pile; it cowers only while awake or held, never while Dormant. **Keepsakes (change LP-24; M2; loot sources design 5.1):** Keepsake dressing never uses a container, bait-cache, Windfall or Bedside Stand silhouette (9.3). **Curiosities (change EV-25; M2; events design 4.2, 4.11):** Curiosity props and Glimpses sit on walls, above head height or in a niche, never on a walkable square; every physical act is staged wall-mounted, dry or lidded, and any wet, spilled, shattered or burning moment appears only in the card's diorama; a resolved Curiosity goes to an inert state (a dust sheet above head height) and leaves no residue; no Curiosity prop, Glimpse or resolved state uses a Portal kind's silhouette or skin (a door appears only inside a diorama); card chips are printed from rules data (read, not changed; change EV-4; events design 4.3.1) |
+| RC2 | **Role prop grammar** (extends enemies 8.1): leaders carry a vertical emblem; soldiers a tall flat object (shield, door, tray, coffin lid, chair); artillery points something forward; brutes are oversized mass inside one square; skirmishers lean low; controllers have an orbiting element; lurkers show a tell at rest; minions are small and share one palette. **Pieces (change TR-20; room terrain design 8.1):** no terrain piece uses a chair, tray, door, upright coffin lid, shield, tall staff, forward-pointing tube, orbiting element or unit silhouette; chairs appear only tucked into tables; Low pieces that could read as shields come only as multi-square runs; no Furnishing or Low piece shares a silhouette family with its theme's current or planned Kegs. **Boxed lurkers (change TL-28, a reading; agreed, traps and locks Q2; M3; traps and locks design 6.14, 8):** a boxed lurker shows its own lurker's rest tell, re-authored at container scale and readable from 6 squares, and a face once revealed. **Pending request (change TL-43; RS owner and art; M2; traps and locks design 6.3, 8):** trap device bodies follow the piece bans above (no chair, tray, door, upright coffin lid, shield, tall staff, forward-pointing tube, orbiting element or roster prop). **Truants (change LP-7; agreed, loot sources Q1, Q4; M3; loot sources design 4.7.1, 5.3):** every Truant is a small, faced, non-fearless animal (RC3), never an object and never humanoid, hauling the one cross-theme bundle (undyed sackcloth tied with the Windfall mark, larger than the animal, visible in every pose, never an item silhouette); its eyes and limbs stay out in every pose, Dormant included; a Truant, its bundle and its Rathole never use its theme's faction motif or minion palette, so theme identity goes on the animal only (M3 pilot skins: the Choir's Alms Crab, the Carnival's Conjuror's Rabbit, the Supper's Crumb Mouse). **Curiosities (change EV-25, EV-45; M2 implied figures, M3 figure frame; events design 4.11):** no interactive chairs and no Portal silhouette on a Curiosity prop; M2 dream figures are implied only (hands with a plain cuff, a lamp and glove above head height, a back in a high window, empty coats on a rail), with no face and no faction motif or minion palette; the M3 **figure frame** is one cross-theme non-unit map object in a niche, booth or behind glass, never behind a Drape or on a walkable square, flat and paper-cut below unit value tier, cropped at the shoulders, with no roster silhouette |
+| RC3 | **Faces mean minds:** mindless types show one cross-theme mind tell (a hollow keyhole motif) and no face; fearless-but-minded types are masked or veiled; non-fearless types have faces and visibly cower, flee and kneel (animations duplicate approved states, never replace them). **(Lead's calls, after the check.)** Bosses are exempt: the boss plate and pips carry their read, and the face grammar applies to non-boss types only. Helms on non-fearless types are open-faced (raised visor or none); veils on non-fearless types are lifted or pinned back. The keyhole silhouette is reserved: no environment, prop or non-mindless unit uses it (locks read as padlocks; change FL-7, told plainly). A Routed or Cowed animation never moves a unit through a door or changes a door. **Locks (change TL-22; traps and locks design 6.11, 8):** every lock reads as a padlock base decal plus a kind glyph, and theme locks are skins on that base (webbing over a padlock, a padlock on a sphincter's rim, a frosted padlock); no lock glyph uses a face part, a ring or a clock face; Wager cages carry no padlock, only the Wager glyph (M3); no container carries a keyhole (V7). **Encounters (read, not changed; change EP-9; M2; encounter placement design 6.7, 8):** Busy and Dormant postures duplicate approved states (the Dormant glyph stays). **Curiosities (change EV-25, EV-45; M2; events design 4.11):** implied figures and the M3 figure frame show neither a face nor the keyhole tell, under their own non-unit grammar; no Curiosity uses a clock-dial object that opens locks |
 | RC4 | **Damage language:** family by shape (physical streaks and impacts; elemental fluids, particles, crystals; spirit rings and ripples); type by hue *plus* pattern, so it survives colour-blind simulation; no theme uses an undesaturated damage hue as its dominant environment colour. **The damage-hue key** (10 types, hue plus pattern) is owned by art and due before the first Tone Sheet. A theme whose Law is a damage type (Gut, Supper, Carnival) dresses its environment in a desaturated, off-key variant and keeps the saturated key for its hazard squares and attacks (lead's call). **RC4+ (change TR-20; room terrain design 8.1):** the saturated damage hue is also allowed on contact hazards in every F2–5 theme; fire hue stays limited to fire squares, Hot pieces and attacks. **M3:** Miasma Remnants take their own hue and pattern (a desaturated violet with a stipple, never bile green; room terrain design 6.6). **Hazards (change HZ-29; hazards design 8):** Voids carry the drop rim but no damage-hue fill; bile green stays reserved (the Gullet backdrop uses flesh tones); due overlays and latent footprints use the telegraph-tier pattern and colour with the damage-type icon; the fire hue appears only in act VFX and on fire squares or Hot pieces |
-| RC5 | **One glyph per square rule:** each square kind has one cross-theme rim and icon; a theme reskins only the fill (bedsheets read as web because they *are* web). **RC5+ (change TR-20; room terrain design 8.1):** one glyph set per piece class and square class across themes, built from four composable marks (base, motion, danger, cover); every hazard face projects a floor decal onto its one front square; the stub-glyph rule (the "blocks sight" cap on a Tall piece's stub state) applies from M1. **Hazards (change HZ-29; hazards design 8):** one Void lip glyph, one Snag glyph, one Cord glyph with used and unused pips and one vent glyph with trigger pips across themes; a Stir uses its host's glyph plus a countdown numeral on the host's floor decal; the four-mark table gains the hazards design's RC5+ rows (Void, Snag, Cord, vent, latent footprint, due square, Tide socket, Lurch lane, Handhold, Chainpost, staked pit) and one pattern registry, in which no two patterns differ only by hue. **Traps and locks (change TL-22; traps and locks design 8):** the four-mark table gains the traps and locks design's RC5+ rows (Revealed trap trigger with a `triggerKind` sub-mark, device area, mechanism gear, trap link, Hunch zone, Hunch catch, state badges, lock, Wager Portal) and the pattern registry gains the trap rim, the Hunch dotted rim with question-mark ticks (never a hatch) and the trap-link dash; one lock glyph set across themes: Plain, Crier, Barb, Tattle and Keyed in M2, Runed, Hour, Riddle, Fed and Ticket in M3, and the High-Striker's threshold glyph. **Encounters (change EP-12; M2; encounter placement design 6.8.1, 6.8.6):** the pattern registry gains the **Spoor base mark** (one cross-theme three-stroke tally, apart from the trap-tell, lock and Hunch families, skinned per theme in material only) and the cross-theme **bait-cache mark**. **Loot (read, not changed; change IR-13; agreed, item rolls Q5; M1; item rolls design 4.13):** the **signature cache** is one pattern-registry mark (base: cache; a signature sub-mark shared with the boss plate's "Guards: <signature name>" line). **Loot sources (change LP-7, LP-12, LP-14, LP-26; loot sources design 4.3, 4.7.3, 4.10, 6):** the four-mark table and pattern registry gain the loot sources design's RC5 rows, each with a positive shape, a slot and an RC6 tier: the **wall-set mark** (M2; an inset container's solid base bracket on the wall face, projected as a solid bracket onto its open square, never a dashed rim); **M3 (agreed, loot sources Q1, Q4):** the **Windfall mark** (a knotted-sack glyph on the plate and bundle), the **scurry trail** (paired dots, one pair per route square, never above floor tier), the **next-hop outline** (a solid pawprint outline, only while awake), the **Rathole** (one cross-theme arched opening at skirting height with the Windfall mark on its lintel, plus a front-square half-rim floor decal drawn whatever the wall's cutaway state; per-theme dressing changes only its material), the **count digit** (with a clock-pip on a floor ring, hollow while Dormant, solid while awake) and the **"held" badge**, and the Twin Coffer's **twin-lid mark**; **M2 (agreed, loot sources Q5):** the **Bedside Stand** is one cross-theme silhouette that hosts only the Viaticum. **Pending request (change LP-27; enemies owner; M2 if agreed, else M3; loot sources design 7):** the **Uncorked** state, a shape sub-state of the carried-notable glint (an open stopper notch), never a hue change, joins the pattern registry |
+| RC5 | **One glyph per square rule:** each square kind has one cross-theme rim and icon; a theme reskins only the fill (bedsheets read as web because they *are* web). **RC5+ (change TR-20; room terrain design 8.1):** one glyph set per piece class and square class across themes, built from four composable marks (base, motion, danger, cover); every hazard face projects a floor decal onto its one front square; the stub-glyph rule (the "blocks sight" cap on a Tall piece's stub state) applies from M1. **Hazards (change HZ-29; hazards design 8):** one Void lip glyph, one Snag glyph, one Cord glyph with used and unused pips and one vent glyph with trigger pips across themes; a Stir uses its host's glyph plus a countdown numeral on the host's floor decal; the four-mark table gains the hazards design's RC5+ rows (Void, Snag, Cord, vent, latent footprint, due square, Tide socket, Lurch lane, Handhold, Chainpost, staked pit) and one pattern registry, in which no two patterns differ only by hue. **Traps and locks (change TL-22; traps and locks design 8):** the four-mark table gains the traps and locks design's RC5+ rows (Revealed trap trigger with a `triggerKind` sub-mark, device area, mechanism gear, trap link, Hunch zone, Hunch catch, state badges, lock, Wager Portal) and the pattern registry gains the trap rim, the Hunch dotted rim with question-mark ticks (never a hatch) and the trap-link dash; one lock glyph set across themes: Plain, Crier, Barb, Tattle and Keyed in M2, Runed, Hour, Riddle, Fed and Ticket in M3, and the High-Striker's threshold glyph. **Encounters (change EP-12; M2; encounter placement design 6.8.1, 6.8.6):** the pattern registry gains the **Spoor base mark** (one cross-theme three-stroke tally, apart from the trap-tell, lock and Hunch families, skinned per theme in material only) and the cross-theme **bait-cache mark**. **Loot (read, not changed; change IR-13; agreed, item rolls Q5; M1; item rolls design 4.13):** the **signature cache** is one pattern-registry mark (base: cache; a signature sub-mark shared with the boss plate's "Guards: <signature name>" line). **Loot sources (change LP-7, LP-12, LP-14, LP-26; loot sources design 4.3, 4.7.3, 4.10, 6):** the four-mark table and pattern registry gain the loot sources design's RC5 rows, each with a positive shape, a slot and an RC6 tier: the **wall-set mark** (M2; an inset container's solid base bracket on the wall face, projected as a solid bracket onto its open square, never a dashed rim); **M3 (agreed, loot sources Q1, Q4):** the **Windfall mark** (a knotted-sack glyph on the plate and bundle), the **scurry trail** (paired dots, one pair per route square, never above floor tier), the **next-hop outline** (a solid pawprint outline, only while awake), the **Rathole** (one cross-theme arched opening at skirting height with the Windfall mark on its lintel, plus a front-square half-rim floor decal drawn whatever the wall's cutaway state; per-theme dressing changes only its material), the **count digit** (with a clock-pip on a floor ring, hollow while Dormant, solid while awake) and the **"held" badge**, and the Twin Coffer's **twin-lid mark**; **M2 (agreed, loot sources Q5):** the **Bedside Stand** is one cross-theme silhouette that hosts only the Viaticum. **Pending request (change LP-27; enemies owner; M2 if agreed, else M3; loot sources design 7):** the **Uncorked** state, a shape sub-state of the carried-notable glint (an open stopper notch), never a hue change, joins the pattern registry. **Curiosities (change EV-25; M2; events design 4.11):** no Curiosity prop or Glimpse uses a container, bait-cache, Windfall or Bedside Stand silhouette (`ReservedSilhouette`); a prop that is a container by name is fused into a wall bracket, rack or wall slot with no box body; no clock-dial object that opens locks |
 | RC6 | **Value hierarchy:** units > telegraph overlays > hazards > floor > walls, checked on a greyscale screenshot per theme; surreal texture only on walls, ceilings and skyboxes, never on walkable squares; scale distortion in architecture only, every unit true to its square. **Boss scale (lead's call):** a boss may stand up to about 1.5 times standard height, but its footprint and silhouette stay within its square at minimum zoom and never hide a unit on an adjacent square; height is shown by proportion, not size. **RC6+ (change TR-20; room terrain design 8.1):** units > telegraph overlays (including Keg footprints while a preview or intent would burst them) > hazards (including contact hazards, harm squares, Kegs and their idle footprints) > cover shields > Furnishings and Low pieces > Tall pieces > floor (Rough, Plank) > walls. Rules pieces count as architecture for the scale clause (room terrain design 7.10). **Hazards (change HZ-29; hazards design 8):** telegraph overlays include due overlays and push and fall previews; hazards include latent footprints; a new bottom tier, the **Void backdrop**, sits below walls, its value ceiling below the floor's darkest walkable tone, rendered as a sealed shaft below the floor plane so nothing shows through at any of the 4 camera rotations |
-| RC7 | **Tone-free UI:** plates, threat overlays, signature banners, joiner footsteps and condition icons use one global skin; boss moves may have diegetic names but use the universal banner and sting. **Gameplay cue sounds** (door open and close, joiner footsteps and horns, alarm bells, trap triggers, and the Choir's fallen-bell struck-bronze cue, kept distinct from the alarm bell; change TR-20, room terrain design 7.5) are reserved and never appear in a music bed or ambience (lead's call). **Hazards (change HZ-29; hazards design 8):** the reserved cues gain the party fall, a monster-removal cue, Cord Operated, the theme-neutral **Dream tick**, two layers per Stir (an announcement sting and an act cue) and the floor-1 small-hour chime, Horn Post rattle and candle exhale, each in a timbre family no music bed uses (the hazards design's timbre table); skipping or batching cuts animation, never cues. **Traps and locks (change TL-22; traps and locks design 8):** the reserved cues gain the trap spring, Jam and Botch, the Rattle Wire's shaker, the Lullaby Glyph's wind-up click, the Gramophone's needle-scratch and the Wager pips, per the traps and locks design's timbre table; a Crier sounds the alarm cue. **Pending request (change TL-43; RS owner and art; M2):** alarm traps, the Belfry Wire, the tin-can tripwire, the High-Striker and the Crier share **one** reserved alarm-bell cue, the same pitch everywhere, no longer pitched per theme (this rule read, not changed). **Encounters (read, not changed; change EP-28; M2; encounter placement design 6.20, 8):** the formation chip set uses the global skin. **Pending request (change EP-27; RS owner; M3; encounter placement design 6.6.7):** the Choir Ritual's "last singer falls" sting joins the reserved cues. **Loot (read, not changed; change IR-12, IR-15; M2; item rolls design 4.12):** the signature banner stays reserved for boss signatures; a carried notable's use shows as a name floater in the unit-floater layer, never in the banner slot. **Pending request (change LP-7; RS owner; M3; loot sources design 6):** a **Windfall timbre row** (a plucked, dry string family that no music bed uses, kept out of chimes, bells, ticks and the Lullaby Glyph's wind-up click) and six reserved cues (wake, stand-up, hop after the Dream tick, held, nabbed, got-away), clock telegraphs, not reward stings; until the RS owner rules they read "pending RS owner", and if refused the Windfall telegraph relies on visuals and the global UI timbre (loot sources design 14.2) |
+| RC7 | **Tone-free UI:** plates, threat overlays, signature banners, joiner footsteps and condition icons use one global skin; boss moves may have diegetic names but use the universal banner and sting. **Gameplay cue sounds** (door open and close, joiner footsteps and horns, alarm bells, trap triggers, and the Choir's fallen-bell struck-bronze cue, kept distinct from the alarm bell; change TR-20, room terrain design 7.5) are reserved and never appear in a music bed or ambience (lead's call). **Hazards (change HZ-29; hazards design 8):** the reserved cues gain the party fall, a monster-removal cue, Cord Operated, the theme-neutral **Dream tick**, two layers per Stir (an announcement sting and an act cue) and the floor-1 small-hour chime, Horn Post rattle and candle exhale, each in a timbre family no music bed uses (the hazards design's timbre table); skipping or batching cuts animation, never cues. **Traps and locks (change TL-22; traps and locks design 8):** the reserved cues gain the trap spring, Jam and Botch, the Rattle Wire's shaker, the Lullaby Glyph's wind-up click, the Gramophone's needle-scratch and the Wager pips, per the traps and locks design's timbre table; a Crier sounds the alarm cue. **Pending request (change TL-43; RS owner and art; M2):** alarm traps, the Belfry Wire, the tin-can tripwire, the High-Striker and the Crier share **one** reserved alarm-bell cue, the same pitch everywhere, no longer pitched per theme (this rule read, not changed). **Encounters (read, not changed; change EP-28; M2; encounter placement design 6.20, 8):** the formation chip set uses the global skin. **Pending request (change EP-27; RS owner; M3; encounter placement design 6.6.7):** the Choir Ritual's "last singer falls" sting joins the reserved cues. **Loot (read, not changed; change IR-12, IR-15; M2; item rolls design 4.12):** the signature banner stays reserved for boss signatures; a carried notable's use shows as a name floater in the unit-floater layer, never in the banner slot. **Pending request (change LP-7; RS owner; M3; loot sources design 6):** a **Windfall timbre row** (a plucked, dry string family that no music bed uses, kept out of chimes, bells, ticks and the Lullaby Glyph's wind-up click) and six reserved cues (wake, stand-up, hop after the Dream tick, held, nabbed, got-away), clock telegraphs, not reward stings; until the RS owner rules they read "pending RS owner", and if refused the Windfall telegraph relies on visuals and the global UI timbre (loot sources design 14.2). **Curiosities (change EV-25; M2; events design 4.11):** no horns, bells or wind-up or winding props on Curiosities, and no running hands or ticking on any clock or watch act; Curiosity audio tags are checked against the reserved cues (`ReservedCues`); card chips and the Twice-Told card use the global skin (read, not changed; change EV-4; events design 4.3.1, 4.5.2) |
 | RC8 | **Barks** fire only on floor entry, idle, rout, Yield, Cowed, and boss phase entry after the banner; never on attack resolution, downings or deaths. A content test checks every bark trigger. **Diegetic ambience follows the same rule (lead's call):** comic or laughing ambience ducks to silence on any downing or death and during the death recap. **Hazards (change HZ-29; hazards design 6.16):** a companion may call a Stir's first due round, once per fight; never on telegraphs. **Boxed lurkers (read, not changed; change TL-28; traps and locks design 6.14, 8):** "feels teeth" is a UI callout over the opener plus the lurker's reveal cue, never a bark. **Encounters (read, not changed; change EP-9; M2; encounter placement design 6.7):** activity barks are idle barks |
-| RC9 | **Names may be whimsical but never lie** about threat or role. **Encounters (read, not changed; change EP-12, EP-28; M2; encounter placement design 6.8.6, 6.20):** formation chip names follow this rule, and a Spoor mark is never a decoy |
+| RC9 | **Names may be whimsical but never lie** about threat or role. **Encounters (read, not changed; change EP-12, EP-28; M2; encounter placement design 6.8.6, 6.20):** formation chip names follow this rule, and a Spoor mark is never a decoy. **Curiosities (change EV-25; M2; events design 4.11):** no silent bell and no purse (it reads as coin) on a Curiosity |
 
 **M2 readability gates** *(illustr. thresholds)*:
 - a greyscale value test per theme;
@@ -1103,7 +1160,11 @@ Q3:** B, no premise; C, folk horror; D, full absurdism.
   the loot sources RC5 marks and every Windfall state in frame (Dormant,
   awake, held, nabbed; M3); once the RS owner approves the RC7 request,
   the six Windfall cues join the audio blind-ID test at 85% in the
-  Choir, Carnival and Supper mixes (M3).
+  Choir, Carnival and Supper mixes (M3);
+- the Curiosity additions (change EV-25, EV-45; events design 4.11):
+  the role-ID gate includes "implied figure, not unit" (M2) and "figure
+  frame, not mindless unit" (M3); the tone review signs off every rare,
+  Sequel and Heart Curiosity under the premise test (7.5).
 
 A theme that fails a gate is not shipped until its art passes; the gate
 never changes a rule **(lead's call)**. **A held theme (lead's call,
@@ -1138,6 +1199,13 @@ matches no cut goes to the client (19.2).
 - Every theme carries a one-line **grim reading**. If surrealism is
   dropped, rosters and rules stand and only skins and names change.
 - Fallback premises: the Bureau of the Dead; a dead god's sunken tomb.
+- **Curiosities (read, not changed; change EV-25, EV-26; M2; events
+  design 4.5.6, 4.5.10, 4.11):** every Curiosity premise names a
+  resident in plain sight as whoever made, wrote, wound or watched it,
+  never the sleeper and never no one (the premise test); `selfReference`
+  cards are capped at 1 per run; the Heart takes at most one
+  domestic-bedtime prop per visit (`HeartBedroomCap`); Afterword and
+  memorial lines never show or imply the Dreamer.
 
 ### 7.6 What to avoid
 
@@ -1268,7 +1336,12 @@ after the check):**
   one charm; hue reviewed at the 7.4 gates), `stamp` (a pictogram),
   `reveries[]` (part-tagged), `provenance`, `signatures[]` (derived at
   load from the boss records) and `memento?` (floor 5). The rules core
-  never reads it, except V14 and the Element Echo switch (6.4).
+  never reads it, except V14 and the Element Echo switch (6.4);
+- **`curiosityKit`** (change EV-40; M1 stub (empty), M2 content; events
+  design 9.1): `curiosities[]`, `interludes[]` and `glimpses[]`,
+  `CuriosityRecord` ids drawn by the events segment; shared Curiosity
+  pools reuse this section's tier names (Shallows, Middle, Deep, plus a
+  shared Forecourt pool).
 
 **Counting (lead's call):**
 - every theme pays Prone (Shove) and Frightened (Frighten): the tax;
@@ -1413,7 +1486,12 @@ Every floor-1 theme meets all of these:
 - **(f) Distinct lesson axes (binding contrast rule):** Kennel teaches
   **morale and positioning**; Gaol teaches **doors, noise and keys**;
   Wake teaches **reading tells and the sleeping house** (Perception,
-  awareness).
+  awareness). **Curiosities (change EV-3; M2; events design 4.2,
+  4.6):** each floor-1 theme's Curiosities follow its axis; no
+  Curiosity adds a lesson tag, and main-path Q room 3 carries a wall
+  Glimpse only. Floor-1 Curiosities never offer supply, theme
+  conditions, riders, curses, rolled options, companions, hazards or
+  Landmark ticks.
 - **(g) Leaders on floor 1** exist only as a Picket's leader-role
   standard (Picket is "1–2 standards", so it can field one where the
   budget allows) or as a boss escort or Champion elite. The leader-group
@@ -1458,7 +1536,11 @@ that occurs.
 **When the Wake is judged (new lead's call).** The Wake's gate is read
 once, at the M2 floor-1 balance freeze: if (c) and its rows pass, it
 joins the M2 floor-1 pool; otherwise it becomes the first M3 unlock and
-is not re-tested inside M2.
+is not re-tested inside M2. **The Wake's promotion (read, not changed;
+change EV-44; agreed, events Q2; M2; events design 4.6):** if it joins,
+its Curiosity kit is authored to parity in M2 and joins at
+`F1PoolParity` (every F1 theme pool with the same standard, MECH and
+rare counts); otherwise 8.5 stands.
 
 ### 8.3 Shallows: 1. The Gaol of Small Hours (F1; M2 core)
 
@@ -1553,7 +1635,8 @@ is not re-tested inside M2.
   falls only in the backdrop, never on walkable squares (RC1). Palette:
   moss green, lantern amber, painted-moon silver. *One wrong detail, in
   every room:* the painted moon never moves, and shadows fall toward
-  it.
+  it (no Curiosity shows a moving moon; change EV-25; events design
+  4.11).
 - **Obsession:** hounds still hunting for a master who is now a
   portrait, carried on a pole as the pack's banner. **Grim reading:** a
   cursed lord's eternal hunt.
@@ -1626,7 +1709,9 @@ is not re-tested inside M2.
   used as furniture, portraits with their eyes closed. Palette: candle-wax
   ivory and mourning black, with faded violet. *One wrong detail, in
   every room:* every clock in the house is stopped at the moment of
-  death, and every portrait's eyes are closed. **Obsession:** a funeral
+  death, and every portrait's eyes are closed (Curiosities keep both:
+  no open-eyed portrait, no running clock; change EV-25; events design
+  4.11, 5.3 W5). **Obsession:** a funeral
   that cannot end politely (grief). **Grim reading:** a plague manor's
   endless vigil.
 
@@ -2028,7 +2113,10 @@ is not re-tested inside M2.
   only as bedsheet squares or above head height (RC1). Palette:
   moonlight blue-grey and faded nursery rose over sheet off-white. Toys
   are played sinister, never cute. *Dream device:* the room's far wall
-  is always the same distance away.
+  is always the same distance away. Heart Curiosities are architectural
+  or giant-furniture images, with at most one domestic-bedtime prop per
+  visit (`HeartBedroomCap`) and no wind-up or winding prop (change
+  EV-25; M2; events design 4.11).
 - **Keepsakes** (9.3) dress it with the visited themes' props.
 - **Hooks:** the single bedchamber is partitioned in the rules into
   ordinary rooms by full-height giant furniture and read as one place on
@@ -2142,9 +2230,9 @@ Unlockable themes and final bosses are main 4.7 content, never power
 | **Last Hollow choice** (final boss at camp 4) | A final decision | about 10 s | **With Two Doors, plus BossParity (agreed, Q2)** |
 | Door bounties | Reward bias by door | 0 | **Rejected** (stream complexity; no gain once milestones give pull). The Perilous Door's reveal is not one: it adds no draw (read, not changed; change LE-19; loot economy design 6.12) |
 | Theme milestones (profile marks) | A positive pull into hard themes | 0 | M2 marks; M3 unlocks |
-| Dream Fragments (off-path Lore checks for boss intel) | Lore gets a dungeon use; a tone outlet | 0.5–1 min per floor | **M3** (it counts against the failing floor-time gate). Pending request (change TL-34; segment 8; M3; traps and locks design 6.12): readings, Dream Fragments included, become no-roll thresholds that each yield a floor fact |
-| Omens (per-theme generator mutators inside the 6) | Variety inside a theme | 0 | M3 (test matrix × 4); a theme's Omen may switch on its one hazard Mood (an integer stage 0–2, capped at +1 per two rooms; change HZ-20; hazards design 6.9); Omens never touch the spoils list (LootDoorInvariant; read, not changed; change LE-19; loot economy design 6.12) |
-| Nightmare tiers (ladder tiers that add kind, not stats) | Harder modes; the old deep overlay returns at tier 3 | 0 | M3 tiers 1–3; Later 4–5 (RT-21, client); hazards escalate in kind only (a kind added, a period shortened by at most 1, or a Mood stage higher; never a band), and each floor-1 theme gains its hazard package from tier 2 (change HZ-25; agreed, hazards Q4; hazards design 6.19) |
+| Dream Fragments (off-path Lore checks for boss intel) | Lore gets a dungeon use; a tone outlet | 0.5–1 min per floor | **M3** (it counts against the failing floor-time gate). Pending request (change TL-34; segment 8; M3; traps and locks design 6.12): readings, Dream Fragments included, become no-roll thresholds that each yield a floor fact. Segment 8 folds Dream Fragments into F-BOSS options on Lore thresholds, 0 VP and 0 coin, through the FactLedger's one boss-fact queue (change EV-29; M3; events design 4.9) |
+| Omens (per-theme generator mutators inside the 6) | Variety inside a theme | 0 | M3 (test matrix × 4); a theme's Omen may switch on its one hazard Mood (an integer stage 0–2, capped at +1 per two rooms; change HZ-20; hazards design 6.9); Omens never touch the spoils list (LootDoorInvariant; read, not changed; change LE-19; loot economy design 6.12); an Omen floor may swap a Curiosity for its Omen Retelling (kind, not stats), and a Curiosity cost may be the named, visible event that advances a Mood within its cap (change EV-31; M3; events design 4.9) |
+| Nightmare tiers (ladder tiers that add kind, not stats) | Harder modes; the old deep overlay returns at tier 3 | 0 | M3 tiers 1–3; Later 4–5 (RT-21, client); hazards escalate in kind only (a kind added, a period shortened by at most 1, or a Mood stage higher; never a band), and each floor-1 theme gains its hazard package from tier 2 (change HZ-25; agreed, hazards Q4; hazards design 6.19); Curiosities gain **Provisos**, extra printed costs, never better gains, never on the free option, ticks or noise only on floor 1 (change EV-31; M3; events design 4.9) |
 | Perilous Door (+1 ladder on one floor) | Risk for choice | 0 | M3 with full Two Doors; client (a per-floor ladder, RT-21). Loot (agreed, loot Q5; change LE-19; M3; loot economy design 6.12): on its floor the boss reward card (enemies 17.5) reveals the pre-drawn fourth dreamed option, choose 1 of 4; no extra draw (6.4 LootDoorInvariant) |
 | Unlockable strata | Return play through content | 0 | M3 (client, main 4.7; RT-18) |
 | Alternate final | Variety at the finale | 0 | M4 |
@@ -2153,7 +2241,7 @@ Unlockable themes and final bosses are main 4.7 content, never power
 | Seams (cosmetic next-theme preview) | Foreshadowing | 0 | M3 |
 | Concentrated guard posts | A lever-3 alternative | small | Simulator arm only (10.2) |
 | Element Echo (offensive element-choice lines read the found floor's `counterType`) | A theme read on rolled lines, no identity or draw change | 0 | **Held for an M3 client decision, default off** (change IR-19; agreed, item rolls Q4; item rolls design 4.4; 6.4 LootDoorInvariant) |
-| Mid-floor theme transitions; two-floor acts; a run-wide curse track; theme-keyed loot; an epilogue floor; cross-run weighting inside the seed | — | — | **Rejected** (theme-keyed loot stays rejected: theme bias 0‰, read, not changed; change IR-15; agreed, item rolls Q4; item rolls design 4.4) |
+| Mid-floor theme transitions; two-floor acts; a run-wide curse track; theme-keyed loot; an epilogue floor; cross-run weighting inside the seed | — | — | **Rejected** (theme-keyed loot stays rejected: theme bias 0‰, read, not changed; change IR-15; agreed, item rolls Q4; item rolls design 4.4). **Cross-run weighting inside the seed stays rejected (read, not changed; agreed, events Q1; change EV-20, EV-27, EV-28; events design 4.5.4, 4.5.8, 4.5.9):** Launcher Fallow acts outside the seed (R-SEED-6); M3 Curiosity Sequels (stage k+1 drawable once stage k is seen) and M3-late or M4 Ripening enter only through `drawableSet`'s unlock snapshot under `SuccessorParity`, a reading of this row, not weighting inside the seed; shared, daily and simulator seeds stay canonical |
 
 ### 9.2 Adopted in full: Strata Draw (M2; RT-2, RT-3)
 
@@ -2219,7 +2307,10 @@ compliant floor-1 bosses; determinism.
   entrances are dog-leg Arches from it, at least 5 apart, with the
   symmetric `AntechamberScreened`. On floor 1 it stays empty,
   single-inbound and off the Circuit, and stays near-safe by this
-  section's approved exception (the "short safe walk"). On floors 2–5 it
+  section's approved exception (the "short safe walk"); its walls may
+  carry Glimpses, which have no rules, no square and no click (a
+  reading of "empty", not a change; change EV-2; M2; events design
+  4.2). On floors 2–5 it
   is always a patrol Circuit waypoint, the patrol's homeRoom and fight
   host at the floor's fight-room size, with at most two Circuit side
   rooms; it is never guaranteed safe while the patrol lives (told
@@ -2449,7 +2540,9 @@ still need condition squares, which the Supper never has.
   reproducibility key (change TR-17; room terrain design 11.1, 6.2.5).
   Loading rejects `lastHollowChoiceEnabled` true with `twoDoorsEnabled`
   false. `route.streakRedrawMax` 8 *(illustr.)* is launcher-only and not
-  in the snapshot.
+  in the snapshot, as are `curiosity.fallowK` = 3 and
+  `curiosity.fallowFloors` = [1], client values, not tuning (change
+  EV-20, EV-40; agreed, events Q1; M2; events design 9.1).
 - **Route state** in the run save (lead's call, after the check): the
   catalogue permutation (stable ids), the boss order per (theme, floor)
   cell, the final-boss order, the unlock snapshot, the configuration
@@ -2484,6 +2577,7 @@ The build fails when one of these fails:
 | V13 | LootEconomy (change LE-23; V13s (a), (c), the floor-1 V13g (g), (i) and the (m) test M1, the rest M2; loot economy design 10.2) | In three parts: V13s, static over the data (every floor × party size × cap × variant × unlock set); V13g, at generation at the shared floor assertion point after LootBind, each check with its named action; and the (m) integration test (fixed, identical draw counts across seeds, doors, waves and opening methods); the named checks of loot economy design 10.2 |
 | V14 | ItemRolls (change IR-21; (a), (b), (d), (h), (j) and the draw-count test M1, the rest M2; item rolls design 9.2) | Beside V13: static checks (a)–(m) of item rolls design 9.2, among them lanes, values and rolled lines, signature forms and carriage, display isolation (no rules code reads `theme.loot`; a release configuration with Element Echo on fails) and a complete `theme.loot` for every drawable theme (8.0); generation-time asserts; and the constant-draw-count and LootDoorInvariant tests |
 | V15 | LootSources (change LP-31; the V15 M1 rows M1, V15s and V15g M2, the Windfall rows M3; loot sources design 9.2) | Beside V13 and V14, split like V13 and run at the shared assertion point after V13g: V15s, static (container skins per kind, `ContainerFamilyDistinct` with V7, `ContainerArtBlind`, the Proprietor checks, `TruantHasFace`, `WindfallSkinLegal`, `BedsideStandOnly`); V15g, at generation (socket binding, the role table, container caps, offer pacing, the Windfall rules including `OneClockPerRoom`, `WindfallRouteSafe`, `WindfallCatchable`, `WindfallOffGuarantees` and `WindfallBudgetInside`, `GleanNoLeak`); and V15t tests; the named checks of loot sources design 9.2 |
+| V16 | Curiosities (change EV-38; M2, the Sequel and Ripening rows M3; events design 9.2) | In three parts: V16s, static over the records (option shape and prices, `PaletteWhitelist`, `StateBlind`, `PaymentFeasibility`, `RegisterByFloor`, `DreamerLine`, `HeartBedroomCap`, `PremiseTagCap`, `ReservedCues`, `ReservedSilhouette`, `RetellingParity`, `SuccessorParity`, `PoolCoverage`, `F1PoolParity`, `NameCollision` against 8.0's avoided list and others); V16g, at generation after V13g and V15g (`FixedDrawCount`, `EventDrawRunBlind`, the within-run caps, `SlotLegal` before V15g, `ReferentResolved`, `NoEventLoot`, `NoEventUnit`, `GraphUnchanged` and others); and V16t tests (determinism replay, `SnapshotCanonical`, LootDoorInvariant over door × memory, `DisplayMemoryInert`, `LauncherLootNeutral`, `LauncherBypass`, `ResolveIsSafePoint`); the named checks of events design 9.2 |
 
 ### 11.3 Simulator arms
 
@@ -2570,7 +2664,7 @@ Two Doors switch agreed, Q2)**
 | **M2** | 8 themes (8.1) **(agreed, Q4)** | Strata Draw; Antechamber Catch-up; cards and dream track; Keepsakes; the RT-7 lever form (only in lever order); V1–V7; ThemeParity, ClassThemeSpread, FloorTimeByTheme, LevelAtDoorByFloor; readability gates; **Two Doors and the Last Hollow choice built, switched on only if their gates pass (agreed, Q2)** |
 | **M2 prerequisites owed by other owners, before rosters freeze** | RT-3 (enemies 10.5 steps 1 and 6), RT-4, RT-6, RT-7, RT-8 (enemies 16), the RT-9 rows in enemies 17.5 and 20.1, RT-17's enemies rows (enemies owner); RT-8 (classes 7.3: classes owner; companions 7.1 and 7.11: companions owner); RT-9's Herald 7.16 sentence (Herald owner); RT-13, RT-14, RT-16 (conditions owner); RT-12 and the DH 19.3 row of RT-10 (DH owner); RT-20 (trinkets owner) | — |
 | **M2 cut lines** | **Cut 1:** drop the extra bosses of Gaol, Kennel and Gut. **Cut 2:** Cut 1, and drop the Supper (floor 4 fixed Gut). Both **pre-authorised (agreed, Q4)**. Below Cut 2, the approved-scope floor (Gaol and Kennel on F1, Choir and Silk on F2–3, Gut on F4, floor 5 as a step-5 deep overlay of the floor-4 theme not drawn, re-passing its 6) needs the client | Under Cut 2, floor 4 has no choice anyway; under the approved-scope floor, random draws only |
-| **M3** | Unlocks in 8.12's order; the Supper's F3–4 band and its F3 boss; a second boss for every M2 (theme, floor) cell that has only one; the third final boss; the Lore roster preview at camp; Dream Fragments plus codex; bile squares if deferred | Two Doors (if its gates failed in M2) and at camp 3 once the floor-4 pool is 3 or more; Omens; Nightmare tiers 1–3; Perilous Door; Seams; profile-side anti-streak outside seeded runs |
+| **M3** | Unlocks in 8.12's order; the Supper's F3–4 band and its F3 boss; a second boss for every M2 (theme, floor) cell that has only one; the third final boss; the Lore roster preview at camp; Dream Fragments plus codex (Fragments folded into Curiosity F-BOSS options; change EV-29; events design 4.9); bile squares if deferred. **Pending request (change EV-37; RS owner; M3; events design 4.9):** segment 8 co-owns the codex's Curiosity pages (Retellings collected and options seen, never power or gating rule text, write-only from the run's view); the RS owner owns the codex and segment 10 hosts it | Two Doors (if its gates failed in M2) and at camp 3 once the floor-4 pool is 3 or more; Omens; Nightmare tiers 1–3; Perilous Door; Seams; profile-side anti-streak outside seeded runs (Launcher Fallow on the F1 Curiosity is pulled into M2: change EV-20; agreed, events Q1; 6.4 R-SEED-6) |
 | **M4** | Pools of 3–4 per tier; the Waking City alternate final; Keepsake echo types; the Inverted Cathedral with its hazard package (the drop hazard now exists; change HZ-26; hazards design 7.11, 12) | Three-door camps (optional) |
 | **Later** | The Lucid Key; Other Dreamers; Nightmare tiers 4–5; daily seeds (already supported); seams that bleed the chosen door's palette | — |
 
@@ -2582,6 +2676,14 @@ tier without its pool, and never removes `F1EscortBreakable`, the
 charter or the Two Doors gates. The Heart and Gut are never cut because
 they are built first.
 
+**Floor-1 variety (read, not changed; change EV-44; agreed, events Q2;
+events design 4.6, 14.2).** Floor-1 Blueprint and boss variety is
+recorded as a production priority for the RS, FL and segment 9 owners;
+no cut line changes. Cut 1 still drops the Gaol's and the Kennel's
+extra bosses first; the F1-boss cut order is carried to segment 9 as a
+future item for the client (19.2), and any reorder is an RS change that
+returns to the client.
+
 ---
 
 ## 13. Hooks handed to later generation segments
@@ -2592,10 +2694,10 @@ they are built first.
 | Room shapes and terrain | `terrainSquares` and density per floor; one home theme per square kind; water and oil placement caps (8.6, 8.8); cover props per theme (the weapons 9.5 decision); wall and edge density for the Wrecker; at least 3 Acrobatics-gated choices per floor (armour 7.3); this segment keeps the ≥ 3 total, of which layout supplies 2 Squeezes (change FL-22). **Filled by the room terrain design (change TR-1; room terrain design 13):** segment 3 owns the room-terrain system (piece and square classes, layers and sockets, the Clearway, the cover rule, Furnishings, Kegs and their verbs, Rough and Plank, arena terrain rules and caps, the Remnant system at M3) and the knock-into system (contact hazards and harm squares: rules, bands, caps and in-room placement); cover props per theme become the theme's `terrainKit` (change TR-22) |
 | Hazards | The bile square (RT-13); the drop hazard needed by the Inverted Cathedral and staked pits; Teetering counting (RT-14). **Ownership (change TR-1; room terrain design 13):** segment 4 owns per-theme hazard catalogues and floor-scale density built from segment 3's classes inside its caps, drops, bile, Teetering counting and vents; segment 5 owns traps. **Filled by the hazards design (change HZ-1, a reading of this hook; hazards design 6.1, 13):** segment 4 owns hazard points, roles and quotas, VP1–VP10, Voids and falls (the drop hazard), bile density, Teetering counting (as a request, HZ-6), vents, Stirs, Cords, Tides, Lurch and the Dream step, Landmark ticks (not hazards), Moods, Dare rooms and Plunge, per-theme catalogues and Tableaux (`hazardKit`); a hazard is visible from reveal and never disarmed; boss counterplay features stay the boss rooms' (segment 9), which take only the Stir and Cord machinery; the staked pits are re-read as a walkable harm square at Nightmare tier 2+, not a drop hazard (change HZ-25, told plainly; hazards design 6.19) |
 | Traps and locks | `trapFlavours` per theme (Shade DEP-S1 records with `mechanismSquare`); trap conditions drawn from the theme's 6 or damage-only (RT-16); no trap hard control on F1, set pieces only on F2; the Gaol keyring and cell caches; sphincter doors; closable cell doors. Keeps the door, lock and secret rules, including the party door verbs (open in M1, close in M2; change FL-8) and Hairline secrets with Sound the wall (change FL-17); layout supplies the slots and minimum counts (change FL-22; floor layout design 9.2, 13). **The line with hazards (change HZ-1; hazards design 6.1):** traps are hidden until detected, or known armed devices, and are sprung; the sprung twins of hazard Stirs stay traps (the toppling-shelf tripwire, the dumbwaiter drop, the sluice one-shot Soak, the icicle chandelier, the acid geyser, trapdoor stages, the bell tripwire, the portcullis, the Appeals trapdoor, the Kennel horn tripwires); an open trapdoor or shaft is a Void (a hazard), a closed one that springs is a trap; Cords never arm traps; known armed traps stay hazards for conditions 10.1–10.4 (conditions 11.3) without moving ownership. **Filled by the traps and locks design (change TL-10, a reading of this agreed hook; M2; traps and locks design 6.3, 11.1, 13):** segment 5 owns the check charter, the DC ladder and the `checks` stream, trap records and rules (the sprung twins included), detection, locks, keys and the Wax Key, the door verbs, Hairline variants, boxed lurkers, Wager rooms and V11; traps come in three families (Device, Snare, Catch); device bodies and mechanisms are always visible and always rigged; every trap carries a diegetic tell (RC1); `trapFlavours` hold TrapRecords, a superset of the DEP-S1 record; trap conditions still wait on RT-16 (pending request, TL-39); the sprung twins keep their traps-catalogue names (the acid geyser is the Acid Gland; the Kennel horn tripwire is re-told as the tin-can tripwire, a pending request, TL-43) |
-| Encounter, loot and event placement | Each theme's `placementRules[]` (8.0); lesson axes per floor-1 theme; the Pack one-family rule; Scavengers at the F1 patrol budget; the Wake's dormant bias kept away from rooms 0–2; the Heart's morale shape by room and psychic cap; the signature type at least twice (a generation assertion, V7); Corroded caps; Frozen source caps; Keepsake slot dressing (9.3); loot stays theme-blind (LootDoorInvariant). Keeps the Wake dormant rule, read from layout's `nearStart` tag, and Keepsake dressing (change FL-22). **Filled by the encounter placement design (segment 6; encounter placement design 6.4, 6.16, 13):** segment 6 owns `placementRules[]` application (the fearless-anchor tags, EP-29; the Gut acid overlay count, EP-31) and ENM 10.5 steps 2 and 4–11; loot and events keep their segments. **Loot placement taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4, 5, 11):** sources, sockets and per-theme container art; loot stays theme-blind (Proprietor tags are display only); the charter entries of changes LP-7, LP-15 and LP-24 (7.4, 9.3) |
+| Encounter, loot and event placement | Each theme's `placementRules[]` (8.0); lesson axes per floor-1 theme; the Pack one-family rule; Scavengers at the F1 patrol budget; the Wake's dormant bias kept away from rooms 0–2; the Heart's morale shape by room and psychic cap; the signature type at least twice (a generation assertion, V7); Corroded caps; Frozen source caps; Keepsake slot dressing (9.3); loot stays theme-blind (LootDoorInvariant). Keeps the Wake dormant rule, read from layout's `nearStart` tag, and Keepsake dressing (change FL-22). **Filled by the encounter placement design (segment 6; encounter placement design 6.4, 6.16, 13):** segment 6 owns `placementRules[]` application (the fearless-anchor tags, EP-29; the Gut acid overlay count, EP-31) and ENM 10.5 steps 2 and 4–11; loot and events keep their segments. **Loot placement taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4, 5, 11):** sources, sockets and per-theme container art; loot stays theme-blind (Proprietor tags are display only); the charter entries of changes LP-7, LP-15 and LP-24 (7.4, 9.3). **Event placement filled by the events design (segment 8, approved 2026-11-22; its 4.2, 4.10, 4.13, 11):** segment 8 owns Curiosity content and forms (Curiosity, Interlude, Glimpse), their hosts (6.6; floor-1 Alcove set pieces and side rooms, Q rooms, Forecourts, `curiosityHost` signature rooms; never arenas), each theme's `curiosityKit` (8.0) and the shared pools, the cost and gain palette, Strands, Retellings, the Twice-Told card, Launcher Fallow (R-SEED-6), Sequels, Ripening, the Afterword and V16; EventDraw runs after layout and EventPlace after LootBind, draw-free, so loot stays theme-blind and never reads Curiosities (LootDoorInvariant) |
 | Boss rooms | One counterplay feature per boss (pendulum, kennel gate, sluice and bell rope, cage, dunk tank, chandelier of icicles, the Pylorus mouth, the bed); Keepsake dressing; phase option (e) never on party squares. Arena terrain caps are segment 3's; (e) uses pre-placed phase sockets of existing kinds only, announced a round ahead and proven in both states; the counterplay identity is unchanged (change TR-16, told plainly; room terrain design 6.11). **Traps (change TL-40; with segment 9; traps and locks design 7.8, 13):** arena devices such as the chandelier of icicles are segment-9 instances in the TrapRecord format; no boss room has guaranteed traps |
-| Exploration and information | Camp card, Two Doors cards, Stratum Card, dream track, Lore reveal, road not taken; Dream Fragments (M3); the Lucid Key secret (Later). Keeps the Stratum Card, including the floor count line (change FL-20), the Listen and Hairline displays (FL-18, FL-17), and the Lucid Key, whose Site layout reserves (change FL-22; floor layout design 9.2, 13) |
-| Seeds and validation | The `route` stream and R-SEED-1 to 6; `drawableSet` and the reproducibility key; V1–V7; the signature-type placement assertion; the RouteSample, fixed-arrival and chooser arms; LootDoorInvariant; the reports in 10 and 11 |
+| Exploration and information | Camp card, Two Doors cards, Stratum Card, dream track, Lore reveal, road not taken; Dream Fragments (M3); the Lucid Key secret (Later). Keeps the Stratum Card, including the floor count line (change FL-20), the Listen and Hairline displays (FL-18, FL-17), and the Lucid Key, whose Site layout reserves (change FL-22; floor layout design 9.2, 13). Dream Fragments are folded into Curiosity F-BOSS options (change EV-29; M3; events design 4.9); the Stratum Card carries no Curiosity line in M2 (events design 4.12) |
+| Seeds and validation | The `route` stream and R-SEED-1 to 6; `drawableSet` and the reproducibility key; V1–V7; the signature-type placement assertion; the RouteSample, fixed-arrival and chooser arms; LootDoorInvariant; the reports in 10 and 11. **Events (change EV-21, EV-38; events design 4.10, 4.13, 9):** the `curiosities` stream and its draw map, the EventDraw and EventPlace order, the resolve safe point, `curiosityMemory`, the launcher order against R-SEED-6, and V16 |
 
 ---
 
@@ -2663,7 +2765,7 @@ they are built first.
 | 11 | Water and oil spikes | Round-1 downs by theme | The 6.4 guards computed with the party Soaked or Oiled; entry-square rules |
 | 12 | Unlock manifests complicate shared seeds | V6 fails across manifests or unlock states | Whole-catalogue permutation; `drawableSet`; the (seed, manifest, configuration, unlock) key; the canonical unlock set for shared and daily seeds |
 | 13 | Name drift between documents | Naming pass | Frozen names (8.0); one canonical act set |
-| 14 | The premise hardens into a story by accretion | Writing review | Uncommitted questions stay open (7.5); no premise twists in boss concepts |
+| 14 | The premise hardens into a story by accretion | Writing review | Uncommitted questions stay open (7.5); no premise twists in boss concepts; Curiosities carry premise tags, the `selfReference` cap, the premise test and a tone review on every Sequel chain (change EV-25; events design 4.5.6, 4.11) |
 | 15 | **All evidence is toy** | — | Every number is owed a simulator rerun before it settles |
 | 16 | **Recall-based survey** | — | Mechanisms only; no names or text taken |
 
@@ -2957,6 +3059,10 @@ triggers them:
 - the M3 rows: unlockable strata (RT-18), the M3 charter (RT-19),
   Nightmare tiers and the Perilous Door (RT-21);
 - an owner declining RT-13 to RT-16 in a way the catalogue cannot absorb;
+- from the events design (its 14.2): the RS owner refusing the Launcher
+  Fallow extension of R-SEED-6 (change EV-20; agreed, events Q1); the
+  F1-boss cut order against Cut 1, carried to segment 9 (change EV-44;
+  agreed, events Q2; any reorder is an RS change);
 - the naming pass.
 
 ---

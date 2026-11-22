@@ -1592,6 +1592,14 @@ arrival level, with the Faltering figure in brackets (save disadvantage,
   else **(new lead's call, restating ability 6.4 for an `onHit` cast)**.
   Its cast policy and the hero's on-hit prompt are in 7.14.
 
+**Pending request (events design 4.8; EV-13; M3 if ruled):** a
+Herald-lit Curiosity variant, "your Show of Force costs no slot this
+floor", offered to this owner and the enemies owner. Curiosities offer
+no Cow-advantage Grace and no cow, spare or interrogate menus; Show of
+Force stays the slot spell above. Not ruled here; until the Herald owner
+rules, the card is unchanged, and if refused the variant is not shipped
+and nothing else changes (events design 14.2).
+
 ### 8.3 Tier 2 (from L3; reference 7.9). 4 drawable cards + the subclass spell
 
 | Card | Cast | Effect | Upcast | W / ‰ |
@@ -2966,6 +2974,9 @@ consumables 16.8 finds none, and "15 scrolls" is found there.
   (Demand Surrender range, Pick the Question, Lay Down Arms); HR-21 (the
   content rule, **agreed** Q3) as authoring data and a content check;
   HR-22; HR-23; the early-end report (HR-32).
+- **The events design (segment 8):** EV-13, the Herald-lit "Show of
+  Force costs no slot this floor" variant, a pending request to this
+  owner and the enemies owner (M3 if ruled; 8.2; events design 4.8).
 - **The ability owner:** HR-14 (universal Frighten range); HR-29 event
   kinds.
 - **The consumables owner:** HR-24 (Terror enemies-only, the `classTags`

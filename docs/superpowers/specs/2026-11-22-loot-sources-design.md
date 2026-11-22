@@ -353,7 +353,7 @@ Each source is one `LootSocketRecord` with exactly one `kind` and one `rank`, or
 | `carrierMain` | Carrier in a main-path fight | SR0 | carried | M1 | ENM 15.3 step 4 order |
 | `carrierOptional` | Carrier in an optional fight (Gb, side room) | SR1 | carried | M2 | Gb reads as optional: **a reading of LE 6.9 item 1, to the LE owner** |
 | `sideContainer` | Container in a side room or loop-back Site | SR1 | container | M2 | Visible from the threshold |
-| `alcoveCache` | The one container of an Alcove leaf | SR1 | container | M2 | Default occupant is a set piece where segment 3 offers one (LP-11) |
+| `alcoveCache` | The one container of an Alcove leaf | SR1 | container | M2 | Default occupant is a set piece where segment 3 offers one (LP-11). On F1 a Curiosity may take that set-piece slot first in its host order; it never empties a leaf and never displaces a container the cap needs (events design 4.2; EV-2, M2) |
 | `lockedCache` | Padlocked, Catch, Keyed | SR2 | container | M2 | Quota card, or coin plus 1 non-healing sundry |
 | `keyTarget` | The Keyed cache a Keybearer's key opens | SR2 | container | M2 | `KeyReachable` |
 | `secretCache` | The cache in a Hairline space | SR2 | container | M2 | ≤ 1 card, never the top card. F1 outside n |
@@ -400,7 +400,7 @@ Each source is one `LootSocketRecord` with exactly one `kind` and one `rank`, or
 | Room role (FL 6.5) | Container sockets | Rank | May hold | Coin weight | Never |
 |---|---|---|---|---|---|
 | Entry (room 0) | F1: 1 Plain no-check; F2–5: 0–1 | SR0 | DH block, coin floor lump | 1 | A lock, Windfall, secret |
-| Main-path non-fight rooms (incl. Q) | 1; 2 only where an HE need demands | SR0 | Due (first HE-7), HE-3/4, ordinary cards | 1 | Locks on HE. Segment 8 may skin, never add |
+| Main-path non-fight rooms (incl. Q) | 1; 2 only where an HE need demands | SR0 | Due (first HE-7), HE-3/4, ordinary cards | 1 | Locks on HE. Segment 8 may skin, never add (`CuriosityLootBlind`; events design 4.4.5, EV-15) |
 | Main-path guard post (G) | 0–1 Plain + carriers | SR0 | Ordinary and carried cards; **Truant host (M3)** | 1 | A lock on an HE socket |
 | Route-avoidable guard post (Gb) | 0–1 + carriers | SR1 | Ordinary and carried; Truant host | 2 | An HE socket |
 | Lair (L) | 1 lair container + carriers; purse chain | SR0 | Ordinary cards; F5 Viaticum; Truant host (F2–4) | 1 | — |
@@ -494,6 +494,8 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 6. **Proprietor tags** (4.5), on the surviving containers.
 7. **Coin lumps, the Heavy Purse and salvage** (LE 6.4 items 2 and 4, 8.3). These run after the Windfall is final, so a dropped Windfall's weight-3 share returns to the pool before lumps are carved.
 8. Then the V13g and V15g checks at the shared assertion point.
+
+**Pending request (segment 8; EV-15, M2).** A LootBind flag `stepFunded` on each locked container, false when the lock carries no value step, so a Curiosity may price an extra route to an ordinary, non-HE, non-Due, non-boxed lock with contents unchanged (events design 4.4.5). Not a rule until the 7c and LE owners rule; if refused, segment 8 has no priced lock routes (events design 14.2).
 
 ### 4.4 How every 7a and 7b channel lands (the LE 6.14 and IR 4.18 hooks; lead's call)
 
@@ -818,7 +820,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 | Object-skinned Truants, Flotsam | Rejected as Truants. Object skins are Ebbs only |
 | Void exit | M4 Nightmare-tier option, Ebb only |
 | Trove (speed-graded offer) | Later (party-size bias, card starvation, third timed family) |
-| Hawker | Segment 8 hook, "the Hawker's Hour", untimed |
+| Hawker | Segment 8 hook, "the Hawker's Hour", untimed; Later, a skin of the ITEMS 10.9 trader (events design EV-42) |
 | Lost Property buy-back | Camp hook, tested only if greed gates miss |
 | Herald shout holds it | Later |
 
@@ -908,11 +910,16 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 ### 4.13 Hooks to segments 8, 9 and 10
 
 - **Segment 8 (events).**
-  - Q rooms and Forecourt micro-events may **skin** a 7c socket but never add one.
+  - Q rooms and Forecourt micro-events may **skin** a 7c socket but never add one. Answered by `CuriosityLootBlind`: a Curiosity frames its room's existing container with wall or backdrop dressing only; the container keeps its silhouette and CT2 art, opens with no check, and its contents are never an option outcome (events design 4.4.5; EV-15, M2).
   - No event spawns or moves units (EP 13), so Windfalls are 7c's alone.
-  - A ticking Landmark makes a clock room. **Segment 8 never places a clock Landmark in a room flagged `windfallHost`** (the Windfall has priority; lead's call, after the check), and V15g's `OneClockPerRoom` runs after segment 8.
+  - A ticking Landmark makes a clock room. **Segment 8 never places a clock Landmark in a room flagged `windfallHost`** (the Windfall has priority; lead's call, after the check), and V15g's `OneClockPerRoom` runs after segment 8. Segment 8 places no Landmarks at all (events design 4.2; EV-35, M2). EventPlace runs draw-free after LootBind and before V13g / V15g (`OneClockPerRoom`); loot never reads Curiosities (events design 4.10; EV-21, M2).
+  - Curiosity props never use a container, bait-cache, Windfall or Bedside Stand silhouette (LP-14, LP-24 read; events design 4.11; EV-25, M2).
   - Dream Fragments may carry Windfall lore and claim the elite intel family.
-  - "The Hawker's Hour" is offered as an untimed bargain event.
+  - "The Hawker's Hour" is offered as an untimed bargain event. **Later:** a skin of the ITEMS 10.9 trader, with the items owner and camp and hub (events design 4.13; EV-42).
+  - **Alcove occupancy (EV-2, M2; 7c applies):** an F1 Curiosity's first host is an Alcove set piece, taking the set-piece slot LP-11 prefers, never emptying a leaf or displacing a container the cap needs (events design 4.2).
+  - **Pending requests to 7c (segment 8; not rules until ruled):**
+    - `stepFunded`, a LootBind flag for priced extra routes to unstepped ordinary locks (4.3; events design 4.4.5; EV-15, M2). If refused: no priced lock routes (events design 14.2).
+    - F-CACHE, a fact naming the contents of one optional, unstepped, non-HE, non-Due container, counted as exposure under LE 6.9 and respecting CT2 `ContainerArtBlind` and the `known` field (events design 4.4.1; EV-7, M2; with the LE owner). If refused: S2 gains F-ROOM (events design 14.2).
 - **Segment 9 (boss rooms).**
   - The signature cache's arena square list, using 4.4's filters, and confirmation of the reading that IR 4.13 and 4.18's "lair of every boss" means the arena (13).
   - The boss card screen and the Memento.
@@ -1687,10 +1694,10 @@ The owed rows are the single list in 13; by owner:
 - **Dungeon generation 7b (IR):** LP-13, LP-14.
 - **The companions owner:** LP-8 (7.4), LP-33 (8.6).
 - **The class owners:** `ignoresWindfall` (V15s).
-- **Segment 8 (events), segment 9 (bosses), segment 10 (UI) and audio:** 4.12, 4.13, 6; segment 8's no-clock-Landmark rule in Windfall rooms; segment 9's arena reading.
+- **Segment 8 (events), segment 9 (bosses), segment 10 (UI) and audio:** 4.12, 4.13, 6; segment 8's no-clock-Landmark rule in Windfall rooms; segment 9's arena reading. Segment 8 is now designed (events design, approved 2026-11-22): its EV-2, EV-7, EV-15, EV-21, EV-25, EV-35 and EV-42 rows touch 7c (4.13); `stepFunded` and F-CACHE are pending requests to 7c.
 - **Segment 11 (seeds):** the `windfall` grandchild (LE 6.10 item 1's new row), SocketPlan, step 8 and LootBind's sub-order in the frozen generation order (LE 6.10 item 4).
 - **Segment 12 (validation):** V15 and the 7c reports.
-- **The camp and hub design:** Lost Property; the Hawker's Hour with segment 8.
+- **The camp and hub design:** Lost Property; the Hawker's Hour with segment 8 (Later; events design EV-42).
 - **The simulator:** every report of 9.3 and every arm of 9.4.
 - **Art, audio and writing:** 5, 6; Proprietor tags.
 - **Naming pass:** every placeholder name here.

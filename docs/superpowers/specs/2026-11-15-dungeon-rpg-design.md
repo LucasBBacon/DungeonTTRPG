@@ -270,7 +270,15 @@ All decided.
   change HZ-25, M3).
   Unlocks, the ladder and Nightmare tiers leave the loot economy
   unchanged (loot economy design 6.12; change LE-19, M3).
-- **No permanent stat boosts.**
+  Events never ease a run for a losing streak: no mercy through events,
+  confirmed; help for struggling players belongs in a visible difficulty
+  setting, which is a future main design and run structure decision, not
+  yet made (events design 4.4.7, 14.2; change EV-10, read, agreed
+  2026-11-22, Q4).
+- **No permanent stat boosts.** Curiosity gains are run-only, and from
+  M3 Curiosity Sequels and Ripening enter the drawable set through the
+  unlock snapshot, never as power (events design 4.4.1, 4.5.8, 4.5.9;
+  changes EV-7, EV-27, EV-28, read; M3 / M3-late).
 - **Hub.** A simple camp screen to begin with. A richer hub is out of scope
   until the run itself is proven.
 
@@ -389,6 +397,11 @@ computes rules.
   step runs after `trapsResolve`, and floor N+1's generation and the
   camp-exit save are one write (loot economy design 6.10; change
   LE-14, M1).
+  A `curiosities` child of each floor's dungeon substream, a fixed 12
+  draws per floor *(illustr.)* in a fixed draw map, is drawn by
+  EventDraw after layout and before hazards; the draw-free EventPlace
+  runs after LootBind, and loot never reads Curiosities (events design
+  4.10; change EV-21, M2).
 - Rules use integer arithmetic only.
 - No reliance on unordered collection iteration.
 
@@ -419,12 +432,21 @@ largely to prove it.
 ### 6.6 Saving
 
 - **Run save:** a snapshot of the full core state, written at safe points.
-  The snapshot is the authority.
+  The snapshot is the authority. Resolving a Curiosity is a safe point,
+  with a fixed write order, so a reload cannot undo a cost or re-roll
+  (events design 4.10; change EV-21, a reading, M2).
 - **Command log:** kept alongside for replays, bug reports and tests. A log
   may stop replaying correctly after a content change, which is why it is
   not the save.
 - **Profile save:** unlocks, boons and difficulty tier, stored separately
-  from any run.
+  from any run. From M2 it also holds `curiosityMemory` (version,
+  checksum, `shownCount`, `fullShown`, `recentRuns`, `last`,
+  `pendingClosure` and the rest of events design 9.1): display and
+  launcher memory of the Curiosities seen, outside the reproducibility
+  key; a file failing its version or checksum reads as empty. Personal
+  runs write every field; shared and daily runs write `shownCount` and
+  `fullShown` only; the simulator writes nothing (events design 4.5.1,
+  4.10, 9.1; change EV-19, agreed 2026-11-22, Q1, M2).
 - Saves carry a version number.
 
 ### 6.7 Enemy AI
@@ -484,7 +506,7 @@ monster in data.
 | M0 Skeleton | Solution, automated tests, command and event loop, Godot draws a placeholder 3D isometric grid and moves a unit | Does the core and display split work? |
 | M1 Vertical slice | One class, levels 1–3, one generated floor, three enemy types, one boss, basic loot, permadeath | Is the loop fun? Does the effects system hold? |
 | M2 Full run | Four classes, companions, 5 floors (change RT-1), level 10, pick-one-of-three offers, save and resume | Does a 1–2 hour run hold together? |
-| M3 Between runs | Profile, unlocks, starting boons, difficulty ladder; in-run content: Two Doors at camp 3, Omens, Seams, Nightmare tiers (run structure design 12; change RT-19, M3) | Do players come back? |
+| M3 Between runs | Profile (its `curiosityMemory` field arrives in M2: events design 9.1; change EV-19, agreed Q1), unlocks, starting boons, difficulty ladder; in-run content: Two Doors at camp 3, Omens, Seams, Nightmare tiers (run structure design 12; change RT-19, M3) | Do players come back? |
 | M4 Breadth | Species, multiclassing, more content, balance passes with the simulator | Is every run different? |
 
 M1 covers species selection only if it is trivial to include; otherwise

@@ -110,6 +110,8 @@ after it. **(lead's call)**
   **(lead's call)** *Reading (change LE-13; M1, M2; lead's call, the DH
   owner confirms):* a standing, announced rule fixed at generation, such
   as the Dream's Due, is not a pity timer (loot economy design 6.6).
+  *No mercy through Curiosities (change EV-10; agreed, events Q4; M2):*
+  see 5.4(f) (events design 4.4.7).
 - **Free between-fight healing** that moves all stakes into each fight.
   **(settled, main design 4.4)**
 - **A free life per floor** from a recharging drop prevention. **(agreed,
@@ -289,7 +291,7 @@ help the hero, and a seed could produce a floor with no potion at all.
 | (c) More guaranteed supply | A **placement** rule instead | Extra supply overflows the cap of 3; what helps is one cache always reachable on the main path |
 | (d) A full heal at camp | Already decided | The strongest guarantee in the game |
 | (e) A healing source in every fight | Rejected | Healing becomes a drip, rests become pointless, and the floor-long decision of main 4.4 disappears |
-| (f) Pity timers | Rejected | Hidden state; exploitable (skip pickups, bleed on purpose); rewards playing at low HP; the same seed would give different loot. *Reading (change LE-13; the DH owner confirms):* the Dream's Due is standing and announced, so outside this; declining pickups can steer which member the F2 or F4 Due names, never how much the floor holds (loot economy design 6.6). *Pending request (change IR-10; M2; item rolls design 4.9; the DH owner confirms):* items sold or dropped at camp count as still dealt for the Due's deficit and slot test, so emptying a slot at camp cannot steer the Due; if refused, loot economy design 6.6 as approved |
+| (f) Pity timers | Rejected | Hidden state; exploitable (skip pickups, bleed on purpose); rewards playing at low HP; the same seed would give different loot. *Reading (change LE-13; the DH owner confirms):* the Dream's Due is standing and announced, so outside this; declining pickups can steer which member the F2 or F4 Due names, never how much the floor holds (loot economy design 6.6). *Pending request (change IR-10; M2; item rolls design 4.9; the DH owner confirms):* items sold or dropped at camp count as still dealt for the Due's deficit and slot test, so emptying a slot at camp cannot steer the Due; if refused, loot economy design 6.6 as approved. *Confirmed (change EV-10; agreed, events Q4; M2):* no mercy through Curiosities: no draw, option set or gain reads HP, downs, deaths, losses or streaks; only payment feasibility reads current HP, and only to disable a shown option; losing streaks get novelty and memory relief only, never easier odds or richer outcomes; difficulty help belongs in a visible ladder or difficulty setting, a future main design and run structure decision not yet made (events design 4.4.7, 14.2) |
 | (g) A generator floor in Recovery units | A **build check** only (21.3) | Proves the guarantee at every floor and party size; too opaque for players |
 | (h) Fully random healing | Rejected | Under permadeath, deaths come from the tail |
 | (i) Healing only from rests and classes | Rejected | The hero has nothing to drink; a healer becomes compulsory |
@@ -384,6 +386,11 @@ economy design 6.6).
   potion stock (agreed), illustratively 2–3; the P1 peg; belt slots and
   `stackMax`; `healingSundryMax`; no healing scrolls through the camp
   channel; no passive regeneration.
+- *Pending request (change EV-33; M3; the DH and conditions owners rule):*
+  Easing, a priced Weary-relief or rest-tick service at a Curiosity, never
+  HP, banned on F5 and in pre-arena Forecourts, counted in
+  `HealSupplyPerFloor` (the HZ-30 path) and never reading streaks (events
+  design 4.9).
 
 ### 5.8 Further considerations
 
@@ -770,6 +777,13 @@ traps and locks Q2)**
   the strike's damage to the opener cannot take it below 1 HP and is
   capped at 20% of the lowest legal hero's HP (traps and locks design
   6.14).
+- **Curiosity HP prices (change EV-9; M2; a reading, the DH owner
+  confirms).** A printed HP price on a Curiosity option is a payment, not
+  damage: the hero pays by default, a companion only where the option
+  prints "any member", and only a unit whose current HP exceeds the cost
+  may pay (`PaymentFeasibility`), so a price never takes a unit to 0. The
+  1 HP floor above covers incidental damage, not prices (events design
+  4.4.4, 4.4.7).
 - The floors apply after temporary HP and **before** the save chain
   (20.3), so the phial is never spent on floored damage.
 
@@ -928,6 +942,12 @@ until the classes design proposes one and the client approves it.
   until ruled):** the Forbidden Course, a party-only environment heal in
   the Long Supper (an Operate on a covered plate, ≤ 2 per fight, half a
   potion's heal plus Poisoned) (hazards design 7.8).
+- **Curiosities are not a healing source (change EV-7; M2):** no option
+  heals, and a Grace never heals (events design 4.4.1, 4.4.3, 4.4.8).
+  *Pending request (change EV-33; M3; the DH and conditions owners rule;
+  not a source until ruled):* Easing, a priced Weary-relief or rest-tick
+  service, never HP, a `cleanse`-tagged source counted in
+  `HealSupplyPerFloor` (events design 4.9).
 
 ### 12.2 Why heal spells scale by targets
 
@@ -964,7 +984,11 @@ returns. Not on at launch: the floor-1 boss needs 3–5 heals (5.8).
 - **HE-3 Placement.** The guaranteed potion goes in a main-path container
   in the first half of the main path (12.5), openable with no check, never
   on a carrier, and is never substituted. Random potion containers lean
-  off-path (`healingOffPathPermille` 600).
+  off-path (`healingOffPathPermille` 600). A Curiosity never prices or
+  checks an HE-3 or HE-4 container: a framed container still opens with
+  no check, and the priced extra route reaches only non-HE, non-Due
+  ordinary locks (change EV-15; M2; events design 4.4.5). HE items are
+  never an offered cost (change EV-9; events design 4.4.4).
 - **HE-4 Supply placement.** `supplyMainPathMin` 1, a main-path
   container before the boss room, reachable with no optional fight and no
   check. Counts, cap and "no guaranteed safe spot" **(agreed)** are
@@ -1191,6 +1215,9 @@ link acts at the attack step: every link reads the event's summed total
   grants a drop prevention outside this chain fails
   `RetiredDropPrevention`; the names Last Ward and Last-Breath Charm are
   not reused for a drop-prevention effect.
+- **Graces (change EV-12; M2 if gated, else M3; agreed, events Q3):** a
+  Curiosity's Grace never prevents a drop and is no link in this chain
+  (events design 4.4.3).
 
 ### 15.4 The cap
 
@@ -1541,7 +1568,10 @@ seen patrol routes (encounter placement design 6.20, 6.21).
   form, for wins and losses, is **Grave Goods** in the same neutral
   voice ("Still carried when the dream closed: …"; on a win "Carried
   out: …"), profile-side, never a score (change LE-15, M2; loot economy
-  design 8.2).
+  design 8.2). After a death, the next run's Afterword line is keyed to
+  the Grave Goods record (floor, theme, killer category), display-only
+  and never humorous (change EV-26; M2 lean, M3 the Unwoken Roll; events
+  design 4.5.10).
   *Pending request (change HZ-13; the DH owner rules):* the recap names
   the Stir when an environment act is in the killing chain (hazards
   design 6.18).
@@ -1677,6 +1707,12 @@ seen patrol routes (encounter placement design 6.20, 6.21).
   encounter placement owners, not loot (loot economy design 6.9 item 8).
 - **Wager rooms (M3; change TL-29):** `WagerDeathShare` is reported
   against these targets (traps and locks design 6.15).
+- **Curiosities (changes EV-3, EV-12; M2):** floor-1 hero deaths stay
+  under 5% with Curiosities on. `EventDeathShareDelta` (novice arm,
+  events on minus off) ≤ +0.5 pp on F1 at party 1 (EV-3) and, for
+  Graces, on F1 at party 1 and F2 at parties 1 and 2; Graces ship in M2
+  only if the conditions owner rules EV-11 and these gates pass, else M3
+  (agreed, events Q3; events design 4.4.3, 4.6, 9.3).
 
 ## 19. AI
 
@@ -1927,7 +1963,9 @@ for tick batches, whose chain already ran where the damage landed.
    18 + 27 = 45 before the rest tool: a half-Recovery self-heal (4) passes,
    but a class whose rest tool does not heal needs the boss nearer 23%
    *(illustr.)*. The check is meant to bind there; that is the floor-1
-   boss's real ceiling.
+   boss's real ceiling. Floor-1 Curiosities leave its inputs unchanged
+   (change EV-3; M2); it is re-run when Graces ship (change EV-12; events
+   design 4.4.3, 4.6).
 
 The 6.4 guards are still computed **without** any party consumable or
 talisman (consumables 14.9) **(settled)**; only step 6 reads them, and it

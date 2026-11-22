@@ -749,7 +749,7 @@ Each is met in section 14.
 | **Keybearer** | The one unit per floor that carries the floor key, shown by a key pip on its plate (6.11) |
 | **Lockside Listen** | Picking or key-opening a door lock also Listens through it (6.11) |
 | **Wax Key** | A run-scoped party counter (cap 2) that opens one ordinary lock silently, without its consequence (6.11) |
-| **Riddle lock** | An M3 lock opened by a clue found elsewhere on the floor, never by a check (6.11, 7) |
+| **Riddle lock** | An M3 lock opened by a clue found elsewhere on the floor, never by a check (6.11, 7); the clue sits on a guaranteed, check-free host placed by segment 8 (events design 4.13; M3) |
 | **Boxed lurker** | A theme's existing lurker placed in container form (`containerForm`) (6.14) |
 | **Wager room** | A signposted trap side room sharing the Dare slot, with caged prizes (6.15) |
 | **Disturbance track** | A Wager room's visible 3-pip meter, one pip per resolved event; the room's one clock; at 3 its guard wakes (6.15) |
@@ -885,6 +885,21 @@ Corrections applied to C:
   approved.
 - **Thresholds:** Take time, detection, Probe, readings.
 
+**Curiosity options (events design 4.3; changes EV-4, EV-5; M2).**
+Segment 8 accepts TL-34's threshold principle for options:
+- no-roll thresholds by default (CC1), passive = 10 + modifier (STAT
+  6); dungeon skills use the best eligible member, companions included
+  (CC8);
+- party-movement Stealth uses the **worst** member (STAT 5.4); a
+  single-actor manipulation uses the acting unit (a flagged reading
+  under the Steal precedent; stat owner); Leadership and Intimidation
+  use the hero;
+- every option but Leave carries a printed price, and a met threshold
+  is never the whole price;
+- a rolled option (at most 1 per band theme pool) prints exact odds and
+  its failure cost (CC2, CC3), rolls on `checks` keyed (runSeed, floor,
+  curiosityId, optionId), and allows one attempt.
+
 *Rejected:* rolled detection (Model A), a room Search (tedium; dead with
 Int detection).
 
@@ -906,6 +921,11 @@ Int detection).
   every floor, heft 8/12, Overturn 15, Pitted repair 13, Wedge 10 +
   Mechanics.
 - There is no Hard tier on F1.
+- **Curiosity thresholds (events design 4.3.2; change EV-5; M2):**
+  Standard for the floor (F1 12, F2–3 13, F4 14, F5 15), never scaled
+  by party size (CC6); a shared pool reads the floor it is drawn on. An
+  F1 **teaching rung** of 9 is allowed on at most one lit option per F1
+  theme pool (the Kennel's K2 only in M2).
 
 Fit with the stat model (trained Int +3 specialist; Open / Jam / Botch):
 
@@ -1446,6 +1466,15 @@ always Plain).
 | **Wax Key** | anyone | 1 tick, silent | Opens it; no consequence; clears a Jam |
 | **Unbolting** (M3) | caster or off-class reader | action, range 6, noise 10 | Opens it; no consequence; usable in combat |
 
+- **Curiosity priced route (events design 4.4.5; change EV-15; M2):** a
+  Curiosity card may open an existing **ordinary** locked container
+  early, as an added route under CC4; the contents are unchanged and
+  the price is never ticks alone. Only a lock with no value step
+  (`stepFunded = false`), never an HE socket, the Due or a boxed lurker
+  (6.14).
+  - *Pending request (events design 4.4.5, 14.2; change EV-15):*
+    `stepFunded` is a LootBind flag asked of 7c and LE; if refused, no
+    Curiosity routes to a lock.
 - **Force resolution (lead's call, after the check):** every force
   failure, Jam or Botch, costs the try's noise (6, or the kind's),
   increments `forceFails` and lowers the DC by 2; a force failure never
@@ -1566,7 +1595,10 @@ per room). The full glyph set is in 8.
 - On pickup the matching lock is highlighted, and the key is used
   automatically on walk-in.
 - A new interrogation category, "the floor key: its carrier and its
-  lock", is added to ENM 14.6 (an agreed list).
+  lock", is added to ENM 14.6 (an agreed list). Key facts are recorded
+  in the one per-floor, in-run FactLedger that Yield interrogation, the
+  elite intel line and Curiosities share; the codex is write-only from
+  the run's view (events design 4.4.2; change EV-8; M2).
 - `KeyReachable`: a key is never behind its own lock; the carrier sits
   within 2 rooms of the lock (Gaol: within 1, FL 7.2); key chains are
   capped at 2 (M3). The `traps` pass draws the Keybearer slot; the
@@ -1657,7 +1689,10 @@ on 2026-11-21; the fallback, if the client ever reopens it: a size-0
 - **Readings** (one-off room checks): thresholds with no roll. Arcana
   reads runes and shrines, Lore reads inscriptions, Mechanics reads
   mechanisms. Each yields a floor fact (a trap Revealed, the Keybearer,
-  a lock kind). Segment 8 owns the content (M3).
+  a lock kind). Segment 8 owns the content (M3). **Accepted by segment
+  8** (events design 4.9; changes EV-5, EV-30; M3): one Reading per
+  room, a no-roll threshold, a floor fact; the second F3 Q room's M3
+  use.
 - **Squeeze and Plank:** approved failure costs kept; the rolls move to
   the `checks` stream. As approved (FL 9.2, RT 6.2.6), each unit checks
   as it enters and may try again in later rounds, and a backtrack
@@ -1788,7 +1823,8 @@ on 2026-11-21; the fallback, if the client ever reopens it: a size-0
 - **Placement:**
   - F2–5, at most 1 per floor;
   - never F1, never in main-path rooms 0–2, the Sanctum, HE sockets, a
-    Wager reward or a key's target;
+    Wager reward, a key's target or a Curiosity's priced lock route
+    (events design 4.4.5; change EV-15);
   - budgeted by segment 6 as the floor's **Annex** group (one lurker at
     room level, 0 XP; it counts first toward the ENM 10.3 ambush cap),
     keeping this section's state: Hidden in its container, no placement
@@ -1997,6 +2033,8 @@ change LE-10; M2).
 - Locks: Plain, plus at most 1 consequence lock after room 2: the Gaol's
   Crier, or the Wake's Viewing Door (a Tattle; new lead's call, 7.4). No
   Splinter on F1. No mimic. No Wager room.
+- F1 Curiosities follow segment 8's floor-1 rules, the analogue of this
+  package (events design 4.6; change EV-3; M2).
 
 ### 6.20 Density and placement (lead's call; change TL-20) *(illustr.)*
 
@@ -3142,7 +3180,7 @@ as 6.20 lists (lead's call, after the check):
 |---|---|
 | **6 Encounters** | The `trapsResolve` pass runs after segment 6's placement and may ask it to re-place a group (TP2); groups never start on triggers; areas allowed; Keybearer tag; Tattle Dormant group (the Annex); boxed-lurker budget (the Annex); Wager guards (the Annex, one extra patrol-band budget, 0 XP; M3); rigged-fight trap damage charged to the budget; alarm and Crier arrivals Alerted (answered in encounter placement design 6.13; EP-25, EP-26) |
 | **7 Loot** | Container kinds; `lockable` sockets; +1 rarity step behind consequence locks and in Wagers; graded cages; Wax Key draws; boxed-lurker drops. **Filled in part by the loot economy design (6.9, 6.4 item 9; changes LE-10, LE-11, LE-12, LE-20):** the one step rule and socket ranks, the two identities of a consequence cache, the K2 / K2b pegs, the cage set and boxed-lurker contents (6.11, 6.13–6.15 here). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 5, 11):** container hosts and kinds (inset hosts, LP-12; the twin-lid mark, LP-26, M3; the Ebb, LP-34, M4), auto-close and Glean (LP-8, LP-9), offer pacing (LP-30, M3) and the Windfall's sole exception to "contents never destroyed" (LP-2, M3); LP-17 to LP-20 are pending requests |
-| **8 Events** | Readings; Riddle-lock clues; Hour locks on Landmark ticks; Dream Fragments read the threshold rule |
+| **8 Events** | Readings; Riddle-lock clues; Hour locks on Landmark ticks; Dream Fragments read the threshold rule. **Taken up by the events design (segment 8, approved 2026-11-22; its 4.9, 4.13):** Readings accepted (TL-34; EV-30; M3); each Riddle lock (Hymn, Index, Place-Setting, Story) gets a guaranteed, check-free clue host (a wall Glimpse or clue prop), placed by EventPlace whenever the lock exists on the floor and never a Curiosity option (M3); Hour locks on Landmark ticks stay with TL and HZ, and segment 8 places no Landmark (EV-35); Dream Fragments fold into F-BOSS options on Lore thresholds (EV-29; M3); Curiosity checks follow 6.1 and 6.2 (EV-4, EV-5); the priced lock route (6.11; EV-15); the shared FactLedger (6.11; EV-8) |
 | **9 Boss arenas** | No guaranteed boss-room traps; arena devices use the TrapRecord format (the Supper chandelier); Clearways stay clear; the Bossgate never opens by Wax Key or Unbolting |
 | **10 Information** | Every display in 6.23; Listen "a mechanism"; Lockside Listen; the codex pages; the camp's Wax Key line (Q3) |
 | **11–12 Seeds and validation** | The streams, V11, `trapDigest`, save fields, the reports, `FloorTimeByTheme` with segment-5 rows |
@@ -3661,6 +3699,8 @@ later design triggers them:
   yield the key.
 - **If the enemies owner refuses the "rudely woken" rider (TL-30):** the
   Rattle Wire is noise 10 only.
+- **If 7c or LE refuses `stepFunded` (events design 14.2; EV-15):** no
+  Curiosity routes to a lock (6.11).
 - **If `TakeTimeShare` misses its 50–75% band:** more `noTakeTime` tags
   per floor (risk 6).
 - **If `V11Fallback` is non-zero in the simulator:** the failing rules
