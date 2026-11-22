@@ -108,7 +108,7 @@ to sort a bag. **(agreed)**
   **(settled, ability model 2)**
 - **Potion roulette.** Drinking unknown consumables to learn what they are,
   under permadeath. **(lead's call)**
-- **Rules in the display layer.** Comparisons, fit verdicts, placement and
+- **Rules in the display layer.** Comparisons, fit lines, placement and
   prices are core queries. **(settled, main design 2)**
 - **Protected content.** **(settled)**
 
@@ -299,6 +299,13 @@ full keys there, including which are not tuning): the rarity decks
 250 *(illustr.)*; Sell 200‰ is the fallback if `SellShareOfCoin` passes
 40% (10.6; loot economy design 6.4). `notablesShop` is 2, set inside the
 agreed 1–2 (10.4). **(change LE-9; change LE-6; M2)**
+The item rolls design adds its keys to the same block (item rolls design
+9.1, full keys there): lanes, the weight split, usability, memory, Plain
+Gifts, offers and the rest. `loot.usability.hardOn`,
+`loot.memory.oncePerRunBy`, Scion-line-once at Common and Uncommon and
+`loot.plainGifts` are client answers (agreed 2026-11-22, Q1–Q3), **not
+tuning**. `loot.trinketScion` lets the trinket `familyCapPerRun` of 1
+admit one Scion (12.2). **(change IR-5; change IR-6; change IR-9; M2)**
 
 All values *(illustr.)*, except the `ePlusGate` block and the trinket and
 death and healing keys named above as not tuning. `basePrice` (supply,
@@ -524,8 +531,8 @@ wandering trader reuse its card and comparison components.
 ┌ VICTORY · +140 XP (level scaling −10%) · +23 coin (salvage 8) · +1 supply ─────┐
 │ Floor fact: "The crypt's guardians answer to a bell."                           │
 ├─────────────────────────────────────────────────────────────────────────────────┤
-│ [1/1] ◆ UNCOMMON  EMBERCLEAVER · family: longsword                              │
-│   • Hits apply Burning            ? 1 dormant property (Arcana 13 vs 15)        │
+│ [1/1] ◆ UNCOMMON  EMBERCLEAVER of ? · family: longsword                         │
+│   • Hits apply Burning            ? dormant · Arcana 13 vs 15                   │
 ├──────────────┬──────────────┬──────────────┬────────────────────────────────────┤
 │ HERO ★       │ C1           │ C2           │ C3                                 │
 │ +21 (tenths) │ +4           │ untrained    │ Strained: needs Str +1             │
@@ -540,12 +547,17 @@ wandering trader reuse its card and comparison components.
   supply", or "supply full: left"); any floor fact.
 - **Cards (at most 3 new items per fight, settled):** name, family, rarity
   as frame shape plus a text label (never colour alone), known properties
-  as one-line verbs, a "?" pip per dormant property, an "Arcana identified"
+  as one-line verbs, the dormant property as one hidden line carrying the
+  Arcana readout ("? dormant · Arcana 13 vs 15"), which replaces the
+  separate "?" pip, with the only other "?" in the name's suffix epithet
+  ("Strider's Boots of ?") **(change IR-9; M2)**, an "Arcana identified"
   tag, and a cursed badge once a curse is known (Later). A reopened marker
   that holds more than 3 items pages in groups of 3 in instanceId order;
   Take all walks every page. **(lead's call)**
 - **Comparison strip (core-computed):** one portrait per member with the
-  gain (6.3), training and Strength fit, and a **fit verdict**: "fits:
+  gain (6.3), training and Strength fit, and a **fit line** (renamed
+  from "fit verdict", so it is never confused with the item verdict;
+  change IR-9): "fits:
   spare"; "fits: pack"; "fits if Longsword leaves" (the core suggests the
   lowest-value displacement: bulky first, then value, then instanceId);
   "Strained: needs Str +1" (the soft threshold, weapons design 10.1; the
@@ -553,6 +565,13 @@ wandering trader reuse its card and comparison components.
   shields and worn items: "cannot wear: untrained"; "Strained: needs Str
   +1" or "+2" (a warning, never a refusal); "replaces X (feet)" (armour
   design 5.8, 16.3) **(change AR-33)**.
+- **Merged card (item rolls design 6.1; change IR-9; M2):** a mark line of
+  at most 2 marks (Answers here > Plays with > +1 line > Suits <name>);
+  each member's footer reads, in this order, the `ItemVerdict` glyph and
+  word in a footer badge (▲ upgrade, ⇄ another way, = redundant, ▽
+  lesser, ✕ cannot use; item rolls design 4.14), the 6.3 gain, then the
+  fit line ("▲ upgrade · +2 · fits: spare"). Where this card and the
+  item rolls design differ, the item rolls design wins.
 - **Suggested recipient (★):** 6.3.
 
 ### 8.3 Actions
@@ -745,7 +764,9 @@ rerolls and family caps, so one draw never repeats itself. For later
 floors' draws, camp and trader stock counts toward family caps **only once
 bought or bartered**, so an item the party could not afford never closes a
 family for the rest of the run. Dreamed options (the unchosen options
-of an offer set) never count (loot economy design 6.3, change LE-4; M2).
+of an offer set) never count (loot economy design 6.3, change LE-4; M2),
+though they do write Scion-line memory, `oncePerRun` and gear floor keys
+(item rolls design 4.7; change IR-6; agreed 2026-11-22, Q2).
 Floor N+1 is generated when the party
 leaves camp for it (it already reads owned bases, enemies 10.5 step 3),
 after every purchase on floor N and at its camp is known, so this stays
@@ -982,13 +1003,22 @@ rules for the trader-as-unit case and is out of scope here.
 2. **Consumables, scrolls and wands are always identified.** **(agreed)**
 3. **At most 1 hidden property per item,** on Uncommon-or-better gear and
    trinkets only. It is **dormant**: it does not function for the party
-   until identified. Comparisons ignore it and show a "?" pip; prices use
+   until identified. Comparisons ignore it and show its hidden line with
+   the Arcana readout (8.2; change IR-9); prices use
    the assessed value (10.5). **(agreed)** A monster carrier uses its item
    in full (enemies 15.4); dormancy is a party-side state. **(lead's
    call)** **Which property is dormant (lead's call):** an instance's
-   dormant properties are exactly its non-`obvious` ones, fixed or rolled,
-   not yet in `known`. Validation keeps that count within `hiddenMax`
-   (19.1 rule 14).
+   dormant properties are exactly its non-`obvious` ones not yet in
+   `known`. Fixed properties are always `obvious`, so the dormant
+   property, if any, is the rolled one (at most 1 rolled line per item;
+   item rolls design 4.6) **(change IR-4, approved 2026-11-22; M2)**.
+   Validation keeps that count within `hiddenMax` (19.1 rule 14).
+   **Plain Gifts (agreed 2026-11-22, Q3):** the Dream's Due, every offer
+   option (the Wager and the Twin Coffer included), the fourth option and
+   every Viaticum option are generated with `known` = every line, so a
+   choose-one never hides a line; fit premiums, the arms floor and
+   Wax-Key and stepped identities are field finds and keep Arcana's job
+   (item rolls design 4.14) **(change IR-9; M2)**.
 4. **At the summary, a threshold with no roll (settled, stat model 7.2):**
    the party's best full passive Arcana is compared with
    `identifyDifficulty`. The full passive is the maximum over members of
@@ -996,7 +1026,8 @@ rules for the trader-as-unit case and is out of scope here.
    mastery) + active effects, the same query form as passive perception
    (settled, stat model 6). If it meets the difficulty, everything is
    revealed, a curse included (Later).
-5. **Otherwise the item is revealed:**
+5. **Otherwise the item is revealed** (Plain Gifts items are generated
+   known, item 3; change IR-9):
    - automatically when the party's best passive Arcana rises (a level-up,
      a recruit or an effect), logged as "Arcana now reveals …". **(lead's
      call)** After any command or event that changes that maximum, the
@@ -1041,6 +1072,17 @@ family: { id: "family.longsword", category: "weapon", improvised: {...},
   category *(illustr.)*: weapons and armour 2, trinkets 1, consumables
   unlimited. A cap of 2 lets a committed build find a higher-rarity
   upgrade of its weapon. How shop and trader stock count: 10.4.
+  **Scions (change IR-5; M2):** a record may name `scionOf` (at most one
+  child per record): same family and base, a superset of the parent's
+  fixed lines (the parent's plus one, or a major replacing a minor of the
+  same domain). **Trinket Scion exception (agreed family
+  caps, approved 2026-11-22):** a trinket family's cap of 1 admits **one**
+  Scion at a strictly higher tier, only while the party owns at most 1
+  copy of the family; the lower copy then shows ▽ with a Sell hint (item
+  rolls design 4.5). **Pending request:** the trinkets owner applies the
+  same exception to trinkets design 13.8; until the trinkets owner
+  applies it, and if refused, there are no trinket Scions and the
+  trinket cap of 1 stands (item rolls design 14.2).
 - Trinket families are finer than trinket kinds (`family.visored_helm`,
   never `family.helm`): at least 3 legal families per piece location, as
   a running total in each wave from M2. The Reliquary Shield counts under
@@ -1066,7 +1108,8 @@ family: { id: "family.longsword", category: "weapon", improvised: {...},
 | `beltable` | bool | Only for consumable, scroll, wand and talisman; Remedy is not beltable **(change CN-1)**. A wand is used from the belt, never wielded. |
 | `requirements` | object | `strength {min, mode}`, `training {group, mode}`; `hard` = cannot be equipped, `soft` = a named penalty set by the category design. Weapon and focus items write neither: training lives on the family, and Strength comes from the family's `strengthClass` through `weapons.json` (weapons design 10, 20.1; change W-6). |
 | `classTags[]` | strings | Scrolls and wands: which classes use it "in class"; real class ids only **(change CN-1)** |
-| `requires[]` | build tags | Smart-loot weighting (the offers vocabulary) |
+| `lootLane` | `lane.*` | Exactly one build lane from the closed `loot.lanes` (build lanes, not trainability; the UI says "Suits", never "lane"). Smart-loot weights, `onParty` and the usability floor (agreed 2026-11-22, Q1) read it through `LanesOf(member)` (item rolls design 4.2, 4.3) **(change IR-1; M1 data on floor 1 records, M2)** |
+| `requires[]` | build tags | Smart-loot weighting (the offers vocabulary); secondary build tags beside `lootLane` (item rolls design 4.3, change IR-1) |
 | `usableBy` | object | `party`, `monster`, `monsterTags[]` |
 | `properties` | object | `fixed[]`, `rollable {table, count}`, `hiddenMax` (0 or 1; 0 below Uncommon). Every rollable table declares one `entryValue` that all its entries equal. |
 | `grants` | object | `whileEquipped[]` (effects), `whileCarried[]` (rare: party-wide), `abilities[] {ability, cost, pool}` |
@@ -1078,8 +1121,8 @@ family: { id: "family.longsword", category: "weapon", improvised: {...},
 | `monsterProfile?` | object | `{effects, abilityShape: uses:N \| cooldown, useWhen, minFloor}`; overrides the family default. `useWhen` is a closed vocabulary (consumables design 15) **(change CN-1)** |
 | `value` | int, checked at load | Σ fixed property values + rollable `count` × the table's `entryValue` + Σ values of the `use` ability and granted abilities, in offer-value units (12.6). Every roll gives the same value. A trinket button is a property whose effect is the grant; its value is counted once, inside that property (trinkets design 9.2) **(change TK-12)**. Each `ability.item.*` declares its offer value; the load check compares a scroll's value with its tier, a wand's with `wandValue(tier, pool max)`, and every other use-only record's with its rarity budget (consumables design 9.1) **(change CN-6)**. |
 | `basePrice?` | int | Required for mundane and shop-only records (supply, Remedy) |
-| `flags` | set | signature, heirloom, unsellable, noSteal, unique, srd (with `srdSource`). The `unsellable` treatment also applies to any instance with `boundToUnitId` set (18.1; companions design 7.6) **(change CMP-21)**. |
-| `display` | object | iconId, modelId, glint; `socket` (`head \| back \| none`, trinkets) (change AR-35). Never read by the rules. |
+| `flags` | set | signature, heirloom, unsellable, noSteal, unique, srd (with `srdSource`). The `unsellable` treatment also applies to any instance with `boundToUnitId` set (18.1; companions design 7.6) **(change CMP-21)**. `oncePerRun`, always explicit: generated at most once per run in any form (dreamed options, the hidden fourth and the unused Wax-Key identity included), never lifted, required on every signature, Very rare record, heirloom template and `chase` record (the named chase Rares), and never drawn for the fourth option or a dual-identity cache; `chase` marks those named Rares. `unique` keeps its meaning (at most 1 owned) (item rolls design 4.7; agreed 2026-11-22, Q2) **(change IR-6; M2)**. |
+| `display` | object | iconId, modelId, glint; `socket` (`head \| back \| none`, trinkets) (change AR-35). Never read by the rules. Theme presentation (Patina on models only, the theme stamp, provenance, a Reverie) comes from the found theme's `theme.loot` display record by display hash, with 0 rules bias (agreed 2026-11-22, Q4); icons stay global and untinted (item rolls design 5.1, 6.2) **(change IR-15; M2, M3)**. |
 | `weapon{}`, `armour{}`… | sub-records | Owned by the category designs (section 17). `weapon{}` and `focus{}`: weapons design 20.1 (change W-6). `armour{armourCategory, verb}`, `shield{}` and `trinket{kind, wornOn}`: armour design 16.1; `armourValue` is derived and never stored (change AR-35). |
 
 ### 12.4 Properties and the buff test
@@ -1104,7 +1147,8 @@ prop: { id, value, bands: {b1, b2, b3}, obvious, test[], tags[] }
   against the first opportunity attack each fight". No item raises an
   ability score past +5 unless it is written as "up to the cap" (settled,
   stat model 5.5).
-- At most 3 properties per item, each shown as one computed line.
+- At most 3 properties per item, each shown as one computed line; at
+  most 1 of them rolled (item rolls design 4.6; change IR-4, read).
 
 ### 12.5 Rarity
 
@@ -1139,13 +1183,29 @@ record meets 19.1 rule 1 with its `use` (consumables design 9.1).
   value is that tier's budget plus the authored property's value. It is
   never cursed and carries **no cost add**, because bosses are validated by the
   boss guards (enemies 6.5 scope) (change I-9). "Legendary" is not used.
-  "The floor's top allowed tier" reads as the top tier that has a legal
-  record for the signature's category, and signatures are exempt from the
-  Very rare `perFloorMax` **(reading, change LE-3; pending the items
-  owner's confirmation; if refused, a floor whose field deck holds a Very
-  rare draws its signature at Rare plus the authored property; loot
-  economy design 6.3, 18.2; M2)**. **Floor 5 (agreed 2026-11-22, Q1):** the
-  final boss still carries and uses its signature, but on death it drops
+  "The floor's top allowed tier" is the highest tier in the floor's drawn
+  rarity-deck variant, capped by the boss's authored forms (one form per
+  top tier its floors can need), and **a Very rare signature consumes its
+  floor's Very rare slot** (the deck's Very rare card takes the
+  tier-stable path, logged). This replaces LE-3's pending exemption
+  reading and its refusal fallback (item rolls design 4.13; loot economy
+  design 6.3, 18.2) **(change IR-13, agreed 2026-11-22, Q5; M2)**.
+  **Pending request:** the items owner confirms the slot rule; if
+  refused, LE-3 stands as approved (signatures exempt from the Very rare
+  `perFloorMax`; a floor whose field deck holds a Very rare draws its
+  signature at Rare plus the authored property; item rolls design 14.2). A
+  signature has at most 3 lines: at most 2 base lines plus one authored
+  value-1 line echoing the boss's fight or kit (approved M1 records
+  grandfathered). Flags `signature` and `oncePerRun`; never rolled, never
+  `scionOf`, `identifyDifficulty` 0; cap-exempt when generated and taken,
+  then counted toward its family cap; exempt from the run-wide owned-base
+  reroll (item rolls design 4.7, 4.13). An unarmed boss **guards** its
+  signature in a signature cache in its lair, and its plate reads
+  **"Guards: <signature name>"**; in M1 Old Ragged guards Bellwarden's
+  Mail **(change IR-13, agreed 2026-11-22, Q5; M1, M2)**. **Floor 5 (agreed 2026-11-22, Q1):** the
+  final boss still carries and uses its signature (an unarmed final boss,
+  none in M2, guards it in its signature cache during the fight instead;
+  change IR-13), but on death it drops
   as a **Memento**: a run-record item card with full stats and a
   premise-neutral caption, 0 VP, shown on the victory screen and the run
   record only (loot economy design 6.11). **(change LE-5; M2)**
@@ -1316,10 +1376,17 @@ is original, so it carries no `srd` flag.
   swap, hand over, take-from-Downed, Equip-now displacement, Sell, barter
   and Disarmed (the weapon stays in hand). Each shows `Clinging`.
 - **Placement:** Rare and above, never on floor 1, at most 1 per floor,
-  never on consumables, signature items or heirlooms.
+  never on consumables, signature items or heirlooms. **(change IR-20,
+  Later; draws reserved from M2)** Curses are authored **cursed twins**
+  (`cursedTwinOf`, same family and base), never rolled. The `curseGate`
+  stream (2 draws per floor, always consumed from M2) decides the floor's
+  curse and picks the card, so at most 1 per floor is structural.
+  Eligible: Rare+ gear field cards from floor 2; also never on the
+  Dream's Due, fit premiums, the arms floor, any offer option or the
+  fourth, the Viaticum, camp entries or rings (item rolls design 4.15).
 - `value` counts the benefit only. **A cursed carried item:** a monster
   carrier applies only the benefit, so its cost add uses the benefit-only
-  value. Hover shows "Carries: X" with **no curse mark**: finding it is the
+  value (the benefit's T+1 value; item rolls design 4.15, change IR-20). Hover shows "Carries: X" with **no curse mark**: finding it is the
   party's Arcana job.
 - **Curses at a discount (change LE-22, Later):** a cursed card keeps
   its deck tier T for VP, price, Sell and Scrap; its benefit is authored
@@ -1340,7 +1407,9 @@ is original, so it carries no `srd` flag.
   floor loot budget. Its value is for display only. It cannot be bartered.
 - It **does not consume its family's cap**, but it **does block duplicate
   bases** (it counts as owned), and it counts as party-owned for the
-  Dream's Due (loot economy design 6.12; change LE-19, read; M3).
+  Dream's Due (loot economy design 6.12; change LE-19, read; M3). It sits
+  outside loot pools and Scion-line memory, is `oncePerRun`, and counts
+  as owned for item verdicts (item rolls design 4.15, read).
 - Left in leftovers, it is lost at the stairs, never scrapped. The profile
   keeps the template.
 
@@ -1486,7 +1555,7 @@ no other occurs.
 ### 18.2 Derived, never stored
 
 Count, assessed value, price, Sell and Scrap value, barter credit, gain,
-comparisons, fit verdicts, the pure-value swap test, the suggested
+comparisons, fit lines, the pure-value swap test, the suggested
 recipient, slot occupancy, capacity and over-capacity. There is **no `tempMods` field**: Pitted Armour and Coated
 are unit conditions.
 
@@ -1582,7 +1651,10 @@ The build fails on any violation:
    or fewer; no concentration on non-spell consumables **(change CN-7)**.
    Floor-1 carried consumables are self-targeting (settled, enemies 15.3).
 9. Curses only on Rare or higher, never on signature, heirloom,
-   consumable, scroll, wand or talisman records **(change CN-7)**.
+   consumable, scroll, wand or talisman records **(change CN-7)**. Later:
+   a cursed record is an authored twin (`cursedTwinOf`) of an uncursed
+   record of the same family and base; never on rings (item rolls design
+   4.15) **(change IR-20, Later)**.
 10. Heirlooms: `unsellable`, `noSteal`, `identifyDifficulty` 0, uncursed.
 11. Every weapon family has an `improvised` attack. Family caps resolve.
 12. Records flagged `srd` cite `srdSource`. Infinite-storage records are
@@ -1595,7 +1667,9 @@ The build fails on any violation:
     check).
 14. `hiddenMax` is 0 below Uncommon, and count(non-`obvious` fixed
     properties) + (the rollable table contains a non-`obvious` entry ?
-    rollable `count` : 0) ≤ `hiddenMax`.
+    rollable `count` : 0) ≤ `hiddenMax`. Every fixed property is
+    `obvious`, so the rule holds per instance: the dormant property, if
+    any, is the rolled one (item rolls design 4.6) **(change IR-4; M2)**.
 15. Trinket domain map: each (effect kind, target scope, subject token)
     triple has one owning table, read from `trinketDomains` and the closed
     `trinketSubjects` vocabulary (5.1), token by token; shared triples
@@ -1634,7 +1708,11 @@ The build fails on any violation:
     no legal roll fails.
 
 Rules 15–28 are summaries; the full text is trinkets design 18.1.
-**(change TK-14)**
+**(change TK-14)** Rule 28's limits apply to every category's rollable
+tables, which are curated per family (3–5 eligible entries) and give at
+most 1 rolled line per item; the item rolls design's V14 `ItemRolls`
+checks also apply (item rolls design 4.6, 9.2; the trinkets, weapons
+and armour owners confirm) **(change IR-4; M2)**.
 
 Armour design 17.1 rules 10, 11, 13, 14 and 17 also apply (bulky armour
 and shields and no AC on trinkets; one table, one property; name
@@ -1663,7 +1741,10 @@ Invariants, asserted as property tests:
   channels; once the floor's count is reached, Rare trinket draws are
   excluded from the weight table for the floor's remaining draws, in
   channel order containers, carried, camp, boss (asserted by the
-  generator and a test) **(change TK-27)**;
+  generator and a test) **(change TK-27)**; loot-plan identities, offer
+  fallback trinkets included, count **first**, then that channel order
+  (item rolls design 4.17) **(change IR-14; M2; pending request: the
+  trinkets owner confirms the order for TK-27)**;
 - nothing at camp goes to leftovers;
 - no inventory command draws a random number (stream positions unchanged);
 - coin never rises at a trader (Later).
@@ -1742,7 +1823,7 @@ Consumable, scroll, wand and talisman reports: see consumables design
     the kill switch (4.2, 19.3) are tuned on M2 data with Sell enabled.
 - **M2** (full run, companions):
   - party view, party-wide placement, suggested recipient;
-  - comparison strip with fit verdicts; pure-value swaps;
+  - comparison strip with fit lines; pure-value swaps;
   - hand over, Administer and take-from-Downed;
   - trinkets, including worn-piece kinds, and capacity trinkets
     **(change AR-39)**; trinkets settled in the trinkets design
@@ -1782,8 +1863,10 @@ Consumable, scroll, wand and talisman reports: see consumables design
   trinkets is more structure than one bag. Mitigation: the combat HUD
   shows only the belt; the summary auto-places.
 - **Dormant properties are a modest stake** until curses arrive. If Arcana
-  rarely changes a choice, raise the hidden share on Rare and above (a
-  tuning step). Delaying the free camp identify would change a client
+  rarely changes a choice, raise the rollable share of Rare and above
+  records (a content lever: fixed properties are always obvious, so only
+  rolled lines can be dormant; item rolls design 4.6, 15) **(change
+  IR-4)**. Delaying the free camp identify would change a client
   decision, so it is only a proposal to bring to the client.
 - **k = 1 rests on approximate action-worth maths.** Validation rule 7 and
   the carrier-room report must confirm it before content scales.

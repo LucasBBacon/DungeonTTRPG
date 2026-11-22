@@ -1514,10 +1514,16 @@ per room). The full glyph set is in 8.
   loot economy design 6.9 item 3: a tier above the floor's reference
   tier, by allocation first, else from the step allowance (at most 2 per
   floor), else a fit premium (change LE-10; M2). The lock card hints at
-  its contents with a tier mark (loot economy design 6.15): "holds a
-  rare notable; by key, an uncommon one"; a fit step reads "holds an
-  uncommon notable, chosen for <name>; by key, an ordinary uncommon
-  notable".
+  its contents with a tier mark (loot economy design 6.15), naming each
+  identity's **fine-category display noun** (weapon, armour, shield,
+  focus, trinket, scroll, wand, tool) in place of "notable", with the
+  rarity word in its frame-shape glyph (ITEMS 8.2) (item rolls design
+  4.11; change IR-11; M2): "holds a Rare weapon; by key, an Uncommon
+  weapon"; a fit step reads "holds an Uncommon weapon, chosen for
+  <name>; by key, an ordinary Uncommon weapon". The Wax-Key identity is
+  the same fine category, a different family (item rolls design 4.11);
+  after a relaxed sibling (any category) each identity shows its own
+  noun ("by key, an Uncommon shield").
 - **Two identities (agreed, loot economy design Q2; change LE-11; M2):**
   a consequence cache that holds a card holds two pre-rolled identities:
   the **stepped identity**, paid when the lock is opened by roll or

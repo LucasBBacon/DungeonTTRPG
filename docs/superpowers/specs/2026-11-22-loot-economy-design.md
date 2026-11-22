@@ -510,7 +510,9 @@ curve so deaths land where DH 18.2 wants them.**
   18.1, 21): it is the lead's pre-agreed lever, engaged at 1 only if the
   scroll-nova reports fire, because `scrollReadSetsCampSpend` is `true`
   (CN-11, approved). The proposal read it as binding at 1; 6.3 and 6.11
-  read it as "while the lever allows" **(new lead's call)**.
+  read it as "while the lever allows" **(new lead's call)**. (Change
+  IR-16 later defaults it to 1 from M2 while the item rolls usability
+  floor ships; CN 18.1; item rolls design 4.7 item 9.)
 
 ### 3.5 Terms
 
@@ -702,22 +704,42 @@ steers the expected share, it does not enforce it (`LootMixByCategory`
 reports the result). 7b applies per-category clamps after the tier: an
 illegal (tier, category) pair re-weights the category, never the tier.
 
-- **Weight composition (lead's call, after the check).** For every
-  weighted identity draw, a legal record's weight is
-  `w = categoryWeight[f][cat] × (onParty ? requiresBias : 1) × anyCompanion
-  × 1 / |legal records in its requires lane at that tier and category|`,
-  applied in that order and normalised per lane (6.12). `requiresBias`
-  is 3 by default and 4 for the boss card's options; `anyCompanion` is 1
-  unless the CMP-30 lever has fired (CMP 7.7, 18 risk 10). **Filters are
-  not weights:** the Dream's Due, a fit premium and the arms floor below
-  restrict the candidate set to their target (member, slot or lane)
-  first, and the weights then apply inside that set.
+- **Weight composition (lead's call, after the check; made concrete by
+  change IR-3, item rolls design 4.2; M2).** For every weighted identity
+  draw, a legal record's weight is an Int64 computed factor by factor in
+  a fixed order, with a FloorDiv after each factor:
+  `categoryWeight[f][group]`, split **lane > family > record** (divided by
+  the number of lanes of the group, of families in the lane and of
+  records in the family, each counted on the **static legal set** at
+  that tier, never on the survivors); × `requiresBias` if `onParty`
+  (else 1); × `anyCompanion`; × the usability factor; × the socket terms
+  (`showsInUse` ×2 on carried cards, IR-12; the null Scion pull lever,
+  IR-18). The "lane" is the record's one `lootLane` from the closed
+  `loot.lanes` (change IR-1; M1 data on F1 records, M2 full); the four
+  categories above are the category groups, over 7b's fine categories.
+  `requiresBias` is 3 by default and 4 for the boss card's options; on a
+  targeted socket it is evaluated against the target member alone;
+  `anyCompanion` is 1 unless the CMP-30 lever has fired (CMP 7.7, 18 risk
+  10), and from M2 the lever has a party-size key (≥ 3, IR-17). **Usability
+  floor (change IR-2; agreed, item rolls Q1; M2):** one `UsableBy` query;
+  **hard** on every chosen, guaranteed or VR draw (the Due, fit premiums,
+  the arms floor, every offer option and the fourth, the Viaticum, both
+  dual identities, camp entries, VR cards); **soft** on C/U/R field cards
+  (×100‰ *(illustr.)* when no member can use the record) (item rolls
+  design 4.3). **Filters are not weights:** the Dream's Due, a fit premium
+  and the arms floor below restrict the candidate set to their target
+  (member, slot or lane) first, and the weights then apply inside that
+  set.
 - **The F5 tactical cap** is enforced during the F5 field draws in
   channel order: once tactical VP drawn so far + the next card's VP would
   exceed `FloorDiv(f5TacticalMaxPermille × F5 field VP, 1000)` (6 of 17
   at 400‰ *(illustr.)*), the tactical categories take weight 0 for the
   rest of the floor. The Viaticum is excluded from the base and the
-  count.
+  count. **Beside it on F3–F4 (change IR-16; M2):**
+  `rareTacticalFieldMaxPerFloor` 2 *(illustr.)*: once that many Rare
+  scrolls, wands and notable flasks are drawn in field draws, Rare
+  tactical records take weight 0 for the rest of the floor, in channel
+  order (item rolls design 4.7 item 9).
 - **Per-run arms floor:** by the end of F2 the hero has been offered at
   least 1 weapon-or-focus and 1 armour-or-shield notable it can use. The
   F1 Due covers arms. **Evaluated at F2's LootPlan (lead's call, after
@@ -780,7 +802,9 @@ premium and is logged; its VP is unchanged.
 - **M2 roster wall (told plainly).** The only M2 VR record is Icefall (a
   tier-4 scroll, family cap 2), and `tier4ScrollsPerRunBeforeFinalBoss`,
   when the lead engages it at 1, allows one before the final boss (CN
-  13.4, 21; off by default, 3.4). So in M2:
+  13.4, 21; off by default, 3.4; **defaulted to 1 from M2 while the
+  item rolls usability floor ships**, change IR-16, item rolls design
+  4.7 item 9). So in M2:
   - the **F4 VR card is Icefall while its family cap, the VR
     `perFloorMax` and the lever allow, and only when a living member at
     generation can read it** (in class, or with trained Arcana, CN Q1)
@@ -791,15 +815,29 @@ premium and is logged; its VP is unchanged.
     tactical cap and the Viaticum already carry the final-boss tools);
   - the **F4 signature is R + authored**;
   - a VR card drawn down to R logs its 1-VP shortfall in
-    `SubstitutedVP` (Ledger B reports it; no coin is added).
+    `SubstitutedVP` (Ledger B reports it; no coin is added);
+  - **relaxation order (change IR-7; M2):** an empty draw first relaxes
+    its socket's own target preferences, then the ladder rungs in order
+    (lift Scion-line memory; category re-weight at T; this tier-stable
+    path, VR cards only; the `substituted` supply or tonic), so the
+    tier-stable path always runs before supply or tonic, and no tier ever
+    changes silently (every change logged); guaranteed draws never reach
+    supply or tonic (item rolls design 4.7 item 8).
   VR gear records are a 7b and ITEMS content request (2–3 records: one
   weapon, one armour or shield per lane group); until they exist, the F4
   field VR stays the only Very rare of the run.
 - **Signature (LE-3).** "The floor's top allowed tier" (ITEMS 12.5) is
   read as the top tier **that has a legal record for the signature's
-  category**, plus the authored property. Signatures are read as exempt
-  from the VR `perFloorMax` ("independent of rarity"); the ITEMS owner
-  confirms. In M2 the question does not arise (the F4 signature is R).
+  category**, plus the authored property; 7b makes it exact as the
+  highest tier in the floor's drawn deck variant, capped by the boss's
+  authored forms (change IR-13; item rolls design 4.13). **The pending
+  VR-cap exemption reading is withdrawn (change IR-13; agreed, item rolls
+  Q5):** a VR signature **consumes its floor's VR slot** (the deck's VR
+  card takes the tier-stable path, logged in `SubstitutedVP`).
+  *Pending request to the ITEMS owner:* if the ITEMS owner refuses the
+  slot rule, LE-3 stands as approved (signatures exempt from the VR
+  `perFloorMax`, with 18.2's fallback). In M2 the question does not
+  arise (the F4 signature is R).
 - **Boss reward card (LE-3).** One offer set, width 3, at C / U / R / R
   on F1–F4, **never VR**; content per CN 10's boss-card row (scrolls,
   wands; the talisman from F3, **settled**). Counted in Ledger B and
@@ -810,21 +848,39 @@ premium and is logged; its VP is unchanged.
     draw may read; a death on the floor does not re-roll the card. Outside
     their class, scrolls and wands need trained Arcana (CN Q1), so a solo
     Vanguard or a martial party with no Arcana could otherwise face a
-    card with nothing usable. **Fallback:** if no option is usable by a
-    member in the snapshot, all three are redrawn at the same tier as
-    fit-premium gear notables for the member with the largest deficit
-    (6.6 item 2), each on its own reserved `lootPlan` grandchild (6.10),
-    and logged `BossCardUsabilityFallback`. This widens CN 10's boss-card
-    row by a fallback only (LE-3).
+    card with nothing usable. **Fallback (per option; change IR-8;
+    agreed, item rolls Q1; M2):** each option with no usable record is
+    drawn **on its own** as **usable gear at the same tier**, with the
+    usability filter and ordinary weights (`requiresBias` 4, `onParty`
+    over the whole party), **not** fit-filtered, on `bossCardFallback`
+    entry = its option index (6.10), and logged
+    `BossCardUsabilityFallback`. If that set is empty too, the offer
+    terminal ladder runs (lift Scion-line memory for that option; a
+    usable notable tool at the same tier; usable gear or a tool one tier
+    lower, logged in `SubstitutedVP`); an offer option never falls to
+    supply or tonic. **Hero guarantee:** if no option 0–2 is usable by
+    the hero, the Theirs option is redrawn as hero-usable gear on
+    `bossCardFallback` entry 4 (item rolls design 4.8). This widens CN
+    10's boss-card row by a fallback only (LE-3).
 - **Offer sets (LE-4).** Every choose-1-of-N (the boss card, the Wager
   cage set, the Viaticum, the Twin Coffer) counts 1 in Ledger A and its
   taken option's tier in Ledger B. Unchosen options are **dreamed
   options**: pre-rolled on `lootPlan`, outside VP and family caps,
   destroyed when the choice resolves (`ItemDestroyed{dreamedAway}`).
+  **Narrowed for memory only (change IR-6; agreed, item rolls Q2;
+  M2):** dreamed options are inside Scion-line memory, `oncePerRun` and
+  gear floor keys, because memory reads what generation produced, taken
+  or not (item rolls design 4.7). **Offer slots (change IR-8; agreed,
+  item rolls Q1; M2; the Wager M3):** options 0–3 are the Yours, Theirs,
+  Wayward and fourth slots, built in option-index order; families
+  distinct, fine categories or effect tags distinct, at most 1 damage
+  option on the boss card and the Wager (item rolls design 4.8).
 - **Camp channel (LE-6).** 2 entries at every camp 1–4 (inside the
   approved 1–2), drawn in floor N's draw (**settled**), **graded for
   floor N+1**: tier and minFloor read N+1; family caps and owned bases
-  read N (**settled**). Tiers: camp 1 U, U; camp 2 R, U; camp 3 R, U;
+  read N (**settled**); the null Scion pull lever (change IR-18; M2
+  lever) applies to camp entries as to F3+ field cards (item rolls
+  design 4.14). Tiers: camp 1 U, U; camp 2 R, U; camp 3 R, U;
   camp 4 R, R *(illustr.)*. **Never VR**, so camp stock can never stack
   against the next floor's VR cap. The phial's minFloor at a camp reads
   the generated floor N, not N+1 (CN 14.7 unchanged; told plainly). No
@@ -1107,7 +1163,17 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      strict upgrade exists in any slot, a marked **sidegrade** (same
      tier, a `requires` lane or property line that no dealt item in that
      slot has) is legal, tagged "another way" (kept clear of RS's "the
-     road not taken").
+     road not taken"). **7b's candidate test (change IR-10; M1 for the
+     F1 Due, M2):** a **two-hander** must exceed both the dealt main hand
+     and off hand, or find them empty; a **trinket** must exceed the
+     lower dealt trinket or fill an empty trinket slot; the test reads
+     fixed lines only. **Items sold or dropped at this camp count as
+     still dealt** for the deficit and the slot test (*pending
+     confirmation by the DH owner*; if refused, this item as approved).
+     Inside the filter, `requiresBias` 3 is evaluated against the
+     **target alone**. Held lever `loot.dueSidegradeFromFloor` = 4 (the
+     approved F4–F5 sidegrade); moving it is a change to this item for the
+     client and DH owner (item rolls design 4.9).
    - **Which card:** the lowest deck card with a tier above the slot's
      dealt item; else, if the slot is empty, the lowest card; else, on
      F4–F5, the lowest card at the slot's tier as a sidegrade; else the
@@ -1153,7 +1219,9 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    not drift to the hero), `DreamsDueWaivedRate`, `WinRateByLootLuck`
    (p10 ≥ 0.70–0.75× the base, p90 ≤ 1.25–1.30×), hero p10 / p50 at F3 ≥
    0.65.
-6. **Class and lane fairness:** V13s (n) checks that every `requires` lane has
+6. **Class and lane fairness:** V13s (n) checks that every `requires` lane
+   (made concrete as the record's `lootLane`, change IR-1; item rolls
+   design 4.3) has
    at least 3 legal records at every deck tier on every floor
    *(illustr.)*; `RequiresHitRate` and `DreamsDueWaivedRate` are reported
    by hero class with a gap ≤ 10 points. 7b fills gaps.
@@ -1195,7 +1263,10 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
   covers several bodies (6.6 item 2); the camp channel of 2; fit
   premiums targeting the largest-deficit member; and the CMP-30
   `anyCompanion` lever when its join-camp fill report fires (CMP 7.7,
-  18 risk 10), not as a standing weight.
+  18 risk 10), not as a standing weight. **The lever gains a party-size
+  key (change IR-17; M2 lever):** it can fire at party size ≥ 3 only
+  (1500‰ *(illustr.)*), read by `CompanionTrinketEmpty` (item rolls
+  design 4.3).
 - **Hooks:** vendor potion stock scaling with party size (DH HE-6 thins
   to 0.70× at n = 4) goes to the camp and hub owner.
 - **Reports:** `GearPerBodyByPartySize`; the solo / reference win ratio
@@ -1254,7 +1325,13 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
         never count as behind a lock;
       - (b) **secrets:** at most 1 card, never the deck's top card;
       - (c) **the elite carrier** takes the highest carrier-legal
-        **gear** card (weapon or focus, armour or shield, trinket). A
+        **gear** card (weapon or focus, armour or shield, trinket); its
+        identity is filtered to `showsInUse` records when that set is
+        non-empty, so "presented in use" holds (elite preference, change
+        IR-12; M2; reported in `EliteShowsInUseRate` and `EliteKpcDelta`,
+        item rolls design 4.12). "Gear" here includes trinkets, so a
+        per-option offer fallback may hold one (a reading recorded in the
+        item rolls design, 4.8). A
         consumable is never the elite's card: a caster-tagged elite reads
         a carried scroll (ENM 15.4), so it would cast the run's best
         card at the party and destroy the premium. A consumable top card
@@ -1299,7 +1376,11 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      drawn only from the `requires` lane of the member with the largest
      deficit under the Due scorer (6.6 item 2) (a hard filter;
      `StepFitPremium`). Only if no fit lane exists does it add 20
-     fallback coin (6.4 item 8; F5: sundries).
+     fallback coin (6.4 item 8; F5: sundries). (Read, kept, by change
+     IR-7: "no fit lane exists" reads as no usable record in the
+     target's lanes at the tier; the socket then keeps an ordinary
+     hard-usable identity and adds the 20 fallback coin; item rolls
+     design 4.7 item 8.)
    - **No swap-down tax:** no main-path card ever drops to pay for a
      step. Judge 3's swap and the "Common becomes a sundry plus 20 coin"
      step-down are deleted (told plainly; they punish the safe player
@@ -1348,11 +1429,21 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      identity's tier, never below C; where the step was paid by a fit
      premium at a gate (no tier raise), the Wax-Key identity is the same
      tier drawn without the fit filter.
+   - **Wax-Key sibling (change IR-11; M2):** the stepped identity is
+     drawn first; the Wax-Key identity is filtered to the **same fine
+     category and a different family**, preferring a different lane;
+     if none, any category (logged `WaxKeySiblingRelaxed`). Neither
+     identity may be `oncePerRun` (item rolls design 4.11).
    - The unused identity is a dreamed option outside VP and caps. **Lock
-     card wording** (TL 6.11's contents hint; 6.15): a tier step reads
-     "holds a rare notable; by key, an uncommon one"; a fit step reads
-     "holds an uncommon notable, chosen for <name>; by key, an ordinary
-     uncommon notable" **(fit wording: lead's call, after the check)**,
+     card wording** (TL 6.11's contents hint; 6.15; changed by IR-11,
+     item rolls design 4.11): "notable" becomes each identity's
+     **fine-category noun** (weapon, armour, shield, focus, trinket,
+     scroll, wand, tool), with the rarity word in its frame-shape
+     glyph: a tier step reads "holds a Rare weapon; by key, an Uncommon
+     weapon"; a fit step reads "holds an Uncommon weapon, chosen for
+     <name>; by key, an ordinary Uncommon weapon"; after a relaxed
+     sibling each identity shows its own noun ("by key, an Uncommon
+     shield") **(fit wording: lead's call, after the check)**,
      the name read from the same generation snapshot the fit premium
      reads, so the premium is visible even when both tiers match. The
      key stays a safe, priced route; the premium pays only the risk.
@@ -1421,6 +1512,15 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    - **A carrier that falls back to a container** (ENM 10.5 step 8) or
      whose group moves (step 9, TP2): its card goes to a same-room
      container, keeping its tier (6.14).
+   - **KinSwap (change IR-12; M2):** over the carried cards of one
+     encounter, a single draw-free pass swaps the carriers of two cards
+     of the same rank and tier only when the carriers' kin score
+     (issue family 3, shield kind 2, armour category 1) strictly rises
+     and both stay carrier-legal; identities never change, so
+     LootDoorInvariant holds; each swap is logged `KinSwap`. A carried
+     line the final carrier rejects is replaced, draw-free, by its
+     pre-picked alternate line, else the same-room container fallback
+     above (item rolls design 4.12).
    - **Salvage, the Heavy Purse and the coin lumps** are computed here
      (6.4 items 2, 4; 8.3).
 8. **Risk does not pay in loot (told plainly; agreed, Q6).** In the toy
@@ -1462,15 +1562,21 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    | `fitPremium` | 9 | per fit-premium entry |
    | `waxKeyIdentity` | 9 | per consequence cache with a card |
    | `bossCard` | 9 | 4 options (3 shown, the fourth a dreamed option) |
-   | `bossCardFallback` | 9 | 3 |
+   | `bossCardFallback` | 9 | 5: entry = option index 0–3, plus entry 4, the hero-guarantee redraw (change IR-14; M2) |
    | `viaticum` | 9 | 4 options (F5) |
-   | `viaticumFallback` | 9 | 3 (F5) |
+   | `viaticumFallback` | 9 | 5 (F5): as `bossCardFallback` (change IR-14; M2) |
    | `wager` | 9 | 4 options (M3) |
    | `twinCoffer` | 9 | 1 alternate (M3) |
    | `campWaxKey` | 1 | 1 per camp 1–4 |
+   | `lineRoll:<source>` | 4: line, alternate line, element, wand charges | 1 per identity of every source, dreamed options and unused fallbacks included; keyed `entryIndex × 16 + optionIndex` (change IR-14; reserved M1, inert; used M2) |
+   | `curseGate` | 2 | 1 per floor (change IR-20; reserved M2, used Later) |
 
    The table is the segment-11 hand-off; entry indices follow the
-   allocation order (6.9 item 2).
+   allocation order (6.9 item 2). **Filter-first (change IR-14; M1):**
+   each identity's filters are applied before its first draw, which
+   picks the record; the other 8 reserved draws are consumed as padding,
+   the same distribution as the reroll loop at a fixed count, locked
+   before M1 golden seeds (item rolls design 4.1, 4.17).
 2. **The approved ENM 10.5 step 3 order is unchanged** on the parent loot
    stream: per-channel counts; items in channel order (containers,
    carried, boss); the DH 12.5 block; wand charges; the next camp's
@@ -1485,7 +1591,10 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      socket's tier;
    - the **boss channel** draws only the signature; any approved parent
      draw for the boss card's options is consumed as a dummy, and every
-     option, the first included, is drawn on `lootPlan`;
+     option, the first included, is drawn on `lootPlan` (read by change
+     IR-13: the signature's form is chosen draw-free and the boss
+     channel's parent draw is consumed as a dummy, its position
+     unchanged; item rolls design 4.13);
    - the **DH block** keeps its parent position, after the notables, and
      may share an HE-7 socket with the Due (6.6).
 3. **The Due's slot (new lead's call; tier fixed after the check).** The
@@ -1519,8 +1628,17 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    owned bases (**settled**), plus, for the Due, fit premiums and the
    usability fallbacks, the same party snapshot at generation (owned
    gear, levels, training, living members) and floor parity (a reading
-   of the same inputs). Nothing else: the purse, the theme and the door
-   are never read.
+   of the same inputs). **Widened (changes IR-2, IR-6; M2):** the
+   usability floor reads that same snapshot, and Scion-line memory and
+   `oncePerRun` read the run-wide `LootLedger.generated[]` (generation
+   outputs only, never player actions; signatures sit in
+   `bossContent[]` and feed no exclusion) (item rolls design 4.3, 4.7).
+   Nothing else: the purse, the theme and the door are never read.
+   **Element Echo (change IR-19; agreed, item rolls Q4: held for an M3
+   client decision):** an option, default off and false in release
+   builds, that would let offensive element-choice lines read the found
+   floor's elemental `counterType`; until the client adopts it, this
+   item stands (item rolls design 4.4).
 8. **`LootLedger`** per floor is saved (ITEMS 18.4) for reports and V13.
 
 ### 6.11 Floor 5 pays before the arena (agreed, Q1; change LE-5)
@@ -1543,13 +1661,20 @@ matter".
    7.5 forbids; the caption is premise-neutral and joins the RS 7.4
    tone-by-depth review list. No loot summary follows the final kill,
    so the Memento appears on the victory screen and the run record only,
-   and never on a loss.
+   and never on a loss. **Unarmed final boss (change IR-13; agreed, item
+   rolls Q5):** "carries and uses" assumes an armed final boss; an
+   unarmed one (none in M2) **guards** its signature in a signature
+   cache in its lair (plate line "Guards: <signature name>"), shown
+   during the fight, and it still drops as the 0-VP Memento at victory
+   (item rolls design 4.13).
 5. **The Viaticum** takes the F5 boss share: an offer set, choose 1 of 3,
    at R, counted 1 in Ledger A.
    - **Options (corrected after the check; lead's call, after the
      check):** distinct Rare boss tools: Rare wands and tier-3 scrolls
      (CN 9.1: tier-1 scroll = C, tier-2 = U, tier-3 = R, tier-4 = VR), at
-     most 1 damage scroll (tag `use.damage`); no tier-3+ scroll once
+     most 1 damage scroll (tag `use.damage`, kept as an alias of
+     `effectTag` damage, change IR-23; *pending request to the CN
+     owner*; M2); no tier-3+ scroll once
      `tier4ScrollsPerRunBeforeFinalBoss`, if engaged, is spent; never the
      phial (the Viaticum is a boss-channel offer, not a container draw).
      The draft's "bombs" are dropped: no bomb exists at Rare (Fire Bomb
@@ -1557,9 +1682,13 @@ matter".
      content item.
    - **Usability:** all 3 options must be usable by a member in the
      generation snapshot (6.3). Each unusable option is redrawn at R as
-     a fit-premium gear notable for the member with the largest deficit
-     (6.6 item 2), on `viaticumFallback`, logged
-     `BossCardUsabilityFallback`. A martial party with no Arcana
+     **usable gear**, with the usability filter and ordinary weights
+     (`requiresBias` 3), not fit-filtered, on `viaticumFallback` entry =
+     its option index, logged `BossCardUsabilityFallback` (change IR-8;
+     agreed, item rolls Q1; M2); then 6.3's offer terminal ladder. **Hero
+     guarantee:** if no option is usable by the hero, the Theirs option
+     is redrawn as hero-usable gear on `viaticumFallback` entry 4 (item
+     rolls design 4.8, 4.10). A martial party with no Arcana
      therefore still gets a real last choice.
    - **Placement (rewritten after the check):** a main-path Plain
      container after the lair that is not in a Circuit room, not in a
@@ -1590,6 +1719,9 @@ matter".
   the Due's candidate pool likewise, so unlocking never lowers the odds
   of an on-build find nor raises `DreamsDueWaivedRate`. Report
   `RequiresHitRate` before and after unlocks; target a drop ≤ 5 points.
+  (Met by 7b's lane > family > record split over `lootLane`, where an
+  unlocked record dilutes only its own family; change IR-1; item rolls
+  design 4.2, 4.16; M3.)
 - **Ladder and Nightmare tiers:** zero economy effect (decks, coin, camp
   channel, allowance). The ladder's +10% encounter budgets widen the gap
   against a fixed loot curve, so kPC is reported per tier.
@@ -1604,6 +1736,11 @@ matter".
   "switching Two Doors on changes no seed", RS 6.4) **(drawn from M2:
   lead's call, after the check)**. On a floor entered through the
   Perilous Door, that floor's camp card reveals the fourth option.
+  **The fourth and memory (change IR-6; agreed, item rolls Q2; M2):**
+  the fourth is drawn by the Wayward rule, never a `oncePerRun` record
+  (it might never be presented), and it writes Scion-line memory and
+  gear floor keys like any offer option (item rolls design 4.7 items 5
+  and 6, 4.8).
   - **Reading (new lead's call; told plainly after the check; accepted
     by the client on 2026-11-22):** "that floor's camp card" is read as the **Perilous
     floor's boss reward card (ENM 17.5)**, shown at the end of that
@@ -1642,6 +1779,10 @@ matter".
 
 ### 6.13 Hooks to 7b (what the tables must produce)
 
+Taken up by the item rolls design (`2026-11-22-item-rolls-design.md`,
+segment 7b, approved 2026-11-22; changes IR-1 to IR-23), which states
+how each hook below is met; the content requests stay open.
+
 - A record for each deck card at an exact tier and category, value =
   budget; category re-weighting when a (tier, category) pair is illegal.
 - The Due filter: "a strict upgrade (or, F4–5, a marked sidegrade) for
@@ -1658,14 +1799,21 @@ matter".
   `anyCompanion` lever when its report fires.
 - Lane-normalised weights after unlocks; ≥ 3 legal records per lane per
   deck tier.
-- A tier-stable substitution path with `SubstitutedVP`.
+- A tier-stable substitution path with `SubstitutedVP` (made a per-socket
+  relaxation order by change IR-7: target relaxations, then the ladder
+  rungs; tier-stable before supply or tonic; no silent tier change; item
+  rolls design 4.7 item 8; M2).
 - **The phial swap (lead's call, after the check):** the phial (CN 14.7)
   takes the lowest-ranked Rare **container** card left after allocation
   that is not the Due, not a fit premium and not a dual-identity cache,
   ties by socketId; it is never carried. A `campReward` phial takes that
   card off the floor: the field deck loses it, Ledger A drops by 1
   (logged; V13s (a) allows this one exemption on the phial's floor), and
-  its VP is counted in the camp channel.
+  its VP is counted in the camp channel. **The boss-channel phial
+  (change IR-8; M2):** when CN 14.7's pre-roll (agreed, CN Q2) places
+  the phial in the boss channel (an F3–F4 boss card, never F5), it takes
+  the boss card's Wayward slot (option index 2), whose identity and
+  `lineRoll` draws are consumed as ghosts (item rolls design 4.1).
 - Carrier-legal subsets for carried cards (ENM 15.3 step 4); the elite
   carrier's gear-only subset (6.9 item 2).
 - Content requests: 2–3 VR gear records; Rare bomb shapes and
@@ -1732,7 +1880,8 @@ no more loot-bearing containers than fillers (6.4 item 5).
   rarity tint stays off the RC4 damage-hue key. On Wager cages the tier
   mark sits on the offer card, never beside the Disturbance meter. Never
   the category. Lock-card wording per 6.9 item 4, including the fit
-  case ("chosen for <name>").
+  case ("chosen for <name>"), with each identity's fine-category noun in
+  place of "notable" (change IR-11; item rolls design 4.11; M2).
 - **Loot marks on plates:** the elite's item is shown in use. A carrier's
   loot is one badge in ENM 5.6's loot-mark slot: the notable's star, a
   coin disc for the Heavy Purse, or both merged into one "loot" badge
@@ -1912,6 +2061,14 @@ A cursed card keeps its deck tier T for VP, price, Sell and Scrap; its
 benefit is authored to T+1's budget and the curse pays the difference.
 The carrier cost add reads the benefit value (cursed carriers hit
 harder). Never F1, never on a Due, at most 1 per floor (ITEMS 13).
+**Made concrete (change IR-20; Later, its draws reserved from M2):**
+curses are authored **cursed twins** (`cursedTwinOf`, same family and
+base), never rolled; a per-floor `curseGate` (2 draws, always consumed
+from M2) makes "at most 1 per floor" structural; eligible only on Rare+
+gear field cards, F2+; also barred from fit premiums, the arms floor,
+every offer option and the fourth, the Viaticum, camp entries,
+signatures, heirlooms, consumables and rings; a cursed carrier's cost
+add uses the benefit's T+1 value (item rolls design 4.15).
 
 ---
 
@@ -2055,8 +2212,10 @@ single unlock):
   card is outside A; deck size and carried counts fit the channel split.
 - (b) Both variants of a floor are **exactly** equal in VP and legal at
   every gate (new lead's call: no 1-VP tolerance).
-- (c) Tier legality: minFloor; VR ≤ 1 per floor (signatures exempt,
-  pending ITEMS); `trinketRarePerFloorMax`; worn pieces ≤ U (AR 5.5);
+- (c) Tier legality: minFloor; VR ≤ 1 per floor (a VR signature
+  consumes its floor's VR slot, change IR-13; *pending the ITEMS owner*:
+  if refused, signatures exempt, with 18.2's fallback);
+  `trinketRarePerFloorMax`; worn pieces ≤ U (AR 5.5);
   `scrollFloorCap`; wands F2+; the boss card ≤ R; camp entries ≤ R; the
   Viaticum's options legal at R; every deck card has ≥ 1 legal record at
   its tier and category on the shipping roster, or a logged roster
@@ -2068,7 +2227,8 @@ single unlock):
 - (k) Restock covered at every camp for the largest legal party at both
   caps, on the per-body ledger (7).
 - (l) No loot or coin line reads the actual party size.
-- (n) ≥ 3 legal records per `requires` lane per deck tier *(illustr.)*;
+- (n) ≥ 3 legal records per `requires` lane (the record's `lootLane`,
+  change IR-1) per deck tier *(illustr.)*;
   for each class with no Arcana in kit, the boss-card and Viaticum
   fallbacks have legal gear at every card tier.
 - (o) M3: lane-normalised weights and the Due pool after unlocks
@@ -2115,6 +2275,11 @@ LootBind, each with its named action:
   dreamed option drawn on every width-3 offer from M2, door or no door;
   generation committed with the camp-exit save.
 
+**V14 `ItemRolls` (change IR-21; M1 parts (a), (b), (d), (h), (j) and
+the draw-count test; the rest M2)** runs beside V13 and checks 7b's
+records, lanes, weights, memory, offers and signatures (item rolls
+design 9.2).
+
 ### 10.3 Simulator reports (calibration, read against DH 18.2)
 
 - **Power:** `kPC` (step 1, per ladder tier, measured as in 6.5),
@@ -2138,6 +2303,11 @@ LootBind, each with its named action:
 - **Loot mix:** `LootMixByCategory`, `SubstitutedVP`.
 - Existing reports kept (ITEMS 19.3, CN 19.3, DH 21.5, TK 18.3, TL
   11.4).
+- **7b reports (change IR-22; M2):** item rolls design 9.3 (among them
+  `RequiresHitRateBySize`, `OfferUsableRate`, `RecordRepeatRate`,
+  `RelaxationStepRate`, `StepDownPerRun`, `ShrugShare`,
+  `EliteShowsInUseRate`); 7a re-runs `SellShareOfCoin`, K1/K2,
+  `CampCoverage` and `LootMixByCategory` against them.
 
 ### 10.4 Simulator arms
 
@@ -2184,7 +2354,7 @@ shop presentation and camp sinks (camp and hub); the display (segment
 | **TL owner** | The mixed-route rule and `consequenceExposed`; Unbolting and Unweaving paying the Wax-Key identity; a Barb force consequence if `WaxKeyConsequenceUse` fires; the Ticket peg; fewer locks where the carve cap or F5 fillers bind (6.4, 6.9) |
 | **FL owner** | The Viaticum room |
 | **CN owner** | The suggester for scrolls; Viaticum options against `tier4ScrollsPerRunBeforeFinalBoss`; the boss-card usability fallback (CN 10) |
-| **ITEMS owner** | The signature VR-cap reading |
+| **ITEMS owner** | The signature VR-cap reading (replaced by IR-13's pending request: a VR signature consumes the floor's VR slot; item rolls design 4.13, 14.2) |
 | **RS owner** | The Perilous Door reading (Q5); the Memento caption on the tone review list (RS 7.4) |
 | **ENM owner** | The elite carrier's gear-only card; the elite intel trigger; step 3a and the dummy count draws (LE-14) |
 | **DH owner** | The Due reading; lock and overflow sundries re-placed inside the DH block (DH 12.5 step 7(c)); Grave Goods as the run-record form of DH 17.12's unspent line |
@@ -2704,8 +2874,11 @@ wave or a later design triggers them; each fallback is a new lead's call
   with the hero as the target on every floor (no lowest-member
   alternation) and still announced; if the owner refuses the Due
   outright, it goes back to the client.
-- **If the ITEMS owner refuses the signature VR-cap exemption:** a floor
-  whose field deck holds a VR draws its signature at R + authored.
+- **If the ITEMS owner refuses "a VR signature consumes the VR slot"**
+  (change IR-13, replacing the earlier VR-cap exemption fallback): LE-3
+  stands as approved, signatures exempt from the VR cap (V13s (c)), and
+  a floor whose field deck holds a VR draws its signature at R +
+  authored (item rolls design 4.13, 14.2).
 - **If the TL owner refuses LE-11's Unbolting and Unweaving reading:**
   Unbolting and Unweaving fire the lock's consequence, and then pay the
   stepped identity (the risk is taken); they never pay the stepped

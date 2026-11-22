@@ -559,6 +559,14 @@ About one action's worth each. **(lead's call)**
   (19.2 invariant, TK-27), and the simulator reports the Rare-found rate
   per run and the Rare offer and pick rate per floor (18.3). A second
   Rare neck family is a Later option (24.3). **(lead's call)**
+- **Pending request (IR-14, M2; item rolls design 4.17, 4.8):** LootPlan
+  identities (the Due, fit premiums, offer and Viaticum options, fallback
+  trinkets included) count **first** against `trinketRarePerFloorMax`;
+  TK-27's order (containers, carried, camp, boss) then holds among the
+  parent channels. It changes nothing until the TK owner confirms; if
+  refused, a fallback trinket may be Rare only when no Rare trinket is
+  reserved on the floor's deck, and TK-27's order stands (item rolls
+  design 14.2).
 
 ### 8.3 Power checks
 
@@ -980,6 +988,15 @@ now keeps them apart (18.3). If offence picks fall below target, the
 first Later reserves to promote are Seeker's Band, the Storm Ring once
 ruled and the Smoke Cloak once Veiled exists. **(lead's call)**
 
+**Pending request (IR-5, M2; item rolls design 4.5):** a trinket family's
+cap of 1 (items 12.2) admits **one** Scion at a strictly higher tier,
+only while the party owns at most 1 copy of the family; the lower copy
+then shows ▽ with a Sell hint. Reported as `TrinketScionRate`; withdrawn
+if the share of trinket families a run sees (about 30%, above) falls by
+more than 5 points. It changes nothing until the TK owner applies it; if
+refused, there are no trinket Scions and the family cap of 1 stands
+(item rolls design 14.2).
+
 ### 13.9 Cut
 
 | Cut | Why |
@@ -1061,11 +1078,22 @@ channel, ◈ token, ▸ button), and a "?" for a dormant line with its glyph hid
 ```
 
 ```
-◆ RARE  HEARTWARD TORC · amulet (neck) — life
+◆ RARE  HEARTWARD TORC of ? · amulet (neck) — life
   ⛨ Kinward: 1/rest, poison, bleeding or withering doesn't land on an adjacent ally
-  ? (unidentified)
+  ? dormant · Arcana 13 vs 14
 ```
 
+- **Merged card (change IR-9; agreed, Q3; M2; item rolls design 6.1,
+  4.14):** this card and items 8.2 are one card budget, and where they
+  differ the item rolls design wins. A dormant line keeps its hidden
+  glyph and carries the Arcana readout ("? dormant · Arcana 13 vs 14"),
+  which replaces items 8.2's separate "?" pip; the name shows "?" only in
+  its suffix epithet slot ("<Name> of ?"). Verdict glyphs sit in a footer
+  badge, never beside the line glyphs; the five shapes above are kept
+  for trinkets and extended to other categories by line tag. **Plain
+  Gifts (agreed, Q3):** the Due, every offer option, the fourth and the
+  Viaticum are generated with every line known, so a trinket there is
+  never dormant; field cards keep Arcana's job.
 - **Names carry the verb:** each family name contains its property
   keyword. Display names never clash with conditions, affixes, behaviour
   profiles, universal actions, verbs or properties (armour 17.1 rule 13).
@@ -1267,7 +1295,7 @@ fails when **(lead's call)**:
 | 25 | **Carriers:** `negates[]` and a role-answer pass per carrier type; `carrier{}` limits present on every carried-eligible property; output conditions within the type's 2; a reaction-shaped property counts as the type's one reaction beyond the opportunity attack and a button under the bonus-action cap (enemies 9.1); Wardstone and Ward-Knot never with the Warded or Unbreakable affix; the 6.4 guards pass with the carrier (checked at generation, enemies 15.3 step 4) |
 | 26 | **Two classes:** every record declares `usefulFor[]` with at least 2 launch classes or `anyCompanion`, signed off by the lead; tag-keyed text met by at least 2 |
 | 27 | **Element families:** at most 2 element families per wave per lane (finger, neck, back), counted from `element` |
-| 28 | **Rolled lines:** a rollable table never offers the item's own obvious line, and never a line sharing an `answers[]` key with it, a second channel on a channel ring, or a second button. An Uncommon or Rare obvious line with no legal roll in its table fails; Heartward keeps all 3 (Antidote, Graveward, Lifeline) |
+| 28 | **Rolled lines:** a rollable table never offers the item's own obvious line, and never a line sharing an `answers[]` key with it, a second channel on a channel ring, or a second button. An Uncommon or Rare obvious line with no legal roll in its table fails; Heartward keeps all 3 (Antidote, Graveward, Lifeline). **(change IR-4; M2; item rolls design 4.6)** This rule extends to every rolled category; a gear record carries at most 1 rolled line, only the rolled line may be dormant, and each family declares a curated table of 3–5 eligible entries |
 
 Armour 17.1 rules 10, 11, 13, 14 and 17 still apply **(settled, AR-38)**.
 The authoring lean (5.6) is a lint warning, never a failure.
@@ -1351,7 +1379,7 @@ except the landing envelope, whose numbers are the lead's (TK-4):
 | **Condition landing envelope (release gate; also in the E+ safety veto)** | With the maximum legal trinket and armour prevention loadout, each monster type's signature condition lands at least 60% as often as trinket-free, and a boss's hard control lands at least once per boss fight in at least 50% of fights. A second row measures the boss's hard control **on the hero** with the maximum legal companion-support loadout (Ward-Knot, Kinward, Heartward on companions). These numbers are binding lead's numbers in `ePlusGate` (`landingEnvelopeMinPermille: 600`, `bossHardLandMinPermille: 500`; TK-4), not *(illustr.)* |
 | Trigger rate per property per kind | At least once per 3 fights for its wearer, also reported per short-rest interval and, for neck lines (Antidote, Graveward, Emberward, Lifeline), per floor theme; capacity exempt |
 | Pick rate by location and family | No family above 50% of eligible wearers within any class |
-| Roll concentration | Measured per table against each obvious line's legal roll set: no property above max(40%, 1.5 ÷ the number of legal entries) of kept Uncommon rolls; `props.trinket.charm` is report-only |
+| Roll concentration | Measured per table against each obvious line's legal roll set: no property above max(40%, 1.5 ÷ the number of legal entries) of kept Uncommon rolls, checked after smart weighting (item rolls design 4.6); `props.trinket.charm` is report-only |
 | **Offence** share of M2 families and picks (channels, reach, Helped, Hidden kills, free Disengage) | At least 25% *(illustr.)* (now 27%, 13.8) |
 | Recovery and tempo share (getting up, getting free, giving, reviving) | Reported |
 | Rare-found rate per run; Rare offer and pick rate per floor | Reported (8.2) |
@@ -1361,8 +1389,8 @@ except the landing envelope, whose numbers are the lead's (TK-4):
 | Precision class damage with best trinkets | At most +10% over trinket-free |
 | Rare amulet, reported separately; effect on boss win rate | Reported |
 | Antidote, Graveward and Lifeline against tonic, Remedy and Treat use; companion downings with and without Lifeline | Reported |
-| Element share of finger and neck picks; second same-element offer in a run | De-weighted by smart loot |
-| Companion slot fill at the boss, reported by join camp (companions design 8.4; change CMP-30) | ≤ 25% empty **(settled)**, the metric unchanged; lever if late recruits miss it: `anyCompanion` loot weighting (CMP-30) |
+| Element share of finger and neck picks; second same-element offer in a run | De-weighted by smart loot (an element already on a party-owned instance of the line weighs half; item rolls design 4.6) |
+| Companion slot fill at the boss, reported by join camp (companions design 8.4; change CMP-30) | ≤ 25% empty **(settled)**, the metric unchanged; lever if late recruits miss it: `anyCompanion` loot weighting (CMP-30), keyed by party size so it fires at party ≥ 3 only (M2 lever; change IR-17; item rolls design 4.3) |
 | Piece against jewellery; the E+ rows | **(settled, armour 17.3)** |
 
 ## 19. Staging
@@ -1710,7 +1738,7 @@ it:
 | R-20 | Sigil of Aid is not "your strike" | Not moved: the client approved the M2 catalogue with Sigil on the finger, and Help is the action that sets up an ally's strike; Study (Scholar's) moved to head, Later |
 | R-21 | Thin Rare tier | Effectively one per run noted; reports; second Rare family a Later option (24.3); catalogue unchanged |
 | R-22 | Names and labels | Trophy Tally, Porter's Satchel, Mule Strap; (settled) readings relabelled; TK-1 three rows; Helped quoted; `test[]`, `monsterTags` |
-| R-23 | Smaller gaps | Capacity exempt from trigger-rate rules; one capacity trinket counts; zero added damage defined; roll concentration per legal set; envelope keys in `ePlusGate`; round-state rows (TK-7); TK-28 for items 7.1; Heartward Lifeline container-only; neck lines on the watch list. Smart-loot de-weighting by floor theme is not adopted (it would change agreed enemies 15.3) |
+| R-23 | Smaller gaps | Capacity exempt from trigger-rate rules; one capacity trinket counts; zero added damage defined; roll concentration per legal set; envelope keys in `ePlusGate`; round-state rows (TK-7); TK-28 for items 7.1; Heartward Lifeline container-only; neck lines on the watch list. Smart-loot de-weighting by floor theme is not adopted (it would change agreed enemies 15.3); theme bias stays 0 on loot weights, and Element Echo is held for an M3 client decision, default off (item rolls design 4.4, IR-19) |
 
 **Judges' grafts adopted:** lane word and shape glyphs on cards, hidden on
 dormant lines (15); per-kind lean as lint only (5.6); the three readings

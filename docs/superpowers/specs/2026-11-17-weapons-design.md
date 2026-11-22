@@ -1663,6 +1663,18 @@ Templates are `natural.*` ability records, used by unarmed types (enemies
   bonus to hit or damage**. Any number appears only through a verb.
 - At most 3 properties per item, and `value` equals the rarity budget
   (settled, items design 12.5).
+- **Rolled lines (change IR-4; M2; item rolls design 4.6).** A weapon or
+  focus rolls at most one line; its fixed lines are always `obvious`, so
+  only the rolled line may be dormant. Very Rare items, signatures,
+  heirlooms and the M1 notables (18.6) are fully authored and roll none;
+  the legal shapes per rarity are item rolls design 4.6's table. Each
+  family declares a curated table of 3–5 eligible entries from 18.2–18.5,
+  all sensible on that family, never the whole table. Eligibility applies
+  the rules here (Quickdraw never with `type`; Shatter Rare and above
+  only), wave gates, `carrierSafe` lines only on carried cards, and
+  trinkets design rule 28 extended to weapons: a rolled line never repeats
+  the obvious line, shares no `answers[]` and adds no second channel or
+  button.
 - Monster carriers get the benefit only (settled, enemies 15.4); pools map
   to uses as in 15.2 **(lead's call)**.
 - **Always-on properties never copy another verb's effect,** focus verbs
@@ -2185,6 +2197,9 @@ left as they are (7.2 rule 9).
   The traps and locks design (`2026-11-21-traps-locks-design.md`) asks
   for the Trigger Shot improvised-throw exception to 9.3 (TL-42, pending;
   M2) and uses reach weapons for Pole it (traps and locks design 6.7).
+  The item rolls design (`2026-11-22-item-rolls-design.md`) sets how
+  18's properties are rolled on generated weapons and foci (18.1; IR-4,
+  M2; item rolls design 4.6).
 - **Enemy content:** the rust, acid and ooze types that Notch (Later), and
   monster cooldown disarms (Later).
 

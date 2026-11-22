@@ -326,7 +326,9 @@ holds (AR-30). **(agreed)**
   location's table (shown as `obvious`).
 - **Common or Uncommon only.** A Common piece has only that verb; an
   Uncommon piece adds one roll from the same location table. No Rare
-  pieces: boss signatures stay on weapons and body armour.
+  pieces: boss signatures stay on weapons and body armour, and also on
+  foci and shields (change IR-13; client-approved 2026-11-22, Q5; item
+  rolls design 4.13). Never on pieces or other trinkets.
 - **No AC of any kind.** No trinket or piece property may declare any
   effect kind that reads or writes AC, charged or conditional included.
 - Pieces have no training, Strength need, Clatter or Stiff.
@@ -1264,6 +1266,18 @@ warhammer-and-shield soldier, the sling artillery and the claw brute.
 - At most 3 properties per item; value equals the tier budget.
 - Verb signatures are off whenever the verb is off.
 - No property gives always-on AC (validation rule 10).
+- **Rolled lines (change IR-4; M2; item rolls design 4.6).** A body
+  armour, shield or piece rolls at most one line; its fixed lines are
+  always `obvious`, so only the rolled line may be dormant. Pieces keep
+  5.5's shape (an Uncommon piece's one location roll); Very Rare items,
+  signatures, heirlooms and the M1 notables (14.6) are fully authored and
+  roll none. Each family declares a curated table of 3–5 eligible entries
+  from 14.2–14.5 or its location table, all sensible on that family, never
+  the whole table. Eligibility applies the rules here (Adamant never on
+  plate), wave gates, `carrierSafe` lines only on carried cards (12.6),
+  and trinkets design rule 28 extended to armour and shields: a rolled
+  line never repeats the obvious line, shares no `answers[]` and adds no
+  second channel or button.
 - **Gear-prevention step (lead's call; AR-51).** Gear that stops a
   condition from landing (Ringed and Double Ring against Bleeding, Unbowed
   against Prone) acts at a new step of the conditions 9.2 pipeline,
@@ -1295,7 +1309,7 @@ warhammer-and-shield soldier, the sling artillery and the claw brute.
 | Property | Tags | Effect | Wave |
 |---|---|---|---|
 | Muffled | prevent | Heavy only: no Clatter (passive or checks). Never on the same item as Fitted. | M1 |
-| Resistant (element) | type | Fire, cold, lightning, acid, radiant or necrotic; never physical or psychic. On M1 notables only if the floor's theme deals that element. | M1 |
+| Resistant (element) | type | Fire, cold, lightning, acid, radiant or necrotic; never physical or psychic. On M1 notables only if the floor's theme deals that element. The theme read and its parent draw serve **authored** Resistant only; a **rolled** Resistant line takes its element from d2 of its identity's `lineRoll` entry, theme-blind (reading; IR-14, IR-15; item rolls design 4.4, 4.17). | M1 |
 | Reprisal (element) | charge | 1 / 1 / 2 per rest, reaction when a melee attack hits you: the attacker takes 1d6 / 2d6 / 3d6 of the element (counts under the reaction cap) | M2 |
 
 **Last Ward (retired; change CN-23 superseded by DH-45):** removed from
@@ -1353,6 +1367,13 @@ Rider-free; M1 conditions and families only. *(illustr.)*
 | Pass-Keeper's Shield | shield | Common | Raise |
 | Hailward Shield | shield | Uncommon | Hailguard, Spiked Boss |
 | **Bellwarden's Mail** (floor-1 boss signature) | chain mail | Floor-1 top tier (budget 2) + one authored property | Adamant, Forewarned, + authored Unbowed |
+
+Bellwarden's Mail is **guarded**, not worn: Old Ragged keeps it in its
+den's signature cache and its plate reads "Guards: Bellwarden's Mail"; the
+authored Unbowed is grandfathered from the signature echo check, and a
+second form is required in M2 (change IR-13; client-approved 2026-11-22,
+Q5; item rolls design 4.13). Worn or lodged signatures remain an M3 option
+that would need a further change to 12.6.
 
 **M2 examples:** Gale Gambeson (gambeson, Uncommon): Far Weave,
 Forewarned. Knight's Plate (plate, Rare): Twice-Proof, Muffled. Pilgrim's
@@ -1834,6 +1855,11 @@ Stat model 6's AC formula and "Armour is hit or miss" and stat model 8.1
 - **Dungeon generation and encounter content:** the **binding**
   Acrobatics requirement (at least 3 Acrobatics-gated choices per floor
   from M2, with simulator evidence; 7.3); stealth content for Clatter.
+  The item rolls design (`2026-11-22-item-rolls-design.md`) sets how 14's
+  properties are rolled on generated armour, shields and pieces (14.1;
+  IR-4, M2), adds foci and shields to signature categories (5.5; IR-13)
+  and keeps 14.3's theme read for Resistant on authored records (IR-14,
+  IR-15; item rolls design 4.4, 4.6, 4.13, 4.17).
 - **Enemy content:** rust, acid and ooze types as Pitted sources (Later);
   M2 grapplers for Studded; piercing-weak and armoured types.
 - **Consumables:** none required; Hushed sources are the conditions

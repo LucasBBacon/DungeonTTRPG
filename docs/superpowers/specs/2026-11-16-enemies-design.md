@@ -632,7 +632,11 @@ The single definition of "elite":
 
 - **Two routes to the rank:** an authored elite type, or a standard type
   marked `promotable: true`, which the generator promotes. Minion and boss
-  types are never promoted.
+  types are never promoted. **Pending request (change IR-12; item rolls
+  design 4.12; M2):** the RS owner and segment 9 flag the Supper's
+  Butler-at-Arms `promotable` and the Silk's Spine-Binder `armed`, so
+  those floors' elite notable is carried instead of falling to the lair
+  cache.
 - **HP ×2**, from the role-adjusted row.
 - **+1 to attack, ability difficulty and all saves.** This comes through an
   effect bundle `rank.elite`, the same path items use. It is not an ability
@@ -1098,8 +1102,18 @@ Deterministic:
    count and notables) and the vendor's limited potions, still under the
    same family caps and owned-base rerolls **(change I-10; items design
    10.4)**. The only input from outside the loot stream is the party's
-   `requires` tags and owned bases (and, Later, trader presence and
+   `requires` tags and owned bases, read with the party snapshot's lanes
+   and usability (`LanesOf`, `UsableBy`; change IR-2; item rolls design
+   4.3) (and, Later, trader presence and
    count). **The loot stream is consumed only in steps 3a and 3.**
+   **`lineRoll` and `curseGate` (change IR-14; item rolls design 4.1,
+   4.17; M1 reserved, M2):** every identity, dreamed options and unused
+   fallbacks included, has its own `lineRoll` entry (4 draws, always
+   consumed: line, alternate line, element, LootPlan wand charges);
+   `curseGate` takes 2 draws per floor (reserved M2, used Later); the
+   boss-card and Viaticum fallback kinds grow from 3 to 5 entries. Parent
+   identities keep their positions, and each identity is filtered before
+   its draw (filter-first, 15.3 step 2).
    **(change LE-14)** The approved draw order above is unchanged: the
    count draws are consumed as dummy draws and their results ignored,
    since the deck of step 3a fixes the counts; channel slot *i* draws its
@@ -2342,8 +2356,8 @@ economy design 6.1 item 2, 6.3; M2)**.
 | Minion | Yes, if armed | Never |
 | Standard | Yes | Only from the enemy-carried quota, and only when no elite or leader in the encounter can take it |
 | Leader | Yes, with a banner, horn or staff prop | Second priority. The banner or horn may *be* the item. |
-| Elite | Yes | First priority for the quota. **Guaranteed only in the optional elite room**, met by allocation: the elite-room carrier takes the floor's highest carrier-legal **gear** card (weapon or focus, armour or shield, trinket), never a consumable; a consumable top card goes to the elite room's lair cache **(change LE-10, LE-18; loot economy design 6.9 items 2, 6; M2)**. An unarmed elite there guards a **lair cache** instead ("Guards: cache"). Other elites without a quota item show nothing. Resolving the elite (killed, Yielded, Routed or Cowed) or stealing its notable, whichever comes first, gives the **elite intel line** (15.8) **(change LE-18; M2)**. |
-| Boss | Yes, if armed | **Guaranteed** signature item, visibly carried, plus the boss reward card (17.5). The signature is at the top tier that has a legal record for its category, plus its authored property **(change LE-3; loot economy design 6.3; M2)**. **Floor 5:** no reward card; the final boss still carries and uses its signature, which drops as a **Memento** (a run-record item card, 0 value, shown on the victory screen and run record only) **(agreed, Q1; change LE-5; loot economy design 6.11; M2)**. |
+| Elite | Yes | First priority for the quota. **Guaranteed only in the optional elite room**, met by allocation: the elite-room carrier takes the floor's highest carrier-legal **gear** card (weapon or focus, armour or shield, trinket), never a consumable; a consumable top card goes to the elite room's lair cache **(change LE-10, LE-18; loot economy design 6.9 items 2, 6; M2)**. The elite's gear card is filtered to records whose lines show in use (`showsInUse`) when that set is non-empty, so the prize is presented in use **(change IR-12; item rolls design 4.12; M2)**. An unarmed elite there guards a **lair cache** instead ("Guards: cache"). Other elites without a quota item show nothing. Resolving the elite (killed, Yielded, Routed or Cowed) or stealing its notable, whichever comes first, gives the **elite intel line** (15.8) **(change LE-18; M2)**. |
+| Boss | Yes, if armed | **Guaranteed** signature item, visibly carried by an armed boss, plus the boss reward card (17.5). An **unarmed** boss **guards** its signature in a **signature cache** in its lair (the "Guards: cache" precedent of the elite row; not a ranked socket, not the elite lair cache), and its plate reads **"Guards: <signature name>"**; M1: Old Ragged guards Bellwarden's Mail in its den **(agreed, Q5; change IR-13; item rolls design 4.13; M1)**. The signature is the boss's authored form for the top tier of the floor's drawn deck variant (one form per top tier its floors can need), with at most 2 base lines plus one authored value-1 line echoing the boss's fight or kit (≤ 3 lines; M1 records grandfathered); a boss that carries one form guards any second form, and "Carries: …" and "Guards: …" always name the chosen form; a draw-free second form in another lane is required for specialist chassis in M2 and every boss in M3; a Very rare signature consumes the floor's VR slot, pending the ITEMS owner **(change LE-3; loot economy design 6.3; change IR-13; item rolls design 4.13; M1 / M2 / M3)**. **Floor 5:** no reward card; the final boss still carries and uses its signature, which drops as a **Memento** (a run-record item card, 0 value, shown on the victory screen and run record only) **(agreed, Q1; change LE-5; loot economy design 6.11; M2)**; an unarmed final boss (none in M2) guards it in its cache and it drops as the Memento at victory **(change IR-13; item rolls design 4.13)**. |
 
 **Heavy Purse (change LE-16; loot economy design 8.3; M2):** on floors
 2–4, about 20% of the floor's found coin *(illustr.)* is carried as coin
@@ -2401,21 +2415,62 @@ not loot; open until the M2 report.
    generation ("smart loot"); a base the party already holds at equal or
    better quality (quality = rarity tier, then value; **change I-12**;
    items design 12.5), or a base already drawn for this floor, is rerolled;
-   each item family is capped per run. **(agreed)** **Termination (lead's
+   each item family is capped per run. **(agreed)** "Base" reads as
+   **base ?? family** (trinkets, scrolls, wands and notable flasks dedupe
+   by family) (item rolls design 4.7 item 2).
+   **Memory (change IR-6; item rolls design 4.7; agreed, Q2; M2, Rare
+   staged):** a gear or trinket record generated by any memory-writing
+   event (real or dreamed, offer options and both dual identities
+   included; ghosts and signatures excepted) excludes itself and its
+   Scion ancestors for the rest of the run (Scion-line-once; read from
+   `LootLedger.generated[]`, never from player actions; C and U from M2,
+   Rare from the `loot.memory.scionLineOnce.R` switch). A record flagged
+   `oncePerRun` (explicit in data) is generated at most once per run in
+   any form, and never as the fourth option or either identity of a
+   dual-identity cache. A boss signature writes no floor key, no memory
+   and no `generated[]` row (`bossContent[]`), is exempt from the
+   run-wide owned-base reroll, and is family-cap-exempt when taken (then
+   counts toward the caps). Consumables, scrolls and wands are outside
+   Scion-line memory (family caps govern).
+   **Termination (lead's
    call):** at most 8 rerolls per notable, each excluding capped families,
-   owned bases and this floor's bases from the weight table. If the table
-   is empty or the rerolls run out, a supply or tonic draw is substituted
-   and flagged `substituted`, so the per-channel count still balances. A
+   owned bases and this floor's bases from the weight table (met by
+   filtering before the identity draw, with padding: the same distribution
+   at a fixed count; item rolls design 4.1). If the table is empty, the
+   socket first relaxes its own target preferences in their listed order,
+   then, draw-free, logged and only as its socket kind allows, the rungs:
+   lift Scion-line memory (never `oncePerRun`); category re-weight at the
+   tier; the tier-stable path (Very rare → Rare + fit premium, Very rare
+   cards only); and last a supply or tonic draw, substituted
+   and flagged `substituted`, so the per-channel count still balances.
+   This floor's bases are never lifted, and the tier never changes
+   silently **(change IR-7; item rolls design 4.7 item 8; M2)**. A
    guaranteed draw is never substituted (death and healing design 12.5).
-   **(change DH-27)**
+   **(change DH-27)** Offer options use their own terminal ladder (item
+   rolls design 4.8).
    **Later (change I-14):** a trader slot is never substituted; it returns
    to the containers channel (items design 10.9).
    **Weights (change LE-17; loot economy design 6.2; M2):** a legal
    record's weight is its category multiplier for the floor
    (`loot.categoryWeight[f]`) × the `requires` bias (3; 4 for the boss
    card's options) × the companion lever (1 by default), normalised per
-   `requires` lane. Filters are not weights: the Dream's Due, a fit
+   lane, then per family, then per record, each divisor counted on the
+   static legal set at the tier, factor by factor in a fixed order with a
+   FloorDiv after each **(change IR-3; item rolls design 4.2; M2)**; the
+   lane is the record's `lootLane` (item rolls design 4.3). Filters are not weights: the Dream's Due, a fit
    premium and the per-run arms floor restrict the candidates first.
+   **Usability (change IR-2; item rolls design 4.3; agreed, Q1; M2):**
+   one `UsableBy` query, read per socket kind (`inClass` or `arcanaRead`
+   for scrolls); a **hard** floor (no record no living member can use) on
+   chosen and guaranteed draws (the Due, fit premiums, the arms floor,
+   every offer option and the fourth, the Viaticum, stepped and Wax-Key
+   identities, camp entries) and on Very rare cards; a **soft** ×100‰
+   *(illustr.)* on Common, Uncommon and Rare field cards (containers and
+   carried). Targeted sockets (the Due, fit premiums, an offer's Yours and
+   Theirs slots) apply the `requires` bias against their target alone.
+   **Element Echo (change IR-19; item rolls design 4.4; agreed, Q4: held
+   for an M3 client decision):** default off (`loot.elementEcho =
+   false`); identities stay theme-blind.
    **The Dream's Due (change LE-13; loot economy design 6.6, 6.10 item
    3; M1 for the F1 hero arms, M2):** the floor's first container-channel
    slot is constrained to one announced upgrade for a fixed target (F1,
@@ -2442,6 +2497,12 @@ not loot; open until the M2 report.
    step 6). **Cost add = item value × k encounter points per offer-value
    unit.** The items design supplies k. A boss signature item carries no
    cost add; the boss guards validate it. **(change I-9)**
+   **Later (change IR-20; item rolls design 4.15):** a cursed carried
+   item's cost add uses its benefit's T+1 value.
+   **Pending (item rolls design 4.12, 14.2; M2):** if `EliteKpcDelta`
+   exceeds about 10% *(illustr.)*, a per-line monster cost-add multiplier
+   for reaction lines engages (lead and enemies owner); open until the M2
+   report.
 4. **Assignment:** the first legal carrier in the order boss, elite,
    leader, standard. Legal means `usableBy` matches and the fully composed
    unit, item included, passes every budget, the threat band (6.5)
@@ -2462,7 +2523,19 @@ not loot; open until the M2 report.
    is legal, the item goes to a container in the same room. If the cost
    add is above 25% *(illustr.)* of the room's budget, the item also goes
    to a container in that room. **(change I-9; items design 12.7)**
-5. **Locked in.** Item, properties and charges are fixed now. Kill order,
+   **KinSwap (change IR-12; item rolls design 4.12; M2):** after
+   identities exist, the draw-free LootBind pass may swap the carriers of
+   two carried cards of one encounter that share rank and tier (one pass,
+   pairs by socketId), only when the swap strictly raises their summed
+   kin score (issue family 3, shield kind 2, armour category 1) and both
+   stay carrier-legal; logged `KinSwap`, identities unchanged. A rolled
+   line the final carrier rejects is replaced, draw-free, by the
+   identity's pre-picked alternate line, else the item goes to a
+   same-room container.
+5. **Locked in.** Item, properties and charges are fixed now (the rolled
+   line, its element and LootPlan wand charges come from the identity's
+   `lineRoll` entry; change IR-14; item rolls design 4.17; M1 reserved,
+   M2). Kill order,
    save and resume, and the method of winning can never change what drops.
 
 **Caps:**
@@ -3064,17 +3137,27 @@ are no separate arenas **(settled)**:
 **Boss death** Routs the non-fearless escort, and mindless servants go
 inert (T7).
 
-**Signature item:** visibly carried and guaranteed, plus a pick-one-of-three
+**Signature item:** guaranteed, visibly carried by an armed boss or
+guarded in its lair's signature cache by an unarmed one ("Guards:
+<signature name>", 15.2; agreed, Q5; change IR-13; item rolls design
+4.13), plus a pick-one-of-three
 reward card that reuses the offer UI. **(change LE-3; loot economy design
-6.3; M2)** The signature is at the top tier that has a legal record for
-its category, plus its authored property. The card is one offer set at
+6.3; M2)** The signature is the boss's authored form for the top tier of
+the floor's drawn deck variant, plus its authored echo line (15.2;
+change IR-13). The card is one offer set at
 C / U / R / R on floors 1–4 *(illustr.)*, **never Very rare**; it is
 outside the floor's notable count and the 3-per-encounter cap, and its
 taken option counts in the floor's value and toward family caps. Its
-options must be usable by a member in the party snapshot at generation;
-if none is, all three are redrawn at the same tier as fit-premium gear
-for the member with the largest gear deficit
-(`BossCardUsabilityFallback`). Unchosen options are dreamed away (15.3
+options fill three slots in order (Yours, Theirs, Wayward), each usable
+by a member in the party snapshot at generation (hard floor), with
+distinct families, distinct fine categories or effect tags, and at most
+1 damage option; an option with no usable record is drawn **on its own**
+as usable gear at the same tier, not fit-filtered (`bossCardFallback`,
+entry = option index; replacing the all-three fit-premium redraw), then
+the offer terminal ladder; if no option is usable by the hero, Theirs is
+redrawn as hero-usable gear (entry 4); a boss-channel phial (consumables
+design 14.7) fills option 2 **(agreed, Q1; change IR-8; item rolls
+design 4.1, 4.8, 4.10; M2)**. Unchosen options are dreamed away (15.3
 step 2). **Floor 5:** no reward card; the signature drops as the
 Memento (15.2), and the Viaticum takes the boss share (15.3 step 1)
 **(agreed, Q1; change LE-5; loot economy design 6.11)**. **Perilous floor
@@ -3322,7 +3405,9 @@ The build fails when:
 - notable items across all channels (the `camp` channel included, change
   I-10; and, Later, the `trader` channel, change I-14), substitutions
   included, do not exactly equal the floor loot budget's per-channel
-  counts, two notables on a floor share a base, or an encounter is
+  counts, two notables on a floor share a base (deck notables only, a boss
+  signature exempt; base read as base ?? family; item rolls design 4.7
+  items 2 and 7), or an encounter is
   assigned more than 3;
 - a morale state is applicable to a party unit, or the morale class holds
   more than 4 states;

@@ -1,7 +1,7 @@
 # Item Rolls and Loot Tables: Design (Dungeon Generation, Segment 7b)
 
 Date: 2026-11-22
-Status: Draft, revised after the check, awaiting client approval, 2026-11-22
+Status: Approved, 2026-11-22
 Parent (immediate): `2026-11-22-loot-economy-design.md` (loot economy design, "LE", segment 7a, approved 2026-11-22, **the key parent and the template**).
 Other parents: `2026-11-15-dungeon-rpg-design.md` (main design, "MAIN"),
 `2026-11-16-character-stat-model-design.md` (stat model, "STAT"),
@@ -27,20 +27,20 @@ and `2026-11-20-herald-class-design.md` ("HR"),
 `2026-11-21-traps-locks-design.md` ("TL", segment 5) and
 `2026-11-21-encounter-placement-design.md` ("EP", segment 6).
 
-Items marked **(agreed)** are the client's answers of 2026-11-22 to the five questions this design raised (Q1–Q5, sections 0.2 and 14.1), each answered with the lead's recommendation (option A), or restate a client answer recorded in an approved document. The client also said that everything else in the lead's proposal stands as written: Model B corrected ("B-fixed") with its grafts; the pipeline; the weight split with static-set divisors; lanes; one rolled line with rolled-only dormancy and telling names; Scions; memory and relaxation; the Triad offers with the hero guarantee; the Due additions; the Wax-Key sibling; carried loot with `showsInUse`, the elite preference, KinSwap, the name banner and the roster flags; signatures with forms and second forms; determinism (`lineRoll`, `curseGate`, the fourth fallback entries); `theme.loot` records and the theme tables for every theme; the guards (IR-16); content requests and V14 warnings with playtest-blocking reports; V14 `ItemRolls`; the reports; the card budget; art and audio; the new mechanics adopted, held and rejected; the numbers and fixes (toy, with caveats); staging; ownership and hooks; the binding requirements; IR-1 to IR-23; the told-plainly items; the risks; and the appendix resolutions and names.
+Items marked **(agreed)** are the client's answers of 2026-11-22 to the five questions this design raised (Q1–Q5, sections 0.2 and 14.1), each answered with the lead's recommendation (option A), or restate a client answer recorded in an approved document. The client also said that everything else in the lead's proposal stands as written: Model B corrected ("B-fixed") with its grafts; the pipeline; the weight split with static-set divisors; lanes; one rolled line with rolled-only dormancy and telling names; Scions; memory and relaxation; the Triad offers with the hero guarantee; the Due additions; the Wax-Key sibling; carried loot with `showsInUse`, the elite preference, KinSwap, the name banner and the roster flags; signatures with forms and second forms; determinism (`lineRoll`, `curseGate`, the fourth fallback entries); `theme.loot` records and the theme tables for every theme; the guards (IR-16); content requests and V14 warnings with playtest-blocking reports; V14 `ItemRolls`; the reports; the card budget; art and audio; the new mechanics adopted, held and rejected; the numbers and fixes (toy, with caveats); staging; ownership and hooks; the binding requirements; IR-1 to IR-23; the told-plainly items; the risks; and the appendix resolutions and names. The client approved this document as a whole on 2026-11-22.
 
-Items marked **(lead's call)** were filled in by the design lead inside approved rules and were in the proposal the client answered; they become binding when the client approves this document. Items marked **(new lead's call)** were made while writing this document, beyond that proposal; each is listed in 14.1 for the client's confirmation. Items marked **(lead's call, after the check)** were made when the written document was checked; none overrides a client answer, and each is listed in 14.1. Items marked **(settled)** restate a rule from an approved document; **(decided)** marks a main-design client decision. Items marked **(change IR-n)** amend an approved document and are listed, with the exact sections they touch, in 13; rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there. Items marked **(told plainly)** narrow or re-read approved text, contest the brief, a judge or a critic, or state an unwelcome forecast; they are gathered in 14.1 so the client sees them in plain words.
+Items marked **(lead's call)** were filled in by the design lead inside approved rules and were in the proposal the client answered; the client confirmed them all on 2026-11-22, when it approved this document as a whole, and they are binding. Items marked **(new lead's call)** were made while writing this document, beyond that proposal; they are listed in 14.1 and the client confirmed them all on 2026-11-22. Items marked **(lead's call, after the check)** were made when the written document was checked; they are listed in 14.1, the client confirmed them all on 2026-11-22, and they never override a client answer. Items marked **(settled)** restate a rule from an approved document; **(decided)** marks a main-design client decision. Items marked **(change IR-n)** amend an approved document and are listed, with the exact sections they touch, in 13; rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there, and the client's approval of this document on 2026-11-22 (with Q1–Q5 where a row names one) covers them. Items marked **(told plainly)** narrow or re-read approved text, contest the brief, a judge or a critic, or state an unwelcome forecast, and were told to the client in plain words (14.1, including those told after the check); the client confirmed them all on 2026-11-22. Every item here is binding on the builders.
 
 | Marking | Meaning |
 |---|---|
 | **(settled)** | Restates a rule from an approved document |
 | **(decided)** | A main-design client decision, restated |
 | **(agreed)** | A client answer: Q1–Q5 of this document (2026-11-22), or one recorded in an approved document, restated |
-| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal; binding once the client approves this document |
-| **(new lead's call)** | A lead's call made while writing this document, beyond the answered proposal; listed in 14.1 for the client's confirmation |
-| **(lead's call, after the check)** | A judgement call made when the written document was checked (builder, consistency, play and art/UX lenses); never overrides a client answer; listed in 14.1 for the client's confirmation |
+| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal; confirmed by the client with this document on 2026-11-22 |
+| **(new lead's call)** | A lead's call made while writing this document, beyond the answered proposal; listed in 14.1 and confirmed by the client on 2026-11-22 |
+| **(lead's call, after the check)** | A judgement call made when the written document was checked (builder, consistency, play and art/UX lenses); never overrides a client answer; listed in 14.1 and confirmed by the client on 2026-11-22 |
 | **(change IR-n)** | Amends an approved document; listed with its exact sections in 13. Rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there |
-| **(told plainly)** | Narrows or re-reads approved text, contests the brief, a judge or a critic, or states an unwelcome forecast; listed in 14.1 so the client sees it in plain words |
+| **(told plainly)** | Narrows or re-reads approved text, contests the brief, a judge or a critic, or states an unwelcome forecast; told to the client in plain words (14.1) and confirmed by the client on 2026-11-22 |
 | **(hook)** | Owned by another segment or design; 7b states only what it needs |
 | *(illustr.)* | An illustrative number, owned by the builders and calibrated by the M2 simulator (8, 9). Never binding |
 
@@ -1132,7 +1132,7 @@ Every report reads `LootLedger` rows at the **generation snapshot** unless it sa
 
 ## 13. Changes to approved documents
 
-To be applied when the client approves this document. **This document edits no parent document itself**; the rows are applied by the owners of the sections they touch **(lead's call)**, and rows owed by other owners are listed again in 17. Every row names the exact sections it touches. Rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ in the "Flag" column, and the client's approval of this document will cover them (with Q1–Q5 where a row names one). **(New lead's call:)** as in the LE, TL and EP precedents, the Flag column also marks rows that only *read* agreed, decided or settled text without changing it, so that every touch of such text is visible; this adds flags to IR-1, IR-14 and IR-15 and names LE Q1 on IR-8 (the Viaticum fallback wording in LE 6.11 item 5 sits inside LE's agreed Q1). **After the check (lead's call)** the Flag and section columns were completed on IR-3, IR-4, IR-6, IR-9, IR-10, IR-11, IR-12, IR-13, IR-14 and IR-15. Rows marked "request" are requests to other owners; they change nothing until their owner rules, and 14.2 names each fallback. M3, M4 and Later rows are recorded now and take effect at their wave.
+Applied on 2026-11-22, when the client approved this document. **This document edits no parent document itself**; the rows are applied by the owners of the sections they touch **(lead's call)**, and rows owed by other owners are listed again in 17. Every row names the exact sections it touches. Rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ in the "Flag" column; **the client's approval of 2026-11-22 covers them** (with Q1–Q5 where a row names one). **(New lead's call:)** as in the LE, TL and EP precedents, the Flag column also marks rows that only *read* agreed, decided or settled text without changing it, so that every touch of such text is visible; this adds flags to IR-1, IR-14 and IR-15 and names LE Q1 on IR-8 (the Viaticum fallback wording in LE 6.11 item 5 sits inside LE's agreed Q1). **After the check (lead's call)** the Flag and section columns were completed on IR-3, IR-4, IR-6, IR-9, IR-10, IR-11, IR-12, IR-13, IR-14 and IR-15. Told-plainly rows were told in 14.1 and confirmed by the client on 2026-11-22. Rows marked "request" are requests to other owners, recorded as pending requests; they change nothing until their owner rules, and 14.2 names each fallback. M3, M4 and Later rows are recorded now as applied text marked with their wave and take effect at that wave.
 
 **Readings recorded inside this design (no approved text changes):**
 - LE 6.9 item 2c's "gear" includes trinkets, so a per-option fallback may hold a trinket; it counts first against `trinketRarePerFloorMax`, as a LootPlan identity (4.8; the order change is in IR-14);
@@ -1180,7 +1180,9 @@ Waves: IR-1 (F1 data), IR-10 (the F1 Due, as approved), IR-13 (Old Ragged guards
 
 ## 14. Open items for the client
 
-The client answered the five questions of the proposal on 2026-11-22, each with the recommended option (A), and said that everything else in the proposal stands as written. **Open:** approval of this document as a whole, including the **new lead's calls**, the **lead's calls after the check**, the **told-plainly** items (with those told after the check) listed in 14.1, and the readings recorded in 13. The check (builder, consistency, play and art/UX lenses) raised nothing that needs a new client question: every fix sits inside the five answers, keeps an approved rule, or is flagged against the text it changes. The future items in 14.2 return only if a report, an owner's refusal, a wave or a later design triggers them.
+None. Approved by the client on 2026-11-22.
+
+The client approved this document as a whole on 2026-11-22, including every lead's call (the lead's calls of the answered proposal, the new lead's calls in 14.1 and the lead's calls after the check in 14.1), the told-plainly items (including "Told plainly after the check" in 14.1: among them the VR-signature slot reversal of LE-3's pending reading, passed-up offer options writing Scion-line memory, and the carried-use name floater) and the readings recorded in 13, and its approval covers the flagged rows of 13. The five questions it raised were answered on 2026-11-22 **(agreed)**, each with the recommended option (A); the client also said everything else in the proposal stands as written. The check (builder, consistency, play and art/UX lenses) raised nothing that needed a new client question: every fix sits inside the five answers, keeps an approved rule, or is flagged against the text it changes. The future items in 14.2, which come back only if a report, an owner's refusal, a wave or a later design triggers them, and the naming pass remain future items.
 
 ### 14.1 This document
 
@@ -1192,7 +1194,7 @@ The client answered the five questions of the proposal on 2026-11-22, each with 
 - **Q4, theme in loot (IR-15, IR-19):** option A. 0 rules bias; presentation, hands and signatures (Patina, stamp, provenance, Reverie, "Answers here", carried loot, KinSwap); Element Echo held for an M3 decision, default off (4.4, 5). Rejected: B, Echo in M3 now; C, theme-keyed weights.
 - **Q5, unarmed bosses (IR-13):** option A. An unarmed boss guards its signature in its lair; its kit is unchanged (M1: Old Ragged guards Bellwarden's Mail); worn or lodged signatures are an M3 option (4.13). Rejected: B, worn or lodged signatures in M2.
 
-**New lead's calls (made while writing; for the client's confirmation with this document):**
+**New lead's calls (made while writing; confirmed by the client on 2026-11-22, with this document):**
 1. **Document shape:** the proposal's section numbers 0–12 are kept so every cross-reference holds; intent, goals and anti-goals join 0 as 0.4; the closing parts follow as 13 (changes), 14 (open items), 15 (risks), 16 (left to the builders) and 17 (depends on).
 2. **Toy failure ids renamed IT1–IT15** (the drafts' F1–F15 read as floors; `IT[0-9]+` has 0 hits).
 3. **"Two Ways" dropped** as a mechanic name (an ordinary phrase with 6 hits); the mechanic is the **Wax-Key sibling** (4.11, 7).
@@ -1208,7 +1210,7 @@ The client answered the five questions of the proposal on 2026-11-22, each with 
 13. **Flags in 13** also mark reads of agreed, decided or settled text (LE, TL and EP precedent): IR-1, IR-14 and IR-15 flagged; IR-8 names LE Q1 (the Viaticum fallback wording).
 14. **Owner-refusal fallbacks** in 14.2, each stated so a refusal never blocks M2.
 
-**Lead's calls after the check (made when the written document was checked; none overrides a client answer; for the client's confirmation with this document):**
+**Lead's calls after the check (made when the written document was checked; none overrides a client answer; confirmed by the client on 2026-11-22, with this document):**
 1. **Relaxation order:** a socket first relaxes its own target preferences in their listed order, then the IR-7 rungs, per a socket × rung matrix; the "lift the same-floor key" rung is withdrawn (ENM 20.1 keys are never lifted), so the ladder has four rungs; offer options use their own terminal ladder (memory → a usable tool at T → one tier lower, logged) and never reach supply or tonic (4.1, 4.7 item 8, 4.8).
 2. **Signatures feed no exclusion:** no pre-registered floor key, no Scion-line memory, no `scionOf`, no `generated[]` row (`bossContent[]` instead); ENM 20.1's shared-base check covers deck notables only; signatures are cap-exempt when taken (4.7 items 1 and 7).
 3. **Weights in fixed point:** a fixed factor order with a FloorDiv after each factor, SCALE 2^20, every socket term named with its key (4.2).
@@ -1238,7 +1240,7 @@ The client answered the five questions of the proposal on 2026-11-22, each with 
 27. **Camp entries** use f = N+1 for tier, floors, `categoryWeight` and `scrollFloorCap`, floor N's keys, and sit outside both floors' field counters (4.1).
 28. **`curseGate` draw 2** orders candidates by frozen generation order, then entryIndex (4.15).
 
-**Told plainly (gathered from where they stand):**
+**Told plainly (gathered from where they stand; confirmed by the client on 2026-11-22):**
 - The brief's "random affixes with ranges" is not delivered: ≤ 1 rolled verb line, no ranges, no greater affixes, no attunement (0.1, 4.6).
 - The brief's theme loot tables are delivered as presentation, hands and signatures; the theme has no rules weight, and a ×1.5 tilt would add only +0.02 kin items per floor (0.1, 4.4).
 - Solo on-build is about 65–76%, not the 83–100% the drafts claimed (0.1, 4.3).
@@ -1261,7 +1263,7 @@ The client answered the five questions of the proposal on 2026-11-22, each with 
 - Every toy number carries the five caveats of 8.
 - A critic's claim that "Wind-Up" has 0 hits is wrong (hits in 5 documents); the name Wind-Down Hammer stands (A.4 IK13).
 
-**Told plainly after the check:**
+**Told plainly after the check (confirmed by the client on 2026-11-22):**
 - The written draft let a signature (which follows the door's boss) block its base for the floor's deck draws, so a door swap could change deck identities against RS 6.4. Signatures now feed no exclusion; the cost is that a field chain-mail notable and Bellwarden's Mail can share a floor on F1 (4.7 item 7).
 - The draft claimed "the phial never sits in an offer"; CN 14.7 (agreed) puts it on the F3–F4 boss card. The approved channel is kept, and a boss-channel phial takes the Wayward option (4.1).
 - "A VR signature consumes its floor's VR slot", which the client accepted with the proposal, reverses LE-3's pending reading that signatures are exempt from the VR cap; it is now flagged as that reversal, and an ITEMS refusal returns to LE-3 as approved (4.13).
@@ -1276,6 +1278,8 @@ The client answered the five questions of the proposal on 2026-11-22, each with 
 - The IR-16 guard can still leave a solo Arcanist or Shade a soft-weighted unusable Rare on F3–F4 when no usable Rare gear exists; the guard is kept (the scroll spike is the worse failure), and `DeadRareRepeatRate` and `LateFloorGearShare` watch it (4.7).
 
 ### 14.2 Future items triggered by reports, owners or later designs
+
+These come back to the client only if a report, an owner's refusal, a wave or a later design triggers them; each fallback is a new lead's call or a lead's call after the check (confirmed by the client on 2026-11-22, with this document):
 
 | Item | Trigger | What happens | Owner / approval |
 |---|---|---|---|

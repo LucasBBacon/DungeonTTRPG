@@ -734,7 +734,7 @@ checked against pegs K1 and K2 (9.3).
 | Sundries (new loot class, CN-19) | Common consumables: healing potion, tonic, water, oil; Fire Bomb from floor 2. Drawn per floor **outside the notable count**, inside the fixed budget (items 2), `sundriesPerFloor` doses set per floor *(illustr. 3–5 on floors 1–2, 4–5 on floors 3–5)*. **At least 1 healing potion per floor** (`healingSundryMin` 1, drawn first; 2 on floors 4–5 only through the pre-authorised raise) and **at most 3** (`healingSundryMax`) **(client, Q3)**: the guaranteed potion goes in a main-path container in the first half of the main path, openable with no check, and is never substituted; random potions lean off-path (`healingOffPathPermille` 600) (death and healing design 12.4, 12.5) **(change DH-40)**. From floor 2, **at least 1 and at most 2 offensive flasks** per floor (`offensiveSundryMin`, `offensiveSundryMax`), the minimum drawn before the other sundries **(lead's call)**. Mostly containers, plus the settled single carried consumable per encounter |
 | Notables | Scrolls, wands, the Greater Fire Bomb and the talisman count in the 6–8 notables per floor and the camp channel; their share steered by category weights by depth and the F5 tactical cap, ranges unchanged (M2; loot economy design 6.2; change LE-17) |
 | Camp channel (notables shop, camp reward card) | Scrolls (never healing scrolls, P1), wands, the Greater Fire Bomb, all with channel `camp` (shop and reward card); the talisman **only** through `campReward` (the reward card, never the shop; CN-1) |
-| Boss reward card | Scrolls, wands; the talisman from floor 3. Floors 1–4 only: no final-boss card; on floor 5 the Viaticum (choose 1 of 3 Rare wands and tier-3 scrolls, usable options, never the phial) takes the boss share (M2; loot economy design 6.11; change LE-5, **agreed, Q1 of 2026-11-22**). **Usability fallback (M2; loot economy design 6.3; change LE-3):** if no option is usable by a member in the party snapshot at generation, all three are redrawn at the same tier as fit-premium gear notables, logged `BossCardUsabilityFallback` |
+| Boss reward card | Scrolls, wands; the talisman from floor 3 (a boss-channel phial fills option 2; item rolls design 4.1; change IR-8). Floors 1–4 only: no final-boss card; on floor 5 the Viaticum (choose 1 of 3 Rare wands and tier-3 scrolls, usable options, never the phial) takes the boss share (M2; loot economy design 6.11; change LE-5, **agreed, Q1 of 2026-11-22**). **Offer slots (M2; item rolls design 4.8, 4.10; change IR-8, agreed, Q1 of 2026-11-22):** options Yours, Theirs, Wayward and the fourth; families distinct, effect tags distinct where legal, at most 1 damage option; a hero guarantee. **Usability fallback (M2; loot economy design 6.3; change LE-3; item rolls design 4.8; change IR-8, agreed, Q1 of 2026-11-22):** each option with no usable record is redrawn **on its own** as usable gear at the same tier (usability filter, ordinary weights, not fit-filtered), on `bossCardFallback` entry = option index, then the offer terminal ladder. **Martial parties (item rolls design 4.8; change IR-8):** "the boss gives spells" holds only for readers; for a solo Vanguard or a Herald without Arcana, boss cards and the Viaticum resolve mostly to gear. **Pending request (M3; item rolls design 4.8, 9.4; change IR-8; consumables owner):** a martial tactical boss-card pool (notable bombs and oils, arena tools; 2–3 *(illustr.)*), pulled forward from Later; until ruled, the pool is unchanged |
 | Carried | Healing potion, tonic (any floor from M2; floor 1 self-targeting only, settled); flasks and scrolls floor 2+; wands floor 2+; never the talisman, Remedy or coatings |
 | Substitution fallback | Supply or tonic **(settled, enemies 15.3)** |
 | Trader (Later) | Never healing potions (settled); never the talisman |
@@ -1173,7 +1173,9 @@ channels and placement lead's call; CN-1, CN-2, CN-27)**
      phial. For `campReward`, one of that floor's container draws moves to
      the camp reward card as the phial, so the notables shop's stock is
      untouched and the floor's count still balances. Which card the phial
-     takes, and its Ledger A count, are set in loot economy design 6.13;
+     takes, and its Ledger A count, are set in loot economy design 6.13
+     (a boss-channel phial fills the F3–F4 boss card's option 2; item
+     rolls design 4.1);
      a camp's phial `minFloor` reads the generated floor N, not N+1 (a
      reading; loot economy design 6.3; change LE-6).
 - **A declined offer is lost for the run:** a reward card is a choice, and
@@ -1504,7 +1506,7 @@ change HR-24), 4 wands; the phial gated.
     "scrollFloorCap": [1, 2, 3, 4, 4],
     "scrollReadSetsCampSpend": true,
     "itemSpellThrift": 50,
-    "tier4ScrollsPerRunBeforeFinalBoss": null,
+    "tier4ScrollsPerRunBeforeFinalBoss": 1,
     "wandValue": [ { "tier": 1, "max": 2, "value": 2 },
                    { "tier": 1, "max": 3, "value": 3 },
                    { "tier": 2, "max": 2, "value": 3 } ],
@@ -1531,7 +1533,9 @@ change HR-24), 4 wands; the phial gated.
   - **engine switches:** `scrollReadSetsCampSpend` (13.5, `true`; CN-11 client-approved
     2026-11-17);
     `tier4ScrollsPerRunBeforeFinalBoss` (the lead's pre-agreed lever,
-    section 21: `null` = off, 1 when engaged; the loot generator reads it);
+    section 21: `null` = off, 1 when engaged; the loot generator reads it;
+    **defaults to 1 while the item rolls usability floor ships and Rare
+    gear is thin** (M2; item rolls design 4.7 item 9; change IR-16));
   - **owned elsewhere:** `talisman.leaveHpPermille`, whose value the
     death and healing design owns (16). `recoveryPlaceholder` is removed
     (7.2). **(change DH-42)**
@@ -1579,6 +1583,13 @@ change HR-24), 4 wands; the phial gated.
   rule 5). A wand declares its `camp` pool and `charges`.
 - Scroll and wand tier is derived from the ability record, never stored.
 - `use.difficulty` is unchanged.
+- **Pending request (M2; item rolls design 4.10; change IR-23;
+  consumables owner):** every scroll, wand and notable flask declares an
+  `effectTag` from {damage, control, ward, mobility, utility}, used for
+  offer distinctness; `use.damage` stays as an alias for loot economy
+  design 6.11. Until ruled, no record declares it, and offer
+  distinctness falls back to category and `use.damage` only (item rolls
+  design 14.2).
 
 ### 18.3 Example records *(illustr.)*
 
@@ -1820,7 +1831,7 @@ hero's HP never shows 0 while a phial is armed on its belt.
 
 | Risk | Mitigation |
 |---|---|
-| **Scroll nova at the boss** (packs hold scrolls; four readers) | Camp-spend flag (13.5, CN-11, client-approved 2026-11-17); family caps; 1 Very rare per floor; boss-damage share alarm at 25%. **Pre-agreed lever:** at most 1 tier-4 scroll per run before the floor-5 boss (`tier4ScrollsPerRunBeforeFinalBoss` 1) |
+| **Scroll nova at the boss** (packs hold scrolls; four readers) | Camp-spend flag (13.5, CN-11, client-approved 2026-11-17); family caps; 1 Very rare per floor; boss-damage share alarm at 25%. **Pre-agreed lever:** at most 1 tier-4 scroll per run before the floor-5 boss (`tier4ScrollsPerRunBeforeFinalBoss` 1; engaged by default from M2, item rolls design 4.7 item 9, change IR-16) |
 | **CN-11 declined at approval** (closed: the client approved CN-11 on 2026-11-17) | Not in force. Recorded only: `scrollReadSetsCampSpend: false` with the 25.2 fallback bounds, the pre-agreed lever set at once, the boss-damage alarm a release gate |
 | **The non-caster scroll route is empty** | DEP-1 (13.8); at least 1 and at most 2 offensive sundries per floor from floor 2; the no-flask report; revisit trigger at 5% |
 | **Thrown potion unused** | Starts at 750; the knob runs to 1000, where Administer merges into the throw |

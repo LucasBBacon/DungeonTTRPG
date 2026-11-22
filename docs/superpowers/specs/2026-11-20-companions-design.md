@@ -1567,7 +1567,9 @@ not apply (Vanguard design 8.2). Weapon families are inside each class's
   hero only (items 10.5).
 - **No kit trinket.** It would be loot outside the per-floor budget (main
   4.6). Trinkets 18.3's ≤ 25% empty slot fill is reported **by join
-  camp**; its lever is `anyCompanion` loot weighting (CMP-30).
+  camp**; its lever is `anyCompanion` loot weighting (CMP-30), keyed by
+  party size so it fires at party ≥ 3 only (M2 lever; item rolls design
+  4.3, IR-17).
 
 ### 8.5 HP, Downed and Scarred
 
