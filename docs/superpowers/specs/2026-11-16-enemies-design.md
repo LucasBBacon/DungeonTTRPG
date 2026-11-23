@@ -1520,7 +1520,7 @@ Each shows as a corner glyph.
 |---|---|---|
 | Dormant | Does not move; −5 to noticing; re-rolls only on noise it hears, on adjacency or on damage | No |
 | Stationary | Holds its post | No |
-| Patrolling | A fixed loop, 1 square per tick, pausing 2 ticks at waypoints. Once seen, the route is drawn and feeds the rest preview **(settled)**. | No |
+| Patrolling | A fixed loop, 1 square per tick, pausing 2 ticks at waypoints. Once seen, the route is drawn and feeds the rest preview **(settled)**, drawn over known squares only (Seen, Remembered, Chalked), with an open "continues" end where it leaves known space, so it never leaks unexplored Circuit rooms **(change XI-6; exploration and information design 4.8.1; agreed, Q2; M2)**. | No |
 | Alerted | Walks to a noise, looks for 3 ticks, then returns. **It does not become Wary**, so luring with noise stays a legitimate Stealth play. | No |
 | Engaged | In combat, following its profile | Yes |
 | Pursuing | Engaged but has noticed no one; moves to the last known square and Searches | Yes |
@@ -1541,6 +1541,26 @@ in its template's Awareness (17.4) ∩ every member type's
 asleep in another. Each group's activity maps 1:1 onto an existing state
 through a posture (Posted and Busy are Stationary, Dormant is Dormant,
 Afoot is Patrolling) and changes no noticing value.
+
+**Patrol forecast** **(change XI-6; exploration and information design
+4.8.1, 4.8.2; agreed, Q2, Q4; M2)**: a drawn route feeds one core query,
+`PatrolForecast(groupId, square, predicate)`, over **known** patrols
+only (seen, or heard through Listen "passing" or F-LISTEN). It is
+earned by continuously watching the group move 4 squares *(illustr.)*
+of its route, or across one observed turn or Portal crossing, or by
+Cased; a single glimpse gives only the route pip, and a heard-only
+patrol earns only the heard Portal's window. It is shown as a window
+("from +4 to +8 ticks, if undisturbed") over route squares seen
+traversed with timing; horizon 20 ticks, or one lap (cap 60 ticks
+*(illustr.)*) with a Perception-trained watcher by sight or Cased; it
+is withdrawn by events, not age (noise that could reach the route, an
+alert, a contradicting sighting, or the group last seen Alerted,
+Searching or Pursuing). The rest preview, the Easy Plain auto-pick gate
+and auto-Probe suppression read it, never true state. **Pacing gate
+(agreed, Q2):** `PatrolFightRate` stays at or above 60% *(illustr.)* of
+the approved-surfaces baseline (owned by EP); on a miss, in order, the
+horizon stays 20 ticks for everyone, the forecast becomes hover-only,
+then route and memory only. Patrol behaviour is unchanged.
 
 **Pending request (EP-15, M2; encounter placement design 6.21):** the
 Wary row's "back at its post" reads "its Billet hold squares" (the
@@ -1595,9 +1615,12 @@ adopted.
   Only hiding monsters (lurkers) roll Stealth against the party's passive
   perception. They roll once at placement, and again only at the 6- and
   3-square bands. At a band the roll is compared against the highest
-  passive Perception among party units with line of sight to the lurker;
-  with none in line of sight, that band is spent **(change EP-3;
-  encounter placement design 6.8.5)**.
+  passive Perception among living, non-Downed party units with line of
+  sight to the lurker; with none in line of sight, that band is spent
+  **(change EP-3; encounter placement design 6.8.5)**. Downed units
+  contribute no knowledge, as in Quarry (11.4); line of sight stays
+  symmetric, so a monster can still see a Downed unit **(change XI-2;
+  exploration and information design 4.1.2; M1)**.
 - **Surprise** **(settled)**: a monster group noticed without noticing
   back is Surprised. The party is read per side: it is Surprised only if
   no party unit has noticed any hostile unit taking part in that combat;
@@ -1683,7 +1706,8 @@ radius reads the live hearing graph, each Portal in its current state
 6. **Hearing outline** (M2): out of combat, the map shows which known
    groups a fight *here* would draw in. A chain-pull is then a decision,
    not an ambush. Listen at a closed door feeds it (floor layout design
-   9.2) **(change FL-18)**.
+   9.2) **(change FL-18)**. The layer is labelled "known groups only"
+   (reading, XI-13; exploration and information design 4.8.4).
 
 Placement keeps this model unchanged and adds only its own levers and
 assertions (Dormant near-pair partners, `JoinedRangedShare`,
@@ -1694,7 +1718,8 @@ Call Post, a bell rope or gong sounding noise 10 within these joiner
 rules; not adopted. The Errant (EP-38) is a Later client item (10.4).
 
 **Doors:** monsters open unlocked doors (1 square of movement) and never
-close or lock them. Locked doors stop monster paths, which is a Mechanics
+close or lock them (read by the fog's Remembered table, XI-5;
+exploration and information design 4.2). Locked doors stop monster paths, which is a Mechanics
 payoff. (Wedge and the force-door term, change SH-18, apply when the
 Trapwright ships; Shade design 14.) Monsters move on the monster
 movement graph: they pass Arches, corridors and Drapes (leaving Drapes
@@ -1935,6 +1960,13 @@ Perception, so guile grows with level. **(agreed)**
   a group's Billet hold squares and fall-back square to parties with a
   Perception-trained member (display only; the AI never reads whether it
   is shown, invariant 10); not yet ruled. If refused, no hold overlay.
+- **Open item (XI-12, XI-27; M3, conditional; exploration and
+  information design 4.8.3, 4.5.2):** Lore does not reveal a group's
+  Perception bonus today. The noticing-roll tag on the move preview
+  shows odds only where Lore has revealed it, and Cased's odds band
+  (Shade request) waits on the same flag; both are gated on EP-41's
+  ruling (pending client); not yet ruled by the enemies owner. If
+  refused, the tag and Cased show no odds.
 
 ### 13.6 Rejected alternatives
 
@@ -2148,7 +2180,9 @@ condition transforms:
   excluded unless nothing else qualifies): the first anchor the party
   has not explored, else the farthest, else it is Cornered. Every non-elite
   fight host has a non-door flee exit (`fleeExit`) **(change FL-12; floor
-  layout design 6.8)**. It never enters a hazard (**pending request
+  layout design 6.8)**. "Explored" here means entered; Chalked or
+  Traced rooms never count (reading, XI-1; exploration and information
+  design 4.1.1). It never enters a hazard (**pending request
   (TR-15, M3; room terrain design 6.6):** except a non-lethal Remnant,
   which it treats as passable; not yet ruled; **pending request (hazards
   design 6.12, M2 (gated), else M3):** it never paths adjacent to a Void
@@ -2210,7 +2244,10 @@ cut), never both **(change HR-19; Herald design 8.3, 10.1)**.
   path to the stairs (the Stairhead; on floor 5, the main path to the
   arena; floor layout design 6.11; **change FL-6**), an undiscovered
   secret (a Hairline secret; floor layout design 9.2; **change FL-17**),
-  the boss's Lore entry, one unexplored room's layout, the floor key:
+  the boss's Lore entry, one unexplored room's layout (an unmapped
+  room: not entered and interior not Chalked; drawn as interior Chalked;
+  readings, XI-1, XI-4; exploration and information design 4.1.1,
+  4.3.6), the floor key:
   its carrier and its lock **(change TL-23; traps and locks design
   6.11; M2)**. **The player picks the category** from this
   list; the priority order is the default selection (Pick the Question,
@@ -2227,6 +2264,12 @@ cut), never both **(change HR-19; Herald design 8.3, 10.1)**.
   reads profile memory (the codex is write-only), so a seed gives the
   same facts to every player (events design 4.4.2) **(change EV-8;
   M2)**.
+  **Pending request (XI-25, M3; exploration and information design
+  4.6.4):** F-TREASURE joins these categories after F-KEY (default
+  priority unchanged), choosable through Pick the Question, at most once
+  per floor through Yield, inside the shared cap of 2; kill switch: if
+  `YieldCategoryMix` shows F-TREASURE above 50% *(illustr.)* of picks,
+  it is restricted to the optional elite; not yet ruled.
 - There is no spare, rob or execute menu. A choice with no mechanical
   difference is noise, and a reward for executing would make mercy a trap.
   Curiosity options follow the same rule: no two share an effect set
@@ -2830,7 +2873,9 @@ floor.
   **(change I-8; items design 6, 8)**
 - **Leftovers** become one fixed map marker per room, scrapped at the
   stairs. Clicking it reopens the same screen. **(change I-8; items
-  design 9)**
+  design 9)** Leftovers and flee piles are map auto-marks, and the
+  floor-info panel is the Floor-info panel (exploration and information
+  design 4.3.3, 4.9.9; XI-7).
 - **Mid-fight pickups:** a unit in or adjacent to a dropped item's square
   may pick it up with the free interaction. Wielding a picked-up weapon
   costs the settled bonus action.

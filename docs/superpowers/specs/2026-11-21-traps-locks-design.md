@@ -1035,6 +1035,10 @@ the maximum of the formulas that apply to it:
 
 Grades are **monotonic**: they never drop, so a death or a companion
 leaving never hides a trap again.
+*Reading (exploration and information design 4.1.1, 4.1.2, 4.2; changes
+XI-1, XI-2, XI-5; M1):* "line of sight" here and in `seenByParty` is the
+one `CanSee`, from living, non-Downed party units; the grade is held in
+`PartyKnowledge` as `trapGrade` and drawn exact while Remembered.
 
 **Told plainly:** Perception finds lurkers and boxed lurkers, not traps.
 **Trap Eye** (SH-19) then needs a new lean; the recommendation is double
@@ -1086,11 +1090,17 @@ stays for hidden units only.
 last square before a new Hunch zone, with one click and three choices:
 **Probe** (default, offered from that square), **Walk round** (if the
 detour is +4 squares or less), or **Push through** (floored out of
-combat). **Out of combat it auto-Probes at 0 clicks** unless the patrol
-forecast shows a crossing within 2 ticks, in which case the three-way
-stop appears; in combat the stop always appears **(lead's call, after
-the check:** out of combat Probe dominated, so the stop was a click,
-not a decision**)**.
+combat). **Out of combat it auto-Probes at 0 clicks** unless a
+**known** patrol is due in the Probe's hearing reach within its 2 ticks
+(`PatrolForecast` over known patrols only), or that hearing reach
+crosses any **never-Seen** square (Unknown or Chalked) **(agreed, Q4 of
+the exploration and information design; change XI-6; M2; exploration
+and information design 4.8.2, which defines the hearing reach and
+"due")**, in which case the three-way stop appears; in combat the stop
+always appears **(lead's call, after the check:** out of combat Probe
+dominated, so the stop was a click, not a decision**)**. **Told
+plainly (XI-6):** an auto-Probe can still meet an unseen patrol
+arriving from known-empty space.
 
 **Other ways a trap is Revealed, all deterministic:**
 - it springs in the party's sight;
@@ -1107,7 +1117,8 @@ it (8).
 
 **Count line (FL-20):** "traps found: k · open Hunch zones: h". It is
 shown from F2. **There is no "/ n".** A total would invite
-floor-sweeping for traps that are floored anyway (KF7).
+floor-sweeping for traps that are floored anyway (KF7; kept by the
+exploration and information design 4.5.3, XI-32).
 
 **Fit.**
 - A solo Vanguard (Int 0, sense 10) Reveals F1 Easy traps, gets Hunches
@@ -1225,15 +1236,22 @@ zones (20–57% of traps go unseen for parties without Mechanics).
     tick. If combat starts or the worker is interrupted, the act ends
     with no result, and since Take time draws nothing, nothing is spent;
   - the card shows the patrol forecast ("a patrol crosses the hearing
-    outline in 4 ticks").
+    outline in 4 ticks"), over **known** patrols only (`PatrolForecast`;
+    exploration and information design 4.8.1, 4.8.2; change XI-6; M2).
 - **Sure Hands** (SH 7.11) keeps its d20 floor on rolls and also cuts
   Take time to 3 ticks. The Shade owner is told that Take time otherwise
   removes most of its value (toy: about +0).
 - **Easy Plain locks** are picked automatically on walk-in by a party
   with a trained member (Take time, its full ticks, no card, 0 extra
-  clicks), **only when the patrol forecast shows no crossing within
-  those ticks**. Otherwise the normal lock card appears with Take time
-  preselected (1 click) **(lead's call, after the check)**.
+  clicks), **only when no known patrol is due in the pick's hearing
+  reach within those ticks** (`PatrolForecast` over known patrols only)
+  **and that hearing reach crosses no never-Seen square** (Unknown or
+  Chalked) **(agreed, Q4 of the exploration and information design;
+  change XI-6; M2; exploration and information design 4.8.2)**.
+  Otherwise the normal lock card appears with Take time preselected (1
+  click) **(lead's call, after the check)**. **Told plainly (XI-6):** the
+  auto-pick can still meet an unseen patrol arriving from known-empty
+  space; Take time stays channelled (above).
 - **Re-arm** (the settled row, now numbered):
   - trained Mechanics, adjacent; 2 ticks out of combat, an action in
     combat;
@@ -1654,6 +1672,16 @@ G2). The merge rules are **new lead's calls**:
   does not withdraw the stocked key; the next camp reads the new party.
 - The camp notables slot (one Wax Key at most) is separate and
   unchanged.
+- **The Ear Trumpet (agreed, Q3 of the exploration and information
+  design; change XI-26; M3, conditional):** the basic vendor also
+  stocks 1 Ear Trumpet (a Listen lane-gap counter, cap 1, 15 coin
+  *(illustr.)*) only when no party unit, the hero included, is
+  Perception-trained, read on the same camp-entry snapshot and stable
+  for the visit, exactly as the Wax Key test above; its effect is
+  suspended while any living party unit is Perception-trained. It ships
+  only if the M2 report `SoloListenClickShare` misses. The coverage
+  strip gains no Ear Trumpet line (CMP 7.3 has no Perception need); the
+  vendor row alone shows it (exploration and information design 4.5.2).
 
 *Rejected (Q3):* B, Wax Keys from loot and the camp notables slot only.
 
@@ -1837,7 +1865,10 @@ on 2026-11-21; the fallback, if the client ever reopens it: a size-0
     entry at SR2, the carried item read as its one carried consumable (a
     sundry dose), so no new carrier slot exists; if it is dropped, the
     real container keeps the entry and the dose (loot economy design 6.9
-    items 1, 6 and 7; changes LE-10, LE-20; M3).
+    items 1, 6 and 7; changes LE-10, LE-20; M3);
+  - never an F-TREASURE target, so no treasure pointer is a free
+    detector (exploration and information design 4.6.1; change XI-22;
+    M3).
 - The "keyhole = mouth" line is not used.
 
 *Rejected (Q2):* B, a cross-theme mindless mimic wearing the keyhole (it
@@ -2271,7 +2302,8 @@ distance and guard, and the boxed-lurker budget.
 - **Lock card:**
   - kind glyph and rule card;
   - the hearing outline per route;
-  - the patrol forecast;
+  - the patrol forecast (known patrols only, `PatrolForecast`;
+    exploration and information design 4.8.1; change XI-6; M2);
   - Take time where offered;
   - the preselected route;
   - the contents hint;
@@ -2280,10 +2312,15 @@ distance and guard, and the boxed-lurker budget.
   - confirmation on the first deliberate entry per trap and on moving an
     ally onto one;
   - the Bear-it HP line and its below-50% warning.
+- **Card queue (exploration and information design 4.9.8; change XI-19;
+  M2):** the ally-onto-trap and Bear-it prompts take slot 1, the Hunch
+  stop card (6.4) and the lock card slot 4, the first-entry prompt slot
+  7.
 - **Count line:** "traps found: k · open Hunch zones: h".
 - **Plates:** the Keybearer pip.
 - **Camp:** the vendor's Wax Key line and the gap card's coverage-strip
-  line (Q3; 6.11).
+  line (Q3; 6.11); at M3, if it ships, the vendor's Ear Trumpet row (no
+  coverage-strip line; XI-26; 6.11).
 - **Codex pages:**
   - "Natives know their floor; the house trusts its traps until one
     bites";
@@ -3187,7 +3224,7 @@ as 6.20 lists (lead's call, after the check):
 | **7 Loot** | Container kinds; `lockable` sockets; +1 rarity step behind consequence locks and in Wagers; graded cages; Wax Key draws; boxed-lurker drops. **Filled in part by the loot economy design (6.9, 6.4 item 9; changes LE-10, LE-11, LE-12, LE-20):** the one step rule and socket ranks, the two identities of a consequence cache, the K2 / K2b pegs, the cage set and boxed-lurker contents (6.11, 6.13–6.15 here). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 5, 11):** container hosts and kinds (inset hosts, LP-12; the twin-lid mark, LP-26, M3; the Ebb, LP-34, M4), auto-close and Glean (LP-8, LP-9), offer pacing (LP-30, M3) and the Windfall's sole exception to "contents never destroyed" (LP-2, M3); LP-17 to LP-20 are pending requests |
 | **8 Events** | Readings; Riddle-lock clues; Hour locks on Landmark ticks; Dream Fragments read the threshold rule. **Taken up by the events design (segment 8, approved 2026-11-22; its 4.9, 4.13):** Readings accepted (TL-34; EV-30; M3); each Riddle lock (Hymn, Index, Place-Setting, Story) gets a guaranteed, check-free clue host (a wall Glimpse or clue prop), placed by EventPlace whenever the lock exists on the floor and never a Curiosity option (M3); Hour locks on Landmark ticks stay with TL and HZ, and segment 8 places no Landmark (EV-35); Dream Fragments fold into F-BOSS options on Lore thresholds (EV-29; M3); Curiosity checks follow 6.1 and 6.2 (EV-4, EV-5); the priced lock route (6.11; EV-15); the shared FactLedger (6.11; EV-8) |
 | **9 Boss arenas** | No guaranteed boss-room traps; arena devices use the TrapRecord format (the Supper chandelier); Clearways stay clear; the Bossgate never opens by Wax Key or Unbolting. **Taken up by the boss rooms design (segment 9, approved 2026-11-22; its 4.7.1, 6, 11; change BR-16; M2, the Den's Device M1):** one Device per boss (F5: plus the Heavy Thing), each a segment-9 TrapRecord instance of kind `arenaDevice` in TL-40 format for data and preview only; *pending reading for 6.20 (TL owner confirms):* an `arenaDevice` is not a trap (no trigger plate, no hiding, no Botch, never armed by monsters); fallback: Devices are authored as segment-9 pieces with their own preview record, same rules; Device bodies obey RC2 and TL-43; no trap in the Sanctum; the Bossgate never by Wax Key **(settled)** |
-| **10 Information** | Every display in 6.23; Listen "a mechanism"; Lockside Listen; the codex pages; the camp's Wax Key line (Q3) |
+| **10 Information** | Every display in 6.23; Listen "a mechanism"; Lockside Listen; the codex pages; the camp's Wax Key line (Q3). **Taken up by the exploration and information design (segment 10, approved 2026-11-23; its 4.1, 4.2, 4.8.2, 4.9.8, 5):** trap grades held in `PartyKnowledge` and drawn exact while Remembered (XI-1, XI-5); the Easy Plain auto-pick and auto-Probe read known patrols only and stand down when their hearing reach crosses a never-Seen square (XI-6; agreed, Q4; M2); TL cards and prompts in the card queue (XI-19; M2); the Ear Trumpet in the basic-vendor row (XI-26; agreed, Q3; M3, conditional); no trap total kept (XI-32) |
 | **11–12 Seeds and validation** | The streams, V11, `trapDigest`, save fields, the reports, `FloorTimeByTheme` with segment-5 rows |
 
 ---

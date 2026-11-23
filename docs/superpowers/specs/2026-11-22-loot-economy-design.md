@@ -308,7 +308,7 @@ the death curve.*
 | 23 | Curses at a discount | Later | lead's call; LE-22 |
 | 24 | V13 `LootEconomy`; reports; "loot last" in the DH 18.2 lever order; kPC first | M1 static, M2 | lead's call; LE-23, LE-24 ⚑ |
 | 25 | Risk incentive fixed by encounter and experience tuning, not loot | M2 | **agreed, Q6**; request to ENM, EP, DH |
-| 26 | Camp sinks (the Wish, the Tithe Bowl, the Ferryman's Note, Blood Price) passed as hooks, no ids, no prices | — | hook |
+| 26 | Camp sinks (the Wish, the Tithe Bowl, the Ferryman's Note, Blood Price) passed as hooks, no ids, no prices; the Tithe Bowl since filled by segment 10 (change XI-24; M3; 8.1) | — | hook |
 
 ---
 
@@ -759,6 +759,11 @@ illegal (tier, category) pair re-weights the category, never the tier.
 - **Keys:** Wax Key sundries stay at most 1 per floor from F2 (TL 6.11,
   **settled**), outside the `sundriesPerFloor` doses (a reading, told
   plainly).
+- **Information counters (M3; changes XI-23, XI-26):** the Lodestring
+  and the Ear Trumpet (conditional, agreed exploration and information
+  Q3) are party counters (cap 1, size 0), never notables, deck cards or
+  scrolls, so they sit outside this split and the `sundriesPerFloor`
+  doses (exploration and information design 4.5.2, 4.6.2).
 - **Supply:** the approved 1–2 per floor, pre-wired as
   `foundSupplyPerFloor`, so DH 5.7 lever 1 (FL 6.8's forecast) is a
   tuning change only.
@@ -1030,7 +1035,8 @@ premium and is logged; its VP is unchanged.
    | Ticket lock (M3) | Approved (TL-32); peg proposal: price ≤ 60% of its cache's VP × 20 |
    | Trader and services | Later (ITEMS 10.9) |
    | Companion hire | **None**: free (CMP 7.8) |
-   | Candidate hooks (no ids, no prices): the Wish, the Tithe Bowl, the Ferryman's Note, Blood Price | Hook (8.1, 12) |
+   | Tithe Bowl (M3): a Lodestring or a Surveyor's Sketch | Filled by segment 10 (change XI-24; exploration and information design 4.6.3); Sketch 15 coin *(illustr.)*, Lodestring pegged at or above a healing potion at that camp (8.1) |
+   | Candidate hooks (no ids, no prices): the Wish, the Ferryman's Note, Blood Price | Hook (8.1, 12) |
 
    **Coverage targets** (design intent passed to the camp owner): coin on
    arrival covers restock at every camp, for the largest legal party at
@@ -1562,6 +1568,12 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
        counted as exposure under this section, respecting CT2
        `ContainerArtBlind` and the `known` field. If refused, its card
        gains F-ROOM (events design 14.2).
+     - *Pending (XI-22, to this owner; M3):* whether an F-TREASURE
+       pointer (one room, tier word, qualifier; 8.2) counts as exposure
+       under this section; recommended **not exposure** (no identity,
+       weaker than F-CACHE). If ruled exposure, it is counted as ruled
+       and the Lodestring price is re-pegged (exploration and
+       information design 4.6.5, 14.2).
      - *M3 if HZ-23 (EV-36):* bypass routes only as skins of FL-generated
        Chutes (`GraphUnchanged`, `XpBandAfterEvents`; events design
        4.4.1, 9.2).
@@ -1987,7 +1999,11 @@ no more loot-bearing containers than fillers (6.4 item 5).
   (rooms, treasures); announcements (the Dream's Due, the purse, the
   Viaticum on F5). The party bar consolidates its floor tallies into one
   floor strip of icon-prefixed counts in a fixed order (potion, rooms,
-  traps, treasures), so the word "found" is not repeated.
+  traps, treasures), so the word "found" is not repeated. **The rooms
+  cell (change XI-11; M2):** reads "rooms e / t", where t is the count
+  line's main-path rooms plus side rooms and e counts Room nodes entered
+  from that same set (Alcoves and corridor segments never count); never
+  split by role (exploration and information design 4.4.4).
 - **Stratum Card:** "Treasures: n" (8.2); the Dream's Due line naming
   its target; on F2–F4 "A heavy purse walks this floor"; on F5 "Before
   the Heart's chamber, the dream sets out provisions: choose one" and the
@@ -1995,12 +2011,28 @@ no more loot-bearing containers than fillers (6.4 item 5).
   told once there. On a Windfall floor (M3) the Treasure line reads
   "Treasures: 7 · one may get away", no new line (loot sources design
   4.5).
-- **Treasure strip:** "k / n" (8.2); once k ≥ n / 2 it adds "best
+- **Treasure field** (the floor strip's "k / n · best remaining" cell;
+  "Treasure strip" retired as a synonym, change XI-19; M2; exploration
+  and information design 4.9.9; FL 9.2's "treasures: k / n" on the count
+  line reads as this field): "k / n" (8.2); once k ≥ n / 2 it adds "best
   remaining: <tier word>", computed from unfound entries and hidden when
   none remain, so floor entry is not a spoiler. **By source (change
   LP-28; M2):** hover breaks n into counts only (open, locked, hidden,
   carried, prize, windfall), never tier, item family or room (loot
-  sources design 4.5).
+  sources design 4.5). **Spent field (change XI-11; M2):** when "best
+  remaining" is Common or nothing countable is left, the field drops one
+  RC6 value step and reads "nothing worth chasing" or "nothing countable
+  left"; while k < n / 2 only "nothing countable left" can fire. The
+  field also feeds the BR 4.16 arena-entry Behind-you line (exploration
+  and information design 4.4.4, 4.4.5).
+- **Pointers (change XI-23; M3):** "counts only, never locations" holds
+  on every free surface; a paid or earned pointer (the Lodestring;
+  F-TREASURE through Yield or a Curiosity gain) may name one room (8.2).
+  It resolves only on the floor entered, never on camp or Two Doors
+  cards, and its string is a map line plus a world trace of 1 s or
+  less, never a persistent floor decal; a pointed notable's loot card
+  gets a "the string ends here" frame, display only (exploration and
+  information design 4.6.2, 4.6.3).
 - **The Dream's Due:** the loot-summary entry is tagged "The dream's due:
   for <name>", with Take defaulted to that member. Once shown, the
   Stratum and strip line turns to a "paid" state. If the target has left
@@ -2008,7 +2040,9 @@ no more loot-bearing containers than fillers (6.4 item 5).
   live to collect" and the item stays an ordinary find. A sidegrade Due
   is tagged "another way".
 - **Tier marks** (renamed from "tier pips"): on the lock card and the
-  container hover only, never a world-space floor decal: 1 to 4 filled
+  container hover only (a container hover on the full map counts as
+  that hover: reading, change XI-7; exploration and information design
+  4.3.2), never a world-space floor decal: 1 to 4 filled
   diamonds (C / U / R / VR), each with its tier word, a shape distinct
   from every existing pip family (the Wager's Disturbance meter, Cord
   pips, vent trigger pips, the Keybearer pip, boss pips). Added to the
@@ -2129,7 +2163,7 @@ card); the toy must be re-run on this configuration before M2 (6.4 item
 | Twin Coffer | Choice width at no value | Low | M3 | **Adopted** (8.4; LE-21) |
 | Curses at a discount | "Cursed items worth more", safely priced | Medium | Later | **Adopted with Curses** (8.5; LE-22) |
 | The Wish (a paid camp mark steering the Due) | Agency; a late sink | Low | M3 | **Hook** to camp and hub (adds a third outside input to ENM 10.5 step 3; that owner flags it) |
-| The Tithe Bowl (coin buys one Stratum fact) | An information sink | Low | M3 | **Hook** (names socket classes "behind risk", never "behind a lock"; unavailable when the party holds a Wax Key; its fact deduplicated through segment 8's per-floor FactLedger, change EV-8, events design 4.4.2) |
+| The Tithe Bowl (one camp service, one purchase per camp: a Lodestring or a Surveyor's Sketch; change XI-24) | An information sink | Low | M3 | **Hook, filled by segment 10** (exploration and information design 4.6.3): the Lodestring (pegged at or above a healing potion) or the Sketch (15 coin *(illustr.)*; room and Alcove outlines with edges and the Stairhead at the next floor's entry, never secret nodes); both resolve at the entered floor's entry or use, never on camp or Two Doors cards; the Lodestring option is greyed while one is held and not offered at camp 4. Names socket classes "behind risk", never "behind a lock"; unavailable when the party holds a Wax Key; its fact deduplicated through segment 8's per-floor FactLedger, change EV-8, events design 4.4.2. *Pending request (XI-24, to this owner):* relax the Wax Key guard for both options; if refused, the guard stays (exploration and information design 14.2) |
 | The Ferryman's Note (borrow against the next floor's coin) | Spend-now tension | Low | M3 | **Hook**, capped: ≤ 30% of the next pool, once per run, never camp 4; replaces interest |
 | Blood Price (a `treatProof` Scarred for +1 step on the camp item) | Pay in blood | Low | M3 | **Hook**: uses one of the next floor's 2 allowance steps (no swap-down); once per run; never camp 4; never VR (the camp cap) |
 | Wager Pot | Stakes at the Wager | Very low | Later | **Parked** (creates coin; a hoarding pull) |
@@ -2183,10 +2217,35 @@ The Dream's Due is in full in 6.6; the Viaticum and the Memento in 6.11.
   death key (floor, theme, killer category) as this record, and never
   changes what is drawn or offered (read by change EV-26; M2 lean;
   events design 4.5.10).
-- **Treasure strip by source (change LP-28; M2):** see 6.15; the
+- **Treasure field by source (change LP-28; M2; "Treasure strip"
+  renamed by change XI-19):** see 6.15; the
   "windfall" count drops by 1 on a nab, a Steal or a getaway, and a
   nabbed card counts under "carried" until it is taken (loot sources
   design 4.5).
+- **Pointers narrow "counts only, never locations" (change XI-23 ⚑;
+  M3; exploration and information design 4.6):** free surfaces stay
+  counts only; a paid or earned pointer may name one room. **F-TREASURE
+  (change XI-22; M3; this owner applies the selector):** candidates are
+  unfound field notables at container sockets on the current floor, read
+  draw-free from LootBind's bound placement and the `LootLedger` flags;
+  excluded are secret caches (agreed, exploration and information Q5),
+  carried notables, boxed-lurker containers, Windfalls, the Viaticum, the
+  signature cache, HE reservations and all of F1. Ranking is role-blind:
+  tier descending, then the room's macro-grid position, then the
+  container's square. Output: one room, its tier word and the qualifier
+  "plain cache" or "behind risk" (from the socket class); at most 2 per
+  floor across all channels. Fact channels on F2–F5; the Lodestring (a
+  run-scoped party counter, cap 1, never a notable or deck card) on
+  F2–F4 only. It draws nothing and never adds, moves, upgrades or
+  re-rolls loot: n, k and Ledgers A, B, C are unchanged. **Value
+  (told plainly):** a pointer adds no value to the floor but can raise
+  the share a hurried party collects (toy: +0.35 VP for lean players,
+  inside the base-to-base+2 band); *pending this owner's confirmation of
+  the band* (exploration and information design 4.6.2).
+- **Floor Atlas (change XI-29; M3):** the run record also keeps each
+  floor's final map with "Treasures found k of n" (no rooms-entered
+  fraction), profile-side display, never a score or achievement, never
+  read by rules (exploration and information design 7).
 - **Report:** `TallyChaseSeconds` (time after the last main-path room
   spent only raising k), median ≤ 30 s.
 
@@ -2532,10 +2591,10 @@ shop presentation and camp sinks (camp and hub); the display (segment
 |---|---|
 | **7b, item rolls and tables** | Records per (tier, category); smart-loot and category weights; the Due, fit, triple and dreamed-option filters; substitution; VR gear content (6.13) |
 | **7c, sources and placement** | Socket tags and ranks (the input to 7a's allocation, 6.9 item 2); lump placement; the Viaticum room; Twin Coffer placement; trimmed-floor sockets; per-encounter caps; trimming containers on F5 and on coin overflow (6.4, 6.14). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 11)** |
-| **Camp and hub** | Shop presentation; the camp reward card's content; vendor stock scaling; the Wish, the Tithe Bowl, the Ferryman's Note, Blood Price; the coverage targets as design intent |
+| **Camp and hub** | Shop presentation; the camp reward card's content; vendor stock scaling; the Wish, the Tithe Bowl (its options filled by segment 10, change XI-24, 8.1), the Ferryman's Note, Blood Price; the coverage targets as design intent |
 | **Segment 8 (Dream Fragments)** | The boss-fact family the elite intel line shares. **Taken up by the events design (segment 8, approved 2026-11-22; changes EV-7, EV-8, EV-15):** the per-floor FactLedger (6.9 item 6); its pending requests to 7a and 7c, `stepFunded` and F-CACHE, stay open (events design 4.4, 11) |
 | **Segment 9 (bosses)** | Signature records; the Memento card. **Taken up by the boss rooms design (segment 9, approved 2026-11-22; changes BR-28, BR-29, BR-34, all reading this design unchanged):** the card, Viaticum and Memento interplay (its 4.11.2); the `bossQueue` order behind the elite intel line (its 4.12); the Perilous Door's Nightmare Rendition beside the 1-of-4 card (its 4.14.2; M3) |
-| **Segment 10 (UI) and audio** | The Stratum Card order, the floor strip, tier marks, plate loot badges, the Steal preview, the Dream's Due tags, the Viaticum offer UI, the camp-4 warning, ledgers, tags, the audio stings (6.15) |
+| **Segment 10 (UI) and audio** | The Stratum Card order, the floor strip, tier marks, plate loot badges, the Steal preview, the Dream's Due tags, the Viaticum offer UI, the camp-4 warning, ledgers, tags, the audio stings (6.15). **Taken up by the exploration and information design (segment 10, approved 2026-11-23; changes XI-7, XI-11, XI-19, XI-22–XI-24, XI-26, XI-29):** the Treasure field naming, rooms cell and spent field (6.15); F-TREASURE and the Lodestring (8.2); the Tithe Bowl (8.1); its requests to this owner, the exposure ruling (6.9 item 6) and the Wax Key guard (8.1), stay open (its 4.6, 4.9.9, 11) |
 | **Segment 11 (seeds)** | The `lootPlan` derivation and keyed grandchildren, the draw table (6.10 item 1), step 3a and the LootBind position, the ghost and dummy draws, the atomic commit |
 | **Segment 12 (validation)** | V13s, V13g, the (m) integration test, and the reports |
 | **ENM / EP / DH owners** | The elite room's and the Annex's risk cost (LX16; agreed, Q6) |

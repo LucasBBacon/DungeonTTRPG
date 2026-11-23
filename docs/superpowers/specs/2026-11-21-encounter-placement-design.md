@@ -1603,8 +1603,10 @@ result): `H(floorSeed, unitId, "lurkStealth", band)` with band ∈
 and 1 as in TL 6.22. The placement value is the standing Stealth until
 the first band. **At a band:** the trigger is the nearest party unit
 entering it; the value is compared against the highest passive
-Perception among party units with line of sight to the lurker; with none
-in line of sight, that band is spent (the mirror of ENM 12.2's ignored
+Perception among **non-Downed** party units with line of sight to the
+lurker (change XI-2 to ENM 12.2's lurker band, approved 2026-11-23; M1;
+Downed units contribute no knowledge; exploration and information design
+4.1.2); with none in line of sight, that band is spent (the mirror of ENM 12.2's ignored
 band trigger). `unitId` = (groupId, position index), so it is stable
 under fallback re-placement. The hashes are replay-stable and
 independent of draw order. They amend ENM 12.2's "lurker Stealth … use
@@ -1652,7 +1654,12 @@ named in 17 (XK-H6), and the three rolls are kept. Model B's
   and must read at all 4 camera rotations (V7 check). **Present if and
   only if a Waylay lies beyond**, so never a decoy (RC9). It is never on
   floor squares (RC1 places a material only on its own squares; RC1+
-  keeps dressing off walkable squares; XK6). Listen reports "still";
+  keeps dressing off walkable squares; XK6). **Pending (XI-18; M2):**
+  when its wall is cut away or faded, the Spoor mark projects a
+  front-square half-rim decal, readable at all 4 rotations, as a
+  projection of a wall mark, not a floor mark (LP Rathole precedent);
+  the EP owner confirms (exploration and information design 4.9.7).
+  Listen reports "still";
   **trained Listen adds which Portal is watched** (not just "waiting"),
   so Perception training buys a better read, not the same one (XF3d).
 - **The right read pays visibly (lead's call, after the check):** when
@@ -1709,7 +1716,10 @@ party-Surprise rounds *(illustr.)*.
 
 - **Patrol File** order (draw-free): soldier or brute, leader,
   artillery, skirmishers, minions last. The route is drawn once seen and
-  feeds the rest preview (**settled**).
+  feeds the rest preview (**settled**). **Display (change XI-6; agreed,
+  Q2; M2):** the route is drawn on known squares only, with "continues"
+  ends, and every consumer reads `PatrolForecast` over known patrols
+  (exploration and information design 4.8.1).
 - **Cover-room window** (EP-17): the Circuit `coverRoom` holds ≥ 2 KP4
   Hide spots with line of sight to a lane square within 4, out of the
   lane's sight from the previous waypoint. On F2–5 the window is in a
@@ -1807,7 +1817,8 @@ counted in `StealthOpenable`. Its XP stays in the pool (`SkippablePool`,
   footsteps (strengthens invariant 5).
 - **Arrival-Portal arrows** on the hearing outline (segment 10): the
   party sees where a joiner would come in, and Set and Hold the Line has
-  a door to hold.
+  a door to hold. The outline is labelled "known groups only" (XI-13, a
+  wording reading; M2; exploration and information design 4.8.4).
 - **No off-map reinforcements on any floor.** Boss reserves stay with
   segment 9 (ENM 17.5). **Reading (BR-11; M2; pending the EP owner's
   confirmation, with the enemies owner):** segment 9's reserve sockets
@@ -2099,10 +2110,15 @@ group of 6.14 (boss rooms design 4.7.4).
   had not already shown. Rejected: B, the band keeps ignoring
   hidden lurkers.
 - **Rest preview** (EP-16): adds Alerted, Searching and Pursuing groups
-  to the seen patrol routes.
+  to the seen patrol routes. Its movers read `PatrolForecast` over known
+  patrols (change XI-6; agreed, Q2; M2; exploration and information
+  design 4.8.1).
 - **Hearing outline:** arrival-Portal arrows; Hedgehog groups marked.
 - **Approach band out of combat** (a DH 17.3 change): M3, a later client
-  decision (EP-41).
+  decision (EP-41). **Also waiting on EP-41 (XI-12, XI-27; M3):** the
+  noticing step tag's odds on the move preview and Cased's noticing-odds
+  band, each also on the ENM 13 flag; if EP-41 is refused, neither ships
+  with odds (exploration and information design 4.8.3, 4.5.2, 14.2).
 - Display only: no draw, no state change; the AI never reads it
   (invariant 10).
 
@@ -2854,6 +2870,7 @@ logged.
 | `ReEngageRate`, `AnnexEngageRate`, `ContainersOpened` | Reported (containers −10% against baseline = the paranoia alarm) |
 | `F1FeatureAdjacency` | Reported |
 | `FormationRead` (playtest) | Name and use the counter ≥ 70% |
+| `PatrolFightRate` (change XI-6; agreed, Q2; M2): combats per floor, F1–5, whose first noticing roll was made by a Patrolling group, over the same count in the BASE arm | ≥ 60% *(illustr.)*; **a gate**, owned by EP, read at M2 sign-off and every balance pass; on a miss, segment 10's cut order (exploration and information design 4.8.1, 9.3) |
 
 **New lead's call:** `RoundsPerFightDelta` is TL's report name (TL 6.9,
 ≤ 0.1 for traps); segment 6 reports its own line under the same name
@@ -2902,7 +2919,7 @@ sockets and pieces (RT); hazards (HZ); traps, locks and `trapsResolve`
 | **7 Loot** | Carriers on sockets the party can reach for Steal (never a nook; never a ward behind two fronts on F1–2); the Champion notable; the bait-cache prop family (CT1, LP-15; re-skins LP-16 pending; loot sources design 5.1, 5.3); activity containers (a dice pot, a feast plate); Annex prizes (none of its own: loot economy design 6.9 item 1); boxed-lurker contents (loot economy design 6.9, LE-20). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 4.8, 5)** |
 | **8 Events** | Activity vignettes in Q rooms ("remains of a revel"); no event spawns or moves units; Cowed kneeling never crosses a door. **Taken up by the events design (segment 8, approved 2026-11-22; its 4.13):** vignettes are Glimpse dressing beside the Q room's Curiosity, under RC1+, never a second decision (M2); "no event spawns or moves units" is held: Curiosity noise is generic noise that moves units only through the hearing rules, never a Lure and never sets `luredThisFloor` (EV-14, a reading pending the EP owner's confirmation, with the enemies owner; M2); figures are framed non-unit map objects, never on a walkable square (events design 4.11; EV-45; M2 implied figures, M3 frame); M3 Overtures may apply Soaked, Oiled or Revealed to a tied group at its fight's first round, never on the elite, the Annex, the boss or a lurker host (for Revealed) (EV-32, a reading of this row pending the EP owner, enemies owner request; M3; events design 4.9) |
 | **9 Boss arenas** | Retinue escorts, arena start zones ≥ 9, the patrol joiner, Keepsake dressing. **Taken up by the boss rooms design (segment 9, approved 2026-11-22; its 4.5, 4.7.4):** arena escorts use segment 9's `ArenaFormation`s, Retinue one allowed shape on F2–5 (BR-19, a request pending the EP owner, 6.14; M2); every F2–5 Boss Court holds ≥ 1 non-fearless group (agreed, Q4; M2); `answers{}` extended to bosses as `BossAnswerMatrix` (BR-19, 6.16; M2); reserve sockets read as keeping "no off-map reinforcements" and `ArrivalThroughPortal` (BR-11, a reading pending the EP owner's confirmation, 6.12; M2); the patrol joiner joins under the 1/1/2/2/2 caps and counts in AddCap (BR-13, an FL-21(e) proposal the enemies owner rules) |
-| **10 Information** | Formation and Keystone chips (`ChipNoLeak`; the read-surface table of 6.20); the Read card; the Perception hold overlay; the Lore counter line; the Listen activity word and watched Portal; Spoor marks; arrival-Portal arrows; the seen-tell band marker (6.20); rest-preview movers; the Lore roster preview of formations; "Line broken" and "Caught facing the door" |
+| **10 Information** | Formation and Keystone chips (`ChipNoLeak`; the read-surface table of 6.20); the Read card; the Perception hold overlay; the Lore counter line; the Listen activity word and watched Portal; Spoor marks; arrival-Portal arrows; the seen-tell band marker (6.20); rest-preview movers; the Lore roster preview of formations; "Line broken" and "Caught facing the door". **Taken up by the exploration and information design (segment 10, approved 2026-11-23; its 4.3.5, 4.8, 4.9.7, 5):** every surface placed in its catalogue (5), EP 13 at 5 surfaces; the Listen bubble carries the activity word and watched Portal if EP-9 and EP-12 are ruled (FL-18 requests; 4.3.5); hold squares and fall-back stay the EP-28 tier, if ruled; arrival-Portal arrows on a hearing outline labelled "known groups only" (XI-13, a reading; M2; 6.12); rest-preview movers read `PatrolForecast` over known patrols (XI-6, agreed, Q2; M2; 6.20); the `PatrolFightRate` gate, owned by EP (XI-6, agreed, Q2; M2; 11.3); Spoor marks projected under cutaway (XI-18, pending the EP owner's confirmation; M2; 6.8.6); the noticing step tag's odds and Cased's odds band wait on EP-41 (XI-12, XI-27; M3; 6.20); Downed units excluded from the lurker band (XI-2; M1; 6.8.5) |
 | **11 Seeds** | The `encounters` node, its draw table, the `retry1` child, the per-band `lurkStealth` keys |
 | **12 Validation** | V12, the reports, the CMP-8 tests extended to formations and the solo column |
 
@@ -3482,6 +3499,14 @@ wave or a later design triggers them; each fallback is a new lead's call
   room) (M2). If the 6.14 request is refused, arena formations are
   authored as Retinue variants inside 6.14's shape on F2–5 (boss rooms
   design 14.2).
+- **Pending from the exploration and information design (segment 10,
+  approved 2026-11-23):** the EP owner confirms the Spoor projection
+  under cutaway (XI-18, 6.8.6; M2), rules EP-28 (hold squares and
+  fall-back), and owns `PatrolFightRate` (XI-6, 11.3; M2). If the EP
+  owner declines `PatrolFightRate`, segment 10 owns the report and the
+  gate is unchanged; if the client refuses EP-41, watch lines ship
+  without the noticing step tag's odds and Cased ships without its odds
+  band (exploration and information design 14.2).
 - **At M3:** the approach band out of combat (EP-41); two-group "watched
   sleep" rooms.
 - **Later:** the Errant (a MAIN 4.3 change, client only); a Rumour-like

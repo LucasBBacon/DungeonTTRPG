@@ -2383,6 +2383,15 @@ all four launch classes and of the Arcanist pip-trap and novice reports
   list (trap, secret, the boss's Lore entry, a room's layout); the
   priority order is the default selection. One fact per fight is
   unchanged.
+  **Pending request (exploration and information design 4.6.4; XI-25;
+  M3):** F-TREASURE joins the list after F-KEY (default priority
+  unchanged), choosable through Pick the Question at most once per floor
+  through Yield, inside the shared cap of 2; kill switch: above 50%
+  *(illustr.)* of picks (`YieldCategoryMix`), restricted to the optional
+  elite. Requested of this owner and the enemies owner (ENM 14.6). Not
+  ruled here; until both owners rule, the list above is unchanged, and if
+  refused the Lodestring's sources are the Tithe Bowl and a Curiosity
+  gain only (exploration and information design 14.2).
 - **Opening Cry (a `voice` offer; `triggerMenu` on Spur):** 7.13. It
   consumes your first turn's Spur: the `spur` pool stays spent through
   the end of your first turn, so the turn-start refill is skipped and it
@@ -2984,6 +2993,10 @@ consumables 16.8 finds none, and "15 scrolls" is found there.
 - **The events design (segment 8):** EV-13, the Herald-lit "Show of
   Force costs no slot this floor" variant, a pending request to this
   owner and the enemies owner (M3 if ruled; 8.2; events design 4.8).
+- **The exploration and information design (segment 10):** XI-25,
+  F-TREASURE through Yield via Pick the Question (once per floor, after
+  F-KEY; kill switch), a pending request to this owner and the enemies
+  owner (M3 if ruled; 10.5; exploration and information design 4.6.4).
 - **The boss rooms design (segment 9):** BR-19 narrows HR-21's
   escort-and-reserve clause for floors 2–5 (**agreed**, boss rooms Q4,
   2026-11-22; M2; 7.16); the Herald answer windows, the "Resolve

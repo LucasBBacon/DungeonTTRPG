@@ -894,7 +894,12 @@ rule 6's charged exclusion is extended to cover (TR-4, armour owner;
   movement, and for a Furnishing's own travel (Shunt, Kick). This
   extends the M0 skeleton plan's `CornerCut` rule, which covered walls
   only, to every movement-blocking square (TR-5); it is not decided
-  text.
+  text. **Sight reads differently (reading, XI-2; approved
+  2026-11-23):** `CanSee` is blocked on a diagonal only when **both**
+  orthogonal neighbours block sight, so a unit can see a square it
+  cannot step to diagonally; this rule is unchanged, and anything
+  treated here as a wall for lines also blocks `CanSee`
+  (`LosVsLineAgree`) (exploration and information design 4.1.2).
 - **Lines** (TR-5): a Tall piece is a wall for lines, Skewer, reach and
   area origin sight (ability 8.1, weapons 7.6). Low pieces, Furnishings
   and hazard pieces never stop a line or reach, and their squares are
@@ -2719,7 +2724,7 @@ Segment 3 takes the knock-into *system*, not drop hazards.
 | 7 Loot | Furnishings never hold loot (reaffirmed, change LP-12; inset containers instead). **Pending request (change LP-11; segment 7c asks; M2):** set pieces an Alcove can take as its default occupant when a container would exceed the floor's container cap; if none are offered, the Alcove keeps a container and the cap is logged, not enforced (loot sources design 4.2, 14.2) | Containers and contents |
 | 8 Events | Furnishing kinds by id. **Pending request (change EV-2; segment 8 asks; M2):** wall-mounted (RC1+) Alcove set pieces that can host the floor-1 Curiosity, first in the F1 host order; such a set piece takes the set-piece slot LP-11 prefers, never empties a leaf, never displaces a container 7c's cap needs and never sits on a walkable square; if none are offered, the F1 host falls to a free leaf side room, then none, logged; `F1CuriosityPresence` is reported to FL and segment 3 before F1 pool sizes freeze (events design 4.2, 14.2) | Events that name a Furnishing kind; Curiosity content and placement |
 | 9 Boss rooms | 6.11's caps, phase sockets and `PhaseSocketsBoth` | Interiors, counterplay identity, each boss's one authored terrain move (arena templates and Guises, change BR-1; boss rooms design 4.1, 5) |
-| 10 Exploration and information | The previews and chips of 6.12; the "Needs a tall piece to hide" reason; glyphs | Overlays, chips and UI |
+| 10 Exploration and information | The previews and chips of 6.12; the "Needs a tall piece to hide" reason; glyphs. **Answered by the exploration and information design (segment 10, approved 2026-11-23; its 5, 9.2):** every 6.12 surface placed in its catalogue; `PreviewExactness` extended to the noise preview and Detour quote; the `CanSee` corner reading (XI-2; 6.2.1) | Overlays, chips and UI |
 | 11–12 Seeds and validation | The `terrain` stream and its draw counts, `terrainDigest`, V9 enumeration, `PreviewExactness` | The stream tree, release seed set, retry logging |
 
 ---

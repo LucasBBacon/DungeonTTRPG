@@ -686,6 +686,20 @@ checked against Lone Blade and Caught.
 | `leans[]` | Stage 1 unchanged: stealth, surprise and Steal **P**; own tempo **P**; single-target damage **s**; skills **s**; exploration **s**; mobility **s**; items (Trapwright lens); morale (Cutthroat lens: Herald + Shade = 2 classes, legal); reactions (Swordsworn lens at the unlock tier: Vanguard + Shade = 2, legal) |
 | Tools, not leans (SH-27) | Duck; Tainted Blade's Poisoned; Make an Example's Frightened; Tripline's Prone; Drag Line's movement. The control row (Arcanist P, Herald s) and the damage-types-and-riders row are full |
 
+**Pending request: Cased (exploration and information design 4.5.2;
+XI-27; M3, conditional on the Trap Eye re-scope, TL-6).** The
+exploration lead asks the Shade owner for a 0-click class rider: when
+the Shade has had line of sight to every member the party has seen this
+floor and that is not Hidden of a known unaware group for 2 consecutive
+ticks *(illustr.; `cased.ticks`)* with no successful noticing roll by the
+group, the group is Cased for the floor (the window restarts whenever a
+new member is seen). Cased gives the one-lap patrol forecast horizon
+(exploration and information design 4.8.1), a "Cased" label ("from what
+you have seen"), and a noticing-odds band only if EP-41 is ruled and the
+enemies 13 flag allows it. It counts only seen, non-Hidden members so it
+never leaks a Hidden member. Not yet ruled by the Shade owner; if
+refused, or TL-6 is unruled at M3, Cased is held to Later.
+
 ### 7.2 At-wills and the bonus action
 
 **At-wills:**
@@ -1366,6 +1380,8 @@ tripline, caughtOut, dust, dragLine | trickShot]`.
     to every Mechanics-trained unit, so (b) adds nothing as written. The
     re-scope is the Shade owner's call, pending; the recommendation is
     double proficiency on trap sense (traps and locks design 6.4).
+    The pending Cased rider request (7.1; exploration and information
+    design 4.5.2, XI-27) waits on this ruling.
 - **Caught** (Opening trigger, open tier; launchers and thrown attacks
   qualify; SH-17):
   - A hostile counts if, since the end of your previous turn, it took
@@ -1799,6 +1815,11 @@ naming pass)**
   unchanged. Pursuit, Search and area aiming follow the false square.
   Monster areas follow invariant 7, so they never knowingly hit their
   own allies. A ghost marker shows on the party side.
+  - **Pending request (exploration and information design 4.2, 5;
+    XI-27):** the ghost marker uses a hollow double-footprint ring, never
+    the Afterimage shape. Not yet ruled by the Shade owner and art; if
+    refused, the Afterimage's base becomes a square paper tag with a
+    punched hole instead.
   - **Not a targeting override (lead's call; classes 6.3):** False Trail
     writes information into the awareness record that the AI reads under
     enemies 11.2; the AI still scores freely on what it knows. It is an
@@ -2433,6 +2454,9 @@ finds the `TriggerFromFive` scope note; a grep for
   density checks as M2 reports and M3 gates; the Trapwright is M3 (14).
   Owed by the Shade owner before M3: the level-3 parity rerun with the
   universal trap rows present, and the Trap Eye re-scope (TL-6; 8.2).
+- **The exploration lead (pending requests, exploration and
+  information design 4.5.2, XI-27):** the Cased rider (7.1; M3,
+  conditional on TL-6) and the False Trail marker shape (9.1).
 - **The enemies owner:** the body-noticed rule (the Cutthroat
   second-kill route); the AI force-door term (Wedge); Lure acceptance;
   Counterstroke deterrence pricing.

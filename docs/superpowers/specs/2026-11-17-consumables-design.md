@@ -730,7 +730,7 @@ checked against pegs K1 and K2 (9.3).
 
 | Channel | What |
 |---|---|
-| Basic vendor **(agreed)** | Supply; healing potions in pre-rolled stock of 2–3 *(illustr.)*; tonics and Remedy, unlimited (price is the knob); 1 Wax Key only when the party has no Mechanics-trained member (M2; items 10.3; traps and locks design 6.11; change TL-25, **agreed, Q3 of 2026-11-21**) |
+| Basic vendor **(agreed)** | Supply; healing potions in pre-rolled stock of 2–3 *(illustr.)*; tonics and Remedy, unlimited (price is the knob); 1 Wax Key only when the party has no Mechanics-trained member (M2; items 10.3; traps and locks design 6.11; change TL-25, **agreed, Q3 of 2026-11-21**); 1 Ear Trumpet (a run-scoped lane-gap party counter, cap 1, not a consumable record; 15 coin *(illustr.)*) only when no party unit (the hero included) is Perception-trained on the camp-entry snapshot, stable for the visit (the TL-25 test); its effect is suspended while any living party unit is Perception-trained and lasts through the next floor; stocked only if the M2 report `SoloListenClickShare` misses (M3, **conditional**; items 10.3; exploration and information design 4.5.2; change XI-26, **agreed, Q3 of 2026-11-23**) |
 | Sundries (new loot class, CN-19) | Common consumables: healing potion, tonic, water, oil; Fire Bomb from floor 2. Drawn per floor **outside the notable count**, inside the fixed budget (items 2), `sundriesPerFloor` doses set per floor *(illustr. 3–5 on floors 1–2, 4–5 on floors 3–5)*. **At least 1 healing potion per floor** (`healingSundryMin` 1, drawn first; 2 on floors 4–5 only through the pre-authorised raise) and **at most 3** (`healingSundryMax`) **(client, Q3)**: the guaranteed potion goes in a main-path container in the first half of the main path, openable with no check, and is never substituted; random potions lean off-path (`healingOffPathPermille` 600) (death and healing design 12.4, 12.5) **(change DH-40)**. From floor 2, **at least 1 and at most 2 offensive flasks** per floor (`offensiveSundryMin`, `offensiveSundryMax`), the minimum drawn before the other sundries **(lead's call)**. Mostly containers, plus the settled single carried consumable per encounter |
 | Notables | Scrolls, wands, the Greater Fire Bomb and the talisman count in the 6–8 notables per floor and the camp channel; their share steered by category weights by depth and the F5 tactical cap, ranges unchanged (M2; loot economy design 6.2; change LE-17) |
 | Camp channel (notables shop, camp reward card) | Scrolls (never healing scrolls, P1), wands, the Greater Fire Bomb, all with channel `camp` (shop and reward card); the talisman **only** through `campReward` (the reward card, never the shop; CN-1) |
@@ -1456,7 +1456,7 @@ Herald declined; Herald design 8.8, HR-24).
 | Aid, Heroism | Max HP or temporary HP |
 | Prayer of Healing, Mass Healing Word; any healing wand | Area healing; free healing |
 | Lesser Restoration | Copies the tonic |
-| Identify, Detect Magic | Knowledge; camp identifies free |
+| Identify, Detect Magic | Knowledge; camp identifies free (kept; exploration and information design 4.5.3) |
 | Mage Armour, Shield of Faith | AC on items |
 | Summons | No summon system |
 | Plain scrolls (`any`) | Later hook only (option C) |
@@ -1468,6 +1468,11 @@ Herald declined; Herald design 8.8, HR-24).
 
 1 potion, 1 tonic, Remedy, 4 flasks, 15 scrolls (Herald design 8.8;
 change HR-24), 4 wands; the phial gated.
+
+**M3 (change XI-23):** +1 run-scoped party counter, the Lodestring
+(Wax Key model; never a scroll, a deck card or a notable; exploration
+and information design 4.6.2). The Ear Trumpet (M3, conditional; 10) is
+a vendor counter outside this count.
 
 ## 17. Licensing
 

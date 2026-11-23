@@ -2304,7 +2304,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
 - **Revealed** — minor · **M2**
   - Effect: on application it ends Hidden, Invisible, Veiled and Blurred;
     it cannot regain them; attacks against it ignore concealment. Its
-    outline shows only while an opposing unit has line of sight.
+    outline shows only while an opposing unit has line of sight (`CanSee`;
+    change XI-2; exploration and information design 4.1.2).
   - Intensity: binary.
   - Duration: `turns:2`; tonic.
   - Sources: radiant rider on a hidden or invisible target **(change C9)**

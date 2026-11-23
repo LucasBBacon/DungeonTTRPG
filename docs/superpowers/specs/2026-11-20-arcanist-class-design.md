@@ -1476,6 +1476,18 @@ teleport rule), Elemental Endurance (Resisting), a brittle hex
 8.4 aura ruling and consumables 16.7 wording; AM-6), Quench (a
 cleanse-lean ruling), readied casts (non-goal).
 
+**Pending request (exploration and information design XI-27,
+2026-11-23; M3; the Arcanist owner rules):** **Walls Have Ears**, a
+batched Listen: out of combat, 1 click, 4 ticks *(illustr.)*, no slot
+(owner's call); listens at every closed, unlistened door of the current
+space at once, each counting as that door's once-per-floor Listen;
+trained detail only if a Perception-trained member is in the party;
+never through Hairlines or the Bossgate; never Hidden units; results as
+Listen bubbles (exploration and information design 4.5.2, 4.8.1). The
+request calls it a ritual; the owner rules it against the "rituals"
+anti-goal (2). If refused, no batched Listen (exploration and
+information design 14.2). Not decided here until the owner rules.
+
 ### 8.9 Concentration, control and lockout audit
 
 - Concentration: Grasping Roots, Slowing, Cordon. A three-way choice.
@@ -2738,6 +2750,9 @@ may raise it to two" in ability 6.5 finds the Arcanist exclusion.
   `classTags` (8.10); unclaimed items default to Later.
 - **The floor-pacing owner:** lever 5 (boss door at level 3), shared
   with the Shade's request.
+- **Exploration and information (segment 10):** **pending request
+  XI-27** (M3): Walls Have Ears, a batched Listen (8.8; exploration and
+  information design 4.5.2); the Arcanist owner rules.
 - **Companions:** an Arcanist recruit kit as a signature slice that does
   not copy Overchannel or the subclass Arts. Answered by the companions
   design (`2026-11-20-companions-design.md`, approved 2026-11-20): the

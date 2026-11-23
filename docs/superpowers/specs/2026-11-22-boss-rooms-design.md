@@ -422,7 +422,7 @@ Lessons:
 - **F1 guard (M2+):** while the Antechamber Catch-up is enabled (M2+; RS 9.4, RT-8) and `antechamberCatchUpApplied` is false, trigger (b) is suppressed and the boss and escort cannot notice (CS5). The hero therefore always meets the F1 boss at level 3 from M2. In M1 there is no Catch-up, and `ArenaEngaged` fires on (a) or (b) with no guard **(lead's call, after the check)**.
 - Order on the same tick: Antechamber Catch-up (F1, M2+) → `ArenaEngaged` (Graces and event riders end, EV-11 order kept) → Take Places (BR-4) → combat start. **If combat is already active** (an F2–5 Forecourt patrol fight), the boss group joins it as joiners under ENM 12.4 item 4 (initiative rolled at the start of its entry round) and Take Places is skipped **(lead's call, after the check)**.
 - A re-engagement after a reset fires no new `ArenaEngaged`, but **every arena combat start while `sanctumEngaged` is set processes `endsOn: arenaSeal` again**, so a Grace or event rider taken elsewhere on the floor between engagements ends before the arena fight, as EV 4.4.3 requires ("a Grace never fires in the arena"). Graces cannot be regained in the Sanctum **(lead's call, after the check; told to the EV and conditions owners under BR-3)**.
-- **Entry confirm (UI only, lead's call, after the check):** the first move of a party unit into a doorway band asks "Enter the arena? The Sanctum will not let you sleep until <boss> falls." The confirm can be turned off in settings; the Playbill and the door card carry the same line. No rule changes.
+- **Entry confirm (UI only, lead's call, after the check):** the first move of a party unit into a doorway band asks "Enter the arena? The Sanctum will not let you sleep until <boss> falls." The confirm can be turned off in settings; the Playbill and the door card carry the same line. No rule changes. **The confirm also carries the Behind-you line** ("Behind you: 2 rooms not entered · Treasures 5 / 7 · best remaining: Uncommon"; rooms not entered exclude the arena and every room reachable only through it; hidden in the spent state; 0 added clicks); **with the confirm turned off**, the same line shows once, as a non-modal status-ribbon toast, the first time a party unit enters the arena's doorway band **(change XI-11; lead's call; told plainly; M2; exploration and information design 4.4.4)**.
 - The conditions doc's data id `arenaSeal` stays as an alias in `endsOn`. Display never says "seal" and never shows a door closing.
 - EV's BC4 hook ("segment 9 may declare Grace exceptions") is answered: **no Grace exceptions in M2**.
 - `ArenaEngaged` also starts the Sanctum rest rule (4.2.5) **(new lead's call: the rule's start event is this one, so the F1 Catch-up order holds for it too)**.
@@ -788,10 +788,12 @@ Exposure *(illustr.; RS 10.6 clears 0.97 / 0.90 / 0.80 / 0.70)*: the F1 boss is 
 - The 13.2 banner with the universal sting (RC7); the phase card; the threshold preview; the Playbill; Take Places; Device previews; reserve silhouettes and wake chip; Gambit squares (M3).
 - The reward card (1 of 3 / 1 of 4 with the Perilous badge); the Memento victory screen; the F-BOSS floor panel; the carried-use floater; pull-back zoom (w + h ≤ 42); an optional skippable intro card ≤ 2 s.
 - The Sanctum rest refusal ("The Sanctum will not let you sleep.") on the Rest button, and the arena-entry confirm (4.2.1, 4.2.5).
+- **The arena-entry confirm gains one Behind-you line** (rooms not entered, the Treasure field, "best remaining" under LE's k ≥ n/2 rule; no secrets found/total, no loose-end count); with the confirm turned off, a one-time non-modal status-ribbon toast at the doorway band (4.2.1) **(change XI-11; lead's call; M2; exploration and information design 4.4.4)**.
+- **Card queue slots (change XI-19; lead's call; M2):** the arena-entry confirm with the Behind-you line is queue slot 2 (after lethal, end-turn and ally confirms) and the boss phase card slot 3, above reward, Viaticum and loot summary (slot 5); a displayed card is pre-empted only by slot 1 (exploration and information design 4.9.8).
 - Never the word "seal".
 
 ### 4.17 Hooks to segments 10–12
-- **Segment 10:** as 4.16, plus the Phase Score (BR-36), the Boss Ledger and Grudge pages (M3, BR-35), grouped escort playback.
+- **Segment 10:** as 4.16, plus the Phase Score (BR-36), the Boss Ledger and Grudge pages (M3, BR-35), grouped escort playback. **Answered** (XI-11, XI-19; exploration and information design 4.4.4, 4.9.8, 5).
 - **Segments 11–12:** `BossVariantKey` hash and draw counts; template-local coordinates; the event order; the launcher F1-boss rule's place in the launcher order (BR-25); V17s/g/t; the reports and arms (9); release-seed coverage of every (boss, Rendition, mirror).
 
 ---
@@ -1007,7 +1009,7 @@ Exposure *(illustr.; RS 10.6 clears 0.97 / 0.90 / 0.80 / 0.70)*: the F1 boss is 
 - **BX5** A boss is never immune or resistant to its own arena clock's type.
 - **BX6** (M3) The party always owns a verb on the arena clock.
 - **BX7** Safe footing: in every socket and clock state, ≥ 2 × party size walkable non-footprint squares within 3 of each start zone and Arch.
-- **BX8** At most 3 telegraph layers at once (due overlay, signature banner, reserve or (e) mark); a 3-second glance test ("what happens at round end?"), run on the map and the plate.
+- **BX8** At most 3 telegraph layers at once (due overlay, signature banner, reserve or (e) mark); a 3-second glance test ("what happens at round end?"), run on the map and the plate. (Read, unchanged, by segment 10's combat mode and budgets: ≤ 3 telegraph layers; change XI-15, exploration and information design 4.9.4, 4.9.5.)
 - **BX9** No clock escalates with round count.
 - **BX10** F1: no harmful arena act at any tier.
 
@@ -1288,7 +1290,7 @@ Boss arm (fixed arrival states per class × size × floor × Rendition, both Con
 | **FL owner** | BR-1 (`arenaCell` sized to the authored arena), BR-31 (Forecourt restability), FL-21(a) |
 | **EP owner** | BR-11 readings; BR-19 (EP 6.14 formations, `answers{}`) |
 | **Main design owner** | BR-2 (MAIN 6.3 sentence), BR-3 and BR-4 (MAIN 4.3, read), BR-25 (`recentRuns[].f1BossId`), BR-35 |
-| **Segment 10** | 4.16 |
+| **Segment 10** | 4.16. **Answered by the exploration and information design (segment 10, approved 2026-11-23; XI-11, XI-19; its 4.4.4, 4.9.8, 5):** the Behind-you line on the arena-entry confirm; the card-queue slots; every 4.16 and 4.17 surface placed in its catalogue |
 | **Segments 11–12** | 4.17 |
 
 **Hook answers:**
@@ -1613,7 +1615,7 @@ The owed rows are the single list in 13; by owner:
 - **The CMP owner:** BR-21.
 - **The VG owner:** BR-18 (size-gated verbs).
 - **The main design owner:** BR-2 (MAIN 6.3 sentence), BR-3 and BR-4 (MAIN 4.3 reading), BR-25 (`recentRuns[].f1BossId`), BR-35 (`bossMemory` in the profile save).
-- **Segment 10 (UI):** 4.16.
+- **Segment 10 (UI):** 4.16 (answered: XI-11, XI-19; exploration and information design 4.4.4, 4.9.8, 5).
 - **Segments 11 and 12 (seeds, validation):** 4.17; V17 (BR-39); the launcher order (BR-25).
 - **The simulator:** every report of 9.3 and every arm of 9.4.
 - **Art, audio and writing:** 5, 6.

@@ -439,7 +439,7 @@ Every ability declares exactly one cost **(lead's call)**:
 | Draw or open a Drape: in combat, drawing is once per Drape per round, never while a hostile is adjacent to it or threatens it with reach **(change FL-7, floor layout design 9.2; M2)** | Free out of combat; drawing in combat, action |
 | Squeeze (1–3 narrow squares): Acrobatics on the keyed `checks` stream, keyed by the object's `traversalIndex` (traps and locks design 6.12, 6.22; change TL-3). Out of combat the leading unit makes one check, no retry; on a pass the party goes through, on a failure it still goes through after +4 ticks *(illustr.)* with noise 4 at the mouth nearest the party. In combat each unit checks as it enters: a pass moves it in and ends its movement there (it continues next turn with no new check); a failure ends its movement at the mouth, no retry that round. Monsters never use a Squeeze **(change FL-7, floor layout design 9.2; M2)** | Out of combat one party check; in combat part of movement |
 | Lift a Latch, from the bar side only: no check, silent; it then becomes a Door. Monsters never lift it **(change FL-19, floor layout design 9.2; M2)** | Out of combat 1 tick; in combat 1 square of movement |
-| Listen at a closed door: out of combat; no roll, no stream draw, noise 0; reports each non-Hidden group in the room beyond at that moment (trained Perception adds the size band and "passing"); once per door per floor. Information only **(change FL-18, floor layout design 9.2; M2; owned by dungeon generation segment 10)**. *Pending request (EP-9, encounter placement design 6.7, 6.20; M2), not a rule until the ability model owner rules:* trained Perception also adds the group's activity word ("dice", "snoring", "chanting") beside the size band; if refused, the activity shows only on sight | Exploration action (2 ticks); passive and free for a party with a member trained in Perception when auto-walk pauses at the door |
+| Listen at a closed door: out of combat; no roll, no stream draw, noise 0; reports each non-Hidden group in the room beyond at that moment (trained Perception adds the size band and "passing"); once per door per floor. Information only **(change FL-18, floor layout design 9.2; M2; owned by dungeon generation segment 10)**. *Pending request (EP-9, encounter placement design 6.7, 6.20; M2), not a rule until the ability model owner rules:* trained Perception also adds the group's activity word ("dice", "snoring", "chanting") beside the size band; if refused, the activity shows only on sight | Exploration action (2 ticks); passive and free for a party with a member trained in Perception when auto-walk pauses at the door. M3, conditional on the `SoloListenClickShare` report missing: also passive at those pauses while the party holds an Ear Trumpet and no living party unit is Perception-trained; the untrained result only, never the size band, "passing" or the activity word **(agreed, Q3; change XI-26, exploration and information design 4.5.2)** |
 | Sound the wall: only at a wall square showing the Hairline tell (or 8-adjacent to the secret Portal's squares); opens it, no roll; out of combat only **(change FL-17, floor layout design 9.2; M2)** | Exploration action (6 ticks) |
 | Move Shunt: an adjacent light, non-sturdy Furnishing moves 1 square straight away from the user; no check; never collides (not choosable if that square holds a unit). Once per piece per round across both Shunt modes; combat only; noise 4; does not end Hidden; never onto a square `FurnishingNeverSeals` forbids **(change TR-6, room terrain design 6.3.2, 6.3.6; M2)** | 2 movement *(illustr.)* |
 | Attack Shunt: an adjacent non-sturdy Furnishing (light automatic; heavy Athletics against heft) moves 1 square straight away; into a unit, the piece stops, the unit takes the collision band once, is not moved, and makes a Reflex save against 8 + the Shunter's Athletics bonus *(illustr.)* or falls Prone (size rule applied to the piece); a light piece breaks on the hit. Once per piece per round; combat only; noise 4; ends Hidden like an attack **(change TR-6, room terrain design 6.3.2; M2)** | Replaces one attack |
@@ -661,6 +661,13 @@ chance. The display computes nothing. **(settled principle)**
   cover from N of M known enemies", use party knowledge only: squares
   the party cannot see are marked "unknown" and never show a unit
   **(change TR-23, room terrain design 6.12)**.
+- Party knowledge is the core's `PartyKnowledge` (exploration and
+  information design 4.1.1); Chalk draws no units, hazards or square
+  kinds (4.1.4), and the `KnowledgeLeak` fuzz harness also guards this
+  section (4.13). The move preview's noticing-roll tag (M3, conditional)
+  shows odds only when Lore has revealed the group's Perception bonus;
+  *pending EP-41 (client) and the ENM 13 flag, not a rule here.*
+  **(changes XI-3, XI-12, read)**
 - The property test in 16 compares preview and resolution with full
   knowledge and with reactions switched off.
 
@@ -1199,9 +1206,11 @@ The build fails when:
   **(lead's call)**
 - There is no guaranteed safe spot. **(agreed)** Before the player confirms,
   the core reports any patrol route already seen that passes within hearing
-  range. **(lead's call)** *Pending request (EP-16, encounter placement
-  design 6.20, 6.21; M2), not a rule until the ability model owner
-  rules:* the report also adds Alerted, Searching and Pursuing groups to
+  range. **(lead's call)** The report reads `PatrolForecast` over known
+  patrols with the `noticing` predicate, as a window (M2; agreed, Q2;
+  change XI-6, exploration and information design 4.8.1). *Pending
+  request (EP-16, encounter placement design 6.20, 6.21; M2), not a rule
+  until the ability model owner rules:* the report also adds Alerted, Searching and Pursuing groups to
   the seen patrol routes. No rest threat is generated; only units
   already on the map and forecast can interrupt a rest (encounter
   placement design 6.21).
@@ -1396,6 +1405,13 @@ Applied on 2026-11-16:
   under 5 (M2), and adds the Gambit exception to 5 and 12.2 and the
   not-a-lair-action reading to 2 (agreed, Q3; M3 (gated), else Later).
   **(changes BR-6, BR-31, BR-32)**
+- **Exploration and information:** settled in
+  `2026-11-23-exploration-information-design.md` (exploration and
+  information design, dungeon generation segment 10, approved
+  2026-11-23). It adds the Ear Trumpet passive Listen condition to 7.2
+  (agreed, Q3; M3, conditional), and the `PatrolForecast` reading to the
+  15.1 rest report (agreed, Q2; M2); 8.3 reads `PartyKnowledge`
+  unchanged. **(changes XI-3, XI-6, XI-12, XI-26)**
 - **Content volume:** counts of companions, themes, monsters and bosses for
   M2. The M1 slice class is the Vanguard (classes design) **(change
   CL-13b)**.

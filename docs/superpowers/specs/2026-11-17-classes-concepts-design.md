@@ -545,6 +545,10 @@ grant any of the following:
 - free or guaranteed-safe rests, supply generation, or `rest` refills
   outside rests;
 - more loot or gold;
+  **Reading (change XI-14; M2):** an information source (a treasure
+  pointer such as the Lodestring or F-TREASURE) never changes loot value,
+  n, identities or placement (IP10), so it is not "more loot"
+  (exploration and information design 4.5.1, 4.6.5);
 - changed potion or tonic values;
 - party passive stealth above the worst member's;
 - AI targeting overrides other than conditions (Challenged).
@@ -588,7 +592,7 @@ lens, **C** companion kits. Caps are **(settled)** unless marked.
 | Wards and Helped (tokens) | Help, Vex, trinket wards | Grant tokens; build on token outputs | Tokens are charges; one trinket Warded per fight; classes build on outputs, never on trinket ids (trinkets 11 rule 8) | — at launch (Votary unlock). **(change HR-33)** Any Herald Helped would sit under ally tempo; none ships at M2 (CO-B3 stands; Herald design 8.3) |
 | Stealth, surprise, Steal | Worst-member passive stealth; Hide (action); silent kills; a second route per floor | A pooled bonus-action Hide (the class hook of ability 7.2; Shadowed armour gives it once per fight, armour 14.2); opener damage | Worst member stays; Clatter stays; no automatic surprise of bosses or elites (lead's call) | S P |
 | Morale | The hero's Intimidation; Frighten; Demand Surrender (Demoralised or Routed only); cowing; Rally | Cheaper, ranged or two-target Frighten; routs through T5 and T6 (limited fear effects) | No meter; Demoralised only from T1–T4 (enemies 14.3); `fearless` units exempt; never bosses; elites only when Routed; one cow attempt per group; the 75% / 100% cow cap; equal experience (enemies 14) | H P |
-| Information | Best passive Perception against guile; Study (Lore); Arcana recognises spells | A free Study rider; revealing resistances | Tactician stays the Perception mastery offer and is never copied (stat model 7.2, enemies 25); Lore never hides basics | A sub (Loremaster, unlock) |
+| Information | Best passive Perception against guile; Study (Lore); Arcana recognises spells | A free Study rider; revealing resistances. **Pending requests (change XI-27; M3; owners' rulings pending):** the Arcanist ritual Walls Have Ears (a batched Listen at the current space's closed doors) and the Shade rider Cased (watching a known unaware group earns a one-lap patrol forecast), conditional on the Trap Eye re-scope ruling (TL-6), its odds band also on EP-41 and the ENM 13 flag; both stay inside IP1–IP10 (exploration and information design 4.5.1, 4.5.2) | Tactician stays the Perception mastery offer and is never copied (stat model 7.2, enemies 25); Lore never hides basics | A sub (Loremaster, unlock) |
 | Initiative | d20 + Intelligence | A bonus | Surprise rules; floor-1 fairness | ribbon (A via Int) |
 | Skills | 2–3 class skills; offers; best-member checks; trained-only uses | The skill on the list plus a class rider on its use | No free retries; mastery only through offers; no class-exclusive skill use | S s |
 | Items | Belt 2 (max 3), Administer, throw, one offensive flask per turn, a scroll read as a camp spend | Belt +1; flask riders; in-class scroll lists | Belt hard maximum 3; potion values fixed; the registry covers item-tempo trinkets | S sub (Trapwright) |

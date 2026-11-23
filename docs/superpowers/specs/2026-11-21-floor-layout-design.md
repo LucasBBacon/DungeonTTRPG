@@ -365,7 +365,11 @@ stealth and cover, and each hit was read in context.
   - flat square grid, 8 directions, diagonal costs 1, no corner cutting
     (M0 plan; its `CornerCut` covered walls only and now covers every
     movement-blocking square, forced moves and a piece's own travel
-    included: room terrain design 6.2.1, TR-5);
+    included: room terrain design 6.2.1, TR-5). **Reading (XI-2, M1;
+    exploration and information design 4.1.2; FL owner confirms):** sight
+    differs on purpose: it is blocked on a diagonal only when both
+    orthogonal neighbours block sight, so a unit can see a square it
+    cannot step to diagonally;
   - one map for exploration and combat, "no separate battle arenas";
   - turn-stepped exploration; symmetric line of sight and fog;
   - no high ground;
@@ -936,7 +940,9 @@ target, which LS5 draws from the Blueprint's `bypassTargets[]` (6.8).
   under the proof state: outside combat radius 8, inside the loud-trap /
   shattered-door radius 10 (enemies 12.3).
 - A horn call, a shattered door, a loud trap, or a fight that drifts
-  toward the pair pulls them. The M2 hearing outline shows the risk.
+  toward the pair pulls them. The M2 hearing outline shows the risk
+  (labelled "known groups only"; XI-13, M2; exploration and information
+  design 4.8.4).
 - Legal under the cluster budget as written; no change.
 - Caps: floor 1 ≤ 1 and none at index ≤ 3 (`nearPairMinIndex[1]` = 4);
   floor 2 ≤ 1; floors 3–5 ≤ 2; the Silk and the Carnival +1. Each
@@ -1094,7 +1100,10 @@ zero. Joiners stay a real, player-caused experience.
   routers do not run forward into the next fight.
 - Runtime: the first anchor the party has not explored, else the
   farthest, else Cornered (enemies 14.5's "nearest" anchor is replaced by
-  this ranking, FL-12; Cornered's definition is unchanged).
+  this ranking, FL-12; Cornered's definition is unchanged). **Reading
+  (XI-1; exploration and information design 4.1.1; FL owner confirms):**
+  explored = entered; a Chalked or Traced room never counts, so no item,
+  fact or glance moves an anchor.
 - Every non-elite fight host has a non-door flee exit (LG12). RC3
   ("never moves a unit through a door") therefore stays literal, with
   "door" read as door kinds (3.4; told plainly).
@@ -1161,6 +1170,12 @@ zero. Joiners stay a real, player-caused experience.
   stays 0. If segment 3 offers no set pieces, the Alcove stays a
   container and the cap is logged, not enforced (loot sources design
   14.2).
+- **Pending request (XI-27, M2; exploration and information design
+  4.4.6):** `SideRoomPayoffMix`: at most 60% *(illustr.)* of side rooms
+  pay loot only; the rest also pay a fact, a shortcut, XP or a pointer.
+  Segment 10's beckoning Glimpses (an EV request) rely on
+  `EmptyDeadEndRate` staying 0. Not a rule until the FL, LP and EV
+  owners rule.
 - **Floor-1 Curiosity host (EV-2, M2; events design 4.2):** after a
   `curiosityHost` signature room (6.5), the host order is (1) an Alcove
   set piece, wall-mounted (RC1+), taking the set-piece slot LP-11
@@ -1173,10 +1188,24 @@ zero. Joiners stay a real, player-caused experience.
   segment 3 before floor-1 pool sizes are frozen (target ≥ 800‰
   *(illustr.)*).
 - Detours are legible before commitment (floor count line, Listen,
-  containers seen through Grilles and Arches).
+  containers seen through Grilles and Arches; extended by segment 10's
+  loose ends, map only and never counted, and the Detour quote: XI-10,
+  M2; exploration and information design 4.4.2, 4.4.3).
 - Travel-to-explored-square auto-walk is requested of segment 10 **in
   M2**: 1 tick per step, stopping on any sighting, noticing or
-  footsteps, and at doors as 6.10 says.
+  footsteps, and at doors as 6.10 says. **Answered (XI-8, M2;
+  exploration and information design 4.7):** travel to Seen or
+  Remembered squares and to Chalked squares inside entered spaces (with
+  the step check), the noticing pre-stop, Next loose end and Back to
+  Stairhead; no auto-explore.
+- **Pending request (XI-9, M2; exploration and information design
+  4.7):** "stopping on any sighting" becomes "on any **new** sighting or
+  **changed** state" (a new group or member, a changed square, awareness
+  or activity); a patrol coming into view always stops, and a
+  contradicted Afterimage updates silently. It ships only together with
+  the noticing pre-stop. Not a rule until the FL owner rules; on a
+  refusal segment 10 applies its cut steps (exploration and information
+  design 9.5).
 - The post-boss walk is 60–97 squares (11–17 s) on the toy. The Way Back
   Latch is built in M3 and off by default (`PostBossBacktrack`
   decides).
@@ -1237,6 +1266,11 @@ zero. Joiners stay a real, player-caused experience.
   format on first sight on every arm; (3) the F2 Forecourt Interlude
   becomes a Glimpse; (4) M3 F4 Curiosities are dropped. Floor-entry
   Strand cashes are untouched by every step.
+- **Segment 10's line (XI-31, M2; exploration and information design
+  9.5):** beside TL-38's, EP-33's, LP-10's, EV-23's and BR-40's, net ≤ 0
+  minutes and ≤ 0 clicks on floors 4–5 at party 4, on both walker arms;
+  the companions 7.4 levers untouched (**agreed** gate kept). On a miss,
+  segment 10's own self-cut order applies first.
 - **Auto-walk at doors (lead's call, after the check):** auto-walk
   pauses at each closed door on its path. A trained party's passive
   Listen resolves there (FL-18). Auto-walk then opens the door and walks
@@ -1253,7 +1287,10 @@ zero. Joiners stay a real, player-caused experience.
   detection runs after every square of party movement, and a new
   Revealed or Hunch result interrupts auto-walk. Auto-walk stops on the
   last square before a new Hunch zone; out of combat it auto-Probes at 0
-  clicks unless the patrol forecast shows a crossing within 2 ticks. It
+  clicks unless the patrol forecast shows a crossing within 2 ticks
+  (read as a **known** patrol due in the Probe's hearing reach, through
+  `PatrolForecast`, or that reach crossing a never-Seen square: XI-6;
+  agreed, Q4; M2; exploration and information design 4.8.2). It
   defaults to walk-round (traps and locks design 6.21).
 - Trimmed floors use 2 side rooms plus a visible Alcove reward, no
   Overlook and no second Latch. Door share on floors 4–5 themes ≤ 0.5.
@@ -1753,6 +1790,11 @@ check):**
   than slice.
 - No ceiling over walkable squares. Door frames never cut below stub
   height.
+- **Wall marks under cutaway (XI-18, M2; exploration and information
+  design 4.9.7):** every rule mark on a wall (Hairline tell, Spoor,
+  wall-set mark, Rathole, the vantage sight-risk mark) projects a
+  front-square half-rim decal whenever its wall is cut away or faded,
+  readable at all 4 rotations.
 
 **`CutawayPockets`:** no walkable square more than 3 squares behind a
 wall corner in its own room at any of 4 rotations. Templates are
@@ -1847,13 +1889,17 @@ included in the per-theme greyscale screenshot check.
 
 **Compass:** one directional cue per theme that survives rotation (7.1).
 
-**Minimap data** (UI to segment 10):
+**Minimap data** (UI to segment 10; the minimap built on it, with
+knowledge fills, a reduced mark set, a glyph floor and no count on its
+frame: XI-7, M1; exploration and information design 4.3.1):
 - a north-up schematic room-node graph on the macro grid, with explored
   rooms' outlines drawn over it;
 - Portal glyphs by kind and state (one global set, in the RC5/RC7
   spirit);
 - Landmark icons, Precinct tints, the Stairhead glyph;
-- never unexplored rooms;
+- never Unknown rooms; Traced and Chalked rooms in their own styles
+  (XI-4, M2, shipping with F-ROOM; exploration and information design
+  4.1.5);
 - a camera wedge.
 
 **Engine note** *(verify on the shipped Godot 4 version)*: baked
@@ -1914,7 +1960,7 @@ socket classes. Budgets count templates, then size classes.
 | Listen at a door | Peeking without breaking symmetric line of sight | **M2** (FL-18) |
 | Last Turning | Route choice before the boss | **M2** (FL-9) |
 | Floor count line | Pacing information | **M2** (FL-20) |
-| Overlook (mapped layer) | A planning aid | **M3** (needs segment 10's mapped layer; Yield prefers unmapped rooms) |
+| Overlook (mapped layer) | A planning aid | **M3** (needs segment 10's mapped layer; Yield prefers unmapped rooms; unmapped = not entered and interior not Chalked, a reading, XI-1, exploration and information design 4.1.1). **Pending request (XI-27; M3; exploration and information design 4.5.2):** Overlook writes Chalked: the vantage Chalks every room with a square in its line of sight (the footprint, Voids as plain chalk; stubs still by sight); not a rule until the FL owner rules; fallback: Overlook Traces only |
 | Chute (directed edge) | Spurs with no walk back | **M3** (pathfinder testing cost). **Pending request (HZ-23):** Plunge as a Chute skin (hazards design 6.10). **Pending request (TL-41; M3):** segment 5's relocation traps (in combat, same room only; the Supper's Dumbwaiter Drop out of combat to its linked scullery) wait for the ability model's teleport rule (ABL 8); fallback Prone in place (traps and locks design 6.3, 7.8). **Recorded (EV-36, M3 if HZ-23; events design 4.4.1):** segment 8's bypass routes come only as Curiosity skins of FL-generated Chutes, never a new edge (`GraphUnchanged`, `XpBandAfterEvents`); waits on HZ-23 and the FL and enemies owners |
 | Strongroom spur | Fight, steal or pick for one reward | **M3**, floors 2–3 only. Its reward socket is rank SR4 (LE-10, M3; loot economy design 6.9). **Pending (TL-29; M3):** segment 5's Wager room may take this Site (traps and locks design 6.15); the FL owner's call, not yet ruled |
 | Drop-bar doors (the party bars a door; locked for monsters) | Real joiner cuts | **M3**, Gaol only, after SH-18 and the Shade owner. They create safe rest cells against ability 15.1, so they return to the client before they ship **(new lead's call)**. If adopted, segment 5 recommends M3 with the anti-rest guard: monsters force it at 10 + the dropper's Athletics (loud 6), a patrol whose Circuit hits it forces it, and it never satisfies a short rest's "no aware hostile" by itself (TL-33; traps and locks design 6.12) |
@@ -2020,7 +2066,8 @@ the check):**
   **physically in the room beyond at that moment**, not by homeRoom.
   Trained Perception adds the size band, plus "passing" if the patrol's
   deterministic waypoint schedule brings it into that room within the
-  next 20 ticks.
+  next 20 ticks (a heard "passing" earns only that Portal's forecast
+  window; XI-6, exploration and information design 4.8.1).
 - **Pending requests (EP-9, EP-12; M2; encounter placement design 6.7,
   6.8.6):** trained Perception would also add the group's activity word
   ("dice", "snoring", "chanting") beside the size band, and, when a
@@ -2033,13 +2080,23 @@ the check):**
   or opening any door lock, also Listens through that door.
 - Owned by segment 10; the action goes into ability 7.2's table. It
   makes stat model 7.1's Perception row ("hear what is behind a door")
-  exact.
+  exact. Results show as Listen bubbles on the Portal (exploration and
+  information design 4.3.5).
+- **Ear Trumpet (XI-26, M3, conditional; agreed, Q3; exploration and
+  information design 4.5.2):** a lane-gap party counter (cap 1) from the
+  basic vendor, stocked only when no party unit is Perception-trained on
+  the camp-entry snapshot, makes an untrained party's Listen passive at
+  auto-walk door pauses; never the size band, "passing" or the activity
+  word; its effect is suspended while any living party unit is
+  Perception-trained. It ships only if `SoloListenClickShare` misses.
 
 **Hairline secrets (FL-17; agreed, Q3; the reveal rules are lead's calls
 after the check):**
 - A secret Portal sits at the end of a dead-end stub of ≤ 3 squares on
   the side the party approaches from, and no other stub that short
   exists on the floor (`HairlineCue`, LG14). A stub is always a secret.
+  Chalk never draws a stub; only sight does (exploration and
+  information design 4.1.4).
 - Its wall face carries one universal tell glyph, shown to party units
   only:
   - a party member trained in Mechanics within 3 squares (Chebyshev) with
@@ -2091,7 +2148,17 @@ design 8.2):** "treasures: k / n", field notables found of field
 notables (containers, secret caches, carried; plus the Viaticum on
 floor 5); counts only, never locations. On floor 1 the secret cache is
 excluded, so a found floor-1 secret-cache notable raises neither k nor
-n and shows as "+1 secret".
+n and shows as "+1 secret". **The party-bar tally (XI-11, M2;
+exploration and information design 4.4.4):** the floor strip's rooms
+cell reads "rooms e / t", where t = n + k from this line and e counts
+those Room nodes entered (Alcoves and corridors never count); never
+split by role; the one named exception to segment 10's "no completion
+meter" rule. **Naming (XI-19, M2; exploration and information design
+4.9.9; FL owner confirms):** this line is the Stratum Card's count line;
+its "treasures: k / n" is read as the floor strip's Treasure field.
+**Counts only, narrowed (XI-23, M3; exploration and information design
+4.6.2):** free surfaces stay counts only, never locations; a paid or
+earned pointer (the Lodestring, F-TREASURE) may name one room.
 
 ---
 
@@ -2345,7 +2412,9 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
      a container N clicks by type (below); Listen 1 click and 2 ticks (0 ticks
      when passive); Sound the wall 1 click and 6 ticks; a Squeeze 1
      click, +4 ticks on a failure; a Latch 1 click and 1 tick; a reveal
-     1 click; each auto-walk stop 1 click.
+     1 click; each auto-walk stop 1 click; a travel command 1 click and
+     1 tick per step, each noticing pre-stop 1 click (XI-8, M2;
+     exploration and information design 4.7).
    - **Container clicks by type (LP-8, M2; loot sources design 4.6;
      *illustr.* until the walker measures them):** a Plain container
      with a quiet summary (coin and non-healing sundries only, which
@@ -2425,7 +2494,7 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
 | 7 Loot | Container, Alcove and secret-cache sockets (inset faces, LP-12); HE-7 and HE-4 reservations; room roles (6.5) | Contents and channel counts; **SocketPlan (LP-11, M2; loot sources design 4.2)** selects from `containerSockets[]` by a role table held as data and never creates a container square: one card-bearing container per room (`cardEligible`), ≤ 1 coin-only container per room, `containerCap` in two phases with merges, the binding definition of the walk line, side-room and Alcove containers previewed from the threshold |
 | 8 Non-combat rooms | Q rooms, the floors 2–5 antechamber micro-event socket, trader and Pledge tags, signature rooms (the `curiosityHost` tag), floor-1 Alcove set pieces and free leaf side rooms as Curiosity hosts (EV-2; events design 4.2) | Fills (Curiosities, Interludes and Glimpses; events design 11), trader, shrines, Dream Fragments. Segment 8 places no Landmarks: layout owns the sockets, segment 4 the ticks (EV-35; events design 4.2) |
 | 9 Boss rooms | The 2×2-cell socket, two dog-leg Forecourt Arches ≥ 5 apart, the Bossgate, start-zone depth ≥ 9, the symmetric `AntechamberScreened` (6.11), the arena pull-back zoom bound (8.1) | Interior, counterplay feature, phases, Keepsake arena dressing; boss tuning with a patrol joiner (FL-21 (e); answered by the BR-13 proposal, pending); the authored arena stamped draw-free into an `arenaCell` sized to contain it (BR-1, BR-2; boss rooms design 4.1); `ArenaEngaged` and the Sanctum rest rule (BR-3, BR-31; boss rooms design 4.2) |
-| 10 Exploration and information | Minimap nodes and explored-room outlines, Portal glyph kinds, Landmarks, tints, travel paths, count-line data, the patrol waypoint schedule (Listen's "passing") | Fog, minimap UI and the rules-room overlay, Listen UI (occupancy, 9.2), Hairline display, the hearing outline (including the self-teaching shut-door prompt and the elite vantage risk), interrogation facts, auto-walk (pausing at doors, 6.10), Overlook (M3), the Stratum Card line |
+| 10 Exploration and information | Minimap nodes and explored-room outlines, Portal glyph kinds, Landmarks, tints, travel paths, count-line data, the patrol waypoint schedule (Listen's "passing") | Fog, minimap UI and the rules-room overlay, Listen UI (occupancy, 9.2), Hairline display, the hearing outline (including the self-teaching shut-door prompt and the elite vantage risk), interrogation facts, auto-walk (pausing at doors, 6.10), Overlook (M3), the Stratum Card line. Answered by the exploration and information design (XI-7; 4.1–4.3, 4.3.6, 4.7, 4.8.4, 4.9.8) |
 | 11–12 Seeds and validation | The `layout` and `dressing` children and their derivation, draw counts, V8 and its enumeration, the assertion list and the shared floor assertion point | The stream tree, release seed set, retry logging |
 
 ---

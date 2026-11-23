@@ -86,6 +86,9 @@ These would make the game a failure even if everything works.
 - Builds target Windows and Linux. **(decided)**
 - Input is mouse and keyboard, routed through remappable actions so
   controller support can be added later. **(decided)**
+  Exploration bindings, full rebinding and the accessibility package
+  follow this (exploration and information design 4.10; change XI-20,
+  read).
 
 ## 4. Game design
 
@@ -203,7 +206,20 @@ These would make the game a failure even if everything works.
 - A unit's turn has movement, one action, one bonus action, and one reaction
   per round. **(decided)**
 - Line of sight and fog of war use one symmetric visibility rule: if A can
-  see B, B can see A. **(decided)**
+  see B, B can see A. **(decided)** One core function, `CanSee`,
+  implements it: symmetric shadowcasting between transparent squares, no
+  range cap, units never block sight, and sight may glance past a single
+  corner where movement may not. Downed party units contribute no
+  knowledge; the geometry stays symmetric, so a monster can still see a
+  Downed unit (exploration and information design 4.1.2; change XI-2, a
+  reading, M1). The party's fog is `PartyKnowledge`, held in the core per
+  floor: each square is Unknown, Chalked (architecture known, never yet
+  seen), Seen (in line of sight of a living, non-Downed party unit now)
+  or Remembered (seen before, not now), and square knowledge never goes
+  back (exploration and information design 4.1.1; change XI-1, a
+  reading, M1 states, M2 the rest). Telepathy, Clairvoyance, Arcane Eye
+  and Spyholes stay out (exploration and information design 4.5.3;
+  change XI-32, kept).
 - Core resolution is a d20 roll plus modifiers against a target number, with
   advantage and disadvantage. **(decided)**
 
@@ -358,7 +374,9 @@ it is expensive to add later.
 
 The display layer may ask the core questions, such as "which squares can
 this unit reach?" or "what are the odds of this attack?", but it never
-computes rules.
+computes rules. Fog, the map and every knowledge mark are drawn from core
+queries over `PartyKnowledge` (exploration and information design 4.1.1,
+4.11; change XI-1, read).
 
 ### 6.3 Determinism
 
@@ -442,10 +460,30 @@ largely to prove it.
 
 ### 6.6 Saving
 
-- **Run save:** a snapshot of the full core state, written at safe points.
-  The snapshot is the authority. Resolving a Curiosity is a safe point,
-  with a fixed write order, so a reload cannot undo a cost or re-roll
-  (events design 4.10; change EV-21, a reading, M2).
+- **Run save:** a snapshot of the full core state, written at safe
+  points; while a run is on a floor, the snapshot is the one suspend slot
+  below. The snapshot is the authority. Resolving a Curiosity is a safe
+  point, with a fixed write order, so a reload cannot undo a cost or
+  re-roll (events design 4.10; change EV-21, a reading, M2). The run
+  snapshot includes `PartyKnowledge` (exploration and information design
+  4.1.1; change XI-1, read).
+- **Suspend slot (permadeath):** while a run is on a floor, one suspend
+  slot holds the full core state and is overwritten after every committed
+  command (every step, act, combat action, death, Down and paid act);
+  quitting writes it too. Writes go to a temporary file, then an atomic
+  rename over the slot; a paid knowledge act's result is shown only after
+  its write has landed. Loading reads and validates the slot, deletes it,
+  writes the current state back as the new slot, then accepts input. The
+  slot always wins over the safe-point snapshot, and `PartyKnowledge` is
+  forward-only, so a resume never undoes a death, a spent counter or a
+  look. Camp and other safe points are unchanged, and no suspend slot
+  exists outside a floor (exploration and information design 4.12;
+  change XI-28, agreed 2026-11-23, Q1, M2; segments 11–12 own the file
+  mechanics).
+- **UI annex of the run save:** display state only (Waymarks and
+  dismissed loose ends), outside the reproducibility key and never read
+  by rules, the simulator or validators (exploration and information
+  design 4.3.4, 4.7; change XI-7, an addition, M2).
 - **Command log:** kept alongside for replays, bug reports and tests. A log
   may stop replaying correctly after a content change, which is why it is
   not the save.
@@ -466,6 +504,11 @@ largely to prove it.
   display only for the Boss Ledger and Grudge, read as a snapshot at
   run start and never by draws, stats or AI (boss rooms design 7;
   change BR-35, M3).
+  From M2 it also holds `uiMemory`, display only and outside the
+  reproducibility key: one-line first-sight callouts per mark family for
+  staged first-run disclosure; the same seed gives identical knowledge
+  and previews on every profile (exploration and information design
+  4.10; change XI-21, an addition, M2).
 - Saves carry a version number.
 
 ### 6.7 Enemy AI
@@ -487,6 +530,9 @@ monster in data.
   the display layer draws them as raised or arcing units. **(decided)**
 - The camera rotates in 90 degree steps, and walls between the camera and
   the party are cut away or faded so units are never hidden. **(decided)**
+  A rule mark on a cut-away or faded wall projects a front-square
+  half-rim decal, readable at all 4 rotations (exploration and
+  information design 4.9.7; change XI-18, M2).
 - Each floor is assembled from 3D tile pieces chosen by the floor theme, so
   placeholder pieces can be swapped for final art without code changes.
   **(decided)**

@@ -821,6 +821,10 @@ slot}` **(lead's call)**.
     card A offers a Mechanics kit. Hiring a Mechanics companion at that
     Muster does not withdraw the stocked key; the next camp reads the
     new party (traps and locks design 6.11).
+    (Read by change XI-26: the conditional Ear Trumpet (agreed, Q3;
+    M3) is shown by its vendor row alone; `gapOrder` has no Perception
+    need, so the coverage strip gains **no** Ear Trumpet line;
+    exploration and information design 4.5.2.)
   - **Never healing** (`GapCardNeverHeal`). Coverage is guaranteed on
     the **offer**, never on the party.
   - **Feasibility:** `RecruitPoolSatisfiable` runs **this exact
@@ -995,6 +999,12 @@ EV-23's: `BossMinutes` median ≤ 7 min at party 4 on floors 4–5
 *(illustr.)*, p75 reported; its own levers in order are AddCap, grouped
 escort playback, reserve size, phase option (c) → (a) and the arena
 Stir moved to M3, never boss HP first.
+
+Segment 10 adds no lever here either (exploration and information
+design 9.5; XI-31, read; M2). Its clock line sits beside TL-38's,
+EP-33's, LP-10's, EV-23's and BR-40's: net ≤ 0 minutes and ≤ 0 clicks
+on floors 4–5 at party 4, on both walker arms; a miss fires that
+design's self-cut order before any lever above.
 
 **Told plainly:** the 10 s per companion turn target (ability 11.4) does
 not fit a party of 4 into a 20-minute floor. Either the per-turn time,

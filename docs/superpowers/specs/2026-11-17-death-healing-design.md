@@ -308,7 +308,7 @@ help the hero, and a seed could produce a floor with no potion at all.
 | **G3 Starting kits** | **2 healing potions in every hero class kit** (floor 1 is solo with no vendor before it); **1 in every recruit kit** |
 | **G4 Found potions** | `healingSundryMin` **1 on every floor**, drawn first (loot procedure, 12.5). Placed in a **main-path container in the first half of the main path, openable with no check, never on a carrier** (carriers drink what they carry). `healingSundryMax` 3 caps all potion sundries on a floor |
 | **G5 Camp top-up** | The hero leaves camp with at least 1 healing potion; a dose already held by a companion is moved to the hero before a free one is issued (13.2) |
-| **G6 Announcement** | The floor-entry card says "This floor holds at least 1 healing potion and 1 supply on the main path." Counts only, never locations |
+| **G6 Announcement** | The floor-entry card says "This floor holds at least 1 healing potion and 1 supply on the main path." Counts only, never locations; a paid or earned pointer (the Lodestring) may name one room, never a square **(change XI-23, M3; agreed, DH Q3; exploration and information design 4.6.2)** |
 | Random top-up | Further potion sundries, random containers leaning **off-path** (`healingOffPathPermille` 600 *(illustr.)*), so extra healing is earned; potions taken from carriers; limited vendor stock (coin-gated); healing scrolls (loot only); class healing; the phial |
 
 **Pre-authorised raise (agreed, Q3):** if the report "floors where the
@@ -1386,7 +1386,10 @@ Recomputed after every command, **only while `combatActive` is true**
 (20.5); out of combat no band is shown. *Recorded (change EP-41; M3, a
 later client decision):* an approach band out of combat; until the
 client rules, this sentence stands (encounter placement design 6.20,
-9.1).
+9.1). The out-of-combat "in sight of" and "hidden from" portrait pips
+are geometry only, never a band, so this rule and 17.2 stand **(change
+XI-12, M2; DH owner informed; exploration and information design
+4.8.3)**.
 
 - **Inputs:** each visible enemy whose threat reach covers the hero before
   the hero's next turn, using **known** kits only (seen at-wills, seen
@@ -1575,7 +1578,10 @@ lift Downed". The rest screen shows, for each member, HP after get-up,
 Treat and Recovery, plus the supply left and the patrol warning
 **(settled)**. *Pending request (change EP-16; M2; the DH owner rules):*
 the rest preview adds Alerted, Searching and Pursuing groups to the
-seen patrol routes (encounter placement design 6.20, 6.21).
+seen patrol routes (encounter placement design 6.20, 6.21). The
+patrol warning reads known patrols only: routes drawn over known squares,
+forecasts from `PatrolForecast` (change XI-6, M2, read; exploration and
+information design 4.8.1).
 
 ### 17.12 Death recap and floor-entry card
 
@@ -1599,11 +1605,22 @@ seen patrol routes (encounter placement design 6.20, 6.21).
   RT-12)**, then the floor count line "Main path: n rooms; side rooms: k;
   secrets: s" (s from floor 2; the floor-1 card omits it), with its
   party-bar tally, counts only, never locations (floor layout design 9.2)
-  **(change FL-20, M2)**, the treasure count "Treasures: n" with its
-  strip "k / n" **(change LE-15, M2; loot economy design 8.2, 6.15)**,
+  **(change FL-20, M2)**; from M3 a paid or earned pointer (the
+  Lodestring, F-TREASURE) may name one room, never on this card **(change
+  XI-23, M3; exploration and information design 4.6.2)**; the treasure
+  count "Treasures: n" with its floor-strip Treasure field "k / n"
+  **(change LE-15, M2; loot economy design 8.2, 6.15; "Treasure field"
+  naming, change XI-19, M2)**,
   and a party-bar tally "found 1 of at least 1": the healing
   potions picked up this floor from containers and carriers, whatever their source. The `guaranteed`
   flag on `LootTaken` stays for reports only.
+- **Card queue (change XI-19, M2):** the floor-entry card takes slot 7
+  of the modal card queue, with TL's first-entry prompt; the Stratum
+  Card is slot 8, and its overflow goes to the pause Floor-info panel
+  (exploration and information design 4.9.8, 4.9.9).
+- **Fatal-room map (change XI-29, M3):** the death recap adds a
+  fatal-room map thumbnail with the killing chain's sources marked
+  (exploration and information design 6, 7).
 
 ### 17.13 Movement undo (Later)
 
@@ -1617,6 +1634,10 @@ seen patrol routes (encounter placement design 6.20, 6.21).
   hazard, or consumed a random number (a noticing roll included).
 - Undo is a core command, validated and logged like any other, so replays
   reproduce it. It never reaches into another unit's turn.
+- *Reading (change XI-1; Later; the DH owner confirms):* "revealed a
+  square" means a square turning Seen from Unknown or Chalked, or a new
+  unit sighting; Chalking alone does not close the window (exploration
+  and information design 4.1.1).
 
 ## 18. Calibration targets
 

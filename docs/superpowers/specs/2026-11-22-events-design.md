@@ -519,6 +519,7 @@ All three judges independently chose the same winner:
   - Each shared Interlude is legal on at most 2 floors, with at most 1 shared Interlude per run (NF3).
   - Every theme drawable on F2–5 has its own Forecourt Interludes: 2 per band theme (added after the check), 3 for the Supper and the Gut, 5 for the Heart. V16s `PoolCoverage(interlude, floor)` fails while any theme drawable on that floor has an empty Interlude pool **(lead's call, after the check)**.
   - **An empty slot.** When EventDraw's fallbacks are spent (4.10), the slot is empty and logged as `CuriosityAbsent{slot, reason: poolEmpty | capsExhausted}`. An empty Forecourt Interlude slot shows a Glimpse. Strands no longer depend on Interludes (4.5.7).
+- **Pending request (XI-27; recommended M2): beckoning Glimpses.** On floors with side rooms, at least 1 Glimpse per floor *(illustr.)* on a wall visible from the main walk line inside or at a side room's threshold; never a Portal or container silhouette; report `BeckonFollowRate`. Not adopted until the EV owner rules; if refused, no Glimpse rule and `BeckonFollowRate` is dropped (exploration and information design 4.4.6).
 
 ### 4.3 Structure, choices and checks
 
@@ -526,7 +527,7 @@ All three judges independently chose the same winner:
 - **Options:** 2–3 plus **Leave**, which is always free. **Every other option carries a printed price** (lead's call, after the check). At most 1 lit, at most 1 rolled.
 - **Leave (lead's call, after the check).** Leave closes the card without resolving it. The prop stays active, and the card can be reopened while the party is on the floor; reopening shows the same presentation and is not a new sighting (4.5.1). The card resolves only when an option is taken.
 - **Chips:** every option ends in rules chips generated from data, for example `−2 HP (hero; not below 1)`, `noise 4 here (who hears: the Turnkey patrol)`, `+6 ticks (patrol moves: see map)`, `Fact: the floor key's carrier`. Prose never states a rule (RC1, RC7). Spatial facts are **drawn on the map** the moment they are gained (hook, segment 10).
-  - **Layout budget (lead's call, after the check).** At most 2 chips per option and at most 6 words per chip. Patrol and route detail lives in the map highlight (4.12), never in chip text. A lit option is marked by a shape icon, never by hue alone (RC4 and colour-blind grammar). The worst-case card (the longest rare, three options, a delta line and a footer, at maximum text scale and minimum resolution) must fit on one screen; this is a segment 10 acceptance item, and if it fails, the rare body cap is lowered.
+  - **Layout budget (lead's call, after the check).** At most 2 chips per option and at most 6 words per chip. Patrol and route detail lives in the map highlight (4.12), never in chip text. A lit option is marked by a shape icon, never by hue alone (RC4 and colour-blind grammar). The worst-case card (the longest rare, three options, a delta line and a footer, at maximum text scale and minimum resolution) must fit on one screen; this is a segment 10 acceptance item, and if it fails, the rare body cap is lowered. Segment 10 checks it as V18s `CardFit` at 150% text scale (exploration and information design 4.10).
 - **Lit option rules:**
   - **`LitIsSidegrade`:** the lit option's gain differs from the priced option's in kind or target.
   - **`LitHasPrice` (lead's call, after the check):** the lit option carries a printed cost that shares no cost kind with the priced option's (for example ticks against noise, or HP against an item). A met threshold is never the whole price. A teaching rung (K2) is a priced lit option like any other.
@@ -576,6 +577,9 @@ All three judges independently chose the same winner:
   - **`GainMix` (restated after the check):** a **deck** is a theme's `curiosityKit` Curiosity cards (standard, MECH and rare), or one shared Curiosity pool (Shallows, Middle). Its options are every priced, lit and rolled option; Leave is excluded, and so are Interludes, which are fact-only by definition. An option is fact-only when its one rules gain is a fact (an M3 codex page does not count). Fact-only options are **at most 40%** of a deck's options *(illustr.)*. On the **Graces-off fallback deck** (4.4.3) the ceiling is **50%** *(illustr.)*, a separate threshold **(lead's call, after the check;** told plainly in 14.1**)**. 5.2 lists the per-pool counts, so V16s and the catalogue agree.
   - **F-BOSS is run-specific** where segment 9 exposes 2–3 seeded boss variables (phase variant, move order, escort, arena hazard placement). Otherwise it is the boss's Lore entry (hook). A veteran still gains something, and it is information, not power.
   - **Answered by segment 9 (BR-29; M2):** two seeded values per boss, the **Rendition** and the **mirror** (where the Rendition leaves it open), yield three run-specific fact lines: the Rendition and its phase change, the **Guise** (Device and reserve-socket side, worded relative to the entrance) and the **formation**, all draw-free from `BossVariantKey`; each boss authors ≥ 4 facts plus mirror-aware variants (boss rooms design 4.12, 4.10.1).
+  - **F-TREASURE (XI-22; agreed, exploration and information Q5, for the exclusion; M3):** an eighth fact category, one instance `{F-TREASURE, socketId}` in the FactLedger: an unfound field notable at a container socket on the current floor, chosen by its own role-blind selector (tier descending, then the room's macro-grid position, then the container's square; never room role, `roomId`, `portalId` or `socketId`). **Never a secret cache (agreed, Q5)**, a carried notable, a boxed-lurker container, a Windfall, the Viaticum, the signature cache or an HE reservation, and never on F1; fact channels (Yield, a Curiosity gain) on F2–F5. Output: the room Traced if Unknown, the tier word and the qualifier "plain cache" or "behind risk" from the container's socket class, with the fixed line "says nothing about traps, lurkers, patrols or hazards". At most 2 instances per floor across all channels *(illustr.)*; an empty set reads "Nothing the string can find" and spends nothing. LE owns the selector (exploration and information design 4.6.1).
+  - **Pending request (XI-23; M3):** a Curiosity option gain of a **Lodestring** (the run-scoped `party.lodestrings` counter, cap 1) as one of its sources; not adopted until the EV owner rules (exploration and information design 4.6.2).
+  - **Pending request (XI-27; M2):** `SideRoomPayoffMix` (FL, LP and EV owners): at most 60% *(illustr.)* of side rooms pay loot only; the rest also pay a fact, a shortcut, XP or a pointer (exploration and information design 4.4.6).
 - **Route.** Reveal an existing Hairline or a Latch's far side. A priced extra route to an existing lock (4.4.5). M3: skin an FL-generated Chute (EV-36).
 - **Grace** (4.4.3). From Curiosity cards only, never Interludes.
 - **Strand** (4.5.7). M3: a codex page beside the one rules gain. Later: a Pledge or a curse ended.
@@ -585,8 +589,9 @@ All three judges independently chose the same winner:
 - **It records fact instances, not categories (lead's call, after the check):** `known[{category, targetId}]` plus the floor's `bossQueue[]`. Learning one room's Listen never blocks another room's.
 - **`bossQueue` order per floor (BR-29; M2):** no repeats, information only: (1) the signature card (the elite intel line, LE-18, unchanged, first); (2) the Rendition fact; (3) the Guise fact; (4) the formation fact; (5) fixed Lore facts (Rhythm, Device rule, weakness). The Playbill is their home (boss rooms design 4.12).
 - **Fall-through.** Each fact gain carries `fallThrough: [category…]`, by default its own category followed by F-ROOM, F-SECRET, F-TRAP. When the named target is already known, the option takes the next **unknown instance**: first other targets of the same category under the same selector (by main-path index, then room id), then the next category in the list. The preview shows which. If nothing is left, the option shows "Nothing left to learn" and is disabled (honest).
-- **Targets are draw-free.** "The next unvisited room" is the lowest main-path index not yet entered; a referent comes from EventPlace (4.5.5); "of your choice" lets the player pick among unknown instances at resolve time.
-- **The codex is write-only from the run's point of view.** Dedup never reads profile memory, so the same seed gives the same facts to a veteran and a new player (BC2). Flagged to the enemies owner (HX-6, TL-23).
+- **F-TREASURE in the ledger (XI-22; M3):** deduplicated with fall-through like every category; a later instance excludes sockets already pointed at this floor; the mark clears when the target container is opened. Its `TreasureTarget()` output for a paid or earned act is the one listed `KnowledgeLeak` exemption, limited to {room node, tier word, qualifier} (exploration and information design 4.6.1).
+- **Targets are draw-free.** "The next unvisited room" is the lowest main-path index not yet entered (reading, XI-1: "entered" and "unvisited" mean the room's `entered` flag; Chalked or Traced never counts; exploration and information design 4.1.1); a referent comes from EventPlace (4.5.5); "of your choice" lets the player pick among unknown instances at resolve time.
+- **The codex is write-only from the run's point of view.** Dedup never reads profile memory, so the same seed gives the same facts to a veteran and a new player (BC2). Flagged to the enemies owner (HX-6, TL-23). Segment 10 keeps this (reading, XI-14, XI-21): IP9 and `ProfileBlind`; its `uiMemory` profile field is display-only and the codex is never a HUD input (exploration and information design 4.5.1, 4.10).
 
 #### 4.4.3 Graces (changes EV-11, EV-12; agreed, Q3: M2 only if the conditions owner rules EV-11 and the F1/F2 death-share gates pass, else M3)
 
@@ -872,7 +877,7 @@ Floor-entry Strand cashes are untouched by every step, and the Coat Hooks surviv
 
 ### 4.9 M3 meta: codex, Fragments, Readings, Omens, Nightmare
 
-- **Codex (EV-37):** segment 8 co-owns "Curiosities" pages: Retellings collected and options seen, with the exact outcomes already printed on the card. Never power, never gating rule text. Write-only from the run's view. Proposed: RS owns the codex and segment 10 hosts it.
+- **Codex (EV-37):** segment 8 co-owns "Curiosities" pages: Retellings collected and options seen, with the exact outcomes already printed on the card. Never power, never gating rule text. Write-only from the run's view. Proposed: RS owns the codex and segment 10 hosts it. **Answered by segment 10 (XI-29; M3):** segment 10 hosts the codex, RS owns it (exploration and information design 4.13, 7).
 - **Dream Fragments (EV-29):** folded into F-BOSS options on Lore thresholds. 0 VP and 0 coin. One boss-fact queue in the FactLedger. Recovers most of the 0.5–1 min per floor.
 - **Readings (EV-30):** TL-34 accepted. One Reading per room, a no-roll threshold, a floor fact. The second F3 Q room's M3 use.
 - **Omens and Moods (EV-31):** an Omen floor may swap a card for its Omen Retelling (kind, not stats). A cost may be the named, visible event that advances a Mood, within HZ 6.9's cap.
@@ -918,7 +923,7 @@ Floor-entry Strand cashes are untouched by every step, and the Coat Hooks surviv
   ```
 - **Strands** are read at floor entry or at offer time from committed run state. Loot never reads Curiosities, so **LootDoorInvariant holds**.
 - **Play-time rolls** use `checks`, keyed (runSeed, floor, curiosityId, optionId).
-- **Resolving a Curiosity is a safe point** (a reading of MAIN 6.6, flagged), so a reload cannot undo a cost or re-roll (BC12). **Resolve order (lead's call, after the check):**
+- **Resolving a Curiosity is a safe point** (a reading of MAIN 6.6, flagged), so a reload cannot undo a cost or re-roll (BC12). Unchanged by segment 10's mid-floor suspend slot (XI-28; agreed, exploration and information Q1; M2), which is written after every committed command and wins over the safe-point snapshot (exploration and information design 4.12). **Resolve order (lead's call, after the check):**
   1. validate payment feasibility;
   2. apply the costs;
   3. apply the gain (FactLedger, map, Grace, Strand);
@@ -956,8 +961,9 @@ Floor-entry Strand cashes are untouched by every step, and the Coat Hooks surviv
 
 - **Cards:** the Curiosity card with chips (at most 2 per option, 6 words each); lit-option display with "met by" and a shape icon; the Twice-Told card with the delta line; First Telling; the worst-case card layout test (4.3.1) as an acceptance item.
 - **Map:** facts drawn on the map; the referent highlight; bound-tick patrol forecasts.
+  - **Answered by segment 10 (exploration and information design 4.3.6, 4.8.1):** every fact-sourced mark carries a "told" pip; **F-ROOM is drawn as interior Chalked** (the footprint; stubs still need sight) (reading, XI-4; M2); F-TREASURE (M3) as the Lodestring mark on the room node, the room Traced if Unknown, tier word and qualifier in hover (XI-22). **Chips and bound-tick forecasts read `PatrolForecast`** over known patrols only, with the `noticing` predicate, shown as a window, 20 ticks or one lap, withdrawn by events (XI-6; agreed, exploration and information Q2; M2).
 - **HUD and state:** the Grace chip with its expiry; Strand display; the floor-entry Strand line (4.5.7).
-- **Profile:** Afterword slot on the run-start card; codex pages; the Unwoken Roll and its hide setting; auto-answer and "read in full".
+- **Profile:** Afterword slot on the run-start card; codex pages (segment 10 hosts, RS owns; XI-29, M3); the Unwoken Roll and its hide setting; auto-answer and "read in full".
 - **Accessibility:** text scale and skip.
 - **Stratum Card:** **no line in M2**. M3 option: "Curiosities: n", counts only.
 
@@ -971,7 +977,7 @@ Floor-entry Strand cashes are untouched by every step, and the Coat Hooks surviv
   - Forecourt Interludes keep `AntechamberScreened`;
   - the Coat Hooks payoffs on F5;
   - floor-1 boss variety as a production priority (agreed, Q2) (answered: 3 Renditions per F1 boss in M2, the launcher F1-boss streak rule and RS 12 Cut 1 graded; agreed, boss rooms Q1; BR-23 to BR-26, boss rooms design 4.10).
-- **Segment 10:** 4.12.
+- **Segment 10:** 4.12 (answered: every hook placed in the UI surface catalogue; XI-4, XI-6, XI-22, XI-27, XI-29; exploration and information design 5).
 - **Segments 11–12:**
   - the `curiosities` stream, its draw count and draw map; EventDraw and EventPlace order;
   - the resolve safe point; `curiosityMemory`; the launcher order against R-SEED-6;
@@ -1545,7 +1551,7 @@ No wave carries a least-seen draw inside the key (rejected, Q1).
 |---|---|
 | **Segment 8** | Curiosity content and forms; their placement in Q rooms, Forecourts, F1 Alcove set pieces and side rooms, and signature rooms; the cost and gain palette; `curiosityValueTable`; the FactLedger rule; Graces (content), Strands, Retellings, Twice-Told, Fallow, Sequels, Ripening, Afterword and the Unwoken Roll; the segment 8 clock line; V16; the reports; Readings content (TL-34); Fragments content; guaranteed Riddle-clue hosts (4.13); the writing and Glimpse briefs (6); co-ownership of the codex's Curiosity pages |
 | **Segment 9** | Seeded boss variables; the arena seal; the F-BOSS queue; poster Glimpses; floor-1 boss variety as a production priority (agreed, Q2); the carried RS Cut 1 question, a future item for the client (14.2). **Answered by the boss rooms design (segment 9, approved 2026-11-22; BR-3, BR-23 to BR-26, BR-29):** the seal is `ArenaEngaged`; F-BOSS facts from the Rendition and mirror in the `bossQueue` order; 3 Renditions per F1 boss and the graded RS Cut 1 (agreed, boss rooms Q1) |
-| **Segment 10** | 4.12 |
+| **Segment 10** | 4.12. **Answered by the exploration and information design (segment 10, approved 2026-11-23; XI-4, XI-6, XI-22, XI-27, XI-29):** facts and F-ROOM drawn per 4.3.6; chips read `PatrolForecast` (agreed, Q2); `CardFit`; codex hosted (M3); F-TREASURE (M3) and beckoning Glimpses (request) |
 | **Segments 11–12** | The stream, its draw map, pass order, safe point, memory field, launcher, V16 and arms |
 | **Camp and hub** | Afterword and keeper lines; Pledges; Testimony; the Hawker's Hour; Tithe Bowl dedup; coin owed |
 | **Conditions owner** | The `eventBoon` form (agreed, Q3 makes M2 Graces depend on it), Weary's universality, Easing |
@@ -1825,7 +1831,7 @@ The owed rows are the single list in 13; by owner:
 - **The items owner:** EV-9, EV-42, EV-43.
 - **The HZ owner:** EV-31, EV-35, EV-36 (HZ-23).
 - **Segment 9 (bosses):** seeded boss variables; the arena seal; floor-1 boss variety (EV-44); the carried RS Cut 1 question, a future item for the client (14.2). Answered by the boss rooms design (approved 2026-11-22; BR-3, BR-23 to BR-26, BR-29; its 4.2.1, 4.10, 4.12).
-- **Segment 10 (UI):** 4.12; EV-17.
+- **Segment 10 (UI):** 4.12; EV-17. Answered by the exploration and information design (approved 2026-11-23; XI-4, XI-6, XI-22, XI-27, XI-29; its 4.3.6, 4.6.1, 4.8.1, 4.10, 5); pending requests to this design's owner: beckoning Glimpses, `SideRoomPayoffMix`, the Curiosity Lodestring gain (XI-23, XI-27).
 - **Segment 11 (seeds):** the `curiosities` stream and its draw map, the pass order, the launcher order (EV-20, EV-21, EV-40).
 - **Segment 12 (validation):** V16 and the reports (EV-38, EV-39).
 - **The camp and hub design:** Afterword and keeper lines, Pledges, Testimony, the Hawker's Hour, coin owed.

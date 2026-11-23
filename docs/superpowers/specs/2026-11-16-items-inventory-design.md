@@ -726,6 +726,15 @@ Later; details lead's call unless marked)**
   a purchase raises `party.waxKeys` and creates no instance. Hiring a
   Mechanics companion at that Muster does not withdraw it (traps and
   locks design 6.11). **(change TL-25)**
+- **(agreed 2026-11-23, Q3; M3, conditional)** 1 Ear Trumpet, **only
+  when no party unit (the hero included) is Perception-trained** on the
+  camp-entry snapshot, stable for the visit (the TL-25 Wax Key test), and
+  only if the M2 report `SoloListenClickShare` misses. It is a lane-gap
+  party counter (cap 1; 15 coin *(illustr.)*): a purchase creates no
+  instance; untrained Listen becomes passive at auto-walk door pauses
+  through the next floor, its effect suspended while any living party
+  unit is Perception-trained (exploration and information design 4.5.2).
+  **(change XI-26)**
 
 **(lead's call)** Only the potions and the conditional Wax Key are limited
 stock, as the client decided; tonics, Remedy and bases are not stock-limited, and their price is
@@ -898,7 +907,8 @@ and one service, for coin or barter.
 
 - **At most one per floor**, placed in an **off-path side room**.
 - **Visible on the map once seen**, as a marker like a leftovers marker
-  (`TraderDiscovered`).
+  (`TraderDiscovered`); on the map it is a core-derived auto-mark (exploration and
+  information design 4.3.3, 5) **(change XI-7)**.
 - **Never interrupts exploration or combat.** Nothing opens on its own:
   the party steps adjacent and chooses Trade.
 - **(lead's call)** Floors 2–4 only (`trader.floors`; never the
@@ -1556,7 +1566,11 @@ coin are integers in party state, never instances (5.3). **(lead's call)**
 So is `party.waxKeys` (M2; 5.3) **(change TL-24)**. The vendor's
 `vendor.waxKeyStock` (0 or 1) is set at camp entry from the gap card's
 party snapshot and draws nothing (10.3; traps and locks design 11.1)
-**(change TL-25)**. An instance at `container(containerId)` is never
+**(change TL-25)**. The vendor's Ear Trumpet stock (0 or 1) is likewise
+set at camp entry from the party snapshot (no Perception-trained party
+unit; `stockRule: laneGap(Perception)`, a client key) and draws nothing
+(10.3; exploration and information design 4.5.2, 9.1) **(change XI-26;
+M3, conditional)**. An instance at `container(containerId)` is never
 destroyed by a lock or trap result, and a container's own additions
 (`lockId?`, `trapId?`, `heldWaxKey`) are segment 7's (traps and locks
 design 6.13, 11.1). **(change TL-27, kept)** `windfall(unitId)` is the

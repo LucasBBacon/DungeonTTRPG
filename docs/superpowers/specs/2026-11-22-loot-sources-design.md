@@ -424,7 +424,7 @@ Each source is one `LootSocketRecord` with exactly one `kind` and one `rank`, or
 
    **At most 1 coin-only container per room**: two are merged in LootBind (rule 5, phase 2).
 2. **Guarded loot sits behind its guards.** A fight host's container is on the far side of the start zone from the party-entry Portal, never inside it.
-3. **Previewed.** Side-room and Alcove containers are in line of sight from the entry threshold (Model C; the Hades lesson).
+3. **Previewed.** Side-room and Alcove containers are in line of sight from the entry threshold (Model C; the Hades lesson). Read, not changed, by segment 10's Detour quote (exploration and information design 4.4.3; XI-10, M2).
 4. **Walk line.** SR0 and HE containers have their open square within 2 squares of the room's walk line (`MainPathDetour`; HE-7 within 1).
 5. **Container count** (LP-11).
    - Target `ContainersPerFloor` ≤ Ledger A + 3. Hard cap `loot.containerCap` = 8 / 12 / 12 / 12 / 10 *(illustr.)*; on F5 the cap is also never above the filler count (LE 6.14), so F5's effective cap is min(10, fillers) (lead's call, after the check: the proposal wrote "F5 rule"). Activity containers count; the signature cache does not.
@@ -435,6 +435,8 @@ Each source is one `LootSocketRecord` with exactly one `kind` and one `rank`, or
    - Never trim a card-bearing, HE, Due, Viaticum or key-target container. `EmptyDeadEndRate` stays 0.
    - Told plainly: the toy role tables produced 12.5–14.5 containers per floor, so these cuts are needed, and the walker must confirm them.
 6. **Never empty** (settled, LE 6.4). Coin overflow becomes sundries, then `CoinSocketTrimmed`.
+
+**Pending request (segment 10; XI-27, M2).** `SideRoomPayoffMix` (FL, LP and EV owners): at most 60% *(illustr.)* of side rooms pay loot only; the rest also pay a fact, a shortcut, XP or a pointer, with no VP change (exploration and information design 4.4.6). Not a rule until the 7c, FL and EV owners rule; it is the first lever if `SideRoomVisitRate` falls below its band (exploration and information design 14.2).
 
 **By depth.**
 
@@ -652,7 +654,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
    - It avoids start zones by ≥ 2 squares where possible, plus hazard, Void-adjacent, trap-trigger, Hunch and due squares, Clearways, chokepoints and Portal neighbours.
    - It stays inside the host room. It never runs through the enemy line.
    - The route is drawn at reveal as the **scurry trail** (paired dots, one pair per route square; RC5, LP-7; 6).
-4. **Rathole form (lead's call, after the check).** One fixed cross-theme shape in the RC5 registry: an **arched opening at skirting height with the Windfall mark on its lintel**. It is never a crack, seam, cloth flap, hatch, drawer or door. Per-theme dressing changes only its material (5.3). Because a camera-side wall can render as a stub (FL 8.1), every Rathole also projects a floor decal onto its front square, a half-rim plus the Rathole icon, drawn whatever the wall's cutaway state; the got-away act ends on that decal, with the bundle shown crossing the rim.
+4. **Rathole form (lead's call, after the check).** One fixed cross-theme shape in the RC5 registry: an **arched opening at skirting height with the Windfall mark on its lintel**. It is never a crack, seam, cloth flap, hatch, drawer or door. Per-theme dressing changes only its material (5.3). Because a camera-side wall can render as a stub (FL 8.1), every Rathole also projects a floor decal onto its front square, a half-rim plus the Rathole icon, drawn whatever the wall's cutaway state; the got-away act ends on that decal, with the bundle shown crossing the rim. This decal is the precedent for segment 10's wall-mark projection (exploration and information design 4.9.7; XI-18).
 5. **Never a theme's trap, Stir or Wager prop as the Rathole, nor any Portal skin (Drape, Squeeze fill, Latch, Door) or Hairline dressing** (V15 `WindfallSkinLegal`; the Supper dumbwaiter and serving hatch, and the Carnival painted flat and tent flap, are banned, CK2, CK22; extended after the check).
 
 #### 4.7.4 Waking, the count and the hop (HZ 6.3 sub-step 3b; change LP-4)
@@ -892,6 +894,8 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 
 - Container hover: Proprietor tag, tier marks, lock card.
 - Treasure strip k / n with the by-source hover; "best remaining"; the "got away" log.
+  - **Naming (XI-19, M2):** the cell is the floor strip's **Treasure field**; "Treasure strip" is retired as a synonym here and in 4.5 (exploration and information design 4.9.9).
+  - **Counts only, narrowed (XI-23 ⚑, M3):** the by-source hover and every other free surface stay counts only, never a location; a paid or earned pointer (the Lodestring, F-TREASURE) may name one room, with its tier word and the "plain cache" / "behind risk" qualifier, notables only, class-blind (exploration and information design 4.6.1, 4.6.2).
 - Stratum Treasure line suffix.
 - Auto-close quiet summaries, their pause on focus, the settings toggle and duration, and their clickable log lines; the Glean button and merged summary.
 - **Windfall:**
@@ -925,7 +929,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
   - The boss card screen and the Memento (boss rooms design 4.11.2).
   - No Windfall or other loot clock in arenas, the Antechamber or the Sanctum. **Answered:** no Windfall in arenas (boss rooms design 11).
   - The Viaticum sits in the lair before the Forecourt.
-- **Segment 10 (UI).** 4.12.
+- **Segment 10 (UI).** 4.12. **Answered** by the exploration and information design (approved 2026-11-23; its 5 and 4.9.9): the Treasure field naming (XI-19), the counts-only narrowing for paid or earned pointers (XI-23, M3) and the pending `SideRoomPayoffMix` request (4.2; XI-27).
 
 ---
 
@@ -1180,7 +1184,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 | Width-2 offer on nab | Held lever; a report-only M3 simulator arm (after the check); adoption returns to the client | M4 | — |
 | Blocked Hairline (secret behind a light Furnishing, cleared by Shunt) | Held M3 candidate if the clock allows | M3? | — |
 | Chained Key (key on a wall hook, Unhook by Stealth) | Held M3 candidate | M3? | — |
-| Crannies; Tip-offs | Later (F3–F4 starvation; FOMO for low-Perception solo heroes) | Later | — |
+| Crannies; Tip-offs | Later (F3–F4 starvation; FOMO for low-Perception solo heroes). Tip-offs' objections answered by segment 10's class-blind, notables-only Lodestring (exploration and information design 4.6.5; XI-23, M3); Tip-offs stay Later | Later | — |
 | Trove | Later | Later | — |
 | Tattler, Shepherded escort, Herald halt | Later | Later | — |
 | Hawker; Lost Property | Segment 8 / camp hooks | hook | — |
@@ -1694,7 +1698,7 @@ The owed rows are the single list in 13; by owner:
 - **Dungeon generation 7b (IR):** LP-13, LP-14.
 - **The companions owner:** LP-8 (7.4), LP-33 (8.6).
 - **The class owners:** `ignoresWindfall` (V15s).
-- **Segment 8 (events), segment 9 (bosses), segment 10 (UI) and audio:** 4.12, 4.13, 6; segment 8's no-clock-Landmark rule in Windfall rooms; segment 9's arena reading. Segment 8 is now designed (events design, approved 2026-11-22): its EV-2, EV-7, EV-15, EV-21, EV-25, EV-35 and EV-42 rows touch 7c (4.13); `stepFunded` and F-CACHE are pending requests to 7c. Segment 9 is now designed (boss rooms design, approved 2026-11-22): its BR-27 and BR-37 rows touch 7c (4.4, 4.10, 4.13).
+- **Segment 8 (events), segment 9 (bosses), segment 10 (UI) and audio:** 4.12, 4.13, 6; segment 8's no-clock-Landmark rule in Windfall rooms; segment 9's arena reading. Segment 8 is now designed (events design, approved 2026-11-22): its EV-2, EV-7, EV-15, EV-21, EV-25, EV-35 and EV-42 rows touch 7c (4.13); `stepFunded` and F-CACHE are pending requests to 7c. Segment 9 is now designed (boss rooms design, approved 2026-11-22): its BR-27 and BR-37 rows touch 7c (4.4, 4.10, 4.13). Segment 10 is now designed (exploration and information design, approved 2026-11-23): its XI-19, XI-23 and XI-27 rows touch 7c (4.2, 4.12, 4.13, 7), and XI-10 and XI-18 read 4.2 and 4.7.3; `SideRoomPayoffMix` is a pending request to 7c.
 - **Segment 11 (seeds):** the `windfall` grandchild (LE 6.10 item 1's new row), SocketPlan, step 8 and LootBind's sub-order in the frozen generation order (LE 6.10 item 4).
 - **Segment 12 (validation):** V15 and the 7c reports.
 - **The camp and hub design:** Lost Property; the Hawker's Hour with segment 8 (Later; events design EV-42).
