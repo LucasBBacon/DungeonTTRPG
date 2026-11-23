@@ -2828,6 +2828,15 @@ may raise it to two" in ability 6.5 finds the Arcanist exclusion.
   coin exactly 15 (M1); SK-9 creation warnings (M2); the Arcanist
   variants (Farcaster, Bookhand) are M3 boon options, gated on the
   weapons owner's mundane orb and tome bases, else M4.
+- **Heirlooms and curses (segment 15): pending request (heirlooms and
+  curses design 5.1, 11, 17; approved 2026-11-23; M3; the Arcanist owner
+  confirms):** the Arcanist's R1 heirloom, the Old Ash Staff (staff,
+  two-handed as a focus), carries **Kindly Weight**: once per fight, when
+  you end an enemy's concentration, your next spell this fight costs 1
+  less from its class pool. Not in force here until confirmed; no row of
+  that design's 13 changes this document. Its F10 renames keep this
+  document's names: Undertow stays the cone (the heirloom line is Low
+  Tide) and Steady Casting stays the staff's (the line is Long Look).
 - **The simulator:** the four arms, parity, nova, spread, camp share,
   sustain sensitivity. The arms become the `Skill` axis of the seeds
   and validation design (6.2; **pending request SV-22**, 5.4).

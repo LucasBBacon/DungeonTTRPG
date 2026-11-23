@@ -73,7 +73,9 @@ Perception, Intimidation, Lore and kill order real content. **(agreed)**
 - A party morale meter, stress or panic. **(lead's call)**
 - Durability, wear, weight or junk loot. **(agreed)**
 - Committed enemy intents and scripted wind-ups. **(settled, ability model
-  5; agreed)**
+  5; agreed)** Read by change HL-19 (M4, pending request): the elite Malady
+  forecast is a live forecast, never a commitment, so this stands
+  (heirlooms and curses design 4.3.3).
 - Multi-square units. Every unit occupies one square in M1 and M2.
   **(lead's call)**
 - 5E's challenge-rating maths, encounter multiplier or optional morale
@@ -684,6 +686,21 @@ The single definition of "elite":
     it stays on controllers and elites.
 - **Presentation:** a distinct frame, a crown on the model, and the affix
   names on the plate.
+- **Pending request (change HL-19, M4; heirlooms and curses design 4.3.3;
+  client agreed 2026-11-23, Q4):** an optional limited-ability slot on an
+  elite record, `maladyAbility?`, not its own enemy type, that applies one
+  Malady (a Cursed preset) on floors 3–4 (Phrenitis floor 4 only): always
+  a save with its DC on the plate, single target, never an on-hit passive
+  or an area; the scorer never targets a unit that already carries the same
+  preset or for which it is ineligible (`EliteMaladyNeverTargetsSame`); never
+  on bosses, floor 1 or floor 5; at most one Malady-carrying elite type per
+  floor and none in the boss antechamber zone, by an EP-owned filter
+  (`MaladyNotBeforeBoss`); counted under 9.2 and telegraphed under 13.2;
+  not yet ruled.
+- **Pending request (Oath of the Iron Sleep, held; Later; heirlooms and
+  curses design 5.2 row 28, 14.2):** an authored elite "kind addition"
+  record for the Oath; none exists, so the Oath stays held until this
+  owner rules; not yet ruled.
 
 **Why ×2.** Threat = offence × defence (6.5). The template gives 1.5 × 1.09
 (accuracy) × 2 × 1.05 (saves) ≈ 3.4. One affix adds about 10–20%, so threat
@@ -839,6 +856,12 @@ The single counting rule for "2 conditions per enemy type". **(change C-2)**
   rider counts 2 toward the theme's 6, and whether Revealed is harmful
   at all. Not decided here; no M2 theme deals radiant, so it blocks only
   M3 themes that do (run structure design 8.0).
+  **Pending request (change HL-19, M4; heirlooms and curses design
+  4.3.3):** an elite's `maladyAbility` counts as the Cursed family toward
+  the type's 2 and the theme's 6, which hold with the slot on and off; a
+  theme declares Cursed in `harmfulConditions[]` before any of its elites
+  can carry a Malady (V22 `MaladyInThemeSix`; RT-15, RT-16, EV-34 pending;
+  fallback: Curiosity and shrine sources only); not yet ruled.
 - **Counts toward neither:** own-side buffs (Rallied, Spurred, Helped,
   Warded on itself). They do count toward the wave's condition budget and
   the plate.
@@ -1160,7 +1183,8 @@ Deterministic:
    4.17; M1 reserved, M2):** every identity, dreamed options and unused
    fallbacks included, has its own `lineRoll` entry (4 draws, always
    consumed: line, alternate line, element, LootPlan wand charges);
-   `curseGate` takes 2 draws per floor (reserved M2, used Later); the
+   `curseGate` takes 2 draws per floor (reserved M2, used Later; M4 by
+   change HL-29, heirlooms and curses design 4.2, 10); the
    boss-card and Viaticum fallback kinds grow from 3 to 5 entries. Parent
    identities keep their positions, and each identity is filtered before
    its draw (filter-first, 15.3 step 2).
@@ -1816,7 +1840,9 @@ The job split **(agreed)**: Intelligence and Lore tell the party **what an
 enemy is** (traits, resistances, abilities, cooldowns). Wisdom and
 Perception tell it **what an enemy is about to do**. Enemies keep some
 ability to surprise mid-combat: a guileful enemy's intent stays unreadable
-to a party that has not invested in Perception.
+to a party that has not invested in Perception. **Pending request (change
+HL-19, M4; heirlooms and curses design 4.3.3):** one exception to the
+split, for `malady`-flagged elite abilities only (13.2); not yet ruled.
 
 **Owed at M2 (change LM-0; Arcanist design 9.3):** the enemies owner sets
 Study's difficulty (Lore, ability model 7.2) and how long a Study's
@@ -1887,6 +1913,17 @@ Further telegraphs, all **(lead's call)**:
   one Stoker type per theme; not yet ruled.
 - Boss actions (M2) that use a Signature are announced the same way before
   the turn they would follow.
+- **Pending request (change HL-19, M4; heirlooms and curses design 4.3.3,
+  T1; client agreed 2026-11-23, Q4):** this forecast extended from boss
+  signatures to an elite's `malady`-flagged ability (7.2): from the elite's
+  first turn its plate lists the ability with name, shape, save DC and
+  "Warded does not stop this", without waiting to be seen or revealed by
+  Lore; whenever the elite would use it if its turn began now, the banner
+  shows the Malady and its target to everyone, whatever its guile. A
+  forecast, never a commitment: the deferral (ability model 5) and the
+  non-goal (2) stand. Fallback if refused: existing tools only (listed once
+  seen or revealed by Lore, the 13.1 second tint, 13.3 reads, the Stratum
+  line). Not yet ruled.
 
 ### 13.3 Intent reading
 
@@ -2702,7 +2739,9 @@ ruled.
    unit.** The items design supplies k. A boss signature item carries no
    cost add; the boss guards validate it. **(change I-9)**
    **Later (change IR-20; item rolls design 4.15):** a cursed carried
-   item's cost add uses its benefit's T+1 value.
+   item's cost add uses its benefit's T+1 value. M4 with item curses
+   (change HL-29; agreed, Q5; heirlooms and curses design 4.2, 10), unless
+   the conditions owner refuses its budget reading.
    **Pending (item rolls design 4.12, 14.2; M2):** if `EliteKpcDelta`
    exceeds about 10% *(illustr.)*, a per-line monster cost-add multiplier
    for reaction lines engages (lead and enemies owner); open until the M2
@@ -2848,7 +2887,7 @@ S-5)**:
 
 **Enemies never pick up party items or any dropped item**, except their own
 Disarmed weapon. No loot ping-pong, and an heirloom can never walk off the
-floor.
+floor (read: heirlooms and curses design 4.1.1).
 
 ### 15.6 Drops
 
@@ -3003,7 +3042,9 @@ design (2026-11-23; pointer only). The original list:
   under the +5 cap.
 - The identification flow.
 - Cursed carried items (Clinging): can a carrier hold one, and is it
-  marked?
+  marked? Taken up by the heirlooms and curses design (2026-11-23; 4.2):
+  carriers apply the benefit only and show no curse mark; M4 (change
+  HL-29).
 - Oils and Coated; Disarmed in full; Pitted Armour.
 - The loot summary layout.
 - Theme materials for unarmed enemies (Later, optional).
@@ -3874,7 +3915,9 @@ The build fails when:
     rerolls, family caps, salvage, comparisons and swap.
 - **Later:** Shaken with T8 and T9; support, summoner and
   thief roles; Later affixes; the Feud template; Disarm seizure; oils;
-  cursed carried items; multi-square bosses; committed boss signature moves
+  cursed carried items (M4 by change HL-29; agreed, Q5; heirlooms and
+  curses design 10; else here); the Iron Sleep elite record (held
+  request, 7.2); multi-square bosses; committed boss signature moves
   (a scripted area marked at the end of the boss's turn, resolving at its
   next turn start, at most one per boss), pulled to M3 as boss Gambits if
   their gates pass, else kept here (13.2) **(change BR-32; boss rooms
@@ -4103,6 +4146,12 @@ committed wind-ups (13.2).
   pick-one-of-three pool, so Tactician is reachable in a run (13.4).
   Settled in the classes design (2026-11-17): Perception mastery sits in
   the Shade and Herald offer lanes and the universal draw. **(change CL-13c)**
+- **Heirlooms and curses:** settled in the heirlooms and curses design
+  (2026-11-23; its 11). Its requests to this owner, pending: change HL-19
+  (M4: the `maladyAbility` slot, 7.2; its counting, 9.2; the forecast
+  extension, 13.2) and the held Iron Sleep record (7.2). Heirlooms are
+  never picked up by enemies (15.5); cursed carriers move to M4 (15.3,
+  15.9; change HL-29).
 
 ## 26. Open items for the client
 

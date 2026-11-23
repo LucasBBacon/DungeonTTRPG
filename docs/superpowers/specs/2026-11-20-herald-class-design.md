@@ -2279,6 +2279,10 @@ heal half is worth nothing without a card; almost no gain on solo floor
 | Mindless | **Weakest:** Plain Speech; Toll dead | **Best** on undead and poison floors | Lead by Example | Tempo untouched |
 | Emboldened | Disadvantage on Antiphon | — | Shove members out | — |
 
+The Hearth's "Cures against boss afflictions" keeps its approved
+meaning; Herald text never uses "Malady" (a reading; heirlooms and
+curses design 4.3.5, 13).
+
 **Report owed:** per-subclass clear rate by mindless share and by
 boss-only rounds (the trap-room report, 5.4).
 
@@ -3073,6 +3077,15 @@ consumables 16.8 finds none, and "15 scrolls" is found there.
   SK-1 (7.11 coin exactly 15, M1) and SK-2 (set B 1 javelin in 7.2, 7.7
   and 7.11; the 7.12 rerun; M2). Informed: SK-9 creation warnings (7.12,
   M2). Kit variants are boon options only (SK-7, M3; agreed, Q1).
+- **The heirlooms and curses design (segment 15; approved
+  2026-11-23):** no HL row changes this document. Reading: 9.5's
+  "Cures against boss afflictions" keeps its approved meaning, and
+  Herald text never uses "Malady" (heirlooms and curses design 4.3.5,
+  13). **Pending request (heirlooms and curses design 5.1, 11; M3):**
+  the Herald owner confirms the R1 Herald heirloom, the Thumb-Worn
+  Totem (a Totem, 7.7), and its line **Carrying Voice**: your Rally
+  reaches +2 / +2 / +3 squares (b1 / b2 / b3). Until confirmed, the
+  line is the heirlooms and curses design's, not a Herald rule.
 - **The ability 8.4 aura ruling:** Pennant, Haunting Chorus.
 - **Builders:** `sourceUnitId` on every condition instance (Draw the
   Sting).

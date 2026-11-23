@@ -771,6 +771,17 @@ switches the last Busy group to Posted; (3) the showcases, by switching
 a group to its next-ranked legal formation that serves the missing
 class. Each switch re-runs 10c–10f for that group only.
 
+**Pending request (HL-19; M4; agreed, Q4 of the heirlooms and curses
+design; the EP owner rules):** an EP-owned **Malady filter**, draw-free,
+after placement: at most one Malady-carrying elite type per floor
+*(illustr.)*; it keeps the optional `maladyAbility` slot on the first
+Malady-carrying type in frozen placement order, turns it off on every
+later one, and turns it off on any elite placed in the boss antechamber
+zone (`MaladyNotBeforeBoss`). It touches no type, budget or draw; the
+Stratum Card's "Maladies abroad" line reads its result (an RS 6.9
+request). Nothing changes until the EP owner rules (heirlooms and
+curses design 4.3.3, 9.1, 11).
+
 **Start sockets and constructive exclusions before 10d** (lead's call;
 EP-25; the socket definition is a lead's call after the check): the
 solver works only over **start sockets** (6.6.1), never over every

@@ -329,6 +329,16 @@ All decided.
   only through declared `kitDelta` entries in `configHash`, with a
   reserved V21 check (starting kits design 4.7, 9.2 (m), 14.2; change
   SK-15, request, Later).
+  Heirlooms are earned as content unlocks, never power, under this
+  rule as written (heirlooms and curses design 4.1.2; change HL-1,
+  read, agreed 2026-11-23, heirlooms and curses Q2, M3). Pending (owed
+  by this document with run structure): a request to fill the reserved
+  run-modifier slot with Oaths, opt-in meta-curses that change kind,
+  never stats, never ease a run and reward content only; until the main
+  design and run structure difficulty decision rules, the slot stays
+  unlit and the Oath catalogue is held (heirlooms and curses design
+  4.5, 14.2; change HL-21, request, agreed 2026-11-23, heirlooms and
+  curses Q6, Later).
 - **Difficulty ladder.** Each win unlocks an optional harder tier. From
   M3, Nightmare tiers add kind, not stats, and the Perilous Door makes
   the ladder per-floor (run structure design 9.1; change RT-21, M3).
@@ -829,6 +839,11 @@ names and Oddments) are settled in `2026-11-23-starting-kits-design.md`;
 they are no longer pending, and its hooks on this document are taken
 up in section 4.7 (starting kits design 11, 13; changes SK-7, read;
 SK-15, request, pending).
+
+Heirlooms, item curses, Maladies and Oaths are settled in
+`2026-11-23-heirlooms-curses-design.md`; they are no longer pending, and
+its hooks on this document are taken up in section 4.7 (heirlooms and
+curses design 11, 13; changes HL-1, read; HL-21, request, pending).
 
 - All numbers: hit points (shape settled there), damage, experience curve, loot rates.
 - The dungeon generation algorithm.

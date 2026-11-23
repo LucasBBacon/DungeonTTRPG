@@ -168,7 +168,10 @@ wind-up, boss rooms design 4.3.1, **change BR-6, a flagged reading; M2**;
 one exception for bosses: a `gambit` signature, never on floor 1, commits
 its squares at the end of the boss's turn and resolves at the start of its
 next, the escape guarantee a runtime constraint on the scorer, boss rooms
-design 4.14.3, **change BR-32; agreed, Q3; M3 (gated), else Later**);
+design 4.14.3, **change BR-32; agreed, Q3; M3 (gated), else Later**;
+an elite's `maladyAbility` announced as a live forecast is not a wind-up
+and never commits: the deferral stands, heirlooms and curses design
+4.3.3, **change HL-19, read; pending request to the enemies owner; M4**);
 upgrades written as data patches instead of effects.
 
 ## 6. Abilities and resources
@@ -1370,7 +1373,9 @@ Applied on 2026-11-16:
   in `2026-11-16-items-inventory-design.md` (items design). What remains
   open moves to the category designs (items design 17): Clinging.
   **(change
-  I-15)** Starting kits are set in the four class designs, the
+  I-15)** Clinging is taken up by `2026-11-23-heirlooms-curses-design.md`
+  (heirlooms and curses design 4.2; item curses moved from Later to M4,
+  agreed, Q5). **(change HL-29, read; M4)** Starting kits are set in the four class designs, the
   companions design and the starting kits design
   (`2026-11-23-starting-kits-design.md`); the minimal starting set M1
   needs is there (starting kits design 5.1). **(change SK-17, M2)**
@@ -1449,6 +1454,16 @@ Applied on 2026-11-16:
   3, 6 and 9) and 15.3 (the run starts with 2 supply; the kit strip's
   supply text comes from that constant) unchanged (starting kits design
   2.1, 4.2). **(change SK-17)**
+- **Heirlooms and curses:** settled in
+  `2026-11-23-heirlooms-curses-design.md` (heirlooms and curses design,
+  segment 15, approved 2026-11-23). It changes no rule here. It reads
+  the wind-up deferral in 5 unchanged: the elite Malady ability uses the
+  enemies design's announced-forecast pattern, never a committed intent
+  (heirlooms and curses design 4.3.3; pending request to the enemies
+  owner, M4). It reads 2's readied-action non-goal (the Pituita Cast-off
+  deed, 5.2) and 6.2's `rest` and `camp` pools unchanged; no Malady lowers
+  a pool maximum. Item curses, Clinging and Maladies are M4 (agreed, Q5).
+  **(changes HL-19, HL-29, read)**
 - **Content volume:** counts of companions, themes, monsters and bosses for
   M2. The M1 slice class is the Vanguard (classes design) **(change
   CL-13b)**.

@@ -1386,6 +1386,18 @@ cleared of its patrol is restable only before first engagement, and
 rests before it stay legal (`PreBossRestSafety`). Rests elsewhere on the
 floor stay legal. The rule is the same on floor 1.
 
+**Pending request (HL-31, M3; heirlooms and curses design 4.1.2):** at
+each boss kill, beside the canonical `BossDefeated` (read, unchanged),
+Core emits a new event `BossFelled{bossId, bossFloor, themeId,
+killingUnitId, credited[{instanceId, familyId, slotClass}]}`, crediting
+the weapon or focus that dealt the killing blow and every shield or
+armour worn by a standing party unit; heirloom earning (R2) keys to it,
+and a non-Core profile-progress step at WO6 is its only reader for
+profile purposes (heirlooms and curses design 9.1, V22 (h)). Not a rule
+until the FL owner (Core events) rules, with the IR and CMP owners;
+fallback if refused: weapon and focus R2 keyed to the killing blow only,
+no shield or armour R2 at M3 (heirlooms and curses design 14.2).
+
 **The Viaticum (F5; LE-5, M2; read; loot economy design 6.11, agreed
 Q1):** the F5 boss share sits in a main-path Plain container after the
 lair that is not in a Circuit room, not in a fight host (HE-4's

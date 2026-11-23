@@ -1,7 +1,7 @@
 # Heirlooms and Curses: Design (Segment 15)
 
 Date: 2026-11-23
-Status: Draft, revised after the design check (builder, consistency, fairness and narrative-art lenses), awaiting client approval, 2026-11-23
+Status: Approved, 2026-11-23
 Parents (immediate): `2026-11-23-starting-kits-design.md` (starting kits design, "SK", segment 14, approved 2026-11-23, **the most recent template**), `2026-11-23-camp-hub-design.md` (camp and hub design, "CH", segment 13), `2026-11-23-seeds-validation-design.md` ("SV", segments 11–12), `2026-11-23-exploration-information-design.md` ("XI", segment 10), the loot designs `2026-11-22-loot-economy-design.md` ("LE", 7a), `2026-11-22-item-rolls-design.md` ("IR", 7b) and `2026-11-22-loot-sources-design.md` ("LP", 7c), `2026-11-22-events-design.md` ("EV", segment 8), `2026-11-22-boss-rooms-design.md` ("BR", segment 9), and `2026-11-23-cross-document-comparison.md` (reviews, "CC").
 Other parents: `2026-11-15-dungeon-rpg-design.md` (main design, "MAIN"),
 `2026-11-16-character-stat-model-design.md` ("STAT"),
@@ -25,20 +25,20 @@ All 32 approved specifications and the cross-document comparison were read or gr
 
 Items marked **(agreed)** are the client's answers of 2026-11-23 (final) to the six questions this design raised (Q1–Q6; sections 0.2 and 14.1), each answered with the lead's recommendation (option A), or restate a client answer recorded in an approved document; parent documents' questions are always named with their document ("SK Q1", "SV Q1", "EV Q4", "TK Q2") so that they never read as this document's Q1–Q6. The client also said that everything else in the lead's proposal stands as written: heirloom identity per ITEMS 14; the earning routes; Grip-marks as display-only history; the HL-3 F1 Due waiver for any heirloom slot; HL-4 (never a Curiosity price); the shelf; item curses and folk cost lines; Maladies as Cursed presets with their own slot and Cast-off deeds; Oaths; the Burdened twin and Redeemed template links; the full catalogue; art and audio; the new mechanics; the numbers; data and validator V22 `HeirloomsCurses`; staging (now with item curses and Maladies at M4); ownership and hooks; the binding requirements; HL-1 to HL-30; the risks; and the appendix resolutions and names. Names are placeholders pending the naming pass. (The design check renamed several placeholders, among them "Passings", now **Grip-marks**; 14.3 lists every rename. The client's own words above are quoted as given.)
 
-**The lead's answers (0.1) and the recommended frame (3.3)** were accepted by the client by proceeding to the six questions. They are recorded here as the lead's answers, to be confirmed by the client with this document, **including every told-plainly item of 14.1**: the naming idea is narrowed to obsolete humoral and theological complaints; the rejected names and their reasons; "Geas" is rejected as an SRD name; "Black Bile" is rejected for its collision with the bile square; the reward is breadth, not power; inherited afflictions across runs, Weighted heirlooms with Entails, heirloom loss on death, a priced camp cure and boss-inflicted Maladies are all rejected.
+**The lead's answers (0.1) and the recommended frame (3.3)** were accepted by the client by proceeding to the six questions. They are recorded here as the lead's answers; the client confirmed them on 2026-11-23, when it approved this document as a whole, **including every told-plainly item of 14.1**: the naming idea is narrowed to obsolete humoral and theological complaints; the rejected names and their reasons; "Geas" is rejected as an SRD name; "Black Bile" is rejected for its collision with the bile square; the reward is breadth, not power; inherited afflictions across runs, Weighted heirlooms with Entails, heirloom loss on death, a priced camp cure and boss-inflicted Maladies are all rejected.
 
-Items marked **(lead's call)** were filled in by the design lead inside approved rules and were in the proposal the client answered; they become binding when the client approves this document. Items marked **(new lead's call)** were made while writing this document, beyond that proposal, mostly from the corpus check; they are listed in 14.1. Items marked **(lead's call, after the check)** were made in answer to the design check of this document (builder, consistency, fairness and narrative-art lenses); none overrides a client answer; they are listed in 14.3 with the "Told plainly after the check" items (T1–T14). Items marked **(settled)** restate a rule from an approved document; **(decided)** marks a main-design client decision. Items marked **(change HL-n)** amend an approved document and are listed, with the exact sections they touch, in 13; rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there. Items marked **(told plainly)** narrow or re-read approved text, contest the brief, the client, a judge, a critic or a draft, or state an unwelcome forecast; they are listed in 14.1.
+Items marked **(lead's call)** were filled in by the design lead inside approved rules and were in the proposal the client answered; the client confirmed them all on 2026-11-23, when it approved this document as a whole, and they are binding. Items marked **(new lead's call)** were made while writing this document, beyond that proposal, mostly from the corpus check; they are listed in 14.1 and the client confirmed them all on 2026-11-23. Items marked **(lead's call, after the check)** were made in answer to the design check of this document (builder, consistency, fairness and narrative-art lenses); none overrides a client answer; they are listed in 14.3 with the "Told plainly after the check" items (T1–T14), and the client confirmed them all on 2026-11-23. Items marked **(settled)** restate a rule from an approved document; **(decided)** marks a main-design client decision. Items marked **(change HL-n)** amend an approved document and are listed, with the exact sections they touch, in 13; rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there, and the client's approval of this document on 2026-11-23 (with Q1–Q6 where a row names one) covers them. Items marked **(told plainly)** narrow or re-read approved text, contest the brief, the client, a judge, a critic or a draft, or state an unwelcome forecast, and were told to the client in plain words (14.1; those found in the check, 14.3, T1–T14); the client confirmed them all on 2026-11-23. Every item here is binding on the builders.
 
 | Marking | Meaning |
 |---|---|
 | **(settled)** | Restates a rule from an approved document |
 | **(decided)** | A main-design client decision, restated |
 | **(agreed)** | A client answer: Q1–Q6 of this document (2026-11-23, final), or one recorded in an approved document (named with its document), restated |
-| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal (the lead's answers of 0.1 and the frame of 3.3 included); binding once the client approves this document |
-| **(new lead's call)** | A lead's call made while writing this document, beyond the answered proposal; listed in 14.1; binding once the client approves this document |
-| **(lead's call, after the check)** | A lead's call made in answer to the design check; never overrides a client answer; listed in 14.3 with the "Told plainly after the check" items; binding once the client approves this document |
-| **(change HL-n)** | Amends an approved document; listed with its exact sections in 13. Rows that touch **settled**, **decided** or **agreed** text are flagged ⚑ there |
-| **(told plainly)** | Narrows or re-reads approved text, contests the brief, the client, a judge, a critic or a draft, or states an unwelcome forecast; listed in 14.1 |
+| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal (the lead's answers of 0.1 and the frame of 3.3 included); confirmed by the client with this document on 2026-11-23 |
+| **(new lead's call)** | A lead's call made while writing this document, beyond the answered proposal; listed in 14.1 and confirmed by the client on 2026-11-23 |
+| **(lead's call, after the check)** | A lead's call made in answer to the design check; never overrides a client answer; listed in 14.3, with the "Told plainly after the check" items, and confirmed by the client on 2026-11-23 |
+| **(change HL-n)** | Amends an approved document; listed with its exact sections in 13. Rows that touch **settled**, **decided** or **agreed** text are flagged ⚑ there; the client's approval of 2026-11-23 covers them |
+| **(told plainly)** | Narrows or re-reads approved text, contests the brief, the client, a judge, a critic or a draft, or states an unwelcome forecast; told to the client in plain words (14.1; those found in the check, 14.3) and confirmed by the client on 2026-11-23 |
 | **(request)** | Asks another owner to rule; changes nothing until that owner rules; the fallback is stated (14.2) |
 | **(hook)** | Owned by another design; this design states only what it needs |
 | *(illustr.)* | An illustrative number, owned by the builders and calibrated by the simulator or human sessions (8, 9). Never binding |
@@ -73,7 +73,7 @@ Items marked **(lead's call)** were filled in by the design lead inside approved
 - **Links, all opt-in and power-neutral (Later):** the Burdened twin (an heirloom taken under the Oath of the Burdened Hand) and the Redeemed template. **Inherited afflictions across runs are rejected** (told plainly).
 - **Rejected:** Weighted heirlooms with Entails and "Set Down"; a third stacking difficulty ladder; heirloom loss on death; a priced camp cure; boss-inflicted Maladies; the names "Black Bile", "Geas" and "Echo"; the thorned-ring and knot badges (told plainly).
 
-### 0.1 The lead's answers in plain words (lead's call; accepted by the client by proceeding; confirmed with this document)
+### 0.1 The lead's answers in plain words (lead's call; accepted by the client by proceeding; confirmed by the client on 2026-11-23)
 
 1. **The client's naming idea: adopted, scoped by register, and never mixed inside one scope** (agreed, Q1; told plainly where it narrows the brief).
    - **Mind-disease names go only on Maladies**, the run-scoped states the dream lays on a unit. They never go on items, heirlooms, enemies or Oaths.
@@ -327,7 +327,7 @@ The research drafts surveyed these games and tables. Details the drafts marked "
 
 Judges 1 and 2 chose Model A as the frame. Judge 3 chose Model C's centre of gravity on Model A's chassis. All three rejected Model B's Weighted heirlooms and Set Down.
 
-### 3.3 Model A's chassis with Model C's centre (lead's call; accepted by the client by proceeding)
+### 3.3 Model A's chassis with Model C's centre (lead's call; accepted by the client by proceeding; confirmed by the client on 2026-11-23)
 
 - **Model A's opt-in-weight rules:** ITEMS 14 kept whole; Maladies as Cursed presets; every cost printed.
 - **Model C's centre of gravity:** Maladies are where the curse layer bites, including telegraphed elite sources.
@@ -1023,9 +1023,9 @@ All reports are calibration class, beside DH 18.2: they inform the client and ne
 
 ## 13. Changes to approved documents
 
-To be applied when the client approves this document. **This document edits no parent document itself**; the rows are applied by the owners of the sections they touch (lead's call), and rows owed by other owners are listed again in 17. Every row names the exact sections it touches. Rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ in the "Flag" column; as in the SK and CH precedents, the Flag column also marks rows that only *read* such text without changing it. Rows marked "request" change nothing until their owner rules; 14.2 names each fallback. M3, M4 and Later rows are recorded as applied text marked with their wave and take effect at that wave.
+Applied on 2026-11-23, when the client approved this document. **This document edits no parent document itself**; the rows are applied by the owners of the sections they touch (lead's call), and rows owed by other owners are listed again in 17. Every row names the exact sections it touches. Rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ in the "Flag" column; as in the SK and CH precedents, the Flag column also marks rows that only *read* such text without changing it. **The client's approval of 2026-11-23 covers the flagged rows** (with Q1–Q6 where a row names one). Told-plainly rows were told in 14.1 and, for those found in the check, 14.3, and confirmed by the client on 2026-11-23. Rows marked "request" are requests to other owners, recorded as pending requests; they change nothing until their owner rules, and 14.2 names each fallback. M3, M4 and Later rows are recorded now as applied text marked with their wave and take effect at that wave.
 
-**Readings recorded inside this design (no approved text changes; each owner confirms its own reading):**
+**Readings recorded inside this design (no approved text changes; recorded as readings, approved by the client with this document on 2026-11-23; each owner confirms its own reading):**
 - SK 4.5.2's "nothing ever returns as a boon or an item" means no instance returns.
 - Heirloom Oddments use the default pool (SK 4.5.2, read).
 - Warded never blocks a Malady (CON 18.9).
@@ -1074,7 +1074,9 @@ The options the client rejected (Q1-B and C, Q2-B, Q3-B and C, Q4-B, Q5-B, Q6-B)
 
 ## 14. Open items for the client
 
-Awaiting the client's approval of this document as a whole: the lead's answers of 0.1 and the frame of 3.3 (accepted by proceeding); every lead's call; the new lead's calls of 14.1; the told-plainly items of 14.1; the readings recorded in 13; and the flagged rows of 13. The six questions raised before writing were answered on 2026-11-23 **(agreed)**, each with the recommended option (A). Writing raised **no new client question**: every new lead's call sits inside the six answers, corrects the proposal's own text against an approved rule, or is flagged against the text it touches in 13. **The design check raised none either**: every lead's call after the check (14.3) implements an answer the client gave, closes a gap the answer left, or corrects a draft rule against an approved one; those that change what the client may have pictured are told plainly (T1–T14). The future items in 14.2 come back only if a report, an owner's refusal, a wave or a later design triggers them.
+None. Approved by the client on 2026-11-23.
+
+The client approved this document as a whole on 2026-11-23, including the lead's answers of 0.1 and the frame of 3.3 (which the client had accepted by proceeding); every lead's call (the lead's calls of the answered proposal, the new lead's calls in 14.1 and the 22 lead's calls after the check in 14.3); the told-plainly items (those in 14.1 and "Told plainly after the check" T1–T14 in 14.3, all as written); and the readings recorded in 13; and its approval covers the flagged rows of 13. The six questions raised before writing were answered on 2026-11-23 **(agreed)**, each with the recommended option (A). Writing raised **no new client question**: every new lead's call sits inside the six answers, corrects the proposal's own text against an approved rule, or is flagged against the text it touches in 13. **The design check raised none either**: every lead's call after the check (14.3) implements an answer the client gave, closes a gap the answer left, or corrects a draft rule against an approved one; those that change what the client may have pictured are told plainly (T1–T14). The future items in 14.2, which come back only if a report, an owner's refusal, a wave or a later design triggers them (including the owner-refusal fallbacks and the report-triggered items), and the naming pass remain future items.
 
 ### 14.1 This document
 
@@ -1086,7 +1088,9 @@ Awaiting the client's approval of this document as a whole: the lead's answers o
 - **Q5, waves (HL-29):** option A, item curses and Maladies move to M4 (an agreed-Later item moved by the client); Oaths and other opt-in pieces stay Later. Rejected: B, keep Later.
 - **Q6, meta-curses (HL-21):** option A, request the MAIN/RS owners of the CH-24 slot to fill it with Oaths (kind only, content rewards), with a fallback. Rejected: B, leave the slot unlit until the difficulty decision.
 
-**Told plainly (to be confirmed by the client with this document):**
+**The lead's answers (0.1) and the frame of 3.3** were accepted by the client by proceeding and confirmed by the client on 2026-11-23, with this document, including every told-plainly item below.
+
+**Told plainly (confirmed by the client on 2026-11-23, with this document):**
 1. The naming idea is adopted but narrowed: mind-disease names to obsolete humoral and theological complaints, and only on Maladies; never on items, heirlooms, enemies or Oaths (0.1 item 1).
 2. Rejected names, with reasons: Calenture (suicide imagery), Wanhope (despair), Nostalgia and Mal du pays (a waking home), Somnambulism, Hypochondria and Dementia (living diagnoses), the Megrims and Quartan Ague (common living conditions), Hysteria, the vapours, lunacy, mania and madness (gendered terms or slurs), St Vitus' dance (a real saint) (0.1, A.2).
 3. "Geas" is rejected as an SRD spell name (RS 7.6); the meta-curse word is "Oath".
@@ -1109,7 +1113,7 @@ Awaiting the client's approval of this document as a whole: the lead's answers o
 20. Item curses stay low-stakes (F3+, at most 1 per floor, camp clears them); the curse layer's weight sits on Maladies (2.3 F5).
 21. The research is from recall and must be checked before any claim is quoted (1; Appendix B).
 
-**New lead's calls (made while writing; binding once the client approves this document):**
+**New lead's calls (made while writing; confirmed by the client on 2026-11-23, with this document):**
 1. **Five heirloom line renames and one more (F10):** Undertow → Low Tide (an ARC spell); Unbowed → Held Ground (an approved armour property); Braced → Set Heels (EP pose word; VG's Later Brace); Steady Sight → Long Look (ARC's Steady Casting); Called Across → Carrying Voice (SK's "Called {givenName}" key); Padding → Quilted (a pipeline term). All 0 hits (5.1, A.2).
 2. **Leaden Maladies by pool tag (F11):** Acedia was Leaden on a `rest` pool (Recovery is a value, not a pool) and Melancholia on a `camp` pool, floored at 1. **Superseded after the check** (14.3 item 12, T5): no Malady lowers a maximum (`MaladyNeverLowersMax`).
 3. **Saltless rewritten against DH (F12):** "a potion heals you 2 less (minimum 1)" *(illustr.)*, because a potion heals Recovery, not dice (5.2).
@@ -1128,6 +1132,8 @@ Awaiting the client's approval of this document as a whole: the lead's answers o
 16. **The 13 register has Flag and Approval columns in the SK shape**, with read flags on HL-5, HL-6, HL-10 to HL-14, HL-16, HL-18 to HL-22, HL-25, HL-26, HL-28 and HL-30, which the proposal's register did not flag. **After the check**, HL-2, HL-8 (Settled, ITEMS 14) and HL-9 (Agreed, CH 4.8) are flagged too, HL-17, HL-19, HL-21 and HL-29 name every section they touch, and HL-31 is added (14.3 item 20).
 
 ### 14.2 Future items triggered by reports, owners or later designs
+
+These come back to the client only if a report, an owner's refusal, a wave or a later design triggers them; each fallback is a lead's call (confirmed by the client on 2026-11-23, with this document) unless marked.
 
 | Item | Trigger | What happens | Owner / approval |
 |---|---|---|---|
@@ -1160,7 +1166,7 @@ Awaiting the client's approval of this document as a whole: the lead's answers o
 
 The design check (builder, consistency, fairness and narrative-art lenses) was answered inside the client's six answers. No client answer is overridden; where a fix narrows or re-reads an answer's wording, it is told plainly below.
 
-**Lead's calls after the check (binding once the client approves this document):**
+**Lead's calls after the check (confirmed by the client on 2026-11-23, with this document):**
 1. **The `BossFelled` Core fact and the profile-progress step (HL-31 ⚑, request):** R2 keys to a Core event at each boss kill, never to the display Deed (IR 6.1, IR 9, V14 (j)); weapon or focus by the killing blow, shield or armour worn by a standing party unit; a non-Core step at WO6 is the only reader and fills `bynameKey` from the display layer (4.1.2, 9.1, V22 (h)).
 2. **Bequest cardinality, order and life cycle:** at most one offer per run, by deepest boss floor, then earliest event, then weapon before worn piece, then creation order; R2 before R5; a pending queue, one per family, never overwritten; Hang it or Set aside; a re-check that the template is still locked; the pending offer shown in Begin again's picker and as a class-pick line (4.1.2, 9.1).
 3. **The run-end table and the WO6 order:** personal unravelled runs keep R1, R2 and Grip-marks already earned; abandoned and seeded runs write nothing; one fixed write and reveal order (4.1.2; HL-6, HL-10).
@@ -1184,7 +1190,7 @@ The design check (builder, consistency, fairness and narrative-art lenses) was a
 21. **Art and audio:** glyphs off the diamond and ring families with `GlyphsDistinctFromRegistry`; the afflicted tell on the base, never at the head; emblem-only codex plates and a forbidden-imagery list; cues moved outside CH AN9's families; Plain names labels per record; the content note shown inline once (5.2, 6, 4.8; HL-27, HL-28).
 22. **Reports:** each with a formula, unit, source (sim, human, telemetry) and comparison arm; curse-off and chip-off control arms; `MaladyAtBossShare`, `MaladyCompanionShare` (9.3); the M4 volume and the sensitivity-read timing (8.7).
 
-**Told plainly after the check (to be confirmed by the client with this document):**
+**Told plainly after the check** (none overrides a client answer; confirmed by the client on 2026-11-23, all as written):
 - **T1. Q4's "intent-telegraphed" uses the approved forecast, not a committed intent.** The corpus has no committed enemy intents (ENM 2, settled with ABL 5; ENM 13.3, agreed). The elite Malady ability is announced to everyone as a live forecast, ENM 13.2's boss-signature pattern extended to it (a request to ENM). If ENM refuses, the telegraph rests on the Stratum line and the existing reads.
 - **T2. Q2's "keyed to the Deed" is keyed to the Core fact the Deed records.** Deeds are display only and no rules code may read them (V14 (j)), so R2 reads `BossFelled` instead. For weapons and foci this is the same event as the Deed; for shields and armour, which never land a killing blow, the credit is "worn by a standing unit when the boss falls", a new rule requested from the FL, IR and CMP owners (HL-31). Whether such a piece also gets a byname is a separate request; R2 does not depend on it.
 - **T3. Q3's chip is class-wide over cards that can be cursed,** not "every unidentified Rare+ card": a card from a channel `curseGate` never serves, a ring, or a family with no authored twin never shows it, because "may Cling" would be false there (RC1). Whether a given card is cursed is still never read.

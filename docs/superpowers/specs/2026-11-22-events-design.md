@@ -273,7 +273,7 @@ Every Curiosity is written into its theme's Law and Obsession. The Dreamer is ne
 | 22 | **M3 meta:** Fragments folded into F-BOSS options; Readings; Omen Retellings; Nightmare Provisos (costs only); Overtures; Easing (4.9) | M3 | lead's call; EV-29 to EV-33 |
 | 23 | **Floor-1 variety in parallel:** the Wake at F1PoolParity when its gate passes; F1 Blueprint and boss variety as a production priority (0.1, 5.3) | M2 | **agreed, Q2**; EV-44 ⚑ |
 | 24 | **No mercy:** novelty and memory relief only (4.4.7, 4.4.8) | All | **agreed, Q4**; EV-10 ⚑ |
-| 25 | **Later:** Pledge sources and Testimony; the Hawker's Hour; curse cures and bargains (4.8, 10) | Later | lead's call; EV-41 to EV-43 |
+| 25 | **Later:** Pledge sources and Testimony; the Hawker's Hour (4.8, 10). Curse cures and bargains **moved to M4** (EV-43; agreed, heirlooms and curses Q5; HL-29; heirlooms and curses design 4.2, 10) | Later; M4 (EV-43) | lead's call; EV-41 to EV-43 |
 
 ### 0.4 Intent, goals and anti-goals (new lead's call: added in the template's shape)
 
@@ -582,7 +582,7 @@ All three judges independently chose the same winner:
   - **Pending request (XI-27; M2):** `SideRoomPayoffMix` (FL, LP and EV owners): at most 60% *(illustr.)* of side rooms pay loot only; the rest also pay a fact, a shortcut, XP or a pointer (exploration and information design 4.4.6).
 - **Route.** Reveal an existing Hairline or a Latch's far side. A priced extra route to an existing lock (4.4.5). M3: skin an FL-generated Chute (EV-36).
 - **Grace** (4.4.3). From Curiosity cards only, never Interludes.
-- **Strand** (4.5.7). M3: a codex page beside the one rules gain. Later: a Pledge or a curse ended.
+- **Strand** (4.5.7). M3: a codex page beside the one rules gain. Later: a Pledge. **M4: a curse ended**, a Malady's Cast-off included (wave moved by HL-29; agreed, heirlooms and curses Q5; heirlooms and curses design 4.3.2).
 
 #### 4.4.2 The FactLedger (change EV-8)
 - One **per-floor, in-run** ledger shared by Yield interrogation, the elite intel line (LE-18), Curiosities, Fragments, Parting Words and the Tithe Bowl.
@@ -628,7 +628,8 @@ All three judges independently chose the same winner:
 | HP | **The hero pays by default.** Companions pay only on options that print "any member". **`PaymentFeasibility`:** payable only by a unit whose current HP exceeds the cost. DH 10.4's floor still covers incidental damage (BC3) | ≤ 2 (hero) |
 | Weary 1 | Lingering. Unavailable if the cap of 2 would block it. Universal use needs EV-34 | One card per F1 theme |
 | Theme condition | Lingering Poisoned (Silk, Supper, Gut) or the theme's own riders (4.4.6). Only from the theme's declared `harmfulConditions[]`. Never Scarred | No |
-| Item offered | The player picks any unequipped carried item meeting a printed family ("a scroll", "any consumable"). Never healing items, the HE-3/4 items, the Due, quest items or curses. New reason **`ItemDestroyed{offered}`**, not LE-4's `dreamedAway` (KC21) | Non-healing consumable only |
+| Item offered | The player picks any unequipped carried item meeting a printed family ("a scroll", "any consumable"). Never healing items, the HE-3/4 items, the Due, quest items, curses or **heirlooms** (an heirloom is never a price; HL-4, M3; heirlooms and curses design 4.1.6). New reason **`ItemDestroyed{offered}`**, not LE-4's `dreamedAway` (KC21) | Non-healing consumable only |
+| Malady (**pending request, HL-19; M4**) | Not adopted until the EV owner rules (agreed, heirlooms and curses Q4; heirlooms and curses design 4.3.3): F2–F4 only; a named Malady drawn StateBlind from `event/{floor}/{site}/malady`, its rule and Cast-off deed printed; **the hero pays by default**, a companion only on an option that prints "any member" (priced higher in `curiosityValueTable`), the cost row carrying `payer`; payable only by a unit with no Malady for which the preset is eligible, else greyed with its reason; never on Leave or the free option; never stacked with a Proviso on F2; `registerLock: sincere`; F2 Malady costs inside the `EventDeathShareDelta` gate, else they start on F3 | No |
 | Supply | **Not used in M2.** Options priced in supply were dead (below 50‰) and moved healing supply into buffs (NF8) | No |
 | Coin | Never. Coin owed at camp is held, off (14.1) | No |
 
@@ -1471,6 +1472,7 @@ Config (tuning): curiosity.rarePermille; curiosityValueTable (4.4.9)
 - `LitSpread` and `LitSpreadPerPool` (4.3.2); `F1DeltaSource` (4.5.2).
 - `StrandPayoffNamed` (KR10; new lead's call); `ReferentFallbackPresent` (4.5.5).
 - `NameCollision` (whole-word against RS 8.0's avoided list, boss signatures, Moods, lock, room and condition names).
+- **Pending request (HL-19; M4):** the Curiosity Malady cost row (4.4.4) enters `PaletteWhitelist`, `PaymentFeasibility` (the payer and eligibility rows), `StateBlind` and `RegisterByFloor` (`registerLock`); V22 (k) adds `CuriosityMaladyOfferLegal` and `CuriosityMaladyPayerLegal` (heirlooms and curses design 4.3.3, 9.2).
 
 **V16g (generation, M2):**
 - `FixedDrawCount` (against the draw map, 4.10); `EventDrawRunBlind`.
@@ -1551,9 +1553,10 @@ Config (tuning): curiosity.rarePermille; curiosityValueTable (4.4.9)
 |---|---|
 | **M1** | Data stub only: `CuriosityRecord`; empty `curiosityKit`; the core emits the 9.3 event payloads as stubs (`CuriosityShown`, `CuriosityResolved`, `CuriosityAbsent`, `CuriosityReferentFallback`, the Grace and Strand events) |
 | **M2** | Curiosities F1–3; arena-facing Interludes F2–3 (band and shared) and substitutive Interludes F4–5; Glimpses; the catalogue of 5 as re-authored after the check, with the Wake's kit authored at parity and drawn when its gate passes (agreed, Q2); priced lit thresholds; the FactLedger of fact instances; costs; the skin rule and priced unstepped lock routes; the presentation sequence, Twice-Told and First Telling; R2; `curiosityMemory`; Launcher Fallow (K = 3, F1 only; agreed, Q1); Referents with fallback gains; the M2 lean Strands cashed at floor entry and the Coat Hooks, with the three pilot Strands gated (4.5.7); the Afterword run-start line and closure line with the generic tier; V16s, V16g and V16t; reports. Graces and carried riders **only if** EV-11 is ruled and the gates pass (agreed, Q3); otherwise the fallback deck |
-| **M3** | R3 everywhere (agreed, Q1); full Strands; Sequels advancing on sight (the Night Usher first; agreed, Q1); the Unwoken Roll; keeper lines; codex pages; Fragments folded into F-BOSS; Readings; F4 Curiosities in Twice-Told format if the line holds; Omen Retellings and Provisos; Overtures; Easing; the figure frame; Chute skins (if EV-36); M3 theme kits; Graces and riders if they missed M2 |
+| **M3** | R3 everywhere (agreed, Q1); full Strands; Sequels advancing on sight (the Night Usher first; agreed, Q1); the Unwoken Roll; keeper lines; codex pages; Fragments folded into F-BOSS; Readings; F4 Curiosities in Twice-Told format if the line holds; Omen Retellings and Provisos; Overtures; Easing; the figure frame; Chute skins (if EV-36); M3 theme kits; Graces and riders if they missed M2; heirlooms never an "Item offered" price (HL-4; heirlooms and curses design 4.1.6) |
 | **M3-late / M4** | Ripening (agreed, Q1); the Inverted Cathedral deck (M4) |
-| **Later** | Pledge sources (Night Usher, shrines) and Testimony; the Hawker's Hour; curse cures and bargains; coin owed (held, off) |
+| **M4** (HL-29) | EV-43's shrine curse cures and curse bargains and the desecrated-shrine source ("Kneel / Pass by", the Malady printed), moved from Later (agreed, heirlooms and curses Q5); cure text generated from the hosts in the build; the Strand "a curse ended". Pending request (HL-19): the Curiosity "Malady" cost row and its V16s rows (heirlooms and curses design 4.2, 4.3.2, 4.3.3, 10) |
+| **Later** | Pledge sources (Night Usher, shrines) and Testimony; the Hawker's Hour; coin owed (held, off). Curse cures and bargains moved to M4 (HL-29) |
 
 No wave carries a least-seen draw inside the key (rejected, Q1).
 
@@ -1568,6 +1571,7 @@ No wave carries a least-seen draw inside the key (rejected, Q1).
 | **Segment 10** | 4.12. **Answered by the exploration and information design (segment 10, approved 2026-11-23; XI-4, XI-6, XI-22, XI-27, XI-29):** facts and F-ROOM drawn per 4.3.6; chips read `PatrolForecast` (agreed, exploration and information Q2; cross-document comparison 2026-11-23, CC-120); `CardFit`; codex hosted (M3); F-TREASURE (M3) and beckoning Glimpses (request) |
 | **Segments 11–12** | The stream, its draw map, pass order, safe point, memory field, launcher, V16 and arms. **Answered by the seeds and validation design (segments 11–12, approved 2026-11-23; SV-1, SV-2, SV-4, SV-6, SV-8, SV-9, SV-13, SV-16, SV-20 to SV-23, SV-25, SV-30, SV-31):** the `curiosities` `vector` key and draw map (4.10); keyed checks `h:curiosity` (4.3.2); the pipeline and AP2 (4.10); WO3 for the resolve write; seeded and simulator writes (9.1); V16 phases and classes (9.2); report classes (9.3); qualified arms and 200 streak profiles (9.4); pending request to this design's owner: walker equivalences (9.4) |
 | **Camp and hub** | Afterword and keeper lines; Pledges; Testimony; the Hawker's Hour; Tithe Bowl dedup; coin owed. **Answered by the camp and hub design (segment 13, approved 2026-11-23; CH-12, CH-14):** the Afterword unchanged on the run-start card; keeper M2 service strings, M3 Strand lines only; the Unwoken Roll's hub home with the Sitter and `AfterwordNoEcho` (M3); Pledges and Testimony on Muster cards only; the Hawker's Hour a floor event; Tithe Bowl dedup unchanged; coin owed off; camp box and coat-display gates (6) (camp and hub design 2.2, 4.10, 4.15.6, 5.1, 6) |
+| **Heirlooms and curses** | EV-43; the Strand "a curse ended"; "Item offered" exclusions. **Taken up by the heirlooms and curses design (segment 15, approved 2026-11-23; HL-4, HL-19, HL-29):** heirlooms never an "Item offered" price (M3); EV-43's shrine curse cures and bargains, the desecrated-shrine source and the Strand "a curse ended" moved to M4 (agreed, heirlooms and curses Q5); pending requests to this design's owner: the Curiosity Malady cost row with `payer`, its V16s rows and the shrine Malady sources (HL-19; agreed, heirlooms and curses Q4; M4) (heirlooms and curses design 4.1.6, 4.2, 4.3.2, 4.3.3, 10) |
 | **Conditions owner** | The `eventBoon` form (agreed, Q3 makes M2 Graces depend on it), Weary's universality, Easing |
 | **Enemies owner** | The noise reading, the FactLedger, Overtures |
 | **EP owner (segment 6)** | The noise reading (EV-14, with the enemies owner); the EP 13 reading for Overtures (EV-32) |
@@ -1653,11 +1657,11 @@ Applied on 2026-11-22, when the client approved this document. **This document e
 | EV-40 | RS 8.0 theme record | Records and save fields (9.1) | — | Lead's call; RS owner, segment 11 | M1 / M2 |
 | EV-41 | CMP 7.12; EP-39 | Pledge sources hosted by segment 8; Testimony (4.8) | — | Lead's call; companions owner (request) | Later |
 | EV-42 | ITEMS 10.9; LP 4.7.12 | The Hawker's Hour as a skin of the ITEMS 10.9 trader | — | Lead's call; items owner, camp and hub | Later |
-| EV-43 | ITEMS 13; C14; LE 8.5; IR 4.15 | Shrine curse cures and curse bargains | — | Lead's call; conditions, items owners | Later |
+| EV-43 | ITEMS 13; C14; LE 8.5; IR 4.15 | Shrine curse cures and curse bargains | — | Lead's call; conditions, items owners | **M4** (was Later; HL-29, agreed, heirlooms and curses Q5; heirlooms and curses design 4.2, 10) |
 | EV-44 | Reads **RS 8.2, 8.5 (agreed, RS Q4 catalogue)**; R-SEED-6 | The Wake's promotion: **read, not changed** (RS 8.5 already says "M2 conditional, else the first M3 unlock"); `F1PoolParity`; floor-1 Blueprint and boss variety recorded as a production priority to the RS, FL and segment 9 owners, changing none of their text (0.1, 4.6) | ⚑ **Agreed** (RS 8.5, read); **Q2** | **Client (Q2, agreed 2026-11-22)**; RS, FL, segment 9 owners (request) | M2 |
 | **EV-45** | **RS 7.4 RC1, RC1+, RC2, RC3 (agreed, read)**; EP 13; ITEMS 10.9; the role-ID gate | Figure frame with its own non-unit grammar; M2 implied figures only, without faction motifs, under the role-ID gate (4.11) | ⚑ **Agreed** (RS 7.4, read) | Lead's call; RS owner, art | M2 (implied figures) / M3 (frame) |
 
-Waves: EV-40's stub in M1; EV-1 to EV-10, EV-14 to EV-25, EV-26 (M2 lean), EV-34, EV-35, EV-38 to EV-40, EV-44 and EV-45 (implied figures) in M2 (EV-11 and EV-12 in M2 only if ruled and gated, agreed, Q3); EV-13, EV-26 (full), EV-27, EV-29 to EV-33, EV-36, EV-37 and EV-45 (the figure frame) in M3; EV-28 in M3-late or M4; EV-41 to EV-43 Later.
+Waves: EV-40's stub in M1; EV-1 to EV-10, EV-14 to EV-25, EV-26 (M2 lean), EV-34, EV-35, EV-38 to EV-40, EV-44 and EV-45 (implied figures) in M2 (EV-11 and EV-12 in M2 only if ruled and gated, agreed, Q3); EV-13, EV-26 (full), EV-27, EV-29 to EV-33, EV-36, EV-37 and EV-45 (the figure frame) in M3; EV-28 in M3-late or M4; EV-43 in M4 (HL-29); EV-41 and EV-42 Later.
 
 ---
 
@@ -1790,6 +1794,8 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 | **The worst-case card does not fit** | Segment 10's layout test (4.3.1) | The rare body cap is lowered before any chip rule changes | Lead; segment 10 |
 | **Referents fall back often** | `ReferentAvailability` high on a Blueprint | Re-author the tied option's referent kind, or ask FL for the referent | Lead; FL |
 | **Walker equivalences** (pending request from the seeds and validation design 6.2, to the XI, FL and EV owners) | This design's owner does not rule | No mapping; each gate reads its own owner's arm (9.4; seeds and validation design 14.2) | EV, XI, FL owners |
+| **Curiosity Malady costs** (pending request HL-19 from the heirlooms and curses design 4.3.3, to this design's owner; M4) | This design's owner does not rule, or `EventDeathShareDelta` fails on F2 | No Curiosity Malady row; on a gate miss, Malady costs start on F3 (heirlooms and curses design 14.2) | EV owner; lead |
+| **Maladies at the boss** (heirlooms and curses design 14.2; M4) | `MaladyAtBossShare` high, or `MaladyDeathShare` above baseline +2 pp at boss fights | Every Malady also ends at the arena seal (`ArenaEngaged`, the Grace precedent, 4.4.3) | Lead; EV, BR owners |
 | **Companions owner refuses** Testimony | — | Pledges (Later) ship without Testimony | Companions owner |
 | Naming pass | — | Every placeholder name here | Client |
 
@@ -1844,6 +1850,7 @@ The owed rows are the single list in 13; by owner:
 - **The Herald owner:** EV-13. (No Shade request remains after the check: the Shade-lit Lure variant is dropped.)
 - **The companions owner:** EV-41.
 - **The items owner:** EV-9, EV-42, EV-43.
+- **The heirlooms and curses design:** EV-43 and the Strand "a curse ended". Taken up by the heirlooms and curses design (segment 15, approved 2026-11-23; HL-4 (M3) and HL-29 (EV-43 to M4) applied; pending request to this design's owner: HL-19, the Curiosity Malady cost row, `payer`, feasibility and `registerLock` (M4); its 4.1.6, 4.2, 4.3.2, 4.3.3, 10).
 - **The HZ owner:** EV-31, EV-35, EV-36 (HZ-23).
 - **Segment 9 (bosses):** seeded boss variables; the arena seal; floor-1 boss variety (EV-44); the RS Cut 1 question once carried for the client (14.2), now answered as graded (BR-26) (cross-document comparison 2026-11-23, CC-116). Answered by the boss rooms design (approved 2026-11-22; BR-3, BR-23 to BR-26, BR-29; its 4.2.1, 4.10, 4.12).
 - **Segment 10 (UI):** 4.12; EV-17. Answered by the exploration and information design (approved 2026-11-23; XI-4, XI-6, XI-22, XI-27, XI-29; its 4.3.6, 4.6.1, 4.8.1, 4.10, 5); pending requests to this design's owner: beckoning Glimpses, `SideRoomPayoffMix`, the Curiosity Lodestring gain (XI-23, XI-27).

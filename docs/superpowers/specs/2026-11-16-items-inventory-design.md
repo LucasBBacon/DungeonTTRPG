@@ -154,7 +154,7 @@ on 2026-11-16. **(agreed)**
 | 1 | Capacity | **Abstract slots per unit, no spatial grid, no weights.** Belt 2 (a feature or offer may raise it to a hard maximum of 3), trinkets 2, pack max(2, 3 + Strength) with item size 1 or 2, an active and a spare weapon set, armour (section 5). | Spatial grid (scored 25 against 44; about 2 s per summary for a handful of shape conflicts per run, see 4.1); pooled bag as primary (kept as the fallback for ownership, 6.4); no limit (Strength's agreed capacity job disappears); weight or bulk (settled out) |
 | 2 | Ownership | **Option D: per-unit ownership with party-wide automatic placement and a suggested recipient** (section 6). The pooled bag is the named fallback. | A, one shared bag for everything (breaks "the thief's free slot" and "Take (choose who)"); B, per unit by hand (mule shuffling; four packs are a fake decision); C, pooled pack (the fallback: rewords 15.5 and 15.8, and Strength is felt weakly) |
 | 3 | Coin and economy | **A run-scoped party purse, spent only at camp** (and at a Ticket lock, M3: agreed 2026-11-23, cross-document comparison Q-1; 10.1)**; a camp shop; Sell at one flat rate; Scrap leftovers at the stairs; no stash** (section 10). | No coin (breaks every settled "bought at camp" and cuts 15.7 salvage); coin without selling (Leave becomes pure regret) |
-| 4 | Identification | **Always-known basics and obvious properties; consumables, scrolls and wands always identified; at most 1 dormant hidden property on Uncommon-or-better gear and trinkets; a passive Arcana threshold with no roll; camp identifies everything free; equipping reveals nothing; curses Later** (section 11). | Everything known (Arcana's agreed job becomes decoration); identify by use (potion roulette under permadeath); reveal on equip (free equip-scumming makes the threshold irrelevant) |
+| 4 | Identification | **Always-known basics and obvious properties; consumables, scrolls and wands always identified; at most 1 dormant hidden property on Uncommon-or-better gear and trinkets; a passive Arcana threshold with no roll; camp identifies everything free; equipping reveals nothing; curses Later** (section 11; curses moved to M4 by the client, 2026-11-23, Q5; change HL-29). | Everything known (Arcana's agreed job becomes decoration); identify by use (potion roulette under permadeath); reveal on equip (free equip-scumming makes the threshold irrelevant) |
 | 5 | Camp trade (client question 2) | **A basic vendor at every camp** (supply, potions in limited pre-rolled stock, tonics, Remedy, mundane bases). The main design's "a shop or reward" is a choice between a **notables shop** (1–2 notables *(illustr.)*) and a **reward card** (change I-13; the camp reward card is not the enemies 17.5 boss reward card, 10.4). | A shop at some camps only (on a shopless camp, coin, tonic resupply and every settled "bought at camp" break) |
 
 The client also approved, as a **Later** option, the **wandering trader**
@@ -1166,12 +1166,39 @@ rules for the trader-as-unit case and is out of scope here.
    - Later, by a wandering trader's Identify service (10.9).
 
    `known` only grows: a reveal persists if passive Arcana later falls.
+
+   **Pending request (change HL-21; Later; agreed 2026-11-23, Q6; a
+   request to the main design and RS owners of the CH-24 slot, not yet
+   ruled):** for a run under the Oath of the Shut Book only, items 4–5's
+   field identification by passive Arcana is off and camp still
+   identifies free; the camp-identify client decision is untouched. If
+   the owners refuse or defer, the slot stays unlit and items 4–5 stand
+   unchanged (heirlooms and curses design 4.5, 5.2).
 6. **Equipping reveals nothing**, so there is no identification by
-   equip-scumming. **(agreed)** With curses (Later), Clinging taking hold
-   reveals the curse.
-7. **Later:** a "malign" hint if the threshold was missed by 5 or less and
-   a curse is present; runes and shrines that identify items (optional
-   content).
+   equip-scumming. **(agreed)** With curses (M4; agreed 2026-11-23, Q5;
+   change HL-29), Clinging taking hold reveals the curse.
+7. **M4, with curses (change HL-29; agreed 2026-11-23, Q5):** a "malign"
+   hint if the threshold was missed by 5 or less and a curse is present
+   (heirlooms and curses design 4.2). **Later:** runes and shrines that
+   identify items (optional content); rune hosts stay Later (HL-29 does
+   not move them).
+
+   **The "Not yet read: may Cling" chip (M4; agreed 2026-11-23, Q3;
+   change HL-15; presentation only, the identification mechanics above
+   unchanged):** a class-wide chip, a pure function of public facts that
+   never reads whether the card is cursed. It shows on a field card from a
+   channel `curseGate` serves, on F2+, of Rare tier or higher, whose
+   family has an authored cursed twin, while the card is not yet `known`
+   and `loot.curse.permille` is non-null. A cursed and an uncursed
+   instance of one record on one channel and floor render the same chip.
+   The first equip of such a card shows one inline, non-modal line per
+   card, "May Cling until camp. Ends at camp or a shrine." (on F5: "May
+   Cling: no camp remains."); every player-facing cure line is generated
+   from the hosts in the build, so "Arcana at a rune" appears only once a
+   rune host ships. Lever: if `RareEquipRateDelta` shows the chip deters
+   equipping Rares, it collapses to its shape alone, words on hover and in
+   the inspect pane, after 10 such equips on the profile *(illustr.)*
+   (heirlooms and curses design 4.2).
 
 ## 12. The generic item model
 
@@ -1488,9 +1515,20 @@ The `srd` flag is set only on records whose name or mechanic comes from
 SRD 5.1/5.2, and then `srdSource` must cite the entry. The ember longsword
 is original, so it carries no `srd` flag.
 
-## 13. Curses (Later)
+## 13. Curses (M4)
 
-**(agreed: curses Later; rules lead's call)**
+**(agreed: curses Later; moved to M4 by the client, 2026-11-23, Q5;
+rules lead's call)** **(change HL-29; M4)** Item curses (cursed twins,
+Clinging, cursed carriers, the malign hint and the folk cost lines) ship
+at **M4**, with EV-43's shrine cures and bargains; the rules below are
+otherwise unchanged. Every "Later" marker on curses, Clinging and cursed
+carriers in this document (7.3, 8.2, 11, 12.3, 12.5, 13, 16, 18.1) reads
+M4. Runes, the curse trunk (CH-24), Oaths, the Burdened twin and
+Redeemed templates stay Later, so at M4 cures are camp, a shrine and,
+for Maladies, Cast-off. **Pending:** the conditions owner's reading that
+the M4 Cursed family sits outside conditions 16's M1–M2 budget of 32 and
+passes conditions 20.3's gate; if refused, the affected rows move to
+Later unchanged (heirlooms and curses design 4.2, 10, 14.2).
 
 - **A curse is always a cost attached to a real benefit.** The cost is a
   `whileEquipped` property (an Ill-Omened, Leaden or Ill-Starred effect,
@@ -1526,14 +1564,44 @@ is original, so it carries no `srd` flag.
   to T+1's budget and the curse pays the difference. Never on a Dream's
   Due (loot economy design 8.5).
 - Once known, a curse shows a cursed badge everywhere.
-- **Shrine curse cures and curse bargains (change EV-43, Later):** hosted
+- **Shrine curse cures and curse bargains (change EV-43, Later; moved to
+  M4 by change HL-29):** hosted
   by segment 8 Curiosities (events design 10); never on floor 1 (events
   design 4.6). The conditions and items owners apply the rules.
+- **Folk cost lines (change HL-16; M4; two lines Later):** besides
+  Ill-Omened, Leaden and Ill-Starred, a cursed twin's cost may be one of
+  Ill-Wished, Short-Armed, Saltless, Black Lot or Graceless (M4), or
+  Eyebitten and Ill-Slept (Later, shipping with Conspicuous and
+  Restless). Each is a `whileEquipped` property using no condition id,
+  passes conditions 13's buff test and the preview, takes no turn part,
+  removes no agency, acts on no square, and never applies a condition
+  that is the input of a conditions 19 transform into a hard condition
+  (`CostLineNoHardTransform`). Cost lines use the folk register only
+  (agreed 2026-11-23, Q1; naming rules NR1–NR10) (heirlooms and curses
+  design 4.2, 5.2, 5.3).
+- **Maladies are not item curses (M4; pointer):** run afflictions on a
+  unit are Cursed presets with their own slot and Cast-off deeds, owned
+  by the conditions design (change HL-17), with priced or telegraphed
+  sources (agreed 2026-11-23, Q4; change HL-19, a request). No item,
+  heirloom or cost line carries a Malady name (heirlooms and curses
+  design 4.3, 5.3).
+- **The Burdened twin (change HL-23; Later):** an heirloom template may
+  author one Burdened twin (`burdenedTwinOf`): the identical U benefit
+  plus one folk cost line, reachable only by taking the Oath of the
+  Burdened Hand. Clinging runs until camp 1 only (heirlooms and curses
+  design 4.7).
+- **Redeemed templates (change HL-24; Later):** wearing a known cursed
+  twin when a final boss falls, in a personal win, unlocks that family's
+  distinct authored Redeemed template, an uncursed U item (route R5,
+  heirlooms and curses design 4.1.2).
 - **No curse trunk at the hub (change CH-24, informed; told plainly;
   Later):** meta-curses are not hub items; they become one reserved
   run-modifier slot on the hub's Depth gauge, owned by the main design and
   RS difficulty decision. The item curses above are unchanged (camp and
-  hub design 2.2, 5.2).
+  hub design 2.2, 5.2). **Pending request (change HL-21; Later; agreed
+  2026-11-23, Q6):** the main design and RS owners are asked to fill that
+  slot with Oaths (kind, not stats; content rewards); until they rule,
+  the slot stays unlit (heirlooms and curses design 4.5).
 
 ## 14. Heirlooms (M3)
 
@@ -1544,8 +1612,13 @@ is original, so it carries no `srd` flag.
   fresh instance each run.
 - Fixed at Uncommon, always identified, banded by proficiency, and never
   grows with run count ("no permanent stat boosts", settled).
-- Flags: `heirloom`, `unsellable`, `noSteal`. Never cursed. Outside the
-  floor loot budget. Its value is for display only. It cannot be bartered.
+- Flags: `heirloom`, `unsellable`, `noSteal`. Never cursed, read as
+  "never a cursed record offered as a plain boon": the one exception is
+  the opt-in Burdened twin, taken only under the Oath of the Burdened
+  Hand (section 13) **(change HL-23; Later)**. Outside the
+  floor loot budget. Its value is for display only. It cannot be bartered,
+  and it is never a Curiosity's "Item offered" price (events design
+  4.4.4; change HL-4; M3).
 - It **does not consume its family's cap**, but it **does block duplicate
   bases** (it counts as owned), and it counts as party-owned for the
   Dream's Due (loot economy design 6.12; change LE-19, read; M3). It sits
@@ -1555,6 +1628,40 @@ is original, so it carries no `srd` flag.
   keeps the template.
 - It is picked as the one starting boon at the hub's Heirloom shelf, its
   exact text shown before the pick (M3; camp and hub design 2.2, 5.2).
+- **Authoring (change HL-8; M3):** each template carries **one**
+  authored banded line, strong in a named situation and ordinary
+  elsewhere, priced at the U budget; never a generalist best-in-slot.
+  V22 `HeirloomValueCap`: the template's value equals the U budget, and
+  against every authored or rollable U record of the same family the
+  item verdict is ⇄ or =, never ▲. V22 `HeirloomNoVerbClone`: no template
+  line repeats an approved verb or property of another record
+  (heirlooms and curses design 4.1.1).
+- **Earning (change HL-1, HL-2; agreed 2026-11-23, Q2; M3, R4 and R5
+  Later):** every route is an achievement, never a copied instance, a
+  Memento or a death key, and unlocks content, never power (main design
+  4.7, read):
+  - **R1, class milestone:** one per class ("Fell the floor-3 boss as a
+    <class>").
+  - **R2, Deed bequest:** from any personal run, win or death, a family's
+    authored template unlocks when a carried item of that family is
+    credited by the Core `BossFelled` fact (the weapon or focus that dealt
+    the killing blow, or a shield or armour worn by a standing party unit
+    when the boss falls; change HL-31, a request), never by the display
+    Deed. Tier-gated (each R2 template names the boss floor it needs); at
+    most one unlock per family per run; R2 before R5 for one family; at
+    most one offer per run, in the order of heirlooms and curses design
+    4.1.2; the credited instance is never copied. The offer is chosen
+    later at the Heirloom shelf ("Hang it" or "Set aside"), never on the
+    death path (change HL-6, a request to SV).
+  - **R3, Heart-won:** the first personal win over each final boss
+    unlocks that boss's authored U template (three at M3).
+  - **Later:** R4, Oath wins; R5, Redeemed templates (section 13).
+  - Seeded, shared, replayed, abandoned and simulated runs earn nothing.
+    Unlocks are never capped or deleted; the shelf shows every locked
+    template's plain goal (camp and hub design 4.8; change HL-9). History
+    is display only: Grip-marks carry Deed bynames and marks, never
+    power, never a count (change HL-5) (heirlooms and curses design
+    4.1.2, 4.1.3, 4.1.5).
 - **Kit variant boons** (M3) sit beside heirlooms on the Heirloom shelf
   under the same exact-contents rule: a full mundane `KitRecord` that
   replaces the default kit of one creation pick, plus one skill training.
@@ -1571,10 +1678,13 @@ is original, so it carries no `srd` flag.
   `namedPiece.fallbackOrder` only when the named piece is not issued,
   suppressing the receiving piece's kit line; V21 `HeirloomKitFits` checks
   the state after placement (starting kits design 7 item 2) **(change
-  SK-12; M3)**. A weapon or focus heirloom of U or better counts as "arms
-  satisfied" for the F1 hero-arms Due, which then takes the 20-coin
-  waiver (loot economy design 6.6 item 2; starting kits design 4.3;
-  change SK-4, applied by the loot economy owner; M3).
+  SK-12; M3)**. **Any** heirloom (weapon, focus, shield or armour; a
+  two-hander and the Burdened twin included) counts as "arms satisfied"
+  for the F1 hero-arms Due, read from the issued instances after
+  placement, never from `boons[]`; the Due then takes the 20-coin waiver
+  and never retargets (loot economy design 6.6 item 2; starting kits
+  design 4.3; change SK-4, applied by the loot economy owner; M3)
+  **(change HL-3; M3; heirlooms and curses design 4.1.4)**.
 
 ## 15. Companions, recruits and run end
 
@@ -1636,8 +1746,8 @@ is original, so it carries no `srd` flag.
 | 4 | **Consumables** (potions, tonics, flasks, coatings, Remedy) | M1 potions; M2 rest | **Designed:** `2026-11-17-consumables-design.md` (consumables design), approved 2026-11-17 **(change CN-8)**: effects, `stackMax`, the use-value table, prices and pegs against supply, thrown flasks, monster `useWhen`, banding. Potions can be thrown at a willing ally: action, range 5, `thrownPotionPermille`, never lifts Downed (consumables design 11) **(change CN-4)**. Coatings and Coated stay Later. |
 | 5 | **Scrolls and wands** | M2 | **Designed:** in the consumables design (section 13), approved 2026-11-17 **(change CN-8)** |
 | 6 | **Trinkets** | M2 | **Designed:** `2026-11-17-trinkets-design.md` (trinkets design), approved 2026-11-17. Piece tables by location, jewellery tables by kind (trinkets design 14.1), capacity table **(change TK-9)**, capacity trinkets (at most +2), trinket families and caps. From the armour design **(change AR-37)**: piece kinds; location domains (armour design 5.6); the strict no-AC rule; the one-table rule; the reaction cap; pieces at Uncommon at most; at least 3 legal families per piece location per wave; `requires` tags for location hunger (armour design 5.7); the piece power target (armour design 17.3) |
-| 7 | **Heirlooms** | M3 | The template list, at Uncommon, banded. Placement at kit issue is set by the starting kits design (7 item 2; section 14) **(change SK-12)** |
-| 8 | **Curses** | Later | The variants used as item costs, the Clinging flow, cursed carriers, the "malign" hint |
+| 7 | **Heirlooms** | M3 | The template list, at Uncommon, banded. Placement at kit issue is set by the starting kits design (7 item 2; section 14) **(change SK-12)**. **Designed:** `2026-11-23-heirlooms-curses-design.md` (heirlooms and curses design, segment 15), approved 2026-11-23, which takes up this row: 13 templates at M3 and about 11 more at M4 (5.1), earning routes R1–R3 with R4 and R5 Later, and the shelf (4.1.2, 4.1.3; section 14) **(change HL-1; M3)**. |
+| 8 | **Curses** | M4 (moved from Later by the client, 2026-11-23, Q5; change HL-29) | The variants used as item costs, the Clinging flow, cursed carriers, the "malign" hint. **Designed:** in the heirlooms and curses design (segment 15), approved 2026-11-23, which takes up this row: item curses, the "Not yet read: may Cling" chip and the folk cost lines at M4 (4.2, 5.2); Maladies at M4 (4.3); Oaths, the Burdened twin and Redeemed templates Later (4.5, 4.7; section 13) **(change HL-29; M4)** |
 | 9 | **Wandering trader** (small) | Later | Service prices, presence chance, trader art and lines, within 10.9 |
 
 `tool` is cut from the generic layer (section 2). Reinstate it only if a
@@ -1764,7 +1874,8 @@ are unit conditions.
   not a dreamed option, never in Scion memory or "What the dream kept";
   loot sources design 4.7.7) **(change LP-2; M3)** (`offered`: an unequipped
   carried item the player gives up as a Curiosity's printed price; never a
-  healing item, an HE-3/4 item, the Due, a quest item or a curse; not
+  healing item, an HE-3/4 item, the Due, a quest item, a curse or an
+  heirloom (change HL-4; M3); not
   `dreamedAway`; events design 4.4.4) **(change EV-9, M2)** (`dismissed`:
 a `kitBound` instance deleted when its unit is dismissed or its hire
 undone; companions design 7.6) **(change CMP-21)** (cross-document
@@ -1831,7 +1942,7 @@ The build fails on any violation:
    equal it. `value` = Σ fixed property values + rollable `count` ×
    `entryValue` + use and granted-ability values, and it **equals** the
    tier budget (curse cost excluded; a signature item adds its authored
-   property, 12.5). Later: a cursed twin's `value` is its own tier T,
+   property, 12.5). M4 (change HL-29; was Later): a cursed twin's `value` is its own tier T,
    and its benefit is authored to T+1's budget (13; change LE-22, change
    IR-20) (cross-document comparison 2026-11-23, CC-43). A trinket button is a property whose effect is the
    grant; its value is counted once, inside that property **(change
@@ -1864,11 +1975,15 @@ The build fails on any violation:
    or fewer; no concentration on non-spell consumables **(change CN-7)**.
    Floor-1 carried consumables are self-targeting (settled, enemies 15.3).
 9. Curses only on Rare or higher, never on signature, heirloom,
-   consumable, scroll, wand or talisman records **(change CN-7)**. Later:
+   consumable, scroll, wand or talisman records **(change CN-7)**. M4 (change HL-29; was Later):
    a cursed record is an authored twin (`cursedTwinOf`) of an uncursed
    record of the same family and base; never on rings (item rolls design
-   4.15) **(change IR-20, Later)**.
-10. Heirlooms: `unsellable`, `noSteal`, `identifyDifficulty` 0, uncursed.
+   4.15) **(change IR-20, Later; M4 by change HL-29)**. Later: the one exception for
+   heirlooms is the opt-in Burdened twin (`burdenedTwinOf`, section 13)
+   **(change HL-23; Later)**.
+10. Heirlooms: `unsellable`, `noSteal`, `identifyDifficulty` 0, uncursed
+   (read as never a cursed record offered as a plain boon; Later, the
+   Burdened twin) **(change HL-23; Later)**.
 11. Every weapon family has an `improvised` attack. Family caps resolve.
 12. Records flagged `srd` cite `srdSource`. Infinite-storage records are
     rejected; capacity grants are at most +2.
@@ -2057,8 +2172,18 @@ Consumable, scroll, wand and talisman reports: see consumables design
   - simulator reports.
 - **M3:** heirlooms as profile templates; heirloom placement at kit issue
   and kit variant boons (starting kits design 4.4, 7; changes SK-7,
-  SK-12).
-- **Later:** curses, Clinging and cursed carriers; Disarmed seizure;
+  SK-12); heirloom earning R1–R3, the `BossFelled` credit, the
+  narrow-Uncommon authoring rule and any heirloom slot waiving the F1
+  Due (heirlooms and curses design 4.1, 10; changes HL-1, HL-2, HL-3,
+  HL-8).
+- **M4** (moved from Later by the client, 2026-11-23, Q5; change
+  HL-29): curses, Clinging and cursed carriers; the malign hint; the
+  "Not yet read: may Cling" chip (change HL-15); five folk cost lines
+  (change HL-16); EV-43's shrine cures and bargains (heirlooms and curses
+  design 10). Pending the conditions owner's budget reading (section 13).
+- **Later:** runes; the Burdened twin and Redeemed templates (changes
+  HL-23, HL-24); Oaths, a pending request (change HL-21); Eyebitten and
+  Ill-Slept; Disarmed seizure;
   coatings and Coated; Pitted Armour; the Thief role (hook: it may take one
   belt item, never the pack, equipment or a `noSteal` item, holds it as its
   carried item and drops it under enemies 15.6); **the wandering trader**
@@ -2231,7 +2356,12 @@ mundane bases are not loot, and family caps all stand.
   **(change TK-16)** Consumables, scrolls and wands are no longer pending:
   see the consumables design (`2026-11-17-consumables-design.md`);
   coatings and Coated stay Later, and what it still needs is in its
-  section 24. **(change CN-8)**
+  section 24. **(change CN-8)** Heirlooms and curses are no longer
+  pending: see the heirlooms and curses design
+  (`2026-11-23-heirlooms-curses-design.md`, segment 15), which takes up
+  the heirloom and curse hooks (17 rows 7–8; sections 13, 14); what it
+  still needs from other owners is in its sections 11 and 17. **(change
+  HL-1; change HL-29)**
 - **Death and healing:** no longer pending: see the death and healing
   design (`2026-11-17-death-healing-design.md`). Companions cannot die at
   launch, so 15's conditional rule stays dormant (death and healing design
@@ -2272,7 +2402,9 @@ mundane bases are not loot, and family caps all stand.
   offers still comes from the `camp` channel (10.4).
 - **Dungeon content:** runes and shrines that identify items or end
   Clinging (Later). Shrine curse cures and bargains are hosted by the
-  events design (`2026-11-22-events-design.md`; change EV-43, Later).
+  events design (`2026-11-22-events-design.md`; change EV-43, Later;
+  moved to M4 with item curses by change HL-29). Runes stay Later (change
+  HL-29, read; heirlooms and curses design 4.2).
 
 ## 25. Open items for the client
 

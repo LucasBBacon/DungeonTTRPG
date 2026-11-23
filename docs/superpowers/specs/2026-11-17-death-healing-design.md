@@ -291,7 +291,7 @@ help the hero, and a seed could produce a floor with no potion at all.
 | (c) More guaranteed supply | A **placement** rule instead | Extra supply overflows the cap of 3; what helps is one cache always reachable on the main path |
 | (d) A full heal at camp | Already decided | The strongest guarantee in the game |
 | (e) A healing source in every fight | Rejected | Healing becomes a drip, rests become pointless, and the floor-long decision of main 4.4 disappears |
-| (f) Pity timers | Rejected | Hidden state; exploitable (skip pickups, bleed on purpose); rewards playing at low HP; the same seed would give different loot. *Reading (change LE-13; the DH owner confirms):* the Dream's Due is standing and announced, so outside this; declining pickups can steer which member the F2 or F4 Due names, never how much the floor holds (loot economy design 6.6). *Pending request (change IR-10; M2; item rolls design 4.9; the DH owner confirms):* items sold or dropped at camp count as still dealt for the Due's deficit and slot test, so emptying a slot at camp cannot steer the Due; if refused, loot economy design 6.6 as approved. *Reading (starting kits design 4.3, 13; pending the DH owner's confirmation, as IR-10):* the still-dealt item covers sold hero kit pieces, so selling a kit piece cannot steer the next Due; if refused, `KitSoldAtCamp1` is read with `HeroDreamsDueShare` before any kit lever. *Pending confirmation (change SK-4; M3; the LE owner applies, the DH and IR owners confirm; starting kits design 4.3):* heirloom precedence over the F1 Due: on equal VP the fixed deal takes the higher tier; a hero whose arms already hold U or better counts as arms satisfied and the F1 Due takes the 20-coin waiver; the Due never retargets. *Confirmed (change EV-10; agreed, events Q4; M2):* no mercy through Curiosities: no draw, option set or gain reads HP, downs, deaths, losses or streaks; only payment feasibility reads current HP, and only to disable a shown option; losing streaks get novelty and memory relief only, never easier odds or richer outcomes; difficulty help belongs in a visible ladder or difficulty setting, a future main design and run structure decision not yet made (events design 4.4.7, 14.2) |
+| (f) Pity timers | Rejected | Hidden state; exploitable (skip pickups, bleed on purpose); rewards playing at low HP; the same seed would give different loot. *Reading (change LE-13; the DH owner confirms):* the Dream's Due is standing and announced, so outside this; declining pickups can steer which member the F2 or F4 Due names, never how much the floor holds (loot economy design 6.6). *Pending request (change IR-10; M2; item rolls design 4.9; the DH owner confirms):* items sold or dropped at camp count as still dealt for the Due's deficit and slot test, so emptying a slot at camp cannot steer the Due; if refused, loot economy design 6.6 as approved. *Reading (starting kits design 4.3, 13; pending the DH owner's confirmation, as IR-10):* the still-dealt item covers sold hero kit pieces, so selling a kit piece cannot steer the next Due; if refused, `KitSoldAtCamp1` is read with `HeroDreamsDueShare` before any kit lever. *Pending confirmation (change SK-4; M3; the LE owner applies, the DH and IR owners confirm; starting kits design 4.3):* heirloom precedence over the F1 Due: on equal VP the fixed deal takes the higher tier; a hero whose arms already hold U or better counts as arms satisfied and the F1 Due takes the 20-coin waiver; the Due never retargets. *Pending confirmation (change HL-3; M3; the LE owner applies, the DH, IR and SK owners confirm; heirlooms and curses design 4.1.4):* **any** heirloom slot (weapon, focus, shield or armour) sets F1 "arms satisfied", read from the issued instances after SK-12 placement, so the F1 Due takes the 20-coin waiver; the Due never retargets; `HeirloomSlotParity` is reported; if refused, no armour or shield heirloom templates at M3. *Confirmed (change EV-10; agreed, events Q4; M2):* no mercy through Curiosities: no draw, option set or gain reads HP, downs, deaths, losses or streaks; only payment feasibility reads current HP, and only to disable a shown option; losing streaks get novelty and memory relief only, never easier odds or richer outcomes; difficulty help belongs in a visible ladder or difficulty setting, a future main design and run structure decision not yet made (events design 4.4.7, 14.2) |
 | (g) A generator floor in Recovery units | A **build check** only (21.3) | Proves the guarantee at every floor and party size; too opaque for players |
 | (h) Fully random healing | Rejected | Under permadeath, deaths come from the tail |
 | (i) Healing only from rests and classes | Rejected | The hero has nothing to drink; a healer becomes compulsory |
@@ -434,8 +434,17 @@ The client asked what else to consider. **(lead's call)**
    body-block) so the player can spend actions keeping the hero alive: a
    requirement on the companions and classes designs (27).
 9. **Late deaths cost the most playtime.** A floor-5 death throws away up
-   to 2 hours. A legacy hook (a fallen hero's notable as a future heirloom
-   candidate, items 14) is noted as a Later idea.
+   to 2 hours. The legacy hook is answered at **M3** as a **Deed
+   bequest** (R2), with no power transfer: in a personal run, win or
+   death, an item credited with a boss's fall by the Core `BossFelled`
+   fact (the weapon or focus that dealt the killing blow, or a shield or
+   armour worn by a standing unit), from a boss of the template's floor
+   tier or deeper, may unlock its family's **authored** U heirloom
+   template; the instance is never copied; the offer is chosen later at
+   the Heirloom shelf (Hang it or Set aside), never on the death path;
+   no fallen hero's notable becomes a template, and Grave Goods and death
+   keys are never a source **(change HL-7, M3; agreed, heirlooms and
+   curses Q2; heirlooms and curses design 4.1.2)**.
 10. **Difficulty ladder.** Harder tiers keep the same healing guarantee;
     the ladder raises budgets, and from M3 also adds kind (change RT-21;
     cross-document comparison 2026-11-23, CC-60).
@@ -1666,6 +1675,12 @@ information design 4.8.1).
   *Pending request (change HZ-13; the DH owner rules):* the recap names
   the Stir when an environment act is in the killing chain (hazards
   design 6.18).
+  *Pending request (change HL-20; M4; the DH owner rules; heirlooms and
+  curses design 4.3.5):* the killing chain annotates any roll that a
+  Malady or an item curse cost line changed ("Choler: advantage"), and
+  Grave Goods lists active Maladies and worn cursed items, both in the
+  neutral voice, from the event log (the HZ-13 pattern); if refused,
+  Grave Goods lists the curses only (heirlooms and curses design 14.2).
 - **Floor-entry card** headed by the **Stratum Card** (theme name, act,
   signature line, damage types, non-fearless band, boss name; run
   structure design 6.9) above the guaranteed counts (G6) **(change
@@ -1837,6 +1852,14 @@ information design 4.8.1).
   Graces, on F1 at party 1 and F2 at parties 1 and 2; Graces ship in M2
   only if the conditions owner rules EV-11 and these gates pass, else M3
   (agreed, events Q3; events design 4.4.3, 4.6, 9.3).
+- **Calibration arms (change HL-12; M3 / M4; a reading, targets
+  unchanged; heirlooms and curses design 9.3):** the base arm is no boon
+  at tier 0; a second arm uses the modal boon mix (M3); from M4 the curse
+  layer (item curses and Maladies) is on in both arms; Oath runs form
+  their own arm (Later). The curse-off and chip-off control arms sit
+  outside these targets. No Malady source acts on F1 or F5, and F2
+  Malady costs sit inside the gated `EventDeathShareDelta` (heirlooms and
+  curses design 4.3.3, 8.4).
 
 ## 19. AI
 
@@ -2247,6 +2270,13 @@ parties on floors 2–5.
   heroes void the guards).
 - Deaths by class HP tier (flat-bonus compression).
 - Run time lost to deaths.
+- *Pending request (change HL-21; Later; agreed, heirlooms and curses
+  Q6; the MAIN and RS owners rule):* an Oath that touches kits declares
+  its `kitDelta` and the rows of this section it waives (the Oath of the
+  Short Fire, at most one short rest per floor, among them); Oath runs
+  are reported in their own arm (18.2). Fallback: the run-modifier slot
+  stays unlit until the MAIN/RS difficulty decision (heirlooms and
+  curses design 4.5).
 
 ## 22. Staging
 
@@ -2256,7 +2286,9 @@ parties on floors 2–5.
 |---|---|
 | **M1** | HP formula and bonus; Recovery; the S-3 crit rule; the hero death path and `RunEnded`; the out-of-combat and undetected-trap floors; potions at Recovery; hero kit 2 potions; rests and supply; 1 guaranteed floor-1 main-path potion, `supplyMainPathMin` 1 on floor 1 and HE-7; `combatActive` and the combat-end order; the floor-1 surprise rule; the guard rows, the floor-1 rows and `Floor1BossSustain` (after the surprise reconciliation); lethal tags; the danger band and end-turn warning; plates; a basic death recap |
 | **M2** | Downed rules (inert, allied drag, occupancy, rest and camp get-up, once-per-fight Medicine); companions' HP; recruit kits; sundries with `healingSundryMin` (12.5) and `supplyMainPathMin` on floors 2–5; the camp top-up and its record; the floor-entry card; heal spells at Recovery; the rest-tool requirement; the Reprieve Phial at 334 **if this design is approved before M2 content lock** (consumables 14.10) |
-| **Later** | Death-warded (with the tier-3 spell); Bolstered; the Weary lever (a switch, not a build); movement undo; the Last Stand and Mortal rungs; a legacy hook |
+| **M3** | The legacy hook, answered as the Deed bequest (5.8 item 9; change HL-7, re-staged from Later; heirlooms and curses design 4.1.2, 10); the boon calibration arms (18.2; change HL-12) |
+| **M4** | The curse layer (item curses and Maladies) on in both calibration arms (18.2; change HL-12); *pending request (change HL-20; the DH owner rules):* the recap's curse annotation and the Grave Goods curse lines (17.12) |
+| **Later** | Death-warded (with the tier-3 spell); Bolstered; the Weary lever (a switch, not a build); movement undo; the Last Stand and Mortal rungs |
 
 ## 23. Risks
 
@@ -2277,7 +2309,7 @@ parties on floors 2–5.
 | **Calibration targets missed** (Q11) | Reports (21.5); the lever order of 18.2; the client is told |
 | **Seed reshuffle** | Once, before M1 content lock; logged |
 | **Inert bodies look odd** (an explosion skips a body) | Accepted for fairness; tooltip |
-| **Late deaths cost 1–2 hours** | Telegraphs, the phial; a Later legacy hook |
+| **Late deaths cost 1–2 hours** | Telegraphs, the phial; the legacy hook, answered at M3 as the Deed bequest (change HL-7) |
 | **Under-levelled stealth heroes** void the guards | Level-gap report; the XP design keeps it at 0 or above |
 | **SRD shapes from memory** (crit wording above all) | Check against SRD 5.2.1 before data |
 
@@ -2538,6 +2570,13 @@ values; the phial's rarity, floor, channels, `offerChancePermille` and
   4.5, 5.4): 2 potions unchanged; coin exactly 15 (21.5); heirloom
   precedence and the still-dealt reading pending the DH owner's
   confirmation (5.4 (f)) **(change SK-1, SK-4, SK-6)**.
+- **Heirlooms and curses:** the legacy hook (5.8 item 9). Taken up by
+  the heirlooms and curses design
+  (`2026-11-23-heirlooms-curses-design.md`, 4.1.2, 4.1.4, 4.3.5, 9.3):
+  answered at M3 as the Deed bequest; any heirloom slot waives the F1
+  Due (pending the DH owner's confirmation, 5.4 (f)); the calibration
+  arms (18.2); the recap and Grave Goods curse lines pending the DH
+  owner's ruling (17.12, M4) **(change HL-3, HL-7, HL-12, HL-20)**.
 - **Experience:** keep hero level minus room level at 0 or above
   (under-levelled stealth heroes void the guards).
 - **Lead's checks before data:** every SRD shape in this document against

@@ -315,13 +315,13 @@ Research covered videogames, tabletop systems and lore-object practice. Lessons,
 | CH `AbandonWritesNoLore` | Extended to `oddmentsSeen` (SK-6) |
 | DH 17.12 / LE 8.2 Grave Goods | 4.5, 5.4 (SK-6) |
 | IR 6.1 Whence, bynames | 4.5.1 given names (SK-5) |
-| IR 4.15 heirloom hooks; ITEMS 14 | SK-4, SK-12 |
-| SV GS0.1, SV-12, 4.7 | 4.7 (SK-16 request) |
+| IR 4.15 heirloom hooks; ITEMS 14 | SK-4, SK-12; taken up by the heirlooms and curses design (segment 15): SK-4 widened to every heirloom slot (HL-3), SK-12 read unchanged, amulet heirlooms a pending request (HL-26, M4) (4.1.4, 4.6 there) |
+| SV GS0.1, SV-12, 4.7 | 4.7 (SK-16 request; heirlooms read fallback (a) and HL-25 is a pending request, heirlooms and curses design 4.1.7) |
 | TK 24.2 charm boon type | Not a kit (no change); no "charm" fields on kits (`accentId`) |
 | XI 4.10 `uiMemory` staged disclosure | 4.6 |
 | ENM 18.1 rival party reuses class kits (Later) | Data kept reusable (9.1) |
 | RS 19.2 hero motives | 4.5.2 writing rules |
-| MAIN/RS run-modifier slot | SK-15 `kitDelta` reservation (request, Later) |
+| MAIN/RS run-modifier slot | SK-15 `kitDelta` reservation (request, Later); taken up by Oaths (HL-21, a pending request; Later; heirlooms and curses design 4.5) |
 
 ### 2.3 Findings (told plainly)
 
@@ -329,7 +329,7 @@ Research covered videogames, tabletop systems and lore-object practice. Lessons,
 - **F2. The Herald's set B "2 javelins" is illegal.** HR lines 876 (7.2), 1011, 1012 (7.7), 1147 and 1148 (7.11) say "2 javelins". W 11.1 allows an off-hand light weapon only beside a light main hand, and the javelin is not light (W 17.6: one-handed, thrown); gear never stacks either (ITEMS 12.8). W 9.3 (settled, ITEMS 17) says a thrown weapon stays with the thrower, so 1 is enough. Fix: SK-2, with an HR 7.12 rerun.
 - **F3. CH 4.9 says "fixed per class",** but the Shade and the Herald choose their kit as their creation pick. CH-24 and its sentence in MAIN 4.7 do not say it ("Starting kits get no hub peg: kit variants ship only as boon options") and need no change. Fix: SK-8, CH 4.9 wording only. The meaning of CH-24 is unchanged **(corrected after the check)**.
 - **F4. ITEMS 18.1 has no row for the hero's kit issue at run start** (only recruit hire). Fix: SK-3.
-- **F5. The F1 Due and an heirloom weapon conflict.** A U heirloom weapon (M3 boon) ties the mundane kit weapon at 0 VP in the fixed deal, with no tie-break stated. Then either no strict U upgrade exists on F1 (the deck has no R card), or the Due lands as a U upgrade over a mundane item the hero no longer uses. Fix: SK-4.
+- **F5. The F1 Due and an heirloom weapon conflict.** A U heirloom weapon (M3 boon) ties the mundane kit weapon at 0 VP in the fixed deal, with no tie-break stated. Then either no strict U upgrade exists on F1 (the deck has no R card), or the Due lands as a U upgrade over a mundane item the hero no longer uses. Fix: SK-4, widened to armour and shield heirlooms by HL-3 (heirlooms and curses design 4.1.4).
 - **F6. Stat rearrangement can make a kit illegal at tick 0.** STAT 5.1 lets the player rearrange the suggested array. A Vanguard at Str −1 Strains the greataxe (heavy needs Str +1) and chain mail; a Shade below Str 0 Strains the longbow; low Dex drops leather AC below what the kit strip prints. Fix: SK-9 creation warnings and V21 checks over legal arrangements.
 - **F7. Mundane bases have no basePrice in any approved document**, although ITEMS prices them "by basePrice" (10.5) and the vendor stocks them. This is a data gap. Fix: SK-11 (request to ITEMS and LE).
 - **F8. "Kit" is overloaded.** CMP and CL 7.8 use "kit" for a companion's ability package (Gatekeeper kit, kit upgrades); CH-17 says "Accept kit defaults". A "Kit" chip on a hero's mundane sabre would also look like kitBound gear, which sells for 0 ("Unsellable: kit"). Fix: SK-13; the player-facing word goes to the naming pass. "Issued" has 26 hits and is rejected as the chip; the placeholder chip is "Starting gear" (0 hits).
@@ -430,9 +430,9 @@ Every hero kit and every variant spends exactly this:
 - **The F1 Due stays a U weapon or focus for the hero** and is a strict upgrade for every kit and variant, because every kit is mundane (V21 `KitDueStrictUpgrade`).
 - **Heirloom precedence (SK-4).** Two parts:
   1. **Tie-break:** in the fixed deal, on equal VP, the higher tier is dealt, so a held heirloom is the slot's dealt item.
-  2. **F1 hero-arms precedence:** a hero whose arms already hold U or better is treated as "arms satisfied". The F1 Due then takes the approved 20-coin waiver.
+  2. **F1 hero-arms precedence:** a hero whose arms already hold U or better, **or who holds an heirloom in any slot (weapon, focus, shield or armour; M3; change HL-3, heirlooms and curses design 4.1.4)**, is treated as "arms satisfied". The F1 Due then takes the approved 20-coin waiver. Order: WO1 kit issue → SK-12 placement → the fixed deal with the tie-break → `armsSatisfied = heroArmsTier ≥ U OR the hero holds an instance flagged heirloom (any slot class, a two-hander and the Burdened twin included)`, read from the issued instances after placement, never from `boons[]` → the waiver (`DreamsDueWaived`; the 20 coin sits in the Due's container slot on F1, never as kit coin).
 
-  Why the waiver and not a retarget to armour: a retarget would give the heirloom hero two U pieces entering F2. That makes the heirloom boon even more dominant and breaks LE 6.5's F1 intent. The waiver coin also adds margin to camp 1. "The Due never retargets" holds unchanged. This applies only to weapon and focus heirlooms. V13g (g) gains a named heirloom case.
+  Why the waiver and not a retarget to armour: a retarget would give the heirloom hero two U pieces entering F2. That makes the heirloom boon even more dominant and breaks LE 6.5's F1 intent. The waiver coin also adds margin to camp 1. "The Due never retargets" holds unchanged. This applies to every heirloom slot class: an armour or shield heirloom hero plays F1 with the mundane kit weapon, U defence and 20 coin (parity by value, on a different axis; report `HeirloomSlotParity`) **(change HL-3, M3; it replaces "only weapon and focus heirlooms")**. V13g (g) gains one named heirloom case per slot class and one for the Burdened twin (Later). Fallback if HL-3 is refused: no armour or shield heirloom templates at M3 (heirlooms and curses design 4.1.4).
 - **Selling kit gear (agreed, Q4).** Hero kit gear stays sellable at the Sell rate, as approved (told plainly: this asymmetry with kitBound recruit gear is kept on purpose). Under the proposed price scale, a spare sells for 1 to 3 coin *(illustr.)*, which is noise. Report `KitSoldAtCamp1`, split into the named piece and the other pieces. The `kitIssue` 0-Sell flag is **held as a lever** (7), never shipped by default. Rejected: Q4-B, 0 Sell for hero kit gear.
   - **Sell, Swap/Leave and Curiosity rows (lead's call, after the check).** Every hero kit piece (4.1's predicate) shows the "Starting gear" chip on these rows, so a bought plain shield and the kit's named shield never look alike. When the named piece is selected there, one inline consequence line shows, non-modal and with no extra confirm: "Sold as plain gear. Its name goes with it." (one whole-string key per action: sold, left, offered). The given name itself never appears on these surfaces (4.5.1). No price change and no block: kit gear stays sellable at the Sell rate (Q4).
   - **Reading (new lead's call):** LE 6.6 counts items sold or dropped at this camp as still dealt (pending the DH owner), so selling a kit piece cannot steer the next Due. If the DH owner refuses that item, `KitSoldAtCamp1` is read together with `HeroDreamsDueShare` before the lever is considered.
@@ -467,6 +467,8 @@ Every hero kit and every variant spends exactly this:
   - codex plates: "A win as a <class>".
 
   Milestones for a class the profile has not unlocked stay hidden. Every milestone card carries SV's "seeded runs do not count" line: **seeded runs never advance milestones** (told plainly; SV Q1).
+
+  **Heirloom R1 (reading, change HL-10; M3).** The heirloom class milestone "Fell the floor-3 boss as a <class>" is ordered after these by difficulty only, with no prerequisite; one run may fire all three. One WO6 writes, and the hub reveals, in a fixed order: these variant milestones, then R1, the R2 offer, R3 (heirlooms and curses design 4.1.2).
 - **Hub object (`UnlockHasHubObject`).** One bundle per class on the **Heirloom shelf**, where boons already live. It is tied in cloth and marked with the class glyph and a pattern, never colour alone.
   - There is **no coat tag on the Coat rack**: CH-24 says "starting kits get no hub peg" (told plainly; corrects Model A and the catalogue).
   - **(new lead's call)** CH 4.11's "kit tag in the Veteran book" stays the companion-kit unlock object; it is never used for a hero kit variant.
@@ -505,9 +507,11 @@ Every hero kit and every variant spends exactly this:
   | Upgraded, Re-engraved | Neither applies: mundane items have no rolled line; Re-engraving is held Later and never touches names |
   | Identified | Always known |
   | Earns a Deed (fells a boss) | The byname takes the Whence slot; the given name becomes "Once called Nine Rivets". IR 6.1's Deed-only rule holds |
+  | Worn by a standing party unit when a boss falls (M3) | Credited by the Core `BossFelled` event for the heirloom R2 route, never by the display Deed; the plain kit shield or armour may come home as its family's authored heirloom; the instance is never copied (change HL-31, SK owner confirms; heirlooms and curses design 4.1.2). **Pending request (IR, CMP; SK confirms):** whether such a worn piece also earns a Deed byname; fallback: none, the bequest carries boss and theme marks only |
   | Death or win | Listed in Grave Goods from the named-piece log (below) |
   | Recruit kit piece dismissed | Deleted with the instance (kitBound, CMP-21) |
 
+- **The given name never leaves the run (reading, recorded by the heirlooms and curses design 4.1.5, F17).** Grip-marks carry Deed bynames only; a named piece that earns a Deed passes on its byname, never its given name.
 - **The named-piece log (lead's call, after the check).** ITEMS deletes an instance when it leaves the run, so the sidecar alone cannot tell Grave Goods what became of the name. `run.save.display.namedPieceLog[] = {instanceId, givenNameKey, fate: carried | sold | left | offered | lost | dismissed, floor}` gets one entry per named piece, written by the display layer when the instance's terminal Core event arrives (`ItemSold` → sold; `ItemLeft` then scrapped → left; `ItemDestroyed{offered}` → offered; `ItemDestroyed{lost}` → lost; `ItemDestroyed{dismissed}` → dismissed), and `carried` at death or win if no terminal event came. **"Replaced" means any fate other than carried**; a piece swapped into the pack and still owned is carried. Grave Goods reads this log.
 - **Companion kit upgrades** are abilities and never swap the named piece (CMP owner confirms). Old Friend issues its kit with the name through the SK-3 issue row.
 - **Kit lines.** Every other kit item gets one authored Whence line (`kitLineKey`). Kit items have no found theme, so the provenance line reads **"Carried from the start"** (placeholder) instead of "Found in <theme>, floor N", and there is no Reverie clash. **(lead's call, after the check:** the draft's "Issued at the Stairtop" asserted the premise that SK-14 only requests, and implied an issuer at the Stairtop that AN1 and CH Q1 rule out; the neutral line names no place and no act of issuing, whatever the RS owner rules on SK-14**)**. Kit lines and the provenance line pass the same word bans as Oddments and the per-word flags of names (V21 (g), (i)).
@@ -525,7 +529,7 @@ Every hero kit and every variant spends exactly this:
 
 - **Record.** `OddmentRecord` is display-domain data, never an ITEMS record. It has no price, size, slot, stack, unit, command or effect field. Core assemblies cannot reference the type (the `AmbientCoreBlind` / `CoreNoProfileRef` pattern).
   - **Records are never deleted (lead's call, after the check).** A patch may only mark one `retired`. A retired id still renders from a save, from Grave Goods and from the codex, and is never selected for a new run. Changing a pool's order is allowed and changes only new runs. V21t `OddmentRetiredLoads` loads a save that holds a retired id.
-- **Pools (lead's call, after the check).** Each default kit has a pool of 6 (Q3). Each variant boon and each background-perk boon (M3) has its own pool of 3 (`oddmentPoolId` on its record). A hero draws from an **effective pool**: the held boon's pool, if any, followed by the default kit's pool for the creation pick, so a variant or background hero draws from 9 and the boon's own entries come first.
+- **Pools (lead's call, after the check).** Each default kit has a pool of 6 (Q3). Each variant boon and each background-perk boon (M3) has its own pool of 3 (`oddmentPoolId` on its record). A hero draws from an **effective pool**: the held boon's pool, if any, followed by the default kit's pool for the creation pick, so a variant or background hero draws from 9 and the boon's own entries come first. An heirloom has no `oddmentPoolId`, so an heirloom hero draws the default kit's pool (reading; heirlooms and curses design 4.1.4).
 - **Issue.** One per hero per run, by **one formula (lead's call, after the check;** the draft gave two derivations**)**:
   - **Order:** each part of the effective pool is permuted by H(`DisplayKey(run)` / `lore` / (campIndex 0, visitIndex 0, speaker "oddment", heroIndex, poolId)), the boon's part first, then the default kit's. **No `nightId`** enters it, because `nightId` is profile-scoped and two players of one code must see the same Oddment.
   - **Fresh seeded or shared runs** take the first entry of the order and write nothing. **Told plainly:** the same seed shows the same Oddment, but a text patch can change it (display content is outside the key).
@@ -557,7 +561,7 @@ Every hero kit and every variant spends exactly this:
 - **After the run.**
   - Death: the Grave Goods line for its state.
   - Win (M3): the Framer pins the **carried** Oddment's tag to the corner of the Memento frame, captioned "carried out of the Heart". This costs no figure line. It is **the first cut** if CH's `OneWinOwnerPerNight` budget refuses it.
-  - Nothing ever returns as a boon or an item (ITEMS 15).
+  - Nothing ever returns as a boon or an item (ITEMS 15). Read as "no instance returns": an authored heirloom template unlocking is content, which ITEMS 15 allows (reading; heirlooms and curses design 4.1.2).
 - **Lore engine (M3; CH owner).**
   - LoreContext (CH 4.15.1) gains display booleans `oddmentCarried` and `oddmentLeftThisNight`, plus a hidden `strataTag` key (never shown in a caption).
   - A Lingerer of the matching stratum may have one T2 line under AN3, AN5 and AN7 caps and `factOncePerRun`. Never on a death Night.
@@ -565,7 +569,7 @@ Every hero kit and every variant spends exactly this:
   - These lines are the second cut.
 - **Codex (M3; agreed, Q3).** An "Oddments" page in the Library (CH 4.15.8 hosts; RS owns), filled on sight and write-only from the run's view. One illustrated plate per completed kit pool, behind "a win as <class>".
 - **Writing rules.** They apply to every Oddment caption, name and codex paragraph, and **to every kit line and the provenance line** (lead's call, after the check).
-  - **Author:** the previous carrier is a resident in plain sight with a trade (porter, footman, field-hand, dyer). Never a delver, adventurer, hero or the Dreamer. Never an echo of a past run's Grave Goods (`noFallenHero`; the Unwoken Roll stays EV's single fallen-hero device).
+  - **Author:** the previous carrier is a resident in plain sight with a trade (porter, footman, field-hand, dyer). Never a delver, adventurer, hero or the Dreamer. Never an echo of a past run's Grave Goods (`noFallenHero`; the Unwoken Roll stays EV's single fallen-hero device). Heirloom bequests and Grip-marks keep it: no hero name and no death text (reading; heirlooms and curses design 4.1.2, 4.1.5).
   - **Never** addresses "you" (no selfReference or AmbientSelfRefCap spend); never hero motives, names or family.
   - **Banned content:**
     - DreamerLine and AN5 words ("down", "went down", "back", "kept going", "wake");
@@ -609,7 +613,9 @@ Every hero kit and every variant spends exactly this:
   - (b) the share code carries `boons[]`, and the recipient is lent the variant.
 
   The player-facing result is stated on the seeded entry screen either way. Fallback until the SV owner rules: (a).
+  - Heirlooms follow (a): shared and seeded runs use canonical grants, so no heirloom, and the entry screen says so. **Pending request (HL-25, SV owner rules; Later):** share codes may carry one heirloom template id and one `runModifierId`, never Grip-marks (heirlooms and curses design 4.1.7).
 - **Run modifiers (SK-15, request to MAIN/RS; Later).** V21 invariants apply to the canonical kit. A future modifier may change kit fields only through declared `kitDelta` entries in `configHash`. It must declare the DH 21.5 and LE-24 gates it waives, and it is reported outside Floor1ClassSpread. A reserved V21 check fails the build if a modifier touches a kit without a declared delta.
+  - **Oaths (Later; pending request HL-21 to the MAIN/RS owners of the CH-24 slot; agreed there, Q6):** an Oath that touches kits declares its `kitDelta` and the DH 21.5 and LE-24 gates it waives, and is reported outside Floor1ClassSpread; `runModifierId` enters `configHash` (HL-22). Fallback: the slot stays unlit until the MAIN/RS difficulty decision, and V21 (m) stays unused (heirlooms and curses design 4.5).
 
 ---
 
@@ -818,6 +824,7 @@ Every hero kit and every variant spends exactly this:
    - **The given name moves only when the named piece is not issued:** it goes to the next issued piece in the kit's fixed order (`namedPiece.fallbackOrder`), and the receiving piece's kit line is suppressed, so it still carries one flavour line (IR 6.1). The order lists only shields and armour (4.5.1), so on a shield kit it ends at the armour; if no listed piece is issued (an armour heirloom on an armour-named kit), the kit carries no given name that run and the heirloom card says so. A named piece that is displaced but issued keeps its name in the pack.
    - The heirloom card shows "Replaces: <piece>" before the pick, and "(not carried: no room)" for a piece that will not be issued, for example "Replaces: staff (not carried: no room)" for an Arcanist.
    - V21 `HeirloomKitFits` checks the state **after** this rule has run, for every class × pick × heirloom template: the pack has at least 1 free slot, and every unissued piece is listed on the card. It holds by construction; the Arcanist staff and leather heirlooms (a 2-slot pack, bulky size-2 pieces, ITEMS 5.2) are named test rows.
+   - Read unchanged by the heirlooms and curses design (4.1.4 there); M3 heirloom slot classes are exactly these placeable classes. **Pending request (HL-26, TK owner rules; M4):** amulet heirlooms, placed in an empty worn slot with no displacement, would need a worn-slot row here, a V21 `KitNoTrinket` waiver and a TK parity report (heirlooms and curses design 4.6).
 3. **Kit variant boons** (SK-7) as in 4.4.
 4. **Given names and kit lines** (SK-5) as in 4.5.1.
 5. **The Oddment and Leave it by the fire** (SK-6) as in 4.5.2.
@@ -837,7 +844,7 @@ Toy script kept in the design lead's scratch area (Appendix B). Assumptions: lev
 
 - Kit 15 + F1 main-path floor 17 = **32** = camp-1 need (2 × 12 + 8). **Margin 0**, so SK-1 is mandatory.
 - LE camp-1 ledger: purse ~73, restock 32, coverage ~0.60 (settled; unchanged).
-- SK-4's waiver path adds 20 coin for heirloom-weapon heroes only.
+- SK-4's waiver path adds 20 coin for heirloom heroes, any slot class (weapon, focus, shield or armour; HL-3, M3; heirlooms and curses design 4.1.4).
 
 ### 8.2 Damage per round (corrected per W 11.3: the off-hand attack adds no positive ability modifier; d6 + 3 ≈ 4.4, d8 + 3 ≈ 5.1, d10 + 3 ≈ 5.8)
 
@@ -965,12 +972,12 @@ Every display field is tagged `display` and sits outside `manifestHash`. Content
 - (d) `KitSetLegal` (W 11.1, no stacked gear), `KitTrained` (no Strain at the suggested array), `KitTwoTypes`, `KitVerbPerSet` (a usable weapon or focus verb in each set **in its actual layout**, Nick counting only in an off hand beside a light main hand; on-hit where a class feature reads it; a `fallbackOnly` set exempt; applied to every variant set too), `KitHasFallbackDamage` (M1; would have caught F2).
 - (e) `KitAcFloor`: `acFloor` ≥ 11 (AR-20); the suggested array reaches `acFloor`; over every legal arrangement (4.2), sustained AC ≥ 11 (M1).
 - (f) `KitDueStrictUpgrade`: the F1 deck holds a legal U arms card for every kit (M1 if the slice includes the Due; else M2).
-- (g) Names, given names, kit lines and the provenance line. **Machine rows** (fail the build): the word lists (possessive, "of", Scion rank words, theme, Bell*, idiom tag, damage and defect words on full-stat pieces); no two given names sharing a head word; ≤ 18 chars; collisions by whole word and substring (the V14 (f) pool plus Hollowfolk verbs); required fields. **Flags** to the naming pass: the per-word list (property, verb, rank-word, party-counter and system-term names). **Authored tags** the tone review confirms: `properNoun: false` (M2).
+- (g) Names, given names, kit lines and the provenance line. **Machine rows** (fail the build): the word lists (possessive, "of", Scion rank words, theme, Bell*, idiom tag, damage and defect words on full-stat pieces); no two given names sharing a head word; ≤ 18 chars; collisions by whole word and substring (the V14 (f) pool plus Hollowfolk verbs), run on display strings and fallbacks as well as names, with the pool shared with the heirloom and curse names and the Grip-mark byname choice (M2; HL-13, NR6, heirlooms and curses design 5.3); required fields. **Flags** to the naming pass: the per-word list (property, verb, rank-word, party-counter and system-term names). **Authored tags** the tone review confirms: `properNoun: false` (M2).
 - (h) `KitDisplayCoreBlind`: Core assemblies cannot reference the `displayOverlay`, `namedPieceLog` or `OddmentRecord` types. `KitDisplayInert` test: strip or randomise the display section and the content keys, and the core state hash is unchanged (M2).
 - (i) `OddmentInert` (no rules fields) and text checks over Oddments, kit lines and the provenance line. **Machine rows:** premise author is a resident trade; required tags `noDreamer`, `noHeroMotive`, `noSecondPerson`, `noFallenHero`; DreamerLine and AN5 words; RC7 cues; Hollowfolk props and textures; EV card titles and props, Strand names, RS faction motifs and role props, boss signatures, trinket and property names, trinket kind words, level-up reward terms; theme names; door, route and distance words; `numberBlocklist`; money words; the kit's own families and named piece; effect verbs; no shared object noun inside a pool; the "Does nothing" line present; `firePropId` present; `OddmentPoolMin` 6 per default kit, 3 per variant or background boon. **Authored tags** the tone review confirms: `noUsableLook`, `noImpliedSense`, `countsReviewed`, `noKitEcho` (M2).
 - (j) `KitNamedPieceNotF1Target` (hero kits and variants, computed over the F1 deck: for each class × creation pick × variant, no card in the F1 hero-arms candidate set (U, usable, trained) has the named piece's family; holds for every shield and armour), `KitResaleBand` (reads prices from data; a missing basePrice on any kit family fails the build), `KitLegalOverArrangements` (a warning exists for every Strain case and every AC below `acFloor`) (M2).
 - (k) Variants: `KitNoDominance` (gear only, over the union of both sets), `KitVariantParity` (AC at the suggested array ≥ the replaced pick's `acFloor`), CL 6.3 ForbiddenClassGrant on the skill, skill, alternate and fallback not in the class's creation defaults and not Leadership or Mechanics, `level3SpareHintFamilies` disjoint from the kit's families and the hint text generated from them, `UnlockHasHubObject` on the Heirloom shelf (M3).
-- (l) `HeirloomKitFits` (after SK-12's placement: ≥ 1 free pack slot, every unissued piece listed on the card; Arcanist staff and leather heirlooms as named rows); SK-4 heirloom case in V13g (g) (M3).
+- (l) `HeirloomKitFits` (after SK-12's placement: ≥ 1 free pack slot, every unissued piece listed on the card; Arcanist staff and leather heirlooms as named rows); SK-4 heirloom cases in V13g (g), one per slot class (HL-3) (M3). **Pending request (HL-26, TK owner rules; M4):** amulet heirlooms would need an SK-12 worn-slot row and a `KitNoTrinket` waiver for the heirloom piece only (heirlooms and curses design 4.6).
 - (m) Reserved: a modifier touching a kit without a declared `kitDelta` fails the build (Later).
 
 **Tests (t):**
@@ -998,9 +1005,9 @@ Every display field is tagged `display` and sits outside `manifestHash`. Content
 |---|---|
 | **M1** | Vanguard default kit (approved contents); coin exactly 15 (SK-1); hero kit-issue row with the creation order and `KitIssueStable` (SK-3); V21 (a)–(e), plus (f) if the Due is in the slice, registered by SK-10; display fields reserved and unused; kit strip for the one class if creation exists in the slice |
 | **M2** | All six default kits; SK-2 javelin fix and HR 7.12 rerun; given names and kit lines on hero and companion kits, with the display sidecar and the named-piece log; trims; Oddments (36, 6 per kit; agreed, Q3) with `oddmentsSeen` and the display tuple; Leave it by the fire; Grave Goods line; kit strip, run-1 form and callout; creation warnings; Arcanist pack-pressure UI; V21 (g)–(j); `KitSoldAtCamp1` (agreed, Q4); SK-11 decision by LE |
-| **M3** | 8 variant boons (Arcanist pair gated) with skills and alternates (agreed, Q1), milestones and Heirloom-shelf bundles; per-offer pick-rate report; SK-4 and SK-12 before heirlooms ship; Deed bynames on kit items; codex Oddments page and plates (agreed, Q3); LoreContext facts and Lingerer lines; Memento frame tag; background-perk boons with Oddment pools (3 each); V21 (k)–(l) |
-| **M4** | Third variant per class (F4-boss milestone); Arcanist variants if delayed; Vanguard "Long Arm"; species-flavoured Oddments; unlock-class kit packages |
-| **Later** | Companion Oddments; F5 Keepsake prop; player-chosen labels (UI only); daily seeds that fix the kit; `kitDelta` modifiers |
+| **M3** | 8 variant boons (Arcanist pair gated) with skills and alternates (agreed, Q1), milestones and Heirloom-shelf bundles; per-offer pick-rate report; SK-4 (with HL-3's any-slot waiver) and SK-12 before heirlooms ship; the `BossFelled` credit for kit pieces (HL-31); Deed bynames on kit items; codex Oddments page and plates (agreed, Q3); LoreContext facts and Lingerer lines; Memento frame tag; background-perk boons with Oddment pools (3 each); V21 (k)–(l) |
+| **M4** | Third variant per class (F4-boss milestone); Arcanist variants if delayed; Vanguard "Long Arm"; species-flavoured Oddments; unlock-class kit packages; an SK-12 worn-slot row for amulet heirlooms if the TK owner agrees (HL-26, pending) |
+| **Later** | Companion Oddments; F5 Keepsake prop; player-chosen labels (UI only); daily seeds that fix the kit; `kitDelta` modifiers (Oaths, HL-21, pending) |
 
 ---
 
@@ -1148,6 +1155,8 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 | Oddment read as a buff | `OddmentMisuseRate` ≥ 5% after the callout, or the playtest question | The card text and placement are revised; no effect is ever added | Lead |
 | Price scale | ITEMS and LE owners rule on SK-11 | Until adopted, the 8.4 scale stays in data labelled `placeholder` (a missing basePrice fails the build from M2); fallback: owners' own prices, `KitResaleBand` re-run | ITEMS, LE owners |
 | Heirloom precedence refused | LE or DH owner refuses SK-4 | The tie-break gap remains; heirlooms ship only with a named V13g (g) case agreed by LE | LE owner (DH, IR confirm) |
+| Any-slot heirloom waiver refused | LE owner refuses HL-3, or DH, IR or SK confirmations stay open at M3 | No armour or shield heirloom templates at M3 (three weapon or focus families replace them); heirlooms do not ship until the confirmations close (heirlooms and curses design 4.1.4, 14.2) | LE owner (DH, IR, SK confirm) |
+| Worn-piece bynames | IR or CMP owners refuse a Deed byname for a shield or armour credited by `BossFelled` (HL-31; SK confirms) | The bequest and its Grip-mark carry boss and theme marks only; the given name is unaffected | IR, CMP owners; SK confirms |
 | Shared seeds and variant boons | SV owner rules on SK-16 | Fallback: (a), variant boons replaced by the default kit for the chosen creation pick, other boons by SV's canonical-grant rule, stated on the seeded entry screen | SV owner |
 | Premise row | RS owner rules on SK-14 | Fallback: no premise row; Oddment writing and the neutral provenance line unchanged | RS owner |
 | `kitDelta` modifiers | MAIN/RS run-modifier decision (SK-15) | Reserved V21 (m) stays unused until then | Main design, RS owners |

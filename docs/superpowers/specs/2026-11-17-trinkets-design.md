@@ -181,7 +181,7 @@ the lead's calls, which the client said stand.
 | 3 | Buttons (Q3) | **(a) At most one trinket-granted button per unit (`ButtonCap`), on charms only in M2;** rings channel automatically. **(agreed)** Charm abilities get a future design pass (24.2). | (b) Rings hold the button lane and charms go automatic. No buttons at all: loses the stored-moment charm. One button per ring: the Pillars / WotR bar bloat. |
 | 4 | Damage (Q4) | **(a) Zero added damage, literally:** a ring-shifted part never gains the weakness bonus, but still lands its rider automatically on a weak target. **(agreed)** | (b) Edge-style full ladder: one ring gives every class a weakness key on every spell and needs a party damage ceiling. |
 | 5 | Stacking | **One merged cap, `DuplicateAnswer`,** counting armour and shield, plus runtime limits (section 7) **(lead's call)** | Three separate caps (`DuplicateProperty`, `DuplicateAnswer`, `TagStack`): three overlapping greyed reasons |
-| 6 | Trade-offs | **None in M2;** drawbacks arrive as curses (Later, Rare+) **(lead's call)** | `cost` lines of negative value break "value equals budget"; numeric +X / −Y fails the buff test |
+| 6 | Trade-offs | **None in M2;** drawbacks arrive as curses (Later, Rare+) **(lead's call)** (item curses now M4; the Heartward Torc's cursed twin only if the TK owner agrees: heirlooms and curses design 4.6, 10; HL-26, HL-29) | `cost` lines of negative value break "value equals budget"; numeric +X / −Y fails the buff test |
 | 7 | Party effects | **No passive party effects or auras in M2;** ally effects are wearer-triggered, one ally per trigger **(lead's call)** | One Rare amulet aura per party: a Later option for the client (24.3). Passive buffs on 4 units × 2 slots: fails ability model 9.6 |
 | 8 | Class features | **Class copy registry at any charge level,** bidirectional; trinkets never act on class abilities or pools **(lead's call)** | The weapons copy rule alone (charged echoes legal): lets a rest charge copy a class feature |
 
@@ -549,7 +549,20 @@ About one action's worth each. **(lead's call)**
 - Neck count is 1, so a unit holds at most one Rare trinket by
   construction. **(agreed, Q2)**
 - Rings cannot be cursed until the curse design (Later) asks for Rare
-  rings, which would reopen Q2 with the client. **(agreed, Q2)**
+  rings, which would reopen Q2 with the client. **(agreed, Q2)** The
+  curse design (segment 15) asks for no Rare rings, so rings stay
+  uncursable and Q2 is not reopened (heirlooms and curses design 4.6;
+  HL-26, TK Q2 read; hook taken up).
+- **Pending request (HL-26; M4; heirlooms and curses design 4.6):** the
+  Heartward Torc is the only trinket curse host; its cursed twin is
+  authored only if the TK owner agrees, and then ships with item curses
+  at **M4** (HL-29, agreed Q5, moving item curses from Later to M4;
+  conditional on this request). If refused, there is no trinket curse
+  host (heirlooms and curses design 14.2). Charms are never cursed and
+  never heirlooms (CH-24). M4 trinket heirlooms are amulets only, placed
+  in an empty worn slot with no displacement; they need an SK-12
+  worn-slot rule, a V21 `KitNoTrinket` waiver and a TK parity report.
+  It changes nothing until the TK owner rules.
 - `trinketRarePerFloorMax` (17.2) is the client's decision and is not
   tuning. **(lead's call)**
 - **In M2 the limit is effectively one per run.** Heartward Torc is the
@@ -741,7 +754,10 @@ About one action's worth each. **(lead's call)**
 - **No trade-offs in M2.** A verb may be situational ("while Hidden"); that
   is a trigger, not a cost. Curses (Later, Rare+, items 13) bring
   drawbacks: only the Rare amulet (and Later charms, if Q2 is reopened)
-  can host one.
+  can host one. Item curses move to **M4** (HL-29, agreed Q5); the
+  Heartward Torc's twin is pending the TK owner (HL-26, 8.2), and the
+  curse design asks for no cursed charms (heirlooms and curses design
+  4.6).
 - **No passive party effects, auras or `whileCarried` in M2.**
 - **Ally effects are wearer-triggered:** they spend the wearer's action,
   bonus action or charge, and reach one ally per trigger (adjacent; within
@@ -937,7 +953,7 @@ Uncommon pieces add one roll from their location table. **(lead's call)**
 | **Lifeline Pendant** | C | **Lifeline:** once per fight, getting a Downed adjacent companion up (Medicine, trained) costs a bonus action | M2 | `fight` minor (counts toward Medicine's once per companion per fight; death and healing design 11.2), offered as an action variant (9.1). `requires: skill.medicine.trained`; a warning verdict when the wearer is not Medicine-trained (15); companions only (a hero downing ends the run); container-only |
 | **Emberward Amulet** | U (major) | **Emberward:** 1 / 1 / 1 per rest, the fire parts of one damage event against you resolve one ladder step toward resistant; never past resistant, never to immune, and never combined with another step source on the same event (the strongest applies) | M2 | The client's "resistance", reading R-b. Bounds **(lead's call, new)**: acts on all fire parts of the event together; `bigHit` is true when the sum of the fire parts, after crit doubling and before any ladder step, is at least `FloorDiv(maxHP × bigHitPermille, 1000)`; the charge is spent only if the final ladder step of some fire part changes (as Shielded's "used only if it changes something"). A fire Resistant source in an earlier slot (Resistant armour) draws the warning verdict `DeadLine`, which is not a suppression |
 | **Kinward Torc** | U (major) | **Kinward:** 1 / 1 / 1 per rest, automatic: when Poisoned, Bleeding or Withered would land on an adjacent ally (a failed save or an automatic landing), it does not land | M2 | Narrowed to the neck's own subjects (5.5, 5.7): Burning and Chilled are back's **(lead's call)**. Trigger `allyConditionWouldLand` (7.3). Reaction-shaped (counts under `ReactionCap`); yields to a ward step 4 would spend (7.1); one received prevention per round |
-| **Heartward Torc** | **R** (floor 3+) | Fixed Kinward + one rolled neck minor (Antidote, Graveward or Lifeline), which may be dormant | M2 | The only M2 Rare family. Kinward answers `ally:` keys and the rolled minors `self:` keys, so all three rolls stay legal under rule 28. Elites only as carriers (12; a Lifeline roll is container-only); Later curse host |
+| **Heartward Torc** | **R** (floor 3+) | Fixed Kinward + one rolled neck minor (Antidote, Graveward or Lifeline), which may be dormant | M2 | The only M2 Rare family. Kinward answers `ally:` keys and the rolled minors `self:` keys, so all three rolls stay legal under rule 28. Elites only as carriers (12; a Lifeline roll is container-only); Later curse host (cursed twin at M4 only if the TK owner agrees: pending request HL-26, HL-29; heirlooms and curses design 4.6) |
 | Frostward, Stormward, Causticward, Dawnward, Duskward Amulets | U (major) | As Emberward for cold, lightning, acid, radiant, necrotic | Later | At most 2 element families per wave per lane; Causticward blunts damage only |
 | Staunch Torc | C | Advantage on saves against `bleed` | Later | Dead under Ringed armour |
 | Torc of Seasons | R | Element chosen at each rest | Later | Needs a new instance field (items 18.1); pushes bring-the-key scouting |
@@ -1435,6 +1451,12 @@ except the landing envelope, whose numbers are the lead's (TK-4):
   (needs the client); curses; theme-tag synergy (armour 5.9); trader-sold
   trinkets; heirloom templates (M3); exploration-first trinkets; E+ by the
   lead's gate.
+- **M3 / M4 (heirlooms and curses design 4.1.1, 4.6, 10; hook taken
+  up):** M3 heirloom templates are main-hand, off-hand and armour only,
+  never trinkets. **Pending request (HL-26; M4):** trinket heirlooms
+  (amulets only) and the Heartward Torc's cursed twin, with item curses
+  at M4 (HL-29, agreed Q5), only if the TK owner agrees (8.2); charms
+  are never cursed and never heirlooms.
 
 ## 20. Risks
 
@@ -1611,6 +1633,11 @@ grants.
   grapplers and web or net users (Grappler's Gauntlets); lurkers (Watcher's
   Hood, Visored Helm).
 - **Curses:** whether Rare rings or charms are needed, which reopens Q2.
+  Answered by the heirlooms and curses design
+  (`2026-11-23-heirlooms-curses-design.md`): neither is needed, so Q2 is
+  not reopened; rings stay uncursable, charms are never cursed, and the
+  Heartward Torc's cursed twin (M4) is pending the TK owner (**change
+  HL-26**, request; 8.2) (heirlooms and curses design 4.6).
 - **Lead's checks before data** (existing designs, not new systems):
   Duskhem against Hidden's end rules and Shadowed; Storm Ring against arc
   damage (the arc defined by ARC-14, Arcanist design 8.1); Dawn Ring against Hidden's targeting rule; Kinstone `sourceTied`.
@@ -1660,7 +1687,9 @@ it:
 
 - **Shared jewellery pool or C-split:** only if the lane-prediction
   playtest holds at 80% *(illustr.)* (19).
-- **Rare charms or rings:** reopen Q2 (curses, Muse's Token). Last-Breath
+- **Rare charms or rings:** reopen Q2 (curses, Muse's Token). Curses no
+  longer trigger it: the heirlooms and curses design asks for neither
+  (4.6, HL-26). Last-Breath
   Charm is retired: the Reprieve Phial owns the party's extra-life fantasy
   (death and healing design 15.3; consumables design 14.9).
 - **One aura per party on a Rare amulet:** a Later option, not

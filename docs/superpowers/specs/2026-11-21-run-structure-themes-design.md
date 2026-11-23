@@ -1057,6 +1057,16 @@ shows for one floor after the card closes. Its floor count line is the
 **count line**; floor layout design 9.2's "treasures: k / n" on it is
 read as the floor strip's **Treasure field** (loot economy design 6.15).
 
+**Pending request (change HL-19; agreed, heirlooms and curses Q4;
+request to RS; M4; heirlooms and curses design 4.3.3, 5.4):** the
+Stratum Card lists "Maladies abroad: <names>" at floor entry on F2–F4,
+after the EP filter has fixed which elite carries its `maladyAbility`
+(at most one Malady-carrying elite type per floor, none in the boss
+antechamber); with Plain names on it shows the plain labels ("Maladies
+abroad: Easy Opening"). Display only, a public fact. Not a rule until
+the RS owner rules; it stays the elite telegraph's anchor if the ENM
+owner refuses the forecast extension (19.2).
+
 ### 6.10 How runs differ
 
 Run-to-run variety comes from the floor-1 draw, the band order, the
@@ -1157,6 +1167,15 @@ chooser (full rollouts) are reported beside it; the Oracle cap is gate
 trimmed camp card (6.9). If a gate fails after M2's balance pass, the
 switch stays off and the lead reports it to the client; the doors are
 re-tested in M3 **(lead's call)**.
+
+**Pending request (change HL-21; agreed, heirlooms and curses Q6;
+request to the MAIN and RS owners of the CH-24 run-modifier slot;
+Later; heirlooms and curses design 4.5, 5.2):** the Oath of the Single
+Door ("Walk the one way given.") turns Two Doors off for the run under
+it; it `conflictsWith` the Perilous Door and is greyed out when Two
+Doors is off in the build. Not a rule until the MAIN and RS owners
+rule; fallback: the slot stays unlit until the MAIN/RS difficulty
+decision (19.2).
 
 ---
 
@@ -1318,7 +1337,21 @@ Q3:** B, no premise; C, folk horror; D, full absurdism.
   figure hides a station); the audio blind-ID test at 85% sets the camp
   music box against the Heart bed's box, the Gaol bed's box (8.3), the
   Lullaby boss, the floor-1 small-hour chime, the Windfall row, the
-  Lullaby Glyph's wind-up click and the Dream tick.
+  Lullaby Glyph's wind-up click and the Dream tick;
+- the heirlooms and curses additions (change HL-13; agreed, heirlooms
+  and curses Q1; M3 heirlooms, M4 curses; heirlooms and curses design
+  5.3, 6, 11): the tone review takes the second-look list (Melancholia,
+  with a **mandatory tone sign-off**, Acedia, Phrenitis, The Spleen,
+  Tarantism) and the "Old Maladies" codex plates (emblems, no suffering
+  figure); the sensitivity read is due before M4 content lock and held
+  at M4 content-complete, so a held fallback name (Atrabile, Adustion,
+  Jactitation, Savourless) can still be swapped in; the four new RC5
+  glyphs (heirloom mark M3; Cursed badge, Malady and not-yet-read chip
+  M4) and the afflicted tell join the greyscale, colour-blind and
+  role-ID gates against the whole RC5 registry (V22 (j)); the new cues
+  (hook settle M3; take-hold, Malady onset and cast-off M4; Oath lamp
+  Later) are recorded in the timbre table, tagged for `ReservedCues`,
+  and join the audio blind-ID test at 85%.
 
 A theme that fails a gate is not shipped until its art passes; the gate
 never changes a rule **(lead's call)**. **A held theme (lead's call,
@@ -1408,6 +1441,20 @@ matches no cut goes to the client (19.2).
   madness-as-monster themes; no child victims (nursery imagery is toys,
   played sinister); invented liturgies only; no ethnic caricature; no
   meme parody; no D&D-specific names.
+- **Naming registers and rules (change HL-13, HL-30; additive;
+  agreed, heirlooms and curses Q1; M2 for the naming pass; heirlooms
+  and curses design 0.1, 5.3):** three registers by scope, never mixed
+  inside one scope: obsolete humoral and theological complaint names on
+  Maladies only; folk words on item curse cost lines; "Oath of the ..."
+  on meta-curses. Naming rules NR1–NR10 with the second-look list, the
+  Melancholia `nameException` (the one agreed exception; fallback
+  Atrabile), the collision grep run on display strings and fallbacks as
+  well as names (V14 (f), V21 (g)), and `localeTermOverride`. **The
+  blocklist adds (HL-30):** living diagnoses, slurs and gendered terms;
+  SRD spell names; SRD and 5E class and subclass feature names (Sacred
+  Oath names included); trinket kind words; for player-facing heirloom
+  strings, "passing", "bequest", "legacy" and "inherit"; and the Malady
+  forbidden-allusion list. Checked by V22 (e) from M2.
 - **Church cap:** at most 2 church-dressed themes in any pool set. The
   Choir is one; the Tallow Abbey and the Inverted Cathedral never share a
   pool set with it.
@@ -2454,7 +2501,7 @@ Unlockable themes and final bosses are main 4.7 content, never power
 | Seams (cosmetic next-theme preview) | Foreshadowing | 0 | M3 |
 | Concentrated guard posts | A lever-3 alternative | small | Simulator arm only (10.2) |
 | Element Echo (offensive element-choice lines read the found floor's `counterType`) | A theme read on rolled lines, no identity or draw change | 0 | **Held for an M3 client decision, default off** (change IR-19; agreed, item rolls Q4; item rolls design 4.4; 6.4 LootDoorInvariant) |
-| Mid-floor theme transitions; two-floor acts; a run-wide curse track; theme-keyed loot; an epilogue floor; cross-run weighting inside the seed | — | — | **Rejected** (theme-keyed loot stays rejected: theme bias 0‰, read, not changed; change IR-15; agreed, item rolls Q4; item rolls design 4.4). **Cross-run weighting inside the seed stays rejected (read, not changed; agreed, events Q1; change EV-20, EV-27, EV-28; events design 4.5.4, 4.5.8, 4.5.9):** Launcher Fallow acts outside the seed (R-SEED-6); M3 Curiosity Sequels (stage k+1 drawable once stage k is seen) and M3-late or M4 Ripening enter only through `drawableSet`'s unlock snapshot under `SuccessorParity`, a reading of this row, not weighting inside the seed; shared, daily and simulator seeds stay canonical |
+| Mid-floor theme transitions; two-floor acts; a run-wide curse track; theme-keyed loot; an epilogue floor; cross-run weighting inside the seed | — | — | **Rejected** (theme-keyed loot stays rejected: theme bias 0‰, read, not changed; change IR-15; agreed, item rolls Q4; item rolls design 4.4). **Cross-run weighting inside the seed stays rejected (read, not changed; agreed, events Q1; change EV-20, EV-27, EV-28; events design 4.5.4, 4.5.8, 4.5.9):** Launcher Fallow acts outside the seed (R-SEED-6); M3 Curiosity Sequels (stage k+1 drawable once stage k is seen) and M3-late or M4 Ripening enter only through `drawableSet`'s unlock snapshot under `SuccessorParity`, a reading of this row, not weighting inside the seed; shared, daily and simulator seeds stay canonical. **A run-wide curse track stays rejected (read, not changed; agreed, heirlooms and curses Q5, Q6; heirlooms and curses design 4.3.1, 4.4, 4.5):** item curses and Maladies move from Later to **M4** (change HL-29; the CON condition-budget reading pending), and every Malady is `untilCamp`, never crossing a camp; inherited afflictions are rejected; the only cross-run curse is an opt-in Oath in the reserved run-modifier slot (pending request, change HL-21, to the MAIN and RS owners; Later) |
 
 ### 9.2 Adopted in full: Strata Draw (M2; RT-2, RT-3)
 
@@ -2842,6 +2889,7 @@ registry, 11.4):
 | V19 | Conformance (change SV-19; lead's call; owned by segments 11–12; M1 partial, M2; seeds and validation design 5.2) | Split like V13: V19s, static (registry completeness, label and id collisions, `DomainDisjoint`, `IdFrozen`, `DrawFreeProof`, `RerunSpanCovers`, `ClassDeclared`, the Core analyzer, `CoreNoProfileRef` and others); V19g, at every stage end and at commit (the DrawLedger, which calls the owners' draw-count rows, stage digests and the frozen `GenInputs` digest); and V19t tests (`KeyAlgebraVectors`, determinism, cross-OS and hostile-environment digests, goldens, `RetryIsolation`, `ExplorationCombatIsolation`, the shared `LootDoorInvariant` harness that V6 calls, `ForecastSurvivesRetry`, `ContentAddStability` and others); the named checks of seeds and validation design 5.2 |
 | V20 | Hollowfolk (change CH-25; owned by the camp and hub design, segment 13; M2; camp and hub design 9.2) | Split into (s), (t) and (r), static and display-only, with no g phase: V20s, static (`AmbientNoTrade`, `AmbientNoHire`, `AmbientNoEffect`, `AmbientCoreBlind`, `AmbientTrigger` over the RC8 camp and hub class, `RegisterByVenue`, `DreamerLine`, `ReservedCues`, `StationRingNoAmbient`, `AmbientNotServiceAnchor`, `LingererPerDrawableTheme` and others; name collisions through V7's name registry); V20t, tests (`LoreInert`, `SeededRunLoreReadOnly`, `AmbientProfileBlind`, `NoLineTwicePerRun`, `CampProbeResistance`, `VendorStockTrimmedInCore` and others); V20r, reports (simulator: `LoreFreshness`, `HollowRepeatRate` and others in the `LoreEmu` sandbox; human: `CampSeconds`, `CampClicks`, `RunWallClock`, `HubSeconds`, `DeathPathSeconds`) |
 | V21 | StartingKits (change SK-10; owned by the starting kits design, segment 14; M1 (a)–(e), plus (f) if the Due is in the slice (else M2), M2 (g)–(j), M3 (k)–(l), (m) reserved for Later; starting kits design 9.2) | Split into (s), (t) and (r): V21s, static (`KitMundane`, `KitHealing`, `KitNoTrinket`, `KitPackEmpty`, `KitCoin` (exactly 15 for hero kits), `KitSetLegal`, `KitTrained`, `KitVerbPerSet`, `KitAcFloor`, `KitDueStrictUpgrade`, the name, kit-line and Oddment text rows, `KitDisplayCoreBlind`, `OddmentInert`, `KitNamedPieceNotF1Target`, `KitResaleBand`, `KitLegalOverArrangements`, the variant rows and `HeirloomKitFits`); V21t, tests (`KitIssueStable`, `KitDisplayInert`, `SeededRunOddmentReadOnly`, `VariantPickConsistent`, `Floor1ClassSpread` per kit and others); V21r, reports (`KitSoldAtCamp1`, `VariantPickPerOffer`, `NamedPieceHeldAtF3`, the Oddment rates and others); the static and display-only parts as V20; the consolidated suite becomes V1–V21 (seeds and validation design 5.2) |
+| V22 | HeirloomsCurses (change HL-14; owned by the heirlooms and curses design, segment 15; registered at **M1** with only the (m) `RunModifierIdInConfigHash` field row live, the (e) rule rows live from M2, (a)–(c), (h), (l) and the (j) heirloom glyph M3, (d), (g), (k), the rest of (j) and (m) M4, (f) and (i) Later; heirlooms and curses design 9.2) | Rows (a)–(m), phases s, g and t: heirloom templates, `HeirloomValueCap`, `HeirloomNoVerbClone`, unlock sources and `HeirloomCoverage`; the Malady whitelist, `untilCamp`, Cast-off deeds and every source range inside F2–F4, `MaladyEliteAgency`, `MaladyInThemeSix`, `MaladyNeverLowersMax`; NameRegister NR1–NR10 with the blocklist (7.6); the Oath rows (Later); cost-line checks (`CostLineNoHardTransform`); no Core reference to `BossFelled` consumers, Grip-marks or pending offers; `GlyphsDistinctFromRegistry` against the RC5 registry; `EliteMaladyCapPerFloor`, `MaladyNotBeforeBoss` and the Curiosity payer rows; the bequest and Malady tests; the consolidated suite becomes V1–V22 (seeds and validation design 5.2) |
 
 ### 11.3 Simulator arms
 
@@ -2982,6 +3030,19 @@ ships in M2 (6.4 R-SEED-6), and **the Wake's gate (8.2) is a production
 priority for the RS owner**. Told plainly with Q1: the Gut is built
 first, so 1a may save nothing; graded steps relieve less schedule per
 cut, so Cut 2 may arrive sooner.
+
+**Heirlooms and curses (RS owner's rows; agreed, heirlooms and curses
+Q5; heirlooms and curses design 10, 11).** **M1:** V22 registered in
+11.2 with only its `RunModifierIdInConfigHash` field row live (HL-14).
+**M2:** the naming registers, NR1–NR10 and the blocklist adopted for
+the naming pass (7.6; HL-13, HL-30). **M3:** the heirloom glyph and the
+hook-settle cue through the gates (7.4). **M4:** item curses and
+Maladies, moved from the agreed Later by the client (HL-29; the CON
+condition-budget reading pending; on refusal those rows stay Later
+unchanged); the Stratum line (pending request, HL-19, 6.9); the "Old
+Maladies" codex page (RS owner; codex hosted as in M3); the tone review
+and sensitivity read (7.4). **Later:** Oaths in the reserved
+run-modifier slot (pending request, HL-21, 6.11).
 
 ---
 
@@ -3194,6 +3255,16 @@ cross-document comparison 2026-11-23, CC-87):
   Oddments page (M3; 12) and the tone review confirms the authored tags
   on Oddments, kit lines and the provenance line (starting kits design
   4.5.2, 9.2).
+- **The heirlooms and curses design (segment 15, approved 2026-11-23;
+  its 11, 13):** the heirloom and curse hooks are **taken up**. HL-14
+  is applied (the V22 `HeirloomsCurses` row of 11.2; M1 registration);
+  HL-13 and HL-30 are applied (7.6 naming registers and blocklist, 7.4
+  tone review; M2); HL-19 (the Stratum line, 6.9; M4) and HL-21 (Oaths
+  in the reserved run-modifier slot of CH-24, with the Single Door
+  against 6.11; Later; MAIN and RS owners rule) are pending requests
+  (19.2); 9.1's rejected curse track is read, not changed; the RS owner
+  owns the "Old Maladies" codex page, the tone review and the timbre
+  table rows (M3/M4; 12).
 - **The simulator:** the arms of 11.3 and the reports of 11.4 at both
   caps; the route enumerator.
 - **Playtests:** the human door pick rate (6.11, gate 2); the
@@ -3404,13 +3475,23 @@ triggers them:
   visible easier setting (a reserved unlit lamp below tier 0 on the
   Depth gauge) and the one reserved run-modifier slot for meta-curses,
   both left to the MAIN/RS difficulty decision (told plainly; CH-24;
-  M3/Later); the premise items above, if answered, re-check the camp and
+  M3/Later; the meta-curse slot taken up as Oaths, pending request
+  HL-21, heirlooms and curses design 4.5); the premise items above, if answered, re-check the camp and
   hub lines against its AN4, and the Stairtop stays (7.5);
 - from the starting kits design (its 14.2): the RS owner ruling on the
   premise row (pending request, SK-14, 7.5; fallback: no row, the
   neutral provenance line unchanged); `kitDelta` modifiers left to the
   MAIN/RS run-modifier decision (pending request, SK-15; Later; reserved
   V21 (m) unused until then);
+- from the heirlooms and curses design (its 14.2): the meta-curse slot
+  above is taken up as Oaths (pending request, HL-21; agreed,
+  heirlooms and curses Q6; Later); if the MAIN and RS owners refuse or
+  defer, the slot stays unlit until the difficulty decision and the
+  Oath catalogue is held; the RS owner ruling on the Stratum line
+  (pending request, HL-19, 6.9; M4); RT-15, RT-16 or EV-34 ruling
+  against a theme declaring Cursed in its 6 (Malady sources then
+  Curiosity and shrine only); the sensitivity read or tone review
+  failing a Malady name (the held fallback name is swapped in);
 - the naming pass.
 
 ---

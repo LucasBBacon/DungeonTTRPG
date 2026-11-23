@@ -1814,6 +1814,26 @@ preview and 17.3 danger band cover four units.
   Gatekeeper").
 - M3: a cosmetic **Veteran** record remembers kits that took part in a
   win; Old Friend can recall that name.
+- **Heirloom credit and Grip-marks (M3; changes HL-5, HL-31, heirlooms
+  and curses design 4.1.2, 4.1.5):** Deeds and item bynames stay display
+  only; no rules code reads them. **Grip-marks carry Deed bynames
+  only (HL-5, applied):** a credited piece's Deed byname may become a
+  Grip-mark on its family's heirloom template; a named piece's given name
+  (above) stays in `run.save`'s display sidecar and never becomes a
+  Grip-mark. Companion kit pieces qualify for the Deed bequest (R2) like
+  hero kit pieces; the instance is never copied.
+  - *Pending request (HL-31, M3; this owner rules with the FL (Core
+    events) and IR owners; SK confirms):* a Core event **`BossFelled`**
+    beside `BossDefeated`, crediting the weapon or focus that dealt the
+    killing blow and every shield or armour worn by any party unit
+    standing (not Downed) when the boss falls, companions included; R2
+    keys to it, never to the display Deed. Fallback if refused: weapon
+    and focus credit by killing blow only (heirlooms and curses design
+    14.2).
+  - *Pending request (HL-31, M3; IR, CMP owners rule, SK confirms):*
+    whether a shield or armour credited by `BossFelled` also earns a Deed
+    byname (today only a piece that felled a boss does). Fallback: none;
+    the bequest and its Grip-mark carry the boss and theme marks only.
 - **Ambient grammar (M2; change CH-21, camp and hub design 4.14 AN10):**
   no camp or hub ambient figure carries a kit silhouette or accent;
   Veterans appear as portraits only; the Night Usher, a Pledge source or
@@ -2511,6 +2531,15 @@ yet designed (cross-document comparison 2026-11-23, CC-81):
   applied: SK-3 (12 Old Friend, 7.6, 11.1) and SK-5 (8.7, 11.1, 12;
   companion named pieces; kit upgrades never swap them). The F1 Due and
   the Oddment do not touch companions.
+- **The heirlooms and curses design (segment 15, approved 2026-11-23;
+  taken up):** its heirloom hooks on this owner are this design's Deeds
+  and named pieces (8.7). Applied: HL-5 (8.7; Grip-marks, bynames only,
+  M3). Pending requests to this owner, not yet ruled: HL-31 (8.7; the
+  `BossFelled` Core event and its worn-piece credit, with the FL and IR
+  owners; the worn-piece byname, with IR, SK confirming; M3; fallbacks
+  in heirlooms and curses design 14.2). No item-curse or Malady row names
+  this document; a Malady can land on a companion (M4; heirlooms and
+  curses design 4.3.1, 4.3.3, EV's payer rule).
 - **The simulator:** every arm in 11.3 and report in 11.4 at both caps;
   the flex-skill re-run before M2 sign-off (an S run of the same arm,
   10.6; SV-21); reconciling the two

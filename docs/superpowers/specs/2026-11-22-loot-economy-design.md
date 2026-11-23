@@ -45,7 +45,7 @@ and the lowest-geared member; determinism with the atomic camp-exit
 commit and `LootLedger`; the Treasure count and Grave Goods; the Heavy
 Purse; category weights and the F5 tactical cap; the elite intel line;
 the M3 meta hooks; real entries in the bait cache and the boxed lurker;
-the Twin Coffer (M3); Curses at a discount (Later); V13 `LootEconomy`,
+the Twin Coffer (M3); Curses at a discount (Later; M4 by change HL-29); V13 `LootEconomy`,
 the reports, loot last in the DH 18.2 lever order and kPC first; the
 camp sinks passed as hooks; the told-plainly items; the risks; and the
 appendix resolutions and names. The client approved this document as a
@@ -306,7 +306,7 @@ the death curve.*
 | 20 | M3 meta hooks; the Perilous Door reveal (the fourth option drawn from M2, shown in M3) | M3 | **agreed, Q5**; the screen it names (the boss reward card) accepted by the client on 2026-11-22 (18.1); LE-19 ⚑ |
 | 21 | The bait cache and the boxed lurker hold real +0 entries; the Annex has no prize of its own | M2/M3 | lead's call; LE-20 ⚑ |
 | 22 | Twin Coffer | M3 | lead's call; LE-21 |
-| 23 | Curses at a discount | Later | lead's call; LE-22 |
+| 23 | Curses at a discount | Later; M4 by change HL-29 (agreed, heirlooms and curses Q5) | lead's call; LE-22 |
 | 24 | V13 `LootEconomy`; reports; "loot last" in the DH 18.2 lever order; kPC first | M1 static, M2 | lead's call; LE-23, LE-24 ⚑ |
 | 25 | Risk incentive fixed by encounter and experience tuning, not loot | M2 | **agreed, Q6**; request to ENM, EP, DH |
 | 26 | Camp sinks (the Wish, the Tithe Bowl, the Ferryman's Note, Blood Price) passed as hooks, no ids, no prices; the Tithe Bowl since filled by segment 10 (change XI-24; M3; 8.1) | — | hook |
@@ -404,7 +404,7 @@ curve so deaths land where DH 18.2 wants them.**
   `trinketRarePerFloorMax` 1 (a client number, TK); worn pieces (the
   trinket-kind armour pieces) ≤ U (AR 5.5; body armour and shields follow
   the ordinary gates; Rare body armour exists, AR 14);
-  `scrollFloorCap` [1, 2, 3, 4, 4]; wands from F2; curses Rare+ (Later).
+  `scrollFloorCap` [1, 2, 3, 4, 4]; wands from F2; curses Rare+ (Later; M4 by change HL-29).
 - **Value and prices** (ITEMS 10.5, 12.6–12.7): one VP unit for items,
   offers and enemies; k = 1 provisional; price = value × 20 × category
   permille; the Leadership discount on the hero only, ≤ 25%; Sell 250‰
@@ -1225,10 +1225,18 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      or focus for the hero (combat is key; it answers the DH 5.8 floor-1
      choke point without touching healing). M1. V13g (g) checks it.
      **Heirloom precedence (change SK-4; M3; starting kits design 4.3;
-     *DH and IR owners confirm*):** a hero whose arms already hold U or
-     better (a weapon or focus heirloom) is treated as "arms satisfied",
+     *DH and IR owners confirm*; widened by change HL-3 ⚑; M3;
+     heirlooms and curses design 4.1.4; *DH, IR and SK owners
+     confirm*):** a hero whose arms already hold U or better, **or who
+     holds any heirloom (weapon, focus, shield or armour, a two-hander
+     and the Burdened twin included)**, is treated as "arms satisfied",
      and the F1 Due takes the 20-coin waiver below; it never retargets
-     (to armour or otherwise).
+     (to armour or otherwise). The predicate is `armsSatisfied =
+     heroArmsTier ≥ U OR the hero holds an instance flagged heirloom`,
+     read from the issued instances after SK-12 placement, never from
+     `boons[]`; the 20 coin sits in the Due's container slot, never as
+     kit coin. Report `HeirloomSlotParity` (heirlooms and curses design
+     9.3).
    - **Placement:** a main-path, no-check Plain container; an HE-7
      socket is fine (containers hold any number of items), and it may
      share that socket with the DH block. Never on a carrier. Never
@@ -1719,7 +1727,7 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    | `twinCoffer` | 9 | 1 alternate (M3) |
    | `campWaxKey` | 1 | 1 per camp 1–4 |
    | `lineRoll:<source>` | 4: line, alternate line, element, wand charges | 1 per identity of every source, dreamed options and unused fallbacks included; keyed `entryIndex × 16 + optionIndex` (change IR-14; reserved M1, inert; used M2) |
-   | `curseGate` | 2 | 1 per floor (change IR-20; reserved M2, used Later) |
+   | `curseGate` | 2 | 1 per floor (change IR-20; reserved M2, used from M4 by change HL-29) |
    | `windfall` | 4: presence, host, pad, pad | 1 per floor, F1–F5, consumed on every floor, door, party size and theme, at the start of 6.9 item 2 step 8 (change LP-1; M3; loot sources design 4.7.10) |
 
    The table is the segment-11 hand-off, taken up as registry rows
@@ -1985,7 +1993,11 @@ matter".
   options on Lore thresholds, one boss-fact queue in the FactLedger
   (M3; change EV-29; events design 4.9). **Heirloom:** outside the budget
   (**settled**); counts as party-owned for the Due (its precedence in the
-  fixed deal and the F1 Due: 6.6 item 2, change SK-4).
+  fixed deal and the F1 Due: 6.6 item 2, change SK-4; any heirloom slot
+  by change HL-3, M3). Earning (R1–R3 at M3; R4, R5 Later) and the
+  Heirloom shelf are content unlocks, never loot or coin; an heirloom is
+  never a Curiosity "Item offered" price (change HL-4, EV's; M3);
+  Grip-marks are display only (heirlooms and curses design 4.1.2–4.1.6).
 - **Daily and shared seeds:** shared seeds (M2) do not fix the hero;
   daily seeds (Later) fix class and species so smart-loot runs are
   comparable (R-SEED-5 hook; shared and daily rules in seeds and
@@ -2257,7 +2269,7 @@ and a `KitResaleBand` re-run (starting kits design 4.3, 14.2).
 | Heavy Purse | A named coin target for combat and Steal, carved from the pool | Low | M2 | **Adopted** (8.3; LE-16) |
 | Elite intel line | A non-power premium for the elite room | Very low | M2 | **Adopted** (6.9; LE-18) |
 | Twin Coffer | Choice width at no value | Low | M3 | **Adopted** (8.4; LE-21) |
-| Curses at a discount | "Cursed items worth more", safely priced | Medium | Later | **Adopted with Curses** (8.5; LE-22) |
+| Curses at a discount | "Cursed items worth more", safely priced | Medium | Later; M4 by change HL-29 | **Adopted with Curses** (8.5; LE-22) |
 | The Wish (a paid camp mark steering the Due) | Agency; a late sink | Low | M3 | **Hook** to camp and hub (adds a third outside input to ENM 10.5 step 3; that owner flags it); held Later by the camp and hub design (its 5.4) |
 | The Tithe Bowl (one camp service, one purchase per camp: a Lodestring or a Surveyor's Sketch; change XI-24) | An information sink | Low | M3 | **Hook, filled by segment 10** (exploration and information design 4.6.3): the Lodestring (pegged at or above a healing potion) or the Sketch (15 coin *(illustr.)*; room and Alcove outlines with edges and the Stairhead at the next floor's entry, never secret nodes); both resolve at the entered floor's entry or use, never on camp or Two Doors cards; the Lodestring option is greyed while one is held and not offered at camp 4. Names socket classes "behind risk", never "behind a lock"; unavailable when the party holds a Wax Key; its fact deduplicated through segment 8's per-floor FactLedger, change EV-8, events design 4.4.2. *Pending request (XI-24, to this owner):* relax the Wax Key guard for both options; if refused, the guard stays (exploration and information design 14.2); until this owner rules, the camp and hub design shows the Bowl at the Keeper's Cart greyed with its reason while a Wax Key is held (its 4.3, 14.2) |
 | The Ferryman's Note (borrow against the next floor's coin) | Spend-now tension | Low | M3 | **Hook**, capped: ≤ 30% of the next pool, once per run, never camp 4; replaces interest; the first promotion candidate if `TonicShareOfSpend` > 25% (camp and hub design 5.4) |
@@ -2318,7 +2330,12 @@ The Dream's Due is in full in 6.6; the Viaticum and the Memento in 6.11.
   read from the named-piece log, and the hero's Oddment in its state
   (the "Still carried when the dream closed:" or "Left by a fire:"
   heading, the name below); display-only, never counted in Treasures,
-  Spent or any ledger.
+  Spent or any ledger. An heirloom's fate is listed the same way (M3;
+  heirlooms and curses design 4.1.6). *Pending request (HL-20, to the
+  DH owner; M4):* Grave Goods also lists active Maladies and worn cursed
+  items, in the neutral voice from the event log, display-only; if
+  refused, it lists curses only (heirlooms and curses design 4.3.5,
+  14.2).
 - **Treasure field by source (change LP-28; M2; "Treasure strip"
   renamed by change XI-19):** see 6.15; the
   "windfall" count drops by 1 on a nab, a Steal or a getaway, and a
@@ -2390,13 +2407,13 @@ first dropped by the draw-free trim (6.9 item 7), reverting to a plain
 container that keeps its Yours identity, its Wayward a dreamed option.
 Report `OffersPerFloor` (loot sources design 6, 7).
 
-### 8.5 Curses at a discount (lead's call; change LE-22; Later)
+### 8.5 Curses at a discount (lead's call; change LE-22; M4, moved from Later by change HL-29 ⚑; agreed, heirlooms and curses Q5)
 
 A cursed card keeps its deck tier T for VP, price, Sell and Scrap; its
 benefit is authored to T+1's budget and the curse pays the difference.
 The carrier cost add reads the benefit value (cursed carriers hit
 harder). Never F1, never on a Due, at most 1 per floor (ITEMS 13).
-**Made concrete (change IR-20; Later, its draws reserved from M2):**
+**Made concrete (change IR-20; M4 by change HL-29, its draws reserved from M2):**
 curses are authored **cursed twins** (`cursedTwinOf`, same family and
 base), never rolled; a per-floor `curseGate` (2 draws, always consumed
 from M2) makes "at most 1 per floor" structural; eligible only on Rare+
@@ -2404,9 +2421,39 @@ gear field cards, F2+; also barred from fit premiums, the arms floor,
 every offer option and the fourth, the Viaticum, camp entries,
 signatures, heirlooms, consumables and rings; a cursed carrier's cost
 add uses the benefit's T+1 value (item rolls design 4.15).
-**Later (change EV-43):** segment 8's shrine curse cures and curse
-bargains touch these curses; conditions and items owners (events design
-13).
+**M4 (change EV-43; moved from Later by change HL-29):** segment 8's
+shrine curse cures and curse bargains touch these curses; conditions and
+items owners (events design 13).
+**Taken up by the heirlooms and curses design (segment 15, approved
+2026-11-23; its 4.2, 10):** this section is kept whole and only its wave
+moves. At M4 item curses ship with Clinging, the "Not yet read: may
+Cling" chip and first-equip line (change HL-15, ITEMS and IR owners;
+agreed, heirlooms and curses Q3; presentation only, never reading
+whether a card is cursed), the malign hint and five folk cost lines
+(change HL-16: `whileEquipped`, none feeding a hard-condition transform;
+Eyebitten and Ill-Slept Later), with Maladies, the desecrated-shrine
+source and EV-43's shrines; cure text is generated from the hosts in
+the build (camp or a shrine at M4; rune hosts stay Later). *Pending
+reading (HL-29, to the CON owner):* the M4 Cursed family sits outside
+CON 16's M1–M2 32 and passes CON 20.3's gate; if refused, this section
+stays Later unchanged (heirlooms and curses design 14.2). The curse
+trunk (CH-24) stays Later.
+**Burdened twin (change HL-23 ⚑; Later):** the one exception to
+"never on heirlooms": an heirloom template may author a Burdened twin
+(`burdenedTwinOf`), the **identical** U benefit plus one folk cost line,
+with no T+1 discount, reachable only under the Oath of the Burdened
+Hand; never a plain boon (heirlooms and curses design 4.7).
+**Redeemed (change HL-24; Later):** wearing a known cursed twin when a
+final boss falls, in a personal win, unlocks that family's distinct
+uncursed U Redeemed template (R5), a content unlock, never loot
+(heirlooms and curses design 4.1.2).
+*Pending request (HL-21, to the MAIN and RS owners of the CH-24 slot;
+Later; agreed, heirlooms and curses Q6):* under the Oath of the Crooked
+Road both `curseGate` draws are consumed as normal and only draw 1's
+result is overridden; a forced twin carries its benefit at card tier T,
+not T+1, so the run is never richer (6.12; `OathNeverEases`). If the
+owners refuse or defer, the slot stays unlit and this rule is held
+(heirlooms and curses design 4.5, 14.2).
 
 ---
 
@@ -2611,7 +2658,10 @@ each with its named action:
   for the hero; invariant under intra-party transfers (a property test
   over the fixed deal); a named heirloom case: a hero whose arms hold a
   U-or-better heirloom gets the waiver, never a retarget (change SK-4;
-  M3; starting kits design 4.3). *Action:* waiver (6.6).
+  M3; starting kits design 4.3); widened by change HL-3 (M3): one case
+  per heirloom slot class (weapon, focus, shield, armour) and one for
+  the Burdened twin (Later), each the waiver (heirlooms and curses
+  design 4.1.4). *Action:* waiver (6.6).
 - (h) F5: coin 0, salvage 0 and their lines hidden; no camp channel, no
   boss card, the Memento at 0 VP; the Viaticum present, all 3 options
   usable, outside the Antechamber, the Circuit and fight hosts; every F5
@@ -2711,7 +2761,8 @@ other names keep their meaning under their qualified ids.
 | **M1** | The F1 deck (single variant, inside M1's own split; at most 1 carried weapon or armour); the hero-arms Due on F1; the coin counter (F1 pool 35, main-path floor 17, the salvage share of 4 per fight then per unit, LE-7, LE-8); the LootPlan step on the keyed `lootPlan` stream and the LootBind pass; `LootLedger`; the atomic commit; V13s (a), (c); V13g (g), (i) on F1; the (m) integration test |
 | **M2** | Decks F1–F5 with variants; boss card counting; the camp channel of 2 graded for N+1; the coin pool, salvage share, Sell 250‰; K2 / K2b; the full Due with the fixed-deal scorer; the Risk Ledger for consequence locks, locks, secrets, the elite and the bait cache; Wax-Key identities and the mixed-route rule; the fourth dreamed option drawn (not shown); the usability fallbacks; the elite intel line; the F5 reshape (Viaticum, Memento, the camp-4 warning); Treasure count and Grave Goods; the Heavy Purse; category weights and the F5 cap; V13 in full; all reports, kPC first; the camp reward card's content and party-keyed vendor potion stock (camp and hub owner; changes CH-15, CH-16; camp and hub design 7.1, 7.2) |
 | **M3** | Wager, Dare, boxed lurker and Strongroom ranks (the Annex has no rank of its own); the Twin Coffer; the Perilous Door reveal (Q5; shown only, the option drawn since M2); unlock normalisation; the memento wall (the Memento wall station in the hub; camp and hub design 5.2); camp hooks if the camp owner takes them (the camp and hub design takes the Tithe Bowl in M3, promotes the Ferryman's Note, then Blood Price, only on `TonicShareOfSpend`, and holds the Wish Later; its 5.4); the Perilous toggle at the camp's door station (change CH-20; camp and hub design 7.6) |
-| **Later** | Curses at a discount; the trader carve (ITEMS 10.9, I-14); daily seeds fixing class; arena-keyed Viaticum tools |
+| **M4** | Curses at a discount (8.5; moved from Later by change HL-29 ⚑; agreed, heirlooms and curses Q5; *CON budget reading pending*, else Later unchanged; heirlooms and curses design 10) |
+| **Later** | The trader carve (ITEMS 10.9, I-14); daily seeds fixing class; arena-keyed Viaticum tools; the Burdened twin, Redeemed and the Crooked Road rule (8.5; changes HL-23, HL-24, HL-21 as a request) |
 
 ---
 
@@ -2737,6 +2788,7 @@ shop presentation and camp sinks (camp and hub); the display (segment
 | **Segment 10 (UI) and audio** | The Stratum Card order, the floor strip, tier marks, plate loot badges, the Steal preview, the Dream's Due tags, the Viaticum offer UI, the camp-4 warning, ledgers, tags, the audio stings (6.15). **Taken up by the exploration and information design (segment 10, approved 2026-11-23; changes XI-7, XI-11, XI-19, XI-22–XI-24, XI-26, XI-29):** the Treasure field naming, rooms cell and spent field (6.15); F-TREASURE and the Lodestring (8.2); the Tithe Bowl (8.1); its requests to this owner, the exposure ruling (6.9 item 6) and the Wax Key guard (8.1), stay open (its 4.6, 4.9.9, 11) |
 | **Segment 11 (seeds)** | The `lootPlan` derivation and keyed grandchildren, the draw table (6.10 item 1), step 3a and the LootBind position, the ghost and dummy draws, the atomic commit. **Taken up by the seeds and validation design (segments 11–12, approved 2026-11-23; changes SV-1, SV-2, SV-5, SV-9, SV-14):** the key algebra and the `lootPlan` registry rows (its 4.1–4.3); step 3 keyed per floor and per entry block, the ghost and dummy draws retired (4.3); GS10 and GS14 in the pipeline (4.4); the atomic commit as WO5 (4.8.3); its request to this owner, the `dealShuffle/retry1` key, stays open (6.10 item 1; its 11, 14.2) |
 | **Segment 12 (validation)** | V13s, V13g, the (m) integration test, and the reports. **Taken up by the seeds and validation design (segments 11–12, approved 2026-11-23; changes SV-9, SV-10, SV-19, SV-20, SV-22, SV-24):** V13 in the phase model with failure classes (its 5.1, 5.2); V13g at AP2 (5.4); (e) as LR2 (5.5); (m) called by the V19g DrawLedger (5.2); the arm catalogue (6.2) and the report registry (6.10); its request to this owner, the V13g (f) quantity, stays open (10.2; its 11, 14.2) |
+| **Heirlooms and curses (segment 15)** | The heirloom precedence in the Due (6.6 item 2) and the curse hook (8.5). **Taken up by the heirlooms and curses design (segment 15, approved 2026-11-23; changes HL-3, HL-23, HL-29 applied by this owner, with HL-20 and HL-21 as requests):** any heirloom slot waives the F1 Due, with V13g (g) cases per slot class (6.6 item 2, 10.2; M3; its 4.1.4); heirlooms never a Curiosity price (HL-4) and earning, the shelf and Grip-marks as content and display only (6.12; its 4.1); Curses at a discount moved to M4 with Maladies (8.5, 11; HL-29; its 4.2, 10), the CON budget reading pending; the Burdened twin and Redeemed (8.5; Later); its requests, HL-20 (Grave Goods, to DH; 8.2) and HL-21 (the Crooked Road, to the MAIN and RS owners; 8.5; Later), stay open (its 11, 14.2) |
 | **ENM / EP / DH owners** | The elite room's and the Annex's risk cost (LX16; agreed, Q6) |
 | **TL owner** | The mixed-route rule and `consequenceExposed`; Unbolting and Unweaving paying the Wax-Key identity; a Barb force consequence if `WaxKeyConsequenceUse` fires; the Ticket peg; fewer locks where the carve cap or F5 fillers bind (6.4, 6.9) |
 | **FL owner** | The Viaticum room |
@@ -3325,6 +3377,16 @@ wave or a later design triggers them; each fallback is a new lead's call
   class-themed C dose in the empty belt slot, carved from F1 sundries,
   goes to the DH owner and this owner; SK-11 and SK-16 as pending
   requests (7, 6.12).
+- **Pending items from the heirlooms and curses design (segment 15;
+  its 14.2):** if the DH or IR owner refuses HL-3's any-slot waiver, no
+  armour or shield heirloom templates ship at M3 and three weapon or
+  focus families replace them (6.6 item 2); heirlooms do not ship until
+  SK-4's IR, DH and LE confirmations close; if CON refuses HL-29's
+  budget reading, Curses at a discount stays Later unchanged (8.5, 11);
+  if `CursedTakeRate` falls below 20%, the benefit budget is reviewed
+  with this owner, never as a loot lever; HL-20 (Grave Goods, to DH;
+  8.2) and HL-21 (the Crooked Road, to the MAIN and RS owners; 8.5;
+  Later) as pending requests.
 - **The naming pass** renames every placeholder.
 
 ---

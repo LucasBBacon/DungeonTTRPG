@@ -1303,12 +1303,21 @@ immunity (the `morale` tag allows none). `mindless` implies `fearless`
   save. **(lead's call; the talisman part: change CN-14, DH-19)** The
   Weary lever for repeat downings (`downed.repeatDowningWeary`, off) is
   exempt in the same way when on (death and healing design 11.6).
-  Later: an item curse's cost is a `whileEquipped` item property, not a
-  lingering condition, and **Cursed (Clinging) from an item is exempt from
-  the cap of 2**, as Scarred is (items design 13).
+  **M4 (change HL-29; agreed with the client, Q5):** an item curse's cost
+  is a `whileEquipped` item property, not a lingering condition, and
+  **Cursed (Clinging) from an item is exempt from the cap of 2**, as
+  Scarred is (items design 13).
+  **Maladies (M4; change HL-17):** at most 1 Malady per unit, in its own
+  slot, exempt from the cap of 2 as Clinging and Scarred are; a paid
+  Malady needs an empty slot, an elite's Malady replaces the current one
+  (heirlooms and curses design 4.3.1). Fallback if the conditions owner
+  refuses: Maladies count in the cap, with the card line "This fills a
+  lingering slot" (heirlooms and curses design 14.2).
 - A camp-bought **Remedy** item ends one non-curse lingering condition.
 - **Cures:** Treat or a Mechanics repair during a rest; shrines or Arcana
-  for curses; camp clears everything.
+  for curses (Arcana at a rune once a rune host ships, Later); a Malady's
+  Cast-off deed (M4; change HL-18; heirlooms and curses design 4.3.2); camp
+  clears everything.
 - **Curiosity costs (change EV-9; events design 4.4.4, 4.4.7):** a Weary
   or theme-condition price is lingering and is offered only while the cap
   of 2 would not block it (payment feasibility); never Scarred.
@@ -1316,9 +1325,10 @@ immunity (the `morale` tag allows none). `mindless` implies `fearless`
   conditions and death and healing owners, not yet ruled):** a priced
   Curiosity service that relieves Weary or rest ticks, as a
   `cleanse`-tagged source; never hit points. Nothing changes until ruled.
-- **Shrine curse cures and curse bargains (Later; change EV-43; with the
-  items owner):** Curiosities may host shrine curse cures and curse
-  bargains (events design 13).
+- **Shrine curse cures and curse bargains (M4, moved from Later by change
+  HL-29, agreed with the client, Q5; change EV-43; with the items
+  owner):** Curiosities may host shrine curse cures and curse bargains
+  (events design 13).
 - **Scarred (agreed):** a companion that is downed and gets up, or any
   unit saved by a talisman (the hero included), gains Scarred: maximum hit
   points −10% until camp. Only the first downing of a unit on each floor
@@ -1430,6 +1440,17 @@ Enforced by content validation. **(lead's call)**
     the theme's 6; and an optional Weary form "kept through your next short
     rest". Until ruled, Weary is priced only on the catalogued cards (one
     per F1 theme, plus S3, S5, S6).
+  - **HL-29 reading (heirlooms and curses design 10, 14.1 item 4;
+    requested of the conditions owner for M2; pending):** "in M1 and M2
+    together" leaves the M4 Cursed family (item curses and the nine Malady
+    presets, counted once by `family`) outside the 32, like Later
+    conditions (18.1), and it passes the 20.3 gate. Fallback if refused:
+    item curses and Maladies stay Later unchanged.
+  - **HL-19 (heirlooms and curses design 4.3.3; request, pending):** a
+    Malady counts as the Cursed family toward an enemy type's 2 and the
+    theme's 6; a theme must declare Cursed in `harmfulConditions[]` before
+    its elites or Curiosities carry a Malady. Depends on RT-15, RT-16 and
+    EV-34; fallback: Curiosity and shrine sources only.
 - **Graces (change EV-12; events design 4.4.3):** use existing M2 ids only
   and add none to the 32 (13).
 
@@ -1600,12 +1621,14 @@ duration and ends, sources, and interactions.
 | M1 | 10: Surprised, Prone, Grappled, Frightened, Hidden, Dodging, Stunned, Steeled, Dazed, Bleeding | 4: Incapacitated, Grappling, Concentrating (if the slice class casts), Unyielding |
 | M2 | 22: Staggered, Unfocused, Restrained, Chilled, Teetering, Spurred, Burning, Smouldering, Corroded, Withered, Poisoned (one family with its lingering form), Soaked, Oiled, Frozen, Blinded, Revealed, Rallied, Challenged, Helped, Warded, Weary, Scarred | 3: Downed, Flying, Jumping |
 | M2 (morale) | 4 morale states, in their own budget (16): Emboldened, Demoralised, Routed, Cowed (enemies design 14) | — |
-| Later | 70, listed in each family below (Notched added, change W-12) | 2: Levitating, Phasing |
+| M4 | 1: Cursed (curse), with Clinging, the item cost lines and the nine Malady presets as one family **(change HL-29; agreed with the client, Q5; the 16 budget reading pending)** | — |
+| Later | 69, listed in each family below (Notched added, change W-12; Cursed moved to M4, change HL-29) | 2: Levitating, Phasing |
 
 M1 and M2 together give 32 conditions, the budget's limit (16), with
 Scarred and Oiled included. **(lead's call)** The morale states are outside
 it, in the separate morale budget. Later conditions are outside the
-32-condition budget (16) **(change W-12)**.
+32-condition budget (16) **(change W-12)**. The M4 Cursed family is read
+as outside it too, pending the conditions owner (16; change HL-29).
 
 In M1, Bleeding comes from a non-rider monster claw and exercises ticks,
 values and re-application. Dazed exercises resolve, Unyielding and party
@@ -2611,7 +2634,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
 - **Warded** — token · **M2**
   - Effect: the next harmful condition that would land on it is blocked
     (pipeline step 4). Not lingering conditions, Hasted's lethargy, Downed
-    or Surprised.
+    or Surprised. So Warded never blocks a Malady, which is lingering
+    (reading; heirlooms and curses design 4.3.1).
   - Intensity: 1–2 charges.
   - Duration: fallback 3 turns.
   - Sources: ward spells; charms; bosses at phase change; monster affixes
@@ -2775,19 +2799,41 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Intensity: worsens one stage at each short rest without treatment.
   - Duration: `untilCamp`; Treat during a rest cures it.
   - Sources: rats and plague undead (Fortitude save); tainted fountains.
-- **Cursed (curse)** — minor · Later
+- **Cursed (curse)** — minor · **M4** **(change HL-29; agreed with the
+  client, Q5; moved from Later; the 16 budget reading pending)**
   - Variants:
     - Ill-Omened: its first d20 test each fight has disadvantage;
     - Leaden: one named pool's maximum −1;
     - Ill-Starred (type): weak to one damage type;
     - Clinging: a cursed item cannot be unequipped (needs the items
       design).
-  - Duration: `untilCamp`; a shrine, or Arcana at a rune (a failure gives
-    Weary 1).
-  - Sources: cursed loot, desecrated shrines.
+    - **Maladies (M4; change HL-17):** nine named presets with
+      `displayKind: malady`, each its own variant id, counted once with the
+      family (16), so a Malady coexists with another Cursed instance under
+      6.1. `untilCamp`, binary, no stages, no worsening; never the Diseased
+      family; no Malady lowers a maximum (heirlooms and curses design
+      4.3.1, 5.2).
+  - Duration: `untilCamp`; a shrine (M4, EV-43), or Arcana at a rune (a
+    failure gives Weary 1; once a rune host ships, Later). Cure text is
+    generated from the hosts in the build. A Malady also ends by its
+    Cast-off deed, performed by the afflicted unit, or "fell an elite
+    (other than the one that applied it), or win 2 fights" begun after
+    onset; Remedy, Tend, Treat and Unweaving do not end it **(change HL-18;
+    heirlooms and curses design 4.3.2)**.
+  - Sources: cursed loot, desecrated shrines. Maladies: Curiosity costs
+    (F2–F4), shrine bargains and desecrated shrines, and an elite's
+    optional `maladyAbility` (F3–F4); never bosses, traps, hazards, F1 or
+    F5 **(change HL-19; agreed with the client, Q4; a request to the
+    events, enemies, conditions, run structure and encounter placement
+    owners, pending; heirlooms and curses design 4.3.3)**.
   - Interactions: an item curse's cost is a `whileEquipped` item property,
     not a lingering condition. Clinging from an item is exempt from the cap
     of 2 harmful lingering conditions, as Scarred is (items design 13).
+    Item cost lines (M4; Eyebitten and Ill-Slept Later, with Conspicuous
+    and Restless) apply no condition that is the input of a transform into
+    a hard condition (19) **(change HL-16; heirlooms and curses design
+    4.2)**. A Malady sits in its own slot, at most 1 per unit, outside the
+    cap of 2 (14; change HL-17).
 - **Restless** — minor · Later
   - Effect: its next short rest gives half Recovery and no Slot Recovery.
   - Duration: until that rest.
@@ -3112,6 +3158,10 @@ Each tied to a risk:
   2026-11-23, CC-26); hazard edges, landing and drags into hazards; boss
   shed actions; lingering conditions and rest
   cures; the four morale states (enemies design 14).
+- **M4 (change HL-29; agreed with the client, Q5; the 16 budget reading
+  pending):** Cursed (curse) with Clinging, item cost lines and Maladies
+  (HL-16 to HL-18), behind the simulator gate (heirlooms and curses design
+  10).
 - **Later:** the remaining catalogue, each behind the simulator gate.
 
 ## 22. Risks
@@ -3206,7 +3256,8 @@ the exact section it touches.
 
 - **Items and inventory:** the generic layer is settled by the items design
   (2026-11-16). Open in its category designs (items design 17): Disarmed,
-  Coated, Clinging.
+  Coated, Clinging. Clinging, item curses and Maladies are taken up by the
+  heirlooms and curses design (2026-11-23, 4.2, 4.3; M4, change HL-29).
   Weapons and foci are no longer pending: see the weapons
   design (2026-11-17). Disarmed and Coated stay Later; starting
   kits remain open in their category designs **(change W-15)**; they are

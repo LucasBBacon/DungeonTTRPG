@@ -364,7 +364,12 @@ skill.
   closes the card without resolving it, and one attempt only (events
   design 4.3.1; EV-4; read, not changed). Exploration keeps no visible
   floor timer (exploration and information design 4.4.1, IN1; XI-14; read,
-  not changed).
+  not changed). Later, pending request: for a run under the Oath of the
+  Shut Book only, field identification by the passive Arcana threshold is
+  off and camp still identifies free; the request is to the MAIN and RS
+  owners of the CH-24 run-modifier slot, and until they rule the slot
+  stays unlit and this rule stands (heirlooms and curses design 4.5, 5.2
+  row 23; HL-21; agreed 2026-11-23, its Q6).
 - **Lore never hides the basics.** Hit points and anything already seen in
   play are visible to everyone. Lore reveals the rest early. **(agreed)**
 
@@ -578,7 +583,9 @@ Each item here is a commitment this model makes on another system's behalf.
   (2026-11-17); coatings and Coated stay Later. Starting kits are set in
   the four class designs, the companions design and the starting kits
   design (`2026-11-23-starting-kits-design.md`; SK-17; M2). What remains
-  open moves to the category designs (items design 17): Clinging.
+  open moves to the category designs (items design 17): Clinging, taken
+  up by the heirlooms and curses design (4.2; HL-29; moved from Later to
+  M4, agreed 2026-11-23, its Q5; CON's budget reading pending).
   Pitted Armour is in armour 9.4 and stays Later (AR-37; cross-document
   comparison 2026-11-23, CC-14).
 - **Conditions.** Settled in `2026-11-16-conditions-design.md`: bleed,
