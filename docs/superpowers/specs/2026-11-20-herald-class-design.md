@@ -872,8 +872,9 @@ beats, 6.3); damage first wastes the payoff for that turn. The preview says "str
 bites it this turn". This replaces the proposal's wording ("faltering
 only from the end of that turn"), which contradicted its own preview.
 
-**Weapon attack.** The longsword (1d8 slashing one-handed, Parry) and 2
-javelins (1d6 piercing, thrown 8, Pry). At Str 0 both are a
+**Weapon attack.** The longsword (1d8 slashing one-handed, Parry) and 1
+javelin (1d6 piercing, thrown 8, Pry; SK-2, M2; starting kits design
+5.1). At Str 0 both are a
 lockout-proof floor, not a damage plan.
 
 ### 7.3 Signature verb: Cadence (`pool.cadence`, rest): "break them before you kill them"
@@ -1008,8 +1009,8 @@ pattern):
 
 | Kit | Set A | Set B | AC b1 / b2 / b3 (Dex +1) | Identity |
 |---|---|---|---|---|
-| **Shield** (default) | Longsword + shield (+2, bash 1d4 B Push) | 2 javelins | 16 / 17 / 18 | Front-capable, sturdy solo; Ringing Blow's home |
-| **Totem** | Longsword + Totem (Loom) | 2 javelins | 14 / 15 / 16 | Breaks morale from range 9–11 |
+| **Shield** (default) | Longsword + shield (+2, bash 1d4 B Push) | 1 javelin (SK-2, M2) | 16 / 17 / 18 | Front-capable, sturdy solo; Ringing Blow's home |
+| **Totem** | Longsword + Totem (Loom) | 1 javelin (SK-2, M2) | 14 / 15 / 16 | Breaks morale from range 9–11 |
 
 - **Starter rule:** two starters, at least one of which deals damage or
   applies Frightened. The confirm button stays disabled otherwise ("pick
@@ -1144,8 +1145,8 @@ No capacity or timescale offer targets an allowance (ARC-26).
 
 | Kit | Armour | Set A | Set B | Belt / coin |
 |---|---|---|---|---|
-| **Shield** (default) | Chain shirt (medium 13 + Dex; Ringed) | Longsword + shield | 2 javelins | 2 healing potions, about 15 coin |
-| **Totem** | Chain shirt | Longsword + Totem | 2 javelins | Same |
+| **Shield** (default) | Chain shirt (medium 13 + Dex; Ringed) | Longsword + shield | 1 javelin (SK-2, M2) | 2 healing potions, exactly 15 coin (`kit.coinStart`; SK-1, M1) |
+| **Totem** | Chain shirt | Longsword + Totem | 1 javelin (SK-2, M2) | Same |
 
 - **The longsword, not a mace** (the draft proposal's weapon), for
   pool-free Parry (the Arcanist staff-Parry precedent). Topple is not
@@ -1156,6 +1157,18 @@ No capacity or timescale offer targets an allowance (ARC-26).
 - **Reaction order (policies, 7.14):** Parry is `ifItChangesOutcome`,
   `nonMinion`; otherwise the reaction stays free for opportunity attacks
   on fleeing routers.
+- **Starting kits design (segment 14; approved 2026-11-23):** set B is
+  **1 javelin**, not 2 (W 11.1: the javelin is not light, so it cannot
+  sit in an off hand; gear never stacks, ITEMS 12.8; a thrown weapon
+  stays with the thrower, W 9.3) (SK-2, M2; told plainly); coin is
+  **exactly 15** (`kit.coinStart`; the camp-1 margin is 0, DH 21.5,
+  LE 6.4 item 4) (SK-1, M1). The kits' named piece (Shield: the shield;
+  Totem: the chain shirt), kit lines, Oddment pools and `kit.acFloor`
+  (Shield 14, Totem 12 *(illustr.)*) are the starting kits design's
+  (starting kits design 4.2, 4.5, 5.1). Kit variants (Macehand,
+  Spearhand) ship only as boon options with one skill, never as a
+  third creation pick (SK-7, M3; agreed, Q1; starting kits design 4.4,
+  5.3).
 
 ### 7.12 Caster defence and sustain
 
@@ -1187,7 +1200,15 @@ pass.** Report rows: at AC 14, Con −1 fails the AC-adjusted need (52.4);
 with Parry it needs 44.0 and passes *(illustr.)*.
 
 **Creation warnings** (never blocking): below Con +1; "Totem kit: AC 14,
-one below the reference"; Dex −1; Intimidation untrained.
+one below the reference"; Dex −1; Intimidation untrained. From M2, a
+rearrangement that Strains a kit item or drops sustained AC below the
+pick's `kit.acFloor` also warns, in one line of shape plus text (SK-9,
+M2; starting kits design 4.6).
+
+**SK-2 rerun (M2):** with set B at 1 javelin, `Floor1BossSustain` and
+this section's rows are rerun (starting kits design 2.3 F2). The
+potions, hit points and AC above do not count javelins, so the rows
+are expected to stand *(illustr.)*.
 
 ### 7.13 Offers, lanes and `triggerMenu`
 
@@ -2901,8 +2922,9 @@ planning gate); the Herald arms above keep their constructions
 - Every *(illustr.)* value: pool sizes inside the shape of 7.10,
   Harrowing Word dice inside the parity rows, spell dice and areas
   inside `SpellTierBound`, `drawWeight`, lane weights and
-  `offerLaneAdjust`, trigger ids, the starting coin, report thresholds
-  other than the agreed ones, and lever sizes.
+  `offerLaneAdjust`, trigger ids, report thresholds
+  other than the agreed ones, and lever sizes. The starting coin is no
+  longer tuning: exactly 15 (starting kits design 4.2; change SK-1).
 - Level-up card, glint, overlay, tray, preview-line and tooltip layout.
 - Wording of option, spell and trigger texts within the rules here,
   until the naming pass.
@@ -3045,6 +3067,12 @@ consumables 16.8 finds none, and "15 scrolls" is found there.
   validation design 6.2). Levers follow the precedence PR0–PR5 and the
   blast-radius rerun (SV-26, read; 5.4; seeds and validation design
   6.9).
+- **The starting kits design (segment 14):** the starting-kit hooks of
+  7.11 and 7.12 (the Totem creation warning, HR-10b per-pick arrays) are
+  taken up (starting kits design 2.2, 4.2, 4.6). Applied 2026-11-23:
+  SK-1 (7.11 coin exactly 15, M1) and SK-2 (set B 1 javelin in 7.2, 7.7
+  and 7.11; the 7.12 rerun; M2). Informed: SK-9 creation warnings (7.12,
+  M2). Kit variants are boon options only (SK-7, M3; agreed, Q1).
 - **The ability 8.4 aura ruling:** Pennant, Haunting Chorus.
 - **Builders:** `sourceUnitId` on every condition instance (Draw the
   Sting).

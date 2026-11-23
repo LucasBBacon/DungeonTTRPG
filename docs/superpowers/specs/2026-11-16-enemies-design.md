@@ -2991,7 +2991,9 @@ Coated stay Later **(change W-15)**. Armour values, Strength thresholds
 and Pitted Armour (Later) are since settled by the armour and shields
 design (2026-11-17) **(change AR-29)**. Consumables, scrolls and wands
 are since settled by the consumables design (2026-11-17); coatings and
-Coated stay Later **(change CN-26)**. The original list:
+Coated stay Later **(change CN-26)**. Starting kits are since set in
+the four class designs, the companions design and the starting kits
+design (2026-11-23; pointer only). The original list:
 
 - Slots: stacks of tonics and potions, and how supply uses slots
   **(settled as open)**.

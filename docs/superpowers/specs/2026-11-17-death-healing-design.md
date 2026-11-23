@@ -291,7 +291,7 @@ help the hero, and a seed could produce a floor with no potion at all.
 | (c) More guaranteed supply | A **placement** rule instead | Extra supply overflows the cap of 3; what helps is one cache always reachable on the main path |
 | (d) A full heal at camp | Already decided | The strongest guarantee in the game |
 | (e) A healing source in every fight | Rejected | Healing becomes a drip, rests become pointless, and the floor-long decision of main 4.4 disappears |
-| (f) Pity timers | Rejected | Hidden state; exploitable (skip pickups, bleed on purpose); rewards playing at low HP; the same seed would give different loot. *Reading (change LE-13; the DH owner confirms):* the Dream's Due is standing and announced, so outside this; declining pickups can steer which member the F2 or F4 Due names, never how much the floor holds (loot economy design 6.6). *Pending request (change IR-10; M2; item rolls design 4.9; the DH owner confirms):* items sold or dropped at camp count as still dealt for the Due's deficit and slot test, so emptying a slot at camp cannot steer the Due; if refused, loot economy design 6.6 as approved. *Confirmed (change EV-10; agreed, events Q4; M2):* no mercy through Curiosities: no draw, option set or gain reads HP, downs, deaths, losses or streaks; only payment feasibility reads current HP, and only to disable a shown option; losing streaks get novelty and memory relief only, never easier odds or richer outcomes; difficulty help belongs in a visible ladder or difficulty setting, a future main design and run structure decision not yet made (events design 4.4.7, 14.2) |
+| (f) Pity timers | Rejected | Hidden state; exploitable (skip pickups, bleed on purpose); rewards playing at low HP; the same seed would give different loot. *Reading (change LE-13; the DH owner confirms):* the Dream's Due is standing and announced, so outside this; declining pickups can steer which member the F2 or F4 Due names, never how much the floor holds (loot economy design 6.6). *Pending request (change IR-10; M2; item rolls design 4.9; the DH owner confirms):* items sold or dropped at camp count as still dealt for the Due's deficit and slot test, so emptying a slot at camp cannot steer the Due; if refused, loot economy design 6.6 as approved. *Reading (starting kits design 4.3, 13; pending the DH owner's confirmation, as IR-10):* the still-dealt item covers sold hero kit pieces, so selling a kit piece cannot steer the next Due; if refused, `KitSoldAtCamp1` is read with `HeroDreamsDueShare` before any kit lever. *Pending confirmation (change SK-4; M3; the LE owner applies, the DH and IR owners confirm; starting kits design 4.3):* heirloom precedence over the F1 Due: on equal VP the fixed deal takes the higher tier; a hero whose arms already hold U or better counts as arms satisfied and the F1 Due takes the 20-coin waiver; the Due never retargets. *Confirmed (change EV-10; agreed, events Q4; M2):* no mercy through Curiosities: no draw, option set or gain reads HP, downs, deaths, losses or streaks; only payment feasibility reads current HP, and only to disable a shown option; losing streaks get novelty and memory relief only, never easier odds or richer outcomes; difficulty help belongs in a visible ladder or difficulty setting, a future main design and run structure decision not yet made (events design 4.4.7, 14.2) |
 | (g) A generator floor in Recovery units | A **build check** only (21.3) | Proves the guarantee at every floor and party size; too opaque for players |
 | (h) Fully random healing | Rejected | Under permadeath, deaths come from the tail |
 | (i) Healing only from rests and classes | Rejected | The hero has nothing to drink; a healer becomes compulsory |
@@ -1002,7 +1002,9 @@ returns. Not on at launch: the floor-1 boss needs 3–5 heals (5.8).
 **(agreed, Q3, for the package; keys and placement detail lead's call)**
 
 - **HE-1 Kits.** `heroKitPotions` 2 on every hero class kit;
-  `recruitKitPotions` 1. Kit potions sit on the belt.
+  `recruitKitPotions` 1. Kit potions sit on the belt. Hero kits: 2
+  instances in one stack in belt slot 0, the second belt slot empty on
+  purpose; V21 (b) checks 2 / 1 (starting kits design 4.2, 9.2).
 - **HE-2 Floor minimum.** `healingSundryMin` [1, 1, 1, 1, 1] by
   floor, drawn **first** among the sundries (before `offensiveSundryMin`;
   the exact draw order is 12.5), inside `sundriesPerFloor` and the fixed
@@ -1654,6 +1656,13 @@ information design 4.8.1).
   the Grave Goods record (floor, theme, killer category), display-only
   and never humorous (change EV-26; M2 lean, M3 the Unwoken Roll; events
   design 4.5.10).
+  Grave Goods also lists, display-only, the hero's **Oddment** by state
+  (carried: under "Still carried when the dream closed:"; left: under
+  "Left by a fire:") and the kit's **named piece** with its given name
+  from `run.save`'s named-piece log ("{family}, called {givenName}";
+  if gone earlier, one key per fate: sold, left, offered, lost) **(change
+  SK-6, M2; agreed, starting kits Q3; given names agreed, Q2, change
+  SK-5; starting kits design 4.5.1, 4.5.2, 5.4)**.
   *Pending request (change HZ-13; the DH owner rules):* the recap names
   the Stir when an environment act is in the killing chain (hazards
   design 6.18).
@@ -2230,7 +2239,8 @@ parties on floors 2–5.
   the healer count (0 / 1 / 2+) and the heal-source breakdown (18.1;
   classes design 12.3) **(change CL-9)**.
 - Coin at camp 1 against 2 potions + 1 supply (≥ 32 coin); the F1
-  main-path coin floor of 17 meets it with the kit's 15 (change LE-24,
+  main-path coin floor of 17 meets it with the kit's exactly 15
+  (`kit.coinStart`; change SK-1, M1; starting kits design 4.2) (change LE-24,
   M2; loot economy design 6.4 item 4). The loot economy's reports, kPC
   first, are read against 18.2 beside these (loot economy design 10.3).
 - Hero level minus room level at fight start (under-levelled stealth
@@ -2522,6 +2532,12 @@ values; the phial's rarity, floor, channels, `offerChancePermille` and
   the Arrival rest summary; the floor-entry card is shown on entering
   F(N+1) after Travel on, unchanged and owned by DH and RS **(change
   CH-1)**.
+- **Starting kits:** the hero kit's coin, belt and potions, and the
+  Grave Goods lines for the Oddment and the named piece. Taken up by the
+  starting kits design (`2026-11-23-starting-kits-design.md`, 4.2, 4.3,
+  4.5, 5.4): 2 potions unchanged; coin exactly 15 (21.5); heirloom
+  precedence and the still-dealt reading pending the DH owner's
+  confirmation (5.4 (f)) **(change SK-1, SK-4, SK-6)**.
 - **Experience:** keep hero level minus room level at 0 or above
   (under-levelled stealth heroes void the guards).
 - **Lead's checks before data:** every SRD shape in this document against
@@ -2556,6 +2572,9 @@ triggers it:
 - `leaveHpPermille` other than 334;
 - `hp.adventurerBonus` or the class HP tiers;
 - a missed Q11 target or a failed 10-point healer gate;
+- a kit's F1 hero-death row above 5% (18.2): the held class-themed
+  C dose in the empty belt slot, carved from F1 sundries, comes to the
+  DH and LE owners (starting kits design 14.2);
 - a `liftsDowned` effect;
 - the Later rungs (Last Stand, Mortal companions) and movement undo when
   their wave comes.

@@ -1112,7 +1112,8 @@ internal design target; ability 11.4's playtest target is unchanged.
 - **What leaves (change CMP-21):** every item instance issued by a
   recruit kit is **`kitBound`**: it carries the instance field
   `boundToUnitId` (null on every other instance), set when the kit is
-  issued. A bound instance:
+  issued (through the items 18.1 kit-issue row as rewritten by SK-3,
+  starting kits design 4.1). A bound instance:
   - sells and scraps for 0 and shows "Unsellable: kit": the approved
     `unsellable` treatment (items 12.3, 10.6) applied to the instance
     **(new lead's call: reuse the approved rule rather than a new sell
@@ -1719,7 +1720,8 @@ not apply (Vanguard design 8.2). Weapon families are inside each class's
   keeps everything **(settled, items 6, 15)**. Leadership prices read the
   hero only (items 10.5).
 - **No kit trinket.** It would be loot outside the per-floor budget (main
-  4.6). Trinkets 18.3's ≤ 25% empty slot fill is reported **by join
+  4.6). The same logic holds for hero kits (starting kits design 4.2,
+  SK-3). Trinkets 18.3's ≤ 25% empty slot fill is reported **by join
   camp**; its lever is `anyCompanion` loot weighting (CMP-30), keyed by
   party size so it fires at party ≥ 3 only (M2 lever; item rolls design
   4.3, IR-17).
@@ -1783,6 +1785,21 @@ preview and 17.3 danger band cover four units.
 
 **(lead's call)**
 - One silhouette and accent per kit; the class palette for the body.
+- **Named piece (M2; change SK-5, starting kits design 4.5.1, 5.2;
+  agreed there, Q2):** each kit's issued gear (unchanged, 8.3) carries
+  one named piece with a given name: Gatekeeper shield "Iron Rim",
+  Brawler maul "Birch Handle", Scout shortbow "Waxed String", Outrider
+  short sword "Worn Scabbard", Tinker dagger "Brass Pommel", Hedgemage
+  staff "Green Bark", Drummer spear "Ochre Daub", Shieldbearer shield
+  "Boss Nail" (placeholders); its other pieces get 1 or 2 kit lines. The
+  name is display only, shown as the piece's Whence line, and lives in
+  `run.save`'s display sidecar, never on the Core instance; it belongs to
+  the `kitBound` instance and is deleted with it on dismissal (logged as
+  `dismissed` for Grave Goods). **Kit upgrades (the 3/6/9 choices) are
+  abilities and never swap the named piece.** Old Friend issues its kit
+  with the name (SK-3). Companion kits are exempt from the F1 named-piece
+  check; companions get no Oddment until Later. Test
+  `CompanionNameOnIssuedPiece` (starting kits design 9.2).
 - Role tags: one primary per kit (Protector, Tempo, Control, Skills,
   Striker, Area, Ward; 8.3); the secondary **Medic** badge (gets allies
   up; **no healing spells**, said on the badge) when the kit's fixed or
@@ -2032,7 +2049,10 @@ numbers.
   lanes, read by `LanesOf`; item rolls design 4.3; cross-document
   comparison 2026-11-23, CC-80), offerWeightPermille,
   combatValuePermille (simulator-calibrated, read by `MusterBestFit`),
-  unlock?, silhouetteId, nameTableId}.
+  unlock?, silhouetteId, nameTableId}. Its issued gear, named piece and
+  kit lines are a `KitRecord` with `ownerKind: companion` and
+  `companionKitId` (gear unchanged; starting kits design 9.1, SK-3,
+  SK-5).
 - **Class record additions:** `heroOnlyFeatureIds[]` (8.3); features
   shared with kits carry `sharedWithKits` (Interpose, Shieldwall, Hold the
   Line, Opening, Mote, Gust, Flare, Spurred).
@@ -2244,10 +2264,10 @@ by the axis, so no name collides with another segment's `Reference` or
 |---|---|
 | **M1** | Nothing. M1 is solo (main 9) |
 | **M2, first** | Vertical-slice timing: the telemetry events, `FloorTimeByPartySize` (the gate, defined in 7.4), the blind party-of-3 vs party-of-4 playtest, the accept-rest-of-turn prototype (flagged). The slice holds floors 4–5 with their templates and one boss each, the eight kits at levels 7–10 and grouped playback (7.4). The cap is fixed from these before balance work freezes |
-| **M2** | Musters at camps 1–3 (7); the slot ladder; 3 cards (+1 Eye); gap card and coverage strip; carried hire; decline, dismiss and swap with `kitBound`; next-camp preview; Party Forecast; two-tier card; first-recruit beat; the 8 kits with flex skill, fixed arrays, level equal to the hero's, one choice grammar, Rethink; Accept kit defaults (CH-17); the forecast as the door caption and the narrowed Travel-on confirm (CH-26); the `recruit` stream; the shortfall discount with the solo composition table and `SoloBudgetMonotone` (**agreed**, Q1); boss HP from the actual party; guard rows at every reachable size; the recruit policy and arms; all validators and reports; Deeds; Recruiter's Eye (cut line → M3) |
+| **M2** | Musters at camps 1–3 (7); the slot ladder; 3 cards (+1 Eye); gap card and coverage strip; carried hire; decline, dismiss and swap with `kitBound`; next-camp preview; Party Forecast; two-tier card; first-recruit beat; the 8 kits with flex skill, fixed arrays, level equal to the hero's, one choice grammar, Rethink; Accept kit defaults (CH-17); the forecast as the door caption and the narrowed Travel-on confirm (CH-26); the `recruit` stream; the shortfall discount with the solo composition table and `SoloBudgetMonotone` (**agreed**, Q1); boss HP from the actual party; guard rows at every reachable size; the recruit policy and arms; all validators and reports; Deeds; Recruiter's Eye (cut line → M3); named pieces and kit lines on the eight kits (SK-5, starting kits design 4.5.1, 5.2) |
 | **M2 prerequisites owed by other owners, before records** | CMP-5 to CMP-9, CMP-17 and the solo composition table (enemies owner); CMP-12 (consumables owner); CMP-21 (items owner); CMP-22, CMP-23 and CMP-31 (DH owner); CMP-26 (Vanguard owner); CMP-27 (naming pass); CMP-30 (trinkets owner); CMP-32 (conditions owner); CMP-33 (Shade owner); CMP-34 (armour owner) |
 | **M2 cut fallbacks** | Recruiter's Eye → M3; Rethink → M3; Deeds → M3. Never cut: the gap card, `kitBound`, the shortfall discount, boss HP from the actual party, the floor-time gate |
-| **M3** | Lone Road (no open-slot bedrolls at its camps, CH-23); milestones; kit unlocks (main 4.7); the Old Friend starting boon (a named unlocked kit among camp 1's cards, replacing a free draw, never the gap card, declinable; it is the run's one starting boon, competing with skill-granting boons, main 4.7); Wayfarer's Pack (+1 belt slot within the hard max 3) as a milestone boon option; locked-class non-caster previews (classes 7.8); the Veteran record |
+| **M3** | Lone Road (no open-slot bedrolls at its camps, CH-23); milestones; kit unlocks (main 4.7); the Old Friend starting boon (a named unlocked kit among camp 1's cards, replacing a free draw, never the gap card, declinable; it is the run's one starting boon, competing with skill-granting boons, main 4.7; its kit, with its named piece, is issued through the items 18.1 kit-issue row at run start, SK-3, starting kits design 4.1); Wayfarer's Pack (+1 belt slot within the hard max 3) as a milestone boon option; locked-class non-caster previews (classes 7.8); the Veteran record |
 | **M4** | A third kit per class, including a second Arcana non-caster; any heal kit the client approves |
 | **Later** | Pledges (captives, wanderers, shrines; Meet at camp; Send home); rival-party survivors; bonds; barks and personalities; mortal companions (the DH Later rung); Beastbound's bonded companion (classes 9.1); the Muster stipend (parked); Poultice (only through the client) |
 
@@ -2480,6 +2500,17 @@ yet designed (cross-document comparison 2026-11-23, CC-81):
   (M3; camp and hub design 2.2, 5.2). Its rows on this owner are applied:
   CH-1 (reading, 7.11), CH-5 (read, 7.4), CH-17 (7.11, 8.2), CH-21 (8.7),
   CH-23 (7.5) and CH-26 (7.5, 7.6, 7.11).
+- **The starting kits design (segment 14, approved 2026-11-23; taken
+  up):** companion kits are `KitRecord`s with gear unchanged (starting
+  kits design 4.1, 5.2, 9.1); kit issue on hire, and for Old Friend at
+  run start, uses the items 18.1 kit-issue row as rewritten by SK-3,
+  which replaces the "kit issue → 6.2 placement" wording of CMP-21's
+  18.1 row (direct slot placement, fixed creation order, `origin = {kit,
+  floor 0}`, `boundToUnitId` set on recruit pieces only); "no kit
+  trinket" (8.4) is extended to hero kits. Its rows on this owner are
+  applied: SK-3 (12 Old Friend, 7.6, 11.1) and SK-5 (8.7, 11.1, 12;
+  companion named pieces; kit upgrades never swap them). The F1 Due and
+  the Oddment do not touch companions.
 - **The simulator:** every arm in 11.3 and report in 11.4 at both caps;
   the flex-skill re-run before M2 sign-off (an S run of the same arm,
   10.6; SV-21); reconciling the two

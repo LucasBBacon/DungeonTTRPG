@@ -407,9 +407,11 @@ curve so deaths land where DH 18.2 wants them.**
   `scrollFloorCap` [1, 2, 3, 4, 4]; wands from F2; curses Rare+ (Later).
 - **Value and prices** (ITEMS 10.5, 12.6–12.7): one VP unit for items,
   offers and enemies; k = 1 provisional; price = value × 20 × category
-  permille; the Leadership discount on the hero only, ≤ 25%; Sell 400‰
-  and Scrap 100‰ *(illustr.)* on the undiscounted base, at one flat rate
-  (**agreed**). Supply 8, potion and tonic 12, Remedy 30, Wax Key 24 /
+  permille; the Leadership discount on the hero only, ≤ 25%; Sell 250‰
+  (6.4 item 6; the parent's illustrative 400‰ replaced as stale text by
+  change SK-17, M2; starting kits design 2.3 F9) and Scrap 100‰
+  *(illustr.)* on the undiscounted base, at one flat rate (**agreed**,
+  kept). Supply 8, potion and tonic 12, Remedy 30, Wax Key 24 /
   28 / 32 / 36 by camp (TL 6.11). Pegs P1–P5, K1, K2 (CN 9.3).
 - **Coin** (ITEMS 10.1–10.2, **agreed**): one run purse, spent only at
   camp, at a Ticket lock (M3) and, Later, at a wandering trader **(agreed
@@ -417,7 +419,10 @@ curve so deaths land where DH 18.2 wants them.**
   2026-11-23, CC-8)**, lost at run end; found coin from containers and caches; salvage
   about 1 + level ÷ 2 per resolved armed unit, sized at 10–15% of found
   coin (ENM 15.7, I-11); Sell and Scrap a separate stream; starting coin
-  about 15 per class kit.
+  **exactly 15** per hero class kit (`kit.coinStart`; change SK-1, M1;
+  starting kits design 4.2), issued before F1 generation as
+  `CoinChanged{source: kit}` and counted in `LootLedger` (change SK-3;
+  starting kits design 4.1); companion kits carry no coin.
 - **Camp** (ITEMS 10.3–10.4, **agreed**): a basic vendor at every camp
   (supply, limited pre-rolled potions, tonics and Remedy, bases, the
   conditional Wax Key, TL-25); an irreversible shop-or-reward choice; the
@@ -1174,7 +1179,9 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      trinket 2); for each slot, the highest-VP unassigned item goes to
      the usable member (trained, Strength) with the highest level, then
      party order, whose slot is still unfilled; repeat until no item
-     fits. Each item fills exactly one member's slot, so one longsword
+     fits. **On equal VP, the higher tier is dealt**, so a held heirloom
+     is the slot's dealt item (change SK-4; M3; starting kits design
+     4.3). Each item fills exactly one member's slot, so one longsword
      never covers four bodies; a slot that gets nothing is **empty** for
      that member. Because the deal ignores the current holder, transfers
      between members change nothing (closes LB7; the V13g (g) property
@@ -1201,6 +1208,8 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      fixed lines only. **Items sold or dropped at this camp count as
      still dealt** for the deficit and the slot test (*pending
      confirmation by the DH owner*; if refused, this item as approved).
+     This covers sold hero kit pieces (a reading recorded by the starting
+     kits design, its 4.3 and 13; pending DH as stated here).
      Inside the filter, `requiresBias` 3 is evaluated against the
      **target alone**. Held lever `loot.levers.dueSidegradeFromFloor` = 4
      (one data key, cross-document comparison 2026-11-23, CC-110; the
@@ -1215,6 +1224,11 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    - **F1 hero arms rule:** kits are mundane, so the F1 Due is a U weapon
      or focus for the hero (combat is key; it answers the DH 5.8 floor-1
      choke point without touching healing). M1. V13g (g) checks it.
+     **Heirloom precedence (change SK-4; M3; starting kits design 4.3;
+     *DH and IR owners confirm*):** a hero whose arms already hold U or
+     better (a weapon or focus heirloom) is treated as "arms satisfied",
+     and the F1 Due takes the 20-coin waiver below; it never retargets
+     (to armour or otherwise).
    - **Placement:** a main-path, no-check Plain container; an HE-7
      socket is fine (containers hold any number of items), and it may
      share that socket with the DH block. Never on a carrier. Never
@@ -1970,12 +1984,17 @@ matter".
 - **Dream Fragments:** 0 VP, 0 coin; folded into segment 8's F-BOSS
   options on Lore thresholds, one boss-fact queue in the FactLedger
   (M3; change EV-29; events design 4.9). **Heirloom:** outside the budget
-  (**settled**); counts as party-owned for the Due.
+  (**settled**); counts as party-owned for the Due (its precedence in the
+  fixed deal and the F1 Due: 6.6 item 2, change SK-4).
 - **Daily and shared seeds:** shared seeds (M2) do not fix the hero;
   daily seeds (Later) fix class and species so smart-loot runs are
   comparable (R-SEED-5 hook; shared and daily rules in seeds and
   validation design 4.7, change SV-17, read; cross-document comparison
-  2026-11-23, CC-109).
+  2026-11-23, CC-109). *Pending request (SK-16, to the SV owner; M3):*
+  on shared seeds, kit-variant boons are replaced by the default kit for
+  the chosen creation pick, other boons following SV's canonical-grant
+  rule; this is also the fallback until the SV owner rules (starting
+  kits design 4.7, 14.2).
 
 ### 6.13 Hooks to 7b (what the tables must produce)
 
@@ -2216,6 +2235,13 @@ Hmid fix (the toy read coin from the actual party and counted the boss
 card); the toy must be re-run on this configuration before M2 (6.4 item
 1).
 
+*Pending request (SK-11, to this owner and the ITEMS owner; M2):* adopt
+the starting kits design's mundane basePrice scale (its 8.4), which also
+sets vendor prices for mundane bases, with a camp-1 coverage re-run of
+this ledger at Sell 250‰ and 200‰. Until the owners rule, the scale
+stays in data labelled `placeholder`; fallback: the owners' own prices
+and a `KitResaleBand` re-run (starting kits design 4.3, 14.2).
+
 ---
 
 ## 8. New mechanics considered
@@ -2286,7 +2312,13 @@ The Dream's Due is in full in 6.6; the Viaticum and the Memento in 6.11.
   4.5, 7). Segment 8's display-only **Afterword** line reads the same
   death key (floor, theme, killer category) as this record, and never
   changes what is drawn or offered (read by change EV-26; M2 lean;
-  events design 4.5.10).
+  events design 4.5.10). **Kit names and the Oddment (change SK-6; M2;
+  agreed, starting kits Q2, Q3; starting kits design 4.5.1, 4.5.2):**
+  Grave Goods also lists each named kit piece by its given name and fate,
+  read from the named-piece log, and the hero's Oddment in its state
+  (the "Still carried when the dream closed:" or "Left by a fire:"
+  heading, the name below); display-only, never counted in Treasures,
+  Spent or any ledger.
 - **Treasure field by source (change LP-28; M2; "Treasure strip"
   renamed by change XI-19):** see 6.15; the
   "windfall" count drops by 1 on a nab, a Steal or a getaway, and a
@@ -2577,7 +2609,9 @@ each with its named action:
 - (g) The Dream's Due is present (or `DreamsDueWaived`), main path, no
   check, never carried, never substituted; on F1 a U weapon or focus
   for the hero; invariant under intra-party transfers (a property test
-  over the fixed deal). *Action:* waiver (6.6).
+  over the fixed deal); a named heirloom case: a hero whose arms hold a
+  U-or-better heirloom gets the waiver, never a retarget (change SK-4;
+  M3; starting kits design 4.3). *Action:* waiver (6.6).
 - (h) F5: coin 0, salvage 0 and their lines hidden; no camp channel, no
   boss card, the Memento at 0 VP; the Viaticum present, all 3 options
   usable, outside the Antechamber, the Circuit and fight hosts; every F5
@@ -2629,6 +2663,8 @@ Windfall; it asserts filters (a)–(g) after step 8 (loot sources design
   class).
 - **Coin:** `CampCoverage` (the bands of 6.4 item 7, at both caps),
   `SellShareOfCoin`, `CoinUnspentAtRunEnd` (reference and solo),
+  `KitSoldAtCamp1` (hero kit gear stays sellable at the Sell rate;
+  agreed, starting kits Q4; starting kits design 4.3),
   `ShopTakeRate`, `TonicShareOfSpend`, `CampVpShareOfRun`,
   `StealCoinShare`, `F5Unspent`, `CoinSocketTrimmed`.
 - **Risk:** `EliteNetWinDelta`, `RiskSocketNetWinDelta`,
@@ -2710,6 +2746,7 @@ shop presentation and camp sinks (camp and hub); the display (segment
 | **ENM owner** | The elite carrier's gear-only card; the elite intel trigger; step 3a and the dummy count draws (LE-14; the dummies retired and step 3 keyed per block by change SV-5) |
 | **DH owner** | The Due reading; lock and overflow sundries re-placed inside the DH block (DH 12.5 step 7(c)); Grave Goods as the run-record form of DH 17.12's unspent line |
 | **Companions owner** | Coin keyed by `companionCap` (CMP 7.4, 7.7); the CMP-30 lever as a lever only |
+| **Starting kits** | The kit's coin and 0 VP, read by the F1 Due and the camp-1 ledger (3.1, 6.5, 6.6, 7). **Taken up by the starting kits design (segment 14, approved 2026-11-23; changes SK-1, SK-3, SK-4, SK-6, SK-17, with SK-11 and SK-16 as requests):** coin exactly 15 as `CoinChanged{source: kit}` in `LootLedger` (3.1; its 4.1, 4.2); heirloom precedence and the tie-break (6.6 item 2, V13g (g); M3; its 4.3); kit names and the Oddment in Grave Goods (8.2; M2; its 4.5); the stale Sell rate (3.1); `KitSoldAtCamp1` (10.3); its requests, SK-11 (the price scale, to this owner and ITEMS) and SK-16 (shared seeds, to SV), stay open (7, 6.12; its 11, 14.2) |
 
 ---
 
@@ -3279,6 +3316,15 @@ wave or a later design triggers them; each fallback is a new lead's call
   stays TL's REP row (6.10, 10.2; seeds and validation design 14.2).
   *(The SV-5 refusal fallback is retired: SV-5 was approved on
   2026-11-23; cross-document comparison 2026-11-23, CC-108.)*
+- **Pending items from the starting kits design (segment 14; its 14.2):**
+  if the DH or IR owner refuses change SK-4, the tie-break gap remains
+  and heirlooms ship only with a named V13g (g) case agreed by this
+  owner; if `KitSoldAtCamp1` shows camp-1 coverage moved beyond 6.4's
+  band, the held `kitIssue` 0-Sell lever goes to the client, never
+  applied without it; if F1 solo deaths for a kit exceed 5%, a held
+  class-themed C dose in the empty belt slot, carved from F1 sundries,
+  goes to the DH owner and this owner; SK-11 and SK-16 as pending
+  requests (7, 6.12).
 - **The naming pass** renames every placeholder.
 
 ---

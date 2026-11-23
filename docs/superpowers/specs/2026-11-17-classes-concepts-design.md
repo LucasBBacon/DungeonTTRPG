@@ -406,7 +406,12 @@ tolerance and the miss rules lead's call)**
     row outside the mean, heal-card rows first, and the class mean is
     unweighted (Herald design 7.7). Lever only, if used (HR-10b, told
     plainly then): a creation pick may carry its own `suggestedArray`
-    (Totem Dex +2) (Herald design 7.16).
+    (Totem Dex +2) (Herald design 7.16). **(change SK-7; M3; agreed
+    2026-11-23, starting kits Q1)** A kit variant boon replaces the
+    default kit of one creation pick and adds one skill training; each
+    variant is printed as its own row, outside the class mean, like the
+    Herald kit × subclass rows, and is held to its death-rate band
+    (V21t `VariantRiskBand`) (starting kits design 4.4, 8).
   - **Splits:** every boss is `fearless` (enemies 14.2), so the report
     splits by what does vary: the floor-1 theme's non-fearless share of
     its roster (enemies 10.4 allows 50–100%; bands *(illustr.)* 50–74%
@@ -1811,7 +1816,7 @@ tables; **Companions** = a requirement passed to the companions design.
 | At most one healing-lean class; healer gap ≤ 10 points; no-healer arm at least a quarter of runs | DH 18.1 (agreed Q10); DH 18.2 (agreed Q11) | Herald, cards only; the DH 18.1 gate as defined; Herald arms and healer count as reports beside it | Met (CL-9) |
 | `liftsDowned` reserved | DH 11.5 | None proposed | Met |
 | Temporary HP and Death-warded are Later | DH 14, 15 | None at launch | Met |
-| Two potions in every hero kit | DH 12.4 | Starting kits at stage 2 | Stage 2 |
+| Two potions in every hero kit | DH 12.4 | Starting kits at stage 2; taken up by the starting kits design (default hero kits, V21 (b); starting kits design 5.1, 9.2) | Stage 2 (taken up) |
 
 ### F. Companions and protector tools
 
@@ -1918,7 +1923,9 @@ class (5.6).
 **(lead's call)** The build fails when:
 
 - `ForbiddenClassGrant`: a class, subclass, companion kit or species
-  record grants anything on the list in 6.3. Enumerated checks: the
+  record grants anything on the list in 6.3. **(M3; starting kits
+  design 4.4, 9.2)** V21 (k) holds each kit variant's bundled skill,
+  alternate and `skillFallback` to this list. Enumerated checks: the
   `effectKinds` for a second reaction, teleport, speed change (not for
   species), rest or supply generation, loot or gold, potion or tonic
   values, party stealth, AI targeting (with the enumerated False Trail
@@ -2087,6 +2094,8 @@ Builders and the lead produce, per launch class:
   HR-36; told plainly)** the Herald's kits carry a longsword (Parry), not
   the draft's mace, so no Topple; on solo floor 1 its escort answer is
   Shove or the shield bash's Push at Str 0 (Herald design 7.11, 7.16);
+  taken up by the four class designs, the companions design and the
+  starting kits design (approved 2026-11-23; starting kits design 5.1);
 - `effectKinds`, subject and trigger on every feature;
 - offer lanes with `requires` tags;
 - default reaction policies;
@@ -2155,7 +2164,9 @@ tell the classes apart in the first fight".
   value, not tuning.
 - Talent menus, spell lists, subclass features and capstone texts, inside
   the cards and rules here (stage 2).
-- Starting kits within DH 12.4 (2 potions) and the trainings here.
+- Starting kits within DH 12.4 (2 potions) and the trainings here
+  (set in the four class designs, the companions design and the starting
+  kits design, 5.1).
 - Offer lane tags and their weights.
 - Level-up card, creation screen and ladder preview layout.
 - **Not tuning:** the launch four and the Herald's healing lean (Q1); the

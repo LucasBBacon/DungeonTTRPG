@@ -1368,10 +1368,13 @@ Applied on 2026-11-16:
   **(change C13)**
 - **Items and inventory:** the generic layer is no longer pending. It is
   in `2026-11-16-items-inventory-design.md` (items design). What remains
-  open moves to the category designs (items design 17): starting kits
-  (class kits need a minimal starting-equipment set for M1) and
-  Clinging. **(change
-  I-15)** Weapons and foci are no longer pending: they are in
+  open moves to the category designs (items design 17): Clinging.
+  **(change
+  I-15)** Starting kits are set in the four class designs, the
+  companions design and the starting kits design
+  (`2026-11-23-starting-kits-design.md`); the minimal starting set M1
+  needs is there (starting kits design 5.1). **(change SK-17, M2)**
+  Weapons and foci are no longer pending: they are in
   `2026-11-17-weapons-design.md` (weapons design). Disarmed and Coated stay
   Later. **(change W-15)** Armour and shields are no longer pending:
   armour values, Strength thresholds and Pitted Armour (Later) are in
@@ -1439,6 +1442,13 @@ Applied on 2026-11-16:
   camp catch-up) and 15.1/15.3 (short rests on floors only; supply)
   unchanged. Its ambient verb Hear out is not the 7.2 Listen action
   (camp and hub design 14.1). **(change CH-17, read)**
+- **Starting kits:** settled in `2026-11-23-starting-kits-design.md`
+  (starting kits design, segment 14, approved 2026-11-23). Its only
+  change here is the items wording above (SK-17); it reads 10.3 (one
+  choice per level: no new level-1 pick), 11.2 (kit upgrades at levels
+  3, 6 and 9) and 15.3 (the run starts with 2 supply; the kit strip's
+  supply text comes from that constant) unchanged (starting kits design
+  2.1, 4.2). **(change SK-17)**
 - **Content volume:** counts of companions, themes, monsters and bosses for
   M2. The M1 slice class is the Vanguard (classes design) **(change
   CL-13b)**.

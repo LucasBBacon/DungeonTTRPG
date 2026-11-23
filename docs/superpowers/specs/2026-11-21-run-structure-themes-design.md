@@ -1371,6 +1371,12 @@ matches no cut goes to the client (19.2).
   environment during acts, never as a body or a sound attributable to a
   sleeper (`FinalBossNoDreamer`); the Later "Dreamer as a true-ending
   boss" is replaced by a bodiless set piece (8.11).
+- **Pending request (change SK-14; request to RS; M2; starting kits
+  design 4.5.2):** an additive premise row, "Kits? The dream issues what
+  its residents set aside.", committing nothing about the hero. Not a
+  rule until the RS owner rules; fallback: no row, and the kit cards'
+  neutral "Carried from the start" provenance line stands either way
+  (19.2).
 
 ### 7.6 What to avoid
 
@@ -2835,13 +2841,15 @@ registry, 11.4):
 | V18 | Information (change XI-30; the tests M1, full M2; exploration and information design 9.2) | Split like V13 and V16: V18s, static (`SurfaceRegistered`, `PatternNoHueOnly`, `NoHoverOnly`, `BoardDigitIsClock`, `WallMarkProjected`, `BudgetWorstCase` per mode from the registry rows of 7.4 RC5, `CardFit` at 150%, `LayerHasLegend`, `FactHasMapDraw`, `RevealNeverUnits`, `InfoItemLaneSafe`, `InfoNeverWritesLoot`, `PointerTextBounded`, `LaneGapStock`, `WaymarkGlyphDistinct`, `NoCompletionStat` and others); V18g, at generation per floor (`SketchNeverSecretNode`, `TreasureSelectorLegal`, `TreasureFactCap`, `NoF1Pointer`); V18r, runtime assertions on every `KnowledgePass` (`MapNeverUnknown`, `ChalkNeverContents`, `ChalkNeverStub`, `RouteKnownOnly`, `ForecastKnownOnly`, `BubbleNeverPositioned`; class `runtimeAssert`; change SV-20, XI-30); and V18t tests (`LosSymmetric`, `FogEqualsRules`, `KnowledgeLeak`, `ProfileBlind`, `PointerNeverPreDoor`, `LodestringDoorBlind`, `RoleBlindOrder` and others); the named checks of exploration and information design 9.2 |
 | V19 | Conformance (change SV-19; lead's call; owned by segments 11–12; M1 partial, M2; seeds and validation design 5.2) | Split like V13: V19s, static (registry completeness, label and id collisions, `DomainDisjoint`, `IdFrozen`, `DrawFreeProof`, `RerunSpanCovers`, `ClassDeclared`, the Core analyzer, `CoreNoProfileRef` and others); V19g, at every stage end and at commit (the DrawLedger, which calls the owners' draw-count rows, stage digests and the frozen `GenInputs` digest); and V19t tests (`KeyAlgebraVectors`, determinism, cross-OS and hostile-environment digests, goldens, `RetryIsolation`, `ExplorationCombatIsolation`, the shared `LootDoorInvariant` harness that V6 calls, `ForecastSurvivesRetry`, `ContentAddStability` and others); the named checks of seeds and validation design 5.2 |
 | V20 | Hollowfolk (change CH-25; owned by the camp and hub design, segment 13; M2; camp and hub design 9.2) | Split into (s), (t) and (r), static and display-only, with no g phase: V20s, static (`AmbientNoTrade`, `AmbientNoHire`, `AmbientNoEffect`, `AmbientCoreBlind`, `AmbientTrigger` over the RC8 camp and hub class, `RegisterByVenue`, `DreamerLine`, `ReservedCues`, `StationRingNoAmbient`, `AmbientNotServiceAnchor`, `LingererPerDrawableTheme` and others; name collisions through V7's name registry); V20t, tests (`LoreInert`, `SeededRunLoreReadOnly`, `AmbientProfileBlind`, `NoLineTwicePerRun`, `CampProbeResistance`, `VendorStockTrimmedInCore` and others); V20r, reports (simulator: `LoreFreshness`, `HollowRepeatRate` and others in the `LoreEmu` sandbox; human: `CampSeconds`, `CampClicks`, `RunWallClock`, `HubSeconds`, `DeathPathSeconds`) |
+| V21 | StartingKits (change SK-10; owned by the starting kits design, segment 14; M1 (a)–(e), plus (f) if the Due is in the slice (else M2), M2 (g)–(j), M3 (k)–(l), (m) reserved for Later; starting kits design 9.2) | Split into (s), (t) and (r): V21s, static (`KitMundane`, `KitHealing`, `KitNoTrinket`, `KitPackEmpty`, `KitCoin` (exactly 15 for hero kits), `KitSetLegal`, `KitTrained`, `KitVerbPerSet`, `KitAcFloor`, `KitDueStrictUpgrade`, the name, kit-line and Oddment text rows, `KitDisplayCoreBlind`, `OddmentInert`, `KitNamedPieceNotF1Target`, `KitResaleBand`, `KitLegalOverArrangements`, the variant rows and `HeirloomKitFits`); V21t, tests (`KitIssueStable`, `KitDisplayInert`, `SeededRunOddmentReadOnly`, `VariantPickConsistent`, `Floor1ClassSpread` per kit and others); V21r, reports (`KitSoldAtCamp1`, `VariantPickPerOffer`, `NamedPieceHeldAtF3`, the Oddment rates and others); the static and display-only parts as V20; the consolidated suite becomes V1–V21 (seeds and validation design 5.2) |
 
 ### 11.3 Simulator arms
 
 - **Fixed arrival states** (lead's call on the definition, after the
   check): authored data, one per {floor, party size} at each cap: the
   hero level (the enemies 6.3 expected level for the floor), the hero's
-  starter kit by class plus the floor's expected item upgrades, and a
+  starter kit by class (the default kit of its creation pick; starting
+  kits design 5.1) plus the floor's expected item upgrades, and a
   canonical companion list per party size. Every ThemeParity,
   ClassThemeSpread, BossParity and FloorTimeByTheme gate reads them.
 - **RouteSample**: whole runs over sampled routes; reported, not gated.
@@ -2944,7 +2952,7 @@ Two Doors switch agreed, Q2)**
 | **M2** | 8 themes (8.1) **(agreed, Q4)** | Strata Draw; Antechamber Catch-up; cards and dream track; Keepsakes; the RT-7 lever form (only in lever order); V1–V7; ThemeParity, ClassThemeSpread, FloorTimeByTheme, LevelAtDoorByFloor; readability gates; **Two Doors and the Last Hollow choice built, switched on only if their gates pass (agreed, Q2)** |
 | **M2 prerequisites owed by other owners, before rosters freeze** | RT-3 (enemies 10.5 steps 1 and 6), RT-4, RT-6, RT-7, RT-8 (enemies 16), the RT-9 rows in enemies 17.5 and 20.1, RT-17's enemies rows (enemies owner); RT-8 (classes 7.3: classes owner; companions 7.1 and 7.11: companions owner); RT-9's Herald 7.16 sentence (Herald owner); RT-13, RT-14, RT-16 (conditions owner); RT-12 and the DH 19.3 row of RT-10 (DH owner); RT-20 (trinkets owner). **Applied by their owners:** every row listed here except RT-14 and RT-16, which stay pending rulings (cross-document comparison 2026-11-23, CC-87) | — |
 | **M2 cut lines** | **Cut 1, graded (change BR-26; agreed, boss rooms Q1; M2; boss rooms design 4.10.4), in this order:** **1a** drops the Appetite **only if it is not yet built** at that review (a no-op otherwise); **1b** drops the Thing in Cell Zero, folded into the Jailer as the Rendition "Cell Zero Opens". **Cut 2:** 1a and 1b, and drop the Supper (floor 4 fixed Gut), **with the Cut 2R rider: Cut 2 never drops a built Appetite**. 1a, 1b and Cut 2 are **pre-authorised (agreed, Q4; graded, boss rooms Q1)**. **1c** drops the Master in the Frame, folded into Old Ragged as the Lord's Gallery Guise; it sits below Cut 2 and is **client-only**. The applied cuts are stamped as `cutState` into the content version (boss rooms design 9.1). Below Cut 2, the approved-scope floor (Gaol and Kennel on F1, Choir and Silk on F2–3, Gut on F4, floor 5 as a step-5 deep overlay of the floor-4 theme not drawn, re-passing its 6) needs the client | Under Cut 2, floor 4 has no choice anyway; under the approved-scope floor, random draws only |
-| **M3** | Unlocks in 8.12's order; the Supper's F3–4 band and its F3 boss; a second boss for every M2 (theme, floor) cell that has only one; the third final boss; the Lore roster preview at camp; Dream Fragments plus codex (Fragments folded into Curiosity F-BOSS options; change EV-29; events design 4.9). **Pending request (change EV-37; RS owner; M3; events design 4.9):** segment 8 co-owns the codex's Curiosity pages (Retellings collected and options seen, never power or gating rule text, write-only from the run's view); the RS owner owns the codex and segment 10 hosts it. **Exploration and information (change XI-29; M3; exploration and information design 6, 7):** segment 10 hosts the codex (the RS owner owns it); the **Floor Atlas** (each floor's final map in the run record, with "Treasures found k of n" and no rooms-entered fraction, never a score), whose previous-floor page shows on the camp dream track; the death-recap map; and the Dream map skin, an option over the plain map gated by the greyscale, colour-blind and glance gates (7.4). **Camp and hub (M3; camp and hub design 4.15.8):** the codex gains a "Residents of the Hollows" page per ambient figure, filling as its chain beats are heard (Lingerer pages under their theme; a completed chain adds a plate), write-only from the run's view and never gating; the RS owner owns it and segment 10 hosts it | Two Doors (if its gates failed in M2) and at camp 3 once the floor-4 pool is 3 or more; Omens; Nightmare tiers 1–3; Perilous Door; Seams; profile-side anti-streak outside seeded runs (Launcher Fallow on the F1 Curiosity is pulled into M2: change EV-20; agreed, events Q1; 6.4 R-SEED-6; the launcher F1-boss streak rule is pulled into M2: change BR-25; agreed, boss rooms Q1; 6.4 R-SEED-6) |
+| **M3** | Unlocks in 8.12's order; the Supper's F3–4 band and its F3 boss; a second boss for every M2 (theme, floor) cell that has only one; the third final boss; the Lore roster preview at camp; Dream Fragments plus codex (Fragments folded into Curiosity F-BOSS options; change EV-29; events design 4.9). **Pending request (change EV-37; RS owner; M3; events design 4.9):** segment 8 co-owns the codex's Curiosity pages (Retellings collected and options seen, never power or gating rule text, write-only from the run's view); the RS owner owns the codex and segment 10 hosts it. **Exploration and information (change XI-29; M3; exploration and information design 6, 7):** segment 10 hosts the codex (the RS owner owns it); the **Floor Atlas** (each floor's final map in the run record, with "Treasures found k of n" and no rooms-entered fraction, never a score), whose previous-floor page shows on the camp dream track; the death-recap map; and the Dream map skin, an option over the plain map gated by the greyscale, colour-blind and glance gates (7.4). **Camp and hub (M3; camp and hub design 4.15.8):** the codex gains a "Residents of the Hollows" page per ambient figure, filling as its chain beats are heard (Lingerer pages under their theme; a completed chain adds a plate), write-only from the run's view and never gating; the RS owner owns it and segment 10 hosts it. **Starting kits (M3; agreed, starting kits Q3; starting kits design 4.5.2, 10):** the codex gains an "Oddments" page in the Library (camp and hub design 4.15.8), filled on sight, write-only from the run's view, one plate per completed kit pool behind "a win as <class>"; the RS owner owns it | Two Doors (if its gates failed in M2) and at camp 3 once the floor-4 pool is 3 or more; Omens; Nightmare tiers 1–3; Perilous Door; Seams; profile-side anti-streak outside seeded runs (Launcher Fallow on the F1 Curiosity is pulled into M2: change EV-20; agreed, events Q1; 6.4 R-SEED-6; the launcher F1-boss streak rule is pulled into M2: change BR-25; agreed, boss rooms Q1; 6.4 R-SEED-6) |
 | **M4** | Pools of 3–4 per tier; the Waking City alternate final; Keepsake echo types; the Inverted Cathedral with its hazard package (the drop hazard now exists; change HZ-26; hazards design 7.11, 12) | Three-door camps (optional) |
 | **Later** | The Lucid Key; Other Dreamers; Nightmare tiers 4–5; daily seeds (already supported; their rules, a seed from a published or server value, and replays in the seeds and validation design 4.7; change SV-17; Later); seams that bleed the chosen door's palette | — |
 
@@ -3178,6 +3186,14 @@ cross-document comparison 2026-11-23, CC-87):
   (6.8); its rows here (CH-1, CH-4, CH-5, CH-6, CH-10, CH-11, CH-12,
   CH-14, CH-25) are applied; CH-20 is a pending request (9.1); CH-24 is
   told plainly (19.2).
+- **The starting kits design (segment 14, approved 2026-11-23; its 11,
+  13):** SK-10 is applied (the V21 `StartingKits` row of 11.2); SK-14
+  (the 7.5 premise row; M2) and SK-15 (`kitDelta` declarations on the
+  MAIN 4.7 run-modifier slot, with V21 (m) reserved; Later; MAIN and RS
+  owners rule) are pending requests (19.2); the RS owner owns the codex
+  Oddments page (M3; 12) and the tone review confirms the authored tags
+  on Oddments, kit lines and the provenance line (starting kits design
+  4.5.2, 9.2).
 - **The simulator:** the arms of 11.3 and the reports of 11.4 at both
   caps; the route enumerator.
 - **Playtests:** the human door pick rate (6.11, gate 2); the
@@ -3390,6 +3406,11 @@ triggers them:
   both left to the MAIN/RS difficulty decision (told plainly; CH-24;
   M3/Later); the premise items above, if answered, re-check the camp and
   hub lines against its AN4, and the Stairtop stays (7.5);
+- from the starting kits design (its 14.2): the RS owner ruling on the
+  premise row (pending request, SK-14, 7.5; fallback: no row, the
+  neutral provenance line unchanged); `kitDelta` modifiers left to the
+  MAIN/RS run-modifier decision (pending request, SK-15; Later; reserved
+  V21 (m) unused until then);
 - the naming pass.
 
 ---

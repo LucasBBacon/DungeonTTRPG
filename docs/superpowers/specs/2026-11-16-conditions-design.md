@@ -3209,7 +3209,9 @@ the exact section it touches.
   Coated, Clinging.
   Weapons and foci are no longer pending: see the weapons
   design (2026-11-17). Disarmed and Coated stay Later; starting
-  kits remain open in their category designs **(change W-15)**. Armour and shields are no longer
+  kits remain open in their category designs **(change W-15)**; they are
+  since set in the four class designs, the companions design and the
+  starting kits design (2026-11-23; pointer only). Armour and shields are no longer
   pending, and Pitted Armour is settled: see the armour design
   (2026-11-17, 9.4) **(change AR-16)**. Consumables, scrolls and wands
   are settled in the consumables design (2026-11-17); coatings and Coated

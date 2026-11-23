@@ -136,7 +136,10 @@ fixing the abilities that have no job in this game.
 - At creation the range is −1 to +3. The hard cap is +5 after all bonuses.
   **(agreed)**
 - The starting spread is +3, +2, +1, +1, 0, −1. The class suggests where
-  each value goes; the player may rearrange them. **(lead's call)**
+  each value goes; the player may rearrange them. **(lead's call)** A
+  rearrangement that Strains a starting-kit item or drops AC below the
+  creation pick's `kit.acFloor` gets a one-line creation warning that never
+  blocks (starting kits design 4.6; SK-9; M2; read, not changed).
 - The −1 is kept on purpose: one visible weakness is part of a character.
   **(agreed)**
 - The hero gains +1 to one ability at levels 4 and 8. **(agreed)**
@@ -345,6 +348,12 @@ skill.
   and the starting boon add more. Companions come with fixed skills,
   plus one flex skill chosen on the join card from two options on its
   class list, fixed from then on (companions design 8.1). **(agreed)**
+  M3: a kit variant is a starting boon that bundles one skill training,
+  never one of the class's default skills, never Leadership, never
+  Mechanics at M3, with an alternate and `skillFallback` resolved at
+  creation confirm (starting kits design 4.4; SK-7; agreed 2026-11-23, its
+  Q1; read, not changed). Pending: this document's owner signs off the
+  bundled skills (starting kits design 11, 14.2).
 - **No free retries.** Exploration has no clock, so a failed check always
   costs something: noise, a sprung trap, a jammed lock. Where no cost fits,
   the check is a threshold with no roll. **(agreed)** For traps and locks
@@ -566,8 +575,10 @@ Each item here is a commitment this model makes on another system's behalf.
   stay Later. Armour and shields, including armour values and Strength
   thresholds, are settled in `2026-11-17-armour-design.md` (its 6.2, 7.1).
   Consumables, scrolls and wands are settled in the consumables design
-  (2026-11-17); coatings and Coated stay Later. What remains open moves to
-  the category designs (items design 17): starting kits and Clinging.
+  (2026-11-17); coatings and Coated stay Later. Starting kits are set in
+  the four class designs, the companions design and the starting kits
+  design (`2026-11-23-starting-kits-design.md`; SK-17; M2). What remains
+  open moves to the category designs (items design 17): Clinging.
   Pitted Armour is in armour 9.4 and stays Later (AR-37; cross-document
   comparison 2026-11-23, CC-14).
 - **Conditions.** Settled in `2026-11-16-conditions-design.md`: bleed,

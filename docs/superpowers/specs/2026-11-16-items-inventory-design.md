@@ -910,6 +910,17 @@ camp-exit save (WO5; seeds and validation design 4.4, 4.8.3). The run state keep
   - tonic and Remedy prices are the condition-economy knob (conditions 22:
     "tonic supply becomes the real balance knob").
 - Every vendor- or camp-sellable record has a price above 0 (19.1).
+- **Pending request (change SK-11; M2):** the starting kits design (8.4)
+  proposes a mundane `basePrice` scale: simple light or simple one-handed
+  (dagger, handaxe, sickle, mace) 6; one-handed martial 8; javelin, spear
+  6; shield 8; two-handed, staff or launcher (sling and hand crossbow
+  included) 12; off-hand focus 10; leather / hide / chain shirt / chain
+  mail 8 / 12 / 16 / 24 *(illustr.)*, with a camp-1 coverage rerun at
+  250‰ and 200‰. It is not adopted until the ITEMS and loot economy
+  owners rule. Until then the scale sits in data labelled `placeholder`,
+  and from M2 a missing `basePrice` on any kit family fails the build;
+  fallback: the owners' own prices, with `KitResaleBand` re-run (starting
+  kits design 4.3, 14.2).
 
 ### 10.6 Sell and Scrap
 
@@ -921,6 +932,15 @@ camp-exit save (WO5; seeds and validation design 4.4, 4.8.3). The run state keep
   sells and scraps for 0 and shows "Unsellable: kit" (companions design
   7.6) **(change CMP-21)**. Camp identifies everything first
   (section 11), so Sell always reads the true value.
+- **Hero kit gear is sellable** at the Sell rate: hero kit instances
+  carry no `boundToUnitId` (18.1), so they are ordinary party items, never
+  `kitBound` (a reading recorded in the starting kits design 4.1, 4.3;
+  agreed 2026-11-23, Q4). The report `KitSoldAtCamp1` watches kit sales;
+  a 0-Sell `kitIssue` flag is held as a lever only, never shipped without
+  the client (starting kits design 7, 14.2). *Pending request (change
+  SK-13, to the naming pass; M2):* the player-facing term for hero
+  starting gear (placeholder chip "Starting gear") stays distinct from the
+  companion "kit" and never matches kitBound's "Unsellable: kit" label.
 - **Scrap** applies only to leftovers and flee piles at the stairs
   *(illustr. 10%)* (section 9). **(agreed)**
 - Both use the integer order in 10.5.
@@ -1229,7 +1249,7 @@ family: { id: "family.longsword", category: "weapon", improvised: {...},
 | `value` | int, checked at load | Σ fixed property values + rollable `count` × the table's `entryValue` + Σ values of the `use` ability and granted abilities, in offer-value units (12.6). Every roll gives the same value. A trinket button is a property whose effect is the grant; its value is counted once, inside that property (trinkets design 9.2) **(change TK-12)**. Each `ability.item.*` declares its offer value; the load check compares a scroll's value with its tier, a wand's with `wandValue(tier, pool max)`, and every other use-only record's with its rarity budget (consumables design 9.1) **(change CN-6)**. |
 | `basePrice?` | int | Required for mundane and shop-only records (supply, Remedy) |
 | `flags` | set | signature, heirloom, unsellable, noSteal, unique, srd (with `srdSource`). The `unsellable` treatment also applies to any instance with `boundToUnitId` set (18.1; companions design 7.6) **(change CMP-21)**. `oncePerRun`, always explicit: generated at most once per run in any form (dreamed options, the hidden fourth and the unused Wax-Key identity included), never lifted, required on every signature, Very rare record, heirloom template and `chase` record (the named chase Rares), and never drawn for the fourth option or a dual-identity cache; `chase` marks those named Rares. `unique` keeps its meaning (at most 1 owned) (item rolls design 4.7; agreed 2026-11-22, Q2) **(change IR-6; M2)**. |
-| `display` | object | iconId, modelId, glint; `socket` (`head \| back \| none`, trinkets) (change AR-35). Never read by the rules. Theme presentation (Patina on models only, the theme stamp, provenance, a Reverie) comes from the found theme's `theme.loot` display record by display hash, with 0 rules bias (agreed 2026-11-22, Q4); icons stay global and untinted (item rolls design 5.1, 6.2) **(change IR-15; M2, M3)**. |
+| `display` | object | iconId, modelId, glint; `socket` (`head \| back \| none`, trinkets) (change AR-35). Never read by the rules. Theme presentation (Patina on models only, the theme stamp, provenance, a Reverie) comes from the found theme's `theme.loot` display record by display hash, with 0 rules bias (agreed 2026-11-22, Q4); icons stay global and untinted (item rolls design 5.1, 6.2) **(change IR-15; M2, M3)**. A starting kit's given name (on the named piece: the shield, else the armour), kit lines and accents are not fields here or on the Core instance (18.1): they live in display sidecars in `run.save`'s display section (`displayOverlay`, `namedPieceLog`), keyed by `instanceId`; the record stays the plain family record (starting kits design 4.5.1, 9.1) **(change SK-5; M2)**. |
 | `weapon{}`, `armour{}`… | sub-records | Owned by the category designs (section 17). `weapon{}` and `focus{}`: weapons design 20.1 (change W-6). `armour{armourCategory, verb}`, `shield{}` and `trinket{kind, wornOn}`: armour design 16.1; `armourValue` is derived and never stored (change AR-35). |
 
 ### 12.4 Properties and the buff test
@@ -1535,6 +1555,26 @@ is original, so it carries no `srd` flag.
   keeps the template.
 - It is picked as the one starting boon at the hub's Heirloom shelf, its
   exact text shown before the pick (M3; camp and hub design 2.2, 5.2).
+- **Kit variant boons** (M3) sit beside heirlooms on the Heirloom shelf
+  under the same exact-contents rule: a full mundane `KitRecord` that
+  replaces the default kit of one creation pick, plus one skill training.
+  Boons do not stack, so a variant never coexists with an heirloom
+  (starting kits design 4.4; agreed 2026-11-23, Q1) **(change SK-7, in
+  parallel; M3)**.
+- **Placement at kit issue** (M3): the heirloom takes its slot class in
+  set A (main hand, off hand or armour; a two-hander takes set A's main
+  and off hand). Displaced kit pieces go to the pack in kit issue order
+  (18.1), each only while at least 1 pack slot stays free afterwards;
+  otherwise that piece is not issued (never created, consuming no
+  `instanceId`), and the heirloom card shows "Replaces: <piece>" and
+  "(not carried: no room)" before the pick. The kit's given name moves by
+  `namedPiece.fallbackOrder` only when the named piece is not issued,
+  suppressing the receiving piece's kit line; V21 `HeirloomKitFits` checks
+  the state after placement (starting kits design 7 item 2) **(change
+  SK-12; M3)**. A weapon or focus heirloom of U or better counts as "arms
+  satisfied" for the F1 hero-arms Due, which then takes the 20-coin
+  waiver (loot economy design 6.6 item 2; starting kits design 4.3;
+  change SK-4, applied by the loot economy owner; M3).
 
 ## 15. Companions, recruits and run end
 
@@ -1592,11 +1632,11 @@ is original, so it carries no `srd` flag.
 |---|---|---|---|
 | 1 | **Weapons (with foci)** | M1 | **Designed:** `2026-11-17-weapons-design.md` (weapons design), approved 2026-11-17, which adopts the no-ammunition-tracking recommendation (weapons design 9.4). Disarmed and Coated stay Later. **(change W-15)** |
 | 2 | **Armour and shields** | M1 | **Designed:** `2026-11-17-armour-design.md` (armour design), approved 2026-11-17, which takes the weapons design 17.9 inputs **(change W-13)**. Pitted Armour and the tower shield stay Later. **(change AR-37)** |
-| 3 | **Starting kits** (small; may fold into 1 and 2) | M1 | **Answered:** hero kits are set in the four class designs (Shade, Vanguard, Arcanist and Herald) and companion kits in the companions design (8.3, 8.4) (cross-document comparison 2026-11-23, CC-46). `kit` records per class and per companion: weapon sets, armour, belt contents, starting coin. Answers ability model 20's "a minimal starting-equipment set for M1". Armour kits as in armour design 13.6 **(change AR-37)**. Every hero class kit holds 2 healing potions on the belt; every recruit kit 1; the hero's camp top-up of 1 (death and healing design 12.4, 13.2) **(change DH-37, agreed 2026-11-17, Q3)**. |
+| 3 | **Starting kits** (small; may fold into 1 and 2) | M1 | **Answered:** hero kits are set in the four class designs (Shade, Vanguard, Arcanist and Herald) and companion kits in the companions design (8.3, 8.4) (cross-document comparison 2026-11-23, CC-46). **Designed:** `2026-11-23-starting-kits-design.md` (starting kits design, segment 14), approved 2026-11-23, which takes up this row. `kit` records per class and per companion are `KitRecord`s (starting kits design 9.1): weapon sets, armour, belt contents, starting coin **exactly 15** for every hero kit (`kit.coinStart`; companion kits carry none) **(change SK-1; M1)**; hero kits have no trinket **(change SK-3; M1)**. Answers ability model 20's "a minimal starting-equipment set for M1". Armour kits as in armour design 13.6 **(change AR-37)**. Every hero class kit holds 2 healing potions on the belt; every recruit kit 1; the hero's camp top-up of 1 (death and healing design 12.4, 13.2) **(change DH-37, agreed 2026-11-17, Q3)**. |
 | 4 | **Consumables** (potions, tonics, flasks, coatings, Remedy) | M1 potions; M2 rest | **Designed:** `2026-11-17-consumables-design.md` (consumables design), approved 2026-11-17 **(change CN-8)**: effects, `stackMax`, the use-value table, prices and pegs against supply, thrown flasks, monster `useWhen`, banding. Potions can be thrown at a willing ally: action, range 5, `thrownPotionPermille`, never lifts Downed (consumables design 11) **(change CN-4)**. Coatings and Coated stay Later. |
 | 5 | **Scrolls and wands** | M2 | **Designed:** in the consumables design (section 13), approved 2026-11-17 **(change CN-8)** |
 | 6 | **Trinkets** | M2 | **Designed:** `2026-11-17-trinkets-design.md` (trinkets design), approved 2026-11-17. Piece tables by location, jewellery tables by kind (trinkets design 14.1), capacity table **(change TK-9)**, capacity trinkets (at most +2), trinket families and caps. From the armour design **(change AR-37)**: piece kinds; location domains (armour design 5.6); the strict no-AC rule; the one-table rule; the reaction cap; pieces at Uncommon at most; at least 3 legal families per piece location per wave; `requires` tags for location hunger (armour design 5.7); the piece power target (armour design 17.3) |
-| 7 | **Heirlooms** | M3 | The template list, at Uncommon, banded |
+| 7 | **Heirlooms** | M3 | The template list, at Uncommon, banded. Placement at kit issue is set by the starting kits design (7 item 2; section 14) **(change SK-12)** |
 | 8 | **Curses** | Later | The variants used as item costs, the Clinging flow, cursed carriers, the "malign" hint |
 | 9 | **Wandering trader** (small) | Later | Service prices, presence chance, trader art and lines, within 10.9 |
 
@@ -1630,9 +1670,24 @@ ItemInstance {
                      //   windfall(unitId)  // on a Windfall Truant (change LP-2; M3)
   origin { channel, floor }
   substituted        // enemies 15.3 step 2
-  boundToUnitId      // null unless issued by a recruit kit; kitBound is derived from it (companions design 7.6; change CMP-21)
+  boundToUnitId      // null unless issued by a recruit kit; kitBound is derived from it (companions design 7.6; change CMP-21);
+                     // never set on hero kit pieces (starting kits design 4.1; change SK-3)
 }
 ```
+
+**Kit issue (change SK-3; M1).** Every instance issued from a `KitRecord`
+(a hero's default kit or variant, Old Friend, or a recruit kit) has
+`origin = {channel: kit, floor: 0}` and `everHeld = true`, and goes
+straight to its `KitRecord` slot (`ItemCreated{kit}`, then
+`ItemEquipped`); 6.2 placement applies only to a piece displaced by an
+heirloom (section 14). The creation order, which fixes `instanceId`, is
+set A main, set A off, set B main, set B off, armour, then the potions one
+by one into belt 0 (a hero kit's 2 potions: 2 instances, one stack); a piece that is not issued
+consumes no `instanceId`. A hero's kit coin is issued in the same step as
+`CoinChanged{delta: 15, source: kit}` (18.3). Hero kit pieces carry no
+`boundToUnitId`, and hero kits have no trinket. No given-name or kit-line
+field is added to the instance (12.3; change SK-5). (Starting kits design
+4.1, 4.2, 7.)
 
 `trader(markerId)` is Later. A two-hander sits at `main`, and `off` is
 derived as blocked. A slot index `i` in the pack is an ordering key only:
@@ -1664,7 +1719,7 @@ no other occurs.
 |---|---|---|---|---|
 | generation | `container`, `carried`, `shop`, `trader`, `windfall` **(change LP-2; M3)** | floor loot draw | generation | `ItemCreated` |
 | vendor (unlimited goods) | 6.2 placement | Buy | camp | `ItemCreated`, `ItemBought` |
-| kit issue | 6.2 placement | on hire (companions design 7.6) **(change CMP-21)** | camp | `ItemCreated{kit}` |
+| kit issue | the `KitRecord.slotRef` locations (weaponSet active/spare main/off, armour, belt 0); a piece an heirloom displaces to 6.2 placement (section 14; M3) **(change SK-12)** | run start, WO1, before F1 generation; on hire (companions design 7.6) **(change CMP-21)**; Old Friend at run start | run start; camp (hire) | `ItemCreated{kit}`, `ItemEquipped` **(change SK-3; M1)** |
 | `carried` | `ground` | the monster dies or drops it (enemies 15.6) | combat | `ItemDropped` |
 | `container`, `leftovers`, `pile`, `ground`, `claimed` | `summary` | summary opens (8.1) | out of combat | `ItemMoved` |
 | `carried` | thief's `pack`, else `leftovers` | Steal (8.1) | out of combat | `ItemTaken` or `ItemLeft` |
@@ -1723,9 +1778,11 @@ comparison 2026-11-23, CC-40), `ItemRecharged` (camp, and Later
 - New trinket event: `TrinketPropertyFired{property, instanceId, unit,
   result}` (trinkets design 17.3) **(change TK-15)**.
 - New state events **(lead's call)**: `CoinChanged{delta, source: found |
-  salvage | sell | scrap | buy | barter | service | ticketLock}` (`ticketLock`:
+  salvage | sell | scrap | buy | barter | service | ticketLock | kit}` (`ticketLock`:
   coin paid at a Ticket lock, M3; traps and locks design 7.7; agreed
-  2026-11-23, cross-document comparison Q-1), `SupplyChanged{delta,
+  2026-11-23, cross-document comparison Q-1) (`kit`: a hero kit's 15 coin
+  at run start, before F1 generation; starting kits design 4.1) **(change
+  SK-3; M1)**, `SupplyChanged{delta,
   source}`, `MarkerCreated{kind: leftovers | pile | trader, room}`,
   `CampChoiceMade{choice: shop | reward}`; Later `TraderDiscovered` and
   `TraderServiceUsed{service, target}`.
@@ -1973,7 +2030,8 @@ Consumable, scroll, wand and talisman reports: see consumables design
     item to leftovers, and **Equip now**) and fixed leftovers markers, so a
     full solo hero can always take a found upgrade;
   - rest-gated armour changes;
-  - the starting kit; value and k = 1;
+  - the starting kit (the Vanguard kit at M1; all six default kits at M2;
+    starting kits design 10); value and k = 1;
   - the coin line as a counter with nothing to spend.
   - **M1 measures the swap rate and forced Leaves for a solo hero.** M1 has
     no Sell, so its pack-fill data is not used for tuning: pack fill and
@@ -1997,7 +2055,9 @@ Consumable, scroll, wand and talisman reports: see consumables design
     CH-18);
   - stairs Scrap; rest-gated trinket changes;
   - simulator reports.
-- **M3:** heirlooms as profile templates.
+- **M3:** heirlooms as profile templates; heirloom placement at kit issue
+  and kit variant boons (starting kits design 4.4, 7; changes SK-7,
+  SK-12).
 - **Later:** curses, Clinging and cursed carriers; Disarmed seizure;
   coatings and Coated; Pitted Armour; the Thief role (hook: it may take one
   belt item, never the pack, equipment or a `noSteal` item, holds it as its
@@ -2158,7 +2218,9 @@ mundane bases are not loot, and family caps all stand.
   Weapons and foci are no longer pending: see the weapons design
   (`2026-11-17-weapons-design.md`). Disarmed and Coated stay Later;
   starting kits are set in the four class designs and the companions
-  design (8.3, 8.4) (cross-document comparison 2026-11-23, CC-46).
+  design (8.3, 8.4) (cross-document comparison 2026-11-23, CC-46), and
+  designed in the starting kits design
+  (`2026-11-23-starting-kits-design.md`, segment 14).
   **(change W-15)** Armour and shields are no
   longer pending: see the armour design (`2026-11-17-armour-design.md`),
   which also fixes the armour part of starting kits (13.6) and hands

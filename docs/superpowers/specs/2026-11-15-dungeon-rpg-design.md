@@ -321,6 +321,14 @@ All decided.
   reserved run-modifier slot on the hub's Depth gauge, owned by the
   main design and run structure difficulty decision (camp and hub
   design 4.9, 2.2; change CH-24, read, M3/Later).
+  Kit variants are boons with one bundled skill, 0 VP, under this
+  rule as written (starting kits design 4.4; change SK-7, read,
+  agreed 2026-11-23, starting kits Q1, M3); the CH-24 sentence above
+  is read as written (starting kits design 13). Pending (owed by this
+  document with run structure): a run modifier may change kit fields
+  only through declared `kitDelta` entries in `configHash`, with a
+  reserved V21 check (starting kits design 4.7, 9.2 (m), 14.2; change
+  SK-15, request, Later).
 - **Difficulty ladder.** Each win unlocks an optional harder tier. From
   M3, Nightmare tiers add kind, not stats, and the Perilous Door makes
   the ladder per-floor (run structure design 9.1; change RT-21, M3).
@@ -815,6 +823,12 @@ hooks on this document are taken up in sections 4.1, 4.7, 6.6 and 9
 (camp and hub design 11, 13; changes CH-6, CH-7, CH-9, CH-13, CH-20,
 CH-24). Telemetry consent and the visible easier setting stay pending
 here (sections 6.6, 4.7).
+
+Starting kits (default hero kits, companion kits, kit variants, given
+names and Oddments) are settled in `2026-11-23-starting-kits-design.md`;
+they are no longer pending, and its hooks on this document are taken
+up in section 4.7 (starting kits design 11, 13; changes SK-7, read;
+SK-15, request, pending).
 
 - All numbers: hit points (shape settled there), damage, experience curve, loot rates.
 - The dungeon generation algorithm.

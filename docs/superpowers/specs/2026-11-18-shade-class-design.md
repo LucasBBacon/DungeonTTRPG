@@ -297,7 +297,7 @@ client said stand.
 | 11 | Tainted Blade | **Trades the stealth-tier dice only** for Poisoned; once per fight per elite or boss; Shrugged Off (7.6) **(lead's call)** | Trading any Opening (makes the verb a poison applicator; a boss lock) |
 | 12 | Tripline | **Fires on use** against adjacent hostiles (8.2) **(lead's call)** | An aura that waits for enemies (a new aura trigger kind). Snuff (Blinded on several hostiles, a major condition; the flash flask was cut for the same reason) |
 | 13 | Lone Blade | **A swap** for Beset's ally-hit clause, from level 5 (8.3) **(lead's call)** | An addition (+6 / +3 / +3 points). From level 3 (113% solo even as a swap) |
-| 14 | Starting kit | **Blades** (shortsword + dagger / sabre + dagger) default; **Launcher** (longbow / sabre + dagger) as the creation pick; leather; 2 potions (7.10) **(lead's call)** | Further presets (a second level-1 pick) |
+| 14 | Starting kit | **Blades** (shortsword + dagger / sabre + dagger) default; **Launcher** (longbow / sabre + dagger) as the creation pick; leather; 2 potions; exactly 15 coin (7.10; starting kits design 5.1, SK-1) **(lead's call)** | Further presets (a second level-1 pick) |
 | 15 | Reading | **Three rows:** at-wills, Tricks, the Vanish row; Opening, Answer and Exploit are glints (7.1) **(lead's call)** | A trigger list shown as rules text. A separate strike-limit row |
 
 ### 4.1 How other games handle rogues and skirmishers
@@ -1025,15 +1025,36 @@ two are honest utility, as the Vanguard's Grim Resolve was.
 
 | Kit | Armour | Set A | Set B | Belt / coin |
 |---|---|---|---|---|
-| **Blades** (default) | leather (AC 15, Supple) | shortsword (Vex, P) + dagger (Nick, thrown, P) | sabre (Flourish, S) + dagger | 2 healing potions; about 15 coin |
+| **Blades** (default) | leather (AC 15, Supple) | shortsword (Vex, P) + dagger (Nick, thrown, P) | sabre (Flourish, S) + dagger | 2 healing potions; exactly 15 coin (`kit.coinStart`; M1; starting kits design 4.2, SK-1) |
 | **Launcher** | leather | longbow (Aim, P; Str 0 meets it) | sabre + dagger | same |
 
 - No other presets. No notable armour, so the kit raises no Shadowed
   question.
+- **Starting kits design (segment 14; approved 2026-11-23):**
+  - Kit variants ship only as starting-boon options on the Heirloom
+    shelf, each a mundane kit replacing one creation pick plus one
+    skill training outside 7.14's defaults: Close Shot (Launcher) and
+    Throwhand (Blades), inside the Shade risk band [default − 3,
+    default] (M3; agreed, Q1; SK-7; starting kits design 4.4, 5.3).
+    Each kit carries its own `level3SpareHintKey`, never naming a
+    family already in the kit (M3; SK-7).
+  - The named piece is the leather, given the placeholder name Grey
+    Lacing, shared by both picks: the piece the F1 Due cannot replace;
+    display only, so the leather stays non-notable (M2; agreed, Q2;
+    SK-5; starting kits design 4.5.1).
+  - Each pick has an Oddment pool of 6, display only (M2; agreed, Q3;
+    SK-6; starting kits design 4.5.2, 5.1).
+  - Kit gear stays sellable at the Sell rate; `KitSoldAtCamp1` is
+    reported (agreed, Q4; starting kits design 4.3).
 - **Array:** Dex +3, Int +2, Con +1, Wis +1, Str 0, Pre −1.
   **Strength is never negative:** it would cut every Dexterity-rolled
   light or finesse hit (weapons 6.2). The Cutthroat preview suggests
   Pre 0, Int +1.
+  **Creation warnings (M2; SK-9; starting kits design 4.6):** a
+  rearrangement that Strains a kit item (the longbow below Str 0) or
+  drops sustained AC below the pick's `kit.acFloor` shows a one-line,
+  never-blocking warning; `Floor1ClassSpread` adds a worst legal
+  rearrangement arm.
 
 ### 7.11 Offers, lanes and `triggerMenu`
 
@@ -1119,7 +1140,9 @@ Subclass rows are in section 8.
 ### 7.14 Recommended creation defaults and ladder preview
 
 **Defaults (lead's call):** skills Stealth, Medicine (DH 8, "close to
-compulsory" solo) and Perception (surprise and Tactician); kit Blades;
+compulsory" solo) and Perception (surprise and Tactician); kit Blades
+(taken up: Blades pre-selected on the kit strip, starting kits design
+4.6);
 L2 Tainted Blade; L3 Cutthroat; L6 Make an Example; L7 Clear Head; L10
 Long Shadow; offers the scorer's pick, with each trigger offer's
 "already live" rate shown.
@@ -2267,7 +2290,8 @@ validation design 5.2).
 - parity at the worst legal build, solo and party, per subclass;
 - camp share under three measures (10.5), and the 60% rule in the offer
   value unit;
-- `Floor1ClassSpread` per pick and subclass; the full-floor clear rate;
+- `Floor1ClassSpread` per pick and subclass, with the worst legal
+  rearrangement arm (M2; starting kits design 4.6, SK-9); the full-floor clear rate;
   the rate of level-2 boss arrivals and the death rate there with Vanish
   3 at level 2;
 - the subclass signature share at levels 3–4 for the Cutthroat and the
@@ -2366,7 +2390,8 @@ arm (seeds and validation design 6.2).
   `CampOptionBound`'s permille and reference encounter,
   `SpringContentBound` inputs, `TrapwrightHasMechanism` counts, lane
   weights and `offerLaneAdjust`, trigger ids, `bigHit`'s permille, the
-  starting coin, the report thresholds.
+  report thresholds. The starting coin is no longer tuning: exactly 15
+  (starting kits design 4.2; change SK-1).
 - Level-up card, glint, pip, picker and tooltip layout.
 - Wording of option, Art and trigger texts within the rules here, until
   the naming pass.

@@ -1854,7 +1854,9 @@ Stat model 6's AC formula and "Armour is hit or miss" and stat model 8.1
   trinkets; the piece power target (17.3).
 - **Starting kits:** settled in the four class designs and the companions
   design (13.6; items 17, row 3; companions design 8.3) (cross-document
-  comparison 2026-11-23, CC-51).
+  comparison 2026-11-23, CC-51), and designed in the starting kits design
+  (2026-11-23; its V21 (e) `KitAcFloor` takes up 13.6's validation at kit
+  AC and lowest legal AC; pointer only).
 - **Companions:** settled in `2026-11-20-companions-design.md` (approved
   2026-11-20; changes CMP-8, CMP-27, CMP-34): no ability increases (a
   fixed array per kit) and kit AC at or above the lowest legal AC

@@ -1,7 +1,7 @@
 # Starting Kits: Design (Segment 14)
 
 Date: 2026-11-23
-Status: Draft, revised after the design check (14.3), awaiting client approval, 2026-11-23
+Status: Approved, 2026-11-23
 Parents (immediate): `2026-11-23-camp-hub-design.md` (camp and hub design, "CH", segment 13, approved 2026-11-23, **the most recent template**), `2026-11-23-seeds-validation-design.md` (seeds and validation design, "SV", segments 11–12), `2026-11-23-exploration-information-design.md` ("XI", segment 10), the loot designs `2026-11-22-loot-economy-design.md` ("LE", segment 7a), `2026-11-22-item-rolls-design.md` ("IR", segment 7b) and `2026-11-22-loot-sources-design.md` ("LP", segment 7c), `2026-11-22-events-design.md` ("EV", segment 8), `2026-11-22-boss-rooms-design.md` ("BR", segment 9), and `2026-11-23-cross-document-comparison.md` (reviews, "CC").
 Other parents: `2026-11-15-dungeon-rpg-design.md` (main design, "MAIN"),
 `2026-11-16-character-stat-model-design.md` (stat model, "STAT"),
@@ -25,20 +25,20 @@ All 31 approved specifications and the cross-document comparison were read or gr
 
 Items marked **(agreed)** are the client's answers of 2026-11-23 to the four questions this design raised (Q1–Q4; sections 0.2 and 14.1), each answered with the lead's recommendation (option A), or restate a client answer recorded in an approved document; parent documents' questions are always named with their document ("CH Q2", "SV Q1", "EV Q4") so that they never read as this document's Q1–Q4. The client also said that everything else in the lead's proposal stands as written: the six kits and their exact contents; the uniform budget; the Oddment rules (a display object with no slot, no price and no effect, Core-blind, outside the seed key, card text "Weighs nothing. Does nothing.", Leave it by the fire, no reward or punishment, profile memory of seen Oddments); kit lines; Deed bynames; companion kits unchanged in gear; the kit-variant catalogue; display surfaces; art and audio; the new mechanics; the numbers; data and validator V21 `StartingKits`; staging; ownership and hooks; the binding requirements; SK-1 to SK-17; the risks; and the appendix resolutions and names. Names are placeholders pending the naming pass.
 
-**The lead's answers (0.1) and Model A with its grafts (3.2)** were accepted by the client by proceeding to the four questions. They are recorded here as the lead's answers, which the client confirms with this document, **including every told-plainly item of 14.1**: kits are not made stronger; the client's sword example is contested and the name goes on the piece the F1 Due cannot replace; class-free background kits, Liveries and Haversacks are rejected; there is no real weightless inventory item and no letter or note; the same seed shows the same Oddment, but a text patch can change it; seeded runs never advance milestones; coin is exactly 15; the Herald's set B is 1 javelin.
+**The lead's answers (0.1) and Model A with its grafts (3.2)** were accepted by the client by proceeding to the four questions. They are recorded here as the lead's answers; the client confirmed them on 2026-11-23, when it approved this document as a whole, **including every told-plainly item of 14.1**: kits are not made stronger; the client's sword example is contested and the name goes on the piece the F1 Due cannot replace; class-free background kits, Liveries and Haversacks are rejected; there is no real weightless inventory item and no letter or note; the same seed shows the same Oddment, but a text patch can change it; seeded runs never advance milestones; coin is exactly 15; the Herald's set B is 1 javelin.
 
-Items marked **(lead's call)** were filled in by the design lead inside approved rules and were in the proposal the client answered; the client confirms them with this document. Items marked **(new lead's call)** were made while writing this document, beyond that proposal; they are listed in 14.1 and the client confirms them with this document. Items marked **(lead's call, after the check)** were made in answer to the design check of this document (builder, consistency, balance and narrative-art lenses); none overrides a client answer; they are listed in 14.3 with the "Told plainly after the check" items (T1–T12), and the client confirms them with this document. Items marked **(settled)** restate a rule from an approved document; **(decided)** marks a main-design client decision. Items marked **(change SK-n)** amend an approved document and are listed, with the exact sections they touch, in 13; rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there, and the client's approval of this document (with Q1–Q4 where a row names one) covers them. Items marked **(told plainly)** narrow or re-read approved text, contest the brief, the client, a judge, a critic or a draft, or state an unwelcome forecast, and were told to the client in plain words (14.1; those found in the check, 14.3, T1–T12). Once approved, every item here is binding on the builders.
+Items marked **(lead's call)** were filled in by the design lead inside approved rules and were in the proposal the client answered; the client confirmed them all on 2026-11-23, when it approved this document as a whole, and they are binding. Items marked **(new lead's call)** were made while writing this document, beyond that proposal; they are listed in 14.1 and the client confirmed them all on 2026-11-23. Items marked **(lead's call, after the check)** were made in answer to the design check of this document (builder, consistency, balance and narrative-art lenses); none overrides a client answer; they are listed in 14.3 with the "Told plainly after the check" items (T1–T12), and the client confirmed them all on 2026-11-23. Items marked **(settled)** restate a rule from an approved document; **(decided)** marks a main-design client decision. Items marked **(change SK-n)** amend an approved document and are listed, with the exact sections they touch, in 13; rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there, and the client's approval of this document on 2026-11-23 (with Q1–Q4 where a row names one) covers them. Items marked **(told plainly)** narrow or re-read approved text, contest the brief, the client, a judge, a critic or a draft, or state an unwelcome forecast, and were told to the client in plain words (14.1; those found in the check, 14.3, T1–T12); the client confirmed them all on 2026-11-23. Every item here is binding on the builders.
 
 | Marking | Meaning |
 |---|---|
 | **(settled)** | Restates a rule from an approved document |
 | **(decided)** | A main-design client decision, restated |
 | **(agreed)** | A client answer: Q1–Q4 of this document (2026-11-23), or one recorded in an approved document (named with its document), restated |
-| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal (the lead's answers of 0.1 and Model A with its grafts included); the client confirms it with this document |
-| **(new lead's call)** | A lead's call made while writing this document, beyond the answered proposal; listed in 14.1; the client confirms it with this document |
-| **(lead's call, after the check)** | A lead's call made in answer to the design check; never overrides a client answer; listed in 14.3, with the "Told plainly after the check" items; the client confirms it with this document |
-| **(change SK-n)** | Amends an approved document; listed with its exact sections in 13. Rows that touch **settled**, **decided** or **agreed** text are flagged ⚑ there; the client's approval of this document covers them |
-| **(told plainly)** | Narrows or re-reads approved text, contests the brief, the client, a judge, a critic or a draft, or states an unwelcome forecast; told to the client in plain words (14.1; after the check, 14.3); the client confirms it with this document |
+| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal (the lead's answers of 0.1 and Model A with its grafts included); confirmed by the client with this document on 2026-11-23 |
+| **(new lead's call)** | A lead's call made while writing this document, beyond the answered proposal; listed in 14.1 and confirmed by the client on 2026-11-23 |
+| **(lead's call, after the check)** | A lead's call made in answer to the design check; never overrides a client answer; listed in 14.3, with the "Told plainly after the check" items, and confirmed by the client on 2026-11-23 |
+| **(change SK-n)** | Amends an approved document; listed with its exact sections in 13. Rows that touch **settled**, **decided** or **agreed** text are flagged ⚑ there; the client's approval of 2026-11-23 covers them |
+| **(told plainly)** | Narrows or re-reads approved text, contests the brief, the client, a judge, a critic or a draft, or states an unwelcome forecast; told to the client in plain words (14.1; those found in the check, 14.3) and confirmed by the client on 2026-11-23 |
 | **(request)** | Asks another owner to rule; changes nothing until that owner rules; the fallback is stated (14.2) |
 | **(hook)** | Owned by another design; this design states only what it needs |
 | *(illustr.)* | An illustrative number, owned by the builders and calibrated by the simulator or by human sessions (8, 9). Never binding |
@@ -65,9 +65,9 @@ Items marked **(lead's call)** were filled in by the design lead inside approved
 - **Kit variants (M3)** ship as **starting-boon options**, as CH-24 decides (MAIN 4.7), each a re-dressed mundane kit bundled with one skill training. A per-offer pick-rate report decides whether the client should revisit CH-24 **(agreed, Q1)**.
 - **Hero kit gear stays sellable** at the Sell rate, the approved asymmetry with kitBound recruit gear; report `KitSoldAtCamp1` **(agreed, Q4)**.
 - **Rejected as kit axes:** class-free background kits, Liveries (Model B), Haversacks (Model C), kit trinkets, extra potions, gold-instead kits, proper-name renames, a real weightless inventory item, a letter or note (told plainly).
-- **Seams fixed whatever the client decides:** coin "about 15" becomes exactly 15 (the camp-1 margin is 0); the Herald's set B becomes 1 javelin; the missing ITEMS 18.1 hero kit-issue row; the heirloom-versus-F1-Due precedence; CH 4.9's "fixed per class" wording (MAIN 4.7 read only); creation warnings when a stat rearrangement Strains a kit item.
+- **Seams fixed independently of the four questions:** coin "about 15" becomes exactly 15 (the camp-1 margin is 0); the Herald's set B becomes 1 javelin; the missing ITEMS 18.1 hero kit-issue row; the heirloom-versus-F1-Due precedence; CH 4.9's "fixed per class" wording (MAIN 4.7 read only); creation warnings when a stat rearrangement Strains a kit item.
 
-### 0.1 The lead's answers in plain words (lead's call; accepted by the client by proceeding; the client confirms them with this document)
+### 0.1 The lead's answers in plain words (lead's call; accepted by the client by proceeding; confirmed by the client on 2026-11-23)
 
 1. **Are the kits enough to get a player started? Yes. They already are, and they should not be made stronger** (told plainly). The brief says "until they get enough resources to keep going themselves". In this game that moment arrives *inside floor 1*:
    - the F1 Dream's Due replaces the kit's main hand within about 15 to 25 minutes *(illustr.)*;
@@ -366,7 +366,7 @@ Three judges scored each model 1–10 on fit with approved rules, balance, theme
 - **B** has the best flavour idea ("tonight's costume", "what was left in its pocket"). But about half of all class × Livery pairs, and every Shade pair, come out "dress only". It contests decided text and grows the parity matrix to about 90 arms.
 - **C** is honest balance (the carve is budget-neutral and seed-invariant). But only three legal doses exist, so most Haversacks are cosmetic behind a mechanical-looking choice. It also cuts found F1 sundries to 2–4 and contests CH-24.
 
-### 3.2 Model A with grafts (lead's call; accepted by the client by proceeding; the client confirms it with this document)
+### 3.2 Model A with grafts (lead's call; accepted by the client by proceeding; confirmed by the client on 2026-11-23)
 
 **Model A as the frame**, with these grafts:
 
@@ -774,7 +774,7 @@ Every hero kit and every variant spends exactly this:
   - Arcanist "Bramble" (staff / sickle + dagger): a strict superset of the default, so `KitNoDominance` rejects it.
   - Herald "Bell-ringer" and "Crier": renamed. "Bell" head words are banned by RS 7.x line 1558, and "Crier" has 85 hits.
   - Vanguard "Long Arm" (pike / flail + shield): held for M4.
-- **Hand crossbow** loading and two-light legality: to be confirmed by the W owner (request; W 11.1 and 11.3 already allow it, W 11.3 naming "an off-hand launcher (the hand crossbow)"); fallback in 14.2 **(corrected after the check)**.
+- **Hand crossbow** loading and two-light legality: asked of the W owner (request, pending; W 11.1 and 11.3 already allow it, W 11.3 naming "an off-hand launcher (the hand crossbow)"); fallback in 14.2 **(corrected after the check)**.
 
 ### 5.4 Display surfaces, sample text
 
@@ -1052,9 +1052,9 @@ Every display field is tagged `display` and sits outside `manifestHash`. Content
 
 ## 13. Changes to approved documents
 
-To be applied when the client approves this document. **This document edits no parent document itself**; the rows are applied by the owners of the sections they touch **(lead's call)**, and rows owed by other owners are listed again in 17. Every row names the exact sections it touches. Rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ in the "Flag" column; as in the LE, IR, EV, BR, XI, SV and CH precedents, the Flag column also marks rows that only *read* such text without changing it, so that every touch of it is visible **(new lead's call:** read flags added to SK-2, SK-3, SK-5, SK-7, SK-9, SK-10, SK-12, SK-16 and SK-17, which the proposal's register did not flag**)**. **The client's approval of this document covers the flagged rows** (with Q1–Q4 where a row names one). Told-plainly rows were told in 14.1 (after the check, 14.3). Rows marked "request" are requests to other owners, recorded as pending requests; they change nothing until their owner rules, and 14.2 names each fallback. M3, M4 and Later rows are recorded as applied text marked with their wave and take effect at that wave.
+Applied on 2026-11-23, when the client approved this document. **This document edits no parent document itself**; the rows are applied by the owners of the sections they touch **(lead's call)**, and rows owed by other owners are listed again in 17. Every row names the exact sections it touches. Rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ in the "Flag" column; as in the LE, IR, EV, BR, XI, SV and CH precedents, the Flag column also marks rows that only *read* such text without changing it, so that every touch of it is visible **(new lead's call:** read flags added to SK-2, SK-3, SK-5, SK-7, SK-9, SK-10, SK-12, SK-16 and SK-17, which the proposal's register did not flag**)**. **The client's approval of 2026-11-23 covers the flagged rows** (with Q1–Q4 where a row names one). Told-plainly rows were told in 14.1 and, for those found in the check, 14.3, and confirmed by the client on 2026-11-23. Rows marked "request" are requests to other owners, recorded as pending requests; they change nothing until their owner rules, and 14.2 names each fallback. M3, M4 and Later rows are recorded now as applied text marked with their wave and take effect at that wave.
 
-**Readings recorded inside this design (no approved text changes; each owner confirms its own reading):**
+**Readings recorded inside this design (no approved text changes; recorded as readings, approved by the client with this document on 2026-11-23; each owner confirms its own reading):**
 - Hero kit instances carry no `boundToUnitId` and sell at the Sell rate (ITEMS 10.6, 18.1; agreed, Q4).
 - LE 6.6's "sold or dropped at this camp count as still dealt" covers sold kit pieces (LE and DH owners; pending DH as LE states).
 - VG 7.10's "on-hit, payable line in each set" is a Vanguard requirement, not a rule for every kit (VG owner; F10).
@@ -1087,7 +1087,9 @@ The options the client rejected (Q1-B and C, Q2-B and C, Q3-B, Q4-B) are not reg
 
 ## 14. Open items for the client
 
-**The client's approval of this document as a whole.** It covers the lead's answers of 0.1 and Model A with its grafts (which the client accepted by proceeding); every lead's call, including the new lead's calls in 14.1 and the lead's calls after the check in 14.3; the told-plainly items of 14.1 and 14.3; the readings recorded in 13; and the flagged rows of 13. The four questions raised before writing were answered on 2026-11-23 **(agreed)**, each with the recommended option (A); the client also said everything else in the proposal stands as written. Writing raised **no new client question**: every new lead's call in 14.1 sits inside the four answers, corrects the proposal's own text against an approved rule, or is flagged against the text it touches in 13. The design check raised none either (14.3). The future items in 14.2 come back only if a report, an owner's refusal, a wave or a later design triggers them; the naming pass remains a future item.
+None. Approved by the client on 2026-11-23.
+
+The client approved this document as a whole on 2026-11-23, including the lead's answers of 0.1 and Model A with its grafts (which the client had accepted by proceeding); every lead's call (the lead's calls of the answered proposal, the new lead's calls in 14.1 and the 26 lead's calls after the check in 14.3); the told-plainly items (those in 14.1 and "Told plainly after the check" T1–T12 in 14.3, all as written); and the readings recorded in 13; and its approval covers the flagged rows of 13. The four questions raised before writing were answered on 2026-11-23 **(agreed)**, each with the recommended option (A); the client also said everything else in the proposal stands as written. Writing raised **no new client question**: every new lead's call in 14.1 sits inside the four answers, corrects the proposal's own text against an approved rule, or is flagged against the text it touches in 13. The design check raised none either (14.3). The future items in 14.2, which come back only if a report, an owner's refusal, a wave or a later design triggers them (including the owner-refusal fallbacks and the report-triggered items), and the naming pass remain future items.
 
 ### 14.1 This document
 
@@ -1097,9 +1099,9 @@ The options the client rejected (Q1-B and C, Q2-B and C, Q3-B, Q4-B) are not reg
 - **Q3, Oddments (SK-6):** option A, ship in M2 with 6 per kit; the codex Oddments page in M3. Rejected: B, everything in M3.
 - **Q4, hero kit gear (4.3):** option A, stays sellable (the approved asymmetry); report `KitSoldAtCamp1`. Rejected: B, 0 Sell through `kitIssue` (held as a lever).
 
-**The lead's answers (0.1) and Model A with its grafts (3.2)** were accepted by the client by proceeding; the client confirms them with this document, including every told-plainly item below.
+**The lead's answers (0.1) and Model A with its grafts (3.2)** were accepted by the client by proceeding and confirmed by the client on 2026-11-23, with this document, including every told-plainly item below.
 
-**Told plainly (the client confirms them with this document):**
+**Told plainly (confirmed by the client on 2026-11-23, with this document):**
 1. Kits are not made stronger: no extra potions, no kit trinket, no non-mundane item, no extra coin, no free dose (0.1 item 1).
 2. The client's sword example is contested: the given name goes on the piece the F1 Due cannot replace, because the sword is usually replaced within 15 to 25 minutes (0.1 item 4; agreed, Q2). After the check, that piece is the shield where the kit has one, otherwise the armour (14.3, T1).
 3. Class-free background kits, Liveries (Model B) and Haversacks (Model C) are rejected; the background perk survives as a boon with its own Oddment pool (0.1 item 2, 3).
@@ -1116,7 +1118,7 @@ The options the client rejected (Q1-B and C, Q2-B and C, Q3-B, Q4-B) are not reg
 14. SK-16 (shared seeds and variant boons) is undecided and goes to the SV owner (4.7).
 15. The research is partly from recall and must be checked before any claim is quoted (1; Appendix B).
 
-**New lead's calls (made while writing; the client confirms them with this document):**
+**New lead's calls (made while writing; confirmed by the client on 2026-11-23, with this document):**
 1. **The verb-per-set rule (F10).** V21 (d) checks a usable weapon or focus verb in each set, and an on-hit verb only where a class feature reads it (the Vanguard's Practised Hand). The proposal's "an on-hit verb in each set" would fail the approved Arcanist (Parry) and Launcher (Aim) kits (4.2, 9.2). *Corrected after the check:* Nick does nothing on the Arcanist's lone set-B dagger; that set is exempt as a declared fallback (14.3 item 7).
 2. **The survivor-piece slot (F11).** *Superseded after the check (14.3 item 1):* the writing-time reading "not the set-A main hand" did not hold; the named piece is the shield, else the armour. Kept from writing: the check applies to hero kits and variants; companion kits are exempt (4.5.1).
 3. **The Arcanist variants name their leather (F11).** Farcaster's and Bookhand's proposed named staff is a focus, which the survivor rule forbids; they have no shield, so the leather is named. *After the check* this is simply the general rule (14.3 item 1), and their set B is now a sling (14.3 item 10) (5.3).
@@ -1134,7 +1136,7 @@ The options the client rejected (Q1-B and C, Q2-B and C, Q3-B, Q4-B) are not reg
 
 ### 14.2 Future items triggered by reports, owners or later designs
 
-Each fallback is a lead's call (the client confirms it with this document) unless marked.
+These come back to the client only if a report, an owner's refusal, a wave or a later design triggers them; each fallback is a lead's call (confirmed by the client on 2026-11-23, with this document) unless marked.
 
 | Item | Trigger | What happens | Owner / approval |
 |---|---|---|---|
@@ -1160,7 +1162,7 @@ Each fallback is a lead's call (the client confirms it with this document) unles
 
 The design check (builder, consistency, balance and narrative-art lenses) found that the named piece for half the kits could be replaced by the F1 Due, that kit issue would have filled the pack, that the display data sat on the Core instance, and a set of gaps in which this design broke its own rules. Every fix below sits inside the four agreed answers and the proposal the client confirmed; **none overrides a client decision**: kits are not made stronger, the given name goes on the piece the F1 Due cannot replace (Q2), Oddments ship in M2 with 6 per kit (Q3), and hero kit gear stays sellable at the Sell rate (Q4). The check raised **no client question**.
 
-**Lead's calls after the check (the client confirms them with this document):**
+**Lead's calls after the check (confirmed by the client on 2026-11-23, with this document):**
 1. **The named piece is the shield where the kit has one, otherwise the armour.** The F1 Due is dealt by slot, never by weapon set, and is always a weapon or focus, so only shields and armour are out of its reach (LE 6.6). The Shade (both picks), the Arcanist, the Herald Totem, Close Shot and Throwhand now name their armour: placeholders Grey Lacing (the Shade's shared leather), Felt Elbows, Copper Links. Thin Edge, String Cutter and Straight Shaft are retired and their pieces get kit lines. `KitNamedPieceNotF1Target` is computed over the F1 deck (4.5.1, 5.1, 5.3; V21 (j)).
 2. **Kit issue defined:** straight to the `KitRecord` slots at WO1, before F1 generation; a fixed creation order; 2 potion instances in one stack; `origin = {kit, floor 0}`, `everHeld = true`; kit coin as `CoinChanged{source: kit}`; `KitIssueStable` (4.1, 7; SK-3).
 3. **One hero-kit predicate,** `origin.channel == kit && boundToUnitId == null`, for every instance issued from a `KitRecord` (variants and Old Friend included); the chip, the reports and the Arcanist pack-pressure option use it (4.1).
@@ -1188,7 +1190,7 @@ The design check (builder, consistency, balance and narrative-art lenses) found 
 25. **Corrections:** F3 and SK-8 limited to CH 4.9 (MAIN 4.7 read only); W 9.4 → W 9.3; the d8 DPR rows; the EHP figures; the hand crossbow "to be confirmed"; Thin Edge's W 18.2 "Edge" flag noted on retirement; the volume, trim, icon, card and plate counts; the six fire-prop wrap families with a required `firePropId` (2.3, 5.3, 6, 8.2, 8.3, 8.8, 13, A.2).
 26. **Register and bookkeeping:** SK-2, SK-3, SK-5, SK-6, SK-7, SK-8, SK-9, SK-12 and SK-16 restated; 11 and 17 regenerated from 13; a 14.2 row for the SV sidecars; new names checked (A.2).
 
-**Told plainly after the check** (none overrides a client answer; the client confirms them with this document):
+**Told plainly after the check** (none overrides a client answer; confirmed by the client on 2026-11-23, all as written):
 - **T1.** **Half the draft's named pieces did not meet Q2.** The F1 Due could replace the Shade's sabre, the Arcanist's dagger and the Herald Totem's javelin. Those kits now name their armour, so Q2's "the piece the F1 Due cannot replace" is true by rule. Armour usually lasts to the F2 or F3 Due, so those names may leave sooner than a shield's.
 - **T2.** **Farcaster and Bookhand were stronger than the default Arcanist kit,** because the set a hero opens with is never a cost (sets swap free outside combat). They now give up the staff, and with it Parry and Steady Casting, for a sling. They may fail the risk band and be cut.
 - **T3.** **The approved Arcanist's set-B dagger has no working verb:** Nick needs an off hand. The kit is unchanged; that set is exempt as the class's declared fallback.

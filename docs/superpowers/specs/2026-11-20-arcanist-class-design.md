@@ -319,7 +319,7 @@ client said stand and confirmed with the document on 2026-11-20.
 | 11 | Hero defaults | **Cast-option defaults** (`castDefaults`): visible, shown ticked, the player can untick them; static predicates; the last-slot confirmation; the pip glint (7.14; ARC-6, ARC-13) **(lead's call; told plainly as a reading of agreed 11.3, accepted with Q1)** | A hero coach (reverses agreed 11.3; not proposed) |
 | 12 | Level-3 default | **Alembic** in `pairDefaults` until the per-subclass rows land (9.1); a creation default for players, which does not move the unweighted class-mean rows (5.4) **(lead's call)** | Binder as default now (novice 69–72% against 81–82% *(illustr.)*) |
 | 13 | Reading | **Three rows:** at-wills; spellbook (all tiers + Overchannel); Weft. Glints count 0 **(lead's call)** | Knit on its own row (kept as the stage-1 lever, never with an offer row) |
-| 14 | Starting kit | Leather, staff, dagger, 2 potions; no creation kit choice (7.11) **(lead's call)** | A kit pick beside the pair (a second level-1 decision) |
+| 14 | Starting kit | Leather, staff, dagger, 2 potions, exactly 15 coin (SK-1); no creation kit choice (7.11; starting kits design 5.1) **(lead's call)** | A kit pick beside the pair (a second level-1 decision) |
 
 ### 4.1 How other games handle casters
 
@@ -1064,9 +1064,15 @@ generalised).**
   concentration checks), the Parry verb (pool-free +2 against melee,
   step 1), 1d6 / v1d8 bludgeoning.
 - **Set B: dagger** (thrown, piercing fallback).
-- **Belt:** 2 healing potions **(settled)**. About 15 coin.
+- **Belt:** 2 healing potions **(settled)**. **Exactly 15 coin**
+  (`kit.coinStart`; starting kits design 4.2, SK-1, M1).
 - No creation kit choice (the pair is the level-1 pick). Orb, rod and
   tome are loot or vendor items. The rod's verb now has a target (Gust).
+- The kit's record and issue, its named piece (the leather), kit lines,
+  Oddment pool, `kit.acFloor`, the set-B dagger as the declared
+  fallback-only set, the pack-pressure option and the gated M3 variants
+  are set by the starting kits design (4.1, 4.2, 4.6, 5.1, 5.3; approved
+  2026-11-23).
 
 ### 7.12 Caster AC (armour 11 item 2 reading)
 
@@ -1194,7 +1200,9 @@ data) **(lead's call)**:
 Creation warnings: below Dex +2 ("AC 13 or less: much more likely to die
 on floor 1") and below Con +1 ("concentration and HP thin") **(lead's
 call; the Dex wording new lead's call)**. Warnings never block; the
-starter rule (7.7) is a rule, not a warning.
+starter rule (7.7) is a rule, not a warning. **M2:** the kit warnings
+extend these: a kit item Strained, or AC below the kit's `kit.acFloor`,
+in one line, never blocking (starting kits design 4.6, SK-9).
 
 ### 7.15 `effectKinds` for the registry
 
@@ -2657,9 +2665,10 @@ names feed; `SeedHasTarget` (classes owner) is executed in V12g
 - Every *(illustr.)* value: pool sizes inside the shape of 7.10, Mote
   dice inside the parity rows, spell dice and areas inside
   `SpellTierBound`, `drawWeight`, the arc band, lane weights and
-  `offerLaneAdjust`, trigger ids, the starting coin, the
+  `offerLaneAdjust`, trigger ids, the
   `SkillExpressionReport` targets other than the agreed 8-point novice
-  threshold, report thresholds and lever sizes.
+  threshold, report thresholds and lever sizes. The starting coin is no
+  longer tuning: exactly 15 (starting kits design 4.2; change SK-1).
 - Level-up card, glint, pip, tray, preview-line and tooltip layout.
 - Wording of option, spell and trigger texts within the rules here,
   until the naming pass.
@@ -2813,6 +2822,12 @@ may raise it to two" in ability 6.5 finds the Arcanist exclusion.
   design (`2026-11-20-companions-design.md`, approved 2026-11-20): the
   Tinker and Hedgemage kits carry no Overchannel or Arts (8.3);
   scorer-chosen beam order and Prime's solo clause read as in its 8.6.
+- **Starting kits:** answered by the starting kits design
+  (`2026-11-23-starting-kits-design.md`, segment 14, approved
+  2026-11-23); the kit hooks (7.11, 7.14, row 14) are taken up: SK-1
+  coin exactly 15 (M1); SK-9 creation warnings (M2); the Arcanist
+  variants (Farcaster, Bookhand) are M3 boon options, gated on the
+  weapons owner's mundane orb and tome bases, else M4.
 - **The simulator:** the four arms, parity, nova, spread, camp share,
   sustain sensitivity. The arms become the `Skill` axis of the seeds
   and validation design (6.2; **pending request SV-22**, 5.4).

@@ -828,6 +828,7 @@ Inspect cards never queue. On a profile's first two runs, a one-line ribbon "Mor
 - **Audio:** no new gameplay cue; map, Waymark, travel and fact sounds use the global UI timbre (RC7); a travel stop is never a tick (the Dream tick is reserved).
 - **Progressive disclosure (change XI-21 ⚑; lead's call; M2):**
   - `uiMemory`, a display-only profile field outside the reproducibility key (flagged addition to MAIN 6.6, EV-19 precedent): one-line first-sight callouts per mark family.
+  - **Starting kits (starting kits SK-9 ⚑; settled; M2; M3 where marked):** on run 1 the class card shows the simplified **kit strip** (kit silhouette, role word, AC and the hand-off line; Shade and Herald show two strips with the default pre-selected; verbs, coin, supply, the given name and the Oddment line on inspect); from run 2 `uiMemory` shows the full strip (set icons with their verb text, never icon-only; armour and AC; potions, coin and supply generated from data; the "Also carried" heading with the Oddment's name). The **Oddment callout** is one-time and non-modal, the first time the hero inspect is opened at camp 1, never at F1 entry and never part of this section's staged vocabulary. **Creation warnings** for a kit item Strained or AC below the pick's `kit.acFloor` are one line of shape plus text, never hue, and never block. **M3:** the variant pick-order line on the Heirloom shelf and creation card. Text chips and labels, alt text, glyph and pattern, controller parity, whole-string keys; Inspect parity and `NoHoverOnly` apply (starting kits design 4.4, 4.6, 5.4).
   - **Staged by floor:** on a profile's first run, F1 shows Seen, Remembered, Chalked, Afterimages, Listen bubbles and loose-end marks on the map by default; the hearing outline first appears with the first shut-door prompt (as the prompt, never as a standing layer); patrol lines with the first known Circuit, on F1 the settled Scavenger Circuit (the cowable-group lesson); told and projected pips when a fact or Stir first appears. One information layer at a time, per 4.9.4 (aligned after the check). Every layer stays available by toggle and Inspect, so content is unchanged (IP9).
   - Density setting **Guided / Regular / Compact** moves items between always-on and hover only ("Regular" renamed after the check from "Standard", ENM's rank and TL's device grade).
   - **Veterans:** compact density, remembered layer toggles, Next loose end on by default.
@@ -862,6 +863,7 @@ Inspect cards never queue. On a profile's first two runs, a one-line ribbon "Mor
   - **Pending request (segments 11–12; SV-22; M2):** walker equivalences, for example whether `XI.Completionist` equals `FL.Hunt` plus optional fights, are an owner question for the XI, FL and EV owners, not a silent mapping. Not a rule until they rule; if they do not, there is no mapping and each gate reads its own owner's arm (seeds and validation design 6.2, 14.2).
 - **Camp:** the Tithe Bowl (Lodestring or Surveyor's Sketch); the conditional Ear Trumpet stock row (agreed, Q3); the next-floor card unchanged (RS 6.9); the Lore roster preview (RS, M3); the previous floor's Atlas page on the dream track (M3).
 - **Hub and profile:** `uiMemory`; codex hosting (RS owns, segment 10 hosts, EV-37); the Floor Atlas in the run record (M3).
+- **Answered** by the starting kits design (segment 14, approved 2026-11-23; its 4.6, 11, 13): the kit strip, the Oddment callout and the creation warnings under `uiMemory` (SK-9 ⚑, applied in 4.10; M2); codex hosting includes the Oddments page (RS owns, segment 10 hosts, with camp and hub design 4.15.8; M2).
 - **Answered** by the camp and hub design (segment 13, approved 2026-11-23; its 2.2, 4.3, 5.2, 11): the Tithe Bowl at the Keeper's Cart, camps 1–4, the Sketch only at camp 4, shown greyed with its reason while a Wax Key is held until the LE owner rules on 4.6.3's request (M3); the Ear Trumpet row in the vendor panel (M3, conditional); the next-floor card trimmed and unchanged at the door station, with the Lore roster preview in its detail tier and the previous floor's Atlas page pinned to the dream-track ribbon above the door (M3); camp chalk is pictorial, never this document's chalk grammar (its 4.7); `uiMemory` stages the hub stations and the ambient first-focus tooltip (its 4.12); codex hosting includes the "Residents of the Hollows" pages (M3; its 4.15.8); the Floor Atlas and fatal-room map in the Book of Nights and the recap (M3); the camp input rows in 4.10 (camp and hub CH-22 ⚑).
 
 ---
@@ -1250,6 +1252,7 @@ The FL 11.4 walker (lean = gate arm, balanced, completionist) plus a human-sessi
 | **Main design owner** | MAIN 6.6: the UI annex (XI-7), `uiMemory` (XI-21), the continuous suspend slot (XI-28); MAIN 4.3 reading (XI-2) |
 | **Segments 11–12** | 4.13 (answered: seeds and validation design 11) |
 | **Camp and hub** | 4.13 (answered: camp and hub design 11; CH-22 applied in 4.10) |
+| **Starting kits** | 4.13 (answered: starting kits design 11; SK-9 applied in 4.10) |
 
 **Hook answers:**
 
@@ -1580,6 +1583,7 @@ The owed rows are the single list in 13; by owner:
 - **The main design owner:** XI-2 (MAIN 4.3 reading), XI-7 (UI annex), XI-21 (`uiMemory`), XI-28 (the continuous suspend slot).
 - **Segments 11 and 12 (seeds, validation, saves):** 4.13; V18 (XI-30); the suspend slot's write, load and precedence mechanics. **Designed:** the seeds and validation design (approved 2026-11-23; its 4.8, 5.2, 6, 11); pending there: walker equivalences (4.13).
 - **Camp and hub (segment 13):** 4.13. **Designed:** the camp and hub design (approved 2026-11-23; its 11); its CH-22 is applied in 4.10.
+- **Starting kits (segment 14):** 4.10, 4.13. **Designed:** the starting kits design (approved 2026-11-23; its 11, 17); its SK-9 is applied in 4.10; codex hosting of the Oddments page.
 - **The simulator:** every report of 9.3 and every arm of 9.4.
 - **Art, audio and writing:** 4.2, 5, 6.
 - **Naming pass:** every placeholder name here.

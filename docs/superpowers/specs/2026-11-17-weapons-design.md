@@ -2107,7 +2107,7 @@ The build fails when:
   the items design.
 - Notable names beyond 18.6, skins and models.
 - Which families each class and companion is trained in, and starting
-  kits (items design 17, row 3).
+  kits (items design 17, row 3; now set in the starting kits design 5).
 - Preview icons and overlay art within 7.2 rule 7.
 - **Not tuning:** switching Precision on (6.5, the lead's gate), switching
   to D-c (11.3, the lead's call on playtest evidence), and anything that
@@ -2200,8 +2200,18 @@ left as they are (7.2 rule 9).
 - **Consumables:** consumables, scrolls and wands are settled in the
   consumables design (2026-11-17); coatings and Coated stay Later (W-11)
   **(change CN-26)**.
-- **Starting kits:** weapon sets per class and companion (items design 17,
-  row 3).
+- **Starting kits:** designed in `2026-11-23-starting-kits-design.md`:
+  weapon sets per class and companion (items design 17, row 3; starting
+  kits design 5.1, 5.2), the M3 kit variants drawn from the 17 families
+  (starting kits design 5.3) and V21 `StartingKits` (d) legality under
+  11.1 (starting kits design 9.2). Two requests to this document are
+  pending (starting kits design 11, 14.2; M3):
+  - **Hand crossbow:** confirm its loading and two-light legality
+    (11.1, 11.3 already allow it). Fallback: Close Shot's set A becomes
+    the hand crossbow alone, with `KitNoDominance` re-run.
+  - **Mundane orb and tome bases:** confirm mundane orb and tome base
+    records (17.8). Fallback: the Farcaster and Bookhand variants move
+    to M4.
 - **Companions:** designed in `2026-11-20-companions-design.md`: weapon
   training per kit and the eight M2 kits drawn from these families
   (companions design 8.3); the D-c fallback stays tied to the M2

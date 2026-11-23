@@ -1108,12 +1108,16 @@ are allowed, because they carry no `damage.*` kind.
 - **Set A (active):** warhammer (1d8 B, versatile, Push) + shield (+2;
   bash 1d4 B Push). AC 18.
 - **Set B:** greataxe (1d12 S, two-handed, heavy, Cleave). AC 16.
-- **Belt:** 2 healing potions **(settled, DH 12.4)**. **Coin:** about 15.
+- **Belt:** 2 healing potions **(settled, DH 12.4)**. **Coin:** exactly
+  15 (`kit.coinStart`; DH 21.5 and loot economy 6.4 item 4 depend on
+  it; starting kits design 4.2) **(change SK-1; M1)**.
 - **Why:**
   - two physical types;
   - an on-hit, payable line in each set (Push, Cleave geometry), so
     Practised Hand fires on hits in either set (42–53% signature share
-    at level 3, M1);
+    at level 3, M1). This is a Vanguard requirement, read by Practised
+    Hand, not a rule for every kit (a reading recorded in the starting
+    kits design 2.3 F10, 4.2 and 13);
   - it narrows the floor-1 spread: warhammer + shield is the kit that
     dies most, 15.1% at level 2 (10.3).
 - **What the kit does not do for the M2 Weaponmaster (stated plainly,
@@ -1133,8 +1137,31 @@ are allowed, because they carry no `damage.*` kind.
   - The M2 signature-share figure for Borrowed Form is owed for the set
     the player fights in (shield set with a borrowable spare, and
     greataxe active), not assumed from the M1 figure (13.3).
+  - **M3:** this single suggestion is replaced by
+    `KitRecord.level3SpareHintKey`, per kit and per kit variant, with its
+    families stored as structured ids (`level3SpareHintFamilies[]`); it
+    never names a family already in the kit, so a Swordhand player is
+    never told to find a sabre. The default kit's hint stays a sabre or
+    a sickle (starting kits design 4.4, 5.1) **(change SK-7; M3)**.
 - **No kit presets at creation.** A second level-1 pick would break "one
-  choice per level" (classes 7.4; ability 10.3).
+  choice per level" (classes 7.4; ability 10.3). Kit variants (Swordhand,
+  Maulhand) ship only as starting-boon options, each a re-dressed
+  mundane kit bundled with one skill training never among this class's
+  creation default skills (7.14) (starting kits design 4.4, 5.3)
+  **(agreed 2026-11-23, starting kits Q1; change SK-7; M3)**.
+- **Creation warnings.** When the player rearranges the array so that a
+  kit item is Strained (the greataxe or the chain mail below Str +1) or
+  AC falls below the kit's `kit.acFloor` (16 *(illustr.)*), the creation
+  card says so in one line, for example "Greataxe: Strained at Str −1.
+  Its verb is off."; it never blocks and never swaps gear;
+  `Floor1ClassSpread` adds a worst-legal-rearrangement arm, reported
+  outside the mean (starting kits design 4.6) **(change SK-9; M2; this
+  owner informed)**.
+- **Display layers** (no rules effect, outside the seed key): the shield
+  is the kit's named piece (given name placeholder "Nine Rivets"), the
+  other pieces carry kit lines, and the hero carries an Oddment from the
+  Vanguard pool (starting kits design 4.5, 5.1) **(agreed 2026-11-23,
+  starting kits Q2, Q3; changes SK-5, SK-6; M2)**.
 
 ### 7.11 Offers, lanes and `triggerMenu`
 
@@ -2081,7 +2108,8 @@ Momentum agreed, Q2)**
   and the stand).
 - Weaponmaster level 3: Practised Hand on on-hit and Set-hit payable
   lines.
-- Kit: chain mail; warhammer + shield / greataxe; 2 potions.
+- Kit: chain mail; warhammer + shield / greataxe; 2 potions; coin
+  exactly 15 (change SK-1).
 - Engine and data, with no new rules text beyond the above:
   - option records with `ranks[]` (rank I);
   - payable tags;
@@ -2303,8 +2331,9 @@ that registry, and this document calls the check rather than owning it.
   collision band's values inside `HewCeiling`, `collisionRate`, the Art
   and Stand Fast utility weight (10.4), `CampOptionBound`'s permille
   and reference encounter, the Momentum scorer term and conversion
-  rates, lane weights and `offerLaneAdjust`, trigger ids, the starting
-  coin, the report thresholds.
+  rates, lane weights and `offerLaneAdjust`, trigger ids, the report
+  thresholds. The starting coin is no longer tuning: exactly 15
+  (starting kits design 4.2; change SK-1).
 - Level-up card, picker, glint, badge and camp-screen layout.
 - Wording of option and Art texts within the rules here, until the
   naming pass.
@@ -2414,8 +2443,15 @@ hit" in conditions 10.1 shows the VG-8 sum.
   (segment 13, approved 2026-11-23; its 2.2 row 6 and 4.3): the Bedrolls
   party view at camp carries the re-pick, its Guarding warning and the
   Shieldwall suggestion, beside equip (M2); no change to this document
-  is owed. The level-3 spare-weapon suggestion is not named there and
-  stays open for the camp screen's owner.
+  is owed. The level-3 spare-weapon suggestion is not named there; it is
+  **taken up** by the starting kits design (segment 14, approved
+  2026-11-23; its 4.4 and 11) as the per-kit `level3SpareHintKey`
+  (7.10; change SK-7; M3).
+- **Starting kits:** **Answered** by the starting kits design (segment
+  14, approved 2026-11-23; its 4, 5.1, 11 and 13): the kit's gear is
+  unchanged; coin exactly 15 (SK-1, M1); the level-3 hint per kit
+  (SK-7, M3); creation warnings (SK-9, M2); the reading of 7.10's
+  on-hit line (F10). Applied in 7.10.
 - **Naming pass:** every placeholder name here, Hold the Line included.
   Upend (8.3) collided with the boss rooms design's boss state
   "Upended": BR's state is renamed **Sprawled** after a whole-word grep
