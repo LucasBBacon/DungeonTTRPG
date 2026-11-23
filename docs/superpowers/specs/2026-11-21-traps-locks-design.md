@@ -1675,7 +1675,10 @@ G2). The merge rules are **new lead's calls**:
 - **Stable for the visit.** Hiring a Mechanics companion at that Muster
   does not withdraw the stocked key; the next camp reads the new party.
 - The camp notables slot (one Wax Key at most) is separate and
-  unchanged.
+  unchanged. *Reading (camp and hub design 7.1, 4.3; change CH-15; M2):*
+  a Wax Key drawn by the notables slot shows on the Notables panel as a
+  shop-only third entry, bought for coin and never the free reward
+  pick.
 - **The Ear Trumpet (agreed, Q3 of the exploration and information
   design; change XI-26; M3, conditional):** the basic vendor also
   stocks 1 Ear Trumpet (a Listen lane-gap counter, cap 1, 15 coin
@@ -2361,7 +2364,9 @@ distance and guard, and the boxed-lurker budget.
 - **Plates:** the Keybearer pip.
 - **Camp:** the vendor's Wax Key line and the gap card's coverage-strip
   line (Q3; 6.11); at M3, if it ships, the vendor's Ear Trumpet row (no
-  coverage-strip line; XI-26; 6.11).
+  coverage-strip line; XI-26; 6.11). Placed at the Keeper's Cart, the
+  notables-slot key on its Notables panel (camp and hub design 4.3, 7.1;
+  CH-15).
 - **Codex pages:**
   - "Natives know their floor; the house trusts its traps until one
     bites";
@@ -3311,7 +3316,7 @@ catalogue.
 | **7 Loot** | Container kinds; `lockable` sockets; +1 rarity step behind consequence locks and in Wagers; graded cages; Wax Key draws; boxed-lurker drops. **Filled in part by the loot economy design (6.9, 6.4 item 9; changes LE-10, LE-11, LE-12, LE-20):** the one step rule and socket ranks, the two identities of a consequence cache, the K2 / K2b pegs, the cage set and boxed-lurker contents (6.11, 6.13–6.15 here). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 5, 11):** container hosts and kinds (inset hosts, LP-12; the twin-lid mark, LP-26, M3; the Ebb, LP-34, M4), auto-close and Glean (LP-8, LP-9), offer pacing (LP-30, M3) and the Windfall's sole exception to "contents never destroyed" (LP-2, M3); LP-17 to LP-20 are pending requests |
 | **8 Events** | Readings; Riddle-lock clues; Hour locks on Landmark ticks; Dream Fragments read the threshold rule. **Taken up by the events design (segment 8, approved 2026-11-22; its 4.9, 4.13):** Readings accepted (TL-34; EV-30; M3); each Riddle lock (Hymn, Index, Place-Setting, Story) gets a guaranteed, check-free clue host (a wall Glimpse or clue prop), placed by EventPlace whenever the lock exists on the floor and never a Curiosity option (M3); Hour locks on Landmark ticks stay with TL and HZ, and segment 8 places no Landmark (EV-35); Dream Fragments fold into F-BOSS options on Lore thresholds (EV-29; M3); Curiosity checks follow 6.1 and 6.2 (EV-4, EV-5); the priced lock route (6.11; EV-15); the shared FactLedger (6.11; EV-8) |
 | **9 Boss arenas** | No guaranteed boss-room traps; arena devices use the TrapRecord format (the Supper chandelier); Clearways stay clear; the Bossgate never opens by Wax Key or Unbolting. **Taken up by the boss rooms design (segment 9, approved 2026-11-22; its 4.7.1, 6, 11; change BR-16; M2, the Den's Device M1):** one Device per boss (F5: plus the Heavy Thing), each a segment-9 TrapRecord instance of kind `arenaDevice` in TL-40 format for data and preview only; *pending reading for 6.20 (TL owner confirms):* an `arenaDevice` is not a trap (no trigger plate, no hiding, no Botch, never armed by monsters); fallback: Devices are authored as segment-9 pieces with their own preview record, same rules; Device bodies obey RC2 and TL-43; no trap in the Sanctum; the Bossgate never by Wax Key **(settled)** |
-| **10 Information** | Every display in 6.23; Listen "a mechanism"; Lockside Listen; the codex pages; the camp's Wax Key line (Q3). **Taken up by the exploration and information design (segment 10, approved 2026-11-23; its 4.1, 4.2, 4.8.2, 4.9.8, 5):** trap grades held in `PartyKnowledge` and drawn exact while Remembered (XI-1, XI-5); the Easy Plain auto-pick and auto-Probe read known patrols only and stand down when their hearing reach crosses a never-Seen square (XI-6; agreed, Q4; M2); TL cards and prompts in the card queue (XI-19; M2); the Ear Trumpet in the basic-vendor row (XI-26; agreed, Q3; M3, conditional); no trap total kept (XI-32) |
+| **10 Information** | Every display in 6.23; Listen "a mechanism"; Lockside Listen; the codex pages; the camp's Wax Key line (Q3). **Taken up by the exploration and information design (segment 10, approved 2026-11-23; its 4.1, 4.2, 4.8.2, 4.9.8, 5):** trap grades held in `PartyKnowledge` and drawn exact while Remembered (XI-1, XI-5); the Easy Plain auto-pick and auto-Probe read known patrols only and stand down when their hearing reach crosses a never-Seen square (XI-6; agreed, Q4; M2); TL cards and prompts in the card queue (XI-19; M2); the Ear Trumpet in the basic-vendor row (XI-26; agreed, Q3; M3, conditional); no trap total kept (XI-32). **Taken up by the camp and hub design (segment 13, approved 2026-11-23; its 2.2, 4.3, 7.1):** the camp's Wax Key row with its reason line and the gap card's coverage-strip line at the Keeper's Cart (M2); the Ear Trumpet row there (M3, conditional); the 6.11 notables-slot Wax Key as a shop-only third entry on the Notables panel (CH-15, read; M2); the TL codex pages in the Library station (M3) |
 | **11–12 Seeds and validation** | The streams, V11, `trapDigest`, save fields, the reports, `FloorTimeByTheme` with segment-5 rows. **Taken up by the seeds and validation design (segments 11–12, approved 2026-11-23; its 4.3, 5.2, 6.10):** the `traps` and `trapsResolve` keys under the floor's `attempt/{a}` node, with keyed `retry1` children in place of "seed + 1" (SV-4; M1); `checks` attempt-invariant under the floor key, its form kept, its domains `h:object` and `h:save` (SV-6); the builders' salt withdrawn (SV-7); V11's phases, V11g1 at AP1 and V11g2 at AP2, on the one LR0–LR5 ladder (SV-10, SV-20); `trapDigest` and the save fields in the run save beside the stored `FloorStatic` (SV-14, read); the reports' budgets and classes, `RoundsPerFightDelta{TL}` and `FloorTimeByTheme{arm, feature}` (SV-11, SV-24, SV-25); the arms `TL.Baseline` and `TL.NoTraps` (SV-22). *Pending request:* the `traps` and `trapsResolve` count formulas (11.2; M1) |
 
 ---

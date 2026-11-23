@@ -1647,6 +1647,11 @@ spends them, brought to the client as its own proposal.
 - **When:** after the first M2 playtest data on those reports, and before
   any Later charm entry is approved. Until then the M2 charm roster in
   13.7 stands.
+- **Camp and hub (segment 13; hook taken up; informed, change CH-24;
+  M3/Later):** charms get no hub surface; this pass may later propose a
+  charm boon type, offered only under the main design's one-boon rule
+  (main design 4.7), never as a starting-kit peg (camp and hub design
+  2.2 hook 32, 4.9).
 
 ### 24.3 Future items triggered by reports
 

@@ -1022,6 +1022,10 @@ returns. Not on at launch: the floor-1 boss needs 3–5 heals (5.8).
   unchanged. Overflow follows items 5.3 and 9.
 - **HE-5 Camp top-up.** `campHeroPotionTopUp` 1 (13.2).
 - **HE-6 Healing floor.** A build check (21.3).
+  *Change CH-16 (M2; camp and hub design 7.2):* vendor potion stock is
+  keyed to floor N's party count at generation (2/2/3/3 for parties of
+  1–4 *(illustr.)*), drawn as `max(table)` entries and trimmed in Core;
+  like all vendor stock, it is not counted in the HE-6 floor (21.3).
   *Pending request (change HZ-30; M3; the DH owner rules):* how the
   Forbidden Course's environment heal is counted in the floor's healing
   supply (`HealSupplyPerFloor`, as the hazards design names it; 7.8).
@@ -1161,6 +1165,14 @@ strongest guarantee. In order:
 
 Recruits arrive with full HP and pools and a kit holding 1 potion.
 
+*Reading (change CH-1; M2; the DH owner confirms; camp and hub design
+4.2):* the order is unchanged and is presented as **Arrival** (get-up,
+the catch-up picks, then one rest summary), **the Hollow** (Muster,
+vendor, shop or reward, in free order) and **Travel on**. Steps 2–5 and
+the next-floor card are one rest-summary command shown after the
+catch-up picks, because step 2 restores to the post-catch-up maxima; the
+hero's top-up (13.2) is shown in that rest summary.
+
 ### 13.2 The hero's potion top-up
 
 **(agreed, Q3, G5; mechanics new lead's call)**
@@ -1172,7 +1184,9 @@ Recruits arrive with full HP and pools and a kit holding 1 potion.
   healing potion (companions design 7.6; change CMP-21). If the hero
   holds one, nothing happens. Run again on leaving camp only if a
   dismissal there deleted a healing potion the hero held (a kit-bound
-  dose); it then moves a companion's dose first and issues only if no
+  dose; from M2 it runs inside that dismissal command, any forfeit named
+  on the dismissal's confirm, and Travel on only asserts it: timing
+  change CH-26, companions design 7.6, camp and hub design 4.2); it then moves a companion's dose first and issues only if no
   unit holds one. Selling, handing over or drinking potions at camp never
   triggers it (companions design 7.6) **(change CMP-22)**.
 - **If the hero holds none but a companion does,** camp moves one dose to
@@ -2503,6 +2517,11 @@ values; the phial's rarity, floor, channels, `offerChancePermille` and
   (`2026-11-23-seeds-validation-design.md`, 4.3, 4.11, 5.4, 5.5)
   **(change SV-4, SV-9, SV-10, SV-18)**.
 - **Camp and hub screens:** the top-up step and the floor-entry card.
+  Taken up by the camp and hub design
+  (`2026-11-23-camp-hub-design.md`, 2.2, 4.2, 6): the top-up is shown in
+  the Arrival rest summary; the floor-entry card is shown on entering
+  F(N+1) after Travel on, unchanged and owned by DH and RS **(change
+  CH-1)**.
 - **Experience:** keep hero level minus room level at 0 or above
   (under-levelled stealth heroes void the guards).
 - **Lead's checks before data:** every SRD shape in this document against

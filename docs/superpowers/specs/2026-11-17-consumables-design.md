@@ -733,7 +733,7 @@ checked against pegs K1 and K2 (9.3).
 | Basic vendor **(agreed)** | Supply; healing potions in pre-rolled stock of 2–3 *(illustr.)*; tonics and Remedy, unlimited (price is the knob); 1 Wax Key only when the party has no Mechanics-trained member (M2; items 10.3; traps and locks design 6.11; change TL-25, **agreed, Q3 of 2026-11-21**); 1 Ear Trumpet (a run-scoped lane-gap party counter, cap 1, not a consumable record; 15 coin *(illustr.)*) only when no party unit (the hero included) is Perception-trained on the camp-entry snapshot, stable for the visit (the TL-25 test); its effect is suspended while any living party unit is Perception-trained and lasts through the next floor; stocked only if the M2 report `SoloListenClickShare` misses (M3, **conditional**; items 10.3; exploration and information design 4.5.2; change XI-26, **agreed, Q3 of 2026-11-23**) |
 | Sundries (new loot class, CN-19) | Common consumables: healing potion, tonic, water, oil; Fire Bomb from floor 2. Drawn per floor **outside the notable count**, inside the fixed budget (items 2), `sundriesPerFloor` doses set per floor *(illustr. 3–5 on floors 1–2, 4–5 on floors 3–5)*. **At least 1 healing potion per floor** (`healingSundryMin` 1, drawn first; 2 on floors 4–5 only through the pre-authorised raise) and **at most 3** (`healingSundryMax`) **(client, death and healing Q3)** (cross-document comparison 2026-11-23, CC-58): the guaranteed potion goes in a main-path container in the first half of the main path, openable with no check, and is never substituted; random potions lean off-path (`healingOffPathPermille` 600) (death and healing design 12.4, 12.5) **(change DH-40)**. From floor 2, **at least 1 and at most 2 offensive flasks** per floor (`offensiveSundryMin`, `offensiveSundryMax`), the minimum drawn before the other sundries **(lead's call)**. Mostly containers, plus the settled single carried consumable per encounter |
 | Notables | Scrolls, wands, the Greater Fire Bomb and the talisman count in the 6–8 notables per floor and the camp channel; their share steered by category weights by depth and the F5 tactical cap, ranges unchanged (M2; loot economy design 6.2; change LE-17) |
-| Camp channel (notables shop, camp reward card) | Scrolls (never healing scrolls, P1), wands, the Greater Fire Bomb, all with channel `camp` (shop and reward card); the talisman **only** through `campReward` (the reward card, never the shop; CN-1) |
+| Camp channel (notables shop, camp reward card) | Scrolls (never healing scrolls, P1), wands, the Greater Fire Bomb, all with channel `camp` (shop and reward card); the talisman **only** through `campReward` (the reward card, never the shop; CN-1; on a phial camp the reward is pick 1 of 3, M2; camp and hub design 7.1; change CH-15) |
 | Boss reward card | Scrolls, wands; the talisman from floor 3 (a boss-channel phial fills option 2; item rolls design 4.1; change IR-8). Floors 1–4 only: no final-boss card; on floor 5 the Viaticum (choose 1 of 3 Rare wands and tier-3 scrolls, usable options, never the phial) takes the boss share (M2; loot economy design 6.11; change LE-5, **agreed, Q1 of 2026-11-22**). **Offer slots (M2; item rolls design 4.8, 4.10; change IR-8, agreed, Q1 of 2026-11-22):** options Yours, Theirs, Wayward and the fourth; families distinct, effect tags distinct where legal, at most 1 damage option; a hero guarantee. **Usability fallback (M2; loot economy design 6.3; change LE-3; item rolls design 4.8; change IR-8, agreed, Q1 of 2026-11-22):** each option with no usable record is redrawn **on its own** as usable gear at the same tier (usability filter, ordinary weights, not fit-filtered), on `bossCardFallback` entry = option index, then the offer terminal ladder. **Martial parties (item rolls design 4.8; change IR-8):** "the boss gives spells" holds only for readers; for a solo Vanguard or a Herald without Arcana, boss cards and the Viaticum resolve mostly to gear. **Pending request (M3; item rolls design 4.8, 9.4; change IR-8; consumables owner):** a martial tactical boss-card pool (notable bombs and oils, arena tools; 2–3 *(illustr.)*), pulled forward from Later; until ruled, the pool is unchanged. **Pending request (Later; item rolls design 9.4; loot economy design 6.13; consumables owner):** Rare bomb shapes and arena-keyed Viaticum tools; until ruled, the Viaticum's pool is unchanged (cross-document comparison 2026-11-23, CC-56) |
 | Carried | Healing potion, tonic (any floor from M2; floor 1 self-targeting only, settled); flasks and scrolls floor 2+; wands floor 2+; never the talisman, Remedy or coatings |
 | Substitution fallback | Supply or tonic **(settled, enemies 15.3)** |
@@ -1159,7 +1159,10 @@ channels and placement lead's call; CN-1, CN-2, CN-27)**
 
 - Containers (floor 3+), the boss reward card (floors 3–4: no final-boss
   card; M2; loot economy design 6.11; change LE-5, **agreed, Q1 of
-  2026-11-22**), the camp reward card (channel `campReward`, CN-1).
+  2026-11-22**), the camp reward card (channel `campReward`, CN-1). On
+  a phial camp the card's reward is pick 1 of 3 (entry 0, entry 1, the
+  phial); the phial is never on the shop panel **(M2; camp and hub
+  design 7.1; change CH-15)**.
 - Never the basic vendor, the notables shop, the trader, a carrier, a
   starting boon or a meta reward. `familyCapPerRun` 1.
 - **Placement: one pre-roll per run (new lead's call; CN-27).** "1 per
@@ -1195,7 +1198,10 @@ channels and placement lead's call; CN-1, CN-2, CN-27)**
 - **A declined offer is lost for the run:** a reward card is a choice, and
   so is choosing the notables shop over the reward card. A returning offer
   would make the phial near-certain. A phial in a container stays there
-  until picked up, like any loot.
+  until picked up, like any loot. The pick is `ChooseReward`, one atomic
+  command with one WO8 write; a `choice` still unset at Travel on loses
+  the phial, and the Travel-on confirm names it **(M2; camp and hub
+  design 4.2, 7.1; change CH-15)**.
 - `offerChancePermille` is the **first lever** when the talisman reports
   fire (19.3), before `leaveHpPermille`.
 - Why floor 3+: late deaths cost the player the most time; floor-1
@@ -1588,7 +1594,8 @@ alters a saved stack's dose count (change SV-15)) (CN-2)
 - `category` gains `talisman`.
 - `channels[]` gains `campReward`: offered on the camp reward card only,
   never in the notables shop. `camp` keeps its meaning (both). Only the
-  talisman uses `campReward` in M2.
+  talisman uses `campReward` in M2 (the card's full entry set: camp and
+  hub design 7.1; change CH-15).
 - `beltable` allows consumable, scroll, wand and talisman; Remedy is not
   beltable.
 - `use.targets[]` entries gain:
@@ -1792,7 +1799,8 @@ hero's HP never shows 0 while a phial is armed on its belt.
 - the phial pre-roll: deterministic per seed; always three draws on
   `loot/run` (pending this owner's confirmation, 14.7), unmoved by a
   floor retry (V13t (m); change SV-5; seeds and validation design 4.3);
-  a declined reward card loses it for the run;
+  a declined reward card, or a `choice` unset at Travel on, loses it for
+  the run (camp and hub design 7.1; change CH-15);
 - pegs P1, P2, P4 at every Leadership discount step and at `minPrice`;
 - replay tests across throws, reads, failed reads and a phial firing,
   rebuilt from the 18.4 events, including **a two-part hit** (Icefall)

@@ -139,7 +139,11 @@ These would make the game a failure even if everything works.
   structure design 6.11), camps 1–2 offer a choice of two next floors
   (run structure design 6.8–6.11; change RT-10), and when the Last
   Hollow choice is on (run structure design 6.11), camp 4 offers a pick
-  of the final boss (change RT-11).
+  of the final boss (change RT-11). The camp is presented as Arrival,
+  the Hollow and Travel on, with the order unchanged; the camp reward
+  card, vendor potion stock keyed to the party and trimmed in Core,
+  Quick Restock (`BuyBatch`) and Accept kit defaults are in camp and
+  hub design 4.2 and 7 (changes CH-1, CH-15 to CH-18, M2).
 - A run can be saved and resumed, but there is one save slot per run and it
   is deleted on death. **(decided)**
 
@@ -312,10 +316,18 @@ All decided.
   RT-18, M3).
 - **One starting boon.** Before a run the player picks a single earned boon,
   such as an heirloom item or a background perk. Boons add variety and do
-  not stack.
+  not stack. Starting kits get no hub peg: kit variants ship only as
+  boon options; charms get no hub surface; meta-curses become one
+  reserved run-modifier slot on the hub's Depth gauge, owned by the
+  main design and run structure difficulty decision (camp and hub
+  design 4.9, 2.2; change CH-24, read, M3/Later).
 - **Difficulty ladder.** Each win unlocks an optional harder tier. From
   M3, Nightmare tiers add kind, not stats, and the Perilous Door makes
   the ladder per-floor (run structure design 9.1; change RT-21, M3).
+  The Perilous toggle sits on the camp door station, on Two Doors cards
+  only (camp and hub design 7.6; change CH-20, read, M3); pending: the
+  run structure owner's ruling on single-door cards and camp 4
+  (fallback: not offered there).
   Hazards escalate in kind under this rule (hazards design 6.19;
   change HZ-25, M3).
   Bosses escalate in kind too: each boss authors a Nightmare
@@ -328,13 +340,28 @@ All decided.
   confirmed; help for struggling players belongs in a visible difficulty
   setting, which is a future main design and run structure decision, not
   yet made (events design 4.4.7, 14.2; change EV-10, read, agreed
-  2026-11-22, events Q4).
+  2026-11-22, events Q4). Pending (owed by this document with run
+  structure): until it is decided, the hub's Depth gauge keeps an unlit
+  lamp reserved for it below tier 0, and no figure substitutes for it
+  (camp and hub design 4.8, 14.2; M3).
 - **No permanent stat boosts.** Curiosity gains are run-only, and from
   M3 Curiosity Sequels and Ripening enter the drawable set through the
   unlock snapshot, never as power (events design 4.4.1, 4.5.8, 4.5.9;
   changes EV-7, EV-27, EV-28, read; M3 / M3-late).
 - **Hub.** A simple camp screen to begin with. A richer hub is out of scope
-  until the run itself is proven.
+  until the run itself is proven. In M2 the hub is that simple screen:
+  one static Stairtop backdrop with menu rows (Begin, Continue, Seeded
+  night, Book of Nights, Profiles, Settings, the Hearsay log), holding
+  one static figure, the Copyist, and the floor-k Lingerer vignette
+  after a death on floor k (camp and hub design 4.8, 7.7; change CH-13,
+  agreed 2026-11-23, camp and hub Q4, M2). From M3, after M2 sign-off,
+  it becomes a menu-room that is never walkable, holding the hub
+  stations and up to 3 settled Lingerers (camp and hub design 4.8, 5.2;
+  change CH-6, a reading, agreed 2026-11-23, camp and hub Q5, M2/M3).
+  Its fiction is the Stairtop, the one hollow that does not re-form
+  (agreed 2026-11-23, camp and hub Q1). Hub figures give no mechanical
+  or informational effect (camp and hub design 4.17; agreed 2026-11-23,
+  camp and hub Q2).
 
 ## 5. Approaches considered
 
@@ -590,6 +617,11 @@ largely to prove it.
   bundle is sent (seeds and validation design 5.5; hook, agreed
   2026-11-23, seeds Q2). Until it exists, bug reports stay local and the
   player can attach them by hand (seeds and validation design 14.2).
+  The same setting is a Settings row in the hub, and the camp and hub
+  reports `CampSeconds`, `CampClicks`, `RunWallClock`, `HubSeconds` and
+  `DeathPathSeconds` come from human sessions (seeds and validation
+  design 6.11) until it exists (camp and hub design 4.5, 4.13, 9.2;
+  hook, pending; M2).
 - **Profile save:** unlocks, boons and difficulty tier, stored separately
   from any run. The grants that change rules (difficulty tier, boons,
   Nightmare tier) enter the run's `configHash` (seeds and validation
@@ -631,6 +663,18 @@ largely to prove it.
   staged first-run disclosure; the same seed gives identical knowledge
   and previews on every profile (exploration and information design
   4.10; change XI-21, an addition, M2).
+  From M2 it also holds `loreMemory` (version, checksum, `nightIndex`,
+  `loreShownCount`, `loreLastShownNight`, `lastFiredNights`,
+  `lingererLastOnBalcony`, `deferredT0[]`, the bounded `hearsay[]` and
+  the rest of camp and hub design 9.1): display memory of the ambient
+  lines heard at camp and hub, outside the reproducibility key and
+  never referenced by Core; a file failing its version or checksum
+  reads as empty. Lore selection uses the display domain `lore`,
+  outside the reproducibility key. Personal runs flush their lore marks
+  through `pendingProfile`, and leaving the hub rewrites the profile
+  with the hub's lore marks (personal Nights only); seeded runs,
+  replays and the simulator write no lore (camp and hub design 4.16,
+  9.1; changes CH-7, M2; CH-9, read).
 - Saves carry a version number. A run's reproducibility key is
   (`runSeed`, `genVersion`, `manifestHash`, `configHash`, `unlockHash`);
   saves also carry `rulesVersion` and `saveVersion`, and each floor's
@@ -715,7 +759,7 @@ monster in data.
 | M0 Skeleton | Solution, automated tests, command and event loop, Godot draws a placeholder 3D isometric grid and moves a unit | Does the core and display split work? |
 | M1 Vertical slice | One class, levels 1–3, one generated floor, three enemy types, one boss, basic loot, permadeath | Is the loop fun? Does the effects system hold? |
 | M2 Full run | Four classes, companions, 5 floors (change RT-1), level 10, pick-one-of-three offers, save and resume | Does a 1–2 hour run hold together? |
-| M3 Between runs | Profile (the profile file and its `curiosityMemory`, `recentRuns[].f1BossId`, `runHistory[]` and `uiMemory` fields arrive in M2: section 6.6; events design 9.1; change EV-19, agreed events Q1; cross-document comparison 2026-11-23, CC-11), unlocks, starting boons, difficulty ladder; in-run content: Two Doors at camp 3, Omens, Seams, Nightmare tiers (run structure design 12; change RT-19, M3) | Do players come back? |
+| M3 Between runs | Profile (the profile file and its `curiosityMemory`, `recentRuns[].f1BossId`, `runHistory[]`, `uiMemory` and `loreMemory` fields arrive in M2: section 6.6; events design 9.1; change EV-19, agreed events Q1; cross-document comparison 2026-11-23, CC-11; camp and hub design 9.1, change CH-7), the menu-room Stairtop hub (the M2 hub is the simple screen of section 4.7; camp and hub design 4.8, 10; change CH-6), unlocks, starting boons, difficulty ladder; in-run content: Two Doors at camp 3, Omens, Seams, Nightmare tiers (run structure design 12; change RT-19, M3) | Do players come back? |
 | M4 Breadth | Species, multiclassing, more content, balance passes with the simulator | Is every run different? |
 
 M1 covers species selection only if it is trivial to include; otherwise
@@ -763,6 +807,14 @@ The random number algorithm, the stream registry, the save file
 mechanics and validation are settled in
 `2026-11-23-seeds-validation-design.md`; they are no longer pending
 (seeds and validation design 4.1, 4.8, 16; change SV-1).
+
+The camp and the hub (camp form, stations, the ambient figures and their
+lore, hub form by wave) are settled in
+`2026-11-23-camp-hub-design.md`; they are no longer pending, and its
+hooks on this document are taken up in sections 4.1, 4.7, 6.6 and 9
+(camp and hub design 11, 13; changes CH-6, CH-7, CH-9, CH-13, CH-20,
+CH-24). Telemetry consent and the visible easier setting stay pending
+here (sections 6.6, 4.7).
 
 - All numbers: hit points (shape settled there), damage, experience curve, loot rates.
 - The dungeon generation algorithm.

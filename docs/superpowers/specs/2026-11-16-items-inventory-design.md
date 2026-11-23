@@ -234,7 +234,7 @@ without migrating any data. **(agreed)**
               "rare":     { "budget": 3, "props": [2, 3], "minFloor": 3 },
               "veryRare": { "budget": 4, "props": [2, 3], "minFloor": 4, "perFloorMax": 1 } },
   "loot": { "rarityDeck": "…", "coinPool": "…", "salvagePermille": 120, "…": "…" },
-  "vendor": { "potionStock": [2, 3], "bases": ["item.longsword", "…"] },
+  "vendor": { "potionStockByParty": [2, 2, 3, 3], "bases": ["item.longsword", "…"] },
   "notablesShop": 2,
   "consumables": { "potionPermille": 1000, "…": "…" },
   "trader": { "floors": [2, 4], "presencePermille": 500, "stock": [2, 3],
@@ -734,8 +734,14 @@ Later; details lead's call unless marked)**
 **(agreed)** Every camp has a basic vendor selling:
 
 - supply (within the settled cap of 3; greyed `SupplyFull` at the cap);
-- healing potions, in **limited, pre-rolled stock** (`vendor.potionStock`;
-  greyed `OutOfStock` when sold out);
+- healing potions, in **limited, pre-rolled stock** keyed to floor N's
+  party count at generation (`vendor.potionStockByParty`, 2/2/3/3 for
+  parties of 1–4 *(illustr.)*; a hire at this camp never changes it):
+  `loot/floor/{N}/vendorPotions` always draws `max(table)` entries, and
+  Core trims the stock to the party's count, discarding the rest, so Buy,
+  `BuyBatch` and `OutOfStock` read the trimmed stock; the drawn
+  `potionStock` range ([2, 3]) is retired (greyed `OutOfStock` when sold
+  out) **(change CH-16; M2; camp and hub design 7.2)**;
 - tonics and Remedy;
 - mundane bases (`vendor.bases`), which come only from here and from kits
   **(settled, enemies 15.9)**;
@@ -771,6 +777,15 @@ for it, and the player Sells first. Camp is a rest, so the party view
 equips armour and trinkets freely, but an equip there that displaces an
 item needs room for it (otherwise greyed `PackFull`).
 
+**Quick Restock (change CH-18; M2; camp and hub design 7.3):** one
+`BuyBatch` compound command, an explicit list of (itemId, targetUnit)
+lines computed by Core at preview time (supply up to the cap, then one
+ordinary healing potion for each unit holding none, in party order, hero
+first, while stock lasts), placed belt first, then pack, through 6.2;
+rejected whole with `InsufficientCoin` when the purse is short;
+invalidated by any change to the party, the purse or the stock; one WO8
+write.
+
 **Leaving camp:** unbought stock (vendor potions, shop notables) is
 destroyed (`ItemDestroyed{lost}`); an unbought vendor Wax Key lapses with
 `vendor.waxKeyStock` (no instance, no event). **(change TL-25)** An
@@ -788,15 +803,24 @@ at each camp between:
 
 **(lead's call)** The **camp reward card** is a separate screen from the
 enemies 17.5 boss reward card, which is shown before camp and is
-unchanged. What the camp reward card offers belongs to the camp and hub
-design (section 24); the items design fixes only that any item it offers
-comes from the floor's `camp` channel below and counts in the budget.
+unchanged. What the camp reward card offers is set by the camp and hub
+design (7.1) **(change CH-15; M2)**: the reward is a pick of 1 of {entry
+0, entry 1, the Reprieve Phial at a `campReward` phial camp}, and the
+others are dreamed; the phial is never on the shop panel, and a declined
+phial is lost for the run (consumables design 14.7). Any item it offers
+comes from the floor's `camp` channel below (the phial from `campReward`,
+change CN-1) and counts in the budget.
 
 **Choice state (lead's call):** camp state `choice: unset | shop |
 reward`, set by an explicit command and irreversible. Browsing the shop
 does not commit; buying a notable needs `choice = shop`, and after the
 reward is chosen the shop's notables are greyed `CampChoiceMade`. The basic
-vendor is open either way.
+vendor is open either way. **(change CH-15; M2; camp and hub design
+7.1)** The reward side is one command, `ChooseReward(entryIndex)`, which
+sets `choice = reward` and grants the item atomically with one WO8 write;
+the shop side is committed by its own explicit command with one WO8
+write. A `choice` still unset at Travel on dreams both entries and loses
+the phial, and the Travel-on confirm names it.
 
 **Stock is pre-rolled** in floor N's loot draw (enemies 10.5 step 3,
 change I-10) as a **`camp` channel of the floor loot budget**: its count
@@ -816,7 +840,9 @@ shop is chosen. Stock is deterministic and cannot be save-scummed.
 floor N+1** (tier and `minFloor` read N+1; family caps and owned bases
 read N), never Very rare; bought camp stock never counts toward floor
 N+1's per-floor tier caps. A Wax Key drawn for TL's camp notables slot is
-a third display entry outside the budget (loot economy design 6.3). **No
+a third display entry outside the budget (loot economy design 6.3), on
+the shop side only: bought for coin, never the free reward pick, whatever
+the `choice` **(change CH-15; M2; camp and hub design 7.1)**. **No
 camp channel after floor 5 (agreed 2026-11-22, Q1; change LE-5).**
 
 **Secret caches:** a cache behind a Hairline secret counts as a
@@ -1483,6 +1509,11 @@ is original, so it carries no `srd` flag.
 - **Shrine curse cures and curse bargains (change EV-43, Later):** hosted
   by segment 8 Curiosities (events design 10); never on floor 1 (events
   design 4.6). The conditions and items owners apply the rules.
+- **No curse trunk at the hub (change CH-24, informed; told plainly;
+  Later):** meta-curses are not hub items; they become one reserved
+  run-modifier slot on the hub's Depth gauge, owned by the main design and
+  RS difficulty decision. The item curses above are unchanged (camp and
+  hub design 2.2, 5.2).
 
 ## 14. Heirlooms (M3)
 
@@ -1502,6 +1533,8 @@ is original, so it carries no `srd` flag.
   as owned for item verdicts (item rolls design 4.15, read).
 - Left in leftovers, it is lost at the stairs, never scrapped. The profile
   keeps the template.
+- It is picked as the one starting boon at the hub's Heirloom shelf, its
+  exact text shown before the pick (M3; camp and hub design 2.2, 5.2).
 
 ## 15. Companions, recruits and run end
 
@@ -1959,6 +1992,9 @@ Consumable, scroll, wand and talisman reports: see consumables design
   - rarity tiers and banded properties;
   - dormant properties and Arcana identification;
   - coin, the basic vendor, the notables shop or reward card, Sell;
+    the reward card's content, potion stock by party and Quick Restock
+    (`BuyBatch`) (camp and hub design 7.1–7.3; changes CH-15, CH-16,
+    CH-18);
   - stairs Scrap; rest-gated trinket changes;
   - simulator reports.
 - **M3:** heirlooms as profile templates.
@@ -2163,9 +2199,15 @@ mundane bases are not loot, and family caps all stand.
   (`2026-11-20-companions-design.md`, 8.3, 8.4): companion kits; the
   companion scorer's "drink it" suggestion and its placement preferences
   (cross-document comparison 2026-11-23, CC-46).
-- **Camp and hub screens:** the camp layout that hosts the vendor, the
-  shop-or-reward choice, Sell and the party view; **what the camp reward
-  card offers** (any item it offers comes from the `camp` channel, 10.4).
+- **Camp and hub screens:** answered by the camp and hub design
+  (`2026-11-23-camp-hub-design.md`, segment 13): the vendor, Sell and
+  Quick Restock at the Keeper's Cart, the shop-or-reward choice at the
+  Notables panel and the party view at the Bedrolls (camp and hub design
+  4.3); what the camp reward card offers (camp and hub design 7.1; change
+  CH-15, M2); vendor potion stock by party (7.2; change CH-16, M2);
+  `BuyBatch` (7.3; change CH-18, M2); heirloom templates at the hub's
+  Heirloom shelf (M3; camp and hub design 5.2). Any item the reward card
+  offers still comes from the `camp` channel (10.4).
 - **Dungeon content:** runes and shrines that identify items or end
   Clinging (Later). Shrine curse cures and bargains are hosted by the
   events design (`2026-11-22-events-design.md`; change EV-43, Later).

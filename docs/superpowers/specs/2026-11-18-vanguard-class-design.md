@@ -890,6 +890,9 @@ may replace its stance with the other one.
 - **Where and when (lead's call):** on the camp screen only, as part of
   the full rest, once per camp visit. Never in combat and never at a
   short rest. It costs nothing and is undone only by the next camp.
+  The camp screen places it in the Bedrolls party view, with the
+  Guarding and trigger warnings and the Shieldwall suggestion; it rides
+  the next WO8 write (camp and hub design 4.3, 4.4; CH-3; M2).
 - **Waves:** M1 has one stance, so the re-pick is not shown; it arrives
   with Shieldwall in M2.
 - **Guarding (lead's call on the armour row, VG-17):** a Guarding shield
@@ -2407,7 +2410,12 @@ hit" in conditions 10.1 shows the VG-8 sum.
   which Vanguard verbs beyond Shove are size-gated.
 - **Camp and hub screens:** the stance re-pick step and its Guarding
   and stance-bound trigger warning; the level-3 spare-weapon suggestion
-  for the Weaponmaster (7.10).
+  for the Weaponmaster (7.10). **Answered** by the camp and hub design
+  (segment 13, approved 2026-11-23; its 2.2 row 6 and 4.3): the Bedrolls
+  party view at camp carries the re-pick, its Guarding warning and the
+  Shieldwall suggestion, beside equip (M2); no change to this document
+  is owed. The level-3 spare-weapon suggestion is not named there and
+  stays open for the camp screen's owner.
 - **Naming pass:** every placeholder name here, Hold the Line included.
   Upend (8.3) collided with the boss rooms design's boss state
   "Upended": BR's state is renamed **Sprawled** after a whole-word grep

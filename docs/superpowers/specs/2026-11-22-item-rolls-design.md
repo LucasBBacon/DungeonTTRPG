@@ -1101,7 +1101,7 @@ Every report reads `LootLedger` rows at the **generation snapshot** unless it sa
 | **Segment 9 (bosses)** | Signature records and forms (budget-complete lines, the echo, second forms), `signatureAbilityTag`, kits, armed status (carriage derives from them), Old Ragged's surcoat, Memento epitaphs, the Headsman's Greataxe home (taken up by the boss rooms design 4.11.1; change BR-27) |
 | **Segment 10 (UI)** (answered by the exploration and information design, approved 2026-11-23: every hook placed in its UI surface catalogue, its 5) | Card budget merged with ITEMS 8.2 and TK 15, glyphs and the footer badge, marks, the line-tag shapes, Whence pane, reveal chime, offer layout and frame headers, the carried-use floater, the "Guards:" plate line and the signature cache decal, stamps |
 | **Segment 11 (seeds)** (taken up by the seeds and validation design, `2026-11-23-seeds-validation-design.md`, segments 11–12, approved 2026-11-23: its 4.3 registry rows, 4.4 GS10, 4.11 and 8.1; changes SV-1, SV-2, SV-5, SV-18; its two requests to this owner pending, 4.17, 9.3) | The 4.17 draw table, keying and frozen generation order; the filter-first adoption before golden seeds |
-| **Camp and hub owner** | Re-engraving (hook), shop comparisons reuse verdicts |
+| **Camp and hub owner** | Re-engraving (hook), shop comparisons reuse verdicts (taken up: Re-engraving held Later; camp and hub design 2.2, 5.4) |
 | **Later systems** | Curses (the gate and twins), trader, Pairs, the malign hint |
 
 ---
@@ -1376,7 +1376,7 @@ The owed rows are the single list in 13; by owner:
 - **Segment 10 (UI) and audio:** 4.19, 6.
 - **Segment 11 (seeds):** IR-14, the frozen order, filter-first before golden seeds (taken up by the seeds and validation design, approved 2026-11-23: 4.3, 4.4 GS10, 4.11, 8.1; changes SV-1, SV-2, SV-5, SV-18). Pending requests from it to this owner: the Resistant draw's owning entry (SV-5, 4.17) and the `DormantAtChoice` proof (9.3); fallbacks in its 14.2.
 - **Segment 12 (validation):** V14 and the 7b reports (taken up by the seeds and validation design, approved 2026-11-23: V14 in its 5.1–5.2 phase model, the reports in its 6.3–6.6 and 6.12; changes SV-20, SV-25, with the SV-23 classes).
-- **The camp and hub design:** Re-engraving (hook); shop comparisons reuse `ItemVerdict`.
+- **The camp and hub design:** Re-engraving (hook); shop comparisons reuse `ItemVerdict`. Taken up by the camp and hub design (segment 13, approved 2026-11-23; its 2.2, 4.3): Re-engraving held Later (its 5.4); Sell at the Keeper's Cart shows `ItemVerdict`.
 - **The simulator:** every report of 9.3; the toy re-runs listed in 8.
 - **Art and writing:** Patina, stamps, signature models, Reveries, provenance captions (6, 9.4).
 - **Naming pass:** every placeholder name here.

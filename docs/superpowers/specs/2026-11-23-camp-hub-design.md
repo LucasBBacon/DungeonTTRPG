@@ -1,7 +1,7 @@
 # Camp and Hub: Design (Segment 13)
 
 Date: 2026-11-23
-Status: Draft, revised after the design check, awaiting client approval, 2026-11-23
+Status: Approved, 2026-11-23
 Parents (immediate): `2026-11-23-exploration-information-design.md` (exploration and information design, "XI", segment 10, approved 2026-11-23, **the most recent template**), `2026-11-23-seeds-validation-design.md` (seeds and validation design, "SV", segments 11–12, approved 2026-11-23), `2026-11-22-boss-rooms-design.md` ("BR", segment 9), `2026-11-22-events-design.md` ("EV", segment 8), the loot designs `2026-11-22-loot-economy-design.md` ("LE", segment 7a), `2026-11-22-item-rolls-design.md` ("IR", segment 7b) and `2026-11-22-loot-sources-design.md` ("LP", segment 7c), `2026-11-21-run-structure-themes-design.md` ("RS", segment 1; its change ids are RT-n), and `2026-11-23-cross-document-comparison.md` (reviews; its Q-1 amends ITEMS 10.1).
 Other parents: `2026-11-15-dungeon-rpg-design.md` (main design, "MAIN"),
 `2026-11-16-character-stat-model-design.md` (stat model, "STAT"),
@@ -25,20 +25,20 @@ All 30 approved specifications and the cross-document comparison were read for e
 
 Items marked **(agreed)** are the client's answers of 2026-11-23 to the five questions this design raised (Q1–Q5; sections 0.2 and 14.1), each answered with the lead's recommendation (option A), or restate a client answer recorded in an approved document; parent documents' questions are always named with their document ("EV Q4", "SV Q1", "XI Q1") so that they never read as this document's Q1–Q5. The client also said that everything else in the lead's proposal stands as written: the camp order unchanged and presented as Arrival, the Hollow and Travel on; the stations; saves at camp; the time and click budget and its reports; camp variation and seam camps; the run told without words; the hub form and surfaces; the launcher; after the run and the death-path budget; unlocks and milestones; onboarding; controller and accessibility; the ambient charter AN1–AN13; the lore engine; determinism (lore outside the reproducibility key, the display domain `lore`, the profile field `loreMemory`, seeded runs writing no lore); the full Hollowfolk catalogue with its sample lines; the creative moments adopted, held and rejected; art and audio; the new mechanics (the camp reward card, vendor potion stock, `BuyBatch` Quick Restock, Accept kit defaults, the speculation restart, the Perilous Door at the door station, the floor-k Lingerer in the hub); the numbers; data and validator V20 `Hollowfolk`; staging; ownership and hooks; the binding requirements; CH-1 to CH-24; the risks; and the appendix resolutions and names. Names are placeholders pending the naming pass. (The register has since grown to CH-26 after the design check: CH-25 registers V20 in the consolidated suite and CH-26 narrows CMP's Travel-on confirmation; both flagged, 13.)
 
-**The lead's answers (0.1) and Composite "H" (3.2)** were accepted by the client by proceeding to the five questions. They are recorded here as the lead's answers, to be confirmed with this document, **including every told-plainly item of 14.1**: no empty bedrolls for the dead inside a run; no tiny flavour effects; camp time budgeted but unmeasured; the streak guarantee to about Night 25 in M3; the Afterword stays on the run-start card; the `ink` chain reward dropped and Ask topics rejected; Listen renamed Hear out; Go down again renamed Begin again; no hub peg for starting kits, no hub surface for charms, no trunk for curses; seeded runs repeat ambient lines; the walkable camp and hub rejected; the name collisions fixed.
+**The lead's answers (0.1) and Composite "H" (3.2)** were accepted by the client by proceeding to the five questions. They are recorded here as the lead's answers; the client confirmed them on 2026-11-23, when it approved this document as a whole, **including every told-plainly item of 14.1**: no empty bedrolls for the dead inside a run; no tiny flavour effects; camp time budgeted but unmeasured; the streak guarantee to about Night 25 in M3; the Afterword stays on the run-start card; the `ink` chain reward dropped and Ask topics rejected; Listen renamed Hear out; Go down again renamed Begin again; no hub peg for starting kits, no hub surface for charms, no trunk for curses; seeded runs repeat ambient lines; the walkable camp and hub rejected; the name collisions fixed.
 
-Items marked **(lead's call)** were filled in by the design lead inside approved rules and were in the proposal the client answered; they become binding when the client approves this document. Items marked **(new lead's call)** were made while writing this document, beyond that proposal; they are listed in 14.1. Items marked **(lead's call, after the check)** were made in answer to the design check of this document (builder, consistency, player and art-narrative lenses); none overrides a client answer; they are listed in 14.3 with a "Told plainly after the check" list. Items marked **(settled)** restate a rule from an approved document; **(decided)** marks a main-design client decision. Items marked **(change CH-n)** amend an approved document and are listed, with the exact sections they touch, in 13; rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there. Items marked **(told plainly)** narrow or re-read approved text, contest the brief, the client, a judge, a critic or a draft, or state an unwelcome forecast, and are listed in 14.1.
+Items marked **(lead's call)** were filled in by the design lead inside approved rules and were in the proposal the client answered; the client confirmed them all on 2026-11-23, when it approved this document as a whole, and they are binding. Items marked **(new lead's call)** were made while writing this document, beyond that proposal; they are listed in 14.1 and the client confirmed them all on 2026-11-23. Items marked **(lead's call, after the check)** were made in answer to the design check of this document (builder, consistency, player and art-narrative lenses); none overrides a client answer; they are listed in 14.3 with the "Told plainly after the check" items (T1–T13), and the client confirmed them all on 2026-11-23. Items marked **(settled)** restate a rule from an approved document; **(decided)** marks a main-design client decision. Items marked **(change CH-n)** amend an approved document and are listed, with the exact sections they touch, in 13; rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there, and the client's approval of this document on 2026-11-23 (with Q1–Q5 where a row names one) covers them. Items marked **(told plainly)** narrow or re-read approved text, contest the brief, the client, a judge, a critic or a draft, or state an unwelcome forecast, and were told to the client in plain words (14.1; those found in the check, 14.3, T1–T13); the client confirmed them all on 2026-11-23. Every item here is binding on the builders.
 
 | Marking | Meaning |
 |---|---|
 | **(settled)** | Restates a rule from an approved document |
 | **(decided)** | A main-design client decision, restated |
 | **(agreed)** | A client answer: Q1–Q5 of this document (2026-11-23), or one recorded in an approved document (named with its document), restated |
-| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal (the lead's answers of 0.1 and Composite H included); binding once the client approves this document |
-| **(new lead's call)** | A lead's call made while writing this document, beyond the answered proposal; listed in 14.1 |
-| **(lead's call, after the check)** | A lead's call made in answer to the design check; never overrides a client answer; listed in 14.3, with the "Told plainly after the check" items |
-| **(change CH-n)** | Amends an approved document; listed with its exact sections in 13. Rows that touch **settled**, **decided** or **agreed** text are flagged ⚑ there |
-| **(told plainly)** | Narrows or re-reads approved text, contests the brief, the client, a judge, a critic or a draft, or states an unwelcome forecast; listed in 14.1 (those found in the check, 14.3) |
+| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal (the lead's answers of 0.1 and Composite H included); confirmed by the client with this document on 2026-11-23 |
+| **(new lead's call)** | A lead's call made while writing this document, beyond the answered proposal; listed in 14.1 and confirmed by the client on 2026-11-23 |
+| **(lead's call, after the check)** | A lead's call made in answer to the design check; never overrides a client answer; listed in 14.3, with the "Told plainly after the check" items, and confirmed by the client on 2026-11-23 |
+| **(change CH-n)** | Amends an approved document; listed with its exact sections in 13. Rows that touch **settled**, **decided** or **agreed** text are flagged ⚑ there; the client's approval of 2026-11-23 covers them |
+| **(told plainly)** | Narrows or re-reads approved text, contests the brief, the client, a judge, a critic or a draft, or states an unwelcome forecast; told to the client in plain words (14.1; those found in the check, 14.3) and confirmed by the client on 2026-11-23 |
 | **(request)** | Asks another owner to rule; changes nothing until that owner rules; the fallback is stated (14.2) |
 | **(hook)** | Owned by another design; this design states only what it needs |
 | *(illustr.)* | An illustrative number, owned by the builders and calibrated by the simulator or by human sessions (8, 9). Never binding |
@@ -63,7 +63,7 @@ Items marked **(lead's call)** were filled in by the design lead inside approved
 - **Clock:** camp time is budgeted by RS 0.1 but measured by nothing. New reports `CampSeconds`, `CampClicks`, `RunWallClock`, `HubSeconds`, `DeathPathSeconds`, with a cut order (CH-5).
 - **Told plainly:** the client's "empty bedrolls for the dead" cannot happen inside a run, because companions are never killed (DH 6) and the hero's death ends the run. Camp shows only true signals; mourning lives in the hub.
 
-### 0.1 The lead's answers in plain words (lead's call; accepted by the client by proceeding; to be confirmed with this document)
+### 0.1 The lead's answers in plain words (lead's call; accepted by the client by proceeding; confirmed by the client on 2026-11-23)
 
 1. **Can the camp and hub have NPCs who can't be recruited or sell, and only give set dressing and lore? Yes, and it is guaranteed in data, not by convention.** The ambient figures use their own record type with no price, stock, item, kit, unit, Muster, reward, command or effect field; the validator rejects any record that adds one, and the rules core cannot even see the type. Service and lore never share a body: the keeper sells, the Muster board hires, and every Hollowfolk figure sits with empty hands and its work set down. Their only action is "Hear out". There are three layers:
    - **Camp regulars** who belong to the hollows: the **Kindler** (keeps the fire, every camp), the **Chalkwright** (chalks pictures of places on a slate at the edge of the light, camps 1–3) and the **Stillwatch** (faces the Heart's door, camp 4 only).
@@ -255,7 +255,7 @@ Three camp models were built in full; a cast-and-engine pass, a creative pass an
 | B, the walkable Hollow and walkable Stairtop | 6 / 6 / 6 | 5 / 6 / 6 | 9 / 9 / 9 | 4 / 4 / 4 | 5 / 5 / 5 | Richest; invites the visit-everyone chore (~50 s a camp); determinism leakage risk; 1.5–2× art |
 | C, the diorama with dolly and drift | 7 / 7 / 7 | 8 / 8 / 8 | 8 / 8 / 8 | 6 / 7 / 6 | 7 / 8 / 7 | Best frame; fix names, per-kit drift clips, waking-world hub, walkable M3 hub |
 
-### 3.2 Composite "H" (lead's call; accepted by the client by proceeding; to be confirmed with this document)
+### 3.2 Composite "H" (lead's call; accepted by the client by proceeding; confirmed by the client on 2026-11-23)
 
 All three judges independently recommended the same composite:
 - **Camp frame from C**: the diorama with a 0.4 s station dolly and a *generic* stand-and-turn party reaction (the 60+ per-kit drift clips rejected).
@@ -805,9 +805,9 @@ A chain-graph and coverage export (the Hades lesson), required before M3 writing
 
 ## 13. Changes to approved documents
 
-To be applied when the client approves this document. **This document edits no parent document itself**; the rows are applied by the owners of the sections they touch **(lead's call)**, and rows owed by other owners are listed again in 17. Every row names the exact sections it touches. Rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ in the "Flag" column; as in the LE, TL, EP, IR, LP, EV, BR, XI and SV precedents, the Flag column also marks rows that only *read* such text without changing it, so that every touch of it is visible **(new lead's call:** this adds read flags to CH-5, CH-20 and CH-24, which the proposal's register did not flag**; lead's call, after the check:** flags added to CH-8, CH-19, CH-21, CH-22 and CH-23, and to the sections that CH-2, CH-5, CH-6, CH-9, CH-15 newly touch; CH-25 and CH-26 added, both flagged**)**. The client's approval of this document will cover the flagged rows (with Q1–Q5 where a row names one). Rows marked "request" are requests to other owners; they change nothing until their owner rules, and 14.2 names each fallback. M3, M4 and Later rows are recorded now as applied text marked with their wave and take effect at that wave.
+Applied on 2026-11-23, when the client approved this document. **This document edits no parent document itself**; the rows are applied by the owners of the sections they touch **(lead's call)**, and rows owed by other owners are listed again in 17. Every row names the exact sections it touches. Rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ in the "Flag" column; as in the LE, TL, EP, IR, LP, EV, BR, XI and SV precedents, the Flag column also marks rows that only *read* such text without changing it, so that every touch of it is visible **(new lead's call:** this adds read flags to CH-5, CH-20 and CH-24, which the proposal's register did not flag**; lead's call, after the check:** flags added to CH-8, CH-19, CH-21, CH-22 and CH-23, and to the sections that CH-2, CH-5, CH-6, CH-9, CH-15 newly touch; CH-25 and CH-26 added, both flagged**)**. **The client's approval of 2026-11-23 covers the flagged rows** (with Q1–Q5 where a row names one). Told-plainly rows were told in 14.1 and, for those found in the check, 14.3, and confirmed by the client on 2026-11-23. Rows marked "request" are requests to other owners, recorded as pending requests; they change nothing until their owner rules, and 14.2 names each fallback. M3, M4 and Later rows are recorded now as applied text marked with their wave and take effect at that wave.
 
-**Readings recorded inside this design (no approved text changes; each goes to its owner for confirmation):**
+**Readings recorded inside this design (no approved text changes; recorded as readings, approved by the client with this document on 2026-11-23; each owner confirms its own reading):**
 - The camp order's steps 3–7 are one rest-summary command shown after the catch-up picks; steps 8–10 are concurrent stations after card A and the Eye's card (CMP, DH, RS owners; CH-1).
 - WO4 carries get-up and the first pending catch-up offer per unit; later offers are drawn inside the previous pick's WO8 write; `CampRest` is a logged system command; WO8's "training" means level and skill picks (SV owner; CH-2, CH-3).
 - SV 4.4's speculative generation restarts when the candidate `GenInputs` digest changes, and its result stays in Core memory until Travel on (SV owner; CH-19).
@@ -851,7 +851,9 @@ The options the client rejected (Q1-B and C, Q2-B, Q3-B and C, Q4-B, Q5-B) are n
 
 ## 14. Open items for the client
 
-**This document, as a whole, awaits the client's approval.** The five questions raised before writing were answered on 2026-11-23 **(agreed)**, each with the recommended option (A); the client also said everything else in the proposal stands as written. Writing raised **no new client question**, and neither did the design check: every new lead's call and every lead's call after the check (14.3) sits inside the five answers, keeps an approved rule, or is flagged against the text it touches. The future items in 14.2 come back only if a report, an owner's refusal, a wave or a later design triggers them.
+None. Approved by the client on 2026-11-23.
+
+The client approved this document as a whole on 2026-11-23, including the lead's answers of 0.1 and Composite H (which the client had accepted by proceeding); every lead's call (the lead's calls of the answered proposal, the new lead's calls in 14.1 and the 41 lead's calls after the check in 14.3); the told-plainly items (those in 14.1 and "Told plainly after the check" T1–T13 in 14.3, all as written); and the readings recorded in 13; and its approval covers the flagged rows of 13. The five questions raised before writing were answered on 2026-11-23 **(agreed)**, each with the recommended option (A); the client also said everything else in the proposal stands as written. Writing raised **no new client question**, and neither did the design check: every new lead's call in 14.1 and every lead's call after the check in 14.3 sits inside the five answers, keeps an approved rule, or is flagged against the text it touches in 13. The future items in 14.2, which come back only if a report, an owner's refusal, a wave or a later design triggers them (including the visible easier setting, voice acting for the Kindler, the owner-refusal fallbacks and the report-triggered items), and the naming pass remain future items.
 
 ### 14.1 This document
 
@@ -862,9 +864,9 @@ The options the client rejected (Q1-B and C, Q2-B, Q3-B and C, Q4-B, Q5-B) are n
 - **Q4, hub figures in M2 (CH-13):** option A, yes, minimal: the static Copyist at the Book of Nights and the floor-k Lingerer vignette on the M2 simple camp screen (a reading of decided MAIN 4.7). Rejected: B, no hub figure until M3.
 - **Q5, settled Lingerers (CH-6):** option A, yes, at most 3 visible in the hub, rotating. Rejected: B, separate casts.
 
-**The lead's answers (0.1) and Composite H (3.2)** were accepted by the client by proceeding; they are recorded as the lead's answers, to be confirmed with this document, including every told-plainly item below.
+**The lead's answers (0.1) and Composite H (3.2)** were accepted by the client by proceeding and confirmed by the client on 2026-11-23, with this document, including every told-plainly item below.
 
-**Told plainly (to be confirmed with this document):**
+**Told plainly (confirmed by the client on 2026-11-23, with this document):**
 1. "Empty bedrolls for the dead" cannot happen inside a run; camp shows only true signals and mourning lives in the hub (4.7).
 2. No tiny flavour effects, not even a hint (4.17; agreed, Q2).
 3. Camp time is budgeted (~12–16 min) but unmeasured; the drafts' "camps excluded" claim was wrong; the numbers pass's new-player overrun is unverified (4.5, 8).
@@ -880,7 +882,7 @@ The options the client rejected (Q1-B and C, Q2-B, Q3-B and C, Q4-B, Q5-B) are n
 13. RS 6.8's camp-2 act-change bullet contradicts RS 6.2 (F1; CH-4).
 14. The research is partly from recall and must be checked before any claim is quoted (1).
 
-**New lead's calls (made while writing; to be confirmed with this document):**
+**New lead's calls (made while writing; confirmed by the client on 2026-11-23, with this document):**
 1. **The Letter Rack.** The proposal's hub station "Sealed Letters" is renamed **the Letter Rack**, because EV's Strand name "Sealed Letter" (EV 5.3 card D1, KC13) collides (4.8, 5.2). "Letter rack" has 0 hits.
 2. **Near-collisions kept and flagged to the naming pass** (A.2): the camp phase **Arrival** shares its word with SV 6.2's simulator axis `Arrival` (a prose label, never an identifier); **Stairtop** sits next to FL's rules term **Stairhead**; the **coat rack and peg** sit next to EV's Curiosity "Coat Hooks by the Door"; the "memento wall" keeps LE 6.11's existing lower-case term, now named the **Memento wall** as a station.
 3. **Settled seats versus the vignette seat** (5.1): the floor-k Lingerer vignette seat is separate from the 3 settled seats; a settled floor-k Lingerer moves to the vignette seat and the balcony then seats 2, so Q5's "at most 3 visible" holds and no figure appears twice (corrected after the check).
@@ -892,7 +894,7 @@ The options the client rejected (Q1-B and C, Q2-B, Q3-B and C, Q4-B, Q5-B) are n
 
 ### 14.2 Future items triggered by reports, owners or later designs
 
-These come back to the client only if a report, an owner's refusal, a wave or a later design triggers them; each fallback is a lead's call unless marked.
+These come back to the client only if a report, an owner's refusal, a wave or a later design triggers them; each fallback is a lead's call (confirmed by the client on 2026-11-23, with this document) unless marked.
 
 | Item | Trigger | What happens | Owner / approval |
 |---|---|---|---|
@@ -918,7 +920,7 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 
 The design check (builder, consistency, player and art-narrative lenses) found two blockers in the camp's draw and save rules and one in the lore state, and a set of gaps in which this design broke its own charter. Every fix below sits inside the five agreed answers and the proposal the client confirmed; **none overrides a client decision**, and the check raised **no client question**. The figures, venues, waves and numbers the client confirmed stand; where a confirmed *sample line*, prop or texture broke a binding rule of this document, the sample was replaced and the figure kept.
 
-**Lead's calls after the check (to be confirmed with this document):**
+**Lead's calls after the check (confirmed by the client on 2026-11-23, with this document):**
 1. **The camp order regrouped** under the three confirmed headings: Arrival (A.1 get-up, A.2 catch-up, A.3 rest summary), the Hollow, Travel on; same content and order (4.2).
 2. **Catch-up draws:** WO4 carries only the first pending offer per unit; each pick draws the next level's offer inside its own WO8 write from `levelup/camp/{k}/unit/{unitId}/level/{L}` (fixed draw count); companion 3/6/9 choices draw nothing (4.2; CH-2).
 3. **`CampRest`**, a Core-issued system command logged in `run.log`, issues the rest when no pick is pending; reload re-enters catch-up or re-issues it (4.2; CH-2).
@@ -961,7 +963,7 @@ The design check (builder, consistency, player and art-narrative lenses) found t
 40. **Names:** the near-collisions Lingerer/Linger(ing), Kindler/Kindle and Rekindle, Indexer/Index, Barker/bark, Sitter/Sit with, Framer/Frame, Chalkwright/Chalked and the camp phase "the Hollow"/"the Hollow ahead" and "Last Hollow" are flagged to the naming pass (A.2). The placeholder names the client confirmed are not renamed here.
 41. **Small fixes:** camp 3's "fewer figures" dropped (the cast is the same); the Placecard-Writer's "dry at camp 3" marked M3; the Understudy's impressions given art counts (4.6, 5.1, 6).
 
-**Told plainly after the check:**
+**Told plainly after the check** (none overrides a client answer; confirmed by the client on 2026-11-23, all as written):
 - **T1.** The proposal left several builder points undefined: how later catch-up offers are drawn, what issues the rest, how the reward is taken, how potion stock is trimmed, what `BuyBatch` buys, how lore remembers within a run, how Nights are counted and how hub lines are saved. All are defined now; none changes a client answer.
 - **T2.** **Quitting at camp loses changes made since the last write.** SV has no quit-time write, and the proposal described one that does not exist. Equips, hand-overs, swaps, Rethink, the door choice and the Perilous toggle made after the last draw, spend or reveal are lost if the player quits. A reload shows the camp as it was at that write.
 - **T3.** **CH-26 narrows a settled CMP rule.** D1's confirmation on every declined board becomes a caption on the door, and the modal confirm is kept for real losses only. Without this change the confirm would appear at almost every camp. The CMP owner may refuse, and the fallback is stated (14.2).

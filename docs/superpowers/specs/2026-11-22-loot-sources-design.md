@@ -373,7 +373,7 @@ Each source is one `LootSocketRecord` with exactly one `kind` and one `rank`, or
 | `bossCard` | Reward screen | unranked | boss | M1 | A ledger kind with no world object and no square; LootBind skips it |
 | `viaticum` | F5 provisions container, in the lair room's host socket | unranked (boss channel; `leanRoute` flag) | boss share | M2 | A boss-channel offer, not a container draw (LE 6.11 item 5): outside the deal and the within-rank shuffles. Opens the width-3 offer UI (lead's call, after the check: the proposal ranked it SR0) |
 
-**Not world objects:** salvage, the camp channel (hook), the Memento (victory screen) and `bossCard`'s screen have no square. Of these, only `bossCard` is a kind, kept in the ledger so the 25 kinds cover every channel. **The Annex has no socket**: its prize is what it serves (settled, LE 6.9 item 1).
+**Not world objects:** salvage, the camp channel (hook; its content set by the camp and hub design 7.1, change CH-15), the Memento (victory screen) and `bossCard`'s screen have no square. Of these, only `bossCard` is a kind, kept in the ledger so the 25 kinds cover every channel. **The Annex has no socket**: its prize is what it serves (settled, LE 6.9 item 1).
 
 ### 4.2 Socket derivation, the role table and depth (lead's call; change LP-11)
 
@@ -920,7 +920,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
   - A ticking Landmark makes a clock room. **Segment 8 never places a clock Landmark in a room flagged `windfallHost`** (the Windfall has priority; lead's call, after the check), and V15g's `OneClockPerRoom` runs after segment 8. Segment 8 places no Landmarks at all (events design 4.2; EV-35, M2). EventPlace runs draw-free after LootBind and before V13g / V15g (`OneClockPerRoom`); loot never reads Curiosities (events design 4.10; EV-21, M2).
   - Curiosity props never use a container, bait-cache, Windfall or Bedside Stand silhouette (LP-14, LP-24 read; events design 4.11; EV-25, M2).
   - Dream Fragments may carry Windfall lore and claim the elite intel family.
-  - "The Hawker's Hour" is offered as an untimed bargain event. **Later:** a skin of the ITEMS 10.9 trader, with the items owner and camp and hub (events design 4.13; EV-42).
+  - "The Hawker's Hour" is offered as an untimed bargain event. **Later:** a skin of the ITEMS 10.9 trader, with the items owner and camp and hub (events design 4.13; EV-42). Camp and hub reads it as a floor event, not camp (camp and hub design 2.2, 5.4).
   - **Alcove occupancy (EV-2, M2; 7c applies):** an F1 Curiosity's first host is an Alcove set piece, taking the set-piece slot LP-11 prefers, never emptying a leaf or displacing a container the cap needs (events design 4.2).
   - **Pending requests to 7c (segment 8; not rules until ruled):**
     - `stepFunded`, a LootBind flag for priced extra routes to unstepped ordinary locks (4.3; events design 4.4.5; EV-15, M2). If refused: no priced lock routes (events design 14.2).
@@ -1439,7 +1439,7 @@ Split like V13 and run at the shared assertion point (AP2) after V13g and `V16g.
 | **CMP owner** | The Truant as a suggestion and simulator-policy target (LP-33) |
 | **Class owners** | `ignoresWindfall` |
 | **Segments 8, 9, 10** | 4.13 |
-| **Camp and hub owner** | The Lost Property hook |
+| **Camp and hub owner** | The Lost Property hook (taken up: held Later, only if greed gates miss; camp and hub design 2.2, 5.4) |
 
 ---
 
@@ -1640,7 +1640,7 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 | Windfall frequency | `WindfallsPerRun` from the first M3 arm, by theme mix and party schedule | Measured against the about 0.6–0.9 per run agreed with Q6 (option A); widening it in M4 follows the pilot's gates, and any lower frequency or turning it off returns to the client (row above) | Client (agreed, Q6) |
 | Richer Windfall stake | The highest-eligible-tier or width-2 offer arm passes ≤ +1 pp | Returns to the client before adoption (the Windfall was accepted as written) | Client |
 | Width-2 offer on nab | `WindfallIgnoreShare` high | Its own keyed grandchild; offer pacing counts it; adoption returns to the client (row above) | Lead (M4 lever); client |
-| Lost Property buy-back | Greed gates miss | Camp hook tested | Camp and hub owner |
+| Lost Property buy-back | Greed gates miss | Camp hook tested (held Later by the camp and hub design 5.4) | Camp and hub owner |
 | 7c clock line miss | Walker shows net > 0 | The 4.6 cut order (containers first), before any CMP 7.4 lever; its Windfall step returns to the client | Lead; client for the Windfall step |
 | Glean | Playtest shows no demand | Not shipped | Lead |
 | Tribute | `CowRate` shows Cow under-used | Returns to the client (reopens ENM 15.7 Q3) | Client; enemies owner |
@@ -1710,7 +1710,7 @@ The owed rows are the single list in 13; by owner:
 - **Segment 8 (events), segment 9 (bosses), segment 10 (UI) and audio:** 4.12, 4.13, 6; segment 8's no-clock-Landmark rule in Windfall rooms; segment 9's arena reading. Segment 8 is now designed (events design, approved 2026-11-22): its EV-2, EV-7, EV-15, EV-21, EV-25, EV-35 and EV-42 rows touch 7c (4.13); `stepFunded` and F-CACHE are pending requests to 7c. Segment 9 is now designed (boss rooms design, approved 2026-11-22): its BR-27 and BR-37 rows touch 7c (4.4, 4.10, 4.13). Segment 10 is now designed (exploration and information design, approved 2026-11-23): its XI-19, XI-23 and XI-27 rows touch 7c (4.2, 4.12, 4.13, 7), and XI-10 and XI-18 read 4.2 and 4.7.3; `SideRoomPayoffMix` is a pending request to 7c.
 - **Segment 11 (seeds):** the `windfall` grandchild (LE 6.10 item 1's new row), SocketPlan, step 8 and LootBind's sub-order in the frozen generation order (LE 6.10 item 4). **Answered** by the seeds and validation design (approved 2026-11-23; its 4.3 and 4.4): `loot/lootPlan/{N}/windfall/0`, fixed 4, attempt-invariant (M3); SocketPlan at GS9, step 8's Windfall draws at the start of step 8 inside 3a (GS10), LootBind at GS14 in 4.3's numbered order; its SV-1, SV-2, SV-6, SV-9 and SV-31 rows touch 7c (2.1, 4.2, 4.3, 4.7.8, 4.7.10, 4.11, 5.1 CT2).
 - **Segment 12 (validation):** V15 and the 7c reports. **Answered** by the seeds and validation design (approved 2026-11-23; its 5.1, 5.2, 5.4, 5.5, 6.2, 6.10): V15's qualified phases and failure classes, V15g at AP2 after `V16g.SlotLegal`, `LootBindDegrade` at LR4, the report-registry rows and the qualified arms; its SV-10, SV-18, SV-20, SV-22 and SV-24 rows touch 7c (4.3, 9.2–9.4, 10). Pending requests to 7c (not rules until ruled; fallbacks in its 14.2): the V15 M1 rows, the HE/Due binding proof, the default `LootPolicy`, and the merge-or-coin rule of `LootBindDegrade`.
-- **The camp and hub design:** Lost Property; the Hawker's Hour with segment 8 (Later; events design EV-42).
+- **The camp and hub design:** Lost Property; the Hawker's Hour with segment 8 (Later; events design EV-42). **Answered** by the camp and hub design (segment 13, approved 2026-11-23; its 2.2 row 19, 5.4 and 10): Lost Property is held Later, only if greed gates miss (14.2 unchanged); the Hawker's Hour stays a floor event (EV-42), not camp. None of its CH rows touches 7c; it reads LP-24 (its 4.7 trophy pole is never a container, Windfall or Bedside Stand silhouette), CF10 (its 4.11 Milestones page) and the Windfall pluck as reserved (its 4.14 AN9 and 6 blind-ID gate).
 - **The simulator:** every report of 9.3 and every arm of 9.4.
 - **Art, audio and writing:** 5, 6; Proprietor tags.
 - **Naming pass:** every placeholder name here.

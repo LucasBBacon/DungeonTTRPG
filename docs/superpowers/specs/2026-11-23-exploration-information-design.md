@@ -668,7 +668,7 @@ When "best remaining" is Common or nothing countable is left, the Treasure field
 - **Option availability (new lead's call):** the Lodestring option is shown greyed with its reason ("you already carry one") while the party holds one (cap 1), and is not offered at the camp before F5 (the fourth camp), where only the Sketch is offered, because the Lodestring is used on F2–F4 only.
 - **Resolution timing:** both resolve at the entered floor's entry or use, never on camp or Two Doors cards (V18t `PointerNeverPreDoor`). The camp card says only "Bought: Surveyor's Sketch".
 - The approved guards stay: never "behind a lock" wording; FactLedger dedup.
-- **Request:** the LE owner relaxes "unavailable while holding a Wax Key" for both options; parties without Mechanics need routing most, and neither option is the lock card. Fallback in 14.2.
+- **Request:** the LE owner relaxes "unavailable while holding a Wax Key" for both options; parties without Mechanics need routing most, and neither option is the lock card. Fallback in 14.2. Until the LE owner rules, the Bowl sits at the Keeper's Cart shown greyed with its reason while a Wax Key is held (camp and hub design 4.3).
 
 #### 4.6.4 F-TREASURE through Yield (change XI-25; lead's call; M3; enemies owner for ENM 14.6, Herald owner for HX-6)
 - F-TREASURE joins the interrogation categories after F-KEY (default priority unchanged), choosable through Pick the Question, **at most once per floor through Yield** (told plainly; balance fix so the paid pointer is not dead content), inside the shared cap of 2.
@@ -822,6 +822,7 @@ Inspect cards never queue. On a profile's first two runs, a one-line ribbon "Mor
 | Floor-info panel (cross-document comparison 2026-11-23, CC-125) | F | Menu (Start) | All |
 
   The M1 rebinding work adds a conflict check against operating-system-reserved chords (Alt+Tab, Alt+F4, the Windows key and its chords). Controller defaults are for the M2 focus model; controller polish stays Later.
+- **Camp rows (camp and hub CH-22 ⚑; agreed there, Q3; M2):** the **Camp List**, a left-side list mirroring every camp station, on the bumpers (stations only) for controller and keyboard; ambient figures are never on the station ring but on a separate **Hear-out sub-list** on one face button ("Hear out" is the ambient verb, distinct from the floor Listen action); **Hold captions** (captions persist until the next input or focus change; the setting pins the last line in a corner tray, default on above 100% text scale; no timed text); **Plain text for speakers** (one legible font, default on above 125% text scale); **controller Travel on** is a dedicated hold (0.6 s *(illustr.)*) reachable from any station, the door never default-focused, and the hold prompt shows any confirm lines, so **the hold is the confirm**. Inspect parity and `NoHoverOnly` apply at camp and hub (camp and hub design 4.1, 4.2, 4.13).
 - **M1:** full rebinding; text scale to 150% with `CardFit` re-run (including EV's worst-case card, an acceptance item); glyph scale; hold-or-toggle for every overlay; reduced motion (no ink-in, static string, no veil drift, Afterimages never animate).
 - **M2:** high-contrast overlay; sticky tooltips. **Later:** controller polish (the focus model is built in M2 so nothing is redesigned); screen-reader card text.
 - **Audio:** no new gameplay cue; map, Waymark, travel and fact sounds use the global UI timbre (RC7); a travel stop is never a tick (the Dream tick is reserved).
@@ -861,6 +862,7 @@ Inspect cards never queue. On a profile's first two runs, a one-line ribbon "Mor
   - **Pending request (segments 11–12; SV-22; M2):** walker equivalences, for example whether `XI.Completionist` equals `FL.Hunt` plus optional fights, are an owner question for the XI, FL and EV owners, not a silent mapping. Not a rule until they rule; if they do not, there is no mapping and each gate reads its own owner's arm (seeds and validation design 6.2, 14.2).
 - **Camp:** the Tithe Bowl (Lodestring or Surveyor's Sketch); the conditional Ear Trumpet stock row (agreed, Q3); the next-floor card unchanged (RS 6.9); the Lore roster preview (RS, M3); the previous floor's Atlas page on the dream track (M3).
 - **Hub and profile:** `uiMemory`; codex hosting (RS owns, segment 10 hosts, EV-37); the Floor Atlas in the run record (M3).
+- **Answered** by the camp and hub design (segment 13, approved 2026-11-23; its 2.2, 4.3, 5.2, 11): the Tithe Bowl at the Keeper's Cart, camps 1–4, the Sketch only at camp 4, shown greyed with its reason while a Wax Key is held until the LE owner rules on 4.6.3's request (M3); the Ear Trumpet row in the vendor panel (M3, conditional); the next-floor card trimmed and unchanged at the door station, with the Lore roster preview in its detail tier and the previous floor's Atlas page pinned to the dream-track ribbon above the door (M3); camp chalk is pictorial, never this document's chalk grammar (its 4.7); `uiMemory` stages the hub stations and the ambient first-focus tooltip (its 4.12); codex hosting includes the "Residents of the Hollows" pages (M3; its 4.15.8); the Floor Atlas and fatal-room map in the Book of Nights and the recap (M3); the camp input rows in 4.10 (camp and hub CH-22 ⚑).
 
 ---
 ## 5. The UI surface catalogue (lead's call; every hook placed)
@@ -1247,7 +1249,7 @@ The FL 11.4 walker (lean = gate arm, balanced, completionist) plus a human-sessi
 | **CMP owner** | Informed: no coverage-strip line for the Ear Trumpet (XI-26) |
 | **Main design owner** | MAIN 6.6: the UI annex (XI-7), `uiMemory` (XI-21), the continuous suspend slot (XI-28); MAIN 4.3 reading (XI-2) |
 | **Segments 11–12** | 4.13 (answered: seeds and validation design 11) |
-| **Camp and hub** | 4.13 |
+| **Camp and hub** | 4.13 (answered: camp and hub design 11; CH-22 applied in 4.10) |
 
 **Hook answers:**
 
@@ -1577,6 +1579,7 @@ The owed rows are the single list in 13; by owner:
 - **The room terrain owner (segment 3):** XI-2 (TR-5 reading).
 - **The main design owner:** XI-2 (MAIN 4.3 reading), XI-7 (UI annex), XI-21 (`uiMemory`), XI-28 (the continuous suspend slot).
 - **Segments 11 and 12 (seeds, validation, saves):** 4.13; V18 (XI-30); the suspend slot's write, load and precedence mechanics. **Designed:** the seeds and validation design (approved 2026-11-23; its 4.8, 5.2, 6, 11); pending there: walker equivalences (4.13).
+- **Camp and hub (segment 13):** 4.13. **Designed:** the camp and hub design (approved 2026-11-23; its 11); its CH-22 is applied in 4.10.
 - **The simulator:** every report of 9.3 and every arm of 9.4.
 - **Art, audio and writing:** 4.2, 5, 6.
 - **Naming pass:** every placeholder name here.

@@ -189,7 +189,8 @@ the cap falls to two if the clock cannot hold it **(agreed, Q1, Q2)**.
 
 - **The camp and hub screens in full.** This document fixes the Muster's
   rules, order and contents (7.11); layout belongs to the camp and hub
-  design and the builders.
+  design and the builders (taken up by the camp and hub design, segment
+  13, approved 2026-11-23: camp and hub design 4.1–4.3).
 - **The enemies owner's solo composition table, the conditions owner's
   rulings and the consumables owner's DEP-1 reading.** This document
   requests them (17) and states how companions work either way.
@@ -949,7 +950,11 @@ Q2):**
   floor (every floor ends at its boss; `BossDefeated` is canonical and
   loot sources' `BossResolved` is its alias, boss rooms design 4.2.4;
   BR-37), excluding camp screens, pause
-  menus and any idle gap over 60 s *(illustr.)*. The gate value is the
+  menus and any idle gap over 60 s *(illustr.)*. Camp time stays outside
+  this gate; it is reported by `CampSeconds`, `CampClicks`,
+  `RunWallClock`, `HubSeconds` and `DeathPathSeconds`, from SV 6.11 human
+  sessions until telemetry consent exists (change CH-5, read; camp and
+  hub design 4.5; M2). The gate value is the
   **median over floors 4 and 5** of at least 12 sessions *(illustr.)*
   per cap arm (kept as written; the median's interval is printed beside
   it and 20 sessions are recommended; change SV-25, seeds and validation
@@ -1063,7 +1068,13 @@ internal design target; ability 11.4's playtest target is unchanged.
 **(lead's call; the right to decline agreed, Q1)**
 
 - **D1.** Any card, or the whole board, is declined with **Travel on**:
-  one click plus a one-line confirmation showing the forecast (7.11).
+  one click on the lit door, whose always-shown caption carries the
+  forecast (7.11), shown before the click and never modal. A confirm
+  appears only when something the party owns or is owed would be lost
+  (camp 4 with a purse at least the cheapest vendor item; `choice` still
+  unset; a Perilous Door choice, M3); an open slot with an unused hire is
+  a passive line on the door card, never a confirm reason (change CH-26,
+  camp and hub design 4.2; M2).
 - **D2, the carried hire.** If no one is hired at a camp where a slot was
   open **on arrival**, the next camp allows **one extra hire** (up to 2),
   with no extra card. It holds one hire and never stacks. With 3 cards
@@ -1073,7 +1084,8 @@ internal design target; ability 11.4's playtest target is unchanged.
 - **D3.** Nothing is missable: unhired kits can reappear (7.2).
 - **A declared Lone Road run (M3; new lead's call)** hides the Musters
   and is otherwise identical to declining every card: the same shortfall
-  weights, no extra bonus.
+  weights, no extra bonus. Its camps show no open-slot bedrolls (change
+  CH-23, camp and hub design 4.7; M3).
 
 ### 7.6 Dismissal and swap (M2)
 
@@ -1126,9 +1138,13 @@ internal design target; ability 11.4's playtest target is unchanged.
   room. Its join-card and Rethink choices are discarded. **An undone swap
   does not bring back the dismissed companion:** the swap confirmation
   says "X leaves for good", and the dismissal stays used.
-- **Top-up re-check (change CMP-22; narrowed).** On Travel on, the DH
-  13.2 procedure runs again **only if a dismissal this visit deleted a
-  healing potion the hero held** (a moved bound dose). It then runs in
+- **Top-up re-check (change CMP-22; narrowed; timing change CH-26,
+  camp and hub design 4.2; M2).** Inside the dismissal or swap command
+  and its WO8 write, the DH 13.2 procedure runs again **only if that
+  dismissal deleted a healing potion the hero held** (a moved bound
+  dose); if the dose has no belt or pack room, the dismissal's own
+  confirm names the forfeit. Travel on keeps the check only as an
+  assertion that finds nothing. The procedure runs in
   full: first it moves a companion's dose to the hero (a newcomer's kit
   potion included), and only if no party unit holds one does it issue
   the camp-issue potion. Selling, handing over or drinking potions at
@@ -1317,7 +1333,9 @@ door commit at step 11 change RT-10, RT-11, run structure design 6.8):**
 1. Downed companions get up (DH 13.1 step 1);
 2. **camp catch-up** (enemies 16) for the hero and every companion, with
    their level-up choices and any skill offer resolved here, hero first
-   (ability 6.9; CMP-17);
+   (ability 6.9; CMP-17); companions' pending choices may be taken at
+   once with **Accept kit defaults** (8.2; change CH-17, camp and hub
+   design 7.4; M2);
 3. all HP and every pool restored, to the post-catch-up maxima (DH 13.1
    step 2);
 4. every lingering condition ends, Scarred included (DH 13.1 step 3);
@@ -1336,10 +1354,19 @@ door commit at step 11 change RT-10, RT-11, run structure design 6.8):**
    at the vendor); a recruit joins at the post-catch-up hero level;
 9. vendor (DH 13.1 step 6);
 10. shop or reward (unchanged, **decided**, main 4.1; items 10.4);
-11. Travel on (the narrowed top-up re-check, 7.6; when route choice is
+11. Travel on (the narrowed top-up re-check now runs at the dismissal
+    and is only asserted here, 7.6; CH-26; when route choice is
     on (run structure design 6.11), it commits the chosen door, which can
     be changed until then; floor N + 1 is generated with the final
     party).
+
+**Presentation (change CH-1, a reading; camp and hub design 4.2; M2).**
+The order above is unchanged and is played in three phases:
+**Arrival** (steps 1–7: get-up, the catch-up picks, then steps 3–7 as
+one rest-summary command shown after the catch-up picks), **the Hollow**
+(steps 8–10 as concurrent stations after card A and the Eye's card, in
+free order until Travel on; the `choice` state unchanged) and **Travel
+on** (step 11).
 
 The hero already reached level 3 at the floor-1 antechamber **(change
 RT-8, run structure design 9.4)**, so the recruit's join card at camp 1
@@ -1356,17 +1383,18 @@ catch-up grants (say Medicine) moves card A to the next need (11.5).
   signature line, L3/6/9 preview, trait line, "Can be Downed, never
   killed", and the **Party Forecast** line.
 
-**Party Forecast** (computed by the core; on every card and on Travel
-on) **(lead's call)**:
+**Party Forecast** (computed by the core; on every card and as the lit
+door's always-shown caption at Travel on, never modal; change CH-26,
+camp and hub design 4.2) **(lead's call)**:
 - next floor's sizing, framed as sizing, never as a bonus: "Floor 3
   fights sized for 3 (weight 31)" or "Floor 3 sized for you alone (weight
   12)";
 - coverage change ("covers Mechanics");
 - worst-member Stealth ("Party Stealth +4 → +1");
 - turn load ("+1 turn per round");
-- on Travel on: "Fewer companions: smaller fights, but every blow lands
-  on fewer of you", and the carried-hire line (7.1; the stranded-slot
-  line is deleted, change RT-1);
+- on the Travel-on door caption: "Fewer companions: smaller fights, but
+  every blow lands on fewer of you", and the carried-hire line (7.1; the
+  stranded-slot line is deleted, change RT-1);
 - on a swap made while a slot is open: the swap forecast lines (7.6).
 
 **First-recruit beat (M2, cosmetic; lead's call):** on a run's first
@@ -1497,6 +1525,14 @@ at levels 1, 5 and 10, so companions never lower the AR-20 bound.
   re-pick one of its 3/6/9 choices. Free, not a camp-pool spend. Never
   re-picks a kit's stance (Vanguard design 7.5), class, skills or flex
   skill.
+- **Accept kit defaults (M2; change CH-17, camp and hub design 4.2,
+  7.4):** at camp catch-up one press issues the ordinary default pick
+  commands (`KitChoicesDefaulted`) for every companion with a pending
+  choice, shown one line per companion with a change link. The link is
+  live only until `CampRest` (the rest summary) is issued; after that a
+  change is a Rethink, once per companion per camp. The hero's picks are
+  always manual; the press is hidden on a profile's first 3 runs
+  *(illustr.)*.
 
 ### 8.3 The eight M2 kits
 
@@ -1761,6 +1797,11 @@ preview and 17.3 danger band cover four units.
   Gatekeeper").
 - M3: a cosmetic **Veteran** record remembers kits that took part in a
   win; Old Friend can recall that name.
+- **Ambient grammar (M2; change CH-21, camp and hub design 4.14 AN10):**
+  no camp or hub ambient figure carries a kit silhouette or accent;
+  Veterans appear as portraits only; the Night Usher, a Pledge source or
+  a former companion is never an ambient figure. Companion speech at camp
+  is a reserved Later speaker class (camp and hub design AN13).
 - Later: barks keyed to deeds; named personalities.
 
 ## 9. New mechanics considered
@@ -2171,7 +2212,7 @@ by the axis, so no name collides with another segment's `Reference` or
   join card shows the L3 choice; a catch-up that grants Medicine moves
   card A to the next need (cross-document comparison 2026-11-23, CC-79).
 - A dismissed companion's bound dose leaves the hero's belt, and the
-  Travel-on re-check first moves another companion's dose (a newcomer's
+  re-check inside the dismissal command (CH-26) first moves another companion's dose (a newcomer's
   kit potion included), else issues the camp-issue potion; selling or
   handing over potions at camp never triggers an issue.
 - Two companions' kit potions never merge into one stack.
@@ -2203,10 +2244,10 @@ by the axis, so no name collides with another segment's `Reference` or
 |---|---|
 | **M1** | Nothing. M1 is solo (main 9) |
 | **M2, first** | Vertical-slice timing: the telemetry events, `FloorTimeByPartySize` (the gate, defined in 7.4), the blind party-of-3 vs party-of-4 playtest, the accept-rest-of-turn prototype (flagged). The slice holds floors 4–5 with their templates and one boss each, the eight kits at levels 7–10 and grouped playback (7.4). The cap is fixed from these before balance work freezes |
-| **M2** | Musters at camps 1–3 (7); the slot ladder; 3 cards (+1 Eye); gap card and coverage strip; carried hire; decline, dismiss and swap with `kitBound`; next-camp preview; Party Forecast; two-tier card; first-recruit beat; the 8 kits with flex skill, fixed arrays, level equal to the hero's, one choice grammar, Rethink; the `recruit` stream; the shortfall discount with the solo composition table and `SoloBudgetMonotone` (**agreed**, Q1); boss HP from the actual party; guard rows at every reachable size; the recruit policy and arms; all validators and reports; Deeds; Recruiter's Eye (cut line → M3) |
+| **M2** | Musters at camps 1–3 (7); the slot ladder; 3 cards (+1 Eye); gap card and coverage strip; carried hire; decline, dismiss and swap with `kitBound`; next-camp preview; Party Forecast; two-tier card; first-recruit beat; the 8 kits with flex skill, fixed arrays, level equal to the hero's, one choice grammar, Rethink; Accept kit defaults (CH-17); the forecast as the door caption and the narrowed Travel-on confirm (CH-26); the `recruit` stream; the shortfall discount with the solo composition table and `SoloBudgetMonotone` (**agreed**, Q1); boss HP from the actual party; guard rows at every reachable size; the recruit policy and arms; all validators and reports; Deeds; Recruiter's Eye (cut line → M3) |
 | **M2 prerequisites owed by other owners, before records** | CMP-5 to CMP-9, CMP-17 and the solo composition table (enemies owner); CMP-12 (consumables owner); CMP-21 (items owner); CMP-22, CMP-23 and CMP-31 (DH owner); CMP-26 (Vanguard owner); CMP-27 (naming pass); CMP-30 (trinkets owner); CMP-32 (conditions owner); CMP-33 (Shade owner); CMP-34 (armour owner) |
 | **M2 cut fallbacks** | Recruiter's Eye → M3; Rethink → M3; Deeds → M3. Never cut: the gap card, `kitBound`, the shortfall discount, boss HP from the actual party, the floor-time gate |
-| **M3** | Lone Road; milestones; kit unlocks (main 4.7); the Old Friend starting boon (a named unlocked kit among camp 1's cards, replacing a free draw, never the gap card, declinable; it is the run's one starting boon, competing with skill-granting boons, main 4.7); Wayfarer's Pack (+1 belt slot within the hard max 3) as a milestone boon option; locked-class non-caster previews (classes 7.8); the Veteran record |
+| **M3** | Lone Road (no open-slot bedrolls at its camps, CH-23); milestones; kit unlocks (main 4.7); the Old Friend starting boon (a named unlocked kit among camp 1's cards, replacing a free draw, never the gap card, declinable; it is the run's one starting boon, competing with skill-granting boons, main 4.7); Wayfarer's Pack (+1 belt slot within the hard max 3) as a milestone boon option; locked-class non-caster previews (classes 7.8); the Veteran record |
 | **M4** | A third kit per class, including a second Arcana non-caster; any heal kit the client approves |
 | **Later** | Pledges (captives, wanderers, shrines; Meet at camp; Send home); rival-party survivors; bonds; barks and personalities; mortal companions (the DH Later rung); Beastbound's bonded companion (classes 9.1); the Muster stipend (parked); Poultice (only through the client) |
 
@@ -2429,8 +2470,16 @@ yet designed (cross-document comparison 2026-11-23, CC-81):
   reusing this design's Deeds pipeline (8.7), display only, following it
   to M3 if Deeds are cut (12) (cross-document comparison 2026-11-23,
   CC-80).
-- **The camp and hub design:** the Muster screen inside the camp order of
-  7.11; the camp reward card (items 10.4) is unchanged.
+- **The camp and hub design (segment 13, approved 2026-11-23; taken
+  up):** the Muster screen inside the camp order of 7.11 is the Muster
+  Post station (camp and hub design 4.2, 4.3); the camp reward card
+  (items 10.4) is unchanged here, its content set by CH-15 (camp and hub
+  design 7.1); Pledges stay Muster cards, never ambient; the Lone Road
+  toggle and the Old Friend and Wayfarer's Pack boons sit on the hub's
+  Heirloom shelf and the Veteran record in the Library's Veteran book
+  (M3; camp and hub design 2.2, 5.2). Its rows on this owner are applied:
+  CH-1 (reading, 7.11), CH-5 (read, 7.4), CH-17 (7.11, 8.2), CH-21 (8.7),
+  CH-23 (7.5) and CH-26 (7.5, 7.6, 7.11).
 - **The simulator:** every arm in 11.3 and report in 11.4 at both caps;
   the flex-skill re-run before M2 sign-off (an S run of the same arm,
   10.6; SV-21); reconciling the two

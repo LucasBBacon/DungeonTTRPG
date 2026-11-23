@@ -766,7 +766,7 @@ A MECH card, and any option marked as tied, is tied at generation to a named **r
 - The setup option prints "pays later, if you get there". An unpaid Strand gets a closure line on the next run-start card ("The letter stayed sealed."; 4.5.10).
 - Payoffs are facts or routes within the band (`StrandValue`, read from `curiosityValueTable`). Never loot or units.
 - Report `StrandCashRate` ≥ 400‰ on the streak arm *(illustr.)*, counting only cashes whose fact was not already known (`StrandCashed{fellThrough}`).
-- **M2 lean and M3 (new lead's call).** M2 ships every catalogued Strand option with a single named payoff, cashed at floor entry or at the Coat Hooks, plus the one closure line. M3 completes the device: camp display of carried Strands, keeper lines that name them, and Strands named by Sequel stages. In M2 each F1 theme's **pilot Strand** (the Gaol's *Signed In*, the Kennel's *Collared*, the Wake's *In Mourning*) carries the `StrandCashRate` gate; every other Strand reports only. After the check, each pilot Strand sits on a priced option facing a priced lit option, so no free alternative beats it.
+- **M2 lean and M3 (new lead's call).** M2 ships every catalogued Strand option with a single named payoff, cashed at floor entry or at the Coat Hooks, plus the one closure line. M3 completes the device: camp display of carried Strands (knotted cords over the camp fire; camp and hub design 4.7), keeper lines that name them (the camp keeper's only M3 lines; CH-14, camp and hub design 5.1), and Strands named by Sequel stages. In M2 each F1 theme's **pilot Strand** (the Gaol's *Signed In*, the Kennel's *Collared*, the Wake's *In Mourning*) carries the `StrandCashRate` gate; every other Strand reports only. After the check, each pilot Strand sits on a priced option facing a priced lit option, so no free alternative beats it.
 - **Default payoffs (new lead's call; illustr.).** Strands the proposal listed without a payoff take the payoff named in the catalogue rows of 5.3 (each marked there), so every Strand names its payoff (KR10).
 - **Cuts never strand a payoff.** Floor-entry cashes are untouched by every step of the clock cut order, and the Coat Hooks survive cut step 1 (4.7; V16t `StrandSurvivesCut`) **(lead's call, after the check:** replaces the proposal-era overlay-only Interludes, which floor-entry cashing makes unnecessary**)**.
 
@@ -789,7 +789,7 @@ A MECH card, and any option marked as tied, is tied at generation to a named **r
 - This closes the abandon-farming route to cross-run power (BC1). `SightingsPerRunMinute` watches for farming anyway.
 
 #### 4.5.10 Afterword and memorials (change EV-26)
-- **M2 lean:** one run-start line keyed to how the last **personal** run ended, plus the Strand closure line (4.5.7). Example: "The Kennel remembers your scent." **(new lead's call:** M2 lean is exactly these two line kinds; camp-keeper lines and chain beats are M3**)**.
+- **M2 lean:** one run-start line keyed to how the last **personal** run ended, plus the Strand closure line (4.5.7). Example: "The Kennel remembers your scent." **(new lead's call:** M2 lean is exactly these two line kinds; camp-keeper lines and chain beats are M3**)**. **Reading (camp and hub design 13, CH-14; RS and EV owners):** the camp keeper's M2 strings are service strings (UI text), not keeper lines (camp and hub design 5.1).
 - **Selection (lead's call, after the check).**
   - After a death: the first line, in authored priority, not yet seen on this profile, whose key matches the Grave Goods record (floor, theme, killer category).
   - After a win or an abandon: the first unseen line keyed to that outcome, or no keyed line.
@@ -797,12 +797,14 @@ A MECH card, and any option marked as tied, is tied at generation to a named **r
   - The run-start card shows **at most 1 Afterword line and at most 1 closure line** (for the oldest pending Strand). A shown closure clears its `pendingClosure` entry.
   - Never silence by exhaustion: the fallback order is the keyed line, then the closure line, then a generic line.
 - **Budget (illustr.).** At least 3 keyed lines per (F1–F2 theme × killer category) and at least 12 generic lines: about 60–90 short lines, about 0.7k words, each through tone review (pillar 2). Report `AfterwordExhaustion`: on the streak arm, 10 runs never reach a silent run-start card and use no generic line before run 6 *(illustr.)*. This keeps 0.1's "losing moves the dream" true of M2 as budgeted.
-- **M3:** camp-keeper lines, Sequel chain beats, plus the **Unwoken Roll** as the single fallen-hero device:
+- **M3:** camp-keeper lines (Strand lines only: lines that name carried Strands, never a lore chain; CH-14, camp and hub design 5.1), Sequel chain beats, plus the **Unwoken Roll** as the single fallen-hero device:
   - at most once per run, only after the profile's first death;
   - the last 3 names plus "and others";
   - marks, never a count;
   - forward-looking, never cumulative;
   - a setting to hide memorials (FC11).
+  - **Hub home (CH-14; M3):** the Roll is a hub object at the Stairtop with the **Sitter**, who owns the hub death reaction as the Roll's caption, from a small sincere pool; every limit above is kept, and no figure names the fallen (camp and hub design 4.10, 5.1). The Sitter's selector calls this section's Afterword selector and excludes that line's key family (`AfterwordNoEcho`; camp and hub design 4.15.6).
+- **The Afterword stays on the run-start card, unchanged** (CH-14; `AfterwordExhaustion` untouched); at most one figure reacts to a death per Night: none in M2, the Sitter in M3 (camp and hub design 4.15.6).
 - Never humour on death (pillar 2). Never the Dreamer.
 - Afterword lines never change what is drawn or offered (agreed, Q4).
 
@@ -986,10 +988,11 @@ Floor-entry Strand cashes are untouched by every step, and the Coat Hooks surviv
   - V16; the reports and arms (9).
   - (answered: `curiosities` a `vector` of 12, attempt-invariant, with the labels kept; EventDraw GS3, EventPlace GS15, V16g at GS3 and AP2; the resolve write is that command's slot write (WO3); memory outside the key, simulator and seeded writes limited; launcher order with the boss rule; V16 phases and classes; reports event-sourced and classed; arms qualified; SV-1, SV-2, SV-4, SV-6, SV-8, SV-9, SV-13, SV-16, SV-20 to SV-23, SV-25, SV-30, SV-31; seeds and validation design 4.3, 4.4, 4.6, 4.8.3 WO3, 5.4, 6.2, 11).
 - **Camp and hub:**
-  - Afterword and keeper lines; Strand display;
-  - Pledges, Testimony and the Hawker's Hour (Later);
-  - Tithe Bowl fact dedup through the FactLedger;
-  - coin owed (held, off).
+  - Afterword and keeper lines; Strand display (answered: the Afterword unchanged on the run-start card; keeper M2 service strings, M3 Strand lines only; Strands as cords over the camp fire, M3; CH-14; camp and hub design 2.2, 4.15.6, 5.1);
+  - Pledges, Testimony and the Hawker's Hour (Later) (answered: Pledges and Testimony on Muster cards only, never ambient; the Hawker's Hour stays a floor event; Lost Property held; camp and hub design 2.2);
+  - Tithe Bowl fact dedup through the FactLedger (answered: at the Keeper's Cart, dedup unchanged; M3; camp and hub design 2.2, 4.3);
+  - coin owed (held, off) (answered: stays off; camp and hub design 2.2);
+  - the Unwoken Roll and Sequel beats (answered: the Roll's hub home with the Sitter, all limits kept, CH-14, M3; Sequel beats on the run-start card, unchanged; camp and hub design 2.2, 4.10).
 
 **Hooks the parents hand to segment 8, answered (lead's call, after the check).** One row per parent hook (2.2):
 
@@ -1249,12 +1252,12 @@ Cut: the Glass of Water and the Turned-Down Corner (RS 7.5; FC5, KC19). Moved: t
 
 - **Cut order when capacity runs short:** per-class and per-theme variants first (G9 shows a class-neutral bundle; D2 already uses a class-neutral coat; Ca7's poster is a silhouette), then Glimpse rotation variants, then band rares; never F1 or Shallows depth or their R2 (0.1).
 - The figure frame (M3), and Unwoken Roll skins per theme except the Heart (M3).
-- Every new figure or prop passes the M2 readability gates: greyscale, silhouette lineup, tone by depth, and the role-ID rows, which add **"Curiosity prop or Portal"**, **"Curiosity prop or container"**, **"Curiosity prop or bait-cache"**, **"implied figure or unit"** (M2), **"figure frame or mindless unit"** (M3) and, for the Kennel, **"Glimpse or Cord"** **(lead's call, after the check)**.
+- Every new figure or prop passes the M2 readability gates: greyscale, silhouette lineup, tone by depth, and the role-ID rows, which add **"Curiosity prop or Portal"**, **"Curiosity prop or container"**, **"Curiosity prop or bait-cache"**, **"implied figure or unit"** (M2), **"figure frame or mindless unit"** (M3) and, for the Kennel, **"Glimpse or Cord"** **(lead's call, after the check)**. **Camp and hub (CH-12; M3):** a role-ID row "hub coat display vs the Coat Hooks and implied-figure silhouettes"; the hub's coat rack hangs each mantle on its own newel peg, never hooks by a door (camp and hub design 4.8, 6).
 
 **Audio (restated after the check)**
 - **Card open and First Telling:** the RC7 global UI timbre, a soft "paper turn" on open and a "soft swell" on a First Telling. Neither is a chime (the floor-1 small-hour chime is a reserved RC7 cue) nor a sting (stings are reserved for bosses, Stir announcements and the pending Choir Ritual). Both join the audio blind-ID test at ≥ 85% *(illustr.)*. Twice-Told cards are silent.
 - **Rule-bearing sounds** use their approved cues: every noise option plays **only the generic noise cue**, with no diegetic flavour foley (no drawer slam, knock, pipe, applause or singing). Watch, clock and mantel acts are silent: no ticking (the Gaol keeps ticking for its boss arena; the Wake's clocks are stopped).
-- **No reserved cue in any bed:** horns, alarm bells, the struck-bronze cue, the Lullaby Glyph's wind-up click and the Heart's music box stay out (RC7; TL).
+- **No reserved cue in any bed:** horns, alarm bells, the struck-bronze cue, the Lullaby Glyph's wind-up click and the Heart's music box stay out (RC7; TL). **Camp music box (CH-12; M2):** the camp box has its own timbre, degraded by filtering, detune and dropped notes only, and passes the blind-ID gate against the Heart's box and the Gaol bed's box; no figure handles it (camp and hub design 6).
 - `ReservedCues` is an **audio-tag check** against the RC7 and TL timbre tables, as well as the horn and bell prop check (9.2).
 
 ---
@@ -1564,7 +1567,7 @@ No wave carries a least-seen draw inside the key (rejected, Q1).
 | **Segment 9** | Seeded boss variables; the arena seal; the F-BOSS queue; poster Glimpses; floor-1 boss variety as a production priority (agreed, Q2); the RS Cut 1 question once carried for the client (14.2), now answered as graded (BR-26) (cross-document comparison 2026-11-23, CC-116). **Answered by the boss rooms design (segment 9, approved 2026-11-22; BR-3, BR-23 to BR-26, BR-29):** the seal is `ArenaEngaged`; F-BOSS facts from the Rendition and mirror in the `bossQueue` order; 3 Renditions per F1 boss and the graded RS Cut 1 (agreed, boss rooms Q1); the Ca7 poster Glimpse on a Carnival wall slot, Interludes keeping `AntechamberScreened` and the F5 Coat Hooks (boss rooms design 4.1, 4.2, 4.12) (cross-document comparison 2026-11-23, CC-120) |
 | **Segment 10** | 4.12. **Answered by the exploration and information design (segment 10, approved 2026-11-23; XI-4, XI-6, XI-22, XI-27, XI-29):** facts and F-ROOM drawn per 4.3.6; chips read `PatrolForecast` (agreed, exploration and information Q2; cross-document comparison 2026-11-23, CC-120); `CardFit`; codex hosted (M3); F-TREASURE (M3) and beckoning Glimpses (request) |
 | **Segments 11–12** | The stream, its draw map, pass order, safe point, memory field, launcher, V16 and arms. **Answered by the seeds and validation design (segments 11–12, approved 2026-11-23; SV-1, SV-2, SV-4, SV-6, SV-8, SV-9, SV-13, SV-16, SV-20 to SV-23, SV-25, SV-30, SV-31):** the `curiosities` `vector` key and draw map (4.10); keyed checks `h:curiosity` (4.3.2); the pipeline and AP2 (4.10); WO3 for the resolve write; seeded and simulator writes (9.1); V16 phases and classes (9.2); report classes (9.3); qualified arms and 200 streak profiles (9.4); pending request to this design's owner: walker equivalences (9.4) |
-| **Camp and hub** | Afterword and keeper lines; Pledges; Testimony; the Hawker's Hour; Tithe Bowl dedup; coin owed |
+| **Camp and hub** | Afterword and keeper lines; Pledges; Testimony; the Hawker's Hour; Tithe Bowl dedup; coin owed. **Answered by the camp and hub design (segment 13, approved 2026-11-23; CH-12, CH-14):** the Afterword unchanged on the run-start card; keeper M2 service strings, M3 Strand lines only; the Unwoken Roll's hub home with the Sitter and `AfterwordNoEcho` (M3); Pledges and Testimony on Muster cards only; the Hawker's Hour a floor event; Tithe Bowl dedup unchanged; coin owed off; camp box and coat-display gates (6) (camp and hub design 2.2, 4.10, 4.15.6, 5.1, 6) |
 | **Conditions owner** | The `eventBoon` form (agreed, Q3 makes M2 Graces depend on it), Weary's universality, Easing |
 | **Enemies owner** | The noise reading, the FactLedger, Overtures |
 | **EP owner (segment 6)** | The noise reading (EV-14, with the enemies owner); the EP 13 reading for Overtures (EV-32) |
@@ -1846,7 +1849,7 @@ The owed rows are the single list in 13; by owner:
 - **Segment 10 (UI):** 4.12; EV-17. Answered by the exploration and information design (approved 2026-11-23; XI-4, XI-6, XI-22, XI-27, XI-29; its 4.3.6, 4.6.1, 4.8.1, 4.10, 5); pending requests to this design's owner: beckoning Glimpses, `SideRoomPayoffMix`, the Curiosity Lodestring gain (XI-23, XI-27).
 - **Segment 11 (seeds):** the `curiosities` stream and its draw map, the pass order, the launcher order (EV-20, EV-21, EV-40). Answered by the seeds and validation design (approved 2026-11-23; SV-1, SV-2, SV-4, SV-6, SV-8, SV-9, SV-13, SV-16, SV-30, SV-31; its 4.1–4.4, 4.6–4.8, 11).
 - **Segment 12 (validation):** V16 and the reports (EV-38, EV-39). Answered by the seeds and validation design (approved 2026-11-23; SV-20 to SV-23, SV-25, SV-30; its 5.1–5.4, 6.1–6.5, 6.12); pending request to this design's owner: walker equivalences (SV-22; 9.4, 14.2).
-- **The camp and hub design:** Afterword and keeper lines, Pledges, Testimony, the Hawker's Hour, coin owed.
+- **The camp and hub design:** Afterword and keeper lines, Pledges, Testimony, the Hawker's Hour, coin owed. Answered by the camp and hub design (segment 13, approved 2026-11-23; CH-12 (EV 6), CH-14 (EV 4.5.10); its 2.2, 4.10, 4.15.6, 5.1, 6).
 - **The simulator:** every report of 9.3 and every arm of 9.4.
 - **Art, audio and writing:** 5, 6.
 - **Naming pass:** every placeholder name here.

@@ -942,7 +942,9 @@ are listed on the same screen above the choice. **(lead's call)**
   avoidable opportunity attack; in playtests, testers accept most
   suggestions.
 - Nothing is ever taken without the player. The hero never gets
-  suggestions.
+  suggestions. Read by the camp's "Accept kit defaults" press, which the
+  player presses and which never takes the hero's picks (camp and hub
+  design 7.4; change CH-17, read; M2).
 - An optional accept-rest-of-turn key (player-pressed each turn; never
   the hero) is prototyped in M2 behind a playtest flag, off in every
   release build, and ships only if the client says yes after the M2
@@ -1430,6 +1432,13 @@ Applied on 2026-11-16:
   (agreed, Q3; M3, conditional), and the `PatrolForecast` reading to the
   15.1 rest report (agreed, Q2; M2); 8.3 reads `PartyKnowledge`
   unchanged. **(changes XI-3, XI-6, XI-12, XI-26)**
+- **Camp and hub:** settled in `2026-11-23-camp-hub-design.md` (camp and
+  hub design, segment 13, approved 2026-11-23). It changes no rule here:
+  its "Accept kit defaults" press reads 11.3 unchanged (camp and hub
+  design 7.4; M2), and it reads 6.5 (camp spell swap), 10.2 (offers at
+  camp catch-up) and 15.1/15.3 (short rests on floors only; supply)
+  unchanged. Its ambient verb Hear out is not the 7.2 Listen action
+  (camp and hub design 14.1). **(change CH-17, read)**
 - **Content volume:** counts of companions, themes, monsters and bosses for
   M2. The M1 slice class is the Vanguard (classes design) **(change
   CL-13b)**.

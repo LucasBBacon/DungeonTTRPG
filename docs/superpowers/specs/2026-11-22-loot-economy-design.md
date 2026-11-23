@@ -904,7 +904,10 @@ premium and is logged; its VP is unchanged.
   the generated floor N, not N+1 (CN 14.7 unchanged; told plainly). No
   camp channel after F5. Where TL's "one camp notables slot" draws a Wax
   Key, it is a third camp display entry outside Ledgers A and B (keys
-  are access; a reading of TL 6.11's channels bullet, told plainly). Its
+  are access; a reading of TL 6.11's channels bullet, told plainly),
+  **shop side only** on the camp reward card: bought for coin, never the
+  free reward pick, whatever the `choice` (change CH-15; M2; camp and hub
+  design 7.1). Its
   presence is one fixed draw at `loot.campWaxKeyPermille` on its own
   `lootPlan` grandchild, always consumed, camps 1–4 **(lead's call, after
   the check)**. **Caps:** bought camp stock counts toward family caps
@@ -1031,12 +1034,13 @@ premium and is logged; its VP is unchanged.
    higher `requiresBias` (4 against 3) and the Dream's Due and fit
    premiums are filters (6.2).
 7. **Sinks** (all owned by the camp and hub design; 7a states only
-   targets and pegs) **(hook)**:
+   targets and pegs) **(hook)**; **taken up by the camp and hub design
+   (segment 13, approved 2026-11-23; changes CH-15, CH-16; its 7.1–7.3)**:
 
    | Sink | Status |
    |---|---|
-   | Vendor: supply, limited potions, tonics, Remedy, bases | Approved (ITEMS 10.3) |
-   | Notables shop: the camp channel's 2 entries | Approved shape; count by LE-6 |
+   | Vendor: supply, limited potions, tonics, Remedy, bases | Approved (ITEMS 10.3); potion stock keyed to the party at floor-N generation and trimmed in Core (change CH-16; M2; 6.8); Quick Restock as one `BuyBatch` command (camp and hub design 7.3) |
+   | Notables shop: the camp channel's 2 entries | Approved shape; count by LE-6. **The camp reward card (change CH-15; M2; camp and hub design 7.1):** reward = pick 1 of {entry 0, entry 1, the Reprieve Phial on a `campReward` phial camp}, one atomic `ChooseReward` command; or buy entry 0, entry 1 or both; the phial never on the shop panel; `choice` unset at Travel on dreams both entries and loses the phial; no new draw, no new VP, no further option |
    | Wax Key (vendor, conditional; camp slot; sundries) | Approved (TL 6.11, TL-25) |
    | Ticket lock (M3) | Approved (TL-32); a floor coin spend, allowed by ITEMS 10.1 as amended **(agreed 2026-11-23, cross-document comparison Q-1; cross-document comparison 2026-11-23, CC-8)**; peg proposal: price ≤ 60% of its cache's VP × 20 |
    | Trader and services | Later (ITEMS 10.9) |
@@ -1050,9 +1054,12 @@ premium and is logged; its VP is unchanged.
    after the check)**; it covers 0.6–0.8 of a reference
    wish list (restock, a tonic per member, Remedy, one camp entry, the
    Wax Key at 50% weight) at camps 1–3 and 0.8–0.95 at camp 4; a party
-   that skips optional restock can afford one camp-1 Uncommon. Health
+   that skips optional restock can afford one camp-1 Uncommon (checked
+   by the camp and hub design's `CampRestockCoverage` report at both
+   caps; its 7.2, 9.2). Health
    signals: tonics ≤ 25% of spend (above it, a fun sink is missing and
-   one camp hook should be promoted to M2); `CoinUnspentAtRunEnd` median
+   one camp hook should be promoted to M2: the Ferryman's Note first,
+   then Blood Price, never camp 4; camp and hub design 5.4, 14.2); `CoinUnspentAtRunEnd` median
    ≤ 12 (reference) and ≤ 36 (solo; told plainly: the solo surplus is the
    approved "fewer bodies" compensation and can only buy capped goods).
 8. **Fallback coin (new lead's call).** Where a rule pays "20 coin"
@@ -1293,7 +1300,14 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
   (1500‰ *(illustr.)*), read by `CompanionTrinketEmpty` (item rolls
   design 4.3).
 - **Hooks:** vendor potion stock scaling with party size (DH HE-6 thins
-  to 0.70× at n = 4) goes to the camp and hub owner.
+  to 0.70× at n = 4) goes to the camp and hub owner. **Taken up (change
+  CH-16; M2; camp and hub design 7.2):** the stock is keyed to floor N's
+  party count at generation (2/2/3/3 for parties of 1–4 *(illustr.)*), so
+  a hire at the camp never changes it and declining a recruit is never
+  rewarded; `loot/floor/{N}/vendorPotions` always draws `max(table)`
+  entries and Core trims the stock to that count, discarding the rest
+  (rules state, never merely hidden by the display); ITEMS 10.3's drawn
+  `potionStock` range ([2, 3]) is retired.
 - **Reports:** `GearPerBodyByPartySize`; the solo / reference win ratio
   (toy 0.29 / 0.32, passes). Revisit only if companions reach F3 entry
   with no notable.
@@ -1922,7 +1936,9 @@ matter".
     card"); and the RS 6.9 camp next-floor card. The boss reward card is
     the only width-3 offer shown before that camp and the only one with
     a pre-drawn fourth option; the ITEMS 10.4 camp reward card's content
-    belongs to the camp and hub owner and 7a pre-draws nothing for it;
+    belongs to the camp and hub owner and 7a pre-draws nothing for it
+    (the camp and hub design adds no further option: change CH-15, its
+    7.1);
     the RS 6.9 card shows no loot. Because this names a different screen
     from the agreed words, it was listed in 18.1 under its own heading;
     **the client accepted this reading on 2026-11-22.** The alternative
@@ -1942,6 +1958,14 @@ matter".
     global skin (RC7), with no extra colour.
   - The RS owner confirms the LootDoorInvariant reading (the door
     changes what is shown, never what is drawn).
+  - **The toggle (read by change CH-20; M3; camp and hub design 7.6):**
+    the Perilous Door is chosen by a Perilous toggle at the camp's door
+    station, on Two Doors cards only, behind the Nightmare-ladder
+    unlock; changeable until Travel on, listed on its confirm, and
+    entering `GenInputs`. This design's reveal and 1-of-4 card are read
+    unchanged (this owner confirms). *Pending request (CH-20, to the RS
+    owner):* offer it on single-door cards and at camp 4; if refused, it
+    is not offered there (camp and hub design 14.2).
   - *Rejected (Q5):* B, a profile mark and a memento-wall frame only.
 - **Dream Fragments:** 0 VP, 0 coin; folded into segment 8's F-BOSS
   options on Lore thresholds, one boss-fact queue in the FactLedger
@@ -1985,7 +2009,10 @@ how each hook below is met; the content requests stay open.
   ties by socketId; it is never carried. A `campReward` phial takes that
   card off the floor: the field deck loses it, Ledger A drops by 1
   (logged; V13s (a) allows this one exemption on the phial's floor), and
-  its VP is counted in the camp channel. **The boss-channel phial
+  its VP is counted in the camp channel. On the camp reward card it is
+  the third reward pick only, never on the shop panel; declined, or
+  left with `choice` unset at Travel on, it is lost for the run (change
+  CH-15; M2; camp and hub design 7.1). **The boss-channel phial
   (change IR-8; M2):** when CN 14.7's pre-roll (agreed, CN Q2) places
   the phial in the boss channel (an F3–F4 boss card, never F5), it takes
   the boss card's Wayward slot (option index 2), whose identity and
@@ -2118,6 +2145,9 @@ no more loot-bearing containers than fillers (6.4 item 5).
   Hollow):** a plain line on the coin ledger, "No camp after floor 5.
   Coin left at camp exit is lost.", repeated as a soft confirm on the
   camp-exit button when the purse is at least the cheapest vendor item.
+  (Placed by the camp and hub design: the ledger and its lines at the
+  Keeper's Cart, the tags in the Bedrolls party view, and the soft
+  confirm as a line of the Travel-on confirm; its 4.2, 4.3.)
 - **Run record:** Grave Goods (8.2); the Memento card on the victory
   screen and run record only (6.11 item 4).
 - **Perilous floor (M3):** the boss card's fourth option, marked as in
@@ -2202,10 +2232,10 @@ card); the toy must be re-run on this configuration before M2 (6.4 item
 | Elite intel line | A non-power premium for the elite room | Very low | M2 | **Adopted** (6.9; LE-18) |
 | Twin Coffer | Choice width at no value | Low | M3 | **Adopted** (8.4; LE-21) |
 | Curses at a discount | "Cursed items worth more", safely priced | Medium | Later | **Adopted with Curses** (8.5; LE-22) |
-| The Wish (a paid camp mark steering the Due) | Agency; a late sink | Low | M3 | **Hook** to camp and hub (adds a third outside input to ENM 10.5 step 3; that owner flags it) |
-| The Tithe Bowl (one camp service, one purchase per camp: a Lodestring or a Surveyor's Sketch; change XI-24) | An information sink | Low | M3 | **Hook, filled by segment 10** (exploration and information design 4.6.3): the Lodestring (pegged at or above a healing potion) or the Sketch (15 coin *(illustr.)*; room and Alcove outlines with edges and the Stairhead at the next floor's entry, never secret nodes); both resolve at the entered floor's entry or use, never on camp or Two Doors cards; the Lodestring option is greyed while one is held and not offered at camp 4. Names socket classes "behind risk", never "behind a lock"; unavailable when the party holds a Wax Key; its fact deduplicated through segment 8's per-floor FactLedger, change EV-8, events design 4.4.2. *Pending request (XI-24, to this owner):* relax the Wax Key guard for both options; if refused, the guard stays (exploration and information design 14.2) |
-| The Ferryman's Note (borrow against the next floor's coin) | Spend-now tension | Low | M3 | **Hook**, capped: ≤ 30% of the next pool, once per run, never camp 4; replaces interest |
-| Blood Price (a `treatProof` Scarred for +1 step on the camp item) | Pay in blood | Low | M3 | **Hook**: uses one of the next floor's 2 allowance steps (no swap-down); once per run; never camp 4; never VR (the camp cap) |
+| The Wish (a paid camp mark steering the Due) | Agency; a late sink | Low | M3 | **Hook** to camp and hub (adds a third outside input to ENM 10.5 step 3; that owner flags it); held Later by the camp and hub design (its 5.4) |
+| The Tithe Bowl (one camp service, one purchase per camp: a Lodestring or a Surveyor's Sketch; change XI-24) | An information sink | Low | M3 | **Hook, filled by segment 10** (exploration and information design 4.6.3): the Lodestring (pegged at or above a healing potion) or the Sketch (15 coin *(illustr.)*; room and Alcove outlines with edges and the Stairhead at the next floor's entry, never secret nodes); both resolve at the entered floor's entry or use, never on camp or Two Doors cards; the Lodestring option is greyed while one is held and not offered at camp 4. Names socket classes "behind risk", never "behind a lock"; unavailable when the party holds a Wax Key; its fact deduplicated through segment 8's per-floor FactLedger, change EV-8, events design 4.4.2. *Pending request (XI-24, to this owner):* relax the Wax Key guard for both options; if refused, the guard stays (exploration and information design 14.2); until this owner rules, the camp and hub design shows the Bowl at the Keeper's Cart greyed with its reason while a Wax Key is held (its 4.3, 14.2) |
+| The Ferryman's Note (borrow against the next floor's coin) | Spend-now tension | Low | M3 | **Hook**, capped: ≤ 30% of the next pool, once per run, never camp 4; replaces interest; the first promotion candidate if `TonicShareOfSpend` > 25% (camp and hub design 5.4) |
+| Blood Price (a `treatProof` Scarred for +1 step on the camp item) | Pay in blood | Low | M3 | **Hook**: uses one of the next floor's 2 allowance steps (no swap-down); once per run; never camp 4; never VR (the camp cap); the second promotion candidate (camp and hub design 5.4) |
 | Wager Pot | Stakes at the Wager | Very low | Later | **Parked** (creates coin; a hoarding pull) |
 | Rarity and fit debt counters; purse governor | — | Medium | — | **Rejected** (no measured effect; contest DH 5.4) |
 | Berth entries; an early F2 Rare; fixed class quotas | — | — | — | **Rejected** (5.3) |
@@ -2643,8 +2673,8 @@ other names keep their meaning under their qualified ids.
 | Wave | Contents |
 |---|---|
 | **M1** | The F1 deck (single variant, inside M1's own split; at most 1 carried weapon or armour); the hero-arms Due on F1; the coin counter (F1 pool 35, main-path floor 17, the salvage share of 4 per fight then per unit, LE-7, LE-8); the LootPlan step on the keyed `lootPlan` stream and the LootBind pass; `LootLedger`; the atomic commit; V13s (a), (c); V13g (g), (i) on F1; the (m) integration test |
-| **M2** | Decks F1–F5 with variants; boss card counting; the camp channel of 2 graded for N+1; the coin pool, salvage share, Sell 250‰; K2 / K2b; the full Due with the fixed-deal scorer; the Risk Ledger for consequence locks, locks, secrets, the elite and the bait cache; Wax-Key identities and the mixed-route rule; the fourth dreamed option drawn (not shown); the usability fallbacks; the elite intel line; the F5 reshape (Viaticum, Memento, the camp-4 warning); Treasure count and Grave Goods; the Heavy Purse; category weights and the F5 cap; V13 in full; all reports, kPC first |
-| **M3** | Wager, Dare, boxed lurker and Strongroom ranks (the Annex has no rank of its own); the Twin Coffer; the Perilous Door reveal (Q5; shown only, the option drawn since M2); unlock normalisation; the memento wall; camp hooks if the camp owner takes them |
+| **M2** | Decks F1–F5 with variants; boss card counting; the camp channel of 2 graded for N+1; the coin pool, salvage share, Sell 250‰; K2 / K2b; the full Due with the fixed-deal scorer; the Risk Ledger for consequence locks, locks, secrets, the elite and the bait cache; Wax-Key identities and the mixed-route rule; the fourth dreamed option drawn (not shown); the usability fallbacks; the elite intel line; the F5 reshape (Viaticum, Memento, the camp-4 warning); Treasure count and Grave Goods; the Heavy Purse; category weights and the F5 cap; V13 in full; all reports, kPC first; the camp reward card's content and party-keyed vendor potion stock (camp and hub owner; changes CH-15, CH-16; camp and hub design 7.1, 7.2) |
+| **M3** | Wager, Dare, boxed lurker and Strongroom ranks (the Annex has no rank of its own); the Twin Coffer; the Perilous Door reveal (Q5; shown only, the option drawn since M2); unlock normalisation; the memento wall (the Memento wall station in the hub; camp and hub design 5.2); camp hooks if the camp owner takes them (the camp and hub design takes the Tithe Bowl in M3, promotes the Ferryman's Note, then Blood Price, only on `TonicShareOfSpend`, and holds the Wish Later; its 5.4); the Perilous toggle at the camp's door station (change CH-20; camp and hub design 7.6) |
 | **Later** | Curses at a discount; the trader carve (ITEMS 10.9, I-14); daily seeds fixing class; arena-keyed Viaticum tools |
 
 ---
@@ -2665,7 +2695,7 @@ shop presentation and camp sinks (camp and hub); the display (segment
 |---|---|
 | **7b, item rolls and tables** | Records per (tier, category); smart-loot and category weights; the Due, fit, triple and dreamed-option filters; substitution; VR gear content (6.13) |
 | **7c, sources and placement** | Socket tags and ranks (the input to 7a's allocation, 6.9 item 2); lump placement; the Viaticum room; Twin Coffer placement; trimmed-floor sockets; per-encounter caps; trimming containers on F5 and on coin overflow (6.4, 6.14). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 11)** |
-| **Camp and hub** | Shop presentation; the camp reward card's content; vendor stock scaling; the Wish, the Tithe Bowl (its options filled by segment 10, change XI-24, 8.1), the Ferryman's Note, Blood Price; the coverage targets as design intent |
+| **Camp and hub** | Shop presentation; the camp reward card's content; vendor stock scaling; the Wish, the Tithe Bowl (its options filled by segment 10, change XI-24, 8.1), the Ferryman's Note, Blood Price; the coverage targets as design intent. **Taken up by the camp and hub design (segment 13, approved 2026-11-23; changes CH-15, CH-16, CH-20):** the Keeper's Cart and Notables panel (its 4.3); the camp reward card's content (7.1); vendor potion stock keyed to the party and trimmed in Core (7.2); `BuyBatch` Quick Restock (7.3); the coverage targets, checked by `CampRestockCoverage` (7.2, 9.2); the camp-4 line and soft confirm (4.2); the Tithe Bowl at the cart (M3; 4.3); the Ferryman's Note and Blood Price as promotion candidates, the Wish Later (5.4); Grave Goods in the Book of Nights and the Memento wall (M3; 5.2); the Perilous toggle at the door station (M3; 7.6); its request on that toggle, to the RS owner, and XI's Wax Key guard request to this owner stay open (its 11, 14.2) |
 | **Segment 8 (Dream Fragments)** | The boss-fact family the elite intel line shares. **Taken up by the events design (segment 8, approved 2026-11-22; changes EV-7, EV-8, EV-15):** the per-floor FactLedger (6.9 item 6); its pending requests to 7a and 7c, `stepFunded` and F-CACHE, stay open (events design 4.4, 11) |
 | **Segment 9 (bosses)** | Signature records; the Memento card. **Taken up by the boss rooms design (segment 9, approved 2026-11-22; changes BR-28, BR-29, BR-34, all reading this design unchanged):** the card, Viaticum and Memento interplay (its 4.11.2); the `bossQueue` order behind the elite intel line (its 4.12); the Perilous Door's Nightmare Rendition beside the 1-of-4 card (its 4.14.2; M3) |
 | **Segment 10 (UI) and audio** | The Stratum Card order, the floor strip, tier marks, plate loot badges, the Steal preview, the Dream's Due tags, the Viaticum offer UI, the camp-4 warning, ledgers, tags, the audio stings (6.15). **Taken up by the exploration and information design (segment 10, approved 2026-11-23; changes XI-7, XI-11, XI-19, XI-22–XI-24, XI-26, XI-29):** the Treasure field naming, rooms cell and spent field (6.15); F-TREASURE and the Lodestring (8.2); the Tithe Bowl (8.1); its requests to this owner, the exposure ruling (6.9 item 6) and the Wax Key guard (8.1), stay open (its 4.6, 4.9.9, 11) |
@@ -2902,7 +2932,9 @@ The owed rows are the single list in 16; by owner:
 - **The camp and hub design:** the sinks, coverage targets and vendor
   scaling of 6.4 and 6.8; the camp-4 warning. The ITEMS 10.4 camp
   reward card owes no fourth option: the client read Q5 as the boss
-  reward card on 2026-11-22 (6.12).
+  reward card on 2026-11-22 (6.12). **Taken up by the camp and hub
+  design (segment 13, approved 2026-11-23; changes CH-15, CH-16, CH-20;
+  its 7.1, 7.2, 7.6, 17).**
 - **The simulator:** the arms of 10.4 and the reports of 10.3, kPC
   first; the toy re-run on the adopted coin table.
 - **Naming pass:** every placeholder name here.
@@ -3228,7 +3260,11 @@ wave or a later design triggers them; each fallback is a new lead's call
 - **If F5 K2 or the F5 fillers cannot be met:** segment 5 drops the
   extra F5 lock, and 7c the extra container (6.4).
 - **If `TonicShareOfSpend` exceeds 25%:** one camp hook is promoted to M2
-  by the camp and hub owner.
+  by the camp and hub owner: the Ferryman's Note first, then Blood Price,
+  never camp 4 (camp and hub design 5.4, 14.2).
+- **If `CampChoiceShare` falls outside 35–65% *(illustr.)*:** price is
+  the knob; no fourth option (camp and hub design 7.1, 14.2; lead and
+  this owner).
 - **If `PotionsHeldAtDeath` median ≥ 2:** the suggester and potion-use
   UI move first, never the DH package (6.7).
 - **If `HeroDreamsDueShare` exceeds 70% at party size 4:** ties in the
