@@ -23,7 +23,8 @@ design", "Arcanist design", "Herald design"),
 `2026-11-21-run-structure-themes-design.md` ("RS", segment 1),
 `2026-11-21-floor-layout-design.md` ("FL", segment 2) and
 `2026-11-21-room-terrain-design.md` ("RT", segment 3, the most recent
-template)
+template; "ROOM" where its 6.11 is cited, the later designs' tag, as
+the seeds and validation design SV-31 asks)
 
 Items marked **(agreed)** were decided by the client on 2026-11-21 for
 the four questions this design raised (Q1–Q4, sections 0, 6 and 19.1),
@@ -502,7 +503,7 @@ Each is met in section 14.
 
 | Id | Tension | Resolution |
 |---|---|---|
-| HT1 | Dynamic hazards against "squares never change" (main 2, C 11.1) | M2 Stirs change no square. Square-changing hazards (Tides, Flips, the Turning Ring, rails) are M3 under Q3, generalising the approved boss phase sockets (RT 6.11) **(agreed, Q3)** |
+| HT1 | Dynamic hazards against "squares never change" (main 2, C 11.1) | M2 Stirs change no square. Square-changing hazards (Tides, Flips, the Turning Ring, rails) are M3 under Q3, generalising the approved boss phase sockets (ROOM 6.11) **(agreed, Q3)** |
 | HT2 | Telegraphed rhythms against the one-step AI | Acts resolve at round end, before any mover's next turn: a one-step quantity, like `onTurnEnd`. Due squares are hazards for pathing |
 | HT3 | Room rhythms against the ABL 2 "Lair actions" non-goal | A Stir has no creature, no choice and no initiative slot: it is a clock. Flagged to the ABL owner as a reading |
 | HT4 | Moving architecture against static proofs (FL 9.1, RS 7.6, FL-15) | Every state is pre-proven by V10. No door ever locks or seals; the `fleeExit` is never touched. Moving dream content is M3 at the earliest **(agreed, Q3)** |
@@ -767,7 +768,7 @@ in M2 only if the reading-time playtest measures it well under the toy
 | F5 | 5 | |
 | Elite room | +1 | |
 | Dare room (M3) | ×2 | |
-| Arena | segment 9, inside RT 6.11 | + at most 1 Stir and 1 Void region (HZ-11) |
+| Arena | segment 9, inside ROOM 6.11 | + at most 1 Stir and 1 Void region (HZ-11) |
 
 **Clock readings from the boss rooms design (change BR-6, BR-32):**
 - **Pending request (BR-6, M2; boss rooms design 4.3.1):** the boss's
@@ -881,6 +882,10 @@ hazards present at every party size, solo on F2–5 included (CMP-8)
 - **VP10. Planks** may cross a Void. A Plank failure stops before it,
   with no fall **(settled, RT 6.2.6)**. Forced movement onto a Plank
   over a Void treats the Plank as floor.
+- **Pending request (SV-31; seeds and validation design 11; M2):** a
+  note that VP1–VP10 are this document's placement-rule ids, not the
+  loot economy design's VP (value points, ITEMS 12.6). Nothing changes
+  until the HZ owner rules.
 
 Traps add their own rules TP1–TP12 (V11) on top of these: no trigger
 square on a Snag, a Stir footprint, a Plank or a Hinge or Postern
@@ -926,7 +931,10 @@ the check)**:
    **due squares** for the coming round, with its announcement sting
    (8).
 
-No draws at act time except saves, which use the combat stream.
+No draws at act time except saves, which use the combat stream in a
+fight; an out-of-combat save (falls, Plunge, M3 Dare rooms) is keyed on
+the floor's `checks` stream, domain `h:envSave` (seeds and validation
+design 4.3; change SV-6; M2, Dare rooms M3).
 
 **The M2 pilot (agreed, Q1).** The Choir's Organ Swells is the first
 choice; the Carnival's Pit Breathes is the alternative. They are the
@@ -1387,7 +1395,7 @@ whose hold has expired counts as that elite's Clutch for the fight
   - Choir "The Drowned Crypt", F3 only, ≤ 1 room.
 - **The Heart is not the pilot:** a Wrecker should not solve floor 5
   with one verb. Heart "The Dark Under the Bed" is M3, ≤ 1 Void room on
-  F5 until `FallsByWrecker` and `ClassThemeSpread` pass.
+  F5 until `FallsByWrecker` and `VoidClassDeathGap` pass.
 - **M3:** the Gut's Gullet, the Carnival's High Wire, the Heart; up to
   40% of non-patrol fight rooms in drop themes.
 - **M4:** the Inverted Cathedral, up to 50%.
@@ -1400,8 +1408,9 @@ whose hold has expired counts as that elite's Clutch for the fight
   F1 and elsewhere the trapdoor recloses (traps and locks design 6.3).
 
 **Ship gates for Voids in any theme (agreed, Q2):**
-- `ClassThemeSpread` with Voids on: Vanguard–Shade gap in run death
-  rate ≤ BASE + 2 percentage points;
+- `VoidClassDeathGap` (renamed from `ClassThemeSpread`, which stays
+  RS 11.4's; seeds and validation design 6.10, SV-24) with Voids on:
+  Vanguard–Shade gap in run death rate ≤ BASE + 2 percentage points;
 - `FightRoundsDelta` ≤ 0 after perimeter placement;
 - `DropRemovalShare` ≤ 15%;
 - `TeeteringUptimeOnBosses` ≤ 25%;
@@ -1416,7 +1425,7 @@ Every report is defined in 11.4.
 **Told plainly:** the M2 pilot alone will not reach TN6's 3% (the
 projection is in 10).
 
-**Arena (change HZ-11 to RT 6.11):** at most 1 Void region, ≥ 3 from
+**Arena (change HZ-11 to ROOM 6.11):** at most 1 Void region, ≥ 3 from
 the Arches, entrances, start zones and boss lanes. Its own line, not
 counted as a contact hazard. ENM 17.5's "a chasm edge for shoves" is met
 by a Void from M2 (gated), and by a contact hazard otherwise
@@ -1635,8 +1644,9 @@ Mood.
     Dare cache keeps its one step, never a second, and a Dare whose
     garrison is dropped keeps its card (loot economy design 6.9 items 1,
     7; change LE-10; M3).
-- Measured on the "taken" arm of `FloorTimeByTheme`, target ≤ 60 s per
-  dare. `DareBruteForceRate` reported.
+- Measured on the "taken" arm of `FloorTimeByTheme` (the keyed family
+  `FloorTimeByTheme{arm, feature}`, seeds and validation design 6.10),
+  target ≤ 60 s per dare. `DareBruteForceRate` reported.
 
 **Plunge:**
 - An out-of-combat, one-way, signposted void well in a side room or
@@ -1817,7 +1827,7 @@ period (3 → 4), footprint size.
 ### 6.17 Boss arena hooks (segment 9 owns them)
 
 Each arena may have ≤ 1 clock (one Stir) and ≤ 1 Void region inside
-RT 6.11's caps and phase sockets, under every room rule (one clock per
+ROOM 6.11's caps and phase sockets, under every room rule (one clock per
 room; no Void with a Lurch Stir). Bosses are `noDrop`, are moved by
 Lurch like anyone, and never gain Teetering from Voids or Clutch. Each
 row is one clock **(lead's call, after the check: the proposal's
@@ -2659,14 +2669,38 @@ record FloorHazardState(int MoodStage, int MoodCounter, int MenuIndex, int CapRo
 
 - A `hazards` child of the `terrain` stream, after the RT 6.2.5
   reservation step, with fixed draw counts (R-SEED-3). It draws the
-  Stir choice, sockets, Snags and Menu permutations.
-- No draws at act time except saves, on the combat stream.
+  Stir choice, sockets, Snags and Menu permutations. Its key is
+  `dungeon/floor/{N}/attempt/{a}/terrain/hazards`, the `hazards`
+  grandchild of the floor's attempt-scoped `terrain`, so the HE-7 floor
+  retry (attempt 1, not "seed + 1") re-derives it; it runs at stage GS6,
+  after **all** terrain (GS5), and the arena node's slot is spent as
+  dummies (seeds and validation design 4.3, 4.4; changes SV-4, SV-9,
+  SV-31; M2).
+- **Pending request (SV-3, M1; seeds and validation design 4.3, 4.5):**
+  the HZ owner declares `hzTagMax`, the most draws its reservation tags
+  take, before the M1 goldens, so RT 6.2.5's reservation reserves them
+  as dummies from M1 and no M1 terrain draw shifts when hazards ship.
+  Fallback: segments 11–12 reserve a padded maximum from the approved
+  tag table (their 14.2).
+- **Pending request (M2; seeds and validation design 4.3, 11):** the HZ
+  owner publishes the `hazards` draw-count formula (fixed per data)
+  before the M2 goldens; fallback as for `hzTagMax`.
+- No draws at act time except saves: in-combat saves on the combat
+  stream; out-of-combat saves (falls, Plunge, M3 Dare rooms) on the
+  floor's keyed `checks` stream, domain `h:envSave` (hazardInstanceId,
+  unitId, exposureIndex, die) (seeds and validation design 4.3; change
+  SV-6; M2 falls and Plunge, M3 Dare rooms).
 - `hazardDigest` sits beside `terrainDigest`. FL 11.1's save fields gain
-  `FloorHazardState` and `UnitFallState`.
+  `FloorHazardState` and `UnitFallState` (stored in `run.save`: the
+  digest among each generated floor's stage digests, the records in its
+  dynamic state; seeds and validation design 4.8.1).
 
 ### 11.3 V10 `RoomHazards`
 
-Build time, after V9; HE-7 single retry at seed + 1. Per template ×
+Build time (V10s, after V9s); at generation, V10g's runtime lookup is a
+`floorRetry` assert at AP1, whose failure takes the HE-7 floor retry,
+attempt 1 (seeds and validation design 5.1, 5.4, 5.5; changes SV-4,
+SV-10, SV-20; M2). Per template ×
 orientation × layer × state × floor band × theme × Mood stage × tier
 class {< 2, ≥ 2} (the last two added after the check, so periods
 changed by Moods and the floor-1 packages are proven).
@@ -2698,7 +2732,10 @@ changed by Moods and the floor-1 packages are proven).
 
 **New lead's call:** the proposal's typo `BoissLaneClear` is written
 `BossLaneClear` everywhere. V10 joins RS 11.2's validator list beside V8
-and V9. The runtime is a lookup that cannot fail (FL-15).
+and V9. The runtime is a lookup that cannot fail (FL-15). Its checks
+carry qualified ids, so `V10.ContactLethalityBound` and
+`V9.ContactLethalityBound` stay apart, and `V10.OneClockPerRoom` is also
+run at V15g at AP2 (seeds and validation design 5.1, 5.4; SV-20).
 
 ### 11.4 Reports and gates *(illustr.)*
 
@@ -2729,7 +2766,7 @@ Every row has solo, duo and four rows.
 | `FleeAfterFallRate` | Watch |
 | `SnagPunishRate` | 10–30% (below 10%, falls are toothless: move the Snag further) |
 | `FallsByWrecker` | Against `HewCeiling` |
-| `ClassThemeSpread` with Voids | Vanguard–Shade gap ≤ BASE + 2 |
+| `VoidClassDeathGap` with Voids | Vanguard–Shade gap ≤ BASE + 2 |
 | `TeeteringUptimeOnBosses` | ≤ 25% |
 | `QuakeProneRatio` | ≤ 1.2 |
 | `HymnRoomRoundsDelta` | ≤ 0 |
@@ -2745,7 +2782,7 @@ Every row has solo, duo and four rows.
 
 | Report | Definition |
 |---|---|
-| `ClassThemeSpread` | The absolute gap between Vanguard and Shade run death rate, in percentage points, on drop-theme floors; BASE is the same metric with Voids off |
+| `VoidClassDeathGap` (was `ClassThemeSpread`, a name RS 11.4 keeps; SV-24) | The absolute gap between Vanguard and Shade run death rate, in percentage points, on drop-theme floors; BASE is the same metric with Voids off |
 | `DropRemovalShare` | `voidFall` defeats ÷ all monster defeats, in Void-room fights |
 | `TeeteringUptimeOnBosses` | Boss turn starts with Teetering ÷ boss turn starts, over all boss fights |
 | `PartyFallsPerFight` | Party Dreamfalls ÷ Void-room fights, per party; solo, duo and four rows |
@@ -2755,6 +2792,29 @@ Every row has solo, duo and four rows.
 | `HazardMinutesDelta` | Segment 4 on minus off with segment 3 on in both arms (11.5); "off" = the hazard-point layer at 0, no Void, Stir or vent, RT 6.2.4's bases kept; rounds become minutes with the playtest-measured seconds per round plus per due round |
 | `StirMinutesDelta` | The same, Stir on minus Stir off, static segment-4 content on in both arms |
 | `RescuePushRate` | Dreamfalls caused by an ally ÷ party Dreamfalls |
+
+**Result classes and reading (seeds and validation design 6.3–6.6,
+6.10, 6.12; changes SV-23, SV-24, SV-25; M2):**
+- the Void and Dream package gates (6.3, 6.4), `VoidClassDeathGap`
+  included, are SHIP rows; the combined `FloorMinutesDelta` (ROOM+HZ
+  ≤ +1.6) is a BIND row; `EnvKillShare` is FELT and is the one id
+  (RT's `EnvironmentKillShare` becomes its alias); `HazardPushDeaths`
+  keeps this all-environment definition as the only one;
+- floor-1 environment deaths, `ForecastLethalSurprise`,
+  `EliteRemovedBeforeFirstTurn` and `DownedAfterDreamfall` (solo) are
+  zero gates: each is a BUILD structural row plus a simulator smoke
+  row, and a simulated non-zero is a P0 bug; spread rows are read on
+  the observed spread, at the minimum N of the seeds and validation
+  design 6.5.
+- **Pending requests (seeds and validation design 6.6, 11; blocking
+  on the M2 checklist):** the HZ owner states the scope of
+  "environment" for floor-1 environment deaths (fallback: every
+  non-unit damage source, so V10 `F1NoHazards`, V9's F1 push-lane rows
+  and V11 `F1TrapRules` are all partners), and supplies the V10
+  structural partners for `EliteRemovedBeforeFirstTurn` (Void
+  geometry) and `DownedAfterDreamfall` (`SnagProven` plus the landing
+  rules) (fallback: both read as SHIP rows on the Void package at
+  30,000 floors).
 
 ### 11.5 Simulator arms
 
@@ -2769,10 +2829,14 @@ Every row has solo, duo and four rows.
   check):** segment 3 on and segment 4 off (as defined for
   `HazardMinutesDelta` in 11.4); `HazardMinutesDelta` is on minus this
   arm. RT 11.3's no-terrain baseline stays RT's own arm, used for the
-  combined gate.
+  combined gate. Arm names are qualified: this arm is `HZ.NoHazards`
+  and RT's is `ROOM.NoTerrain`; Stirs and Void density are toggles of
+  the shared catalogue (seeds and validation design 6.2; SV-22; M2).
 
 **The first measurement before any pilot commits:** reading time per due
-round in playtest, which replaces the toy's 4-second assumption.
+round in playtest, which replaces the toy's 4-second assumption. It is
+booked in the one human-session calendar (seeds and validation design
+6.11; SV-27; M2).
 
 ---
 
@@ -2782,9 +2846,9 @@ round in playtest, which replaces the toy's 4-second assumption.
 
 | Wave | Contents |
 |---|---|
-| **M1** | Nothing. Pushes stop before hazards (C 10.1) **(settled)** |
+| **M1** | Nothing. Pushes stop before hazards (C 10.1) **(settled)**. `hzTagMax` declared for the terrain reservation (pending request, SV-3; 11.2) |
 | **M2** | The HZ-1 line; hazard points, roles and quotas; VP1–VP10; bile and the RS 8.10 reading; the RT-14 request with both guards; the EnvRound cap; Tableaux; the `hazardKit` field; V10, reports and the `hazards` stream; the clock allowance and cut order |
-| **M2 (gated, Q2)** | Void, Dreamfall, Snag, FallFloor, Clutch with the hold, the landing-failure branch, the `voidFall` trigger, the arena Void line; pilots in the Silk (the Stacks Have No Bottom) and the Choir (the Drowned Crypt, F3); the Void backdrop shaft, fall and Snag VFX. Gates: the Shade hook delivered, spread ≤ BASE + 2, `FightRoundsDelta` ≤ 0, `DropRemovalShare` ≤ 15%, `TeeteringUptimeOnBosses` ≤ 25%, `PartyFallsPerFight` ≤ 0.25, `PreviewExactness` 100%; `DownedAfterDreamfall` 0 solo (added after the check) |
+| **M2 (gated, Q2)** | Void, Dreamfall, Snag, FallFloor, Clutch with the hold, the landing-failure branch, the `voidFall` trigger, the arena Void line; pilots in the Silk (the Stacks Have No Bottom) and the Choir (the Drowned Crypt, F3); the Void backdrop shaft, fall and Snag VFX. Gates: the Shade hook delivered, `VoidClassDeathGap` ≤ BASE + 2 (SV-24), `FightRoundsDelta` ≤ 0, `DropRemovalShare` ≤ 15%, `TeeteringUptimeOnBosses` ≤ 25%, `PartyFallsPerFight` ≤ 0.25, `PreviewExactness` 100%; `DownedAfterDreamfall` 0 solo (added after the check) |
 | **M2 (gated, Q1)** | The Dream step for at most one signature Stir per F2–5 floor (the Organ Swells and Pit Breathes, each shipping on its own theme gates, so only Choir and Carnival floors); the countdown; latent footprints and due squares; Warned or floored; bound Cords Now and Hold; the charter; two RC7 cue pairs and the Dream tick. Gates: the client's (the reading-time playtest, the TR-27 written pass, `StirRoundsDelta` ≤ 0, `HazardMinutesDelta` ≤ +0.3 with `StirMinutesDelta` ≤ +0.1 and the combined gate) and the lead's `StirBothWaysShare` ≥ 30% |
 | **M3** | The broad Stir catalogue; Lurch; struck and breathing vents; Tides, Cord Flips (the Sluice Wheel, the Acid Tide valve), the Turning Ring (F3), the Returns Trolley, rails (Q3); standalone Cords; Landmark ticks; Moods as Omens; Dare rooms; Plunge; Snatch; Startle; Chainposts; turning faces; Stoke; the Heart and Gut Voids and the High Wire; the Dream Rules pages; Omens and Nightmare tiers 1–3, with the floor-1 packages from tier 2 (Q4); the Forbidden Course (the DH owner) |
 | **M4** | The Inverted Cathedral, with the Chimes Ring Upward (Q3); two clocks per room tested at a Nightmare tier |
@@ -2820,9 +2884,9 @@ M3 instead; the client is told (19.2).
 | 6 Encounter placement | Start sockets outside footprints and Tide states at fight start; ≤ 2 starts within 2 of a Void edge; ≤ 1 flyer, ≤ 1 shover type and ≤ 2 shover units within 4 of a Void edge in Void rooms; the `usesCords`, `singer` and Stoker tags; Wake candle racks on Dormant groups (index ≥ 3, ≤ 1 per room); Dare garrisons; the mindless share (the enemies owner). **Filled by the encounter placement design (6.1 exclusions, 6.6.8 Terrain Pairings, 6.13):** the guarded Dare garrison is the floor's Annex (change EP-26; agreed, Q2; M3) | Who starts where |
 | 7 Loot | Fallen loot on the edge; Dare containers (+1 rarity step); no item loss. **Filled by the loot economy design (6.9, 6.14; change LE-10; M3):** the Dare cache is an SR5 step socket under the one step rule; fallen loot on the edge, no item loss (7c). **Changed by the loot sources design (4.7.7; change LP-2; agreed, Q1; M3):** the sole exception is that a Windfall's card and coin leave the floor when its shown count ends (`ItemDestroyed{gotAway}`); kill method, damage, terrain, traps, locks and force still never destroy loot | Containers and contents |
 | 8 Events | Unguarded Dare forms; Moods on the Stratum Card; empty Tide naves as non-combat puzzles; the Gaol's small hours. **Filled by the events design (4.2, 4.9, 4.13; changes EV-31, EV-35):** no Curiosity is placed in a Dare or Wager room, which stays segment 4's (M2); segment 8 places no Landmark and no clock Landmark: FL owns the sockets, segment 4 the ticks (EV-35; M2); no Mood on the Stratum Card in M2, handed to segment 10 and segment 4, and in M3 an Omen card's cost may be the named, visible event that advances a Mood within 6.9's cap (EV-31; M3); empty Tide naves are not M2 Curiosities, and an empty nave may be an M3 Curiosity host only if segment 4 offers it (**open item**, segment 4's to offer; M3 option); the Gaol's small hours are a Glimpse and Retelling motif only, no rule (events design 5.3; M2) | Event content |
-| 9 Boss arenas | 6.17: one clock and one Void line per arena inside RT 6.11, under the room rules; `noDrop`; the boss Teetering guard; counterplay identities kept. **Filled by the boss rooms design (4.1, 4.7.1, 4.13, 4.14; changes BR-1, BR-16, BR-30, BR-32, BR-34):** arena templates inside the 6.17 caps; bosses `noDrop` (read); the Kennel gate renamed the pen bar; the Governess row's tone flag; the Gambit footprint not a clock (M3 gated); Mood readings (M3). **Pending requests (BR-6, BR-10, BR-22, BR-33):** 6.2.1, 6.3, 6.17, 6.19 | Interiors, counterplay, phases |
+| 9 Boss arenas | 6.17: one clock and one Void line per arena inside ROOM 6.11, under the room rules; `noDrop`; the boss Teetering guard; counterplay identities kept. **Filled by the boss rooms design (4.1, 4.7.1, 4.13, 4.14; changes BR-1, BR-16, BR-30, BR-32, BR-34):** arena templates inside the 6.17 caps; bosses `noDrop` (read); the Kennel gate renamed the pen bar; the Governess row's tone flag; the Gambit footprint not a clock (M3 gated); Mood readings (M3). **Pending requests (BR-6, BR-10, BR-22, BR-33):** 6.2.1, 6.3, 6.17, 6.19 | Interiors, counterplay, phases |
 | 10 Exploration and UI | Stir rule cards on reveal; due overlays; countdown glyphs; the menu card; Snag glyphs; Portal hazard and Dare signposts; Listen hears tells; Plunge links. **Filled by the exploration and information design (4.1.4, 4.2, 4.3.5, 4.7, 4.9.6, 5; changes XI-3, XI-5, XI-8, XI-16; readings, no HZ text changed):** "visible from reveal" means sight, so chalk never draws hazard footprints or phases (XI-3; M1); a Remembered Stir shows its projected phase as a solid digit only when `projectable` (schedule announced at reveal, no Cord or Stoke input), else "?", so the digit stays the room's clock (XI-5; M1/M2); travel paths round known hazard footprints and any Remembered hazard showing "?", and is off inside Dare rooms (XI-8; M2); board digits are room clocks only (XI-16; M1); Listen bubbles carry the Stir-tell glyph; the menu card and Plunge links are placed as approved | Overlays and UI |
-| 11–12 Seeds and validation | The `hazards` stream; V10; `hazardDigest`; save fields; reports and arms | The stream tree, release seed set, retry logging |
+| 11–12 Seeds and validation | The `hazards` stream; V10; `hazardDigest`; save fields; reports and arms. **Filled by the seeds and validation design (4.3, 4.4, 4.8, 5.1–5.5, 6.2–6.6, 6.10; changes SV-3, SV-4, SV-6, SV-9, SV-10, SV-20, SV-22, SV-24, SV-25):** the `hazards` stream registered as `…/attempt/{a}/terrain/hazards` at GS6, and out-of-combat saves on `checks` (`h:envSave`) (11.2); V10 at build, V10g a `floorRetry` lookup at AP1 (11.3); `hazardDigest` and the save fields in `run.save` (11.2); report classes, `ClassThemeSpread` renamed `VoidClassDeathGap` (11.4); the baseline arm `HZ.NoHazards` (11.5). **Pending requests (seeds and validation design 11):** `hzTagMax` (M1) and the hazards formula (M2) (11.2); the floor-1 environment scope and the Void zero-gate partners (11.4); the VP id note (6.2.4) | The stream tree, release seed set, retry logging |
 | 2 Floor layout | Plunge as a Chute skin with an LG14 exception; the Hinge and Postern radius; the sluice-wheel piece reading | Graph invariants |
 
 ---
@@ -2868,7 +2932,7 @@ M3 instead; the client is told (19.2).
 |---|---|---|---|
 | 1 | Clock: Stirs cost reading time and never shorten fights; Voids lengthen them until placed on the perimeter. On toy numbers the M2 Stir misses its clock share (told plainly, 10) | `HazardMinutesDelta`; `StirMinutesDelta`; the combined `FloorMinutesDelta`; `StirRoundsDelta`; `FightRoundsDelta` | At most one Stir per floor; the reading-time playtest first; perimeter Voids; the +0.3 allowance and its split; the extended cut order; Q1's fallback to M3 |
 | 2 | The TN6 band is reached only at M3–M4 (told plainly) | `EnvKillShare` | Void density is the lever, not damage |
-| 3 | Wrecker dominance; the Shade gains nothing | `FallsByWrecker`; `ClassThemeSpread` | The Void save ignores Teetering's disadvantage; the Clutch hold; the spread gate; the Shade hook as a ship gate |
+| 3 | Wrecker dominance; the Shade gains nothing | `FallsByWrecker`; `VoidClassDeathGap` | The Void save ignores Teetering's disadvantage; the Clutch hold; the spread gate; the Shade hook as a ship gate |
 | 4 | Falls feel toothless | `SnagPunishRate` | Snag distance, the Groggy state, the `SnagPunishRate` floor |
 | 5 | Edges become a party safety net | `FleeAfterFallRate`; `RescuePushRate` | Let Go Later; the Snag ≥ 3 from the `fleeExit`; Groggy blocks Portal exits; a rescue push lands on the secondary Snag and costs the next action; no voluntary movement ends over a Void |
 | 6 | The AI shovers farm party falls, or land a solo hero beside a hostile | `PartyFallsPerFight` by shover count; `DownedAfterDreamfall` | Once-per-hero fall value; the shover type and unit caps; the Snag choice checks hostiles at both sockets, with an overflow square |
@@ -3300,7 +3364,7 @@ triggers them:
 - the "bosses steady at turn start" lever, if
   `TeeteringUptimeOnBosses` fails;
 - the Heart's Void rooms beyond 1 per F5, once `FallsByWrecker` and
-  `ClassThemeSpread` pass;
+  `VoidClassDeathGap` pass;
 - a theme's Cord cut under `CordUseRate` < 20%;
 - the Dreamer Turns Over moved to Nightmare tiers if `QuakeProneRatio`
   fails;

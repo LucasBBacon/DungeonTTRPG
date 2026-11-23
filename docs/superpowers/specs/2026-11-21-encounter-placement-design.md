@@ -138,8 +138,10 @@ each grep-checked as a whole word with 0 hits:
   1" to "tier 4", in ABL, C and the class designs**)**;
 - this document's client questions **Q1–Q4** (local, as in every parent).
 
-The validator id **V12** is free (V1–V7 RS, V8 FL, V9 RT, V10 HZ, V11
-TL); a grep for `V1[2-9]` finds 0 hits.
+The validator id **V12** is free (V1–V7 RS, V8 FL, V9 ROOM, V10 HZ, V11
+TL); a grep for `V1[2-9]` finds 0 hits. ("ROOM" is the room terrain
+design's tag for its validator owner, so as not to collide with RS's
+change ids RT-n; seeds and validation design 13, change SV-31.)
 
 **Names are placeholders** until the client naming pass. Each was
 grep-checked case-insensitively as a whole word across the 22 approved
@@ -492,7 +494,7 @@ and the party is the better ambusher.**
 | ET1 | MAIN 4.3 says "a **side** noticed without noticing back"; ENM 12.2 says "a **group**" | Per side for the party, per group for monsters (EP-2; **agreed, Q1**) |
 | ET2 | ENM 10.3 caps "ambushes" but never defines one | Defined (EP-10): Cuckoo, Mousetrap, boxed lurker, Waylay |
 | ET3 | Invariant 6 bars limited abilities only in F1 *surprise rounds*; under the per-side reading an F1 Cuckoo has no surprise round, so Ambush Strike would become legal | "On floor 1 a lurker never uses Ambush Strike" (change EP-11) |
-| ET4 | ENM 10.5 step 10 puts lurker placement rolls on the dungeon stream; ENM 12.2 puts lurker Stealth on the combat stream | A keyed per-unit hash on the `encounters` stream (change EP-3; both rows named) |
+| ET4 | ENM 10.5 step 10 puts lurker placement rolls on the dungeon stream; ENM 12.2 puts lurker Stealth on the combat stream | A keyed per-unit hash (change EP-3; both rows named), in the domain `h:lurkStealth` on the floor's attempt-invariant `checks` stream, not on `encounters` (seeds and validation design 4.3; changes SV-6, SV-31; M2) |
 | ET5 | Only 5 of 9 themes have a lurker; F5 has none | Waylay for the other four; no roster swap (told plainly) |
 | ET6 | F1's only legal ambush host is the guard post adjacent to the lair, whose Gaol lesson is the shut-door pair | Gaol "shut-door pair or hooded cot" (change EP-13 to FL 7.2); the F1 ambush only in the L-G role order (EP-11) |
 | ET7 | `Floor1NoCoveredStarts` vs "archers behind cover" | The F1 archer starts uncovered and may *fall back* to cover (a reading for the RT owner, EP-6) |
@@ -649,18 +651,41 @@ stream. **Read (change LE-14; M1):** loot is now steps 3a (LootPlan, on
 the keyed `lootPlan` child stream) and 3, and the draw-free LootBind
 pass runs after `trapsResolve`, before the V13g checks at the shared
 assertion point; this order is unchanged (loot economy design 6.10).
+**The two assertion points (change SV-9; M1; order kept):** the one
+floor assertion point becomes **AP1**, the structural point after the
+`traps` pass (FL's structural asserts, V9g, V10g, V11g1; HE-7's point),
+and **AP2**, the shared point after LootBind and EventPlace, where V12's
+floor assertions run. In the canonical stage table, steps 2 and 2a are
+GS8, steps 4–11 GS12 (after LootPlan GS10 and loot GS11), `trapsResolve`
+GS13 (seeds and validation design 4.4, 5.4).
 
 **Stream (change EP-1).** Segment 6 draws only from `encounters =
-Derive(floorDungeonSubstream, FNV-1a("encounters"))`, written as RT and
-TL write their sibling streams (lead's call, after the check), with
-fixed draw counts and dummy draws (R-SEED-3). `floorSeed` in the keyed
-hashes below is the floor dungeon substream's seed, as in TL 6.22. This
+Derive(attemptKey, "encounters")` (was `Derive(floorDungeonSubstream,
+FNV-1a("encounters"))`: `Derive` applies the FNV-1a `LabelId` itself,
+and the parent is the floor's attempt node; changes SV-1, SV-4),
+written as RT and TL write their streams (lead's call, after the check;
+"sibling" dropped, SV-31), with fixed draw counts and dummy draws
+(R-SEED-3). `floorSeed` in the keyed hashes below is the floor dungeon
+substream's seed, as in TL 6.22. This
 amends ENM 10.5's last paragraph ("every step except 3 draws only from
 the dungeon stream", lead's call), adds a child to MAIN 6.3's stream
 list (**decided**, extended as FL-2, TR-17 and TL-3 extended it; **new
 lead's call:** flagged in 17 on that precedent) and adds a node to the
 RS seed tree (segment 11 owns the tree). Purpose: a segment-6 retry
 never perturbs segments 3–5.
+
+**Keyed form (changes SV-1, SV-2, SV-31; M1; draw counts
+unchanged):** `Derive` and `H` are the one key algebra of the seeds and
+validation design (4.1; a child derives from its parent's key, and every
+bounded draw uses `Bound`, never `mod`). `encounters` is the never-drawn
+node `dungeon/floor/{N}/attempt/{a}/encounters`, a child of the floor's
+attempt node beside `traps` and `trapsResolve` (`hazards` is a
+grandchild, under `terrain`). One stage draws each stream, so it has two
+sub-keys: **`encounters/plan`** (step 2a, GS8; 1 + 2 × floor cap + 1)
+and **`encounters/place`** (steps 5, 5b, 10a, 10b, GS12; 4 per slot ×
+maxSlots, the boss slot's draws spent as dummies). `floorSeed` is the
+floor key `dungeon/floor/{N}`; the lurker hashes of 6.8.5 sit on its
+attempt-invariant `checks` child (seeds and validation design 4.2, 4.3).
 
 | Step | Work | Draws (fixed) |
 |---|---|---|
@@ -680,7 +705,7 @@ never perturbs segments 3–5.
 | 10c | Terrain Pairings (6.6.8) and the defensive variant | 0 |
 | 10d | Start-square solver and Billets: deterministic, draw-free; fixed role priority; ties by fixed square order (ABL 8.1) | 0 |
 | 10e | Patrol File order and Circuit phase (the `layout` pass's phase); the tell square (the first legal socket by id that satisfies `TellSight`) | 0 |
-| 10f | Lurker Stealth: keyed hashes per band (6.8.5; change EP-3) | 0 on the stream |
+| 10f | Lurker Stealth: keyed hashes per band (6.8.5; change EP-3), domain `h:lurkStealth` on the floor's `checks` stream (SV-6; M2) | 0 on the stream |
 | 10g | Floor repair pass (below) | 0 |
 | 11 | XP shares (unchanged) | 0 |
 | out | `GroupPlacement` record to `trapsResolve` (6.13) | — |
@@ -766,18 +791,27 @@ re-entering at 5b; (2) the next step-5 candidate; (3) the theme's
 cheapest legal Picket in **Picket Line**; (4) **terminal:** that Picket
 placed role-blind under the hard constraints only (TP2, VP3, CV8, LG20,
 KP5, `Floor1NoCoveredStarts`), with no formation clauses, so every
-*slot* ends legal. Every retry is logged for segment 12. Report
+*slot* ends legal. Every retry is logged for segment 12 (the chain is an
+LR1 in-stage repair, counted by `FormationFallbackRate`; the floor
+retry below is logged `StageRetried`; seeds and validation design 5.5;
+change SV-10). Report
 `FormationFallbackRate` (< 10% overall, < 5% on F1, *illustr.*).
 
 **Floor-level failure policy (lead's call, after the check; mirrors TL
 6.22).** Floor assertions (the awareness mix, the 6.5 spread, the Busy
 caps, variety, `StealthOpenable`, showcases, `SeedHasTarget`, the Annex,
 Tattle and Wager bindings) run at the shared assertion point after
-`trapsResolve`. The slot chain cannot repair them, so:
+`trapsResolve` (**AP2**, after LootBind and EventPlace, as V12g; the
+Tattle and Wager bindings are TL's actions at GS13 and V12g only
+asserts them; seeds and validation design 5.4; change SV-9). The slot
+chain cannot repair them, so:
 1. the repair pass 10g runs inside segment 6 before the hand-off;
 2. if a floor assertion still fails, segment 6 is retried **once** on
-   `Derive(encounters, FNV-1a("retry1"))` with the same fixed draw
-   counts, and `trapsResolve` re-runs on the new placement;
+   the keyed child `…/attempt/{a}/encounters/retry1` (its `plan` and
+   `place` sub-keys; changes SV-2, SV-4) with the same fixed draw
+   counts, and `trapsResolve` re-runs on the new placement (at its own
+   unchanged key; the rerun span is GS8–GS15; seeds and validation
+   design 4.3, 5.4);
 3. **terminal:** the floor ships with the failing assertion logged in a
    `V12FloorFallback` report. Only these may be waived: the class
    showcases, ≥ 2 activity kinds, the `StealthOpenable` ceiling and the
@@ -790,6 +824,22 @@ Tattle and Wager bindings) run at the shared assertion point after
    theme's cheapest legal Pack, role-blind in Sleeping Ward, for Dormant
    (every theme roster has a Pack fill, a content test), which by
    construction meets them.
+
+**On the one ladder (seeds and validation design 5.5; change SV-10;
+M1; this policy kept):** the slot chain, the cluster re-run 5b–8, 9b
+and 10g are **LR1** in-stage repairs; the retry above is **LR2**
+(`stageRetry(encounters)`, at most once per attempt, logged
+`StageRetried{floor, attempt, stage, check}`); the terminal floor
+fallback is **LR4** (`waivable(V12FloorFallback)`, for the waivable set
+only, logged `GenerationFallback`). The never-waived list has the class
+`neverWaived`: should one still fail after the forced-state terminal
+group, that is **LR5** `GenerationDefect`, which takes the next floor
+attempt (`dungeon/floor/{N}/attempt/{a+1}`, at most 3 attempts in
+every build). Dev and CI builds then fail hard once the floor is
+recorded (never silent); a release build whose last attempt fails ends
+the run cleanly, "the dream unravels", in place of DH 12.4's crash
+(agreed, Q2 of the seeds and validation design). Every build runs the
+same ladder.
 
 ### 6.2 Budget and difficulty curve (lead's call; change EP-20)
 
@@ -1598,9 +1648,14 @@ ENM 12.2 (**settled**) rolls lurker Stealth "once at placement, and
 again only at the 6- and 3-square bands": three rolls. Each is a keyed
 hash, **one per roll** (lead's call, after the check, correcting the
 proposal's single hash, which made the 3-band check repeat the 6-band
-result): `H(floorSeed, unitId, "lurkStealth", band)` with band ∈
-{placement, 6, 3}. The d20 is `1 + (hash mod 20)`; advantage uses die 0
-and 1 as in TL 6.22. The placement value is the standing Stealth until
+result): `H(dungeon/floor/{N}/checks, "h:lurkStealth", groupId,
+positionIndex, band, die)` with band ∈ {placement, 6, 3} (the keyed
+form of the seeds and validation design 4.1, 4.3; changes SV-1, SV-6:
+the floor key's attempt-invariant `checks` child, the `h:` domain
+prefix and the `die` index added; M2, registered as a reserved, inert
+domain in M1). The d20 is `1 + Bound(d, 20)` (multiply-shift, not
+`mod 20`); advantage uses die 0 and 1 as in TL 6.22. The placement
+value is the standing Stealth until
 the first band. **At a band:** the trigger is the nearest party unit
 entering it; the value is compared against the highest passive
 Perception among **non-Downed** party units with line of sight to the
@@ -2050,10 +2105,15 @@ group of 6.14 (boss rooms design 4.7.4).
 ### 6.19 Seeds (lead's call; change EP-1, EP-3)
 
 - The `encounters` child stream and its draw table (6.1); segment 11
-  owns the tree.
-- Lurker Stealth by keyed hashes, one per roll (6.8.5).
-- One segment-6 retry per floor on `Derive(encounters, FNV-1a("retry1"))`
-  (6.1).
+  owns the tree. It is the node `dungeon/floor/{N}/attempt/{a}/encounters`
+  with the sub-keys `plan` (step 2a, GS8) and `place` (steps 5, 5b, 10a,
+  10b, GS12), counts unchanged, each a registry row (seeds and
+  validation design 4.2, 4.3; changes SV-1, SV-2; M1).
+- Lurker Stealth by keyed hashes, one per roll (6.8.5), in the domain
+  `h:lurkStealth` on the floor's `checks` stream (SV-6; M2).
+- One segment-6 retry per floor attempt on the keyed child
+  `…/attempt/{a}/encounters/retry1` (6.1), the LR2 rung of the one
+  ladder (seeds and validation design 5.5; SV-10).
 - The solver, Billets, Patrol File, Terrain Pairings and the fallback
   chain are draw-free.
 - Same seed and same inputs give the same placement; retries never
@@ -2782,6 +2842,17 @@ pass's triggers and device areas, Stir footprints, Tide states, door
 start states and the actual composition, so a build-time result cannot
 simply be looked up at runtime).
 
+**Phases and classes (seeds and validation design 5.1, 5.2; change
+SV-20; M1 static + chain, M2):** the build-time part is **V12s**; the
+geometry re-check is **V12g** at GS12; the floor assertions are
+**V12g** at AP2; the runtime assertions are **V12r**; tests are
+**V12t**. `s` and `t` parts fail the build; `g` parts act by their
+class: `stageRetry(encounters)`, then `waivable(V12FloorFallback)` for
+the waivable set and `neverWaived` for the never-waived list (6.1). The
+simulator gate below is not a validator part: it moves to the report
+registry as SHIP or REL rows owned by EP, keeping its id as an alias
+(seeds and validation design 6.3, 6.10).
+
 **Build time** (enumerated per layer × orientation × template ×
 formation × variant × party size 1–4 × reachable weight × floor band ×
 theme, pruned by floor gates; **on the worst case**: every optional
@@ -2805,14 +2876,16 @@ and line-of-sight checks): the build-time geometry predicates for each
 placed group, `CounterCost` (6.8.6), `TableSocketPieceExists`,
 `AnnexHearingGap`, `ChipNoLeak`'s inputs and `ActivityHasAnimation`.
 
-**Simulator gate** (11.3, 11.4; per template × formation × floor band
+**Simulator gate** (a report-registry row, not a V12 part; SV-20, SV-24;
+11.3, 11.4; per template × formation × floor band
 on sampled layers, not per case): **the ENM 6.4 rows over placed
 geometry with Billets on** (EP-30), including Keg, Conduct and Stir acts
 and shove-success × fall value for shover positions within 4 of a Void
 edge; the Waylay HP-eq band.
 
 **Generation time, floor assertions** (after `trapsResolve`, at the
-shared assertion point):
+shared assertion point, **AP2**, in its code-fixed order after V11g2;
+seeds and validation design 5.4; change SV-9):
 - the ENM 10.3 caps with the ambush definition; Mousetrap ≤ 1 per floor,
   ≤ 2 per run, party ≥ 2, never F1;
 - the ENM 10.4 guarantees, the awareness mix after step 10, and variety,
@@ -2831,7 +2904,9 @@ shared assertion point):
   signature ≥ 2; Pack one family; Heart shapes; the Wake `nearStart`;
 - trigger-free starts; ≤ ½ in device areas; the Keybearer, Tattle, Annex,
   Wager and boxed-lurker bindings; `JoinedRangedShare`; `JoinedUnitsCap`;
-  one call source per encounter; `ProtectedIntact`; the cover-room
+  one call source per encounter; `ProtectedIntact` (its group part;
+  the structural part is FL's V8g at AP1; pending request below); the
+  cover-room
   window; `AnnexHearingGap` > 8; roster placeability (a content test).
 
 **Runtime assertions:** `ArrivalThroughPortal`; a Billet never applied
@@ -2840,11 +2915,30 @@ is available.
 
 **Failure policy** (6.1): per slot, the fallback chain, ending in a
 role-blind Picket that keeps every hard constraint; per floor, the 10g
-repair pass, one retry of segment 6 on `Derive(encounters,
-FNV-1a("retry1"))` with `trapsResolve` re-run, then the terminal floor
-fallback with its waivable and never-waived assertions and the
-`V12FloorFallback` report (lead's call, after the check). Every retry
-logged.
+repair pass, one retry of segment 6 on the keyed child
+`…/attempt/{a}/encounters/retry1` with `trapsResolve` re-run, then the
+terminal floor fallback with its waivable and never-waived assertions
+and the `V12FloorFallback` report (lead's call, after the check). Every
+retry logged (`StageRetried`, `GenerationFallback`; the ladder LR1, LR2,
+LR4 and LR5 of 6.1; seeds and validation design 5.5; SV-10).
+
+**Pending requests from the seeds and validation design (segments
+11–12, approved 2026-11-23; change SV-20; M1/M2; the EP owner rules):**
+- RS V7's signature-type assertion moves to **V12g** (signature ≥ 2,
+  above), and its "fixed seed sample per (theme, floor, party size)"
+  becomes a **V12t** regression row, `SignatureTypeTwice`, over the
+  release seed set. Fallback if refused: V19t runs the sample row.
+- `ProtectedIntact` is split: the structural part is FL's (V8g at
+  AP1, `floorRetry`); the **group part** (step-9 group moves) is V12g at
+  AP2, `stageRetry(encounters)` then `neverWaived`. Fallback if refused:
+  FL owns both parts, the group part run at AP2 under V8g with the same
+  class.
+- With the companions owner, confirm `content.CMP8.Formations` and
+  `content.CMP8.SoloColumn` (the CMP-8 tests extended to formations and
+  the solo column, 13), owned by CMP over EP's data, run with CMP 11.2
+  at tier 1. Fallback: the rows run as 13 words them, under CMP 11.2's
+  suite.
+(Seeds and validation design 5.2, 5.4, 5.7, 11, 14.2.)
 
 ### 11.3 Reports and gates *(illustr.)*
 
@@ -2859,18 +2953,18 @@ logged.
 | `WaylayListenRate`, `KillBoxCounterUse`, `WaylayRound1Damage` | Reported; counter use ≥ 40% |
 | `BacklineReachRate` | 40–70% |
 | `FormationBreakRound` | Median 1.8–2.8, unbroken fights counted at their last round, the censored share reported; the party engages the line ≥ 1 round |
-| `RoundsPerFightDelta` (the segment-6 line beside TL's) | ≤ +0.2; no net minutes at party 4 on F4–5 |
+| `RoundsPerFightDelta{segment}` (the segment-6 line beside TL's; the keyed family, seeds and validation design 6.10, SV-24) | ≤ +0.2; no net minutes at party 4 on F4–5 |
 | `DoorCampShare`: the share of posted fights in which every party unit ends ≥ 2 consecutive turns on landing or entry-lane squares while no party unit is adjacent to an enemy | ≤ 15%, with an HP-eq delta ≤ the Busy discount (a gate, after the check) |
 | `ClassHpEqDelta`: per-hero HP-eq lost, B arm − Base arm, by class | An absolute spread: max − median ≤ 0.03 HP-eq per fight *(illustr.)* (after the check; a ratio breaks when the median delta is ≤ 0) |
 | `StealthOpenableShare`, `RevelOpenerDamage`, `LairSneakRate` | ≥ 2 and ≤ 3 per floor; Revel fights median ≥ 2 rounds; ≤ 25% |
 | `ChainPullRate`, `JoinerWarningLead` | 0.3–0.6; ≥ 1 always |
 | `FormationEntropy`, `TemplateEntropy`, triples per floor | ≥ 1.5 bits; ≥ 4 |
 | `FormationFallbackRate` | < 10%; < 5% on F1 |
-| `V12FloorFallback` (floors shipped with a waived assertion) | < 1%, never a never-waived one |
+| `V12FloorFallback` (floors shipped with a waived assertion) | < 1%, never a never-waived one; **read pooled** per (floor, cap), never per cell (BUDGET; seeds and validation design 5.6; SV-11) |
 | `ReEngageRate`, `AnnexEngageRate`, `ContainersOpened` | Reported (containers −10% against baseline = the paranoia alarm) |
 | `F1FeatureAdjacency` | Reported |
 | `FormationRead` (playtest) | Name and use the counter ≥ 70% |
-| `PatrolFightRate` (change XI-6; agreed, Q2; M2): combats per floor, F1–5, whose first noticing roll was made by a Patrolling group, over the same count in the BASE arm | ≥ 60% *(illustr.)*; **a gate**, owned by EP, read at M2 sign-off and every balance pass; on a miss, segment 10's cut order (exploration and information design 4.8.1, 9.3) |
+| `PatrolFightRate` (change XI-6; agreed, Q2; M2): combats per floor, F1–5, whose first noticing roll was made by a Patrolling group, over the same count in the BASE arm (`XI.BASE`; seeds and validation design 6.2; SV-22) | ≥ 60% *(illustr.)*; **a gate**, owned by EP, read at M2 sign-off and every balance pass; on a miss, segment 10's cut order (exploration and information design 4.8.1, 9.3) |
 
 **New lead's call:** `RoundsPerFightDelta` is TL's report name (TL 6.9,
 ≤ 0.1 for traps); segment 6 reports its own line under the same name
@@ -2878,15 +2972,39 @@ with a `segment` key, so the two allowances stay separate and additive.
 
 **Lever order on a miss:** the Waylay share → the Mousetrap weight → the
 Crossfire / Kill Box floor gate → `billet%` and `maxRounds` → only then
-the approved DH 18.2 levers (the F1 ambush and lair budgets).
+the approved DH 18.2 levers (the F1 ambush and lair budgets). Read
+(SV-26; M2): one lever at a time with its blast radius rerun; the F1
+ambush and lair budgets, shared with DH 18.2, are applied once, by the
+owner higher on the precedence ladder PR0–PR5 (seeds and validation
+design 6.9).
+
+**Result classes and reading (seeds and validation design 6.3, 6.4,
+6.6, 6.12; changes SV-23, SV-24, SV-25; M2):** every row above carries
+one class. `PartySurpriseShare` and the segment-6 clock line
+(`RoundsPerFightDelta{segment}`, EP-33) are **BIND**;
+`PatrolFightRate` is **REL** (PR1); `FormationFallbackRate` and
+`V12FloorFallback` are **BUDGET** (with LR2 `encounters` ≤ 3% of floors
+at ρ = 0.3, 5.6); `FormationRead` is a human-session row (H; the
+playtest calendar of 6.11, SV-27); F1 `SurpriseDeathShare` = 0 is a
+zero gate, two **BUILD** rows: the structural V12 F1 package (EP-2) and
+the simulator smoke. The other rows keep their approved meaning and
+take their class in the report registry (EP owns the thresholds). Each
+row declares its sidedness and z by its class (6.4); `ClassHpEqDelta`
+is read de-noised; the `PatrolFightRate` ratio uses a bootstrap
+interval.
 
 ### 11.4 Simulator arms
 
-Base (approved role-blind); A (the M1 static zones); B (full); B-rigid;
+Base (approved role-blind; the qualified toggle `EP.Base`); A (the M1
+static zones); B (full); B-rigid;
 B with per-group surprise; B + Mousetrap; the Waylay geometry arm; the
 solo arm (F2–5); the F1 `billetScale` arm (0 vs 500‰); the door-camp
-arm (`DoorCampShare`); the Shade-in-party worst-legal arm; K = 1 with
-real kits for every arm.
+arm (`DoorCampShare`); the Shade-in-party worst-legal arm
+(`Skill.WorstLegalShade`); K = 1 with real kits for every arm.
+Qualified names (seeds and validation design 6.2; change SV-22; M2):
+every arm is a vector over the shared catalogue's axes, so "Base"
+never collides with another owner's baseline; `PatrolFightRate` reads
+`XI.BASE`, not `EP.Base` (11.3).
 
 ---
 
@@ -2894,7 +3012,7 @@ real kits for every arm.
 
 | Wave | Contents |
 |---|---|
-| **M1** | EP-1 pipeline and stream; EP-4 static formations (Picket Line, Door Line and Crescent, and the Patrol File start shape) with front and back sockets, no AI term; the derived start sockets; `FirstSight`, `LandingShooters`; constructive TP2 and the Keybearer candidate guarantee; EP-2 recorded (M1 has no lurkers, so no party Surprise); the solo table with its formation column; the V12 core with the fallback chain |
+| **M1** | EP-1 pipeline and stream; EP-4 static formations (Picket Line, Door Line and Crescent, and the Patrol File start shape) with front and back sockets, no AI term; the derived start sockets; `FirstSight`, `LandingShooters`; constructive TP2 and the Keybearer candidate guarantee; EP-2 recorded (M1 has no lurkers, so no party Surprise); the solo table with its formation column; the V12 core with the fallback chain (V12s static and the chain; the `encounters/plan` and `/place` keys, the LR2 `retry1` child and `StageRetried` logging; `h:lurkStealth` registered as a reserved, inert domain, used from M2; seeds and validation design 4.3, 5.2, 5.5; SV-2, SV-6, SV-10, SV-20) |
 | **M2** | Billets, Stung, fall-back, Keystone, breaks; the fairness bundle; activities (F1 themes ≥ 3; 1–2 bespoke per F2–5 theme, `animReady`); per-position Posted idles per rig family (8); the remaining formations and start shapes except the Ritual; the Cuckoo and the Mousetrap (after DH 21.1 step 1); the Waylay with Spoor marks (after its gate); Hold the Hide and the window; the Hedgehog; the rest preview; arrival arrows; Terrain Pairings on approved rules; the Sleeping Ward sneak line; the tier ladder and variety assertions; the Read card and overlays; the class matrix; join levers; per-theme eligibility; V12 full; reports |
 | **M3** | The Annex (Wager guard, Dare garrison, boxed lurker, Tattle beyond; until then every Tattle is a Crier, told plainly); the Ritual; Messenger, Call Post, Wake Order (if per-member state is cheap); natives in device areas (after TL-16); TR-15 pairings; `roleHint`; the full activity art; two-group "watched sleep" rooms on F4–5; the approach band (client) |
 | **M4** | The Cathedral roster and shapes |
@@ -2920,8 +3038,8 @@ sockets and pieces (RT); hazards (HZ); traps, locks and `trapsResolve`
 | **8 Events** | Activity vignettes in Q rooms ("remains of a revel"); no event spawns or moves units; Cowed kneeling never crosses a door. **Taken up by the events design (segment 8, approved 2026-11-22; its 4.13):** vignettes are Glimpse dressing beside the Q room's Curiosity, under RC1+, never a second decision (M2); "no event spawns or moves units" is held: Curiosity noise is generic noise that moves units only through the hearing rules, never a Lure and never sets `luredThisFloor` (EV-14, a reading pending the EP owner's confirmation, with the enemies owner; M2); figures are framed non-unit map objects, never on a walkable square (events design 4.11; EV-45; M2 implied figures, M3 frame); M3 Overtures may apply Soaked, Oiled or Revealed to a tied group at its fight's first round, never on the elite, the Annex, the boss or a lurker host (for Revealed) (EV-32, a reading of this row pending the EP owner, enemies owner request; M3; events design 4.9) |
 | **9 Boss arenas** | Retinue escorts, arena start zones ≥ 9, the patrol joiner, Keepsake dressing. **Taken up by the boss rooms design (segment 9, approved 2026-11-22; its 4.5, 4.7.4):** arena escorts use segment 9's `ArenaFormation`s, Retinue one allowed shape on F2–5 (BR-19, a request pending the EP owner, 6.14; M2); every F2–5 Boss Court holds ≥ 1 non-fearless group (agreed, Q4; M2); `answers{}` extended to bosses as `BossAnswerMatrix` (BR-19, 6.16; M2); reserve sockets read as keeping "no off-map reinforcements" and `ArrivalThroughPortal` (BR-11, a reading pending the EP owner's confirmation, 6.12; M2); the patrol joiner joins under the 1/1/2/2/2 caps and counts in AddCap (BR-13, an FL-21(e) proposal the enemies owner rules) |
 | **10 Information** | Formation and Keystone chips (`ChipNoLeak`; the read-surface table of 6.20); the Read card; the Perception hold overlay; the Lore counter line; the Listen activity word and watched Portal; Spoor marks; arrival-Portal arrows; the seen-tell band marker (6.20); rest-preview movers; the Lore roster preview of formations; "Line broken" and "Caught facing the door". **Taken up by the exploration and information design (segment 10, approved 2026-11-23; its 4.3.5, 4.8, 4.9.7, 5):** every surface placed in its catalogue (5), EP 13 at 5 surfaces; the Listen bubble carries the activity word and watched Portal if EP-9 and EP-12 are ruled (FL-18 requests; 4.3.5); hold squares and fall-back stay the EP-28 tier, if ruled; arrival-Portal arrows on a hearing outline labelled "known groups only" (XI-13, a reading; M2; 6.12); rest-preview movers read `PatrolForecast` over known patrols (XI-6, agreed, Q2; M2; 6.20); the `PatrolFightRate` gate, owned by EP (XI-6, agreed, Q2; M2; 11.3); Spoor marks projected under cutaway (XI-18, pending the EP owner's confirmation; M2; 6.8.6); the noticing step tag's odds and Cased's odds band wait on EP-41 (XI-12, XI-27; M3; 6.20); Downed units excluded from the lurker band (XI-2; M1; 6.8.5) |
-| **11 Seeds** | The `encounters` node, its draw table, the `retry1` child, the per-band `lurkStealth` keys |
-| **12 Validation** | V12, the reports, the CMP-8 tests extended to formations and the solo column |
+| **11 Seeds** | The `encounters` node, its draw table, the `retry1` child, the per-band `lurkStealth` keys. **Taken up by the seeds and validation design (segments 11–12, approved 2026-11-23; its 4.3, 5.5):** `…/attempt/{a}/encounters` a node with the sub-keys `plan` (GS8) and `place` (GS12), counts unchanged (SV-2; M1); `encounters/retry1` the LR2 child (SV-10; M1); `h:lurkStealth` (groupId, positionIndex, band, die) on the floor's `checks` stream (SV-6; M2, reserved in M1); the key algebra (SV-1); 6.1, 6.8.5, 6.19 |
+| **12 Validation** | V12, the reports, the CMP-8 tests extended to formations and the solo column. **Taken up by the seeds and validation design (segments 11–12, approved 2026-11-23; its 5.1, 5.2, 5.4–5.7, 6.3, 6.10):** V12 split into V12s, V12g (GS12 geometry; AP2 floor assertions) and V12r, its simulator gate moved to the report registry (SV-20); every retry logged as `StageRetried` (5.7); `V12FloorFallback` < 1% read pooled (SV-11); the CMP-8 rows as `content.CMP8.Formations` and `content.CMP8.SoloColumn` (a request to the EP and companions owners, pending; 11.2); signature ≥ 2 and `ProtectedIntact`'s group part in V12g (requests pending; 11.2) |
 
 ---
 
@@ -2951,7 +3069,7 @@ sockets and pieces (RT); hazards (HZ); traps, locks and `trapsResolve`
 | No floor-wide alarm | FL 9.1 | The Rumour and the Prowl rejected |
 | Monsters never respawn; XP finite | ENM 16 | 6.21; the Annex at 0 XP |
 | Rival Party fit | FL 13 | A Later stub (EP-34) |
-| Determinism; fixed draws | MAIN 6.3 (**decided**); R-SEED-3 | The `encounters` stream; the keyed hash (6.19) |
+| Determinism; fixed draws | MAIN 6.3 (**decided**); R-SEED-3 | The `encounters` stream; the keyed hash (6.19); registry rows under the one key algebra (seeds and validation design 4.1–4.3) |
 
 ---
 
@@ -3507,6 +3625,13 @@ wave or a later design triggers them; each fallback is a new lead's call
   gate is unchanged; if the client refuses EP-41, watch lines ship
   without the noticing step tag's odds and Cased ships without its odds
   band (exploration and information design 14.2).
+- **Pending from the seeds and validation design (segments 11–12,
+  approved 2026-11-23):** the EP owner accepts the signature-twice
+  authority in V12g and the V12t sample row (fallback: V19t runs it);
+  accepts `ProtectedIntact`'s group part as V12g at AP2 (fallback: FL
+  owns both parts, under V8g); and, with the companions owner, confirms
+  the `content.CMP8.*` rows (fallback: they run as 13 words them, under
+  CMP 11.2) (11.2; SV-20; seeds and validation design 11, 14.2).
 - **At M3:** the approach band out of combat (EP-41); two-group "watched
   sleep" rooms.
 - **Later:** the Errant (a MAIN 4.3 change, client only); a Rumour-like

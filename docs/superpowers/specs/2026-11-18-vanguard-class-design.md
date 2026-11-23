@@ -2191,6 +2191,13 @@ stage-1 checks as written (`ForbiddenClassGrant`, `LeanSpread`,
 `SubclassCopiesBaseLean`, `SubclassAddsPool`, `NameCollision`, the cap
 of eight, the copy registry).
 
+**(2026-11-23; SV-20, seeds and validation design 5.1–5.2; lead's call;
+M1 / M2)** These are pre-generation content checks: they keep their VG
+and classes codes, have no V id and are registered as `content.*` rows
+(classes 12.2 with the VG codes), all build-phase. `NameCollision` is
+owned by `V7.NameRegistry` (manifest-driven); the Vanguard's names feed
+that registry, and this document calls the check rather than owning it.
+
 ### 13.3 Simulator reports owed
 
 - parity at the worst legal build, with real R;
@@ -2366,7 +2373,8 @@ hit" in conditions 10.1 shows the VG-8 sum.
   VG-22 (the ally swap).
 - **Lead's checks before data:** every SRD shape in this document
   (Second Wind, Surge as Action Surge, Extra Attack, Shove, the verbs'
-  SRD sources) against SRD 5.2.1; `NameCollision` over the final names.
+  SRD sources) against SRD 5.2.1; `NameCollision` over the final names
+  (run by `V7.NameRegistry`; SV-20, seeds and validation design 5.2).
 
 ## 19. Open items for the client
 

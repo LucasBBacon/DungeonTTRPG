@@ -157,8 +157,9 @@ stands as written).**
    exhaustively over its rules, template classes and orientations, and
    the floor-wide invariants from composed per-Site bounds (11.2). The
    runtime is a lookup that cannot fail. It keeps only structurally
-   proven assertions, checked once with DH's HE-7 check and under its
-   existing single seed + 1 retry **(settled)**.
+   proven assertions, checked once with DH's HE-7 check at AP1 and under
+   its single floor retry, the keyed `attempt/1` **(settled; SV-4,
+   SV-9, M1; seeds and validation design 5.4, 5.5)**.
 
 Why, on the toy:
 - Model A failed at runtime on 0% of seeds.
@@ -418,7 +419,10 @@ stealth and cover, and each hit was read in context.
   guard-post bypass; pre-boss 510 on floor 5 (410 after one bypass).
 - **DH:**
   - 12.4 HE-7: 2 or more no-check main-path containers before the boss
-    room, one in the first half; one retry at seed + 1, then a crash;
+    room, one in the first half; one retry, now the keyed `attempt/1`
+    floor retry (LR3), then a hard failure in dev and CI after the floor
+    is recorded and, in release builds, the clean end (agreed, Q2;
+    SV-4, SV-10, M1 / M2; seeds and validation design 5.5);
   - 12.5: "first half" means index < FloorDiv(n−1, 2);
   - 17.1 **(agreed Q9)**: `mainPathIndex`, corridors take the lower
     index, no Surprise at floor-1 index 0–1.
@@ -579,22 +583,33 @@ call)**.
 
 **Streams (lead's call; the derivation, retry and weighted-pick rules are
 lead's calls after the check):**
-- The floor's dungeon substream (RT-3, keyed by floor index) gains a
-  child keyed `layout`, derived as `Derive(parentState,
-  FNV-1a("layout"))`, the same function that derives the `route` and
-  `recruit` children. Only layout draws from it.
-- Enemies 10.5 steps 2–11 keep drawing from the parent substream as
-  approved. The `route` child is untouched, so R-SEED-1 and V6 hold.
+- The floor's dungeon substream (RT-3, keyed by floor index; the floor
+  key `dungeon/floor/{N}`, never drawn) has an attempt node
+  `attempt/{a}`, which gains a child keyed `layout`, derived as
+  `Derive(attemptKey, "layout")` from the parent's **key**, never its
+  state, the same function that derives the `route` and `recruit`
+  children (SV-1, SV-4, M1; seeds and validation design 4.1, 4.3).
+  Only layout draws from it.
+- Enemies 10.5 steps 2–11 draw from their own registered children
+  (`encounters/plan` and `encounters/place` under the attempt key; loot
+  step 3 from `loot/floor/{N}`), never from the floor key itself, which
+  is never drawn (SV-31, SV-2; seeds and validation design 4.3). The
+  `route` child is untouched, so R-SEED-1 and V6 hold.
 - Dressing (art variants and props with no rules effect) draws from a
-  display-side child, `Derive(parentState, FNV-1a("dressing"))`, that
-  the core never reads. Art growth never moves a rules seed.
+  display-side child, `…/attempt/{a}/dressing`, that the core never
+  reads: Core exposes the raw attempt key one way and the display
+  assembly derives its own `DisplayKey` from it (DS12; SV-1, M1; seeds
+  and validation design 4.3). Art growth never moves a rules seed.
 - **Terrain (TR-17):** segment 3's rules pieces draw from a sibling
-  child, `terrain = Derive(parentState, FNV-1a("terrain"))`, after LS13
+  child, `terrain = Derive(attemptKey, "terrain")`, after LS13
   and before enemies 10.5 step 2; rules pieces never come from the
   `dressing` child (room terrain design 6.2.5).
-- **Retry:** HE-7's retry reseeds the floor's dungeon substream at
-  seed + 1, and every child, `layout`, `terrain` and `dressing`
-  included, is re-derived from it, with nothing carried over.
+- **Retry:** HE-7's retry is the floor's next attempt: every
+  attempt-scoped child, `layout`, `terrain` (with its `hazards`) and
+  `dressing` included, is re-derived under `attempt/{a+1}` (attempt 1
+  for the HE-7 retry), with nothing carried over; `curiosities`,
+  `checks`, `trader`, loot and recruit keys are attempt-invariant
+  (SV-4, M1, curiosities M2; seeds and validation design 4.3, 5.5).
 - **Weighted picks** (rule weights, `bypassTargets[]`, `closedShare`)
   use one 64-bit draw, multiply-shifted into [0, the sum of the integer
   per-mille weights), scanning the cumulative list sorted by id. This is
@@ -614,7 +629,9 @@ lead's calls after the check):**
   node index); then the Stairhead; then Alcoves by (parent `roomId`,
   socket index). `roomId` is the position in that order, and every draw,
   tie-break and Keepsake number uses it.
-- Generation runs at camp step 11 for floor N+1 (RS 6.8).
+- Generation runs at camp step 11 for floor N+1 (RS 6.8); its
+  `GenInputs` are frozen there, at Travel on, from the camp-exit state
+  (SV-14, read; seeds and validation design 4.4, 4.8.2).
 
 **Inputs:** theme, floor index, actual party band (fixed at generation),
 the configuration snapshot (`layout.*`, `pacing.trimmedFloors[]`) and the
@@ -662,7 +679,7 @@ rule is needed to forbid it.
 1. **Segment 3 terrain** runs after LS13 and before enemies 10.5 step 2.
    It never blocks `protectedSquares` and never stands on a
    `protectedSightLines` square. Segment 3 may move its step with the
-   lead, as long as it stays before the assertion point. **(TR-17:)**
+   lead, as long as it stays before AP1 (item 3). **(TR-17:)**
    it draws from the `terrain` child (reservation step, then per node
    slot a layer pick, on/off and skin draws), places one of the
    template's terrain layers, and keeps each layer's **Clearway**, a
@@ -674,11 +691,24 @@ rule is needed to forbid it.
    pass may move a group only within its slot host, or to a host that
    layout lists as equivalent for that role (`equivalentHosts`, proven by
    V8), never off a proven host (FL-3).
-3. **The floor assertion point:** DH 12.4's HE-7 assertion and the
-   layout runtime assertions (11.2) run together, before the loot step.
-   On a failure, HE-7's single retry at seed + 1 (`GenerationRetried`)
-   reruns everything; a second failure is a crash bug **(settled,
-   DH 12.4; FL-15)**.
+3. **The two assertion points (SV-9 ⚑, M1; seeds and validation design
+   4.4, 5.4):** **AP1**, HE-7's point, runs after terrain, hazards and
+   traps pass 1 (GS5–GS7) and before enemies 10.5 step 2 (GS8) and the
+   loot step: DH 12.4's HE-7 assertion (`HE7Reserved`) and the layout
+   runtime assertions (11.2), with `ProtectedIntact`'s structural part.
+   **AP2**, the shared point after LootBind and EventPlace, runs the
+   later checks, including `ProtectedIntact`'s group part (V12g). Stages
+   after AP1 never mutate layout (V19t `AP1EarlyEquivalence`). On an AP1
+   failure, HE-7's floor retry (LR3, `GenerationRetried`) moves to the
+   next attempt, `attempt/{a+1}`, and reruns every attempt-scoped stage;
+   only structurally proven (`floorRetry`, with a `proofRef`) assertions
+   may trigger it **(settled, DH 12.4; FL-15 kept)**. LR3 is one rung of
+   the LR0–LR5 ladder, the same in every build, with at most 3
+   attempts: after the floor is recorded, a further failure is a hard
+   failure in dev and CI, never silent, and in release builds the run
+   ends cleanly as "the dream unravels", its record kept and marked and
+   a bug report filed **(agreed, Q2; SV-4, SV-10 ⚑, M1 / M2 for the
+   release clean end; seeds and validation design 5.5)**.
 
 **The draw count is fixed per Blueprint:** 2 + 1 + 1 + 1 + (2 + the
 number of Sites) + 3 × `maxNodes` + 2 × `maxEdges` + 3. `maxNodes` and
@@ -686,12 +716,15 @@ number of Sites) + 3 × `maxNodes` + 2 × `maxEdges` + 3. `maxNodes` and
 authored on the Blueprint and recomputed by V8 `DrawCount`. LS1 and LS2
 draw before the Blueprint is known, but their counts are constant. The
 number of draws therefore never depends on the data, which meets
-R-SEED-3.
+R-SEED-3. In the stream registry the `layout` stream is classed
+`leaf-formula`, evaluated on the Blueprint recorded in `GenerationLog`;
+the formula is unchanged (SV-2, classification only, M1; seeds and
+validation design 4.2, 4.3).
 
 ### 6.2 Graph invariants
 
 All are proven at build time (V8, 11.2). Those marked † are re-asserted
-at runtime at the floor assertion point (6.1, 11.2).
+at runtime at AP1 (6.1, 11.2; SV-9).
 
 | # | Invariant | Source |
 |---|---|---|
@@ -1223,6 +1256,10 @@ zero. Joiners stay a real, player-caused experience.
   - `ExploreSeconds` ≤ 3.5 min;
   - `ExploreClicks` ≤ 40;
   - Circuit isolation.
+  - **Result class (SV-23, M2; seeds and validation design 6.3):**
+    these commitments are layout's **BIND** line, not a gate of their
+    own; they feed the companions 7.4 REL gate (`FloorTimeByPartySize`),
+    as companions 7.4 already reads them.
 - **Segment 5's allowance (TL-38, M2; told plainly; traps and locks
   design 6.21):** a new budget line of ≤ +0.3 min `ExploreSeconds` and
   ≤ +5 `ExploreClicks` per floor at party 4 on floors 4–5, reported
@@ -2241,7 +2278,7 @@ RoomTemplate
   postSquares, patrolWaypoints, containerSockets[] {noCheck, face?}, trapSockets, landmarkSocket,
   socketToStartZoneMin[socket], fleeExit, vantageSquares?, maskVariants[]?
 FloorLayout (output)
-  static (regenerable from the seed; covered by layoutDigest):
+  static (stored in the floor's `FloorStatic` file, SV-14; covered by layoutDigest):
     blueprintId, transform, roleOrder, bypassTarget, siteRules[], secretCount
     rooms[] {roomId, role, mainPathIndex?, effectiveIndex, branchIndex {attachIndex, depth,
       sibling}, parentRoomId?, templateId, orientation, maskVariant?, tags[] (nearStart,
@@ -2253,10 +2290,14 @@ FloorLayout (output)
     grilleVantage[]; hearingMatrix[k] + circuitOpen + generatedState + allOpen;
     anchors[fightRoom][entryPortal][]; reserved {he7First, he7Second, supply}; landmarks[];
     keepsakeSlots[]; minimapNodes[]; protectedSquares[]; protectedSightLines[]; report{}
-  layoutDigest: a 64-bit hash (FNV-1a) of the canonical serialisation of the static part,
-    fields in the order above and arrays in roomId / portalId / square order
-Save: the seed and configuration regenerate the static part, checked against layoutDigest;
-  the save stores only dynamic per-Portal state (open, closed, drawn, found, lifted)
+  layoutDigest: the layout stage digest, SHA-256 over the `CanonicalWriter` bytes of the
+    static part (stored in full, shown truncated to 128 bits), fields in the order above
+    and arrays in roomId / portalId / square order (SV-1, M1; seeds and validation design 4.5)
+Save: the static part is stored, not regenerated: `floor-N-<hash>.static` holds the floor's
+  `FloorStatic`, and `run.save` holds its `GenInputs`, stage digests, attempt used and
+  `GenerationLog`; regeneration checked against layoutDigest stays only as V19t
+  `SaveDigestMatch` and a debug-build load check (SV-14 ⚑, M1 / M2; seeds and validation
+  design 4.8.1); the save's dynamic state holds per-Portal state (open, closed, drawn, found, lifted)
   and, beside it, dynamic Furnishing state {id, square, state: intact|debris|gone,
   burstSpent}; terrainDigest sits beside layoutDigest (TR-17; room terrain design 6.2.5);
   hazardDigest sits beside terrainDigest, and the save adds FloorHazardState (Mood stage
@@ -2266,7 +2307,8 @@ Configuration snapshot (RS 11.1; hashed into the reproducibility key, RS 6.4 R-S
   layout.mainPathRooms[floor], layout.mainPathRoomsTrimmed[floor], layout.sideRooms[floor],
   layout.sideRoomsTrimmed[floor], layout.secrets[floor], layout.hearingGapMin,
   layout.nearPairsMax[floor], layout.lastTurningWeight (ceiling), layout.wayBack (default off)
-Events: GenerationRetried (existing); DoorClosed; DrapeDrawn; LatchLifted; ListenHeard; SecretFound
+Events: GenerationRetried (existing; the LR3 floor retry, beside StageRetried,
+  GenerationFallback and GenerationDefect, SV-10; seeds and validation design 5.5, 5.7); DoorClosed; DrapeDrawn; LatchLifted; ListenHeard; SecretFound
 ```
 
 - `layout.secrets[floor]` is the global bound *(illustr.: [0–1, 1, 1,
@@ -2309,6 +2351,13 @@ with named sub-checks:
 - `F1LessonLadder`, `LayoutDistinct`, `TraversalFeel` footprint share,
   `PortalSkinMatrix`, `LandmarkSetSize`, `NearPairMinIndex`, config
   nesting.
+- **Phase model (SV-20, M1 core / M2; seeds and validation design 5.1,
+  5.2):** every V8 check has a qualified id `V8.CheckName` (so
+  `V8.TemplateReadability` and `V9.TemplateReadability` stay distinct)
+  and a phase: `s` (the build checks above), `g` (the runtime
+  assertions below, at AP1, failure class `floorRetry` with `proofRef`
+  V8s) and `t` (V8t). `DrawCount` is called by V19g's DrawLedger; V8
+  keeps the row as a citation.
 
 **What V8 enumerates (lead's call, after the check):**
 1. **Per Site, exhaustively:** every legal rule × every template class ×
@@ -2353,8 +2402,9 @@ theme plus floor-level capacity rows per Blueprint and rule choice
 `hazards` child of the `terrain` stream with fixed counts. Its runtime
 is a lookup that cannot fail (FL-15; hazards design 11.2, 11.3).
 
-**Runtime assertions** at the floor assertion point (6.1), each with a
-build-time structural proof; anything else is a report:
+**Runtime assertions** at AP1 (6.1; SV-9, M1; seeds and validation
+design 5.4), each with a build-time structural proof; anything else is
+a report:
 - `MainPathConnected`, `NothingInWalls`, `AntechamberDominatesArena`,
   `ArenaEntrancesFromAntechamber`;
 - `HE7Reserved` (with DH's HE-7 check), `CircuitValid`, `BypassValid`,
@@ -2367,11 +2417,29 @@ build-time structural proof; anything else is a report:
   square, and V9 proves the no-piece part at build time (TR-17; room
   terrain design 6.2.2, 11.2). Segment 6 reads it as written: no unit
   starts on a Clearway square (EP-24, a reading; M1; encounter placement
-  design 6.6.5).
+  design 6.6.5). **Split (SV-9, SV-20, M1; seeds and validation design
+  5.2, 5.4):** the structural part (terrain, hazards and traps against
+  protected squares) runs at AP1 as V8g; the group part (moved groups;
+  every slot-hosted group on its host or an equivalent host) runs at
+  AP2 as V12g, `stageRetry(encounters)` then `neverWaived`. **Pending
+  request (SV-20; seeds and validation design 11, 14.2):** EP owns the
+  group part; not settled until the EP owner rules; fallback: FL owns
+  both parts, with the group part still run at AP2 under V8g.
 
-Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
+Failure is class `floorRetry` (`proofRef`: V8s) and triggers HE-7's
+floor retry, LR3, at most once per floor, at the next attempt key
+`attempt/{a+1}` **(settled, DH 12.4; FL-15 kept)**; the rest of the
+LR0–LR5 ladder, its ≤ 3 attempts in every build and the release clean
+end (agreed, Q2) are as 6.1 item 3 says (SV-4, SV-10, M1 / M2; seeds
+and validation design 5.1, 5.5).
 
 ### 11.3 Reports (M2, at both party caps)
+
+Every report row carries exactly one result class (SV-23, M2; seeds
+and validation design 6.3): layout's clock line (6.10) is **BIND**,
+`PreBossRestSafety` is **ESC**, and unmarked rows are REP. After the M2
+cap decision, gated rows bind at the shipped cap (a reading of
+companions 7.4).
 
 - **Paths:** `CriticalPathSquares`, `FullClearWalkRatio`,
   `DeadEndDepth`, `EmptyDeadEndRate`, `PostBossBacktrack`.
@@ -2427,8 +2495,19 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
      7c clock line re-runs this walker with these clicks explicit
      (6.10; LP-10).
    - Statistic: the median over the release seed set at party 4, per
-     (theme, floor). The 6.10 gate passes when the lean median is ≤ 3.5
-     min and ≤ 40 clicks. The heavy and hunt figures are reported.
+     (theme, floor). The 6.10 BIND commitment holds when the lean median
+     is ≤ 3.5 min and ≤ 40 clicks (SV-23). The heavy and hunt figures
+     are reported. The release seed set reads as the frozen release set
+     plus its logged extension trials (SV-18, M1 / M2; seeds and
+     validation design 4.11).
+   - **Qualified arm names (SV-22, M2; seeds and validation design
+     6.2):** `FL.Lean` (the gate arm and the `Walk` default),
+     `FL.Heavy`, `FL.Stealth`, `FL.Hunt`. **Pending request (SV-22;
+     seeds and validation design 6.2, 14.2):** walker equivalences with
+     XI's and EV's walkers (for example, whether `XI.Completionist`
+     equals `FL.Hunt` plus optional fights) are for the XI, FL and EV
+     owners to rule; until they do, no mapping, and each gate reads its
+     own owner's arm.
    - Supplies the companions 7.4 time model with these terms.
 2. **`DamageShareByRangeBand` per grammar**, with segment 3, for the
    weapons 9.5 cover decision.
@@ -2457,7 +2536,7 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
 
 | Wave | Content |
 |---|---|
-| **M1** | Kennel subset: 2 Blueprints, a small rule library, the M1 kit budget and the 8.0 kit metrics. Graph rules LG1–LG10 (LG3 and LG5 in their floor-1 form; LG10 with no depth-2 spur, since the Latch is M2), LG12 (non-door flee exits, FL-12's M1 clause), LG15–LG16, LG18–LG20. Portal kinds Arch, Door, Locked, Bossgate; the party **open** verb (FL-8). Corridors and the socket router; `mainPathIndex`, `effectiveIndex` and the index rules (FL-13); the `expectedTenths` order; slot hosts (FL-3). The Bypass as a quiet corridor with a Door; the Circuit with a cover room and isolation; hearing graph and matrices. HE-7 and HE-4 reservation at the shared assertion point with the retry. The arena socket with dog-leg Forecourt Arches (`AntechamberScreened`). The Stairhead with plain stairs, warning and Scrap (items 24 is M1). V8 core sub-checks; runtime assertions; template and Blueprint editor tools. Enemies 25 M1 rows; DH-32 |
+| **M1** | Kennel subset: 2 Blueprints, a small rule library, the M1 kit budget and the 8.0 kit metrics. Graph rules LG1–LG10 (LG3 and LG5 in their floor-1 form; LG10 with no depth-2 spur, since the Latch is M2), LG12 (non-door flee exits, FL-12's M1 clause), LG15–LG16, LG18–LG20. Portal kinds Arch, Door, Locked, Bossgate; the party **open** verb (FL-8). Corridors and the socket router; `mainPathIndex`, `effectiveIndex` and the index rules (FL-13); the `expectedTenths` order; slot hosts (FL-3). The Bypass as a quiet corridor with a Door; the Circuit with a cover room and isolation; hearing graph and matrices. HE-7 and HE-4 reservation at AP1 with the floor retry (LR3, `attempt/{a}`; SV-4, SV-9, M1; seeds and validation design 5.4, 5.5). The arena socket with dog-leg Forecourt Arches (`AntechamberScreened`). The Stairhead with plain stairs, warning and Scrap (items 24 is M1). V8 core sub-checks; runtime assertions; template and Blueprint editor tools. Enemies 25 M1 rows; DH-32 |
 | **M2** | All 8 core grammars plus the Wake if it passes; 4–6 Blueprints per theme (6–8 for floor-1 themes and the Heart); the Precinct family; the Portal skin matrix. Grille, Drape, Squeeze, Latch, Hairline (Q3 counts). The party close verb; Listen; the floor count line. Elite vantage; the antechamber on every floor (floors 2–5 on the Circuit, Q2); retreat anchors (enemies 25 M2 row). Near pairs; Gaol shut-door pairs (if the owner agrees). Last Turning; Landmarks, compass, tints and minimap data; trimmed Blueprints; signature rooms. Full V8; all reports and arms; travel auto-walk (segment 10) |
 | **M3** | More Blueprints per unlock; seams at the Stairhead; Nightmare-tier layout variants (to be designed); Overlook; Chute; Strongroom (floors 2–3); Drop-bar doors (Gaol, gated, back to the client); Way Back (off by default); the Supper on floor 3 (`LayoutDistinct` already applies to the Choir–Supper pair from M2) |
 | **M4** | Breadth: rules and templates |
@@ -2495,7 +2574,7 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
 | 8 Non-combat rooms | Q rooms, the floors 2–5 antechamber micro-event socket, trader and Pledge tags, signature rooms (the `curiosityHost` tag), floor-1 Alcove set pieces and free leaf side rooms as Curiosity hosts (EV-2; events design 4.2) | Fills (Curiosities, Interludes and Glimpses; events design 11), trader, shrines, Dream Fragments. Segment 8 places no Landmarks: layout owns the sockets, segment 4 the ticks (EV-35; events design 4.2) |
 | 9 Boss rooms | The 2×2-cell socket, two dog-leg Forecourt Arches ≥ 5 apart, the Bossgate, start-zone depth ≥ 9, the symmetric `AntechamberScreened` (6.11), the arena pull-back zoom bound (8.1) | Interior, counterplay feature, phases, Keepsake arena dressing; boss tuning with a patrol joiner (FL-21 (e); answered by the BR-13 proposal, pending); the authored arena stamped draw-free into an `arenaCell` sized to contain it (BR-1, BR-2; boss rooms design 4.1); `ArenaEngaged` and the Sanctum rest rule (BR-3, BR-31; boss rooms design 4.2) |
 | 10 Exploration and information | Minimap nodes and explored-room outlines, Portal glyph kinds, Landmarks, tints, travel paths, count-line data, the patrol waypoint schedule (Listen's "passing") | Fog, minimap UI and the rules-room overlay, Listen UI (occupancy, 9.2), Hairline display, the hearing outline (including the self-teaching shut-door prompt and the elite vantage risk), interrogation facts, auto-walk (pausing at doors, 6.10), Overlook (M3), the Stratum Card line. Answered by the exploration and information design (XI-7; 4.1–4.3, 4.3.6, 4.7, 4.8.4, 4.9.8) |
-| 11–12 Seeds and validation | The `layout` and `dressing` children and their derivation, draw counts, V8 and its enumeration, the assertion list and the shared floor assertion point | The stream tree, release seed set, retry logging |
+| 11–12 Seeds and validation | The `layout` and `dressing` children and their derivation, draw counts, V8 and its enumeration, the assertion list and the shared floor assertion point | The stream tree, release seed set, retry logging. Answered by the seeds and validation design (4.3 the stream tree, `layout` and `dressing` under `attempt/{a}`; 4.4 the pipeline; 4.11 the release seed set; 5.4 the assertion list at AP1 and AP2; 5.5 and 5.7 retry logging) |
 
 ---
 
@@ -2510,7 +2589,7 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
 | Stairs, left-behind warning, Scrap | RS 14; items 9, 24 | The Stairhead (FL-6, **agreed Q2**), M1 |
 | Keepsake numbering | RS 9.3 | 6.5 |
 | `mainPathIndex`; corridors take the lower index | DH 17.1 **(agreed Q9)**, DH-32 | FL-13: `mainPathIndex` where defined, `effectiveIndex` on every square |
-| HE-7 containers with retry | DH 12.4 | LS11; LG16; FL-15 |
+| HE-7 containers with retry | DH 12.4 | LS11; LG16; FL-15; AP1 and the LR3 floor retry (SV-9, SV-10; seeds and validation design 5.4, 5.5) |
 | `expectedTenths`; off-path inheritance | enemies 6.3 | Main-chain order; `branchIndex` |
 | Slots (patrol, guard posts, lair, elite, boss) | enemies 10.4 | 6.5, 6.7 |
 | Stealth bypass / second route | enemies 10.4, 25; classes 6.4; Shade design | The Bypass (6.8) |
@@ -2538,7 +2617,7 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
 | Wake dormant bias; Heart morale by room | RS 8.5, 8.11 | `nearStart`; `skittishShape` / `ledShape` |
 | Flat rules; camera; tile pieces | main 6.8 **(decided)** | LG18; section 8 |
 | Connected; boss reachable; nothing in walls | main 7 | LG2; runtime asserts |
-| Seed determinism; separate streams | main 6.3 **(decided)**; RS 6.4 | The `layout` child; fixed counts; display stream (FL-2) |
+| Seed determinism; separate streams | main 6.3 **(decided)**; RS 6.4 | The `layout` child; fixed counts; display stream (FL-2); the key algebra and stream registry (SV-1, SV-2; seeds and validation design 4.1–4.3) |
 | Symmetric line of sight and fog | main 4.3 **(decided)** | Grille sight-only and symmetric; Listen gives no line of sight |
 
 ---
@@ -2556,7 +2635,7 @@ Failure triggers HE-7's single retry **(settled, DH 12.4; FL-15)**.
 | 7 | Door dancing and doorway holds | `DoorCloseInCombat`; the doorway-hold arm | Close costs an action, barred when a hostile is adjacent; flank pairs; FL-21(c) |
 | 8 | Multi-bypass experience below 20.1 | `MultiBypassRate` | `SkippablePool`; the Bypass meets the Circuit; FL-21(d) |
 | 9 | V8 combinatorial blow-up | Build time | Per-Site enumeration, composed floor-wide bounds, a capped product only over declared `interacting` Sites (11.2); ≤ 4 rules per Site type in M2 |
-| 10 | Runtime crash from unprovable asserts | Any `GenerationRetried` in the release seed set | FL-15: only structurally proven asserts at runtime |
+| 10 | Runtime crash from unprovable asserts | Any `GenerationRetried` in the release seed set (read as the LR3 BUDGET row: 0 on the release set, ≤ 1 per 10^4 on the soak, pooled; SV-11, SV-18; seeds and validation design 4.11, 5.6) | FL-15: only structurally proven asserts at runtime; one LR0–LR5 ladder in every build, with the release clean end in place of a crash (agreed, Q2; SV-10; seeds and validation design 5.5) |
 | 11 | Kennel ranged dominance on the solo floor | `DamageShareByRangeBand` | Thicket and trail bends; the joint range-band arm with the cover arm (cover decided: room terrain design 6.1, TR-2) |
 | 12 | Cutaway failures in tall themes | `CutawayPockets` | The stub kit |
 | 13 | Authoring and tooling cost | M2 schedule review | A shared socket standard; editor tooling from M1; the eager art team is the enabling assumption |
@@ -2656,6 +2735,17 @@ Waves: FL-1 to FL-4, FL-6, FL-10, FL-13, FL-15 and FL-22 in M1; FL-5 in
 M1 (floor 1) and M2 (floors 2–5); FL-7, FL-9, FL-11 and FL-14 in M1 and
 M2; FL-8 open in M1 and close in M2; FL-12's flee-exit clause in M1 and
 its anchors in M2; FL-16 to FL-20 in M2; FL-21 (a) in M1, the rest M2.
+
+**Later amendments (seeds and validation design, approved by the client
+on 2026-11-23; its section 13):** the rows above stay as approved on
+2026-11-21. SV-1 and SV-4 re-key FL-2's `layout` and `dressing`
+children from the parent's key under `attempt/{a}`; SV-9 and SV-10
+replace FL-15's single floor assertion point and seed + 1 retry with
+AP1 and AP2 and the LR0–LR5 ladder (FL-15's proven-asserts-only rule
+kept); SV-14 stores the static floor instead of regenerating it; SV-20,
+SV-22 and SV-23 qualify V8's checks, the walker arms and the clock line's
+result class (6.1, 6.10, 11.1–11.4; seeds and validation design 4.1,
+4.3, 4.8, 5.1–5.5, 6.2, 6.3).
 
 ---
 

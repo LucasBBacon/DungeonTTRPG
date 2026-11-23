@@ -591,9 +591,12 @@ more theme to build); C, variable 4–5 floors.
   dungeon stream (the `recruit` substreams are the precedent). Each floor
   generates from a dungeon child keyed by **floor index**, and the theme
   is an input (enemies 10.5 step 1). The route stream is consumed only at
-  run start, so no generation retry (HE-7's seed + 1), player action or
+  run start, so no generation retry (HE-7's retry, the keyed
+  `attempt/{a}` child of the floor key, attempt 1; change SV-4; M1;
+  seeds and validation design 4.3, 5.5), player action or
   door choice can perturb it. Each floor's dungeon child has a `layout`
-  child, drawn with fixed counts per Blueprint; dressing draws from a
+  child (under its `attempt/{a}` node; change SV-4), drawn with fixed
+  counts per Blueprint; dressing draws from a
   display-side stream the core never reads (change FL-2; floor layout
   design 6.1).
 - **R-SEED-2, when.** The draw happens at run start, after hero
@@ -612,6 +615,13 @@ more theme to build); C, variable 4–5 floors.
   **(settled, main 6.3)**. Every bounded integer is drawn with **one
   64-bit draw per index** by a fixed method (multiply-shift), never by
   rejection sampling, so the number of draws never depends on the data.
+  **Key algebra (change SV-1; lead's call; M1; seeds and validation
+  design 4.1):** a child derives from its parent's key; every bounded
+  integer uses `Bound` (multiply-shift, asserting n ≥ 1), with reference
+  vectors. **Stream registry (change SV-2; M1; seeds and validation
+  design 4.2, 4.3):** every draw table here is a registry row with a
+  count class (`boss9` is a 4-long `vector`); every approved count is
+  unchanged.
   The floor `layout` child follows the same rule: a fixed draw count per
   Blueprint, every draw consumed even when one option is legal (change
   FL-2; floor layout design 6.1). So does the `hazards` child of the
@@ -624,8 +634,9 @@ more theme to build); C, variable 4–5 floors.
   does the `lootPlan` child of the loot stream, one per floor keyed by
   floor index, each consumer on its own keyed grandchild with a
   reserved draw count (9 per identity draw) consumed even when unused,
-  and the approved enemies 10.5 step 3 parent draws kept as dummy and
-  ghost draws; floor N+1's generation is committed with the camp-exit
+  and the approved enemies 10.5 step 3 order kept as the order of keyed
+  per-floor, per-entry blocks, the dummy and ghost draws retired (change
+  SV-5; M1; seeds and validation design 4.3); floor N+1's generation is committed with the camp-exit
   save (change LE-14; M1; loot economy design 6.10). So does the
   `curiosities` child of each floor's dungeon substream: a fixed 12
   draws per floor *(illustr.)* in a fixed draw map, every draw consumed
@@ -638,8 +649,12 @@ more theme to build); C, variable 4–5 floors.
   its mirror bit after this pre-roll fixes the boss; arena stamping makes
   no draws (change BR-2, BR-23; M2; boss rooms design 4.10.1, 4.15). In
   order:
-  1. **the permutation:** a Fisher–Yates permutation of the **whole theme
-     catalogue in the manifest, locked, held and cut themes included**;
+  1. **the permutation:** a keyed sort of the **whole theme
+     catalogue in the manifest, locked, held and cut themes included**,
+     by `H(route, "themePerm", themeId)`, ties by stable id (change SV-8;
+     lead's call; M1 rule; seeds and validation design 4.3; replaces
+     the Fisher–Yates permutation, so the route stream takes 0
+     sequential draws);
      the drawable set filters it afterwards, so unlocking a theme never
      reorders the others;
   2. **the floor-1 theme** is the first floor-1-eligible theme of the
@@ -647,14 +662,16 @@ more theme to build); C, variable 4–5 floors.
      a third floor-1 theme (the Wake) takes its 1/3 share automatically;
   3. **the boss orders:** for every (theme, floor) cell of the
      catalogue, sorted by (theme id, floor), with themes marked `final`
-     skipped, a Fisher–Yates order over **every** boss record whose
+     skipped, a keyed sort by `H(route, "bossOrder", themeId, floor,
+     bossId)` (change SV-8; M1 rule) over **every** boss record whose
      `themes[]` and `eligibleFloors` match the cell, locked ones
      included. The boss used is the first drawable entry; floor 1 also
      filters by `Floor1BossMindReachable`. This moves the boss draw out
      of enemies 10.5 step 6 into the pre-roll, so the door cards (Two
      Doors), the camp-4 preview and the Stratum Card can name the boss
      without consuming floor substreams;
-  4. **the final-boss order:** one Fisher–Yates order over every boss
+  4. **the final-boss order:** one keyed sort by `H(route, "finalOrder",
+     bossId)` (change SV-8; M1 rule) over every boss
      record marked `final`, locked ones included. It is the **only**
      source of the final boss: the preview (and the random build's final
      boss) is its first drawable entry; the Last Hollow choice offers its
@@ -695,14 +712,27 @@ more theme to build); C, variable 4–5 floors.
     **Profile data:** the unlock snapshot (M3). A theme is drawable when
     its `shipStatus` is `core` or `conditional-passed` and it is
     unlocked (M2: every shipped theme is unlocked).
-  - **The reproducibility key** is (seed, content-manifest hash,
-    configuration-snapshot hash, unlock-snapshot hash). The
+  - **The reproducibility key** is (seed, `genVersion`, content-manifest
+    hash, configuration-snapshot hash, unlock-snapshot hash) (change
+    SV-12; lead's call; M1 fields, M2, M3; seeds and validation design
+    4.6): `genVersion` is the generator's code version; the manifest
+    hash is the canonical `manifestHash` over rules-relevant content,
+    computed in the build pipeline (display text and art go to a
+    separate `displayHash` outside the key; `cutState` and `shipStatus`
+    sit inside the manifest); the per-floor generation identity is the
+    key plus that floor's `GenInputs` digest. The
     **configuration snapshot** holds `route.twoDoorsEnabled`,
     `route.lastHollowChoiceEnabled`, `route.doorCamps[]`,
     `pacing.trimmedFloors[]` and `party.cap` (11.1), the `layout.*`
-    fields of 11.1 (change FL-14), and the `terrain.*` and `cover.*`
-    tuning of 11.1 (change TR-17; room terrain design 11.1). It is fixed at run
-    start; **a run never changes mode mid-run (new lead's call)**.
+    fields of 11.1 (change FL-14), the `terrain.*` and `cover.*`
+    tuning of 11.1 (change TR-17; room terrain design 11.1), and the
+    profile grants that change rules (11.1; change SV-12). It is fixed at run
+    start; **a run never changes mode mid-run (new lead's call)**. Across
+    a patch this is kept: the configuration and unlock snapshots,
+    `drawableSet` and the route state are never recomputed, and a
+    mid-run patch changes only the generator version of future floors
+    (read, kept; change SV-15; agreed, seeds and validation Q3; M2; seeds
+    and validation design 4.10.1).
   - **Display memory (read, not changed; change EV-18; agreed, events
     Q1; M2, R3 in M3; events design 4.5.3, 4.10):** Curiosity
     Retellings, the Twice-Told card and Afterword lines are display only
@@ -712,14 +742,23 @@ more theme to build); C, variable 4–5 floors.
   - **Shared and daily seeds use the canonical unlock set** (all content
     of the current M-wave unlocked), never the sharing player's own
     profile, so two players with one shared seed get one route.
+    **Seeded runs advance no progress (read; change SV-16, SV-17;
+    agreed, seeds and validation Q1; M2 shared, Later daily; seeds and
+    validation design 4.7, 4.9):** a run whose seed did not come from
+    the launcher is marked seeded in run history and advances no
+    unlocks, records, codex entries or launcher memory; it writes only
+    the seen counts.
   - **The save** holds the route state of 11.1: the permutation, the
     boss orders, the final-boss order, both snapshots, the committed
     theme per floor so far and the `DoorChosen` log. The last
-    `DoorChosen` before Travel on counts.
+    `DoorChosen` before Travel on counts. `drawableSet` is computed
+    from the unlock snapshot at run start and stored in the run save
+    (seeds and validation design 4.4 GS0.2, answering 13).
 - **R-SEED-6, launcher streak cap (lead's call; adopted for M2, new
   lead's call on adoption; streak length revised after the check).** The
-  launcher, not the rules core, may redraw a fresh OS-entropy seed (up
-  to 8 times) if its floor-1 theme equals that of **each of the three
+  launcher, not the rules core, may redraw a fresh OS-entropy seed
+  (masked to 60 bits; change SV-16; M2; seeds and validation design 4.3,
+  4.9) (up to 8 times) if its floor-1 theme equals that of **each of the three
   previous runs**, **or if the forecast F1 Curiosity is in the
   profile's Fallow set (K = 3)** (change EV-20; agreed, events Q1; M2;
   events design 4.5.4), **or if the forecast F1 boss equals the F1 boss
@@ -740,9 +779,14 @@ more theme to build); C, variable 4–5 floors.
     onboarding, earliest);
     if no candidate passed the theme rule, it keeps the original seed
     (a reading, since this rule states no such case; the RS owner
-    confirms).
+    confirms). **Pending request (seeds and validation design 11, 14.2;
+    RS owner):** confirm this clause; if it is rejected, the
+    best-ranked candidate is kept in that case too.
     Guards: `LauncherLootNeutral`, `Floor1ThemeShare`, `F1PoolParity`,
-    `LauncherRedrawRate` and `LauncherCheckMs`. This pulls 12's M3 row
+    `LauncherRedrawRate` and `LauncherCheckMs` (≤ 5 ms p95 per candidate
+    *(illustr.)*, a report until measured; 11.4), and the new
+    `LauncherF1Neutral` (change SV-13, SV-24; M2; seeds and validation
+    design 6.10). This pulls 12's M3 row
     "profile-side anti-streak outside seeded runs" into M2.
   - **Launcher F1-boss streak rule (change BR-25; agreed, boss rooms
     Q1; M2; boss rooms design 4.10.3):** the forecast is the pre-rolled
@@ -752,7 +796,17 @@ more theme to build); C, variable 4–5 floors.
     key; the memory of 2 runs (`launcher.f1BossMemory`) is a client
     value, not tuning. It shares the budget of 8 and the bypasses above;
     `BossRepeatRate` is measured by a launcher emulation, since the
-    simulator bypasses the launcher.
+    simulator bypasses the launcher (LauncherEmu, which runs the real
+    launcher code on sandbox profiles; the simulator writes no player
+    profile; change SV-13; M2; seeds and validation design 4.6, 6.1).
+  - **The F1 defect redraw (change SV-10; lead's call, after the check;
+    M2; seeds and validation design 5.5):** when a personal run's first
+    floor cannot be built at run start (the last attempt of the LR0–LR5
+    ladder fails), the seed is silently discarded and the launcher
+    draws a fresh candidate through the full launcher order with a
+    fresh 8-redraw budget; the discarded candidate does not count
+    against "up to 8". A seeded run shows that its code cannot be
+    dreamed on this build.
 - **Switching Two Doors on changes no seed (agreed, Q2).** The walk
   produces Door A and Door B in both builds; only who picks changes.
 - **LootDoorInvariant (lead's call):**
@@ -1023,7 +1077,9 @@ switch it names, never the build):**
 4. **the Oracle chooser's absolute run-win rate is 333‰ or less** (the
    DH 18.2 baseline is stated beside it). Blocks Two Doors;
 5. DH 18.2 calibrated on the Reference chooser (a change to DH 19.3,
-   RT-10). Blocks Two Doors;
+   RT-10). Blocks Two Doors (read: gate 5 reads DH 18.2's metrics as an
+   SW gate, while their calibration verdict stays CAL; change SV-23;
+   seeds and validation design 6.3);
 6. **per-build theme coverage** (11.4) within about 20% *(illustr.)* of
    random-draw coverage for every hero class (lead's call, after the
    check: turned from a report into a gate, so the doors cannot become
@@ -2635,7 +2691,11 @@ still need condition squares, which the Supper never has.
 - **Theme records** (8.0), one per theme, in `content/` **(settled,
   main 6.5)**; boss records gain `themes[]` and `final` (RT-4).
 - **Configuration snapshot** (hashed into the reproducibility key and
-  fixed at run start, 6.4 R-SEED-5; lead's call on the fields):
+  fixed at run start, 6.4 R-SEED-5; lead's call on the fields; it also
+  holds the profile grants that change rules, `difficulty.tier`,
+  `boons[]` and `nightmareTier`, sorted canonically, with canonical
+  values for shared and daily runs (change SV-12; lead's call; field
+  reserved in M1, live in M3; seeds and validation design 4.6)):
   `route.twoDoorsEnabled`, `route.lastHollowChoiceEnabled` (both false
   by default; 6.11), `route.doorCamps[]` (M2: [1, 2]),
   `pacing.trimmedFloors[]` (default empty; lever 3: [4, 5]; 10.2
@@ -2668,28 +2728,34 @@ still need condition squares, which the Supper never has.
 
 ### 11.2 Content validation (change RT-17; definitions new lead's call)
 
-The build fails when one of these fails:
+`s` and `t` parts fail the build; `g` and `r` parts act by their
+registered class (change SV-20; lead's call; M1 model, M2 complete;
+seeds and validation design 5.1: every check has a qualified id
+`Vn.CheckName`, one owner, a phase `s`, `g`, `r` or `t`, and every `g`
+and `r` check one failure class; simulator gates move to the report
+registry, 11.4):
 
 | Id | Validator | Checks |
 |---|---|---|
-| V1 | ThemeBudget | Every theme meets enemies 10.6 and conditions 12.2 and 16, with its 6 recomputed from role taxes, riders, boss kits, traps, terrain and every legal overlay; `counterType` is a declared weakness or square weakness; `themeDamage` and `hardenedLayer` follow the 8.0 rule and stay inside the 6; per-type conditions at most 2; tag immunities within the budget (2 per non-boss trait set, at most 1 control, mindless counting `mind`); every floor-4 and floor-5 theme has a skittish type; a Teetering fallback drop on every theme with a full 6 |
-| V2 | BossCoverage | At least 1 boss per (theme, eligible floor); floor-1 bosses pass `Floor1BossMindReachable` and 8.2 (b), and (c) where it binds (`F1EscortBreakable`); no boss immune to its theme's `counterType`; every boss has 1–2 named signatures; final bosses use only the Heart's 6 |
+| V1 | ThemeBudget (owns `V1.ThemeSix`, called by V9, V10, V11, V16s and V17s; change SV-20) | Every theme meets enemies 10.6 and conditions 12.2 and 16, with its 6 recomputed from role taxes, riders, boss kits, traps, terrain and every legal overlay; `counterType` is a declared weakness or square weakness; `themeDamage` and `hardenedLayer` follow the 8.0 rule and stay inside the 6; per-type conditions at most 2; tag immunities within the budget (2 per non-boss trait set, at most 1 control, mindless counting `mind`); every floor-4 and floor-5 theme has a skittish type; a Teetering fallback drop on every theme with a full 6 |
+| V2 | BossCoverage | At least 1 boss per (theme, eligible floor); floor-1 bosses pass `Floor1BossMindReachable` and 8.2 (b), and (c) where it binds (`F1EscortBreakable`); no boss immune to its theme's `counterType`; every boss has 1–2 named signatures; final bosses use only the Heart's 6. **Single owner (change SV-20; seeds and validation design 5.2):** V2 checks coverage only; the boss-kit rows (`Floor1BossMindReachable`, `F1EscortBreakable`, signatures 1–2, `counterType` immunity) are owned by V17s |
 | V3 | PoolRules | RP1–RP6 (6.4) over every theme and every pair that can sit on adjacent floors (RP6 unweighted over the roster); the church cap (7.6); one home theme per square kind (6.3); Obsession kinds (7.3 pillar 6) |
 | V4 | ThemeFloorFill | Enemies 10.5's content test over every (theme, floor) cell × party size × band × ladder tier, trimmed floors included |
 | V5 | RouteEnumeration | Enumerated over **histories**, not permutations: for floor 1, each drawable floor-1 theme; for floors 2–4, each ordered choice of survivors the walk can produce (Door A and Door B where doors apply). Run once for **every drawable set the manifest can produce**: every subset of unlockable themes, crossed with the Wake verdict, the cut states and any held theme. The build fails if any history breaks RP1–RP5 or RouteSufficiency (RP4), or a Two Doors floor has fewer than 2 candidates. The 10.3 counts are published from the all-unlocked set |
-| V6 | RouteDeterminism | The same reproducibility key (seed, manifest hash, configuration-snapshot hash, unlock-snapshot hash) gives the same route; shared and daily seeds use the canonical unlock set; perturbing any floor substream or a generation retry never changes the route; unlocking a theme never changes another theme's position or the boss orders; a doors-on run choosing Door A at every camp is identical to the doors-off run; LootDoorInvariant holds for both doors, including the Resistant-element draw and its n = 0 fallback |
-| V7 | CharterChecks | Every bark trigger is in RC8's list; one glyph per square kind (RC5); a Tone Sheet referenced; every non-final theme authors `keepsakeProps` and `keepsakeArenaDressing`; no frozen-name collision; no keyhole silhouette outside mindless tells (RC3); no keyhole on any container (change TL-28; traps and locks design 8, 11.3 `NoKeyholeOnContainers`). The "signature type placed at least twice per floor" check (enemies 10.4) is a **generation assertion** over a fixed seed sample per (theme, floor, party size), owned by the seeds and validation segment |
+| V6 | RouteDeterminism (a `t` part calling the V19t harnesses; M1 stub, M2; change SV-20) | The same reproducibility key (seed, `genVersion`, manifest hash, configuration-snapshot hash, unlock-snapshot hash; change SV-12) gives the same route; shared and daily seeds use the canonical unlock set; perturbing any floor substream or a generation retry never changes the route; unlocking a theme never changes another theme's position or the boss orders; a doors-on run choosing Door A at every camp is identical to the doors-off run; LootDoorInvariant holds for both doors, including the Resistant-element draw and its n = 0 fallback |
+| V7 | CharterChecks | Every bark trigger is in RC8's list; one glyph per square kind (RC5); a Tone Sheet referenced; every non-final theme authors `keepsakeProps` and `keepsakeArenaDressing`; no frozen-name collision; no keyhole silhouette outside mindless tells (RC3); no keyhole on any container (change TL-28; traps and locks design 8, 11.3 `NoKeyholeOnContainers`). The "signature type placed at least twice per floor" check (enemies 10.4) is a **generation assertion** over a fixed seed sample per (theme, floor, party size), owned by the seeds and validation segment. **Pending request (change SV-20; request to EP; M2; seeds and validation design 5.2, 5.7):** its authority moves to `V12g` (signature ≥ 2) and the fixed sample becomes a V12t regression row over the release set; if EP refuses, V19t runs the sample row. V7 owns `V7.NameRegistry` (manifest-driven; every segment feeds it) |
 | V8 | LayoutGrammar (change FL-14; floor layout design 11.2) | Every theme's `layoutGrammar`, Blueprints, rules and templates, with the named sub-checks of floor layout design 11.2 (LG1–LG20, `HearingGap`, Circuit isolation, `LayoutDistinct`, config nesting and others) |
 | V9 | RoomTerrain (change TR-18; room terrain design 11.2) | Every template × orientation × layer × floor band × theme, plus the floor-level capacity rows per Blueprint and rule choice, with the named checks of room terrain design 11.2 (`ClearwayConnected`, `ProtectedIntact`, `KitCoversRulesKeys`, `EntryCaps`, `ThemeSix`, `HomeTheme`, `PhaseSocketsBoth`, `TerrainDrawCount` and others); partial in M1, full in M2 |
 | V10 | RoomHazards (change HZ-28; hazards design 11.3) | After V9, every template × orientation × layer × state × floor band × theme × Mood stage × tier class, with the named checks of hazards design 11.3 (`HazardPointsWithinBudget`, `OneClockPerRoom`, `F1NoHazards`, `EntryCapsAllStates`, `VoidQuotasAndGeometry`, `SnagProven`, `PushLaneExists` and others); `EnvRoundBound` is a report, not pass/fail |
-| V11 | TrapsLocks (change TL-20; M2; traps and locks design 6.20, 6.22, 11.3) | In two passes (`traps`, then `trapsResolve` after encounter placement), the named checks of traps and locks design 11.3: TP1–TP12, `HunchTrue`, `WagerNonSkillLine` and the Tattle host rule, `HiddenTrapBound`, `TrapLethalityBound`, `EveryDamagingTrapHasSave`, `F1TrapRules`, `MimicPlacement`, `RiskRoomShare`, `HardControlGates`, `HarmfulConditionsRecount` (with V1), `NoKeyholeOnContainers` (with V7) and `ReservedTellSilhouettes` (with V9); with the retry and terminal fallback of traps and locks design 6.20 |
-| V12 | EncounterPlacement (change EP-32; static parts M1, the rest M2; encounter placement design 6.1, 11.2) | In three parts (build time on the worst case, generation time per seed, runtime assertions), the named checks of encounter placement design 11.2, with the per-slot fallback chain, one segment-6 retry and the terminal floor fallback of encounter placement design 6.1 |
-| V13 | LootEconomy (change LE-23; V13s (a), (c), the floor-1 V13g (g), (i) and the (m) test M1, the rest M2; loot economy design 10.2) | In three parts: V13s, static over the data (every floor × party size × cap × variant × unlock set); V13g, at generation at the shared floor assertion point after LootBind, each check with its named action; and the (m) integration test (fixed, identical draw counts across seeds, doors, waves and opening methods); the named checks of loot economy design 10.2 |
+| V11 | TrapsLocks (change TL-20; M1 skeleton (`LockNeverCritical`, `HeNoLock`, `KeyReachable`), M2, M3 Trapwright (wave corrected, change SV-20); traps and locks design 6.20, 6.22, 11.3) | In two passes (`traps`, then `trapsResolve` after encounter placement), the named checks of traps and locks design 11.3: TP1–TP12, `HunchTrue`, `WagerNonSkillLine` and the Tattle host rule, `HiddenTrapBound`, `TrapLethalityBound`, `EveryDamagingTrapHasSave`, `F1TrapRules`, `MimicPlacement`, `RiskRoomShare`, `HardControlGates`, `HarmfulConditionsRecount` (with V1), `NoKeyholeOnContainers` (with V7) and `ReservedTellSilhouettes` (with V9); with the retry and terminal fallback of traps and locks design 6.20 |
+| V12 | EncounterPlacement (change EP-32; static parts and the fallback chain M1, the rest M2 (wave corrected, change SV-20); encounter placement design 6.1, 11.2) | In three parts (build time on the worst case, generation time per seed, runtime assertions), the named checks of encounter placement design 11.2, with the per-slot fallback chain, one segment-6 retry and the terminal floor fallback of encounter placement design 6.1 |
+| V13 | LootEconomy (change LE-23; V13s (a), (c), the floor-1 V13g (g), (i) and the (m) test M1, the rest M2; loot economy design 10.2) | In three parts: V13s, static over the data (every floor × party size × cap × variant × unlock set); V13g, at generation at the final floor assertion point AP2 after LootBind (change SV-20; seeds and validation design 5.2, 5.4), each check with its named action; and the (m) integration test (fixed, identical draw counts across seeds, doors, waves and opening methods); the named checks of loot economy design 10.2 |
 | V14 | ItemRolls (change IR-21; (a), (b), (d), (h), (j) and the draw-count test M1, the rest M2; item rolls design 9.2) | Beside V13: static checks (a)–(m) of item rolls design 9.2, among them lanes, values and rolled lines, signature forms and carriage, display isolation (no rules code reads `theme.loot`; a release configuration with Element Echo on fails) and a complete `theme.loot` for every drawable theme (8.0); generation-time asserts; and the constant-draw-count and LootDoorInvariant tests |
-| V15 | LootSources (change LP-31; the V15 M1 rows M1, V15s and V15g M2, the Windfall rows M3; loot sources design 9.2) | Beside V13 and V14, split like V13 and run at the shared assertion point after V13g: V15s, static (container skins per kind, `ContainerFamilyDistinct` with V7, `ContainerArtBlind`, the Proprietor checks, `TruantHasFace`, `WindfallSkinLegal`, `BedsideStandOnly`); V15g, at generation (socket binding, the role table, container caps, offer pacing, the Windfall rules including `OneClockPerRoom`, `WindfallRouteSafe`, `WindfallCatchable`, `WindfallOffGuarantees` and `WindfallBudgetInside`, `GleanNoLeak`); and V15t tests; the named checks of loot sources design 9.2 |
-| V16 | Curiosities (change EV-38; M2, the Sequel and Ripening rows M3; events design 9.2) | In three parts: V16s, static over the records (option shape and prices, `PaletteWhitelist`, `StateBlind`, `PaymentFeasibility`, `RegisterByFloor`, `DreamerLine`, `HeartBedroomCap`, `PremiseTagCap`, `ReservedCues`, `ReservedSilhouette`, `RetellingParity`, `SuccessorParity`, `PoolCoverage`, `F1PoolParity`, `NameCollision` against 8.0's avoided list and others); V16g, at generation after V13g and V15g (`FixedDrawCount`, `EventDrawRunBlind`, the within-run caps, `SlotLegal` before V15g, `ReferentResolved`, `NoEventLoot`, `NoEventUnit`, `GraphUnchanged` and others); and V16t tests (determinism replay, `SnapshotCanonical`, LootDoorInvariant over door × memory, `DisplayMemoryInert`, `LauncherLootNeutral`, `LauncherBypass`, `ResolveIsSafePoint`); the named checks of events design 9.2 |
-| V17 | BossRooms (change BR-39; M2, the Gambit rows M3; boss rooms design 9.2) | In three parts, after V9, V10 and V13g: V17s, static over every boss record, Rendition, Guise and formation (kits and caps on the effective kit, `NoUntelegraphedSpike`, the floor-1 package with exactly 3 Renditions per F1 boss, size ≤ Large, carriage, the last-threshold rule, the Device contract, reserves and AddCap, `final` immunities, answer windows and `BossCourtBreakable`, facts and `FinalBossNoDreamer`, guard rows per Rendition × formation × size, cut consistency against `cutState`); V17g, at generation on each stamped arena (a proven stamp, start zones, one clock and one Void, lanes, phase sockets in both states, the OneDueThing enumeration, the `BossVariantKey` draw count); and V17t, tests (determinism, mirror equivalence, event order at the arena) |
-| V18 | Information (change XI-30; the tests M1, full M2; exploration and information design 9.2) | Split like V13 and V16: V18s, static (`SurfaceRegistered`, `PatternNoHueOnly`, `NoHoverOnly`, `BoardDigitIsClock`, `WallMarkProjected`, `BudgetWorstCase` per mode from the registry rows of 7.4 RC5, `CardFit` at 150%, `LayerHasLegend`, `FactHasMapDraw`, `RevealNeverUnits`, `InfoItemLaneSafe`, `InfoNeverWritesLoot`, `PointerTextBounded`, `LaneGapStock`, `WaymarkGlyphDistinct`, `NoCompletionStat` and others); V18g, at generation per floor (`MapNeverUnknown`, `ChalkNeverContents`, `ChalkNeverStub`, `SketchNeverSecretNode`, `RouteKnownOnly`, `ForecastKnownOnly`, `BubbleNeverPositioned`, `TreasureSelectorLegal`, `TreasureFactCap`, `NoF1Pointer`); and V18t tests (`LosSymmetric`, `FogEqualsRules`, `KnowledgeLeak`, `ProfileBlind`, `PointerNeverPreDoor`, `LodestringDoorBlind`, `RoleBlindOrder` and others); the named checks of exploration and information design 9.2 |
+| V15 | LootSources (change LP-31; the V15 M1 rows M1 (an owner deliverable, request to LP; change SV-20), V15s and V15g M2, the Windfall rows M3; loot sources design 9.2) | Beside V13 and V14, split like V13 and run at AP2 after V13g and `V16g.SlotLegal` (change SV-20): V15s, static (container skins per kind, `ContainerFamilyDistinct` with V7, `ContainerArtBlind`, the Proprietor checks, `TruantHasFace`, `WindfallSkinLegal`, `BedsideStandOnly`); V15g, at generation (socket binding, the role table, container caps, offer pacing, the Windfall rules including `OneClockPerRoom`, `WindfallRouteSafe`, `WindfallCatchable`, `WindfallOffGuarantees` and `WindfallBudgetInside`, `GleanNoLeak`); and V15t tests; the named checks of loot sources design 9.2 |
+| V16 | Curiosities (change EV-38; M2, the Sequel and Ripening rows M3; events design 9.2) | In three parts: V16s, static over the records (option shape and prices, `PaletteWhitelist`, `StateBlind`, `PaymentFeasibility`, `RegisterByFloor`, `DreamerLine`, `HeartBedroomCap`, `PremiseTagCap`, `ReservedCues`, `ReservedSilhouette`, `RetellingParity`, `SuccessorParity`, `PoolCoverage`, `F1PoolParity`, `NameCollision` against 8.0's avoided list and others); V16g, at generation, split (change SV-20; seeds and validation design 5.2): `FixedDrawCount` at EventDraw, `SlotLegal` before V15g, the rest after V13g and V15g (`EventDrawRunBlind`, the within-run caps, `ReferentResolved`, `NoEventLoot`, `NoEventUnit`, `GraphUnchanged` and others); and V16t tests (determinism replay, `SnapshotCanonical`, LootDoorInvariant over door × memory, `DisplayMemoryInert`, `LauncherLootNeutral`, `LauncherBypass`, `ResolveIsSafePoint`); the named checks of events design 9.2 |
+| V17 | BossRooms (change BR-39; M1 subset (wave corrected, change SV-20), M2, the Gambit rows M3; boss rooms design 9.2) | In three parts, after V9, V10 and V13g: V17s, static over every boss record, Rendition, Guise and formation (kits and caps on the effective kit, `NoUntelegraphedSpike`, the floor-1 package with exactly 3 Renditions per F1 boss, size ≤ Large, carriage, the last-threshold rule, the Device contract, reserves and AddCap, `final` immunities, answer windows and `BossCourtBreakable`, facts and `FinalBossNoDreamer`, guard rows per Rendition × formation × size, cut consistency against `cutState`); V17g, at generation on each stamped arena (`V17g.StampProven` at AP1, the rest at AP2 after V15g and V16g; change SV-20) (a proven stamp, start zones, one clock and one Void, lanes, phase sockets in both states, the OneDueThing enumeration, the `BossVariantKey` draw count); and V17t, tests (determinism, mirror equivalence, event order at the arena) |
+| V18 | Information (change XI-30; the tests M1, full M2; exploration and information design 9.2) | Split like V13 and V16: V18s, static (`SurfaceRegistered`, `PatternNoHueOnly`, `NoHoverOnly`, `BoardDigitIsClock`, `WallMarkProjected`, `BudgetWorstCase` per mode from the registry rows of 7.4 RC5, `CardFit` at 150%, `LayerHasLegend`, `FactHasMapDraw`, `RevealNeverUnits`, `InfoItemLaneSafe`, `InfoNeverWritesLoot`, `PointerTextBounded`, `LaneGapStock`, `WaymarkGlyphDistinct`, `NoCompletionStat` and others); V18g, at generation per floor (`SketchNeverSecretNode`, `TreasureSelectorLegal`, `TreasureFactCap`, `NoF1Pointer`); V18r, runtime assertions on every `KnowledgePass` (`MapNeverUnknown`, `ChalkNeverContents`, `ChalkNeverStub`, `RouteKnownOnly`, `ForecastKnownOnly`, `BubbleNeverPositioned`; class `runtimeAssert`; change SV-20, XI-30); and V18t tests (`LosSymmetric`, `FogEqualsRules`, `KnowledgeLeak`, `ProfileBlind`, `PointerNeverPreDoor`, `LodestringDoorBlind`, `RoleBlindOrder` and others); the named checks of exploration and information design 9.2 |
+| V19 | Conformance (change SV-19; lead's call; owned by segments 11–12; M1 partial, M2; seeds and validation design 5.2) | Split like V13: V19s, static (registry completeness, label and id collisions, `DomainDisjoint`, `IdFrozen`, `DrawFreeProof`, `RerunSpanCovers`, `ClassDeclared`, the Core analyzer, `CoreNoProfileRef` and others); V19g, at every stage end and at commit (the DrawLedger, which calls the owners' draw-count rows, stage digests and the frozen `GenInputs` digest); and V19t tests (`KeyAlgebraVectors`, determinism, cross-OS and hostile-environment digests, goldens, `RetryIsolation`, `ExplorationCombatIsolation`, the shared `LootDoorInvariant` harness that V6 calls, `ForecastSurvivesRetry`, `ContentAddStability` and others); the named checks of seeds and validation design 5.2 |
 
 ### 11.3 Simulator arms
 
@@ -2704,6 +2770,13 @@ The build fails when one of these fails:
   Doors is on.
 - **Both caps** (3 and 2) from the start (companions 7.4 item 3).
 - **Concentrated guard posts** (10.2): an arm only.
+- **Qualified names (change SV-22; lead's call; M2; seeds and
+  validation design 6.2):** in the shared arm catalogue the choosers are
+  `Door.Reference`, `Door.Random` and `Door.Oracle` (default Door A when
+  Two Doors is off, `Door.Reference` when on); fixed arrival states and
+  RouteSample are values of the `Arrival` axis (`FixedArrival`,
+  `RouteSample`); the canonical companion list is the `Party` axis's
+  class mix.
 
 ### 11.4 Reports owed (M2)
 
@@ -2741,6 +2814,21 @@ random-draw floor, ClassThemeSpread (ii), FloorTimeByTheme, readability)
 holds that theme (`shipStatus = held`, 7.4) until tuning passes;
 `Level10BeforeFinalBoss` blocks lever 3's form until fixed.
 
+**Result classes (change SV-23; lead's call; M1 skeleton, M2 complete;
+seeds and validation design 6.3):** every row below carries exactly one
+class, which says what a miss does: the Two Doors gates 1–6 and gate 7
+(BossParity) are **SW** (keep a switch off); ThemeParity on random-draw
+floors, ClassThemeSpread (ii), `FloorTimeByTheme` and the readability
+gates are **HOLD** (`shipStatus = held`); `Level10BeforeFinalBoss` is
+**REL**; `DistinctnessCheck` is **ESC**; the floor-1 death share read
+against DH 18.2 is **CAL**; the rest are REP. Every report runs at both
+caps; after the M2 cap decision the gating verdicts bind at the shipped
+cap and the other cap's rows are REP (a reading of companions 7.4).
+**Report registry (change SV-24; M2; seeds and validation design
+6.10):** `ClassThemeSpread` keeps its name here (the hazards design's
+row is renamed `VoidClassDeathGap`); `FloorTimeByTheme` is registered as
+the keyed family member `FloorTimeByTheme{RS}`.
+
 | Report | Gate or report | Threshold *(illustr. unless agreed)* |
 |---|---|---|
 | ThemeParity (per floor and cap) | Gate on choice floors (Two Doors); **build gate on random-draw floors** (theme hold) | ≤ 5 points on choice floors **(agreed, Q2)**; ≤ 8 on random-draw floors (1, 4, and 2–3 when doors are off) |
@@ -2763,6 +2851,7 @@ holds that theme (`shipStatus = held`, 7.4) until tuning passes;
 | Picket leader fill on floor 1 | Report | — |
 | Armour `verbDefencePermille`, Resistant-target share, single-type builds | Report per theme | — |
 | Readability gates (7.4) | Gate (art; theme hold) | 85% roles, 75% morale reads, per theme |
+| `LauncherCheckMs` (6.4 R-SEED-6; change SV-24; M2) | Report until measured | ≤ 5 ms p95 per candidate |
 
 ## 12. Staging
 
@@ -2778,7 +2867,7 @@ Two Doors switch agreed, Q2)**
 | **M2 cut lines** | **Cut 1, graded (change BR-26; agreed, boss rooms Q1; M2; boss rooms design 4.10.4), in this order:** **1a** drops the Appetite **only if it is not yet built** at that review (a no-op otherwise); **1b** drops the Thing in Cell Zero, folded into the Jailer as the Rendition "Cell Zero Opens". **Cut 2:** 1a and 1b, and drop the Supper (floor 4 fixed Gut), **with the Cut 2R rider: Cut 2 never drops a built Appetite**. 1a, 1b and Cut 2 are **pre-authorised (agreed, Q4; graded, boss rooms Q1)**. **1c** drops the Master in the Frame, folded into Old Ragged as the Lord's Gallery Guise; it sits below Cut 2 and is **client-only**. The applied cuts are stamped as `cutState` into the content version (boss rooms design 9.1). Below Cut 2, the approved-scope floor (Gaol and Kennel on F1, Choir and Silk on F2–3, Gut on F4, floor 5 as a step-5 deep overlay of the floor-4 theme not drawn, re-passing its 6) needs the client | Under Cut 2, floor 4 has no choice anyway; under the approved-scope floor, random draws only |
 | **M3** | Unlocks in 8.12's order; the Supper's F3–4 band and its F3 boss; a second boss for every M2 (theme, floor) cell that has only one; the third final boss; the Lore roster preview at camp; Dream Fragments plus codex (Fragments folded into Curiosity F-BOSS options; change EV-29; events design 4.9); bile squares if deferred. **Pending request (change EV-37; RS owner; M3; events design 4.9):** segment 8 co-owns the codex's Curiosity pages (Retellings collected and options seen, never power or gating rule text, write-only from the run's view); the RS owner owns the codex and segment 10 hosts it. **Exploration and information (change XI-29; M3; exploration and information design 6, 7):** segment 10 hosts the codex (the RS owner owns it); the **Floor Atlas** (each floor's final map in the run record, with "Treasures found k of n" and no rooms-entered fraction, never a score), whose previous-floor page shows on the camp dream track; the death-recap map; and the Dream map skin, an option over the plain map gated by the greyscale, colour-blind and glance gates (7.4) | Two Doors (if its gates failed in M2) and at camp 3 once the floor-4 pool is 3 or more; Omens; Nightmare tiers 1–3; Perilous Door; Seams; profile-side anti-streak outside seeded runs (Launcher Fallow on the F1 Curiosity is pulled into M2: change EV-20; agreed, events Q1; 6.4 R-SEED-6; the launcher F1-boss streak rule is pulled into M2: change BR-25; agreed, boss rooms Q1; 6.4 R-SEED-6) |
 | **M4** | Pools of 3–4 per tier; the Waking City alternate final; Keepsake echo types; the Inverted Cathedral with its hazard package (the drop hazard now exists; change HZ-26; hazards design 7.11, 12) | Three-door camps (optional) |
-| **Later** | The Lucid Key; Other Dreamers; Nightmare tiers 4–5; daily seeds (already supported); seams that bleed the chosen door's palette | — |
+| **Later** | The Lucid Key; Other Dreamers; Nightmare tiers 4–5; daily seeds (already supported; their rules, a seed from a published or server value, and replays in the seeds and validation design 4.7; change SV-17; Later); seams that bleed the chosen door's palette | — |
 
 **How a cut is applied (new lead's call).** The lead applies 1a, then
 1b, then Cut 2 with Cut 2R (change BR-26; agreed, boss rooms Q1; boss
@@ -2820,7 +2909,7 @@ cut, so Cut 2 may arrive sooner.
 | Encounter, loot and event placement | Each theme's `placementRules[]` (8.0); lesson axes per floor-1 theme; the Pack one-family rule; Scavengers at the F1 patrol budget; the Wake's dormant bias kept away from rooms 0–2; the Heart's morale shape by room and psychic cap; the signature type at least twice (a generation assertion, V7); Corroded caps; Frozen source caps; Keepsake slot dressing (9.3); loot stays theme-blind (LootDoorInvariant). Keeps the Wake dormant rule, read from layout's `nearStart` tag, and Keepsake dressing (change FL-22). **Filled by the encounter placement design (segment 6; encounter placement design 6.4, 6.16, 13):** segment 6 owns `placementRules[]` application (the fearless-anchor tags, EP-29; the Gut acid overlay count, EP-31) and ENM 10.5 steps 2 and 4–11; loot and events keep their segments. **Loot placement taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4, 5, 11):** sources, sockets and per-theme container art; loot stays theme-blind (Proprietor tags are display only); the charter entries of changes LP-7, LP-15 and LP-24 (7.4, 9.3). **Event placement filled by the events design (segment 8, approved 2026-11-22; its 4.2, 4.10, 4.13, 11):** segment 8 owns Curiosity content and forms (Curiosity, Interlude, Glimpse), their hosts (6.6; floor-1 Alcove set pieces and side rooms, Q rooms, Forecourts, `curiosityHost` signature rooms; never arenas), each theme's `curiosityKit` (8.0) and the shared pools, the cost and gain palette, Strands, Retellings, the Twice-Told card, Launcher Fallow (R-SEED-6), Sequels, Ripening, the Afterword and V16; EventDraw runs after layout and EventPlace after LootBind, draw-free, so loot stays theme-blind and never reads Curiosities (LootDoorInvariant) |
 | Boss rooms | One counterplay feature per boss (pendulum, the pen bar (renamed from "kennel gate": a two-state piece on the Whelping Pen, not a Portal, so TR-22's kennel gates are untouched; change BR-16; boss rooms design 4.7.1), sluice and bell rope, cage, dunk tank, chandelier of icicles, the Pylorus mouth, the bed); Keepsake dressing; phase option (e) never on party squares. Arena terrain caps are segment 3's; (e) uses pre-placed phase sockets of existing kinds only, announced a round ahead and proven in both states; the counterplay identity is unchanged (change TR-16, told plainly; room terrain design 6.11). **Traps (change TL-40; with segment 9; traps and locks design 7.8, 13):** arena devices such as the chandelier of icicles are segment-9 instances in the TrapRecord format; no boss room has guaranteed traps. **Filled by the boss rooms design (segment 9, approved 2026-11-22; change BR-16, BR-23 to BR-26, BR-30; its 4, 5, 11):** the list is extended to every boss as the Device contract (one class-blind Device per boss, an `arenaDevice` TrapRecord instance that is not a trap, with a ranged trigger; F1 Devices never harm; F5 adds the Heavy Thing, 9.3) (change BR-16; M1 for the Den, M2); segment 9 owns arenas and Guises, Rhythm, phases, reserves, Renditions and `BossVariantKey`, folded bosses for the graded cuts (12), the Playbill and V17 `BossRooms`; the RS owner signs off Rendition phase and ability alternates that vary 8.x text (change BR-23) |
 | Exploration and information | Camp card, Two Doors cards, Stratum Card, dream track, Lore reveal, road not taken; Dream Fragments (M3); the Lucid Key secret (Later). Keeps the Stratum Card, including the floor count line (change FL-20), the Listen and Hairline displays (FL-18, FL-17), and the Lucid Key, whose Site layout reserves (change FL-22; floor layout design 9.2, 13). Dream Fragments are folded into Curiosity F-BOSS options (change EV-29; M3; events design 4.9); the Stratum Card carries no Curiosity line in M2 (events design 4.12). **Filled by the exploration and information design (segment 10, approved 2026-11-23; change XI-15, XI-17, XI-19, XI-20, XI-23, XI-24, XI-29; its 4.9, 5, 6, 11):** segment 10 places the camp card, door cards, Stratum Card, dream track and Lore reveal in its regions and card queue (6.9), adds its registry rows and gates to the charter (7.4), hosts the codex, and keeps the next-floor card unchanged, with no pointer result on camp or door cards |
-| Seeds and validation | The `route` stream and R-SEED-1 to 6; `drawableSet` and the reproducibility key; V1–V7; the signature-type placement assertion; the RouteSample, fixed-arrival and chooser arms; LootDoorInvariant; the reports in 10 and 11. **Events (change EV-21, EV-38; events design 4.10, 4.13, 9):** the `curiosities` stream and its draw map, the EventDraw and EventPlace order, the resolve safe point, `curiosityMemory`, the launcher order against R-SEED-6, and V16 |
+| Seeds and validation | The `route` stream and R-SEED-1 to 6; `drawableSet` and the reproducibility key; V1–V7; the signature-type placement assertion; the RouteSample, fixed-arrival and chooser arms; LootDoorInvariant; the reports in 10 and 11. **Events (change EV-21, EV-38; events design 4.10, 4.13, 9):** the `curiosities` stream and its draw map, the EventDraw and EventPlace order, the resolve safe point, `curiosityMemory`, the launcher order against R-SEED-6, and V16. **Filled by the seeds and validation design (segments 11–12, approved 2026-11-23; change SV-1, SV-2, SV-4, SV-8, SV-10, SV-12, SV-19, SV-20, SV-22; its 4.3, 4.4 GS0.2, 4.6, 5.2, 5.7, 6.2, 11):** segments 11–12 own the key algebra, the stream registry (`dungeon/route` by keyed sorts, retry scope "never"), the pipeline and its two assertion points AP1 and AP2, the LR0–LR5 retry ladder, the reproducibility key (with `genVersion`), saves, shared, daily and replay rules, golden seeds and the release set, V19 `Conformance` and the report and arm registries; `drawableSet` is computed at GS0.2 and stored in the run save; V1–V7 keep their RS owner and phases (5.2); the signature-type assertion moves to `V12g` with a V12t sample row (pending EP; fallback V19t); the arms are qualified (11.3); LootDoorInvariant is one shared V19t harness that V6 calls; the `curiosities` stream is attempt-invariant (change SV-4). Owners keep every stream's consumers and counts, every check's logic and every report's threshold |
 
 ---
 
@@ -2845,7 +2934,7 @@ cut, so Cut 2 may arrive sooner.
 | Floor-time gate at both caps | companions 7.4 **(agreed)** | 10.1; `FloorTimeByTheme` |
 | Next-floor line (HR-23) | enemies 10.6; Herald 5.7 | 6.9 |
 | Floor-entry card | DH 17.12 | Stratum Card (RT-12) |
-| HE-7 containers; generation retry | DH 12.4 | Seeds and placement segments; the route is unaffected by retries |
+| HE-7 containers; generation retry | DH 12.4 | Seeds and placement segments; the route is unaffected by retries (the LR0–LR5 ladder, with the release clean end, agreed Q2; seeds and validation design 5.5) |
 | Death share by floor; win rate | DH 18.2 **(agreed)** | Per theme; Reference chooser when Two Doors is on (RT-10) |
 | Loot theme-blind; the Resistant filter | enemies 15.3; trinkets R-23; armour 14.3 | 6.4 LootDoorInvariant |
 | Carrier legality inside the 6 | enemies 15 | Carrier-fallback report per theme |
@@ -2886,7 +2975,7 @@ cut, so Cut 2 may arrive sooner.
 | 9 | Pending rulings (Teetering, radiant, traps) | RT-14 to RT-16 refused or late | Fallback drops per theme; radiant blocks only M3 |
 | 10 | Class-polar matchups (Shade vs Mirror Court, Vanguard vs Gut, fire Arcanist vs Choir, Herald vs low bands, **Arcanist and Herald vs the Heart**, on every route) | ClassThemeSpread over 10 | Mirror Court in M3 with radiant limits; Corroded caps; water placement caps; the Heart's psychic cap and ClassThemeSpread (ii) gated on the Heart and each final boss; RP3 |
 | 11 | Water and oil spikes | Round-1 downs by theme | The 6.4 guards computed with the party Soaked or Oiled; entry-square rules |
-| 12 | Unlock manifests complicate shared seeds | V6 fails across manifests or unlock states | Whole-catalogue permutation; `drawableSet`; the (seed, manifest, configuration, unlock) key; the canonical unlock set for shared and daily seeds |
+| 12 | Unlock manifests complicate shared seeds | V6 fails across manifests or unlock states | Whole-catalogue permutation; `drawableSet`; the (seed, `genVersion`, manifest, configuration, unlock) key (change SV-12); the canonical unlock set for shared and daily seeds |
 | 13 | Name drift between documents | Naming pass | Frozen names (8.0); one canonical act set |
 | 14 | The premise hardens into a story by accretion | Writing review | Uncommitted questions stay open (7.5); no premise twists in boss concepts; Curiosities carry premise tags, the `selfReference` cap, the premise test and a tone review on every Sequel chain (change EV-25; events design 4.5.6, 4.11) |
 | 15 | **All evidence is toy** | — | Every number is owed a simulator rerun before it settles |

@@ -249,8 +249,9 @@ the death curve.*
    generation: deck, variant, allocation, steps, the Due, coin lumps,
    dreamed options, the Wax-Key identities, camp stock. Nothing rolls at
    open, kill, Steal or save. Every new draw runs on a **`lootPlan` child
-   stream** in a **LootPlan** step just before ENM 10.5 step 3, so every
-   approved draw position in step 3 is unchanged; a draw-free **LootBind**
+   stream** in a **LootPlan** step just before ENM 10.5 step 3, and step
+   3 keeps its approved order, now as keyed per-floor, per-entry blocks
+   (change SV-5; M1; seeds and validation design 4.3); a draw-free **LootBind**
    pass after TL's `trapsResolve` settles what depends on placed units
    and resolved locks (salvage, the purse, coin lumps) and remaps any
    socket that pass changed. Floor N+1's generation is committed in the
@@ -752,8 +753,8 @@ illegal (tier, category) pair re-weights the category, never the tier.
   the check):** if F1's `LootLedger` holds no armour-or-shield notable
   the hero could use, the first F2 container card in allocation order
   that is not the Due is constrained to armour-or-shield for the hero,
-  drawn like the Due (its parent draw made as a ghost draw, its identity
-  on `lootPlan`, 6.10).
+  drawn like the Due (its identity on `lootPlan`, 6.10; the parent ghost
+  draw is retired by change SV-5, M1).
 - **Healing:** the DH package only. Offers never contain healing
   potions.
 - **Keys:** Wax Key sundries stay at most 1 per floor from F2 (TL 6.11,
@@ -1651,11 +1652,16 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
 ### 6.10 Determinism and the loot stream (lead's call; change LE-14)
 
 1. **The `lootPlan` child stream (keyed after the check; lead's call,
-   after the check).** `lootPlan = Derive(lootStreamSeed,
-   FNV-1a("lootPlan"), floorIndex)`, one per floor, so no two floors
-   share a plan (the loot stream also carries the run-level phial
-   pre-roll, which stays on the parent). Every consumer draws from its
-   own keyed grandchild, `Derive(lootPlan, FNV-1a(kind), entryIndex)`,
+   after the check).** `lootPlan` = `loot/lootPlan/{N}` =
+   `Derive(loot, "lootPlan", N)`, derived from the `loot` key, never
+   from a counter or state (change SV-1; M1; the key algebra, path
+   grammar and `Bound` of seeds and validation design 4.1–4.2), one per
+   floor, so no two floors share a plan (the run-level phial pre-roll is
+   on its own key, `loot/run`, a vector of always 3 draws, change SV-5;
+   seeds and validation design 4.3). Every consumer draws from its
+   own keyed grandchild, `loot/lootPlan/{N}/{kind}/{entryIndex}` =
+   `Derive(lootPlan, kind, entryIndex)` (the label hashed by `LabelId`
+   inside `Derive`; each a registry row, change SV-2),
    so adding a consumer (an M3 feature, a fallback) never shifts another
    consumer's draws. Every identity draw reserves **9 draws** (1 + the 8
    approved rerolls), consumed even when unused, so counts never depend
@@ -1681,38 +1687,48 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    | `curseGate` | 2 | 1 per floor (change IR-20; reserved M2, used Later) |
    | `windfall` | 4: presence, host, pad, pad | 1 per floor, F1–F5, consumed on every floor, door, party size and theme, at the start of 6.9 item 2 step 8 (change LP-1; M3; loot sources design 4.7.10) |
 
-   The table is the segment-11 hand-off; entry indices follow the
-   allocation order (6.9 item 2). **Filter-first (change IR-14; M1):**
+   The table is the segment-11 hand-off, taken up as registry rows
+   (seeds and validation design 4.3); entry indices follow the
+   allocation order (6.9 item 2). *Pending request to this owner
+   (segments 11–12; M2):* the V13g (e) re-deal's LR2 key,
+   `loot/lootPlan/{N}/dealShuffle/retry1`, drawn as `dealShuffle`; if
+   not confirmed, that key stands as written (seeds and validation
+   design 4.3, 14.2). **Filter-first (change IR-14; M1):**
    each identity's filters are applied before its first draw, which
    picks the record; the other 8 reserved draws are consumed as padding,
    the same distribution as the reroll loop at a fixed count, locked
    before M1 golden seeds (item rolls design 4.1, 4.17).
-2. **The approved ENM 10.5 step 3 order is unchanged** on the parent loot
-   stream: per-channel counts; items in channel order (containers,
-   carried, boss); the DH 12.5 block; wand charges; the next camp's
-   channel (its count and notables); vendor potions. No approved draw
-   position moves (answers LB8, LK13). **What the parent draws now mean
-   (lead's call, after the check):**
-   - the **count draws** (per channel, and the camp channel's count) are
-     still consumed as dummy draws and their results ignored: the deck
-     and 6.9 item 2 fix the counts (field 5 / 6 / 6 / 6 / 6, camp 2);
+2. **The approved ENM 10.5 step 3 order is unchanged**, now as the order
+   in which keyed blocks are evaluated (change SV-5 ⚑; lead's call;
+   approved by the client, 2026-11-23; M1): step 3 is keyed per floor
+   and per entry block, `loot/floor/{N}/{block}/{entry}`, 9 draws per
+   identity entry (filter-first), blocks in approved order:
+   `containers`, `carried`, `dhBlock` (the DH 12.5 block), `resistant`,
+   `wandCharges`, `camp` (the next camp's notables), `vendorPotions`,
+   `trader` (Later). Approved positions become block addresses, so no
+   block's draws move when another block's entry count changes (answers
+   LB8, LK13; seeds and validation design 4.3). **What the blocks mean
+   (lead's call, after the check; dummies retired by SV-5):**
+   - the **counts** come from the deck and 6.9 item 2 (field 5 / 6 / 6 /
+     6 / 6, camp 2); the former count draws are retired, not drawn;
    - **ordinary identities** are drawn there, channel slot *i* on the
      *i*-th socket of that channel in allocation order, filtered to that
      socket's tier;
-   - the **boss channel** draws only the signature; any approved parent
-     draw for the boss card's options is consumed as a dummy, and every
-     option, the first included, is drawn on `lootPlan` (read by change
-     IR-13: the signature's form is chosen draw-free and the boss
-     channel's parent draw is consumed as a dummy, its position
-     unchanged; item rolls design 4.13);
-   - the **DH block** keeps its parent position, after the notables, and
-     may share an HE-7 socket with the Due (6.6).
+   - the **boss channel** draws only the signature; every option, the
+     first included, is drawn on `lootPlan`, and no parent draw is made
+     for the options (read by change IR-13: the signature's form is
+     chosen draw-free; item rolls design 4.13);
+   - the **DH block** keeps its place in the block order, after the
+     notables, and may share an HE-7 socket with the Due (6.6).
+   *Fallback if this owner refuses SV-5:* the sequential parent stream,
+   every data-dependent block padded to a declared cap, the counter
+   snapshotted and restored at GS1 on any retry (seeds and validation
+   design 4.3, 14.2).
 3. **The Due's slot (new lead's call; tier fixed after the check).** The
-   Due takes the first container slot. On the parent stream that slot's
-   approved draw is still made as a **ghost draw**, at the Due card's
-   tier and with the ordinary (unfiltered) weight table, consuming its
-   padded reroll count, then discarded, never counted toward caps or
-   same-floor bases, so every later parent position is as approved. The
+   Due takes the first container slot. That slot's former parent
+   **ghost draw** is retired (change SV-5; M1): with keyed blocks there
+   is no position to hold, so it is not drawn, and nothing is counted
+   toward caps or same-floor bases for it. The
    Due's own identity is drawn on `lootPlan` (`dreamsDue`), and later
    items treat it as this floor's base for rerolls. The arms-floor card
    (6.2) is drawn the same way.
@@ -1721,11 +1737,18 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    draw-free, builds the provisional socket set; change LP-1) → **step
    3a, LootPlan** (on `lootPlan`: variant, deal, steps, the Due, dual
    identities, offer options; 6.9 item 2; then the Windfall's step 8
-   inside step 3a, M3) → step 3 (parent loot stream, as approved) →
+   inside step 3a, M3) → step 3 (keyed `loot/floor/{N}` blocks in the
+   approved order, change SV-5) →
    steps 4–11 → `trapsResolve` → **LootBind** (draw-free: remaps,
    salvage, the purse, coin lumps; 6.9 item 7, in its numbered
-   sub-order, loot sources design 4.3) → the V13g checks at the
-   shared floor assertion point. LootPlan reads only the provisional
+   sub-order, loot sources design 4.3) → the V13g checks at **AP2**,
+   the shared floor assertion point after LootBind and EventPlace
+   (change SV-9 ⚑; lead's call; approved by the client, 2026-11-23;
+   M1). HE-7's structural point, **AP1**, runs before loot, after
+   `traps`; one canonical pipeline GS0–GS17 places SocketPlan at GS9,
+   LootPlan at GS10, step 3 at GS11 and LootBind at GS14, and F(N+1)'s
+   `GenInputs` is frozen at Travel on from the camp-exit state (seeds
+   and validation design 4.4, 5.4). LootPlan reads only the provisional
    socket set; LootBind reads the final one. ENM 10.5 step 3's "the loot
    stream is consumed only in this step" becomes "only in steps 3a and
    3" (LE-14). Segment 8 reads this order unchanged: EventDraw runs
@@ -1738,8 +1761,12 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
 6. **Atomic commit:** floor N+1's generation and the camp-exit save are
    one write. The toy found that otherwise reloading camp and hiring a
    different Muster candidate rerolls that floor's identities (about 3
-   rerolls of value). Muster candidates, vendor stock and the camp
-   channel are already fixed in floor N's draw (**settled**).
+   rerolls of value). The Muster free cards, vendor stock and the camp
+   channel are already fixed in floor N's draw (**settled**); card A
+   resolves at camp entry on its own keyed `recruit/camp/{k}/gap`
+   (CMP 7.3; text fix, change SV-31). The commit is write order WO5 at
+   Travel on, F(N+1)'s own first safe point (read by change SV-14;
+   seeds and validation design 4.8.3).
 7. **Inputs from outside the stream:** the party's `requires` tags and
    owned bases (**settled**), plus, for the Due, fit premiums and the
    usability fallbacks, the same party snapshot at generation (owned
@@ -1911,7 +1938,8 @@ matter".
   (M3; change EV-29; events design 4.9). **Heirloom:** outside the budget
   (**settled**); counts as party-owned for the Due.
 - **Daily and shared seeds (Later):** fix class and species so smart-loot
-  runs are comparable (R-SEED-5 hook).
+  runs are comparable (R-SEED-5 hook; shared and daily rules in seeds
+  and validation design 4.7, change SV-17, read).
 
 ### 6.13 Hooks to 7b (what the tables must produce)
 
@@ -2440,6 +2468,16 @@ call, after the check)**:
 **(Split: lead's call, after the check.)** V8–V12 each name a failure
 action; so does every generation-time clause here.
 
+**Phase model (change SV-20 ⚑; lead's call; this owner applies; M1
+model, M2 complete; seeds and validation design 5.1, 5.2).** Each check
+has a qualified id `V13.CheckName` and a phase: V13s `s` (fails the
+build), V13g `g` at AP2, V13t `t` (the (m) test, fails the build). Each
+V13g row declares one failure class from its named action: (d)
+`defect`; (e) `stageRetry(dealShuffle)`; (f) `report` (its card move
+an LR1 repair); (g) by its named action, the waiver; (h), (i)
+`repair`; any row with no named action, `defect`. Waves as in 11: M1
+(a), (c), (g), (i) on F1, (m); M2 the rest; M3 (o).
+
 **V13s, static over the data** (every floor × party size 1–4 × cap 2 and
 3 × variant × unlock set, where the unlock sets are none, all, and each
 single unlock):
@@ -2470,20 +2508,29 @@ single unlock):
 - (o) M3: lane-normalised weights and the Due pool after unlocks
   (`UnlockValueNeutral`).
 
-**V13g, at generation**, at the shared floor assertion point after
-LootBind, each with its named action:
+**V13g, at generation**, at AP2, the shared floor assertion point after
+LootBind and EventPlace (change SV-9; seeds and validation design 5.4),
+each with its named action:
 - (d) Offer sets count 1; dreamed options never in VP or caps. *Action:*
   a defect (assert).
 - (e) The step rule holds per socket (reference tier = lower median of
   SR0 ordinary cards, excluding the Due and the DH block; allocation,
   allowance ≤ 2, or a logged fit premium); no main-path card is ever
   lowered. *Action:* re-deal with the next within-rank permutation
-  (one retry), then convert the failing step to a fit premium.
+  (one retry), then convert the failing step to a fit premium. The
+  re-deal is the LR2 stage retry on `dealShuffle/retry1`: it re-runs
+  GS10 for that kind only, then GS14–GS15; the fit premium after it is
+  approved behaviour, reported only, not an LR4 fallback (change SV-10
+  ⚑; lead's call; M2; seeds and validation design 5.4, 5.5; the key is
+  a pending request to this owner, 6.10 item 1).
 - (f) TL 6.17: locked or trapped notables ≤ the quota;
   `NoMechanicsLootLoss` ≤ 10%; secrets ≤ 1 notable, never the top;
   premium and lean bands. *Action:* move the extra card to the
   highest-ranked SR0 container and make its socket coin-only; a band
-  miss is logged and the floor ships.
+  miss is logged and the floor ships. *Pending request to this owner
+  (segment 12; M2):* `NoMechanicsLootLoss` is a by-class rate, so it
+  is read as TL's REP row unless this owner defines a per-floor
+  quantity (change SV-24; seeds and validation design 6.10, 14.2).
 - (g) The Dream's Due is present (or `DreamsDueWaived`), main path, no
   check, never carried, never substituted; on F1 a U weapon or focus
   for the hero; invariant under intra-party transfers (a property test
@@ -2505,11 +2552,15 @@ LootBind, each with its named action:
 - the coverage bands of 6.4 item 7 (formerly (k)) are simulator reports
   (10.3);
 - (m) **an integration test:** draw counts fixed and identical across
-  seeds, doors, waves and opening methods; approved parent-stream
-  positions unchanged (the ghost draws and dummy count draws included);
-  every `lootPlan` grandchild consumes its reserved count; the fourth
+  seeds, doors, waves and opening methods; every `loot/floor/{N}` block
+  entry consumes its declared count and perturbing one block's entry
+  count moves no other block (V19t block independence; the ghost and
+  dummy count draws are retired, change SV-5); `loot/run` always 3
+  draws; every `lootPlan` grandchild consumes its reserved count; the fourth
   dreamed option drawn on every width-3 offer from M2, door or no door;
-  generation committed with the camp-exit save.
+  generation committed with the camp-exit save (WO5). The V19g
+  DrawLedger calls (m) at every stage end; this row stays its citation
+  (change SV-19; seeds and validation design 5.2).
 
 **V14 `ItemRolls` (change IR-21; M1 parts (a), (b), (d), (h), (j) and
 the draw-count test; the rest M2)** runs beside V13 and checks 7b's
@@ -2518,7 +2569,8 @@ design 9.2).
 
 **V15 `LootSources` (change LP-31; M1 rows on F1, M2, M3 Windfall
 rows)** runs beside V13 and V14, split the same way (V15s, V15g, V15t)
-at the shared assertion point after V13g, and checks 7c's sockets,
+at AP2 after V13g and `V16g.SlotLegal` (change SV-9; seeds and
+validation design 5.4), and checks 7c's sockets,
 squares, role table, caps, offer pacing, Proprietor tags and the
 Windfall; it asserts filters (a)–(g) after step 8 (loot sources design
 9.2).
@@ -2542,7 +2594,9 @@ Windfall; it asserts filters (a)–(g) after step 8 (loot sources design
 - **Hoarding:** `HoardIndex`, `TooGoodToUse`, `PotionsHeldAtDeath`,
   `ViaticumBossShare`.
 - **Party:** `GearPerBodyByPartySize`, bait value by party size.
-- **Clock:** `TallyChaseSeconds`.
+- **Clock:** `TallyChaseSeconds` (one report-registry row, owned here;
+  other segments read it; change SV-24; M2; seeds and validation
+  design 6.10).
 - **Loot mix:** `LootMixByCategory`, `SubstitutedVP`.
 - Existing reports kept (ITEMS 19.3, CN 19.3, DH 21.5, TK 18.3, TL
   11.4).
@@ -2561,6 +2615,13 @@ Windfall; it asserts filters (a)–(g) after step 8 (loot sources design
 Reference, lean, full, solo (Lone Road), starved, steep, `SwapChurn`
 (CMP 9.3), no-Mechanics (TL 6.17), skilled scout (for the elite question,
 Q6), and a Wax-Key-always arm (`WaxKeyConsequenceUse`).
+
+**Qualified arms (change SV-22 ⚑; lead's call; M2; seeds and
+validation design 6.2).** Each arm is a vector over the catalogue's
+axes, every name qualified: `SwapChurn` is `Muster.SwapChurn`; solo is
+`Party` forced 1; no-Mechanics, skilled scout and Wax-Key-always are
+`Toggles` baselines; the reference arm is the catalogue defaults; the
+other names keep their meaning under their qualified ids.
 
 ---
 
@@ -2595,15 +2656,15 @@ shop presentation and camp sinks (camp and hub); the display (segment
 | **Segment 8 (Dream Fragments)** | The boss-fact family the elite intel line shares. **Taken up by the events design (segment 8, approved 2026-11-22; changes EV-7, EV-8, EV-15):** the per-floor FactLedger (6.9 item 6); its pending requests to 7a and 7c, `stepFunded` and F-CACHE, stay open (events design 4.4, 11) |
 | **Segment 9 (bosses)** | Signature records; the Memento card. **Taken up by the boss rooms design (segment 9, approved 2026-11-22; changes BR-28, BR-29, BR-34, all reading this design unchanged):** the card, Viaticum and Memento interplay (its 4.11.2); the `bossQueue` order behind the elite intel line (its 4.12); the Perilous Door's Nightmare Rendition beside the 1-of-4 card (its 4.14.2; M3) |
 | **Segment 10 (UI) and audio** | The Stratum Card order, the floor strip, tier marks, plate loot badges, the Steal preview, the Dream's Due tags, the Viaticum offer UI, the camp-4 warning, ledgers, tags, the audio stings (6.15). **Taken up by the exploration and information design (segment 10, approved 2026-11-23; changes XI-7, XI-11, XI-19, XI-22–XI-24, XI-26, XI-29):** the Treasure field naming, rooms cell and spent field (6.15); F-TREASURE and the Lodestring (8.2); the Tithe Bowl (8.1); its requests to this owner, the exposure ruling (6.9 item 6) and the Wax Key guard (8.1), stay open (its 4.6, 4.9.9, 11) |
-| **Segment 11 (seeds)** | The `lootPlan` derivation and keyed grandchildren, the draw table (6.10 item 1), step 3a and the LootBind position, the ghost and dummy draws, the atomic commit |
-| **Segment 12 (validation)** | V13s, V13g, the (m) integration test, and the reports |
+| **Segment 11 (seeds)** | The `lootPlan` derivation and keyed grandchildren, the draw table (6.10 item 1), step 3a and the LootBind position, the ghost and dummy draws, the atomic commit. **Taken up by the seeds and validation design (segments 11–12, approved 2026-11-23; changes SV-1, SV-2, SV-5, SV-9, SV-14):** the key algebra and the `lootPlan` registry rows (its 4.1–4.3); step 3 keyed per floor and per entry block, the ghost and dummy draws retired (4.3); GS10 and GS14 in the pipeline (4.4); the atomic commit as WO5 (4.8.3); its request to this owner, the `dealShuffle/retry1` key, stays open (6.10 item 1; its 11, 14.2) |
+| **Segment 12 (validation)** | V13s, V13g, the (m) integration test, and the reports. **Taken up by the seeds and validation design (segments 11–12, approved 2026-11-23; changes SV-9, SV-10, SV-19, SV-20, SV-22, SV-24):** V13 in the phase model with failure classes (its 5.1, 5.2); V13g at AP2 (5.4); (e) as LR2 (5.5); (m) called by the V19g DrawLedger (5.2); the arm catalogue (6.2) and the report registry (6.10); its request to this owner, the V13g (f) quantity, stays open (10.2; its 11, 14.2) |
 | **ENM / EP / DH owners** | The elite room's and the Annex's risk cost (LX16; agreed, Q6) |
 | **TL owner** | The mixed-route rule and `consequenceExposed`; Unbolting and Unweaving paying the Wax-Key identity; a Barb force consequence if `WaxKeyConsequenceUse` fires; the Ticket peg; fewer locks where the carve cap or F5 fillers bind (6.4, 6.9) |
 | **FL owner** | The Viaticum room |
 | **CN owner** | The suggester for scrolls; Viaticum options against `tier4ScrollsPerRunBeforeFinalBoss`; the boss-card usability fallback (CN 10) |
 | **ITEMS owner** | The signature VR-cap reading (replaced by IR-13's pending request: a VR signature consumes the floor's VR slot; item rolls design 4.13, 14.2) |
 | **RS owner** | The Perilous Door reading (Q5); the Memento caption on the tone review list (RS 7.4) |
-| **ENM owner** | The elite carrier's gear-only card; the elite intel trigger; step 3a and the dummy count draws (LE-14) |
+| **ENM owner** | The elite carrier's gear-only card; the elite intel trigger; step 3a and the dummy count draws (LE-14; the dummies retired and step 3 keyed per block by change SV-5) |
 | **DH owner** | The Due reading; lock and overflow sundries re-placed inside the DH block (DH 12.5 step 7(c)); Grave Goods as the run-record form of DH 17.12's unspent line |
 | **Companions owner** | Coin keyed by `companionCap` (CMP 7.4, 7.7); the CMP-30 lever as a lever only |
 
@@ -2618,7 +2679,7 @@ shop presentation and camp sinks (camp and hub); the display (segment
 | No junk; ≤ 3 per encounter; carried caps | ENM 15.1, 15.3 | Kept; 7c |
 | Smart loot, rerolls, family caps, guaranteed never substituted | ENM 15.3 step 2; DH-27 | Kept; the Due is guaranteed |
 | Value = tier budget; gates | ITEMS 12.5 | Decks legal by V13s (c) |
-| Loot only in ENM 10.5 step 3; fixed counts; locked at generation | ENM 10.5, 15.3 step 5; DH 12.5; MAIN 6.3 (**decided**) | Step 3a on a keyed child stream (LE-14 extends "only in this step" to steps 3a and 3); parent order unchanged; ghost and dummy draws; the draw-free LootBind |
+| Loot only in ENM 10.5 step 3; fixed counts; locked at generation | ENM 10.5, 15.3 step 5; DH 12.5; MAIN 6.3 (**decided**) | Step 3a on a keyed child stream (LE-14 extends "only in this step" to steps 3a and 3); approved order kept as the block order of keyed `loot/floor/{N}` blocks, ghost and dummy draws retired (change SV-5); the draw-free LootBind |
 | LootDoorInvariant | RS 6.4 | No theme, door or Omen input; the fourth option drawn on every seed |
 | Coin run-scoped, no meta currency | ITEMS 10.1 (**agreed**) | Kept; F5 coin 0; no interest |
 | Salvage 10–15% of found coin | ITEMS 10.2; I-11 | Holds by construction (12%) |
@@ -3157,6 +3218,13 @@ wave or a later design triggers them; each fallback is a new lead's call
   and 7c):** if `stepFunded` is refused, there are no priced lock routes;
   if F-CACHE is refused, its card gains F-ROOM (6.9 item 6; events
   design 14.2).
+- **Pending requests from segments 11–12 (to this owner):** if the
+  `dealShuffle/retry1` key is not confirmed, the key stands as written;
+  if no per-floor V13g (f) quantity is defined, `NoMechanicsLootLoss`
+  stays TL's REP row; if SV-5 is refused, the sequential parent stream
+  returns, every data-dependent block padded to a declared cap and the
+  counter restored at GS1 on any retry (6.10, 10.2; seeds and
+  validation design 14.2).
 - **The naming pass** renames every placeholder.
 
 ---

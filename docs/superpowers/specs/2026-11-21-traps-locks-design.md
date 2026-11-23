@@ -129,8 +129,10 @@ whole word with 0 hits:
 - Appendix A findings **KF** (fun), **KB** (balance) and **KK**
   (consistency).
 
-The validator id **V11** is free (V1–V7 RS, V8 FL, V9 RT, V10 HZ); a
-grep finds 0 hits.
+The validator id **V11** is free (V1–V7 RS, V8 FL, V9 ROOM, V10 HZ); a
+grep finds 0 hits. ("ROOM" is the room terrain design's tag for its
+validator owner, so as not to collide with RS's change ids RT-n; seeds
+and validation design 13, change SV-31.)
 
 **Names are placeholders** until the client naming pass. Each was
 grep-checked case-insensitively as a whole word across the 21 approved
@@ -1963,7 +1965,9 @@ under RC3 by giving a minded, hungry thing the mindless mark).
 - **Exits are never sealed.** No short rest inside.
 - **Reports:** `WagerTakenRate`, `WagerWakeRate`, `WagerDeathShare`
   (against DH 18.2), `WagerXpDelta` (must be 0), `WagerWalkRoundRate`
-  (must be 0), and the taken arm of `FloorTimeByTheme` ≤ 90 s.
+  (must be 0), and the taken arm of `FloorTimeByTheme` ≤ 90 s (the
+  keyed row `FloorTimeByTheme{arm, feature}` for the Wager taken; seeds
+  and validation design 6.10; change SV-24; M3).
 
 ### 6.16 The Trapwright (told plainly; change TL-37)
 
@@ -2203,16 +2207,24 @@ distance and guard, and the boxed-lurker budget.
   rules need monsters that are not yet placed when traps are drawn, so:
   1. **`traps`**, a child of each floor's dungeon substream, after
      `hazards` and before encounter placement, with fixed draw counts
-     per socket (R-SEED-3). It draws only geometry and kinds:
+     per socket (R-SEED-3); its path is
+     `dungeon/floor/{N}/attempt/{a}/traps`, stage GS7 (seeds and
+     validation design 4.3, 4.4; changes SV-4, SV-9; M1). It draws only
+     geometry and kinds:
      - trap kinds, positions, tiers and DCs;
      - Hunch zone offsets;
      - lock kinds, including the Tattle candidates;
      - Keybearer slots;
      - boxed-lurker sockets;
      - Wager layouts.
-     V11's structural rules check this pass (6.20).
+     V11's structural rules check this pass (6.20), as V11g1 at the
+     structural assertion point AP1 (seeds and validation design 5.4).
   2. **`trapsResolve`**, a second child stream with fixed draws, run
-     after segment 6 places encounters. It resolves each Tattle
+     after segment 6 places encounters
+     (`dungeon/floor/{N}/attempt/{a}/trapsResolve`, stage GS13; its
+     rules are V11g2 at the final assertion point AP2; seeds and
+     validation design 4.3, 5.4; changes SV-4, SV-9; M1). It resolves
+     each Tattle
      candidate (its group, or a Crier), binds each Keybearer slot to a
      placed unit from segment 6's ordered `keybearerCandidates[]` (its
      `GroupPlacement` hand-off record), confirms boxed lurkers against
@@ -2235,12 +2247,25 @@ distance and guard, and the boxed-lurker budget.
     its Wax-Key identity; a Tattle resolved to a Crier changes nothing),
     before the V13g checks. The generation order is otherwise unchanged.
   - **Retry and terminal fallback:** a V11 failure retries only the pass
-    that failed, once, at seed + 1 (HE-7 style). If the retry also
+    that failed, once, at its keyed `retry1` child
+    (`…/attempt/{a}/traps/retry1` or `…/attempt/{a}/trapsResolve/retry1`;
+    seeds and validation design 4.3; change SV-4; M1). If the retry also
     fails, the failing traps are removed and failing locks become Plain,
     keeping fixed draw counts, and V11 runs again. If it still fails,
     the floor ships with the segment-5 minimum (TP12's sockets filled
     with `alwaysKnown` Easy alarms) and the `V11Fallback` report counts
     it.
+  - **On the one ladder (seeds and validation design 5.5; change
+    SV-10; M1):** the per-rule failure actions above are LR1 in-stage
+    repairs; the pass retry is LR2 (`stageRetry(traps)` or
+    `stageRetry(trapsResolve)`, at most one per stage per attempt,
+    logged `StageRetried`); `V11Fallback` is LR4, the class
+    `waivable(V11Fallback)`, logged `GenerationFallback`. Every build
+    runs the same ladder. The Tattle and Wager bindings are TL's
+    actions at GS13; EP's floor assertions only assert them (nesting
+    rule 1). When EP's `encounters/retry1` re-runs, `trapsResolve`
+    re-runs at its own unchanged key, and its `retry1` is used at most
+    once per set of `trapsResolve` inputs (5.4).
 - **Act-time object checks** draw `d20 = H(floorSeed, objectId,
   checkKind, attemptIndex, die)`, **with no unit in the key**, so
   swapping members cannot fish for a better roll. Advantage uses `die` 0
@@ -2255,6 +2280,17 @@ distance and guard, and the boxed-lurker budget.
   - Steal on a Dormant Truant: `H(floorSeed, windfallId,
     "windfallSteal", 0, die)`, `die` 0, and 0 and 1 for advantage
     (loot sources design 4.7.8; change LP-6; M3).
+- **Keyed form (seeds and validation design 4.1, 4.3; changes SV-1,
+  SV-6; M1; the form above is kept):** `floorSeed` is the floor key
+  `dungeon/floor/{N}`, and `H` is the one key algebra's `H` on its
+  attempt-invariant `checks` child: the object check is
+  `H(…/checks, "h:object", objectId, LabelId(checkKind), attemptIndex,
+  die)`, the save below `H(…/checks, "h:save", objectId, unitId,
+  springIndex, die)`, and the Truant Steal the LP domain
+  `h:windfallSteal`; `d20 = 1 + Bound(d, 20)`. The same `checks` stream
+  now also carries out-of-combat noticing and Steal (ENM) and
+  out-of-combat hazard saves (HZ), widening TL-3's main 6.3 sentence;
+  "out of combat" means no fight is active when the roll is made.
 - **Out-of-combat saves forced by traps or consequence locks** draw
   `H(floorSeed, objectId, 'save', unitId, springIndex, die)`, where
   `springIndex` counts the trap's springs (or the lock's consequence
@@ -2274,8 +2310,9 @@ distance and guard, and the boxed-lurker budget.
   card keeps its own `recruit` substream (CMP 7.3).
 - **Fallback if refused:** every object check becomes a threshold
   (19.2).
-- **Builders' option:** salt `checks` with a run id for daily or shared
-  seeds.
+- **Builders' option withdrawn (seeds and validation design 4.7;
+  change SV-7; M1):** `checks` is never salted with a run id for daily
+  or shared seeds; one key gives one run (R-SEED-5, V6).
 
 ### 6.23 UI and previews (lead's call; segment 10 owns the display)
 
@@ -3097,22 +3134,40 @@ after the check)**
 - `trapsResolve`: a second child stream with fixed draws, after segment
   6 places encounters; binds Tattles and Keybearers and runs the
   monster-dependent checks (6.22). A V11 failure retries only the
-  failing pass, once, at seed + 1, then falls back as 6.22 says.
+  failing pass, once, at its keyed `traps/retry1` or
+  `trapsResolve/retry1` child (LR2), then falls back as 6.22 says
+  (seeds and validation design 4.3, 5.5; changes SV-4, SV-10; M1).
+- *Pending request (seeds and validation design 4.3, 11, 14.2; M1):*
+  the TL owner publishes the `traps` and `trapsResolve` draw-count
+  formulas (count class `fixed-per-data`) before the M1 goldens.
+  Fallback: TL's own padded maxima declared as caps, with the
+  DrawLedger checking counter = cap.
 - `checks`: object checks keyed by `(floorSeed, objectId, checkKind,
   attemptIndex, die)`, no unit, with `attemptIndex` defined per kind in
   6.22; out-of-combat trap and lock saves keyed by `(floorSeed,
-  objectId, 'save', unitId, springIndex, die)`.
+  objectId, 'save', unitId, springIndex, die)`. These are the `h:object`
+  and `h:save` domains of the attempt-invariant `checks` key (6.22;
+  seeds and validation design 4.3; change SV-6; M1).
 - The vendor stock draws nothing; the gap card keeps CMP's `recruit`
   substream.
 - `trapDigest` beside `terrainDigest` and `hazardDigest`; every
   TrapState, LockRecord state, GroupState bit, WagerRecord and
-  `party.waxKeys` is saved.
+  `party.waxKeys` is saved. The digests are stage digests kept in the
+  run save with each floor's stored `FloorStatic` and `GenInputs`, and
+  the check indices (`forceFails`, `traversalIndex`, `springIndex`) are
+  saved dynamic state (seeds and validation design 4.3, 4.8; change
+  SV-14, read).
 
 ### 11.3 V11 `TrapsLocks`
 
 Proven structurally where possible; otherwise a fixed-seed property test
 (N = 50 per floor *(illustr.)*). The rules split across the two passes
-as 6.20 lists (lead's call, after the check):
+as 6.20 lists (lead's call, after the check). *Phases (seeds and
+validation design 5.1, 5.2; change SV-20; M1 skeleton, M2, M3
+Trapwright):* qualified ids `V11.CheckName`; V11s at build (proofs, or
+the property test run on generation truncated at AP1); V11g1 (the
+`traps` pass) at AP1 and V11g2 (the `trapsResolve` pass) at AP2, each
+`stageRetry`, then `waivable(V11Fallback)`; V11t tests. The rules:
 - TP1–TP12 (TP1 now includes `HunchZoneExclusive`);
 - `HunchTrue` (a zone must hide something: its clipped area exceeds the
   trigger area);
@@ -3130,9 +3185,17 @@ as 6.20 lists (lead's call, after the check):
   checked against theme dressing; with V9).
 
 **M2 reports, M3 gates:** `TrapwrightHasMechanism`,
-`SpringContentBound`, `DeadRoomRate`.
+`SpringContentBound`, `DeadRoomRate`. As simulator gates they are report
+registry rows, not V11 parts (the Trapwright rows, SHIP from M3; seeds
+and validation design 5.1, 6.12; change SV-20).
 
 ### 11.4 Reports and gates *(illustr.)*
+
+Each row carries one result class and is read by the statistical rules
+of the seeds and validation design (6.3, 6.4–6.6, 6.12; changes SV-24,
+SV-25; M2): the TL-38 clock lines are BIND, `V11Fallback` is BUDGET,
+`OpeningSpringRate` is ALARM, the Trapwright rows are SHIP (M3); the
+rest are REP unless the registry says otherwise.
 
 - **Damage and deaths:**
   - `TrapDamageShare`: 3–8% of party damage taken; 5–12% of damage to
@@ -3152,9 +3215,13 @@ as 6.20 lists (lead's call, after the check):
   - `RouteChoiceMix` (from `TrapResolved`), `LockRouteMix`;
   - `EatRate`, `ChipBeforeFight`.
 - **Loot access:** `LootGatedShare`, `NoMechanicsLootLoss` by class and
-  party size.
+  party size (also V13g (f): TL's REP row; *pending request to the LE
+  owner* to define a per-floor quantity, else it stays TL's REP row;
+  seeds and validation design 6.10, 14.2; change SV-24).
 - **Clock:** `TrapLockSeconds` ≤ 0.3 min; `ExploreClicksDelta` ≤ 5;
-  `RoundsPerFightDelta` ≤ 0.1.
+  `RoundsPerFightDelta` ≤ 0.1 (the keyed row
+  `RoundsPerFightDelta{TL}`; seeds and validation design 6.10; change
+  SV-24).
 - **AI and lures:**
   - `OpeningSpringRate` (above 70% means the puzzle is solved: vary
     devices and riders);
@@ -3165,11 +3232,22 @@ as 6.20 lists (lead's call, after the check):
 - **Items:** `WaxKeyUse` (including unspent at run end), split by
   channel (sundries, notables, vendor) **(new lead's call, for Q3)**.
 - **Generation:** `V11Fallback` (floors shipped with the segment-5
-  minimum; 6.22).
+  minimum; 6.22), ≤ 0.3% of floors; the LR2 pass retries
+  (`StageRetried` for `traps` and `trapsResolve`) ≤ 1% each; both
+  BUDGET, gated on pooled reads per (floor, cap), per-cell soak reads
+  ALARM (seeds and validation design 5.6; change SV-11; M1).
 - **M3:** `BoxedLurkerOpenerHits`, the Wager reports (6.15), including
-  `WagerWalkRoundRate` (must be 0).
+  `WagerWalkRoundRate` (must be 0; a zero gate whose structural partner
+  is the V11 Wager rows, BUILD; seeds and validation design 6.6; change
+  SV-25). `F1TrapRules` is likewise a co-partner of the F1
+  environment-deaths zero gate (M2).
 
 ### 11.5 Simulator arms
+
+*Qualified names (seeds and validation design 6.2; change SV-22; M2):*
+the baseline is `TL.Baseline` and the no-trap control `TL.NoTraps`; the
+no-Mechanics and Wax-Key-always arms are `Toggles` values of the arm
+catalogue.
 
 - baseline;
 - no-trap control;
@@ -3225,7 +3303,7 @@ as 6.20 lists (lead's call, after the check):
 | **8 Events** | Readings; Riddle-lock clues; Hour locks on Landmark ticks; Dream Fragments read the threshold rule. **Taken up by the events design (segment 8, approved 2026-11-22; its 4.9, 4.13):** Readings accepted (TL-34; EV-30; M3); each Riddle lock (Hymn, Index, Place-Setting, Story) gets a guaranteed, check-free clue host (a wall Glimpse or clue prop), placed by EventPlace whenever the lock exists on the floor and never a Curiosity option (M3); Hour locks on Landmark ticks stay with TL and HZ, and segment 8 places no Landmark (EV-35); Dream Fragments fold into F-BOSS options on Lore thresholds (EV-29; M3); Curiosity checks follow 6.1 and 6.2 (EV-4, EV-5); the priced lock route (6.11; EV-15); the shared FactLedger (6.11; EV-8) |
 | **9 Boss arenas** | No guaranteed boss-room traps; arena devices use the TrapRecord format (the Supper chandelier); Clearways stay clear; the Bossgate never opens by Wax Key or Unbolting. **Taken up by the boss rooms design (segment 9, approved 2026-11-22; its 4.7.1, 6, 11; change BR-16; M2, the Den's Device M1):** one Device per boss (F5: plus the Heavy Thing), each a segment-9 TrapRecord instance of kind `arenaDevice` in TL-40 format for data and preview only; *pending reading for 6.20 (TL owner confirms):* an `arenaDevice` is not a trap (no trigger plate, no hiding, no Botch, never armed by monsters); fallback: Devices are authored as segment-9 pieces with their own preview record, same rules; Device bodies obey RC2 and TL-43; no trap in the Sanctum; the Bossgate never by Wax Key **(settled)** |
 | **10 Information** | Every display in 6.23; Listen "a mechanism"; Lockside Listen; the codex pages; the camp's Wax Key line (Q3). **Taken up by the exploration and information design (segment 10, approved 2026-11-23; its 4.1, 4.2, 4.8.2, 4.9.8, 5):** trap grades held in `PartyKnowledge` and drawn exact while Remembered (XI-1, XI-5); the Easy Plain auto-pick and auto-Probe read known patrols only and stand down when their hearing reach crosses a never-Seen square (XI-6; agreed, Q4; M2); TL cards and prompts in the card queue (XI-19; M2); the Ear Trumpet in the basic-vendor row (XI-26; agreed, Q3; M3, conditional); no trap total kept (XI-32) |
-| **11–12 Seeds and validation** | The streams, V11, `trapDigest`, save fields, the reports, `FloorTimeByTheme` with segment-5 rows |
+| **11–12 Seeds and validation** | The streams, V11, `trapDigest`, save fields, the reports, `FloorTimeByTheme` with segment-5 rows. **Taken up by the seeds and validation design (segments 11–12, approved 2026-11-23; its 4.3, 5.2, 6.10):** the `traps` and `trapsResolve` keys under the floor's `attempt/{a}` node, with keyed `retry1` children in place of "seed + 1" (SV-4; M1); `checks` attempt-invariant under the floor key, its form kept, its domains `h:object` and `h:save` (SV-6); the builders' salt withdrawn (SV-7); V11's phases, V11g1 at AP1 and V11g2 at AP2, on the one LR0–LR5 ladder (SV-10, SV-20); `trapDigest` and the save fields in the run save beside the stored `FloorStatic` (SV-14, read); the reports' budgets and classes, `RoundsPerFightDelta{TL}` and `FloorTimeByTheme{arm, feature}` (SV-11, SV-24, SV-25); the arms `TL.Baseline` and `TL.NoTraps` (SV-22). *Pending request:* the `traps` and `trapsResolve` count formulas (11.2; M1) |
 
 ---
 
@@ -3747,6 +3825,10 @@ later design triggers them:
   per floor (risk 6).
 - **If `V11Fallback` is non-zero in the simulator:** the failing rules
   are retuned before M2 content locks.
+- **If the TL owner does not publish the `traps` and `trapsResolve`
+  formulas (seeds and validation design 14.2; M1):** TL's own padded
+  maxima are declared as caps, and the DrawLedger checks counter = cap
+  (11.2).
 - **If the TL owner refuses the `arenaDevice` reading (boss rooms design
   4.7.1, 14.2; BR-16; M2):** arena Devices are authored as segment-9
   pieces with their own preview record, same rules (6.20, TL-40).
@@ -3792,7 +3874,7 @@ later design triggers them:
 | KB14 | Take time erases the Shade edge | 8 ticks; Sure Hands cut; Second Nature reaches Hard |
 | KB15 | Clock may fail the first gate | Mandatory levers; fallback switch |
 | KB16 | Validator ignores Circuits; loot targets disagree | TP10 includes Circuit rooms; one loot target (6.17) |
-| KB17 | Shared seeds known in advance | Builders' option: salt with run id |
+| KB17 | Shared seeds known in advance | Builders' option: salt with run id (withdrawn: one key gives one run; seeds and validation design 4.7; SV-7) |
 | KB18 | Count line never reaches k = n | Total dropped |
 | KB19 | Steal-the-keyring is a fight trigger | Previewed on the lock card |
 | KB20 | Oil the Works redundant | Kept M3 optional: matters on rolled consequence and Hard attempts |

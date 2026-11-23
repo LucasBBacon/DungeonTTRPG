@@ -2236,7 +2236,10 @@ with the Shade allow-list, `RankKeepsBounds`, `TurnAllowanceNoDamage`
 with its allow-list, `FlagNotCondition`); and the stage-1 checks
 (`ForbiddenClassGrant`, `LeanSpread`, `SubclassCopiesBaseLean`,
 `SubclassAddsPool`, `NameCollision`, the cap of eight, the copy
-registry).
+registry). **(change SV-20; M2)** These checks are registered as
+`content.*` rows under CL 12.2 with the SH codes, and `NameCollision`
+is run by `V7.NameRegistry`, which this document feeds (seeds and
+validation design 5.2).
 
 ### 13.3 Simulator reports owed
 
@@ -2272,6 +2275,12 @@ registry).
 - Shadowed builds reported separately;
 - Lure: elite-room notables taken without a fight;
 - launcher family floors (to the weapons owner).
+
+**(change SV-22; M2)** The `Skill` arms `Novice`, `Basic` and `Expert`
+are generalised from arcanist 5.4 to the Shade (request to the ARC
+owner; fallback: the Shade owner writes a novice script by the M2
+planning gate); the worst legal build above is the `WorstLegalShade`
+arm (seeds and validation design 6.2).
 
 ## 14. Staging
 
@@ -2470,7 +2479,9 @@ finds the `TriggerFromFive` scope note; a grep for
   copy the hero's Vanish Arts or From Nowhere.
 - **The simulator:** the stealth share, parity per subclass, spread and
   full-floor clear, level-2 boss arrivals, fights avoided, the content
-  bound.
+  bound. Pending (SV-22, M2): the generalised `Skill.*` arms, or the
+  Shade owner's novice script by the M2 planning gate (13.3; seeds and
+  validation design 6.2).
 - **Naming pass:** every placeholder name here.
 - **Rulings owed by the lead:** the Duskhem ruling (No Witnesses III),
   VG-18 (Toss and Dust against Slinger's Bracers; the Riposte echo).

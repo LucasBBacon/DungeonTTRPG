@@ -80,7 +80,7 @@ Rejected schemes: XT (20 hits), XF (35), XK (19), IT (32), IF (21). This documen
 - "Never Seen": a square in the Unknown or Chalked state (4.1.1); Q4's "unexplored squares" (4.8.2).
 - "Space": a Room node, an Alcove or a corridor segment (FL room identity).
 - "Walker" and "human arm": the FL 11.4 walker and the human-session arm of 9.4.
-- "BASE": the approved surfaces plus the M1 minimap, the toy's and the simulator's baseline arm (8).
+- "BASE": the approved surfaces plus the M1 minimap, the toy's and the simulator's baseline arm (8); qualified as **`XI.BASE`** in the simulator's arm catalogue (SV-22; seeds and validation design 6.2).
 
 ---
 
@@ -834,9 +834,9 @@ Inspect cards never queue. On a profile's first two runs, a one-line ribbon "Mor
 ### 4.11 Determinism (lead's call; M1)
 
 - Every rule-bearing pixel is a core query through `IKnowledgeQuery`: `Visible()`, `State(sq)`, `ChalkOutline(space)`, `Afterimages()`, `Marks()`, `Facts()`, `LooseEnds()`, `DetourQuote(t)`, `NoisePreview(verb)`, `TravelPath(dest)`, `NoticingPreStop(path)`, `PatrolForecast(g, sq, predicate)`, `InSightOf(unit)`, `TreasureTarget()`, `SketchGraph()`, and the two helpers over party knowledge, `KnownCanSee` and `KnownNoiseReach` (4.1.2, with each query's mode). The only AI-output places stay those the enemies owner rules (ENM 13.5 intent; EP-28 if ruled).
-- The display holds only camera, panels, active layers, Waymarks and card state. Cosmetic randomness (ink wobble if the skin ships, paper grain) comes from the display or dressing stream (FL-2), which the core never reads.
-- **Segment 10 adds no seeded stream and consumes no rules draw.** Items are core actions with events (`InstrumentUsed`, then `SpaceTraced` or `FactGained`).
-- **Event order:** the 4.1.3 `KnowledgePass`; paid knowledge acts resolve as a single core action (`InstrumentUsed` → the writes, counter and coin included → the suspend-slot write, 4.12) whose result is shown only after the write.
+- The display holds only camera, panels, active layers, Waymarks and card state. Cosmetic randomness (ink wobble if the skin ships, paper grain) comes from the display or dressing stream (FL-2), which the core never reads. **Amended by SV-2 (M1):** it comes from the `display` key's `ink` domain (`DisplayKey`, outside every rules stream; Core assemblies cannot reference it), not the dressing stream; display interactions (dismissing a card or a Waymark) are UI-layer only, never core commands (SV-13, read) (seeds and validation design 4.3, 4.6).
+- **Segment 10 adds no seeded stream and consumes no rules draw.** Items are core actions with events (`InstrumentUsed`, then `SpaceTraced` or `FactGained`). (Confirmed: segments 11–12 add no stream for segment 10; seeds and validation design 11.)
+- **Event order:** the 4.1.3 `KnowledgePass`; paid knowledge acts resolve as a single core action (`InstrumentUsed` → the writes, counter and coin included → the suspend-slot write, 4.12, that command's journal record) whose result is shown only after the write (the outcome rule; seeds and validation design 4.8.3).
 
 ### 4.12 Save integrity (change XI-28 ⚑; agreed, Q1; M2)
 
@@ -847,16 +847,17 @@ Inspect cards never queue. On a profile's first two runs, a one-line ribbon "Mor
   - Every paid knowledge act (Lodestring use, the Tithe Bowl, a Yield fact pick) is an atomic write, like LE-14's camp commit.
 - **The slot is continuous (lead's call, after the check; replaces the draft's knowledge journal).** The draft resumed a crashed run from the last safe point with knowledge laid over it from a journal. The check showed that this rewound deaths, Downs, sprung traps, spent counters and coin, broke replay (journaled `entered` flags drive flee anchors and EV 4.4.2), missed what was merely seen, and let a Lodestring or a Yield fact be used twice. So:
   - **While a run is on a floor, the one suspend slot is overwritten after every committed command** (each command-log entry: every step, act, combat action, death, Down and paid act). Quitting writes it too. It holds the full core state, so the counter, the coin, the world and `PartyKnowledge` always agree, and replay from it reproduces every rule input.
-  - **Write order:** to a temporary file, then an atomic rename over the slot. A paid act's result (the mark, the fact, the bought service) is shown only after its write has landed.
-  - **Load order:** read the slot, validate it, delete it, write the current state back as the new slot before accepting input, then continue. The loaded slot is deleted, as Q1 requires; the running game owns a fresh one, so a crash at any moment resumes at the latest committed command, never earlier.
+  - **Write order (amended by SV-14 ⚑; agreed, Q4; M2):** the slot is a snapshot plus a state-delta journal: `suspend.base` (the floor-entry or compacted snapshot, `PartyKnowledge` and the combat counter, written only by temp file, flush and atomic replace) and `suspend.journal` (one delta record per committed command, appended with a flush, compacted often). **No frame whose content depends on a draw, a reveal, a Down, a death, a spent counter or a paid act is shown until that command's journal record has landed** (the outcome rule, WO2); a paid act's result (the mark, the fact, the bought service) is one such frame (seeds and validation design 4.8.3, 4.8.4).
+  - **Load order (amended by SV-14 ⚑; agreed, Q4; M2):** read the slot, validate it (matching `runId`, contiguous journal), write the re-validated state as a new `suspend.base` by atomic replace and truncate the journal to it, then accept input (WO7). The loaded slot no longer exists, which is how "deleted on load" is met (a reading of XI-28 and Q1; agreed, Q4: atomic replace instead of delete-then-write); the running game owns a fresh one, so a crash at any moment, the load path included, resumes at the latest committed command, never earlier, and never leaves the run without a valid slot (seeds and validation design 4.8.3).
   - **Precedence:** the suspend slot always wins over the safe-point snapshot whenever it exists. A mid-floor run with no slot can arise only at the floor's own safe point (before its first command), so resuming from the safe point never rewinds play.
-  - **Told plainly:** this goes beyond Q1's "quitting writes" (the slot is also written per command) but keeps its single slot, its delete-on-load and its forward-only knowledge, and it closes the crash path Q1 was meant to close: killing the process can no longer undo a death, a bad fight, a spent counter or a look. It amends MAIN 6.6's "the run save is a snapshot of the full core state written at safe points" for mid-floor play (XI-28); MAIN 6.6's "the snapshot is the authority" holds, with the slot as that snapshot. Segments 11–12 own the file mechanics and the write cost.
+  - **Told plainly:** this goes beyond Q1's "quitting writes" (the slot is also written per command) but keeps its single slot, its delete-on-load and its forward-only knowledge, and it closes the crash path Q1 was meant to close: killing the process can no longer undo a death, a bad fight, a spent counter or a look. It amends MAIN 6.6's "the run save is a snapshot of the full core state written at safe points" for mid-floor play (XI-28); MAIN 6.6's "the snapshot is the authority" holds, with the slot as that snapshot. Segments 11–12 own the file mechanics and the write cost (**answered:** seeds and validation design 4.8; agreed, Q4 there).
 - Camp and other safe points (MAIN 6.6; EV-21) are unchanged: quitting at camp writes the normal run save, and no suspend slot exists outside a floor.
-- V18t `KnowledgeReloadMonotone` (kill after a Lodestring use, after a Yield fact, after a Tithe Bowl purchase, after merely looking through a door: none is refunded or forgotten), `DeathNotRewindable` (kill after a death or Down: the resumed state has it), `SaveReloadKnowledge`.
+- V18t `KnowledgeReloadMonotone` (kill after a Lodestring use, after a Yield fact, after a Tithe Bowl purchase, after merely looking through a door: none is refunded or forgotten), `DeathNotRewindable` (kill after a death or Down: the resumed state has it), `SaveReloadKnowledge`; beside them, V19t `SlotEquivalence`, `ProbeResistance` and `LoadPathKillFuzz` (SV-14; seeds and validation design 4.8.3, 4.8.4).
 
 ### 4.13 Hooks to segments 11–12, camp and hub
 
-- **Segments 11–12:** `PartyKnowledge` serialisation and the 4.1.3 event order in the run save and replay; the UI annex; the continuous suspend slot, its write and load order (agreed, Q1; per-command writes after the check); V18 in the validator set; the `KnowledgeLeak` fuzz harness as M1 infrastructure (it also protects ABL 8.3 and DH 17.2 for every later segment); release-seed coverage of `LosSymmetric` and treasure targets; walker rows for travel, the pre-stop, XI-9, Next loose end and the items; a human-session arm; no new stream.
+- **Segments 11–12:** `PartyKnowledge` serialisation and the 4.1.3 event order in the run save and replay; the UI annex; the continuous suspend slot, its write and load order (agreed, Q1; per-command writes after the check); V18 in the validator set; the `KnowledgeLeak` fuzz harness as M1 infrastructure (it also protects ABL 8.3 and DH 17.2 for every later segment); release-seed coverage of `LosSymmetric` and treasure targets; walker rows for travel, the pre-stop, XI-9, Next loose end and the items; a human-session arm; no new stream. **Answered** by the seeds and validation design (segments 11–12, approved 2026-11-23; its 11): `PartyKnowledge` and the 4.1.3 event order in `run.save` and the slot (4.8); the UI annex as `run.annex` (4.8.1); the slot as `suspend.base` plus `suspend.journal` with write orders WO1–WO8 (4.8.3–4.8.4; agreed, Q4 there); V18 in the consolidated suite (5.2); `KnowledgeLeak` as M1 infrastructure and a PR-tier smoke (5.8); the release seed set covers `LosSymmetric` templates and treasure targets (4.11; SV-18, read); walker rows under the W instrument and the `XI.*` arms, the human arm as the H instrument (6.1, 6.2, 6.11); no new stream added.
+  - **Pending request (segments 11–12; SV-22; M2):** walker equivalences, for example whether `XI.Completionist` equals `FL.Hunt` plus optional fights, are an owner question for the XI, FL and EV owners, not a silent mapping. Not a rule until they rule; if they do not, there is no mapping and each gate reads its own owner's arm (seeds and validation design 6.2, 14.2).
 - **Camp:** the Tithe Bowl (Lodestring or Surveyor's Sketch); the conditional Ear Trumpet stock row (agreed, Q3); the next-floor card unchanged (RS 6.9); the Lore roster preview (RS, M3); the previous floor's Atlas page on the dream track (M3).
 - **Hub and profile:** `uiMemory`; codex hosting (RS owns, segment 10 hosts, EV-37); the Floor Atlas in the run record (M3).
 
@@ -1171,7 +1172,9 @@ FactCategory{ F-TREASURE, selector, rank:[tierDesc, roomMacroYX, containerYX], q
 ### 9.2 V18 `Information` (change XI-30; split like V13 and V16)
 
 - **V18s (static):** `SurfaceRegistered` (every row of 5 has a record with a core source query, a slot and a `countsAsMark` flag); `PatternNoHueOnly`; `NoHoverOnly` (information and every segment 10 action have a non-mouse path); `BoardDigitIsClock` (Afterimages among the fixtures); `WallMarkProjected`; `BudgetWorstCase` per mode, from the 6 registry table; `CardFit` at 150%; `LayerHasLegend`; `FactHasMapDraw` (F-KEY on route pips included); `RevealNeverUnits`; `InfoItemLaneSafe`; `InfoNeverWritesLoot`; `PointerTextBounded` (tier word plus qualifier and the fixed hover line only); `LaneGapStock` (camp-entry snapshot; suspended while the lane is present); `WaymarkGlyphDistinct`; `NoCompletionStat` (no field counts map coverage or loose ends for display, except the named FL-20 rooms tally, 4.4.4).
-- **V18g (generation, per floor):** `MapNeverUnknown`; `ChalkNeverContents`; `ChalkNeverStub` (every non-sight source; the `ChalkOutline` closing line withdrawn once the stub is Seen); `SketchNeverSecretNode`; `RouteKnownOnly`; `ForecastKnownOnly` (timed segments only; nothing past a "continues" end without a timed lap; a heard-only patrol gets its Portal window only); `BubbleNeverPositioned`; `TreasureSelectorLegal` (exclusions incl. secret caches; role-blind ranking; qualifier from socket class); `TreasureFactCap`; `NoF1Pointer`.
+- **V18g (generation, per floor; amended by SV-20, M1 model, M2 complete):** the graph rows, asserted at AP2: `SketchNeverSecretNode`; `TreasureSelectorLegal` (exclusions incl. secret caches; role-blind ranking; qualifier from socket class); `TreasureFactCap`; `NoF1Pointer`. Failure class: this section's named action where it names one, otherwise `defect` (seeds and validation design 5.1, 5.2, 5.4).
+- **V18r (runtime assertions, on every `KnowledgePass`; SV-20; lead's call; M1 model, M2 complete):** the knowledge rows, moved from V18g because they read `PartyKnowledge`: `MapNeverUnknown`; `ChalkNeverContents`; `ChalkNeverStub` (every non-sight source; the `ChalkOutline` closing line withdrawn once the stub is Seen); `RouteKnownOnly`; `ForecastKnownOnly` (timed segments only; nothing past a "continues" end without a timed lap; a heard-only patrol gets its Portal window only); `BubbleNeverPositioned`. Class `runtimeAssert`: a crash in dev and CI; in release fail closed (suppress the leaking surface, log `RuntimeAssert{check}` as P0, never block play) (seeds and validation design 5.1, 5.2).
+- **Phase model (SV-20):** every check has a qualified id `V18.CheckName`; `s` and `t` parts fail the build, `g` and `r` parts act by their registered class (seeds and validation design 5.1).
 - **V18t (tests):**
   - `LosSymmetric` (every pair of **transparent** squares, every template, 4 rotations, Portal states); `LosVsLineAgree`;
   - `FogEqualsRules`: every replay tick, the Seen squares equal the union over living, non-Downed party units u of {s : `CanSee`(u.square, s)} (plus blockers lit by the 4.1.2 rule), and a group's first-line-of-sight noticing trigger fires if and only if one of its member squares is in that set (restated after the check);
@@ -1180,24 +1183,26 @@ FactCategory{ F-TREASURE, selector, rank:[tierDesc, roomMacroYX, containerYX], q
   - `SaveReloadKnowledge`; `KnowledgeReloadMonotone` and `DeathNotRewindable` (process kills after a Lodestring use, a Yield fact, a Tithe Bowl purchase, a look through a door, a death and a Down; 4.12); `WaymarksOutsideKey`;
   - `PointerNeverPreDoor`; `LodestringDoorBlind`; `RoleBlindOrder` (permuting `roomId`s with geometry fixed gives identical Next loose end, points-of-interest and F-TREASURE choices);
   - `TravelNeverEntersKnownHazard`; `BehindYouFullClearZero`; `SpentFieldRespectsBestRemaining`; entered-flag cases (doorway, arena doorway, Downed unit shoved); loose-end cases (peek-then-leave, an F-ROOM-Chalked room);
-  - `PreviewExactness` extended to the noise preview and Detour quote.
+  - `PreviewExactness` extended to the noise preview and Detour quote; it is the structural partner of the zero gates `ForecastLethalSurprise` = 0 and `PreviewExactness` 100% (SV-25; M2; seeds and validation design 6.6).
 
 ### 9.3 Reports (M2 unless noted; targets *illustr.* except the stated gates; definitions after the check)
 
+Every report is computed from the core's event log by the simulator's instruments: Seg10 rows on the W walker, `MarksPerScreen` on V, the glance test on H (SV-21, read; seeds and validation design 6.1, 6.12).
+
 - **Binding:** `Seg10ClickDelta` (both arms), `Seg10MinutesDelta`.
 - **Gates:**
-  - `PatrolFightRate` (agreed, Q2; ≥ 60% of BASE) = combats per floor, F1–5, whose first noticing roll was made by a group whose activity was Patrolling, divided by the same count in the BASE arm. **Walker forecast policy:** wait when an earned window overlaps the next 3 path squares; otherwise walk on.
+  - `PatrolFightRate` (agreed, Q2; ≥ 60% of BASE) = combats per floor, F1–5, whose first noticing roll was made by a group whose activity was Patrolling, divided by the same count in the BASE arm (`XI.BASE`; EP owns the row; SV-22, SV-24; seeds and validation design 6.2, 6.10). **Walker forecast policy:** wait when an earned window overlaps the next 3 path squares; otherwise walk on.
   - `MarksPerScreen` (4.9.5) in explore and, as a pre-M2 sign-off check, in combat; the glance test (first-time testers name each visible line family ≥ 80%, on the board and the minimap).
 - **Cut triggers:** `MapSecondsPerFloor`, with a plan of 6 s per floor *(illustr.)*.
 - **Reads:** `MapOpenRate`, `TravelClicksSaved`, `NoticingPreStops`, `PocketClearClicks`, `LooseEndsAtExit`, `SideRoomVisitRate` per policy, `DetourRegret` (the share of quoted detours taken whose realised value fell below the quoted Sight line), `DetourQuoteHoverRate`, `BeckonFollowRate`, `TallyChaseSeconds`, `LostTime`, `AfterimageMisreadRate` (the share of player commands that target, or path around, a square holding an Afterimage while the true unit is elsewhere; combat included), `FirstRunExplainerCount`, `InfoCoinByPartySize`, `WaylaySurpriseRate`.
 - **Q3 trigger (new lead's call):** `SoloListenClickShare` (4.5.2), read at the M3 schedule review.
-- **M3:** `LodestringBuyRate`, `LodestringUseRate`, `LodestringRegret` (the share of uses whose target is uncollected at floor exit, plus the minutes spent on uncollected targets), `LodestringMinutesDelta`, `YieldCategoryMix`, `SketchBuyRate`, `SecretFindRate`, `EarTrumpetClickSavings`.
+- **M3:** `LodestringBuyRate`, `LodestringUseRate`, `LodestringRegret` (the share of uses whose target is uncollected at floor exit, plus the minutes spent on uncollected targets), `LodestringMinutesDelta`, `YieldCategoryMix`, `SketchBuyRate`, `SecretFoundRate{lodestring}` (renamed from `SecretFindRate`, SV-24, M2: one keyed row with FL's and LP's `SecretFoundRate`; seeds and validation design 6.10), `EarTrumpetClickSavings`.
 
 ### 9.4 Simulator arms
-The FL 11.4 walker (lean = gate arm, balanced, completionist) plus a human-session arm that charges move orders and pocket clearing; per-feature ablation; party 1, 2 and 4; the BASE arm for the `PatrolFightRate` baseline.
+The FL 11.4 walker (lean = gate arm, balanced, completionist) plus a human-session arm that charges move orders and pocket clearing; per-feature ablation; party 1, 2 and 4; the BASE arm for the `PatrolFightRate` baseline. **Amended by SV-22 (M2):** qualified names `FL.Lean` (the gate arm), `XI.Balanced`, `XI.Completionist`, and the toggle baseline `XI.BASE`; the human-session arm runs under the H instrument and the human-session plan (SV-27, read) (seeds and validation design 6.1, 6.2, 6.11).
 
 ### 9.5 The segment 10 clock line (change XI-31 ⚑; lead's call; M2)
-- Beside TL-38, EP-33, LP-10, EV-23 and BR-40: **net ≤ 0 minutes and ≤ 0 clicks on F4–5 at party 4**, on both arms; the companions' CMP 7.4 levers untouched (**agreed** gate kept). **The human vertical slice is a read, not a gate (after the check):** an A/B with segment 10's features toggled where the slice allows it, otherwise reported beside the arms.
+- Beside TL-38, EP-33, LP-10, EV-23 and BR-40: **net ≤ 0 minutes and ≤ 0 clicks on F4–5 at party 4**, on both arms; the companions' CMP 7.4 levers untouched (**agreed** gate kept). The line is a BIND row summed in `FloorClockLedger`, and a miss fires the self-cut order below before any CMP 7.4 lever (SV-26, read; seeds and validation design 6.3, 6.8, 6.9). **The human vertical slice is a read, not a gate (after the check):** an A/B with segment 10's features toggled where the slice allows it, otherwise reported beside the arms.
 - **Self-cut order on a miss** (player-unrequested items first, map usability last; steps 1 and 3 replaced after the check, because the draft's steps were already the defaults):
   1. the Detour quote shows only the Cost line by default (the rest on Inspect);
   2. the Lodestring limited to F3–F4;
@@ -1240,7 +1245,7 @@ The FL 11.4 walker (lean = gate arm, balanced, completionist) plus a human-sessi
 | **Arcanist, Shade, Herald owners** | Walls Have Ears; Cased and the False Trail shape; HX-6 Pick the Question (XI-25, XI-27) |
 | **CMP owner** | Informed: no coverage-strip line for the Ear Trumpet (XI-26) |
 | **Main design owner** | MAIN 6.6: the UI annex (XI-7), `uiMemory` (XI-21), the continuous suspend slot (XI-28); MAIN 4.3 reading (XI-2) |
-| **Segments 11–12** | 4.13 |
+| **Segments 11–12** | 4.13 (answered: seeds and validation design 11) |
 | **Camp and hub** | 4.13 |
 
 **Hook answers:**
@@ -1481,7 +1486,7 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 | Pre-stop costs clicks | `NoticingPreStops` pushes the walker line over | The 9.5 cut order; the pre-stop itself is never cut while XI-9 ships | Lead |
 | Yield pointer dominates | `YieldCategoryMix` F-TREASURE > 50% | F-TREASURE through Yield restricted to the optional elite | Lead |
 | Lodestring is a tax | `LodestringBuyRate` > 90% among parties with a Rare-or-better unfound, or high `LodestringRegret` | Price first (pegged to healing); then the cut order's step 2 | Lead |
-| Secrets found change | `SecretFindRate` moves with Lodestring use | Review the selector; secret caches stay excluded (agreed, Q5) | Lead |
+| Secrets found change | `SecretFoundRate{lodestring}` (SV-24) moves with Lodestring use | Review the selector; secret caches stay excluded (agreed, Q5) | Lead |
 | Afterimages misread | `AfterimageMisreadRate` high, in combat or explore | Art first; then shorter persistence for Stationary units | Lead |
 | Clutter | `MarksPerScreen` gate or the glance test misses | Density defaults, combat suppression, information layer defaults | Lead |
 | Clicks still high | `ExploreClicks` misses with travel on | An auto-explore accessibility option goes to the client (Later) | Client |
@@ -1505,7 +1510,7 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 | Combat clutter | `MarksPerScreen` combat P(> 12) > 5% at the pre-M2 sign-off check | The 8.4 levers in order, then the clutter row above | Lead |
 | **Arcanist owner refuses** Walls Have Ears | — | No batched Listen | Arcanist owner |
 | **Main design owner refuses** the suspend slot or forward-only knowledge | — | Returns to the client (Q1 was agreed) | Main design owner; client |
-| **Main design owner or segments 11–12 refuse** a write after every command (cost) | — | The slot is written at least at every `KnowledgePass` end, combat round end, death, Down and paid act, which keeps every rewindable outcome covered | Main design owner; segments 11–12 |
+| **Main design owner or segments 11–12 refuse** a write after every command (cost) | — | The slot is written at least at every `KnowledgePass` end, combat round end, death, Down and paid act, which keeps every rewindable outcome covered. **Segments 11–12 did not refuse:** a journal record after every command (seeds and validation design 4.8.4; agreed, Q4 there) | Main design owner; segments 11–12 |
 | **Main design owner refuses** the run-save UI annex | — | Waymarks are display state only and are lost on suspend | Main design owner |
 | **Main design owner refuses** `uiMemory` | — | Staged disclosure by floor runs on every run; first-sight callouts are always shown | Main design owner |
 | **DH owner refuses** the in-sight pip beside the danger band | — | The pip becomes hover-only on the portrait | DH owner |
@@ -1570,7 +1575,7 @@ The owed rows are the single list in 13; by owner:
 - **The CMP owner:** XI-26 (informed: no coverage-strip line).
 - **The room terrain owner (segment 3):** XI-2 (TR-5 reading).
 - **The main design owner:** XI-2 (MAIN 4.3 reading), XI-7 (UI annex), XI-21 (`uiMemory`), XI-28 (the continuous suspend slot).
-- **Segments 11 and 12 (seeds, validation, saves):** 4.13; V18 (XI-30); the suspend slot's write, load and precedence mechanics.
+- **Segments 11 and 12 (seeds, validation, saves):** 4.13; V18 (XI-30); the suspend slot's write, load and precedence mechanics. **Designed:** the seeds and validation design (approved 2026-11-23; its 4.8, 5.2, 6, 11); pending there: walker equivalences (4.13).
 - **The simulator:** every report of 9.3 and every arm of 9.4.
 - **Art, audio and writing:** 4.2, 5, 6.
 - **Naming pass:** every placeholder name here.
@@ -1664,6 +1669,8 @@ The owed rows are the single list in 13; by owner:
 - Model A's and the UI catalogue's counts on the minimap frame and loose-end count → rejected (IN6).
 
 ### A.5 Names checked (case-insensitive, whole word, 28 approved documents)
+
+**Amended by SV-31 (M2):** "28 approved documents" is the count at writing; from M2 the name check is `V7.NameRegistry`, manifest-driven, which every segment feeds, so no document count is kept here (seeds and validation design 5.2).
 
 **0 hits:** the `XI-` prefix; `V18`; Lodestring, F-TREASURE, Afterimage(s), Chalked, Traced, Waymark(s), Walls Have Ears, Cased, Ear Trumpet, Surveyor's Sketch, Behind-you, Detour quote, Keep card, Back to Stairhead, loose end(s), Next loose end, Listen bubble, spent field, Floor Atlas, `PartyKnowledge`, `CanSee`, `PatrolForecast`, `IKnowledgeQuery`, `uiMemory`, seen-edge, fog bank, Declutter, status ribbon, Stratum strip, Treasure field, told pip, sight shadow, noticing pre-stop, watch lines, Guided, Compact, frayed (now unused after the check); the events `SquaresSeen`, `SpaceEntered`, `SpaceTraced`, `SpaceChalked`, `AfterimageSet`, `HeardRecorded`, `FactDrawn`, `InstrumentUsed`; the queries `DetourQuote`, `NoticingPreStop`, `TreasureTarget`, `SketchGraph`, `LooseEnds`, `NoisePreview`, `InSightOf`; the checks and reports `LosSymmetric`, `FogEqualsRules`, `KnowledgeLeak`, `ProfileBlind`, `NoHoverOnly`, `ChalkNeverStub`, `SketchNeverSecretNode`, `BubbleNeverPositioned`, `LodestringDoorBlind`, `PointerNeverPreDoor`, `WaymarksOutsideKey`, `KnowledgeReloadMonotone`, `PatrolFightRate`, `MapSecondsPerFloor`, `Seg10ClickDelta`, `MarksPerScreen`, `CardFit`, `LostTime`, `YieldCategoryMix`, `SecretFindRate`, `SideRoomVisitRate`, `BeckonFollowRate`, `SideRoomPayoffMix`; "the string ends here"; "Dream map". Local prefixes XQ, XN, IP, IN, XP, XB, XS: 0 hits.
 

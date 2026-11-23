@@ -779,6 +779,10 @@ change I-10) as a **`camp` channel of the floor loot budget**: its count
 (`notablesShop`) and items are drawn on the loot stream after the field
 channels and wand charges, under the same family caps and owned-base
 rerolls, and the vendor's limited potion stock is drawn right after it.
+Each is a keyed block of floor N's loot key (`loot/floor/{N}/camp` and
+`loot/floor/{N}/vendorPotions`, per entry), evaluated in this order, so
+no count drawn earlier moves its draws **(change SV-5; M1; seeds and
+validation design 4.3)**.
 The camp channel is part of the fixed, pre-rolled budget, so the anti-goal
 "never beyond the budget" holds (section 2). It is drawn whether or not the
 shop is chosen. Stock is deterministic and cannot be save-scummed.
@@ -809,7 +813,9 @@ Floor N+1 is generated when the party
 leaves camp for it (it already reads owned bases, enemies 10.5 step 3),
 after every purchase on floor N and at its camp is known, so this stays
 deterministic; that generation and the camp-exit save are one atomic
-write (loot economy design 6.10) **(change LE-14; M1)**. The run state keeps the per-family count.
+write (loot economy design 6.10) **(change LE-14; M1)**: its inputs are
+frozen at Travel on from the camp-exit state and committed with the
+camp-exit save (WO5; seeds and validation design 4.4, 4.8.3). The run state keeps the per-family count.
 
 ### 10.5 Prices and pegs
 
@@ -912,10 +918,12 @@ and one service, for coin or barter.
 - **Never interrupts exploration or combat.** Nothing opens on its own:
   the party steps adjacent and chooses Trade.
 - **(lead's call)** Floors 2–4 only (`trader.floors`; never the
-  solo-tuned floor 1 or the deep floor 5). Two draws on the **dungeon
-  stream** at the floor plan (enemies 10.5 step 2), right after the slots
-  are assigned and **always both, whatever their outcome**, so the stream
-  position never depends on them: the presence roll (`presencePermille`,
+  solo-tuned floor 1 or the deep floor 5). Two draws on the floor's
+  keyed **`dungeon/floor/{N}/trader`** stream (2 draws, attempt-invariant)
+  at the floor plan (enemies 10.5 step 2; pipeline GS8), right after the
+  slots are assigned and **always both, whatever their outcome**, so no
+  other draw ever depends on them **(change SV-32, Later; seeds and
+  validation design 4.3, 4.4)**: the presence roll (`presencePermille`,
   *illustr. 50%*) and the stock count (`stock`, *illustr. 2–3*). If
   presence succeeds but the plan has no eligible off-path side room, there
   is no trader; the draws are still consumed.
@@ -929,7 +937,8 @@ and one service, for coin or barter.
 **Stock (agreed):**
 
 - **2–3 items, pre-rolled from the floor's notable loot budget** on the
-  loot stream. They are **part of the budget, never additional**, and are
+  loot stream (the keyed `trader` block of `loot/floor/{N}`, 9 draws per
+  entry; change SV-32, Later). They are **part of the budget, never additional**, and are
   fixed at generation like every notable (deterministic).
 - **Where the count comes from (lead's call).** After the loot step draws
   the per-channel counts (enemies 15.3 step 1), the trader count is
@@ -962,8 +971,11 @@ and one service, for coin or barter.
   (containers, enemy-carried, boss, **trader**, then any returned trader
   slots on the containers channel); wand charges in item order (every
   wand, the trader's included); the camp channel and vendor potions
-  (10.4); the trader's tonic move (no draw) and **service** draw. A floor
-  without a trader consumes the loot stream exactly as before.
+  (10.4); the trader's tonic move (no draw) and **service** draw. These
+  are keyed blocks of `loot/floor/{N}` evaluated in this order; no parent
+  positions are inserted, so a floor without a trader draws every other
+  block exactly as before **(change SV-32, Later; seeds and validation
+  design 4.3)**.
 
 **Prices and payment:**
 
@@ -1659,13 +1671,18 @@ are unit conditions.
   (6.3); **within a unit** the next ordering index; **stacks** fill the
   lowest slot index first, ties by instanceId (6.2).
 - Loot, wand charges, camp stock and (Later) trader stock and service are
-  fixed at floor generation on the loot stream, and trader presence and
-  stock count on the dungeon stream (both always drawn, 10.9), so kill order, save and resume, and inventory choices can
-  never change what drops or what is for sale.
+  fixed at floor generation on the loot stream, keyed per floor and per
+  entry block (`loot/floor/{N}/…`; change SV-5; M1), and trader presence
+  and stock count on the floor's keyed `dungeon/floor/{N}/trader` stream
+  (both always drawn, 10.9; change SV-32, Later); both are
+  attempt-invariant, so kill order, save and resume, generation retries and inventory choices can
+  never change what drops or what is for sale (seeds and validation
+  design 4.3).
 - The loot plan is drawn on the keyed `lootPlan` child of the loot
   stream (enemies 10.5 step 3a); coin lumps, salvage shares and the Heavy
   Purse are bound in the draw-free LootBind pass; floor N+1's generation
-  and the camp-exit save are one atomic write (10.4); a `LootLedger` per
+  and the camp-exit save are one atomic write (10.4; WO5, seeds and
+  validation design 4.8.3); a `LootLedger` per
   floor is saved for reports and V13 (loot economy design 6.10, 10.1).
   **(change LE-14; M1)**
 
@@ -2014,7 +2031,7 @@ the exact section it touches. I-14 and I-16 are applied as text marked Later.
 | I-10 | 10.5, step 3; 15.3, step 1 (channel split); 20.1 (per-channel count check) | Append "then the next camp's `camp` channel (its count and notables) and the vendor's limited potions" after wand charges, still on the loot stream and under the same family caps and owned-base rerolls. The floor loot budget gains a **`camp` channel** (1–2 notables, *illustr.*) for the notables shop, drawn whether or not the shop is chosen; the count check includes it. Camp stock counts toward later floors' family caps only once bought (items 10.4). |
 | I-11 | 15.7, bullet "Salvage is sized at about 10–15% of a floor's coin income" | "A floor's coin income" means found coin. Item Sell and Scrap income is reported separately (items 10.2). |
 | I-12 | 15.3, step 2 | Clarification: "quality" = (rarity tier, then value) (items 12.5) |
-| I-14 | 10.4, floor plan table; 10.5, step 2; 10.5, step 3 (draw order and the sentence "The only input from outside the loot stream is the party's `requires` tags and owned bases"); 15.3, steps 1–2; 20.1 (per-channel count check) | **Later.** A `trader` channel. 10.4: an optional off-path side room that can host the trader, floors 2–4. 10.5 step 2: two dungeon-stream draws, always made, for presence and stock count. 10.5 step 3: the trader count is carved first from the containers share, then the enemy-carried share, each keeping at least 1 notable *(illustr.)*, never the boss; below 2 there is no trader. Its notables are drawn after the boss channel, then any returned trader slots on the containers channel, then wand charges, the camp channel, the trader's tonic (moved from the containers channel, no draw) and its service. The "only input" sentence adds trader presence and count. 15.3 step 2: a trader slot is never substituted; it returns to the containers channel. Unbought trader stock counts toward later floors' family caps only once bought or bartered. The count check includes the trader channel. (items 10.4, 10.9) |
+| I-14 | 10.4, floor plan table; 10.5, step 2; 10.5, step 3 (draw order and the sentence "The only input from outside the loot stream is the party's `requires` tags and owned bases"); 15.3, steps 1–2; 20.1 (per-channel count check) | **Later.** A `trader` channel. 10.4: an optional off-path side room that can host the trader, floors 2–4. 10.5 step 2: two dungeon-stream draws, always made, for presence and stock count. 10.5 step 3: the trader count is carved first from the containers share, then the enemy-carried share, each keeping at least 1 notable *(illustr.)*, never the boss; below 2 there is no trader. Its notables are drawn after the boss channel, then any returned trader slots on the containers channel, then wand charges, the camp channel, the trader's tonic (moved from the containers channel, no draw) and its service. The "only input" sentence adds trader presence and count. 15.3 step 2: a trader slot is never substituted; it returns to the containers channel. Unbought trader stock counts toward later floors' family caps only once bought or bartered. The count check includes the trader channel. (items 10.4, 10.9) **Amended 2026-11-23 (change SV-32, Later):** the two draws are the floor's keyed `dungeon/floor/{N}/trader` stream (attempt-invariant), not the dungeon stream, and the trader notables are the loot `trader` block; no parent positions are inserted (seeds and validation design 4.3). |
 
 **Main design (2026-11-15):**
 
@@ -2060,7 +2077,7 @@ mundane bases are not loot, and family caps all stand.
 | Containers and lair caches for the loot channels | Loot | M1 |
 | Room identity for leftovers merging and flee piles | Leftovers | M1 |
 | A stairs transition that runs the left-behind warning and Scrap: the Stairhead behind the arena, through a Bossgate that opens on `BossDefeated`; none on floor 5 (floor layout design 6.11, change FL-6) | Stairs | M1 |
-| An off-path side room per floor that can host the trader, and its presence and stock-count draws at the floor plan | Wandering trader | Later |
+| An off-path side room per floor that can host the trader, and its presence and stock-count draws at the floor plan (the draws: `dungeon/floor/{N}/trader` at GS8; seeds and validation design 4.3, 4.4; change SV-32) | Wandering trader | Later |
 
 - **Classes and offers:** see the classes design
   (`2026-11-17-classes-concepts-design.md`). The belt +1 is the Shade's

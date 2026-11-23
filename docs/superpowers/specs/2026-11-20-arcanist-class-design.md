@@ -523,6 +523,18 @@ default in `pairDefaults` (9.1) is therefore a creation default for
 players and does not move any class-mean row; it changes which
 per-subclass row a default-following player lands in.
 
+**Pending request (seeds and validation design SV-22, 2026-11-23; M2;
+the Arcanist owner rules, with the class owners):** the four arms are
+generalised to every class as the simulator's `Skill` axis
+(`Skill.Novice`, `Skill.Basic`, `Skill.Reference`, `Skill.Expert`; a
+flagged extension of this section, lead's call, approved by the client
+with that design); `Skill.Reference` stays DH 19.3 plus the ability 13
+scorer **(settled)**, and the definitions above are the Arcanist's rows
+of it. If refused, each class owner writes a novice script by the M2
+planning gate (seeds and validation design 6.2, 11, 14.2). The novice
+row's result class there is ESC, read at the M2 F1 balance freeze
+(seeds and validation design 6.3, 7); its status here is unchanged.
+
 **Novice responses (new lead's call; *illustr.* probabilities):** so that
 the fixes applied before the escalation point are measured, the novice
 arm confirms the last-slot confirmation with probability 50%; drops an
@@ -2363,6 +2375,10 @@ them):**
 5. The shared floor-pacing request (boss door at level 3). Moves both
    arms, as lever 3.
 
+One lever at a time, each rerun over its blast radius;
+`Floor1ClassSpread` is re-read after every lever (seeds and validation
+design 6.9, SV-26, read; this order kept).
+
 **Never:** the HP tier, the armour ceiling, item AC, temporary HP, a
 second reaction, a forbidden grant, Weft 2 at levels 1–2 (rejected, Q2),
 or the reagent restriction (rejected, Q3).
@@ -2547,6 +2563,11 @@ The build fails when any of these fail (VG-11): `SpellTierBound`,
 `NameCollision`, the cap of eight, the copy registry). The runtime
 invariant `KnownVariantInPair` (7.3) is asserted in play and property
 tested, not a content check.
+
+These run as `content.*` rows under classes 12.2 (pre-generation, no V
+id); `NameCollision` runs as `V7.NameRegistry`, which this document's
+names feed; `SeedHasTarget` (classes owner) is executed in V12g
+(seeds and validation design 5.2, SV-20; M1 / M2).
 
 ### 14.3 Simulator reports owed
 
@@ -2759,7 +2780,8 @@ may raise it to two" in ability 6.5 finds the Arcanist exclusion.
   Tinker and Hedgemage kits carry no Overchannel or Arts (8.3);
   scorer-chosen beam order and Prime's solo clause read as in its 8.6.
 - **The simulator:** the four arms, parity, nova, spread, camp share,
-  sustain sensitivity.
+  sustain sensitivity. The arms become the `Skill` axis of the seeds
+  and validation design (6.2; **pending request SV-22**, 5.4).
 - **The ability 8.4 aura ruling:** AM-6 and the self-aura reserve.
 - **Naming pass:** every placeholder name here.
 - **Lead's checks before data:** every SRD shape in this document

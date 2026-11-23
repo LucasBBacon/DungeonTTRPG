@@ -246,7 +246,7 @@ The web-confirmed items (XCOM 2 loot timer, Into the Breach time pods, Hades tro
   - C 5.5: one round is one tick.
   - "Nothing timed in M2" is agreed (RT Q5, TR-27), reopened only for the HZ M2 Stir pilot (HZ-12).
 - **Readability.** RS 7.4 RC1–RC9 (agreed, RS Q3): no spawns, no idle object motion, faces mean minds, keyhole reserved, reserved cues, names never lie. LE 6.15: tier marks only on hover and the lock card, and no loot cue joins RC7 unless the RS owner asks.
-- **Determinism.** LE 6.10 (keyed `lootPlan` grandchildren, fixed draws), RS 6.4 LootDoorInvariant, and the order layout → hazards → traps → ENM 10.5 step 2 → LootPlan → steps 3–11 → `trapsResolve` → LootBind → V13g (LE 6.10 item 4).
+- **Determinism.** LE 6.10 (keyed `lootPlan` grandchildren, fixed draws), RS 6.4 LootDoorInvariant, and the order layout → hazards → traps → ENM 10.5 step 2 → LootPlan → steps 3–11 → `trapsResolve` → LootBind → V13g (LE 6.10 item 4). **Amended by SV-9 (M1):** the order is now the canonical pipeline GS0–GS17 with two assertion points: AP1, HE-7's structural point after traps and before loot, and AP2, the shared point after LootBind and EventPlace, where V13g, `V16g.SlotLegal` and then V15g run; SocketPlan is GS9 (after EP's 2a), LootPlan 3a with step 8 is GS10, loot step 3 GS11, LootBind GS14 (seeds and validation design 4.4, 5.4).
 - **Clock.**
   - FL 6.10 (3.5 min and 40 clicks at party 4 on F4–5).
   - TL-38 (+0.3 min, +5 clicks).
@@ -377,7 +377,7 @@ Each source is one `LootSocketRecord` with exactly one `kind` and one `rank`, or
 
 ### 4.2 Socket derivation, the role table and depth (lead's call; change LP-11)
 
-**Where it runs.** 7c's **SocketPlan** builds LootPlan's provisional socket set (LE 6.9 item 2), draw-free apart from the Windfall grandchild. It reads:
+**Where it runs.** 7c's **SocketPlan** builds LootPlan's provisional socket set (LE 6.9 item 2), draw-free. It runs at GS9, after EP's 2a (the Mousetrap bait cache), reading encounter steps 2 and 2a only; EP's 10b activity props are read by LootBind, not SocketPlan (SV-9, M1). The Windfall grandchild's draws are not SocketPlan's: they are taken at the start of step 8 inside 3a (GS10; 4.7.10) (SV-31 text fix; seeds and validation design 4.4). It reads:
 - layout `containerSockets[]`;
 - Alcove leaves and `secretSites[]`;
 - the hazards pass's Dare socket;
@@ -461,7 +461,7 @@ Each source is one `LootSocketRecord` with exactly one `kind` and one `rank`, or
 
 The open square is walkable, safe, and reachable from the walk line (4.2) without crossing a hazard, trap or Void.
 
-**Traps-bound sockets (lead's call, after the check).** Sockets the traps pass has already bound to a square (a Catch host and its trigger, a lock, a boxed lurker, the key target) **keep the traps pass's square**. LootBind only checks them against this list; a failure is a V15g failure (`LootBindUnplaceable`), never a rebind, so a Catch is never separated from its trigger square.
+**Traps-bound sockets (lead's call, after the check).** Sockets the traps pass has already bound to a square (a Catch host and its trigger, a lock, a boxed lurker, the key target) **keep the traps pass's square**. LootBind only checks them against this list; a failure is a V15g failure (`LootBindUnplaceable`, handled by its class as in step 2 below; SV-10), never a rebind, so a Catch is never separated from its trigger square.
 
 **Choice by role.** Each role ranks the legal squares by a scoring tuple, lowest first, then by face N, E, S, W (lead's call, after the check: the proposal named regions, not a key):
 - SR0 and HE: (distance from the walk line, path distance to the exit Portal, square index).
@@ -483,8 +483,9 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
    1. another legal square in the same room under the relaxed tie order (role tuple dropped, square index only);
    2. else merge its entry into the room's existing container, which keeps the room at one card-bearing container;
    3. else, for a non-HE, non-Due socket, the parent room's Alcove, only if the Alcove's occupant is a container of the same or a higher rank (never a set piece);
-   4. else a hard V15g failure, `LootBindUnplaceable{socketId}`.
-   HE and Due sockets may use fallback 1 only, else fail. 7c never moves them to another room.
+   4. else a V15g failure, `LootBindUnplaceable{socketId}`, acted on by its class (SV-10; seeds and validation design 5.1, 5.5): on a non-HE, non-Due socket, the LR4 terminal fallback **`LootBindDegrade`** (the socket becomes a merge, else coin-only; logged `GenerationFallback{floor, fallback, check}`; BUDGET ≤ 0.3% *(illustr.)*), replacing the action-less hard failure (M1; budget read M2); on an HE or Due socket, a defect (LR5), which the V15s binding proof (9.2) makes impossible.
+   **Pending request (segments 11–12; SV-10):** the 7c owner confirms `LootBindDegrade`'s merge-or-coin rule. Not a rule until the 7c owner rules; if not confirmed, 7c's own failure order above applies to the socket, ending in coin-only, and the row stays a BUDGET ≤ 0.3% (seeds and validation design 14.2).
+   HE and Due sockets may use fallback 1 only, else fail (a defect, LR5). 7c never moves them to another room.
 3. **Windfall host check.** If the host room now has a formation or form the Windfall may not share (Kill Box, Crossfire, Pincer, an ambush form, the Annex, a boxed lurker), or the room has no legal Rathole, home and route under 4.7.3, the Windfall **moves** (`WindfallMoved{from,to}`):
    - the card first returns to its origin, as resolved after step 1 (below);
    - the next eligible host in `socketId` order is tried; the draw-free step-8 source order (4.7.6: (i) the new host's carried allotment, then (ii) a plain SR1 container) is re-run against it, with filters (f1) and (g) re-asserted;
@@ -495,7 +496,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 5. **Container merges** (4.2 rule 5, phase 2).
 6. **Proprietor tags** (4.5), on the surviving containers.
 7. **Coin lumps, the Heavy Purse and salvage** (LE 6.4 items 2 and 4, 8.3). These run after the Windfall is final, so a dropped Windfall's weight-3 share returns to the pool before lumps are carved.
-8. Then the V13g and V15g checks at the shared assertion point.
+8. Then the V13g and V15g checks at AP2, the shared assertion point after LootBind and EventPlace, in the order V13g, `V16g.SlotLegal`, V15g (SV-9, M1; seeds and validation design 5.4).
 
 **Pending request (segment 8; EV-15, M2).** A LootBind flag `stepFunded` on each locked container, false when the lock carries no value step, so a Curiosity may price an extra route to an ordinary, non-HE, non-Due, non-boxed lock with contents unchanged (events design 4.4.5). Not a rule until the 7c and LE owners rule; if refused, segment 8 has no priced lock routes (events design 14.2).
 
@@ -730,7 +731,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 - **Steal on a Dormant Truant** (LP-6 ⚑ settled ENM 15.5, S-5, STAT 7.1 Stealth row, LE-16; **agreed, Q1**).
   - **Conditions:** adjacent; no awake un-Cowed hostile in its room has line of sight to the thief.
   - **Check:** Stealth against the Truant's fixed passive **20, −5 Dormant = 15** *(illustr.; tuned so `WindfallStealShare` ≤ 40% in Shade parties)*. The value is a fixed row, not the group trait Keen (CK9). Light Fingers gives advantage.
-  - **Roll:** made on the keyed hash `H(floorSeed, windfallId, "windfallSteal", 0, die)` on `checks`, with `die` 0, and 0 and 1 for advantage, as in TL 6.22, so it never shifts the combat stream (CB7; die index added after the check).
+  - **Roll:** made on the keyed hash `d = H(floorKey/checks, "h:windfallSteal", windfallId, 0, die)`, `d20 = 1 + Bound(d, 20)`, on `checks` (the keyed-check domain `h:windfallSteal`; SV-1, SV-6, M3; seeds and validation design 4.1, 4.3), with `die` 0, and 0 and 1 for advantage, as in TL 6.22, so it never shifts the combat stream (CB7; die index added after the check).
   - **The room's one Steal try.** The party steals either a carrier in the host group or the Truant, not both (CF4). **(Lead's call, after the check:)** the host group's runtime state carries `stealTryUsed`, set by either Steal path and checked by both.
   - **Success takes the card only** (LE-16 holds). The coin spills on its square as a dropped pile. **The pile is "guarded" while its host group is unresolved** (lead's call, after the check, matching 4.7.5); it becomes a 1-tick Take once the group is resolved, or is auto-gathered at the end of a fight. The Truant plays its stolen act (6) and leaves. k + 1. Logged `WindfallStolen{unit}`; `WindfallState.state` becomes `stolen`.
   - **Failure** starts the fight as any failed Steal does (nobody Surprised). The Truant wakes **at its starting count for the party size** (3, or the solo arm's 4) **after the live-size check**: below the allowed size it stays Dormant (lead's call, after the check). There is no extra Tattle (rejecting Model C's squeal).
@@ -770,9 +771,9 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 
 #### 4.7.10 Frequency, carry and determinism
 
-- **Grandchild.** `Derive(lootPlan, FNV-1a("windfall"), 0)`, in LE 6.10 item 1's scheme (`lootPlan` is already per floor, so the kind is `windfall` and the entry index 0; renamed after the check from the proposal's `lootPlan/windfall/<floor>`). It has **4 draws consumed on every floor, F1–F5**, door or no door, host or no host, party size or skin or not, taken at the **start of step 8** (4.7.6):
-  1. presence: on when (draw mod 1000) < `windfallPermille[f]`;
-  2. host: `eligible[draw mod count]`, with the formation-independent eligible hosts ordered by `socketId` (unused when there are none);
+- **Grandchild.** `Derive(lootPlan, "windfall", 0)` from the `lootPlan` key under the one key algebra (`LabelId` is FNV-1a, an input to `Mix` only), path `loot/lootPlan/{N}/windfall/0`, a stream-registry row (SV-1, SV-2, M1 rule; seeds and validation design 4.1–4.3), in LE 6.10 item 1's scheme (`lootPlan` is already per floor, so the kind is `windfall` and the entry index 0; renamed after the check from the proposal's `lootPlan/windfall/<floor>`). It has **4 draws consumed on every floor, F1–F5**, door or no door, host or no host, party size or skin or not, taken at the **start of step 8** (4.7.6):
+  1. presence: on when `Bound(draw, 1000)` < `windfallPermille[f]` (multiply-shift replaces `mod 1000`; SV-1, M1 rule);
+  2. host: `eligible[Bound(draw, count)]` (SV-1), with the formation-independent eligible hosts ordered by `socketId` (unused when there are none; `Bound` is never called with count 0);
   3. pad;
   4. pad.
   LP-1 adds this as a new row of LE 6.10 item 1's draw table (`windfall`, 4 draws, 1 entry per floor, F1–F5) and step 8 to item 4's generation order (lead's call, after the check).
@@ -786,7 +787,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
   - Set and clear are written in the same atomic camp-exit save.
   - Toy: about 1.2 per run without carry, about 1.4 with it, **at party 4 and with every theme skinned**. The lead's re-estimate under the party ladder and the M3 skins, about 0.6–0.9 per run *(illustr.)*, is in 0.1 and was accepted for the M3 pilot (agreed, Q6); the simulator reports the real figure by theme mix (9.3 `WindfallsPerRun`).
 - **Runtime.** No draws at wake, hop, nab, slip or escape. The only roll is the keyed-hash Steal. Save and resume mid-fight persist `WindfallState{c, state, square, slipUsed, heldSteps}` and the host group's `stealTryUsed`. Reload changes nothing.
-- **LootDoorInvariant.** Card identities never change by door. Presence and host may differ by door (placement), which is logged. V15 golden seeds check this.
+- **LootDoorInvariant.** Card identities never change by door. Presence and host may differ by door (placement), which is logged. V15 golden seeds check this (golden seeds and the release seed set: seeds and validation design 4.11; SV-18).
 
 #### 4.7.11 The Ebb and the exploration Truant (M4; agreed, Q3; change LP-34)
 
@@ -886,7 +887,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
   - **New step 8** (Windfall card move), draw-free, inside step 3a. The `windfall` grandchild's 4 fixed draws are taken at its start, on every floor (4.7.10).
 - **Step 3 (parent stream).** The Windfall's slot is drawn filter-first without `oncePerRun` records (filter (f2), 4.7.6).
 - **LootBind.** Draw-free, in 4.3's numbered order: item-7 remaps and the offer-pacing trim; container squares; the Windfall host check, move or drop; home, Rathole, route and C; merges; Proprietors and skins; coin lumps, purse and salvage.
-- **Runtime.** No draws at open, Glean, wake, hop, nab, slip or escape. The only existing checks are Steal (Truant: keyed hash), lock checks and noticing.
+- **Runtime.** No draws at open, Glean, wake, hop, nab, slip or escape. The only existing checks are Steal (Truant: keyed hash), lock checks and noticing; out of combat, Steal and noticing roll on the floor's `checks` keyed domains, never the combat stream (SV-6; seeds and validation design 4.3).
 - **Assertions.** V13g and V15 assert every filter (a)–(g) **after step 8** ((f2) after the parent draw). A hook goes to the LE owner: the same latent shuffle issue exists for secret filter (b) and the quota card at steps 6–7 (CB2, pre-existing).
 - **Client switches add no draws.** Opening the solo arm (Q2) changes no draw count or position: the 4 draws are consumed at every party size (V15 draw-count test).
 
@@ -940,7 +941,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 | Rule | Content | Change |
 |---|---|---|
 | CT1 | Silhouette families never overlap within a theme: loot containers, catch hosts, boxed-lurker host (shares with loot by design), bait cache, Furnishings and Low pieces, Kegs, reserved trap tells, Truants, cross-theme variants (signature cache, Wager cages, Viaticum host). Role-ID gate rows: "container or Furnishing", "container or bait", "Truant or minion", "Truant or boxed lurker"; **added after the check:** "Truant or faction minion", "inset container or Latch, Door or Hairline", "Rathole or Portal skin", "Bedside Stand or Latch, Furnishing". Truants and their bundles never use the theme's faction motif or minion palette (4.7.1) | LP-15 |
-| CT2 | **ContainerArtBlind.** Two variants per family, chosen by a display hash of (floorSeed, containerId). No size step by rank, no glow, beam or tinted lid | LP-15 |
+| CT2 | **ContainerArtBlind.** Two variants per family, chosen by a display hash of (floorSeed, containerId) (the `display` key's `containerArt` domain over (floor, containerId), a `DisplayKey` that Core never references; SV-2, M1; seeds and validation design 4.3). No size step by rank, no glow, beam or tinted lid | LP-15 |
 | CT3 | Locks are skins on one padlock base plus a kind glyph. Never a keyhole, face part, ring or clock face | (settled TL 8) |
 | CT4 | Containers never idle. Open act ≤ 1.0 s. The opened state is true (lid up, empty). Truants are units with a Dormant breathing idle | (settled RC1) |
 | CT5 | Tier marks are UI only, colour-blind safe by count and word | (settled LE 6.15) |
@@ -1310,7 +1311,10 @@ Events: LootBindRemap{reason}, LootBindUnplaceable{socketId}, WindfallMoved{from
 
 ### 9.2 V15 `LootSources` (change LP-31; beside V13 and V14 in RS 11.2 and LE 10.2)
 
-Split like V13 and run at the shared assertion point after V13g:
+Split like V13 and run at the shared assertion point (AP2) after V13g and `V16g.SlotLegal`:
+
+- **Phase model and assertion point (SV-9, SV-20; M1 model, M2 complete; seeds and validation design 5.1, 5.2, 5.4).** Checks carry qualified ids (`V15.CheckName`) with one phase each; `s` and `t` parts fail the build; V15g runs at AP2 after V13g and `V16g.SlotLegal`, and acts by its failure class: `repair` (7c's LP fallbacks: square fallbacks, remaps, Windfall move or drop, `ProprietorFallback`, offer trim; LR1), then `waivable(LootBindDegrade)` (LR4, 4.3); on an HE or Due socket, `defect` (LR5). Waves: M1 rows (below); M2; M3 Windfall rows.
+- **Pending request (segments 11–12; SV-20, M1):** the 7c owner itemises V15's M1 rows before the M1 goldens. Not a rule until the 7c owner rules; fallback: segments 11–12 itemise the M1 subset from this section (the rows touching F1 binding), and the 7c owner confirms it on the M1 checklist (seeds and validation design 14.2).
 
 - **V15s (static).**
   - Every theme has a skin for every container kind it hosts.
@@ -1323,6 +1327,7 @@ Split like V13 and run at the shared assertion point after V13g:
   - `BedsideStandOnly` (new lead's call, 4.10).
   - Every `onHit` ability lists `ignoresWindfall`.
   - Cue ids are in RC7 once the RS owner approves.
+  - **HE/Due socket-binding proof** (LR0): `LootBindUnplaceable` on an HE or Due socket is impossible by construction, so V15g's HE/Due case is a `defect`, held at 0 (SV-10). **Pending request (segments 11–12; SV-10, SV-20; M1 assert, M2 proof):** the 7c owner supplies the proof. Not a rule until the 7c owner rules; fallback: M1 ships V15g's assert as `defect` with the soak at 0, and M2 sign-off stays blocked until the proof exists (told plainly: no M2 fallback; seeds and validation design 14.2).
 - **V15g (generation).**
   - Every socket has one kind and rank, or is unranked, and is bound to a legal square (4.3); traps-bound sockets kept their square; no `LootBindUnplaceable`.
   - The role table (`loot.roleTable`) is met; ≤ 1 card-bearing container per room (`cardEligible`); ≤ 1 coin-only container per room after merges.
@@ -1336,15 +1341,15 @@ Split like V13 and run at the shared assertion point after V13g:
     - F2–F4, ≤ 1, not trimmed, party size in `windfallParties`, and the floor's theme has a non-empty pilot skin list for the wave;
     - host exclusions, including the Annex, a boxed lurker and the first fight, checked on the final host;
     - the final host encounter's 3 notables and carried caps with the Windfall counted;
-    - `OneClockPerRoom`, run after segment 8;
+    - `V10.OneClockPerRoom` (V10's check, run at V15g; SV-20), run after segment 8;
     - `WindfallRouteSafe` (route legality; route length exactly L = 4, stored as `routeLength`);
     - `WindfallCatchable` (4.7.8's algorithm for each class at floor level; home ≥ 4 path squares from, and not within 1 move of, the entry Portal);
     - `WindfallOffGuarantees` (the Due, DH, Viaticum, keys, secrets and lean band unchanged with the Windfall forced to escape);
     - `WindfallBudgetInside` (deck VP and Ledger A unchanged).
   - `GleanNoLeak`.
-  - The `windfall` grandchild's draw count (4) is equal on every floor, door, party size and theme.
+  - The `windfall` grandchild's draw count (4) is equal on every floor, door, party size and theme (kept as a citation; V19g's DrawLedger calls it at every stage end; seeds and validation design 5.2).
 - **V15t (tests).**
-  - LootDoorInvariant golden seeds, with Windfalls present, moved, dropped and carried.
+  - LootDoorInvariant golden seeds, with Windfalls present, moved, dropped and carried (goldens and the release seed set, which covers Windfall present and absent: seeds and validation design 4.11; SV-18).
   - Reload after camp exit replays the carry. Carry cases: set by a drop; kept across a party- or skin-ineligible floor; not stacked when presence would pass anyway; cleared when a Windfall survives LootBind; cleared at the end of F4 generation.
   - Resume mid-fight replays hops including `slipUsed` and held steps.
   - Dormant is untouched: a fight-opening area over its square does not nab it unless the square is still included after the wake.
@@ -1364,11 +1369,11 @@ Split like V13 and run at the shared assertion point after V13g:
 | `LootDetourSquares` | SR0 median ≤ 2 |
 | `ContainersPerFloor` | ≤ Ledger A + 3 |
 | `ContainerCapTrim` | — |
-| `ContainersOpened` | Paranoia alarm at −10% (kept) |
+| `ContainersOpened` | Paranoia alarm at −10% (kept; one row, 7c owns it, the others read; SV-24) |
 | `ContainerMisreadRate` | — |
 | `LootTakenShare` | — |
-| `SecretFoundRate` | — |
-| `TallyChaseSeconds` | ≤ 30 s (kept) |
+| `SecretFoundRate{lodestring}` (one keyed family with XI's `SecretFindRate`; SV-24) | — |
+| `TallyChaseSeconds` | ≤ 30 s (kept; LE's row, 7c reads it; SV-24) |
 | `OffersPerFloor` | ≤ 2 |
 | `ProprietorFallbackRate` | ≤ 10% (fallbacks ÷ tagged sockets) |
 | `WindfallNabRate` | 80–95% |
@@ -1387,7 +1392,11 @@ Split like V13 and run at the shared assertion point after V13g:
 | `CompanionChaseDowns` | — |
 | `SecretCardShareWithWindfall` | ≥ control |
 
+**Report registry (SV-24, M2; seeds and validation design 6.3, 6.10, 6.12).** Each row above is one report-registry row with one result class: the Windfall gate rows SHIP (M3); `ProprietorFallbackRate` BUDGET; `ContainersOpened` ALARM; the 7c clock line (LP-10) BIND, fired before any CMP 7.4 lever; the rest REP, WATCH or FELT. `LootBindDegrade` is a BUDGET row (≤ 0.3% *(illustr.)*; 4.3).
+
 ### 9.4 Simulator arms
+
+**Qualified names (SV-22, M2; seeds and validation design 6.2).** The 7a-only baseline is the toggle `LP.Loot7aOnly`; the policies are the `LootPolicy` axis (`LootPolicy.Greedy`, `Balanced`, `Smart`, `Ignore`, `Blocker`, `Pull`); the declining party ladder is `Party.ScheduleDeclining` (M3). **Pending request (segments 11–12; SV-22):** the 7c owner names the default `LootPolicy`. Not a rule until the 7c owner rules; fallback `LootPolicy.Balanced` (seeds and validation design 14.2).
 
 - 7a-only baseline against 7c;
 - the walker re-baseline;
@@ -1403,7 +1412,7 @@ Split like V13 and run at the shared assertion point after V13g:
 
 | Wave | 7c content |
 |---|---|
-| **M1** | F1 role-table subset (Kennel), LootBind square legality, Plain containers and the pen box, the Due on the first HE-7, HE-3/7, the coin floor, ≤ 1 carried notable, Old Ragged's signature cache, V15 M1 rows |
+| **M1** | F1 role-table subset (Kennel), LootBind square legality, Plain containers and the pen box, the Due on the first HE-7, HE-3/7, the coin floor, ≤ 1 carried notable, Old Ragged's signature cache, V15 M1 rows (itemised by the 7c owner, a pending request; 9.2) |
 | **M2** | Full socket table and ranks; all LootBind rules and remaps; Keybearer and key target; secrets and Alcoves; bait-cache placement with the Mousetrap (EP 6.8.1; moved from M3 after the check); the Heavy Purse; Steal targets; the Viaticum lair-room binding and the Bedside Stand (agreed, Q5); tier marks, Proprietor tags and the Treasure strip by source; the numbered click table and auto-close; optional Glean; inset containers; the container count and cap; the 7c clock line (after the walker re-baseline); catalogue CT1–CT15, the inset forms and the signature loot moments, and LP-15 to LP-25; Uncorked (if agreed); V15s and V15g; M2 reports |
 | **M3** | **Windfall Truant pilot** (Rabbit, Crumb Mouse, Alms Crab; party ≥ 3; agreed, Q1, Q2, Q4); the solo arm and, if it passes, solo at C = 4; Wager, Dare, Strongroom, boxed lurker and Twin Coffer placement; offer pacing; the "Got away" line; held candidates Blocked Hairline and Chained Key if the clock allows |
 | **M4** | Ebb (forking only) and the exploration Truant (agreed, Q3); remaining Truant skins (Silverfish, Rent Snail) and Ebb skins; the width-2 offer lever; the Void-exit Ebb at Nightmare tier; the Inverted Cathedral family. **No F1 teaching Ebb** (agreed, Q4) |
@@ -1699,8 +1708,8 @@ The owed rows are the single list in 13; by owner:
 - **The companions owner:** LP-8 (7.4), LP-33 (8.6).
 - **The class owners:** `ignoresWindfall` (V15s).
 - **Segment 8 (events), segment 9 (bosses), segment 10 (UI) and audio:** 4.12, 4.13, 6; segment 8's no-clock-Landmark rule in Windfall rooms; segment 9's arena reading. Segment 8 is now designed (events design, approved 2026-11-22): its EV-2, EV-7, EV-15, EV-21, EV-25, EV-35 and EV-42 rows touch 7c (4.13); `stepFunded` and F-CACHE are pending requests to 7c. Segment 9 is now designed (boss rooms design, approved 2026-11-22): its BR-27 and BR-37 rows touch 7c (4.4, 4.10, 4.13). Segment 10 is now designed (exploration and information design, approved 2026-11-23): its XI-19, XI-23 and XI-27 rows touch 7c (4.2, 4.12, 4.13, 7), and XI-10 and XI-18 read 4.2 and 4.7.3; `SideRoomPayoffMix` is a pending request to 7c.
-- **Segment 11 (seeds):** the `windfall` grandchild (LE 6.10 item 1's new row), SocketPlan, step 8 and LootBind's sub-order in the frozen generation order (LE 6.10 item 4).
-- **Segment 12 (validation):** V15 and the 7c reports.
+- **Segment 11 (seeds):** the `windfall` grandchild (LE 6.10 item 1's new row), SocketPlan, step 8 and LootBind's sub-order in the frozen generation order (LE 6.10 item 4). **Answered** by the seeds and validation design (approved 2026-11-23; its 4.3 and 4.4): `loot/lootPlan/{N}/windfall/0`, fixed 4, attempt-invariant (M3); SocketPlan at GS9, step 8's Windfall draws at the start of step 8 inside 3a (GS10), LootBind at GS14 in 4.3's numbered order; its SV-1, SV-2, SV-6, SV-9 and SV-31 rows touch 7c (2.1, 4.2, 4.3, 4.7.8, 4.7.10, 4.11, 5.1 CT2).
+- **Segment 12 (validation):** V15 and the 7c reports. **Answered** by the seeds and validation design (approved 2026-11-23; its 5.1, 5.2, 5.4, 5.5, 6.2, 6.10): V15's qualified phases and failure classes, V15g at AP2 after `V16g.SlotLegal`, `LootBindDegrade` at LR4, the report-registry rows and the qualified arms; its SV-10, SV-18, SV-20, SV-22 and SV-24 rows touch 7c (4.3, 9.2–9.4, 10). Pending requests to 7c (not rules until ruled; fallbacks in its 14.2): the V15 M1 rows, the HE/Due binding proof, the default `LootPolicy`, and the merge-or-coin rule of `LootBindDegrade`.
 - **The camp and hub design:** Lost Property; the Hawker's Hour with segment 8 (Later; events design EV-42).
 - **The simulator:** every report of 9.3 and every arm of 9.4.
 - **Art, audio and writing:** 5, 6; Proprietor tags.

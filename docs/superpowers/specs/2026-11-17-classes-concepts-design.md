@@ -436,6 +436,11 @@ tolerance and the miss rules lead's call)**
   a target on floor 1. Each class names a `seedTarget` predicate (12.1);
   the check passes when, on every floor-1 seed of the validation corpus,
   at least N *(illustr. 2)* main-path encounters satisfy it.
+  **(change SV-20; M2)** Owned here, it is a generation (`g`) check
+  executed in V12g at the second floor assertion point (AP2); a miss
+  acts by V12g's failure class, `stageRetry(encounters)`, then V12's
+  waivable or never-waived end (seeds and validation design 5.1, 5.2,
+  5.4).
 - **Per-round breakdown of the solo boss** (simulator report): in each
   class's floor-1 boss fight, the share of rounds 2 and later in which
   the signature fires (3.4), by level (1–3) and subclass. Rounds after the
@@ -452,11 +457,20 @@ tolerance and the miss rules lead's call)**
   cards" − "Herald without heal cards" ≤ 10 points win rate, on the
   reference arm) also blocks the M2 release; the Herald reliance and
   desirability reports stay reports, with escalation thresholds (Herald
-  design 5.4).
+  design 5.4). **(change SV-23; M2)** Result classes (seeds and
+  validation design 6.3): `Floor1ClassSpread` and the heal-isolation
+  gate are **REL** (they block wave sign-off until the levers pass or
+  the client re-rules, as above); the CL reliance reports escalate as
+  **ESC**. After the M2 cap decision they bind at the shipped cap
+  (reading of CMP 7.4). `Floor1ClassSpread` is read on the observed
+  spread inside every split, and a marginal split fails (seeds and
+  validation design 6.4).
 - **(change CMP-29)** The companions reports are added (companions design
   11.4), and **`FloorTimeByPartySize`** is the first M2 gate (agreed
   2026-11-20, companions Q2; companions design 7.4). Pass or fail
-  verdicts read the M2 simulator only, never a toy.
+  verdicts read the M2 simulator only, never a toy. **(change SV-21,
+  kept)** The M1 simulator skeleton prints reports only (seeds and
+  validation design 6.1).
 - **(change BR-40; M2)** The boss-room reports and arms join these
   (boss rooms design 9.3, 9.4): `ClassBossContribution` (clear rate of
   the fixed arrival state per class, spread ≤ 10 points across classes,
@@ -1893,6 +1907,11 @@ companion-kit id, read by `LeanWithoutBaseline`.
 
 ### 12.2 Content validation
 
+**(change SV-20)** This suite is registered as `content.*` rows with the
+VG, SH, ARC and HR codes (seeds and validation design 5.2); its build
+(`s`) checks fail the build, and `SeedHasTarget` acts by its failure
+class (5.6).
+
 **(lead's call)** The build fails when:
 
 - `ForbiddenClassGrant`: a class, subclass, companion kit or species
@@ -1910,7 +1929,9 @@ companion-kit id, read by `LeanWithoutBaseline`.
   `baselineRoutes[]` in `utilities.json` (12.1);
 - `ClassGatedContent`: a dungeon, encounter or reward record names a
   class id or class-only ability as a requirement;
-- `NameCollision` (10);
+- `NameCollision` (10); run by `V7.NameRegistry`, which this document
+  and the class docs feed (change SV-20; seeds and validation design
+  5.2);
 - `LeanSpread`: among the classes unlocked by default, a utility is the
   primary lean of two classes, or is leaned on by more than two classes,
   each counted with its subclasses (6.2); re-run per unlock tier as a
@@ -1921,7 +1942,9 @@ companion-kit id, read by `LeanWithoutBaseline`.
   button where a trigger would do (7.3);
 - `SeedHasTarget` (content check on the floor-1 generator): on some
   floor-1 seed of the validation corpus, fewer than N *(illustr. 2)*
-  main-path encounters satisfy a class's `seedTarget` (5.6);
+  main-path encounters satisfy a class's `seedTarget` (5.6); a
+  generation check executed in V12g at AP2, not a build check (change
+  SV-20; seeds and validation design 5.2, 5.4);
 - the existing rules apply as written: `MissingRestDefensiveTool`,
   `HealPerTargetAboveRecovery` (DH 21.2), the cap of eight counted per
   CL-2 as distinct pool ids reachable from the class table plus the
@@ -1971,7 +1994,8 @@ companion-kit id, read by `LeanWithoutBaseline`.
 lead's call)**
 
 - `Floor1ClassSpread` (≤ 10 points, client number; a gate on the M2
-  release, 5.6, confirmed by the client 2026-11-18) inside every split,
+  release, 5.6, confirmed by the client 2026-11-18; result class REL,
+  change SV-23) inside every split,
   with the per-class death share and the headroom measures; the
   per-round signature firing in each class's floor-1 boss fight,
   boss-only rounds separate (a report).
@@ -2017,11 +2041,20 @@ lead's call)**
   `Floor1ClassSpread` gates (Arcanist design 5.4).
 - Creation pick rate per class (playtest and telemetry, 15).
 - `Floor1BossSustain` per class at the reference and the lowest legal Con
-  (DH 21.1 step 6), the Herald with and without a heal card.
+  (DH 21.1 step 6), the Herald with and without a heal card. It is an
+  arithmetic BUILD content check, not a simulator row (change SV-23;
+  seeds and validation design 5.2, 6.3).
 
 ## 13. Staging
 
 **(lead's call)**
+
+**(change SV-29, read; M1–M3)** The wave sign-off checklists (seeds and
+validation design 7) read this table unchanged: M1 asks for the CL M1
+checks and `Floor1BossSustain` (Vanguard, BUILD); M2 for
+`Floor1ClassSpread` ≤ 10 in every split, `HealerGap` and
+`HealIsolation` as REL rows; M3 for `Floor1ClassSpread` per Nightmare
+tier and heal isolation for Warcaller and Pennant.
 
 | Wave | Content |
 |---|---|
@@ -2094,7 +2127,7 @@ tell the classes apart in the first fight".
 | Risk | Mitigation, report and lever |
 |---|---|
 | ~~The T6 change is refused~~ (closed: CL-1 approved and applied 2026-11-18) | Recorded only. Had it been refused, the Herald's routs would run on T5 only; fallback Cadence Frighten as the whole rout engine |
-| **Floor-1 spread:** the Vanguard (full Second Wind, sturdy 8, AC 18) is structurally favoured; the Herald depends on the roster's non-fearless share and the escort | `Floor1ClassSpread` inside every split, with the headroom measures; CL-10; a creation pick-rate measure per class (playtest). Levers are any class's data, the Vanguard's own included (Techniques size, Surge timing, shield AC through starting kits); only the existence of the one full-Recovery Second Wind is protected |
+| **Floor-1 spread:** the Vanguard (full Second Wind, sturdy 8, AC 18) is structurally favoured; the Herald depends on the roster's non-fearless share and the escort | `Floor1ClassSpread` inside every split, with the headroom measures; CL-10; a creation pick-rate measure per class (playtest). Levers are any class's data, the Vanguard's own included (Techniques size, Surge timing, shield AC through starting kits); only the existence of the one full-Recovery Second Wind is protected. Precedence (change SV-26, read; M2): a PR1 gate; spread first, DH F1 levers only if the spread still passes; re-read after every ARC lever; one lever at a time, its blast radius rerun (seeds and validation design 6.9) |
 | **The Shade's solo rounds 3 and later** | The Answer trigger (8.4) and the Vanish carry (Hidden for Opening; SH-2); the per-round breakdown, boss-only rounds separate, run before stage 2 sets the Tricks size; then stage 2 raises Tricks |
 | **Camp share for the martials** | Both may miss 40–60% after the fixes. The pool cap stops new pools, so the lever is weighting capstone and subclass value toward camp |
 | **The healer gap** | The DH 18.1 gate, with the Herald arms and healer count beside it (CL-9), and the heal-isolation gate (HR-38; 12.3). Lever order (DH 18.1): heal-card targets (Hearth) and heal-specific sub-limits in Herald and companion data, never the Herald's slot or Cadence pools (change HR-38; Herald design 5.4); then random potion weight for everyone. Never the guarantee |
@@ -2312,6 +2345,9 @@ shows the Vanish clause.
 - **Multiclassing (M4):** the model, inside the dip guards (7.7).
 - **Dungeon generation:** `SeedHasTarget` and its `seedTarget`
   predicates; the floor-1 cowable group before the boss room (CL-10).
+  Taken up for `SeedHasTarget` by segments 11–12: executed in V12g at
+  AP2, and `NameCollision` run by `V7.NameRegistry` (change SV-20;
+  seeds and validation design 5.2, 5.4).
 - **Profile and unlocks (M3):** the unlock order (9.4).
 - **Naming pass:** every placeholder name here.
 - **Lead's checks before data:** every SRD shape in this document against

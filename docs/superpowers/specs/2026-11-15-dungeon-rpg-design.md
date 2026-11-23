@@ -381,7 +381,11 @@ queries over `PartyKnowledge` (exploration and information design 4.1.1,
 ### 6.3 Determinism
 
 - The core uses its own seeded random number generator, not the platform
-  one, so results do not change between runtime versions.
+  one, so results do not change between runtime versions. It is a
+  SplitMix64 key algebra: every child key is derived from its parent's
+  key, label and indices, never from another stream's counter, and every
+  bounded integer uses multiply-shift `Bound` (seeds and validation
+  design 4.1; change SV-1, M1).
 - Separate random streams for dungeon generation, combat rolls and loot.
   Opening a chest must not change the next attack roll. A `recruit` stream
   sits beside them, with per-camp, per-slot and gap substreams and
@@ -389,8 +393,21 @@ queries over `PartyKnowledge` (exploration and information design 4.1.1,
   children (companions design 7.2; change CMP-3). A `route` child of
   the dungeon stream is consumed only at run start and draws each
   floor's theme and boss; each floor generates from a dungeon substream
-  keyed by floor index (run structure design 6.4; change RT-3). Each
-  floor's dungeon substream has a `layout` child, drawn with fixed counts
+  keyed by floor index (run structure design 6.4; change RT-3).
+  `dungeon`, `loot` and each floor substream are never drawn; they only
+  derive children. Every stream is a row of the stream registry (path,
+  count class, count, stage, retry scope, owner, wave), and core code
+  opens a stream only through its registry handle (seeds and validation
+  design 4.2, 4.3; changes SV-2, SV-31, M1). Each floor substream's
+  generation children (`layout`, `terrain` and its `hazards`, `traps`,
+  `encounters`, `trapsResolve`, and dressing) sit under an
+  `attempt/{a}` child: a = 0 normally, and a floor retry takes the next
+  attempt (a keyed child, never `seed + 1`); a single-stage retry uses
+  that stage's keyed `retry1` child. `curiosities`, `checks`, every
+  loot and recruit key and (Later) `trader` are attempt-invariant, so a
+  retry never moves them (seeds and validation design 4.3, 5.5;
+  changes SV-4, SV-31, M1; `curiosities` M2). Each floor's dungeon
+  substream has a `layout` child, drawn with fixed counts
   per Blueprint; the party-agnostic graph is drawn first and the party
   band picks only size classes; dressing draws from a display-side
   stream the core never reads (floor layout design 6.1; change FL-2).
@@ -398,6 +415,9 @@ queries over `PartyKnowledge` (exploration and information design 4.1.1,
   layout with fixed counts, places room terrain; every piece on a
   walkable square comes from it, not from dressing (room terrain design
   6.2.5; change TR-17).
+  A `hazards` grandchild of `terrain` (`terrain/hazards`), drawn after
+  all terrain with fixed counts, places hazards (hazards design 11; change
+  HZ-28; seeds and validation design 4.3; change SV-31, M2).
   A `traps` child of each floor's dungeon substream, drawn after
   hazards and before encounter placement with fixed counts, draws trap
   and lock geometry and kinds; a `trapsResolve` child with fixed draws
@@ -408,17 +428,33 @@ queries over `PartyKnowledge` (exploration and information design 4.1.1,
   (keyed by `springIndex`) and out-of-combat attacks on objects also
   draw from `checks`, so a trap or lock handled between fights never
   moves the next fight's rolls (traps and locks design 6.22; change
-  TL-3, M1).
+  TL-3, M1). The same keyed-check spec, with one registered domain per
+  roll kind, also covers out-of-combat noticing (`h:notice`, M1) and
+  out-of-combat Steal (`h:steal`, M1), lurker Stealth (`h:lurkStealth`,
+  M2), out-of-combat hazard saves (`h:envSave`: falls and Plunge M2,
+  Dare rooms M3) and Curiosity checks (`h:curiosity`, M2); in-combat
+  noticing, Steal and hazard saves stay on the combat stream. So no
+  roll made outside a fight, including the noticing roll that starts
+  one, ever moves the next fight's rolls (seeds and validation design
+  4.3; change SV-6, M1 / M2 / M3).
   An `encounters` child of each floor's dungeon substream, drawn after
   `traps` and before `trapsResolve` with fixed counts and dummy draws,
   places enemy groups, so a placement retry never moves layout,
   terrain, hazards or traps (encounter placement design 6.1; change
-  EP-1, M1).
+  EP-1, M1). It is a node with a `plan` sub-key (slot plan, step 2a)
+  and a `place` sub-key (placement), and its retry is
+  `encounters/retry1` (seeds and validation design 4.2, 4.3; change
+  SV-31, M1).
   A `lootPlan` child of the loot stream, keyed by floor index, is
-  drawn in a new LootPlan step before the approved loot draws, which
-  keep their order and positions (count draws become dummy draws); each
+  drawn in a new LootPlan step before the approved loot draws; each
   consumer draws from its own keyed grandchild with fixed counts, so
-  adding a consumer never shifts another's draws. A draw-free LootBind
+  adding a consumer never shifts another's draws. The approved loot
+  draws (step 3) are keyed per floor (`loot/floor/{N}`) and per entry
+  block (`loot/floor/{N}/{block}/{entry}`); their approved order is kept
+  as the order in which blocks are evaluated, and the count dummies and
+  ghost draws that held positions on one sequential stream are retired.
+  The Reprieve Phial pre-roll (`loot/run`) is always 3 draws (seeds and
+  validation design 4.3; change SV-5, M1). A draw-free LootBind
   step runs after `trapsResolve`, and floor N+1's generation and the
   camp-exit save are one write (loot economy design 6.10; change
   LE-14, M1).
@@ -431,8 +467,17 @@ queries over `PartyKnowledge` (exploration and information design 4.1.1,
   never consumed on the route stream, draws each boss's Rendition and
   mirror bit; arena stamping makes no draws (boss rooms design 4.10.1,
   4.15; change BR-2, M2).
+- Each floor is generated in one canonical order (GS0–GS17) and
+  checked at two assertion points: AP1 after traps, before loot (HE-7's
+  point), and AP2 after LootBind and EventPlace. A failed check climbs
+  one retry ladder (LR0–LR5) in every build, at most 3 attempts; in a
+  release build a floor that still cannot be built ends the run cleanly
+  (agreed 2026-11-23, Q2) (seeds and validation design 4.4, 5.4, 5.5;
+  changes SV-9, SV-10, M1 / M2).
 - Rules use integer arithmetic only.
-- No reliance on unordered collection iteration.
+- No reliance on unordered collection iteration. Both are enforced by
+  the Core analyzer (seeds and validation design 4.5, DS11; change
+  SV-28, M1).
 
 ### 6.4 Effects system
 
@@ -466,36 +511,72 @@ largely to prove it.
   point, with a fixed write order, so a reload cannot undo a cost or
   re-roll (events design 4.10; change EV-21, a reading, M2). The run
   snapshot includes `PartyKnowledge` (exploration and information design
-  4.1.1; change XI-1, read).
+  4.1.1; change XI-1, read). Every generated floor is stored with the
+  run as an immutable static floor file (`FloorStatic`, named by its
+  content hash) with the `GenInputs` it was generated from, so a load
+  never regenerates a floor and a patch never changes one already
+  built. Every save file carries the run's `runId` and a monotone
+  `seq`, and saves follow fixed write orders (WO1–WO8: run start, on a
+  floor, Curiosity resolve, floor exit, Travel on, death, victory or
+  unravel, load, camp command); floor N+1 is generated at Travel on and
+  committed with the camp-exit save (seeds and validation design 4.8;
+  change SV-14, M1 run save and log, M2 the rest).
 - **Suspend slot (permadeath):** while a run is on a floor, one suspend
-  slot holds the full core state and is overwritten after every committed
-  command (every step, act, combat action, death, Down and paid act);
-  quitting writes it too. Writes go to a temporary file, then an atomic
-  rename over the slot; a paid knowledge act's result is shown only after
-  its write has landed. Loading reads and validates the slot, deletes it,
-  writes the current state back as the new slot, then accepts input. The
+  slot holds the full core state: a snapshot at floor entry
+  (`suspend.base`) plus a state-delta journal (`suspend.journal`) with
+  one record appended and flushed after every committed command (every
+  step, act, combat action, death, Down and paid act), compacted into a
+  fresh base often; quitting writes it too. The base is written to a
+  temporary file, flushed, then atomically replaced over the slot. No
+  frame whose content depends on a draw, a reveal, a Down, a death, a
+  spent counter or a paid act is shown until that command's write has
+  landed; the same rule covers camp commands that draw, spend or reveal
+  (the outcome rule). Loading reads and validates the slot, then
+  replaces it atomically with the re-validated state, then accepts
+  input; this meets "deleted on load" (seeds and validation design
+  4.8.3, 4.8.4; change SV-14, agreed 2026-11-23, Q4, M2). The
   slot always wins over the safe-point snapshot, and `PartyKnowledge` is
   forward-only, so a resume never undoes a death, a spent counter or a
   look. Camp and other safe points are unchanged, and no suspend slot
   exists outside a floor (exploration and information design 4.12;
-  change XI-28, agreed 2026-11-23, Q1, M2; segments 11–12 own the file
-  mechanics).
+  change XI-28, agreed 2026-11-23, Q1, M2; the file mechanics are
+  seeds and validation design 4.8).
 - **UI annex of the run save:** display state only (Waymarks and
   dismissed loose ends), outside the reproducibility key and never read
   by rules, the simulator or validators (exploration and information
   design 4.3.4, 4.7; change XI-7, an addition, M2).
 - **Command log:** kept alongside for replays, bug reports and tests. A log
   may stop replaying correctly after a content change, which is why it is
-  not the save.
+  not the save. A replay is valid only when its reproducibility key and
+  `rulesVersion` match the build (seeds and validation design 4.7;
+  change SV-17, read, M1).
+  Open item (pending, owed by this document): the game's telemetry
+  consent setting, under which a generation defect's local bug-report
+  bundle is sent (seeds and validation design 5.5; hook, agreed
+  2026-11-23, Q2). Until it exists, bug reports stay local and the
+  player can attach them by hand (seeds and validation design 14.2).
 - **Profile save:** unlocks, boons and difficulty tier, stored separately
-  from any run. From M2 it also holds `curiosityMemory` (version,
-  checksum, `shownCount`, `fullShown`, `recentRuns`, `last`,
-  `pendingClosure` and the rest of events design 9.1): display and
-  launcher memory of the Curiosities seen, outside the reproducibility
-  key; a file failing its version or checksum reads as empty. Personal
-  runs write every field; shared and daily runs write `shownCount` and
-  `fullShown` only; the simulator writes nothing (events design 4.5.1,
-  4.10, 9.1; change EV-19, agreed 2026-11-22, Q1, M2).
+  from any run. The grants that change rules (difficulty tier, boons,
+  Nightmare tier) enter the run's `configHash` (seeds and validation
+  design 4.6; change SV-12, read, field M1, live M3). From M2 it also
+  holds `curiosityMemory` (version, checksum, `shownCount`, `fullShown`,
+  `recentRuns`, `last`, `pendingClosure` and the rest of events design
+  9.1): display and launcher memory of the Curiosities seen, outside the
+  reproducibility key; a file failing its version or checksum reads as
+  empty. Personal
+  runs write every field; seeded runs (shared, daily and typed codes)
+  write `shownCount` and `fullShown` only, plus their marked
+  `runHistory[]` entry below; the simulator writes no player profile
+  (launcher-dependent arms write sandbox profiles in its launcher
+  emulator only) (events design 4.5.1, 4.10, 9.1; change EV-19, agreed
+  2026-11-22, Q1, M2; seeds and validation design 4.6, 4.7; changes
+  SV-13, SV-16, M2).
+  From M2 it also holds `runHistory[]`: one record per finished run,
+  personal or seeded, with `seedMode`, the result, the floor reached and
+  the code. A seeded run appears there marked seeded and advances no
+  unlocks, records, codex entries or launcher memory; `recentRuns` is
+  never written for a seeded run (seeds and validation design 4.7, 4.9;
+  change SV-16, agreed 2026-11-23, Q1, M2).
   Each `recentRuns` entry also holds `f1BossId`, written at run start
   for every launched personal run and read by the launcher's F1-boss
   streak rule (memory 2); outside the reproducibility key (boss rooms
@@ -509,7 +590,18 @@ largely to prove it.
   staged first-run disclosure; the same seed gives identical knowledge
   and previews on every profile (exploration and information design
   4.10; change XI-21, an addition, M2).
-- Saves carry a version number.
+- Saves carry a version number. A run's reproducibility key is
+  (`runSeed`, `genVersion`, `manifestHash`, `configHash`, `unlockHash`);
+  saves also carry `rulesVersion` and `saveVersion`, and each floor's
+  generation identity is the key plus that floor's `GenInputs` digest
+  (seeds and validation design 4.6; change SV-12, M1 fields / M2 / M3).
+  Every `saveVersion` bump ships a migration. A run in progress when a
+  patch lands continues: floors already generated are kept exactly,
+  later floors use the new version, the configuration, unlock and
+  `drawableSet` snapshots and route state never change, and a patch
+  that can change the run marks it not comparable for records and
+  shared codes (seeds and validation design 4.10, 4.10.1; change SV-15,
+  agreed 2026-11-23, Q3, M2).
 
 ### 6.7 Enemy AI
 
@@ -544,14 +636,25 @@ monster in data.
 - **Unit tests** for every rule: attack resolution, conditions, each class
   feature.
 - **Property tests** for generation: every floor is connected, the boss is
-  reachable, nothing spawns inside a wall.
+  reachable, nothing spawns inside a wall. Validator V19 `Conformance`
+  checks the seed machinery itself (every stream registered, every
+  stream draws exactly its declared count, no clock, profile or OS
+  read), alongside golden seeds and the release seed set (seeds and
+  validation design 4.11, 5.2; changes SV-18, SV-19, M1 / M2).
 - **Replay tests:** recorded command logs must reproduce the same final
   state.
 - **Balance simulation:** `Sim` plays many seeded fights with AI on both
-  sides and reports win rates and fight lengths per build and floor.
+  sides and reports win rates and fight lengths per build and floor. It
+  is one simulator with six instruments, and every report row declares
+  its result class, which says in advance what a miss does (seeds and
+  validation design 6.1, 6.3; changes SV-21, SV-23, read, M1 skeleton,
+  M2).
 - **Content validation** runs as a test, so a broken data file fails the
   build.
-- All of the above run with `dotnet test`, with no engine needed.
+- All of the above run with `dotnet test`, with no engine needed. CI
+  tiers (pull request, nightly, weekly, sign-off), their time budgets,
+  per-OS jobs and the minimum-spec runner are in seeds and validation
+  design 5.8 (change SV-28, read, extended, M1).
 - The Godot layer is checked by manual playtest at each milestone.
 
 ## 8. Ways of working
@@ -576,6 +679,9 @@ monster in data.
 
 M1 covers species selection only if it is trivial to include; otherwise
 species arrive in M4.
+
+The sign-off checklists for M1, M2 and M3 are in the seeds and
+validation design 7 (change SV-29, read, M1–M3).
 
 ## 10. Left to the builders
 
@@ -607,11 +713,15 @@ structure and concepts are settled in
 `2026-11-17-classes-concepts-design.md`; the feature lists are its
 stage 2 (classes design 14, 19; change CL-13a).
 
+The random number algorithm, the stream registry, the save file
+mechanics and validation are settled in
+`2026-11-23-seeds-validation-design.md`; they are no longer pending
+(seeds and validation design 4.1, 4.8, 16; change SV-1).
+
 - The four launch classes' feature lists (classes design, stage 2).
 - All numbers: hit points (shape settled there), damage, experience curve, loot rates.
 - The dungeon generation algorithm.
 - The JSON schema details.
-- The random number algorithm.
 - UI layout and art style.
 - The Godot version.
 

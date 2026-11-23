@@ -726,7 +726,8 @@ palette **(change RT-17; run structure design 7.4 RC2)**.
 
 ### 8.2 Composition order
 
-Fixed, and run on the dungeon random stream:
+Fixed, and run on the floor's `encounters/place` stream (10.5 step 7;
+seeds and validation design 4.3, 4.4 GS12) **(change SV-31)**:
 
 1. base type;
 2. level shift;
@@ -1096,17 +1097,23 @@ Deterministic:
 
 1. **Inputs:** rooms, main path, `expectedTenths` per room (6.3), party
    weight, ladder tier, theme, and the floor's boss. Theme and boss come
-   from the route pre-roll on the `route` child of the dungeon stream,
-   consumed only at run start; each floor generates from a dungeon child
-   stream keyed by floor index **(change RT-3; run structure design
-   6.4)**.
-1a. **Layout** (the `layout` child of the floor's dungeon substream):
+   from the route pre-roll on the `route` child of the `dungeon` node,
+   consumed only at run start and never moved by retries; each floor
+   generates under its floor key `dungeon/floor/{N}`, keyed by floor
+   index; `dungeon` and each floor key are nodes, never drawn **(change
+   RT-3; run structure design 6.4; change SV-31; seeds and validation
+   design 4.3)**.
+1a. **Layout** (the floor's `attempt/{a}/layout` stream; seeds and
+   validation design 4.3 **(change SV-4, SV-31)**):
    the floor layout design 6.1 runs here and outputs the rooms, main
    path, slot hosts and `equivalentHosts` **(change FL-3)**.
-2. **Floor plan** (dungeon stream): assign slots to layout's slot hosts;
+2. **Floor plan** (the floor's `encounters/plan` stream, GS8; seeds and
+   validation design 4.4 **(change SV-31)**): assign slots to layout's slot hosts;
    fix each slot's homeRoom **(change FL-3)**. **Later (change I-14):** right after the slots are assigned,
-   two dungeon-stream draws for the trader, always both, whatever their
-   outcome: presence and stock count (items design 10.9).
+   two draws for the trader on the floor's own `trader` key
+   (`dungeon/floor/{N}/trader`, attempt-invariant), always both, whatever
+   their outcome: presence and stock count (items design 10.9)
+   **(change SV-32; seeds and validation design 4.3; Later)**.
 3a. **LootPlan** (the floor's keyed `lootPlan` child of the loot stream,
    before step 3): over the provisional socket set (layout's containers
    and caches, the `traps` pass's lock kinds, step 2's slot plan and the
@@ -1116,7 +1123,9 @@ Deterministic:
    and offer options. Fixed draw counts on keyed grandchildren; step 4
    takes no draw, so the prediction is exact. **(change LE-14; loot
    economy design 6.9 item 2, 6.10; M1)**
-3. **Loot draw** (loot stream): the notable count per channel, then the
+3. **Loot draw** (the loot stream's per-floor key `loot/floor/{N}`, one
+   keyed block per channel and entry, attempt-invariant; **change SV-5**;
+   seeds and validation design 4.3): the notable count per channel, then the
    items in channel order (containers, enemy-carried, boss), then wand
    charges in item order (15.3), then the next camp's `camp` channel (its
    count and notables) and the vendor's limited potions, still under the
@@ -1134,13 +1143,18 @@ Deterministic:
    boss-card and Viaticum fallback kinds grow from 3 to 5 entries. Parent
    identities keep their positions, and each identity is filtered before
    its draw (filter-first, 15.3 step 2).
-   **(change LE-14)** The approved draw order above is unchanged: the
-   count draws are consumed as dummy draws and their results ignored,
-   since the deck of step 3a fixes the counts; channel slot *i* draws its
+   **(change LE-14)** The approved draw order above is unchanged, now as
+   the order in which the keyed blocks are evaluated: each entry of each
+   block has its own key `loot/floor/{N}/{block}/{entry}` (9 draws per
+   identity entry, filter-first), so a block's entry count moves no other
+   block and a floor retry re-runs loot from identical keys. The deck of
+   step 3a fixes the counts, so the count draws are not drawn; channel slot *i* draws its
    ordinary identity on the *i*-th socket of that channel in allocation
    order, filtered to that socket's tier; the boss channel draws only the
    signature (the reward card's options are drawn in step 3a). The Due's
-   slot is a ghost draw (15.3 step 2). The party snapshot at generation
+   slot takes no ghost draw: the count dummies and the Due and arms-floor
+   ghost draws are retired, since keyed blocks have no positions to hold
+   **(change SV-5; seeds and validation design 4.3 Loot; M1)**. The party snapshot at generation
    (owned gear, levels, training, living members) is also read, for the
    Due, fit premiums and usability fallbacks. **(change LE-2, LE-14; loot
    economy design 6.3, 6.10 items 2, 3, 7; M1 for F1, M2)**
@@ -1151,8 +1165,13 @@ Deterministic:
    then any returned trader slots on the containers channel, then wand
    charges, the camp channel, the trader's tonic (moved from the
    containers channel, no draw) and its service (items design 10.9).
+   The trader's notables take the loot `trader` block
+   (`loot/floor/{N}/trader/{entry}`, evaluated in the order above); no
+   parent positions are inserted **(change SV-32; seeds and validation
+   design 4.3; Later)**.
    **The Reprieve Phial is never a weighted draw.** One pre-roll per run,
-   on the loot stream, decides whether it appears, its floor and its
+   on the loot stream's run key `loot/run` (always 3 draws: offer, floor,
+   channel; **change SV-5**), decides whether it appears, its floor and its
    channel; it replaces one notable draw of that floor and channel (a
    `campReward` phial takes a container draw of that floor). A declined
    offer is lost for the run (consumables design 14.7). **(change CN-27)**
@@ -1164,7 +1183,8 @@ Deterministic:
    the first free carrier room in a fixed order: the optional elite room,
    then the lair, then guard posts by main-path index, then the patrol.
    The boss item goes to the boss room.
-5. **Template choice** (dungeon stream): pick per slot, weighted,
+5. **Template choice** (the floor's `encounters/place` stream, GS12;
+   **change SV-31**): pick per slot, weighted,
    respecting the no-repeat rules. A carrier room's template must include
    a slot whose role and `usableBy` fit its item. The weights read the
    formation tier and the slot's position (the first main-path fight
@@ -1188,7 +1208,11 @@ Deterministic:
    candidate, then the theme's cheapest legal Picket in Picket Line, then
    that Picket placed role-blind under the hard constraints only; every
    retry is logged **(change EP-32; encounter placement design 6.1, 11.2;
-   M1 static parts, M2 the rest)**.
+   M1 static parts, M2 the rest)**. The floor assertions run at the
+   final assertion point AP2, after LootBind and EventPlace, with EP's
+   `encounters/retry1` as AP2's first act; a retry is logged as
+   `StageRetried` and a fallback as `GenerationFallback` **(change SV-9;
+   seeds and validation design 5.4, 5.5; M1)**.
 9. **Cluster pass:** downgrade or move the cheaper neighbour when the
    cluster budget is exceeded. A move stays within the group's slot host
    or goes to a host layout lists as equivalent for that role
@@ -1197,18 +1221,28 @@ Deterministic:
    design 6.1, 6.6)**.
 10. **Awareness:** set states, patrol routes, lurker placement rolls and
     ambush tells. Lurker placement Stealth takes no stream draw: it is a
-    keyed hash (12.2) **(change EP-3; encounter placement design 6.8.5;
-    M2)**.
+    keyed hash in the `h:lurkStealth` domain on the floor's `checks` key
+    (12.2) **(change EP-3; encounter placement design 6.8.5;
+    M2; change SV-6, SV-31; seeds and validation design 4.3)**.
 11. **Experience:** fix each group's experience shares (16).
 
-Every step except 3a and 3 draws only from the dungeon stream (the floor's
-substream keyed by floor index; **change RT-3**), in the order listed.
-**(lead's call)** Step 1a draws only from that substream's `layout`
+Every step except 3a and 3 draws only under the floor key
+(`dungeon/floor/{N}`, keyed by floor index, itself never drawn; **change
+RT-3; change SV-31**), in the order listed.
+**(lead's call)** Step 1a draws only from the attempt's `layout`
 child (floor layout design 6.1) **(change FL-3)**. Steps 2 and 4–11
-(dungeon generation segment 6) draw only from that substream's
-`encounters` child, after the `traps` pass and before `trapsResolve`,
+(dungeon generation segment 6) draw only from the attempt's
+`encounters` node, step 2 on `encounters/plan` (GS8) and steps 4–11 on
+`encounters/place` (GS12), after the `traps` pass and before `trapsResolve`,
 with fixed draw counts and dummy draws **(change EP-1; encounter
-placement design 6.1; M1)**. After `trapsResolve`, the draw-free
+placement design 6.1; M1)**. These streams sit under the attempt key
+`dungeon/floor/{N}/attempt/{a}`: a floor retry (HE-7) re-derives them
+under the next attempt, while the loot keys, `checks` and `trader` are
+attempt-invariant. The steps run at their places in the canonical
+pipeline GS0–GS17, with the structural assertion point AP1 before step
+2 and the final assertion point AP2 after LootBind and EventPlace
+**(change SV-4, SV-9; seeds and validation design 4.3, 4.4, 5.4; M1)**.
+After `trapsResolve`, the draw-free
 **LootBind** pass reads the final socket set: it applies the named
 remaps (a carrier that falls back to a container in step 8, or whose
 group moves in step 9, passes its card to a same-room container at its
@@ -1605,12 +1639,21 @@ adopted.
   otherwise Later) **(change SH-10; Shade design 8.1)**: a patrol that
   sees a corpse becomes Alerted to its square.
 - The 6- and 3-square bands use the same grid distance as ranges.
-  Noticing and Steal rolls use the **combat stream**, in the order the
-  triggers occur. **(lead's call)** Lurker Stealth uses a keyed hash per
-  roll, `H(floorSeed, unitId, "lurkStealth", band)` with band ∈
-  {placement, 6, 3}, d20 = 1 + (hash mod 20), replay-stable and
-  independent of draw order **(change EP-3; encounter placement design
-  6.8.5; M2)**.
+  In combat, noticing and Steal rolls use the **combat stream**, in the
+  order the triggers occur. **(lead's call)** Out of combat (no fight is
+  active when the roll is made, including a noticing roll that starts a
+  fight), they are keyed checks on the floor's `checks` key, never the
+  combat stream: noticing `H(floorKey/checks, "h:notice", noticerId,
+  targetId, noticeIndex, die)`, where the per-noticer `noticeIndex` keeps
+  the order of the triggers, and Steal `H(floorKey/checks, "h:steal",
+  unitId, stealIndex, die)`; d20 = 1 + `Bound`(d, 20), so exploration
+  never moves the next fight's rolls **(change SV-6; seeds and
+  validation design 4.3; M1)**. Lurker Stealth uses a keyed hash per
+  roll, `H(floorKey/checks, "h:lurkStealth", groupId, positionIndex,
+  band, die)` with band ∈ {placement, 6, 3}, d20 = 1 + `Bound`(d, 20),
+  replay-stable and independent of draw order **(change EP-3; encounter
+  placement design 6.8.5; M2; change SV-1, SV-6; seeds and validation
+  design 4.1, 4.3)**.
 - **The party notices non-hiding monsters automatically on line of sight.**
   Only hiding monsters (lurkers) roll Stealth against the party's passive
   perception. They roll once at placement, and again only at the 6- and
@@ -2610,9 +2653,9 @@ ruled.
    3; M1 for the F1 hero arms, M2):** the floor's first container-channel
    slot is constrained to one announced upgrade for a fixed target (F1,
    F3, F5 the hero; F2, F4 the member with the largest gear deficit). Its
-   approved parent draw is still made as a **ghost draw** at the Due's
-   tier with the ordinary weight table, then discarded and never counted
-   toward caps or same-floor bases; the Due's identity is drawn on
+   former parent **ghost draw** is retired: with keyed step-3 blocks
+   there is no position to hold, so it is not drawn **(change SV-5; M1;
+   seeds and validation design 4.3)**; the Due's identity is drawn on
    `lootPlan`, and later items treat it as this floor's base. The F2
    arms-floor card is drawn the same way **(change LE-17)**.
    **Offer sets (change LE-4; loot economy design 6.3; M2):** a
@@ -3680,14 +3723,21 @@ The build fails when:
 - a theme validator fails: V1 ThemeBudget, V2 BossCoverage, V3
   PoolRules, V4 ThemeFloorFill, V5 RouteEnumeration, V6
   RouteDeterminism, V7 CharterChecks **(change RT-17; run structure
-  design 11.2)**;
+  design 11.2)**, or V19 `Conformance` (registry, key and draw-ledger
+  conformance) **(change SV-19; seeds and validation design 5.2; M1 /
+  M2)**. Every validator check has a qualified id and a phase: `s` and
+  `t` parts fail the build, `g` and `r` parts act by their registered
+  failure class **(change SV-20; seeds and validation design 5.1; M1 /
+  M2)**;
 - V12 `EncounterPlacement` fails: its build-time geometry checks, its
   generation-time re-checks and floor assertions (the 10.3 caps with the
   ambush definition, the 10.4 guarantees and variety, state in the
   group's legal state set, `TemplateLegal`, the floor-1 package) or its
   runtime assertions, after its fallback chain (10.5 step 8) **(change
   EP-32; encounter placement design 11.2; M1 static parts, M2 the
-  rest)**.
+  rest)**; in the phase model these are V12s, V12g (geometry at GS12,
+  floor assertions at AP2) and V12r (seeds and validation design 5.1,
+  5.2) **(change SV-20)**.
 
 ### 20.2 Tests
 
@@ -3996,7 +4046,7 @@ committed wind-ups (13.2).
 | Containers and lair caches for the loot channels | Loot | M1 |
 | Boss arena templates: at least 2 entrances, line-of-sight blockers, a counterplay feature | Bosses | M1 |
 | Hazard placement within theme budgets | Conditions 11 | M2 |
-| When laying out the main path, reserve at least 2 containers openable with no check in main-path rooms before the boss room, one in the first half; a run-time assertion and one retry with the dungeon stream at seed + 1 (death and healing design 12.4 HE-7) **(change DH-32)** | Healing guarantee | M1 |
+| When laying out the main path, reserve at least 2 containers openable with no check in main-path rooms before the boss room, one in the first half; a run-time assertion at AP1 and one floor retry under the next attempt key `attempt/{a}` (attempt 1), then the LR0–LR5 ladder: a hard failure in development and CI, a clean end of the run in release builds (agreed, Q2) (death and healing design 12.4 HE-7) **(change DH-32; change SV-4, SV-9, SV-10; seeds and validation design 4.3, 5.4, 5.5)** | Healing guarantee | M1 |
 | A `mainPathIndex` on main-chain rooms, their Alcoves and the Portals joining consecutive main-path rooms (the lower index; arena-adjacent squares take the arena's), null elsewhere, and an `effectiveIndex` on every square (death and healing design 17.1) **(change DH-32; change FL-13; floor layout design 3.4)** | Floor-1 surprise rule (11.3 invariant 6, 12.2) | M1 |
 | Trap ids and a detection snapshot when a trap fires (death and healing design 10.4) **(change DH-32)** | Party trap floor | M1 |
 

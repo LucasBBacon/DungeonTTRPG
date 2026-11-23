@@ -559,7 +559,7 @@ All three judges independently chose the same winner:
 
   The card shows who meets the threshold: "Met by Wren, Lore 15".
 - **Leadership's "event outcomes" (EV-6, flagged reading of STAT 7.1 Leadership row and STAT 2 non-goals):** one hero-only threshold on one option. No dialogue tree and no roll.
-- **Rolled options** are capped at 1 per band theme pool. They print exact odds and the failure cost (CC2, CC3), roll on `checks` keyed (runSeed, floor, curiosityId, optionId), and allow one attempt.
+- **Rolled options** are capped at 1 per band theme pool. They print exact odds and the failure cost (CC2, CC3), roll on `checks` in the keyed-check domain `h:curiosity`: `H(floorKey/checks, "h:curiosity", LabelId(curiosityId), LabelId(optionId), 0, die)`, attempt index 0 (SV-6; seeds and validation design 4.3; M2), and allow one attempt.
 - **`LitOptionSpread`** target: each launch class meets a lit option on ≥ 500‰ of the Curiosities it meets *(illustr.)*, **measured at party 1 with each class's creation-default skills** from the stage-2 class designs **(lead's call, after the check;** the proposal's class-to-skill list did not match those defaults**)**:
   - Arcanist: Lore, Medicine (ARC);
   - Shade: Stealth, Medicine, Perception (SH 7.14);
@@ -681,7 +681,7 @@ All three judges independently chose the same winner:
 | DV11 | **Afterword** lines and chain beats | Display only | M2 lean / M3 |
 | DV12 | **Sequels** advancing on sight | Unlock snapshot (flagged reading) | M3 (agreed, Q1) |
 | DV13 | **Ripening** under SuccessorParity | Unlock snapshot (flagged reading) | M3-late / M4 (agreed, Q1) |
-| DV14 | Glimpse rotation: the least-seen variant on the display stream; text grammar tokens | Display only | M2 / M3 |
+| DV14 | Glimpse rotation: the least-seen variant on the display stream (the `display` key's `glimpse` domain; SV-2; seeds and validation design 4.3); text grammar tokens | Display only | M2 / M3 |
 
 #### 4.5.1 What counts as "seen"
 A card counts as seen when it is **displayed** (the card opens; `CuriosityShown`). Drawn-but-unreached cards never advance memory (FC15).
@@ -723,12 +723,12 @@ So a second meeting shows R2 in full, as the toy assumed when it counted R2 as f
 - **`DisplayMemoryInert`:** wiping or randomising memory, the codex included, gives the same core hash.
 
 #### 4.5.4 Launcher Fallow (change EV-20 ⚑; agreed, Q1)
-- **Forecast.** The F1 Curiosity's identity is fixed by the **first draw** on F1's `curiosities` child (the draw map, 4.10), filtered only by manifest, unlock snapshot, theme, floor, wave and rarity: `F1MajorForecastable`, part of `EventDrawRunBlind`. No Sequel draw touches F1 (4.5.8). **Every F1-eligible card is host-agnostic**, authored to fit an Alcove, a side room or a wall. The host decides presence only, and the referent never changes identity: where no referent exists, only the fallback gain differs (4.5.5) (BC6; KC8). The forecast ignores host presence: a forecast card whose floor turns out to have no host still counts **(lead's call, after the check)**.
+- **Forecast.** The F1 Curiosity's identity is fixed by the **first draw** on F1's `curiosities` child (the draw map, 4.10), filtered only by manifest, unlock snapshot, theme, floor, wave and rarity: `F1MajorForecastable`, part of `EventDrawRunBlind`. No Sequel draw touches F1 (4.5.8). **Every F1-eligible card is host-agnostic**, authored to fit an Alcove, a side room or a wall. The host decides presence only, and the referent never changes identity: where no referent exists, only the fallback gain differs (4.5.5) (BC6; KC8). The forecast ignores host presence: a forecast card whose floor turns out to have no host still counts **(lead's call, after the check)**. **The forecast is exact (SV-4, read; SV-30; M2):** `curiosities` is attempt-invariant, so an F1 floor retry never moves it, and V16s `F1HostAlways` (9.2) gives every F1 Blueprint a legal host for every F1 Curiosity pool, so a retried F1 keeps its forecast Curiosity (V19t `ForecastSurvivesRetry`; seeds and validation design 4.3, 5.2).
 - **Rule.** The launcher, not the rules core, redraws an OS-entropy seed when the forecast F1 Curiosity is in the profile's **Fallow set** (cards displayed in the last **K = 3** personal runs **(agreed, Q1)**; `recentRuns`, 9.1).
   - It shares R-SEED-6's budget of at most 8 redraws.
   - **Order per candidate (lead's call, after the check):** (1) the R-SEED-6 theme rule; (2) Fallow; (3) the onboarding preference, which only scores candidates and never forces a redraw that Fallow does not need.
   - **Segment 9's F1-boss streak rule (BR-25; agreed, boss rooms Q1; M2)** sits between Fallow and onboarding: (theme, Fallow, boss rule, onboarding), inside the same budget of 8, and in the same place in the exhaustion tie-break (theme, Fallow, boss rule, onboarding, earliest) (boss rooms design 4.10.3). RS owner applies.
-  - **On exhaustion** the launcher keeps the best candidate by (passes the theme rule, passes Fallow, passes onboarding, earliest). If no candidate passed the theme rule, it keeps the original seed; R-SEED-6 states no rule for that case, so this reading goes to the RS owner with EV-20.
+  - **On exhaustion** the launcher keeps the best candidate by (passes the theme rule, passes Fallow, passes the F1-boss rule (M2), passes onboarding, earliest) (boss rule added, SV-31). If no candidate passed the theme rule, it keeps the original seed; R-SEED-6 states no rule for that case, so this reading goes to the RS owner with EV-20.
   - Bypassed for shared seeds, daily seeds and the simulator.
   - It applies to the **F1 Curiosity only** **(agreed, Q1)**; no other floor's slot is forecast or redrawn.
 - **Rares are not exempt.** A rare is fresh if and only if it is not in the Fallow set. An exemption would raise the rare share about 1.5× (BC6).
@@ -738,7 +738,8 @@ So a second meeting shows R2 in full, as the toy assumed when it counted R2 as f
   - `Floor1ThemeShare`: each drawable F1 theme within 1/n ± 5 points, n the number of drawable F1 themes (50% with the Gaol and the Kennel, 33% with the Wake; more themes in M3) **(lead's call, after the check;** the toy measured only n = 2**)**;
   - `F1PoolParity`: every F1 theme pool in the manifest has the same standard / MECH / rare counts (6 / 2 / 1 in M2), so the Wake's promotion never thins one theme's freshness (agreed, Q2);
   - `LauncherRedrawRate` ≤ 0.5 per run (measured 0.10–0.15);
-  - `LauncherCheckMs`.
+  - `LauncherCheckMs`;
+  - `LauncherF1Neutral` (new, REL; SV-13; seeds and validation design 6.10; M2).
 - This also pulls RS 12's M3 row "profile-side anti-streak outside seeded runs" into M2 (flagged).
 - **Rejected (Q1):** a least-seen or seeded Fallow draw inside the key (Q1-B), and no memory at all (Q1-C).
 
@@ -890,7 +891,7 @@ Floor-entry Strand cashes are untouched by every step, and the Coat Hooks surviv
 
 ### 4.10 Determinism (change EV-21)
 
-- **Stream:** `curiosities`, a keyed child of each floor's dungeon substream (segment 11 assigns it). A fixed **12 draws per floor** *(illustr.)*, with dummy draws (R-SEED-3).
+- **Stream:** `curiosities`, a keyed child of each floor's dungeon substream (segment 11 assigns it). A fixed **12 draws per floor** *(illustr.)*, with dummy draws (R-SEED-3). **Assigned (SV-2, SV-4; M2):** `dungeon/floor/{N}/curiosities`, count class `vector` of length 12, read by absolute index (0-based: index 0 is draw 1 below), the length locked before the M2 goldens; **attempt-invariant**, so a floor retry never moves it; the launcher reads F1 index 0 (seeds and validation design 4.2, 4.3).
 - **The draw map (new lead's call).** The proposal's "fixed 12 draws" and its "whole-catalogue Fisher–Yates permutation" are reconciled: a slot consumes **one** draw, its slot sub-seed, and the rarity roll and the whole-catalogue permutation are derived from that sub-seed by keyed hash, draw-free. The draws are taken in a fixed order on every floor, whatever the floor hosts:
 
   | Draw | Use |
@@ -904,14 +905,14 @@ Floor-entry Strand cashes are untouched by every step, and the Coat Hooks surviv
   A floor with no slot of a kind still consumes its draw.
 - **EventDraw** (order inside one slot specified after the check; lead's call, after the check):
   - runs right after layout, before hazards, so no earlier pass reads its result;
-  - for each slot, with `sub` the slot's draw and H segment 11's keyed hash:
-    1. `rar = H(sub, "rarity") mod 1000`; the slot seeks a rare if `rar < curiosity.rarePermille` (about 30 *(illustr.)*), else a standard card;
-    2. `pool = H(sub, "pool") mod 1000`; the slot seeks the shared pool if `pool <` the slot's capped shared share (4.2), else the theme pool;
-    3. `perm = FisherYates(catalogueSortedById, i ↦ H(sub, "perm", i))`, over the whole catalogue, locked entries included;
+  - for each slot, with `sub` the slot's draw and H segment 11's keyed hash (`H` and `Bound` of seeds and validation design 4.1; SV-1):
+    1. `rar = Bound(H(sub, "rarity"), 1000)` (SV-1: `mod` on a raw draw is banned); the slot seeks a rare if `rar < curiosity.rarePermille` (about 30 *(illustr.)*), else a standard card;
+    2. `pool = Bound(H(sub, "pool"), 1000)` (SV-1); the slot seeks the shared pool if `pool <` the slot's capped shared share (4.2), else the theme pool;
+    3. `perm` = the whole catalogue in keyed-sort order, by (`H(sub, "perm", LabelId(id))`, then the ordinal comparison of the id) (SV-8; seeds and validation design 4.1 K-rule 7), locked entries included;
     4. the first entry of `perm` that passes every filter wins: form, pool, rarity class, theme, floor, wave, drawable, the run's prior draws (no repeat; prop-family, chassis, noise and premise caps; 4.5.11) and F1 rules;
     5. if none passes: the other rarity class, then the other pool (with each rarity class), then the slot is empty with `CuriosityAbsent{slot, reason}`;
-  - the label strings `"rarity"`, `"pool"` and `"perm"` are fixed and listed in the segment 11 draw table;
-  - reads **no host, no loot, no party, no run choices and no profile memory** (`EventDrawRunBlind`).
+  - the label strings `"rarity"`, `"pool"` and `"perm"` are fixed and listed in the segment 11 draw table (kept as written; their parent, the slot sub-key, has no stream children; seeds and validation design 4.1 K-rule 6);
+  - reads **no host, no loot, no party, no run choices and no profile memory** (`EventDrawRunBlind`); its one player input is the committed theme, read as a `GenInputs` field (SV-30; seeds and validation design 4.8.2; M2).
 - **Pass order** (aligned after the check with LP 2.1 and LE 6.10 item 4, the approved order):
   ```
   layout → EventDraw → hazards → traps → ENM 10.5 step 2 → LootPlan
@@ -921,14 +922,15 @@ Floor-entry Strand cashes are untouched by every step, and the Coat Hooks surviv
               choose referents or fall back, 4.5.5)
   → V13g / V15g (OneClockPerRoom) → V16g Curiosities
   ```
+  **Pipeline positions (SV-9; seeds and validation design 4.4, 5.4; M1 pipeline, M2 curiosities):** EventDraw is GS3, computed once per floor and reused on any retry; EventPlace is GS15; the shared point is **AP2**, after EventPlace (AP1, HE-7's structural point, holds no V16 check). V16g is split (SV-20): `V16g.FixedDrawCount` at GS3; at AP2 `V16g.SlotLegal` before V15g, then the rest of V16g after V15g. `OneClockPerRoom` here is V10's check run at V15g (`V10.OneClockPerRoom`; reading recorded in seeds and validation design 13).
 - **Strands** are read at floor entry or at offer time from committed run state. Loot never reads Curiosities, so **LootDoorInvariant holds**.
-- **Play-time rolls** use `checks`, keyed (runSeed, floor, curiosityId, optionId).
+- **Play-time rolls** use `checks`, in the keyed-check domain `h:curiosity` (curiosityId, optionId, attempt index 0, die) (SV-6; 4.3.2; seeds and validation design 4.3; M2).
 - **Resolving a Curiosity is a safe point** (a reading of MAIN 6.6, flagged), so a reload cannot undo a cost or re-roll (BC12). Unchanged by segment 10's mid-floor suspend slot (XI-28; agreed, exploration and information Q1; M2), which is written after every committed command and wins over the safe-point snapshot (exploration and information design 4.12). **Resolve order (lead's call, after the check):**
   1. validate payment feasibility;
   2. apply the costs;
   3. apply the gain (FactLedger, map, Grace, Strand);
   4. advance ticks and noise through the hearing rules (patrols may move or join; combat, if it starts, starts after the resolve);
-  5. write the run snapshot, carrying the pending memory record;
+  5. write the run snapshot, carrying the pending memory record (on a floor this **is** that command's slot write: its `suspend.journal` record, flushed before any outcome frame; reading, seeds and validation design 4.8.3 WO2, WO3; agreed, seeds and validation Q4);
   6. write the profile's `last[id]`, idempotent on replay from the snapshot. A crash between 5 and 6 replays step 6 on load (V16t `CrashBetweenWrites`).
 - **Profile memory** feeds Retellings, the Twice-Told card, Afterword lines and the launcher. It sits outside the key. A profile whose `curiosityMemory` fails its version or checksum reads as empty: First Tellings again, and no Fallow redraws (9.1).
 - **M3 snapshot:** Sequel and Ripening stages enter `drawableSet`. Shared, daily and simulator runs use the canonical snapshot.
@@ -982,6 +984,7 @@ Floor-entry Strand cashes are untouched by every step, and the Coat Hooks surviv
   - the `curiosities` stream, its draw count and draw map; EventDraw and EventPlace order;
   - the resolve safe point; `curiosityMemory`; the launcher order against R-SEED-6;
   - V16; the reports and arms (9).
+  - (answered: `curiosities` a `vector` of 12, attempt-invariant, with the labels kept; EventDraw GS3, EventPlace GS15, V16g at GS3 and AP2; the resolve write is that command's slot write (WO3); memory outside the key, simulator and seeded writes limited; launcher order with the boss rule; V16 phases and classes; reports event-sourced and classed; arms qualified; SV-1, SV-2, SV-4, SV-6, SV-8, SV-9, SV-13, SV-16, SV-20 to SV-23, SV-25, SV-30, SV-31; seeds and validation design 4.3, 4.4, 4.6, 4.8.3 WO3, 5.4, 6.2, 11).
 - **Camp and hub:**
   - Afterword and keeper lines; Strand display;
   - Pledges, Testimony and the Hawker's Hour (Later);
@@ -1420,7 +1423,7 @@ Run save   += curiosityDigest[floor] = {slot → (curiosityId, referentRef, opti
 Profile (MAIN 6.6 change) curiosityMemory {
   version, checksum,
   shownCount[id], fullShown[id] (bitmask of Retellings displayed in full; bit 1 = First Telling),
-  recentRuns: ring[K]{runId, seedMode, shownIds[], f1BossId},   // f1BossId: BR-25, M2 (boss rooms design 4.10.3)
+  recentRuns: ring[K]{runId, seedMode, shownIds[], f1BossId},   // f1BossId: BR-25, M2 (boss rooms design 4.10.3); seedMode here is not the seeded-run mark (runHistory[], seeds and validation design 4.7; SV-16)
   last[id]{optionId|left, targetRole, replacedBoon, litMet[], unaffordable[], runId},
   autoAnswer[id], afterwordSeen[], genericAfterwordLastRun[], pendingClosure[strandId],
   chainStage[]  // chainStage enters the unlock snapshot in M3 only
@@ -1441,9 +1444,11 @@ Config (tuning): curiosity.rarePermille; curiosityValueTable (4.4.9)
   - `lastOption` becomes `last`, which also keeps what the Twice-Told delta needs;
   - `pendingClosure` feeds the closure line; `version` and `checksum` detect a bad file, which then reads as empty (4.10).
 - **`f1BossId` (BR-25; agreed, boss rooms Q1; M2):** written at run start from the pre-rolled F1 boss record for every launched personal run, abandoned or not; shared, daily and simulator runs never write it; outside the reproducibility key (boss rooms design 4.10.3).
-- **Which runs write memory.** Personal runs write every field and advance `recentRuns` on run end or abandon. Shared and daily runs write `shownCount` and `fullShown` only (their display may change; their draws never do) and never advance `recentRuns`. The simulator writes nothing, except the scripted-memory arm (9.4).
+- **Which runs write memory.** Personal runs write every field and advance `recentRuns` on run end or abandon. Shared and daily runs write `shownCount` and `fullShown` only (their display may change; their draws never do) and never advance `recentRuns`. **Seeded runs (agreed, seeds and validation Q1; SV-16; M2):** every run whose seed the launcher did not draw writes only those seen counts plus a marked profile `runHistory[]` record (every finished run, personal or seeded, gets one, with `seedMode` from `SaveHeader.seedMode`), and advances no unlocks, records, codex entries or launcher memory; `recentRuns` and `f1BossId` are never written for a seeded run (V19t `SeededRunWritesSeenOnly`; seeds and validation design 4.7). The simulator writes **no player profile**; the launcher-dependent arms (the scripted-memory and streak arms, 9.4) write sandbox profiles in LauncherEmu only (SV-13; seeds and validation design 4.6, 6.1; M2). Replay runs write no player profile either.
 
 ### 9.2 V16 `Curiosities` (change EV-38)
+
+**Phases and classes (SV-20; seeds and validation design 5.1, 5.2, 5.4):** checks carry qualified ids `V16.CheckName` and a phase (`s`, `g`, `t`); `s` and `t` parts fail the build, `g` parts act by their class: `V16g.FixedDrawCount` at GS3, `defect`; `V16g.SlotLegal` at AP2 before V15g, then the rest of V16g after V15g, each `repair` (the EventDraw and EventPlace fallbacks), then `defect`. Wave: M1 stub, M2, M3 Sequel and Ripening rows.
 
 **V16s (static, M2):**
 - `OutcomeShown`; `FreeLeave`; `OptionShape` (one rules gain per option, plus an M3 codex page; every option but Leave priced); `MechanicalDifference`.
@@ -1453,7 +1458,7 @@ Config (tuning): curiosity.rarePermille; curiosityValueTable (4.4.9)
 - `GainMix` (4.4.1's deck definition); `TextCaps`; `RegisterByFloor` (with `registerNeutral`).
 - `DreamerLine` (with the premise test, 4.11); `HeartBedroomCap` (with `domesticProp`); `PremiseTagCap`.
 - `ReservedCues` (no horn or bell props, no winding props on the Heart, and an audio-tag check against the RC7 and TL timbre tables); `ReservedSilhouette` (container, bait-cache, Windfall and Bedside Stand reads, container framing under `CuriosityLootBlind`, and Portal silhouettes and skins); `ThemeWrongDetail` (no running hands or ticking on any clock or watch act on the Gaol and the Wake; the Kennel's painted moon; new lead's call, widened after the check); `StagingRC1` (KR16).
-- `EventConditionsInThemeSix`; `F1Rules`; `HostAgnosticF1`; `TeachingRungCap` (≤ 1 rung-9 lit option per F1 theme pool; new lead's call).
+- `EventConditionsInThemeSix`; `F1Rules`; `HostAgnosticF1`; `F1HostAlways` (every F1 Blueprint offers a legal host for every F1 Curiosity pool, so a retried F1 keeps its forecast Curiosity; SV-30; M2); `TeachingRungCap` (≤ 1 rung-9 lit option per F1 theme pool; new lead's call).
 - `RetellingParity`; `SuccessorParity` and `DeckValueParity` (against `curiosityValueTable`); `SequelGraphAcyclic` (M3).
 - `PoolCoverage` per (floor, slot class), counted over eligible entries under the canonical snapshot; in M3 also under each Sequel and Ripening unlock snapshot. `PoolCoverage(interlude, F2|F3)` fails while any theme drawable there has an empty Interlude pool.
 - `ForecourtGainFacesArena` (Interlude gains are arena-facing; F4–5 substitutive only, or marked exempt with a reason).
@@ -1491,6 +1496,8 @@ Config (tuning): curiosity.rarePermille; curiosityValueTable (4.4.9)
 
 **Definitions.** A *meeting* is a text-card meeting (0). Rates are per mille of the denominator named.
 
+**Report path and result classes (SV-21, SV-23; seeds and validation design 6.1, 6.3, 6.12; M2):** every report below is computed from these payloads by the one report path, the same code for simulator and human sessions; `CuriosityFreshShare` and `StrandCashRate` run on LauncherEmu, `F1CuriosityPresence` on generation-only runs. Gate classes: `CuriosityFreshShare` and `StrandCashRate` **SHIP**; `EventDeathShareDelta` **SHIP** (Graces; it reads the DH 18.2 metrics, one of their three roles); `CuriositySeconds` and `CuriosityClicks` **BIND** (the EV-23 line: the 4.7 cut order fires before any CMP 7.4 lever); `GraceExpiryRate` **ALARM**; the rest **REP**. SHIP verdicts bind at the shipped cap after the cap decision.
+
 | Report | Formula and gate |
 |---|---|
 | `CuriosityFreshShare` | Over `CuriosityShown` text-card meetings on the streak arm (launcher on): txtNew, txtFresh, near3 as defined in 0. Gate: txtFresh ≥ 0.95 at 10 runs, ≥ 0.90 at 30; near3 ≤ 0.05 (**gated, M2**) |
@@ -1520,14 +1527,16 @@ Config (tuning): curiosity.rarePermille; curiosityValueTable (4.4.9)
 
 ### 9.4 Simulator arms
 
-- **Streak** (10 profiles dying on F1–2, over 10, 30 and 50 runs). **Runs the launcher** and writes profile memory as a personal run (lead's call, after the check).
+- **Streak** (**200 profiles** dying on F1–2, over 10, 30 and 50 runs; was 10, which can never decide the gate; SV-25; seeds and validation design 6.5; M2). **Runs the launcher** and writes profile memory as a personal run (lead's call, after the check), in a **sandbox profile in LauncherEmu**, never a player profile (SV-13).
 - **f1only**, **learner**, **average**, **novice**.
 - **First-10-runs** time arm.
 - **Rest-adjacent** policy arm.
 - **Party 1, party 2 and party 4** (party 2 for the F2 gate).
-- **Scripted profile memory** for the launcher (runs the launcher).
+- **Scripted profile memory** for the launcher (runs the launcher; sandbox profiles in LauncherEmu, SV-13).
 - **Canonical and determinism runs** bypass the launcher and write no memory.
 - **Graces off** (the M2 fallback deck), so the Q3 decision can be taken on measured figures **(new lead's call)**.
+- **Qualified names (SV-22; seeds and validation design 6.2; M2):** the `History` axis (LauncherEmu only; profile-history models, never skill levels): `Streak` (the freshness gate's default), `F1only`, `Learner`, `Average`, `ScriptedMemory`, `First10Runs`; the `Walk` axis `EV.First10` (and this design's light, median and heavy walks under `EV.`); the `Rest` axis `RestAdjacent`; novice = `Skill.Novice`; party 1, 2 and 4 on the `Party` axis; Graces off on `Toggles`.
+- **Pending request (from the seeds and validation design, 6.2; request to the XI, FL and EV owners):** walker equivalences, for example whether `XI.Completionist` equals `FL.Hunt` plus optional fights. Until this design's owner rules, there is no mapping: each gate reads its own owner's arm (seeds and validation design 14.2).
 
 ---
 
@@ -1552,7 +1561,7 @@ No wave carries a least-seen draw inside the key (rejected, Q1).
 | **Segment 8** | Curiosity content and forms; their placement in Q rooms, Forecourts, F1 Alcove set pieces and side rooms, and signature rooms; the cost and gain palette; `curiosityValueTable`; the FactLedger rule; Graces (content), Strands, Retellings, Twice-Told, Fallow, Sequels, Ripening, Afterword and the Unwoken Roll; the segment 8 clock line; V16; the reports; Readings content (TL-34); Fragments content; guaranteed Riddle-clue hosts (4.13); the writing and Glimpse briefs (6); co-ownership of the codex's Curiosity pages |
 | **Segment 9** | Seeded boss variables; the arena seal; the F-BOSS queue; poster Glimpses; floor-1 boss variety as a production priority (agreed, Q2); the carried RS Cut 1 question, a future item for the client (14.2). **Answered by the boss rooms design (segment 9, approved 2026-11-22; BR-3, BR-23 to BR-26, BR-29):** the seal is `ArenaEngaged`; F-BOSS facts from the Rendition and mirror in the `bossQueue` order; 3 Renditions per F1 boss and the graded RS Cut 1 (agreed, boss rooms Q1) |
 | **Segment 10** | 4.12. **Answered by the exploration and information design (segment 10, approved 2026-11-23; XI-4, XI-6, XI-22, XI-27, XI-29):** facts and F-ROOM drawn per 4.3.6; chips read `PatrolForecast` (agreed, Q2); `CardFit`; codex hosted (M3); F-TREASURE (M3) and beckoning Glimpses (request) |
-| **Segments 11–12** | The stream, its draw map, pass order, safe point, memory field, launcher, V16 and arms |
+| **Segments 11–12** | The stream, its draw map, pass order, safe point, memory field, launcher, V16 and arms. **Answered by the seeds and validation design (segments 11–12, approved 2026-11-23; SV-1, SV-2, SV-4, SV-6, SV-8, SV-9, SV-13, SV-16, SV-20 to SV-23, SV-25, SV-30, SV-31):** the `curiosities` `vector` key and draw map (4.10); keyed checks `h:curiosity` (4.3.2); the pipeline and AP2 (4.10); WO3 for the resolve write; seeded and simulator writes (9.1); V16 phases and classes (9.2); report classes (9.3); qualified arms and 200 streak profiles (9.4); pending request to this design's owner: walker equivalences (9.4) |
 | **Camp and hub** | Afterword and keeper lines; Pledges; Testimony; the Hawker's Hour; Tithe Bowl dedup; coin owed |
 | **Conditions owner** | The `eventBoon` form (agreed, Q3 makes M2 Graces depend on it), Weary's universality, Easing |
 | **Enemies owner** | The noise reading, the FactLedger, Overtures |
@@ -1775,6 +1784,7 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 | **A future ladder or difficulty decision** | The main design or RS takes up the M3 ladder | Q4's "difficulty help in the visible ladder" is handed to the main design owner and the client; segment 8 changes nothing | Main design owner; client |
 | **The worst-case card does not fit** | Segment 10's layout test (4.3.1) | The rare body cap is lowered before any chip rule changes | Lead; segment 10 |
 | **Referents fall back often** | `ReferentAvailability` high on a Blueprint | Re-author the tied option's referent kind, or ask FL for the referent | Lead; FL |
+| **Walker equivalences** (pending request from the seeds and validation design 6.2, to the XI, FL and EV owners) | This design's owner does not rule | No mapping; each gate reads its own owner's arm (9.4; seeds and validation design 14.2) | EV, XI, FL owners |
 | **Companions owner refuses** Testimony | — | Pledges (Later) ship without Testimony | Companions owner |
 | Naming pass | — | Every placeholder name here | Client |
 
@@ -1832,8 +1842,8 @@ The owed rows are the single list in 13; by owner:
 - **The HZ owner:** EV-31, EV-35, EV-36 (HZ-23).
 - **Segment 9 (bosses):** seeded boss variables; the arena seal; floor-1 boss variety (EV-44); the carried RS Cut 1 question, a future item for the client (14.2). Answered by the boss rooms design (approved 2026-11-22; BR-3, BR-23 to BR-26, BR-29; its 4.2.1, 4.10, 4.12).
 - **Segment 10 (UI):** 4.12; EV-17. Answered by the exploration and information design (approved 2026-11-23; XI-4, XI-6, XI-22, XI-27, XI-29; its 4.3.6, 4.6.1, 4.8.1, 4.10, 5); pending requests to this design's owner: beckoning Glimpses, `SideRoomPayoffMix`, the Curiosity Lodestring gain (XI-23, XI-27).
-- **Segment 11 (seeds):** the `curiosities` stream and its draw map, the pass order, the launcher order (EV-20, EV-21, EV-40).
-- **Segment 12 (validation):** V16 and the reports (EV-38, EV-39).
+- **Segment 11 (seeds):** the `curiosities` stream and its draw map, the pass order, the launcher order (EV-20, EV-21, EV-40). Answered by the seeds and validation design (approved 2026-11-23; SV-1, SV-2, SV-4, SV-6, SV-8, SV-9, SV-13, SV-16, SV-30, SV-31; its 4.1–4.4, 4.6–4.8, 11).
+- **Segment 12 (validation):** V16 and the reports (EV-38, EV-39). Answered by the seeds and validation design (approved 2026-11-23; SV-20 to SV-23, SV-25, SV-30; its 5.1–5.4, 6.1–6.5, 6.12); pending request to this design's owner: walker equivalences (SV-22; 9.4, 14.2).
 - **The camp and hub design:** Afterword and keeper lines, Pledges, Testimony, the Hawker's Hour, coin owed.
 - **The simulator:** every report of 9.3 and every arm of 9.4.
 - **Art, audio and writing:** 5, 6.

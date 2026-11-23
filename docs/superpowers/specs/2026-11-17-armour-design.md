@@ -1309,7 +1309,7 @@ warhammer-and-shield soldier, the sling artillery and the claw brute.
 | Property | Tags | Effect | Wave |
 |---|---|---|---|
 | Muffled | prevent | Heavy only: no Clatter (passive or checks). Never on the same item as Fitted. | M1 |
-| Resistant (element) | type | Fire, cold, lightning, acid, radiant or necrotic; never physical or psychic. On M1 notables only if the floor's theme deals that element. The theme read and its parent draw serve **authored** Resistant only; a **rolled** Resistant line takes its element from d2 of its identity's `lineRoll` entry, theme-blind (reading; IR-14, IR-15; item rolls design 4.4, 4.17). | M1 |
+| Resistant (element) | type | Fire, cold, lightning, acid, radiant or necrotic; never physical or psychic. On M1 notables only if the floor's theme deals that element. The theme read and its parent draw serve **authored** Resistant only (the parent draw's position is now the keyed `resistant` block of loot step 3, `loot/floor/{N}/resistant/{entry}`, order kept; position read, IR confirms the owning entry; seeds and validation design 4.3, SV-5); a **rolled** Resistant line takes its element from d2 of its identity's `lineRoll` entry, theme-blind (reading; IR-14, IR-15; item rolls design 4.4, 4.17). | M1 |
 | Reprisal (element) | charge | 1 / 1 / 2 per rest, reaction when a melee attack hits you: the attacker takes 1d6 / 2d6 / 3d6 of the element (counts under the reaction cap) | M2 |
 
 **Last Ward (retired; change CN-23 superseded by DH-45):** removed from

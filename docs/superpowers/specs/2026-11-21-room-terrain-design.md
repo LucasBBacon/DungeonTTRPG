@@ -1076,8 +1076,14 @@ PhaseSocket { socket: Socket, phase, off: PieceKind|SquareClass|none, on: PieceK
   `Socket`, used by segment 6 only to break ties between its derived
   start sockets; no other authored start-socket field (encounter
   placement design 6.6.1). Nothing changes until this owner rules.
-- **Stream:** `terrain = Derive(floorDungeonSubstream,
-  FNV-1a("terrain"))`, after LS13 and before enemies 10.5 step 2. It
+- **Stream:** `terrain` is the key `dungeon/floor/{N}/attempt/{a}/terrain`,
+  derived from its parent's **key** by the one key algebra, with every
+  bounded draw by `Bound` (change SV-1; M1; seeds and validation design
+  4.1, 4.3); it is registered as a `leaf-formula` row, its approved
+  count unchanged (change SV-2; M1; seeds and validation design 4.2).
+  It runs at stage GS5, after LS13, EventDraw (GS3) and the arena stamp
+  (GS4), and before hazards (GS6), traps (GS7), AP1 and enemies 10.5
+  step 2 (change SV-9; M1; seeds and validation design 4.4). It
   draws, in this order **(lead's call, after the check)**:
   1. **Reservation:** fight-room slots, sorted by (`effectiveIndex`,
      `roomId`), receive tags in the fixed order `teaching` (floor 1) or
@@ -1088,11 +1094,22 @@ PhaseSocket { socket: Socket, phase, off: PieceKind|SquareClass|none, on: PieceK
      has a candidate layer carrying that tag (any cluttered layer, for `cluttered`); if
      no such slot is left, the draw is a dummy. A slot takes at most one
      tag. The count is fixed at 2 + ⌊0.3 ×
-     `maxFightSlots`⌋ draws per floor, plus segment 4's fixed count for
-     its tags; unused ones are dummies.
+     `maxFightSlots`⌋ draws per floor, plus **`hzTagMax`** draws for
+     segment 4's tags, reserved and spent as dummies **from M1**, so no
+     M1 terrain draw shifts when hazards ship in M2 (change SV-3; M1;
+     seeds and validation design 4.3; **pending request:** HZ declares
+     `hzTagMax` before the M1 goldens; fallback, a padded maximum from
+     HZ's approved tag table, seeds and validation design 14.2); unused ones are dummies.
   2. **Per node slot up to `maxNodes`:** 1 layer pick; `maxSockets`
      on/off draws; `maxSockets` skin draws. Unused slots and sockets
      spend dummy draws (R-SEED-3).
+     **Pending request (segments 11–12 ask; BR and ROOM confirm; M1;
+     seeds and validation design 4.4, 11, 14.2):** the arena stamp runs
+     at GS4, before terrain, and the arena node's terrain slot is spent
+     as dummies, so counts stay fixed and the arena interior has one
+     source. Nothing changes until this owner rules; if refused, the
+     stamp runs after GS6 and overwrites (BR 4.1.3 as it reads today),
+     and the arena node's slot draws stay fixed.
 - **Layer candidates:** the layers for (`templateId`, orientation) with
   `minFloor` ≤ floor ≤ `maxFloor`, the room's wetness band, and the
   slot's reserved tag if it has one; an untagged slot never takes a
@@ -1109,8 +1126,10 @@ PhaseSocket { socket: Socket, phase, off: PieceKind|SquareClass|none, on: PieceK
   socket's `rulesKey`, sorted by id.
 - **`maxSockets`** *(illustr. 16)* is one global constant in the
   `terrain.*` snapshot; V9 `TerrainDrawCount` rejects any layer above
-  it. HE-7's retry at seed + 1 re-derives everything, and nothing is
-  carried over from the failed attempt. `terrain.*` tuning is hashed
+  it. HE-7's retry (LR3) takes the next attempt key, `attempt/{a+1}`
+  (a = 1 from attempt 0), which re-derives every attempt-scoped child,
+  `terrain` included, and nothing is carried over from the failed
+  attempt (change SV-4; M1; seeds and validation design 4.3, 5.5). `terrain.*` tuning is hashed
   into the reproducibility key (R-SEED-5).
 - **Rules pieces never come from the display `dressing` stream.**
 - **Proofs.** Quantities that only grow with placed sockets (blocking,
@@ -1631,7 +1650,8 @@ Harm squares are squares, so it does.
    Kegs, Kick lines and Overturn strips (TR-23).
 6. **Downed units are inert** (DH 11.4).
 7. **Gates:** `HazardPushDeaths` ≤ 10% of hero deaths *(illustr.)*;
-   `ContactHazardDowns` by theme and floor. The per-round push caps
+   `ContactHazardDeaths` (renamed from `ContactHazardDowns`, change
+   SV-24) by theme and floor. The per-round push caps
    (`hazardHitThisRound`, `hazardPushPerRound`) are kept as **switchable
    simulator arms**, not rules. The toy AI aims badly, so human-like
    aiming may exceed its rates.
@@ -1968,7 +1988,10 @@ locks design 7.8), of kind `arenaDevice`, one per boss (F5: two)
   from an authored `ArenaTemplate` Guise at one authored size per
   (Guise, floor band), inside these caps; generated arena fill is
   rejected; the stamp runs V9 (with `PhaseSocketsBoth`) before V17g
-  (boss rooms design 4.1). **M1 reading (told plainly):** Old Ragged's
+  (boss rooms design 4.1). **Pending request (segments 11–12; BR and
+  ROOM confirm):** the stamp runs before terrain, with the arena node's
+  terrain slot spent as dummies (6.2.5; seeds and validation design
+  4.4). **M1 reading (told plainly):** Old Ragged's
   root-columns are template walls, not RT pieces, and count as its Tall
   clusters and line-of-sight Deny under RS 12's M1 "No terrain" (boss
   rooms design 5.3).
@@ -2594,7 +2617,9 @@ Tuning: cover.effect = minus2|disadvantage|off; cover.penalty = 2;
   the contact band or the typed collision band (6.5.2) **(new lead's
   call)**.
 - **Segment 4 (change HZ-28):** a `hazards` child of the `terrain`
-  stream draws after the 6.2.5 reservation step with fixed draw counts;
+  stream draws after the 6.2.5 reservation step with fixed draw counts
+  (at GS6, after **all** terrain; change SV-9; seeds and validation
+  design 4.4);
   `hazardDigest` sits beside `terrainDigest`; V10 `RoomHazards` runs
   after V9 at build time; its reports, arms and save records are
   segment 4's (hazards design 11).
@@ -2604,10 +2629,18 @@ Tuning: cover.effect = minus2|disadvantage|off; cover.penalty = 2;
 Build time; per template × orientation × layer × floor band × theme,
 plus the floor-level capacity rows per Blueprint and rule choice.
 
+**Phases and ids (change SV-20; M1 partial, M2; seeds and validation
+design 5.1, 5.2):** the rows below are V9's `s` (build) part; its `g`
+part is the GS5 lookup, a `floorRetry` check asserted at AP1 with
+`proofRef` V9s. Checks are qualified `V9.CheckName`, so
+`V9.TemplateReadability` and `V9.ContactLethalityBound` stay distinct
+from V8's and V10's checks of the same name. A shared check has one
+owner, and V9 calls it where noted.
+
 | Check | Rule |
 |---|---|
 | `ClearwayConnected` | Joins every Portal, landing, start zone, `fleeExit`, mouth and anchor, at width ≥ 2 in fight rooms, all-optional-on |
-| `ProtectedIntact` (proven) | No piece on `protectedSquares` or `protectedSightLines` |
+| `ProtectedIntact` (proven) | No piece on `protectedSquares` or `protectedSightLines`. FL owns the check (structural part, `V8g` at AP1); V9s calls it as a proof (change SV-20) |
 | `FreeSpaceAfterClutter` | ≥ 6 free squares per unit (FL 6.3) |
 | `RoomMixAfterClutter` | Open room keeps a 5×5 core and a 3×6 lane |
 | `ClutterBand` | Role band, both ends checked on all-on and all-off |
@@ -2618,7 +2651,7 @@ plus the floor-level capacity rows per Blueprint and rule choice.
 | `EntryCaps` | RS 8.6, 8.8; KP5 |
 | `KegSpacing` | KP6 |
 | `HazardNearEnemy`, `DepA1Ring` | KP1, KP2: every F2–5 fight-room layer, on mandatory sockets |
-| `ThemeSix`, `HomeTheme` | Keg and Remnant conditions in the 6; condition squares in their home theme and on matching FL region tags |
+| `ThemeSix`, `HomeTheme` | Keg and Remnant conditions in the 6; condition squares in their home theme and on matching FL region tags. The theme's 6 is owned by `V1.ThemeSix`, which V9 calls (change SV-20) |
 | `ContactLethalityBound`, `BurstLethalityBound` | 6.5.4, 6.3.5 |
 | `WayRound`, `ChokeLimit` | 6.2.3 |
 | `ShortcutToCover` | KP7 |
@@ -2627,9 +2660,11 @@ plus the floor-level capacity rows per Blueprint and rule choice.
 | `TippableExcluded` (M3) | `coverRoom` cover, `PartyEscape` and Hide band proven without tippable pieces |
 | `PhaseSocketsBoth` | Arena sockets proven on and off |
 | `AcrobaticsChoices` (floor) | ≥ 3 with Squeezes; every layer tagged `plank` holds a Plank |
-| `TerrainDrawCount` | Fixed draws, reservation draws included; no layer above `terrain.maxSockets`; HE-7 re-derivation with nothing carried over |
+| `TerrainDrawCount` | Fixed draws, reservation draws included (`hzTagMax` dummies from M1, SV-3); no layer above `terrain.maxSockets`; HE-7 re-derivation under the next `attempt/{a}` key with nothing carried over (SV-4). The V19g DrawLedger calls it at GS5's end; this row stays as its citation (change SV-20; seeds and validation design 5.2) |
 
-The runtime is a lookup that cannot fail (FL-15). `FurnishingNeverSeals`
+The runtime is a lookup that cannot fail (FL-15); it is asserted at AP1
+as a `floorRetry` check with `proofRef` V9s (change SV-9, SV-20; M1;
+seeds and validation design 5.4). `FurnishingNeverSeals`
 and Kick stops are **rules**, not assertions. V9 joins RS 11.2's
 validator list beside V8.
 
@@ -2644,25 +2679,31 @@ validator list beside V8.
 | `CoverUseRate`, `HideSpotsPerRoom`, Shade Hide rate | Shade D4 |
 | `WreckerCollisionRate`, `contactRate` by theme; `HewCeiling` with contact | Vanguard 10.1; the formula of 6.10 |
 | `TeeteringUptimeOnBosses` | ≤ 25%: boss turn starts with Teetering ÷ all boss turn starts |
-| `HazardPushDeaths`, `ContactHazardDowns` | ≤ 10% of hero deaths |
-| `EnvironmentKillShare` | 3–8% of enemy kills (a "felt" band, not a gate) |
-
-**Attribution for these reports (lead's call, after the check):** a kill
-or a Down is environmental when the damage instance that crossed 0 HP is
-environment damage (under the top-up rule, the instance that landed it),
-and a hero death is attributed to the cause of its Down.
+| `HazardPushDeaths`, `ContactHazardDeaths` | ≤ 10% of hero deaths. `HazardPushDeaths` has one definition, HZ's all-environment one; `ContactHazardDowns` is renamed `ContactHazardDeaths`, threshold meaning kept (change SV-24; M2; seeds and validation design 6.10) |
+| `EnvKillShare` (alias `EnvironmentKillShare`; HZ owns) | 3–8% of enemy kills (a "felt" band, not a gate; FELT) (change SV-24; M2; seeds and validation design 6.3, 6.10) |
 | `EnvDamageShareByClass` | Vanguards ≤ 50% (fun indicator) |
 | `ShuntUseRate`, `FurnishingUseRate` (party, AI) | < 10% of fights is a fun failure even if safety gates pass |
 | `BurstSelfDamageShare`, `BurstRound1Share` | ≤ 15%; ≤ 40% |
 | `ArcanistComboShare`, DEP-A1 coverage | Arcanist cap; ≥ 40% on F2–5. DEP-A1 is read, until the Arcanist owner rules (TR-21), as an interactive feature at path distance 3–6 from any `partyEntrySquares` square, over non-boss fight rooms on floors 2–5; the report is re-run if the owner rules otherwise |
 | `AcrobaticsChoicesPerFloor`, `PlankUseRate` | ≥ 3 |
-| `PreviewExactness`; `PreviewHiddenDelta` | 100%, per save branch on the party-knowledge state; the hidden delta is information (6.12) |
+| `PreviewExactness`; `PreviewHiddenDelta` | 100%, per save branch on the party-knowledge state; the hidden delta is information (6.12). The 100% is a zero-event gate with a structural partner, V18t `PreviewExactness` (previews and the core share one function), both rows BUILD (change SV-25; M2; seeds and validation design 6.6) |
 | M3: `RemnantUptime`, `MiasmaIgnitionRate`, condition pressure per theme | Watch |
+
+**Attribution for these reports (lead's call, after the check):** a kill
+or a Down is environmental when the damage instance that crossed 0 HP is
+environment damage (under the top-up rule, the instance that landed it),
+and a hero death is attributed to the cause of its Down. *(Moved below
+the table so that the table is one table, change SV-31.)*
 
 ### 11.4 Simulator arms
 
 **(new lead's call:** the arms are gathered from 6.1, 6.5.4 and 6.10
 into one list; the clutter and AI-aim arms are added**)**
+**Qualified ids (change SV-22; M2; seeds and validation design 6.2):**
+these arms join the qualified arm catalogue: the baseline is the named
+toggle `ROOM.NoTerrain`; cover variants and clutter 0/30/50 are
+`Toggles` values; the AI-aim arm is the `AIAim` axis (toy one-step,
+lookahead), read as a band.
 - **Cover:** `cover.effect` off / minus2 / disadvantage, per layout
   grammar, with the joint range-band arm owed by FL 11.4 arm 2 and
   weapons 21.3.
@@ -2687,7 +2728,7 @@ into one list; the clutter and AI-aim arms are added**)**
 
 | Wave | Content |
 |---|---|
-| **M1** | Tall and Low pieces as blockers; the obstacle definition, corner rule and lines rule (TR-5); non-free pieces, the open room's 5×5 core and lane, Tall pieces at full wall height with the stub glyph (TR-19, TR-20's stub-glyph rule); the Clearway; the `terrain` stream with its reservation step, layers in greybox, `terrainDigest`; V9 partial (`ClearwayConnected`, `ProtectedIntact`, `FreeSpaceAfterClutter`, `RoomMixAfterClutter`, `ClutterBand`, `ReservationCapacity` for the `cluttered` tag, `WayRound`, `CutawayWithTall`, `TerrainDrawCount`); the Kennel `coverRoom` from Tall trunks and root plates. **No cover rule, nothing movable, no hazards** |
+| **M1** | Tall and Low pieces as blockers; the obstacle definition, corner rule and lines rule (TR-5); non-free pieces, the open room's 5×5 core and lane, Tall pieces at full wall height with the stub glyph (TR-19, TR-20's stub-glyph rule); the Clearway; the `terrain` stream with its reservation step (`hzTagMax` reserved as dummies, SV-3), layers in greybox, `terrainDigest`; V9 partial (`ClearwayConnected`, `ProtectedIntact`, `FreeSpaceAfterClutter`, `RoomMixAfterClutter`, `ClutterBand`, `ReservationCapacity` for the `cluttered` tag, `WayRound`, `CutawayWithTall`, `TerrainDrawCount`); the Kennel `coverRoom` from Tall trunks and root plates. **No cover rule, nothing movable, no hazards** |
 | **M2** | Cover (**Q1**); Furnishings with Shunt, Kick, Smash (**Q2**); Kegs in the Carnival and Gut (**Q2**); contact hazards and harm squares on floors 2–5 (**Q3**); Rough; Plank; floor-1 teaching rooms and typed Low pieces; condition-square placement and entry caps; arena caps and phase sockets; the AI requests; previews, chips, charter extensions; full V9 and reports; K2 burn-away and K3 Conduct (**Q4**) |
 | **M3** | Remnants (**Q5**, after the M2 rider and layer reports, 6.6); Overturn; Haul; Shoot an object; Kegs in the Choir, Silk, Supper and Heart; depth-1 chains; Briar (own question); floor-1 Hot pieces only after floor-1 `HazardPushDeaths` and an RT-20 reopening (applied at Nightmare tier 2+ only, for the Gaol stove: HZ-25, hazards design 6.19) |
 | **M3+ / M4** | Glaze for a frost theme; Mist if needed; powder-keg blast push |
@@ -2725,7 +2766,7 @@ Segment 3 takes the knock-into *system*, not drop hazards.
 | 8 Events | Furnishing kinds by id. **Pending request (change EV-2; segment 8 asks; M2):** wall-mounted (RC1+) Alcove set pieces that can host the floor-1 Curiosity, first in the F1 host order; such a set piece takes the set-piece slot LP-11 prefers, never empties a leaf, never displaces a container 7c's cap needs and never sits on a walkable square; if none are offered, the F1 host falls to a free leaf side room, then none, logged; `F1CuriosityPresence` is reported to FL and segment 3 before F1 pool sizes freeze (events design 4.2, 14.2) | Events that name a Furnishing kind; Curiosity content and placement |
 | 9 Boss rooms | 6.11's caps, phase sockets and `PhaseSocketsBoth` | Interiors, counterplay identity, each boss's one authored terrain move (arena templates and Guises, change BR-1; boss rooms design 4.1, 5) |
 | 10 Exploration and information | The previews and chips of 6.12; the "Needs a tall piece to hide" reason; glyphs. **Answered by the exploration and information design (segment 10, approved 2026-11-23; its 5, 9.2):** every 6.12 surface placed in its catalogue; `PreviewExactness` extended to the noise preview and Detour quote; the `CanSee` corner reading (XI-2; 6.2.1) | Overlays, chips and UI |
-| 11–12 Seeds and validation | The `terrain` stream and its draw counts, `terrainDigest`, V9 enumeration, `PreviewExactness` | The stream tree, release seed set, retry logging |
+| 11–12 Seeds and validation | The `terrain` stream and its draw counts, `terrainDigest`, V9 enumeration, `PreviewExactness`. **Answered by the seeds and validation design (segments 11–12, approved 2026-11-23; its 4.3, 5.2, 11, SV-3):** `terrain` registered under `attempt/{a}` as a `leaf-formula` row with `hzTagMax` reserved (6.2.5); `terrainDigest` as a GS5 stage digest; V9 phased in the consolidated suite (11.2); `PreviewExactness` with its V18t partner (11.3). **Pending request (BR and ROOM):** the stamp before terrain and the arena-node dummies (6.2.5) | The stream tree (its 4.3), release seed set (its 4.11), retry logging (`GenerationRetried`, `StageRetried`, `GenerationFallback`, `GenerationDefect`; its 5.7) |
 
 ---
 
@@ -2771,7 +2812,7 @@ Segment 3 takes the knock-into *system*, not drop hazards.
 | # | Risk | Signal | Response |
 |---|---|---|---|
 | 1 | Cover is a guess until the arm runs: −2 may be too weak in open Kennel glades and Carnival plazas, and cover can lengthen artillery fights | `DamageShareByRangeBand`; net `FightRoundsByTheme` | The cover arms; CV8 flank rule; the net rounds gate |
-| 2 | Knock-into may still be unfelt; the toy AI under-aims, so humans will exceed its rates | `EnvironmentKillShare`; `ShuntUseRate` | KP1; Shunt and Kick costs; collision on a success; the alignment highlight; the AI-aim arm |
+| 2 | Knock-into may still be unfelt; the toy AI under-aims, so humans will exceed its rates | `EnvKillShare` (alias `EnvironmentKillShare`, SV-24); `ShuntUseRate` | KP1; Shunt and Kick costs; collision on a success; the alignment highlight; the AI-aim arm |
 | 3 | The Wrecker over-performs in dense rooms | `WreckerCollisionRate`; `HewCeiling` with contact; `TeeteringUptimeOnBosses` | KP3; contact = collision + 1 step; the "bosses steady" reserve lever |
 | 4 | Arcanist push payoff: Gust now deals the typed collision band against contact hazards; Shockwave and Squall the contact band | The at-will rider bound; `ArcanistComboShare` | Counted in the rider bound; area cap of 2 |
 | 5 | AI uses objects worse than players | `FurnishingUseRate` (AI) | Accepted as player power; universal light Smash; one terrain-using enemy per theme |
@@ -2909,7 +2950,9 @@ The owed rows are the single list in 17; by owner:
   validator list.
 - **The floor layout owner:** TR-17 (FL 6.1, 6.6, 8.2, 11.1, 11.2),
   TR-19.
-- **Dungeon generation segments 4–12:** every hook in 13, including
+- **Dungeon generation segments 4–12:** every hook in 13 (segments
+  11–12's answered by the seeds and validation design 11, with its
+  pending stamp request in 6.2.5), including
   segment 4's catalogues, drops and vents, segment 5's DC ladder,
   segment 6's start sockets, and segment 9's arena interiors and
   authored terrain moves.

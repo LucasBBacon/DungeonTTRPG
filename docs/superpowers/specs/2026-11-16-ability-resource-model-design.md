@@ -1156,7 +1156,11 @@ when the Warcaller ships (M3) **(change HR-29, Herald design 14.1, 9.3)**.
   object checks, out-of-combat saves forced by traps or locks and
   out-of-combat attacks on objects use the keyed `checks` stream, with
   no unit in the key (traps and locks design 6.22). **(change TL-3,
-  decided main 6.3 extended; M1)**
+  decided main 6.3 extended; M1)** Out-of-combat noticing and Steal,
+  lurker Stealth, out-of-combat hazard saves and Curiosity checks also
+  use `checks`, each in its registered domain; in combat they stay on the
+  combat stream (seeds and validation design 4.3; change SV-6, read;
+  M1 / M2 / M3).
 - Effects that data cannot express, including reaction policies and AI
   terms, are C# hooks referenced from data by ID. **(settled)**
 

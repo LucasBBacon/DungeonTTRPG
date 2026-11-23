@@ -594,6 +594,12 @@ pattern):**
    are printed and answered with per-row data changes.
 3. The lead applies the levers in order, one at a time, with a rerun
    after each, and stops at the first that meets the threshold.
+   **(SV-26, read; M2)** The rerun covers the class-data blast radius at
+   each gate's N, plus every PR0 and PR1 gate as a nightly sample; a
+   lever that turns a higher-rung gate from PASS to FAIL is reverted and
+   goes to the lead. The heal-isolation gate is a PR1 (REL) row, and
+   reliance and desirability are ESC rows (seeds and validation design
+   6.3, 6.9).
 4. **No lever is applied that breaks another line:** a desirability
    lever that would push reliance above 10, or a reliance lever that
    would push desirability below +2 or the heal-isolation gate above 10,
@@ -2776,6 +2782,15 @@ written (`TurnAllowanceNoDamage`, `FlagNotCondition`, `RankAddsNoDice`,
 `SubclassAddsPool`, `NameCollision`, the cap of eight, the copy
 registry).
 
+**(2026-11-23; SV-20, seeds and validation design 5.1–5.2; lead's call;
+M1 / M2)** These are pre-generation content checks: they keep their HR
+and classes codes, have no V id and are registered as `content.*` rows
+(classes 12.2 with the HR codes), all build-phase. `NameCollision` is
+owned by `V7.NameRegistry` (manifest-driven); the Herald's names feed
+that registry, and this document calls the check rather than owning it.
+`Floor1BossMindReachable` (HR-21) is owned and run by V17s; V2 checks
+coverage only.
+
 **Not a content check:** `HealUpcastByClassSlots` is a runtime cast
 legality rule (5.3), enabled at M4 when multiclassing ships; its data
 half is `HealUpcastCapDeclared` above.
@@ -2834,6 +2849,12 @@ half is `HealUpcastCapDeclared` above.
 - `Floor1BossSustain` sensitivity (Con −1, AC 14, Rekindle unavailable).
 - Pips spent per boss fight by composition (10.2).
 - The P3 tonic report with a Hearth arm.
+
+**(change SV-22; M2)** The `Skill` arms `Novice`, `Basic` and `Expert`
+are generalised from arcanist 5.4 to the Herald (request to the ARC
+owner; fallback: the Herald owner writes a novice script by the M2
+planning gate); the Herald arms above keep their constructions
+(seeds and validation design 6.2).
 
 ## 15. Staging
 
@@ -3017,7 +3038,11 @@ consumables 16.8 finds none, and "15 scrolls" is found there.
 - **The simulator:** the heal-isolation gate; the three arms; reliance
   and desirability; `Floor1ClassSpread` on the reference arm; parity,
   camp share, sustain, early-end, trap-room and skill-expression
-  reports.
+  reports. Pending (SV-22, M2): the generalised `Skill.*` arms, or the
+  Herald owner's novice script by the M2 planning gate (14.3; seeds and
+  validation design 6.2). Levers follow the precedence PR0–PR5 and the
+  blast-radius rerun (SV-26, read; 5.4; seeds and validation design
+  6.9).
 - **The ability 8.4 aura ruling:** Pennant, Haunting Chorus.
 - **Builders:** `sourceUnitId` on every condition instance (Draw the
   Sting).
@@ -3025,7 +3050,8 @@ consumables 16.8 finds none, and "15 scrolls" is found there.
   and "Interject" next to Interpose flagged.
 - **Lead's checks before data:** every SRD shape in this document
   against SRD 5.2.1 (Cause Fear and Command first); `NameCollision` over
-  the final names.
+  the final names (run by `V7.NameRegistry`; SV-20, seeds and validation
+  design 5.2).
 
 ## 20. Open items for the client
 

@@ -1161,7 +1161,16 @@ channels and placement lead's call; CN-1, CN-2, CN-27)**
   starting boon or a meta reward. `familyCapPerRun` 1.
 - **Placement: one pre-roll per run (new lead's call; CN-27).** "1 per
   run" is a cap, not a promise **(confirmed by the client, 2026-11-17)**.
-  At run generation, on the loot stream:
+  At run generation, on the `loot/run` key, a `vector` of length 3
+  always drawn (index 0 offer, 1 floor, 2 channel; indices 1 and 2 are
+  drawn even when the offer fails, so the count never depends on the
+  outcome; a floor retry never moves it; the outcome is unchanged)
+  **(change SV-5, lead's call; approved by the client, 2026-11-23; M1
+  key, drawn with the phial, 14.10; seeds and validation design 4.3,
+  11)**. **Pending request (segments 11–12, to this design's owner):**
+  "phial always 3 draws" is not settled until this owner confirms it; if
+  refused, `loot/run` becomes per-entry with 1 or 3 draws on its own
+  key and nothing else moves (seeds and validation design 14.2):
   1. roll `talisman.offerChancePermille` *(illustr. 500)*; on a failure
      the run has no phial;
   2. otherwise roll its floor, uniform over `talisman.minFloor` to the
@@ -1760,8 +1769,10 @@ hero's HP never shows 0 while a phial is armed on its belt.
 - **the rest screen:** a `treatProof` Scarred is not offered for Treat and
   uses no attempt; a standard Scarred on another unit at the same rest
   still gets its attempt; a Remedy ends the instance and the flag;
-- the phial pre-roll: deterministic per seed; a declined reward card
-  loses it for the run;
+- the phial pre-roll: deterministic per seed; always three draws on
+  `loot/run` (pending this owner's confirmation, 14.7), unmoved by a
+  floor retry (V13t (m); change SV-5; seeds and validation design 4.3);
+  a declined reward card loses it for the run;
 - pegs P1, P2, P4 at every Leadership discount step and at `minPrice`;
 - replay tests across throws, reads, failed reads and a phial firing,
   rebuilt from the 18.4 events, including **a two-part hit** (Icefall)

@@ -684,10 +684,18 @@ preview**. Its Hold card is not needed, because nothing is missable.
 
 **Determinism (change CMP-3)**
 - A new RNG stream `recruit` beside dungeon, combat and loot (main 6.3).
+- **Keys (changes SV-1, SV-2; seeds and validation design 4.1–4.3; lead's
+  call; M2).** Every `(runSeed, recruit, …)` tuple in this design is a
+  path in the one key algebra (`Derive`/`H`): `recruit/camp/{k}/slot/{s}`,
+  `recruit/camp/{k}/gap/{needId:}` and the `armReroll`, `eyeReroll`,
+  `cosmetic` and `pledge` children, each derived from its parent's key,
+  never its counter, and each a row in the stream registry.
 - **At floor-k generation**, each free slot *s* of camp k (slots 1 to
   `cardsMax − 1`, always all of them) pre-draws a fixed ordered
   **candidate list** *(illustr.: 8 entries, `candidateListLength`)* on
-  substream `(runSeed, recruit, k, slot s)`. Each entry is drawn with a
+  substream `(runSeed, recruit, k, slot s)`; each entry *e* has its own
+  key `recruit/camp/{k}/slot/{s}/entry/{e}` (a per-entry registry row;
+  SV-2, seeds and validation design 4.3). Each entry is drawn with a
   fixed number of draws (the DH 12.5 pattern; `RecruitDrawFixedCount`) and
   holds `{kitId, elementFamily?, nameId, traitId}`: an Arcanist kit's
   element family is part of its entry, so the preview shows it.
@@ -697,7 +705,7 @@ preview**. Its Hold card is not needed, because nothing is missable.
   earlier free slot); they are resolved at generation and are exact
   (`PreviewMatchesBoard`).
 - **Exhaustion (new lead's call).** If no entry of a list is legal, the
-  slot keeps drawing entries on the same substream, up to
+  slot keeps drawing entries, each on its own entry key (SV-2), up to
   `candidateDrawMax` *(illustr.: 32)* entries in all, then takes the first
   legal kit in data order; if no kit is legal at all, the slot is empty.
 - **Card A is resolved at camp entry** by the gap procedure (7.3) on its
@@ -710,7 +718,9 @@ preview**. Its Hold card is not needed, because nothing is missable.
   card and re-roll, 9.2).
 - Children of the stream: `armReroll` (the "without X" arms, below),
   `eyeReroll` (Recruiter's Eye's re-roll, 9.2), `cosmetic` (palette
-  variant), and the reserved `pledge` key (7.12). Each is keyed by camp
+  variant; a core child kept as approved, whose only consumer is the
+  palette; SV-31, seeds and validation design 4.3), and the reserved
+  `pledge` key (7.12). Each is keyed by camp
   and slot, so no arm or option shifts another's draws.
 - Re-entering a saved camp shows the same board. A choice at camp k
   changes camp k + 1 only through the visible roster and the gap
@@ -886,7 +896,8 @@ Q2):**
   1 click, +4 ticks on a failure; a Latch 1 click and 1 tick; a reveal 1
   click; each auto-walk stop 1 click. Layout commits, at party 4 on
   floors 4–5, to `ExploreSeconds` ≤ 3.5 min and `ExploreClicks` ≤ 40 as
-  medians of the walker's lean policy over the release seed set, and to
+  medians of the walker's lean policy over the release seed set (seeds
+  and validation design 4.11; SV-18, read), and to
   Circuit isolation; these are layout reports beside the gate, not the
   gate. Layout is a gate input, and floors 4–5 at party 4 pass only
   narrowly on the toy, so the cap-2 fallback stays likely (floor layout
@@ -935,7 +946,9 @@ Q2):**
   BR-37), excluding camp screens, pause
   menus and any idle gap over 60 s *(illustr.)*. The gate value is the
   **median over floors 4 and 5** of at least 12 sessions *(illustr.)*
-  per cap arm. The core emits these telemetry events from M2-first.
+  per cap arm (kept as written; the median's interval is printed beside
+  it and 20 sessions are recommended; change SV-25, seeds and validation
+  design 6.4–6.5). The core emits these telemetry events from M2-first.
 - **Party size is forced.** Gate sessions start from a prepared save at
   floor 4 with the reference schedule's party (4 units; 3 for the blind
   arm's party-of-3 sessions), so testers cannot decline below the size
@@ -1005,6 +1018,35 @@ design 9.5; XI-31, read; M2). Its clock line sits beside TL-38's,
 EP-33's, LP-10's, EV-23's and BR-40's: net ≤ 0 minutes and ≤ 0 clicks
 on floors 4–5 at party 4, on both walker arms; a miss fires that
 design's self-cut order before any lever above.
+
+Segments 11–12 add no lever here either (seeds and validation design
+6.3, 6.7–6.9, 6.11; SV-23, SV-25, SV-26, SV-27, read; M2). They take up
+this section's time-model and clock-sum hook (seeds and validation
+design 11):
+- **Result classes.** `FloorTimeByPartySize` is a REL gate (precedence
+  rung PR1); each segment clock line above is a BIND row (PR3) that fires
+  its own cut order before any lever above (order kept); the 75th
+  percentile row is ESC.
+- **Gates bind at the shipped cap (a reading, approved by the client with
+  the seeds and validation design on 2026-11-23; this owner confirms it;
+  seeds and validation design 13).** Every report runs
+  at both caps; after the cap decision, REL, HOLD, SW and SHIP verdicts
+  bind at the shipped cap and the other cap's rows are REP; every REL
+  gate is re-read at the shipped cap before the F1 balance freeze.
+- **`FloorClockLedger`** (REP) sums the clock lines per cap at party 4 on
+  floors 4–5 against the 20 minutes, beside the human gate, only to show
+  which line is over when the gate fails.
+- **`TimeModelError`** (SW) ≤ 10% *(illustr.)*, human slice against
+  simulator on the same seeds and prepared saves, lets simulator-time
+  verdicts count. Above it the companions owner re-fits the cost table
+  above, and while it is suspended each segment line is attributed from
+  human-slice telemetry, so no lever above fires first; if attribution is
+  impossible, the cap decision waits.
+- **One lever at a time.** After each lever its blast radius is rerun;
+  after any lever above, the DH 18.2 rows are re-read and reported; lever
+  3 is reverted while `Level10BeforeFinalBoss` fails.
+- **Sessions.** One playtest calendar holds the gate; a gate session never
+  also serves a suggestions-on arm.
 
 **Told plainly:** the 10 s per companion turn target (ability 11.4) does
 not fit a party of 4 into a 20-minute floor. Either the per-turn time,
@@ -1349,8 +1391,9 @@ offers to turn on companion suggestions; the default stays off
   (enemies 18.1).
 - Run state reserves `pledges[]` at M2 with its element shape fixed now,
   `PledgeState {kitId, sourceFloor, sourceKind (captive | wanderer |
-  shrine), nameId, metAtFloor}`, and the substream key `(runSeed,
-  recruit, floor, pledge)` is reserved and used by no M2 code, so adding
+  shrine), nameId, metAtFloor}`, and the substream key
+  `recruit/camp/{k}/pledge` (keyed by camp; camp k has the same index as
+  floor k; change SV-31, seeds and validation design 4.3) is reserved and used by no M2 code, so adding
   Pledges later changes no schema, no save and no M2 draw **(new lead's
   call)**. Promoting captives to M4 is a future item for the client.
 - **Pending request (change EV-41, events design 4.8; Later):** segment 8
@@ -1906,7 +1949,9 @@ hero against being outshone.
   Vanguard hero's protector need, a Tinker for a Shade hero's Mechanics
   need; the Arcana need for a Shade hero stays forced and is printed),
   `HeroClassDuplicateShare` (11.4), more kits at M4. **The flex-skill
-  and card-A re-run of `gen.py` is owed before M2 sign-off.**
+  and card-A re-run is owed before M2 sign-off, as a simulator S run of
+  the same arm** (`gen.py` stays a regression fixture only; change SV-21,
+  seeds and validation design 6.1).
 
 ### 10.7 Healer readings: not evidence
 
@@ -2006,11 +2051,28 @@ numbers.
 | `KitItemsBound`, `KitPotionIssuedWithKit` | Every kit-issued instance has `boundToUnitId` set to its unit; the kit potion is the ordinary healing potion record, issued with the kit |
 | `SoloBudgetMonotone` | For floors 2–5 × band × every weight from 15 − the live shortfall key's largest entry to 15, the deterministic solo table's fill and ERD are non-decreasing in weight (7.7); fails if a key leaves the `soloWeightMin` bound |
 
+This suite is registered as pre-generation `content.*` rows (seeds and
+validation design 5.2).
+
+**Pending request (seeds and validation design 5.2, 11; request to the
+CMP and EP owners; M2):** the CMP-8 tests extended to formations and the
+solo column (encounter placement design 13's hook to segment 12) run as
+`content.CMP8.Formations` and `content.CMP8.SoloColumn`, owned here
+(CMP-8) over the encounter placement design's formation and solo-column
+data, with this suite at tier 1. Not a rule until the CMP and EP owners
+confirm; if they do not, the rows run as encounter placement design 13
+words them, under this suite (seeds and validation design 14.2).
+
 ### 11.3 Simulator arms (change CMP-18)
 
 **Cap is a run-config axis of every arm,** not an arm: every arm and
 report runs at cap 3 and cap 2 **(agreed, Q2)**. All arms of a
-comparison use the same seeds.
+comparison use the same seeds (common random numbers, mandatory for
+every comparison; change SV-21, seeds and validation design 6.1). These
+arms are the `Muster` axis of the qualified arm catalogue: `Reference`
+keeps its name and means `MusterBestFit`, and the others are qualified
+by the axis, so no name collides with another segment's `Reference` or
+`Oracle` (change SV-22, seeds and validation design 6.2; M2).
 
 - **`Reference`** (the written `MusterBestFit`), complete **(new lead's
   call)**:
@@ -2025,8 +2087,10 @@ comparison use the same seeds.
 - **`Oracle`** **(new lead's call)**: at each Muster it enumerates every
   legal action (hire each card × each flex option, each swap × each flex
   option, Travel on). For each action it runs R rollouts *(illustr.:
-  200)* that continue under `Reference`, on seeds `hash(runSeed, camp,
-  rolloutIndex)` from a simulator-only stream, with common random numbers
+  200)* that continue under `Reference`, on simulator-only `sim` keys
+  `Derive(trialKey, "oracle", camp, rollout)` under `simRoot`, never
+  derived from `runSeed` (change SV-2, seeds and validation design 4.3),
+  with common random numbers
   across actions; it never draws on the run's own streams. It takes the
   action with the highest win permille, ties by data order.
 - **`DiversityFirst`**.
@@ -2047,7 +2111,8 @@ comparison use the same seeds.
 ### 11.4 Reports owed (M2)
 
 - **`FloorTimeByPartySize`** (the first M2 gate, **agreed** Q2; defined
-  in 7.4), with its 75th percentile and the suggestions-on sessions
+  in 7.4; class REL, binding at the shipped cap after the cap decision,
+  seeds and validation design 6.3), with its 75th percentile and the suggestions-on sessions
   beside it; companion-turn time by kit; suggestion accept rate.
 - `SoloRunReport`, `DeclineOneSpread`, `DeclineTwoSpread`,
   `SoloClassSpread` (7.7 targets CT-1 to CT-6).
@@ -2056,7 +2121,7 @@ comparison use the same seeds.
   mean uplift| ≤ 100‰ *(illustr.)*.
 - **`HeroClassDuplicateShare`** **(new lead's call)**: the share of final
   parties holding a kit of the hero's class, by hero class; target ≤ 50%
-  *(illustr.)*; read in the owed `gen.py` re-run.
+  *(illustr.)*; read in the owed re-run (an S run, 10.6).
 - Per-kit **passive and signature fire rate per fight** beside
   companion-turn time by kit, so a dead passive shows up.
 - `HeroShareReport`: hero damage share ≥ the highest single companion's;
@@ -2344,7 +2409,8 @@ The owed rows are the single list in 16 (and 12); by owner:
 - **The camp and hub design:** the Muster screen inside the camp order of
   7.11; the camp reward card (items 10.4) is unchanged.
 - **The simulator:** every arm in 11.3 and report in 11.4 at both caps;
-  the flex-skill `gen.py` re-run before M2 sign-off; reconciling the two
+  the flex-skill re-run before M2 sign-off (an S run of the same arm,
+  10.6; SV-21); reconciling the two
   toys' heal models (10.7).
 - **Playtests:** the floor-time gate and the blind party-of-3 vs
   party-of-4 arm (**agreed** Q2); the accept-rest-of-turn prototype;
