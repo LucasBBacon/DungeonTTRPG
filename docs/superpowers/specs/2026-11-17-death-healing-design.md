@@ -437,7 +437,8 @@ The client asked what else to consider. **(lead's call)**
    to 2 hours. A legacy hook (a fallen hero's notable as a future heirloom
    candidate, items 14) is noted as a Later idea.
 10. **Difficulty ladder.** Harder tiers keep the same healing guarantee;
-    the ladder raises budgets only.
+    the ladder raises budgets, and from M3 also adds kind (change RT-21;
+    cross-document comparison 2026-11-23, CC-60).
 
 ## 6. The death model
 
@@ -835,8 +836,9 @@ concentration and keeps its initiative slot **(settled, conditions
   not reset `medicineGetUpsThisFight`. It resets at `BossDefeated`, or at
   the first combat start after the party ends a combat outside the
   Sanctum. This closes the threshold dip (step out through an Arch, come
-  back with Medicine ready). If refused, no rule, and `ThresholdDipRate`
-  is reported beside `BossCheeseRate` (boss rooms design 4.2.5, 14.2).
+  back with Medicine ready). Applied by the DH owner; `ThresholdDipRate`
+  is still reported beside `BossCheeseRate` (boss rooms design 4.2.5,
+  14.2; cross-document comparison 2026-11-23, CC-60).
 
 ### 11.3 Order at rest completion
 
@@ -852,6 +854,11 @@ is party-wide, so one unit there blocks it. Rests before the first
 not an awareness reading: combat end and the enemies' A-4 reset are
 untouched. The Rest button shows the rule as its unusable reason, never
 hidden (boss rooms design 4.2.5).
+
+**Dare and Wager rest bans (M3):** no short rest while any party unit is
+in a Dare room (change HZ-21) or a Wager room (change TL-29); the Rest
+button shows the reason (ability design 15.1, 15.4; cross-document
+comparison 2026-11-23, CC-19).
 
 ### 11.4 A Downed unit is inert
 
@@ -1219,8 +1226,10 @@ order: death and healing design". **(lead's call)**
    1. a Downed target discards the event (11.4);
    2. the per-part steps, temporary HP included (14);
    3. the event's total is summed;
+   3a. if Ducked, total = max(1, FloorDiv(total, 2)) (Shade design 7.4,
+      SH-6; cross-document comparison 2026-11-23, CC-29);
    4. out-of-combat and undetected-trap damage clamps at 1 HP, on the
-      post-absorption total (10.4).
+      post-absorption total of step 3a (10.4).
 
    Q7 listed these steps as a group ("floors and Downed discard →
    temporary HP"); it did not order them among themselves. Clamping
@@ -1239,8 +1248,9 @@ order: death and healing design". **(lead's call)**
 3. **Reprieve Phial** (16), `recharging: false`.
 
 The concentration difficulty uses the pre-save total **(settled)**: the
-summed total after the per-part steps and **before** the floor clamp and
-the chain (step 1.3's value) **(lead's call)**. With Last Ward retired, no
+summed total after the per-part steps and the Duck halving, and
+**before** the floor clamp and the chain (step 1.3a's value, 20.3 step 3a;
+cross-document comparison 2026-11-23, CC-29) **(lead's call)**. With Last Ward retired, no
 link acts at the attack step: every link reads the event's summed total
 **(new lead's call)**.
 
@@ -1387,8 +1397,9 @@ bought, never moves in combat, `treatProof` Scarred.
 - **Hazards (told plainly; change HZ-19, M3):** this rule is unchanged.
   Landmark ticks are a non-hazard class (no damage, condition or unit
   movement) legal on floor 1; at Nightmare tier 2+ floor-1 hazard
-  packages place no Void, Stir or Lurch in main-path rooms 0–1 (hazards
-  design 6.1, 6.19, 7.2–7.4).
+  packages place no Void, Stir or Lurch in main-path rooms 0–1 (change
+  HZ-25, agreed, hazards Q4; cross-document comparison 2026-11-23, CC-60)
+  (hazards design 6.1, 6.19, 7.2–7.4).
 - **Traps (lead's call; change TL-19; M2):** this rule is unchanged.
   Floor 1 places no trap in main-path rooms 0–1 and no damaging trap in
   rooms 0–2, mirroring it (traps and locks design 6.19).
@@ -1608,7 +1619,10 @@ lift Downed". The rest screen shows, for each member, HP after get-up,
 Treat and Recovery, plus the supply left and the patrol warning
 **(settled)**. *Pending request (change EP-16; M2; the DH owner rules):*
 the rest preview adds Alerted, Searching and Pursuing groups to the
-seen patrol routes (encounter placement design 6.20, 6.21). The
+seen patrol routes (encounter placement design 6.20, 6.21); such a
+group shows "last seen <state> at tick N; route unknown" and no forecast
+(exploration and information design 4.8.1; cross-document comparison
+2026-11-23, CC-105). The
 patrol warning reads known patrols only: routes drawn over known squares,
 forecasts from `PatrolForecast` (change XI-6, M2, read; exploration and
 information design 4.8.1).
@@ -1644,10 +1658,12 @@ information design 4.8.1).
   and a party-bar tally "found 1 of at least 1": the healing
   potions picked up this floor from containers and carriers, whatever their source. The `guaranteed`
   flag on `LootTaken` stays for reports only.
-- **Card queue (change XI-19, M2):** the floor-entry card takes slot 7
-  of the modal card queue, with TL's first-entry prompt; the Stratum
-  Card is slot 8, and its overflow goes to the pause Floor-info panel
-  (exploration and information design 4.9.8, 4.9.9).
+- **Card queue (change XI-19, M2):** one floor-entry card, headed by the
+  Stratum Card, takes slot 8 of the modal card queue; TL's first-entry
+  prompt takes slot 7; the card's overflow goes to the pause Floor-info
+  panel (run structure design 6.9; loot economy design 6.15; exploration
+  and information design 4.9.8, 4.9.9; cross-document comparison
+  2026-11-23, CC-59).
 - **Fatal-room map (change XI-29, M3):** the death recap adds a
   fatal-room map thumbnail with the killing chain's sources marked
   (exploration and information design 6, 7).
@@ -1854,7 +1870,12 @@ keys go in the consumables block of `inventory.json` (consumables 18.1)
 as bare keys beside `offensiveSundryMin`, in that block's existing style;
 `sundriesPerFloor` keeps its name and is reshaped per floor (DH-42).
 `talisman.leaveHpPermille` stays where consumables 18.1 places it. The
-save hash covers both files.
+save hash covers both files. A save records the hash of `inventory.json`;
+a run crossing a patch continues on the new build and is marked not
+comparable (seeds and validation design 4.10.1). Each stack instance
+stores its `stackMax` at creation, so a `stackMax` change never alters a
+saved stack's dose count (change SV-15) (cross-document comparison
+2026-11-23, CC-3).
 
 | Key | Value | Status |
 |---|---|---|
@@ -1918,10 +1939,14 @@ save hash covers both files.
    3a. If Ducked: total = max(1, FloorDiv(total, 2)). This step-3a value
    is the **pre-save total** that concentration uses; steps 4 onward read
    it.
-4. Floors, on the post-absorption total of step 3a: for a party unit, if
-   `combatActive` is false (20.5) or the event carries undetected-trap
-   parts (10.4, with the mixed-event rule), clamp so HP stays ≥ 1,
-   `DamageClamped{outOfCombat | undetectedTrap}`.
+4. Floors, on the post-absorption total of step 3a: for a party unit,
+   clamp so HP stays ≥ 1 when any 10.4 floor applies: `combatActive` is
+   false (20.5); the event carries undetected-trap parts (with the
+   mixed-event rule); fall damage (the FallFloor); a Stir act for which
+   the unit is not Warned; or a boxed lurker opener's strike after its 20%
+   cap. `DamageClamped{outOfCombat | undetectedTrap | fallFloor |
+   unwarnedStir | lurkerOpener}` (cross-document comparison 2026-11-23,
+   CC-28).
 5. If the total still reaches 0: the save chain (15.2), with the cap
    (15.4). A link that fires ends the chain and fixes HP as 15.2 says.
 6. Lower HP.
@@ -1942,7 +1967,9 @@ for tick batches, whose chain already ran where the damage landed.
 
 - `UnitDowned`; `UnitGotUp{reason: win | medicine | rest | camp}`;
   `DropPrevented{link}`; `DamageDiscarded{downedInert}`;
-  `DamageClamped{reason}`; `HealApplied{source, amount, overheal,
+  `DamageClamped{reason}`, reason one of `outOfCombat`, `undetectedTrap`,
+  `fallFloor`, `unwarnedStir`, `lurkerOpener` (10.4, 20.3 step 4;
+  cross-document comparison 2026-11-23, CC-28); `HealApplied{source, amount, overheal,
   blocked}`; `RunEnded`; `FloorEntered{…, guaranteedPotions,
   guaranteedSupply}`; `PotionToppedUp`; `PotionMovedAtCamp`;
   `CombatStarted`, `CombatEnded{reason}`; `GenerationRetried`;
@@ -2459,6 +2486,8 @@ values; the phial's rarity, floor, channels, `offerChancePermille` and
   CL-13g)**
 - **Companions:** kits with protector tools (guard, intercept,
   body-block); Medicine training spread; recruit kits with 1 potion.
+  Answered by the companions design (7.6, 8.3) (cross-document
+  comparison 2026-11-23, CC-60).
 - **Dungeon generation:** HE-7's constructive container reservation and
   retry policy (12.4); `mainPathIndex` per square for 17.1; trap ids and
   the detection snapshot for 10.4; containers known before the loot step

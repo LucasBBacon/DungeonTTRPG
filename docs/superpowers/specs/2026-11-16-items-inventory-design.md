@@ -153,7 +153,7 @@ on 2026-11-16. **(agreed)**
 |---|---|---|---|
 | 1 | Capacity | **Abstract slots per unit, no spatial grid, no weights.** Belt 2 (a feature or offer may raise it to a hard maximum of 3), trinkets 2, pack max(2, 3 + Strength) with item size 1 or 2, an active and a spare weapon set, armour (section 5). | Spatial grid (scored 25 against 44; about 2 s per summary for a handful of shape conflicts per run, see 4.1); pooled bag as primary (kept as the fallback for ownership, 6.4); no limit (Strength's agreed capacity job disappears); weight or bulk (settled out) |
 | 2 | Ownership | **Option D: per-unit ownership with party-wide automatic placement and a suggested recipient** (section 6). The pooled bag is the named fallback. | A, one shared bag for everything (breaks "the thief's free slot" and "Take (choose who)"); B, per unit by hand (mule shuffling; four packs are a fake decision); C, pooled pack (the fallback: rewords 15.5 and 15.8, and Strength is felt weakly) |
-| 3 | Coin and economy | **A run-scoped party purse, spent only at camp; a camp shop; Sell at one flat rate; Scrap leftovers at the stairs; no stash** (section 10). | No coin (breaks every settled "bought at camp" and cuts 15.7 salvage); coin without selling (Leave becomes pure regret) |
+| 3 | Coin and economy | **A run-scoped party purse, spent only at camp** (and at a Ticket lock, M3: agreed 2026-11-23, cross-document comparison Q-1; 10.1)**; a camp shop; Sell at one flat rate; Scrap leftovers at the stairs; no stash** (section 10). | No coin (breaks every settled "bought at camp" and cuts 15.7 salvage); coin without selling (Leave becomes pure regret) |
 | 4 | Identification | **Always-known basics and obvious properties; consumables, scrolls and wands always identified; at most 1 dormant hidden property on Uncommon-or-better gear and trinkets; a passive Arcana threshold with no roll; camp identifies everything free; equipping reveals nothing; curses Later** (section 11). | Everything known (Arcana's agreed job becomes decoration); identify by use (potion roulette under permadeath); reveal on equip (free equip-scumming makes the threshold irrelevant) |
 | 5 | Camp trade (client question 2) | **A basic vendor at every camp** (supply, potions in limited pre-rolled stock, tonics, Remedy, mundane bases). The main design's "a shop or reward" is a choice between a **notables shop** (1–2 notables *(illustr.)*) and a **reward card** (change I-13; the camp reward card is not the enemies 17.5 boss reward card, 10.4). | A shop at some camps only (on a shopless camp, coin, tonic resupply and every settled "bought at camp" break) |
 
@@ -256,13 +256,17 @@ without migrating any data. **(agreed)**
   "ePlusGate": { "minSimRuns": 200, "minPlaytestRuns": 10,
     "freeSlotPickMinPermille": 500, "fullSlotPickMaxRatioPermille": 500,
     "nearTieCampMaxPermille": 250, "nearTieValueMargin": 1,
-    "playtesterAsks": [3, 10], "vetoBindMaxPermille": 100 } }
+    "playtesterAsks": [3, 10], "vetoBindMaxPermille": 100,
+    "landingEnvelopeMinPermille": 600, "bossHardLandMinPermille": 500 } }
 ```
 
 `kindToLocation` and `wornLocations` are the armour design's location
 rule (armour design 5.4); `ePlusGate` is its E+ gate (armour design 5.10),
 whose numbers are the lead's binding numbers, **not tuning**: only the
-lead changes them. **(change AR-31)**
+lead changes them. **(change AR-31)** The block also holds the trinkets
+design's `landingEnvelopeMinPermille` 600 and `bossHardLandMinPermille`
+500, on the same terms **(change TK-4)** (cross-document comparison
+2026-11-23, CC-39).
 
 A pre-approved lever may raise `trinketSlots` to 3 (armour design 5.10,
 E+); it is off by default, and the count stays 2 until the lead switches
@@ -310,10 +314,12 @@ admit one Scion (12.2). **(change IR-5; change IR-6; change IR-9; M2)**
 All values *(illustr.)*, except the `ePlusGate` block and the trinket and
 death and healing keys named above as not tuning. `basePrice` (supply,
 Remedy, mundane bases) and `size` stay on the records; `stackMax` is read from here by `kind`, and
-gear is always 1. A save records the hash of `inventory.json` and resumes
-only under the same file, so a tuning change (for example kill-switch
-lever 3) applies to new runs and never reinterprets a saved `spent`.
-**(lead's call)**
+gear is always 1. A save records the hash of `inventory.json`; a run
+crossing a patch continues on the new build and is marked not comparable
+(seeds and validation design 4.10.1). Each stack instance stores its
+`stackMax` at creation, so a `stackMax` change never alters a saved stack's
+dose count (change SV-15). **(agreed, seeds and validation Q3;
+cross-document comparison 2026-11-23, CC-3)**
 
 `packInCombat` takes `action | freeOncePerFight | closed`, so changing
 how Retrieve works is a tuning change, not a redesign. **Its value
@@ -357,6 +363,17 @@ about 14 slots, so a recruit is also a gain in capacity.
   survives the stairs. It opens one ordinary lock out of combat; its
   rules, channels and depth price are the traps and locks design's
   (6.11). **(change TL-24)**
+- **The Lodestring (M3):** a run-scoped party counter,
+  `party.lodestrings`, cap 1, size 0, no carrier (the Wax Key model);
+  never an item instance, a scroll, a deck card or a notable. Its use,
+  sources and price are the exploration and information design's
+  (4.6.2). **(change XI-23)** (cross-document comparison 2026-11-23,
+  CC-44)
+- **The Ear Trumpet (M3, conditional):** a lane-gap party counter, cap
+  1, size 0, never an item instance; sold only by the basic vendor
+  (10.3). Its effect is the exploration and information design's
+  (4.5.2). **(change XI-26; agreed 2026-11-23, exploration and
+  information Q3)** (cross-document comparison 2026-11-23, CC-44)
 
 Records for party counters have `size: 0` (12.3).
 
@@ -505,7 +522,9 @@ Every greyed button names one reason **(settled, ability model 15.4)**:
 `NotInCombat`, `BeltFull`, `PackFull`, `NotBeltable`, `NotAdjacent`,
 `NoFreeInteraction`, `StrengthThreshold`, `HardRequirement`, `Untrained`,
 `OverCapacity`, `RestOnly`, `Clinging` (Later), `NoCoin`, `Unsellable`,
-`SupplyFull`, `OutOfStock`, `CampChoiceMade`, `LocationOccupied`,
+`SupplyFull`, `OutOfStock`, `WaxKeysFull` (M2; traps and locks design
+6.11) **(change TL-25)** (cross-document comparison 2026-11-23, CC-40),
+`CampChoiceMade`, `LocationOccupied`,
 `ReactionCap`, `ButtonCap`, `DuplicateAnswer`, `AlreadyWarded`,
 `AlreadyWardedThisFight`, `TrinketHelpedLimit` (trinkets design 15)
 **(change TK-10)**, `FlaskThisTurn` (consumables design 18.4) **(change
@@ -667,9 +686,11 @@ Later; details lead's call unless marked)**
 
 ### 10.1 The purse
 
-- **One run-scoped party purse.** Coin is spent only at camp (and, Later,
-  at a wandering trader, 10.9). It is lost at run end: there is no meta
-  currency and no grind to win. **(agreed)**
+- **One run-scoped party purse.** Coin is spent only at camp, at a
+  Ticket lock (M3; access only, never loot; traps and locks design 7.7),
+  and, Later, at a wandering trader (10.9). It is lost at run end: there
+  is no meta currency and no grind to win. **(agreed)** The Ticket lock
+  clause is **(agreed 2026-11-23, cross-document comparison Q-1)**.
 - In M1 the coin line shows as a counter with nothing to spend (enemies
   15.8's M1 summary includes it).
 
@@ -736,8 +757,9 @@ Later; details lead's call unless marked)**
   unit is Perception-trained (exploration and information design 4.5.2).
   **(change XI-26)**
 
-**(lead's call)** Only the potions and the conditional Wax Key are limited
-stock, as the client decided; tonics, Remedy and bases are not stock-limited, and their price is
+**(lead's call)** Only the potions, the conditional Wax Key and the
+conditional Ear Trumpet (change XI-26; cross-document comparison
+2026-11-23, CC-44) are limited stock, as the client decided; tonics, Remedy and bases are not stock-limited, and their price is
 the knob (10.5; conditions 22). Unlimited goods are created at purchase
 (`ItemCreated`, no random draw). Vendor and shop wands and scrolls start
 full (`spent = 0`), since camp refills wands anyway.
@@ -751,7 +773,9 @@ item needs room for it (otherwise greyed `PackFull`).
 
 **Leaving camp:** unbought stock (vendor potions, shop notables) is
 destroyed (`ItemDestroyed{lost}`); an unbought vendor Wax Key lapses with
-`vendor.waxKeyStock` (no instance, no event). **(change TL-25)**
+`vendor.waxKeyStock` (no instance, no event). **(change TL-25)** An
+unbought Ear Trumpet lapses with its stock the same way (no instance, no
+event). **(change XI-26)** (cross-document comparison 2026-11-23, CC-44)
 
 ### 10.4 Shop or reward
 
@@ -971,7 +995,9 @@ and one service, for coin or barter.
   (containers, enemy-carried, boss, **trader**, then any returned trader
   slots on the containers channel); wand charges in item order (every
   wand, the trader's included); the camp channel and vendor potions
-  (10.4); the trader's tonic move (no draw) and **service** draw. These
+  (10.4); the trader's tonic move (no draw) and **service** draw (the
+  keyed `traderService` block, Later; cross-document comparison
+  2026-11-23, CC-45). These
   are keyed blocks of `loot/floor/{N}` evaluated in this order; no parent
   positions are inserted, so a floor without a trader draws every other
   block exactly as before **(change SV-32, Later; seeds and validation
@@ -1152,7 +1178,7 @@ family: { id: "family.longsword", category: "weapon", improvised: {...},
 | `id`, `nameKey`, `flavourKey` | string | Stable ID and localisation keys |
 | `family` | `family.*` | Cap key, duplicate rerolls, `improvised`, default monster profile |
 | `base` | item ID or null | The mundane base it builds on. Null for mundanes and consumables. |
-| `category` | enum | weapon, focus, shield, armour, trinket, consumable, scroll, wand, talisman (**change CN-1**; death and healing design 15, 16; **change DH-35**), key; `supply` is a counter record only, never instantiated (5.3); so is `waxKey` (M2), which is not `key` (5.3; traps and locks design 6.11) **(change TL-24)** |
+| `category` | enum | weapon, focus, shield, armour, trinket, consumable, scroll, wand, talisman (**change CN-1**; death and healing design 15, 16; **change DH-35**), key; `supply` is a counter record only, never instantiated (5.3); so is `waxKey` (M2), which is not `key` (5.3; traps and locks design 6.11) **(change TL-24)**; so are `lodestring` (M3) and `earTrumpet` (M3, conditional) (5.3; exploration and information design 4.5.2, 4.6.2) **(change XI-23; change XI-26)** (cross-document comparison 2026-11-23, CC-44) |
 | `kind` | enum (consumables) | potion, tonic, flask, coating, remedy |
 | `tags[]` | strings | Read by effects and offers: `twoHanded`, `versatile`, `thrown`, `fire`, `bulky`… |
 | `rarity` | enum | mundane, common, uncommon, rare, veryRare (12.5) |
@@ -1161,7 +1187,7 @@ family: { id: "family.longsword", category: "weapon", improvised: {...},
 | `size` | 0, 1 or `bulkySize` | Pack cost. 0 = party counter; `bulkySize` (2) = bulky. Stack size is not on the record: `stackMax` by `kind` in `inventory.json`, 1 for gear. |
 | `equip.slot` | enum | mainHand, offHand, either, twoHand, armour, trinket, none. A focus's `hands` maps `off`, `main` and `two` to `off`, `main` and `twoHand` (bulky) (weapons design 11.1; change W-6). |
 | `beltable` | bool | Only for consumable, scroll, wand and talisman; Remedy is not beltable **(change CN-1)**. A wand is used from the belt, never wielded. |
-| `requirements` | object | `strength {min, mode}`, `training {group, mode}`; `hard` = cannot be equipped, `soft` = a named penalty set by the category design. Weapon and focus items write neither: training lives on the family, and Strength comes from the family's `strengthClass` through `weapons.json` (weapons design 10, 20.1; change W-6). |
+| `requirements` | object | `strength {min, mode}`, `training {group, mode}`; `hard` = cannot be equipped, `soft` = a named penalty set by the category design. Weapon, focus, armour and shield items write neither: for weapons and foci training lives on the family, and Strength comes from the family's `strengthClass` through `weapons.json` (weapons design 10, 20.1; change W-6); for armour and shields training also lives on the family, and the Strength threshold comes from `strengthClass` through `armour.json` (armour design 16.1; change AR-36) (cross-document comparison 2026-11-23, CC-41). |
 | `classTags[]` | strings | Scrolls and wands: which classes use it "in class"; real class ids only **(change CN-1)** |
 | `lootLane` | `lane.*` | Exactly one build lane from the closed `loot.lanes` (build lanes, not trainability; the UI says "Suits", never "lane"). Smart-loot weights, `onParty` and the usability floor (agreed 2026-11-22, Q1) read it through `LanesOf(member)` (item rolls design 4.2, 4.3) **(change IR-1; M1 data on floor 1 records, M2)** |
 | `requires[]` | build tags | Smart-loot weighting (the offers vocabulary); secondary build tags beside `lootLane` (item rolls design 4.3, change IR-1) |
@@ -1330,7 +1356,10 @@ to a container in that room.
 
 - **A stack is one instance.** Its pool is `{max: stackMax, refill:
   never}` and stores `spent`; count = stackMax − spent. This is the settled
-  pool rule, so no exception is needed.
+  pool rule, so no exception is needed. The instance also stores the
+  `stackMax` in force at its creation, and its count reads that stored
+  value, so a patch that changes `stackMax` never alters a saved stack
+  (5.1; change SV-15) (cross-document comparison 2026-11-23, CC-3).
 - **Using** a dose increments `spent`. At count 0 the instance is
   destroyed (`ItemDestroyed{usedUp}`).
 - **Merging** fills matching stacks in the destination place, lowest slot
@@ -1439,7 +1468,10 @@ is original, so it carries no `srd` flag.
   Eligible: Rare+ gear field cards from floor 2; also never on the
   Dream's Due, fit premiums, the arms floor, any offer option or the
   fourth, the Viaticum, camp entries or rings (item rolls design 4.15).
-- `value` counts the benefit only. **A cursed carried item:** a monster
+- A cursed twin's `value` is its own deck tier T; its benefit is
+  authored to T+1's budget, and the curse pays the difference (change
+  LE-22; change IR-20) (cross-document comparison 2026-11-23, CC-43).
+  **A cursed carried item:** a monster
   carrier applies only the benefit, so its cost add uses the benefit-only
   value (the benefit's T+1 value; item rolls design 4.15, change IR-20). Hover shows "Carries: X" with **no curse mark**: finding it is the
   party's Arcana job.
@@ -1502,7 +1534,7 @@ is original, so it carries no `srd` flag.
 |---|---|---|
 | Weapon records, incl. multi-die (one-die conversion) | The weapon sub-record carries `dice[]` (a list, so "one die of the weapon's largest size", capped by the row die since enemies change W-5, is computable), `damageType`, `riderFlag` and tags | Weapons |
 | Armour records in the table AC bands with monster Dexterity | The armour sub-record carries `armourCategory` and `verb`; value, Dexterity cap and Strength threshold are derived from `armour.json`, never written on the record (armour design 16.1; change AR-36), plus a content test against the enemies 6.2 bands | Armour and shields |
-| Strength thresholds | Generic `requirements.strength {min, mode: hard\|soft}`, gating **wearing, never carrying** | Weapons; armour |
+| Strength thresholds | Generic `requirements.strength {min, mode: hard\|soft}`, gating **wearing, never carrying**. For weapons, foci, armour and shields the threshold is derived from the family's `strengthClass` and never written on the record (weapons design 20.1; armour design 16.1) **(change W-6; change AR-36)** (cross-document comparison 2026-11-23, CC-41) | Weapons; armour |
 | `improvised` attack per weapon family | On the **family record**; required for every weapon family | Weapons |
 | `monsterProfile`, `usableBy`, `family`, `requires`, `identifyDifficulty` | A **family default profile**, overridable per record; required exactly when `usableBy.monster`; applies benefits only | Each category |
 | k | **k = 1, provisional** (12.7) | Generic; the simulator owns the number |
@@ -1527,7 +1559,7 @@ is original, so it carries no `srd` flag.
 |---|---|---|---|
 | 1 | **Weapons (with foci)** | M1 | **Designed:** `2026-11-17-weapons-design.md` (weapons design), approved 2026-11-17, which adopts the no-ammunition-tracking recommendation (weapons design 9.4). Disarmed and Coated stay Later. **(change W-15)** |
 | 2 | **Armour and shields** | M1 | **Designed:** `2026-11-17-armour-design.md` (armour design), approved 2026-11-17, which takes the weapons design 17.9 inputs **(change W-13)**. Pitted Armour and the tower shield stay Later. **(change AR-37)** |
-| 3 | **Starting kits** (small; may fold into 1 and 2) | M1 | `kit` records per class and per companion: weapon sets, armour, belt contents, starting coin. Answers ability model 20's "a minimal starting-equipment set for M1". Armour kits as in armour design 13.6 **(change AR-37)**. Every hero class kit holds 2 healing potions on the belt; every recruit kit 1; the hero's camp top-up of 1 (death and healing design 12.4, 13.2) **(change DH-37, agreed 2026-11-17, Q3)**. |
+| 3 | **Starting kits** (small; may fold into 1 and 2) | M1 | **Answered:** hero kits are set in the four class designs (Shade, Vanguard, Arcanist and Herald) and companion kits in the companions design (8.3, 8.4) (cross-document comparison 2026-11-23, CC-46). `kit` records per class and per companion: weapon sets, armour, belt contents, starting coin. Answers ability model 20's "a minimal starting-equipment set for M1". Armour kits as in armour design 13.6 **(change AR-37)**. Every hero class kit holds 2 healing potions on the belt; every recruit kit 1; the hero's camp top-up of 1 (death and healing design 12.4, 13.2) **(change DH-37, agreed 2026-11-17, Q3)**. |
 | 4 | **Consumables** (potions, tonics, flasks, coatings, Remedy) | M1 potions; M2 rest | **Designed:** `2026-11-17-consumables-design.md` (consumables design), approved 2026-11-17 **(change CN-8)**: effects, `stackMax`, the use-value table, prices and pegs against supply, thrown flasks, monster `useWhen`, banding. Potions can be thrown at a willing ally: action, range 5, `thrownPotionPermille`, never lifts Downed (consumables design 11) **(change CN-4)**. Coatings and Coated stay Later. |
 | 5 | **Scrolls and wands** | M2 | **Designed:** in the consumables design (section 13), approved 2026-11-17 **(change CN-8)** |
 | 6 | **Trinkets** | M2 | **Designed:** `2026-11-17-trinkets-design.md` (trinkets design), approved 2026-11-17. Piece tables by location, jewellery tables by kind (trinkets design 14.1), capacity table **(change TK-9)**, capacity trinkets (at most +2), trinket families and caps. From the armour design **(change AR-37)**: piece kinds; location domains (armour design 5.6); the strict no-AC rule; the one-table rule; the reaction cap; pieces at Uncommon at most; at least 3 legal families per piece location per wave; `requires` tags for location hunger (armour design 5.7); the piece power target (armour design 17.3) |
@@ -1619,6 +1651,7 @@ no other occurs.
 | `shop`, `trader` | 6.2 placement (armour and trinkets to a pack at a trader) | Buy, barter | camp; trader (Later) | `ItemBought`, `CoinChanged` |
 | party place | deleted | use to 0, Sell, barter offer | any; camp; trader | `ItemDestroyed{usedUp}`, `ItemSold`, `ItemBartered` |
 | unequipped carried item | deleted | offered as a Curiosity's price (events design 4.4.4) **(change EV-9, M2)** | out of combat | `ItemDestroyed{offered}` |
+| an offer set's unchosen option (the boss card, the Wager cage set, the Viaticum, the Twin Coffer's unused identity) | deleted | the choice resolves (loot economy design 6.3) **(change LE-4, M2; change LE-21, M3)** (cross-document comparison 2026-11-23, CC-40) | out of combat | `ItemDestroyed{dreamedAway}` |
 | party place (`boundToUnitId` set) | deleted | on dismissal or same-visit undo of its unit (companions design 7.6) **(change CMP-21)** | camp | `ItemDestroyed{dismissed}` |
 | `leftovers`, `pile` | deleted | stairs | descent | `ItemScrapped` (heirloom: `ItemDestroyed{lost}`) |
 | `container`, `carried`, `ground`, `trader`, `party(keys)`, `windfall` **(change LP-2; M3)** | deleted | stairs | descent | `ItemDestroyed{lost}` |
@@ -1636,7 +1669,7 @@ are unit conditions.
 - New item events: `ItemCreated`, `ItemTaken`, `ItemMoved`,
   `ItemEquipped`, `ItemUsed`, `ItemSplit`, `ItemMerged`, `ItemClaimed`,
   `ItemRevealed`, `ItemLeft`, `ItemSold`, `ItemBought`, `ItemScrapped`,
-  `ItemDestroyed{reason: usedUp | lost | dreamedAway | gotAway | offered}` (`dreamedAway`: an
+  `ItemDestroyed{reason: usedUp | lost | dreamedAway | gotAway | offered | dismissed}` (`dreamedAway`: an
   unchosen option of an offer set dissolving when the choice resolves;
   loot economy design 6.3) **(change LE-4, M2; change LE-21, the Twin
   Coffer, M3)** (`gotAway`: a Windfall's card leaving with its Truant;
@@ -1644,7 +1677,10 @@ are unit conditions.
   loot sources design 4.7.7) **(change LP-2; M3)** (`offered`: an unequipped
   carried item the player gives up as a Curiosity's printed price; never a
   healing item, an HE-3/4 item, the Due, a quest item or a curse; not
-  `dreamedAway`; events design 4.4.4) **(change EV-9, M2)**, `ItemRecharged` (camp, and Later
+  `dreamedAway`; events design 4.4.4) **(change EV-9, M2)** (`dismissed`:
+a `kitBound` instance deleted when its unit is dismissed or its hire
+undone; companions design 7.6) **(change CMP-21)** (cross-document
+comparison 2026-11-23, CC-40), `ItemRecharged` (camp, and Later
   the trader), `ItemReturned` (Disarmed, Later); Later `ItemBartered`.
 - Consumable events (consumables design 18.4): `ItemUsed` gains `mode:
   self | adjacentAlly | thrown | inClass | outOfClass`; new
@@ -1654,7 +1690,9 @@ are unit conditions.
 - New trinket event: `TrinketPropertyFired{property, instanceId, unit,
   result}` (trinkets design 17.3) **(change TK-15)**.
 - New state events **(lead's call)**: `CoinChanged{delta, source: found |
-  salvage | sell | scrap | buy | barter | service}`, `SupplyChanged{delta,
+  salvage | sell | scrap | buy | barter | service | ticketLock}` (`ticketLock`:
+  coin paid at a Ticket lock, M3; traps and locks design 7.7; agreed
+  2026-11-23, cross-document comparison Q-1), `SupplyChanged{delta,
   source}`, `MarkerCreated{kind: leftovers | pile | trader, room}`,
   `CampChoiceMade{choice: shop | reward}`; Later `TraderDiscovered` and
   `TraderServiceUsed{service, target}`.
@@ -1703,7 +1741,9 @@ The build fails on any violation:
    equal it. `value` = Σ fixed property values + rollable `count` ×
    `entryValue` + use and granted-ability values, and it **equals** the
    tier budget (curse cost excluded; a signature item adds its authored
-   property, 12.5). A trinket button is a property whose effect is the
+   property, 12.5). Later: a cursed twin's `value` is its own tier T,
+   and its benefit is authored to T+1's budget (13; change LE-22, change
+   IR-20) (cross-document comparison 2026-11-23, CC-43). A trinket button is a property whose effect is the
    grant; its value is counted once, inside that property **(change
    TK-12)**. Every vendor- or camp-sellable record has a price above
    0.
@@ -1717,7 +1757,8 @@ The build fails on any violation:
    `fightUses` state (trinkets design 9.3) **(change TK-13)**.
 5. `size` ∈ {0, 1, `bulkySize`}. Two-handers, armour and shields are
    bulky. Size 0 only for party-counter categories (`supply`, `key`,
-   `waxKey` **(change TL-24)**).
+   `waxKey` **(change TL-24)**, `lodestring` and `earTrumpet` **(change
+   XI-23; change XI-26)** (cross-document comparison 2026-11-23, CC-44)).
    Records carry no `stackMax` (5.1).
 6. `beltable` ⇒ category ∈ {consumable, scroll, wand, talisman} **(change
    CN-7)**. No record is both
@@ -1969,8 +2010,10 @@ Consumable, scroll, wand and talisman reports: see consumables design
 - **Barter could become a laundering route** (turning unwanted loot into
   wanted loot above Sell value). Mitigation: one-for-one, no change given,
   and the barter rate is a tuning value.
-- **Dependencies.** Category designs and dungeon generation are not yet
-  designed (section 24). Numbers here are provisional until they are.
+- **Dependencies (answered).** The category designs, the class designs,
+  the companions design and dungeon generation are now designed (section
+  24) (cross-document comparison 2026-11-23, CC-46). Numbers marked
+  *(illustr.)* stay provisional to simulator calibration.
   Death and healing is settled in the death and healing design
   (`2026-11-17-death-healing-design.md`). **(change DH-35)**
 - **Protected content.** SRD tier names and any SRD item are attributed
@@ -1983,11 +2026,35 @@ Consumable, scroll, wand and talisman reports: see consumables design
   counts within the agreed shape, `stackMax` values, Sell, Scrap and barter
   rates, the notables-shop size, the Leadership discount within its shape,
   coin per value, category multipliers, the minimum price, the dormant
-  allowance, the room guard, family caps, rarity budgets and depths, vendor
+  allowance, the room guard, family caps (except the agreed values below),
+  rarity budgets and depths, vendor
   stock, and the trader's floors, multiplier, presence chance, stock size,
   guards and service prices.
 - **Not tuning:** `packInCombat: action` and the free camp identify are
-  client decisions; changing them needs client approval.
+  client decisions; changing them needs client approval. So are the 5.1
+  keys named there as not tuning (cross-document comparison 2026-11-23,
+  CC-42):
+  - the `ePlusGate` block (the lead's binding numbers; only the lead
+    changes them; change AR-31, change TK-4);
+  - `trinketRarePerFloorMax` and `trinketButtonCap` (client decisions);
+    `trinketSubjects`, `trinketDomains`, `sharedTrinketAllowlist`,
+    `copyRegistryAllowlist` and the channel filter lists (a lead's-call
+    block only the lead changes; change TK-11);
+  - the death and healing keys `healingSundryMin`, `healingSundryMax`,
+    `supplyMainPathMin`, `heroKitPotions`, `recruitKitPotions` and
+    `campHeroPotionTopUp` (client numbers; change DH-33), and the
+    `consumables` block's keys that the consumables design 18.1 marks
+    not tuning (change CN-2);
+  - the talisman keys `stackMax.talisman` 1, `categoryPermille.talisman`
+    1500 and `familyCapPerRun.talisman` 1 (settled; change DH-33);
+  - the `loot` block's keys that the loot economy design 10.1 marks not
+    tuning (change LE-2), and `loot.usability.hardOn`,
+    `loot.memory.oncePerRunBy`, Scion-line-once at Common and Uncommon
+    and `loot.plainGifts` (agreed 2026-11-22, item rolls Q1–Q3; change
+    IR-5, IR-6, IR-9);
+  - the agreed family caps per run (enemies 15.3 step 2): weapon,
+    armour, shield, focus, scroll and wand 2; trinket and talisman 1
+    (`familyCapPerRun`; the trinket Scion exception, change IR-5).
 - `identifyDifficulty` values per record.
 - Party view, summary, shop and trader layouts within sections 5.5, 8 and
   10.
@@ -2054,7 +2121,9 @@ mundane bases are not loot, and family caps all stand.
   use-value table and price peg. The generic layer fixes only their shape.
   Weapons and foci are no longer pending: see the weapons design
   (`2026-11-17-weapons-design.md`). Disarmed and Coated stay Later;
-  starting kits remain open in their category designs. **(change W-15)** Armour and shields are no
+  starting kits are set in the four class designs and the companions
+  design (8.3, 8.4) (cross-document comparison 2026-11-23, CC-46).
+  **(change W-15)** Armour and shields are no
   longer pending: see the armour design (`2026-11-17-armour-design.md`),
   which also fixes the armour part of starting kits (13.6) and hands
   worn-piece kinds to the trinkets design. **(change AR-39)** Trinkets
@@ -2070,7 +2139,10 @@ mundane bases are not loot, and family caps all stand.
   launch, so 15's conditional rule stays dormant (death and healing design
   6.4, 11); no healing lifts Downed, as Administer assumes (death and
   healing design 11.5). **(change DH-35)**
-- **Dungeon generation:**
+- **Dungeon generation:** answered: containers and lair caches by the
+  loot sources and traps and locks designs, room identity and the stairs
+  by the floor layout design, and the trader's draws by the seeds and
+  validation design (cross-document comparison 2026-11-23, CC-46).
 
 | Requirement | Consumers | Wave |
 |---|---|---|
@@ -2087,8 +2159,10 @@ mundane bases are not loot, and family caps all stand.
   mastery's signature use (it could interact with identification) goes to
   the classes design's stage 2 (classes design 8.5, 14). **(change
   CL-13h)**
-- **Companions:** companion kits; the companion scorer's "drink it"
-  suggestion and its placement preferences.
+- **Companions:** answered by the companions design
+  (`2026-11-20-companions-design.md`, 8.3, 8.4): companion kits; the
+  companion scorer's "drink it" suggestion and its placement preferences
+  (cross-document comparison 2026-11-23, CC-46).
 - **Camp and hub screens:** the camp layout that hosts the vendor, the
   shop-or-reward choice, Sell and the party view; **what the camp reward
   card offers** (any item it offers comes from the `camp` channel, 10.4).

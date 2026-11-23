@@ -38,9 +38,10 @@ checked against (section 19).
 
 **Waves:** M1 is the vertical slice (one class, levels 1–3, one floor,
 three enemy types, solo hero, basic loot). M2 is the full run with
-companions. M3 adds profile, unlocks and boons. Later is everything after
-M3 that no milestone names, including M4. **(settled, main design 9; items
-design header)**
+companions. M3 adds profile, unlocks and boons. M4 is breadth (species,
+multiclassing, more content). Later is everything after M4. **(settled,
+main design 9; items design header)** (cross-document comparison
+2026-11-23, CC-38)
 
 ## 1. Intent
 
@@ -322,15 +323,19 @@ gear. **(agreed)**
 - **Effect:** the weapons in the weapon set that was active when Notched
   landed roll their dice one size smaller (minimum d4) and lose their verb.
   On a focus it suppresses only the focus verb. Shields and natural weapons
-  are unaffected.
+  are unaffected, except the **Reliquary Shield**, which is a focus:
+  Notched lands through it and suppresses Spare only, never the AC
+  (armour design 10.2; change AR-15) (cross-document comparison
+  2026-11-23, CC-48).
 - **The instance records the weapon set,** the way Teetering records its
   hazard. **(lead's call)** It records the instanceIds of the items in that
   set when it lands, not the set's slot, so rearranging the sets out of
   combat does not shed it. Handing a recorded weapon to an ally also
   escapes it; this is accepted as the same escape as the set swap.
 - **Landing (lead's call):** Notched applies only if the active set holds
-  at least one weapon or focus it would affect (not a shield, a natural
-  weapon or a Sure Grip weapon). Otherwise it does not apply, takes no
+  at least one weapon or focus it would affect (not a shield other than a
+  Reliquary Shield, a natural weapon or a Sure Grip weapon; AR-15;
+  cross-document comparison 2026-11-23, CC-48). Otherwise it does not apply, takes no
   lingering slot, and the rider or effect counts as not attempted.
 - **Re-application (settled, conditions 6.3):** a unit that already has
   Notched cannot gain it again: the equal value and the same `untilCamp`
@@ -522,6 +527,12 @@ class's Strength-main spread:
 | Best launcher build of each Dexterity-main class | ≥ 75% |
 | Every launcher family, trained wielder, its best class build (M2 parity set) | ≥ 60% |
 | Any build, measured as VG-12: rest-pool damage floor-averaged at the worst legal build (every legal capacity step), Slot Recovery counted as rest power **(change ARC-3; Arcanist design 11.1)**; camp-pool damage bounded by the nova bound and `CampOptionBound` (`actionsGranted` ≤ the base option's; was `SurgeOptionBound`; scoped to non-slot, non-slotless camp pools), or for slot pools `SpellTierBound` and for slotless casts `SlotlessCastBound`, instead **(change VG-12; Vanguard design 10.1; renamed by change SH-5, Shade design 17; change ARC-2, Arcanist design 11.1, 11.2)**; the value a camp-sourced condition adds to your own at-wills is charged to the source spell's row in the parity accounting, not the at-will's (`SetupAttribution`; the static `SpellTierBound` is unchanged by it) **(change ARC-16; Arcanist design 11.1)** | ≤ 110% |
+
+**Pending (Shade design 15, 18; finding N-5; M2):** the Shade design
+predicts that some launcher families miss the ≥ 60% per-family floor
+above, and hands the launcher family floors to the weapons owner. This
+is answered after the M2 parity run; nothing here changes until then
+(26) (cross-document comparison 2026-11-23, CC-47).
 
 **Binding requirement on the class designs (agreed):** every class whose
 main ability is Dexterity has at least one **precision feature**: a class
@@ -1597,7 +1608,7 @@ No two launchers share a verb.
 
 | Focus | Wave | Hands | Focus verb (buff-test tag) | Notes |
 |---|---|---|---|---|
-| **Staff** (one family: weapon + focus, any tradition) | M1 if the slice class casts, else M2 | two as a focus (focus verb and properties only two-handed, 11.2); versatile 1d6 / v1d8 B as a weapon, simple | **Steady Casting:** advantage on concentration checks (prevent) | Merges the quarterstaff. Its weapon verb is Parry. The family cap counts it under `focus`. |
+| **Staff** (one family: weapon + focus, any tradition) | M2 (the M1 slice class, the Vanguard, does not cast; change CL-13d; cross-document comparison 2026-11-23, CC-49) | two as a focus (focus verb and properties only two-handed, 11.2); versatile 1d6 / v1d8 B as a weapon, simple | **Steady Casting:** advantage on concentration checks (prevent) | Merges the quarterstaff. Its weapon verb is Parry. The family cap counts it under `focus`. |
 | Orb (arcane) | M2 | off | **Reach Out:** cantrip range +4 (targeting) | The back-line artillery caster |
 | Rod (arcane) | M2 | **main** | **Shape:** line and cone cantrips +2 length, inside the area cap (targeting) | Rod and shield |
 | Tome (arcane) | M2 | off | **Annotate:** swap one known spell at a short rest instead of camp (economy) | The planning focus |
@@ -1794,7 +1805,7 @@ Rider-free, M1 conditions only.
 | Bonebreaker Mace | mace | Common | Floorer |
 | Wardwood Staff | staff | Common | Warding Staff |
 | Magpie's Knife | dagger | Common | Far-flight (thrown 8) |
-| **Headsman's Greataxe** (boss signature) | greataxe | Floor 1 top tier (budget 2) plus one authored property (items design 12.5) | Wide Cleave, Opener, plus authored Reaping |
+| **Headsman's Greataxe** (boss signature) | greataxe | Floor 1 top tier (budget 2) plus one authored property (items design 12.5) | Wide Cleave, Opener, plus authored Reaping. No channel until its M3 boss (the Ministry of Small Mercies, F1–2; boss rooms design 4.11.1, change BR-27; item rolls design 4.13) (cross-document comparison 2026-11-23, CC-49) |
 
 "Vowkeeper" replaces "Oathkeeper", a protected name.
 
@@ -2016,7 +2027,8 @@ The build fails when:
 - **M1** (one class, levels 1–3, one floor, three enemy types):
   - 15 families: dagger, rapier, longsword, greatsword, handaxe, greataxe,
     mace, greatclub, warhammer, flail, pike, spear, longbow, light
-    crossbow, sling; plus the staff if the slice class casts.
+    crossbow, sling. No staff: the slice class is the Vanguard (change
+    CL-13d; cross-document comparison 2026-11-23, CC-49).
   - 11 verbs: Push, Topple, Cleave, Skewer, Nick, Lunge, Aim, Parry, Set,
     Graze, Pry.
   - Rules: chassis and attack ability; the attack pipeline (7.5) and
@@ -2034,7 +2046,7 @@ The build fails when:
     Dexterity-main, the rapier is its M1 measuring build.
 - **M2:** shortsword, sabre, sickle, battleaxe, maul, war pick, whip,
   glaive, halberd, trident, javelin, shortbow, hand crossbow, heavy
-  crossbow; spear-and-shield soldiers and light crossbow artillery; the
+  crossbow; the staff (CL-13d; CC-49); spear-and-shield soldiers and light crossbow artillery; the
   remaining foci; M2 natural weapons; Vex, Flourish, Hook (with `shift`)
   and Puncture; riders, Honed and the Edge riders; the
   Dexterity parity reports and the Precision gate (6.5).
@@ -2170,11 +2182,16 @@ left as they are (7.2 rule 9).
 ## 26. Depends on systems not yet designed
 
 - **Classes and offers:** concepts settled in
-  `2026-11-17-classes-concepts-design.md`; its stage 2 owes the binding
-  precision feature of each Dexterity-main class with its simulator
-  evidence, melee and launcher (6.4); each class's training lists; the
-  Technique option and the "verb training (family)" offer (7.3);
-  subclasses keyed to verbs or groups; disarm Techniques (Later). The M1
+  `2026-11-17-classes-concepts-design.md`; its stage 2 is taken up by the
+  four approved class designs (`2026-11-18-vanguard-class-design.md`,
+  `2026-11-18-shade-class-design.md`,
+  `2026-11-20-arcanist-class-design.md`,
+  `2026-11-20-herald-class-design.md`), which carry the binding precision
+  feature of each Dexterity-main class with its simulator evidence, melee
+  and launcher (6.4); each class's training lists; the Technique option
+  and the "verb training (family)" offer (7.3); subclasses keyed to verbs
+  or groups; disarm Techniques (Later) (cross-document comparison
+  2026-11-23, CC-49). The M1
   slice class is the Vanguard, so no staff ships in M1 **(change CL-13d)**.
 - **Armour and shields:** designed in
   `2026-11-17-armour-design.md`: the bash sub-record, buckler, Reliquary
@@ -2185,7 +2202,20 @@ left as they are (7.2 rule 9).
   **(change CN-26)**.
 - **Starting kits:** weapon sets per class and companion (items design 17,
   row 3).
-- **Companions:** kits drawn from these families; the D-c playtest.
+- **Companions:** designed in `2026-11-20-companions-design.md`: weapon
+  training per kit and the eight M2 kits drawn from these families
+  (companions design 8.3); the D-c fallback stays tied to the M2
+  companion-turn median (companions design 7.4; CMP-28) (cross-document
+  comparison 2026-11-23, CC-49).
+- **Pending (cross-document comparison 2026-11-23, CC-47):**
+  - **Launcher family floors** (Shade design 15, 18; N-5): answered
+    after the M2 parity run (6.4).
+  - **Item rolls content requests** (item rolls design 9.4; M2): Rare
+    weapon and focus records, ≥ 3 per lane × 7 lanes (minimum 2 per
+    lane) *(illustr.)*, with ITEMS; and about 4–6 value-2 majors for
+    blades, axes, polearms and spears (R-1). Until the majors land, R and
+    VR signatures stay on impact, launcher, focus or armour bases (item
+    rolls design 14.2, 4.13).
 - **Death and healing:** designed in `2026-11-17-death-healing-design.md`:
   the crit rule is settled (S-3, death and healing design 9). Every guard
   and parity figure here assumes SRD double dice for every unit (enemies

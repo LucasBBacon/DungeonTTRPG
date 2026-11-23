@@ -566,7 +566,14 @@ About one action's worth each. **(lead's call)**
   parent channels. It changes nothing until the TK owner confirms; if
   refused, a fallback trinket may be Rare only when no Rare trinket is
   reserved on the floor's deck, and TK-27's order stands (item rolls
-  design 14.2).
+  design 14.2). Inside IR-14 the TK owner is also asked to restate
+  TK-27's order as LootPlan identities, then containers, carried, boss,
+  camp; pending the TK owner (cross-document comparison 2026-11-23,
+  CC-46).
+- **Pending request (item rolls design 9.4; M2 request):** 2–3 Rare neck
+  families. TK holds it under the 24.3 report trigger (a second Rare
+  neck family); until that report fires, Heartward stays the only Rare
+  family (cross-document comparison 2026-11-23, CC-53).
 
 ### 8.3 Power checks
 
@@ -767,7 +774,11 @@ About one action's worth each. **(lead's call)**
    shift **(change ARC-27; Arcanist design 7.3)**. Tincture (Alembic
    Prime III) against the Water Flask's ally use awaits the registry's
    ruling; if it fails, the Alembic takes Seal instead **(change ALM-7;
-   Arcanist design 9.2)**.
+   Arcanist design 9.2)**. **Owed registry rulings (pending, lead;
+   cross-document comparison 2026-11-23, CC-54):** Duskhem against No
+   Witnesses III and Long Shadow; Slinger's Bracers against Toss and
+   Dust (VG-18); the Herald pairs, including Reach the Fallen against
+   the Lifeline Pendant.
 2. **Weapon, armour, shield and focus properties keep weapons 18.1:**
    charged echoes are legal (Ember Ring echoes Ember Edge; Longreach
    echoes Long Haft); always-on copies are not.
@@ -1041,21 +1052,29 @@ All minors `entryValue` 1; majors 2 and jewellery only. **(lead's call)**
 
 No Rare-only tables in M2 (Heartward uses the neck tables).
 
+A trinket family's curated table is the legal set these tables leave
+after rule 28's exclusions (at least 1), not the 3–5 of IR-4: hands and
+feet leave 2, a channel ring 2, Wardstone 1 (rule 28; cross-document
+comparison 2026-11-23, CC-4).
+
 ### 14.2 Example notables *(illustr.)*
 
 | Notable | Rarity | Lines | Value |
 |---|---|---|---|
 | Strider's Boots | C | Strider | 1 |
-| Ashen Strider's Boots | U | Strider + rolled Runner | 2 |
+| Strider's Boots of the Runner | U | Strider + rolled Runner | 2 |
 | Watcher's Hood of the Bar | U | Vigil + rolled Barred (dormant until identified) | 2 |
 | Ember Ring | C | Ember | 1 |
-| Kindler's Ember Ring | U | Ember + rolled Aid | 2 |
+| Ember Ring of Aid | U | Ember + rolled Aid | 2 |
 | Graveward Amulet | C | Graveward | 1 |
 | Kinward Torc | U | Kinward (major) | 2 |
 | Heartward Torc | R, floor 3+ | Kinward + rolled Antidote (may be dormant) | 3 |
 | Wardstone | C | Wardstone (button) | 1 |
-| Tallied Wardstone | U | Wardstone + rolled Tally | 2 |
+| Wardstone of the Tally | U | Wardstone + rolled Tally | 2 |
 | Mule Strap | U | Pack +2 | 2 |
+
+Uncommon notables name the rolled line as a suffix epithet (IR-9;
+cross-document comparison 2026-11-23, CC-55).
 
 ## 15. Display
 
@@ -1199,7 +1218,11 @@ prop.trinket.kinward: { value: 2, table: "props.trinket.neck_major",
 
 - **`trinkets.json`** holds the property tables (14.1), per-property pool
   bands and the trinket tuning numbers. A save records its hash, as
-  `inventory.json` does. **(lead's call, new: the domain map lives in
+  `inventory.json` does; a run crossing a patch continues on the new
+  build and is marked not comparable (seeds and validation design
+  4.10.1). Each stack instance stores its stackMax at creation, so a
+  stackMax change never alters a saved stack's dose count (change
+  SV-15) (cross-document comparison 2026-11-23, CC-3). **(lead's call, new: the domain map lives in
   `inventory.json` with the other cross-category keys, so it has one
   source)**
 - **`inventory.json`** gains (TK-11):
@@ -1295,7 +1318,7 @@ fails when **(lead's call)**:
 | 25 | **Carriers:** `negates[]` and a role-answer pass per carrier type; `carrier{}` limits present on every carried-eligible property; output conditions within the type's 2; a reaction-shaped property counts as the type's one reaction beyond the opportunity attack and a button under the bonus-action cap (enemies 9.1); Wardstone and Ward-Knot never with the Warded or Unbreakable affix; the 6.4 guards pass with the carrier (checked at generation, enemies 15.3 step 4) |
 | 26 | **Two classes:** every record declares `usefulFor[]` with at least 2 launch classes or `anyCompanion`, signed off by the lead; tag-keyed text met by at least 2 |
 | 27 | **Element families:** at most 2 element families per wave per lane (finger, neck, back), counted from `element` |
-| 28 | **Rolled lines:** a rollable table never offers the item's own obvious line, and never a line sharing an `answers[]` key with it, a second channel on a channel ring, or a second button. An Uncommon or Rare obvious line with no legal roll in its table fails; Heartward keeps all 3 (Antidote, Graveward, Lifeline). **(change IR-4; M2; item rolls design 4.6)** This rule extends to every rolled category; a gear record carries at most 1 rolled line, only the rolled line may be dormant, and each family declares a curated table of 3–5 eligible entries |
+| 28 | **Rolled lines:** a rollable table never offers the item's own obvious line, and never a line sharing an `answers[]` key with it, a second channel on a channel ring, or a second button. An Uncommon or Rare obvious line with no legal roll in its table fails; Heartward keeps all 3 (Antidote, Graveward, Lifeline). **(change IR-4; M2; item rolls design 4.6)** This rule extends to every rolled category; a gear record carries at most 1 rolled line, only the rolled line may be dormant, and each family declares a curated table of 3–5 eligible entries, except trinket families (`props.trinket.*`), whose curated table is the legal set left after this rule's exclusions (at least 1) (cross-document comparison 2026-11-23, CC-4) |
 
 Armour 17.1 rules 10, 11, 13, 14 and 17 still apply **(settled, AR-38)**.
 The authoring lean (5.6) is a lint warning, never a failure.
@@ -1591,6 +1614,10 @@ grants.
 - **Lead's checks before data** (existing designs, not new systems):
   Duskhem against Hidden's end rules and Shadowed; Storm Ring against arc
   damage (the arc defined by ARC-14, Arcanist design 8.1); Dawn Ring against Hidden's targeting rule; Kinstone `sourceTied`.
+- **Copy registry rulings owed (pending; 11 item 1):** Duskhem against No
+  Witnesses III and Long Shadow; Slinger's Bracers against Toss and Dust
+  (VG-18); the Herald pairs, including Reach the Fallen against the
+  Lifeline Pendant (cross-document comparison 2026-11-23, CC-54).
 
 ## 24. Open items for the client
 
@@ -1638,7 +1665,9 @@ it:
 - **A second Rare neck family** (for example Emberward plus a rolled neck
   minor), if the Rare offer and pick reports show the Rare tier too thin
   on floors 4–5 (8.2, 20). It adds a family to the roster, so it comes
-  back with the report.
+  back with the report. Item rolls design 9.4's request for 2–3 Rare
+  neck families (M2 request) is pending and held under this trigger
+  (cross-document comparison 2026-11-23, CC-53).
 - **Q4(b),** the weakness bonus on ring-shifted parts, only if rings fail
   their pick and trigger targets after tuning.
 

@@ -152,7 +152,7 @@ All **(settled)**:
 | Conditions 18.2, 18.9, 18.10 | Downed; Death-warded (Later, "the first drop to 0 hit points leaves it on 1", always `combatOnly`); Scarred (agreed; the hero is never Scarred) | The phial (section 14) |
 | Enemies 6.4, 15.3, 15.4 (agreed) | Permadeath guards; sundry-like "1–2 supply and a few tonics"; carriers use what they carry | Monster use (section 15) |
 | Weapons 9.1, 14 | Thrown range 5 for the dagger; wands are never wielded or foci | Flask range (12); wands (13.6) |
-| Armour 14.3; trinkets 13.2, 13.5, 13.7, 23 (Death and healing bullet) | Last Ward (Later); Slinger's Bracers (Later); Lifeline Pendant; Scrollwright's Token and Last-Breath Charm (Later); death-ward owners left to death and healing | Inputs to sections 11, 13, 14 |
+| Armour 14.3; trinkets 13.2, 13.5, 13.7, 23 (Death and healing bullet) | Last Ward (retired; DH-45); Slinger's Bracers (Later); Lifeline Pendant; Scrollwright's Token (Later); Last-Breath Charm (retired; DH-45); death-ward owners left to death and healing (cross-document comparison 2026-11-23, CC-58) | Inputs to sections 11, 13, 14 |
 | Main design 2 | No D&D names; SRD content carries attribution | Section 17 |
 
 ### 3.2 Numeric conventions
@@ -731,10 +731,10 @@ checked against pegs K1 and K2 (9.3).
 | Channel | What |
 |---|---|
 | Basic vendor **(agreed)** | Supply; healing potions in pre-rolled stock of 2–3 *(illustr.)*; tonics and Remedy, unlimited (price is the knob); 1 Wax Key only when the party has no Mechanics-trained member (M2; items 10.3; traps and locks design 6.11; change TL-25, **agreed, Q3 of 2026-11-21**); 1 Ear Trumpet (a run-scoped lane-gap party counter, cap 1, not a consumable record; 15 coin *(illustr.)*) only when no party unit (the hero included) is Perception-trained on the camp-entry snapshot, stable for the visit (the TL-25 test); its effect is suspended while any living party unit is Perception-trained and lasts through the next floor; stocked only if the M2 report `SoloListenClickShare` misses (M3, **conditional**; items 10.3; exploration and information design 4.5.2; change XI-26, **agreed, Q3 of 2026-11-23**) |
-| Sundries (new loot class, CN-19) | Common consumables: healing potion, tonic, water, oil; Fire Bomb from floor 2. Drawn per floor **outside the notable count**, inside the fixed budget (items 2), `sundriesPerFloor` doses set per floor *(illustr. 3–5 on floors 1–2, 4–5 on floors 3–5)*. **At least 1 healing potion per floor** (`healingSundryMin` 1, drawn first; 2 on floors 4–5 only through the pre-authorised raise) and **at most 3** (`healingSundryMax`) **(client, Q3)**: the guaranteed potion goes in a main-path container in the first half of the main path, openable with no check, and is never substituted; random potions lean off-path (`healingOffPathPermille` 600) (death and healing design 12.4, 12.5) **(change DH-40)**. From floor 2, **at least 1 and at most 2 offensive flasks** per floor (`offensiveSundryMin`, `offensiveSundryMax`), the minimum drawn before the other sundries **(lead's call)**. Mostly containers, plus the settled single carried consumable per encounter |
+| Sundries (new loot class, CN-19) | Common consumables: healing potion, tonic, water, oil; Fire Bomb from floor 2. Drawn per floor **outside the notable count**, inside the fixed budget (items 2), `sundriesPerFloor` doses set per floor *(illustr. 3–5 on floors 1–2, 4–5 on floors 3–5)*. **At least 1 healing potion per floor** (`healingSundryMin` 1, drawn first; 2 on floors 4–5 only through the pre-authorised raise) and **at most 3** (`healingSundryMax`) **(client, death and healing Q3)** (cross-document comparison 2026-11-23, CC-58): the guaranteed potion goes in a main-path container in the first half of the main path, openable with no check, and is never substituted; random potions lean off-path (`healingOffPathPermille` 600) (death and healing design 12.4, 12.5) **(change DH-40)**. From floor 2, **at least 1 and at most 2 offensive flasks** per floor (`offensiveSundryMin`, `offensiveSundryMax`), the minimum drawn before the other sundries **(lead's call)**. Mostly containers, plus the settled single carried consumable per encounter |
 | Notables | Scrolls, wands, the Greater Fire Bomb and the talisman count in the 6–8 notables per floor and the camp channel; their share steered by category weights by depth and the F5 tactical cap, ranges unchanged (M2; loot economy design 6.2; change LE-17) |
 | Camp channel (notables shop, camp reward card) | Scrolls (never healing scrolls, P1), wands, the Greater Fire Bomb, all with channel `camp` (shop and reward card); the talisman **only** through `campReward` (the reward card, never the shop; CN-1) |
-| Boss reward card | Scrolls, wands; the talisman from floor 3 (a boss-channel phial fills option 2; item rolls design 4.1; change IR-8). Floors 1–4 only: no final-boss card; on floor 5 the Viaticum (choose 1 of 3 Rare wands and tier-3 scrolls, usable options, never the phial) takes the boss share (M2; loot economy design 6.11; change LE-5, **agreed, Q1 of 2026-11-22**). **Offer slots (M2; item rolls design 4.8, 4.10; change IR-8, agreed, Q1 of 2026-11-22):** options Yours, Theirs, Wayward and the fourth; families distinct, effect tags distinct where legal, at most 1 damage option; a hero guarantee. **Usability fallback (M2; loot economy design 6.3; change LE-3; item rolls design 4.8; change IR-8, agreed, Q1 of 2026-11-22):** each option with no usable record is redrawn **on its own** as usable gear at the same tier (usability filter, ordinary weights, not fit-filtered), on `bossCardFallback` entry = option index, then the offer terminal ladder. **Martial parties (item rolls design 4.8; change IR-8):** "the boss gives spells" holds only for readers; for a solo Vanguard or a Herald without Arcana, boss cards and the Viaticum resolve mostly to gear. **Pending request (M3; item rolls design 4.8, 9.4; change IR-8; consumables owner):** a martial tactical boss-card pool (notable bombs and oils, arena tools; 2–3 *(illustr.)*), pulled forward from Later; until ruled, the pool is unchanged |
+| Boss reward card | Scrolls, wands; the talisman from floor 3 (a boss-channel phial fills option 2; item rolls design 4.1; change IR-8). Floors 1–4 only: no final-boss card; on floor 5 the Viaticum (choose 1 of 3 Rare wands and tier-3 scrolls, usable options, never the phial) takes the boss share (M2; loot economy design 6.11; change LE-5, **agreed, Q1 of 2026-11-22**). **Offer slots (M2; item rolls design 4.8, 4.10; change IR-8, agreed, Q1 of 2026-11-22):** options Yours, Theirs, Wayward and the fourth; families distinct, effect tags distinct where legal, at most 1 damage option; a hero guarantee. **Usability fallback (M2; loot economy design 6.3; change LE-3; item rolls design 4.8; change IR-8, agreed, Q1 of 2026-11-22):** each option with no usable record is redrawn **on its own** as usable gear at the same tier (usability filter, ordinary weights, not fit-filtered), on `bossCardFallback` entry = option index, then the offer terminal ladder. **Martial parties (item rolls design 4.8; change IR-8):** "the boss gives spells" holds only for readers; for a solo Vanguard or a Herald without Arcana, boss cards and the Viaticum resolve mostly to gear. **Pending request (M3; item rolls design 4.8, 9.4; change IR-8; consumables owner):** a martial tactical boss-card pool (notable bombs and oils, arena tools; 2–3 *(illustr.)*), pulled forward from Later; until ruled, the pool is unchanged. **Pending request (Later; item rolls design 9.4; loot economy design 6.13; consumables owner):** Rare bomb shapes and arena-keyed Viaticum tools; until ruled, the Viaticum's pool is unchanged (cross-document comparison 2026-11-23, CC-56) |
 | Carried | Healing potion, tonic (any floor from M2; floor 1 self-targeting only, settled); flasks and scrolls floor 2+; wands floor 2+; never the talisman, Remedy or coatings |
 | Substitution fallback | Supply or tonic **(settled, enemies 15.3)** |
 | Trader (Later) | Never healing potions (settled); never the talisman |
@@ -1078,7 +1078,10 @@ healing design 15.2, 15.3). **(change DH-41)**
 **Where the check runs (new lead's call; CN-15).** A damage event is as
 conditions 9.3 defines it: one ability use against one target, one
 turn-start tick batch, or one other separate source. Each Sparks dart,
-each Scorching Rays hit and Frost Shard's burst are separate events.
+each Scorching Rays hit and Frost Shard's burst are separate events
+(each attack roll or dart of a multi-attack ability, and a separately
+resolved burst, is its own damage event; conditions 9.3; change CN-28)
+(cross-document comparison 2026-11-23, CC-57).
 
 1. **Total.** The event's total damage is computed after every per-part
    step of conditions 9.3 (ladder shifts, shells, temporary HP), summed
@@ -1181,7 +1184,9 @@ channels and placement lead's call; CN-1, CN-2, CN-27)**
   3. on that floor, one notable draw of that channel is replaced by the
      phial. For `campReward`, one of that floor's container draws moves to
      the camp reward card as the phial, so the notables shop's stock is
-     untouched and the floor's count still balances. Which card the phial
+     untouched; Ledger A drops by 1 (logged exemption), and the phial's VP
+     is counted in the camp channel (loot economy design 6.13)
+     (cross-document comparison 2026-11-23, CC-58). Which card the phial
      takes, and its Ledger A count, are set in loot economy design 6.13
      (a boss-channel phial fills the F3–F4 boss card's option 2; item
      rolls design 4.1);
@@ -1346,6 +1351,11 @@ Each coating has a `blade` record (edge oil) and a `launcher` record
 | Venom Oil / Venom Arrows | Poisoned (named rider) | Weapon keeps its damage type. Worst: undead, constructs |
 | Serrating Oil / Serrated Arrows | Bleeding (named rider) | Never on slashing weapons (validation). Worst: bloodless enemies |
 
+**Pending request (Later; item rolls design 9.4; loot economy design
+6.13; consumables owner):** Rare bomb shapes and arena-keyed Viaticum
+tools (section 10, Boss reward card row); nothing is added until ruled
+(cross-document comparison 2026-11-23, CC-56).
+
 ### 16.4 Scrolls (M2)
 
 All: in class = the spell's cost, slot-free, sets the camp-spend flag
@@ -1406,6 +1416,12 @@ t3); Banishing (Banishment, Banished; t4). Tier 2 is thin in M2 (two
 scrolls plus the Rime Lance wand); Holding, Hushing and Flicker Step are
 its reserves.
 
+**Pending request (M2; item rolls design 9.4; consumables owner, with
+the Herald owner for `classTags`):** Herald tier-2 and tier-3 scrolls
+(+2 *(illustr.)*) and more tier-2 scrolls (+1 *(illustr.)*); until
+ruled, the roster and the audit above are unchanged (cross-document
+comparison 2026-11-23, CC-56).
+
 **Pending request (M3; traps and locks design 9.2; change TL-35;
 consumables, Arcanist and Herald owners):** a tier-2 reserve,
 **Unbolting** [arcane, divine]: action, range 6, opens one lock or Jammed
@@ -1425,7 +1441,7 @@ channel; floor 2+.
 |---|---|---|---|
 | **Wand of Sparks** (Magic Missile; our types have no force) [arcane] | (T1, 2) = 2, U, 40 coin | 3 / 4 / 5 lightning darts by user band, 1d4+1 each, split among visible enemies within 12; no attack roll, no save; not rider-flagged; each dart is its own damage event | Best: finishing minions; breaking concentration |
 | **Wand of Outlining** (Faerie Fire) [arcane, divine, primal] | (T1, 2) = 2, U, 40 coin | Burst r1 within 12, not selective: Reflex save or Revealed, 2 turns | Best: ambush floors. Reveals hidden allies too |
-| **Wand of Snaring** [primal] | (T1, 2) = 2, U, 40 coin | One enemy within 8: Reflex save or Restrained (cords; breakers slashing, fire), `turns:2`, no concentration | Never on floor-1 carriers |
+| **Wand of Snaring** [primal] | (T1, 2) = 2, U, 40 coin | One enemy within 8: Reflex save or Restrained (cords; breakers slashing, fire), `turns:2`, no concentration | A loot rule only; all wands floor 2+ (ARC-24) (cross-document comparison 2026-11-23, CC-58) |
 | **Wand of Rime Lance** [arcane, primal] | (T2, 2) = 3, R, floor 3+, 60 coin | Item spell attack, range 10: cold 3d8, rider-flagged; `freezing` **only on a Soaked target** (Soaked + Chilled → Frozen, fallback Chilled; Steeled and resolve apply (ARC-24; Arcanist design 8.10)); otherwise Chilled | The only repeatable hard-capable item (the class Rime Lance also exists from Arcanist L3, Arcanist design 8.10; ARC-24): `usableBy.monster: false` in M2; freeze rate reported |
 
 **`classTags` (Arcanist design 8.10; change ARC-24):** `arcanist`: Wand
@@ -1507,8 +1523,12 @@ a vendor counter outside this count.
 
 ### 18.1 Tuning block
 
-`inventory.json` gains a `consumables` block (the save hash covers
-`inventory.json`, so a tuning change never reinterprets a save) (CN-2):
+`inventory.json` gains a `consumables` block (a save records the hash of
+`inventory.json`; a run crossing a patch continues on the new build and is
+marked not comparable (seeds and validation design 4.10.1); each stack
+instance stores its `stackMax` at creation, so a `stackMax` change never
+alters a saved stack's dose count (change SV-15)) (CN-2)
+(cross-document comparison 2026-11-23, CC-3):
 
 ```json
 { "consumables": {
@@ -1902,7 +1922,8 @@ section it touches. Ids are provisional and match the proposal;
 CN-10 and CN-13 were merged into other changes during review and are not
 reused, and CN-25 (the D′ trained-only change) lapsed when the client
 rejected D′ and is not reused either; CN-26 and CN-27 were added in the
-final review. **Agreed or decided rows are flagged.** CN-11 and CN-20
+final review; CN-28 was added on 2026-11-23 (cross-document comparison
+2026-11-23, CC-57). **Agreed or decided rows are flagged.** CN-11 and CN-20
 were approved by the client on 2026-11-17.
 
 **Narrowings recorded inside this design (no change id, no approved text
@@ -1942,6 +1963,7 @@ never moves in combat) change approved text and are in CN-3 and CN-12.
 | CN-16 | 18.4 Hasted, Fleet, Unfettered; 18.7 Invisible; 18.8 Rallied (**M2 row**); 18.9 Heightened; 18.7 Blinded and 18.4 Restrained sources | Strike "potions" from Hasted, Fleet and Heightened, the "potion `turns:3`" clauses from Hasted, Unfettered and Invisible (no potion grants them: the Freedom Draught is cut as condition-tag immunity, consumables design 16.7), and "courage potions" from Rallied. Blinded's "flash powder" and Restrained's "nets" read as monster and trap sources; the party net is a Later consumable | Lead |
 | CN-17 | 8, `tonic` cure row | "Thrown at an ally (action, range `throwAllyRange`): minor only" | Lead |
 | CN-18 | 18.9 Coated, Effect and Sources | Sources: "Coatings carry a named condition rider only; no element shift and no own-type rider flag (consumables design 7.5)". Effect: "its next 3 weapon hits carry the oil's rider" becomes "its next 3 weapon hits that attempt the coating's rider; a charge is spent only on such a hit (ability model 9.3 gates apply)". Weapons 5.5, which quotes the old Effect line, takes the same wording | Lead |
+| CN-28 | 9.3 Damage events | Adds: "Each attack roll or dart of a multi-attack ability, and a separately resolved burst, is its own damage event (consumables design 14.4; Arcanist design 8)" (cross-document comparison 2026-11-23, CC-57) | Lead (added 2026-11-23) |
 
 **Enemies design (2026-11-16):**
 

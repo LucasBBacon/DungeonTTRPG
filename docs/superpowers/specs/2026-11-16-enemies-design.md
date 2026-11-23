@@ -19,9 +19,11 @@ Numbers in this document are illustrative unless a rule says otherwise.
 The builders own them and the simulator calibrates them (section 23). No
 enemy names or lore are proposed here.
 
-**Waves:** M1 is the vertical slice (one class, levels 1–3, one floor,
-three enemy types, one boss, basic loot). M2 is the full run. Later is
-everything after. **(settled, main design 9)**
+**Waves:** **M1** is the vertical slice (one class, levels 1–3, one
+floor, three enemy types, one boss, basic loot), **M2** the full run,
+**M3** between runs (profile, unlocks, ladder), **M4** breadth, and
+**Later** everything after. **(settled, main design 9; cross-document
+comparison 2026-11-23, CC-38)**
 
 ## 1. Intent
 
@@ -481,8 +483,8 @@ round-1 row.
 | Floor 1, solo boss: expected damage to the hero per round (its turn plus boss actions); the 35% boss row stays for every other boss **(change DH-26)** | ≤ 25% *(illustr.)* |
 | Floor 1, solo boss at the lowest legal hero: worst spike (dice at maximum, a crit, one boss action) **(change DH-26)** | ≤ 75% |
 | Floor 1, solo boss at the lowest legal hero: a full-HP hero cannot be reduced to 0 in one round **(change DH-26)** | Even with one crit *(illustr.)* |
-| Boss: `NoUntelegraphedSpike`: any boss or boss-action effect whose maximum without a crit exceeds 30% of the floor's reference hero *(illustr.)* is a bannered signature on its Downbeat, a Gambit (M3) or an announced arena act **(change BR-8; boss rooms design 4.3.3; M2)** | Else rejected |
-| Boss: a forecast Downbeat signature's maximum without a crit, at the lowest legal hero **(change BR-8; boss rooms design 4.3.3; M2)** | ≤ 45% *(illustr.)* |
+| Boss: `NoUntelegraphedSpike`: any boss or boss-action effect whose maximum without a crit exceeds 30% of the floor's reference hero *(illustr.)* is a bannered signature on its Downbeat, a Gambit (M3) or an announced arena act **(change BR-8; boss rooms design 4.3.3; M2; conditional on BR-6 (Downbeats) and BR-7 (no Strike on F1), both pending with this owner; cross-document comparison 2026-11-23, CC-32)** | Else rejected |
+| Boss: a forecast Downbeat signature's maximum without a crit, at the lowest legal hero **(change BR-8; boss rooms design 4.3.3; M2; conditional on BR-6 and BR-7, as above; cross-document comparison 2026-11-23, CC-32)** | ≤ 45% *(illustr.)* |
 | Floor 1 cumulative round-1 budget, reference and lowest legal hero: the sum over floor 1's encounter slots of the highest round-1 death chance among the templates the generator can emit there, plus the floor-1 boss's one-round death chance (`guard.floor1CumulativeRoundOnePermille`) **(change DH-26)** | ≤ 2.5% *(illustr.)* |
 | AC envelope, levels 1–10: the 6.2 table attack's hit chance against the maximum sustained party AC, normal roll mode **(change AR-20)** | ≥ 35% |
 | AC envelope: against the maximum charged AC (Raise or Fortified, plus one reaction), normal roll mode **(change AR-20)** | ≥ 15% |
@@ -508,7 +510,11 @@ round-1 row.
   that attacker's piercing R), Puncture included (armour design 9.1). The
   AC envelope rows are read at levels 1–10 against the maximum party AC,
   not at the reference hero.
-- **Boss spike rows (change BR-8; boss rooms design 4.3.3; M2):** the
+- **Boss spike rows (change BR-8; boss rooms design 4.3.3; M2):** these
+  rows are **conditional on BR-6 (the Rhythm's Downbeats) and BR-7 (no
+  Strike on floor 1)**, both pending requests with this owner (11.1,
+  17.5); until they are ruled, the rows apply only as far as those rules
+  are adopted **(cross-document comparison 2026-11-23, CC-32)**. The
   worst-spike rows read the boss's worst own-turn effect with a crit plus
   the worst boss action that can hit the same unit that round (on floor 1,
   whose menu has no Strike, the boss's own turn). On floors 3–5, focus
@@ -945,6 +951,10 @@ with `FloorDiv` (3.1). **(change M-4)**
   raises caps or raw stats. **M3:** Nightmare tiers add kind, not stats,
   and the Perilous Door (+1 ladder on one floor) makes the ladder
   per-floor **(change RT-21, client, M3; run structure design 9.1)**.
+  ladder% reads the profile grant `difficulty.tier`; `nightmareTier`
+  (M3) drives the kind additions only and never changes ladder% (run
+  structure design 11.1; main design 4.7) **(cross-document comparison
+  2026-11-23, CC-84)**.
 
 The generator fills each encounter to **85–100%** of its budget, never
 over: from the fill minimum of 3.1 (⌈85%⌉) up to the budget. Inside that
@@ -954,23 +964,34 @@ cost, with the lair at ≥ 925‰ and the elite room at 950–1000‰ *(illustr.
 **(change EP-20; encounter placement design 6.2; M2)**. A **Mousetrap**
 Ambush uses 85% of its band (`FloorDiv(guard × 85, 100)`); the Cuckoo and
 the Waylay fill at their full band **(change EP-10; encounter placement
-design 6.8.1; M2)**.
+design 6.8.1; M2)**. Encounter placement design 6.2 adds three
+exceptions (pointers only; that design is authoritative): on floor 1 the
+2.5% cumulative round-1 budget (6.4) is a **hard ceiling**, met by
+stepping the highest-index guard post down by 50‰, never below 850‰,
+then its fallback chain; when the floor-1 **Cuckoo** is drawn, the lair
+fills at **850‰**, overriding its 925‰ floor on that seed; on floors
+4–5 any composition with a **+2-level unit** on a back or overwatch
+position fills at **≤ 925‰** **(cross-document comparison 2026-11-23,
+CC-36)**.
 
 ### 10.2 Worked examples
 
 The arithmetic is checked; a content test asserts each one, including its
 template, the 3-type cap and the role rule (10.3). "Room N" is the room
-level of the group's homeRoom.
+level of the group's homeRoom. The lair and elite-room rows are composed
+to meet the M2 fill curve (10.1): floor 1 lair 15–16, floor 3 lair
+40–43, floor 5 lair 56–60, floor 1 elite room 19 **(cross-document
+comparison 2026-11-23, CC-35)**.
 
 | Case | Budget (fill range) | Template: composition | Cost |
 |---|---|---|---|
 | Floor 1, solo, patrol, room 1 | 8 (7–8) | Picket: one level 0 soldier (−1: 7) | 7 |
 | Floor 1, solo, guard post, room 1 | 12 (11–12) | Picket: level 1 soldier (10) + 1 level 0 minion (2) | 12 |
-| Floor 1, solo, lair, room 2 | 16 (14–16) | Pack: level 2 brute (10) + 2 level 1 minions (2 + 2) | 14 |
-| Floor 1, solo, elite room, room 2 | 19 (17–19) | Champion: level 1 elite soldier with one gentle affix (7 × 2 = 14) + 2 level 1 minions (2 + 2) | 18 |
+| Floor 1, solo, lair, room 2 | 16 (15–16 on the M2 curve) | Pack: level 2 brute (10) + a level 2 minion (3) and the same minion type shifted to level 1 (2) | 15 |
+| Floor 1, solo, elite room, room 2 | 19 (19 on the M2 curve) | Champion: level 1 elite soldier with one gentle affix (7 × 2 = 14) + a level 2 minion (3) and the same minion type shifted to level 1 (2) | 19 |
 | Floor 3, trio, guard post, room 5 | 31 (27–31) | Warband: level 5 leader (10) + level 5 soldier (10) + the same soldier type shifted to level 4 (7) + 2 level 3 minions (2 + 2) | 31; 3 types; 4 units (minions count ½) |
-| Floor 3, trio, lair, room 5 | 43 (37–43) | Honour Guard: level 5 elite soldier with Bodyguard (20) + level 6 artillery (14) + 2 level 4 minions (2 + 2) | 38 |
-| Floor 5, four, lair, room 9 | 60 (51–60) | Gauntlet: level 9 elite controller with two affixes (`FloorDiv(10 × 2000 × 1200, 1,000,000)` = 24) + two level 10 brutes of one type (14 + 14) | 52 |
+| Floor 3, trio, lair, room 5 | 43 (40–43 on the M2 curve) | Honour Guard: level 5 elite soldier with Bodyguard (20) + level 6 artillery (14) + 2 level 5 minions (3 + 3) | 40 |
+| Floor 5, four, lair, room 9 | 60 (56–60 on the M2 curve) | Gauntlet: level 10 elite controller with one affix (`FloorDiv(14 × 2000 × 1000, 1,000,000)` = 28) + two level 10 brutes of one type (14 + 14) | 56 |
 
 Solo check for the floor 1 guard post: the hero takes about 8 damage, about
 45% of 18 HP, falling to about 35% with limited abilities. Simulator target:
@@ -1672,14 +1693,17 @@ adopted.
   effect in M2)**. Joining groups are never Surprised and never Surprise.
   Exception: the solo hero is never surprised in floor 1's first two
   main-path rooms (death and healing design 17.1). **(change DH-29)**
-- **Pending request (BR-3, BR-4; boss rooms design 4.2.1, 4.2.2; M1 /
-  M2):** a party unit entering an arena square (doorway squares included)
-  counts as noticed by the boss's group, so the boss fight starts by
-  noticing (`ArenaEngaged`, once per floor); from M2, when combat is not
-  already active, **Take Places** (the player places each party unit
+- **BR-3, BR-4 (boss rooms design 4.2.1, 4.2.2; M1 / M2):** a party
+  unit entering an arena square (doorway squares included) counts as
+  noticed by the boss's group, so the boss fight starts by noticing
+  (`ArenaEngaged`, once per floor); applied, confirmed by the main design
+  owner (MAIN 4.3) **(cross-document comparison 2026-11-23, CC-31)**.
+  **Pending request:** the combat-start order: from M2, when combat is
+  not already active, **Take Places** (the player places each party unit
   out of combat in the Forecourt or on an arena square on either Arch's
   doorway band or placement squares, within its Speed) is the placement
-  step of that combat start, before initiative; not yet ruled.
+  step of that combat start, before initiative; this owner's ruling, not
+  yet ruled.
 
 ### 12.3 Noise
 
@@ -2181,15 +2205,16 @@ condition transforms:
   - offers no shield against T1, because the aura ends when the leader
     falls. It ends with no `onEnd` relation; T1 does the Demoralising,
     so fearless members are never Demoralised by it **(change C-18)**;
-  - **Waver:** while the leader's Frightened penalties are active (its
+  - **Pending request (HR-20, HX-2; Herald design 10.4) — Waver:** while the leader's Frightened penalties are active (its
     source in line of sight), its aura is **suppressed**: members gain no
     Emboldened, Frighten has no aura disadvantage, and Routed, T2 and T3
     are no longer blocked. Suppression is not an end: no `onEnd` and no
     T1 (C-18 unchanged); members Demoralised during the gap stay so until
     a Rally. The aura returns when the leader stops being Frightened or
     loses sight of its source. Lever: suppression only from round 2.
-    **(change HR-20, HX-2; Herald design 10.4; recommended to the enemies
-    owner; touches the settled "blocks Routed")**
+    Recommended to the enemies owner; it touches the settled "blocks
+    Routed"; adoption is this owner's ruling; not yet ruled
+    **(cross-document comparison 2026-11-23, CC-33)**.
 
   The positional play is to pull or shove members out of the banner's
   reach before breaking them.
@@ -2455,7 +2480,8 @@ main path before the boss room (classes design 8.6) **(change CL-10)**.
   profiles and break lines are always visible.
 - **Break-chain preview** (universal, hover only): any preview whose
   resolution causes loss events shows the FIFO cascade (14.3) from party
-  knowledge only, with "aura drops" (Waver), "Fearless: Frightens only"
+  knowledge only, with "aura drops" (Waver, if Waver is adopted, 14.4;
+  cross-document comparison 2026-11-23, CC-33), "Fearless: Frightens only"
   and "Immune (known)"; unrevealed immunities show as "uncertain"
   **(change HR-37, HX-7; Herald design 10.3)**.
 - **Morale overlay:** one family of enemy markers, at most one glint per
@@ -2523,7 +2549,7 @@ economy design 6.1 item 2, 6.3; M2)**.
 | Minion | Yes, if armed | Never |
 | Standard | Yes | Only from the enemy-carried quota, and only when no elite or leader in the encounter can take it |
 | Leader | Yes, with a banner, horn or staff prop | Second priority. The banner may *be* the item; a horn never is, because horns are reserved for joiners (the Kennel Houndmaster's horn included) **(change LP-21; loot sources design 5.3; M2)**. |
-| Elite | Yes | First priority for the quota. **Guaranteed only in the optional elite room**, met by allocation: the elite-room carrier takes the floor's highest carrier-legal **gear** card (weapon or focus, armour or shield, trinket), never a consumable; a consumable top card goes to the elite room's lair cache **(change LE-10, LE-18; loot economy design 6.9 items 2, 6; M2)**. The elite's gear card is filtered to records whose lines show in use (`showsInUse`) when that set is non-empty, so the prize is presented in use **(change IR-12; item rolls design 4.12; M2)**. An unarmed elite there guards a **lair cache** instead ("Guards: cache"). Other elites without a quota item show nothing. Resolving the elite (killed, Yielded, Routed or Cowed) or stealing its notable, whichever comes first, gives the **elite intel line** (15.8) **(change LE-18; M2)**. |
+| Elite | Yes | First priority for the quota. **Guaranteed only in the optional elite room**, met by allocation: the elite-room carrier takes the floor's highest carrier-legal **gear** card (weapon or focus, armour or shield, trinket), never a consumable; a consumable top card goes to the elite room's lair cache **(change LE-10, LE-18; loot economy design 6.9 items 2, 6; M2)**. The elite's gear card is filtered to records whose lines show in use (`showsInUse`) when that set is non-empty, so the prize is presented in use **(change IR-12; item rolls design 4.12; M2)**. An unarmed elite there guards a **lair cache** instead ("Guards: cache"). Other elites without a quota item show nothing. Resolving the elite (killed, Yielded or Routed; cross-document comparison 2026-11-23, CC-38) or stealing its notable, whichever comes first, gives the **elite intel line** (15.8) **(change LE-18; M2)**. |
 | Boss | Yes, if armed | **Guaranteed** signature item, visibly carried by an armed boss, plus the boss reward card (17.5). An **unarmed** boss **guards** its signature in a **signature cache** in its lair (the "Guards: cache" precedent of the elite row; not a ranked socket, not the elite lair cache), and its plate reads **"Guards: <signature name>"**; M1: Old Ragged guards Bellwarden's Mail in its den **(agreed, Q5; change IR-13; item rolls design 4.13; M1)**. The signature is the boss's authored form for the top tier of the floor's drawn deck variant (one form per top tier its floors can need), with at most 2 base lines plus one authored value-1 line echoing the boss's fight or kit (≤ 3 lines; M1 records grandfathered); a boss that carries one form guards any second form, and "Carries: …" and "Guards: …" always name the chosen form; a draw-free second form in another lane is required for specialist chassis in M2 and every boss in M3; a Very rare signature consumes the floor's VR slot, pending the ITEMS owner **(change LE-3; loot economy design 6.3; change IR-13; item rolls design 4.13; M1 / M2 / M3)**. **Floor 5:** no reward card; the final boss still carries and uses its signature, which drops as a **Memento** (a run-record item card, 0 value, shown on the victory screen and run record only) **(agreed, Q1; change LE-5; loot economy design 6.11; M2)**; an unarmed final boss (none in M2) guards it in its cache and it drops as the Memento at victory **(change IR-13; item rolls design 4.13)**. |
 
 **Heavy Purse (change LE-16; loot economy design 8.3; M2):** on floors
@@ -2798,8 +2824,9 @@ S-5)**:
   Adjacent, and no awake un-Cowed hostile in its room has line of sight
   to the thief. Stealth against its fixed passive **20, −5 Dormant = 15**
   *(illustr.)*, a fixed row, not Keen; Light Fingers gives advantage.
-  The roll is the keyed hash `H(floorSeed, windfallId, "windfallSteal",
-  0, die)` on `checks`, never the combat stream. **The room's one Steal
+  The roll is the keyed hash `H(floorKey/checks, "h:windfallSteal",
+  windfallId, 0, die)`, never the combat stream (change SV-6; seeds and
+  validation design 4.3; cross-document comparison 2026-11-23, CC-34). **The room's one Steal
   try:** the party steals either a carrier in the host group or the
   Truant, not both (`stealTryUsed` on the host group, set and checked by
   both paths). Success takes **the card only**; its coin spills as a
@@ -3323,7 +3350,7 @@ clock's damage type; not yet ruled.
   Command); Shed ends only a condition on the boss at the start of the
   round; no two boss actions on the same unit in one round; none on a
   unit in a live Gambit footprint (M3); a forced spend before the boss's
-  turn; and **Upended**, a boss state from a Device's Expose payoff (no
+  turn; and **Upended** (renamed **Sprawled** by boss rooms design 4.7.2; this restatement's rename is pending with this owner; cross-document comparison 2026-11-23, CC-65), a boss state from a Device's Expose payoff (no
   boss actions until the end of the boss's next turn, once per phase,
   applied whatever its save or a Prone immunity), which with the denial
   budget are the only boss-action denial sources; not yet ruled.
@@ -3554,7 +3581,8 @@ encounter or as a floor's boss.
 - **AI cost.** The scorer would have to weigh pools, pressure and spell
   choice for every enemy, against a 50 ms budget.
 - **Content volume.** Every enemy would need a class, a subclass, level
-  choices and gear, multiplying the M2 content cost (about 22–27 types).
+  choices and gear, multiplying the M2 content cost (56 types; change
+  RT-5; cross-document comparison 2026-11-23, CC-38).
 
 ### 18.3 Why a few rare, hand-tuned ones work
 
@@ -3581,15 +3609,20 @@ Illustrative:
 { "id": "monster.raider_spear", "nativeLevel": 2, "levelShift": [-2, 2],
   "role": "soldier", "rank": "standard", "promotable": true,
   "abilities": { "str": 2, "dex": 1, "con": 0, "int": 0, "wis": 0, "pre": -1 },
+  "dexSlot": "secondary",
   "hp": 15, "trainedSave": "fortitude", "skills": ["perception"],
   "speed": 6, "traits": [], "atWills": ["atk.spear", "act.shove"],
   "limited": [], "reaction": "react.interpose",
   "behaviour": "holder", "allowedAwareness": ["stationary"], "morale": "normal",
   "armed": true,
   "loadout": { "mainHand": "item.spear", "offHand": "item.shield", "armour": "item.gambeson", "carried": null },
-  "improvised": "atk.improvised_pierce", "notableSlot": true, "salvageCoin": "byLevel",
+  "improvised": "atk.improvised_pierce", "notableSlot": true,
   "themes": ["theme.raiders"] }
 ```
+
+`dexSlot` is the declared Dexterity spread slot (5.1; change AR-53); no
+`salvageCoin` field, since salvage is a pre-assigned pool share (15.7;
+change LE-8) **(cross-document comparison 2026-11-23, CC-38)**.
 
 - **Composed unit (generation output):** base id, level, rank, affixes,
   overlay, `carriedItem { itemId, rolledProperties, chargesOrUses,
@@ -3784,7 +3817,7 @@ The build fails when:
 | Affixes | Win rate by affix and by affix pair. Outliers block release. |
 | AI | Stall detector; decision time; joiner warning lead time (must be ≥1) |
 | Intent | Share of enemies readable by floor and party Perception investment, with guile = 10 + Wisdom + proficiency + role adjustment (13.3), gated: targets about 40% for an untrained party, 75% trained, 95% with mastery (**lead's call**; outliers block release); read accuracy (a read matching the action taken, with and without intervening party actions, and with rolled turn-start steps as an expected mismatch); hero deaths with and without reading |
-| Morale | Share of fights ended by morale, and rounds saved; Rally uses, and the share undone by counters; Frighten, Demand Surrender and cow attempts and success by floor; **an Intimidation-focused hero against a baseline**; the share of enemies with no morale content, per theme; the early-end target (14.3) with every adopted morale mechanic on (Antiphon, Mourners, Scatter, Waver, Offer Terms if adopted), with and without a Dirge **(change HR-32; Herald design 11.9)** |
+| Morale | Share of fights ended by morale, and rounds saved; Rally uses, and the share undone by counters; Frighten, Demand Surrender and cow attempts and success by floor; **an Intimidation-focused hero against a baseline**; the share of enemies with no morale content, per theme; the early-end target (14.3) with every adopted morale mechanic on (Antiphon, Mourners, Scatter, Waver if Waver is adopted (14.4), Offer Terms if adopted), with and without a Dirge **(change HR-32; Herald design 11.9; cross-document comparison 2026-11-23, CC-33)** |
 | Bosses | Boss kills involving re-engagement, and HP lost per reset |
 | Experience | Pool against need, with and without bypass and cow; catch-up frequency |
 | Loot | Notables placed against the floor budget; loot summary size |
@@ -3899,8 +3932,9 @@ RT-5; client agreed 2026-11-21, Q4; run structure design 8.1, 12)**
   adjustment in the loot summary. Catch-up should fire in under 20% of
   runs.
 - **Dependencies.** Items (k, records, coin) and generation (anchors,
-  routes, tells) are not yet designed. **(change DH-31)**
-  The guards and loot numbers are provisional until they are.
+  routes, tells) are now settled by their designs (25). **(change DH-31)**
+  The guards and loot numbers are provisional only to simulator
+  calibration **(cross-document comparison 2026-11-23, CC-37)**.
 - **Precedent.** The morale-state budget raise could invite more
   relabelling. Mitigation: a hard cap of 4 on the morale class, recorded in
   conditions 16.
@@ -4032,6 +4066,15 @@ committed wind-ups (13.2).
 | **The Reprieve Phial (talisman) needs** (consumables design 24): its final leave-HP; whether it fires out of combat; the owner order of Death-warded, Last Ward, Last-Breath Charm and the phial; whether companions can die (then the phial also covers "would die") **(change CN-21)** | The save runs in the damage pipeline before HP is lowered; the 6.4 guards are computed without it (consumables design 14.4, 14.9) | Leave-HP 334‰; fires from any source, but the floors come first; owner the death and healing design, order Death-warded → phial, Last Ward and Last-Breath Charm retired; companions never die, no would-die coverage (15, 16, 11.6) |
 
 - **Dungeon generation** (the generator content test asserts each):
+  settled. Answered by the floor layout design (its 14 maps each row:
+  party level in tenths, slots and the elite room, path hearing, patrol
+  loops, retreat anchors, the Bypass, the cover room, `mainPathIndex`,
+  HE-7 containers), the encounter placement design 6.8 (ambush tells and
+  lurkers), the loot sources design 4.1–4.4 (containers and lair caches),
+  the boss rooms design 4.1 (arena templates), the hazards design 6.2
+  (hazard placement) and the traps and locks design (trap ids and
+  detection); the numbers stay provisional only to simulator calibration
+  **(cross-document comparison 2026-11-23, CC-37)**.
 
 | Requirement | Consumers | Wave |
 |---|---|---|

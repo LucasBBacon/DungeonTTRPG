@@ -401,7 +401,7 @@ that otherwise gains only +1 Dexterity and sits in a parity trough
 |---|---|---|---|---|---|
 | **Cutthroat** (M2) | The quiet kill between fights; the ambush opener; kill-then-fade; perfect stealth or terror | No Witnesses | Ambuscade | Throat-Cut / Make an Example | The first kill takes No Witnesses free |
 | **Trapwright** (M2 if DEP-S1 lands in M2; otherwise an unlock, the expected default; resolved 2026-11-21: the fallback applies, the first unlock in M3, TL-37) | Known traps as weapons; setup-flask tempo; Caught; forced movement onto traps; doors | Jury-Rig (Spring, Re-arm, Toss and Dust; Wedge; Killing Ground) | Tripline | Drag Line / Trick Shot | Caught Out: a free Killing Ground, and one stealth-die hit on a Caught hostile next turn |
-| **Swordsworn** (first unlock, M3; promoted to M2 under the fallback) | One-on-one melee; the reaction economy; Answer as the engine; finesse and light blades | Sworn Guard (with Counterstroke, Open Guard, Held Guard) | Blade Dance | Cross Steel / Turn Aside | One Counterstroke before your next turn costs no Trick and takes the stealth die |
+| **Swordsworn** (M2: promoted under the fallback, TL-37; cross-document comparison 2026-11-23, CC-73) | One-on-one melee; the reaction economy; Answer as the engine; finesse and light blades | Sworn Guard (with Counterstroke, Open Guard, Held Guard) | Blade Dance | Cross Steel / Turn Aside | One Counterstroke before your next turn costs no Trick and takes the stealth die |
 
 ### 5.5 Level table *(illustr.)*
 
@@ -683,7 +683,7 @@ checked against Lone Blade and Caught.
 | `signatureVerb` | opening |
 | `signatureEvents` | Opening dealt or traded; a Vanish or Art used; a Duck that set Answer; a subclass signature applied; a From Nowhere hit (SH-32) |
 | `seedTarget` | `enemyNotYetActed`, for every Shade and every subclass (classes 12.1 has no subclass field). The Trapwright's trap on the path is a content check from floor 2 inside `TrapwrightHasMechanism` (8.2), not a `seedTarget` |
-| `leans[]` | Stage 1 unchanged: stealth, surprise and Steal **P**; own tempo **P**; single-target damage **s**; skills **s**; exploration **s**; mobility **s**; items (Trapwright lens); morale (Cutthroat lens: Herald + Shade = 2 classes, legal); reactions (Swordsworn lens at the unlock tier: Vanguard + Shade = 2, legal) |
+| `leans[]` | Stage 1 unchanged: stealth, surprise and Steal **P**; own tempo **P**; single-target damage **s**; skills **s**; exploration **s**; mobility **s**; items (Trapwright lens); morale (Cutthroat lens: Herald + Shade = 2 classes, legal); reactions (Swordsworn lens, M2 under the fallback, TL-37: Vanguard + Shade = 2, legal; cross-document comparison 2026-11-23, CC-73) |
 | Tools, not leans (SH-27) | Duck; Tainted Blade's Poisoned; Make an Example's Frightened; Tripline's Prone; Drag Line's movement. The control row (Arcanist P, Herald s) and the damage-types-and-riders row are full |
 
 **Pending request: Cased (exploration and information design 4.5.2;
@@ -1325,6 +1325,11 @@ How the call is made is in 14. **Resolved (2026-11-21; TL-37):** the
 fallback applies; the Swordsworn ships in M2 and the Trapwright is the
 first Shade unlock in M3 (traps and locks design 0.1, 6.16).
 
+**Pending request (hazards design 6.15, 18):** a Shade hazard hook owed
+before Voids ship, and the Jury-Rig Stir re-time (C ± 1, never below 2;
+M3, the Shade owner's call); recorded in 18 (cross-document comparison
+2026-11-23, CC-7).
+
 **Specs into:** known traps as weapons (remote springing, re-arming and
 reaction timing); setup-flask tempo (oil before fire, water before cold
 or lightning); Opening through **Caught** (launchers included); forced
@@ -1547,7 +1552,7 @@ owner: traps and locks design 6.8, TL-16).
 caps), chained springs, monster trap use, Holy Water and Sticky
 flasks as Toss fuel.
 
-### 8.3 SWORDSWORN (the first unlock subclass, M3; promoted to M2 under the fallback): "make them miss, then answer"
+### 8.3 SWORDSWORN (M2, promoted under the fallback, TL-37; cross-document comparison 2026-11-23, CC-73): "make them miss, then answer"
 
 **Mechanism (agreed, Q3):** a Tricks-paid Sworn Guard ward that counts
 as a Parry; Counterstroke after a turned blow from level 3 and (Open
@@ -1759,9 +1764,10 @@ Fade-Hide), eased at level 4 by the signature pip (7.9); standard HP in
 light armour while standing in front; with a bow out, no Sworn Guard
 until a set swap.
 
-**Staging:** M3, the first Shade unlock (stage-1 order). Promoted to M2
-if the Trapwright falls back (the expected default, 14). Its SH-8 engine
-work lands in M2 either way.
+**Staging:** M2. It was M3, the first Shade unlock (stage-1 order),
+promoted to M2 if the Trapwright fell back; the fallback applies
+(2026-11-21; TL-37, 14), so the Swordsworn ships in M2. Its SH-8 engine
+work lands in M2 (cross-document comparison 2026-11-23, CC-73).
 
 ## 9. New mechanics considered
 
@@ -1986,8 +1992,12 @@ scratch p95.
   - **A pre-committed request to the floor-pacing owner** (18; it reaches
     the client only if refused, 19.2):
     the floor-1 boss door needs level 3, or the XP that guarantees it.
+    **Closed: answered by the Antechamber Catch-up** (run structure
+    design 9.4; RT-8), which guarantees level 3 before the floor-1 boss
+    (cross-document comparison 2026-11-23, CC-72).
   - The VG-24 reading still takes the boss check at level 3; the
-    simulator owes the rate of level-2 boss arrivals.
+    simulator owes the rate of level-2 boss arrivals, kept only as a
+    check that the catch-up fires (CC-72).
 - **The proxy is boss death only.** The gate is the full-floor clear
   rate, which the simulator owes.
 - **Signature share** in solo boss rounds 2 and later: 54–67% (target
@@ -2029,7 +2039,7 @@ reading 3 at every level, with room for 1 offer row;
 |---|---|---|
 | Over 110% at levels 1–4 | 1. Stealth die 1d4 at levels 1–4 (the fallback band). 2. Caught to level 5 (Trapwright); cut Dust. 3. The Surprised die to +1 at every level | A cut to Answer (the solo boss engine) |
 | Headroom at levels 1–3 in the rerun | Spend the strike pip only on a successful Hide (7.4, held) | — |
-| Level-2 boss arrivals stay high after Vanish 3 at 2 | The floor-pacing request (18) | A level-2 parity step |
+| Level-2 boss arrivals stay high after Vanish 3 at 2 | The floor-pacing request (18), closed: answered by the Antechamber Catch-up (run structure design 9.4; RT-8); the arrival rate is kept only as a check that the catch-up fires (cross-document comparison 2026-11-23, CC-72) | A level-2 parity step |
 | Over 110% at levels 5–10 | 1. Narrow Beset's ally-hit clause to flank-shaped (about −2). 2. Drop the No Witnesses II carry-only option. 3. Opening on main-hand or single-weapon hits only (about −3; costs boss survival) | A forbidden grant |
 | Under 90% (typical) | Open die 1d8 at levels 5–10 | — |
 | Cutthroat fights avoided > baseline + 1 per floor | Remove the second-kill route | — |
@@ -2088,7 +2098,7 @@ Bleeding, Challenged and Frightened (triggers). No new condition.
 | Subclass at 3, verb change at 6, capstone at 9 (classes 7.4) | All three subclasses | Met |
 | Capstone acceptance criterion (classes 14) | From Nowhere changes the primary lean; nova 1.57–1.76 | Met |
 | Talent menus of 3 with an upgrade; a level-7 trigger option (classes 14) | 7.6 | Met |
-| `Floor1ClassSpread` (classes 5.6) | Proxy passes thin at L3 under the correct comparator; L2 arrivals addressed by Vanish 3 at L2 and the floor-pacing request (10.4) | Met at L3 (proxy); simulator owed |
+| `Floor1ClassSpread` (classes 5.6) | Proxy passes thin at L3 under the correct comparator; L2 arrivals addressed by Vanish 3 at L2 and the floor-pacing request (10.4), now answered by the Antechamber Catch-up (run structure design 9.4; RT-8; cross-document comparison 2026-11-23, CC-72) | Met at L3 (proxy); simulator owed |
 | Signature share in solo boss rounds (classes 12.3) | 54–67% | Met |
 | Reliance reports (classes 6.6, 12.3, **agreed** Q3) | Stealth and own-tempo reliance, with and without the Shade (hero and recruit), the DEP-1 Arcana recruit-rule waiver printed (classes 7.8) (13.3) | Reports owed |
 | Dip guards (classes 7.7) | `scalesBy: classLevel` on the band, the strike limit (the signature pip included) and the pool steps; Catch Breath `chassisOnly`; From Nowhere `minClassLevel 9` | Met; test in 12.1 |
@@ -2274,7 +2284,11 @@ validation design 5.2).
   uptime; the AI deterrence report;
 - Shadowed builds reported separately;
 - Lure: elite-room notables taken without a fight;
-- launcher family floors (to the weapons owner).
+- launcher family floors (to the weapons owner);
+- **pending input request (encounter placement design 6.8):**
+  `PartySurpriseShare` for the worst-legal Shade-in-party profile, fed to
+  `stealthShare[L]` / `openShare[L]`; parity rerun if it exceeds the 10
+  profile (18) (cross-document comparison 2026-11-23, CC-74).
 
 **(change SV-22; M2)** The `Skill` arms `Novice`, `Basic` and `Expert`
 are generalised from arcanist 5.4 to the Shade (request to the ARC
@@ -2289,7 +2303,7 @@ arm (seeds and validation design 6.2).
 | Wave | Content |
 |---|---|
 | **M1** | Nothing. No M1 rule is needed for the Shade |
-| **M2** | Section 11: the whole core; the strike limit and validators; Draw Out, False Trail, Shrugged Off, Lure (if accepted), Wise to You off; the NM-1 hazard ruling; the NM-2 engine; **the Cutthroat** (its second-kill route only with the body-noticed rule); **and the Swordsworn** (the fallback, applied 2026-11-21; TL-37). The trap records the Trapwright needs, the universal hand-trigger, Trigger Shot and 500‰ re-arm, and the `TrapwrightHasMechanism`, `SpringContentBound` and dead-room reports ship with traps (traps and locks design 0.1, 6.16) |
+| **M2** | Section 11: the whole core; the strike limit and validators; Draw Out, False Trail, Shrugged Off, Lure (if accepted), Wise to You off; the NM-1 hazard ruling; the NM-2 engine; **the Cutthroat** (its second-kill route only with the body-noticed rule); **and the Swordsworn** (the fallback, applied 2026-11-21; TL-37). The trap records the Trapwright needs, the universal hand-trigger, Trigger Shot and 500‰ re-arm, and the `TrapwrightHasMechanism`, `SpringContentBound` and dead-room reports ship with traps (traps and locks design 0.1, 6.16). **Pending request (hazards design 6.15, 18; HZ-31):** the Shade hazard hook, owed before Voids ship (18) (cross-document comparison 2026-11-23, CC-7) |
 | **M3** | The **Trapwright** as the **first Shade unlock** (TL-37), with the density reports as gates, per-group belief and witness-only secrecy for party-armed traps, and the Trap Eye re-scope; level-3 parity is rerun with the universal trap rows present before M3 (traps and locks design 6.16) |
 | **Later** | Pinch, Lie in Wait, Gloom squares (with the Wise to You trial), Vault, Stake Out, the body-noticed rule if not taken in M2, Drag Line auto-entry (with Over the Edge), chained springs, monster trap use, Holy Water and Sticky flasks as Toss fuel, coatings |
 
@@ -2328,10 +2342,10 @@ arm (seeds and validation design 6.2).
 |---|---|
 | The stealth share is the binding number, measured only in scratch | Release input; `OpeningCeiling` calibrated to it; every stealth source enumerated (Fade, Vanish, the Art carries, Shadowed, Duskhem, Long Shadow, the free No Witnesses, Cross Steel, the carry-only option, the Caught Out and Swordsworn riders, the level-4 signature pip; Gloom and Lie in Wait held back); Wise to You as a lever |
 | Cutthroat, Swordsworn and the base sit within a point of the cap at L9–10 | Pre-committed levers (10.7); rerun owed |
-| Floor-1 spread passes thin (9.2 against 10) and L2 arrivals fail | Vanish 3 at L2; the floor-pacing request (18); lever list (10.4); the full-floor simulator gate |
+| Floor-1 spread passes thin (9.2 against 10) and L2 arrivals fail | Vanish 3 at L2; the floor-pacing request (18), answered by the Antechamber Catch-up (run structure design 9.4; RT-8), with the level-2 arrival rate kept as a check that it fires (cross-document comparison 2026-11-23, CC-72); lever list (10.4); the full-floor simulator gate |
 | The strike limit makes the early Shade feel less stealthy | Vanish 3 from L2; the big stealth die from L1; the carry sold as the loop (and kept from overkills by `holdCarryOnOverkill`); pips display; the Hide success chance shown before committing; spend-on-success held as a lever (10.7) |
 | Bonus-action overload | Card warning; Nick default; tutorial preview line |
-| The Trapwright depends on undesigned trap content | The Q2 rule and its automatic fallback (14); Dust gives Caught and Toss a fuel floor where setup flasks are scarce; the dead-room rate is gated in `TrapwrightHasMechanism`; Drag Line's disadvantage works on any hazard |
+| The Trapwright depends on trap density (the traps and locks design ships the records in M2; density checks are M2 reports and M3 gates) (cross-document comparison 2026-11-23, CC-74) | The Q2 rule and its automatic fallback (14); Dust gives Caught and Toss a fuel floor where setup flasks are scarce; the dead-room rate is gated in `TrapwrightHasMechanism`; Drag Line's disadvantage works on any hazard |
 | Under the fallback the Swordsworn ships in M2; at levels 3–4 one strike per rest made its signature fire about once every 2–3 fights | The level-4 signature pip (7.9), pre-committed and applied; Sworn Guard's ward and Answer carry level 3; signature share at L3–4 an M2 report for the Swordsworn and the Cutthroat; the next lever is the pip at level 3, only if the rerun keeps the 109.1 / 109.3 cells ≤ 110 **(lead's call)** |
 | Out-of-combat floor clearing (Cutthroat) | Throat-Cut `strike`-tagged; body-noticed rule with the second-kill route; fights-avoided threshold lever |
 | Poisoned lock on bosses | Stealth-dice-only trade; once per fight per elite or boss; Shrugged Off |
@@ -2400,7 +2414,7 @@ recorded in classes 18 by SH-23's row):**
 | SH-3 | Vanguard 7.9 `TurnAllowanceNoDamage` (lead's call); weapons 6.6 and 7.5 step 8 (lead's call) | Allow-list `damage.extraDice.opening` and `damage.flat.opening` (named apart from the weapons 6.5 Precision term, which is not allow-listed); new `OpeningCeiling` and `StrikeOptionCeiling` with tuning tables; in step 8, Opening's dice go after Exploit dice and before crit doubling, and the flat +2 goes with the flat terms after doubling | Lead |
 | SH-4 | Classes 3.4 (limited-ability bullet), 7.5 (counting); Vanguard 7.9 / VG-10 (lead's call) | "A per-rest counter on one named pool's record, spent by records tagged with its one declared tag, whether or not they spend from the pool, is a frequency limit and counts 0; it is not a named pool"; `strikeLimit` with the level-4 signature pip; the static `HideLimit` with its waiver list; `costByTrigger` and `costWaivers` (a waiver is not a refill) | Lead |
 | SH-5 | Vanguard 7.3 `SurgeOptionBound`; weapons 6.4, parity targets, "Any build ≤ 110%" row (the VG-12 text); classes 6.4, single-target damage cap cell; classes 12.2, validator list (lead's calls) | Renamed and generalised to `CampOptionBound` (`actionsGranted` ≤ the base option's) in every approved document; scoped to non-slot, non-slotless camp pools beside `SpellTierBound` and `SlotlessCastBound` by ARC-2 (Arcanist design 11.2) | Lead |
-| SH-6 | Weapons 7.5 (new step 8a, a marker only; step 8's "then any concentration check" points to DH 20.3); ability 14.3; DH 20.3 (the Duck offer between steps 3 and 3a; new step 3a; step 3's and step 8's "concentration uses step 3's value" read the step-3a value) (lead's calls) | The Duck marker, offer and halving step (7.4) | Lead |
+| SH-6 | Weapons 7.5 (new step 8a, a marker only; step 8's "then any concentration check" points to DH 20.3); ability 14.3; DH 20.3 (the Duck offer between steps 3 and 3a; new step 3a; step 3's and step 8's "concentration uses step 3's value" read the step-3a value); conditions 9.3 and DH 15.2 (step 3a inserted; the pre-save total for concentration is the step-3a value; cross-document comparison 2026-11-23, CC-29) (lead's calls) | The Duck marker, offer and halving step (7.4) | Lead |
 | SH-7 | Ability 7.3, policy filters (lead's call) | `bigHit` (on the DH 20.3 step-3 total), `noAllyHarm`, `preferStealthTarget`, `holdCarryOnOverkill`, `ifOpeningUnavailable`; `whilePoolAtLeastHalf` read for a pool with a strike counter | Lead |
 | SH-8 | Weapons 7.5 step 6/6a, 8, 18.4; ability 7.2 threatened-zone row, 14.3 step 6; VG-18/20 (lead's calls) | `missedBy` and its order at a miss (Graze → `answeredBy` → 6a → the hook, re-checked); `sameReactionFollowUp` (same reaction after a reaction-spending or carried ward; spends the reaction after a fill); the `onParrySuccess` definition; the Riposte echo ruling | Lead; the Sworn Guard route **client (agreed, Q3)** |
 | SH-9 | Armour 10.4, "Candidate order" and "Window algorithm" (lead's call) | Step 3 split: **3a** the target's own class-pool-paid wards (Sworn Guard, `countsAsParry: true`; Flare, `countsAsParry: false`; ARC-5, Arcanist design 7.5), **3b** the target's own Parrying property, then allies' charges; Blade Dance as a step-0 fill; a **step-0b** carried ward (Held Guard) that spends nothing, is exempt from the "no reaction left" skip, inherits the other skips and counts as the one reaction AC bonus | Lead; **client (agreed, Q3)** for the ward |
@@ -2472,11 +2486,28 @@ finds the `TriggerFromFive` scope note; a grep for
 - **The armour owner:** the step-3a / 3b split and the step-0b carried
   ward (SH-9); without 0b, Held Guard falls back to `counterstrokeStop`.
 - **The floor-pacing owner (pre-committed request, 10.4):** the floor-1
-  boss door needs level 3, or the XP that guarantees it.
+  boss door needs level 3, or the XP that guarantees it. **Closed:
+  answered by the Antechamber Catch-up** (run structure design 9.4;
+  RT-8); the level-2 arrival rate stays only as a check that the
+  catch-up fires (cross-document comparison 2026-11-23, CC-72).
+- **The hazards owner (pending request, hazards design 6.15, 18; HZ-31):**
+  a Shade hazard hook owed before Voids ship (candidates: Operate a Cord
+  without breaking Hidden; push-1 from Hidden at Void edges;
+  VoidClassDeathGap ≤ BASE + 2). Until it is delivered, Voids do not
+  ship. Also the Trapwright Jury-Rig Stir re-time (C ± 1, never below 2;
+  M3, the Shade owner's call) (8.2). Not yet ruled by the Shade owner
+  (cross-document comparison 2026-11-23, CC-7).
+- **The encounter placement owner (pending input request, encounter
+  placement design 6.8):** `PartySurpriseShare`, measured for the
+  worst-legal Shade-in-party profile, is fed to this document's
+  `stealthShare[L]` / `openShare[L]` tables (10); parity is rerun if it
+  exceeds the 10 profile (cross-document comparison 2026-11-23, CC-74).
 - **The other two stage-2 class documents:** `Floor1ClassSpread` as a
   real gate needs all four classes in data.
 - **Companions:** a Shade recruit kit as a signature slice that does not
-  copy the hero's Vanish Arts or From Nowhere.
+  copy the hero's Vanish Arts or From Nowhere. Answered by the
+  companions design 8.3 and 11.3 (cross-document comparison 2026-11-23,
+  CC-74).
 - **The simulator:** the stealth share, parity per subclass, spread and
   full-floor clear, level-2 boss arrivals, fights avoided, the content
   bound. Pending (SV-22, M2): the generalised `Skill.*` arms, or the
@@ -2549,8 +2580,10 @@ triggers them:
   it changes an agreed value (10.7);
 - Pinch (an agreed-row change);
 - Gloom squares together with a Wise to You trial as a softer bound;
-- level-2 boss arrivals, only if the pre-committed floor-pacing request
-  (18) is refused and the rerun with Vanish 3 at level 2 still fails;
+- level-2 boss arrivals: closed, since the pre-committed floor-pacing
+  request (18) is answered by the Antechamber Catch-up (run structure
+  design 9.4; RT-8); the arrival rate stays only as a check that the
+  catch-up fires (cross-document comparison 2026-11-23, CC-72);
 - a `Floor1ClassSpread` miss whose levers run out;
 - the naming pass.
 

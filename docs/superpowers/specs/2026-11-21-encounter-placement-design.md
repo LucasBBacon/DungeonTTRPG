@@ -540,7 +540,7 @@ and the party is the better ambusher.**
 | **Terrain Pairing** | A deterministic seating that pairs a unit with a terrain or hazard feature (6.6.8) |
 | **Annex** | The one optional, zero-XP, off-slot group per floor on F2–5 (6.13) |
 | **Encounter Read card** | The inspect card listing a group's formation, breaks, Keystone and counter (6.20) |
-| **`encounters`** | The segment-6 child of the floor's dungeon substream (6.1) |
+| **`encounters`** | The segment-6 node under the floor's attempt node, `dungeon/floor/{N}/attempt/{a}/encounters` (6.1; SV-1, SV-31; cross-document comparison 2026-11-23, CC-101) |
 | **`GroupPlacement`** | The record handed to `trapsResolve` (6.13) |
 | **V12 `EncounterPlacement`** | This segment's validator (11.2) |
 
@@ -665,8 +665,9 @@ FNV-1a("encounters"))`: `Derive` applies the FNV-1a `LabelId` itself,
 and the parent is the floor's attempt node; changes SV-1, SV-4),
 written as RT and TL write their streams (lead's call, after the check;
 "sibling" dropped, SV-31), with fixed draw counts and dummy draws
-(R-SEED-3). `floorSeed` in the keyed hashes below is the floor dungeon
-substream's seed, as in TL 6.22. This
+(R-SEED-3). `floorSeed` in the keyed hashes below is the floor key
+`dungeon/floor/{N}` (keyed form below; SV-1; cross-document comparison
+2026-11-23, CC-101). This
 amends ENM 10.5's last paragraph ("every step except 3 draws only from
 the dungeon stream", lead's call), adds a child to MAIN 6.3's stream
 list (**decided**, extended as FL-2, TR-17 and TL-3 extended it; **new
@@ -957,16 +958,39 @@ only reported (XB-L4).
   thus taught where formations are first met. A toy and simulator
   re-run is owed (10).
 - **The solo composition table** (owed by ENM 10.1 and CMP 7.7) gains a
-  formation column:
+  formation column. **Re-tuned (cross-document comparison 2026-11-23,
+  CC-104):** levels are relative to the homeRoom's room level, minion
+  levels are stated, and each cell is the highest-cost fill at or below
+  B, so every cell lies inside the ENM 10.1 window (85–100%; lowest 852‰,
+  at B 54). A cell is taken only if its cost is also at or above
+  `ceil(fillTarget‰ × B ÷ 1000)` (6.2); where it is not (for example B 8
+  at a fillTarget above 875‰), the slot takes its fallback chain (6.1),
+  so no placed cell lies below fillTarget. Costs are ENM 10.1's
+  `levelCost` (a minion `max(2, FloorDiv(levelCost, 3))`):
 
-| Solo budget B *(illustr.)* | Composition | Formation |
+| Solo budget B *(illustr.)* | Composition (cost) | Formation |
 |---|---|---|
-| 7–9 | 1 standard at −1 | Picket Line (Patrol File as the start shape when patrolling) |
-| 10–12 | 1 standard at 0 | Picket Line |
-| 13–15 | 1 standard at 0 + 1 minion | Picket Line (a Pack needs 2 minions, so no Crescent; lead's call, after the check) |
-| 16–19 | 1 standard at 0 + 2 minions | Crescent or Door Line (minion shooter) |
-| 20–27 | 1 standard at +1 + 2 minions | as above |
-| 28+ | 1 standard at +2 + 2 minions | as above |
+| 7–8 | 1 standard at −1 (7) | Picket Line (Patrol File as the start shape when patrolling) |
+| 9 | 1 standard at −1 + 1 minion at −2 (9) | Picket Line |
+| 10–11 | 1 standard at 0 (10) | Picket Line |
+| 12 | 1 standard at 0 + 1 minion at −1 (12) | Picket Line (a Pack needs 2 minions, so no Crescent; lead's call, after the check) |
+| 13 | 1 standard at 0 + 1 minion at 0 (13) | as above |
+| 14 | 1 standard at 0 + 2 minions at −1 (14) | Crescent or Door Line (minion shooter) |
+| 15 | 1 standard at 0 + minions at 0 and −1 (15) | as above |
+| 16–17 | 1 standard at 0 + 2 minions at 0 (16) | as above |
+| 18 | 1 standard at +1 + 2 minions at −1 (18) | as above |
+| 19 | 1 standard at +1 + minions at 0 and −1 (19) | as above |
+| 20 | 1 standard at +1 + 2 minions at 0 (20) | as above |
+| 21 | 1 standard at +1 + minions at +1 and 0 (21) | as above |
+| 22–23 | 1 standard at +1 + 2 minions at +1 (22) | as above |
+| 24 | 1 standard at +2 + 2 minions at −1 (24) | as above |
+| 25 | 1 standard at +2 + minions at 0 and −1 (25) | as above |
+| 26 | 1 standard at +2 + 2 minions at 0 (26) | as above |
+| 27 | 1 standard at +2 + minions at +1 and 0 (27) | as above |
+| 28–29 | 1 standard at +2 + 2 minions at +1 (28) | as above |
+| 30–31 | 1 standard at +2 + minions at +2 and +1 (30) | as above |
+| 32–37 | 1 standard at +2 + 2 minions at +2 (32) | as above |
+| 38–54 | 1 standard at +3 + 2 minions, the highest-cost pair at or below B (32–46) | as above |
 
 - **`SoloShapeMonotone`** extends `SoloBudgetMonotone`: as weight rises,
   the standard's level never falls, threat lanes at fight start never
@@ -1064,8 +1088,10 @@ non-fearless, 0 mindless, 0 hard control.
   Awareness read as states, ∩ its types' `allowedAwareness[]`; 6.4; V12;
   XK3). **The F1 lair is a Dormant Pack** (lead's call, kept: it is the
   sleeping-lair lesson and meets the awareness mix). A Pack guard post may
-  also be Dormant on any floor (ENM 17.4), and from F2 so may a Warband or
-  Gauntlet; the first fight host never is (it is Posted or Busy, 6.17). **Told
+  also be Dormant on any floor (ENM 17.4), and from F2 so may a Warband
+  (a Gauntlet is a lair-only template, ENM 17.4, so it never holds a
+  Dormant guard post; cross-document comparison 2026-11-23, CC-100); the
+  first fight host never is (it is Posted or Busy, 6.17). **Told
   plainly, after the check:** the proposal's "no F1 guard template can be
   Dormant" was wrong; ET20 is corrected.
 
@@ -1853,7 +1879,8 @@ counted in `StealthOpenable`. Its XP stays in the pool (`SkippablePool`,
   3. **no near pair on Waylay, Ambush or FT3 hosts**, so a showpiece
      stays one puzzle (XF7);
   4. only if that misses: a **request to the FL owner** to drop the
-     Silk/Carnival +1 on F4–5 or the F3–5 near-pair cap (FL 6.6).
+     Silk/Carnival +1 on F2–3 (their floors; cross-document comparison
+     2026-11-23, CC-89) or the F3–5 near-pair cap (FL 6.6).
   `JoinBudget` remains available only as a client change to MAIN 4.3
   (not proposed).
 - **Partner rules (the definition is a lead's call, after the check):**
@@ -2042,8 +2069,10 @@ group of 6.14 (boss rooms design 4.7.4).
   escort or a Champion elite; the 2.5% cumulative budget.
 - **This design:**
   - the first fight host: Picket Line or Door Line, Posted or Busy, FT1,
-    at the 850‰ fill minimum (11 of 12 at the expected solo weight; G1,
-    K1 and W1 are recast to 11, 7); the KP8 teaching room hosts a lone
+    at the 850‰ fill minimum (11 of 12 at the expected solo weight; G1
+    and W1 are recast to 11, 7; on the Kennel the first G is the
+    Huntsman +0 with one minion, 12, because K1 moved to room level 2,
+    7.3; cross-document comparison 2026-11-23, CC-2); the KP8 teaching room hosts a lone
     front enemy in line with the light piece;
   - **the lair is a Dormant Pack** (6.5); a Pack guard post may also be
     Dormant;
@@ -2135,7 +2164,9 @@ group of 6.14 (boss rooms design 4.7.4).
   assertion.
 - **Board read surfaces (lead's call, after the check; registered in the
   RC5+ pattern registry so no two differ by hue alone, and added to the
-  colour-blind and greyscale gates):**
+  colour-blind and greyscale gates; the registry entry is a request to
+  the RS owner under EP-12, pending; cross-document comparison
+  2026-11-23, CC-103):**
 
 | Surface | Shape and pattern | Anchor |
 |---|---|---|
@@ -2170,8 +2201,11 @@ group of 6.14 (boss rooms design 4.7.4).
   had not already shown. Rejected: B, the band keeps ignoring
   hidden lurkers.
 - **Rest preview** (EP-16): adds Alerted, Searching and Pursuing groups
-  to the seen patrol routes. Its movers read `PatrolForecast` over known
-  patrols (change XI-6; agreed, Q2; M2; exploration and information
+  to the seen patrol routes; a group last seen Alerted, Searching or
+  Pursuing shows "last seen <state> at tick N; route unknown" and no
+  forecast (exploration and information design 4.8.1; cross-document
+  comparison 2026-11-23, CC-105). Its movers read `PatrolForecast` over known
+  patrols (change XI-6; agreed, exploration and information Q2; cross-document comparison 2026-11-23, CC-106; M2; exploration and information
   design 4.8.1).
 - **Hearing outline:** arrival-Portal arrows; Hedgehog groups marked.
 - **Approach band out of combat** (a DH 17.3 change): M3, a later client
@@ -2294,8 +2328,19 @@ Roster: Whelp (minion), Gaunt Hound (skirmisher), Kennel Mastiff
 Ghillie (lurker). M1: Mastiff, Huntsman, Poacher, Old Ragged.
 
 - **K1 The Huntsman's Stand** (guard post; **M1**): Line and Bow,
-  Huntsman −1 (7) + Poacher −3 (4) = 11 (the 850‰ minimum, if native
-  levels allow; after the check); **Door Line**: the Huntsman at
+  Huntsman −1 (7) + Poacher −2 (5) = 12 of 12, **at a guard post of room
+  level 2 or more** (on F1 the last G, `mainPathIndex` 5; from M2 it
+  shares that host's draw with K3 and K5). **Re-checked (change RT-22;
+  cross-document comparison 2026-11-23, CC-2):** the Huntsman is now the
+  M1 warhammer-and-shield soldier, legal only at L1–4 (armour 12.3), so
+  its −1 shift needs room level 2 (L1; the Poacher at −2 is the L0 sling
+  artillery). At room level 1 (the first G) the −1 Huntsman would be L0
+  and the old Poacher −3 below level 0, and dropping the shift (Huntsman
+  +0 (10) + Poacher −1 (7) = 17) overruns the budget of 12, so the K1
+  room is raised (lead's call): the first G takes the 6.3 solo table's
+  B 12 cell instead, the Huntsman +0 (10) + one minion at −1 (2) = 12 on
+  Picket Line (the ENM 21 minion template in M1; a Whelp from M2);
+  **Door Line**: the Huntsman at
   the 1-wide trail mouth, the Poacher on the log line 6–8 back,
   uncovered; the glade's second mouth is the `BacklineReach` lane. "Go
   around"; ≤ 1 artillery per F1 solo encounter (O15).
@@ -2720,7 +2765,7 @@ run with the RS role-ID gate.
 | Rule | Statement *(thresholds illustr.)* | Wave |
 |---|---|---|
 | `FirstSight` | ≥ ⅔ of non-lurker units in line of sight of at least one landing square on entry (after the check); the Waylay exempt (announced by Spoor and Listen) | M1 |
-| `LandingShooters` | Ranged attackers with line of sight to the **entry lane** at fight start: 1/2/2/2/2 (F1–F5); 3 only at party 4 outside the lair and the last G; solo −1 (min 1) | M1 |
+| `LandingShooters` | Ranged attackers with line of sight to the **entry lane** at fight start: 1/2/2/2/2 (F1–F5); 3 only at party 4 outside the lair and the last G; solo −1 (min 1); Waylay on F2: 1 (6.8.6; cross-document comparison 2026-11-23, CC-102) | M1 |
 | `StartArc` | Every start (lurkers included) inside 120° from the landing centroid, bisected by the line from the landing centroid to the start-zone centroid (after the check), on F1–2 or at party ≤ 2; 180° otherwise | M2 |
 | `BacklineReach` | For every back, overwatch, ward or leader unit, a path from the landing avoiding squares adjacent to front starts, ≤ shortest + 4 | M2 |
 | `LeaderReach` / `AuraCover` | The leader reachable from any CV8 flank square (after the check) in ≤ 6 without entering more than one front unit's reach; starts within 2 of ≥ 2 own members; never nearest to the landing | M2 |
@@ -2964,7 +3009,7 @@ LR4 and LR5 of 6.1; seeds and validation design 5.5; SV-10).
 | `ReEngageRate`, `AnnexEngageRate`, `ContainersOpened` | Reported (containers −10% against baseline = the paranoia alarm) |
 | `F1FeatureAdjacency` | Reported |
 | `FormationRead` (playtest) | Name and use the counter ≥ 70% |
-| `PatrolFightRate` (change XI-6; agreed, Q2; M2): combats per floor, F1–5, whose first noticing roll was made by a Patrolling group, over the same count in the BASE arm (`XI.BASE`; seeds and validation design 6.2; SV-22) | ≥ 60% *(illustr.)*; **a gate**, owned by EP, read at M2 sign-off and every balance pass; on a miss, segment 10's cut order (exploration and information design 4.8.1, 9.3) |
+| `PatrolFightRate` (change XI-6; agreed, exploration and information Q2; cross-document comparison 2026-11-23, CC-106; M2): combats per floor, F1–5, whose first noticing roll was made by a Patrolling group, over the same count in the BASE arm (`XI.BASE`; seeds and validation design 6.2; SV-22) | ≥ 60% *(illustr.)*; **a gate**, owned by EP, read at M2 sign-off and every balance pass; on a miss, segment 10's cut order (exploration and information design 4.8.1, 9.3) |
 
 **New lead's call:** `RoundsPerFightDelta` is TL's report name (TL 6.9,
 ≤ 0.1 for traps); segment 6 reports its own line under the same name
@@ -3036,8 +3081,8 @@ sockets and pieces (RT); hazards (HZ); traps, locks and `trapsResolve`
 |---|---|
 | **7 Loot** | Carriers on sockets the party can reach for Steal (never a nook; never a ward behind two fronts on F1–2); the Champion notable; the bait-cache prop family (CT1, LP-15; re-skins LP-16 pending; loot sources design 5.1, 5.3); activity containers (a dice pot, a feast plate); Annex prizes (none of its own: loot economy design 6.9 item 1); boxed-lurker contents (loot economy design 6.9, LE-20). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 4.8, 5)** |
 | **8 Events** | Activity vignettes in Q rooms ("remains of a revel"); no event spawns or moves units; Cowed kneeling never crosses a door. **Taken up by the events design (segment 8, approved 2026-11-22; its 4.13):** vignettes are Glimpse dressing beside the Q room's Curiosity, under RC1+, never a second decision (M2); "no event spawns or moves units" is held: Curiosity noise is generic noise that moves units only through the hearing rules, never a Lure and never sets `luredThisFloor` (EV-14, a reading pending the EP owner's confirmation, with the enemies owner; M2); figures are framed non-unit map objects, never on a walkable square (events design 4.11; EV-45; M2 implied figures, M3 frame); M3 Overtures may apply Soaked, Oiled or Revealed to a tied group at its fight's first round, never on the elite, the Annex, the boss or a lurker host (for Revealed) (EV-32, a reading of this row pending the EP owner, enemies owner request; M3; events design 4.9) |
-| **9 Boss arenas** | Retinue escorts, arena start zones ≥ 9, the patrol joiner, Keepsake dressing. **Taken up by the boss rooms design (segment 9, approved 2026-11-22; its 4.5, 4.7.4):** arena escorts use segment 9's `ArenaFormation`s, Retinue one allowed shape on F2–5 (BR-19, a request pending the EP owner, 6.14; M2); every F2–5 Boss Court holds ≥ 1 non-fearless group (agreed, Q4; M2); `answers{}` extended to bosses as `BossAnswerMatrix` (BR-19, 6.16; M2); reserve sockets read as keeping "no off-map reinforcements" and `ArrivalThroughPortal` (BR-11, a reading pending the EP owner's confirmation, 6.12; M2); the patrol joiner joins under the 1/1/2/2/2 caps and counts in AddCap (BR-13, an FL-21(e) proposal the enemies owner rules) |
-| **10 Information** | Formation and Keystone chips (`ChipNoLeak`; the read-surface table of 6.20); the Read card; the Perception hold overlay; the Lore counter line; the Listen activity word and watched Portal; Spoor marks; arrival-Portal arrows; the seen-tell band marker (6.20); rest-preview movers; the Lore roster preview of formations; "Line broken" and "Caught facing the door". **Taken up by the exploration and information design (segment 10, approved 2026-11-23; its 4.3.5, 4.8, 4.9.7, 5):** every surface placed in its catalogue (5), EP 13 at 5 surfaces; the Listen bubble carries the activity word and watched Portal if EP-9 and EP-12 are ruled (FL-18 requests; 4.3.5); hold squares and fall-back stay the EP-28 tier, if ruled; arrival-Portal arrows on a hearing outline labelled "known groups only" (XI-13, a reading; M2; 6.12); rest-preview movers read `PatrolForecast` over known patrols (XI-6, agreed, Q2; M2; 6.20); the `PatrolFightRate` gate, owned by EP (XI-6, agreed, Q2; M2; 11.3); Spoor marks projected under cutaway (XI-18, pending the EP owner's confirmation; M2; 6.8.6); the noticing step tag's odds and Cased's odds band wait on EP-41 (XI-12, XI-27; M3; 6.20); Downed units excluded from the lurker band (XI-2; M1; 6.8.5) |
+| **9 Boss arenas** | Retinue escorts, arena start zones ≥ 9, the patrol joiner, Keepsake dressing. **Taken up by the boss rooms design (segment 9, approved 2026-11-22; its 4.5, 4.7.4):** arena escorts use segment 9's `ArenaFormation`s, Retinue one allowed shape on F2–5 (BR-19, a request pending the EP owner, 6.14; M2); every F2–5 Boss Court holds ≥ 1 non-fearless group (agreed, boss rooms Q4; cross-document comparison 2026-11-23, CC-106; M2); `answers{}` extended to bosses as `BossAnswerMatrix` (BR-19, 6.16; M2); reserve sockets read as keeping "no off-map reinforcements" and `ArrivalThroughPortal` (BR-11, a reading pending the EP owner's confirmation, 6.12; M2); the patrol joiner joins under the 1/1/2/2/2 caps and counts in AddCap (BR-13, an FL-21(e) proposal the enemies owner rules) |
+| **10 Information** | Formation and Keystone chips (`ChipNoLeak`; the read-surface table of 6.20); the Read card; the Perception hold overlay; the Lore counter line; the Listen activity word and watched Portal; Spoor marks; arrival-Portal arrows; the seen-tell band marker (6.20); rest-preview movers; the Lore roster preview of formations; "Line broken" and "Caught facing the door". **Taken up by the exploration and information design (segment 10, approved 2026-11-23; its 4.3.5, 4.8, 4.9.7, 5):** every surface placed in its catalogue (5), EP 13 at 5 surfaces; the Listen bubble carries the activity word and watched Portal if EP-9 and EP-12 are ruled (FL-18 requests; 4.3.5); hold squares and fall-back stay the EP-28 tier, if ruled; arrival-Portal arrows on a hearing outline labelled "known groups only" (XI-13, a reading; M2; 6.12); rest-preview movers read `PatrolForecast` over known patrols (XI-6, agreed, exploration and information Q2; M2; 6.20); the `PatrolFightRate` gate, owned by EP (XI-6, agreed, exploration and information Q2; M2; 11.3; cross-document comparison 2026-11-23, CC-106); Spoor marks projected under cutaway (XI-18, pending the EP owner's confirmation; M2; 6.8.6); the noticing step tag's odds and Cased's odds band wait on EP-41 (XI-12, XI-27; M3; 6.20); Downed units excluded from the lurker band (XI-2; M1; 6.8.5) |
 | **11 Seeds** | The `encounters` node, its draw table, the `retry1` child, the per-band `lurkStealth` keys. **Taken up by the seeds and validation design (segments 11–12, approved 2026-11-23; its 4.3, 5.5):** `…/attempt/{a}/encounters` a node with the sub-keys `plan` (GS8) and `place` (GS12), counts unchanged (SV-2; M1); `encounters/retry1` the LR2 child (SV-10; M1); `h:lurkStealth` (groupId, positionIndex, band, die) on the floor's `checks` stream (SV-6; M2, reserved in M1); the key algebra (SV-1); 6.1, 6.8.5, 6.19 |
 | **12 Validation** | V12, the reports, the CMP-8 tests extended to formations and the solo column. **Taken up by the seeds and validation design (segments 11–12, approved 2026-11-23; its 5.1, 5.2, 5.4–5.7, 6.3, 6.10):** V12 split into V12s, V12g (GS12 geometry; AP2 floor assertions) and V12r, its simulator gate moved to the report registry (SV-20); every retry logged as `StageRetried` (5.7); `V12FloorFallback` < 1% read pooled (SV-11); the CMP-8 rows as `content.CMP8.Formations` and `content.CMP8.SoloColumn` (a request to the EP and companions owners, pending; 11.2); signature ≥ 2 and `ProtectedIntact`'s group part in V12g (requests pending; 11.2) |
 
@@ -3092,9 +3137,9 @@ sockets and pieces (RT); hazards (HZ); traps, locks and `trapsResolve`
 | 13 | Formations solved after a few runs | Terrain Pairings vary the counter by room; the counter line free only on first meeting; no-repeat |
 | 14 | Many pending dependencies (DH 21.1, TL-16, TL-30, TR-15, FL-21, SH-21, the solo table) | Each gated feature names its gate; nothing ships on an unruled rule (19.2 names each fallback) |
 | 15 | Lurker supply uneven; F5 has no lurker ambush; one legal ambush host on most floors, none on trimmed F3–4 | Told plainly; the Waylay carries F5; the boxed lurker fills the second place in M3 |
-| 18 | The floor-level quotas fail on a seed | The floor allocation (9b), the repair pass (10g), one retry, the terminal floor fallback with `V12FloorFallback` (6.1) |
 | 16 | Re-engage farming | The Hedgehog without Billets after losses; all Portals watched; the DH rests gate |
 | 17 | **All evidence is toy** | Every number is owed a simulator re-run before it settles |
+| 18 | The floor-level quotas fail on a seed | The floor allocation (9b), the repair pass (10g), one retry, the terminal floor fallback with `V12FloorFallback` (6.1); row order fixed (cross-document comparison 2026-11-23, CC-106) |
 
 ---
 
@@ -3185,7 +3230,7 @@ with their wave and take effect at that wave.
 | **EP-9** | **MAIN 4.3 "set per monster in data" (decided)**; ENM 12.1 (no new state); **RS RC1, RC3, RC8 (agreed; read)**; FL 9.2 and ABL 7.2 Listen rows (request: the activity word) | Activities and postures; `allowedAwareness[]`; state ∈ template Awareness (6.7) | **Decided** (MAIN 4.3, read per group); **Agreed** (RC, read); **Q4** | **Client (agreed 2026-11-21, Q4)**, with this document; enemies owner applies; FL and ABL owners (the Listen word, request) |
 | EP-10 | ENM 10.3 ambush column; ENM 10.1 "an ambush uses 85%" → "a Mousetrap Ambush"; ENM 16 "ambushes pay … at 85%" → the same; ENM 17.4 Ambush row (container bait tightened: party ≥ 2, F2–5, ≤ 1 per floor, ≤ 2 per run; Band "Guard post × 0.85" → "guard post; × 0.85 for a Mousetrap"; Awareness "Hidden" read as "the lurker group Stationary and Hidden at start; the bait group Stationary"; the last two after the check) | The ambush defined; the Cuckoo at full band; the bait-cache prop (6.8.1) | — | Lead's call; enemies owner applies |
 | EP-11 | ENM 17.1 lurker row; ENM 9.3 F1 bullet; ENM 11.3 invariant 6 (DH-28 lineage); **DH 17.1 (agreed; read, not changed)** | A floor-1 lurker never uses Ambush Strike; the F1 ambush only in the L-G role order (6.17) | **Agreed** (DH 17.1, read; tightened only) | Lead's call; enemies owner applies |
-| EP-12 | ENM 10.3 (the Quarry rule extended to the Waylay); ENM 17.4 (the Kill Box as a formation); FL 9.2 (trained Listen adds the watched Portal; request); **RS RC1 (agreed; read: frame and wall marks)**; RS RC5+ pattern registry (the Spoor base mark and bait mark; after the check) | The Waylay posture, gates and Spoor marks (6.8.6) | **Agreed** (RC1, read) | Lead's call; enemies owner applies; FL owner (request) |
+| EP-12 | ENM 10.3 (the Quarry rule extended to the Waylay); ENM 17.4 (the Kill Box as a formation); FL 9.2 (trained Listen adds the watched Portal; request); **RS RC1 (agreed; read: frame and wall marks)**; RS RC5+ pattern registry (the Spoor base mark and bait mark; after the check; extended to the 6.20 board read surfaces as a request to the RS owner, pending; cross-document comparison 2026-11-23, CC-103) | The Waylay posture, gates and Spoor marks (6.8.6) | **Agreed** (RC1, read) | Lead's call; enemies owner applies; FL owner (request) |
 | EP-13 | FL 7.2 `F1LessonLadder` (the Gaol's guard post adjacent to the lair); FL 7.2 "Law in layout" bullet and the FL theme table's Gaol row ("1 shut-door pair"); RS 8.3 Law, Lockdown ("one shut-door pair") (the last three named after the check) | "The shut-door pair or the hooded cot" (6.17); on hooded-cot seeds the floor has no shut-door pair, and the Gaol's Law shows through its door network and bell tripwires (told plainly) | — | Lead's call; FL owner applies |
 | **EP-14** | **DH 17.3 danger band (agreed lineage)**; DH 21.5 | A seen tell counts as a known threat, its reach taken from the tell square (6.20; the square after the check) | **Agreed** (DH 17.3); **Q3** | **Client (agreed 2026-11-21, Q3)**, with this document; DH owner applies |
 | EP-15 | ENM 12.1 Wary row ("its post", a reading) | The Hedgehog re-form; no Billets after ⅓ down or the Keystone lost; watches all Portals (6.21) | — | Request; enemies owner rules the reading |
@@ -3247,7 +3292,9 @@ The owed rows are the single list in 17; by owner:
 - **The Shade owner:** `PartySurpriseShare` into `stealthShare[L]` and
   `openShare[L]` (6.8.8); SH-21 Lure (pending) as a counter.
 - **The RS owner:** EP-1 (the seed tree), EP-9 (RC readings), EP-12
-  (Spoor marks on frames and walls), EP-29 (fearless-anchor tags), EP-31
+  (Spoor marks on frames and walls; the 6.20 board read surfaces in the
+  RC5+ registry, a pending request; cross-document comparison
+  2026-11-23, CC-103), EP-29 (fearless-anchor tags), EP-31
   (Gut cap), the pose grammar (8), the Cathedral roster request (7.11),
   roster placeability.
 - **The floor layout owner:** EP-9 and EP-12 (Listen rows, FL 9.2),
@@ -3375,7 +3422,7 @@ document; none changes a client answer):
   written" list says "the 17-formation catalogue"; the entries are as
   written, the count was wrong. They are now read as **15 battle
   formations and 4 start shapes** (Patrol File, Revel, Bout, Sleeping Ward),
-  so a Busy, Dormant or Afoot group carries both a start start shape and a
+  so a Busy, Dormant or Afoot group carries both a start shape (cross-document comparison 2026-11-23, CC-106) and a
   battle formation (6.6.6, 6.7). The chip set is 17 icons: the 15 battle
   formations plus "Line broken" and "Caught facing the door" (8).
 - **Ambushes are rarer than the proposal's figures.** The approved host

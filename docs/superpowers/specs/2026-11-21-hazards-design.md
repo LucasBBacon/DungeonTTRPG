@@ -107,7 +107,8 @@ floor-1 theme from Nightmare tier 2 (Q4).**
 
 **Change prefix.** This design uses **HZ-n** ("hazards"). A grep for
 `HZ-` across the 20 approved documents finds 0 hits. This document
-issues one register, HZ-1 to HZ-30 (17). The check that followed the
+issues one register, HZ-1 to HZ-30 (17), with HZ-31 added on
+2026-11-23 (cross-document comparison 2026-11-23, CC-7). The check that followed the
 client's answers added no HZ row; its changes sit inside the existing
 rows and are listed in 19.1. Local id schemes, each
 grep-checked as a whole word with 0 hits: tensions **HT1–HT19**,
@@ -496,7 +497,7 @@ Each is met in section 14.
 | O10 | Kennel staked pits | RS 8.4 |
 | O11 | Wrecker value by hazard density | Vanguard 8.3, 18 |
 | O12 | Hazard-edge coverage from floor 2 (Ledgewalker) | trinkets 23 |
-| O13 | DEP-A1 interactive features | Arcanist 16, 19; TR-21 |
+| O13 | DEP-A1 interactive features | Arcanist 16, 19; TR-21; ROOM 3.4, KP2 (pending request, HZ-31; CC-7) |
 | O14 | ENM 17.5's "a chasm edge for shoves" | ENM 17.5; RT 6.5.7 |
 
 ### 3.3 Tensions found and their resolutions
@@ -719,8 +720,8 @@ in M2 only if the reading-time playtest measures it well under the toy
   hidden or sprung twin stays segment 5's: the toppling-shelf tripwire
   (the Leaning Stacks are its Stir twin), the dumbwaiter drop (the
   Courses), the sluice one-shot Soak (the Sluice Wheel Cord), the icicle
-  chandelier, the acid geyser, trapdoor stages, the bell tripwire, the
-  portcullis, the Appeals trapdoor and the Kennel horn tripwires. These
+  chandelier, the Acid Gland, trapdoor stages, the bell tripwire, the
+  portcullis, the Appeals trapdoor and the Kennel horn tripwires (cross-document comparison 2026-11-23, CC-98). These
   sprung twins are segment 5's traps; the Stir and Cord twins named here
   are unchanged (traps and locks design 6.3, 7; change TL-10).
 - A Cord that arms or disarms a trap is segment 5's. **Cords never arm
@@ -730,8 +731,8 @@ in M2 only if the reading-time playtest measures it well under the toy
 - Known armed traps remain hazards for C 10.1–10.4 **(settled, C 11.3,
   SH-15)**. That is not a transfer of ownership.
 - **Boss counterplay features stay segment 9's** (RS 13): the
-  Carillon's sluice and bell rope, the Kennel gate, the Jailer's
-  pendulum. Segment 4 supplies only the Stir and Cord machinery.
+  Carillon's sluice and bell rope, the Kennel's pen bar (cross-document
+  comparison 2026-11-23, CC-98), the Jailer's pendulum. Segment 4 supplies only the Stir and Cord machinery.
   Non-arena look-alikes get distinct skins and names (the Choir's
   **hymn bellows** and **clapper chain**, never "the bell rope").
   Arena trap devices are segment-9 instances in segment 5's TrapRecord
@@ -788,7 +789,7 @@ in M2 only if the reading-time playtest measures it well under the toy
 | The floor's route-avoidable guard post | −1 point; no Void, no Stir (keeps the stealth bypass clean) |
 | Main-path rooms 0–1 of any floor; the floor's first fight room | No Void, no Stir |
 | Other guard posts, lairs | Stirs and Voids allowed from F2 (M3: Lurch Stirs and Tides from F3). The floor-1 Nightmare packages of 6.19 are the only exception (lead's call, after the check) |
-| Elite room | Preferred host of the floor's signature Stir (the KP9 signature slot) |
+| Elite room | May host the floor's signature Stir when the reserved slot (the KP9 signature slot) falls on it; no preference (cross-document comparison 2026-11-23, CC-92) |
 | Hinge and Postern squares | No hazard on the square or its 8 neighbours; no Void within 2 (fills FL 13's undefined radius) |
 | Antechamber–Sanctum interface | No Void or crossable hazard region between them (LG3) |
 
@@ -873,7 +874,8 @@ hazards present at every party size, solo on F2–5 included (CMP-8)
   sockets obey the same rule (encounter placement design 6.6.1; change
   EP-21; M2).
 - **VP7. Boss lanes:** no Void within 3 of a boss start zone or boss
-  lane (F-c).
+  lane (F-c); no contact hazard within 3 of a boss lane (BR-1;
+  cross-document comparison 2026-11-23, CC-94).
 - **VP8. Flee and escape:** `fleeExit`, `PartyEscape` and
   `NoSealedPocket` hold in every state.
 - **VP9. Themes:** home square kinds only (RS 8.x). Bile only in the
@@ -932,9 +934,10 @@ the check)**:
    (8).
 
 No draws at act time except saves, which use the combat stream in a
-fight; an out-of-combat save (falls, Plunge, M3 Dare rooms) is keyed on
+fight; an out-of-combat save (falls, M3 Plunge, M3 Dare rooms) is keyed on
 the floor's `checks` stream, domain `h:envSave` (seeds and validation
-design 4.3; change SV-6; M2, Dare rooms M3).
+design 4.3; change SV-6; falls M2, Plunge and Dare rooms M3;
+cross-document comparison 2026-11-23, CC-97).
 
 **The M2 pilot (agreed, Q1).** The Choir's Organ Swells is the first
 choice; the Carnival's Pit Breathes is the alternative. They are the
@@ -1279,7 +1282,7 @@ without changing Brink.
 | **Other monster** | **Falls:** removed and defeated. A new ENM 16 experience trigger `voidFall`, paid as a kill. A morale "removal" event (ENM 14.3). `causedBy` is the pusher, so on-kill hooks fire inside the action. Carried loot lands on the last safe square **(settled, ENM 15.6)**. Summons and Figments: removed, no loot |
 | **Party unit (hero or companion)** | **Dreamfalls** (below) |
 | Flying | Crosses; immune unless its Flying ends over the Void |
-| Downed | Inert; never moved **(settled, DH 11.4)** |
+| Downed | Inert; moved only by an ally's grapple-drag, which stops before a Void **(settled, DH 11.4)** (cross-document comparison 2026-11-23, CC-95) |
 
 Half-HP Clutch is **rejected**. In the toy it halved removals (in-room
 environment kills 4.2–4.7% against 7.3–7.7%) and bought no measured
@@ -1416,9 +1419,12 @@ whose hold has expired counts as that elite's Clutch for the fight
 - `TeeteringUptimeOnBosses` ≤ 25%;
 - `PartyFallsPerFight` ≤ 0.25 *(illustr.)*;
 - `PreviewExactness` 100%, act and fall branches included;
-- the Shade hazard hook delivered by the Shade owner (6.15).
-- **Added by the lead after the check:** `DownedAfterDreamfall` (a
-  hero Downed within one round of its Dreamfall) = 0 on the solo row.
+- the Shade hazard hook delivered by the Shade owner (6.15; pending
+  request HZ-31, cross-document comparison 2026-11-23, CC-7).
+- **Added by the lead after the check:** `ZeroHpAfterDreamfall` (was
+  `DownedAfterDreamfall`; a party unit reaching 0 HP within one round of
+  its Dreamfall placement) = 0 on the solo row (cross-document
+  comparison 2026-11-23, CC-96).
 
 Every report is defined in 11.4.
 
@@ -1802,10 +1808,10 @@ period (3 → 4), footprint size.
 | Class | Gains | Watch and gate |
 |---|---|---|
 | Vanguard (Wrecker) | Void removals; Brink on Void squares; due-square pushes | Toy: about 55–60% of environment kills. `FallsByWrecker` against `HewCeiling` (removal valued as remaining HP, capped by Clutch; the TR-30 owner). The Void-save disadvantage is removed (6.4). The spread gate |
-| Shade | Mute rounds (M3); Hide never in footprints or next to Voids; the quake's "still" rule favours stillness | Toy: 0% of environment kills. **Ship gate:** a Shade hazard hook owed by the Shade owner before Voids ship. Candidates: Operate a Cord without breaking Hidden; a push-1 from Hidden at Void edges. Vanguard–Shade gap ≤ BASE + 2 |
-| Arcanist | Gust, Squall and Shockwave into Voids and footprints; fire into vents; Stirs, Cords and Voids count for DEP-A1 (TR-21) | The owner's call: a second Gust charge in Void rooms. `ArcanistComboShare` |
+| Shade | Mute rounds (M3); Hide never in footprints or next to Voids; the quake's "still" rule favours stillness | Toy: 0% of environment kills. **Ship gate:** a Shade hazard hook owed by the Shade owner before Voids ship (pending request, HZ-31; cross-document comparison 2026-11-23, CC-7). Candidates: Operate a Cord without breaking Hidden; a push-1 from Hidden at Void edges. Vanguard–Shade gap ≤ BASE + 2 |
+| Arcanist | Gust, Squall and Shockwave into Voids and footprints; fire into vents; Stirs, Cords and Voids would count for DEP-A1 (request, O13; the ROOM owner defines "interactive feature"; HZ-31) | The owner's call: a second Gust charge in Void rooms (pending request, HZ-31). `ArcanistComboShare` (cross-document comparison 2026-11-23, CC-7) |
 | Herald | Give Ground into footprints and Voids; Startle plus Frighten = Rout (M3) | Give Ground stays "a tool, not a lean" |
-| Trapwright (DEP-S1) | Hook: Jury-Rig may re-time a Stir (C ± 1, never below 2, so SC2 holds) | The owner's call |
+| Trapwright (DEP-S1) | Hook: Jury-Rig may re-time a Stir (C ± 1, never below 2, so SC2 holds) | The Shade owner's call; M3 (pending request, HZ-31; CC-7) |
 | Heavy armour | Bile and Corroded | `verbDefencePermille` on the Gut |
 | Trinkets | Ledgewalker fires on Void edges; Emberward on fire Stirs; Antidote on vents | Trigger-rate reports per theme |
 
@@ -1909,6 +1915,11 @@ hazards by adding a kind, shortening a period by at most 1 (never
 below its kind's floor, 6.3.3), or starting a Mood stage higher; never
 by raising a band, an EnvDC or the EnvRound cap. V10 enumerates Mood
 stages and a tier class (11.3).
+
+**The tier read (cross-document comparison 2026-11-23, CC-84):** every
+"tier" in this section is `nightmareTier` (M3; RS 11.1), which drives
+kind additions only; `difficulty.tier` drives ladder% and is not read
+here.
 
 **Floor 1 at Nightmare tier 2+ (agreed, Q4).** The base game keeps
 floor 1 hazard-free at every tier below 2 (RT-20 kept literally; the
@@ -2686,10 +2697,11 @@ record FloorHazardState(int MoodStage, int MoodCounter, int MenuIndex, int CapRo
   owner publishes the `hazards` draw-count formula (fixed per data)
   before the M2 goldens; fallback as for `hzTagMax`.
 - No draws at act time except saves: in-combat saves on the combat
-  stream; out-of-combat saves (falls, Plunge, M3 Dare rooms) on the
+  stream; out-of-combat saves (falls, M3 Plunge, M3 Dare rooms) on the
   floor's keyed `checks` stream, domain `h:envSave` (hazardInstanceId,
   unitId, exposureIndex, die) (seeds and validation design 4.3; change
-  SV-6; M2 falls and Plunge, M3 Dare rooms).
+  SV-6; falls M2, Plunge and Dare rooms M3; cross-document comparison
+  2026-11-23, CC-97).
 - `hazardDigest` sits beside `terrainDigest`. FL 11.1's save fields gain
   `FloorHazardState` and `UnitFallState` (stored in `run.save`: the
   digest among each generated floor's stage digests, the records in its
@@ -2721,7 +2733,7 @@ changed by Moods and the floor-1 packages are proven).
 | `HingePosternClear` | The square and its 8 neighbours; no Void within 2 |
 | `NoSanctumBridge` | LG3 |
 | `HideNotOnEdge` | VP6 |
-| `BossLaneClear` | VP7 |
+| `BossLaneClear` | VP7: no Void within 3 of a boss start zone or lane; no contact hazard within 3 of a boss lane (BR-1) (cross-document comparison 2026-11-23, CC-94) |
 | `HandholdDensity` | Heart quake rooms (7.10) |
 | `TideStatesProven` | Both whole states × layer (M3); no mixed state exists (Turn part) |
 | `BileRules` | 6.5, the dry-route check in every Tide state |
@@ -2761,7 +2773,7 @@ Every row has solo, duo and four rows.
 | `DropRemovalShare` | ≤ 15% |
 | `EliteRemovedBeforeFirstTurn` | 0 |
 | `PartyFallsPerFight` | ≤ 0.25, also by shover count |
-| `DownedAfterDreamfall` | 0 on the solo row; watch on duo and four |
+| `ZeroHpAfterDreamfall` (was `DownedAfterDreamfall`; CC-96) | 0 on the solo row; watch on duo and four |
 | `RescuePushRate` | Watch |
 | `FleeAfterFallRate` | Watch |
 | `SnagPunishRate` | 10–30% (below 10%, falls are toothless: move the Snag further) |
@@ -2786,7 +2798,7 @@ Every row has solo, duo and four rows.
 | `DropRemovalShare` | `voidFall` defeats ÷ all monster defeats, in Void-room fights |
 | `TeeteringUptimeOnBosses` | Boss turn starts with Teetering ÷ boss turn starts, over all boss fights |
 | `PartyFallsPerFight` | Party Dreamfalls ÷ Void-room fights, per party; solo, duo and four rows |
-| `DownedAfterDreamfall` | Heroes Downed within one round of their Dreamfall placement ÷ Dreamfalls |
+| `ZeroHpAfterDreamfall` (was `DownedAfterDreamfall`) | Party units reaching 0 HP within one round of their Dreamfall placement ÷ Dreamfalls (the hero has no Downed state, so the old count always read 0) (cross-document comparison 2026-11-23, CC-96) |
 | `StirBothWaysShare` | Acts that damaged a monster, or where a monster's chosen destination differs when the scorer is rerun with the due-square term zeroed, ÷ acts |
 | `EnvKillShare` | A kill counts as environment when the killing damage or removal came from an environment instance or `voidFall`, whatever `causedBy` names |
 | `HazardMinutesDelta` | Segment 4 on minus off with segment 3 on in both arms (11.5); "off" = the hazard-point layer at 0, no Void, Stir or vent, RT 6.2.4's bases kept; rounds become minutes with the playtest-measured seconds per round plus per due round |
@@ -2801,7 +2813,7 @@ Every row has solo, duo and four rows.
   (RT's `EnvironmentKillShare` becomes its alias); `HazardPushDeaths`
   keeps this all-environment definition as the only one;
 - floor-1 environment deaths, `ForecastLethalSurprise`,
-  `EliteRemovedBeforeFirstTurn` and `DownedAfterDreamfall` (solo) are
+  `EliteRemovedBeforeFirstTurn` and `ZeroHpAfterDreamfall` (solo; CC-96) are
   zero gates: each is a BUILD structural row plus a simulator smoke
   row, and a simulated non-zero is a P0 bug; spread rows are read on
   the observed spread, at the minimum N of the seeds and validation
@@ -2812,7 +2824,7 @@ Every row has solo, duo and four rows.
   non-unit damage source, so V10 `F1NoHazards`, V9's F1 push-lane rows
   and V11 `F1TrapRules` are all partners), and supplies the V10
   structural partners for `EliteRemovedBeforeFirstTurn` (Void
-  geometry) and `DownedAfterDreamfall` (`SnagProven` plus the landing
+  geometry) and `ZeroHpAfterDreamfall` (`SnagProven` plus the landing
   rules) (fallback: both read as SHIP rows on the Void package at
   30,000 floors).
 
@@ -2848,7 +2860,7 @@ booked in the one human-session calendar (seeds and validation design
 |---|---|
 | **M1** | Nothing. Pushes stop before hazards (C 10.1) **(settled)**. `hzTagMax` declared for the terrain reservation (pending request, SV-3; 11.2) |
 | **M2** | The HZ-1 line; hazard points, roles and quotas; VP1–VP10; bile and the RS 8.10 reading; the RT-14 request with both guards; the EnvRound cap; Tableaux; the `hazardKit` field; V10, reports and the `hazards` stream; the clock allowance and cut order |
-| **M2 (gated, Q2)** | Void, Dreamfall, Snag, FallFloor, Clutch with the hold, the landing-failure branch, the `voidFall` trigger, the arena Void line; pilots in the Silk (the Stacks Have No Bottom) and the Choir (the Drowned Crypt, F3); the Void backdrop shaft, fall and Snag VFX. Gates: the Shade hook delivered, `VoidClassDeathGap` ≤ BASE + 2 (SV-24), `FightRoundsDelta` ≤ 0, `DropRemovalShare` ≤ 15%, `TeeteringUptimeOnBosses` ≤ 25%, `PartyFallsPerFight` ≤ 0.25, `PreviewExactness` 100%; `DownedAfterDreamfall` 0 solo (added after the check) |
+| **M2 (gated, Q2)** | Void, Dreamfall, Snag, FallFloor, Clutch with the hold, the landing-failure branch, the `voidFall` trigger, the arena Void line; pilots in the Silk (the Stacks Have No Bottom) and the Choir (the Drowned Crypt, F3); the Void backdrop shaft, fall and Snag VFX. Gates: the Shade hook delivered (pending request, HZ-31; CC-7), `VoidClassDeathGap` ≤ BASE + 2 (SV-24), `FightRoundsDelta` ≤ 0, `DropRemovalShare` ≤ 15%, `TeeteringUptimeOnBosses` ≤ 25%, `PartyFallsPerFight` ≤ 0.25, `PreviewExactness` 100%; `ZeroHpAfterDreamfall` 0 solo (added after the check; renamed and redefined, CC-96) |
 | **M2 (gated, Q1)** | The Dream step for at most one signature Stir per F2–5 floor (the Organ Swells and Pit Breathes, each shipping on its own theme gates, so only Choir and Carnival floors); the countdown; latent footprints and due squares; Warned or floored; bound Cords Now and Hold; the charter; two RC7 cue pairs and the Dream tick. Gates: the client's (the reading-time playtest, the TR-27 written pass, `StirRoundsDelta` ≤ 0, `HazardMinutesDelta` ≤ +0.3 with `StirMinutesDelta` ≤ +0.1 and the combined gate) and the lead's `StirBothWaysShare` ≥ 30% |
 | **M3** | The broad Stir catalogue; Lurch; struck and breathing vents; Tides, Cord Flips (the Sluice Wheel, the Acid Tide valve), the Turning Ring (F3), the Returns Trolley, rails (Q3); standalone Cords; Landmark ticks; Moods as Omens; Dare rooms; Plunge; Snatch; Startle; Chainposts; turning faces; Stoke; the Heart and Gut Voids and the High Wire; the Dream Rules pages; Omens and Nightmare tiers 1–3, with the floor-1 packages from tier 2 (Q4); the Forbidden Course (the DH owner) |
 | **M4** | The Inverted Cathedral, with the Chimes Ring Upward (Q3); two clocks per room tested at a Nightmare tier |
@@ -2880,7 +2892,7 @@ M3 instead; the client is told (19.2).
 
 | Segment | Receives from segment 4 | Owns |
 |---|---|---|
-| **5 Traps, locks, checks** | The HZ-1 line. Traps kept: the dumbwaiter drop, the toppling-shelf tripwire, the icicle chandelier, the sluice Soak, the acid geyser, trapdoor stages, the bell tripwire, the portcullis, the Appeals trapdoor, horn tripwires. EnvDC as a reference for the DC ladder. Cords never arm traps and need no check | DCs; traps; door verbs; how traps and hazards share a room beyond these defaults |
+| **5 Traps, locks, checks** | The HZ-1 line. Traps kept: the dumbwaiter drop, the toppling-shelf tripwire, the icicle chandelier, the sluice Soak, the Acid Gland (cross-document comparison 2026-11-23, CC-98), trapdoor stages, the bell tripwire, the portcullis, the Appeals trapdoor, horn tripwires. EnvDC as a reference for the DC ladder. Cords never arm traps and need no check | DCs; traps; door verbs; how traps and hazards share a room beyond these defaults |
 | 6 Encounter placement | Start sockets outside footprints and Tide states at fight start; ≤ 2 starts within 2 of a Void edge; ≤ 1 flyer, ≤ 1 shover type and ≤ 2 shover units within 4 of a Void edge in Void rooms; the `usesCords`, `singer` and Stoker tags; Wake candle racks on Dormant groups (index ≥ 3, ≤ 1 per room); Dare garrisons; the mindless share (the enemies owner). **Filled by the encounter placement design (6.1 exclusions, 6.6.8 Terrain Pairings, 6.13):** the guarded Dare garrison is the floor's Annex (change EP-26; agreed, Q2; M3) | Who starts where |
 | 7 Loot | Fallen loot on the edge; Dare containers (+1 rarity step); no item loss. **Filled by the loot economy design (6.9, 6.14; change LE-10; M3):** the Dare cache is an SR5 step socket under the one step rule; fallen loot on the edge, no item loss (7c). **Changed by the loot sources design (4.7.7; change LP-2; agreed, Q1; M3):** the sole exception is that a Windfall's card and coin leave the floor when its shown count ends (`ItemDestroyed{gotAway}`); kill method, damage, terrain, traps, locks and force still never destroy loot | Containers and contents |
 | 8 Events | Unguarded Dare forms; Moods on the Stratum Card; empty Tide naves as non-combat puzzles; the Gaol's small hours. **Filled by the events design (4.2, 4.9, 4.13; changes EV-31, EV-35):** no Curiosity is placed in a Dare or Wager room, which stays segment 4's (M2); segment 8 places no Landmark and no clock Landmark: FL owns the sockets, segment 4 the ticks (EV-35; M2); no Mood on the Stratum Card in M2, handed to segment 10 and segment 4, and in M3 an Omen card's cost may be the named, visible event that advances a Mood within 6.9's cap (EV-31; M3); empty Tide naves are not M2 Curiosities, and an empty nave may be an M3 Curiosity host only if segment 4 offers it (**open item**, segment 4's to offer; M3 option); the Gaol's small hours are a Glimpse and Retelling motif only, no rule (events design 5.3; M2) | Event content |
@@ -2907,7 +2919,7 @@ M3 instead; the client is told (19.2).
 | O10: Kennel staked pits | RS 8.4 | A walkable harm square at Nightmare tier 2+ **(agreed, Q4)**; re-read from "Later (drop hazard)", told plainly; 6.19 |
 | O11: Wrecker value by density | Vanguard 8.3, 18 | `FallsByWrecker`; the spread gate |
 | O12: hazard edges from floor 2 | trinkets 23, RT-20 | F1 dry in the base game; Voids on Silk and Choir floors; the owner is told |
-| O13: DEP-A1 features | TR-21 | Stirs, Cords, Voids and vents count for KP2 (request) |
+| O13: DEP-A1 features | TR-21 | Stirs, Cords, Voids and vents would count for DEP-A1 and KP2 (pending request, HZ-31; the ROOM owner defines the term; cross-document comparison 2026-11-23, CC-7) |
 | O14: a chasm edge for shoves | ENM 17.5 | The arena Void line (HZ-11), else a contact hazard |
 | Theme record fields | RS 8.0 | `hazardKit`; `placementRules`; `teeteringFallbackDrop` |
 | One flat rules level; coplanar squares | main 4.3, 6.8 **(decided)**; LG18 | Voids are flat; depth is backdrop |
@@ -2935,7 +2947,7 @@ M3 instead; the client is told (19.2).
 | 3 | Wrecker dominance; the Shade gains nothing | `FallsByWrecker`; `VoidClassDeathGap` | The Void save ignores Teetering's disadvantage; the Clutch hold; the spread gate; the Shade hook as a ship gate |
 | 4 | Falls feel toothless | `SnagPunishRate` | Snag distance, the Groggy state, the `SnagPunishRate` floor |
 | 5 | Edges become a party safety net | `FleeAfterFallRate`; `RescuePushRate` | Let Go Later; the Snag ≥ 3 from the `fleeExit`; Groggy blocks Portal exits; a rescue push lands on the secondary Snag and costs the next action; no voluntary movement ends over a Void |
-| 6 | The AI shovers farm party falls, or land a solo hero beside a hostile | `PartyFallsPerFight` by shover count; `DownedAfterDreamfall` | Once-per-hero fall value; the shover type and unit caps; the Snag choice checks hostiles at both sockets, with an overflow square |
+| 6 | The AI shovers farm party falls, or land a solo hero beside a hostile | `PartyFallsPerFight` by shover count; `ZeroHpAfterDreamfall` (CC-96) | Once-per-hero fall value; the shover type and unit caps; the Snag choice checks hostiles at both sockets, with an overflow square |
 | 7 | One-round stacks | `EnvRoundCapBinds` | The EnvRound cap as a rule |
 | 8 | Players ignore Stirs and Cords | `StirIgnoredRate`; `CordUseRate` | Footprint value, the payoff rule, Cord placement and bonus-action Operate, cut-if-unused |
 | 9 | Readability overload, visual and audio | The glance test; greyscale gates; audio blind-ID | One clock per room (any digit or meter), never waived; pips for everything else; one headline plus one sub-line; the RC7 timbre table |
@@ -2989,8 +3001,9 @@ in the "Flag" column; **the client's approval of 2026-11-21 covers
 them** (with Q1–Q4 where a row names one; the answers of 2026-11-21
 already agreed each of those rows in substance). Told-plainly rows were
 told in 19.1 and confirmed by the client on 2026-11-21. HZ-6, HZ-13,
-HZ-15, HZ-17, HZ-24 and HZ-30 are requests to other owners, recorded as
-pending requests; they change nothing until their owner rules. M2
+HZ-15, HZ-17, HZ-23, HZ-24, HZ-30 and HZ-31 are requests to other
+owners, recorded as pending requests (HZ-23 and HZ-31 added to this
+list: cross-document comparison 2026-11-23, CC-98, CC-7); they change nothing until their owner rules. M2
 (gated), M3 and M4 rows are recorded now as applied text marked with
 their wave: an M2 (gated) row takes effect in M2 only if its gates pass,
 else at M3 (19.2), and M3 and M4 rows take effect at their wave.
@@ -3015,14 +3028,14 @@ else at M3 (19.2), and M3 and M4 rows take effect at their wave.
 | HZ-8 | RS 8.0 theme record (lead's call field names); TR-22 `terrainKit`; RS 7.5 (checked: nothing shows the Dreamer) | Tableaux; the `hazardKit` field (6.2.2, 11.1) | — | Lead's call; RS owner applies |
 | **HZ-9** | C 10.2 (a Void branch; the area-cap sentence becomes "a contact hazard, harm square or Void", one counter per use); C 11.3 (Void squares are hazards); C 18.4 Teetering ("its next save against being forced into that hazard has disadvantage"); C 19 interaction table, combo row "Teetering + forced movement" (the Void save excepted); RT 6.5.1 drop row; RT 6.5.7 (replaced); main 4.3 (**decided**; used, unchanged) | The Void square class; the edge-save Void branch; the Void-fall save ignores Teetering's disadvantage; Clutch with the hold; `noDrop` without Teetering (6.4) | **Agreed (Q2)** | **Client (agreed 2026-11-21, Q2)**; conditions owner applies |
 | **HZ-10** | DH 10.4 (**agreed**, DH Q6: a new in-combat fall row); C 10.3 (a failure branch); C 10.4; DH 17.7 (rescue push); ENM 16 (the `voidFall` payout); ENM 14.3 (removal as a loss event); ENM 15.6; ENM invariant 7; trinkets TK-2 (Ledgewalker reads Void saves) | Dreamfall, the FallFloor, Groggy, the second-fall rule, the Snag and its choice order, the landing-failure branch (EnvDC; no voluntary movement ends over a Void), the rescue push (secondary Snag, the next action lost), `voidFall` paid as a kill (6.4) | **Agreed** (DH Q6 extended); **Q2** | **Client (agreed 2026-11-21, Q2)**; DH, conditions and enemies owners apply |
-| HZ-11 | RT 6.11 (TR-16 arena caps); ENM 17.5 ("a chasm edge for shoves") | The arena Void line, not counted as a contact hazard (6.4) | — | Lead's call; segment 9 inherits |
+| HZ-11 | ROOM 6.11 (TR-16 arena caps; was "RT 6.11", CC-98); ENM 17.5 ("a chasm edge for shoves") | The arena Void line, not counted as a contact hazard (6.4) | — | Lead's call; segment 9 inherits |
 | **HZ-12** | C 5.4 round-end environment step (TR-27: wave M3 → M2 for Stirs only; its sub-steps, 6.3); **RT 0.1 item 5, RT 0.2 row 13 and RT 6.6 "M2: nothing timed and nothing spreads" (agreed, RT Q5)**; ABL 2 "Lair actions" (lead's call; a flagged reading); ABL 5 / ENM 13.2 (not a wind-up) | The Dream step in M2 for one signature Stir per F2–5 floor, gated (6.3) | **Agreed** (RT Q5 reopened) | **Client (agreed 2026-11-21, Q1)**; ABL owner told |
 | HZ-13 | C 11.3; ENM invariant 7; DH 17.3 (the threat list gains "environment acts due before the hero's next turn"); DH 17.4, 17.5, 17.6, 17.12; RT 6.12 | Due squares; previews; the danger band includes environment acts (6.3.1, 6.18) | — (request) | DH and enemies owners |
 | **HZ-14** | DH 10.4 (**agreed**, DH Q6: a new row); DH 17.5 (marks) | Warned or floored (with a legal move), shown (6.3.2) | **Agreed** (DH Q6 extended) | **Client (agreed 2026-11-21, Q1)**; DH owner applies |
 | HZ-15 | ABL 7.2 (a new object action, Operate, and the bonus-action rule); RT 6.3 grammar; RT 6.4 (on-kill never from acts); RT 6.9; ENM `usesFurnishings` (extended by `usesCords`) | Cords and Operate: bound Cords (Now, Hold; Reverse, Flip and Kick at M3) on the countdown C, and standalone Cords; the credit rule (6.3.4) | — (request for the bonus-action rule) | Lead's call; ABL owner rules on the bonus action |
 | HZ-16 | RT 6.6 sources row; C 11.1 (Remnants already sanctioned); RT 6.8 K5 | Struck and breathing vents; `causedBy` (6.7) | — | Lead's call; applies at M3 after the TR-27 gate |
 | HZ-17 | C 10.1 (a third named exception class); weapons 7.2 rule 4 | Lurch (soft stops only; benign and hazardous forms; the downstream-first area-cap order; the floor-1 tier-2+ exception), holds fast for Rooted, Restrained, Hidden and Handhold-adjacent units, and Anchored once it ships (6.3.3) | — (request) | Conditions owner; M3 |
-| **HZ-18** | **Main 2 Non-goals bullet "Spreading, evolving or player-placed ground surfaces …" (decided)**; **C 11.1 sanctioned list (agreed; a new row "pre-proven Stir states")**; C 11.2 (a state change under a unit is not an entry); C 11.4; **RS 7.6 "shifting rooms" and "gravity or height (main 4.3, 6.8)" (agreed; Later → M3, the reversal round M4; the rules stay flat, only the push direction reverses)**; RS 8.8, FL 7.7, RT 7.7 (the carousel's spirit; told plainly); **RT 6.3 "Furnishings move only by verbs" (agreed, RT Q2)**; RT 6.3.7; RT 6.11 (precedent); stat model 2 Non-goals (agreed) | Tides (held whole, 2 states only), Cord Flips, Turning Ring boards, environment-moved Furnishings (the Returns Trolley), environment Overturn, the reversal round (6.3, 7) | **Decided** (main 2); **Agreed** (C 11.1, RS 7.6, RT 6.3, stat model 2); told plainly | **Client (agreed 2026-11-21, Q3)**; applies at M3 (the reversal round at M4) |
+| **HZ-18** | **Main 2 Non-goals bullet "Spreading, evolving or player-placed ground surfaces …" (decided)**; **C 11.1 sanctioned list (agreed; a new row "pre-proven Stir states")**; C 11.2 (a state change under a unit is not an entry); C 11.4; **RS 7.6 "shifting rooms" and "gravity or height (main 4.3, 6.8)" (agreed; Later → M3, the reversal round M4; the rules stay flat, only the push direction reverses)**; RS 8.8, FL 7.7, RT 7.7 (the carousel's spirit; told plainly); **RT 6.3 "Furnishings move only by verbs" (agreed, RT Q2)**; RT 6.3.7; ROOM 6.11 (precedent; was "RT 6.11", CC-98); stat model 2 Non-goals (agreed) | Tides (held whole, 2 states only), Cord Flips, Turning Ring boards, environment-moved Furnishings (the Returns Trolley), environment Overturn, the reversal round (6.3, 7) | **Decided** (main 2); **Agreed** (C 11.1, RS 7.6, RT 6.3, stat model 2); told plainly | **Client (agreed 2026-11-21, Q3)**; applies at M3 (the reversal round at M4) |
 | HZ-19 | RS 8.2 floor-1 terrain bullet and RT-20 (read as written; told plainly); TR-29; DH 17.1; ENM invariant 6; FL-8 (a Portal source); FL 6.6 (the mute applies to party verbs only) | Landmark ticks: a non-hazard class legal on floor 1 (no damage, condition or unit movement) (6.1, 7.2–7.4) | — (told plainly) | Lead's call; trinkets and FL owners told; M3 |
 | HZ-20 | RS 6.9 (the Stratum Card line); RS 9.1 Omens row; FL 9.1 (not a floor-wide alarm); FL 11.1 (save) | Moods as Omens and Nightmare only, capped triggers (6.9) | — | Lead's call; with the client's Omens package (RT-19); M3 |
 | HZ-21 | FL 6.3, 6.8; C 5.5; DH 10.4 | Dare rooms on the out-of-combat tick; anti-brute-force (6.10) | — | Lead's call; M3 |
@@ -3035,10 +3048,12 @@ else at M3 (19.2), and M3 and M4 rows take effect at their wave.
 | HZ-28 | RT 11; FL 11, FL 11.1 (save fields); RS 11.2 validator list; R-SEED-3 | V10, reports and their definitions, arms, the `hazards` stream, `hazardDigest`, the split records and save fields (11) | — | Lead's call |
 | **HZ-29** | RS 7.4 RC1, RC4, RC5, RC6, RC7 (**agreed**, RS Q3 charter); RC8 (barks); RT 8.1 four-mark table (extended); RS 8.4, 8.6, 8.8, 8.10, 8.11 Sound lines (read; the Heart bed's quotations stripped of reserved timbres, a request) | Readability rules; the floor-motion whitelist and figments; the RC5+ table and pattern registry; the Void backdrop tier; the reserved RC7 cues, two layers per Stir, the Dream tick and the timbre table (8, 6.18) | **Agreed** (RS Q3 charter, extended) | Client, with this document; RC and art owners apply |
 | HZ-30 | DH 12.1 sources; DH 12.4 `HealSupplyPerFloor` | The Forbidden Course (a party-only environment heal, ≤ 2 per fight) (7.8) | — (request) | DH owner; M3 |
+| HZ-31 | SH 8.2, 14, 18 (the Shade hazard hook, a Void ship gate, agreed Q2; the Trapwright Jury-Rig Stir re-time, C ± 1, never below 2, M3); ARC 16, 19 (a second Gust charge in Void rooms; Stirs, Cords, Voids and vents counting for DEP-A1 and KP2); VG 6.4 rule 8, VG 18 (the `HewCeiling` term: a Void removal is valued as the target's remaining HP, capped by Clutch, for `FallsByWrecker`); ROOM 3.4, KP2 (the DEP-A1 "interactive feature" extension; the ROOM owner defines it) | The class-owner asks of 6.4, 6.15, 13 (O13) and 18, recorded on the owing side; until the Shade hook is delivered, Voids do not ship (added 2026-11-23; cross-document comparison 2026-11-23, CC-7) | — (request) | SH, ARC, VG and ROOM owners; M2 |
 
 Waves: HZ-1 to HZ-8, HZ-13, HZ-15 (re-time verbs), HZ-27, HZ-28 and
 HZ-29 (M2 parts) in M2; HZ-9 to HZ-12 and HZ-14 in M2 (gated), else M3;
-HZ-16 to HZ-25 and HZ-30 in M3; HZ-26 in M4.
+HZ-16 to HZ-25 and HZ-30 in M3; HZ-26 in M4; HZ-31 in M2 (its
+Trapwright re-time M3; CC-7).
 
 ---
 
@@ -3059,7 +3074,8 @@ The owed rows are the single list in 17; by owner:
   share.
 - **The ability model owner:** HZ-12's "not a lair action" reading,
   HZ-15 (Operate and the bonus-action rule), HZ-22 (Snatch).
-- **The class owners:** the Shade hazard hook (a Void ship gate, 6.15);
+- **The class owners (HZ-31, pending; cross-document comparison
+  2026-11-23, CC-7):** the Shade hazard hook (a Void ship gate, 6.15);
   the Arcanist's second Gust charge in Void rooms and TR-21's DEP-A1
   reading; the Vanguard `HewCeiling` removal term (TR-30's owner); the
   Trapwright's Jury-Rig re-time hook.

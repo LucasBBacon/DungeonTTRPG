@@ -250,7 +250,9 @@ then moves every class, not half of them.
   accepted too **(agreed; change ARC-4, Arcanist design 11.8)**. The
   Herald's miss at levels 1–3 is accepted too, and its levels 3–4 are
   read on the class mean over both subclasses, subclass rows printed
-  **(agreed; change HR-31, Herald design 11.10)**. Slot
+  **(agreed; change HR-31, Herald design 11.10)**. The Shade's miss at
+  levels 1–4 (32–37%) is accepted too **(agreed; change SH-28, Shade
+  design 10.5)** (cross-document comparison 2026-11-23, CC-20). Slot
   Recovery counts as `rest` power, in the camp share and in the VG-12
   parity reading alike, never one without the other **(change ARC-3,
   Arcanist design 7.4)**.
@@ -909,8 +911,9 @@ are listed on the same screen above the choice. **(lead's call)**
 ### 11.2 Progression
 
 - Automatic, with a choice at a few key levels. **(settled)**
-- The choice is one of two or three kit upgrades, at levels 3, 6 and 9.
-  **(lead's call)**
+- The choice is one of two kit upgrades, at levels 3, 6 and 9.
+  **(lead's call; change CMP-16)** (cross-document comparison
+  2026-11-23, CC-21)
 - A recruit joins at camp with full pools. **(lead's call)**
 - A companion's level always equals the hero's; a recruit joins at the
   hero's level with missed choices defaulted on the join card; one
@@ -1153,9 +1156,11 @@ when the Warcaller ships (M3) **(change HR-29, Herald design 14.1, 9.3)**.
   order, then effect creation order.
 - Every roll uses the combat stream. **(settled)** Narrowed: unit
   attacks, saves in combat and contests use the combat stream; act-time
-  object checks, out-of-combat saves forced by traps or locks and
-  out-of-combat attacks on objects use the keyed `checks` stream, with
-  no unit in the key (traps and locks design 6.22). **(change TL-3,
+  object checks and out-of-combat attacks on objects use the keyed
+  `checks` stream with no unit in the key, and out-of-combat trap and
+  lock saves use it keyed by unit and `springIndex` (traps and locks
+  design 6.22; seeds and validation design 4.3) (cross-document
+  comparison 2026-11-23, CC-23). **(change TL-3,
   decided main 6.3 extended; M1)** Out-of-combat noticing and Steal,
   lurker Stealth, out-of-combat hazard saves and Curiosity checks also
   use `checks`, each in its registered domain; in combat they stay on the
@@ -1171,7 +1176,8 @@ The build fails when:
 - a pool has other than one refill tag;
 - a class lacks a `rest` pool or a `camp` pool;
 - a unit has fewer than two at-wills, or none that deals damage;
-- an area exceeds 25 squares at levels 1–6;
+- an area exceeds 25 squares at levels 1–6, or 49 at levels 7–10
+  **(change ARC-9)** (cross-document comparison 2026-11-23, CC-22);
 - a reaction has no automatic policy;
 - a companion has other than one signature ability;
 - a beneficial effect on an ally longer than 10 of the wearer's turns, or
@@ -1209,10 +1215,10 @@ The build fails when:
   the party, combat starts, no supply is spent and nothing is gained.
   **(lead's call)**
 - There is no guaranteed safe spot. **(agreed)** Before the player confirms,
-  the core reports any patrol route already seen that passes within hearing
-  range. **(lead's call)** The report reads `PatrolForecast` over known
-  patrols with the `noticing` predicate, as a window (M2; agreed, Q2;
-  change XI-6, exploration and information design 4.8.1). *Pending
+  the core reports the `PatrolForecast` window over known patrols with the
+  `noticing` predicate: earned forecasts only, and a glimpsed patrol shows
+  only its pip (M2; agreed, Q2; change XI-6, exploration and information
+  design 4.8.1) (cross-document comparison 2026-11-23, CC-19). *Pending
   request (EP-16, encounter placement design 6.20, 6.21; M2), not a rule
   until the ability model owner rules:* the report also adds Alerted, Searching and Pursuing groups to
   the seen patrol routes. No rest threat is generated; only units
@@ -1233,6 +1239,11 @@ The build fails when:
   `ArenaEngaged` stay legal. The Rest button shows it as its reason
   (15.4): "The Sanctum will not let you sleep." (boss rooms design
   4.2.5) **(change BR-31; agreed, Q2; M2)**
+- No short rest while any party unit is in a Dare room (hazards design
+  6.10; change HZ-21; M3) or a Wager room (traps and locks design 6.15;
+  change TL-29; M3). These are location bans, not awareness readings; the
+  Rest button shows each as its reason (15.4). (cross-document comparison
+  2026-11-23, CC-19)
 
 ### 15.2 On completion
 
@@ -1276,6 +1287,9 @@ reason is the validation code from 14.3. **(lead's call)**
   action left, no slot, camp spend already used this turn.
 - Reasons that do depend on a target (out of range, no line of sight) are
   shown on the targeting cursor, not the bar.
+- The Rest button names its location bans as its reason: the Sanctum
+  (BR-31; M2), a Dare room (HZ-21; M3) and a Wager room (TL-29; M3)
+  (15.1). (cross-document comparison 2026-11-23, CC-19)
 
 ## 16. Testing
 

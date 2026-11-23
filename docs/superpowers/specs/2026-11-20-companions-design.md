@@ -720,8 +720,10 @@ preview**. Its Hold card is not needed, because nothing is missable.
   `eyeReroll` (Recruiter's Eye's re-roll, 9.2), `cosmetic` (palette
   variant; a core child kept as approved, whose only consumer is the
   palette; SV-31, seeds and validation design 4.3), and the reserved
-  `pledge` key (7.12). Each is keyed by camp
-  and slot, so no arm or option shifts another's draws.
+  `pledge` key (7.12). Each is keyed as in seeds and validation design
+  4.3: `armReroll` per slot or gap, `eyeReroll` per slot, `cosmetic` and
+  `pledge` per camp (SV-31), so no arm or option shifts another's draws
+  (cross-document comparison 2026-11-23, CC-81).
 - Re-entering a saved camp shows the same board. A choice at camp k
   changes camp k + 1 only through the visible roster and the gap
   procedure.
@@ -894,7 +896,10 @@ Q2):**
   them); Listen 1 click and 2 ticks
   (0 ticks when passive); Sound the wall 1 click and 6 ticks; a Squeeze
   1 click, +4 ticks on a failure; a Latch 1 click and 1 tick; a reveal 1
-  click; each auto-walk stop 1 click. Layout commits, at party 4 on
+  click; each auto-walk stop 1 click; travel 1 click and 1 tick per step,
+  and each noticing pre-stop 1 click (change XI-8, exploration and
+  information design 4.7; floor layout design 11.4) (cross-document
+  comparison 2026-11-23, CC-79). Layout commits, at party 4 on
   floors 4–5, to `ExploreSeconds` ≤ 3.5 min and `ExploreClicks` ≤ 40 as
   medians of the walker's lean policy over the release seed set (seeds
   and validation design 4.11; SV-18, read), and to
@@ -1301,8 +1306,9 @@ experience share** (breaks the enemies 16 curve).
 party unit" is always true on floor 1; the floor-1 solo rows, solo minion
 caps, HE-6's floor-1 n = 1 row and the solo `Floor1ClassSpread` gate are
 untouched. Classes 7.3 still holds: the subclass lands at the end of the
-solo floor, just before the first recruit. A Pledge found on floor 1
-(Later) is used only at camp 1.
+solo floor, just before the first recruit. No Pledge source appears
+on floor 1 (Later; 7.12; events design 4.6), so camp 1 never shows a
+Pledge (cross-document comparison 2026-11-23, CC-81).
 
 ### 7.11 The camp and the Muster screen
 
@@ -1372,8 +1378,9 @@ offers to turn on companion suggestions; the default stays off
 ### 7.12 In-dungeon sources (Later; slot reserved at M2)
 
 **(lead's call; change CMP-10; wave unchanged, Later)**
-- **Pledges:** a freed captive (an optional room feature on floors 2–4),
-  a wanderer or a shrine gives a named candidate who waits at the
+- **Pledges:** on floors 2–4 only, for every source (events design 4.6;
+  cross-document comparison 2026-11-23, CC-81), a freed captive (an
+  optional room feature), a wanderer or a shrine gives a named candidate who waits at the
   **next** camp as an extra card outside the 3, marked "Met on floor N".
   It never joins mid-floor, never fights and is never in the weight.
   The captive is the encounter placement design's Captive form (a
@@ -1670,7 +1677,9 @@ not apply (Vanguard design 8.2). Weapon families are inside each class's
   Arcana (stat model 7.2). The items 10.8 "drink it" suggestion and the
   consumables 13.7 boss reserve apply to companions through the party
   scorer.
-- Per-unit ownership, one run purse spent at camp, a Downed companion
+- Per-unit ownership, one run purse spent at camp (and at a Ticket lock,
+  M3, and, Later, at a wandering trader; items 10.1 as amended, **agreed
+  2026-11-23, cross-document comparison Q-1**), a Downed companion
   keeps everything **(settled, items 6, 15)**. Leadership prices read the
   hero only (items 10.5).
 - **No kit trinket.** It would be loot outside the per-floor budget (main
@@ -1978,7 +1987,9 @@ numbers.
   passives, slotSpells[]? (spell or family-template ids), choices{3, 6, 9:
   [A, B], default}, sliceOf, effectKinds, stanceFixed?, hasElementFamily,
   companionMainAbility?, protector, healAlly (false at M2),
-  defaultRotation, potionRule, castDefaults, offerWeightPermille,
+  defaultRotation, potionRule, castDefaults, lootLanes[] (the kit's loot
+  lanes, read by `LanesOf`; item rolls design 4.3; cross-document
+  comparison 2026-11-23, CC-80), offerWeightPermille,
   combatValuePermille (simulator-calibrated, read by `MusterBestFit`),
   unlock?, silhouetteId, nameTableId}.
 - **Class record additions:** `heroOnlyFeatureIds[]` (8.3); features
@@ -2155,9 +2166,10 @@ by the axis, so no name collides with another segment's `Reference` or
 - In a "without X" arm every non-X card is identical to the base arm,
   with Recruiter's Eye on and off; Eye-on and Eye-off runs give the same
   non-Eye cards.
-- A hero at level 2 at camp 1 is raised to 3 before the Muster, and the
-  recruit's join card shows the L3 choice; a catch-up that grants
-  Medicine moves card A to the next need.
+- A hero arrives at camp 1 already at level 3 (reached at the floor-1
+  antechamber; change RT-8, run structure design 9.4), and the recruit's
+  join card shows the L3 choice; a catch-up that grants Medicine moves
+  card A to the next need (cross-document comparison 2026-11-23, CC-79).
 - A dismissed companion's bound dose leaves the hero's belt, and the
   Travel-on re-check first moves another companion's dose (a newcomer's
   kit potion included), else issues the camp-issue potion; selling or
@@ -2359,8 +2371,10 @@ client on 2026-11-20; the rest were confirmed with the document on
 | CMP-33 | Shade design 6.5, the Opening trigger registry | Add the kit-only rows: Gap Sight (open tier, launcher or thrown, Unready or Staggered, once per round; Scout kit only); Knife Work (two Beset melee attacks, Flank Sense's once-per-round limit lifted for that action; Outrider kit only). Neither is a hero trigger; checked against Lone Blade and Caught | Lead; Shade owner |
 | CMP-34 | Armour 11 item 1, "Inputs" ("The maxima include every class defence feature…") | Add "and every companion kit defence feature (Interpose, Flare, Close Ranks as a step-0 window fill, 10.4)" | Lead; armour owner |
 
-**Rows owed by other owners before records** (the same list as 12 and
-17): CMP-5 to CMP-9, CMP-17 and the solo composition table (enemies
+**Rows owed by other owners before records** (the same rows as 12's
+prerequisites row; 17 lists them by owner, beside the lead-applied rows
+other owners host and the systems not yet designed; cross-document
+comparison 2026-11-23, CC-81): CMP-5 to CMP-9, CMP-17 and the solo composition table (enemies
 owner); CMP-12 (consumables owner); CMP-21 (items owner); CMP-22, CMP-23
 and CMP-31 (DH owner); CMP-26 (Vanguard owner); CMP-27 (naming pass);
 CMP-30 (trinkets owner); CMP-32 (conditions owner); CMP-33 (Shade
@@ -2385,7 +2399,9 @@ and "handed to the companions design as optional" finds none; a grep for
 
 ## 17. Depends on systems not yet designed
 
-The owed rows are the single list in 16 (and 12); by owner:
+The owed rows of 16 (and 12), by owner, with the lead-applied rows
+other owners host, the pending requests to this owner and the systems not
+yet designed (cross-document comparison 2026-11-23, CC-81):
 
 - **The enemies owner:** CMP-5 and CMP-6 (the shortfall term, **agreed**
   Q1); the **deterministic solo composition table** for floors 2–5 at
@@ -2406,6 +2422,13 @@ The owed rows are the single list in 16 (and 12); by owner:
   yes.
 - **The Vanguard owner:** CMP-26. **The trinkets owner:** CMP-30 and the
   Medicine and Lore spread input (8.3).
+- **Pending requests from the item rolls design (IR 4.3, 6.1; not yet
+  ruled by this owner):** the kit lanes, declared on each kit row as
+  `lootLanes[]` (11.1) and finalised by this owner (IR-1); the
+  `anyCompanion` party-size key (IR-17, this owner confirms); item Deeds
+  reusing this design's Deeds pipeline (8.7), display only, following it
+  to M3 if Deeds are cut (12) (cross-document comparison 2026-11-23,
+  CC-80).
 - **The camp and hub design:** the Muster screen inside the camp order of
   7.11; the camp reward card (items 10.4) is unchanged.
 - **The simulator:** every arm in 11.3 and report in 11.4 at both caps;

@@ -584,9 +584,10 @@ call)**.
 3. **The levers, in order** (11.8), one at a time, with a rerun after
    each; the lead stops at the first that meets the threshold **(new
    lead's call)**.
-4. **If the levers run out:** back to the client. The last lever is a
-   request to the floor-pacing owner; if it is refused, the levers count
-   as run out.
+4. **If the levers run out:** back to the client. Lever 5, the
+   floor-pacing request, is already in force (the Antechamber Catch-up,
+   run structure design 9.4, RT-8), so the levers count as run out after
+   levers 1–4 (cross-document comparison 2026-11-23, CC-72).
 5. **No new gate:** classes 5.6 is agreed text and stays as written.
 
 **Bounded by construction:** `SpellTierBound`, `PayoffBound`,
@@ -777,6 +778,12 @@ uses `moteKey`) **(change ARC-10)**:
   precedent).
 - M2 hazard edges apply: a Reflex save, then Teetering on a success
   (conditions 10.2).
+- **Into a contact hazard (M2; TR-10, agreed Q3):** a failed save deals
+  the typed collision band 2 / 3 / 3, never the contact band (Gust is
+  purely verb-sourced); a success is an ordinary obstacle stop with no
+  damage and no Teetering. It is environment damage, counted in the
+  at-will rider bound (room terrain design 6.5.2; cross-document
+  comparison 2026-11-23, CC-76).
 - Uses: step a foe off you, then walk away under Supple; edge a foe into
   water, fire or oil; set up Teetering for an ally's push.
 
@@ -1255,7 +1262,8 @@ it).
   consolidated list of sanctioned map changes, room terrain design TR-8:
   the settled fire on oil; Furnishing debris and removal, boss phase
   sockets, and web and bedsheet burn-away (M2); Overturn debris and
-  sight change, and Remnants (M3)); teleport; summons; AC on anyone; temporary HP; healing (Knit
+  sight change, Remnants, and pre-proven Stir states (M3; HZ-18;
+  cross-document comparison 2026-11-23, CC-77)); teleport; summons; AC on anyone; temporary HP; healing (Knit
   stays the only heal); psychic, radiant or necrotic parts; fear or
   morale (the Herald's primary lean, `LeanSpread`); Shocked or any Later
   condition **(settled)**.
@@ -1523,27 +1531,29 @@ information design 14.2). Not decided here until the owner rules.
 | Shockwave | 1 | arcanist | Shockwave |
 | Grasping Roots | 1 | arcanist | Grasping Roots ([primal] is a hint) |
 | Frost Shard | 1 | arcanist | Shard (cold) |
-| Trembling Word | 1 | herald; **Later** if the Herald declines | Fear is the Herald's primary lean; the [arcane] hint moving to a presence class is legal (CL-12a) and stated |
-| Jarring Whispers | 1 | herald if claimed, else **Later** | Psychic would be a third key |
-| Guiding Radiance | 1 | herald if claimed, else **Later** | Radiant third key |
-| Withering Touch | 1 | herald if claimed, else **Later** | Necrotic third key |
+| Trembling Word | 1 | **herald** (claimed, HR-24) | Fear is the Herald's primary lean; the [arcane] hint moving to a presence class is legal (CL-12a) and stated |
+| Jarring Whispers | 1 | **herald** (claimed, HR-24) | Psychic would be a third key |
+| Guiding Radiance | 1 | **Later** (declined, HR-24; Votary or Hexer) | Radiant third key |
+| Withering Touch | 1 | **Later** (declined, HR-24; Votary or Hexer) | Necrotic third key |
 | Mending Word | 1 | herald | Stage 1 8.6 binds it |
 | Scorching Rays | 2 | arcanist | Rays (fire) |
-| Blinding Flash | 2 | arcanist (+herald if listed) | Blinding Flash |
+| Blinding Flash | 2 | arcanist (Herald declined, HR-24) | Blinding Flash |
 | Fireball | 3 | arcanist | Detonation (fire) |
 | Lightning Line | 3 | arcanist | Streak (lightning) |
-| Terror | 3 | herald; **Later** if declined | Fear |
+| Terror | 3 | **herald** (claimed, HR-24; enemies only for every reader) | Fear |
 | Slowing | 3 | arcanist | Slowing |
-| Unweaving | 3 | arcanist (+herald if listed) | Unweaving |
+| Unweaving | 3 | **arcanist + herald** (one shared record, HR-24) | Unweaving |
 | Icefall | 4 | arcanist | Skyfall (cold) |
-| Blight | 4 | herald if claimed, else **Later** (Rootwarden) | Necrotic third key |
+| Blight | 4 | **Later** (Rootwarden; HR-24) | Necrotic third key |
 | Wand of Sparks | 1 | arcanist | Needles (lightning) |
-| Wand of Outlining | 1 | arcanist (+herald if listed) | Outlining |
+| Wand of Outlining | 1 | arcanist (Herald declined, HR-24) | Outlining |
 | Wand of Snaring | 1 | arcanist | Snaring. Its "never on floor-1 carriers" restriction is read as a loot rule only; the consumables owner confirms |
 | Wand of Rime Lance | 2 | arcanist | Lance (cold). Consumables 16.5 / 19's "only repeatable hard-capable item, floor 3+" note is updated: the class Rime Lance exists from L3. The wand's "Steeled, depth gates and resolve apply" is amended to "Steeled and resolve apply" (the conditions 7.2 depth gates are monster-against-party; 8.1), so the wand and the class variant agree under `VariantIsScroll` (ARC-24) **(new lead's call)** |
 
 **The audit closes now:** every item is mapped, or defaults to Later
-unless the Herald's stage 2 claims it. Off-pair reads are in class by
+unless the Herald's stage 2 claims it. **Final values** from the Herald
+design 8.8 (HR-24): its claims and declines are entered in the table
+above (cross-document comparison 2026-11-23, CC-75). Off-pair reads are in class by
 rule (8.1, 7.3). DEP-1 is untouched (the Shade carries it).
 
 **Pending request (traps and locks design TL-35, 2026-11-21; M3; the
@@ -1670,7 +1680,10 @@ outside the allowance, no damage).
   Binder control, before the condition applies, push or pull it up to 2
   relative to you; verb-sourced for collisions; uses `movedByYou` (once
   per round per target); the 3-square sum per use; hazard-edge save and
-  Teetering in M2. Default off (offered on the cast).
+  Teetering in M2; a failed contact-hazard save deals the typed collision
+  band 2 / 3 / 3 as environment damage, counted in the at-will rider
+  bound (TR-10, agreed Q3; 7.2; cross-document comparison 2026-11-23,
+  CC-76). Default off (offered on the cast).
 
 **`triggerMenu`** (`requires: subclass:binder`): `cinch.forAnAlly`
 (Cinch on a hostile's save against an ally's major or hard condition; no
@@ -2215,7 +2228,10 @@ an Interplay mark) adds to your own at-wills is charged, in the parity
 report, to the source spell's row (read as camp power) and not to the
 at-will's. It adds nothing to the static `SpellTierBound` evaluation,
 which stays a per-record predicate. The band-1 rider is a fallback lever
-only. ALM-1 is required and agreed.
+only. ALM-1 is required and agreed. A failed contact-hazard save from
+Gust or Reel deals the typed collision band 2 / 3 / 3 (TR-10, agreed
+Q3); it is environment damage, counted in the at-will rider bound, so it
+adds no row here (7.2; cross-document comparison 2026-11-23, CC-76).
 
 ### 11.2 Slot spells against the bounds (at arrival level)
 
@@ -2373,7 +2389,10 @@ them):**
    only through the basic arm's ceiling near 93–98%.
 4. Flare policy `always` while solo. Moves both arms, as lever 3.
 5. The shared floor-pacing request (boss door at level 3). Moves both
-   arms, as lever 3.
+   arms, as lever 3. **In force:** answered by the Antechamber Catch-up
+   (run structure design 9.4, RT-8), so it is already in every run and
+   the levers are run out after 1–4 (cross-document comparison
+   2026-11-23, CC-72).
 
 One lever at a time, each rerun over its blast radius;
 `Floor1ClassSpread` is re-read after every lever (seeds and validation
@@ -2386,7 +2405,8 @@ or the reagent restriction (rejected, Q3).
 ### 11.9 Slots per floor
 
 Casts per floor (camp fill + 2 Slot Recoveries + Overchannel): 4 / 6 / 8
-/ 10 / 13 / 14 at L1 / 3 / 5 / 7 / 9 / 10, about 19% of rounds at L1
+/ 10 / 15 / 16 *(illustr.)* at L1 / 3 / 5 / 7 / 9 / 10 (L9 and L10
+corrected, cross-document comparison 2026-11-23, CC-77), about 19% of rounds at L1
 rising to 67% at L10. The Mote carries floor 1; late on, composition
 skill takes over from slot timing.
 
@@ -2605,7 +2625,7 @@ names feed; `SeedHasTarget` (classes owner) is executed in V12g
 |---|---|
 | **M1** | Nothing. No M1 rule is needed for the Arcanist |
 | **M2** | Section 12: the whole core kit; the full spell list; the Binder and the Alembic; Interplay (behind its lever); Temper, Fray, Afterhold, Flare II; AM-1, AM-2; `SkillExpressionReport`; all validators; the `classTags` mapping |
-| **M2 prerequisites owed by other owners** | EL-1 (the meaning of "ignores resistance"); LM-0 (Study persistence); the arc ruling (ARC-14); ARC-17 (Restrained's rank); the M2 hazard-edge rules (Reel, Gust, Shockwave); the per-theme terrain-presence report (DEP-A1) |
+| **M2 prerequisites owed by other owners** | EL-1 (the meaning of "ignores resistance"); LM-0 (Study persistence); the arc ruling (ARC-14, written: stat 8.1); ARC-17 (Restrained's rank, written: conditions 12.3); the M2 hazard-edge rules (Reel, Gust, Shockwave; written: conditions 10.1–10.3) (cross-document comparison 2026-11-23, CC-77); the per-theme terrain-presence report (DEP-A1) |
 | **M2 cut fallbacks** | Runoff waits on the payout-event hook (Wide Mix alone ships); Interplay can be cut by its lever; if `graceTurns` slips, Fastness lengthens `saveEnds` caps only |
 | **M3** | The Loremaster and Elementalist unlock aspects (the Elementalist first if the resistance-share report is clean) |
 | **M4** | The dip report for Weft 3 at class level 1 (multiclass envelope) |
@@ -2617,7 +2637,7 @@ names feed; `SeedHasTarget` (classes owner) is executed in V12g
 |---|---|
 | **Novice floor 1.** The real gap is slot discipline and the pip trap; the defaults may not close it | The novice row with its escalation threshold (5.4, **agreed** Q1); the lever order (11.8); back to the client if the levers run out |
 | **Pick-mean drag.** Six pairs, two keys, two subclasses: a trapped pair (Opposed, Etch) or subclass can pull the class mean below the Shade's line | Per-row reports (Opposed rows first); `StarterDefaultsHaveAnswer`; the Opposed starters chosen not to cancel (7.14); honest pair cards; AM-12 lever |
-| **Terrain dependency.** E3–E4 need water, oil, fire, web and hazard squares near fights; no document commits the generator | DEP-A1 with a requested target *(illustr.)* of at least one interactive square within 6 of the start in about 40% of non-boss rooms on floors 2–5; until then no card relies on terrain (Squall is Expert for this reason). **Pending request (room terrain design TR-21, 2026-11-21; the Arcanist owner rules):** DEP-A1 counts interactive features (condition squares, contact hazards, harm squares, Kegs); the 3–6 ring rule (KP2: every F2–5 fight-room layer has a mandatory interactive feature at path distance 3–6 from some `partyEntrySquares` square); which "start" is meant (the report reads party entry until ruled; room terrain design 6.2.4, 11.3, TN14). Told plainly: E3 combos still need condition squares, which the Supper never has |
+| **Terrain dependency.** E3–E4 need water, oil, fire, web and hazard squares near fights; the room terrain design's KP2 commits the generator (cross-document comparison 2026-11-23, CC-77) | DEP-A1 with a requested target *(illustr.)* of at least one interactive square within 6 of the start in about 40% of non-boss rooms on floors 2–5; until then no card relies on terrain (Squall is Expert for this reason). **Pending request (room terrain design TR-21, 2026-11-21; the Arcanist owner rules):** DEP-A1 counts interactive features (condition squares, contact hazards, harm squares, Kegs); the 3–6 ring rule (KP2: every F2–5 fight-room layer has a mandatory interactive feature at path distance 3–6 from some `partyEntrySquares` square); which "start" is meant (the report reads party entry until ruled; room terrain design 6.2.4, 11.3, TN14). Told plainly: E3 combos still need condition squares, which the Supper never has. **Pending request (hazards design 6.15, 18, O13; HZ-31; M2; the Arcanist owner rules; cross-document comparison 2026-11-23, CC-7):** Stirs, Cords, Voids and vents count as interactive features for DEP-A1 and KP2 (the room terrain owner defines the term); and a second Gust charge in Void rooms (`ArcanistComboShare`); neither in force until ruled (19) |
 | **Sustain recalibration.** The Arcanist at Con −1 passes `Floor1BossSustain` by 1; an upward key recalibration fails it first | Door-HP medians reported separately (11.3) |
 | **Ceiling invisible on run 1.** Floor 1 is mostly Mote turns | The ladder preview and Interplay sell the later depth |
 | **Interplay unproven.** It may mostly fire cancels in the Opposed pair, or drift parity | Modifiers-off rows; the lever (10.3) |
@@ -2625,7 +2645,7 @@ names feed; `SeedHasTarget` (classes owner) is executed in V12g
 | **Reading load.** The Weft row holds Sculpt (3 modes), Flare, Knit and a subclass option | Tray greying and waves; the "Complex" label's price |
 | **The inert rule feels like a bug** | Card text up front; greyed payoff line with its reason; Catalyse as the taught solo combo; ALM-1 tests (13.1) |
 | **Off-pair scrolls** dilute the pair identity | Bounded as consumables; reported |
-| **Dependencies on other owners:** EL-1, LM-0, the arc ruling, ARC-17, the Herald's stage 2 for `classTags`, the payout-event hook for Runoff, the ability 8.4 aura ruling | 19; M2 cut fallbacks (15) |
+| **Dependencies on other owners:** EL-1, LM-0, the arc ruling and ARC-17 (both written; cross-document comparison 2026-11-23, CC-77), the Herald's stage 2 for `classTags` (answered by the Herald design 8.8, HR-24; cross-document comparison 2026-11-23, CC-75), the payout-event hook for Runoff, the ability 8.4 aura ruling | 19; M2 cut fallbacks (15) |
 | **Dip value** of Weft 3 at class level 1 | M4 report |
 | **All evidence is proxy** | Every number is owed a simulator rerun before it settles |
 | **Recall-based survey and SRD shapes** | Check against SRD 5.2.1 before data |
@@ -2753,12 +2773,22 @@ may raise it to two" in ability 6.5 finds the Arcanist exclusion.
   design TR-21):** rule whether DEP-A1 counts interactive features, the
   3–6 ring rule, and which "start" is meant (16); the floor-4 miss is
   likely closed by the Supper's pieces (room terrain design 7.8).
+- **Hazards (segment 4): pending request (hazards design 6.15, 18, O13;
+  HZ-31; M2; the Arcanist owner rules; cross-document comparison
+  2026-11-23, CC-7):** a second Gust charge in Void rooms
+  (`ArcanistComboShare` reported); and the DEP-A1/KP2 extension, under
+  which Stirs, Cords, Voids and vents count as interactive features (the
+  room terrain owner defines the term, 16). Neither is in force until
+  ruled; Gust stays as 7.2.
 - **The enemies owner:** LM-0 (Study persistence), LM-1
   (`cooldown.delay`); Fray's mirror never in floor-1 monster kits; the
   AI pricing of Afterhold and Belay.
 - **The conditions owner:** the arc ruling (ARC-14); Restrained's rank
   (ARC-17); `graceTurns` (BN-1); the payout-event hook (Runoff);
-  the M2 hazard-edge rules.
+  the M2 hazard-edge rules. ARC-14 (stat 8.1), ARC-17 (conditions
+  12.3), BN-1 (conditions 5.1, 17.3) and the hazard-edge rules
+  (conditions 10.1–10.3) are written; the payout-event hook stays owed
+  (cross-document comparison 2026-11-23, CC-77).
 - **The stat-model owner:** EL-1, owed at M2 whatever ships.
 - **The armour owner:** the step-3a wording (ARC-5) with the Shade's
   SH-9.
@@ -2768,9 +2798,13 @@ may raise it to two" in ability 6.5 finds the Arcanist exclusion.
   7.15 and Tincture against the Water Flask (ALM-7); Prime against the
   Water and Oil Flasks is ruled here (7.15).
 - **The Herald's stage 2:** claims or declines the Herald-dependent
-  `classTags` (8.10); unclaimed items default to Later.
+  `classTags` (8.10); unclaimed items default to Later. Answered by the
+  Herald design 8.8 (HR-24); the 8.10 values are final (cross-document
+  comparison 2026-11-23, CC-75).
 - **The floor-pacing owner:** lever 5 (boss door at level 3), shared
-  with the Shade's request.
+  with the Shade's request. Answered by the Antechamber Catch-up (run
+  structure design 9.4, RT-8): lever 5 is in force, so the levers are
+  run out after 1–4 (11.8; cross-document comparison 2026-11-23, CC-72).
 - **Exploration and information (segment 10):** **pending request
   XI-27** (M3): Walls Have Ears, a batched Listen (8.8; exploration and
   information design 4.5.2); the Arcanist owner rules.

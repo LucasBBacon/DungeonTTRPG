@@ -227,7 +227,10 @@ attack, limited ability, a signature fires), which stand **(settled)**.
   blocked by a wall, obstacle or unit, a 0-square blocked move included.
   A verb part ignored because its target was already verb-moved this
   round is not a stop (6.4 rule 6) **(lead's call)**. Stopping before a
-  hazard is not stopping early **(settled, conditions 10.1)**.
+  hazard is not stopping early **(settled, conditions 10.1)**. **A
+  successful contact-hazard or harm-square save is an ordinary obstacle
+  stop, so it counts as stopped early (TR-10, room terrain design
+  6.5.2) (cross-document comparison 2026-11-23, CC-62).**
 - **Window fill:** a reaction AC bonus that applies to an attack roll
   from a camp-pool ability without a reaction being spent, at the new
   step 0 of the armour 10.4 window (7.7; VG-4).
@@ -486,8 +489,12 @@ without its repertoire.
      verb-moved-this-round mark.
    - **Brink (a)** (Wrecker) then sets the combined distance anywhere
      from 1 to the cut total, trimming from the last part again.
-   - **Collisions.** A move collides if any non-verb part contributes;
-     Battering Force (8.3) is the one verb-only exception.
+   - **Collisions.** A move collides if any non-verb part contributes.
+     There are two named verb-only exceptions: Battering Force (8.3),
+     and the purely verb-sourced contact push, whose failed
+     contact-hazard save deals the collision band, typed (TR-10, room
+     terrain design 6.5.2) (cross-document comparison 2026-11-23,
+     CC-62).
    - **Save areas (ARC-22, SP-5; Arcanist design 8.2).** Each target of
      a save area is its own hit for the 3-square sum.
 
@@ -546,6 +553,12 @@ without its repertoire.
      adds, with its collision. The Art as a whole falls under
      `CampOptionBound` (7.3).
 
+     **Void removal term: pending request (hazards design 6.4, 18;
+     HZ-31; M2).** The hazards owner asks that a Void removal be valued
+     as the target's remaining HP, capped by Clutch, for
+     `FallsByWrecker` against `HewCeiling`. Not yet applied; recorded in
+     18 (cross-document comparison 2026-11-23, CC-7).
+
      The pass table is in 10.1;
    - `TechniquePickerSize`: every reachable known-option set, built from
      the option sources and `offerExcludes`, has at most 6 options, and
@@ -594,8 +607,9 @@ knows Low Cut, and never offer Low Cut to one who knows Cover Step
 
 - **Every Empower effect is verb-sourced** (a clarification to weapons
   7.2 rule 4, VG-8). The collision rule is the one in 6.4 rule 6: any
-  move in which a non-verb part contributes collides, and Battering Force
-  is the one verb-only exception.
+  move in which a non-verb part contributes collides. The two named
+  verb-only exceptions are Battering Force and the purely verb-sourced
+  contact push (TR-10) (cross-document comparison 2026-11-23, CC-62).
 - Each line is its own record keyed by verb id, `{verbId, wave, ranks[],
   tag, payable}` (13.1), because `payable` and the tag vary per line.
 - **No line adds dice or flat damage.** That keeps the table under
@@ -852,6 +866,9 @@ the claim is checked, not assumed (6.4 rule 8).
   one attack roll.
   - It spends your reaction.
   - Pry ignores it; Staggered switches it off.
+  - Against a Covered attack the +2 is not offered (it is not spent and
+    does not close the window); cover applies instead (TR-2, room
+    terrain design 6.1) (cross-document comparison 2026-11-23, CC-63).
   - Policy `ifItChangesOutcome`, `nonMinion`.
   - It is learned, so Guarding is illegal for you (CL-7).
 - **Solo clause:** while no ally is within 2 squares of you, it may
@@ -919,7 +936,8 @@ Menus of 3; each menu has an upgrade **(settled shape, classes 7.4,
 - **Grim Resolve** (upgrade; D10 fix). Second Wind also ends one of
   Frightened, Dazed or **Bleeding** on you, and you stand from Prone at
   no movement cost. Bleeding comes from the M1 claw brute. The stand
-  folds in the core's `standOnBreath` trigger.
+  folds in the core's `stand.free` trigger (cross-document comparison
+  2026-11-23, CC-65).
 
 **Level 2, M2:** Drive Through, Pivot, **Low Cut** (adds). Grim Resolve
 moves to level 7.
@@ -971,7 +989,11 @@ moves to level 7.
     order. The first applies and closes the window, and it gets the
     "blocked" event. An ally under any fill counts as **covered** for
     the subclass riders below;
-  - never covers you (except under the solo clause below).
+  - never covers you (except under the solo clause below);
+  - **against a Covered attack, the +2 fill is not offered:** cover
+    applies instead, and the fill is not spent and does not close the
+    window (TR-2, room terrain design 6.1) (cross-document comparison
+    2026-11-23, CC-63).
 - **Display.** The fill is shown in the reaction term of the resolve
   preview ("AC +2, Stand Fast"), like Parry's `previewHint`. It is
   **not** in visible AC (armour 6.1 unchanged). The AI reads it through
@@ -1523,7 +1545,9 @@ calledOut]`.
 - **II (L9):** until your next turn starts, attack rolls by the
   Squared-Up unit against an ally adjacent to you take Interpose's +2 as
   a window fill. Smaller than Stand Fast: one attacker against the whole
-  line.
+  line. Against a Covered attack the fill is not offered and cover
+  applies instead (TR-2; 7.7) (cross-document comparison 2026-11-23,
+  CC-63).
 
 **Triggers (`requires: subclass:bastion`):** `retortStrike.wardensReach`.
 Retort Strike also triggers once per round (a turn allowance, 7.9) when
@@ -2002,6 +2026,10 @@ the lever it would take levels 5 and 10 below the band (39% and 37%).
   miss stays at level 1.
 - **(client, 2026-11-20; ARC-4)** The accepted miss is extended to
   Arcanist levels 1–2 (26% and 35%; Arcanist design 11.8).
+- **(client, Herald Q2, 2026-11-20; HR-31)** The accepted miss is extended to
+  Herald levels 1–3, with levels 3–4 read on the class mean over both
+  subclasses (Herald design 11.10) (cross-document comparison
+  2026-11-23, CC-20).
 - Arts at class level 5 do not affect level 1.
 - The camp-share pass does not rely on camp damage being exempt from
   parity: Arts are valued at their utility, not as damage.
@@ -2083,8 +2111,10 @@ Collisions with walls and units apply. Pushes stop before hazards
 - `Floor1BossSustain` at level 3;
 - the per-round boss breakdown;
 - signature share per kit, with Momentum;
-- Hew's pick share at levels 1–4, and for the Weaponmaster at levels 3–4
-  (where Momentum and Practised Hand compete for one hit, 6.7);
+- Hew's pick share at levels 1–3, and for the Weaponmaster at level 3
+  (where Momentum and Practised Hand compete for one hit, 6.7); level 4
+  is reported in M2, since M1 is levels 1–3 (cross-document comparison
+  2026-11-23, CC-65);
 - the Hold the Line fire and reroute rate.
 
 ## 12. Binding requirements and how they are met
@@ -2211,10 +2241,13 @@ that registry, and this document calls the check rather than owning it.
 - signature share at levels 1–3 under Momentum, kit and scorer variants;
 - the M2 Weaponmaster's signature share in the set it fights in (the
   shield set with a borrowable spare, and the greataxe active; 7.10);
-- Hew's pick share at levels 1–4 in M1, and for the Weaponmaster at
-  levels 3–4 (6.7); target below 50% in M2;
+- Hew's pick share at levels 1–3 in M1, and for the Weaponmaster at
+  level 3 (6.7); level 4 (and the Weaponmaster's levels 3–4) in M2;
+  target below 50% in M2 (cross-document comparison 2026-11-23, CC-65);
 - Hold the Line fire and reroute rates;
-- Stand Fast blocked misses per use;
+- Stand Fast blocked misses per use, counting only offered fills (a
+  fill not offered against a Covered attack is not counted; 7.7)
+  (cross-document comparison 2026-11-23, CC-63);
 - the protection reliance report with and without the Bastion;
 - Retort trigger and deterrence rates, and the share of rounds with a
   Square Up active (8.2);
@@ -2243,7 +2276,7 @@ that registry, and this document calls the check rather than owning it.
 | Parity passes only under VG-12, and only inside model noise (±7 points with R); the worst legal build sits at 109.6–110.0% at level 10 | Worst-legal-build measure; the Hew cap; Deep Reserves deals no damage; `capacity:techniques` excluded; fallback Hew 1d4 to level 6; the simulator sets R |
 | `HewCeiling` passes on an assumed `collisionRate` (400‰); the Domino row has little room | The observed rate per subclass and theme is reported; the band (2 / 3 / 3) is the lever, never a dice band |
 | The camp share sits near the band's lower edge once Momentum is counted (41% at level 5, 40% at level 10) | The Art and Stand Fast weight is already applied; the simulator checks it; the same weight is the further lever (10.4) |
-| Momentum adds little for the M1 Weaponmaster at levels 3–4 (it competes with Practised Hand for one hit) | Stated (6.7); the scorer term set to about 0 in that case; Hew's pick share at levels 3–4 reported in M1 |
+| Momentum adds little for the M1 Weaponmaster at levels 3–4 (it competes with Practised Hand for one hit) | Stated (6.7); the scorer term set to about 0 in that case; Hew's pick share at level 3 reported in M1, and level 4 in M2 (cross-document comparison 2026-11-23, CC-65) |
 | The Weaponmaster's signature lives in a different set from its protection with the default kit | The M2 spare recommendation at level 3 (7.10); the signature share in the set it fights in is reported |
 | Hold the Line and Square Up undercut each other (an opportunity attack ends the mark) | `notWhileSquaredUpElsewhere` default; the preview warning; the mark-up share report (8.2) |
 | The floor-1 spread stays wide (the Vanguard is favoured 5–20×) | No floor-1 power added beyond stage 1 except the Shieldwall solo clause; the per-feature diff report; the lever is the other classes' data |
@@ -2355,12 +2388,19 @@ hit" in conditions 10.1 shows the VG-8 sum.
 
 - **The other three stage-2 class documents:** `Floor1ClassSpread` as a
   real gate needs all four classes in data; the `LeanSpread` minion
-  clear check reads the Arcanist.
+  clear check reads the Arcanist. **Answered:** the Shade, Arcanist and
+  Herald designs are approved; only the simulator evidence is owed
+  (cross-document comparison 2026-11-23, CC-64).
 - **Companions:** a Vanguard recruit kit as a signature slice that does
   not copy the hero's Momentum or Arts; protector kits on at least two
-  classes (classes 7.8).
+  classes (classes 7.8). **Answered** by the companions design 8.3 (the
+  Gatekeeper and Brawler kits; Protector on the Gatekeeper and
+  Shieldbearer) (cross-document comparison 2026-11-23, CC-64).
 - **Dungeon generation:** hazard density by theme (Wrecker value);
-  walls and edges near main-path fights. **Pending confirmation from the
+  walls and edges near main-path fights. **Answered** by the room
+  terrain design (6.2, 6.4, 6.5, 6.10), the hazards design and the floor
+  layout design; the observed rates are reported (13.3)
+  (cross-document comparison 2026-11-23, CC-64). **Pending confirmation from the
   boss rooms design (segment 9, approved 2026-11-22; change BR-18; M2;
   its 4.7.6):** every M1–M2 boss is rules-size ≤ Large, and each floor-1
   theme with two bosses has a Medium one; the Vanguard owner confirms
@@ -2369,6 +2409,25 @@ hit" in conditions 10.1 shows the VG-8 sum.
   and stance-bound trigger warning; the level-3 spare-weapon suggestion
   for the Weaponmaster (7.10).
 - **Naming pass:** every placeholder name here, Hold the Line included.
+  Upend (8.3) collided with the boss rooms design's boss state
+  "Upended": BR's state is renamed **Sprawled** after a whole-word grep
+  (boss rooms design 4.7.2), and Upend keeps its name (cross-document
+  comparison 2026-11-23, CC-65).
+- **Pending requests to this document (cross-document comparison
+  2026-11-23, CC-7, CC-64):**
+  - **Hazards (HZ-31; hazards design 6.4, 18; M2):** the `HewCeiling`
+    Void removal term: "a Void removal is valued as the target's
+    remaining HP, capped by Clutch, for `FallsByWrecker` against
+    `HewCeiling`" (6.4 rule 8). Pending the Vanguard owner.
+  - **Loot sources (LP; V15s):** every Vanguard ability with an `onHit`
+    tag lists `ignoresWindfall`. Pending the Vanguard owner's wording.
+  - **Item rolls (IR 4.3):** the Vanguard's `loot.classLanes` and
+    `subclassLanes` (illustr. strike.heavy, strike.blade, strike.reach,
+    guard.heavy, guard.shield). Pending the Vanguard owner.
+  - **Seeds and validation (SV-22, SV 6.2; M2):** the generalised
+    `Skill.*` novice, basic and expert arms, conditional on the ARC
+    owner; if refused, the Vanguard owner writes a novice script by the
+    M2 planning gate.
 - **Rulings owed by the lead:** VG-18 (registry scope, the Parry line),
   VG-22 (the ally swap).
 - **Lead's checks before data:** every SRD shape in this document

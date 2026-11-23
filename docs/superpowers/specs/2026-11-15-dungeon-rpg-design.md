@@ -4,8 +4,30 @@ Date: 2026-11-15
 Status: approved by client, 2026-11-15
 
 Items marked **(decided)** were agreed with the client, either directly or
-by approving the lead's proposal. Items marked **(decided)** are the lead's
-calls and have not been confirmed.
+by approving the lead's proposal. No (proposal) items remain since the
+client's approval of 2026-11-15. (cross-document comparison 2026-11-23,
+CC-1)
+
+Markers added by later designs (cross-document comparison 2026-11-23,
+CC-1):
+
+- **(agreed YYYY-MM-DD, <design> Qn):** a client answer to question Qn
+  of the named design, given on that date. Every agreed marker names its
+  design ("hazards Q3"), so it never reads as a question of this
+  document.
+- **read**, **a reading**, **an addition** (after a change id): the
+  change cites this passage and leaves its rule as written (read);
+  interprets its existing wording without changing a rule (a reading);
+  or adds a rule beside it without altering an existing one (an
+  addition).
+- **hook:** a need one design states and another owns; the asking
+  design states only what it needs. **pending:** a request or open item
+  awaiting the named owner's ruling or deliverable; it changes nothing
+  until that owner rules.
+- *(illustr.)*: an illustrative number, owned by the builders and
+  calibrated by the simulator. Never binding.
+- **M1–M4** name the milestones of section 9; **Later** means after M4,
+  not scheduled.
 
 ## 1. Intent
 
@@ -46,13 +68,16 @@ simulate and change.
   squares placed by floor generation are allowed; see the conditions
   design, section 11. Exception (M3): environment-made Remnant clouds
   with a fixed footprint and a short countdown, which never drift,
-  spread or grow (room terrain design 6.6; change TR-27, M3).
+  spread or grow (room terrain design 6.6; change TR-27, M3). **(agreed
+  2026-11-21, room terrain Q5)** (cross-document comparison 2026-11-23,
+  CC-1)
   Exception (M3; the reversal round M4): environment square changes
   only through pre-proven Stir states (Tides held whole in their two
   states, Cord Flips, Turning Ring boards, environment-moved
   Furnishings, environment Overturn), using existing square kinds,
   announced a round ahead, never spreading or growing (hazards design
-  6.3, 7; change HZ-18, M3). **(agreed 2026-11-21, Q3)**
+  6.3, 7; change HZ-18, M3). **(agreed 2026-11-21, hazards Q3)**
+  (cross-document comparison 2026-11-23, CC-1)
 
 ### Anti-goals
 
@@ -103,8 +128,12 @@ These would make the game a failure even if everything works.
   slot, a swap offer otherwise; hiring is optional. **(decided)**
   (companions design 7.1, 7.11; change CMP-1) Every camp also has a basic
   vendor (supply, potions in limited pre-rolled stock, tonics, Remedy,
-  mundane bases). "A shop or reward" is a choice between a notables shop (1–2
-  notables) and a camp reward card, separate from the boss reward card
+  mundane bases; 1 Wax Key (M2) only when the party has no
+  Mechanics-trained member, change TL-25; 1 Ear Trumpet (M3,
+  conditional) only when no party unit is Perception-trained, change
+  XI-26) (cross-document comparison 2026-11-23, CC-10). "A shop or
+  reward" is a choice between a notables shop (1–2 notables) and a camp
+  reward card, separate from the boss reward card
   (enemies design 17.5). **(decided)** (items design 10.3, 10.4) Each
   camp shows the next floor's theme; when route choice is on (run
   structure design 6.11), camps 1–2 offer a choice of two next floors
@@ -122,8 +151,9 @@ These would make the game a failure even if everything works.
   declined; one dismissal or swap per camp, at camp only. If the M2
   floor-time gate fails after the levers, the cap is 2: no new slot opens
   at camp 3, and a party below the cap there still gets a hire board.
-  **(agreed 2026-11-20, Q2)** (companions design 7.1, 7.4–7.6; change
-  CMP-2) Companions have a fixed class and lighter progression: they level
+  **(agreed 2026-11-20, companions Q2)** (companions design 7.1,
+  7.4–7.6; change CMP-2) Companions have a fixed class and lighter
+  progression: they level
   automatically, with a choice only at a few key levels. **(decided)**
 - The player controls every party member in combat. **(decided)**
 - The run ends when the hero dies. A companion reduced to zero hit points is
@@ -161,8 +191,8 @@ These would make the game a failure even if everything works.
   group within a per-monster set in data: each monster type lists
   `allowedAwareness[]`, and the encounter template and the group's
   activity choose within it (encounter placement design 6.7; change
-  EP-9, agreed Q4, M2). **(decided)** "Dormant" is a behaviour, not the
-  Asleep condition (conditions design 5.5).
+  EP-9, agreed encounter placement Q4, M2). **(decided)** "Dormant" is
+  a behaviour, not the Asleep condition (conditions design 5.5).
 - Each unaware enemy group makes one perception check per trigger, using
   its best member in line of sight, against the party's passive stealth,
   never an opposed roll; see the character stat model. Triggers: first
@@ -175,7 +205,8 @@ These would make the game a failure even if everything works.
   the party is surprised only if no party unit has noticed any hostile
   unit taking part in that combat; each monster group is surprised if
   the party noticed it and it is unaware (encounter placement design
-  6.8.2; change EP-2, agreed Q1; recorded M1, in effect M2).
+  6.8.2; change EP-2, agreed encounter placement Q1; recorded M1, in
+  effect M2).
   Exception: the solo hero is never surprised in floor 1's first two
   main-path rooms (death and healing design 17.1). A note only, Later:
   if `SurpriseDeathShare` misses, a 2024-style surprise (disadvantage on
@@ -297,7 +328,7 @@ All decided.
   confirmed; help for struggling players belongs in a visible difficulty
   setting, which is a future main design and run structure decision, not
   yet made (events design 4.4.7, 14.2; change EV-10, read, agreed
-  2026-11-22, Q4).
+  2026-11-22, events Q4).
 - **No permanent stat boosts.** Curiosity gains are run-only, and from
   M3 Curiosity Sequels and Ripening enter the drawable set through the
   unlock snapshot, never as power (events design 4.4.1, 4.5.8, 4.5.9;
@@ -430,9 +461,10 @@ queries over `PartyKnowledge` (exploration and information design 4.1.1,
   moves the next fight's rolls (traps and locks design 6.22; change
   TL-3, M1). The same keyed-check spec, with one registered domain per
   roll kind, also covers out-of-combat noticing (`h:notice`, M1) and
-  out-of-combat Steal (`h:steal`, M1), lurker Stealth (`h:lurkStealth`,
-  M2), out-of-combat hazard saves (`h:envSave`: falls and Plunge M2,
-  Dare rooms M3) and Curiosity checks (`h:curiosity`, M2); in-combat
+  out-of-combat Steal (`h:steal`, reserved M1, live M2), lurker Stealth
+  (`h:lurkStealth`, M2), out-of-combat hazard saves (`h:envSave`: falls
+  M2, Plunge and Dare rooms M3) and Curiosity checks (`h:curiosity`, M2)
+  (cross-document comparison 2026-11-23, CC-13, CC-97); in-combat
   noticing, Steal and hazard saves stay on the combat stream. So no
   roll made outside a fight, including the noticing roll that starts
   one, ever moves the next fight's rolls (seeds and validation design
@@ -453,8 +485,10 @@ queries over `PartyKnowledge` (exploration and information design 4.1.1,
   block (`loot/floor/{N}/{block}/{entry}`); their approved order is kept
   as the order in which blocks are evaluated, and the count dummies and
   ghost draws that held positions on one sequential stream are retired.
-  The Reprieve Phial pre-roll (`loot/run`) is always 3 draws (seeds and
-  validation design 4.3; change SV-5, M1). A draw-free LootBind
+  The Reprieve Phial pre-roll (`loot/run`) is always 3 draws, pending the
+  consumables owner's confirmation; fallback in seeds and validation
+  design 14.2 (seeds and validation design 4.3; change SV-5, M1)
+  (cross-document comparison 2026-11-23, CC-12). A draw-free LootBind
   step runs after `trapsResolve`, and floor N+1's generation and the
   camp-exit save are one write (loot economy design 6.10; change
   LE-14, M1).
@@ -472,7 +506,7 @@ queries over `PartyKnowledge` (exploration and information design 4.1.1,
   point), and AP2 after LootBind and EventPlace. A failed check climbs
   one retry ladder (LR0–LR5) in every build, at most 3 attempts; in a
   release build a floor that still cannot be built ends the run cleanly
-  (agreed 2026-11-23, Q2) (seeds and validation design 4.4, 5.4, 5.5;
+  (agreed 2026-11-23, seeds Q2) (seeds and validation design 4.4, 5.4, 5.5;
   changes SV-9, SV-10, M1 / M2).
 - Rules use integer arithmetic only.
 - No reliance on unordered collection iteration. Both are enforced by
@@ -534,13 +568,14 @@ largely to prove it.
   (the outcome rule). Loading reads and validates the slot, then
   replaces it atomically with the re-validated state, then accepts
   input; this meets "deleted on load" (seeds and validation design
-  4.8.3, 4.8.4; change SV-14, agreed 2026-11-23, Q4, M2). The
+  4.8.3, 4.8.4; change SV-14, agreed 2026-11-23, seeds Q4, M2). The
   slot always wins over the safe-point snapshot, and `PartyKnowledge` is
   forward-only, so a resume never undoes a death, a spent counter or a
   look. Camp and other safe points are unchanged, and no suspend slot
   exists outside a floor (exploration and information design 4.12;
-  change XI-28, agreed 2026-11-23, Q1, M2; the file mechanics are
-  seeds and validation design 4.8).
+  change XI-28, agreed 2026-11-23, exploration Q1, M2; the file
+  mechanics are seeds and validation design 4.8) (cross-document
+  comparison 2026-11-23, CC-1).
 - **UI annex of the run save:** display state only (Waymarks and
   dismissed loose ends), outside the reproducibility key and never read
   by rules, the simulator or validators (exploration and information
@@ -553,7 +588,7 @@ largely to prove it.
   Open item (pending, owed by this document): the game's telemetry
   consent setting, under which a generation defect's local bug-report
   bundle is sent (seeds and validation design 5.5; hook, agreed
-  2026-11-23, Q2). Until it exists, bug reports stay local and the
+  2026-11-23, seeds Q2). Until it exists, bug reports stay local and the
   player can attach them by hand (seeds and validation design 14.2).
 - **Profile save:** unlocks, boons and difficulty tier, stored separately
   from any run. The grants that change rules (difficulty tier, boons,
@@ -569,18 +604,24 @@ largely to prove it.
   `runHistory[]` entry below; the simulator writes no player profile
   (launcher-dependent arms write sandbox profiles in its launcher
   emulator only) (events design 4.5.1, 4.10, 9.1; change EV-19, agreed
-  2026-11-22, Q1, M2; seeds and validation design 4.6, 4.7; changes
+  2026-11-22, events Q1, M2; seeds and validation design 4.6, 4.7; changes
   SV-13, SV-16, M2).
   From M2 it also holds `runHistory[]`: one record per finished run,
   personal or seeded, with `seedMode`, the result, the floor reached and
   the code. A seeded run appears there marked seeded and advances no
   unlocks, records, codex entries or launcher memory; `recentRuns` is
   never written for a seeded run (seeds and validation design 4.7, 4.9;
-  change SV-16, agreed 2026-11-23, Q1, M2).
+  change SV-16, agreed 2026-11-23, seeds Q1, M2) (cross-document
+  comparison 2026-11-23, CC-1).
   Each `recentRuns` entry also holds `f1BossId`, written at run start
   for every launched personal run and read by the launcher's F1-boss
   streak rule (memory 2); outside the reproducibility key (boss rooms
-  design 4.10.3; change BR-25, agreed 2026-11-22, Q1, M2). From M3 it
+  design 4.10.3; change BR-25, agreed 2026-11-22, boss rooms Q1, M2).
+  Beside it, each entry holds `f1ThemeId`, written at run start for
+  every launched personal run and read by the floor-1 theme redraw
+  (run structure design 6.4, R-SEED-6: each of the last three personal
+  runs); outside the reproducibility key (M2) (cross-document comparison
+  2026-11-23, CC-6). From M3 it
   also holds `bossMemory {bossId: lastOutcome, renditionsSeen[]}`,
   display only for the Boss Ledger and Grudge, read as a snapshot at
   run start and never by draws, stats or AI (boss rooms design 7;
@@ -601,7 +642,7 @@ largely to prove it.
   `drawableSet` snapshots and route state never change, and a patch
   that can change the run marks it not comparable for records and
   shared codes (seeds and validation design 4.10, 4.10.1; change SV-15,
-  agreed 2026-11-23, Q3, M2).
+  agreed 2026-11-23, seeds Q3, M2).
 
 ### 6.7 Enemy AI
 
@@ -674,7 +715,7 @@ monster in data.
 | M0 Skeleton | Solution, automated tests, command and event loop, Godot draws a placeholder 3D isometric grid and moves a unit | Does the core and display split work? |
 | M1 Vertical slice | One class, levels 1–3, one generated floor, three enemy types, one boss, basic loot, permadeath | Is the loop fun? Does the effects system hold? |
 | M2 Full run | Four classes, companions, 5 floors (change RT-1), level 10, pick-one-of-three offers, save and resume | Does a 1–2 hour run hold together? |
-| M3 Between runs | Profile (its `curiosityMemory` field arrives in M2: events design 9.1; change EV-19, agreed Q1), unlocks, starting boons, difficulty ladder; in-run content: Two Doors at camp 3, Omens, Seams, Nightmare tiers (run structure design 12; change RT-19, M3) | Do players come back? |
+| M3 Between runs | Profile (the profile file and its `curiosityMemory`, `recentRuns[].f1BossId`, `runHistory[]` and `uiMemory` fields arrive in M2: section 6.6; events design 9.1; change EV-19, agreed events Q1; cross-document comparison 2026-11-23, CC-11), unlocks, starting boons, difficulty ladder; in-run content: Two Doors at camp 3, Omens, Seams, Nightmare tiers (run structure design 12; change RT-19, M3) | Do players come back? |
 | M4 Breadth | Species, multiclassing, more content, balance passes with the simulator | Is every run different? |
 
 M1 covers species selection only if it is trivial to include; otherwise
@@ -690,8 +731,9 @@ in `2026-11-16-character-stat-model-design.md`. What that document leaves
 open is listed in its own section 12.
 
 Weapons and foci are settled in `2026-11-17-weapons-design.md`; they are no
-longer pending. Disarmed and Coated stay Later; starting kits remain
-open in their category designs (weapons design 25, 26).
+longer pending. Disarmed and Coated stay Later; starting kits are set
+in the four class designs (weapons design 25, 26) (cross-document
+comparison 2026-11-23, CC-9).
 
 Armour and shields are settled in `2026-11-17-armour-design.md`; they are
 no longer pending (armour design 21, 22).
@@ -710,15 +752,18 @@ and healing design 26, 27).
 
 The four launch classes (Vanguard, Shade, Arcanist, Herald), class
 structure and concepts are settled in
-`2026-11-17-classes-concepts-design.md`; the feature lists are its
-stage 2 (classes design 14, 19; change CL-13a).
+`2026-11-17-classes-concepts-design.md` (classes design 14, 19; change
+CL-13a). Feature lists, subclasses, capstones and kits are settled in
+the four approved class designs: `2026-11-18-vanguard-class-design.md`,
+`2026-11-18-shade-class-design.md`, `2026-11-20-arcanist-class-design.md`
+and `2026-11-20-herald-class-design.md` (cross-document comparison
+2026-11-23, CC-9).
 
 The random number algorithm, the stream registry, the save file
 mechanics and validation are settled in
 `2026-11-23-seeds-validation-design.md`; they are no longer pending
 (seeds and validation design 4.1, 4.8, 16; change SV-1).
 
-- The four launch classes' feature lists (classes design, stage 2).
 - All numbers: hit points (shape settled there), damage, experience curve, loot rates.
 - The dungeon generation algorithm.
 - The JSON schema details.

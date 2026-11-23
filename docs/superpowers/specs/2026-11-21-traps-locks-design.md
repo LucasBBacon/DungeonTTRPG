@@ -315,7 +315,7 @@ to use:
 | **Plain** | M1 | Jam only | Normal |
 | **Crier** | M2 | Noise 10 at the lock | Every force attempt is noise 10 |
 | **Barb** | M2 | Harm-band damage plus the theme's poison condition on the picker; floored out of combat | Never fires (forcing is safe here) |
-| **Tattle** | M2 | Wakes the existing, pre-placed Dormant group beyond, which Listen reports first | Wakes them too |
+| **Tattle** | M2 | Wakes the existing, pre-placed Dormant group beyond, which Listen reports first; a Crier until the Annex (M3), and always a Crier on F1 (6.11; cross-document comparison 2026-11-23, CC-99) | Wakes them too |
 | **Runed** | M3 | — | — (Arcana may pick it) |
 | **Hour** | M3 | — | — (opens itself on the floor's Landmark tick) |
 
@@ -899,8 +899,10 @@ Segment 8 accepts TL-34's threshold principle for options:
 - every option but Leave carries a printed price, and a met threshold
   is never the whole price;
 - a rolled option (at most 1 per band theme pool) prints exact odds and
-  its failure cost (CC2, CC3), rolls on `checks` keyed (runSeed, floor,
-  curiosityId, optionId), and allows one attempt.
+  its failure cost (CC2, CC3), rolls on `checks` in the keyed-check
+  domain `h:curiosity` (curiosityId, optionId, attempt index 0, die;
+  SV-6; cross-document comparison 2026-11-23, CC-99), and allows one
+  attempt.
 
 *Rejected:* rolled detection (Model A), a room Search (tedium; dead with
 Int detection).
@@ -2000,7 +2002,7 @@ Before M3, level-3 parity is rerun with the universal rows present (SH
 | **Vanguard** | Force; Pole it; Bear it with high HP; Shove onto triggers; Kick or Shunt pieces; Trigger Shot with thrown weapons; Medicine smells poison | Force, the loud lock class; the High-Striker |
 | **Herald** | Perception marks boxed lurkers; Medicine smells poison and treats Barb poison; Pick the Question; Yield and Cow for keys | Unbolting; Leadership discount on the Wax Key |
 | **Anyone** | Walk round, Probe, Trigger Shot, Bear it, wide-berth reads | Wax Key, floor keys, force |
-| **Companions** | Scout and Tinker are the Mechanics coverage (gap card). Out of combat they act automatically as best member; in combat, on command (CMP 6.16) | Same; the vendor's Wax Key fills the gap when no member is trained (Q3) |
+| **Companions** | Scout and Tinker are the Mechanics coverage (gap card). Out of combat they act automatically as best member; in combat, on command (CMP 8.6; cross-document comparison 2026-11-23, CC-81) | Same; the vendor's Wax Key fills the gap when no member is trained (Q3) |
 
 **Told plainly:** in the toy, companions do as much Mechanics work as
 the Shade and Arcanist combined. The Shade's trap identity is access and
@@ -2259,7 +2261,9 @@ distance and guard, and the boxed-lurker budget.
     SV-10; M1):** the per-rule failure actions above are LR1 in-stage
     repairs; the pass retry is LR2 (`stageRetry(traps)` or
     `stageRetry(trapsResolve)`, at most one per stage per attempt,
-    logged `StageRetried`); `V11Fallback` is LR4, the class
+    logged `StageRetried`); the post-retry removal and Plain is a
+    draw-free LR1 repair taken after LR2 and before LR4 (cross-document
+    comparison 2026-11-23, CC-5); `V11Fallback` is LR4, the class
     `waivable(V11Fallback)`, logged `GenerationFallback`. Every build
     runs the same ladder. The Tattle and Wager bindings are TL's
     actions at GS13; EP's floor assertions only assert them (nesting
@@ -2522,7 +2526,8 @@ loot).
   - Plain;
   - the Will-Box (Keyed; the Keybearer is the Undertaker);
   - the Viewing Door (Tattle; after room 2; never wakes a group in rooms
-    0–2);
+    0–2; a Crier until the Annex (M3), and always a Crier on F1, 6.11;
+    cross-document comparison 2026-11-23, CC-99);
   - Hour lock (M3).
 - **Reserved:** rucked runner rugs, ceiling pulleys with counterweights,
   crepe garlands, closed cabinet gramophones, high lid racks.
@@ -2663,7 +2668,11 @@ Staggered, Prone, Frightened.
   - the **High-Striker** (a no-roll Strength threshold: passive
     Athletics ≥ Standard opens a padlocked prize cage, and it sounds the
     reserved alarm cue at noise 10; the Vanguard's lock);
-  - the Ticket lock ("Admit One", M3: coin buys access, never loot);
+  - the Ticket lock ("Admit One", M3: coin buys access, never loot;
+    coin may be spent only at camp, at a Ticket lock (M3) and, Later, at
+    a wandering trader, with ITEMS 10.1 amended to match **(agreed
+    2026-11-23, cross-document comparison Q-1)**; cross-document
+    comparison 2026-11-23, CC-8);
   - the Ring key (Keyed; the Keybearer is the Ringmaster).
 - **Wager room:** the Last Act (guarded). A garrison stands in the ring
   among revealed trapdoors, buckets, the Blade Wheel and braziers.
@@ -3407,9 +3416,10 @@ agreed STAT 6 trap-sense row, which the proposal had marked a lead's
 call), TL-23 names ENM 14.8, TL-31 names HZ 6.4 and its gates, and TL-42
 and TL-43 are added; every row touched after the check says so.
 Told-plainly rows were told in 19.1 and confirmed by the client on
-2026-11-21. TL-16, TL-17, TL-30, TL-34, TL-35,
+2026-11-21. TL-16, TL-17, TL-30, TL-35,
 TL-39, TL-41, TL-42 and TL-43 are requests to other owners, recorded as
-pending requests; they change nothing until their owner rules, and 19.2
+pending requests (TL-34 was accepted by the events design, EV-30, and is
+no longer pending; cross-document comparison 2026-11-23, CC-87); they change nothing until their owner rules, and 19.2
 names each fallback. M3, M4 and Later rows are recorded now as applied
 text marked with their wave and take effect at that wave; TL-37 takes
 effect at the M2 gate.
@@ -3476,6 +3486,13 @@ to TL-27, TL-30, TL-31 (Voids in proven Void rooms), TL-32 (M2 parts),
 TL-33 (close verb), TL-36, TL-38, TL-39, TL-42 and TL-43 in M2; TL-17, TL-22 (Runed, Hour),
 TL-28, TL-29, TL-34, TL-35 and TL-41 in M3; TL-37 at the M2 gate; TL-40
 with segment 9.
+
+**Later amendment (cross-document comparison 2026-11-23, Q-1 and CC-8).**
+The Ticket lock's coin spend (TL-32; 7.7) is confirmed by the client:
+coin may be spent only at camp, at a Ticket lock (M3) and, Later, at a
+wandering trader **(agreed 2026-11-23, cross-document comparison Q-1)**.
+The ITEMS owner amends ITEMS 10.1 and the coin-change event sources; the
+EV and LE owners correct their restatements. No TL row changes.
 
 ---
 
@@ -3642,7 +3659,9 @@ document):
    most twice per floor (6.6).
 7. **The Wake's Viewing Door is the one F1 Tattle,** and a floor-1 floor
    holds at most 1 consequence lock after room 2 (the Gaol's Crier or
-   the Wake's Viewing Door) (7.4, 6.19, 6.20).
+   the Wake's Viewing Door) (7.4, 6.19, 6.20). A Tattle is a Crier until
+   the Annex (M3), and always a Crier on F1 (6.11; cross-document
+   comparison 2026-11-23, CC-99).
 8. **The Iced padlock's Smash** is RT's Smash verb extended to that
    padlock: 1 tick out of combat, replaces one attack in combat, one
    `checks` roll, opens like a force with no Splinter (7.8; TL-32).

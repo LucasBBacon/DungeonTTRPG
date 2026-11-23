@@ -53,8 +53,10 @@ characters who differ in it. **(agreed)**
   changes: fire burns an oil square to plain floor (conditions design 11);
   from M2, Furnishing debris and removal, boss phase sockets, and fire
   burning a web or bedsheet square to plain floor; from M3, Overturn
-  debris and sight change, Remnants (room terrain design 6.6, 6.7,
-  6.8), and pre-proven Stir states (hazards design 6.3). **(agreed)**
+  debris and sight change, Remnants (room terrain design 6.3, 6.3.7,
+  6.6–6.8, 6.11; conditions design 11), and pre-proven Stir states
+  (hazards design 6.3). **(agreed)** (cross-document comparison
+  2026-11-23, CC-16)
 - **M3 exception:** environment-made Remnant clouds (Miasma only) with a
   fixed footprint and a short countdown, which never drift, spread or
   grow (room terrain design 6.6). "Until riders and layers are proven"
@@ -73,7 +75,9 @@ characters who differ in it. **(agreed)**
   M3; the Inverted Cathedral's reversal round at M4 (the rules stay
   flat, only the push direction reverses).
 - The ability and resource model (spell slots, action costs). Designed
-  next, separately.
+  separately in the ability design
+  (`2026-11-16-ability-resource-model-design.md`). (cross-document
+  comparison 2026-11-23, CC-16)
 
 ### Anti-goals
 
@@ -237,8 +241,8 @@ Formulas give the shape. Exact values are left to the builders.
 | Will | Better of Wisdom and Presence |
 | Initiative | d20 + Intelligence, rolled once per fight |
 | Speed | 6 squares. Changed only by species traits, monster role or traits, armour and conditions; affixes are traits (enemies design 8.3). |
-| Passive perception | The best party member's full passive: 10 + Wisdom + proficiency if trained (double with mastery) + active effects (enemies design 12.2, 13.3) |
-| Passive stealth | 10 + Dexterity of the worst party member, less a heavy armour penalty (sized in armour design 7.3) |
+| Passive perception | The best party member's full passive: 10 + Wisdom + proficiency if trained (double with mastery) + active effects (enemies design 12.2, 13.3); against a lurker, the highest over the living, non-Downed units with line of sight (EP-3, XI-2; cross-document comparison 2026-11-23, CC-18) |
+| Passive stealth | The worst party member's full passive: the minimum, over members, of 10 + Dexterity + proficiency if trained in Stealth (double with mastery) + active effects, less Clatter (the heavy armour penalty, sized in armour design 7.3) (cross-document comparison 2026-11-23, CC-17) |
 | Trap sense | The highest, over the living, non-Downed units in the party roster (companions included, whichever unit has line of sight), of the formulas that apply to each trap: 10 + Intelligence for anyone; 10 + Intelligence + proficiency for a Mechanics-trained unit (double with mastery); for traps tagged `rune`, also 10 + Intelligence + Arcana proficiency; for `poison` traps, also passive Medicine (10 + Wisdom + proficiency). Detection grades never drop. Perception finds lurkers, not traps. Trap Eye (SH-19) is re-scoped by the Shade owner (recommended: double proficiency on trap sense). M2 (traps and locks design 6.4; TL-6) |
 | Guile (monsters) | 10 + Wisdom + proficiency + role adjustment, for every monster whether or not trained in Perception (enemies design 13.3) |
 | Recovery | Hit points restored per short rest; grows with level and Constitution = `recovery.base` + `recovery.perLevel` × level + Constitution, minimum 1 (values in the death and healing design 8) |
@@ -269,7 +273,9 @@ Rules behind the table:
   maximum, over eligible members, of each member's full passive (10 +
   ability + proficiency or double proficiency + active effects). This also
   applies to party passive perception against lurkers (enemies design
-  12.2, 13.3).
+  12.2, 13.3). A party value taken from the worst member (passive
+  stealth) is likewise the minimum, over members, of each member's full
+  passive (cross-document comparison 2026-11-23, CC-17).
 - **Readings (TL-34; segment 8; M3; accepted by segment 8, events
   design 4.9, EV-30, 2026-11-22):** readings, one-off room
   checks, as no-roll thresholds on passives: Arcana reads runes and
@@ -561,8 +567,9 @@ Each item here is a commitment this model makes on another system's behalf.
   thresholds, are settled in `2026-11-17-armour-design.md` (its 6.2, 7.1).
   Consumables, scrolls and wands are settled in the consumables design
   (2026-11-17); coatings and Coated stay Later. What remains open moves to
-  the category designs (items design 17): starting kits, Clinging and
-  Pitted Armour.
+  the category designs (items design 17): starting kits and Clinging.
+  Pitted Armour is in armour 9.4 and stays Later (AR-37; cross-document
+  comparison 2026-11-23, CC-14).
 - **Conditions.** Settled in `2026-11-16-conditions-design.md`: bleed,
   burning, slow, stagger, blind, frightened and the rest are defined there;
   this document only names them.
@@ -581,10 +588,13 @@ Each item here is a commitment this model makes on another system's behalf.
 
 ## 12. Left to the builders
 
-- All numbers: class hit points, skill difficulties, rider strengths and
+- All numbers: skill difficulties, rider strengths and
   durations, base carrying slots (pack base 3, minimum 2, *illustr.*; items
   design 5.1). Armour values and Strength thresholds are set in the armour
-  design (6.2, 7.1).
+  design (6.2, 7.1). Class hit points are not builders' numbers: the
+  flat 11 and the HP tiers 6 / 7 / 8 are the client's, and Recovery 4 / 2
+  (`recovery.base`, `recovery.perLevel`) the lead's (death and healing
+  design 7.1, 8) (cross-document comparison 2026-11-23, CC-15).
 - Which save each rider calls for.
 - The signature use for each skill's mastery, except Perception's
   (Tactician, section 7.2).

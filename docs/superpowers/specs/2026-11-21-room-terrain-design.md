@@ -99,8 +99,9 @@ may leave a fixed, short-lived Miasma cloud that never drifts or spreads
 **Change prefix.** This design uses **TR-n** ("terrain"). A grep for
 `TR-[0-9]` across the 19 approved documents finds 0 hits. The research
 drafts and model briefs each numbered their own TR rows; this document
-issues **one** register, TR-1 to TR-30 (17; TR-30 added after the
-check), and no draft id is used
+issues **one** register, TR-1 to TR-31 (17; TR-30 added after the
+check; TR-31 added 2026-11-23, cross-document comparison 2026-11-23,
+CC-86), and no draft id is used
 anywhere in it. Local id schemes, each grep-checked with 0 hits:
 tensions **TT1–TT16**, cover rules **CV1–CV8**, kit placement rules
 **KP1–KP9**, combos **K1–K5**, numbers findings **TN1–TN17** **(new
@@ -583,7 +584,7 @@ Each is met in section 14.
 | **Terrain layer** | An authored interior for one room template: its Clearway, sockets and phase sockets (6.2.5) |
 | **Socket** (terrain) | A square or group in a layer that a piece or patch of a fixed class may occupy; distinct from FL's Portal sockets and enemies 10.4 slots |
 | **Phase socket** | An arena socket that changes state on a boss phase (e), proven in both states (6.11) |
-| **Interactive feature** | For DEP-A1: a condition square, a contact hazard, a harm square or a Keg (TR-21) |
+| **Interactive feature** | For DEP-A1: a condition square, a contact hazard, a harm square or a Keg (TR-21). **Pending request (segment 4 asks; change HZ-31; M2; hazards design 6.15, O13, 18):** segment 4's Stirs, Cords, Voids and vents also count as interactive features for DEP-A1 and KP2. This document owns the definition; nothing changes until this owner rules (cross-document comparison 2026-11-23, CC-7) |
 | **Environment damage** | Damage from a collision, a contact hazard, a harm square, a Keg burst, a Conduct or (M3) an ignition; source `environment`; rider-free (6.5.2) |
 | **Collision band / contact band / harm band / Keg band** | The flat damage values of 11.1: collision 2/3/3 by the pusher's level band (the Vanguard design's indexing, kept); contact 3/4/4 and harm 2/3/3 by the level band of the floor's lowest expected level; Keg 4/6/8 by floor (3.4 indexing is a lead's call after the check) |
 | **Hazard-edge save** | Any Reflex save against forced movement into a hazard: the 10.2 save, the contact save and the harm-square save (6.5.2). Every rule that reads "hazard-edge save" reads all three |
@@ -998,7 +999,10 @@ asserts nothing it has not proven (FL-15).
 - **KP2.** **Every** F2–5 fight-room layer has at least 1 **mandatory**
   interactive feature at path distance 3–6 from some
   `partyEntrySquares` square (DEP-A1; TR-21; was "≥ 50%"). One piece
-  may meet KP1 and KP2 at once.
+  may meet KP1 and KP2 at once. **Pending request (change HZ-31; M2;
+  hazards design 6.15, O13):** Stirs, Cords, Voids and vents count for
+  KP2 as interactive features (3.4); nothing changes until this owner
+  rules (cross-document comparison 2026-11-23, CC-7).
 - **KP3.** Cluttered fight rooms are ≤ 30% of a floor's fight rooms
   (Wrecker parity, TN7): a cluttered layer can be picked only for a slot
   the reservation step tagged `cluttered` (6.2.5). A rule, not a
@@ -1040,7 +1044,7 @@ TerrainLayer {
   id, templateId, wetness?: dry|wetEdge|flooded,       // Choir bands (FL 7.5)
   minFloor, maxFloor,
   clutterRole: open|standard|cluttered|guardPost|elite|forecourt|coverRoom|alcove|nonCombat|arena,
-  tags: (teaching|signature|plank)[],                   // what the layer can serve (6.2.4)
+  tags: (teaching|signature|plank|clock|void)[],        // what the layer can serve (6.2.4); clock, void: segment 4 (HZ-2; CC-91)
   lessonTag?,                                           // floor-1 teaching layers (6.5.6)
   clearway: Square[],                                   // 6.2.2
   sockets: Socket[],                                    // sorted by socketId
@@ -1081,8 +1085,9 @@ PhaseSocket { socket: Socket, phase, off: PieceKind|SquareClass|none, on: PieceK
   bounded draw by `Bound` (change SV-1; M1; seeds and validation design
   4.1, 4.3); it is registered as a `leaf-formula` row, its approved
   count unchanged (change SV-2; M1; seeds and validation design 4.2).
-  It runs at stage GS5, after LS13, EventDraw (GS3) and the arena stamp
-  (GS4), and before hazards (GS6), traps (GS7), AP1 and enemies 10.5
+  It runs at stage GS5, after LS13, EventDraw (GS3) and, **conditional
+  on the pending stamp request below**, the arena stamp (GS4)
+  (cross-document comparison 2026-11-23, CC-68), and before hazards (GS6), traps (GS7), AP1 and enemies 10.5
   step 2 (change SV-9; M1; seeds and validation design 4.4). It
   draws, in this order **(lead's call, after the check)**:
   1. **Reservation:** fight-room slots, sorted by (`effectiveIndex`,
@@ -1109,11 +1114,21 @@ PhaseSocket { socket: Socket, phase, off: PieceKind|SquareClass|none, on: PieceK
      as dummies, so counts stay fixed and the arena interior has one
      source. Nothing changes until this owner rules; if refused, the
      stamp runs after GS6 and overwrites (BR 4.1.3 as it reads today),
-     and the arena node's slot draws stay fixed.
+     and the arena node's slot draws stay fixed. Until the BR and ROOM
+     owners confirm SV-9, every GS4 stamp reading in this document is
+     conditional on this request (cross-document comparison 2026-11-23,
+     CC-68).
 - **Layer candidates:** the layers for (`templateId`, orientation) with
   `minFloor` ≤ floor ≤ `maxFloor`, the room's wetness band, and the
   slot's reserved tag if it has one; an untagged slot never takes a
-  `cluttered` layer. Sorted by layer id and picked by the bounded draw.
+  `cluttered` layer. **Segment 4's tags (change HZ-2; hazards design
+  6.2.2, 6.2.3):** a layer may carry `clock` or `void` only where
+  segment 4's room-role and quota rules allow it (no Void or Stir in
+  the roles 6.2.2 bars; `void` only in drop themes; at most one clock
+  and, in M2, one Void region per room); segment 4 supplies the rule
+  and this step reads it. A slot tagged `clock` or `void`, like every
+  slot not tagged `cluttered` (KP3), never takes a cluttered layer
+  (cross-document comparison 2026-11-23, CC-91). Sorted by layer id and picked by the bounded draw.
   For a Supper bay template, the previous main-path bay's layer id is
   excluded (FL 7.8), and the draw is still spent; V9 proves ≥ 2
   candidates for every bay template.
@@ -1580,7 +1595,11 @@ save. TR-10 adds this as a new obstacle-hazard branch of 10.2; it is
   order of the moved units' **starting** squares, the first 2 units
   whose move reaches a contact hazard or a harm square roll the save.
   Every later unit rolls nothing and stops as against an ordinary
-  obstacle (the collision band if a non-verb part contributed).
+  obstacle (the collision band if a non-verb part contributed). **The
+  cap is one shared counter per use** across contact hazards, harm
+  squares and (segment 4) Void squares; a unit beyond it stops before a
+  Void as a non-early stop (change HZ-9; hazards design 6.4;
+  cross-document comparison 2026-11-23, CC-90).
 - The hazard piece takes nothing.
 - **The preview headline shows the difference** a failed save makes
   over a plain obstacle ("Spikes: 55% for +1"), not the raw band.
@@ -1718,8 +1737,10 @@ replacing this section's earlier suggestion:
 - a non-elite monster that falls is removed and defeated (`voidFall`,
   paid as a kill); elites and group leaders **Clutch** the edge once
   per fight; bosses are `noDrop`;
-- a party unit **Dreamfalls**: it takes the fall band (the contact
-  band), which can never take it below 1 HP (the FallFloor), and is
+- a party unit **Dreamfalls**: it takes the fall band per hazards
+  design 6.4 (the contact band, or the harm band where its 6.11 item 5
+  requires it, typed by the Void's skin; cross-document comparison
+  2026-11-23, CC-93), which can never take it below 1 HP (the FallFloor), and is
   placed Prone on the room's **Snag**, a proven landing on the party
   side, chosen by the Snag rule (primary, secondary, overflow), not on
   the nearest safe square; it is Groggy until the end of its first turn
@@ -1918,7 +1939,7 @@ creates a square kind outside its theme's home set.
 | Vanguard: Wrecker | Contact hazards and Furnishings multiply collision partners; Ram into a brazier; Brink beside harm and condition squares; Battering Force against faces | `HewCeiling` with the contact term below, run with observed `collisionRate` and `contactRate` per theme (Ram at level 5+ reaches 450–496‰ in cluttered rooms on the toy); KP3 cap; `TeeteringUptimeOnBosses` ≤ 25% of boss turns *(illustr.)*, with the lever "bosses steady at turn start" held in reserve (19.2) |
 | Vanguard: others | Low lines to hold; Shieldwall's reaction AC replaces cover (CV4) | Doorway holds gain no cover (Portal squares) |
 | Shade | Tall nooks as Hide spots; cover at range; lurker sockets; "Needs a tall piece to hide" | Hide-spot band KP4; `HideSpotsPerRoom` against `hideSuccess` 700‰; the Shade yardstick re-run |
-| Arcanist | Areas and saves ignore cover (the anti-artillery role); Gust and Reel pay the typed collision band against contact hazards, Shockwave and Squall the contact band; Keg ignition; K2 burn-away; Conduct | Gust contact counted in the at-will rider bound (engine); area cap 2; DEP-A1 by "interactive feature"; the solo floor-1 down rate with the adopted cover arm; `ArcanistComboShare` |
+| Arcanist | Areas and saves ignore cover (the anti-artillery role); Gust and Reel pay the typed collision band against contact hazards, Shockwave and Squall the contact band; Keg ignition; K2 burn-away; Conduct | Gust contact counted in the at-will rider bound (engine); area cap 2, one shared counter across contact, harm and Void squares (HZ-9; cross-document comparison 2026-11-23, CC-90); DEP-A1 by "interactive feature"; the solo floor-1 down rate with the adopted cover arm; `ArcanistComboShare` |
 | Herald | Give Ground into hazards (capped at 2 contacts per action); saves ignore cover; Frighten near hazards pins routers | Give Ground's "tool, not a lean" budget |
 | Companions | Shunt like any unit; Jostle, Heave and Barge are non-verb and collide | Prop verbs never offered on companion turns unless the player opens the target |
 | Launcher users | Take cover against monster artillery; lose ~13–25% against covered targets | Precision 75% line; damage-taken veto ≥ 50%; launcher family floor ≥ 60% |
@@ -1993,8 +2014,10 @@ locks design 7.8), of kind `arenaDevice`, one per boss (F5: two)
   terrain slot spent as dummies (6.2.5; seeds and validation design
   4.4). **M1 reading (told plainly):** Old Ragged's
   root-columns are template walls, not RT pieces, and count as its Tall
-  clusters and line-of-sight Deny under RS 12's M1 "No terrain" (boss
-  rooms design 5.3).
+  clusters and line-of-sight Deny; RS 12's M1 terrain is Tall and Low
+  pieces as blockers only, per 12 (change TR-31; cross-document
+  comparison 2026-11-23, CC-86), and the root-columns sit beside those
+  blockers (boss rooms design 5.3).
 
 ### 6.12 Previews and UI (no rules in display; change TR-23)
 
@@ -2644,7 +2667,7 @@ owner, and V9 calls it where noted.
 | `FreeSpaceAfterClutter` | ≥ 6 free squares per unit (FL 6.3) |
 | `RoomMixAfterClutter` | Open room keeps a 5×5 core and a 3×6 lane |
 | `ClutterBand` | Role band, both ends checked on all-on and all-off |
-| `ReservationCapacity` (floor) | Every Blueprint and rule choice has enough fight slots and eligible layers for the reserved `teaching` or `signature`, `plank` and `cluttered` tags; Supper bay templates have ≥ 2 layers (6.2.5). KP3, KP8, KP9 and the Plank minimum follow by construction |
+| `ReservationCapacity` (floor) | Every Blueprint and rule choice has enough fight slots and eligible layers for the reserved `teaching` or `signature`, `plank` and `cluttered` tags, and (M2) segment 4's `clock` and `void` tags on layers its eligibility rule allows, none of them cluttered (change HZ-2; cross-document comparison 2026-11-23, CC-91); Supper bay templates have ≥ 2 layers (6.2.5). KP3, KP8, KP9 and the Plank minimum follow by construction |
 | `KitCoversRulesKeys` | Every theme kit offers ≥ 1 PieceKind for each socket `rulesKey` its layers use (6.2.5) |
 | `CoverPresence`, `ArtilleryFlank`, `Floor1NoCoveredStarts` | CV8, with the halves, every start socket and the landing test as defined there; initial state only |
 | `HideSpotBand` | KP4, by enumeration over the nook-touching optional sockets (6.2.5) |
@@ -2759,12 +2782,12 @@ Segment 3 takes the knock-into *system*, not drop hazards.
 
 | Segment | Receives from segment 3 | Owns |
 |---|---|---|
-| 4 Hazards | The piece and square classes, bands, caps, `ThemeSix`, the Remnant record and its environment-only source rule | Catalogues and density inside the caps; drops; bile; Teetering counting; vents |
-| 5 Traps, locks, checks | Plank and Shunt checks naming the ladder; Overturn strips that never include a Clearway square; **traps and pieces (lead's call, after the check):** a Furnishing may end on a trap's trigger square, never springs a trap and never hides a known trap's marker; trap damage is outside the one-instance cap (6.3.6, 6.4); segment 5 may narrow both. **Narrowed by segment 5 (change TL-14; M2):** weighted plates (a piece ending on a plate or trapdoor springs it; one act springs at most one trap); the cap exclusion kept (TL-18) (traps and locks design 6.7, 6.10) | DCs; traps; door verbs; the out-of-combat Plank cost; how traps and pieces interact beyond these defaults |
-| 6 Encounter placement | Start sockets with cover data (derived by segment 6 from FL `startZone` squares; change EP-5); `Floor1NoCoveredStarts`; KP5's ambush clause (defined, change EP-8); nooks as lurker sockets; the terrain-using enemy per theme (encounter placement design 6.6.1, 6.8.3) | Who starts where; ambush templates |
-| 7 Loot | Furnishings never hold loot (reaffirmed, change LP-12; inset containers instead). **Pending request (change LP-11; segment 7c asks; M2):** set pieces an Alcove can take as its default occupant when a container would exceed the floor's container cap; if none are offered, the Alcove keeps a container and the cap is logged, not enforced (loot sources design 4.2, 14.2) | Containers and contents |
-| 8 Events | Furnishing kinds by id. **Pending request (change EV-2; segment 8 asks; M2):** wall-mounted (RC1+) Alcove set pieces that can host the floor-1 Curiosity, first in the F1 host order; such a set piece takes the set-piece slot LP-11 prefers, never empties a leaf, never displaces a container 7c's cap needs and never sits on a walkable square; if none are offered, the F1 host falls to a free leaf side room, then none, logged; `F1CuriosityPresence` is reported to FL and segment 3 before F1 pool sizes freeze (events design 4.2, 14.2) | Events that name a Furnishing kind; Curiosity content and placement |
-| 9 Boss rooms | 6.11's caps, phase sockets and `PhaseSocketsBoth` | Interiors, counterplay identity, each boss's one authored terrain move (arena templates and Guises, change BR-1; boss rooms design 4.1, 5) |
+| 4 Hazards | The piece and square classes, bands, caps, `ThemeSix`, the Remnant record and its environment-only source rule. **Taken up by the hazards design (segment 4, approved 2026-11-21; changes HZ-1 to HZ-30)** (cross-document comparison 2026-11-23, CC-93) | Catalogues and density inside the caps; drops; bile; Teetering counting; vents |
+| 5 Traps, locks, checks | Plank and Shunt checks naming the ladder; Overturn strips that never include a Clearway square; **traps and pieces (lead's call, after the check):** a Furnishing may end on a trap's trigger square, never springs a trap and never hides a known trap's marker; trap damage is outside the one-instance cap (6.3.6, 6.4); segment 5 may narrow both. **Narrowed by segment 5 (change TL-14; M2):** weighted plates (a piece ending on a plate or trapdoor springs it; one act springs at most one trap); the cap exclusion kept (TL-18) (traps and locks design 6.7, 6.10). **Taken up by the traps and locks design (segment 5, approved 2026-11-21; changes TL-n)** (cross-document comparison 2026-11-23, CC-93) | DCs; traps; door verbs; the out-of-combat Plank cost; how traps and pieces interact beyond these defaults |
+| 6 Encounter placement | Start sockets with cover data (derived by segment 6 from FL `startZone` squares; change EP-5); `Floor1NoCoveredStarts`; KP5's ambush clause (defined, change EP-8); nooks as lurker sockets; the terrain-using enemy per theme (encounter placement design 6.6.1, 6.8.3). **Taken up by the encounter placement design (segment 6, approved 2026-11-22; changes EP-n)** (cross-document comparison 2026-11-23, CC-93) | Who starts where; ambush templates |
+| 7 Loot | Furnishings never hold loot (reaffirmed, change LP-12; inset containers instead). **Pending request (change LP-11; segment 7c asks; M2):** set pieces an Alcove can take as its default occupant when a container would exceed the floor's container cap; if none are offered, the Alcove keeps a container and the cap is logged, not enforced (loot sources design 4.2, 14.2). **Taken up by the loot designs (segments 7a–7c, approved 2026-11-22; changes LE-n, IR-n, LP-n)** (cross-document comparison 2026-11-23, CC-93) | Containers and contents |
+| 8 Events | Furnishing kinds by id. **Pending request (change EV-2; segment 8 asks; M2):** wall-mounted (RC1+) Alcove set pieces that can host the floor-1 Curiosity, first in the F1 host order; such a set piece takes the set-piece slot LP-11 prefers, never empties a leaf, never displaces a container 7c's cap needs and never sits on a walkable square; if none are offered, the F1 host falls to a free leaf side room, then none, logged; `F1CuriosityPresence` is reported to FL and segment 3 before F1 pool sizes freeze (events design 4.2, 14.2). **Taken up by the events design (segment 8, approved 2026-11-22; changes EV-n)** (cross-document comparison 2026-11-23, CC-93) | Events that name a Furnishing kind; Curiosity content and placement |
+| 9 Boss rooms | 6.11's caps, phase sockets and `PhaseSocketsBoth`. **Taken up by the boss rooms design (segment 9, approved 2026-11-22; changes BR-n)** (cross-document comparison 2026-11-23, CC-93) | Interiors, counterplay identity, each boss's one authored terrain move (arena templates and Guises, change BR-1; boss rooms design 4.1, 5) |
 | 10 Exploration and information | The previews and chips of 6.12; the "Needs a tall piece to hide" reason; glyphs. **Answered by the exploration and information design (segment 10, approved 2026-11-23; its 5, 9.2):** every 6.12 surface placed in its catalogue; `PreviewExactness` extended to the noise preview and Detour quote; the `CanSee` corner reading (XI-2; 6.2.1) | Overlays, chips and UI |
 | 11–12 Seeds and validation | The `terrain` stream and its draw counts, `terrainDigest`, V9 enumeration, `PreviewExactness`. **Answered by the seeds and validation design (segments 11–12, approved 2026-11-23; its 4.3, 5.2, 11, SV-3):** `terrain` registered under `attempt/{a}` as a `leaf-formula` row with `hzTagMax` reserved (6.2.5); `terrainDigest` as a GS5 stage digest; V9 phased in the consolidated suite (11.2); `PreviewExactness` with its V18t partner (11.3). **Pending request (BR and ROOM):** the stamp before terrain and the arena-node dummies (6.2.5) | The stream tree (its 4.3), release seed set (its 4.11), retry logging (`GenerationRetried`, `StageRetried`, `GenerationFallback`, `GenerationDefect`; its 5.7) |
 
@@ -2917,9 +2940,10 @@ and TR-6's Overturn and Haul.
 | TR-28 | Ability 8.x targeting; conditions 18.7 (attacking ends Hidden); weapons 9.3 (unchanged: no improvised throw) | Shoot an object (6.3.7) | — | Lead; M3 |
 | TR-29 | RS 8.2 and RT-20 reading; trinkets 23 | Floor-1 typed Low pieces, not hazards (6.5.6) | — (told plainly) | Lead; trinkets owner told |
 | TR-30 | Vanguard 6.4 rule 8 `HewCeiling` (lead's call); Vanguard 10.1 pass table; the tuning file beside `collisionRate` | The contact term of 6.10: per-use damage counts `contactRate` and P(save); the per-unit clause reads the collision band only, the contact surplus bounded by `ContactLethalityBound` and the top-up cap; `contactRate` joins the tuning file | — (told plainly) | Lead; Vanguard owner applies |
+| TR-31 | RS 12 M1 row ("No terrain", read to admit Old Ragged's root-columns; lead's call) | M1 terrain is Tall and Low pieces as blockers only, per 12 M1 (no cover rule, nothing movable, no hazards); Old Ragged's root-columns stay template walls, not terrain pieces (6.11). Added 2026-11-23 (cross-document comparison 2026-11-23, CC-86) | — (a reconciliation of 12 with RS 12) | Lead; RS owner applies |
 
 Waves: TR-1, TR-3, TR-5, TR-17 (stream, reservation step, layers,
-Clearway), TR-18 (partial), TR-19 and TR-20's stub-glyph rule in M1;
+Clearway), TR-18 (partial), TR-19, TR-20's stub-glyph rule and TR-31 in M1;
 TR-2, TR-4, TR-6 to TR-16, TR-17 (save state), TR-18 (full), TR-20 (the
 rest) to TR-26, TR-29 and TR-30 in M2; TR-27 and TR-28 in M3, with
 TR-6's Overturn and Haul.
@@ -2947,12 +2971,15 @@ The owed rows are the single list in 17; by owner:
   TR-24 (Shade 8.1), TR-8's Arcanist sentence.
 - **The DH owner:** TR-23 (17.6, 17.7).
 - **The RS owner:** TR-1, TR-20, TR-22, TR-17's snapshot fields, TR-18's
-  validator list.
+  validator list, TR-31 (RS 12 M1; cross-document comparison 2026-11-23,
+  CC-86).
 - **The floor layout owner:** TR-17 (FL 6.1, 6.6, 8.2, 11.1, 11.2),
   TR-19.
 - **Dungeon generation segments 4–12:** every hook in 13 (segments
+  4–9 taken up by their approved designs, 13; segments
   11–12's answered by the seeds and validation design 11, with its
-  pending stamp request in 6.2.5), including
+  pending stamp request in 6.2.5; cross-document comparison 2026-11-23,
+  CC-93), including
   segment 4's catalogues, drops and vents, segment 5's DC ladder,
   segment 6's start sockets, and segment 9's arena interiors and
   authored terrain moves.

@@ -762,7 +762,8 @@ All **(lead's call)** except the level, which is **(settled, ability
   `holdTheLine`, `opening`, `elementPair`, `cadenceFrighten`) and each
   subclass lists the `mechanicIds` it introduces; `SubclassCopiesBaseLean`
   (12.2) compares the two lists, not utility rows. Intended results:
-  Bastion introduces `challenge` (passes, deepening protection); Binder
+  Bastion introduces `squareUp` (passes, deepening protection;
+  cross-document comparison 2026-11-23, CC-61); Binder
   introduces `controlDuration` (passes); Dirge introduces
   `twoTargetFrighten` (passes, deepening morale); Cutthroat introduces
   `silentKillBroken` (passes; its Surprised clause is a trigger on
@@ -1535,8 +1536,9 @@ saves.
   never applies Frightened itself; Herald design 7.2) and a weapon
   attack.
 - **Slots and spells:** `camp` slots.
-  - The fear spells need **T6 moved to M2 (CL-1).** Until that is
-    approved, the Herald's routs run on T5 alone.
+  - The fear spells need **T6 moved to M2 (CL-1).** CL-1 is applied
+    (2026-11-18), so T6 for class fear spells is at M2 (cross-document
+    comparison 2026-11-23, CC-61).
   - Marching calls grant Spurred to several allies.
   - **Heal cards:** *Mending Word*, tier 1, a bonus action at range 6,
     healing exactly the target's Recovery; higher tiers add targets, never
@@ -1567,7 +1569,8 @@ saves.
   units included**, makes a Will save or is Frightened `turns:1`, and is
   never routed (Herald design 7.9). Wards, fear and mind immunity,
   Rallied and Emboldened block or resist it as usual, and "Routed wins"
-  over Panicked. Gated on CL-1.
+  over Panicked. Gated on CL-1, which is applied (T6 at M2;
+  cross-document comparison 2026-11-23, CC-61).
 - **Subclasses:**
   - **Dirge** (M2): **Antiphon** (not "Two Voices"; change HR-8):
     Cadence's Frighten may target two enemies within 2 squares of each
@@ -2345,6 +2348,9 @@ shows the Vanish clause.
 - **Multiclassing (M4):** the model, inside the dip guards (7.7).
 - **Dungeon generation:** `SeedHasTarget` and its `seedTarget`
   predicates; the floor-1 cowable group before the boss room (CL-10).
+  CL-10 is hosted by the floor-1 Circuit (floor layout design 6.7,
+  change FL-10) and change EV-14; `seedTarget` is realised by encounter
+  placement design 6.17 (cross-document comparison 2026-11-23, CC-61).
   Taken up for `SeedHasTarget` by segments 11–12: executed in V12g at
   AP2, and `NameCollision` run by `V7.NameRegistry` (change SV-20;
   seeds and validation design 5.2, 5.4).
@@ -2389,7 +2395,9 @@ for the client's review were confirmed by the client:
 
 These are not open items for this document. Stage 2 (section 14: the
 full class tables and all evidence) is the next stage of the classes
-design and stays future work. The rest come back to the client only if
+design and is taken up by the four class designs (Vanguard, Shade,
+Arcanist and Herald designs; cross-document comparison 2026-11-23,
+CC-9). The rest come back to the client only if
 a report or a later design triggers them:
 
 - a reliance report the lead proposes to turn into a gate;

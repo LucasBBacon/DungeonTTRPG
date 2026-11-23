@@ -319,7 +319,9 @@ The approved documents fixed *that* notable loot is a fixed, curated,
 pre-rolled per-floor budget with no junk, *how many* notables each
 channel holds, *what* a rarity tier is worth (C1 / U2 / R3 / VR4), and
 *that* coin exists, is run-scoped and is spent only at camp **(settled,
-MAIN 4.6; ENM 15; ITEMS 10, 12)**. None of them said what the budget is
+MAIN 4.6; ENM 15; ITEMS 10, 12)**, at a Ticket lock (M3) and, Later, at a
+wandering trader **(agreed 2026-11-23, cross-document comparison Q-1;
+ITEMS 10.1; cross-document comparison 2026-11-23, CC-8)**. None of them said what the budget is
 measured in, how value rises by depth, how much coin a floor holds, what
 "+1 rarity step" means against the depth gates, what pays for risk, or
 what the last floor pays when no camp follows it.
@@ -410,7 +412,9 @@ curve so deaths land where DH 18.2 wants them.**
   (**agreed**). Supply 8, potion and tonic 12, Remedy 30, Wax Key 24 /
   28 / 32 / 36 by camp (TL 6.11). Pegs P1–P5, K1, K2 (CN 9.3).
 - **Coin** (ITEMS 10.1–10.2, **agreed**): one run purse, spent only at
-  camp, lost at run end; found coin from containers and caches; salvage
+  camp, at a Ticket lock (M3) and, Later, at a wandering trader **(agreed
+  2026-11-23, cross-document comparison Q-1; cross-document comparison
+  2026-11-23, CC-8)**, lost at run end; found coin from containers and caches; salvage
   about 1 + level ÷ 2 per resolved armed unit, sized at 10–15% of found
   coin (ENM 15.7, I-11); Sell and Scrap a separate stream; starting coin
   about 15 per class kit.
@@ -910,7 +914,8 @@ premium and is logged; its VP is unchanged.
   after the check)**.
 - **Run totals** *(illustr.)*: field + boss ≈ 95 VP over about 34
   counted entries; camp channel ≈ 4–20 VP taken. `CampVpShareOfRun` ≤
-  about 15%. AR 5.2's 33–42 notables per run holds; AR 5.7's per-slot
+  about 15%. AR 5.1's 33–42 notables per run holds (cross-document
+  comparison 2026-11-23, CC-50); AR 5.7's per-slot
   arithmetic is recomputed in the M2 simulator against these decks (a
   hook to AR).
 
@@ -1033,7 +1038,7 @@ premium and is logged; its VP is unchanged.
    | Vendor: supply, limited potions, tonics, Remedy, bases | Approved (ITEMS 10.3) |
    | Notables shop: the camp channel's 2 entries | Approved shape; count by LE-6 |
    | Wax Key (vendor, conditional; camp slot; sundries) | Approved (TL 6.11, TL-25) |
-   | Ticket lock (M3) | Approved (TL-32); peg proposal: price ≤ 60% of its cache's VP × 20 |
+   | Ticket lock (M3) | Approved (TL-32); a floor coin spend, allowed by ITEMS 10.1 as amended **(agreed 2026-11-23, cross-document comparison Q-1; cross-document comparison 2026-11-23, CC-8)**; peg proposal: price ≤ 60% of its cache's VP × 20 |
    | Trader and services | Later (ITEMS 10.9) |
    | Companion hire | **None**: free (CMP 7.8) |
    | Tithe Bowl (M3): a Lodestring or a Surveyor's Sketch | Filled by segment 10 (change XI-24; exploration and information design 4.6.3); Sketch 15 coin *(illustr.)*, Lodestring pegged at or above a healing potion at that camp (8.1) |
@@ -1190,7 +1195,8 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      still dealt** for the deficit and the slot test (*pending
      confirmation by the DH owner*; if refused, this item as approved).
      Inside the filter, `requiresBias` 3 is evaluated against the
-     **target alone**. Held lever `loot.dueSidegradeFromFloor` = 4 (the
+     **target alone**. Held lever `loot.levers.dueSidegradeFromFloor` = 4
+     (one data key, cross-document comparison 2026-11-23, CC-110; the
      approved F4–F5 sidegrade); moving it is a change to this item for the
      client and DH owner (item rolls design 4.9).
    - **Which card:** the lowest deck card with a tier above the slot's
@@ -1521,7 +1527,8 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      approved guarantee becomes allocation; presented in use during the
      fight (C's "try before you take", presentation only). **Plus the
      elite intel line (LE-18):** when the elite is resolved (killed,
-     Yielded, Routed or Cowed) or its notable is stolen, whichever comes
+     Yielded or Routed; cross-document comparison 2026-11-23, CC-38) or
+     its notable is stolen, whichever comes
      first, the party learns one non-power boss fact for that floor (the
      boss signature item's card) **(trigger: lead's call, after the
      check)**. The fact is recorded in the floor's one **FactLedger**
@@ -1703,9 +1710,12 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    approved by the client, 2026-11-23; M1): step 3 is keyed per floor
    and per entry block, `loot/floor/{N}/{block}/{entry}`, 9 draws per
    identity entry (filter-first), blocks in approved order:
-   `containers`, `carried`, `dhBlock` (the DH 12.5 block), `resistant`,
-   `wandCharges`, `camp` (the next camp's notables), `vendorPotions`,
-   `trader` (Later). Approved positions become block addresses, so no
+   `containers`, `carried`, the boss channel, `trader` (Later), then any
+   returned trader slots on `containers` (Later), `dhBlock` (the DH 12.5
+   block), `resistant`, `wandCharges`, `camp` (the next camp's notables),
+   `vendorPotions`, `traderService` (the trader's service draw, Later)
+   (ITEMS 10.9; ENM 10.5; cross-document comparison 2026-11-23, CC-45).
+   Approved positions become block addresses, so no
    block's draws move when another block's entry count changes (answers
    LB8, LK13; seeds and validation design 4.3). **What the blocks mean
    (lead's call, after the check; dummies retired by SV-5):**
@@ -1720,10 +1730,10 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      chosen draw-free; item rolls design 4.13);
    - the **DH block** keeps its place in the block order, after the
      notables, and may share an HE-7 socket with the Due (6.6).
-   *Fallback if this owner refuses SV-5:* the sequential parent stream,
-   every data-dependent block padded to a declared cap, the counter
-   snapshotted and restored at GS1 on any retry (seeds and validation
-   design 4.3, 14.2).
+   *(Retired: SV-5 was approved by the client on 2026-11-23, so the
+   refusal fallback, the sequential parent stream with padded blocks
+   and a GS1 counter restore, no longer applies; cross-document
+   comparison 2026-11-23, CC-108.)*
 3. **The Due's slot (new lead's call; tier fixed after the check).** The
    Due takes the first container slot. That slot's former parent
    **ghost draw** is retired (change SV-5; M1): with keyed blocks there
@@ -1937,9 +1947,11 @@ matter".
   options on Lore thresholds, one boss-fact queue in the FactLedger
   (M3; change EV-29; events design 4.9). **Heirloom:** outside the budget
   (**settled**); counts as party-owned for the Due.
-- **Daily and shared seeds (Later):** fix class and species so smart-loot
-  runs are comparable (R-SEED-5 hook; shared and daily rules in seeds
-  and validation design 4.7, change SV-17, read).
+- **Daily and shared seeds:** shared seeds (M2) do not fix the hero;
+  daily seeds (Later) fix class and species so smart-loot runs are
+  comparable (R-SEED-5 hook; shared and daily rules in seeds and
+  validation design 4.7, change SV-17, read; cross-document comparison
+  2026-11-23, CC-109).
 
 ### 6.13 Hooks to 7b (what the tables must produce)
 
@@ -2423,7 +2435,8 @@ loot.heavyPurse = { permille: 200, floors: [2,3,4] }
 loot.fallbackCoin = 20; loot.f5SundryCoinPerDose = 12; loot.f5NonNotableLocksMax = 1
 loot.categoryWeight[floor]; loot.f5TacticalMaxPermille = 400
 loot.gearCurve[level] = { mainHand, offHand, armour, trinket1, trinket2 }   // VP
-loot.dreamsDue = { heroFloors: [1,3,5], sidegradeFloors: [4,5], f1Tier: U, waiveCoin: 20, extraDueAtParty: null }
+loot.dreamsDue = { heroFloors: [1,3,5], f1Tier: U, waiveCoin: 20, extraDueAtParty: null }
+loot.levers.dueSidegradeFromFloor = 4   // the F4–F5 sidegrade; one key (item rolls design 9.1; cross-document comparison 2026-11-23, CC-110)
 loot.requiresBias = { default: 3, bossCard: 4 }
 loot.premiumShareBand = [350, 500]; loot.leanRouteBand = [450, 550]
 loot.foundSupplyPerFloor = [1, 2]
@@ -2461,7 +2474,7 @@ call, after the check)**:
 - Events: `DreamsDueWaived`, `StepFitPremium`, `OfferResolved`,
   `BossCardUsabilityFallback`, `LootBindRemap`, `CoinSocketTrimmed`,
   `ItemDestroyed{dreamedAway}` (a new reason on the ITEMS 18.3 event),
-  `CoinChanged` (existing; sources unchanged).
+  `CoinChanged` (existing; this design adds no source; ITEMS 18.3's sources gain `ticketLock` for the Ticket lock, agreed 2026-11-23, cross-document comparison Q-1).
 
 ### 10.2 V13 `LootEconomy` (split after the check into static, generation-time and test parts; the M1 parts on F1)
 
@@ -2722,10 +2735,13 @@ shop presentation and camp sinks (camp and hub); the display (segment
 | 8 | **Solo coin surplus** persists by design | Reported; it buys only capped goods |
 | 9 | **Hoarding** may persist despite the cap and suggester | `HoardIndex`; use-side levers first |
 | 10 | **Owner dependencies:** DH (the Due reading), TL (the mixed-route rule, Unbolting), FL (the Viaticum room), ITEMS (signature VR), RS (Q5), camp and hub (hooks) | Each has a fallback in 18.2 |
-| 13 | **Two generation passes.** LootPlan predicts sockets that later passes can change | Named LootBind remaps, logged; V13g after LootBind; `LootBindRemap` rate |
-| 14 | **The Q5 screen.** The client may have meant the ITEMS 10.4 camp reward card | Closed: the client accepted the boss reward card reading on 2026-11-22 (6.12, 18.1) |
 | 11 | **Clock:** the Treasure count may invite completionism | `TallyChaseSeconds` |
 | 12 | **All evidence is toy** | Every number is owed a simulator re-run before it settles |
+| 13 | **Two generation passes.** LootPlan predicts sockets that later passes can change | Named LootBind remaps, logged; V13g after LootBind; `LootBindRemap` rate |
+| 14 | **The Q5 screen.** The client may have meant the ITEMS 10.4 camp reward card | Closed: the client accepted the boss reward card reading on 2026-11-22 (6.12, 18.1) |
+
+Rows 11–14 are in number order (cross-document comparison 2026-11-23,
+CC-110).
 
 ---
 
@@ -2779,8 +2795,10 @@ and take effect at that wave.
 
 **Readings recorded inside this design (no approved text changes):**
 - ITEMS 12.5's "the floor's top allowed tier" reads "the top tier that
-  has a legal record for the signature's category", and signatures are
-  exempt from the VR `perFloorMax` (6.3; the ITEMS owner confirms);
+  has a legal record for the signature's category" (6.3); the
+  signature VR-cap exemption reading is **withdrawn** (change IR-13): a
+  VR signature consumes its floor's VR slot, *pending the ITEMS owner*,
+  with 18.2's fallback (cross-document comparison 2026-11-23, CC-107);
 - TL 6.11's "+1 rarity step inside the budget", TL 6.15's "+1 rarity
   step" and HZ 6.10's "+1 rarity step" read as the one step rule of 6.9;
 - TL 6.11's "one camp notables slot" Wax Key reads as a third camp
@@ -2791,8 +2809,9 @@ and take effect at that wave.
   the DH owner confirms);
 - RS 6.4's LootDoorInvariant holds when the door changes only what is
   shown (6.12; the RS owner confirms);
-- `tier4ScrollsPerRunBeforeFinalBoss` is off by default and binds only
-  when engaged (3.4);
+- `tier4ScrollsPerRunBeforeFinalBoss` is engaged at 1 by default from
+  M2 (change IR-16; 3.4); it binds while engaged (cross-document
+  comparison 2026-11-23, CC-107);
 - Q5's "that floor's camp card" reads as the Perilous floor's boss
   reward card (ENM 17.5), accepted by the client on 2026-11-22 (6.12,
   18.1);
@@ -3221,10 +3240,9 @@ wave or a later design triggers them; each fallback is a new lead's call
 - **Pending requests from segments 11–12 (to this owner):** if the
   `dealShuffle/retry1` key is not confirmed, the key stands as written;
   if no per-floor V13g (f) quantity is defined, `NoMechanicsLootLoss`
-  stays TL's REP row; if SV-5 is refused, the sequential parent stream
-  returns, every data-dependent block padded to a declared cap and the
-  counter restored at GS1 on any retry (6.10, 10.2; seeds and
-  validation design 14.2).
+  stays TL's REP row (6.10, 10.2; seeds and validation design 14.2).
+  *(The SV-5 refusal fallback is retired: SV-5 was approved on
+  2026-11-23; cross-document comparison 2026-11-23, CC-108.)*
 - **The naming pass** renames every placeholder.
 
 ---
@@ -3292,7 +3310,7 @@ wave or a later design triggers them; each fallback is a new lead's call
 | LK15 | "Antechamber offer", "Vault", "Dreamer's Heart" | The first two not used; **told plainly:** the Dreamer's Heart is the F5 theme (RS; EP 7.10), so the tone line stands. Also renamed: "Threshold Cache" → Viaticum (RS 8.0 avoids "Threshold") |
 | LK16 | LE ids collide | One register LE-1..24 (A.6) |
 | LK17 | Client flags on illustrative numbers | Sell 250‰ is a lead's tuning call; client questions limited to Q1–Q6 |
-| LK18 | Unassigned hooks | 6.14 and 12 assign HZ 13 (7c), HZ 16 (7a, 6.9), EP 13 (7c with 7a values), ROOM 6.3.4 (the Viaticum), FL 6.9 (7c, every container non-empty, F5 included, with the overflow and filler rules of 6.4), TL 11.1 fields (7c), AR 5.2 / 5.7 (recomputed in M2) |
+| LK18 | Unassigned hooks | 6.14 and 12 assign HZ 13 (7c), HZ 16 (7a, 6.9), EP 13 (7c with 7a values), ROOM 6.3.4 (the Viaticum), FL 6.9 (7c, every container non-empty, F5 included, with the overflow and filler rules of 6.4), TL 11.1 fields (7c), AR 5.1 / 5.7 (recomputed in M2; cross-document comparison 2026-11-23, CC-50) |
 | LK19 | Bait cache honesty | A real +0 entry in LE-20; party-size dependence reported |
 | LK20 | Waves: Keybearer, Twin Coffer, Perilous Door | The purse follows a fixed chain from the bound Keybearer (8.3); the Twin Coffer M3 with TL-27 flagged; the Perilous Door M3 with RS |
 

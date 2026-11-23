@@ -391,6 +391,10 @@ call)**
   once every member wears that location.
 - **Suggested recipient:** a member with a free slot and a free matching
   location comes before value (16.4).
+- **M2 recompute:** the per-slot arithmetic above is recomputed in the M2
+  simulator against the loot economy design's decks (loot economy design
+  6.3 hook); 5.1's 33–42 notables per run is unchanged (cross-document
+  comparison 2026-11-23, CC-50).
 
 ### 5.8 Summary card and display
 
@@ -1232,8 +1236,12 @@ Examples are in 5.6.
 
 ### 13.6 M1 selection and starting kits
 
-M1 is one class, levels 1–3, one floor, three enemy types: the
-warhammer-and-shield soldier, the sling artillery and the claw brute.
+M1 is one class, levels 1–3, one floor, three enemy types: Kennel Mastiff
+(claw brute), Huntsman (warhammer soldier), Poacher (sling artillery); RS
+8.4. The RS 8.4 kits are dressed onto these 12.3 chassis (a hunting maul
+and boar-board shield, a hunting sling); a boar spear only on a promoted
+or F2+ pike variant, never at room level 1 (cross-document comparison
+2026-11-23, CC-2).
 
 - **M1 families:** leather, hide, chain shirt, chain mail, shield,
   unarmoured, natural.
@@ -1445,7 +1453,7 @@ Reliquary (Reliquary Shield, Uncommon): Raise, Guarding.
   "armourReductionCap": 4, "pittedCap": 2, "pittedRepairDifficulty": 13,
   "critDowngradeCapPerFight": 2, "reactionAcBonusesPerAttack": 1, "gearRollModeEffectsPerAttack": 1,
   "acEnvelope": { "sustainedMinHitPermille": 350, "chargedMinHitPermille": 150,
-      "rollModeMinHitPermille": 100 },
+      "rollModeMinHitPermille": 100, "coverMinHitPermille": 250 },
   "sharedVerbAllowlist": [ ["armour.chain_shirt", "armour.chain_mail", "averb.ringed"] ],
   "validation": { "verbDefencePermille": { "averb.supple": 20, "averb.weave": 25, "averb.studded": 15,
       "averb.sure_footed": 15, "averb.ringed": 10, "averb.overlap": 30, "averb.stalwart": 10,
@@ -1456,6 +1464,9 @@ All values *(illustr.)*, except `valueByCategory`, `mediumDexCap`, the
 `piercing` block and `armourReductionCap`, which are the client's
 decisions (Q2, Q3) and need client approval to change. A save records the
 file's hash, as `inventory.json` does. **(lead's call)**
+`acEnvelope.coverMinHitPermille` 250 is 11 item 1's positional row (M2;
+TR-4, room terrain Q1, agreed) (cross-document comparison 2026-11-23,
+CC-52).
 
 ### 16.3 State, queries and events
 
@@ -1841,8 +1852,9 @@ Stat model 6's AC formula and "Armour is hit or miss" and stat model 8.1
   least 3 legal families per piece location, as a running total each
   wave), within 5.4–5.6; neck, finger and none domains; capacity
   trinkets; the piece power target (17.3).
-- **Starting kits:** armour per class and companion (13.6; items 17,
-  row 3).
+- **Starting kits:** settled in the four class designs and the companions
+  design (13.6; items 17, row 3; companions design 8.3) (cross-document
+  comparison 2026-11-23, CC-51).
 - **Companions:** settled in `2026-11-20-companions-design.md` (approved
   2026-11-20; changes CMP-8, CMP-27, CMP-34): no ability increases (a
   fixed array per kit) and kit AC at or above the lowest legal AC
@@ -1854,7 +1866,9 @@ Stat model 6's AC formula and "Armour is hit or miss" and stat model 8.1
   assume.
 - **Dungeon generation and encounter content:** the **binding**
   Acrobatics requirement (at least 3 Acrobatics-gated choices per floor
-  from M2, with simulator evidence; 7.3); stealth content for Clatter.
+  from M2; 7.3) is met by floor layout design 6.4 and room terrain design
+  6.2.6; only the simulator evidence is owed (cross-document comparison
+  2026-11-23, CC-51). Stealth content for Clatter.
   The item rolls design (`2026-11-22-item-rolls-design.md`) sets how 14's
   properties are rolled on generated armour, shields and pieces (14.1;
   IR-4, M2), adds foci and shields to signature categories (5.5; IR-13)

@@ -985,8 +985,9 @@ target, which LS5 draws from the Blueprint's `bypassTargets[]` (6.8).
   near-pair partners at the far end (10) of the 9–10 band, behind a
   closed door where layout allows; and, only if `ChainPullRate` still
   misses after segment 6's own levers, dropping the Silk and Carnival
-  +1 on floors 4–5 or the floors 3–5 cap. Not rules until the FL owner
-  rules.
+  +1 on floors 2–3 or the floors 3–5 cap (encounter placement design
+  6.12 lever 4; cross-document comparison 2026-11-23, CC-89). Not rules
+  until the FL owner rules.
 - A Dormant-partner variant (half radius) is also allowed.
 
 **Gaol shut-door pairs (the enemies owner's call):**
@@ -997,7 +998,9 @@ target, which LS5 draws from the Blueprint's `bypassTargets[]` (6.8).
   reading that the hearing outline shows the pull before entry and the
   party closes it out of combat.
 - On floor 1 the Gaol has 1 shut-door pair, or, under the fallback, 1
-  near pair; never both, so floor 1's cap of 1 holds.
+  near pair; never both, so floor 1's cap of 1 holds. On hooded-cot
+  seeds it has neither (EP-13, M2; encounter placement design 6.17;
+  7.2) (cross-document comparison 2026-11-23, CC-88).
 - **Told plainly:** this loosens the static cluster check. A party that
   ignores it gets one joiner (cap 1). Its footsteps warning comes ≥ 1
   round ahead, so DH 6.4's floor-1 round-1 death bound is unaffected.
@@ -1053,9 +1056,11 @@ zero. Joiners stay a real, player-caused experience.
   party opens it mid-fight, the outline shows the patrol risk.
 - On Last Turning floors (6.8), the Bypass arm rejoins at the Forecourt
   or passes through a Circuit side room, so taking the stealth route means
-  meeting the patrol's route. Elsewhere the Bypass and the Circuit do not
-  meet, because the Circuit lives in the tail **(narrowed after the
-  check)**.
+  meeting the patrol's route. On floor 1 the Bypass arm rejoins at
+  room 3 (Gb+1), which is on the Circuit (CL-10), so the two meet there
+  (cross-document comparison 2026-11-23, CC-88). On other floors the
+  Bypass and the Circuit do not meet, because the Circuit lives in the
+  tail **(narrowed after the check)**.
 
 ### 6.8 Stealth, flee and retreat (change FL-9, FL-12)
 
@@ -1097,7 +1102,8 @@ zero. Joiners stay a real, player-caused experience.
 - **Experience reading:** a guard post's share is 100 (the RS 6.6 /
   enemies 20.1 table: 710 → 610), so every entry→antechamber path passes
   ≥ `preBossPool(floor, trimmed)` − 100: 410 standard, 310 on trimmed
-  floor 4, 410 on trimmed floor 5 and, on trimmed floor 3, the enemies
+  floor 4 (binding, RT-7; cross-document comparison 2026-11-23, CC-89),
+  410 on trimmed floor 5 and, on trimmed floor 3, the enemies
   owner's preBossPool − 100 (310 *(illustr.)*). The boss and the
   optional elite are excluded.
 - The patrol counts as present: it can be dodged by timing, not by
@@ -1105,7 +1111,11 @@ zero. Joiners stay a real, player-caused experience.
 - **Told plainly:** a party that takes the Bypass **and** times the
   patrol reaches 540 counting the boss (100%), below the 20.1 band.
   `MultiBypassRate` is reported and flagged to the enemies owner
-  (FL-21).
+  (FL-21). **Pending request (EP-23, M2; encounter placement design
+  6.10):** segment 6's Sleeping Ward sneak line answers FL-21 (d)'s
+  in-room sneak case (Den, Sleeper and Dormant lairs; `LairSneakRate`);
+  not a rule until the enemies owner rules (cross-document comparison
+  2026-11-23, CC-89).
 - **Told plainly (after the check):** on floors 2–5 the patrol's lap runs
   through the Forecourt, so a party that times its way past it usually
   meets it as an ordinary joiner in the boss fight (enemies 17.5 allows
@@ -1238,7 +1248,8 @@ zero. Joiners stay a real, player-caused experience.
   contradicted Afterimage updates silently. It ships only together with
   the noticing pre-stop. Not a rule until the FL owner rules; on a
   refusal segment 10 applies its cut steps (exploration and information
-  design 9.5).
+  design 9.5). Until the FL owner rules, segment 10's `stopOnResight`
+  defaults to true (cross-document comparison 2026-11-23, CC-124).
 - The post-boss walk is 60–97 squares (11–17 s) on the toy. The Way Back
   Latch is built in M3 and off by default (`PostBossBacktrack`
   decides).
@@ -1345,7 +1356,7 @@ or a slot rule above.
 | Piece | Rule | Floors |
 |---|---|---|
 | **Forecourt** (antechamber) | Main-path room n−2, always a Room node, never a corridor **(new lead's call)**; every path to the arena passes through it (LG3); themed per Blueprint | All |
-| Floor-1 Forecourt | Empty (no encounter), 5×9–7×11, one inbound Portal, no side room, no Alcove, off the Circuit; near-safe by RS 9.4's approved exception; hosts the `AntechamberCatchUp` (RS 9.4). **Reading to confirm (EV-2, M2; events design 4.2):** its walls may carry segment-8 Glimpses, read as "empty" because a Glimpse has no rules, no square and no click; the FL and RS owners confirm | 1 |
+| Floor-1 Forecourt | Empty (no encounter), 5×9–7×11, one inbound Portal, no side room, no Alcove, off the Circuit; near-safe by RS 9.4's approved exception; hosts the `AntechamberCatchUp` (RS 9.4). **Reading (EV-2, M2; events design 4.2):** its walls may carry segment-8 Glimpses, read as "empty" because a Glimpse has no rules, no square and no click; recorded in RS 9.4 as a reading of "empty", not a change (cross-document comparison 2026-11-23, CC-89) | 1 |
 | Floors 2–5 Forecourt | Counted as an empty or special room; 1–2 inbound main Portals; **always a Circuit waypoint** and the patrol's homeRoom and fight host, never guaranteed safe while the patrol lives; at most two Circuit side rooms attach, never touching the arena; the floor's fight-room size, with the free-space rule, LG12 flee exits and LG20 entry rules; may host a segment-8 micro-event, a 1-click Interlude with arena-facing facts only, `AntechamberScreened` kept (EV-2, EV-23; events design 4.1, 4.7) **(size and fight-host rules: lead's calls, after the check)** | 2–5 |
 | **Arena entrances** | Two **dog-leg** Arches from the Forecourt, ≥ 5 apart, never Doors; arena start zones ≥ 9 path squares from both. **`AntechamberScreened`, symmetric:** no Forecourt square more than 2 beyond an entrance has line of sight to any arena square more than 2 beyond that entrance, in either direction; a baffle or bend inside each Arch does it. The boss can therefore be shot from the Forecourt only while it stands in its own doorway band, where its reach covers the Arch **(symmetric form: lead's call, after the check)**. Segment 9 authors each Arch socket's baffle and reads the screen for Take Places (BR-1, BR-4; boss rooms design 4.1.1, 4.2.2) | All |
 | **Bossgate** | On the arena's far wall; blocks movement and sight and is not a hearing path until `BossDefeated` (canonical; LP's `BossResolved` is its alias, BR-37, M2; boss rooms design 4.2.4), then an Arch. Not an entrance: "the exits are never sealed" refers to the entrances (enemies 17.5, clarified) | 1–4 |
@@ -2187,7 +2198,10 @@ floor 5); counts only, never locations. On floor 1 the secret cache is
 excluded, so a found floor-1 secret-cache notable raises neither k nor
 n and shows as "+1 secret". **The party-bar tally (XI-11, M2;
 exploration and information design 4.4.4):** the floor strip's rooms
-cell reads "rooms e / t", where t = n + k from this line and e counts
+cell reads "rooms e / t", where t = n + k from this line (n the
+main-path room count, k the side-room count; not the Treasure field's
+k / n, which are field notables found and field notables in all;
+cross-document comparison 2026-11-23, CC-89) and e counts
 those Room nodes entered (Alcoves and corridors never count); never
 split by role; the one named exception to segment 10's "no completion
 meter" rule. **Naming (XI-19, M2; exploration and information design
@@ -2536,8 +2550,8 @@ companions 7.4).
 
 | Wave | Content |
 |---|---|
-| **M1** | Kennel subset: 2 Blueprints, a small rule library, the M1 kit budget and the 8.0 kit metrics. Graph rules LG1–LG10 (LG3 and LG5 in their floor-1 form; LG10 with no depth-2 spur, since the Latch is M2), LG12 (non-door flee exits, FL-12's M1 clause), LG15–LG16, LG18–LG20. Portal kinds Arch, Door, Locked, Bossgate; the party **open** verb (FL-8). Corridors and the socket router; `mainPathIndex`, `effectiveIndex` and the index rules (FL-13); the `expectedTenths` order; slot hosts (FL-3). The Bypass as a quiet corridor with a Door; the Circuit with a cover room and isolation; hearing graph and matrices. HE-7 and HE-4 reservation at AP1 with the floor retry (LR3, `attempt/{a}`; SV-4, SV-9, M1; seeds and validation design 5.4, 5.5). The arena socket with dog-leg Forecourt Arches (`AntechamberScreened`). The Stairhead with plain stairs, warning and Scrap (items 24 is M1). V8 core sub-checks; runtime assertions; template and Blueprint editor tools. Enemies 25 M1 rows; DH-32 |
-| **M2** | All 8 core grammars plus the Wake if it passes; 4–6 Blueprints per theme (6–8 for floor-1 themes and the Heart); the Precinct family; the Portal skin matrix. Grille, Drape, Squeeze, Latch, Hairline (Q3 counts). The party close verb; Listen; the floor count line. Elite vantage; the antechamber on every floor (floors 2–5 on the Circuit, Q2); retreat anchors (enemies 25 M2 row). Near pairs; Gaol shut-door pairs (if the owner agrees). Last Turning; Landmarks, compass, tints and minimap data; trimmed Blueprints; signature rooms. Full V8; all reports and arms; travel auto-walk (segment 10) |
+| **M1** | Kennel subset: 2 Blueprints, a small rule library, the M1 kit budget and the 8.0 kit metrics. Graph rules LG1–LG10 (LG3 and LG5 in their floor-1 form; LG10 with no depth-2 spur, since the Latch is M2), LG12 (non-door flee exits, FL-12's M1 clause), LG15–LG16, LG18–LG20. Portal kinds Arch, Door, Locked, Bossgate; the party **open** verb (FL-8). Corridors and the socket router; `mainPathIndex`, `effectiveIndex` and the index rules (FL-13); the `expectedTenths` order; slot hosts (FL-3). The Bypass as a quiet corridor with a Door; the Circuit with a cover room and isolation; hearing graph and matrices. HE-7 and HE-4 reservation at AP1 with the floor retry (LR3, `attempt/{a}`; SV-4, SV-9, M1; seeds and validation design 5.4, 5.5). The arena socket with dog-leg Forecourt Arches (`AntechamberScreened`). The Stairhead with plain stairs, warning and Scrap (items 24 is M1). Minimap data (8.1; XI-7, M1) (cross-document comparison 2026-11-23, CC-88). V8 core sub-checks; runtime assertions; template and Blueprint editor tools. Enemies 25 M1 rows; DH-32 |
+| **M2** | All 8 core grammars plus the Wake if it passes; 4–6 Blueprints per theme (6–8 for floor-1 themes and the Heart); the Precinct family; the Portal skin matrix. Grille, Drape, Squeeze, Latch, Hairline (Q3 counts). The party close verb; Listen; the floor count line. Elite vantage; the antechamber on every floor (floors 2–5 on the Circuit, Q2); retreat anchors (enemies 25 M2 row). Near pairs; Gaol shut-door pairs (if the owner agrees). Last Turning; Landmarks, compass and tints; trimmed Blueprints; signature rooms. Full V8; all reports and arms; travel auto-walk (segment 10) |
 | **M3** | More Blueprints per unlock; seams at the Stairhead; Nightmare-tier layout variants (to be designed); Overlook; Chute; Strongroom (floors 2–3); Drop-bar doors (Gaol, gated, back to the client); Way Back (off by default); the Supper on floor 3 (`LayoutDistinct` already applies to the Choir–Supper pair from M2) |
 | **M4** | Breadth: rules and templates |
 | **Later** | The Lucid Key secret door (reserved Site); trader and Pledge rooms (tags reserved from M2). Split levels: not recommended; listed only so the client can refuse them explicitly |
@@ -2574,7 +2588,7 @@ companions 7.4).
 | 8 Non-combat rooms | Q rooms, the floors 2–5 antechamber micro-event socket, trader and Pledge tags, signature rooms (the `curiosityHost` tag), floor-1 Alcove set pieces and free leaf side rooms as Curiosity hosts (EV-2; events design 4.2) | Fills (Curiosities, Interludes and Glimpses; events design 11), trader, shrines, Dream Fragments. Segment 8 places no Landmarks: layout owns the sockets, segment 4 the ticks (EV-35; events design 4.2) |
 | 9 Boss rooms | The 2×2-cell socket, two dog-leg Forecourt Arches ≥ 5 apart, the Bossgate, start-zone depth ≥ 9, the symmetric `AntechamberScreened` (6.11), the arena pull-back zoom bound (8.1) | Interior, counterplay feature, phases, Keepsake arena dressing; boss tuning with a patrol joiner (FL-21 (e); answered by the BR-13 proposal, pending); the authored arena stamped draw-free into an `arenaCell` sized to contain it (BR-1, BR-2; boss rooms design 4.1); `ArenaEngaged` and the Sanctum rest rule (BR-3, BR-31; boss rooms design 4.2) |
 | 10 Exploration and information | Minimap nodes and explored-room outlines, Portal glyph kinds, Landmarks, tints, travel paths, count-line data, the patrol waypoint schedule (Listen's "passing") | Fog, minimap UI and the rules-room overlay, Listen UI (occupancy, 9.2), Hairline display, the hearing outline (including the self-teaching shut-door prompt and the elite vantage risk), interrogation facts, auto-walk (pausing at doors, 6.10), Overlook (M3), the Stratum Card line. Answered by the exploration and information design (XI-7; 4.1–4.3, 4.3.6, 4.7, 4.8.4, 4.9.8) |
-| 11–12 Seeds and validation | The `layout` and `dressing` children and their derivation, draw counts, V8 and its enumeration, the assertion list and the shared floor assertion point | The stream tree, release seed set, retry logging. Answered by the seeds and validation design (4.3 the stream tree, `layout` and `dressing` under `attempt/{a}`; 4.4 the pipeline; 4.11 the release seed set; 5.4 the assertion list at AP1 and AP2; 5.5 and 5.7 retry logging) |
+| 11–12 Seeds and validation | The `layout` and `dressing` children and their derivation, draw counts, V8 and its enumeration, the assertion list and the shared floor assertion points AP1 and AP2 (cross-document comparison 2026-11-23, CC-89) | The stream tree, release seed set, retry logging. Answered by the seeds and validation design (4.3 the stream tree, `layout` and `dressing` under `attempt/{a}`; 4.4 the pipeline; 4.11 the release seed set; 5.4 the assertion list at AP1 and AP2; 5.5 and 5.7 retry logging) |
 
 ---
 

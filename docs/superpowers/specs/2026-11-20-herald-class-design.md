@@ -217,7 +217,7 @@ All **(settled)**:
 | Classes 8.6 | Chassis: Presence / Wisdom; Standard 7; Will; medium ceiling, shield allowed (Totem-or-shield kit); `weaponTraining {simple: all, martial: hands == 1}`; Totem (Loom) never required; 2 of Leadership, Intimidation, Medicine, Lore, Perception; Medium; Cadence (Frighten, Spurred, Rekindle); Rally unchanged; Harrowing Word; heal cards (Mending Word, exactly Recovery, may target the Herald); concentrator 2 of 2; Dirge and Hearth M2, Warcaller and Pennant unlocks; Scatter *(illustr.)* | 7.1 |
 | Classes 8.6 **(agreed, stage 1 Q1)** | Leans: morale primary; ally tempo secondary; healing only through spell cards and the Hearth | 5, 6.3 |
 | Classes 5.6 | `Floor1ClassSpread` ≤ 10 points, every pick and subclass, an M2 release gate; about 60% of limited power after level 1; `SeedHasTarget`; the per-round boss breakdown | 7.7, 11.5 |
-| Classes 6.1–6.6 | Lean, never require; the spread rule; forbidden grants; the utility map (morale A P, H s; control A P, H s); fallback damage types; reliance reports **(agreed, Q3 of stage 1)** | 5, 7.1 |
+| Classes 6.1–6.6 | Lean, never require; the spread rule; forbidden grants; the utility map (morale H P; control A P, H s; classes 6.4) (cross-document comparison 2026-11-23, CC-78); fallback damage types; reliance reports **(agreed, Q3 of stage 1)** | 5, 7.1 |
 | Classes 7.3–7.8 | Subclasses and aspects; the published ladder, caster column; the cap of eight and offers; at most four things to read; dip guards; companions and hero classes | 7, 9 |
 | Classes 8.2 | One `restDefensiveTool`, half Recovery, 1 per rest, 2 from 6; 2 kit potions; camp share 40–60% | 7.3, 11.10 |
 | Classes 10 | Pennant, not Banner; banned head words | Front matter |
@@ -2386,8 +2386,10 @@ all four launch classes and of the Arcanist pip-trap and novice reports
 
 - **Pick the Question (universal; HR-19):** when a fight's one floor
   fact is earned, the player chooses its category from the enemies 14.6
-  list (trap, secret, the boss's Lore entry, a room's layout); the
-  priority order is the default selection. One fact per fight is
+  list (trap, secret, the boss's Lore entry, a room's layout, the floor
+  key: its carrier and its lock, F-KEY; change TL-23) (cross-document
+  comparison 2026-11-23, CC-78); the priority order is the default
+  selection. One fact per fight is
   unchanged.
   **Pending request (exploration and information design 4.6.4; XI-25;
   M3):** F-TREASURE joins the list after F-KEY (default priority

@@ -670,7 +670,11 @@ step 9 (enemies design 14.3, 14.9).
 
 A **damage event** is one ability use against one target, one turn-start
 tick batch (6.8), or one other separate damage source (a collision, a
-Retaliating shroud, a Condemned burst). **(lead's call)**
+Retaliating shroud, a Condemned burst). **(lead's call)** Each attack roll
+or dart of a multi-attack ability, and a separately resolved burst, is
+its own damage event (consumables design 14.4; Arcanist design 8;
+change CN-28) (cross-document comparison
+2026-11-23, CC-57).
 
 For each damage part, in data order:
 
@@ -681,18 +685,24 @@ For each damage part, in data order:
 **Save chain (change CN-15, DH-17; consumables design 14.3, 14.4; death
 and healing design 15.2, 20.3):** in order, before hit points are lowered:
 a Downed target discards the event → these per-part steps, temporary hit
-points included → the event's damage is summed over all its parts → the
-floors (out-of-combat and undetected-trap damage to a party unit clamps at
-1 hit point) on the post-absorption total → the chain. If the total would
-still take the unit to 0 or less, the chain runs in order and the first
-link that fires ends it: Death-warded → talisman. Each link declares
+points included → the event's damage is summed over all its parts → if
+the target Ducks, the total is halved (death and healing design 20.3 step
+3a: max(1, FloorDiv(total, 2)); Shade design 7.4, SH-6) → the
+floors (death and healing design 10.4: damage to a party unit clamps at
+1 hit point when any floor there applies: out of combat, undetected trap,
+FallFloor, unwarned Stir act, or lurker opener after its 20% cap;
+cross-document comparison 2026-11-23, CC-28) on the post-absorption
+total → the chain. If the total would still take the unit to 0 or less,
+the chain runs in order and the first link that fires ends it:
+Death-warded → talisman. Each link declares
 `recharging` in data (Death-warded true, the talisman false). At most one
 recharging prevention fires per unit per fight; a recharging link capped
 by this rule is skipped without spending its charge. The talisman is
 outside the cap. Last Ward is removed (retired, death and healing design
-15.3). The concentration difficulty uses the pre-save total (the summed
-total, before the floors and the chain). Owner of the order: the death and
-healing design (15.1).
+15.3). The concentration difficulty uses the pre-save total, which is
+the step-3a value (the summed total after any Duck, before the floors and
+the chain) (cross-document comparison 2026-11-23, CC-29). Owner of the
+order: the death and healing design (15.1).
 
 - At most one transform per damage event, and a transform never triggers
   another.
@@ -853,7 +863,11 @@ stops on the last safe square and gains Teetering.
   band (never below 1 hit point, 10.4), leaves the grid at once, is
   placed Prone on the room's Snag at the end of the use (an entry, but
   Snags are never hazards; grapples end), is Groggy until the end of
-  its first turn after placement, and is not dropped again that fight.
+  its first turn after placement, and is not dropped again that fight:
+  a later Void failure that fight leaves it on its last safe square,
+  Prone and Teetering, with the fall band floored at 1 hit point
+  (change HZ-9; hazards design 6.4 item 4) (cross-document comparison
+  2026-11-23, CC-27).
   A rescue push by an ally lands on the secondary Snag and costs the
   faller its next action. Flying units cross; Downed units are never
   moved. A sprung trapdoor's Void (from floor 2, only in a V10-proven
@@ -2033,7 +2047,11 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     Brink is read literally, so it reads harm squares but not contact
     hazards **(change TR-10; room terrain design 6.5.2)**. A Void-edge
     success (only if RT-14 is ruled "does not count"; never on a boss)
-    and an elite's Clutch also give it (10.2) **(change HZ-9)**.
+    and an elite's Clutch also give it (10.2) **(change HZ-9)**, and so
+    does a party unit's second Void failure in a fight, which leaves it
+    on its last safe square, Prone and Teetering, the fall band floored
+    at 1 hit point (10.2; change HZ-9; hazards design 6.4 item 4)
+    (cross-document comparison 2026-11-23, CC-27).
   - Interactions: Rooted and Anchored make the edge safe.
 - **Hobbled** — minor · Later
   - Effect: the first time each turn it moves 3+ squares by its own
@@ -2304,8 +2322,10 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
 - **Revealed** — minor · **M2**
   - Effect: on application it ends Hidden, Invisible, Veiled and Blurred;
     it cannot regain them; attacks against it ignore concealment. Its
-    outline shows only while an opposing unit has line of sight (`CanSee`;
-    change XI-2; exploration and information design 4.1.2).
+    outline shows only while an opposing unit that contributes sight (for
+    the party, living and non-Downed) has line of sight (`CanSee`;
+    change XI-2; exploration and information design 4.1.2)
+    (cross-document comparison 2026-11-23, CC-30).
   - Intensity: binary.
   - Duration: `turns:2`; tonic.
   - Sources: radiant rider on a hidden or invisible target **(change C9)**
@@ -2473,7 +2493,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
 - **Cowed** — exploration state, morale state, enemy-only · **M2**
   - Effect: a weak group will not start combat and steps aside for the
     party. Any harmful act against a member breaks it, and the attacked
-    members become Shaken. Experience is paid once per member.
+    members become Shaken (Later; in M2 they start with no state; enemies
+    design 14.8) (cross-document comparison 2026-11-23, CC-24).
+    Experience is paid once per member.
   - Intensity: binary, group-wide.
   - Duration: until the floor ends.
   - Sources: out-of-combat Intimidation **(settled job, stat model 7.1)**;
@@ -2813,8 +2835,10 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Intensity: binary. The instance records the instanceIds of the items
     in that set when it lands (as Teetering records its hazard), not the
     set's slot. It applies only if the active set holds at least one weapon
-    or focus it would affect (not a shield, a natural weapon or a Sure Grip
-    weapon); otherwise it does not apply, takes no lingering slot, and the
+    or focus it would affect (not a shield other than a Reliquary Shield,
+    a natural weapon or a Sure Grip weapon; change AR-15; cross-document
+    comparison 2026-11-23, CC-30); otherwise it does not apply, takes no
+    lingering slot, and the
     rider or effect counts as not attempted. A unit that already has
     Notched cannot gain it again ("No effect: already Notched", 6.3).
   - Duration: `untilCamp`. A Mechanics repair during a short rest ends it:
@@ -3082,9 +3106,11 @@ Each tied to a risk:
   movement (10.1); pushes and drags stop before hazard squares. No
   condition terrain.
 - **M2:** the 22 M2 conditions and Downed, Flying and Jumping; riders;
-  Treat and tonics; Scarred and its rest-screen support; water, web, fire
-  and oil-slick squares with the burn-away rule; hazard edges, landing and
-  drags into hazards; boss shed actions; lingering conditions and rest
+  Treat and tonics; Scarred and its rest-screen support; water, web, fire,
+  oil-slick and bile squares with the burn-away rule; harm squares and the
+  contact-hazard obstacle branch (11.5; cross-document comparison
+  2026-11-23, CC-26); hazard edges, landing and drags into hazards; boss
+  shed actions; lingering conditions and rest
   cures; the four morale states (enemies design 14).
 - **Later:** the remaining catalogue, each behind the simulator gate.
 
@@ -3119,11 +3145,12 @@ Each tied to a risk:
   generous. The one-lingering-boon rule is the lever.
 - **Tonic supply becomes the real balance knob.** Track tonics used per
   fight; pricing belongs to the items design.
-- **Rules owned by designs that do not exist yet:** hazard placement
-  (dungeon generation); Disarmed, Coated, Clinging,
-  Pitted Armour and tonics (items; Disarmed's rules are now in weapons
+- **Rules owned by designs that do not exist yet:** Disarmed, Coated,
+  Clinging and Pitted Armour (items; Disarmed's rules are now in weapons
   design 16 and Pitted Armour's in armour design 9.4, both still Later)
-  **(change DH-24: death and healing is settled)**.
+  **(change DH-24: death and healing is settled)**. Settled since: hazard
+  placement (hazards design 6.2, 6.11) and tonics (consumables design 11)
+  (cross-document comparison 2026-11-23, CC-25).
 - **Protected content.**
   - Generic names that match other games' conditions need a check before
     shipping. Dazed is the one kept; the fallback name is "Addled".
@@ -3186,18 +3213,24 @@ the exact section it touches.
   pending, and Pitted Armour is settled: see the armour design
   (2026-11-17, 9.4) **(change AR-16)**. Consumables, scrolls and wands
   are settled in the consumables design (2026-11-17); coatings and Coated
-  stay Later **(change CN-26)**.
+  stay Later **(change CN-26)**. Tonics are settled in consumables design
+  11 (cross-document comparison 2026-11-23, CC-25).
 - **Enemies:** morale (Demoralised, Routed, Emboldened, Cowed) is resolved
   by enemies design 14; elite definitions for the depth gates (7.1) and
   enemy condition kits within the budget (9.2) are settled there too.
-- **Dungeon content:** traps (11.6), their set-piece status for the depth
-  gates, and which floors hold them.
-- **Dungeon generation:** hazard and terrain placement by theme, and the
-  hazard lethality guarantee.
+- **Dungeon content:** settled: traps (11.6), their set-piece status for
+  the depth gates, and which floors hold them are in traps and locks
+  design 6.9, 6.10, 6.19 and 6.20.
+- **Dungeon generation:** settled: hazard and terrain placement by theme,
+  and the hazard lethality guarantee, are in hazards design 6.2 and 6.11.
+- **Still pending with these owners:** TR-13 (9.3, 11.6), RT-16/TL-39
+  (11.6), HZ-13 (11.3) and HZ-17 (10.1) (cross-document comparison
+  2026-11-23, CC-25).
 - **Death and healing:** no longer pending: settled in the death and
   healing design (2026-11-17), which owns the save chain order, the
   floors and Downed's routes. Scarred is settled here **(change DH-24)**.
-- **Boss actions** (M2): the shed action.
+- **Boss actions** (M2): settled: the shed action is in enemies design
+  17.5 (BR-7 pending) (cross-document comparison 2026-11-23, CC-25).
 
 ## 26. Open items for the client
 
