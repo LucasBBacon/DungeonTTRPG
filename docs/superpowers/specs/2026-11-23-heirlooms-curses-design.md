@@ -45,7 +45,7 @@ Items marked **(lead's call)** were filled in by the design lead inside approved
 
 **The client's brief.** "Let's go for the heirlooms and curses. I haven't got much input for these; a consideration I have is to make the names of the curses a mix of old concepts of mind diseases, like melancholia, and fantasy curse names, but I'll leave this for your judgement. Do the usual research and considerations." Standing guidance: not an exact 5E port; design is not limited by quantity; the art team is eager; **combat is key**; contest the client or approved views where warranted.
 
-**Change prefix.** This design uses **HL-n**. A case-insensitive grep for `HL-[0-9]` across `docs/` (the 32 approved documents and the reviews) finds **0 hits** (re-run while writing). The research drafts, the three models and the two components used colliding local HL numbers (HL-1 to HL-22 and HL-30 to HL-42); this document issues **one register, HL-1 to HL-30** (13), and no id has two meanings (A.3).
+**Change prefix.** This design uses **HL-n**. A case-insensitive grep for `HL-[0-9]` across `docs/` (the 32 approved documents and the reviews) finds **0 hits** (re-run while writing). The research drafts, the three models and the two components used colliding local HL numbers (HL-1 to HL-22 and HL-30 to HL-42); this document issues **one register, HL-1 to HL-31** (13; HL-31 was added after the design check), and no id has two meanings in it (A.3).
 
 **Validator.** **V22 `HeirloomsCurses`** is free. V1–V7 belong to RS, V8 FL, V9 ROOM, V10 HZ, V11 TL, V12 EP, V13 LE, V14 IR, V15 LP, V16 EV, V17 BR, V18 XI, V19 SV, V20 CH and V21 SK (`StartingKits`, SK-10). A grep for `\bV22` finds **0 hits** (re-run while writing). V22 joins the consolidated suite only through **HL-14** (RS 11.2 suite table; SV 5.2 becomes V1–V22), as V21 did through SK-10.
 
@@ -54,7 +54,7 @@ Items marked **(lead's call)** were filled in by the design lead inside approved
 ## 0. At a glance
 
 - **An heirloom stays exactly what ITEMS 14 says** (settled): an authored, fixed-Uncommon profile template; a fresh instance each run; taken as the one starting boon; it never grows and its template is never lost. This design adds the missing half, **how heirlooms are earned**, which no approved document says; a display-only history called **Grip-marks**; and fixes for three seams.
-- **Earning (change HL-1, HL-2; agreed, Q2).** Every route is an achievement; none is a copied instance, a Memento or a death key.
+- **Earning (change HL-1, HL-2, HL-31; agreed, Q2).** Every route is an achievement; none is a copied instance, a Memento or a death key.
   - R1, class milestones (one per class);
   - R2, a **Deed bequest** from any personal run, win or death: keyed to a carried item being credited with a boss's fall (a Core `BossFelled` fact: the weapon or focus that dealt the killing blow, or a shield or armour worn by a standing unit when the boss falls), tier-gated, chosen later at the shelf, never on the death path (lead's call, after the check);
   - R3, **Heart-won** templates: one per final boss, so three at M3;
@@ -119,23 +119,23 @@ Items marked **(lead's call)** were filled in by the design lead inside approved
 
 | # | Question | Answer **(agreed)** | Rejected | Change |
 |---|---|---|---|---|
-| Q1 | Naming | **A.** Three registers by scope: obsolete complaint names on Maladies only; folk words on item curse cost lines; "Oath of the ..." on meta-curses; naming rules NR1–NR10 and the blocklist; Melancholia kept with a weight-only rule, a mandatory tone sign-off and fallback name Atrabile; the display-only Plain names setting, content note and a sensitivity read before Later or M4 content lock (5.3; read as "before M4 content lock" once Q5 moved Maladies to M4, F20) | B: mind-disease names on all curses (the brief's literal mix). C: fantasy names only | HL-13 ⚑, HL-27, HL-30 |
-| Q2 | Heirloom earning | **A.** R1 class milestones; R2 Deed bequests from any personal run (win or death, keyed to the Deed, tier-gated, chosen later at the shelf, never on the death path); R3 Heart-won; R4 Oath wins and R5 Redeemed Later (4.1.2) | B: milestones and Heart-won only | HL-1 ⚑, HL-2, HL-6, HL-7 ⚑ |
-| Q3 | Hidden item curses | **A.** The class-wide "Not yet read: may Cling" chip, presentation only; the approved curse mechanics unchanged (4.2) | B: full reveal before equipping. C: silent, as approved | HL-15 ⚑ |
+| Q1 | Naming | **A.** Three registers by scope: obsolete complaint names on Maladies only; folk words on item curse cost lines; "Oath of the ..." on meta-curses; naming rules NR1–NR10 and the blocklist; Melancholia kept with a weight-only rule, a mandatory tone sign-off and fallback name Atrabile; the display-only Plain names setting, content note and a sensitivity read before Later or M4 content lock (5.3; read as "before M4 content lock" once Q5 moved Maladies to M4, F20) | B: mind-disease names on all curses (the brief's literal mix). C: fantasy names only | HL-13 ⚑, HL-27, HL-30 ⚑ |
+| Q2 | Heirloom earning | **A.** R1 class milestones; R2 Deed bequests from any personal run (win or death, keyed to the Deed, tier-gated, chosen later at the shelf, never on the death path); R3 Heart-won; R4 Oath wins and R5 Redeemed Later (4.1.2; "keyed to the Deed" is met through the Core `BossFelled` fact the Deed records, because the Deed itself is display only, T2) | B: milestones and Heart-won only | HL-1 ⚑, HL-2 ⚑, HL-6 ⚑, HL-7 ⚑, HL-31 ⚑ |
+| Q3 | Hidden item curses | **A.** The class-wide "Not yet read: may Cling" chip, presentation only; the approved curse mechanics unchanged (4.2; the class is every card that can be cursed, T3) | B: full reveal before equipping. C: silent, as approved | HL-15 ⚑ |
 | Q4 | Malady sources | **A.** Priced Curiosities and shrine bargains, plus intent-telegraphed elite abilities on F3–F4; never bosses, traps, hazards or random imposition; never on F1 or F5 (4.3.3; the intent is telegraphed by the ENM 13.2 forecast pattern, never a committed intent, T1) | B: choices only (no enemy sources) | HL-19 ⚑ (request) |
-| Q5 | Waves | **A.** Item curses and Maladies move to **M4** (an agreed-Later item moved by the client); Oaths and the other opt-in pieces stay Later (10) | B: keep curses Later | HL-29 ⚑ |
-| Q6 | Meta-curses | **A.** Request the MAIN/RS owners of the CH-24 slot to fill it with Oaths (kind only, content rewards); a request with a fallback (4.5) | B: leave the slot unlit until the difficulty decision | HL-21 ⚑ (request) |
+| Q5 | Waves | **A.** Item curses and Maladies move to **M4** (an agreed-Later item moved by the client); Oaths and the other opt-in pieces stay Later (10; rune cures stay Later with their hosts, T11) | B: keep curses Later | HL-29 ⚑ |
+| Q6 | Meta-curses | **A.** Request the MAIN/RS owners of the CH-24 slot to fill it with Oaths (kind only, content rewards); a request with a fallback (4.5; on refusal the fallback reaches B's outcome, T14) | B: leave the slot unlit until the difficulty decision | HL-21 ⚑ (request) |
 
 ### 0.3 Decisions in brief
 
 | # | Decision | Wave | Marking |
 |---|---|---|---|
-| 1 | Naming: three registers by scope; NR1–NR10; blocklist; Plain names; content note; sensitivity read (0.1, 5.3) | M2 rules, M4 Malady content | lead's call; **agreed, Q1**; HL-13 ⚑, HL-27, HL-30 |
-| 2 | Heirloom identity: ITEMS 14 kept whole; the narrow-Uncommon authoring rule (4.1.1) | M3 | settled; HL-8 |
+| 1 | Naming: three registers by scope; NR1–NR10; blocklist; Plain names; content note; sensitivity read (0.1, 5.3) | M2 rules, M4 Malady content | lead's call; **agreed, Q1**; HL-13 ⚑, HL-27, HL-30 ⚑ |
+| 2 | Heirloom identity: ITEMS 14 kept whole; the narrow-Uncommon authoring rule (4.1.1) | M3 | settled; HL-8 ⚑ |
 | 3 | Earning: R1, R2 (tier-gated Deed bequest, keyed to the Core `BossFelled` credit), R3; R4, R5 Later (4.1.2) | M3 / Later | lead's call; **agreed, Q2**; HL-1 ⚑, HL-2 ⚑, HL-7 ⚑, HL-31 ⚑ |
-| 4 | Bequest timing: at most one offer per run, written at WO6 by the non-Core profile-progress step, queued one per family, chosen (Hang it or Set aside) at the next shelf visit or in Begin again's boon picker, never on the death path (4.1.2) | M3 | HL-6 (request to SV) |
+| 4 | Bequest timing: at most one offer per run, written at WO6 by the non-Core profile-progress step, queued one per family, chosen (Hang it or Set aside) at the next shelf visit or in Begin again's boon picker, never on the death path (4.1.2) | M3 | HL-6 ⚑ (request to SV) |
 | 5 | The F1 Due seam: any heirloom slot sets "arms satisfied" (4.1.4) | M3 | HL-3 ⚑ |
-| 6 | History: Grip-marks, display only, bynames only (4.1.5) | M3 | HL-5 |
+| 6 | History: Grip-marks, display only, bynames only (4.1.5) | M3 | HL-5 ⚑ |
 | 7 | Loss: never the template; never a Curiosity price (4.1.6) | M3 | HL-4 ⚑ |
 | 8 | Item curses: approved twins, the class-wide chip, folk cost lines (4.2) | **M4** | **agreed, Q3, Q5**; HL-15 ⚑, HL-16, HL-29 ⚑ |
 | 9 | Maladies: Cursed presets, own slot, Cast-off deeds, telegraphed sources (4.3) | **M4** | **agreed, Q4, Q5**; HL-17 ⚑ to HL-20, HL-29 ⚑ |
@@ -270,7 +270,7 @@ The research drafts surveyed these games and tables. Details the drafts marked "
 | CON 18.10 Cursed variants; desecrated shrines | 4.3 (HL-17 to HL-19) |
 | CON 16 condition budget and theme six | 4.3.3, 10 (HL-19, HL-29 reading) |
 | EV-43 shrine cures and bargains; EV 4.4.1 Strand "a curse ended" | 4.3.2, 4.3.3 (wave moved by HL-29) |
-| ENM 9.2 condition counts; ENM 15.3 carriers; ENM 13.2 forecasts, extended to Malady abilities | 4.3.3 (HL-19 ⚑) |
+| ENM 9.2 condition counts; ENM 15.3 carriers; ENM 13.2 forecasts, extended to Malady abilities; ENM 2 and 13.3 (read: no committed intents) | 4.3.3 (HL-19 ⚑; T1) |
 | FL 6.11 `BossDefeated`; IR 6.1 / CMP 8.7 Deeds | 4.1.2 R2 (HL-31 ⚑, the `BossFelled` credit) |
 | TK 8.2 / TK Q2 rings; Heartward Torc | 4.6 (HL-26) |
 | CL 9.1 Hexer / Baned | 11 (hook; no change) |
@@ -763,7 +763,7 @@ Every string is one whole-string key with named placeholders and translator note
 - **Glyphs**, registered in RC5, each a shape plus a word: **heirloom mark = a worn grip band**; **Cursed badge = a cross-barred ring** (placeholder; the thorned and knot rings are rejected); **Malady = a humour-wheel quarter** (placeholder; replaces the draft's "cracked circle", which shared the "cracked" grammar of DH's cracked-heart lethal tag); **not-yet-read chip = a folded page corner** (placeholder; replaces the draft's hollow diamond, which read as an empty LE 6.15 tier mark on the very cards that carry tier marks) **(lead's call, after the check)**. V22 (j) `GlyphsDistinctFromRegistry`: each new glyph passes the role-ID test against the **whole RC5 pattern registry** (LE 6.15 tier diamonds, CON 15 token clusters, BR's Rhythm marks and leash ring, EP's eye-tick ring, LP's floor ring, DH's cracked-heart tag) and against the other new glyphs, including together on a Burdened card and beside tier marks on one card, at greyscale and under the colour-blind filters.
 - A tarnish finish on known cursed and Burdened items; never on unidentified items, so nothing leaks.
 - **Clinging take-hold:** a brief cord-wrap on the hand, anchored to the UI and the model, never a floor particle (RC1); honours reduced motion; no flash.
-- **Afflicted tell (lead's call, after the check):** a fine engraved hatch arc on the unit's base, in the global skin, never at the head. The draft's "shadow halo" was the cartoon shorthand for depression and placed the Malady in the hero's head. It must pass the greyscale, colour-blind and role-ID gates against condition icons, the Scarred cue and the RC5 base marks.
+- **Afflicted tell (lead's call, after the check):** a fine engraved double arc (two thin concentric lines) on the unit's base ring, in the global skin, never at the head; never hatching, which is Rough terrain's pattern (TL). The draft's "shadow halo" was the cartoon shorthand for depression and placed the Malady in the hero's head. It must pass the greyscale, colour-blind and role-ID gates against condition icons, the Scarred cue and the RC5 base marks.
 - **Codex plates:** 9 Malady plates on an "Old Maladies" codex page, briefed as **emblems with no suffering figure**: Saturn's lead and sickle, the humour wheel, each humour's element and season, a glass vessel rather than a glass man. Dürer's Melencolia I is cited for engraving technique only. Sincere, never caricature; no asylum, physician or patient imagery; **no figure in a posture of grief, withdrawal or delusion, and no cloud, halo or shadow at a head** (the forbidden-imagery list) **(lead's call, after the check)**.
 - **Oath art (Later):** 8 Oath sigils plus rank rings for the gauge lamp and the Memento frames.
 
@@ -916,7 +916,7 @@ Keyed consumers (DS7):
 | (a) | s | templates are U, authored, flags set, `identifyDifficulty` 0, uncursed except a Burdened twin with an identical benefit; a Heart-won never equals its signature; each R2 template names one concrete base family | M3 |
 | (b) | s | `HeirloomValueCap` (4.1.1: value = U budget; never ▲ against any same-family U record); `HeirloomNoVerbClone` | M3 |
 | (c) | s | unlock source, hub object, goal text worded to the credit rule (`HeirloomGoalReadable`), `HeirloomKitFits` rows, at least 2 per class (`HeirloomCoverage`), `HeirloomUnlockLegal` (no death, loss or streak keys) | M3 |
-| (d) | s | Malady whitelist; `untilCamp`; a Core-observable deed by the afflicted unit, its Core events named, with its alternative (`CastOffAlwaysReachable`); every non-Oath source range inside F2–F4 and every Oath source range inside F2–F4; `MaladyEliteAgency`; `MaladyInThemeSix` (with the ability on and off); `MaladyNetHarder`; `MaladyNeverLowersMax`; no payload stacks with an heirloom line so as to zero an approved verb | M4 |
+| (d) | s | Malady whitelist; `untilCamp`; a Core-observable deed by the afflicted unit, its Core events named, with its alternative (`CastOffAlwaysReachable`); every source range (Curiosity, shrine, elite, Oath) inside F2–F4, each checked on its own; `MaladyEliteAgency`; `MaladyInThemeSix` (with the ability on and off); `MaladyNetHarder`; `MaladyNeverLowersMax`; no payload stacks with an heirloom line so as to zero an approved verb | M4 |
 | (e) | s | NameRegister NR1–NR10: blocklist (SRD spell names, SRD and 5E class and subclass feature names, trinket kind words, the player-facing heirloom word list); collision pool on names and display strings, fallbacks included, with recorded waivers; register by scope (whole word); the "Oath of the ..." form and unique Oath head nouns; `nameException` only on the Q1 Melancholia record, with `toneSignOff`; `MaladyFlavourDreamActs`; the forbidden-allusion list; `MaladyNeverOnHeirloom`; `NameKeyHasTranslatorNote`; `PlainNameKeyUnique`; locale overrides carry their checks | M2 (rules), M3 and M4 (rows) |
 | (f) | s | `OathKindOnly`, `OathNotNightmare`, `OathNeverEases`; `kitDelta` and waived gates declared; `requires` and `conflictsWith` set | Later |
 | (g) | s | cost-line buff test; `CostLineNoHardTransform`; preview coverage, including Graceless; a line with `requiresCondition` never ships before that condition; `CureTextMatchesHosts`; no comic-register string on a card face with a Malady name | M4 |
@@ -964,9 +964,9 @@ All reports are calibration class, beside DH 18.2: they inform the client and ne
 
 | Wave | Content |
 |---|---|
-| **M1** | Reserve `runModifierId` in the snapshot schema (HL-22) |
-| **M2** | Naming rules NR1–NR10 and the blocklist adopted for the naming pass (HL-13, HL-30); string keys reserved; the CON condition-budget reading (HL-29) and the theme-six rulings (RT-15, RT-16, EV-34) requested |
-| **M3** | 13 heirloom templates; R1–R3 (HL-1, HL-2); the Bequest via WO6 (HL-6); the HL-3 seam fix (after SK-4 closes); HL-4; Grip-marks (HL-5); HL-7 to HL-12; V22 (a)–(c), the (e) rows, (h), the (j) heirloom glyph and (l), via HL-14 |
+| **M1** | Reserve `runModifierId` in the snapshot schema (HL-22); register V22 in the RS 11.2 suite with only the (m) `RunModifierIdInConfigHash` field row live (HL-14) |
+| **M2** | Naming rules NR1–NR10 and the blocklist adopted for the naming pass (HL-13, HL-30), with V22 (e)'s rule rows live; string keys reserved; the CON condition-budget reading (HL-29) and the theme-six rulings (RT-15, RT-16, EV-34) requested |
+| **M3** | 13 heirloom templates; R1–R3 (HL-1, HL-2); the `BossFelled` Core fact (HL-31); the Bequest via WO6 (HL-6); the HL-3 seam fix (after SK-4 closes); HL-4; Grip-marks (HL-5); HL-7 to HL-12; V22 (a)–(c), the (e) rows, (h), the (j) heirloom glyph and (l), via HL-14 |
 | **M4** | **Item curses** (agreed, Q5; HL-29): cursed twins through `curseGate` with `loot.curse.permille` set, Clinging, the chip and equip lines (HL-15), the malign hint, five folk lines (HL-16), the Torc twin if TK agrees (HL-26). **Maladies** (agreed, Q5): HL-17 to HL-20; Curiosity, shrine, desecrated-shrine and elite sources; EV-43 shrine cures and bargains; the Stratum Card line; Plain names and the content note (HL-27); the sensitivity read and tone sign-offs before content lock. Onboarding lines (HL-28). V22 (d), (g), (j), (k), (m). Trinket heirlooms (HL-26); about 11 more templates |
 | **Later** | Oaths, after the MAIN/RS difficulty decision (HL-21; agreed, Q6); Burdened (HL-23); Redeemed (HL-24); R4; Eyebitten and Ill-Slept with their conditions (F15); share codes (HL-25); V22 (f), (i); growth in kind (held) |
 
@@ -979,16 +979,17 @@ All reports are calibration class, beside DH 18.2: they inform the client and ne
 | Owner | What this design needs from them (generated from 13) |
 |---|---|
 | ITEMS | HL-1, HL-8, HL-15, HL-16, HL-23, HL-24 applied; HL-29 (ITEMS 11, 13, 20 waves) |
-| SK | HL-3 (SK-4); HL-10 reading; the `noFallenHero` reading; Grip-marks bynames only (F17) |
-| CH | HL-9, HL-28; hub objects |
-| SV | HL-6, HL-11, HL-22, HL-25 |
-| CON | HL-17, HL-18; the Warded reading; HL-29 budget reading (CON 16, 18.1, 21) |
+| SK | HL-3 (SK-4); HL-10 reading; the `noFallenHero` reading; Grip-marks bynames only (F17); HL-31 (SK-5 named-piece Deeds, confirm) |
+| CH | HL-6 (Begin again picker), HL-9, HL-27, HL-28; hub objects; the shelf role-ID gate row |
+| SV | HL-6 (the profile-progress step, `bequestOffer`, `gripMark`, the run-end table), HL-11, HL-14, HL-22, HL-25 |
+| CON | HL-16 (CON 19 read), HL-17 (CON 6.1 coexistence), HL-18; the Warded reading; HL-29 budget reading (CON 16, 18.1, 21) |
 | EV | HL-4, HL-19; HL-29 (EV-43 to M4) |
-| ENM / EP | HL-19; the Iron Sleep record (held) |
+| ENM / EP | HL-19 (ENM: the 13.2 forecast extension and the `maladyAbility` slot; EP: the per-floor and antechamber filter); the Iron Sleep record (held) |
+| FL (Core events), IR, CMP | HL-31: the `BossFelled` event and its worn-piece credit; the worn-piece byname request (IR, CMP; SK confirms) |
 | DH | HL-7 (staging row), HL-12, HL-20 |
-| RS | HL-13, HL-14, HL-30; the Stratum line; the "Old Maladies" codex page; tone review |
+| RS | HL-13, HL-14, HL-21 (RS 6.11, Later), HL-30; the Stratum line; the "Old Maladies" codex page; tone review; the timbre table rows |
 | MAIN/RS difficulty decision | HL-21 (request; agreed, Q6) |
-| LE, IR | HL-29 (LE 8.5, LE 11; IR 4.15, IR 10 waves) |
+| LE, IR | HL-29 (LE 8.5, LE 11; IR 4.15, IR 10 waves); HL-21 (IR 4.15, LE 8.5 under the Crooked Road, Later) |
 | TK | HL-26 |
 | HR | the Herald boss-room line: no change (told plainly) |
 | CL | hook only: an enemy-facing "curse" button stays CL's and is never named with a Malady term |
@@ -1008,14 +1009,14 @@ All reports are calibration class, beside DH 18.2: they inform the client and ne
 | 5 | RS 7.6 watch-list | NR1–NR10; Calenture, Wanhope and "Geas" rejected; no madness-as-monster |
 | 6 | RC1: no lying UI | the chip; printed costs; truthful F5 text; recap annotation |
 | 7 | RC7 / RC9 | global skin; register by scope |
-| 8 | CON: "drained, never helpless"; agency enemy-only | the payload whitelist; Leaden floored at 1 |
-| 9 | CON 16 budget | Cursed presets (0 new ids); theme six declared; the M4 budget reading (HL-29) |
+| 8 | CON: "drained, never helpless"; agency enemy-only | the payload whitelist; no Malady lowers a maximum (`MaladyNeverLowersMax`); no cost line feeds a hard-condition transform (`CostLineNoHardTransform`) |
+| 9 | CON 16 budget | Cursed presets: nine new variant ids counted once (0 new budget entries); theme six declared; the M4 budget reading (HL-29) |
 | 10 | EV Q4 no mercy; EV 4.4.8 | StateBlind; no death keys; no cross-run power |
 | 11 | CH AN11 | marks, never counts; the Bequest off the death path |
 | 12 | SV Q1; SV-12 | seeded runs write nothing; `runModifierId` in the key |
 | 13 | DH 18.2 | no F1 or F5 sources; gated F2 delta; reports per arm |
 | 14 | ITEMS 11 free camp identify (agreed) | untouched; the chip is presentation only (agreed, Q3) |
-| 15 | Combat is key | Cast-off deeds; telegraphed elite intents; heirloom lines that read in fights |
+| 15 | Combat is key | Cast-off deeds by the afflicted unit; forecast-telegraphed elite Malady abilities (ENM 13.2's pattern); heirloom lines that read in fights |
 | 16 | Q5 wave move (agreed) | every item-curse and Malady row at M4 (10; HL-29) |
 
 ---
@@ -1036,48 +1037,49 @@ To be applied when the client approves this document. **This document edits no p
 | # | Document / section (current status) | Change | Flag | Approval | Wave |
 |---|---|---|---|---|---|
 | HL-1 | ITEMS 14 (new "Earning" bullet), ITEMS 17 row 7, CH 4.11; **MAIN 4.7 (decided, read)** | Earning routes R1–R5 (4.1.2) | ⚑ Decided (read); ⚑ Settled (ITEMS 14) | **Client (Q2, with this document)**; ITEMS, CH owners apply | M3 (R4, R5 Later) |
-| HL-2 | ITEMS 14 earning bullet | R2 tier gating; one unlock per family per run | — | Client (Q2); ITEMS owner applies | M3 |
+| HL-2 | ITEMS 14 earning bullet | R2 tier gating; one unlock per family per run; R2 before R5 for one family; at most one offer per run, in the 4.1.2 order | ⚑ Settled (ITEMS 14) | Client (Q2); ITEMS owner applies | M3 |
 | HL-3 | **SK 4.3 (SK-4)**, LE 6.6 item 2, ITEMS 14 placement bullet, V13g (g) (settled) | Any heirloom slot (weapon, focus, shield, armour) sets "arms satisfied"; the 20-coin waiver; no retarget; `HeirloomSlotParity` (4.1.4) | ⚑ Settled ("the Due never retargets" kept) | Lead's call; LE owner applies, DH, IR, SK owners confirm | M3 |
 | HL-4 | **EV 4.4.4 "Item offered" (agreed register)** | Heirlooms are never a price (4.1.6) | ⚑ Settled | Lead's call; EV owner applies | M3 |
 | HL-5 | IR 6.1 Whence, CMP 8.7, SV 4.6 profile memory, V14 (j) | Grip-marks, bynames only (4.1.5) | ⚑ Settled (IR 6.1 Deed-only rule, read) | Lead's call; IR, CMP, SV owners apply | M3 |
-| HL-6 | SV write order WO6 and `pendingProfile`; CH 4.10, 4.12 | `bequestOffer`, chosen at the shelf; never on the death path (4.1.2) | ⚑ Settled (read) | Request; SV owner rules; CH applies | M3 |
+| HL-6 | SV write order WO6 and `pendingProfile`; SV 5.5 (unravelled runs); CH 4.10 ("Begin again" boon picker), 4.12 | The non-Core profile-progress step at WO6; `pendingProfile` kinds `bequestOffer` (at most one per run) and `gripMark`; the pending queue, one per family, never overwritten; Hang it or Set aside at the shelf or in Begin again's picker; the run-end table; never on the death path (4.1.2, 4.1.5) | ⚑ Settled (read); ⚑ Agreed (CH 4.10, read) | Request; SV owner rules; CH applies | M3 |
 | HL-7 | **DH 5.8 item 9; DH staging "Later … a legacy hook" row (settled)** | The legacy hook answered as a Deed bequest at M3, with no power transfer; the staging row re-staged (4.1.2; F16) | ⚑ Settled | Client (Q2); DH owner applies | M3 |
-| HL-8 | ITEMS 14 authoring | The narrow-U rule; `HeirloomValueCap` (4.1.1) | — | Lead's call; ITEMS owner applies | M3 |
-| HL-9 | CH 4.8, 5.2, 4.10 | 6 hooks, the wrapped board, locked goals, class chips, the mismatch path, the pending bundle (4.1.3) | — | Lead's call; CH owner applies | M3 |
-| HL-10 | **SK 4.4 (agreed, SK Q1, read)**, CH 4.11 | R1 after the variant milestones | ⚑ Agreed (read) | Lead's call; SK, CH owners confirm | M3 |
+| HL-8 | ITEMS 14 authoring | The narrow-U rule; `HeirloomValueCap` against every same-family U record; `HeirloomNoVerbClone` (4.1.1) | ⚑ Settled (ITEMS 14) | Lead's call; ITEMS owner applies | M3 |
+| HL-9 | **CH 4.8 (hub form, agreed: CH Q1, Q4, Q5)**, 5.2, 4.10 | 6 hooks, the wrapped board, the boon picker listing every unlocked template, the four shelf states (paper-cut locked outlines), goals worded to the credit rule, class chips, the mismatch path, the pending bundle; a CH role-ID gate row (4.1.2, 4.1.3) | ⚑ Agreed (CH 4.8, CH Q1/Q4/Q5, read) | Lead's call; CH owner applies | M3 |
+| HL-10 | **SK 4.4 (agreed, SK Q1, read)**, CH 4.11, CH 4.12 | R1 ordered after the variant milestones by difficulty only (no prerequisite); the fixed WO6 write and reveal order | ⚑ Agreed (read) | Lead's call; SK, CH owners confirm | M3 |
 | HL-11 | SV 4.6 (reading) | Heirloom unlocks outside `unlockHash`; supersession; `heirloomsSchemaVersion` (4.1.7) | ⚑ Settled (read) | Request; SV owner rules | M3 |
 | HL-12 | **DH 18.2 (agreed targets, read)** | Calibration arms; the curse layer in both arms from M4 (9.3) | ⚑ Agreed (read) | Lead's call; DH owner applies | M3 / M4 |
-| HL-13 | RS 7.6 (additive), RS 7.4, the naming pass, V14 (f), V21 (g) | NR1–NR10, the blocklist, the second-look list, the sensitivity read before M4 content lock (5.3) | ⚑ Settled (read) | **Client (Q1, with this document)**; RS owner applies | M2 |
-| HL-14 | **RS 11.2 validator suite table (settled)**; **SV 5.2 (settled)** | RS 11.2 gains a V22 `HeirloomsCurses` row (waves as 9.2); SV 5.2 becomes V1–V22 | ⚑ Settled (read) | Lead's call; RS, SV owners apply | M3 |
-| HL-15 | **ITEMS 11 item 7 (agreed, framework decision 4)**, IR 4.15 (presentation) | The class-wide chip, the first-equip line, the F5 line; the malign hint ships with curses at M4 (4.2) | ⚑ Agreed (presentation only; mechanics unchanged) | **Client (Q3, with this document)**; ITEMS, IR owners apply | M4 |
-| HL-16 | ITEMS 13, CON 18.10, LE 8.5 | Folk cost lines; Eyebitten and Ill-Slept gated on their Later conditions (4.2, 5.2) | ⚑ Settled (read) | Lead's call; ITEMS, CON owners apply | M4 (two lines Later) |
-| HL-17 | **CON 14 (cap bullet), 16, 18.10 (settled)** | Maladies as Cursed presets with `displayKind: malady`; their own slot; 1 per unit; Leaden by pool tag, floored at 1 (4.3.1) | ⚑ Settled | Lead's call; CON owner applies (fallback 14.2) | M4 |
-| HL-18 | CON 18.10 duration | Cast-off deeds, with the alternative (4.3.2) | ⚑ Settled (read) | Lead's call; CON owner applies | M4 |
-| HL-19 | EV 4.4.4, EV-43, V16s; ENM 9.2; CON 16 theme six; RS 6.9 Stratum Card; the EP filter | Malady sources and agency rules (4.3.3) | ⚑ Agreed (EV Q4, read) | **Client (Q4, with this document)**; request: EV, ENM, CON, RS, EP owners rule | M4 |
+| HL-13 | RS 7.6 (additive), RS 7.4, the naming pass, V14 (f), V21 (g) | NR1–NR10, the blocklist, the second-look list, the Melancholia `nameException`, the collision grep on display strings and fallbacks, `localeTermOverride`; the sensitivity read "before Later or M4 content lock" (agreed, Q1), read as before M4 content lock (F20) and held at M4 content-complete (5.3) | ⚑ Settled (read) | **Client (Q1, with this document)**; RS owner applies | M2 |
+| HL-14 | **RS 11.2 validator suite table (settled)**; **SV 5.2 (settled)** | RS 11.2 gains a V22 `HeirloomsCurses` row (waves as 9.2); SV 5.2 becomes V1–V22; registered at M1 with only the (m) `RunModifierIdInConfigHash` field row live, the (e) rule rows live from M2, the rest at their waves | ⚑ Settled (read) | Lead's call; RS, SV owners apply | **M1** (registration) |
+| HL-15 | **ITEMS 11 item 7 (agreed, framework decision 4)**, IR 4.15 (presentation) | The class-wide chip on its public-fact population; the per-card first-equip line and the F5 line; cure text generated from the hosts in the build; the chip lever; the malign hint ships with curses at M4 (4.2) | ⚑ Agreed (presentation only; mechanics unchanged) | **Client (Q3, with this document)**; ITEMS, IR owners apply | M4 |
+| HL-16 | ITEMS 13, CON 18.10, CON 19 (transforms, read), LE 8.5 | Folk cost lines; none feeds a hard-condition transform (`CostLineNoHardTransform`); Eyebitten and Ill-Slept gated on their Later conditions (4.2, 5.2) | ⚑ Settled (read) | Lead's call; ITEMS, CON owners apply | M4 (two lines Later) |
+| HL-17 | **CON 14 (cap bullet), 16, 18.10 (settled)**; **CON 6.1 (agreed, read)** | Maladies as Cursed presets with `displayKind: malady`: nine new variant ids counted once toward CON 16, each its own id so it coexists with another Cursed instance under CON 6.1; their own slot; 1 per unit; an elite's Malady replaces, a paid one needs an empty slot; no Malady lowers a maximum; `MaladyState` in run.save (4.3.1) | ⚑ Settled; ⚑ Agreed (CON 6.1, read) | Lead's call; CON owner applies (fallback 14.2) | M4 |
+| HL-18 | CON 18.10 duration and cures | Cast-off deeds by the afflicted unit, with the alternative ("fell an elite" other than the one that applied it; fights that began after onset); cure text from the hosts in the build (4.3.2) | ⚑ Settled (read) | Lead's call; CON owner applies | M4 |
+| HL-19 | EV 4.4.4 (`payer`), EV-43, V16s (`PaymentFeasibility`, `StateBlind`, `RegisterByFloor`); **ENM 2 non-goals (settled, ABL 5)**; **ENM 13 job split, 13.1, 13.2, 13.3 (agreed: no committed intents)**; ENM 9.2; CON 16 theme six; RS 6.9 Stratum Card; the EP filter (per-floor cap, boss antechamber) | Malady sources and agency rules: the hero pays by default; the elite ability as an optional `maladyAbility` slot, telegraphed by ENM 13.2's forecast pattern extended to it (listed on the plate from the first turn; never a committed intent; ABL 5's deferral and ENM 2 stand), with the existing-tools fallback (4.3.3, T1) | ⚑ Agreed (EV Q4, read); ⚑ Settled (ENM 2, ABL 5, read); ⚑ Agreed (ENM 13, 13.3: an exception for one ability kind) | **Client (Q4, with this document)**; request: EV, ENM, CON, RS, EP owners rule | M4 |
 | HL-20 | DH 17.12, Grave Goods (DH, LE 8.2) | Recap annotation; Grave Goods lines (4.3.5) | ⚑ Settled (read) | Request; DH owner rules | M4 |
-| HL-21 | **MAIN 4.7 slot (decided)**, CH-24, CH 4.8, 4.9, RS 9.1, SK-15 | The Oath catalogue, rules and rewards; fallback: slot unlit until the difficulty decision (4.5) | ⚑ Decided (read) | **Client (Q6, with this document)**; request: MAIN and RS owners rule | Later |
+| HL-21 | **MAIN 4.7 slot (decided)**, CH-24, CH 4.8, 4.9, RS 9.1, SK-15; for the run under an Oath only: **ITEMS 11 items 4–5 (agreed, framework decision 4)** and **STAT 7.2 (settled)** (the Shut Book), **IR 4.15 and LE 8.5** (`curseGate` under the Crooked Road), **RS 6.11** (Two Doors, the Single Door), **DH 21.5** (waived rows, the Short Fire) | The Oath catalogue, rules, launcher validation (`requires`, `conflictsWith`; off on seeded runs until HL-25) and rewards; fallback: slot unlit until the difficulty decision (4.5) | ⚑ Decided (read); ⚑ Agreed (ITEMS 11); ⚑ Settled (STAT 7.2, IR 4.15, LE 8.5, RS 6.11, DH 21.5); all Later | **Client (Q6, with this document)**; request: MAIN and RS owners rule | Later |
 | HL-22 | SV 4.6 (SV-12), V19t | `runModifierId` in `configHash` | ⚑ Settled (read) | Lead's call; SV owner applies | field M1 |
 | HL-23 | **ITEMS 14 "Never cursed", ITEMS 19.1 rules 9–10**, IR 4.15, LE 8.5, ITEMS 13 | The Burdened twin, via the Oath only (4.7) | ⚑ Settled | Lead's call; ITEMS, IR, LE owners apply | Later |
 | HL-24 | ITEMS 13, LE 8.5, CH 4.11 | Redeemed templates (R5) | — | Client (Q2); ITEMS, CH owners apply | Later |
 | HL-25 | SV 4.7, SK-16 | Share codes carry the template id and `runModifierId`, never Grip-marks | ⚑ Agreed (SV Q1, read) | Request; SV owner rules | Later |
 | HL-26 | TK 8.2, TK 19, SK-12, V21 | Trinkets and charms; the Torc twin at M4 only if TK agrees (4.6) | ⚑ Agreed (TK Q2 read, not reopened) | Request; TK owner rules | M4 |
-| HL-27 | CH settings | Plain names on every surface; the content note | — | **Client (Q1, with this document)**; CH owner applies | M4 |
-| HL-28 | CH 4.12, SV 6.11 | First-time lines (4.8) | ⚑ Settled (read) | Request; CH owner rules | M3 / M4 / Later |
-| HL-29 | **ITEMS 13 heading "(agreed: curses Later)"; ITEMS 11 items 6 and 7; ITEMS 20 "Later: curses, Clinging and cursed carriers"; CON 18.10 Cursed "minor · Later", CON 18.1 waves table, CON 21 staging (CON 16 reading); IR 4.15 "Curses (Later)", IR 10 Later row; LE 8.5 heading "(Later)", LE 11 Later row; EV-43 shrine curse cures and bargains (Later); TK 8.2 (Torc, conditional)** | Item curses (cursed twins, Clinging, cursed carriers, the malign hint, five folk lines) and Maladies move from Later to **M4**, with EV-43's shrine cures and bargains and the desecrated-shrine source; CON confirms that the M4 Cursed family sits outside CON 16's M1–M2 32 and passes CON 20.3's gate; the curse trunk (CH-24), Oaths, the Burdened twin, Redeemed, Eyebitten and Ill-Slept stay Later (F13, F14, F15) | ⚑ **Agreed** (curses Later); ⚑ Settled (CON, IR, LE, EV waves) | **Client (Q5, with this document)**; ITEMS, CON, IR, LE, EV owners apply; CON confirms the reading | M4 |
-| HL-30 | RS 7.6 | Add SRD spell names and trinket kind words to the blocklist | ⚑ Settled (read) | Lead's call; RS owner applies | M2 |
+| HL-27 | CH settings | Plain names on every surface, with a unique per-record `plainNameKey` label; the content note in Settings and once inline (4.8) | — | **Client (Q1, with this document)**; CH owner applies | M4 |
+| HL-28 | CH 4.12, SV 6.11 | First-time lines, including the inline content note and the pending offer in Begin again (4.8) | ⚑ Settled (read) | Request; CH owner rules | M3 / M4 / Later |
+| HL-29 | **ITEMS 13 heading "(agreed: curses Later)"; ITEMS 11 items 6 and 7; ITEMS 20 "Later: curses, Clinging and cursed carriers"; CON 18.10 Cursed "minor · Later", CON 18.1 waves table, CON 21 staging (CON 16 reading); IR 4.15 "Curses (Later)", IR 10 Later row; LE 8.5 heading "(Later)", LE 11 Later row; EV-43 shrine curse cures and bargains (Later), EV 10 staging row ("Later: ... curse cures and bargains"), EV 13's EV-43 wave cell; TK 8.2 (Torc, conditional); ITEMS 24 "Dungeon content" (read: runes stay Later)** | Item curses (cursed twins, Clinging, cursed carriers, the malign hint, five folk lines) and Maladies move from Later to **M4**, with EV-43's shrine cures and bargains and the desecrated-shrine source; CON confirms that the M4 Cursed family sits outside CON 16's M1–M2 32 and passes CON 20.3's gate; the curse trunk (CH-24), rune hosts (ITEMS 11 item 7's runes, ITEMS 24), Oaths, the Burdened twin, Redeemed, Eyebitten and Ill-Slept stay Later, so at M4 cures are camp, a shrine and Cast-off (F13, F14, F15, T11) | ⚑ **Agreed** (curses Later); ⚑ Settled (CON, IR, LE, EV, ITEMS 24 waves) | **Client (Q5, with this document)**; ITEMS, CON, IR, LE, EV owners apply; CON confirms the reading | M4 |
+| HL-30 | RS 7.6 | Add to the blocklist: SRD spell names; SRD and 5E class and subclass feature names (Sacred Oath names included); trinket kind words; for player-facing heirloom strings, "passing", "bequest", "legacy" and "inherit"; the Malady forbidden-allusion list (5.3) | ⚑ Settled (read) | Lead's call; RS owner applies | M2 |
+| HL-31 | **FL 6.11 (`BossDefeated`, settled, read)**; **IR 6.1, IR 9 instance `deeds{}`, V14 (j) (settled: display only, read)**; CMP 8.7 Deeds; SK-5 (named-piece Deeds) | A new Core event `BossFelled` beside `BossDefeated`, crediting the killing-blow weapon or focus and every shield or armour worn by a standing party unit; R2 keyed to it, never to the display Deed, so V14 (j) holds; the request on worn-piece bynames (4.1.2) | ⚑ Settled (FL 6.11, IR 6.1, IR 9, V14 (j), read) | Lead's call, after the check; request: FL (Core events), IR, CMP owners rule; SK owner confirms | M3 |
 
-The options the client rejected (Q1-B and C, Q2-B, Q3-B and C, Q4-B, Q5-B, Q6-B) are not register rows.
+The options the client rejected (Q1-B and C, Q2-B, Q3-B and C, Q4-B, Q5-B, Q6-B) are not register rows. HL-31 was added after the design check; no id has two meanings (A.3).
 
 ---
 
 ## 14. Open items for the client
 
-Awaiting the client's approval of this document as a whole: the lead's answers of 0.1 and the frame of 3.3 (accepted by proceeding); every lead's call; the new lead's calls of 14.1; the told-plainly items of 14.1; the readings recorded in 13; and the flagged rows of 13. The six questions raised before writing were answered on 2026-11-23 **(agreed)**, each with the recommended option (A). Writing raised **no new client question**: every new lead's call sits inside the six answers, corrects the proposal's own text against an approved rule, or is flagged against the text it touches in 13. The future items in 14.2 come back only if a report, an owner's refusal, a wave or a later design triggers them.
+Awaiting the client's approval of this document as a whole: the lead's answers of 0.1 and the frame of 3.3 (accepted by proceeding); every lead's call; the new lead's calls of 14.1; the told-plainly items of 14.1; the readings recorded in 13; and the flagged rows of 13. The six questions raised before writing were answered on 2026-11-23 **(agreed)**, each with the recommended option (A). Writing raised **no new client question**: every new lead's call sits inside the six answers, corrects the proposal's own text against an approved rule, or is flagged against the text it touches in 13. **The design check raised none either**: every lead's call after the check (14.3) implements an answer the client gave, closes a gap the answer left, or corrects a draft rule against an approved one; those that change what the client may have pictured are told plainly (T1–T14). The future items in 14.2 come back only if a report, an owner's refusal, a wave or a later design triggers them.
 
 ### 14.1 This document
 
 **The six answers (agreed, 2026-11-23, final), each the recommended option:**
-- **Q1, naming (HL-13, HL-27, HL-30):** option A, three registers by scope; NR1–NR10 and the blocklist; Melancholia kept with a weight-only rule, a mandatory tone sign-off and fallback Atrabile; Plain names, the content note, the sensitivity read before M4 content lock. Rejected: B, mind-disease names on all curses; C, fantasy names only.
+- **Q1, naming (HL-13, HL-27, HL-30):** option A, three registers by scope: obsolete complaint names on Maladies only, folk words on item curse cost lines, "Oath of the ..." on meta-curses; naming rules NR1–NR10 and the blocklist; Melancholia kept with a weight-only rule, a mandatory tone sign-off and fallback name Atrabile; the display-only Plain names setting, content note and a sensitivity read "before Later or M4 content lock" (the client's words; read as due before M4 content lock once Q5 moved Maladies to M4, F20). Rejected: B, mind-disease names on all curses; C, fantasy names only.
 - **Q2, heirloom earning (HL-1, HL-2, HL-6, HL-7, HL-24):** option A, R1 class milestones, R2 Deed bequests from any personal run (win or death, keyed to the Deed, tier-gated, chosen later at the shelf, never on the death path), R3 Heart-won; R4 Oath wins and R5 Redeemed Later. Rejected: B, milestones and Heart-won only.
 - **Q3, hidden item curses (HL-15):** option A, the class-wide "Not yet read: may Cling" chip; presentation only; the approved curse mechanics unchanged. Rejected: B, full reveal before equipping; C, silent.
 - **Q4, Malady sources (HL-19):** option A, priced Curiosities and shrine bargains plus intent-telegraphed elite abilities on F3–F4; never bosses, traps, hazards or random imposition; never on F1 or F5. Rejected: B, choices only.
@@ -1109,45 +1111,94 @@ Awaiting the client's approval of this document as a whole: the lead's answers o
 
 **New lead's calls (made while writing; binding once the client approves this document):**
 1. **Five heirloom line renames and one more (F10):** Undertow → Low Tide (an ARC spell); Unbowed → Held Ground (an approved armour property); Braced → Set Heels (EP pose word; VG's Later Brace); Steady Sight → Long Look (ARC's Steady Casting); Called Across → Carrying Voice (SK's "Called {givenName}" key); Padding → Quilted (a pipeline term). All 0 hits (5.1, A.2).
-2. **Leaden Maladies by pool tag (F11):** Acedia is Leaden on a `rest` pool (Recovery is a value, not a pool); Melancholia on a `camp` pool; the unit's first pool of that tag in record order, named on the chip; never below a maximum of 1 (`MaladyLeadenFloor`) (4.3.1, 5.2, 9.2 (d)).
+2. **Leaden Maladies by pool tag (F11):** Acedia was Leaden on a `rest` pool (Recovery is a value, not a pool) and Melancholia on a `camp` pool, floored at 1. **Superseded after the check** (14.3 item 12, T5): no Malady lowers a maximum (`MaladyNeverLowersMax`).
 3. **Saltless rewritten against DH (F12):** "a potion heals you 2 less (minimum 1)" *(illustr.)*, because a potion heals Recovery, not dice (5.2).
 4. **The M4 condition-budget reading (F13):** an M4 Cursed family sits outside CON 16's M1–M2 32, like Later conditions, and passes CON 20.3's gate; CON confirms; fallback: the rows go Later (HL-29, 10).
 5. **Q5 carries EV-43, the desecrated shrine and the malign hint to M4 (F14)** (4.2, 4.3.3, HL-29).
 6. **Eyebitten and Ill-Slept stay Later (F15)** with Conspicuous and Restless; five folk lines ship at M4; `requiresCondition` in data and V22 (g) (4.2, 5.2, 9.1).
 7. **The DH legacy hook's Later staging row is re-staged by HL-7 (F16)** (13).
 8. **Grip-marks carry Deed bynames only (F17):** the Whence sample is "Gatesplitter. Felled the Jailer of Hours."; `GripMarksBynameOnly` (4.1.5, 9.2 (l)).
-9. **Prose and substring hits flagged, not renamed (F18):** Oath (Oathbroken, Oathkeeper, Oathbinder), Bequest (LP prose), Not yet read (EV prose), First Cut, Answer, Thumb-Worn Totem (Choir hymnal crates; the hymn-sheet texture ban), Kneel (an EV option verb) (A.2).
+9. **Prose and substring hits flagged, not renamed (F18):** Oath (Oathbroken, Oathkeeper, Oathbinder), Bequest (LP prose; now internal only), Not yet read (EV prose), First Cut, Answer, Kneel (an EV option verb) (A.2). The draft's Darned Hymnal (Choir hymnal crates; the hymn-sheet texture ban) was renamed Thumb-Worn Totem after the check (T12).
 10. **Maladies never use the Diseased family (F19);** NR5 extended to Diseased strains (4.3.1, 5.3).
 11. **The sensitivity read is due before M4 content lock (F20)** (0.1, 5.3, 10).
 12. **The Burdened twin's cost line comes from the eight shippable folk lines, never Clinging, Eyebitten or Ill-Slept (F21)** (4.7).
 13. **The Heartward Torc's twin follows the item-curse wave (M4) if TK agrees** (4.6, HL-26).
 14. **Waves made consistent under Q5:** every item-curse and Malady row reads M4 in 0, 4, 5.2, 6, 8.7, 9.2, 10 and 13; V22 (j) split M3 (heirloom glyph) / M4 (the other three); (k) split M4 / Later (Crooked Road).
 15. **The curse catalogue gives every row its register, rule, source, telegraph, cure and wave in full** (5.2), and the naming rules move from the appendix to 5.3; display samples added (5.4).
-16. **The 13 register has Flag and Approval columns in the SK shape**, with read flags on HL-5, HL-6, HL-10 to HL-14, HL-16, HL-18 to HL-22, HL-25, HL-26, HL-28 and HL-30, which the proposal's register did not flag.
+16. **The 13 register has Flag and Approval columns in the SK shape**, with read flags on HL-5, HL-6, HL-10 to HL-14, HL-16, HL-18 to HL-22, HL-25, HL-26, HL-28 and HL-30, which the proposal's register did not flag. **After the check**, HL-2, HL-8 (Settled, ITEMS 14) and HL-9 (Agreed, CH 4.8) are flagged too, HL-17, HL-19, HL-21 and HL-29 name every section they touch, and HL-31 is added (14.3 item 20).
 
 ### 14.2 Future items triggered by reports, owners or later designs
 
 | Item | Trigger | What happens | Owner / approval |
 |---|---|---|---|
-| HL-3 refused | LE, DH or IR refuses the any-slot waiver | No armour or shield templates at M3 | Lead; LE owner |
+| HL-3 refused | LE, DH or IR refuses the any-slot waiver | No armour or shield templates at M3; rows 8–10 of 5.1 become a warhammer (F3+), a shortbow (F4+) and a rod (F4+) R2 family *(illustr.)*; `HeirloomCoverage` and 8.2 re-run (4.1.4) | Lead; LE owner |
+| `BossFelled` refused | FL, IR or CMP owners refuse HL-31's Core fact or its worn-piece credit | Weapon and focus R2 families keyed to the killing blow only; no armour or shield R2 templates at M3 (the same replacement families as HL-3's fallback) | FL, IR, CMP owners; lead |
+| Worn-piece bynames | IR, CMP or SK owners refuse a byname for a credited shield or armour (HL-31) | The bequest and its Grip-mark carry the boss and theme marks only; R2 itself unchanged | IR, CMP, SK owners |
+| Elite forecast | ENM owner refuses the 13.2 forecast extension (HL-19) | Existing tools only: the ability shown once seen or revealed by Lore; the threat-reach tint; 13.3 reads; the Stratum line (4.3.3, T1) | ENM owner; lead |
+| Maladies at the boss | `MaladyAtBossShare` high, or `MaladyDeathShare` above baseline +2 pp at boss fights | Every Malady also ends at the arena seal (`ArenaEngaged`, the 4.3.4 Grace precedent), and the chip reads "until camp or the arena seal" | Lead; EV, BR owners |
 | SK-4 confirmations | IR, DH, LE confirmations still open at M3 | Heirlooms do not ship until they close | LE, DH, IR owners |
 | Bequest write | SV refuses `bequestOffer` at WO6 (HL-6) | R2 ships without the offer: the unlock applies directly at WO6, shown at the next shelf visit, still never on the death path | SV owner; lead |
 | Unlocks and `unlockHash` | SV refuses HL-11 | Unlocks enter `unlockHash`; the "will play differently" notice states "different shelves" plainly | SV owner |
 | Malady slot | CON refuses HL-17 | Maladies count in the cap; "This fills a lingering slot"; `CapBlockedByMalady` | CON owner; lead |
 | Theme six | RT-15, RT-16, EV-34 rule against | Curiosity and shrine sources only | CON, RS, EV owners |
 | M4 budget reading | CON refuses HL-29's reading | Item curses and Maladies stay Later unchanged | CON owner; client informed |
-| Tone | the sensitivity read or tone review fails a name | The fallback name (Atrabile, Adustion, Savourless) or a new name under NR1–NR10 | Writing; lead |
+| Tone | the sensitivity read or tone review fails a name | The held fallback name (Atrabile for Melancholia, Adustion for Acedia, Jactitation for Tarantism, Savourless for Saltless) or a new name under NR1–NR10 | Writing; lead |
 | F2 Curiosity Maladies | `EventDeathShareDelta` gate fails | Malady costs start on F3 | Lead; EV owner |
 | Elite sources feel imposed | `MaladyDeathShare` above baseline +2 pp, or sessions | Elite sources cut back to F4, then off (Q4-B) only with the client | Client |
-| Chip deters Rares | `RareEquipRateDelta` | The chip shows only while passive Arcana is below the threshold | Lead |
+| Chip deters Rares | `RareEquipRateDelta` (against the chip-off arm) | The chip collapses to its shape alone, with the words on hover and in the inspect pane, after 10 such equips on the profile *(illustr.)*; never dependent on whether a card is cursed (4.2) | Lead |
 | Item curses dead | `CursedTakeRate` below 20% | Benefit budget reviewed with LE; never a loot lever | Lead; LE owner |
 | Heirloom dominance | `HeirloomWinDelta` > +3 or `HeirloomPickShare` > 2× fair share | The 5.1 lever order; the last step returns to SK-4's owners | Lead; SK-4 owners |
-| Oaths | MAIN/RS owners refuse or defer HL-21 | Slot unlit; catalogue held; R4, Burdened and the Borrowed Physic wait | MAIN, RS owners |
+| Oaths | MAIN/RS owners refuse or defer HL-21 | Slot unlit; catalogue held; R4, Burdened and the Borrowed Physic wait (on refusal, the same outcome as the rejected Q6-B, T14) | MAIN, RS owners |
+| Crooked Road eases | the `OathNeverEases` simulator win-rate check fails | The Oath is held | Lead |
 | Iron Sleep | ENM rules on an elite kind-addition record | Oath 28 joins or stays held | ENM owner |
 | Torc twin | TK owner rules (HL-26) | No trinket curse host if refused | TK owner |
 | Recap | DH refuses HL-20 | Grave Goods lists curses only; the recap risk stays in 15 | DH owner |
 | Share codes | SV rules on HL-25 | Fallback: share codes carry neither | SV owner |
 | Naming pass | scheduled | Every placeholder, with the A.2 flags | Naming pass |
+
+### 14.3 After the design check
+
+The design check (builder, consistency, fairness and narrative-art lenses) was answered inside the client's six answers. No client answer is overridden; where a fix narrows or re-reads an answer's wording, it is told plainly below.
+
+**Lead's calls after the check (binding once the client approves this document):**
+1. **The `BossFelled` Core fact and the profile-progress step (HL-31 ⚑, request):** R2 keys to a Core event at each boss kill, never to the display Deed (IR 6.1, IR 9, V14 (j)); weapon or focus by the killing blow, shield or armour worn by a standing party unit; a non-Core step at WO6 is the only reader and fills `bynameKey` from the display layer (4.1.2, 9.1, V22 (h)).
+2. **Bequest cardinality, order and life cycle:** at most one offer per run, by deepest boss floor, then earliest event, then weapon before worn piece, then creation order; R2 before R5; a pending queue, one per family, never overwritten; Hang it or Set aside; a re-check that the template is still locked; the pending offer shown in Begin again's picker and as a class-pick line (4.1.2, 9.1).
+3. **The run-end table and the WO6 order:** personal unravelled runs keep R1, R2 and Grip-marks already earned; abandoned and seeded runs write nothing; one fixed write and reveal order (4.1.2; HL-6, HL-10).
+4. **Goal texts worded to the credit rule**, locked templates as paper-cut outlines, and the four shelf states kept apart in greyscale (4.1.2, 4.1.3, 6; HL-9).
+5. **The boon picker lists every unlocked template**; hooks are display; Hang it never displaces a hung template; `uiMemory` "new" flags and CH 4.10's last-boon carry (4.1.3).
+6. **`HeirloomValueCap` defined against every same-family U record** (never ▲), and **`HeirloomNoVerbClone`** (Set Heels rewritten off the Splint's Stalwart) (4.1.1, 5.1).
+7. **The F1 Due order and predicate** (WO1 → SK-12 → fixed deal → `armsSatisfied` read from issued instances, any slot class and the Burdened twin → waiver in the Due's container slot), and **named replacement families** if HL-3 is refused (4.1.4, 14.2).
+8. **Grip-marks data and write point:** the `gripMark` pendingProfile kind; credited template rules; a list of earned bynames; a three-entry FIFO of Deed marks; a set of marks; references to boss and theme, never to deleted run files (4.1.5, 9.1).
+9. **A concrete base family on every template** (ITEMS 14 blocks duplicate bases): the Herald's Totem for row 4; gambeson and chain shirt for R2 rows 9–10, the latter now the Stair-Worn Byrnie (5.1).
+10. **The chip's population on public facts** (a `curseGate` field channel, F2+, Rare+, a family with an authored twin, not yet known, `permille` non-null), an equivalence test, one first-equip line per card, a separate onboarding key, and a lever that differs from the rule (4.2; T3).
+11. **Cure text generated from the hosts in the build:** at M4, camp or a shrine; a rune only once a rune host ships (4.2, 4.3.2; HL-29; T11).
+12. **No Malady lowers a maximum** (`MaladyNeverLowersMax`): Melancholia and Acedia take new payloads (5.2; T5).
+13. **The Malady slot:** an elite's Malady replaces the current one and resets deed progress; a paid Malady needs an empty slot; each preset its own id, coexisting with other Cursed instances under CON 6.1; `MaladyState` in run.save (4.3.1; HL-17; T9).
+14. **Cast-off actors and windows:** the afflicted unit acts; "fell an elite" excludes the one that applied it; "win 2 fights" counts fights that began after onset; each deed names its Core events (4.3.2, 5.2).
+15. **Curiosity Maladies:** drawn StateBlind among presets whose Curiosity source covers the floor; the hero pays by default, a companion only on an "any member" option priced higher; feasibility rows in V16s; `registerLock: sincere` (4.3.3; T10).
+16. **Elite Malady abilities:** an optional `maladyAbility` slot; ENM 13.2's forecast pattern extended to it, with the existing-tools fallback; targeting never picks a unit that already carries the same preset or is ineligible; the EP filter keeps the first carrier in frozen placement order and none in the boss antechamber zone (4.3.3; HL-19; T1, T8).
+17. **Per-source floor ranges** in the Malady record, with predicates (e.g. bludgeoning kits); the Borrowed Physic limited to F2–F4 (4.3.4, 5.2, 9.1).
+18. **Oath launcher validation:** off on seeded and shared runs until HL-25; `requires` and `conflictsWith`; the Crooked Road consumes both draws and grants its forced twin at card tier T; rank as an authored display label (4.5, 5.2).
+19. **Naming corrections** (5.2, 5.3, A.2; T6, T7, T12): flavour lines with the dream as subject and no scriptural allusion; "bile" kept out of display strings; Surfeit for Plethora; Adustion for Torpor; Jactitation held for Tarantism, whose rule and flavour are rewritten; Ill-Wished applies no condition; Pituita's deed avoids readied actions; Eyebitten, Short-Armed, Grip-marks, Thumb-Worn Totem, Long-Kept Crossbow, Shut Book, Borrowed Physic, the Iron Sleep form; the Melancholia `nameException` tagged truthfully; NR2, NR3, NR5, NR6, NR8 and NR10 extended (with `localeTermOverride`).
+20. **Register hygiene:** flags on HL-2, HL-8, HL-9; full section lists on HL-17, HL-19, HL-21, HL-29, HL-30; HL-14 registered at M1; HL-31 added (13).
+21. **Art and audio:** glyphs off the diamond and ring families with `GlyphsDistinctFromRegistry`; the afflicted tell on the base, never at the head; emblem-only codex plates and a forbidden-imagery list; cues moved outside CH AN9's families; Plain names labels per record; the content note shown inline once (5.2, 6, 4.8; HL-27, HL-28).
+22. **Reports:** each with a formula, unit, source (sim, human, telemetry) and comparison arm; curse-off and chip-off control arms; `MaladyAtBossShare`, `MaladyCompanionShare` (9.3); the M4 volume and the sensitivity-read timing (8.7).
+
+**Told plainly after the check (to be confirmed by the client with this document):**
+- **T1. Q4's "intent-telegraphed" uses the approved forecast, not a committed intent.** The corpus has no committed enemy intents (ENM 2, settled with ABL 5; ENM 13.3, agreed). The elite Malady ability is announced to everyone as a live forecast, ENM 13.2's boss-signature pattern extended to it (a request to ENM). If ENM refuses, the telegraph rests on the Stratum line and the existing reads.
+- **T2. Q2's "keyed to the Deed" is keyed to the Core fact the Deed records.** Deeds are display only and no rules code may read them (V14 (j)), so R2 reads `BossFelled` instead. For weapons and foci this is the same event as the Deed; for shields and armour, which never land a killing blow, the credit is "worn by a standing unit when the boss falls", a new rule requested from the FL, IR and CMP owners (HL-31). Whether such a piece also gets a byname is a separate request; R2 does not depend on it.
+- **T3. Q3's chip is class-wide over cards that can be cursed,** not "every unidentified Rare+ card": a card from a channel `curseGate` never serves, a ring, or a family with no authored twin never shows it, because "may Cling" would be false there (RC1). Whether a given card is cursed is still never read.
+- **T4. The earn-rate toy (8.2) is a lower bound** for the shield and armour families under the credit rule; the builders re-run it.
+- **T5. Melancholia and Acedia changed payloads.** The proposal's Leaden on a pool read as the anergia of depression, left a pool one short after camp, and cost nothing on a spent pool. Melancholia's rule is still weight only, as Q1 agreed: when forced movement moves you, you also fall Prone (once per round). Acedia now takes a round-3 heat. No Malady lowers a maximum.
+- **T6. Plethora and Torpor fail NR1** (a current clinical sign; a current physiological term). Plethora becomes Surfeit; Acedia's fallback becomes Adustion.
+- **T7. Two naming exceptions are recorded, not hidden.** Melancholia is the one agreed exception to NR1 and NR1b and is tagged truthfully (`referentLiving: true`); Atrabile, the client's named fallback, keeps "bile" as a substring under an explicit NR6 waiver, while no display string uses "bile".
+- **T8. A Malady can reach a boss fight.** One taken late on F3 or F4 may have no fight left to cast it off. No source acts in the boss antechamber zone, `MaladyAtBossShare` is reported, and a lever (end at the arena seal) is held in 14.2.
+- **T9. An elite's Malady replaces the unit's current one.** Otherwise a mild paid Malady would buy immunity from the elite the Stratum Card names.
+- **T10. The hero pays a Curiosity Malady by default** (EV's HP rule); a companion pays only where the option prints "any member", priced higher. Otherwise every paid Malady would land on a companion, who is never killed.
+- **T11. At M4 a Malady or Clinging ends at camp, at a shrine or by its Cast-off deed; there is no rune cure** until a rune host ships (ITEMS 24, Later). The cure text says only what the build holds.
+- **T12. Several placeholders were renamed** for tone, truth or collision: Passings → Grip-marks (it read as "deaths"; the Passing Bell); "bequest" is internal only ("Hang it?"); Overlooked → Eyebitten; Widdershins → Short-Armed; Darned Hymnal → Thumb-Worn Totem; Grandsire's Crossbow → Long-Kept Crossbow; Stair-Worn Hauberk → Stair-Worn Byrnie; Plethora → Surfeit; Oath of the Lent Physic → Borrowed Physic; Covered Hand → Shut Book; Oath of Iron Sleep → Oath of the Iron Sleep; the Memento's caption is no longer reused. All are still placeholders for the naming pass.
+- **T13. A personal unravelled run keeps what it earned** (R1, R2 and Grip-marks for bosses already felled): a generation defect is not the player's fault (SV 5.5).
+- **T14. Q6's fallback reaches the rejected B's outcome on refusal.** If the MAIN/RS owners refuse the Oaths, the slot stays unlit until the difficulty decision, as B would have left it; A differs only in that the request is made first.
 
 ---
 
@@ -1155,7 +1206,7 @@ Awaiting the client's approval of this document as a whole: the lead's answers o
 
 | # | Risk | Mitigation |
 |---|---|---|
-| 1 | Tone: Malady names may still offend (Melancholia is a living clinical specifier; Acedia is real doctrine) | Second-look list, sensitivity read before M4 lock, fallbacks (Atrabile, Adustion), content note, Plain names |
+| 1 | Tone: Malady names may still offend (Melancholia is a living clinical specifier, tagged `referentLiving: true` as the one agreed exception; Acedia is real doctrine; Tarantism names a place and a living folk practice) | Second-look list, sensitivity read held at M4 content-complete, fallbacks held ready (Atrabile, Adustion, Jactitation), flavour with the dream as subject, emblem-only plates, the content note shown inline, Plain names with per-record labels |
 | 2 | CON may refuse the Malady slot, the theme-six counting or the M4 budget reading | Stated fallbacks (14.2) |
 | 3 | Elite sources may feel imposed despite telegraphs | `MaladyDeathShare`, player sessions; Q4-B only with the client |
 | 4 | HL-3 may raise F1 deaths for armour or shield heirloom heroes (Shade, Arcanist) | `HeirloomSlotParity`; fallback: no armour or shield templates at M3 |
@@ -1167,10 +1218,12 @@ Awaiting the client's approval of this document as a whole: the lead's answers o
 | 10 | Item curses stay low-stakes; a take rate below 20% means dead content | `CursedTakeRate`; the weight sits on Maladies |
 | 11 | Cast-off deeds may skew by class | The always-reachable alternative; per-class reports |
 | 12 | The Bequest via WO6 needs an addition to SV's write order | HL-6 request, fallback |
-| 13 | Localisation of the archaic registers | Translator notes; NR10 period substitutes; whole-string keys; CardFit at 150% |
-| 14 | Placeholder glyph shapes unchecked against RC5 until the registry pass | `GlyphsPairwiseDistinct` |
+| 13 | Localisation of the archaic registers (Spanish "cólera" is cholera; Melancholia and Spleen are everyday words in several locales; the folk register has no direct equivalent) | Translator notes pre-filled with known traps; NR10 period substitutes with `localeTermOverride` and per-locale blocklist, collision grep and native-speaker read; whole-string keys; CardFit at 150% |
+| 14 | Placeholder glyph shapes unchecked against RC5 until the registry pass | `GlyphsDistinctFromRegistry` against the whole RC5 registry (the draft's hollow diamond and cracked circle already replaced) |
 | 15 | Moving curses to M4 (Q5) loads M4 with a condition family, nine codex plates, new elite abilities and a sensitivity read | The rows can fall back to Later unchanged (10); the read is scheduled before content lock |
 | 16 | Name flags (F18) may force renames late | Flagged now to the naming pass (A.2) |
+| 17 | R2 needs a new Core fact (`BossFelled`, HL-31) and a worn-piece credit rule no approved text defines | A request with a fallback (14.2): without it, no armour or shield R2 templates at M3 (the 4.1.4 replacement families) |
+| 18 | A Malady taken late on F3 or F4 can ride into the boss fight (T8) | No source in the boss antechamber zone (`MaladyNotBeforeBoss`); `MaladyAtBossShare`; the 14.2 lever |
 
 ---
 
@@ -1190,22 +1243,24 @@ Awaiting the client's approval of this document as a whole: the lead's answers o
 
 The owed rows are the single list in 13; by owner:
 
-- **ITEMS owner:** HL-1, HL-2, HL-8, HL-15, HL-16, HL-23, HL-24, HL-29.
-- **SK owner:** HL-3 (confirm), HL-10 (reading), the `noFallenHero` and Grip-marks readings.
+- **ITEMS owner:** HL-1, HL-2, HL-8, HL-15, HL-16, HL-21 (ITEMS 11 items 4–5, Later), HL-23, HL-24, HL-29 (with ITEMS 24 read).
+- **SK owner:** HL-3 (confirm), HL-10 (reading), HL-31 (confirm), the `noFallenHero` and Grip-marks readings.
 - **LE owner:** HL-3, HL-23, HL-29 (LE 8.5, LE 11).
-- **IR owner:** HL-3 (confirm), HL-5, HL-15, HL-29 (IR 4.15, IR 10).
-- **DH owner:** HL-3 (confirm), HL-7, HL-12, HL-20.
+- **IR owner:** HL-3 (confirm), HL-5, HL-15, HL-21 (Later), HL-29 (IR 4.15, IR 10), HL-31 (V14 (j) reading; worn-piece bynames).
+- **DH owner:** HL-3 (confirm), HL-7, HL-12, HL-20, HL-21 (DH 21.5, Later).
 - **CON owner:** HL-16, HL-17, HL-18, HL-19 (theme six), HL-29 (budget reading); RT-15, RT-16, EV-34.
-- **EV owner:** HL-4, HL-19, HL-29 (EV-43).
-- **ENM and EP owners:** HL-19; the Iron Sleep record.
+- **EV owner:** HL-4, HL-19 (`payer`, feasibility, `registerLock`), HL-29 (EV-43, EV 10, EV 13).
+- **ENM and EP owners:** HL-19 (the forecast extension, the `maladyAbility` slot, the per-floor and antechamber filter); the Iron Sleep record.
+- **FL owner (Core events) and CMP owner:** HL-31 (`BossFelled`; worn-piece credit and bynames).
 - **CH owner:** HL-1 (CH 4.11), HL-6, HL-9, HL-27, HL-28.
 - **SV owner:** HL-5, HL-6, HL-11, HL-14, HL-22, HL-25, HL-28 (SV 6.11).
-- **RS owner:** HL-13, HL-14, HL-19 (Stratum Card), HL-30; the "Old Maladies" codex page; the tone review.
+- **RS owner:** HL-13, HL-14, HL-19 (Stratum Card), HL-21 (RS 6.11, Later), HL-30; the "Old Maladies" codex page; the tone review.
 - **Main design and RS owners:** HL-21.
 - **TK owner:** HL-26.
 - **ARC and HR owners:** confirm Kindly Weight and Carrying Voice.
 - **The simulator:** V22 (t) rows, the 9.3 reports, the calibration arms.
-- **Human sessions (SV 6.11):** onboarding lines, the chip, Malady readability.
+- **Human sessions (SV 6.11):** onboarding lines, the chip, Malady readability, `ClingRegret`.
+- **STAT owner:** HL-21 (STAT 7.2 under the Shut Book, Later).
 - **Art, audio and writing:** 5, 6, 8.7; the sensitivity read.
 - **Naming pass:** every placeholder, with the A.2 flags.
 
@@ -1229,24 +1284,24 @@ The owed rows are the single list in 13; by owner:
 | HL-18, Herald's boss afflictions | dropped; told plainly |
 | Quartan Ague and the Megrims have living referents | retired (NR1b, NR4b) |
 | Acedia is real doctrine | second-look list; humoral gloss; fallback Adustion |
-| Eyebitten and Leaden-Recovery rewrite approved rules | Eyebitten re-applies Conspicuous; Acedia uses approved Leaden on a `rest` pool (corrected while writing: Recovery is not a pool, F11) |
-| Badge and heirloom glyphs share a family; knot collides with charms | worn grip band; cross-barred ring; `GlyphsPairwiseDistinct`; no knots on glyphs |
+| Eyebitten and Leaden-Recovery rewrite approved rules | Eyebitten re-applies Conspicuous; Acedia uses approved Leaden on a `rest` pool (corrected while writing: Recovery is not a pool, F11); **superseded after the check:** no Malady uses Leaden (T5) |
+| Badge and heirloom glyphs share a family; knot collides with charms | worn grip band; cross-barred ring; no knots on glyphs; after the check, `GlyphsDistinctFromRegistry` against the whole RC5 registry, the Malady glyph a humour-wheel quarter and the chip a folded page corner |
 | R5 overlaps R2 | a distinct template; one unlock per family per run; V22 (i) scoped |
-| Melancholia's payload stacks with Braced | Leaden (`camp` pool) only, floored at 1; a stacking row in V22 (d) |
+| Melancholia's payload stacks with Braced | Leaden (`camp` pool) only, floored at 1; a stacking row in V22 (d); **superseded after the check:** a weight payload (Prone when forced movement moves you, once per round), and Set Heels no longer touches forced movement against you (T5) |
 | Uneasy Bed / Cold Pillow collisions | Oath of the Borrowed Physic |
 | Unlocks in `unlockHash` | kept out (HL-11) |
 | HL-9 Oddment pool is not a gap | downgraded to a reading |
 | Burdened Clinging duration | the cost binds while worn; Clinging until camp 1 |
 | The cap of 2 lets Maladies block conditions | their own slot (HL-17); fallback stated |
 | Elite agency underspecified | `MaladyEliteAgency` |
-| F5 breaks "until camp" | no F5 sources; the Borrowed Physic ends at the arena seal; truthful F5 text |
+| F5 breaks "until camp" | no F5 sources; truthful F5 text; after the check, the Borrowed Physic acts on F2–F4 only (its F5 pool was empty) |
 | The recap does not name curses | HL-20 |
-| Register numbering mixed | one register, HL-1 to HL-30 |
-| Hidden unlock goals | locked silhouettes with goals; a Whence hint |
+| Register numbering mixed | one register, HL-1 to HL-30 (HL-31 added after the check) |
+| Hidden unlock goals | locked templates shown as paper-cut outlines with goals worded to the credit rule; a Whence hint |
 | The chip as noise | `RareEquipRateDelta`, with a lever |
 | Phlegm and Spleen read as comic | Pituita; Spleen kept pending review; NR4b; Tarantism and Acedia revised |
 | Graceless makes some gains duds | a preview mark |
-| Plain names only partial | all surfaces (HL-27) |
+| Plain names only partial | all surfaces (HL-27); after the check, a unique per-record label so two names never collapse into one |
 | Bequest on the death screen | moved off the death path entirely |
 | Warded vs Malady | never blocks; the preview says so |
 | Trinket and charm hooks | HL-26 |
@@ -1254,18 +1309,19 @@ The owed rows are the single list in 13; by owner:
 | Seeds: the Malady pick stream, the elite cap, share codes | keyed consumers; the EP filter; HL-25 |
 | Onboarding | HL-28 |
 | Localisation | NR10; translator notes; whole-string keys; the chip splits at 150% |
-| Audio collisions | thud, cloth tear, cloth fold |
+| Audio collisions | thud, cloth tear, cloth fold; **superseded after the check:** clay press, reed swell, ash crumble and a wood hook settle, outside CH AN9's families |
 | Mended, Unread, Seal, Long Watch | handed-down finish; "Not yet read"; Shut Book; Short Fire |
 | V22 format | s, g and t phases with waves (9.2) |
 | The lever "swap the template" | supersession (HL-11) |
 | Reports miss the arms | split by healer arm and party size; `CostLineBiteRate`; `MaladyNetHarder` |
 | Accessibility | `MaladySurfacesNotHoverOnly`; reduced motion; no flash |
 | Corpus check while writing (this document) | F10–F21 (2.3); new lead's calls 1–16 (14.1) |
+| The design check of this document (builder, consistency, fairness, narrative-art) | lead's calls after the check 1–22 and told-plainly items T1–T14 (14.3); HL-31 (13) |
 
 ### A.2 Names checked (case-insensitive, whole word and substring, the 32 approved documents and the reviews; re-run while writing)
 
 - **Prefixes:** `HL-[0-9]` 0 hits; `\bV22` 0 hits.
-- **0 hits, used:** Malady, Maladies, Grip-marks, Heart-won, Melancholia, Acedia, Atrabile, Adustion, Choler, Pituita, Spleen, Surfeit, Glass Conceit, Tarantism, Phrenitis, Burdened, Redeemed, Ill-Wished, Ill-Slept, Eyebitten, Short-Armed, Saltless, Savourless, Black Lot, Graceless, Crooked Road, Shut Book, Short Fire, Single Door, Bare Board, Borrowed Physic, Iron Sleep, Handed-down, Old Maladies, Cast off / Cast-off, Plain names, Saturn, Tidewrack Spear, Quiet Knife, Old Ash Staff, Thumb-Worn Totem (substring flag below), Whetted Arming Sword, Threshing Flail, Long-Kept Crossbow, Door-Plank Shield, Patched Gambeson, Stair-Worn Byrnie, Kindly Weight, Winnow, cross-barred, humour-wheel quarter, folded corner, grip band, Sullens, Frets, `HeirloomsCurses`, `runModifierId`, `bequestOffer`, `supersededBy`, `burdenedTwinOf`, `redeemedFrom`, `heirloomsSchemaVersion`, `displayKind`, `HeirloomWinDelta`, `HeirloomSlotParity`, `CuriosityMaladyOfferLegal`, `SeededWritesNothing`, `run/oath`. **Added while writing (new lead's call), 0 hits:** Low Tide, Held Ground, Set Heels, Long Look, Carrying Voice, Quilted, `MaladyLeadenFloor`, `GripMarksBynameOnly`, Hang it.
+- **0 hits, used:** Malady, Maladies, Grip-marks, Heart-won, Melancholia, Acedia, Atrabile, Adustion, Choler, Pituita, Spleen, Surfeit, Glass Conceit, Tarantism, Phrenitis, Burdened, Redeemed, Ill-Wished, Ill-Slept, Eyebitten, Short-Armed, Saltless, Savourless, Black Lot, Graceless, Crooked Road, Shut Book, Short Fire, Single Door, Bare Board, Borrowed Physic, Iron Sleep, Handed-down, Old Maladies, Cast off / Cast-off, Plain names, Saturn, Tidewrack Spear, Quiet Knife, Old Ash Staff, Thumb-Worn Totem (substring flag below), Whetted Arming Sword, Threshing Flail, Long-Kept Crossbow, Door-Plank Shield, Patched Gambeson, Stair-Worn Byrnie, Kindly Weight, Winnow, cross-barred, humour-wheel quarter, folded corner, grip band, Sullens, Frets, `HeirloomsCurses`, `runModifierId`, `bequestOffer`, `supersededBy`, `burdenedTwinOf`, `redeemedFrom`, `heirloomsSchemaVersion`, `displayKind`, `HeirloomWinDelta`, `HeirloomSlotParity`, `CuriosityMaladyOfferLegal`, `SeededWritesNothing`, `run/oath`. **Added while writing (new lead's call), 0 hits:** Low Tide, Held Ground, Set Heels, Long Look, Carrying Voice, Quilted, `GripMarksBynameOnly`, Hang it (`MaladyLeadenFloor` retired after the check). **Added after the check (lead's call, after the check), 0 hits (re-run):** Grip-mark, Eyebitten, Short-Armed, Surfeit, Adustion, Jactitation, Borrowed Physic, Shut Book, Iron Sleep, Byrnie, Long-Kept, Thumb-Worn, `BossFelled`, Easy Opening (and the other plain labels), humour-wheel, "Carried to the night's end", ash crumble, hook settle; "Oath of" and "Sacred Oath" (0 hits in the corpus).
 - **Hits, handled:**
   - bile (153): an approved square kind, so "Black Bile" is rejected.
   - Echo (129, incl. IR's Element Echo): "Heart-won" instead.
@@ -1287,22 +1343,32 @@ The owed rows are the single list in 13; by owner:
   - "Called" + given name: SK's "Called {givenName}" key → Carrying Voice (F10).
 - **Kept, flagged to the naming pass (new lead's call; F18):**
   - **Oath:** 0 whole-word hits; substring of **Oathbroken** (an RS enemy), **Oathkeeper** (a W protected name) and **Oathbinder** (an SK rejected example). The register check is whole word, so Oathbroken passes NR5, but the naming pass looks at it.
-  - **Bequest:** 0 hits; LP's Endless Wake prose reads "grave goods and bequests".
+  - **Bequest:** 0 hits; LP's Endless Wake prose reads "grave goods and bequests". Internal only after the check (NR2); the player sees "Hang it?".
   - **First Cut (5):** plain prose ("the first cut" of a cut order); a line name only here.
   - **Answer (82):** plain prose; a line name only here.
-  - **Thumb-Worn Totem:** "hymnal crates" are a Choir theme prop (ROOM), and "hymn sheets" are a banned Oddment texture (SK 4.5.2).
+  - **Thumb-Worn Totem:** 0 hits for the name; "Totem" (79) is the Herald's approved off-hand focus kind (HR 7.7), used as defined. It replaces Darned Hymnal, whose "hymnal" sat beside the Choir theme's hymnal crates (ROOM) and the banned Oddment texture "hymn sheets" (SK 4.5.2), and whose "darned" read as a mild oath.
+  - **Set aside (3):** RS prose only ("its residents set aside"); the shelf button label is flagged.
+  - **Oaths against SRD and 5E:** the eight placeholder Oaths were checked against the SRD 5.1 and 5E Sacred Oath names (Devotion, the Ancients, Vengeance, Conquest, Redemption, Glory, the Watchers, the Crown) and the Oathbreaker: no match (NR2, HL-30).
   - **Kneel:** an EV option verb (K9, "Kneel by the coat"); used here as the desecrated-shrine option label.
   - **Gatesplitter (3):** SK's sample byname, reused as a sample.
   - **Stair-Worn Byrnie:** checked for a "Stairtop" pun.
 - **Existing terms used as defined:** Heirloom shelf, Depth gauge, Book of Nights, Framer, Memento, Stairtop (CH); Old Friend, Wayfarer's Pack (CMP); Lone Road (32); `curseGate` (22); Clinging (30); Ill-Omened, Leaden, Ill-Starred (CON); Grace, Strand, Proviso, StateBlind, `curiosityValueTable`, `EventDeathShareDelta`, the Unwoken Roll (EV); Stratum Card (RS); the Night Governess, the Rousing Engine, the Lullaby, the Jailer of Hours (RS, BR); Whence, byname, Deed (IR, CMP); `pendingProfile`, WO6, `configHash`, `unlockHash`, DS7 (SV); `kitDelta` (SK).
-- **Rejected on tone or rules:** Calenture, Wanhope, Nostalgia, Mal du pays, Somnambulism, Hysteria, the Vapours, Green-sickness, Lunacy, Moonstruck, Mania, Madness, Dementia, Hypochondria, Catalepsy, Monomania, Lypemania, Lycanthropy, Choreomania, St Vitus' Dance, Distemper, Lethargus, Mare-ridden, the Megrims, Quartan Ague, Crow-Marked (Marked has 484 hits), Iron-Debt, Hex, Blight, Bane, Withering, Thrall, Humours, Entail as an heirloom cost, Geas (an SRD spell), Black Bile, Echo.
+- **Hits found by the design check, handled (lead's call, after the check):**
+  - **Passing Bell (12):** a Herald spell head word, and "passing" reads as "deaths" → Grip-marks.
+  - **diamond (9):** LE 6.15 tier marks, CON 15 token clusters, BR's Lead diamond → the chip is a folded page corner.
+  - **cracked:** DH's cracked-heart lethal tag → the Malady glyph is a humour-wheel quarter.
+  - **Hauberk (3):** AR/IR's Hushmail Hauberk is chain mail (heavy) → Stair-Worn Byrnie.
+  - **hatching:** Rough terrain's pattern (TL) → the afflicted tell is an engraved double arc.
+  - **"Carried out of the Heart":** the Memento's own caption (LE Q1, CH 4.10, SK 4.5.2) → "Carried to the night's end".
+  - **Stalwart:** the Splint's approved verb, repeated by the draft's Set Heels → Set Heels rewritten.
+- **Rejected on tone or rules:** Calenture, Wanhope, Nostalgia, Mal du pays, Somnambulism, Hysteria, the Vapours, Green-sickness, Lunacy, Moonstruck, Mania, Madness, Dementia, Hypochondria, Catalepsy, Monomania, Lypemania, Lycanthropy, Choreomania, St Vitus' Dance, Distemper, Lethargus, Mare-ridden, the Megrims, Quartan Ague, Crow-Marked (Marked has 484 hits), Iron-Debt, Hex, Blight, Bane, Withering, Thrall, Humours, Entail as an heirloom cost, Geas (an SRD spell), Black Bile, Echo. **After the check:** Passings (reads as "deaths"), Plethora (a current clinical sign; everyday English), Torpor (current physiology), Overlooked (reads as "ignored"), Widdershins (promised a reversal its rule lacked), Darned Hymnal, Grandsire's Crossbow (a waking-world lineage; gendered), Stair-Worn Hauberk, Oath of the Lent Physic (a liturgical season), Oath of the Covered Hand (a shared head noun), Oath of Iron Sleep (the agreed form), "noonday" in Acedia's flavour (the scriptural noonday demon), the hollow diamond, the cracked circle and the shadow halo.
 - **Spares for the naming pass:** the Sullens and the Frets; both risk NR1b as mood words, so they need a second look.
 
 ### A.3 HL cross-reference
 
 | Id | Sections here |
 |---|---|
-| HL-1 | 0, 0.2, 4.1.2, 13 |
+| HL-1 | 0.2, 0.3, 4.1.2, 13 |
 | HL-2 | 4.1.2, 5.1 |
 | HL-3 | 0.1, 4.1.4, 8.1 |
 | HL-4 | 0.1, 4.1.6 |
@@ -1315,12 +1381,12 @@ The owed rows are the single list in 13; by owner:
 | HL-11 | 4.1.7 |
 | HL-12 | 9.3 |
 | HL-13 | 0.2, 5.3 |
-| HL-14 | header (Validator), 9.2 |
+| HL-14 | header (Validator), 9.2, 10 |
 | HL-15 | 0.2, 4.2 |
 | HL-16 | 4.2, 5.2 |
 | HL-17 | 4.3.1 |
 | HL-18 | 4.3.2 |
-| HL-19 | 4.3.3 |
+| HL-19 | 0.2, 4.3.3, 14.2 |
 | HL-20 | 4.3.5 |
 | HL-21 | 0.2, 4.5 |
 | HL-22 | 4.5, 9.1, 10 |
@@ -1330,10 +1396,11 @@ The owed rows are the single list in 13; by owner:
 | HL-26 | 4.6 |
 | HL-27 | 0.1, 7, 10 |
 | HL-28 | 4.8 |
-| HL-29 | 0.2, 2.3 F13–F15, 4.2, 4.3, 10 |
-| HL-30 | 5.3 |
+| HL-29 | 0.2, 2.3 F13–F15, 4.2, 4.3, 10, 14.3 |
+| HL-30 | 5.3, 13 |
+| HL-31 | 0.3, 2.2, 4.1.2, 9.1, 13, 14.2, 14.3 |
 
-The drafts' local numbers map to this register as follows: Model A's HL-4 (full reveal) → Q3 option B (rejected); the synthesis's HL-4 (Grip-marks) → HL-5, its HL-4b (chip) → HL-15; the Curses component's HL-30 → HL-13, HL-31 → HL-15, HL-32 → HL-16, HL-33 → HL-17, HL-34 → HL-18, HL-35 and HL-36 → HL-19, HL-37 → HL-21, HL-38 → HL-22, HL-39 → HL-23, HL-40 → HL-24, HL-41 → HL-27, HL-42 → HL-14; the Heirlooms component's HL-9 (Oddment pool) → a reading; the drafts' HL-18 (Herald) → dropped. HL-1 to HL-30 each have one meaning.
+The drafts' local numbers map to this register as follows: Model A's HL-4 (full reveal) → Q3 option B (rejected); the synthesis's HL-4 (Grip-marks) → HL-5, its HL-4b (chip) → HL-15; the Curses component's HL-30 → HL-13, HL-31 → HL-15, HL-32 → HL-16, HL-33 → HL-17, HL-34 → HL-18, HL-35 and HL-36 → HL-19, HL-37 → HL-21, HL-38 → HL-22, HL-39 → HL-23, HL-40 → HL-24, HL-41 → HL-27, HL-42 → HL-14; the Heirlooms component's HL-9 (Oddment pool) → a reading; the drafts' HL-18 (Herald) → dropped. Those draft-local numbers are retired and never cited in this document's text; HL-1 to HL-31 each have one meaning. HL-31 (the `BossFelled` Core fact) was added after the design check and maps to no draft number.
 
 ## Appendix B: sources
 
