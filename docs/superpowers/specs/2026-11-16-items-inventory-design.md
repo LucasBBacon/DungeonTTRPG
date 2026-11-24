@@ -249,6 +249,8 @@ without migrating any data. **(agreed)**
     "neck": 1, "finger": 2, "none": 2 },
   "trinketSubjects": ["Search", "…"],
   "trinketDomains": { "props.trinket.head": ["Search", "…"], "…": ["…"] },
+  "charmTriggers": [{ "token": "…", "catchClass": "setup", "actor": "…",
+    "repeat": "once", "predicate": "…" }], "charmOutputs": ["…"],
   "sharedTrinketAllowlist": [], "copyRegistryAllowlist": ["…"],
   "trinketRarePerFloorMax": 1, "trinketButtonCap": 1,
   "trinketPolicyFilters": { "bigHitPermille": 200,
@@ -278,7 +280,11 @@ decisions, **not tuning**: changing them needs client approval.
 `trinketSubjects`, `trinketDomains`, `sharedTrinketAllowlist`,
 `copyRegistryAllowlist` and the channel filter lists are a lead's-call
 block that only the lead changes; `bigHitPermille` is tuning.
-**(change TK-11)**
+**(change TK-11)** The charm vocabularies `charmTriggers` (each token with
+`catchClass`, `actor`, `repeat`, `crossLocation` and its exact predicate)
+and `charmOutputs` join that lead's-call block by the same path; a charm
+record carries a `charm{}` block (charm abilities design 4.3, 9.1)
+**(change CA-3)**.
 
 The `consumables` block is the consumables design's (consumables design
 18.1, full keys there, including which are not tuning). The talisman
@@ -855,7 +861,11 @@ drawn item (camp and trader stock included) counts for duplicate-base
 rerolls and family caps, so one draw never repeats itself. For later
 floors' draws, camp and trader stock counts toward family caps **only once
 bought or bartered**, so an item the party could not afford never closes a
-family for the rest of the run. Dreamed options (the unchosen options
+family for the rest of the run. The notables shop is a live charm
+channel: catch charms are priced by the existing value-to-price rule
+(10.5, read); the charm lane-weight question is a future item for the IR
+and LE owners with the client (charm abilities design 4.10, 14.2)
+**(change CA-25, read)**. Dreamed options (the unchosen options
 of an offer set) never count (loot economy design 6.3, change LE-4; M2),
 though they do write Scion-line memory, `oncePerRun` and gear floor keys
 (item rolls design 4.7; change IR-6; agreed 2026-11-22, Q2).
@@ -1140,6 +1150,12 @@ rules for the trader-as-unit case and is out of scope here.
    property, if any, is the rolled one (at most 1 rolled line per item;
    item rolls design 4.6) **(change IR-4, approved 2026-11-22; M2)**.
    Validation keeps that count within `hiddenMax` (19.1 rule 14).
+   **Charms (change CA-24; agreed 2026-11-24, Q5; M3):** a charm's
+   rolled catch or Keep line may be its one dormant property; it has no
+   ready pip, no hint and no fire-order place, and a line revealed
+   mid-fight shows at once on the card but stays inert until the next
+   fight-resources reset. The obvious line is never a dormant catch
+   (charm abilities design 4.8).
    **Plain Gifts (agreed 2026-11-22, Q3):** the Dream's Due, every offer
    option (the Wager and the Twin Coffer included), the fourth option and
    every Viaticum option are generated with `known` = every line, so a
@@ -1685,6 +1701,16 @@ Later unchanged (heirlooms and curses design 4.2, 10, 14.2).
   and never retargets (loot economy design 6.6 item 2; starting kits
   design 4.3; change SK-4, applied by the loot economy owner; M3)
   **(change HL-3; M3; heirlooms and curses design 4.1.4)**.
+- **The charm boon, the Bobbin** (M3; agreed 2026-11-24, Q4; change
+  CA-20, read), is a boon type of its own, not an heirloom: a fresh,
+  uncursed Common Catch charm each run, flagged `boonCharm` and never
+  `heirloom`, treated like an heirloom instance for economy only (outside
+  the floor loot budget, display value, unsellable, lost at the stairs if
+  left in leftovers). It counts as party-owned for the Dream's Due's
+  owned and duplicate checks, but never satisfies the F1 hero-arms Due
+  and never triggers the HL-3 waiver (a reading recorded in the charm
+  abilities design 13; the LE owner rules it under CA-20, pending;
+  charm abilities design 4.11).
 
 ## 15. Companions, recruits and run end
 
@@ -2033,9 +2059,28 @@ The build fails on any violation:
 28. Rolled lines: a rollable trinket table never offers the item's own
     obvious line, a line sharing an `answers[]` key with it, a second
     channel on a channel ring, or a second button; an obvious line with
-    no legal roll fails.
+    no legal roll fails. Charms add: no two lines with the same (trigger,
+    output), no rolled catch with the obvious line's output, and no
+    Warded catch on a ward-button charm (charm abilities design 4.8;
+    change CA-24; M3).
+
+29. Charm hints: every charm declares shape, catchClass, readyDisplay,
+    iconSilhouette and `plateHint`; a setup Catch also `forecastHint`,
+    and no other shape or class does.
+30. Charm catches: the trigger is a `charmTriggers` token and a combat
+    event (never `combatStart`, `roundN`); the output is in
+    `charmOutputs`; no class, verb, ability or item id keys; no chain;
+    `onBlocked` and `filters` declared; a `crossLocation` token only with
+    a Warded or Helped output and no effect on the subject (agreed
+    2026-11-24, Q3).
+31. Charm buttons: a Spend or Keep holds the item's one button (rule
+    19); a shaper acts only on a held token and never creates one.
 
 Rules 15–28 are summaries; the full text is trinkets design 18.1.
+Rules 29–31 are summaries; the full text is charm abilities design 9.2,
+checked by V23 `CharmLane` (charm abilities design 9.3; listed in SV 5.2, its RS 11.2 row a
+pending request to the RS owner)
+**(change CA-18; M2)**.
 **(change TK-14)** Rule 28's limits apply to every category's rollable
 tables, which are curated per family (3–5 eligible entries) and give at
 most 1 rolled line per item; the item rolls design's V14 `ItemRolls`
@@ -2356,7 +2401,12 @@ mundane bases are not loot, and family caps all stand.
   **(change TK-16)** Consumables, scrolls and wands are no longer pending:
   see the consumables design (`2026-11-17-consumables-design.md`);
   coatings and Coated stay Later, and what it still needs is in its
-  section 24. **(change CN-8)** Heirlooms and curses are no longer
+  section 24. **(change CN-8)** Charm abilities (the trinkets design's
+  24.2 pass) are no longer pending: see the charm abilities design
+  (`2026-11-24-charm-abilities-design.md`, segment 16), which takes up
+  that hook; this document's rows are CA-3, CA-18, CA-20 (read), CA-24
+  and CA-25 (read), and what it still needs from other owners is in its
+  sections 13 and 17. Heirlooms and curses are no longer
   pending: see the heirlooms and curses design
   (`2026-11-23-heirlooms-curses-design.md`, segment 15), which takes up
   the heirloom and curse hooks (17 rows 7–8; sections 13, 14); what it

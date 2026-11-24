@@ -274,7 +274,7 @@ Input: a card {floor f, tier T, channel, socketId, rank, flags: due | fit | arms
 
 ### 4.2 Category, lane and family (lead's call; change IR-3)
 
-**Categories at two levels (lead's call, after the check).** A record has a **fine category** (`loot.categories`: weapon, focus, armour, shield, piece, jewel, scroll, wand, flask, talisman) and a **category group** (`loot.categoryGroup`: the four LE 6.2 groups). Groups: **arms** = weapon, focus; **guard** = armour, shield; **trinket** = piece, jewel (pieces sit with trinkets, as TK and the 5.3 tables already list them); **tactical** = scroll, wand, flask (notable flasks and bombs), talisman. `categoryWeight` and the lane divisor use the **group**; offer and camp-pair distinctness, the Wax-Key sibling's "same category", the Due's slot and the UI's category word use the **fine category**.
+**Categories at two levels (lead's call, after the check).** A record has a **fine category** (`loot.categories`: weapon, focus, armour, shield, piece, jewel, scroll, wand, flask, talisman) and a **category group** (`loot.categoryGroup`: the four LE 6.2 groups). Groups: **arms** = weapon, focus; **guard** = armour, shield; **trinket** = piece, jewel (pieces sit with trinkets, as TK and the 5.3 tables already list them); **tactical** = scroll, wand, flask (notable flasks and bombs), talisman. `categoryWeight` and the lane divisor use the **group**; offer and camp-pair distinctness, the Wax-Key sibling's "same category", the Due's slot and the UI's category word use the **fine category**. The fine category `talisman` stays; "talisman" is no longer a charm display word (charm abilities design 2.3 F1, change CA-12; M2 text). A global charm-lane weight change inside the unchanged trinket VP share, never theme-keyed (agreed Q4), is a future item (14.2; charm abilities design 4.10, change CA-25; after CG1/CG2).
 
 For each surviving record r (lane L, family F, group g, tier T), records sorted by id, the weight is an Int64 computed **factor by factor in this fixed order, with a FloorDiv after each factor** (lead's call, after the check; the earlier "one FloorDiv at the end" was undefined):
 
@@ -592,7 +592,7 @@ A theme table is a **`theme.loot`** record on the RS 8.0 theme (additive, displa
 theme.loot {
   carriedFamilies[] : family ids     // derived from the RS 8.x kit columns of armed roster types, leaders, bosses (V14 (k) checks)
   answers[]         : family | prop | answers[] keys   // answer the theme's 6, counterType or Law verbs
-  patina            : { materialSet, trimPalette, charm? }   // 6.2: material on the trim mask, at most one charm; hue reviewed at the RS 7.4 art gates
+  patina            : { materialSet, trimPalette, accent? }   // 6.2: material on the trim mask, at most one accent (was "charm"; CA-13, M2); hue reviewed at the RS 7.4 art gates
   stamp             : glyphId        // a pictogram (6.2 bans); card corner inside the cross-theme "found" frame, never on the icon body
   reveries[]        : { lineKey, part }   // about 12 per theme (illustr.); part = haft | grip | binding | blade | worn | any; RC1/RC9-vetted
   provenance        : captionKey     // "Found in <theme>, floor N"
@@ -832,7 +832,7 @@ All flavour (provenance, the Reverie, a byname, Deeds, Patina caption) sits in a
 ### 6.2 Art (lead's call; agreed, Q4; change IR-15)
 
 - **Silhouette = family.** A Gaol mace and a Heart mace share an outline. The theme changes only material on a **trim mask** (grip, wrap, rivets, pommel, finish).
-- **Patina = materials plus at most one charm (lead's call, after the check).** (a) A **material set** on the trim mask: a shader job, M2-cheap. (b) At most **one optional charm** per theme on a fixed socket, inside the family's silhouette envelope (≤ 10% of bounding length, no dangling elements): Gaol, padlock-brass rivets; Kennel, an antler grip; Wake, jet beads; Choir, an organ-pipe tin ferrule; Silk, thread bindings; Carnival, carousel-pole brass; Supper, an old-silver collar; Gut, brass rent-tokens; Heart, a sewn name-tape. Every other geometric detail in a 5.3 Patina line is Reverie text or a material read. *(illustr.; art finalises)*
+- **Patina = materials plus at most one accent (lead's call, after the check; "charm" renamed "accent" so the art team never budgets charms twice, charm abilities design 2.3 F2, change CA-13; M2).** (a) A **material set** on the trim mask: a shader job, M2-cheap. (b) At most **one optional accent** per theme on a fixed socket, inside the family's silhouette envelope (≤ 10% of bounding length, no dangling elements): Gaol, padlock-brass rivets; Kennel, an antler grip; Wake, jet beads; Choir, an organ-pipe tin ferrule; Silk, thread bindings; Carnival, carousel-pole brass; Supper, an old-silver collar; Gut, brass rent-tokens; Heart, a sewn name-tape. Every other geometric detail in a 5.3 Patina line is Reverie text or a material read. *(illustr.; art finalises)*
 - **Where Patina shows (lead's call, after the check).** Patina is **model-only**: unit models at tactical zoom and the inspect render. Icons stay global and untinted, so the card's theme read in M2 is the stamp and the provenance line, not Patina. Themes without trims in M2 show the **base finish**, with the stamp and provenance still shown.
 - **Patina bans:** flame, frost, acid or storm effects; the keyhole motif and keys (RC3; TL-23); square-kind textures (water, web, oil, bile, bedsheet) (RC1); roster-prop silhouettes on items; clock faces on lock-like objects. Element VFX come only from properties. **Hue** is checked at the RS 7.4 art gates (greyscale and colour-blind simulation against the RC4 damage-hue key), not by V14, because the key does not exist yet; each theme's Tone Sheet lists "review against the key" items: oxblood (fire or bleed red), bruise-purple, flesh-pink (Gut necrotic), verdigris (acid and the reserved bile green), and gilt or lamp-gold leaf (conditional on the radiant hue's final value) (lead's call, after the check).
 - **Stamps:** pictograms only, shown in the card corner inside one cross-theme "found" frame so the stamp reads as provenance, not maker; no numerals, letters, keys, keyholes, faces, clock faces or button shapes (V14 (f), (k)) (lead's call, after the check).
@@ -847,7 +847,7 @@ All flavour (provenance, the Reverie, a byname, Deeds, Patina caption) sits in a
 |---|---|---|
 | Trim masks (once per family model) | about 80 | — |
 | Material sets | 2 (Kennel, Gaol) | 8 more |
-| Charms | about 2 | about 8 more (about 10 small meshes) |
+| Accents (CA-13) | about 2 | about 8 more (about 10 small meshes) |
 | Stamps | 10 | — |
 | Signature first forms (bespoke) | 15 | + 2 (Wake) |
 | Signature tier forms | finish step, no model | — |
@@ -1073,7 +1073,7 @@ Every report reads `LootLedger` rows at the **generation snapshot** unless it sa
 | Lexicon epithets (suffixes) for every rollable entry; `carrierSafe`, `synergy[]`, `verbTag` tags | about 40 | owners | M2 |
 | Scion lines | about 1 per gear lane | owners | M2 |
 | Martial tactical boss-card items | 2–3 | CN | M3 (from Later) |
-| Element amulets, Wader's Boots, Stillmind Pendant, Holy Water, leader-emblem charms | as TK and CN Later lists | TK, CN | M3–Later |
+| Element amulets, Wader's Boots, Stillmind Pendant, Holy Water; Muse's Token (held Later with the Leadership-mastery owner; replaces the dangling "leader-emblem charms" pointer, charm abilities design 5.1, 14.2, change CA-14) | as TK and CN Later lists | TK, CN; Leadership owner | M3–Later |
 | Rare bomb shapes, arena-keyed Viaticum tools | — | CN | Later (LE 6.13) |
 | Reveries (about 12 per theme, part-tagged) and provenance captions | about 110 | writing | M2 |
 
@@ -1323,6 +1323,7 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 | **This owner refuses** HL-3 (any heirloom slot waives the F1 Due) | M3 | No armour or shield heirloom templates at M3; three weapon or focus R2 families instead (heirlooms and curses design 4.1.4, its 14.2) | IR owner; LE owner |
 | **This owner refuses** HL-31 (`BossFelled` worn-piece credit) or worn-piece bynames | M3 | Weapon and focus R2 families keyed to the killing blow only; worn pieces earn no byname, and the Deed-only rule stands (heirlooms and curses design 14.2) | IR, FL, CMP owners |
 | **Conditions owner refuses** the HL-29 budget reading | M4 | Cursed twins and the chip return to Later unchanged (heirlooms and curses design 10) | CON owner |
+| **Charm-lane weight** (charm abilities design 14.2; change CA-25) | CG1/CG2 show P(0 charms) above ~25% *(illustr.)* on the canonical unlock set | A global charm-lane weight change inside the unchanged trinket VP share, never theme-keyed (agreed Q4); catch charms priced by the existing camp-shop rule meanwhile (4.2) | IR/LE owners + client |
 
 ---
 
@@ -1351,7 +1352,7 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 
 **(lead's call)**
 
-- Every *(illustr.)* value: lane lists per class, subclass and kit (within 4.3); the soft usability factor; the `identifyDifficulty` by tier; the rollable share; the smart-roll weights; the `LinePowerDelta` band; the Wax-Key lane preference, the spell-family repeat and named-VR-first terms; the `showsInUse` factor; the placeholder mark and line glyphs (6.1); the charms; the IR-16 caps; the `anyCompanion` permille; lever caps; every report target other than the stated gates; reserved draw totals (segment 11 computes).
+- Every *(illustr.)* value: lane lists per class, subclass and kit (within 4.3); the soft usability factor; the `identifyDifficulty` by tier; the rollable share; the smart-roll weights; the `LinePowerDelta` band; the Wax-Key lane preference, the spell-family repeat and named-VR-first terms; the `showsInUse` factor; the placeholder mark and line glyphs (6.1); the Patina accents; the IR-16 caps; the `anyCompanion` permille; lever caps; every report target other than the stated gates; reserved draw totals (segment 11 computes).
 - Record contents: which families are rollable, their 3–5 eligible entries (trinkets per TK rule 28; cross-document comparison 2026-11-23, CC-4), Scion lines, lexicon epithets, `synergy[]` and `carrierSafe` tags, within 4.5–4.6 and the content requests (9.4).
 - Theme presentation: Patina material sets, trim palettes, stamps and Reverie text within 5 and 6, through the RC vetting list.
 - Godot scene structure for the card, the Whence pane, the verdict glyphs, the carried-use floater and the signature cache decal, with no physics.
@@ -1372,6 +1373,7 @@ The owed rows are the single list in 13; by owner:
 - **The companions owner:** IR-17 (the party-size key); Deeds (6.1); kit lanes (4.3).
 - **The starting kits design** (segment 14, approved 2026-11-23): the heirloom hook (4.15) and starting-kit gear in the Whence pane (6.1) taken up: SK-5 (given names and kit lines in Whence, bynames displace given names, V14 (f) pool shared; M2), SK-12 (heirloom placement; M3); pending with this owner: the SK-4 confirmation (heirloom precedence at the F1 Due; M3).
 - **The heirlooms and curses design** (segment 15, approved 2026-11-23): the curse and heirloom hooks (4.15) and Grip-marks in the Whence pane (6.1) taken up: HL-5 (Grip-marks; M3), HL-15 (the chip and first-equip line; M4), HL-29 (curses at M4), HL-23 (the Burdened twin; Later); pending with this owner: the HL-3 confirmation (any heirloom slot waives the F1 Due; M3) and the HL-31 ruling (`BossFelled`; worn-piece bynames; M3); pending with the main design and RS owners: HL-21 (Oaths, the Crooked Road; Later).
+- **The charm abilities design** (segment 16, the TK 24.2 pass, `2026-11-24-charm-abilities-design.md`, approved 2026-11-24): its hooks on this document taken up: CA-12 ("talisman" off charm cards; the `talisman` fine category stays; 4.2; M2 text), CA-13 (a request to this owner, applied here: Patina "charm" → "accent" in 6.2, the art table and `theme.loot.patina`; M2; RS 8.0 a pending request to the RS owner), CA-14 (a request to this owner, applied here: the 9.4 pointer names Muse's Token and the Leadership-mastery owner; M2), CA-25 (the charm-lane weight question, a future item with the LE owner and the client, 14.2; after CG1/CG2). Its reads of 4.3 `lane.jewel.charm` and 4.6 need no change.
 - **The class owners:** `loot.classLanes` and `subclassLanes` (4.3).
 - **The traps owner:** IR-11 (the lock-card wording, TL 6.11).
 - **The RS owner:** IR-6 (RS 6.4 read), IR-12 (roster flags), IR-13 (IX21 reading; Old Ragged's surcoat), IR-14 (reading), IR-15 (`theme.loot` on RS 8.0; the RS 7.4 art gates take the Patina hue check and the signature silhouette check), IR-19 (Echo), IR-21 (V14 in RS 11.2); the Memento epitaph line and the Reveries flagged in 6.1 ("Still warm") on the RS 7.4 tone review.

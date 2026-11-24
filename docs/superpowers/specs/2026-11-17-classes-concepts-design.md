@@ -915,6 +915,19 @@ read")** The target is at most four per unit (ability 11.4, settled).
   Stand Fast on the Surge row, Overchannel and Scatter on the spellbook
   row, From Nowhere on the Vanish row.
 
+**Pending requests (change CA-10 ⚑; before M2 UI; CL owner and lead's
+ruling pending; charm abilities design 4.7):** under the text above a
+trinket Catch counts 1 (it has a `fight` pool, so it is not a pool-free
+reaction, and it marks nothing on the battlefield), so the approved
+Trophy Tally already puts a Vanguard at 5. Two new bullets are requested:
+(1) "a once-per-fight automatic trinket catch with a plate ready pip
+counts 0"; (2) an items row (belt consumables plus the one trinket
+button) sits outside the four-per-unit class count, checked by the
+companion under-10-seconds gate. Fallbacks until ruled: (1) catches
+count 1, covered by the "rarely fires" and Vanguard read verdicts; (2)
+the trinket button counts 1, with a Vanguard warning verdict (charm
+abilities design 14.2).
+
 At level 1: Vanguard 4, Shade 3, Arcanist 3, Herald 3; the same at level
 10 before offers. Party-level readability is an M2 playtest gate: median companion-turn time under 10
 seconds (settled target).

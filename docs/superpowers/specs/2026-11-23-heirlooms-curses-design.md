@@ -436,6 +436,7 @@ Every route is an achievement. None reads deaths, losses, streaks or counts (AN1
   - Report `HeirloomSlotParity` (9.3).
   - **Fallback if refused:** no armour or shield templates at M3. Rows 8–10 of 5.1 are then replaced by three weapon or focus R2 families at the same tiers: a warhammer (F3+), a shortbow (F4+) and a rod (F4+) *(illustr.)*, keeping the 2/2/2 split and 13 templates; `HeirloomCoverage` and the 8.2 table are re-run **(lead's call, after the check)**.
   - SK-4's pending IR, DH and LE confirmations must close before heirlooms ship (SK 10).
+  - **Read by the charm abilities design (2026-11-24; a reading, no change here):** the Bobbin's boon charm (`boonCharm`, never `heirloom`) is never arms, so it never sets `armsSatisfied` and never triggers this waiver; a V13g (g) case is requested from LE (CA-26; charm abilities design 4.11).
 - **Oddments** (a reading, not a gap): SK 4.5.2's effective pool is the held boon's pool, then the default kit's. An heirloom has no `oddmentPoolId`, so it draws the default pool.
 - **"Begin again"** carries the heirloom forward, re-validated (CH 4.10, read).
 
@@ -465,7 +466,7 @@ Every route is an achievement. None reads deaths, losses, streaks or counts (AN1
 
 - The template id travels in `boons[]`, inside `configHash` (SV-12). Template content is in `manifestHash`.
 - **Heirloom unlocks stay out of `unlockHash`** (change HL-11, an SV reading). They change no generation pool; including them would show two players with different shelves a spurious "will play differently" notice. Grip-marks and the hook arrangement are display.
-- Shared and seeded runs use canonical grants, so no heirloom (SK-16 fallback (a)). The entry screen says so.
+- Shared and seeded runs use canonical grants, so no heirloom (SK-16 fallback (a)). The entry screen says so. Read by the charm abilities design (CA-20): the Bobbin charm boon is off on the same runs (charm abilities design 4.11).
 - Request HL-25: Later share codes may carry one template id and one `runModifierId`, never Grip-marks.
 - **Template supersession (HL-11):** a balance swap maps `supersededBy`, the player's unlock and Grip-marks migrate, and nothing is deleted; a rebalanced line keeps its id and bumps the content version; old replays play under their own `manifestHash`; the profile record carries `heirloomsSchemaVersion`.
 
@@ -601,7 +602,7 @@ They are rejected because they are: cross-run penalty or power (EV 4.4.8); strea
 
 - Rings stay uncursable. This design does **not** ask for Rare rings, so TK Q2 is not reopened.
 - The Heartward Torc is the only trinket curse host. Its cursed twin is authored only if the TK owner agrees, and then ships with item curses at M4 (new lead's call, Q5); otherwise there is none.
-- Charms are never cursed and never heirlooms (CH-24: charms get no hub surface).
+- Charms are never cursed and never heirlooms (CH-24: charms get no hub surface). Read by the charm abilities design (CA-26, M3): its Bobbin boon is a fresh, uncursed Common charm each run, flagged `boonCharm`, never `heirloom`; its worn-slot row and `KitNoTrinket` waiver follow this section's pattern and are requested from SK, not from this design (charm abilities design 4.11).
 - M4 trinket heirlooms are amulets only, placed in an empty worn slot with no displacement. They need an SK-12 worn-slot rule, a V21 `KitNoTrinket` waiver and a TK parity report.
 
 ### 4.7 Links (Later)

@@ -214,7 +214,7 @@ of consumables.
 | Tag | Spent count reset to zero at | Used for |
 |---|---|---|
 | `turn` | The unit's turn start | Once-per-turn passives; the reaction |
-| `fight` | Combat start | Minor uses only, such as Rally once per ally. Every armour, shield and piece `fight` use is a minor use: cancelling one event per fight (Ringed, Double Ring, Proof, Twice-Proof), Shadowed, Warding Lining, Runner's Boots and Forewarned's fight-start window **(change AR-6, armour design 8.1 rule 5)**, and every trinket `fight` use (trinkets design 9.3) **(change TK-18)**. No major power is per-fight. |
+| `fight` | Combat start | Minor uses only, such as Rally once per ally. Every armour, shield and piece `fight` use is a minor use: cancelling one event per fight (Ringed, Double Ring, Proof, Twice-Proof), Shadowed, Warding Lining, Runner's Boots and Forewarned's fight-start window **(change AR-6, armour design 8.1 rule 5)**, and every trinket `fight` use (trinkets design 9.3) **(change TK-18)**; a charm Catch is a `fight` 1 minor, and an automatic ally-Warded charm is a major on `rest` 1/1/1 (charm abilities design 4.2, 4.5) **(change CA-7, read; M3)**. No major power is per-fight. |
 | `rest` | A completed short rest, and camp | Martial charges, Second Wind, caster rest recovery |
 | `camp` | Camp only. *Later:* one named exception, a wandering trader's paid **Recharge**, which resets one wand's `camp` pool, once per trader, priced in coin; the simulator reports wand charges per floor with and without it (change I-16, items design 10.9, 19.1, 19.3) | Spell slots, Surge, signature abilities, wand charges |
 | `never` | Never | Consumables |
@@ -956,6 +956,10 @@ are listed on the same screen above the choice. **(lead's call)**
 - The suggestion comes from the party scorer (section 13), the same one the
   simulator uses. A poor suggestion is visible to players, so its quality is
   a release requirement.
+- *Pending request (CA-22), not a rule until the ability model owner
+  rules (M3):* the party scorer values an expected charm catch at its
+  preview value, so suggestions position companions to trigger charms
+  (charm abilities design 4.9).
 
 ### 11.4 Other measures against fatigue
 
@@ -968,6 +972,12 @@ are listed on the same screen above the choice. **(lead's call)**
 - A party bar shows the supply count.
 - Playtest target: under 10 seconds per companion turn, and at most four
   things to read per unit.
+- *Pending request (CA-10) to the classes owner and the lead, not a rule
+  until they rule (before M2 UI):* a once-per-fight automatic trinket
+  catch with a plate ready pip counts 0, and an items row (belt
+  consumables and the one trinket button) sits outside the four; until
+  then a Catch counts 1 (charm abilities design 4.7). Automatic catches
+  add no press to a companion's turn (charm abilities design 0.1, read).
 
 ## 12. Monster abilities
 
@@ -1067,7 +1077,9 @@ score = expected damage (capped at the target's hit points)
   term is added when the Loremaster ships (change LM-2, Arcanist design
   9.3). Every weapon verb adds a static
   scorer value in hit-point equivalents. **(change W-4, weapons design
-  15.4)**
+  15.4)** *Pending request (CA-22), not a rule until the ability model
+  owner rules (M3):* a party-scorer term values an expected charm catch
+  at its preview value (charm abilities design 4.9; 11.3 here).
 - **Units:** every term is in hit-point equivalents. A condition's control
   value is computed (conditions design 17.3); only its `denyPct` is set in
   the condition's data. **(change C14)**
@@ -1464,6 +1476,20 @@ Applied on 2026-11-16:
   deed, 5.2) and 6.2's `rest` and `camp` pools unchanged; no Malady lowers
   a pool maximum. Item curses, Clinging and Maladies are M4 (agreed, Q5).
   **(changes HL-19, HL-29, read)**
+- **Charm abilities:** settled in
+  `2026-11-24-charm-abilities-design.md` (charm abilities design,
+  segment 16, the TK 24.2 pass, approved 2026-11-24); its hooks here are
+  taken up. It changes no rule here. It reads 6.2's "No major power is
+  per-fight" (ally-Warded charms on `rest` 1/1/1; CA-7, read; M3), 7.3
+  (no charm uses the reaction-prompt path), 10.2's eight-limited cap
+  (item abilities exempt; ButtonCap 1) and 14.3 step 6 (catches resolve
+  after the use) unchanged. Its rename leaves 7.2's "never a talisman
+  in combat" unchanged: "talisman" stays the consumables category and
+  leaves charm cards (CA-12; M2 text). Pending with the ability model
+  owner: the party scorer values expected catches (11.3, 13; CA-22,
+  M3). Pending with the classes owner and the lead: the charm read
+  rulings (11.4; CA-10, before M2 UI). **(changes CA-7, CA-12, read;
+  CA-10, CA-22, requests)**
 - **Content volume:** counts of companions, themes, monsters and bosses for
   M2. The M1 slice class is the Vanguard (classes design) **(change
   CL-13b)**.

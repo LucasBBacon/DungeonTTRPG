@@ -762,6 +762,7 @@ The centre is reserved for one modal card.
 #### 4.9.5 Budgets (lead's call; *illustr.*; gated by V18 and the glance test)
 - At most 7 HUD regions.
 - Enemy plates unchanged (ENM 5.6: ≤ 2 marks plus the formation chip, ≤ 1 glint).
+- **Pending request (charm abilities design CA-27; read; M2 for Trophy Tally's pips, M3):** a party unit's charms are **one** plate mark, a pair of pips, so they spend one of `plateMarks: 2` (which party plates already spend on the Bloodied and low marks, DH-20); no budget change. Not a rule until this owner rules (charm abilities design 4.7, 6).
 - `MarksPerScreen` ≤ 12 at default zoom, with gate targets P(> 12) ≤ 10% in explore and ≤ 5% in combat. **Defined (after the check)** as the count of visible records with `countsAsMark` in the viewport at default zoom; the 6 registry table sets the flag (Afterimages, glints, Listen badges and told pips count; knowledge-state fills and the seen-edge line do not).
 - ≤ 3 telegraph layers; 1 board information layer.
 - 1 modal plus ≤ 1 floating and ≤ 2 kept inspect cards.
@@ -864,6 +865,7 @@ Inspect cards never queue. On a profile's first two runs, a one-line ribbon "Mor
 - **Camp:** the Tithe Bowl (Lodestring or Surveyor's Sketch); the conditional Ear Trumpet stock row (agreed, Q3); the next-floor card unchanged (RS 6.9); the Lore roster preview (RS, M3); the previous floor's Atlas page on the dream track (M3).
 - **Hub and profile:** `uiMemory`; codex hosting (RS owns, segment 10 hosts, EV-37); the Floor Atlas in the run record (M3).
 - **Answered** by the starting kits design (segment 14, approved 2026-11-23; its 4.6, 11, 13): the kit strip, the Oddment callout and the creation warnings under `uiMemory` (SK-9 ⚑, applied in 4.10; M2); codex hosting includes the Oddments page (RS owns, segment 10 hosts, with camp and hub design 4.15.8; M2).
+- **Taken up** by the charm abilities design (segment 16, the TK 24.2 pass, approved 2026-11-24; its 4.7, 6, 11, 13): charm `forecastHint` computed only through `IKnowledgeQuery` and party knowledge, with its `KnowledgeLeak` cases (pending with this owner); `plateHint` never on a hostile's intent telegraph; plate states with Inspect text (`NoHoverOnly`); `uiMemory` callouts on the first charm pickup, first catch fire and first Keep fill (4.10, read). **Pending request (CA-27; M2 for Trophy Tally's pips, M3):** the charm pip pair, forecast line and fire beat as `SurfaceRecord` rows, the `plateMarks` read, the pip patterns and the output cues in the blind-ID gate (4.9.5, 5, 6). Not a rule until this owner rules.
 - **Answered** by the camp and hub design (segment 13, approved 2026-11-23; its 2.2, 4.3, 5.2, 11): the Tithe Bowl at the Keeper's Cart, camps 1–4, the Sketch only at camp 4, shown greyed with its reason while a Wax Key is held until the LE owner rules on 4.6.3's request (M3); the Ear Trumpet row in the vendor panel (M3, conditional); the next-floor card trimmed and unchanged at the door station, with the Lore roster preview in its detail tier and the previous floor's Atlas page pinned to the dream-track ribbon above the door (M3); camp chalk is pictorial, never this document's chalk grammar (its 4.7); `uiMemory` stages the hub stations and the ambient first-focus tooltip (its 4.12); codex hosting includes the "Residents of the Hollows" pages (M3; its 4.15.8); the Floor Atlas and fatal-room map in the Book of Nights and the recap (M3); the camp input rows in 4.10 (camp and hub CH-22 ⚑).
 
 ---
@@ -946,6 +948,7 @@ Tier codes as 4.9.2 (U = unit plate). Placement: **A** always on, **H** HUD, **V
 | Leash ring, reward card, Memento, Boss Ledger and Grudge, Phase Score (BR 4.16, 4.17) | T; C; Meta | — | — | — |
 | Pull-back zoom, intro card, Sanctum refusal, arena-entry confirm (BR 4.16) | Camera; C | Card | Confirm gains the Behind-you line | "Seal" never used |
 | Conditions row, greyed reasons, Revealed outline (C 15.1, 15.3, 18.7) | Plate; action bar | U / H | As approved | Revealed is a live unit; Afterimage is a cut-out |
+| Charm pip pair, forecast line, fire beat (charm abilities design 4.7, 6; TK 15) | A plate; move or attack forecast; over the unit on a catch | U / A | **Pending request (charm abilities design CA-27; M2 for Trophy Tally's pips, M3):** registered as `SurfaceRecord` rows (V18s `SurfaceRegistered`); one plate mark, five pip states by shape and pattern, never hue alone | One of `plateMarks: 2` (4.9.5); the forecast line through `IKnowledgeQuery` and party knowledge only (`KnowledgeLeak` cases); never on a hostile's intent telegraph; pips greyscale-gated against the Windfall mark and the Lodestring spool |
 | Break-chain preview, combo glint, morale overlay (ABL 8.3, ARC 10.2, HR 10.3) | Tool mode; plate | A / U | As approved | Glints gate |
 | Shade False Trail marker (SH) | Board, party side | M | Request: hollow double-footprint ring | Never the Afterimage shape |
 | Hide state, Hold the Hide (SH; ABL 7.2; EP-17) | Portrait pip; status ribbon | H | Hidden-from count | — |
@@ -991,6 +994,8 @@ Tier codes as 4.9.2 (U = unit plate). Placement: **A** always on, **H** HUD, **V
 | Patrol route and forecast band | line | I | No | Explore (the I layer), map | Hover-only (Q2 cut step 2) |
 | Hearing contour, noise contour | line | I | No | Prompt; aiming (borrow) | — |
 | Travel path | line | A | No | While hovering or walking | — |
+
+- **Pending request (charm abilities design CA-27; M2 for Trophy Tally's pips, M3):** the charm pip pair (one plate mark on a plain rounded backing, no sack, knot or spool outline) joins this registry as a non-segment-10 row, its five states (ready, spent, waiting, kept, dormant) in the RC5 pattern registry, greyscale-gated against the Windfall knotted-sack mark and the Lodestring spool. Not a rule until this owner and the RS owner rule (charm abilities design 6).
 
 **Line-style registry (lead's call, after the check).** No two families differ only by hue or only by dot spacing; each is checked by the glance test (9.3).
 
@@ -1039,6 +1044,7 @@ Tier codes as 4.9.2 (U = unit plate). Placement: **A** always on, **H** HUD, **V
 | Lodestring use (M3) | A short, soft swell in the global UI timbre, never a plucked or bowed string | The Windfall timbre row (plucked, dry string) |
 
 - Request to the RS owner: whether a "something new seen" travel-stop sting counts as a gameplay cue; if refused, visuals only.
+- **Pending request (charm abilities design CA-27; M3):** the two charm output cues (Warded, Helped; placeholder timbres) get RS timbre-table rows, are tagged for `ReservedCues` and run pairwise in the 85% audio blind-ID gate above; pending the RS and audio owners (charm abilities design 6).
 
 ---
 
@@ -1253,6 +1259,7 @@ The FL 11.4 walker (lean = gate arm, balanced, completionist) plus a human-sessi
 | **Segments 11–12** | 4.13 (answered: seeds and validation design 11) |
 | **Camp and hub** | 4.13 (answered: camp and hub design 11; CH-22 applied in 4.10) |
 | **Starting kits** | 4.13 (answered: starting kits design 11; SK-9 applied in 4.10) |
+| **Charm abilities (segment 16, TK 24.2)** | 4.13 (taken up: charm abilities design 11; CA-27 pending with this owner, with the RS and audio owners) |
 
 **Hook answers:**
 
@@ -1584,6 +1591,7 @@ The owed rows are the single list in 13; by owner:
 - **Segments 11 and 12 (seeds, validation, saves):** 4.13; V18 (XI-30); the suspend slot's write, load and precedence mechanics. **Designed:** the seeds and validation design (approved 2026-11-23; its 4.8, 5.2, 6, 11); pending there: walker equivalences (4.13).
 - **Camp and hub (segment 13):** 4.13. **Designed:** the camp and hub design (approved 2026-11-23; its 11); its CH-22 is applied in 4.10.
 - **Starting kits (segment 14):** 4.10, 4.13. **Designed:** the starting kits design (approved 2026-11-23; its 11, 17); its SK-9 is applied in 4.10; codex hosting of the Oddments page.
+- **Charm abilities (segment 16, the TK 24.2 pass):** 4.9.5, 4.13, 5, 6. **Designed:** the charm abilities design (approved 2026-11-24; its 11, 17); pending with this owner: CA-27 (`SurfaceRecord` rows, plate-mark budget read) and the forecast's `KnowledgeLeak` cases.
 - **The simulator:** every report of 9.3 and every arm of 9.4.
 - **Art, audio and writing:** 4.2, 5, 6.
 - **Naming pass:** every placeholder name here.

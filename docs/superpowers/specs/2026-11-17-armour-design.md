@@ -368,7 +368,7 @@ M2 and *(illustr.)*. **(lead's call)**
 | Back | Elements, stealth | **Weathered Cloak:** advantage on saves against one element's rider: Burning or Chilled in M2, under the rider-ownership rule (trinkets design 5.7) (moved here from armour). **Grey Mantle:** your Hide checks against a unit that has not seen you this fight have advantage. |
 | Neck | Life and the body | Trinkets design 5.5 |
 | Finger | Your strike | Trinkets design 5.5 |
-| None | Stored moments (charm); carrying (capacity) | Trinkets design 5.5 |
+| None | Stored moments (charm); carrying (capacity) | Trinkets design 5.5; charms (charm abilities design 4.2, 4.3) |
 
 ### 5.7 Loot
 
@@ -1212,6 +1212,14 @@ Best at / worst at / monster use:
 
 Examples are in 5.6.
 
+**Cross-location charm reads (change CA-2; client-approved 2026-11-24,
+charm abilities Q3, amending the agreed trinkets Q1 domains; M3):** a
+charm may read an outcome event in another location's subject (Prone,
+Teetering and hazard squares stay feet subjects) only to grant Warded or
+Helped, never to change how that subject resolves; receivers stay "you
+or one adjacent ally". The domains in this table and in 5.6 are
+unchanged (charm abilities design 4.3 rule 6).
+
 ### 13.5 Merged and cut
 
 | Cut or merged | Why, and where it went |
@@ -1492,6 +1500,17 @@ CC-52).
 | `trinketPreventionReceivedThisRound` | bool | Round start | One received trinket prevention per round (trinkets design 7.3) |
 | `trinketHelpedThisRound` | bool | Round start | One trinket Helped per round (trinkets design 7.1) |
 | `trinketWardedThisFight` | bool | Fight start | One trinket Warded per fight (trinkets design 7.1) |
+| `charmCaughtHelpedThisFight[unit]`, `charmCaughtWardedThisFight[unit]` | bool per receiving unit | Fight-resources reset event (BR 4.2.5) | One caught Helped and one caught Warded per receiving unit per fight, `CharmCaughtThisFight` (change CA-11; charm abilities design 4.6 item 3; M2 simulator-only, M3 live) |
+| `charmKept` | per (unit, property) | Fight-resources reset event (BR 4.2.5) | A charm's Keep fill; expires on the same event (change CA-11; charm abilities design 4.6 item 7; M2 simulator-only, M3 live) |
+| Charm armed / deferred / missed state; policy choice | per (unit, property) | Armed, defer and missed state: fight-resources reset event (BR 4.2.5); the policy choice persists | Catch deferral, missed catches and the per-(unit, property) policy (change CA-11; charm abilities design 4.5; M2 simulator-only, M3 live) |
+
+- **Charm per-fight state (change CA-11; M2 simulator-only, M3 live):**
+  every charm per-fight state (`fightUses` of charm properties, the
+  per-output caught flags, `charmKept`, the defer state and
+  `trinketWardedThisFight`) resets only on the fight-resources reset
+  event of BR 4.2.5, never on a combat start or a Sanctum combat end
+  while the boss lives (charm abilities design 4.6 item 7). The save
+  schema and suspend journal carry these fields (SV owner applies).
 
 - Queries: `AC(unit, attack)`, `VisibleAC(unit)`, `PiercingReduction(attack,
   target)`, `CountsAsHeavy(unit)`, `heavySpeedPenalty(unit)`,
@@ -1505,7 +1524,8 @@ CC-52).
 - Events: `ArmourVerbFired{verb, unit, result}`;
   `ConditionResisted{reason: ArmourVerb}` (14.1);
   `TrinketPropertyFired{property, instanceId, unit, result}` (trinkets
-  design 17.3).
+  design 17.3); `CharmCaught` (change CA-11; charm abilities design 7 item 11;
+  M2 simulator-only, M3 live).
 
 ### 16.4 Suggested recipient
 
@@ -1555,7 +1575,10 @@ The build fails when **(lead's call)**:
 12. An `averb.*` has no validation price.
 13. A `prop.*` or `averb.*` display name matches a condition, affix,
     awareness state, behaviour profile, universal action, verb or
-    property.
+    property. Charm names and charm shape words are registered under the
+    same pattern (V23s); the design word "Catch" is flagged until the
+    naming pass rules and is never printed (change CA-12; charm abilities
+    design 9.3; M2 text).
 14. A property or signature does not bind a declared `hook` to an engine
     event or query, or has no property test showing an outcome change (a
     dead property). A simulator trigger rate of zero (17.3) is reported as
@@ -1636,6 +1659,7 @@ The build fails when **(lead's call)**:
 | Acrobatics checks per floor | At least the 7.3 requirement (3 Acrobatics-gated choices per floor); a miss after content tuning triggers the named Stiff fallback (7.3) |
 | Pitted and Corroded co-occurrence (Later) | Reported |
 | The trinket rows of trinkets design 18.3, including the condition landing envelope and its hero row (release gate; in the E+ veto) | As trinkets design 18.3 |
+| The charm rows of charm abilities design 9.4 (V23r): fire, missed and wasted rates per charm, split by fight class, party size, boss, floor and unlock set; rule 26 on the rate report per floor band and party size; bind rates per wearer-fight (change CA-16; M2) | As charm abilities design 9.3, 9.4 and CG1 |
 
 ## 18. Staging
 
@@ -1851,7 +1875,10 @@ Stat model 6's AC formula and "Armour is hit or miss" and stat model 8.1
   2026-11-17; changes TK-1 to TK-8): the location tables and families (at
   least 3 legal families per piece location, as a running total each
   wave), within 5.4–5.6; neck, finger and none domains; capacity
-  trinkets; the piece power target (17.3).
+  trinkets; the piece power target (17.3). Charm abilities (the trinkets
+  design 24.2 pass) settled in `2026-11-24-charm-abilities-design.md`
+  (approved 2026-11-24): this document takes up CA-2 (13.4), CA-11
+  (16.3), CA-12 (17.1 rule 13) and CA-16 (17.3).
 - **Starting kits:** settled in the four class designs and the companions
   design (13.6; items 17, row 3; companions design 8.3) (cross-document
   comparison 2026-11-23, CC-51), and designed in the starting kits design

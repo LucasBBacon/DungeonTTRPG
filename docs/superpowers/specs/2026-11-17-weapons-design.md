@@ -778,7 +778,10 @@ these steps, in this order:
    `bucklerOffUntilOwnTurnStart` at declaration, hit or miss, reactions
    and opportunity attacks included.
 2. **Fix the roll mode:** collect advantage and disadvantage from every
-   source, net them (one cancels one), and consume Helped if it applies.
+   source, net them (one cancels one), and consume Helped if it applies
+   (a reading recorded in the charm abilities design 13, not a change
+   here, the weapons owner confirms: a roll that already has advantage
+   does not use it, so Helped carries over).
    Exploit (6.3) and Vex read this net mode; Aim (7.6) is recorded here
    as a separate flag that qualifies the attack for Exploit and does not
    change the mode. **Gear roll-mode cap (change AR-40; armour design 8.1
@@ -872,7 +875,9 @@ these steps, in this order:
     with its own restrictions (7.6); Skewer reuses the step 4 roll.
 13. **Self-buffs:** Vex's Helped.
 14. **Self-movement:** Flourish, then Driving.
-15. **Events:** `VerbFired` and `ExploitApplied` (20.3).
+15. **Events:** `VerbFired` and `ExploitApplied` (20.3). Read, not
+    changed, by the charm abilities design 4.6 item 4: charm catches
+    resolve only after this step (M3).
 
 So Topple lands before a push (Prone, then pushed; under Upend its save
 follows the push, step 9), Skewer and Cleave read

@@ -1,7 +1,7 @@
 # Charm Abilities: Design (Segment 16, the TK 24.2 pass)
 
 Date: 2026-11-24
-Status: Draft, revised after the design check (builder, consistency, player and art-and-audio lenses), awaiting client approval, 2026-11-24
+Status: Approved, 2026-11-24
 Parents (immediate): `2026-11-17-trinkets-design.md` (trinkets design, "TK", whose 24.2 is this pass), `2026-11-23-heirlooms-curses-design.md` (heirlooms and curses design, "HL", segment 15, approved 2026-11-23, **the most recent template**), `2026-11-23-starting-kits-design.md` ("SK", segment 14), `2026-11-23-camp-hub-design.md` ("CH", segment 13), `2026-11-23-seeds-validation-design.md` ("SV", segments 11–12), `2026-11-23-exploration-information-design.md` ("XI", segment 10), the loot designs `2026-11-22-loot-economy-design.md` ("LE", 7a), `2026-11-22-item-rolls-design.md` ("IR", 7b) and `2026-11-22-loot-sources-design.md` ("LP", 7c), `2026-11-22-events-design.md` ("EV", segment 8), `2026-11-22-boss-rooms-design.md` ("BR", segment 9), and `2026-11-23-cross-document-comparison.md` (reviews, "CC").
 Other parents: `2026-11-15-dungeon-rpg-design.md` (main design, "MAIN"),
 `2026-11-16-character-stat-model-design.md` ("STAT"),
@@ -24,20 +24,20 @@ All 33 approved specifications and the cross-document comparison were read (TK a
 
 Items marked **(agreed)** are the client's answers of 2026-11-24 (final) to the five questions this design raised (Q1–Q5; sections 0.2 and 14.1), each answered with the lead's recommendation (option A), or restate a client answer recorded in an approved document; parent documents' questions are always named with their document ("TK Q1", "TK Q2", "TK Q3", "SV Q1", "IR Q4") so that they never read as this document's Q1–Q5. The client also said that everything else in the lead's proposal stands as written: the shapes Spend, Catch, Keep and Shaper (Later); the closed `charmTriggers` list; `forecastHint` and `plateHint`; feedback and sounds; two charms per unit; the catalogue with its statuses; the data gates G1–G3 (renamed **CG1–CG3** after the check, ids only, because G1–G3 are taken in DH, CMP, EP, W and HL; 14.3 T1); the reports and shadow records; the data and validator V23 `CharmLane`; staging; ownership and hooks; the binding requirements; CA-1 to CA-25 (CA-26 and CA-27 added after the check); the risks; and the appendix resolutions and names. Names are placeholders pending the naming pass.
 
-**The lead's answers (0.1) and the recommended frame (3.3)** were accepted by the client by proceeding to the five questions. They are recorded here as the lead's answers, to be confirmed by the client with this document, **including every told-plainly item of 14.1**: small passives fit only as small moments, and a "+1" reading is banned; outputs stay Warded and Helped until Spotted is ruled; the drafts' boon budget reason is corrected; TK 24.2's timing is split (framework, reports and shadow records now, content after M2 data); a third of runs may see no charm; the Wardstone envelope toy result is a measurement question; Scrollwright's Token leaves the charm lane; "talisman" leaves charm cards and the Patina "charm" becomes "accent"; and the rejected candidates.
+**The lead's answers (0.1) and the recommended frame (3.3)** were accepted by the client by proceeding to the five questions. They are recorded here as the lead's answers; the client confirmed them on 2026-11-24, when it approved this document as a whole, **including every told-plainly item of 14.1**: small passives fit only as small moments, and a "+1" reading is banned; outputs stay Warded and Helped until Spotted is ruled; the drafts' boon budget reason is corrected; TK 24.2's timing is split (framework, reports and shadow records now, content after M2 data); a third of runs may see no charm; the Wardstone envelope toy result is a measurement question; Scrollwright's Token leaves the charm lane; "talisman" leaves charm cards and the Patina "charm" becomes "accent"; and the rejected candidates.
 
-Items marked **(lead's call)** were filled in by the design lead inside approved rules and were in the proposal the client answered; they become binding when the client approves this document. Items marked **(new lead's call)** were made while writing this document, beyond that proposal, mostly from the corpus check; they are listed in 14.1 for the client's approval with this document. Items marked **(lead's call, after the check)** were made in answer to the design check of this document (builder, consistency, player and art-and-audio lenses); none overrides a client answer; they are listed in 14.3 with the "Told plainly after the check" items (T1–T17), for the client's approval with this document. Items marked **(settled)** restate a rule from an approved document; **(decided)** marks a main-design client decision. Items marked **(change CA-n)** amend an approved document and are listed, with the exact sections they touch, in 13; rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there, and the client's approval of this document (with Q1–Q5 where a row names one) will cover them. Items marked **(told plainly)** narrow or re-read approved text, contest the brief, the client, a judge, a critic, a model or a draft, or state an unwelcome forecast, and are told to the client in plain words (14.1). Once approved, every item here is binding on the builders.
+Items marked **(lead's call)** were filled in by the design lead inside approved rules and were in the proposal the client answered; the client confirmed them all on 2026-11-24, when it approved this document as a whole, and they are binding. Items marked **(new lead's call)** were made while writing this document, beyond that proposal, mostly from the corpus check; they are listed in 14.1 and the client confirmed them all on 2026-11-24. Items marked **(lead's call, after the check)** were made in answer to the design check of this document (builder, consistency, player and art-and-audio lenses); none overrides a client answer; they are listed in 14.3 with the "Told plainly after the check" items (T1–T17), and the client confirmed them all on 2026-11-24. Items marked **(settled)** restate a rule from an approved document; **(decided)** marks a main-design client decision. Items marked **(change CA-n)** amend an approved document and are listed, with the exact sections they touch, in 13; rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there, and the client's approval of this document on 2026-11-24 (with Q1–Q5 where a row names one) covers them. Items marked **(told plainly)** narrow or re-read approved text, contest the brief, the client, a judge, a critic, a model or a draft, or state an unwelcome forecast, and were told to the client in plain words (14.1; those found in the check, 14.3, T1–T17); the client confirmed them all on 2026-11-24. Every item here is binding on the builders.
 
 | Marking | Meaning |
 |---|---|
 | **(settled)** | Restates a rule from an approved document |
 | **(decided)** | A main-design client decision, restated |
 | **(agreed)** | A client answer: Q1–Q5 of this document (2026-11-24, final), or one recorded in an approved document (named with its document), restated |
-| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal (the lead's answers of 0.1 and the frame of 3.3 included); binding once the client approves this document |
-| **(new lead's call)** | A lead's call made while writing this document, beyond the answered proposal; listed in 14.1 for approval with this document |
-| **(lead's call, after the check)** | A lead's call made in answer to the design check; never overrides a client answer; listed in 14.3, with the "Told plainly after the check" items, for approval with this document |
-| **(change CA-n)** | Amends an approved document; listed with its exact sections in 13. Rows that touch **settled**, **decided** or **agreed** text are flagged ⚑ there; the client's approval of this document covers them |
-| **(told plainly)** | Narrows or re-reads approved text, contests the brief, the client, a model, a judge or a critic, or states an unwelcome forecast; told to the client in plain words (14.1) |
+| **(lead's call)** | Filled in by the design lead inside approved rules, in the answered proposal (the lead's answers of 0.1 and the frame of 3.3 included); confirmed by the client with this document on 2026-11-24 |
+| **(new lead's call)** | A lead's call made while writing this document, beyond the answered proposal; listed in 14.1 and confirmed by the client on 2026-11-24 |
+| **(lead's call, after the check)** | A lead's call made in answer to the design check; never overrides a client answer; listed in 14.3, with the "Told plainly after the check" items, and confirmed by the client on 2026-11-24 |
+| **(change CA-n)** | Amends an approved document; listed with its exact sections in 13. Rows that touch **settled**, **decided** or **agreed** text are flagged ⚑ there; the client's approval of 2026-11-24 covers them |
+| **(told plainly)** | Narrows or re-reads approved text, contests the brief, the client, a model, a judge or a critic, or states an unwelcome forecast; told to the client in plain words (14.1; those found in the check, 14.3) and confirmed by the client on 2026-11-24 |
 | **(request)** | Asks another owner to rule; changes nothing until that owner rules; the fallback is stated (14.2) |
 | **(hook)** | Owned by another design; this design states only what it needs |
 | *(illustr.)* | An illustrative number, owned by the builders and calibrated by the simulator or human sessions (8, 9, 10). Never binding. The landing envelope numbers (600‰, 500‰; TK-4) and ButtonCap 1 (agreed TK Q3) are **binding** and are never marked *(illustr.)* |
@@ -69,7 +69,7 @@ Items marked **(lead's call)** were filled in by the design lead inside approved
 - **Name fixes (change CA-12, CA-13):** drop "talisman" as a charm display word (it is the Reprieve Phial's item category and an IR 4.2 fine category); rename the Patina "charm" ornament to "accent". The working label "Catch" also meets TL's approved trap kind **Catch** and TL's "Hunch catch" badge, so player-facing text never prints it: cards use TK 15's keyword line under the ◈ glyph, and logs and Inspect say "fires" (new lead's call; extended after the check; 2.3 F13).
 - **Timing (change CA-19):** TK 24.2's timing is a lead's call, so the framework is decided now and **M2 instrumentation plus simulator-only shadow records** start now; **content approval still waits** for CG1 (simulator) and CG2 (M2 playtest). The M2 roster in TK 13.7 stands.
 
-### 0.1 The lead's answers in plain words (lead's call; accepted by the client by proceeding; to be confirmed with this document)
+### 0.1 The lead's answers in plain words (lead's call; accepted by the client by proceeding; confirmed by the client on 2026-11-24)
 
 1. **Do small passives fit?** Yes, and better than more buttons. But "small" must mean small in rules, not small in numbers. A charm passive is a sentence like "*the first time a harmful condition fails to land on you, you gain Helped*": one named moment, once per fight, a token you can see, a preview that tells you when you are about to trigger it, and a flash and log line when it fires. "+1 to saves" never fits: it is invisible, it becomes best-in-slot, and the approved rules already ban it. In player-facing text call them **small moments**, so nobody expects "+1" (told plainly).
 2. **Why it fits this game specifically.**
@@ -279,7 +279,7 @@ Added after the check (settled, read; lead's call, after the check):
 
 All three judges: A and B are one design at two levels of ambition; take the content from the catalogue after the numbers fixes; reject C for M2 and M3; keep C-slot as an M4 evaluation brief only; reject C-add.
 
-### 3.3 Model B's discipline with Model A's one Keep record (lead's call; accepted by the client by proceeding; to be confirmed with this document)
+### 3.3 Model B's discipline with Model A's one Keep record (lead's call; accepted by the client by proceeding; confirmed by the client on 2026-11-24)
 
 **Model B's discipline as the spine, Model A's single gated Keep record, the catalogue's content corrected by the numbers pass and the three critics.** Concretely:
 - From B: once per fight default; outcome keys; shapers and counters Later; a per-round charm cap held as a report-triggered fallback only.
@@ -579,7 +579,7 @@ Hints are written in the trigger's literal rule words (the drafts' idioms "Shrug
 
   The pip patterns join the RC5 pattern registry, and the pip pair, the forecast line and the fire beat are registered as XI `SurfaceRecord` rows (V18s `SurfaceRegistered`) (CA-27).
 - **Fire beats:** three reusable 2D beats over the unit, one per silhouette class, then the token: *tighten* (knot, hair), *settle* (stone, ring, nut, bead: a small drop and settle), *flex* (crescent, pin, fork: a bend and spring back). Only beats M3 uses ship. No element VFX (Patina rules); never implies light, heat or motion as an effect (RC4, RC9). Under reduced motion each beat is a static outline flash of the icon for the beat's length.
-- **Audio (corrected after the check; T3).** Two **output cues** in the global UI family, never one sound per charm. The first proposal's "muffled bell" and "released breath" are withdrawn: bells, struck bronze and chimes are RC7-reserved, and the dry-breath family is HZ's Heart Stir cue (BR `FinalBossNoDreamer`; CH AN9 bars any breath-family sample). Placeholder timbres, to be confirmed with the RS and audio owners (CA-27):
+- **Audio (corrected after the check; T3).** Two **output cues** in the global UI family, never one sound per charm. The first proposal's "muffled bell" and "released breath" are withdrawn: bells, struck bronze and chimes are RC7-reserved, and the dry-breath family is HZ's Heart Stir cue (BR `FinalBossNoDreamer`; CH AN9 bars any breath-family sample). Placeholder timbres, pending the RS and audio owners' confirmation (CA-27, a pending request):
 
   | Cue | Placeholder timbre | Kept out of |
   |---|---|---|
@@ -811,9 +811,9 @@ Catch rate per charm (splits above); missed rate per charm; Helped and Warded wa
 
 ## 13. Changes to approved documents
 
-To be applied when the client approves this document. **This document edits no parent document itself**; the rows are applied by the owners of the sections they touch (lead's call), and rows owed by other owners are listed again in 17. Every row names the exact sections it touches. Rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ in the "Flag" column; as in the SK, CH and HL precedents, the Flag column also marks rows that only *read* such text without changing it. **The client's approval of this document will cover the flagged rows** (with Q1–Q5 where a row names one). Rows marked "request" are requests to other owners; they change nothing until their owner rules, and 14.2 names each fallback. M3, M4 and Later rows are recorded as applied text marked with their wave and take effect at that wave.
+Applied on 2026-11-24, when the client approved this document. **This document edits no parent document itself**; the rows are applied by the owners of the sections they touch (lead's call), and rows owed by other owners are listed again in 17. Every row names the exact sections it touches. Rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ in the "Flag" column; as in the SK, CH and HL precedents, the Flag column also marks rows that only *read* such text without changing it. **The client's approval of 2026-11-24 covers the flagged rows** (with Q1–Q5 where a row names one). Told-plainly rows were told in 14.1 and, for those found in the check, 14.3, and confirmed by the client on 2026-11-24. Rows marked "request" are requests to other owners, recorded as pending requests; they change nothing until their owner rules, and 14.2 names each fallback. M3, M4 and Later rows are recorded now as applied text marked with their wave and take effect at that wave.
 
-**Readings recorded inside this design (no approved text changes; each owner confirms its own reading):**
+**Readings recorded inside this design (no approved text changes; recorded as readings, approved by the client with this document on 2026-11-24; each owner confirms its own reading):**
 - A Catch is a TK 9.1 Passive.
 - Trophy Tally's "not spent if blocked" is the general catch rule.
 - BR-31 and BR 4.2.5's one-fight rule make once per fight once per boss encounter, and the fight-resources reset event is the only reset of charm per-fight state (after the check).
@@ -857,7 +857,9 @@ To be applied when the client approves this document. **This document edits no p
 
 ## 14. Open items for the client
 
-**One: approval of this document as a whole.** The five questions raised before writing were answered on 2026-11-24 **(agreed)**, each with the recommended option A. Approval would cover the lead's answers of 0.1 and the frame of 3.3 (accepted by proceeding), every lead's call, the new lead's calls of 14.1, the told-plainly items of 14.1, the lead's calls after the check and the "Told plainly after the check" items of 14.3 (T1–T17), the readings recorded in 13, and the flagged rows of 13. **The design check raised no new client question:** every fix sits inside the five answers, keeps an approved rule, or is flagged against the text it touches (14.3).
+None. Approved by the client on 2026-11-24.
+
+The client approved this document as a whole on 2026-11-24, including the lead's answers of 0.1 and the frame of 3.3 (which the client had accepted by proceeding); every lead's call (the lead's calls of the answered proposal, the new lead's calls in 14.1 and the 33 lead's calls after the check in 14.3); the told-plainly items (those in 14.1 and "Told plainly after the check" T1–T17 in 14.3, all as written); and the readings recorded in 13; and its approval covers the flagged rows of 13. The five questions raised before writing were answered on 2026-11-24 **(agreed)**, each with the recommended option (A). Writing raised **no new client question**: every new lead's call sits inside the five answers, corrects the proposal's own text against an approved rule, or is flagged against the text it touches in 13. **The design check raised none either**: every lead's call after the check (14.3) sits inside the five answers, keeps an approved rule, or is flagged against the text it touches; those that change what the client may have pictured are told plainly (T1–T17). The future items in 14.2, which come back only if a report, an owner's refusal, a wave or a later design triggers them (including the owner-refusal fallbacks, the report-triggered items and the two later routes to the client for an Inspired charm and Spotted, T13 and T14), and the naming pass remain future items.
 
 ### 14.1 This document
 
@@ -868,9 +870,9 @@ To be applied when the client approves this document. **This document edits no p
 - **Q4, charm boon (CH-24; CA-20):** option A, the Underpillow (placeholder; now the Bobbin, T4) at M3: choose one unlocked Common catch at run start; never a button, Keep, Uncommon, heirloom, persistent or cursed; gated on a parity report and a boon pick share of at most about 40% *(illustr.)*. Rejected: B, no charm boon.
 - **Q5, rarity, ButtonCap, slots (CA-24):** option A, TK Q2 stays closed (no Rare charms), ButtonCap stays 1, no slot change; the charm string held as a future M4 item. Rejected: B, Rare charms with `RareWornCap` 1; C, a charm string outside the slots.
 
-**The lead's answers (0.1) and the frame of 3.3** were accepted by the client by proceeding and are to be confirmed with this document, including every told-plainly item below.
+**The lead's answers (0.1) and the frame of 3.3** were accepted by the client by proceeding and confirmed by the client on 2026-11-24, with this document, including every told-plainly item below.
 
-**Told plainly (for confirmation with this document):**
+**Told plainly (confirmed by the client on 2026-11-24, with this document):**
 1. "Small passives" fits only as "small moments"; a "+1" reading is banned and stays banned (0.1 item 1).
 2. Outputs stay Warded and Helped; expect many charms to read "you gain Helped" until Spotted is ruled (CA-23). Variety comes from what each charm catches and who receives it (4.4).
 3. The four drafts and three judges declined a charm boon for a budget reason that approved rules contradict; the lead corrected it, and the client chose the Bobbin (4.11; agreed, Q4).
@@ -887,7 +889,7 @@ To be applied when the client approves this document. **This document edits no p
 14. The proposal misquoted CON 5.6; the approved text already handles own-turn Helped (2.3 F8; found while writing).
 15. "Catch" is also TL's trap kind; the shape word may change at the naming pass (2.3 F13; found while writing). After the check it is never printed to the player at all (T12).
 
-**New lead's calls (made while writing, beyond the answered proposal; for approval with this document):**
+**New lead's calls (made while writing, beyond the answered proposal; confirmed by the client on 2026-11-24, with this document):**
 1. **CA-9 becomes a reading (F8):** CON 5.6 already says a window opened during the source's own turn runs to its following turn; CA-9 asks the CON owner only to confirm; the "Helped wasted" report and provenance log stay (2.3, 13).
 2. **"Catch" flagged against TL's trap kind (F13):** the naming pass rules the display word before M3 card-text freeze; fallback, the card drops the word and keeps the ◈ glyph; V23s flags it until then; Lockjaw's hint reviewed (2.3, 4.2, 5.1, 9.3). *Superseded after the check (14.3 item 13; T12): the word is never printed on any surface.*
 3. **TK-4 interim (F14):** until CA-17's clarification, CG1 reports both readings and the literal maximum-loadout reading binds (2.3, 8.3, 10).
@@ -905,7 +907,7 @@ To be applied when the client approves this document. **This document edits no p
 
 ### 14.2 Future items triggered by reports, owners or later designs
 
-These come back to the client only if a report, an owner's refusal, a wave or a later design triggers them; each fallback is a lead's call unless marked.
+These come back to the client only if a report, an owner's refusal, a wave or a later design triggers them; each fallback is a lead's call (confirmed by the client on 2026-11-24, with this document) unless marked.
 
 | Item | Trigger | What happens | Owner / approval |
 |---|---|---|---|
@@ -930,7 +932,7 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 
 The design check (builder, consistency, player and art-and-audio lenses) was answered inside the client's five answers. No client answer is overridden; where a fix narrows or re-reads an answer's wording, it is told plainly below. **No new client question was raised.** Two later routes to the client are made explicit (an Inspired charm, T13; Spotted, T14); both are future items that come back only if their owner moves.
 
-**Lead's calls after the check (for approval with this document):**
+**Lead's calls after the check (confirmed by the client on 2026-11-24, with this document):**
 1. **After-the-use resolution:** qualifying events are queued, and catches resolve only after the triggering use (W 7.5 step 15; ABL 14.3 step 6; the full conditions pipeline and TK 7.3 for a stand-alone application; each reaction as its own use); a token never affects the rest of the use that caused it (4.6 item 4; V23t; T15).
 2. **A total order:** core event sequence, then ascending unit order of the wearers (TK 7.3 step 3), then the `CharmFireOnce` order; shared caps read and written in that order (4.6 item 5).
 3. **One fight in the Sanctum:** every charm per-fight state, and the Keep fill, reset only by BR 4.2.5's fight-resources reset event (4.6 item 7; 9.1; V23t; T16).
@@ -965,10 +967,10 @@ The design check (builder, consistency, player and art-and-audio lenses) was ans
 32. **Names:** the renames of T4 and T5; the greyed reason in player words (5.1, 5.4, A.2).
 33. **Register hygiene:** the CA-12 flag; CA-23's added sections and flag; CA-5, CA-11 waves; the SV citations (6.10, 9.1, 6.2, 6.5) and RC4 with RS 7.4 for plate states; the gate ids CG1–CG3; CA-26 and CA-27 added (13; T1).
 
-**Told plainly after the check** (none overrides a client answer; for confirmation with this document):
+**Told plainly after the check** (none overrides a client answer; confirmed by the client on 2026-11-24, all as written):
 - **T1. The data gates are renamed CG1–CG3.** "G1–G3" are already ids in DH, CMP, EP, W and HL, and SV rejects single-letter numbered schemes for that reason. The gates themselves are unchanged.
 - **T2. Under today's CL 7.6 a Catch counts 1, not 0.** The proposal read it as a pool-free automatic reaction; it is neither. So the approved Trophy Tally already puts a Vanguard at 5 reads, and the button is not the only gap. CA-10 now asks the CL owner for a Catch bullet as well as the button bullet; if refused, catches count 1 and the verdicts cover it.
-- **T3. The two sounds the proposal described cannot be used.** Bells are reserved cue sounds, and the dry-breath family is the Heart Stir cue (no breath-family sample anywhere, CH AN9). The placeholders are now a soft mallet tap on a hollow gourd (Warded) and a marble rolling to rest in a bowl (Helped), to be confirmed with the audio owner. Trophy Tally's sound changes at M3, not M2.
+- **T3. The two sounds the proposal described cannot be used.** Bells are reserved cue sounds, and the dry-breath family is the Heart Stir cue (no breath-family sample anywhere, CH AN9). The placeholders are now a soft mallet tap on a hollow gourd (Warded) and a marble rolling to rest in a bowl (Helped), pending the audio owner's confirmation (CA-27). Trophy Tally's sound changes at M3, not M2.
 - **T4. The Underpillow is renamed the Bobbin, is earned, and goes to the hero.** "Pillow" names the Heart's harmful dust-pillow Keg, and the under-pillow, milk-tooth and swaddling imagery implies the Dreamer is a child, which RS 7.5 forbids. MAIN 4.7 says boons are earned, so the Bobbin unlocks when a charm first fires in a won fight; a new profile's first runs do not offer it. It is off on shared, seeded and daily runs (as heirlooms are). Q4's rule, never-list and gates are unchanged.
 - **T5. Several placeholders were renamed:** Widow's Knot → Minder's Pebble (gendered, and on a Downed trigger it implied a death); Second's Knot → Second's Hairpin; Swaddle Knot → Walnut (age imagery); Ashen Knot → Ashen Bead (Q1's one Keep record, the same rule); Calm Stone → Shy Stone (Calm Emotions, Calm Minds); Pointing Bone → Acorn Cap (a living people's practice); Hand-me-down Knot → Relay Thread and Cradle Knot → Stay Thread (age imagery). Six of the seven M3 records were knots, which would make their icons differ by hue only. All are still placeholders for the naming pass.
 - **T6. Bloodknot, as the catalogue listed it, already failed this document's own per-fight test** (about 900‰ in elite and 950‰ in boss fights on the toy). It is shadowed only as a rest-charged ward (`rest` 1/1/2).

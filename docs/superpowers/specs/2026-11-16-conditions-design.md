@@ -335,6 +335,13 @@ sub-steps, in order:
   mid-round opens windows normally.
 - Out of combat the source has a part in every tick (5.5), so a window
   lasts until the next tick.
+- **Open item, pending confirmation (request CA-9; charm abilities design
+  2.3 F8, 4.5, 13; M3):** reading, not a text change: a charm-caught
+  Helped gained during the wearer's own turn (`untilSourceTurnEnd`, the
+  wearer as source) runs to the end of the wearer's next turn under this
+  section's second sentence. Pending; the conditions owner confirms.
+  Fallback if refused: nothing changes in play, because the charm's output
+  record states the duration.
 
 ### 5.7 Lost turn starts
 
@@ -1453,6 +1460,14 @@ Enforced by content validation. **(lead's call)**
     EV-34; fallback: Curiosity and shrine sources only.
 - **Graces (change EV-12; events design 4.4.3):** use existing M2 ids only
   and add none to the 32 (13).
+- **Open item, pending ruling (request CA-23; charm abilities design 4.4,
+  13; M4):** whether Spotted (18.9, Later) may move to M4 as an
+  adjacent-sourced charm output, behind the Herald "too required" lens and
+  the carrier rule (at most 2 harmful conditions per type), and how it is
+  read against the 32 (Later conditions sit outside it). A Spotted charm
+  also changes the agreed trinket None lane, so it goes to the client after
+  the conditions owner. Pending; nothing changes until ruled. Fallback:
+  Spotted stays Later.
 
 ## 17. Data and the core
 
@@ -2616,10 +2631,18 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     `untilSourceTurnEnd` with the wearer as source; Help made cheaper by
     Sigil of Aid counts under the trinket limit) **(change TK-22; trinkets
     design 7.1, 13.7)**.
+    **Open item, pending ruling (request CA-23; charm abilities design
+    5.1, 13; M3):** list the approved charm families as sources (Trophy
+    Tally, M2; Hangnail and Jolt Knot, M3 base; further catches as they
+    pass their data gates). A charm-caught Helped gained on the wearer's
+    own turn: 5.6 (request CA-9, pending confirmation).
 - **Spotted** — harmful token · Later
   - Effect: the next attack roll against it has advantage.
   - Duration: `charges:1`, fallback `untilSourceTurnStart`.
   - Sources: spotting at-wills; pack hunters.
+    **Open item, pending ruling (request CA-23; charm abilities design 4.4,
+    5.1; M4):** adjacent-sourced charms (Whiff-Mark, Acorn Cap) at M4; see
+    16. Then the client. Fallback: Later, no charm source.
   - Interactions: the same token type as Helped, on the other side.
 - **Blessed** — beneficial · Later
   - Effect: +1d4 to attack rolls and saves.
@@ -2640,6 +2663,10 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Duration: fallback 3 turns.
   - Sources: ward spells; charms; bosses at phase change; monster affixes
     (`oncePerLife`, enemies design 7.2).
+    **Open item, pending ruling (request CA-23; charm abilities design
+    5.1, 13; M3):** list the approved charm families as sources (Wardstone
+    and Ward-Knot, M2; Bloodknot, Walnut and Ashen Bead as they pass their
+    data gates).
   - Interactions: the preview says "will spend ward"; a warded boss keeps
     its pips. A trinket-granted Warded has no effect on a unit already
     Warded; a unit receives at most one trinket-granted Warded per fight

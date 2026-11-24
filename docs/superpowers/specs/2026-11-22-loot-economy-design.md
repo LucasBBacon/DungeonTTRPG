@@ -777,6 +777,12 @@ illegal (tier, category) pair re-weights the category, never the tier.
 - **Supply:** the approved 1–2 per floor, pre-wired as
   `foundSupplyPerFloor`, so DH 5.7 lever 1 (FL 6.8's forecast) is a
   tuning change only.
+- **Charm lane (hook; change CA-25; after CG1/CG2; charm abilities
+  design 4.10):** catch charms sit inside the unchanged Trinkets share
+  and are priced in the camp notables shop by the existing rule (read).
+  *Future item (IR/LE owners + client):* if CG1/CG2 show P(0 charms)
+  above ~25% *(illustr.)*, a global charm-lane weight change inside the
+  unchanged trinket VP share, never theme-keyed (agreed IR Q4) (18.2).
 - **Report:** `LootMixByCategory`.
 
 ### 6.3 Rarity curves (lead's call; changes LE-2, LE-3, LE-4, LE-6)
@@ -1236,7 +1242,11 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      read from the issued instances after SK-12 placement, never from
      `boons[]`; the 20 coin sits in the Due's container slot, never as
      kit coin. Report `HeirloomSlotParity` (heirlooms and curses design
-     9.3).
+     9.3). *Pending request (changes CA-20 ⚑, CA-26; M3; charm abilities
+     design 4.11):* the Bobbin boon's charm is flagged `boonCharm`, never
+     `heirloom`, so it never sets `armsSatisfied` and never triggers this
+     waiver (a charm is not arms); it counts as party-owned for the
+     Due's owned and duplicate checks only (6.12; V13g (g)).
    - **Placement:** a main-path, no-check Plain container; an HE-7
      socket is fine (containers hold any number of items), and it may
      share that socket with the DH block. Never on a carrier. Never
@@ -1998,6 +2008,17 @@ matter".
   Heirloom shelf are content unlocks, never loot or coin; an heirloom is
   never a Curiosity "Item offered" price (change HL-4, EV's; M3);
   Grip-marks are display only (heirlooms and curses design 4.1.2–4.1.6).
+- **The Bobbin (charm boon; M3; change CA-20 ⚑; agreed, charm abilities
+  Q4; charm abilities design 4.11):** one unlocked Common Catch charm as
+  the one starting boon, issued to the hero, outside the budget like an
+  heirloom boon (value for display only, unsellable, never a Curiosity
+  "Item offered" price), flagged `boonCharm`, never `heirloom`; off on
+  shared, seeded and daily runs. Counted against the heirloom boon in
+  the parity report (charm abilities design 4.11). *Pending request
+  (CA-20, the Due reading, to this owner):* the Bobbin's charm counts
+  as party-owned for the Dream's Due's owned and duplicate checks, but
+  never as F1 hero arms and never for the HL-3 waiver (6.6 item 2); the
+  V13g (g) case is CA-26 (10.2).
 - **Daily and shared seeds:** shared seeds (M2) do not fix the hero;
   daily seeds (Later) fix class and species so smart-loot runs are
   comparable (R-SEED-5 hook; shared and daily rules in seeds and
@@ -2661,7 +2682,10 @@ each with its named action:
   M3; starting kits design 4.3); widened by change HL-3 (M3): one case
   per heirloom slot class (weapon, focus, shield, armour) and one for
   the Burdened twin (Later), each the waiver (heirlooms and curses
-  design 4.1.4). *Action:* waiver (6.6).
+  design 4.1.4). *Pending request (change CA-26; M3; charm abilities
+  design 4.11):* one case asserting that a `boonCharm` instance (the
+  Bobbin's charm) never sets `armsSatisfied`; if this owner refuses, the
+  Bobbin is held (charm abilities design 14.2). *Action:* waiver (6.6).
 - (h) F5: coin 0, salvage 0 and their lines hidden; no camp channel, no
   boss card, the Memento at 0 VP; the Viaticum present, all 3 options
   usable, outside the Antechamber, the Circuit and fight hosts; every F5
@@ -2789,6 +2813,7 @@ shop presentation and camp sinks (camp and hub); the display (segment
 | **Segment 11 (seeds)** | The `lootPlan` derivation and keyed grandchildren, the draw table (6.10 item 1), step 3a and the LootBind position, the ghost and dummy draws, the atomic commit. **Taken up by the seeds and validation design (segments 11–12, approved 2026-11-23; changes SV-1, SV-2, SV-5, SV-9, SV-14):** the key algebra and the `lootPlan` registry rows (its 4.1–4.3); step 3 keyed per floor and per entry block, the ghost and dummy draws retired (4.3); GS10 and GS14 in the pipeline (4.4); the atomic commit as WO5 (4.8.3); its request to this owner, the `dealShuffle/retry1` key, stays open (6.10 item 1; its 11, 14.2) |
 | **Segment 12 (validation)** | V13s, V13g, the (m) integration test, and the reports. **Taken up by the seeds and validation design (segments 11–12, approved 2026-11-23; changes SV-9, SV-10, SV-19, SV-20, SV-22, SV-24):** V13 in the phase model with failure classes (its 5.1, 5.2); V13g at AP2 (5.4); (e) as LR2 (5.5); (m) called by the V19g DrawLedger (5.2); the arm catalogue (6.2) and the report registry (6.10); its request to this owner, the V13g (f) quantity, stays open (10.2; its 11, 14.2) |
 | **Heirlooms and curses (segment 15)** | The heirloom precedence in the Due (6.6 item 2) and the curse hook (8.5). **Taken up by the heirlooms and curses design (segment 15, approved 2026-11-23; changes HL-3, HL-23, HL-29 applied by this owner, with HL-20 and HL-21 as requests):** any heirloom slot waives the F1 Due, with V13g (g) cases per slot class (6.6 item 2, 10.2; M3; its 4.1.4); heirlooms never a Curiosity price (HL-4) and earning, the shelf and Grip-marks as content and display only (6.12; its 4.1); Curses at a discount moved to M4 with Maladies (8.5, 11; HL-29; its 4.2, 10), the CON budget reading pending; the Burdened twin and Redeemed (8.5; Later); its requests, HL-20 (Grave Goods, to DH; 8.2) and HL-21 (the Crooked Road, to the MAIN and RS owners; 8.5; Later), stay open (its 11, 14.2) |
+| **Charm abilities (segment 16, the TK 24.2 pass)** | The trinket share and the Due's owned checks, read by the charm lane (6.2, 6.6 item 2, 6.12). **Taken up by the charm abilities design (segment 16, approved 2026-11-24; CA-20, CA-25, CA-26):** the trinket share unchanged, catch charms priced by the existing rule (6.2; its 4.10); the Bobbin boon outside the budget, never arms for the F1 Due (6.6 item 2, 6.12; M3; its 4.11); its requests to this owner, CA-20 (the Due reading) and CA-26 (the V13g (g) case, 10.2), and the lane-weight future item (CA-25) stay open (18.2; its 11, 14.2) |
 | **ENM / EP / DH owners** | The elite room's and the Annex's risk cost (LX16; agreed, Q6) |
 | **TL owner** | The mixed-route rule and `consequenceExposed`; Unbolting and Unweaving paying the Wax-Key identity; a Barb force consequence if `WaxKeyConsequenceUse` fires; the Ticket peg; fewer locks where the carve cap or F5 fillers bind (6.4, 6.9) |
 | **FL owner** | The Viaticum room |
@@ -3387,6 +3412,12 @@ wave or a later design triggers them; each fallback is a new lead's call
   with this owner, never as a loot lever; HL-20 (Grave Goods, to DH;
   8.2) and HL-21 (the Crooked Road, to the MAIN and RS owners; 8.5;
   Later) as pending requests.
+- **Pending items from the charm abilities design (segment 16; its
+  14.2):** CA-20 (the Bobbin's Due reading, 6.6 item 2, 6.12) and CA-26
+  (the V13g (g) `boonCharm` case, 10.2) as pending requests to this
+  owner (M3); if this owner refuses CA-26, the Bobbin is held until it
+  can be placed; the charm lane weight (CA-25, 6.2) is a future item for
+  the IR and LE owners and the client, triggered by CG1/CG2.
 - **The naming pass** renames every placeholder.
 
 ---

@@ -73,7 +73,10 @@ two slots with real choices from about 9 finds a run. **(agreed, Q1)**
 
 - **The location promises the subject; the shape tells you when.** Each
   body location owns a domain and a signature shape, and each jewellery
-  kind owns a lane. **(agreed, Q1)**
+  kind owns a lane. **(agreed, Q1)** Charms catch moments: their shapes
+  are Spend, Catch, Keep (one gated record) and Shaper (Later), and the
+  shape glyph tells you which **(change CA-1; agreed, charm abilities
+  Q1; charm abilities design 4.2)**.
 - **Bend one rule, never add a number.** Every trinket is a verb, a cost
   step, a prevention or a channel. **(lead's call)**
 - **One line per trinket.** "Ember Ring: your strike, 1/rest, one part
@@ -178,7 +181,7 @@ the lead's calls, which the client said stand.
 |---|---|---|---|
 | 1 | Domains (Q1) | **(a) Themed (B′):** pieces keep the approved location domains strictly; jewellery lanes ring = your strike, amulet (neck) = life and the body, charm (none) = stored moments, capacity = carrying; the kind inside a location is flavour with a lint-only authoring lean; shared jewellery pool deferred to Later. Approves TK-1 and the rider-ownership rule (TK-2). **(agreed)** | (b) Strict per kind: reopens agreed 13.4, needs about 35–42 families and new art, answer kinds often fail to drop. (c) Open: the kind predicts nothing in a new player's first runs and reverses agreed-Q1 wording. |
 | 2 | Rarity (Q2) | **(a) Rare only on amulets,** floor 3+, at most 1 Rare trinket per floor, never a boss signature; rings, charms and pieces Common or Uncommon; no Very rare. **(agreed)** | (b) Common and Uncommon only: floors 3–5 offer no trinket that matches Rare weapons and armour, and curses have no trinket host Later. Rare on all jewellery: two rings or charms stack two Rares. |
-| 3 | Buttons (Q3) | **(a) At most one trinket-granted button per unit (`ButtonCap`), on charms only in M2;** rings channel automatically. **(agreed)** Charm abilities get a future design pass (24.2). | (b) Rings hold the button lane and charms go automatic. No buttons at all: loses the stored-moment charm. One button per ring: the Pillars / WotR bar bloat. |
+| 3 | Buttons (Q3) | **(a) At most one trinket-granted button per unit (`ButtonCap`), on charms only in M2;** rings channel automatically. **(agreed)** Charm abilities get a future design pass (24.2; taken up by the charm abilities design, which keeps `ButtonCap` at 1 and adds Catches outside it: change CA-24, agreed charm abilities Q5). | (b) Rings hold the button lane and charms go automatic. No buttons at all: loses the stored-moment charm. One button per ring: the Pillars / WotR bar bloat. |
 | 4 | Damage (Q4) | **(a) Zero added damage, literally:** a ring-shifted part never gains the weakness bonus, but still lands its rider automatically on a weak target. **(agreed)** | (b) Edge-style full ladder: one ring gives every class a weakness key on every spell and needs a party damage ceiling. |
 | 5 | Stacking | **One merged cap, `DuplicateAnswer`,** counting armour and shield, plus runtime limits (section 7) **(lead's call)** | Three separate caps (`DuplicateProperty`, `DuplicateAnswer`, `TagStack`): three overlapping greyed reasons |
 | 6 | Trade-offs | **None in M2;** drawbacks arrive as curses (Later, Rare+) **(lead's call)** (item curses now M4; the Heartward Torc's cursed twin only if the TK owner agrees: heirlooms and curses design 4.6, 10; HL-26, HL-29) | `cost` lines of negative value break "value equals budget"; numeric +X / −Y fails the buff test |
@@ -277,7 +280,8 @@ lean (as lint only) and card glyphs. All four grafts are adopted.
 
 ### 5.5 Domains, lanes and shapes
 
-**(agreed, Q1 for the domains and lanes; shapes lead's call)**
+**(agreed, Q1 for the domains and lanes; shapes lead's call; the None
+charm row's shape cell restated under agreed charm abilities Q1, CA-1)**
 
 | Location (count) | Kinds | Domain: owns these subjects | Signature shape | Never here |
 |---|---|---|---|---|
@@ -287,8 +291,28 @@ lean (as lint only) and card glyphs. All four grafts are adopted.
 | **Back** (1) | cloak | **(settled, armour 13.4)** Elements, stealth. Read here as: the element riders back owns under 5.7 **(agreed, Q1)** (Burning, Smouldering, Chilled); stealth (Hide, staying Hidden) and shake-off economy **(lead's call)** | Passive: reacts to weather and being seen | Always-on resistance (Resistant); Muffled and Shadowed copies; roll mode against attacks; Corroded |
 | **Neck** (1) | amulet (torc, locket, pendant) | **Life and the body:** the `poison`, `bleed`, `disease` tags; Withered; getting a Downed companion up; one element damage event; prevention for one adjacent ally against a non-control minor, limited **(lead's call)** to the neck's own subjects (Poisoned, Bleeding, Withered; Diseased when it ships) | Automatic prevention or blunting: keeps you going | Healing amounts; Scarred; concentration (Later candidate); mind and fear (head's in M2); any control tag as a whole; another location's riders, for yourself or an ally |
 | **Finger** (2) | ring (band) | **Your strike:** one damage part of your own damaging attack or ability (type shift with rider flag; rider flag on its own type); a declared +1 reach option; the cost of Help, the action that sets up an ally's strike (Sigil) | Automatic channel charge on your own use, or an option you declare with it: changes the strike you are making | Added damage; class pools, slots or spells; movement or teleport; defence of any kind; buttons in M2; Study (head, Later) |
-| **None** (2) | charm (talisman, knot, token) | **Stored moments:** Warded and Helped from the charm's own pool or trigger | Button or once-per-fight trigger: a moment you choose when to spend | Fight-start automatic Warded (Warding Lining); save rerolls (Inspired, Later); coin |
+| **None** (2) | charm (knot, token) ("talisman" dropped as a display word; change CA-12; M2 text) | **Stored moments:** Warded and Helped from the charm's own pool or trigger | **Charms catch moments:** a token earned from a named moment in the fight, or one button you spend **(change CA-1; agreed, charm abilities Q1; charm abilities design 4.2)** | Fight-start automatic Warded (Warding Lining); save rerolls (Inspired, Later); coin |
 | **None** | capacity | **Carrying:** +1 or +2 pack slots **(settled, items design 5.4)**; one capacity trinket counts per unit, so trinket capacity is at most +2 per unit (7.1) **(lead's call)** | No combat line | Belt or trinket slots |
+
+- **Charm shapes (change CA-1; agreed, charm abilities Q1; charm
+  abilities design 4.2):** Spend (the existing button, ▸), Catch (an
+  automatic once-per-fight small moment, ◈, outside `ButtonCap`; M3),
+  Keep (a catch fills the charm and the one button spends it; one gated
+  record, M3 if CG2, else M4) and Shaper (Later); counters rejected for
+  now. "Stored moments" stays as the domain words, unchanged.
+- **Cross-location charm reads (change CA-2; agreed, charm abilities Q3,
+  amending the agreed Q1 domains; M3; charm abilities design 4.3):** a
+  charm may read an outcome event in another location's subject (Prone,
+  Teetering and hazard squares, the Feet row's subjects) only to grant
+  Warded or Helped, never to change how that subject resolves. The Feet
+  row's domain is otherwise unchanged; the base batch is domain-clean
+  except Jolt Knot's danger branch.
+- **Pending request (CA-23; M4, else Later; charm abilities design 4.4):**
+  a Spotted charm output (adjacent-only) needs the conditions owner's
+  ruling and then the client, because it would change the None row's
+  domain words ("Warded and Helped"), 6.1 item 6 and the 17.2 domain
+  map. It changes nothing until both rule; Inspired stays under Never
+  here and would also return to the client as a question.
 
 ### 5.6 Authoring lean and display kinds
 
@@ -299,9 +323,13 @@ lean (as lint only) and card glyphs. All four grafts are adopted.
   mind; gauntlets → grapple; gloves → handling; bracers → giving and
   reach. The agreed 13.4 row and the approved example names stay
   unchanged, so Warden's Coif (a hood) keeps a mind verb.
-- **Talismans, knots, lockets, tokens, torcs, pendants and bands** are
+- **Knots, lockets, tokens, torcs, pendants and bands** are
   display names and silhouettes under the existing `charm`, `amulet` and
   `ring` kinds. **No new kind enums**; `kindToLocation` is unchanged.
+  "Talisman" is no longer a charm display word: it is the Reprieve
+  Phial's item category and an item rolls fine loot category **(change
+  CA-12; M2 text; charm abilities design 2.3 F1)**. "Token" is reviewed
+  by the naming pass.
 
 ### 5.7 Rider ownership
 
@@ -381,7 +409,13 @@ Each only inside its owning table (5.5). **(lead's call)**
    "any damaging attack or ability you make", never on a class ability by
    id or tag.
 6. **Granting Warded or Helped** from the trinket's own pool or trigger,
-   to you or one adjacent ally.
+   to you or one adjacent ally. A charm trigger is a token of the closed
+   `charmTriggers` vocabulary and reads outcome events from any source;
+   a cross-location read grants Warded or Helped only, never changing
+   how its subject resolves; receivers stay "you or one adjacent ally",
+   with no new target value **(M3; change CA-2; agreed, charm abilities
+   Q3; charm abilities design 4.3)**. A Spotted output is a pending
+   request (CA-23, 5.5).
 7. **Movement verbs** (feet only): costs to stand, hazard-edge and landing
    saves, Disengage economy; Jumping over crossable hazards Later. Never
    squares of speed.
@@ -428,6 +462,7 @@ marked)**
 | Condition-tag immunity | Monster immunity budget (conditions 12.2); the enemies 17.1 Party's answer |
 | Granting or extending Steeled, Unyielding, composure or Rallied; shortening hard conditions | Conditions 7.2 anti-lock guards |
 | Applying hard or major conditions; offensive morale (Frighten economy, Demoralise, Rout) | Hard control only from limited abilities (conditions 7.1); the morale engine |
+| Any of these as a trinket output, in any lane: Spurred, Rallied, Steeled, Unyielding, Dodging, Hidden, Veiled, Revealed, Shielded, Empowered, Bolstered, Blurred, Death-warded, healing, temporary HP **(change CA-4, a narrowing; charm abilities design 4.4)** | Spurred reads as speed (13.9); each other output belongs to another lane, owner or row of this list; charm outputs stay Warded and Helped (6.1 item 6) |
 | Extra actions, turns or attacks; a second reaction; two cost steps on one action | Nova anti-goal; Surge and Extra Attack are class powers |
 | Class pools: +max, refill, refill-tag change, "not spent on a miss" | Free-refill anti-goal; capacity and timescale offers |
 | Training, mastery, spells known, concentration proficiency | Offers and classes own access |
@@ -460,6 +495,9 @@ marked)**
 | **One received trinket prevention per round** | At most one trinket property, from any wearer, stops a condition on a given unit per round; others are not spent. The counter and its order are defined in 7.3 | TK-21 |
 | **Ally preventions yield to wards** | An ally prevention (Kinward, Heartward) yields only when step 4 would actually spend a Warded charge on this application: the target holds Warded, the condition is ward-eligible (not lingering, Downed or Surprised), and no ward has been spent on this target in this use. The test is the same function step 4 uses. Otherwise the ally prevention may fire **(lead's call)** | TK-21 |
 | **One trinket Helped per round** | A unit gains at most one Helped per round from a trinket source (Trophy Tally; a Sigil-cheapened Help counts). A Sigil variant whose Helped would be blocked is hidden and its reason shown as `TrinketHelpedLimit` | TK-10, TK-21, TK-22 |
+| **`CharmFireOnce`** | When one event qualifies two charms on the same unit, only one fires; one floater per event. Candidates are taken `once` tokens first, then `recurring` ones, in slot order within each; blocked candidates are skipped; the others defer (`recurring`) or are missed (`once`) (charm abilities design 4.6 item 1) | **(agreed, charm abilities Q2)**; CA-5; M2 simulator-only (shadow records), M3 live |
+| **No-chain** | An event caused by a trinket output never fills or fires a charm. Trinket-caused means a `TrinketPropertyFired` root source; modifiers (a Helped's advantage, a channel's type shift, a ward answering a hostile's application) never taint (charm abilities design 4.6 item 2) | **(agreed, charm abilities Q2)**; CA-5; M2 simulator-only, M3 live |
+| **One caught token per output per receiving unit per fight** | A unit receives at most one Helped and one Warded from charm catches per fight (receiver-keyed flags; only a Catch grant sets them; the Bobbin's charm counts). Greyed `CharmCaughtThisFight` (charm abilities design 4.6 item 3) | **(agreed, charm abilities Q2)**; CA-5; M2 simulator-only, M3 live |
 | **One cost step, one reach step** | Never two cost steps on one action from any mix of sources (Deft Gloves plus a rolled Administer step); one reach step and one cost step may combine | Rule 23 |
 | **Combat-first** | Every trinket's `obvious` property binds a combat hook; capacity is exempt | Rule 17 |
 
@@ -468,6 +506,16 @@ active set, trinket slot 1, trinket slot 2 (the `ReactionCap` machinery,
 armour 5.5). Suppression is never a refusal: the equip is legal and the
 suppressed line is greyed with its reason. **(settled pattern, armour
 5.5)**
+
+**How charm catches resolve (change CA-5; lead's calls, after the check,
+in the charm abilities design 4.6 items 4–7; M2 simulator-only, M3
+live):** catches are queued and resolve only after the use that caused
+them is complete, so a token never affects the rest of that use; order
+is core event sequence, then ascending unit order of the wearers, then
+the `CharmFireOnce` order; every charm per-fight state, and
+`trinketWardedThisFight`, resets only on the fight-resources reset event
+(boss rooms design 4.2.5), so in the Sanctum once per fight is once per
+boss encounter; a line revealed mid-fight stays inert until that reset.
 
 ### 7.2 Dormant lines
 
@@ -483,6 +531,9 @@ deferred to fight end, so a line that was working never greys mid-fight.
 Counters (`fightUses`, `spent`, the per-round and per-fight flags) belong
 to the property, not to its active status, and persist across a
 recompute. Any newly greyed line is announced in the log and on the card.
+A charm catch or Keep line revealed mid-fight stays inert until the next
+fight-resources reset (charm abilities design 4.6 item 6, 4.8; CA-24,
+read).
 
 ### 7.3 Gear-prevention order
 
@@ -534,6 +585,14 @@ About one action's worth each. **(lead's call)**
 | `camp` 1 charge | 2; Rare only; a camp spend (ability model 6.4); none in the M2 roster |
 | Granted button | Counted once, inside the property whose effect is the grant (TK-12) |
 | Capacity | +1 pack = 1; +2 pack = 2 (TK-12) |
+| A two-branch catch (two `charmTriggers`, one output, once per fight) | 1: one value-1 property (the Visor exception as a data shape), provided its merged rate passes CG1 (Jolt Knot, Minder's Pebble) **(M3; change CA-7; charm abilities design 4.5)** |
+
+**Charm catch values (change CA-7; M3; charm abilities design 4.5):** a
+Catch is a `fight` minor, value 1. A self-Warded catch keeps value 1
+only if its fire rate is at most 600‰ *(illustr.)* in elite and in boss
+fights, read separately; otherwise it is `rest`-charged (Bloodknot
+`rest` 1/1/2, automatic, value 1). An automatic ally-Warded catch is a
+major, `rest` 1/1/1, value 2 (ability model 6.2, read).
 
 ### 8.2 Rarity and feel
 
@@ -548,6 +607,14 @@ About one action's worth each. **(lead's call)**
 
 - Neck count is 1, so a unit holds at most one Rare trinket by
   construction. **(agreed, Q2)**
+- **Charms stay Common and Uncommon (change CA-24; agreed, charm
+  abilities Q5; M3; charm abilities design 4.8, 4.9, 4.12):** Q2 stays
+  closed (no Rare charms); `ButtonCap` stays 1 and Catches never count
+  toward it; up to 2 charms per unit, no slot change. A Common charm is
+  one Catch line or one self Spend line; an Uncommon is one major or the
+  obvious line plus one rolled line from `props.trinket.charm`, which
+  catch lines join. A rolled catch or Keep line may be the one dormant
+  property. The charm string is held as a future M4 item.
 - Rings cannot be cursed until the curse design (Later) asks for Rare
   rings, which would reopen Q2 with the client. **(agreed, Q2)** The
   curse design (segment 15) asks for no Rare rings, so rings stay
@@ -612,6 +679,16 @@ About one action's worth each. **(lead's call)**
 | **Charged, automatic** | Neck, finger, some pieces | Prevention or channel charges with a data policy. Defaults: condition preventions `always` with target filter `nonMinion`; element blunting `always` with `nonMinion` and `bigHit` (13.5); channels `always` with the default filters `nonMinion`, `notResistant` (never shift onto a target known to resist or be immune to the new type) and `noCancelOwnSide` (9.4). Channels also carry the mandatory `hostileOnly` filter and the built-in precondition `riderWouldBeAttempted` (9.4), which the player cannot change. The player may change any default to "ask me" (ability model 7.3). Automatic `fight` uses of preventions and channels always fire |
 | **Cost-step, reach-step and declared uses** | Pieces, rings, Lifeline | A `fight` or `rest` use that changes an action's cost or reach (Runner, Oilskin, Lifeline, Aid, Longreach) is offered as a separate action variant beside the normal one ("Shake off (Oilskin, 1 square)") and spent only when the player or AI picks that variant. Never automatic. A passive verb with no pool (Strider, Deft, Catcher) simply applies **(lead's call)** |
 | **Granted (button)** | Charms only in M2 | At most 1 per unit (`ButtonCap`). Original trinket-list abilities only. Usable only in combat, after initiative is rolled. They need no difficulty of their own: trinket outputs carry no save-or-suffer control |
+| **Charm shapes** **(change CA-1; agreed, charm abilities Q1)** | Charms | Spend is the granted button (▸). Catch (◈) is a Passive: automatic, once per fight, keyed to a named outcome, a `fight` minor, outside `ButtonCap` (M3). Keep fills from a catch and spends through the one button (one gated record; M3 if CG2, else M4). Shaper changes a held token (Later). Charm abilities design 4.2 |
+
+**Charm policies (change CA-8; M3; charm abilities design 4.5):** Helped
+catches `always`; Warded catches `always` or `spareForButton`, set at
+rests; ally-target catches and majors `always`, with the receiver fixed
+by the trigger, never a prompt (no "ask me" on a catch); every catch
+`onBlocked: defer`, with the waits (defer), missed and wasted meanings
+of charm abilities design 4.5. A Catch is a 9.1 Passive, and Trophy
+Tally's "not spent if blocked" is the general catch rule (readings,
+charm abilities design 13).
 
 ### 9.2 Granted buttons
 
@@ -630,8 +707,11 @@ About one action's worth each. **(lead's call)**
   after initiative is rolled, so a Warded cannot be stored before opening
   a known boss or elite door (that would recreate the cut fight-start
   Warded charm, 13.9).
-- Charm abilities are a planned area for growth: a future design pass on
-  "stored moments" is an open item (24.2).
+- Charm abilities are designed in the charm abilities design (24.2;
+  hook taken up): Catches never use the button; a Keep uses the one
+  button, and its fill expires at the fight-resources reset, so it
+  stores no boss-door ward either (change CA-1; charm abilities design
+  4.2).
 
 ### 9.3 Pools
 
@@ -794,7 +874,11 @@ About one action's worth each. **(lead's call)**
    cross-document comparison 2026-11-23, CC-54):** Duskhem against No
    Witnesses III and Long Shadow; Slinger's Bracers against Toss and
    Dust (VG-18); the Herald pairs, including Reach the Fallen against
-   the Lifeline Pendant.
+   the Lifeline Pendant. **Owed for the charm catches (pending, TK
+   owner with the class owners, the CC-54 pattern; before shadow results
+   are read; charm abilities design 11):** Twitch Bone, Lockjaw, Shy
+   Stone, Quietus Knot and Second's Hairpin, and the ally-Helped catch
+   ruling (charm abilities design 4.4).
 2. **Weapon, armour, shield and focus properties keep weapons 18.1:**
    charged echoes are legal (Ember Ring echoes Ember Edge; Longreach
    echoes Long Haft); always-on copies are not.
@@ -805,7 +889,10 @@ About one action's worth each. **(lead's call)**
    rogue's Steady Aim.
 4. **Trinkets act only on** universal actions, conditions, item use,
    movement, their own pools and "any damaging use you make". Never on a
-   class ability by id or tag, never on a class pool.
+   class ability by id or tag, never on a class pool. Charm triggers
+   are outcomes from the closed `charmTriggers` vocabulary, never a
+   class ability, weapon verb or item id **(M3; change CA-2; charm
+   abilities design 4.3)**.
 5. **No access:** no training, spells, slots, pool capacity or
    proficiency.
 6. **Binding class requirements are proven with empty trinket slots:** the
@@ -979,17 +1066,20 @@ Uncommon pieces add one roll from their location table. **(lead's call)**
 |---|---|---|---|---|
 | **Wardstone** | C | **Wardstone** (button): 1 / 1 / 2 per rest, bonus action, combat only: you gain Warded (1). Greyed `AlreadyWarded` while you hold Warded, and `AlreadyWardedThisFight` once you have had a trinket Warded this fight | M2 | Self only. Warded blocks hard conditions (approved Warded text); the landing envelope gate checks bosses still land control |
 | **Ward-Knot** | U (major) | **Ward-Knot** (button): 1 / 1 / 1 per rest, bonus action, combat only: one adjacent ally (not you) gains Warded (1). Greyed `AlreadyWarded` on a Warded ally and `AlreadyWardedThisFight` on an ally that has had a trinket Warded this fight | M2 | Distinct from Wardstone by target. The card says "stops the ally's next harmful condition, hard control included" |
-| **Trophy Tally** | C | **Tally:** once per fight, automatic: the first time any damage event reduces a hostile to 0 HP while it is adjacent to you at the moment of the drop, you gain Helped (fallback `untilSourceTurnEnd`, you as source, as the Vex verb, W-7) | M2 | Renamed from "Hunter's Tally" (Hunter is an elite affix, enemies 17.2). Not spent if you already hold Helped or have had a trinket Helped this round. Container-only (no beast carriers) |
+| **Trophy Tally** | C | **Tally:** once per fight, automatic: the first time any damage event reduces a hostile to 0 HP while it is adjacent to you at the moment of the drop, you gain Helped (fallback `untilSourceTurnEnd`, you as source, as the Vex verb, W-7) | M2 | Renamed from "Hunter's Tally" (Hunter is an elite affix, enemies 17.2). Not spent if you already hold Helped or have had a trinket Helped this round (the general catch rule; reading, charm abilities design 13). Container-only (no beast carriers). Keeps its unfiltered line (no minion filter; reading); ready/spent plate states at M2, the Helped output cue at M3 (charm abilities design 5.1, 6) |
 | **Porter's Satchel** | C | +1 pack slot | M2 | Capacity, value 1; no combat line, no dormant property. Renamed from "Porter's Charm" so no kind word ("charm", "knot") sits on the capacity lane |
 | **Mule Strap** | U | +2 pack slots (the settled maximum) | M2 | Capacity, value 2. Renamed from "Mule Knot". Only one capacity trinket counts per unit (7.1). A fallback if it is never picked is held until the pick report triggers it; its table is chosen then |
-| Bloodknot | C | Once per fight: first drop to half HP or below, gain Warded | Later | Held so M2 has at most two ward charms |
-| Kinstone | C | Move a Warded charge between you and an adjacent ally | Later | Needs a `sourceTied` ruling; only if the ward non-stacking rule holds |
-| Scrollwright's Token | C | Advantage on the next off-class scroll Arcana or trap Mechanics check | Later | Trigger-rate risk |
+| Bloodknot | C | Once per fight: first drop to half HP or below, gain Warded | Later | Held so M2 has at most two ward charms. Status: M3 unlock candidate, HOLD for CG1, shadowed in its `rest`-charged form (`rest` 1/1/2, automatic, value 1) (change CA-15; charm abilities design 5.1, 5.2) |
+| Kinstone | C | Move a Warded charge between you and an adjacent ally | Later | Needs a `sourceTied` ruling; only if the ward non-stacking rule holds. Status: HOLD, M4 (change CA-15; charm abilities design 5.2) |
+| Scrollwright's Token | C | Advantage on the next off-class scroll Arcana or trap Mechanics check | Later (exploration-first, 19) | Trigger-rate risk. Leaves the charm lane: moves to the exploration-first Later trinkets (19), not a combat moment (rule 17); the consumables design 25 / ID-3 revisit lever is kept (change CA-15; charm abilities design 5.2) |
 | Last-Breath Charm | R | 1 per camp: at fight start gain Death-warded | Later, retired | Retired (Later; nothing shipped changes): it duplicates Death-warded on a timer and the Reprieve Phial owns the extra-life fantasy (death and healing design 15.3, Q7) |
-| Muse's Token | R | 1 per camp: gain Inspired | Later | Only with the Leadership-mastery owner's agreement; reopens Q2 |
+| Muse's Token | R | 1 per camp: gain Inspired | Later | Only with the Leadership-mastery owner's agreement; reopens Q2. Status: HOLD Later; an Inspired charm returns to the client as a question (change CA-15; charm abilities design 5.2) |
 
 All Later charm entries go through the charm-abilities pass (24.2) before
-they are approved. **(lead's call)**
+they are approved. **(lead's call)** The pass set their statuses above
+(Last-Breath Charm stays retired) and its M3 catalogue (charm abilities
+design 5.1); content approval still waits for its data gates CG1 and
+CG2 (24.2, change CA-19).
 
 ### 13.8 M2 roster count
 
@@ -1037,7 +1127,7 @@ refused, there are no trinket Scions and the family cap of 1 stands
 | Ring of Passage (blink) | Movement belongs to feet |
 | Ring of the Second Word (no slot spent on a total miss) | Free class-pool refill |
 | Second Chance Token; Lucky Bone as a save reroll | Copy Inspired; replaced by Muse's Token, Later |
-| Spurred boots | Reads as speed; copies Rally's token |
+| Spurred boots | Reads as speed; copies Rally's token. Spurred is never a trinket output, in any lane (6.2; change CA-4; charm abilities design 4.4) |
 | Dodge as a bonus action | Echoes Patient Defense; held for the registry |
 | Quickdraw, Retrieve and escape-advantage gloves; Slipping Bracers | Copy weapon or armour properties, or route around Retrieve |
 | Tinder Ring; any damage or no-save ring button | Rings carry no buttons in M2 (Q3); no-save application at range |
@@ -1153,7 +1243,25 @@ channel, ◈ token, ▸ button), and a "?" for a dormant line with its glyph hid
   suppression): `DeadLine` (a line another worn source already covers,
   Emberward behind a fire Resistant source), a ring whose rider slot the
   active weapon already takes (13.6), and Lifeline on a wearer who is not
-  Medicine-trained.
+  Medicine-trained. Charms add the greyed reason `CharmCaughtThisFight`,
+  shown as "Already gained a Helped from a charm this fight" (change
+  CA-5; M3), and the warning verdicts party-scope `DeadLine`, "rarely
+  fires for this unit" (by floor band and party size), "no ally to
+  receive this" and "shares its Helped with <charm>" (change CA-6; M3;
+  charm abilities design 4.7).
+- **Charm lines, plate and hints (changes CA-6, CA-12; charm abilities
+  design 4.2, 4.7, 5.4):** a catch line keeps this line format under
+  the ◈ glyph ("◈ **<Keyword>:** once per fight, automatic: when
+  <outcome>, <receiver> gain(s) <token>"); no card, log, Inspect or hint
+  string prints "Catch" or "caught" (a design and data label only: it
+  meets the traps design's Catch trap kind and Hunch catch badge), and
+  "talisman" is not a charm display word (5.6; M2 text). Every charm
+  record has a `plateHint` (the serialized `previewHint`) and setup
+  catches a `forecastHint`, shown in the move or attack forecast through
+  party knowledge only, with whole-string "waits" and "missed" forms.
+  On the plate a unit's charms are one mark, a pair of pips with ready
+  and spent states (M2, for Trophy Tally) and waiting, kept and dormant
+  states (M3).
 - **Art:** icons kit-bashed from kind silhouette × material × element tint
   × lane glyph.
 
@@ -1277,6 +1385,14 @@ prop.trinket.kinward: { value: 2, table: "props.trinket.neck_major",
   `sharedTrinketAllowlist`, `copyRegistryAllowlist` and the channel
   filter lists are a lead's-call block that only the lead changes.
   `bigHitPermille` and the pool bands are tuning *(illustr.)*.
+- **Charm vocabularies (change CA-3; Now (spec); charm abilities design
+  4.3, 9.1):** `inventory.json` gains the closed `charmTriggers`
+  vocabulary (each entry with `catchClass`, `actor`, `repeat`, an
+  optional `crossLocation` flag and the 4.3.1 predicate) and
+  `charmOutputs`, a lead's-call block beside `trinketSubjects` and
+  `trinketDomains` (TK-11 path); charm property records gain a
+  `charm{}` block. A Spotted entry in the domain map is a pending
+  request (CA-23, 5.5).
 
 ### 17.3 State, queries and events
 
@@ -1295,6 +1411,15 @@ prop.trinket.kinward: { value: 2, table: "props.trinket.neck_major",
   awareness record (enemies 11.2), set on the first `noticed` and reset at
   fight start (Grey Mantle, Duskhem). Nothing derived is stored
   **(settled, stat model 6)**.
+- **Charm state (change CA-11; M2 simulator-only for the shadow records,
+  M3 live; charm abilities design 9.1):** `charmKept[(unit, prop)]`; the
+  receiver-keyed flags `charmCaughtHelpedThisFight[unit]` and
+  `charmCaughtWardedThisFight[unit]`; the armed/missed (defer) state of
+  each catch; the per-(unit, property) policy choice. Every per-fight
+  entry, `fightUses` and `trinketWardedThisFight` included for charms,
+  resets only on the fight-resources reset event (boss rooms design
+  4.2.5); all of it is in the save, the suspend journal and replays, with
+  a schema version bump (the seeds and validation owner applies).
 - **Queries:** `ActiveReactionProperty(unit)` (settled) reads the new
   `reactionShaped` flag; new `ActiveTrinketButton(unit)` and
   `AnswerOwner(unit, scope, key)`, by the fixed slot order of 7.1 and
@@ -1304,7 +1429,10 @@ prop.trinket.kinward: { value: 2, table: "props.trinket.neck_major",
   with `result ∈ {prevented, shifted, flagged, costStepped, reachStepped,
   granted, blunted, notSpent}`; `ConditionResisted{reason:
   TrinketProperty}` (TK-5, TK-15). A channel that does not fire emits
-  nothing that names a hidden trait (9.4).
+  nothing that names a hidden trait (9.4). Beside it, `CharmCaught{unit,
+  receiver, property, trigger, eventSeq, outcome: fired|deferred|missed,
+  shadow}`; a granted token that expires unconsumed is logged as wasted
+  (changes CA-5, CA-11; charm abilities design 7 item 11).
 - **AI:** monster carriers use the resolve-preview scoring; buttons need
   `useWhen` (12).
 - **Determinism:** every trinket fire replays bit-identically (main design
@@ -1321,20 +1449,20 @@ fails when **(lead's call)**:
 
 | Rule | Content |
 |---|---|
-| 15 | **Domain map:** each (effect kind, target scope, subject token) triple has one owning table, read from `trinketDomains` and the closed `trinketSubjects` vocabulary (17.2); a property with several subject tokens is checked token by token; a property outside its table fails; shared triples only through `sharedTrinketAllowlist` (empty in M2) |
+| 15 | **Domain map:** each (effect kind, target scope, subject token) triple has one owning table, read from `trinketDomains` and the closed `trinketSubjects` vocabulary (17.2); a property with several subject tokens is checked token by token; a property outside its table fails; shared triples only through `sharedTrinketAllowlist` (empty in M2). A charm trigger token flagged `crossLocation` reads another location's subject only to grant Warded or Helped and is not a breach **(M3; change CA-2; agreed, charm abilities Q3; charm abilities design 4.3, 9.2 rule 30)** |
 | 16 | **Denylist** (6.2) on `effectKinds[]`, and every effect kind is one of 6.1's |
 | 17 | **Combat-first:** the `obvious` property binds a combat hook; capacity exempt (its hook is the capacity query; also exempt from armour 17.1 rule 14's zero-trigger-rate failure) |
 | 18 | **Class copy registry** at any charge level, bidirectional (11): a collision fails both records unless the pair is in `copyRegistryAllowlist`. The registry is empty until class records land (23) |
 | 19 | **Buttons:** only on charms in M2, at most 1 per item; the button is a property whose effect is the grant, and its `button.abilityId` resolves to an ability-model record |
 | 20 | **Pools:** no `never`; `camp` only on Rare; majors 1 / 1 / 1 |
-| 21 | **Rare:** amulets only, `minFloor` 3+, never `signature`; pieces at most Uncommon (settled). The per-floor count `trinketRarePerFloorMax` is a generation invariant, not content validation (items 19.2, TK-27) |
+| 21 | **Rare:** amulets only, `minFloor` 3+, never `signature`; pieces at most Uncommon (settled); charms Common and Uncommon only, Q2 kept closed **(change CA-24; agreed, charm abilities Q5)**. The per-floor count `trinketRarePerFloorMax` is a generation invariant, not content validation (items 19.2, TK-27) |
 | 22 | **Ally effects:** `targets` is `self`, `adjacentAlly`, or `reach2Ally` only on Hand over and Administer reach steps; one ally per trigger |
 | 23 | **One cost step and one reach step per action; one channel per use** (7.1); a declared reach option is not a channel |
 | 24 | **Outputs:** minor or token conditions only; never an AC-writing condition; zero added damage as 6.2 defines it; every `channel` record carries `hostileOnly` and `riderWouldBeAttempted` |
 | 25 | **Carriers:** `negates[]` and a role-answer pass per carrier type; `carrier{}` limits present on every carried-eligible property; output conditions within the type's 2; a reaction-shaped property counts as the type's one reaction beyond the opportunity attack and a button under the bonus-action cap (enemies 9.1); Wardstone and Ward-Knot never with the Warded or Unbreakable affix; the 6.4 guards pass with the carrier (checked at generation, enemies 15.3 step 4) |
 | 26 | **Two classes:** every record declares `usefulFor[]` with at least 2 launch classes or `anyCompanion`, signed off by the lead; tag-keyed text met by at least 2 |
 | 27 | **Element families:** at most 2 element families per wave per lane (finger, neck, back), counted from `element` |
-| 28 | **Rolled lines:** a rollable table never offers the item's own obvious line, and never a line sharing an `answers[]` key with it, a second channel on a channel ring, or a second button. An Uncommon or Rare obvious line with no legal roll in its table fails; Heartward keeps all 3 (Antidote, Graveward, Lifeline). **(change IR-4; M2; item rolls design 4.6)** This rule extends to every rolled category; a gear record carries at most 1 rolled line, only the rolled line may be dormant, and each family declares a curated table of 3–5 eligible entries, except trinket families (`props.trinket.*`), whose curated table is the legal set left after this rule's exclusions (at least 1) (cross-document comparison 2026-11-23, CC-4) |
+| 28 | **Rolled lines:** a rollable table never offers the item's own obvious line, and never a line sharing an `answers[]` key with it, a second channel on a channel ring, or a second button. An Uncommon or Rare obvious line with no legal roll in its table fails; Heartward keeps all 3 (Antidote, Graveward, Lifeline). **(change IR-4; M2; item rolls design 4.6)** This rule extends to every rolled category; a gear record carries at most 1 rolled line, only the rolled line may be dormant, and each family declares a curated table of 3–5 eligible entries, except trinket families (`props.trinket.*`), whose curated table is the legal set left after this rule's exclusions (at least 1) (cross-document comparison 2026-11-23, CC-4). **(change CA-24; M3; charm abilities design 4.8)** On a charm: no second line with the same (trigger, output); a rolled catch line never has the obvious line's output; a Warded catch line never rolls onto a ward-button charm; the obvious line is never a dormant catch |
 
 Armour 17.1 rules 10, 11, 13, 14 and 17 still apply **(settled, AR-38)**.
 The authoring lean (5.6) is a lint warning, never a failure.
@@ -1415,8 +1543,9 @@ except the landing envelope, whose numbers are the lead's (TK-4):
 
 | Report | Target |
 |---|---|
-| **Condition landing envelope (release gate; also in the E+ safety veto)** | With the maximum legal trinket and armour prevention loadout, each monster type's signature condition lands at least 60% as often as trinket-free, and a boss's hard control lands at least once per boss fight in at least 50% of fights. A second row measures the boss's hard control **on the hero** with the maximum legal companion-support loadout (Ward-Knot, Kinward, Heartward on companions). These numbers are binding lead's numbers in `ePlusGate` (`landingEnvelopeMinPermille: 600`, `bossHardLandMinPermille: 500`; TK-4), not *(illustr.)* |
-| Trigger rate per property per kind | At least once per 3 fights for its wearer, also reported per short-rest interval and, for neck lines (Antidote, Graveward, Emberward, Lifeline), per floor theme; capacity exempt |
+| **Condition landing envelope (release gate; also in the E+ safety veto)** | With the maximum legal trinket and armour prevention loadout, each monster type's signature condition lands at least 60% as often as trinket-free, and a boss's hard control lands at least once per boss fight in at least 50% of fights. A second row measures the boss's hard control **on the hero** with the maximum legal companion-support loadout (Ward-Knot, Kinward, Heartward on companions). These numbers are binding lead's numbers in `ePlusGate` (`landingEnvelopeMinPermille: 600`, `bossHardLandMinPermille: 500`; TK-4), not *(illustr.)*. **Measurement clarification (change CA-17, lead; before CG1; charm abilities design 8.3):** whether "maximum legal loadout" is literal or realistic is clarified by the lead, the binding numbers unchanged; meanwhile both loadouts are reported and the literal one binds |
+| Trigger rate per property per kind | At least once per 3 fights for its wearer, also reported per short-rest interval and, for neck lines (Antidote, Graveward, Emberward, Lifeline), per floor theme; capacity exempt. For charms, rule 26 also holds on the rate report, read per floor band and party size **(change CA-16; M2; charm abilities design 8.1)** |
+| **Charm reports** **(change CA-16; M2; charm abilities design 9.4)** | Catch, missed and wasted rates per charm, split per fight class, party size, boss, floor and unlock set; bind rates per wearer-fight; the other reports of charm abilities design 9.4, run on the M2 roster and the simulator-only shadow records |
 | Pick rate by location and family | No family above 50% of eligible wearers within any class |
 | Roll concentration | Measured per table against each obvious line's legal roll set: no property above max(40%, 1.5 ÷ the number of legal entries) of kept Uncommon rolls, checked after smart weighting (item rolls design 4.6); `props.trinket.charm` is report-only |
 | **Offence** share of M2 families and picks (channels, reach, Helped, Hidden kills, free Disengage) | At least 25% *(illustr.)* (now 27%, 13.8) |
@@ -1449,8 +1578,9 @@ except the landing envelope, whose numbers are the lead's (TK-4):
   kind-flexible variants, only if `LocationOccupied` binds in the armour
   17.3 report; Rare charms (reopening Q2); one-aura-per-party Rare amulet
   (needs the client); curses; theme-tag synergy (armour 5.9); trader-sold
-  trinkets; heirloom templates (M3); exploration-first trinkets; E+ by the
-  lead's gate.
+  trinkets; heirloom templates (M3); exploration-first trinkets
+  (Scrollwright's Token moves here from the charm lane; change CA-15;
+  charm abilities design 5.2); E+ by the lead's gate.
 - **M3 / M4 (heirlooms and curses design 4.1.1, 4.6, 10; hook taken
   up):** M3 heirloom templates are main-hand, off-hand and armour only,
   never trinkets. **Pending request (HL-26; M4):** trinket heirlooms
@@ -1476,7 +1606,7 @@ except the landing envelope, whose numbers are the lead's (TK-4):
 | **Thin Rare tier** (one Rare family, at most one per run) | Rare offer and pick reports per floor; a second Rare neck family is a Later option (24.3) |
 | **Medicine-dependent entries become dead loot for companions** | At most one Medicine or Lore family per wave; `requires` steering |
 | **New greyed reasons to teach** | Pre-equip verdicts; one line each |
-| **Charms feel thin** with two ward buttons and Tally in M2 | The charm-abilities pass (24.2), with the button press-rate report as its input |
+| **Charms feel thin** with two ward buttons and Tally in M2 | The charm-abilities pass (24.2), with the button press-rate report as its input; taken up by the charm abilities design (catch batch at M3, after its data gates) |
 | **Bring-the-key** (element amulets and cloaks by floor theme) | Rest gate; charged, single-event effects; Torc of Seasons Later |
 | **Unruled dependencies** | Duskhem against Hidden's end rules; Leaper's against Jumping; Inspired owner; Storm and Dawn rings; Kinstone `sourceTied` |
 | **Class copies discovered late** | The bidirectional registry makes the second-authored record change; Runner's pre-cleared |
@@ -1657,6 +1787,13 @@ Approved by the client on 2026-11-17.
 **(agreed, Q3: the client wants charm abilities discussed further as a fun
 mechanic; scope and timing lead's call, new)**
 
+**Taken up** by the charm abilities design
+(`2026-11-24-charm-abilities-design.md`, segment 16, approved by the
+client on 2026-11-24). The fixed-frame changes went to the client as
+its Q1–Q5 (all agreed): the lane wording and shapes (5.5, 9.1), the
+three new 7.1 limits, cross-location reads (5.5, 6.1), the Bobbin boon,
+and Q2 kept closed with `ButtonCap` 1 and no slot change (8.2).
+
 A dedicated pass on expanding what charms can store and when the player
 spends them, brought to the client as its own proposal.
 
@@ -1671,14 +1808,25 @@ spends them, brought to the client as its own proposal.
 - **Inputs:** M2 playtest and simulator data on the button press rate,
   Wardstone and Ward-Knot pick and trigger rates, the landing envelope,
   and the `ButtonCap` bind rate.
-- **When:** after the first M2 playtest data on those reports, and before
-  any Later charm entry is approved. Until then the M2 charm roster in
-  13.7 stands.
+- **When (split by change CA-19; charm abilities design 10):** the
+  framework, the reports and the simulator-only shadow records now (M2
+  instrumentation); content approval after the data gates CG1
+  (simulator) and CG2 (the first M2 playtest), and before any Later
+  charm entry is approved. Until then the M2 charm roster in 13.7
+  stands.
 - **Camp and hub (segment 13; hook taken up; informed, change CH-24;
   M3/Later):** charms get no hub surface; this pass may later propose a
   charm boon type, offered only under the main design's one-boon rule
   (main design 4.7), never as a starting-kit peg (camp and hub design
-  2.2 hook 32, 4.9).
+  2.2 hook 32, 4.9). **Taken up (change CA-20; agreed, charm abilities
+  Q4; M3; charm abilities design 4.11):** the **Bobbin** (the agreed
+  Underpillow, renamed) is a charm boon type: earned by a milestone, the
+  one starting boon may be one unlocked Common catch-only charm, placed
+  on the hero at WO1; never a button, Keep, Uncommon, heirloom,
+  persistent or cursed; off on shared, seeded and daily runs; gated on
+  a parity report and a pick share of at most about 40% *(illustr.)*.
+  Its main design, camp and hub, seeds and validation and loot economy
+  parts are pending requests to those owners.
 
 ### 24.3 Future items triggered by reports
 
@@ -1689,7 +1837,8 @@ it:
   playtest holds at 80% *(illustr.)* (19).
 - **Rare charms or rings:** reopen Q2 (curses, Muse's Token). Curses no
   longer trigger it: the heirlooms and curses design asks for neither
-  (4.6, HL-26). Last-Breath
+  (4.6, HL-26). The charm abilities design keeps Q2 closed for charms
+  (change CA-24; agreed, charm abilities Q5). Last-Breath
   Charm is retired: the Reprieve Phial owns the party's extra-life fantasy
   (death and healing design 15.3; consumables design 14.9).
 - **One aura per party on a Rare amulet:** a Later option, not

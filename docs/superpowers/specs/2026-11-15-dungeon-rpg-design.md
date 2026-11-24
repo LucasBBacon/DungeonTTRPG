@@ -314,6 +314,10 @@ All decided.
   multiclass character. From M3, themes and final bosses also join the
   unlockable content, never power (run structure design 8.12; change
   RT-18, M3).
+  From M3, charm families join the unlockable loot under this rule as
+  written, with two base families, so they add families, never
+  strength; charm unlocks use the Library's generic loot-unlock object
+  (charm abilities design 4.10; change CA-21, read, M3).
 - **One starting boon.** Before a run the player picks a single earned boon,
   such as an heirloom item or a background perk. Boons add variety and do
   not stack. Starting kits get no hub peg: kit variants ship only as
@@ -339,6 +343,14 @@ All decided.
   unlit and the Oath catalogue is held (heirlooms and curses design
   4.5, 14.2; change HL-21, request, agreed 2026-11-23, heirlooms and
   curses Q6, Later).
+  Pending (owed by this document with camp and hub): a request to add
+  the Bobbin, a charm boon: one earned boon option, unlocked by the
+  milestone "a charm fired in a won fight", that gives the hero one
+  fresh, uncursed, unlocked Common Catch charm each run, never stacked,
+  never an heirloom, and off on shared, seeded and daily runs; it gets
+  no hub surface (the CH-24 sentence above, read); if declined, the
+  boon is withdrawn or narrowed (charm abilities design 4.11, 14.2;
+  change CA-20, request, agreed 2026-11-24, charm abilities Q4, M3).
 - **Difficulty ladder.** Each win unlocks an optional harder tier. From
   M3, Nightmare tiers add kind, not stats, and the Perilous Door makes
   the ladder per-floor (run structure design 9.1; change RT-21, M3).
@@ -844,6 +856,12 @@ Heirlooms, item curses, Maladies and Oaths are settled in
 `2026-11-23-heirlooms-curses-design.md`; they are no longer pending, and
 its hooks on this document are taken up in section 4.7 (heirlooms and
 curses design 11, 13; changes HL-1, read; HL-21, request, pending).
+
+Charm abilities (the trinkets design 24.2 pass: charm shapes, triggers,
+limits, catalogue and the Bobbin boon) are settled in
+`2026-11-24-charm-abilities-design.md`; they are no longer pending, and
+its hooks on this document are taken up in section 4.7 (charm
+abilities design 11, 13; changes CA-20, request, pending; CA-21, read).
 
 - All numbers: hit points (shape settled there), damage, experience curve, loot rates.
 - The dungeon generation algorithm.
