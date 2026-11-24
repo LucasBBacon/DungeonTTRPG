@@ -4,6 +4,13 @@ Date: 2026-11-16
 Status: approved by client, 2026-11-16
 Parent: `2026-11-15-dungeon-rpg-design.md` (the main design)
 
+Names updated by the naming pass (naming pass design, approved 2026-11-24;
+NP rows listed): NP-8 (8.1 rider wording prints the condition keyword:
+Bleeding, Chilled, Corroded; 8.4 Raging → Frenzied, Resisting prints
+"Resistant (type)", Ill-Starred → Star-Crossed; 10 bleed → bleeding) and
+NP-9 (7.2 Second Nature → Old Hand; Tactician kept, W-22); 7.1 Sound the
+wall → Tap the wall (register 5.3.44).
+
 Items marked **(agreed)** were agreed with the client, either directly or by
 approving the lead's proposal. Items marked **(lead's call)** were filled in
 by the design lead while writing this document and have not been confirmed.
@@ -44,13 +51,40 @@ characters who differ in it. **(agreed)**
 
 - Fidelity to 5E numbers or wording.
 - Social skills and dialogue checks.
-- Spreading or evolving terrain surfaces, such as burning oil that spreads
-  or conducting water. Held back until riders and layers are proven.
-  **(agreed)** Fixed map squares that apply conditions are allowed; they
-  never spread or change, except that fire burns an oil square to plain
-  floor (conditions design 11).
+- Spreading or evolving terrain surfaces, such as burning oil that spreads.
+  Held back until riders and layers are proven. **(agreed)** Conduct
+  (lightning through connected water) is not held back: it arrives in M2,
+  before this gate, because it is instantaneous and makes no square
+  (room terrain design 6.8, K3). Fixed map squares that apply conditions
+  are allowed; they never spread or change, except for the sanctioned map
+  changes: fire burns an oil square to plain floor (conditions design 11);
+  from M2, Furnishing debris and removal, boss phase sockets, and fire
+  burning a web or bedsheet square to plain floor; from M3, Overturn
+  debris and sight change, Remnants (room terrain design 6.3, 6.3.7,
+  6.6–6.8, 6.11; conditions design 11), and pre-proven Stir states
+  (hazards design 6.3). **(agreed)** (cross-document comparison
+  2026-11-23, CC-16)
+- **M3 exception:** environment-made Remnant clouds (Miasma only) with a
+  fixed footprint and a short countdown, which never drift, spread or
+  grow (room terrain design 6.6). "Until riders and layers are proven"
+  is read as the M2 rider and layer reports passing, recorded by the
+  lead in writing before Remnant work starts (room terrain design 6.6).
+  **(agreed)** Applies at M3.
+- **M3 exception (hazards design 6.3, 7; agreed 2026-11-21, its Q3):**
+  pre-proven Stir states. At the round-end Dream step a Stir may change
+  squares only between states proven in advance by the hazards
+  validator (V10), using existing square kinds only, announced a round
+  ahead and held while occupied where needed: Tides (held whole, so
+  only their 2 proven states exist), Cord Flips, Turning Ring boards,
+  environment-moved Furnishings (the Returns Trolley) and environment
+  Overturn along a pre-proven strip. The flee and escape proofs hold in
+  every state; nothing spreads, drifts or grows. **(agreed)** Applies at
+  M3; the Inverted Cathedral's reversal round at M4 (the rules stay
+  flat, only the push direction reverses).
 - The ability and resource model (spell slots, action costs). Designed
-  next, separately.
+  separately in the ability design
+  (`2026-11-16-ability-resource-model-design.md`). (cross-document
+  comparison 2026-11-23, CC-16)
 
 ### Anti-goals
 
@@ -109,7 +143,10 @@ fixing the abilities that have no job in this game.
 - At creation the range is −1 to +3. The hard cap is +5 after all bonuses.
   **(agreed)**
 - The starting spread is +3, +2, +1, +1, 0, −1. The class suggests where
-  each value goes; the player may rearrange them. **(lead's call)**
+  each value goes; the player may rearrange them. **(lead's call)** A
+  rearrangement that Strains a starting-kit item or drops AC below the
+  creation pick's `kit.acFloor` gets a one-line creation warning that never
+  blocks (starting kits design 4.6; SK-9; M2; read, not changed).
 - The −1 is kept on purpose: one visible weakness is part of a character.
   **(agreed)**
 - The hero gains +1 to one ability at levels 4 and 8. **(agreed)**
@@ -163,6 +200,13 @@ All **(agreed)**.
   forcing doors, and so on.
 - Stealth uses the worst member.
 - Presence is always the hero's. The hero is the leader.
+- **Curiosity checks (events design 4.3.2; EV-5; M2; agreed
+  2026-11-22):** dungeon skills use the best eligible member, companions
+  included; party-movement Stealth ("slip past") uses the worst member;
+  Leadership and Intimidation use the hero. A single-actor manipulation
+  ("lift the key off its string") uses the acting unit's Stealth, a
+  reading under the Steal precedent in 7.1 (pending confirmation by this
+  document's owner).
 
 Companions are therefore how a hero covers a weak ability, and a recruit can
 carry a cost as well as a benefit.
@@ -207,14 +251,16 @@ Formulas give the shape. Exact values are left to the builders.
 | Will | Better of Wisdom and Presence |
 | Initiative | d20 + Intelligence, rolled once per fight |
 | Speed | 6 squares. Changed only by species traits, monster role or traits, armour and conditions; affixes are traits (enemies design 8.3). |
-| Passive perception | The best party member's full passive: 10 + Wisdom + proficiency if trained (double with mastery) + active effects (enemies design 12.2, 13.3) |
-| Passive stealth | 10 + Dexterity of the worst party member, less a heavy armour penalty (sized in armour design 7.3) |
-| Trap sense | 10 + Intelligence of the best party member |
+| Passive perception | The best party member's full passive: 10 + Wisdom + proficiency if trained (double with mastery) + active effects (enemies design 12.2, 13.3); against a lurker, the highest over the living, non-Downed units with line of sight (EP-3, XI-2; cross-document comparison 2026-11-23, CC-18) |
+| Passive stealth | The worst party member's full passive: the minimum, over members, of 10 + Dexterity + proficiency if trained in Stealth (double with mastery) + active effects, less Clatter (the heavy armour penalty, sized in armour design 7.3) (cross-document comparison 2026-11-23, CC-17) |
+| Trap sense | The highest, over the living, non-Downed units in the party roster (companions included, whichever unit has line of sight), of the formulas that apply to each trap: 10 + Intelligence for anyone; 10 + Intelligence + proficiency for a Mechanics-trained unit (double with mastery); for traps tagged `rune`, also 10 + Intelligence + Arcana proficiency; for `poison` traps, also passive Medicine (10 + Wisdom + proficiency). Detection grades never drop. Perception finds lurkers, not traps. Trap Eye (SH-19) is re-scoped by the Shade owner (recommended: double proficiency on trap sense). M2 (traps and locks design 6.4; TL-6) |
 | Guile (monsters) | 10 + Wisdom + proficiency + role adjustment, for every monster whether or not trained in Perception (enemies design 13.3) |
 | Recovery | Hit points restored per short rest; grows with level and Constitution = `recovery.base` + `recovery.perLevel` × level + Constitution, minimum 1 (values in the death and healing design 8) |
 | Carrying capacity | Pack slots: max(2, 3 + Strength) *(illustr. base 3, minimum 2)*, holding items of size 1 or 2. Belt, trinkets, weapon sets (active and one spare set, shield included) and armour sit outside the pack. Reads Strength excluding conditions. No weights. (items design 5) |
 
-All rows **(agreed)**, with the unarmoured row a **(lead's call)**.
+All rows **(agreed)**, with the unarmoured row a **(lead's call)**. The trap-sense
+row was changed by TL-6 (traps and locks design 6.4), agreed by the client
+on 2026-11-21.
 
 Rules behind the table:
 
@@ -237,7 +283,17 @@ Rules behind the table:
   maximum, over eligible members, of each member's full passive (10 +
   ability + proficiency or double proficiency + active effects). This also
   applies to party passive perception against lurkers (enemies design
-  12.2, 13.3).
+  12.2, 13.3). A party value taken from the worst member (passive
+  stealth) is likewise the minimum, over members, of each member's full
+  passive (cross-document comparison 2026-11-23, CC-17).
+- **Readings (TL-34; segment 8; M3; accepted by segment 8, events
+  design 4.9, EV-30, 2026-11-22):** readings, one-off room
+  checks, as no-roll thresholds on passives: Arcana reads runes and
+  shrines, Lore reads inscriptions, Mechanics reads mechanisms, each
+  yielding a floor fact. One Reading per room, the second F3 Q room's M3
+  use; content is segment 8's (traps and locks design 6.12). From M2,
+  Curiosity options use the same threshold principle, passive = 10 +
+  modifier (events design 4.3.2; EV-5).
 - **Speed is not tied to an ability.** **(agreed)**
 - **Concentration is a Constitution check**, not a Fortitude save, so
   Strength cannot stand in for it. **(agreed)**
@@ -259,16 +315,22 @@ Rules behind the table:
 
 | Skill | Ability | In the dungeon | In a fight |
 |---|---|---|---|
-| Athletics | Strength | Force doors, bars and chests (loud); jump crossable hazards | Shove, grapple, resist being moved |
-| Acrobatics | Dexterity | Cross narrow or unstable ground | Slip past enemies, escape grapples, avoid attacks when disengaging |
-| Stealth | Dexterity | Sneak past, set ambushes, steal from unaware enemies: only from a Dormant, Stationary or Patrolling carrier; adjacent; no other awake group member has line of sight; any party member's Stealth against the carrier's passive perception (−5 if Dormant, +5 if Keen), with disadvantage against an awake carrier; one try per carrier per floor; failure starts combat with nobody Surprised (enemies design 15.5) | Hide to break line of sight and strike unseen. A class feature may let Hide succeed without breaking line of sight (classes design 8.4, Vanish); the Stealth roll and Hidden's end rules (conditions 18.7) stay |
-| Mechanics | Intelligence | Find and disarm traps, pick locks (quiet), find secret doors | Re-arm or trigger traps against enemies |
-| Arcana | Intelligence | Identify magic items, read runes and shrines | Use scrolls and wands outside your class; recognise a spell being cast |
-| Lore | Intelligence | Know what a floor's theme is likely to hold | Reveal an enemy's traits, resistances, weaknesses and abilities |
-| Perception | Wisdom | Hear what is behind a door; spot hidden enemies | Avoid surprise; find hidden attackers; read an enemy's intent when the party's best passive Perception is at least its guile (enemies design 13.3) |
-| Medicine | Wisdom | Stretch short-rest supplies; cure poison and disease; at a short rest, Treat ends Diseased and Scarred (fixed difficulty, one attempt per Scarred unit per rest), except a talisman's `treatProof` Scarred, which is not offered and uses no attempt (consumables design 14.6) | Get a downed companion back up, at most once per companion per fight (death and healing design 11.2); Treat (an action, adjacent): one roll against each instance's difficulty ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (conditions design 8) |
+| Athletics | Strength | Force doors, bars and chests (loud; noise per try, each failure lowers the difficulty and the third try always opens, M1; traps and locks design 6.11; TL-21); jump crossable hazards | Shove, grapple, resist being moved; M2: Shunt, Kick and Smash Furnishings (heavy pieces against heft; Attack Shunt's Prone save is against 8 + the Shunter's Athletics bonus); M3: Overturn a tippable Tall Furnishing (heft 15, *illustr.*) and Haul (room terrain design 6.3) |
+| Acrobatics | Dexterity | Cross narrow or unstable ground: from M2, entering a Plank (narrow ground) in combat needs Acrobatics against the segment-5 ladder; a failure ends movement on the square before, with no retry that round, no fall and no damage; out of combat the leading unit checks once (room terrain design 6.2.6); pass a Squeeze: out of combat the leading unit makes one check for the party, and a failure still gets through, at a time and noise cost; in combat each unit checks as it enters; monsters never use one (floor layout design 9.2) | Slip past enemies, escape grapples, avoid attacks when disengaging |
+| Stealth | Dexterity | Sneak past, set ambushes, steal from unaware enemies: only from a Dormant, Stationary or Patrolling carrier; adjacent; no other awake group member has line of sight; any party member's Stealth against the carrier's passive perception (−5 if Dormant, +5 if Keen), with disadvantage against an awake carrier; one try per carrier per floor; failure starts combat with nobody Surprised (enemies design 15.5); M3: a Dormant Windfall Truant can also be stolen from: adjacent; no awake un-Cowed hostile in its room has line of sight; Stealth against its fixed passive 15 (20, −5 Dormant; *illustr.*; a fixed value, never Keen); success takes its card only, its coin spilling as a guarded pile; the party has one Steal try per room, on a carrier in the host group or the Truant, not both (loot sources design 4.7.8; LP-6; agreed 2026-11-22, its Q1) | Hide to break line of sight and strike unseen. A class feature may let Hide succeed without breaking line of sight (classes design 8.4, Vanish); the Stealth roll and Hidden's end rules (conditions 18.7) stay |
+| Mechanics | Intelligence | Find and disarm traps, pick locks (quiet; a Locked door is a Door with the padlock decal, on optional content only; floor layout design 9.2; one roll per lock per floor under the Margin rule, M1; traps and locks design 6.6, 6.11; TL-21), find secret doors: a member trained in Mechanics within 3 squares with line of sight to a Hairline secret's tell reveals the secret automatically, and Tap the wall opens a secret only at its tell (no roll; floor layout design 9.2); M3: the Lodestring never points at secret caches, so finding them stays this lane's (exploration and information design 4.6.1; XI-22; agreed 2026-11-23, its Q5; read, not changed) | Re-arm or trigger traps against enemies |
+| Arcana | Intelligence | Identify magic items, read runes and shrines (also trap sense against `rune` traps; traps and locks design 6.4) | Use scrolls and wands outside your class; recognise a spell being cast |
+| Lore | Intelligence | Know what a floor's theme is likely to hold: the roster's types and roles are revealed on entry (enemies design 10.6); M3: the next floor's roles are also shown at camp (run structure design 6.9; RT-10). It shows types only, never whether a boxed lurker is on the floor (traps and locks design 6.14; read, not changed) | Reveal an enemy's traits, resistances, weaknesses and abilities |
+| Perception | Wisdom | Hear what is behind a door: Listen at a closed door (no roll) reports the groups in the room beyond at that moment, passively for a party with a member trained in Perception, who also hears their size band (floor layout design 9.2); spot hidden enemies. M3, conditional: the Ear Trumpet is a lane-gap item stocked only for a party with no Perception-trained unit, its effect suspended while the lane is present (exploration and information design 4.5.2; XI-26; agreed 2026-11-23, its Q3; this list kept, not changed) | Avoid surprise; find hidden attackers; read an enemy's intent when the party's best passive Perception is at least its guile (enemies design 13.3) |
+| Medicine | Wisdom | Stretch short-rest supplies; cure poison and disease (passive Medicine also counts as trap sense against `poison` traps; traps and locks design 6.4); at a short rest, Treat ends Diseased and Scarred (fixed difficulty, one attempt per Scarred unit per rest), except a talisman's `treatProof` Scarred, which is not offered and uses no attempt (consumables design 14.6) | Get a downed companion back up, at most once per companion per fight (death and healing design 11.2); Treat (an action, adjacent): one roll against each instance's difficulty ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying at stages 1–2 (conditions design 8) |
 | Intimidation | Presence | Make weak groups back off without a fight; cow eligibility and the `broken` flag (enemies design 14.8) | Frighten enemies; break morale when a leader falls; Demand Surrender (enemies design 14.6) |
-| Leadership | Presence | Better recruits, shop prices and event outcomes | Rally: steady an ally or give them a free step |
+| Leadership | Presence | Better recruits (Recruiter's Eye, companions design 9.2), shop prices and event outcomes | Rally: steady an ally or give them a free step |
+
+Leadership's "event outcomes" (and Presence's in 5.2) are one hero-only
+threshold on one Curiosity option, with no dialogue tree and no roll, so
+the social-skills non-goal in 2 stands (events design 4.3.2; EV-6; M2;
+agreed 2026-11-22, a reading pending confirmation by this document's
+owner).
 
 Constitution has no skill; its three jobs are passive. Strength has one broad
 skill.
@@ -287,13 +349,34 @@ skill.
   Perception mastery's signature use is fixed as **Tactician**: readable
   enemies also show the ability, and reading extends to the next 3 enemies
   in initiative (enemies design 13.4). The other skills' signature uses
-  stay the builders'.
+  stay the builders'. For Mechanics, Old Hand is proposed to the
+  builders (traps and locks design 9.2; TL-36, M2).
 - **Sources:** a class grants two or three skills from its own list. Offers
-  and the starting boon add more. Companions come with fixed skills.
-  **(agreed)**
+  and the starting boon add more. Companions come with fixed skills,
+  plus one flex skill chosen on the join card from two options on its
+  class list, fixed from then on (companions design 8.1). **(agreed)**
+  M3: a kit variant is a starting boon that bundles one skill training,
+  never one of the class's default skills, never Leadership, never
+  Mechanics at M3, with an alternate and `skillFallback` resolved at
+  creation confirm (starting kits design 4.4; SK-7; agreed 2026-11-23, its
+  Q1; read, not changed). Pending: this document's owner signs off the
+  bundled skills (starting kits design 11, 14.2).
 - **No free retries.** Exploration has no clock, so a failed check always
   costs something: noise, a sprung trap, a jammed lock. Where no cost fits,
-  the check is a threshold with no roll. **(agreed)**
+  the check is a threshold with no roll. **(agreed)** For traps and locks
+  this is met by the Margin rule, one roll per object per hand verb per
+  floor, per-try force noise and Take time's ticks (traps and locks
+  design 6.1, 6.6; TL-1, TL-4, TL-5; read, not changed). For Curiosities
+  it is met by a printed price on every option but the free Leave, which
+  closes the card without resolving it, and one attempt only (events
+  design 4.3.1; EV-4; read, not changed). Exploration keeps no visible
+  floor timer (exploration and information design 4.4.1, IN1; XI-14; read,
+  not changed). Later, pending request: for a run under the Oath of the
+  Shut Book only, field identification by the passive Arcana threshold is
+  off and camp still identifies free; the request is to the MAIN and RS
+  owners of the CH-24 run-modifier slot, and until they rule the slot
+  stays unlit and this rule stands (heirlooms and curses design 4.5, 5.2
+  row 23; HL-21; agreed 2026-11-23, its Q6).
 - **Lore never hides the basics.** Hit points and anything already seen in
   play are visible to everyone. Lore reveals the rest early. **(agreed)**
 
@@ -306,18 +389,24 @@ its identity. Names are placeholders; theming comes later. **(agreed)**
 
 | Family | Type | Rider |
 |---|---|---|
-| Physical | Slashing | Bleed: damage over time |
+| Physical | Slashing | Bleeding: damage over time |
 | Physical | Piercing | Ignores part of the target's armour |
 | Physical | Bludgeoning | Stagger: no reactions until the end of the target's next turn; shatters brittle or frozen targets |
 | Elemental | Fire | Burning: damage over time that can spread to adjacent units |
-| Elemental | Cold | Slows movement |
-| Elemental | Lightning | Arcs to an adjacent unit |
-| Elemental | Acid | Corrodes: lowers armour class and strips layers |
+| Elemental | Cold | Chilled: slows movement |
+| Elemental | Lightning | Arcs to an adjacent unit. The arc deals the rider strength as lightning, one damage event per arced unit, no crit, no rider flag, never re-arcs; an at-will's Soaked arc spread happens at most once per turn across beams (Arcanist design 8.1; ARC-14, lead's call) |
+| Elemental | Acid | Corroded: lowers armour class and strips layers |
 | Spirit | Psychic | Breaks concentration and applies Unfocused for 1 turn; attempted on a concentrating target or one not already Unfocused |
 | Spirit | Radiant | Revealed on a hidden or invisible target; Blinded otherwise |
 | Spirit | Necrotic | Blocks healing |
 
 Poison is a condition, not a damage type. **(agreed)**
+
+- **Open, pending ruling (RT-15; conditions owner):** whether radiant's
+  rider counts 2 toward a theme's 6 harmful conditions, and whether
+  Revealed is "harmful" at all. No M2 theme deals radiant; the ruling
+  blocks only the M3 Mirror Court and Moth Wedding (run structure design
+  8.0, 8.12).
 
 ### 8.2 When a rider applies
 
@@ -337,6 +426,16 @@ Poison is a condition, not a damage type. **(agreed)**
   with Puncture; it shares a reduction cap of 4 with Pitted Armour (armour
   design 9.1). **(lead's call; sizing agreed 2026-11-17, armour design
   Q3)**
+- Alembic exception, "your mix needs a spark" (Arcanist design 9.2;
+  ALM-1): a condition instance with `origin: prime` and `source: you` is
+  treated as absent by every damage part of your own at-wills (weapon
+  attacks included), so it grants no automatic rider. A rider your own
+  at-will would apply is not attempted on a target holding your inert
+  reagent where a conditions 19 cancel, override or wash row would fire
+  against it; the once-per-turn rider attempt is not spent. Your slot
+  spells, Catalyse, Overchannel, allies and consumables read it normally.
+  **(agreed 2026-11-20, Arcanist Q3; the rider sentence told plainly and
+  confirmed by the client 2026-11-20)**
 
 ### 8.3 The ladder
 
@@ -358,6 +457,17 @@ Poison is a condition, not a damage type. **(agreed)**
   and fire portions each meet their own step. **(agreed)**
 - The party follows the same rules. Armour and items grant resistances.
   **(agreed)**
+- Your own inert prime (Alembic, 8.2) gives your own at-wills no weakness
+  step and no resistance, and your at-will damage does not end it
+  (Arcanist design 9.2; ALM-1). **(agreed 2026-11-20, Arcanist Q3)**
+- Arcs and allies (Arcanist design 8.1; ARC-8): at-will arcs never reach
+  allies, the Soaked "arcs to every adjacent unit" row included (ability
+  8.2 wins); a selective cast leaves allies out of all its effects, arcs,
+  forks and forced movement included, and selective may be taken on any
+  slot cast whose arcs or forks reach an ally; you are never affected by
+  your own casts' areas, arcs and forks. This narrows how the ladder reads
+  for allies and changes no number. **(lead's call; told plainly and
+  confirmed by the client 2026-11-20)**
 
 ### 8.4 Enemy traits
 
@@ -368,8 +478,8 @@ Poison is a condition, not a damage type. **(agreed)**
   never costs speed (armour design 7.3).
 - Budget per enemy: at most two resistances, and at least one weakness
   alongside any resistance. **(agreed)** Ladder shifts that come from
-  conditions (Soaked, Oiled, Exposed, Resisting, Shredded, Sapped,
-  Shielded, Raging, Petrified, Ill-Starred and Frozen's shell) are not
+  conditions (Soaked, Oiled, Exposed, Resistant (type), Shredded, Sapped,
+  Shielded, Frenzied, Petrified, Star-Crossed and Frozen's shell) are not
   traits or layers and do not count toward the two (conditions design
   12.2).
 - Condition-tag immunities: at most two per non-boss trait set, at most one
@@ -379,8 +489,20 @@ Poison is a condition, not a damage type. **(agreed)**
 - A "mindless" trait grants immunity to psychic and to the `mind`
   condition tag. Psychic is the one damage-type immunity allowed outside
   bosses, and the theme rule above still applies to it. **(lead's call)**
+  The floor-1 boss is never `mindless` and never psychic-immune
+  (class-blind; a `mind` immunity alone is allowed), checked by
+  `Floor1BossMindReachable` (enemies design 17.5, 20.1; Herald design
+  7.16, HR-21). **(agreed 2026-11-20, Herald Q3)**
 - Specialists can buy through: an offer such as "your fire ignores
-  resistance" exists for committed builds. **(agreed)**
+  resistance" exists for committed builds. **(agreed)** "Ignores
+  resistance" applies after the ladder and the cancel rule: a final
+  Resistant reads Normal, never Weak; it covers trait and layer
+  resistance (the layer stays unbroken); never condition-based shifts
+  (Soaked's fire resistance, Frozen's shell, the Resistant (type)
+  condition, Shielded); never
+  immunity; `IgnoreResistanceSources ≤ 1` per hero (Arcanist design 9.4;
+  EL-1, owed at M2). **(lead's call)** The Elementalist's Purity applies
+  it to its heart family when that aspect ships (Arcanist design 9.4).
 
 ### 8.5 Layers
 
@@ -453,6 +575,10 @@ Each item here is a commitment this model makes on another system's behalf.
   **(agreed)** Settled in enemies design 14.
 - **Dungeon content.** Locks, traps, secrets, noise and non-combat
   encounters must appear on most floors, or the skills are decoration.
+  Traps, locks, doors and containers are settled in
+  `2026-11-21-traps-locks-design.md` (its 6, 17). Non-combat encounters
+  are settled in `2026-11-22-events-design.md`: about one Curiosity per
+  floor on F1–3 and Interludes on F2–5 (its 4.2, 4.13; M2).
 - **Items and inventory.** Settled in
   `2026-11-16-items-inventory-design.md`: a spare weapon is one spare
   weapon set (main + off hand, shield included), and the pack holds
@@ -462,10 +588,15 @@ Each item here is a commitment this model makes on another system's behalf.
   stay Later. Armour and shields, including armour values and Strength
   thresholds, are settled in `2026-11-17-armour-design.md` (its 6.2, 7.1).
   Consumables, scrolls and wands are settled in the consumables design
-  (2026-11-17); coatings and Coated stay Later. What remains open moves to
-  the category designs (items design 17): starting kits, Clinging and
-  Pitted Armour.
-- **Conditions.** Settled in `2026-11-16-conditions-design.md`: bleed,
+  (2026-11-17); coatings and Coated stay Later. Starting kits are set in
+  the four class designs, the companions design and the starting kits
+  design (`2026-11-23-starting-kits-design.md`; SK-17; M2). What remains
+  open moves to the category designs (items design 17): Clinging, taken
+  up by the heirlooms and curses design (4.2; HL-29; moved from Later to
+  M4, agreed 2026-11-23, its Q5; CON's budget reading pending).
+  Pitted Armour is in armour 9.4 and stays Later (AR-37; cross-document
+  comparison 2026-11-23, CC-14).
+- **Conditions.** Settled in `2026-11-16-conditions-design.md`: bleeding,
   burning, slow, stagger, blind, frightened and the rest are defined there;
   this document only names them.
 
@@ -483,10 +614,13 @@ Each item here is a commitment this model makes on another system's behalf.
 
 ## 12. Left to the builders
 
-- All numbers: class hit points, skill difficulties, rider strengths and
+- All numbers: skill difficulties, rider strengths and
   durations, base carrying slots (pack base 3, minimum 2, *illustr.*; items
   design 5.1). Armour values and Strength thresholds are set in the armour
-  design (6.2, 7.1).
+  design (6.2, 7.1). Class hit points are not builders' numbers: the
+  flat 11 and the HP tiers 6 / 7 / 8 are the client's, and Recovery 4 / 2
+  (`recovery.base`, `recovery.perLevel`) the lead's (death and healing
+  design 7.1, 8) (cross-document comparison 2026-11-23, CC-15).
 - Which save each rider calls for.
 - The signature use for each skill's mastery, except Perception's
   (Tactician, section 7.2).

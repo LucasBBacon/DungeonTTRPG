@@ -9,6 +9,24 @@ Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-enemies-design.md` (enemies design) and
 `2026-11-16-items-inventory-design.md` (items design)
 
+**Names updated by the naming pass** (naming pass design,
+`2026-11-24-naming-pass-design.md`, approved 2026-11-24; NP rows listed:
+NP-12, with the name register (section 5) rows whose sites include this
+document). Player-facing names only: Overwatch → Ready Shot, Volley →
+Arrowfall, Steady Aim → Settled Aim, Shatter → Fracturing, Bull Rush →
+Bowl Over, Bloodletter → Gashing, Thunderclap Greatclub → Thudding
+Greatclub, Rooted → Tangled, Set (pike verb) → Receive, Spare (focus verb)
+→ Withhold, Opener → Forestroke, Sure Grip → Fast Grip, Held Guard →
+Closed Guard, Hunter's Longbow → Fowler's Longbow, Skirmisher's Spear →
+Forager's Spear, Duellist's Rapier → Courtier's Rapier, Corridor Warden →
+Corridor Crossbow, Wardwood Staff → Rowan Staff, Totem (focus) →
+Tipstaff, the enemy roles Artillery → Marksman and Minion → Swarmer
+(Minion stays the rank), the Honed affix → Razored, the Bodyguard affix →
+Challenger, Bleed → Bleeding (printed), Slot Recovery → Slot Renewal,
+item "dormant" → "untold", and the cites Hold the Line → Bar the Way and
+Spur → Urge. Internal ids, data keys, field names and change ids are
+unchanged; Appendix A keeps its history as written, with rename notes.
+
 Items marked **(agreed)** were decided by the client, on 2026-11-17 for
 the questions this document raised, either directly or by choosing the
 lead's recommendation. Items marked **(lead's call)** were filled in by
@@ -38,9 +56,10 @@ checked against (section 19).
 
 **Waves:** M1 is the vertical slice (one class, levels 1–3, one floor,
 three enemy types, solo hero, basic loot). M2 is the full run with
-companions. M3 adds profile, unlocks and boons. Later is everything after
-M3 that no milestone names, including M4. **(settled, main design 9; items
-design header)**
+companions. M3 adds profile, unlocks and boons. M4 is breadth (species,
+multiclassing, more content). Later is everything after M4. **(settled,
+main design 9; items design header)** (cross-document comparison
+2026-11-23, CC-38)
 
 ## 1. Intent
 
@@ -74,7 +93,7 @@ bookkeeping. **(agreed)**
   same verb text as the party. **(agreed)**
 - **Strength hits hard, Dexterity hits often, and both finish the fight in
   comparable time** (6.4). **(agreed, client question 3)**
-- **One line per weapon.** "Pike: piercing, reach 2, Set." **(lead's
+- **One line per weapon.** "Pike: piercing, reach 2, Receive." **(lead's
   call)**
 - **Every verb is previewed** before the player commits (7.2 rule 7).
   **(settled principle, ability model 8.3)**
@@ -155,7 +174,7 @@ Six framework decisions shape everything else. The client chose all six on
 
 | # | Decision | Chosen | Rejected, and why |
 |---|---|---|---|
-| 1 | Durability (Q1) | **(a) Decline.** The agreed non-goal "No durability, wear or weights" stands unchanged. Substitutes: charged weapon powers, consumable coatings, wear inflicted on enemies (Later), opt-in Shatter (Later) (section 5). | (b) amend the non-goal for a Keenness pool: two more pools per unit, duplicates the martial Technique, breaks the monster one-die rule and the floor-1 guards. Recorded as a declined backlog fallback only (5.7). |
+| 1 | Durability (Q1) | **(a) Decline.** The agreed non-goal "No durability, wear or weights" stands unchanged. Substitutes: charged weapon powers, consumable coatings, wear inflicted on enemies (Later), opt-in Fracturing (Later) (section 5). | (b) amend the non-goal for a Keenness pool: two more pools per unit, duplicates the martial Technique, breaks the monster one-die rule and the floor-1 guards. Recorded as a declined backlog fallback only (5.7). |
 | 2 | Notched (Q2) | **Yes, as a Later condition** on the unit, exactly as in 5.6 (change W-12) | No: loses the one honest answer to "should weapons wear down in combat" for the cost of one Later condition |
 | 3 | Where weapon identity lives | **I1: the weapon owns its verb; any trained wielder uses it automatically; classes own frequency and upgrades** | I2, class-unlocked masteries (SRD 5.2 as written): looted weapons dead for most of the party, companion kits need picks, "mastery" already means skill mastery (stat model 7.2). I3, weapon buttons on pools: breaks "at most three named pools" and "four things to read". |
 | 4 | Families, groups, training | **G1: about 30 SRD-sized families; simple, martial and exotic training; groups are tags only** | G2, about 12 broad families: a family cap of 2 starves builds and weapons in a group play alike. G3, training by group: more class data, more soft penalties to read. |
@@ -203,13 +222,13 @@ Mechanism references only; no names or text are taken from any of them.
 |---|---|---|---|
 | **5E SRD 5.2** (weapon masteries) | Each weapon has one mastery: Cleave, Graze, Nick, Push, Sap, Slow, Topple, Vex. A class unlocks masteries in a few weapons. | **One short verb per weapon**, and six SRD names and effects (adapted, CC-BY-4.0, attributed) | Class-gated unlocks. Sap and Slow (7.2 rule 6). |
 | **Brogue** | Weapon *shapes*: the spear hits the unit behind, the axe hits all adjacent, the rapier lunges | Geometry verbs that read on the board: Skewer, Cleave, Lunge | Its names and text. Its permanent acid corrosion of gear is one reason we decline durability. |
-| **Battle Brothers** | Weapon types grant skill buttons; polearms strike from the second rank; spearwall, shieldwall, split shield; gear wears out and needs tools | Second-rank reach over allies, a spearwall-like reaction (Set), an anti-shield verb (Pry) | One button per weapon; tool and durability bookkeeping |
+| **Battle Brothers** | Weapon types grant skill buttons; polearms strike from the second rank; spearwall, shieldwall, split shield; gear wears out and needs tools | Second-rank reach over allies, a spearwall-like reaction (Receive), an anti-shield verb (Pry) | One button per weapon; tool and durability bookkeeping |
 | **Into the Breach** | Push and pull are the main tactical verbs; every result is previewed | Positional verbs with a previewed landing square | Collision damage on every hit (7.2 rule 4) |
 | **Baldur's Gate 3** | Weapon actions as buttons recharging on a short rest | A weapon carries a limited power: charge properties on notables (18) | Buttons by default (close to the player cooldowns the ability model rejected) |
 | **Diablo, Path of Exile** | A base item with a built-in property, plus rolled affixes | **Verb signature tables**: properties that deepen the family's own verb (18.4) | Flat +N affix piles (the buff test bans them) |
 | **Fire Emblem, Breath of the Wild, Divinity OS1 and OS2** | Weapon durability | Lessons only: durability caused hoarding and was softened or removed over these series (as recalled: Fire Emblem from Fates on; OS2 removed it) | Durability (section 5) |
 | **Monster Hunter** | A sharpness gauge that wears within a hunt and is restored cheaply; nothing is lost | The best case for wear, weighed in 5.2 | A per-unit meter (5.3) |
-| **XCOM** | A few readable numbers; overwatch | Overwatch as a launcher property (18.3); previews for everything | — |
+| **XCOM** | A few readable numbers; overwatch | Ready Shot as a launcher property (18.3); previews for everything | — |
 
 ## 5. Durability: verdict and substitutes
 
@@ -299,7 +318,7 @@ games dropped.
 | **Charged weapon powers** (`rest` or `camp` charges) | **Accepted** (5.5) |
 | **Consumable coatings** (special arrows, edge oils) | **Accepted, Later, as consumables** (5.5) |
 | **Wear the party inflicts on enemies** (Sundering, Crushing) | **Accepted, Later** (5.5) |
-| **Opt-in Shatter** | **Accepted, Later** (5.5) |
+| **Opt-in Fracturing** | **Accepted, Later** (5.5) |
 
 ### 5.5 The substitutes
 
@@ -311,7 +330,7 @@ gear. **(agreed)**
 | **Charged weapon powers** | Use-or-save tension with no permanent loss | Notable properties with a `rest` or `camp` pool (buff-test tag `charge`), through `grants.abilities {ability, cost, pool}` (items design 12.3). Listed in 18.2–18.4. | M1 |
 | **Consumable coatings** | Spending special ammunition and oils | Special arrows and bolts, and edge oils, are `coating` consumables (items design 5.1 `stackMax`) that apply Coated: "its next 3 weapon hits that attempt the coating's rider; a charge is spent only on such a hit (ability model 9.3 gates apply)" (conditions 18.9; consumables design 7.5) **(change CN-18)**. Tagged `launcher` or `blade` (W-11). Never both beltable and wieldable (items design 19.1 rule 6). | Later |
 | **Wear on enemies** | "Break their gear" without item churn | **Sundering** (18.3): an armed monster uses its improvised attack for the fight. **Crushing** (18.3): Pitted Armour 1. | Later |
-| **Opt-in Shatter** | A big, chosen sacrifice | **Shatter** (18.3): once, destroy this weapon as part of a hit, which becomes a critical and pushes 2. Rare and above only, never on heirlooms or signature items. The player chooses, so it is never a tax (W-6, items design 12.8). | Later |
+| **Opt-in Fracturing** | A big, chosen sacrifice | **Fracturing** (18.3): once, destroy this weapon as part of a hit, which becomes a critical and pushes 2. Rare and above only, never on heirlooms or signature items. The player chooses, so it is never a tax (W-6, items design 12.8). | Later |
 | **Notched** | Grit from rust and acid monsters | 5.6 | Later |
 
 ### 5.6 Notched (Later)
@@ -322,15 +341,19 @@ gear. **(agreed)**
 - **Effect:** the weapons in the weapon set that was active when Notched
   landed roll their dice one size smaller (minimum d4) and lose their verb.
   On a focus it suppresses only the focus verb. Shields and natural weapons
-  are unaffected.
+  are unaffected, except the **Reliquary Shield**, which is a focus:
+  Notched lands through it and suppresses Withhold only, never the AC
+  (armour design 10.2; change AR-15) (cross-document comparison
+  2026-11-23, CC-48).
 - **The instance records the weapon set,** the way Teetering records its
   hazard. **(lead's call)** It records the instanceIds of the items in that
   set when it lands, not the set's slot, so rearranging the sets out of
   combat does not shed it. Handing a recorded weapon to an ally also
   escapes it; this is accepted as the same escape as the set swap.
 - **Landing (lead's call):** Notched applies only if the active set holds
-  at least one weapon or focus it would affect (not a shield, a natural
-  weapon or a Sure Grip weapon). Otherwise it does not apply, takes no
+  at least one weapon or focus it would affect (not a shield other than a
+  Reliquary Shield, a natural weapon or a Fast Grip weapon; AR-15;
+  cross-document comparison 2026-11-23, CC-48). Otherwise it does not apply, takes no
   lingering slot, and the rider or effect counts as not attempted.
 - **Re-application (settled, conditions 6.3):** a unit that already has
   Notched cannot gain it again: the equal value and the same `untilCamp`
@@ -351,7 +374,7 @@ gear. **(agreed)**
   (enemies 9.2). **Party-facing only** in this wave: no party source
   Notches monsters, whose issue weapons have no sets. **(lead's call)**
 - **Counterplay:** swapping to the spare set (a bonus action) escapes it.
-  The **Sure Grip** property (18.2) makes a weapon immune.
+  The **Fast Grip** property (18.2) makes a weapon immune.
 - **Storage:** a condition on the unit; never item state. The agreed
   non-goal stands.
 - **Budget:** a Later condition, outside the 32-condition M1 and M2 budget
@@ -521,7 +544,13 @@ class's Strength-main spread:
 | Best Dexterity melee build of each Dexterity-main class | ≥ 90% |
 | Best launcher build of each Dexterity-main class | ≥ 75% |
 | Every launcher family, trained wielder, its best class build (M2 parity set) | ≥ 60% |
-| Any build | ≤ 110% |
+| Any build, measured as VG-12: rest-pool damage floor-averaged at the worst legal build (every legal capacity step), Slot Renewal counted as rest power **(change ARC-3; Arcanist design 11.1)**; camp-pool damage bounded by the nova bound and `CampOptionBound` (`actionsGranted` ≤ the base option's; was `SurgeOptionBound`; scoped to non-slot, non-slotless camp pools), or for slot pools `SpellTierBound` and for slotless casts `SlotlessCastBound`, instead **(change VG-12; Vanguard design 10.1; renamed by change SH-5, Shade design 17; change ARC-2, Arcanist design 11.1, 11.2)**; the value a camp-sourced condition adds to your own at-wills is charged to the source spell's row in the parity accounting, not the at-will's (`SetupAttribution`; the static `SpellTierBound` is unchanged by it) **(change ARC-16; Arcanist design 11.1)** | ≤ 110% |
+
+**Pending (Shade design 15, 18; finding N-5; M2):** the Shade design
+predicts that some launcher families miss the ≥ 60% per-family floor
+above, and hands the launcher family floors to the weapons owner. This
+is answered after the M2 parity run; nothing here changes until then
+(26) (cross-document comparison 2026-11-23, CC-47).
 
 **Binding requirement on the class designs (agreed):** every class whose
 main ability is Dexterity has at least one **precision feature**: a class
@@ -592,8 +621,11 @@ CL-8)**.
   one-handed `dice`, never the versatile die (9.3).
 - **Exploit dice** are that actual die (6.3); a monster's are its
   one-die-rule die (15.1).
-- **Crit doubling** doubles the weapon dice and the Exploit dice; flat
-  terms (ability, Precision, row flat) are not doubled.
+- **Crit doubling** doubles the weapon dice, the Exploit dice and a
+  class's dice part placed before it (Opening's `damage.extraDice.opening`);
+  flat terms (ability, Precision, row flat, Opening's rank-I
+  `damage.flat.opening`) are not doubled. Opening's effectKinds are named
+  apart from Precision (6.5) **(change SH-3; Shade design 6.4)**.
 - **Executioner's Stroke** re-rolls the **weapon dice part only** (crit
   dice included; Exploit and Precision excluded) and keeps the higher
   total. Aim changes no dice: it only makes an attack qualify for Exploit
@@ -622,7 +654,7 @@ records reference a verb and cannot override its text.
 | Tempo | **Flourish** | original | On your own turn, once per turn, after a melee hit, you may step 1 square without spending speed. The unit you hit makes no opportunity attack for that step; other units do. | M2 |
 | Tempo | **Aim** **(agreed)** | original | On your own turn, your first attack made **before you move** counts as having advantage for Exploit (it does not gain advantage) (6.3, 7.6). | M1 |
 | Guard | **Parry** | original | Reaction, policy `ifItChangesOutcome` with target filter `nonMinion`: +2 AC against one melee attack roll. | M1 |
-| Guard | **Set** | original | Reaction: when a hostile enters your threatened zone from outside it by its own movement, make one attack with this weapon. Default policy `always` with target filter `nonMinion`. | M1 |
+| Guard | **Receive** | original | Reaction: when a hostile enters your threatened zone from outside it by its own movement, make one attack with this weapon. Default policy `always` with target filter `nonMinion`. | M1 |
 | Penetrate | **Graze** | SRD 5.2, adapted | Once per turn, when a Strength attack with this weapon misses, the target takes your Strength modifier (if positive) as the weapon's damage type. No rider, no verb. Never on a miss caused by a reaction (Parry, Interpose or any reaction AC bonus; exact test in 7.6) **(change AR-42)**. A natural 1 allows it. Minions take none. | M1 |
 | Penetrate | **Pry** | original | This attack ignores the target's shield bonus and Interpose. | M1 |
 | Penetrate | **Puncture** | original | This attack doubles piercing's armour reduction. | M2 (with riders) |
@@ -638,7 +670,7 @@ records reference a verb and cannot override its text.
 2. **Topple** fires at most **once per round per target**, and is never
    attempted against a Prone target (W-10).
 3. **Condition verbs never fire on reactions:** not on opportunity attacks,
-   not on Set attacks (W-10). **Self-movement and own-turn verbs never
+   not on Receive attacks (W-10). **Self-movement and own-turn verbs never
    apply on reactions either:** Flourish, Driving, Lunge and Aim apply only
    on the wielder's own turn. Push and Hook may apply on reactions,
    subject to rule 4. Cleave, Skewer, Graze, Pry, Puncture and Exploit
@@ -649,18 +681,47 @@ records reference a verb and cannot override its text.
    conditions 10.1, at step 10 of the pipeline (7.5). Opposite directions
    cancel square for square; a shift (7.6) and a push or pull on the same
    hit cannot combine, and the shift is dropped.
+   - **The 3-square sum** counts squares **actually moved, across all
+     moved units** (a Domino link at step 10b uses only the remainder).
+     Parts are listed in data order, non-verb parts first, then verb
+     parts; a verb part whose target was already verb-moved this round is
+     dropped first and is not a stop; the total is cut to 3 by trimming
+     from the last part, and a part **contributes** if it keeps at least
+     1 square after the cut. Only contributing parts count for collision
+     eligibility and the verb-moved-this-round mark **(change VG-8;
+     Vanguard design 6.4 rule 6)**.
+   - **Stopped early:** at least 1 square of a move's chosen distance was
+     blocked by a wall, obstacle or unit, a 0-square blocked move
+     included; an ignored verb part is not a stop, and stopping before a
+     hazard is not stopping early **(change VG-8; Vanguard design 3.4)**.
    - **Verb-sourced** movement is: the verbs in 7.1, the verb signatures
      in 18.4 (Heavy Push, Long Hook, Crack, Keep Back, Binding Parry,
      Driving Graze), the shield bash's Push (17.9) and armour verb
-     signatures that move a target (Bull Rush) **(change AR-49; armour
-     design 14.4)**. Everything else
-     (a Technique push, Thunderous, Shatter) is **not verb-sourced**.
+     signatures that move a target (Bowl Over) **(change AR-49; armour
+     design 14.4)**, and every **Empower** effect (the "empower the
+     weapon's verb" Technique, 7.3) **(change VG-8; Vanguard design
+     6.6)**. Everything else
+     (a Technique push, Thunderous, Fracturing) is **not verb-sourced**.
    - **Once per round** applies to verb-sourced movement only: a target
      already moved by a verb-sourced move this round ignores any further
      verb-sourced part; the per-target round state records only those.
    - **Collision damage** applies to the combined move only if a
      non-verb-sourced part contributed to it; a move made only of
-     verb-sourced parts never deals it.
+     verb-sourced parts never deals it. The one exception is the
+     Wrecker's Battering Force: once per round, a verb-only move stopped
+     early deals collision damage as if a non-verb part had contributed,
+     and its parts stay verb-sourced for every other rule **(change VG-8;
+     Vanguard design 8.3)**. A second named exception class (M2): a
+     purely verb-sourced push that fails its hazard-edge save against a
+     contact hazard deals the collision band, typed by the hazard (a push
+     with a non-verb part deals the contact band instead); a successful
+     save is an ordinary obstacle stop **(change TR-10; agreed by the
+     client 2026-11-21, Q3; room terrain design 6.5.2)**.
+     **Pending request (change HZ-17; M3; hazards design 6.3.3):** a
+     third named exception class, **Lurch** (environment forced movement
+     used only by Stirs; soft stops only, never collision damage), is
+     requested of the conditions owner for conditions 10.1; it changes
+     nothing here until that owner rules.
 5. **A verb is off** when the wielder is untrained (10.2) or Strained
    (10.1), and on improvised and unarmed attacks (13).
 6. **Existing conditions only.** A verb applies only positional effects,
@@ -673,7 +734,7 @@ records reference a verb and cannot override its text.
 7. **Preview hint.** Every conditional verb declares a `previewHint`:
    Lunge, an icon on qualifying squares; Aim, a "planted" badge, with the
    Exploit dice in the damage preview, that clears when you move or make an
-   attack; Skewer and Cleave, the second target highlighted; Set and
+   attack; Skewer and Cleave, the second target highlighted; Receive and
    reach, rings on the threat overlay; Push and Hook, the landing square;
    Parry, the attack previewed at AC + 2.
 8. **Class abilities and spells.** A class ability that makes a weapon
@@ -704,13 +765,17 @@ records reference a verb and cannot override its text.
   simple and martial families only, and builders do not gate on the exotic
   branch;
 - subclasses that key off verb ids or group tags;
+- **verb borrowing:** a subclass may apply the canonical verb of a
+  trained, non-Strained weapon in the wielder's own spare set (11.1).
+  Signatures, dice, type, reach and properties never travel **(change
+  VG-19; Vanguard design 8.1, 9.1)**;
 - the binding precision feature of each Dexterity-main class (6.4).
 
 ### 7.4 Names
 
 **(lead's call)**
 
-- "Brace" is already an Anchored source, so the pike verb is **Set**.
+- "Brace" is already an Anchored source, so the pike verb is **Receive** (it was Set until the naming pass, NP-12: "Set" collided with the weapon set; Plant and Brace are taken).
 - The UI and data say "verb" (`verb.push`), never "mastery", which means
   skill mastery (stat model 7.2).
 - `verb.cleave` is a different id from the illustrative ability "Cleave" in
@@ -723,7 +788,7 @@ records reference a verb and cannot override its text.
 these steps, in this order:
 
 1. **Declare** the attack and its mode: melee, reach, throw, launcher,
-   off-hand, opportunity attack or Set. **Grip (change AR-48; armour
+   off-hand, opportunity attack or Receive. **Grip (change AR-48; armour
    design 10.2):** declaration gains a `grip` input (`oneHand` or
    `twoHand`), legal only for a versatile weapon in a set whose off hand
    is empty or holds a buckler; it defaults to `oneHand` with a buckler,
@@ -731,7 +796,10 @@ these steps, in this order:
    `bucklerOffUntilOwnTurnStart` at declaration, hit or miss, reactions
    and opportunity attacks included.
 2. **Fix the roll mode:** collect advantage and disadvantage from every
-   source, net them (one cancels one), and consume Helped if it applies.
+   source, net them (one cancels one), and consume Helped if it applies
+   (a reading recorded in the charm abilities design 13, not a change
+   here, the weapons owner confirms: a roll that already has advantage
+   does not use it, so Helped carries over).
    Exploit (6.3) and Vex read this net mode; Aim (7.6) is recorded here
    as a separate flag that qualifies the attack for Exploit and does not
    change the mode. **Gear roll-mode cap (change AR-40; armour design 8.1
@@ -741,36 +809,96 @@ these steps, in this order:
    are not spent; Overlap qualifies only on net advantage; gear roll-mode
    effects are suppressed while the target has Raise or Fortified.
    Hailguard is fixed here, never after the roll.
+   - **2b. Cover (M2):** right after the net mode is fixed, cover is
+     computed (9.5): −2 to the roll if the target is Covered, ignored if
+     the net mode is disadvantage, suppressed against an active charged
+     AC bonus. It is recorded with the mode in `AttackDeclared`; the
+     matching step sits in ability model 14.3 for spell attacks
+     **(change TR-2; room terrain design 6.1 CV4)**.
 3. **Choose the ability** (6.2) and record it, with the mode, in
    `AttackDeclared`.
 4. **Roll** the attack.
 5. **Reaction window:** the target side's reactions (Parry, Interpose)
    resolve here (ability model 14.3). **One reaction AC bonus per attack
    (change AR-41; armour design 10.4):** by the window algorithm, in the
-   order pool-free target, then pool-free allies in unit order, then
-   charges with the target's own first; no reaction AC bonus is offered
-   after a gear-sourced disadvantage.
-6. **Hit or miss, and crit.** On a miss: Graze (7.6), then stop. A
-   natural 20 hits and crits.
+   order step 0 window fills (reaction AC bonuses from camp-pool
+   abilities, no reaction spent, ordered by source unit order then
+   creation order; the first fill closes the window and counts as "the
+   one reaction") **(change VG-4; Vanguard design 7.7)**, then a step-0b
+   carried ward (Closed Guard), then pool-free
+   target, then pool-free allies in unit order, then
+   charges with the target's own first (3a its class-pool-paid wards,
+   such as Sworn Guard or Flare, then 3b its Parrying property) **(change
+   SH-9; ARC-5; armour design 10.4)**; no reaction AC bonus is offered
+   after a gear-sourced disadvantage. **Against a Covered attack (M2)**
+   the protection is max(cover 2, the reaction AC bonus), never the sum:
+   offers are evaluated against the roll with cover applied, and a
+   reaction or step-0 fill whose bonus is ≤ 2 is not offered (not spent,
+   window not closed) **(change TR-2; room terrain design 6.1 CV4)**.
+6. **Hit or miss, and crit.** On a miss: Graze (7.6), then the target's
+   `answeredBy[]` is written, then step 6a, then step 6b, then stop. A
+   natural 20 hits and crits **(change SH-8; Shade design 8.3)**.
+   - **6a. Verb on a miss** (Sure Form, Weaponmaster): on a qualifying
+     miss, only the verb's own effect runs, at its normal step (forced
+     movement at step 10, a Cleave follow-up at step 12, Lunge's carried
+     advantage at step 13), with no damage step, no save slot and no
+     Empower line. The miss is not a hit for any rule **(change VG-8;
+     Vanguard design 8.1)**.
+   - **6b. `missedBy` hook:** reactions keyed to the miss (Counterstroke)
+     are offered here, with legality re-checked (reaction left, not
+     Staggered, attacker in reach, HP above 0), so a Graze that drops or
+     Staggers the unit removes the offer. `onParrySuccess` means a Parry,
+     or a `countsAsParry` ward, was applied and the roll missed. With
+     `sameReactionFollowUp`, the follow-up runs in the same reaction when
+     the ward spent the reaction or carries one forward, and spends the
+     reaction when the ward was a step-0 fill that spent none **(change
+     SH-8; Shade design 8.3)**.
 7. **On-hit spends:** Techniques and `onHit` charge properties
-   (Executioner's Stroke, Thunderous, Quake, Crushing, Pinning, Shatter)
+   (Executioner's Stroke, Thunderous, Quake, Crushing, Pinning, Fracturing)
    are chosen now, before damage.
 8. **Damage** (6.6): the weapon dice with Executioner's Stroke, then
-   Exploit dice (from net advantage or Aim), then crit doubling, then the ability term, Precision
-   and flat terms; minimum 1. Then any concentration check.
+   Exploit dice (from net advantage or Aim), then Opening's dice, then crit doubling, then the ability term, Precision
+   and flat terms (Opening's rank-I flat +2 among them); minimum 1 **(change
+   SH-3; Shade design 6.4)**. Then step 8a, then any concentration check, which uses the
+   DH 20.3 step-3a value **(change SH-6; Shade design 7.4)**.
+   - **8a. Duck marker:** when the attack hits, the damage event is only
+     flagged as Duck-eligible and the attacker recorded; nothing is
+     offered here (the offer and the halving are DH 20.3, steps 3 and 3a)
+     **(change SH-6; Shade design 7.4)**.
 9. **Rider attempt, or Topple** in the shared save slot (7.2 rule 1).
+   A save that depends on the movement (Ram's collision Prone, Topple
+   under Upend) **reserves** the slot here and is rolled at step 11, as
+   Thunderous's Dazed save is; a reserved slot blocks riders and Topple
+   on that target even when no save is rolled. Every Prone source whose
+   record has `sharesToppleCount: true` shares Topple's once-per-round
+   count (7.2 rule 2), and a Ram suppresses the weapon's Topple verb on
+   its hit. Under Upend, Topple II's push is dropped **(change VG-8;
+   Vanguard design 6.4 rule 6, 8.3)**.
 10. **Forced movement:** every forced movement this hit causes is summed
-    (7.2 rule 4) and resolved once.
+    (7.2 rule 4, across all moved units) and resolved once. **M2:** the
+    hazard-edge save against a contact hazard or harm square is rolled
+    here, square by square as the move resolves, before step 11's
+    reserved saves; it never uses the step-9 slot **(change TR-10; room
+    terrain design 6.5.2)**.
+    - **10b. Domino link** (Wrecker): when the combined move is stopped
+      early by a hostile, that hostile is pushed 1 square the same way,
+      inside the remainder of the 3-square sum; the link collides only
+      through Battering Force, then Brink applies **(change VG-8;
+      Vanguard design 8.3)**.
 11. **Other on-hit effects** in data order (Thunderous's Dazed save after
-    its push, Quake, Pitted Armour, Rooted).
+    its push, the reserved saves of step 9, Quake, Pitted Armour,
+    Tangled).
 12. **Secondary targets:** Skewer first, then Cleave, with geometry read
     **after** step 10. A secondary attack re-enters the pipeline at step 2
     with its own restrictions (7.6); Skewer reuses the step 4 roll.
 13. **Self-buffs:** Vex's Helped.
 14. **Self-movement:** Flourish, then Driving.
-15. **Events:** `VerbFired` and `ExploitApplied` (20.3).
+15. **Events:** `VerbFired` and `ExploitApplied` (20.3). Read, not
+    changed, by the charm abilities design 4.6 item 4: charm catches
+    resolve only after this step (M3).
 
-So Topple lands before a push (Prone, then pushed), Skewer and Cleave read
+So Topple lands before a push (Prone, then pushed; under Upend its save
+follows the push, step 9), Skewer and Cleave read
 the board after the push, and Vex's Helped is in place before the next
 attack of the same Attack action, a Nick attack included.
 
@@ -785,7 +913,9 @@ attack of the same Attack action, a Nick attack included.
   square. This gives the obvious square for the 8 directions and one
   defined square for any ranged offset, such as (5, 2) or a knight's move.
   - An empty square, a wall, or a square the attacker cannot see
-    (symmetric visibility) ends the effect; it never carries on.
+    (symmetric visibility) ends the effect; it never carries on. A Tall
+    piece is a wall for the line; Low pieces, Furnishings and hazard
+    pieces never stop it **(change TR-5; room terrain design 6.2.1)**.
   - An ally on that square stops it. **Long Skewer** b1 skips exactly one
     ally square and checks the square after it; b3 then checks one more
     square beyond the second unit, under the same rules.
@@ -806,7 +936,7 @@ attack of the same Attack action, a Nick attack included.
   signature or Technique that raises Hook's distance raises the shift
   equally; all of it counts toward the 3-square cap. It stops at units and
   walls, never passes through the source's square, and is blocked by
-  Rooted, Restrained and Anchored. The end square is chosen by the player
+  Tangled, Restrained and Anchored. The end square is chosen by the player
   or the AI among the reachable ring squares, the AI using the fixed
   square order.
 - **Movement facts** (20.3). "Moved" counts squares the unit entered by
@@ -815,7 +945,7 @@ attack of the same Attack action, a Nick attack included.
   Prone, and steps taken on another unit's turn (Kiter's Step) are
   excluded.
   - **Aim** applies to the first attack the unit declares on its own
-    turn, if that count is 0 at declaration (Steady Aim: at most 1). Any
+    turn, if that count is 0 at declaration (Settled Aim: at most 1). Any
     earlier attack that turn, hit or miss, a class ability with
     `weaponAttack: true` included, spends it; a miss gives no Exploit and
     passes nothing on. **(agreed rule, client question 4; timing lead's
@@ -851,18 +981,18 @@ attack of the same Attack action, a Nick attack included.
   moment; otherwise the reaction is not taken and not spent.
   - An **opportunity attack** triggers when a hostile **leaves** the zone
     by its own movement.
-  - **Set** triggers when a hostile **enters** the zone from outside it by
+  - **Receive** triggers when a hostile **enters** the zone from outside it by
     its own movement.
-  - So stepping away from next to a pike does not trigger Set; it provokes
+  - So stepping away from next to a pike does not trigger Receive; it provokes
     only when the hostile finally leaves the zone. Disengage prevents both.
-  - Set and the opportunity attack share the round's one reaction.
+  - Receive and the opportunity attack share the round's one reaction.
   - Which weapon: the main-hand weapon (11.3) if it can reach the mover;
     otherwise the off-hand weapon, the haft strike or the improvised
     attack, in that order.
 - **Movement and reactions:**
   - Movement is a sequence of single-square steps. A **leave** trigger
     resolves before the step that leaves, with the mover still on its last
-    square inside the zone. An **enter** trigger (Set) resolves after the
+    square inside the zone. An **enter** trigger (Receive) resolves after the
     mover enters its first zone square, before its next step. Kiter's Step
     ("moves adjacent") resolves after the step that makes the mover
     adjacent.
@@ -872,7 +1002,7 @@ attack of the same Attack action, a Nick attack included.
     automatically.
   - A **movement segment** is one contiguous run of steps; it ends when
     the unit takes any non-movement action, is displaced, or ends its turn.
-    Overwatch's "ends its own move" means the end of a segment that is not
+    Ready Shot's "ends its own move" means the end of a segment that is not
     cut short by displacement.
   - Self-movement verbs never apply on another unit's turn (7.2 rule 3);
     the only self-step on another unit's turn is the Kiter's Step reaction,
@@ -882,7 +1012,19 @@ attack of the same Attack action, a Nick attack included.
     turn to 0; its speed is unchanged and it keeps its action and bonus
     action. Movement granted afterwards by Dash (whatever its action cost)
     or by Spurred is added as normal; forced movement is unaffected
-    (classes design 8.3, Hold the Line) **(change CL-6)**.
+    (classes design 8.3, Bar the Way) **(change CL-6)**.
+  - **Slip past:** where a feature makes a slip-past provoke (the
+    `slipPast` trigger), it resolves after a successful slip-past check
+    (ability model 7.2), before the step that moves the hostile through
+    or past the unit's square, and spends the reaction as an opportunity
+    attack **(change VG-20; Vanguard design 7.4)**.
+  - **Reaction attack on another's attack** (trigger kind
+    `attackAgainstOther`): a reaction attack, **not** an opportunity
+    attack, hooked after step 15 of the weapon pipeline (7.5), or after
+    ability model 14.3 step 6 for each attack roll of a non-weapon
+    attack. A legal attack on the attacker must exist at that moment;
+    otherwise it is not taken and not spent **(change VG-20; Vanguard
+    design 8.2)**.
 - **Prone and reach:** a reach attack at distance 2 or more against a
   Prone target has disadvantage (conditions 18.4). Reach weapons therefore
   carry no Topple.
@@ -921,6 +1063,12 @@ One range ring per weapon, in squares; no long-range band *(illustr.)*:
   Extra Attack may be a throw.
 - The verb applies to throws, except that Cleave is melee only.
 - There is no improvised throw of a non-thrown weapon.
+  **Pending request (change TL-42; M2; traps and locks design 6.7):** a
+  narrow exception for **Trigger Shot** alone: any unit may throw a held
+  weapon or item as an improvised throw, range 4, no damage, the item
+  landing on the target square. It changes nothing here until the
+  weapons owner rules; if refused, Trigger Shot needs a thrown weapon or
+  a launcher (traps and locks design 19.2).
 - **On non-light weapons, thrown costs a die step:** a thrown-capable
   family's dice sit one step below its non-thrown peer in both grips. The
   spear and the trident (1d6 / v1d8) are one step below the longsword
@@ -940,10 +1088,23 @@ Special arrows and bolts are `coating` consumables tagged `launcher`
 
 ### 9.5 Cover
 
-- No cover rule in M1. Obstacles block line of sight only, and units never
-  give cover.
-- Revisit in M2 with the dungeon generation design, using the simulator's
-  party damage share by range band (21.3).
+- No cover rule in M1. Tall pieces block sight and movement; Low pieces
+  block movement only; nothing gives cover; units never give cover
+  **(change TR-3; room terrain design 6.1 CV1)**.
+- **M2:** directional one-tier cover, as room terrain design 6.1 (CV2 to
+  CV4). A ranged attack roll (ranged or thrown weapon attack, or ranged
+  spell attack) at Chebyshev distance ≥ 2 is Covered when a cover-giver
+  8-adjacent to the target faces the attacker within 45 degrees (the
+  dot-product test), is not 8-adjacent to the attacker, and the target is
+  not on a Portal square. Effect: −2 to the attack roll *(illustr.;
+  lever `cover.effect` = off | minus2 | disadvantage)*, computed at step
+  2b (7.5); never stacks; ignored when the net mode already has
+  disadvantage; suppressed against a target whose charged AC bonus is
+  active (Raise, Fortified); against a reaction AC bonus the larger
+  applies, never both (step 5). Walls, partitions, units and Grilles
+  never give cover; melee, reach, opportunity attacks, saves and areas
+  never face it **(change TR-2; agreed by the client 2026-11-21, Q1;
+  room terrain design 6.1)**.
 - A unit holding only a launcher threatens adjacent squares through its
   improvised stock or stave blow (13).
 
@@ -1001,7 +1162,7 @@ hand (`main`) and an off hand (`off`), or one two-handed item in both:
 | Slot | May hold |
 |---|---|
 | `main` | A weapon, a main-hand focus (rod), or nothing |
-| `off` | A light weapon (only if `main` holds a light weapon), a shield, an off-hand focus (orb, tome, holy symbol, totem), or nothing |
+| `off` | A light weapon (only if `main` holds a light weapon), a shield, an off-hand focus (orb, tome, holy symbol, tipstaff), or nothing |
 | Both (`twoHand`) | A two-handed weapon, the staff, or a two-handed focus (instrument) |
 
 So the legal sets include: a weapon; weapon + shield; weapon + focus;
@@ -1059,6 +1220,11 @@ maps as `off` → `off`, `main` → `main`, `two` → `twoHand` (bulky).
   call)** The lead switches to it only if the M2 companion-turn playtest
   median exceeds 10 seconds and turns with an off-hand attack are
   measurably slower; the switch is reported to the client.
+- **Companion lever `companion.extraAttackAsDie` (off) (lead's call;
+  CMP-28):** a companion turn-time lever, applied before D-c in the
+  companions design's lever order (companions design 7.4); D-c keeps its
+  own trigger above. No M2 kit dual-wields, so D-c speeds the hero's turns
+  only.
 
 ## 12. Damage types and riders
 
@@ -1071,7 +1237,7 @@ maps as `off` → `off`, `main` → `main`, `two` → `twoHand` (bulky).
   base weapon's riders come only from critical hits, weak targets
   **(settled, stat model 8.2)**, martial Techniques **(settled, ability
   model 6.6)**, properties (Honed, the Edge riders), Coated, and the
-  monster affix Honed.
+  monster affix Razored.
 - The at-will bound covers flagged and crit riders on second targets;
   weak-target riders land on every damaging hit, as agreed (7.2 rule 9).
 - Riders arrive in M2 **(settled, stat model 9)**; until then a weakness is
@@ -1125,10 +1291,10 @@ design 12.2)**
   a d4 with flat 0 is already above the band, the minion rolls d4 with
   flat 0 and passes the band; the 6.4 guards still apply.
 - **Why:** under the unrevised rule plus "flat ≥ 0", the pike soldier
-  (d10), the greatclub brute (d8) and d8 artillery are illegal on floor 1
+  (d10), the greatclub brute (d8) and d8 marksmen are illegal on floor 1
   under the 6.2 band and the 6.4 crit guard. The revised rule keeps every
   family legal under the per-turn guards on every floor; for monsters the
-  die is only variance. (The round guard for Set, below, still holds pike
+  die is only variance. (The round guard for Receive, below, still holds pike
   soldiers to room level 2.)
 - **Exploit and Precision on monsters (lead's call):** they are core rules,
   not authored dice, so they sit outside 5.4's "at most one die per
@@ -1150,34 +1316,34 @@ design 12.2)**
   only damage dealt to one hero. Skewer counts only with the hero as the
   primary target; Cleave's second target is a different unit and is
   excluded. Dice are at maximum, Exploit at expected value.
-- **A round guard for Set (lead's call; W-5).** A Set reaction is damage
+- **A round guard for Receive (lead's call; W-5).** A Receive reaction is damage
   a melee hero cannot avoid by approaching, short of Disengage, so it is
   checked with the unit's own turn: a non-boss unit's maximum damage to
-  one hero across one round, its turn plus its Set attack, is at most 50%
+  one hero across one round, its turn plus its Receive attack, is at most 50%
   of the hero's HP with no crit, and at most 70% with one crit. The
   opportunity attack is not added: the hero chooses to leave, and the
   preview shows the provoke. The floor 1 summed round-1 guard and the
-  0.5% round-1 simulation include Set and opportunity attacks under the
+  0.5% round-1 simulation include Receive and opportunity attacks under the
   AI's movement.
 - *Worked check, pike soldier (Strength, soldier 90% damage):* a level 1
   pike soldier rolls d4+2: average 4.5 against a 4.05 target (band ceiling
   4.66); on its turn, maximum 6 (33% of 18 HP), with a crit 10 (56%): it
-  passes the turn rows. The round guard: Set plus its turn is 12 with no
+  passes the turn rows. The round guard: Receive plus its turn is 12 with no
   crit (67% of 18 at room level 1, **fails**; 48% of 25 at room level 2,
   passes) and 16 with one crit (64% of 25, passes). A level 0 pike soldier
   (d4+1) fails room level 1 the same way (10 of 18, 56%). **So pike
   soldiers appear from room level 2.**
-- *Worked check, launcher artillery (Dexterity, artillery 110% damage):*
+- *Worked check, launcher marksman (Dexterity, marksman 110% damage):*
   sling and light crossbow both roll d4 at levels 0–1. Exploit expected
   value per hit: 250‰ × 2.5 = 0.625.
   - Level 1 (target 4.95, band 4.20–5.69): flat 2 gives 2.5 + 2 + 0.625
     = 5.125, in band. Room level 1 (18 HP): no crit 4 + 2 + 0.625 = 6.625
     (37%, passes); with a crit 8 + 2 + 1.25 = 11.25 (63%, **fails**). Room
-    level 2 (25 HP): 26% and 45%, passes. **A level 1 launcher artillery
+    level 2 (25 HP): 26% and 45%, passes. **A level 1 launcher marksman
     appears from room level 2.**
   - Level 0 (target 3.85, band 3.27–4.43): flat 1 gives 4.125, in band.
     Room level 1: no crit 5.625 (31%), with a crit 10.25 (57%): passes.
-    So room level 1 fields level 0 artillery.
+    So room level 1 fields level 0 marksmen.
 - *Worked check, dagger minion (minion 50% damage):* a level 1 minion's
   target is 2.25 (band 1.91–2.59). A Strength-rolled 1d4 (2.5) is in band;
   Dexterity-rolled, Exploit makes it 3.125 and fails. **Minion dagger
@@ -1193,10 +1359,10 @@ design 12.2)**
 **(lead's call; change W-5)**
 
 - **Monster weapon identity is verb + type + reach or range.** The gear
-  line reads, for example, "Pike: piercing, reach 2, Set".
+  line reads, for example, "Pike: piercing, reach 2, Receive".
 - **Condition verbs** (Topple) count toward the type's 2 conditions
   (enemies 9.2).
-- **Guard verbs** (Parry, Set) count as the unit's one reaction beyond the
+- **Guard verbs** (Parry, Receive) count as the unit's one reaction beyond the
   opportunity attack (enemies 9.1).
 - On minions, condition and guard verbs are **inert and shown greyed**.
 - A soldier carries **Interpose or a Guard-verb weapon, never both**.
@@ -1208,7 +1374,7 @@ design 12.2)**
   at-will gains the property):** monsters have no pools (enemies 5.5), so
   a property's pool maps to uses for the monster's life: `rest` N and
   `camp` N become `uses:N`; `never` becomes `uses:1`; a `fight`-pool
-  property (Opener, Quickdraw) becomes `uses:1`, which is one fight for a
+  property (Forestroke, Quickdraw) becomes `uses:1`, which is one fight for a
   monster.
 
 ### 15.3 Role loadouts
@@ -1216,9 +1382,9 @@ design 12.2)**
 | Role | M1 | M2 additions |
 |---|---|---|
 | Brute | The approved M1 brute is the **Bleeding claw + Shove** beast; an armed variant uses a greatclub (Topple, Prone counted once with Shove's) + Shove | Maul (Topple, counts as a condition); greataxe or greatsword |
-| Soldier | **Warhammer and shield (Push) + Interpose + Shove.** A pike soldier (Set instead of Interpose; from room level 2, 15.1) is the optional second soldier. | Spear and shield (Skewer), once a party gives Skewer a second target; glaive or halberd elite (Bodyguard affix) |
-| Artillery | **Sling (Push)** + dagger (level 0 from room level 1, level 1 from room level 2; 15.1) | Light crossbow (Skewer); shortbow. Longbow from floor 2, with the artillery band widened to 8–14 (W-5). |
-| Minion | Dagger or spear, Strength-rolled (condition-free; their verbs rarely fire against a solo hero, which is accepted) | — |
+| Soldier | **Warhammer and shield (Push) + Interpose + Shove.** A pike soldier (Receive instead of Interpose; from room level 2, 15.1) is the optional second soldier. | Spear and shield (Skewer), once a party gives Skewer a second target; glaive or halberd elite (Challenger affix) |
+| Marksman | **Sling (Push)** + dagger (level 0 from room level 1, level 1 from room level 2; 15.1) | Light crossbow (Skewer); shortbow. Longbow from floor 2, with the marksman band widened to 8–14 (W-5). |
+| Swarmer | Dagger or spear, Strength-rolled (condition-free; their verbs rarely fire against a solo hero, which is accepted) | — |
 | Skirmisher (M2) | — | Handaxe (thrown + Cleave), javelin (thrown + Pry), trident (thrown + Hook), sabre (Flourish) |
 | Leader (M2) | — | Longsword (Parry) instead of other reactions; whip (Hook) for slaver types |
 
@@ -1227,24 +1393,24 @@ design 12.2)**
 **(lead's call; changes W-4, W-5)**
 
 - **Why these M1 defaults:** M1 is a solo hero, so Skewer and Cleave can
-  never fire on the party. The default soldier and artillery carry verbs
+  never fire on the party. The default soldier and marksman carry verbs
   that fire against one target (Push), so monsters teach a verb before the
   player loots it (2, Goals). The M1 trigger-rate report checks it (21.3).
 - Every verb has a **static scorer value** in HP equivalents: Helped = the
   expected gain on the next attack; Prone = its control value plus the
   advantage gain for adjacent allies.
-- The cost of **entering a Set zone** applies only while the zone owner's
+- The cost of **entering a Receive zone** applies only while the zone owner's
   reaction is unspent, and only for the first unit each round that would
-  trigger the owner's Set under its current policy (by default the first
+  trigger the owner's Receive under its current policy (by default the first
   non-minion). This prevents a stall exploit without letting a minion
   "spend" a zone it cannot trigger.
 - **No reaction priority rule except the AC-reaction order in 7.5 step 5
-  (change AR-41; armour design 10.4).** Set, opportunity attacks and Parry
+  (change AR-41; armour design 10.4).** Receive, opportunity attacks and Parry
   trigger at different moments and never compete at one decision point;
   each follows its own policy and filter (7.1, ability model 7.3).
 - **Aim** is valued as the expected Exploit dice on the turn's first
   attack, and only when that attack is made from the current square before
-  moving (Steady Aim: a destination at most 1 square away).
+  moving (Settled Aim: a destination at most 1 square away).
 - **Lunge** is scored inside the square-plus-ability pairs (ability model
   13).
 
@@ -1258,7 +1424,7 @@ design 12.2)**
 - **Save:** Fortitude against the source's ability difficulty, with
   advantage when wielding two-handed.
 - **Only the main hand drops.** Shields are never Disarmed. A Disarmed
-  focus loses only its verb and properties; casting continues. Sure Grip
+  focus loses only its verb and properties; casting continues. Fast Grip
   and Clinging are immune.
 - **Party side (settled, items design 7.1):** the weapon falls into its own
   square; a bonus action re-wields it from there or swaps sets; Distracted
@@ -1294,7 +1460,7 @@ design 12.2)**
 
 - **Dagger.** Best at the off hand: Nick keeps the bonus action free, and
   any unit gets a throw at range 5. Worst at damage; never a main weapon.
-  Monsters: minion weapon, artillery sidearm. Skins: throwing knives,
+  Monsters: swarmer weapon, marksman sidearm. Skins: throwing knives,
   darts, and a "throwing hammer" (Converted to bludgeoning) replacing the
   cut light hammer.
 - **Shortsword.** Best at sustained Dexterity melee: a Vex hit gives
@@ -1304,9 +1470,9 @@ design 12.2)**
   Helped.
 - **Sabre.** Best at hit and slip: after a hit it steps out of a pin,
   round a corner, out of an ogre's reach, or opens a Skewer line for an
-  ally; from M2 the light Dexterity weapon that delivers Bleed. Worst at
+  ally; from M2 the light Dexterity weapon that delivers Bleeding. Worst at
   holding a line. Monsters: M2 raider, scored as a post-hit retreat.
-- **Rapier.** Best at diving onto artillery and casters: the largest
+- **Rapier.** Best at diving onto marksmen and casters: the largest
   Dexterity-eligible die, and the Lunge opener triggers Exploit; the
   duellist build with a shield. Worst when pinned, in corridors, and it
   cannot dual-wield. In M1 so the M1 simulator has a Dexterity melee
@@ -1396,7 +1562,7 @@ design 12.2)**
 
 | Family | Wave | Tr. | Dice | Type | Hands and tags | Reach | Str | Verb |
 |---|---|---|---|---|---|---|---|---|
-| Pike | **M1** | M | 1d10 | P | two-handed, heavy, **minReach 2** | 2 only; haft strike 1d6 B when adjacent | +1 | Set |
+| Pike | **M1** | M | 1d10 | P | two-handed, heavy, **minReach 2** | 2 only; haft strike 1d6 B when adjacent | +1 | Receive |
 | Glaive | M2 | M | 1d10 | S | two-handed, heavy | 2 (also adjacent) | +1 | Graze |
 | Halberd | M2 | M | 1d10 | S | two-handed, heavy (tags `polearm`, `axe`) | 2 (also adjacent) | +1 | Cleave |
 
@@ -1404,7 +1570,7 @@ design 12.2)**
   walks in takes a d10 before arriving. Worst against foes already
   adjacent, ranged attackers, and baiting (the first unit through spends
   its reaction). Monsters: optional M1 soldier from room level 2 (15.1),
-  Set **instead of** Interpose.
+  Receive **instead of** Interpose.
 - **Glaive.** Steady damage from the second rank against elites and
   bosses. Worst against minions and Prone targets at distance 2.
 - **Halberd.** Groups seen from behind a front line, two rolls per turn
@@ -1420,7 +1586,7 @@ design 12.2)**
 
 - **Spear.** Corridors and doorways, where one roll hits two foes; works
   with a shield; can be thrown. Worst in open rooms and against lone
-  targets. Monsters: M1 minion, M2 soldier; monster spears teach "don't
+  targets. Monsters: M1 swarmer, M2 soldier; monster spears teach "don't
   queue up in corridors" once a party gives them a second target.
 - **Trident.** A thrown pull from 5 squares (a harpoon) for a Strength
   fighter: the spear's chassis with Hook. Worst at reach and sustained
@@ -1444,16 +1610,16 @@ No two launchers share a verb.
 - **Longbow.** The planted sniper: shoot before you move, and the planted
   shot counts for Exploit (Aim), then reposition; holds a chokepoint from
   14 squares. Worst when engaged, for Strength −1 builds, and on turns it
-  must move before it shoots. Monsters: from floor 2, artillery with
+  must move before it shoots. Monsters: from floor 2, marksmen with
   range capped by the role band (W-5).
 - **Light crossbow.** The sidearm for casters, companions and untrained
   units, with no Strength need; Skewer repays Loading in corridors. Worst
-  for Extra Attack users and in open rooms. Monsters: M2 artillery.
+  for Extra Attack users and in open rooms. Monsters: M2 marksman.
 - **Shortbow.** Kiting: moves and shoots every turn; the strongest
   sustained Dexterity launcher at levels 5–10. Worst against high AC and
   after a miss.
 - **Sling.** The shield-bearer's ranged option and knockback at range; can
-  free a grappled ally. Worst at damage. Monsters: M1 artillery, whose Push
+  free a grappled ally. Worst at damage. Monsters: M1 marksman, whose Push
   teaches the verb to a solo hero.
 - **Hand crossbow.** Dive and shoot point-blank; the off-hand shot for a
   blade. Worst at range and with Extra Attack.
@@ -1465,12 +1631,12 @@ No two launchers share a verb.
 
 | Focus | Wave | Hands | Focus verb (buff-test tag) | Notes |
 |---|---|---|---|---|
-| **Staff** (one family: weapon + focus, any tradition) | M1 if the slice class casts, else M2 | two as a focus (focus verb and properties only two-handed, 11.2); versatile 1d6 / v1d8 B as a weapon, simple | **Steady Casting:** advantage on concentration checks (prevent) | Merges the quarterstaff. Its weapon verb is Parry. The family cap counts it under `focus`. |
+| **Staff** (one family: weapon + focus, any tradition) | M2 (the M1 slice class, the Vanguard, does not cast; change CL-13d; cross-document comparison 2026-11-23, CC-49) | two as a focus (focus verb and properties only two-handed, 11.2); versatile 1d6 / v1d8 B as a weapon, simple | **Steady Casting:** advantage on concentration checks (prevent) | Merges the quarterstaff. Its weapon verb is Parry. The family cap counts it under `focus`. |
 | Orb (arcane) | M2 | off | **Reach Out:** cantrip range +4 (targeting) | The back-line artillery caster |
 | Rod (arcane) | M2 | **main** | **Shape:** line and cone cantrips +2 length, inside the area cap (targeting) | Rod and shield |
 | Tome (arcane) | M2 | off | **Annotate:** swap one known spell at a short rest instead of camp (economy) | The planning focus |
-| Holy symbol (divine) | M2 | off | **Spare:** once per turn, one area spell leaves out one ally square (targeting) | A divine caster with a shield instead takes a **Reliquary Shield** (an armour-design shield with a `focus{}` sub-record), so no new placement rule is needed. The Reliquary Shield is notable-only; rod + Reliquary is legal (armour design 10.2; change AR-44) |
-| Totem (presence) | M2 | off | **Loom:** Frighten and presence ranges +3 (targeting) | Breaks morale from range |
+| Holy symbol (divine) | M2 | off | **Withhold:** once per turn, one area spell leaves out one ally square (targeting) | A divine caster with a shield instead takes a **Reliquary Shield** (an armour-design shield with a `focus{}` sub-record), so no new placement rule is needed. The Reliquary Shield is notable-only; rod + Reliquary is legal (armour design 10.2; change AR-44) |
+| Tipstaff (presence) | M2 | off | **Loom:** Frighten and hostile-facing presence effects range +3 (targeting); never heals, calls, Urge, Rally or Demand Surrender **(change HR-15; Herald design 7.1, 8.1)** | Breaks morale from range |
 | Instrument (presence) | Later | two | **Carry:** Rally and presence buffs +3 range | Costs both hands for no weapon |
 
 ### 17.9 Shields as weapons (handed to the armour design)
@@ -1495,7 +1661,7 @@ No two launchers share a verb.
 | Claw | M1 | S | 1 | Bleeding on hit (the settled non-rider claw; counts toward the type's 2) |
 | Bite | M1 | P | 1 | Plain bite; pack bite: Topple; grabbing bite: Grappled, cooldown only |
 | Slam | M1 | B | 1 | Push |
-| Tail or sting | M2 | P or B | 2 | Set (counts as its reaction); sting variant adds Poisoned |
+| Tail or sting | M2 | P or B | 2 | Receive (counts as its reaction); sting variant adds Poisoned |
 | Tentacle or pseudopod | M2 | B or acid | 2 | Hook |
 | Touch | M2 | necrotic or acid | 1 | Pry; the acid ooze is the Later Notched and Pitted Armour source |
 
@@ -1510,12 +1676,12 @@ Templates are `natural.*` ability records, used by unarmed types (enemies
 | Light hammer | Nick duplicated the dagger; it became a dagger skin with Converted (bludgeoning) |
 | Main-gauche | The Parrying property covers it; too many Parry sources |
 | Morningstar | Overlapped the mace and flail; a notable mace with Converted (piercing). The "Spiked" per-attack type choice was dropped. |
-| Chain, war scythe, lance | Duplicate jobs; Lunging and Opener cover the charge fantasy |
+| Chain, war scythe, lance | Duplicate jobs; Lunging and Forestroke cover the charge fantasy |
 | Cestus (Clinch verb) | Grappling belongs to the class designs; it would add a verb |
 | Net (as a party weapon) | Restrained on a `fight` pool breaks ability model 6.2. A monster cooldown-3 ability (M2) and a Later consumable instead. |
 | Darts, throwing knives | Dagger skins |
 | Chakram, repeating crossbow, atlatl, warbow, harpoon, boomerang | The Ricochet, Repeater and Far-flight properties, or the longbow, the trident and the default no-pickup throw |
-| Blowgun, staff sling | Deferred: they need Coated plus a stealth rule, or a cover rule |
+| Blowgun, staff sling | Deferred: they need Coated plus a stealth rule, or a cover rule (the M2 cover rule now exists, room terrain design 6.1; revisit when the weapons owner next extends the roster) |
 | Scimitar, gladius, estoc, partisan, bo staff | Folded into the sabre, shortsword, war pick, spear and staff; the names live on as notables and skins |
 
 ## 18. Notable properties
@@ -1531,6 +1697,18 @@ Templates are `natural.*` ability records, used by unarmed types (enemies
   bonus to hit or damage**. Any number appears only through a verb.
 - At most 3 properties per item, and `value` equals the rarity budget
   (settled, items design 12.5).
+- **Rolled lines (change IR-4; M2; item rolls design 4.6).** A weapon or
+  focus rolls at most one line; its fixed lines are always `obvious`, so
+  only the rolled line may be untold. Very Rare items, signatures,
+  heirlooms and the M1 notables (18.6) are fully authored and roll none;
+  the legal shapes per rarity are item rolls design 4.6's table. Each
+  family declares a curated table of 3–5 eligible entries from 18.2–18.5,
+  all sensible on that family, never the whole table. Eligibility applies
+  the rules here (Quickdraw never with `type`; Fracturing Rare and above
+  only), wave gates, `carrierSafe` lines only on carried cards, and
+  trinkets design rule 28 extended to weapons: a rolled line never repeats
+  the obvious line, shares no `answers[]` and adds no second channel or
+  button.
 - Monster carriers get the benefit only (settled, enemies 15.4); pools map
   to uses as in 15.2 **(lead's call)**.
 - **Always-on properties never copy another verb's effect,** focus verbs
@@ -1552,7 +1730,7 @@ Templates are `natural.*` ability records, used by unarmed types (enemies
 | Long Haft | targeting | Reach +1: maximum 2, or 3 on a `minReach` 2 weapon (8) | reach families, spear | M1 |
 | Far-flight | targeting | Range +4 / +6 / +8 (cap 20); thrown range +3 / +4 / +5 | launchers, thrown | M1 |
 | Quickdraw | economy (`fight` pool, minor) | Swapping to this set is free once per fight | never with a `type` property; also shields, since it acts on the set (armour design 14.5; change AR-50) | M1 |
-| Opener | charge (`fight` pool, minor) | Your first attack each fight has advantage | any | M1 |
+| Forestroke | charge (`fight` pool, minor) | Your first attack each fight has advantage | any | M1 |
 | Parrying | prevent, charge | Parry reaction 1 / 2 / 3 per rest | non-Parry families | M1 |
 | Lunging | charge, targeting | 1 / 2 / 2 per rest: move 2 squares as part of an attack; the target makes no opportunity attack | melee | M1 |
 | Kiter's Step | prevent, charge | 1 / 1 / 2 per rest: reaction when a hostile moves adjacent; step 1 without provoking | launchers | M1 |
@@ -1562,9 +1740,9 @@ Templates are `natural.*` ability records, used by unarmed types (enemies
 | Shove-through | economy | After a hit, Shove as a bonus action, once per turn | melee | M2 |
 | Executioner's Stroke | charge | 1 / 1 / 2 per rest, `onHit`, target below half HP: roll the weapon dice twice | heavy blades, axes | M2 |
 | Hungering | charge | 2 per rest: when you drop a unit, regain 2 / 3 / 4 HP (Withered blocks it) | any | M2 |
-| Sure Grip | prevent | Cannot be Disarmed; immune to Notched | any | Later |
+| Fast Grip | prevent | Cannot be Disarmed; immune to Notched | any | Later |
 | Quivered | economy | Applying a coating is a free interaction | launchers | Later |
-| Bloodletter | rider, cost | Slashing rider on every hit; you take 1 / 2 / 3 at turn start while your Bleed runs | slashing | Later |
+| Gashing | rider, cost | Slashing rider on every hit; you take 1 / 2 / 3 at turn start while your Bleeding runs | slashing | Later |
 
 A shield may also roll `props.verb.push` (18.4) through its bash's Push
 (armour design 14.5) **(change AR-50)**.
@@ -1575,13 +1753,13 @@ A shield may also roll `props.verb.push` (18.4) through its bash's Push
 |---|---|---|---|---|
 | Thunderous | charge | 1 / 1 / 2 per rest, `onHit`: push 2, then Fortitude save or Dazed | impact | M1 |
 | Quake | charge | 1 / 1 / 2 per rest, `onHit`: hostiles adjacent to the target make a Fortitude save or fall Prone | mace, maul | M2 |
-| Volley | charge, targeting | 1 per rest: one roll against each hostile in a radius-1 burst within range | launchers | M2 |
-| Overwatch | charge | 1 / 1 / 2 per rest: reaction when a hostile ends its own move within half range; one attack | launchers | M2 |
-| Pinning | charge | 1 per rest, `onHit`: Rooted for 1 turn; never against bosses | launchers | Later |
+| Arrowfall | charge, targeting | 1 per rest: one roll against each hostile in a radius-1 burst within range | launchers | M2 |
+| Ready Shot | charge | 1 / 1 / 2 per rest: reaction when a hostile ends its own move within half range; one attack | launchers | M2 |
+| Pinning | charge | 1 per rest, `onHit`: Tangled for 1 turn; never against bosses | launchers | Later |
 | Crushing | charge | 1 per rest, `onHit`: Pitted Armour 1 | impact | Later |
 | Sundering | charge | 1 per rest, `onHit` against an armed monster: it uses its improvised attack for the fight | axes, impact | Later |
 | Disarming | charge | 1 per rest, `onHit`: Disarm attempt (16) | whip, flail | Later |
-| Shatter | cost, charge | Once (`never` pool): as part of a hit, destroy this weapon; the hit becomes a critical and pushes 2. Rare and above only; never on heirlooms or signature items. | any | Later |
+| Fracturing | cost, charge | Once (`never` pool): as part of a hit, destroy this weapon; the hit becomes a critical and pushes 2. Rare and above only; never on heirlooms or signature items. | any | Later |
 
 ### 18.4 Verb signature tables `props.verb.<verb>` (value 1)
 
@@ -1599,9 +1777,9 @@ whenever the verb is off (10.2).
 | Vex | **Shared Vex** (M2): give the Helped to an adjacent ally instead |
 | Lunge | **Quick Lunge**: needs 1 square of movement. **Lunge Guard**: the Lunge target makes no opportunity attack against you this turn. |
 | Flourish | **Long Flourish**: step 2; at b3 no one gets an opportunity attack |
-| Aim | **Steady Aim**: Aim survives 1 square of movement (the first attack still counts for Exploit after moving 1 square) |
-| Parry | **Deflect**: also against ranged weapon attacks. **Binding Parry**: a successful Parry pushes the attacker 1. **Riposte** (M2, charge 1 / 1 / 2 per rest): a successful Parry lets you attack the attacker in the same reaction. **Warding Staff** (staff): Parry may protect an adjacent ally. |
-| Set | **Short Grip** (pike): may attack adjacent, with disadvantage. **Keep Back** (charge 2 per rest): a Set or opportunity-attack hit pushes 1. |
+| Aim | **Settled Aim**: Aim survives 1 square of movement (the first attack still counts for Exploit after moving 1 square) |
+| Parry | **Deflect**: also against ranged weapon attacks. **Binding Parry**: a successful Parry pushes the attacker 1. **Riposte** (M2, charge 1 / 1 / 2 per rest): a successful Parry lets you attack the attacker in the same reaction; one reaction makes one attack, so where a Counterstroke is also offered the player picks one (the VG-18 echo ruling; change SH-8, Shade design 8.3). **Warding Staff** (staff): Parry may protect an adjacent ally. |
+| Receive | **Short Grip** (pike): may attack adjacent, with disadvantage. **Keep Back** (charge 2 per rest): a Receive or opportunity-attack hit pushes 1. |
 | Graze | **Driving Graze**: a Graze may also push 1 |
 | Pry | **Pry Deep** (M2): also ignores Parry |
 | Puncture | **Bore** (M2): hits count as bludgeoning for breaking layers, Brittle and Frozen |
@@ -1624,7 +1802,7 @@ one-handed):
   total cap +8.
 - **Shared Steadiness** (staff): Steady Casting also covers one adjacent
   concentrating ally.
-- **Sparing** (holy symbol): Spare leaves out 1 / 1 / 2 more ally squares.
+- **Sparing** (holy symbol): Withhold leaves out 1 / 1 / 2 more ally squares.
 
 **`props.focus_major` (value 2):**
 
@@ -1639,18 +1817,18 @@ Rider-free, M1 conditions only.
 |---|---|---|---|
 | Doorwarden's Pike | pike | Uncommon | Long Haft (reach 3), Quickdraw |
 | Gatebreaker | warhammer | Common | Heavy Push |
-| Wolfcleaver | greataxe | Uncommon | Wide Cleave, Opener |
+| Wolfcleaver | greataxe | Uncommon | Wide Cleave, Forestroke |
 | Vowkeeper | longsword | Uncommon | Binding Parry, Quickdraw |
-| Thunderclap Greatclub | greatclub | Uncommon | Thunderous (major) |
-| Hunter's Longbow | longbow | Common | Steady Aim |
-| Corridor Warden | light crossbow | Uncommon | Long Skewer, Quickdraw |
-| Skirmisher's Spear | spear | Common | Lunging |
-| Duellist's Rapier | rapier | Common | Quick Lunge |
+| Thudding Greatclub | greatclub | Uncommon | Thunderous (major) |
+| Fowler's Longbow | longbow | Common | Settled Aim |
+| Corridor Crossbow | light crossbow | Uncommon | Long Skewer, Quickdraw |
+| Forager's Spear | spear | Common | Lunging |
+| Courtier's Rapier | rapier | Common | Quick Lunge |
 | Skullsplitter | longsword | Common | Converted (bludgeoning): an anti-skeleton sidegrade that costs the bonus-action swap |
 | Bonebreaker Mace | mace | Common | Floorer |
-| Wardwood Staff | staff | Common | Warding Staff |
+| Rowan Staff | staff | Common | Warding Staff |
 | Magpie's Knife | dagger | Common | Far-flight (thrown 8) |
-| **Headsman's Greataxe** (boss signature) | greataxe | Floor 1 top tier (budget 2) plus one authored property (items design 12.5) | Wide Cleave, Opener, plus authored Reaping |
+| **Headsman's Greataxe** (boss signature) | greataxe | Floor 1 top tier (budget 2) plus one authored property (items design 12.5) | Wide Cleave, Forestroke, plus authored Reaping. No channel until its M3 boss (the Ministry of Small Mercies, F1–2; boss rooms design 4.11.1, change BR-27; item rolls design 4.13) (cross-document comparison 2026-11-23, CC-49) |
 
 "Vowkeeper" replaces "Oathkeeper", a protected name.
 
@@ -1750,11 +1928,11 @@ for `inventory.json` (items design 5.1).
   unit's turn, as the camp-spend flag does (ability model 6.4, 14.2). The
   keys: Exploit, Graze, each once-per-turn verb in use (a dual-wielder's
   two verbs are separate keys), the off-hand attack, and each
-  once-per-turn property in use (Shove-through, Repeater, Spare).
+  once-per-turn property in use (Shove-through, Repeater, Withhold).
 - **Own-turn movement state,** reset at the unit's own turn start:
   `squaresMovedOwnThisTurn` (int), `attacksDeclaredOwnThisTurn` (int),
   `adjacentAtTurnStart` (unitIds) and `lungeUsedTargets` (unitIds), for
-  Aim, Steady Aim, Lunge and Quick Lunge (7.6).
+  Aim, Settled Aim, Lunge and Quick Lunge (7.6).
 - **Per-target round state** records Topple attempts and verb-sourced
   forced movement (7.2 rules 2 and 4), cleared at round start.
 - **Events:** `AttackDeclared{source, target, mode, ability, weapon}`,
@@ -1783,7 +1961,7 @@ The build fails when:
 6. a monster weapon has flat damage below 0, or a band EV outside its row
    band with verbs, Exploit and (if on) Precision included at the 15.1
    rates; or a non-boss unit fails the 6.4 guards or the round guard for
-   Set (15.1) at its earliest legal room level;
+   Receive (15.1) at its earliest legal room level;
 7. a condition or guard verb on a minion is not inert, or is not counted
    under enemies 9.1 and 9.2;
 8. a soft threshold does not name the Strained penalty, or a weapon family
@@ -1832,7 +2010,7 @@ The build fails when:
   dice, crit doubling); Exploit and Vex on the net roll mode; Aim
   qualifying only the turn's first attack before movement for Exploit,
   with one d20 and the roll mode unchanged (Vex still fires on it), with
-  net disadvantage, spent by an earlier miss, and with Steady Aim after 1
+  net disadvantage, spent by an earlier miss, and with Settled Aim after 1
   square; minion dice one size smaller and the level 0 exception (W-17);
   Graze's reaction test and natural 1; the shooting-in-melee hostile test;
   the off-hand attack with negative Strength and as a hand crossbow shot;
@@ -1841,10 +2019,10 @@ The build fails when:
 - Property test: the preview matches the resolution for every verb
   (settled, ability model 16), with the ability choice read from
   `AttackDeclared`.
-- Replay tests across fights with forced movement, Set and Parry, and for
-  each case of 8's movement and reactions: a Set hit that pushes the
+- Replay tests across fights with forced movement, Receive and Parry, and for
+  each case of 8's movement and reactions: a Receive hit that pushes the
   mover, an opportunity attack with Push or Hook, Keep Back, Kiter's Step
-  and Overwatch on a split move.
+  and Ready Shot on a split move.
 
 ### 21.3 Simulator reports
 
@@ -1856,9 +2034,9 @@ The build fails when:
 | Verb trigger rate per family, with **party and monster rows** | Reported; a verb that rarely fires is a dead verb. Each M1 monster type's weapon verb fires in at least some solo fights. | M1 |
 | Saves per round | Within the ability model's watch | M2 |
 | Rounds a melee unit ends unable to attack because of forced movement or Prone | Low; a lockout watch | M1 |
-| Set-zone stalls (fights where no unit enters a zone for 3+ rounds) | Rare | M1 |
+| Receive-zone stalls (fights where no unit enters a zone for 3+ rounds) | Rare | M1 |
 | Weapon swaps per fight | Low but non-zero (settled, ability model 16) | M1 |
-| Damage share by range band (melee, reach 2–3, ranged) | Each band's share of party damage within ±25% of its share of party members; feeds the M2 cover decision (9.5) | M2 |
+| Damage share by range band (melee, reach 2–3, ranged) | Each band's share of party damage within ±25% of its share of party members; feeds the M2 cover decision (9.5); run with the cover arm `cover.effect` off / minus2 / disadvantage per layout grammar **(change TR-2; room terrain design 11.4)** | M2 |
 | **Damage taken by range band** (party damage taken per fight by the unit's main band, reach 3 units reported apart) | Launcher-main units take at least 50% of what melee-main units take; the safety veto on the Precision gate (6.5) | M2 |
 | Launcher family floor (6.4) | Every launcher family ≥ 60% of the reference at levels 1, 5 and 10; the longbow measured with the agreed Aim (7.1), checking the estimate in 6.4 and the 110% cap | M2 |
 | Families never equipped after floor 2 | None; the dead-weapon watch | M2 |
@@ -1872,8 +2050,9 @@ The build fails when:
 - **M1** (one class, levels 1–3, one floor, three enemy types):
   - 15 families: dagger, rapier, longsword, greatsword, handaxe, greataxe,
     mace, greatclub, warhammer, flail, pike, spear, longbow, light
-    crossbow, sling; plus the staff if the slice class casts.
-  - 11 verbs: Push, Topple, Cleave, Skewer, Nick, Lunge, Aim, Parry, Set,
+    crossbow, sling. No staff: the slice class is the Vanguard (change
+    CL-13d; cross-document comparison 2026-11-23, CC-49).
+  - 11 verbs: Push, Topple, Cleave, Skewer, Nick, Lunge, Aim, Parry, Receive,
     Graze, Pry.
   - Rules: chassis and attack ability; the attack pipeline (7.5) and
     geometry (7.6); verbs and bounds; Strained; training; dual wielding
@@ -1881,21 +2060,21 @@ The build fails when:
     ranged disadvantage in melee; thrown and Loading; improvised and
     unarmed; Exploit (1 die at levels 1–3), with Aim as a trigger; type
     properties; the revised one-die rule, minion dice (W-17) and the round
-    guard for Set (15.1).
+    guard for Receive (15.1).
   - Monsters: claw brute (or the greatclub brute), warhammer-and-shield
-    soldier (or the pike soldier from room level 2), sling artillery,
-    Strength-rolled dagger or spear minions.
+    soldier (or the pike soldier from room level 2), sling marksman,
+    Strength-rolled dagger or spear swarmers.
   - The M1 notables (18.6) and the M1 rows of 18.2–18.3.
   - The Dexterity parity gate applies **from M2**. If the slice class is
     Dexterity-main, the rapier is its M1 measuring build.
 - **M2:** shortsword, sabre, sickle, battleaxe, maul, war pick, whip,
   glaive, halberd, trident, javelin, shortbow, hand crossbow, heavy
-  crossbow; spear-and-shield soldiers and light crossbow artillery; the
+  crossbow; the staff (CL-13d; CC-49); spear-and-shield soldiers and light crossbow marksmen; the
   remaining foci; M2 natural weapons; Vex, Flourish, Hook (with `shift`)
   and Puncture; riders, Honed and the Edge riders; the
   Dexterity parity reports and the Precision gate (6.5).
 - **Later:** bolas, instrument, Disarmed, Coated and coatings, Notched,
-  Sundering, Crushing, Shatter, Sure Grip, Quivered, Bloodletter,
+  Sundering, Crushing, Fracturing, Fast Grip, Quivered, Gashing,
   Pinning, the tower shield.
 
 ## 23. Risks
@@ -1910,7 +2089,7 @@ The build fails when:
 - **The monster one-die change (W-5)** moves monster weapon identity onto
   verbs. Players may read a pike as hitting no harder than a dagger on
   floor 1. The gear line and verb previews carry the read.
-- **Control stacking:** forced movement, Prone, Set rings and the reaction
+- **Control stacking:** forced movement, Prone, Receive rings and the reaction
   economy. Mitigations: once-per-round bounds, condition verbs off on
   reactions, the stall and lockout reports, the floor-1 soldier cap.
 - **Overshoot from team advantage** (a Topple user plus Exploit users).
@@ -1951,7 +2130,7 @@ The build fails when:
   the items design.
 - Notable names beyond 18.6, skins and models.
 - Which families each class and companion is trained in, and starting
-  kits (items design 17, row 3).
+  kits (items design 17, row 3; now set in the starting kits design 5).
 - Preview icons and overlay art within 7.2 rule 7.
 - **Not tuning:** switching Precision on (6.5, the lead's gate), switching
   to D-c (11.3, the lead's call on playtest evidence), and anything that
@@ -1973,7 +2152,7 @@ the exact section it touches. W-1 and W-12 were approved by the client on
 
 | # | Section | Change | Approved by |
 |---|---|---|---|
-| W-2 | 7.2, universal and skill actions table | New rows: off-hand light attack (bonus action; Nick moves it into the Attack action); threatened zone (opportunity attack on leaving, Set on entering; Disengage stops both; movement resolves square by square, with the trigger timing of weapons 8); ranged and thrown **weapon** attacks with a hostile adjacent have disadvantage; Loading; thrown as an attack mode with no pickup; reach passes over units; unarmed strike (1 + Strength bludgeoning); improvised attack rule (weapons 8, 9, 11.3, 13) | Lead |
+| W-2 | 7.2, universal and skill actions table | New rows: off-hand light attack (bonus action; Nick moves it into the Attack action); threatened zone (opportunity attack on leaving, Receive on entering; Disengage stops both; movement resolves square by square, with the trigger timing of weapons 8); ranged and thrown **weapon** attacks with a hostile adjacent have disadvantage; Loading; thrown as an attack mode with no pickup; reach passes over units; unarmed strike (1 + Strength bludgeoning); improvised attack rule (weapons 8, 9, 11.3, 13) | Lead |
 | W-3 | 6.6, Techniques bullet; 10.2, offer kinds list | Technique option "empower the weapon's verb"; new offer kind "verb training (family)". 10.3 is not changed: `verb.cleave` is distinct from its example ability. (weapons 7.3) | Lead |
 | W-4 | 7.3, policies list; 9.3, first and second bullets; 13, "Open to more terms" bullet | A reaction policy may carry a target filter (`nonMinion`), set in data and changeable by the player like the policy. Topple shares the rider save slot. The at-will rider bound covers flagged and crit riders on Cleave and Skewer second targets (a stated reading; weak-target riders are untouched, stat model 8.2). For weapon attacks, 14.3 step 5 expands into weapons 7.5. New AI term: static verb scorer values. (weapons 7.1, 7.2, 7.5, 15.4) | Lead |
 
@@ -1981,14 +2160,14 @@ the exact section it touches. W-1 and W-12 were approved by the client on
 
 | # | Section | Change | Approved by |
 |---|---|---|---|
-| W-5 | 5.3, Dexterity-main bullet; 5.4, first and second bullets; 5.6, gear line row; 6.4, guards table and notes; 9.1, reaction column; 9.2, "Counts toward the type's 2"; 11.1, Opportunity cost row; 15.2, first bullet; 15.4, first table row; 15.5, Disarm seizure, first bullet; 17.1, Brute, Soldier and Artillery rows | 5.4 first bullet adds: "Crit dice, Exploit and Precision are core rules outside this limit (weapons 15.1)." Monster die = min(weapon's largest die, row die); flat ≥ 0. Each monster at-will declares its attack ability; flat damage is unaffected by weapons 6.2. Exploit and (if on) Precision count at expected value, at the `weapons.json` rates, in the band and the guards. New 6.4 row: a non-boss unit's maximum damage to one hero across one round, its turn plus its Set attack: ≤ 50% no crit, ≤ 70% with one crit; per-unit guards count one hero. The gear line shows the verb. Verb effects count in the band and guards; monster Graze uses the monster's Strength. Guard verbs are the reaction beyond the opportunity attack; condition verbs count toward the 2; both inert on minions. Set-zone entry cost only while the reaction is unspent, for the first unit each round that would trigger Set under its policy. Carried properties map pools to uses (weapons 15.2). Disarm seizure: a party unit on the square blocks recovery once the owner has moved off it. Unarmed types use `natural.*` templates (Strength unless declared). Brute: heavy **or two-handed** weapon. Soldier: Interpose **or** a Guard-verb weapon. Artillery range band 8–14 from floor 2. (weapons 6.2, 15, 16, 17.10) | Lead |
+| W-5 | 5.3, Dexterity-main bullet; 5.4, first and second bullets; 5.6, gear line row; 6.4, guards table and notes; 9.1, reaction column; 9.2, "Counts toward the type's 2"; 11.1, Opportunity cost row; 15.2, first bullet; 15.4, first table row; 15.5, Disarm seizure, first bullet; 17.1, Brute, Soldier and Marksman rows | 5.4 first bullet adds: "Crit dice, Exploit and Precision are core rules outside this limit (weapons 15.1)." Monster die = min(weapon's largest die, row die); flat ≥ 0. Each monster at-will declares its attack ability; flat damage is unaffected by weapons 6.2. Exploit and (if on) Precision count at expected value, at the `weapons.json` rates, in the band and the guards. New 6.4 row: a non-boss unit's maximum damage to one hero across one round, its turn plus its Receive attack: ≤ 50% no crit, ≤ 70% with one crit; per-unit guards count one hero. The gear line shows the verb. Verb effects count in the band and guards; monster Graze uses the monster's Strength. Guard verbs are the reaction beyond the opportunity attack; condition verbs count toward the 2; both inert on minions. Receive-zone entry cost only while the reaction is unspent, for the first unit each round that would trigger Receive under its policy. Carried properties map pools to uses (weapons 15.2). Disarm seizure: a party unit on the square blocks recovery once the owner has moved off it. Unarmed types use `natural.*` templates (Strength unless declared). Brute: heavy **or two-handed** weapon. Soldier: Interpose **or** a Guard-verb weapon. Marksman range band 8–14 from floor 2. (weapons 6.2, 15, 16, 17.10) | Lead |
 | W-17 | 5.4, second bullet ("A monster rolls one die of the weapon's largest size", as revised by W-5); 7.1, ranks table, Minion row, "Damage is 50% of the row" | A minion rolls the W-5 die **one size smaller, minimum d4**, and its flat (≥ 0) is set to keep its at-will in the 50% band (6.2, ±15%). Exception: at level 0, where a d4 with flat 0 (2.5) is above the band (ceiling 2.01), the minion rolls d4 with flat 0 and passes the band; the 6.4 guards still apply. This fixes the level 0 minion (d4 above its band) and the level 2 minion (d6 above its band). (weapons 15.1) | Lead |
 
 **Items design (2026-11-16):**
 
 | # | Section | Change | Approved by |
 |---|---|---|---|
-| W-6 | 5.2, places table, "Active weapon set" row; 8.2, fit verdict "cannot wear: needs Str +2" and the layout mock-up's C3 column; 12.2, family record; 12.3, `weapon{}` row, `requirements` row and `equip.slot` row; 12.8 (Later); 12.10, Ember Longsword example; 2, Non-goals, bullet "Weight, bulk, durability or wear" | The set follows weapons 11.1's slot rules: adds light + light, a focus alone, rod + shield, rod + off-hand focus, the staff and the two-handed instrument. The soft-threshold verdict and the mock-up read "Strained: needs Str +1". `weapon{}`, `focus{}` and family fields as in weapons 20.1. For weapons and foci, training lives on the family (`training: simple\|martial\|exotic`) and the item-level `requirements.training` is not used; the 12.10 example drops it. Strength requirements come from the family's `strengthClass` through `weapons.json`; weapon and focus items do not write them. A focus's `equip.slot` maps `off`, `main` and `two` to `off`, `main` and `twoHand` (bulky). 12.8 (Later): a weapon is destroyed when a `never` pool reaches 0 (Shatter). The Ember Longsword is re-expressed as an Ember Edge M2 card. The non-goal's citation credits durability to enemies 2 and 15.9 (stat model 6 covers only weights). | Lead |
+| W-6 | 5.2, places table, "Active weapon set" row; 8.2, fit verdict "cannot wear: needs Str +2" and the layout mock-up's C3 column; 12.2, family record; 12.3, `weapon{}` row, `requirements` row and `equip.slot` row; 12.8 (Later); 12.10, Ember Longsword example; 2, Non-goals, bullet "Weight, bulk, durability or wear" | The set follows weapons 11.1's slot rules: adds light + light, a focus alone, rod + shield, rod + off-hand focus, the staff and the two-handed instrument. The soft-threshold verdict and the mock-up read "Strained: needs Str +1". `weapon{}`, `focus{}` and family fields as in weapons 20.1. For weapons and foci, training lives on the family (`training: simple\|martial\|exotic`) and the item-level `requirements.training` is not used; the 12.10 example drops it. Strength requirements come from the family's `strengthClass` through `weapons.json`; weapon and focus items do not write them. A focus's `equip.slot` maps `off`, `main` and `two` to `off`, `main` and `twoHand` (bulky). 12.8 (Later): a weapon is destroyed when a `never` pool reaches 0 (Fracturing). The Ember Longsword is re-expressed as an Ember Edge M2 card. The non-goal's citation credits durability to enemies 2 and 15.9 (stat model 6 covers only weights). | Lead |
 | W-13 | 17, row 2 (armour and shields), "Must decide" | Add: the shield `bash{}` sub-record (1d4 B, Push, riderFlag false); the buckler grip recommendation; the Reliquary Shield with a `focus{}` sub-record; the tower shield (Later) (weapons 17.9). The armour design takes these as inputs. | Lead |
 
 **Conditions design (2026-11-16):**
@@ -1996,7 +2175,7 @@ the exact section it touches. W-1 and W-12 were approved by the client on
 | # | Section | Change | Approved by |
 |---|---|---|---|
 | W-7 | 18.9, Helped, Sources and Duration | Add source **Vex verb**, with a per-source fallback `untilSourceTurnEnd`, the wearer as source (it ends at the end of its next turn) | Lead |
-| W-8 | 10.1, Forced movement | New forced-movement kind **shift**: steps along the ring of squares adjacent to the source, each to an 8-adjacent ring square; never through the source; stops at units and walls; blocked by Rooted, Restrained and Anchored; never provokes; stops before hazards in M1 (weapons 7.6). All forced movement one hit causes sums to at most 3 squares and resolves once; collision damage applies only if a non-verb source contributed; verb-sourced movement moves a unit at most once per round (weapons 7.2 rule 4). | Lead |
+| W-8 | 10.1, Forced movement | New forced-movement kind **shift**: steps along the ring of squares adjacent to the source, each to an 8-adjacent ring square; never through the source; stops at units and walls; blocked by Tangled, Restrained and Anchored; never provokes; stops before hazards in M1 (weapons 7.6). All forced movement one hit causes sums to at most 3 squares and resolves once; collision damage applies only if a non-verb source contributed; verb-sourced movement moves a unit at most once per round (weapons 7.2 rule 4). | Lead |
 | W-9 | 18.3, Disarmed (Later) and Staggered | Disarmed: add monster cooldown sources; Fortitude save; advantage when two-handed; main hand only; the focus rule; the monster-side blocking rule only after the owner moves. Staggered's "shield bashes" source means a bash with the Bashing Rim property or a Technique, not the base bash. | Lead |
 | W-10 | 18.4, Prone, Sources | Topple's Prone is tagged `trip`; Topple at most once per round per target; condition verbs never fire on reactions | Lead |
 | W-11 | 18.9, Coated, Sources | `coating` consumables tagged `launcher` (special arrows and bolts) or `blade` (edge oils) (consumables design) | Lead |
@@ -2026,11 +2205,16 @@ left as they are (7.2 rule 9).
 ## 26. Depends on systems not yet designed
 
 - **Classes and offers:** concepts settled in
-  `2026-11-17-classes-concepts-design.md`; its stage 2 owes the binding
-  precision feature of each Dexterity-main class with its simulator
-  evidence, melee and launcher (6.4); each class's training lists; the
-  Technique option and the "verb training (family)" offer (7.3);
-  subclasses keyed to verbs or groups; disarm Techniques (Later). The M1
+  `2026-11-17-classes-concepts-design.md`; its stage 2 is taken up by the
+  four approved class designs (`2026-11-18-vanguard-class-design.md`,
+  `2026-11-18-shade-class-design.md`,
+  `2026-11-20-arcanist-class-design.md`,
+  `2026-11-20-herald-class-design.md`), which carry the binding precision
+  feature of each Dexterity-main class with its simulator evidence, melee
+  and launcher (6.4); each class's training lists; the Technique option
+  and the "verb training (family)" offer (7.3); subclasses keyed to verbs
+  or groups; disarm Techniques (Later) (cross-document comparison
+  2026-11-23, CC-49). The M1
   slice class is the Vanguard, so no staff ships in M1 **(change CL-13d)**.
 - **Armour and shields:** designed in
   `2026-11-17-armour-design.md`: the bash sub-record, buckler, Reliquary
@@ -2039,15 +2223,46 @@ left as they are (7.2 rule 9).
 - **Consumables:** consumables, scrolls and wands are settled in the
   consumables design (2026-11-17); coatings and Coated stay Later (W-11)
   **(change CN-26)**.
-- **Starting kits:** weapon sets per class and companion (items design 17,
-  row 3).
-- **Companions:** kits drawn from these families; the D-c playtest.
+- **Starting kits:** designed in `2026-11-23-starting-kits-design.md`:
+  weapon sets per class and companion (items design 17, row 3; starting
+  kits design 5.1, 5.2), the M3 kit variants drawn from the 17 families
+  (starting kits design 5.3) and V21 `StartingKits` (d) legality under
+  11.1 (starting kits design 9.2). Two requests to this document are
+  pending (starting kits design 11, 14.2; M3):
+  - **Hand crossbow:** confirm its loading and two-light legality
+    (11.1, 11.3 already allow it). Fallback: Close Shot's set A becomes
+    the hand crossbow alone, with `KitNoDominance` re-run.
+  - **Mundane orb and tome bases:** confirm mundane orb and tome base
+    records (17.8). Fallback: the Farcaster and Bookhand variants move
+    to M4.
+- **Companions:** designed in `2026-11-20-companions-design.md`: weapon
+  training per kit and the eight M2 kits drawn from these families
+  (companions design 8.3); the D-c fallback stays tied to the M2
+  companion-turn median (companions design 7.4; CMP-28) (cross-document
+  comparison 2026-11-23, CC-49).
+- **Pending (cross-document comparison 2026-11-23, CC-47):**
+  - **Launcher family floors** (Shade design 15, 18; N-5): answered
+    after the M2 parity run (6.4).
+  - **Item rolls content requests** (item rolls design 9.4; M2): Rare
+    weapon and focus records, ≥ 3 per lane × 7 lanes (minimum 2 per
+    lane) *(illustr.)*, with ITEMS; and about 4–6 value-2 majors for
+    blades, axes, polearms and spears (R-1). Until the majors land, R and
+    VR signatures stay on impact, launcher, focus or armour bases (item
+    rolls design 14.2, 4.13).
 - **Death and healing:** designed in `2026-11-17-death-healing-design.md`:
   the crit rule is settled (S-3, death and healing design 9). Every guard
   and parity figure here assumes SRD double dice for every unit (enemies
   25, S-3) **(change DH-48)**.
-- **Dungeon generation:** a cover decision in M2 (9.5); room shapes that
-  give corridors and open rooms (Skewer, Cleave, reach).
+- **Dungeon generation:** the M2 cover decision is made in
+  `2026-11-21-room-terrain-design.md` (room terrain design 6.1; TR-2,
+  TR-3); room shapes that give corridors and open rooms (Skewer, Cleave,
+  reach) are met by its Lane and 5×5 core (room terrain design 6.2.3).
+  The traps and locks design (`2026-11-21-traps-locks-design.md`) asks
+  for the Trigger Shot improvised-throw exception to 9.3 (TL-42, pending;
+  M2) and uses reach weapons for Pole it (traps and locks design 6.7).
+  The item rolls design (`2026-11-22-item-rolls-design.md`) sets how
+  18's properties are rolled on generated weapons and foci (18.1; IR-4,
+  M2; item rolls design 4.6).
 - **Enemy content:** the rust, acid and ooze types that Notch (Later), and
   monster cooldown disarms (Later).
 
@@ -2089,8 +2304,8 @@ None. Approved by the client on 2026-11-17.
 | Collision damage | None from verbs (W-8) |
 | Movement lockout | Once-per-round bounds and a lockout report |
 | Topple on reactions | Never on reactions |
-| Pike Set fired on disengage | Threatened-zone rule (8) |
-| AI could not value verbs | Static values and the Set-zone term (W-4, W-5); the reaction priority rule was later dropped for policies with filters |
+| Pike Set fired on disengage | Threatened-zone rule (8; Set renamed Receive, naming pass NP-12) |
+| AI could not value verbs | Static values and the Set-zone term (W-4, W-5; Set renamed Receive, naming pass NP-12); the reaction priority rule was later dropped for policies with filters |
 | Graze too strong | Once per turn, not on reaction misses; "adds proficiency" cut |
 | Exploit from team advantage | Team gates and the self-generated fallback |
 | Wrong parity baseline | Greatsword is the reference |
@@ -2124,8 +2339,8 @@ None. Approved by the client on 2026-11-17.
 | No attack-resolution order | The weapon attack pipeline (7.5) |
 | Skewer undefined at range and in edge cases | Line, next square and second-target rules (7.6) |
 | Reactions in mid-movement undefined | Step-wise movement, segments and triggers (8) |
-| Monster Exploit at maximum broke the floor-1 roster; no validation rates | Expected value in band and guards, as the client decided; `weapons.json` rates; worked checks for artillery and minions (6.3, 15.1) |
-| Set plus the unit's turn unchecked | Round guard for Set; pike soldiers from room level 2 (15.1, W-5) |
+| Monster Exploit at maximum broke the floor-1 roster; no validation rates | Expected value in band and guards, as the client decided; `weapons.json` rates; worked checks for artillery (role renamed Marksman, naming pass NP-12) and minions (6.3, 15.1) |
+| Set plus the unit's turn unchecked | Round guard for Set (renamed Receive, naming pass NP-12); pike soldiers from room level 2 (15.1, W-5) |
 | Ability choice undefined | Integer formula, knowledge state, recorded once (6.2) |
 | Turn scope of once-per-turn flags | Global turn ids; own-turn verbs listed (7.2 rules 3 and 10, 20.3) |
 | Movement facts too thin | Squares moved, adjacency at turn start, Lunge targets (7.6, 20.3) |
@@ -2144,9 +2359,9 @@ None. Approved by the client on 2026-11-17.
 | Training on items versus families | W-6 extended |
 | Missing change rows | W-4 (7.3 filter), W-5 (5.4 bullets, 15.5, Brute row), W-6 (mock-up), W-16 (Pitted Armour) |
 | Precision would break monster validation; gate used a median | Precision folded into monster flats; per-class gate; safety veto (6.5) |
-| Longbow falls with level | Per-family launcher floor; Aim rewritten to count for Exploit, keep-higher roll dropped (client question 4, option a, agreed 2026-11-17; 6.3, 6.6, 7.1); Hunter's Longbow takes Steady Aim |
+| Longbow falls with level | Per-family launcher floor; Aim rewritten to count for Exploit, keep-higher roll dropped (client question 4, option a, agreed 2026-11-17; 6.3, 6.6, 7.1); Hunter's Longbow takes Steady Aim (renamed Fowler's Longbow and Settled Aim, naming pass NP-12) |
 | Warhammer dominated the greatclub | Greatclub takes Topple; rule 13 ignores training |
-| M1 monster verbs could not fire solo | Warhammer soldier and sling artillery by default (15.3); party and monster trigger rows |
+| M1 monster verbs could not fire solo | Warhammer soldier and sling artillery by default (15.3; renamed sling marksman, naming pass NP-12); party and monster trigger rows |
 | Launcher safety unmeasured | Damage-taken report and the gate's safety veto (21.3) |
 | Dual wielding in M1 had one light family | Handaxe moved to M1 |
 | Exotic training empty until Later | Stated; builders do not gate on it (7.3) |
