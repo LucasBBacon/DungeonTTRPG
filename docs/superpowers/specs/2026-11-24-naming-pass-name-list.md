@@ -1,9 +1,11 @@
 # Naming Pass: Appendix B, the full harvested name list
 
-Companion to `2026-11-24-naming-pass-design.md` (its Appendix B, kept in its own file for size). Section 5 of the design governs any difference.
+Status: Draft, awaiting client approval, 2026-11-24 (with the design).
+
+Companion to `2026-11-24-naming-pass-design.md` (its Appendix B, kept in its own file for size). The client answered the design's six questions on 2026-11-24, each with the recommended option A **(agreed, Q1–Q6; design 0.2, 14.1)**; every outcome marked "(client)" below is that answer or follows it. **After the design check (2026-11-24), the matcher was re-run sense-aware** (lead's call, after the check; design 14.4): each " / " or comma part of a grouped entry, and each parenthetical sense (affix, kit, item family, hub station, property, check grade, boss action), is matched against the row of section 5 that names that sense in that source document, against the internal families of 4.8, against W-DREAM-1 (4.7) and against the waivers of 9.3. 127 outcomes were corrected (the entries the check listed among them), every waiver outcome now names its waiver id, every W-DREAM-1 entry reads "final under W-DREAM-1 (a)" or "(b)", and outcomes marked "(after the check)" carry the lead's calls of design 14.4. A script check now holds: no entry whose harvested sense matches a renamed sense in 5 reads "final as written".
 
 
-All 2,893 harvested entries, by source document, in the harvest's order: **name · category · harvest status · naming-pass outcome**. The outcome is matched by script against section 5 (exact name, base name, or any " / " part), against the internal families of 4.8 and against the waivers of 9.3; a handful of flagged entries carry an explicit ruling. "Final as written" means the name becomes final unchanged. Where a generic word has several senses, the outcome shown is for the harvested sense if a row in 5 names it; otherwise the kept sense. **Section 5 governs any difference.**
+All 2,893 harvested entries, by source document, in the harvest's order: **name · category · harvest status · naming-pass outcome**. Outcomes: "final as written" (the name becomes final unchanged); "renamed" or "renamed in part" (each renamed part named); "final under W-DREAM-1 (a)/(b)" or "kept with a recorded waiver (W-n)"; "internal only, never printed"; "retired", "deleted" or "held". A line (a sentence, not a name) is final under T4 and is not a W-DREAM-1 entry. The design's counts in 8.2 are computed from this file. **Section 5 governs any difference**; a difference found later is corrected here, not read past.
 
 #### B.1 dungeon-rpg (33)
 
@@ -26,8 +28,8 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - surprised · condition · approved-final · **final as written**
 - "ask me" (reaction setting) · report or setting · approved-final · **final as written**
 - pick-one-of-three offer · UI surface · approved-final · **final as written**
-- boon · system term · unclear · **final, kept with a recorded waiver (12, 9.3)**
-- starting boon · system term · approved-final · **final, kept with a recorded waiver (12, 9.3)**
+- boon · system term · unclear · **final, kept with a recorded waiver (W-11, 9.3)**
+- starting boon · system term · approved-final · **final, kept with a recorded waiver (W-11, 9.3)**
 - heirloom item · heirloom · unclear · **final as written**
 - background perk · system term · unclear · **renamed → Calling perk (client)**
 - content unlocks / milestones · system term · unclear · **final as written**
@@ -78,7 +80,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Leadership · system term · approved-final · **final as written**
 - Rally · verb or action · approved-final · **final as written**
 - Mastery · system term · approved-final · **final as written**
-- Tactician · ability · approved-final · **final, kept with a recorded waiver (12, 9.3)**
+- Tactician · ability · approved-final · **final, kept with a recorded waiver (W-22, 9.3)**
 - Second Nature · ability · unclear · **renamed → Old Hand**
 - Shove · verb or action · unclear · **final as written**
 - Grapple · verb or action · unclear · **final as written**
@@ -114,8 +116,8 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 #### B.3 ability-resource-model (60)
 
 - Slot Recovery · ability · approved-final · **renamed → Slot Renewal (client)**
-- Slot Recovery 2 · ability · approved-final · **final as written**
-- Second Wind · ability · unclear · **renamed → Dig In**
+- Slot Recovery 2 · ability · approved-final · **renamed → Slot Renewal 2 (client; agreed, Q5; upgrades keep their name, N-J)**
+- Second Wind · ability · unclear · **renamed → Patch Up (after the check)**
 - Techniques (Technique) · ability · unclear · **final as written**
 - Surge · ability · unclear · **renamed → Onslaught (client)**
 - Ember Burst · spell · unclear · **renamed → Cinder Spray**
@@ -148,7 +150,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - reaction attack · system term · approved-final · **final as written**
 - Swap weapon sets · verb or action · approved-final · **final as written**
 - Unarmed strike / Improvised attack / Off-hand attack · verb or action · approved-final · **final as written**
-- Reaction policies: always / ifItChangesOutcome / whilePoolAtLeastHalf / never / "ask me" · report or setting · approved-final · **final as written**
+- Reaction policies: always / ifItChangesOutcome / whilePoolAtLeastHalf / never / "ask me" · report or setting · approved-final · **renamed → Always / Only if it matters / While half full / Never / Ask me (ids internal; 5.9.14)**
 - cast-option defaults (castDefaults) · UI surface · unclear · **final as written**
 - Burst / Aura / Cone / Line (area shapes) · system term · approved-final · **final as written**
 - selective (tag) · system term · approved-final · **final as written**
@@ -185,15 +187,15 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Unyielding · condition · approved-final · **final as written**
 - Stunned · condition · approved-final · **final as written**
 - Held · condition · approved-final · **final as written**
-- Asleep · condition · approved-final · **final as written**
+- Asleep · condition · approved-final · **final under W-DREAM-1 (a)**
 - dormant · system term · approved-final · **final as written**
 - Banished · condition · approved-final · **final as written**
 - Commanded · condition · approved-final · **final as written**
-- Approach / Flee / Grovel / Halt · verb or action · approved-final · **renamed → Come (client)**
+- Approach / Flee / Grovel / Halt · verb or action · approved-final · **renamed → Come / Run / Crouch / Wait (client)**
 - Engulfed · condition · approved-final · **final as written**
 - Calcifying · condition · approved-final · **final as written**
 - Petrified · condition · approved-final · **final as written**
-- Dazed · condition · approved-final · **final, kept with a recorded waiver (12, 9.3)**
+- Dazed · condition · approved-final · **final, kept with a recorded waiver (W-20, 9.3)**
 - Addled · condition · placeholder · **final as written**
 - Distracted · condition · approved-final · **final as written**
 - Nauseated · condition · approved-final · **final as written**
@@ -270,19 +272,19 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Spotted · condition · approved-final · **final as written**
 - Blessed · condition · approved-final · **final as written**
 - Baned · condition · approved-final · **final as written**
-- Warded · condition · approved-final · **final, kept with a recorded waiver (12, 9.3)**
+- Warded · condition · approved-final · **final, kept with a recorded waiver (W-2, 9.3)**
 - Shielded · condition · approved-final · **final as written**
 - Fortified · condition · approved-final · **final as written**
 - Resisting (type) · condition · approved-final · **renamed → Resistant (type) on screen (client)**
-- Regenerating · condition · approved-final · **final, kept with a recorded waiver (12, 9.3)**
+- Regenerating · condition · approved-final · **final, kept with a recorded waiver (W-2, 9.3)**
 - Bolstered · condition · approved-final · **final as written**
 - Empowered · condition · approved-final · **final as written**
 - Coated · condition · approved-final · **final as written**
 - Heightened (ability) · condition · approved-final · **final as written**
 - Death-warded · condition · approved-final · **final as written**
 - Sanctified · condition · approved-final · **final as written**
-- Blurred · condition · approved-final · **final, kept with a recorded waiver (12, 9.3)**
-- Riposting · condition · approved-final · **final, kept with a recorded waiver (12, 9.3)**
+- Blurred · condition · approved-final · **final, kept with a recorded waiver (W-2, 9.3)**
+- Riposting · condition · approved-final · **final, kept with a recorded waiver (W-2, 9.3)**
 - Retaliating · condition · approved-final · **final as written**
 - Guarded · condition · approved-final · **final as written**
 - Raging · condition · approved-final · **renamed → Frenzied (client)**
@@ -314,7 +316,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Token / Minor / Major / Hard / Beneficial (tiers) · system term · unclear · **final as written**
 - Water square / Web square / Fire square / Oil slick square · room or terrain · approved-final · **final as written**
 - Immune · UI surface · approved-final · **final as written**
-- bloodied / low marks · UI surface · approved-final · **renamed → hurt (client)**
+- bloodied / low marks · UI surface · approved-final · **renamed in part: bloodied → hurt (client); low final as written**
 - Plate preview strings · UI surface · approved-final · **final as written**
 
 #### B.5 items-inventory (72)
@@ -364,8 +366,8 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Comparison strip · UI surface · approved-final · **final as written**
 - Gain · system term · approved-final · **final as written**
 - Suggested recipient (★) · UI surface · approved-final · **final as written**
-- ? dormant · Arcana 13 vs 15 · UI surface · approved-final · **final as written**
-- dormant (property) · system term · approved-final · **final as written**
+- ? dormant · Arcana 13 vs 15 · UI surface · approved-final · **renamed → "? untold · Arcana 13 vs 15" (client)**
+- dormant (property) · system term · approved-final · **renamed → untold (client)**
 - Arcana identified · UI surface · approved-final · **final as written**
 - Arcana now reveals … · UI surface · approved-final · **final as written**
 - cursed badge · UI surface · approved-final · **final as written**
@@ -382,10 +384,10 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Notable(s) · system term · unclear · **final as written**
 - Mundane / Common / Uncommon / Rare / Very rare · system term · approved-final · **final as written**
 - Signature item · item family · approved-final · **renamed → the boss's prize (display) (client)**
-- Heirloom · heirloom · approved-final · **final, kept with a recorded waiver (12, 9.3)**
+- Heirloom · heirloom · approved-final · **final, kept with a recorded waiver (W-11, 9.3)**
 - Capacity trinkets · item family · approved-final · **final as written**
 - Quality · system term · unclear · **final as written**
-- Embercleaver of ? · item · placeholder · **final as written**
+- Embercleaver of ? · item · placeholder · **renamed → Ember Longsword of ? (5.1.34)**
 - ember longsword (item.ember_longsword) · item · placeholder · **final as written**
 - Strider's Boots of ? · item · placeholder · **final as written**
 - Encumbered · condition · approved-final · **final as written**
@@ -410,27 +412,27 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - veteran (tint) · UI surface · unclear · **renamed → (no word: tint plus arrow; tooltip 'stronger than usual')**
 - Keen · other · unclear · **final as written**
 - Sightless N · other · unclear · **final as written**
-- Warded (affix) · enemy affix · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Warded (affix) · enemy affix · placeholder · **final, kept with a recorded waiver (W-2, 9.3)**
 - Plated · enemy affix · placeholder · **final as written**
 - Hardened · enemy affix · placeholder · **final as written**
-- Blurred · enemy affix · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Blurred · enemy affix · placeholder · **final, kept with a recorded waiver (W-2, 9.3)**
 - Swift · enemy affix · placeholder · **final as written**
 - Slippery · enemy affix · placeholder · **final as written**
 - Pouncer · enemy affix · placeholder · **final as written**
 - Vampiric · enemy affix · placeholder · **renamed → Leeching**
 - Relentless · enemy affix · placeholder · **renamed → Undying**
-- Regenerating · enemy affix · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Regenerating · enemy affix · placeholder · **final, kept with a recorded waiver (W-2, 9.3)**
 - Volatile · enemy affix · placeholder · **final as written**
 - Thorned · enemy affix · placeholder · **renamed → Retaliating**
-- Riposting · enemy affix · placeholder · **final, kept with a recorded waiver (12, 9.3)**
-- Commanding · enemy affix · placeholder · **renamed → Banneret**
+- Riposting · enemy affix · placeholder · **final, kept with a recorded waiver (W-2, 9.3)**
+- Commanding · enemy affix · placeholder · **renamed → Exhorting (after the check)**
 - Hunter · enemy affix · placeholder · **renamed → Fixated**
 - Horn-bearer · enemy affix · placeholder · **final as written**
-- Bodyguard · enemy affix · placeholder · **final as written**
+- Bodyguard · enemy affix · placeholder · **renamed → Challenger (after the check)**
 - Protector (affix) · enemy affix · placeholder · **renamed → Guardian**
-- Honed · enemy affix · placeholder · **final as written**
+- Honed · enemy affix · placeholder · **renamed → Razored**
 - Venomous · enemy affix · placeholder · **final as written**
-- Chilling · enemy affix · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Chilling · enemy affix · placeholder · **final, kept with a recorded waiver (W-2, 9.3)**
 - Dread · enemy affix · placeholder · **final as written**
 - Unbreakable · enemy affix · placeholder · **renamed → Unbending**
 - Steadfast · enemy affix · placeholder · **renamed → Dauntless**
@@ -445,12 +447,12 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Cow (Cowed out of combat) · verb or action · approved-final · **final as written**
 - Steal · verb or action · approved-final · **final as written**
 - Search · verb or action · approved-final · **final as written**
-- Strike / Reposition / Shed / Command / Signature (boss actions) · verb or action · approved-final · **final as written**
+- Strike / Reposition / Shed / Command / Signature (boss actions) · verb or action · approved-final · **renamed in part: Strike → Attack, Command → Direct (client); Reposition, Shed and Signature final as written**
 - Boss action · system term · approved-final · **final as written**
 - Signature move (announced boss signature) · system term · approved-final · **final as written**
 - Quarry · system term · approved-final · **final as written**
 - Guile · system term · approved-final · **final as written**
-- Tactician · ability · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Tactician · ability · placeholder · **final, kept with a recorded waiver (W-22, 9.3)**
 - Intent reading / intent line · system term · approved-final · **final as written**
 - "Intent unreadable" · UI surface · unclear · **final as written**
 - "beyond your Perception" · UI surface · unclear · **final as written**
@@ -462,7 +464,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Plate (rank frame, role glyph, frame-strip tint, glint, ready marker) · UI surface · unclear · **final as written**
 - "Carries: …" · UI surface · approved-final · **final as written**
 - "Guards: cache" · UI surface · unclear · **final as written**
-- "Weak: Will" · UI surface · unclear · **final as written**
+- "Weak: Will" · UI surface · unclear · **renamed → "Poor save: Will"**
 - "Provoked: leaves post" (Provoked) · UI surface · unclear · **final as written**
 - Break-line pip bar ("Breaks: leader falls, or 2 more pips") · UI surface · unclear · **final as written**
 - Cowable glyph · UI surface · unclear · **final as written**
@@ -474,7 +476,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Dormant · system term · approved-final · **final as written**
 - Stationary · system term · approved-final · **final as written**
 - Patrolling · system term · approved-final · **final as written**
-- Alerted · system term · unclear · **final, kept with a recorded waiver (12, 9.3)**
+- Alerted · system term · unclear · **final, kept with a recorded waiver (W-5, 9.3)**
 - Engaged · system term · unclear · **final as written**
 - Pursuing · system term · unclear · **final as written**
 - Searching · system term · unclear · **final as written**
@@ -494,7 +496,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Automaton · system term · unclear · **internal only, never printed**
 - Boss (behaviour profile) · system term · unclear · **final as written**
 - Raider · system term · unclear · **internal only, never printed**
-- Protector (behaviour profile) · system term · unclear · **final as written**
+- Protector (behaviour profile) · system term · unclear · **internal only, never printed (4.8)**
 - Disruptor · system term · unclear · **internal only, never printed**
 - Commander · system term · unclear · **internal only, never printed**
 - Stalker · system term · unclear · **internal only, never printed**
@@ -588,14 +590,14 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Kneeguard Mail · item · unclear · **final as written**
 - Hushmail Hauberk · item · unclear · **renamed → Muffled Hauberk**
 - Gatewarden's Shield · item · unclear · **renamed → Wicket Shield**
-- Pass-Keeper's Shield · item · unclear · **renamed → Pass-Watch Shield**
+- Pass-Keeper's Shield · item · unclear · **renamed → Toll-Taker's Shield (after the check)**
 - Hailward Shield · item · unclear · **renamed → Hailstruck Shield**
 - Bellwarden's Mail · heirloom · unclear · **renamed → Hound-Collar Mail (client)**
 - Gale Gambeson · item · unclear · **final as written**
 - Knight's Plate · item · unclear · **renamed → Tourney Plate**
 - Pilgrim's Reliquary · item · unclear · **final as written**
 - Visored Helm · trinket · unclear · **final as written**
-- Warden's Coif (Unshaken) · trinket · unclear · **final as written**
+- Warden's Coif (Unshaken) · trinket · unclear · **final as written (Warden's Coif); its Unshaken property shows Unflinching (client)**
 - Unshaken · weapon or armour property · approved-final · **renamed → Unflinching (client)**
 - Barred Helm · trinket · unclear · **final as written**
 - Grappler's Gauntlets · trinket · unclear · **final as written**
@@ -606,7 +608,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Weathered Cloak · trinket · unclear · **renamed → Fleece-Lined Cloak (client)**
 - Grey Mantle · trinket · unclear · **final as written**
 - Hob-nailed Boots · trinket · unclear · **final as written**
-- Ember Ring · trinket · unclear · **final, kept with a recorded waiver (12, 9.3)**
+- Ember Ring · trinket · unclear · **final, kept with a recorded waiver (W-1, 9.3)**
 - Helm, hood, circlet, gloves, gauntlets, bracers, boots, cloak, amulet, ring, charm, capacity (trinket kinds) · item family · approved-final · **final as written**
 - Head, hands, feet, back, neck, finger (body locations) · system term · approved-final · **final as written**
 - Worn items · UI surface · approved-final · **final as written**
@@ -643,7 +645,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Flourish · verb or action · approved-final · **final as written**
 - Aim · verb or action · approved-final · **final as written**
 - Parry · verb or action · approved-final · **final as written**
-- Set · verb or action · approved-final · **final as written**
+- Set · verb or action · approved-final · **renamed → Receive (client)**
 - Graze · verb or action · approved-final · **final as written**
 - Pry · verb or action · approved-final · **final as written**
 - Puncture · verb or action · approved-final · **final as written**
@@ -711,7 +713,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Reach Out · ability · approved-final · **final as written**
 - Shape · ability · approved-final · **final as written**
 - Annotate · ability · approved-final · **final as written**
-- Spare · ability · approved-final · **final as written**
+- Spare · ability · approved-final · **renamed → Withhold (client)**
 - Loom · ability · approved-final · **final as written**
 - Carry · ability · approved-final · **final as written**
 - Reliquary Shield · item · approved-final · **final as written**
@@ -800,12 +802,12 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Headsman's Greataxe · item · approved-final · **final as written**
 - throwing knives / darts / throwing hammer (dagger skins) · item · unclear · **final as written**
 - Scimitar, cutlass, falchion, gladius, estoc, partisan, bo staff, khopesh, hookblade, katana, arming sword, bastard sword, zweihander, claymore, harpoon, morningstar · item · unclear · **final as written**
-- Soldier / Brute / Artillery / Minion / Skirmisher / Leader / raider / duellist / cultist minion / pike soldier / claw brute · enemy type · unclear · **renamed → Marksman (client)**
+- Soldier / Brute / Artillery / Minion / Skirmisher / Leader / raider / duellist / cultist minion / pike soldier / claw brute · enemy type · unclear · **renamed in part: Artillery → Marksman (client); Minion as a role → Swarmer, Minion stays the rank (client); the rest final as written**
 
 #### B.9 consumables (60)
 
 - Reprieve Phial · item · approved-final · **final as written**
-- talisman · item family · approved-final · **final as written**
+- talisman · item family · approved-final · **renamed → failsafe (display; the id `talisman` stays) (after the check)**
 - Reprieve ready · UI surface · unclear · **final as written**
 - lethal → Reprieve fires / will fire Reprieve on X · UI surface · unclear · **final as written**
 - Give (adjacent or within 5) · UI surface · unclear · **final as written**
@@ -830,17 +832,17 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Sticky Flask · consumable · placeholder · **final as written**
 - Weighted Net · consumable · placeholder · **final as written**
 - Thunderstone · consumable · placeholder · **renamed → Blowback Jar**
-- Venom Oil / Venom Arrows · consumable · placeholder · **renamed → Poison Oil**
-- Serrating Oil / Serrated Arrows · consumable · placeholder · **renamed → Serrating Arrows**
+- Venom Oil / Venom Arrows · consumable · placeholder · **renamed → Poison Oil / Poison Arrows**
+- Serrating Oil / Serrated Arrows · consumable · placeholder · **renamed in part: Serrated Arrows → Serrating Arrows; Serrating Oil final as written**
 - Fan of Cinders · spell · placeholder · **final as written**
-- Shockwave · spell · placeholder · **renamed → Groundswell**
+- Shockwave · spell · placeholder · **renamed → Upheaval (after the check)**
 - Trembling Word · spell · placeholder · **final as written**
 - Grasping Roots · spell · placeholder · **renamed → Grasping Weeds**
 - Jarring Whispers · spell · placeholder · **renamed → Grating Murmur**
 - Guiding Radiance · spell · placeholder · **renamed → Marking Light**
 - Withering Touch · spell · placeholder · **final as written**
 - Frost Shard · spell · placeholder · **final as written**
-- Mending Word · spell · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Mending Word · spell · placeholder · **final, kept with a recorded waiver (W-4, 9.3)**
 - Scorching Rays · spell · placeholder · **renamed → Rays (fire)**
 - Blinding Flash · spell · placeholder · **final as written**
 - Fireball · spell · placeholder · **renamed → Detonation (fire)**
@@ -858,10 +860,10 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Far Step · spell · placeholder · **final as written**
 - Elemental Endurance · spell · placeholder · **final as written**
 - Banishing · spell · placeholder · **renamed → Cast Out**
-- Wand of Sparks · item · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Wand of Sparks · item · placeholder · **final, kept with a recorded waiver (W-4, 9.3)**
 - Wand of Outlining · item · placeholder · **final as written**
 - Wand of Snaring · item · placeholder · **renamed → Wand of Fetters**
-- Wand of Rime Lance · item · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Wand of Rime Lance · item · placeholder · **final, kept with a recorded waiver (W-4, 9.3)**
 - Ward Draught · consumable · unclear · **final as written**
 - Courage draught / Freedom Draught / Clarity draught / Regeneration potion / Smoke Pellet / Frost bomb / Flash flask / glowdust / Acid flask / Smelling salts / Ember and Rime coatings · consumable · unclear · **final as written**
 
@@ -877,9 +879,9 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - charm (none) (card kind display) · UI surface · approved-final · **final as written**
 - knot, locket, token, torc, pendant, band (kind display words) · system term · unclear · **final as written**
 - Token (charm display word) · system term · flagged-to-naming-pass · **dropped as a display word; object noun shown; ◈ spoken "stored moment"; "Fob" in two item names**
-- talisman (dropped charm display word) · system term · approved-final · **final as written**
-- shape glyphs (⛨ prevent, ⟲ cost/reach/declared step, ✦ channel, ◈ token, ▸ button, ? dormant) · UI surface · unclear · **final as written**
-- ? dormant · Arcana 13 vs 14 (dormant line readout) · UI surface · unclear · **final as written**
+- talisman (dropped charm display word) · system term · approved-final · **retired as a charm display word (CA-12); the CN item family shows failsafe (after the check)**
+- shape glyphs (⛨ prevent, ⟲ cost/reach/declared step, ✦ channel, ◈ token, ▸ button, ? dormant) · UI surface · unclear · **final as written; "?" is spoken "untold" and ◈ "stored moment" (7.4; client)**
+- ? dormant · Arcana 13 vs 14 (dormant line readout) · UI surface · unclear · **renamed → "? untold · Arcana 13 vs 14" (client)**
 - Carries: amulet (life) (hover tell) · UI surface · unclear · **final as written**
 - ReactionCap / ButtonCap / DuplicateAnswer / AlreadyWarded / AlreadyWardedThisFight / TrinketHelpedLimit / CharmCaughtThisFight (greyed reasons) · UI surface · unclear · **final as written**
 - DeadLine (warning verdict) · UI surface · unclear · **final as written**
@@ -900,8 +902,8 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Deft · weapon or armour property · approved-final · **final as written**
 - Catcher's Bracers · item family · placeholder · **renamed → Courier's Bracers**
 - Catcher · weapon or armour property · placeholder · **renamed → Courier**
-- Clenching Gauntlets · item family · placeholder · **renamed → Iron-Grip Gauntlets**
-- Clench · weapon or armour property · placeholder · **renamed → Iron Grip**
+- Clenching Gauntlets · item family · placeholder · **renamed → Vicelike Gauntlets (after the check)**
+- Clench · weapon or armour property · placeholder · **renamed → Vicelike (after the check)**
 - Slinger's Bracers · item family · placeholder · **final as written**
 - Strider's Boots · item family · placeholder · **final as written**
 - Strider · weapon or armour property · approved-final · **final as written**
@@ -921,12 +923,12 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Groundsilk Cloak · item family · placeholder · **final as written**
 - Smoke Cloak · item family · placeholder · **final as written**
 - Antidote Locket · item family · placeholder · **final as written**
-- Antidote · weapon or armour property · placeholder · **renamed → Venomproof**
+- Antidote · weapon or armour property · placeholder · **final as written (Antidote kept once Antitoxin is Bitter Draught; 5.4.40, after the check)**
 - Graveward Amulet · item family · placeholder · **final as written**
 - Graveward · weapon or armour property · placeholder · **final as written**
 - Lifeline Pendant · item family · placeholder · **final as written**
 - Lifeline · weapon or armour property · placeholder · **final as written**
-- Emberward Amulet · item family · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Emberward Amulet · item family · placeholder · **final, kept with a recorded waiver (W-1, W-13, 9.3)**
 - Emberward · weapon or armour property · placeholder · **final as written**
 - Kinward Torc · item family · placeholder · **final as written**
 - Kinward · weapon or armour property · placeholder · **final as written**
@@ -936,7 +938,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Torc of Seasons · item family · placeholder · **renamed → Seasonal Torc**
 - Stillmind Pendant · item family · placeholder · **final as written**
 - Bulwark Locket · item family · placeholder · **final as written**
-- Ember Ring · item family · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Ember Ring · item family · placeholder · **final, kept with a recorded waiver (W-1, 9.3)**
 - Ember · weapon or armour property · placeholder · **final as written**
 - Frost Ring · item family · placeholder · **final as written**
 - Frost · weapon or armour property · placeholder · **final as written**
@@ -966,7 +968,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 
 #### B.11 death-healing (39)
 
-- HP tier (slight / standard / sturdy) · system term · approved-final · **final as written**
+- HP tier (slight / standard / sturdy) · system term · approved-final · **renamed in part: standard → sound (client); slight and sturdy final as written**
 - Recovery · system term · approved-final · **final as written**
 - Danger band: Safe / Risky / Deadly · UI surface · approved-final · **final as written**
 - "unknown threats" marker · UI surface · unclear · **final as written**
@@ -977,7 +979,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - "floored this time" / bracketed "1" pip; "floored" preview label · UI surface · unclear · **final as written**
 - "up to X" Hunch entry preview, with a red cracked-heart lethal tag · UI surface · unclear · **final as written**
 - "HP after: X, until next rest" (move preview) · UI surface · unclear · **final as written**
-- "bloodied" plate mark (50%) · UI surface · placeholder · **final as written**
+- "bloodied" plate mark (50%) · UI surface · placeholder · **renamed → "hurt" plate mark (client; agreed, Q5)**
 - "low" plate mark (25%) · UI surface · placeholder · **final as written**
 - Downed marker text "gets up if you win, or at a rest" · UI surface · placeholder · **final as written**
 - Get-up preview ("already got up this fight") · UI surface · unclear · **final as written**
@@ -1001,27 +1003,27 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Fallen list · UI surface · unclear · **final as written**
 - Last Ward (retired) · weapon or armour property · approved-final · **final as written**
 - Last-Breath Charm (retired) · charm · approved-final · **final as written**
-- Second Wind (fighter-type rest tool) · ability · unclear · **renamed → Dig In**
+- Second Wind (fighter-type rest tool) · ability · unclear · **renamed → Patch Up (after the check)**
 - Death-Ward-shaped tier-3 class spell · spell · unclear · **final as written**
 - carried body / carried follower · system term · unclear · **final as written**
-- "the dream unravels" (release clean-end text) · system term · unclear · **final as written**
+- "the dream unravels" (release clean-end text) · system term · unclear · **final under W-DREAM-1 (a); two keys (NP-24)**
 
 #### B.12 classes-concepts (95)
 
 - Vanguard · class · placeholder · **final as written**
-- Shade · class · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Shade · class · placeholder · **final, kept with a recorded waiver (W-21, 9.3)**
 - Arcanist · class · placeholder · **final as written**
 - Herald · class · placeholder · **final as written**
-- Weaponmaster · subclass · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Weaponmaster · subclass · placeholder · **final, kept with a recorded waiver (W-22, 9.3)**
 - Bastion · subclass · placeholder · **renamed → Rampart (client)**
 - Wrecker · subclass · placeholder · **final as written**
 - Cutthroat · subclass · placeholder · **final as written**
 - Trapwright · subclass · placeholder · **final as written**
 - Swordsworn · subclass · placeholder · **final as written**
-- Binder · subclass · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Binder · subclass · placeholder · **final, kept with a recorded waiver (W-22, 9.3)**
 - Alembic · subclass · placeholder · **final as written**
-- Loremaster · subclass · placeholder · **final, kept with a recorded waiver (12, 9.3)**
-- Elementalist · subclass · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Loremaster · subclass · placeholder · **final, kept with a recorded waiver (W-22, 9.3)**
+- Elementalist · subclass · placeholder · **final, kept with a recorded waiver (W-22, 9.3)**
 - Dirge · subclass · placeholder · **final as written**
 - Hearth · subclass · placeholder · **final as written**
 - Hearthkeeper · ability · placeholder · **final as written**
@@ -1032,7 +1034,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Hew · ability · placeholder · **final as written**
 - Empower · ability · placeholder · **final as written**
 - Bite Deep · ability · placeholder · **final as written**
-- Second Wind · ability · flagged-to-naming-pass · **renamed → Dig In**
+- Second Wind · ability · flagged-to-naming-pass · **renamed → Patch Up (after the check)**
 - Surge · ability · placeholder · **renamed → Onslaught (client)**
 - Hold the Line · ability · placeholder · **renamed → Bar the Way**
 - Shieldwall · ability · placeholder · **final as written**
@@ -1065,7 +1067,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Flare · ability · placeholder · **final as written**
 - Knit · ability · flagged-to-naming-pass · **final as written**
 - Mote · ability · placeholder · **final as written**
-- Gust · ability · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Gust · ability · placeholder · **final, kept with a recorded waiver (W-17, 9.3)**
 - Interplay · ability · placeholder · **final as written**
 - Fused · ability · placeholder · **final as written**
 - Overchannel · ability · placeholder · **final as written**
@@ -1073,12 +1075,12 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Spellguard · class · unclear · **final as written**
 - Cadence · ability · placeholder · **final as written**
 - Spur · ability · placeholder · **renamed → Urge**
-- Rekindle · ability · flagged-to-naming-pass · **renamed → Take Heart**
+- Rekindle · ability · flagged-to-naming-pass · **renamed → Take Comfort (after the check)**
 - Harrowing Word · ability · placeholder · **final as written**
 - Plain Speech · system term · placeholder · **final as written**
 - Faltering · system term · placeholder · **final as written**
 - Undertone · system term · placeholder · **renamed → Ache**
-- Mending Word · spell · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Mending Word · spell · placeholder · **final, kept with a recorded waiver (W-4, 9.3)**
 - Marching calls · spell · placeholder · **final as written**
 - Scatter · ability · placeholder · **final as written**
 - Antiphon · ability · placeholder · **final as written**
@@ -1100,8 +1102,8 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Stormblood / Seer / Captain · class · unclear · **final as written**
 - Class talent / Spell card / Offer / Creation pick / Capstone · UI surface · unclear · **final as written**
 - aspect · system term · unclear · **final as written**
-- Complexity (Simple / Medium / Complex) · UI surface · unclear · **final as written**
-- HP tier labels (Sturdy / Standard / Slight) · system term · unclear · **final as written**
+- Complexity (Simple / Medium / Complex) · UI surface · unclear · **renamed → Straightforward / Involved / Intricate**
+- HP tier labels (Sturdy / Standard / Slight) · system term · unclear · **renamed in part: Standard → Sound (client); Sturdy and Slight final as written**
 - spellbook row · UI surface · unclear · **final as written**
 
 #### B.13 vanguard-class (55)
@@ -1143,7 +1145,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Shieldwall · ability · placeholder · **final as written**
 - Surge · ability · placeholder · **renamed → Onslaught (client)**
 - Techniques · system term · placeholder · **final as written**
-- Art (Surge Art) · system term · placeholder · **final as written**
+- Art (Surge Art) · system term · placeholder · **final as written (Art); shown as Onslaught Art (agreed, Q5)**
 - Rank (I / II / III) · system term · placeholder · **final as written**
 - Signature Technique · system term · placeholder · **final as written**
 - Free effect · system term · unclear · **final as written**
@@ -1164,7 +1166,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 
 #### B.14 shade-class (84)
 
-- Shade · class · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Shade · class · placeholder · **final, kept with a recorded waiver (W-21, 9.3)**
 - Cutthroat · subclass · placeholder · **final as written**
 - Trapwright · subclass · placeholder · **final as written**
 - Swordsworn · subclass · placeholder · **final as written**
@@ -1218,7 +1220,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Wedge · ability · placeholder · **final as written**
 - Killing Ground · ability · placeholder · **final as written**
 - Drag Line · ability · placeholder · **final as written**
-- Trick Shot · ability · placeholder · **renamed → Bank Shot**
+- Trick Shot · ability · placeholder · **renamed → Foul Play (after the check)**
 - Tripline · ability · placeholder · **final as written**
 - Caught Out · ability · placeholder · **renamed → Unbraced**
 - Trigger Shot · verb or action · unclear · **final as written**
@@ -1241,8 +1243,8 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Lie in Wait · ability · unclear · **final as written**
 - Gloom squares · room or terrain · unclear · **final as written**
 - Vault · verb or action · unclear · **final as written**
-- Blades (kit) · item family · placeholder · **final as written**
-- Launcher (kit) · item family · placeholder · **final as written**
+- Blades (kit) · item family · placeholder · **renamed → Twin Blades**
+- Launcher (kit) · item family · placeholder · **renamed → Bow and Blade**
 - Ladder preview lines · UI surface · placeholder · **final as written**
 - Tricks row pip display · UI surface · placeholder · **final as written**
 - Seam and Coup · other · unclear · **final as written**
@@ -1252,23 +1254,23 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 #### B.15 arcanist-class (91)
 
 - Arcanist · class · placeholder · **final as written**
-- Binder · subclass · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Binder · subclass · placeholder · **final, kept with a recorded waiver (W-22, 9.3)**
 - Alembic · subclass · placeholder · **final as written**
-- Loremaster · subclass · placeholder · **final, kept with a recorded waiver (12, 9.3)**
-- Elementalist · subclass · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Loremaster · subclass · placeholder · **final, kept with a recorded waiver (W-22, 9.3)**
+- Elementalist · subclass · placeholder · **final, kept with a recorded waiver (W-22, 9.3)**
 - Mote · ability · placeholder · **final as written**
 - Mote key · system term · placeholder · **final as written**
-- Gust · ability · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Gust · ability · placeholder · **final, kept with a recorded waiver (W-17, 9.3)**
 - Sculpt · ability · flagged-to-naming-pass · **renamed → Whittle**
-- Sculpt II · ability · placeholder · **final as written**
-- Selective / Widen / Charge (Sculpt modes) · ability · placeholder · **final as written**
+- Sculpt II · ability · placeholder · **renamed → Whittle II (N-J)**
+- Selective / Widen / Charge (Sculpt modes) · ability · placeholder · **renamed in part: Charge → Load; Selective and Widen final as written (modes of Whittle)**
 - Weft · system term · placeholder · **final as written**
 - Flare · ability · placeholder · **final as written**
 - Flare II · ability · placeholder · **final as written**
 - Knit · ability · placeholder · **final as written**
 - Overchannel · ability · placeholder · **final as written**
 - Fused · ability · placeholder · **final as written**
-- Slot Recovery 2 · ability · placeholder · **final as written**
+- Slot Recovery 2 · ability · placeholder · **renamed → Slot Renewal 2 (client; agreed, Q5; upgrades keep their name, N-J)**
 - Interplay · ability · placeholder · **final as written**
 - Interplay mark · system term · placeholder · **final as written**
 - Temper · ability · placeholder · **final as written**
@@ -1335,7 +1337,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Conflux / Pair Conflux / Ionised · ability · placeholder · **final as written**
 - Lace / Fork / Quickcast · ability · placeholder · **final as written**
 - Insulate · ability · unclear · **final as written**
-- Slumber / Hushing / Holding / Banishing / Flicker Step / Far Step / Elemental Endurance / Quench · spell · placeholder · **renamed → Drowse**
+- Slumber / Hushing / Holding / Banishing / Flicker Step / Far Step / Elemental Endurance / Quench · spell · placeholder · **renamed in part: Slumber → Drowse (client: follows Q1); Holding → Arrest (merged); Banishing → Cast Out; Hushing, Flicker Step, Far Step, Elemental Endurance and Quench final as written**
 - Recommended / Expert badges · UI surface · unclear · **final as written**
 - Pair cards · UI surface · unclear · **final as written**
 - Last-slot confirmation · UI surface · unclear · **final as written**
@@ -1371,12 +1373,12 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Underfoot · ability · placeholder · **final as written**
 - Knife Work · ability · placeholder · **final as written**
 - Poultice · ability · placeholder · **final as written**
-- Deeds · UI surface · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Deeds · UI surface · placeholder · **final, kept with a recorded waiver (W-11, 9.3)**
 - Veteran · report or setting · placeholder · **final as written**
 - Parting Word · other · placeholder · **final as written**
 - Meet at camp · verb or action · unclear · **final as written**
 - Send home · verb or action · unclear · **final as written**
-- Carried hire · system term · unclear · **renamed → Held-over hire**
+- Carried hire · system term · unclear · **renamed → Returning hire (after the check)**
 - Hire / swap · system term · unclear · **final as written**
 - Gap card (card A) · system term · unclear · **final as written**
 - Free cards · system term · unclear · **final as written**
@@ -1390,12 +1392,12 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Accept-rest-of-turn key · UI surface · unclear · **final as written**
 - First-recruit beat · other · unclear · **final as written**
 - Recruiter's Eye · ability · unclear · **final as written**
-- Protector / Tempo / Control / Skills / Striker / Area / Ward (role tags) · UI surface · unclear · **final as written**
+- Protector / Tempo / Control / Skills / Striker / Area / Ward (role tags) · UI surface · unclear · **renamed in part: Protector → Defender, Ward → Buffer; Tempo, Control, Skills, Striker and Area final as written**
 - Medic (badge) · UI surface · unclear · **final as written**
 - Lone Road milestones ('Win on the Lone Road', 'Win with at most one companion', 'Beat the floor-2 boss with no companions', 'Win with all four classes in the party') · report or setting · unclear · **final as written**
 - 'Unsellable: kit' · UI surface · unclear · **final as written**
 - 'Can be Downed, never killed' · UI surface · unclear · **final as written**
-- Iron Rim / Birch Handle / Waxed String / Worn Scabbard / Brass Pommel / Green Bark / Ochre Daub / Boss Nail · item · placeholder · **renamed → Banded Face**
+- Iron Rim / Birch Handle / Waxed String / Worn Scabbard / Brass Pommel / Green Bark / Ochre Daub / Boss Nail · item · placeholder · **renamed in part: Iron Rim → Banded Face, Waxed String → Linen Whipping, Worn Scabbard → Old Scabbard, Green Bark → Green Wood, Boss Nail → Domed Nail; Birch Handle, Brass Pommel and Ochre Daub final as written**
 - Brask (example generated name, 'Fell with: Brask the Gatekeeper') · companion · unclear · **final as written**
 
 #### B.17 herald-class (89)
@@ -1467,7 +1469,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - side by side · system term · unclear · **final as written**
 - the three beats: Scare or steady / Speak / Step · system term · unclear · **final as written**
 - tolled · system term · unclear · **final as written**
-- Shield kit / Totem kit · UI surface · unclear · **renamed → Shield hand**
+- Shield kit / Totem kit · UI surface · unclear · **renamed → Shield hand / Focus hand (Totem kit; agreed, Q2)**
 - Brennan · NPC · unclear · **renamed → Brask**
 - Heartening Cry · spell · placeholder · **final as written**
 - Inspire · spell · placeholder · **final as written**
@@ -1511,7 +1513,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Party open / close door verbs · verb or action · unclear · **final as written**
 - Footsteps glyph / 'passing' · UI surface · unclear · **final as written**
 - Forecourt · room or terrain · placeholder · **final as written**
-- Sanctum · place · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Sanctum · place · placeholder · **final, kept with a recorded waiver (W-8, 9.3)**
 - Stairhead · room or terrain · flagged-to-naming-pass · **renamed → the Downstair**
 - Alcove · room or terrain · placeholder · **final as written**
 - Landmark · room or terrain · placeholder · **final as written**
@@ -1532,7 +1534,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Signature room · room or terrain · unclear · **final as written**
 - Compass clock (Landmark clock) · room or terrain · placeholder · **final as written**
 - Universal glyphs: Hairline tell, Squeeze glyph, Grille rim glyph, Latch 'no handle, barred beyond', padlock decal, Arch threshold seam · UI surface · unclear · **final as written**
-- Cell Zero (Cell Zero door) · place · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Cell Zero (Cell Zero door) · place · placeholder · **final, kept with a recorded waiver (W-23, 9.3)**
 - Music-box clearing · place · placeholder · **final as written**
 - Two Wings (H) · place · placeholder · **renamed → Split Block**
 - Three Wings (E) · place · placeholder · **final as written**
@@ -1575,7 +1577,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Backstage ring / back lot / big top / plaza · place · placeholder · **final as written**
 - The Horseshoe · place · placeholder · **final as written**
 - Two Sittings · place · placeholder · **final as written**
-- The Long Table · place · placeholder · **renamed → Banquet Run**
+- The Long Table · place · placeholder · **renamed → The Groaning Board (after the check)**
 - The Cellar Run · place · placeholder · **final as written**
 - High Table · place · placeholder · **final as written**
 - Kitchen hub / hall bays / servery ring / pantries / service passages · place · placeholder · **final as written**
@@ -1592,16 +1594,16 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Wardrobe Way · place · placeholder · **final as written**
 - Foot of the Bed · place · placeholder · **final as written**
 - Moonward · place · placeholder · **final as written**
-- Hem ring / hem of the blanket / bed clearing / pillow rooms · place · placeholder · **final as written**
+- Hem ring / hem of the blanket / bed clearing / pillow rooms · place · placeholder · **final in part: Hem ring and hem of the blanket final as written; bed clearing and pillow rooms final under W-DREAM-1 (b) (after the check)**
 - Gaol Portal skins: archway, clock-face cell door, ward door, cell bars over glass, drain crawl, hatch, iron leaf · room or terrain · placeholder · **final as written**
-- Kennel Portal skins: thicket gap, boarded hurdle, lodge door, kennel mesh, deer-run, trap hatch, lodge doors · room or terrain · placeholder · **final as written**
-- Wake Portal skins: gallery arch, panelled door, drawn curtain, crypt lattice, servants' crawl, hatch, crypt slab · room or terrain · placeholder · **final as written**
+- Kennel Portal skins: thicket gap, boarded hurdle, lodge door, kennel mesh, deer-run, trap hatch, lodge doors · room or terrain · placeholder · **renamed in part: lodge doors → great-hall doors; the rest final as written**
+- Wake Portal skins: gallery arch, panelled door, drawn curtain, crypt lattice, servants' crawl, hatch, crypt slab · room or terrain · placeholder · **renamed in part: drawn curtain → drawn arras (after the check); the rest final as written**
 - Choir Portal skins: bay arch, sluice door, choir-screen mesh, flooded culvert, hatch, quire doors · room or terrain · placeholder · **final as written**
 - Silk Portal skins: aisle mouth, reading-room door, catalogue mesh, shelf gap, book-lift, archive leaf · room or terrain · placeholder · **final as written**
-- Carnival Portal skins: tent mouth, wagon door, booth door, tent flap, ticket-window mesh, under-stage crawl, trap hatch, big-top curtain wall · room or terrain · placeholder · **final as written**
+- Carnival Portal skins: tent mouth, wagon door, booth door, tent flap, ticket-window mesh, under-stage crawl, trap hatch, big-top curtain wall · room or terrain · placeholder · **renamed in part: big-top curtain wall → big-top canvas wall; the rest final as written**
 - Supper Portal skins: bay arch, service-screen door, serving-hatch mesh, under-table crawl, dumbwaiter, dining-hall doors · room or terrain · placeholder · **final as written**
 - Gut Portal skins: tube mouth, sphincter, villus mesh, fold crawl, valve, pylorus · room or terrain · placeholder · **final as written**
-- Heart Portal skins: furniture gap, wardrobe door, bed hanging, crib bars over glass, toy-fort tunnel, drawer slide · room or terrain · placeholder · **final as written**
+- Heart Portal skins: furniture gap, wardrobe door, bed hanging, crib bars over glass, toy-fort tunnel, drawer slide · room or terrain · placeholder · **renamed in part: bed hanging → canopy valance, crib bars over glass → rail bars over glass (after the check); the rest final as written**
 - 'On Watch' Omen · other · unclear · **final as written**
 - Spyhole / Peer · verb or action · unclear · **final as written**
 - Minimap (schematic room-node map) · UI surface · unclear · **final as written**
@@ -1610,14 +1612,14 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 
 - Gaol of Small Hours (the Gaol) · theme or floor · placeholder · **final as written**
 - Kennel Wood · theme or floor · placeholder · **final as written**
-- The Endless Wake (the Wake) · theme or floor · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- The Endless Wake (the Wake) · theme or floor · placeholder · **final under W-DREAM-1 (b)**
 - The Drowned Choir (the Choir) · theme or floor · placeholder · **final as written**
 - The Silk Archive (the Silk) · theme or floor · placeholder · **renamed → The Cobweb Archive (short form: the Archive) (client)**
 - The Carnival of the Last Evening (the Carnival) · theme or floor · placeholder · **final as written**
 - The Long Supper (the Supper) · theme or floor · placeholder · **final as written**
 - The Gut of the World (the Gut) · theme or floor · placeholder · **final as written**
-- The Dreamer's Heart (the Heart) · theme or floor · placeholder · **final, kept with a recorded waiver (12, 9.3)**
-- the Dreamer · other · placeholder · **final as written**
+- The Dreamer's Heart (the Heart) · theme or floor · placeholder · **final under W-DREAM-1 (b)**
+- the Dreamer · other · placeholder · **final only inside The Dreamer's Heart (W-DREAM-1 (b)) and in lines (T4); never a standalone name (after the check)**
 - Mirror Court · theme or floor · placeholder · **final as written**
 - Ossuary Opera (Opera) · theme or floor · placeholder · **final as written**
 - Moth Wedding · theme or floor · placeholder · **final as written**
@@ -1628,36 +1630,36 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Night Market · theme or floor · placeholder · **renamed → Lantern Market**
 - Marionette Grove (Strung Marionette) · theme or floor · placeholder · **final as written**
 - Ledger Halls · theme or floor · placeholder · **final as written**
-- The Waking City · theme or floor · placeholder · **retired / held: (held, gated before M4)**
+- The Waking City · theme or floor · placeholder · **held (gated until M4; waiver W-DREAM-HOLD-1; client, Q1)**
 - Shallows · theme or floor · placeholder · **final as written**
 - Middle Dream · theme or floor · placeholder · **renamed → Midwater**
 - Deep · theme or floor · placeholder · **final as written**
 - Heart (act) · theme or floor · placeholder · **final as written**
 - Two Doors · system term · placeholder · **final as written**
 - Door A / Door B · UI surface · placeholder · **final as written**
-- Last Hollow / the Last Hollow choice · place · placeholder · **final as written**
+- Last Hollow / the Last Hollow choice · place · placeholder · **final as written (kept; client, Q3)**
 - Stratum Card · UI surface · placeholder · **final as written**
-- Dream track · UI surface · placeholder · **final, kept with a recorded waiver (12, 9.3)**
-- the road not taken · UI surface · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Dream track · UI surface · placeholder · **final under W-DREAM-1 (a)**
+- the road not taken · UI surface · placeholder · **final, kept with a recorded waiver (W-9, 9.3)**
 - Camp next-floor card / door cards / final-boss card / run-start card · UI surface · unclear · **final as written**
 - Keepsakes · system term · placeholder · **renamed → Souvenirs**
 - Antechamber · room or terrain · placeholder · **renamed → Forecourt (on screen; antechamber stays an id)**
 - Antechamber Catch-up · system term · placeholder · **renamed → Forecourt Top-up**
-- ahead of the dream · UI surface · placeholder · **final as written**
+- ahead of the dream · UI surface · placeholder · **renamed → the Forecourt Top-up line (5.3.32)**
 - Strata Draw · system term · placeholder · **final as written**
 - Nightmare tiers · system term · placeholder · **renamed → Peril tiers (client)**
 - Perilous Door · system term · placeholder · **final as written**
 - Omens · system term · placeholder · **final as written**
 - Seams · system term · placeholder · **final as written**
-- Dream Fragments · system term · placeholder · **final as written**
+- Dream Fragments · system term · placeholder · **renamed → Fragments (after the check)**
 - Lucid Key · item · placeholder · **renamed → the Clear Key**
 - Other Dreamers · event or curiosity · placeholder · **renamed → Strangers**
 - Theme milestone marks · system term · unclear · **final as written**
 - Law (theme signature mechanic) / Obsession · system term · placeholder · **final as written**
 - Lockdown · theme or floor · placeholder · **final as written**
-- bile square · room or terrain · placeholder · **final as written**
+- bile square · room or terrain · placeholder · **renamed → gall square (after the check)**
 - Grim Surreal · other · approved-final · **final as written**
-- you did not wake / Some go down; few wake. / The dream remembers you · other · unclear · **final as written**
+- you did not wake / Some go down; few wake. / The dream remembers you · other · unclear · **final under W-DREAM-1 (a) ("You did not wake"); the other two are lines (T4)**
 - the Bureau of the Dead / a dead god's sunken tomb · other · placeholder · **final as written**
 - Jailers and Inmates · faction · placeholder · **final as written**
 - Inmate · enemy type · placeholder · **final as written**
@@ -1698,7 +1700,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - The Executor of the Will · boss · placeholder · **final as written**
 - Clout · ability · placeholder · **final as written**
 - Sob · ability · placeholder · **final as written**
-- Wail · ability · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Wail · ability · placeholder · **final, kept with a recorded waiver (W-6, 9.3)**
 - Eulogy · ability · placeholder · **final as written**
 - Last Rites · ability · placeholder · **renamed → Final Respects**
 - Chorister · enemy type · placeholder · **final as written**
@@ -1729,7 +1731,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Redaction · ability · placeholder · **final as written**
 - Shh · ability · placeholder · **final as written**
 - Index Card · ability · placeholder · **final as written**
-- Cross-Reference · ability · placeholder · **final as written**
+- Cross-Reference · ability · placeholder · **renamed → Footnote (the boss's; the Loremaster keeps Cross-Reference)**
 - Roustabout · enemy type · placeholder · **final as written**
 - Knife-Thrower · enemy type · placeholder · **final as written**
 - Lion-Tamer · enemy type · placeholder · **final as written**
@@ -1768,23 +1770,23 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - The Appetite · boss · placeholder · **final as written**
 - Gulp · ability · placeholder · **final as written**
 - Sporecloud · ability · placeholder · **final as written**
-- Swallow · ability · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Swallow · ability · placeholder · **final, kept with a recorded waiver (W-6, 9.3)**
 - Digest · ability · placeholder · **final as written**
 - Figment · enemy type · placeholder · **renamed → Shadow-Puppet**
-- Sleepwalker · enemy type · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Sleepwalker · enemy type · placeholder · **final under W-DREAM-1 (b)**
 - Storybook Knight · enemy type · placeholder · **final as written**
 - Night-Mare · enemy type · placeholder · **renamed → Pale Mare**
-- Insomniac · enemy type · placeholder · **final, kept with a recorded waiver (12, 9.3)**
-- Lullabist · enemy type · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Insomniac · enemy type · placeholder · **final under W-DREAM-1 (b)**
+- Lullabist · enemy type · placeholder · **final under W-DREAM-1 (b)**
 - Mother-Shape · enemy type · placeholder · **final as written**
 - The Night Governess · boss · placeholder · **final as written**
-- The Rousing Engine · boss · placeholder · **final, kept with a recorded waiver (12, 9.3)**
-- The Lullaby · boss · placeholder · **final as written**
+- The Rousing Engine · boss · placeholder · **final, kept with a recorded waiver (W-10, 9.3)**
+- The Lullaby · boss · placeholder · **final under W-DREAM-1 (b)**
 - Lullaby (ability) · ability · placeholder · **renamed → Soft Song (Lullabist ability only)**
 - Clangour · ability · placeholder · **final as written**
-- Tuck In (fallback Smother) · ability · placeholder · **final as written**
+- Tuck In (fallback Smother) · ability · placeholder · **final as written (Tuck In); fallback Smother → Tuck Tight (after the check)**
 - Reveille · ability · placeholder · **final as written**
-- Grim-reading renames: tomb-wisp, entranced votary, Oathbroken knight, tomb-steed, vigil-keeper, vigil-singer, tomb-matron, the Shroud-Keeper, the Tomb Clock · enemy type · placeholder · **final as written**
+- Grim-reading renames: tomb-wisp, entranced votary, Oathbroken knight, tomb-steed, vigil-keeper, vigil-singer, tomb-matron, the Shroud-Keeper, the Tomb Clock · enemy type · placeholder · **renamed in part: Oathbroken knight → Faithless knight; the rest final as written**
 - Shardling · enemy type · placeholder · **final as written**
 - Doppel (Mirror Court opener) · enemy type · unclear · **renamed → Reflection**
 - Netcaster · enemy type · placeholder · **final as written**
@@ -1844,14 +1846,14 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - "aligned to hazard" · UI surface · unclear · **final as written**
 - Lamp-oil keg (Carnival) · item · placeholder · **final as written**
 - Swollen sac (Gut) · item · placeholder · **final as written**
-- M3 Keg skins: cistern butt, ink cask, frost-wine cask, dust pillow · item · placeholder · **final as written**
+- M3 Keg skins: cistern butt, ink cask, frost-wine cask, dust pillow · item · placeholder · **final in part: dust pillow final under W-DREAM-1 (b) (after the check); the rest final as written**
 - Thorn-rose vines · hazard · placeholder · **final as written**
 - Theme kit skins (Furnishings): filing crates, lidded pails, tally desk, laundry cart, hay bales, feed barrels, meat cart, wreath trestles, draped side tables, lectern, hymnal crates, kneeler benches, cantor's desk, hymn cart, returns trolleys, paper bales, book cart, crates, costume trunks, beast crates, balancing ball, serving trolley, linen presses, tenant stools, lidded crocks, rent chests, toy blocks, toy chest, toy cart, giant ball · room or terrain · placeholder · **final as written**
 - Hazard skins: storm-glass pipe face, fallen-bell face, lamp-sconce face, nib-rack face, knife-wheel face, braziers, plate-warmer braziers, boiling tureen, carving-station face, grinding-molar face, acid-scald fold, fireplace-grate face, pincushion face · hazard · placeholder · **final as written**
 - Harm skins: broken storm glass, spilled nibs, broken bottles, shattered crystal, bone shards · hazard · placeholder · **final as written**
 - Wheel of Knives · room or terrain · unclear · **final as written**
 - Landmark clock-case · room or terrain · unclear · **final as written**
-- Gas-aura monsters: Gut spore-bloat, Silk mildew moth, Heart sleeping-draught nurse · enemy type · placeholder · **final as written**
+- Gas-aura monsters: Gut spore-bloat, Silk mildew moth, Heart sleeping-draught nurse · enemy type · placeholder · **deleted in part: the Heart sleeping-draught nurse example is deleted (A.1; NP-10, NP-19); the rest final as written**
 - usesFurnishings kit tag · system term · placeholder · **final as written**
 - FurnishingNeverSeals / NoCheapKill / causedBy / terrainDigest / terrainKit / RoomTerrain (V9) / rulesKey / contactRate / PreviewHiddenDelta / FloorMinutesDelta and the 11.3 report names · report or setting · placeholder · **final as written**
 - Local id schemes TT, CV, KP, K1-K5, TN, TF, TB, TC · other · approved-final · **final as written**
@@ -1868,9 +1870,9 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - FallFloor · system term · placeholder · **final as written**
 - Groggy · condition · placeholder · **final as written**
 - Fall band · system term · placeholder · **final as written**
-- Dream step · system term · placeholder · **final, kept with a recorded waiver (12, 9.3)**
-- Dream card · UI surface · placeholder · **final, kept with a recorded waiver (12, 9.3)**
-- Dream tick · UI surface · placeholder · **final as written**
+- Dream step · system term · placeholder · **final under W-DREAM-1 (a)**
+- Dream card · UI surface · placeholder · **final under W-DREAM-1 (a)**
+- Dream tick · UI surface · placeholder · **internal only, never printed (4.8: the cue has no text)**
 - Stir (also Stirring) · system term · placeholder · **final as written**
 - Footprint · system term · unclear · **final as written**
 - Latent footprint · UI surface · placeholder · **final as written**
@@ -1892,7 +1894,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Plunge · room or terrain · placeholder · **final as written**
 - Tableau / Tableaux · system term · placeholder · **final as written**
 - Hazard points · system term · unclear · **final as written**
-- Strike (Stir part) · system term · unclear · **final as written**
+- Strike (Stir part) · system term · unclear · **internal only, never printed (4.8)**
 - Taint (Stir part) · system term · placeholder · **internal only, never printed**
 - Portal (Stir part) · system term · unclear · **final as written**
 - Mute round · system term · placeholder · **internal only, never printed**
@@ -1907,13 +1909,13 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Kick (Cord verb) · verb or action · unclear · **renamed → Knock**
 - Snatch · verb or action · placeholder · **final as written**
 - Let Go · verb or action · unclear · **final as written**
-- Swallow (in-combat) · other · unclear · **final, kept with a recorded waiver (12, 9.3)**
+- Swallow (in-combat) · other · unclear · **final, kept with a recorded waiver (W-6, 9.3)**
 - Rescue push · verb or action · unclear · **final as written**
 - Wading (deep water) · room or terrain · unclear · **final as written**
 - Struck vent / breathing vent · hazard · unclear · **final as written**
 - the ink press (Silk vent) · hazard · unclear · **final as written**
 - the spore pore (Gut vent) · hazard · unclear · **final as written**
-- the dust-pillow seam (Heart vent) · hazard · unclear · **final as written**
+- the dust-pillow seam (Heart vent) · hazard · unclear · **final under W-DREAM-1 (b) (after the check)**
 - High Water (Choir Mood) · system term · placeholder · **final as written**
 - Spring Tide (Choir Omen) · system term · placeholder · **renamed → King Tide**
 - Silence Kept (Silk Mood) · system term · placeholder · **final as written**
@@ -1922,8 +1924,8 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Encore (Carnival Omen) · system term · placeholder · **final as written**
 - Digestion (Gut Mood) · system term · placeholder · **final as written**
 - Fasting (Gut Omen) · system term · placeholder · **final as written**
-- Nearer Waking (Heart Mood) · system term · placeholder · **final, kept with a recorded waiver (12, 9.3)**
-- Fitful Sleep (Heart Omen) · system term · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Nearer Waking (Heart Mood) · system term · placeholder · **final under W-DREAM-1 (b)**
+- Fitful Sleep (Heart Omen) · system term · placeholder · **final under W-DREAM-1 (b)**
 - Last Orders · system term · placeholder · **final as written**
 - Second Sitting (Supper Omen) · system term · placeholder · **final as written**
 - Annex (guarded Dare garrison) · other · unclear · **final as written**
@@ -1931,16 +1933,16 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Turning face · hazard · unclear · **final as written**
 - Stoke / Stoker · verb or action · placeholder · **final as written**
 - floorborn (tag immunity) · enemy affix · placeholder · **final as written**
-- Dream Rules pages · UI surface · placeholder · **final as written**
+- Dream Rules pages · UI surface · placeholder · **final under W-DREAM-1 (a)**
 - Lull · other · placeholder · **final as written**
 - Contraptions / Unrest (rejected model labels) · other · unclear · **final as written**
 - Tide High · hazard · unclear · **renamed → Flood Stage**
-- The Bed Turns Over · hazard · flagged-to-naming-pass · **final under W-DREAM-1 (b) (Q1)**
+- The Bed Turns Over · hazard · flagged-to-naming-pass · **final under W-DREAM-1 (b) (client, Q1)**
 - The Drowned Nave (Choir tableau) · hazard · placeholder · **final as written**
 - The Carrel Rows (Silk tableau) · hazard · placeholder · **final as written**
 - The Fire-Eater's Pit (Carnival tableau) · hazard · placeholder · **final as written**
 - The Laid Table (Supper tableau) · hazard · placeholder · **final as written**
-- The Bile Low (Gut tableau) · hazard · placeholder · **final as written**
+- The Bile Low (Gut tableau) · hazard · placeholder · **renamed → The Gall Low (after the check)**
 - The Thorn Garden (Heart tableau) · hazard · placeholder · **final as written**
 - The Small Hour Strikes · hazard · placeholder · **final as written**
 - The Lockdown Lever · hazard · placeholder · **renamed → The Lockdown Crank**
@@ -1984,7 +1986,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - sphincter valve (Cord) · hazard · unclear · **final as written**
 - The Gullet · hazard · placeholder · **final as written**
 - The Acid Tide (and its valve) · hazard · placeholder · **final as written**
-- The Dark Under the Bed · hazard · placeholder · **final as written**
+- The Dark Under the Bed · hazard · placeholder · **final under W-DREAM-1 (b)**
 - The Dreamer Turns Over · hazard · flagged-to-naming-pass · **renamed → The Bed Turns Over (client)**
 - music box (Cord) · hazard · unclear · **final as written**
 - The Alarm Clock (Wind Back, Ring Now) · hazard · placeholder · **final as written**
@@ -2006,11 +2008,11 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 #### B.22 traps-locks (132)
 
 - Margin rule · system term · placeholder · **final as written**
-- Open / Jam / Botch (check grades) · system term · placeholder · **final as written**
-- Easy / Standard / Hard (DC tiers) · system term · placeholder · **final as written**
+- Open / Jam / Botch (check grades) · system term · placeholder · **renamed in part: Open → Smooth (after the check); Jam and Botch final as written**
+- Easy / Standard / Hard (DC tiers) · system term · placeholder · **renamed in part: Easy → Mild, Standard → Middling (after the check); Hard final as written**
 - Take time · verb or action · placeholder · **final as written**
 - Trap sense · system term · unclear · **final as written**
-- Revealed / Hunch / Hidden (detection grades) · system term · placeholder · **final as written**
+- Revealed / Hunch / Hidden (detection grades) · system term · placeholder · **renamed in part: Revealed → Found, Hidden → Unfound; Hunch final as written**
 - Hunch zone · UI surface · placeholder · **final as written**
 - Hunch stop · UI surface · placeholder · **final as written**
 - Hunch badge · UI surface · placeholder · **final as written**
@@ -2025,10 +2027,10 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Wide berth · system term · placeholder · **final as written**
 - Once Bitten · system term · placeholder · **final as written**
 - Opener rule · system term · unclear · **renamed → First-spring rule**
-- Device / Snare / Catch (trap families) · system term · placeholder · **final as written**
+- Device / Snare / Catch (trap families) · system term · placeholder · **renamed in part: Catch → Clasp; Device and Snare final as written (TL families)**
 - Set piece · system term · unclear · **final as written**
 - Lesson trap · system term · placeholder · **final as written**
-- Trigger kinds: plate, wire, trapdoor, glyph, catch, room, scent · system term · unclear · **final as written**
+- Trigger kinds: plate, wire, trapdoor, glyph, catch, room, scent · system term · unclear · **renamed in part: plate → pressure slab, catch → clasp; the rest final as written**
 - Consequence lock · system term · unclear · **final as written**
 - Plain (lock/container kind) · system term · placeholder · **final as written**
 - Crier (lock) · trap or lock · placeholder · **final as written**
@@ -2066,7 +2068,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Trap link · UI surface · placeholder · **final as written**
 - Cracked heart (lethal tag shape) · UI surface · placeholder · **final as written**
 - Trap state badges: armed, jammed, sprung, disarmed, party-armed · UI surface · unclear · **final as written**
-- Lock glyph set and states (sound-wave arcs, barb, door-with-exclamation, sigil, hourglass, key-tooth notch, text-line, supply/coin, threshold; intact, hanging, Jammed, splintered) · UI surface · unclear · **final as written**
+- Lock glyph set and states (sound-wave arcs, barb, door-with-exclamation, sigil, hourglass, key-tooth notch, text-line, supply/coin, threshold; intact, hanging, Jammed, splintered) · UI surface · unclear · **renamed in part: the state hanging → dangling (after the check); the rest final as written**
 - Lock card / rule card · UI surface · unclear · **final as written**
 - "Mechanics: Wax Key stocked at the vendor" (coverage-strip line) · UI surface · approved-final · **final as written**
 - Codex pages: "Natives know their floor; the house trusts its traps until one bites", "Device bodies never lie", "A padlock is a lock", "Boxed lurkers show their tell" · UI surface · unclear · **final as written**
@@ -2122,10 +2124,10 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Tenant's strongbox · trap or lock · unclear · **final as written**
 - Landlord's ledger lock · trap or lock · unclear · **final as written**
 - The Stomach · room or terrain · placeholder · **renamed → The Craw**
-- Lullaby Glyph · trap or lock · placeholder · **final, kept with a recorded waiver (12, 9.3)**
-- Hand Under the Bed · trap or lock · placeholder · **final as written**
+- Lullaby Glyph · trap or lock · placeholder · **final under W-DREAM-1 (b)**
+- Hand Under the Bed · trap or lock · placeholder · **final under W-DREAM-1 (b)**
 - Rattle Wire · trap or lock · placeholder · **final as written**
-- Darning Volley · trap or lock · placeholder · **final as written**
+- Darning Volley · trap or lock · placeholder · **final as written (not the SRD Volley job; 5.1.16)**
 - Plain diary lock · trap or lock · unclear · **final as written**
 - Nursery door · trap or lock · unclear · **final as written**
 - Night Nursery · room or terrain · placeholder · **renamed → The Airing Cupboard**
@@ -2140,18 +2142,18 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 
 #### B.23 loot-economy (41)
 
-- Dream's Due · system term · placeholder · **final, kept with a recorded waiver (12, 9.3)**
-- "The dream owes <name> something." (Stratum Card Due line) · UI surface · placeholder · **final as written**
-- "The dream's due: for <name>" (loot-summary tag), with its 'paid' state · UI surface · placeholder · **final as written**
+- Dream's Due · system term · placeholder · **final under W-DREAM-1 (a)**
+- "The dream owes <name> something." (Stratum Card Due line) · UI surface · placeholder · **final as written (a line, not a name; T4)**
+- "The dream's due: for <name>" (loot-summary tag), with its 'paid' state · UI surface · placeholder · **final under W-DREAM-1 (a) (Dream's Due)**
 - "<name> did not live to collect" · UI surface · placeholder · **final as written**
 - "another way" (sidegrade Due tag) · UI surface · placeholder · **final as written**
 - Viaticum · system term · placeholder · **renamed → Parting Fare (client)**
-- "Before the Heart's chamber, the dream sets out provisions: choose one" · UI surface · placeholder · **final as written**
+- "Before the Heart's chamber, the dream sets out provisions: choose one" · UI surface · placeholder · **final as written (a line, not a name; T4)**
 - Memento · item family · placeholder · **final as written**
 - "carried out of the Heart" (Memento caption) · UI surface · placeholder · **final as written**
 - memento wall · UI surface · placeholder · **final as written**
 - Grave Goods · report or setting · placeholder · **final as written**
-- "Still carried when the dream closed:" / "Carried out: ..." · UI surface · placeholder · **final as written**
+- "Still carried when the dream closed:" / "Carried out: ..." · UI surface · placeholder · **final as written (a line, not a name; T4)**
 - Treasure count ("Treasures: n") · system term · placeholder · **final as written**
 - "best remaining: <tier word>" · UI surface · placeholder · **final as written**
 - "+1 secret" · UI surface · placeholder · **final as written**
@@ -2161,17 +2163,17 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - "A heavy purse walks this floor" · UI surface · placeholder · **final as written**
 - "Carries: 12 coin" / coin-disc loot badge / merged 'loot' badge · UI surface · placeholder · **final as written**
 - Twin Coffer · item family · placeholder · **final as written**
-- "it was only a dream" · UI surface · placeholder · **final as written**
-- dreamed option · system term · placeholder · **final as written**
+- "it was only a dream" · UI surface · placeholder · **final as written (a line, not a name; T4)**
+- dreamed option · system term · placeholder · **final under W-DREAM-1 (a) (after the check)**
 - tier mark · UI surface · placeholder · **final as written**
 - "The door's gift" · UI surface · placeholder · **final as written**
 - Lock card wording ("holds a Rare weapon; by key, an Uncommon weapon"; "chosen for <name>"; "by key, an ordinary Uncommon weapon") · UI surface · placeholder · **final as written**
 - Wax-Key identity · system term · unclear · **final as written**
 - elite intel line · system term · unclear · **final as written**
 - "Salvage: 2" (salvage coin line) · UI surface · unclear · **final as written**
-- pressed-moth line ("in the Dreamer's Heart, coins are pressed moths") · UI surface · placeholder · **final as written**
+- pressed-moth line ("in the Dreamer's Heart, coins are pressed moths") · UI surface · placeholder · **final as written (a line, not a name; T4)**
 - "No camp after floor 5. Coin left at camp exit is lost." · UI surface · placeholder · **final as written**
-- "the Hollow ahead sells rare" / "unused since floor N" tag / coin ledger · UI surface · placeholder · **final as written**
+- "the Hollow ahead sells rare" / "unused since floor N" tag / coin ledger · UI surface · placeholder · **renamed → "the next camp sells rare" (agreed, Q3; 5.6.6); the tag and ledger final as written**
 - Steal preview · UI surface · unclear · **final as written**
 - The Wish · system term · placeholder · **final as written**
 - Tithe Bowl · system term · placeholder · **final as written**
@@ -2242,7 +2244,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - open zone · system term · placeholder · **final as written**
 - core and growth positions · system term · placeholder · **final as written**
 - contact round · system term · placeholder · **final as written**
-- start socket / socket classes (front, ward, back, overwatch, flank, nook, watch, table, blind) · system term · unclear · **final as written**
+- start socket / socket classes (front, ward, back, overwatch, flank, nook, watch, table, blind) · system term · unclear · **internal only, never printed (4.8)**
 - Pose grammar · other · placeholder · **final as written**
 - G1 Roll Call, G2 The Junction Desk, G3 The Shuffle, G4 Lights-Out, G5 Visiting Hour, G6 The Keyring Office · event or curiosity · placeholder · **final as written**
 - K1 The Huntsman's Stand, K2 Kennel Run, K3 Horn and Hounds, K4 The Strays, K5 Bracken Blind, K6 The Trophy Room · event or curiosity · placeholder · **final as written**
@@ -2252,7 +2254,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - CA1 The Show, CA2 The Fire-Eater's Pit, CA3 The Knife Act, CA4 The Booth Gallery, CA5 Carousel, CA6 The Tamer's Ring · event or curiosity · placeholder · **final as written**
 - SU1 Second Course, SU2 The Seating Plan, SU3 The Cellar Pour, SU4 Full Belly, SU5 The Carvers, SU6 The Service Hatch · event or curiosity · placeholder · **final as written**
 - GU1 Immune Sweep, GU2 Membrane, GU3 Rent Day, GU4 Burrow, GU5 Sated Den, GU6 Antibody Escort · event or curiosity · placeholder · **final as written**
-- H1 Sleepwalkers, H2 Story Time, H3 Knitting Circle, H4 Night Stable, H5 Nursery Den, H6 Bedpost Watch · event or curiosity · placeholder · **final as written**
+- H1 Sleepwalkers, H2 Story Time, H3 Knitting Circle, H4 Night Stable, H5 Nursery Den, H6 Bedpost Watch · event or curiosity · placeholder · **internal only, never printed (4.8: EP catalogue titles)**
 - Messenger · system term · placeholder · **final as written**
 - Call Post · system term · placeholder · **final as written**
 - Wake Order · system term · placeholder · **renamed → Alarm Order**
@@ -2301,7 +2303,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Truant hover "Carries: … · runs when a fight starts · gets away in <c0>" · UI surface · unclear · **final as written**
 - Run-record lines "Windfalls nabbed k of m" and "Got away: <tier word>" · report or setting · unclear · **final as written**
 - Steal preview row "Windfall: card (coin spills)" · UI surface · unclear · **final as written**
-- Hover "The dream's due: for <name>" · UI surface · unclear · **final as written**
+- Hover "The dream's due: for <name>" · UI surface · unclear · **final under W-DREAM-1 (a) (Dream's Due)**
 - Confiscation tin · item family · placeholder · **final as written**
 - Poacher's creel · item family · placeholder · **final as written**
 - Pen box · item · placeholder · **final as written**
@@ -2350,7 +2352,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Reverie · system term · placeholder · **internal only, never printed**
 - byname · system term · placeholder · **final as written**
 - Plain Gifts · system term · placeholder · **final as written**
-- What the dream kept · UI surface · placeholder · **final as written**
+- What the dream kept · UI surface · placeholder · **final under W-DREAM-1 (a)**
 - Verdict words: upgrade / another way / redundant / lesser / cannot use (glyphs ▲ ⇄ = ▽ ✕) · UI surface · placeholder · **final as written**
 - footer badge · UI surface · placeholder · **final as written**
 - fit line · UI surface · placeholder · **final as written**
@@ -2359,7 +2361,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - carried-use floater · UI surface · placeholder · **final as written**
 - reveal chime · system term · placeholder · **final as written**
 - Dormant name form "<Name> of ?" and suffix epithets (e.g. 'of the Whetstone', 'of the Bar') · system term · placeholder · **final as written**
-- Arcana readout "? dormant · Arcana 13 vs 15" · UI surface · placeholder · **final as written**
+- Arcana readout "? dormant · Arcana 13 vs 15" · UI surface · placeholder · **renamed → "? untold · Arcana 13 vs 15" (client)**
 - Provenance caption "Found in <theme>, floor N" · UI surface · placeholder · **final as written**
 - "Carried from the start" · UI surface · placeholder · **final as written**
 - Lock-card wording ("holds a Rare weapon; by key, an Uncommon weapon"; "chosen for <name>"; "an ordinary Uncommon weapon") · UI surface · approved-final · **final as written**
@@ -2382,11 +2384,11 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Wind-Down Hammer · item · placeholder · **final as written**
 - Authored signature lines: Shove-through, Long Skewer, Paired Throw, Driving, Shared Steadiness, Conduit, Floorer, Shadowed (authored) · ability · placeholder · **final as written**
 - Memento epitaphs ("Warming Pan, carried out of the Heart. Still warm." / "Wind-Down Hammer, carried out of the Heart. It has stopped.") · other · placeholder · **final as written**
-- Reverie lines (per theme, e.g. 'Its little dial shows a different hour than yours.') · other · placeholder · **final as written**
+- Reverie lines (per theme, e.g. 'Its little dial shows a different hour than yours.') · other · placeholder · **final as written (lines; the Reverie label is internal, 4.8)**
 - Theme stamps: striped shirt, collar buckle, lily, pipe stop, inkpot, ticket punch, assay mark, ribcage, rocking horse, rose tracery · other · placeholder · **final as written**
 - Wax-Key sibling · system term · placeholder · **final as written**
 - KinSwap · system term · unclear · **final as written**
-- Triad (Yours / Theirs / Wayward + fourth) · system term · unclear · **final as written**
+- Triad (Yours / Theirs / Wayward + fourth) · system term · unclear · **final as written (Triad); its Wayward part shows Windblown (agreed, Q3)**
 - Seen in Hand · system term · unclear · **final as written**
 - Element Echo · system term · unclear · **final as written**
 - new to your codex (badge) · UI surface · unclear · **final as written**
@@ -2414,14 +2416,14 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Afterword · UI surface · placeholder · **final as written**
 - Figure frame · system term · unclear · **final as written**
 - Leave · verb or action · unclear · **final as written**
-- Unwoken Roll · UI surface · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Unwoken Roll · UI surface · placeholder · **final under W-DREAM-1 (a)**
 - FactLedger · system term · unclear · **final as written**
 - F-LISTEN · system term · unclear · **final as written**
 - F-CACHE · system term · unclear · **final as written**
 - Easing · system term · placeholder · **final as written**
 - Testimony · system term · placeholder · **final as written**
 - Overtures · system term · placeholder · **final as written**
-- Provisos (Nightmare Provisos) · system term · placeholder · **final as written**
+- Provisos (Nightmare Provisos) · system term · placeholder · **final as written (Provisos); full form Peril Provisos (agreed, Q4)**
 - Omen Retelling · system term · placeholder · **final as written**
 - Night Usher · NPC · placeholder · **final as written**
 - choirmaster · NPC · unclear · **final as written**
@@ -2448,7 +2450,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - The Codicil · event or curiosity · placeholder · **final as written**
 - The Black Armband · event or curiosity · placeholder · **final as written**
 - Start the Clocks · event or curiosity · placeholder · **final as written**
-- The Wake for You · event or curiosity · placeholder · **final as written**
+- The Wake for You · event or curiosity · placeholder · **final under W-DREAM-1 (b) (after the check)**
 - The Lily Clock · event or curiosity · placeholder · **final as written**
 - The Receiving Line · event or curiosity · placeholder · **final as written**
 - The Funeral Programme · event or curiosity · placeholder · **final as written**
@@ -2494,7 +2496,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - The Chapel Being Digested · event or curiosity · placeholder · **final as written**
 - The Skirting Board · event or curiosity · placeholder · **final as written**
 - The High Window · event or curiosity · placeholder · **final as written**
-- The Bedpost Ladder · event or curiosity · placeholder · **final as written**
+- The Bedpost Ladder · event or curiosity · placeholder · **final under W-DREAM-1 (b) (after the check)**
 - The Coat Hooks by the Door (the Coat Hooks) · event or curiosity · placeholder · **final as written**
 - The Wall That Keeps Its Distance · event or curiosity · placeholder · **final as written**
 - The Pinned Notice · event or curiosity · placeholder · **final as written**
@@ -2543,8 +2545,8 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Offbeat (Off beat) · system term · placeholder · **final as written**
 - Lead beat · system term · placeholder · **final as written**
 - Downbeat · system term · placeholder · **final as written**
-- Device (arena Device) · system term · placeholder · **final as written**
-- Device payoff kinds: Cancel, Deny, Divide, Divert, Sate, Expose, Release · system term · unclear · **final as written**
+- Device (arena Device) · system term · placeholder · **renamed → Counterpiece**
+- Device payoff kinds: Cancel, Deny, Divide, Divert, Sate, Expose, Release · system term · unclear · **internal only, never printed (4.8)**
 - Guise · system term · placeholder · **final as written**
 - Rendition · system term · placeholder · **final as written**
 - Nightmare Rendition · system term · placeholder · **renamed → Peril Rendition (client)**
@@ -2567,11 +2569,11 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Prompts (Prompts on boss actions) · system term · flagged-to-naming-pass · **renamed → Boss-action warnings**
 - the Heavy Thing · trap or lock · placeholder · **final as written**
 - leash ring · UI surface · placeholder · **final as written**
-- Sanctum rest rule refusal: 'The Sanctum will not let you sleep.' · UI surface · placeholder · **final as written**
+- Sanctum rest rule refusal: 'The Sanctum will not let you sleep.' · UI surface · placeholder · **final as written (a line, not a name; T4)**
 - Behind-you line · UI surface · unclear · **final as written**
 - Wakes at 33% (reserve wake chip) · UI surface · unclear · **renamed → Joins at 33%**
-- waking light (waking-light window) · place · placeholder · **final as written**
-- keepers of the sleep · system term · unclear · **final as written**
+- waking light (waking-light window) · place · placeholder · **never printed (art direction; 14.2 call 7)**
+- keepers of the sleep · system term · unclear · **never printed (design prose; 14.2 call 7)**
 - stance lines: Rises from the chair / Takes the pulpit / Drops from the threads / Still hungry / Wound up · UI surface · placeholder · **final as written**
 - Ten to Three · other · placeholder · **final as written**
 - Counter-Clockwise · other · placeholder · **final as written**
@@ -2588,7 +2590,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Act III Guise · room or terrain · unclear · **final as written**
 - Gullet Guise · room or terrain · unclear · **final as written**
 - Pendulum Hall · place · placeholder · **final as written**
-- Cell Zero (arena) · place · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Cell Zero (arena) · place · placeholder · **final, kept with a recorded waiver (W-23, 9.3)**
 - the Den · place · placeholder · **final as written**
 - Portrait Kennel · place · placeholder · **final as written**
 - the Viewing Room · place · placeholder · **final as written**
@@ -2602,7 +2604,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Head of the Hall · place · placeholder · **renamed → the Dais**
 - the Antrum · place · placeholder · **final as written**
 - Larder of the World · place · placeholder · **final as written**
-- the Turned-Down Bed · place · placeholder · **final as written**
+- the Turned-Down Bed · place · placeholder · **final under W-DREAM-1 (b)**
 - the Mantel Nursery · place · placeholder · **final as written**
 - Whelping Pen · room or terrain · placeholder · **final as written**
 - the pen bar · trap or lock · placeholder · **renamed → the pen board**
@@ -2631,10 +2633,10 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Cell Zero Slam · ability · placeholder · **final as written**
 - the Pin-Down · ability · placeholder · **final as written**
 - the View Halloo · ability · placeholder · **final as written**
-- Spear Lunge · ability · placeholder · **renamed → Running Thrust**
+- Spear Lunge · ability · placeholder · **renamed → Spear Through (after the check)**
 - Mourner's Embrace · ability · placeholder · **renamed → Black-Crepe Embrace**
 - Read the Will · ability · placeholder · **renamed → Read the Testament**
-- Disinherit · ability · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Disinherit · ability · placeholder · **final, kept with a recorded waiver (W-7, 9.3)**
 - Clapper Swing · ability · placeholder · **final as written**
 - Cold Ring · ability · placeholder · **renamed → Frost Tone**
 - Fermata · ability · placeholder · **final as written**
@@ -2657,8 +2659,8 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Mouthful · ability · placeholder · **final as written**
 - There, There · ability · placeholder · **final as written**
 - Lights Out · ability · placeholder · **final as written**
-- Smother · ability · flagged-to-naming-pass · **renamed → Heavy Blanket (fallback)**
-- The Bed Turns Over · hazard · flagged-to-naming-pass · **final under W-DREAM-1 (b) (Q1)**
+- Smother · ability · flagged-to-naming-pass · **renamed → Tuck In stays; fallback Tuck Tight (after the check)**
+- The Bed Turns Over · hazard · flagged-to-naming-pass · **final under W-DREAM-1 (b) (client, Q1)**
 - Memento captions: 'Warming Pan, carried out of the Heart. Still warm.' / 'Wind-Down Hammer, carried out of the Heart. It has stopped.' · UI surface · placeholder · **final as written**
 
 #### B.29 exploration-information (63)
@@ -2674,7 +2676,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Walls Have Ears · ability · placeholder · **final as written**
 - Cased · condition · placeholder · **final as written**
 - Chalked · system term · placeholder · **final as written**
-- Traced · system term · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Traced · system term · placeholder · **final, kept with a recorded waiver (W-17, 9.3)**
 - Seen / Remembered / Unknown (knowledge states) · system term · unclear · **final as written**
 - Chalk on entry · system term · placeholder · **final as written**
 - Trace on glimpse · system term · placeholder · **renamed → Trace on sight**
@@ -2691,10 +2693,10 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Detour quote · UI surface · placeholder · **final as written**
 - Behind-you line · UI surface · placeholder · **final as written**
 - rooms tally ('rooms e / t') · UI surface · placeholder · **final as written**
-- spent field · UI surface · placeholder · **renamed → cleared field**
+- spent field · UI surface · placeholder · **renamed → emptied field (after the check)**
 - Treasure field · UI surface · placeholder · **final as written**
 - Floor Atlas · UI surface · placeholder · **final as written**
-- Dream map (skin) · setting · placeholder · **final as written**
+- Dream map (skin) · setting · placeholder · **final under W-DREAM-1 (a)**
 - fog bank · UI surface · placeholder · **final as written**
 - seen-edge line · UI surface · placeholder · **final as written**
 - sight shadow ('out of sight (not out of hearing)') · UI surface · placeholder · **final as written**
@@ -2723,16 +2725,16 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Full map / minimap / room inspector · UI surface · unclear · **final as written**
 - More in Floor info (F) · UI surface · unclear · **final as written**
 - Omen 'Drawn in Chalk' · curse · placeholder · **final as written**
-- Dreambook pages · UI surface · placeholder · **final as written**
+- Dreambook pages · UI surface · placeholder · **final under W-DREAM-1 (a) (after the check)**
 - Scout Ahead / Range Ahead · verb or action · unclear · **final as written**
-- Rejected reveal items: Vendor Chalk, Floor Rubbing, Folded Floorplan, Cartographer's Loupe, Augur's Knot, Plumb Line, Hedge Bestiary, Deja Vu, Familiar Halls, Plumb the Halls, Dream Survey, Cartouche set piece · item · unclear · **final as written**
+- Rejected reveal items: Vendor Chalk, Floor Rubbing, Folded Floorplan, Cartographer's Loupe, Augur's Knot, Plumb Line, Hedge Bestiary, Deja Vu, Familiar Halls, Plumb the Halls, Dream Survey, Cartouche set piece · item · unclear · **retired (rejected in XI; never shipped)**
 
 #### B.30 seeds-validation (30)
 
 - the dream unravels · system term · flagged-to-naming-pass · **final under W-DREAM-1 (a)**
 - unravel card · UI surface · flagged-to-naming-pass · **final: two keys, "The dream unravels." plus "Your profile is unchanged." (W-DREAM-1 a)**
 - unravelled (run result) · system term · placeholder · **final as written**
-- "this code cannot be dreamed on this build" · UI surface · placeholder · **final as written**
+- "this code cannot be dreamed on this build" · UI surface · placeholder · **renamed → "This run code can't be played on this build." (5.9.30)**
 - Seeded run (launcher field and entry screen) · UI surface · flagged-to-naming-pass · **renamed → Run code (launcher: 'Play a run code')**
 - seeded-run entry line (one-line notice) · UI surface · flagged-to-naming-pass · **final: whole-string key "Run codes use all content at standard difficulty. They don't count toward unlocks, records or the codex." (5.9; NP-24)**
 - seeded (run-history mark) · UI surface · flagged-to-naming-pass · **renamed → run code (mark)**
@@ -2773,8 +2775,8 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Also carried · UI surface · placeholder · **final as written**
 - Weighs nothing. Does nothing. · UI surface · approved-final · **final as written**
 - Kit strip · UI surface · placeholder · **renamed → Gear strip**
-- Enough for the first stair. The dream owes you the rest. · UI surface · placeholder · **final as written**
-- Still carried when the dream closed: / Left by a fire: · UI surface · placeholder · **final as written**
+- Enough for the first stair. The dream owes you the rest. · UI surface · placeholder · **final as written (a line, not a name; T4)**
+- Still carried when the dream closed: / Left by a fire: · UI surface · placeholder · **final as written (a line, not a name; T4)**
 - Sold as plain gear. Its name goes with it. · UI surface · placeholder · **final as written**
 - It stays by this fire. It does nothing either way. · UI surface · placeholder · **final as written**
 - Nine Rivets · item · placeholder · **final as written**
@@ -2804,14 +2806,14 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Oddment pool captions (36 samples across six kits) · item · placeholder · **final as written**
 - Kit lines (sample Whence lines) · item · placeholder · **final as written**
 - Variant milestone texts ('Reach floor 3 as a <class>', 'Fell the floor-2 boss as a <class>', 'Fell the floor-4 boss as a <class>', 'A win as a <class>') · UI surface · placeholder · **final as written**
-- Your boon replaces Launcher gear. Choosing Blades returns the boon. · UI surface · placeholder · **final as written**
-- Kits? The dream issues what its residents set aside. · other · unclear · **final as written**
+- Your boon replaces Launcher gear. Choosing Blades returns the boon. · UI surface · placeholder · **final as written (a line); its kit words show Bow and Blade and Twin Blades (5.8.38–39)**
+- Kits? The dream issues what its residents set aside. · other · unclear · **final as written (a line, not a name; T4)**
 - Heirloom-shelf variant bundle · UI surface · unclear · **final as written**
 
 #### B.32 camp-hub (70)
 
 - Hollowfolk · faction · placeholder · **renamed → the Fireside (client)**
-- Stairtop · place · flagged-to-naming-pass · **final as written**
+- Stairtop · place · flagged-to-naming-pass · **final as written (kept; client, Q6)**
 - Arrival · system term · flagged-to-naming-pass · **final as written**
 - the Hollow (camp phase) · system term · flagged-to-naming-pass · **final as written**
 - Camp List · UI surface · placeholder · **final as written**
@@ -2819,7 +2821,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Overheard · system term · unclear · **final as written**
 - Hearsay (log) · UI surface · placeholder · **final as written**
 - the Fire (station) · UI surface · placeholder · **final as written**
-- the Bedrolls (station) · UI surface · placeholder · **final as written**
+- the Bedrolls (station) · UI surface · placeholder · **final as written ("bedroll" is camp gear, outside the G9 bed forms; 4.7, after the check)**
 - Muster Post · UI surface · placeholder · **final as written**
 - Keeper's Cart · UI surface · placeholder · **renamed → the Pedlar's Cart**
 - Keeper / the keeper · NPC · flagged-to-naming-pass · **renamed → the Pedlar**
@@ -2836,16 +2838,16 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Plain text for speakers · report or setting · unclear · **renamed → Legible captions**
 - mute chatter · report or setting · unclear · **final as written**
 - trophy pole · other · unclear · **renamed → ribbon post**
-- dream-track ribbon · other · unclear · **final as written**
+- dream-track ribbon · other · unclear · **final under W-DREAM-1 (a) (Dream track)**
 - Begin · UI surface · placeholder · **final as written**
 - Begin again · UI surface · placeholder · **final as written**
 - Continue · UI surface · unclear · **final as written**
 - Abandon and begin · UI surface · placeholder · **final as written**
 - Seeded night · UI surface · flagged-to-naming-pass · **renamed → Play a run code (hub row)**
-- Book of Nights · UI surface · flagged-to-naming-pass · **final as written**
+- Book of Nights · UI surface · flagged-to-naming-pass · **final as written (kept; 5.6.25)**
 - Night (unit of play) · system term · unclear · **final as written**
 - Profiles · UI surface · unclear · **final as written**
-- the Stair · UI surface · placeholder · **final as written**
+- the Stair · UI surface · placeholder · **renamed → the Banister**
 - Depth gauge · UI surface · placeholder · **final as written**
 - the Library · UI surface · placeholder · **final as written**
 - Veteran book · UI surface · unclear · **final as written**
@@ -2859,7 +2861,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Letter Rack · UI surface · placeholder · **final as written**
 - hub fire · UI surface · unclear · **final as written**
 - Balcony · place · unclear · **final as written**
-- New in the dream · UI surface · placeholder · **final as written**
+- New in the dream · UI surface · placeholder · **final under W-DREAM-1 (a)**
 - Kindler · NPC · flagged-to-naming-pass · **renamed → Log-Carrier**
 - Chalkwright · NPC · flagged-to-naming-pass · **renamed → Slate-Sketcher**
 - Stillwatch · NPC · placeholder · **final as written**
@@ -2877,7 +2879,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Sitter · NPC · flagged-to-naming-pass · **renamed → Roll-Reader**
 - Understudy · NPC · placeholder · **final as written**
 - Framer · NPC · flagged-to-naming-pass · **renamed → Gilder**
-- floor-k Lingerer vignette · system term · unclear · **final as written**
+- floor-k Lingerer vignette · system term · unclear · **renamed in part: Lingerer → Straggler; the vignette final**
 - Seam camps / the quiet camp · room or terrain · unclear · **final as written**
 - Has nothing to sell. Has things to say. · UI surface · unclear · **final as written**
 
@@ -2906,28 +2908,28 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Spend (charm shape word) · system term · flagged-to-naming-pass · **internal only, never printed**
 - Shaper (charm shape word) · system term · placeholder · **internal only, never printed**
 - small moments · system term · approved-final · **final as written**
-- Charms catch moments: a token earned from a named moment in the fight, or one button you spend · system term · approved-final · **final as written**
+- Charms catch moments: a token earned from a named moment in the fight, or one button you spend · system term · approved-final · **renamed → "Charms hold moments: …" (client)**
 - accent (Patina ornament) · system term · unclear · **final as written**
-- fires / fired / waits / missed (charm log and Inspect verbs) · verb or action · unclear · **final as written**
+- fires / fired / waits / missed (charm log and Inspect verbs) · verb or action · unclear · **renamed in part: fires / fired → goes off / went off; waits and missed final as written**
 - wasted (log/report state) · UI surface · unclear · **final as written**
-- Plate pip states: Ready, Spent, Waiting, Kept, Dormant · UI surface · unclear · **final as written**
-- "? dormant · Arcana" (card text) · UI surface · unclear · **final as written**
+- Plate pip states: Ready, Spent, Waiting, Kept, Dormant · UI surface · unclear · **renamed → Ready, Used, Waiting, Stored, Idle**
+- "? dormant · Arcana" (card text) · UI surface · unclear · **renamed → "? untold · Arcana" (client)**
 - "Once per boss encounter" (Sanctum card note) · UI surface · unclear · **final as written**
 - "rarely fires for this unit" (equip verdict) · UI surface · unclear · **final as written**
 - "no ally to receive this" (equip verdict) · UI surface · unclear · **final as written**
 - "Shares its Helped with <charm>: only one can fire a fight" (equip verdict) · UI surface · unclear · **final as written**
 - "Already gained a Helped from a charm this fight" (greyed reason) · UI surface · unclear · **final as written**
-- Bobbin boon picker line "take one small moment into the dream" · UI surface · unclear · **final as written**
-- Underpillow · heirloom · unclear · **final as written**
-- Widow's Knot / Second's Knot / Swaddle Knot / Ashen Knot / Lodestone / Calm Stone / Crooked Finger / Pointing Bone / Hand-me-down Knot / Cradle Knot / Duck Knot / Spite Knot / Scab Knot · charm · unclear · **final as written**
-- Near-Miss / Blink Bone / Milk-tooth / Press-Stone / Bier-Knot / Held-Breath Knot / Gallows Penny / Tally-stick · charm · unclear · **final as written**
+- Bobbin boon picker line "take one small moment into the dream" · UI surface · unclear · **final as written (a line, not a name; T4)**
+- Underpillow · heirloom · unclear · **retired (renamed the Bobbin in CA T4)**
+- Widow's Knot / Second's Knot / Swaddle Knot / Ashen Knot / Lodestone / Calm Stone / Crooked Finger / Pointing Bone / Hand-me-down Knot / Cradle Knot / Duck Knot / Spite Knot / Scab Knot · charm · unclear · **retired (renamed or rejected in CA T5, CA 4.2, A.2): Widow's Knot → Minder's Pebble; Second's Knot → Second's Hairpin; Swaddle Knot → Walnut; Ashen Knot → Ashen Bead; Calm Stone → Shy Stone; Pointing Bone → Acorn Cap; Hand-me-down Knot → Relay Thread (now Relay Ribbon, 5.8.20); Cradle Knot → Stay Thread (now Anchor Bead, 5.8.21); Lodestone, Crooked Finger, Duck Knot, Spite Knot and Scab Knot avoided**
+- Near-Miss / Blink Bone / Milk-tooth / Press-Stone / Bier-Knot / Held-Breath Knot / Gallows Penny / Tally-stick · charm · unclear · **retired (rejected candidates, CA 5.3)**
 
 #### B.34 heirlooms-curses (75)
 
 - Grip-marks (Grip-mark) · system term · placeholder · **final as written**
 - Heart-won · system term · placeholder · **final as written**
 - Bequest / Deed bequest · system term · flagged-to-naming-pass · **internal only, never printed (NR2)**
-- Hang it / 'Hang it?' · UI surface · placeholder · **final as written**
+- Hang it / 'Hang it?' · UI surface · placeholder · **renamed → Shelve it?**
 - Set aside · UI surface · flagged-to-naming-pass · **renamed → Not this time**
 - An heirloom waits on the shelf. · UI surface · placeholder · **final as written**
 - Carried to the night's end · UI surface · placeholder · **renamed → Carried to the end**
@@ -2935,9 +2937,9 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Burdened twin · system term · placeholder · **final as written**
 - Redeemed template · system term · placeholder · **final as written**
 - Malady / Maladies · system term · approved-final · **final as written**
-- Oath (meta-curse umbrella; 'Oath of the ...' form) · system term · flagged-to-naming-pass · **final, kept with a recorded waiver (12, 9.3)**
+- Oath (meta-curse umbrella; 'Oath of the ...' form) · system term · flagged-to-naming-pass · **final, kept with a recorded waiver (W-19, 9.3)**
 - Cast off / Cast-off deed · verb or action · placeholder · **final as written**
-- Not yet read: may Cling · UI surface · flagged-to-naming-pass · **final, kept with a recorded waiver (1 EV prose hit)**
+- Not yet read: may Cling · UI surface · flagged-to-naming-pass · **final, kept with a recorded waiver (W-18, 9.3)**
 - May Cling until camp. / May Cling: no camp remains. · UI surface · placeholder · **final as written**
 - Plain names (setting) · report or setting · approved-final · **final as written**
 - Content note · report or setting · approved-final · **final as written**
@@ -2989,7 +2991,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - the Sullens · malady · flagged-to-naming-pass · **held spare; second-look list; article stored separately**
 - the Frets · malady · flagged-to-naming-pass · **retired / held: (retired spare)**
 - Malady plain labels (Easy Opening, Slow Start, First Stumble, Weak to Piercing, Falls When Moved, Weak to Bludgeoning, Guard Pulled, Third-Round Heat, Weak to Fire) · UI surface · placeholder · **final as written**
-- Cost-line plain labels (Clings, First Stumble, One Use Fewer, Weak to <type>, Cold Start, Easy to Spot, Short Push, Weak Potions, No First Crit, No Graces, Restless Rest) · UI surface · placeholder · **final as written**
+- Cost-line plain labels (Clings, First Stumble, One Use Fewer, Weak to <type>, Cold Start, Easy to Spot, Short Push, Weak Potions, No First Crit, No Graces, Restless Rest) · UI surface · placeholder · **renamed in part: First Stumble → Stumbles Early; the rest final as written**
 - Oath of the Burdened Hand · oath · placeholder · **final as written**
 - Oath of the Crooked Road · oath · placeholder · **final as written**
 - Oath of the Shut Book · oath · placeholder · **final as written**
