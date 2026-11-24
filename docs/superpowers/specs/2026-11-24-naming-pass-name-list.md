@@ -1,0 +1,3001 @@
+# Naming Pass: Appendix B, the full harvested name list
+
+Companion to `2026-11-24-naming-pass-design.md` (its Appendix B, kept in its own file for size). Section 5 of the design governs any difference.
+
+
+All 2,893 harvested entries, by source document, in the harvest's order: **name · category · harvest status · naming-pass outcome**. The outcome is matched by script against section 5 (exact name, base name, or any " / " part), against the internal families of 4.8 and against the waivers of 9.3; a handful of flagged entries carry an explicit ruling. "Final as written" means the name becomes final unchanged. Where a generic word has several senses, the outcome shown is for the harvested sense if a row in 5 names it; otherwise the kept sense. **Section 5 governs any difference.**
+
+#### B.1 dungeon-rpg (33)
+
+- run · system term · unclear · **final as written**
+- floor · system term · unclear · **final as written**
+- camp · place · unclear · **final as written**
+- hub · place · unclear · **final as written**
+- permadeath · system term · approved-final · **final as written**
+- hero · system term · unclear · **final as written**
+- companion · system term · unclear · **final as written**
+- party · system term · unclear · **final as written**
+- downed · condition · unclear · **final as written**
+- full rest · system term · approved-final · **final as written**
+- short rest · system term · approved-final · **final as written**
+- supply · consumable · unclear · **final as written**
+- tick · system term · unclear · **final as written**
+- jumping (state) · verb or action · approved-final · **final as written**
+- flying (state) · verb or action · approved-final · **final as written**
+- dormant / stationary / patrolling · system term · unclear · **final as written**
+- surprised · condition · approved-final · **final as written**
+- "ask me" (reaction setting) · report or setting · approved-final · **final as written**
+- pick-one-of-three offer · UI surface · approved-final · **final as written**
+- boon · system term · unclear · **final, kept with a recorded waiver (12, 9.3)**
+- starting boon · system term · approved-final · **final, kept with a recorded waiver (12, 9.3)**
+- heirloom item · heirloom · unclear · **final as written**
+- background perk · system term · unclear · **renamed → Calling perk (client)**
+- content unlocks / milestones · system term · unclear · **final as written**
+- difficulty ladder · system term · approved-final · **final as written**
+- difficulty tier · system term · unclear · **final as written**
+- visible difficulty setting (easier setting) / unlit lamp below tier 0 · report or setting · placeholder · **final as written**
+- reserved run-modifier slot · system term · placeholder · **final as written**
+- telemetry consent setting · report or setting · placeholder · **final as written**
+- notable loot / notables · system term · unclear · **final as written**
+- save slot (one per run) · UI surface · approved-final · **final as written**
+- species · system term · approved-final · **final as written**
+- multiclassing · system term · approved-final · **final as written**
+
+#### B.2 character-stat-model (67)
+
+- Strength · system term · approved-final · **final as written**
+- Dexterity · system term · approved-final · **final as written**
+- Constitution · system term · approved-final · **final as written**
+- Intelligence · system term · approved-final · **final as written**
+- Wisdom · system term · approved-final · **final as written**
+- Presence · system term · approved-final · **final as written**
+- Species · system term · approved-final · **final as written**
+- Fortitude · system term · approved-final · **final as written**
+- Reflex · system term · approved-final · **final as written**
+- Will · system term · approved-final · **final as written**
+- Proficiency bonus · system term · approved-final · **final as written**
+- Hit points · system term · approved-final · **final as written**
+- Armour class · system term · approved-final · **final as written**
+- Attack bonus · system term · approved-final · **final as written**
+- Ability difficulty · system term · approved-final · **final as written**
+- Initiative · system term · approved-final · **final as written**
+- Speed · system term · approved-final · **final as written**
+- Passive perception · system term · approved-final · **final as written**
+- Passive stealth · system term · approved-final · **final as written**
+- Trap sense · system term · approved-final · **final as written**
+- Guile · system term · approved-final · **final as written**
+- Recovery · system term · approved-final · **final as written**
+- Carrying capacity · system term · approved-final · **final as written**
+- Athletics · system term · approved-final · **final as written**
+- Acrobatics · system term · approved-final · **final as written**
+- Stealth · system term · approved-final · **final as written**
+- Mechanics · system term · approved-final · **final as written**
+- Arcana · system term · approved-final · **final as written**
+- Lore · system term · approved-final · **final as written**
+- Perception · system term · approved-final · **final as written**
+- Medicine · system term · approved-final · **final as written**
+- Intimidation · system term · approved-final · **final as written**
+- Leadership · system term · approved-final · **final as written**
+- Rally · verb or action · approved-final · **final as written**
+- Mastery · system term · approved-final · **final as written**
+- Tactician · ability · approved-final · **final, kept with a recorded waiver (12, 9.3)**
+- Second Nature · ability · unclear · **renamed → Old Hand**
+- Shove · verb or action · unclear · **final as written**
+- Grapple · verb or action · unclear · **final as written**
+- Slip past · verb or action · unclear · **final as written**
+- Hide · verb or action · unclear · **final as written**
+- Natural 20 / critical hit · system term · approved-final · **final as written**
+- Slashing · system term · placeholder · **final as written**
+- Piercing · system term · placeholder · **final as written**
+- Bludgeoning · system term · placeholder · **final as written**
+- Fire · system term · placeholder · **final as written**
+- Cold · system term · placeholder · **final as written**
+- Lightning · system term · placeholder · **final as written**
+- Acid · system term · placeholder · **final as written**
+- Psychic · system term · placeholder · **final as written**
+- Radiant · system term · placeholder · **final as written**
+- Necrotic · system term · placeholder · **final as written**
+- Physical (damage family) · system term · placeholder · **final as written**
+- Elemental (damage family) · system term · placeholder · **final as written**
+- Spirit (damage family) · system term · placeholder · **final as written**
+- Rider · system term · approved-final · **final as written**
+- Weak · system term · approved-final · **final as written**
+- Normal · system term · approved-final · **final as written**
+- Resistant · system term · approved-final · **final as written**
+- Immune · system term · approved-final · **final as written**
+- Layer · system term · approved-final · **final as written**
+- Trait · system term · approved-final · **final as written**
+- skeletal · enemy affix · unclear · **final as written**
+- armoured · enemy affix · approved-final · **final as written**
+- mindless · enemy affix · approved-final · **final as written**
+- Trained / training · system term · approved-final · **final as written**
+- Starting spread · system term · unclear · **final as written**
+
+#### B.3 ability-resource-model (60)
+
+- Slot Recovery · ability · approved-final · **renamed → Slot Renewal (client)**
+- Slot Recovery 2 · ability · approved-final · **final as written**
+- Second Wind · ability · unclear · **renamed → Dig In**
+- Techniques (Technique) · ability · unclear · **final as written**
+- Surge · ability · unclear · **renamed → Onslaught (client)**
+- Ember Burst · spell · unclear · **renamed → Cinder Spray**
+- Cleave (as level-up card example 'Cleave: 2 → 3 uses') · ability · unclear · **final as written**
+- At-will / Limited / Passive / Toggle / Sustained / Reaction (ability kinds) · system term · approved-final · **final as written**
+- Pool · system term · approved-final · **final as written**
+- Refill tags: turn / fight / rest / camp / never · system term · approved-final · **final as written**
+- camp spend (one camp spend per turn) · system term · approved-final · **final as written**
+- Recharge (wandering trader's paid Recharge) · verb or action · unclear · **final as written**
+- Spell slots / tiers (tier 1-4) · system term · approved-final · **final as written**
+- Capstone · system term · approved-final · **final as written**
+- Signature (companion signature camp ability; boss signature) · system term · approved-final · **final as written**
+- Attack (Attack action) · verb or action · approved-final · **final as written**
+- Extra Attack · ability · approved-final · **final as written**
+- Dash, Disengage, Dodge, Help · verb or action · approved-final · **final as written**
+- Shove · verb or action · approved-final · **final as written**
+- Grapple / Escape a grapple · verb or action · approved-final · **final as written**
+- Slip past (an enemy) · verb or action · approved-final · **final as written**
+- Hide · verb or action · approved-final · **final as written**
+- Search · verb or action · approved-final · **final as written**
+- Frighten · verb or action · approved-final · **final as written**
+- Rally · verb or action · approved-final · **final as written**
+- Study an enemy · verb or action · approved-final · **final as written**
+- Recognise a spell being cast · verb or action · approved-final · **final as written**
+- Get a downed companion up · verb or action · approved-final · **final as written**
+- Treat · verb or action · approved-final · **final as written**
+- Use a scroll or wand outside your class · verb or action · approved-final · **final as written**
+- Opportunity attack · verb or action · approved-final · **final as written**
+- Threatened zone · system term · approved-final · **final as written**
+- reaction attack · system term · approved-final · **final as written**
+- Swap weapon sets · verb or action · approved-final · **final as written**
+- Unarmed strike / Improvised attack / Off-hand attack · verb or action · approved-final · **final as written**
+- Reaction policies: always / ifItChangesOutcome / whilePoolAtLeastHalf / never / "ask me" · report or setting · approved-final · **final as written**
+- cast-option defaults (castDefaults) · UI surface · unclear · **final as written**
+- Burst / Aura / Cone / Line (area shapes) · system term · approved-final · **final as written**
+- selective (tag) · system term · approved-final · **final as written**
+- Preview · UI surface · approved-final · **final as written**
+- Rider · system term · approved-final · **final as written**
+- Concentration · system term · approved-final · **final as written**
+- Offer kinds: capacity / cost / rider / shape / concentration training / skill mastery / verb training / armour training / shield training / timescale / trigger · system term · unclear · **final as written**
+- Pick-one-of-three offer · system term · approved-final · **final as written**
+- Level-up cards · UI surface · approved-final · **final as written**
+- Suggested action (suggestions) · UI surface · approved-final · **final as written**
+- accept-rest-of-turn key · UI surface · unclear · **final as written**
+- Rethink · verb or action · unclear · **final as written**
+- Party bar (supply count) · UI surface · approved-final · **final as written**
+- Boss actions · system term · approved-final · **final as written**
+- Resolve (boss pips) · system term · approved-final · **final as written**
+- Unyielding · condition · approved-final · **final as written**
+- Phases (boss) · system term · approved-final · **final as written**
+- ready in N (cooldown display) · UI surface · approved-final · **final as written**
+- Short rest · system term · approved-final · **final as written**
+- Supply · system term · approved-final · **final as written**
+- Rest button · UI surface · approved-final · **final as written**
+- "The Sanctum will not let you sleep." · UI surface · approved-final · **final as written**
+- Action bar / targeting cursor (greyed reasons) · UI surface · approved-final · **final as written**
+- Spending policies: spend freely / hold half / hold everything · report or setting · unclear · **final as written**
+
+#### B.4 conditions (140)
+
+- Incapacitated · condition · approved-final · **final as written**
+- Surprised · condition · approved-final · **final as written**
+- Downed · condition · approved-final · **final as written**
+- Concentrating · condition · approved-final · **final as written**
+- Grappling · condition · approved-final · **final as written**
+- Steeled · condition · approved-final · **final as written**
+- Unyielding · condition · approved-final · **final as written**
+- Stunned · condition · approved-final · **final as written**
+- Held · condition · approved-final · **final as written**
+- Asleep · condition · approved-final · **final as written**
+- dormant · system term · approved-final · **final as written**
+- Banished · condition · approved-final · **final as written**
+- Commanded · condition · approved-final · **final as written**
+- Approach / Flee / Grovel / Halt · verb or action · approved-final · **renamed → Come (client)**
+- Engulfed · condition · approved-final · **final as written**
+- Calcifying · condition · approved-final · **final as written**
+- Petrified · condition · approved-final · **final as written**
+- Dazed · condition · approved-final · **final, kept with a recorded waiver (12, 9.3)**
+- Addled · condition · placeholder · **final as written**
+- Distracted · condition · approved-final · **final as written**
+- Nauseated · condition · approved-final · **final as written**
+- Staggered · condition · approved-final · **final as written**
+- Silenced · condition · approved-final · **final as written**
+- Hampered · condition · approved-final · **final as written**
+- Unfocused · condition · approved-final · **final as written**
+- Disarmed · condition · approved-final · **final as written**
+- Harried · condition · approved-final · **final as written**
+- Suppressed · condition · approved-final · **final as written**
+- Prone · condition · approved-final · **final as written**
+- Grappled · condition · approved-final · **final as written**
+- Restrained · condition · approved-final · **final as written**
+- Rooted · condition · approved-final · **renamed → Tangled (client)**
+- Chilled · condition · approved-final · **final as written**
+- Mired · condition · approved-final · **final as written**
+- Grounded · condition · approved-final · **final as written**
+- Teetering · condition · approved-final · **final as written**
+- Hobbled · condition · approved-final · **final as written**
+- Hasted · condition · approved-final · **final as written**
+- Fleet · condition · approved-final · **final as written**
+- Spurred · condition · approved-final · **final as written**
+- Anchored · condition · approved-final · **final as written**
+- Unfettered · condition · approved-final · **final as written**
+- Flying · condition · approved-final · **final as written**
+- Jumping · condition · approved-final · **final as written**
+- Levitating · condition · approved-final · **final as written**
+- Phasing · condition · approved-final · **final as written**
+- Bleeding · condition · approved-final · **final as written**
+- Burning · condition · approved-final · **final as written**
+- Smouldering · condition · approved-final · **final as written**
+- Envenomed · condition · approved-final · **final as written**
+- Shocked · condition · approved-final · **final as written**
+- Discharge · verb or action · approved-final · **final as written**
+- Condemned · condition · approved-final · **final as written**
+- Corroded · condition · approved-final · **final as written**
+- Exposed (type) · condition · approved-final · **final as written**
+- Brittle · condition · approved-final · **final as written**
+- Shredded · condition · approved-final · **final as written**
+- Withered · condition · approved-final · **final as written**
+- Sapped · condition · approved-final · **final as written**
+- Poisoned · condition · approved-final · **final as written**
+- Shrugged Off · system term · unclear · **final as written**
+- Soaked · condition · approved-final · **final as written**
+- Oiled · condition · approved-final · **final as written**
+- Frozen · condition · approved-final · **final as written**
+- Blinded · condition · approved-final · **final as written**
+- Squinting · condition · approved-final · **final as written**
+- Revealed · condition · approved-final · **final as written**
+- Hidden · condition · approved-final · **final as written**
+- Invisible · condition · approved-final · **final as written**
+- Veiled · condition · approved-final · **final as written**
+- Vigilant · condition · approved-final · **final as written**
+- Deafened · condition · approved-final · **final as written**
+- Hushed · condition · approved-final · **final as written**
+- Shaken · condition · approved-final · **final as written**
+- Frightened · condition · approved-final · **final as written**
+- Panicked · condition · approved-final · **final as written**
+- Rallied · condition · approved-final · **final as written**
+- Emboldened · condition · approved-final · **final as written**
+- Demoralised · condition · approved-final · **final as written**
+- Routed · condition · approved-final · **final as written**
+- Cowed · condition · approved-final · **final as written**
+- Charmed · condition · approved-final · **final as written**
+- Thralled · condition · approved-final · **final as written**
+- Confused · condition · approved-final · **final as written**
+- Enraged · condition · approved-final · **final as written**
+- Challenged · condition · approved-final · **final as written**
+- Tormented · condition · approved-final · **final as written**
+- Clear-minded · condition · approved-final · **final as written**
+- Inspired · condition · approved-final · **final as written**
+- Dodging · condition · approved-final · **final as written**
+- Helped · condition · approved-final · **final as written**
+- Spotted · condition · approved-final · **final as written**
+- Blessed · condition · approved-final · **final as written**
+- Baned · condition · approved-final · **final as written**
+- Warded · condition · approved-final · **final, kept with a recorded waiver (12, 9.3)**
+- Shielded · condition · approved-final · **final as written**
+- Fortified · condition · approved-final · **final as written**
+- Resisting (type) · condition · approved-final · **renamed → Resistant (type) on screen (client)**
+- Regenerating · condition · approved-final · **final, kept with a recorded waiver (12, 9.3)**
+- Bolstered · condition · approved-final · **final as written**
+- Empowered · condition · approved-final · **final as written**
+- Coated · condition · approved-final · **final as written**
+- Heightened (ability) · condition · approved-final · **final as written**
+- Death-warded · condition · approved-final · **final as written**
+- Sanctified · condition · approved-final · **final as written**
+- Blurred · condition · approved-final · **final, kept with a recorded waiver (12, 9.3)**
+- Riposting · condition · approved-final · **final, kept with a recorded waiver (12, 9.3)**
+- Retaliating · condition · approved-final · **final as written**
+- Guarded · condition · approved-final · **final as written**
+- Raging · condition · approved-final · **renamed → Frenzied (client)**
+- Reckless · condition · approved-final · **renamed → Heedless (client)**
+- Inured · condition · approved-final · **final as written**
+- Weary · condition · approved-final · **final as written**
+- Scarred · condition · approved-final · **final as written**
+- Lame · condition · placeholder · **renamed → Limping**
+- Diseased (strain) · condition · approved-final · **final as written**
+- Grave Fever · malady · placeholder · **final as written**
+- Shaking Rot · malady · placeholder · **final as written**
+- Sight-blight · malady · placeholder · **renamed → Sight-rot**
+- Cursed (curse) · curse · approved-final · **final as written**
+- Ill-Omened · curse · approved-final · **final as written**
+- Leaden · curse · approved-final · **renamed → Plodding (client)**
+- Ill-Starred (type) · curse · approved-final · **renamed → Star-Crossed (client)**
+- Clinging · curse · approved-final · **final as written**
+- Restless · condition · approved-final · **final as written**
+- Conspicuous · condition · approved-final · **final as written**
+- Well-fed · condition · approved-final · **final as written**
+- Pitted Armour · condition · approved-final · **final as written**
+- Notched · condition · approved-final · **final as written**
+- Treat (Medicine Treat) · verb or action · approved-final · **final as written**
+- Escape · verb or action · approved-final · **final as written**
+- shake off · verb or action · approved-final · **final as written**
+- Remedy · consumable · unclear · **final as written**
+- resolve pip · system term · approved-final · **final as written**
+- Party composure · system term · approved-final · **final as written**
+- Token / Minor / Major / Hard / Beneficial (tiers) · system term · unclear · **final as written**
+- Water square / Web square / Fire square / Oil slick square · room or terrain · approved-final · **final as written**
+- Immune · UI surface · approved-final · **final as written**
+- bloodied / low marks · UI surface · approved-final · **renamed → hurt (client)**
+- Plate preview strings · UI surface · approved-final · **final as written**
+
+#### B.5 items-inventory (72)
+
+- Starting gear · UI surface · flagged-to-naming-pass · **final as written**
+- Unsellable / "Unsellable: kit" · UI surface · approved-final · **final as written**
+- fit line · UI surface · approved-final · **final as written**
+- Tend · ability · approved-final · **final as written**
+- Identify (trader service) · ability · approved-final · **final as written**
+- Recharge (trader service) · ability · approved-final · **final as written**
+- Sell · verb or action · approved-final · **final as written**
+- Scrap · verb or action · approved-final · **final as written**
+- Take · verb or action · approved-final · **final as written**
+- Take (leaves <item>) · UI surface · approved-final · **final as written**
+- Take all · verb or action · approved-final · **final as written**
+- Equip now · verb or action · approved-final · **final as written**
+- Swap · verb or action · approved-final · **final as written**
+- Leave · verb or action · approved-final · **final as written**
+- Done · verb or action · approved-final · **final as written**
+- Retrieve · verb or action · approved-final · **final as written**
+- Administer · verb or action · approved-final · **final as written**
+- Hand over · verb or action · approved-final · **final as written**
+- Hand over is cheaper · UI surface · approved-final · **final as written**
+- Take from a Downed adjacent ally (take-from-Downed) · verb or action · approved-final · **final as written**
+- Potion thrown at an ally · verb or action · approved-final · **final as written**
+- Swap weapon sets · verb or action · approved-final · **final as written**
+- Trade · verb or action · approved-final · **final as written**
+- Barter · verb or action · approved-final · **final as written**
+- Buy · verb or action · approved-final · **final as written**
+- claimed · system term · approved-final · **final as written**
+- Belt · UI surface · approved-final · **final as written**
+- Pack · UI surface · approved-final · **internal only, never printed**
+- Trinkets (slot row) · UI surface · approved-final · **renamed → Worn items**
+- Active weapon set · UI surface · approved-final · **final as written**
+- Spare weapon set · UI surface · approved-final · **final as written**
+- bulky · weapon or armour property · approved-final · **final as written**
+- over capacity · UI surface · approved-final · **final as written**
+- Party bar · UI surface · unclear · **final as written**
+- Party view · UI surface · unclear · **final as written**
+- Coin / purse (party purse) · system term · approved-final · **final as written**
+- Supply · system term · approved-final · **final as written**
+- Keys and floor tokens · system term · unclear · **final as written**
+- Party counters · system term · unclear · **final as written**
+- Loot summary · UI surface · approved-final · **final as written**
+- VICTORY header · UI surface · unclear · **final as written**
+- Floor fact · UI surface · unclear · **final as written**
+- Comparison strip · UI surface · approved-final · **final as written**
+- Gain · system term · approved-final · **final as written**
+- Suggested recipient (★) · UI surface · approved-final · **final as written**
+- ? dormant · Arcana 13 vs 15 · UI surface · approved-final · **final as written**
+- dormant (property) · system term · approved-final · **final as written**
+- Arcana identified · UI surface · approved-final · **final as written**
+- Arcana now reveals … · UI surface · approved-final · **final as written**
+- cursed badge · UI surface · approved-final · **final as written**
+- malign hint · UI surface · unclear · **final as written**
+- Carries: X · UI surface · approved-final · **final as written**
+- Guards: <signature name> · UI surface · approved-final · **final as written**
+- Replaces: <piece> / (not carried: no room) · UI surface · approved-final · **final as written**
+- Leftovers marker (leftovers) · system term · approved-final · **final as written**
+- Flee pile · system term · approved-final · **final as written**
+- Basic vendor · NPC · approved-final · **final as written**
+- Notables shop · UI surface · approved-final · **final as written**
+- Camp reward card · UI surface · approved-final · **final as written**
+- Wandering trader · NPC · approved-final · **final as written**
+- Notable(s) · system term · unclear · **final as written**
+- Mundane / Common / Uncommon / Rare / Very rare · system term · approved-final · **final as written**
+- Signature item · item family · approved-final · **renamed → the boss's prize (display) (client)**
+- Heirloom · heirloom · approved-final · **final, kept with a recorded waiver (12, 9.3)**
+- Capacity trinkets · item family · approved-final · **final as written**
+- Quality · system term · unclear · **final as written**
+- Embercleaver of ? · item · placeholder · **final as written**
+- ember longsword (item.ember_longsword) · item · placeholder · **final as written**
+- Strider's Boots of ? · item · placeholder · **final as written**
+- Encumbered · condition · approved-final · **final as written**
+- Greyed reasons (NotInCombat, BeltFull, PackFull, NotBeltable, NotAdjacent, NoFreeInteraction, StrengthThreshold, HardRequirement, Untrained, OverCapacity, RestOnly, Clinging, NoCoin, Unsellable, SupplyFull, OutOfStock, CampChoiceMade, LocationOccupied, InsufficientCoin, ServiceUsed, NotBarterable) · UI surface · unclear · **final as written**
+- Glean · verb or action · unclear · **final as written**
+
+#### B.6 enemies (126)
+
+- Brute · class · approved-final · **final as written**
+- Soldier · class · approved-final · **final as written**
+- Artillery · class · approved-final · **renamed → Marksman (client)**
+- Minion · class · approved-final · **renamed → Swarmer (role); Minion stays the rank (client)**
+- Skirmisher · class · approved-final · **final as written**
+- Controller · class · approved-final · **renamed → Hinderer (client)**
+- Leader · class · approved-final · **final as written**
+- Lurker · class · approved-final · **final as written**
+- Support / Summoner / Thief (Later roles) · class · unclear · **final as written**
+- Standard (rank) · system term · approved-final · **final as written**
+- Elite (rank) · system term · approved-final · **final as written**
+- Boss (rank) · system term · approved-final · **final as written**
+- ragged (tint) · UI surface · unclear · **renamed → (no word: tint plus arrow; tooltip 'weaker than usual')**
+- veteran (tint) · UI surface · unclear · **renamed → (no word: tint plus arrow; tooltip 'stronger than usual')**
+- Keen · other · unclear · **final as written**
+- Sightless N · other · unclear · **final as written**
+- Warded (affix) · enemy affix · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Plated · enemy affix · placeholder · **final as written**
+- Hardened · enemy affix · placeholder · **final as written**
+- Blurred · enemy affix · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Swift · enemy affix · placeholder · **final as written**
+- Slippery · enemy affix · placeholder · **final as written**
+- Pouncer · enemy affix · placeholder · **final as written**
+- Vampiric · enemy affix · placeholder · **renamed → Leeching**
+- Relentless · enemy affix · placeholder · **renamed → Undying**
+- Regenerating · enemy affix · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Volatile · enemy affix · placeholder · **final as written**
+- Thorned · enemy affix · placeholder · **renamed → Retaliating**
+- Riposting · enemy affix · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Commanding · enemy affix · placeholder · **renamed → Banneret**
+- Hunter · enemy affix · placeholder · **renamed → Fixated**
+- Horn-bearer · enemy affix · placeholder · **final as written**
+- Bodyguard · enemy affix · placeholder · **final as written**
+- Protector (affix) · enemy affix · placeholder · **renamed → Guardian**
+- Honed · enemy affix · placeholder · **final as written**
+- Venomous · enemy affix · placeholder · **final as written**
+- Chilling · enemy affix · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Dread · enemy affix · placeholder · **final as written**
+- Unbreakable · enemy affix · placeholder · **renamed → Unbending**
+- Steadfast · enemy affix · placeholder · **renamed → Dauntless**
+- Spotter · enemy affix · placeholder · **final as written**
+- Charge · ability · approved-final · **final as written**
+- Interpose · ability · approved-final · **final as written**
+- Ambush Strike · ability · approved-final · **final as written**
+- Command (leader ability) · ability · approved-final · **final as written**
+- Rally (enemy) · ability · approved-final · **final as written**
+- Order · ability · unclear · **final as written**
+- Demand Surrender · verb or action · approved-final · **final as written**
+- Cow (Cowed out of combat) · verb or action · approved-final · **final as written**
+- Steal · verb or action · approved-final · **final as written**
+- Search · verb or action · approved-final · **final as written**
+- Strike / Reposition / Shed / Command / Signature (boss actions) · verb or action · approved-final · **final as written**
+- Boss action · system term · approved-final · **final as written**
+- Signature move (announced boss signature) · system term · approved-final · **final as written**
+- Quarry · system term · approved-final · **final as written**
+- Guile · system term · approved-final · **final as written**
+- Tactician · ability · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Intent reading / intent line · system term · approved-final · **final as written**
+- "Intent unreadable" · UI surface · unclear · **final as written**
+- "beyond your Perception" · UI surface · unclear · **final as written**
+- "if its turn began now" / "no attack" · UI surface · unclear · **final as written**
+- Threat-reach overlay · UI surface · approved-final · **final as written**
+- Turn log · UI surface · approved-final · **final as written**
+- Footsteps marker (reinforcement warning) · UI surface · approved-final · **final as written**
+- Hearing outline · UI surface · unclear · **final as written**
+- Plate (rank frame, role glyph, frame-strip tint, glint, ready marker) · UI surface · unclear · **final as written**
+- "Carries: …" · UI surface · approved-final · **final as written**
+- "Guards: cache" · UI surface · unclear · **final as written**
+- "Weak: Will" · UI surface · unclear · **final as written**
+- "Provoked: leaves post" (Provoked) · UI surface · unclear · **final as written**
+- Break-line pip bar ("Breaks: leader falls, or 2 more pips") · UI surface · unclear · **final as written**
+- Cowable glyph · UI surface · unclear · **final as written**
+- Loot summary (Take, Leave, Take all, swap, leftovers) · UI surface · approved-final · **final as written**
+- Issue gear · system term · approved-final · **final as written**
+- Notable item · system term · approved-final · **final as written**
+- Salvage (salvage coin) · system term · approved-final · **final as written**
+- Floor fact (Interrogation) · system term · unclear · **final as written**
+- Dormant · system term · approved-final · **final as written**
+- Stationary · system term · approved-final · **final as written**
+- Patrolling · system term · approved-final · **final as written**
+- Alerted · system term · unclear · **final, kept with a recorded waiver (12, 9.3)**
+- Engaged · system term · unclear · **final as written**
+- Pursuing · system term · unclear · **final as written**
+- Searching · system term · unclear · **final as written**
+- Wary · system term · unclear · **renamed → Watchful (client)**
+- Emboldened · condition · approved-final · **final as written**
+- Demoralised · condition · approved-final · **final as written**
+- Routed · condition · approved-final · **final as written**
+- Cowed · condition · approved-final · **final as written**
+- Yielded / Fled · system term · approved-final · **final as written**
+- Cornered · system term · unclear · **final as written**
+- fearless / steady / normal / skittish (morale profiles) · system term · unclear · **final as written**
+- Silent kill · system term · unclear · **final as written**
+- Charger · system term · unclear · **internal only, never printed**
+- Holder · system term · unclear · **internal only, never printed**
+- Kiter · system term · unclear · **internal only, never printed**
+- Mob · system term · unclear · **internal only, never printed**
+- Automaton · system term · unclear · **internal only, never printed**
+- Boss (behaviour profile) · system term · unclear · **final as written**
+- Raider · system term · unclear · **internal only, never printed**
+- Protector (behaviour profile) · system term · unclear · **final as written**
+- Disruptor · system term · unclear · **internal only, never printed**
+- Commander · system term · unclear · **internal only, never printed**
+- Stalker · system term · unclear · **internal only, never printed**
+- Ambusher · system term · unclear · **internal only, never printed**
+- Opportunist · system term · unclear · **internal only, never printed**
+- Sentinel · system term · unclear · **internal only, never printed**
+- Picket · other · unclear · **internal only, never printed**
+- Pack · other · unclear · **internal only, never printed**
+- Line and Bow · other · unclear · **final as written**
+- Boss Court · other · unclear · **final as written**
+- Champion · other · unclear · **internal only, never printed**
+- Warband · other · unclear · **final as written**
+- Den · other · unclear · **internal only, never printed**
+- Skirmish Screen · other · unclear · **internal only, never printed**
+- Ambush (template) · other · unclear · **internal only, never printed**
+- Battery · other · unclear · **final as written**
+- Honour Guard · other · unclear · **internal only, never printed**
+- Gauntlet · other · unclear · **final as written**
+- Scavengers · other · unclear · **final as written**
+- Sleeper · other · unclear · **internal only, never printed**
+- Summoner Circle / Mender's Band / Feud · other · unclear · **final as written**
+- Rival Party (rival adventuring party, captain) · other · unclear · **final as written**
+- Optional elite room · room or terrain · approved-final · **final as written**
+- Guard post / Lair / Patrol (encounter bands) · room or terrain · unclear · **final as written**
+- Upended / Sprawled · condition · flagged-to-naming-pass · **Sprawled final; Upended retired (NP-6)**
+
+#### B.7 armour (102)
+
+- Supple · verb or action · approved-final · **final as written**
+- Weave · verb or action · approved-final · **final as written**
+- Studded · verb or action · approved-final · **final as written**
+- Sure-Footed · verb or action · approved-final · **final as written**
+- Ringed · verb or action · approved-final · **final as written**
+- Overlap · verb or action · approved-final · **final as written**
+- Shoulder · verb or action · approved-final · **final as written**
+- Stalwart · verb or action · approved-final · **final as written**
+- Proof · verb or action · approved-final · **final as written**
+- Enclosed · verb or action · approved-final · **final as written**
+- Leather · item family · approved-final · **final as written**
+- Gambeson · item family · approved-final · **final as written**
+- Brigandine · item family · approved-final · **final as written**
+- Hide · item family · approved-final · **final as written**
+- Chain shirt · item family · approved-final · **final as written**
+- Scale · item family · approved-final · **final as written**
+- Breastplate · item family · approved-final · **final as written**
+- Half plate · item family · approved-final · **final as written**
+- Chain mail · item family · approved-final · **final as written**
+- Splint (lamellar) · item family · approved-final · **final as written**
+- Plate · item family · approved-final · **final as written**
+- Unarmoured · system term · approved-final · **final as written**
+- Natural (armour) · system term · approved-final · **final as written**
+- Light / Medium / Heavy (armour categories) · system term · approved-final · **final as written**
+- Shield · item family · approved-final · **final as written**
+- Buckler · item family · approved-final · **final as written**
+- Reliquary Shield · item family · approved-final · **final as written**
+- Tower shield · item family · approved-final · **final as written**
+- Pavise · item family · unclear · **final as written**
+- Fitted · weapon or armour property · approved-final · **final as written**
+- Forewarned · weapon or armour property · approved-final · **final as written**
+- Unbowed · weapon or armour property · approved-final · **final as written**
+- Shadowed · weapon or armour property · approved-final · **final as written**
+- Adamant · weapon or armour property · approved-final · **final as written**
+- Warding Lining · weapon or armour property · approved-final · **final as written**
+- Blued · weapon or armour property · approved-final · **final as written**
+- Muffled · weapon or armour property · approved-final · **final as written**
+- Resistant (element) · weapon or armour property · approved-final · **renamed → <element>-proof (e.g. Fireproof) (client)**
+- Reprisal (element) · weapon or armour property · approved-final · **final as written**
+- Last Ward · weapon or armour property · unclear · **final as written**
+- Ghost Step · weapon or armour property · approved-final · **final as written**
+- Far Weave · weapon or armour property · approved-final · **final as written**
+- Barbed Studs · weapon or armour property · approved-final · **final as written**
+- Deep Stance · weapon or armour property · approved-final · **renamed → Low Stance (client)**
+- Double Ring · weapon or armour property · approved-final · **final as written**
+- Tight Overlap · weapon or armour property · approved-final · **final as written**
+- Bull Rush · weapon or armour property · approved-final · **renamed → Bowl Over (client)**
+- Immovable · weapon or armour property · approved-final · **final as written**
+- Twice-Proof · weapon or armour property · approved-final · **final as written**
+- Sealed · weapon or armour property · approved-final · **final as written**
+- Spiked Boss · weapon or armour property · approved-final · **final as written**
+- Raise · weapon or armour property · approved-final · **final as written**
+- Hailguard · weapon or armour property · approved-final · **final as written**
+- Guarding · weapon or armour property · approved-final · **final as written**
+- Bashing Rim · weapon or armour property · approved-final · **final as written**
+- Shelter · weapon or armour property · approved-final · **final as written**
+- Bulwark Stance · weapon or armour property · approved-final · **final as written**
+- Duskleather Jerkin · item · unclear · **final as written**
+- Tumbler's Leathers · item · unclear · **final as written**
+- Boar-hide Coat · item · unclear · **final as written**
+- Ironbark Hide · item · unclear · **renamed → Ironwood Vest**
+- Ringwarden's Shirt · item · unclear · **renamed → Linkmender's Shirt**
+- Kneeguard Mail · item · unclear · **final as written**
+- Hushmail Hauberk · item · unclear · **renamed → Muffled Hauberk**
+- Gatewarden's Shield · item · unclear · **renamed → Wicket Shield**
+- Pass-Keeper's Shield · item · unclear · **renamed → Pass-Watch Shield**
+- Hailward Shield · item · unclear · **renamed → Hailstruck Shield**
+- Bellwarden's Mail · heirloom · unclear · **renamed → Hound-Collar Mail (client)**
+- Gale Gambeson · item · unclear · **final as written**
+- Knight's Plate · item · unclear · **renamed → Tourney Plate**
+- Pilgrim's Reliquary · item · unclear · **final as written**
+- Visored Helm · trinket · unclear · **final as written**
+- Warden's Coif (Unshaken) · trinket · unclear · **final as written**
+- Unshaken · weapon or armour property · approved-final · **renamed → Unflinching (client)**
+- Barred Helm · trinket · unclear · **final as written**
+- Grappler's Gauntlets · trinket · unclear · **final as written**
+- Deft Gloves · trinket · unclear · **final as written**
+- Strider's Boots · trinket · unclear · **final as written**
+- Ledgewalker's Boots · trinket · unclear · **final as written**
+- Runner's Boots · trinket · unclear · **final as written**
+- Weathered Cloak · trinket · unclear · **renamed → Fleece-Lined Cloak (client)**
+- Grey Mantle · trinket · unclear · **final as written**
+- Hob-nailed Boots · trinket · unclear · **final as written**
+- Ember Ring · trinket · unclear · **final, kept with a recorded waiver (12, 9.3)**
+- Helm, hood, circlet, gloves, gauntlets, bracers, boots, cloak, amulet, ring, charm, capacity (trinket kinds) · item family · approved-final · **final as written**
+- Head, hands, feet, back, neck, finger (body locations) · system term · approved-final · **final as written**
+- Worn items · UI surface · approved-final · **final as written**
+- Body armour (slot) · UI surface · approved-final · **final as written**
+- Strained · system term · approved-final · **final as written**
+- Clatter · system term · approved-final · **final as written**
+- Stiff · system term · approved-final · **final as written**
+- Weighty · system term · approved-final · **final as written**
+- Untrained (verdict 'cannot wear: untrained') · system term · approved-final · **final as written**
+- Armour verb · system term · approved-final · **final as written**
+- Armour band ('AC +1: armour band') · report or setting · approved-final · **final as written**
+- Shield bash · verb or action · approved-final · **final as written**
+- Two-hand grip / one-hand grip · UI surface · approved-final · **final as written**
+- Pits armour · enemy affix · unclear · **final as written**
+- Location verb · system term · approved-final · **final as written**
+- Reaction cap / roll-mode cap / crit cap (preview text 'Shelter would be greyed: one reaction property', 'Parry not offered: Supple already applies') · UI surface · approved-final · **final as written**
+- Vestments (Composed) / Serene · item family · unclear · **final as written**
+- Turning, Cushioned, Lined, Steadfast, Windcloak, Punch Buckler, Lookout Rim, Turn the Blow, Vigilant, Watchful, Quiver · weapon or armour property · unclear · **final as written**
+
+#### B.8 weapons (173)
+
+- Verb (weapon verb) · system term · approved-final · **final as written**
+- Verb signature · system term · approved-final · **final as written**
+- Focus verb · system term · approved-final · **final as written**
+- Push · verb or action · approved-final · **final as written**
+- Hook · verb or action · approved-final · **final as written**
+- shift · system term · approved-final · **final as written**
+- Topple · verb or action · approved-final · **final as written**
+- Cleave · verb or action · approved-final · **final as written**
+- Skewer · verb or action · approved-final · **final as written**
+- Nick · verb or action · approved-final · **final as written**
+- Vex · verb or action · approved-final · **final as written**
+- Lunge · verb or action · approved-final · **final as written**
+- Flourish · verb or action · approved-final · **final as written**
+- Aim · verb or action · approved-final · **final as written**
+- Parry · verb or action · approved-final · **final as written**
+- Set · verb or action · approved-final · **final as written**
+- Graze · verb or action · approved-final · **final as written**
+- Pry · verb or action · approved-final · **final as written**
+- Puncture · verb or action · approved-final · **final as written**
+- Exploit · system term · approved-final · **final as written**
+- Precision · system term · approved-final · **final as written**
+- precision feature · system term · unclear · **final as written**
+- Notched · condition · approved-final · **final as written**
+- Strained · system term · approved-final · **final as written**
+- Keenness · system term · unclear · **final as written**
+- Blunted · condition · unclear · **final as written**
+- Threatened zone · system term · approved-final · **final as written**
+- Haft strike · verb or action · approved-final · **final as written**
+- Off-hand attack · verb or action · approved-final · **final as written**
+- Improvised attack · verb or action · approved-final · **final as written**
+- Unarmed strike · verb or action · approved-final · **final as written**
+- Shield bash · verb or action · approved-final · **final as written**
+- Shove-through · weapon or armour property · approved-final · **final as written**
+- verb training (family) · system term · approved-final · **final as written**
+- empower the weapon's verb / Empower · system term · approved-final · **final as written**
+- verb borrowing · system term · unclear · **final as written**
+- planted (Aim badge) · UI surface · approved-final · **final as written**
+- Gear line · UI surface · approved-final · **final as written**
+- Simple / Martial / Exotic (training) · system term · approved-final · **final as written**
+- light / finesse / heavy / versatile / two-handed / thrown / loading / pointBlank / reach · weapon or armour property · approved-final · **final as written**
+- Blades / Axes / Impact weapons / Flexible weapons / Polearms / Spears / Launchers / Foci (groups) · other · unclear · **final as written**
+- Dagger · item family · approved-final · **final as written**
+- Shortsword · item family · approved-final · **final as written**
+- Sabre · item family · approved-final · **final as written**
+- Rapier · item family · approved-final · **final as written**
+- Longsword · item family · approved-final · **final as written**
+- Greatsword · item family · approved-final · **final as written**
+- Sickle · item family · approved-final · **final as written**
+- Handaxe · item family · approved-final · **final as written**
+- Battleaxe · item family · approved-final · **final as written**
+- Greataxe · item family · approved-final · **final as written**
+- Mace · item family · approved-final · **final as written**
+- Greatclub · item family · approved-final · **final as written**
+- Warhammer · item family · approved-final · **final as written**
+- Maul · item family · approved-final · **final as written**
+- War pick · item family · approved-final · **final as written**
+- Flail · item family · approved-final · **final as written**
+- Whip · item family · approved-final · **final as written**
+- Bolas · item family · approved-final · **final as written**
+- Pike · item family · approved-final · **final as written**
+- Glaive · item family · approved-final · **final as written**
+- Halberd · item family · approved-final · **final as written**
+- Spear · item family · approved-final · **final as written**
+- Trident · item family · approved-final · **final as written**
+- Javelin · item family · approved-final · **final as written**
+- Longbow · item family · approved-final · **final as written**
+- Light crossbow · item family · approved-final · **final as written**
+- Shortbow · item family · approved-final · **final as written**
+- Sling · item family · approved-final · **final as written**
+- Hand crossbow · item family · approved-final · **final as written**
+- Heavy crossbow · item family · approved-final · **final as written**
+- Staff · item family · approved-final · **final as written**
+- Orb · item family · approved-final · **final as written**
+- Rod · item family · approved-final · **final as written**
+- Tome · item family · approved-final · **final as written**
+- Holy symbol · item family · approved-final · **final as written**
+- Totem · item family · approved-final · **renamed → Tipstaff (focus kind) (client)**
+- Instrument · item family · approved-final · **final as written**
+- Wand (not a focus) · other · approved-final · **final as written**
+- Steady Casting · ability · approved-final · **final as written**
+- Reach Out · ability · approved-final · **final as written**
+- Shape · ability · approved-final · **final as written**
+- Annotate · ability · approved-final · **final as written**
+- Spare · ability · approved-final · **final as written**
+- Loom · ability · approved-final · **final as written**
+- Carry · ability · approved-final · **final as written**
+- Reliquary Shield · item · approved-final · **final as written**
+- Buckler · item family · approved-final · **final as written**
+- Tower shield · item family · approved-final · **final as written**
+- Claw · weapon or armour property · approved-final · **final as written**
+- Bite (pack bite, grabbing bite) · weapon or armour property · approved-final · **final as written**
+- Slam · weapon or armour property · approved-final · **final as written**
+- Tail or sting · weapon or armour property · approved-final · **final as written**
+- Tentacle or pseudopod · weapon or armour property · approved-final · **final as written**
+- Touch · weapon or armour property · approved-final · **final as written**
+- Converted · weapon or armour property · approved-final · **final as written**
+- Edge · weapon or armour property · approved-final · **final as written**
+- Ember Edge / Frost Edge / Storm Edge / Caustic Edge / Dawn Edge / Grave Edge · weapon or armour property · approved-final · **final as written**
+- Honed · weapon or armour property · approved-final · **final as written**
+- Long Haft · weapon or armour property · approved-final · **final as written**
+- Far-flight · weapon or armour property · approved-final · **final as written**
+- Quickdraw · weapon or armour property · approved-final · **final as written**
+- Opener · weapon or armour property · approved-final · **renamed → Forestroke (client)**
+- Parrying · weapon or armour property · approved-final · **final as written**
+- Lunging · weapon or armour property · approved-final · **final as written**
+- Kiter's Step · weapon or armour property · approved-final · **final as written**
+- Ricochet · weapon or armour property · approved-final · **final as written**
+- Seeking · weapon or armour property · approved-final · **final as written**
+- Repeater · weapon or armour property · approved-final · **final as written**
+- Executioner's Stroke · weapon or armour property · approved-final · **final as written**
+- Hungering · weapon or armour property · approved-final · **final as written**
+- Sure Grip · weapon or armour property · approved-final · **renamed → Fast Grip (client)**
+- Quivered · weapon or armour property · approved-final · **final as written**
+- Bloodletter · weapon or armour property · approved-final · **renamed → Gashing (client)**
+- Thunderous · weapon or armour property · approved-final · **final as written**
+- Quake · weapon or armour property · approved-final · **final as written**
+- Volley · weapon or armour property · approved-final · **renamed → Arrowfall (client)**
+- Overwatch · weapon or armour property · approved-final · **renamed → Ready Shot (client)**
+- Pinning · weapon or armour property · approved-final · **final as written**
+- Crushing · weapon or armour property · approved-final · **final as written**
+- Sundering · weapon or armour property · approved-final · **final as written**
+- Disarming · weapon or armour property · approved-final · **final as written**
+- Shatter · weapon or armour property · approved-final · **renamed → Fracturing (client)**
+- Heavy Push · weapon or armour property · approved-final · **final as written**
+- Driving · weapon or armour property · approved-final · **final as written**
+- Long Hook · weapon or armour property · approved-final · **final as written**
+- Crack · weapon or armour property · approved-final · **final as written**
+- Floorer · weapon or armour property · approved-final · **final as written**
+- Wide Cleave · weapon or armour property · approved-final · **final as written**
+- Biting Cleave · weapon or armour property · approved-final · **final as written**
+- Reaping · weapon or armour property · approved-final · **final as written**
+- Long Skewer · weapon or armour property · approved-final · **final as written**
+- Paired Throw · weapon or armour property · approved-final · **final as written**
+- Fan Throw · weapon or armour property · approved-final · **final as written**
+- Shared Vex · weapon or armour property · approved-final · **final as written**
+- Quick Lunge · weapon or armour property · approved-final · **final as written**
+- Lunge Guard · weapon or armour property · approved-final · **final as written**
+- Long Flourish · weapon or armour property · approved-final · **final as written**
+- Steady Aim · weapon or armour property · approved-final · **renamed → Settled Aim (client)**
+- Deflect · weapon or armour property · approved-final · **final as written**
+- Binding Parry · weapon or armour property · approved-final · **final as written**
+- Riposte · weapon or armour property · approved-final · **final as written**
+- Warding Staff · weapon or armour property · approved-final · **final as written**
+- Short Grip · weapon or armour property · approved-final · **final as written**
+- Keep Back · weapon or armour property · approved-final · **final as written**
+- Driving Graze · weapon or armour property · approved-final · **final as written**
+- Pry Deep · weapon or armour property · approved-final · **final as written**
+- Bore · weapon or armour property · approved-final · **final as written**
+- Shaping · weapon or armour property · approved-final · **final as written**
+- Snap Casting · weapon or armour property · approved-final · **final as written**
+- Attuned · weapon or armour property · approved-final · **final as written**
+- Conduit · weapon or armour property · approved-final · **final as written**
+- Far Reach · weapon or armour property · approved-final · **final as written**
+- Shared Steadiness · weapon or armour property · approved-final · **final as written**
+- Sparing · weapon or armour property · approved-final · **final as written**
+- Wellspring · weapon or armour property · approved-final · **final as written**
+- Doorwarden's Pike · item · approved-final · **final as written**
+- Gatebreaker · item · approved-final · **final as written**
+- Wolfcleaver · item · approved-final · **final as written**
+- Vowkeeper · item · approved-final · **final as written**
+- Thunderclap Greatclub · item · approved-final · **renamed → Thudding Greatclub (client)**
+- Hunter's Longbow · item · approved-final · **renamed → Fowler's Longbow (client)**
+- Corridor Warden · item · approved-final · **renamed → Corridor Crossbow (client)**
+- Skirmisher's Spear · item · approved-final · **renamed → Forager's Spear (client)**
+- Duellist's Rapier · item · approved-final · **renamed → Courtier's Rapier (client)**
+- Skullsplitter · item · approved-final · **final as written**
+- Bonebreaker Mace · item · approved-final · **final as written**
+- Wardwood Staff · item · approved-final · **renamed → Rowan Staff (client)**
+- Magpie's Knife · item · approved-final · **final as written**
+- Headsman's Greataxe · item · approved-final · **final as written**
+- throwing knives / darts / throwing hammer (dagger skins) · item · unclear · **final as written**
+- Scimitar, cutlass, falchion, gladius, estoc, partisan, bo staff, khopesh, hookblade, katana, arming sword, bastard sword, zweihander, claymore, harpoon, morningstar · item · unclear · **final as written**
+- Soldier / Brute / Artillery / Minion / Skirmisher / Leader / raider / duellist / cultist minion / pike soldier / claw brute · enemy type · unclear · **renamed → Marksman (client)**
+
+#### B.9 consumables (60)
+
+- Reprieve Phial · item · approved-final · **final as written**
+- talisman · item family · approved-final · **final as written**
+- Reprieve ready · UI surface · unclear · **final as written**
+- lethal → Reprieve fires / will fire Reprieve on X · UI surface · unclear · **final as written**
+- Give (adjacent or within 5) · UI surface · unclear · **final as written**
+- Throw (potion/tonic delivery) · verb or action · approved-final · **final as written**
+- Drink · verb or action · unclear · **final as written**
+- Sundries · system term · unclear · **final as written**
+- offensive flask / setup flask · system term · unclear · **final as written**
+- FlaskThisTurn · system term · unclear · **final as written**
+- in class / out of class · system term · approved-final · **final as written**
+- camp issue (Healing potion, camp issue) · item · unclear · **final as written**
+- Healing Potion · consumable · placeholder · **final as written**
+- Tonic · consumable · unclear · **final as written**
+- Remedy · consumable · unclear · **final as written**
+- Antitoxin · consumable · placeholder · **renamed → Bitter Draught**
+- Resistance Draught · consumable · placeholder · **renamed → Tempering Draught**
+- Stoneskin Draught · consumable · placeholder · **renamed → Slate Draught**
+- Water Flask · consumable · placeholder · **final as written**
+- Oil Flask · consumable · placeholder · **final as written**
+- Fire Bomb · consumable · placeholder · **final as written**
+- Greater Fire Bomb · consumable · placeholder · **final as written**
+- Holy Water · consumable · placeholder · **renamed → Lamp Water**
+- Sticky Flask · consumable · placeholder · **final as written**
+- Weighted Net · consumable · placeholder · **final as written**
+- Thunderstone · consumable · placeholder · **renamed → Blowback Jar**
+- Venom Oil / Venom Arrows · consumable · placeholder · **renamed → Poison Oil**
+- Serrating Oil / Serrated Arrows · consumable · placeholder · **renamed → Serrating Arrows**
+- Fan of Cinders · spell · placeholder · **final as written**
+- Shockwave · spell · placeholder · **renamed → Groundswell**
+- Trembling Word · spell · placeholder · **final as written**
+- Grasping Roots · spell · placeholder · **renamed → Grasping Weeds**
+- Jarring Whispers · spell · placeholder · **renamed → Grating Murmur**
+- Guiding Radiance · spell · placeholder · **renamed → Marking Light**
+- Withering Touch · spell · placeholder · **final as written**
+- Frost Shard · spell · placeholder · **final as written**
+- Mending Word · spell · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Scorching Rays · spell · placeholder · **renamed → Rays (fire)**
+- Blinding Flash · spell · placeholder · **final as written**
+- Fireball · spell · placeholder · **renamed → Detonation (fire)**
+- Lightning Line · spell · placeholder · **final as written**
+- Terror · spell · placeholder · **final as written**
+- Slowing · spell · placeholder · **renamed → Dragfoot**
+- Unweaving · spell · placeholder · **final as written**
+- Icefall · spell · placeholder · **final as written**
+- Blight · spell · placeholder · **renamed → Wilt**
+- Blessing · spell · placeholder · **renamed → Warm Word**
+- Slumber · spell · placeholder · **renamed → Drowse**
+- Holding · spell · placeholder · **renamed → Arrest (merged)**
+- Hushing · spell · placeholder · **final as written**
+- Flicker Step · spell · placeholder · **final as written**
+- Far Step · spell · placeholder · **final as written**
+- Elemental Endurance · spell · placeholder · **final as written**
+- Banishing · spell · placeholder · **renamed → Cast Out**
+- Wand of Sparks · item · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Wand of Outlining · item · placeholder · **final as written**
+- Wand of Snaring · item · placeholder · **renamed → Wand of Fetters**
+- Wand of Rime Lance · item · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Ward Draught · consumable · unclear · **final as written**
+- Courage draught / Freedom Draught / Clarity draught / Regeneration potion / Smoke Pellet / Frost bomb / Flash flask / glowdust / Acid flask / Smelling salts / Ember and Rime coatings · consumable · unclear · **final as written**
+
+#### B.10 trinkets (96)
+
+- trinket · system term · approved-final · **final as written**
+- Common / Uncommon / Rare / Very rare (trinket rarity tiers) · system term · approved-final · **final as written**
+- Head / Hands / Feet / Back / Neck / Finger / None (trinket locations) · UI surface · approved-final · **final as written**
+- life (lane word; 'life and the body') · UI surface · approved-final · **final as written**
+- your strike (lane word) · UI surface · approved-final · **final as written**
+- stored moments (lane/domain words) · UI surface · approved-final · **final as written**
+- carrying (capacity lane) · UI surface · approved-final · **final as written**
+- charm (none) (card kind display) · UI surface · approved-final · **final as written**
+- knot, locket, token, torc, pendant, band (kind display words) · system term · unclear · **final as written**
+- Token (charm display word) · system term · flagged-to-naming-pass · **dropped as a display word; object noun shown; ◈ spoken "stored moment"; "Fob" in two item names**
+- talisman (dropped charm display word) · system term · approved-final · **final as written**
+- shape glyphs (⛨ prevent, ⟲ cost/reach/declared step, ✦ channel, ◈ token, ▸ button, ? dormant) · UI surface · unclear · **final as written**
+- ? dormant · Arcana 13 vs 14 (dormant line readout) · UI surface · unclear · **final as written**
+- Carries: amulet (life) (hover tell) · UI surface · unclear · **final as written**
+- ReactionCap / ButtonCap / DuplicateAnswer / AlreadyWarded / AlreadyWardedThisFight / TrinketHelpedLimit / CharmCaughtThisFight (greyed reasons) · UI surface · unclear · **final as written**
+- DeadLine (warning verdict) · UI surface · unclear · **final as written**
+- pack slot (Pack +1 / Pack +2) · system term · unclear · **final as written**
+- Visored Helm · item family · placeholder · **final as written**
+- Visor · weapon or armour property · placeholder · **final as written**
+- Warden's Coif · item family · approved-final · **final as written**
+- Unshaken · weapon or armour property · approved-final · **renamed → Unflinching (client)**
+- Barred Helm · item family · placeholder · **final as written**
+- Barred · weapon or armour property · approved-final · **final as written**
+- Watcher's Hood · item family · placeholder · **final as written**
+- Vigil · weapon or armour property · placeholder · **final as written**
+- Shaded Circlet · item family · placeholder · **final as written**
+- Scholar's Circlet · item family · placeholder · **final as written**
+- Grappler's Gauntlets · item family · approved-final · **final as written**
+- Grappler · weapon or armour property · placeholder · **final as written**
+- Deft Gloves · item family · placeholder · **final as written**
+- Deft · weapon or armour property · approved-final · **final as written**
+- Catcher's Bracers · item family · placeholder · **renamed → Courier's Bracers**
+- Catcher · weapon or armour property · placeholder · **renamed → Courier**
+- Clenching Gauntlets · item family · placeholder · **renamed → Iron-Grip Gauntlets**
+- Clench · weapon or armour property · placeholder · **renamed → Iron Grip**
+- Slinger's Bracers · item family · placeholder · **final as written**
+- Strider's Boots · item family · placeholder · **final as written**
+- Strider · weapon or armour property · approved-final · **final as written**
+- Ledgewalker's Boots · item family · approved-final · **final as written**
+- Ledgewalker · weapon or armour property · placeholder · **final as written**
+- Runner's Boots · item family · placeholder · **final as written**
+- Runner · weapon or armour property · approved-final · **final as written**
+- Wader's Boots · item family · placeholder · **final as written**
+- Leaper's Boots · item family · placeholder · **final as written**
+- Weathered Cloak · item family · approved-final · **renamed → Fleece-Lined Cloak (client)**
+- Weathered · weapon or armour property · approved-final · **renamed → Fleece-Lined (client)**
+- Grey Mantle · item family · approved-final · **final as written**
+- Oilskin Cloak · item family · placeholder · **final as written**
+- Oilskin · weapon or armour property · placeholder · **final as written**
+- Duskhem Cloak · item family · placeholder · **final as written**
+- Duskhem · weapon or armour property · placeholder · **final as written**
+- Groundsilk Cloak · item family · placeholder · **final as written**
+- Smoke Cloak · item family · placeholder · **final as written**
+- Antidote Locket · item family · placeholder · **final as written**
+- Antidote · weapon or armour property · placeholder · **renamed → Venomproof**
+- Graveward Amulet · item family · placeholder · **final as written**
+- Graveward · weapon or armour property · placeholder · **final as written**
+- Lifeline Pendant · item family · placeholder · **final as written**
+- Lifeline · weapon or armour property · placeholder · **final as written**
+- Emberward Amulet · item family · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Emberward · weapon or armour property · placeholder · **final as written**
+- Kinward Torc · item family · placeholder · **final as written**
+- Kinward · weapon or armour property · placeholder · **final as written**
+- Heartward Torc · item family · placeholder · **final as written**
+- Frostward / Stormward / Causticward / Dawnward / Duskward Amulets · item family · placeholder · **final as written**
+- Staunch Torc · item family · placeholder · **final as written**
+- Torc of Seasons · item family · placeholder · **renamed → Seasonal Torc**
+- Stillmind Pendant · item family · placeholder · **final as written**
+- Bulwark Locket · item family · placeholder · **final as written**
+- Ember Ring · item family · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Ember · weapon or armour property · placeholder · **final as written**
+- Frost Ring · item family · placeholder · **final as written**
+- Frost · weapon or armour property · placeholder · **final as written**
+- Whetstone Ring · item family · placeholder · **final as written**
+- Whetstone · weapon or armour property · placeholder · **final as written**
+- Sigil of Aid · item family · placeholder · **final as written**
+- Aid · weapon or armour property · placeholder · **renamed → of the Helper (epithet); Helping Sigil (family)**
+- Longreach Band · item family · placeholder · **final as written**
+- Longreach · weapon or armour property · placeholder · **final as written**
+- Storm / Grave / Dawn Rings · item family · placeholder · **final as written**
+- Seeker's Band · item family · placeholder · **final as written**
+- Sightline · weapon or armour property · placeholder · **final as written**
+- Caustic Ring · item family · placeholder · **final as written**
+- Wardstone · charm · placeholder · **final as written**
+- Ward-Knot · charm · placeholder · **final as written**
+- Trophy Tally · charm · placeholder · **final as written**
+- Tally · ability · placeholder · **final as written**
+- Porter's Satchel · item family · placeholder · **final as written**
+- Mule Strap · item family · placeholder · **final as written**
+- Bloodknot · charm · placeholder · **final as written**
+- Kinstone · charm · placeholder · **renamed → Kin Pebble**
+- Scrollwright's Token · trinket · placeholder · **renamed → Scrollwright's Fob**
+- Last-Breath Charm · charm · placeholder · **final as written**
+- Muse's Token · charm · placeholder · **renamed → Muse's Fob**
+- Strider's Boots of the Runner / Watcher's Hood of the Bar / Ember Ring of Aid / Wardstone of the Tally / Heartward Torc of ? · item · placeholder · **final as written**
+- Cut names: Shifting Band, Luckstone, Doubled Knot, Physician's Locket, Guardring, Steady Hands, Ring of Passage, Ring of the Second Word, Second Chance Token, Lucky Bone, Spurred boots, Slipping Bracers, Tinder Ring, Knucklebone, Turn of Luck, Kindred Glint, Ward Echo, Watchful Clasp, Help-whistle charm, Clearmind Circlet, Stillwater · item family · unclear · **final as written**
+
+#### B.11 death-healing (39)
+
+- HP tier (slight / standard / sturdy) · system term · approved-final · **final as written**
+- Recovery · system term · approved-final · **final as written**
+- Danger band: Safe / Risky / Deadly · UI surface · approved-final · **final as written**
+- "unknown threats" marker · UI surface · unclear · **final as written**
+- "can be Downed" (companion band label) · UI surface · unclear · **final as written**
+- "Reprieve armed" / "Death-warded" band markers; "before saves" tooltip · UI surface · unclear · **final as written**
+- End-turn warning ("You can be killed this round (Deadly, 27%).") · UI surface · placeholder · **final as written**
+- Lethal tags ("lethal"; "lethal -> Death-warded / Reprieve fires"; "will Down X"; "killing this triggers a burst that is lethal to you") · UI surface · unclear · **final as written**
+- "floored this time" / bracketed "1" pip; "floored" preview label · UI surface · unclear · **final as written**
+- "up to X" Hunch entry preview, with a red cracked-heart lethal tag · UI surface · unclear · **final as written**
+- "HP after: X, until next rest" (move preview) · UI surface · unclear · **final as written**
+- "bloodied" plate mark (50%) · UI surface · placeholder · **final as written**
+- "low" plate mark (25%) · UI surface · placeholder · **final as written**
+- Downed marker text "gets up if you win, or at a rest" · UI surface · placeholder · **final as written**
+- Get-up preview ("already got up this fight") · UI surface · unclear · **final as written**
+- Get-up overlay · UI surface · unclear · **final as written**
+- Heal preview ("cannot lift Downed") · UI surface · unclear · **final as written**
+- Rest screen / patrol warning · UI surface · unclear · **final as written**
+- Death recap · UI surface · placeholder · **final as written**
+- Floor-entry card ("This floor holds at least 1 healing potion and 1 supply on the main path.") · UI surface · placeholder · **final as written**
+- Party-bar tally "found 1 of at least 1" · UI surface · placeholder · **final as written**
+- healing potion (camp issue) · consumable · approved-final · **final as written**
+- Camp top-up (hero's potion top-up) · system term · approved-final · **final as written**
+- Healing package / guarantee (G1 Camp, G2 Supply, G3 Starting kits, G4 Found potions, G5 Camp top-up, G6 Announcement) · system term · unclear · **final as written**
+- Movement undo · verb or action · approved-final · **final as written**
+- Instant (death model) · system term · approved-final · **final as written**
+- Last Stand (Later assist / 'Story' rung) · report or setting · unclear · **final as written**
+- Mortal companions (Later 'Hard' rung) · report or setting · unclear · **final as written**
+- Story rung / Hard rung · report or setting · unclear · **final as written**
+- Rescue (Last Stand action) · verb or action · unclear · **final as written**
+- Dying (clock / state) and Stable · condition · unclear · **final as written**
+- Stabilise (universal action) · verb or action · unclear · **final as written**
+- Fallen list · UI surface · unclear · **final as written**
+- Last Ward (retired) · weapon or armour property · approved-final · **final as written**
+- Last-Breath Charm (retired) · charm · approved-final · **final as written**
+- Second Wind (fighter-type rest tool) · ability · unclear · **renamed → Dig In**
+- Death-Ward-shaped tier-3 class spell · spell · unclear · **final as written**
+- carried body / carried follower · system term · unclear · **final as written**
+- "the dream unravels" (release clean-end text) · system term · unclear · **final as written**
+
+#### B.12 classes-concepts (95)
+
+- Vanguard · class · placeholder · **final as written**
+- Shade · class · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Arcanist · class · placeholder · **final as written**
+- Herald · class · placeholder · **final as written**
+- Weaponmaster · subclass · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Bastion · subclass · placeholder · **renamed → Rampart (client)**
+- Wrecker · subclass · placeholder · **final as written**
+- Cutthroat · subclass · placeholder · **final as written**
+- Trapwright · subclass · placeholder · **final as written**
+- Swordsworn · subclass · placeholder · **final as written**
+- Binder · subclass · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Alembic · subclass · placeholder · **final as written**
+- Loremaster · subclass · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Elementalist · subclass · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Dirge · subclass · placeholder · **final as written**
+- Hearth · subclass · placeholder · **final as written**
+- Hearthkeeper · ability · placeholder · **final as written**
+- Warcaller · subclass · placeholder · **final as written**
+- Pennant · subclass · placeholder · **final as written**
+- Techniques · ability · placeholder · **final as written**
+- Press · ability · placeholder · **final as written**
+- Hew · ability · placeholder · **final as written**
+- Empower · ability · placeholder · **final as written**
+- Bite Deep · ability · placeholder · **final as written**
+- Second Wind · ability · flagged-to-naming-pass · **renamed → Dig In**
+- Surge · ability · placeholder · **renamed → Onslaught (client)**
+- Hold the Line · ability · placeholder · **renamed → Bar the Way**
+- Shieldwall · ability · placeholder · **final as written**
+- Drive Through · ability · placeholder · **final as written**
+- Pivot · ability · placeholder · **final as written**
+- Grim Resolve · ability · placeholder · **final as written**
+- Low Cut · ability · placeholder · **final as written**
+- Stand Fast · ability · placeholder · **final as written**
+- Square Up · ability · placeholder · **final as written**
+- Opening · ability · placeholder · **final as written**
+- Unready · system term · placeholder · **final as written**
+- Surprised (Opening trigger) · system term · placeholder · **final as written**
+- Hidden (Opening trigger) · system term · placeholder · **final as written**
+- Beset · system term · placeholder · **final as written**
+- Answer · system term · placeholder · **final as written**
+- Caught · system term · placeholder · **renamed → Trapped**
+- Tricks · ability · placeholder · **final as written**
+- Duck · ability · placeholder · **final as written**
+- Catch Breath · ability · flagged-to-naming-pass · **renamed → Respite**
+- Vanish · ability · placeholder · **final as written**
+- Deep Pockets · ability · placeholder · **final as written**
+- Light Fingers · ability · placeholder · **final as written**
+- Tainted Blade · ability · placeholder · **final as written**
+- From Nowhere · ability · placeholder · **final as written**
+- Quiet Company · ability · unclear · **final as written**
+- Feint · ability · unclear · **final as written**
+- element pair · system term · placeholder · **final as written**
+- Weft · ability · placeholder · **final as written**
+- Sculpt · ability · placeholder · **renamed → Whittle**
+- Flare · ability · placeholder · **final as written**
+- Knit · ability · flagged-to-naming-pass · **final as written**
+- Mote · ability · placeholder · **final as written**
+- Gust · ability · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Interplay · ability · placeholder · **final as written**
+- Fused · ability · placeholder · **final as written**
+- Overchannel · ability · placeholder · **final as written**
+- priming · verb or action · placeholder · **final as written**
+- Spellguard · class · unclear · **final as written**
+- Cadence · ability · placeholder · **final as written**
+- Spur · ability · placeholder · **renamed → Urge**
+- Rekindle · ability · flagged-to-naming-pass · **renamed → Take Heart**
+- Harrowing Word · ability · placeholder · **final as written**
+- Plain Speech · system term · placeholder · **final as written**
+- Faltering · system term · placeholder · **final as written**
+- Undertone · system term · placeholder · **renamed → Ache**
+- Mending Word · spell · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Marching calls · spell · placeholder · **final as written**
+- Scatter · ability · placeholder · **final as written**
+- Antiphon · ability · placeholder · **final as written**
+- Soothe · ability · placeholder · **final as written**
+- Drummer · companion · placeholder · **final as written**
+- Totem · item family · unclear · **renamed → Tipstaff (focus kind) (client)**
+- Votary · class · placeholder · **final as written**
+- Tracker · class · placeholder · **final as written**
+- Prey · ability · placeholder · **final as written**
+- Rootwarden · class · placeholder · **final as written**
+- Holdfast · class · placeholder · **final as written**
+- Berserker · class · placeholder · **renamed → Ravager**
+- Fury · ability · placeholder · **final as written**
+- Adept · class · placeholder · **renamed → Ascetic (client)**
+- Sapper · class · placeholder · **final as written**
+- Marshal · class · placeholder · **final as written**
+- Hexer · class · placeholder · **final as written**
+- Beastbound · class · placeholder · **final as written**
+- Stormblood / Seer / Captain · class · unclear · **final as written**
+- Class talent / Spell card / Offer / Creation pick / Capstone · UI surface · unclear · **final as written**
+- aspect · system term · unclear · **final as written**
+- Complexity (Simple / Medium / Complex) · UI surface · unclear · **final as written**
+- HP tier labels (Sturdy / Standard / Slight) · system term · unclear · **final as written**
+- spellbook row · UI surface · unclear · **final as written**
+
+#### B.13 vanguard-class (55)
+
+- Hold the Line · ability · flagged-to-naming-pass · **renamed → Bar the Way**
+- Square Up · ability · placeholder · **final as written**
+- Bite Deep · ability · placeholder · **final as written**
+- Borrowed Form · ability · placeholder · **final as written**
+- Stance Drill · ability · placeholder · **final as written**
+- Stubborn Breath · ability · placeholder · **final as written**
+- Press · ability · placeholder · **final as written**
+- Practised Hand · ability · placeholder · **final as written**
+- Hew · ability · placeholder · **final as written**
+- Empower · ability · placeholder · **final as written**
+- Low Cut · ability · placeholder · **final as written**
+- Cover Step · ability · placeholder · **final as written**
+- Momentum · system term · placeholder · **final as written**
+- Ram · ability · placeholder · **final as written**
+- Skittles · ability · placeholder · **final as written**
+- Called Out · ability · placeholder · **final as written**
+- Arsenal · ability · placeholder · **final as written**
+- Step In · ability · placeholder · **final as written**
+- Earthshaker · ability · placeholder · **final as written**
+- Twin Verb · ability · placeholder · **final as written**
+- Sure Form · ability · placeholder · **final as written**
+- Retort Strike · ability · placeholder · **final as written**
+- Warden's Reach (retortStrike.wardensReach) · ability · unclear · **final as written**
+- Shield Craft · ability · placeholder · **final as written**
+- Battering Force · ability · placeholder · **final as written**
+- Brink · ability · placeholder · **final as written**
+- Domino · ability · placeholder · **final as written**
+- Upend · ability · placeholder · **final as written**
+- Drive Through · ability · placeholder · **final as written**
+- Pivot · ability · placeholder · **final as written**
+- Grim Resolve · ability · placeholder · **final as written**
+- Deep Reserves · ability · placeholder · **renamed → Fresh Reserves**
+- Sound the Advance · ability · placeholder · **final as written**
+- Stand Fast · ability · placeholder · **final as written**
+- Shieldwall · ability · placeholder · **final as written**
+- Surge · ability · placeholder · **renamed → Onslaught (client)**
+- Techniques · system term · placeholder · **final as written**
+- Art (Surge Art) · system term · placeholder · **final as written**
+- Rank (I / II / III) · system term · placeholder · **final as written**
+- Signature Technique · system term · placeholder · **final as written**
+- Free effect · system term · unclear · **final as written**
+- Stance re-pick · UI surface · unclear · **final as written**
+- Window fill · system term · unclear · **final as written**
+- Collision band · system term · unclear · **final as written**
+- Nine Rivets · item · placeholder · **final as written**
+- Form ready (glint) · UI surface · unclear · **final as written**
+- Ladder preview lines · UI surface · unclear · **final as written**
+- Creation warning text · UI surface · unclear · **final as written**
+- breakFree / twoRounds (trigger options) · ability · unclear · **final as written**
+- Take the Blow · ability · placeholder · **final as written**
+- Chosen Arms · ability · placeholder · **final as written**
+- Over the Edge · ability · placeholder · **final as written**
+- Blade Storm · ability · unclear · **final as written**
+- Avalanche · ability · unclear · **final as written**
+- Rejected/withheld names · other · unclear · **final as written**
+
+#### B.14 shade-class (84)
+
+- Shade · class · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Cutthroat · subclass · placeholder · **final as written**
+- Trapwright · subclass · placeholder · **final as written**
+- Swordsworn · subclass · placeholder · **final as written**
+- Opening · verb or action · placeholder · **final as written**
+- Tricks · system term · placeholder · **final as written**
+- Vanish · ability · placeholder · **final as written**
+- Answer · ability · placeholder · **final as written**
+- Fade · ability · placeholder · **final as written**
+- Duck · ability · placeholder · **final as written**
+- Catch Breath · ability · placeholder · **renamed → Respite**
+- Beset · ability · placeholder · **final as written**
+- Unready · ability · placeholder · **final as written**
+- Strike limit · system term · placeholder · **final as written**
+- Strike option · system term · placeholder · **final as written**
+- Stealth die / stealth tier · system term · placeholder · **final as written**
+- Open amount / open tier · system term · placeholder · **final as written**
+- Glint · UI surface · placeholder · **final as written**
+- Signature Tricks option · system term · placeholder · **final as written**
+- Art (Vanish Art) · system term · placeholder · **final as written**
+- Turned blow · system term · placeholder · **final as written**
+- Unaware (Cutthroat) · system term · placeholder · **final as written**
+- The Vanish carry · system term · placeholder · **final as written**
+- Hidden for Opening · system term · placeholder · **final as written**
+- Signature pip · UI surface · placeholder · **final as written**
+- Opening I / Opening II · ability · placeholder · **final as written**
+- Draw Out · ability · placeholder · **final as written**
+- Tainted Blade · ability · placeholder · **final as written**
+- Shrugged Off · system term · placeholder · **final as written**
+- Deep Pockets · ability · unclear · **final as written**
+- Light Fingers · ability · placeholder · **final as written**
+- Clear Head · ability · placeholder · **final as written**
+- Long Shadow · ability · placeholder · **final as written**
+- Spare Trick · ability · placeholder · **final as written**
+- Tumble Clear · ability · placeholder · **final as written**
+- Sure Hands · ability · unclear · **final as written**
+- From Nowhere · ability · placeholder · **final as written**
+- No Witnesses · ability · placeholder · **final as written**
+- Quiet Work · ability · placeholder · **final as written**
+- Surprised die · system term · placeholder · **final as written**
+- Throat-Cut · ability · placeholder · **final as written**
+- Make an Example · ability · placeholder · **final as written**
+- Ambuscade · ability · placeholder · **final as written**
+- Stake Out · ability · unclear · **final as written**
+- Trap Eye · ability · placeholder · **final as written**
+- Caught · ability · placeholder · **renamed → Trapped**
+- Jury-Rig · ability · placeholder · **final as written**
+- Spring · ability · placeholder · **final as written**
+- Re-arm · ability · unclear · **final as written**
+- Toss · ability · placeholder · **final as written**
+- Dust · ability · placeholder · **final as written**
+- Wedge · ability · placeholder · **final as written**
+- Killing Ground · ability · placeholder · **final as written**
+- Drag Line · ability · placeholder · **final as written**
+- Trick Shot · ability · placeholder · **renamed → Bank Shot**
+- Tripline · ability · placeholder · **final as written**
+- Caught Out · ability · placeholder · **renamed → Unbraced**
+- Trigger Shot · verb or action · unclear · **final as written**
+- Sworn Guard · ability · placeholder · **final as written**
+- Counterstroke · ability · placeholder · **final as written**
+- Open Guard · ability · placeholder · **final as written**
+- Held Guard · ability · placeholder · **renamed → Closed Guard**
+- Lone Blade · ability · placeholder · **final as written**
+- Cross Steel · ability · placeholder · **final as written**
+- Turn Aside · ability · placeholder · **final as written**
+- Blade Dance · ability · placeholder · **renamed → Steel Waltz**
+- Old Wound · ability · placeholder · **final as written**
+- Bad Footing · ability · placeholder · **final as written**
+- Blind Side · ability · placeholder · **final as written**
+- False Trail · ability · placeholder · **final as written**
+- False Trail ghost marker · UI surface · unclear · **final as written**
+- Lure · verb or action · placeholder · **final as written**
+- Wise to You · system term · placeholder · **final as written**
+- Pinch · verb or action · unclear · **final as written**
+- Lie in Wait · ability · unclear · **final as written**
+- Gloom squares · room or terrain · unclear · **final as written**
+- Vault · verb or action · unclear · **final as written**
+- Blades (kit) · item family · placeholder · **final as written**
+- Launcher (kit) · item family · placeholder · **final as written**
+- Ladder preview lines · UI surface · placeholder · **final as written**
+- Tricks row pip display · UI surface · placeholder · **final as written**
+- Seam and Coup · other · unclear · **final as written**
+- Snuff · ability · unclear · **final as written**
+- Press the Duel / Answering Lunge · ability · unclear · **final as written**
+
+#### B.15 arcanist-class (91)
+
+- Arcanist · class · placeholder · **final as written**
+- Binder · subclass · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Alembic · subclass · placeholder · **final as written**
+- Loremaster · subclass · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Elementalist · subclass · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Mote · ability · placeholder · **final as written**
+- Mote key · system term · placeholder · **final as written**
+- Gust · ability · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Sculpt · ability · flagged-to-naming-pass · **renamed → Whittle**
+- Sculpt II · ability · placeholder · **final as written**
+- Selective / Widen / Charge (Sculpt modes) · ability · placeholder · **final as written**
+- Weft · system term · placeholder · **final as written**
+- Flare · ability · placeholder · **final as written**
+- Flare II · ability · placeholder · **final as written**
+- Knit · ability · placeholder · **final as written**
+- Overchannel · ability · placeholder · **final as written**
+- Fused · ability · placeholder · **final as written**
+- Slot Recovery 2 · ability · placeholder · **final as written**
+- Interplay · ability · placeholder · **final as written**
+- Interplay mark · system term · placeholder · **final as written**
+- Temper · ability · placeholder · **final as written**
+- Fray · ability · placeholder · **final as written**
+- Afterhold · ability · placeholder · **final as written**
+- Tempest · system term · placeholder · **renamed → Weatherwork**
+- Ruin · system term · placeholder · **final as written**
+- Flux · system term · placeholder · **final as written**
+- Scour · system term · placeholder · **final as written**
+- Etch · system term · placeholder · **final as written**
+- Opposed · system term · placeholder · **final as written**
+- Element pair / Pair / Family / Off-key family / Family-free · system term · unclear · **final as written**
+- Fan · spell · placeholder · **final as written**
+- Shard · spell · placeholder · **final as written**
+- Brand · spell · placeholder · **final as written**
+- Needles · spell · placeholder · **final as written**
+- Drench · spell · placeholder · **final as written**
+- Spatter · spell · placeholder · **final as written**
+- Rays · spell · placeholder · **final as written**
+- Lance · spell · placeholder · **final as written**
+- Arrest · spell · placeholder · **final as written**
+- Squall · spell · placeholder · **final as written**
+- Detonation · spell · placeholder · **final as written**
+- Streak · spell · placeholder · **final as written**
+- Undertow · spell · placeholder · **final as written**
+- Skyfall · spell · placeholder · **renamed → Highfall**
+- Gout · spell · placeholder · **renamed → Deluge**
+- Deep Freeze · spell · placeholder · **final as written**
+- Pyre · spell · placeholder · **final as written**
+- Forked Bolt · spell · placeholder · **final as written**
+- Dissolve · spell · placeholder · **final as written**
+- Cordon · spell · placeholder · **final as written**
+- Shackle · spell · placeholder · **final as written**
+- Coffle · ability · placeholder · **renamed → Lashed Pair**
+- Cinch · ability · placeholder · **final as written**
+- Fastness · ability · placeholder · **final as written**
+- Belay · ability · placeholder · **final as written**
+- Slipped · system term · placeholder · **final as written**
+- Rebind · ability · placeholder · **final as written**
+- Reel · ability · placeholder · **final as written**
+- Binder control / Fetter / Stop · system term · unclear · **final as written**
+- Prime · ability · placeholder · **final as written**
+- Splash · ability · placeholder · **final as written**
+- Tincture · ability · placeholder · **final as written**
+- Seal · ability · placeholder · **final as written**
+- Catalyse · spell · placeholder · **final as written**
+- Wide Mix · ability · placeholder · **final as written**
+- Runoff · ability · placeholder · **final as written**
+- Reagent Surge · ability · placeholder · **final as written**
+- Your mix needs a spark (inert rule) · system term · approved-final · **final as written**
+- Dissect · spell · placeholder · **renamed → Lay Bare**
+- Field Notes · ability · placeholder · **final as written**
+- Studied · system term · unclear · **final as written**
+- Unpick · ability · placeholder · **final as written**
+- Weak Point · ability · placeholder · **final as written**
+- Cross-Reference · ability · placeholder · **final as written**
+- Purity · ability · placeholder · **final as written**
+- heart family · system term · unclear · **final as written**
+- Crux · spell · placeholder · **final as written**
+- Deepen · ability · placeholder · **final as written**
+- Unmake · ability · placeholder · **final as written**
+- Aftershock · ability · placeholder · **final as written**
+- Converge · ability · placeholder · **final as written**
+- Conflux / Pair Conflux / Ionised · ability · placeholder · **final as written**
+- Lace / Fork / Quickcast · ability · placeholder · **final as written**
+- Insulate · ability · unclear · **final as written**
+- Slumber / Hushing / Holding / Banishing / Flicker Step / Far Step / Elemental Endurance / Quench · spell · placeholder · **renamed → Drowse**
+- Recommended / Expert badges · UI surface · unclear · **final as written**
+- Pair cards · UI surface · unclear · **final as written**
+- Last-slot confirmation · UI surface · unclear · **final as written**
+- Combo glint / pip counter glint · UI surface · unclear · **final as written**
+- Interaction preview (AM-1) · UI surface · unclear · **final as written**
+- Ladder-preview lines / card lines · UI surface · unclear · **final as written**
+
+#### B.16 companions (52)
+
+- Muster · UI surface · placeholder · **final as written**
+- Travel on · verb or action · placeholder · **final as written**
+- Party Forecast · UI surface · placeholder · **final as written**
+- Pledge · system term · placeholder · **final as written**
+- Rethink · verb or action · placeholder · **final as written**
+- Lone Road · report or setting · placeholder · **final as written**
+- Old Friend · other · placeholder · **final as written**
+- Wayfarer's Pack · other · placeholder · **renamed → Wayfarer's Belt**
+- Levy soldier · enemy type · flagged-to-naming-pass · **final as written**
+- Gatekeeper · companion · placeholder · **final as written**
+- Brawler · companion · placeholder · **final as written**
+- Scout · companion · placeholder · **final as written**
+- Outrider · companion · placeholder · **final as written**
+- Tinker · companion · placeholder · **final as written**
+- Hedgemage · companion · placeholder · **final as written**
+- Jostle · ability · placeholder · **final as written**
+- Close Ranks · ability · placeholder · **final as written**
+- Barge · ability · placeholder · **final as written**
+- Heave · ability · placeholder · **final as written**
+- Gap Sight · ability · placeholder · **final as written**
+- Sidestep · ability · placeholder · **final as written**
+- Staggering Shot · ability · placeholder · **final as written**
+- Flank Sense · ability · placeholder · **final as written**
+- Underfoot · ability · placeholder · **final as written**
+- Knife Work · ability · placeholder · **final as written**
+- Poultice · ability · placeholder · **final as written**
+- Deeds · UI surface · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Veteran · report or setting · placeholder · **final as written**
+- Parting Word · other · placeholder · **final as written**
+- Meet at camp · verb or action · unclear · **final as written**
+- Send home · verb or action · unclear · **final as written**
+- Carried hire · system term · unclear · **renamed → Held-over hire**
+- Hire / swap · system term · unclear · **final as written**
+- Gap card (card A) · system term · unclear · **final as written**
+- Free cards · system term · unclear · **final as written**
+- Coverage strip · UI surface · unclear · **final as written**
+- Slot ladder · system term · unclear · **final as written**
+- Shortfall / shortfall discount · system term · unclear · **final as written**
+- Join card · UI surface · unclear · **final as written**
+- Two-tier card · UI surface · unclear · **final as written**
+- Next-camp preview ('Waiting at the next camp:') · UI surface · unclear · **final as written**
+- Ready glint · UI surface · unclear · **final as written**
+- Accept-rest-of-turn key · UI surface · unclear · **final as written**
+- First-recruit beat · other · unclear · **final as written**
+- Recruiter's Eye · ability · unclear · **final as written**
+- Protector / Tempo / Control / Skills / Striker / Area / Ward (role tags) · UI surface · unclear · **final as written**
+- Medic (badge) · UI surface · unclear · **final as written**
+- Lone Road milestones ('Win on the Lone Road', 'Win with at most one companion', 'Beat the floor-2 boss with no companions', 'Win with all four classes in the party') · report or setting · unclear · **final as written**
+- 'Unsellable: kit' · UI surface · unclear · **final as written**
+- 'Can be Downed, never killed' · UI surface · unclear · **final as written**
+- Iron Rim / Birch Handle / Waxed String / Worn Scabbard / Brass Pommel / Green Bark / Ochre Daub / Boss Nail · item · placeholder · **renamed → Banded Face**
+- Brask (example generated name, 'Fell with: Brask the Gatekeeper') · companion · unclear · **final as written**
+
+#### B.17 herald-class (89)
+
+- Faltering · system term · placeholder · **final as written**
+- Undertone · ability · placeholder · **renamed → Ache**
+- Plain Speech · ability · placeholder · **final as written**
+- Spur · ability · flagged-to-naming-pass · **renamed → Urge**
+- Rouse · spell · placeholder · **final as written**
+- Ringing Blow · spell · placeholder · **final as written**
+- Bewilder · spell · placeholder · **final as written**
+- Recoil · spell · placeholder · **final as written**
+- Show of Force · spell · placeholder · **final as written**
+- Dire Tidings · spell · placeholder · **final as written**
+- Doomsay · spell · placeholder · **final as written**
+- Give Ground · spell · placeholder · **final as written**
+- Lay Down Arms · spell · placeholder · **renamed → Yield Arms**
+- Fallen Idol · spell · placeholder · **final as written**
+- Bitter Truth · spell · placeholder · **final as written**
+- Pall · spell · placeholder · **final as written**
+- Final Word · spell · placeholder · **renamed → Pronouncement**
+- Lament · spell · placeholder · **final as written**
+- Overwhelm · spell · placeholder · **final as written**
+- Antiphon · ability · placeholder · **final as written**
+- Toll · spell · placeholder · **final as written**
+- Mourners · ability · placeholder · **final as written**
+- Passing Bell · ability · placeholder · **final as written**
+- Last Toll · ability · placeholder · **final as written**
+- Knell · ability · placeholder · **final as written**
+- Terms of Surrender · ability · placeholder · **final as written**
+- Refrain · ability · placeholder · **final as written**
+- Parley · ability · placeholder · **final as written**
+- Hearthkeeper · ability · placeholder · **final as written**
+- Hearthsong · spell · placeholder · **final as written**
+- Homecoming · ability · placeholder · **renamed → Gather In**
+- Firelight · ability · placeholder · **final as written**
+- Soothe · ability · placeholder · **final as written**
+- Watchfire · ability · placeholder · **final as written**
+- Draw the Sting · ability · placeholder · **renamed → Ease the Pain**
+- Reach the Fallen · ability · placeholder · **final as written**
+- Strike Now · ability · placeholder · **final as written**
+- War Cry · spell · placeholder · **final as written**
+- Lead by Example · ability · placeholder · **renamed → Show the Way**
+- Strike or Shove · ability · unclear · **final as written**
+- Raise the Pennant · spell · placeholder · **renamed → Hoist the Pennant**
+- Colours Forward · ability · placeholder · **final as written**
+- Carry the Colours · ability · placeholder · **final as written**
+- Rush the Colours · ability · unclear · **final as written**
+- Shieldbearer · companion · placeholder · **final as written**
+- Quickstep · ability · placeholder · **final as written**
+- Drumroll · ability · placeholder · **final as written**
+- Guard Step · ability · placeholder · **final as written**
+- Form Up · ability · placeholder · **final as written**
+- Offer Terms · verb or action · placeholder · **final as written**
+- Interject · ability · flagged-to-naming-pass · **renamed → Speak Over**
+- Earned Spur · ability · placeholder · **renamed → Earned Urge**
+- Opening Cry · ability · unclear · **renamed → Clarion**
+- Waver · system term · unclear · **final as written**
+- Pick the Question · verb or action · unclear · **final as written**
+- Break-chain preview · UI surface · unclear · **final as written**
+- morale overlay · UI surface · unclear · **final as written**
+- Spurred trail · UI surface · unclear · **final as written**
+- rout-ready · system term · unclear · **final as written**
+- broken · system term · unclear · **final as written**
+- Frightened tether · UI surface · unclear · **final as written**
+- heal card · system term · unclear · **final as written**
+- Hearth list / hearth-list condition · system term · unclear · **final as written**
+- Hearth cure · system term · unclear · **final as written**
+- side by side · system term · unclear · **final as written**
+- the three beats: Scare or steady / Speak / Step · system term · unclear · **final as written**
+- tolled · system term · unclear · **final as written**
+- Shield kit / Totem kit · UI surface · unclear · **renamed → Shield hand**
+- Brennan · NPC · unclear · **renamed → Brask**
+- Heartening Cry · spell · placeholder · **final as written**
+- Inspire · spell · placeholder · **final as written**
+- Unnerve · spell · placeholder · **final as written**
+- Headlong Flight · spell · placeholder · **final as written**
+- Calm Minds · spell · placeholder · **renamed → Quiet Minds**
+- Hushing · spell · placeholder · **final as written**
+- Haunting Chorus · spell · placeholder · **final as written**
+- Exhort · spell · placeholder · **final as written**
+- Onward · spell · placeholder · **final as written**
+- Shout Down · ability · placeholder · **final as written**
+- Double Time / Spurred-now · ability · placeholder · **final as written**
+- Bring Them Home · other · unclear · **final as written**
+- Kindle · ability · placeholder · **final as written**
+- Field Dressing · ability · placeholder · **final as written**
+- Salve · ability · placeholder · **final as written**
+- Hand Up · ability · placeholder · **final as written**
+- Verses (engine) / Hush (heal kind) · system term · placeholder · **final as written**
+- Mender / Steward (recruit kits) · companion · placeholder · **final as written**
+- Next-floor theme band (HI-4 camp line) · UI surface · unclear · **final as written**
+- Recruiter's Eye · system term · unclear · **final as written**
+
+#### B.18 floor-layout (113)
+
+- Blueprint · system term · placeholder · **final as written**
+- Site · system term · flagged-to-naming-pass · **internal only, never printed**
+- Portal · system term · placeholder · **final as written**
+- Arch · room or terrain · flagged-to-naming-pass · **final as written**
+- Door · room or terrain · unclear · **final as written**
+- Door kind / non-door · system term · unclear · **final as written**
+- Locked · trap or lock · unclear · **final as written**
+- Bossgate · room or terrain · flagged-to-naming-pass · **final as written**
+- Drape · room or terrain · flagged-to-naming-pass · **final as written**
+- Grille · room or terrain · placeholder · **final as written**
+- Grille vantage / vantage Door / vantage Alcove · room or terrain · placeholder · **final as written**
+- Squeeze · room or terrain · placeholder · **final as written**
+- Latch · room or terrain · placeholder · **final as written**
+- Hairline / Hairline secret · room or terrain · placeholder · **final as written**
+- Sound the wall · verb or action · flagged-to-naming-pass · **renamed → Tap the wall**
+- Listen (at a closed door) · verb or action · placeholder · **final as written**
+- Party open / close door verbs · verb or action · unclear · **final as written**
+- Footsteps glyph / 'passing' · UI surface · unclear · **final as written**
+- Forecourt · room or terrain · placeholder · **final as written**
+- Sanctum · place · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Stairhead · room or terrain · flagged-to-naming-pass · **renamed → the Downstair**
+- Alcove · room or terrain · placeholder · **final as written**
+- Landmark · room or terrain · placeholder · **final as written**
+- Precinct / Precinct tint · system term · placeholder · **final as written**
+- Hinge · room or terrain · placeholder · **final as written**
+- Postern · room or terrain · placeholder · **final as written**
+- Nexus · room or terrain · placeholder · **final as written**
+- Bypass · system term · placeholder · **final as written**
+- Circuit · system term · placeholder · **final as written**
+- Last Turning · system term · placeholder · **final as written**
+- near pair · system term · placeholder · **final as written**
+- Overlook · room or terrain · placeholder · **final as written**
+- Chute · room or terrain · placeholder · **final as written**
+- Strongroom · room or terrain · placeholder · **final as written**
+- Drop-bar doors · room or terrain · flagged-to-naming-pass · **renamed → Slam doors**
+- Way Back · room or terrain · placeholder · **renamed → Return Latch**
+- Floor count line · UI surface · unclear · **final as written**
+- Signature room · room or terrain · unclear · **final as written**
+- Compass clock (Landmark clock) · room or terrain · placeholder · **final as written**
+- Universal glyphs: Hairline tell, Squeeze glyph, Grille rim glyph, Latch 'no handle, barred beyond', padlock decal, Arch threshold seam · UI surface · unclear · **final as written**
+- Cell Zero (Cell Zero door) · place · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Music-box clearing · place · placeholder · **final as written**
+- Two Wings (H) · place · placeholder · **renamed → Split Block**
+- Three Wings (E) · place · placeholder · **final as written**
+- The Yard · place · placeholder · **final as written**
+- The Stairwell Tube · place · placeholder · **final as written**
+- Cell Zero Wing · place · placeholder · **final as written**
+- Outer block / inner block / the warden's clock office · place · placeholder · **final as written**
+- Admissions · room or terrain · placeholder · **final as written**
+- Cell galleries / junction guard rooms / records / chapel · room or terrain · placeholder · **final as written**
+- The Last Hour · room or terrain · placeholder · **renamed → The Sentence Corridor**
+- Hunting Ring · place · placeholder · **renamed → Hunting Circle**
+- Lodge Grounds · place · placeholder · **final as written**
+- The Ride · place · placeholder · **final as written**
+- Twin Coverts · place · placeholder · **final as written**
+- The Drive · place · placeholder · **final as written**
+- Hunt's edge · place · placeholder · **final as written**
+- Manor Court · place · placeholder · **final as written**
+- Two Wings and a Chapel · place · placeholder · **final as written**
+- The Long Gallery · place · placeholder · **final as written**
+- The Undercroft · place · placeholder · **final as written**
+- Servants' passage / gallery ring · place · placeholder · **final as written**
+- The Nave · place · placeholder · **final as written**
+- Cruciform · place · placeholder · **final as written**
+- Twin Naves · place · placeholder · **final as written**
+- Drowned Cloister · place · placeholder · **final as written**
+- Quire and Crypt · place · placeholder · **final as written**
+- Quire ambulatory / quire screen · place · placeholder · **final as written**
+- Sluice gates · room or terrain · unclear · **renamed → sluice doors**
+- Stack Hall · place · placeholder · **final as written**
+- Scriptorium Court · place · placeholder · **final as written**
+- The Carrels · place · placeholder · **final as written**
+- Catalogue Cross · place · placeholder · **final as written**
+- The Missing Page · place · placeholder · **final as written**
+- Reading rooms / catalogue ring / maze rooms · room or terrain · placeholder · **final as written**
+- The Midway · place · placeholder · **final as written**
+- The Ring · place · placeholder · **final as written**
+- Two Rings · place · placeholder · **final as written**
+- Fairground Gate · place · placeholder · **renamed → Fairground Turnstile**
+- Under the Big Top · place · placeholder · **final as written**
+- Backstage ring / back lot / big top / plaza · place · placeholder · **final as written**
+- The Horseshoe · place · placeholder · **final as written**
+- Two Sittings · place · placeholder · **final as written**
+- The Long Table · place · placeholder · **renamed → Banquet Run**
+- The Cellar Run · place · placeholder · **final as written**
+- High Table · place · placeholder · **final as written**
+- Kitchen hub / hall bays / servery ring / pantries / service passages · place · placeholder · **final as written**
+- The Coil · place · placeholder · **final as written**
+- Two Stomachs · place · placeholder · **final as written**
+- The Villi · place · placeholder · **final as written**
+- The Parish · place · placeholder · **final as written**
+- Pylorus Approach · place · placeholder · **final as written**
+- Appetite Chamber · place · placeholder · **final as written**
+- Pylorus ring / folds / tubes / chambers / tenant houses · place · placeholder · **final as written**
+- The Spiral · place · placeholder · **final as written**
+- Four Posts · place · placeholder · **final as written**
+- The Nursery Sprawl · place · placeholder · **final as written**
+- Wardrobe Way · place · placeholder · **final as written**
+- Foot of the Bed · place · placeholder · **final as written**
+- Moonward · place · placeholder · **final as written**
+- Hem ring / hem of the blanket / bed clearing / pillow rooms · place · placeholder · **final as written**
+- Gaol Portal skins: archway, clock-face cell door, ward door, cell bars over glass, drain crawl, hatch, iron leaf · room or terrain · placeholder · **final as written**
+- Kennel Portal skins: thicket gap, boarded hurdle, lodge door, kennel mesh, deer-run, trap hatch, lodge doors · room or terrain · placeholder · **final as written**
+- Wake Portal skins: gallery arch, panelled door, drawn curtain, crypt lattice, servants' crawl, hatch, crypt slab · room or terrain · placeholder · **final as written**
+- Choir Portal skins: bay arch, sluice door, choir-screen mesh, flooded culvert, hatch, quire doors · room or terrain · placeholder · **final as written**
+- Silk Portal skins: aisle mouth, reading-room door, catalogue mesh, shelf gap, book-lift, archive leaf · room or terrain · placeholder · **final as written**
+- Carnival Portal skins: tent mouth, wagon door, booth door, tent flap, ticket-window mesh, under-stage crawl, trap hatch, big-top curtain wall · room or terrain · placeholder · **final as written**
+- Supper Portal skins: bay arch, service-screen door, serving-hatch mesh, under-table crawl, dumbwaiter, dining-hall doors · room or terrain · placeholder · **final as written**
+- Gut Portal skins: tube mouth, sphincter, villus mesh, fold crawl, valve, pylorus · room or terrain · placeholder · **final as written**
+- Heart Portal skins: furniture gap, wardrobe door, bed hanging, crib bars over glass, toy-fort tunnel, drawer slide · room or terrain · placeholder · **final as written**
+- 'On Watch' Omen · other · unclear · **final as written**
+- Spyhole / Peer · verb or action · unclear · **final as written**
+- Minimap (schematic room-node map) · UI surface · unclear · **final as written**
+
+#### B.19 run-structure-themes (180)
+
+- Gaol of Small Hours (the Gaol) · theme or floor · placeholder · **final as written**
+- Kennel Wood · theme or floor · placeholder · **final as written**
+- The Endless Wake (the Wake) · theme or floor · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- The Drowned Choir (the Choir) · theme or floor · placeholder · **final as written**
+- The Silk Archive (the Silk) · theme or floor · placeholder · **renamed → The Cobweb Archive (short form: the Archive) (client)**
+- The Carnival of the Last Evening (the Carnival) · theme or floor · placeholder · **final as written**
+- The Long Supper (the Supper) · theme or floor · placeholder · **final as written**
+- The Gut of the World (the Gut) · theme or floor · placeholder · **final as written**
+- The Dreamer's Heart (the Heart) · theme or floor · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- the Dreamer · other · placeholder · **final as written**
+- Mirror Court · theme or floor · placeholder · **final as written**
+- Ossuary Opera (Opera) · theme or floor · placeholder · **final as written**
+- Moth Wedding · theme or floor · placeholder · **final as written**
+- Ministry of Small Mercies (Ministry) · theme or floor · placeholder · **final as written**
+- Tallow Abbey · theme or floor · placeholder · **final as written**
+- Inverted Cathedral · theme or floor · placeholder · **final as written**
+- Orchard of Teeth (Orchard) · theme or floor · placeholder · **final as written**
+- Night Market · theme or floor · placeholder · **renamed → Lantern Market**
+- Marionette Grove (Strung Marionette) · theme or floor · placeholder · **final as written**
+- Ledger Halls · theme or floor · placeholder · **final as written**
+- The Waking City · theme or floor · placeholder · **retired / held: (held, gated before M4)**
+- Shallows · theme or floor · placeholder · **final as written**
+- Middle Dream · theme or floor · placeholder · **renamed → Midwater**
+- Deep · theme or floor · placeholder · **final as written**
+- Heart (act) · theme or floor · placeholder · **final as written**
+- Two Doors · system term · placeholder · **final as written**
+- Door A / Door B · UI surface · placeholder · **final as written**
+- Last Hollow / the Last Hollow choice · place · placeholder · **final as written**
+- Stratum Card · UI surface · placeholder · **final as written**
+- Dream track · UI surface · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- the road not taken · UI surface · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Camp next-floor card / door cards / final-boss card / run-start card · UI surface · unclear · **final as written**
+- Keepsakes · system term · placeholder · **renamed → Souvenirs**
+- Antechamber · room or terrain · placeholder · **renamed → Forecourt (on screen; antechamber stays an id)**
+- Antechamber Catch-up · system term · placeholder · **renamed → Forecourt Top-up**
+- ahead of the dream · UI surface · placeholder · **final as written**
+- Strata Draw · system term · placeholder · **final as written**
+- Nightmare tiers · system term · placeholder · **renamed → Peril tiers (client)**
+- Perilous Door · system term · placeholder · **final as written**
+- Omens · system term · placeholder · **final as written**
+- Seams · system term · placeholder · **final as written**
+- Dream Fragments · system term · placeholder · **final as written**
+- Lucid Key · item · placeholder · **renamed → the Clear Key**
+- Other Dreamers · event or curiosity · placeholder · **renamed → Strangers**
+- Theme milestone marks · system term · unclear · **final as written**
+- Law (theme signature mechanic) / Obsession · system term · placeholder · **final as written**
+- Lockdown · theme or floor · placeholder · **final as written**
+- bile square · room or terrain · placeholder · **final as written**
+- Grim Surreal · other · approved-final · **final as written**
+- you did not wake / Some go down; few wake. / The dream remembers you · other · unclear · **final as written**
+- the Bureau of the Dead / a dead god's sunken tomb · other · placeholder · **final as written**
+- Jailers and Inmates · faction · placeholder · **final as written**
+- Inmate · enemy type · placeholder · **final as written**
+- Escapee · enemy type · placeholder · **final as written**
+- Turnkey · enemy type · placeholder · **final as written**
+- Lamplighter · enemy type · placeholder · **final as written**
+- The Lifer · enemy type · placeholder · **final as written**
+- Silent Penitent · enemy type · placeholder · **final as written**
+- Jailer-Sergeant · enemy type · placeholder · **final as written**
+- The Jailer of Hours · boss · placeholder · **final as written**
+- The Thing in Cell Zero · boss · placeholder · **final as written**
+- Manacle · ability · placeholder · **final as written**
+- Lantern Bolt · ability · placeholder · **final as written**
+- Chain Swing · ability · placeholder · **final as written**
+- Countdown · ability · placeholder · **final as written**
+- Stop the Clock · ability · placeholder · **final as written**
+- Appeals trapdoor · trap or lock · placeholder · **final as written**
+- bell tripwire · trap or lock · placeholder · **renamed → keyring tripwire**
+- Whelp · enemy type · placeholder · **final as written**
+- Gaunt Hound · enemy type · placeholder · **final as written**
+- Kennel Mastiff · enemy type · placeholder · **final as written**
+- Huntsman · enemy type · placeholder · **final as written**
+- Poacher · enemy type · placeholder · **final as written**
+- Houndmaster · enemy type · placeholder · **final as written**
+- Ghillie · enemy type · placeholder · **final as written**
+- Old Ragged · boss · placeholder · **final as written**
+- The Master in the Frame · boss · placeholder · **final as written**
+- Worry · ability · placeholder · **final as written**
+- Flushing Shot · ability · placeholder · **final as written**
+- Black-Crepe Guest (Guests) · enemy type · placeholder · **final as written**
+- Black-Glove Cousin · enemy type · placeholder · **final as written**
+- Pallbearer · enemy type · placeholder · **final as written**
+- Gravedigger · enemy type · placeholder · **final as written**
+- Hired Wailer · enemy type · placeholder · **final as written**
+- The Late Uncle · enemy type · placeholder · **final as written**
+- Undertaker · enemy type · placeholder · **final as written**
+- The Guest of Honour · boss · placeholder · **final as written**
+- The Executor of the Will · boss · placeholder · **final as written**
+- Clout · ability · placeholder · **final as written**
+- Sob · ability · placeholder · **final as written**
+- Wail · ability · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Eulogy · ability · placeholder · **final as written**
+- Last Rites · ability · placeholder · **renamed → Final Respects**
+- Chorister · enemy type · placeholder · **final as written**
+- Eel-Acolyte · enemy type · placeholder · **final as written**
+- Drowned Verger · enemy type · placeholder · **final as written**
+- Clapper-Monk · enemy type · placeholder · **final as written**
+- Storm Organist · enemy type · placeholder · **final as written**
+- Tidecantor · enemy type · placeholder · **final as written**
+- Deacon · enemy type · placeholder · **final as written**
+- The Drowned Carillon · boss · placeholder · **final as written**
+- The Precentor · boss · placeholder · **final as written**
+- Peal · ability · placeholder · **final as written**
+- Crescendo · ability · placeholder · **final as written**
+- Riptide Note · ability · placeholder · **final as written**
+- Pull Under · ability · placeholder · **final as written**
+- Undersong · ability · placeholder · **final as written**
+- Inkling · enemy type · placeholder · **final as written**
+- Scribe-Spider · enemy type · placeholder · **final as written**
+- Margin-Crawler · enemy type · placeholder · **final as written**
+- Spine-Binder · enemy type · placeholder · **final as written**
+- Shusher · enemy type · placeholder · **final as written**
+- Misprint · enemy type · placeholder · **final as written**
+- Head Archivist · enemy type · placeholder · **renamed → Chief Archivist**
+- The Mouthless Librarian · boss · placeholder · **final as written**
+- The Weaver of the Index · boss · placeholder · **final as written**
+- Web Shot · ability · placeholder · **final as written**
+- Stitch · ability · placeholder · **final as written**
+- Redaction · ability · placeholder · **final as written**
+- Shh · ability · placeholder · **final as written**
+- Index Card · ability · placeholder · **final as written**
+- Cross-Reference · ability · placeholder · **final as written**
+- Roustabout · enemy type · placeholder · **final as written**
+- Knife-Thrower · enemy type · placeholder · **final as written**
+- Lion-Tamer · enemy type · placeholder · **final as written**
+- Strongman · enemy type · placeholder · **renamed → Weightlifter**
+- Carousel Horse · enemy type · placeholder · **final as written**
+- Fire-Eater · enemy type · placeholder · **final as written**
+- Ringmaster · enemy type · placeholder · **final as written**
+- The Strongest Man Who Ever Lived · boss · placeholder · **final as written**
+- Madame Ashes, the Final Act · boss · placeholder · **final as written**
+- Bend the Bar · ability · placeholder · **final as written**
+- Rear · ability · placeholder · **final as written**
+- Lamp-Oil Toss · ability · placeholder · **final as written**
+- Hold Aloft · ability · placeholder · **final as written**
+- Curtain of Flame · ability · placeholder · **final as written**
+- Wheel of Knives · room or terrain · placeholder · **final as written**
+- Frozen Footman · enemy type · placeholder · **renamed → Still Footman**
+- Glutton · enemy type · placeholder · **final as written**
+- Butler-at-Arms · enemy type · placeholder · **final as written**
+- Sommelier · enemy type · placeholder · **final as written**
+- Ice Sculptor · enemy type · placeholder · **final as written**
+- Carver · enemy type · placeholder · **final as written**
+- The Seneschal · enemy type · placeholder · **final as written**
+- The Head of the Table · boss · placeholder · **final as written**
+- The Last Course · boss · placeholder · **final as written**
+- Second Helping · ability · placeholder · **final as written**
+- Chilled Pour · ability · placeholder · **renamed → Cold Pour**
+- Toast / Frozen Toast · ability · placeholder · **final as written**
+- Tenant · enemy type · placeholder · **final as written**
+- Gutworm · enemy type · placeholder · **final as written**
+- Antibody Knight · enemy type · placeholder · **final as written**
+- Bile Ooze · enemy type · placeholder · **renamed → Gall Slick**
+- Acid-Spitter · enemy type · placeholder · **final as written**
+- Spore-Priest · enemy type · placeholder · **final as written**
+- The Landlord · enemy type · placeholder · **final as written**
+- The Pylorus · boss · placeholder · **final as written**
+- The Appetite · boss · placeholder · **final as written**
+- Gulp · ability · placeholder · **final as written**
+- Sporecloud · ability · placeholder · **final as written**
+- Swallow · ability · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Digest · ability · placeholder · **final as written**
+- Figment · enemy type · placeholder · **renamed → Shadow-Puppet**
+- Sleepwalker · enemy type · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Storybook Knight · enemy type · placeholder · **final as written**
+- Night-Mare · enemy type · placeholder · **renamed → Pale Mare**
+- Insomniac · enemy type · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Lullabist · enemy type · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Mother-Shape · enemy type · placeholder · **final as written**
+- The Night Governess · boss · placeholder · **final as written**
+- The Rousing Engine · boss · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- The Lullaby · boss · placeholder · **final as written**
+- Lullaby (ability) · ability · placeholder · **renamed → Soft Song (Lullabist ability only)**
+- Clangour · ability · placeholder · **final as written**
+- Tuck In (fallback Smother) · ability · placeholder · **final as written**
+- Reveille · ability · placeholder · **final as written**
+- Grim-reading renames: tomb-wisp, entranced votary, Oathbroken knight, tomb-steed, vigil-keeper, vigil-singer, tomb-matron, the Shroud-Keeper, the Tomb Clock · enemy type · placeholder · **final as written**
+- Shardling · enemy type · placeholder · **final as written**
+- Doppel (Mirror Court opener) · enemy type · unclear · **renamed → Reflection**
+- Netcaster · enemy type · placeholder · **final as written**
+
+#### B.20 room-terrain (64)
+
+- Clearway · system term · placeholder · **final as written**
+- Furnishing · system term · placeholder · **final as written**
+- Shunt (Move Shunt / Attack Shunt) · verb or action · placeholder · **final as written**
+- Smash · verb or action · placeholder · **final as written**
+- Kick · verb or action · placeholder · **final as written**
+- Keg · system term · placeholder · **final as written**
+- Overturn · verb or action · placeholder · **final as written**
+- Haul · verb or action · placeholder · **final as written**
+- Shoot an object · verb or action · placeholder · **final as written**
+- Rough (Rough square) · room or terrain · placeholder · **final as written**
+- Plank · room or terrain · placeholder · **final as written**
+- Tall piece · room or terrain · placeholder · **final as written**
+- Low piece · room or terrain · placeholder · **final as written**
+- Hazard piece · hazard · placeholder · **final as written**
+- Hazard face · hazard · placeholder · **final as written**
+- Contact hazard · hazard · placeholder · **final as written**
+- Harm square · hazard · placeholder · **final as written**
+- Bladed · hazard · placeholder · **final as written**
+- Hot (hazard kind) · hazard · unclear · **final as written**
+- Briar · hazard · placeholder · **final as written**
+- Miasma · hazard · placeholder · **final as written**
+- Remnant · system term · placeholder · **final as written**
+- Glaze · hazard · placeholder · **final as written**
+- Haze · hazard · placeholder · **final as written**
+- Mist · hazard · unclear · **renamed → Fog (if revived)**
+- Conduct · verb or action · placeholder · **renamed → Charged Water**
+- Covered · condition · placeholder · **final as written**
+- Cover / cover-giver · system term · placeholder · **final as written**
+- Interactive feature · system term · placeholder · **final as written**
+- Contact band / harm band / Keg band / collision band · system term · placeholder · **final as written**
+- Heft · system term · placeholder · **final as written**
+- Hazard-edge save · system term · unclear · **final as written**
+- Environment damage · system term · unclear · **final as written**
+- Debris · system term · unclear · **final as written**
+- Terrain layer · system term · unclear · **final as written**
+- Socket / Phase socket · system term · unclear · **final as written**
+- Signature interaction / terrain Law · system term · unclear · **final as written**
+- Teaching room · room or terrain · unclear · **final as written**
+- Nook / Lane / Island / Pillared hall / Low line / Split room / In-room choke / Way round · room or terrain · unclear · **final as written**
+- Hide spot · system term · unclear · **final as written**
+- Flank square · system term · unclear · **final as written**
+- Hazard edge · system term · unclear · **final as written**
+- Typed Low piece · room or terrain · unclear · **final as written**
+- Contextual verb chip · UI surface · unclear · **final as written**
+- Cover shields / shield tick / broken-shield tick / cover pip · UI surface · unclear · **final as written**
+- Collision star · UI surface · unclear · **final as written**
+- "Needs a tall piece to hide" · UI surface · unclear · **final as written**
+- "Would block the way" / "Hazard" · UI surface · unclear · **final as written**
+- "In cover from N of M known enemies" · UI surface · unclear · **final as written**
+- "Ignite: N damage to M units" · UI surface · unclear · **final as written**
+- "aligned to hazard" · UI surface · unclear · **final as written**
+- Lamp-oil keg (Carnival) · item · placeholder · **final as written**
+- Swollen sac (Gut) · item · placeholder · **final as written**
+- M3 Keg skins: cistern butt, ink cask, frost-wine cask, dust pillow · item · placeholder · **final as written**
+- Thorn-rose vines · hazard · placeholder · **final as written**
+- Theme kit skins (Furnishings): filing crates, lidded pails, tally desk, laundry cart, hay bales, feed barrels, meat cart, wreath trestles, draped side tables, lectern, hymnal crates, kneeler benches, cantor's desk, hymn cart, returns trolleys, paper bales, book cart, crates, costume trunks, beast crates, balancing ball, serving trolley, linen presses, tenant stools, lidded crocks, rent chests, toy blocks, toy chest, toy cart, giant ball · room or terrain · placeholder · **final as written**
+- Hazard skins: storm-glass pipe face, fallen-bell face, lamp-sconce face, nib-rack face, knife-wheel face, braziers, plate-warmer braziers, boiling tureen, carving-station face, grinding-molar face, acid-scald fold, fireplace-grate face, pincushion face · hazard · placeholder · **final as written**
+- Harm skins: broken storm glass, spilled nibs, broken bottles, shattered crystal, bone shards · hazard · placeholder · **final as written**
+- Wheel of Knives · room or terrain · unclear · **final as written**
+- Landmark clock-case · room or terrain · unclear · **final as written**
+- Gas-aura monsters: Gut spore-bloat, Silk mildew moth, Heart sleeping-draught nurse · enemy type · placeholder · **final as written**
+- usesFurnishings kit tag · system term · placeholder · **final as written**
+- FurnishingNeverSeals / NoCheapKill / causedBy / terrainDigest / terrainKit / RoomTerrain (V9) / rulesKey / contactRate / PreviewHiddenDelta / FloorMinutesDelta and the 11.3 report names · report or setting · placeholder · **final as written**
+- Local id schemes TT, CV, KP, K1-K5, TN, TF, TB, TC · other · approved-final · **final as written**
+
+#### B.21 hazards (144)
+
+- Hazard (as a defined class, vs trap and terrain) · system term · unclear · **final as written**
+- Static hazard · system term · unclear · **final as written**
+- Void (Void square, Void region) · room or terrain · placeholder · **final as written**
+- Void room · system term · placeholder · **final as written**
+- Dreamfall · verb or action · placeholder · **renamed → Freefall**
+- Snag · system term · placeholder · **final as written**
+- Clutch · verb or action · placeholder · **final as written**
+- FallFloor · system term · placeholder · **final as written**
+- Groggy · condition · placeholder · **final as written**
+- Fall band · system term · placeholder · **final as written**
+- Dream step · system term · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Dream card · UI surface · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Dream tick · UI surface · placeholder · **final as written**
+- Stir (also Stirring) · system term · placeholder · **final as written**
+- Footprint · system term · unclear · **final as written**
+- Latent footprint · UI surface · placeholder · **final as written**
+- Countdown (C) · UI surface · unclear · **final as written**
+- Due square · system term · placeholder · **final as written**
+- Act · system term · unclear · **final as written**
+- Tide · system term · placeholder · **final as written**
+- Cord (bound Cord, standalone Cord) · system term · flagged-to-naming-pass · **final as the Cord keyword; binding prose says "bindings" (NP-30)**
+- Clock / Clock room · system term · placeholder · **final as written**
+- Operate · verb or action · placeholder · **final as written**
+- Lurch · verb or action · placeholder · **final as written**
+- Handhold · room or terrain · placeholder · **final as written**
+- Warned or floored (Warned, floored) · system term · placeholder · **final as written**
+- EnvRound cap · system term · placeholder · **final as written**
+- EnvDC · system term · placeholder · **final as written**
+- Landmark tick · system term · placeholder · **final as written**
+- Mood (Mood stage) · system term · placeholder · **final as written**
+- Dare room · room or terrain · placeholder · **final as written**
+- Plunge · room or terrain · placeholder · **final as written**
+- Tableau / Tableaux · system term · placeholder · **final as written**
+- Hazard points · system term · unclear · **final as written**
+- Strike (Stir part) · system term · unclear · **final as written**
+- Taint (Stir part) · system term · placeholder · **internal only, never printed**
+- Portal (Stir part) · system term · unclear · **final as written**
+- Mute round · system term · placeholder · **internal only, never printed**
+- Startle · verb or action · placeholder · **final as written**
+- Emit (Stir part) · system term · placeholder · **internal only, never printed**
+- Turn (Stir part) · system term · unclear · **final as written**
+- Overturn (Stir part) · system term · placeholder · **final as written**
+- Now (Cord verb) · verb or action · unclear · **final as written**
+- Hold (Cord verb) · verb or action · unclear · **renamed → Sustain**
+- Reverse (Cord verb) · verb or action · unclear · **final as written**
+- Flip (Cord verb) / Cord Flips · verb or action · unclear · **final as written**
+- Kick (Cord verb) · verb or action · unclear · **renamed → Knock**
+- Snatch · verb or action · placeholder · **final as written**
+- Let Go · verb or action · unclear · **final as written**
+- Swallow (in-combat) · other · unclear · **final, kept with a recorded waiver (12, 9.3)**
+- Rescue push · verb or action · unclear · **final as written**
+- Wading (deep water) · room or terrain · unclear · **final as written**
+- Struck vent / breathing vent · hazard · unclear · **final as written**
+- the ink press (Silk vent) · hazard · unclear · **final as written**
+- the spore pore (Gut vent) · hazard · unclear · **final as written**
+- the dust-pillow seam (Heart vent) · hazard · unclear · **final as written**
+- High Water (Choir Mood) · system term · placeholder · **final as written**
+- Spring Tide (Choir Omen) · system term · placeholder · **renamed → King Tide**
+- Silence Kept (Silk Mood) · system term · placeholder · **final as written**
+- Overdue (Silk Omen) · system term · placeholder · **final as written**
+- The Last Evening (Carnival Mood display line) · system term · flagged-to-naming-pass · **renamed → Last Show**
+- Encore (Carnival Omen) · system term · placeholder · **final as written**
+- Digestion (Gut Mood) · system term · placeholder · **final as written**
+- Fasting (Gut Omen) · system term · placeholder · **final as written**
+- Nearer Waking (Heart Mood) · system term · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Fitful Sleep (Heart Omen) · system term · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Last Orders · system term · placeholder · **final as written**
+- Second Sitting (Supper Omen) · system term · placeholder · **final as written**
+- Annex (guarded Dare garrison) · other · unclear · **final as written**
+- Chainpost · hazard · placeholder · **final as written**
+- Turning face · hazard · unclear · **final as written**
+- Stoke / Stoker · verb or action · placeholder · **final as written**
+- floorborn (tag immunity) · enemy affix · placeholder · **final as written**
+- Dream Rules pages · UI surface · placeholder · **final as written**
+- Lull · other · placeholder · **final as written**
+- Contraptions / Unrest (rejected model labels) · other · unclear · **final as written**
+- Tide High · hazard · unclear · **renamed → Flood Stage**
+- The Bed Turns Over · hazard · flagged-to-naming-pass · **final under W-DREAM-1 (b) (Q1)**
+- The Drowned Nave (Choir tableau) · hazard · placeholder · **final as written**
+- The Carrel Rows (Silk tableau) · hazard · placeholder · **final as written**
+- The Fire-Eater's Pit (Carnival tableau) · hazard · placeholder · **final as written**
+- The Laid Table (Supper tableau) · hazard · placeholder · **final as written**
+- The Bile Low (Gut tableau) · hazard · placeholder · **final as written**
+- The Thorn Garden (Heart tableau) · hazard · placeholder · **final as written**
+- The Small Hour Strikes · hazard · placeholder · **final as written**
+- The Lockdown Lever · hazard · placeholder · **renamed → The Lockdown Crank**
+- The Curfew Rope (and its cleat) · hazard · placeholder · **final as written**
+- The Treadwheel · hazard · placeholder · **final as written**
+- The Horn Post · hazard · placeholder · **final as written**
+- Staked pit · hazard · unclear · **final as written**
+- The Painted Hunt · hazard · placeholder · **final as written**
+- The Stampede · hazard · placeholder · **final as written**
+- The Open Grave · hazard · placeholder · **final as written**
+- Guttering Candles · hazard · placeholder · **final as written**
+- The Mourning Cord · hazard · placeholder · **renamed → The Mourning Ribbon**
+- The Long Night · hazard · placeholder · **final as written**
+- The Eulogy Pause · hazard · unclear · **final as written**
+- Organ Swells · hazard · placeholder · **final as written**
+- The Drowned Crypt · hazard · placeholder · **final as written**
+- hymn bellows · hazard · placeholder · **final as written**
+- clapper chain · hazard · placeholder · **final as written**
+- The Hymn Must Never Stop · hazard · placeholder · **final as written**
+- Sluice Wheel · hazard · placeholder · **final as written**
+- The Stacks Have No Bottom · hazard · placeholder · **final as written**
+- Lamplighting · hazard · placeholder · **final as written**
+- lamp chain (Cord) · hazard · unclear · **final as written**
+- The Leaning Stacks · hazard · placeholder · **final as written**
+- The Returns Trolley · hazard · placeholder · **final as written**
+- the Lamp's eye / the Reading Lamp's eye · hazard · unclear · **final as written**
+- Pit Breathes · hazard · placeholder · **final as written**
+- the Ringmaster's damper (Cord) · hazard · unclear · **final as written**
+- The Turning Ring · hazard · placeholder · **final as written**
+- brake Cord / reverse Cord · hazard · unclear · **final as written**
+- The High Wire · hazard · placeholder · **final as written**
+- The Chained Bear · hazard · placeholder · **final as written**
+- The Courses (Soup, Sorbet, Roast; menu card) · hazard · placeholder · **final as written**
+- bellpull (Cord) · hazard · unclear · **renamed → service pull**
+- The Open Window · hazard · placeholder · **final as written**
+- The Forbidden Course · hazard · placeholder · **final as written**
+- The Carving Hound · hazard · placeholder · **final as written**
+- The Service Lift · hazard · placeholder · **final as written**
+- Brim · hazard · placeholder · **final as written**
+- Peristalsis · hazard · placeholder · **final as written**
+- sphincter valve (Cord) · hazard · unclear · **final as written**
+- The Gullet · hazard · placeholder · **final as written**
+- The Acid Tide (and its valve) · hazard · placeholder · **final as written**
+- The Dark Under the Bed · hazard · placeholder · **final as written**
+- The Dreamer Turns Over · hazard · flagged-to-naming-pass · **renamed → The Bed Turns Over (client)**
+- music box (Cord) · hazard · unclear · **final as written**
+- The Alarm Clock (Wind Back, Ring Now) · hazard · placeholder · **final as written**
+- Falling Toys · hazard · placeholder · **final as written**
+- Counting Sheep · hazard · placeholder · **final as written**
+- Toss and Turn · hazard · placeholder · **final as written**
+- The Nightlight · hazard · placeholder · **final as written**
+- the floor is lava · hazard · unclear · **final as written**
+- Fall Upward · hazard · placeholder · **final as written**
+- The Chimes Ring Upward · hazard · placeholder · **final as written**
+- censer rope (Cord) · hazard · unclear · **final as written**
+- Drop rim / Void lip glyph / Snag glyph / link glyph / Cord glyph / vent glyph · UI surface · unclear · **final as written**
+- Pips: 'Holding on', 'Groggy', 'floored this time'; lethal tag · UI surface · unclear · **final as written**
+- Rule card / due overlay / fall preview lines · UI surface · unclear · **final as written**
+- lessonTag card · UI surface · unclear · **final as written**
+- Figment (herd, sheep) · other · unclear · **renamed → Shadow-Puppet**
+- Eel-Acolyte (amphibious) · enemy type · unclear · **final as written**
+
+#### B.22 traps-locks (132)
+
+- Margin rule · system term · placeholder · **final as written**
+- Open / Jam / Botch (check grades) · system term · placeholder · **final as written**
+- Easy / Standard / Hard (DC tiers) · system term · placeholder · **final as written**
+- Take time · verb or action · placeholder · **final as written**
+- Trap sense · system term · unclear · **final as written**
+- Revealed / Hunch / Hidden (detection grades) · system term · placeholder · **final as written**
+- Hunch zone · UI surface · placeholder · **final as written**
+- Hunch stop · UI surface · placeholder · **final as written**
+- Hunch badge · UI surface · placeholder · **final as written**
+- Probe · verb or action · placeholder · **final as written**
+- Walk round · verb or action · placeholder · **final as written**
+- Push through · verb or action · placeholder · **final as written**
+- Step over · verb or action · placeholder · **final as written**
+- Bear it · verb or action · placeholder · **final as written**
+- Pole it · verb or action · placeholder · **final as written**
+- Weighted plate · system term · placeholder · **renamed → pressure slab**
+- Handle · system term · unclear · **final as written**
+- Wide berth · system term · placeholder · **final as written**
+- Once Bitten · system term · placeholder · **final as written**
+- Opener rule · system term · unclear · **renamed → First-spring rule**
+- Device / Snare / Catch (trap families) · system term · placeholder · **final as written**
+- Set piece · system term · unclear · **final as written**
+- Lesson trap · system term · placeholder · **final as written**
+- Trigger kinds: plate, wire, trapdoor, glyph, catch, room, scent · system term · unclear · **final as written**
+- Consequence lock · system term · unclear · **final as written**
+- Plain (lock/container kind) · system term · placeholder · **final as written**
+- Crier (lock) · trap or lock · placeholder · **final as written**
+- Barb (lock) · trap or lock · placeholder · **final as written**
+- Tattle (lock) · trap or lock · placeholder · **final as written**
+- Runed (lock) · trap or lock · placeholder · **final as written**
+- Hour lock · trap or lock · placeholder · **final as written**
+- Keyed (lock/container kind) · system term · unclear · **final as written**
+- Riddle lock · trap or lock · placeholder · **final as written**
+- Hymn Riddle lock · trap or lock · placeholder · **final as written**
+- Index Riddle lock · trap or lock · placeholder · **final as written**
+- Place-Setting Riddle lock · trap or lock · placeholder · **final as written**
+- Story Riddle lock · trap or lock · placeholder · **final as written**
+- Splinter · verb or action · placeholder · **final as written**
+- Keybearer · system term · placeholder · **final as written**
+- Lockside Listen · verb or action · placeholder · **final as written**
+- Wax Key · consumable · placeholder · **final as written**
+- "The wax will not take a shape" · UI surface · unclear · **final as written**
+- Picks (fallback counter) · consumable · placeholder · **final as written**
+- Oil the Works · verb or action · placeholder · **final as written**
+- Unbolting · consumable · placeholder · **final as written**
+- Set off a Crier (sound a Crier) · verb or action · unclear · **final as written**
+- Boxed lurker · enemy affix · placeholder · **final as written**
+- "Feels teeth" · UI surface · unclear · **final as written**
+- Feed (boxed lurker) · verb or action · unclear · **final as written**
+- Wager room · room or terrain · placeholder · **final as written**
+- Disturbance track · UI surface · placeholder · **final as written**
+- Greed plates · trap or lock · unclear · **final as written**
+- Wager cage / caged prizes · system term · unclear · **final as written**
+- Swollen door · room or terrain · placeholder · **final as written**
+- Reading(s) (one-off room checks) · system term · unclear · **final as written**
+- Second Nature · ability · placeholder · **renamed → Old Hand**
+- Count line ("traps found: k · open Hunch zones: h") · UI surface · unclear · **final as written**
+- Trap rim · UI surface · placeholder · **final as written**
+- Trap link · UI surface · placeholder · **final as written**
+- Cracked heart (lethal tag shape) · UI surface · placeholder · **final as written**
+- Trap state badges: armed, jammed, sprung, disarmed, party-armed · UI surface · unclear · **final as written**
+- Lock glyph set and states (sound-wave arcs, barb, door-with-exclamation, sigil, hourglass, key-tooth notch, text-line, supply/coin, threshold; intact, hanging, Jammed, splintered) · UI surface · unclear · **final as written**
+- Lock card / rule card · UI surface · unclear · **final as written**
+- "Mechanics: Wax Key stocked at the vendor" (coverage-strip line) · UI surface · approved-final · **final as written**
+- Codex pages: "Natives know their floor; the house trusts its traps until one bites", "Device bodies never lie", "A padlock is a lock", "Boxed lurkers show their tell" · UI surface · unclear · **final as written**
+- Bear-it HP preview ("HP after: X, until next rest"), "up to X", LETHAL tag text · UI surface · unclear · **final as written**
+- Clock-Weight · trap or lock · placeholder · **final as written**
+- Confession Box · trap or lock · placeholder · **final as written**
+- Lockdown portcullis · trap or lock · unclear · **final as written**
+- Winch up · verb or action · placeholder · **final as written**
+- Jailer's keyring · item · unclear · **final as written**
+- Snare (Kennel trap) · trap or lock · placeholder · **renamed → Wire Loop**
+- Tin-can tripwire · trap or lock · placeholder · **final as written**
+- Gin Jaw · trap or lock · placeholder · **final as written**
+- Scent Bladder · trap or lock · placeholder · **final as written**
+- Deadfall · trap or lock · placeholder · **final as written**
+- Huntsman's (lodge) chest · trap or lock · unclear · **final as written**
+- Creaking board · trap or lock · unclear · **final as written**
+- Closing Coffin · trap or lock · placeholder · **final as written**
+- Crepe Veil · trap or lock · placeholder · **final as written**
+- Gramophone · trap or lock · placeholder · **final as written**
+- Lid Rack · trap or lock · placeholder · **final as written**
+- Will-Box · trap or lock · placeholder · **final as written**
+- Viewing Door · trap or lock · placeholder · **final as written**
+- Drowning Grate · trap or lock · placeholder · **final as written**
+- Belfry Wire · trap or lock · placeholder · **final as written**
+- Responsory · trap or lock · placeholder · **final as written**
+- Drowned Chandelier · trap or lock · placeholder · **final as written**
+- Vestry door · trap or lock · placeholder · **final as written**
+- Loft of Responses · room or terrain · placeholder · **final as written**
+- Shelf-Pull · trap or lock · placeholder · **final as written**
+- Paper-Cut Tray · trap or lock · placeholder · **final as written**
+- Shush Glyph · trap or lock · placeholder · **final as written**
+- Web seal · trap or lock · placeholder · **final as written**
+- Closed-Stack cage · trap or lock · placeholder · **final as written**
+- Restricted Section · room or terrain · placeholder · **renamed → The Chained Shelves**
+- Stage Trapdoor · trap or lock · placeholder · **final as written**
+- Blade Wheel · trap or lock · placeholder · **renamed → Swing Blade**
+- Jack-in-the-Box · trap or lock · placeholder · **final as written**
+- Oil Bucket · trap or lock · placeholder · **final as written**
+- Mirror Glyph · trap or lock · placeholder · **final as written**
+- High-Striker · trap or lock · placeholder · **final as written**
+- Ticket lock ("Admit One") · trap or lock · placeholder · **final as written**
+- Ring key · item · placeholder · **renamed → Ringmaster's Key**
+- Last Act · room or terrain · placeholder · **renamed → The Prop Room**
+- Taster's Plate · trap or lock · placeholder · **final as written**
+- Cold Seat · trap or lock · placeholder · **final as written**
+- Iced padlock · trap or lock · flagged-to-naming-pass · **renamed → Frost-seized padlock**
+- Cellar door (Supper) · trap or lock · unclear · **final as written**
+- Top Table · room or terrain · placeholder · **final as written**
+- Lip Catch · trap or lock · placeholder · **renamed → Lip Clamp**
+- Acid Gland · trap or lock · placeholder · **final as written**
+- Spore Bladder · trap or lock · placeholder · **final as written**
+- Sphincter caches / Fed sphincter · trap or lock · placeholder · **final as written**
+- Tenant's strongbox · trap or lock · unclear · **final as written**
+- Landlord's ledger lock · trap or lock · unclear · **final as written**
+- The Stomach · room or terrain · placeholder · **renamed → The Craw**
+- Lullaby Glyph · trap or lock · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Hand Under the Bed · trap or lock · placeholder · **final as written**
+- Rattle Wire · trap or lock · placeholder · **final as written**
+- Darning Volley · trap or lock · placeholder · **final as written**
+- Plain diary lock · trap or lock · unclear · **final as written**
+- Nursery door · trap or lock · unclear · **final as written**
+- Night Nursery · room or terrain · placeholder · **renamed → The Airing Cupboard**
+- Rose Pane · trap or lock · placeholder · **final as written**
+- Thurible Wire · trap or lock · placeholder · **final as written**
+- Collection Plate · trap or lock · placeholder · **final as written**
+- Pew Rack · trap or lock · placeholder · **final as written**
+- Rood Screen gate · trap or lock · placeholder · **renamed → Rood Screen door**
+- Rose Window · room or terrain · placeholder · **renamed → The Tracery Loft**
+- Valve-knot · other · placeholder · **final as written**
+- Paper burns · system term · unclear · **final as written**
+
+#### B.23 loot-economy (41)
+
+- Dream's Due · system term · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- "The dream owes <name> something." (Stratum Card Due line) · UI surface · placeholder · **final as written**
+- "The dream's due: for <name>" (loot-summary tag), with its 'paid' state · UI surface · placeholder · **final as written**
+- "<name> did not live to collect" · UI surface · placeholder · **final as written**
+- "another way" (sidegrade Due tag) · UI surface · placeholder · **final as written**
+- Viaticum · system term · placeholder · **renamed → Parting Fare (client)**
+- "Before the Heart's chamber, the dream sets out provisions: choose one" · UI surface · placeholder · **final as written**
+- Memento · item family · placeholder · **final as written**
+- "carried out of the Heart" (Memento caption) · UI surface · placeholder · **final as written**
+- memento wall · UI surface · placeholder · **final as written**
+- Grave Goods · report or setting · placeholder · **final as written**
+- "Still carried when the dream closed:" / "Carried out: ..." · UI surface · placeholder · **final as written**
+- Treasure count ("Treasures: n") · system term · placeholder · **final as written**
+- "best remaining: <tier word>" · UI surface · placeholder · **final as written**
+- "+1 secret" · UI surface · placeholder · **final as written**
+- "a treasure was spent by its bearer" / "some treasures may be gone" · UI surface · placeholder · **final as written**
+- floor strip · UI surface · unclear · **final as written**
+- Heavy Purse · system term · placeholder · **final as written**
+- "A heavy purse walks this floor" · UI surface · placeholder · **final as written**
+- "Carries: 12 coin" / coin-disc loot badge / merged 'loot' badge · UI surface · placeholder · **final as written**
+- Twin Coffer · item family · placeholder · **final as written**
+- "it was only a dream" · UI surface · placeholder · **final as written**
+- dreamed option · system term · placeholder · **final as written**
+- tier mark · UI surface · placeholder · **final as written**
+- "The door's gift" · UI surface · placeholder · **final as written**
+- Lock card wording ("holds a Rare weapon; by key, an Uncommon weapon"; "chosen for <name>"; "by key, an ordinary Uncommon weapon") · UI surface · placeholder · **final as written**
+- Wax-Key identity · system term · unclear · **final as written**
+- elite intel line · system term · unclear · **final as written**
+- "Salvage: 2" (salvage coin line) · UI surface · unclear · **final as written**
+- pressed-moth line ("in the Dreamer's Heart, coins are pressed moths") · UI surface · placeholder · **final as written**
+- "No camp after floor 5. Coin left at camp exit is lost." · UI surface · placeholder · **final as written**
+- "the Hollow ahead sells rare" / "unused since floor N" tag / coin ledger · UI surface · placeholder · **final as written**
+- Steal preview · UI surface · unclear · **final as written**
+- The Wish · system term · placeholder · **final as written**
+- Tithe Bowl · system term · placeholder · **final as written**
+- The Ferryman's Note · system term · placeholder · **final as written**
+- Blood Price · system term · placeholder · **final as written**
+- Wager Pot · system term · placeholder · **final as written**
+- Risk Ledger · system term · unclear · **final as written**
+- fit variant / spiky (deck variants), rarity deck, spoils list, step allowance, step socket, fit premium · system term · unclear · **final as written**
+- Socket ranks SR0-SR5 · system term · unclear · **final as written**
+
+#### B.24 encounter-placement (76)
+
+- Cuckoo · system term · placeholder · **final as written**
+- Mousetrap · system term · placeholder · **renamed → Baited Room**
+- Waylay · system term · placeholder · **final as written**
+- Kill Box · system term · placeholder · **final as written**
+- Spoor mark · UI surface · placeholder · **final as written**
+- Bait cache · item family · placeholder · **final as written**
+- Billet · system term · placeholder · **final as written**
+- Keystone · system term · placeholder · **final as written**
+- Stung (Stung rule) · system term · placeholder · **final as written**
+- Line broken · UI surface · placeholder · **final as written**
+- Caught facing the door · UI surface · placeholder · **renamed → Facing the door**
+- Line crossed · system term · placeholder · **final as written**
+- Keystone lost · system term · placeholder · **final as written**
+- Encounter Read card (Read card) · UI surface · placeholder · **final as written**
+- Formation chip · UI surface · placeholder · **final as written**
+- Marked tell · UI surface · unclear · **final as written**
+- Seen-tell band marker · UI surface · unclear · **final as written**
+- Hold squares · UI surface · unclear · **final as written**
+- fall-back square · UI surface · placeholder · **final as written**
+- Arrival-Portal arrows · UI surface · unclear · **final as written**
+- Hedgehog · system term · placeholder · **final as written**
+- Hold the Hide · verb or action · placeholder · **final as written**
+- cover-room window · room or terrain · unclear · **final as written**
+- Terrain Pairing · system term · placeholder · **final as written**
+- Annex (Annex group) · system term · placeholder · **final as written**
+- Posture · system term · placeholder · **final as written**
+- Posted · system term · placeholder · **final as written**
+- Busy · system term · placeholder · **final as written**
+- Afoot · system term · placeholder · **final as written**
+- Activity (activity word) · system term · placeholder · **final as written**
+- Start shape · system term · placeholder · **final as written**
+- Battle formation (Formation) · system term · placeholder · **final as written**
+- Formation tiers FT1-FT3 (opening, combined arms, centrepiece) · system term · placeholder · **final as written**
+- Picket Line · system term · placeholder · **final as written**
+- Door Line · system term · placeholder · **final as written**
+- Phalanx · system term · placeholder · **final as written**
+- Crescent · system term · placeholder · **final as written**
+- Skirmish Spread · system term · placeholder · **final as written**
+- Retinue · system term · placeholder · **final as written**
+- Honour Ring · system term · placeholder · **final as written**
+- Champion Watch · system term · placeholder · **final as written**
+- Crossfire · system term · placeholder · **final as written**
+- Pincer · system term · placeholder · **final as written**
+- Grindstone · system term · placeholder · **final as written**
+- Scramble · system term · placeholder · **final as written**
+- Bait and Nook · system term · placeholder · **final as written**
+- Ritual · system term · placeholder · **final as written**
+- Patrol File · system term · placeholder · **final as written**
+- Revel · system term · placeholder · **final as written**
+- gorged Revel · system term · placeholder · **final as written**
+- Bout · system term · placeholder · **final as written**
+- Sleeping Ward · system term · placeholder · **renamed → the Heap**
+- Defensive variant · system term · unclear · **final as written**
+- watched lane / watched Portal · system term · placeholder · **final as written**
+- entry lane · system term · placeholder · **final as written**
+- open zone · system term · placeholder · **final as written**
+- core and growth positions · system term · placeholder · **final as written**
+- contact round · system term · placeholder · **final as written**
+- start socket / socket classes (front, ward, back, overwatch, flank, nook, watch, table, blind) · system term · unclear · **final as written**
+- Pose grammar · other · placeholder · **final as written**
+- G1 Roll Call, G2 The Junction Desk, G3 The Shuffle, G4 Lights-Out, G5 Visiting Hour, G6 The Keyring Office · event or curiosity · placeholder · **final as written**
+- K1 The Huntsman's Stand, K2 Kennel Run, K3 Horn and Hounds, K4 The Strays, K5 Bracken Blind, K6 The Trophy Room · event or curiosity · placeholder · **final as written**
+- W1 Pallbearers' Line, W2 The Undertaker's Count, W3 The Uncle's Chair, W4 The Last Round, W5 Undertaker's Parlour · event or curiosity · placeholder · **final as written**
+- C1 Evensong, C1b Evensong Rows, C2 The Procession, C3 Quire Watch, C4 Tidewatch, C5 Vespers, C6 The Hymn · event or curiosity · placeholder · **final as written**
+- S1 Aisle Watch, S2 Cataloguing, S3 Margin Notes, S4 Silent Reading, S5 Web Weavers, S6 Aisle Kill Box · event or curiosity · placeholder · **final as written**
+- CA1 The Show, CA2 The Fire-Eater's Pit, CA3 The Knife Act, CA4 The Booth Gallery, CA5 Carousel, CA6 The Tamer's Ring · event or curiosity · placeholder · **final as written**
+- SU1 Second Course, SU2 The Seating Plan, SU3 The Cellar Pour, SU4 Full Belly, SU5 The Carvers, SU6 The Service Hatch · event or curiosity · placeholder · **final as written**
+- GU1 Immune Sweep, GU2 Membrane, GU3 Rent Day, GU4 Burrow, GU5 Sated Den, GU6 Antibody Escort · event or curiosity · placeholder · **final as written**
+- H1 Sleepwalkers, H2 Story Time, H3 Knitting Circle, H4 Night Stable, H5 Nursery Den, H6 Bedpost Watch · event or curiosity · placeholder · **final as written**
+- Messenger · system term · placeholder · **final as written**
+- Call Post · system term · placeholder · **final as written**
+- Wake Order · system term · placeholder · **renamed → Alarm Order**
+- Errant · enemy type · placeholder · **final as written**
+- Standoff / Riot · event or curiosity · placeholder · **final as written**
+- Distracted · condition · unclear · **final as written**
+- Rumour, Prowl, Stand To, Uneasy · system term · unclear · **final as written**
+
+#### B.25 loot-sources (73)
+
+- Windfall · system term · placeholder · **final as written**
+- Truant (Windfall Truant) · enemy type · placeholder · **final as written**
+- Exploration Truant · enemy type · placeholder · **final as written**
+- Ebb · item family · placeholder · **final as written**
+- Nab / Nabbed · verb or action · placeholder · **final as written**
+- Grab · verb or action · placeholder · **final as written**
+- Rathole · room or terrain · placeholder · **final as written**
+- Glean · verb or action · placeholder · **final as written**
+- Proprietor tag · UI surface · placeholder · **final as written**
+- Proprietors: the turnkey, the warden, the confiscation clerk, the chaplain · other · placeholder · **final as written**
+- Bedside Stand · item · placeholder · **renamed → the Washstand (client)**
+- Alms Crab · enemy type · flagged-to-naming-pass · **renamed → Pew Crab**
+- Conjuror's Rabbit (the Rabbit) · enemy type · placeholder · **final as written**
+- Crumb Mouse · enemy type · placeholder · **final as written**
+- Silverfish · enemy type · placeholder · **final as written**
+- Rent Snail · enemy type · placeholder · **final as written**
+- Offertory Plate · item · placeholder · **renamed → Offertory Dish**
+- Prize Balloon · item · placeholder · **renamed → Fairground Balloon**
+- Swallowed bauble · item · placeholder · **renamed → Gut-Lodged bauble**
+- Rising Votive · item · placeholder · **final as written**
+- Scurry trail · UI surface · placeholder · **final as written**
+- Next-hop outline (pawprint outline) · UI surface · placeholder · **final as written**
+- Wall-set mark · UI surface · placeholder · **final as written**
+- Windfall mark (knotted-sack glyph) · UI surface · placeholder · **final as written**
+- Got-away cue · other · placeholder · **final as written**
+- "Held" badge (reasons: Surprised, Alone, slip used) · UI surface · placeholder · **final as written**
+- Count digit / floor ring (hollow while Dormant, solid while awake) · UI surface · unclear · **final as written**
+- Rathole floor decal (half-rim) · UI surface · placeholder · **final as written**
+- Twin-lid mark · UI surface · unclear · **final as written**
+- Uncorked (glint state) · condition · placeholder · **final as written**
+- Treasure field by source · UI surface · unclear · **final as written**
+- Quiet summary / auto-close · UI surface · placeholder · **final as written**
+- "guarded" greyed reason · UI surface · unclear · **final as written**
+- Log line "The <skin> got away with a <tier word> treasure" · UI surface · unclear · **final as written**
+- Stratum line "Treasures: 7 · one may get away" · UI surface · unclear · **final as written**
+- Truant hover "Carries: … · runs when a fight starts · gets away in <c0>" · UI surface · unclear · **final as written**
+- Run-record lines "Windfalls nabbed k of m" and "Got away: <tier word>" · report or setting · unclear · **final as written**
+- Steal preview row "Windfall: card (coin spills)" · UI surface · unclear · **final as written**
+- Hover "The dream's due: for <name>" · UI surface · unclear · **final as written**
+- Confiscation tin · item family · placeholder · **final as written**
+- Poacher's creel · item family · placeholder · **final as written**
+- Pen box · item · placeholder · **final as written**
+- Grave-goods casket · item family · placeholder · **renamed → Burial casket**
+- Alms chest · item family · placeholder · **final as written**
+- Archive chest · item family · placeholder · **final as written**
+- Prize hamper · item family · placeholder · **final as written**
+- Busker's hat · item · placeholder · **final as written**
+- Silver canteen · item family · placeholder · **final as written**
+- Savings tin · item family · placeholder · **final as written**
+- Biscuit tin · item family · placeholder · **final as written**
+- Document case (ink-lacquered) · item · placeholder · **final as written**
+- Sewing basket (tenant's) · item · placeholder · **final as written**
+- Up-chained chests · item family · unclear · **final as written**
+- Sacristy · place · placeholder · **final as written**
+- Box Office · place · placeholder · **final as written**
+- Plate Room · place · placeholder · **final as written**
+- Rare Books Room · place · placeholder · **final as written**
+- Trove · other · placeholder · **final as written**
+- Crannies · other · placeholder · **final as written**
+- Tip-offs · other · placeholder · **final as written**
+- Tattler · other · placeholder · **final as written**
+- Hawker / the Hawker's Hour · event or curiosity · placeholder · **final as written**
+- Lost Property · other · placeholder · **final as written**
+- Blocked Hairline · other · placeholder · **final as written**
+- Chained Key (Unhook) · other · placeholder · **final as written**
+- Shepherded escort · other · placeholder · **final as written**
+- Herald halt · other · unclear · **final as written**
+- Tribute · other · placeholder · **final as written**
+- Grapnel · other · placeholder · **final as written**
+- Doorstop · other · placeholder · **final as written**
+- Flotsam · other · unclear · **final as written**
+- Inset container · system term · placeholder · **final as written**
+- Walk line · system term · unclear · **final as written**
+
+#### B.26 item-rolls (51)
+
+- Wayward · system term · placeholder · **renamed → Windblown**
+- Suits / "Suits <name>" · UI surface · placeholder · **final as written**
+- Patina · system term · placeholder · **final as written**
+- Scion (and Scion rank words, e.g. 'Vowkeeper, Twice-Sworn') · system term · placeholder · **final as written**
+- Plays with / "Plays with: <feature>" · UI surface · placeholder · **final as written**
+- Answers here · UI surface · placeholder · **renamed → Shines here**
+- +1 line / "+1 line over your <item>" · UI surface · placeholder · **final as written**
+- Whence (pane) · UI surface · placeholder · **final as written**
+- Reverie · system term · placeholder · **internal only, never printed**
+- byname · system term · placeholder · **final as written**
+- Plain Gifts · system term · placeholder · **final as written**
+- What the dream kept · UI surface · placeholder · **final as written**
+- Verdict words: upgrade / another way / redundant / lesser / cannot use (glyphs ▲ ⇄ = ▽ ✕) · UI surface · placeholder · **final as written**
+- footer badge · UI surface · placeholder · **final as written**
+- fit line · UI surface · placeholder · **final as written**
+- signature cache · item family · placeholder · **final as written**
+- "Guards: <signature name>" plate line · UI surface · placeholder · **final as written**
+- carried-use floater · UI surface · placeholder · **final as written**
+- reveal chime · system term · placeholder · **final as written**
+- Dormant name form "<Name> of ?" and suffix epithets (e.g. 'of the Whetstone', 'of the Bar') · system term · placeholder · **final as written**
+- Arcana readout "? dormant · Arcana 13 vs 15" · UI surface · placeholder · **final as written**
+- Provenance caption "Found in <theme>, floor N" · UI surface · placeholder · **final as written**
+- "Carried from the start" · UI surface · placeholder · **final as written**
+- Lock-card wording ("holds a Rare weapon; by key, an Uncommon weapon"; "chosen for <name>"; "an ordinary Uncommon weapon") · UI surface · approved-final · **final as written**
+- tool (fine-category display noun) · system term · unclear · **final as written**
+- Stopclock Mace (authored line 'the Countdown') · item · placeholder · **final as written**
+- Cell Zero Flail · item · placeholder · **final as written**
+- Frame-Master's Spear · item · placeholder · **final as written**
+- Lying-in-State Leathers · item · placeholder · **final as written**
+- Executor's Letter-Knife · item · placeholder · **final as written**
+- Sunken Carillon Hammer · item · flagged-to-naming-pass · **final, boss-tied (renamed only with its boss)**
+- Precentor's Baton · item · flagged-to-naming-pass · **final, boss-tied**
+- Vellum Gambeson · item · flagged-to-naming-pass · **final, boss-tied; RS Patina list drops "vellum"**
+- Index Crossbow · item · placeholder · **final as written**
+- Ever-Lifted Barbell · item · placeholder · **final as written**
+- Curtain-Fall Rod · item · placeholder · **final as written**
+- Oxblood Brigandine · item · flagged-to-naming-pass · **renamed → Damask Brigandine**
+- Swallowed Splint · item · flagged-to-naming-pass · **final, boss-tied; Swallowed kept for the signature only**
+- Appetite's Pestle (authored line 'Hungering') · item · placeholder · **final as written**
+- Warming Pan · item · placeholder · **final as written**
+- Wind-Down Hammer · item · placeholder · **final as written**
+- Authored signature lines: Shove-through, Long Skewer, Paired Throw, Driving, Shared Steadiness, Conduit, Floorer, Shadowed (authored) · ability · placeholder · **final as written**
+- Memento epitaphs ("Warming Pan, carried out of the Heart. Still warm." / "Wind-Down Hammer, carried out of the Heart. It has stopped.") · other · placeholder · **final as written**
+- Reverie lines (per theme, e.g. 'Its little dial shows a different hour than yours.') · other · placeholder · **final as written**
+- Theme stamps: striped shirt, collar buckle, lily, pipe stop, inkpot, ticket punch, assay mark, ribcage, rocking horse, rose tracery · other · placeholder · **final as written**
+- Wax-Key sibling · system term · placeholder · **final as written**
+- KinSwap · system term · unclear · **final as written**
+- Triad (Yours / Theirs / Wayward + fourth) · system term · unclear · **final as written**
+- Seen in Hand · system term · unclear · **final as written**
+- Element Echo · system term · unclear · **final as written**
+- new to your codex (badge) · UI surface · unclear · **final as written**
+
+#### B.27 events (142)
+
+- Curiosity (rules noun; also the main card form) · system term · placeholder · **final as written**
+- Interlude · system term · placeholder · **final as written**
+- Glimpse · system term · placeholder · **final as written**
+- MECH tag / tool card · system term · unclear · **final as written**
+- Rare tag · system term · unclear · **final as written**
+- Grace · system term · placeholder · **final as written**
+- G-Ward · ability · placeholder · **internal only, never printed**
+- G-Help · ability · placeholder · **internal only, never printed**
+- G-Spur · ability · placeholder · **internal only, never printed**
+- G-Steady · ability · placeholder · **internal only, never printed**
+- Strand · system term · placeholder · **final as written**
+- Referent · system term · unclear · **final as written**
+- Retelling · system term · placeholder · **final as written**
+- Twice-Told card · UI surface · placeholder · **final as written**
+- First Telling · UI surface · placeholder · **final as written**
+- Fallow / Launcher Fallow · system term · unclear · **final as written**
+- Sequel · system term · placeholder · **final as written**
+- Ripening · system term · unclear · **final as written**
+- Afterword · UI surface · placeholder · **final as written**
+- Figure frame · system term · unclear · **final as written**
+- Leave · verb or action · unclear · **final as written**
+- Unwoken Roll · UI surface · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- FactLedger · system term · unclear · **final as written**
+- F-LISTEN · system term · unclear · **final as written**
+- F-CACHE · system term · unclear · **final as written**
+- Easing · system term · placeholder · **final as written**
+- Testimony · system term · placeholder · **final as written**
+- Overtures · system term · placeholder · **final as written**
+- Provisos (Nightmare Provisos) · system term · placeholder · **final as written**
+- Omen Retelling · system term · placeholder · **final as written**
+- Night Usher · NPC · placeholder · **final as written**
+- choirmaster · NPC · unclear · **final as written**
+- The Turnkey's Daybook · event or curiosity · placeholder · **final as written**
+- The Visitors' Slot · event or curiosity · placeholder · **final as written**
+- The Tally Board · event or curiosity · placeholder · **final as written**
+- The Slop Hatch · event or curiosity · placeholder · **final as written**
+- The Petitions Slot · event or curiosity · placeholder · **final as written**
+- The Borrowed Hour · event or curiosity · placeholder · **final as written**
+- The Warders' Rota · event or curiosity · placeholder · **final as written**
+- The Yard Wall · event or curiosity · placeholder · **final as written**
+- Your Name on the Charge Sheet · event or curiosity · placeholder · **final as written**
+- The Fallen Portrait · event or curiosity · placeholder · **final as written**
+- The Collar With No Dog · event or curiosity · placeholder · **final as written**
+- The Kennel Book · event or curiosity · placeholder · **final as written**
+- The Lodge Weathervane · event or curiosity · placeholder · **final as written**
+- The Hunt Card · event or curiosity · placeholder · **final as written**
+- The Gamekeeper's Board · event or curiosity · placeholder · **final as written**
+- The Unfinished Pedigree · event or curiosity · placeholder · **final as written**
+- The Feeding Trough · event or curiosity · placeholder · **final as written**
+- The Last Hound · event or curiosity · placeholder · **final as written**
+- The Guest Book · event or curiosity · placeholder · **final as written**
+- The Uncovered Mirror · event or curiosity · placeholder · **final as written**
+- The Codicil · event or curiosity · placeholder · **final as written**
+- The Black Armband · event or curiosity · placeholder · **final as written**
+- Start the Clocks · event or curiosity · placeholder · **final as written**
+- The Wake for You · event or curiosity · placeholder · **final as written**
+- The Lily Clock · event or curiosity · placeholder · **final as written**
+- The Receiving Line · event or curiosity · placeholder · **final as written**
+- The Funeral Programme · event or curiosity · placeholder · **final as written**
+- Take a Shift · event or curiosity · placeholder · **final as written**
+- The Black Basin · event or curiosity · placeholder · **final as written**
+- The Dry Pew · event or curiosity · placeholder · **final as written**
+- The Waterlogged Pipe · event or curiosity · placeholder · **final as written**
+- The Unsung Verse · event or curiosity · placeholder · **final as written**
+- The Rising Waterline · event or curiosity · placeholder · **final as written**
+- The Hymn Stops · event or curiosity · placeholder · **final as written**
+- The Damp Order of Service · event or curiosity · placeholder · **final as written**
+- The Drip Count · event or curiosity · placeholder · **final as written**
+- Second Notice · event or curiosity · placeholder · **final as written**
+- The Card Catalogue · event or curiosity · placeholder · **final as written**
+- Silence, Please · event or curiosity · placeholder · **final as written**
+- Finish the Sentence · event or curiosity · placeholder · **final as written**
+- The Lamp Wick · event or curiosity · placeholder · **final as written**
+- The Missing Last Page · event or curiosity · placeholder · **final as written**
+- The Spider's Copy · event or curiosity · placeholder · **final as written**
+- The Returns Slip · event or curiosity · placeholder · **final as written**
+- The Shelf Mark · event or curiosity · placeholder · **final as written**
+- Admission: One Memory · event or curiosity · placeholder · **final as written**
+- Ring Toss · event or curiosity · placeholder · **final as written**
+- The High Mirror · event or curiosity · placeholder · **final as written**
+- The Fire-Eater's Tip Jar · event or curiosity · placeholder · **final as written**
+- The Applause Machine · event or curiosity · placeholder · **final as written**
+- The Fortune Machine · event or curiosity · placeholder · **final as written**
+- Curtain Call · event or curiosity · placeholder · **final as written**
+- The Running Order · event or curiosity · placeholder · **final as written**
+- The Prompter's Cue · event or curiosity · placeholder · **final as written**
+- The Seating Chart · event or curiosity · placeholder · **final as written**
+- The Warming Dish · event or curiosity · placeholder · **final as written**
+- The Bill of Fare · event or curiosity · placeholder · **final as written**
+- The Laid Place · event or curiosity · placeholder · **final as written**
+- Pass the Salt · event or curiosity · placeholder · **final as written**
+- Every Glass Rises · event or curiosity · placeholder · **final as written**
+- The Folded Napkin · event or curiosity · placeholder · **final as written**
+- Noise Complaint · event or curiosity · placeholder · **final as written**
+- The To-Let Sign · event or curiosity · placeholder · **final as written**
+- Undigested Letters · event or curiosity · placeholder · **final as written**
+- Rent Due · event or curiosity · placeholder · **final as written**
+- The Knitted Scar · event or curiosity · placeholder · **final as written**
+- The Chapel Being Digested · event or curiosity · placeholder · **final as written**
+- The Skirting Board · event or curiosity · placeholder · **final as written**
+- The High Window · event or curiosity · placeholder · **final as written**
+- The Bedpost Ladder · event or curiosity · placeholder · **final as written**
+- The Coat Hooks by the Door (the Coat Hooks) · event or curiosity · placeholder · **final as written**
+- The Wall That Keeps Its Distance · event or curiosity · placeholder · **final as written**
+- The Pinned Notice · event or curiosity · placeholder · **final as written**
+- The Letter Addressed to You · event or curiosity · placeholder · **final as written**
+- Someone Wearing Your Coat · event or curiosity · placeholder · **final as written**
+- The Stopped Mantel · event or curiosity · placeholder · **final as written**
+- The Spare Key on a String · event or curiosity · placeholder · **final as written**
+- The Night Usher (card) · event or curiosity · placeholder · **final as written**
+- The Lantern Left Burning · event or curiosity · placeholder · **final as written**
+- The Door You Already Opened · event or curiosity · placeholder · **final as written**
+- The Umbrella Stand · event or curiosity · placeholder · **final as written**
+- Left Luggage · event or curiosity · placeholder · **final as written**
+- The Wrong Floor Sign · event or curiosity · placeholder · **final as written**
+- The Printed Itinerary · event or curiosity · placeholder · **final as written**
+- The Clock With No Hands · event or curiosity · placeholder · **final as written**
+- The Late Mirror · event or curiosity · placeholder · **final as written**
+- The Lost Glove · event or curiosity · placeholder · **final as written**
+- The Stair Count · event or curiosity · placeholder · **final as written**
+- Signed In · other · placeholder · **final as written**
+- Petitioned · other · placeholder · **final as written**
+- Off the Rota · other · placeholder · **final as written**
+- Time Already Served · other · placeholder · **final as written**
+- Collared · other · placeholder · **final as written**
+- Pedigreed · other · placeholder · **final as written**
+- In Mourning · other · placeholder · **final as written**
+- Rehearsed · other · placeholder · **final as written**
+- Shook Hands · other · placeholder · **final as written**
+- Settled Debt · other · placeholder · **final as written**
+- The Silence Held · other · placeholder · **final as written**
+- In the Book · other · placeholder · **final as written**
+- The Last Page · other · placeholder · **final as written**
+- Took a Bow · other · placeholder · **final as written**
+- Sat Down · other · placeholder · **final as written**
+- Sealed Letter · other · placeholder · **final as written**
+- Shut Behind You · other · placeholder · **final as written**
+- Left Luggage (Strand) · other · placeholder · **final as written**
+- Read in full · UI surface · unclear · **final as written**
+- Auto-answer · report or setting · unclear · **final as written**
+- Nothing left to learn · UI surface · unclear · **final as written**
+- ends at the boss door · UI surface · unclear · **final as written**
+
+#### B.28 boss-rooms (122)
+
+- Rhythm · system term · placeholder · **final as written**
+- Rhythm strip · UI surface · placeholder · **final as written**
+- Offbeat (Off beat) · system term · placeholder · **final as written**
+- Lead beat · system term · placeholder · **final as written**
+- Downbeat · system term · placeholder · **final as written**
+- Device (arena Device) · system term · placeholder · **final as written**
+- Device payoff kinds: Cancel, Deny, Divide, Divert, Sate, Expose, Release · system term · unclear · **final as written**
+- Guise · system term · placeholder · **final as written**
+- Rendition · system term · placeholder · **final as written**
+- Nightmare Rendition · system term · placeholder · **renamed → Peril Rendition (client)**
+- Playbill · UI surface · placeholder · **final as written**
+- Take Places · verb or action · placeholder · **final as written**
+- Sprawled · condition · placeholder · **final as written**
+- Upended (former name) · condition · placeholder · **renamed → Sprawled**
+- Resolve Broken · UI surface · placeholder · **renamed → Resolve Spent**
+- Gambit · system term · placeholder · **final as written**
+- Next turn (Gambit glyph) · UI surface · placeholder · **final as written**
+- Keynote · system term · placeholder · **final as written**
+- Overtaken · condition · placeholder · **final as written**
+- Arena State · system term · placeholder · **final as written**
+- Phase Score · system term · placeholder · **final as written**
+- phase card · UI surface · unclear · **final as written**
+- threshold preview · UI surface · unclear · **final as written**
+- Boss Ledger · UI surface · placeholder · **final as written**
+- Grudge · system term · placeholder · **final as written**
+- It remembers. · UI surface · placeholder · **final as written**
+- Prompts (Prompts on boss actions) · system term · flagged-to-naming-pass · **renamed → Boss-action warnings**
+- the Heavy Thing · trap or lock · placeholder · **final as written**
+- leash ring · UI surface · placeholder · **final as written**
+- Sanctum rest rule refusal: 'The Sanctum will not let you sleep.' · UI surface · placeholder · **final as written**
+- Behind-you line · UI surface · unclear · **final as written**
+- Wakes at 33% (reserve wake chip) · UI surface · unclear · **renamed → Joins at 33%**
+- waking light (waking-light window) · place · placeholder · **final as written**
+- keepers of the sleep · system term · unclear · **final as written**
+- stance lines: Rises from the chair / Takes the pulpit / Drops from the threads / Still hungry / Wound up · UI surface · placeholder · **final as written**
+- Ten to Three · other · placeholder · **final as written**
+- Counter-Clockwise · other · placeholder · **final as written**
+- Lock-In · other · placeholder · **final as written**
+- Cell Zero Opens · other · placeholder · **final as written**
+- The Chain Snaps · other · placeholder · **final as written**
+- Long Reach · other · placeholder · **final as written**
+- Old Iron · other · placeholder · **final as written**
+- Pack Mother · other · placeholder · **final as written**
+- Drawn Shutters · other · placeholder · **final as written**
+- Gone to Ground · other · placeholder · **final as written**
+- Kennel Row · other · placeholder · **final as written**
+- Lord's Gallery · room or terrain · placeholder · **final as written**
+- Act III Guise · room or terrain · unclear · **final as written**
+- Gullet Guise · room or terrain · unclear · **final as written**
+- Pendulum Hall · place · placeholder · **final as written**
+- Cell Zero (arena) · place · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- the Den · place · placeholder · **final as written**
+- Portrait Kennel · place · placeholder · **final as written**
+- the Viewing Room · place · placeholder · **final as written**
+- Probate Room · place · placeholder · **final as written**
+- Sunken Belfry · place · placeholder · **final as written**
+- Choir Stalls · place · placeholder · **final as written**
+- Reading Hall · place · placeholder · **renamed → the Lectern Hall**
+- Index Well · place · placeholder · **final as written**
+- Strongman's Ring · place · placeholder · **renamed → the Lifting Stage**
+- the Proscenium · place · placeholder · **final as written**
+- Head of the Hall · place · placeholder · **renamed → the Dais**
+- the Antrum · place · placeholder · **final as written**
+- Larder of the World · place · placeholder · **final as written**
+- the Turned-Down Bed · place · placeholder · **final as written**
+- the Mantel Nursery · place · placeholder · **final as written**
+- Whelping Pen · room or terrain · placeholder · **final as written**
+- the pen bar · trap or lock · placeholder · **renamed → the pen board**
+- Menagerie Wagon · room or terrain · placeholder · **final as written**
+- wagon bolt · trap or lock · placeholder · **final as written**
+- family pews · room or terrain · placeholder · **final as written**
+- nursery linen press · room or terrain · placeholder · **final as written**
+- Windlass · trap or lock · placeholder · **final as written**
+- Heel Whistle · trap or lock · placeholder · **final as written**
+- Kennel Shutter · trap or lock · placeholder · **final as written**
+- the Turned Portrait · trap or lock · placeholder · **final as written**
+- Mourning Curtains · trap or lock · placeholder · **renamed → Mourning Blinds**
+- Probate Desk · trap or lock · placeholder · **final as written**
+- the sluice · trap or lock · placeholder · **final as written**
+- Grounding Chain · trap or lock · placeholder · **final as written**
+- Returns Bell · trap or lock · placeholder · **renamed → Returns Stamp**
+- Thread Anchors · trap or lock · placeholder · **final as written**
+- Jaw Prop (with the rescue handle) · trap or lock · placeholder · **final as written**
+- Feeding Hatch · trap or lock · placeholder · **final as written**
+- Lamp Snuffer · trap or lock · placeholder · **final as written**
+- Mainspring · trap or lock · placeholder · **final as written**
+- Halberd Sweep · ability · placeholder · **final as written**
+- Chain of Keys · ability · placeholder · **final as written**
+- Chain Lash · ability · placeholder · **final as written**
+- Chain Crack · ability · placeholder · **final as written**
+- Cell Zero Slam · ability · placeholder · **final as written**
+- the Pin-Down · ability · placeholder · **final as written**
+- the View Halloo · ability · placeholder · **final as written**
+- Spear Lunge · ability · placeholder · **renamed → Running Thrust**
+- Mourner's Embrace · ability · placeholder · **renamed → Black-Crepe Embrace**
+- Read the Will · ability · placeholder · **renamed → Read the Testament**
+- Disinherit · ability · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Clapper Swing · ability · placeholder · **final as written**
+- Cold Ring · ability · placeholder · **renamed → Frost Tone**
+- Fermata · ability · placeholder · **final as written**
+- Arc Note · ability · placeholder · **final as written**
+- Hold the Note · ability · placeholder · **renamed → Long Note**
+- Inkblot · ability · placeholder · **final as written**
+- Marginalia · ability · placeholder · **final as written**
+- Spinneret · ability · placeholder · **final as written**
+- See Also · ability · unclear · **final as written**
+- Threadwalk · ability · placeholder · **final as written**
+- Showstopper · ability · placeholder · **final as written**
+- Flex and Stamp · ability · placeholder · **final as written**
+- Final Bow · ability · placeholder · **final as written**
+- Carving Knife · ability · placeholder · **final as written**
+- Cold Shoulder · ability · placeholder · **final as written**
+- Gnash · ability · placeholder · **final as written**
+- Bile Spit · ability · placeholder · **renamed → Sour Spit**
+- Retch · ability · placeholder · **final as written**
+- Gorge · ability · placeholder · **final as written**
+- Mouthful · ability · placeholder · **final as written**
+- There, There · ability · placeholder · **final as written**
+- Lights Out · ability · placeholder · **final as written**
+- Smother · ability · flagged-to-naming-pass · **renamed → Heavy Blanket (fallback)**
+- The Bed Turns Over · hazard · flagged-to-naming-pass · **final under W-DREAM-1 (b) (Q1)**
+- Memento captions: 'Warming Pan, carried out of the Heart. Still warm.' / 'Wind-Down Hammer, carried out of the Heart. It has stopped.' · UI surface · placeholder · **final as written**
+
+#### B.29 exploration-information (63)
+
+- Lodestring · item · placeholder · **final as written**
+- Lodestring spool (mark) · UI surface · placeholder · **final as written**
+- the string ends here · UI surface · placeholder · **final as written**
+- Nothing the string can find · UI surface · placeholder · **final as written**
+- plain cache / behind risk (Lodestring qualifier) · UI surface · placeholder · **final as written**
+- F-TREASURE · system term · placeholder · **final as written**
+- Surveyor's Sketch · item · placeholder · **final as written**
+- Ear Trumpet · item · placeholder · **final as written**
+- Walls Have Ears · ability · placeholder · **final as written**
+- Cased · condition · placeholder · **final as written**
+- Chalked · system term · placeholder · **final as written**
+- Traced · system term · placeholder · **final, kept with a recorded waiver (12, 9.3)**
+- Seen / Remembered / Unknown (knowledge states) · system term · unclear · **final as written**
+- Chalk on entry · system term · placeholder · **final as written**
+- Trace on glimpse · system term · placeholder · **renamed → Trace on sight**
+- Afterimage · UI surface · placeholder · **final as written**
+- Fresh / Persisting / Old / Short (Afterimage states) · UI surface · placeholder · **final as written**
+- Waymark · UI surface · placeholder · **final as written**
+- tack (Waymark tack) · UI surface · placeholder · **final as written**
+- loose end · system term · placeholder · **final as written**
+- thread tuft (loose-end mark) · UI surface · placeholder · **final as written**
+- Next loose end · verb or action · placeholder · **final as written**
+- Back to Stairhead · verb or action · placeholder · **renamed → To the Downstair**
+- Travel · verb or action · unclear · **final as written**
+- Listen bubble · UI surface · placeholder · **final as written**
+- Detour quote · UI surface · placeholder · **final as written**
+- Behind-you line · UI surface · placeholder · **final as written**
+- rooms tally ('rooms e / t') · UI surface · placeholder · **final as written**
+- spent field · UI surface · placeholder · **renamed → cleared field**
+- Treasure field · UI surface · placeholder · **final as written**
+- Floor Atlas · UI surface · placeholder · **final as written**
+- Dream map (skin) · setting · placeholder · **final as written**
+- fog bank · UI surface · placeholder · **final as written**
+- seen-edge line · UI surface · placeholder · **final as written**
+- sight shadow ('out of sight (not out of hearing)') · UI surface · placeholder · **final as written**
+- Traced contour hover 'shape only; exits unknown' · UI surface · placeholder · **final as written**
+- told pip · UI surface · placeholder · **final as written**
+- projected pip · UI surface · placeholder · **final as written**
+- "continues" ellipsis · UI surface · placeholder · **final as written**
+- forecast band / horizon bracket / patrol forecast · UI surface · placeholder · **final as written**
+- in-sight pip ('in sight of') / hidden-from pip ('hidden from: n') · UI surface · placeholder · **final as written**
+- noticing bands · UI surface · placeholder · **final as written**
+- watch lines ('from what you see') · UI surface · placeholder · **final as written**
+- noticing roll (step tag) · UI surface · placeholder · **final as written**
+- noticing pre-stop · system term · placeholder · **final as written**
+- noise preview ('would draw:', 'unknown things may also hear') · UI surface · placeholder · **final as written**
+- hearing outline label 'known groups only' · UI surface · placeholder · **final as written**
+- status ribbon · UI surface · placeholder · **final as written**
+- Stratum strip · UI surface · placeholder · **final as written**
+- Tool mode · setting · placeholder · **final as written**
+- Explore / Combat / Plan (modes) · setting · unclear · **final as written**
+- Declutter · verb or action · placeholder · **final as written**
+- Guided / Regular / Compact (density setting) · setting · placeholder · **final as written**
+- Inspect · verb or action · placeholder · **final as written**
+- Keep card · verb or action · placeholder · **final as written**
+- Points of interest (key) · verb or action · unclear · **final as written**
+- Map layers: Rooms, Marks, Patrols, Hearing, Traps and Hunch, Loot, Facts · UI surface · unclear · **final as written**
+- Full map / minimap / room inspector · UI surface · unclear · **final as written**
+- More in Floor info (F) · UI surface · unclear · **final as written**
+- Omen 'Drawn in Chalk' · curse · placeholder · **final as written**
+- Dreambook pages · UI surface · placeholder · **final as written**
+- Scout Ahead / Range Ahead · verb or action · unclear · **final as written**
+- Rejected reveal items: Vendor Chalk, Floor Rubbing, Folded Floorplan, Cartographer's Loupe, Augur's Knot, Plumb Line, Hedge Bestiary, Deja Vu, Familiar Halls, Plumb the Halls, Dream Survey, Cartouche set piece · item · unclear · **final as written**
+
+#### B.30 seeds-validation (30)
+
+- the dream unravels · system term · flagged-to-naming-pass · **final under W-DREAM-1 (a)**
+- unravel card · UI surface · flagged-to-naming-pass · **final: two keys, "The dream unravels." plus "Your profile is unchanged." (W-DREAM-1 a)**
+- unravelled (run result) · system term · placeholder · **final as written**
+- "this code cannot be dreamed on this build" · UI surface · placeholder · **final as written**
+- Seeded run (launcher field and entry screen) · UI surface · flagged-to-naming-pass · **renamed → Run code (launcher: 'Play a run code')**
+- seeded-run entry line (one-line notice) · UI surface · flagged-to-naming-pass · **final: whole-string key "Run codes use all content at standard difficulty. They don't count toward unlocks, records or the codex." (5.9; NP-24)**
+- seeded (run-history mark) · UI surface · flagged-to-naming-pass · **renamed → run code (mark)**
+- personal run · system term · unclear · **final as written**
+- version-crossed mark · UI surface · flagged-to-naming-pass · **renamed → older build**
+- one-time version notice ("This run began on an earlier version. It continues normally but will not count toward records.") · UI surface · flagged-to-naming-pass · **final as written (neutral); "code" reads "run code" (NP-24)**
+- not comparable (mark) · system term · placeholder · **final as written**
+- share code / seed code · UI surface · placeholder · **final as written**
+- build tag · UI surface · placeholder · **final as written**
+- check character · system term · placeholder · **final as written**
+- configuration preset · system term · placeholder · **final as written**
+- "check the code" · UI surface · placeholder · **final as written**
+- missing-suffix notice ("No settings or build tag in this code: using default settings; the run may not match the sharer's.") · UI surface · flagged-to-naming-pass · **final; "this code" → "this run code" (NP-24)**
+- build-mismatch notices, two tiers ("This code was made on another build or with different unlocks or settings; this dungeon may differ." / "This dungeon matches; fights may play differently on this build.") · UI surface · flagged-to-naming-pass · **final; "this code" → "this run code" (NP-24)**
+- "seed (will play differently for others)" · UI surface · flagged-to-naming-pass · **renamed → "Copy run code (plays differently for others)"**
+- "different shelves" · UI surface · placeholder · **final as written**
+- copy button (seed) · UI surface · unclear · **final as written**
+- seed field · UI surface · unclear · **final as written**
+- shared seeds / shared runs · system term · placeholder · **final as written**
+- daily seeds / daily mode · system term · placeholder · **final as written**
+- "local practice" · system term · placeholder · **final as written**
+- replays · system term · placeholder · **final as written**
+- "not replayable on this build" · UI surface · placeholder · **final as written**
+- run history · UI surface · placeholder · **final as written**
+- defect mark (run record) · UI surface · unclear · **final as written**
+- bug report · system term · unclear · **final as written**
+
+#### B.31 starting-kits (45)
+
+- Oddment · system term · flagged-to-naming-pass · **final as written**
+- Oddments (codex page) · UI surface · placeholder · **final as written**
+- Leave it by the fire · verb or action · flagged-to-naming-pass · **final as written**
+- Leave / Leave it / Keep it (buttons) · UI surface · placeholder · **final as written**
+- kit (player-facing word for hero starting gear) · system term · flagged-to-naming-pass · **ruled: "kit" is the companion word only; hero chip "Starting gear" is final (SK-13 closed)**
+- Starting gear (chip) · UI surface · flagged-to-naming-pass · **final as written**
+- Carried from the start · UI surface · placeholder · **final as written**
+- Called <given name> / Once called <given name> · UI surface · placeholder · **final as written**
+- Also carried · UI surface · placeholder · **final as written**
+- Weighs nothing. Does nothing. · UI surface · approved-final · **final as written**
+- Kit strip · UI surface · placeholder · **renamed → Gear strip**
+- Enough for the first stair. The dream owes you the rest. · UI surface · placeholder · **final as written**
+- Still carried when the dream closed: / Left by a fire: · UI surface · placeholder · **final as written**
+- Sold as plain gear. Its name goes with it. · UI surface · placeholder · **final as written**
+- It stays by this fire. It does nothing either way. · UI surface · placeholder · **final as written**
+- Nine Rivets · item · placeholder · **final as written**
+- Grey Lacing · item · placeholder · **renamed → Hemp Lacing**
+- Felt Elbows · item · placeholder · **final as written**
+- Patched Twice · item · flagged-to-naming-pass · **renamed → Leather Facing**
+- Copper Links · item · flagged-to-naming-pass · **renamed → Copper Gorget**
+- Iron Rim · item · flagged-to-naming-pass · **renamed → Banded Face**
+- Birch Handle · item · placeholder · **final as written**
+- Waxed String · item · flagged-to-naming-pass · **renamed → Linen Whipping**
+- Worn Scabbard · item · placeholder · **renamed → Old Scabbard**
+- Brass Pommel · item · placeholder · **final as written**
+- Green Bark · item · flagged-to-naming-pass · **renamed → Green Wood**
+- Ochre Daub · item · placeholder · **final as written**
+- Boss Nail · item · flagged-to-naming-pass · **renamed → Domed Nail**
+- Gatesplitter · item · flagged-to-naming-pass · **renamed → the Ironbiter (sample byname)**
+- Swordhand · item family · placeholder · **final as written**
+- Maulhand · item family · placeholder · **final as written**
+- Close Shot · item family · placeholder · **final as written**
+- Throwhand · item family · placeholder · **final as written**
+- Farcaster · item family · placeholder · **final as written**
+- Bookhand · item family · placeholder · **final as written**
+- Macehand · item family · placeholder · **final as written**
+- Spearhand · item family · placeholder · **final as written**
+- Long Arm · item family · placeholder · **final as written**
+- Porter's armband · item · placeholder · **renamed → Lamp-trimmer's armband**
+- Oddment pool captions (36 samples across six kits) · item · placeholder · **final as written**
+- Kit lines (sample Whence lines) · item · placeholder · **final as written**
+- Variant milestone texts ('Reach floor 3 as a <class>', 'Fell the floor-2 boss as a <class>', 'Fell the floor-4 boss as a <class>', 'A win as a <class>') · UI surface · placeholder · **final as written**
+- Your boon replaces Launcher gear. Choosing Blades returns the boon. · UI surface · placeholder · **final as written**
+- Kits? The dream issues what its residents set aside. · other · unclear · **final as written**
+- Heirloom-shelf variant bundle · UI surface · unclear · **final as written**
+
+#### B.32 camp-hub (70)
+
+- Hollowfolk · faction · placeholder · **renamed → the Fireside (client)**
+- Stairtop · place · flagged-to-naming-pass · **final as written**
+- Arrival · system term · flagged-to-naming-pass · **final as written**
+- the Hollow (camp phase) · system term · flagged-to-naming-pass · **final as written**
+- Camp List · UI surface · placeholder · **final as written**
+- Hear out · verb or action · placeholder · **final as written**
+- Overheard · system term · unclear · **final as written**
+- Hearsay (log) · UI surface · placeholder · **final as written**
+- the Fire (station) · UI surface · placeholder · **final as written**
+- the Bedrolls (station) · UI surface · placeholder · **final as written**
+- Muster Post · UI surface · placeholder · **final as written**
+- Keeper's Cart · UI surface · placeholder · **renamed → the Pedlar's Cart**
+- Keeper / the keeper · NPC · flagged-to-naming-pass · **renamed → the Pedlar**
+- Notables (panel) · UI surface · unclear · **final as written**
+- Door(s) (station) · UI surface · placeholder · **final as written**
+- Edge of the Light · place · placeholder · **final as written**
+- rest summary · UI surface · unclear · **final as written**
+- Accept kit defaults · UI surface · placeholder · **final as written**
+- Quick Restock · UI surface · placeholder · **final as written**
+- Quick camp · report or setting · placeholder · **final as written**
+- Quiet camp · report or setting · placeholder · **renamed → No idle chatter**
+- Hide memorials · report or setting · unclear · **final as written**
+- Hold captions · report or setting · unclear · **final as written**
+- Plain text for speakers · report or setting · unclear · **renamed → Legible captions**
+- mute chatter · report or setting · unclear · **final as written**
+- trophy pole · other · unclear · **renamed → ribbon post**
+- dream-track ribbon · other · unclear · **final as written**
+- Begin · UI surface · placeholder · **final as written**
+- Begin again · UI surface · placeholder · **final as written**
+- Continue · UI surface · unclear · **final as written**
+- Abandon and begin · UI surface · placeholder · **final as written**
+- Seeded night · UI surface · flagged-to-naming-pass · **renamed → Play a run code (hub row)**
+- Book of Nights · UI surface · flagged-to-naming-pass · **final as written**
+- Night (unit of play) · system term · unclear · **final as written**
+- Profiles · UI surface · unclear · **final as written**
+- the Stair · UI surface · placeholder · **final as written**
+- Depth gauge · UI surface · placeholder · **final as written**
+- the Library · UI surface · placeholder · **final as written**
+- Veteran book · UI surface · unclear · **final as written**
+- Milestones page · UI surface · unclear · **final as written**
+- Residents of the Hollows (Residents pages) · UI surface · placeholder · **final as written**
+- Memento wall · UI surface · flagged-to-naming-pass · **final as written**
+- Heirloom shelf · UI surface · placeholder · **final as written**
+- Coat rack · UI surface · flagged-to-naming-pass · **renamed → the Newel**
+- the Newel · UI surface · flagged-to-naming-pass · **final as written**
+- coat peg / the hero's peg · other · flagged-to-naming-pass · **final as written**
+- Letter Rack · UI surface · placeholder · **final as written**
+- hub fire · UI surface · unclear · **final as written**
+- Balcony · place · unclear · **final as written**
+- New in the dream · UI surface · placeholder · **final as written**
+- Kindler · NPC · flagged-to-naming-pass · **renamed → Log-Carrier**
+- Chalkwright · NPC · flagged-to-naming-pass · **renamed → Slate-Sketcher**
+- Stillwatch · NPC · placeholder · **final as written**
+- Lingerer / Lingerers · NPC · flagged-to-naming-pass · **renamed → Straggler(s)**
+- settled Lingerers · system term · placeholder · **final as written**
+- Trusty · NPC · placeholder · **final as written**
+- Whipper-in · NPC · placeholder · **final as written**
+- Wreath-Carrier · NPC · placeholder · **final as written**
+- Off-Shift Singer · NPC · placeholder · **final as written**
+- Indexer · NPC · flagged-to-naming-pass · **renamed → Shelver**
+- Barker · NPC · flagged-to-naming-pass · **renamed → Showcaller**
+- Placecard-Writer · NPC · placeholder · **final as written**
+- Subletter · NPC · placeholder · **final as written**
+- Copyist · NPC · placeholder · **final as written**
+- Sitter · NPC · flagged-to-naming-pass · **renamed → Roll-Reader**
+- Understudy · NPC · placeholder · **final as written**
+- Framer · NPC · flagged-to-naming-pass · **renamed → Gilder**
+- floor-k Lingerer vignette · system term · unclear · **final as written**
+- Seam camps / the quiet camp · room or terrain · unclear · **final as written**
+- Has nothing to sell. Has things to say. · UI surface · unclear · **final as written**
+
+#### B.33 charm-abilities (38)
+
+- Hangnail · charm · placeholder · **final as written**
+- Jolt Knot (card keyword 'Jolt') · charm · placeholder · **final as written**
+- Wardstone of the Jolt · item · placeholder · **final as written**
+- Minder's Pebble · charm · placeholder · **final as written**
+- Second's Hairpin · charm · placeholder · **final as written**
+- Walnut · charm · placeholder · **final as written**
+- Ashen Bead · charm · placeholder · **final as written**
+- Twitch Bone · charm · placeholder · **final as written**
+- Lockjaw · charm · placeholder · **renamed → Jawbone**
+- Wishbone · charm · placeholder · **final as written**
+- Meeting Stone · charm · placeholder · **final as written**
+- Shy Stone · charm · placeholder · **final as written**
+- Quietus Knot · charm · placeholder · **renamed → Snuffed Wick**
+- Relay Thread · charm · placeholder · **renamed → Relay Ribbon**
+- Stay Thread · charm · placeholder · **renamed → Anchor Bead**
+- Whiff-Mark · charm · placeholder · **final as written**
+- Acorn Cap · charm · placeholder · **final as written**
+- Bobbin · heirloom · placeholder · **final as written**
+- Catch (charm shape word) · system term · flagged-to-naming-pass · **internal only, never printed**
+- Keep (charm shape word) · system term · flagged-to-naming-pass · **internal only, never printed**
+- Spend (charm shape word) · system term · flagged-to-naming-pass · **internal only, never printed**
+- Shaper (charm shape word) · system term · placeholder · **internal only, never printed**
+- small moments · system term · approved-final · **final as written**
+- Charms catch moments: a token earned from a named moment in the fight, or one button you spend · system term · approved-final · **final as written**
+- accent (Patina ornament) · system term · unclear · **final as written**
+- fires / fired / waits / missed (charm log and Inspect verbs) · verb or action · unclear · **final as written**
+- wasted (log/report state) · UI surface · unclear · **final as written**
+- Plate pip states: Ready, Spent, Waiting, Kept, Dormant · UI surface · unclear · **final as written**
+- "? dormant · Arcana" (card text) · UI surface · unclear · **final as written**
+- "Once per boss encounter" (Sanctum card note) · UI surface · unclear · **final as written**
+- "rarely fires for this unit" (equip verdict) · UI surface · unclear · **final as written**
+- "no ally to receive this" (equip verdict) · UI surface · unclear · **final as written**
+- "Shares its Helped with <charm>: only one can fire a fight" (equip verdict) · UI surface · unclear · **final as written**
+- "Already gained a Helped from a charm this fight" (greyed reason) · UI surface · unclear · **final as written**
+- Bobbin boon picker line "take one small moment into the dream" · UI surface · unclear · **final as written**
+- Underpillow · heirloom · unclear · **final as written**
+- Widow's Knot / Second's Knot / Swaddle Knot / Ashen Knot / Lodestone / Calm Stone / Crooked Finger / Pointing Bone / Hand-me-down Knot / Cradle Knot / Duck Knot / Spite Knot / Scab Knot · charm · unclear · **final as written**
+- Near-Miss / Blink Bone / Milk-tooth / Press-Stone / Bier-Knot / Held-Breath Knot / Gallows Penny / Tally-stick · charm · unclear · **final as written**
+
+#### B.34 heirlooms-curses (75)
+
+- Grip-marks (Grip-mark) · system term · placeholder · **final as written**
+- Heart-won · system term · placeholder · **final as written**
+- Bequest / Deed bequest · system term · flagged-to-naming-pass · **internal only, never printed (NR2)**
+- Hang it / 'Hang it?' · UI surface · placeholder · **final as written**
+- Set aside · UI surface · flagged-to-naming-pass · **renamed → Not this time**
+- An heirloom waits on the shelf. · UI surface · placeholder · **final as written**
+- Carried to the night's end · UI surface · placeholder · **renamed → Carried to the end**
+- Carried with its weight · UI surface · placeholder · **final as written**
+- Burdened twin · system term · placeholder · **final as written**
+- Redeemed template · system term · placeholder · **final as written**
+- Malady / Maladies · system term · approved-final · **final as written**
+- Oath (meta-curse umbrella; 'Oath of the ...' form) · system term · flagged-to-naming-pass · **final, kept with a recorded waiver (12, 9.3)**
+- Cast off / Cast-off deed · verb or action · placeholder · **final as written**
+- Not yet read: may Cling · UI surface · flagged-to-naming-pass · **final, kept with a recorded waiver (1 EV prose hit)**
+- May Cling until camp. / May Cling: no camp remains. · UI surface · placeholder · **final as written**
+- Plain names (setting) · report or setting · approved-final · **final as written**
+- Content note · report or setting · approved-final · **final as written**
+- Old Maladies (codex page) · UI surface · placeholder · **final as written**
+- Maladies abroad: <names> · UI surface · placeholder · **final as written**
+- Rank rings · UI surface · placeholder · **final as written**
+- Cursed badge (cross-barred ring glyph) · UI surface · placeholder · **final as written**
+- Tidewrack Spear · heirloom · placeholder · **final as written**
+- Quiet Knife · heirloom · placeholder · **final as written**
+- Old Ash Staff · heirloom · placeholder · **final as written**
+- Thumb-Worn Totem · heirloom · flagged-to-naming-pass · **renamed → Thumb-Worn Tipstaff (client)**
+- Whetted Arming Sword · heirloom · placeholder · **final as written**
+- Threshing Flail · heirloom · placeholder · **final as written**
+- Long-Kept Crossbow · heirloom · placeholder · **final as written**
+- Door-Plank Shield · heirloom · placeholder · **final as written**
+- Patched Gambeson · heirloom · placeholder · **final as written**
+- Stair-Worn Byrnie · heirloom · flagged-to-naming-pass · **renamed → Road-Scuffed Mail**
+- Heart-won (Night Governess / Rousing Engine / Lullaby) templates · heirloom · unclear · **final as written**
+- Low Tide · weapon or armour property · placeholder · **final as written**
+- First Cut · weapon or armour property · flagged-to-naming-pass · **renamed → Quick Blood**
+- Kindly Weight · weapon or armour property · placeholder · **final as written**
+- Carrying Voice · weapon or armour property · placeholder · **final as written**
+- Answer · weapon or armour property · flagged-to-naming-pass · **renamed → Rejoinder**
+- Winnow · weapon or armour property · placeholder · **final as written**
+- Long Look · weapon or armour property · placeholder · **final as written**
+- Set Heels · weapon or armour property · placeholder · **final as written**
+- Quilted · weapon or armour property · placeholder · **final as written**
+- Held Ground · weapon or armour property · placeholder · **renamed → Planted**
+- Ill-Wished · curse · placeholder · **renamed → Begrudged**
+- Eyebitten · curse · placeholder · **final as written**
+- Short-Armed · curse · placeholder · **final as written**
+- Saltless · curse · placeholder · **final as written**
+- Savourless · curse · placeholder · **final as written**
+- Black Lot · curse · placeholder · **final as written**
+- Graceless · curse · placeholder · **final as written**
+- Ill-Slept · curse · placeholder · **renamed → Heavy-Eyed**
+- Choler · malady · placeholder · **final as written**
+- Pituita · malady · placeholder · **final as written**
+- The Spleen · malady · placeholder · **final as written**
+- Surfeit · malady · placeholder · **final as written**
+- Melancholia · malady · approved-final · **final as written**
+- The Glass Conceit · malady · placeholder · **final as written**
+- Tarantism · malady · placeholder · **final as written**
+- Acedia · malady · placeholder · **final as written**
+- Phrenitis · malady · placeholder · **final as written**
+- Atrabile · malady · approved-final · **final as written**
+- Adustion · malady · placeholder · **final as written**
+- Jactitation · malady · flagged-to-naming-pass · **held fallback; NR1/NR1b citation and a TTS hint owed before use (7.3)**
+- the Sullens · malady · flagged-to-naming-pass · **held spare; second-look list; article stored separately**
+- the Frets · malady · flagged-to-naming-pass · **retired / held: (retired spare)**
+- Malady plain labels (Easy Opening, Slow Start, First Stumble, Weak to Piercing, Falls When Moved, Weak to Bludgeoning, Guard Pulled, Third-Round Heat, Weak to Fire) · UI surface · placeholder · **final as written**
+- Cost-line plain labels (Clings, First Stumble, One Use Fewer, Weak to <type>, Cold Start, Easy to Spot, Short Push, Weak Potions, No First Crit, No Graces, Restless Rest) · UI surface · placeholder · **final as written**
+- Oath of the Burdened Hand · oath · placeholder · **final as written**
+- Oath of the Crooked Road · oath · placeholder · **final as written**
+- Oath of the Shut Book · oath · placeholder · **final as written**
+- Oath of the Short Fire · oath · placeholder · **final as written**
+- Oath of the Single Door · oath · placeholder · **final as written**
+- Oath of the Bare Board · oath · placeholder · **final as written**
+- Oath of the Borrowed Physic · oath · placeholder · **final as written**
+- Oath of the Iron Sleep · oath · placeholder · **renamed → Oath of the Cold Iron**
+- Kneel / Pass by · verb or action · flagged-to-naming-pass · **renamed → Lower your head / Walk on**
