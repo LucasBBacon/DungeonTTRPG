@@ -1015,7 +1015,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Arcanist · class · placeholder · **final as written**
 - Herald · class · placeholder · **final as written**
 - Weaponmaster · subclass · placeholder · **final, kept with a recorded waiver (W-22, 9.3)**
-- Bastion · subclass · placeholder · **renamed → Rampart (client)**
+- Bastion · subclass · placeholder · **renamed → Redoubt (client; agreed 2026-11-24, W-28 (a); Rampart, the Q6 answer, renamed: a 1990 Atari Games title)**
 - Wrecker · subclass · placeholder · **final as written**
 - Cutthroat · subclass · placeholder · **final as written**
 - Trapwright · subclass · placeholder · **final as written**
