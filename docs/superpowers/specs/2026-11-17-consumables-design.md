@@ -2,6 +2,7 @@
 
 Date: 2026-11-17
 Status: Approved, 2026-11-17
+Names updated by the naming pass (naming pass design, approved 2026-11-24; NP rows listed): NP-31 (`2026-11-24-naming-pass-design.md` 13, 13.1; register 5.1, 5.2, 5.3, 5.4, 5.8, 5.9).
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model),
@@ -86,7 +87,7 @@ the rare consumable that saves a run fires itself so it cannot be hoarded.
   cure; Remedy = lingering cure out of combat; flask = thrown setup and
   small offence; coating = temporary weapon rider (Later); scroll = one
   cast of a class spell; wand = a small camp-refilled spell pool;
-  talisman = an automatic one-use trigger. **(lead's call)**
+  failsafe = an automatic one-use trigger. **(lead's call)**
 - **Tempo over power.** Every value-1 consumable is about one action's
   worth (items 12.6). Strong save-the-run power exists only in an
   automatic, non-hoardable shape. **(lead's call)**
@@ -139,7 +140,7 @@ All **(settled)**:
 | Items 7.1 | Potion: bonus action. Tonic: bonus action minor, action major, thrown at an ally (action) minor only. Scroll or wand in class: its ability's cost. Out of class: action + trained Arcana; a failure uses it up. Administer, Hand over, Take from Downed | Delivery (section 11); scrolls (section 13) |
 | Items 10.3 (agreed) | The basic vendor: supply, healing potions in limited pre-rolled stock, tonics, Remedy, bases | Vendor list unchanged (section 10) |
 | Items 10.5, 10.8 | Price formula; potion healing per coin below supply; tonic and Remedy prices as the condition knob; anti-hoarding list; banding not counted | Prices and pegs (section 9); section 8 |
-| Items 11 (agreed) | Consumables, scrolls and wands are always identified | No dormant lines on consumables |
+| Items 11 (agreed) | Consumables, scrolls and wands are always identified | No untold lines on consumables |
 | Items 12.3, 12.5, 12.6, 12.8 | `use {ability, targets[], difficulty: user \| fixed:N}`; value = rarity budget; the use-value table is this design's; stacks are `never` pools; wand charges pre-rolled, `camp` refill | Data (section 18); value (9.1) |
 | Items 17 rows 4, 5 | The brief: effects, `stackMax`, use-value table, prices and pegs, thrown flasks, "whether potions can be thrown (default no)", Coated (Later), `useWhen`, banding; `classTags[]`, `use.difficulty`, wand charges, the out-of-class Arcana rule | This document's scope |
 | Ability model 6.2, 6.4 (agreed), 7.1 | Pool rule; one camp spend per unit per turn; "a pool spend is separate from the cost" | Slot-free in-class reads (13.2); the nova guard (13.5) |
@@ -152,7 +153,7 @@ All **(settled)**:
 | Conditions 18.2, 18.9, 18.10 | Downed; Death-warded (Later, "the first drop to 0 hit points leaves it on 1", always `combatOnly`); Scarred (agreed; the hero is never Scarred) | The phial (section 14) |
 | Enemies 6.4, 15.3, 15.4 (agreed) | Permadeath guards; sundry-like "1–2 supply and a few tonics"; carriers use what they carry | Monster use (section 15) |
 | Weapons 9.1, 14 | Thrown range 5 for the dagger; wands are never wielded or foci | Flask range (12); wands (13.6) |
-| Armour 14.3; trinkets 13.2, 13.5, 13.7, 23 (Death and healing bullet) | Last Ward (retired; DH-45); Slinger's Bracers (Later); Lifeline Pendant; Scrollwright's Token (Later); Last-Breath Charm (retired; DH-45); death-ward owners left to death and healing (cross-document comparison 2026-11-23, CC-58) | Inputs to sections 11, 13, 14 |
+| Armour 14.3; trinkets 13.2, 13.5, 13.7, 23 (Death and healing bullet) | Last Ward (retired; DH-45); Slinger's Bracers (Later); Lifeline Pendant; Scrollwright's Fob (Later); Last-Breath Charm (retired; DH-45); death-ward owners left to death and healing (cross-document comparison 2026-11-23, CC-58) | Inputs to sections 11, 13, 14 |
 | Main design 2 | No D&D names; SRD content carries attribution | Section 17 |
 
 ### 3.2 Numeric conventions
@@ -171,7 +172,7 @@ Gaps found while designing; each is fixed by a change in section 23.
 | F1 | No document says that an in-class scroll read spends no slot, though it follows from items 7.1 and ability model 7.1 | Stated outright (CN-3, CN-12) |
 | F2 | The tonic's "thrown at an ally" row has no range | `throwAllyRange` (CN-3, CN-17) |
 | F3 | A scroll's pool is `never`, so ability model 6.4's camp-spend sentence does not cover scrolls; a caster could cast a slot spell and read a bonus-action scroll in one turn. (A wand charge is already covered: its pool is `camp`, items 12.8) | An explicit engine rule for scroll reads (13.5; CN-11, client-approved 2026-11-17) |
-| F8 | The approved Administer row allows a potion on a Downed ally ("does not lift Downed"), and Hand over, Take from Downed and Retrieve allow any belt item in combat | Narrowed for potions, healing scrolls and the talisman (11, 14.5; CN-3, CN-12) |
+| F8 | The approved Administer row allows a potion on a Downed ally ("does not lift Downed"), and Hand over, Take from Downed and Retrieve allow any belt item in combat | Narrowed for potions, healing scrolls and the failsafe (11, 14.5; CN-3, CN-12) |
 | F9 | No approved document gives a Recovery formula (stat model 6 names the stat only) | An M1 placeholder and a dependency (7.2, 24) |
 | F4 | Several condition sources name potions that this design cuts (Hasted, Fleet, Heightened, Unfettered, Invisible, Rallied) | Struck (CN-16) |
 | F5 | Items 12.5 and 5.1 `rarity.props` ranges read as if a use-only record needed 2–3 properties at Rare | Ranges apply to gear only (CN-6) |
@@ -186,19 +187,19 @@ the lead's calls, which the client said stand.
 | # | Decision | Chosen | Rejected, and why |
 |---|---|---|---|
 | 1 | Idea 1, scrolls (Q1) | **(a) Keep the Arcana requirement (option B):** in class = the reader's class is in `classTags`, any spell on the list, the spell's own cost, no slot spent, cast at the scroll's tier, never upcast; out of class = action + trained Arcana against 10 + tier, always rolled, a failure burns it. Untrained members have no scroll route; flasks are their one-use power. **(agreed)** | (b) D′, an untrained tier-1 flat roll: changes the trained-only list and thins Arcana's job where scrolls are commonest; **rejected by the client**. (c) A, anyone reads, no check: empties Arcana's agreed item job. C (plain scrolls) kept as a Later hook; D (untrained with disadvantage) a trap |
-| 2 | Idea 2, save item (Q2) | **(a) The Reprieve Phial (option B):** talisman category, belt, holder only, automatic when the holder would drop to 0 HP (order Death-warded → talisman), leaves 334‰ of max HP, Rare, floor 3+, 1 per run, unique, never bought; **can save the hero**. Principle approved now; final numbers and owner order set by the death and healing design (15, 16). **(agreed; change DH-38)** | (b) No item, the extra life left to death and healing. Option A as stated (party-wide, fires on a downing): can never save the hero and is spent on the first harmless companion downing. Option C (smelling salts): undercuts Medicine and Lifeline |
+| 2 | Idea 2, save item (Q2) | **(a) The Reprieve Phial (option B):** failsafe category, belt, holder only, automatic when the holder would drop to 0 HP (order Death-warded → failsafe), leaves 334‰ of max HP, Rare, floor 3+, 1 per run, unique, never bought; **can save the hero**. Principle approved now; final numbers and owner order set by the death and healing design (15, 16). **(agreed; change DH-38)** | (b) No item, the extra life left to death and healing. Option A as stated (party-wide, fires on a downing): can never save the hero and is spent on the first harmless companion downing. Option C (smelling salts): undercuts Medicine and Lifeline |
 | 3 | The phial's cost (Q3) | **(a) Scarred, the hero included, with `treatProof`:** Treat cannot end it; a Remedy or camp does; it does not set `downedThisFloor`. **(agreed)** | (b) Standard Scarred: one Treat roll at the next rest buys a life. (c) No Scarred: a free life |
 | 4 | Idea 3, thrown flasks (Q4) | **(a) No glass damage;** potions throwable at a willing ally for the thrower's action, range 5, line of sight, no roll, at `thrownPotionPermille` 750 *(illustr.; knob 500–1000, merge rule at 1000)*; never lifts Downed; tonics unchanged (minor only), range `throwAllyRange`. **(agreed)** | (b) Keep potions unthrowable. (c) Glass damage as proposed: a tax that can down a 1-HP ally or end the run, breaks concentration and needs an AI friendly-fire term |
 | 5 | Healing shape | **One Recovery-linked record** (`potionPermille` 1000) **(lead's call)** | Banded dice per drinker band (the named fallback, 7.2); tiered records (fragment the belt and stock) |
 | 6 | Effect difficulty | **`user` for every item effect**, the existing schema default **(lead's call)** | New `tier` or `band` values (a schema change for no gain); fixed per-tier scroll DCs (a fighter's scroll would out-DC its own abilities) |
 | 7 | Scroll nova guard | **A scroll read sets the camp-spend flag** **(lead's recommendation; CN-11 client-approved 2026-11-17, 25.2)**; a wand charge already does **(settled, items 12.8)** | Belt slots alone (four readers × 2–3 slots at the boss); every scroll costs an action (kills in-class bonus-action spells) |
 | 8 | In class | **The reader's class is in `classTags`**; any spell on the list; no "has reached that tier" test **(lead's call)** | A tier test (misfires on companion kits; the floor cap already tracks tiers) |
-| 9 | Loot classes | **Sundries** (Common consumables, outside the notable count, inside the fixed budget) and **notables** (scrolls, wands, Greater Fire Bomb, talisman) **(lead's call)** | Every consumable a notable (a bomb displaces a sword); consumables only by substitution (too scarce) |
+| 9 | Loot classes | **Sundries** (Common consumables, outside the notable count, inside the fixed budget) and **notables** (scrolls, wands, Greater Fire Bomb, failsafe) **(lead's call)** | Every consumable a notable (a bomb displaces a sword); consumables only by substitution (too scarce) |
 | 10 | Fire bomb strength | **Fixed dice per record**; one-shots never banded **(lead's call)** | Banded 2d6/3d6/4d6 at value 1 (out-damages a tier-1 scroll at band 3) |
-| 11 | Offensive flask nova | **At most one offensive flask per unit per turn** **(lead's call)** | Flasks as camp spends (blocks a fighter's Surge turn from ever throwing a bomb) |
+| 11 | Offensive flask nova | **At most one offensive flask per unit per turn** **(lead's call)** | Flasks as camp spends (blocks a fighter's Onslaught turn from ever throwing a bomb) |
 | 12 | Remedy | **Out of combat only,** from the pack, not beltable **(lead's call)** | A belt action (a slot with no tactical content) |
-| 13 | Talisman category | **A new category `talisman`**, like scroll and wand **(lead's call)** | A consumable `kind` (caps and permille are keyed by category: it would cost 36 coin and be uncapped) |
-| 14 | Talisman channels | **Containers floor 3+, boss reward card, camp reward card (`campReward`); never bought; placed by one pre-roll per run (14.7)** **(lead's call, inside agreed Q2)** | The notables shop (coin buys a life); a weighted draw on every floor 3+ (near-certain every run) |
+| 13 | Failsafe category | **A new category `talisman`**, like scroll and wand **(lead's call)** | A consumable `kind` (caps and permille are keyed by category: it would cost 36 coin and be uncapped) |
+| 14 | Failsafe channels | **Containers floor 3+, boss reward card, camp reward card (`campReward`); never bought; placed by one pre-roll per run (14.7)** **(lead's call, inside agreed Q2)** | The notables shop (coin buys a life); a weighted draw on every floor 3+ (near-certain every run) |
 | 15 | Coatings | **Named rider only** (Later) **(lead's call)** | Element shift plus rider (duplicates Edge and Ember Ring; collides with TK-25); own-type rider flag (duplicates Honed) |
 | 16 | Vendor | **The client's list unchanged** **(settled, items 10.3)** | Water and oil flasks on the vendor (a client-list change for little) |
 
@@ -266,7 +267,7 @@ slots.
 
 | Option | What it does | Outcome |
 |---|---|---|
-| A. Anyone reads any scroll, no check | In class: the spell's cost. Out of class: an action, no check | Not chosen: changes the settled out-of-class rule and the trained-only list; empties Arcana's agreed item job (items 1); every fighter becomes a part-time caster; Scrollwright's Token loses its job |
+| A. Anyone reads any scroll, no check | In class: the spell's cost. Out of class: an action, no check | Not chosen: changes the settled out-of-class rule and the trained-only list; empties Arcana's agreed item job (items 1); every fighter becomes a part-time caster; Scrollwright's Fob loses its job |
 | **B. Keep the gate; state the slot-free rule; add the missing limits** | Section 13 in full | **Chosen (agreed, Q1(a))** |
 | C. B plus plain scrolls anyone reads (`classTags: ["any"]`) | A short list of Common utility scrolls with no damage, healing or major conditions | Not chosen: every candidate duplicated something else (Wardstone, the Outlining wand, Rally). **Kept as a Later hook** (25.3) |
 | D′. B plus an untrained tier-1 flat roll | d20 + Intelligence, no proficiency, against 11 *(illustr.)*; a failure burns it | **Offered as Q1(b); rejected by the client, 2026-11-17** |
@@ -341,7 +342,7 @@ usual, no Scarred, or another balancing cost.
 
 **Decision (agreed, Q2, Q3).** The **Reprieve Phial** (section 14):
 
-- talisman category; on the belt; protects its holder only;
+- failsafe category; on the belt; protects its holder only;
 - fires automatically when the holder would drop to 0 HP, after
   Death-warded;
 - leaves the holder on 334‰ of its maximum HP (a client number, death
@@ -454,16 +455,16 @@ spending nothing.
 | consumable / coating | Temporary weapon rider through Coated | 2 | Later |
 | scroll | One cast of a class spell | 1 | M2 |
 | wand | A small camp-refilled spell pool | 1 | M2 |
-| **talisman** (new category) | A belt item that fires itself on a trigger | 1 | M2, else Later (14.10) |
+| **failsafe** (new category; id `talisman`; display word from the naming pass, 5.8.49, NP-31) | A belt item that fires itself on a trigger | 1 | M2, else Later (14.10) |
 
 `stackMax` values are the settled tuning values **(settled, items 5.1)**,
 with `talisman: 1` added (CN-2).
 
 - Every value-1 consumable is about one action's worth (items 12.6).
-- Only scrolls, wands, the Greater Fire Bomb and the talisman go above
+- Only scrolls, wands, the Greater Fire Bomb and the failsafe go above
   Common.
 - Strong save-the-run power exists only in an automatic, non-hoardable
-  shape (the talisman).
+  shape (the failsafe).
 - Items do not count toward the hero's 8 limited abilities **(settled,
   ability model 10.2)**.
 
@@ -471,7 +472,7 @@ with `talisman: 1` added (CN-2).
 
 Many trinket denylist rows (trinkets 6.2) encode global anti-goals, not
 trinket rules. This design reuses them as a closed `effectKinds[]`
-denylist for every consumable, scroll, wand and talisman record, with the
+denylist for every consumable, scroll, wand and failsafe record, with the
 relaxations of 6.3. **(lead's call)**
 
 | Never | Bound it protects |
@@ -485,7 +486,7 @@ relaxations of 6.3. **(lead's call)**
 | Flat save bonuses; always-on resistance; condition-tag immunity | Buff test; the immunity budget |
 | Granting or extending Steeled, Unyielding, composure; shortening hard conditions | Conditions 7.2 anti-lock guards |
 | Extra actions, turns or attacks (Haste-shaped spells included) | Nova anti-goal |
-| Class-pool max, refill, refill tag; Slot Recovery; Recovery; supply | Free-refill anti-goal |
+| Class-pool max, refill, refill tag; Slot Renewal; Recovery; supply | Free-refill anti-goal |
 | Training, mastery, spells known (no learning from scrolls) | Offers own access (ability model 10.2) |
 | Recharge of wands or scrolls, except the trader's Recharge (Later, I-16) | Free refills |
 | Retrieve or `packInCombat` changes; belt-slot, dose or stack grants | Client decision; belt maximum 3 |
@@ -503,7 +504,7 @@ relaxations of 6.3. **(lead's call)**
 ### 6.3 Relaxations
 
 Relaxed for consumables only, and only for the named categories.
-**(lead's call; the talisman row agreed, Q2)**
+**(lead's call; the failsafe row agreed, Q2)**
 
 | Relaxation | Who | Bound |
 |---|---|---|
@@ -511,7 +512,7 @@ Relaxed for consumables only, and only for the named categories.
 | Cures | Tonic by tier; Remedy for one non-curse lingering condition (Scarred included) **(settled)** | `cureImmune` |
 | Class spells | Scrolls and wands only **(settled, trinkets 6.2: "scrolls and wands own item spells")** | Floor cap, never-list (section 13) |
 | Major and hard conditions | Only through a class spell on a scroll or wand, under every conditions 7.2 guard. Flasks: minor or setup conditions only in M2; one named major flask (the net) Later | Conditions 7.1 (hard control only from limited abilities) |
-| Saving from a drop to 0 | The talisman only **(agreed, Q2)** | Section 14 |
+| Saving from a drop to 0 | The failsafe only **(agreed, Q2)** | Section 14 |
 
 ### 6.4 Durations and the copy registry
 
@@ -604,7 +605,7 @@ lingering **(settled)**. Thrown range `throwAllyRange` 5 *(illustr.)*
   pre-coating). Tagged `blade` (edge oils) or `launcher` (special arrows
   and bolts).
 - **Named rider only:** the weapon's hits attempt one named condition
-  rider (Venom → Poisoned; Serrating → Bleeding, never on a slashing
+  rider (Poison → Poisoned; Serrating → Bleeding, never on a slashing
   weapon, which already has it). No element shift (Edge and Ember Ring own
   it) and no own-type rider flag (Honed owns it). Zero added damage.
 - A charge is spent only on a hit that attempts the coating's rider,
@@ -617,14 +618,14 @@ lingering **(settled)**. Thrown range `throwAllyRange` 5 *(illustr.)*
 ## 8. Stacks, belt and anti-hoarding
 
 - **The belt** (2 slots, a feature or offer may add a 3rd, hard maximum
-  3) is the in-combat limit **(settled)**. Every scroll, wand and talisman
+  3) is the in-combat limit **(settled)**. Every scroll, wand and failsafe
   takes a whole slot.
 - **Honest note (lead's call):** the belt is **not** a hoarding cap for
   scrolls. Belts rearrange freely out of combat (items 7.2), and the pack
   holds any number of scrolls. A party can carry its tier-3 and tier-4
   scrolls in packs all floor and belt them before the boss. The real
   bounds are the camp-spend flag (one scroll read or wand charge per unit
-  per turn, and never beside a slot spell or Surge, 13.5), family caps (2
+  per turn, and never beside a slot spell or Onslaught, 13.5), family caps (2
   per spell per run), at most 1 Very rare per floor, and the boss report
   (19.3) with a pre-agreed lever (section 21).
 - **Anti-hoarding toolkit** (banding not counted): belt cap and
@@ -661,7 +662,7 @@ summed value with:
 - a scroll: its tier (derived from the ability, 18.2);
 - a wand: `wandValue(tier, pools[camp].max)` (13.6), keyed on the pool's
   `max`, never on the `charges` range;
-- every other use-only record (potion, tonic, flask, coating, talisman):
+- every other use-only record (potion, tonic, flask, coating, failsafe):
   its rarity budget (Common 1, Uncommon 2, Rare 3, Very rare 4; items
   12.5);
 - Remedy: excepted (`basePrice`).
@@ -695,7 +696,7 @@ checked against pegs K1 and K2 (9.3).
   (8 × 1000 ≤ 12 × 800). It is checked on camp prices **after** the
   Leadership discount and `minPrice`, so rounding cannot invert it. Under
   the Recovery-linked shape it then holds at every party size, and
-  supply's rest pools, Slot Recovery and Medicine bonus only widen the
+  supply's rest pools, Slot Renewal and Medicine bonus only widen the
   gap. Healing scrolls are checked on the same terms (their heal equals
   the potion's).
 - **P2, Remedy.** Remedy price > supply price: a rest also grants a free
@@ -732,18 +733,18 @@ checked against pegs K1 and K2 (9.3).
 |---|---|
 | Basic vendor **(agreed)** | Supply; healing potions in pre-rolled stock of 2–3 *(illustr.)*; tonics and Remedy, unlimited (price is the knob); 1 Wax Key only when the party has no Mechanics-trained member (M2; items 10.3; traps and locks design 6.11; change TL-25, **agreed, Q3 of 2026-11-21**); 1 Ear Trumpet (a run-scoped lane-gap party counter, cap 1, not a consumable record; 15 coin *(illustr.)*) only when no party unit (the hero included) is Perception-trained on the camp-entry snapshot, stable for the visit (the TL-25 test); its effect is suspended while any living party unit is Perception-trained and lasts through the next floor; stocked only if the M2 report `SoloListenClickShare` misses (M3, **conditional**; items 10.3; exploration and information design 4.5.2; change XI-26, **agreed, Q3 of 2026-11-23**) |
 | Sundries (new loot class, CN-19) | Common consumables: healing potion, tonic, water, oil; Fire Bomb from floor 2. Drawn per floor **outside the notable count**, inside the fixed budget (items 2), `sundriesPerFloor` doses set per floor *(illustr. 3–5 on floors 1–2, 4–5 on floors 3–5)*. **At least 1 healing potion per floor** (`healingSundryMin` 1, drawn first; 2 on floors 4–5 only through the pre-authorised raise) and **at most 3** (`healingSundryMax`) **(client, death and healing Q3)** (cross-document comparison 2026-11-23, CC-58): the guaranteed potion goes in a main-path container in the first half of the main path, openable with no check, and is never substituted; random potions lean off-path (`healingOffPathPermille` 600) (death and healing design 12.4, 12.5) **(change DH-40)**. From floor 2, **at least 1 and at most 2 offensive flasks** per floor (`offensiveSundryMin`, `offensiveSundryMax`), the minimum drawn before the other sundries **(lead's call)**. Mostly containers, plus the settled single carried consumable per encounter |
-| Notables | Scrolls, wands, the Greater Fire Bomb and the talisman count in the 6–8 notables per floor and the camp channel; their share steered by category weights by depth and the F5 tactical cap, ranges unchanged (M2; loot economy design 6.2; change LE-17) |
-| Camp channel (notables shop, camp reward card) | Scrolls (never healing scrolls, P1), wands, the Greater Fire Bomb, all with channel `camp` (shop and reward card); the talisman **only** through `campReward` (the reward card, never the shop; CN-1; on a phial camp the reward is pick 1 of 3, M2; camp and hub design 7.1; change CH-15) |
-| Boss reward card | Scrolls, wands; the talisman from floor 3 (a boss-channel phial fills option 2; item rolls design 4.1; change IR-8). Floors 1–4 only: no final-boss card; on floor 5 the Viaticum (choose 1 of 3 Rare wands and tier-3 scrolls, usable options, never the phial) takes the boss share (M2; loot economy design 6.11; change LE-5, **agreed, Q1 of 2026-11-22**). **Offer slots (M2; item rolls design 4.8, 4.10; change IR-8, agreed, Q1 of 2026-11-22):** options Yours, Theirs, Wayward and the fourth; families distinct, effect tags distinct where legal, at most 1 damage option; a hero guarantee. **Usability fallback (M2; loot economy design 6.3; change LE-3; item rolls design 4.8; change IR-8, agreed, Q1 of 2026-11-22):** each option with no usable record is redrawn **on its own** as usable gear at the same tier (usability filter, ordinary weights, not fit-filtered), on `bossCardFallback` entry = option index, then the offer terminal ladder. **Martial parties (item rolls design 4.8; change IR-8):** "the boss gives spells" holds only for readers; for a solo Vanguard or a Herald without Arcana, boss cards and the Viaticum resolve mostly to gear. **Pending request (M3; item rolls design 4.8, 9.4; change IR-8; consumables owner):** a martial tactical boss-card pool (notable bombs and oils, arena tools; 2–3 *(illustr.)*), pulled forward from Later; until ruled, the pool is unchanged. **Pending request (Later; item rolls design 9.4; loot economy design 6.13; consumables owner):** Rare bomb shapes and arena-keyed Viaticum tools; until ruled, the Viaticum's pool is unchanged (cross-document comparison 2026-11-23, CC-56) |
-| Carried | Healing potion, tonic (any floor from M2; floor 1 self-targeting only, settled); flasks and scrolls floor 2+; wands floor 2+; never the talisman, Remedy or coatings |
+| Notables | Scrolls, wands, the Greater Fire Bomb and the failsafe count in the 6–8 notables per floor and the camp channel; their share steered by category weights by depth and the F5 tactical cap, ranges unchanged (M2; loot economy design 6.2; change LE-17) |
+| Camp channel (notables shop, camp reward card) | Scrolls (never healing scrolls, P1), wands, the Greater Fire Bomb, all with channel `camp` (shop and reward card); the failsafe **only** through `campReward` (the reward card, never the shop; CN-1; on a phial camp the reward is pick 1 of 3, M2; camp and hub design 7.1; change CH-15) |
+| Boss reward card | Scrolls, wands; the failsafe from floor 3 (a boss-channel phial fills option 2; item rolls design 4.1; change IR-8). Floors 1–4 only: no final-boss card; on floor 5 the Parting Fare (choose 1 of 3 Rare wands and tier-3 scrolls, usable options, never the phial) takes the boss share (M2; loot economy design 6.11; change LE-5, **agreed, Q1 of 2026-11-22**). **Offer slots (M2; item rolls design 4.8, 4.10; change IR-8, agreed, Q1 of 2026-11-22):** options Yours, Theirs, Windblown and the fourth; families distinct, effect tags distinct where legal, at most 1 damage option; a hero guarantee. **Usability fallback (M2; loot economy design 6.3; change LE-3; item rolls design 4.8; change IR-8, agreed, Q1 of 2026-11-22):** each option with no usable record is redrawn **on its own** as usable gear at the same tier (usability filter, ordinary weights, not fit-filtered), on `bossCardFallback` entry = option index, then the offer terminal ladder. **Martial parties (item rolls design 4.8; change IR-8):** "the boss gives spells" holds only for readers; for a solo Vanguard or a Herald without Arcana, boss cards and the Parting Fare resolve mostly to gear. **Pending request (M3; item rolls design 4.8, 9.4; change IR-8; consumables owner):** a martial tactical boss-card pool (notable bombs and oils, arena tools; 2–3 *(illustr.)*), pulled forward from Later; until ruled, the pool is unchanged. **Pending request (Later; item rolls design 9.4; loot economy design 6.13; consumables owner):** Rare bomb shapes and arena-keyed Parting Fare tools; until ruled, the Parting Fare's pool is unchanged (cross-document comparison 2026-11-23, CC-56) |
+| Carried | Healing potion, tonic (any floor from M2; floor 1 self-targeting only, settled); flasks and scrolls floor 2+; wands floor 2+; never the failsafe, Remedy or coatings |
 | Substitution fallback | Supply or tonic **(settled, enemies 15.3)** |
-| Trader (Later) | Never healing potions (settled); never the talisman |
+| Trader (Later) | Never healing potions (settled); never the failsafe |
 
 - **M1:** no carried consumables; M1's carried split is at most one weapon
   or armour notable **(lead's call, enemies 15.3)**. Potions come from the
   kit and containers.
 - **Family caps:** consumable `null` (settled); scroll 2 and wand 2, where
-  one family = one spell **(settled values)**; talisman 1 (CN-2). Wand
+  one family = one spell **(settled values)**; failsafe 1 (CN-2). Wand
   spells and scroll spells are disjoint, so no family duplicates another
   in play.
 - **The phial is never a weighted draw.** It is placed by one pre-roll
@@ -820,7 +821,7 @@ checked against pegs K1 and K2 (9.3).
   `FlaskThisTurn` (CN-9). **Offensive is derived, never authored (new
   lead's call):** a flask is offensive if any of its harmful target
   entries (18.2) has a damage part or forced movement. So the Fire Bomb,
-  Greater Fire Bomb and the Later Holy Water and Thunderstone are
+  Greater Fire Bomb and the Later Lamp Water and Blowback Jar are
   offensive; water and oil (setup flasks) are not. The unit's
   `offensiveFlaskUsed` is set at the cost-paid step (ability model 14.3
   step 3), resets with the unit's own turn budget (conditions 5.4
@@ -892,7 +893,7 @@ An engine rule keyed on category `scroll` or `wand`, never per-record data.
   reading another class's scroll about 75–85%; with Arcana mastery about
   85%+. 10 + 2 × tier was rejected: the non-caster drops to about 30% at
   tier 4, so nobody would read a 64-coin scroll out of class.
-- **Always a roll at every tier** **(agreed, Q1)**, so Scrollwright's Token
+- **Always a roll at every tier** **(agreed, Q1)**, so Scrollwright's Fob
   (trinkets 13.7, Later) keeps its job. The preview shows the odds.
 - Builder idea, not a rule: Arcana mastery's signature use could make
   out-of-class reads a threshold with no roll. If adopted, it comes back
@@ -940,7 +941,7 @@ the client on 2026-11-17, 25.2)**
   flag, before any Arcana roll, so a failed read sets it too.
 - **What it does:** the out-of-slots caster loses nothing; a caster cannot
   cast a slot spell and read a bonus-action scroll in one turn; and since
-  Surge is itself a `camp` spend (ability model 6.6), a Surge turn cannot
+  Onslaught is itself a `camp` spend (ability model 6.6), an Onslaught turn cannot
   also read a scroll or use a wand charge, in either order.
 - Ability model 6.4's agreed sentence is about `camp` pools, and a
   scroll's pool is `never`, so this is written as an explicit engine rule,
@@ -978,7 +979,7 @@ the client on 2026-11-17, 25.2)**
 - **M2:** class-list spells of the four launch classes only. No
   scroll-only list (option C is a Later hook).
 - **Never on a scroll or wand** (validation): cantrips; reaction-cost
-  spells; extra actions, turns or attacks; slot, pool or Slot Recovery
+  spells; extra actions, turns or attacks; slot, pool or Slot Renewal
   restore; knowledge or identification; capacity; revive, Death-warded or
   Downed-lifting spells; area or splash healing; any duration over 10
   turns (authors write a short variant); ground zones (already banned,
@@ -1027,7 +1028,7 @@ of reads *(illustr.)*, the lead brings option C or the Arcana-mastery
 threshold back to the client. D′ was rejected by the client and returns
 only if the client asks for it. **(new lead's call)**
 
-## 14. The Reprieve Phial (talisman)
+## 14. The Reprieve Phial (failsafe)
 
 **(agreed, Q2, Q3, for the principle and the cost; details lead's call
 unless marked; final numbers and owner order set by the death and
@@ -1078,7 +1079,7 @@ healing design 15.2, 15.3). **(change DH-41)**
 **Where the check runs (new lead's call; CN-15).** A damage event is as
 conditions 9.3 defines it: one ability use against one target, one
 turn-start tick batch, or one other separate source. Each Sparks dart,
-each Scorching Rays hit and Frost Shard's burst are separate events
+each Rays (fire) hit and Frost Shard's burst are separate events
 (each attack roll or dart of a multi-attack ability, and a separately
 resolved burst, is its own damage event; conditions 9.3; change CN-28)
 (cross-document comparison 2026-11-23, CC-57).
@@ -1202,7 +1203,7 @@ channels and placement lead's call; CN-1, CN-2, CN-27)**
   command with one WO8 write; a `choice` still unset at Travel on loses
   the phial, and the Travel-on confirm names it **(M2; camp and hub
   design 4.2, 7.1; change CH-15)**.
-- `offerChancePermille` is the **first lever** when the talisman reports
+- `offerChancePermille` is the **first lever** when the failsafe reports
   fire (19.3), before `leaveHpPermille`.
 - Why floor 3+: late deaths cost the player the most time; floor-1
   fragility belongs to the death and healing design's level-1 HP rule.
@@ -1227,7 +1228,7 @@ channels and placement lead's call; CN-1, CN-2, CN-27)**
 ### 14.9 Guards and the death-ward family
 
 - **Guards:** the enemies 6.4 permadeath guards are computed **without**
-  any party consumable or talisman; the phial only adds survival on top of
+  any party consumable or failsafe; the phial only adds survival on top of
   guarded fights.
 - **Death-ward family:** Recommendation superseded: Last-Breath Charm
   retired as recommended, and Last Ward also retired (death and healing
@@ -1299,7 +1300,7 @@ lead's call)**
   **(new lead's call)**
 - Difficulty: the monster's own ability difficulty (`user`); every monster
   has one.
-- Never carried: Remedy, the talisman, coatings (until Later), Rime Lance
+- Never carried: Remedy, the failsafe, coatings (until Later), Rime Lance
   in M2, the Greater Fire Bomb in M2.
 - **Risk:** items 19.1 rule 7 (carrier power ÷ price within 90–110%) may
   not land for a `uses:1` item at k = 1. The simulator reports it; a
@@ -1330,9 +1331,9 @@ the Rootwarden. **(lead's call; change CL-12a)**
 | **Healing potion (camp issue)** | Flag `unsellable`; stacks only with itself | As the Healing Potion | As the Healing Potion | Camp top-up only (death and healing design 13.2) **(change DH-40)** | M2 |
 | **Tonic** | C, 1 | Bonus action minor / action major / thrown (range 5) or Administered minor | Settled shape; `cureImmune` respected; also ends Soaked and Oiled **(settled)** | 12 coin; vendor unlimited; sundries; substitution | M2 |
 | **Remedy** | `basePrice` 30 | Out of combat, from the pack | Ends one non-curse lingering condition (Scarred, including `treatProof`; Weary in full) | Vendor only; never loot or carried | M2 |
-| Antitoxin | C, 1 | Bonus action | Inured, up to 10 turns | Loot | Later (Inured) |
-| Resistance Draught | C, 1 | Bonus action | Resisting (one named type, one held at a time), up to 10 turns | Loot | Later (Resisting) |
-| Stoneskin Draught | C, 1 | Bonus action | Shielded, 1 charge | Loot | Later (Shielded) |
+| Bitter Draught | C, 1 | Bonus action | Inured, up to 10 turns | Loot | Later (Inured) |
+| Tempering Draught | C, 1 | Bonus action | Resistant (type) (one named type, one held at a time), up to 10 turns | Loot | Later (Resistant (type)) |
+| Slate Draught | C, 1 | Bonus action | Shielded, 1 charge | Loot | Later (Shielded) |
 
 ### 16.2 Flasks
 
@@ -1342,10 +1343,10 @@ the Rootwarden. **(lead's call; change CL-12a)**
 | **Oil Flask** | C, 1; floor 1+ | Single unit within 5: Reflex save or Oiled (the next fire hit takes +half and applies Burning one band higher). No square. **Oil the Works (M3; traps and locks design 6.11; change TL-26):** an oil flask can instead be spent on one rolled lock or trap attempt for advantage; a failed roll makes no noise | Best: a boss or brute before a fire spell or bomb the same round. Worst: parties with no fire source. Watched as a possible dead slot (19.3) | M2 (Oil the Works M3) |
 | **Fire Bomb** | C, 1; floor 2+ | Square within 5: burst r1, not selective, fire 2d6, Reflex half; fire part rider-flagged (Burning); pays out Oiled; ends Soaked; burns oil squares (conditions 11.4) | Best: a non-caster's area answer to a clustered swarm. Worst: melee scrums with allies adjacent | M2 |
 | **Greater Fire Bomb** | U, 2; floor 4+ | As Fire Bomb, fire 4d6 | Best: late packs. Worst: as above | M2 |
-| Holy Water | C, 1; floor 2+ | Single unit: radiant 2d6, Reflex half; radiant-weak targets get the automatic rider (Blinded or Revealed) | Needs the named-major-flask ruling | Later |
+| Lamp Water | C, 1; floor 2+ | Single unit: radiant 2d6, Reflex half; radiant-weak targets get the automatic rider (Blinded or Revealed) | Needs the named-major-flask ruling | Later |
 | Sticky Flask | C, 1; floor 2+ | Single unit: Reflex save or Mired, 2 turns | Waits for Mired | Later |
 | Weighted Net | C, 1; floor 3+ | Medium or smaller unit within 4: Reflex save or Restrained (major; breaker slashing; Escape; a tonic drunk as an action); the one named major flask, under conditions 7.2 | Best: stopping one melee threat for a round | Later |
-| Thunderstone | C, 1; floor 2+ | Burst r1, not selective: Fortitude save or pushed 1 away from centre; no damage | Best: breaking a surround near a hazard | Later |
+| Blowback Jar | C, 1; floor 2+ | Burst r1, not selective: Fortitude save or pushed 1 away from centre; no damage | Best: breaking a surround near a hazard | Later |
 
 ### 16.3 Coatings (Later, with Coated)
 
@@ -1354,11 +1355,11 @@ Each coating has a `blade` record (edge oil) and a `launcher` record
 
 | Record | Rider | Notes |
 |---|---|---|
-| Venom Oil / Venom Arrows | Poisoned (named rider) | Weapon keeps its damage type. Worst: undead, constructs |
-| Serrating Oil / Serrated Arrows | Bleeding (named rider) | Never on slashing weapons (validation). Worst: bloodless enemies |
+| Poison Oil / Poison Arrows | Poisoned (named rider) | Weapon keeps its damage type. Worst: undead, constructs |
+| Serrating Oil / Serrating Arrows | Bleeding (named rider) | Never on slashing weapons (validation). Worst: bloodless enemies |
 
 **Pending request (Later; item rolls design 9.4; loot economy design
-6.13; consumables owner):** Rare bomb shapes and arena-keyed Viaticum
+6.13; consumables owner):** Rare bomb shapes and arena-keyed Parting Fare
 tools (section 10, Boss reward card row); nothing is added until ruled
 (cross-document comparison 2026-11-23, CC-56).
 
@@ -1375,34 +1376,34 @@ excepted). Effects use user difficulty and the item spell attack.
 | Scroll (shape) | Tier, rarity | Effect | Best / worst |
 |---|---|---|---|
 | **Fan of Cinders** (Burning Hands) [arcane] | 1, C | Cone L2: fire 3d6, Reflex half, rider-flagged (Burning); not selective; pays out Oiled | Best: a bunched melee pack, Oiled targets. Worst: allies in front |
-| **Shockwave** (Thunderwave; our types have no thunder) [arcane, primal] | 1, C | Burst r1 on the reader, not selective: bludgeoning 2d8, Fortitude half; on a failed save pushed 2 (hazard edges and Teetering apply) | Best: a surrounded reader near pits. Worst: an adjacent ally (hit and pushed) |
+| **Upheaval** (Thunderwave; our types have no thunder) [arcane, primal] | 1, C | Burst r1 on the reader, not selective: bludgeoning 2d8, Fortitude half; on a failed save pushed 2 (hazard edges and Teetering apply) | Best: a surrounded reader near pits. Worst: an adjacent ally (hit and pushed) |
 | **Trembling Word** (Cause Fear) [arcane] | 1, C | One enemy within 6: Will save or Frightened of the reader (saveEnds Will, cap 3); a Demoralised enemy is Routed instead (T6) | Best: a group whose leader fell. Worst: fearless enemies, bosses |
-| **Grasping Roots** (Entangle, on units only) [primal] | 1, C | Burst r1 within 8, not selective: Reflex save or Restrained (roots; breakers slashing, fire), sustained up to 3, concentration | Best: stopping a rush; setting up Reflex areas. Worst: ranged enemies; a reader already concentrating |
-| **Jarring Whispers** (Dissonant Whispers) [arcane] | 1, C | One enemy within 8: psychic 3d6, Will half, rider-flagged (ends concentration or Unfocused) | Best: breaking an enemy caster's concentration |
-| **Guiding Radiance** (Guiding Bolt) [divine] | 1, C; **Later** (Votary or Hexer; Herald design 8.8, HR-24) | Item spell attack, range 8: radiant 4d6, rider-flagged (Blinded, or Revealed on a hidden target); a miss uses it up | Best: undead; blinding an archer. Worst: out of class (two failure points) |
+| **Grasping Weeds** (Entangle, on units only) [primal] | 1, C | Burst r1 within 8, not selective: Reflex save or Restrained (weeds; breakers slashing, fire), sustained up to 3, concentration | Best: stopping a rush; setting up Reflex areas. Worst: ranged enemies; a reader already concentrating |
+| **Grating Murmur** (Dissonant Whispers) [arcane] | 1, C | One enemy within 8: psychic 3d6, Will half, rider-flagged (ends concentration or Unfocused) | Best: breaking an enemy caster's concentration |
+| **Marking Light** (Guiding Bolt) [divine] | 1, C; **Later** (Votary or Hexer; Herald design 8.8, HR-24) | Item spell attack, range 8: radiant 4d6, rider-flagged (Blinded, or Revealed on a hidden target); a miss uses it up | Best: undead; blinding an archer. Worst: out of class (two failure points) |
 | **Withering Touch** (Inflict Wounds) [divine] | 1, C; **Later** (Votary or Hexer; Herald design 8.8, HR-24) | Melee item spell attack: necrotic 3d10, rider-flagged (Withered) | Best: a regenerating enemy or potion carrier. Worst: undead |
 | **Frost Shard** (Ice Knife shape) [arcane, primal] | 1, C | Item spell attack, range 8: piercing 1d10; hit or miss, cold 2d6 burst r1 around the target, Reflex half, rider-flagged (Chilled), not selective | Best: a cluster of Soaked targets. Worst: a target in melee with allies |
 | **Mending Word** (Healing Word) [divine] | 1, C | One ally within 6: heals its Recovery (the potion's number, 7.2); Withered blocks it; never lifts Downed; never on a Downed unit. In class a bonus action. `usableBy.monster: false` | Best: a healer out of slots. Loot only (never the camp channel, P1; never carried); counted in the delivery mix. Not the answer to idea 3 |
-| **Scorching Rays** (Scorching Ray) [arcane] | 2, U | Three item spell attacks within 8: fire 2d6 each, rider-flagged; one Burning attempt per target per use; only the first hit pays out Oiled | Best: finishing spread-out wounded enemies |
+| **Rays (fire)** (Scorching Ray) [arcane] | 2, U | Three item spell attacks within 8: fire 2d6 each, rider-flagged; one Burning attempt per target per use; only the first hit pays out Oiled | Best: finishing spread-out wounded enemies |
 | **Blinding Flash** (Blindness) [arcane, divine] | 2, U | One enemy within 8: Fortitude save or Blinded (saveEnds Fortitude, cap 2); no concentration | Best: shutting down an elite archer or caster |
-| **Fireball** [arcane] | 3, R | Burst r2 within 12, not selective: fire 8d6, Reflex half, rider-flagged; pays out Oiled; burns oil squares | Best: packs at range. Worst: mixed melee |
+| **Detonation (fire)** (Fireball) [arcane] | 3, R | Burst r2 within 12, not selective: fire 8d6, Reflex half, rider-flagged; pays out Oiled; burns oil squares | Best: packs at range. Worst: mixed melee |
 | **Lightning Line** (Lightning Bolt) [arcane, primal] | 3, R | Line L10: lightning 8d6, Reflex half; Soaked hits arc (settled) | Best: a corridor queue; Soaked clusters |
 | **Terror** (Fear) [arcane] | 3, R | Cone L3, **enemies only** for every reader (Herald design 8.8, HR-24): Will save or Frightened (saveEnds Will, cap 3), concentration; Demoralised → Routed | Best: collapsing a group's morale |
-| **Slowing** (Slow) [arcane] | 3, R | Up to 3 enemies in a burst r2 within 12: Will save or Slowed (Chilled + Dazed, conditions "Slowed (spell)" row), concentration | Best: an elite trio or a boss's escort |
+| **Dragfoot** (Slow) [arcane] | 3, R | Up to 3 enemies in a burst r2 within 12: Will save or Slowed (Chilled + Dazed, conditions "Slowed (spell)" row), concentration | Best: an elite trio or a boss's escort |
 | **Unweaving** (Dispel Magic) [arcane, divine] | 3, R | One unit within 12. Enemy: ends spell-sourced beneficial conditions and its concentration. Ally: ends spell-sourced harmful conditions below hard. Never hard conditions, curses, lingering conditions, `oncePerLife` affixes or boss phase wards | Best: an enemy caster's buffs. Worst: fights with no spell effects |
 | **Icefall** (Ice Storm) [arcane, primal] | 4, VR (1 per floor) | Burst r2 within 12, not selective: bludgeoning 2d8 and cold 4d6, Reflex half; cold rider-flagged (Chilled); bludgeoning shatters Frozen | Best: large late packs |
-| **Blight** [primal] | 4, VR (1 per floor); **Later** (Rootwarden; Herald design 8.8, HR-24) | One creature within 8: necrotic 8d8, Fortitude half, rider-flagged (Withered); plants are weak | Best: bosses and regenerators. Worst: undead, constructs |
+| **Wilt** (Blight) [primal] | 4, VR (1 per floor); **Later** (Rootwarden; Herald design 8.8, HR-24) | One creature within 8: necrotic 8d8, Fortitude half, rider-flagged (Withered); plants are weak | Best: bosses and regenerators. Worst: undead, constructs |
 
 The names in brackets are the SRD shapes each entry adapts; they are
 authoring references, never shown in game (section 17).
 
 **`classTags` (the coverage-or-cut audit, closed; Arcanist design 8.10;
 change ARC-24; Herald design 8.8; change HR-24):** `arcanist`: Fan of
-Cinders, Shockwave, Grasping Roots, Frost Shard, Scorching Rays,
-Fireball, Lightning Line, Slowing, Icefall, Blinding Flash (the Herald
+Cinders, Upheaval, Grasping Weeds, Frost Shard, Rays (fire),
+Detonation (fire), Lightning Line, Dragfoot, Icefall, Blinding Flash (the Herald
 declined); `arcanist` + `herald` (one shared record): Unweaving;
-`herald`: Mending Word, Trembling Word, Jarring Whispers, Terror;
-**Later**: Guiding Radiance, Withering Touch (Votary or Hexer), Blight
+`herald`: Mending Word, Trembling Word, Grating Murmur, Terror;
+**Later**: Marking Light, Withering Touch (Votary or Hexer), Wilt
 (the Rootwarden). The M2 tier-4 pool holds only Icefall; optional lever
 (lead's call, not required): a `herald`-tagged Pall scroll at tier 4,
 Very rare (Herald design 8.8). **Pending request (M3; traps and locks
@@ -1411,15 +1412,15 @@ design 9.2; change TL-35):** Unbolting [arcane, divine] needs a
 for the Arcanist (8.10) and Herald (8.8) owners' sign-off and changes
 nothing until they rule.
 
-**Later scrolls** (each waits for its condition or rule): Blessing (Bless,
-Blessed; t1); Slumber (Sleep, Asleep; t1); Holding (Hold Person, Held;
-t2); Hushing (Silence on a unit, Silenced; t2); Flicker Step (Misty Step;
+**Later scrolls** (each waits for its condition or rule): Warm Word (Bless,
+Blessed; t1); Drowse (Sleep, Asleep; t1); Arrest (Hold Person, Held;
+t2; merged with the Arcanist's Arrest, naming pass NP-31); Hushing (Silence on a unit, Silenced; t2); Flicker Step (Misty Step;
 t2) and Far Step (Dimension Door; t4), both waiting for a teleport rule in
 ability model 8 (the traps and locks design's relocation traps and
 Mirror Glyph wait for the same rule; traps and locks design 7; TL-41);
-Elemental Endurance (Protection from Energy, Resisting;
-t3); Banishing (Banishment, Banished; t4). Tier 2 is thin in M2 (two
-scrolls plus the Rime Lance wand); Holding, Hushing and Flicker Step are
+Elemental Endurance (Protection from Energy, Resistant (type);
+t3); Cast Out (Banishment, Banished; t4). Tier 2 is thin in M2 (two
+scrolls plus the Rime Lance wand); Arrest, Hushing and Flicker Step are
 its reserves.
 
 **Pending request (M2; item rolls design 9.4; consumables owner, with
@@ -1447,14 +1448,14 @@ channel; floor 2+.
 |---|---|---|---|
 | **Wand of Sparks** (Magic Missile; our types have no force) [arcane] | (T1, 2) = 2, U, 40 coin | 3 / 4 / 5 lightning darts by user band, 1d4+1 each, split among visible enemies within 12; no attack roll, no save; not rider-flagged; each dart is its own damage event | Best: finishing minions; breaking concentration |
 | **Wand of Outlining** (Faerie Fire) [arcane, divine, primal] | (T1, 2) = 2, U, 40 coin | Burst r1 within 12, not selective: Reflex save or Revealed, 2 turns | Best: ambush floors. Reveals hidden allies too |
-| **Wand of Snaring** [primal] | (T1, 2) = 2, U, 40 coin | One enemy within 8: Reflex save or Restrained (cords; breakers slashing, fire), `turns:2`, no concentration | A loot rule only; all wands floor 2+ (ARC-24) (cross-document comparison 2026-11-23, CC-58) |
+| **Wand of Fetters** [primal] | (T1, 2) = 2, U, 40 coin | One enemy within 8: Reflex save or Restrained (bindings; breakers slashing, fire), `turns:2`, no concentration | A loot rule only; all wands floor 2+ (ARC-24) (cross-document comparison 2026-11-23, CC-58) |
 | **Wand of Rime Lance** [arcane, primal] | (T2, 2) = 3, R, floor 3+, 60 coin | Item spell attack, range 10: cold 3d8, rider-flagged; `freezing` **only on a Soaked target** (Soaked + Chilled → Frozen, fallback Chilled; Steeled and resolve apply (ARC-24; Arcanist design 8.10)); otherwise Chilled | The only repeatable hard-capable item (the class Rime Lance also exists from Arcanist L3, Arcanist design 8.10; ARC-24): `usableBy.monster: false` in M2; freeze rate reported |
 
 **`classTags` (Arcanist design 8.10; change ARC-24):** `arcanist`: Wand
-of Sparks, Wand of Snaring, Wand of Rime Lance, Wand of Outlining (the
+of Sparks, Wand of Fetters, Wand of Rime Lance, Wand of Outlining (the
 Herald declined; Herald design 8.8, HR-24).
 
-### 16.6 Talisman
+### 16.6 Failsafe
 
 | Record | Rarity, value | Effect | Wave |
 |---|---|---|---|
@@ -1510,8 +1511,10 @@ a vendor counter outside this count.
 **(lead's call; mirrors trinkets 16)**
 
 - Item names and texts are original. Scroll and wand names follow the
-  ability's name, which the classes design owns; catalogue names here are
-  placeholders.
+  ability's name, which the classes design owns, except that an Arcanist
+  override name that fails the SRD gate yields to the "Template (family)"
+  form (naming pass N13; NP-31: Detonation (fire), Rays (fire)). Catalogue
+  names here were placeholders; the naming pass set them (NP-31).
 - SRD-shaped mechanisms (Spell Scroll gating and check shape, Potion of
   Healing, alchemist's fire, oil, holy water, wand charges, the spell
   shapes in section 16) are adapted under CC-BY-4.0 and attributed in the
@@ -1764,7 +1767,7 @@ never splashes and never deals damage; one unit never makes two camp
 spends in one turn, a wand charge always counting as one, and a scroll
 read counting as one while `scrollReadSetsCampSpend` is true; at most one
 offensive flask per unit per turn; a scroll is never upcast; an untrained
-out-of-class read is never attempted; a talisman fires at most once, only
+out-of-class read is never attempted; a failsafe fires at most once, only
 from its holder's belt, never on a Downed unit, only after Death-warded
 had its chance **(change DH-43)**, and never changes place in combat; the
 hero's HP never shows 0 while a phial is armed on its belt.
@@ -1781,8 +1784,8 @@ hero's HP never shows 0 while a phial is armed on its belt.
 - an in-class read spends no slot and never upcasts; an out-of-class read
   rolls at every tier and a failure spends the scroll or charge; an
   untrained read is greyed `Untrained`;
-- the camp-spend flag: a slot spell, then a scroll read: blocked; Surge,
-  then a scroll read: blocked; a scroll read, then Surge: blocked; a failed
+- the camp-spend flag: a slot spell, then a scroll read: blocked; Onslaught,
+  then a scroll read: blocked; a scroll read, then Onslaught: blocked; a failed
   out-of-class read sets the flag; **with the switch off, a scroll is not
   blocked, and a wand charge still is**;
 - `FlaskThisTurn` after one Fire Bomb; water and oil are not blocked; the
@@ -1833,7 +1836,7 @@ hero's HP never shows 0 while a phial is armed on its belt.
   turns" rate.
 - Monster carried-item use rate; kill-the-carrier-first rate; carrier
   power ÷ price for `uses:1` items.
-- Talisman: runs offered a phial, and offers declined; fires per 100
+- Failsafe: runs offered a phial, and offers declined; fires per 100
   runs and by floor; runs saved per 100 (watch above about 15%: the
   first lever is `offerChancePermille`); same-fight deaths after a save
   (above about 50% → raise `leaveHpPermille`, which now goes to the
@@ -1865,8 +1868,8 @@ hero's HP never shows 0 while a phial is armed on its belt.
 - **The Reprieve Phial:** M2 if the death and healing design is approved
   before M2 content lock, otherwise Later (14.10). **(change DH-44)**
 - **Later:** coatings, special arrows and Coated; Quivered; Slinger's
-  Bracers; Scrollwright's Token; sidegrade potions with their conditions;
-  holy water, sticky flask, net, thunderstone; teleport scrolls (with a
+  Bracers; Scrollwright's Fob; sidegrade potions with their conditions;
+  Lamp Water, sticky flask, net, Blowback Jar; teleport scrolls (with a
   teleport rule); the Later scrolls of 16.4; plain scrolls (option C,
   only on the revisit trigger); monster ally throws; the Asleep wake
   trigger.
@@ -1900,7 +1903,7 @@ hero's HP never shows 0 while a phial is armed on its belt.
 - All numbers in the `consumables` block marked as tuning (18.1) and
   every *(illustr.)* value: heal permilles, `flaskRange` and
   `throwAllyRange`, `scrollFloorCap`, `wandValue`, sundry counts,
-  `itemSpellThrift`, the talisman's `offerChancePermille` and
+  `itemSpellThrift`, the failsafe's `offerChancePermille` and
   `channelWeights`, prices and `basePrice`, report targets marked
   *(illustr.)*.
 - Placeholder names, flavour text and the roster within section 16's
@@ -2048,9 +2051,9 @@ family caps; belt counts; `packInCombat`; the 6.4 guards; main design
 - **Ability model:** a teleport rule (Flicker Step, Far Step). No launch
   class needs a teleport rule (classes design 11.G); teleport scrolls stay
   Later. **(change CL-12b)**
-- **Conditions content (Later):** Inured, Resisting, Shielded, Mired,
+- **Conditions content (Later):** Inured, Resistant (type), Shielded, Mired,
   Asleep, Held, Silenced, Blessed, Banished, Coated.
-- **Trinkets (Later):** Slinger's Bracers and Scrollwright's Token numbers.
+- **Trinkets (Later):** Slinger's Bracers and Scrollwright's Fob numbers.
 - **Multiclassing (Later):** in class for multiclass readers.
 - **Lead's checks before data** (existing designs, not new systems): every
   SRD shape in section 16 against SRD 5.2.1; the protected-name check on
@@ -2126,7 +2129,7 @@ it:
 |---|---|---|
 | ID-1 | The thrown potion at 50% is dominated by walking and Administering | Starts at 750 with the movement maths stated (5.3); knob to 1000, where Administer merges; one range, 5 |
 | ID-2 | Water on a Burning ally is dominated by the thrown tonic | Water's job is enemy setup; ally use stated as fallback (12) |
-| ID-3 | "Use bombs" leans on a resource made scarce | Offensive sundries at least 1 and at most 2 per floor from floor 2 (floor 1 none, by design); DEP-1 binding; no-flask report; revisit trigger. Scrollwright's Token stays Later, named as a revisit lever |
+| ID-3 | "Use bombs" leans on a resource made scarce | Offensive sundries at least 1 and at most 2 per floor from floor 2 (floor 1 none, by design); DEP-1 binding; no-flask report; revisit trigger. Scrollwright's Token (renamed Scrollwright's Fob, naming pass NP-31) stays Later, named as a revisit lever |
 | ID-4 | Option D strawmanned | Replaced by D′ (untrained tier-1 flat roll), offered honestly in Q1; rejected by the client |
 | ID-5 | Scroll numbers contradict across the material | One set: 10 + tier, `user`, no tier test; catalogue odds regenerated; talisman at 25% |
 | ID-6 | The talisman's carrier choice is fake; AI shift | Framed as run insurance (5.2); scorer term; holder-attack report |
@@ -2166,7 +2169,7 @@ it:
 | CO-6 | Condition source lines contradict | CN-16 covers potions, flash powder, nets |
 | CO-7 | Enemies 15.3 and 15.4 changes; M1 carriers | CN-19 cites M-5; CN-20 flagged and client-approved 2026-11-17 (25.2); M1 has no carried consumables |
 | CO-8 | Coatings duplicate Ember Ring and break TK-25 | Named rider only; Quivered launcher only (CN-18) |
-| CO-9 | Name collisions | Renamed: Fan of Cinders, Shockwave, Trembling Word, Flicker Step, Icefall, Elemental Endurance, Serrating Oil, Reprieve Phial; Ward Draught cut; protected-name check before data |
+| CO-9 | Name collisions | Renamed: Fan of Cinders, Shockwave (renamed Upheaval, naming pass NP-31), Trembling Word, Flicker Step, Icefall, Elemental Endurance, Serrating Oil, Reprieve Phial; Ward Draught cut; protected-name check before data |
 | CO-10 | Rules 8 and 9 key on `consumable` | Extended (CN-7) |
 | CO-11 | Rare props counts on use-only records | CN-6 |
 | CO-12 | Bomb banding breaks the banding rule | Fixed dice |
@@ -2177,14 +2180,14 @@ it:
 | CO-17 | Tonic range changes a settled row | CN-3, CN-17 |
 | CO-18 | Remedy's "best use" wrong; Weary ruling | Mid-floor niche; Weary in full marked lead's call |
 | CO-19 | Save order not tied to approved rules | Last Ward automatic-or-policy recorded as a dependency (24, CN-23) |
-| Also found | Thunder and force are not damage types | Shockwave is bludgeoning; Sparks is lightning; Elemental Endurance lists fire, cold, lightning, acid |
+| Also found | Thunder and force are not damage types | Shockwave (renamed Upheaval, naming pass NP-31) is bludgeoning; Sparks is lightning; Elemental Endurance lists fire, cold, lightning, acid |
 
 **Final review (builder, consistency and play lenses; all lead's calls
 inside the client's answers)**
 
 | Area | Resolution |
 |---|---|
-| Camp spend | CN-11 and its switch (`scrollReadSetsCampSpend`) cover scroll reads only; wand charges are settled camp spends; checked at step 2, set at step 3; Surge blocks reads either way (13.5) |
+| Camp spend | CN-11 and its switch (`scrollReadSetsCampSpend`) cover scroll reads only; wand charges are settled camp spends; checked at step 2, set at step 3; Onslaught (renamed from Surge, naming pass NP-31) blocks reads either way (13.5) |
 | Phial damage order | The save chain on the event's summed total; synchronous Scarred; pre-save concentration DC; replay tests (14.4, CN-15) |
 | Phial placement and rate | One pre-roll per run with `offerChancePermille`; declined offers lost; no reserved slots (14.7, CN-27); recharging-only drop-prevention cap (14.9) |
 | Schema | `campReward` channel; target `side` and `area` with derived beneficial; closed `useWhen`; `healRecovery`; `int \| tuningKeyRef`; derived stack pools; declared item-ability values (9.1, 18.2, CN-1, CN-6) |

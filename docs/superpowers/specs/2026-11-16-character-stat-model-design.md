@@ -4,6 +4,13 @@ Date: 2026-11-16
 Status: approved by client, 2026-11-16
 Parent: `2026-11-15-dungeon-rpg-design.md` (the main design)
 
+Names updated by the naming pass (naming pass design, approved 2026-11-24;
+NP rows listed): NP-8 (8.1 rider wording prints the condition keyword:
+Bleeding, Chilled, Corroded; 8.4 Raging → Frenzied, Resisting prints
+"Resistant (type)", Ill-Starred → Star-Crossed; 10 bleed → bleeding) and
+NP-9 (7.2 Second Nature → Old Hand; Tactician kept, W-22); 7.1 Sound the
+wall → Tap the wall (register 5.3.44).
+
 Items marked **(agreed)** were agreed with the client, either directly or by
 approving the lead's proposal. Items marked **(lead's call)** were filled in
 by the design lead while writing this document and have not been confirmed.
@@ -311,7 +318,7 @@ Rules behind the table:
 | Athletics | Strength | Force doors, bars and chests (loud; noise per try, each failure lowers the difficulty and the third try always opens, M1; traps and locks design 6.11; TL-21); jump crossable hazards | Shove, grapple, resist being moved; M2: Shunt, Kick and Smash Furnishings (heavy pieces against heft; Attack Shunt's Prone save is against 8 + the Shunter's Athletics bonus); M3: Overturn a tippable Tall Furnishing (heft 15, *illustr.*) and Haul (room terrain design 6.3) |
 | Acrobatics | Dexterity | Cross narrow or unstable ground: from M2, entering a Plank (narrow ground) in combat needs Acrobatics against the segment-5 ladder; a failure ends movement on the square before, with no retry that round, no fall and no damage; out of combat the leading unit checks once (room terrain design 6.2.6); pass a Squeeze: out of combat the leading unit makes one check for the party, and a failure still gets through, at a time and noise cost; in combat each unit checks as it enters; monsters never use one (floor layout design 9.2) | Slip past enemies, escape grapples, avoid attacks when disengaging |
 | Stealth | Dexterity | Sneak past, set ambushes, steal from unaware enemies: only from a Dormant, Stationary or Patrolling carrier; adjacent; no other awake group member has line of sight; any party member's Stealth against the carrier's passive perception (−5 if Dormant, +5 if Keen), with disadvantage against an awake carrier; one try per carrier per floor; failure starts combat with nobody Surprised (enemies design 15.5); M3: a Dormant Windfall Truant can also be stolen from: adjacent; no awake un-Cowed hostile in its room has line of sight; Stealth against its fixed passive 15 (20, −5 Dormant; *illustr.*; a fixed value, never Keen); success takes its card only, its coin spilling as a guarded pile; the party has one Steal try per room, on a carrier in the host group or the Truant, not both (loot sources design 4.7.8; LP-6; agreed 2026-11-22, its Q1) | Hide to break line of sight and strike unseen. A class feature may let Hide succeed without breaking line of sight (classes design 8.4, Vanish); the Stealth roll and Hidden's end rules (conditions 18.7) stay |
-| Mechanics | Intelligence | Find and disarm traps, pick locks (quiet; a Locked door is a Door with the padlock decal, on optional content only; floor layout design 9.2; one roll per lock per floor under the Margin rule, M1; traps and locks design 6.6, 6.11; TL-21), find secret doors: a member trained in Mechanics within 3 squares with line of sight to a Hairline secret's tell reveals the secret automatically, and Sound the wall opens a secret only at its tell (no roll; floor layout design 9.2); M3: the Lodestring never points at secret caches, so finding them stays this lane's (exploration and information design 4.6.1; XI-22; agreed 2026-11-23, its Q5; read, not changed) | Re-arm or trigger traps against enemies |
+| Mechanics | Intelligence | Find and disarm traps, pick locks (quiet; a Locked door is a Door with the padlock decal, on optional content only; floor layout design 9.2; one roll per lock per floor under the Margin rule, M1; traps and locks design 6.6, 6.11; TL-21), find secret doors: a member trained in Mechanics within 3 squares with line of sight to a Hairline secret's tell reveals the secret automatically, and Tap the wall opens a secret only at its tell (no roll; floor layout design 9.2); M3: the Lodestring never points at secret caches, so finding them stays this lane's (exploration and information design 4.6.1; XI-22; agreed 2026-11-23, its Q5; read, not changed) | Re-arm or trigger traps against enemies |
 | Arcana | Intelligence | Identify magic items, read runes and shrines (also trap sense against `rune` traps; traps and locks design 6.4) | Use scrolls and wands outside your class; recognise a spell being cast |
 | Lore | Intelligence | Know what a floor's theme is likely to hold: the roster's types and roles are revealed on entry (enemies design 10.6); M3: the next floor's roles are also shown at camp (run structure design 6.9; RT-10). It shows types only, never whether a boxed lurker is on the floor (traps and locks design 6.14; read, not changed) | Reveal an enemy's traits, resistances, weaknesses and abilities |
 | Perception | Wisdom | Hear what is behind a door: Listen at a closed door (no roll) reports the groups in the room beyond at that moment, passively for a party with a member trained in Perception, who also hears their size band (floor layout design 9.2); spot hidden enemies. M3, conditional: the Ear Trumpet is a lane-gap item stocked only for a party with no Perception-trained unit, its effect suspended while the lane is present (exploration and information design 4.5.2; XI-26; agreed 2026-11-23, its Q3; this list kept, not changed) | Avoid surprise; find hidden attackers; read an enemy's intent when the party's best passive Perception is at least its guile (enemies design 13.3) |
@@ -342,7 +349,7 @@ skill.
   Perception mastery's signature use is fixed as **Tactician**: readable
   enemies also show the ability, and reading extends to the next 3 enemies
   in initiative (enemies design 13.4). The other skills' signature uses
-  stay the builders'. For Mechanics, Second Nature is proposed to the
+  stay the builders'. For Mechanics, Old Hand is proposed to the
   builders (traps and locks design 9.2; TL-36, M2).
 - **Sources:** a class grants two or three skills from its own list. Offers
   and the starting boon add more. Companions come with fixed skills,
@@ -382,13 +389,13 @@ its identity. Names are placeholders; theming comes later. **(agreed)**
 
 | Family | Type | Rider |
 |---|---|---|
-| Physical | Slashing | Bleed: damage over time |
+| Physical | Slashing | Bleeding: damage over time |
 | Physical | Piercing | Ignores part of the target's armour |
 | Physical | Bludgeoning | Stagger: no reactions until the end of the target's next turn; shatters brittle or frozen targets |
 | Elemental | Fire | Burning: damage over time that can spread to adjacent units |
-| Elemental | Cold | Slows movement |
+| Elemental | Cold | Chilled: slows movement |
 | Elemental | Lightning | Arcs to an adjacent unit. The arc deals the rider strength as lightning, one damage event per arced unit, no crit, no rider flag, never re-arcs; an at-will's Soaked arc spread happens at most once per turn across beams (Arcanist design 8.1; ARC-14, lead's call) |
-| Elemental | Acid | Corrodes: lowers armour class and strips layers |
+| Elemental | Acid | Corroded: lowers armour class and strips layers |
 | Spirit | Psychic | Breaks concentration and applies Unfocused for 1 turn; attempted on a concentrating target or one not already Unfocused |
 | Spirit | Radiant | Revealed on a hidden or invisible target; Blinded otherwise |
 | Spirit | Necrotic | Blocks healing |
@@ -471,8 +478,8 @@ Poison is a condition, not a damage type. **(agreed)**
   never costs speed (armour design 7.3).
 - Budget per enemy: at most two resistances, and at least one weakness
   alongside any resistance. **(agreed)** Ladder shifts that come from
-  conditions (Soaked, Oiled, Exposed, Resisting, Shredded, Sapped,
-  Shielded, Raging, Petrified, Ill-Starred and Frozen's shell) are not
+  conditions (Soaked, Oiled, Exposed, Resistant (type), Shredded, Sapped,
+  Shielded, Frenzied, Petrified, Star-Crossed and Frozen's shell) are not
   traits or layers and do not count toward the two (conditions design
   12.2).
 - Condition-tag immunities: at most two per non-boss trait set, at most one
@@ -491,7 +498,8 @@ Poison is a condition, not a damage type. **(agreed)**
   resistance" applies after the ladder and the cancel rule: a final
   Resistant reads Normal, never Weak; it covers trait and layer
   resistance (the layer stays unbroken); never condition-based shifts
-  (Soaked's fire resistance, Frozen's shell, Resisting, Shielded); never
+  (Soaked's fire resistance, Frozen's shell, the Resistant (type)
+  condition, Shielded); never
   immunity; `IgnoreResistanceSources ≤ 1` per hero (Arcanist design 9.4;
   EL-1, owed at M2). **(lead's call)** The Elementalist's Purity applies
   it to its heart family when that aspect ships (Arcanist design 9.4).
@@ -588,7 +596,7 @@ Each item here is a commitment this model makes on another system's behalf.
   M4, agreed 2026-11-23, its Q5; CON's budget reading pending).
   Pitted Armour is in armour 9.4 and stays Later (AR-37; cross-document
   comparison 2026-11-23, CC-14).
-- **Conditions.** Settled in `2026-11-16-conditions-design.md`: bleed,
+- **Conditions.** Settled in `2026-11-16-conditions-design.md`: bleeding,
   burning, slow, stagger, blind, frightened and the rest are defined there;
   this document only names them.
 

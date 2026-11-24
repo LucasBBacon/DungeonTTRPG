@@ -109,6 +109,26 @@ here so the documents agree. Every new name was grep-checked as a whole
 word against the 17 approved documents; 8.0 lists the names avoided
 because they collide.
 
+**Names updated by the naming pass** (naming pass design,
+`2026-11-24-naming-pass-design.md`, approved 2026-11-24; NP rows listed:
+NP-1 (V24 `NamingPass` in 11.2), NP-2 (the N-rules adopted in 7.6),
+NP-3 (W-DREAM-1 in 7.5), NP-6 (Upended restated as Sprawled in 7.4 RC5)
+and NP-20 (this document's renames, with the name register rows of the
+naming pass design 5 whose sites name this document)). Player-facing
+names in the body now read as the register's finals: for example Middle
+Dream → Midwater, The Silk Archive → The Cobweb Archive (short form the
+Archive), Nightmare tiers → Peril tiers, Keepsakes → Souvenirs,
+Antechamber Catch-up → Forecourt Top-up, Stairhead → the Downstair, and
+the roster roles artillery, controller and minion → marksman, hinderer
+and swarmer (Minion stays the rank). Code identifiers, field names,
+validator, report and event ids, change ids and file names are
+unchanged (`keepsakeProps`, `AntechamberCatchUp`, V20 `Hollowfolk`).
+Waived names stay (W-DREAM-1, W-DREAM-HOLD-1 for the Waking City, W-26
+for the Night Governess). Historical text (section 17's change rows,
+Appendix A and the 8.0 grep record) keeps the old names, with a
+"(renamed …, naming pass NP-n)" note where a row names an old name as
+current.
+
 **Numbers in this document are illustrative** unless a rule says
 otherwise, and are marked *(illustr.)* where they first appear. Every
 minute, win rate and share comes from crude toy models (Appendix B); the
@@ -135,8 +155,8 @@ unlocks, ladder), **M4** breadth, **Later** **(settled, main design 9)**.
   all per floor.
 - **Floor 5 breaks the pattern.** It is always the same destination, the
   Dreamer's Heart, with a pool of final bosses.
-- An act feeling survives as **presentation only**: Shallows, Middle
-  Dream, Deep, Heart.
+- An act feeling survives as **presentation only**: Shallows, Midwater,
+  Deep, Heart.
 
 **2. Randomise per theme tier? Yes, with three refinements (agreed,
 Q1).**
@@ -186,7 +206,7 @@ floors 4–5 held to the 20-minute gate; four camps of 3–4 min (read, not
 changed; change CH-5; M2; camp and hub design 4.5: camp time is now
 reported, 6.7). Two pacing
 fixes are owned here:
-- **(a) the Antechamber Catch-up** guarantees level 3 before the floor-1
+- **(a) the Forecourt Top-up** guarantees level 3 before the floor-1
   boss (the Shade and Arcanist requests);
 - **(b) a concrete form for companions lever 3:** floors 4–5 drop to 2
   guard posts; the 100 experience the trim removes moves to floor 4's
@@ -208,10 +228,10 @@ fallback is the likely outcome. Theme selection cannot fix the clock.
 | 4 | Whole route drawn at run start on a `route` child of the dungeon stream (fixed-count, whole-catalogue permutation) | M2 | **agreed, Q1**; RT-3 |
 | 5 | Two Doors at camps 1–2 and the Last Hollow choice at camp 4: built in M2, switched on only if the gates pass; otherwise random, doors in M3 | M2 or M3 | **agreed, Q2**; RT-10, RT-11 (decided text) |
 | 6 | Grim Surreal tone, charter RC1–RC9 with M2 gates, Tone Sheets, uncommitted Dreamer premise | M2 | **agreed, Q3**; RT-17 |
-| 7 | M2 themes: Gaol, Kennel Wood (F1); Drowned Choir, Silk Archive, Carnival (F2–3); Long Supper, Gut (F4); Dreamer's Heart (F5). Endless Wake if it passes its floor-1 test. Cut 1 and Cut 2 pre-authorised. Build order Heart and Gut first | M2 | **agreed, Q4**; RT-5 |
-| 8 | Antechamber Catch-up to level 3 before the floor-1 boss | M2 | lead's call; RT-8 |
+| 7 | M2 themes: Gaol, Kennel Wood (F1); Drowned Choir, Cobweb Archive, Carnival (F2–3); Long Supper, Gut (F4); Dreamer's Heart (F5). Endless Wake if it passes its floor-1 test. Cut 1 and Cut 2 pre-authorised. Build order Heart and Gut first | M2 | **agreed, Q4**; RT-5 |
+| 8 | Forecourt Top-up to level 3 before the floor-1 boss | M2 | lead's call; RT-8 |
 | 9 | Lever 3: floors 4–5 at 2 guard posts; floor-4 boss experience 300, floor-5 lair experience 240; only in the companions 7.4 lever order | M2 | lead's call; RT-7 (told plainly) |
-| 10 | Step-5 theme overlay stays in M2 as per-theme legal overlays; the floor-5 deep overlay retires to Nightmare tier 3 (M3) | M2 / M3 | lead's call; RT-5, RT-6 |
+| 10 | Step-5 theme overlay stays in M2 as per-theme legal overlays; the floor-5 deep overlay retires to Peril tier 3 (M3) | M2 / M3 | lead's call; RT-5, RT-6 |
 
 ---
 
@@ -318,7 +338,7 @@ and each hit was read in context.
   a cowable group, a leader group from floor 2, a steal target. **20.1:**
   the experience pool must be 110–135% of need **after one bypass**.
 - **Enemies 10.6 theme rules (settled):** a roster of 5–7 types over at
-  least 4 roles, with types that can lead, be a minion, be promoted and
+  least 4 roles, with types that can lead, be a swarmer, be promoted and
   be `armed`; at most 6 harmful conditions, counting riders and terrain;
   the water rule; weaknesses in at least 2 families; 2–3 at-will damage
   types; at least half non-fearless; one visual faction and one
@@ -326,7 +346,7 @@ and each hit was read in context.
   next-floor line (HR-23).
 - **Enemies 17.1 role taxes (settled):** brute: Shove (Prone) plus
   Grapple or Staggered on its limited ability; soldier: Shove; leader:
-  Frighten; controller: an at-will minor from {Chilled, Poisoned,
+  Frighten; hinderer: an at-will minor from {Chilled, Poisoned,
   Corroded}; lurker: an opener from {Poisoned, Bleeding, Blinded}.
 - **Implicit riders (settled, stat model 8.1):** slashing → Bleeding;
   bludgeoning → Staggered; fire → Burning + Smouldering (counts 2); cold
@@ -386,8 +406,8 @@ section 14 consolidates them.
 | RE12 | Unlockable themes are not in main 4.7 | RT-18 (M3, client) |
 | RE13 | `Floor1ClassSpread` bands | The M2 floor-1 pool is all 75–100%; the Wake is conditional (8.2) |
 | RE14 | Undefined counter type | Defined (8.0, RT-4) |
-| RE15 | Armour's Resistant-element filter reads the theme | Kept as an M1 precedent; LootDoorInvariant stated around it (6.4) |
-| RE16 | Level 3 at the floor-1 door | Antechamber Catch-up (RT-8) |
+| RE15 | Armour's <element>-proof filter reads the theme | Kept as an M1 precedent; LootDoorInvariant stated around it (6.4) |
+| RE16 | Level 3 at the floor-1 door | Forecourt Top-up (RT-8) |
 | RE17 | Arcanist DEP-A1 terrain density against theme budgets | Reported; floor 4 is dry when the Supper is drawn **(told plainly)** |
 | RE18 | Requirements scattered over 9 documents | Section 14 |
 
@@ -396,7 +416,7 @@ section 14 consolidates them.
 | Term | Meaning |
 |---|---|
 | **Theme** | One floor's place: a faction (roster), environment, music, signature mechanic ("Law") and bosses, as one record (8.0) |
-| **Tier** | A theme's home depth band, a pool and presentation tag only: Shallows (F1), Middle Dream (F2–3), Deep (F4), Heart (F5). The act shown on cards and the dream track comes from the **floor index**, never from `tier` |
+| **Tier** | A theme's home depth band, a pool and presentation tag only: Shallows (F1), Midwater (F2–3), Deep (F4), Heart (F5). The act shown on cards and the dream track comes from the **floor index**, never from `tier` |
 | **Band pool** | A pool whose themes are eligible on two adjacent floors (in M2, the floors 2–3 pool) |
 | **Drawable set** | `drawableSet(manifest, unlockSnapshot)`: the themes and bosses a run may use (6.4 R-SEED-5) |
 | **Route** | The run's five themes and their bosses. The pre-roll fixes the permutation and boss orders at run start; each floor's theme is committed by the walk at run start (floors 1–2) or at the camp before it (6.4) |
@@ -406,12 +426,12 @@ section 14 consolidates them.
 | **Last Hollow** | Camp 4; the **Last Hollow choice** is the pick between the two pooled final bosses |
 | **Stratum Card** | The floor-entry card header (6.9; DH 17.12) |
 | **Dream track** | The five-stratum route display on the HUD and pause screen (6.9) |
-| **Keepsakes** | Floor-5 dressing and one arena prop drawn from the run's visited themes (9.3) |
-| **Antechamber** | The main-path room immediately before the boss arena, the Forecourt, on every floor: empty on floor 1 (9.4); on floors 2–5 a patrol Circuit waypoint (floor layout design 6.11; change FL-5); the floor-5 Viaticum is never placed in it (read, not changed; change LE-5; loot economy design 6.11) |
+| **Souvenirs** | Floor-5 dressing and one arena prop drawn from the run's visited themes (9.3) |
+| **Antechamber** | The main-path room immediately before the boss arena, shown on screen as the Forecourt ("antechamber" stays the design term and id; naming pass NP-20), on every floor: empty on floor 1 (9.4); on floors 2–5 a patrol Circuit waypoint (floor layout design 6.11; change FL-5); the floor-5 Parting Fare is never placed in it (read, not changed; change LE-5; loot economy design 6.11) |
 | **Law / Obsession** | A theme's signature mechanic / its faction's absurd vow (7.3) |
 | **Free 4** | A theme's harmful conditions other than the universal Prone and Frightened tax (8.0) |
 | **Reference chooser** | The simulator's door policy used for calibration when Two Doors is on (6.11) |
-| **Nightmare tiers** | M3 ladder tiers that add kind, not stats (9.1) |
+| **Peril tiers** | M3 ladder tiers that add kind, not stats (9.1) |
 
 ---
 
@@ -429,7 +449,7 @@ references only.
 | Risk of Rain 2 | Each stage slot draws 1 of 2+ environments; no repeat in a loop | The brief's "A or B per tier" | A pool of 2 is learned fast; disliked maps become a dice tax |
 | Dead Cells | A biome graph; harder exits pay more; boss tiers fixed | Choice tied to risk and build | Dominant routes at high difficulty |
 | Binding of Isaac | 2-floor chapters with random alternates; secret routes; a ladder of endings | Unlocks drive return play | Two-floor themes (they work only with about 5-min floors); obscure secrets |
-| Spelunky 2 | Branching worlds chosen at exits; a long secret route | A later secret route (the Lucid Key) | Obscurity |
+| Spelunky 2 | Branching worlds chosen at exits; a long secret route | A later secret route (the Clear Key) | Obscurity |
 | Enter the Gungeon | Fixed chambers, boss drawn from a pool per floor | A random boss is the cheapest variety per floor | — |
 | Darkest Dungeon 1–2 | Regions change which tools are good; DD2's road with inns; a narrator's grim irony | Themes change the *kind* of tool needed; irony softens loss without mocking it | DD2's run length (1.5–2.5 h) |
 | Into the Breach | Islands in any order; a telegraphed environment rule per island; fixed finale | One readable, deterministic environment law per theme | — |
@@ -487,7 +507,7 @@ hardest to calibrate and test. A is the safest first build and already
 produces the per-floor candidates C needs.
 
 - The hybrid ships tiered pools.
-- **Two Doors is restricted to the Middle Dream floors** (camps 1 and 2)
+- **Two Doors is restricted to the Midwater floors** (camps 1 and 2)
   in M2, plus the Last Hollow choice at camp 4, and is switched on only
   if the gates pass **(agreed, Q2)**. Floor 4 stays random until its
   pool reaches 3 (M3).
@@ -500,7 +520,7 @@ produces the per-floor candidates C needs.
   never reorder seeds; the candidate walk and its pair and contrast
   rules; LootDoorInvariant; Reference chooser calibration.
 - **From A:** the band pool; stratum dressing variants; role-tax
-  accounting; the floor-1 catch-up.
+  accounting; the floor-1 Top-up.
 - **From the numbers check and the critiques:** parity gates measured
   from fixed arrival states; ClassThemeSpread; a plain trim with the
   removed experience moved to floor 4's boss (300) and floor 5's lair
@@ -538,7 +558,7 @@ more theme to build); C, variable 4–5 floors.
   on *one* of them per run.
 - **No mid-floor transitions.** Later "seams" are display-only: the boss
   arena's far exit shows the next theme's palette, with no enemies or
-  rules from it (M3). The far exit is the Bossgate to the Stairhead,
+  rules from it (M3). The far exit is the Bossgate to the Downstair,
   which opens on `BossDefeated` (floors 1–4); floor 5 has none, and a
   waking-light window dresses its far wall (M3, display only) (change
   FL-6; floor layout design 6.11).
@@ -548,7 +568,7 @@ more theme to build); C, variable 4–5 floors.
 | Act / tier | Floors | Surrealism | Party (settled schedule) |
 |---|---|---|---|
 | **Shallows** | 1 | Near-grounded: one wrong detail per theme, repeated in every room | solo |
-| **Middle Dream** | 2–3 | Uncanny, impossible architecture | duo → trio |
+| **Midwater** | 2–3 | Uncanny, impossible architecture | duo → trio |
 | **Deep** | 4 | Sublime, horrific; physics wrong in the backdrop only | four |
 | **Heart** | 5 | Full dream logic in the dressing, played quiet | four |
 
@@ -556,8 +576,8 @@ more theme to build); C, variable 4–5 floors.
 
 | Tier | Floors | M2 pool | How chosen (M2) | M3 | M4 |
 |---|---|---|---|---|---|
-| Shallows | 1 | Gaol of Small Hours, Kennel Wood (+ Endless Wake if it passes its gate, 8.2) | Random at run start | + Wake (if not M2), + Ministry (F1–2 window) | + Night Market, Orchard |
-| Middle Dream | 2–3 band | Drowned Choir, Silk Archive, Carnival of the Last Evening | F2: 1 of 3; F3: 1 of the remaining 2. Random, or Two Doors when on | + Moth Wedding; the Long Supper widens to F3–4 | 5 |
+| Shallows | 1 | Gaol of Small Hours, Kennel Wood (+ Endless Wake if it passes its gate, 8.2) | Random at run start | + Wake (if not M2), + Ministry (F1–2 window) | + Lantern Market, Orchard |
+| Midwater | 2–3 band | Drowned Choir, Cobweb Archive, Carnival of the Last Evening | F2: 1 of 3; F3: 1 of the remaining 2. Random, or Two Doors when on | + Moth Wedding; the Long Supper widens to F3–4 | 5 |
 | Deep | 4 | Long Supper, Gut of the World | Random | + Mirror Court (F3–4), + Ossuary Opera; Two Doors at camp 3 once the pool is 3 or more | 4–5 |
 | Heart | 5 | The Dreamer's Heart (fixed); final-boss pool of 2 | Fixed; boss random, or picked at camp 4 when the Last Hollow choice is on | Final-boss pool 3 | + alternate final, the Waking City |
 
@@ -569,22 +589,22 @@ more theme to build); C, variable 4–5 floors.
   floor-4 slots, exactly the staleness the fun critique flagged on the floors
   players replay most. Floor-4-only gives a true 50/50 pool. The band
   opens in M3, when Mirror Court and Opera dilute floor 4.
-- **Pool partners differ in kind (lead's call).** The Middle Dream "fire
+- **Pool partners differ in kind (lead's call).** The Midwater "fire
   triangle": the Choir punishes fire (Soaked resists it); the Archive
   rewards fire (it burns webs and paper); the Carnival cuts both ways
   (Oiled). The Deep pair is "endure or shatter": the Gut is attrition
   against healing and armour; the Supper is freeze-and-shatter against
   slow, clumped parties.
 - **One home theme per square kind in any M2 set (lead's call):** water
-  → Choir, web → Silk, oil and fire → Carnival, bile → Gut. The only
-  exception is bedsheet webs on the Heart, because the Silk can never be
+  → Choir, web → Archive, oil and fire → Carnival, bile → Gut. The only
+  exception is bedsheet webs on the Heart, because the Archive can never be
   adjacent to floor 5. The rule covers condition square kinds only: the
   condition-free square classes (harm, Rough, Plank) are theme-neutral
   (change TR-11; room terrain design 6.2). The Gaol, Kennel and Supper
   are deliberately dry, read as "no condition squares": condition-free
   squares appear there (the Supper's shattered-crystal harm squares;
   Rough and Plank in all three; change TR-22, told plainly; room terrain
-  design 7.1; kept for the Kennel's Nightmare tier 2+ staked pits, which
+  design 7.1; kept for the Kennel's Peril tier 2+ staked pits, which
   are condition-free harm squares, change HZ-25, hazards design 6.19);
   their identity comes from a visible
   `signatureFeature` (8.0).
@@ -821,15 +841,15 @@ more theme to build); C, variable 4–5 floors.
   - for a fixed seed and party state, swapping the door gives the **same
     loot draw sequence and the same item identities**;
   - *placement* may differ (carrier or container);
-  - the armour Resistant-element property reads the floor's drawn theme
+  - the armour <element>-proof property (e.g. Fireproof) reads the floor's drawn theme
     (armour 14.3, an M1 precedent) through **one always-consumed draw
     r in [0, 720)**, the same for every theme: with the theme's
     elemental damage types sorted by id (n of them), the element is
     entry r mod n; when n = 0 (the Gaol, the Kennel), the property uses
     a fixed non-theme fallback element with no extra draw (lead's call;
-    V6 checks it); **this read serves authored Resistant records only
+    V6 checks it); **this read serves authored <element>-proof records only
     (read, not changed; change IR-14, IR-15; M2; item rolls design 4.4,
-    4.17):** a Resistant line **rolled** from a table takes its element
+    4.17):** an <element>-proof line **rolled** from a table takes its element
     theme-blind from its own `lineRoll` entry, and the parent draw r
     keeps its approved position;
   - loot stays theme-blind **(settled, enemies 15.3; trinkets R-23)**;
@@ -882,7 +902,7 @@ more theme to build); C, variable 4–5 floors.
 
 - **The Dreamer's Heart** is always floor 5 (RT-2). It has its own
   roster (8.11), a morale shape that escalates room by room, and
-  **Keepsakes** (9.3).
+  **Souvenirs** (9.3).
 - **Final-boss pool:** 2 in M2 (the Night Governess, the Rousing
   Engine), 3 in M3. All are level 12, 3 pips, 2 boss actions, phases at
   66/33, and all their conditions come from the Heart's 6. Boss records
@@ -945,7 +965,7 @@ more theme to build); C, variable 4–5 floors.
   extra to the table's 7 but inside n (n = 8, the antechamber at n−2);
   the floors 2–5 antechamber is inside the table's count. The elite room and
   Circuit side rooms count as side rooms; the Bypass arm, Alcoves,
-  corridors and the Stairhead are not counted rooms; the Circuit counts
+  corridors and the Downstair are not counted rooms; the Circuit counts
   Room nodes. "Room k" means `mainPathIndex` k everywhere, except
   enemies 10.2, whose "Room N" stays room level as defined there.
 
@@ -999,22 +1019,22 @@ reaches the post-catch-up maxima; step 6a's card fills the door),
 **the Hollow** (steps 8–10 as concurrent stations after card A and the
 Eye's card; the `choice` state unchanged) and **Travel on** (step 11).
 
-- Camps 1 and 3 carry the act-change moment; camp 2, inside the Middle
-  Dream, is the quiet camp; camp 4 is the Last Hollow (Deep → Heart)
+- Camps 1 and 3 carry the act-change moment; camp 2, inside
+  Midwater, is the quiet camp; camp 4 is the Last Hollow (Deep → Heart)
   **(told plainly; change CH-4, corrected against the act table of 6.2;
   M2; camp and hub design 2.3 F1, 4.6)**.
-- A recurring wakeful camp keeper runs the vendor (display only).
+- A recurring wakeful camp Pedlar runs the vendor (display only).
   **Afterword (change EV-26; agreed, events Q1 for the memory model;
   M2 lean, M3; events design 4.5.10):** in M2 the run-start card shows
   at most one Afterword line keyed to how the last personal run ended
-  and at most one Strand closure line; in M3 the keeper gains lines
+  and at most one Strand closure line; in M3 the Pedlar gains lines
   that name carried Strands, and the Unwoken Roll; all display only,
   never humour on death, never the Dreamer. **Camp and hub (told
   plainly; change CH-14; M2 reading, M3; camp and hub design 4.10,
-  4.15.6):** the M2 camp keeper's lines are service strings, not EV
-  keeper lines; in M3 the keeper speaks Strand lines only and never
+  4.15.6):** the M2 camp Pedlar's lines are service strings, not EV
+  Pedlar lines; in M3 the Pedlar speaks Strand lines only and never
   carries a lore chain; the Unwoken Roll gains a hub home with the
-  Sitter, keeping every EV 4.5.10 limit; the Afterword stays on the
+  Roll-Reader, keeping every EV 4.5.10 limit; the Afterword stays on the
   run-start card, unchanged.
 - A lullaby on a music box plays at every camp and degrades with depth.
   **Camp and hub (change CH-12; M2; camp and hub design 6, AN9, AN10):**
@@ -1031,7 +1051,7 @@ Eye's card; the `choice` state unchanged) and **Travel on** (step 11).
 |---|---|---|
 | Run-start card | Floor-1 theme name, vignette, HR-23 line | Same |
 | Camp next-floor card | Name, vignette, the approved HR-23 line "Next floor: theme X, about Y% non-fearless"; **M3:** a Tithe Bowl Surveyor's Sketch shows only as "Bought: Surveyor's Sketch", and every pointer resolves at the entered floor's entry or use, never on a camp card (change XI-24; exploration and information design 4.6.3) | Per door: name, vignette, HR-23 line, signature line, at-will damage icons, square-kind icon, boss name and silhouette; **M3:** no pointer result on a door card (change XI-24) |
-| Floor-entry **Stratum Card** (DH 17.12 header) | Name, act, signature line, damage types, non-fearless band, boss name; the floor count line "Main path: n rooms; side rooms: k; secrets: s" (s from floor 2; counts only, never locations; change FL-20, floor layout design 9.2; **M3:** narrowed for paid or earned pointers: this card and every free surface stay counts-only, and only a paid or earned pointer (the Lodestring, an F-TREASURE fact) may name one room, drawn on the map; change XI-23; exploration and information design 4.6.2); **M3:** the floor's Mood, Omen and Nightmare only, with its stage and every threshold visible from floor entry (change HZ-20; hazards design 6.9); **loot lines (M2; loot economy design 6.15),** at most 1 line each, after the RS facts and the DH guarantees: the count "Treasures: n" (change LE-15; loot economy design 8.2), then announcements: the Dream's Due line naming its target, never the item ("The dream owes Brask something."), turning to a "paid" state once shown (change LE-13; the Due itself on floor 1 from M1; loot economy design 6.6); on floors 2–4 "A heavy purse walks this floor" (change LE-16; loot economy design 8.3); on floor 5 "Before the Heart's chamber, the dream sets out provisions: choose one" (the Viaticum; change LE-5; loot economy design 6.11) | Same |
+| Floor-entry **Stratum Card** (DH 17.12 header) | Name, act, signature line, damage types, non-fearless band, boss name; the floor count line "Main path: n rooms; side rooms: k; secrets: s" (s from floor 2; counts only, never locations; change FL-20, floor layout design 9.2; **M3:** narrowed for paid or earned pointers: this card and every free surface stay counts-only, and only a paid or earned pointer (the Lodestring, an F-TREASURE fact) may name one room, drawn on the map; change XI-23; exploration and information design 4.6.2); **M3:** the floor's Mood, Omen and Peril only, with its stage and every threshold visible from floor entry (change HZ-20; hazards design 6.9); **loot lines (M2; loot economy design 6.15),** at most 1 line each, after the RS facts and the DH guarantees: the count "Treasures: n" (change LE-15; loot economy design 8.2), then announcements: the Dream's Due line naming its target, never the item ("The dream owes Brask something."), turning to a "paid" state once shown (change LE-13; the Due itself on floor 1 from M1; loot economy design 6.6); on floors 2–4 "A heavy purse walks this floor" (change LE-16; loot economy design 8.3); on floor 5 "Before the Heart's chamber, the dream sets out provisions: choose one" (the Parting Fare; change LE-5; loot economy design 6.11) | Same |
 | Lore reveal on entry | Roster types and roles **(settled, enemies 10.6)** | Same; M3: roles shown at camp too |
 | **Dream track** (HUD, pause) | 5 strata: visited floors named; the next floor named at its camp; later floors show only their tier glyph; floor 5 reads "The Dreamer's Heart" from minute one | Plus "the road not taken": the declined door, shown on the run summary too |
 
@@ -1042,7 +1062,7 @@ nothing hides a rule change. All of it is class-blind and
 information-only. **The elite intel line (change LE-18; M2; loot
 economy design 6.9, 6.15):** when a floor's elite is resolved or its
 notable is stolen, the party learns one non-power boss fact for that
-floor (the boss signature item's card), shown in the loot summary's
+floor (the card of the boss's prize), shown in the loot summary's
 floor-fact slot (enemies 15.8) and kept under the boss name on the
 pause screen's Floor-info panel; it is not a Stratum Card line.
 
@@ -1072,7 +1092,7 @@ owner refuses the forecast extension (19.2).
 Run-to-run variety comes from the floor-1 draw, the band order, the
 floor-4 draw and the final boss; 15 bosses over 11 (theme, floor)
 cells; shallow and deep dressing sets; and layouts, recruits and loot.
-Counts are in 10.3. From M3, unlockable strata, omens and Nightmare
+Counts are in 10.3. From M3, unlockable strata, omens and Peril
 tiers add more (9.1).
 
 ### 6.11 Two Doors and the Last Hollow choice (agreed, Q2; change RT-10, RT-11)
@@ -1118,7 +1138,7 @@ switch it names, never the build):**
    *(the 65% agreed)*. **Decision rule (lead's call, after the check;
    illustr. sample):** per theme pooled over floors and partners, the
    point estimate is 65% or less **and** the upper 90% confidence bound
-   is 70% or less, on about 150 or more offers per Middle Dream theme
+   is 70% or less, on about 150 or more offers per Midwater theme
    (40 offers leaves a margin of about ±15 points, too wide to judge
    65%); per (theme, floor, partner) cell, at least 40 offers and a
    point estimate of 75% or less, so a pooled rate cannot hide one
@@ -1254,18 +1274,18 @@ Q3:** B, no premise; C, folk horror; D, full absurdism.
    tagged by kind (vow, debt, duty, grief, craft, vanity, hunger, rest).
    No two themes in one pool, or able to sit on adjacent floors, share
    a kind; the tone-by-depth review checks it. M2 tags: Gaol debt,
-   Kennel duty, Wake grief, Choir vow, Silk craft, Carnival vanity,
+   Kennel duty, Wake grief, Choir vow, Archive craft, Carnival vanity,
    Supper hunger, Gut debt (never adjacent to the Gaol), Heart rest.
 
 ### 7.4 Readability charter (agreed, Q3; change RT-17 for the gates; display only)
 
 | # | Rule |
 |---|---|
-| RC1 | **Mechanics never joke:** no fake tiles, no lying UI, no hidden rules, no "wild" random effects for flavour. **Dressing never mimics a unit, a square kind or a rule (lead's call, after the check):** statues and props share no silhouette with a roster type; a square kind's material (water, web, sheet, oil, bile) appears only on its squares and on walls above head height; no floor-level particle implies a condition; frost, rain and liquid read only as backdrop. **RC1+ (change TR-20; room terrain design 8.1, 8.2):** every object on a walkable square is a rules piece; dressing lives only on walls, backdrop, non-walkable squares or above head height; liquid-holding pieces are drawn dry or lidded; residue rule: nothing remains on the floor after an event resolves, except debris as Rough. **M3:** Remnant volumes are the one floor-level particle allowed to imply a condition (TR-27). **Hazards (change HZ-29; hazards design 8):** every Void is a Void, no fake holes; backdrop depth never reads as walkable; a fall leaves no residue; motion on walkable squares happens only during an act animation (≤ 1.0 s), never at idle, and only for the Turning Ring's rotation, Peristalsis's band step, a Tide's fill change and the Dreamer's heave; figments (the Stampede herd, Counting Sheep) exist only during their act, flat, translucent, non-unit and below unit value; **M4 (change LP-34; agreed, loot sources Q3; loot sources design 4.7.11):** the Ebb's fade, one notch per tick as an act of ≤ 1.0 s, joins this closed motion list. **Traps and locks (change TL-10; M2; traps and locks design 6.3, 8):** every device body over walkable squares is rigged, with no decoys; Hunch zones always contain a trap; no fake plates, empty "trapped" chests or lying hovers; every trap carries a diegetic tell on a wall, above head height or on the device body, never on a fake floor tile; snare and catch tells render only from Revealed, through a Reveal transition that reads as the object settling, never as a spawn; a forced lock shows a hanging padlock and a Splinter an empty frame with a jagged edge, with no floor debris; no trap tell moves at idle (idle motion on containers and Furnishings stays the lurkers', boxed lurkers included; change TL-28, a reading, M3). **Encounters (read, not changed; change EP-9, EP-12; M2; encounter placement design 6.7, 6.8.6, 8):** activities and postures keep their props on the model and off walkable squares; the Waylay's Spoor mark sits only on door frames and walls, never on floor squares. **Loot sources (change LP-7; agreed, loot sources Q1, Q4; M3; loot sources design 4.7.1, 6):** the Windfall Truant is a pre-placed unit, present at reveal, never a spawn, with a Dormant breathing idle and motion only in its closed act table of ≤ 1.0 s acts that reuse approved states (dormant, stand, hop, held, wait-at-hole, leave-by-Rathole, fade-with-bundle, nabbed, stolen); a loss always takes the bundle and plays the got-away cue, a gain always leaves a pile, and nothing remains after it resolves except a gain's pile; it cowers only while awake or held, never while Dormant. **Keepsakes (change LP-24; M2; loot sources design 5.1):** Keepsake dressing never uses a container, bait-cache, Windfall or Bedside Stand silhouette (9.3). **Curiosities (change EV-25; M2; events design 4.2, 4.11):** Curiosity props and Glimpses sit on walls, above head height or in a niche, never on a walkable square; every physical act is staged wall-mounted, dry or lidded, and any wet, spilled, shattered or burning moment appears only in the card's diorama; a resolved Curiosity goes to an inert state (a dust sheet above head height) and leaves no residue; no Curiosity prop, Glimpse or resolved state uses a Portal kind's silhouette or skin (a door appears only inside a diorama); card chips are printed from rules data (read, not changed; change EV-4; events design 4.3.1). **Pending request (change BR-38; RS owner; M2; boss rooms design 6):** boss arena Device idle and act motion (Device and leash-ring acts ≤ 1.0 s) joins this closed motion list; overhead Devices (the Pendulum, the Icicle Chandelier, the Heavy Thing) hang over non-walkable squares or a wall slot. **Exploration and information (change XI-5, XI-14, XI-15; M1/M2; exploration and information design 4.2, 4.5.1, 4.9.3):** the information charter (IP1–IP10) and the incentive charter (IN1–IN6) apply this rule to what the party knows: Remembered is never drawn as Seen, projected never as known, Chalked never as floor, and a learned fact carries a told pip; an Afterimage is labelled memory in its own paper cut-out grammar (never a unit silhouette or a hazard figment), shows the last-seen activity and never changes while unseen; Unknown is always "?", never "none"; a mark that loses its slot drops to a pip and its text to the hover or Inspect card, so nothing vanishes silently. Chalk on entry leaves FL-17's secrets as approved (read, not changed; change XI-3; exploration and information design 4.1.4) |
-| RC2 | **Role prop grammar** (extends enemies 8.1): leaders carry a vertical emblem; soldiers a tall flat object (shield, door, tray, coffin lid, chair); artillery points something forward; brutes are oversized mass inside one square; skirmishers lean low; controllers have an orbiting element; lurkers show a tell at rest; minions are small and share one palette. **Pieces (change TR-20; room terrain design 8.1):** no terrain piece uses a chair, tray, door, upright coffin lid, shield, tall staff, forward-pointing tube, orbiting element or unit silhouette; chairs appear only tucked into tables; Low pieces that could read as shields come only as multi-square runs; no Furnishing or Low piece shares a silhouette family with its theme's current or planned Kegs. **Boxed lurkers (change TL-28, a reading; agreed, traps and locks Q2; M3; traps and locks design 6.14, 8):** a boxed lurker shows its own lurker's rest tell, re-authored at container scale and readable from 6 squares, and a face once revealed. **Pending request (change TL-43; RS owner and art; M2; traps and locks design 6.3, 8):** trap device bodies follow the piece bans above (no chair, tray, door, upright coffin lid, shield, tall staff, forward-pointing tube, orbiting element or roster prop). **Truants (change LP-7; agreed, loot sources Q1, Q4; M3; loot sources design 4.7.1, 5.3):** every Truant is a small, faced, non-fearless animal (RC3), never an object and never humanoid, hauling the one cross-theme bundle (undyed sackcloth tied with the Windfall mark, larger than the animal, visible in every pose, never an item silhouette); its eyes and limbs stay out in every pose, Dormant included; a Truant, its bundle and its Rathole never use its theme's faction motif or minion palette, so theme identity goes on the animal only (M3 pilot skins: the Choir's Alms Crab, the Carnival's Conjuror's Rabbit, the Supper's Crumb Mouse). **Curiosities (change EV-25, EV-45; M2 implied figures, M3 figure frame; events design 4.11):** no interactive chairs and no Portal silhouette on a Curiosity prop; M2 dream figures are implied only (hands with a plain cuff, a lamp and glove above head height, a back in a high window, empty coats on a rail), with no face and no faction motif or minion palette; the M3 **figure frame** is one cross-theme non-unit map object in a niche, booth or behind glass, never behind a Drape or on a walkable square, flat and paper-cut below unit value tier, cropped at the shoulders, with no roster silhouette |
+| RC1 | **Mechanics never joke:** no fake tiles, no lying UI, no hidden rules, no "wild" random effects for flavour. **Dressing never mimics a unit, a square kind or a rule (lead's call, after the check):** statues and props share no silhouette with a roster type; a square kind's material (water, web, sheet, oil, bile) appears only on its squares and on walls above head height; no floor-level particle implies a condition; frost, rain and liquid read only as backdrop. **RC1+ (change TR-20; room terrain design 8.1, 8.2):** every object on a walkable square is a rules piece; dressing lives only on walls, backdrop, non-walkable squares or above head height; liquid-holding pieces are drawn dry or lidded; residue rule: nothing remains on the floor after an event resolves, except debris as Rough. **M3:** Remnant volumes are the one floor-level particle allowed to imply a condition (TR-27). **Hazards (change HZ-29; hazards design 8):** every Void is a Void, no fake holes; backdrop depth never reads as walkable; a fall leaves no residue; motion on walkable squares happens only during an act animation (≤ 1.0 s), never at idle, and only for the Turning Ring's rotation, Peristalsis's band step, a Tide's fill change and the Dreamer's heave; figments (the Stampede herd, Counting Sheep) exist only during their act, flat, translucent, non-unit and below unit value; **M4 (change LP-34; agreed, loot sources Q3; loot sources design 4.7.11):** the Ebb's fade, one notch per tick as an act of ≤ 1.0 s, joins this closed motion list. **Traps and locks (change TL-10; M2; traps and locks design 6.3, 8):** every device body over walkable squares is rigged, with no decoys; Hunch zones always contain a trap; no fake plates, empty "trapped" chests or lying hovers; every trap carries a diegetic tell on a wall, above head height or on the device body, never on a fake floor tile; snare and clasp tells render only from Found, through a Reveal transition that reads as the object settling, never as a spawn; a forced lock shows a dangling padlock and a Splinter an empty frame with a jagged edge, with no floor debris; no trap tell moves at idle (idle motion on containers and Furnishings stays the lurkers', boxed lurkers included; change TL-28, a reading, M3). **Encounters (read, not changed; change EP-9, EP-12; M2; encounter placement design 6.7, 6.8.6, 8):** activities and postures keep their props on the model and off walkable squares; the Waylay's Spoor mark sits only on door frames and walls, never on floor squares. **Loot sources (change LP-7; agreed, loot sources Q1, Q4; M3; loot sources design 4.7.1, 6):** the Windfall Truant is a pre-placed unit, present at reveal, never a spawn, with a Dormant breathing idle and motion only in its closed act table of ≤ 1.0 s acts that reuse approved states (dormant, stand, hop, held, wait-at-hole, leave-by-Rathole, fade-with-bundle, nabbed, stolen); a loss always takes the bundle and plays the got-away cue, a gain always leaves a pile, and nothing remains after it resolves except a gain's pile; it cowers only while awake or held, never while Dormant. **Souvenirs (change LP-24; M2; loot sources design 5.1):** Souvenir dressing never uses a container, bait-cache, Windfall or Washstand silhouette (9.3). **Curiosities (change EV-25; M2; events design 4.2, 4.11):** Curiosity props and Glimpses sit on walls, above head height or in a niche, never on a walkable square; every physical act is staged wall-mounted, dry or lidded, and any wet, spilled, shattered or burning moment appears only in the card's diorama; a resolved Curiosity goes to an inert state (a dust sheet above head height) and leaves no residue; no Curiosity prop, Glimpse or resolved state uses a Portal kind's silhouette or skin (a door appears only inside a diorama); card chips are printed from rules data (read, not changed; change EV-4; events design 4.3.1). **Pending request (change BR-38; RS owner; M2; boss rooms design 6):** boss arena Counterpiece idle and act motion (Counterpiece and leash-ring acts ≤ 1.0 s) joins this closed motion list; overhead Counterpieces (the Pendulum, the Icicle Chandelier, the Heavy Thing) hang over non-walkable squares or a wall slot. **Exploration and information (change XI-5, XI-14, XI-15; M1/M2; exploration and information design 4.2, 4.5.1, 4.9.3):** the information charter (IP1–IP10) and the incentive charter (IN1–IN6) apply this rule to what the party knows: Remembered is never drawn as Seen, projected never as known, Chalked never as floor, and a learned fact carries a told pip; an Afterimage is labelled memory in its own paper cut-out grammar (never a unit silhouette or a hazard figment), shows the last-seen activity and never changes while unseen; Unknown is always "?", never "none"; a mark that loses its slot drops to a pip and its text to the hover or Inspect card, so nothing vanishes silently. Chalk on entry leaves FL-17's secrets as approved (read, not changed; change XI-3; exploration and information design 4.1.4) |
+| RC2 | **Role prop grammar** (extends enemies 8.1): leaders carry a vertical emblem; soldiers a tall flat object (shield, door, tray, coffin lid, chair); marksmen point something forward; brutes are oversized mass inside one square; skirmishers lean low; hinderers have an orbiting element; lurkers show a tell at rest; swarmers are small and share one palette. **Pieces (change TR-20; room terrain design 8.1):** no terrain piece uses a chair, tray, door, upright coffin lid, shield, tall staff, forward-pointing tube, orbiting element or unit silhouette; chairs appear only tucked into tables; Low pieces that could read as shields come only as multi-square runs; no Furnishing or Low piece shares a silhouette family with its theme's current or planned Kegs. **Boxed lurkers (change TL-28, a reading; agreed, traps and locks Q2; M3; traps and locks design 6.14, 8):** a boxed lurker shows its own lurker's rest tell, re-authored at container scale and readable from 6 squares, and a face once revealed. **Pending request (change TL-43; RS owner and art; M2; traps and locks design 6.3, 8):** trap device bodies follow the piece bans above (no chair, tray, door, upright coffin lid, shield, tall staff, forward-pointing tube, orbiting element or roster prop). **Truants (change LP-7; agreed, loot sources Q1, Q4; M3; loot sources design 4.7.1, 5.3):** every Truant is a small, faced, non-fearless animal (RC3), never an object and never humanoid, hauling the one cross-theme bundle (undyed sackcloth tied with the Windfall mark, larger than the animal, visible in every pose, never an item silhouette); its eyes and limbs stay out in every pose, Dormant included; a Truant, its bundle and its Rathole never use its theme's faction motif or swarmer palette, so theme identity goes on the animal only (M3 pilot skins: the Choir's Pew Crab, the Carnival's Conjuror's Rabbit, the Supper's Crumb Mouse). **Curiosities (change EV-25, EV-45; M2 implied figures, M3 figure frame; events design 4.11):** no interactive chairs and no Portal silhouette on a Curiosity prop; M2 dream figures are implied only (hands with a plain cuff, a lamp and glove above head height, a back in a high window, empty coats on a rail), with no face and no faction motif or swarmer palette; the M3 **figure frame** is one cross-theme non-unit map object in a niche, booth or behind glass, never behind a Drape or on a walkable square, flat and paper-cut below unit value tier, cropped at the shoulders, with no roster silhouette |
 | RC3 | **Faces mean minds:** mindless types show one cross-theme mind tell (a hollow keyhole motif) and no face; fearless-but-minded types are masked or veiled; non-fearless types have faces and visibly cower, flee and kneel (animations duplicate approved states, never replace them). **(Lead's calls, after the check.)** Bosses are exempt: the boss plate and pips carry their read, and the face grammar applies to non-boss types only. Helms on non-fearless types are open-faced (raised visor or none); veils on non-fearless types are lifted or pinned back. The keyhole silhouette is reserved: no environment, prop or non-mindless unit uses it (locks read as padlocks; change FL-7, told plainly). A Routed or Cowed animation never moves a unit through a door or changes a door. **Locks (change TL-22; traps and locks design 6.11, 8):** every lock reads as a padlock base decal plus a kind glyph, and theme locks are skins on that base (webbing over a padlock, a padlock on a sphincter's rim, a frosted padlock); no lock glyph uses a face part, a ring or a clock face; Wager cages carry no padlock, only the Wager glyph (M3); no container carries a keyhole (V7). **Encounters (read, not changed; change EP-9; M2; encounter placement design 6.7, 8):** Busy and Dormant postures duplicate approved states (the Dormant glyph stays). **Curiosities (change EV-25, EV-45; M2; events design 4.11):** implied figures and the M3 figure frame show neither a face nor the keyhole tell, under their own non-unit grammar; no Curiosity uses a clock-dial object that opens locks |
 | RC4 | **Damage language:** family by shape (physical streaks and impacts; elemental fluids, particles, crystals; spirit rings and ripples); type by hue *plus* pattern, so it survives colour-blind simulation; no theme uses an undesaturated damage hue as its dominant environment colour. **The damage-hue key** (10 types, hue plus pattern) is owned by art and due before the first Tone Sheet. A theme whose Law is a damage type (Gut, Supper, Carnival) dresses its environment in a desaturated, off-key variant and keeps the saturated key for its hazard squares and attacks (lead's call). **RC4+ (change TR-20; room terrain design 8.1):** the saturated damage hue is also allowed on contact hazards in every F2–5 theme; fire hue stays limited to fire squares, Hot pieces and attacks. **M3:** Miasma Remnants take their own hue and pattern (a desaturated violet with a stipple, never bile green; room terrain design 6.6). **Hazards (change HZ-29; hazards design 8):** Voids carry the drop rim but no damage-hue fill; bile green stays reserved (the Gullet backdrop uses flesh tones); due overlays and latent footprints use the telegraph-tier pattern and colour with the damage-type icon; the fire hue appears only in act VFX and on fire squares or Hot pieces |
-| RC5 | **One glyph per square rule:** each square kind has one cross-theme rim and icon; a theme reskins only the fill (bedsheets read as web because they *are* web). **RC5+ (change TR-20; room terrain design 8.1):** one glyph set per piece class and square class across themes, built from four composable marks (base, motion, danger, cover); every hazard face projects a floor decal onto its one front square; the stub-glyph rule (the "blocks sight" cap on a Tall piece's stub state) applies from M1. **Hazards (change HZ-29; hazards design 8):** one Void lip glyph, one Snag glyph, one Cord glyph with used and unused pips and one vent glyph with trigger pips across themes; a Stir uses its host's glyph plus a countdown numeral on the host's floor decal; the four-mark table gains the hazards design's RC5+ rows (Void, Snag, Cord, vent, latent footprint, due square, Tide socket, Lurch lane, Handhold, Chainpost, staked pit) and one pattern registry, in which no two patterns differ only by hue. **Traps and locks (change TL-22; traps and locks design 8):** the four-mark table gains the traps and locks design's RC5+ rows (Revealed trap trigger with a `triggerKind` sub-mark, device area, mechanism gear, trap link, Hunch zone, Hunch catch, state badges, lock, Wager Portal) and the pattern registry gains the trap rim, the Hunch dotted rim with question-mark ticks (never a hatch) and the trap-link dash; one lock glyph set across themes: Plain, Crier, Barb, Tattle and Keyed in M2, Runed, Hour, Riddle, Fed and Ticket in M3, and the High-Striker's threshold glyph. **Encounters (change EP-12; M2; encounter placement design 6.8.1, 6.8.6):** the pattern registry gains the **Spoor base mark** (one cross-theme three-stroke tally, apart from the trap-tell, lock and Hunch families, skinned per theme in material only) and the cross-theme **bait-cache mark**. **Pending request (change EP-12, extended; RS owner; M2; encounter placement design 6.20; cross-document comparison 2026-11-23, CC-103):** the four-mark table and pattern registry gain the encounter placement design's board read surfaces (the formation chip, the "Line broken" split frame, the Keystone notched-crown pip, the hold-square corner brackets, the fall-back chevron with its dashed tether, the marked-tell eye-tick ring and the seen-tell band marker), each gated on the greyscale and colour-blind checks. **Loot (read, not changed; change IR-13; agreed, item rolls Q5; M1; item rolls design 4.13):** the **signature cache** is one pattern-registry mark (base: cache; a signature sub-mark shared with the boss plate's "Guards: <signature name>" line). **Loot sources (change LP-7, LP-12, LP-14, LP-26; loot sources design 4.3, 4.7.3, 4.10, 6):** the four-mark table and pattern registry gain the loot sources design's RC5 rows, each with a positive shape, a slot and an RC6 tier: the **wall-set mark** (M2; an inset container's solid base bracket on the wall face, projected as a solid bracket onto its open square, never a dashed rim); **M3 (agreed, loot sources Q1, Q4):** the **Windfall mark** (a knotted-sack glyph on the plate and bundle), the **scurry trail** (paired dots, one pair per route square, never above floor tier), the **next-hop outline** (a solid pawprint outline, only while awake), the **Rathole** (one cross-theme arched opening at skirting height with the Windfall mark on its lintel, plus a front-square half-rim floor decal drawn whatever the wall's cutaway state; per-theme dressing changes only its material), the **count digit** (with a clock-pip on a floor ring, hollow while Dormant, solid while awake) and the **"held" badge**, and the Twin Coffer's **twin-lid mark**; **M2 (agreed, loot sources Q5):** the **Bedside Stand** is one cross-theme silhouette that hosts only the Viaticum. **Pending request (change LP-27; enemies owner; M2 if agreed, else M3; loot sources design 7):** the **Uncorked** state, a shape sub-state of the carried-notable glint (an open stopper notch), never a hue change, joins the pattern registry. **Curiosities (change EV-25; M2; events design 4.11):** no Curiosity prop or Glimpse uses a container, bait-cache, Windfall or Bedside Stand silhouette (`ReservedSilhouette`); a prop that is a container by name is fused into a wall bracket, rack or wall slot with no box body; no clock-dial object that opens locks. **Pending request (change BR-38; RS owner; M2, the Gambit mark M3; boss rooms design 6, 4.3.1):** the four-mark table and pattern registry gain the boss rooms design's marks: the Rhythm strip's three marks (Off dot, Lead diamond, Down area-shape glyph), the five phase-type icons (new move, stance, ward, reserve, terrain), "Upended" (renamed **Sprawled** by boss rooms design 4.7.2; this restatement's rename is pending with the RS owner; cross-document comparison 2026-11-23, CC-65), "Resolve Broken", the Gambit "Next turn" mark and one cross-theme **leash ring** for every `chain(n)` unit, each gated on the greyscale and colour-blind checks. **Exploration and information (change XI-5, XI-15, XI-17; M1 the knowledge states and basic Afterimages, M2 the rest, the Lodestring marks M3; exploration and information design 4.2, 4.9.3, 6):** the four-mark table and pattern registry gain segment 10's rows, each with a slot (fill, rim, glyph, pip, line or sprite), an RC6 tier and a `countsAsMark` flag per that design's registry table: the knowledge-state grade, the Chalked footprint and the fog bank; the seen-edge line; the Traced contour (map only); the Afterimage cut-outs in four states (Fresh, Persisting, Old, Short) and the stacked group cut-outs, with no numerals; the told pip; the projected pip on a Stir decal; the F-KEY Keybearer pip on a patrol route's last-seen pip; the loose-end thread tuft (map only); the Listen badge and bubble; the Waymark tack (its 6 inner shapes chosen outside the pattern registry); the sight-risk mark, ear badge, hearing double contour, noise single contour, patrol arrowhead line, "continues" ellipsis, forecast band and horizon bracket; the front-square wall projections; and, M3, the Lodestring spool mark (never a knot, greyscale-gated against the Windfall mark) and the Lodestring string. A **line-style registry** joins it: no two line families differ only by hue or only by dot spacing. Pattern ids are assigned by the RS owner. **Pending request (change CA-27; RS owner, with the XI owner for the `SurfaceRecord` rows; M2 Trophy Tally's pips, M3 the rest; charm abilities design 6):** the pattern registry gains the charm pip pair (one plate mark per unit) and its five states (ready, spent or missed, waiting, kept, dormant as no pip), told apart by shape and pattern, never hue alone, and greyscale-gated against the Windfall mark and the Lodestring spool; until the RS owner rules this reads "pending RS owner". |
+| RC5 | **One glyph per square rule:** each square kind has one cross-theme rim and icon; a theme reskins only the fill (bedsheets read as web because they *are* web). **RC5+ (change TR-20; room terrain design 8.1):** one glyph set per piece class and square class across themes, built from four composable marks (base, motion, danger, cover); every hazard face projects a floor decal onto its one front square; the stub-glyph rule (the "blocks sight" cap on a Tall piece's stub state) applies from M1. **Hazards (change HZ-29; hazards design 8):** one Void lip glyph, one Snag glyph, one Cord glyph with used and unused pips and one vent glyph with trigger pips across themes; a Stir uses its host's glyph plus a countdown numeral on the host's floor decal; the four-mark table gains the hazards design's RC5+ rows (Void, Snag, Cord, vent, latent footprint, due square, Tide socket, Lurch lane, Handhold, Chainpost, staked pit) and one pattern registry, in which no two patterns differ only by hue. **Traps and locks (change TL-22; traps and locks design 8):** the four-mark table gains the traps and locks design's RC5+ rows (Found trap trigger with a `triggerKind` sub-mark, device area, mechanism gear, trap link, Hunch zone, Hunch badge, state badges, lock, Wager Portal) and the pattern registry gains the trap rim, the Hunch dotted rim with question-mark ticks (never a hatch) and the trap-link dash; one lock glyph set across themes: Plain, Crier, Barb, Tattle and Keyed in M2, Runed, Hour, Riddle, Fed and Ticket in M3, and the High-Striker's threshold glyph. **Encounters (change EP-12; M2; encounter placement design 6.8.1, 6.8.6):** the pattern registry gains the **Spoor base mark** (one cross-theme three-stroke tally, apart from the trap-tell, lock and Hunch families, skinned per theme in material only) and the cross-theme **bait-cache mark**. **Pending request (change EP-12, extended; RS owner; M2; encounter placement design 6.20; cross-document comparison 2026-11-23, CC-103):** the four-mark table and pattern registry gain the encounter placement design's board read surfaces (the formation chip, the "Line broken" split frame, the Keystone notched-crown pip, the hold-square corner brackets, the fall-back chevron with its dashed tether, the marked-tell eye-tick ring and the seen-tell band marker), each gated on the greyscale and colour-blind checks. **Loot (read, not changed; change IR-13; agreed, item rolls Q5; M1; item rolls design 4.13):** the **signature cache** is one pattern-registry mark (base: cache; a signature sub-mark shared with the boss plate's "Guards: <signature name>" line). **Loot sources (change LP-7, LP-12, LP-14, LP-26; loot sources design 4.3, 4.7.3, 4.10, 6):** the four-mark table and pattern registry gain the loot sources design's RC5 rows, each with a positive shape, a slot and an RC6 tier: the **wall-set mark** (M2; an inset container's solid base bracket on the wall face, projected as a solid bracket onto its open square, never a dashed rim); **M3 (agreed, loot sources Q1, Q4):** the **Windfall mark** (a knotted-sack glyph on the plate and bundle), the **scurry trail** (paired dots, one pair per route square, never above floor tier), the **next-hop outline** (a solid pawprint outline, only while awake), the **Rathole** (one cross-theme arched opening at skirting height with the Windfall mark on its lintel, plus a front-square half-rim floor decal drawn whatever the wall's cutaway state; per-theme dressing changes only its material), the **count digit** (with a clock-pip on a floor ring, hollow while Dormant, solid while awake) and the **"paused" badge**, and the Twin Coffer's **twin-lid mark**; **M2 (agreed, loot sources Q5):** the **Washstand** is one cross-theme silhouette that hosts only the Parting Fare. **Pending request (change LP-27; enemies owner; M2 if agreed, else M3; loot sources design 7):** the **Uncorked** state, a shape sub-state of the carried-notable glint (an open stopper notch), never a hue change, joins the pattern registry. **Curiosities (change EV-25; M2; events design 4.11):** no Curiosity prop or Glimpse uses a container, bait-cache, Windfall or Washstand silhouette (`ReservedSilhouette`); a prop that is a container by name is fused into a wall bracket, rack or wall slot with no box body; no clock-dial object that opens locks. **Pending request (change BR-38; RS owner; M2, the Gambit mark M3; boss rooms design 6, 4.3.1):** the four-mark table and pattern registry gain the boss rooms design's marks: the Rhythm strip's three marks (Off dot, Lead diamond, Down area-shape glyph), the five phase-type icons (new move, stance, ward, reserve, terrain), "Sprawled" (renamed from "Upended" by boss rooms design 4.7.2; restated here by the naming pass, NP-6; cross-document comparison 2026-11-23, CC-65), "Resolve Spent", the Gambit "Next turn" mark and one cross-theme **leash ring** for every `chain(n)` unit, each gated on the greyscale and colour-blind checks. **Exploration and information (change XI-5, XI-15, XI-17; M1 the knowledge states and basic Afterimages, M2 the rest, the Lodestring marks M3; exploration and information design 4.2, 4.9.3, 6):** the four-mark table and pattern registry gain segment 10's rows, each with a slot (fill, rim, glyph, pip, line or sprite), an RC6 tier and a `countsAsMark` flag per that design's registry table: the knowledge-state grade, the Chalked footprint and the fog bank; the seen-edge line; the Traced contour (map only); the Afterimage cut-outs in four states (Fresh, Persisting, Old, Short) and the stacked group cut-outs, with no numerals; the told pip; the projected pip on a Stir decal; the F-KEY Keybearer pip on a patrol route's last-seen pip; the loose-end thread tuft (map only); the Listen badge and bubble; the Waymark tack (its 6 inner shapes chosen outside the pattern registry); the sight-risk mark, ear badge, hearing double contour, noise single contour, patrol arrowhead line, "continues" ellipsis, forecast band and horizon bracket; the front-square wall projections; and, M3, the Lodestring spool mark (never a knot, greyscale-gated against the Windfall mark) and the Lodestring string. A **line-style registry** joins it: no two line families differ only by hue or only by dot spacing. Pattern ids are assigned by the RS owner. **Pending request (change CA-27; RS owner, with the XI owner for the `SurfaceRecord` rows; M2 Trophy Tally's pips, M3 the rest; charm abilities design 6):** the pattern registry gains the charm pip pair (one plate mark per unit) and its five states (ready, used or missed, waiting, stored, idle as no pip), told apart by shape and pattern, never hue alone, and greyscale-gated against the Windfall mark and the Lodestring spool; until the RS owner rules this reads "pending RS owner". |
 | RC6 | **Value hierarchy:** units > telegraph overlays > hazards > floor > walls, checked on a greyscale screenshot per theme; surreal texture only on walls, ceilings and skyboxes, never on walkable squares; scale distortion in architecture only, every unit true to its square. **Boss scale (lead's call):** a boss may stand up to about 1.5 times standard height, but its footprint and silhouette stay within its square at minimum zoom and never hide a unit on an adjacent square; height is shown by proportion, not size. **RC6+ (change TR-20; room terrain design 8.1):** units > telegraph overlays (including Keg footprints while a preview or intent would burst them) > hazards (including contact hazards, harm squares, Kegs and their idle footprints) > cover shields > Furnishings and Low pieces > Tall pieces > floor (Rough, Plank) > walls. Rules pieces count as architecture for the scale clause (room terrain design 7.10). **Hazards (change HZ-29; hazards design 8):** telegraph overlays include due overlays and push and fall previews; hazards include latent footprints; a new bottom tier, the **Void backdrop**, sits below walls, its value ceiling below the floor's darkest walkable tone, rendered as a sealed shaft below the floor plane so nothing shows through at any of the 4 camera rotations. **Exploration and information (change XI-15, XI-17; M1/M2; exploration and information design 4.2, 4.9.2):** board priority extends this hierarchy without reordering it: units > lethal (K) > active tool lines (A) > due and room clocks (D) > telegraphs (T) > hazards (H) > traps and Hunches (R) > cover and pieces (C) > Portal and wall marks (W) > the information layer (I) > memory (M) > floor pattern (F) > knowledge state (N); the Remembered grade (a faded photograph) applies to tiers F and N only, and hazard, trap, Hunch and Portal marks are never desaturated; Unknown is a static, theme-tinted fog bank at wall-top height, never floor-plane darkness, so it never reads as the Void backdrop, and it drops to a low cap under the FL 8.1 cutaway |
 | RC7 | **Tone-free UI:** plates, threat overlays, signature banners, joiner footsteps and condition icons use one global skin; boss moves may have diegetic names but use the universal banner and sting. **Gameplay cue sounds** (door open and close, joiner footsteps and horns, alarm bells, trap triggers, and the Choir's fallen-bell struck-bronze cue, kept distinct from the alarm bell; change TR-20, room terrain design 7.5) are reserved and never appear in a music bed or ambience (lead's call). **Hazards (change HZ-29; hazards design 8):** the reserved cues gain the party fall, a monster-removal cue, Cord Operated, the theme-neutral **Dream tick**, two layers per Stir (an announcement sting and an act cue) and the floor-1 small-hour chime, Horn Post rattle and candle exhale, each in a timbre family no music bed uses (the hazards design's timbre table); skipping or batching cuts animation, never cues. **Traps and locks (change TL-22; traps and locks design 8):** the reserved cues gain the trap spring, Jam and Botch, the Rattle Wire's shaker, the Lullaby Glyph's wind-up click, the Gramophone's needle-scratch and the Wager pips, per the traps and locks design's timbre table; a Crier sounds the alarm cue. **Pending request (change TL-43; RS owner and art; M2):** alarm traps, the Belfry Wire, the tin-can tripwire, the High-Striker and the Crier share **one** reserved alarm-bell cue, the same pitch everywhere, no longer pitched per theme (this rule read, not changed). **Encounters (read, not changed; change EP-28; M2; encounter placement design 6.20, 8):** the formation chip set uses the global skin. **Pending request (change EP-27; RS owner; M3; encounter placement design 6.6.7):** the Choir Ritual's "last singer falls" sting joins the reserved cues. **Loot (read, not changed; change IR-12, IR-15; M2; item rolls design 4.12):** the signature banner stays reserved for boss signatures; a carried notable's use shows as a name floater in the unit-floater layer, never in the banner slot. **Pending request (change LP-7; RS owner; M3; loot sources design 6):** a **Windfall timbre row** (a plucked, dry string family that no music bed uses, kept out of chimes, bells, ticks and the Lullaby Glyph's wind-up click) and six reserved cues (wake, stand-up, hop after the Dream tick, held, nabbed, got-away), clock telegraphs, not reward stings; until the RS owner rules they read "pending RS owner", and if refused the Windfall telegraph relies on visuals and the global UI timbre (loot sources design 14.2). **Curiosities (change EV-25; M2; events design 4.11):** no horns, bells or wind-up or winding props on Curiosities, and no running hands or ticking on any clock or watch act; Curiosity audio tags are checked against the reserved cues (`ReservedCues`); card chips and the Twice-Told card use the global skin (read, not changed; change EV-4; events design 4.3.1, 4.5.2). **Boss rooms (read, not changed; change BR-36, BR-38; M2/M3; boss rooms design 6):** boss cues follow the boss rooms design's per-boss timbre table, in this table's shape (no struck bronze on the Carillon, no ringing alarm on the Engine, no horn on the View Halloo, no breath-family sample in any Heart bed or ambience stem); the Phase Score's per-boss stems and per-threshold layers stay out of the reserved cues, and every boss cue runs the 85% audio blind-ID gate. **Exploration and information (read, not changed; exploration and information design 4.10, 6):** segment 10 adds no reserved gameplay cue; its map, fact, Waymark, travel and Lodestring stings use the global UI timbre, are checked against the reserved cues (`ReservedCues`) and the 85% audio blind-ID gate, and a travel stop is never a tick. **Pending request (exploration and information design 6; RS owner; M2):** whether a "something new seen" travel-stop sting counts as a gameplay cue; until the RS owner rules this reads "pending RS owner", and if refused the travel stop uses visuals only (exploration and information design 14.2). **Camp and hub (change CH-12; M2; camp and hub design 6, AN9):** ambient figure textures avoid every reserved cue and the breath, footstep and whisper families (`ReservedCues`), one family per figure, never shared; no figure handles the music box. **Pending request (change CA-27; RS and audio owners; M3; charm abilities design 6):** two charm **output cues** in the global UI family (placeholder timbres: a soft mallet tap on a hollow gourd for Warded, a marble rolling to rest in a shallow bowl for Helped), each with a timbre-table row and its "kept out of" families, tagged for `ReservedCues` and run pairwise in the 85% audio blind-ID gate; played only when a charm fires, never on a button press or a class or consumable source, so never a condition-application sound against this rule's global condition skin; until the RS owner rules this reads "pending RS owner". |
 | RC8 | **Barks** fire only on floor entry, idle, rout, Yield, Cowed, and boss phase entry after the banner; never on attack resolution, downings or deaths. A content test checks every bark trigger. **Diegetic ambience follows the same rule (lead's call):** comic or laughing ambience ducks to silence on any downing or death and during the death recap. **Hazards (change HZ-29; hazards design 6.16):** a companion may call a Stir's first due round, once per fight; never on telegraphs. **Boxed lurkers (read, not changed; change TL-28; traps and locks design 6.14, 8):** "feels teeth" is a UI callout over the opener plus the lurker's reveal cue, never a bark. **Encounters (read, not changed; change EP-9; M2; encounter placement design 6.7):** activity barks are idle barks. **Pending request (change BR-38; RS owner; M2; boss rooms design 6):** the boss signature banner joins the bark triggers, so a signature is voiced only as a non-verbal vocal sting under the universal banner when its forecast appears, never on resolution; until the RS owner rules this reads "pending RS owner", and if refused signatures are not voiced at all (SFX only; boss rooms design 14.2). **Camp and hub (change CH-10; M2; camp and hub design 4.15.2, AN13):** an ambient trigger class outside combat: camp arrival end (after the rest summary), idle, Hear out, hub entry after the recap closes and hub approach (M3); RC8 in combat is unchanged; a future speaker kind "companion" is named (Later). The ambient verb is Hear out, never Listen, which stays the floor action's verb |
@@ -1303,9 +1323,9 @@ Q3:** B, no premise; C, folk horror; D, full absurdism.
 - the loot sources additions (change LP-7, LP-15; loot sources design
   5.1, 6): the role-ID gate includes "container or Furnishing",
   "container or bait", "inset container or Latch, Door or Hairline",
-  "Rathole or Portal skin" and "Bedside Stand or Latch, Furnishing"
-  (M2), and "Truant or minion", "Truant or boxed lurker" and "Truant or
-  faction minion" (M3); the greyscale and colour-blind passes run with
+  "Rathole or Portal skin" and "Washstand or Latch, Furnishing"
+  (M2), and "Truant or swarmer", "Truant or boxed lurker" and "Truant or
+  faction swarmer" (M3); the greyscale and colour-blind passes run with
   the loot sources RC5 marks and every Windfall state in frame (Dormant,
   awake, held, nabbed; M3); once the RS owner approves the RC7 request,
   the six Windfall cues join the audio blind-ID test at 85% in the
@@ -1332,7 +1352,7 @@ Q3:** B, no premise; C, folk horror; D, full absurdism.
   hub set and on the Stillwatch; the role-ID gate adds "ambient resident
   vs its faction's roster types vs Muster card vs keeper", "ambient
   resident vs implied dream figure" (the Stillwatch), "hub coat display
-  vs EV Coat Hooks and implied-figure silhouettes" and every Lingerer
+  vs EV Coat Hooks and implied-figure silhouettes" and every Straggler
   prop against reserved silhouettes and items; an occlusion check (no
   figure hides a station); the audio blind-ID test at 85% sets the camp
   music box against the Heart bed's box, the Gaol bed's box (8.3), the
@@ -1410,6 +1430,23 @@ matches no cut goes to the client (19.2).
   rule until the RS owner rules; fallback: no row, and the kit cards'
   neutral "Carried from the start" provenance line stands either way
   (19.2).
+- **Premise words in names (naming pass NP-3; agreed, naming pass Q1,
+  option A; naming pass design 4.7):** a name may not contain a reserved
+  premise word (dream, sleep, slumber, wake, nightmare, reverie, lucid,
+  lullaby, bed, pillow, cradle and the other forms the naming pass 4.7
+  lists) except on the waiver list **W-DREAM-1**: (a) the UI furniture
+  that names the run's frame (Dream card, Dream track and its ribbon,
+  Dream step, Dream's Due and its tags, Dream map, "What the dream
+  kept", "New in the dream", "the dream unravels", Dream Rules pages,
+  the Unwoken Roll, "You did not wake", Asleep and Dormant, Dreambook
+  pages, "dreamed option(s)"); (b) the named F5 Heart and Wake-theme
+  content listed one by one in the naming pass 4.7 (b) (The Endless
+  Wake, The Dreamer's Heart, Sleepwalker, Insomniac, Lullabist, The
+  Lullaby, Lullaby Glyph and the rest); (c) everything else is banned,
+  and the Heart has no blanket licence. The Waking City is held under
+  W-DREAM-HOLD-1 until the M4 content lock. "The Dreamer" never stands
+  alone as a name. Lines may use premise words within NR8 and AN4;
+  names may not. Checked by V24 r7 (11.2).
 
 ### 7.6 What to avoid
 
@@ -1455,6 +1492,14 @@ matches no cut goes to the client (19.2).
   Oath names included); trinket kind words; for player-facing heirloom
   strings, "passing", "bequest", "legacy" and "inherit"; and the Malady
   forbidden-allusion list. Checked by V22 (e) from M2.
+- **The naming pass N-rules (naming pass NP-2; approved with the naming
+  pass design on 2026-11-24; naming pass design 4):** this section
+  adopts the N-rules by reference. The blocklist outranks NR1; the SRD
+  function test and its allowlist apply (naming pass 4.5, which contests
+  the literal reading of the SRD lines above, told plainly T1); the echo
+  and gazetteer checks apply; the filtered substring rule applies; Plain
+  tags are unique in scope. The N-rules add to, and never relax, this
+  section, RC1–RC9 and 8.0. Checked by V24 `NamingPass` (11.2).
 - **Church cap:** at most 2 church-dressed themes in any pool set. The
   Choir is one; the Tallow Abbey and the Inverted Cathedral never share a
   pool set with it.
@@ -1477,7 +1522,7 @@ the grim reading; a forbidden-imagery check, including the Dreamer line
 of 7.5. The sheet is a content artefact referenced from
 the theme record (`toneSheet`) and reviewed in the tone-by-depth gate.
 **Camp and hub (change CH-11; M2; camp and hub design 4.6, 5.1):** each
-sheet gains its theme's Lingerer set, in the camp register of 7.3
+sheet gains its theme's Straggler set, in the camp register of 7.3
 pillar 4.
 
 ---
@@ -1485,7 +1530,7 @@ pillar 4.
 ## 8. The theme catalogue (agreed, Q4)
 
 **Q4 (agreed):** the full M2 core of 8 themes (Gaol of Small Hours and
-Kennel Wood on floor 1; Drowned Choir, Silk Archive and Carnival of the
+Kennel Wood on floor 1; Drowned Choir, Cobweb Archive and Carnival of the
 Last Evening on floors 2–3; Long Supper and Gut of the World on floor 4;
 the Dreamer's Heart on floor 5), with the Endless Wake added if it
 passes its floor-1 test (8.2, 8.5); Cut 1 and Cut 2 pre-authorised as
@@ -1544,7 +1589,7 @@ after the check):**
   shares, per-encounter unit caps such as the Gut's acid cap, Frozen
   source caps, the Wake's dormant-bias exclusion, the Heart's morale
   shape by room); **fearless-anchor tags** (the Gut Knights, Wake
-  Pallbearers, Choir Vergers, Silk Misprints and the Night-Mare are
+  Pallbearers, Choir Vergers, Archive Misprints and the Pale Mare are
   tagged "kill the anchor, then the rest Cow"; change EP-29; M2;
   encounter placement design 6.16);
 - `keepsakeProps` and `keepsakeArenaDressing` (9.3; every non-final
@@ -1612,21 +1657,21 @@ after the check):**
 | Draft name | Collides with | Used instead |
 |---|---|---|
 | Sleeper (premise, Heart, final boss) | Enemies 17.4 template **Sleeper** | **the Dreamer**, the Dreamer's Heart |
-| Mourner (Wake minion), Chief Mourner | Herald **Mourners** (Dirge feature; morale report) | **Black-Crepe Guest** |
+| Mourner (Wake swarmer), Chief Mourner | Herald **Mourners** (Dirge feature; morale report) | **Black-Crepe Guest** |
 | Toll, Knell, Passing Bell; "Bell" head words (Bell-Ringer, Bell-Mother) | Herald spells Toll, Knell, Passing Bell | **Peal** (brute ability), **Clapper-Monk**, **the Drowned Carillon**, Undersong |
 | Dirge, Keening, Lament, Hush, Kindle | Herald subclass and spells; retired Herald names | **Sob, Wail**; the Mouthless Librarian |
 | Undertow (Tidecantor note, Mother Undertow) | Arcanist spell **Undertow** (the Soak combo) | **Riptide Note** |
-| Warden (Warden-Sergeant, Warden of Hours, Shushing Warden, Net-Warden) | Warden's Coif; Corridor Warden | **Jailer-Sergeant, the Jailer of Hours, Shusher, Netcaster** |
+| Warden (Warden-Sergeant, Warden of Hours, Shushing Warden, Net-Warden) | Warden's Coif; Corridor Warden (renamed Corridor Crossbow, naming pass NP-20) | **Jailer-Sergeant, the Jailer of Hours, Shusher, Netcaster** |
 | Fork (camp route choice) | Arcanist Spellcraft option **Fork** | **Two Doors** |
-| Deepening, Deepened | Arcanist **Deepen** and its rider | **Nightmare tiers** |
-| Threshold (tier and mechanic) | A generic term in 15 documents | **Shallows; Antechamber Catch-up** |
-| Errata (Archive artillery) | A section heading word in armour and trinkets | **Misprint** |
+| Deepening, Deepened | Arcanist **Deepen** and its rider | **Peril tiers** |
+| Threshold (tier and mechanic) | A generic term in 15 documents | **Shallows; Forecourt Top-up** |
+| Errata (Archive marksman) | A section heading word in armour and trinkets | **Misprint** |
 | Glint (Mirror Court skirmisher) | Shade on-target display **Glint** | **Shardling** |
 | Rime (Supper lurker), Grease | Conditions and Arcanist *Rime*; consumables *Grease* | Lurker cut; fat is "dripping" in dressing only |
-| Heart's Echoes | Trinket **Ward Echo** | **Keepsakes** |
+| Heart's Echoes | Trinket **Ward Echo** | **Souvenirs** |
 | Gatekeeper (Model B boss role) | Companions kit **Gatekeeper** | Not used |
 | Oil Flask (Fire-Eater ability) | Consumables item **Oil Flask** | **Lamp-Oil Toss** |
-| Engulf (Bile Ooze ability) | Conditions **Engulfed** (Later); the SRD cube's Engulf | **Gulp** |
+| Engulf (Bile Ooze ability; the unit renamed Gall Slick, naming pass NP-20) | Conditions **Engulfed** (Later); the SRD cube's Engulf | **Gulp** |
 | Host, Hostess, guest names (Supper) | The Wake's **Guest of Honour** and Guests (one run can hold both) | **the Head of the Table**, **the Seneschal**, "diners" |
 | Black-Veil Cousin (Wake) | Charter RC3: a veil means fearless | **Black-Glove Cousin** |
 | Dirge-priest (Heart grim reading) | Herald **Dirge** | **vigil-singer** |
@@ -1641,7 +1686,9 @@ Figment, Lullabist, Tenant, Pylorus, Grim Surreal, ThemeParity,
 ClassThemeSpread, FloorTimeByTheme, LevelAtDoorByFloor; after the check:
 Lamp-Oil, Gulp, Smother, Seneschal, Head of the Table, Black-Glove,
 Carver, tomb-wisp, vigil-singer, Shroud-Keeper, Tomb Clock, Oathbroken,
-AntechamberDominatesArena, drawableSet.
+AntechamberDominatesArena, drawableSet. (A historical record: names the
+naming pass later renamed are listed here as they were checked; their
+current forms are in the naming pass register, NP-20.)
 
 ### 8.1 Summary
 
@@ -1650,9 +1697,9 @@ AntechamberDominatesArena, drawableSet.
 | 1 | **Gaol of Small Hours** | Shallows, F1 | **M2 core** | Lockdown: doors, noise and keys | sl, bl, pi | Bleeding, Staggered, Grappled, Dazed | none | 857‰ | 0 |
 | 2 | **Kennel Wood** | Shallows, F1 | **M1 subset, M2 core** | The pack and the horn | sl, pi, bl (RT-22) | Bleeding, Grappled, Dazed (5 total) | none | 1000‰ | 0 |
 | 3 | Endless Wake | Shallows, F1 | **M2 conditional** (else the first M3 unlock) | The sleeping house: dormant guests, coffin tells | bl, pi, psy | Staggered, Unfocused, Bleeding, Dazed | none | 714‰ | 0 |
-| 4 | **Drowned Choir** | Middle Dream, F2–3 | **M2 core** | The drowning line: Soaked plus cold and lightning | ltn, bl, cold | Soaked, Chilled, Staggered, Grappled | water | 857‰ | 0 |
-| 5 | **Silk Archive** | Middle Dream, F2–3 | **M2 core** | Webs and silence; fire is the key | pi, psy | Restrained, Poisoned, Unfocused, Grappled | web | 714‰ | 1 |
-| 6 | **Carnival of the Last Evening** | Middle Dream, F2–3 | **M2 core** | Oil and fire, both ways | fire, pi, bl | Burning, Smouldering, Oiled, Staggered | oil (+ fire) | 857‰ | 1 |
+| 4 | **Drowned Choir** | Midwater, F2–3 | **M2 core** | The drowning line: Soaked plus cold and lightning | ltn, bl, cold | Soaked, Chilled, Staggered, Grappled | water | 857‰ | 0 |
+| 5 | **Cobweb Archive** | Midwater, F2–3 | **M2 core** | Webs and silence; fire is the key | pi, psy | Restrained, Poisoned, Unfocused, Grappled | web | 714‰ | 1 |
+| 6 | **Carnival of the Last Evening** | Midwater, F2–3 | **M2 core** | Oil and fire, both ways | fire, pi, bl | Burning, Smouldering, Oiled, Staggered | oil (+ fire) | 857‰ | 1 |
 | 7 | **Long Supper** | Deep, F4 (F3–4 from M3) | **M2 core** | Freeze and shatter, both ways | cold, bl, pi | Chilled, Frozen, Staggered, Poisoned | none (tables) | 857‰ | 1 |
 | 8 | **Gut of the World** | Deep, F4 | **M2 core** | Attrition: Corroded and Withered | acid, pi, nec | Corroded, Withered, Poisoned, Grappled | bile (RT-13) | 714‰ | 1 |
 | 9 | **The Dreamer's Heart** | Heart, F5 fixed | **M2 core** | Waking: breakable dreaming groups; a capped war on concentration | psy, pi | Unfocused, Poisoned, Dazed, Restrained | web (bedsheets) | 714‰ | 1 |
@@ -1663,14 +1710,14 @@ The Wake adds 7 types and 2 bosses if it passes its gate.
 
 **`pairKey` per theme (lead's call; the at-will column lists the
 `primaryDamageType` first):** Gaol (slashing, none); Kennel (slashing,
-none); Wake (bludgeoning, none); Choir (lightning, water); Silk
+none); Wake (bludgeoning, none); Choir (lightning, water); Archive
 (piercing, web); Carnival (fire, oil); Supper (cold, none); Gut (acid,
 bile); Heart (psychic, web). No floor-1 theme shares a primary type
 with a band theme, so R4 never bites between floors 1 and 2 (10.3).
 
 **`signatureFamily` per theme:** Gaol doors; Kennel cover logs (was
 cover gates; change TR-22, told plainly; room terrain design 7.3); Wake
-coffins and curtains; Choir islands; Silk stacks; Carnival slicks;
+coffins and curtains; Choir islands; Archive stacks; Carnival slicks;
 Supper tables; Gut pools; Heart beds.
 
 **Tactical matrix: themes differ in kind, not amount.** Budgets stay
@@ -1681,7 +1728,7 @@ theme-agnostic **(settled, enemies 10.1)**.
 | Gaol | Stealth, closing doors, stealing keys, cowing | Noise |
 | Kennel | Walls, chokepoints, killing the leader, area attacks against packs | Standing in the open |
 | Choir | Lightning and cold, breaking grapples, dry ground, spacing | Fire reliance, clumping in water |
-| Silk | Fire, slashing, stealth | Noise, open firing lines |
+| Archive | Fire, slashing, stealth | Noise, open firing lines |
 | Carnival | Cold, spacing, burning oil away | Standing on slicks, edges |
 | Supper | Bludgeoning, the party's fire, spread formations | Slow, clumped parties |
 | Gut | Antidote and Remedy, cold, light armour | Heavy armour, heal reliance |
@@ -1693,7 +1740,7 @@ Every floor-1 theme meets all of these:
 - **(a) Default entry: 750‰ or more non-fearless.** The binding
   `Floor1ClassSpread` row is unproven under the adopted Herald package:
   Herald 11.5 shows a number only for the binding row (85.5, about 14
-  behind) and otherwise for the *non-adopted* Totem-lever column.
+  behind) and otherwise for the *non-adopted* Tipstaff-lever column.
 - **(b)** Every M2 floor-1 boss is authored with an **escort drawn from
   non-fearless types**.
 - **(c)** A 50–74% theme joins the floor-1 pool only after the
@@ -1705,7 +1752,7 @@ Every floor-1 theme meets all of these:
   also needs per-theme rows for any psychic at-will against a solo
   concentrating Arcanist. The Herald's own lever list (Herald 7.16)
   stays owed.
-- **(d)** 0 mindless types; no hard control; at most 1 controller, never
+- **(d)** 0 mindless types; no hard control; at most 1 hinderer, never
   in rooms 1–2; lurkers never in main-path rooms 0–2; ambushes only after
   room 2; no surprise at `mainPathIndex` 0–1 **(settled)**.
 - **(e)** Content tests: Scavengers fills at the floor-1 solo patrol
@@ -1734,7 +1781,7 @@ Every floor-1 theme meets all of these:
   countdowns, a startle; no damage, condition or unit movement) are not
   hazards and are legal on floor 1, at most 1 per room at main-path
   index 3 or more, so floor 1 stays dry in the base game.
-  **Nightmare tier 2+ (change HZ-25; agreed, hazards Q4; M3; hazards
+  **Peril tier 2+ (change HZ-25; agreed, hazards Q4; M3; hazards
   design 6.19):** below tier 2 floor 1 stays hazard-free; from tier 2
   each floor-1 theme gains one damaging hazard package (the Gaol's
   Treadwheel, with the warden's stove promoted to a Hot piece; the
@@ -1743,14 +1790,14 @@ Every floor-1 theme meets all of these:
   rooms per floor at main-path index 3 or more, on floor 1's own bands.
 - **Floor-1 traps and locks (change TL-19; M2; traps and locks design
   6.19, 7.2–7.4):** 1–2 traps, the first on the main path being the
-  `alwaysKnown`, labelled, noise-only **lesson trap** (Gaol bell
+  `alwaysKnown`, labelled, noise-only **lesson trap** (Gaol keyring
   tripwire, Kennel tin-can tripwire (pending TL-43, 8.4), Wake creaking
   board), which
   teaches each theme's lesson axis (f); no trap in main-path rooms 0–1
   and no damaging trap in rooms 0–2, as (d); no trap trigger on a patrol
   Circuit or within 6 of a fight host; pushes stop before F1 trigger
   squares; trap conditions end when combat starts; detect DC ≤ F1
-  Standard; damage ≤ 3, with one off-path device ≤ 4 (the Gaol's
+  Middling; damage ≤ 3, with one off-path device ≤ 4 (the Gaol's
   Clock-Weight); no hard control. Locks: Plain, plus at most 1
   consequence lock after room 2 (the Gaol's Crier, or the Wake's Viewing
   Door, the one F1 Tattle); no Splinter, no mimic and no Wager room on
@@ -1777,7 +1824,7 @@ rare counts); otherwise 8.5 stands.
   appear only on Grilles; never keyholes (RC3; change FL-7, floor layout
   design 8.1). Palette: iron grey and whitewash with rust
   accents, under pale gaslight (moved off amber after the check, so the
-  floor-1 pair and the Gaol–Silk adjacency differ). *One wrong detail,
+  floor-1 pair and the Gaol–Archive adjacency differ). *One wrong detail,
   in every room:* every clock shows a different hour.
 - **Obsession:** inmates serving time for crimes they have not yet
   committed. **Grim reading:** an oubliette for the forgotten.
@@ -1785,10 +1832,10 @@ rare counts); otherwise 8.5 stands.
 
 | Type | Role | Profile | Kit |
 |---|---|---|---|
-| Inmate | minion | skittish | shiv (slashing) + Help |
+| Inmate | swarmer | skittish | shiv (slashing) + Help |
 | Escapee | skirmisher | skittish | thrown spoon-shiv (piercing); Disengage; leads Packs of Inmates (one family) |
 | Turnkey | soldier, `armed`, `promotable` | normal | key-club (bludgeoning) + Shove; limited Manacle (Grappled; Staggered if RT-14 is refused); carries the keyring (steal target); cell-door shield |
-| Lamplighter | artillery | normal | crossbow (piercing); limited line 4 Lantern Bolt (piercing) |
+| Lamplighter | marksman | normal | crossbow (piercing); limited line 4 Lantern Bolt (piercing) |
 | The Lifer | brute | normal | manacled fists (bludgeoning) + Shove; limited Chain Swing (Staggered) |
 | Silent Penitent | lurker | fearless (hooded vow, minded) | Ambush opener with a shiv (Bleeding); hides on the cots; never in rooms 0–2 |
 | Jailer-Sergeant | leader | steady | halberd (slashing), Frighten, Command |
@@ -1802,14 +1849,14 @@ rare counts); otherwise 8.5 stands.
   - the densest closed-door network in the game, with path hearing −3
     per closed door (enemies 12.3), so sneaking is easy and noise is the
     risk;
-  - bell tripwires (noise; floor-1 joining cap 1);
+  - keyring tripwires (noise; floor-1 joining cap 1);
   - one shut-door pair (a guard post and a neighbour through a `pairDoor`
     that starts propped open) **pending the enemies owner's ruling on the
     `pairDoor` reading**; if refused, one near pair instead (change
     FL-11; floor layout design 6.6, 7.2); **or the hooded cot instead,
     one per seed** (change EP-13; M2; told plainly; encounter placement
     design 6.17): on hooded-cot seeds the floor has no shut-door pair,
-    and Lockdown shows through the door network and the bell tripwires;
+    and Lockdown shows through the door network and the keyring tripwires;
   - the Turnkey's keyring is the floor's steal target and opens a cell
     cache (locks hook); the Turnkey is the floor's **Keybearer**, and
     the Jailer's keyring opens every cell-tagged lock, gained by kill,
@@ -1823,7 +1870,7 @@ rare counts); otherwise 8.5 stands.
   joiner (the party close action, FL-8; shutting mutes and
   delays; it does not cut a path unless locked; floor layout design
   7.2, 9.2).
-- **Hooks:** cell-block grid layout; traps: bell tripwire (noise),
+- **Hooks:** cell-block grid layout; traps: keyring tripwire (noise),
   portcullis (damage only in M2; the Arch-to-Grille Bar is M3, flagged
   against 7.6; change TL-31; traps and locks design 7.2), "Appeals"
   trapdoor (Prone), no hard control; locks: Plain cell padlocks (M1), 1
@@ -1856,11 +1903,11 @@ rare counts); otherwise 8.5 stands.
     rig; no new type.
 - **Role props (RC2):** Turnkey, the cell-door shield; Jailer-Sergeant,
   a raised key-staff emblem; Penitent's rest tell, a hood that turns to
-  follow; minions share striped cloth. **Faction motif:** manacles and
+  follow; swarmers share striped cloth. **Faction motif:** manacles and
   striped cloth.
 - **Sound:** irregular ticking in 5/4, music box, cello; no door slams
   or bells in the bed (RC7 cue sounds).
-- **Checks:** 7 types and 7 roles; leader, minion, promotable and armed
+- **Checks:** 7 types and 7 roles; leader, swarmer, promotable and armed
   present; 2 weakness families; no universal tag. **Teetering:** the
   Gaol has Shove users, traps (known armed traps are hazards,
   conditions 11.3) and a full 6, so Teetering would make 7;
@@ -1881,15 +1928,15 @@ rare counts); otherwise 8.5 stands.
 
 | Type | Role | Profile | Kit |
 |---|---|---|---|
-| Whelp | minion | skittish | bite (piercing) + Help |
+| Whelp | swarmer | skittish | bite (piercing) + Help |
 | Gaunt Hound | skirmisher | skittish | slashing bite; limited Worry (Grappled); Disengage |
 | Kennel Mastiff | brute | skittish | **the settled M1 Bleeding claw** + Shove; Charge (exactly the settled M1 brute, enemies 17.1) |
 | Huntsman | soldier, `armed`, `promotable` | normal | hunting maul and boar-board shield (the weapons M1 warhammer-and-shield soldier: bludgeoning, Push, Interpose) + Shove; a boar spear (reach, piercing) only on a promoted or F2+ pike variant, never at room level 1 (weapons 15.1) (change RT-22; cross-document comparison 2026-11-23, CC-2) |
-| Poacher | artillery, `armed` | normal | hunting sling (the weapons M1 sling artillery: bludgeoning, Push) (change RT-22; cross-document comparison 2026-11-23, CC-2); limited burst 1 Flushing Shot (damage only) |
+| Poacher | marksman, `armed` | normal | hunting sling (the weapons M1 sling marksman: bludgeoning, Push) (change RT-22; cross-document comparison 2026-11-23, CC-2); limited burst 1 Flushing Shot (damage only) |
 | Houndmaster | leader | steady | hunting knife (slashing), Frighten (the horn), Command; portrait-pole emblem |
 | Ghillie | lurker | normal | hook-knife (slashing); Ambush opener (Bleeding); never in rooms 0–2 |
 
-- **The 5:** Bleeding, Grappled (the Gaunt Hound's Worry and snares),
+- **The 5:** Bleeding, Grappled (the Gaunt Hound's Worry and wire loops),
   Dazed (boss), plus Prone and Frightened. These are exactly the
   approved M1 kit space, so the M1 art and kit carry straight into M2.
   Teetering, if counted (RT-14), makes 6, so no drop is needed.
@@ -1910,13 +1957,13 @@ rare counts); otherwise 8.5 stands.
   as weapons 9.5 and 26 need), partitioned in the rules into ordinary
   rooms joined by Portals and read as one wood on screen (`beads`;
   change FL-1, floor layout design 7.3); one horn near pair at index ≥ 4
-  (FL-11, floor layout design 6.6); traps: snares (Grappled), alarm horns
+  (FL-11, floor layout design 6.6); traps: wire loops (Grappled), alarm horns
   (noise; **pending request**, change TL-43, RS owner and art, M2,
   traps and locks design 7.3: the horn tripwire is re-told as the
   **tin-can tripwire**, noise 10 at the cans with the one reserved alarm
   cue, because horns stay reserved for joiners and a horn on a post
   reads as the HZ Horn Post Cord); staked pits are a walkable harm square (piercing, damage
-  only, no Teetering) at Nightmare tier 2+, M3 (re-read from "Later
+  only, no Teetering) at Peril tier 2+, M3 (re-read from "Later
   (drop hazard)"; change HZ-25, told plainly; hazards design 6.19).
 - **Bosses** (3 Renditions each in M2, as 8.3; change BR-23; agreed,
   boss rooms Q1; boss rooms design 4.10.1, 5.3):
@@ -1925,8 +1972,8 @@ rare counts); otherwise 8.5 stands.
     BR-18, told plainly; boss rooms design 4.7.6). It is the
     approved M1 boss kit **(settled, enemies 17.5)**: Bleeding claw,
     bite, roar (Frightened signature), slam, Dazed swap at 50%.
-    Unarmed, it **guards** its signature, Bellwarden's Mail, in a
-    signature cache in its den; its plate reads "Guards: Bellwarden's
+    Unarmed, it **guards** its signature, Hound-Collar Mail, in a
+    signature cache in its den; its plate reads "Guards: Hound-Collar
     Mail" (read, not changed; change IR-13; agreed, item rolls Q5; M1;
     item rolls design 4.13). **Pending request (change IR-13; the RS
     owner rules; segment 9 and art support; item rolls design 4.13;
@@ -1948,7 +1995,7 @@ rare counts); otherwise 8.5 stands.
 - **M1 subset:** Kennel Mastiff, Huntsman, Poacher and Old Ragged: the
   approved "3 types plus 1 boss" **(settled, enemies 21)**. In M1 the
   Huntsman is the weapons M1 warhammer-and-shield soldier and the
-  Poacher the M1 sling artillery, dressed as above (weapons 15.3, 15.4;
+  Poacher the M1 sling marksman, dressed as above (weapons 15.3, 15.4;
   armour 12.3, 13.6) (change RT-22; cross-document comparison 2026-11-23, CC-2).
 - **Role props (RC2):** Huntsman, a hide-covered hurdle; Houndmaster,
   the portrait-pole emblem; Ghillie's rest tell, a twitching leaf cape.
@@ -1970,11 +2017,11 @@ rare counts); otherwise 8.5 stands.
 
 | Type | Role | Profile | Kit |
 |---|---|---|---|
-| Black-Crepe Guest | minion | skittish | hatpin (piercing) |
+| Black-Crepe Guest | swarmer | skittish | hatpin (piercing) |
 | Black-Glove Cousin | skirmisher | skittish | thrown hatpins (piercing) |
 | Pallbearer | soldier, `armed`, `promotable` | fearless (veiled) | coffin pole (bludgeoning) + Shove |
 | Gravedigger | brute | normal | spade (bludgeoning) + Shove; limited Clout (Staggered) |
-| Hired Wailer | artillery | normal | Sob (psychic, ranged); limited burst 1 Wail (psychic) |
+| Hired Wailer | marksman | normal | Sob (psychic, ranged); limited burst 1 Wail (psychic) |
 | The Late Uncle | lurker | fearless (dead, veiled, minded) | cane (bludgeoning); Ambush opener with a razor (Bleeding); never in rooms 0–2 |
 | Undertaker | leader | steady | black cane-sword (piercing), Frighten, Command |
 
@@ -1997,7 +2044,7 @@ rare counts); otherwise 8.5 stands.
 - **`signatureFeature`:** coffins as fixed Low cover (units never
   occupy a piece; hiding comes from Tall canopies and Drapes; change
   TR-22, told plainly; room terrain design 7.4) and
-  drawn curtains (line-of-sight blockers the party can open or close:
+  drawn arras (line-of-sight blockers the party can open or close:
   the Drape Portal kind; drawing one in combat costs the action; change
   FL-7, floor layout design 9.2).
 - **Hooks:** manor-and-crypt layout (galleries with niches); traps: a
@@ -2007,11 +2054,11 @@ rare counts); otherwise 8.5 stands.
   Drapes as sight breaks; Overturn candelabra (M3).
 - **Role props (RC2):** Pallbearer, the coffin lid; Undertaker, a tall
   black-plumed staff; the Late Uncle's rest tell, a cane tapping in
-  time; minions share black crepe. **Faction motif:** armbands and
+  time; swarmers share black crepe. **Faction motif:** armbands and
   lilies.
 - **Bosses:**
   - **The Guest of Honour:** Eulogy (Frightened signature); at 50%, (a)
-    Last Rites (Dazed).
+    Final Respects (Dazed).
   - **The Executor of the Will:** reads the will (Frightened signature);
     at 50%, (d) announced Guests.
   - Escorts are Guests, Cousins and the Undertaker only; **never** the
@@ -2021,7 +2068,7 @@ rare counts); otherwise 8.5 stands.
 - **Gate to join the M2 floor-1 pool:** 8.2 (c), plus the
   Wailer-against-a-concentrating-Arcanist row.
 
-### 8.6 Middle Dream: 4. The Drowned Choir (F2–3; M2 core)
+### 8.6 Midwater: 4. The Drowned Choir (F2–3; M2 core)
 
 - **Look:** a half-flooded nave, organ pipes of storm-glass, choristers
   with water pouring from their mouths. Standing water appears only on
@@ -2036,12 +2083,12 @@ rare counts); otherwise 8.5 stands.
 
 | Type | Role | Profile | Kit |
 |---|---|---|---|
-| Chorister | minion | normal | hymnal (bludgeoning) + Help |
+| Chorister | swarmer | normal | hymnal (bludgeoning) + Help |
 | Eel-Acolyte | skirmisher | skittish | cold bite |
 | Drowned Verger | soldier, `armed`, `promotable` | fearless (drowned, minded) | mace (bludgeoning) + Shove |
 | Clapper-Monk | brute | normal | bell-hammer (bludgeoning) + Shove; limited Peal (Staggered) |
-| Storm Organist | artillery | normal | lightning; limited line 4 Crescendo |
-| Tidecantor | controller | normal | Riptide Note (cold, Chilled minor); limited Pull Under (Grappled) |
+| Storm Organist | marksman | normal | lightning; limited line 4 Swell |
+| Tidecantor | hinderer | normal | Riptide Note (cold, Chilled minor); limited Pull Under (Grappled) |
 | Deacon | leader | steady | cold-iron crozier (cold), Frighten, Command |
 
 - **The 6:** Soaked (water squares), Chilled, Staggered, Grappled, plus
@@ -2060,16 +2107,16 @@ rare counts); otherwise 8.5 stands.
   under or adjacent to a fight room's party entry squares; at least 1
   dry island within 2 of each entrance; at most half of an encounter's
   enemy start squares in water; the enemies 6.4 round-1 guards computed
-  with the party Soaked and the arc fan-out counted, and Conduct (K3)
+  with the party Soaked and the arc fan-out counted, and Charged Water (K3)
   counted (change TR-26; room terrain design 6.8). These caps hold in
   every hazard state, Tide states included (change HZ-3; hazards design
   6.2.4, 11.3 `EntryCapsAllStates`).
-- **`signatureFeature`:** dry pews and dais islands; sluice gates.
+- **`signatureFeature`:** dry pews and dais islands; sluice doors.
 - **Hooks:** nave layout with side chapels; traps: sluice (one-shot
   Soak), falling chandelier (damage); cover: pillars; Wrecker: shoving
   into water; the Hymn Riddle lock (M3; change TL-32; traps and locks
   design 7.5).
-- **Terrain Law (change TR-22; room terrain design 7.5):** Conduct
+- **Terrain Law (change TR-22; room terrain design 7.5):** Charged Water
   across water (K3); the bell.
 - **Bosses:**
   - **The Drowned Carillon** (F2, level 6): Undersong (Frightened
@@ -2083,7 +2130,7 @@ rare counts); otherwise 8.5 stands.
 - **Sound:** a submerged organ, a choir a quarter-tone flat, muffled
   low chimes (no alarm-bell timbre, RC7).
 
-### 8.7 Middle Dream: 5. The Silk Archive (F2–3; M2 core)
+### 8.7 Midwater: 5. The Cobweb Archive (F2–3; M2 core)
 
 - **Look:** stacks rising out of sight, webs strung between them above
   head height only (floor-level web is always a web square, RC1),
@@ -2095,13 +2142,13 @@ rare counts); otherwise 8.5 stands.
 
 | Type | Role | Profile | Kit |
 |---|---|---|---|
-| Inkling | minion | mindless (animated ink) | nib (piercing) |
-| Scribe-Spider | controller | normal | bite (piercing, Poisoned minor); limited Web Shot (Restrained) |
+| Inkling | swarmer | mindless (animated ink) | nib (piercing) |
+| Scribe-Spider | hinderer | normal | bite (piercing, Poisoned minor); limited Web Shot (Restrained) |
 | Margin-Crawler | lurker | skittish | piercing; Ambush opener (Poisoned); hides in shelves |
 | Spine-Binder | brute, `promotable` | normal | awl-pike (piercing) + Shove; limited Stitch (Grappled) |
 | Shusher | soldier, `armed` | normal | Keen; glaive (reach, piercing) + Shove; Interpose |
-| Misprint | artillery | fearless (a misprint ghost, minded) | psychic bolt; limited burst Redaction |
-| Head Archivist | leader | steady | quill-sword (piercing), Frighten, Command |
+| Misprint | marksman | fearless (a misprint ghost, minded) | psychic bolt; limited burst Redaction |
+| Chief Archivist | leader | steady | quill-sword (piercing), Frighten, Command |
 
 - **The 6:** Restrained (web squares, Web Shot), Poisoned, Unfocused,
   Grappled, plus Prone and Frightened.
@@ -2126,16 +2173,16 @@ rare counts); otherwise 8.5 stands.
   TL-28; agreed, traps and locks Q2; M3; traps and locks design 6.14,
   7.6):** the Margin-Crawler in a catalogue drawer, its rest tell (a
   page that turns by itself) re-authored at container scale; the drawer
-  never shares a host with a catch.
+  never shares a host with a clasp.
 - **Terrain Law (change TR-22; room terrain design 7.6):** burn webs off
   the aisles (K2); lamps against fire-weak spiders.
 - **Bosses:**
   - **The Mouthless Librarian** (F2): "Shh" (Frightened signature);
     limited Index Card (Restrained); at 66%, (e) webs; at 33%, (d)
     Inklings.
-  - **The Weaver of the Index** (F3): Cross-Reference (a limited
+  - **The Weaver of the Index** (F3): Footnote (a limited
     Restrained line, signature); at 66%, (b); at 33%, (e) webs.
-- **Role props (RC2):** Shusher, a lectern board; Head Archivist, a
+- **Role props (RC2):** Shusher, a lectern board; Chief Archivist, a
   raised quill-standard; Scribe-Spider, an orbit of loose pages;
   Margin-Crawler's rest tell, a page that turns by itself. **Faction
   motif:** ink-stained vellum and spectacles.
@@ -2148,7 +2195,7 @@ rare counts); otherwise 8.5 stands.
   the bed keeps a steady floor level, with no sudden silences that
   could be read as a stealth cue (RC7).
 
-### 8.8 Middle Dream: 6. The Carnival of the Last Evening (F2–3; M2 core)
+### 8.8 Midwater: 6. The Carnival of the Last Evening (F2–3; M2 core)
 
 - **Look:** a funfair at permanent dusk; bruise-purple and faded
   red-and-cream tents pegged to stone; carousel horses fixed on poles
@@ -2165,12 +2212,12 @@ rare counts); otherwise 8.5 stands.
 
 | Type | Role | Profile | Kit |
 |---|---|---|---|
-| Roustabout | minion | skittish | tent stake (piercing) |
+| Roustabout | swarmer | skittish | tent stake (piercing) |
 | Knife-Thrower | skirmisher | normal | knives (piercing) |
 | Lion-Tamer | soldier, `armed`, `promotable` | normal | prod-fork (piercing) + Shove; the chair silhouette |
-| Strongman | brute | normal | barbell (bludgeoning) + Shove; limited Bend the Bar (Staggered) |
+| Weightlifter | brute | normal | barbell (bludgeoning) + Shove; limited Bend the Bar (Staggered) |
 | Carousel Horse | brute | mindless construct | trample (bludgeoning) + Shove; limited Rear (Staggered) |
-| Fire-Eater | artillery | normal | thrown torch (fire); limited line 4 breath; limited burst 1 Lamp-Oil Toss (Oiled) |
+| Fire-Eater | marksman | normal | thrown torch (fire); limited line 4 breath; limited burst 1 Lamp-Oil Toss (Oiled) |
 | Ringmaster | leader | steady | cane-sword (piercing), Frighten, Command |
 
 - **The 6:** Burning, Smouldering (fire counts 2), Oiled, Staggered,
@@ -2233,11 +2280,11 @@ rare counts); otherwise 8.5 stands.
 
 | Type | Role | Profile | Kit |
 |---|---|---|---|
-| Frozen Footman | minion | mindless | iced decanter (bludgeoning) |
+| Still Footman | swarmer | mindless | iced decanter (bludgeoning) |
 | Glutton | brute, `promotable` | normal | belly slam (bludgeoning) + Shove; limited Second Helping (Staggered) |
 | Butler-at-Arms | soldier, `armed` | normal | rapier (piercing) + Shove; Parry; silver salver shield |
-| Sommelier | controller | normal | iced wine (cold; Poisoned minor, a corked vintage); limited `freezing` Chilled Pour → **Frozen** (hard; `readyAt` 2, cooldown 3; at most 1 source per encounter, enemies 10.3) |
-| Ice Sculptor | artillery | normal | cold shards; limited line 4 |
+| Sommelier | hinderer | normal | iced wine (cold; Poisoned minor, a corked vintage); limited `freezing` Cold Pour → **Frozen** (hard; `readyAt` 2, cooldown 3; at most 1 source per encounter, enemies 10.3) |
+| Ice Sculptor | marksman | normal | cold shards; limited line 4 |
 | Carver | skirmisher | skittish | carving fork (piercing) |
 | The Seneschal | leader | steady | silver ladle (bludgeoning), Frighten, Command |
 
@@ -2255,9 +2302,9 @@ rare counts); otherwise 8.5 stands.
   Sommelier's pour Freezes, bludgeoning shatters, and fire ends Chilled
   (and Frozen; change TR-22, room terrain design 7.8).
   The party's bludgeoning and cold users get the same combo against the
-  diners. The **Iced padlock** (change TL-32; M2; traps and locks design
+  diners. The **Frost-seized padlock** (change TL-32; M2; traps and locks design
   7.8): picking it has disadvantage, any fire thaws it to normal, and a
-  bludgeoning Smash shatters it at Athletics Easy (noise 6); the
+  bludgeoning Smash shatters it at Athletics Mild (noise 6); the
   Place-Setting Riddle lock is M3.
 - **Deliberately dry** (no condition squares; no ice), as the Deep
   contrast to the Gut; condition-free squares appear (shattered-crystal
@@ -2277,7 +2324,7 @@ rare counts); otherwise 8.5 stands.
   Choir under `LayoutDistinct` (floor layout design 7.8, 12).
 - **Role props (RC2):** Butler-at-Arms, the salver shield; the
   Seneschal, a tall white steward's rod; Sommelier, an orbit of frosted
-  glasses; minions carry decanters, never trays. **Faction motif:**
+  glasses; swarmers carry decanters, never trays. **Faction motif:**
   napkins and place cards.
 - **Pending request (change IR-12; the RS owner rules; segment 9
   supports; M2; item rolls design 4.12; cross-document comparison 2026-11-23, CC-87):** flag the Butler-at-Arms `promotable`, so the
@@ -2296,7 +2343,7 @@ rare counts); otherwise 8.5 stands.
 - **Look:** a gut the size of the world, with no owner shown (7.5).
   Ribbed, breathing corridors; tenants' houses and chapels built inside.
   Flesh pink and bone with a desaturated bile olive; the saturated bile
-  green is kept for bile squares and acid (RC4); wet claymation
+  green is kept for gall squares and acid (RC4); wet claymation
   materials. *Dream device:* the chapels in the backdrop are slowly
   being digested.
 - **Obsession:** domestic life inside a monster; tenants complain about
@@ -2304,15 +2351,15 @@ rare counts); otherwise 8.5 stands.
 
 | Type | Role | Profile | Kit |
 |---|---|---|---|
-| Tenant | minion | skittish | fork (piercing) |
+| Tenant | swarmer | skittish | fork (piercing) |
 | Gutworm | lurker | skittish | bite (piercing); Ambush opener (Poisoned) |
 | Antibody Knight | soldier, `armed`, `promotable` | fearless (masked) | spear (piercing) + Shove |
-| Bile Ooze | brute | mindless (bleed immune; with mindless's `mind`, 2 tags, 1 control) | acid slam + Shove; limited Gulp (Grappled) |
-| Acid-Spitter | artillery | normal | acid; limited burst 1 |
-| Spore-Priest | controller | normal | acid (Poisoned minor); limited Sporecloud (Poisoned) |
+| Gall Slick | brute | mindless (Bleeding immune; with mindless's `mind`, 2 tags, 1 control) | acid slam + Shove; limited Gulp (Grappled) |
+| Acid-Spitter | marksman | normal | acid; limited burst 1 |
+| Spore-Priest | hinderer | normal | acid (Poisoned minor); limited Sporecloud (Poisoned) |
 | The Landlord | leader | steady | cleaver (necrotic), Frighten, Command |
 
-- **The 6:** Corroded (acid; bile squares), Withered, Poisoned,
+- **The 6:** Corroded (acid; gall squares), Withered, Poisoned,
   Grappled, plus Prone and Frightened.
 - **Damage:** acid, piercing, necrotic. **Weaknesses:** Ooze to cold
   (elemental), Tenants to radiant (spirit). `counterType` cold. Legal
@@ -2323,14 +2370,14 @@ rare counts); otherwise 8.5 stands.
   design 7.9): 1 supply opens it with no check.
 - **Balance caps (balance critique; illustr.):** at most 2 acid
   sources per encounter (a source is an acid-dealing unit, a swollen
-  sac, Brim or the Gullet; bile squares, and so the Acid Tide, are never
+  sac, Brim or the Gullet; gall squares, and so the Acid Tide, are never
   counted; change HZ-5, agreed text, told plainly; hazards design 6.5),
   the Tenants' acid overlay counted (`AcidSourcesAfterOverlay`; change
   EP-31; M2; encounter placement design 6.4);
   armour
   `verbDefencePermille` measured on this theme first; ClassThemeSpread
   must hold for the Vanguard.
-- **Bile squares** (Corroded on entry; change RT-13, accepted by the
+- **Gall squares** (Corroded on entry; change RT-13, accepted by the
   client on 2026-11-21; cross-document comparison 2026-11-23, CC-82).
 - **`signatureFeature`:** bile pools and sphincter doors (locks hook).
 - **Hooks:** looping tube layout; one resonance near pair (FL-11, floor
@@ -2370,7 +2417,7 @@ rare counts); otherwise 8.5 stands.
   or giant-furniture images, with at most one domestic-bedtime prop per
   visit (`HeartBedroomCap`) and no wind-up or winding prop (change
   EV-25; M2; events design 4.11).
-- **Keepsakes** (9.3) dress it with the visited themes' props.
+- **Souvenirs** (9.3) dress it with the visited themes' props.
 - **Hooks:** the single bedchamber is partitioned in the rules into
   ordinary rooms by full-height giant furniture and read as one place on
   screen; the main path spirals inward to the bed arena (`spiral`;
@@ -2382,26 +2429,26 @@ rare counts); otherwise 8.5 stands.
 
 | Type | Role | Profile | Kit |
 |---|---|---|---|
-| Figment | minion | mindless | psychic touch |
+| Shadow-Puppet | swarmer | mindless | psychic touch |
 | Sleepwalker | soldier, `armed`, `promotable` | skittish | fire-poker (piercing) + Shove; headboard shield |
 | Storybook Knight | soldier | skittish (a hero who failed, still re-enacting the tale; cowering reads as shame) | lance (piercing) + Shove; Interpose; storybook-cover shield; visor up (RC3) |
-| Night-Mare | skirmisher | fearless (minded beast) | dread hoof (psychic) |
-| Insomniac | artillery | normal | alarm-bolt crossbow (piercing); limited burst Clangour (psychic) |
-| Lullabist | controller | normal | psychic (Poisoned minor: a sleeping draught); limited Lullaby (Dazed) |
+| Pale Mare | skirmisher | fearless (minded beast) | dread hoof (psychic) |
+| Insomniac | marksman | normal | alarm-bolt crossbow (piercing); limited burst Din (psychic) |
+| Lullabist | hinderer | normal | psychic (Poisoned minor: a sleeping draught); limited Soft Song (Dazed) |
 | Mother-Shape | leader | steady | knitting-spear (piercing), Frighten, Command |
 
 - **The 6:** Unfocused, Poisoned, Dazed, Restrained (bedsheet web
   squares), plus Prone and Frightened. No hard control.
-- **Damage:** psychic, piercing. **Weaknesses:** Figments to radiant
-  (spirit), Insomniacs' moth-wool to fire (elemental), Night-Mare to
+- **Damage:** psychic, piercing. **Weaknesses:** Shadow-Puppets to radiant
+  (spirit), Insomniacs' moth-wool to fire (elemental), Pale Mare to
   bludgeoning (physical). `counterType` radiant. Legal overlay:
   Sleepwalker piercing → psychic. Teetering fallback: drop the bedsheet
   squares.
 - **Poisoned keeps Antidote live in every run.**
 - **Psychic cap (lead's call, after the check):** the Heart is on every
   route, so its war on concentration is capped: at most 2 types with a
-  psychic at-will per encounter, and Figments (psychic touch) as at most
-  one minion pack per encounter. ClassThemeSpread is gated on the Heart
+  psychic at-will per encounter, and Shadow-Puppets (psychic touch) as at most
+  one swarmer pack per encounter. ClassThemeSpread is gated on the Heart
   and on each final boss (11.4), so the Arcanist and the Herald are not
   tuned against on every run's last floor.
 - **Law, waking:** skittish dreaming groups break early (Paper burns
@@ -2415,8 +2462,8 @@ rare counts); otherwise 8.5 stands.
 - **Morale shape by room (fun critique; a `placementRules` entry):**
   early main-path rooms are skittish (fast; "waking"); the elite room and
   the last guard post before the boss are led by the Mother-Shape or
-  anchored by a fearless Night-Mare (enemies 14.4, 17.2: only a
-  leader-role type or a Commanding soldier or controller leads). The
+  anchored by a fearless Pale Mare (enemies 14.4, 17.2: only a
+  leader-role type or an Exhorting soldier or hinderer leads). The
   floor escalates instead of deflating.
 - **Role props (RC2):** Sleepwalker, a headboard; Storybook Knight, a
   storybook-cover shield; Mother-Shape, a raised knitting-spear with
@@ -2431,7 +2478,7 @@ rare counts); otherwise 8.5 stands.
   - **The Night Governess:** long-limbed, stooped under the ceiling (its
     height shown by proportion, RC6; rules-size ≤ Large, change BR-18,
     told plainly; boss rooms design 4.7.6); she tucks intruders in. Tuck In
-    (Restrained signature; renamed **Smother** if its banner does not
+    (Restrained signature; renamed **Tuck Tight** if its banner does not
     read sinister in the tone-by-depth review); at 66%, (e) bedsheets;
     at 33%, (d) Sleepwalkers.
   - **The Rousing Engine:** a clockwork alarm with a bell-and-hammer
@@ -2449,11 +2496,11 @@ rare counts); otherwise 8.5 stands.
     cannot be failed; it obeys `FinalBossNoDreamer`. A harmful set piece
     would be a new client question.
 - **Grim-reading renames** (used only if surrealism is dropped, 7.2;
-  lead's call): Figment → tomb-wisp; Sleepwalker → entranced votary;
-  Storybook Knight → Oathbroken knight; Night-Mare → tomb-steed;
+  lead's call): Shadow-Puppet → tomb-wisp; Sleepwalker → entranced votary;
+  Storybook Knight → Faithless knight; Pale Mare → tomb-steed;
   Insomniac → vigil-keeper; Lullabist → vigil-singer; Mother-Shape →
   tomb-matron; the Night Governess → the Shroud-Keeper; the Rousing
-  Engine → the Tomb Clock; Law "waking" → "the god's slumber: its
+  Engine → the Tomb Clock; Law "waking" → "the god's drowse: its
   servants break when disturbed".
 - **Sound:** the lullaby leitmotif heard whole for the first time, then
   broken; distorted quotes of every visited floor's score, stripped of
@@ -2466,14 +2513,14 @@ The unlock order spends breadth on the deep floors first (fun critique).
 | Order | Theme | Tier / floors | Wave | Law | Blocker / note |
 |---|---|---|---|---|---|
 | 1 | **the Lullaby** (third final boss) | F5 | M3 | Unfocused and Frightened kit | — |
-| 2 | **Mirror Court** | Deep, F3–4 | M3 | Hidden against radiant | Radiant ruling RT-15. Shade fixes: party-facing radiant on at most 2 types; the Doppel opener Blinded only; ClassThemeSpread for the Shade. 667‰, the one route-allowed theme below 700‰. Skirmisher named Shardling |
+| 2 | **Mirror Court** | Deep, F3–4 | M3 | Hidden against radiant | Radiant ruling RT-15. Shade fixes: party-facing radiant on at most 2 types; the Reflection opener Blinded only; ClassThemeSpread for the Shade. 667‰, the one route-allowed theme below 700‰. Skirmisher named Shardling |
 | 3 | **Ossuary Opera** | Deep, F4 | M3 | The aria: anti-caster, dry | Raises necrotic presence (Graveward) |
 | 4 | Endless Wake (if not M2) | F1 | M3 | Tells and the sleeping house | 8.2 gate |
-| 5 | Moth Wedding | Middle Dream, F2–3 | M3 | Light against stealth | Radiant ruling; dark side routes keep the Stealth guarantee |
+| 5 | Moth Wedding | Midwater, F2–3 | M3 | Light against stealth | Radiant ruling; dark side routes keep the Stealth guarantee |
 | 6 | Ministry of Small Mercies | Shallows, F1–2 | M3 | Due process (morale-maximal, Weary attrition) | Psychic on floor 1 needs its own `Floor1ClassSpread` row |
 | 7 | Tallow Abbey | Shallows, F1–2 | M3–M4 | Oil and censer fire | Church cap: never in a pool set with the Choir; overlaps the Carnival's square kind |
 | — | Inverted Cathedral | Deep, F3–4 | M4 | Edges and light | The lethal-safe drop hazard is supplied (change HZ-26; hazards design 6.4, 7.11): rose-window Voids you fall upward from to the chandelier Snag, up to 50% of rooms, Plank catwalks, the censer-rope Cord, and the Chimes Ring Upward reversal round; its "light" Law waits for NM-9; church cap |
-| — | Orchard of Teeth, Night Market, Marionette Grove ("Strung Marionette"), Ledger Halls | various | M4 | — | Each needs a compliant floor-1 boss where floor-1 eligible |
+| — | Orchard of Teeth, Lantern Market, Marionette Grove ("Strung Marionette"), Ledger Halls | various | M4 | — | Each needs a compliant floor-1 boss where floor-1 eligible |
 | — | The Waking City (alternate final) | F5 | M4 | — | Offered at camp 4 after a first win |
 
 Unlockable themes and final bosses are main 4.7 content, never power
@@ -2488,21 +2535,21 @@ Unlockable themes and final bosses are main 4.7 content, never power
 | Mechanic | Adds | Time cost | Verdict |
 |---|---|---|---|
 | **Strata Draw** (route pre-roll, bands, pool rules, enumerator) | Deterministic variety, shareable seeds | 0 | **Adopted, M2** |
-| **Antechamber Catch-up** | Level 3 before the floor-1 boss | 0 | **Adopted, M2** |
+| **Forecourt Top-up** | Level 3 before the floor-1 boss | 0 | **Adopted, M2** |
 | **Stratum Card, camp card, dream track** | Theme readability; the act moment; the road not taken | 0 | **Adopted, M2** |
-| **Keepsakes** (finale dressing plus one prop) | A personal finale | 0 | **Adopted, M2** (echo *types* M4) |
+| **Souvenirs** (finale dressing plus one prop) | A personal finale | 0 | **Adopted, M2** (echo *types* M4) |
 | **Two Doors** (camps 1–2) | One real decision per camp | about 15 s per camp | **Built M2; on only if the gates pass; else M3 (agreed, Q2)** |
 | **Last Hollow choice** (final boss at camp 4) | A final decision | about 10 s | **With Two Doors, plus BossParity (agreed, Q2)** |
 | Door bounties | Reward bias by door | 0 | **Rejected** (stream complexity; no gain once milestones give pull). The Perilous Door's reveal is not one: it adds no draw (read, not changed; change LE-19; loot economy design 6.12) |
 | Theme milestones (profile marks) | A positive pull into hard themes | 0 | M2 marks; M3 unlocks |
-| Dream Fragments (off-path Lore checks for boss intel) | Lore gets a dungeon use; a tone outlet | 0.5–1 min per floor | **M3** (it counts against the failing floor-time gate). Accepted (change TL-34; change EV-30; segment 8; M3; traps and locks design 6.12; cross-document comparison 2026-11-23, CC-87): readings, Dream Fragments included, become no-roll thresholds that each yield a floor fact. Segment 8 folds Dream Fragments into F-BOSS options on Lore thresholds, 0 VP and 0 coin, through the FactLedger's one boss-fact queue (change EV-29; M3; events design 4.9) |
+| Fragments (off-path Lore checks for boss intel) | Lore gets a dungeon use; a tone outlet | 0.5–1 min per floor | **M3** (it counts against the failing floor-time gate). Accepted (change TL-34; change EV-30; segment 8; M3; traps and locks design 6.12; cross-document comparison 2026-11-23, CC-87): readings, Fragments included, become no-roll thresholds that each yield a floor fact. Segment 8 folds Fragments into F-BOSS options on Lore thresholds, 0 VP and 0 coin, through the FactLedger's one boss-fact queue (change EV-29; M3; events design 4.9) |
 | Omens (per-theme generator mutators inside the 6) | Variety inside a theme | 0 | M3 (test matrix × 4); a theme's Omen may switch on its one hazard Mood (an integer stage 0–2, capped at +1 per two rooms; change HZ-20; hazards design 6.9); Omens never touch the spoils list (LootDoorInvariant; read, not changed; change LE-19; loot economy design 6.12); an Omen floor may swap a Curiosity for its Omen Retelling (kind, not stats), and a Curiosity cost may be the named, visible event that advances a Mood within its cap (change EV-31; M3; events design 4.9) |
-| Nightmare tiers (ladder tiers that add kind, not stats) | Harder modes; the old deep overlay returns at tier 3 | 0 | M3 tiers 1–3; Later 4–5 (RT-21, client); hazards escalate in kind only (a kind added, a period shortened by at most 1, or a Mood stage higher; never a band), and each floor-1 theme gains its hazard package from tier 2 (change HZ-25; agreed, hazards Q4; hazards design 6.19); Curiosities gain **Provisos**, extra printed costs, never better gains, never on the free option, ticks or noise only on floor 1 (change EV-31; M3; events design 4.9) |
-| Perilous Door (+1 ladder on one floor) | Risk for choice | 0 | M3 with full Two Doors; client (a per-floor ladder, RT-21). Loot (agreed, loot Q5; change LE-19; M3; loot economy design 6.12): on its floor the boss reward card (enemies 17.5) reveals the pre-drawn fourth dreamed option, choose 1 of 4; no extra draw (6.4 LootDoorInvariant) **Camp and hub (change CH-20; M3; camp and hub design 7.6):** the Perilous toggle sits at the camp door station, on Two Doors cards only, behind the Nightmare-ladder unlock, changeable until Travel on and listed on its confirm. **Pending request (change CH-20; RS owner; M3):** whether it is also offered on single-door cards, camp 4 included; until the RS owner rules this reads "pending RS owner", and if refused it is offered only on Two Doors cards, never at camp 4 (camp and hub design 14.2) |
+| Peril tiers (ladder tiers that add kind, not stats) | Harder modes; the old deep overlay returns at tier 3 | 0 | M3 tiers 1–3; Later 4–5 (RT-21, client); hazards escalate in kind only (a kind added, a period shortened by at most 1, or a Mood stage higher; never a band), and each floor-1 theme gains its hazard package from tier 2 (change HZ-25; agreed, hazards Q4; hazards design 6.19); Curiosities gain **Provisos**, extra printed costs, never better gains, never on the free option, ticks or noise only on floor 1 (change EV-31; M3; events design 4.9) |
+| Perilous Door (+1 ladder on one floor) | Risk for choice | 0 | M3 with full Two Doors; client (a per-floor ladder, RT-21). Loot (agreed, loot Q5; change LE-19; M3; loot economy design 6.12): on its floor the boss reward card (enemies 17.5) reveals the pre-drawn fourth dreamed option, choose 1 of 4; no extra draw (6.4 LootDoorInvariant) **Camp and hub (change CH-20; M3; camp and hub design 7.6):** the Perilous toggle sits at the camp door station, on Two Doors cards only, behind the Peril-ladder unlock, changeable until Travel on and listed on its confirm. **Pending request (change CH-20; RS owner; M3):** whether it is also offered on single-door cards, camp 4 included; until the RS owner rules this reads "pending RS owner", and if refused it is offered only on Two Doors cards, never at camp 4 (camp and hub design 14.2) |
 | Unlockable strata | Return play through content | 0 | M3 (client, main 4.7; RT-18) |
 | Alternate final | Variety at the finale | 0 | M4 |
-| Lucid Key secret route | A secret floor-4 door | 0 (replaces a floor) | Later (needs a quest-item slot from items) |
-| Other Dreamers (a rival party as a visitor) | A cross-theme set piece | 0 | Later (enemies 18) |
+| Clear Key secret route | A secret floor-4 door | 0 (replaces a floor) | Later (needs a quest-item slot from items) |
+| Strangers (a rival party as a visitor) | A cross-theme set piece | 0 | Later (enemies 18) |
 | Seams (cosmetic next-theme preview) | Foreshadowing | 0 | M3 |
 | Concentrated guard posts | A lever-3 alternative | small | Simulator arm only (10.2) |
 | Element Echo (offensive element-choice lines read the found floor's `counterType`) | A theme read on rolled lines, no identity or draw change | 0 | **Held for an M3 client decision, default off** (change IR-19; agreed, item rolls Q4; item rolls design 4.4; 6.4 LootDoorInvariant) |
@@ -2515,7 +2562,7 @@ every reachable history, for every drawable set the manifest can
 produce; RP1–RP6; RouteSufficiency; at least 1 boss per (theme, floor);
 compliant floor-1 bosses; determinism.
 
-### 9.3 Adopted in full: Keepsakes (M2; display plus one prop)
+### 9.3 Adopted in full: Souvenirs (M2; display plus one prop)
 
 - Floor-5 dressing uses prop sets from the 4 visited themes, chosen
   deterministically from the route history, with no random draw. No
@@ -2535,20 +2582,20 @@ compliant floor-1 bosses; determinism.
   half and Prone on a failure, both ways, once per fight, party-only;
   dressed in neutral materials, never ice, frost or blue (the Supper's
   dark iron hoop with unlit candle cups, or the Gut's rib-cage; under
-  Cut 2 only the rib-cage). Each final boss also has its own Device, of
+  Cut 2 only the rib-cage). Each final boss also has its own Counterpiece, of
   different kinds (the Governess's Lamp Snuffer, the Engine's
   Mainspring).
-- **Keepsake dressing carries no damage-type cue (RC4):** no ice, flame,
+- **Souvenir dressing carries no damage-type cue (RC4):** no ice, flame,
   acid or other fluid; only the visited theme's neutral materials (wood,
   brass, cloth, glass, bone). The tone-by-depth review checks it, and
-  V7 checks that every non-final theme authors both Keepsake fields.
-- **Keepsake dressing never uses a container, bait-cache or Windfall
-  silhouette, nor the Bedside Stand's** (change LP-24; M2; loot sources
+  V7 checks that every non-final theme authors both Souvenir fields.
+- **Souvenir dressing never uses a container, bait-cache or Windfall
+  silhouette, nor the Washstand's** (change LP-24; M2; loot sources
   design 5.1, 4.10; RC1).
 - M4 adds echo types (at most 1 per encounter, at most 2 encounters,
   curated to the Heart's 6).
 
-### 9.4 Adopted in full: Antechamber Catch-up (M2; RT-8)
+### 9.4 Adopted in full: Forecourt Top-up (M2; RT-8)
 
 - **Trigger (lead's call on the details, after the check):** the event
   `AntechamberCatchUp` fires on the earlier of (a) the hero's first
@@ -2589,7 +2636,7 @@ compliant floor-1 bosses; determinism.
   is always a patrol Circuit waypoint, the patrol's homeRoom and fight
   host at the floor's fight-room size, with at most two Circuit side
   rooms; it is never guaranteed safe while the patrol lives (told
-  plainly). The Catch-up stays floor 1 only.
+  plainly). The Top-up stays floor 1 only.
 - **Reports:** `AntechamberCatchUpRate` per class *(illustr.: about 100%
   of bypass runs, about 5% of full clears)*; the camp catch-up's "under
   20%" target (enemies 16) applies to **camps 2–4**.
@@ -2599,16 +2646,16 @@ compliant floor-1 bosses; determinism.
 - **Told plainly:** in effect the first boss always meets a level-3
   hero.
 - **Boss rooms (read, not changed; change BR-3, BR-4; M2; boss rooms
-  design 4.2.1, 4.2.2):** from M2, while the Catch-up is enabled and
+  design 4.2.1, 4.2.2):** from M2, while the Top-up is enabled and
   `antechamberCatchUpApplied` is false, the boss and escort cannot
   notice the party, so the hero meets the F1 boss at level 3 (M1 has
-  no guard); the Catch-up resolves before `ArenaEngaged` on the same
+  no guard); the Top-up resolves before `ArenaEngaged` on the same
   tick. A party unit entering an arena square counts as noticed, so
   the boss fight starts as a notice, with Take Places as its placement
   step. The floor-1 Forecourt is near-safe only before engagement: from
   the first `ArenaEngaged` until the boss falls, no short rest is taken
   while any party unit stands in the Sanctum (Forecourt, arena,
-  Stairhead) (change BR-31; agreed, boss rooms Q2; boss rooms design
+  the Downstair) (change BR-31; agreed, boss rooms Q2; boss rooms design
   4.2.5).
 
 ### 9.5 Adopted in full: camp card, Stratum Card and dream track (M2; RT-10, RT-12)
@@ -2687,11 +2734,11 @@ All model numbers are *(illustr.)*. They come from toy scripts
   bodies, and changes enemies 10.3.
 - It stays a simulator arm and needs a measured saving of at least 1.5
   min at party 4 to be reconsidered. If ever chosen: at most 1 elite per
-  guard post, and at least 1 skittish or minion slot.
+  guard post, and at least 1 skittish or swarmer slot.
 
 **Floor 1:** a full clear reaches 539–557 at the door (level 3 in 95% of
-room orders); a bypass reaches 455–482 (level 3 never); the Antechamber
-Catch-up covers it.
+room orders); a bypass reaches 455–482 (level 3 never); the Forecourt
+Top-up covers it.
 
 **Carry-over:** full clears run about 1 level ahead of the enemies 6.3
 table from floor 2. Trimming floors 4–5 pulls the hero back toward the
@@ -2723,12 +2770,12 @@ bypass. Without lever 3 it stays a report.
 | Supper as an F3–4 band (rejected for M2) | 30 | 60 | 5.4% | 50% | **Gut about 85%** |
 
 - With the authored `pairKey`s of 8.1 (Gaol and Kennel slashing/none,
-  Wake bludgeoning/none, Choir lightning/water, Silk piercing/web,
+  Wake bludgeoning/none, Choir lightning/water, Archive piercing/web,
   Carnival fire/oil, Supper cold/none, Gut acid/bile; `none` never
   matching), the soft R3 and R4 rules never bite in M2. Two Doors always
   has 2 candidates (minimum 2, exhaustive check). Recounted after the
   check: had Kennel been coded piercing (its first listed type), R4
-  would skip the Silk after Kennel, giving 20 sequences and the Silk
+  would skip the Archive after Kennel, giving 20 sequences and the Archive
   only about 17% of floor-2 slots; the authored primary avoids it. The
   rejected Supper band row is recounted under the same walk and coding
   (it had been computed from an older coding).
@@ -2762,7 +2809,7 @@ arrival states. Route-sampled rates are reported, not gated.
 
 With the adopted package, only the binding row (50–74%, fearless escort)
 has a number: 85.5 against about 99, a spread of about 14. **Fail.** The
-3.8, 6.6 and 10.2 figures belong to the non-adopted Totem-lever column.
+3.8, 6.6 and 10.2 figures belong to the non-adopted Tipstaff-lever column.
 **No floor-1 theme is proven yet.** Hence 8.2.
 
 ### 10.6 Route choice risk (logit model; base clear 0.97 / 0.90 / 0.80 / 0.70 / 0.58; run win 28.4%)
@@ -2828,7 +2875,7 @@ still need condition squares, which the Supper never has.
   values for shared and daily runs (change SV-12; lead's call; field
   reserved in M1, live in M3; seeds and validation design 4.6);
   `difficulty.tier` drives ladder% (enemies 10.1), and `nightmareTier`
-  (M3) drives the Nightmare kind additions only and never changes
+  (M3) drives the Peril kind additions only and never changes
   ladder% (main 4.7 **(decided)**, "kind, not stats"; RT-21)
   (cross-document comparison 2026-11-23, CC-84)):
   `route.twoDoorsEnabled`, `route.lastHollowChoiceEnabled` (both false
@@ -2878,7 +2925,7 @@ registry, 11.4):
 | V3 | PoolRules | RP1–RP6 (6.4) over every theme and every pair that can sit on adjacent floors (RP6 unweighted over the roster); the church cap (7.6); one home theme per square kind (6.3); Obsession kinds (7.3 pillar 6) |
 | V4 | ThemeFloorFill | Enemies 10.5's content test over every (theme, floor) cell × party size × band × ladder tier, trimmed floors included |
 | V5 | RouteEnumeration | Enumerated over **histories**, not permutations: for floor 1, each drawable floor-1 theme; for floors 2–4, each ordered choice of survivors the walk can produce (Door A and Door B where doors apply). Run once for **every drawable set the manifest can produce**: every subset of unlockable themes, crossed with the Wake verdict, the cut states and any held theme. The build fails if any history breaks RP1–RP5 or RouteSufficiency (RP4), or a Two Doors floor has fewer than 2 candidates. The 10.3 counts are published from the all-unlocked set |
-| V6 | RouteDeterminism (a `t` part calling the V19t harnesses; M1 stub, M2; change SV-20) | The same reproducibility key (seed, `genVersion`, manifest hash, configuration-snapshot hash, unlock-snapshot hash; change SV-12) gives the same route; shared and daily seeds use the canonical unlock set; perturbing any floor substream or a generation retry never changes the route; unlocking a theme never changes another theme's position or the boss orders; a doors-on run choosing Door A at every camp is identical to the doors-off run; LootDoorInvariant holds for both doors, including the Resistant-element draw and its n = 0 fallback |
+| V6 | RouteDeterminism (a `t` part calling the V19t harnesses; M1 stub, M2; change SV-20) | The same reproducibility key (seed, `genVersion`, manifest hash, configuration-snapshot hash, unlock-snapshot hash; change SV-12) gives the same route; shared and daily seeds use the canonical unlock set; perturbing any floor substream or a generation retry never changes the route; unlocking a theme never changes another theme's position or the boss orders; a doors-on run choosing Door A at every camp is identical to the doors-off run; LootDoorInvariant holds for both doors, including the <element>-proof draw and its n = 0 fallback |
 | V7 | CharterChecks | Every bark trigger is in RC8's list (ambient lines in its camp and hub trigger class; change CH-10; V20s `AmbientTrigger`); one glyph per square kind (RC5); a Tone Sheet referenced; every non-final theme authors `keepsakeProps` and `keepsakeArenaDressing`; no frozen-name collision; no keyhole silhouette outside mindless tells (RC3); no keyhole on any container (change TL-28; traps and locks design 8, 11.3 `NoKeyholeOnContainers`). The "signature type placed at least twice per floor" check (enemies 10.4) is a **generation assertion** over a fixed seed sample per (theme, floor, party size), owned by the seeds and validation segment. **Pending request (change SV-20; request to EP; M2; seeds and validation design 5.2, 5.7):** its authority moves to `V12g` (signature ≥ 2) and the fixed sample becomes a V12t regression row over the release set; if EP refuses, V19t runs the sample row. V7 owns `V7.NameRegistry` (manifest-driven; every segment feeds it) |
 | V8 | LayoutGrammar (change FL-14; floor layout design 11.2) | Every theme's `layoutGrammar`, Blueprints, rules and templates, with the named sub-checks of floor layout design 11.2 (LG1–LG20, `HearingGap`, Circuit isolation, `LayoutDistinct`, config nesting and others) |
 | V9 | RoomTerrain (change TR-18; room terrain design 11.2) | Every template × orientation × layer × floor band × theme, plus the floor-level capacity rows per Blueprint and rule choice, with the named checks of room terrain design 11.2 (`ClearwayConnected`, `ProtectedIntact`, `KitCoversRulesKeys`, `EntryCaps`, `ThemeSix`, `HomeTheme`, `PhaseSocketsBoth`, `TerrainDrawCount` and others); partial in M1, full in M2 |
@@ -2889,12 +2936,13 @@ registry, 11.4):
 | V14 | ItemRolls (change IR-21; (a), (b), (d), (h), (j) and the draw-count test M1, (m) Later, the rest M2; item rolls design 9.2; cross-document comparison 2026-11-23, CC-85) | Beside V13: static checks (a)–(m) of item rolls design 9.2, among them lanes, values and rolled lines, signature forms and carriage, display isolation (no rules code reads `theme.loot`; a release configuration with Element Echo on fails) and a complete `theme.loot` for every drawable theme (8.0); generation-time asserts; and the constant-draw-count and LootDoorInvariant tests |
 | V15 | LootSources (change LP-31; the V15 M1 rows M1 (an owner deliverable, request to LP; change SV-20), V15s and V15g M2, the Windfall rows M3; loot sources design 9.2) | Beside V13 and V14, split like V13 and run at AP2 after V13g and `V16g.SlotLegal` (change SV-20): V15s, static (container skins per kind, `ContainerFamilyDistinct` with V7, `ContainerArtBlind`, the Proprietor checks, `TruantHasFace`, `WindfallSkinLegal`, `BedsideStandOnly`); V15g, at generation (socket binding, the role table, container caps, offer pacing, the Windfall rules including `OneClockPerRoom`, `WindfallRouteSafe`, `WindfallCatchable`, `WindfallOffGuarantees` and `WindfallBudgetInside`, `GleanNoLeak`); and V15t tests; the named checks of loot sources design 9.2 |
 | V16 | Curiosities (change EV-38; M1 stub, M2, the Sequel rows M3, the Ripening rows M3-late or M4 (change EV-28; agreed, events Q1); events design 9.2; cross-document comparison 2026-11-23, CC-85) | In three parts: V16s, static over the records (option shape and prices, `PaletteWhitelist`, `StateBlind`, `PaymentFeasibility`, `RegisterByFloor`, `DreamerLine`, `HeartBedroomCap`, `PremiseTagCap`, `ReservedCues`, `ReservedSilhouette`, `RetellingParity`, `SuccessorParity`, `PoolCoverage`, `F1PoolParity`, `NameCollision` against 8.0's avoided list and others); V16g, at generation, split (change SV-20; seeds and validation design 5.2): `FixedDrawCount` at EventDraw, `SlotLegal` before V15g, the rest after V13g and V15g (`EventDrawRunBlind`, the within-run caps, `ReferentResolved`, `NoEventLoot`, `NoEventUnit`, `GraphUnchanged` and others); and V16t tests (determinism replay, `SnapshotCanonical`, LootDoorInvariant over door × memory, `DisplayMemoryInert`, `LauncherLootNeutral`, `LauncherBypass`, `ResolveIsSafePoint`); the named checks of events design 9.2 |
-| V17 | BossRooms (change BR-39; M1 subset (wave corrected, change SV-20; the M1 rows are the boss rooms design 10 M1 list: (a)–(c) on Old Ragged's kit, (f) root-column Deny, the Den Guise stamp proof, `V17g.StampProven` at AP1, start zones and lanes; cross-document comparison 2026-11-23, CC-70), M2, the Gambit rows M3; boss rooms design 9.2) | In three parts, after V9, V10 and V13g: V17s, static over every boss record, Rendition, Guise and formation (kits and caps on the effective kit, `NoUntelegraphedSpike`, the floor-1 package with exactly 3 Renditions per F1 boss, size ≤ Large, carriage, the last-threshold rule, the Device contract, reserves and AddCap, `final` immunities, answer windows and `BossCourtBreakable`, facts and `FinalBossNoDreamer`, guard rows per Rendition × formation × size, cut consistency against `cutState`); V17g, at generation on each stamped arena (`V17g.StampProven` at AP1, the rest at AP2 after V15g and V16g; change SV-20) (a proven stamp, start zones, one clock and one Void, lanes, phase sockets in both states, the OneDueThing enumeration, the `BossVariantKey` draw count); and V17t, tests (determinism, mirror equivalence, event order at the arena) |
+| V17 | BossRooms (change BR-39; M1 subset (wave corrected, change SV-20; the M1 rows are the boss rooms design 10 M1 list: (a)–(c) on Old Ragged's kit, (f) root-column Deny, the Den Guise stamp proof, `V17g.StampProven` at AP1, start zones and lanes; cross-document comparison 2026-11-23, CC-70), M2, the Gambit rows M3; boss rooms design 9.2) | In three parts, after V9, V10 and V13g: V17s, static over every boss record, Rendition, Guise and formation (kits and caps on the effective kit, `NoUntelegraphedSpike`, the floor-1 package with exactly 3 Renditions per F1 boss, size ≤ Large, carriage, the last-threshold rule, the Counterpiece contract, reserves and AddCap, `final` immunities, answer windows and `BossCourtBreakable`, facts and `FinalBossNoDreamer`, guard rows per Rendition × formation × size, cut consistency against `cutState`); V17g, at generation on each stamped arena (`V17g.StampProven` at AP1, the rest at AP2 after V15g and V16g; change SV-20) (a proven stamp, start zones, one clock and one Void, lanes, phase sockets in both states, the OneDueThing enumeration, the `BossVariantKey` draw count); and V17t, tests (determinism, mirror equivalence, event order at the arena) |
 | V18 | Information (change XI-30; the tests M1, full M2; exploration and information design 9.2) | Split like V13 and V16: V18s, static (`SurfaceRegistered`, `PatternNoHueOnly`, `NoHoverOnly`, `BoardDigitIsClock`, `WallMarkProjected`, `BudgetWorstCase` per mode from the registry rows of 7.4 RC5, `CardFit` at 150%, `LayerHasLegend`, `FactHasMapDraw`, `RevealNeverUnits`, `InfoItemLaneSafe`, `InfoNeverWritesLoot`, `PointerTextBounded`, `LaneGapStock`, `WaymarkGlyphDistinct`, `NoCompletionStat` and others); V18g, at generation per floor (`SketchNeverSecretNode`, `TreasureSelectorLegal`, `TreasureFactCap`, `NoF1Pointer`); V18r, runtime assertions on every `KnowledgePass` (`MapNeverUnknown`, `ChalkNeverContents`, `ChalkNeverStub`, `RouteKnownOnly`, `ForecastKnownOnly`, `BubbleNeverPositioned`; class `runtimeAssert`; change SV-20, XI-30); and V18t tests (`LosSymmetric`, `FogEqualsRules`, `KnowledgeLeak`, `ProfileBlind`, `PointerNeverPreDoor`, `LodestringDoorBlind`, `RoleBlindOrder` and others); the named checks of exploration and information design 9.2 |
 | V19 | Conformance (change SV-19; lead's call; owned by segments 11–12; M1 partial, M2; seeds and validation design 5.2) | Split like V13: V19s, static (registry completeness, label and id collisions, `DomainDisjoint`, `IdFrozen`, `DrawFreeProof`, `RerunSpanCovers`, `ClassDeclared`, the Core analyzer, `CoreNoProfileRef` and others); V19g, at every stage end and at commit (the DrawLedger, which calls the owners' draw-count rows, stage digests and the frozen `GenInputs` digest); and V19t tests (`KeyAlgebraVectors`, determinism, cross-OS and hostile-environment digests, goldens, `RetryIsolation`, `ExplorationCombatIsolation`, the shared `LootDoorInvariant` harness that V6 calls, `ForecastSurvivesRetry`, `ContentAddStability` and others); the named checks of seeds and validation design 5.2 |
-| V20 | Hollowfolk (change CH-25; owned by the camp and hub design, segment 13; M2; camp and hub design 9.2) | Split into (s), (t) and (r), static and display-only, with no g phase: V20s, static (`AmbientNoTrade`, `AmbientNoHire`, `AmbientNoEffect`, `AmbientCoreBlind`, `AmbientTrigger` over the RC8 camp and hub class, `RegisterByVenue`, `DreamerLine`, `ReservedCues`, `StationRingNoAmbient`, `AmbientNotServiceAnchor`, `LingererPerDrawableTheme` and others; name collisions through V7's name registry); V20t, tests (`LoreInert`, `SeededRunLoreReadOnly`, `AmbientProfileBlind`, `NoLineTwicePerRun`, `CampProbeResistance`, `VendorStockTrimmedInCore` and others); V20r, reports (simulator: `LoreFreshness`, `HollowRepeatRate` and others in the `LoreEmu` sandbox; human: `CampSeconds`, `CampClicks`, `RunWallClock`, `HubSeconds`, `DeathPathSeconds`) |
+| V20 | Hollowfolk (the validator id stays; the figures show as the Fireside, naming pass, agreed Q3; change CH-25; owned by the camp and hub design, segment 13; M2; camp and hub design 9.2) | Split into (s), (t) and (r), static and display-only, with no g phase: V20s, static (`AmbientNoTrade`, `AmbientNoHire`, `AmbientNoEffect`, `AmbientCoreBlind`, `AmbientTrigger` over the RC8 camp and hub class, `RegisterByVenue`, `DreamerLine`, `ReservedCues`, `StationRingNoAmbient`, `AmbientNotServiceAnchor`, `LingererPerDrawableTheme` and others; name collisions through V7's name registry); V20t, tests (`LoreInert`, `SeededRunLoreReadOnly`, `AmbientProfileBlind`, `NoLineTwicePerRun`, `CampProbeResistance`, `VendorStockTrimmedInCore` and others); V20r, reports (simulator: `LoreFreshness`, `HollowRepeatRate` and others in the `LoreEmu` sandbox; human: `CampSeconds`, `CampClicks`, `RunWallClock`, `HubSeconds`, `DeathPathSeconds`) |
 | V21 | StartingKits (change SK-10; owned by the starting kits design, segment 14; M1 (a)–(e), plus (f) if the Due is in the slice (else M2), M2 (g)–(j), M3 (k)–(l), (m) reserved for Later; starting kits design 9.2) | Split into (s), (t) and (r): V21s, static (`KitMundane`, `KitHealing`, `KitNoTrinket`, `KitPackEmpty`, `KitCoin` (exactly 15 for hero kits), `KitSetLegal`, `KitTrained`, `KitVerbPerSet`, `KitAcFloor`, `KitDueStrictUpgrade`, the name, kit-line and Oddment text rows, `KitDisplayCoreBlind`, `OddmentInert`, `KitNamedPieceNotF1Target`, `KitResaleBand`, `KitLegalOverArrangements`, the variant rows and `HeirloomKitFits`); V21t, tests (`KitIssueStable`, `KitDisplayInert`, `SeededRunOddmentReadOnly`, `VariantPickConsistent`, `Floor1ClassSpread` per kit and others); V21r, reports (`KitSoldAtCamp1`, `VariantPickPerOffer`, `NamedPieceHeldAtF3`, the Oddment rates and others); the static and display-only parts as V20; the consolidated suite becomes V1–V21 (seeds and validation design 5.2) |
 | V22 | HeirloomsCurses (change HL-14; owned by the heirlooms and curses design, segment 15; registered at **M1** with only the (m) `RunModifierIdInConfigHash` field row live, the (e) rule rows live from M2, (a)–(c), (h), (l) and the (j) heirloom glyph M3, (d), (g), (k), the rest of (j) and (m) M4, (f) and (i) Later; heirlooms and curses design 9.2) | Rows (a)–(m), phases s, g and t: heirloom templates, `HeirloomValueCap`, `HeirloomNoVerbClone`, unlock sources and `HeirloomCoverage`; the Malady whitelist, `untilCamp`, Cast-off deeds and every source range inside F2–F4, `MaladyEliteAgency`, `MaladyInThemeSix`, `MaladyNeverLowersMax`; NameRegister NR1–NR10 with the blocklist (7.6); the Oath rows (Later); cost-line checks (`CostLineNoHardTransform`); no Core reference to `BossFelled` consumers, Grip-marks or pending offers; `GlyphsDistinctFromRegistry` against the RC5 registry; `EliteMaladyCapPerFloor`, `MaladyNotBeforeBoss` and the Curiosity payer rows; the bequest and Malady tests; the consolidated suite becomes V1–V22 (seeds and validation design 5.2) |
+| V24 | NamingPass (registered by the naming pass, NP-1; owner the lead; runs on `V7.NameRegistry`; phase split per SV-20: static rows at build, string rows at content build; naming pass design 9.3) | The naming pass rules r1–r9 and r3b: exact equality across all registries on display strings, fallbacks, Plain labels and every `localeTermOverride` (r1); retired names reused (r2); keyword collisions (r3); flavour near pairs (r3b, flag); SRD, IP floor, sensitivity and gazetteer (r4); echo and the cluster test (r5); internal families never on a display surface, checked by key (r6); premise words on `name` and `label` fields outside W-DREAM-1 and W-DREAM-HOLD-1 (r7; 7.5); register rows, caps, article and plural fields, head-word cap and filtered substrings (r8, flag; caps fail at content lock); waiver records complete (r9). Its data files and the string table are manifest-listed (naming pass design 9.1, 9.1.1); the report `NamingDrift` is registered in SV 6.10 (naming pass design 9.4). V23 stays pending as below |
 
 **Pending request (change CA-18; RS and SV owners; M2; charm abilities
 design 9.3):** a **V23 `CharmLane`** row (owned by the charm abilities
@@ -3009,14 +3057,14 @@ Two Doors switch agreed, Q2)**
 
 | Wave | Content | Structure |
 |---|---|---|
-| **M1** | Kennel Wood subset: Kennel Mastiff (the settled Bleeding-claw brute), Huntsman (the M1 warhammer-and-shield soldier), Poacher (the M1 sling artillery), and Old Ragged (the approved M1 boss kit) (change RT-22; cross-document comparison 2026-11-23, CC-2). Terrain: Tall and Low pieces as blockers only, per room terrain design 12 M1 (change TR-31; cross-document comparison 2026-11-23, CC-86); Old Ragged's architectural root-columns are template walls that are not terrain pieces, the Den's line-of-sight blockers (change BR-1, told plainly; boss rooms design 4.1, 5.3) | One floor. The route pre-roll code ships returning the single theme, so determinism tests start early. The M1 art and kit carry into M2 |
-| **M2, first** | Build order: **the Heart and the Gut first** (they carry the companions "M2 first" floors 4–5 slice), then Kennel, Gaol, the Middle Dream themes, the Supper. The Wake only if gated in (8.2) | The floor-time slice (companions 7.4) runs on the Heart and the slowest floor-4 theme |
-| **M2** | 8 themes (8.1) **(agreed, Q4)** | Strata Draw; Antechamber Catch-up; cards and dream track; Keepsakes; the RT-7 lever form (only in lever order); V1–V7; ThemeParity, ClassThemeSpread, FloorTimeByTheme, LevelAtDoorByFloor; readability gates; **Two Doors and the Last Hollow choice built, switched on only if their gates pass (agreed, Q2)** |
+| **M1** | Kennel Wood subset: Kennel Mastiff (the settled Bleeding-claw brute), Huntsman (the M1 warhammer-and-shield soldier), Poacher (the M1 sling marksman), and Old Ragged (the approved M1 boss kit) (change RT-22; cross-document comparison 2026-11-23, CC-2). Terrain: Tall and Low pieces as blockers only, per room terrain design 12 M1 (change TR-31; cross-document comparison 2026-11-23, CC-86); Old Ragged's architectural root-columns are template walls that are not terrain pieces, the Den's line-of-sight blockers (change BR-1, told plainly; boss rooms design 4.1, 5.3) | One floor. The route pre-roll code ships returning the single theme, so determinism tests start early. The M1 art and kit carry into M2 |
+| **M2, first** | Build order: **the Heart and the Gut first** (they carry the companions "M2 first" floors 4–5 slice), then Kennel, Gaol, the Midwater themes, the Supper. The Wake only if gated in (8.2) | The floor-time slice (companions 7.4) runs on the Heart and the slowest floor-4 theme |
+| **M2** | 8 themes (8.1) **(agreed, Q4)** | Strata Draw; Forecourt Top-up; cards and dream track; Souvenirs; the RT-7 lever form (only in lever order); V1–V7; ThemeParity, ClassThemeSpread, FloorTimeByTheme, LevelAtDoorByFloor; readability gates; **Two Doors and the Last Hollow choice built, switched on only if their gates pass (agreed, Q2)** |
 | **M2 prerequisites owed by other owners, before rosters freeze** | RT-3 (enemies 10.5 steps 1 and 6), RT-4, RT-6, RT-7, RT-8 (enemies 16), the RT-9 rows in enemies 17.5 and 20.1, RT-17's enemies rows (enemies owner); RT-8 (classes 7.3: classes owner; companions 7.1 and 7.11: companions owner); RT-9's Herald 7.16 sentence (Herald owner); RT-13, RT-14, RT-16 (conditions owner); RT-12 and the DH 19.3 row of RT-10 (DH owner); RT-20 (trinkets owner). **Applied by their owners:** every row listed here except RT-14 and RT-16, which stay pending rulings (cross-document comparison 2026-11-23, CC-87) | — |
-| **M2 cut lines** | **Cut 1, graded (change BR-26; agreed, boss rooms Q1; M2; boss rooms design 4.10.4), in this order:** **1a** drops the Appetite **only if it is not yet built** at that review (a no-op otherwise); **1b** drops the Thing in Cell Zero, folded into the Jailer as the Rendition "Cell Zero Opens". **Cut 2:** 1a and 1b, and drop the Supper (floor 4 fixed Gut), **with the Cut 2R rider: Cut 2 never drops a built Appetite**. 1a, 1b and Cut 2 are **pre-authorised (agreed, Q4; graded, boss rooms Q1)**. **1c** drops the Master in the Frame, folded into Old Ragged as the Lord's Gallery Guise; it sits below Cut 2 and is **client-only**. The applied cuts are stamped as `cutState` into the content version (boss rooms design 9.1). Below Cut 2, the approved-scope floor (Gaol and Kennel on F1, Choir and Silk on F2–3, Gut on F4, floor 5 as a step-5 deep overlay of the floor-4 theme not drawn, re-passing its 6) needs the client | Under Cut 2, floor 4 has no choice anyway; under the approved-scope floor, random draws only |
-| **M3** | Unlocks in 8.12's order; the Supper's F3–4 band and its F3 boss; a second boss for every M2 (theme, floor) cell that has only one; the third final boss; the Lore roster preview at camp; Dream Fragments plus codex (Fragments folded into Curiosity F-BOSS options; change EV-29; events design 4.9). **Pending request (change EV-37; RS owner; M3; events design 4.9):** segment 8 co-owns the codex's Curiosity pages (Retellings collected and options seen, never power or gating rule text, write-only from the run's view); the RS owner owns the codex and segment 10 hosts it. **Exploration and information (change XI-29; M3; exploration and information design 6, 7):** segment 10 hosts the codex (the RS owner owns it); the **Floor Atlas** (each floor's final map in the run record, with "Treasures found k of n" and no rooms-entered fraction, never a score), whose previous-floor page shows on the camp dream track; the death-recap map; and the Dream map skin, an option over the plain map gated by the greyscale, colour-blind and glance gates (7.4). **Camp and hub (M3; camp and hub design 4.15.8):** the codex gains a "Residents of the Hollows" page per ambient figure, filling as its chain beats are heard (Lingerer pages under their theme; a completed chain adds a plate), write-only from the run's view and never gating; the RS owner owns it and segment 10 hosts it. **Starting kits (M3; agreed, starting kits Q3; starting kits design 4.5.2, 10):** the codex gains an "Oddments" page in the Library (camp and hub design 4.15.8), filled on sight, write-only from the run's view, one plate per completed kit pool behind "a win as <class>"; the RS owner owns it | Two Doors (if its gates failed in M2) and at camp 3 once the floor-4 pool is 3 or more; Omens; Nightmare tiers 1–3; Perilous Door; Seams; profile-side anti-streak outside seeded runs (Launcher Fallow on the F1 Curiosity is pulled into M2: change EV-20; agreed, events Q1; 6.4 R-SEED-6; the launcher F1-boss streak rule is pulled into M2: change BR-25; agreed, boss rooms Q1; 6.4 R-SEED-6) |
-| **M4** | Pools of 3–4 per tier; the Waking City alternate final; Keepsake echo types; the Inverted Cathedral with its hazard package (the drop hazard now exists; change HZ-26; hazards design 7.11, 12) | Three-door camps (optional) |
-| **Later** | The Lucid Key; Other Dreamers; Nightmare tiers 4–5; daily seeds (already supported; their rules, a seed from a published or server value, and replays in the seeds and validation design 4.7; change SV-17; Later); seams that bleed the chosen door's palette | — |
+| **M2 cut lines** | **Cut 1, graded (change BR-26; agreed, boss rooms Q1; M2; boss rooms design 4.10.4), in this order:** **1a** drops the Appetite **only if it is not yet built** at that review (a no-op otherwise); **1b** drops the Thing in Cell Zero, folded into the Jailer as the Rendition "Cell Zero Opens". **Cut 2:** 1a and 1b, and drop the Supper (floor 4 fixed Gut), **with the Cut 2R rider: Cut 2 never drops a built Appetite**. 1a, 1b and Cut 2 are **pre-authorised (agreed, Q4; graded, boss rooms Q1)**. **1c** drops the Master in the Frame, folded into Old Ragged as the Lord's Gallery Guise; it sits below Cut 2 and is **client-only**. The applied cuts are stamped as `cutState` into the content version (boss rooms design 9.1). Below Cut 2, the approved-scope floor (Gaol and Kennel on F1, Choir and Archive on F2–3, Gut on F4, floor 5 as a step-5 deep overlay of the floor-4 theme not drawn, re-passing its 6) needs the client | Under Cut 2, floor 4 has no choice anyway; under the approved-scope floor, random draws only |
+| **M3** | Unlocks in 8.12's order; the Supper's F3–4 band and its F3 boss; a second boss for every M2 (theme, floor) cell that has only one; the third final boss; the Lore roster preview at camp; Fragments plus codex (Fragments folded into Curiosity F-BOSS options; change EV-29; events design 4.9). **Pending request (change EV-37; RS owner; M3; events design 4.9):** segment 8 co-owns the codex's Curiosity pages (Retellings collected and options seen, never power or gating rule text, write-only from the run's view); the RS owner owns the codex and segment 10 hosts it. **Exploration and information (change XI-29; M3; exploration and information design 6, 7):** segment 10 hosts the codex (the RS owner owns it); the **Floor Atlas** (each floor's final map in the run record, with "Treasures found k of n" and no rooms-entered fraction, never a score), whose previous-floor page shows on the camp dream track; the death-recap map; and the Dream map skin, an option over the plain map gated by the greyscale, colour-blind and glance gates (7.4). **Camp and hub (M3; camp and hub design 4.15.8):** the codex gains a "Residents of the Hollows" page per ambient figure, filling as its chain beats are heard (Straggler pages under their theme; a completed chain adds a plate), write-only from the run's view and never gating; the RS owner owns it and segment 10 hosts it. **Starting kits (M3; agreed, starting kits Q3; starting kits design 4.5.2, 10):** the codex gains an "Oddments" page in the Library (camp and hub design 4.15.8), filled on sight, write-only from the run's view, one plate per completed kit pool behind "a win as <class>"; the RS owner owns it | Two Doors (if its gates failed in M2) and at camp 3 once the floor-4 pool is 3 or more; Omens; Peril tiers 1–3; Perilous Door; Seams; profile-side anti-streak outside seeded runs (Launcher Fallow on the F1 Curiosity is pulled into M2: change EV-20; agreed, events Q1; 6.4 R-SEED-6; the launcher F1-boss streak rule is pulled into M2: change BR-25; agreed, boss rooms Q1; 6.4 R-SEED-6) |
+| **M4** | Pools of 3–4 per tier; the Waking City alternate final; Souvenir echo types; the Inverted Cathedral with its hazard package (the drop hazard now exists; change HZ-26; hazards design 7.11, 12) | Three-door camps (optional) |
+| **Later** | The Clear Key; Strangers; Peril tiers 4–5; daily seeds (already supported; their rules, a seed from a published or server value, and replays in the seeds and validation design 4.7; change SV-17; Later); seams that bleed the chosen door's palette | — |
 
 **How a cut is applied (new lead's call).** The lead applies 1a, then
 1b, then Cut 2 with Cut 2R (change BR-26; agreed, boss rooms Q1; boss
@@ -3066,11 +3114,11 @@ run-modifier slot (pending request, HL-21, 6.11).
 |---|---|
 | Floor layout | Room counts (6.6); the floor-1 **antechamber** (empty, main path, immediately before the arena, a cut vertex of the room graph; `AntechamberDominatesArena`); layout archetype per theme (cell grid, glades and trails, galleries with niches, nave with chapels, stacks and aisles, ring plaza, long hall, looping tubes, bedchamber); per-floor dressing sets; 1–3 empty or special main-path rooms. **Filled by the floor layout design (change FL-1, FL-5, FL-14, FL-22):** rooms joined by Portals, open-plan themes partitioned into ordinary rooms (FL-1); the antechamber (the Forecourt) on every floor, on the patrol Circuit on floors 2–5 (FL-5); the layout archetype is the theme's `layoutGrammar` (FL-14); layout supplies sockets and minimum counts, and the named segments below keep their rules (FL-22) |
 | Room shapes and terrain | `terrainSquares` and density per floor; one home theme per square kind; water and oil placement caps (8.6, 8.8); cover props per theme (the weapons 9.5 decision); wall and edge density for the Wrecker; at least 3 Acrobatics-gated choices per floor (armour 7.3); this segment keeps the ≥ 3 total, of which layout supplies 2 Squeezes (change FL-22). **Filled by the room terrain design (change TR-1; room terrain design 13):** segment 3 owns the room-terrain system (piece and square classes, layers and sockets, the Clearway, the cover rule, Furnishings, Kegs and their verbs, Rough and Plank, arena terrain rules and caps, the Remnant system at M3) and the knock-into system (contact hazards and harm squares: rules, bands, caps and in-room placement); cover props per theme become the theme's `terrainKit` (change TR-22) |
-| Hazards | The bile square (RT-13); the drop hazard needed by the Inverted Cathedral and staked pits; Teetering counting (RT-14). **Ownership (change TR-1; room terrain design 13):** segment 4 owns per-theme hazard catalogues and floor-scale density built from segment 3's classes inside its caps, drops, bile, Teetering counting and vents; segment 5 owns traps. **Filled by the hazards design (change HZ-1, a reading of this hook; hazards design 6.1, 13):** segment 4 owns hazard points, roles and quotas, VP1–VP10, Voids and falls (the drop hazard), bile density, Teetering counting (as a request, HZ-6), vents, Stirs, Cords, Tides, Lurch and the Dream step, Landmark ticks (not hazards), Moods, Dare rooms and Plunge, per-theme catalogues and Tableaux (`hazardKit`); a hazard is visible from reveal and never disarmed; boss counterplay features stay the boss rooms' (segment 9), which take only the Stir and Cord machinery; the staked pits are re-read as a walkable harm square at Nightmare tier 2+, not a drop hazard (change HZ-25, told plainly; hazards design 6.19) |
-| Traps and locks | `trapFlavours` per theme (Shade DEP-S1 records with `mechanismSquare`); trap conditions drawn from the theme's 6 or damage-only (RT-16); no trap hard control on F1, set pieces only on F2; the Gaol keyring and cell caches; sphincter doors; closable cell doors. Keeps the door, lock and secret rules, including the party door verbs (open in M1, close in M2; change FL-8) and Hairline secrets with Sound the wall (change FL-17); layout supplies the slots and minimum counts (change FL-22; floor layout design 9.2, 13). **The line with hazards (change HZ-1; hazards design 6.1):** traps are hidden until detected, or known armed devices, and are sprung; the sprung twins of hazard Stirs stay traps (the toppling-shelf tripwire, the dumbwaiter drop, the sluice one-shot Soak, the icicle chandelier, the acid geyser, trapdoor stages, the bell tripwire, the portcullis, the Appeals trapdoor, the Kennel horn tripwires); an open trapdoor or shaft is a Void (a hazard), a closed one that springs is a trap; Cords never arm traps; known armed traps stay hazards for conditions 10.1–10.4 (conditions 11.3) without moving ownership. **Filled by the traps and locks design (change TL-10, a reading of this agreed hook; M2; traps and locks design 6.3, 11.1, 13):** segment 5 owns the check charter, the DC ladder and the `checks` stream, trap records and rules (the sprung twins included), detection, locks, keys and the Wax Key, the door verbs, Hairline variants, boxed lurkers, Wager rooms and V11; traps come in three families (Device, Snare, Catch); device bodies and mechanisms are always visible and always rigged; every trap carries a diegetic tell (RC1); `trapFlavours` hold TrapRecords, a superset of the DEP-S1 record; trap conditions still wait on RT-16 (pending request, TL-39); the sprung twins keep their traps-catalogue names (the acid geyser is the Acid Gland; the Kennel horn tripwire is re-told as the tin-can tripwire, a pending request, TL-43) |
-| Encounter, loot and event placement | Each theme's `placementRules[]` (8.0); lesson axes per floor-1 theme; the Pack one-family rule; Scavengers at the F1 patrol budget; the Wake's dormant bias kept away from rooms 0–2; the Heart's morale shape by room and psychic cap; the signature type at least twice (a generation assertion, V7); Corroded caps; Frozen source caps; Keepsake slot dressing (9.3); loot stays theme-blind (LootDoorInvariant). Keeps the Wake dormant rule, read from layout's `nearStart` tag, and Keepsake dressing (change FL-22). **Filled by the encounter placement design (segment 6; encounter placement design 6.4, 6.16, 13):** segment 6 owns `placementRules[]` application (the fearless-anchor tags, EP-29; the Gut acid overlay count, EP-31) and ENM 10.5 steps 2 and 4–11; loot and events keep their segments. **Loot placement taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4, 5, 11):** sources, sockets and per-theme container art; loot stays theme-blind (Proprietor tags are display only); the charter entries of changes LP-7, LP-15 and LP-24 (7.4, 9.3). **Event placement filled by the events design (segment 8, approved 2026-11-22; its 4.2, 4.10, 4.13, 11):** segment 8 owns Curiosity content and forms (Curiosity, Interlude, Glimpse), their hosts (6.6; floor-1 Alcove set pieces and side rooms, Q rooms, Forecourts, `curiosityHost` signature rooms; never arenas), each theme's `curiosityKit` (8.0) and the shared pools, the cost and gain palette, Strands, Retellings, the Twice-Told card, Launcher Fallow (R-SEED-6), Sequels, Ripening, the Afterword and V16; EventDraw runs after layout and EventPlace after LootBind, draw-free, so loot stays theme-blind and never reads Curiosities (LootDoorInvariant) |
-| Boss rooms | One counterplay feature per boss (pendulum, the pen bar (renamed from "kennel gate": a two-state piece on the Whelping Pen, not a Portal, so TR-22's kennel gates are untouched; change BR-16; boss rooms design 4.7.1), sluice and bell rope, the Menagerie Wagon (wagon bolt; renamed from "cage", change BR-16; cross-document comparison 2026-11-23, CC-69), dunk tank, chandelier of icicles, the Pylorus mouth, the bed); Keepsake dressing; phase option (e) never on party squares. Arena terrain caps are segment 3's; (e) uses pre-placed phase sockets of existing kinds only, announced a round ahead and proven in both states; the counterplay identity is unchanged (change TR-16, told plainly; room terrain design 6.11). **Traps (change TL-40; with segment 9; traps and locks design 7.8, 13):** arena devices such as the chandelier of icicles are segment-9 instances in the TrapRecord format; no boss room has guaranteed traps. **Filled by the boss rooms design (segment 9, approved 2026-11-22; change BR-16, BR-23 to BR-26, BR-30; its 4, 5, 11):** the list is extended to every boss as the Device contract (one class-blind Device per boss, an `arenaDevice` TrapRecord instance that is not a trap, with a ranged trigger; F1 Devices never harm; F5 adds the Heavy Thing, 9.3) (change BR-16; M1 for the Den, M2); segment 9 owns arenas and Guises, Rhythm, phases, reserves, Renditions and `BossVariantKey`, folded bosses for the graded cuts (12), the Playbill and V17 `BossRooms`; the RS owner signs off Rendition phase and ability alternates that vary 8.x text (change BR-23) |
-| Exploration and information | Camp card, Two Doors cards, Stratum Card, dream track, Lore reveal, road not taken; Dream Fragments (M3); the Lucid Key secret (Later). Keeps the Stratum Card, including the floor count line (change FL-20), the Listen and Hairline displays (FL-18, FL-17), and the Lucid Key, whose Site layout reserves (change FL-22; floor layout design 9.2, 13). Dream Fragments are folded into Curiosity F-BOSS options (change EV-29; M3; events design 4.9); the Stratum Card carries no Curiosity line in M2 (events design 4.12). **Filled by the exploration and information design (segment 10, approved 2026-11-23; change XI-15, XI-17, XI-19, XI-20, XI-23, XI-24, XI-29; its 4.9, 5, 6, 11):** segment 10 places the camp card, door cards, Stratum Card, dream track and Lore reveal in its regions and card queue (6.9), adds its registry rows and gates to the charter (7.4), hosts the codex, and keeps the next-floor card unchanged, with no pointer result on camp or door cards |
+| Hazards | The gall square (RT-13); the drop hazard needed by the Inverted Cathedral and staked pits; Teetering counting (RT-14). **Ownership (change TR-1; room terrain design 13):** segment 4 owns per-theme hazard catalogues and floor-scale density built from segment 3's classes inside its caps, drops, gall, Teetering counting and vents; segment 5 owns traps. **Filled by the hazards design (change HZ-1, a reading of this hook; hazards design 6.1, 13):** segment 4 owns hazard points, roles and quotas, VP1–VP10, Voids and falls (the drop hazard), bile density, Teetering counting (as a request, HZ-6), vents, Stirs, Cords, Tides, Lurch and the Dream step, Landmark ticks (not hazards), Moods, Dare rooms and Plunge, per-theme catalogues and Tableaux (`hazardKit`); a hazard is visible from reveal and never disarmed; boss counterplay features stay the boss rooms' (segment 9), which take only the Stir and Cord machinery; the staked pits are re-read as a walkable harm square at Peril tier 2+, not a drop hazard (change HZ-25, told plainly; hazards design 6.19) |
+| Traps and locks | `trapFlavours` per theme (Shade DEP-S1 records with `mechanismSquare`); trap conditions drawn from the theme's 6 or damage-only (RT-16); no trap hard control on F1, set pieces only on F2; the Gaol keyring and cell caches; sphincter doors; closable cell doors. Keeps the door, lock and secret rules, including the party door verbs (open in M1, close in M2; change FL-8) and Hairline secrets with Tap the wall (change FL-17); layout supplies the slots and minimum counts (change FL-22; floor layout design 9.2, 13). **The line with hazards (change HZ-1; hazards design 6.1):** traps are hidden until detected, or known armed devices, and are sprung; the sprung twins of hazard Stirs stay traps (the toppling-shelf tripwire, the dumbwaiter drop, the sluice one-shot Soak, the icicle chandelier, the acid geyser, trapdoor stages, the keyring tripwire, the portcullis, the Appeals trapdoor, the Kennel horn tripwires); an open trapdoor or shaft is a Void (a hazard), a closed one that springs is a trap; Cords never arm traps; known armed traps stay hazards for conditions 10.1–10.4 (conditions 11.3) without moving ownership. **Filled by the traps and locks design (change TL-10, a reading of this agreed hook; M2; traps and locks design 6.3, 11.1, 13):** segment 5 owns the check charter, the DC ladder and the `checks` stream, trap records and rules (the sprung twins included), detection, locks, keys and the Wax Key, the door verbs, Hairline variants, boxed lurkers, Wager rooms and V11; traps come in three families (Device, Snare, Clasp); device bodies and mechanisms are always visible and always rigged; every trap carries a diegetic tell (RC1); `trapFlavours` hold TrapRecords, a superset of the DEP-S1 record; trap conditions still wait on RT-16 (pending request, TL-39); the sprung twins keep their traps-catalogue names (the acid geyser is the Acid Gland; the Kennel horn tripwire is re-told as the tin-can tripwire, a pending request, TL-43) |
+| Encounter, loot and event placement | Each theme's `placementRules[]` (8.0); lesson axes per floor-1 theme; the Pack one-family rule; Scavengers at the F1 patrol budget; the Wake's dormant bias kept away from rooms 0–2; the Heart's morale shape by room and psychic cap; the signature type at least twice (a generation assertion, V7); Corroded caps; Frozen source caps; Souvenir slot dressing (9.3); loot stays theme-blind (LootDoorInvariant). Keeps the Wake dormant rule, read from layout's `nearStart` tag, and Souvenir dressing (change FL-22). **Filled by the encounter placement design (segment 6; encounter placement design 6.4, 6.16, 13):** segment 6 owns `placementRules[]` application (the fearless-anchor tags, EP-29; the Gut acid overlay count, EP-31) and ENM 10.5 steps 2 and 4–11; loot and events keep their segments. **Loot placement taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4, 5, 11):** sources, sockets and per-theme container art; loot stays theme-blind (Proprietor tags are display only); the charter entries of changes LP-7, LP-15 and LP-24 (7.4, 9.3). **Event placement filled by the events design (segment 8, approved 2026-11-22; its 4.2, 4.10, 4.13, 11):** segment 8 owns Curiosity content and forms (Curiosity, Interlude, Glimpse), their hosts (6.6; floor-1 Alcove set pieces and side rooms, Q rooms, Forecourts, `curiosityHost` signature rooms; never arenas), each theme's `curiosityKit` (8.0) and the shared pools, the cost and gain palette, Strands, Retellings, the Twice-Told card, Launcher Fallow (R-SEED-6), Sequels, Ripening, the Afterword and V16; EventDraw runs after layout and EventPlace after LootBind, draw-free, so loot stays theme-blind and never reads Curiosities (LootDoorInvariant) |
+| Boss rooms | One counterplay feature per boss (pendulum, the pen board (renamed from "kennel gate", then from "the pen bar" by the naming pass: a two-state piece on the Whelping Pen, not a Portal, so TR-22's kennel gates are untouched; change BR-16; boss rooms design 4.7.1), sluice and bell rope, the Menagerie Wagon (wagon bolt; renamed from "cage", change BR-16; cross-document comparison 2026-11-23, CC-69), dunk tank, chandelier of icicles, the Pylorus mouth, the bed); Souvenir dressing; phase option (e) never on party squares. Arena terrain caps are segment 3's; (e) uses pre-placed phase sockets of existing kinds only, announced a round ahead and proven in both states; the counterplay identity is unchanged (change TR-16, told plainly; room terrain design 6.11). **Traps (change TL-40; with segment 9; traps and locks design 7.8, 13):** arena Counterpieces such as the chandelier of icicles are segment-9 instances in the TrapRecord format; no boss room has guaranteed traps. **Filled by the boss rooms design (segment 9, approved 2026-11-22; change BR-16, BR-23 to BR-26, BR-30; its 4, 5, 11):** the list is extended to every boss as the Counterpiece contract (one class-blind Counterpiece per boss, an `arenaDevice` TrapRecord instance that is not a trap, with a ranged trigger; F1 Counterpieces never harm; F5 adds the Heavy Thing, 9.3) (change BR-16; M1 for the Den, M2); segment 9 owns arenas and Guises, Rhythm, phases, reserves, Renditions and `BossVariantKey`, folded bosses for the graded cuts (12), the Playbill and V17 `BossRooms`; the RS owner signs off Rendition phase and ability alternates that vary 8.x text (change BR-23) |
+| Exploration and information | Camp card, Two Doors cards, Stratum Card, dream track, Lore reveal, road not taken; Fragments (M3); the Clear Key secret (Later). Keeps the Stratum Card, including the floor count line (change FL-20), the Listen and Hairline displays (FL-18, FL-17), and the Clear Key, whose Site layout reserves (change FL-22; floor layout design 9.2, 13). Fragments are folded into Curiosity F-BOSS options (change EV-29; M3; events design 4.9); the Stratum Card carries no Curiosity line in M2 (events design 4.12). **Filled by the exploration and information design (segment 10, approved 2026-11-23; change XI-15, XI-17, XI-19, XI-20, XI-23, XI-24, XI-29; its 4.9, 5, 6, 11):** segment 10 places the camp card, door cards, Stratum Card, dream track and Lore reveal in its regions and card queue (6.9), adds its registry rows and gates to the charter (7.4), hosts the codex, and keeps the next-floor card unchanged, with no pointer result on camp or door cards |
 | Seeds and validation | The `route` stream and R-SEED-1 to 6; `drawableSet` and the reproducibility key; V1–V7; the signature-type placement assertion; the RouteSample, fixed-arrival and chooser arms; LootDoorInvariant; the reports in 10 and 11. **Events (change EV-21, EV-38; events design 4.10, 4.13, 9):** the `curiosities` stream and its draw map, the EventDraw and EventPlace order, the resolve safe point, `curiosityMemory`, the launcher order against R-SEED-6, and V16. **Filled by the seeds and validation design (segments 11–12, approved 2026-11-23; change SV-1, SV-2, SV-4, SV-8, SV-10, SV-12, SV-19, SV-20, SV-22; its 4.3, 4.4 GS0.2, 4.6, 5.2, 5.7, 6.2, 11):** segments 11–12 own the key algebra, the stream registry (`dungeon/route` by keyed sorts, retry scope "never"), the pipeline and its two assertion points AP1 and AP2, the LR0–LR5 retry ladder, the reproducibility key (with `genVersion`), saves, shared, daily and replay rules, golden seeds and the release set, V19 `Conformance` and the report and arm registries; `drawableSet` is computed at GS0.2 and stored in the run save; V1–V7 keep their RS owner and phases (5.2); the signature-type assertion moves to `V12g` with a V12t sample row (pending EP; fallback V19t); the arms are qualified (11.3); LootDoorInvariant is one shared V19t harness that V6 calls; the `curiosities` stream is attempt-invariant (change SV-4). Owners keep every stream's consumers and counts, every check's logic and every report's threshold |
 
 ---
@@ -3082,7 +3130,7 @@ run-modifier slot (pending request, HL-21, 6.11).
 | Theme selects tiles, enemies, hazards; one per floor | main 4.6 **(decided)** | 6.2–6.3 |
 | Seed determinism; separate streams | main 2, 6.3 | 6.4 (RT-3); the reproducibility key (seed, `genVersion`, manifest, configuration, unlock; change SV-12) (cross-document comparison 2026-11-23, CC-87); V6 |
 | Theme rules (roster, 6, water rule, at least half non-fearless, …) | enemies 10.6; conditions 12.2, 16 | 8.1–8.11 checks; V1. Pending request: RT-14 ruled "does not count" before M2 rosters freeze (change TR-14; room terrain design 6.5.5) |
-| Tag-immunity budget (2 per non-boss trait set, at most 1 control; mindless grants `mind`) | conditions 12.2; enemies 8.3; stat model 8.4 | 8.10 (the Bile Ooze); V1 |
+| Tag-immunity budget (2 per non-boss trait set, at most 1 control; mindless grants `mind`) | conditions 12.2; enemies 8.3; stat model 8.4 | 8.10 (the Gall Slick); V1 |
 | Role taxes and per-type condition cap (at most 2) | enemies 9.1, 9.2, 17.1 | Counted in every theme (the Kennel Mastiff stays the settled M1 brute); V1 |
 | Boss signatures (1–2 per boss) | enemies 17.5, 20.1 | Named for every boss (8.3–8.11); V2 |
 | A boss per eligible floor; a compliant F1 boss | enemies 10.5, 17.5, 20.1; HR-21 **(agreed)** | 15 bosses over 11 cells; V2 |
@@ -3098,10 +3146,10 @@ run-modifier slot (pending request, HL-21, 6.11).
 | Floor-entry card | DH 17.12 | Stratum Card (RT-12) |
 | HE-7 containers; generation retry | DH 12.4 | Seeds and placement segments; the route is unaffected by retries (the LR0–LR5 ladder, with the release clean end, agreed Q2; seeds and validation design 5.5) |
 | Death share by floor; win rate | DH 18.2 **(agreed)** | Per theme; Reference chooser when Two Doors is on (RT-10) |
-| Loot theme-blind; the Resistant filter | enemies 15.3; trinkets R-23; armour 14.3 | 6.4 LootDoorInvariant |
+| Loot theme-blind; the <element>-proof filter | enemies 15.3; trinkets R-23; armour 14.3 | 6.4 LootDoorInvariant |
 | Carrier legality inside the 6 | enemies 15 | Carrier-fallback report per theme |
 | Rare and very rare by floor; trader F2–4 | items 12.5, 10.9 | Unchanged |
-| Hazard edges per floor | trinkets 23 | Floors 2–5; floor 1 exempt (RT-20, **told plainly**); the floor-1 stove and candle rack are typed Low pieces, not hazards (change TR-29, told plainly; room terrain design 6.5.6); floor 1 gains hazard edges at Nightmare tier 2+ only (change HZ-25; hazards design 6.19) |
+| Hazard edges per floor | trinkets 23 | Floors 2–5; floor 1 exempt (RT-20, **told plainly**); the floor-1 stove and candle rack are typed Low pieces, not hazards (change TR-29, told plainly; room terrain design 6.5.6); floor 1 gains hazard edges at Peril tier 2+ only (change HZ-25; hazards design 6.19) |
 | Neck-line trigger rates by theme | trinkets 18.3, 20 | 10.7 |
 | Terrain presence | Arcanist DEP-A1 | Report; 10.7 |
 | Wrecker hazard and wall density | Vanguard 8.3, 18 | Hook; per-theme report |
@@ -3113,8 +3161,8 @@ run-modifier slot (pending request, HL-21, 6.11).
 | Resistant-target share | Arcanist 9.4 | Per theme |
 | Single-type builds "slowed, not stopped" | stat model 11 | Per theme, with Soaked modelled |
 | Pledge rooms F2–4 (Later) | companions 7.12 | Slot reserved; placement segment |
-| Stairs, left-behind warning, Scrap | items 24 | Layout segment: the Stairhead behind the arena, through a Bossgate that opens on `BossDefeated`; none on floor 5 (change FL-6; floor layout design 6.11) |
-| Non-combat content on most floors | stat model 10 | Placement segment; Dream Fragments M3 |
+| Stairs, left-behind warning, Scrap | items 24 | Layout segment: the Downstair behind the arena, through a Bossgate that opens on `BossDefeated`; none on floor 5 (change FL-6; floor layout design 6.11) |
+| Non-combat content on most floors | stat model 10 | Placement segment; Fragments M3 |
 | Arcana-trained non-caster in recruit pools | consumables DEP-1 | Unaffected; the Muster stays theme-blind |
 | Bring-the-key anti-goal | stat model 2; items 2; trinkets 2 | Class-blind cards; vendor pre-rolled; bring-the-key watch report |
 | No protected content | main 2 **(decided)** | Original names; the frozen-names check (V7) |
@@ -3128,7 +3176,7 @@ run-modifier slot (pending request, HL-21, 6.11).
 |---|---|---|---|
 | 1 | The floor-time gate fails at cap 3 | `FloorTimeByPartySize` over 20 min after the levers | Levers 1–2 mandatory; RT-7; a morale-forward Heart; party-3 reference tuning; the cap-2 fallback, pre-authorised (companions Q2) |
 | 2 | Content cost about 2.8× approved; design, test and simulator time | M2 schedule review | Cut 1 and Cut 2, pre-authorised (Q4); Heart and Gut first; 62k-run passes budgeted from fixed arrival states |
-| 3 | Deep staleness (Gut and Heart replayed after losses) | Playtest notes; coverage report | The Supper floor-4-only for a true 50/50; 2 Gut bosses; room-by-room Heart escalation; Keepsakes; deep breadth first in the M3 unlock order |
+| 3 | Deep staleness (Gut and Heart replayed after losses) | Playtest notes; coverage report | The Supper floor-4-only for a true 50/50; 2 Gut bosses; room-by-room Heart escalation; Souvenirs; deep breadth first in the M3 unlock order |
 | 4 | A dice tax under a random draw | ThemeParity over 8 points | A build gate: the theme is held until signature or roster tuning passes (11.4); themes differ in kind; ClassThemeSpread; Two Doors when its gates pass |
 | 5 | Two Doors rewards avoidance or has a dominant door | Pick rate over 65%; ThemeParity over 5; Oracle over 1/3; coverage under the band | The switch stays off (Q2); milestones; road not taken; the coverage gate |
 | 6 | Readability under surreal art | Readability gates fail | Charter RC1–RC9 and M2 gates (Q3) |
@@ -3205,25 +3253,25 @@ CC-2) is an M1 row.
 | **RT-1** | Main 4.1 bullet 1, "A run is 4–5 floors." (**decided**); main 9 M2 row "4–5 floors" (**decided**); ability model 3 "Levels 1–10 over 4–5 floors"; classes 3.1 constraint table row "4–5 floors"; armour 5.1 item 1 "across 4–5 floors"; companions 3.1 main 4.1 row, 7.1 table row "Camp 4 (5-floor runs)" and the stranded-slot bullet's "on a 4-floor run" sentence and forecast text, 7.6 swap forecast "on a 4-floor run", 18.1 stranded-slot bullet | "4–5 floors" → "5 floors"; "(5-floor runs)" deleted; the 4-floor stranded-slot sentence and forecast lines deleted (with 5 floors the third slot is always reachable through camp 4) | **Decided** (main 4.1, 9) | **Client (agreed 2026-11-21, Q1)** |
 | **RT-2** | Main 4.6 bullet "Each floor has a theme that selects its tiles, enemies and hazards." (**decided**); enemies 10.6 | Add: "Themes are drawn per floor from tiered pools (floor 1; floors 2–3 band; floor 4), or picked from two drawn candidates when route choice is on (RT-10), with no repeat in a run; floor 5 is always the fixed final theme with a final-boss pool (run structure design 6.3–6.5)". Enemies 10.6 gains `tier`, `eligibleFloors` (at most 2 adjacent), `pairKey`, `final`, `shipStatus` and pool rules RP1–RP6 | **Decided** (main 4.6) | **Client (agreed 2026-11-21, Q1)** |
 | **RT-3** | Main 6.3 bullet "Separate random streams ..." (**decided**, as extended by CMP-3); enemies 10.5 steps 1 and 6 and its content-test text | Add a `route` child of the dungeon stream, consumed only at run start; per-floor dungeon substreams keyed by floor index; the boss draw of 10.5 step 6 moves to the route pre-roll (the boss is an input, like the theme) | **Decided** (main 6.3) **(new lead's call: flagged)** | **Client (agreed 2026-11-21, Q1)**; enemies owner applies 10.5 |
-| RT-4 | Enemies 10.6 (record fields); 17.2 (Volatile reads `themeDamage` = the `primaryDamageType`; Hardened reads `hardenedLayer`, whose breaker is the `counterType`; Chilling reads `frost`); 17.5 ("the theme's counter type" defined as `counterType`; boss records gain `themes[]`, `final` and `shipStatus`) | The theme record of 8.0, `placementRules[]` and the Keepsake fields included | — | Lead; enemies owner applies |
-| **RT-5** | Enemies 21 M2 bullet "themes (4 themes plus a deep overlay on floor 5)"; 21 "Content volume" paragraph ("4 themes of 5–6 types (about 22 types) plus a deep overlay"; lead's call there); 22 risk "M2 content volume" ("The deep overlay is the lever") | M2 = 8 themes of 5–7 types (56 types), 15 bosses, with Cut 1 and Cut 2 as the lever; the floor-5 deep overlay retires (returns as Nightmare tier 3, M3) | Replaces a lead's call the client saw | **Client (agreed 2026-11-21, Q4)** |
+| RT-4 | Enemies 10.6 (record fields); 17.2 (Volatile reads `themeDamage` = the `primaryDamageType`; Hardened reads `hardenedLayer`, whose breaker is the `counterType`; Chilling reads `frost`); 17.5 ("the theme's counter type" defined as `counterType`; boss records gain `themes[]`, `final` and `shipStatus`) | The theme record of 8.0, `placementRules[]` and the Keepsake fields (renamed Souvenir, naming pass NP-20) included | — | Lead; enemies owner applies |
+| **RT-5** | Enemies 21 M2 bullet "themes (4 themes plus a deep overlay on floor 5)"; 21 "Content volume" paragraph ("4 themes of 5–6 types (about 22 types) plus a deep overlay"; lead's call there); 22 risk "M2 content volume" ("The deep overlay is the lever") | M2 = 8 themes of 5–7 types (56 types), 15 bosses, with Cut 1 and Cut 2 as the lever; the floor-5 deep overlay retires (returns as Nightmare tier 3, M3; renamed Peril tier, naming pass NP-20) | Replaces a lead's call the client saw | **Client (agreed 2026-11-21, Q4)** |
 | RT-6 | Enemies 8.2 step 5; 8.3 content tests | Step 5 **stays in M2**; each theme lists `legalOverlays` that keep its 6. Restated, no rule change; the 17.2 affix cut stands | — | Enemies owner |
 | RT-7 | Enemies 10.4 slot table (floors 4–5: guard posts 2 when lever 3 applies, read from `pacing.trimmedFloors`); enemies 16 experience list (floor-4 boss 300 and floor-5 lair 240 on trimmed floors; the 10.1 budget bands of 200 and 140 unchanged) and its floor pool check table; 20.1 pool check (on floor 5, only experience earned before the final boss counts); companions 7.4 lever 3 wording | The concrete lever-3 form, applied only in the lever order of companions 7.4 | Touches lead's-call lever text next to agreed levers 5–6 (companions Q2) | Enemies owner; **client told plainly** (the floor-5 form told again after the check, 19.1) |
-| RT-8 | Enemies 16 "Camp catch-up" bullet and its target ("under 20% of runs" → "under 20% of runs at camps 2–4"); classes 7.3 subclass timing ("at the floor-1 antechamber, before the boss"); companions 7.1 camp-1 row; companions 7.11 camp-1 catch-up paragraph ("A hero who reaches camp 1 at level 2 is raised to 3 at step 2 …" → "the hero already reached level 3 at the floor-1 antechamber") | Antechamber Catch-up (9.4) | — | Lead; classes, Shade and Arcanist owners told; **client told plainly** |
+| RT-8 | Enemies 16 "Camp catch-up" bullet and its target ("under 20% of runs" → "under 20% of runs at camps 2–4"); classes 7.3 subclass timing ("at the floor-1 antechamber, before the boss"); companions 7.1 camp-1 row; companions 7.11 camp-1 catch-up paragraph ("A hero who reaches camp 1 at level 2 is raised to 3 at step 2 …" → "the hero already reached level 3 at the floor-1 antechamber") | Antechamber Catch-up (9.4; renamed Forecourt Top-up, naming pass NP-20) | — | Lead; classes, Shade and Arcanist owners told; **client told plainly** |
 | **RT-9** | Enemies 17.5 floor-1 boss bullet ("Escort and reserve groups are not constrained", **agreed**, Herald Q3); enemies 20.1 floor-1 boss rule; Herald 7.16 content-rule bullet "escort and reserve groups are not constrained by it"; classes 5.6 | Add: "except that a theme below 75% non-fearless joins the floor-1 pool only with `F1EscortBreakable` (every escort and reserve group of its floor-1 bosses drawn from non-fearless types) and a passing reference-arm `Floor1ClassSpread` in its split"; the floor-1 pool's 750‰ default | **Agreed** (HR-21, Herald Q3) | **Client, with this document (approved 2026-11-21); told plainly and confirmed** |
 | **RT-10** | Main 4.1 camp bullet "Between floors the party reaches a camp: full rest, a shop or reward, and a **Muster** ..." (**decided**, as amended by CMP-1); enemies 10.6 next-floor line (HR-23: one line per door when Two Doors is on); companions 7.11 camp order (new step 6a; step 11 Travel on commits the door); DH 18.2 "competent player" reading and **DH 19.3** (the Reference chooser inside the reference party policy when Two Doors is on); stat model 7.1 (Lore roster preview at camp, M3) | Add to main 4.1: "Each camp shows the next floor's theme; when route choice is on, camps 1–2 offer a choice of two next floors (run structure design 6.8–6.11)". The camp card, door cards and their place in the camp order | **Decided** (main 4.1 camp bullet) | **Client (agreed 2026-11-21, Q2)**; the door parts apply only when `route.twoDoorsEnabled` is on |
 | **RT-11** | Main 4.1 camp bullet (**decided**); main 4.6 boss bullet "Which boss appears on a floor is drawn from a pool." (**decided**); enemies 17.5 (a final-boss pool); companions 7.11 camp 4 | The Last Hollow choice at camp 4; main 4.6 reads "... drawn from a pool; the final boss may be picked at camp 4 when the Last Hollow choice is on" | **Decided** (main 4.1, 4.6) | **Client (agreed 2026-11-21, Q2)**; applies only when `route.lastHollowChoiceEnabled` is on |
 | RT-12 | DH 17.12 floor-entry card | The Stratum Card header (6.9) above the guaranteed counts | — | Lead; DH owner applies |
-| **RT-13** | Conditions 11.2, 11.5 (the M2 square set "water, web, fire and oil-slick squares", **agreed**) | The bile square (Corroded on entry) added to the M2 square set; no new condition id | **Agreed** (conditions 11.5) | **Client, with this document (approved 2026-11-21); conditions owner applies**; told plainly and confirmed (19.1) |
+| **RT-13** | Conditions 11.2, 11.5 (the M2 square set "water, web, fire and oil-slick squares", **agreed**) | The bile square (renamed gall square, naming pass NP-20; Corroded on entry) added to the M2 square set; no new condition id | **Agreed** (conditions 11.5) | **Client, with this document (approved 2026-11-21); conditions owner applies**; told plainly and confirmed (19.1) |
 | RT-14 | Conditions 16 | Ruling requested: "conditions granted by the universal hazard-edge and landing rules (10.2, 10.3) do not count toward a theme's 6". Fallback drops listed per theme | — | Conditions owner (needed before M2 rosters freeze) |
 | RT-15 | Enemies 9.2; conditions 16; stat model 8.1 | Ruling requested: whether radiant counts 2, and whether Revealed is "harmful" at all. Blocks the M3 Mirror Court and Moth Wedding only | — | Conditions owner |
 | RT-16 | Conditions 11.6, 16 | Ruling requested: trap conditions come from the theme's 6, or the trap is damage-only | — | Conditions owner |
 | RT-17 | Enemies 8.1 (role prop grammar, extending AR-23), 5.6 UI test, 20.1, 20.3 | Charter gates (7.4); V1–V7; ThemeParity; ClassThemeSpread; FloorTimeByTheme; LevelAtDoorByFloor; the reports of 11.4 | — | Lead; **client (agreed 2026-11-21, Q3)** for the charter |
 | **RT-18** | Main 4.7 "Content unlocks lead" (**decided**) | Themes and final bosses join the unlockable content (M3), never power | **Decided** | **Client (M3)** |
-| **RT-19** | Main 9 M3 row (**decided**) | M3 also carries in-run content: Two Doors at camp 3, Omens, Seams, Nightmare tiers | **Decided** | **Client, told with this document (approved 2026-11-21)**; applies at M3 |
+| **RT-19** | Main 9 M3 row (**decided**) | M3 also carries in-run content: Two Doors at camp 3, Omens, Seams, Nightmare tiers (renamed Peril tiers, naming pass NP-20) | **Decided** | **Client, told with this document (approved 2026-11-21)**; applies at M3 |
 | RT-20 | Trinkets 23 | The hazard-edge ask applies from floor 2 (floor 1 is dry by design) | — | Trinkets owner; **told plainly** |
-| **RT-21** | Main 4.7 "Difficulty ladder" (**decided**); enemies 10.1 ladder% ("never raises caps or raw stats" kept) | Nightmare tiers add kind, not stats; the Perilous Door makes the ladder per-floor | **Decided** | **Client (M3)** |
-| RT-22 | This design 8.4 Kennel roster, damage line and M1 subset, 8.1 at-will cell, 12 M1 row; item rolls 5 Kennel row (base families); encounter placement 7.3 K1 (re-check that the Huntsman's level after the −1 shift lies in armour 12.3's legal L1–4, else raise the K1 room or drop the shift); armour 13.6 (types named); weapons unchanged | The M1 Huntsman is re-dressed onto the weapons M1 warhammer-and-shield soldier (a hunting maul and boar-board shield, Push and Interpose, plus Shove) and the Poacher onto the M1 sling artillery (a hunting sling, Push), so both teach their verb against a solo hero (weapons 15.3, 15.4; armour 12.3, 13.6, 10.5); "boar spear" only on a promoted or F2+ pike variant, never at room level 1 (weapons 15.1) (cross-document comparison 2026-11-23, CC-2) | — | Lead's call; RS owner applies 8.4 and 12; item rolls, encounter placement and armour owners apply their rows; M1; added 2026-11-23 |
+| **RT-21** | Main 4.7 "Difficulty ladder" (**decided**); enemies 10.1 ladder% ("never raises caps or raw stats" kept) | Nightmare tiers (renamed Peril tiers, naming pass NP-20) add kind, not stats; the Perilous Door makes the ladder per-floor | **Decided** | **Client (M3)** |
+| RT-22 | This design 8.4 Kennel roster, damage line and M1 subset, 8.1 at-will cell, 12 M1 row; item rolls 5 Kennel row (base families); encounter placement 7.3 K1 (re-check that the Huntsman's level after the −1 shift lies in armour 12.3's legal L1–4, else raise the K1 room or drop the shift); armour 13.6 (types named); weapons unchanged | The M1 Huntsman is re-dressed onto the weapons M1 warhammer-and-shield soldier (a hunting maul and boar-board shield, Push and Interpose, plus Shove) and the Poacher onto the M1 sling artillery (a hunting sling, Push; the role is renamed marksman, naming pass NP-20), so both teach their verb against a solo hero (weapons 15.3, 15.4; armour 12.3, 13.6, 10.5); "boar spear" only on a promoted or F2+ pike variant, never at room level 1 (weapons 15.1) (cross-document comparison 2026-11-23, CC-2) | — | Lead's call; RS owner applies 8.4 and 12; item rolls, encounter placement and armour owners apply their rows; M1; added 2026-11-23 |
 
 ---
 
@@ -3294,7 +3342,7 @@ cross-document comparison 2026-11-23, CC-87):
   readability role-ID playtest (7.4); the floor-time slice on the Heart
   and the slowest floor-4 theme.
 - **The profile (M3):** milestone marks to unlocks; unlockable strata;
-  Nightmare tiers; the Perilous Door (hub surfaces placed by the camp
+  Peril tiers; the Perilous Door (hub surfaces placed by the camp
   and hub design 4.8, 4.11, 7.6: the Milestones page, the Depth gauge,
   the door station; M3).
 - **The art and audio teams:** Tone Sheets and the readability gates.
@@ -3341,7 +3389,7 @@ naming pass remain future items.
   (open: who the Dreamer is, motives, endings). Rejected: B, no premise;
   C, folk horror; D, full absurdism.
 - **Q4, M2 content:** option A. The full M2 core of 8 themes (Gaol and
-  Kennel Wood on F1; Drowned Choir, Silk Archive and Carnival on F2–3;
+  Kennel Wood on F1; Drowned Choir, Cobweb Archive and Carnival on F2–3;
   Long Supper and Gut on F4; the Dreamer's Heart on F5), the Endless Wake
   added if it passes its floor-1 test; Cut 1 and Cut 2 pre-authorised as
   schedule fallbacks; build order Heart and Gut first. Rejected: B, plan
@@ -3355,12 +3403,12 @@ naming pass remain future items.
 - lever 3 takes the RT-7 form (2 guard posts, boss experience 300),
   applied only in the companions 7.4 lever order (the floor-5 form was
   revised after the check, below);
-- the Antechamber Catch-up fires in nearly every bypass run: in effect,
+- the Forecourt Top-up fires in nearly every bypass run: in effect,
   the first boss always meets a level-3 hero (9.4);
 - the 50–74% `Floor1ClassSpread` split has no floor-1 data in M2 unless
   the Wake passes; `F1EscortBreakable` narrows agreed HR-21 text (RT-9);
 - the Gut appears on floor 4 in half of runs; floor 5 differs only by
-  boss and Keepsakes until M3; Emberward is dead in a third of runs and
+  boss and Souvenirs until M3; Emberward is dead in a third of runs and
   Graveward in half; floor 4 is dry when the Supper is drawn (10.7);
 - the trinkets hazard-edge ask starts on floor 2 (RT-20);
 - route choice raises win rates by 2–4 points, so calibration runs on
@@ -3374,7 +3422,7 @@ answers; none changes a Q1–Q4 answer); confirmed by the client on
   run ends, so on floor 5 the trimmed 100 moves to the lair (240)
   instead of the boss; floor 4 keeps boss 300. `Level10BeforeFinalBoss`
   becomes a gate whenever lever 3 applies (6.6, 10.2, RT-7);
-- **bile squares touch agreed text:** the M2 square set of conditions
+- **gall squares touch agreed text:** the M2 square set of conditions
   11.5 is agreed, so RT-13 is flagged and covered by the client's
   approval of this document on 2026-11-21 (17);
 - **ThemeParity is a build gate under the random draw too** (8 points),
@@ -3383,7 +3431,7 @@ answers; none changes a Q1–Q4 answer); confirmed by the client on
   comes back to the client (7.4, 11.4);
 - **Two Doors has two more gates:** the per-class coverage band and a
   confidence rule on the 65% pick rate, which needs about 150 human
-  offers per Middle Dream theme instead of 40 (6.11). This makes the
+  offers per Midwater theme instead of 40 (6.11). This makes the
   switch harder to turn on, never easier;
 - **the launcher streak cap is now 3 runs**, so after three runs on one
   floor-1 theme the next is forecastable (R-SEED-2, R-SEED-6);
@@ -3415,7 +3463,7 @@ answered proposal; confirmed by the client with the document on
    Random and Oracle choosers reported beside it (6.11).
 4. **The pick-rate sample:** read on human playtest sessions with the
    switch on behind a playtest flag, with the 6.11 decision rule (about
-   150 offers per Middle Dream theme, 40 per (theme, floor, partner)
+   150 offers per Midwater theme, 40 per (theme, floor, partner)
    cell) *(illustr.)*, the Reference chooser's rate beside it (6.11).
 5. **A failed gate after M2's balance pass** leaves the switch off, is
    reported to the client, and the doors are re-tested in M3 (6.11).
@@ -3438,7 +3486,7 @@ answered proposal; confirmed by the client with the document on
     configuration snapshot and the route events of 11.1.
 12. **`AntechamberDominatesArena`,** a layout assertion that every
     floor-1 layout has an antechamber every path to the arena passes
-    through (9.4); the catch-up report is named
+    through (9.4); the Top-up report is named
     `AntechamberCatchUpRate`, keeping "Threshold" out of new names (8.0).
 13. **RT-3 flagged** as touching decided text (main 6.3's streams
     bullet, following the CMP-3 precedent), covered by Q1.
@@ -3450,8 +3498,8 @@ answered proposal; confirmed by the client with the document on
     `pairKey`s (8.1); the configuration snapshot fields (11.1); the
     metric definitions and what each gate blocks (11.4); the floor-5
     lair form of lever 3 (6.6); the extended charter clauses inside
-    RC1–RC8 (7.4); pillar 6, Obsession kinds (7.3); the Keepsake rule
-    (9.3); the roster fixes (the Mastiff, the Bile Ooze, the skittish
+    RC1–RC8 (7.4); pillar 6, Obsession kinds (7.3); the Souvenir rule
+    (9.3); the roster fixes (the Mastiff, the Gall Slick, the skittish
     Carver, Teetering drops, boss signatures, role props, the completed
     Wake).
 
@@ -3476,7 +3524,7 @@ triggers them:
 - dropping or replacing Grim Surreal (every theme's grim reading is the
   fallback);
 - the M3 rows: unlockable strata (RT-18), the M3 charter (RT-19),
-  Nightmare tiers and the Perilous Door (RT-21);
+  Peril tiers and the Perilous Door (RT-21);
 - an owner declining RT-14 to RT-16 in a way the catalogue cannot absorb
   (RT-13 was accepted by the client; cross-document comparison 2026-11-23, CC-82);
 - from the events design (its 14.2): the RS owner refusing the Launcher
@@ -3561,7 +3609,7 @@ triggers them:
 | 3 | ThemeParity measures the wrong thing | Fixed arrival states; the ClassThemeSpread gate; sample sizes at both caps costed (10.4) |
 | 4 | Class-polar matchups | Mirror Court to M3 with radiant limits; the Gut's Corroded cap and armour report; the Choir's water caps; RP3 never two consecutive floors below 700‰ |
 | 5 | Water and oil spikes | 6.4 guards with party terrain states; entry-square rules |
-| 6 | Roster rule violations | The Gaol Pack led by the Escapee (one family); no Sergeant-group signature on F1; the Wailer is artillery; the Model B Heart not used; every M2 theme keeps a leader-role type (no Commanding dependence); Wake Guests skittish; the Scavengers content test |
+| 6 | Roster rule violations | The Gaol Pack led by the Escapee (one family); no Sergeant-group signature on F1; the Wailer is artillery (role renamed marksman, naming pass NP-20); the Model B Heart not used; every M2 theme keeps a leader-role type (no Commanding dependence; the affix is renamed Exhorting, naming pass NP-20); Wake Guests skittish; the Scavengers content test |
 | 7 | A Reference policy understates experts | The Oracle cap of 1/3; class reports rerun under the Reference chooser; the pick-rate gate on humans |
 | 8 | An absolute FloorTimeByTheme is noise | A relative gate; the slowest-theme human slice |
 | 9 | Non-monotone difficulty after the trim | The `LevelAtDoorByFloor` report and a stated response |
@@ -3583,11 +3631,11 @@ triggers them:
 | CF-M3 | Catch-up: unflagged text, a mid-combat edge case | RT-8 edits classes 7.3 and companions 7.1; deferral to combat end; DH already at level 3 |
 | CF-M4 | Concentrated guard posts are an enemies 10.3 change with an assumed saving | Not adopted (A.3 #1) |
 | CF-M5 | LootDoorInvariant overclaims | Restated around placement and the Resistant filter; a carrier-fallback report |
-| CF-M6 | Dream Fragments add time where the gate fails | Moved to M3 |
+| CF-M6 | Dream Fragments (renamed Fragments, naming pass NP-20) add time where the gate fails | Moved to M3 |
 | CF-M7 | No owed-requirements table; trinkets 23 against a dry floor 1 | Section 14; RT-20 |
 | CF-M8 | Merged theme versions | One frozen version per theme (8.3–8.11); cross-theme checks rerun (10.3, 10.7) |
 | CF-L1 | A Picket can field a leader | Corrected (8.2 g) |
-| CF-L2 | Wave charter; Perilous owner; Lucid Key slot | RT-19; RT-21 client; the Lucid Key Later, pending items |
+| CF-L2 | Wave charter; Perilous owner; Lucid Key slot | RT-19; RT-21 client; the Lucid Key Later, pending items (renamed the Clear Key, naming pass NP-20) |
 | CF-L3 | 5–6 against 5–7 types | RT-5 (enemies 10.6 already says 5–7) |
 | CF-L4 | A draft raised the budget band | RT-7 edits the experience list only |
 | CF-L5 | Bring-the-key | A watch report; class-blind cards |

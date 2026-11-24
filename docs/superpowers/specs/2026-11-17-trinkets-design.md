@@ -11,6 +11,13 @@ Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-17-weapons-design.md` (weapons design) and
 `2026-11-17-armour-design.md` (armour design)
 
+**Names updated by the naming pass** (naming pass design,
+`2026-11-24-naming-pass-design.md`, approved 2026-11-24; NP rows NP-15,
+with the register cites of NP-4, NP-10, NP-11, NP-12, NP-13, NP-14 and
+NP-17 that name this document). Player-facing names only; code ids, field
+names, change ids and quoted history stay as written, with "(renamed …)"
+notes where a historical row names an old name as current.
+
 Items marked **(agreed)** were decided by the client on 2026-11-17 for
 the four questions this design raised (domains, rarity, buttons, damage),
 by choosing the lead's recommendation in each case. Under Q1 the client
@@ -40,7 +47,9 @@ where a value is marked as a client decision or a lead's number.
 charged item powers, the capped capacity item) and the SRD 5.2 class and
 feat shapes the copy registry protects against (Steady Aim, Patient
 Defense, Cunning Action, halfling Luck, Heroic Inspiration) are written
-from memory. **Every SRD-shaped mechanism must be checked against the SRD
+from memory. (Here and in 11, 13.9, 16 and Appendix A, "Steady Aim"
+names the SRD rogue feature itself; the game's own longbow mastery that
+echoed it is now Settled Aim, naming pass NP-12, 5.1.17.) **Every SRD-shaped mechanism must be checked against the SRD
 5.2.1 document before any trinket or property record is written**, and
 every record flagged `srd` cites the entry it was checked against
 (section 16).
@@ -73,7 +82,7 @@ two slots with real choices from about 9 finds a run. **(agreed, Q1)**
 
 - **The location promises the subject; the shape tells you when.** Each
   body location owns a domain and a signature shape, and each jewellery
-  kind owns a lane. **(agreed, Q1)** Charms catch moments: their shapes
+  kind owns a lane. **(agreed, Q1)** Charms hold moments: their shapes
   are Spend, Catch, Keep (one gated record) and Shaper (Later), and the
   shape glyph tells you which **(change CA-1; agreed, charm abilities
   Q1; charm abilities design 4.2)**.
@@ -287,11 +296,11 @@ charm row's shape cell restated under agreed charm abilities Q1, CA-1)**
 |---|---|---|---|---|
 | **Head** (1) | helm, hood, circlet | **(settled, armour 13.4)** Senses, mind, crit riders. Read here **(lead's call)** as: senses (Search; Blinded and Revealed against you); mind (save advantage against one named mind or fear condition); crits and unseen hits against you attempt no rider; the psychic rider (Unfocused) | Passive: reacts to what is done to your mind and senses | Crit downgrades (armour's Proof and Adamant); "cannot be Surprised" (Perception's job, the lurker answer) |
 | **Hands** (1) | gloves, gauntlets, bracers | **(settled, armour 13.4)** Grapple, handling, Administer. Read here **(lead's call)** as: grapple and escape; handling (Hand over, pickup); giving (Administer and other ally-targeted item use) | Passive cost or reach step: changes what your hands do for the party | Weapon swaps (Quickdraw), Retrieve, added cures, escape-check advantage (Barbed Studs) |
-| **Feet** (1) | boots | **(settled, armour 13.4)** Movement, Prone, hazards. Read here **(lead's call)** as: movement verbs and the movement cost of standing, Prone, Teetering and hazard edges, Disengage economy; Jumping over crossable hazards (Later) | Passive or `fight` minor use: reacts to ground and footing | Speed of any kind; Shove-proofing (Sure-Footed, Deep Stance) |
-| **Back** (1) | cloak | **(settled, armour 13.4)** Elements, stealth. Read here as: the element riders back owns under 5.7 **(agreed, Q1)** (Burning, Smouldering, Chilled); stealth (Hide, staying Hidden) and shake-off economy **(lead's call)** | Passive: reacts to weather and being seen | Always-on resistance (Resistant); Muffled and Shadowed copies; roll mode against attacks; Corroded |
+| **Feet** (1) | boots | **(settled, armour 13.4)** Movement, Prone, hazards. Read here **(lead's call)** as: movement verbs and the movement cost of standing, Prone, Teetering and hazard edges, Disengage economy; Jumping over crossable hazards (Later) | Passive or `fight` minor use: reacts to ground and footing | Speed of any kind; Shove-proofing (Sure-Footed, Low Stance) |
+| **Back** (1) | cloak | **(settled, armour 13.4)** Elements, stealth. Read here as: the element riders back owns under 5.7 **(agreed, Q1)** (Burning, Smouldering, Chilled); stealth (Hide, staying Hidden) and shake-off economy **(lead's call)** | Passive: reacts to weather and being seen | Always-on resistance (the armour <element>-proof property); Muffled and Shadowed copies; roll mode against attacks; Corroded |
 | **Neck** (1) | amulet (torc, locket, pendant) | **Life and the body:** the `poison`, `bleed`, `disease` tags; Withered; getting a Downed companion up; one element damage event; prevention for one adjacent ally against a non-control minor, limited **(lead's call)** to the neck's own subjects (Poisoned, Bleeding, Withered; Diseased when it ships) | Automatic prevention or blunting: keeps you going | Healing amounts; Scarred; concentration (Later candidate); mind and fear (head's in M2); any control tag as a whole; another location's riders, for yourself or an ally |
 | **Finger** (2) | ring (band) | **Your strike:** one damage part of your own damaging attack or ability (type shift with rider flag; rider flag on its own type); a declared +1 reach option; the cost of Help, the action that sets up an ally's strike (Sigil) | Automatic channel charge on your own use, or an option you declare with it: changes the strike you are making | Added damage; class pools, slots or spells; movement or teleport; defence of any kind; buttons in M2; Study (head, Later) |
-| **None** (2) | charm (knot, token) ("talisman" dropped as a display word; change CA-12; M2 text) | **Stored moments:** Warded and Helped from the charm's own pool or trigger | **Charms catch moments:** a token earned from a named moment in the fight, or one button you spend **(change CA-1; agreed, charm abilities Q1; charm abilities design 4.2)** | Fight-start automatic Warded (Warding Lining); save rerolls (Inspired, Later); coin |
+| **None** (2) | charm (knot) ("talisman" dropped as a display word; change CA-12; M2 text) | **Stored moments:** Warded and Helped from the charm's own pool or trigger | **Charms hold moments:** a token earned from a named moment in the fight, or one button you spend **(change CA-1; agreed, charm abilities Q1; charm abilities design 4.2)** | Fight-start automatic Warded (Warding Lining); save rerolls (Inspired, Later); coin |
 | **None** | capacity | **Carrying:** +1 or +2 pack slots **(settled, items design 5.4)**; one capacity trinket counts per unit, so trinket capacity is at most +2 per unit (7.1) **(lead's call)** | No combat line | Belt or trinket slots |
 
 - **Charm shapes (change CA-1; agreed, charm abilities Q1; charm
@@ -323,13 +332,14 @@ charm row's shape cell restated under agreed charm abilities Q1, CA-1)**
   mind; gauntlets → grapple; gloves → handling; bracers → giving and
   reach. The agreed 13.4 row and the approved example names stay
   unchanged, so Warden's Coif (a hood) keeps a mind verb.
-- **Knots, lockets, tokens, torcs, pendants and bands** are
+- **Knots, lockets, torcs, pendants and bands** are
   display names and silhouettes under the existing `charm`, `amulet` and
   `ring` kinds. **No new kind enums**; `kindToLocation` is unchanged.
   "Talisman" is no longer a charm display word: it is the Reprieve
-  Phial's item category and an item rolls fine loot category **(change
-  CA-12; M2 text; charm abilities design 2.3 F1)**. "Token" is reviewed
-  by the naming pass.
+  Phial's item category (shown as "failsafe" since the naming pass; the id stays `talisman`) and an item rolls fine loot category **(change
+  CA-12; M2 text; charm abilities design 2.3 F1)**. "Token" was reviewed
+  by the naming pass and dropped as a display word: cards show the
+  object noun, and two item names take "Fob" (naming pass NP-15).
 
 ### 5.7 Rider ownership
 
@@ -368,9 +378,9 @@ wants rings as much as a caster.
 
 | Reading | Meaning | Verdict |
 |---|---|---|
-| R-a: always-on element resistance on gauntlets | Moves or copies Resistant (`props.armour_major`, armour 14.3); a value-2 line on a piece | **Rejected:** breaks the one-table rule and the piece rule (armour 5.5), and makes resistance a hands tax |
+| R-a: always-on element resistance on gauntlets | Moves or copies the <element>-proof property (`props.armour_major`, armour 14.3); a value-2 line on a piece | **Rejected:** breaks the one-table rule and the piece rule (armour 5.5), and makes resistance a hands tax |
 | R-b: blunt one element damage event per rest | A value-2 major, so jewellery only | **On the amulet** (Emberward Amulet, 13.5) |
-| R-c: the element's rider does not stick | Save advantage against Burning or Chilled | **On the cloak** (Weathered Cloak, approved). The card says "riders", never "resistance" |
+| R-c: the element's rider does not stick | Save advantage against Burning or Chilled | **On the cloak** (Fleece-Lined Cloak, approved; renamed from Weathered Cloak by the naming pass). The card says "riders", never "resistance" |
 
 Gauntlets stay grapple (Grappler's Gauntlets, approved). **(agreed, Q1)**
 
@@ -383,7 +393,7 @@ Each only inside its owning table (5.5). **(lead's call)**
 1. **Save advantage against one named condition, or one non-control tag**
    (`poison`, `bleed`, `disease`). Never a control tag as a whole (`mind`,
    `fear`, `restraint`, `prone`, `sight`), never "all Will saves".
-   Precedent: Unshaken, Barred, Weathered.
+   Precedent: Unflinching, Barred, Fleece-Lined.
 2. **A prevention charge at the gear-prevention step** (between conditions
    pipeline steps 3 and 4; AR-51; order in 7.3): one named minor or major
    condition, or one non-control tag, for yourself; or, neck major only,
@@ -458,16 +468,16 @@ marked)**
 | Max HP; temporary HP (Bolstered is Later) | Dead number; Scarred is the client's cost of a downing |
 | Speed, flat or conditional; Dash cost steps **(settled, stat model 6 Speed row, agreed)** | Items are not a listed speed source |
 | Flat save bonus; advantage on a whole defence | Buff test; the "cloak of protection" must-have |
-| Always-on damage resistance | One-table rule; Resistant is `props.armour_major` |
+| Always-on damage resistance | One-table rule; <element>-proof is `props.armour_major` |
 | Condition-tag immunity | Monster immunity budget (conditions 12.2); the enemies 17.1 Party's answer |
 | Granting or extending Steeled, Unyielding, composure or Rallied; shortening hard conditions | Conditions 7.2 anti-lock guards |
 | Applying hard or major conditions; offensive morale (Frighten economy, Demoralise, Rout) | Hard control only from limited abilities (conditions 7.1); the morale engine |
 | Any of these as a trinket output, in any lane: Spurred, Rallied, Steeled, Unyielding, Dodging, Hidden, Veiled, Revealed, Shielded, Empowered, Bolstered, Blurred, Death-warded, healing, temporary HP **(change CA-4, a narrowing; charm abilities design 4.4)** | Spurred reads as speed (13.9); each other output belongs to another lane, owner or row of this list; charm outputs stay Warded and Helped (6.1 item 6) |
-| Extra actions, turns or attacks; a second reaction; two cost steps on one action | Nova anti-goal; Surge and Extra Attack are class powers |
+| Extra actions, turns or attacks; a second reaction; two cost steps on one action | Nova anti-goal; Onslaught and Extra Attack are class powers |
 | Class pools: +max, refill, refill-tag change, "not spent on a miss" | Free-refill anti-goal; capacity and timescale offers |
 | Training, mastery, spells known, concentration proficiency | Offers and classes own access |
 | Class-list or scroll spells; slot-free or bonus-action casting; wand or scroll recharge | Scrolls and wands own item spells; focus tables own casting shape |
-| Healing amounts, regeneration, heal on hit or kill, extra cures, Recovery, supply, Slot Recovery | Coin peg (items 10.5); Second Wind; Hungering is a weapon minor; tonic pricing |
+| Healing amounts, regeneration, heal on hit or kill, extra cures, Recovery, supply, Slot Renewal | Coin peg (items 10.5); Patch Up; Hungering is a weapon minor; tonic pricing |
 | Scarred | Client decision |
 | Retrieve or any pack-in-combat change | `packInCombat` is a client decision (items 5.1) |
 | Coin, prices, Sell, loot draws, rerolls, smart-loot tags, family caps | Fixed loot budget; grind anti-goal; Leadership pricing |
@@ -488,7 +498,7 @@ marked)**
 | **Reaction cap** | One reaction-granting property per unit across armour, shield and trinkets; slot-order suppression `ReactionCap` | **(settled, armour 5.5)**, extended: an automatic trigger that fires off the wearer's turn to protect or affect **another unit** (Kinward, Heartward) counts as reaction-granting for the cap, though it spends no reaction. Self-only automatic preventions stay exempt (TK-3) |
 | Roll-mode and crit caps | Untouched: trinkets have no roll-mode effect against the wearer and no crit downgrade | **(settled)** |
 | **`ButtonCap`** | At most 1 trinket-granted button per unit; extras greyed by slot order, with a pre-equip verdict ("Ward-Knot would be greyed: one trinket button"). E+ never adds a button | **(agreed, Q3)**; TK-3, TK-10 |
-| **`DuplicateAnswer`** | Among a unit's worn trinket properties **and its armour and shield properties**, at most one property answers each key. Keys are read from each property's `answers[]` field (17.1), never inferred. **Prevent keys** are pairs (scope, subject), scope `self` or `ally`, subject a condition id, a non-control tag, a control tag or an element; only the effect kinds `preventCondition` and `saveAdvantage` declare them. A tag key collides with every condition id that carries that tag (`self:poison` collides with `self:Poisoned`); `self:Withered` and `ally:Withered` do not collide. **Identity keys:** every property also answers its own property id, so a second copy of the same id (two Aid lines, two Ember rings) is greyed and its pool is never spent. **Capacity** is one key, so only one capacity trinket counts per unit. Armour and shield win (they come first in slot order); extra trinket lines are greyed `DuplicateAnswer`, never refused. Cost steps and channels have no prevent keys; they are bounded by the identity key and the per-use rules below **(lead's call)** | TK-3, TK-10 |
+| **`DuplicateAnswer`** | Among a unit's worn trinket properties **and its armour and shield properties**, at most one property answers each key. Keys are read from each property's `answers[]` field (17.1), never inferred. **Prevent keys** are pairs (scope, subject), scope `self` or `ally`, subject a condition id, a non-control tag, a control tag or an element; only the effect kinds `preventCondition` and `saveAdvantage` declare them. A tag key collides with every condition id that carries that tag (`self:poison` collides with `self:Poisoned`); `self:Withered` and `ally:Withered` do not collide. **Identity keys:** every property also answers its own property id, so a second copy of the same id (two Helping lines, two Ember rings) is greyed and its pool is never spent. **Capacity** is one key, so only one capacity trinket counts per unit. Armour and shield win (they come first in slot order); extra trinket lines are greyed `DuplicateAnswer`, never refused. Cost steps and channels have no prevent keys; they are bounded by the identity key and the per-use rules below **(lead's call)** | TK-3, TK-10 |
 | **One channel per use** | At most one trinket channel per **use**, from all worn trinkets. A use is one attack roll or one ability resolution: each attack of an Attack action (Extra Attack, a Nick or off-hand attack) and each opportunity attack is its own use. Only the wearer's `UseAbility` resolutions and weapon attack pipelines are eligible; never damage-over-time ticks, rider damage, `onApply` effects or gear retaliation. Candidate rings are evaluated in trinket slot order; the first whose policy, filters and part rule all pass fires, and later rings are not evaluated or spent **(lead's call)** | Rule 23 |
 | **Trinket wards never stack** | A trinket-granted Warded has no effect on a unit already Warded (no refresh, no intensity). The button is greyed `AlreadyWarded` on that target | TK-10, TK-22 |
 | **One trinket Warded per fight** | A unit receives at most one trinket-granted Warded per fight, from any source (its own Wardstone, an ally's Ward-Knot). A second is greyed `AlreadyWardedThisFight` on that target **(lead's call, new)** | TK-10, TK-22 |
@@ -521,6 +531,8 @@ boss encounter; a line revealed mid-fight stays inert until that reset.
 
 **(lead's call)** Verdicts and suppressions ignore dormant properties
 (they do not function, items 11), so a verdict never leaks a hidden line.
+On the card a dormant line reads "? untold" (naming pass NP-11, 5.9.15);
+"dormant" stays the design word here.
 
 **When suppression is recomputed (lead's call, new):** by strict slot
 order (7.1), on these events only: equip or unequip, `ItemRevealed`, and a
@@ -601,7 +613,7 @@ major, `rest` 1/1/1, value 2 (ability model 6.2, read).
 | Rarity | Composition | Feel | Examples |
 |---|---|---|---|
 | **Common (1)** | One obvious line. A piece's Common is its location verb | **"A habit":** one small rule you feel every fight or two. No hidden line | Strider's Boots, Antidote Locket, Ember Ring, Wardstone |
-| **Uncommon (2)** | Obvious line + one roll from the same table, **or** one jewellery major alone. May hold the one reaction-shaped trigger. The rolled line may be the one dormant property; the obvious line never is | **"A plan":** two lines, or one planned moment you build a turn around | Kinward Torc; an Ember Ring rolled with Aid |
+| **Uncommon (2)** | Obvious line + one roll from the same table, **or** one jewellery major alone. May hold the one reaction-shaped trigger. The rolled line may be the one dormant property; the obvious line never is | **"A plan":** two lines, or one planned moment you build a turn around | Kinward Torc; an Ember Ring rolled with Helping |
 | **Rare (3): amulets only, floor 3+, at most 1 Rare trinket per floor, never a boss signature** | A major + one rolled minor; the minor may be dormant | **"A signature jewel":** the late find that matches Rare weapons and armour. Never fundamental maths | Heartward Torc |
 | Very rare | None | — | — |
 
@@ -640,7 +652,7 @@ major, `rest` 1/1/1, value 2 (ability model 6.2, read).
   per run and the Rare offer and pick rate per floor (18.3). A second
   Rare neck family is a Later option (24.3). **(lead's call)**
 - **Pending request (IR-14, M2; item rolls design 4.17, 4.8):** LootPlan
-  identities (the Due, fit premiums, offer and Viaticum options, fallback
+  identities (the Due, fit premiums, offer and Parting Fare options, fallback
   trinkets included) count **first** against `trinketRarePerFloorMax`;
   TK-27's order (containers, carried, camp, boss) then holds among the
   parent channels. It changes nothing until the TK owner confirms; if
@@ -677,7 +689,7 @@ major, `rest` 1/1/1, value 2 (ability model 6.2, read).
 |---|---|---|
 | **Passive** | Mostly pieces | Event-shaped, with a named trigger and a mandatory `previewHint`. Never a number. Never an always-on copy of another table (one-table rule) |
 | **Charged, automatic** | Neck, finger, some pieces | Prevention or channel charges with a data policy. Defaults: condition preventions `always` with target filter `nonMinion`; element blunting `always` with `nonMinion` and `bigHit` (13.5); channels `always` with the default filters `nonMinion`, `notResistant` (never shift onto a target known to resist or be immune to the new type) and `noCancelOwnSide` (9.4). Channels also carry the mandatory `hostileOnly` filter and the built-in precondition `riderWouldBeAttempted` (9.4), which the player cannot change. The player may change any default to "ask me" (ability model 7.3). Automatic `fight` uses of preventions and channels always fire |
-| **Cost-step, reach-step and declared uses** | Pieces, rings, Lifeline | A `fight` or `rest` use that changes an action's cost or reach (Runner, Oilskin, Lifeline, Aid, Longreach) is offered as a separate action variant beside the normal one ("Shake off (Oilskin, 1 square)") and spent only when the player or AI picks that variant. Never automatic. A passive verb with no pool (Strider, Deft, Catcher) simply applies **(lead's call)** |
+| **Cost-step, reach-step and declared uses** | Pieces, rings, Lifeline | A `fight` or `rest` use that changes an action's cost or reach (Runner, Oilskin, Lifeline, Helping, Longreach) is offered as a separate action variant beside the normal one ("Shake off (Oilskin, 1 square)") and spent only when the player or AI picks that variant. Never automatic. A passive verb with no pool (Strider, Deft, Courier) simply applies **(lead's call)** |
 | **Granted (button)** | Charms only in M2 | At most 1 per unit (`ButtonCap`). Original trinket-list abilities only. Usable only in combat, after initiative is rolled. They need no difficulty of their own: trinket outputs carry no save-or-suffer control |
 | **Charm shapes** **(change CA-1; agreed, charm abilities Q1)** | Charms | Spend is the granted button (▸). Catch (◈) is a Passive: automatic, once per fight, keyed to a named outcome, a `fight` minor, outside `ButtonCap` (M3). Keep fills from a catch and spends through the one button (one gated record; M3 if CG2, else M4). Shaper changes a held token (Later). Charm abilities design 4.2 |
 
@@ -876,8 +888,8 @@ charm abilities design 13).
    Dust (VG-18); the Herald pairs, including Reach the Fallen against
    the Lifeline Pendant. **Owed for the charm catches (pending, TK
    owner with the class owners, the CC-54 pattern; before shadow results
-   are read; charm abilities design 11):** Twitch Bone, Lockjaw, Shy
-   Stone, Quietus Knot and Second's Hairpin, and the ally-Helped catch
+   are read; charm abilities design 11):** Twitch Bone, Jawbone, Shy
+   Stone, Snuffed Wick and Second's Hairpin, and the ally-Helped catch
    ruling (charm abilities design 4.4).
 2. **Weapon, armour, shield and focus properties keep weapons 18.1:**
    charged echoes are legal (Ember Ring echoes Ember Edge; Longreach
@@ -946,8 +958,8 @@ charm abilities design 13).
   item goes to a container in the same room (15.3 step 4, unchanged).
   **(lead's call)**
 - **Banned pairs:** Wardstone and Ward-Knot are never on a carrier with
-  the Warded or Unbreakable affix (enemies 17.2 bans Warded with
-  Unbreakable; a carried ward would recreate the pair or add a second
+  the Warded or Unbending affix (enemies 17.2 bans Warded with
+  Unbending; a carried ward would recreate the pair or add a second
   ward once the affix ward is spent), and a carried Ward-Knot's `useWhen`
   never targets such a unit. **(lead's call)**
 - **Party-side opener rule:** no trinket property may negate a role's
@@ -958,11 +970,11 @@ charm abilities design 13).
 | Location | Carried-eligible (limits) | Container-only |
 |---|---|---|
 | Head | Visored Helm; Barred Helm | Warden's Coif; Watcher's Hood |
-| Hands | — | Grappler's Gauntlets; Deft Gloves; Catcher's Bracers |
+| Hands | — | Grappler's Gauntlets; Deft Gloves; Courier's Bracers |
 | Feet | Strider's Boots (never on brutes) | Ledgewalker's Boots; Runner's Boots |
-| Back | Weathered Cloak | Grey Mantle; Oilskin Cloak; Duskhem Cloak |
+| Back | Fleece-Lined Cloak | Grey Mantle; Oilskin Cloak; Duskhem Cloak |
 | Neck | Emberward Amulet; Kinward Torc (elites; never in a boss encounter); Heartward Torc (elites, floor 3+; never in a boss encounter; an instance whose rolled line is Lifeline is container-only) | Antidote Locket; Graveward Amulet; Lifeline Pendant |
-| Finger | Ember Ring; Frost Ring | Whetstone Ring; Sigil of Aid; Longreach Band |
+| Finger | Ember Ring; Frost Ring | Whetstone Ring; Helping Sigil; Longreach Band |
 | Charm | Wardstone; Ward-Knot (elites; never in a boss encounter) | Trophy Tally |
 | Capacity | — | Porter's Satchel; Mule Strap |
 
@@ -994,7 +1006,7 @@ Uncommon pieces add one roll from their location table. **(lead's call)**
 | Family | Kind | Line | Wave | Notes |
 |---|---|---|---|---|
 | **Visored Helm** | helm | **Visor:** a critical hit against you attempts no rider; also, once per fight (`fight` minor), the first hit from an attacker you could not see that would attempt a rider attempts none | M2 | **(change TK-2)** Unseen branch added as a `fight` minor so it meets the trigger rate without erasing the lurker opener's damage. "Could not see" means: at the attack roll the attacker is Hidden from you or you are Blinded. The `fight` use is spent only when a rider would otherwise be attempted and the passive crit branch did not already apply. Valued as one value-1 property (the lead's valuation; the exception to 8.1 noted there). Crits still double; never a downgrade |
-| **Warden's Coif** | hood | **Unshaken** (approved): Frighten attempts against you have disadvantage; advantage on saves against Frightened | M2 | Container-only |
+| **Warden's Coif** | hood | **Unflinching** (approved): Frighten attempts against you have disadvantage; advantage on saves against Frightened | M2 | Container-only |
 | **Barred Helm** | helm | **Barred** (approved): advantage on saves against Dazed | M2 | |
 | **Watcher's Hood** | hood | **Vigil:** your Search has advantage | M2 | The party's lurker answer; trigger-rate watch; container-only |
 | Shaded Circlet | circlet | Advantage on saves against Blinded | Later | First replacement if a head family is cut |
@@ -1006,8 +1018,8 @@ Uncommon pieces add one roll from their location table. **(lead's call)**
 |---|---|---|---|---|
 | **Grappler's Gauntlets** | gauntlets | **Grappler:** escaping Grappled or Restrained costs a bonus action | M2 | **(change TK-2)** Restrained added (webs, nets) for the trigger rate; matches the conditions `escape` cure. Container-only |
 | **Deft Gloves** | gloves | **Deft** (approved): Administer costs a bonus action | M2 | Container-only |
-| **Catcher's Bracers** | bracers | **Catcher:** Hand over and Administer may target an ally within 2 squares in line of sight | M2 | Reach step (6.1 item 4); container-only |
-| Clenching Gauntlets | gauntlets | **Clench:** once per fight, a unit you grapple has disadvantage on its first escape check | Later | Renamed from "Holder" (behaviour-profile clash); `fight` minor, for the conditions 7.2 anti-lock spirit; container-only |
+| **Courier's Bracers** | bracers | **Courier:** Hand over and Administer may target an ally within 2 squares in line of sight | M2 | Reach step (6.1 item 4); container-only |
+| Vicelike Gauntlets | gauntlets | **Vicelike:** once per fight, a unit you grapple has disadvantage on its first escape check | Later | Renamed from "Holder" (behaviour-profile clash), then from "Clench" by the naming pass (NP-15); `fight` minor, for the conditions 7.2 anti-lock spirit; container-only |
 | Slinger's Bracers | bracers | Once per fight, throwing a belt flask, tonic or potion costs a bonus action | Later | **(change CN-22)** The flask throw and the potion throw at an ally are designed (consumables design 11) |
 
 ### 13.3 Feet (3 M2)
@@ -1024,7 +1036,7 @@ Uncommon pieces add one roll from their location table. **(lead's call)**
 
 | Family | Line | Wave | Notes |
 |---|---|---|---|
-| **Weathered Cloak** | **Weathered** (approved): advantage on saves against one element's rider: Burning or Chilled in M2 | M2 | **(change TK-2)** Rider ownership (5.7); Corroded excluded. The element is fixed by the record, not the instance: two property records, `prop.trinket.weathered_burning` and `prop.trinket.weathered_chilled`, in `props.trinket.back` under one family, as armour Resistant (element) works. No new instance state **(lead's call)** |
+| **Fleece-Lined Cloak** | **Fleece-Lined** (approved): advantage on saves against one element's rider: Burning or Chilled in M2 | M2 | **(change TK-2)** Rider ownership (5.7); Corroded excluded. The element is fixed by the record, not the instance: two property records, `prop.trinket.weathered_burning` and `prop.trinket.weathered_chilled`, in `props.trinket.back` under one family, as the armour <element>-proof property works. No new instance state **(lead's call)** |
 | **Grey Mantle** | **Grey Mantle** (approved): Hide has advantage against a unit that has not seen you this fight | M2 | "Has not seen you this fight" reads the awareness record's per-fight `everNoticed[partyUnit]` flag (TK-26). Hide makes one check against several observer groups: roll two d20s once from the combat stream; the higher die is used against groups with `everNoticed` false, the first die against the rest. Trigger-rate watch; container-only |
 | **Oilskin Cloak** | **Oilskin:** once per fight, shaking off costs 1 square instead of half your speed; a shake-off paid this way does not end Corroded | M2 | `fight` minor; a movement-cost step offered as a variant ("Shake off (Oilskin, 1 square)") beside the normal shake-off (9.1), so a player who needs Corroded ended picks the normal one |
 | **Duskhem Cloak** | **Duskhem:** once per fight, when your attack made while Hidden drops its target to 0 HP, you stay Hidden from every hostile group whose `everNoticed` flag for you is false | M2 | Stealth persistence (6.1 item 14); checked against Hidden's end rules and Shadowed before data (23); container-only |
@@ -1035,15 +1047,15 @@ Uncommon pieces add one roll from their location table. **(lead's call)**
 
 | Family | Rarity | Line | Wave | Notes |
 |---|---|---|---|---|
-| **Antidote Locket** | C | **Antidote:** advantage on saves against `poison`-tag conditions | M2 | Sealed reworded (TK-6, F2). Overlaps Inured (Later) as Weathered overlaps Resisting (approved precedent). Container-only; trigger rate reported per floor theme |
+| **Antidote Locket** | C | **Antidote:** advantage on saves against `poison`-tag conditions | M2 | Sealed reworded (TK-6, F2). Overlaps Inured (Later) as Fleece-Lined overlaps Resisting, shown "Resistant (type)" (approved precedent). Container-only; trigger rate reported per floor theme |
 | **Graveward Amulet** | C | **Graveward:** 1 / 1 / 2 per rest, Withered does not land on you | M2 | Gear-prevention step (7.3). Container-only; trigger rate reported per floor theme |
 | **Lifeline Pendant** | C | **Lifeline:** once per fight, getting a Downed adjacent companion up (Medicine, trained) costs a bonus action | M2 | `fight` minor (counts toward Medicine's once per companion per fight; death and healing design 11.2), offered as an action variant (9.1). `requires: skill.medicine.trained`; a warning verdict when the wearer is not Medicine-trained (15); companions only (a hero downing ends the run); container-only |
-| **Emberward Amulet** | U (major) | **Emberward:** 1 / 1 / 1 per rest, the fire parts of one damage event against you resolve one ladder step toward resistant; never past resistant, never to immune, and never combined with another step source on the same event (the strongest applies) | M2 | The client's "resistance", reading R-b. Bounds **(lead's call, new)**: acts on all fire parts of the event together; `bigHit` is true when the sum of the fire parts, after crit doubling and before any ladder step, is at least `FloorDiv(maxHP × bigHitPermille, 1000)`; the charge is spent only if the final ladder step of some fire part changes (as Shielded's "used only if it changes something"). A fire Resistant source in an earlier slot (Resistant armour) draws the warning verdict `DeadLine`, which is not a suppression |
+| **Emberward Amulet** | U (major) | **Emberward:** 1 / 1 / 1 per rest, the fire parts of one damage event against you resolve one ladder step toward resistant; never past resistant, never to immune, and never combined with another step source on the same event (the strongest applies) | M2 | The client's "resistance", reading R-b. Bounds **(lead's call, new)**: acts on all fire parts of the event together; `bigHit` is true when the sum of the fire parts, after crit doubling and before any ladder step, is at least `FloorDiv(maxHP × bigHitPermille, 1000)`; the charge is spent only if the final ladder step of some fire part changes (as Shielded's "used only if it changes something"). A Fireproof source in an earlier slot (Fireproof armour) draws the warning verdict `DeadLine`, which is not a suppression |
 | **Kinward Torc** | U (major) | **Kinward:** 1 / 1 / 1 per rest, automatic: when Poisoned, Bleeding or Withered would land on an adjacent ally (a failed save or an automatic landing), it does not land | M2 | Narrowed to the neck's own subjects (5.5, 5.7): Burning and Chilled are back's **(lead's call)**. Trigger `allyConditionWouldLand` (7.3). Reaction-shaped (counts under `ReactionCap`); yields to a ward step 4 would spend (7.1); one received prevention per round |
 | **Heartward Torc** | **R** (floor 3+) | Fixed Kinward + one rolled neck minor (Antidote, Graveward or Lifeline), which may be dormant | M2 | The only M2 Rare family. Kinward answers `ally:` keys and the rolled minors `self:` keys, so all three rolls stay legal under rule 28. Elites only as carriers (12; a Lifeline roll is container-only); Later curse host (cursed twin at M4 only if the TK owner agrees: pending request HL-26, HL-29; heirlooms and curses design 4.6) |
-| Frostward, Stormward, Causticward, Dawnward, Duskward Amulets | U (major) | As Emberward for cold, lightning, acid, radiant, necrotic | Later | At most 2 element families per wave per lane; Causticward blunts damage only |
+| Frostward, Stormward, Causticward, Dawnward, Gloamward Amulets | U (major) | As Emberward for cold, lightning, acid, radiant, necrotic | Later | At most 2 element families per wave per lane; Causticward blunts damage only |
 | Staunch Torc | C | Advantage on saves against `bleed` | Later | Dead under Ringed armour |
-| Torc of Seasons | R | Element chosen at each rest | Later | Needs a new instance field (items 18.1); pushes bring-the-key scouting |
+| Seasonal Torc | R | Element chosen at each rest | Later | Needs a new instance field (items 18.1); pushes bring-the-key scouting |
 | Stillmind Pendant | C | Once per fight, your first concentration check has advantage | Later | Only if at least 2 launch classes concentrate; never with Steady Casting |
 | Bulwark Locket | U | Rest charge granting Shielded before a damage event | Later | Needs Shielded; class copy check against defensive Techniques |
 
@@ -1054,7 +1066,7 @@ Uncommon pieces add one roll from their location table. **(lead's call)**
 | **Ember Ring** | C | **Ember:** 1 / 1 / 2 per rest, policy `always` (`hostileOnly`, `nonMinion`, `notResistant`, `noCancelOwnSide`; fires only if its rider would be attempted): when an attack or ability you make deals damage, one part deals fire instead and is rider-flagged (Burning). Its damage is unchanged (9.4). Against a fire-weak target Burning lands automatically | M2 | Charged echo of Ember Edge (weapons 18.1). Part, target, filters and the Oiled ruling in 9.4. Carried: Burning counts toward the type's 2. A verdict warns when the active weapon already flags a part first in 9.3 order (an Ember Edge or Honed weapon): the ring then fires only on other uses |
 | **Frost Ring** | C | **Frost:** as Ember, cold, Chilled | M2 | Kiting and back-line protection; never puts out the party's Burning (`noCancelOwnSide`) |
 | **Whetstone Ring** | C | **Whetstone:** 1 / 1 / 2 per rest: one part of your damaging use carries its own type's rider flag, only for slashing (Bleeding), fire (Burning), cold (Chilled), necrotic (Withered) and psychic (Unfocused) | M2 | Charged echo of Honed; a channel under 9.4 (same filters and precondition). Excludes bludgeoning and radiant (major riders), acid (AC write), lightning (arc damage), piercing (always-on already). A verdict warns on a Honed single-part weapon, where it never fires; container-only |
-| **Sigil of Aid** | C | **Aid:** once per fight, Help costs a bonus action | M2 | Cost step, not a button, offered as a variant (9.1); hidden with reason `TrinketHelpedLimit` when its Helped would be blocked. Help sets up an ally's strike, which keeps it in the finger lane **(lead's call)**; container-only |
+| **Helping Sigil** | C | **Helping:** once per fight, Help costs a bonus action | M2 | Cost step, not a button, offered as a variant (9.1); hidden with reason `TrinketHelpedLimit` when its Helped would be blocked. Help sets up an ally's strike, which keeps it in the finger lane **(lead's call)**; container-only |
 | **Longreach Band** | C | **Longreach:** 1 / 1 / 2 per rest, when you declare a melee weapon attack or touch-range damaging ability against a target beyond your normal reach, you may give it +1 reach (maximum 2, or 3 on a `minReach` 2 weapon); the charge is paid on declaration, hit or miss | M2 | A declared option, not a channel (6.1 item 11, 9.4). Charged echo of Long Haft; melee and touch casters; container-only |
 | Storm, Grave, Dawn Rings | C | As Ember for other elements | Later | 2 element rings per wave. Storm needs a ruling (arc damage breaks zero added damage; the arc itself is now defined: the rider strength band, one damage event per arced unit, no crit, flag or re-arc **(change ARC-14; Arcanist design 8.1)**); Dawn restricted to its Revealed branch (Hidden's targeting rule) |
 | Seeker's Band | C | **Sightline:** once per rest, one ranged weapon attack ignores the adjacent-hostile disadvantage | Later | Charged echo of Seeking; dead on a Seeking weapon and for casters |
@@ -1066,14 +1078,14 @@ Uncommon pieces add one roll from their location table. **(lead's call)**
 |---|---|---|---|---|
 | **Wardstone** | C | **Wardstone** (button): 1 / 1 / 2 per rest, bonus action, combat only: you gain Warded (1). Greyed `AlreadyWarded` while you hold Warded, and `AlreadyWardedThisFight` once you have had a trinket Warded this fight | M2 | Self only. Warded blocks hard conditions (approved Warded text); the landing envelope gate checks bosses still land control |
 | **Ward-Knot** | U (major) | **Ward-Knot** (button): 1 / 1 / 1 per rest, bonus action, combat only: one adjacent ally (not you) gains Warded (1). Greyed `AlreadyWarded` on a Warded ally and `AlreadyWardedThisFight` on an ally that has had a trinket Warded this fight | M2 | Distinct from Wardstone by target. The card says "stops the ally's next harmful condition, hard control included" |
-| **Trophy Tally** | C | **Tally:** once per fight, automatic: the first time any damage event reduces a hostile to 0 HP while it is adjacent to you at the moment of the drop, you gain Helped (fallback `untilSourceTurnEnd`, you as source, as the Vex verb, W-7) | M2 | Renamed from "Hunter's Tally" (Hunter is an elite affix, enemies 17.2). Not spent if you already hold Helped or have had a trinket Helped this round (the general catch rule; reading, charm abilities design 13). Container-only (no beast carriers). Keeps its unfiltered line (no minion filter; reading); ready/spent plate states at M2, the Helped output cue at M3 (charm abilities design 5.1, 6) |
+| **Trophy Tally** | C | **Tally:** once per fight, automatic: the first time any damage event reduces a hostile to 0 HP while it is adjacent to you at the moment of the drop, you gain Helped (fallback `untilSourceTurnEnd`, you as source, as the Vex verb, W-7) | M2 | Renamed from "Hunter's Tally" (Hunter was an elite affix, enemies 17.2; renamed Fixated by the naming pass). Not spent if you already hold Helped or have had a trinket Helped this round (the general catch rule; reading, charm abilities design 13). Container-only (no beast carriers). Keeps its unfiltered line (no minion filter; reading); Ready/Used plate states at M2, the Helped output cue at M3 (charm abilities design 5.1, 6) |
 | **Porter's Satchel** | C | +1 pack slot | M2 | Capacity, value 1; no combat line, no dormant property. Renamed from "Porter's Charm" so no kind word ("charm", "knot") sits on the capacity lane |
 | **Mule Strap** | U | +2 pack slots (the settled maximum) | M2 | Capacity, value 2. Renamed from "Mule Knot". Only one capacity trinket counts per unit (7.1). A fallback if it is never picked is held until the pick report triggers it; its table is chosen then |
 | Bloodknot | C | Once per fight: first drop to half HP or below, gain Warded | Later | Held so M2 has at most two ward charms. Status: M3 unlock candidate, HOLD for CG1, shadowed in its `rest`-charged form (`rest` 1/1/2, automatic, value 1) (change CA-15; charm abilities design 5.1, 5.2) |
-| Kinstone | C | Move a Warded charge between you and an adjacent ally | Later | Needs a `sourceTied` ruling; only if the ward non-stacking rule holds. Status: HOLD, M4 (change CA-15; charm abilities design 5.2) |
-| Scrollwright's Token | C | Advantage on the next off-class scroll Arcana or trap Mechanics check | Later (exploration-first, 19) | Trigger-rate risk. Leaves the charm lane: moves to the exploration-first Later trinkets (19), not a combat moment (rule 17); the consumables design 25 / ID-3 revisit lever is kept (change CA-15; charm abilities design 5.2) |
+| Kin Pebble | C | Move a Warded charge between you and an adjacent ally | Later | Needs a `sourceTied` ruling; only if the ward non-stacking rule holds. Status: HOLD, M4 (change CA-15; charm abilities design 5.2) |
+| Scrollwright's Fob | C | Advantage on the next off-class scroll Arcana or trap Mechanics check | Later (exploration-first, 19) | Trigger-rate risk. Leaves the charm lane: moves to the exploration-first Later trinkets (19), not a combat moment (rule 17); the consumables design 25 / ID-3 revisit lever is kept (change CA-15; charm abilities design 5.2) |
 | Last-Breath Charm | R | 1 per camp: at fight start gain Death-warded | Later, retired | Retired (Later; nothing shipped changes): it duplicates Death-warded on a timer and the Reprieve Phial owns the extra-life fantasy (death and healing design 15.3, Q7) |
-| Muse's Token | R | 1 per camp: gain Inspired | Later | Only with the Leadership-mastery owner's agreement; reopens Q2. Status: HOLD Later; an Inspired charm returns to the client as a question (change CA-15; charm abilities design 5.2) |
+| Muse's Fob | R | 1 per camp: gain Inspired | Later | Only with the Leadership-mastery owner's agreement; reopens Q2. Status: HOLD Later; an Inspired charm returns to the client as a question (change CA-15; charm abilities design 5.2) |
 
 All Later charm entries go through the charm-abilities pass (24.2) before
 they are approved. **(lead's call)** The pass set their statuses above
@@ -1086,7 +1098,7 @@ CG2 (24.2, change CA-19).
 | Location | M2 families | Binding floor |
 |---|---|---|
 | Head | 4 | ≥3 **(settled)** |
-| Hands | 3 | ≥3 **(settled)**; reserves Clenching, Slinger's |
+| Hands | 3 | ≥3 **(settled)**; reserves Vicelike, Slinger's |
 | Feet | 3 | ≥3 **(settled)**; reserves Wader's, Leaper's |
 | Back | 4 | ≥3 **(settled)** |
 | Neck | 6 (1 Rare) | ≥3 target, non-binding |
@@ -1099,7 +1111,7 @@ CG2 (24.2, change CA-19).
 reach, Helped, Hidden kills, the free Disengage): Ember, Frost,
 Whetstone, Longreach, Sigil, Trophy Tally, Duskhem, Runner's: 8 of 30
 (27%). **Recovery and tempo** (getting up, getting free, giving,
-reviving): Strider's, Grappler's, Deft, Catcher's, Lifeline: 5 of 30
+reviving): Strider's, Grappler's, Deft, Courier's, Lifeline: 5 of 30
 (17%). The earlier "13 of 30 (43%)" counted both as offence; the report
 now keeps them apart (18.3). If offence picks fall below target, the
 first Later reserves to promote are Seeker's Band, the Storm Ring once
@@ -1126,15 +1138,15 @@ refused, there are no trinket Scions and the family cap of 1 stands
 | Steady Hands (Administered potion also ends Staggered) | An added cure |
 | Ring of Passage (blink) | Movement belongs to feet |
 | Ring of the Second Word (no slot spent on a total miss) | Free class-pool refill |
-| Second Chance Token; Lucky Bone as a save reroll | Copy Inspired; replaced by Muse's Token, Later |
+| Second Chance Token; Lucky Bone as a save reroll | Copy Inspired; replaced by Muse's Fob, Later |
 | Spurred boots | Reads as speed; copies Rally's token. Spurred is never a trinket output, in any lane (6.2; change CA-4; charm abilities design 4.4) |
 | Dodge as a bonus action | Echoes Patient Defense; held for the registry |
 | Quickdraw, Retrieve and escape-advantage gloves; Slipping Bracers | Copy weapon or armour properties, or route around Retrieve |
 | Tinder Ring; any damage or no-save ring button | Rings carry no buttons in M2 (Q3); no-save application at range |
 | Fight-start automatic Warded charm | Copies Warding Lining |
 | Knucklebone, Turn of Luck, Kindred Glint, Ward Echo, Watchful Clasp | Shared-pool entries; the pool is Later |
-| Help-whistle charm | Duplicates Sigil of Aid |
-| Steadfast-named items, Clearmind Circlet | Name clashes (enemies affix; Clear-minded condition) |
+| Help-whistle charm | Duplicates the Helping Sigil |
+| Steadfast-named items, Clearmind Circlet | Name clashes (enemies affix Steadfast, now Dauntless after the naming pass; Clear-minded condition) |
 | Tag-wide "mind" or "fear" protections; a mind amulet in M2 | Control tags as a whole; amulet overload |
 
 ## 14. Property tables and example notables
@@ -1145,11 +1157,11 @@ All minors `entryValue` 1; majors 2 and jewellery only. **(lead's call)**
 
 | Table | Entries (M2) | Rolled by |
 |---|---|---|
-| `props.trinket.head` | Visor, Unshaken, Barred, Vigil | Uncommon head pieces |
-| `props.trinket.hands` | Grappler, Deft, Catcher | Uncommon hands pieces |
+| `props.trinket.head` | Visor, Unflinching, Barred, Vigil | Uncommon head pieces |
+| `props.trinket.hands` | Grappler, Deft, Courier | Uncommon hands pieces |
 | `props.trinket.feet` | Strider, Ledgewalker, Runner | Uncommon boots |
-| `props.trinket.back` | Weathered (Burning), Weathered (Chilled), Grey Mantle, Oilskin, Duskhem | Uncommon cloaks |
-| `props.trinket.ring` | Ember, Frost, Whetstone, Aid, Longreach | Uncommon rings (rule 28: never a second channel line on a channel ring; Ember, Frost and Whetstone are channels, Aid and Longreach are not) |
+| `props.trinket.back` | Fleece-Lined (Burning), Fleece-Lined (Chilled), Grey Mantle, Oilskin, Duskhem | Uncommon cloaks |
+| `props.trinket.ring` | Ember, Frost, Whetstone, Helping, Longreach | Uncommon rings (rule 28: never a second channel line on a channel ring; Ember, Frost and Whetstone are channels, Helping and Longreach are not) |
 | `props.trinket.neck` | Antidote, Graveward, Lifeline | Uncommon and Rare amulets |
 | `props.trinket.neck_major` | Emberward, Kinward | Fixed only |
 | `props.trinket.charm` | Wardstone, Tally | Uncommon charms (rule 28: never a second button) |
@@ -1171,7 +1183,7 @@ comparison 2026-11-23, CC-4).
 | Strider's Boots of the Runner | U | Strider + rolled Runner | 2 |
 | Watcher's Hood of the Bar | U | Vigil + rolled Barred (dormant until identified) | 2 |
 | Ember Ring | C | Ember | 1 |
-| Ember Ring of Aid | U | Ember + rolled Aid | 2 |
+| Ember Ring of the Helper | U | Ember + rolled Helping | 2 |
 | Graveward Amulet | C | Graveward | 1 |
 | Kinward Torc | U | Kinward (major) | 2 |
 | Heartward Torc | R, floor 3+ | Kinward + rolled Antidote (may be dormant) | 3 |
@@ -1188,7 +1200,7 @@ cross-document comparison 2026-11-23, CC-55).
 
 Card, extending armour 5.8, with a **lane word** in the header, a **shape
 glyph** on each line (⛨ prevent, ⟲ cost, reach or declared step, ✦
-channel, ◈ token, ▸ button), and a "?" for a dormant line with its glyph hidden:
+channel, ◈ token, a design label only, spoken "stored moment" (naming pass NP-14), ▸ button), and a "?" for a dormant line with its glyph hidden (the line reads "? untold"; naming pass NP-11, 5.9.15):
 
 ```
 ◇ UNCOMMON  KINWARD TORC · amulet (neck) — life
@@ -1205,27 +1217,27 @@ channel, ◈ token, ▸ button), and a "?" for a dormant line with its glyph hid
 ```
 ◆ RARE  HEARTWARD TORC of ? · amulet (neck) — life
   ⛨ Kinward: 1/rest, poison, bleeding or withering doesn't land on an adjacent ally
-  ? dormant · Arcana 13 vs 14
+  ? untold · Arcana 13 vs 14
 ```
 
 - **Merged card (change IR-9; agreed, Q3; M2; item rolls design 6.1,
   4.14):** this card and items 8.2 are one card budget, and where they
   differ the item rolls design wins. A dormant line keeps its hidden
-  glyph and carries the Arcana readout ("? dormant · Arcana 13 vs 14"),
+  glyph and carries the Arcana readout ("? untold · Arcana 13 vs 14"),
   which replaces items 8.2's separate "?" pip; the name shows "?" only in
   its suffix epithet slot ("<Name> of ?"). Verdict glyphs sit in a footer
   badge, never beside the line glyphs; the five shapes above are kept
   for trinkets and extended to other categories by line tag. **Plain
   Gifts (agreed, Q3):** the Due, every offer option, the fourth and the
-  Viaticum are generated with every line known, so a trinket there is
+  Parting Fare are generated with every line known, so a trinket there is
   never dormant; field cards keep Arcana's job.
 - **Names carry the verb:** each family name contains its property
   keyword. Display names never clash with conditions, affixes, behaviour
   profiles, universal actions, verbs or properties (armour 17.1 rule 13).
-  Hence "Holder" → "Clench"; "Steadfast" not used; "Seeker" kept off M2;
+  Hence "Holder" → "Clench" (now "Vicelike", naming pass NP-15); "Steadfast" not used (the affix is now Dauntless); "Seeker" kept off M2;
   the Ember Ring line is "Ember", never "Channel" (loot `channels[]`);
   Watcher's Hood's property is "Vigil"; "Hunter's Tally" → "Trophy Tally"
-  (Hunter is an elite affix). The card writes "charm (none)", never
+  (Hunter was an elite affix, now Fixated after the naming pass). The card writes "charm (none)", never
   "Charm" (the Charmed condition is Later). Kind display words (5.6) are
   never used in capacity family names ("Porter's Satchel", "Mule Strap";
   never "belt", armour 5.4).
@@ -1241,7 +1253,7 @@ channel, ◈ token, ▸ button), and a "?" for a dormant line with its glyph hid
   `AlreadyWardedThisFight` and `TrinketHelpedLimit`, the first two with a
   one-line pre-equip verdict (TK-10). **Warning verdicts** (never a
   suppression): `DeadLine` (a line another worn source already covers,
-  Emberward behind a fire Resistant source), a ring whose rider slot the
+  Emberward behind a Fireproof source), a ring whose rider slot the
   active weapon already takes (13.6), and Lifeline on a wearer who is not
   Medicine-trained. Charms add the greyed reason `CharmCaughtThisFight`,
   shown as "Already gained a Helped from a charm this fight" (change
@@ -1254,13 +1266,14 @@ channel, ◈ token, ▸ button), and a "?" for a dormant line with its glyph hid
   the ◈ glyph ("◈ **<Keyword>:** once per fight, automatic: when
   <outcome>, <receiver> gain(s) <token>"); no card, log, Inspect or hint
   string prints "Catch" or "caught" (a design and data label only: it
-  meets the traps design's Catch trap kind and Hunch catch badge), and
+  met the traps design's Catch trap kind and Hunch catch badge, now the Clasp
+  family and the Hunch badge after the naming pass), and
   "talisman" is not a charm display word (5.6; M2 text). Every charm
   record has a `plateHint` (the serialized `previewHint`) and setup
   catches a `forecastHint`, shown in the move or attack forecast through
   party knowledge only, with whole-string "waits" and "missed" forms.
-  On the plate a unit's charms are one mark, a pair of pips with ready
-  and spent states (M2, for Trophy Tally) and waiting, kept and dormant
+  On the plate a unit's charms are one mark, a pair of pips with Ready
+  and Used states (M2, for Trophy Tally) and Waiting, Stored and Idle
   states (M3).
 - **Art:** icons kit-bashed from kind silhouette × material × element tint
   × lane glyph.
@@ -1397,9 +1410,9 @@ prop.trinket.kinward: { value: 2, table: "props.trinket.neck_major",
 ### 17.3 State, queries and events
 
 - **No new item state.** Charges use the existing `spent` state (items
-  12.8); Weathered's element is per record (13.4).
+  12.8); Fleece-Lined's element is per record (13.4).
 - `fightUses` (armour 16.3) lists trinket `fight` properties: Visor's
-  unseen branch, Runner, Oilskin, Duskhem, Lifeline, Aid and Tally at 1
+  unseen branch, Runner, Oilskin, Duskhem, Lifeline, Helping and Tally at 1
   (TK-7). Entries are keyed by (unit, property id); a duplicate id is
   greyed (7.1) and never spent.
 - **New unit-state rows (TK-7)**, in the armour 16.3 table:
@@ -1459,7 +1472,7 @@ fails when **(lead's call)**:
 | 22 | **Ally effects:** `targets` is `self`, `adjacentAlly`, or `reach2Ally` only on Hand over and Administer reach steps; one ally per trigger |
 | 23 | **One cost step and one reach step per action; one channel per use** (7.1); a declared reach option is not a channel |
 | 24 | **Outputs:** minor or token conditions only; never an AC-writing condition; zero added damage as 6.2 defines it; every `channel` record carries `hostileOnly` and `riderWouldBeAttempted` |
-| 25 | **Carriers:** `negates[]` and a role-answer pass per carrier type; `carrier{}` limits present on every carried-eligible property; output conditions within the type's 2; a reaction-shaped property counts as the type's one reaction beyond the opportunity attack and a button under the bonus-action cap (enemies 9.1); Wardstone and Ward-Knot never with the Warded or Unbreakable affix; the 6.4 guards pass with the carrier (checked at generation, enemies 15.3 step 4) |
+| 25 | **Carriers:** `negates[]` and a role-answer pass per carrier type; `carrier{}` limits present on every carried-eligible property; output conditions within the type's 2; a reaction-shaped property counts as the type's one reaction beyond the opportunity attack and a button under the bonus-action cap (enemies 9.1); Wardstone and Ward-Knot never with the Warded or Unbending affix; the 6.4 guards pass with the carrier (checked at generation, enemies 15.3 step 4) |
 | 26 | **Two classes:** every record declares `usefulFor[]` with at least 2 launch classes or `anyCompanion`, signed off by the lead; tag-keyed text met by at least 2 |
 | 27 | **Element families:** at most 2 element families per wave per lane (finger, neck, back), counted from `element` |
 | 28 | **Rolled lines:** a rollable table never offers the item's own obvious line, and never a line sharing an `answers[]` key with it, a second channel on a channel ring, or a second button. An Uncommon or Rare obvious line with no legal roll in its table fails; Heartward keeps all 3 (Antidote, Graveward, Lifeline). **(change IR-4; M2; item rolls design 4.6)** This rule extends to every rolled category; a gear record carries at most 1 rolled line, only the rolled line may be dormant, and each family declares a curated table of 3–5 eligible entries, except trinket families (`props.trinket.*`), whose curated table is the legal set left after this rule's exclusions (at least 1) (cross-document comparison 2026-11-23, CC-4). **(change CA-24; M3; charm abilities design 4.8)** On a charm: no second line with the same (trigger, output); a rolled catch line never has the obvious line's output; a Warded catch line never rolls onto a ward-button charm; the obvious line is never a dormant catch |
@@ -1475,7 +1488,7 @@ The authoring lean (5.6) is a lint warning, never a failure.
   pair outside the allowlist and each denylist row fail the build.
 - **Suppression:** `ButtonCap`, `DuplicateAnswer` and the reaction-shaped
   extension of `ReactionCap` by slot order; armour and shield win
-  `DuplicateAnswer`; two lines with the same property id (two Aid lines)
+  `DuplicateAnswer`; two lines with the same property id (two Helping lines)
   grey the second and never spend its pool; `self:` and `ally:` keys do
   not collide; a tag key collides with its condition ids; one capacity
   trinket counts; pre-equip verdicts match the post-equip state;
@@ -1513,8 +1526,8 @@ The authoring lean (5.6) is a lint warning, never a failure.
   (a transform to Withered meets Graveward); `onApply` relations skip it;
   outside combat each application is its own round.
 - **Emberward:** `bigHit` on the summed fire parts after crit; no charge
-  spent when the step changes nothing; `DeadLine` warning behind fire
-  Resistant armour.
+  spent when the step changes nothing; `DeadLine` warning behind
+  Fireproof armour.
 - **Charms:** `AlreadyWarded` and `AlreadyWardedThisFight` grey the
   button; a trinket ward on a Warded unit has no effect; buttons are
   unusable before initiative; one trinket Helped per round, Sigil-cheapened
@@ -1522,11 +1535,11 @@ The authoring lean (5.6) is a lint warning, never a failure.
   of the wearer's next turn and Tally is not spent while the wearer holds
   Helped.
 - **Costs and reach:** one cost step and one reach step combine; two cost
-  steps on one action are refused; Oilskin, Runner, Lifeline and Aid are
+  steps on one action are refused; Oilskin, Runner, Lifeline and Helping are
   spent only when their variant is chosen.
 - **Carriers:** a carrier with a Guard verb cannot take Kinward; a carrier
   with a bonus-action ability cannot take Wardstone; Wardstone is never on
-  an Unbreakable or Warded-affix elite; a Heartward with a Lifeline roll
+  an Unbending or Warded-affix elite; a Heartward with a Lifeline roll
   goes to a container; the party receives a used carried trinket with
   `spent` 0.
 - **Stealth:** `everNoticed` set on first `noticed` and reset at fight
@@ -1579,7 +1592,7 @@ except the landing envelope, whose numbers are the lead's (TK-4):
   17.3 report; Rare charms (reopening Q2); one-aura-per-party Rare amulet
   (needs the client); curses; theme-tag synergy (armour 5.9); trader-sold
   trinkets; heirloom templates (M3); exploration-first trinkets
-  (Scrollwright's Token moves here from the charm lane; change CA-15;
+  (Scrollwright's Fob moves here from the charm lane; change CA-15;
   charm abilities design 5.2); E+ by the lead's gate.
 - **M3 / M4 (heirlooms and curses design 4.1.1, 4.6, 10; hook taken
   up):** M3 heirloom templates are main-hand, off-hand and armour only,
@@ -1599,7 +1612,7 @@ except the landing envelope, whose numbers are the lead's (TK-4):
 | **Amulet must-have** (one neck, life lane) | No healing amounts; Kinward narrowed to the neck's own subjects and capped; Lifeline a `fight` minor; mind kept on head in M2; no family above 50% within any class; the element major moves off neck if neck pick share is too high |
 | **Two rings as the best kind** | One channel per use; `DuplicateAnswer`; at most 2 element rings per wave; zero added damage |
 | **Rings feel weak** without the weakness bonus (Q4) | Rider control as their job, automatic on weak targets; trigger-rate and pick reports; Q4(b) stays the recorded alternative |
-| **Dead slots** (trigger rate below 1 in 3) | Watch Visored, Watcher's, Grey Mantle, Duskhem, Barred, Weathered, and the theme-dependent neck lines Antidote, Graveward, Emberward and Lifeline, by floor theme; the Lifeline training verdict; same-location reserves in section 13 |
+| **Dead slots** (trigger rate below 1 in 3) | Watch Visored, Watcher's, Grey Mantle, Duskhem, Barred, Fleece-Lined, and the theme-dependent neck lines Antidote, Graveward, Emberward and Lifeline, by floor theme; the Lifeline training verdict; same-location reserves in section 13 |
 | **Thin feet and hands at exactly 3** | Reserves ship in the same build if one is cut (armour 17.3 pattern) |
 | **Loot dilution** (30 families, about 9 finds) | A run sees about 30%; `requires` tags steer; second same-element offer de-weighted |
 | **Rare amulet trips the E+ "displaced" gate** | Reported separately (TK-4); tune Rare frequency, never E+ |
@@ -1607,8 +1620,8 @@ except the landing envelope, whose numbers are the lead's (TK-4):
 | **Medicine-dependent entries become dead loot for companions** | At most one Medicine or Lore family per wave; `requires` steering |
 | **New greyed reasons to teach** | Pre-equip verdicts; one line each |
 | **Charms feel thin** with two ward buttons and Tally in M2 | The charm-abilities pass (24.2), with the button press-rate report as its input; taken up by the charm abilities design (catch batch at M3, after its data gates) |
-| **Bring-the-key** (element amulets and cloaks by floor theme) | Rest gate; charged, single-event effects; Torc of Seasons Later |
-| **Unruled dependencies** | Duskhem against Hidden's end rules; Leaper's against Jumping; Inspired owner; Storm and Dawn rings; Kinstone `sourceTied` |
+| **Bring-the-key** (element amulets and cloaks by floor theme) | Rest gate; charged, single-event effects; Seasonal Torc Later |
+| **Unruled dependencies** | Duskhem against Hidden's end rules; Leaper's against Jumping; Inspired owner; Storm and Dawn rings; Kin Pebble `sourceTied` |
 | **Class copies discovered late** | The bidirectional registry makes the second-authored record change; Runner's pre-cleared |
 | **SRD shapes from memory** | Check against SRD 5.2.1 before any record (header, section 16) |
 
@@ -1649,12 +1662,12 @@ and no Corroded in trinket lists in M2.
 | # | Section | Change | Approved by |
 |---|---|---|---|
 | TK-1 | 5.6, last row; **13.4, Amulet / ring / charm row, Domain cell (agreed, Q1)** | 5.6's last row becomes three location rows: neck = life and the body; finger = your strike; none = stored moments (charm) and carrying (capacity) (trinkets design 5.5). The 13.4 Domain cell, now "Trinkets design", reads "Neck: life and the body · Finger: your strike · None: stored moments, capacity". No other 13.4 cell changes | **Client (agreed 2026-11-17, Q1)** for 13.4; Lead for 5.6 |
-| TK-2 | 5.6, examples column | Ledgewalker's Boots: "advantage on hazard-edge and landing saves"; Visored Helm gains the once-per-fight unseen-attacker branch; Grappler's Gauntlets covers Restrained; Weathered Cloak covers Burning or Chilled in M2, under the rider-ownership rule (trinkets design 5.7) | Lead; **rider-ownership rule signed off by the client (agreed 2026-11-17, Q1)** |
+| TK-2 | 5.6, examples column | Ledgewalker's Boots: "advantage on hazard-edge and landing saves"; Visored Helm gains the once-per-fight unseen-attacker branch; Grappler's Gauntlets covers Restrained; Weathered Cloak (renamed Fleece-Lined Cloak, naming pass NP-15) covers Burning or Chilled in M2, under the rider-ownership rule (trinkets design 5.7) | Lead; **rider-ownership rule signed off by the client (agreed 2026-11-17, Q1)** |
 | TK-3 | 5.5, reaction cap bullet; new bullet | Off-turn automatic triggers that protect or affect another unit count as reaction-granting for the cap. New bullet: `ButtonCap` and `DuplicateAnswer` suppressions use the same fixed slot order and pre-equip verdict as `ReactionCap`; `DuplicateAnswer` counts armour and shield prevent properties (each declaring `answers[]`, trinkets design 17.1), which win by slot order | Lead |
 | TK-4 | 5.10, criterion 1; safety veto bullet; `ePlusGate` | Criterion 1: "jewellery (amulets, rings, charms) excludes Rare-tier records". Veto adds: the condition landing envelope and its hero row (trinkets design 18.3); the bind rates of `ButtonCap`, `DuplicateAnswer`, reaction-shaped triggers and the per-round and per-fight limits at 10%; the carrier 6.4 rerun. `ePlusGate` gains `landingEnvelopeMinPermille: 600` and `bossHardLandMinPermille: 500`, binding lead's numbers | Lead |
 | TK-5 | 14.1, gear-prevention step | Trinket properties also act at this step and emit `ConditionResisted{reason: TrinketProperty}` and `TrinketPropertyFired` | Lead |
 | TK-6 | 14.4, Enclosed signature Sealed (Later) | "Sealed: Poisoned never lingers on you" (blocks the lingering form) instead of save advantage, so it no longer copies Antidote Locket under rule 11 | Lead |
-| TK-7 | 16.3, state table; events | `fightUses` lists Visor's unseen branch, Runner, Oilskin, Duskhem, Lifeline, Aid and Tally at 1, keyed by (unit, property id). New rows: `trinketPreventionReceivedThisRound` (bool, round start), `trinketHelpedThisRound` (bool, round start), `trinketWardedThisFight` (bool, fight start). New event `TrinketPropertyFired{property, instanceId, unit, result}` | Lead |
+| TK-7 | 16.3, state table; events | `fightUses` lists Visor's unseen branch, Runner, Oilskin, Duskhem, Lifeline, Aid (now Helping, naming pass NP-15) and Tally at 1, keyed by (unit, property id). New rows: `trinketPreventionReceivedThisRound` (bool, round start), `trinketHelpedThisRound` (bool, round start), `trinketWardedThisFight` (bool, fight start). New event `TrinketPropertyFired{property, instanceId, unit, result}` | Lead |
 | TK-8 | 17.3, simulator reports | Adds the rows in trinkets design 18.3 | Lead |
 
 **Items design (2026-11-16):**
@@ -1686,14 +1699,14 @@ and no Corroded in trinket lists in M2.
 | # | Section | Change | Approved by |
 |---|---|---|---|
 | TK-21 | 9.2, gear-prevention paragraph (AR-51); entry-point table; step 7 | Names trinket properties; adds `reason: TrinketProperty`; adds the gear-prevention order (trinkets design 7.3: armour and shield verbs, then the target's own trinkets, then ally preventions by unit order); adds the per-round limits (one received trinket prevention per unit per round, counted only on a trinket stop; ally preventions yield only when step 4 would spend a ward; one trinket Helped per unit per round); outside combat each application is its own round. Entry-point table gains a column "Gear step": skipped wherever the ward is skipped. Step 7 reads "steps 2, the gear step, 4 and 5 run once more" | Lead |
-| TK-22 | 18.9, Warded and Helped | Warded: "a trinket-granted Warded has no effect on a unit already Warded; a unit receives at most one trinket-granted Warded per fight". Helped: sources add "trinkets (Trophy Tally, fallback `untilSourceTurnEnd` with the wearer as source; Help made cheaper by Sigil of Aid counts under the trinket limit)" | Lead |
+| TK-22 | 18.9, Warded and Helped | Warded: "a trinket-granted Warded has no effect on a unit already Warded; a unit receives at most one trinket-granted Warded per fight". Helped: sources add "trinkets (Trophy Tally, fallback `untilSourceTurnEnd` with the wearer as source; Help made cheaper by Sigil of Aid (renamed Helping Sigil, naming pass NP-15) counts under the trinket limit)" | Lead |
 | TK-25 | 18.6, Oiled and Soaked interactions; 19, interaction table damage-end row | Oiled: "a ring-shifted fire part (trinkets design 9.4) does not pay out Oiled: no +half, no band-higher Burning, Oiled stays and no oil square burns; Burning lands as an ordinary automatic rider at its normal band". Soaked: "a ring-shifted fire part ends Soaked and attempts no Burning rider, as any fire hit" | Lead |
 
 **Enemies design (2026-11-16):**
 
 | # | Section | Change | Approved by |
 |---|---|---|---|
-| TK-23 | 15.3, step 4 ("Legal means…", as amended by AR-26) | Adds: "For a notable trinket, legal also means: with its rolled properties in place it passes the 6.4 guards; its output conditions fit 9.2; a reaction-shaped line is the unit's one reaction beyond the opportunity attack and a button is its bonus-action ability (9.1); its role answers pass; no suppression conflict with the issue gear; Wardstone and Ward-Knot never with the Warded or Unbreakable affix; its `carrier` limits hold (trinkets design 12)". Carried wards and ally preventions count toward the encounter's control defence. The agreed 15.4 table is unchanged | Lead |
+| TK-23 | 15.3, step 4 ("Legal means…", as amended by AR-26) | Adds: "For a notable trinket, legal also means: with its rolled properties in place it passes the 6.4 guards; its output conditions fit 9.2; a reaction-shaped line is the unit's one reaction beyond the opportunity attack and a button is its bonus-action ability (9.1); its role answers pass; no suppression conflict with the issue gear; Wardstone and Ward-Knot never with the Warded or Unbreakable (renamed Unbending, naming pass) affix; its `carrier` limits hold (trinkets design 12)". Carried wards and ally preventions count toward the encounter's control defence. The agreed 15.4 table is unchanged | Lead |
 | TK-26 | 11.2, awareness record | Adds a per-fight flag `everNoticed[partyUnit]` to each group's record: set on the first `noticed`, reset at fight start (trinkets design 13.4) | Lead |
 
 **Main design (2026-11-15):**
@@ -1707,7 +1720,7 @@ the pointer cell the client approved (Q1). TK-23 amends enemies 15.3 step
 4, a lead's sentence (AR-26), and leaves the agreed 15.4 table unchanged.
 **Not changed:** stat model 6 (Speed, AC); the armour 5.4 location rule
 and the 5.5 piece rules other than TK-3's reaction-cap extension and
-suppression bullet; armour 14.3 Resistant; `packInCombat`; belt and trinket-slot counts; every other
+suppression bullet; armour 14.3 Resistant (shown as "<element>-proof" since the naming pass); `packInCombat`; belt and trinket-slot counts; every other
 agreed row. **Would need the client, and not recommended:** trinket speed;
 always-on resistance on trinkets; a Retrieve change; belt or trinket-slot
 grants.
@@ -1732,16 +1745,16 @@ grants.
   (settled): nothing lifts Downed beyond Medicine (Lifeline counts toward
   its once per companion per fight), a won fight, a completed short rest
   or camp; the drop-prevention chain is Death-warded → Reprieve Phial
-  (talisman), owned there; Last Ward and Last-Breath Charm retired (death
+  (failsafe), owned there; Last Ward and Last-Breath Charm retired (death
   and healing design 11, 15; consumables design 14.9, 14.10).
 - **Consumables:** the flask throw is designed (consumables design 11);
   Slinger's Bracers numbers stay Later **(change CN-22)**.
 - **Conditions content (Later):** Veiled (Smoke Cloak), Shielded (Bulwark
-  Locket), Inspired and its Leadership-mastery owner (Muse's Token),
+  Locket), Inspired and its Leadership-mastery owner (Muse's Fob),
   Bolstered.
 - **Dungeon generation:** hazard edges and crossable hazards per floor
   (Ledgewalker, Leaper's), from floor 2: floor 1 is dry by design
-  **(change RT-20)** below Nightmare tier 2 **(change HZ-25)** (run
+  **(change RT-20)** below Peril tier 2 **(change HZ-25)** (run
   structure design 6.3, 14); water and oil
   squares (Wader's); Jumping sources (main design 4.3). Hazard edges
   answered by the room terrain design
@@ -1755,7 +1768,7 @@ grants.
   Ledgewalker (edge and landing saves; **change HZ-10**; M2 (gated),
   else M3; hazards design 6.4); the floor-1 Landmark ticks are not
   hazards, so floor 1 stays without hazard edges in the base game
-  (**change HZ-19**, told; M3; hazards design 6.1); at Nightmare tier 2+
+  (**change HZ-19**, told; M3; hazards design 6.1); at Peril tier 2+
   each floor-1 theme gains one damaging hazard package with hazard
   edges (the Treadwheel's Hot stove, staked pits, the Open Grave Void)
   **(change HZ-25; M3)** (hazards design 6.19).
@@ -1770,7 +1783,7 @@ grants.
   HL-26**, request; 8.2) (heirlooms and curses design 4.6).
 - **Lead's checks before data** (existing designs, not new systems):
   Duskhem against Hidden's end rules and Shadowed; Storm Ring against arc
-  damage (the arc defined by ARC-14, Arcanist design 8.1); Dawn Ring against Hidden's targeting rule; Kinstone `sourceTied`.
+  damage (the arc defined by ARC-14, Arcanist design 8.1); Dawn Ring against Hidden's targeting rule; Kin Pebble `sourceTied`.
 - **Copy registry rulings owed (pending; 11 item 1):** Duskhem against No
   Witnesses III and Long Shadow; Slinger's Bracers against Toss and Dust
   (VG-18); the Herald pairs, including Reach the Fallen against the
@@ -1835,7 +1848,7 @@ it:
 
 - **Shared jewellery pool or C-split:** only if the lane-prediction
   playtest holds at 80% *(illustr.)* (19).
-- **Rare charms or rings:** reopen Q2 (curses, Muse's Token). Curses no
+- **Rare charms or rings:** reopen Q2 (curses, Muse's Fob). Curses no
   longer trigger it: the heirlooms and curses design asks for neither
   (4.6, HL-26). The charm abilities design keeps Q2 closed for charms
   (change CA-24; agreed, charm abilities Q5). Last-Breath
@@ -1855,6 +1868,13 @@ it:
   their pick and trigger targets after tuning.
 
 ## Appendix A: how the review findings were resolved
+
+Names in this appendix are recorded as they stood when the findings were
+resolved. Renamed by the naming pass (2026-11-24; NP-15): Catcher's
+Bracers → Courier's Bracers; Clench and Clenching → Vicelike; Weathered →
+Fleece-Lined; Sigil of Aid → Helping Sigil; Kinstone → Kin Pebble; Torc of
+Seasons → Seasonal Torc; the enemies affixes Steadfast → Dauntless and
+Hunter → Fixated. "Steady Aim" here is the SRD rogue feature (header).
 
 **Identity critic**
 

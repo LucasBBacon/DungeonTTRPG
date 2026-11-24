@@ -1,8 +1,8 @@
 # Naming Pass: Appendix B, the full harvested name list
 
-Status: Draft, awaiting client approval, 2026-11-24 (with the design).
+Status: Approved, 2026-11-24 (with the design; approved by the client as a whole on 2026-11-24, design 14).
 
-Companion to `2026-11-24-naming-pass-design.md` (its Appendix B, kept in its own file for size). The client answered the design's six questions on 2026-11-24, each with the recommended option A **(agreed, Q1–Q6; design 0.2, 14.1)**; every outcome marked "(client)" below is that answer or follows it. **After the design check (2026-11-24), the matcher was re-run sense-aware** (lead's call, after the check; design 14.4): each " / " or comma part of a grouped entry, and each parenthetical sense (affix, kit, item family, hub station, property, check grade, boss action), is matched against the row of section 5 that names that sense in that source document, against the internal families of 4.8, against W-DREAM-1 (4.7) and against the waivers of 9.3. 127 outcomes were corrected (the entries the check listed among them), every waiver outcome now names its waiver id, every W-DREAM-1 entry reads "final under W-DREAM-1 (a)" or "(b)", and outcomes marked "(after the check)" carry the lead's calls of design 14.4. A script check now holds: no entry whose harvested sense matches a renamed sense in 5 reads "final as written".
+Companion to `2026-11-24-naming-pass-design.md` (its Appendix B, kept in its own file for size). The client answered the design's six questions on 2026-11-24, each with the recommended option A **(agreed, Q1–Q6; design 0.2, 14.1)**; every outcome marked "(client)" below is that answer or follows it. **After the design check (2026-11-24), the matcher was re-run sense-aware** (lead's call, after the check; design 14.4; confirmed by the client on 2026-11-24, with the design): each " / " or comma part of a grouped entry, and each parenthetical sense (affix, kit, item family, hub station, property, check grade, boss action), is matched against the row of section 5 that names that sense in that source document, against the internal families of 4.8, against W-DREAM-1 (4.7) and against the waivers of 9.3. 127 outcomes were corrected (the entries the check listed among them), every waiver outcome now names its waiver id, every W-DREAM-1 entry reads "final under W-DREAM-1 (a)" or "(b)", and outcomes marked "(after the check)" carry the lead's calls of design 14.4, confirmed by the client on 2026-11-24. A script check now holds: no entry whose harvested sense matches a renamed sense in 5 reads "final as written".
 
 
 All 2,893 harvested entries, by source document, in the harvest's order: **name · category · harvest status · naming-pass outcome**. Outcomes: "final as written" (the name becomes final unchanged); "renamed" or "renamed in part" (each renamed part named); "final under W-DREAM-1 (a)/(b)" or "kept with a recorded waiver (W-n)"; "internal only, never printed"; "retired", "deleted" or "held". A line (a sentence, not a name) is final under T4 and is not a W-DREAM-1 entry. The design's counts in 8.2 are computed from this file. **Section 5 governs any difference**; a difference found later is corrected here, not read past.
@@ -2967,7 +2967,7 @@ All 2,893 harvested entries, by source document, in the harvest's order: **name 
 - Long Look · weapon or armour property · placeholder · **final as written**
 - Set Heels · weapon or armour property · placeholder · **final as written**
 - Quilted · weapon or armour property · placeholder · **final as written**
-- Held Ground · weapon or armour property · placeholder · **renamed → Planted**
+- Held Ground · weapon or armour property · placeholder · **renamed → Footsure** (first Planted; changed in the apply sweep for the weapons Aim badge)
 - Ill-Wished · curse · placeholder · **renamed → Begrudged**
 - Eyebitten · curse · placeholder · **final as written**
 - Short-Armed · curse · placeholder · **final as written**

@@ -134,11 +134,28 @@ V10 HZ, V11 TL, V12 EP; a grep for `\bV1[3-9]\b` finds 0 hits.
 grep-checked case-insensitively as a whole word across the 23 approved
 documents; the list and the renames forced by collisions are in A.5. The
 check forced four renames of draft names: "Threshold Cache" (RS 8.0 keeps
-"Threshold" out of new names) → **Viaticum**; "trophy" and "Tally" (the
+"Threshold" out of new names) → **Viaticum** (renamed Parting Fare, naming pass NP-22); "trophy" and "Tally" (the
 Trophy Tally trinket and its Tally property, TK) → **Memento** and
 **Treasure count**; "Marked Purse" ("Marked" is the retired name of
 Spotted, CON) → **Heavy Purse**. A critic's proposed "keepsake" also
 collides (the RS Keepsake dressing) and is not used.
+
+**Names updated by the naming pass** (naming pass design,
+`2026-11-24-naming-pass-design.md`, approved 2026-11-24; NP rows listed):
+NP-22 and its 13.1 cites (agreed Q1–Q6 there) with the register rows
+naming this document: Viaticum → Parting Fare (`viaticum`,
+`viaticumFallback`, `ViaticumBossShare` ids stay); Bedside Stand → the
+Washstand; the Wish → The Long Shot; Wayward → Windblown; Nightmare
+tiers, Rendition and Provisos → Peril; Dream Fragments → Fragments;
+Ill-Slept → Heavy-Eyed; Antechamber Catch-up → Forecourt Top-up;
+Stairhead → the Downstair; "the Hollow ahead" → "the next camp";
+Keeper's Cart → the Pedlar's Cart; spent field → emptied field;
+Signature item shown as "the boss's prize"; Mousetrap → Baited Room;
+the trap family Catch → Clasp (NP-17); the talisman category → failsafe
+(`talisman` key stays). Appendix A and the placeholder
+history above keep the old names, marked "(renamed …)". Waived names
+(W-DREAM-1: the Dream's Due, "dreamed option(s)"; the Dreamer's Heart)
+and kept names (Last Hollow, Book of Nights) are unchanged.
 
 **Numbers in this document are illustrative** unless a rule says
 otherwise, and are marked *(illustr.)* where they first appear. Every
@@ -197,7 +214,7 @@ the death curve.*
 3. **Rarity curves (changes LE-2, LE-3, LE-6).** One deck per floor, with
    2 equal-VP variants where the gates allow: F1 `C C U U U` (8); F2
    `C U U U U U` (11); F3 `U U U R R R` (15); F4 `U R R R R VR` (18); F5
-   `U R R R R R` (17) plus the Viaticum *(illustr.)*. Front-loaded
+   `U R R R R R` (17) plus the Parting Fare *(illustr.)*. Front-loaded
    count, back-loaded value: an item found on floor N serves about 5 − N
    floors. Boss floors: the signature takes the top tier **that has a
    legal record for its category** plus its authored property; the boss
@@ -257,11 +274,11 @@ the death curve.*
    socket that pass changed. Floor N+1's generation is committed in the
    same save write as camp exit, closing a reload-and-rehire leak the toy
    found.
-9. **Meta hooks (change LE-19).** Nightmare tiers and the ladder change
+9. **Meta hooks (change LE-19).** Peril tiers and the ladder change
    nothing in the economy (harder is not richer, RT-21). Omens never
    touch the spoils list (LootDoorInvariant, RS 6.4). Unlocks enter at
    existing tier budgets with smart-loot weight normalised per `requires`
-   lane, so they never dilute an on-build find. Dream Fragments and
+   lane, so they never dilute an on-build find. Fragments and
    heirlooms are 0 VP. The Perilous Door reveals a pre-drawn fourth
    dreamed option **(agreed, Q5)**, read as the Perilous floor's boss
    reward card (ENM 17.5), shown before its camp; because that reading
@@ -273,7 +290,7 @@ the death curve.*
 
 | # | Question | Answer **(agreed)** | Rejected | Change |
 |---|---|---|---|---|
-| Q1 | Should floor 5 pay before the arena? | **A.** F5 coin and salvage 0; no camp channel after F5; no final reward card; the final boss carries and uses its signature, which drops as a 0-VP **Memento**; its share becomes the **Viaticum**, a choose-1-of-3 of boss tools before the arena; the Last Hollow is the spend-down camp (6.11) | B: keep F5 as approved (its coin, card and signature arrive after the last fight: dead value, told plainly) | LE-5 ⚑ |
+| Q1 | Should floor 5 pay before the arena? | **A.** F5 coin and salvage 0; no camp channel after F5; no final reward card; the final boss carries and uses its signature, which drops as a 0-VP **Memento**; its share becomes the **Parting Fare**, a choose-1-of-3 of boss tools before the arena; the Last Hollow is the spend-down camp (6.11) | B: keep F5 as approved (its coin, card and signature arrive after the last fight: dead value, told plainly) | LE-5 ⚑ |
 | Q2 | Should a Wax Key still buy the consequence-lock premium safely? | **A.** The cache holds two pre-rolled identities; roll or force pays the stepped one, a Wax Key the ordinary one (6.9) | B: the consequence still fires on a Wax Key (changes TL 6.11's table); C: leave it (the Wax Key becomes a must-buy without Mechanics and K2 bounds nothing) | LE-11 ⚑ |
 | Q3 | Should salvage become a share of a fixed coin pool? | **A.** 12% of the floor pool, pre-assigned to armed units; the per-unit line still shows; Cowed groups pay none (6.4) | B: keep the per-unit formula (read literally with the 10–15% ratio, about 2,000+ coin per run) | LE-8 ⚑ |
 | Q4 | Should coin follow the party? | **A.** Coin per party from the expected-party table; solo and full parties get the same coin (CMP 7.7 holds) (6.4, 6.8) | B: +15% per actual companion (pays hiring; changes the budget under a shortfall) | LE-7 |
@@ -289,7 +306,7 @@ the death curve.*
 | 3 | Rarity decks with 2 equal-VP variants where the gates allow, on a `lootPlan` child stream; exact-VP variant shapes (6.3) | M1 (F1), M2 | lead's call; variant shapes new lead's call; LE-2 ⚑ |
 | 4 | Boss channel: signature at the top legal tier for its category; reward card counted in Ledger B and caps, outside Ledger A, never VR | M2 | lead's call; LE-3 |
 | 5 | Offer sets count once; unchosen options are **dreamed options** outside VP and caps | M2 | lead's call; LE-4 |
-| 6 | Floor 5 pays before the arena: coin 0, no camp channel, no final card, the Viaticum, the Memento | M2 | **agreed, Q1**; LE-5 ⚑ |
+| 6 | Floor 5 pays before the arena: coin 0, no camp channel, no final card, the Parting Fare, the Memento | M2 | **agreed, Q1**; LE-5 ⚑ |
 | 7 | Camp channel of 2 at every camp 1–4, graded for floor N+1, never VR | M2 | lead's call; LE-6 ⚑ |
 | 8 | Coin pool 35 / 50 / 70 / 90 / 0 per party at cap 3 (keyed by `companionCap`), lumps by risk rank after the locks resolve, F1 main-path floor ≥ 17 | M2 (F1 pool M1) | lead's call; **agreed, Q4**; keyed by cap: lead's call, after the check; LE-7 |
 | 9 | Salvage as a 12% share of the pool, pre-assigned per fight, then per armed unit | M1 (F1), M2 | **agreed, Q3**; LE-8 ⚑ |
@@ -309,7 +326,7 @@ the death curve.*
 | 23 | Curses at a discount | Later; M4 by change HL-29 (agreed, heirlooms and curses Q5) | lead's call; LE-22 |
 | 24 | V13 `LootEconomy`; reports; "loot last" in the DH 18.2 lever order; kPC first | M1 static, M2 | lead's call; LE-23, LE-24 ⚑ |
 | 25 | Risk incentive fixed by encounter and experience tuning, not loot | M2 | **agreed, Q6**; request to ENM, EP, DH |
-| 26 | Camp sinks (the Wish, the Tithe Bowl, the Ferryman's Note, Blood Price) passed as hooks, no ids, no prices; the Tithe Bowl since filled by segment 10 (change XI-24; M3; 8.1) | — | hook |
+| 26 | Camp sinks (The Long Shot, the Tithe Bowl, the Ferryman's Note, Blood Price) passed as hooks, no ids, no prices; the Tithe Bowl since filled by segment 10 (change XI-24; M3; 8.1) | — | hook |
 
 ---
 
@@ -369,7 +386,7 @@ curve so deaths land where DH 18.2 wants them.**
   **(agreed, Q4; CMP 7.7)**.
 - **Dead value:** coin, cards or items that arrive when nothing can be
   done with them **(agreed, Q1)**.
-- **Harder is richer:** ladder and Nightmare tiers never raise loot
+- **Harder is richer:** ladder and Peril tiers never raise loot
   **(lead's call; RT-21, decided)**.
 - **Second currencies, magic find, snowball items, items as currency.**
   **(lead's call)**
@@ -459,7 +476,7 @@ curve so deaths land where DH 18.2 wants them.**
 - **Experience** fixed by band: pool 710 against a need of 540, clamp
   50–150%, catch-ups (ENM 16; RT-8).
 - **Meta:** unlocks are content, never power (MAIN 4.7, **decided**);
-  Nightmare adds kind, not stats (RT-21, **decided**); heirlooms are
+  Peril tiers add kind, not stats (RT-21, **decided**); heirlooms are
   outside the budget (ITEMS 14).
 
 ### 3.2 What the approved documents owe this design
@@ -512,7 +529,7 @@ curve so deaths land where DH 18.2 wants them.**
 - **Companion hire is free** (CMP 7.8): there is no hire-cost sink.
 - **Pity timers are rejected** (DH 2 anti-goals and DH 5.4 (f): "hidden
   mercy keyed to low HP or dry spells").
-- **Dream Fragments are M3 Lore readings giving boss intel**, not a
+- **Fragments are M3 Lore readings giving boss intel**, not a
   currency (RS 9.1; TL-34).
 - **The consequence-lock rule is TL 6.11**, not 6.12 (doors and secrets)
   as the brief and one research track cite.
@@ -546,7 +563,7 @@ curve so deaths land where DH 18.2 wants them.**
 | **Tier mark** | The 1–4 filled diamonds with the tier word that preview a step socket's tier (6.15; the client's "tier pips", renamed because pips already mean several things) **(lead's call, after the check)** |
 | **Wax-Key identity** | A consequence cache's second pre-rolled item, paid when it is opened with no exposure to its consequence (a Wax Key, Unbolting, Unweaving) (6.9) |
 | **Wax-Key value** | The rule-derived expected value a Wax Key yields at a floor's locked sockets, computed from data, never from a generated floor (6.4 item 9) |
-| **The Viaticum** | F5's pre-arena offer set of boss tools (6.11) |
+| **The Parting Fare** | F5's pre-arena offer set of boss tools (6.11) |
 | **Memento** | The final boss's signature as a 0-VP run-record card (6.11) |
 | **Treasure count** | The Stratum Card's count of field notables (8.2) |
 | **Grave Goods** | The run-record line of what died with the hero (8.2) |
@@ -676,7 +693,7 @@ C as a base: it overpowers through selection (F3 party gear 18.7 against
    - (c) key entries (Wax Key sundries; floor keys are access);
    - (d) one coin pool with its salvage share.
 2. **Ledger A (count) is the contract.** Field entries plus the boss
-   signature (or, on F5, the Viaticum) fall inside 6–8 per floor
+   signature (or, on F5, the Parting Fare) fall inside 6–8 per floor
    *(illustr.)*. An offer set counts 1. The boss reward card is
    **outside** Ledger A (it is a separate screen, ENM 15.1, **settled**)
    but inside Ledger B and family caps once taken (6.3). The camp channel
@@ -739,7 +756,7 @@ illegal (tier, category) pair re-weights the category, never the tier.
   10), and from M2 the lever has a party-size key (≥ 3, IR-17). **Usability
   floor (change IR-2; agreed, item rolls Q1; M2):** one `UsableBy` query;
   **hard** on every chosen, guaranteed or VR draw (the Due, fit premiums,
-  the arms floor, every offer option and the fourth, the Viaticum, both
+  the arms floor, every offer option and the fourth, the Parting Fare, both
   dual identities, camp entries, VR cards); **soft** on C/U/R field cards
   (×100‰ *(illustr.)* when no member can use the record) (item rolls
   design 4.3). **Filters are not weights:** the Dream's Due, a fit premium
@@ -750,7 +767,7 @@ illegal (tier, category) pair re-weights the category, never the tier.
   channel order: once tactical VP drawn so far + the next card's VP would
   exceed `FloorDiv(f5TacticalMaxPermille × F5 field VP, 1000)` (6 of 17
   at 400‰ *(illustr.)*), the tactical categories take weight 0 for the
-  rest of the floor. The Viaticum is excluded from the base and the
+  rest of the floor. The Parting Fare is excluded from the base and the
   count. **Beside it on F3–F4 (change IR-16; M2):**
   `rareTacticalFieldMaxPerFloor` 2 *(illustr.)*: once that many Rare
   scrolls, wands and notable flasks are drawn in field draws, Rare
@@ -800,7 +817,7 @@ floor has a binding **base variant** and, where the gates allow, an
 | F2 | C U U U U U | **fit variant:** the same cards, one U a fit premium | 11 | U + authored ≈ 3 | U, 1 of 3 | 7 | 16 |
 | F3 | U U U R R R | **spiky:** C U R R R R | 15 | R + authored ≈ 4 | R, 1 of 3 | 7 | 22 |
 | F4 | U R R R R VR (the run's first VR beside a U) | **fit variant:** the same cards, one R a fit premium | 18 | R + authored ≈ 4 (VR + authored ≈ 5 once VR gear records exist) | R, 1 of 3 | 7 | 25 |
-| F5 | U R R R R R | **spiky:** C R R R R VR | 17 | none (the Memento, 0 VP); the Viaticum at R ≈ 3 | none | 7 (6 field + the Viaticum) | 20 |
+| F5 | U R R R R R | **spiky:** C R R R R VR | 17 | none (the Memento, 0 VP); the Parting Fare at R ≈ 3 | none | 7 (6 field + the Parting Fare) | 20 |
 
 **Variant rule (new lead's call; told plainly).** "Spiky" means the same
 VP concentrated into fewer, higher cards **where the depth gates allow
@@ -839,7 +856,7 @@ premium and is logged; its VP is unchanged.
     premium, logged in `SubstitutedVP`. A party with no arcane or primal
     reader never meets a VR it can only sell;
   - the **F5 spiky variant's VR card is R + fit premium** (the F5
-    tactical cap and the Viaticum already carry the final-boss tools);
+    tactical cap and the Parting Fare already carry the final-boss tools);
   - the **F4 signature is R + authored**;
   - a VR card drawn down to R logs its 1-VP shortfall in
     `SubstitutedVP` (Ledger B reports it; no coin is added);
@@ -867,7 +884,7 @@ premium and is logged; its VP is unchanged.
   arise (the F4 signature is R).
 - **Boss reward card (LE-3).** One offer set, width 3, at C / U / R / R
   on F1–F4, **never VR**; content per CN 10's boss-card row (scrolls,
-  wands; the talisman from F3, **settled**). Counted in Ledger B and
+  wands; the failsafe from F3, **settled**). Counted in Ledger B and
   toward family caps once taken; outside Ledger A and the
   3-per-encounter cap (ENM 15.1, kept). No final-boss card (6.11).
   Offered in the arena after `BossDefeated`, beside the opened cache
@@ -892,7 +909,7 @@ premium and is logged; its VP is unchanged.
     `bossCardFallback` entry 4 (item rolls design 4.8). This widens CN
     10's boss-card row by a fallback only (LE-3).
 - **Offer sets (LE-4).** Every choose-1-of-N (the boss card, the Wager
-  cage set, the Viaticum, the Twin Coffer) counts 1 in Ledger A and its
+  cage set, the Parting Fare, the Twin Coffer) counts 1 in Ledger A and its
   taken option's tier in Ledger B. Unchosen options are **dreamed
   options**: pre-rolled on `lootPlan`, outside VP and family caps,
   destroyed when the choice resolves (`ItemDestroyed{dreamedAway}`).
@@ -901,7 +918,7 @@ premium and is logged; its VP is unchanged.
   gear floor keys, because memory reads what generation produced, taken
   or not (item rolls design 4.7). **Offer slots (change IR-8; agreed,
   item rolls Q1; M2; the Wager M3):** options 0–3 are the Yours, Theirs,
-  Wayward and fourth slots, built in option-index order; families
+  Windblown and fourth slots, built in option-index order; families
   distinct, fine categories or effect tags distinct, at most 1 damage
   option on the boss card and the Wager (item rolls design 4.8).
 - **Camp channel (LE-6).** 2 entries at every camp 1–4 (inside the
@@ -1057,7 +1074,7 @@ premium and is logged; its VP is unchanged.
    | Trader and services | Later (ITEMS 10.9) |
    | Companion hire | **None**: free (CMP 7.8) |
    | Tithe Bowl (M3): a Lodestring or a Surveyor's Sketch | Filled by segment 10 (change XI-24; exploration and information design 4.6.3); Sketch 15 coin *(illustr.)*, Lodestring pegged at or above a healing potion at that camp (8.1) |
-   | Candidate hooks (no ids, no prices): the Wish, the Ferryman's Note, Blood Price | Hook (8.1, 12) |
+   | Candidate hooks (no ids, no prices): The Long Shot, the Ferryman's Note, Blood Price | Hook (8.1, 12) |
 
    **Coverage targets** (design intent passed to the camp owner): coin on
    arrival covers restock at every camp, for the largest legal party at
@@ -1273,7 +1290,7 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    the party those finds. This is part of the LE-13 reading for the DH
    owner. B's rarity and fit debt counters and the research "lean pity"
    and fit meter **are** dry-spell triggers and are rejected.
-4. **Boss card and the Viaticum:** usable options by the generation
+4. **Boss card and the Parting Fare:** usable options by the generation
    snapshot, with the fallbacks of 6.3 and 6.11.
 5. **No dead runs:** value variance is 0 by construction (the deck), apart
    from the agreed safe-route shortfall (6.1 item 3); fit variance is
@@ -1301,7 +1318,7 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
   line (8.2).
 - **Consumable hoarding** (the toy: 2.9–3.3 potions and, in A and Z, a
   tactical item in 83–86% of deaths): the F5 tactical cap (6.2);
-  Viaticum tools shaped for the arena (6.11); a hook to CN 8 so the
+  Parting Fare tools shaped for the arena (6.11); a hook to CN 8 so the
   companion "use it" suggester also fires for scrolls at elite and boss
   starts; an "unused since floor N" tag in the camp party view (segment
   10) **(hooks)**.
@@ -1353,7 +1370,7 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    | SR5 | Wager cage set, Dare cache (M3) |
    | SR4 | Elite-room carrier or lair cache; Strongroom (M3, F2–3) |
    | SR3 | Consequence-lock cache; for a consequence-locked Portal, the highest-ranked container in the room beyond |
-   | SR2 | Padlocked, Catch or Keyed caches; secret caches; the bait cache; the boxed lurker (M3); the Keybearer cache; **the Windfall (M3, change LP-1; agreed, loot sources Q1):** a unit socket outside the lock quota, inside the premium share, with no step, created only in step 8 (item 2) |
+   | SR2 | Padlocked, Clasp or Keyed caches; secret caches; the bait cache; the boxed lurker (M3); the Keybearer cache; **the Windfall (M3, change LP-1; agreed, loot sources Q1):** a unit socket outside the lock quota, inside the premium share, with no step, created only in step 8 (item 2) |
    | SR1 | Off-path containers, Alcoves, optional-fight carriers |
    | SR0 | Main-path containers and carriers |
 
@@ -1361,7 +1378,7 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    cache" here and in 6.14 means the *elite room's* SR4 cache; the
    main-path lair's container is SR0 (`lairContainer`). Gb guard-post
    carriers are optional-fight carriers (SR1). The Gaol Hour-lock cell
-   cache is SR2, not SR3. The F5 **Viaticum** is **unranked** (boss
+   cache is SR2, not SR3. The F5 **Parting Fare** is **unranked** (boss
    channel; change LP-1): an offer outside the deal and the within-rank
    shuffles (6.11 item 5).
 
@@ -1443,7 +1460,7 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
       coin plus 1 non-healing sundry; (iii) else no Windfall on this
       floor (its draws consumed, `windfallCarry` set). New filters:
       - (f1), card-level, at step 8: exactly 1 card; never the deck's
-        top card or a VR; the Due, the DH block or the Viaticum; a key,
+        top card or a VR; the Due, the DH block or the Parting Fare; a key,
         a signature or a step card; a dual-identity card;
       - (f2), identity-level, at the parent draw: the Windfall's slot is
         drawn filter-first (6.10 item 1) with `oncePerRun` records
@@ -1575,8 +1592,8 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      elite intel line (LE-18):** when the elite is resolved (killed,
      Yielded or Routed; cross-document comparison 2026-11-23, CC-38) or
      its notable is stolen, whichever comes
-     first, the party learns one non-power boss fact for that floor (the
-     boss signature item's card) **(trigger: lead's call, after the
+     first, the party learns one non-power boss fact for that floor (the card of
+     the boss's prize) **(trigger: lead's call, after the
      check)**. The fact is recorded in the floor's one **FactLedger**
      (fact instances and the `bossQueue`, shared with Yield
      interrogation, Curiosities, Fragments, Parting Words and the Tithe
@@ -1599,10 +1616,10 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      consumable (a sundry dose), so no new carrier slot exists. Feeding 1
      supply hands over the container entry (approved).
    - **Bait cache (LE-20):** a real ordinary entry at SR2 ("the cheese is
-     real"), so Mousetrap lures are worth taking; the separate prop family
+     real"), so Baited Room lures are worth taking; the separate prop family
      keeps ordinary chests honest (EP 6.8.1). A solo party never meets a
-     Mousetrap (EP), so bait value is party-size dependent: reported.
-     (Read: the bait cache and its placement are M2, with the Mousetrap;
+     Baited Room (EP), so bait value is party-size dependent: reported.
+     (Read: the bait cache and its placement are M2, with the Baited Room;
      loot sources design 4.1, 13.)
    - **Strongroom (M3, F2–3):** SR4.
    - **Curiosities (segment 8; changes EV-7, EV-15; M2; events design
@@ -1668,9 +1685,9 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
      from KinSwap and the carrier fallback (change LP-1).
    - **Offer pacing trim (change LP-30; M3):** at most 2 offer-form
      field sources per floor among the Wager, the Twin Coffer and the
-     Viaticum; draw-free, after the reverts above: the Viaticum is never
+     Parting Fare; draw-free, after the reverts above: the Parting Fare is never
      dropped; the Twin Coffer is dropped first (it reverts to a plain
-     container keeping its Yours identity; Wayward becomes a dreamed
+     container keeping its Yours identity; Windblown becomes a dreamed
      option); then the Wager (the revert above) (loot sources design 7).
    - **A Windfall moved or dropped (change LP-1; M3):**
      `WindfallMoved{from,to}` when its host room can no longer hold it
@@ -1866,7 +1883,7 @@ matter".
    cache in its lair (plate line "Guards: <signature name>"), shown
    during the fight, and it still drops as the 0-VP Memento at victory
    (item rolls design 4.13).
-5. **The Viaticum** takes the F5 boss share: an offer set, choose 1 of 3,
+5. **The Parting Fare** takes the F5 boss share: an offer set, choose 1 of 3,
    at R, counted 1 in Ledger A.
    - **Options (corrected after the check; lead's call, after the
      check):** distinct Rare boss tools: Rare wands and tier-3 scrolls
@@ -1875,7 +1892,7 @@ matter".
      `effectTag` damage, change IR-23; *pending request to the CN
      owner*; M2); no tier-3+ scroll once
      `tier4ScrollsPerRunBeforeFinalBoss`, if engaged, is spent; never the
-     phial (the Viaticum is a boss-channel offer, not a container draw).
+     phial (the Parting Fare is a boss-channel offer, not a container draw).
      The draft's "bombs" are dropped: no bomb exists at Rare (Fire Bomb
      C, Greater Fire Bomb U), so Rare bomb shapes go to 7b as a Later
      content item.
@@ -1897,11 +1914,11 @@ matter".
      missable), never a Furnishing (ROOM 6.3.4). The FL and ENM owners
      confirm the room. It is counted on the lean route. *(Reading, loot
      sources design 4.4, 4.10: on F5 nothing lies between L and F, so
-     the fallback is the real rule; the Viaticum takes the lair room's
+     the fallback is the real rule; the Parting Fare takes the lair room's
      host socket, kind `viaticum`, on its exit side toward the
      Forecourt, outside the start zone, on the walk line; pending FL and
      ENM confirmation, 18.2.)* **Host (change LP-14; agreed, loot
-     sources Q5; M2):** the Bedside Stand, a nightstand with three
+     sources Q5; M2):** the Washstand, a nightstand with three
      drawers, whose silhouette hosts nothing else. Offer pacing never
      drops it (change LP-30; 6.9 item 7).
    - **Surfaces (lead's call, after the check):** the F5 Stratum Card
@@ -1933,28 +1950,28 @@ matter".
   (Met by 7b's lane > family > record split over `lootLane`, where an
   unlocked record dilutes only its own family; change IR-1; item rolls
   design 4.2, 4.16; M3.)
-- **Ladder and Nightmare tiers:** zero economy effect (decks, coin, camp
+- **Ladder and Peril tiers:** zero economy effect (decks, coin, camp
   channel, allowance). The ladder's +10% encounter budgets widen the gap
   against a fixed loot curve, so kPC is reported per tier. Segment 8's
-  Nightmare **Provisos** add printed Curiosity costs only, never better
+  Peril **Provisos** add printed Curiosity costs only, never better
   gains (M3; change EV-31; events design 4.9).
 - **Omens never touch the spoils list** (LootDoorInvariant; RS 9.1
   "theme-keyed loot" rejected). The research ideas of Omen reshapes and
   an interest Omen are dropped unless the RS owner rules otherwise.
 - **The Perilous Door (M3; RT-21, decided; agreed, Q5).** Every width-3
-  offer (the boss card, the Wager set, the Viaticum) pre-draws a fourth
+  offer (the boss card, the Wager set, the Parting Fare) pre-draws a fourth
   dreamed option on `lootPlan` **from M2**, whatever the door and
   whatever the wave, so draws and identities are door-independent and
   switching the reveal on in M3 changes no seed (the RS precedent:
   "switching Two Doors on changes no seed", RS 6.4) **(drawn from M2:
   lead's call, after the check)**. On a floor entered through the
   Perilous Door, that floor's camp card reveals the fourth option.
-  On that floor the boss uses its Nightmare Rendition one tier up (cap
+  On that floor the boss uses its Peril Rendition one tier up (cap
   3), never an extra boss action, and the Stratum Card and Playbill show
   it before commitment; this design's 1-of-4 card is read unchanged
   (change BR-34; M3; boss rooms design 4.14.2).
   **The fourth and memory (change IR-6; agreed, item rolls Q2; M2):**
-  the fourth is drawn by the Wayward rule, never a `oncePerRun` record
+  the fourth is drawn by the Windblown rule, never a `oncePerRun` record
   (it might never be presented), and it writes Scion-line memory and
   gear floor keys like any offer option (item rolls design 4.7 items 5
   and 6, 4.8).
@@ -1992,14 +2009,14 @@ matter".
     changes what is shown, never what is drawn).
   - **The toggle (read by change CH-20; M3; camp and hub design 7.6):**
     the Perilous Door is chosen by a Perilous toggle at the camp's door
-    station, on Two Doors cards only, behind the Nightmare-ladder
+    station, on Two Doors cards only, behind the Peril-ladder
     unlock; changeable until Travel on, listed on its confirm, and
     entering `GenInputs`. This design's reveal and 1-of-4 card are read
     unchanged (this owner confirms). *Pending request (CH-20, to the RS
     owner):* offer it on single-door cards and at camp 4; if refused, it
     is not offered there (camp and hub design 14.2).
   - *Rejected (Q5):* B, a profile mark and a memento-wall frame only.
-- **Dream Fragments:** 0 VP, 0 coin; folded into segment 8's F-BOSS
+- **Fragments:** 0 VP, 0 coin; folded into segment 8's F-BOSS
   options on Lore thresholds, one boss-fact queue in the FactLedger
   (M3; change EV-29; events design 4.9). **Heirloom:** outside the budget
   (**settled**); counts as party-owned for the Due (its precedence in the
@@ -2041,7 +2058,7 @@ how each hook below is met; the content requests stay open.
   member X in slot S against the fixed deal of party-owned items" (6.6).
 - The fit-premium draw: a hard filter to the target member's lane, then
   the ordinary weights (6.2).
-- Distinct triples for the Wager, the boss card and the Viaticum; the
+- Distinct triples for the Wager, the boss card and the Parting Fare; the
   fourth dreamed option; the Twin Coffer pair; the usability fallbacks
   (6.3, 6.11).
 - Wax-Key identities for consequence caches.
@@ -2067,12 +2084,12 @@ how each hook below is met; the content requests stay open.
   CH-15; M2; camp and hub design 7.1). **The boss-channel phial
   (change IR-8; M2):** when CN 14.7's pre-roll (agreed, CN Q2) places
   the phial in the boss channel (an F3–F4 boss card, never F5), it takes
-  the boss card's Wayward slot (option index 2), whose identity and
+  the boss card's Windblown slot (option index 2), whose identity and
   `lineRoll` draws are consumed as ghosts (item rolls design 4.1).
 - Carrier-legal subsets for carried cards (ENM 15.3 step 4); the elite
   carrier's gear-only subset (6.9 item 2).
 - Content requests: 2–3 VR gear records; Rare bomb shapes and
-  arena-keyed tools for the Viaticum (Later).
+  arena-keyed tools for the Parting Fare (Later).
 
 ### 6.14 Hooks to 7c (what each source receives)
 
@@ -2096,7 +2113,7 @@ how each hook below is met (its 4.4); its pending requests stay open.
 | Activity containers | Coin and sundries |
 | Heavy Purse carrier (F2–F4) | 20% of found coin, bound in LootBind (8.3) |
 | Boss | Signature (+ the counted card); F5 the Memento |
-| F5 main path after the lair | The Viaticum (6.11 item 5); by the reading recorded there, the lair room's host socket, kind `viaticum`, unranked, on the Bedside Stand (changes LP-1, LP-14; loot sources design 4.10) |
+| F5 main path after the lair | The Parting Fare (6.11 item 5); by the reading recorded there, the lair room's host socket, kind `viaticum`, unranked, on the Washstand (changes LP-1, LP-14; loot sources design 4.10) |
 | SR2 Windfall (M3, change LP-1) | 1 card under (f)/(g) from the host's carried allotment or a plain SR1 container (6.9 item 2 step 8); coin weight 3, never a lump; no salvage, no purse (loot sources design 4.4, 4.7.6) |
 | Encounters | Salvage shares, per fight then per unit (6.4 item 2) |
 | Every container | Never empty (6.4 items 4–5) |
@@ -2116,7 +2133,7 @@ no more loot-bearing containers than fillers (6.4 item 5).
 - **Ordering (lead's call, after the check).** The Stratum Card shows,
   in this order and at most 1 line each: RS facts; DH guarantees; counts
   (rooms, treasures); announcements (the Dream's Due, the purse, the
-  Viaticum on F5). The party bar consolidates its floor tallies into one
+  Parting Fare on F5). The party bar consolidates its floor tallies into one
   floor strip of icon-prefixed counts in a fixed order (potion, rooms,
   traps, treasures), so the word "found" is not repeated. **The rooms
   cell (change XI-11; M2):** reads "rooms e / t", where t is the count
@@ -2138,7 +2155,7 @@ no more loot-bearing containers than fillers (6.4 item 5).
   none remain, so floor entry is not a spoiler. **By source (change
   LP-28; M2):** hover breaks n into counts only (open, locked, hidden,
   carried, prize, windfall), never tier, item family or room (loot
-  sources design 4.5). **Spent field (change XI-11; M2):** when "best
+  sources design 4.5). **Emptied field (change XI-11; M2):** when "best
   remaining" is Common or nothing countable is left, the field drops one
   RC6 value step and reads "nothing worth chasing" or "nothing countable
   left"; while k < n / 2 only "nothing countable left" can fire. The
@@ -2187,18 +2204,18 @@ no more loot-bearing containers than fillers (6.4 item 5).
 - **Elite intel line:** shown in the loot summary's existing floor-fact
   slot (ENM 15.8) when it fires (6.9 item 6), and kept afterwards under
   the boss name on the pause screen's floor-info panel.
-- **The Viaticum:** opens the boss-reward offer UI at width 3, not the
-  loot summary (6.11 item 5). Its host is the **Bedside Stand** (change
+- **The Parting Fare:** opens the boss-reward offer UI at width 3, not the
+  loot summary (6.11 item 5). Its host is the **Washstand** (change
   LP-14; agreed, loot sources Q5; M2), the second named exception to IR
   4.18's "container art never implies contents" (loot sources design
   4.10).
-- **Camp:** the coin ledger; "the Hollow ahead sells rare" (the next
-  camp's top tier); "unused since floor N" tags. **Camp 4 (the Last
+- **Camp:** the coin ledger; "the next camp sells rare" (its top
+  tier); "unused since floor N" tags. **Camp 4 (the Last
   Hollow):** a plain line on the coin ledger, "No camp after floor 5.
   Coin left at camp exit is lost.", repeated as a soft confirm on the
   camp-exit button when the purse is at least the cheapest vendor item.
   (Placed by the camp and hub design: the ledger and its lines at the
-  Keeper's Cart, the tags in the Bedrolls party view, and the soft
+  Pedlar's Cart, the tags in the Bedrolls party view, and the soft
   confirm as a line of the Travel-on confirm; its 4.2, 4.3.)
 - **Run record:** Grave Goods (8.2); the Memento card on the victory
   screen and run record only (6.11 item 4).
@@ -2220,11 +2237,11 @@ no more loot-bearing containers than fillers (6.4 item 5).
 
 | | F1 | F2 | F3 | F4 | F5 |
 |---|---|---|---|---|---|
-| Ledger A (field + signature or Viaticum) | 6 | 7 | 7 | 7 | 7 |
+| Ledger A (field + signature or Parting Fare) | 6 | 7 | 7 | 7 | 7 |
 | Field deck (base) | C C U U U | C U U U U U | U U U R R R | U R R R R VR | U R R R R R |
 | Alternate variant | — | fit variant | C U R R R R | fit variant | C R R R R VR |
 | Field VP | 8 | 11 | 15 | 18 | 17 |
-| Signature / Viaticum VP | 3 | 3 | 4 | 4 (M2) | Viaticum 3 |
+| Signature / Parting Fare VP | 3 | 3 | 4 | 4 (M2) | Parting Fare 3 |
 | Boss card | C (1) | U (2) | R (3) | R (3) | none |
 | Floor VP (base) | 12 | 16 | 22 | 25 | 20 |
 | Step allowance | ≤ 2 | ≤ 2 | ≤ 2 | ≤ 2 | ≤ 2 |
@@ -2285,14 +2302,14 @@ and a `KitResaleBand` re-run (starting kits design 4.3, 14.2).
 |---|---|---|---|---|
 | Risk Ledger (ranks, allocation, allowance, fit premium, tier marks) | Makes the "+1 step" checkable | Low | M2 / M3 | **Adopted** (6.9; LE-10) |
 | The Dream's Due | A fit guarantee, not pity | Low–medium | M1 hero arms, M2 | **Adopted** (6.6; LE-13) |
-| The Viaticum + the Memento | Removes F5 dead value; a last pre-boss decision | Low | M2 | **Adopted** (6.11; LE-5; agreed, Q1) |
+| The Parting Fare + the Memento | Removes F5 dead value; a last pre-boss decision | Low | M2 | **Adopted** (6.11; LE-5; agreed, Q1) |
 | Treasure count + Grave Goods | Routing information; a known stopping point; a hoarding signal | Very low | M2 | **Adopted** (8.2; LE-15) |
 | Heavy Purse | A named coin target for combat and Steal, carved from the pool | Low | M2 | **Adopted** (8.3; LE-16) |
 | Elite intel line | A non-power premium for the elite room | Very low | M2 | **Adopted** (6.9; LE-18) |
 | Twin Coffer | Choice width at no value | Low | M3 | **Adopted** (8.4; LE-21) |
 | Curses at a discount | "Cursed items worth more", safely priced | Medium | Later; M4 by change HL-29 | **Adopted with Curses** (8.5; LE-22) |
-| The Wish (a paid camp mark steering the Due) | Agency; a late sink | Low | M3 | **Hook** to camp and hub (adds a third outside input to ENM 10.5 step 3; that owner flags it); held Later by the camp and hub design (its 5.4) |
-| The Tithe Bowl (one camp service, one purchase per camp: a Lodestring or a Surveyor's Sketch; change XI-24) | An information sink | Low | M3 | **Hook, filled by segment 10** (exploration and information design 4.6.3): the Lodestring (pegged at or above a healing potion) or the Sketch (15 coin *(illustr.)*; room and Alcove outlines with edges and the Stairhead at the next floor's entry, never secret nodes); both resolve at the entered floor's entry or use, never on camp or Two Doors cards; the Lodestring option is greyed while one is held and not offered at camp 4. Names socket classes "behind risk", never "behind a lock"; unavailable when the party holds a Wax Key; its fact deduplicated through segment 8's per-floor FactLedger, change EV-8, events design 4.4.2. *Pending request (XI-24, to this owner):* relax the Wax Key guard for both options; if refused, the guard stays (exploration and information design 14.2); until this owner rules, the camp and hub design shows the Bowl at the Keeper's Cart greyed with its reason while a Wax Key is held (its 4.3, 14.2) |
+| The Long Shot (a paid camp mark steering the Due) | Agency; a late sink | Low | M3 | **Hook** to camp and hub (adds a third outside input to ENM 10.5 step 3; that owner flags it); held Later by the camp and hub design (its 5.4) |
+| The Tithe Bowl (one camp service, one purchase per camp: a Lodestring or a Surveyor's Sketch; change XI-24) | An information sink | Low | M3 | **Hook, filled by segment 10** (exploration and information design 4.6.3): the Lodestring (pegged at or above a healing potion) or the Sketch (15 coin *(illustr.)*; room and Alcove outlines with edges and the Downstair at the next floor's entry, never secret nodes); both resolve at the entered floor's entry or use, never on camp or Two Doors cards; the Lodestring option is greyed while one is held and not offered at camp 4. Names socket classes "behind risk", never "behind a lock"; unavailable when the party holds a Wax Key; its fact deduplicated through segment 8's per-floor FactLedger, change EV-8, events design 4.4.2. *Pending request (XI-24, to this owner):* relax the Wax Key guard for both options; if refused, the guard stays (exploration and information design 14.2); until this owner rules, the camp and hub design shows the Bowl at the Pedlar's Cart greyed with its reason while a Wax Key is held (its 4.3, 14.2) |
 | The Ferryman's Note (borrow against the next floor's coin) | Spend-now tension | Low | M3 | **Hook**, capped: ≤ 30% of the next pool, once per run, never camp 4; replaces interest; the first promotion candidate if `TonicShareOfSpend` > 25% (camp and hub design 5.4) |
 | Blood Price (a `treatProof` Scarred for +1 step on the camp item) | Pay in blood | Low | M3 | **Hook**: uses one of the next floor's 2 allowance steps (no swap-down); once per run; never camp 4; never VR (the camp cap); the second promotion candidate (camp and hub design 5.4) |
 | Wager Pot | Stakes at the Wager | Very low | Later | **Parked** (creates coin; a hoarding pull) |
@@ -2300,14 +2317,14 @@ and a `KitResaleBand` re-run (starting kits design 4.3, 14.2).
 | Berth entries; an early F2 Rare; fixed class quotas | — | — | — | **Rejected** (5.3) |
 | Elite spoils lair-cache swap (Model C) | Choice at the elite | Medium | — | **Not adopted** (clock); presentation only |
 | Dare width by attempt | Clean-win texture | Low | M3 | Left to the HZ owner |
-| Coin interest; Dream Tithe; salvage shards; coin weight; coin as score; companion upkeep; per-body shares; kill bounties; an F1 Antechamber catch-up cache | — | — | — | **Rejected** (meta currency, second currencies, hoarding pulls, CMP 7.8, ENM 2, player-state pity) |
+| Coin interest; Dream Tithe; salvage shards; coin weight; coin as score; companion upkeep; per-body shares; kill bounties; an F1 Forecourt Top-up cache | — | — | — | **Rejected** (meta currency, second currencies, hoarding pulls, CMP 7.8, ENM 2, player-state pity) |
 
-The Dream's Due is in full in 6.6; the Viaticum and the Memento in 6.11.
+The Dream's Due is in full in 6.6; the Parting Fare and the Memento in 6.11.
 
 ### 8.2 Treasure count and Grave Goods (lead's call; change LE-15; M2)
 
 - **Treasure count:** n = field notables (containers, secret caches,
-  carried), plus the Viaticum on F5; the signature, camp stock and
+  carried), plus the Parting Fare on F5; the signature, camp stock and
   sundries are not counted; F1 excludes the secret cache (FL-20): a
   found F1 secret-cache notable raises neither k nor n and shows as "+1
   secret". Offer sets count 1, and count as found when shown. Found k
@@ -2369,7 +2386,7 @@ The Dream's Due is in full in 6.6; the Viaticum and the Memento in 6.11.
   unfound field notables at container sockets on the current floor, read
   draw-free from LootBind's bound placement and the `LootLedger` flags;
   excluded are secret caches (agreed, exploration and information Q5),
-  carried notables, boxed-lurker containers, Windfalls, the Viaticum, the
+  carried notables, boxed-lurker containers, Windfalls, the Parting Fare, the
   signature cache, HE reservations and all of F1. Ranking is role-blind:
   tier descending, then the room's macro-grid position, then the
   container's square. Output: one room, its tier word and the qualifier
@@ -2423,9 +2440,9 @@ only a dream") inside the loot summary; counts 1; the alternate is a
 dreamed option. At most 1 per floor, F2+, off-path, never an HE socket.
 It carries a twin-lid kind mark (change LP-26, CT8; M3). **Offer pacing
 (change LP-30; M3):** at most 2 offer-form field sources per floor among
-the Wager, the Twin Coffer and the Viaticum; the Twin Coffer is the
+the Wager, the Twin Coffer and the Parting Fare; the Twin Coffer is the
 first dropped by the draw-free trim (6.9 item 7), reverting to a plain
-container that keeps its Yours identity, its Wayward a dreamed option.
+container that keeps its Yours identity, its Windblown a dreamed option.
 Report `OffersPerFloor` (loot sources design 6, 7).
 
 ### 8.5 Curses at a discount (lead's call; change LE-22; M4, moved from Later by change HL-29 ⚑; agreed, heirlooms and curses Q5)
@@ -2439,7 +2456,7 @@ curses are authored **cursed twins** (`cursedTwinOf`, same family and
 base), never rolled; a per-floor `curseGate` (2 draws, always consumed
 from M2) makes "at most 1 per floor" structural; eligible only on Rare+
 gear field cards, F2+; also barred from fit premiums, the arms floor,
-every offer option and the fourth, the Viaticum, camp entries,
+every offer option and the fourth, the Parting Fare, camp entries,
 signatures, heirlooms, consumables and rings; a cursed carrier's cost
 add uses the benefit's T+1 value (item rolls design 4.15).
 **M4 (change EV-43; moved from Later by change HL-29):** segment 8's
@@ -2452,7 +2469,7 @@ Cling" chip and first-equip line (change HL-15, ITEMS and IR owners;
 agreed, heirlooms and curses Q3; presentation only, never reading
 whether a card is cursed), the malign hint and five folk cost lines
 (change HL-16: `whileEquipped`, none feeding a hard-condition transform;
-Eyebitten and Ill-Slept Later), with Maladies, the desecrated-shrine
+Eyebitten and Heavy-Eyed Later), with Maladies, the desecrated-shrine
 source and EV-43's shrines; cure text is generated from the hosts in
 the build (camp or a shrine at M4; rune hosts stay Later). *Pending
 reading (HL-29, to the CON owner):* the M4 Cursed family sits outside
@@ -2538,7 +2555,7 @@ LE-14).
 | Over-closure at k = 1 | kPC first; trip-wire; F4 deck at 6 cards | 6.5 |
 | Hero dry floors in A (5.5% below curve) | The Due parity rule (B's targeting reached 3.6%) | LE-13 |
 | Camp reload leak | Atomic commit | LE-14 |
-| Tactical hoarding | F5 cap; Viaticum shape; suggester hook | 6.7 |
+| Tactical hoarding | F5 cap; Parting Fare shape; suggester hook | 6.7 |
 
 ---
 
@@ -2625,7 +2642,7 @@ an LR1 repair); (g) by its named action, the waiver; (h), (i)
 3 × variant × unlock set, where the unlock sets are none, all, and each
 single unlock):
 - (a) Ledger A per floor is 6–8 including the signature (or the
-  Viaticum), less 1 on a `campReward` phial's floor (6.13); the boss
+  Parting Fare), less 1 on a `campReward` phial's floor (6.13); the boss
   card is outside A; deck size and carried counts fit the channel split.
 - (b) Both variants of a floor are **exactly** equal in VP and legal at
   every gate (new lead's call: no 1-VP tolerance).
@@ -2634,7 +2651,7 @@ single unlock):
   if refused, signatures exempt, with 18.2's fallback);
   `trinketRarePerFloorMax`; worn pieces ≤ U (AR 5.5);
   `scrollFloorCap`; wands F2+; the boss card ≤ R; camp entries ≤ R; the
-  Viaticum's options legal at R; every deck card has ≥ 1 legal record at
+  Parting Fare's options legal at R; every deck card has ≥ 1 legal record at
   its tier and category on the shipping roster, or a logged roster
   fallback (6.3).
 - (j) Pegs at every camp: P1; K1 (warn if a re-price breaks equality);
@@ -2646,7 +2663,7 @@ single unlock):
 - (l) No loot or coin line reads the actual party size.
 - (n) ≥ 3 legal records per `requires` lane (the record's `lootLane`,
   change IR-1) per deck tier *(illustr.)*;
-  for each class with no Arcana in kit, the boss-card and Viaticum
+  for each class with no Arcana in kit, the boss-card and Parting Fare
   fallbacks have legal gear at every card tier.
 - (o) M3: lane-normalised weights and the Due pool after unlocks
   (`UnlockValueNeutral`).
@@ -2687,7 +2704,7 @@ each with its named action:
   Bobbin's charm) never sets `armsSatisfied`; if this owner refuses, the
   Bobbin is held (charm abilities design 14.2). *Action:* waiver (6.6).
 - (h) F5: coin 0, salvage 0 and their lines hidden; no camp channel, no
-  boss card, the Memento at 0 VP; the Viaticum present, all 3 options
+  boss card, the Memento at 0 VP; the Parting Fare present, all 3 options
   usable, outside the Antechamber, the Circuit and fight hosts; every F5
   fallback converted to sundries within ranges; at most 1 non-notable
   lock; loot-bearing containers ≤ fillers. *Action:* 7c removes the
@@ -2783,10 +2800,10 @@ other names keep their meaning under their qualified ids.
 | Wave | Contents |
 |---|---|
 | **M1** | The F1 deck (single variant, inside M1's own split; at most 1 carried weapon or armour); the hero-arms Due on F1; the coin counter (F1 pool 35, main-path floor 17, the salvage share of 4 per fight then per unit, LE-7, LE-8); the LootPlan step on the keyed `lootPlan` stream and the LootBind pass; `LootLedger`; the atomic commit; V13s (a), (c); V13g (g), (i) on F1; the (m) integration test |
-| **M2** | Decks F1–F5 with variants; boss card counting; the camp channel of 2 graded for N+1; the coin pool, salvage share, Sell 250‰; K2 / K2b; the full Due with the fixed-deal scorer; the Risk Ledger for consequence locks, locks, secrets, the elite and the bait cache; Wax-Key identities and the mixed-route rule; the fourth dreamed option drawn (not shown); the usability fallbacks; the elite intel line; the F5 reshape (Viaticum, Memento, the camp-4 warning); Treasure count and Grave Goods; the Heavy Purse; category weights and the F5 cap; V13 in full; all reports, kPC first; the camp reward card's content and party-keyed vendor potion stock (camp and hub owner; changes CH-15, CH-16; camp and hub design 7.1, 7.2) |
-| **M3** | Wager, Dare, boxed lurker and Strongroom ranks (the Annex has no rank of its own); the Twin Coffer; the Perilous Door reveal (Q5; shown only, the option drawn since M2); unlock normalisation; the memento wall (the Memento wall station in the hub; camp and hub design 5.2); camp hooks if the camp owner takes them (the camp and hub design takes the Tithe Bowl in M3, promotes the Ferryman's Note, then Blood Price, only on `TonicShareOfSpend`, and holds the Wish Later; its 5.4); the Perilous toggle at the camp's door station (change CH-20; camp and hub design 7.6) |
+| **M2** | Decks F1–F5 with variants; boss card counting; the camp channel of 2 graded for N+1; the coin pool, salvage share, Sell 250‰; K2 / K2b; the full Due with the fixed-deal scorer; the Risk Ledger for consequence locks, locks, secrets, the elite and the bait cache; Wax-Key identities and the mixed-route rule; the fourth dreamed option drawn (not shown); the usability fallbacks; the elite intel line; the F5 reshape (Parting Fare, Memento, the camp-4 warning); Treasure count and Grave Goods; the Heavy Purse; category weights and the F5 cap; V13 in full; all reports, kPC first; the camp reward card's content and party-keyed vendor potion stock (camp and hub owner; changes CH-15, CH-16; camp and hub design 7.1, 7.2) |
+| **M3** | Wager, Dare, boxed lurker and Strongroom ranks (the Annex has no rank of its own); the Twin Coffer; the Perilous Door reveal (Q5; shown only, the option drawn since M2); unlock normalisation; the memento wall (the Memento wall station in the hub; camp and hub design 5.2); camp hooks if the camp owner takes them (the camp and hub design takes the Tithe Bowl in M3, promotes the Ferryman's Note, then Blood Price, only on `TonicShareOfSpend`, and holds The Long Shot Later; its 5.4); the Perilous toggle at the camp's door station (change CH-20; camp and hub design 7.6) |
 | **M4** | Curses at a discount (8.5; moved from Later by change HL-29 ⚑; agreed, heirlooms and curses Q5; *CON budget reading pending*, else Later unchanged; heirlooms and curses design 10) |
-| **Later** | The trader carve (ITEMS 10.9, I-14); daily seeds fixing class; arena-keyed Viaticum tools; the Burdened twin, Redeemed and the Crooked Road rule (8.5; changes HL-23, HL-24, HL-21 as a request) |
+| **Later** | The trader carve (ITEMS 10.9, I-14); daily seeds fixing class; arena-keyed Parting Fare tools; the Burdened twin, Redeemed and the Crooked Road rule (8.5; changes HL-23, HL-24, HL-21 as a request) |
 
 ---
 
@@ -2805,19 +2822,19 @@ shop presentation and camp sinks (camp and hub); the display (segment
 | Owner | Hook |
 |---|---|
 | **7b, item rolls and tables** | Records per (tier, category); smart-loot and category weights; the Due, fit, triple and dreamed-option filters; substitution; VR gear content (6.13) |
-| **7c, sources and placement** | Socket tags and ranks (the input to 7a's allocation, 6.9 item 2); lump placement; the Viaticum room; Twin Coffer placement; trimmed-floor sockets; per-encounter caps; trimming containers on F5 and on coin overflow (6.4, 6.14). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 11)** |
-| **Camp and hub** | Shop presentation; the camp reward card's content; vendor stock scaling; the Wish, the Tithe Bowl (its options filled by segment 10, change XI-24, 8.1), the Ferryman's Note, Blood Price; the coverage targets as design intent. **Taken up by the camp and hub design (segment 13, approved 2026-11-23; changes CH-15, CH-16, CH-20):** the Keeper's Cart and Notables panel (its 4.3); the camp reward card's content (7.1); vendor potion stock keyed to the party and trimmed in Core (7.2); `BuyBatch` Quick Restock (7.3); the coverage targets, checked by `CampRestockCoverage` (7.2, 9.2); the camp-4 line and soft confirm (4.2); the Tithe Bowl at the cart (M3; 4.3); the Ferryman's Note and Blood Price as promotion candidates, the Wish Later (5.4); Grave Goods in the Book of Nights and the Memento wall (M3; 5.2); the Perilous toggle at the door station (M3; 7.6); its request on that toggle, to the RS owner, and XI's Wax Key guard request to this owner stay open (its 11, 14.2) |
-| **Segment 8 (Dream Fragments)** | The boss-fact family the elite intel line shares. **Taken up by the events design (segment 8, approved 2026-11-22; changes EV-7, EV-8, EV-15):** the per-floor FactLedger (6.9 item 6); its pending requests to 7a and 7c, `stepFunded` and F-CACHE, stay open (events design 4.4, 11) |
-| **Segment 9 (bosses)** | Signature records; the Memento card. **Taken up by the boss rooms design (segment 9, approved 2026-11-22; changes BR-28, BR-29, BR-34, all reading this design unchanged):** the card, Viaticum and Memento interplay (its 4.11.2); the `bossQueue` order behind the elite intel line (its 4.12); the Perilous Door's Nightmare Rendition beside the 1-of-4 card (its 4.14.2; M3) |
-| **Segment 10 (UI) and audio** | The Stratum Card order, the floor strip, tier marks, plate loot badges, the Steal preview, the Dream's Due tags, the Viaticum offer UI, the camp-4 warning, ledgers, tags, the audio stings (6.15). **Taken up by the exploration and information design (segment 10, approved 2026-11-23; changes XI-7, XI-11, XI-19, XI-22–XI-24, XI-26, XI-29):** the Treasure field naming, rooms cell and spent field (6.15); F-TREASURE and the Lodestring (8.2); the Tithe Bowl (8.1); its requests to this owner, the exposure ruling (6.9 item 6) and the Wax Key guard (8.1), stay open (its 4.6, 4.9.9, 11) |
+| **7c, sources and placement** | Socket tags and ranks (the input to 7a's allocation, 6.9 item 2); lump placement; the Parting Fare room; Twin Coffer placement; trimmed-floor sockets; per-encounter caps; trimming containers on F5 and on coin overflow (6.4, 6.14). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 11)** |
+| **Camp and hub** | Shop presentation; the camp reward card's content; vendor stock scaling; The Long Shot, the Tithe Bowl (its options filled by segment 10, change XI-24, 8.1), the Ferryman's Note, Blood Price; the coverage targets as design intent. **Taken up by the camp and hub design (segment 13, approved 2026-11-23; changes CH-15, CH-16, CH-20):** the Pedlar's Cart and Notables panel (its 4.3); the camp reward card's content (7.1); vendor potion stock keyed to the party and trimmed in Core (7.2); `BuyBatch` Quick Restock (7.3); the coverage targets, checked by `CampRestockCoverage` (7.2, 9.2); the camp-4 line and soft confirm (4.2); the Tithe Bowl at the cart (M3; 4.3); the Ferryman's Note and Blood Price as promotion candidates, The Long Shot Later (5.4); Grave Goods in the Book of Nights and the Memento wall (M3; 5.2); the Perilous toggle at the door station (M3; 7.6); its request on that toggle, to the RS owner, and XI's Wax Key guard request to this owner stay open (its 11, 14.2) |
+| **Segment 8 (Fragments)** | The boss-fact family the elite intel line shares. **Taken up by the events design (segment 8, approved 2026-11-22; changes EV-7, EV-8, EV-15):** the per-floor FactLedger (6.9 item 6); its pending requests to 7a and 7c, `stepFunded` and F-CACHE, stay open (events design 4.4, 11) |
+| **Segment 9 (bosses)** | Signature records; the Memento card. **Taken up by the boss rooms design (segment 9, approved 2026-11-22; changes BR-28, BR-29, BR-34, all reading this design unchanged):** the card, Parting Fare and Memento interplay (its 4.11.2); the `bossQueue` order behind the elite intel line (its 4.12); the Perilous Door's Peril Rendition beside the 1-of-4 card (its 4.14.2; M3) |
+| **Segment 10 (UI) and audio** | The Stratum Card order, the floor strip, tier marks, plate loot badges, the Steal preview, the Dream's Due tags, the Parting Fare offer UI, the camp-4 warning, ledgers, tags, the audio stings (6.15). **Taken up by the exploration and information design (segment 10, approved 2026-11-23; changes XI-7, XI-11, XI-19, XI-22–XI-24, XI-26, XI-29):** the Treasure field naming, rooms cell and emptied field (6.15); F-TREASURE and the Lodestring (8.2); the Tithe Bowl (8.1); its requests to this owner, the exposure ruling (6.9 item 6) and the Wax Key guard (8.1), stay open (its 4.6, 4.9.9, 11) |
 | **Segment 11 (seeds)** | The `lootPlan` derivation and keyed grandchildren, the draw table (6.10 item 1), step 3a and the LootBind position, the ghost and dummy draws, the atomic commit. **Taken up by the seeds and validation design (segments 11–12, approved 2026-11-23; changes SV-1, SV-2, SV-5, SV-9, SV-14):** the key algebra and the `lootPlan` registry rows (its 4.1–4.3); step 3 keyed per floor and per entry block, the ghost and dummy draws retired (4.3); GS10 and GS14 in the pipeline (4.4); the atomic commit as WO5 (4.8.3); its request to this owner, the `dealShuffle/retry1` key, stays open (6.10 item 1; its 11, 14.2) |
 | **Segment 12 (validation)** | V13s, V13g, the (m) integration test, and the reports. **Taken up by the seeds and validation design (segments 11–12, approved 2026-11-23; changes SV-9, SV-10, SV-19, SV-20, SV-22, SV-24):** V13 in the phase model with failure classes (its 5.1, 5.2); V13g at AP2 (5.4); (e) as LR2 (5.5); (m) called by the V19g DrawLedger (5.2); the arm catalogue (6.2) and the report registry (6.10); its request to this owner, the V13g (f) quantity, stays open (10.2; its 11, 14.2) |
 | **Heirlooms and curses (segment 15)** | The heirloom precedence in the Due (6.6 item 2) and the curse hook (8.5). **Taken up by the heirlooms and curses design (segment 15, approved 2026-11-23; changes HL-3, HL-23, HL-29 applied by this owner, with HL-20 and HL-21 as requests):** any heirloom slot waives the F1 Due, with V13g (g) cases per slot class (6.6 item 2, 10.2; M3; its 4.1.4); heirlooms never a Curiosity price (HL-4) and earning, the shelf and Grip-marks as content and display only (6.12; its 4.1); Curses at a discount moved to M4 with Maladies (8.5, 11; HL-29; its 4.2, 10), the CON budget reading pending; the Burdened twin and Redeemed (8.5; Later); its requests, HL-20 (Grave Goods, to DH; 8.2) and HL-21 (the Crooked Road, to the MAIN and RS owners; 8.5; Later), stay open (its 11, 14.2) |
 | **Charm abilities (segment 16, the TK 24.2 pass)** | The trinket share and the Due's owned checks, read by the charm lane (6.2, 6.6 item 2, 6.12). **Taken up by the charm abilities design (segment 16, approved 2026-11-24; CA-20, CA-25, CA-26):** the trinket share unchanged, catch charms priced by the existing rule (6.2; its 4.10); the Bobbin boon outside the budget, never arms for the F1 Due (6.6 item 2, 6.12; M3; its 4.11); its requests to this owner, CA-20 (the Due reading) and CA-26 (the V13g (g) case, 10.2), and the lane-weight future item (CA-25) stay open (18.2; its 11, 14.2) |
 | **ENM / EP / DH owners** | The elite room's and the Annex's risk cost (LX16; agreed, Q6) |
 | **TL owner** | The mixed-route rule and `consequenceExposed`; Unbolting and Unweaving paying the Wax-Key identity; a Barb force consequence if `WaxKeyConsequenceUse` fires; the Ticket peg; fewer locks where the carve cap or F5 fillers bind (6.4, 6.9) |
-| **FL owner** | The Viaticum room |
-| **CN owner** | The suggester for scrolls; Viaticum options against `tier4ScrollsPerRunBeforeFinalBoss`; the boss-card usability fallback (CN 10) |
+| **FL owner** | The Parting Fare room |
+| **CN owner** | The suggester for scrolls; Parting Fare options against `tier4ScrollsPerRunBeforeFinalBoss`; the boss-card usability fallback (CN 10) |
 | **ITEMS owner** | The signature VR-cap reading (replaced by IR-13's pending request: a VR signature consumes the floor's VR slot; item rolls design 4.13, 14.2) |
 | **RS owner** | The Perilous Door reading (Q5); the Memento caption on the tone review list (RS 7.4) |
 | **ENM owner** | The elite carrier's gear-only card; the elite intel trigger; step 3a and the dummy count draws (LE-14; the dummies retired and step 3 keyed per block by change SV-5) |
@@ -2853,14 +2870,14 @@ shop presentation and camp sinks (camp and hub); the display (segment
 | +1 step (consequence lock, Dare, Wager) | TL 6.11, 6.15; HZ 6.10 | One reading (6.9) |
 | Annex 0 experience, its prize is the reward | EP-26 (**agreed**) | The prize of what it serves (Wager or Dare SR5 step, boxed lurker +0); no second step (6.9 item 1) |
 | Bait cache prop family | EP 6.8.1 | A real +0 entry |
-| Furnishings never hold loot | ROOM 6.3.4 | The Viaticum is a container |
+| Furnishings never hold loot | ROOM 6.3.4 | The Parting Fare is a container |
 | Worn pieces Common or Uncommon only | AR 5.5 | V13s (c); body armour and shields follow the ordinary gates |
 | Nothing implies who the Dreamer is | RS 7.5 (**agreed**, RS Q3) | The Memento caption is premise-neutral (6.11) |
 | `EmptyDeadEndRate` 0; Alcoves on trimmed floors | FL 6.9 | Every container holds something (coin overflow and F5 filler rules, 6.4); the top card on a carrier |
 | Content unlocks never power | MAIN 4.7 (**decided**) | Lane-normalised, same tiers |
-| Nightmare kind, not stats | RT-21 (**decided**) | Zero economy effect |
+| Peril tiers add kind, not stats | RT-21 (**decided**) | Zero economy effect |
 | Phial one pre-roll; channels | CN 14.7 (**agreed**) | Kept; minFloor reads the generated floor; the F5 card removed from its channels (LE-5) |
-| `tier4ScrollsPerRunBeforeFinalBoss` | CN 13.4, 21 | The VR card and the Viaticum obey it when engaged |
+| `tier4ScrollsPerRunBeforeFinalBoss` | CN 13.4, 21 | The VR card and the Parting Fare obey it when engaged |
 | Classes never grant more loot or gold | CL 6.3 | No class economy verbs |
 
 ---
@@ -2871,14 +2888,14 @@ shop presentation and camp sinks (camp and hub); the display (segment
 |---|---|---|
 | 1 | **kPC unknown.** Every VP claim rests on k = 1 (ITEMS 12.7, provisional); the toy over-closes | kPC first; the trip-wire; F4 at 6 cards |
 | 2 | **Risk does not pay.** If ENM, EP and DH do not move, optional rooms become "never" | Q6 routes the fix to them; the release reports; the elite intel line |
-| 3 | **Fixed totals remove the jackpot.** Spiky variants are thin on F1–F3 because of the gates | Tier marks, the half-found "best remaining" reveal, the Wager, the Viaticum and the Twin Coffer, the within-rank shuffles and the SR1–SR2 swap |
+| 3 | **Fixed totals remove the jackpot.** Spiky variants are thin on F1–F3 because of the gates | Tier marks, the half-found "best remaining" reveal, the Wager, the Parting Fare and the Twin Coffer, the within-rank shuffles and the SR1–SR2 swap |
 | 4 | **Late saturation.** F4–5 finds may mostly be Sell fodder | Sidegrade Dues, VR gear content, `LateFindRelevance` |
 | 5 | **The M2 VR roster is one scroll**; F4–5 lean on fit premiums | `SubstitutedVP`; the VR gear content request |
 | 6 | **The Due reads party state at generation.** A scorer bug becomes a loot bug; shared seeds differ by party (as smart loot already does) | The fixed deal; the V13g (g) property test; `DreamsDueWaivedRate` by class; `HeroDreamsDueShare` at party 4 |
 | 7 | **Coin numbers are a toy ledger**; camp 2 sits below its coverage band; the adopted table was not the toy's tested arm | A toy re-run before M2; the camp-2 levers in 7 |
 | 8 | **Solo coin surplus** persists by design | Reported; it buys only capped goods |
 | 9 | **Hoarding** may persist despite the cap and suggester | `HoardIndex`; use-side levers first |
-| 10 | **Owner dependencies:** DH (the Due reading), TL (the mixed-route rule, Unbolting), FL (the Viaticum room), ITEMS (signature VR), RS (Q5), camp and hub (hooks) | Each has a fallback in 18.2 |
+| 10 | **Owner dependencies:** DH (the Due reading), TL (the mixed-route rule, Unbolting), FL (the Parting Fare room), ITEMS (signature VR), RS (Q5), camp and hub (hooks) | Each has a fallback in 18.2 |
 | 11 | **Clock:** the Treasure count may invite completionism | `TallyChaseSeconds` |
 | 12 | **All evidence is toy** | Every number is owed a simulator re-run before it settles |
 | 13 | **Two generation passes.** LootPlan predicts sockets that later passes can change | Named LootBind remaps, logged; V13g after LootBind; `LootBindRemap` rate |
@@ -2914,7 +2931,7 @@ CC-110).
   never read from the actual party **(agreed, Q4)**; the fourth dreamed
   option drawn on every width-3 offer **(agreed, Q5)**; nothing rolls
   after generation; the LootPlan step and the LootBind remaps; the atomic camp-exit commit; camp stock never VR; the boss
-  card never VR; no economy effect from ladder, Nightmare tiers or Omens.
+  card never VR; no economy effect from ladder, Peril tiers or Omens.
 
 ---
 
@@ -2970,9 +2987,9 @@ and take effect at that wave.
 |---|---|---|---|---|
 | **LE-1** | **ENM 15.3 step 1 (change M-5 text, derived from MAIN 4.6, decided)**; ITEMS 2 anti-goal "Grind to win" (kept); ITEMS 12.6 (read) | Three ledgers; the spoils list; step 1's "Value comes only from each item's record" becomes "Each entry's tier is fixed by the floor's spoils list; identity and properties come from the record" (6.1) | **Decided** (MAIN 4.6, kept and strengthened) | Client, with this document; enemies owner applies |
 | **LE-2** | ITEMS 12.5 (a new key `loot.rarityDeck` beside `rarity`; minFloor kept); ITEMS 5.1 tuning file; **ENM 15.3 step 1 illustrative counts (agreed lineage, M-5)**; ENM 10.5 step 3 | Rarity decks with base and alternate variants of exactly equal VP (6.3) | **Decided** (MAIN 4.6 lineage) | Client, with this document; items and enemies owners apply |
-| LE-3 | ITEMS 12.5 signature bullet (reading: top legal tier for its category; VR cap exemption); ENM 15.1 last paragraph (the card outside the cap, kept); ENM 15.2 Boss row; ENM 17.5 "Signature item" paragraph; CN 10 "Boss reward card" channel row (a usability fallback added, after the check) | Boss channel: signature at the top legal tier for its category; the reward card counted in Ledger B and family caps, outside Ledger A, ≤ R; options usable by the generation snapshot, else redrawn as fit-premium gear (6.3) | — | Lead's call; ITEMS owner confirms the VR-cap reading; CN owner applies the fallback |
+| LE-3 | ITEMS 12.5 signature bullet (reading: top legal tier for its category; VR cap exemption); ENM 15.1 last paragraph (the card outside the cap, kept); ENM 15.2 Boss row; ENM 17.5 "Signature item" paragraph (shown as "the boss's prize", naming pass NP-22); CN 10 "Boss reward card" channel row (a usability fallback added, after the check) | Boss channel: signature at the top legal tier for its category; the reward card counted in Ledger B and family caps, outside Ledger A, ≤ R; options usable by the generation snapshot, else redrawn as fit-premium gear (6.3) | — | Lead's call; ITEMS owner confirms the VR-cap reading; CN owner applies the fallback |
 | LE-4 | ITEMS 10.4 "Family caps for stock" (read); TL 6.15 Reward bullet (read); ENM 15.3 step 2; ITEMS 18.3 events (`ItemDestroyed` gains the reason `dreamedAway`) | Offer sets count once; dreamed options outside VP and caps; `ItemDestroyed{dreamedAway}` (6.3) | — | Lead's call; enemies and items owners apply |
-| **LE-5** | ENM 15.2 Boss row (F5); ENM 15.3 step 1 split (F5); ENM 15.7 (F5); **ENM 17.5 "Signature item" paragraph (F5)**; ITEMS 10.2, 10.4 (no camp channel after F5); ITEMS 12.5 signature bullet (F5: the Memento); **CN 10 "Boss reward card" channel row and CN 14.7 phial channels (agreed, CN Q2; F5 card removed)**; RS 6.5 (read: the Last Hollow as the spend-down camp); FL 6.7, 6.11 and RS Antechamber rows (read: the Viaticum is placed on the main path after the lair, outside the Antechamber, the Circuit and fight hosts); DH 12.5 step 7 (F5 coin fallbacks and lock sundries are doses inside `sundriesPerFloor`; the count is unchanged); RS 7.4 tone review list (the Memento caption) | F5: coin and salvage 0, their lines hidden; no camp channel; no final card; the Memento (premise-neutral caption); the Viaticum (Rare wands and tier-3 scrolls, usable options); F5 coin fallbacks to sundries; F5 fillers and at most 1 non-notable lock (6.4, 6.11) | **Agreed** (CN 14.7); **Q1** | **Client (agreed 2026-11-22, Q1)**, with this document; enemies, items, CN owners apply; FL and ENM owners confirm the room |
+| **LE-5** | ENM 15.2 Boss row (F5); ENM 15.3 step 1 split (F5); ENM 15.7 (F5); **ENM 17.5 "Signature item" paragraph (F5)** (shown as "the boss's prize", naming pass NP-22); ITEMS 10.2, 10.4 (no camp channel after F5); ITEMS 12.5 signature bullet (F5: the Memento); **CN 10 "Boss reward card" channel row and CN 14.7 phial channels (agreed, CN Q2; F5 card removed)**; RS 6.5 (read: the Last Hollow as the spend-down camp); FL 6.7, 6.11 and RS Antechamber rows (read: the Parting Fare is placed on the main path after the lair, outside the Antechamber, the Circuit and fight hosts); DH 12.5 step 7 (F5 coin fallbacks and lock sundries are doses inside `sundriesPerFloor`; the count is unchanged); RS 7.4 tone review list (the Memento caption) | F5: coin and salvage 0, their lines hidden; no camp channel; no final card; the Memento (premise-neutral caption); the Parting Fare (Rare wands and tier-3 scrolls, usable options); F5 coin fallbacks to sundries; F5 fillers and at most 1 non-notable lock (6.4, 6.11) | **Agreed** (CN 14.7); **Q1** | **Client (agreed 2026-11-22, Q1)**, with this document; enemies, items, CN owners apply; FL and ENM owners confirm the room |
 | **LE-6** | **ITEMS 10.4 (agreed: shop or reward; `notablesShop` [1, 2] → 2)**; ITEMS 12.5 Depth column (read: camp entries graded for N+1); ENM 15.3 step 1 camp channel; TL 6.11 channels bullet (read: the Wax Key slot as a third display entry); CN 14.7 (read: phial minFloor reads N) | Camp channel of 2 at every camp 1–4, graded for N+1, never VR (6.3) | **Agreed** (ITEMS 10.4, count set inside its range) | Client, with this document; items owner applies |
 | **LE-7** | ITEMS 10.2 "Found coin: containers and caches" (gains numbers); ENM 15.7 bullet 2; **CMP 7.7 item 1 (agreed, CMP Q1; read: coin is part of the unchanged per-floor budget)**; **CMP 7.4 (agreed, CMP Q2; read: the pre-authorised cap 2 selects the cap-2 pool row)** | Coin pool 35 / 50 / 70 / 90 / 0 per party at cap 3 and 35 / 50 / 70 / 75 / 0 at cap 2, keyed by `companionCap`, never the actual party; lumps by rank over containers and caches, computed in LootBind; the F1 main-path floor 17; lock lumps; the carve cap and overflow; fallback coin (6.4) | **Agreed** (CMP 7.7, read); **Q4** | **Client (agreed 2026-11-22, Q4)**, with this document; items and enemies owners apply |
 | **LE-8** | ENM 15.7 bullets 1 and 3 ("Coin exists, so salvage stays as written"); **ENM 15.1 Issue gear row "armed units add a little salvage coin" and rule 1 "at most it becomes one line of coin" (agreed; kept in meaning)**; ITEMS 10.2 Salvage bullet; I-11 ratio (kept) | Salvage as a 12% pre-assigned share of the pool, per fight then per armed unit, computed in LootBind; the per-unit display kept as the fight total plus a line per non-zero share; Cowed groups pay none (6.4) | **Agreed** (ENM 15.1, kept in meaning); **Q3** | **Client (agreed 2026-11-22, Q3)**, with this document; enemies and items owners apply |
@@ -2986,7 +3003,7 @@ and take effect at that wave.
 | **LE-16** | ITEMS 10.2 (found coin gains carriers); ENM 15.2 (coin only); **ENM 15.5 Steal (agreed; change S-5)**: "one of {notable, purse, key}"; TL 6.11 / TL-23 Keybearer; ENM 5.6 loot-mark slot and the glints-per-screen gate; RS 6.9 Stratum Card row ("A heavy purse walks this floor") | The Heavy Purse, bound in LootBind; Steal takes one of three, with a preview; one merged loot badge (8.3, 6.15) | **Agreed** (ENM 15.5, one-try spirit kept) | Lead's call; enemies owner applies |
 | LE-17 | ENM 15.3 step 2 (a category multiplier); CN 10 (ranges unchanged); DH 5.7 lever 1 (pre-wired); FL 6.8 forecast (read) | Category weights by depth and the weight composition; the per-run arms floor; the F5 tactical cap; Wax Key sundries outside doses; `foundSupplyPerFloor` (6.2) | — | Lead's call; enemies owner applies |
 | LE-18 | ENM 15.2 Elite row (the elite carries gear only); ENM 15.8 floor-fact slot; RS 6.9 | The elite intel line, fired when the elite resolves or its notable is stolen (6.9) | — | Lead's call; enemies owner applies; segment 8 told |
-| **LE-19** | **MAIN 4.7 (decided; consistent, read)**; RS 6.4 LootDoorInvariant (read), RS 9.1 Perilous Door, Omens and "Door bounties" rows (read: the reveal adds no draw and is not a bounty); **RT-21 (decided)**; ITEMS 14 (read: the heirloom counts as owned for the Due) | M3 meta: unlock normalisation (the Due pool included), zero Nightmare and ladder effect, Omens never touch spoils, the fourth dreamed option drawn from M2, the Perilous Door reveal on the boss card (the screen accepted by the client on 2026-11-22, 18.1) (6.12) | **Decided** (MAIN 4.7, RT-21, read); **Q5** | **Client (agreed 2026-11-22, Q5)**, with this document; RS owner confirms the reading; M3 |
+| **LE-19** | **MAIN 4.7 (decided; consistent, read)**; RS 6.4 LootDoorInvariant (read), RS 9.1 Perilous Door, Omens and "Door bounties" rows (read: the reveal adds no draw and is not a bounty); **RT-21 (decided)**; ITEMS 14 (read: the heirloom counts as owned for the Due) | M3 meta: unlock normalisation (the Due pool included), zero Peril-tier and ladder effect, Omens never touch spoils, the fourth dreamed option drawn from M2, the Perilous Door reveal on the boss card (the screen accepted by the client on 2026-11-22, 18.1) (6.12) | **Decided** (MAIN 4.7, RT-21, read); **Q5** | **Client (agreed 2026-11-22, Q5)**, with this document; RS owner confirms the reading; M3 |
 | **LE-20** | EP 6.8.1 (bait cache contents); **TL 6.14 (agreed, TL Q2: the boxed lurker; contents read)** | Bait cache and boxed lurker contents (6.9) | **Agreed** (TL 6.14, read) | Lead's call; EP and TL owners apply; M2 / M3 |
 | LE-21 | TL 6.13 (a new container kind); TL-27 (contents never destroyed: the alternate is a dreamed option, read); ITEMS 18.3 (`dreamedAway`) | The Twin Coffer (8.4) | — | Lead's call; TL owner applies; M3 |
 | LE-22 | ITEMS 12.5 ("value equals tier budget exactly" gains a cursed exception); ITEMS 13 | Curses at a discount (8.5) | — | Lead's call; Later |
@@ -3024,14 +3041,14 @@ The owed rows are the single list in 16; by owner:
   (18.4), LE-16, LE-22, LE-24 (19.3).
 - **The consumables owner:** LE-3 (the CN 10 usability fallback), LE-5
   (CN 10, 14.7), LE-9 (CN 9.2 talisman Sell), LE-12 (K2, K2b), LE-24
-  (19.3); the scroll suggester (6.7); Viaticum options.
+  (19.3); the scroll suggester (6.7); Parting Fare options.
 - **The traps owner:** LE-10 (6.17, 6.20, 6.22), LE-11 (the mixed-route
   rule; Unbolting and Unweaving pay the Wax-Key identity), LE-12, LE-16,
   LE-20 (6.14), LE-21; a Barb force consequence if its report fires;
   fewer locks where the carve cap or the F5 fillers bind.
 - **The hazards owner:** LE-10 (HZ 6.10 Dare); Dare width by attempt.
 - **The floor layout owner:** LE-10 (Strongroom, Alcoves), LE-15 (FL-20
-  count line); the Viaticum room.
+  count line); the Parting Fare room.
 - **The RS owner:** LE-5 (the Memento caption on the tone review list),
   LE-13, LE-15 and LE-16 (Stratum Card), LE-14 (seed tree), LE-18,
   LE-19 (the Perilous Door reading, Door bounties), LE-23 (V13).
@@ -3081,7 +3098,7 @@ the naming pass remain future items.
 - **Q1, floor 5 pays before the arena:** option A. F5 coin and salvage
   0; no camp channel after F5; no final reward card; the final boss
   carries and uses its signature, which drops as a 0-VP Memento; its
-  share becomes the Viaticum, a choose-1-of-3 of boss tools before the
+  share becomes the Parting Fare, a choose-1-of-3 of boss tools before the
   arena; the Last Hollow is the spend-down camp (6.11; LE-5). Rejected:
   B, keep F5 as approved.
 - **Q2, the Wax Key and consequence locks:** option A. The cache holds
@@ -3219,11 +3236,11 @@ this document; none overrides a client answer):
     K2b discounted, checked statically (6.4 item 9).
 13. **F5:** coin and salvage lines hidden; at most 1 non-notable lock;
     loot-bearing containers ≤ fillers (6.4 item 5).
-14. **Usability:** the boss card and the Viaticum read the generation
+14. **Usability:** the boss card and the Parting Fare read the generation
     snapshot; unusable options become fit-premium gear (6.3, 6.11); the
     F4 VR is Icefall only when someone can read it (6.3); the elite
     carries gear only (6.9 item 2).
-15. **The Viaticum:** Rare wands and tier-3 scrolls only (no Rare bomb
+15. **The Parting Fare:** Rare wands and tier-3 scrolls only (no Rare bomb
     exists); main path after the lair, outside the Circuit and fight
     hosts, never a side room; its Stratum line and offer UI (6.11).
 16. **The Memento caption** "carried out of the Heart", on the victory
@@ -3231,7 +3248,7 @@ this document; none overrides a client answer):
 17. **The Heavy Purse** bound in LootBind by a fixed chain (8.3); one
     merged loot badge on plates; the Steal preview (6.15).
 18. **The Treasure count** falls on every seen loss; "best remaining"
-    from unfound entries; the Viaticum in F5's n; the F1 secret as "+1
+    from unfound entries; the Parting Fare in F5's n; the F1 secret as "+1
     secret" (8.2).
 19. **Grave Goods** as the run-record form of DH 17.12's unspent line, in
     its voice, for wins and losses (8.2).
@@ -3281,7 +3298,7 @@ this document; none overrides a client answer):
   Wax Key is a third display entry; the phial's minFloor at a camp reads
   N (6.2, 6.3).
 - The corrections to the brief in 3.4 ("Pilfer", hire cost, pity
-  timers, Dream Fragments, TL 6.11 not 6.12, the Dreamer's Heart).
+  timers, Fragments, TL 6.11 not 6.12, the Dreamer's Heart).
 
 **Told plainly after the check** (confirmed by the client on
 2026-11-22, with this document; none changes a client answer):
@@ -3311,8 +3328,8 @@ this document; none overrides a client answer):
   one card's worth; told to the DH owner with the LE-13 reading (6.6).
 - **The draft's "armour ≤ U" was wrong:** AR 5.5 caps only worn pieces;
   body armour and shields can be Rare (3.1, 6.9, V13s (c)).
-- **The draft's Viaticum could offer bombs at Rare,** which do not exist;
-  and its boss card and Viaticum could offer nothing usable to a martial
+- **The draft's Parting Fare could offer bombs at Rare,** which do not exist;
+  and its boss card and Parting Fare could offer nothing usable to a martial
   party without Arcana. Both are fixed by fallbacks (6.3, 6.11).
 - **The draft's elite could carry the run's best scroll and cast it at
   the party.** The elite now carries gear only (6.9 item 2).
@@ -3364,7 +3381,7 @@ wave or a later design triggers them; each fallback is a new lead's call
 - *(Closed on 2026-11-22: the client accepted the boss reward card
   reading of Q5, so the ITEMS 10.4 camp reward card fallback is not
   needed, 6.12.)*
-- **If the FL owner cannot place the Viaticum on the main path after the
+- **If the FL owner cannot place the Parting Fare on the main path after the
   lair outside the Circuit and fight hosts:** a container in the lair
   room, never a side room, never the Antechamber. *(Read by 7c: on F5
   nothing lies between L and F, so this fallback is the real rule, the
@@ -3433,8 +3450,8 @@ wave or a later design triggers them; each fallback is a new lead's call
 | LF3 | Gear saturates by F4; the Due waives late; F4's first VR is a scroll | kPC and F4 at 6 cards; F4–5 sidegrade Dues; the VR gear content request; `LateFindRelevance` (6.5, 6.6) |
 | LF4 | The floor becomes fully readable | Spiky variants where gates allow; "best remaining" revealed after half found; within-rank shuffles and the SR1–SR2 swap (6.3, 6.9, 6.15) |
 | LF5 | Recruits steal the hero's Due | The parity rule: hero on F1, F3, F5; `HeroDreamsDueShare` ≥ 40% (6.6) |
-| LF6 | Tactical and potion hoarding | The F5 tactical cap; the Viaticum shape; the suggester hook; `PotionsHeldAtDeath` (6.7) |
-| LF7 | Coin has nothing fun to buy early | The camp-1 affordability check; the tonic-share signal; "the Hollow ahead sells rare" (6.4, 6.15) |
+| LF6 | Tactical and potion hoarding | The F5 tactical cap; the Viaticum (renamed Parting Fare, naming pass NP-22) shape; the suggester hook; `PotionsHeldAtDeath` (6.7) |
+| LF7 | Coin has nothing fun to buy early | The camp-1 affordability check; the tonic-share signal; "the Hollow ahead sells rare" (renamed "the next camp sells rare", naming pass NP-22) (6.4, 6.15) |
 | LF8 | Lane fairness unverified | V13s (n); reports by class (6.6) |
 | LF9 | F5 loses its fanfare | The Memento card and the memento wall (6.11) |
 | LF10 | Meta hooks weak | The Perilous Door reveal (agreed, Q5); its fallback is a cosmetic mark (18.2) |
@@ -3478,14 +3495,14 @@ wave or a later design triggers them; each fallback is a new lead's call
 | LK8 | The salvage change touches agreed rows | LE-8 lists ENM 15.1, 15.7 bullets 1 and 3, ITEMS 10.2; display (read as the fight total plus non-zero lines) and the Cowed rule kept; flagged |
 | LK9 | +15% per companion conflicts with per party | Rejected (Q4, option B) |
 | LK10 | Marked Purse: Steal of coin; "Marked" retired | Renamed Heavy Purse; ENM 15.5 and ITEMS 10.2 flagged (LE-16) |
-| LK11 | Camp items are camp-owner decisions; the Wish input; the Blood Price swap | 7a sets only the channel count; hooks without ids or prices; the Wish input flagged to its owner; Blood Price reshaped onto the allowance (8.1) |
+| LK11 | Camp items are camp-owner decisions; the Wish (renamed The Long Shot, naming pass NP-22) input; the Blood Price swap | 7a sets only the channel count; hooks without ids or prices; the Wish input flagged to its owner; Blood Price reshaped onto the allowance (8.1) |
 | LK12 | The phial under N+1 grading | The phial's minFloor reads the generated floor N (6.3) |
 | LK13 | The stream order needs the DH owner | Approved order unchanged; the child stream; the ghost draw (6.10) |
 | LK14 | "Trophy" and "Tally" taken | Memento, Treasure count. The critic's "keepsake" also collides (RS Keepsake) and is not used |
-| LK15 | "Antechamber offer", "Vault", "Dreamer's Heart" | The first two not used; **told plainly:** the Dreamer's Heart is the F5 theme (RS; EP 7.10), so the tone line stands. Also renamed: "Threshold Cache" → Viaticum (RS 8.0 avoids "Threshold") |
+| LK15 | "Antechamber offer", "Vault", "Dreamer's Heart" | The first two not used; **told plainly:** the Dreamer's Heart is the F5 theme (RS; EP 7.10), so the tone line stands. Also renamed: "Threshold Cache" → Viaticum (renamed Parting Fare, naming pass NP-22) (RS 8.0 avoids "Threshold") |
 | LK16 | LE ids collide | One register LE-1..24 (A.6) |
 | LK17 | Client flags on illustrative numbers | Sell 250‰ is a lead's tuning call; client questions limited to Q1–Q6 |
-| LK18 | Unassigned hooks | 6.14 and 12 assign HZ 13 (7c), HZ 16 (7a, 6.9), EP 13 (7c with 7a values), ROOM 6.3.4 (the Viaticum), FL 6.9 (7c, every container non-empty, F5 included, with the overflow and filler rules of 6.4), TL 11.1 fields (7c), AR 5.1 / 5.7 (recomputed in M2; cross-document comparison 2026-11-23, CC-50) |
+| LK18 | Unassigned hooks | 6.14 and 12 assign HZ 13 (7c), HZ 16 (7a, 6.9), EP 13 (7c with 7a values), ROOM 6.3.4 (the Viaticum, renamed Parting Fare, naming pass NP-22), FL 6.9 (7c, every container non-empty, F5 included, with the overflow and filler rules of 6.4), TL 11.1 fields (7c), AR 5.1 / 5.7 (recomputed in M2; cross-document comparison 2026-11-23, CC-50) |
 | LK19 | Bait cache honesty | A real +0 entry in LE-20; party-size dependence reported |
 | LK20 | Waves: Keybearer, Twin Coffer, Perilous Door | The purse follows a fixed chain from the bound Keybearer (8.3); the Twin Coffer M3 with TL-27 flagged; the Perilous Door M3 with RS |
 
@@ -3507,7 +3524,7 @@ wave or a later design triggers them; each fallback is a new lead's call
 | rarity deck | 0 | Tier multiset |
 | alternate variant, fit variant, spiky | 0 | Deck variants |
 | Dream's Due ("the dream owes": 0) | 0 | The guaranteed upgrade |
-| Viaticum | 0 | F5 pre-arena offer (replaces "Threshold Cache"; "Threshold" is on RS 8.0's avoided list) |
+| Viaticum (renamed Parting Fare, naming pass NP-22) | 0 | F5 pre-arena offer (replaces "Threshold Cache"; "Threshold" is on RS 8.0's avoided list) |
 | Memento, memento wall | 0 | Final signature on the run record (replaces "trophy": Trophy Tally, TK) |
 | Grave Goods | 0 | Run-record hoard line |
 | Treasure count | 0 | Stratum count (replaces "Tally": a TK property) |
@@ -3524,7 +3541,7 @@ wave or a later design triggers them; each fallback is a new lead's call
 | `lootPlan` | 0 | Child stream |
 | `SubstitutedVP`, `F5Unspent`, `LootEconomy`, kPC, K2b | 0 | Report, validator and peg names |
 | moth coin | 0 | Retired after the check (the F5 coin line is hidden; the flavour is on the Stratum Card) |
-| Wish, Tithe Bowl, Ferryman, Blood Price | 0 | Camp hooks (the owner names them) |
+| Wish (renamed The Long Shot, naming pass NP-22), Tithe Bowl, Ferryman, Blood Price | 0 | Camp hooks (the owner names them) |
 | keepsake | 22 | **Not used** (RS Keepsake dressing) |
 | Vault | in use (SH Vault) | **Not used** |
 | LX, LF, LB, LK prefixes | 0 | Local ids (`LT` had 3 hits, rejected) |
@@ -3546,7 +3563,7 @@ LE-11 (new, from LB1); K2 → LE-12; upgrade entry / G-U / lane notable /
 Due → LE-13; determinism → LE-14; tally and ledger lines → LE-15; purse →
 LE-16; category, keys, supply → LE-17; elite intel → LE-18 (new, from
 LB2); meta → LE-19; bait and boxed lurker → LE-20; Twin Coffer → LE-21;
-curses → LE-22; V13 → LE-23; reports and lever order → LE-24. The Wish,
+curses → LE-22; V13 → LE-23; reports and lever order → LE-24. The Wish (renamed The Long Shot, naming pass NP-22),
 the Tithe Bowl, the Ferryman's Note and Blood Price keep no ids (hooks).
 
 ---

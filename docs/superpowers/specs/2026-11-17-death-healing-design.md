@@ -2,6 +2,7 @@
 
 Date: 2026-11-17
 Status: Approved, 2026-11-17
+Names updated by the naming pass (naming pass design, approved 2026-11-24; NP rows listed: NP-37).
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model),
@@ -82,7 +83,7 @@ after it. **(lead's call)**
   chain; nothing sets a party unit's HP to 0 directly. **(lead's call)**
 - **Limited but guaranteed healing.** A seeded, announced minimum per
   floor, random healing above it, and a ceiling on top. **(agreed, Q3)**
-- **One healing currency.** Recovery scales potions, rests, Second Wind,
+- **One healing currency.** Recovery scales potions, rests, Patch Up,
   scrolls and tier-1 heal spells alike. **(lead's call)**
 - **Hidden information never kills.** Out-of-combat damage and undetected
   traps cannot take a party unit below 1 HP. **(agreed, Q6)**
@@ -131,7 +132,7 @@ All **(settled)**:
 | Main design 4.4 (decided) | No full rest inside a floor; camp is the full rest; short rests are limited by supply | HP wears down per floor, not per run (5.2) |
 | Stat model 6 (agreed) | HP: fixed class amount per level + Con per level, never rolled, at least 1 per level. Recovery: HP per short rest, grows with level and Con. Natural 20 and 1 on attack rolls only | The HP formula (7), Recovery (8), crits (9) |
 | Stat model 7.2 | Getting a downed companion up is trained-only Medicine | Medicine get-up (11.2) |
-| Ability model 6.3 (agreed), 6.6, 6.9 | Every class has `rest` and `camp` pools, 40–60% camp; Second Wind example; level-ups at combat end | Class healing (12), level-up HP (7.4) |
+| Ability model 6.3 (agreed), 6.6, 6.9 | Every class has `rest` and `camp` pools, 40–60% camp; Patch Up example; level-ups at combat end | Class healing (12), level-up HP (7.4) |
 | Ability model 11.3 (agreed) | Suggestions are off by default; the hero never gets suggestions | The end-turn warning names no action (17.4) |
 | Ability model 15 | Short rest: 20 ticks, no aware hostile, no guaranteed safe spot (agreed); Recovery + the best trained Medicine member's Wis + proficiency; supply start 2, +1 per camp, 1–2 found, cap 3 | The rest order (11.3), the supply guarantee (5) |
 | Conditions 5.4, 5.5, 9.3 | Zero-HP check; out-of-combat ticks cannot take a unit below 1; damage events and the save chain | The damage function (20.3) |
@@ -178,7 +179,7 @@ lead's calls, which the client said stand.
 | 2 | Companion death (Q2) | **None at launch;** Downed is the fail state, and a Downed unit is inert **(agreed)** | Third-downing loss; the Mortal rung at launch |
 | 3 | Healing guarantee (Q3) | **The package G1–G6:** camp full heal; one supply cache on the main path; kits 2 / 1; 1 found potion on every floor, main path, first half, no check, never on a carrier, at most 3; the camp top-up; counts announced; random top-up leaning off-path; a pre-authorised raise to 2 on floors 4–5 (5.5) **(agreed)** | Fixed counts (removes loot texture, teaches "spend exactly N"); per-fight healing (rests become pointless); pity timers (hidden, exploitable); fully random (deaths come from the tail); rests and classes only (the hero has nothing to drink) |
 | 4 | Getting up (Q4) | **A win, Medicine (once per companion per fight), a completed short rest, camp;** all on 1 HP except camp (full) **(agreed)** | Any heal lifts Downed (yo-yo); Medicine only (soft lock after a flee) |
-| 5 | HP shape (Q5) | **11 + level × max(1, class HP tier + Con)** at every level for every party unit; tiers slight 6 / standard 7 / sturdy 8 (the client's "bands"; renamed here only to avoid a clash with the proficiency and encounter bands, lead's call); `hp.companionBonus` a separate key **(agreed)** | Bands 5/6/7 with a middle reference (a Con −1 light hero at 15 HP; a soldier crit is 67% of it). 5E max die at level 1 + 7 (a d6 Con −1 caster at 12 HP). Level-1-only bonus (the 6.1 table would not match). Hero-only bonus (companions become downing magnets) |
+| 5 | HP shape (Q5) | **11 + level × max(1, class HP tier + Con)** at every level for every party unit; tiers slight 6 / sound 7 / sturdy 8 (the client's "bands"; renamed here only to avoid a clash with the proficiency and encounter bands, lead's call); `hp.companionBonus` a separate key **(agreed)** | Bands 5/6/7 with a middle reference (a Con −1 light hero at 15 HP; a soldier crit is 67% of it). 5E max die at level 1 + 7 (a d6 Con −1 caster at 12 HP). Level-1-only bonus (the 6.1 table would not match). Hero-only bonus (companions become downing magnets) |
 | 6 | Out-of-combat damage (Q6) | **Never below 1 HP for a party unit;** undetected traps never below 1, even in combat; spotted traps stay lethal in a fight, with a warning **(agreed)** | Traps may kill with a cap and a warning (hidden information kills); detected traps floored in combat (traps become a safe tool) |
 | 7 | Death-ward owners (Q7) | **Retire Last Ward and Last-Breath Charm.** Order: Downed discard → temporary HP (per part) → floors → Death-warded → Reprieve Phial; at most one recharging prevention per unit per fight **(agreed)**. Q7 listed the steps before the chain as a group; their order among themselves is fixed by the damage function (20.3) **(lead's call; reading confirmed by the client on 2026-11-17)** | Last Ward armed above half HP (almost never fires); Last Ward per camp (a free life per floor); Last Ward once per run (kept only as the recorded fallback, now moot) |
 | 8 | Phial leave-HP (Q8) | **334‰** of maximum HP after Scarred, minimum 1 **(agreed)** | 250 (a saved hero dropped by the next 1–2 attacks 36–75% of the time); 1 HP plus Dodging (only delays death) |
@@ -192,7 +193,7 @@ lead's calls, which the client said stand.
 | 16 | Damage on Downed | **Inert: no damage or harmful effect from any source; only an ally's grapple-drag moves it** (11.4) **(lead's call)** | Damage on Downed kills (the only remaining sources are misclicks and hazards); never moved (contradicts approved Grappling) |
 | 17 | Repeat downings | **Scarred only; the Weary lever written and off** (11.6) **(lead's call)** | Escalation on by default (untested) |
 | 18 | Class healing | **Tier-1 heal = target's Recovery; higher tiers add targets, range or riders** (12.2) **(lead's call; requirement on classes)** | Recovery + caster ability (healer gap) |
-| 19 | Self-heals | **Full Recovery only for a fighter-type Second Wind;** others a `rest` defensive tool at most half Recovery (12.2) **(lead's call)** | Every class a full-Recovery self-heal (doubles hero sustain) |
+| 19 | Self-heals | **Full Recovery only for a fighter-type Patch Up;** others a `rest` defensive tool at most half Recovery (12.2) **(lead's call)** | Every class a full-Recovery self-heal (doubles hero sustain) |
 | 20 | Temporary HP | **Class and spell only; no stacking; a grant at most the target's Recovery** (14) **(lead's call)** | Item temporary HP (consumables denylist); stacking |
 | 21 | Danger display | **Probabilistic bands by exact convolution (a normative algorithm, 17.3); known threats only; assumes every threat picks the hero; computed before any drop prevention** (17.3) **(lead's call)** | "Worst case can kill" (fires at full HP in ordinary floor-1 fights); exact % as the main display (kept in the tooltip) |
 | 22 | End-turn warning | **On by default, opt-out; fires only when Deadly and some candidate from a bounded, roll-free set (17.4) would lower the band; names no action** (17.4) **(lead's call)** | Fires whenever Deadly (click-through noise); a "drink it" prompt (contradicts ability 11.3) |
@@ -209,7 +210,7 @@ checked against SRD 5.2.1 before data. **(lead's call)**
 | **5E 2024 / SRD 5.2** | Drinking a potion is a bonus action. Second Wind 1d10 + level with uses that grow. Crit dice for every attacker (to verify) | Bonus-action potions; Second Wind's shape | — |
 | **Pathfinder 2e** | Dying 1–4, raised by Wounded on every recovery. Treat Wounds (skill-gated, then immune for an hour). Hero points. Crit = beat the DC by 10 | **Wounded** as the model for escalation on repeat downings (our Weary lever) | Dying tracks on the main unit; meta currencies |
 | **13th Age** | About 8 recoveries a day; one healing currency for rests, potions and rally. Death saves 16+ | **One receiver-scaled healing currency** (our Recovery) | Death saves |
-| **4e** | Healing surge = 1/4 of max HP. Bloodied at half. Second Wind once per encounter. Crits deal maximum damage | Receiver-scaled healing; a visible "bloodied" mark | Max-damage crits; 1/4-of-max healing (fails our potion fallback triggers) |
+| **4e** | Healing surge = 1/4 of max HP. Bloodied at half. Second Wind once per encounter. Crits deal maximum damage | Receiver-scaled healing; a visible "bloodied" mark (ours reads "hurt", naming pass NP-37) | Max-damage crits; 1/4-of-max healing (fails our potion fallback triggers) |
 | **Dungeon World** | Last Breath: a 2d6 roll and a bargain with death | — | A roll deciding death |
 | **Torchbearer, OSR** | Attrition through light, food and checks; slow natural healing; legible danger; retreat is real | **Legibility matters more than harshness**; supply as the attrition clock | Very slow healing; hidden death tables |
 | **Shadow of the Demon Lord** | Healing rate = 1/4 Health. At 0, fate rolls each round; damage while down kills | — | Fate rolls; damage on a downed body killing it |
@@ -420,11 +421,11 @@ The client asked what else to consider. **(lead's call)**
    exists (12.3) but is off, and never applies to the floor-1 solo boss.
 4. **Class sustain.** If every class had a full-Recovery self-heal, the
    hero's floor healing would roughly double (about 3.5× max HP at floor 3
-   against a need of 1.0–1.5×). Hence only the fighter-type Second Wind
+   against a need of 1.0–1.5×). Hence only the fighter-type Patch Up
    heals a full Recovery (12.2).
 5. **Mid-fight Medicine as a free decoy.** Hence once per companion per
    fight **(agreed, Q4)** (11.2).
-6. **Heal spells as the biggest source.** Slot Recovery returns a slot per
+6. **Heal spells as the biggest source.** Slot Renewal returns a slot per
    rest. Hence heals sized at Recovery and scaled by targets (12.2).
 7. **Level-ups heal.** About +14 HP per member per floor arrives through
    level-ups at combat end (ability 6.9). Reported, never counted in the
@@ -441,7 +442,7 @@ The client asked what else to consider. **(lead's call)**
    armour worn by a standing unit), from a boss of the template's floor
    tier or deeper, may unlock its family's **authored** U heirloom
    template; the instance is never copied; the offer is chosen later at
-   the Heirloom shelf (Hang it or Set aside), never on the death path;
+   the Heirloom shelf (Shelve it? or Not this time), never on the death path;
    no fallen hero's notable becomes a template, and Grave Goods and death
    keys are never a source **(change HL-7, M3; agreed, heirlooms and
    curses Q2; heirlooms and curses design 4.1.2)**.
@@ -528,7 +529,7 @@ here.
 **(agreed, Q5; change DH-4)**
 
 - **Max HP = `hp.adventurerBonus` 11 + level × max(1, classHp + Con).**
-- `classHp` comes from the class's **HP tier**: slight 6, standard 7,
+- `classHp` comes from the class's **HP tier**: slight 6, sound 7,
   sturdy 8 (`hp.classTiers`). The classes design assigns each class a
   tier. The client's Q5 answer calls these "bands"; this document says
   "HP tier" so they are not confused with the proficiency bands (b1–b3),
@@ -543,7 +544,7 @@ here.
 **The reference hero is tier 6 with Con +1:** 18, 25, 32 … 81, the
 enemies 6.1 row exactly, so no approved table moves (DH-25).
 
-| Level | Reference (6, +1) | Lowest legal (6, −1) | Standard (7, +2) | Sturdy, max Con (8, +3 → +5) |
+| Level | Reference (6, +1) | Lowest legal (6, −1) | Sound (7, +2) | Sturdy, max Con (8, +3 → +5) |
 |---|---|---|---|---|
 | 1 | 18 | 16 | 20 | 22 |
 | 2 | 25 | 21 | 29 | 33 |
@@ -632,7 +633,7 @@ the class HP tier nor Scarred.
   proficiency **(settled)**;
 - a potion heals Recovery, excluding the Medicine bonus **(settled)**;
 - a healing scroll heals the same as a potion (P1);
-- a fighter-type Second Wind heals Recovery, excluding the Medicine bonus;
+- a fighter-type Patch Up heals Recovery, excluding the Medicine bonus;
 - a tier-1 heal spell heals the target's Recovery (12.2).
 
 **Medicine rest bonus.** At level 1 it is about +4, 57% of Recovery,
@@ -711,7 +712,7 @@ traps and locks Q2)**
   closes the free-damage loophole.
 - **Undetected traps:** damage from a trap the party had not detected when
   it fired cannot take a party unit below 1 HP, **in or out of combat**. A
-  trap that starts combat counts here. "Undetected" means a Hidden trap,
+  trap that starts combat counts here. "Undetected" means an Unfound trap,
   or a Hunch trap in the floored cases below (change TL-8; traps and
   locks design 6.5).
 - **Trap provenance (lead's call).** When a trap fires, every damage event
@@ -731,7 +732,7 @@ traps and locks Q2)**
 - **Warned or floored for traps (agreed, traps and locks Q1; change
   TL-8; M2).** A shown Hunch zone is a **warning**. The floor follows
   each trap's own grade at fire time, never the zone a square lies in:
-  - a **Hidden** trap is always floored, even inside another trap's
+  - an **Unfound** trap is always floored, even inside another trap's
     zone;
   - damage from a **Hunch** trap whose shown zone the unit entered is
     floored only when combat is not active, when the unit was moved in
@@ -741,7 +742,7 @@ traps and locks Q2)**
     "up to X" with the lethal tag (17.5, 17.6), and the damage is then
     ordinary and self-caused (counted in full, outside the EnvRound
     cap);
-  - a **Revealed** trap is a detected trap (below);
+  - a **Found** trap is a detected trap (below);
   - a trap whose grade changed during the current move or action counts
     as undetected for that action;
   - a spring the party causes that starts combat is floored for party
@@ -751,11 +752,11 @@ traps and locks Q2)**
   undetected-trap parts and other parts, the floor protects against the
   trap parts only. If the other parts alone would take the unit to 0, the
   event is not clamped; otherwise it is clamped so HP stays ≥ 1.
-- **Detected traps in combat** (Revealed traps; change TL-8) are ordinary
+- **Detected traps in combat** (Found traps; change TL-8) are ordinary
   damage: lethal, and shown with a lethal tag on the move preview (17.6). Hidden information never kills,
   and a known trap is never a safe tool.
 - **Falls: the FallFloor (agreed, Q6 extended; hazards Q2; change HZ-10;
-  M2 (gated), else M3).** Fall damage (a Dreamfall's fall band, and the
+  M2 (gated), else M3).** Fall damage (a Freefall's fall band, and the
   fall band of a later Void failure that leaves the unit on the edge)
   can never take a party unit below 1 HP, **in or out of combat**
   (hazards design 6.4, `2026-11-21-hazards-design.md`).
@@ -781,7 +782,7 @@ traps and locks Q2)**
   combat and this floor applies; a taker reduced to 1 HP by the room is
   returned to the threshold and the dare resets (hazards design 6.10).
   This bullet is kept: Wager rooms share the Dare slot, their risk runs
-  through combat (the room's guard), and no trap inside one is Hidden
+  through combat (the room's guard), and no trap inside one is Unfound
   (change TL-29, M3; traps and locks design 6.15).
 - **Boxed lurker openers (agreed, traps and locks Q2; change TL-28;
   M3).** An untrained Open, Force or floor key on a boxed lurker the
@@ -852,12 +853,12 @@ concentration and keeps its initiative slot **(settled, conditions
 ### 11.3 Order at rest completion
 
 **(lead's call; change DH-12)** Get up → Treat attempts → Recovery +
-Medicine bonus → `rest` pools reset → Slot Recovery. A fresh Scarred from
+Medicine bonus → `rest` pools reset → Slot Renewal. A fresh Scarred from
 this get-up can be Treated at the same rest.
 
 **Sanctum rest rule (agreed, boss rooms Q2; change BR-31; M2):** a short
 rest is refused while `sanctumEngaged` is set, the boss lives and any
-party unit stands on a Sanctum square (Forecourt, arena, Stairhead); rest
+party unit stands on a Sanctum square (Forecourt, arena, the Downstair); rest
 is party-wide, so one unit there blocks it. Rests before the first
 `ArenaEngaged`, and elsewhere on the floor, stay legal. A location ban,
 not an awareness reading: combat end and the enemies' A-4 reset are
@@ -961,7 +962,7 @@ until the classes design proposes one and the client approves it.
 | **Camp** | Reset between floors | Section 13 **(decided)** |
 | **Short rest** (1 supply, 20 ticks, no aware hostile, no guaranteed safe spot) | The floor's main healing | The order of 11.3 **(settled shape)** |
 | **Healing potion** | In-fight tempo; the hero's lifeline | Recovery, bonus action; Hand over, Administer, or throw at 750‰ **(agreed, consumables Q4)**; never on a Downed unit |
-| **Fighter-type Second Wind** | Self-sufficiency | **Regain your Recovery**, `rest` pool (DH-10). The 1d10 + level example drifts from 36% of HP to 19% |
+| **Fighter-type Patch Up** | Self-sufficiency | **Regain your Recovery**, `rest` pool (DH-10). The 1d10 + level example drifts from 36% of HP to 19% |
 | **Other classes' rest tool** | Self-sufficiency, solo floor 1 | A `rest`-pool defensive tool tagged `restDefensiveTool: true` (exactly one per launch class): a self-heal of at most FloorDiv(Recovery, 2), or an effect kind on the approved defensive list (21.2), inside the 40–60% band of ability 6.3. **Requirement on the classes design.** Binds class records, not companion kits (companions design 8.1; change CMP-24) |
 | **Class heal spells** | Optional healer power | **Tier 1: the target's Recovery, exactly.** Higher tiers add targets, range or riders, never more HP per target; a declared upcast entry may add nothing (Mending Word targets 1 / 1 / 2 / 3, its tier-2 entry adds no target; the cast's tier is the slot spent; Herald design 8.1, a reading; change HR-6). `rest` or `camp` pools only; never at-will; never on wands |
 | **Healing scroll** | A potion bought with a camp spend | One cast of the tier-1 heal = a potion's heal (P1 holds); loot only, never the camp channel |
@@ -989,7 +990,7 @@ until the classes design proposes one and the client approves it.
 
 **(lead's call; agreed in principle, Q10)**
 
-- A level-5 full caster with Slot Recovery casts about 8–9 slot spells
+- A level-5 full caster with Slot Renewal casts about 8–9 slot spells
   per floor. At "Recovery + ability" (19 at level 5), half of those spent
   on tier-1 heals is about 76 HP: 1.65× a 46-HP member's maximum, and
   2.5–5× the floor's guaranteed potion healing.
@@ -1097,7 +1098,7 @@ a position **(change SV-5; M1; seeds and validation design 4.3)**.
 Definitions: the main path's rooms have indices 0 … n − 1, with 0 the
 entry and n − 1 the boss room. n counts `mainPathIndex` 0 (the entry)
 to n − 1 (the arena), the floor-1 antechamber (RS 6.6's extra room)
-included; the Bypass arm, Alcoves, corridors and the Stairhead are not
+included; the Bypass arm, Alcoves, corridors and the Downstair are not
 counted rooms, and "room k" means `mainPathIndex` k (floor layout design
 3.4, 6.3) **(change FL-4)**. A room is in the **first half** when its
 index < FloorDiv(n − 1, 2). An **eligible guaranteed container** is a
@@ -1265,7 +1266,7 @@ order: death and healing design". **(lead's call)**
    the unit ends on HP 1, temporary HP 0.
 2. **Death-warded:** left on 1 HP; `combatOnly`, `charges:1`,
    `recharging: true`. Sources: the tier-3 Death-Ward-shaped class spell
-   (Later) and the elite affix. The "rare charm" source is removed with
+   (Later; named Stay the Hand when written, naming pass NP-37) and the elite affix. The "rare charm" source is removed with
    Last-Breath Charm. **When it fires,** HP is set to 1 and the rest of the
    event's damage is discarded; the event then continues as in
    consumables 14.4 step 6 (riders, concentration, logging)
@@ -1308,7 +1309,7 @@ link acts at the attack step: every link reads the event's summed total
 
 - At most one **recharging** prevention fires per unit per fight
   (`dropPrevention.rechargingPerFight` 1; state
-  `dropPreventionFiredThisFight`). Today this means a re-cast Death Ward
+  `dropPreventionFiredThisFight`). Today this means a re-cast Death-Ward-shaped spell (Stay the Hand when written, naming pass NP-37)
   cannot save the same unit twice in one fight; it caps any future
   recharging prevention.
 - **Each chain link declares `recharging` in data** (Death-warded true,
@@ -1392,7 +1393,7 @@ bought, never moves in combat, `treatProof` Scarred.
   joins consecutive main-path rooms, and then the lower one, except that
   arena-adjacent squares take the arena's index; every other square has
   none, so the floor-1 Bypass arm has none. Every square also carries an
-  `effectiveIndex`, which `expectedTenths`, Keepsakes and leftovers read;
+  `effectiveIndex`, which `expectedTenths`, Souvenirs and leftovers read;
   this rule reads `mainPathIndex` only (none = not 0–1) (floor layout
   design 3.4, 6.1 LS10) **(change FL-13)**.
 - **Judged by the hero's square** at the moment the noticing that starts
@@ -1421,7 +1422,7 @@ bought, never moves in combat, `treatProof` Scarred.
   likely to stop new players coming back.
 - **Hazards (told plainly; change HZ-19, M3):** this rule is unchanged.
   Landmark ticks are a non-hazard class (no damage, condition or unit
-  movement) legal on floor 1; at Nightmare tier 2+ floor-1 hazard
+  movement) legal on floor 1; at Peril tier 2+ floor-1 hazard
   packages place no Void, Stir or Lurch in main-path rooms 0–1 (change
   HZ-25, agreed, hazards Q4; cross-document comparison 2026-11-23, CC-60)
   (hazards design 6.1, 6.19, 7.2–7.4).
@@ -1528,7 +1529,7 @@ XI-12, M2; DH owner informed; exploration and information design
     move preview (moving changes who reaches the hero);
   - each available action or bonus action whose effect on the hero's state
     involves no roll: drinking a potion (+Recovery), Dodge, Disengage, the
-    class's defensive tools, Second Wind.
+    class's defensive tools, Patch Up.
   Each candidate is scored by recomputing the band (17.3) on the resulting
   state. Actions whose band change depends on a roll (attacks, enemy
   saves) are not candidates. The search consumes no random number and
@@ -1573,7 +1574,7 @@ design 6.3.1, 6.18).
 
 ### 17.6 Move preview
 
-Flags opportunity attacks, Set triggers and **known** hazards and traps
+Flags opportunity attacks, Receive triggers and **known** hazards and traps
 that could be lethal. Known contact hazards and harm squares count as
 hazards here: the move preview sums harm-square damage per square
 entered, with a lethal tag, and lethal tags (17.5) extend to contact
@@ -1607,7 +1608,7 @@ action (Arcanist design 5.2, ARC-13).
 
 **Rescue push (agreed, hazards Q2; change HZ-10; M2 (gated), else
 M3):** pushing an ally into a Void is legal behind this confirmation.
-The Dreamfall it causes lands on the secondary Snag, and the faller
+The Freefall it causes lands on the secondary Snag, and the faller
 also loses its next action (Groggy as normal); the FallFloor (10.4)
 still holds (hazards design 6.4). *Pending request (change HZ-13; the
 DH owner rules):* due squares count as hazards for this confirmation
@@ -1620,7 +1621,7 @@ asks for confirmation, and moving an ally onto a known trigger asks too
 
 ### 17.8 Plates
 
-**(change DH-20)** A "bloodied" mark at 50% and a "low" mark at 25% on
+**(change DH-20)** A "hurt" mark at 50% and a "low" mark at 25% on
 party plates (not "critical", which reads as a crit); the hero's portrait
 pulses while Deadly; the Downed marker reads "gets up if you win, or at a
 rest"; armed Death-warded and Reprieve are shown.
@@ -1714,7 +1715,7 @@ information design 4.8.1).
   back to the turn's start or to the last point that closed the window.
 - **The window closes** on any action, bonus action, reaction, free
   interaction or ability use, and on any move that revealed a square or a
-  unit, triggered a reaction, a Set or any other trigger, entered a
+  unit, triggered a reaction, a Receive or any other trigger, entered a
   hazard, or consumed a random number (a noticing roll included).
 - Undo is a core command, validated and logged like any other, so replays
   reproduce it. It never reaches into another unit's turn.
@@ -1735,7 +1736,7 @@ information design 4.8.1).
 - **A party with a healer** is one where at least one member's kit holds
   an ability with a `healRecovery` effect whose target entries include an
   ally other than self; potions, scrolls and self-only heals such as
-  Second Wind do not count. Both arms use the same seeds and the reference
+  Patch Up do not count. Both arms use the same seeds and the reference
   policy (19.3).
 - **Levers if it fails,** in order: heal-spell targets or pool sizes in
   class and companion data (for the Herald, heal-specific sub-limits in
@@ -1927,7 +1928,7 @@ saved stack's dose count (change SV-15) (cross-document comparison
 |---|---|---|
 | `hp.adventurerBonus` | 11 | Client number (Q5) |
 | `hp.companionBonus` | 11 | Tuning, may only go down |
-| `hp.classTiers` | slight 6, standard 7, sturdy 8 | Client number (Q5) |
+| `hp.classTiers` | slight 6, sound 7, sturdy 8 | Client number (Q5) |
 | `recovery.base` / `recovery.perLevel` | 4 / 2 | Lead's numbers (not tuning, 8) |
 | `crit.mode` | `doubleDice` | Lead's call (engine switch) |
 | `damage.outOfCombatFloor` | 1 | Client rule (Q6) |
@@ -2154,7 +2155,7 @@ parties on floors 2–5.
 - `MissingRestDefensiveTool` (12.1): each launch class has exactly one
   `rest`-pool ability tagged `restDefensiveTool: true`, and it is either a
   self heal with `healRecovery` permille ≤ 500 (≤ 1000 for the one
-  fighter-type Second Wind) or an effect kind on the approved defensive
+  fighter-type Patch Up) or an effect kind on the approved defensive
   list (`restDefensiveKinds` in `death.json`, maintained by the lead);
 - `LiftsDownedUnapproved` (11.5);
 - `RetiredDropPrevention` (15.3): drop prevention has an enumerated
@@ -2298,7 +2299,7 @@ parties on floors 2–5.
 | **The solo floor-1 boss needs 3–5 heals** | The floor-1 solo boss row of ≤ 25% per round, the lowest-legal boss rows and `Floor1BossSustain` (21.1); boss-door reports calibrate its inputs; no drink limit there |
 | **Supply gives 4–5 rests per floor,** so "limited" leaks | Rests gate median ≤ 3; lever order (5.7) |
 | **Boss potion-chugging** on floors 2–5 | Boss potion report; `potion.laterInFightPermille` lever (off) |
-| **The healer gap** (Slot Recovery heals) | Heals at Recovery per target; the 10-point gate (18.1) |
+| **The healer gap** (Slot Renewal heals) | Heals at Recovery per target; the 10-point gate (18.1) |
 | **Ablative companions** | Medicine once per fight; downing reports; the Weary lever |
 | **Danger band noise,** worst in party fights where every threat is assumed to pick the hero | Probabilistic bands; the warning fires only when a bounded candidate helps (17.4); the danger calibration report and its target; the party-fight warning lever (off); override report |
 | **Hoarding** | Camp top-up; died-holding report; neutral recap |
@@ -2377,7 +2378,7 @@ parties on floors 2–5.
 | Stat model 6, Recovery "grows with level and Con" | Formula set (8) |
 | Stat model 10, the hero level-1 bonus | Flat 11 at every level, for every party unit (7.2) |
 | Stat model 7.1, Medicine `treatProof` (gated) | Ungated; get-up once per companion per fight (DH-8) |
-| Ability 6.6, Second Wind example | Fighter-type: regain Recovery; other classes a half-Recovery or other `rest` tool (12.1) |
+| Ability 6.6, Patch Up example | Fighter-type: regain Recovery; other classes a half-Recovery or other `rest` tool (12.1) |
 | Ability 7.2, Medicine get-up and the talisman rows | Once per companion per fight; talisman rows ungated (DH-11) |
 | Conditions 5.4, 9.2, 9.3, 14, 18.2, 18.9, 18.10 gated text | Ungated; chain final (15); Bolstered and Death-warded (14, 15) |
 | Conditions 25, "the rest of death and healing" | Settled here (DH-24) |
@@ -2408,7 +2409,7 @@ document; and a grep for "25%" finds no remaining phial leave-HP.
 **Narrowings recorded inside this design (no change id, no approved text
 changes):** the party instant-death denylist; no healing per tick; heal
 spells sized at Recovery per target; temporary HP capped at Recovery;
-`liftsDowned` reserved; Second Wind's full Recovery only for the
+`liftsDowned` reserved; Patch Up's full Recovery only for the
 fighter-type tool; `RetiredDropPrevention`.
 
 **Main design (2026-11-15):**
@@ -2434,9 +2435,9 @@ fighter-type tool; `RetiredDropPrevention`.
 
 | # | Section | Change | Approved by |
 |---|---|---|---|
-| DH-10 | 6.6, Second Wind (illustrative) | "Heal 1d10 + level" becomes "regain your Recovery (the Medicine bonus excluded)". Adds: other classes' `rest` defensive tool (at most half Recovery, or a defensive or prevention effect) is a requirement on the classes design, inside 6.3's band | Lead |
+| DH-10 | 6.6, Second Wind (illustrative; renamed Patch Up, naming pass NP-37) | "Heal 1d10 + level" becomes "regain your Recovery (the Medicine bonus excluded)". Adds: other classes' `rest` defensive tool (at most half Recovery, or a defensive or prevention effect) is a requirement on the classes design, inside 6.3's band | Lead |
 | DH-11 | 7.2 rows: "Get a downed companion up: Medicine, trained only" **(settled)**; Treat (`treatProof`); Hand over, Take from a Downed ally, Retrieve | Medicine get-up: "at most once per companion per fight (a Lifeline get-up counts)". Treat, Hand over, Take and Retrieve rows ungated | **Settled row narrowed: client (agreed 2026-11-17, Q4)** |
-| DH-12 | 15.2 On completion | Order: get up (Downed companions, on 1 HP) → Treat → Recovery + Medicine bonus → `rest` pools → Slot Recovery | Lead's call row |
+| DH-12 | 15.2 On completion | Order: get up (Downed companions, on 1 HP) → Treat → Recovery + Medicine bonus → `rest` pools → Slot Recovery (renamed Slot Renewal, naming pass NP-37) | Lead's call row |
 | DH-13 | 15.3 Supply | Counts and cap unchanged. Adds `supplyMainPathMin` 1, the rests-per-floor gate and the lever order (death and healing design 5.7) | **Client (agreed 2026-11-17, Q3)** for the placement; Lead for the gate |
 
 **Conditions design (2026-11-16):**
@@ -2449,7 +2450,7 @@ fighter-type tool; `RetiredDropPrevention`.
 | DH-17 | 9.3, save chain | Final: Downed discard → per-part steps, temporary HP included → sum → floors on the post-absorption total → the chain (death and healing design 20.3); Death-warded → talisman, each link declaring `recharging`; a capped recharging link is skipped without spending its charge; Last Ward removed; at most one recharging prevention per unit per fight, the talisman outside it; owner: the death and healing design | **Agreed Q2 order text edited: client (agreed 2026-11-17, Q7)** |
 | DH-18 | 10.4 Hazard lethality; 11.6, Traps bullet | 10.4 becomes a hazard-design guideline under the party floor. 11.6 adds: "Damage from a trap the party had not detected cannot take a party unit below 1 hit point, in or out of combat; detected traps are ordinary damage" | **Client (agreed 2026-11-17, Q6)** |
 | DH-19 | 14, lingering cap bullet and Scarred bullet | Ungated; the Weary lever's exemption recorded (off) | Lead |
-| DH-20 | 15.1 Plate | "Bloodied" at 50%, "low" at 25% on party plates; Downed marker text; armed saves shown | Lead |
+| DH-20 | 15.1 Plate | "Bloodied" (renamed "hurt", naming pass NP-37) at 50%, "low" at 25% on party plates; Downed marker text; armed saves shown | Lead |
 | DH-21 | 18.2 Downed **(settled entry)**: Effect, Duration, Sources, Interactions | Effect: inert (no damage, no harmful condition, no temporary HP; every forced movement except an ally's grapple-drag and every area skip it; not a unit for forced-movement stopping; greyed as a target of harmful party effects); does not block movement but no unit ends a move on it; after a non-win end the body stays until a party unit picks it up; current HP stays 0 while Downed (death and healing design 11.4, 20.5). Duration: "Ends on Medicine (trained, action, once per companion per fight), a won fight or a completed short rest, getting up on 1 hit point, or at camp" (5.5). "For the hero, the run ends" kept. Interactions ungated | **Settled routes kept, routes added: client (agreed 2026-11-17, Q2, Q4)** |
 | DH-22 | 18.9 Bolstered, Death-warded (Later) | Bolstered: a grant at most the target's Recovery; not healing; never on Downed; class and spell sources only. Death-warded: the "rare charm" source removed; interactions ungated ("first link of the save chain, before the talisman; at most one recharging prevention per unit per fight") | Lead (Later entries; the charm removal follows Q7) |
 | DH-23 | 18.10 Scarred, Sources **(agreed entry)** | "By either route (Medicine or a won fight)" becomes "by any get-up route (Medicine, a won fight, a completed short rest, camp, where camp clears it at once)"; talisman parts ungated | **Agreed entry edited: Lead's call row; rest route client (agreed 2026-11-17, Q4)** |
@@ -2533,7 +2534,7 @@ values; the phial's rarity, floor, channels, `offerChancePermille` and
 - **Classes:** an HP tier (6 / 7 / 8) per launch class; each class's
   `rest` defensive tool, tagged `restDefensiveTool`
   (`MissingRestDefensiveTool`); heal spells at Recovery per target; the
-  tier-3 Death-Ward-shaped spell (Later); which class may lean on healing;
+  tier-3 Death-Ward-shaped spell (Later; named Stay the Hand when written, naming pass NP-37); which class may lean on healing;
   any `liftsDowned` proposal (client approval). Answered by the classes
   design (`2026-11-17-classes-concepts-design.md`, 8, 11.E): tiers
   8 / 7 / 6 / 7 (Vanguard / Shade / Arcanist / Herald); four half- or

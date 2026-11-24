@@ -2,6 +2,7 @@
 
 Date: 2026-11-16
 Status: Approved, 2026-11-16
+Names updated by the naming pass (naming pass design, approved 2026-11-24; NP-6, NP-10).
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model) and
@@ -215,7 +216,7 @@ Authored on the base type. The composed unit exists only at runtime.
 | Field | Rule | Wave |
 |---|---|---|
 | `nativeLevel` 0–12 | Plus a legal `levelShift` range of −2 to +2 | M1 (shift M2) |
-| `role` | Brute, soldier, skirmisher, artillery, controller, leader, lurker or minion (17.1) | M1: brute, soldier, artillery, minion |
+| `role` | Brute, soldier, skirmisher, marksman, hinderer, leader, lurker or swarmer (17.1) | M1: brute, soldier, marksman, swarmer |
 | `rank` | Minion, standard, elite or boss (7) | M1: minion, standard, boss |
 | `abilities` | Main and secondary follow the spread table (5.3). Intelligence (initiative) and Wisdom (perception and guile) are authored; the others default to 0. Range −3 to +5. The type declares Dexterity's spread slot (`main`, `secondary` or `other`), which armour validation reads at every shift (armour design 12.2). **(change AR-53)** | M1 |
 | `hp` | Within the band of the table row | M1 |
@@ -228,7 +229,7 @@ Authored on the base type. The composed unit exists only at runtime.
 | `traits` | Within the settled budgets | M1 |
 | `atWills`, `limited`, `reaction`, `bonus` | Ability ids, within the kit caps (9.1) | M1 |
 | `signature` | Boss only: which limited abilities are announced signature moves (13.2) | M1 |
-| `concentrates` | Only controllers, caster leaders and bosses | M1 |
+| `concentrates` | Only hinderers, caster leaders and bosses | M1 |
 | `behaviour`, `awareness`, `morale` | Profiles (11, 12, 14) | M1 (morale field only in M1) |
 | `mindless` | Implies `fearless` and the Automaton profile default | M1 |
 | `armed`, `loadout`, `improvised`, `notableSlot`, `promotable` | Gear (15) and elite promotion (7.2) | M1 (promotion M2) |
@@ -274,7 +275,7 @@ Authored on the base type. The composed unit exists only at runtime.
 | 9–12 | +5 | +4 | 0 or +1 |
 
 - **Save lever:** every non-boss has at least one save in the low or mid
-  band, so save-based builds always have a target. Lore reveals it ("Weak:
+  band, so save-based builds always have a target. Lore reveals it ("Poor save:
   Will"). A boss has no save below mid, because resolve covers that gap.
 - **Dexterity-main monsters** add Dexterity to hit, not to damage
   **(settled)**. Their flat damage is declared on the attack, so they are
@@ -316,7 +317,7 @@ Authored on the base type. The composed unit exists only at runtime.
   reactions, mastery, or Lore, Arcana or Medicine uses.
 
 **Pending request (TR-15, M2; room terrain design 6.9):** a
-`usesFurnishings` kit tag (Strongman, Fire-Eater, Glutton, a Gaol warden
+`usesFurnishings` kit tag (Weightlifter, Fire-Eater, Glutton, a Gaol warden
 brute, Gut Ooze *(illustr.)*) for Attack Shunt, Kick and Smash of heavy
 pieces, never Move-Shunt to barricade; and a universal light Smash: every
 monster with a melee attack may Smash an adjacent light Furnishing; a
@@ -342,7 +343,7 @@ ability model owner rules, not yet a rule.
 | Always | (3) The condition row, under the settled icon rules |
 | Always | (4) Affix names, one word each |
 | Once seen | One "ready" marker for a seen hard-control or area ability that is ready next turn |
-| On hover or inspect | Gear line, with the weapon's verb ("Pike: piercing, reach 2, Set · Chain mail: heavy, Ringed"; changes W-5, AR-19), "Carries: …" (a purse reads, for example, "Carries: 12 coin"; change LE-16), cooldowns and uses, the morale profile and break line, traits once revealed by Lore, the intent line (13.3) |
+| On hover or inspect | Gear line, with the weapon's verb ("Pike: piercing, reach 2, Receive · Chain mail: heavy, Ringed"; changes W-5, AR-19), "Carries: …" (a purse reads, for example, "Carries: 12 coin"; change LE-16), cooldowns and uses, the morale profile and break line, traits once revealed by Lore, the intent line (13.3) |
 
 A UI test renders the worst legal composed elite on each floor at minimum
 zoom. From M2 it runs per theme, beside the readability charter's gates
@@ -431,7 +432,7 @@ damage, flat steps for AC and attack (17.1).
     structure design 6.6's 7, so floor 1's n is 8), and the floors
     2–5 antechamber counts as an empty or special room. The elite room
     and Circuit side rooms count as side rooms; the Bypass arm, Alcoves,
-    corridors and the Stairhead are not counted rooms. "Room k" means
+    corridors and the Downstair are not counted rooms. "Room k" means
     `mainPathIndex` k throughout this document, except 10.2, whose
     "Room N" stays a room level as defined there.
 - **Off-path rooms** (the optional elite room, side rooms, cache rooms)
@@ -474,7 +475,7 @@ round-1 row.
 | A non-boss unit's maximum damage on its turn, no crit | ≤ 40% |
 | A non-boss unit's maximum damage on its turn, with a crit | ≤ 60% |
 | A non-boss unit's maximum damage on its turn plus its own death effect (Volatile), no crit | ≤ 60% |
-| A non-boss unit's maximum damage to one hero across one round, its turn plus its Set attack, no crit / with one crit **(change W-5)** | ≤ 50% / ≤ 70% |
+| A non-boss unit's maximum damage to one hero across one round, its turn plus its Receive attack, no crit / with one crit **(change W-5)** | ≤ 50% / ≤ 70% |
 | Chance that a full-HP hero is reduced to 0 in round 1, for **every** template × band × composition the generator can emit on that floor, with surprise wherever the template's awareness allows and every focus term on (Quarry, kill bonus, setup), death effects included | < 0.5% each |
 | Floor 1, solo: an encounter's summed round-1 expected damage to the hero (surprise included where allowed) | ≤ 50% of the hero's HP |
 | Boss: expected damage to one unit per round (its turn plus boss actions) | ≤ 35% |
@@ -485,7 +486,7 @@ round-1 row.
 | Floor 1, solo boss: expected damage to the hero per round (its turn plus boss actions); the 35% boss row stays for every other boss **(change DH-26)** | ≤ 25% *(illustr.)* |
 | Floor 1, solo boss at the lowest legal hero: worst spike (dice at maximum, a crit, one boss action) **(change DH-26)** | ≤ 75% |
 | Floor 1, solo boss at the lowest legal hero: a full-HP hero cannot be reduced to 0 in one round **(change DH-26)** | Even with one crit *(illustr.)* |
-| Boss: `NoUntelegraphedSpike`: any boss or boss-action effect whose maximum without a crit exceeds 30% of the floor's reference hero *(illustr.)* is a bannered signature on its Downbeat, a Gambit (M3) or an announced arena act **(change BR-8; boss rooms design 4.3.3; M2; conditional on BR-6 (Downbeats) and BR-7 (no Strike on F1), both pending with this owner; cross-document comparison 2026-11-23, CC-32)** | Else rejected |
+| Boss: `NoUntelegraphedSpike`: any boss or boss-action effect whose maximum without a crit exceeds 30% of the floor's reference hero *(illustr.)* is a bannered signature on its Downbeat, a Gambit (M3) or an announced arena act **(change BR-8; boss rooms design 4.3.3; M2; conditional on BR-6 (Downbeats) and BR-7 (no Attack on F1), both pending with this owner; cross-document comparison 2026-11-23, CC-32)** | Else rejected |
 | Boss: a forecast Downbeat signature's maximum without a crit, at the lowest legal hero **(change BR-8; boss rooms design 4.3.3; M2; conditional on BR-6 and BR-7, as above; cross-document comparison 2026-11-23, CC-32)** | ≤ 45% *(illustr.)* |
 | Floor 1 cumulative round-1 budget, reference and lowest legal hero: the sum over floor 1's encounter slots of the highest round-1 death chance among the templates the generator can emit there, plus the floor-1 boss's one-round death chance (`guard.floor1CumulativeRoundOnePermille`) **(change DH-26)** | ≤ 2.5% *(illustr.)* |
 | AC envelope, levels 1–10: the 6.2 table attack's hit chance against the maximum sustained party AC, normal roll mode **(change AR-20)** | ≥ 35% |
@@ -500,7 +501,7 @@ round-1 row.
   placement design 6.2, 9.2, 10):** the rows are enumerated over placed
   geometry (formations, start squares and Billets on), beside segment
   6's own `LandingShooters` (1/2/2/2/2 on the entry lane) and its F4–5
-  fill cap (a +2-level unit on a back or overwatch position fills at ≤
+  fill cap (a +2-level unit on a back or Ready Shot position fills at ≤
   925‰); a pre-existing gap is flagged: the toy's F4–5 control fights at
   maximum fills with +2 units showed a 1.8–3.4% round-1 death chance
   against the < 0.5% row; this owner rules the gap; not yet ruled.
@@ -514,12 +515,12 @@ round-1 row.
   not at the reference hero.
 - **Boss spike rows (change BR-8; boss rooms design 4.3.3; M2):** these
   rows are **conditional on BR-6 (the Rhythm's Downbeats) and BR-7 (no
-  Strike on floor 1)**, both pending requests with this owner (11.1,
+  Attack on floor 1)**, both pending requests with this owner (11.1,
   17.5); until they are ruled, the rows apply only as far as those rules
   are adopted **(cross-document comparison 2026-11-23, CC-32)**. The
   worst-spike rows read the boss's worst own-turn effect with a crit plus
   the worst boss action that can hit the same unit that round (on floor 1,
-  whose menu has no Strike, the boss's own turn). On floors 3–5, focus
+  whose menu has no Attack, the boss's own turn). On floors 3–5, focus
   spread (11.1) is read to forbid two boss actions on the same unit in one
   round, so the rows enumerate one boss action per target (a reading sent
   to this owner for confirmation). The round in which a phase entry occurs
@@ -527,7 +528,7 @@ round-1 row.
 - The guards assume the **SRD double-dice crit** for every unit
   **(settled; change S-3, death and healing design 9)**.
 - **(change DH-26)** All rows are computed without party consumables or
-  the talisman. "Before the hero's first turn" replaces "round 1" for
+  the failsafe. "Before the hero's first turn" replaces "round 1" for
   ambush-eligible templates only after the surprise model is reconciled
   and the 10.2 worked examples pass (death and healing design 21.1). The
   floor-1 boss sustain check (`Floor1BossSustain`) reads consumables, so
@@ -537,10 +538,10 @@ round-1 row.
   every round in which a monster-triggerable Keg is in range of
   party-reachable squares counts in the guards, not round 1 only (a Keg
   burst is a one-shot area, source `environment`, sturdy in M2, and no
-  burst triggers a burst in M2); Conduct (K3) counts in the guards too.
+  burst triggers a burst in M2); Charged Water (K3) counts in the guards too.
   **(M2)**
 - **Hazards (change HZ-7; hazards design 6.11):** Stir acts count in the
-  guards in the rounds they are due (the Keg and Conduct precedent;
+  guards in the rounds they are due (the Keg and Charged Water precedent;
   **M2 (gated), else M3**); round 1 never has an act (`firstAct` ≥ 2),
   so the round-1 rows are unchanged. Deep falls count in the Choir
   lightning spike row and environment Chilled in the Supper freeze-spike
@@ -559,8 +560,8 @@ round-1 row.
   crit" rows the Exploit value is doubled with the dice, Precision is not. The per-unit guards count
   only damage dealt to one hero (Skewer only with the hero as the primary
   target; Cleave's second target excluded). The opportunity attack is not
-  added to the Set round row; the floor 1 summed round-1 guard and the
-  round-1 simulation include Set and opportunity attacks under the AI's
+  added to the Receive round row; the floor 1 summed round-1 guard and the
+  round-1 simulation include Receive and opportunity attacks under the AI's
   movement.
 - The encounter rows were tightened from a median encounter because
   permadeath deaths come from the tail (lairs, elite rooms, ambushes,
@@ -643,7 +644,7 @@ gates read the **source unit's rank at the moment a condition is applied**.
 | **Windfall** (non-combatant) | The Truant: a **non-combatant unit**, not a roster type, minion, monster or group member; faction "dream". One square; units may move through it but not end a move there; no cover; never provokes or makes opportunity attacks. 0 XP, 0 salvage; never a purse or key carrier; no morale (never Routed, Cowed or Yielded); **never counts as a hostile** (14.6). It is **nabbed**, not killed: once awake, any action that targets it (an attack, an action-cost spell or ability, a thrown item, or Grab from an adjacent square), any area or effect including its square, any damage or any forced movement nabs it; bonus actions and reactions cannot target it; while Dormant with its host group unresolved only Steal touches it (15.5), and Grab and attacks are greyed "guarded". A nab is not an attack roll, a hit, damage dealt or a kill: no on-hit, on-damage, on-kill or morale trigger, no XP or salvage. **(change LP-3; loot sources design 4.7.1, 4.7.5; agreed, Q1, Q2; M3)** | None: outside the encounter budget, the ambush cap and the joiner caps | M3 |
 
 The "weak" rank is cut. Padding uses a −1 or −2 level shift with the
-"ragged" tint.
+downward tint (no word: a tint plus arrow; tooltip "weaker than usual").
 
 ### 7.2 The elite template
 
@@ -653,7 +654,7 @@ The single definition of "elite":
   marked `promotable: true`, which the generator promotes. Minion and boss
   types are never promoted. **Pending request (change IR-12; item rolls
   design 4.12; M2):** the RS owner and segment 9 flag the Supper's
-  Butler-at-Arms `promotable` and the Silk's Spine-Binder `armed`, so
+  Butler-at-Arms `promotable` and the Archive's Spine-Binder `armed`, so
   those floors' elite notable is carried instead of falling to the lair
   cache.
 - **HP ×2**, from the role-adjusted row.
@@ -673,8 +674,8 @@ The single definition of "elite":
 - **Morale:** `steady` by default. A type may lower it to `normal`, never
   to `skittish`.
 - **No resolve pips.** Unyielding only through authored data or the
-  Unbreakable affix **(settled: "elites by choice")**.
-- **Death-warded** only through the Relentless affix (Later). Never on
+  Unbending affix **(settled: "elites by choice")**.
+- **Death-warded** only through the Undying affix (Later). Never on
   bosses **(settled)**.
 - **Placement:**
   - only in rooms whose room level is at least 2;
@@ -683,7 +684,7 @@ The single definition of "elite":
   - floor 2: the only non-boss rank allowed party-facing hard control
     **(settled gate)**;
   - floor 3 and deeper: the gates allow hard control on standards too, but
-    it stays on controllers and elites.
+    it stays on hinderers and elites.
 - **Presentation:** a distinct frame, a crown on the model, and the affix
   names on the plate.
 - **Pending request (change HL-19, M4; heirlooms and curses design 4.3.3;
@@ -697,7 +698,7 @@ The single definition of "elite":
   floor and none in the boss antechamber zone, by an EP-owned filter
   (`MaladyNotBeforeBoss`); counted under 9.2 and telegraphed under 13.2;
   not yet ruled.
-- **Pending request (Oath of the Iron Sleep, held; Later; heirlooms and
+- **Pending request (Oath of the Cold Iron, held; Later; heirlooms and
   curses design 5.2 row 28, 14.2):** an authored elite "kind addition"
   record for the Oath; none exists, so the Oath stays held until this
   owner rules; not yet ruled.
@@ -722,7 +723,7 @@ M2. A deterministic transform by k rows, −2 to +2:
 - at −2 the type also drops its second limited ability, which is the
   difference the player notices.
 
-Shifts use a "ragged" tint downward and a "veteran" tint upward. A shift
+Shifts show a wordless tint plus arrow: downward (tooltip "weaker than usual") or upward (tooltip "stronger than usual"). A shift
 beyond ±2 needs a newly authored variant.
 
 ## 8. Roles and composition
@@ -737,14 +738,14 @@ override profile weights within ±50% of the role default; validation checks
 the composed unit.
 
 **Silhouette rule:** a unit's role must be readable at isometric zoom from
-its model and issue gear, before any Lore. A bow means artillery, a tall
+its model and issue gear, before any Lore. A bow means a marksman, a tall
 shield means soldier, a banner means leader. Issue helms (crests on
 leaders) are display-only props. **(change AR-23)** The readability
 charter's **role prop grammar** extends it: leaders carry a vertical
 emblem; soldiers a tall flat object (shield, door, tray, coffin lid,
-chair); artillery points something forward; brutes are oversized mass
-inside one square; skirmishers lean low; controllers have an orbiting
-element; lurkers show a tell at rest; minions are small and share one
+chair); marksmen point something forward; brutes are oversized mass
+inside one square; skirmishers lean low; hinderers have an orbiting
+element; lurkers show a tell at rest; swarmers are small and share one
 palette **(change RT-17; run structure design 7.4 RC2)**.
 
 ### 8.2 Composition order
@@ -788,7 +789,7 @@ The catalogue is in 17.2.
   **Pending request (HZ-24, M3; hazards design 9.2):** `floorborn`, an
   immunity to the theme's Stir acts, counts as one tag immunity, with no
   horizon-2 read; not yet ruled.
-- **Commanding** is never applied to a member of a group that already has
+- **Exhorting** is never applied to a member of a group that already has
   a leader, so a group has at most one (14.4). Validation checks it.
   **(lead's call)**
 - **Per encounter:** affixed elites at most 1 on floors 1–3, 2 on floors
@@ -821,8 +822,8 @@ Build order:
 | | At-wills | Limited (`uses` / `cooldown`) | Reaction beyond the opportunity attack | Bonus-action ability | Harmful conditions | Concentration |
 |---|---|---|---|---|---|---|
 | Minion | 2 | 0 | 0 | 0 | 0 | No |
-| Standard | 2 | 0–2 | ≤1 | ≤1 | ≤2 | Controllers and caster leaders |
-| Elite | 2 (+ multiattack) | 0–2 (+1 with option b) | ≤1 | ≤1 | ≤2 | Controllers and caster leaders |
+| Standard | 2 | 0–2 | ≤1 | ≤1 | ≤2 | Hinderers and caster leaders |
+| Elite | 2 (+ multiattack) | 0–2 (+1 with option b) | ≤1 | ≤1 | ≤2 | Hinderers and caster leaders |
 | Boss | 2 | 2–4 | ≤1 | ≤1 | ≤2 per phase kit, ≤3 across phases **(change C-2)** | Yes |
 
 A shield bash exists for a monster only if it is authored as one of its
@@ -831,7 +832,7 @@ two at-wills (armour design 10.5). **(change AR-24)**
 A carried notable item may add one limited ability beyond the cap. Its
 conditions still count.
 
-A **Guard verb** on a weapon (Parry, Set) is the unit's one reaction beyond
+A **Guard verb** on a weapon (Parry, Receive) is the unit's one reaction beyond
 the opportunity attack. On minions, guard and condition verbs are inert and
 shown greyed. **(change W-5; weapons 15.2)**
 
@@ -957,7 +958,7 @@ Line with a front standard; a solo shooter is a minion-cost unit), and
 standard's level never falls, threat lanes at fight start never
 decrease, and front positions ≥ back positions. Formations declare core
 and growth positions, filled core first. A solo hero on floors 2–5
-meets no ambush form (no Cuckoo, Mousetrap or Waylay) and no Kill Box,
+meets no ambush form (no Cuckoo, Baited Room or Waylay) and no Kill Box,
 Crossfire, Pincer or Bait and Nook; `billetScale` is 0 for a solo hero
 on floors 2–5 and 500‰ on floor 1. Every placement gate on party size
 reads `partyCountAtGeneration` **(change EP-19; encounter placement
@@ -971,7 +972,7 @@ with `FloorDiv` (3.1). **(change M-4)**
 - depth%: 80 / 90 / 100 / 105 / 110 for floors 1–5. This meets main design
   4.6's "grows with depth" and cools the solo floor 1;
 - ladder%: 100 at the base tier, +10 per difficulty tier. The ladder never
-  raises caps or raw stats. **M3:** Nightmare tiers add kind, not stats,
+  raises caps or raw stats. **M3:** Peril tiers add kind, not stats,
   and the Perilous Door (+1 ladder on one floor) makes the ladder
   per-floor **(change RT-21, client, M3; run structure design 9.1)**.
   ladder% reads the profile grant `difficulty.tier`; `nightmareTier`
@@ -984,7 +985,7 @@ over: from the fill minimum of 3.1 (⌈85%⌉) up to the budget. Inside that
 window the fill target rises along the main path: `fillTarget‰ = 850 +
 FloorDiv(150 × mainPathIndex, max(1, n − 1))`, the minimum accepted
 cost, with the lair at ≥ 925‰ and the elite room at 950–1000‰ *(illustr.)*
-**(change EP-20; encounter placement design 6.2; M2)**. A **Mousetrap**
+**(change EP-20; encounter placement design 6.2; M2)**. A **Baited Room**
 Ambush uses 85% of its band (`FloorDiv(guard × 85, 100)`); the Cuckoo and
 the Waylay fill at their full band **(change EP-10; encounter placement
 design 6.8.1; M2)**. Encounter placement design 6.2 adds three
@@ -993,7 +994,7 @@ exceptions (pointers only; that design is authoritative): on floor 1 the
 stepping the highest-index guard post down by 50‰, never below 850‰,
 then its fallback chain; when the floor-1 **Cuckoo** is drawn, the lair
 fills at **850‰**, overriding its 925‰ floor on that seed; on floors
-4–5 any composition with a **+2-level unit** on a back or overwatch
+4–5 any composition with a **+2-level unit** on a back or Ready Shot
 position fills at **≤ 925‰** **(cross-document comparison 2026-11-23,
 CC-36)**.
 
@@ -1013,8 +1014,8 @@ comparison 2026-11-23, CC-35)**.
 | Floor 1, solo, lair, room 2 | 16 (15–16 on the M2 curve) | Pack: level 2 brute (10) + a level 2 minion (3) and the same minion type shifted to level 1 (2) | 15 |
 | Floor 1, solo, elite room, room 2 | 19 (19 on the M2 curve) | Champion: level 1 elite soldier with one gentle affix (7 × 2 = 14) + a level 2 minion (3) and the same minion type shifted to level 1 (2) | 19 |
 | Floor 3, trio, guard post, room 5 | 31 (27–31) | Warband: level 5 leader (10) + level 5 soldier (10) + the same soldier type shifted to level 4 (7) + 2 level 3 minions (2 + 2) | 31; 3 types; 4 units (minions count ½) |
-| Floor 3, trio, lair, room 5 | 43 (40–43 on the M2 curve) | Honour Guard: level 5 elite soldier with Bodyguard (20) + level 6 artillery (14) + 2 level 5 minions (3 + 3) | 40 |
-| Floor 5, four, lair, room 9 | 60 (56–60 on the M2 curve) | Gauntlet: level 10 elite controller with one affix (`FloorDiv(14 × 2000 × 1000, 1,000,000)` = 28) + two level 10 brutes of one type (14 + 14) | 56 |
+| Floor 3, trio, lair, room 5 | 43 (40–43 on the M2 curve) | Honour Guard: level 5 elite soldier with Challenger (20) + level 6 marksman (14) + 2 level 5 minions (3 + 3) | 40 |
+| Floor 5, four, lair, room 9 | 60 (56–60 on the M2 curve) | Gauntlet: level 10 elite hinderer with one affix (`FloorDiv(14 × 2000 × 1000, 1,000,000)` = 28) + two level 10 brutes of one type (14 + 14) | 56 |
 
 Solo check for the floor 1 guard post: the hero takes about 8 damage, about
 45% of 18 HP, falling to about 35% with limited abilities. Simulator target:
@@ -1024,7 +1025,7 @@ a guard post costs 25–35% of the party's HP-equivalents.
 
 A minion counts as ½ a unit.
 
-| Floor | Units | Elites per encounter | Hard-control sources | Controllers | Ranged share | Ambushes per floor | Joining groups per fight |
+| Floor | Units | Elites per encounter | Hard-control sources | Hinderers | Ranged share | Ambushes per floor | Joining groups per fight |
 |---|---|---|---|---|---|---|---|
 | 1 | 4; ≤2 minions in a solo encounter; ≤2 brutes | Elite room only | 0 **(settled)** | ≤1, not in rooms 1–2 (`mainPathIndex` 1–2; change FL-4) | ≤ ½ | ≤1, not in rooms 1–2 (`mainPathIndex` 1–2; change FL-4) | ≤1 |
 | 2 | 5 | 1 | ≤1, elites and bosses only **(settled)** | ≤1 | ≤ ½ | ≤1 | ≤1 |
@@ -1043,11 +1044,11 @@ On every floor:
   encounter placement design 6.8.1; M2)**;
 - an **ambush** (the Ambushes per floor column) is one of four forms: the
   **Cuckoo** (a standard bait + 1–2 lurkers; full guard band; floor 1
-  solo, or floors 2–5 at party ≥ 2), the **Mousetrap** (a bait cache + 1
+  solo, or floors 2–5 at party ≥ 2), the **Baited Room** (a bait cache + 1
   lurker, 2 from floor 3 at party ≥ 3; 85% band; floors 2–5, party ≥ 2,
   ≤ 1 per floor and ≤ 2 per run), the **Waylay** (an ordinary Stationary
   group in the Kill Box; full band; floors 2–5, party ≥ 2) and the
-  **boxed lurker** (M3), which counts first. Only the Mousetrap can
+  **boxed lurker** (M3), which counts first. Only the Baited Room can
   Surprise the party. The cap is a maximum, never a quota **(change
   EP-10; encounter placement design 6.8.1; M2)**;
 - the **fairness bundle** holds for every placed encounter: `FirstSight`,
@@ -1061,7 +1062,7 @@ On every floor:
 
 A floor holds 4–6 fights plus the boss **(settled)**. **M3:** floors 2–5
 may also hold at most one **Annex** group, outside the slots: Dormant
-(Sleeping Ward; a boxed lurker keeps its traps and locks 6.14 state),
+(the Heap; a boxed lurker keeps its traps and locks 6.14 state),
 one extra encounter budget at the patrol band at its
 host room's level, deducted from no slot, inside the cluster budget, the
 joiner cap and the 6.4 rows, paying 0 experience (16), never a lurker
@@ -1185,7 +1186,7 @@ Deterministic:
    consumed: line, alternate line, element, LootPlan wand charges);
    `curseGate` takes 2 draws per floor (reserved M2, used Later; M4 by
    change HL-29, heirlooms and curses design 4.2, 10); the
-   boss-card and Viaticum fallback kinds grow from 3 to 5 entries. Parent
+   boss-card and Parting Fare fallback kinds grow from 3 to 5 entries. Parent
    identities keep their positions, and each identity is filtered before
    its draw (filter-first, 15.3 step 2).
    **(change LE-14)** The approved draw order above is unchanged, now as
@@ -1339,7 +1340,7 @@ M2.
   `tier` (a pool and presentation tag), `eligibleFloors` (at most 2
   adjacent), `pairKey` (`primaryDamageType`, `squareKind`), `final`,
   `shipStatus`, `counterType`, `themeDamage`, `hardenedLayer`, `frost`,
-  `legalOverlays[]`, `placementRules[]` and the Keepsake fields
+  `legalOverlays[]`, `placementRules[]` and the Souvenir fields
   (`keepsakeProps`, `keepsakeArenaDressing`) **(change RT-2, RT-4)**.
 - **Pools:** themes are drawn per floor from tiered pools (floor 1;
   floors 2–3 band; floor 4), or picked from two drawn candidates when
@@ -1362,8 +1363,8 @@ The added terms are data-weighted percentages. **(change A-6)**
 | Term | Shape | Why | Wave |
 |---|---|---|---|
 | Approach | The best expected score reachable *next* turn from the destination, half-discounted | A one-step scorer otherwise stands still when nothing is in reach | M1 |
-| Exposure | − the party's expected damage against this square next round × `caution%` | Artillery stays back | M1 |
-| Opportunity cost | − the opportunity attacks the path provokes × `oaAversion%` (higher means it avoids them). Entering a Set zone costs the same way, but only while the zone owner's reaction is unspent, and only for the first unit each round that would trigger the owner's Set under its policy (by default the first non-minion) **(change W-5; weapons 15.4)**. Other *known* reaction triggers (the Hold the Line stop, Retort Strike, the Swordsworn's Counterstroke) are priced the same way, as state, as Interpose is previewed; the term never reads class (Vanguard design 7.4; Shade design 8.3) **(change VG-16; change SH-29)** | Brutes plough through; skirmishers Disengage or slip past; no Set-zone stall | M1 |
+| Exposure | − the party's expected damage against this square next round × `caution%` | Marksmen stay back | M1 |
+| Opportunity cost | − the opportunity attacks the path provokes × `oaAversion%` (higher means it avoids them). Entering a Receive zone costs the same way, but only while the zone owner's reaction is unspent, and only for the first unit each round that would trigger the owner's Receive under its policy (by default the first non-minion) **(change W-5; weapons 15.4)**. Other *known* reaction triggers (the Bar the Way stop, Retort Strike, the Swordsworn's Counterstroke) are priced the same way, as state, as Interpose is previewed; the term never reads class (Vanguard design 7.4; Shade design 8.3) **(change VG-16; change SH-29)** | Brutes plough through; skirmishers Disengage or slip past; no Receive-zone stall | M1 |
 | Range | − \|distance to the nearest noticed target − `preferredRange`\| × step | Kiting | M1 |
 | Hazard path | Settled 17.3 term; a cost of at least 100% for any hazard that could kill the mover | Never suicidal | M1 |
 | Target preference | + bonus% × expected damage when the target matches the preference, capped at 25% of its best at-will | Personality without exclusivity | M1 (nearest); M2 (others) |
@@ -1410,7 +1411,7 @@ not yet ruled: `NoCheapKill` with the exact text of room terrain design
 minus the action's non-environment expected damage is ≤ the candidate's
 maximum environment damage to that hero, that environment damage scores
 0 and the candidate gets no kill or down bonus for that hero; non-boss
-monsters, every trigger they cause: push, Shunt, Kick, Keg and Conduct;
+monsters, every trigger they cause: push, Shunt, Kick, Keg and Charged Water;
 agreed in substance, Q3); a destination value (the destination square's
 `onEnter` and `onTurnEnd` value); Furnishing verbs valued by the existing
 forced-movement, collision and area terms, light Smash by the reduction
@@ -1432,8 +1433,8 @@ bosses only: the **Rhythm**, a per-band loop of Off, Lead and Down beats
 read as a per-turn preference order over the scorer (never a wind-up,
 no new search depth; it reads only the boss's own turn count and move
 legality), with a Rhythm strip on the plate and initiative entry; and
-per-boss data weights (Rhythm obedience, Device-face avoidance, lane
-preference, escort Command toward screening the Device), `deviceBait`
+per-boss data weights (Rhythm obedience, Counterpiece-face avoidance, lane
+preference, escort Direct toward screening the Counterpiece), `deviceBait`
 and the doorway band; not yet ruled. If the Rhythm is refused, bosses
 keep cooldowns only, with ready-state pips (13.2).
 
@@ -1483,10 +1484,10 @@ rescores with what is left of its turn, so it can retreat after striking.
   as floor and spring them; **Once Bitten**: a group with any member
   inside the area of a device spring that resolves treats every known
   device area on the floor as a hazard for the rest of the floor (one
-  bit, `bitten`, inherited by joiners); the opener rule (a spring that
+  bit, `bitten`, inherited by joiners); the first-spring rule (a spring that
   affects an unaware group starts combat as the springing unit's
   surprise action); monster pushes and Shunts score only traps the party
-  has Revealed; not yet ruled. If refused: rigged-fight density drops
+  has Found; not yet ruled. If refused: rigged-fight density drops
   until rigged share × party-hit ≤ 0.03 (traps and locks design 19.2).
 - **Pending request (TL-17, M3; traps and locks design 6.8):** per-group
   trap belief (`armed`/`spent`) and witness-only secrecy: a trap the
@@ -1549,7 +1550,7 @@ These hold on every difficulty tier and are asserted by property tests:
 
 **(change C-15)** Handed over by conditions 18.11.
 
-- **Declared by** a Commander, a Stalker or the Hunter affix, at the start
+- **Declared by** a Commander, a Stalker or the Fixated affix, at the start
   of its turn, before scoring, at no action cost. It has no mechanical
   effect, so it is not a condition.
 - **Candidates:** non-downed party units recorded as noticed in the
@@ -1564,7 +1565,7 @@ These hold on every difficulty tier and are asserted by property tests:
 - **Shown** as a line from the declarer and an icon over the target, to
   everyone, whatever the guile (13.3).
 - **Counterplay:** break line of sight, kill or Challenge the declarer, or
-  bodyguard the target.
+  body-block for the target.
 
 ### 11.5 Difficulty knobs and performance
 
@@ -1600,17 +1601,17 @@ Each shows as a corner glyph.
 | Dormant | Does not move; −5 to noticing; re-rolls only on noise it hears, on adjacency or on damage | No |
 | Stationary | Holds its post | No |
 | Patrolling | A fixed loop, 1 square per tick, pausing 2 ticks at waypoints. Once seen, the route is drawn and feeds the rest preview **(settled)**, drawn over known squares only (Seen, Remembered, Chalked), with an open "continues" end where it leaves known space, so it never leaks unexplored Circuit rooms **(change XI-6; exploration and information design 4.8.1; agreed, Q2; M2)**. | No |
-| Alerted | Walks to a noise, looks for 3 ticks, then returns. **It does not become Wary**, so luring with noise stays a legitimate Stealth play. | No |
+| Alerted | Walks to a noise, looks for 3 ticks, then returns. **It does not become Watchful**, so luring with noise stays a legitimate Stealth play. | No |
 | Engaged | In combat, following its profile | Yes |
 | Pursuing | Engaged but has noticed no one; moves to the last known square and Searches | Yes |
 | Searching | After its profile's pursuit rounds, checks the last known square and up to 3 nearby squares in fixed order | **No**, so combat can end |
-| Wary | Back at its post for the rest of the floor: cannot be Surprised, +3 to noticing. **Only groups that were Engaged and lost the party become Wary.** | No |
+| Watchful | Back at its post for the rest of the floor: cannot be Surprised, +3 to noticing. **Only groups that were Engaged and lost the party become Watchful.** | No |
 
 This answers ability model 20's "behaviour after losing sight": Pursuing,
-then Searching, then Wary, with no healing and no refill.
+then Searching, then Watchful, with no healing and no refill.
 
 The Cutthroat's "unaware" set is Dormant, Stationary or Patrolling, never
-Alerted, Searching or Wary (12.2; Shade design 3.4) **(change SH-11)**.
+Alerted, Searching or Watchful (12.2; Shade design 3.4) **(change SH-11)**.
 
 **Start states and activities** **(change EP-9; client agreed
 2026-11-21, Q4; encounter placement design 6.4, 6.7; M2)**: no new state.
@@ -1642,16 +1643,16 @@ horizon stays 20 ticks for everyone, the forecast becomes hover-only,
 then route and memory only. Patrol behaviour is unchanged.
 
 **Pending request (EP-15, M2; encounter placement design 6.21):** the
-Wary row's "back at its post" reads "its Billet hold squares" (the
+Watchful row's "back at its post" reads "its Billet hold squares" (the
 Hedgehog: the group re-forms in its battle formation's defensive
 variant, facing the Portal where the party was last seen; a group that
 lost ⅓ of its members or its Keystone re-forms without Billets and
-watches every Portal); not yet ruled. If refused, Wary groups return to
+watches every Portal); not yet ruled. If refused, Watchful groups return to
 their start squares.
 
 **Deferred (M3; encounter placement design 9.1):** the Messenger (EP-35:
 a runner Rousing a target group to Stationary, a new Dormant→Stationary
-route here) and the Wake Order (EP-37: per-member Dormant waking); not
+route here) and the Alarm Order (EP-37: per-member Dormant waking); not
 adopted.
 
 ### 12.2 Noticing
@@ -1774,7 +1775,7 @@ radius reads the live hearing graph, each Portal in its current state
    deeper. When more groups qualify than the cap allows, the shortest path
    wins, then the lower `groupId`. Groups beyond the cap **do not change
    state** (they stay Stationary, Patrolling or Dormant) and are never made
-   Wary. **(lead's call)**
+   Watchful. **(lead's call)**
 3. **A directional "footsteps" marker appears at least 1 round before
    arrival.** The core knows the path length, so the timing is exact. With
    a party member trained in Perception, the warning comes 2 rounds ahead
@@ -1938,13 +1939,13 @@ Perception, so guile grows with level. **(agreed)**
 
 | Unit | Adjustment |
 |---|---|
-| Brute, minion, mindless type (Automaton profile) | −2 |
-| Soldier, artillery, skirmisher | 0 |
-| Leader, controller, lurker | +2 |
+| Brute, swarmer, mindless type (Automaton profile) | −2 |
+| Soldier, marksman, skirmisher | 0 |
+| Leader, hinderer, lurker | +2 |
 | Boss | +2 (signature moves always announced, 13.2) |
 
 - **Precedence (lead's call):** boss, then mindless, then role. Exactly one
-  adjustment applies: a mindless controller is −2; a boss is +2 whatever its
+  adjustment applies: a mindless hinderer is −2; a boss is +2 whatever its
   role. Elite rank, affixes and level shifts add nothing beyond the Wisdom
   and proficiency they change. A minion uses −2 whatever its role.
 - Guile is a derived number, never stored (change S-11). In M2 no condition
@@ -1952,7 +1953,7 @@ Perception, so guile grows with level. **(agreed)**
 - Illustrative: a level 1 brute with Wisdom 0 has guile 10 (10 + 0 + 2
   − 2); a level 5 soldier with Wisdom 0 has 13; a level 5 leader with
   Wisdom +2 has 17; a level 9 lurker with Wisdom +1 has 17; a level 9
-  controller with Wisdom as its main ability (+5, 5.3) has 21. A trained
+  hinderer with Wisdom as its main ability (+5, 5.3) has 21. A trained
   level 1 hero with Wisdom +1 reads 13; a trained level 10 hero with
   Wisdom +3 reads 17, or 21 with mastery.
 - **Calibration:** because guile and a trained party's reading score both
@@ -2219,7 +2220,7 @@ condition transforms:
   its leader (17.4), so one kill never ends it.
 - Simulator target: under 10% of Pack fights, and under 10% of fights
   against any leader template (Warband, Den, and any template given a
-  Commanding elite), end through morale before round 2.
+  Exhorting elite), end through morale before round 2.
 
 **The readable Intimidation play** is T1 → T5 → T2:
 
@@ -2230,7 +2231,7 @@ condition transforms:
 ### 14.4 Leaders, Emboldened and Command
 
 - **Leader is a role, not a rank.** A leader can be a standard, an elite
-  with the Commanding affix, or the boss for its escort. There is at most 1
+  with the Exhorting affix, or the boss for its escort. There is at most 1
   per group, and a leader's group needs at least 2 other members.
 - **Emboldened** is an aura on members of the leader's own group within 2
   squares of the living leader, not on the leader itself. Units of other
@@ -2317,7 +2318,7 @@ condition transforms:
   for 1 Cadence, once per round (Herald design 9.1) **(change HR-19)**.
 - **Roll:** Intimidation against 10 + Will.
 - **Range:** within 2 squares; 4 for a Dirge Herald with Terms of
-  Surrender and the Totem in its active set (Loom does not stack)
+  Surrender and the Tipstaff in its active set (Loom does not stack)
   **(change HR-19; Herald design 9.1)**.
 - **Targets:** a Demoralised or Routed unit. Never a boss. An elite only
   when Routed.
@@ -2336,8 +2337,8 @@ condition transforms:
 
 **Yielded** is a *disposition*, like dead, not a condition. There is one
 disposition, reached two ways: Demand Surrender, or the end-of-fight rule.
-A third route is either the Herald's Lay Down Arms or the universal Offer
-Terms (HX-5, the enemies owner's decision; if adopted, Lay Down Arms is
+A third route is either the Herald's Yield Arms or the universal Offer
+Terms (HX-5, the enemies owner's decision; if adopted, Yield Arms is
 cut), never both **(change HR-19; Herald design 8.3, 10.1)**.
 
 - A yielded unit drops its notable item and salvage at once; a
@@ -2346,7 +2347,7 @@ cut), never both **(change HR-19; Herald design 8.3, 10.1)**.
 - It is removed as resolved, with its full experience share.
 - **Interrogation is automatic: one floor fact per fight**, however many
   enemies yield. In priority order: the nearest undiscovered trap on the
-  path to the stairs (the Stairhead; on floor 5, the main path to the
+  path to the stairs (the Downstair; on floor 5, the main path to the
   arena; floor layout design 6.11; **change FL-6**), an undiscovered
   secret (a Hairline secret; floor layout design 9.2; **change FL-17**),
   the boss's Lore entry, one unexplored room's layout (an unmapped
@@ -2587,7 +2588,7 @@ economy design 6.1 item 2, 6.3; M2)**.
 | Standard | Yes | Only from the enemy-carried quota, and only when no elite or leader in the encounter can take it |
 | Leader | Yes, with a banner, horn or staff prop | Second priority. The banner may *be* the item; a horn never is, because horns are reserved for joiners (the Kennel Houndmaster's horn included) **(change LP-21; loot sources design 5.3; M2)**. |
 | Elite | Yes | First priority for the quota. **Guaranteed only in the optional elite room**, met by allocation: the elite-room carrier takes the floor's highest carrier-legal **gear** card (weapon or focus, armour or shield, trinket), never a consumable; a consumable top card goes to the elite room's lair cache **(change LE-10, LE-18; loot economy design 6.9 items 2, 6; M2)**. The elite's gear card is filtered to records whose lines show in use (`showsInUse`) when that set is non-empty, so the prize is presented in use **(change IR-12; item rolls design 4.12; M2)**. An unarmed elite there guards a **lair cache** instead ("Guards: cache"). Other elites without a quota item show nothing. Resolving the elite (killed, Yielded or Routed; cross-document comparison 2026-11-23, CC-38) or stealing its notable, whichever comes first, gives the **elite intel line** (15.8) **(change LE-18; M2)**. |
-| Boss | Yes, if armed | **Guaranteed** signature item, visibly carried by an armed boss, plus the boss reward card (17.5). An **unarmed** boss **guards** its signature in a **signature cache** in its lair (the "Guards: cache" precedent of the elite row; not a ranked socket, not the elite lair cache), and its plate reads **"Guards: <signature name>"**; M1: Old Ragged guards Bellwarden's Mail in its den **(agreed, Q5; change IR-13; item rolls design 4.13; M1)**. The signature is the boss's authored form for the top tier of the floor's drawn deck variant (one form per top tier its floors can need), with at most 2 base lines plus one authored value-1 line echoing the boss's fight or kit (≤ 3 lines; M1 records grandfathered); a boss that carries one form guards any second form, and "Carries: …" and "Guards: …" always name the chosen form; a draw-free second form in another lane is required for specialist chassis in M2 and every boss in M3; a Very rare signature consumes the floor's VR slot, pending the ITEMS owner **(change LE-3; loot economy design 6.3; change IR-13; item rolls design 4.13; M1 / M2 / M3)**. **Floor 5:** no reward card; the final boss still carries and uses its signature, which drops as a **Memento** (a run-record item card, 0 value, shown on the victory screen and run record only) **(agreed, Q1; change LE-5; loot economy design 6.11; M2)**; an unarmed final boss (none in M2) guards it in its cache and it drops as the Memento at victory **(change IR-13; item rolls design 4.13)**. |
+| Boss | Yes, if armed | **Guaranteed** boss's prize, visibly carried by an armed boss, plus the boss reward card (17.5). An **unarmed** boss **guards** its signature in a **signature cache** in its lair (the "Guards: cache" precedent of the elite row; not a ranked socket, not the elite lair cache), and its plate reads **"Guards: <signature name>"**; M1: Old Ragged guards Hound-Collar Mail in its den **(agreed, Q5; change IR-13; item rolls design 4.13; M1)**. The signature is the boss's authored form for the top tier of the floor's drawn deck variant (one form per top tier its floors can need), with at most 2 base lines plus one authored value-1 line echoing the boss's fight or kit (≤ 3 lines; M1 records grandfathered); a boss that carries one form guards any second form, and "Carries: …" and "Guards: …" always name the chosen form; a draw-free second form in another lane is required for specialist chassis in M2 and every boss in M3; a Very rare signature consumes the floor's VR slot, pending the ITEMS owner **(change LE-3; loot economy design 6.3; change IR-13; item rolls design 4.13; M1 / M2 / M3)**. **Floor 5:** no reward card; the final boss still carries and uses its signature, which drops as a **Memento** (a run-record item card, 0 value, shown on the victory screen and run record only) **(agreed, Q1; change LE-5; loot economy design 6.11; M2)**; an unarmed final boss (none in M2) guards it in its cache and it drops as the Memento at victory **(change IR-13; item rolls design 4.13)**. |
 
 **Heavy Purse (change LE-16; loot economy design 8.3; M2):** on floors
 2–4, about 20% of the floor's found coin *(illustr.)* is carried as coin
@@ -2627,8 +2628,8 @@ ruled.
    fixed draw; carried cards are 2 / 2 / 3 / 3 / 3 per floor
    *(illustr.)* within the per-encounter caps below **(change LE-2; loot
    economy design 6.3, 6.9 item 2; M1 for F1, M2)**. **M1's split** is its own: containers, at most 1
-   enemy-carried weapon or armour notable, and the boss's signature item.
-   **(lead's call)** **Floor 5:** the boss share is the **Viaticum**, a
+   enemy-carried weapon or armour notable, and the boss's prize.
+   **(lead's call)** **Floor 5:** the boss share is the **Parting Fare**, a
    choose-1-of-3 offer at Rare (Rare wands and tier-3 scrolls, every
    option usable by the party snapshot), in a main-path Plain container
    after the lair, outside the Antechamber, Circuit rooms and fight
@@ -2637,8 +2638,8 @@ ruled.
    loot economy design 6.11; M2)** *Reading recorded for this owner's
    confirmation (loot sources design 4.10, 13; LP-14; LE 18.2):* nothing
    lies between the lair and the Forecourt on floor 5, so the fallback is
-   the real rule: the Viaticum is the lair room's card-bearing container,
-   hosted on the Bedside Stand **(agreed, Q5; M2)**. The budget also holds a **`camp`
+   the real rule: the Parting Fare is the lair room's card-bearing container,
+   hosted on the Washstand **(agreed, Q5; M2)**. The budget also holds a **`camp`
    channel** (**2** notables at every camp 1–4, inside the approved
    1–2; graded for floor N+1, never Very rare; *illustr.*; **change
    LE-6; loot economy design 6.3; M2**) for the next camp's notables shop, drawn whether
@@ -2704,7 +2705,7 @@ ruled.
    one `UsableBy` query, read per socket kind (`inClass` or `arcanaRead`
    for scrolls); a **hard** floor (no record no living member can use) on
    chosen and guaranteed draws (the Due, fit premiums, the arms floor,
-   every offer option and the fourth, the Viaticum, stepped and Wax-Key
+   every offer option and the fourth, the Parting Fare, stepped and Wax-Key
    identities, camp entries) and on Very rare cards; a **soft** ×100‰
    *(illustr.)* on Common, Uncommon and Rare field cards (containers and
    carried). Targeted sockets (the Due, fit premiums, an offer's Yours and
@@ -2722,7 +2723,7 @@ ruled.
    `lootPlan`, and later items treat it as this floor's base. The F2
    arms-floor card is drawn the same way **(change LE-17)**.
    **Offer sets (change LE-4; loot economy design 6.3; M2):** a
-   choose-1-of-N offer (the boss reward card, the Viaticum and others)
+   choose-1-of-N offer (the boss reward card, the Parting Fare and others)
    counts once; its unchosen options are dreamed options, pre-rolled,
    outside value and family caps, and destroyed when the choice resolves
    (`ItemDestroyed{dreamedAway}`).
@@ -2736,7 +2737,7 @@ ruled.
    room is filled against its budget minus the item's cost add, so the
    item makes its carrier more dangerous without breaking the budget (10.5
    step 6). **Cost add = item value × k encounter points per offer-value
-   unit.** The items design supplies k. A boss signature item carries no
+   unit.** The items design supplies k. A boss's prize carries no
    cost add; the boss guards validate it. **(change I-9)**
    **Later (change IR-20; item rolls design 4.15):** a cursed carried
    item's cost add uses its benefit's T+1 value. M4 with item curses
@@ -2759,7 +2760,7 @@ ruled.
    reaction-shaped line is the unit's one reaction beyond the opportunity
    attack and a button is its bonus-action ability (9.1); its role answers
    pass; no suppression conflict with the issue gear; Wardstone and
-   Ward-Knot never with the Warded or Unbreakable affix; its `carrier`
+   Ward-Knot never with the Warded or Unbending affix; its `carrier`
    limits hold (trinkets design 12). Carried wards and ally preventions
    count toward the encounter's control defence. **(change TK-23)**
    Otherwise the next candidate is tried (10.5 step 8); if none
@@ -2825,7 +2826,7 @@ glints-per-screen gate (14.10). Not yet ruled.
 S-5)**:
 
 - **When:** the carrier is Dormant, Stationary or Patrolling (never
-  Alerted, Engaged, Pursuing, Searching or Wary), the thief is adjacent,
+  Alerted, Engaged, Pursuing, Searching or Watchful), the thief is adjacent,
   and **no other awake member of the carrier's group has line of sight to
   the thief.** Any party member may attempt it.
 - **Cost:** one exploration action.
@@ -2956,7 +2957,7 @@ floor (read: heirlooms and curses design 4.1.1).
   wherever it fell, with the coin line, the experience line with its level
   scaling (16) and any floor fact. The floor-fact slot also carries the
   **elite intel line** when it fires (15.2): one non-power fact about that
-  floor's boss (its signature item's card), kept afterwards under the
+  floor's boss (its prize's card), kept afterwards under the
   boss name on the pause screen's floor-info panel; the line takes the
   next unknown instance from the floor's boss-fact queue (`bossQueue`)
   in the shared FactLedger (14.6), so it never repeats a fact a
@@ -3064,7 +3065,7 @@ design (2026-11-23; pointer only). The original list:
 
 - patrol 70, guard post 100, lair 140, elite room 160, boss 200 (escort and
   reserves included);
-- a **Mousetrap** Ambush pays its band's value even though it is filled
+- a **Baited Room** Ambush pays its band's value even though it is filled
   at 85% **(change EP-10; encounter placement design 6.8.1; M2)**;
 - joiners keep their own value;
 - **M3:** the Annex group (10.4) pays 0 experience; its reward is the
@@ -3119,7 +3120,7 @@ candidate" from the lair templates, re-read 20.1 as "one guard post or
 one Dormant lair", or rely on the camp catch-up, measured by
 `MultiBypassRate`. Not yet ruled.
 **Pending request (EP-23, M2; encounter placement design 6.10):** the
-**Sleeping Ward sneak line** answers it: Den, Sleeper and Dormant Pack,
+**the Heap sneak line** answers it: Den, Sleeper and Dormant Pack,
 Gauntlet and Warband lairs seat sleepers beside the lair's Clearway, so
 every route through passes within 3 of at least one sleeper (two band
 rolls at Dormant −5); `LairSneakRate` is reported, and above 25%
@@ -3129,7 +3130,7 @@ lair" skippable; not yet ruled.
 - **Camp catch-up:** at camp the hero is raised to at least the next
   floor's entry level, and companions with it, before the camp restore
   and the Muster (companions design 7.11) **(change CMP-17)**. Target: this fires in under 20% of runs at camps 2–4
-  **(change RT-8)**; the floor-1 Antechamber Catch-up raises the hero to level 3 before the floor-1 boss
+  **(change RT-8)**; the floor-1 Forecourt Top-up raises the hero to level 3 before the floor-1 boss
   **(change RT-8; run structure design 9.4)**.
 - **Banking:** experience is banked and resolved at combat end
   **(settled)**.
@@ -3143,11 +3144,11 @@ lair" skippable; not yet ruled.
 | Role | HP / damage / AC / attack | At-will 1 + at-will 2 (verb) | Signature | Party's answer | Profile | Guile adj. | Wave |
 |---|---|---|---|---|---|---|---|
 | **Brute** | 130% / 120% / −2 / −1 | Heavy or two-handed weapon + Shove **(change W-5)** | **Charge** (cooldown 3: a straight-line move, then its at-will with advantage; from floor 2 a type may instead add +1 die, guards permitting; 6.4). Conditions under 9.2, at most 2, Shove's Prone included: the M1 brute is Bleeding claw + Shove (Prone); an M2 brute keeps Shove plus one of Grapple (Grappled) or Staggered on its limited ability, never both, and takes Bleeding only if it drops Shove. Earliest room level by guard. At most 2 per floor 1 encounter. | Kite it, use opportunity-attack zones, Prone it, punish its low AC and Will | Charger | −2 | M1 |
-| **Soldier** | 100% / 90% / +2 / 0 | Reach weapon or shield + Shove | **Interpose** reaction (`ifItChangesOutcome`: +2 AC for an adjacent ally against one attack), **or** a Guard-verb weapon (Parry, Set) instead, never both **(change W-5)**. Challenge only as an elite (Bodyguard) **(settled source)**. At most 1 per floor 1 encounter. | Go around it (slip past), Shove it out of the doorway, piercing or acid, kill what it guards | Holder | 0 | M1 |
-| **Artillery** | 70% / 110% / −1 / 0 | Ranged (8–12; 8–14 from floor 2, **change W-5**) + weak melee | M2: a limited area on cooldown 3 (burst 1 or line 4), not selective; elemental riders. Never hard control. | Close distance, break line of sight, spread out, dive past the soldier | Kiter | 0 | M1 |
-| **Minion** | Rank rule | Attack + a second attack or Help | Packs share one initiative slot; at most 4 per pack (2 in a solo encounter) | Areas, cleaves, chokepoints | Mob | −2 | M1 (template) |
+| **Soldier** | 100% / 90% / +2 / 0 | Reach weapon or shield + Shove | **Interpose** reaction (`ifItChangesOutcome`: +2 AC for an adjacent ally against one attack), **or** a Guard-verb weapon (Parry, Receive) instead, never both **(change W-5)**. Challenge only as an elite (Challenger) **(settled source)**. At most 1 per floor 1 encounter. | Go around it (slip past), Shove it out of the doorway, piercing or acid, kill what it guards | Holder | 0 | M1 |
+| **Marksman** | 70% / 110% / −1 / 0 | Ranged (8–12; 8–14 from floor 2, **change W-5**) + weak melee | M2: a limited area on cooldown 3 (burst 1 or line 4), not selective; elemental riders. Never hard control. | Close distance, break line of sight, spread out, dive past the soldier | Kiter | 0 | M1 |
+| **Swarmer** | Rank rule (minion) | Attack + a second attack or Help | Packs share one initiative slot; at most 4 per pack (2 in a solo encounter) | Areas, cleaves, chokepoints | Mob | −2 | M1 (template) |
 | **Skirmisher** | 80% / 100% / +1 / 0; speed 8 | Melee + thrown | Slips past; Disengage as its bonus action; M2 Help sets up allies (Helped) | Reach, opportunity-attack zones, Grapple, Chilled, close formation | Raider | 0 | M2 |
-| **Controller** | 90% / 70% / 0 / 0; concentrates | Damage + a minor (Chilled, Poisoned or Corroded) | One limited control ability. Hard control only where the gates allow. Carries the type's 2 conditions. At most 1 per encounter on floors 1–2. | Focus it, psychic rider, Treat, Rally | Disruptor | +2 | M2 |
+| **Hinderer** | 90% / 70% / 0 / 0; concentrates | Damage + a minor (Chilled, Poisoned or Corroded) | One limited control ability. Hard control only where the gates allow. Carries the type's 2 conditions. At most 1 per encounter on floors 1–2. | Focus it, psychic rider, Treat, Rally | Disruptor | +2 | M2 |
 | **Leader** | 110% / 80% / 0 / 0; trained Will and Intimidation | Weapon + Frighten | **Command** (Rally or Order, cooldown 3); Emboldened aura; Quarry | Kill it first; Frighten the Demoralised; Frighten the leader to stop its Rally | Commander | +2 | M2 |
 | **Lurker** | 80% / 100% (150% on its opener) / 0 / 0 | Melee + Hide | Starts Hidden; **Ambush Strike** (`uses:1`, +2 dice); Poisoned, Bleeding or Blinded. Never in floor 1's main-path rooms 0–2 **(change DH-28)**. On floor 1 it never uses Ambush Strike: it opens with its at-will at 150%, stated plainly on its card **(change EP-11; encounter placement design 6.17; M2)**. **M3:** a theme's lurker may be placed as a **boxed lurker** (`containerForm`, F2–5, at most 1 per floor): no placement Stealth roll; marked when party passive Perception ≥ 10 + its proficiency, checked with trap detection **(change TL-28; traps and locks design 6.14)**. | Perception, the radiant rider (Revealed), staying grouped, reading the tell | Ambusher | +2 | M2 |
 | Support | — | — | One `uses:1` heal or buff; at most 1 per encounter | Withered, focus | — | — | Later |
@@ -3167,32 +3168,32 @@ affix costs ×1.2. **Gentle** means legal on floor 1.
 | Defence | **Warded** (gentle) | Warded with 1 charge (2 on floors 4–5), `oncePerLife` | 1+ | Any | M2 |
 | Defence | **Plated** (gentle) | Armour counts as **heavy** for category-reading rules only (so Corroded's +1, the piercing rider and the stealth penalty apply), +2 AC as the `traits` term of the AC query, never part of the armour value (outside the ±1 base band, governed by the threat band: 5.2, 6.5), speed −1 as the heavy speed penalty, paid once (armour design 6.1, 7.3) **(change AR-27)** | 1+ | Brute, soldier, leader | M2 |
 | Defence | **Hardened** | One theme layer (the theme's `hardenedLayer`, whose shown breaker is its `counterType`; **change RT-4**) with its breaker shown. Inside the 2-resistance budget, with a weakness alongside. | 2+ | Any | M2 |
-| Defence | Blurred | 3 charges, `oncePerLife` | 3+ | Skirmisher, lurker, controller | Later |
+| Defence | Blurred | 3 charges, `oncePerLife` | 3+ | Skirmisher, lurker, hinderer | Later |
 | Mobility | **Swift** (gentle) | Speed +2 | 1+ | Brute, skirmisher, lurker | M2 |
 | Mobility | **Slippery** | Immune to `restraint` (its 1 control immunity) | 2+ | Skirmisher, lurker | M2 |
 | Mobility | **Pouncer** | Bonus action, cooldown 3: Jumps up to its speed and must end adjacent to an enemy. On a skirmisher it replaces the bonus-action Disengage. | 2+ | Brute, skirmisher | M2 |
-| Sustain | **Vampiric** | On a melee at-will hit, regains half the damage. Withered counters it. | 2+ | Brute, skirmisher | M2 |
-| Sustain | Relentless | Death-warded, `oncePerLife` | 2+ | Not minions | Later |
+| Sustain | **Leeching** | On a melee at-will hit, regains half the damage. Withered counters it. | 2+ | Brute, skirmisher | M2 |
+| Sustain | Undying | Death-warded, `oncePerLife` | 2+ | Not minions | Later |
 | Sustain | Regenerating | Regains 10% of max HP at turn start; Withered suppresses it | 3+ | Brute, soldier | Later |
 | Punish | **Volatile** | Death burst, radius 1, theme damage (the theme's `themeDamage` = its `primaryDamageType`; **change RT-4**), Reflex for half. The kill preview shows it. Counted in the guards with its turn maximum (6.4). | 2+ | Brute, leader | M2 |
-| Punish | Thorned | Retaliating | 3+ | Soldier, brute | Later |
+| Punish | Retaliating | Retaliating | 3+ | Soldier, brute | Later |
 | Punish | Riposting | Riposting while its reaction is unused | 3+ | Soldier, skirmisher | Later |
-| Command | **Commanding** | Becomes its group's leader: Command (cooldown 3) and the Emboldened aura. Never in a group that already has a leader (8.3). | 2+ | Soldier, controller | M2 |
-| Command | **Hunter** | Declares Quarry | 2+ | Skirmisher, artillery, leader | M2 |
-| Command | **Horn-bearer** | `uses:1` at or below half HP: the nearest unaware group in hearing becomes Alerted and joins, announced a round early. Only where the cluster budget and the joining cap allow. At most one placed call source per encounter **(change EP-22; encounter placement design 6.12; M2)**. | 3+ | Leader, artillery | M2 |
-| Goad | **Bodyguard** | Challenge: bonus action, cooldown 3, applies Challenged to an adjacent enemy | 2+ | Soldier | M2 |
-| Goad | Protector | Guarded on an adjacent ally | 3+ | Soldier | Later |
-| Rider | **Honed** | Its weapon at-will carries its damage type's rider | 2+ | Armed types | M2 |
+| Command | **Exhorting** | Becomes its group's leader: Command (cooldown 3) and the Emboldened aura. Never in a group that already has a leader (8.3). | 2+ | Soldier, hinderer | M2 |
+| Command | **Fixated** | Declares Quarry | 2+ | Skirmisher, marksman, leader | M2 |
+| Command | **Horn-bearer** | `uses:1` at or below half HP: the nearest unaware group in hearing becomes Alerted and joins, announced a round early. Only where the cluster budget and the joining cap allow. At most one placed call source per encounter **(change EP-22; encounter placement design 6.12; M2)**. | 3+ | Leader, marksman | M2 |
+| Goad | **Challenger** | Challenge: bonus action, cooldown 3, applies Challenged to an adjacent enemy | 2+ | Soldier | M2 |
+| Goad | Guardian | Guarded on an adjacent ally | 3+ | Soldier | Later |
+| Rider | **Razored** | Its weapon at-will carries its damage type's rider | 2+ | Armed types | M2 |
 | Rider | **Venomous** | Its damaging at-will applies Poisoned on a failed Fortitude save | 2+ | Skirmisher, lurker | M2 |
 | Aura | **Chilling** | Turn-start Fortitude save within 1 square or Chilled; a success gives immunity for the fight **(settled aura rule)** | 3+, frost themes (themes with `frost`; **change RT-4**) | Brute, soldier | M2 |
-| Aura | Dread | The same shape, Will save or Shaken | 3+ | Leader, controller | Later |
-| Control defence | **Unbreakable** | Unyielding, permanent | 2+ | Any | M2 |
-| Control defence | **Steadfast** | Advantage on saves against `fear` and `goad`; morale profile becomes `fearless`. Not legal if it would break the theme's non-fearless half. | 2+ | Leader, soldier | M2 |
+| Aura | Dread | The same shape, Will save or Shaken | 3+ | Leader, hinderer | Later |
+| Control defence | **Unbending** | Unyielding, permanent | 2+ | Any | M2 |
+| Control defence | **Dauntless** | Advantage on saves against `fear` and `goad`; morale profile becomes `fearless`. Not legal if it would break the theme's non-fearless half. | 2+ | Leader, soldier | M2 |
 | Setup | Spotter | Spotted on hit | 3+ | Skirmisher | Later |
 
-**Banned pairs** (beyond one affix per group): Bodyguard with Thorned,
-Riposting or any aura; Slippery with Swift; Warded with Unbreakable;
-Vampiric with Plated on floors 1–3. Bodyguard, Commanding and Pouncer each
+**Banned pairs** (beyond one affix per group): Challenger with Retaliating,
+Riposting or any aura; Slippery with Swift; Warded with Unbending;
+Leeching with Plated on floors 1–3. Challenger, Exhorting and Pouncer each
 use the bonus-action slot, so the kit cap excludes any two of them
 together.
 
@@ -3203,6 +3204,8 @@ call)**
 
 ### 17.3 Behaviour profiles
 
+Profile names are internal and never printed (naming pass design 4.8; NP-10).
+
 The schema is canonical. The weights are approach / caution / oaAversion,
 in percent, all illustrative.
 
@@ -3210,15 +3213,15 @@ in percent, all illustrative.
 |---|---|---|---|---|---|---|
 | **Charger** | Brute | 150 / 30 / 30 | 1 | Nearest, last attacker; kill bonus 130% | Walks through opportunity attacks to reach you; never retreats | M1 |
 | **Holder** | Soldier | 100 / 80 / 100 | 1 | Nearest to its ward | Holds the doorway; shoves toward hazards (M2). **Pending request (TR-15, M2; room terrain design 6.9):** "hazards" includes contact hazards; not yet ruled. **Pending request (hazards design 6.12; M2 (gated), else M3):** also toward due footprints and Voids, the intent reading "pushes toward the edge"; not yet ruled. **Pending request (EP-6, M2; encounter placement design 6.6.3):** the hold is the Billet term (11.1) on the choke square, weight 40; not yet ruled | M1 (hold term M2) |
-| **Kiter** | Artillery | 60 / 150 / 200 | 5 | Lowest visible AC in range; concentrating units **(change AR-25)** | Keeps 4–6 squares away; steps back when engaged; falls back at 50% HP. **Pending request (EP-6, M2; encounter placement design 6.6.3):** "falls back" gains a destination, its fall-back square (also on a formation break or when adjacent to a noticed party unit), and a Billet weight 25; not yet ruled | M1 |
-| **Mob** | Minion | 150 / 0 / 0 | 1 | Nearest; spreads to free adjacent squares | Surrounds you; ignores danger | M1 |
+| **Kiter** | Marksman | 60 / 150 / 200 | 5 | Lowest visible AC in range; concentrating units **(change AR-25)** | Keeps 4–6 squares away; steps back when engaged; falls back at 50% HP. **Pending request (EP-6, M2; encounter placement design 6.6.3):** "falls back" gains a destination, its fall-back square (also on a formation break or when adjacent to a noticed party unit), and a Billet weight 25; not yet ruled | M1 |
+| **Mob** | Swarmer | 150 / 0 / 0 | 1 | Nearest; spreads to free adjacent squares | Surrounds you; ignores danger | M1 |
 | **Automaton** | Mindless | 120 / 0 / 0 | 1 | Nearest, then unit order | No exposure or cohesion terms; walks through minor hazards (the lethal floor still holds). **Pending request (hazards design 6.12; M2 (gated), else M3):** ignores non-lethal due squares, keeping the lethal floor (shown on its card); segment 4 does not raise the mindless share and asks this owner; not yet ruled. **Pending request (TL-16, M2; traps and locks design 6.8):** mindless types treat non-lethal traps as floor and spring them (the mindless blunder), lethal ones still barred; not yet ruled | M1 |
 | **Boss** | Bosses | Authored; `leash: room` | — | Authored | A phase may swap the profile. **Pending request (FL-21 (a), M1; floor layout design 6.11):** a Provoked analogue that extends the leash to the Sanctum when the boss is damaged from outside its reach; not yet ruled; segment 9 asks for the narrow form, pursuit to the Arch squares, never into the Forecourt (boss rooms design 4.6). **Pending request (BR-6, BR-14, M2; boss rooms design 4.3.1, 4.6):** the Rhythm and per-boss data weights (11.1), and a narrower leash value `chain(n)` that limits the unit's own movement only (forced movement unaffected; a unit pushed beyond it returns toward its anchor), replacing a `fixedInPlace` exception; not yet ruled | M1 (M2 adds boss actions) |
 | **Raider** | Skirmisher | 120 / 120 / 200 | 1 | Lowest visible AC; concentrating units **(change AR-25)** | Hits, then uses leftover movement to leave reach; slips past | M2 |
-| **Protector** | Bodyguard elites | 80 / 60 / 120 | 1 | Whoever threatens its ward | Body-blocks; Challenges the unit nearest the leader | M2 |
-| **Disruptor** | Controller | 80 / 120 / 150 | 3 | Highest T | Spends control on the most dangerous unit; setup at 150% | M2 |
+| **Protector** | Challenger elites | 80 / 60 / 120 | 1 | Whoever threatens its ward | Body-blocks; Challenges the unit nearest the leader | M2 |
+| **Disruptor** | Hinderer | 80 / 120 / 150 | 3 | Highest T | Spends control on the most dangerous unit; setup at 150% | M2 |
 | **Commander** | Leader | 70 / 120 / 150 | 2 | Quarry, else nearest | Stays behind its line; uses Command; declares Quarry. **Pending request (EP-6, M2; encounter placement design 6.6.3):** a Billet weight 30 and a fall-back square on a formation break or when adjacent to a noticed party unit; not yet ruled | M2 |
-| **Stalker** | Hunter affix, pack beasts | 130 / 80 / 80 | 1 | Its own Quarry | Picks one unit and keeps after it | M2 |
+| **Stalker** | Fixated affix, pack beasts | 130 / 80 / 80 | 1 | Its own Quarry | Picks one unit and keeps after it | M2 |
 | **Ambusher** | Lurker | 100 / 150 / 200 | 1 | Lowest HP fraction in reach | Waits Hidden, opens, retreats and Hides again. **Pending request (encounter placement design 6.8.3, 6.15):** "waits Hidden" made precise as "until a party unit is within 3 squares and in its line of sight, or its group or the bait is attacked or notices"; not yet ruled | M2 |
 | **Opportunist** | Skittish scavengers | 100 / 150 / 150 | 1 | Lowest HP fraction above 0 | Picks off the wounded and breaks early | M2 |
 | **Sentinel** | Door, treasure and shrine guards | 80 / 100 / 100 | By kit | Nearest inside its leash | Never leaves its 6-square leash while it can answer. **Provoked (lead's call):** when damaged by a unit it cannot reach from inside its leash, it drops the leash for that fight and switches to Holder with pursuit 2, shown on the plate ("Provoked: leaves post"). Plinking from outside the leash is therefore never free. **Pending request (FL-21 (b), M2; floor layout design 6.5):** the Champion's elite uses a Sentinel-style hold, so noticing through a Grille leaves it Alerted but holding; not yet ruled. The elite's Billet is offered as that hold if EP-6 is accepted (11.1; encounter placement design 6.10) | M2 |
@@ -3229,32 +3232,34 @@ same, which is what makes them learnable, and what makes intent reading
 
 **Pending request (TR-15, M2; room terrain design 6.9, 6.6):** one
 visible terrain-using enemy per F2–5 theme, with a telegraphed intent (a
-Strongman Shunts a crate at the backline; a Glutton Kicks a trolley; a
+Weightlifter Shunts a crate at the backline; a Glutton Kicks a trolley; a
 Fire-Eater breathes on a Keg; a Gut Ooze shoves toward molars); and one
-gas-aura monster each in the Gut, Silk and Heart (a Gut spore-bloat, a
-Silk mildew moth, a Heart sleeping-draught nurse; unit auras are legal
+gas-aura monster each in the Gut, Archive and Heart (a Gut spore-bloat, an
+Archive mildew moth; no Heart example is named; unit auras are legal
 under ability 8.4); a request to this owner, not yet a rule.
 
 ### 17.4 Encounter templates
 
+Template names are internal and never printed; the Lore preview shows the formation names (naming pass design 4.8; NP-10).
+
 | Template | Slots | Band | Floors | Awareness | Notes | Formations **(change EP-4)** | Wave |
 |---|---|---|---|---|---|---|---|
-| **Picket** | 1–2 standards + 0–2 minions (≤2 when solo) | Patrol or guard post | 1+ | Patrol or stationary | The universal fallback. On floor 1 solo, budgets make a patrol one standard: the floor's Stealth and ambush teaching target. | Picket Line; Door Line (front + artillery standard); Kill Box (Waylay, F2+). Patrol File; Revel, Bout | M1 |
-| **Pack** | 1 brute (M2: or skirmisher) + 2–4 minions of one family (2 when solo) | Patrol, guard post or lair | 1+ | Patrol or dormant | Minions share one initiative slot | Crescent; Pincer (F3+). Patrol File; Sleeping Ward; gorged Revel | M1 |
-| **Line and Bow** | 1–2 soldiers or brutes + 1 artillery | Guard post or lair | 1+ | Stationary at a chokepoint | Teaches "go around" | Door Line; Phalanx (2 soldiers, F2+); Kill Box (Waylay, F2+). Revel, Bout | M1 |
-| **Boss Court** | Boss + escort (0–2 standards or a minion pack; no elite on floor 1) | Boss | All | Wary from the start | Boss alone in M1. Escort budget: the shortfall-adjusted party weight × 200% × depth% × ladder%; boss HP ignores the shortfall (17.5) **(change CMP-7)**. Floors 2–5: ≥ 1 non-fearless group (17.5) **(change BR-19; agreed, Q4; M2)**. **Pending request (BR-12, M2; boss rooms design 4.5.3):** AddCap, a per-arena headcount trimming reserves (17.5) | Retinue for the escort (segment 9 owns the arena set) | M1 / M2 |
+| **Picket** | 1–2 standards + 0–2 minions (≤2 when solo) | Patrol or guard post | 1+ | Patrol or stationary | The universal fallback. On floor 1 solo, budgets make a patrol one standard: the floor's Stealth and ambush teaching target. | Picket Line; Door Line (front + marksman standard); Kill Box (Waylay, F2+). Patrol File; Revel, Bout | M1 |
+| **Pack** | 1 brute (M2: or skirmisher) + 2–4 minions of one family (2 when solo) | Patrol, guard post or lair | 1+ | Patrol or dormant | Minions share one initiative slot | Crescent; Pincer (F3+). Patrol File; the Heap; gorged Revel | M1 |
+| **Line and Bow** | 1–2 soldiers or brutes + 1 marksman | Guard post or lair | 1+ | Stationary at a chokepoint | Teaches "go around" | Door Line; Phalanx (2 soldiers, F2+); Kill Box (Waylay, F2+). Revel, Bout | M1 |
+| **Boss Court** | Boss + escort (0–2 standards or a minion pack; no elite on floor 1) | Boss | All | Watchful from the start | Boss alone in M1. Escort budget: the shortfall-adjusted party weight × 200% × depth% × ladder%; boss HP ignores the shortfall (17.5) **(change CMP-7)**. Floors 2–5: ≥ 1 non-fearless group (17.5) **(change BR-19; agreed, Q4; M2)**. **Pending request (BR-12, M2; boss rooms design 4.5.3):** AddCap, a per-arena headcount trimming reserves (17.5) | Retinue for the escort (segment 9 owns the arena set) | M1 / M2 |
 | **Champion** | 1 elite + 1–2 minions or standards, at least one of them an awake **watcher** placed with line of sight to every square adjacent to the elite | Elite room | 1+ (second half of floor 1) | Stationary, awake, visible from the approach (through the Grille vantage behind an opt-in vantage Door; floor layout design 6.5; **change FL-7**) | Guaranteed notable item or cache; Steal needs the watcher drawn off first (15.5). **Pending request (FL-21 (b)):** a Sentinel-style hold for the elite (17.3) | Champion Watch | M2 |
-| **Warband** | Leader + 1–2 front + 0–4 minions | Guard post or lair | 2+ | Stationary or dormant | Morale showcase; the usual carrier | Retinue; Phalanx (2 front); Pincer (F3+); Kill Box (Waylay); **M3:** Ritual (the Choir only, F3; change EP-27). Revel, Bout; Sleeping Ward | M2 |
-| **Den** | Leader-role "mother" (a beast silhouette is allowed) + 1 non-minion standard + 2–4 minions | Lair | 2+ | Dormant | Stealth-bypass candidate. The extra standard keeps one kill from ending the lair (14.3). **Pending request (FL-21 (d)):** in-room sneaks against 20.1 (16); the Sleeping Ward sneak line (EP-23, pending; 16) | Crescent (the mother as alpha). Sleeping Ward | M2 |
+| **Warband** | Leader + 1–2 front + 0–4 minions | Guard post or lair | 2+ | Stationary or dormant | Morale showcase; the usual carrier | Retinue; Phalanx (2 front); Pincer (F3+); Kill Box (Waylay); **M3:** Ritual (the Choir only, F3; change EP-27). Revel, Bout; the Heap | M2 |
+| **Den** | Leader-role "mother" (a beast silhouette is allowed) + 1 non-minion standard + 2–4 minions | Lair | 2+ | Dormant | Stealth-bypass candidate. The extra standard keeps one kill from ending the lair (14.3). **Pending request (FL-21 (d)):** in-room sneaks against 20.1 (16); the Heap sneak line (EP-23, pending; 16) | Crescent (the mother as alpha). The Heap | M2 |
 | **Skirmish Screen** | 2–3 skirmishers | Patrol or guard post | 2+ | Patrol | Tests formation | Skirmish Spread (patrol only; never a Waylay). Patrol File | M2 |
-| **Ambush** | Bait (1 standard or a container) + 1–2 lurkers as a separate group | Guard post; × 0.85 for a Mousetrap **(change EP-10)** | 1+ (after room 2) | The lurker group Stationary and Hidden at start; the bait group Stationary **(change EP-10)** | A visible **tell** within 6 squares; trained Perception marks it (the tell) on the map (encounter placement design 6.8.4). A container bait (the Mousetrap's reserved bait cache) only on floors 2–5 at party ≥ 2, at most 1 per floor and 2 per run *(illustr.)* **(change EP-10; encounter placement design 6.8.1)**. **M3:** the bait container may be the lurker itself, a boxed lurker (17.1) **(change TL-28; traps and locks design 6.14)** | Bait and Nook (Cuckoo or Mousetrap) | M2 |
-| **Battery** | 2 artillery + 1 soldier (optionally an elite bodyguard) | Guard post | 3+ | Stationary | Banned on floors 1–2 by the ranged cap | Crossfire (F3+, party ≥ 3); Kill Box (Waylay) | M2 |
-| **Honour Guard** | Bodyguard elite + artillery or controller + 0–2 minions | Lair | 2+ | Stationary | Challenged showcase | Honour Ring | M2 |
-| **Gauntlet** | Controller + 2 brutes | Lair | 3+ | Dormant or stationary | Hard control on the controller only | Grindstone. Sleeping Ward | M2 |
+| **Ambush** | Bait (1 standard or a container) + 1–2 lurkers as a separate group | Guard post; × 0.85 for a Baited Room **(change EP-10)** | 1+ (after room 2) | The lurker group Stationary and Hidden at start; the bait group Stationary **(change EP-10)** | A visible **tell** within 6 squares; trained Perception marks it (the tell) on the map (encounter placement design 6.8.4). A container bait (the Baited Room's reserved bait cache) only on floors 2–5 at party ≥ 2, at most 1 per floor and 2 per run *(illustr.)* **(change EP-10; encounter placement design 6.8.1)**. **M3:** the bait container may be the lurker itself, a boxed lurker (17.1) **(change TL-28; traps and locks design 6.14)** | Bait and Nook (Cuckoo or Baited Room) | M2 |
+| **Battery** | 2 marksmen + 1 soldier (optionally a Challenger elite) | Guard post | 3+ | Stationary | Banned on floors 1–2 by the ranged cap | Crossfire (F3+, party ≥ 3); Kill Box (Waylay) | M2 |
+| **Honour Guard** | Challenger elite + marksman or hinderer + 0–2 minions | Lair | 2+ | Stationary | Challenged showcase | Honour Ring | M2 |
+| **Gauntlet** | Hinderer + 2 brutes | Lair | 3+ | Dormant or stationary | Hard control on the hinderer only | Grindstone. The Heap | M2 |
 | **Scavengers** | 2–3 skittish standards or minions; no elite or leader | Patrol | 1+ | Patrol | Always cowable (content test); fills the cowing guarantee | Scramble. Patrol File | M2 |
-| **Sleeper** | 1 dormant elite at room level +0 to +2 (its legal elite range, 6.3) + 0–2 dormant standards or minions to reach the fill | Lair | 2+ | Dormant | Stealth bypass or steal target; never cowable (it holds an elite). **Pending request (FL-21 (d)):** in-room sneaks against 20.1 (16); the Sleeping Ward sneak line (EP-23, pending; 16) | Picket Line (the elite as the front Keystone). Sleeping Ward; gorged Revel | M2 |
+| **Sleeper** | 1 dormant elite at room level +0 to +2 (its legal elite range, 6.3) + 0–2 dormant standards or minions to reach the fill | Lair | 2+ | Dormant | Stealth bypass or steal target; never cowable (it holds an elite). **Pending request (FL-21 (d)):** in-room sneaks against 20.1 (16); the Heap sneak line (EP-23, pending; 16) | Picket Line (the elite as the front Keystone). The Heap; gorged Revel | M2 |
 | Summoner Circle; Mender's Band; Feud | — | — | 3+ | — | Feud needs AI for monsters hostile to each other. **Later (EP-40; encounter placement design 9.1):** Standoff / Riot, Gaol Jailers against Inmates, a three-sided fight, waits on Feud | — | Later |
-| Rival Party | See section 18 | Boss or elite room | 3+ | Wary | At most one per run | — | Later (stretch) |
+| Rival Party | See section 18 | Boss or elite room | 3+ | Watchful | At most one per run | — | Later (stretch) |
 
 - **Promotion in templates (lead's call):** a standard slot may hold a
   promoted elite wherever the floor's elite cap (10.3) allows, unless the
@@ -3381,19 +3386,19 @@ clock's damage type; not yet ruled.
   of party units).
 - **Timing:** at most one at the end of any one unit's turn, never after
   the boss's own turn.
-- **Menu:** **Strike** (one at-will); **Reposition** (half speed; it
+- **Menu:** **Attack** (one at-will); **Reposition** (half speed; it
   provokes); **Shed** (end one harmful condition) **(settled)**;
-  **Command** (one escort member moves); **Signature** (a flagged limited
+  **Direct** (one escort member moves); **Signature** (a flagged limited
   ability, announced per 13.2).
 - **Never hard control.** Hampered never blocks boss actions
   **(settled)**.
 - **Pending request (BR-7, BR-17, M2; boss rooms design 4.8.1, 4.7.2):**
   Signature is never a boss action (every boss authors its 1–3 options
-  from Strike, Reposition, Shed and Command; floor 1: Reposition, Shed,
-  Command); Shed ends only a condition on the boss at the start of the
+  from Attack, Reposition, Shed and Direct; floor 1: Reposition, Shed,
+  Direct); Shed ends only a condition on the boss at the start of the
   round; no two boss actions on the same unit in one round; none on a
   unit in a live Gambit footprint (M3); a forced spend before the boss's
-  turn; and **Upended** (renamed **Sprawled** by boss rooms design 4.7.2; this restatement's rename is pending with this owner; cross-document comparison 2026-11-23, CC-65), a boss state from a Device's Expose payoff (no
+  turn; and **Sprawled** (renamed from Upended by boss rooms design 4.7.2; restated here by the naming pass, NP-6; cross-document comparison 2026-11-23, CC-65), a boss state from a Counterpiece's Expose payoff (no
   boss actions until the end of the boss's next turn, once per phase,
   applied whatever its save or a Prone immunity), which with the denial
   budget are the only boss-action denial sources; not yet ruled.
@@ -3445,21 +3450,21 @@ clock's damage type; not yet ruled.
   reset to ready at combat end and `turnsTaken` resets at the next fight
   start, as for every monster (9.3), so `readyAt` still guards a
   re-engagement's opening turn.
-- A boss that loses the party returns to its post as **Wary**, leashed to
+- A boss that loses the party returns to its post as **Watchful**, leashed to
   its room, and **regains HP up to the top of its current phase band**.
 - Retreat-rest-return therefore costs the party supply and keeps the phase
   progress it earned, but it cannot whittle a boss down through repeated
   pokes.
 - **Pending request (BR-6, BR-14, M2; boss rooms design 4.3.1, 4.6):**
   the life state also holds the Rhythm pointer and any pending signature,
-  Device charges, reserve state and the Rendition; not yet ruled. Beside
+  Counterpiece charges, reserve state and the Rendition; not yet ruled. Beside
   this rule, segment 9 bans short rests in the Sanctum while the boss
   lives and holds party per-fight resources across Sanctum combat ends
   (the ability model and death and healing owners apply it; boss rooms
   design 4.2.5); this rule is read, unchanged.
 - The exits are never sealed, so fleeing by breaking line of sight still
   works **(settled)**. "Exits" means the arena entrances; the Bossgate to
-  the Stairhead behind the arena is not an entrance and opens on
+  the Downstair behind the arena is not an entrance and opens on
   `BossDefeated` (none on floor 5) (floor layout design 6.11) **(change
   FL-6; a clarification)**.
 
@@ -3482,13 +3487,13 @@ boss rooms design 4.1 (read):
 - terrain caps and kind rules: room terrain design 6.11 (contact
   hazards, Furnishings, Kegs, cover-giving squares, clutter); the
   counterplay identity is unchanged **(change TR-16)**;
-- the boss and escort start **Wary**, so the boss room never surprises the
+- the boss and escort start **Watchful**, so the boss room never surprises the
   party and is never Surprised.
 
 **Boss death** Routs the non-fearless escort, and mindless servants go
 inert (T7).
 
-**Signature item:** guaranteed, visibly carried by an armed boss or
+**The boss's prize:** guaranteed, visibly carried by an armed boss or
 guarded in its lair's signature cache by an unarmed one ("Guards:
 <signature name>", 15.2; agreed, Q5; change IR-13; item rolls design
 4.13), plus a pick-one-of-three
@@ -3499,7 +3504,7 @@ change IR-13). The card is one offer set at
 C / U / R / R on floors 1–4 *(illustr.)*, **never Very rare**; it is
 outside the floor's notable count and the 3-per-encounter cap, and its
 taken option counts in the floor's value and toward family caps. Its
-options fill three slots in order (Yours, Theirs, Wayward), each usable
+options fill three slots in order (Yours, Theirs, Windblown), each usable
 by a member in the party snapshot at generation (hard floor), with
 distinct families, distinct fine categories or effect tags, and at most
 1 damage option; an option with no usable record is drawn **on its own**
@@ -3510,7 +3515,7 @@ redrawn as hero-usable gear (entry 4); a boss-channel phial (consumables
 design 14.7) fills option 2 **(agreed, Q1; change IR-8; item rolls
 design 4.1, 4.8, 4.10; M2)**. Unchosen options are dreamed away (15.3
 step 2). **Floor 5:** no reward card; the signature drops as the
-Memento (15.2), and the Viaticum takes the boss share (15.3 step 1)
+Memento (15.2), and the Parting Fare takes the boss share (15.3 step 1)
 **(agreed, Q1; change LE-5; loot economy design 6.11)**. **Perilous floor
 (M3):** on a floor entered through the Perilous Door, this card shows its
 pre-drawn fourth option and becomes choose 1 of 4 (a reading accepted by
@@ -3555,7 +3560,7 @@ encounter or as a floor's boss.
   party's derived numbers, and gear chosen by the author.
 - **Pools become limited uses for that one fight.** Every `rest` and `camp`
   pool converts to `uses:N` for the unit's life, with N its maximum. Rests,
-  Slot Recovery and refills never apply. A use converted from a `camp`
+  Slot Renewal and refills never apply. A use converted from a `camp`
   pool keeps a **camp-spend** mark, so the settled one-camp-spend-per-turn
   rule (ability model 6.4) still binds each rival and caps nova turns.
   **(lead's call)**
@@ -3574,7 +3579,7 @@ encounter or as a floor's boss.
   experience, whichever slot it takes. Its gear is issue gear, except at
   most one notable item per rival (at most 3 in all), drawn from the
   **enemy-carried channel** of the floor's loot budget, so the floor total
-  and the boss's own signature item are unchanged. **(lead's call)**
+  and the boss's own prize are unchanged. **(lead's call)**
 - **Rank:** `rank: elite` is a **flag only**, for the depth gates, Demand
   Surrender and the absence of resolve. The elite template (HP ×2, the
   `rank.elite` bundle, multiattack) is **not** applied: rivals use
@@ -3588,7 +3593,7 @@ encounter or as a floor's boss.
   budget, experience, the reward card, the arena and the reset rule
   (17.5: HP back to full on a reset, spent uses stay spent), with one
   announced `signature` per rival party (13.2). The boss channel's
-  signature item is carried by the captain and counts toward the rival
+  prize is carried by the captain and counts toward the rival
   party's 3. The validation rules that a boss is fearless and has 1–2
   signature abilities apply to the party as a whole, not to its members.
   **(lead's call)**
@@ -3746,7 +3751,7 @@ The build fails when:
 - a trait, immunity or theme budget is broken (including the non-fearless
   half and rider counting);
 - the threat band (6.5) is broken on any enumerated combination;
-- a group has more than one leader, or Commanding sits in a group that
+- a group has more than one leader, or Exhorting sits in a group that
   has a leader;
 - a banned affix pair appears;
 - an affix grant is not `oncePerLife`;
@@ -3874,10 +3879,10 @@ The build fails when:
 
 - **M1** (the slice):
   - **Types:** 3 (brute with the settled Bleeding claw, soldier,
-    artillery), the minion template and one boss.
+    marksman), the minion template and one boss.
   - **AI:** profiles Charger, Holder, Kiter, Mob, Automaton and Boss; the
     M1 scorer terms; the awareness record and Hidden rule; awareness states
-    Dormant to Wary; noticing triggers; noise and joining with warnings,
+    Dormant to Watchful; noticing triggers; noise and joining with warnings,
     the joining cap (1 per fight on floors 1–2) and the cluster budget,
     which are the M1 guards against chain-pulls.
   - **Telegraphs (the baseline):** threat-reach overlay, turn log,
@@ -3890,15 +3895,15 @@ The build fails when:
     validator (6.5).
   - **Rewards and rules:** experience on kill with shares and level
     scaling; issue gear, shared records, the one-die rule; the boss's
-    signature item and at most 1 carried weapon or armour notable on the
+    prize and at most 1 carried weapon or armour notable on the
     floor (M1's own channel split, 15.3); basic loot summary; the floor
     loot budget; `readyAt`, `turnsTaken` and kit caps; the morale **data
     fields only**; guile derived (unused until M2).
 - **M2:**
-  - **Types and ranks:** roles skirmisher, controller, leader and lurker;
+  - **Types and ranks:** roles skirmisher, hinderer, leader and lurker;
     elite rank and promotion; the M2 affixes; level shifts and tints;
     themes (8 themes of 5–7 types, 56 types, and 15 bosses; the floor-5
-    deep overlay retires and returns as Nightmare tier 3 in M3)
+    deep overlay retires and returns as Peril tier 3 in M3)
     **(change RT-5; run structure design 8.1, 12)**.
   - **AI:** the remaining profiles; Quarry, focus spread, setup, hold and
     leash; the hearing outline.
@@ -3916,7 +3921,7 @@ The build fails when:
 - **Later:** Shaken with T8 and T9; support, summoner and
   thief roles; Later affixes; the Feud template; Disarm seizure; oils;
   cursed carried items (M4 by change HL-29; agreed, Q5; heirlooms and
-  curses design 10; else here); the Iron Sleep elite record (held
+  curses design 10; else here); the Cold Iron elite record (held
   request, 7.2); multi-square bosses; committed boss signature moves
   (a scripted area marked at the end of the boss's turn, resolving at its
   next turn start, at most one per boss), pulled to M3 as boss Gambits if
@@ -3929,7 +3934,7 @@ The build fails when:
 
 Content volume: M1 = 3 types and 1 boss. M2 = 8 themes of 5–7 types (56
 types) and 15 bosses, with the pre-authorised Cut 1 and Cut 2 as the
-lever; the floor-5 deep overlay retires (Nightmare tier 3, M3). **(change
+lever; the floor-5 deep overlay retires (Peril tier 3, M3). **(change
 RT-5; client agreed 2026-11-21, Q4; run structure design 8.1, 12)**
 
 ## 22. Risks
@@ -4048,7 +4053,7 @@ the exact section it touches.
 | A-1 | 9.3, last bullet (rider strength bands) | Bands are levels 0–4, 5–8 and 9–12 |
 | A-2 | 12.1 | New `readyAt` field (default 1), counted in the unit's own turns in the current fight (`turnsTaken`, reset at each fight start). Cooldown minimum 2. Cooldowns reset to ready at every combat end. Party-facing hard-control abilities have `readyAt ≥ 2` and `cooldown ≥ 3` and are never openers (enemies 9.3). |
 | A-3 | 12.2, "Boss actions" bullet | N per round = min(1 on floors 1–2 or 2 on floors 3–5, party units). At most one at the end of any unit's turn, never after the boss's own. Never hard control (enemies 17.5). |
-| A-4 | 12.2, "Resolve… two or three visible pips per fight" | Pips, phases passed and uses belong to the boss's **life**, not the fight; cooldowns reset at combat end as for every monster. On a reset the boss returns Wary and leashed, with HP raised to the top of its current phase band (enemies 17.5). |
+| A-4 | 12.2, "Resolve… two or three visible pips per fight" | Pips, phases passed and uses belong to the boss's **life**, not the fight; cooldowns reset at combat end as for every monster. On a reset the boss returns Wary (renamed Watchful, naming pass NP-10) and leashed, with HP raised to the top of its current phase band (enemies 17.5). |
 | A-5 | 13, "Knowledge" bullet | "The monster AI reads the true state, **except that a party unit's position is known only through that monster's awareness record**" (enemies 11.2) |
 | A-6 | 13, "Open to more terms" bullet | Adds the named data-weighted terms of enemies 11.1 (approach, exposure, opportunity cost, range, target preference, focus spread, Quarry, cohesion, body-block, area spread, hold, leash) |
 | A-7 | 20, "Enemies" bullet | Answered: monster cost (enemies 10.1), behaviour after losing sight (12.1), morale (14), experience on resolution (16) |
@@ -4108,7 +4113,7 @@ committed wind-ups (13.2).
 | Confirmation that the hero has no downed state | Boss and encounter guards read "reduced to 0" | Confirmed: 0 HP ends the run (10) |
 | Whether damage on a downed companion kills it | The AI invariant "never target or aim areas at downed units" is required either way | No: a Downed unit is inert; invariant 2 is now also a core rule (11.4) |
 | A morale win counts as a win | For getting up (M-1) | Yes (11.2) |
-| **The Reprieve Phial (talisman) needs** (consumables design 24): its final leave-HP; whether it fires out of combat; the owner order of Death-warded, Last Ward, Last-Breath Charm and the phial; whether companions can die (then the phial also covers "would die") **(change CN-21)** | The save runs in the damage pipeline before HP is lowered; the 6.4 guards are computed without it (consumables design 14.4, 14.9) | Leave-HP 334‰; fires from any source, but the floors come first; owner the death and healing design, order Death-warded → phial, Last Ward and Last-Breath Charm retired; companions never die, no would-die coverage (15, 16, 11.6) |
+| **The Reprieve Phial (failsafe) needs** (consumables design 24): its final leave-HP; whether it fires out of combat; the owner order of Death-warded, Last Ward, Last-Breath Charm and the phial; whether companions can die (then the phial also covers "would die") **(change CN-21)** | The save runs in the damage pipeline before HP is lowered; the 6.4 guards are computed without it (consumables design 14.4, 14.9) | Leave-HP 334‰; fires from any source, but the floors come first; owner the death and healing design, order Death-warded → phial, Last Ward and Last-Breath Charm retired; companions never die, no would-die coverage (15, 16, 11.6) |
 
 - **Dungeon generation** (the generator content test asserts each):
   settled. Answered by the floor layout design (its 14 maps each row:
@@ -4149,7 +4154,7 @@ committed wind-ups (13.2).
 - **Heirlooms and curses:** settled in the heirlooms and curses design
   (2026-11-23; its 11). Its requests to this owner, pending: change HL-19
   (M4: the `maladyAbility` slot, 7.2; its counting, 9.2; the forecast
-  extension, 13.2) and the held Iron Sleep record (7.2). Heirlooms are
+  extension, 13.2) and the held Cold Iron record (7.2). Heirlooms are
   never picked up by enemies (15.5); cursed carriers move to M4 (15.3,
   15.9; change HL-29).
 

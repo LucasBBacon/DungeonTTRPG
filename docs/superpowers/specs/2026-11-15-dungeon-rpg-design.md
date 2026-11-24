@@ -29,6 +29,15 @@ CC-1):
 - **M1–M4** name the milestones of section 9; **Later** means after M4,
   not scheduled.
 
+Names updated by the naming pass (naming pass design, approved
+2026-11-24; NP rows listed): NP-29 (Peril tiers and Peril Rendition for
+Nightmare tiers and Nightmare Rendition; "offers" in the level-up pool;
+Calling perk; hub screen; Straggler; "Play a run code" and the "run
+code" mark; the Easier setting and Easier lamp; "Share play data"),
+with the register's Returning hire (5.9.28). Kept as written: Stairtop,
+Last Hollow, Seams, Book of Nights and "boon" for the starting boon
+(naming pass W-11).
+
 ## 1. Intent
 
 A turn-based RPG played in runs through a randomly generated dungeon. The
@@ -151,7 +160,7 @@ These would make the game a failure even if everything works.
 
 - The player builds one hero in full. **(decided)**
 - Up to 3 companions (a party of 4). One slot opens at each of camps 1–3;
-  at most one hire per camp plus one carried hire; any offer may be
+  at most one hire per camp plus one returning hire; any offer may be
   declined; one dismissal or swap per camp, at camp only. If the M2
   floor-time gate fails after the levers, the cap is 2: no new slot opens
   at camp 3, and a party below the cap there still gets a hire board.
@@ -274,7 +283,7 @@ real decision, which 5E relies on a DM to enforce.
   unlocks. **(decided)**
 - Every level offers a choice. Where the class table has nothing to offer,
   the game presents a pick-one-of-three offer drawn from a pool of feats,
-  boons and upgrades suited to the build. **(decided)**
+  offers and upgrades suited to the build. **(decided)**
 - Multiclassing is added only once the single-class paths are fun.
   **(decided)**
 
@@ -319,7 +328,7 @@ All decided.
   strength; charm unlocks use the Library's generic loot-unlock object
   (charm abilities design 4.10; change CA-21, read, M3).
 - **One starting boon.** Before a run the player picks a single earned boon,
-  such as an heirloom item or a background perk. Boons add variety and do
+  such as an heirloom item or a Calling perk. Boons add variety and do
   not stack. Starting kits get no hub peg: kit variants ship only as
   boon options; charms get no hub surface; meta-curses become one
   reserved run-modifier slot on the hub's Depth gauge, owned by the
@@ -352,7 +361,7 @@ All decided.
   boon is withdrawn or narrowed (charm abilities design 4.11, 14.2;
   change CA-20, request, agreed 2026-11-24, charm abilities Q4, M3).
 - **Difficulty ladder.** Each win unlocks an optional harder tier. From
-  M3, Nightmare tiers add kind, not stats, and the Perilous Door makes
+  M3, Peril tiers add kind, not stats, and the Perilous Door makes
   the ladder per-floor (run structure design 9.1; change RT-21, M3).
   The Perilous toggle sits on the camp door station, on Two Doors cards
   only (camp and hub design 7.6; change CH-20, read, M3); pending: the
@@ -360,33 +369,34 @@ All decided.
   (fallback: not offered there).
   Hazards escalate in kind under this rule (hazards design 6.19;
   change HZ-25, M3).
-  Bosses escalate in kind too: each boss authors a Nightmare
+  Bosses escalate in kind too: each boss authors a Peril
   Rendition, the Perilous Door uses it one tier up, and HP, damage,
   pips and thresholds never change (boss rooms design 4.14.2; change
   BR-34, M3).
-  Unlocks, the ladder and Nightmare tiers leave the loot economy
+  Unlocks, the ladder and Peril tiers leave the loot economy
   unchanged (loot economy design 6.12; change LE-19, M3).
   Events never ease a run for a losing streak: no mercy through events,
   confirmed; help for struggling players belongs in a visible difficulty
-  setting, which is a future main design and run structure decision, not
-  yet made (events design 4.4.7, 14.2; change EV-10, read, agreed
-  2026-11-22, events Q4). Pending (owed by this document with run
-  structure): until it is decided, the hub's Depth gauge keeps an unlit
-  lamp reserved for it below tier 0, and no figure substitutes for it
-  (camp and hub design 4.8, 14.2; M3).
+  setting (named Easier: "Difficulty: Easier"; naming pass NP-29),
+  which is a future main design and run structure decision, not yet made
+  (events design 4.4.7, 14.2; change EV-10, read, agreed 2026-11-22,
+  events Q4). Pending (owed by this document with run structure):
+  until it is decided, the hub's Depth gauge keeps an unlit lamp, the
+  Easier lamp, reserved for it below tier 0, and no figure substitutes
+  for it (camp and hub design 4.8, 14.2; M3).
 - **No permanent stat boosts.** Curiosity gains are run-only, and from
   M3 Curiosity Sequels and Ripening enter the drawable set through the
   unlock snapshot, never as power (events design 4.4.1, 4.5.8, 4.5.9;
   changes EV-7, EV-27, EV-28, read; M3 / M3-late).
-- **Hub.** A simple camp screen to begin with. A richer hub is out of scope
+- **Hub.** A simple hub screen to begin with. A richer hub is out of scope
   until the run itself is proven. In M2 the hub is that simple screen:
-  one static Stairtop backdrop with menu rows (Begin, Continue, Seeded
-  night, Book of Nights, Profiles, Settings, the Hearsay log), holding
-  one static figure, the Copyist, and the floor-k Lingerer vignette
+  one static Stairtop backdrop with menu rows (Begin, Continue, Play a
+  run code, Book of Nights, Profiles, Settings, the Hearsay log), holding
+  one static figure, the Copyist, and the floor-k Straggler vignette
   after a death on floor k (camp and hub design 4.8, 7.7; change CH-13,
   agreed 2026-11-23, camp and hub Q4, M2). From M3, after M2 sign-off,
   it becomes a menu-room that is never walkable, holding the hub
-  stations and up to 3 settled Lingerers (camp and hub design 4.8, 5.2;
+  stations and up to 3 settled Stragglers (camp and hub design 4.8, 5.2;
   change CH-6, a reading, agreed 2026-11-23, camp and hub Q5, M2/M3).
   Its fiction is the Stairtop, the one hollow that does not re-form
   (agreed 2026-11-23, camp and hub Q1). Hub figures give no mechanical
@@ -643,7 +653,8 @@ largely to prove it.
   `rulesVersion` match the build (seeds and validation design 4.7;
   change SV-17, read, M1).
   Open item (pending, owed by this document): the game's telemetry
-  consent setting, under which a generation defect's local bug-report
+  consent setting (the Settings row "Share play data", On/Off; naming
+  pass NP-29), under which a generation defect's local bug-report
   bundle is sent (seeds and validation design 5.5; hook, agreed
   2026-11-23, seeds Q2). Until it exists, bug reports stay local and the
   player can attach them by hand (seeds and validation design 14.2).
@@ -654,7 +665,7 @@ largely to prove it.
   hook, pending; M2).
 - **Profile save:** unlocks, boons and difficulty tier, stored separately
   from any run. The grants that change rules (difficulty tier, boons,
-  Nightmare tier) enter the run's `configHash` (seeds and validation
+  Peril tier) enter the run's `configHash` (seeds and validation
   design 4.6; change SV-12, read, field M1, live M3). From M2 it also
   holds `curiosityMemory` (version, checksum, `shownCount`, `fullShown`,
   `recentRuns`, `last`, `pendingClosure` and the rest of events design
@@ -670,7 +681,7 @@ largely to prove it.
   SV-13, SV-16, M2).
   From M2 it also holds `runHistory[]`: one record per finished run,
   personal or seeded, with `seedMode`, the result, the floor reached and
-  the code. A seeded run appears there marked seeded and advances no
+  the code. A seeded run appears there marked "run code" and advances no
   unlocks, records, codex entries or launcher memory; `recentRuns` is
   never written for a seeded run (seeds and validation design 4.7, 4.9;
   change SV-16, agreed 2026-11-23, seeds Q1, M2) (cross-document
@@ -789,7 +800,7 @@ monster in data.
 | M0 Skeleton | Solution, automated tests, command and event loop, Godot draws a placeholder 3D isometric grid and moves a unit | Does the core and display split work? |
 | M1 Vertical slice | One class, levels 1–3, one generated floor, three enemy types, one boss, basic loot, permadeath | Is the loop fun? Does the effects system hold? |
 | M2 Full run | Four classes, companions, 5 floors (change RT-1), level 10, pick-one-of-three offers, save and resume | Does a 1–2 hour run hold together? |
-| M3 Between runs | Profile (the profile file and its `curiosityMemory`, `recentRuns[].f1BossId`, `runHistory[]`, `uiMemory` and `loreMemory` fields arrive in M2: section 6.6; events design 9.1; change EV-19, agreed events Q1; cross-document comparison 2026-11-23, CC-11; camp and hub design 9.1, change CH-7), the menu-room Stairtop hub (the M2 hub is the simple screen of section 4.7; camp and hub design 4.8, 10; change CH-6), unlocks, starting boons, difficulty ladder; in-run content: Two Doors at camp 3, Omens, Seams, Nightmare tiers (run structure design 12; change RT-19, M3) | Do players come back? |
+| M3 Between runs | Profile (the profile file and its `curiosityMemory`, `recentRuns[].f1BossId`, `runHistory[]`, `uiMemory` and `loreMemory` fields arrive in M2: section 6.6; events design 9.1; change EV-19, agreed events Q1; cross-document comparison 2026-11-23, CC-11; camp and hub design 9.1, change CH-7), the menu-room Stairtop hub (the M2 hub is the simple screen of section 4.7; camp and hub design 4.8, 10; change CH-6), unlocks, starting boons, difficulty ladder; in-run content: Two Doors at camp 3, Omens, Seams, Peril tiers (run structure design 12; change RT-19, M3) | Do players come back? |
 | M4 Breadth | Species, multiclassing, more content, balance passes with the simulator | Is every run different? |
 
 M1 covers species selection only if it is trivial to include; otherwise
@@ -843,8 +854,8 @@ lore, hub form by wave) are settled in
 `2026-11-23-camp-hub-design.md`; they are no longer pending, and its
 hooks on this document are taken up in sections 4.1, 4.7, 6.6 and 9
 (camp and hub design 11, 13; changes CH-6, CH-7, CH-9, CH-13, CH-20,
-CH-24). Telemetry consent and the visible easier setting stay pending
-here (sections 6.6, 4.7).
+CH-24). Telemetry consent ("Share play data") and the visible Easier
+setting stay pending here (sections 6.6, 4.7).
 
 Starting kits (default hero kits, companion kits, kit variants, given
 names and Oddments) are settled in `2026-11-23-starting-kits-design.md`;

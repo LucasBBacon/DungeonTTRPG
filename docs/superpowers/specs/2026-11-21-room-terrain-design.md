@@ -2,6 +2,7 @@
 
 Date: 2026-11-21
 Status: Approved, 2026-11-21
+Names updated by the naming pass (naming pass design `2026-11-24-naming-pass-design.md`, approved 2026-11-24; NP-19 and the name-register rows of its section 5 that cite this document). Internal ids, record and report names are unchanged.
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model),
@@ -92,7 +93,7 @@ one directional tier worth −2 to ranged attack rolls (Q1); Furnishings
 can be Shunted, Kicked and Smashed, and Kegs burst once, but walls never
 break (Q2); contact hazards and harm squares from floor 2 always give a
 save and deal flat, previewed damage (Q3); fire burns webs away and
-lightning Conducts through water (Q4); and in M3 only, the environment
+lightning charges connected water (Charged Water; Q4); and in M3 only, the environment
 may leave a fixed, short-lived Miasma cloud that never drifts or spreads
 (Q5).**
 
@@ -112,7 +113,7 @@ N1–N14 mechanics ids**)**, and the Appendix A findings **TF** (fun),
 **Names are placeholders** until the client naming pass. Each was
 grep-checked as a whole word across the 19 approved documents. These
 have 0 hits: Clearway, Furnishing, Shunt, Smash, Kick, Keg, Overturn,
-Rough, Plank, Briar, Miasma, Remnant, Glaze, Haze, Conduct, "harm
+Rough, Plank, Briar, Miasma, Remnant, Glaze, Haze, Conduct (renamed Charged Water, naming pass NP-19), "harm
 square", "hazard face", "hazard piece", "contact hazard", "Low piece",
 "cover-giver", "interactive feature", "contact band", "harm band", "Keg
 band", heft, `terrainDigest`, `NoCheapKill`, `causedBy`,
@@ -141,7 +142,7 @@ check, with 0 hits: Bladed, "Shoot an object", `rulesKey`,
 | Flanked | Shade "Flank Sense" | "flank square" (prose) |
 | Smoke | Smoke Pellet | Haze (Later) |
 | Spill, Rime, Shard, Pall | Approved spell, flask and condition names | Miasma, Remnant |
-| Strike (an object) | Enemies 17.5 boss menu **Strike**; the Shade `strike` option and "Strike limit" | Shoot an object (M3) |
+| Strike (an object) | Enemies 17.5 boss menu **Strike** (renamed Attack by the naming pass); the Shade `strike` option and "Strike limit" | Shoot an object (M3) |
 | Spiked | Armour "Spiked Boss" property; the dropped weapons "Spiked" property | Bladed (hazard kind) |
 
 The draft names "Clear Path", "Throughway" and "spine" are merged into
@@ -191,7 +192,7 @@ TR-3, TR-4): yes from M2, none in M1.**
   Both fail the armour 11 sustained row as written (18 against +4: 35%
   becomes 25%), so armour 11 item 1 gains one positional row (TR-4). The
   −2 form is chosen because the shown AC never changes, not because it
-  passes the gate. Cover is symmetric: it helps enemy artillery too.
+  passes the gate. Cover is symmetric: it helps enemy marksmen too.
 - *Rejected:* B, cover as disadvantage; C, no cover rule.
 
 **2. Movable terrain (agreed, Q2; change TR-6, TR-7, TR-8, TR-9): yes in
@@ -247,7 +248,7 @@ floor 2 in M2, as a universal damage-only system with themed skins.**
 - *Rejected:* B, harm squares only in M3; C, condition squares only.
 
 **4. Instant combos (agreed, Q4; change TR-25, TR-26): fire burns webs
-and bedsheets away (K2), and lightning Conducts through water (K3), in
+and bedsheets away (K2), and lightning charges connected water (Charged Water, K3), in
 M2.** No timers; the combo table is closed at 5 rows (6.8). *Rejected:*
 B, burn-away only; C, neither.
 
@@ -296,7 +297,7 @@ TR-18, TR-19).**
 
 **Told plainly** (19.1; confirmed by the client on 2026-11-21): cover
 is symmetric and can raise enemy
-artillery damage; the terrain packages cost about +0.8 to +1.6 min per
+marksman damage; the terrain packages cost about +0.8 to +1.6 min per
 floor on floors already over the clock gate, held by a net rounds gate;
 the Vanguard rejection is reversed for objects; decided main 2 changes
 in M3; and the rest of the list in 19.1.
@@ -316,10 +317,10 @@ in M3; and the rest of the list in 19.1.
 | 9 | Rough (2 movement per square; costs never stack above 2) and Plank narrow ground (Acrobatics; failure stops you at the mouth) | M2 | lead's call; TR-11, TR-12 |
 | 10 | AI: `NoCheapKill` (a scorer term, 6.9); destination square value; `usesFurnishings`; universal Smash of light pieces scored by path gain | M2 | **agreed, Q3** (`NoCheapKill`) and **Q2** (monster Smash); the rest lead's call; TR-15 (requests) |
 | 11 | Boss phase (e) through phase sockets proven in both states; arena caps here, counterplay identity stays RS 13 and segment 9 | M2 | lead's call; TR-16, TR-8 |
-| 12 | Web and bedsheet burn-away; instant Conduct through water; closed 5-row combo table | M2 | **agreed, Q4**; TR-25, TR-26 |
+| 12 | Web and bedsheet burn-away; instant Charged Water; closed 5-row combo table | M2 | **agreed, Q4**; TR-25, TR-26 |
 | 13 | Remnants (Miasma only), environment-only, fixed footprint, countdown, ignite once; the round-end environment step comes to M2 for one signature Stir per F2–5 floor at most (hazards design 6.3) | M3; the Stir step M2 (gated), else M3 | **agreed, Q5**; TR-27 (decided text); narrowed by HZ-12 (**agreed**, hazards Q1) |
 | 14 | Overturn (tippable Tall Furnishings), Haul, Shoot an object, Kegs in the other themes, depth-1 chains | M3 | lead's call; TR-6, TR-28 |
-| 15 | Ownership: segment 3 owns the room-terrain system; segment 4 owns floor-scale density, drops, bile, Teetering counting and vents; segment 5 owns traps | — | lead's call; TR-1 |
+| 15 | Ownership: segment 3 owns the room-terrain system; segment 4 owns floor-scale density, drops, gall, Teetering counting and vents; segment 5 owns traps | — | lead's call; TR-1 |
 | 16 | Floor-level quotas made constructive by a reservation step; sockets carry a rules key; contact and harm saves defined; cover placed in the attack pipeline | M1 / M2 | lead's call, after the check (19.3) |
 
 ---
@@ -367,7 +368,7 @@ a path, surprising the player or spreading across the floor.**
 
 ### Non-goals
 
-- **Drop hazards, floor-wide hazard density, bile, Teetering counting,
+- **Drop hazards, floor-wide hazard density, gall, Teetering counting,
   vents, traps, locks and checks, encounter fill, loot and boss
   interiors.** Those are segments 4–12; this document hands them
   classes, caps and hooks (13).
@@ -447,15 +448,15 @@ Hide, and each hit was read in context.
   - 10.3 landing; 10.4 no single failed save or entry lethal to the
     hero;
   - verb-sourced movement (weapons 7.2 rule 4): the weapon verbs, verb
-    signatures, the shield bash's Push, Bull Rush (AR-49, AR-52) and
+    signatures, the shield bash's Push, Bowl Over (AR-49, AR-52) and
     Empower; the Arcanist's Gust and Reel count as verb-sourced for
-    collisions (ARC-7). Shockwave, Squall (Arcanist 8.2, 8.3) and Give
+    collisions (ARC-7). Upheaval, Squall (Arcanist 8.2, 8.3) and Give
     Ground (Herald) are non-verb.
 - **Hazards:**
   - conditions 11.2: squares apply minor or major conditions only;
   - 11.3: every harmful-condition square, and every known armed trap, is
     a hazard;
-  - 11.5: the M2 square set is water, web, fire, oil, bile (agreed);
+  - 11.5: the M2 square set is water, web, fire, oil, gall (agreed);
   - 11.6: source `environment`.
 - **Budget:**
   - conditions 16 and 18.1: 32 conditions in M1 + M2, full;
@@ -533,7 +534,7 @@ Each is met in section 14.
 | O7 | Wrecker walls and edges near main-path fights; value by theme hazard density | Vanguard 8.3, 18; FL 13 |
 | O8 | Hazard edges and crossable hazards from floor 2 (Ledgewalker, Leaper) | trinkets 23 |
 | O9 | Boss arena line-of-sight blockers and the counterplay-feature rules | enemies 17.5, 25 |
-| O10 | Lurker hide spots (Gaol cots, Silk shelves, Wake coffins) | enemies 25; RS 8.3, 8.7; FL 7.2 |
+| O10 | Lurker hide spots (Gaol cots, Archive shelves, Wake coffins) | enemies 25; RS 8.3, 8.7; FL 7.2 |
 | O11 | Choir and Carnival entry caps | RS 8.6, 8.8; FL 13 |
 | O12 | Supper bays with no two consecutive table layouts alike | FL 7.8 |
 | O13 | Open-room Cleave and reach space; corridor and guard-post lines | weapons 26; FL 6.4 |
@@ -560,7 +561,7 @@ Each is met in section 14.
 | TT13 | DEP-A1 against the deliberately dry Supper | Interactive features count (TR-21). Supper braziers, tureen and carving face close the floor-4 gap |
 | TT14 | Prop interactions against the clock | Combat only; verbs on hover, or as a chip only when they pay off; a net rounds gate |
 | TT15 | Dressing props draw from the display stream with no rules effect | Every object on a walkable square is a rules piece from the core `terrain` stream (TR-20, TR-17) |
-| TT16 | Verb-only pushes (Gust, Reel, Push, Hook, Bull Rush) deal no collision damage, so terrain gives them no payoff | A failed save against a contact hazard deals the collision band, typed, even for verb-only pushes. Capped per action (TR-10) |
+| TT16 | Verb-only pushes (Gust, Reel, Push, Hook, Bowl Over) deal no collision damage, so terrain gives them no payoff | A failed save against a contact hazard deals the collision band, typed, even for verb-only pushes. Capped per action (TR-10) |
 
 ### 3.4 Terms
 
@@ -585,7 +586,7 @@ Each is met in section 14.
 | **Socket** (terrain) | A square or group in a layer that a piece or patch of a fixed class may occupy; distinct from FL's Portal sockets and enemies 10.4 slots |
 | **Phase socket** | An arena socket that changes state on a boss phase (e), proven in both states (6.11) |
 | **Interactive feature** | For DEP-A1: a condition square, a contact hazard, a harm square or a Keg (TR-21). **Pending request (segment 4 asks; change HZ-31; M2; hazards design 6.15, O13, 18):** segment 4's Stirs, Cords, Voids and vents also count as interactive features for DEP-A1 and KP2. This document owns the definition; nothing changes until this owner rules (cross-document comparison 2026-11-23, CC-7) |
-| **Environment damage** | Damage from a collision, a contact hazard, a harm square, a Keg burst, a Conduct or (M3) an ignition; source `environment`; rider-free (6.5.2) |
+| **Environment damage** | Damage from a collision, a contact hazard, a harm square, a Keg burst, Charged Water or (M3) an ignition; source `environment`; rider-free (6.5.2) |
 | **Collision band / contact band / harm band / Keg band** | The flat damage values of 11.1: collision 2/3/3 by the pusher's level band (the Vanguard design's indexing, kept); contact 3/4/4 and harm 2/3/3 by the level band of the floor's lowest expected level; Keg 4/6/8 by floor (3.4 indexing is a lead's call after the check) |
 | **Hazard-edge save** | Any Reflex save against forced movement into a hazard: the 10.2 save, the contact save and the harm-square save (6.5.2). Every rule that reads "hazard-edge save" reads all three |
 | **Heft** | A Furnishing's Athletics difficulty: light 8, heavy 12 *(illustr.)* |
@@ -700,7 +701,7 @@ call; stands as written)**.
 | Obstacle-hazard branch: failure = contact damage; success = ordinary obstacle stop, no Teetering | balance and consistency critiques | Honest change text; RT-14 decoupled; Brink not inflated |
 | `NoCheapKill` only, phrased as "does not prefer" | B; numbers pass | Removed every residual environment hero down |
 | One environment damage instance per unit per action | balance critique | One cap instead of many |
-| Web burn-away and Conduct | C, B | Silk and Choir Laws on the map; cheap and bounded **(agreed, Q4)** |
+| Web burn-away and Charged Water | C, B | Archive and Choir Laws on the map; cheap and bounded **(agreed, Q4)** |
 | `causedBy` kill credit; boss phase sockets | new-mechanics; A | Fair credit; reconciles enemies 17.5 |
 | Clearway ≥ 2 wide in fight rooms; universal monster Smash of light pieces | balance critique | No party-built single-file funnels the AI cannot answer |
 | Cluttered rooms ≤ 30%; DEP-A1 3–6 ring rule | numbers pass | Wrecker parity; DEP-A1 |
@@ -831,10 +832,10 @@ rule 6's charged exclusion is extended to cover (TR-4, armour owner;
 | System | Effect |
 |---|---|
 | Symmetric line of sight (main 4.3, decided) | Untouched: cover is roll maths, never sight |
-| Ranged balance | Every toy arm keeps range-band share within ±25%. Launcher damage stays ≥ 1.01× the greatsword reference, far from the 75% Precision line (10). Cover is symmetric: it can **raise** enemy artillery damage by 5–15%, because covered artillery lives longer. **Told plainly:** cover is not a party buff by default |
+| Ranged balance | Every toy arm keeps range-band share within ±25%. Launcher damage stays ≥ 1.01× the greatsword reference, far from the 75% Precision line (10). Cover is symmetric: it can **raise** enemy marksman damage by 5–15%, because covered marksmen live longer. **Told plainly:** cover is not a party buff by default |
 | Shade | Hide unchanged: it still needs a line-of-sight break. "Hide behind cover" rejected for M2 (a free Vanish for every class, CL-12c; it would also help lurkers); Later with NM-9 Gloom. A Hide attempt next to Low cover greys out with "Needs a tall piece to hide" |
-| AI | No new term. Exposure reads the resolve preview, so Kiters and artillery seek cover and Raiders flank |
-| Arcanist and Herald | Areas and saves ignore cover: the anti-artillery role, with no new rule |
+| AI | No new term. Exposure reads the resolve preview, so Kiters and marksmen seek cover and Raiders flank |
+| Arcanist and Herald | Areas and saves ignore cover: the anti-marksman role, with no new rule |
 | Pavise | Becomes designable (Later, armour owner) |
 | Shieldwall and reaction AC | The larger of cover and the reaction bonus applies (CV4); never both |
 
@@ -848,7 +849,7 @@ rule 6's charged exclusion is extended to cover (TR-4, armour owner;
 - **every enemy start socket that is Covered from any party-half square
   has a flank square** that is not Covered against it, reachable in ≤ 6
   path squares from the Clearway *(illustr.)*. Every start socket is
-  treated as possibly artillery or a Kiter, because who stands on it is
+  treated as possibly a marksman or a Kiter, because who stands on it is
   decided after terrain (enemies 10.5, segment 6). **Start sockets
   (reading, change EP-5):** this rule and the floor-1 rule below range
   over the start sockets segment 6 derives from FL `startZone` squares
@@ -884,7 +885,7 @@ rule 6's charged exclusion is extended to cover (TR-4, armour owner;
 | **Harm square** (walkable; damage on entry) | no | no | no | never | ignored while crossing | floor fill | M2, floors 2–5 **(agreed, Q3)** |
 | **Rough square** | costs 2 to enter | no | no | — | ignored | floor fill | M2 |
 | **Plank** (narrow ground) | Acrobatics on entry | no | no | — | — | floor fill | M2 |
-| Existing condition squares (water, web, fire, oil, bile, bedsheet web) | no | no | no | per conditions 11 | per 11.2 | existing | M2 (conditions 11.5) |
+| Existing condition squares (water, web, fire, oil, gall, bedsheet web) | no | no | no | per conditions 11 | per 11.2 | existing | M2 (conditions 11.5) |
 | **Remnant** (Miasma) | no | no | no | countdown, ignition | ignored while crossing | low translucent volume | M3 **(agreed, Q5)** |
 
 **Rules for every class:**
@@ -954,7 +955,7 @@ Inside FL footprints (rectangle, 1×2 bay, L; near-convex;
 | Split room | A Low or Tall line with 2 gaps of 1–2 |
 | Island | A dry group in water (Choir; the RS 8.6 dry-island rule) |
 | In-room choke | A gap of width 1–2 between pieces. At most 1 per fight room; never within 3 of the landing or on the party-entry axis within 3; never on the Clearway |
-| Lane | A clear strip ≥ 3 wide and ≥ 6 long *(illustr.)*. Required in every `RoomMix` open room (Cleave, reach, Skewer; weapons 26) |
+| lane | A clear strip ≥ 3 wide and ≥ 6 long *(illustr.)*. Required in every `RoomMix` open room (Cleave, reach, Skewer; weapons 26) |
 | Nook | A floor square with Tall pieces or walls on ≥ 3 sides: a Hide spot and a lurker socket |
 | Dais or stage | Floor material only (FL 8.1); never a piece |
 | Way round | Every Tall cluster and every Low line leaves a route round it of ≤ 6 squares, so shooters can always be reached |
@@ -967,7 +968,7 @@ Clutter share = blocked interior squares ÷ interior squares.
 |---|---|---|---|---|---|---|---|---|
 | Fight, open (`RoomMix` ≥ 11×11) | 3–8% | 0–2 | 2–4 | 1–2 | ≤ 1 | by depth | ≤ 2 | Clear 5×5 core and one lane |
 | Fight, standard | 8–15% | 1–3 | 3–6 | 2–3 | ≤ 1 (Carnival ≤ 2) | by depth | ≤ 4 | — |
-| Fight, cluttered (Silk, Supper, Heart lean) | 15–22% | 2–5 | 4–8 | 2–3 | ≤ 1 (Carnival ≤ 2) | by depth | ≤ 4 | ≤ 30% of a floor's fight rooms |
+| Fight, cluttered (Archive, Supper, Heart lean) | 15–22% | 2–5 | 4–8 | 2–3 | ≤ 1 (Carnival ≤ 2) | by depth | ≤ 4 | ≤ 30% of a floor's fight rooms |
 | Guard post | standard band | ≥ 1 | ≥ 2 on the defenders' side | 0–1 | 0, never within 3 of the Portal | by depth | ≤ 2 | — |
 | Elite room | standard band | ≥ 1 per half | ≥ 2 per half | 1–2 | ≤ 1 | by depth | ≤ 2 | Never on Grille-vantage sight lines (FL 6.5) |
 | Forecourt (F2–5) | 3–8% | 0–2 | 2–4 | 0–1 | 0 | 0 | 0 | The approach stays calm |
@@ -1023,7 +1024,7 @@ asserts nothing it has not proven (FL-15).
   EP-8; M2; encounter placement design 6.6.1, 6.8.3). Segment 6's
   Terrain Pairings also keep Kegs ≥ 2 from the entry lane (change EP-21;
   M2; encounter placement design 6.6.8). **Extended by VP1 (change HZ-3):**
-  no condition patch or bile within 2 of `partyEntrySquares`; no Void,
+  no condition patch or gall within 2 of `partyEntrySquares`; no Void,
   vent mouth, Stir footprint or Cord within 3 (hazards design 6.2.4).
 - **KP6.** Kegs ≥ 2 from each other.
 - **KP7.** Plank and harm-square shortcuts end within 2 of an enemy
@@ -1177,7 +1178,7 @@ PhaseSocket { socket: Socket, phase, off: PieceKind|SquareClass|none, on: PieceK
 **Plank (M2; TR-12):**
 - A 1-wide line of 2–5 floor squares, drawn coplanar (LG18), flanked by
   hazard squares, harm squares, Rough or Low pieces: a pew-back walk, a
-  plank over bile, a dry causeway, a ruler laid flush.
+  plank over gall, a dry causeway, a ruler laid flush.
 - It shortens a route by ≥ 4 *(illustr.)*, always beside a free route,
   and ends within 2 of an enemy cover line or flank square (KP7), so it
   is a tactical choice, not a pathing tax.
@@ -1224,7 +1225,7 @@ fog.
 **Furnishings move only by verbs, with one M3 exception (change HZ-18;
 agreed, hazards Q3; M3):** the environment may move a Furnishing along
 a pre-proven rail as an announced Stir act, held while occupied (the
-Returns Trolley; a bound Cord's Kick), and a Stir's Overturn part may
+Returns Trolley; a bound Cord's Knock), and a Stir's Overturn part may
 tip a tippable Tall Furnishing along a pre-proven strip (6.3.7; hazards
 design 6.3, 6.3.4, 7.6).
 
@@ -1232,7 +1233,7 @@ design 6.3, 6.3.4, 7.6).
 Low piece face or wall socket with exactly one verb, used by
 **Operate**, a new ability 7.2 object action (one action, from an
 adjacent square, no check, noise 4 *(illustr.)*). In M2 bound Cords
-only re-time their Stir (Now, Hold); Reverse, Flip, Kick and the
+only re-time their Stir (Now, Sustain); Reverse, Flip, Knock and the
 standalone Cords are M3. **Pending request (the ability owner rules):**
 a unit that starts its turn adjacent to a Cord may Operate it as its
 bonus action (hazards design 6.3.4).
@@ -1355,7 +1356,7 @@ core cost.
   - **a burst never triggers another burst in M2**;
   - Kegs are sturdy in M2, so they cannot be walked into a pack;
   - ≤ 2 per Carnival room, ≤ 1 per Gut room (the sac counts toward the
-    Gut's "≤ 2 acid sources per encounter"; bile squares never count,
+    Gut's "≤ 2 acid sources per encounter"; gall squares never count,
     change HZ-5, hazards design 6.5);
   - spacing and distances per KP5–KP6;
   - none on floor 1.
@@ -1403,7 +1404,7 @@ guarantees proven by V9; at runtime these two rules hold their place.
 
 A Furnishing may end on a trap's trigger square, known or not, and
 never hides a known trap's marker. **Narrowed by segment 5 (change
-TL-14; M2): weighted plates.** A Furnishing whose Shunt, Kick or
+TL-14; M2): pressure slabs.** A Furnishing whose Shunt, Kick or
 Overturn **ends** on a plate or trapdoor springs it, with the mover as
 causer; squares it only passes over spring nothing; wires and glyphs
 ignore pieces; Kegs stay sturdy. So one act springs at most one trap
@@ -1442,7 +1443,7 @@ the option out with "Would block the way" or "Hazard".
     to objects; it uses the attack roll stream;
   - it ends Hidden (it is an attack); noise 6;
   - monsters triggering Kegs this way fall under `NoCheapKill` (6.9).
-- **M3:** Kegs in the Choir, Silk, Supper and Heart; chains of depth 1
+- **M3:** Kegs in the Choir, Archive, Supper and Heart; chains of depth 1
   in `furnishingId` order.
 - **Rejected:** carrying, stacking, pulling into a pack, and party
   throwing (weapons 9.3; stat model 6; BG3). Hurl is Later at most, as
@@ -1456,7 +1457,7 @@ the option out with "Would block the way" or "Hazard".
   - collision band once, only with a non-verb part (Battering Force
     excepted);
   - the 3-square sum per hit; never provokes;
-  - Rooted, Restrained and Anchored are not moved.
+  - Tangled, Restrained and Anchored are not moved.
 - **A unit forced into a Furnishing or Low piece:** it stops and
   collides as with any obstacle. A Furnishing with `fragileToCollision`
   breaks (a Keg bursts); the piece is never moved (no carom).
@@ -1471,10 +1472,10 @@ the option out with "Would block the way" or "Hazard".
 - **One environment damage instance per unit per action** (TR-13;
   **agreed, Q3**). A unit takes no more environment damage from a single
   action than its largest single instance would deal: collision,
-  contact, harm-square entry, Keg burst, ignition (M3) and Conduct.
+  contact, harm-square entry, Keg burst, ignition (M3) and Charged Water.
   - **The top-up rule (lead's call, after the check).** Instances arise
     in sequence (a collision at step 10, then a broken piece, a Keg
-    burst, a Conduct), so damage is never deferred to the end of the
+    burst, Charged Water), so damage is never deferred to the end of the
     action. The first environment instance on a unit in an action
     applies in full. Each later one deals max(0, its final amount − the
     environment damage that unit has already taken this action), where
@@ -1496,7 +1497,7 @@ the option out with "Would block the way" or "Hazard".
     applications and trap damage (traps are segment 5's and keep their
     own lethality rules, conditions 11.6; kept by TL-18). A piece's own
     collision instance is unaffected by a spring; when one act both
-    collides and springs a weighted plate, both go through EnvRound in a
+    collides and springs a pressure slab, both go through EnvRound in a
     fixed order, collision first, then the spring (change TL-14; M2;
     traps and locks design 6.7).
   - **Setup payouts are not environment instances.** Oiled's fire
@@ -1536,7 +1537,7 @@ One glyph per class; themes reskin the fill.
 | **Bladed hazard piece / face** | Non-walkable obstacle; piercing or slashing (bludgeoning for the Choir's fallen bell) | Spike rack, knife wheel, grinding gears, glass rack, molar face, nib rack, pincushion (needles flat) |
 | **Hot hazard piece / face** | Non-walkable obstacle; fire (lightning for the storm-glass pipe, acid for the Gut's acid-scald fold) | Brazier, plate-warmer, boiling tureen or cauldron, stove, lamp sconce, fireplace grate |
 | **Harm square** | Walkable; damage on entry; a hazard | Thorny vines (the client's ask: the Heart's thorn-rose vines), broken glass and bottles, shattered crystal, bone shards, spilled nibs |
-| Existing condition squares | Walkable; conditions 11.2 | Water, web, fire, oil, bile, bedsheets |
+| Existing condition squares | Walkable; conditions 11.2 | Water, web, fire, oil, gall, bedsheets |
 | Drop hazards | Segment 4: **Void** squares, non-walkable, crossable by Jumping and Flying (change HZ-9; M2 (gated), else M3; hazards design 6.4) | Chasm, shaft, open trapdoor; deep water as the Drowned Crypt Void |
 
 **Contact hazard** means a hazard piece or a hazard face.
@@ -1577,19 +1578,19 @@ save. TR-10 adds this as a new obstacle-hazard branch of 10.2; it is
     expected level *(illustr.)*, and never less than the collision band
     the success would have dealt.
     Non-verb sources include Shove, kit and Technique pushes, Ram,
-    Domino, Give Ground, Shockwave, Squall, Jostle, Heave and Barge;
+    Domino, Give Ground, Upheaval, Squall, Jostle, Heave and Barge;
     Battering Force counts its move as non-verb for this choice, as it
     does for collisions;
   - a purely verb-sourced push (the weapon verbs Push and Hook and their
-    signatures, the shield bash's Push, Bull Rush, Empower effects, and
+    signatures, the shield bash's Push, Bowl Over, Empower effects, and
     the Arcanist's Gust and Reel) deals the **collision band**, typed: 2
     / 3 / 3. This is the TT16 payoff, a second named exception class
     beside Battering Force (weapons 7.2 rule 4; TR-10).
-  - **New lead's call:** the proposal listed Shockwave and Squall among
+  - **New lead's call:** the proposal listed Upheaval and Squall among
     the verb-only pushes. The Arcanist design (8.2, 8.3) makes both
     non-verb ("collisions, hazard edges, Teetering"), so they take the
     contact band, under the area cap below.
-- **Area cap:** an area-shaped forced movement (Give Ground, Shockwave,
+- **Area cap:** an area-shaped forced movement (Give Ground, Upheaval,
   Squall, an M3 blast) gives the save to at most **2 units per action**
   **(lead's call, after the check, on the order):** in the fixed square
   order of the moved units' **starting** squares, the first 2 units
@@ -1646,7 +1647,7 @@ Harm squares are squares, so it does.
 
 | Side | Means |
 |---|---|
-| Party | Shove; weapon Push and Hook; shield bash; Bull Rush; Wrecker Ram, Domino, Battering Force; Arcanist Gust, Reel, Shockwave, Squall; Herald Give Ground; companion Jostle, Heave, Barge; Attack Shunt and Kick (collision; Prone) |
+| Party | Shove; weapon Push and Hook; shield bash; Bowl Over; Wrecker Ram, Domino, Battering Force; Arcanist Gust, Reel, Upheaval, Squall; Herald Give Ground; companion Jostle, Heave, Barge; Attack Shunt and Kick (collision; Prone) |
 | Enemies | Kit Shove users; the Holder ("shoves toward hazards", M2, now including contact hazards); Carnival Strongmen toward fire; one visible terrain-using enemy per F2–5 theme (6.9) |
 | Bosses | Authored, forecast signatures only, inside the 3-square cap and the edge save. Bosses are pushed into hazards like anyone else and are `noDrop` (segment 4); no `fixedInPlace` exception: a `chain(n)` leash limits a unit's own movement only, never forced movement (change BR-14; boss rooms design 4.6) |
 | Environment | M3 powder-keg blast push 1 (non-verb), if adopted from Model B's later catalogue |
@@ -1702,7 +1703,7 @@ So a refusal costs the same fallback drop with or without harm squares.
 
 - **No hazards of any kind** in the base game. M3 Landmark ticks are
   not hazards (no damage, condition or unit movement), so this stands
-  (change HZ-19; hazards design 6.1). **Exception at Nightmare tier 2+
+  (change HZ-19; hazards design 6.1). **Exception at Peril tier 2+
   only (change HZ-25; agreed, hazards Q4; M3):** each floor-1 theme
   gains one damaging hazard package (the Gaol Treadwheel; the Kennel's
   staked pits with the Painted Hunt, the Stampede replacing the Painted
@@ -1714,7 +1715,7 @@ So a refusal costs the same fallback drop with or without harm squares.
   visible ember tell. This satisfies RS pillar 1 ("if it looks like it
   matters, it matters") without breaking RT-20 **(told plainly** to the
   trinkets owner: floor 1 still has no hazard edges; TR-29**)**. At
-  Nightmare tier 2+ only, the stove is promoted to a Hot piece for the
+  Peril tier 2+ only, the stove is promoted to a Hot piece for the
   Treadwheel and floor 1 gains hazard edges (HZ-25; 7.2).
 - **Teaching room (KP8):** one `lessonTag` fight room per floor-1 theme
   authors a light piece in line with a lone enemy, so that an Attack
@@ -1737,7 +1738,7 @@ replacing this section's earlier suggestion:
 - a non-elite monster that falls is removed and defeated (`voidFall`,
   paid as a kill); elites and group leaders **Clutch** the edge once
   per fight; bosses are `noDrop`;
-- a party unit **Dreamfalls**: it takes the fall band per hazards
+- a party unit **Freefalls**: it takes the fall band per hazards
   design 6.4 (the contact band, or the harm band where its 6.11 item 5
   requires it, typed by the Void's skin; cross-document comparison
   2026-11-23, CC-93), which can never take it below 1 HP (the FallFloor), and is
@@ -1770,14 +1771,14 @@ Otherwise the legal M2 lingering experience is **one package**:
   vines, 7.1; never growing) **(agreed, Q3)**;
 - one-shot Kegs (Carnival oil, Gut gas sac with Poisoned) **(agreed,
   Q2)**;
-- **one gas-aura monster each in the Gut, Silk and Heart** (a Gut
-  spore-bloat, a Silk mildew moth, a Heart sleeping-draught nurse). The
+- **one gas-aura monster each in the Gut, Archive and Heart** (a Gut
+  spore-bloat and an Archive mildew moth; the Heart example is left to the enemies owner). The
   Supper, whose 6 also holds Poisoned, is left out because Poisoned is
   its RT-14 fallback drop. Unit
   auras are legal under ability 8.4; this is a request to the enemies
   owner (TR-15);
 - boss phase sockets (6.11);
-- web and bedsheet burn-away, and Conduct (6.8) **(agreed, Q4)**.
+- web and bedsheet burn-away, and Charged Water (6.8) **(agreed, Q4)**.
 
 **M3 Remnants (agreed, Q5).** Only after the M2 rider and layer reports,
 the stat model 2 gate "until riders and layers are proven". **New lead's
@@ -1790,8 +1791,8 @@ report holds Remnants back and the client is told.
 
 | Rule | Value |
 |---|---|
-| Sources | Environment only: a gas Keg's burst (M3 Silk ink cask, Gut sac upgrade, Heart dust pillow), boss phase (e), segment-4 vents (struck vents emit when struck, `causedBy` the triggering unit; a breathing vent is its room's one Stir, `causedBy` `environment` or the Cord's operator; change HZ-16, hazards design 6.7). Never party abilities, monster at-wills or flasks |
-| Kind | **Miasma only** (gas, spores, ink fumes, sleeping dust): `onEnter` and `onTurnEnd`, Fortitude save or Poisoned. Only in themes whose 6 holds Poisoned (Silk, Gut, Heart; the Supper only if RT-14 is ruled "does not count") |
+| Sources | Environment only: a gas Keg's burst (M3 Archive ink cask, Gut sac upgrade, Heart dust pillow), boss phase (e), segment-4 vents (struck vents emit when struck, `causedBy` the triggering unit; a breathing vent is its room's one Stir, `causedBy` `environment` or the Cord's operator; change HZ-16, hazards design 6.7). Never party abilities, monster at-wills or flasks |
+| Kind | **Miasma only** (gas, spores, ink fumes, sleeping dust): `onEnter` and `onTurnEnd`, Fortitude save or Poisoned. Only in themes whose 6 holds Poisoned (Archive, Gut, Heart; the Supper only if RT-14 is ruled "does not count") |
 | Footprint | Fixed at creation, ≤ radius 1 (9 squares), **clipped** off walls, pieces, condition squares, harm squares, Portal squares, the Clearway, `fleeExit` and in-room chokes. **Never drifts, spreads or grows** |
 | Duration | Integer countdown: `roundsLeft` = 2 at creation *(illustr.)*. A new **round-end environment step** (from M2 (gated) for Stirs only, HZ-12) runs after the last turn's turn-end step (conditions 5.4) and before the next round starts; it decrements every Remnant in `createdSeq` order, skips Remnants created this round, and removes any at 0. Shown as a number on the glyph. All Remnants end when combat ends **(lead's call, after the check)** |
 | Stacking | ≤ 1 per room. A new one from a **different** `sourceId` fails if one exists, and the preview says so; one from the **same** `sourceId` refreshes `roundsLeft` to full and never past it |
@@ -1815,7 +1816,7 @@ this cap, reach 1, exactly its duration, no cascades (TN8).
 | Growing vines | Rejected | Static harm squares instead |
 | Party abilities or flasks that create terrain | Rejected | Ability 8.4; consumables 12, 16; the Arcanist's "Never" |
 | Outpour (breaking a piece creates squares) | Rejected | Reverses decided main 2 in M2 for little gain over Kegs |
-| Mist (Chilled cloud) | Deferred | Low fun, readability cost; revisit if the Choir or Supper reports need it |
+| Fog (Chilled cloud) | Deferred | Low fun, readability cost; revisit if the Choir or Supper reports need it |
 | Haze (smoke that blocks sight) | Later, with NM-9 Gloom | Moves the Shade's Hide-rate parity; the Shade rejected smoke clouds; RS 7.6 refuses light mechanics in M2 |
 | Briar (harm square applying Bleeding) | M3, Kennel; its own client question then | Touches RS 6.3, 8.4 "deliberately dry", RT-20 and the 11.2 table (19.2) |
 | Ice | Never in the Supper (RS 8.9) | **Glaze** (forced movement entering it slides 1 more square, re-triggering, inside the 3-square cap; no condition) is offered for a future frost theme, M3+ |
@@ -1840,12 +1841,12 @@ this cap, reach 1, exactly its duration, no cascades (TN8).
 |---|---|---|---|---|---|
 | K1 | Fire area or fire part ≥ 1 | Oil square | Burns to plain floor; Oiled payout on the unit | existing | settled (11.4) |
 | K2 | Same fire trigger | Web or bedsheet square | Burns to plain floor; a unit Restrained by that web is freed. No timer, existing code | M2 | **agreed, Q4**; TR-25 |
-| K3 | Lightning part on a unit standing in water | Connected water | **Conduct:** every other unit on water squares orthogonally connected to it within path 3 takes the lightning part, rider-free, cap 6 extra units. Instantaneous; no square changes. **Never starts from a monster at-will.** It follows ability 8.2: an at-will's or a selective cast's Conduct skips the caster's allies, and it **never reaches the caster**. Counts in the enemies 6.4 guards and the Choir lightning spike row. Details below the table | M2 | **agreed, Q4**; TR-26 |
+| K3 | Lightning part on a unit standing in water | Connected water | **Charged Water:** every other unit on water squares orthogonally connected to it within path 3 takes the lightning part, rider-free, cap 6 extra units. Instantaneous; no square changes. **Never starts from a monster at-will.** It follows ability 8.2: an at-will's or a selective cast's Charged Water skips the caster's allies, and it **never reaches the caster**. Counts in the enemies 6.4 guards and the Choir lightning spike row. Details below the table | M2 | **agreed, Q4**; TR-26 |
 | K4 | Fire area | Keg | Bursts it (6.3.5) | M2 | **agreed, Q2**; TR-9 |
 | K5 | Fire area or fire part | Miasma | Ignition (6.6), vent Remnants included (HZ-16; hazards design 6.7) | M3 | **agreed, Q5**; TR-27 |
 
-**Conduct in detail (lead's call, after the check):**
-- one Conduct per action per lightning source; a lightning area that
+**Charged Water in detail (lead's call, after the check):**
+- one Charged Water event per action per lightning source; a lightning area that
   strikes several units in water starts it from each struck unit, in
   unit order, as one event;
 - recipients are units on connected water that the triggering area did
@@ -1854,8 +1855,8 @@ this cap, reach 1, exactly its duration, no cascades (TN8).
   weakness; each recipient applies its own weakness (Soaked), then
   halves, rounding down;
 - a unit already hit by the same event's Soaked arc (conditions 18.6) is
-  not Conducted to as well; the arc resolves first;
-- **told plainly:** Conduct is the "conducting water" that stat model 2
+  not reached by Charged Water as well; the arc resolves first;
+- **told plainly:** Charged Water is the "conducting water" that stat model 2
   held back "until riders and layers are proven"; it arrives in M2,
   before that gate, because it is instantaneous and makes no square
   (TR-26).
@@ -1866,7 +1867,7 @@ this cap, reach 1, exactly its duration, no cascades (TN8).
 3. Keg bursts, in `furnishingId` order; each is a separate area whose
    own K1 and K2 effects apply to squares not yet processed this action
    (each square changes at most once per action);
-4. Conduct (K3), as above;
+4. Charged Water (K3), as above;
 5. setup payouts (Oiled) with the instance that triggered them.
 
 Bounds:
@@ -1896,12 +1897,12 @@ creates a square kind outside its theme's home set.
   environment damage scores 0 and the candidate gets no kill or down
   bonus for that hero. The candidate stays in the list and is still
   chosen if it wins on its other terms. It applies to non-boss monsters
-  and to every trigger they cause: push, Shunt, Kick, Keg and Conduct.
+  and to every trigger they cause: push, Shunt, Kick, Keg and Charged Water.
   **Pending request (change TL-16; the enemies owner rules; M2):**
   segment 5 extends it to trap springs a monster causes, with monster
-  pushes and Shunts scoring only traps the party has Revealed (traps
+  pushes and Shunts scoring only traps the party has Found (traps
   and locks design 6.8). Nothing changes until that owner rules.
-- **`usesFurnishings` kit tag** (Strongman, Fire-Eater, Glutton, a Gaol
+- **`usesFurnishings` kit tag** (Weightlifter, Fire-Eater, Glutton, a Gaol
   warden brute, Gut Ooze *(illustr.)*): Attack Shunt, Kick and Smash of
   heavy pieces, valued by the existing forced-movement, collision and
   area terms. Monsters never Move-Shunt to barricade: a one-step scorer
@@ -1918,7 +1919,7 @@ creates a square kind outside its theme's home set.
   trigger counts as an attack in the intent read and in focus spread.
 - **Holder:** "shoves toward hazards" includes contact hazards.
 - **One visible terrain-using enemy per F2–5 theme**, with a telegraphed
-  intent (a Strongman Shunts a crate at the backline; a Glutton Kicks a
+  intent (a Weightlifter Shunts a crate at the backline; a Glutton Kicks a
   trolley; a Fire-Eater breathes on a Keg; a Gut Ooze shoves toward
   molars). **M3 (change EP-21; on the TR-15 ruling):** segment 6's
   Terrain Pairings seat the terrain-using enemy by its Furnishing; the
@@ -1939,10 +1940,10 @@ creates a square kind outside its theme's home set.
 | Vanguard: Wrecker | Contact hazards and Furnishings multiply collision partners; Ram into a brazier; Brink beside harm and condition squares; Battering Force against faces | `HewCeiling` with the contact term below, run with observed `collisionRate` and `contactRate` per theme (Ram at level 5+ reaches 450–496‰ in cluttered rooms on the toy); KP3 cap; `TeeteringUptimeOnBosses` ≤ 25% of boss turns *(illustr.)*, with the lever "bosses steady at turn start" held in reserve (19.2) |
 | Vanguard: others | Low lines to hold; Shieldwall's reaction AC replaces cover (CV4) | Doorway holds gain no cover (Portal squares) |
 | Shade | Tall nooks as Hide spots; cover at range; lurker sockets; "Needs a tall piece to hide" | Hide-spot band KP4; `HideSpotsPerRoom` against `hideSuccess` 700‰; the Shade yardstick re-run |
-| Arcanist | Areas and saves ignore cover (the anti-artillery role); Gust and Reel pay the typed collision band against contact hazards, Shockwave and Squall the contact band; Keg ignition; K2 burn-away; Conduct | Gust contact counted in the at-will rider bound (engine); area cap 2, one shared counter across contact, harm and Void squares (HZ-9; cross-document comparison 2026-11-23, CC-90); DEP-A1 by "interactive feature"; the solo floor-1 down rate with the adopted cover arm; `ArcanistComboShare` |
+| Arcanist | Areas and saves ignore cover (the anti-marksman role); Gust and Reel pay the typed collision band against contact hazards, Upheaval and Squall the contact band; Keg ignition; K2 burn-away; Charged Water | Gust contact counted in the at-will rider bound (engine); area cap 2, one shared counter across contact, harm and Void squares (HZ-9; cross-document comparison 2026-11-23, CC-90); DEP-A1 by "interactive feature"; the solo floor-1 down rate with the adopted cover arm; `ArcanistComboShare` |
 | Herald | Give Ground into hazards (capped at 2 contacts per action); saves ignore cover; Frighten near hazards pins routers | Give Ground's "tool, not a lean" budget |
 | Companions | Shunt like any unit; Jostle, Heave and Barge are non-verb and collide | Prop verbs never offered on companion turns unless the player opens the target |
-| Launcher users | Take cover against monster artillery; lose ~13–25% against covered targets | Precision 75% line; damage-taken veto ≥ 50%; launcher family floor ≥ 60% |
+| Launcher users | Take cover against monster marksmen; lose ~13–25% against covered targets | Precision 75% line; damage-taken veto ≥ 50%; launcher family floor ≥ 60% |
 
 **`HewCeiling` with contact (lead's call, after the check; change
 TR-30).** Vanguard 6.4 rule 8 is a static formula, so "re-run counting
@@ -1972,8 +1973,8 @@ collision, the per-use damage for each hostile it can move becomes:
 Segment 3 sets **caps and kind rules only**. The counterplay identity of
 each boss stays with RS 13 and segment 9; the Supper's is the chandelier
 of icicles, a segment-5 trap. Braziers may be extra arena pieces, never
-the counterplay (read by change BR-16: a boss Device is never a brazier;
-boss rooms design 4.7.1). Arena devices are segment-9 instances in
+the counterplay (read by change BR-16: a boss Counterpiece is never a brazier;
+boss rooms design 4.7.1). Arena Counterpieces are segment-9 instances in
 segment 5's TrapRecord format (change TL-40; with segment 9; traps and
 locks design 7.8), of kind `arenaDevice`, one per boss (F5: two)
 (change BR-16; M1 for the Den, M2; boss rooms design 4.7.1).
@@ -1997,7 +1998,7 @@ locks design 7.8), of kind `arenaDevice`, one per boss (F5: two)
 
   This is named a sanctioned exception in the consolidated conditions
   11.1 change (TR-8), which reconciles RS 8.6–8.11 bosses that flood or
-  add webs, oil, fire, bile or bedsheets mid-fight.
+  add webs, oil, fire, gall or bedsheets mid-fight.
 - M3: phase (e) may also create a Remnant **(agreed, Q5)**.
 - Phase sockets are the precedent for segment 4's M3 pre-proven Stir
   states (Tides, Cord Flips, Turning Ring boards), under the same rules
@@ -2083,11 +2084,11 @@ locks design 7.8), of kind `arenaDevice`, one per boss (F5: two)
 | Gaol (F1) | stone pillars, records cabinets, Landmark clock-case | ledger desks, bolted benches, foot stocks | filing crates, lidded pails / tally desk; laundry cart (round) | — | — (warden's stove = typed Low piece) | — | straw, spilled ledgers | gap beside the desk rank | — | Loud verbs wake the block: noise is the terrain |
 | Kennel (F1; M1 subset) | oak trunks, root plates, lodge chimney | fallen logs (crossable), hurdle fence runs, hay mangers | hay bales, feed barrels (round) / meat cart | — | — | (M3 Briar) | bracken, root tangles | deer-run between log lines | — | Backs to logs; the pack flanks round cover |
 | Wake (F1) | catafalque canopies, stopped clocks, draped easels | pew rows, lidded coffins on catafalques, lily urns | wreath trestles, draped side tables / lectern | — | — (candle rack = typed Low piece) | — | fallen wreaths, strewn lilies | aisle between pews and trestles | — | Canopies and Drapes as sight breaks; Overturn candelabra (M3) |
-| Choir (F2–3) | nave pillars, organ-pipe clusters | pews on islands, dry font plinths | hymnal crates, kneeler benches / cantor's desk; hymn cart (round) | M3 cistern butt (Soaked, no damage) | storm-glass pipe face (lightning), fallen-bell face (bludgeoning, noise 6) | broken storm glass | fallen hymnals, dry vault rubble | dry causeway between pools | water (home) | Conduct across water (K3); the bell |
-| Silk (F2–3) | book columns, catalogue towers | reading desks, carrels, folio heaps | returns trolleys, paper bales (fire-fragile) / book cart (round) | M3 ink cask (Poisoned) | lamp-sconce face (fire), nib-rack face (piercing) | spilled nibs | ink-dark paper drifts | clear path through a web field | web (home) | Burn webs off the aisles (K2); lamps against fire-weak spiders |
+| Choir (F2–3) | nave pillars, organ-pipe clusters | pews on islands, dry font plinths | hymnal crates, kneeler benches / cantor's desk; hymn cart (round) | M3 cistern butt (Soaked, no damage) | storm-glass pipe face (lightning), fallen-bell face (bludgeoning, noise 6) | broken storm glass | fallen hymnals, dry vault rubble | dry causeway between pools | water (home) | Charged Water across water (K3); the bell |
+| Archive (F2–3) | book columns, catalogue towers | reading desks, carrels, folio heaps | returns trolleys, paper bales (fire-fragile) / book cart (round) | M3 ink cask (Poisoned) | lamp-sconce face (fire), nib-rack face (piercing) | spilled nibs | ink-dark paper drifts | clear path through a web field | web (home) | Burn webs off the aisles (K2); lamps against fire-weak spiders |
 | Carnival (F2–3) | wagons, booths, tent poles, Wheel of Knives (always with its knife-wheel face) | ring curbs, ticket crates, bale lines | crates / costume trunks, beast crates (sturdy, solid-sided); balancing ball (round) | **lamp-oil keg (M2)** | braziers (Hot), knife-wheel face | broken bottles | trampled bunting, collapsed canvas | duckboards between oil slicks | oil, fire (home) | Oil keg into oil-then-fire |
 | Supper (F4) | high tables (sight walls), swan towers, dumbwaiter shaft | dining tables with chairs tucked in, sideboards | serving trolley (light, round) / linen presses | M3 frost-wine cask (cold, Chilled) | plate-warmer braziers and boiling tureen (Hot), carving-station face (piercing) | shattered crystal | fallen place settings | service gap beside a warmer line | none (dry) | Braziers end Chilled and Frozen, both ways |
-| Gut (F4) | rib pillars, cartilage knots, tenant-house corners | gristle mounds, tenant sofas, villus stubs | tenant stools, lidded crocks / rent chests | **swollen sac (M2)** | grinding-molar face (piercing), acid-scald fold (acid) | bone shards | half-digested furniture | plank flush across bile | bile (segment 4) | Sacs burst; Oozes shove toward molars |
+| Gut (F4) | rib pillars, cartilage knots, tenant-house corners | gristle mounds, tenant sofas, villus stubs | tenant stools, lidded crocks / rent chests | **swollen sac (M2)** | grinding-molar face (piercing), acid-scald fold (acid) | bone shards | half-digested furniture | plank flush across gall | gall (segment 4) | Sacs burst; Oozes shove toward molars |
 | Heart (F5) | bedposts, wardrobe sides, toy-fort walls, block towers | hatboxes, flat storybooks, slippers | toy blocks / toy chest; toy cart and giant ball (round) | M3 dust pillow (psychic, Poisoned) | fireplace-grate face (fire), pincushion face (piercing, needles flat) | thorn-rose vines (the client's thorny vines) | heaped storybooks, crayons | ruler laid flush | bedsheet web (home; RT-14) | Kick the giant ball |
 
 - **New lead's call:** the Supper's serving trolley is its one **light**
@@ -2133,7 +2134,7 @@ locks design 7.8), of kind `arenaDevice`, one per boss (F5: two)
   tell.
 - **M3:** the stove may become a Hot hazard piece if floor-1
   `HazardPushDeaths` passes and RT-20 is reopened (19.2). **Applied at
-  Nightmare tier 2+ only (change HZ-25; agreed, hazards Q4; M3):** the
+  Peril tier 2+ only (change HZ-25; agreed, hazards Q4; M3):** the
   stove is promoted to a Hot piece, typed bludgeoning ("scalding iron"),
   for the Treadwheel package, under its floor-1 `HazardPushDeaths` gate;
   below tier 2 it stays a typed Low piece (hazards design 6.19).
@@ -2170,7 +2171,7 @@ locks design 7.8), of kind `arenaDevice`, one per boss (F5: two)
 - **Readability:** no upright coffin lid anywhere (Pallbearer, RC2); no
   veiled figures (RC3); no plumed staffs (Undertaker).
 - **Loot (change LP-18; lead's call; M2 cond.):** loot sits in
-  knee-high grave-goods caskets with a horizontal lid; **full coffins
+  knee-high burial caskets with a horizontal lid; **full coffins
   never hold loot**, so a coffin reads only as cover or a lurker tell.
   **Pending request (traps owner, TL 7.4 opening paragraph):** the
   same wording there (loot sources design 5.3).
@@ -2188,7 +2189,7 @@ locks design 7.8), of kind `arenaDevice`, one per boss (F5: two)
   (bludgeoning; a noise-6 strike with a reserved struck-bronze gameplay
   cue, kept distinct from the alarm bell, added to RC7's reserved cues,
   TR-20).
-- **K3 Conduct (agreed, Q4)** makes the Law a combo, both ways: the
+- **K3 Charged Water (agreed, Q4)** makes the Law a combo, both ways: the
   Organist can use it through slot or recharge abilities, never
   at-wills.
 - **Rulings:** deep water as drowning is rejected (10.4; segment 4).
@@ -2197,7 +2198,7 @@ locks design 7.8), of kind `arenaDevice`, one per boss (F5: two)
 - **Readability:** no lone upright pew-back (Drowned Verger, RC2); no
   wet sheen on dry squares (FL 7.5).
 
-### 7.6 The Silk Archive (F2–3)
+### 7.6 The Cobweb Archive (F2–3)
 
 - **Law:** webs and silence; fire is the key. **The 6:** full; the kit
   uses Restrained (webs) and, in M3, Poisoned.
@@ -2253,16 +2254,16 @@ locks design 7.8), of kind `arenaDevice`, one per boss (F5: two)
 
 ### 7.9 The Gut of the World (F4)
 
-- **Law:** attrition. **The 6:** full; the kit uses Corroded (bile) and
+- **Law:** attrition. **The 6:** full; the kit uses Corroded (gall) and
   Poisoned.
-- Bile rules and density are segment 4's (RT-13); segment 3 shapes bile
+- Gall rules and density are segment 4's (RT-13); segment 3 shapes gall
   pools in rooms. **Set by segment 4 (change HZ-4):** 6–12% of a Gut
   fight room's walkable squares *(illustr.)* in pools of 3–8, Corroded
   on entry, a Fortitude save negates it, with a dry route at most 2
   squares longer (hazards design 6.5). The swollen sac counts toward "≤
-  2 acid sources per encounter"; bile squares are never a source
+  2 acid sources per encounter"; gall squares are never a source
   (change HZ-5; hazards design 6.5).
-- **Readability:** saturated bile green only on bile and acid; sacs in
+- **Readability:** saturated bile green only on gall and acid; sacs in
   off-key olive with the hazard ring; wall pulses never read as shifting
   rooms (RS 7.6); no orbiting spores (Spore-Priest, RC2).
 
@@ -2274,7 +2275,7 @@ locks design 7.8), of kind `arenaDevice`, one per boss (F5: two)
   hazards, Furnishings, Kick, Plank and its thorn-rose harm squares.
 - **Rulings:** loose marbles rejected (a chaotic slide surface); toy
   soldiers, rocking horses and dolls never pieces (FL 7.10, the
-  Night-Mare); needles only flat.
+  Pale Mare); needles only flat.
 - **Readability:** toys sinister, never cute; scale distortion in
   architecture only, and **rules pieces count as architecture** for that
   clause (RC6): the giant ball, slippers and hatboxes are giant pieces
@@ -2310,12 +2311,12 @@ every row except faces, which take their host's height.
 | Choir | storm-glass pipe face | Hot face | — | never | — | — | no | lightning | M2 |
 | Choir | fallen-bell face | Bladed face | — | never | — | — | no | bludgeoning | M2 |
 | Choir | broken storm glass | harm square | — | — | — | — | no | slashing | M2 |
-| Silk | returns trolleys | Furnishing, light | — | B | no | gone | yes | — | M2 |
-| Silk | paper bales | Furnishing, light | — | F | no | gone | yes | — | M2 |
-| Silk | book cart | Furnishing, heavy | yes | F | no | debris | yes | — | M2 |
-| Silk | lamp-sconce face | Hot face | — | never | — | — | no | fire | M2 |
-| Silk | nib-rack face | Bladed face | — | never | — | — | no | piercing | M2 |
-| Silk | spilled nibs | harm square | — | — | — | — | no | piercing | M2 |
+| Archive | returns trolleys | Furnishing, light | — | B | no | gone | yes | — | M2 |
+| Archive | paper bales | Furnishing, light | — | F | no | gone | yes | — | M2 |
+| Archive | book cart | Furnishing, heavy | yes | F | no | debris | yes | — | M2 |
+| Archive | lamp-sconce face | Hot face | — | never | — | — | no | fire | M2 |
+| Archive | nib-rack face | Bladed face | — | never | — | — | no | piercing | M2 |
+| Archive | spilled nibs | harm square | — | — | — | — | no | piercing | M2 |
 | Carnival | crates | Furnishing, light | — | F, B | yes | gone | yes | — | M2 |
 | Carnival | costume trunks | Furnishing, heavy | — | F | no | debris | yes | — | M2 |
 | Carnival | beast crates | Furnishing, heavy, sturdy | — | B | no | debris | yes | — | M2 |
@@ -2416,8 +2417,8 @@ damage type.
   never idle and never reuse hazard prop families (traps and locks
   design 7, 8).
   **Extended by segment 7c (change LP-15; lead's call; M2):** loot
-  containers, catch hosts, the bait cache, Truants (M3) and the
-  cross-theme variants (signature cache, Wager cages, Viaticum host)
+  containers, clasp hosts, the bait cache, Truants (M3) and the
+  cross-theme variants (signature cache, Wager cages, Parting Fare host)
   join this rule: within a theme no family shares a silhouette with
   Furnishings, Low pieces or Kegs; container art is rank-blind
   (`ContainerArtBlind`); an inset container never shares a silhouette
@@ -2478,7 +2479,7 @@ resolution, no decal and no particle, except debris as Rough (RC1).
 | Lamp-oil keg, ignited | A fire burst inside the footprint, ending with the burst |
 | Gut sac burst | An acid-and-gas puff that dissipates within the burst and never lingers (it must not read as a Remnant) |
 | K2 burn-away | The web or bedsheet fades to plain floor with no embers |
-| K3 Conduct | Travels along the water surface between recipients, never between unit bodies (it must not read as an arc rider) |
+| K3 Charged Water | Travels along the water surface between recipients, never between unit bodies (it must not read as an arc rider) |
 | Phase socket | The authored change, after its one-round announcement outline |
 
 That is about 12–14 rules pieces per theme on top of 41–50 templates. M3
@@ -2517,9 +2518,9 @@ floor *(illustr.)*, with **no physics bodies**.
 | Plank narrow ground | all | **Adopted** | M2 |
 | Glaze ice slide | C, new-mechanics, research | Future frost theme only | M3+ |
 | Web and bedsheet burn-away | C, kits | **Adopted** **(agreed, Q4)** | M2 |
-| Conduct | B | **Adopted** **(agreed, Q4)** | M2 |
+| Charged Water | B | **Adopted** **(agreed, Q4)** | M2 |
 | Remnants (Miasma) | A, B, C, kits | **Adopted** **(agreed, Q5)** | M3 |
-| Mist, Haze | B, C, kits | Deferred / Later | — |
+| Fog, Haze | B, C, kits | Deferred / Later | — |
 | Drift, spread, Outpour, blood slicks | B, C, client | Rejected | — |
 | `NoCheapKill` | B | **Adopted** | M2 |
 | `hazardHitThisRound`, `hazardPushPerRound` | A, B | Simulator arms only | — |
@@ -2538,7 +2539,7 @@ The rules are in section 6. The ones not stated there:
 
 - **`causedBy` (M2; TR-24).**
   - Every environment damage event (collision, contact, harm, Keg,
-    ignition, Conduct) records the unit whose action began the
+    ignition, Charged Water) records the unit whose action began the
     resolution.
   - "On a kill" features (Shade No Witnesses, Shade 8.1) fire for that
     unit only when the killing damage resolves inside that same action;
@@ -2574,7 +2575,7 @@ rates as lower bounds.
 |---|---|---|
 | TN1 | A's line-crossing test grants cover on 1–10% of ranged attacks (2–7% typical); the half-plane dot-product test gives 11–37% | Dot-product test (CV2), narrowed after the check to within 45 degrees of the line of fire; the re-run is owed and will read lower **(told plainly)** |
 | TN2 | Disadvantage cover raises the floor-1 solo Arcanist's down rate from 7.2% to 13.4%; −2 and +2 AC are neutral (7.0–8.0%) | −2 default; disadvantage only an arm. **Owed:** the solo table re-run with the adopted arm (dot-product, −2, ignore clause), never run so far; gate `Floor1ClassSpread` |
-| TN3 | Symmetric cover raises enemy artillery damage by 5–15% in open and mixed rooms | Told plainly; CV8 flank rule; no covered starts on floor 1 |
+| TN3 | Symmetric cover raises enemy marksman damage by 5–15% in open and mixed rooms | Told plainly; CV8 flank rule; no covered starts on floor 1 |
 | TN4 | +2 AC (and equally −2) fails the armour 11 sustained row (25% < 35%); +2 AC stacked with gear fails the 10% row (6.25%) | Roll form with the ignore and suppress clauses; new positional row (TR-4) |
 | TN5 | Every arm keeps band share within ±25% (1.00–1.12) and launcher ÷ greatsword ≥ 1.01; rounds +0.6% to +4.2% | `FightRoundsByTheme`; −2 is the cheapest arm |
 | TN6 | Knock-into is safe (≤ 1.6% of hero downs even under stress; 0 with `NoCheapKill`) but too rare to feel: environment kills ≤ 0.9% of enemy kills at A's densities (target band 3–8%) | KP1 placement; hover alignment; Move Shunt and Kick; a success still collides. Damage not raised |
@@ -2583,14 +2584,14 @@ rates as lower bounds.
 | TN9 | Model C drift reaches 3 (5 with displacement); validator distance would need ≥ 6 | Drift rejected |
 | TN10 | Keg chains: 4–23% chance with ≤ 2–3 per room; 0 with spacing ≥ 2 | Spacing ≥ 2 **and** sturdy Kegs in M2 **and** no burst triggers a burst (movable Kegs would undo spacing) |
 | TN11 | Combo frequency under B/C would be routine (30–58% of fire casts touch a combo square) | Closed 5-row table; only K2 and K3 new in M2 |
-| TN12 | Conduct: mean 0.27 extra units, P(≥ 1) 23%, max 3; the cap of 6 never binds | Adopted (Q4), halved after weakness |
+| TN12 | Charged Water: mean 0.27 extra units, P(≥ 1) 23%, max 3; the cap of 6 never binds | Adopted (Q4), halved after weakness |
 | TN13 | Clock: packages add +0.5 to +3.5 min per floor, on floors already 3–9 min over the gate. Model A ~+0.5 to +1.2; the adopted package is estimated at +0.8 to +1.6 | Combat-only verbs; hover-only or payoff chips; move shields only in the move tool; gates: net `FightRoundsByTheme` ≤ +1% rounds for the M2 package (Kegs and contact shorten fights, cover lengthens them) **and** `FloorMinutesDelta` ≤ +1.6 min per floor, the top of the told-plainly forecast, measured on the companions 7.4 time model with the verbs and reads as terms; a miss fires the risk-7 cut order **(told plainly; the minutes gate is a lead's call after the check)**. Segment 4's `HazardMinutesDelta` ≤ +0.3 min per floor sits **inside** this +1.6, and `FloorMinutesDelta` read with segment 4 on is the combined gate (change HZ-27, told plainly; hazards design 10) |
 | TN14 | DEP-A1 (party-entry reading): Gut 0.38 and Heart 0.36 today; the Supper 0. With features counted, the Supper reaches 0.41–0.52 and a Heart with RT-14 refused 0.39–0.51 | TR-21 "interactive feature"; KP2 in every F2–5 fight layer at path distance 3–6 from party entry; the report uses that reading until the Arcanist owner rules which "start" is meant (11.3) |
 | TN15 | 49 terrain condition sources checked: 0 new ids; 1 violation (B's overturned Supper brazier spilling a fire square) | Hot pieces never tip; no square creation by pieces |
 | TN16 | A ranged scorer ended 0.4% of turns on harm squares | Destination value in the scorer (6.9) |
 | TN17 | Flood fill costs ~0.15 ms; the Clearway refuses 6–11% of Shunts, disconnection ≤ 0.4% | Keep both; the width-2 fill is replaced after the check by the reachability and initial-state lengthening rules (6.3.6), at the same cost |
 
-The toy did not model the Shockwave and Squall correction (6.5.2):
+The toy did not model the Upheaval and Squall correction (6.5.2):
 moving them from the collision band to the contact band raises their
 contact damage by 1 per affected unit, inside the area cap of 2. The
 `HewCeiling` and at-will rider re-runs (11.3) include them **(new lead's
@@ -2752,9 +2753,9 @@ lookahead), read as a band.
 | Wave | Content |
 |---|---|
 | **M1** | Tall and Low pieces as blockers; the obstacle definition, corner rule and lines rule (TR-5); non-free pieces, the open room's 5×5 core and lane, Tall pieces at full wall height with the stub glyph (TR-19, TR-20's stub-glyph rule); the Clearway; the `terrain` stream with its reservation step (`hzTagMax` reserved as dummies, SV-3), layers in greybox, `terrainDigest`; V9 partial (`ClearwayConnected`, `ProtectedIntact`, `FreeSpaceAfterClutter`, `RoomMixAfterClutter`, `ClutterBand`, `ReservationCapacity` for the `cluttered` tag, `WayRound`, `CutawayWithTall`, `TerrainDrawCount`); the Kennel `coverRoom` from Tall trunks and root plates. **No cover rule, nothing movable, no hazards** |
-| **M2** | Cover (**Q1**); Furnishings with Shunt, Kick, Smash (**Q2**); Kegs in the Carnival and Gut (**Q2**); contact hazards and harm squares on floors 2–5 (**Q3**); Rough; Plank; floor-1 teaching rooms and typed Low pieces; condition-square placement and entry caps; arena caps and phase sockets; the AI requests; previews, chips, charter extensions; full V9 and reports; K2 burn-away and K3 Conduct (**Q4**) |
-| **M3** | Remnants (**Q5**, after the M2 rider and layer reports, 6.6); Overturn; Haul; Shoot an object; Kegs in the Choir, Silk, Supper and Heart; depth-1 chains; Briar (own question); floor-1 Hot pieces only after floor-1 `HazardPushDeaths` and an RT-20 reopening (applied at Nightmare tier 2+ only, for the Gaol stove: HZ-25, hazards design 6.19) |
-| **M3+ / M4** | Glaze for a frost theme; Mist if needed; powder-keg blast push |
+| **M2** | Cover (**Q1**); Furnishings with Shunt, Kick, Smash (**Q2**); Kegs in the Carnival and Gut (**Q2**); contact hazards and harm squares on floors 2–5 (**Q3**); Rough; Plank; floor-1 teaching rooms and typed Low pieces; condition-square placement and entry caps; arena caps and phase sockets; the AI requests; previews, chips, charter extensions; full V9 and reports; K2 burn-away and K3 Charged Water (**Q4**) |
+| **M3** | Remnants (**Q5**, after the M2 rider and layer reports, 6.6); Overturn; Haul; Shoot an object; Kegs in the Choir, Archive, Supper and Heart; depth-1 chains; Briar (own question); floor-1 Hot pieces only after floor-1 `HazardPushDeaths` and an RT-20 reopening (applied at Peril tier 2+ only, for the Gaol stove: HZ-25, hazards design 6.19) |
+| **M3+ / M4** | Glaze for a frost theme; Fog if needed; powder-keg blast push |
 | **Later** | Haze with NM-9; hide in cover; Pavise; carom and Over the Edge; lethal chasms; Hurl; multi-square Furnishings; ability-created surfaces (a separate client question) |
 
 ---
@@ -2766,7 +2767,7 @@ lookahead), read as a band.
 | Owner | Owns |
 |---|---|
 | **Segment 3 (this)** | Piece and square classes and the obstacle definition; terrain layers, sockets, the Clearway, clutter bands, chokes, lanes, nooks; the cover rule; Furnishings, Kegs and their verbs; the knock-into **system** (contact hazards, harm squares: rules, bands, caps, in-room placement grammar); Rough and Plank; in-room placement of existing condition squares and the Choir and Carnival entry caps; the combo table; the Remnant system; arena terrain **rules and caps**; DEP-A1 presence; the `terrain` stream, V9 and the reports |
-| **Segment 4 (hazards)** | Per-theme hazard catalogues and floor-wide density built from segment 3's classes, inside its caps; drop hazards, chasms, pits and what a fall does (Voids and the Snag, 6.5.7); bile (RT-13); Teetering counting (RT-14); theme-scale self-acting set pieces (vents that emit Remnants, flooding; Stirs, Cords and the Dream step's content); Hinge and Postern no-hazard squares. The hazard / trap line: a hazard is visible from reveal, acts by a rule and is never found or disarmed; "would detection change anything?" If yes, it is a segment-5 trap (change HZ-1; hazards design 6.1, 13) |
+| **Segment 4 (hazards)** | Per-theme hazard catalogues and floor-wide density built from segment 3's classes, inside its caps; drop hazards, chasms, pits and what a fall does (Voids and the Snag, 6.5.7); gall (RT-13); Teetering counting (RT-14); theme-scale self-acting set pieces (vents that emit Remnants, flooding; Stirs, Cords and the Dream step's content); Hinge and Postern no-hazard squares. The hazard / trap line: a hazard is visible from reveal, acts by a rule and is never found or disarmed; "would detection change anything?" If yes, it is a segment-5 trap (change HZ-1; hazards design 6.1, 13) |
 | **Segment 5 (traps, locks, checks)** | Traps (hidden, armed, sprung, one-shot), including the toppling shelf, icicles, chandelier and dumbwaiter; door verbs (FL-8); the DC ladder that Shunt, Smash, Plank and Overturn read; the out-of-combat Plank failure cost |
 
 **Rule of thumb:**
@@ -2775,15 +2776,15 @@ lookahead), read as a band.
 - something that is sprung: segment 5.
 
 **Told plainly:** this contests the computed task's split. Approved FL
-13 and RS 13 already give drops, bile and Teetering counting to segment 4.
+13 and RS 13 already give drops, gall and Teetering counting to segment 4.
 Segment 3 takes the knock-into *system*, not drop hazards.
 
 **Hooks handed off:**
 
 | Segment | Receives from segment 3 | Owns |
 |---|---|---|
-| 4 Hazards | The piece and square classes, bands, caps, `ThemeSix`, the Remnant record and its environment-only source rule. **Taken up by the hazards design (segment 4, approved 2026-11-21; changes HZ-1 to HZ-30)** (cross-document comparison 2026-11-23, CC-93) | Catalogues and density inside the caps; drops; bile; Teetering counting; vents |
-| 5 Traps, locks, checks | Plank and Shunt checks naming the ladder; Overturn strips that never include a Clearway square; **traps and pieces (lead's call, after the check):** a Furnishing may end on a trap's trigger square, never springs a trap and never hides a known trap's marker; trap damage is outside the one-instance cap (6.3.6, 6.4); segment 5 may narrow both. **Narrowed by segment 5 (change TL-14; M2):** weighted plates (a piece ending on a plate or trapdoor springs it; one act springs at most one trap); the cap exclusion kept (TL-18) (traps and locks design 6.7, 6.10). **Taken up by the traps and locks design (segment 5, approved 2026-11-21; changes TL-n)** (cross-document comparison 2026-11-23, CC-93) | DCs; traps; door verbs; the out-of-combat Plank cost; how traps and pieces interact beyond these defaults |
+| 4 Hazards | The piece and square classes, bands, caps, `ThemeSix`, the Remnant record and its environment-only source rule. **Taken up by the hazards design (segment 4, approved 2026-11-21; changes HZ-1 to HZ-30)** (cross-document comparison 2026-11-23, CC-93) | Catalogues and density inside the caps; drops; gall; Teetering counting; vents |
+| 5 Traps, locks, checks | Plank and Shunt checks naming the ladder; Overturn strips that never include a Clearway square; **traps and pieces (lead's call, after the check):** a Furnishing may end on a trap's trigger square, never springs a trap and never hides a known trap's marker; trap damage is outside the one-instance cap (6.3.6, 6.4); segment 5 may narrow both. **Narrowed by segment 5 (change TL-14; M2):** pressure slabs (a piece ending on a plate or trapdoor springs it; one act springs at most one trap); the cap exclusion kept (TL-18) (traps and locks design 6.7, 6.10). **Taken up by the traps and locks design (segment 5, approved 2026-11-21; changes TL-n)** (cross-document comparison 2026-11-23, CC-93) | DCs; traps; door verbs; the out-of-combat Plank cost; how traps and pieces interact beyond these defaults |
 | 6 Encounter placement | Start sockets with cover data (derived by segment 6 from FL `startZone` squares; change EP-5); `Floor1NoCoveredStarts`; KP5's ambush clause (defined, change EP-8); nooks as lurker sockets; the terrain-using enemy per theme (encounter placement design 6.6.1, 6.8.3). **Taken up by the encounter placement design (segment 6, approved 2026-11-22; changes EP-n)** (cross-document comparison 2026-11-23, CC-93) | Who starts where; ambush templates |
 | 7 Loot | Furnishings never hold loot (reaffirmed, change LP-12; inset containers instead). **Pending request (change LP-11; segment 7c asks; M2):** set pieces an Alcove can take as its default occupant when a container would exceed the floor's container cap; if none are offered, the Alcove keeps a container and the cap is logged, not enforced (loot sources design 4.2, 14.2). **Taken up by the loot designs (segments 7a–7c, approved 2026-11-22; changes LE-n, IR-n, LP-n)** (cross-document comparison 2026-11-23, CC-93) | Containers and contents |
 | 8 Events | Furnishing kinds by id. **Pending request (change EV-2; segment 8 asks; M2):** wall-mounted (RC1+) Alcove set pieces that can host the floor-1 Curiosity, first in the F1 host order; such a set piece takes the set-piece slot LP-11 prefers, never empties a leaf, never displaces a container 7c's cap needs and never sits on a walkable square; if none are offered, the F1 host falls to a free leaf side room, then none, logged; `F1CuriosityPresence` is reported to FL and segment 3 before F1 pool sizes freeze (events design 4.2, 14.2). **Taken up by the events design (segment 8, approved 2026-11-22; changes EV-n)** (cross-document comparison 2026-11-23, CC-93) | Events that name a Furnishing kind; Curiosity content and placement |
@@ -2800,7 +2801,7 @@ Segment 3 takes the knock-into *system*, not drop hazards.
 | Cover decision in M2 with the range-band arm | weapons 9.5, 26; FL 13 | 6.1 (**agreed, Q1**); arms off / minus2 / disadvantage (11.4) |
 | O2: interiors, terrain squares and density per theme and floor | RS 8.0, 13; FL 13 | Interiors and in-room placement: 6.2 and 7; floor-wide density moves to segment 4 (13, TR-1) |
 | O3: `coverProps[]` per theme | RS 8.0, 8.3–8.11 | `terrainKit` (7.1, 7.11; TR-22) |
-| O13: open-room Cleave and reach space; corridor and guard-post lines | weapons 26; FL 6.4 | The Lane and the 5×5 core in every `RoomMix` open room (6.2.3; `RoomMixAfterClutter`); clear corridors; guard-post band (6.2.4) |
+| O13: open-room Cleave and reach space; corridor and guard-post lines | weapons 26; FL 6.4 | The lane and the 5×5 core in every `RoomMix` open room (6.2.3; `RoomMixAfterClutter`); clear corridors; guard-post band (6.2.4) |
 | O15: the Kennel solo-floor ranged risk | FL 7.3; FL 15 risk 11 | The per-grammar cover arm (11.4) read on the Kennel at floor-1 solo; `Floor1NoCoveredStarts` |
 | No cover rule in M1 | weapons 2 | CV1 (TR-3 rewords 9.5 bullet 1) |
 | One flat rules level; coplanar squares; no high ground | main 4.3, 6.8 **(decided)**; LG18 | No stand-on pieces; Planks coplanar; drops are flat voids (segment 4) |
@@ -2834,17 +2835,17 @@ Segment 3 takes the knock-into *system*, not drop hazards.
 
 | # | Risk | Signal | Response |
 |---|---|---|---|
-| 1 | Cover is a guess until the arm runs: −2 may be too weak in open Kennel glades and Carnival plazas, and cover can lengthen artillery fights | `DamageShareByRangeBand`; net `FightRoundsByTheme` | The cover arms; CV8 flank rule; the net rounds gate |
+| 1 | Cover is a guess until the arm runs: −2 may be too weak in open Kennel glades and Carnival plazas, and cover can lengthen marksman fights | `DamageShareByRangeBand`; net `FightRoundsByTheme` | The cover arms; CV8 flank rule; the net rounds gate |
 | 2 | Knock-into may still be unfelt; the toy AI under-aims, so humans will exceed its rates | `EnvKillShare` (alias `EnvironmentKillShare`, SV-24); `ShuntUseRate` | KP1; Shunt and Kick costs; collision on a success; the alignment highlight; the AI-aim arm |
 | 3 | The Wrecker over-performs in dense rooms | `WreckerCollisionRate`; `HewCeiling` with contact; `TeeteringUptimeOnBosses` | KP3; contact = collision + 1 step; the "bosses steady" reserve lever |
-| 4 | Arcanist push payoff: Gust now deals the typed collision band against contact hazards; Shockwave and Squall the contact band | The at-will rider bound; `ArcanistComboShare` | Counted in the rider bound; area cap of 2 |
+| 4 | Arcanist push payoff: Gust now deals the typed collision band against contact hazards; Upheaval and Squall the contact band | The at-will rider bound; `ArcanistComboShare` | Counted in the rider bound; area cap of 2 |
 | 5 | AI uses objects worse than players | `FurnishingUseRate` (AI) | Accepted as player power; universal light Smash; one terrain-using enemy per theme |
 | 6 | Readability load: cover pips, rims, Keg rings, harm squares and stub glyphs stack up | Greyscale and role-ID gates | One glyph per class; RC6+ order; a failing theme is held |
 | 7 | Clock: every package spends time on floors already over the gate | Net `FightRoundsByTheme`; `FloorMinutesDelta`; `ExploreSeconds` | Combat-only verbs; chips only on payoff. The cut order fires automatically, one step per failed run of either gate: Kick, Move Shunt, Rough density, harm squares. **Extended by segment 4 (change HZ-27):** then Moods, Dare rooms, second Stir kinds, Lurch and Prone Stirs, Tides, Void density 40% → 30%, and the signature Stir reverting to static density; segment 4's steps fire first when `HazardMinutesDelta` or the combined gate misses, these steps first when the terrain package misses with segment 4 off (hazards design 10) |
 | 8 | RT-14 refusal costs the Heart's bedsheets and each full-6 theme's named fallback drop | The RT-14 ruling | Floor 5 keeps contact hazards, Furnishings, Planks and harm squares; harm squares no longer depend on it (6.5.5) |
 | 9 | Approved-text footprint: several agreed texts and one decided text (M3) change | — | Each is flagged (17); the M2 package touches main 2 only by consolidating and clarifying (TR-8, TR-9) |
 | 10 | Art volume: about 12–14 rules pieces per theme on top of 41–50 templates | M2 schedule review | The art team's stated appetite is the enabling assumption |
-| 11 | Clutter against screen fit in the Silk, Supper and Heart | `TemplateReadability` at 4 rotations | Template rework; the clutter bands |
+| 11 | Clutter against screen fit in the Archive, Supper and Heart | `TemplateReadability` at 4 rotations | Template rework; the clutter bands |
 | 12 | Party-triggered Remnants read as player-made ground effects | M3 playtest notes; `RemnantUptime` | Environment-only sources; ≤ 1 per room; 2-round countdown; told plainly (Q5) |
 | 13 | **All evidence is toy** | — | Every number is owed a simulator rerun before it settles |
 | 14 | **Research partly from recall** (Lancer, Kill Team, Wildermyth, Pathfinder 2E details) | — | Marked *(recalled)*; none is load-bearing |
@@ -2910,7 +2911,7 @@ and TR-6's Overturn and Haul.
 
 | # | Document / section (current status) | Change | Flag | Approved by |
 |---|---|---|---|---|
-| **TR-1** | FL 13 hand-off rows for segments 3 and 4; FL 17 row FL-22 (its RS 13 ownership amendment, whose pattern this row follows); RS 13 rows "Room shapes and terrain" and "Hazards" (**agreed** hook text) | Ownership line: segment 3 owns the room-terrain system and the knock-into system; segment 4 owns floor-scale density, drops, bile, Teetering counting and vents; segment 5 owns traps (13) | **Agreed** (RS hooks, filled) | Client, with this document |
+| **TR-1** | FL 13 hand-off rows for segments 3 and 4; FL 17 row FL-22 (its RS 13 ownership amendment, whose pattern this row follows); RS 13 rows "Room shapes and terrain" and "Hazards" (**agreed** hook text) | Ownership line: segment 3 owns the room-terrain system and the knock-into system; segment 4 owns floor-scale density, drops, gall, Teetering counting and vents; segment 5 owns traps (13) | **Agreed** (RS hooks, filled) | Client, with this document |
 | **TR-2** | Weapons 9.5 bullets 1–2 (M2 reading; lead's call); weapons 21.3 arms; enemies 17.5 arena bullet "pillars or cover" (**settled**; gains a rules meaning); armour 13 Pavise row (Later, designable) | Directional one-tier cover (the dot-product facing test within 45 degrees), −2 to the roll with the ignore (net disadvantage), suppress and replace (the larger of cover and the reaction bonus) clauses; weapons 7.5 gains step 2b and ability model 14.3 the matching step; no cover on Portal squares; walls, units and Grilles never give cover (6.1) | **Agreed** (Q1); the 45-degree bound, step 2b and the window rule told plainly after the check | **Client (agreed 2026-11-21, Q1)** |
 | TR-3 | Weapons 9.5 bullet 1 ("Obstacles block line of sight only"; lead's call) | M1 wording: "Tall pieces block sight and movement; Low pieces block movement only; nothing gives cover; units never give cover" | — | Lead; weapons owner applies |
 | **TR-4** | Armour 11 item 1 (**lead's call, confirmed to stand**); armour 8.1 rule 6 (charged exclusion) | Positional envelope row: "sustained maximum AC + cover leaves ≥ 25%"; the charged exclusion extends to cover (CV5) | **Confirmed to stand** (armour 11) | **Client (agreed 2026-11-21, Q1)**; armour owner applies |
@@ -2919,10 +2920,10 @@ and TR-6's Overturn and Haul.
 | **TR-7** | Vanguard 8.3 rejected list "breakable terrain (rejected: the fixed-terrain non-goal)"; Vanguard 9 table "Rejected" row "destructible terrain" (resting on **decided** main 2); RS 7.6 "breakable walls" (**agreed**; kept refused) | Breakable and movable Furnishings and Kegs; walls never break (6.7) | **Decided** (main 2 reading); **Agreed** (RS 7.6, kept); told plainly | **Client (agreed 2026-11-21, Q2)** |
 | **TR-8** | Conditions 11.1 bullet 3 ("Squares never spread or change, with one exception (11.4)") (**agreed**); 11.4 "The single exception" (agreed that it exists); conditions 2 Non-goals bullet ("never spread or change, with the single exception of oil burning away") (**agreed**); stat model 2 Non-goals bullet ("except that fire burns an oil square to plain floor") (**agreed**); the Arcanist design "Never: ground zones (the one terrain change is the settled fire on oil)" | One consolidated list of sanctioned map changes, with waves: fire on oil (existing); Furnishing debris and removal (M2); boss phase sockets (M2); web and bedsheet burn-away (M2); Overturn debris and sight change (M3); Remnants (M3) | **Agreed** | **Client (agreed 2026-11-21, Q2, Q4, Q5)**; conditions and Arcanist owners apply |
 | **TR-9** | Conditions 11.4 (sibling rule), 11.6; ability 8.4 (**agreed**; clarification); consumables 12 "never terrain" (clarification); enemies 6.4 guards; enemies 17.2 Volatile (precedent) | Kegs: a one-shot area, source `environment`, nothing on the ground; sturdy in M2; no burst triggers a burst in M2; counted in the guards every round (6.3.5) | **Agreed** (clarified, not changed) | **Client (agreed 2026-11-21, Q2)** |
-| **TR-10** | Conditions 10.1 bullet 2 ("Stopping before a hazard is not stopping early and deals no damage"); 10.2; 11.3 hazard list; 11.5 M2 package (**agreed**); weapons 7.2 rule 4 (a second named exception class beside Battering Force); conditions 18.4 Teetering sources (unchanged; Brink read literally) | Obstacle-hazard branch: contact hazards are hazards; a failed save deals the contact band (a non-verb part, including Shockwave and Squall) or the typed collision band (verb-only) instead of collision; success is an ordinary obstacle stop; a successful harm-square save is an ordinary obstacle stop too (10.1's "deals no damage" no longer applies to harm squares), and a failed one lets the push continue; damage-only hazards never give Teetering; area cap of 2 saves per action by starting square; the save's difficulty (the pusher's ability difficulty, else 8 + Athletics), its name (a hazard-edge save) and its timing (weapons 7.5 step 10), offered for every 10.2 save; Stalwart order (6.5.2) | **Agreed** (M2 package extended) | **Client (agreed 2026-11-21, Q3)**; conditions and weapons owners apply |
+| **TR-10** | Conditions 10.1 bullet 2 ("Stopping before a hazard is not stopping early and deals no damage"); 10.2; 11.3 hazard list; 11.5 M2 package (**agreed**); weapons 7.2 rule 4 (a second named exception class beside Battering Force); conditions 18.4 Teetering sources (unchanged; Brink read literally) | Obstacle-hazard branch: contact hazards are hazards; a failed save deals the contact band (a non-verb part, including Upheaval and Squall) or the typed collision band (verb-only) instead of collision; success is an ordinary obstacle stop; a successful harm-square save is an ordinary obstacle stop too (10.1's "deals no damage" no longer applies to harm squares), and a failed one lets the push continue; damage-only hazards never give Teetering; area cap of 2 saves per action by starting square; the save's difficulty (the pusher's ability difficulty, else 8 + Athletics), its name (a hazard-edge save) and its timing (weapons 7.5 step 10), offered for every 10.2 save; Stalwart order (6.5.2) | **Agreed** (M2 package extended) | **Client (agreed 2026-11-21, Q3)**; conditions and weapons owners apply |
 | **TR-11** | Conditions 11.2 table and schema; **11.5 M2 set (agreed)**; RS 6.3 home-theme rule (lead's call); conditions 18.4 Prone crawl | Condition-free square classes (harm, Rough, Plank); harm squares join the M2 set; the home rule reads condition-free classes as theme-neutral; movement cost modifiers never stack above 2 | **Agreed** (conditions 11.5) | **Client (agreed 2026-11-21, Q3)** |
 | TR-12 | Ability 7.2 (new row); stat model 7.1 Acrobatics row; armour 7.3 binding paragraph | Plank narrow ground (6.2.6) | — (a binding requirement met) | Lead; ability owner applies |
-| TR-13 | Conditions 9.2, 9.3, 11.6 | Ruling requests: environment damage is rider-free; the damage-end row and setup payouts apply (payouts are not environment instances); one environment damage instance per unit per action by the top-up rule, with "action" as one use, voluntary harm entries, turn-end effects, Remnants and traps outside it, and non-damage effects as in 6.4; Conduct's base before the origin's weakness, each recipient's weakness then halving (6.8) | — (request; the cap agreed in substance, Q3) | Conditions owner |
+| TR-13 | Conditions 9.2, 9.3, 11.6 | Ruling requests: environment damage is rider-free; the damage-end row and setup payouts apply (payouts are not environment instances); one environment damage instance per unit per action by the top-up rule, with "action" as one use, voluntary harm entries, turn-end effects, Remnants and traps outside it, and non-damage effects as in 6.4; Charged Water's base before the origin's weakness, each recipient's weakness then halving (6.8) | — (request; the cap agreed in substance, Q3) | Conditions owner |
 | TR-14 | Conditions 16; RS 8.0 fallbacks; RS 14 | RT-14 ruled "does not count" before M2 rosters freeze; harm squares and Supper Poisoned rows conditional on it | — (request) | Conditions owner, before M2 rosters |
 | TR-15 | Enemies 5.5, 11.1, 11.3, 14.5, 17.3; conditions 17.3 | AI requests: `NoCheapKill` as the exact scorer term of 6.9 (including triggered environment damage); destination value; `usesFurnishings`; universal light Smash by path gain; the Holder includes contact hazards; Keg triggers count as attacks; tie-break; routers may cross non-lethal Remnants; one visible terrain-using enemy and one gas-aura monster per relevant theme (6.9, 6.6) | — (requests) | Enemies owner |
 | TR-16 | Enemies 17.5 (**settled**) phase (e) "change arena terrain within the theme's 6"; RS 13 Boss rooms row (unchanged) | Arena caps; phase (e) narrowed to pre-placed phase sockets, existing kinds only, announced a round ahead and proven in both states; counterplay identity unchanged (6.11) | — (told plainly: narrows settled phase (e)) | Lead; segment 9 inherits |
@@ -2935,7 +2936,7 @@ and TR-6's Overturn and Haul.
 | TR-23 | DH 17.6, 17.7; ARC-25; ability 8.3 | Lethal tags, ally confirmations and previews extended to contact hazards, harm squares, Kegs, Kick lines and Overturn strips (6.12) | — | Lead; DH owner applies |
 | TR-24 | Conditions 9.3 damage events; Shade 8.1 (classes owner check) | `causedBy` kill credit (9.2) | — | Lead; conditions and Shade owners apply |
 | **TR-25** | Conditions 11.1, 11.2 binding bullet ("never the square"), 11.4 (**agreed**); conditions 2 and stat model 2 Non-goals bullets (**agreed**; listed in TR-8's consolidated exceptions) | Web and bedsheet burn-away, K2 (6.8) | **Agreed** | **Client (agreed 2026-11-21, Q4)** |
-| **TR-26** | Conditions interaction table; 11.2 water row (**agreed**); conditions 18.6 Soaked arc (order with Conduct); ability 8.2 friendly fire (read, not changed: Conduct follows it); **stat model 2 Non-goals bullet "Spreading or evolving terrain surfaces, such as burning oil that spreads or conducting water. Held back until riders and layers are proven." (agreed)**; RS 8.6 Choir guards | Conduct, K3 (6.8), in M2, before the stat-model gate, because it is instantaneous and makes no square | **Agreed** (Q4); told plainly | **Client (agreed 2026-11-21, Q4)** |
+| **TR-26** | Conditions interaction table; 11.2 water row (**agreed**); conditions 18.6 Soaked arc (order with Charged Water); ability 8.2 friendly fire (read, not changed: Charged Water follows it); **stat model 2 Non-goals bullet "Spreading or evolving terrain surfaces, such as burning oil that spreads or conducting water. Held back until riders and layers are proven." (agreed)**; RS 8.6 Choir guards | Charged Water, K3 (6.8), in M2, before the stat-model gate, because it is instantaneous and makes no square | **Agreed** (Q4); told plainly | **Client (agreed 2026-11-21, Q4)** |
 | **TR-27** | **Main 2 Non-goals bullet "Spreading, evolving or player-placed ground surfaces …" (decided)**; stat model 2 (agreed); ability model 2 (settled) and 8.4 (agreed); conditions 2, 11.1 (agreed), 11.4 "free of timers" (lead's call); conditions 5.4 (turn order of condition steps: the new round-end environment step); conditions 11.6 and 5.7 (a party-triggered Remnant counts as party-sourced for the per-fight cap, not hostile to every unit); RS 7.4 RC1 (agreed); RS 7.6 (agreed); Shade 9 table (smoke rejection untouched: no Haze) | M3 Remnants (Miasma), environment-only, fixed footprint, countdown, ignite once; a new round-end environment step. **Main 2 gains:** "Exception (M3): environment-made Remnant clouds with a fixed footprint and a short countdown, which never drift, spread or grow (room terrain design 6.6)" **(new lead's call:** the wording**)** | **Decided** (main 2); **Agreed** (stat model 2, ability 8.4, conditions 11.1, RC1, RS 7.6); told plainly | **Client (agreed 2026-11-21, Q5)**; applies at M3 |
 | TR-28 | Ability 8.x targeting; conditions 18.7 (attacking ends Hidden); weapons 9.3 (unchanged: no improvised throw) | Shoot an object (6.3.7) | — | Lead; M3 |
 | TR-29 | RS 8.2 and RT-20 reading; trinkets 23 | Floor-1 typed Low pieces, not hazards (6.5.6) | — (told plainly) | Lead; trinkets owner told |
@@ -3036,7 +3037,7 @@ them, and the naming pass remain future items.
   instance per unit per action; `NoCheapKill`; harm squares join the
   agreed M2 square set (conditions 11.5) (6.5; TR-10, TR-11). Rejected:
   B, harm squares in M3; C, condition squares only.
-- **Q4, combos:** option A. Web and bedsheet burn-away (K2) and Conduct
+- **Q4, combos:** option A. Web and bedsheet burn-away (K2) and Conduct (renamed Charged Water, naming pass NP-19)
   through water (K3) in M2; a closed combo table of 5 rows (6.8; TR-25,
   TR-26). Rejected: B, burn-away only; C, neither.
 - **Q5, lingering clouds:** option A. Environment-only Miasma Remnants
@@ -3054,8 +3055,8 @@ them, and the naming pass remain future items.
   `FightRoundsByTheme` ≤ +1% for the M2 package) and, after the check, a
   minutes gate at the top of that forecast, with a named cut order that
   fires automatically (risk 7);
-- **symmetric cover helps enemy artillery:** it can raise enemy
-  artillery damage by 5–15%, because covered artillery lives longer;
+- **symmetric cover helps enemy marksmen:** it can raise enemy
+  marksman damage by 5–15%, because covered marksmen live longer;
   cover is not a party buff by default (CV7, TN3);
 - **−2 to the roll and +2 AC give the same hit chance,** and both fail
   armour 11's sustained row as written; the positional row (TR-4) is
@@ -3076,7 +3077,7 @@ them, and the naming pass remain future items.
   pieces** that thaw Frozen units of either side (7.2, 7.4, 7.8; TR-22);
 - **floor 1 still has no hazard edges** (trinkets owner): the stove and
   candle rack are typed Low pieces (6.5.6; TR-29);
-- **the computed task's ownership split is contested:** drops, bile and
+- **the computed task's ownership split is contested:** drops, gall and
   Teetering counting stay segment 4's (13);
 - **players will out-think monsters with Furnishings;** accepted as
   player power (6.9);
@@ -3088,7 +3089,7 @@ them, and the naming pass remain future items.
 **New lead's calls made while writing this document** (beyond the
 answered proposal; confirmed by the client on 2026-11-21, with this
 document):
-1. **Shockwave and Squall are non-verb pushes** and take the contact
+1. **Upheaval and Squall are non-verb pushes** and take the contact
    band on a failed save, under the area cap of 2; the proposal had
    listed them as verb-only. The Arcanist design (8.2, 8.3) makes both
    non-verb, and conditions 10.1 names only Gust and Reel as
@@ -3135,14 +3136,14 @@ triggers them:
 - Briar with Bleeding in the Kennel (M3; touches RS 6.3, 8.4, RT-20 and
   conditions 11.2), as its own question;
 - floor-1 Hot hazard pieces (M3; reopens RT-20) if floor-1
-  `HazardPushDeaths` passes (applied at Nightmare tier 2+ only, for the
+  `HazardPushDeaths` passes (applied at Peril tier 2+ only, for the
   Gaol stove under the Treadwheel: HZ-25, hazards design 6.19);
 - Glaze for a future frost theme;
 - Haze with NM-9 Gloom;
 - hide in cover;
 - the "bosses steady at turn start" Teetering lever, if
   `TeeteringUptimeOnBosses` fails;
-- Mist, if the Choir or Supper reports need it;
+- Fog, if the Choir or Supper reports need it;
 - the powder-keg blast push;
 - Hurl;
 - the RT-14 ruling refused (each full-6 theme's named fallback drop,
@@ -3181,7 +3182,7 @@ document):
    with cover applied, and a reaction or window fill worth ≤ 2 is not
    offered against a Covered attack (CV4).
 6. **CV8 is computable:** the halves by the entry-to-enemy bisector;
-   every start socket treated as possibly artillery; the landing test
+   every start socket treated as possibly a marksman; the landing test
    stated; initial-state guarantees only (CV8).
 7. **The contact and harm save:** the pusher's ability difficulty, else
    8 + Athletics; it is a hazard-edge save for every rule keyed on that
@@ -3206,7 +3207,7 @@ document):
 14. **Kegs:** heavy and sturdy (heft 12); the unreachable third trigger
     dropped; burst line of effect from the Keg; the Smasher is outside
     its own burst (6.3.5).
-15. **The combo order** inside one action, and Conduct's recipients,
+15. **The combo order** inside one action, and Charged Water's recipients,
     base, weakness order, ally rule (ability 8.2) and order with the
     Soaked arc (6.8).
 16. **`FurnishingNeverSeals`:** the vacuous width-2 fill is replaced by
@@ -3234,7 +3235,7 @@ document):
     and Gut have no round piece; no inert piece shares a Keg silhouette
     (balancing ball, linen presses, hatboxes); the Wheel of Knives
     always carries its face; low forms for trestles, stocks and ticket
-    crates; liquid pieces dry or lidded; Silk and Heart role-prop
+    crates; liquid pieces dry or lidded; Archive and Heart role-prop
     rulings; rules pieces count as architecture for RC6's scale clause
     (7.1–7.10).
 24. **The M2 build table** of 7.11, and the art budget reconciled to it
@@ -3262,7 +3263,7 @@ confirmed by the client on 2026-11-21, with this document:
 - **`HewCeiling` failed as written:** a Ram into a contact hazard broke
   its per-unit clause at every level; the per-unit clause now reads the
   collision band only, a change to a Vanguard lead's call (TR-30);
-- **Conduct is the "conducting water" that stat model 2 held back**
+- **Charged Water is the "conducting water" that stat model 2 held back**
   until riders and layers are proven; it arrives in M2, before that
   gate, because it is instantaneous and makes no square (TR-26);
 - **"Deliberately dry" now means "no condition squares":** the Supper,
@@ -3305,8 +3306,8 @@ confirmed by the client on 2026-11-21, with this document:
 | TF2 | A successful edge save makes a knock-into fizzle | Success is an ordinary obstacle stop, so non-verb pushes still collide, and after the check this holds for harm squares too; save odds and the failure's difference are the preview headline (6.5.2, 6.12) |
 | TF3 | Floor 1 shows the solo player no terrain | Teaching room per floor-1 theme; typed Low pieces; Gaol noise identity (6.5.6, 7.2) |
 | TF4 | Round-1 Keg alpha strike | Kegs ≥ 2 from enemy starts; no shooting Kegs in M2; Shoot an object (M3) ends Hidden; `BurstRound1Share` |
-| TF5 | Cover makes Kiter fights slogs | CV8 artillery flank rule; move-hover shields kept while the move tool is open; Smash and (M3) Shoot an object break cover |
-| TF6 | Lingering ask fully deferred | The M2 legal package bundled (6.6), including one gas-aura monster per Poisoned theme; Q4 bundles K2 and Conduct; M3 Remnants lead with ignition; Mist dropped |
+| TF5 | Cover makes Kiter fights slogs | CV8 artillery flank rule (role renamed Marksman, naming pass NP-19); move-hover shields kept while the move tool is open; Smash and (M3) Shoot an object break cover |
+| TF6 | Lingering ask fully deferred | The M2 legal package bundled (6.6), including one gas-aura monster per Poisoned theme; Q4 bundles K2 and Conduct (renamed Charged Water, naming pass NP-19); M3 Remnants lead with ignition; Mist (renamed Fog, naming pass NP-19) dropped |
 | TF7 | Themes feel samey | One signature interaction and terrain Law line per theme (7.1, KP9, TR-22) |
 | TF8 | Enemies barely use terrain | One visible terrain-using enemy per F2–5 theme with telegraphed intent; bosses get an authored terrain move via segment 9 (6.9, 6.11) |
 | TF9 | Hover-only verbs hurt discovery | Contextual chip when a verb pays off (6.12) |
@@ -3319,7 +3320,7 @@ confirmed by the client on 2026-11-21, with this document:
 
 | Id | Finding | Resolution |
 |---|---|---|
-| TB1 | Contact on verb pushes makes Gust a damaging at-will and Give Ground an area spike | Verb-only pushes deal the typed collision band; area forced movement deals contact to ≤ 2 units per action; Gust contact counted in the at-will rider bound (6.5.2, TR-10). Shockwave and Squall corrected to non-verb (new lead's call 1) |
+| TB1 | Contact on verb pushes makes Gust a damaging at-will and Give Ground an area spike | Verb-only pushes deal the typed collision band; area forced movement deals contact to ≤ 2 units per action; Gust contact counted in the at-will rider bound (6.5.2, TR-10). Shockwave (renamed Upheaval, naming pass NP-19) and Squall corrected to non-verb (new lead's call 1) |
 | TB2 | Brink on faces gives no-save boss disadvantage | Brink read literally (hazard squares only); contact hazards give no Teetering; `TeeteringUptimeOnBosses` gate with the "bosses steady" lever in reserve |
 | TB3 | Movable Kegs break the spacing guarantee | Kegs sturdy in M2; no burst triggers a burst in M2 (6.3.5) |
 | TB4 | A 1-wide Clearway plus Shunt builds funnels the AI cannot answer | Clearway ≥ 2 wide in fight rooms; `FurnishingNeverSeals` reachability and initial-state lengthening rules (the width-2 fill replaced after the check); universal monster light Smash (6.2.2, 6.3.6, 6.9) |
@@ -3328,9 +3329,9 @@ confirmed by the client on 2026-11-21, with this document:
 | TB7 | Enemy-triggered Kegs against a crowded party | Footprints always drawn; Keg triggers count as attacks in intent and focus spread; guards every round; `NoCheapKill` covers triggered environment damage |
 | TB8 | RT-14 as a single point of failure | Damage-only hazards never give Teetering; harm squares need no ruling (the withholding dropped after the check); Supper Poisoned rows conditional (6.5.5) |
 | TB9 | Cover against reaction AC timing undefined | Suppressed against charged AC; step 2b in the pipeline; the larger of cover and the reaction bonus, with offers evaluated with cover applied and the preview note (CV4) |
-| TB10 | Symmetric cover buffs artillery, worst on floor 1 | No covered monster starts on floor 1; the solo table re-run with the adopted arm; `Floor1ClassSpread` |
+| TB10 | Symmetric cover buffs artillery (role renamed Marksman, naming pass NP-19), worst on floor 1 | No covered monster starts on floor 1; the solo table re-run with the adopted arm; `Floor1ClassSpread` |
 | TB11 | Party-triggered Remnants as ground zones; clouds pin AI and routers | Clipped off Portals, the Clearway, flee exits and chokes; routers may cross non-lethal ones; party-sourced for caps; told plainly in Q5 |
-| TB12 | Conduct punishes the party in Choir water | Halved after weakness; once per unit per event; never from monster at-wills; counted in the guards |
+| TB12 | Conduct (renamed Charged Water, naming pass NP-19) punishes the party in Choir water | Halved after weakness; once per unit per event; never from monster at-wills; counted in the guards |
 | TB13 | `NoCheapKill` readable as immunity; per-round cap demoted on a weak toy | Phrased "does not prefer"; per-round caps kept as switchable simulator arms |
 | TB14 | Shade parity | V9 Hide-spot band; Shade yardstick re-run; Overturn ordering stated |
 | TB15 | Clock and companions | Verbs never offered on companion turns unless opened; net rounds gate ≤ +1% |
@@ -3352,7 +3353,7 @@ confirmed by the client on 2026-11-21, with this document:
 | TC10 | Lines, Skewer, reach undefined against pieces | Tall = wall; Low pieces never stop lines (TR-5) |
 | TC11 | Rider-free ruling ambiguity; braziers thaw Frozen | Ruling text includes the damage-end row and payouts; told plainly (6.5.2, TR-13) |
 | TC12 | Name collisions and inconsistent vocabulary | Fixture, Volatile, Roll, Hot Furnishing, "burst" as a class, Flanked dropped; Clearway and harm square unified (front matter) |
-| TC13 | Wrong citations | Flanking rejection cited to the Shade 9 table; Volatile to enemies 17.2; the Vanguard 9 "Rejected" row with its main 2 justification (CV6, TR-7). While writing: Shockwave and Squall cited to the Arcanist design 8.2 and 8.3 as non-verb (new lead's call 1) |
+| TC13 | Wrong citations | Flanking rejection cited to the Shade 9 table; Volatile to enemies 17.2; the Vanguard 9 "Rejected" row with its main 2 justification (CV6, TR-7). While writing: Shockwave (renamed Upheaval, naming pass NP-19) and Squall cited to the Arcanist design 8.2 and 8.3 as non-verb (new lead's call 1) |
 | TC14 | Remnants miss RC1 | RC1 in TR-27 and TR-20 |
 | TC15 | Briar without flags | Its own future question with RS 6.3, 8.4, RT-20 and 11.2 listed (19.2) |
 | TC16 | Rough stacking undefined | Costs never stack above 2 (6.2.1, TR-11) |
@@ -3364,7 +3365,7 @@ confirmed by the client on 2026-11-21, with this document:
 
 Every judge graft is adopted (5.3) except where a critique overrode it:
 - **"Shoot the keg" in M2** (judge 1) moves to M3 (TC9, TB3).
-- **Mist as a second Remnant** (judge 3) is deferred (TF6).
+- **Mist (renamed Fog, naming pass NP-19) as a second Remnant** (judge 3) is deferred (TF6).
 - **"Contact applies to verb pushes"** is kept but at the collision band
   (TB1).
 - **Free-authored phase (e)** (judge 1) becomes phase sockets (TC5).
@@ -3378,7 +3379,7 @@ Approved specs: all 19 under
 while writing this document:
 - weapons 7.2 rule 4 (verb-sourced movement) and 9.5;
 - conditions 10.1–10.4 and 11.1–11.6;
-- the Arcanist design: Gust (verb-sourced for collisions), Shockwave and
+- the Arcanist design: Gust (verb-sourced for collisions), Upheaval and
   Squall (non-verb), "Never: ground zones";
 - the Herald design: Give Ground (non-verb, collision bludgeoning);
 - the Vanguard design 8.3 (Brink; the rejected list) and the 9 table

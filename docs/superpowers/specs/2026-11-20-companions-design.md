@@ -92,11 +92,18 @@ extrapolation outside the calibrated range. **Read the numbers as
 direction and size, never as values to put in data (told plainly,
 accepted with Q1).**
 
+**Names updated by the naming pass** (naming pass design,
+`2026-11-24-naming-pass-design.md`, approved 2026-11-24; NP-30, and
+NP-7 closing CMP-27). Change rows (16), the approval record (18.1) and
+Appendix A keep the names as written then; the lists below note each
+rename in place.
+
 **Names are placeholders** pending the naming pass (a separate client
 item). They are frozen here so that documents agree. Every name new to
 this document was grep-checked as a whole word against the 16 approved
 documents and has no hits: Muster, Travel on, Party Forecast, Pledge,
-Rethink, Lone Road, Old Friend, Wayfarer's Pack, Levy soldier, `kitBound`,
+Rethink, Lone Road, Old Friend, Wayfarer's Pack (renamed Wayfarer's
+Belt, naming pass NP-30), Levy soldier, `kitBound`,
 Gatekeeper, Brawler, Scout, Outrider, Tinker, Hedgemage, Jostle, Close
 Ranks, Barge, Heave, Gap Sight, Sidestep, Staggering Shot, Flank Sense,
 Underfoot, Knife Work, Poultice, Deeds, Veteran (as a record name),
@@ -106,9 +113,9 @@ Names avoided because they collide **(lead's call)**:
 
 | Avoided name (draft) | Collides with | Used instead |
 |---|---|---|
-| Warden (kit) | Warden's Coif (trinkets, armour); Corridor Warden (weapons) | **Gatekeeper** |
+| Warden (kit) | Warden's Coif (trinkets, armour); Corridor Warden (weapons; renamed Corridor Crossbow, naming pass NP-30) | **Gatekeeper** |
 | Breaker (kit) | Rejected in classes 10 (the conditions' "breaker types") | **Brawler** |
-| Adept (kit) | A planned unlock class (classes 9.1, "Adept (monk-type)") | **Tinker** |
+| Adept (kit) | A planned unlock class (classes 9.1, "Adept (monk-type)"; renamed Ascetic, naming pass NP-30) | **Tinker** |
 | Skirmisher (kit) | The enemy role "skirmisher" (enemies 17.1) | **Outrider** |
 | Lockbreaker | Head word "Breaker" | **Scout** |
 | Hedge-warder | Head word "Ward" (Warded, Warding) | **Hedgemage** |
@@ -121,13 +128,13 @@ Names avoided because they collide **(lead's call)**:
 | Mend | Herald's Mending Word | **Poultice** (Later reserve only, 9.5) |
 | Salve | A rejected Herald mechanic | Not used |
 | Drill | Vanguard Stance Drill | **Rethink** |
-| Lone Banner, Carried Banner | "Banner" is rejected (classes 10; Herald front matter) | **Lone Road**, "carried hire" |
+| Lone Banner, Carried Banner | "Banner" is rejected (classes 10; Herald front matter) | **Lone Road**, "carried hire" (renamed "returning hire", naming pass NP-30) |
 | Recruit soldier (enemy) | Player "recruits" | **Levy soldier** (CMP-27) |
 | Recruit Board | Kept short | **Muster** |
 
 The kit names the Herald design fixed are kept: Drummer, Shieldbearer,
 Quickstep, Drumroll, Guard Step, Form Up **(settled, Herald design
-7.17)**. Shared mechanic names (Interpose, Shieldwall, Hold the Line,
+7.17)**. Shared mechanic names (Interpose, Shieldwall, Bar the Way,
 Opening, Mote, Gust, Flare) are used on purpose: each names the same rule
 as on the hero, applied to a simplified slice **(settled, classes 7.8)**.
 They carry `sharedWithKits` in data, so `SliceNotCopy` checks kits only
@@ -348,7 +355,7 @@ stand **(settled)**.
   `min(k, cap)` companions (7.1).
 - **Hire:** a companion joining the party at a Muster; a **swap** is a
   dismissal and a hire in one visit.
-- **Carried hire:** one extra hire at the next camp, earned by hiring
+- **Returning hire:** one extra hire at the next camp, earned by hiring
   nobody at a camp where a slot was open (7.5).
 - **Gap card (card A):** the board card resolved at camp entry by the gap
   procedure (7.3); it covers the first unmet coverage need not already
@@ -384,7 +391,7 @@ document on 2026-11-20, and they are binding.
 | 2 | How many companions, given the clock? (Q2) | **Cap 3 companions (a party of 4), decided by measurement:** `FloorTimeByPartySize` is the first M2 gate (median floor time at party 4 on floors 4–5 ≤ 20 minutes) plus a blind party-of-3 vs party-of-4 playtest before balance freezes; the lever order of 7.4; if floors 4–5 still run long after the levers, the cap becomes 2 (camp 3 swap-only, read exactly in 7.1; expected 0 / 1 / 2 / 2 / 2); every new report runs at both caps from the start; the accept-rest-of-turn key is prototyped behind a playtest flag and **the client decides whether it ships** after seeing it (7.4; CMP-2, CMP-19, CMP-29) **(agreed)** | B: cap 2 now (re-reads every calibration column; narrower parties). C: cap 3 with no gate (the toy puts floors 4–5 at about 27–29 minutes) |
 | 3 | Should any companion heal allies at M2? (Q3) | **No.** No recruit kit heals allies at M2; the heal-kit recruit rows print 0; healing stays the Herald's lean (classes 6.4, "one class at most"); the Hedgemage's Poultice is kept written as a Later reserve (5.4, 9.5; CMP-23) **(agreed)** | B: ship Poultice on the Hedgemage at M2 as a new class-healing source measured by the healer gate |
 | 4 | Recruitment model | **Model A, the camp schedule**, with grafts (6) **(lead's call; judges unanimous)** | B, found in the dungeon (dual composition at W and W + 8). C, the choice economy (charges twice for one unit) |
-| 5 | Cadence | One slot at each of camps 1–3; a Muster of 3 cards *(illustr.)*; at most one hire per camp plus one non-stacking carried hire; camps only; floor 1 always solo (7.1) **(lead's call)** | Mid-floor joins; a random chance per camp; unlimited carry |
+| 5 | Cadence | One slot at each of camps 1–3; a Muster of 3 cards *(illustr.)*; at most one hire per camp plus one non-stacking returning hire; camps only; floor 1 always solo (7.1) **(lead's call)** | Mid-floor joins; a random chance per camp; unlimited carry |
 | 6 | Guarantees | **The offer and its coverage, never a hire:** a Muster at every camp with an open slot; a gap card for the first unmet need (Medicine, protector, Mechanics, Arcana), never healing, waivers printed; no pity timer (7.3) **(lead's call)** | A guaranteed hire or party size by floor X (budgets already read the actual party); a pity timer (DH 5.4(f)) |
 | 7 | Declining, dismissal and swap | Travel on in one click; dismissal and swap at camp only, one per camp (a plain dismissal or a swap); `kitBound` kit items (7.5, 7.6) **(lead's call)** | Mid-floor dismissal (pure loss, griefable); a reserve bench |
 | 8 | Cost of a recruit | **Free;** the price is party weight, shown on the card (7.8) **(lead's call)** | Gold; the camp's shop or reward; an experience share |
@@ -443,8 +450,8 @@ scaling or recognition, never stats.**
 - **One recruit slot opens at each of camps 1, 2 and 3.** Every camp with
   an open slot shows a **Muster** of 3 candidate cards *(illustr.)*; at a
   full party the Muster becomes a 3-card swap board.
-- **At most one hire per camp,** plus one **carried hire** if the
-  previous camp was declined in full. The carried hire never stacks.
+- **At most one hire per camp,** plus one **returning hire** if the
+  previous camp was declined in full. The returning hire never stacks.
 - **Cap: 3 companions, a party of 4** **(agreed, Q2)**, inside main 4.2's
   decided "2–3". An always-hiring player has a party of 1 / 2 / 3 / 4 / 4
   on floors 1–5, exactly the expected-size column the enemies design was
@@ -595,7 +602,7 @@ preview**. Its Hold card is not needed, because nothing is missable.
 |---|---|---|
 | Shortfall weight discount | Toy; all three judges | 7.7; CMP-5, CMP-6; keyed to a config value, not the enemies 6.3 column **(agreed, Q1)** |
 | Boss HP reads the actual party | Toy; all judges | Mandatory; CMP-7 |
-| One-step carried hire (not unlimited carry) | New mechanics; all judges | 7.5: **+1 hire, no extra card** |
+| One-step returning hire (not unlimited carry) | New mechanics; all judges | 7.5: **+1 hire, no extra card** |
 | Party Forecast line | New mechanics | 7.11, framed as sizing, never as a bonus |
 | Next-camp preview | Model C | 7.2: the free cards exactly, plus placeholders for card A and the Eye's card |
 | Board drawn at floor generation | Model C | 7.2: free cards drawn and fixed at generation; card A resolved at camp entry by the gap procedure (7.3) |
@@ -618,7 +625,7 @@ preview**. Its Hold card is not needed, because nothing is missable.
   cap is a **single switch**: `slotOpensAtCamp` is always the first
   `companionCap` camps, and `expectedCompanions(floor)` is computed from
   them (7.7); `SlotScheduleMatchesCap` checks both.
-- **Hires per camp.** At most **one**, plus the **carried hire** (7.5).
+- **Hires per camp.** At most **one**, plus the **returning hire** (7.5).
 - **Floor 1 has no companion source of any kind** (`NoFloor1Companion`).
   No boon, event, Pledge or offer places a unit before camp 1. Segment 8
   reads this as written: no Curiosity offers or places a companion or
@@ -628,22 +635,22 @@ preview**. Its Hold card is not needed, because nothing is missable.
 | Camp | Reached after | Ladder | Muster shown | Hires this visit |
 |---|---|---|---|---|
 | — | — (floor 1) | 0 | never | 0 |
-| Camp 1 | Floor-1 boss (hero at level 3 since the floor-1 antechamber, subclass chosen there before the boss, classes 7.3; change RT-8, run structure design 9.4) | 1 | always | 1 |
-| Camp 2 | Floor-2 boss | 2 | always (open slot, or swap) | 1, or 2 with a carried hire |
-| Camp 3 | Floor-3 boss | 3 | always (open slot, or swap) | 1, or 2 with a carried hire |
-| Camp 4 | Floor-4 boss | 3 | open slot or swap | 1, or 2 with a carried hire |
+| Camp 1 | Floor-1 boss (hero at level 3 since the floor-1 Forecourt, subclass chosen there before the boss, classes 7.3; change RT-8, run structure design 9.4) | 1 | always | 1 |
+| Camp 2 | Floor-2 boss | 2 | always (open slot, or swap) | 1, or 2 with a returning hire |
+| Camp 3 | Floor-3 boss | 3 | always (open slot, or swap) | 1, or 2 with a returning hire |
+| Camp 4 | Floor-4 boss | 3 | open slot or swap | 1, or 2 with a returning hire |
 
 - An always-hiring player is at 1 / 2 / 3 / 4 / 4: the enemies 6.3
   column, the Herald design 5.4 toy schedule, HE-6's n = 4 cells and
   items 5.2's "party of four".
-- **Stranded slot (told plainly).** The carried hire holds one hire
+- **Stranded slot (told plainly).** The returning hire holds one hire
   only. A player who declines at camps 1 and 2 can hire at most 2 at
   camp 3; with 5 floors the third slot is always reachable through camp 4
   **(change RT-1, run structure design 6.1)**.
 - **Under the cap-2 fallback** (7.4) the ladder is `min(k, 2)`,
   `slotOpensAtCamp` becomes [1, 2] and `expectedCompanions` becomes 0 /
   1 / 2 / 2 / 2. **No new slot opens at camp 3.** A party below the cap
-  there still gets a hire board (a carried hire honoured, up to 2
+  there still gets a hire board (a returning hire honoured, up to 2
   companions); a full party gets a swap board. This is the exact reading
   of the client's "camp 3 swap-only", which describes the always-hiring
   player **(lead's call; told plainly)**. Nothing else in this section
@@ -664,7 +671,7 @@ preview**. Its Hold card is not needed, because nothing is missable.
   class, or in a "without X" arm, where only three classes remain.
   `BoardShrinkLegal` (a test) checks that the base board never falls
   below `cardsBase` cards while the corpus has legal kits.
-- A carried hire adds a hire, **not** a card.
+- A returning hire adds a hire, **not** a card.
 - At a full party: a swap board of the same construction.
 
 **Free cards** **(lead's call; classes 7.8)**
@@ -851,7 +858,7 @@ slot}` **(lead's call)**.
     cards Brawler + Drummer, open need protector: card A is a Gatekeeper
     or Shieldbearer (tier iii, printed)".
 - **G3, no pity timer.** DH 5.4(f)'s reasons apply. The only memory is
-  the visible carried hire. **(lead's call)** (Read by change LE-13: the
+  the visible returning hire. **(lead's call)** (Read by change LE-13: the
   Dream's Due is a loot rule, not recruitment pity; G3 unchanged; loot
   economy design 6.6.)
 - **G4, no "party ≥ N by floor X".** Budgets use the actual party; what
@@ -892,10 +899,10 @@ Q2):**
   door 1 click; a container N clicks by type (filled by change LP-8,
   loot sources design 4.6; M2: a quiet Plain open 1 click, auto-closing;
   a Plain open with a notable or healing sundry 2; Twin Coffer 2; Glean
-  1 + 1 per notable decision; Steal 2; Viaticum or boss card offer 2; a
+  1 + 1 per notable decision; Steal 2; Parting Fare or boss card offer 2; a
   consequence lock 3; values *(illustr.)* until the walker measures
   them); Listen 1 click and 2 ticks
-  (0 ticks when passive); Sound the wall 1 click and 6 ticks; a Squeeze
+  (0 ticks when passive); Tap the wall 1 click and 6 ticks; a Squeeze
   1 click, +4 ticks on a failure; a Latch 1 click and 1 tick; a reveal 1
   click; each auto-walk stop 1 click; travel 1 click and 1 tick per step,
   and each noticing pre-stop 1 click (change XI-8, exploration and
@@ -1075,11 +1082,11 @@ internal design target; ability 11.4's playtest target is unchanged.
   unset; a Perilous Door choice, M3); an open slot with an unused hire is
   a passive line on the door card, never a confirm reason (change CH-26,
   camp and hub design 4.2; M2).
-- **D2, the carried hire.** If no one is hired at a camp where a slot was
+- **D2, the returning hire.** If no one is hired at a camp where a slot was
   open **on arrival**, the next camp allows **one extra hire** (up to 2),
   with no extra card. It holds one hire and never stacks. With 3 cards
   and 2 hires, deferring gives less choice than two separate boards, so
-  it is never a better-pick tool. **A dismissal never creates a carried
+  it is never a better-pick tool. **A dismissal never creates a returning
   hire (new lead's call):** only an open slot left unfilled does.
 - **D3.** Nothing is missable: unhired kits can reappear (7.2).
 - **A declared Lone Road run (M3; new lead's call)** hides the Musters
@@ -1101,11 +1108,11 @@ internal design target; ability 11.4's playtest target is unchanged.
 - **Swap:** it uses one of the camp's hires. The newcomer joins at the
   hero's level with defaulted choices, so swapping never costs levels.
   **A camp's hires may be spent on joins or on the one swap (new lead's
-  call):** with a carried hire and an open slot, a player may swap one
+  call):** with a returning hire and an open slot, a player may swap one
   companion and hire one.
 - **Swap forecast (new lead's call).** A swap made while the party has an
   open slot shows on its confirmation: "Swapping uses this camp's hire:
-  your party stays at N" (no carried hire is earned, because someone was
+  your party stays at N" (no returning hire is earned, because someone was
   hired; the 4-floor line is deleted, change RT-1).
 - **A plain dismissal** (no newcomer) frees the slot; the ladder lets a
   later camp refill it. Its confirmation says "X leaves for good".
@@ -1132,7 +1139,7 @@ internal design target; ability 11.4's playtest target is unchanged.
   6.2). Dismiss is greyed `PackFull` until there is room, as Buy is.
 - **Same-visit undo (new lead's call).** A hire may be undone before
   Travel on. The core restores the Muster snapshot taken at that hire:
-  the card is shown again and hireable, the hires used and the carried
+  the card is shown again and hireable, the hires used and the returning
   hire are restored, the newcomer's bound items are deleted, and any other
   item it holds (gear bought or moved onto it) goes to the hero or the
   pack by 6.2 placement; the undo is greyed `PackFull` until there is
@@ -1218,7 +1225,7 @@ internal design target; ability 11.4's playtest target is unchanged.
    rows at every reachable party size; the solo round-1 row also on solo
    floors 2–5. Kept as fairness only: the toy shows it never binds (solo
    deaths come from round 2 on) **(told plainly)**.
-3. **Choice:** the carried hire; nothing missable.
+3. **Choice:** the returning hire; nothing missable.
 4. **What a small party keeps:** experience is not split (enemies 16);
    guaranteed healing per member is higher (HE-6 n = 1); loot is shared
    among fewer bodies.
@@ -1369,14 +1376,14 @@ one rest-summary command shown after the catch-up picks), **the Hollow**
 free order until Travel on; the `choice` state unchanged) and **Travel
 on** (step 11).
 
-The hero already reached level 3 at the floor-1 antechamber **(change
+The hero already reached level 3 at the floor-1 Forecourt **(change
 RT-8, run structure design 9.4)**, so the recruit's join card at camp 1
 shows the L3 choice; a skill the
 catch-up grants (say Medicine) moves card A to the next need (11.5).
 
 **Two-tier card (lead's call):**
 - **Front:** portrait and silhouette, generated name, one primary role
-  tag (Protector, Tempo, Control, Skills, Striker, Area, Ward; the kit's
+  tag (Defender, Tempo, Control, Skills, Striker, Area, Buffer; the kit's
   `primaryRoleTag`, 8.3), the secondary **Medic** badge when a fixed skill
   or the preselected flex is Medicine, a one-line verb, the coverage
   strip. Read in a glance.
@@ -1394,7 +1401,7 @@ camp and hub design 4.2) **(lead's call)**:
 - worst-member Stealth ("Party Stealth +4 → +1");
 - turn load ("+1 turn per round");
 - on the Travel-on door caption: "Fewer companions: smaller fights, but
-  every blow lands on fewer of you", and the carried-hire line (7.1; the
+  every blow lands on fewer of you", and the returning-hire line (7.1; the
   stranded-slot line is deleted, change RT-1);
 - on a swap made while a slot is open: the swap forecast lines (7.6).
 
@@ -1510,8 +1517,8 @@ at levels 1, 5 and 10, so companions never lower the AR-20 bound.
 | Brawler | Barge 3 uses / Heave push 4 | Barge on a target up to one size larger / Heave a second target adjacent to the first (own roll) | Heave 2 per camp / Barge 4 uses |
 | Scout | Sidestep 3 uses / Staggering Shot +2 to hit | Sidestep 4 uses / Staggering Shot a second target within 2 of the first (own roll) | Staggering Shot 2 per camp / Sidestep 5 uses |
 | Outrider | Underfoot 3 uses / Knife Work +2 to hit | Underfoot 4 uses / Knife Work's two attacks may target two adjacent hostiles | Knife Work 2 per camp / Underfoot 5 uses |
-| Tinker | Flare 3 uses / Spatter range +4 | Flare 4 uses / Shockwave push +1 | Slot pool +1 / Flare 5 uses |
-| Hedgemage | Flare 3 uses / Grasping Roots range +4 | Flare 4 uses / Drench burst radius 1 → 2 (inside 25 squares) | Slot pool +1 / Flare 5 uses |
+| Tinker | Flare 3 uses / Spatter range +4 | Flare 4 uses / Upheaval push +1 | Slot pool +1 / Flare 5 uses |
+| Hedgemage | Flare 3 uses / Grasping Weeds range +4 | Flare 4 uses / Drench burst radius 1 → 2 (inside 25 squares) | Slot pool +1 / Flare 5 uses |
 | Drummer | As Herald design 7.17 **(settled)** | | |
 | Shieldbearer | As 8.3 (CMP-25) | | |
 
@@ -1542,37 +1549,37 @@ at levels 1, 5 and 10, so companions never lower the AR-20 bound.
 
 | Class | The hero keeps | The kit's slice |
 |---|---|---|
-| Vanguard | Techniques decided **after** the hit; Momentum; Surge; Second Wind; Arts; stance re-pick; subclass | Riders **declared before the roll**, spent only on a hit; stance fixed by the kit |
+| Vanguard | Techniques decided **after** the hit; Momentum; Onslaught; Patch Up; Arts; stance re-pick; subclass | Riders **declared before the roll**, spent only on a hit; stance fixed by the kit |
 | Shade | Stealth tier; Hidden strikes; Vanish; Fade; Duck; From Nowhere; subclass | The **open tier** only, one Opening trigger per kit; never Hide-to-strike |
 | Arcanist | The element pair; Interplay; full Weft; slot tiers; Overchannel; Arts; Knit | One element family (drawn with the candidate entry, 7.2); one combined `camp` slot pool with 2 fixed, named spells; Flare as its reaction; a simple weapon as its physical fallback |
-| Herald | Cadence (Frighten, Spur, Rekindle); presence spells; Rally; Leadership and Intimidation | Spurred grants on its own pools (CL-5); Wisdom main; no heal |
+| Herald | Cadence (Frighten, Urge, Take Comfort); presence spells; Rally; Leadership and Intimidation | Spurred grants on its own pools (CL-5); Wisdom main; no heal |
 
 A recruit of the hero's class is therefore a different slice by
 construction; the ×½ weight and card A's hero-class tier (7.3) are about
 variety, not identity. Each class lists its hero-only features in
-`heroOnlyFeatureIds` (Momentum, Surge, Second Wind, Arts, the Techniques,
+`heroOnlyFeatureIds` (Momentum, Onslaught, Patch Up, Arts, the Techniques,
 Stand Fast, the subclass features; Vanish, Fade, Duck, From Nowhere, the
-stealth tier; Overchannel, Weft, Interplay, Knit, Sculpt; Frighten, Spur,
-Rekindle, presence spells, Rally), which `SliceNotCopy` reads (11.2).
+stealth tier; Overchannel, Weft, Interplay, Knit, Whittle; Frighten, Urge,
+Take Comfort, presence spells, Rally), which `SliceNotCopy` reads (11.2).
 
 **Kit table** *(names placeholders; numbers illustr.; stat sheets are
 stage-2 data)*:
 
 | Kit | Class / primary role | Array | Skills: fixed; flex (choose 1) | Gear |
 |---|---|---|---|---|
-| **Gatekeeper** | Vanguard, Protector | Str +3, Con +2, Wis +1, Dex +1, Int 0, Pre −1 | Athletics; Medicine or Perception | Chain mail, shield, warhammer |
+| **Gatekeeper** | Vanguard, Defender | Str +3, Con +2, Wis +1, Dex +1, Int 0, Pre −1 | Athletics; Medicine or Perception | Chain mail, shield, warhammer |
 | **Brawler** | Vanguard, Control | Str +3, Con +2, Dex +1, Wis +1, Pre 0, Int −1 | Athletics; Medicine or Lore | Chain mail, maul |
 | **Scout** | Shade, Skills | Dex +3, Int +2, Wis +1, Con +1, Str 0, Pre −1 | Arcana, Mechanics; Perception or Stealth | Leather, shortbow, dagger |
 | **Outrider** | Shade, Striker | Dex +3, Con +2, Wis +1, Int +1, Str 0, Pre −1 | Stealth, Acrobatics; Medicine or Arcana | Leather, short sword, darts |
 | **Tinker** | Arcanist, Area | Int +3, Dex +2, Con +1, Wis +1, Str 0, Pre −1 | Mechanics; Lore or Medicine | Leather, dagger |
-| **Hedgemage** | Arcanist, Ward | Int +3, Dex +2, Wis +1, Con +1, Pre 0, Str −1 | Arcana; Medicine or Perception | Leather, staff |
+| **Hedgemage** | Arcanist, Buffer | Int +3, Dex +2, Wis +1, Con +1, Pre 0, Str −1 | Arcana; Medicine or Perception | Leather, staff |
 | **Drummer** | Herald, Tempo | Wis +3, Con +2, Dex +1, Str +1, Int 0, Pre −1 | Perception; Medicine or Lore | Hide (Sure-Footed), spear **(settled, Herald design 7.17)** |
-| **Shieldbearer** | Herald, Protector | Wis +3, Con +2, Str +1, Dex +1, Int 0, Pre −1 | Medicine; Lore or Perception | Chain shirt, shield, mace **(settled)** |
+| **Shieldbearer** | Herald, Defender | Wis +3, Con +2, Str +1, Dex +1, Int 0, Pre −1 | Medicine; Lore or Perception | Chain shirt, shield, mace **(settled)** |
 
 Every skill is on its class's list (classes 8.3–8.6), and each kit's
 skill count equals its class's (2, or 3 for the Shade). **Role tags (new
-lead's call):** each kit has exactly one `primaryRoleTag` from Protector,
-Tempo, Control, Skills, Striker, Area, Ward, and no two M2 kits of one
+lead's call):** each kit has exactly one `primaryRoleTag` from Defender,
+Tempo, Control, Skills, Striker, Area, Buffer, and no two M2 kits of one
 class share one (`KitRoleTagUnique`). **Medic** is a secondary badge,
 shown when a fixed skill or the chosen (or preselected) flex skill is
 Medicine (the Shieldbearer always).
@@ -1604,7 +1611,7 @@ signature; at most 3 things to read) **(lead's call unless marked)**:
   and carries no rider. `KitAcEnvelope` checks it inside the charged
   envelope.
 - **Brawler.** At-wills: weapon attack; Shove. Reaction: opportunity
-  attack, stance fixed **Hold the Line**. `rest` 2 **Barge**: declared
+  attack, stance fixed **Bar the Way**. `rest` 2 **Barge**: declared
   before the roll; on a hit, the target is knocked Prone if it is your
   size or smaller (tagged `trip`, so Anchored and `prone` immunity apply;
   a kit source added to the Prone sources, CMP-32). `camp` 1 signature
@@ -1635,12 +1642,12 @@ signature; at most 3 things to read) **(lead's call unless marked)**:
   `ifItChangesOutcome`). `camp`: one combined slot pool (2; 3 at level 5;
   4 at level 9) holding 2 fixed spells from the Arcanist list with
   `classTags`: **Spatter** (family template, resolved to the kit's
-  family; the **signature**) and **Shockwave** (family-free push), never
+  family; the **signature**) and **Upheaval** (family-free push), never
   Binder- or Alembic-exclusive. Tier automatic from level **(new lead's
   call: spells named)**.
 - **Hedgemage.** At-wills: **Mote** (its element family); **Help**.
   Reaction: Flare (`rest` 2). A slot pool of the same shape holding
-  **Grasping Roots** (family-free lockdown, concentration; the
+  **Grasping Weeds** (family-free lockdown, concentration; the
   **signature**) and **Drench** (family-free; a willing ally may skip the
   save and is put out). It differs from the Tinker in an at-will, both
   spells and its signature `effectKinds` (`KitsDistinctWithinClass`)
@@ -1742,7 +1749,8 @@ preview and 17.3 danger band cover four units.
 - **The player controls every unit (decided, main 4.2).** Suggestions
   off by default, one key accepts one step **(agreed, ability 11.3)**.
 - **Kit data carries:** `reactionPolicy` (Interpose and Flare
-  `ifItChangesOutcome`; opportunity attacks `nonMinion`),
+  `ifItChangesOutcome`, shown as **Only if it matters**, naming pass
+  5.9.14; opportunity attacks `nonMinion`),
   `defaultRotation`, an ordered list of `{abilityId, condition (always |
   targetUnready | targetStaggered | allyAdjacentThreatened | allyBelowHalf
   | …, a closed enum), targetRule (nearest | lowestHp | threateningAlly |
@@ -1787,11 +1795,11 @@ preview and 17.3 danger band cover four units.
 - One silhouette and accent per kit; the class palette for the body.
 - **Named piece (M2; change SK-5, starting kits design 4.5.1, 5.2;
   agreed there, Q2):** each kit's issued gear (unchanged, 8.3) carries
-  one named piece with a given name: Gatekeeper shield "Iron Rim",
-  Brawler maul "Birch Handle", Scout shortbow "Waxed String", Outrider
-  short sword "Worn Scabbard", Tinker dagger "Brass Pommel", Hedgemage
-  staff "Green Bark", Drummer spear "Ochre Daub", Shieldbearer shield
-  "Boss Nail" (placeholders); its other pieces get 1 or 2 kit lines. The
+  one named piece with a given name: Gatekeeper shield "Banded Face",
+  Brawler maul "Birch Handle", Scout shortbow "Linen Whipping", Outrider
+  short sword "Old Scabbard", Tinker dagger "Brass Pommel", Hedgemage
+  staff "Green Wood", Drummer spear "Ochre Daub", Shieldbearer shield
+  "Domed Nail" (placeholders); its other pieces get 1 or 2 kit lines. The
   name is display only, shown as the piece's Whence line, and lives in
   `run.save`'s display sidecar, never on the Core instance; it belongs to
   the `kitBound` instance and is deleted with it on dismissal (logged as
@@ -1800,8 +1808,8 @@ preview and 17.3 danger band cover four units.
   with the name (SK-3). Companion kits are exempt from the F1 named-piece
   check; companions get no Oddment until Later. Test
   `CompanionNameOnIssuedPiece` (starting kits design 9.2).
-- Role tags: one primary per kit (Protector, Tempo, Control, Skills,
-  Striker, Area, Ward; 8.3); the secondary **Medic** badge (gets allies
+- Role tags: one primary per kit (Defender, Tempo, Control, Skills,
+  Striker, Area, Buffer; 8.3); the secondary **Medic** badge (gets allies
   up; **no healing spells**, said on the badge) when the kit's fixed or
   chosen flex skill is Medicine.
 - Party bar per unit: HP, pool pips with refill icons, signature pip,
@@ -1853,7 +1861,7 @@ local to this table; F1, F5 and F6 are the fun critique's proposals
 |---|---|---|---|
 | CX-1 | Muster (camp board, slot ladder) | **Adopted** (7.1, 7.2) | M2 |
 | CX-2 | Gap card with printed waivers | **Adopted**, coverage strip instead of a single ribbon (7.3) | M2 |
-| CX-3 | Carried hire (one step) | **Adopted**, +1 hire, no extra card (7.5) | M2 |
+| CX-3 | Returning hire (one step) | **Adopted**, +1 hire, no extra card (7.5) | M2 |
 | CX-4 | Party Forecast line | **Adopted**, framed as sizing (7.11) | M2 |
 | CX-5 | Recruiter's Eye (HX-10) | **Adopted** (9.2) | M2 (cut line → M3) |
 | CX-6 | Camp swap and dismiss | **Adopted** with `kitBound` (7.6) | M2 |
@@ -1902,7 +1910,7 @@ local to this table; F1, F5 and F6 are the fun critique's proposals
 - A threshold, not a roll (stat model 5.4; the items 10.5 precedent). It
   is stat model 7.1's "better recruits" (CMP-14) and the Herald hero's
   secondary lean under classes 6.4's "no extra units" (CMP-15).
-- The extra card is a free card; it never stacks with a carried hire
+- The extra card is a free card; it never stacks with a returning hire
   (which adds no card), so it cannot make deferral a better-pick tool.
 - Toy: a small effect (a Herald hero's all-four-classes share 58% → 62%
   *(illustr.)*). Report `LeadershipRecruitUplift` ≤ 10 points; the
@@ -2074,8 +2082,8 @@ numbers.
   `companionKitId` (gear unchanged; starting kits design 9.1, SK-3,
   SK-5).
 - **Class record additions:** `heroOnlyFeatureIds[]` (8.3); features
-  shared with kits carry `sharedWithKits` (Interpose, Shieldwall, Hold the
-  Line, Opening, Mote, Gust, Flare, Spurred).
+  shared with kits carry `sharedWithKits` (Interpose, Shieldwall, Bar the
+  Way, Opening, Mote, Gust, Flare, Spurred).
 - **Boss record addition:** `hpByPartySize[1..4]` (7.9; CMP-7).
 - **Config `recruitSchedule`** {slotOpensAtCamp [1, 2, 3], companionCap
   3, cardsBase 3, cardsMax 4, carriedHireMax 1, dismissalsPerCamp 1,
@@ -2168,7 +2176,7 @@ by the axis, so no name collides with another segment's `Reference` or
 
 - **`Reference`** (the written `MusterBestFit`), complete **(new lead's
   call)**:
-  - always hires while a slot is open (the carried hire too); never
+  - always hires while a slot is open (the returning hire too); never
     declines, dismisses or swaps; never uses Rethink;
   - card order: covers the most unmet needs, then a class new to the
     party, then `combatValuePermille`, then data order;
@@ -2187,7 +2195,7 @@ by the axis, so no name collides with another segment's `Reference` or
   action with the highest win permille, ties by data order.
 - **`DiversityFirst`**.
 - **`AlwaysDecline`**; **`DeclineAt{k}`** (decline camp k, never use the
-  carried hire, hire at the other camps under `Reference`);
+  returning hire, hire at the other camps under `Reference`);
   **`DeclineTwo{j,k}`** (likewise for two camps); `DeferThenDouble` ×
   {Reference, Oracle, Eye}.
 - **Forced-kit arms** `ForceKit{kit}` (that kit hired at camp 1 whenever
@@ -2237,7 +2245,7 @@ by the axis, so no name collides with another segment's `Reference` or
 **(lead's call)**
 - A run that declines camp 1 gets 2 hires and 3 cards at camp 2; a
   second decline does not stack.
-- A dismissal at a full party creates no carried hire.
+- A dismissal at a full party creates no returning hire.
 - The same seed shows the same board on camp re-entry and across a
   save and resume; a mid-floor hero skill gain changes only card A.
 - Free cards Brawler + Drummer with the protector need open: card A is a
@@ -2248,7 +2256,7 @@ by the axis, so no name collides with another segment's `Reference` or
   with Recruiter's Eye on and off; Eye-on and Eye-off runs give the same
   non-Eye cards.
 - A hero arrives at camp 1 already at level 3 (reached at the floor-1
-  antechamber; change RT-8, run structure design 9.4), and the recruit's
+  Forecourt; change RT-8, run structure design 9.4), and the recruit's
   join card shows the L3 choice; a catch-up that grants Medicine moves
   card A to the next need (cross-document comparison 2026-11-23, CC-79).
 - A dismissed companion's bound dose leaves the hero's belt, and the
@@ -2262,7 +2270,7 @@ by the axis, so no name collides with another segment's `Reference` or
   hire is not a dismissal and returns the newcomer's other items to the
   hero or pack.
 - Cap 2: a party that declined camp 2 gets a hire board at camp 3 (2
-  hires with the carried hire, up to 2 companions); a full party gets a
+  hires with the returning hire, up to 2 companions); a full party gets a
   swap board.
 - A swap made while a slot is open shows the swap forecast lines.
 - Shortfall: floor 3 solo generates at weight 12, floor 1 solo at 15,
@@ -2284,10 +2292,10 @@ by the axis, so no name collides with another segment's `Reference` or
 |---|---|
 | **M1** | Nothing. M1 is solo (main 9) |
 | **M2, first** | Vertical-slice timing: the telemetry events, `FloorTimeByPartySize` (the gate, defined in 7.4), the blind party-of-3 vs party-of-4 playtest, the accept-rest-of-turn prototype (flagged). The slice holds floors 4–5 with their templates and one boss each, the eight kits at levels 7–10 and grouped playback (7.4). The cap is fixed from these before balance work freezes |
-| **M2** | Musters at camps 1–3 (7); the slot ladder; 3 cards (+1 Eye); gap card and coverage strip; carried hire; decline, dismiss and swap with `kitBound`; next-camp preview; Party Forecast; two-tier card; first-recruit beat; the 8 kits with flex skill, fixed arrays, level equal to the hero's, one choice grammar, Rethink; Accept kit defaults (CH-17); the forecast as the door caption and the narrowed Travel-on confirm (CH-26); the `recruit` stream; the shortfall discount with the solo composition table and `SoloBudgetMonotone` (**agreed**, Q1); boss HP from the actual party; guard rows at every reachable size; the recruit policy and arms; all validators and reports; Deeds; Recruiter's Eye (cut line → M3); named pieces and kit lines on the eight kits (SK-5, starting kits design 4.5.1, 5.2) |
+| **M2** | Musters at camps 1–3 (7); the slot ladder; 3 cards (+1 Eye); gap card and coverage strip; returning hire; decline, dismiss and swap with `kitBound`; next-camp preview; Party Forecast; two-tier card; first-recruit beat; the 8 kits with flex skill, fixed arrays, level equal to the hero's, one choice grammar, Rethink; Accept kit defaults (CH-17); the forecast as the door caption and the narrowed Travel-on confirm (CH-26); the `recruit` stream; the shortfall discount with the solo composition table and `SoloBudgetMonotone` (**agreed**, Q1); boss HP from the actual party; guard rows at every reachable size; the recruit policy and arms; all validators and reports; Deeds; Recruiter's Eye (cut line → M3); named pieces and kit lines on the eight kits (SK-5, starting kits design 4.5.1, 5.2) |
 | **M2 prerequisites owed by other owners, before records** | CMP-5 to CMP-9, CMP-17 and the solo composition table (enemies owner); CMP-12 (consumables owner); CMP-21 (items owner); CMP-22, CMP-23 and CMP-31 (DH owner); CMP-26 (Vanguard owner); CMP-27 (naming pass); CMP-30 (trinkets owner); CMP-32 (conditions owner); CMP-33 (Shade owner); CMP-34 (armour owner) |
 | **M2 cut fallbacks** | Recruiter's Eye → M3; Rethink → M3; Deeds → M3. Never cut: the gap card, `kitBound`, the shortfall discount, boss HP from the actual party, the floor-time gate |
-| **M3** | Lone Road (no open-slot bedrolls at its camps, CH-23); milestones; kit unlocks (main 4.7); the Old Friend starting boon (a named unlocked kit among camp 1's cards, replacing a free draw, never the gap card, declinable; it is the run's one starting boon, competing with skill-granting boons, main 4.7; its kit, with its named piece, is issued through the items 18.1 kit-issue row at run start, SK-3, starting kits design 4.1); Wayfarer's Pack (+1 belt slot within the hard max 3) as a milestone boon option; locked-class non-caster previews (classes 7.8); the Veteran record |
+| **M3** | Lone Road (no open-slot bedrolls at its camps, CH-23); milestones; kit unlocks (main 4.7); the Old Friend starting boon (a named unlocked kit among camp 1's cards, replacing a free draw, never the gap card, declinable; it is the run's one starting boon, competing with skill-granting boons, main 4.7; its kit, with its named piece, is issued through the items 18.1 kit-issue row at run start, SK-3, starting kits design 4.1); Wayfarer's Belt (+1 belt slot within the hard max 3) as a milestone boon option; locked-class non-caster previews (classes 7.8); the Veteran record |
 | **M4** | A third kit per class, including a second Arcana non-caster; any heal kit the client approves |
 | **Later** | Pledges (captives, wanderers, shrines; Meet at camp; Send home); rival-party survivors; bonds; barks and personalities; mortal companions (the DH Later rung); Beastbound's bonded companion (classes 9.1); the Muster stipend (parked); Poultice (only through the client) |
 
@@ -2345,7 +2353,7 @@ by the axis, so no name collides with another segment's `Reference` or
 | 1 | **Pacing at party 4** (the largest) | `FloorTimeByPartySize` > 20 min on floors 4–5 | Lever order (7.4); cap 2, pre-authorised (**agreed** Q2) |
 | 2 | Shortfall values sit on a cliff | `SoloBudgetMonotone` fails; solo lumpy | Solo composition table; tuning keys, not constants; escalation (7.7) |
 | 3 | The shortfall overshoots or undershoots | `SoloRunReport` outside 40–70%; CT-5 fails | One step at a time inside CT-1, CT-5 and the `soloWeightMin` bound; back to the client if it cannot fit (7.7) |
-| 4 | Deferral becomes an exploit | `DeferThenDouble × Oracle` > reference | The carried hire already gives no card; cut the carried hire if needed |
+| 4 | Deferral becomes an exploit | `DeferThenDouble × Oracle` > reference | The returning hire already gives no card; cut the returning hire if needed |
 | 5 | Kit convergence; hero-class duplicates | `KitPickValue` (Oracle) or human picks < 15% / > 60% *(illustr.)*; `HeroClassDuplicateShare` > 50% | Flex skill and card A's hero-class tier (owed re-run); combat-value term; next lever `sameClassAsHeroWeightPermille` 500 → 250; M4 kits |
 | 6 | Hero outshone | `HeroShareReport` fails; hero-retreat rate up | Kit damage factors, never hero buffs |
 | 7 | Solo favours the Vanguard | `SoloClassSpread` > 10 | Class owners' companion-reading features; floor 1 untouched |
@@ -2377,7 +2385,7 @@ by the axis, so no name collides with another segment's `Reference` or
 - Wording of kit, card and forecast texts within the rules here, until
   the naming pass.
 - **Not tuning:** camps 1–3 as the slot schedule; at most one hire per
-  camp plus one non-stacking carried hire; one dismissal or swap per
+  camp plus one non-stacking returning hire; one dismissal or swap per
   camp; camps only; floor 1 always solo; the gap procedure's order and
   tiers; the cap of 3 with its measured fallback to 2 (**agreed**, Q2);
   the gap order and "never healing"; no pity timer; free recruiting;
@@ -2443,7 +2451,7 @@ client on 2026-11-20; the rest were confirmed with the document on
 | CMP-24 | Classes 8.2 and DH 12.1 (`restDefensiveTool`) | "Binds class records, not companion kits." | Lead |
 | CMP-25 | Herald design 7.17, Shieldbearer "Choices" cell ("As the Drummer's pattern") | Write the rows in 8.3 | Lead |
 | CMP-26 | Vanguard design 7.14, defaults table, Level 2 row: "Pivot in M2 when two or more companions are recruited at the level-up" | Delete the clause (unreachable: level 2 always falls on solo floor 1); Drive Through stays the default | Vanguard owner |
-| CMP-27 | Armour 12.3 table, row "Recruit soldier (M2; a separate L0 type…)" | → "Levy soldier" | Naming pass |
+| CMP-27 | Armour 12.3 table, row "Recruit soldier (M2; a separate L0 type…)" | → "Levy soldier" (applied: armour 12.3 already reads "Levy soldier"; closed by the naming pass, NP-7, 2026-11-24) | Naming pass |
 | CMP-28 | Weapons 11.3, beside the D-c fallback bullet | Add the companion lever `companion.extraAttackAsDie` (off) | Lead |
 | **CMP-29** | Classes 6.6 and 5.6; DH 18.1 (**agreed**, Q10); DH 18.2 (**agreed**, Q11) | Add the 11.4 reports; the DH 18.1 and 18.2 pass or fail verdicts read the M2 simulator only, never a toy; DH 18.2's "checked against playtests" **stands** as a check beside the verdict, and a disagreement goes to the client; `FloorTimeByPartySize` as the first M2 gate | Lead; **touches agreed text: client with this document (told plainly); the gate: client (agreed 2026-11-20, Q2)** |
 | CMP-30 | Trinkets 18.3, "Companion slot fill at the boss" row | Report split by join camp; lever `anyCompanion` loot weighting; the metric unchanged | Lead; trinkets owner |
@@ -2515,7 +2523,7 @@ yet designed (cross-document comparison 2026-11-23, CC-81):
   Post station (camp and hub design 4.2, 4.3); the camp reward card
   (items 10.4) is unchanged here, its content set by CH-15 (camp and hub
   design 7.1); Pledges stay Muster cards, never ambient; the Lone Road
-  toggle and the Old Friend and Wayfarer's Pack boons sit on the hub's
+  toggle and the Old Friend and Wayfarer's Belt boons sit on the hub's
   Heirloom shelf and the Veteran record in the Library's Veteran book
   (M3; camp and hub design 2.2, 5.2). Its rows on this owner are applied:
   CH-1 (reading, 7.11), CH-5 (read, 7.4), CH-17 (7.11, 8.2), CH-21 (8.7),

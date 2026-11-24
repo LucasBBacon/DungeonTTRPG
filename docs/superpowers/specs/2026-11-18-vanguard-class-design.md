@@ -37,9 +37,27 @@ figures with Momentum counted and the lever applied (41% and 40%), the
 Momentum clauses, Ram standing in for Press, and the exclusion of
 Technique capacity offers.
 
+**Names updated by the naming pass (naming pass design, approved
+2026-11-24; NP rows listed).** Applied by NP-33 and its 13.1 cites
+(`2026-11-24-naming-pass-design.md`, sections 5, 13 and 13.1): Surge →
+**Onslaught** and Surge Art → **Onslaught Art** (pool sense; agreed Q5);
+Bastion → **Redoubt** (agreed 2026-11-24, W-28 (a); Q6); Hold the Line →
+**Bar the Way**; Second Wind → **Patch Up**; Deep Reserves → **Fresh
+Reserves**; Rooted → **Tangled** (agreed Q5); artillery (role) →
+**marksman** (agreed Q5); Shockwave → **Upheaval**; Adept → **Ascetic**
+(agreed Q6); Berserker → **Ravager**; the Bodyguard affix → the
+**Challenger** affix; Slot Recovery → **Slot Renewal** (agreed Q5; 10.1, and noted
+in 17); the pike verb Set → **Receive** (agreed Q5); the complexity Simple →
+**Straightforward**; reaction-policy labels (7.12). Internal ids (`pool.surge`,
+`pool.secondWind`, `holdTheLine`, `bastion`, `surge.ramFree`,
+`retortStrike.wardensReach` and the rest) are unchanged, and Warden's
+Reach is never displayed. The change rows of 17, appendix A and the
+client's brief quoted below keep the names as written, with a pointer
+where a row names an old name as current.
+
 This is **stage 2 of the classes design for the Vanguard**, the M1 slice
 class: its full table for levels 1–10, its Techniques and how they grow,
-its core kit, its three subclasses (Weaponmaster, Bastion, Wrecker), the
+its core kit, its three subclasses (Weaponmaster, Redoubt, Wrecker), the
 capstone, the numbers, the M1 cut and how every binding requirement on
 "the classes design" is met for this class. The other three launch
 classes get their own stage-2 documents. Classes stage 1 section 14 lists
@@ -69,7 +87,7 @@ others come from this design's drafts:
 
 | Earlier name (stage 1 or this design's drafts) | Renamed | Why |
 |---|---|---|
-| Challenge (Bastion option; **the one stage-1 name**) | **Square Up** | Collides with the Bodyguard affix's ability (enemies 17.2) |
+| Challenge (Redoubt option; **the one stage-1 name**) | **Square Up** | Collides with the Challenger affix's ability (enemies 17.2) |
 | Carry (the rider option, draft) | **Bite Deep** | Collides with the Instrument's focus verb Carry (weapons 17.8) |
 | Second Form | **Borrowed Form** | Collision |
 | Second Stance | **Stance Drill** | Collision |
@@ -77,12 +95,13 @@ others come from this design's drafts:
 | Drive (the push option) | **Press** | Collision |
 | Weapon Forms | **Practised Hand** | "Mastery"-style names are barred for verb features (weapons 7.4) |
 
-Hold the Line nearly matches a non-SRD Cavalier feature and goes to the
-naming pass unchanged.
+Hold the Line nearly matched a non-SRD Cavalier feature and went to the
+naming pass unchanged; the naming pass renamed it **Bar the Way**
+(NP-33).
 
 **SRD check (settled principle, classes stage 1; lead's call to repeat
-it here).** The SRD-shaped mechanisms used here (Second Wind, Action
-Surge as Surge, Extra Attack, Shove, the weapon verbs that adapt SRD
+it here).** The SRD-shaped mechanisms used here (Second Wind as Patch Up, Action
+Surge as Onslaught, Extra Attack, Shove, the weapon verbs that adapt SRD
 masteries) were written from memory, and the research for this document
 web-checked only parts of the Battle Master and the 2024 Fighter, where
 sources disagree on details. **Every SRD-shaped mechanism must be
@@ -100,16 +119,16 @@ milestone names. **(settled, main design 9)**
 
 Stage 1 fixed what the Vanguard *is*: a Strength martial whose verb is
 "I hit, then decide what the hit does", protection first, weapon craft
-second, its own tempo through Surge, with three subclasses named.
+second, its own tempo through Onslaught, with three subclasses named.
 **(settled)** It left open how the class grows from level 1 to level 10,
-how many Techniques and Surges it gets and when, what each subclass lets
+how many Techniques and Onslaughts it gets and when, what each subclass lets
 the player spec into, and what the capstone does in each build.
 
 The answer in one sentence: **the Vanguard keeps exactly four things to
-read at every level (at-wills, Second Wind, Techniques, Surge), and all
+read at every level (at-wills, Patch Up, Techniques, Onslaught), and all
 growth is depth on those four rows**: Technique **ranks**, one
 **signature Technique** per subclass that ranks up at levels 3, 5 and 7,
-one **signature Surge move (an "Art")** per subclass from level 5, and a
+one **signature Onslaught move (an "Art")** per subclass from level 5, and a
 level-6 feature that **rewrites a verb**. Protection grows through the
 stance and the capstone; weapon craft grows through the verbs.
 **(lead's call)**
@@ -120,7 +139,7 @@ stance and the capstone; weapon craft grows through the verbs.
 
 - **Signature Techniques that progress further into the class** (the
   client's brief): every subclass owns one signature option that gains
-  ranks at 3, 5 and 7, and one Surge Art at 5 that gains a rank at 9.
+  ranks at 3, 5 and 7, and one Onslaught Art at 5 that gains a rank at 9.
 - **Protection that grows in *whom* and *how*, not in size:** one
   reaction AC bonus per attack always (settled, armour 10.4).
 - **Weapon craft that grows in what a hit does, not how much it deals.**
@@ -128,7 +147,7 @@ stance and the capstone; weapon craft grows through the verbs.
   classes 7.6).
 - **A felt decision on floor 1,** not a Hew-every-hit default.
 - **Three subclasses that are roles:** a verb toolkit (Weaponmaster), a
-  mark-and-hold defender (Bastion) and a board-control bruiser (Wrecker).
+  mark-and-hold defender (Redoubt) and a board-control bruiser (Wrecker).
 
 ### Non-goals
 
@@ -145,7 +164,7 @@ stance and the capstone; weapon craft grows through the verbs.
   named exception.
 - **A fifth reading row:** no in-fight stance toggles, no stored combo
   meter, no new pool.
-- **Long reactive chains** that make the Bastion play itself on enemy
+- **Long reactive chains** that make the Redoubt play itself on enemy
   turns.
 - **A new condition:** the 32-condition budget stays untouched.
 - **More floor-1 power** for the class that is already favoured there
@@ -159,8 +178,8 @@ All **(settled)**:
 
 | Source | Binding text | What it means here |
 |---|---|---|
-| Classes 8.2, 8.3 | Chassis: Strength / Constitution; Sturdy 8; Fortitude; heavy ceiling, shield, simple + martial; 2 of Athletics, Intimidation, Medicine, Perception, Lore; Second Wind (full Recovery, rest 1, 2 from 6), Techniques, Surge; a stance creation pick; Weaponmaster M1, Bastion and Wrecker M2 | 7.1 |
-| Classes 6.4 | The launch leans: protection P; single-target damage, damage types and riders, reach and zones, reactions s; own tempo (Surge); forced movement as the Wrecker's lens | 7.1 |
+| Classes 8.2, 8.3 | Chassis: Strength / Constitution; Sturdy 8; Fortitude; heavy ceiling, shield, simple + martial; 2 of Athletics, Intimidation, Medicine, Perception, Lore; Patch Up (full Recovery, rest 1, 2 from 6), Techniques, Onslaught; a stance creation pick; Weaponmaster M1, Redoubt and Wrecker M2 | 7.1 |
+| Classes 6.4 | The launch leans: protection P; single-target damage, damage types and riders, reach and zones, reactions s; own tempo (Onslaught); forced movement as the Wrecker's lens | 7.1 |
 | Classes 7.4 | The published ladder: talent at 2 and 7, subclass at 3, +1 ability at 4 and 8, offer at 5 and 9, subclass feature (changes a verb) at 6, capstone at 9, talent or offer at 10 | 5.4 |
 | Classes 7.5, 7.6 | A named pool is one limited ability; the cap of eight; four things to read, the Vanguard at four from level 1, so it takes only options, upgrades and triggers | 7.9, 10.5 |
 | Classes 7.7 | Dip guards: `scalesBy: classLevel`, `minClassLevel`, `chassisOnly` | 6.4 rule 9 |
@@ -190,12 +209,12 @@ table.
 |---|---|---|
 | D1 | Both stage-1 Wrecker clauses are base rules already. A Technique push is not verb-sourced, so it collides (weapons 7.2 rule 4; conditions 10.1). Teetering on a successful edge save is the M2 rule for everyone (conditions 10.2) | 8.3 |
 | D2 | Shieldwall does nothing on solo floor 1: it needs an adjacent ally, and the pick is made with no test drive (main 4.5) | 7.5 |
-| D3 | Weapons 6.4 "any build ≤ 110%" binds the class's own pools, and no measure for pools is defined. A greatsword Vanguard that Hews every Technique and spends every Surge on Attack sits at 114–121% | 10.1 |
-| D4 | Under the ability 6.6 template, the camp share cannot reach 40–60% at level 1, because the full-Recovery Second Wind dominates rest value | 10.4 |
+| D3 | Weapons 6.4 "any build ≤ 110%" binds the class's own pools, and no measure for pools is defined. A greatsword Vanguard that Hews every Technique and spends every Onslaught on Attack sits at 114–121% | 10.1 |
+| D4 | Under the ability 6.6 template, the camp share cannot reach 40–60% at level 1, because the full-Recovery Patch Up dominates rest value | 10.4 |
 | D5 | A Technique is chosen at pipeline step 7, after the roll. No option may change its own attack roll; every line acts at step 7 or later, or on a later attack | 6.4 |
 | D6 | The stage-1 suggested kit (longsword Parry, greatsword Graze) has no on-hit verb to empower, which makes the M1 Weaponmaster nearly empty | 7.10 |
-| D7 | The Bastion's Hold the Line clause (stop on a Set hit) works only with a pike | 8.2 |
-| D8 | The Challenged-Disengage stop is already a base rule: leaving the challenger's reach provokes even after Disengage (conditions 18.8), and Hold the Line stops on that leave-triggered opportunity-attack hit | 7.4, 8.2 |
+| D7 | The Redoubt's Bar the Way clause (stop on a Receive hit) works only with a pike | 8.2 |
+| D8 | The Challenged-Disengage stop is already a base rule: leaving the challenger's reach provokes even after Disengage (conditions 18.8), and Bar the Way stops on that leave-triggered opportunity-attack hit | 7.4, 8.2 |
 | D9 | Drive Through's geometry fails: after a push of 1 the target is out of Shove reach | 7.6 |
 | D10 | Grim Resolve is nearly dead in M1: only the M1 boss applies Frightened (its roar) and Dazed (limited, from phase 2) (enemies 9.5, 17.5), so it has no target in any other fight | 7.6 |
 | D11 | Once-per-round `turn` pools silently break "at most three named martial pools" | 7.9; VG-10 |
@@ -214,7 +233,7 @@ attack, limited ability, a signature fires), which stand **(settled)**.
   except Hew's named step.
 - **Signature Technique:** the one Technique option a subclass adds
   (Borrowed Form, Square Up, Ram).
-- **Art:** the one Surge option a subclass adds from class level 5
+- **Art:** the one Onslaught option a subclass adds from class level 5
   (Arsenal, Step In, Earthshaker).
 - **Free effect:** an option or Empower line applied without spending a
   Technique (6.4 rule 3).
@@ -245,20 +264,20 @@ client said stand.
 | # | Decision | Chosen | Rejected, and why |
 |---|---|---|---|
 | 1 | Technique progression model | **Ranks**, with grafts from the other two models (6.1–6.3) **(lead's call)** | Catalogue (picker load, Hew still dominant, heaviest QA, carve-outs). Combo (a new subsystem, AI lookahead, picker overflow); only its Momentum flag is kept |
-| 2 | Camp share at level 1 (Q1) | **Accept the level-1 miss.** Measure with the `restDefensiveTool` (Second Wind) at half value and report all three measures; hold the 40–60% band at levels 5 and 10 (about 45% and 40%) (10.4; VG-13) **(agreed)**. With Momentum counted and the lever applied: 41% and 40% | Surge 2 from level 1 (adds floor-1 power to the class already safest there and widens the floor-1 spread) |
+| 2 | Camp share at level 1 (Q1) | **Accept the level-1 miss.** Measure with the `restDefensiveTool` (Patch Up) at half value and report all three measures; hold the 40–60% band at levels 5 and 10 (about 45% and 40%) (10.4; VG-13) **(agreed)**. With Momentum counted and the lever applied: 41% and 40% | Onslaught 2 from level 1 (adds floor-1 power to the class already safest there and widens the floor-1 spread) |
 | 3 | Momentum in M1 (Q2) | **Momentum ships in the M1 slice Vanguard.** A paid Press or Empower sets it; the next hit on that target before the end of your next turn may take Press or Empower free; it never chains and never pays for Hew; from level 3 in M2 it may take the subclass signature instead (6.7) **(agreed)** | Momentum at M2 only (a thinner floor 1: the signature fires in about 15% of rounds instead of about 37%) |
-| 4 | Stance re-pick (Q3) | **The stance may be re-picked once per camp**, rest-gated, never in combat; Stance Drill at level 7 still makes both stances live (7.5; VG-17) **(agreed)** | A permanent pick with Stance Drill as the only way to the second stance (a solo Hold the Line Vanguard could not switch to Shieldwall when companions join) |
+| 4 | Stance re-pick (Q3) | **The stance may be re-picked once per camp**, rest-gated, never in combat; Stance Drill at level 7 still makes both stances live (7.5; VG-17) **(agreed)** | A permanent pick with Stance Drill as the only way to the second stance (a solo Bar the Way Vanguard could not switch to Shieldwall when companions join) |
 | 5 | Parity reading for class pools | **VG-12:** rest-pool damage measured floor-averaged at the worst legal build against weapons 6.4's ≤ 110%; camp-pool damage bounded by the nova bound and `CampOptionBound` (10.1) **(lead's call; the client was told plainly and approved proceeding)** | The row as written (every plan fails it, this one included). A per-fight measure (126–164%; meaningless for rest pools) |
-| 6 | Pools | **Techniques 2 / 3 from level 5 / 3 at level 9; Surge 1 / 2 from level 5; Second Wind 1 / 2 from level 6; Stand Fast camp 1 at level 9** (7.8; VG-6) **(lead's call)** | Stage-1 Techniques 4 at level 9 (parity). Surge 2 at level 9 (camp share at level 5 out of band) |
-| 7 | Hew | **1d4 at levels 1–4, 1d6 from level 5** (its rank II); Hews per rest capped at the class-table pool; Deep Reserves' use deals no damage; Technique capacity offers excluded (6.4 rule 7; 7.11; VG-6) **(lead's call; the last two from the revision)** | 1d6 from level 1 (Hew dominates every hit; parity) |
+| 6 | Pools | **Techniques 2 / 3 from level 5 / 3 at level 9; Onslaught 1 / 2 from level 5; Patch Up 1 / 2 from level 6; Stand Fast camp 1 at level 9** (7.8; VG-6) **(lead's call)** | Stage-1 Techniques 4 at level 9 (parity). Onslaught 2 at level 9 (camp share at level 5 out of band) |
+| 7 | Hew | **1d4 at levels 1–4, 1d6 from level 5** (its rank II); Hews per rest capped at the class-table pool; Fresh Reserves' use deals no damage; Technique capacity offers excluded (6.4 rule 7; 7.11; VG-6) **(lead's call; the last two from the revision)** | 1d6 from level 1 (Hew dominates every hit; parity) |
 | 8 | Empower | **One canonical table; no line adds dice or flat damage; every line tagged with a `payable` flag** (6.6) **(lead's call)** | Damage lines (beat Hew 1d4 and fail `HewCeiling`) |
 | 9 | Free effects | **At most one free effect per hit, and it is that hit's Technique;** the spare-verb fire (Twin Verb, Arsenal II, the Weaponmaster's Stand Fast rider) is the one exception, control verbs only (6.4 rule 3) **(lead's call)** | Per-feature slot rules (unreadable; stacked free effects) |
-| 10 | Surge Arts | **One Art per subclass from class level 5, rank II at 9, under `CampOptionBound`** (7.3; 8) **(lead's call)** | Arts from level 3 (floor-1 power). Two-attack Arsenal (2000‰). Blade Storm (fails at level 3) |
+| 10 | Onslaught Arts | **One Art per subclass from class level 5, rank II at 9, under `CampOptionBound`** (7.3; 8) **(lead's call)** | Arts from level 3 (floor-1 power). Two-attack Arsenal (2000‰). Blade Storm (fails at level 3) |
 | 11 | Stances | **Learned, never toggled** (7.4, 7.5) **(lead's call; re-pick agreed, Q3)** | In-fight toggles (a fifth reading row) |
 | 12 | Starting kit | **Chain mail; warhammer + shield active; greataxe spare; 2 potions**; for the M2 Weaponmaster, a recommended one-handed spare with a borrowable verb (7.10; VG-21) **(lead's call)** | Longsword + shield / greatsword (no on-hit verb to empower, D6). Kit presets at creation (a second level-1 pick) |
 | 13 | Capstone | **Stand Fast as a window fill over every attack roll against adjacent allies for one round, shield required, with a solo clause and an automatic subclass rider** (7.7; VG-4, VG-15) **(lead's call)** | The stage-1 "first attack roll" form (invisible; dead in two of three builds) |
 | 14 | Wrecker | **Re-specced:** Battering Force, Brink, Ram, then Domino or Upend; collision band flat 2 / 3 / 3 *(illustr.)* (8.3; VG-2) **(lead's call; lowered from 2 / 4 / 6 in the revision, because 4 and 6 fail `HewCeiling` against Hew 1d6 once both collided units are counted, 10.1)** | The stage-1 card (both clauses are base rules already, D1). The dice band (Ram out-damages Hew at level 10). The 2 / 4 / 6 flat band (fails `HewCeiling` at levels 5 and 10) |
-| 15 | Bastion redirect | **Take the Blow moves to Later** with Guarded or Holdfast (8.2) **(lead's call)** | Take the Blow at M2 (reproduces Guarded, fails `FlagNotCondition`; its ranged trigger copies Shelter) |
+| 15 | Redoubt redirect | **Take the Blow moves to Later** with Guarded or Holdfast (8.2) **(lead's call)** | Take the Blow at M2 (reproduces Guarded, fails `FlagNotCondition`; its ranged trigger copies Shelter) |
 
 ### 4.1 How other games handle martial and defender progression
 
@@ -273,7 +292,7 @@ written **(settled, classes stage 1)**.
 | **5E Battle Master** (checked in part) | Small superiority pool, many maneuvers, more known at 3/7/10/15, short-rest refresh | One pool, many options; small pool steps | Damage-adding maneuvers (parity); non-SRD maneuver text |
 | **5E Fighter 2024 / Weapon Mastery** (checked in part) | Extra uses for Second Wind; new spends on existing pools; each weapon has one mastery | New spends on existing rows; verbs per weapon (already our verbs) | Class-gated mastery unlocks |
 | **5E Barbarian 2024, Brutal Strike** | Trade a resource for an effect at the hit | "Hit, then decide" (Techniques) | Extra damage dice on the trade |
-| **5E Cavalier** (non-SRD) | Mark, ally reaction AC, a movement stop on an opportunity-attack hit | The defender shape | Its names (Hold the Line goes to the naming pass) |
+| **5E Cavalier** (non-SRD) | Mark, ally reaction AC, a movement stop on an opportunity-attack hit | The defender shape | Its names (Hold the Line went to the naming pass; now Bar the Way, NP-33) |
 | **PF2e Fighter / Guardian** (checked in part) | Reactive Strike at 1; Taunt; Intercept; stances entered as actions | One taunt, one intercept, one reaction, deepened by later choices | Toggle stances (they cost a reading row) |
 | **D&D 4e Fighter** | Mark everything you hit; strike when a marked foe attacks others | Square Up + Retort Strike ("ignore me and pay") | Uniform power structures |
 | **13th Age** | Effects chosen after seeing the natural die | `naturalHighFree` as a trigger only | A base mechanic on natural rolls |
@@ -301,14 +320,14 @@ hoarded meter.
 **(lead's call)** The Vanguard grows by **depth on four fixed rows**,
 never by new rows. Each subclass is a role the player specs into, and
 each gives **two further signature moves**: a signature Technique that
-ranks up at 3, 5 and 7, and a Surge Art at 5 that ranks up at 9. The
+ranks up at 3, 5 and 7, and an Onslaught Art at 5 that ranks up at 9. The
 level-6 feature rewrites a verb, and the capstone extends the stance's
 protection to the line, with a rider in the subclass's own voice.
 
 ### 5.2 The two hands
 
-- **The shield hand (protection)** grows through the stance (Hold the
-  Line or Shieldwall), the Bastion, and the capstone Stand Fast. Each
+- **The shield hand (protection)** grows through the stance (Bar the
+  Way or Shieldwall), the Redoubt, and the capstone Stand Fast. Each
   step widens *whom* the Vanguard protects and *how*, never the size of
   the bonus. Protection stays at one reaction AC bonus per attack
   **(settled, armour 10.4)**.
@@ -324,19 +343,19 @@ protection to the line, with a rider in the subclass's own voice.
 |---|---|---|
 | 1 | Press, Hew, Empower (rank I); Momentum | — |
 | 3 | — | **Signature Technique, rank I** (Borrowed Form, Square Up, Ram) and the subclass clauses |
-| 5 | Press II, Hew II (1d6), Empower II; Extra Attack (two decisions per turn) | **Signature rank II**; **Surge Art** arrives |
+| 5 | Press II, Hew II (1d6), Empower II; Extra Attack (two decisions per turn) | **Signature rank II**; **Onslaught Art** arrives |
 | 6 | — | **Verb rewrite** (1 of 2) |
 | 7 | Talent with a trigger option | **Signature rank III** |
 | 8 | Other known options rank II | — |
-| 9 | **Stand Fast**, with its automatic subclass rider | **Surge Art rank II** |
+| 9 | **Stand Fast**, with its automatic subclass rider | **Onslaught Art rank II** |
 | 10 | Talent or offer | — |
 
 ### 5.4 What each subclass lets the player spec into
 
-| Subclass | Specs into | Signature Technique | Surge Art | Level 6 (1 of 2) | Stand Fast rider |
+| Subclass | Specs into | Signature Technique | Onslaught Art | Level 6 (1 of 2) | Stand Fast rider |
 |---|---|---|---|---|---|
 | **Weaponmaster** (M1) | Verb depth; a two-set toolkit; breadth or reliability | Borrowed Form | Arsenal | Twin Verb / Sure Form | Free Empower, plus the spare set's verb, on a hit against an attacker that missed a covered ally |
-| **Bastion** (M2) | Mark, hold, shield, punish | Square Up | Step In | Retort Strike / Shield Craft | Covers allies within 2 squares |
+| **Redoubt** (M2) | Mark, hold, shield, punish | Square Up | Step In | Retort Strike / Shield Craft | Covers allies within 2 squares |
 | **Wrecker** (M2) | Collisions, hazard edges, crowd breaking, Prone set-ups, the Shove as a weapon | Ram (replaces Press) | Earthshaker | Domino / Upend | Pushes a melee attacker whose attack misses a covered ally |
 
 ### 5.5 Level table *(illustr.)*
@@ -346,12 +365,12 @@ protection to the line, with a rider in the subclass's own voice.
 
 | Lvl | Floor | Automatic | Choice | HP / Rec | AC | Prof / attack / difficulty |
 |---|---|---|---|---|---|---|
-| 1 | 1 | Kit; at-wills; Second Wind 1; Techniques 2 (Press I, Hew I 1d4, Empower I); Surge 1; Momentum | Stance: M1 Hold the Line; M2 Hold the Line or Shieldwall | 21 / 8 | 18 / 16 | +2 / +5 / 13 |
+| 1 | 1 | Kit; at-wills; Patch Up 1; Techniques 2 (Press I, Hew I 1d4, Empower I); Onslaught 1; Momentum | Stance: M1 Bar the Way; M2 Bar the Way or Shieldwall | 21 / 8 | 18 / 16 | +2 / +5 / 13 |
 | 2 | 1 | — | Talent (7.6) | 31 / 10 | 18 / 16 | +2 / +5 / 13 |
 | 3 | 1→2 | — | Subclass (M1: Weaponmaster; M2: 1 of 3): signature rank I and subclass clauses | 41 / 12 | 18 / 16 | +2 / +5 / 13 |
 | 4 | 2 | — | +1 ability, alone (settled) | 51 / 14 | 18 / 16 | +2 / +6 / 14 |
-| 5 | 2→3 | Extra Attack; Techniques 3; **Surge 2**; rank II for Press, Hew (1d6), Empower and the signature; **Surge Art**; armour band +1 | Offer (1 of 3) | 61 / 16 | 19 / 17 | +3 / +7 / 15 |
-| 6 | 3 | Second Wind 2 (settled) | Subclass feature (1 of 2), changing a verb | 71 / 18 | 19 / 17 | +3 / +7 / 15 |
+| 5 | 2→3 | Extra Attack; Techniques 3; **Onslaught 2**; rank II for Press, Hew (1d6), Empower and the signature; **Onslaught Art**; armour band +1 | Offer (1 of 3) | 61 / 16 | 19 / 17 | +3 / +7 / 15 |
+| 6 | 3 | Patch Up 2 (settled) | Subclass feature (1 of 2), changing a verb | 71 / 18 | 19 / 17 | +3 / +7 / 15 |
 | 7 | 3→4 | Signature rank III | Talent (with a trigger option) | 81 / 20 | 19 / 17 | +3 / +7 / 15 |
 | 8 | 4 | Other known options rank II | +1 ability | 91 / 22 | 19 / 17 | +3 / +8 / 16 |
 | 9 | 4→5 | **Stand Fast** with its subclass rider; Art rank II; armour band +1 | Offer (1 of 3) (agreed, CL-4) | 101 / 24 | 20 / 18 | +4 / +9 / 17 |
@@ -375,7 +394,7 @@ protection to the line, with a rider in the subclass's own voice.
 |---|---|---|---|
 | **Catalogue** | A growing repertoire: tiers I–III, a cap of 8 known, camp swaps, Learn talents | Most "new button" moments; costs 0 toward the cap (CL-2) | Picker load (8 options, every hit); Hew still dominant; the heaviest QA; Masterstroke, Combination and Pin Down need carve-outs or invite lockouts |
 | **Ranks** | A fixed set of at most 6 options, each with ranks I/II/III | Pips on existing buttons, costing 0 to read; "ranks add no dice" answers parity | Subtle growth; a heavy Empower table; automatic rank-ups; level 9 crowded (as drafted) |
-| **Combo** | Leads set Momentum; the next hit cashes in a free option or a subclass Finisher | Best felt decision; lowers Hew use; lifts the level 1–2 signature share | A new subsystem; AI lookahead; picker overflow; pulls against Hold the Line |
+| **Combo** | Leads set Momentum; the next hit cashes in a free option or a subclass Finisher | Best felt decision; lowers Hew use; lifts the level 1–2 signature share | A new subsystem; AI lookahead; picker overflow; pulls against Bar the Way |
 
 ### 6.2 Verdict and judges' scores
 
@@ -416,7 +435,7 @@ without its repertoire.
 - **Cut, with one-line reasons:**
   - Hew "late call" (pipeline step 8b) and Hew "Spill": policy and the
     preview already cover overkill;
-  - Set III (halved movement): a new rule shape;
+  - Receive III (halved movement): a new rule shape;
   - Masterstroke, Combination, Reave, Pin Down, Ring the Bell and Read
     the Guard: carve-outs, flat damage, a lockout ladder, and overlap
     with the roll-mode cap.
@@ -505,7 +524,7 @@ without its repertoire.
    free Ram suppresses the weapon's Topple verb on that hit** (the
    preview says so), so the two never contest the slot.
 7. **Hew cap (lead's call).** Hews per rest are at most the class-table
-   pool (2, or 3 from level 5). Deep Reserves adds one use. That use is
+   pool (2, or 3 from level 5). Fresh Reserves adds one use. That use is
    the one spent once the class-table pool's worth has been spent this
    rest, read from the pool's count (nothing derived is stored, 3.2; no
    Hew counter is needed, 13.1). It cannot pay for Hew, and a move it
@@ -590,7 +609,7 @@ in every rule that names Press (lead's call):**
 - Drive Through's trigger (7.6);
 - `onGraze` (7.11);
 - the Square Up II pairing list (8.2). This only matters for a companion
-  kit or a later multiclass, because a Wrecker is never a Bastion.
+  kit or a later multiclass, because a Wrecker is never a Redoubt.
 
 A free Ram passes `HewCeiling`: it adds the same collision as Press, and
 its Prone deals no damage (10.1). The level-3 card for a Wrecker that
@@ -626,7 +645,7 @@ knows Low Cut, and never offer Low Cut to one who knows Cover Step
 | Lunge | M1 | The target makes no opportunity attack against you this turn | — (capped at I: roll-mode overlap) | guard | yes |
 | Pry | M1 | Your other attacks on this target this turn (the bash, an Arsenal swap) also have Pry. Narrowed in the revision so that it lives inside one turn's pipeline (`FlagNotCondition`, 9.2) | — | accuracy | yes |
 | Parry (on any hit with the Parry weapon) | M1 | Until your next turn starts, your Parry may protect an adjacent ally against a melee attack roll, inside that roll's one window | — | guard | yes, pending the registry-scope ruling (VG-18) |
-| Set (on the Set hit, under the reaction policy) | M1 | Push the mover 1 out of your zone | Push up to 2 | position | yes |
+| Receive (on the Receive hit, under the reaction policy) | M1 | Push the mover 1 out of your zone | Push up to 2 | position | yes |
 | Graze | M1 | **No line.** Graze carries "no rider, no verb" (weapons 7.1); the `onGraze` trigger covers it | — | — | — |
 | Aim | M1 | **No line** (Exploit reads Dexterity) | — | — | — |
 | Hook | M2 | Pull up to 2, or shift up to 3 | The target makes no opportunity attack against you until the end of your turn | position / guard | yes |
@@ -722,9 +741,9 @@ knows Low Cut, and never offer Low Cut to one who knows Cover Step
 | Bite Deep | base | 1 | M2 | I 1, II 8 |
 | Low Cut | L2 talent (M2 menu); offer (not with Cover Step) | 2 | M2 | I, II 8 |
 | Borrowed Form | Weaponmaster | 3 | M2 | I 3, II 5, III 7 |
-| Square Up | Bastion | 3 | M2 | I 3, II 5, III 7 |
+| Square Up | Redoubt | 3 | M2 | I 3, II 5, III 7 |
 | Ram (replaces Press) | Wrecker | 3 | M2 | I 3, II 5, III 7 |
-| Cover Step | offer (guard lane, Bastion-weighted; not with Low Cut) | 5 | M2 | I only |
+| Cover Step | offer (guard lane, Redoubt-weighted; not with Low Cut) | 5 | M2 | I only |
 
 **Cover Step:** an ally adjacent to you or to the target shifts 1 square
 around you. It provokes from no unit, never enters a hazard, and is
@@ -748,15 +767,15 @@ the claim is checked, not assumed (6.4 rule 8).
 | HP tier, save | Sturdy 8; Fortitude |
 | Armour / shield / weapons | heavy ceiling; shield allowed; simple + martial |
 | Skills | 2 of Athletics, Intimidation, Medicine, Perception, Lore |
-| Complexity | Simple |
-| Things to read | **4 at every level:** at-wills; Second Wind; Techniques; Surge (Stand Fast is shown on the Surge row) |
+| Complexity | Straightforward |
+| Things to read | **4 at every level:** at-wills; Patch Up; Techniques; Onslaught (Stand Fast is shown on the Onslaught row) |
 | Named pools | 3 martial + capstone = **4 limited abilities by level 10** (cap room 4). Turn allowances do not count (7.9) |
 | `fallbackDamageTypes` | bludgeoning (warhammer, bash); slashing (greataxe) |
 | `level1MechanicIds` | techniques, holdTheLine, shieldwall, secondWindFull, surge, momentum |
 | `signatureVerb` | techniques |
-| `signatureEvents` | a Technique option applied (paid or free); a Momentum cash-in; a Hold the Line stop; an enemy rerouting around your zone (defined in 7.4); a Shieldwall Interpose; a Stand Fast block |
+| `signatureEvents` | a Technique option applied (paid or free); a Momentum cash-in; a Bar the Way stop; an enemy rerouting around your zone (defined in 7.4); a Shieldwall Interpose; a Stand Fast block |
 | `seedTarget` | anyEnemyInMelee |
-| `leans[]` | **The stage-1 launch leans, unchanged (settled, classes 6.4):** protection P; single-target damage s; damage types and riders s; reach, zones and opportunity attacks s; reactions s; own tempo (Surge); forced movement and terrain as the Wrecker's subclass lens. The subclasses deepen leans the class already holds: the Weaponmaster damage types and riders, the Bastion protection and reach and zones, the Wrecker forced movement. `SubclassCopiesBaseLean` compares mechanic ids, not utility rows (classes 7.3), so this passes. `LeanSpread` is counted on these rows. Card wording: "protection first; damage through position" |
+| `leans[]` | **The stage-1 launch leans, unchanged (settled, classes 6.4):** protection P; single-target damage s; damage types and riders s; reach, zones and opportunity attacks s; reactions s; own tempo (Onslaught); forced movement and terrain as the Wrecker's subclass lens. The subclasses deepen leans the class already holds: the Weaponmaster damage types and riders, the Redoubt protection and reach and zones, the Wrecker forced movement. `SubclassCopiesBaseLean` compares mechanic ids, not utility rows (classes 7.3), so this passes. `LeanSpread` is counted on these rows. Card wording: "protection first; damage through position" |
 
 **At-wills:**
 1. A weapon attack with the active main hand and its verb.
@@ -764,7 +783,7 @@ the claim is checked, not assumed (6.4 rule 8).
    replaces one attack). With the two-hander, Shove (universal; push 1
    or Prone, VG-9).
 
-### 7.2 Second Wind (`pool.secondWind`, rest)
+### 7.2 Patch Up (`pool.secondWind`, rest)
 
 **(settled, classes 8.2, 8.3; DH 8, 12.1)**
 
@@ -776,7 +795,7 @@ the claim is checked, not assumed (6.4 rule 8).
 - **Guards (lead's call):** no offer may raise its capacity or change
   its cost (`offerExcludes`). Grim Resolve and Stubborn Breath modify it.
 
-### 7.3 Surge (`pool.surge`, camp)
+### 7.3 Onslaught (`pool.surge`, camp)
 
 **(lead's call; cost settled, ability 6.4)**
 
@@ -798,7 +817,7 @@ the claim is checked, not assumed (6.4 rule 8).
     not a simulator result. The simulator reports the observed value
     beside it;
   - **tempo clause:** the record's `actionsGranted` is at most the
-    pool's base option's (Surge 1; SH-5); option effects ride on that
+    pool's base option's (Onslaught 1; SH-5); option effects ride on that
     action;
   - areas ≤ 25 squares, `selective` only;
   - no hard-control `condition.apply` kind;
@@ -810,24 +829,24 @@ the claim is checked, not assumed (6.4 rule 8).
     `SlotlessCastBound`.
 - **Nova bound:** reported with Arts included and without them.
 
-### 7.4 Hold the Line (stance, M1)
+### 7.4 Bar the Way (stance, M1)
 
 **(settled shape, classes 8.3, CL-6; clarifications lead's call)**
 
 - **Text.** When a reaction attack keyed to one of these triggers hits
-  (an opportunity attack on `leaveZone` or `slipPast`, or your Set on
+  (an opportunity attack on `leaveZone` or `slipPast`, or your Receive on
   `setHit`), that hostile's remaining movement this turn becomes 0:
-  `{leaveZone, slipPast, setHit}`, where `slipPast` needs the Bastion
-  clause or `slipPastProvokes`, and `setHit` needs the Bastion clause or
+  `{leaveZone, slipPast, setHit}`, where `slipPast` needs the Redoubt
+  clause or `slipPastProvokes`, and `setHit` needs the Redoubt clause or
   `onSetHit`. The keying is a clarification **(lead's call)**:
   - **`leaveZone`:** a hostile leaving your threatened zone by its own
     movement (weapons 8).
-  - **`slipPast`** (the Bastion clause, 8.2, and the `slipPastProvokes`
+  - **`slipPast`** (the Redoubt clause, 8.2, and the `slipPastProvokes`
     trigger): after a successful slip-past check (ability 7.2), the
     trigger resolves before the step that moves the hostile through or
     past your square, and it spends your reaction as an opportunity
     attack. The hostile is still on its last square before that step.
-  - **`setHit`:** your Set hit (8.2; `onSetHit`).
+  - **`setHit`:** your Receive hit (8.2; `onSetHit`).
 - **What it does not change:** speed; it is not a condition; action and
   bonus action stay; later Dash or Spurred movement adds as normal;
   forced movement is unaffected.
@@ -836,20 +855,20 @@ the claim is checked, not assumed (6.4 rule 8).
   (conditions 18.8). An earlier draft line, "Disengage stops it", is
   **not adopted**, because it contradicts 18.8.
 - **Policy:** rides the opportunity attack, `always`, `nonMinion`
-  (`notWhileSquaredUpElsewhere` for a Bastion with an active Square Up,
+  (`notWhileSquaredUpElsewhere` for a Redoubt with an active Square Up,
   7.12). Pool-free; counts 0.
 - **AI precondition (VG-16).** The enemies 11.1 opportunity-cost term
   prices *known* reaction triggers as state, the stop included, as
   Interpose is previewed. This ships in M1, so monsters neither walk
   into the stop blind nor ignore it.
 - **Visibility:**
-  - threatened squares carry a Hold the Line marker in the movement
+  - threatened squares carry a Bar the Way marker in the movement
     preview and the enemy-intent display;
   - an enemy rerouting around your zone is a signature event. **A
     reroute (lead's call)** is a move in which the planner's cheapest
-    path, with the Hold the Line term priced at 0, would have crossed one
+    path, with the Bar the Way term priced at 0, would have crossed one
     of your triggers above, and the chosen path does not;
-  - `Floor1ClassSpread` prints the Hold the Line fire rate and reroute
+  - `Floor1ClassSpread` prints the Bar the Way fire rate and reroute
     rate per fight.
 - **Pushing a foe out of your zone (lead's call).** A pushed unit never
   provokes, so a push can release a foe toward the back line. The attack
@@ -878,7 +897,7 @@ the claim is checked, not assumed (6.4 rule 8).
     Raise, 22, exactly 15%. Pass.
   - **Registry (VG-18):** checked against Deflect, Hailguard and Shelter
     under trinkets 11 rule 1. If refused, the pick is labelled "for
-    parties" and Hold the Line stays the default.
+    parties" and Bar the Way stays the default.
 - **Card text:** "covers you against ranged attacks while alone".
 
 **Stances are learned, never toggled (lead's call).** A stance has no
@@ -898,7 +917,7 @@ may replace its stance with the other one.
 - **Guarding (lead's call on the armour row, VG-17):** a Guarding shield
   carried by a Vanguard who re-picks Shieldwall becomes runtime-inert,
   with a warning on the camp screen before the re-pick is confirmed; it
-  wakes again if the stance returns to Hold the Line.
+  wakes again if the stance returns to Bar the Way.
 - **Stance-bound triggers (lead's call):** a trigger whose record has
   `requires: stance:<id>` (`onSetHit`, `slipPastProvokes`,
   `pushOnTurnedMiss`) goes dormant while that stance is not live, and
@@ -936,7 +955,7 @@ Menus of 3; each menu has an upgrade **(settled shape, classes 7.4,
   from rank II). A shift and a push cannot combine (weapons 7.2 rule 4).
   Shifts never collide, so a shifted Ram makes no Prone save; a pulled
   Ram keeps its save if the pull is stopped early.
-- **Grim Resolve** (upgrade; D10 fix). Second Wind also ends one of
+- **Grim Resolve** (upgrade; D10 fix). Patch Up also ends one of
   Frightened, Dazed or **Bleeding** on you, and you stand from Prone at
   no movement cost. Bleeding comes from the M1 claw brute. The stand
   folds in the core's `stand.free` trigger (cross-document comparison
@@ -956,13 +975,13 @@ moves to level 7.
   stances you lack.
 
 **Level 10 (if the talent source is picked):**
-- **Deep Reserves** (upgrade): Techniques +1. That use cannot pay for
+- **Fresh Reserves** (upgrade): Techniques +1. That use cannot pay for
   Hew, and a move it pays for deals no collision damage (6.4 rule 7).
 - **Stubborn Breath** (upgrade; a cost change ability 7.1 allows).
-  Second Wind may instead be your reaction when damage leaves you at or
+  Patch Up may instead be your reaction when damage leaves you at or
   below half your maximum HP and above 0. Policy `always`. It spends the
   round's reaction. Registry: Reprieve Phial, Hungering.
-- **Sound the Advance** (adds; M2): when you Surge, one ally you can see
+- **Sound the Advance** (adds; M2): when you use Onslaught, one ally you can see
   within 6 squares gains Spurred. A class source is allowed (CL-5). It
   is a token, never a created action.
 
@@ -971,7 +990,7 @@ moves to level 7.
 `pool.standFast`, camp 1, `minClassLevel` 9 **(settled shape, ability
 6.7; text lead's call; VG-4, VG-15)**.
 
-- **Cost:** bonus action plus the turn's camp spend, so never on a Surge
+- **Cost:** bonus action plus the turn's camp spend, so never on an Onslaught
   turn. Requires a shield in the active set, **checked at use and again
   at each roll**: after a swap to the two-hander set the fill does not
   apply until the shield set is active again **(lead's call)**.
@@ -1003,12 +1022,12 @@ moves to level 7.
   the resolve preview. Every turned miss shows "Stand Fast: blocked" and
   is a signature event.
 - **Solo clause.** If no ally is within your Stand Fast range when you
-  use it (adjacent, or within 2 squares for a Bastion), it covers **you**
+  use it (adjacent, or within 2 squares for a Redoubt), it covers **you**
   against ranged weapon attack rolls this round, still one window. So a
-  Bastion with an ally 2 squares away covers the ally and is not solo.
+  Redoubt with an ally 2 squares away covers the ally and is not solo.
   Registry against Raise and Deflect; if refused, the clause is cut.
 - **Automatic subclass rider at level 9:**
-  - **Bastion:** covers allies within 2 squares instead of adjacent.
+  - **Redoubt:** covers allies within 2 squares instead of adjacent.
   - **Wrecker:** an attacker adjacent to you whose melee attack misses a
     covered ally is pushed 1 square, not verb-sourced, once per attacker
     per Stand Fast (the use's `riderPushed[]` set, 13.1). Registry:
@@ -1024,7 +1043,7 @@ moves to level 7.
     `riderEligible[]` (13.1). The double fire is logged as a signature
     event.
 - **Envelope at level 9:** 20 + Raise 2 + fill 2 = 24 against +9, a 30%
-  hit chance, at least the required 15%. Pass, including the Bastion's
+  hit chance, at least the required 15%. Pass, including the Redoubt's
   reach 2 (same bonus, more allies). The reliance report is rerun.
 - **Nova:** no damage. Pass.
 
@@ -1032,13 +1051,13 @@ moves to level 7.
 
 | Pool (refill) | L1 | L2 | L3 | L4 | L5 | L6 | L7 | L8 | L9 | L10 |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Second Wind (`rest`) | 1 | 1 | 1 | 1 | 1 | **2** | 2 | 2 | 2 | 2 |
-| Techniques (`rest`) | 2 | 2 | 2 | 2 | **3** | 3 | 3 | 3 | 3 | 3 (+1 Deep Reserves: non-Hew, no collision damage) |
+| Patch Up (`rest`) | 1 | 1 | 1 | 1 | 1 | **2** | 2 | 2 | 2 | 2 |
+| Techniques (`rest`) | 2 | 2 | 2 | 2 | **3** | 3 | 3 | 3 | 3 | 3 (+1 Fresh Reserves: non-Hew, no collision damage) |
 | Hew-use cap per rest | 2 | 2 | 2 | 2 | 3 | 3 | 3 | 3 | 3 | 3 |
-| Surge (`camp`) | 1 | 1 | 1 | 1 | **2** | 2 | 2 | 2 | 2 | 2 |
+| Onslaught (`camp`) | 1 | 1 | 1 | 1 | **2** | 2 | 2 | 2 | 2 | 2 |
 | Stand Fast (`camp`) | – | – | – | – | – | – | – | – | **1** | 1 |
 
-Second Wind's steps are settled; the rest are lead's calls (VG-6).
+Patch Up's steps are settled; the rest are lead's calls (VG-6).
 
 ### 7.9 Turn allowances
 
@@ -1053,7 +1072,7 @@ its owner, refilled at the owner's turn start, classes 3.4):
 - the once-per-round Square Up (Called Out and Step In spend it);
 - Drive Through;
 - `naturalHighFree`;
-- `surge.ramFree` (refilled by a Surge, spent by the first Ram that
+- `surge.ramFree` (refilled by an Onslaught, spent by the first Ram that
   turn);
 - `retortStrike.wardensReach`.
 
@@ -1170,11 +1189,11 @@ are allowed, because they carry no `damage.*` kind.
 | Lane | Weight | Carries |
 |---|---|---|
 | `technique` | 1500‰ | Low Cut / Cover Step option offers (mutually exclusive, 6.5); trigger offers |
-| `guard` | 1500‰ | trigger offers on Hold the Line, Shieldwall, Stand Fast; Cover Step |
+| `guard` | 1500‰ | trigger offers on Bar the Way, Shieldwall, Stand Fast; Cover Step |
 | `might` | 1200‰ | Athletics or Intimidation mastery; a physical type that ignores resistance |
 
 - **New subclass field `offerLaneAdjust`** (VG-14): ×1333‰ on the
-  Weaponmaster's `technique`, the Bastion's `guard` and the Wrecker's
+  Weaponmaster's `technique`, the Redoubt's `guard` and the Wrecker's
   `might`.
 - **`offerExcludes`:**
 
@@ -1184,7 +1203,7 @@ are allowed, because they carry no `damage.*` kind.
   | `cost:*` | No action-cost limited ability to cheapen |
   | `timescale:surge`, `timescale:standFast` | Would gut the camp share and the nova bound; ability 10.2 bars only the *last* camp pool, and Stand Fast exists from level 9 |
   | `capacity:surge`, `capacity:standFast` | Camp damage sits outside the parity row (VG-12), so it cannot also be sold as capacity; ability 6.7 fixes the capstone at 1 |
-  | `capacity:techniques` | **(lead's call, revision)** Each extra use adds about 1.2–2.5 parity points at level 10 through collisions and Momentum, so capacity offers would push the worst legal build past 110% (10.1). Deep Reserves is the one capacity step, and its use deals no damage |
+  | `capacity:techniques` | **(lead's call, revision)** Each extra use adds about 1.2–2.5 parity points at level 10 through collisions and Momentum, so capacity offers would push the worst legal build past 110% (10.1). Fresh Reserves is the one capacity step, and its use deals no damage |
   | `option:coverStep` when Low Cut is known; `option:lowCut` when Cover Step is known | `TechniquePickerSize` (6.5, 6.8) |
   | `shape`, concentration training | Dead for the Vanguard |
   | `verbTraining`, armour and shield training | Already trained or at the ceiling |
@@ -1197,26 +1216,28 @@ are allowed, because they carry no `damage.*` kind.
 | techniques | `onGrappleSuccess` | Spend Square Up or Low Cut when your grapple succeeds | M2; part-pays the weapons 17.11 grapple debt |
 | techniques | `onGraze` | Spend Press (Ram for a Wrecker) when your Graze fires | M2 |
 | techniques | `naturalHighFree` | A natural 19–20 hit's non-damage option costs nothing; once per round | M2; the one free-cost trigger |
-| holdTheLine | `onSetHit` | The stop also applies when your Set hits | `barredFor: bastion`; `requires: stance:holdTheLine` |
+| holdTheLine | `onSetHit` | The stop also applies when your Receive hits | `barredFor: bastion`; `requires: stance:holdTheLine` |
 | holdTheLine | `slipPastProvokes` | A hostile that slips past you still provokes you (the `slipPast` trigger, 7.4) | `barredFor: bastion` (built in); `requires: stance:holdTheLine` |
 | shieldwall | `pushOnTurnedMiss` | When your Interpose turns a hit into a miss, push the attacker 1, not verb-sourced | Registry: Binding Parry; barred with the Wrecker's rider; `requires: stance:shieldwall` |
-| surge | `breakFree` | When you Surge, end Grappled on you (M2: also Restrained) | — |
+| surge | `breakFree` | When you use Onslaught, end Grappled on you (M2: also Restrained) | — |
 | standFast | `twoRounds` | Lasts until the end of your next turn | Envelope rerun |
 | Subclass triggers | — | See 8.1–8.3 | `requires: subclass:<id>` |
 
 ### 7.12 Default reaction policies
 
 Each is changeable to any policy or "ask me" **(settled principle,
-ability 7.3; defaults lead's call)**.
+ability 7.3; defaults lead's call)**. The ids below are data and never
+show; players see the policy labels Always / Only if it matters / While
+half full / Never / Ask me (naming pass 5.9.14).
 
 | Reaction | Default |
 |---|---|
-| Opportunity attack (carries Hold the Line) | `always`, `nonMinion`. For a Bastion with an active Square Up: `notWhileSquaredUpElsewhere`, `nonMinion` (8.2) |
+| Opportunity attack (carries Bar the Way) | `always`, `nonMinion`. For a Redoubt with an active Square Up: `notWhileSquaredUpElsewhere`, `nonMinion` (8.2) |
 | Shieldwall (ally and solo) | `ifItChangesOutcome`, `nonMinion` |
 | Parry (if wielded) | `ifItChangesOutcome`, `nonMinion` (canonical) |
 | Techniques on reaction attacks | `never` |
-| Practised Hand on a Set hit | `always`, `nonMinion` |
-| Practised Hand on an opportunity-attack Push | `never` (it would undo the Hold the Line stop) |
+| Practised Hand on a Receive hit | `always`, `nonMinion` |
+| Practised Hand on an opportunity-attack Push | `never` (it would undo the Bar the Way stop) |
 | Retort Strike | `always`, `nonMinion` |
 | Stubborn Breath | `always` (the threshold is in the trigger) |
 | Stand Fast | not a reaction (automatic fill) |
@@ -1238,37 +1259,37 @@ ability 7.3; defaults lead's call)**.
 
 | Feature | effectKinds | Subject | Trigger |
 |---|---|---|---|
-| Second Wind / Stubborn Breath | `heal.recovery` | self | bonus action / reaction at ≤ half HP |
-| Grim Resolve | `condition.end{frightened,dazed,bleeding,staggered}`, `stand.free` | self | on Second Wind |
+| Patch Up / Stubborn Breath | `heal.recovery` | self | bonus action / reaction at ≤ half HP |
+| Grim Resolve | `condition.end{frightened,dazed,bleeding,staggered}`, `stand.free` | self | on Patch Up |
 | Press | `forcedMovement.push`, `collision.enable` | hit target | onHit |
 | Hew | `damage.extraDice` | hit target | onHit |
-| Empower | `verb.empower` (per-line sub-kinds) | per line | onHit / Set hit |
+| Empower | `verb.empower` (per-line sub-kinds) | per line | onHit / Receive hit |
 | Bite Deep | `rider.flag`, `save.disadvantage` | hit target | onHit |
 | Low Cut | `condition.apply:staggered` | hit target | onHit, own turn |
 | Momentum | `momentum.load`, `cost.free.momentum` | self → target | paid Press, Ram or Empower on your turn / a later own-turn hit on that target |
 | Drive Through | `shove.free` | pushed target | a combined move with a Press, Ram or Empower push part |
 | Pivot | `forcedMovement.pull`, `forcedMovement.shift` | hit target | Press (Ram for a Wrecker) |
-| Surge | `action.extra` | self | own turn |
-| Hold the Line | `movement.remainingZero` | mover | a keyed hit: `leaveZone` or `slipPast` opportunity attack, `setHit` Set |
+| Onslaught | `action.extra` | self | own turn |
+| Bar the Way | `movement.remainingZero` | mover | a keyed hit: `leaveZone` or `slipPast` opportunity attack, `setHit` Receive |
 | Shieldwall | `reactionAc.ally`; `reactionAc.self.ranged` | ally / self | attack roll |
 | Stand Fast | `reactionAc.windowFill.noReaction` | adjacent allies | each attack roll |
-| Sound the Advance | `condition.apply:spurred` | ally within 6 | on Surge |
+| Sound the Advance | `condition.apply:spurred` | ally within 6 | on Onslaught |
 | Stance Drill | `stance.learn` | self | level-up |
 | Stance re-pick | `stance.swap` | self | camp |
 | Low Cut II | `save.disadvantage` | hit target | onHit, own turn, target Prone or Squared Up by you |
 | Cover Step | `forcedMovement.shift.ally` | ally adjacent to you or the target | onHit |
-| Deep Reserves | `capacity.techniques.nonDamage` | self | level-up |
+| Fresh Reserves | `capacity.techniques.nonDamage` | self | level-up |
 | **Weaponmaster** | | | |
-| Practised Hand | `cost.free.empower` | hit target | onHit / Set hit, once per round |
+| Practised Hand | `cost.free.empower` | hit target | onHit / Receive hit, once per round |
 | Borrowed Form I–III | `verb.borrow`; II adds `verb.empower`; III adds `cost.free.empower` | hit target | onHit (Technique) |
 | Twin Verb | `verb.borrow.extra` (control verbs) | hit target | onHit, once per round |
 | Sure Form | `verb.onMiss` | missed target | qualifying miss, once per round |
-| Arsenal I–II | `action.attack`, `weapon.swap.free`, `cost.free.empower`; II adds `verb.borrow.extra` | self → each target | Surge option |
+| Arsenal I–II | `action.attack`, `weapon.swap.free`, `cost.free.empower`; II adds `verb.borrow.extra` | self → each target | Onslaught option |
 | `practisedHand.payRider` | `cost.free.rider` | hit target | onHit |
 | `twinVerb.offHand` | `verb.borrow.offHand` | hit target | onHit |
 | `borrowedForm.onReaction` | `verb.borrow` (Push, Hook) | hit target | reaction-attack hit |
 | Stand Fast rider (Weaponmaster) | `cost.free.empower`, `verb.borrow.extra` | attacker that missed a covered ally | your next hit on it |
-| **Bastion** | | | |
+| **Redoubt** | | | |
 | Square Up I | `condition.apply:challenged` | hit target | onHit, own turn |
 | Square Up (no hit, Called Out and Step In only) | `condition.apply:challenged` | hostile in reach / adjacent | turn start / end of the Art's Dash |
 | Square Up II (pairing) | `technique.pair` | hit target | onHit |
@@ -1277,16 +1298,16 @@ ability 7.3; defaults lead's call)**.
 | Retort Strike | `reactionAttack.attackAgainstOther` | Squared-Up attacker | its attack roll against another unit |
 | `retortStrike.wardensReach` | `reactionAttack.attackAgainstOther` | hostile in reach attacking an adjacent ally | once per round |
 | Shield Craft | `verb.bash.choose{push,hook,topple}` | bash target | bash hit |
-| Step In I–II | `action.dash`, `condition.apply:challenged`, `forcedMovement.swap.ally` (pending VG-22); II adds `reactionAc.windowFill.noReaction` | self / adjacent hostile / ally | Surge option |
-| Stand Fast rider (Bastion) | `reactionAc.windowFill.reach2` | allies within 2 | each attack roll |
+| Step In I–II | `action.dash`, `condition.apply:challenged`, `forcedMovement.swap.ally` (pending VG-22); II adds `reactionAc.windowFill.noReaction` | self / adjacent hostile / ally | Onslaught option |
+| Stand Fast rider (Redoubt) | `reactionAc.windowFill.reach2` | allies within 2 | each attack roll |
 | **Wrecker** | | | |
 | Battering Force | `collision.damage` | moved unit and the unit it strikes | verb-only move stopped early, once per round |
 | Brink | `forcedMovement.distance.choose`; `condition.apply:teetering` | hostile moved by you | forced movement you cause |
 | Ram I–III | `forcedMovement.push`, `collision.enable`, `condition.apply:prone` (deferred save); III (Skittles) adds `condition.apply:prone` on the struck hostile | hit target / struck hostile | onHit (Technique) |
 | Domino | `forcedMovement.push.link` | blocking hostile | step 10b |
 | Upend | `forcedMovement.push`, `condition.apply:prone` (no save if stopped early) | Topple target | Topple fires |
-| Earthshaker I–II | `shove.multi`, `forcedMovement.push`, `condition.apply:prone` | up to 3 adjacent hostiles | Surge option |
-| `surge.ramFree` | `cost.free.ram` | hit target | first Ram on a Surge turn |
+| Earthshaker I–II | `shove.multi`, `forcedMovement.push`, `condition.apply:prone` | up to 3 adjacent hostiles | Onslaught option |
+| `surge.ramFree` | `cost.free.ram` | hit target | first Ram on an Onslaught turn |
 | Stand Fast rider (Wrecker) | `forcedMovement.push` | adjacent melee attacker that missed a covered ally | turned miss, once per attacker per use |
 
 **Registry pass, named first** (all under the scope ruling VG-18):
@@ -1306,17 +1327,17 @@ ability 7.3; defaults lead's call)**.
 |---|---|---|
 | Array | Str +3, Con +2, Wis +1, Pre +1, Int 0, Dex −1 | Heavy armour ignores Dex; Wis feeds Medicine and Will |
 | Skills | Athletics, Medicine | DH 8 calls Medicine "close to compulsory" on solo floor 1 |
-| Stance | Hold the Line | Works solo; keeps Guarding legal |
+| Stance | Bar the Way | Works solo; keeps Guarding legal |
 | Level 2 | Drive Through (M1 and M2) | Level 2 always falls on solo floor 1, so the M2 Pivot clause could never fire and is deleted (companions design 16, CMP-26) **(lead's call)** |
 | Level 3 | Weaponmaster | Fewest decisions; M1 |
 | Level 6 | Twin Verb / Retort Strike / Domino with a shield active, otherwise Upend | — |
 | Level 7 | Grim Resolve II | Stance Drill flagged as "the defender pick" |
-| Level 10 | Deep Reserves | — |
+| Level 10 | Fresh Reserves | — |
 | Offers | scorer suggestion | — |
-| Camp re-pick | Hold the Line while solo; the camp screen suggests Shieldwall once two or more companions are recruited and a shield is in the active set | Lead's call |
+| Camp re-pick | Bar the Way while solo; the camp screen suggests Shieldwall once two or more companions are recruited and a shield is in the active set | Lead's call |
 
 **Ladder preview lines:**
-- "Bastion shines with companions; alone, it catches runners."
+- "Redoubt shines with companions; alone, it catches runners."
 - "Wrecker needs walls and hazards."
 - "Weaponmaster: control, not damage; best with two different verbs."
 
@@ -1325,7 +1346,7 @@ ability 7.3; defaults lead's call)**.
 **(lead's call throughout; VG-2 replaces the stage-1 cards)** Shape
 shared by all three:
 - level 3: a signature Technique (I) and clauses;
-- level 5: signature rank II and the Surge Art;
+- level 5: signature rank II and the Onslaught Art;
 - level 6: a verb rewrite (1 of 2);
 - level 7: signature rank III;
 - level 9: the Stand Fast rider and Art rank II.
@@ -1360,7 +1381,7 @@ chosen weapon family (Chosen Arms is Later).
   - Movement stays verb-sourced and never collides.
   - It inherits every verb bound and never fires on granted attacks.
   - Shown by a "Form ready" glint (counts 0).
-  - In M1, on-hit and Set-hit lines only. The Parry-success and Graze
+  - In M1, on-hit and Receive-hit lines only. The Parry-success and Graze
     timings are not needed with the default kit.
 - **Borrowed Form** (signature, M2). Spend a Technique after a hit: the
   hit applies your **spare set's main-hand verb** instead of the active
@@ -1371,7 +1392,7 @@ chosen weapon family (Chosen Arms is Later).
   - **Never borrowable:**
     - Cleave and Skewer (extra dice fail `HewCeiling`);
     - Nick, Lunge, Aim, Pry and Puncture (structure or pre-roll);
-    - Parry, Set and Graze.
+    - Parry, Receive and Graze.
   - **Only the canonical verb travels.** Signatures, dice, type, reach
     and properties never do.
   - The verb is off if the spare weapon is untrained or would Strain
@@ -1401,8 +1422,8 @@ chosen weapon family (Chosen Arms is Later).
     its normal step: forced movement at step 10, a Cleave follow-up at
     step 12, Lunge's carried advantage at step 13. There is no damage
     step, no save slot (step 9) and no Empower line.
-  - **The miss is not a hit for any rule:** not for Momentum, Hold the
-    Line, Square Up or signature events other than "Sure Form fired".
+  - **The miss is not a hit for any rule:** not for Momentum, Bar the
+    Way, Square Up or signature events other than "Sure Form fired".
   - Push and Hook move the target as written.
   - Cleave makes its follow-up against a hostile adjacent to the missed
     target, inside your reach.
@@ -1412,7 +1433,7 @@ chosen weapon family (Chosen Arms is Later).
   - It spends Practised Hand for the round. Parity: about +0.6 DPR with
     the greataxe *(illustr.)*.
 
-**Surge Art: Arsenal** (M2, class level 5):
+**Onslaught Art: Arsenal** (M2, class level 5):
 - Take the Attack action. Before each attack, choose which set's main
   weapon makes it; the swaps are part of the Art.
 - Each hit fires its verb with its payable line free (that hit's free
@@ -1439,7 +1460,7 @@ chosen weapon family (Chosen Arms is Later).
 **Weaknesses:**
 - the lowest ceiling with a greatsword (+0%);
 - verb-dependent, so weak against bosses more than one size larger,
-  Rooted or Anchored targets, and Aim;
+  Tangled or Anchored targets, and Aim;
 - kit- and loot-dependent;
 - leaving the shield set costs AC 2;
 - one more decision per hit.
@@ -1453,7 +1474,7 @@ non-Weaponmaster build.
   triggers.
 - Later: Chosen Arms.
 
-### 8.2 BASTION (M2): "look at me"
+### 8.2 REDOUBT (M2): "look at me"
 
 **Specs into:**
 - **mark:** Square Up I, II, III;
@@ -1484,14 +1505,14 @@ calledOut]`.
   - **The preview warns on every attack that would end it:** "ends your
     Square Up on X" is shown on a Cleave or Skewer secondary, on an
     attack on a second target (an Extra Attack, a Shield Craft bash), and
-    on an opportunity attack against another hostile. **The Bastion's
+    on an opportunity attack against another hostile. **The Redoubt's
     opportunity-attack policy defaults to `notWhileSquaredUpElsewhere`
-    while a Square Up is active (7.12; lead's call)**, so Hold the Line
+    while a Square Up is active (7.12; lead's call)**, so Bar the Way
     does not end the mark by default.
 - **Stance clause, either stance:**
   - **Shieldwall:** the ally clause reaches allies within 2 squares (the
     settled stage-1 clause).
-  - **Hold the Line:** the stop also applies when your Set hits (the
+  - **Bar the Way:** the stop also applies when your Receive hits (the
     settled stage-1 clause), **and** a hostile that slips past you
     provokes you. This is the built-in `slipPastProvokes`, barred as a
     trigger.
@@ -1546,7 +1567,7 @@ calledOut]`.
   - **Bounds:**
     - no Techniques and no condition-applying verbs. Position verbs
       (Push, Hook) may apply under weapons 7.2 rule 3;
-    - no Hold the Line stop (not a keyed trigger, 7.4);
+    - no Bar the Way stop (not a keyed trigger, 7.4);
     - no nesting off reactions or boss actions;
     - Staggered switches it off.
   - **Deterrence logging:** "X chose another target: Squared Up by you"
@@ -1560,7 +1581,7 @@ calledOut]`.
   so it fails `FlagNotCondition`; its ranged trigger copied Shelter,
   which fails at any charge level (trinkets 11 rule 1).
 
-**Surge Art: Step In** (M2, class level 5):
+**Onslaught Art: Step In** (M2, class level 5):
 - Take the Dash action. At its end, Square Up one hostile adjacent to you
   with no hit (the round's Square Up).
 - **Swap add-on, pending ruling VG-22:** once during the Dash, while
@@ -1568,7 +1589,7 @@ calledOut]`.
   The swap costs 1 square of your movement and is 1 square of forced
   movement for the ally: no provoke, never a collision, never into or
   adjacent to a hazard. It is illegal while either unit is Grappled,
-  Grappling, Restrained, Rooted or Anchored, or if the size does not
+  Grappling, Restrained, Tangled or Anchored, or if the size does not
   fit.
 - The Art works without the swap if the ruling is refused.
 - About 0‰ of damage, and one action of tempo. Pass.
@@ -1587,7 +1608,7 @@ composite-lockout test applies (12.1).
 **Report owed:** the share of rounds with a Square Up active, beside the
 Retort trigger and deterrence rates (13.3).
 
-**Rejected for the Bastion:**
+**Rejected for the Redoubt:**
 - Call Them Out and Taunting Roar (a multi-target Challenge cancels
   itself; stage 1 withdrew it);
 - Hold Fast (a refresh has no semantics in conditions);
@@ -1698,7 +1719,7 @@ baseline behaviour for every unit.
     save is rolled.
   - Step reorder (VG-8). Registry: Floorer, Thunderous.
 
-**Surge Art: Earthshaker** (M2, class level 5):
+**Onslaught Art: Earthshaker** (M2, class level 5):
 - One Athletics roll against 10 + Fortitude of **up to 3** hostiles
   adjacent to you, each no more than one size larger. Each one you beat
   is pushed 1 square away or knocked Prone (tag `shove`), your choice
@@ -1716,9 +1737,9 @@ baseline behaviour for every unit.
   under the flat band*)*. Pass. The 3-target cap answers the area-lean
   overlap. `drawIn` is rejected.
 - **II (L9):** each push may be up to 2 (chosen).
-- Registry: Quake, Shockwave.
+- Registry: Quake, Upheaval.
 
-**Triggers (`requires: subclass:wrecker`):** `surge.ramFree`. On a Surge
+**Triggers (`requires: subclass:wrecker`):** `surge.ramFree`. On an Onslaught
 turn, your first Ram costs nothing (a free effect, not a refill).
 
 **Rejected or Later for the Wrecker:**
@@ -1744,8 +1765,8 @@ counted (10.1), so it was lowered in the revision.
 **Weaknesses:**
 - open, hazard-light rooms;
 - Large or bigger bosses;
-- Rooted, Restrained, Anchored and Stalwart targets;
-- artillery and fliers;
+- Tangled, Restrained, Anchored and Stalwart targets;
+- marksmen and fliers;
 - its own follow-up (a push moves the target off your next attack);
 - friendly-fire geometry;
 - slower previews.
@@ -1771,7 +1792,7 @@ anything on the forbidden list (classes 6.3).
 | # | Mechanic | What it adds | Cost | Touches | Decision |
 |---|---|---|---|---|---|
 | N1 | Technique ranks | Visible growth, 0 reading | S: data field, upgrade effects, 2 validators | ability 6.6, 10.2–10.3; classes 7.4 | **Adopted:** rank I in M1, II/III in M2 |
-| N2 | Surge Arts + `CampOptionBound` | Signature moves; camp-share lever | S–M | ability 6.4; classes 8.3, 12.2–12.3 | **Adopted M2**, `minClassLevel 5` |
+| N2 | Onslaught Arts + `CampOptionBound` | Signature moves; camp-share lever | S–M | ability 6.4; classes 8.3, 12.2–12.3 | **Adopted M2**, `minClassLevel 5` |
 | N3 | Off-timing spends (`onShoveSuccess`, `onGrappleSuccess`, `onGraze`, `turnStart`) | "Decide after the result"; grapple debt | M | ability 7.1; weapons 7.5, 17.11; classes 8.3 | **Adopted M2** as triggers and Called Out. `onParrySuccess` (riposte) reserved for the Swordsworn |
 | N4 | Verb borrowing | Two-set toolkit | M | weapons 7.1, 7.3, 11; ability 7.2 | **Adopted M2** (VG-19) |
 | N5 | Intercept / Take the Blow | Bodyguard redirect | M | classes 6.3; armour 14.5; conditions 18.9 | **Later** with Guarded or Holdfast |
@@ -1784,11 +1805,11 @@ anything on the forbidden list (classes 6.3).
 | N12 | Shieldwall solo cover; Shield Craft | Floor-1 viability; shield as a verb weapon | S | armour 10.3–10.4; classes 8.3 | **Adopted M2** |
 | N13 | Ally swap primitive | Rescue | S | conditions 10.1; classes 6.3 | **M2 add-on, pending ruling VG-22** |
 | N14 | Turn allowance and per-target round count record kinds | Keeps the cap and pool counts honest | S | classes 3.4, 7.5; ability 6.6, 10.2 | **Adopted now (M1)** |
-| — | In-fight stance toggles | Swap mid-fight | 5th reading row | ability 11.4 | **Rejected** (Later for an Adept or Berserker) |
+| — | In-fight stance toggles | Swap mid-fight | 5th reading row | ability 11.4 | **Rejected** (Later for an Ascetic or Ravager) |
 | — | Stored combo meter | Build and spend | New pool or row | ability 6.6 | **Rejected** |
 | — | Brace / Anchored self-brace | Planted defender | Reproduces Anchored | conditions 16 | **Later** (Holdfast) |
 | — | Flat adjacency or formation auras | Formation play | Dead numbers; envelope | conditions 13; armour 10.4 | **Rejected** |
-| — | Zone-entry stop | Pillars-style engagement | Overlaps Set, Hold the Line | weapons 8 | **Later** (Holdfast) |
+| — | Zone-entry stop | Pillars-style engagement | Overlaps Receive, Bar the Way | weapons 8 | **Later** (Holdfast) |
 | — | Universal sweep / Blade Storm | Crowd answer | Area lean; 2241‰ at level 3 | classes 6.4 | **Rejected** |
 | — | Masterstroke, Combination | Crit and combo spends | Carve-outs | classes 8.3 | **Rejected** |
 | — | Damage reduction | Tankiness | Stat model 6 bars DR; Shielded Later | — | **Rejected** |
@@ -1814,8 +1835,8 @@ anything on the forbidden list (classes 6.3).
   wave, ranks[], tag, payable}` (6.6).
 - Validators: `RankAddsNoDice` (Hew allow-listed) and `RankKeepsBounds`.
 
-**Surge Arts (N2).**
-- An Art is an option on the Surge pool, own turn, using the camp spend.
+**Onslaught Arts (N2).**
+- An Art is an option on the Onslaught pool, own turn, using the camp spend.
 - It grants only what it states and is greyed under action denial.
 - One per subclass from class level 5; rank II at level 9.
 - `CampOptionBound` as in 7.3.
@@ -1865,7 +1886,7 @@ Each criterion is a data predicate over the flag's record: `heldBy`
 (source or `turnPipeline`), the absence of `save`, `tier` and `cure`
 fields, its `effectKinds`, and a `display` of `glint` or `row`.
 
-Momentum, Hold the Line's stop, the Stand Fast state and the source-held
+Momentum, Bar the Way's stop, the Stand Fast state and the source-held
 `empowerMarks` (13.1) pass. Take the Blow and Brace fail. The Binder's
 source-held `slippedFrom`, `boundBy` and `cinched` pass (2026-11-20;
 BN-3, Arcanist design 9.1).
@@ -1878,15 +1899,15 @@ swing about ±7 points with R.
 
 ### 10.1 Parity (weapons 6.4, any build ≤ 110%)
 
-Greatsword Vanguard, every Hew-legal Technique spent on Hew, every Surge
+Greatsword Vanguard, every Hew-legal Technique spent on Hew, every Onslaught
 spent on Attack:
 
 | Reading | L1 | L5 | L10 |
 |---|---|---|---|
 | This plan, rest pools only (the VG-12 reading) | 109.7% | 109.3% | 108.4% |
-| **Worst legal build, rest pools only (the VG-12 measure)**: the plan above plus every legal capacity step (Deep Reserves at level 10; capacity offers are excluded), its use spent on the best non-Hew option (a Press that sets Momentum, cashed in as a colliding Press) | **109.7%** | **109.3%** | **109.6%** (110.0% if every collision strikes a second hostile) |
-| This plan, Surge counted (the row's current text) | 114.5% | 118.9% | 117.9% |
-| Stage-1 concept numbers, Surge counted | 118.4% | 114.1% | 120.7% |
+| **Worst legal build, rest pools only (the VG-12 measure)**: the plan above plus every legal capacity step (Fresh Reserves at level 10; capacity offers are excluded), its use spent on the best non-Hew option (a Press that sets Momentum, cashed in as a colliding Press) | **109.7%** | **109.3%** | **109.6%** (110.0% if every collision strikes a second hostile) |
+| This plan, Onslaught counted (the row's current text) | 114.5% | 118.9% | 117.9% |
+| Stage-1 concept numbers, Onslaught counted | 118.4% | 114.1% | 120.7% |
 | Per-fight measure (fresh pools each fight) | 126–164% | — | — |
 
 - **Stated plainly:** under weapons 6.4 as written, every plan fails,
@@ -1898,10 +1919,10 @@ spent on Attack:
     slotless casts `SlotlessCastBound` (2026-11-20; ARC-2, Arcanist
     design 11.2);
   - parity is measured at the **worst legal build**: every legal
-    capacity step (Deep Reserves; Technique capacity offers are excluded
+    capacity step (Fresh Reserves; Technique capacity offers are excluded
     in the revision), and R at the simulator's observed lower bound;
   - **(2026-11-20; ARC-3, ARC-16, Arcanist design 11.1)** Slot
-    Recovery counts as rest power, floor-averaged, here as in the camp
+    Renewal counts as rest power, floor-averaged, here as in the camp
     share; under `SetupAttribution` the value a camp-sourced condition
     adds to your own at-wills is charged to the source spell's row, not
     to the at-will's (the static `SpellTierBound` is unchanged by it).
@@ -1911,7 +1932,7 @@ spent on Attack:
     levels 1–4, and 1.8 + 1.6 against 3.8 at level 10 *(illustr.;*
     collision rate 400‰, half of collisions striking a second
     hostile*)*;
-  - the one legal capacity step is Deep Reserves. Its use cannot pay for
+  - the one legal capacity step is Fresh Reserves. Its use cannot pay for
     Hew and deals no collision damage itself (6.4 rule 7), so it adds
     only the Momentum cash-in it can set: about +1.2 points at level 10;
   - capacity offers on Techniques are excluded (`capacity:techniques`,
@@ -2006,7 +2027,7 @@ not a gate):
 | Level 1–2, with Momentum (the M1 slice, agreed Q2) | 36–38% |
 | Level 3, Weaponmaster with the default kit | 42–53% |
 | Level 3, Weaponmaster with Momentum | about 43–56% *(revised)*: at one attack a turn Momentum and Practised Hand compete for the same hit (6.7), so Momentum adds little before Extra Attack. The draft's 44–77% assumed the two never overlap |
-| Level 3, Bastion or Wrecker with Momentum (M2) | up to the draft's 77% *(illustr.)*, where no other free effect competes; to be rerun (13.3) |
+| Level 3, Redoubt or Wrecker with Momentum (M2) | up to the draft's 77% *(illustr.)*, where no other free effect competes; to be rerun (13.3) |
 
 The scorer pre-highlights Press or Empower when the preview shows a
 payoff (a collision, Prone, a peel, an edge), and labels Hew "+2.5 avg".
@@ -2024,11 +2045,11 @@ the lever it would take levels 5 and 10 below the band (39% and 37%).
 
 | Measure | L1 | L5 | L10 |
 |---|---|---|---|
-| Full Second Wind, with Momentum and the lever | 16% | 35% | 30% |
-| **Half Second Wind (the measure, agreed Q1), with Momentum and the lever** | **20%** | **41%** | **40%** |
-| Second Wind excluded, with Momentum and the lever | 28% | 50% | 61% |
-| *For reference:* half Second Wind, with Momentum, without the lever | 20% | 39% | 37% |
-| *For reference:* half Second Wind, without Momentum (the draft figures) | 23% | 45% | 40% |
+| Full Patch Up, with Momentum and the lever | 16% | 35% | 30% |
+| **Half Patch Up (the measure, agreed Q1), with Momentum and the lever** | **20%** | **41%** | **40%** |
+| Patch Up excluded, with Momentum and the lever | 28% | 50% | 61% |
+| *For reference:* half Patch Up, with Momentum, without the lever | 20% | 39% | 37% |
+| *For reference:* half Patch Up, without Momentum (the draft figures) | 23% | 45% | 40% |
 
 - **The lever, applied (lead's call):** the Arts and Stand Fast riders
   are valued and sized at their utility weight. An Art is worth 400‰ of
@@ -2045,12 +2066,12 @@ the lever it would take levels 5 and 10 below the band (39% and 37%).
   draft's, without Momentum.
 
 - **(agreed, Q1)** The camp share is measured with the
-  `restDefensiveTool` (Second Wind) at half value, and all three
+  `restDefensiveTool` (Patch Up) at half value, and all three
   measures are reported. **The level-1 miss is accepted**: it is
   structural, because no camp pool can rise before level 5 without
   adding floor-1 power. The band holds at levels 5 and 10 (about 45% and
   40% in the draft; 41% and 40% with Momentum counted and the lever
-  applied, as tabled above). Raising Surge to 2 from level 1 is rejected.
+  applied, as tabled above). Raising Onslaught to 2 from level 1 is rejected.
 - **(client, 2026-11-18; SH-28)** The accepted martial miss is extended
   to levels 1–4 for the Shade (Shade design 10.5). The Vanguard's own
   miss stays at level 1.
@@ -2073,7 +2094,7 @@ the lever it would take levels 5 and 10 below the band (39% and 37%).
 |---|---|
 | Limited abilities by level 10 | 4 of 8. Pass, given VG-10 |
 | Named martial pools | 3 of 3. Pass |
-| Reading count | 4 at every level. Pass. Ranks are pips; the Arts and Stand Fast sit on the Surge row; Momentum, Practised Hand and Twin Verb are glints (counting 0, per VG-11's row-modifier rule) |
+| Reading count | 4 at every level. Pass. Ranks are pips; the Arts and Stand Fast sit on the Onslaught row; Momentum, Practised Hand and Twin Verb are glints (counting 0, per VG-11's row-modifier rule) |
 | 60% rule, level-1 value | 178‰ (HP-equivalents) against the 400‰ bound. Pass |
 | 60% rule, increments at 3/5/9 | 522‰ against 500‰. Pass (Arts at 5, Art II at 9) |
 
@@ -2087,7 +2108,7 @@ unit.
 - Pool 2 covers about 44% of hits at levels 1–4. Pool 3 covers about 33%
   from level 5.
 - A pool step spent on Hew would add about +2.8 parity points at level
-  10. The one legal step, Deep Reserves, adds about +1.2, because its
+  10. The one legal step, Fresh Reserves, adds about +1.2, because its
   use deals no damage itself (10.1).
 - Stand Fast is worth about 5.6 HP-equivalents per use, and about 8.4
   with its subclass rider (10.4). It is a protection capstone, not a
@@ -2099,14 +2120,14 @@ Levels 1–3; no riders, no offers, M1 conditions only. **(lead's call;
 Momentum agreed, Q2)**
 
 **In:**
-- Second Wind 1; Techniques 2 (Press I, Hew I 1d4, Empower I on M1
-  lines); Surge 1 (extra action only).
+- Patch Up 1; Techniques 2 (Press I, Hew I 1d4, Empower I on M1
+  lines); Onslaught 1 (extra action only).
 - **Momentum** (agreed, Q2), with Press and M1 Empower lines as its
   cash-ins, and its clauses (6.7).
-- Hold the Line only (so no stance re-pick is shown).
+- Bar the Way only (so no stance re-pick is shown).
 - The M1 level-2 menu: Drive Through, Pivot, Grim Resolve (with Bleeding
   and the stand).
-- Weaponmaster level 3: Practised Hand on on-hit and Set-hit payable
+- Weaponmaster level 3: Practised Hand on on-hit and Receive-hit payable
   lines.
 - Kit: chain mail; warhammer + shield / greataxe; 2 potions; coin
   exactly 15 (change SK-1).
@@ -2122,7 +2143,7 @@ Momentum agreed, Q2)**
     collision damage is not a hit;
   - the collision causer on events;
   - the `techniquePush` tag;
-  - the Hold the Line scorer pricing (VG-16).
+  - the Bar the Way scorer pricing (VG-16).
 
 **Conditions the Vanguard touches:**
 - applies: Prone (Topple, Drive Through);
@@ -2134,7 +2155,7 @@ Collisions with walls and units apply. Pushes stop before hazards
 
 **Out:**
 - Bite Deep, Low Cut, Shieldwall, the stance re-pick;
-- Bastion, Wrecker, Arts;
+- Redoubt, Wrecker, Arts;
 - ranks II/III, triggers, offers;
 - Borrowed Form, Stand Fast.
 
@@ -2146,16 +2167,16 @@ Collisions with walls and units apply. Pushes stop before hazards
   (where Momentum and Practised Hand compete for one hit, 6.7); level 4
   is reported in M2, since M1 is levels 1–3 (cross-document comparison
   2026-11-23, CC-65);
-- the Hold the Line fire and reroute rate.
+- the Bar the Way fire and reroute rate.
 
 ## 12. Binding requirements and how they are met
 
 | Requirement (source) | How met | Status |
 |---|---|---|
-| Rest and camp pools; 40–60% camp (ability 6.3; classes 8.2, 8.3 "Camp share") | Surge 2 at level 5; Arts; Stand Fast, weighted toward camp (10.4) | Levels 5 and 10 in band under the half measure, Momentum included (41% and 40%); the level-1 miss accepted **(agreed, Q1; VG-13 changes the settled chassis row)** |
-| One camp spend per turn (ability 6.4) | Surge, Arts, Stand Fast and scroll reads share it | Met |
+| Rest and camp pools; 40–60% camp (ability 6.3; classes 8.2, 8.3 "Camp share") | Onslaught 2 at level 5; Arts; Stand Fast, weighted toward camp (10.4) | Levels 5 and 10 in band under the half measure, Momentum included (41% and 40%); the level-1 miss accepted **(agreed, Q1; VG-13 changes the settled chassis row)** |
+| One camp spend per turn (ability 6.4) | Onslaught, Arts, Stand Fast and scroll reads share it | Met |
 | At most 3 named martial pools; cap of 8; reading 4 (ability 6.6; classes 7.5–7.6) | 3 + capstone; turn allowances, per-target counts and the Hew-use sub-limit are not pools (VG-10) | Met, given VG-10 |
-| One full-Recovery `restDefensiveTool`, once per rest, twice from level 6 (classes 8.2; DH 12) | Second Wind; `capacity:secondWind` excluded | Met |
+| One full-Recovery `restDefensiveTool`, once per rest, twice from level 6 (classes 8.2; DH 12) | Patch Up; `capacity:secondWind` excluded | Met |
 | At least 2 at-wills, one damaging (ability 6.1) | Weapon attack; bash or Shove | Met |
 | Extra Attack at level 5 (classes 7.4) | Level 5 | Met |
 | Policy on every reaction; one reaction AC bonus per attack (ability 7.3; armour 10.4) | 7.12; the fill closes the window | Met; VG-4 |
@@ -2184,20 +2205,20 @@ Each case states its expected outcome; the test confirms it.
 
 | Case | Expected outcome |
 |---|---|
-| Hold the Line keyed to its triggers (`leaveZone`, `slipPast`, `setHit`), against Retort Strike and `wardensReach` | The stop applies only to keyed reaction attacks; Retort Strike never stops; the mover keeps its action |
+| Bar the Way keyed to its triggers (`leaveZone`, `slipPast`, `setHit`), against Retort Strike and `wardensReach` | The stop applies only to keyed reaction attacks; Retort Strike never stops; the mover keeps its action |
 | A Squared-Up unit that Disengages | It provokes and is stopped, and its action is spent (by its own Disengage). Its bonus action remains, and it is not locked beyond this turn. The scorer rates Dash-first above Disengage |
-| A slip past a Bastion | It provokes before the step past, and a hit stops it on its last square; action and bonus action remain |
-| Topple II push + Hold the Line | Prone, then pushed (no provoke); action remains, so it can stand |
-| **Single Bastion:** Shield Craft Topple Prone + Square Up (Challenged) + Hold the Line + Retort Strike (+ Low Cut Staggered) | Every piece applies at most once per round per its limit; the unit can stand and act; Staggered ends at its own turn; no lockout |
-| **Wrecker + Bastion companion:** Ram, Upend and Skittles Prone + Hold the Line + Square Up | Prone and the stop apply at most once per round (`sharesToppleCount`); the unit keeps its action to stand or Dash |
-| Square Up + a Hold the Line opportunity attack on a second hostile | Under the default `notWhileSquaredUpElsewhere`, no attack and the mark stays; under `always`, the attack ends the Square Up (preview warned) |
-| Drive Through Prone + Hold the Line | As Topple II |
-| Brink Teetering + Hold the Line | The edge save is made at disadvantage on a later push; the unit can still act |
+| A slip past a Redoubt | It provokes before the step past, and a hit stops it on its last square; action and bonus action remain |
+| Topple II push + Bar the Way | Prone, then pushed (no provoke); action remains, so it can stand |
+| **Single Redoubt:** Shield Craft Topple Prone + Square Up (Challenged) + Bar the Way + Retort Strike (+ Low Cut Staggered) | Every piece applies at most once per round per its limit; the unit can stand and act; Staggered ends at its own turn; no lockout |
+| **Wrecker + Redoubt companion:** Ram, Upend and Skittles Prone + Bar the Way + Square Up | Prone and the stop apply at most once per round (`sharesToppleCount`); the unit keeps its action to stand or Dash |
+| Square Up + a Bar the Way opportunity attack on a second hostile | Under the default `notWhileSquaredUpElsewhere`, no attack and the mark stays; under `always`, the attack ends the Square Up (preview warned) |
+| Drive Through Prone + Bar the Way | As Topple II |
+| Brink Teetering + Bar the Way | The edge save is made at disadvantage on a later push; the unit can still act |
 | Grappled + Prone | It can still attempt an escape with its action |
-| Earthshaker Prone + Hold the Line | As Topple II, once per target |
+| Earthshaker Prone + Bar the Way | As Topple II, once per target |
 | Domino link | One link, inside the 3-square sum; no second link |
 | Stance Drill (both stances live) | One reaction covers both; no double stop |
-| Every movement source after a stop: Dash, bonus-action Dash, Surge Dash, Spurred, slip past (now provoking a Bastion), forced movement by allies | Each adds movement as normal; only the current segment was stopped |
+| Every movement source after a stop: Dash, bonus-action Dash, Onslaught Dash, Spurred, slip past (now provoking a Redoubt), forced movement by allies | Each adds movement as normal; only the current segment was stopped |
 
 ## 13. Data, validation and simulator
 
@@ -2239,7 +2260,7 @@ Each case states its expected outcome; the test confirms it.
 
 The Technique uses spent this rest are read from the pool's count, not
 stored (3.2). The Hew-use cap needs no counter: Hew is barred only on
-the Deep Reserves use, which is the use spent once the class-table
+the Fresh Reserves use, which is the use spent once the class-table
 pool's worth is gone, so Hews per rest can never pass the class-table
 pool (6.4 rule 7).
 
@@ -2275,14 +2296,14 @@ that registry, and this document calls the check rather than owning it.
 - Hew's pick share at levels 1–3 in M1, and for the Weaponmaster at
   level 3 (6.7); level 4 (and the Weaponmaster's levels 3–4) in M2;
   target below 50% in M2 (cross-document comparison 2026-11-23, CC-65);
-- Hold the Line fire and reroute rates;
+- Bar the Way fire and reroute rates;
 - Stand Fast blocked misses per use, counting only offered fills (a
   fill not offered against a Covered attack is not counted; 7.7)
   (cross-document comparison 2026-11-23, CC-63);
-- the protection reliance report with and without the Bastion;
+- the protection reliance report with and without the Redoubt;
 - Retort trigger and deterrence rates, and the share of rounds with a
   Square Up active (8.2);
-- the AI Disengage behaviour against a Bastion;
+- the AI Disengage behaviour against a Redoubt;
 - Earthshaker minion clear rate against the Arcanist;
 - friendly-collision share;
 - Wrecker value by theme;
@@ -2295,8 +2316,8 @@ that registry, and this document calls the check rather than owning it.
 
 | Wave | Content |
 |---|---|
-| **M1** | Section 11: levels 1–3; Second Wind, Techniques (Press, Hew 1d4, M1 Empower lines), Surge, Momentum, Hold the Line, the M1 level-2 menu, the Weaponmaster's Practised Hand; the record kinds (ranks, stance, turn allowance, per-target round count); the collision groundwork; VG-16 scorer pricing; the M1 kit |
-| **M2** | Levels 4–10; ranks II and III; Bite Deep, Low Cut, Cover Step; Shieldwall and the camp re-pick; the M2 level-2, level-7 and level-10 menus; offers, lanes and `triggerMenu`; Borrowed Form, Twin Verb, Sure Form and Arsenal; the Bastion; the Wrecker; Stand Fast with its riders; the swap add-on if VG-22 is ruled in; every report in 13.3 |
+| **M1** | Section 11: levels 1–3; Patch Up, Techniques (Press, Hew 1d4, M1 Empower lines), Onslaught, Momentum, Bar the Way, the M1 level-2 menu, the Weaponmaster's Practised Hand; the record kinds (ranks, stance, turn allowance, per-target round count); the collision groundwork; VG-16 scorer pricing; the M1 kit |
+| **M2** | Levels 4–10; ranks II and III; Bite Deep, Low Cut, Cover Step; Shieldwall and the camp re-pick; the M2 level-2, level-7 and level-10 menus; offers, lanes and `triggerMenu`; Borrowed Form, Twin Verb, Sure Form and Arsenal; the Redoubt; the Wrecker; Stand Fast with its riders; the swap add-on if VG-22 is ruled in; every report in 13.3 |
 | **M4** | The creation-stance dip proposal (12) with the multiclass model |
 | **Later** | Take the Blow and Guarded-based guards; Brace; zone-entry stop; Chosen Arms; Throw; Over the Edge; lethal chasms; carom pushes; in-fight stance toggles (for another class) |
 
@@ -2304,16 +2325,16 @@ that registry, and this document calls the check rather than owning it.
 
 | Risk | Mitigation, report and lever |
 |---|---|
-| Parity passes only under VG-12, and only inside model noise (±7 points with R); the worst legal build sits at 109.6–110.0% at level 10 | Worst-legal-build measure; the Hew cap; Deep Reserves deals no damage; `capacity:techniques` excluded; fallback Hew 1d4 to level 6; the simulator sets R |
+| Parity passes only under VG-12, and only inside model noise (±7 points with R); the worst legal build sits at 109.6–110.0% at level 10 | Worst-legal-build measure; the Hew cap; Fresh Reserves deals no damage; `capacity:techniques` excluded; fallback Hew 1d4 to level 6; the simulator sets R |
 | `HewCeiling` passes on an assumed `collisionRate` (400‰); the Domino row has little room | The observed rate per subclass and theme is reported; the band (2 / 3 / 3) is the lever, never a dice band |
 | The camp share sits near the band's lower edge once Momentum is counted (41% at level 5, 40% at level 10) | The Art and Stand Fast weight is already applied; the simulator checks it; the same weight is the further lever (10.4) |
 | Momentum adds little for the M1 Weaponmaster at levels 3–4 (it competes with Practised Hand for one hit) | Stated (6.7); the scorer term set to about 0 in that case; Hew's pick share at level 3 reported in M1, and level 4 in M2 (cross-document comparison 2026-11-23, CC-65) |
 | The Weaponmaster's signature lives in a different set from its protection with the default kit | The M2 spare recommendation at level 3 (7.10); the signature share in the set it fights in is reported |
-| Hold the Line and Square Up undercut each other (an opportunity attack ends the mark) | `notWhileSquaredUpElsewhere` default; the preview warning; the mark-up share report (8.2) |
+| Bar the Way and Square Up undercut each other (an opportunity attack ends the mark) | `notWhileSquaredUpElsewhere` default; the preview warning; the mark-up share report (8.2) |
 | The floor-1 spread stays wide (the Vanguard is favoured 5–20×) | No floor-1 power added beyond stage 1 except the Shieldwall solo clause; the per-feature diff report; the lever is the other classes' data |
 | Hew remains the dominant default | Momentum (in M1); the scorer highlight; Hew 1d4 early; Hew's pick share report (target below 50% in M2) |
 | Picker and decision load | The legal-only picker (≤ 6); one free-effect rule; one "Ready" glint; playtest of companion turns under 10 s |
-| The Bastion plays itself on enemy turns | Square Up, pairing and Step In decided on its own turn; Called Out prompted for the hero (7.12); deterrence logged |
+| The Redoubt plays itself on enemy turns | Square Up, pairing and Step In decided on its own turn; Called Out prompted for the hero (7.12); deterrence logged |
 | Wrecker value depends on terrain | Walls set the floor of its value; reports by theme; no dependence on lethal hazards |
 | A Momentum glint reads like a mark (budget optics) | `FlagNotCondition` ruling; it shows as the owner's badge first |
 | The camp re-pick becomes a chore or a trap (Guarding goes inert) | Once per camp, camp screen only; the warning before confirming; the scorer suggestion (7.14); the re-pick rate report |
@@ -2339,13 +2360,13 @@ that registry, and this document calls the check rather than owning it.
   naming pass.
 - **Not tuning:** the ranks spine and its schedule; four things to read;
   no rank or Empower line adds dice or flat damage; one free effect per
-  hit; the Hew cap and the non-damage Deep Reserves use; the 3-square
+  hit; the Hew cap and the non-damage Fresh Reserves use; the 3-square
   sum rule; Ram standing in for Press; Momentum's rules and its M1 wave
   (Q2); the camp-share
   measure and the accepted level-1 miss (Q1); the camp re-pick (Q3);
   Shieldwall's shield requirement and solo clause; Stand Fast as a
   window fill; Take the Blow at Later; Interpose's +2 (settled); one
-  full-Recovery Second Wind (settled).
+  full-Recovery Patch Up (settled).
 
 ## 17. Changes to approved documents
 
@@ -2369,21 +2390,21 @@ recorded in classes 18 by VG-1):**
 | # | Document / section | Change | Approved by |
 |---|---|---|---|
 | VG-1 | Classes 18, "Narrowings recorded inside this design" paragraph | Add the narrowings above | Lead |
-| VG-2 | Classes 8.3: Techniques bullet and its "Timing" sub-bullet, Growth bullets (level 2 talents), Creation pick bullet (the Hold the Line sub-bullet), Subclasses bullets, Cap respected bullets; classes 11.C, the "Classes own depth, never access" row | Technique text (Press; Hew 1d4 / 1d6; options; one free effect); **the Square Up II pairing carve-out to one Technique per hit** (6.4 rule 2); Ram stands in for Press for the Wrecker (6.5); Drive Through rewrite; M2 level-2 menu; Grim Resolve text; Weaponmaster card ("keyed to verb ids; group tags as `requires` filters"), and the 11.C row's "Weaponmaster keyed to groups" to match; Bastion card (Square Up, the no-hit application by Called Out and Step In only, the slip-past clause, "harms" corrected to "targets"); Wrecker card replaced (8.3 here); Prone from Wrecker effects a forced-movement tool (leans ruling); Hold the Line keyed to `leaveZone`, `slipPast` and `setHit` (7.4), "Disengage stops it" not added | Lead (the 8.3 items are lead's calls) |
+| VG-2 | Classes 8.3: Techniques bullet and its "Timing" sub-bullet, Growth bullets (level 2 talents), Creation pick bullet (the Hold the Line sub-bullet; renamed Bar the Way, naming pass NP-33), Subclasses bullets, Cap respected bullets; classes 11.C, the "Classes own depth, never access" row | Technique text (Press; Hew 1d4 / 1d6; options; one free effect); **the Square Up II pairing carve-out to one Technique per hit** (6.4 rule 2); Ram stands in for Press for the Wrecker (6.5); Drive Through rewrite; M2 level-2 menu; Grim Resolve text; Weaponmaster card ("keyed to verb ids; group tags as `requires` filters"), and the 11.C row's "Weaponmaster keyed to groups" to match; Bastion card (renamed Redoubt, naming pass NP-33; Square Up, the no-hit application by Called Out and Step In only, the slip-past clause, "harms" corrected to "targets"); Wrecker card replaced (8.3 here); Prone from Wrecker effects a forced-movement tool (leans ruling); Hold the Line keyed to `leaveZone`, `slipPast` and `setHit` (7.4), "Disengage stops it" not added | Lead (the 8.3 items are lead's calls) |
 | VG-3 | Classes 8.3, Creation pick bullet, Shieldwall sub-bullet | Requires a shield; the solo ranged clause | Lead |
 | VG-4 | Armour 10.4, "Candidate order" and "Window algorithm"; ability 7.3, the window paragraph (AR-8); armour 11 item 1; weapons 7.5 step 5 (the restated window order) | Step 0 window fills, ordered by source unit order then creation order; a fill counts as "the one reaction"; the skip rules inherited except "no reaction left" (7.7) | Lead |
 | VG-5 | Conditions 18.4, Teetering, "Sources" line | Add Brink; the edge save made before the movement ends Teetering | Lead |
-| VG-6 | Classes 8.3, Techniques, Surge and "M1 content" bullets ("push, +1d6 and empower-verb Techniques"); ability 6.6, Techniques and Surge bullets (illustrative, the W-3 example); classes 13, M1 row ("+1d6") | Techniques 2 / 3 / 3; Surge 2 at level 5; Hew 1d4 at levels 1–4, 1d6 from level 5. **Classes 13's M1 row and 8.3's M1 content bullet gain Momentum** | Lead; **Momentum in M1: client (agreed 2026-11-18, Q2)** |
+| VG-6 | Classes 8.3, Techniques, Surge (renamed Onslaught, naming pass NP-33) and "M1 content" bullets ("push, +1d6 and empower-verb Techniques"); ability 6.6, Techniques and Surge bullets (illustrative, the W-3 example); classes 13, M1 row ("+1d6") | Techniques 2 / 3 / 3; Surge 2 at level 5; Hew 1d4 at levels 1–4, 1d6 from level 5. **Classes 13's M1 row and 8.3's M1 content bullet gain Momentum** | Lead; **Momentum in M1: client (agreed 2026-11-18, Q2)** |
 | VG-7 | Ability 7.1, declared costs; classes 8.3, Technique timing | `onEvent:<id>` cost timing (Shove, grapple, Graze, turn start) | Lead |
 | VG-8 | Weapons 7.2 rule 4; weapons 7.5 steps 6 and 9–11, new steps 6a and 10b; conditions 10.1, the "One move per hit" bullet | Empowered movement stays verb-sourced; the Battering Force exception; the 3-square sum across all moved units, counted in squares actually moved, with the part order, truncation and "contributes" rule of 6.4 rule 6; "stopped early" defined (3.4); the save slot reserved at step 9 and rolled at step 11 for collision-conditional effects (Thunderous precedent), a reserved slot blocking riders and Topple; `sharesToppleCount`; a Ram suppresses the Topple verb on its hit; **step 6a**, Sure Form's verb on a miss (8.1); the Upend order, with Topple II's push dropped under Upend; **step 10b**, the Domino link (inside the remainder, colliding only through Battering Force, then Brink) | Lead |
 | VG-9 | Ability 7.2, Shove row | Write the push as "push 1 or Prone" | Lead. **The Shove contest is settled; only the push wording changes** |
 | VG-10 | Classes 3.4 (terms), 7.5 (counting); ability 6.6 (the three-pool sentence), 10.2 (the CL-2 text) | Turn allowances and per-target round counts are frequency limits, not named pools; outside the cap and the three-pool limit; count 0; outside the camp-share ratio, inside the 60% formula. **A per-rest sub-limit on one option of a named pool (the Hew-use cap) is not a named pool and is not counted**, as the `restDefensiveTool` sub-limit is not. Extended from one option to one tag by SH-4 (Shade design 7.9). No capacity or timescale offer targets a turn allowance (ARC-26, Arcanist design 7.8) | Lead |
 | VG-11 | Classes 12.1, 12.2, 12.3, 7.6; ability 7.3 (policy filters) | `rankSchedule` (a validator input) and `rankCategory`; `offerLaneAdjust`; `triggerMenu` ids; validators as data predicates (`RankAddsNoDice`, `RankKeepsBounds`, `HewCeiling` as the static formula, `TechniquePickerSize` over reachable option sets, `SurgeOptionBound` (now `CampOptionBound`, SH-5) with `actionsGranted` and the reference encounter, `TurnAllowanceNoDamage` with its allow-list, `FlagNotCondition` with the condition equivalence table; `slippedFrom`, `boundBy` and `cinched` pass, BN-3, Arcanist design 9.1); `collisionRate` in the tuning file; the nova bound with Arts; the policy filter `notWhileSquaredUpElsewhere`; a row-modifier passive or glint counts 0; a cost waiver is not a refill (the 6.3 reading) | Lead |
-| VG-12 | Weapons 6.4, parity targets table, "Any build ≤ 110%" row; classes 6.4, the single-target damage cap cell ("Every build ≤ 110% of the greatsword reference", read "as measured by weapons 6.4, VG-12") | Measured floor-averaged at the worst legal build for rest pools; camp-pool damage bounded by the nova bound and `SurgeOptionBound` (now `CampOptionBound`, SH-5), or for slot pools `SpellTierBound` and for slotless casts `SlotlessCastBound` (ARC-2); Slot Recovery read as rest power (ARC-3) and `SetupAttribution` (ARC-16) (Arcanist design 11.1). This **changes the row's meaning**. The trap-damage content reading (SH-16) applies when the Trapwright ships (Shade design 14) | Lead (the row is the lead's call); **the client was told plainly on 2026-11-18 and approved proceeding** |
+| VG-12 | Weapons 6.4, parity targets table, "Any build ≤ 110%" row; classes 6.4, the single-target damage cap cell ("Every build ≤ 110% of the greatsword reference", read "as measured by weapons 6.4, VG-12") | Measured floor-averaged at the worst legal build for rest pools; camp-pool damage bounded by the nova bound and `SurgeOptionBound` (now `CampOptionBound`, SH-5), or for slot pools `SpellTierBound` and for slotless casts `SlotlessCastBound` (ARC-2); Slot Recovery (renamed Slot Renewal, naming pass NP-33) read as rest power (ARC-3) and `SetupAttribution` (ARC-16) (Arcanist design 11.1). This **changes the row's meaning**. The trap-damage content reading (SH-16) applies when the Trapwright ships (Shade design 14) | Lead (the row is the lead's call); **the client was told plainly on 2026-11-18 and approved proceeding** |
 | VG-13 | Ability 6.3, the measure bullet ("The share is measured in the offer value unit"); **classes 8.2, the camp-pool chassis bullet (settled)**; **classes 8.3, the "Camp share" bullet (settled)**; classes 11.B, the camp-share row (a note: "level-1 martial miss accepted") | The camp share counts the `restDefensiveTool` at half value; all three measures reported, Momentum included; the band holds at levels 5 and 10; the level-1 martial miss accepted (extended to levels 1–4 for the Shade by SH-28, Shade design 10.5, to Arcanist levels 1–2 by ARC-4, Arcanist design 11.8, and to Herald levels 1–3 by HR-31, with levels 3–4 read on the class mean over both subclasses, Herald design 11.10; client, Q2, 2026-11-20). **Both classes rows are settled rows changed by the client** | **Client (agreed 2026-11-18, Q1): the measure and the level-1 miss** |
 | VG-14 | Classes 12.1, subclass fields | Subclass field `offerLaneAdjust` (one name) | Lead |
 | VG-15 | Classes 8.3, Growth bullet, level 9 (Stand Fast); classes 14, registry list | Stand Fast "every roll", shield required, solo clause, subclass riders | Lead |
-| VG-16 | Enemies 11.1, the opportunity-cost term | Prices known reaction triggers (the Hold the Line stop, Retort Strike) as state; never class. Counterstroke added by SH-29 (Shade design 8.3) | Lead |
+| VG-16 | Enemies 11.1, the opportunity-cost term | Prices known reaction triggers (the Hold the Line stop (renamed Bar the Way, naming pass NP-33), Retort Strike) as state; never class. Counterstroke added by SH-29 (Shade design 8.3) | Lead |
 | VG-17 | Classes 8.3, Creation pick bullet ("a **permanent** creation pick"); classes 18, narrowings paragraph ("the stance a permanent creation pick"); armour 14.5, Guarding row | The stance may be re-picked once per camp, never in combat; Guarding gains a runtime-inert state with a warning | **Client (agreed 2026-11-18, Q3)**, since the permanent pick was confirmed with stage 1; armour row: Lead |
 | VG-18 | Classes 14, "Registry pass" bullet; trinkets 11 rule 1 (the registry's scope, as amended by CL-11: "It also covers ... weapon verb signatures") | Weapon verb signatures join the registry list. Class features never match armour or shield signatures (trinkets 11 rule 1). Payable lines prefer original effects. Echoes of verb signatures (Warding Staff) need a ruling; the Riposte echo ruling is SH-8 (Shade design 8.3) | Lead |
 | VG-19 | Weapons 7.3, class hooks; ability 7.2, a note | A subclass may apply the canonical verb of a trained, non-Strained weapon in the wielder's own spare set. Signatures, dice, type, reach and properties never travel. A note says why this is not a key per enemy | Lead (7.3 is a lead's call) |
@@ -2397,7 +2418,7 @@ recorded in classes 18 by VG-1):**
 armour 10.3; enemies 17.1); the Shove contest (ability 7.2); ability 6.7
 (the capstone is a camp pool of 1); the Challenged end rules
 (conditions 18.8); armour 6.1 (visible AC); "a choice every level" (main
-4.5); one full-Recovery Second Wind (DH 12.1); the 32-condition budget.
+4.5); one full-Recovery Second Wind (DH 12.1; renamed Patch Up, naming pass NP-33); the 32-condition budget.
 
 **Check after applying:** a grep for "2 / 3 / 4" in classes 8.3 finds
 nothing; a grep for "4 at level 9" in ability 6.6 finds only history; a
@@ -2453,6 +2474,9 @@ hit" in conditions 10.1 shows the VG-8 sum.
   (SK-7, M3); creation warnings (SK-9, M2); the reading of 7.10's
   on-hit line (F10). Applied in 7.10.
 - **Naming pass:** every placeholder name here, Hold the Line included.
+  **Answered** by the naming pass design (approved 2026-11-24; NP-33):
+  Hold the Line → Bar the Way, Surge → Onslaught, Bastion → Redoubt and
+  the rest listed in the front matter; the other names here are kept.
   Upend (8.3) collided with the boss rooms design's boss state
   "Upended": BR's state is renamed **Sprawled** after a whole-word grep
   (boss rooms design 4.7.2), and Upend keeps its name (cross-document
@@ -2475,7 +2499,7 @@ hit" in conditions 10.1 shows the VG-8 sum.
 - **Rulings owed by the lead:** VG-18 (registry scope, the Parry line),
   VG-22 (the ally swap).
 - **Lead's checks before data:** every SRD shape in this document
-  (Second Wind, Surge as Action Surge, Extra Attack, Shove, the verbs'
+  (Patch Up as Second Wind, Onslaught as Action Surge, Extra Attack, Shove, the verbs'
   SRD sources) against SRD 5.2.1; `NameCollision` over the final names
   (run by `V7.NameRegistry`; SV-20, seeds and validation design 5.2).
 
@@ -2490,9 +2514,9 @@ every lead's call in it. The three questions it raised were answered on
 2026-11-18 **(agreed)**, each with the recommended option:
 
 - **Q1, camp share at level 1:** accept the level-1 miss; measure with
-  the `restDefensiveTool` (Second Wind) at half value and report all
+  the `restDefensiveTool` (Patch Up) at half value and report all
   three measures; hold the 40–60% band at levels 5 and 10 (about 45%
-  and 40%). Raising Surge to 2 from level 1 is rejected. With Momentum
+  and 40%). Raising Onslaught to 2 from level 1 is rejected. With Momentum
   counted, as it ships, and the named lever applied, the figures are 41%
   and 40% (10.4): the band holds, as agreed. The client confirmed these
   figures on 2026-11-18.
@@ -2541,19 +2565,19 @@ triggers them:
 | F-3 | Late plateau; level-5 wall | Rank II for other options moved to level 8; Art II at level 9 (5.5); 60% rule rerun owed |
 | F-4 | Weaponmaster's signature least visible; "both verbs" duplicated | Arsenal as a named verb sequence; Borrowed Form II = empowered borrow; both verbs only in Twin Verb; default kit; card wording (8.1) |
 | F-5 | Free allowances with different slot rules | One free-effect rule (6.4); one free-cost trigger (`naturalHighFree`); Follow-Through merged into Momentum; one "Ready" glint |
-| F-6 | Bastion plays itself | Own-turn decisions at each rank; deterrence events; Called Out `ask` for the hero (8.2) |
+| F-6 | Bastion (renamed Redoubt, naming pass NP-33) plays itself | Own-turn decisions at each rank; deterrence events; Called Out `ask` for the hero (8.2) |
 | F-7 | Step In depends on a Later primitive | Fallback built in; the swap is an add-on (8.2; VG-22) |
 | F-8 | Wrecker chain granted twice | Skittles (Prone, no movement) at rank III; Domino at level 6; `secondLink` cut (8.3) |
 | F-9 | Grim Resolve nearly dead in M1 (only the M1 boss's roar and its limited Dazed) | Ends Bleeding and stands you (7.6) |
-| F-10 | Hold the Line unseen solo | Zone markers, reroute events, fire-rate report (7.4) |
+| F-10 | Hold the Line (renamed Bar the Way, naming pass NP-33) unseen solo | Zone markers, reroute events, fire-rate report (7.4) |
 | F-11 | Striker half stops growing | Card wording "protection first; damage through position"; no rules change |
-| F-12 | Not worth the cost: full combo, pairing, step 8b, Set III; re-pick wanted | Combo reduced to Momentum; pairing the one carve-out; step 8b and Set III cut; re-pick agreed (Q3) |
+| F-12 | Not worth the cost: full combo, pairing, step 8b, Set III (the pike verb, renamed Receive, naming pass NP-33); re-pick wanted | Combo reduced to Momentum; pairing the one carve-out; step 8b and Set III cut; re-pick agreed (Q3) |
 
 **Balance under permadeath critique (B-n)**
 
 | # | Finding | Resolution |
 |---|---|---|
-| B-S1 | Parity passes only by redefinition; offers ignored | Stated plainly (10.1); VG-12 as a change, told to the client; worst-legal-build measure with its own row; `capacity:techniques` and `capacity:surge` excluded; Deep Reserves cannot pay for Hew and deals no collision damage |
+| B-S1 | Parity passes only by redefinition; offers ignored | Stated plainly (10.1); VG-12 as a change, told to the client; worst-legal-build measure with its own row; `capacity:techniques` and `capacity:surge` excluded; Deep Reserves (renamed Fresh Reserves, naming pass NP-33) cannot pay for Hew and deals no collision damage |
 | B-S2 | Hew 1d4 makes damage Empower lines beat Hew | No Empower line adds damage (6.6); `HewCeiling` at levels 1–4 |
 | B-S3 | Floor-1 power grows | Arts at class level 5; ranged Parry line cut; per-feature spread diff; Momentum noted as spread-narrowing; riskiest kit by default |
 | B-S4 | Redirect breaks forbidden grants; Shelter precedent weak | Take the Blow moved to Later (8.2) |
@@ -2580,14 +2604,14 @@ triggers them:
 | C-7 | The Challenged-Disengage clause is a base rule; "Disengage stops it" contradicts 18.8 | Clause dropped; the line not adopted; slip-past clause added instead (8.2, 7.4) |
 | C-8 | New reactions called "opportunity attacks" | Reaction attack of trigger kind `attackAgainstOther` (VG-20) |
 | C-9 | "Harms" changes the Challenged text | Approved "targets" kept; paraphrase corrected; preview shows the end (8.2) |
-| C-10 | Name collisions | Square Up, Press, Borrowed Form, Stance Drill, Stubborn Breath, Bite Deep (for Carry); Hold Fast, Press On, Answer Steel and Hamstring not used; Guarding Blow and Warden's Strike not used; Hold the Line to the naming pass |
+| C-10 | Name collisions | Square Up, Press, Borrowed Form, Stance Drill, Stubborn Breath, Bite Deep (for Carry); Hold Fast, Press On, Answer Steel and Hamstring not used; Guarding Blow and Warden's Strike not used; Hold the Line to the naming pass (renamed Bar the Way, naming pass NP-33) |
 | C-11 | The kit breaks the subclass or the types | Warhammer + shield / greataxe; no presets (7.10, VG-21) |
 | C-12 | Second Form II overlaps level 6 | Borrowed Form II = empowered borrow (8.1) |
 | C-13 | Collision Prone at the wrong save step | Slot reserved at step 9, rolled at step 11 (VG-8) |
 | C-14 | N3 overrides stat model 8.2 | Clarification only: a collision is not a hit, so agreed 8.2 is untouched (VG-23) |
 | C-15 | Graze lines contradict "no verb" | No Graze line; `onGraze` trigger with timing row VG-7 |
 | C-16 | Echo basis misattributed | Registry-scope ruling (VG-18); originals preferred |
-| C-17 | Hew 1d4 needs rows; Deep Reserves a hidden sub-pool | VG-6; allow-list in `RankAddsNoDice`; the Hew-use cap (6.4 rule 7), a sub-limit exempt under VG-10 |
+| C-17 | Hew 1d4 needs rows; Deep Reserves (renamed Fresh Reserves, naming pass NP-33) a hidden sub-pool | VG-6; allow-list in `RankAddsNoDice`; the Hew-use cap (6.4 rule 7), a sub-limit exempt under VG-10 |
 | C-18 | Condition-on-reaction narrowings | Recorded in classes 18 (VG-1) |
 | C-19 | Camp re-pick amends a recorded narrowing; Guarding inert state | Agreed by the client (Q3); VG-17 |
 | C-20 | Swap conflict (Later or M2); tempo clause | Add-on pending VG-22; tempo clause in `SurgeOptionBound` (now `CampOptionBound`, SH-5); Step In buys one Dash |
@@ -2596,7 +2620,7 @@ triggers them:
 | C-23 | Chosen distance needs rows | Wrecker-only, so it lives in the subclass text; Push's canonical text untouched |
 | C-24 | 60% evidence in two units | Rerun in the offer value unit owed (10.5) |
 | C-25 | Lane field name | `offerLaneAdjust` (VG-14) |
-| C-26 | Surge 2 at level 5 rows; timescale excludes | VG-6; `offerExcludes` (7.11) |
+| C-26 | Surge (renamed Onslaught, naming pass NP-33) 2 at level 5 rows; timescale excludes | VG-6; `offerExcludes` (7.11) |
 
 **Check pass of 2026-11-18 (K-n), after the client's answers** **(lead's
 calls unless marked)**
@@ -2610,7 +2634,7 @@ calls unless marked)**
 | K-5 | Moves after step 10 (Skewer II, Topple II, Domino, Upend) | Skewer II cut; Topple II dropped under Upend; step 10b defined (VG-8) |
 | K-6 | Save-slot priority; which Prone sources share Topple's count | `sharesToppleCount`; Ram suppresses Topple; reserved slots block (6.4 rule 6) |
 | K-7 | Domino trigger and direction; Earthshaker order | Any verb-sourced part; last-step vector; Earthshaker input order (8.3) |
-| K-8 | Hold the Line did not key slip-pasts | `{leaveZone, slipPast, setHit}`; slip-past trigger point (7.4; VG-20) |
+| K-8 | Hold the Line (renamed Bar the Way, naming pass NP-33) did not key slip-pasts | `{leaveZone, slipPast, setHit}`; slip-past trigger point (7.4; VG-20) |
 | K-9 | Stand Fast's inherited skips; fill order; shield check | Skips listed in full; fill order; shield checked at each roll (7.7) |
 | K-10 | Retort Strike's hook, re-check and bounds | Hook points; legality re-check; bounds reworded (8.2) |
 | K-11 | Turn allowances could not model per-target counts or riders | `perTargetRoundCount`; per-use sets; refill priority (7.9) |
@@ -2620,16 +2644,17 @@ calls unless marked)**
 | K-15 | Missing unit state and effectKinds | 13.1 state table; 7.13 rows for every feature |
 | K-16 | Sure Form had no pipeline step; Square Up's no-hit form too wide | Step 6a; no-hit form by source id; Square Up at step 11 (8.1, 8.2) |
 | K-17 | Camp share without Momentum | Recomputed with Momentum; lever applied; 41% / 40% (10.4) |
-| K-18 | Worst legal build unshown; capacity offers could pass 110% | Row added; `capacity:techniques` excluded; Deep Reserves non-damage (10.1) |
+| K-18 | Worst legal build unshown; capacity offers could pass 110% | Row added; `capacity:techniques` excluded; Deep Reserves (renamed Fresh Reserves, naming pass NP-33) non-damage (10.1) |
 | K-19 | Leans moved without a change row | Stage-1 leans restored (7.1) |
 | K-20 | Pry line was a hidden debuff; `changeOfHands` broke once per round; Carry collided | Pry narrowed; trigger cut; renamed Bite Deep |
 | K-21 | Weaponmaster's signature and protection in different sets; Momentum versus Practised Hand at levels 3–4 | M2 spare recommendation; scorer term; reports (7.10; 6.7) |
-| K-22 | Hold the Line opportunity attacks ended Square Up; the Bastion had no supply step | `notWhileSquaredUpElsewhere`; the pairing may take a Momentum cash-in; a free Called Out rejected (8.2) |
+| K-22 | Hold the Line opportunity attacks ended Square Up; the Bastion had no supply step (renamed Bar the Way and Redoubt, naming pass NP-33) | `notWhileSquaredUpElsewhere`; the pairing may take a Momentum cash-in; a free Called Out rejected (8.2) |
 | K-23 | Change rows missed sections (VG-2, 4, 6, 8, 10, 11, 12, 13, 18) | Rows extended; VG-13 retargeted to classes 8.2, 8.3 and 11.B, credited to the client (Q1) |
 
 **Research and draft findings carried into this design:** D1–D12 (3.3),
-and from the drafts: the Hold the Line name collision (naming pass); the
-Surge denial rule (7.3); the Stand Fast weakness that motivated the
+and from the drafts: the Hold the Line name collision (naming pass; renamed Bar the Way,
+NP-33); the Surge denial rule (renamed Onslaught, naming pass NP-33;
+7.3); the Stand Fast weakness that motivated the
 window fill (7.7); the timescale offer exclusion (7.11); the name
 "mastery" banned for verb features, hence Practised Hand (weapons 7.4).
 

@@ -2,6 +2,7 @@
 
 Date: 2026-11-22
 Status: Approved, 2026-11-22
+Names updated by the naming pass (naming pass design, `2026-11-24-naming-pass-design.md`, approved 2026-11-24; NP rows listed: NP-22 with its 13.1 cites, and the name-register rows of its section 5 whose sites name this document, plus register renames whose old names stand here in the renamed sense: Mousetrap → Baited Room, the trap family Catch → Clasp (NP-17), the DC tier Easy → Mild and the trap grade Revealed → Found). Code identifiers, keys, ids and change ids are unchanged (`viaticum`, `viaticumFallback`, `BedsideStandOnly` among them); history notes and Appendix A keep the old names, annotated where they read as current.
 Parents (immediate): `2026-11-22-loot-economy-design.md` (loot economy design, "LE", segment 7a, approved 2026-11-22) and `2026-11-22-item-rolls-design.md` (item rolls design, "IR", segment 7b, approved 2026-11-22, **the most recent template**). Both are **the key parents**.
 Other parents: `2026-11-15-dungeon-rpg-design.md` (main design, "MAIN"),
 `2026-11-16-character-stat-model-design.md` (stat model, "STAT"),
@@ -27,7 +28,7 @@ and `2026-11-20-herald-class-design.md` ("HR"),
 `2026-11-21-traps-locks-design.md` ("TL", segment 5) and
 `2026-11-21-encounter-placement-design.md` ("EP", segment 6).
 
-Items marked **(agreed)** are the client's answers of 2026-11-22 to the six questions this design raised (Q1–Q5 before the document was written, and Q6, raised by the check, with the approval of this document; sections 0.2 and 14.1), each answered with the lead's recommendation (option A), or restate a client answer recorded in an approved document. The client also said that everything else in the lead's proposal stands as written: Model A (sockets by room role) as the skeleton, with grafts from Models B and C, the fleeting-loot draft and the catalogue; the 25-kind source taxonomy with ranks; socket derivation and the role table; LootBind square legality, draw-free, after `trapsResolve`; every 7a and 7b channel landing (the LE 6.14 and IR 4.18 hooks); visibility, Proprietor tags, tier marks on hover and the Treasure strip; clutter, the numbered click table, auto-close of quiet summaries, optional Glean, the container count cut and the 7c clock line at net ≤ 0; Furnishing stashes rejected in favour of inset containers; the Windfall in full; traps, hazards, encounters, stealth, Steal and Cow; floor 1; floor 5 and the Viaticum in the F5 lair room by the exit, with the Bedside Stand; determinism (the keyed Windfall grandchild of `lootPlan` with 4 draws on every floor); UI and segment hooks; CT1–CT14 and the five collision fixes; the per-theme catalogue for every theme; readability, art and audio; the new mechanics adopted, held and rejected (Trove, Crannies, Tip-offs, Tattler and Hawker held); the numbers and fixes (toy, PT1–PT15); data, V15 `LootSources`, reports and arms; staging; ownership and hooks; the binding requirements; LP-1 to LP-34; the told-plainly items; the risks; and the appendix resolutions and names. The client approved this document as a whole on 2026-11-22, with Q6 answered with option A.
+Items marked **(agreed)** are the client's answers of 2026-11-22 to the six questions this design raised (Q1–Q5 before the document was written, and Q6, raised by the check, with the approval of this document; sections 0.2 and 14.1), each answered with the lead's recommendation (option A), or restate a client answer recorded in an approved document. The client also said that everything else in the lead's proposal stands as written: Model A (sockets by room role) as the skeleton, with grafts from Models B and C, the fleeting-loot draft and the catalogue; the 25-kind source taxonomy with ranks; socket derivation and the role table; LootBind square legality, draw-free, after `trapsResolve`; every 7a and 7b channel landing (the LE 6.14 and IR 4.18 hooks); visibility, Proprietor tags, tier marks on hover and the Treasure field; clutter, the numbered click table, auto-close of quiet summaries, optional Glean, the container count cut and the 7c clock line at net ≤ 0; Furnishing stashes rejected in favour of inset containers; the Windfall in full; traps, hazards, encounters, stealth, Steal and Cow; floor 1; floor 5 and the Parting Fare in the F5 lair room by the exit, with the Washstand; determinism (the keyed Windfall grandchild of `lootPlan` with 4 draws on every floor); UI and segment hooks; CT1–CT14 and the five collision fixes; the per-theme catalogue for every theme; readability, art and audio; the new mechanics adopted, held and rejected (Trove, Crannies, Tip-offs, Tattler and Hawker held); the numbers and fixes (toy, PT1–PT15); data, V15 `LootSources`, reports and arms; staging; ownership and hooks; the binding requirements; LP-1 to LP-34; the told-plainly items; the risks; and the appendix resolutions and names. The client approved this document as a whole on 2026-11-22, with Q6 answered with option A.
 
 Items marked **(lead's call)** were filled in by the design lead inside approved rules and were in the proposal the client answered; the client confirmed them all on 2026-11-22, when it approved this document as a whole, and they are binding. Items marked **(new lead's call)** were made while writing this document, beyond that proposal; they are listed in 14.1 and the client confirmed them all on 2026-11-22. Items marked **(lead's call, after the check)** were made when the written document was checked by the builder, consistency, play and art-and-UX lenses; they are listed in 14.1 with the check's "told plainly" items, the client confirmed them all on 2026-11-22, and none changes a client answer. Items marked **(settled)** restate a rule from an approved document; **(decided)** marks a main-design client decision. Items marked **(change LP-n)** amend an approved document and are listed, with the exact sections they touch, in 13; rows that touch **decided**, **agreed** or **settled** text are flagged ⚑ there, and the client's approval of this document on 2026-11-22 (with Q1–Q6 where a row names one) covers them. Items marked **(told plainly)** narrow or re-read approved text, contest the brief, the client, a judge or a critic, or state an unwelcome forecast, and were told to the client in plain words (14.1, including those told after the check); the client confirmed them all on 2026-11-22. Every item here is binding on the builders.
 
@@ -46,7 +47,7 @@ Items marked **(lead's call)** were filled in by the design lead inside approved
 
 **The client's brief.** Dungeon generation segment 7c: **loot sources and placement**, the last part of loot. 7a owns value, 7b owns identity, 7c owns where every source sits and what it looks like. Shops stay hooks. The client also asked directly: *should there be loot that disappears after a certain number of turns: a container or one-hit entity that appears in combat or exploration and must be broken or reached in time?* Standing guidance: not an exact 5E port; design is not limited by quantity; the art team is eager; combat is key; contest the client or approved views where warranted.
 
-The client's five answers (Q1–Q5, **agreed**, 2026-11-22) are in 0.2: **fleeting loot is the Windfall Truant, an in-combat M3 pilot on F2–F4 holding a real card from the fixed deck, lost visibly if it gets away (Q1); the pilot runs at party ≥ 3, solo opens on its own simulator arm, duo is held (Q2); the exploration forms (the Ebb and the exploration Truant) are M4 (Q3); the Rabbit, the Crumb Mouse and the Alms Crab are the pilot skins, with the client's other skins re-skinned, kept as M4 Ebbs or excluded (Q4); and the Bedside Stand is the second named exception to "container art never implies contents" (Q5).** The check raised a sixth question, the Windfall frequency; the client answered it on 2026-11-22, with its approval of this document: **about 0.6–0.9 Windfalls per run *(illustr.)* for the M3 pilot, with presence 1000‰ on F3–F4; the simulator owns the figure** (Q6, **agreed**, option A).
+The client's five answers (Q1–Q5, **agreed**, 2026-11-22) are in 0.2: **fleeting loot is the Windfall Truant, an in-combat M3 pilot on F2–F4 holding a real card from the fixed deck, lost visibly if it gets away (Q1); the pilot runs at party ≥ 3, solo opens on its own simulator arm, duo is held (Q2); the exploration forms (the Ebb and the exploration Truant) are M4 (Q3); the Rabbit, the Crumb Mouse and the Pew Crab are the pilot skins, with the client's other skins re-skinned, kept as M4 Ebbs or excluded (Q4); and the Washstand is the second named exception to "container art never implies contents" (Q5).** The check raised a sixth question, the Windfall frequency; the client answered it on 2026-11-22, with its approval of this document: **about 0.6–0.9 Windfalls per run *(illustr.)* for the M3 pilot, with presence 1000‰ on F3–F4; the simulator owns the figure** (Q6, **agreed**, option A).
 
 **Change prefix.** This design uses **LP-n** ("loot placement"). A case-insensitive grep for `\bLP-[0-9]` across the 25 approved documents finds 0 hits (re-run while writing). This document issues one register, **LP-1 to LP-34** (13); no id has two meanings. The research and model drafts used colliding local LP numbers; all are renumbered into this register (A.6).
 
@@ -75,17 +76,17 @@ Abbreviations: F1–F5 = floors 1–5; C / U / R / VR = Common, Uncommon, Rare, 
 - **Form.** The Truant is a small, faced, harmless animal hauling a plain sackcloth bundle bigger than itself, such as the Carnival's Conjuror's Rabbit or the Supper's Crumb Mouse. It never wears its theme's faction motif (4.7.1).
   - It lies **Dormant, visible at room reveal**, in a guard post or lair. While Dormant nothing touches it but Steal.
   - When a fight engages its host group it wakes. From round 2 it hops 2 squares *(illustr.)* per Dream step along a route drawn as a **scurry trail** toward a **Rathole** in its own room's wall.
-  - Its countdown digit, **C = 3** **(agreed, Q1)**, is the room's one clock (HZ 6.2.2). It shows on its floor ring and on the Dream card, and only ever counts down: a Surprised start or the solo arm's extra step shows as a "held" step, never a higher digit (4.7.4).
+  - Its countdown digit, **C = 3** **(agreed, Q1)**, is the room's one clock (HZ 6.2.2). It shows on its floor ring and on the Dream card, and only ever counts down: a Surprised start or the solo arm's extra step shows as a "paused" step, never a higher digit (4.7.4).
   - Once awake, any **action** aimed at it nabs it, as do any area or damage that includes its square and any forced movement. There is no roll.
   - It never fights, never calls help and has no morale. Monsters ignore it.
   - If the fight ends while it is still in the room, it is nabbed: **win the fight, or spend one action.**
 - **Contested: it never "appears".** RC1 forbids spawn reads, EP forbids event spawns, and determinism needs a bound square. So the Windfall is pre-placed and seen at reveal. The dream logic is in how it **wakes and leaves**, never in how it arrives (told plainly).
 - **Contested: no extra value.** Its card comes **out of the fixed deck**, taken from its host fight's own carried allotment (never the elite's), or else from a plain off-path container. Extra value would break Ledger A ("never grows"), MAIN 4.6 (decided) and "harder is not richer". It would also become expected income that every miss then taxes. The thrill is paid in things that cost no VP: a visible tier, a reserved cue family and a run-record line (told plainly; **agreed, Q1**: option C rejected).
 - **What a miss costs.** That card and its coin share, nothing else. n falls by 1 with the log line "The <skin> got away with a <tier word> treasure". This is the **one named exception** to "loot is never destroyed" (LP-2). Kill method still never destroys anything.
-  - The Dream's Due, the DH package, the Viaticum, keys, signatures and secrets' cards can **never** be on a Windfall (V15).
+  - The Dream's Due, the DH package, the Parting Fare, keys, signatures and secrets' cards can **never** be on a Windfall (V15).
   - The realistic expected loss is about **0.1–0.15 VP per run** *(illustr.)*. It is a tempo decision rather than a value tax, which is right under permadeath.
 - **How often.** At most 1 per floor, on **F2–F4 only**, with a draw-free carry to the next floor when a host is lost. The proposal's toy gave about **1.2–1.4 per run** *(illustr.)*, the figure the client agreed with Q1.
-  - **Told plainly after the check: that figure is out of reach as agreed.** The toy assumed party 4 on every floor and a Truant skin on every theme. Under the companion ladder (CMP 7.1: party at most 1 / 2 / 3 / 4 / 4 on F1–F5) and Q2's party ≥ 3, **F2 is never eligible unless the solo arm opens**, F3 is eligible only for a party with two companions by camp 2 (a hire at each camp, or a carried hire), and F4 only for a party of 3 or more. Under Q4 only the Choir, the Carnival and the Supper have M3 skins, so **Silk and Gut floors host no Truant** (4.7.2), and under RS Cut 2 (no Supper) F4 never does.
+  - **Told plainly after the check: that figure is out of reach as agreed.** The toy assumed party 4 on every floor and a Truant skin on every theme. Under the companion ladder (CMP 7.1: party at most 1 / 2 / 3 / 4 / 4 on F1–F5) and Q2's party ≥ 3, **F2 is never eligible unless the solo arm opens**, F3 is eligible only for a party with two companions by camp 2 (a hire at each camp, or a returning hire), and F4 only for a party of 3 or more. Under Q4 only the Choir, the Carnival and the Supper have M3 skins, so **Archive and Gut floors host no Truant** (4.7.2), and under RS Cut 2 (no Supper) F4 never does.
   - The lead therefore raises F3 and F4 presence to 1000‰ *(illustr.)* (lead's call, after the check). The lead's re-estimate for an always-hiring party is about **0.6–0.9 per run** *(illustr.)*, about 0.3–0.5 at the old 500‰, and lower for a player who declines a hire. The simulator owns the figure (9.4). **The client accepted this frequency for the M3 pilot on 2026-11-22** **(agreed, Q6**, option A; 14.1**)**.
   - It never appears on F1, F5 or trimmed floors.
   - It never appears in the elite room, the arena, the Forecourt, Sanctum or Antechamber, Circuit rooms, ambush forms, Kill Box, Crossfire or Pincer, Wager, Dare or Strongroom Sites, or any room with another clock.
@@ -96,9 +97,9 @@ Abbreviations: F1–F5 = floors 1–5; C / U / R / VR = Common, Uncommon, Rare, 
 - **Exploration form (the Ebb, a fading cache).** Held to **M4** with the exploration Truant **(agreed, Q3)**. In the toy it was either a free walking check for careful players or an attention tax for casual ones, and the decision appeared on only 12–35% of placements (told plainly: the client's "during exploration" case has no M3 form).
 - **Not M2.** "Nothing timed in M2" is agreed (ROOM 0.1 item 5, ROOM Q5, TR-27; cross-document comparison 2026-11-23, CC-113). The Dream step is M3 outside the M2 Stir pilot (HZ-12), so **M3 adoption reopens nothing agreed**.
 - **The client's skins** **(agreed, Q4)**.
-  - The Rabbit (Carnival), the Crumb Mouse (Supper) and the Alms Crab (Choir) are the Truant pilot.
-  - The Carnival balloon and the Choir plate are kept, as Ebb skins (M4). The Gut bauble is kept as an Ebb, outside Peristalsis rooms.
-  - The Gaol prisoner reads as the Escapee roster type. The Supper trolley is a rules piece. The Heart toy collides with toy pieces. A Silk page is the boxed lurker's rest tell. All four are re-skinned or excluded (5, told plainly).
+  - The Rabbit (Carnival), the Crumb Mouse (Supper) and the Pew Crab (Choir) are the Truant pilot.
+  - The Carnival balloon and the Choir dish are kept, as Ebb skins (M4). The Gut bauble is kept as an Ebb, outside Peristalsis rooms.
+  - The Gaol prisoner reads as the Escapee roster type. The Supper trolley is a rules piece. The Heart toy collides with toy pieces. An Archive page is the boxed lurker's rest tell. All four are re-skinned or excluded (5, told plainly).
   - F1 and F5 themes have no Windfall. A coin-only F1 teaching Ebb is rejected (Q4 option B).
 
 **Source taxonomy.** Every source is one tagged socket with one kind and one rank (SR0–SR5), or is explicitly unranked: the signature cache, the boss card, activity containers. There are 25 kinds (4.1), and the only new one is `windfall`. **Furnishing-hidden stashes are rejected.** "Furnishings never hold loot" is settled (ROOM anti-goal, 6.3.4, 13), and the brief's idea is answered by **inset containers** set into walls (told plainly).
@@ -118,7 +119,7 @@ Abbreviations: F1–F5 = floors 1–5; C / U / R / VR = Common, Uncommon, Rare, 
 - The container count is **cut, not the cap raised**: coin-only containers are merged and Alcoves default to set pieces.
 - 7c gets its own clock line, **net ≤ 0** minutes and clicks on the gated floors, once the walker re-baselines container clicks.
 
-**Theme skins.** Each theme gets a container family that never shares a silhouette with its Furnishings, bait, lurker or Windfall. Container art never implies contents, with two named exceptions: the signature cache (IR 4.13) and the Bedside Stand **(agreed, Q5)**. Each theme gets one named **signature loot moment** (5). Five collisions found in approved skins have fixes requested (pending; LP-16 to LP-20; cross-document comparison 2026-11-23, CC-115).
+**Theme skins.** Each theme gets a container family that never shares a silhouette with its Furnishings, bait, lurker or Windfall. Container art never implies contents, with two named exceptions: the signature cache (IR 4.13) and the Washstand **(agreed, Q5)**. Each theme gets one named **signature loot moment** (5). Five collisions found in approved skins have fixes requested (pending; LP-16 to LP-20; cross-document comparison 2026-11-23, CC-115).
 
 **Determinism.**
 - Identities come from LootPlan, and the Windfall's card moves in a new draw-free step 8 after allocation.
@@ -133,9 +134,9 @@ Abbreviations: F1–F5 = floors 1–5; C / U / R / VR = Common, Uncommon, Rare, 
 | Q1 | Fleeting loot: form and budget | **A.** The Windfall Truant in M3, in combat, F2–F4, about 1.2–1.4 per run, holding a real card from the fixed deck (from its host fight's carried allotment), lost visibly if it gets away, nabbed by any action or by winning the fight; pre-placed and visible at reveal (never spawned); C = 3; route outlined a turn ahead; slip once when blocked; Shade Steal while Dormant (4.7) | B: coin and a sundry only (safer, likely ignored); C: extra value outside the budget (breaks Ledger A, MAIN 4.6, "harder is not richer"); D: no fleeting loot | LP-1 ⚑ to LP-7 |
 | Q2 | Party size | **A.** Pilot at party ≥ 3; solo opens on its own simulator arm (C = 4) if greed downs ≤ +2 pp; duo held (4.7.2) | B: all party sizes from the start (the toy says solo and duo fail) | LP-3 ⚑ |
 | Q3 | The exploration form | **A.** The Ebb (forking geometry only) and the exploration Truant in M4 (4.7.11) | B: the Ebb in M3 after the Truant pilot passes | LP-34 |
-| Q4 | Skins | **A.** Rabbit (Carnival), Crumb Mouse (Supper) and Alms Crab (Choir) are the Truant pilot; balloon, plate and bauble kept as M4 Ebbs; Gaol prisoner, Supper trolley, Heart toy and Silk page contested and excluded; F1 and F5 themes excluded (5) | B: an M4 F1 coin-only teaching Ebb (a Gaol confiscation sack, outside n) on top of A | LP-7 ⚑ |
-| Q5 | The Bedside Stand | **A.** Accepted as a second named exception to "container art never implies contents", because it opens a different UI (4.10, 5.3) | B: an ordinary biscuit tin opens the offer UI | LP-14 ⚑ |
-| Q6 | The Windfall frequency (raised by the check; answered with the approval of this document) | **A.** Accept about 0.6–0.9 Windfalls per run *(illustr.)* for the M3 pilot, with presence 1000‰ *(illustr.)* on F3–F4; the simulator owns the figure (`WindfallsPerRun`), and the pilot's gates decide whether to widen it in M4. Q1's "about 1.2–1.4 per run" cannot be met under Q2, Q4 and the companion ladder (4.7.2, 14.1) | B: Silverfish (Silk) and Rent Snail (Gut) in the M3 pilot (changes Q4); C: a duo arm in M3 at C = 4 (changes Q2) | — |
+| Q4 | Skins | **A.** Rabbit (Carnival), Crumb Mouse (Supper) and Pew Crab (Choir) are the Truant pilot; balloon, dish and bauble kept as M4 Ebbs; Gaol prisoner, Supper trolley, Heart toy and Archive page contested and excluded; F1 and F5 themes excluded (5) | B: an M4 F1 coin-only teaching Ebb (a Gaol confiscation sack, outside n) on top of A | LP-7 ⚑ |
+| Q5 | The Washstand | **A.** Accepted as a second named exception to "container art never implies contents", because it opens a different UI (4.10, 5.3) | B: an ordinary biscuit tin opens the offer UI | LP-14 ⚑ |
+| Q6 | The Windfall frequency (raised by the check; answered with the approval of this document) | **A.** Accept about 0.6–0.9 Windfalls per run *(illustr.)* for the M3 pilot, with presence 1000‰ *(illustr.)* on F3–F4; the simulator owns the figure (`WindfallsPerRun`), and the pilot's gates decide whether to widen it in M4. Q1's "about 1.2–1.4 per run" cannot be met under Q2, Q4 and the companion ladder (4.7.2, 14.1) | B: Silverfish (Archive) and Rent Snail (Gut) in the M3 pilot (changes Q4); C: a duo arm in M3 at C = 4 (changes Q2) | — |
 
 ### 0.3 Decisions in brief
 
@@ -148,11 +149,11 @@ Abbreviations: F1–F5 = floors 1–5; C / U / R / VR = Common, Uncommon, Rare, 
 | 5 | Numbered click table; auto-close quiet summaries; optional Glean (4.6) | M2 | lead's call; LP-8, LP-9 |
 | 6 | Container count cut, not cap raised; 7c clock line net ≤ 0 (4.2, 4.6) | M2 | lead's call; LP-10 ⚑, LP-11 |
 | 7 | Proprietor tags on container hover and summary header (4.5) | M2 | lead's call; LP-13 |
-| 8 | Viaticum in the F5 lair room by the exit (a reading); Bedside Stand host (4.10) | M2 | reading; **agreed, Q5**; LP-14 ⚑ |
+| 8 | Parting Fare in the F5 lair room by the exit (a reading); Washstand host (4.10) | M2 | reading; **agreed, Q5**; LP-14 ⚑ |
 | 9 | Catalogue rules CT1–CT14 and five collision fixes (5); CT15, inset forms and signature-moment deliverables (after the check) | M2 | lead's call; LP-15 to LP-25 |
 | 10 | **Windfall Truant pilot**: in-combat, party ≥ 3, C = 3, action nab, fight-end nab, slip once, real card from the host's carried allotment (4.7); about 0.6–0.9 per run *(illustr.)*, 1000‰ on F3–F4 (Q6) | M3 | **agreed, Q1, Q2, Q6**; LP-1 to LP-7 ⚑ |
 | 11 | Ebb and the exploration Truant (4.7.11) | M4 | **agreed, Q3**; LP-34 |
-| 12 | Pilot skins Rabbit, Crumb Mouse, Alms Crab; Ebb skins kept; contested skins excluded (5) | M3 / M4 | **agreed, Q4** |
+| 12 | Pilot skins Rabbit, Crumb Mouse, Pew Crab; Ebb skins kept; contested skins excluded (5) | M3 / M4 | **agreed, Q4** |
 | 13 | Uncorked glint state; Treasure field by source (7; cross-document comparison 2026-11-23, CC-115) | M2 | lead's call; LP-27, LP-28 |
 | 14 | V15 `LootSources`, reports, simulator arms (9) | M1–M3 | lead's call; LP-31, LP-32 |
 | 15 | Trove, Crannies, Tip-offs, Tattler, Hawker (7) | Later / hook | lead's call |
@@ -174,7 +175,7 @@ Abbreviations: F1–F5 = floors 1–5; C / U / R / VR = Common, Uncommon, Rare, 
 - A smash-everything chore.
 - Pixel hunts and Search spam.
 - Loot destroyed by kill method.
-- Container art that implies contents (two named exceptions: the signature cache and the Bedside Stand).
+- Container art that implies contents (two named exceptions: the signature cache and the Washstand).
 - Floor-wide timers.
 - A 100% completion badge.
 - A greed trap whose loss cascades.
@@ -231,7 +232,7 @@ The web-confirmed items (XCOM 2 loot timer, Into the Breach time pods, Hades tro
 - **Guarantees.**
   - The Due (LE 6.6).
   - DH HE-3/4/7 (DH 12.4–12.5).
-  - The Viaticum (LE 6.11 item 5, agreed LE Q1).
+  - The Parting Fare (LE 6.11 item 5, agreed LE Q1).
   - The signature cache (IR 4.13, agreed IR Q5).
 - **Carried loot.** ENM 15.2–15.8:
   - loot is never destroyed by terrain, damage type or kill method (15.6; TL 6.13, TL-27; HZ 13);
@@ -239,7 +240,7 @@ The web-confirmed items (XCOM 2 loot timer, Into the Breach time pods, Hades tro
   - enemies never pick up items (15.5);
   - every drop in a fight is auto-gathered (15.8).
 - **Steal.** ENM 15.5, S-5, STAT 7.1 Stealth row: only a Dormant, Stationary or Patrolling carrier; one try per carrier per floor; it takes one of {notable, purse, key} (LE-16).
-- **Containers.** TL 6.13 kinds: Plain, Padlocked, Catch, Keyed, boxed lurker (M3), Twin Coffer (M3). `HeNoLock`, `LockNeverCritical`. Attack-to-test on a container does nothing (TL 6.14).
+- **Containers.** TL 6.13 kinds: Plain, Padlocked, Clasp, Keyed, boxed lurker (M3), Twin Coffer (M3). `HeNoLock`, `LockNeverCritical`. Attack-to-test on a container does nothing (TL 6.14).
 - **Clocks.**
   - HZ 6.2.2: one clock per room, never waived; a digit on the map always means the room's clock.
   - HZ 6.3: the Dream step, with Stir `firstAct` ≥ 2, the held Turn's one-round slip and `holdSlip` (6.3.4).
@@ -255,7 +256,7 @@ The web-confirmed items (XCOM 2 loot timer, Into the Breach time pods, Hades tro
 
 ### 2.2 What the approved documents owe 7c
 
-- LE 6.14 and LE 12 (the 7c row): socket tags and ranks, lump placement, the Viaticum room, Twin Coffer placement, trimmed-floor sockets, per-encounter caps, F5 and overflow trims.
+- LE 6.14 and LE 12 (the 7c row): socket tags and ranks, lump placement, the Parting Fare room, Twin Coffer placement, trimmed-floor sockets, per-encounter caps, F5 and overflow trims.
 - IR 4.18: identity bundles per socket; the signature cache placed in the lair of every boss whose form is `guarded` (read as the boss arena, 4.4, 13); container art never implies contents.
 - IR 5.3: per-theme container notes. The Heart has none.
 - TL 13, EP 13, HZ 13, FL 13, ROOM 13, RS 13: container kinds, `lockable` sockets, bait-cache family, activity containers, fallen loot, HE reservations, "Furnishings never hold loot", Stratum lines.
@@ -278,7 +279,7 @@ The web-confirmed items (XCOM 2 loot timer, Into the Breach time pods, Hades tro
 | PX11 | Herald Cow is group-only and fresh groups are not Cow-eligible | No advertised Herald payoff. Only the neutral rule "a host group resolved without combat leaves a free Take" (CF8, CK16) |
 | PX12 | The container cap against role tables (toy: 97–100% of floors over a cap of 9–10) | Cut the count (merge coin-only containers; Alcove default a set piece), with a hard cap of 12 and a target of ≤ Ledger A + 3 (CB6, CF5) |
 | PX13 | Glean's claimed saving (3–5 clicks) against the toy (about 0.25) | Auto-close of quiet summaries is the lever. Glean is optional (told plainly) |
-| PX14 | The Viaticum's primary rule "after the lair" is structurally empty on F5 | A reading, not a change: LE's own fallback, the lair room, is the rule. The FL and ENM owners confirm (CK18) |
+| PX14 | The Parting Fare's primary rule "after the lair" is structurally empty on F5 | A reading, not a change: LE's own fallback, the lair room, is the rule. The FL and ENM owners confirm (CK18) |
 | PX15 | Model A's reading "containers are not opened in combat" against TL's in-combat lock verbs | Dropped. 7c adds no rule (CK3, CB9) |
 | PX16 | "Catch" collides with the TL Catch lock kind | Player-facing verb **Nab**, action **Grab** (CK8) |
 | PX17 | The roll-forward needs persisted state, and formations are known only after LootPlan | Presence is decided in LootPlan on formation-independent rules. Formation conflicts move the host within the floor in LootBind. A persisted `windfallCarry` flag lives in the camp-exit write (CB4, CK14) |
@@ -354,10 +355,10 @@ Each source is one `LootSocketRecord` with exactly one `kind` and one `rank`, or
 | `carrierOptional` | Carrier in an optional fight (Gb, side room) | SR1 | carried | M2 | Gb reads as optional: **a reading of LE 6.9 item 1, to the LE owner** |
 | `sideContainer` | Container in a side room or loop-back Site | SR1 | container | M2 | Visible from the threshold |
 | `alcoveCache` | The one container of an Alcove leaf | SR1 | container | M2 | Default occupant is a set piece where segment 3 offers one (LP-11). On F1 a Curiosity may take that set-piece slot first in its host order; it never empties a leaf and never displaces a container the cap needs (events design 4.2; EV-2, M2) |
-| `lockedCache` | Padlocked, Catch, Keyed | SR2 | container | M2 | Quota card, or coin plus 1 non-healing sundry |
+| `lockedCache` | Padlocked, Clasp, Keyed | SR2 | container | M2 | Quota card, or coin plus 1 non-healing sundry |
 | `keyTarget` | The Keyed cache a Keybearer's key opens | SR2 | container | M2 | `KeyReachable` |
 | `secretCache` | The cache in a Hairline space | SR2 | container | M2 | ≤ 1 card, never the top card. F1 outside n |
-| `baitCache` | Mousetrap bait (EP 6.8.1) | SR2 | container | M2 | Its own prop family. M2 with the Mousetrap (EP 6.8.1, LE 6.9 item 6; corrected after the check) |
+| `baitCache` | Baited Room bait (EP 6.8.1) | SR2 | container | M2 | Its own prop family. M2 with the Baited Room (EP 6.8.1, LE 6.9 item 6; corrected after the check) |
 | `boxedLurker` | `containerForm` lurker (TL 6.14) | SR2 | container | M3 | — |
 | **`windfall`** | **Truant unit** | **SR2 (new row, LP-1)** | **inherits its card's origin channel** | **M3** | Created only in step 8; never in the steps 1–7 socket list, ordering or deal (4.7.6) |
 | `consequenceCache` | Crier, Barb, Tattle (TL 6.11) | SR3 | container | M2 | Two identities |
@@ -377,7 +378,7 @@ Each source is one `LootSocketRecord` with exactly one `kind` and one `rank`, or
 
 ### 4.2 Socket derivation, the role table and depth (lead's call; change LP-11)
 
-**Where it runs.** 7c's **SocketPlan** builds LootPlan's provisional socket set (LE 6.9 item 2), draw-free. It runs at GS9, after EP's 2a (the Mousetrap bait cache), reading encounter steps 2 and 2a only; EP's 10b activity props are read by LootBind, not SocketPlan (SV-9, M1). The Windfall grandchild's draws are not SocketPlan's: they are taken at the start of step 8 inside 3a (GS10; 4.7.10) (SV-31 text fix; seeds and validation design 4.4). It reads:
+**Where it runs.** 7c's **SocketPlan** builds LootPlan's provisional socket set (LE 6.9 item 2), draw-free. It runs at GS9, after EP's 2a (the Baited Room bait cache), reading encounter steps 2 and 2a only; EP's 10b activity props are read by LootBind, not SocketPlan (SV-9, M1). The Windfall grandchild's draws are not SocketPlan's: they are taken at the start of step 8 inside 3a (GS10; 4.7.10) (SV-31 text fix; seeds and validation design 4.4). It reads:
 - layout `containerSockets[]`;
 - Alcove leaves and `secretSites[]`;
 - the hazards pass's Dare socket;
@@ -390,7 +391,7 @@ Each source is one `LootSocketRecord` with exactly one `kind` and one `rank`, or
 
 **How the role table becomes sockets (lead's call, after the check).** SocketPlan **selects** from layout `containerSockets[]` (and the other inputs above); it never creates a container square. The table lives in data as `loot.roleTable[role][floor] {min, max, ranks, coinWeight, never[]}` (9.1).
 - Per room, in `socketId` order, SocketPlan takes sockets up to `max`. It keeps `min`, and more only where an HE or Due reservation needs one (the "2 only where an HE need demands" row). Draw-free: a range "0–1" means take 1 if the layout offers a legal socket, else 0.
-- Sockets the traps pass has already bound (Catch hosts, lock kinds, boxed lurkers, the key target) are always selected; they count toward `max`.
+- Sockets the traps pass has already bound (Clasp hosts, lock kinds, boxed lurkers, the key target) are always selected; they count toward `max`.
 - **`cardEligible`.** Each selected socket carries a `cardEligible` flag. It is true on the first container socket of a room in `socketId` order and false on every later one, except the named exceptions of room rule 1 (the elite cache, the Wager set, an HE-7 socket in a room with a separate Alcove). The step-5 deal (LE 6.9 item 2) skips sockets with `cardEligible` false, which is how "one card-bearing container per room" is enforced; they take coin and sundries only.
 
 **The walk line (lead's call, after the check).** The **walk line** of a room is the shortest walkable path from its party-entry Portal to its main-path exit Portal, under 4.7.3's fixed neighbour order. In a room with one Portal (a side room, an Alcove, a dead end), it is the shortest path from the entry Portal to the room's walkable square farthest from it (ties by square index). FL uses the phrase informally; this is the binding definition for 4.2, 4.3, 4.4, 4.10, `MainPathDetour` and `LootDetourSquares`.
@@ -403,18 +404,18 @@ Each source is one `LootSocketRecord` with exactly one `kind` and one `rank`, or
 | Main-path non-fight rooms (incl. Q) | 1; 2 only where an HE need demands | SR0 | Due (first HE-7), HE-3/4, ordinary cards | 1 | Locks on HE. Segment 8 may skin, never add (`CuriosityLootBlind`; events design 4.4.5, EV-15) |
 | Main-path guard post (G) | 0–1 Plain + carriers | SR0 | Ordinary and carried cards; **Truant host (M3)** | 1 | A lock on an HE socket |
 | Route-avoidable guard post (Gb) | 0–1 + carriers | SR1 | Ordinary and carried; Truant host | 2 | An HE socket |
-| Lair (L) | 1 lair container + carriers; purse chain | SR0 | Ordinary cards; F5 Viaticum; Truant host (F2–4) | 1 | — |
+| Lair (L) | 1 lair container + carriers; purse chain | SR0 | Ordinary cards; F5 Parting Fare; Truant host (F2–4) | 1 | — |
 | Elite room | Elite carrier + 0–1 elite cache | SR4 | Top gear card; consumable top card to the cache | 4 | Purse, Windfall, lock on the cache |
-| Forecourt (F2–5) | 0–1 Plain no-check | SR0 | HE-7 #2 where FL allows; never HE-4 | 1 | Viaticum, Windfall, lock |
+| Forecourt (F2–5) | 0–1 Plain no-check | SR0 | HE-7 #2 where FL allows; never HE-4 | 1 | Parting Fare, Windfall, lock |
 | Arena | Signature cache only (guarded forms) | unranked | Signature | 0 | Any other container (segment 9) |
-| Stairhead, corridors | 0 | — | — | — | Loot |
+| The Downstair, corridors | 0 | — | — | — | Loot |
 | Side room / loop-back Site | 1 | SR1 / SR2 locked / SR3 consequence | Ordinary, quota, step cards; Twin Coffer | 2/3/4 | HE |
-| Circuit rooms | 0 | — | — | — | Windfall, HE-4, Viaticum |
+| Circuit rooms | 0 | — | — | — | Windfall, HE-4, Parting Fare |
 | Alcove leaf | Exactly 1 occupant: container, cache or set piece | SR1 (SR2 if locked) | Ordinary card; trimmed-floor reward | 2 | Top card |
 | Hairline space | 1 secret cache | SR2 | ≤ 1 card, never the top card | 3 | Due, HE, key target, Windfall card source |
 | Strongroom spur (M3, F2–3) | 1 | SR4 | Step-eligible | 4 | — |
 | Wager / Dare Site (M3) | Prize | SR5 | Triples / step card | 4 | A second clock |
-| Mousetrap guard post (M2, EP 6.8.1) | + bait cache | SR2 | Real ordinary entry | 3 | Solo, F1 |
+| Baited Room guard post (M2, EP 6.8.1) | + bait cache | SR2 | Real ordinary entry | 3 | Solo, F1 |
 
 **Room rules (lead's calls):**
 1. **One card-bearing container per room.** Exceptions:
@@ -432,7 +433,7 @@ Each source is one `LootSocketRecord` with exactly one `kind` and one `rank`, or
      1. **Phase 1, SocketPlan (before allocation).** Activity slots are reserved first from ENM step 2's slot plan (EP's props), then HE, Due, key-target and traps-bound sockets. Card-eligible sockets (beyond the reserved ones) are limited to the known count of container cards (deck size − carried cards, LE 6.9 item 2 step 1), since more could never hold a card. Further sockets are taken only while the total stays ≤ the cap; an Alcove whose occupant would exceed it takes its set piece (segment 3 ask).
      2. **Phase 2, LootBind (after allocation, step 5 of 4.3).** Coin-only containers in one room are merged into the lowest-`socketId` survivor: their coin weights and sundries are summed onto it, its HE flags are kept, and the merged squares are freed. Each merge is logged `ContainerCapTrim{merged:[ids]}`.
    - **Fewer locks is a design-time lever, not a generation-time request.** If the walker shows the cap binding, the TL tuning for non-quota coin locks (LE 6.4 item 4) is lowered by the TL owner; no pass is asked again during generation.
-   - Never trim a card-bearing, HE, Due, Viaticum or key-target container. `EmptyDeadEndRate` stays 0.
+   - Never trim a card-bearing, HE, Due, Parting Fare or key-target container. `EmptyDeadEndRate` stays 0.
    - Told plainly: the toy role tables produced 12.5–14.5 containers per floor, so these cuts are needed, and the walker must confirm them.
 6. **Never empty** (settled, LE 6.4). Coin overflow becomes sundries, then `CoinSocketTrimmed`.
 
@@ -442,10 +443,10 @@ Each source is one `LootSocketRecord` with exactly one `kind` and one `rank`, or
 
 | Floor | Rules |
 |---|---|
-| F1 (always solo) | Plain-dominant. ≤ 1 consequence lock after room 2. Coin floor ≥ 17. Secret only on Gaol or Wake (0–1), shown "+1 secret", outside n. No Windfall, Wager, Dare, lurker, Mousetrap, Strongroom or Twin Coffer (4.9) |
+| F1 (always solo) | Plain-dominant. ≤ 1 consequence lock after room 2. Coin floor ≥ 17. Secret only on Gaol or Wake (0–1), shown "+1 secret", outside n. No Windfall, Wager, Dare, lurker, Baited Room, Strongroom or Twin Coffer (4.9) |
 | F2–F3 | Full table. Strongroom (M3). Dare or Wager ≤ 1. Twin Coffer ≤ 1. Purse on. Windfall eligible by floor; in practice F2 only through the solo arm once opened, and F3 only at party ≥ 3 on a skinned theme (4.7.2) |
 | F4 | As F2–F3 without the Strongroom. Windfall eligible at party ≥ 3 on a skinned theme (4.7.2) |
-| F5 | No coin or salvage lines, no purse, no boss card, no camp channel. Viaticum in the lair room. ≤ 1 non-notable lock. Loot-bearing ≤ fillers. No Windfall. Memento on the victory screen only |
+| F5 | No coin or salvage lines, no purse, no boss card, no camp channel. Parting Fare in the lair room. ≤ 1 non-notable lock. Loot-bearing ≤ fillers. No Windfall. Memento on the victory screen only |
 | Trimmed (RT-7) | Deck kept as visible Alcoves; top card on the elite or lair carrier. No Windfall |
 
 ### 4.3 LootBind: binding to rooms and squares (draw-free; after `trapsResolve`; lead's call; changes LP-12, LP-25)
@@ -453,7 +454,7 @@ Each source is one `LootSocketRecord` with exactly one `kind` and one `rank`, or
 **Square legality** applies to every container square, its **open square**, and every Truant home and route square. A square is never:
 - a Clearway square, a 1-wide chokepoint, a Portal square or its inner neighbour, or inside a Hinge or Postern 8-neighbourhood;
 - a hazard square, a Void-adjacent square, a Stir footprint or due square, or a Tide socket;
-- a trap trigger square or a Hunch-zone square. A Catch container's own catch is the exception;
+- a trap trigger square or a Hunch-zone square. A Clasp container's own clasp is the exception;
 - a Furnishing or piece square, or within 1 of a Keg footprint;
 - an enemy start zone (Truant: ≥ 2 squares from every monster start square);
 - an arena entrance band;
@@ -461,7 +462,7 @@ Each source is one `LootSocketRecord` with exactly one `kind` and one `rank`, or
 
 The open square is walkable, safe, and reachable from the walk line (4.2) without crossing a hazard, trap or Void.
 
-**Traps-bound sockets (lead's call, after the check).** Sockets the traps pass has already bound to a square (a Catch host and its trigger, a lock, a boxed lurker, the key target) **keep the traps pass's square**. LootBind only checks them against this list; a failure is a V15g failure (`LootBindUnplaceable`, handled by its class as in step 2 below; SV-10), never a rebind, so a Catch is never separated from its trigger square.
+**Traps-bound sockets (lead's call, after the check).** Sockets the traps pass has already bound to a square (a Clasp host and its trigger, a lock, a boxed lurker, the key target) **keep the traps pass's square**. LootBind only checks them against this list; a failure is a V15g failure (`LootBindUnplaceable`, handled by its class as in step 2 below; SV-10), never a rebind, so a Clasp is never separated from its trigger square.
 
 **Choice by role.** Each role ranks the legal squares by a scoring tuple, lowest first, then by face N, E, S, W (lead's call, after the check: the proposal named regions, not a key):
 - SR0 and HE: (distance from the walk line, path distance to the exit Portal, square index).
@@ -514,7 +515,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 | Bait cache, boxed lurker | Their sockets | Real SR2 entries |
 | **The Dream's Due** | **First HE-7 in main-path order**, with the DH block | No special host (CT6). Hover "The dream's due: for <name>" |
 | DH HE-3/4/7 | Layout reservations (7c never moves them) | Plain, no check |
-| **Viaticum (F5)** | **The lair room's host socket (kind `viaticum`, replacing `lairContainer` on F5), exit side toward the Forecourt, outside the start zone, on the walk line** | **A reading** of LE 6.11 item 5 (its fallback is the real rule, because nothing lies between L and F on F5). The FL and ENM owners confirm (LE 18.2). Opens the width-3 offer UI. Host skin: the Bedside Stand (LP-14; **agreed, Q5**) |
+| **Parting Fare (F5)** | **The lair room's host socket (kind `viaticum`, replacing `lairContainer` on F5), exit side toward the Forecourt, outside the start zone, on the walk line** | **A reading** of LE 6.11 item 5 (its fallback is the real rule, because nothing lies between L and F on F5). The FL and ENM owners confirm (LE 18.2). Opens the width-3 offer UI. Host skin: the Washstand (LP-14; **agreed, Q5**) |
 | **Signature cache** | In the boss's arena, for `guarded` forms (a reading: IR 4.13 and 4.18's "the lair of every boss" means the boss arena, not FL 6.5's L room; 13, lead's call, after the check; confirmed by segment 9, boss rooms design 4.11.1; BR-27, M2) | ≥ 3 squares from both entrance Arches, outside the boss start zone and arena-clock footprints, visible from the entry. Barred until `BossDefeated` (`BossResolved` is its alias; boss rooms design 4.2.4; BR-37, M2). Segment 9 owns the final square: each arena template's `cacheCandidates[]` applies these filters (boss rooms design 4.1.1) |
 | Boss card, Memento | Screens | No placement |
 | Coin pool, lumps | By weight: SR0 1, SR1 2, SR2 3, SR3–5 4 | **Windfall: weight-3 share, never a K2 lump** (toy: a lump fails `StealCoinShare` at 45%). Carved in LootBind step 7, after the Windfall is final (4.3) |
@@ -530,14 +531,14 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 |---|---|---|---|
 | Plain container | Kind silhouette (theme family) | Proprietor tag; tier marks (1–4 diamonds plus tier word) if it holds a card, else the coin glyph | Lid open, no residue |
 | Locked / consequence | Padlock base decal plus kind glyph, never a keyhole | Lock card: tier mark, fine-category noun (IR-11) | — |
-| Secret | The Hairline only | — | Sound the wall reveals it |
+| Secret | The Hairline only | — | Tap the wall reveals it |
 | Carried | ENM glint, purse badge, key pip (≤ 2 plate marks) | "Carries: …" | Use reveals the item |
 | Elite | Item shown in use | — | Elite intel line |
 | Wager / Dare | Portal glyph, Listen, Stratum line, prize through the Grille | Offer card tier marks | — |
 | Signature cache | Barred lid, item-icon plate | "Guards: <name>" | Opens on `BossDefeated` (`BossResolved` is its alias; BR-37) |
 | **Truant (M3)** | Unit plate with the **Windfall mark**; Dormant glyph; digit at its start value on a hollow floor ring | "Carries: <tier word> <fine-category noun> and coin · runs when a fight starts · gets away in <c0>"; the scurry trail and Rathole decal | Awake: digit on a solid floor ring and the Dream card; next hop outlined |
 
-- **Truant hover (lead's call, after the check).** `<c0>` is the displayed start digit, 3 (`WindfallInstance.c0`); held steps from a Surprised start or the solo arm show as a "held" badge, never a higher number (4.7.4). If the live party falls below the allowed size, the hover drops "runs when a fight starts · gets away in …" and reads "Carries: …" only, and the Stratum suffix is dropped for that floor.
+- **Truant hover (lead's call, after the check).** `<c0>` is the displayed start digit, 3 (`WindfallInstance.c0`); held steps from a Surprised start or the solo arm show as a "paused" badge, never a higher number (4.7.4). If the live party falls below the allowed size, the hover drops "runs when a fight starts · gets away in …" and reads "Carries: …" only, and the Stratum suffix is dropped for that floor.
 - **Proprietor tag** (LP-13). The hover and summary header read "<proprietor possessive> <skin noun>", such as "The turnkey's confiscation tin" (on a padlocked skin, "The turnkey's locker").
   - It is draw-free and assigned in LootBind step 6 (4.3), never by the card.
   - **Selection (lead's call, after the check).** Rank families are **safe** (SR0), **off-path** (SR1), **guarded** (SR2–SR3) and **prize** (SR4–SR5); unranked sockets take no tag except the signature cache's "Guards:" line. Sockets are tagged in `socketId` order. Candidates are the theme's `ProprietorRecord`s whose `roomRoles`, `rankFamilies` and `hosts` all match and whose uses so far are below `maxUses`. The pick is by (anchor matches the room's anchor first, then the most matching non-empty lists, then `id`). With no candidate, the theme's required `generic` record is used and `ProprietorFallback{socketId}` is logged. `ProprietorFallbackRate` = fallbacks ÷ tagged sockets.
@@ -562,14 +563,14 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 | Open a Plain container, quiet summary (coin and non-healing sundries only): it **auto-closes** after 1.5 s *(illustr.)*, coin to the purse, sundries to the suggested recipient | 1 | 1 |
 | Open a Plain container holding a notable or a healing sundry (open, Take or Take all) | 2 | 1 |
 | Lock card (TL 6.21) | +1 | +1 + hand work |
-| Key walk-in, Easy Plain auto-pick (TL 6.21) | 0 | as TL |
+| Key walk-in, Mild Plain auto-pick (TL 6.21) | 0 | as TL |
 | Consequence lock | 3 | +1 |
 | Twin Coffer | 2 | 1 |
-| Secret: Sound the wall + open | 1 + 1–2 | 6 + 1 |
+| Secret: Tap the wall + open | 1 + 1–2 | 6 + 1 |
 | Glean (optional) | 1 (+1 per notable decision) | 1 per container |
 | Steal | 2 | 1 |
 | Truant | 0 extra (fight summary) | — |
-| Viaticum / boss card offer | 2 | 0 |
+| Parting Fare / boss card offer | 2 | 0 |
 
 **Auto-close of quiet summaries** (LP-8; touches ITEMS 7 and 8.1). Out of combat, a summary holding only coin and non-healing sundries that all fit takes everything and closes itself, logging a non-modal toast to the log drawer (exploration and information design 4.9.1; cross-document comparison 2026-11-23, CC-115). A summary with a notable, a healing sundry or any choice stays open. Toy saving: −9 to −11 clicks per floor.
 - **"All fit" (lead's call, after the check)** uses party-wide placement (ITEMS Option D): each sundry goes to the suggested recipient, else the next member with room. If any item fails to place, the summary stays open.
@@ -579,9 +580,9 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 
 **Glean** (LP-9; M2, optional; lead's call).
 - **When:** out of combat, in a room with no awake un-Cowed hostile in sight. One click opens every **visible Plain unlocked** container in `socketId` order into **one merged summary** (still one screen, ITEMS 8.1). Each open routes per TL 6.13.
-- **Excluded:** locked, Catch or consequence containers, bait caches, Twin Coffers, Wager and Dare prizes, the signature cache before `BossDefeated`, Windfalls, and the Viaticum and any other container that opens an offer UI (it cannot join a merged summary; added after the check).
+- **Excluded:** locked, Clasp or consequence containers, bait caches, Twin Coffers, Wager and Dare prizes, the signature cache before `BossDefeated`, Windfalls, and the Parting Fare and any other container that opens an offer UI (it cannot join a merged summary; added after the check).
 - **No-leak rule (Model C):** an **unmarked boxed-lurker host is included**, because it reads as Plain. If Glean reaches it, it springs exactly as a single open would, and Glean stops with the rest unopened. Glean never reveals what a single open would not (V15 `GleanNoLeak`).
-- **Also stops on:** a new Revealed or Hunch result, a noticing roll, or a patrol forecast crossing within 2 ticks.
+- **Also stops on:** a new Found or Hunch result, a noticing roll, or a patrol forecast crossing within 2 ticks.
 - Told plainly: the toy saving is about 0.25 clicks per floor. Glean ships only if playtest shows players want it.
 
 **Pickup.** In combat, ENM 15.8 auto-gather and free-interaction pickup are unchanged. **7c adds no rule about opening containers in combat**: container work in combat follows TL 6.11 and 6.13 as written (CK3, CB9). A hook asks the ITEMS owner to confirm that a Plain open costs an action in combat.
@@ -611,7 +612,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 - **Look.**
   - **Always a small, faced, non-fearless animal hauling a bundle larger than itself** (RC3: faces mean minds; LP-7 adds the RC2 Truant grammar). Never an object, because a faceless unit must show the reserved keyhole and an object-shaped unit reads as a boxed lurker (CK1). Never humanoid, which avoids the Escapee, Messenger (EP-35) and Thief reads.
   - The bundle is generic, with the Windfall mark, and never an item silhouette (IR 4.18). **Every Truant drags the same cross-theme bundle (lead's call, after the check):** undyed sackcloth tied with the Windfall mark, larger than the animal, visible in every pose. It is the only bundle grammar.
-  - **No faction motif (lead's call, after the check).** A Truant, its bundle and its Rathole never use its theme's faction motif or minion palette (RS 8: the Carnival's stripes and greasepaint, the Supper's napkins and place cards, and the like), because a faction motif says "the enemy's side" and the Truant is in the "dream" faction. Theme identity goes on the animal only. V15s skin vetting and the role-ID gate add the row "Truant or faction minion" (CT1).
+  - **No faction motif (lead's call, after the check).** A Truant, its bundle and its Rathole never use its theme's faction motif or swarmer palette (RS 8: the Carnival's stripes and greasepaint, the Supper's napkins and place cards, and the like), because a faction motif says "the enemy's side" and the Truant is in the "dream" faction. Theme identity goes on the animal only. V15s skin vetting and the role-ID gate add the row "Truant or faction swarmer" (CT1).
   - Its posture is the approved **Dormant** posture and glyph. "Dozing" is art direction only (CK10). Its eyes and limbs stay out in every pose, Dormant included; it never withdraws into a shell or vessel (the boxed-lurker read, RC1).
 - ⚑ **ENM 14.5** ("a visibly flagged 'runner' role is a Later option") **and ENM 21's Later list** ("the runner role") hold the runner as **Later**; ENM 17.1's Thief row is a Later role too. LP-3 pulls forward a **non-hostile** runner only, into M3. That is a wave change on an approved Later list, told plainly (CK21). The hostile Thief stays Later. **(New lead's call:** the proposal cited "ENM 14.5 and 17.1"; the runner's Later entries are ENM 14.5 and ENM 21, and 17.1's Thief row is read, not changed.**)**
 
@@ -623,16 +624,16 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
   - If the live size at that moment is below the allowed size, the Truant **never wakes**. It stays Dormant and is a plain Take after the fight (1 click, 1 tick, nabbed).
   - **Solo** opens only if its own simulator arm (C = 4) shows greed downs ≤ +2 pp (14.2). **Duo is held**: no duo arm opens it in M3, and duo is reported only.
   - **(New lead's call.)** A floor whose party is below the allowed sizes at generation still consumes its 4 draws; it hosts no Windfall and **sets no `windfallCarry`** (party ineligibility is not a lost host).
-  - **The party schedule (told plainly after the check).** Under CMP 7.1 the party is at most 1 / 2 / 3 / 4 / 4 on F1–F5. So, while duo is held, **F2 never hosts a Windfall unless the solo arm opens** (then only for a hero who declined at camp 1); F3 hosts one only for a party with two companions by camp 2 (a hire at each camp, or a declined camp 1 and a carried hire at camp 2); F4 for a party of 3 or more. The M3 pilot is in practice F3–F4.
-- **Skin (lead's call, after the check).** The floor's theme must have a non-empty pilot skin list for the current wave (M3: the Choir, the Carnival and the Supper, agreed Q4). This is formation-independent and checked in LootPlan. A theme with no skin is treated like party ineligibility: the 4 draws are consumed, there is no Windfall, and no `windfallCarry` is set. In M3, **Silk and Gut floors and the M3 pool themes without a skin (Moth Wedding, Mirror Court, Ossuary Opera) never host a Truant** (told plainly after the check).
+  - **The party schedule (told plainly after the check).** Under CMP 7.1 the party is at most 1 / 2 / 3 / 4 / 4 on F1–F5. So, while duo is held, **F2 never hosts a Windfall unless the solo arm opens** (then only for a hero who declined at camp 1); F3 hosts one only for a party with two companions by camp 2 (a hire at each camp, or a declined camp 1 and a returning hire at camp 2); F4 for a party of 3 or more. The M3 pilot is in practice F3–F4.
+- **Skin (lead's call, after the check).** The floor's theme must have a non-empty pilot skin list for the current wave (M3: the Choir, the Carnival and the Supper, agreed Q4). This is formation-independent and checked in LootPlan. A theme with no skin is treated like party ineligibility: the 4 draws are consumed, there is no Windfall, and no `windfallCarry` is set. In M3, **Archive and Gut floors and the M3 pool themes without a skin (Moth Wedding, Mirror Court, Ossuary Opera) never host a Truant** (told plainly after the check).
 - **Hosts.** A main-path guard post (G) or Gb, or the main-path lair, at main-path index ≥ 3 and not the floor's first fight. **"First fight" (lead's call, after the check)** is the G, Gb or L fight room with the lowest main-path index, whether or not the party later skips a Gb.
 - **Never in:**
-  - the elite room, the arena, the Forecourt, Sanctum, Antechamber or Stairhead;
+  - the elite room, the arena, the Forecourt, Sanctum, Antechamber or the Downstair;
   - Circuit rooms or the cover room;
   - rooms with a Void;
   - any room with a clock (Stir, Chainpost, Now-Cord, ticking Landmark, Wager, Dare, Courses, Open Window);
   - Wager, Dare or Strongroom Sites;
-  - ambush forms (Mousetrap, Cuckoo, Waylay), or rooms with a boxed lurker or the Annex;
+  - ambush forms (Baited Room, Cuckoo, Waylay), or rooms with a boxed lurker or the Annex;
   - Kill Box, Crossfire or Pincer formations;
   - an HE socket's room on the HE-4 path.
 - **In LootPlan,** host eligibility uses only **formation-independent** rules: floor, party size, the theme's skin list, room role, main-path index, clocks and Sites (all known after the hazards and traps passes). Formation conflicts, the Annex (chosen by EP) and a boxed lurker are resolved in LootBind (4.3 step 3).
@@ -663,12 +664,12 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 - **Dormant means untouched (lead's call, after the check).** While Dormant with its host group unresolved, nothing nabs it except Steal (4.7.8): no action, area, damage or push affects it, and it is untargetable. An area, damage or push that **starts** combat resolves after combat start and the wake, and nabs it only if it still includes its square then. This closes the free pre-wake nab by a fight-opening area.
 - **Wakes (lead's call, after the check)** when **any member of its host group becomes Engaged** (ENM 12) in any fight, or when a fight starts in its room, whichever comes first, if the live party is allowed (≥ 3, or solo once opened); or at once on a failed Steal. Its route stays in its own room. So pulling the host group into a corridor still wakes it and starts its count. The proposal's "combat start in its room" let a pulled group leave it asleep.
 - **C** = 3 Dream steps **(agreed, Q1)**, or 4 if the party is Surprised (the Stir `firstAct` precedent). The solo arm, once opened, uses C = 4 **(agreed, Q2)**, and 5 if Surprised **(lead's call, after the check:** the Surprised solo value extends the Stir precedent; Q2 agreed only C = 4**)**.
-- **Shown as a countdown that never rises (lead's call, after the check).** The digit starts at **3** in every case. Each extra step above 3 (Surprised, the solo arm, both for 5) is a **held step** right after the stand-up: the digit does not fall, and the Dream card and floor ring show a "held" badge with its reason ("Surprised", "Alone"). Held steps are not the slip and do not set `slipUsed`. The effective count is unchanged; a count shown at reveal never goes up.
+- **Shown as a countdown that never rises (lead's call, after the check).** The digit starts at **3** in every case. Each extra step above 3 (Surprised, the solo arm, both for 5) is a **held step** right after the stand-up: the digit does not fall, and the Dream card and floor ring show a "paused" badge with its reason ("Surprised", "Alone"). Held steps are not the slip and do not set `slipUsed`. The effective count is unchanged; a count shown at reveal never goes up.
 - **Sub-step 3b, Windfall hops,** runs after Remnant countdowns and before announcements:
   - **Round-1 Dream step:** it stands up, does not move, and C falls to 2 (`wakeDelay` 1). Held steps follow, if any.
   - **Each later Dream step:** it hops up to `hop` squares along its route, and C falls by 1. At the Dream step where C reaches 0 it **gets away**: through the Rathole if it stands on the front square, else it fades where it stands. Either way it leaves with its bundle.
   - **Square by square (lead's call, after the check).** A hop is checked one route square at a time. It never enters a square holding a unit, or a harmful or obstacle state (fire, web, oil, a Keg; anything created or moved there at runtime), so hopping never damages it.
-  - **Blocked** means the hop moved fewer than `hop` squares and did not reach the Rathole front square, even if it moved part of the way. **The first blocked hop holds C** ("held · slip used" on the card; the HZ 6.3 slip precedent). **On any later blocked hop C falls anyway.** Any unit can block it, a monster by accident included; the "slip used" badge keeps a used slip visible. One body cannot freeze it (CB1, CF9).
+  - **Blocked** means the hop moved fewer than `hop` squares and did not reach the Rathole front square, even if it moved part of the way. **The first blocked hop holds C** ("paused · slip used" on the card; the HZ 6.3 slip precedent). **On any later blocked hop C falls anyway.** Any unit can block it, a monster by accident included; the "slip used" badge keeps a used slip visible. One body cannot freeze it (CB1, CF9).
   - **Early arrival (new lead's call).** If it reaches its Rathole front square while C > 0, it waits there, still a target, and gets away only at the Dream step where C reaches 0. It never leaves early. With the exact-L route (4.7.3) and held steps taken before any hop, it cannot normally happen; the rule stays as a safety.
   - **After 3b,** sub-step 4 outlines its next hop in the **next-hop outline** (RC5; never the due-square hatch). Every unit gets at least one turn between seeing a hop and the hop.
 - **Combat end (lead's call, after the check, extending LP-5).** The combat-end check runs **after each Dream sub-step**, not only between Dream steps. Combat ends at the moment the last hostile resolves (a 1c down, a 2b Rout or Yield included). If combat has ended before sub-step 3b, 3b and 4 are skipped and a Truant still in the room is nabbed (LP-5).
@@ -704,7 +705,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
   3. **(iii)** else **no Windfall on this floor**. Its draws are consumed and `windfallCarry` is set.
 - **Ledger and channel tallies** record the card in its **origin channel** with an **`onWindfall`** tag **(new lead's call:** renamed from the draft's `heldBy`, a VG data predicate**)**. The ENM 15.3 split is unchanged. **The channel-slot mapping is fixed at the end of step 7** (lead's call, after the check), and the Windfall keeps its origin socket's slot index *i*: no carried or container slot is recounted after the card moves.
 - **Filter (f), new, in two parts (lead's call, after the check),** because ordinary identities are drawn later, on the parent stream (LE 6.10 items 2 and 4):
-  - **(f1), card-level, at step 8:** exactly 1 card. Never the deck's top card or a VR; the Due, the DH block or the Viaticum; a key, a signature or a step card; a dual-identity card.
+  - **(f1), card-level, at step 8:** exactly 1 card. Never the deck's top card or a VR; the Due, the DH block or the Parting Fare; a key, a signature or a step card; a dual-identity card.
   - **(f2), identity-level, at the parent draw:** the Windfall's slot is drawn filter-first (LE 6.10 item 1) with `oncePerRun` records excluded, so it can never hold one.
 - **Filter (g), new:** never a card from a secret, the quota socket, a trimmed floor's Alcove reward, a Wager, Dare or Strongroom, or the elite carrier. Secrets keep their card, so careful exploration never pays less on a Windfall floor (CB5).
 - **Why the host's carried card (lead's call; told plainly).** The toy showed the F3–F4 container channel is down to 3 cards (the Due, the quota and the secret's), so a container-only source would leave the Truant coin-only on 2 of 3 floors, which is a coin-tax goblin (CF1). Taking a carried card from the fight that hosts it keeps the stake inside the same fight, starves no off-path source and leaves the Steal target count intact (V15). **This source was not simulated** in the toy, and is the first M3 simulator arm. The client chose it with Q1 option A.
@@ -714,7 +715,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
   - A visible tier at reveal.
   - The reserved cue family.
   - The run-record line.
-  - **A width-2 offer on nab (Yours plus Wayward) is held as an M4 lever**, to be used only if `WindfallIgnoreShare` is high. If adopted it uses its own keyed grandchild, so it can be added later without shifting other streams (CB12).
+  - **A width-2 offer on nab (Yours plus Windblown) is held as an M4 lever**, to be used only if `WindfallIgnoreShare` is high. If adopted it uses its own keyed grandchild, so it can be added later without shifting other streams (CB12).
 - **Contested: extra value.** Rejected **(agreed, Q1**: option C rejected**)**.
 
 #### 4.7.7 Getting away
@@ -724,7 +725,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 - **Item location (lead's call, after the check; LP-2).** While on a Truant the card's ITEMS 18.1 `location` is a new value **`windfall(unitId)`** (`carried(monsterId)` is for monsters). LP-2 adds four rows to the ITEMS 18.1 location-transition table, which 19.2 asserts: generation → `windfall` (the floor loot draw, extending the first row; `ItemCreated`); `windfall` → `ground` (nab; `ItemDropped`); `windfall` → thief's `pack`, else `leftovers` (Steal; `ItemTaken` or `ItemLeft`); `windfall` → deleted (getaway; `ItemDestroyed{gotAway}`). `windfall` → deleted at the stairs joins the existing stairs row (`ItemDestroyed{lost}`).
 - **Coin.** Removed from found coin, reported as `WindfallEscapedCoin`.
 - **Treasure count.** n − 1. Grave Goods: "Got away: <tier word>".
-- **Untouched by construction (V15 `WindfallOffGuarantees`):** the Due, DH, Viaticum, keys, signatures, secrets and the lean band.
+- **Untouched by construction (V15 `WindfallOffGuarantees`):** the Due, DH, Parting Fare, keys, signatures, secrets and the lean band.
 
 #### 4.7.8 Steal, Cow, classes, AI and companions (changes LP-6, LP-33)
 
@@ -798,7 +799,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
   - It uses **click-to-move with per-step ticks**, never one click per step. Both routes' tick counts are shown.
   - It fades one notch per tick, as an act of ≤ 1.0 s added to RC1's closed motion list.
   - At 0, `gotAway`. If a fight starts in its room, the remaining count converts to Dream steps.
-  - Skins **(agreed, Q4)**: the Choir Offertory Plate (sinking into dry flagstones), the Carnival Prize Balloon (lifting on its sandbag string) and the Gut swallowed bauble (absorbed into a lining fold; never in a Peristalsis room).
+  - Skins **(agreed, Q4)**: the Choir Offertory Dish (sinking into dry flagstones), the Carnival Fairground Balloon (lifting on its sandbag string) and the Gut-Lodged bauble (absorbed into a lining fold; never in a Peristalsis room).
 - **Exploration Truant.** A Dormant Truant in a group-free side room that wakes on a noticing band and runs on chase ticks, placed only where the generator proves an intercept line. M4, because out-of-combat targeting needs the ability owner and main 4.3 (CF7).
 - Told plainly: the client's "during exploration" case has **no M3 form** (agreed, Q3).
 - **No F1 Ebb** **(agreed, Q4**: option B, a coin-only F1 teaching Ebb, rejected**)**.
@@ -821,7 +822,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 | C falls while blocked | Rejected (kills the intercept). Slip once instead |
 | Pips not a digit | Rejected (a lying exception) |
 | Object-skinned Truants, Flotsam | Rejected as Truants. Object skins are Ebbs only |
-| Void exit | M4 Nightmare-tier option, Ebb only |
+| Void exit | M4 Peril-tier option, Ebb only |
 | Trove (speed-graded offer) | Later (party-size bias, card starvation, third timed family) |
 | Hawker | Segment 8 hook, "the Hawker's Hour", untimed; Later, a skin of the ITEMS 10.9 trader (events design EV-42) |
 | Lost Property buy-back | Camp hook, tested only if greed gates miss |
@@ -833,7 +834,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
   - Lock counts follow TL 6.20. Fewer locks is a design-time TL tuning lever if the cap binds, never a generation-time request (4.2 rule 5).
   - Traps-bound sockets keep the traps pass's square (4.3).
   - `HeNoLock` and `LockNeverCritical` hold.
-  - A Catch is the only trap on a container square.
+  - A Clasp is the only trap on a container square.
   - Hunch zones may lie on the path to SR1+ sockets, never to an SR0 or HE open square.
   - The Wax Key is refused on secrets and Wager cages (TL).
   - Boxed lurkers sit ≥ 3 squares from any Truant home.
@@ -864,18 +865,18 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 - Secret 0–1 (Gaol and Wake), "+1 secret", outside n.
 - ≤ 1 carried notable per encounter; carried consumables self-targeting only.
 - No lurker in rooms 0–2; no surprise in rooms 0–1.
-- No Windfall, Ebb, Wager, Dare, lurker, Mousetrap, Strongroom, Twin Coffer or Heavy Purse.
+- No Windfall, Ebb, Wager, Dare, lurker, Baited Room, Strongroom, Twin Coffer or Heavy Purse.
 - Proprietor tags teach that room logic predicts loot.
-- **M1:** containers, at most 1 carried weapon or armour notable, the Due, and **Old Ragged guarding Bellwarden's Mail** in its den (the first signature cache).
+- **M1:** containers, at most 1 carried weapon or armour notable, the Due, and **Old Ragged guarding Hound-Collar Mail** in its den (the first signature cache).
 - Told plainly: the client's Gaol "escaping prisoner" is declined for F1. F1 teaches with nothing timed (RT-20, DH 17.1), and a prisoner reads as the Escapee (RC1, RC2) **(agreed, Q4)**.
 
-### 4.10 Floor 5, the Viaticum and boss loot (segment 9 hook; agreed, Q5; change LP-14)
+### 4.10 Floor 5, the Parting Fare and boss loot (segment 9 hook; agreed, Q5; change LP-14)
 
-- **Viaticum.** On F5 the lair room's host socket takes kind `viaticum` (unranked, boss channel) in place of `lairContainer`, so the room keeps one card-bearing container. It sits on the lair room's exit side toward the Forecourt, outside the start zone, on the walk line. This is a **reading of LE 6.11 item 5**, whose stated fallback is the real rule. **The FL and ENM owners confirm** (LE 18.2). Taking it during or after the lair fight follows TL as written.
-  - It opens the boss-reward offer UI at width 3. Its host is the **Bedside Stand** (LP-14), a nightstand with three drawers, accepted as the **second named exception** to IR 4.18's "container art never implies contents", because an ordinary tin would lie about what clicking it does **(agreed, Q5)**.
-  - **Scale and open act (lead's call, after the check).** The proposal's "child-scale" means the scale of a child's furniture to a unit, never the Heart's giant nursery scale: it fits one square, stands below unit shoulder height, and has three short drawers stacked on legs with an open underside, so it never reads as a Tall piece (ROOM's wardrobe and block tower). Its open act: the three drawers slide out together in ≤ 1.0 s, then the width-3 offer UI opens; the opened state shows three empty drawers. **The Heart's drawer-slide Latch skin is banned from every F5 lair room**, and the role-ID gate adds "Bedside Stand or Latch, Furnishing".
-  - **The Bedside Stand silhouette hosts only the Viaticum** **(new lead's call)**: no other container, Furnishing, piece or Keepsake on any floor uses it (V15s `BedsideStandOnly`), so the exception never leaks.
-  - The lean band is computed with the Viaticum counted in every arm, stealth or fight (CB10).
+- **Parting Fare.** On F5 the lair room's host socket takes kind `viaticum` (unranked, boss channel) in place of `lairContainer`, so the room keeps one card-bearing container. It sits on the lair room's exit side toward the Forecourt, outside the start zone, on the walk line. This is a **reading of LE 6.11 item 5**, whose stated fallback is the real rule. **The FL and ENM owners confirm** (LE 18.2). Taking it during or after the lair fight follows TL as written.
+  - It opens the boss-reward offer UI at width 3. Its host is the **Washstand** (LP-14), a nightstand with three drawers, accepted as the **second named exception** to IR 4.18's "container art never implies contents", because an ordinary tin would lie about what clicking it does **(agreed, Q5)**.
+  - **Scale and open act (lead's call, after the check).** The proposal's "child-scale" means the scale of a child's furniture to a unit, never the Heart's giant nursery scale: it fits one square, stands below unit shoulder height, and has three short drawers stacked on legs with an open underside, so it never reads as a Tall piece (ROOM's wardrobe and block tower). Its open act: the three drawers slide out together in ≤ 1.0 s, then the width-3 offer UI opens; the opened state shows three empty drawers. **The Heart's drawer-slide Latch skin is banned from every F5 lair room**, and the role-ID gate adds "Washstand or Latch, Furnishing".
+  - **The Washstand silhouette hosts only the Parting Fare** **(new lead's call)**: no other container, Furnishing, piece or Souvenir on any floor uses it (V15s `BedsideStandOnly`), so the exception never leaks.
+  - The lean band is computed with the Parting Fare counted in every arm, stealth or fight (CB10).
 - **Signature cache.** One per guarded-form boss, in its arena, per 4.4. Unranked, never locked or trapped, holds nothing else, opens on `BossDefeated` (boss rooms design 4.2.4; BR-37, M2).
 - **Armed boss:** carries its signature. Segment 9 authors each boss's `armed` flag and issue gear so a carried form is the piece the boss visibly uses, chassis only; no second form is chosen on F5 (boss rooms design 4.11.1; BR-27, M2). **Boss card:** C/U/R/R on F1–F4, separate screen. **Memento:** victory screen.
 
@@ -903,14 +904,14 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
   - the non-combatant plate frame, Windfall mark and Dormant glyph;
   - the templated hover line;
   - the scurry trail, the next-hop outline, the Rathole decal and its front-square floor decal;
-  - the digit on its floor ring (hollow while Dormant, solid while awake) and the Dream card, and the "held" badge with its reason ("Surprised", "Alone", "slip used");
+  - the digit on its floor ring (hollow while Dormant, solid while awake) and the Dream card, and the "paused" badge with its reason ("Surprised", "Alone", "slip used");
   - the Steal preview row "Windfall: card (coin spills)";
   - the greyed "guarded" reason on Grab, attacks and the spilled coin out of combat;
   - the Truant as a companion suggestion target (LP-33; suggestions off by default);
   - the run-record lines.
 - The Uncorked glint state.
 - The Twin Coffer twin-lid mark.
-- The Bedside Stand opening the width-3 offer UI.
+- The Washstand opening the width-3 offer UI.
 
 ### 4.13 Hooks to segments 8, 9 and 10
 
@@ -918,8 +919,8 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
   - Q rooms and Forecourt micro-events may **skin** a 7c socket but never add one. Answered by `CuriosityLootBlind`: a Curiosity frames its room's existing container with wall or backdrop dressing only; the container keeps its silhouette and CT2 art, opens with no check, and its contents are never an option outcome (events design 4.4.5; EV-15, M2).
   - No event spawns or moves units (EP 13), so Windfalls are 7c's alone.
   - A ticking Landmark makes a clock room. **Segment 8 never places a clock Landmark in a room flagged `windfallHost`** (the Windfall has priority; lead's call, after the check), and V15g's `OneClockPerRoom` runs after segment 8. Segment 8 places no Landmarks at all (events design 4.2; EV-35, M2). EventPlace runs draw-free after LootBind and before V13g / V15g (`OneClockPerRoom`); loot never reads Curiosities (events design 4.10; EV-21, M2).
-  - Curiosity props never use a container, bait-cache, Windfall or Bedside Stand silhouette (LP-14, LP-24 read; events design 4.11; EV-25, M2).
-  - Dream Fragments may carry Windfall lore and claim the elite intel family.
+  - Curiosity props never use a container, bait-cache, Windfall or Washstand silhouette (LP-14, LP-24 read; events design 4.11; EV-25, M2).
+  - Fragments may carry Windfall lore and claim the elite intel family.
   - "The Hawker's Hour" is offered as an untimed bargain event. **Later:** a skin of the ITEMS 10.9 trader, with the items owner and camp and hub (events design 4.13; EV-42). Camp and hub reads it as a floor event, not camp (camp and hub design 2.2, 5.4).
   - **Alcove occupancy (EV-2, M2; 7c applies):** an F1 Curiosity's first host is an Alcove set piece, taking the set-piece slot LP-11 prefers, never emptying a leaf or displacing a container the cap needs (events design 4.2).
   - **Pending requests to 7c (segment 8; not rules until ruled):**
@@ -929,7 +930,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
   - The signature cache's arena square list, using 4.4's filters, and confirmation of the reading that IR 4.13 and 4.18's "lair of every boss" means the arena (13). **Answered:** `cacheCandidates[]` per arena template (boss rooms design 4.1.1); "lair = arena" confirmed (boss rooms design 4.11.1; BR-27, M2).
   - The boss card screen and the Memento (boss rooms design 4.11.2).
   - No Windfall or other loot clock in arenas, the Antechamber or the Sanctum. **Answered:** no Windfall in arenas (boss rooms design 11).
-  - The Viaticum sits in the lair before the Forecourt.
+  - The Parting Fare sits in the lair before the Forecourt.
 - **Segment 10 (UI).** 4.12. **Answered** by the exploration and information design (approved 2026-11-23; its 5 and 4.9.9): the Treasure field naming (XI-19), the counts-only narrowing for paid or earned pointers (XI-23, M3) and the pending `SideRoomPayoffMix` request (4.2; XI-27).
 
 ---
@@ -940,7 +941,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 
 | Rule | Content | Change |
 |---|---|---|
-| CT1 | Silhouette families never overlap within a theme: loot containers, catch hosts, boxed-lurker host (shares with loot by design), bait cache, Furnishings and Low pieces, Kegs, reserved trap tells, Truants, cross-theme variants (signature cache, Wager cages, Viaticum host). Role-ID gate rows: "container or Furnishing", "container or bait", "Truant or minion", "Truant or boxed lurker"; **added after the check:** "Truant or faction minion", "inset container or Latch, Door or Hairline", "Rathole or Portal skin", "Bedside Stand or Latch, Furnishing". Truants and their bundles never use the theme's faction motif or minion palette (4.7.1) | LP-15 |
+| CT1 | Silhouette families never overlap within a theme: loot containers, clasp hosts, boxed-lurker host (shares with loot by design), bait cache, Furnishings and Low pieces, Kegs, reserved trap tells, Truants, cross-theme variants (signature cache, Wager cages, Parting Fare host). Role-ID gate rows: "container or Furnishing", "container or bait", "Truant or swarmer", "Truant or boxed lurker"; **added after the check:** "Truant or faction swarmer", "inset container or Latch, Door or Hairline", "Rathole or Portal skin", "Washstand or Latch, Furnishing". Truants and their bundles never use the theme's faction motif or swarmer palette (4.7.1) | LP-15 |
 | CT2 | **ContainerArtBlind.** Two variants per family, chosen by a display hash of (floorSeed, containerId) (the `display` key's `containerArt` domain over (floor, containerId), a `DisplayKey` that Core never references; SV-2, M1; seeds and validation design 4.3). No size step by rank, no glow, beam or tinted lid | LP-15 |
 | CT3 | Locks are skins on one padlock base plus a kind glyph. Never a keyhole, face part, ring or clock face | (settled TL 8) |
 | CT4 | Containers never idle. Open act ≤ 1.0 s. The opened state is true (lid up, empty). Truants are units with a Dormant breathing idle | (settled RC1) |
@@ -956,22 +957,22 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 | CT14 | Containers and Truants only on plain walkable squares | LP-25 |
 | CT15 | **Insets never read as Portals (lead's call, after the check).** Each theme's inset is waist-high on its wall-set bracket, at most half a wall square wide, with no floor-level opening; opened, a shallow empty back, never a passage. It never shares a silhouette with the theme's Latch, Door or Hairline skins (FL Portal skin table: hatch, book-lift, dumbwaiter, drawer slide; the Gut's sphincter Door). `ContainerFamilyDistinct` checks it | LP-15 |
 
-**Keepsake dressing on F5 never uses a container, bait or Windfall silhouette** (LP-24), nor the Bedside Stand's (4.10).
+**Souvenir dressing on F5 never uses a container, bait or Windfall silhouette** (LP-24), nor the Washstand's (4.10).
 
 ### 5.2 Summary
 
 | Theme (floors) | Plain family | Named containers and locks | M3 prizes | Activity | Truant (M3 pilot / M4) | Ebb (M4) | Signature loot moment |
 |---|---|---|---|---|---|---|---|
-| Gaol (F1) | Confiscation tins | Cell padlocks, 1 Crier, Confession Box catch, Hour lock (M3) | — | Dice pot | none (F1) | none | The keyring cell cache seen through a Grille |
-| Kennel (F1) | Poacher's creels | Pen box (M1), Huntsman's lodge chest | — | — | none | none | Old Ragged guarding Bellwarden's Mail (M1) |
-| Wake (F1 cond.) | Grave-goods caskets | Will-Box, Viewing Door (Tattle) | — | — | none | none | The Will-Box in the Undertaker's reach |
-| Choir (F2–3) | Alms chests | Barb, Vestry door | Loft of Responses; Sacristy | — | **Alms Crab (pilot)** | Offertory Plate | The Vestry door cache (M2); the Sacristy treasury (M3) |
-| Silk (F2–3) | Archive chests | Web seal, Crier, Closed-Stack cage | Restricted Section; Rare Books Room | — | Silverfish (M4) | none | The Closed-Stack cage key from the Head Archivist |
-| Carnival (F2–3) | Prize hampers | Crier, High-Striker cage, Ring key, Ticket (M3) | Last Act domes; Box Office | Busker's hat | **Conjuror's Rabbit (pilot)** | Prize Balloon | The High-Striker prize cage |
-| Supper (F4) | Silver canteens | Barb, Iced padlock, Tattle, cellar door | Top Table cloches; Plate Room (F3 only) | Feast plate | **Crumb Mouse (pilot)** | none | The cellar door cache (M2); the Top Table under cloches (M3) |
-| Gut (F4) | Sphincter caches, savings tins | Tenant's strongbox, Landlord's ledger safe | Stomach birdcages | Rent pot | Rent Snail (M4) | Swallowed bauble | The Landlord carrying the rent (Heavy Purse) |
-| Heart (F5) | Biscuit tins | Diary box, Nursery door | Night Nursery birdcages | Knitting basket | none (F5) | none | The Bedside Stand Viaticum |
-| Inverted Cathedral (M4) | Up-chained chests | Rood Screen gate | Rose Window lanterns | — | none | Rising Votive | TBD with roster |
+| Gaol (F1) | Confiscation tins | Cell padlocks, 1 Crier, Confession Box clasp, Hour lock (M3) | — | Dice pot | none (F1) | none | The keyring cell cache seen through a Grille |
+| Kennel (F1) | Poacher's creels | Pen box (M1), Huntsman's lodge chest | — | — | none | none | Old Ragged guarding Hound-Collar Mail (M1) |
+| Wake (F1 cond.) | Burial caskets | Will-Box, Viewing Door (Tattle) | — | — | none | none | The Will-Box in the Undertaker's reach |
+| Choir (F2–3) | Alms chests | Barb, Vestry door | Loft of Responses; Sacristy | — | **Pew Crab (pilot)** | Offertory Dish | The Vestry door cache (M2); the Sacristy treasury (M3) |
+| Archive (F2–3) | Archive chests | Web seal, Crier, Closed-Stack cage | The Chained Shelves; Rare Books Room | — | Silverfish (M4) | none | The Closed-Stack cage key from the Chief Archivist |
+| Carnival (F2–3) | Prize hampers | Crier, High-Striker cage, Ringmaster's Key, Ticket (M3) | Prop Room domes; Box Office | Busker's hat | **Conjuror's Rabbit (pilot)** | Fairground Balloon | The High-Striker prize cage |
+| Supper (F4) | Silver canteens | Barb, Frost-seized padlock, Tattle, cellar door | Top Table cloches; Plate Room (F3 only) | Feast plate | **Crumb Mouse (pilot)** | none | The cellar door cache (M2); the Top Table under cloches (M3) |
+| Gut (F4) | Sphincter caches, savings tins | Tenant's strongbox, Landlord's ledger safe | Craw birdcages | Rent pot | Rent Snail (M4) | Gut-Lodged bauble | The Landlord carrying the rent (Heavy Purse) |
+| Heart (F5) | Biscuit tins | Diary box, Nursery door | Airing Cupboard birdcages | Knitting basket | none (F5) | none | The Washstand Parting Fare |
+| Inverted Cathedral (M4) | Up-chained chests | Rood Screen door | Tracery Loft lanterns | — | none | Rising Votive | TBD with roster |
 
 **Signature loot moments (lead's call, after the check).** A moment is a guaranteed socket plus one bespoke asset and one cue, so art and audio can schedule it. Every theme has one from its first shipping wave; an M3 site upgrades it when its wave ships.
 
@@ -981,11 +982,11 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 | Kennel | Old Ragged's signature cache (unranked) | M1 | Every Kennel floor (guarded form) | Moss-wood cache open act ≤ 1.0 s | Theme foley tail |
 | Wake | The Will-Box (`keyTarget`, SR2) | M2 cond. | Where the Undertaker exists | Lid-lift open act ≤ 1.0 s | Theme foley tail |
 | Choir | M2: the Vestry door Keyed cache from the Deacon (SR2). M3: the Sacristy treasury (`strongroom`, SR4) | M2 / M3 | Where the Deacon exists; the Sacristy on F2–3 Strongroom floors | Vestry door reveal framing; the Sacristy open act | Theme foley tail |
-| Silk | The Closed-Stack cage from the Head Archivist (`keyTarget`, SR2) | M2 | Where the Head Archivist exists | Cage-shutter open act ≤ 1.0 s | Theme foley tail |
+| Archive | The Closed-Stack cage from the Chief Archivist (`keyTarget`, SR2) | M2 | Where the Chief Archivist exists | Cage-shutter open act ≤ 1.0 s | Theme foley tail |
 | Carnival | The High-Striker prize cage (`lockedCache`, SR2) | M2 | Once per Carnival floor with a cage lock | Threshold-glyph reveal framing | Theme foley tail |
 | Supper | M2: the cellar door cache from the Sommelier (SR2). M3: the Top Table under cloches (`wagerCage`, SR5) | M2 / M3 | Where the Sommelier exists; the Top Table where a Wager is placed | Cellar door reveal framing; the approved cloche lift | Theme foley tail |
 | Gut | The Landlord carrying the rent (`carrierMain` with the Heavy Purse) | M2 | Where the Landlord exists | Purse-badge reveal on the Landlord's plate | Coin-weight foley tail on the drop |
-| Heart | The Bedside Stand Viaticum (`viaticum`, unranked) | M2 | Every F5 | Three-drawer open act (4.10) | Theme foley tail |
+| Heart | The Washstand Parting Fare (`viaticum`, unranked) | M2 | Every F5 | Three-drawer open act (4.10) | Theme foley tail |
 | Inverted Cathedral | TBD with roster | M4 | — | — | — |
 
 **Inset forms (lead's call, after the check; CT15).** Every inset is waist-high on its wall-set bracket, at most half a wall square wide, no floor-level opening, opened state a shallow empty back.
@@ -994,12 +995,12 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 |---|---|---|
 | Gaol | A whitewashed wall tin with a stencilled tag | The Gaol Latch hatch |
 | Kennel | A strapped wicker wall creel on a peg rail | A sapling hang (Reserved) |
-| Wake | A small grave-goods niche box with a horizontal lid | The Wake Latch hatch; a coffin |
-| Choir | An oak alms niche with iron bands, on a dry wall | The Choir Latch hatch; the Offertory Plate |
-| Silk | An ink-lacquered wall pigeonhole box | The Silk book-lift Latch; a book or page |
+| Wake | A small burial niche box with a horizontal lid | The Wake Latch hatch; a coffin |
+| Choir | An oak alms niche with iron bands, on a dry wall | The Choir Latch hatch; the Offertory Dish |
+| Archive | An ink-lacquered wall pigeonhole box | The Archive book-lift Latch; a book or page |
 | Carnival | A gilt-tagged hamper hung on a wall bracket | The Drape (tent flap) |
 | Supper | An oxblood canteen in a wall niche | The Supper dumbwaiter Latch; the serving hatch |
-| Gut | A sphincter cache below half the Door aperture, pale dry rim, fixed static (no peristaltic idle within 1 square) | The Gut sphincter Door; the Lip Catch |
+| Gut | A sphincter cache below half the Door aperture, pale dry rim, fixed static (no peristaltic idle within 1 square) | The Gut sphincter Door; the Lip Clamp |
 | Heart | A biscuit tin on a small wall shelf | The Heart drawer-slide Latch |
 
 ### 5.3 Each theme
@@ -1009,7 +1010,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 - **Locks.**
   - Cell padlocks; one Crier after room 2 (SR3).
   - The Hour lock (M3, Portal). Its cell cache is read as **SR2, not SR3**: a question to the TL and LE owners.
-  - The **Confession Box** catch host, the one container with a speaking grille.
+  - The **Confession Box** clasp host, the one container with a speaking grille.
 - **Keybearer.** The Turnkey with the Jailer's keyring. It is also the classic Steal target.
 - **Elite cache.** A tin in the Keyring Office.
 - **Hairline.** Whitewash newer than the wall.
@@ -1023,12 +1024,12 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 - **Pen box** (M1).
 - **The Huntsman's lodge chest** (Keyed; Keybearer the Huntsman).
 - **Elite cache.** A creel in the Trophy Room.
-- **Signature cache.** Old Ragged's moss-wood cache, "Guards: Bellwarden's Mail".
+- **Signature cache.** Old Ragged's moss-wood cache, "Guards: Hound-Collar Mail".
 - **LP-21.** The Houndmaster's horn is never the notable, because horns are reserved for joiners.
 - **Windfall.** None. The fox (Later) needs a role-ID pass against the Whelp and Gaunt Hound.
 
 **The Endless Wake (F1, conditional).** Grave goods and bequests.
-- **Plain: the grave-goods casket** (LP-18). Knee-high, lid horizontal. **Full coffins never hold loot**, which removes the three-way coffin read (cover, lurker tell, loot).
+- **Plain: the burial casket** (LP-18). Knee-high, lid horizontal. **Full coffins never hold loot**, which removes the three-way coffin read (cover, lurker tell, loot).
 - **The Will-Box** (Keyed; the Undertaker).
 - **The Viewing Door** (Tattle).
 - **Elite cache.** In the Parlour.
@@ -1046,35 +1047,35 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 - **Strongroom: the Sacristy.**
 - **Hairline.** A dry patch above the water lines.
 - **Purse.** The Deacon first.
-- **Truant (M3 pilot; agreed, Q4): the Alms Crab.** **Re-specified after the check (lead's call, after the check):** a hermit crab whose shell is a barnacled bell-clapper, never a cup, box, plate or other vessel, with eye stalks and mouthparts for a face. It drags the standard sackcloth bundle behind it, larger than its body. Its eye stalks and legs stay out in every pose, Dormant included; its Dormant breathing idle plays on the eye stalks only. It scuttles the **dry causeway** to a Rathole at the foot of a dry plinth, well away from the water-line band where the Hairline dressing sits. Its route never enters water or a Grate or Sluice area, and it is never in an Organ Swells, Hymn or clapper room. The proposal's alms cup and wall crack were dropped: the cup sat in the alms chest's family and read as a container moving at idle (the boxed-lurker tell), and a crack at the water line read as a decoy Hairline. The role-ID gate adds Crab-against-alms-chest screenshots. (The name stays a placeholder for the naming pass.)
-- **Ebb (M4; agreed, Q4).** The Offertory Plate sinking ring by ring into the flagstones. **Not on water**: the water-square exception is dropped (CK13).
+- **Truant (M3 pilot; agreed, Q4): the Pew Crab.** **Re-specified after the check (lead's call, after the check):** a hermit crab whose shell is a barnacled bell-clapper, never a cup, box, plate or other vessel, with eye stalks and mouthparts for a face. It drags the standard sackcloth bundle behind it, larger than its body. Its eye stalks and legs stay out in every pose, Dormant included; its Dormant breathing idle plays on the eye stalks only. It scuttles the **dry causeway** to a Rathole at the foot of a dry plinth, well away from the water-line band where the Hairline dressing sits. Its route never enters water or a Grate or Sluice area, and it is never in an Organ Swells, Hymn or clapper room. The proposal's alms cup and wall crack were dropped: the cup sat in the alms chest's family and read as a container moving at idle (the boxed-lurker tell), and a crack at the water line read as a decoy Hairline. The role-ID gate adds Crab-against-alms-chest screenshots. (The placeholder name Alms Crab was renamed the Pew Crab by the naming pass, NP-22.)
+- **Ebb (M4; agreed, Q4).** The Offertory Dish sinking ring by ring into the flagstones. **Not on water**: the water-square exception is dropped (CK13).
 
-**The Silk Archive (F2–3).** Borrowers are shelved, and so are their belongings.
+**The Cobweb Archive (F2–3).** Borrowers are shelved, and so are their belongings.
 - **Plain: the archive chest.** Ink lacquer, never book-shaped, no paper skin.
-- **Catch host.** The card-catalogue tray.
-- **Locks.** Web seal (fire opens it), Crier, the Closed-Stack cage (Keyed; Head Archivist), Index Riddle (M3).
-- **Bait** (LP-16). The bait cache is an **ink-lacquered document case**, not EP's reading tray (RC2 tray ban; second Silk tray).
+- **Clasp host.** The card-catalogue tray.
+- **Locks.** Web seal (fire opens it), Crier, the Closed-Stack cage (Keyed; Chief Archivist), Index Riddle (M3).
+- **Bait** (LP-16). The bait cache is an **ink-lacquered document case**, not EP's reading tray (RC2 tray ban; second Archive tray).
 - **Boxed lurker.** The catalogue drawer (M3).
-- **Prizes.** Restricted Section (vellum-shuttered cages), Rare Books Room.
+- **Prizes.** The Chained Shelves (vellum-shuttered cages), Rare Books Room.
 - **Hairline.** Worn gilt at hand height.
 - **Three small boxes** (tray, drawer, chest) join TL's screenshot gate.
-- **Truant (M4): the Silverfish** hauling the standard sackcloth bundle to an arched Rathole at the foot of a stack plinth (never a crack; 4.7.3). It needs a role-ID pass against the Inkling minion and the Margin-Crawler. **Never a page** (the lurker's rest tell; agreed, Q4).
+- **Truant (M4): the Silverfish** hauling the standard sackcloth bundle to an arched Rathole at the foot of a stack plinth (never a crack; 4.7.3). It needs a role-ID pass against the Inkling swarmer and the Margin-Crawler. **Never a page** (the lurker's rest tell; agreed, Q4).
 
 **The Carnival of the Last Evening (F2–3).** Prizes nobody won and the night's takings.
 - **Plain: the prize hamper.** Wicker, gilt tag, bruise-purple ribbon.
-- **LP-17.** The Jack-in-the-Box catch sits on a prize hamper, not a costume trunk (a Furnishing).
-- **Locks.** Crier; the High-Striker cage (threshold glyph); the Ring key (Keyed; the Ringmaster); the Ticket lock (M3; coin buys access, never loot).
-- **Wager: the Last Act.** Glass domes, never barred, never padlocked.
+- **LP-17.** The Jack-in-the-Box clasp sits on a prize hamper, not a costume trunk (a Furnishing).
+- **Locks.** Crier; the High-Striker cage (threshold glyph); the Ringmaster's Key (Keyed; the Ringmaster); the Ticket lock (M3; coin buys access, never loot).
+- **Wager: the Prop Room.** Glass domes, never barred, never padlocked.
 - **Strongroom: the Box Office.**
 - **Activity: the busker's hat** (never a bucket).
 - **Hairline.** A poster pasted over a seam.
 - **Truant (M3 pilot; agreed, Q4): the Conjuror's Rabbit.** A white rabbit with a ticket punched through one ear, dragging the standard unstriped sackcloth bundle (stripes are the Carnival's faction motif) to a Rathole at the foot of a wall, rimmed with sawdust. Never a painted flat, which is the secret cache's panel (CK22), and never cloth: the proposal's tent-flap gap was the Carnival's Drape Portal skin (corrected after the check). Its route avoids oil, fire and Keg footprints. Never in a Pit Breathes, Turning Ring or Wheel of Knives room. It answers the client's Mario-rabbit reference.
-- **Ebb (M4; agreed, Q4).** The Prize Balloon on a sandbag weight, lifting a notch per tick. A hit pops it and the bundle drops (never destroyed).
+- **Ebb (M4; agreed, Q4).** The Fairground Balloon on a sandbag weight, lifting a notch per tick. A hit pops it and the bundle drops (never destroyed).
 
 **The Long Supper (F4; F3–4 from M3).** The household plate laid by.
-- **Plain: the silver canteen.** Oxblood lacquer. **No frost** (frost on a lock is the Iced padlock's alone).
+- **Plain: the silver canteen.** Oxblood lacquer. **No frost** (frost on a lock is the Frost-seized padlock's alone).
 - **LP-19.** The Taster's Plate tell is one tarnished fork in a canteen's velvet.
-- **Locks.** Barb (Poisoned), Iced padlock, Tattle, the cellar door (Keyed; the Sommelier), Place-Setting Riddle (M3).
+- **Locks.** Barb (Poisoned), Frost-seized padlock, Tattle, the cellar door (Keyed; the Sommelier), Place-Setting Riddle (M3).
 - **Wager: the Top Table** (approved cloches).
 - **Strongroom: the Plate Room** (F3 only).
 - **Activity: the uncovered feast plate.**
@@ -1082,26 +1083,26 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 - **Contested skins (agreed, Q4).** The client's dessert trolley (the serving trolley is a rules piece). **The cloche** (the Top Table Wager's lift). **The dumbwaiter and serving hatch** (the Dumbwaiter Drop trap and the Courses Stir emitter) (CK2).
 
 **The Gut of the World (F4).** The tenants' savings, and what the gut swallowed.
-- **Plain: sphincter caches** (wall) **with a pale dry rim** (LP-20; lips and drip lines are the Lip Catch's). **Savings tins.** No chest-shaped loot, because rent chests are Furnishings.
+- **Plain: sphincter caches** (wall) **with a pale dry rim** (LP-20; lips and drip lines are the Lip Clamp's). **Savings tins.** No chest-shaped loot, because rent chests are Furnishings.
 - **Keyed.** The Tenant's strongbox. **Keybearer cache.** The Landlord's ledger safe (low, iron).
 - **Bait** (LP-16). A tenant's sewing basket, not a third strongbox.
 - **Boxed lurker.** The swallowed strongbox (M3).
-- **Wager: the Stomach** (swallowed birdcages).
+- **Wager: the Craw** (swallowed birdcages).
 - **Activity: the rent pot.**
 - **Purse: the Landlord** ("Carries: n coin" is the rent).
 - **Truant (M4): the Rent Snail** (hop 1, so its C comes from the catchability proof).
-- **Ebb (M4; agreed, Q4).** The swallowed bauble absorbed ring by ring into a lining fold. Never in a Brim, Peristalsis or Acid Tide room.
+- **Ebb (M4; agreed, Q4).** The Gut-Lodged bauble absorbed ring by ring into a lining fold. Never in a Brim, Peristalsis or Acid Tide room.
 
 **The Dreamer's Heart (F5).** What a sleeper keeps close. All F5 rules apply.
 - **Plain: the biscuit tin** (not the toy chest, hatbox or blocks; no bedsheet cloth).
 - **Diary box** (Plain diary lock). **The Nursery door** (Keyed plus Tattle).
-- **Viaticum host: the Bedside Stand** (LP-14; **agreed, Q5**). A unit-scale nightstand with three short drawers on legs, one square, below unit shoulder height (4.10), which opens the width-3 offer UI. It is the second named exception to IR 4.18, because an ordinary tin would lie about what clicking it does (RC1). Its silhouette hosts nothing else (4.10).
-- **Wager: the Night Nursery** (birdcages, never mobiles).
+- **Parting Fare host: the Washstand** (LP-14; **agreed, Q5**). A unit-scale nightstand with three short drawers on legs, one square, below unit shoulder height (4.10), which opens the width-3 offer UI. It is the second named exception to IR 4.18, because an ordinary tin would lie about what clicking it does (RC1). Its silhouette hosts nothing else (4.10).
+- **Wager: the Airing Cupboard** (birdcages, never mobiles).
 - **Activity: the knitting basket.**
 - **Windfall.** None **(agreed, Q4)**. The runaway toy is contested: toys are pieces, and a wind-up toy is mindless (keyhole).
 
 **The Inverted Cathedral (M4; stub).**
-- Up-chained chests, the Rood Screen gate, Rose Window lanterns.
+- Up-chained chests, the Rood Screen door, Tracery Loft lanterns.
 - The Rising Votive Ebb, never near a rose-window Void.
 - Blocked by V14 until its roster exists.
 
@@ -1118,7 +1119,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
   | Next-hop outline | A solid pawprint outline on the 1–2 landing squares | motion | telegraph tier, **only while awake** | Never the due-square hatch, the Spoor tally, the trap-link dash or EP's fall-back chevron |
   | Rathole | The arched opening (4.7.3) plus a front-square half-rim floor decal | base | floor decal | Drawn whatever the wall's cutaway state |
   | Count digit | The digit plus a clock-pip on the floor ring; **hollow ring while Dormant, solid while awake** | danger | telegraph tier while awake | State never depends on hue (HZ: a digit plus a clock-pip for countdowns) |
-  | "Held" badge | A small bar across the clock-pip, with its reason on hover | danger | telegraph | Surprised, Alone, slip used |
+  | "Paused" badge | A small bar across the clock-pip, with its reason on hover | danger | telegraph | Surprised, Alone, slip used |
   | Wall-set mark | A solid base bracket on the wall face, projected as a solid bracket onto the open square | base | floor decal | Never a dashed rim |
   | Twin-lid mark | As CT8 | base | container | — |
 
@@ -1132,7 +1133,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
     | dormant | idle until it wakes | breathing idle (the Crab: eye stalks only) |
     | stand | round-1 Dream step | rises, bundle shouldered |
     | hop | each hop | 1–2 squares along the trail |
-    | held | a held step or a block | flinch toward the blocker or the cause; the "held" badge |
+    | held | a held step or a block | flinch toward the blocker or the cause; the "paused" badge |
     | wait-at-hole | at the Rathole front square while C > 0 (safety case) | alert loop, no travel |
     | leave-by-Rathole | got away through the Rathole | ducks through the arch, bundle crossing the rim |
     | fade-with-bundle | got away in place, or the party fled | animal and bundle dim together; no pile |
@@ -1158,7 +1159,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
   | Wave | Per unit | Units | Total |
   |---|---|---|---|
   | M1 | Kennel creel (2 variants × closed/open = 4), pen box (2), signature cache (2) | — | about 8 |
-  | M2 | Per theme: Plain family 2 variants × closed/open (4), inset variant closed/open (2), named containers (about 3), activity container (1), signature-moment asset (1), foley tail (1): about 12 | 8 core themes | about 96, plus the Bedside Stand (closed, open act, opened = 3) and the Wake (about 12, last in M2, conditional) |
+  | M2 | Per theme: Plain family 2 variants × closed/open (4), inset variant closed/open (2), named containers (about 3), activity container (1), signature-moment asset (1), foley tail (1): about 12 | 8 core themes | about 96, plus the Washstand (closed, open act, opened = 3) and the Wake (about 12, last in M2, conditional) |
   | M3 | Per Truant skin: 9 acts, bundle, Rathole dressing, 6 cues: about 17 | 3 pilot skins | about 51, plus Wager cages and Twin Coffers |
   | M4 | Silverfish and Rent Snail (about 17 each), Ebb skins, the Cathedral family | — | about 60 |
 
@@ -1187,7 +1188,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 | Chained Key (key on a wall hook, Unhook by Stealth) | Held M3 candidate | M3? | — |
 | Crannies; Tip-offs | Later (F3–F4 starvation; FOMO for low-Perception solo heroes). Tip-offs' objections answered by segment 10's class-blind, notables-only Lodestring (exploration and information design 4.6.5; XI-23, M3); Tip-offs stay Later | Later | — |
 | Trove | Later | Later | — |
-| Tattler, Shepherded escort, Herald halt | Later | Later | — |
+| Tattler, Shepherded escort, Herald wait | Later | Later | — |
 | Hawker; Lost Property | Segment 8 / camp hooks | hook | — |
 | Tribute (Cowed groups pay salvage) | Not adopted: reopens agreed ENM 15.7 Q3. Only if a `CowRate` report shows Cow is under-used | Later | — |
 | Grapnel; Doorstop | Later | Later | — |
@@ -1198,9 +1199,9 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
 **Adopted in full.**
 
 - **Uncorked** (LP-27). A carried consumable notable has a data use threshold, such as the HP fraction at which a self-heal fires. While the carrier is at or below it, its existing glint shows an "uncorked" state. This is a state read, not a new mark and not an intent read. Hover: "Uncorked: may use its <tier word> <noun>". If used in sight, LE 8.2 already gives n − 1. **Its look (lead's call, after the check):** a shape sub-state of the glint (the glint glyph with an open stopper notch), never a hue change. It joins the pattern registry, the greyscale and colour-blind passes, and counts in ENM's glints-per-screen gate.
-- **Treasure field by source** (LP-28; cross-document comparison 2026-11-23, CC-115). Counts only. It gives routing information (is Sound the wall worth 6 ticks?) without locations.
+- **Treasure field by source** (LP-28; cross-document comparison 2026-11-23, CC-115). Counts only. It gives routing information (is Tap the wall worth 6 ticks?) without locations.
 - **"Got away" line** (LP-29). Profile-side, at run end only, listing the tier word of each Windfall that got away, never its item family or identity (matching 4.5; corrected after the check). Kept apart from IR's "What the dream kept".
-- **Offer pacing** (LP-30). At most 2 offer-form field sources per floor among Wager, Twin Coffer and Viaticum, plus the width-2 Windfall offer if it ever ships. Report `OffersPerFloor`. **Draw-free trim (lead's call, after the check),** checked by V15g: the Viaticum is never dropped; the Twin Coffer is dropped first (it reverts to a plain container keeping its Yours identity; Wayward becomes a dreamed option); then the Wager (LE 6.9 item 7's revert). This runs in LootBind step 1, with the other item-7 reverts.
+- **Offer pacing** (LP-30). At most 2 offer-form field sources per floor among Wager, Twin Coffer and Parting Fare, plus the width-2 Windfall offer if it ever ships. Report `OffersPerFloor`. **Draw-free trim (lead's call, after the check),** checked by V15g: the Parting Fare is never dropped; the Twin Coffer is dropped first (it reverts to a plain container keeping its Yours identity; Windblown becomes a dreamed option); then the Wager (LE 6.9 item 7's revert). This runs in LootBind step 1, with the other item-7 reverts.
 - **Auto-close, click table, inset containers, Proprietor tags, Glean:** 4.5–4.6.
 
 ---
@@ -1307,7 +1308,7 @@ Events: LootBindRemap{reason}, LootBindUnplaceable{socketId}, WindfallMoved{from
   SummaryAutoClosed{containerIds[], coin, sundries}, GleanOpened{ids[]}
 ```
 
-**Client keys, not tuning (new lead's call):** `cDefault` 3 and `cSurprised` 4 (Q1); `loot.windfallParties` = {3, 4}, gaining 1 only when the solo arm passes, and `loot.windfallCSolo` 4 (Q2); `loot.windfallCSoloSurprised` 5 is a lead's call after the check (the Stir precedent), not a client key; the Windfall wave M3 and the Ebb wave M4 (Q3); the pilot skin list per theme (Q4); the Bedside Stand as the Viaticum host (Q5). The draft's `loot.windfallMinParty 3` is replaced by the `windfallParties` set, so duo can stay held while solo opens. Every other number is tuning.
+**Client keys, not tuning (new lead's call):** `cDefault` 3 and `cSurprised` 4 (Q1); `loot.windfallParties` = {3, 4}, gaining 1 only when the solo arm passes, and `loot.windfallCSolo` 4 (Q2); `loot.windfallCSoloSurprised` 5 is a lead's call after the check (the Stir precedent), not a client key; the Windfall wave M3 and the Ebb wave M4 (Q3); the pilot skin list per theme (Q4); the Washstand as the Parting Fare host (Q5). The draft's `loot.windfallMinParty 3` is replaced by the `windfallParties` set, so duo can stay held while solo opens. Every other number is tuning.
 
 ### 9.2 V15 `LootSources` (change LP-31; beside V13 and V14 in RS 11.2 and LE 10.2)
 
@@ -1321,7 +1322,7 @@ Split like V13 and run at the shared assertion point (AP2) after V13g and `V16g.
   - `ContainerFamilyDistinct` (with V7).
   - `ContainerArtBlind`.
   - `ProprietorNounBan`, `ProprietorNounMatchesSkin` and lurker parity; every theme has a `generic` Proprietor record.
-  - `TruantHasFace`; Truants only in F2–F4 themes; no Truant, bundle or Rathole uses its theme's faction motif or minion palette.
+  - `TruantHasFace`; Truants only in F2–F4 themes; no Truant, bundle or Rathole uses its theme's faction motif or swarmer palette.
   - Rathole never a trap, Stir or Wager prop, a Portal skin or a Hairline dressing, and always the arched cross-theme form (`WindfallSkinLegal`).
   - Insets never share a silhouette with the theme's Latch, Door or Hairline skins (CT15, in `ContainerFamilyDistinct`).
   - `BedsideStandOnly` (new lead's call, 4.10).
@@ -1334,7 +1335,7 @@ Split like V13 and run at the shared assertion point (AP2) after V13g and `V16g.
   - Offer pacing: ≤ 2 offer-form field sources per floor after the trim (LP-30).
   - `MainPathDetour`; `SideRoomPreview`.
   - Cap and `EmptyDeadEndRate` 0.
-  - Due on the first HE-7. Viaticum room. Signature cache rules. HE Plain.
+  - Due on the first HE-7. Parting Fare room. Signature cache rules. HE Plain.
   - Caps: 3 notables per encounter including the Windfall; carried caps; ≥ 1 Steal target **after step 8**; F5 locks and fillers.
   - Filters (a)–(g) asserted **after step 8**.
   - **Windfall:**
@@ -1344,7 +1345,7 @@ Split like V13 and run at the shared assertion point (AP2) after V13g and `V16g.
     - `V10.OneClockPerRoom` (V10's check, run at V15g; SV-20), run after segment 8;
     - `WindfallRouteSafe` (route legality; route length exactly L = 4, stored as `routeLength`);
     - `WindfallCatchable` (4.7.8's algorithm for each class at floor level; home ≥ 4 path squares from, and not within 1 move of, the entry Portal);
-    - `WindfallOffGuarantees` (the Due, DH, Viaticum, keys, secrets and lean band unchanged with the Windfall forced to escape);
+    - `WindfallOffGuarantees` (the Due, DH, Parting Fare, keys, secrets and lean band unchanged with the Windfall forced to escape);
     - `WindfallBudgetInside` (deck VP and Ledger A unchanged).
   - `GleanNoLeak`.
   - The `windfall` grandchild's draw count (4) is equal on every floor, door, party size and theme (kept as a citation; V19g's DrawLedger calls it at every stage end; seeds and validation design 5.2).
@@ -1413,10 +1414,10 @@ Split like V13 and run at the shared assertion point (AP2) after V13g and `V16g.
 | Wave | 7c content |
 |---|---|
 | **M1** | F1 role-table subset (Kennel), LootBind square legality, Plain containers and the pen box, the Due on the first HE-7, HE-3/7, the coin floor, ≤ 1 carried notable, Old Ragged's signature cache, V15 M1 rows (itemised by the 7c owner, a pending request; 9.2) |
-| **M2** | Full socket table and ranks; all LootBind rules and remaps; Keybearer and key target; secrets and Alcoves; bait-cache placement with the Mousetrap (EP 6.8.1; moved from M3 after the check); the Heavy Purse; Steal targets; the Viaticum lair-room binding and the Bedside Stand (agreed, Q5); tier marks, Proprietor tags and the Treasure field by source (cross-document comparison 2026-11-23, CC-115); the numbered click table and auto-close; optional Glean; inset containers; the container count and cap; the 7c clock line (after the walker re-baseline); catalogue CT1–CT15, the inset forms and the signature loot moments, and LP-15 to LP-25; Uncorked (if agreed); V15s and V15g; M2 reports |
-| **M3** | **Windfall Truant pilot** (Rabbit, Crumb Mouse, Alms Crab; party ≥ 3; agreed, Q1, Q2, Q4); the solo arm and, if it passes, solo at C = 4; Wager, Dare, Strongroom, boxed lurker and Twin Coffer placement; offer pacing; the "Got away" line; held candidates Blocked Hairline and Chained Key if the clock allows |
-| **M4** | Ebb (forking only) and the exploration Truant (agreed, Q3); remaining Truant skins (Silverfish, Rent Snail) and Ebb skins; the width-2 offer lever; the Void-exit Ebb at Nightmare tier; the Inverted Cathedral family. **No F1 teaching Ebb** (agreed, Q4) |
-| **Later** | Trove, Crannies, Tip-offs, Tattler, Shepherded, Herald halt, Lost Property, Tribute, Grapnel, Doorstop; duo Windfalls (held, Q2); F1/F5 Windfall skins only if a new client decision opens those floors |
+| **M2** | Full socket table and ranks; all LootBind rules and remaps; Keybearer and key target; secrets and Alcoves; bait-cache placement with the Baited Room (EP 6.8.1; moved from M3 after the check); the Heavy Purse; Steal targets; the Parting Fare lair-room binding and the Washstand (agreed, Q5); tier marks, Proprietor tags and the Treasure field by source (cross-document comparison 2026-11-23, CC-115); the numbered click table and auto-close; optional Glean; inset containers; the container count and cap; the 7c clock line (after the walker re-baseline); catalogue CT1–CT15, the inset forms and the signature loot moments, and LP-15 to LP-25; Uncorked (if agreed); V15s and V15g; M2 reports |
+| **M3** | **Windfall Truant pilot** (Rabbit, Crumb Mouse, Pew Crab; party ≥ 3; agreed, Q1, Q2, Q4); the solo arm and, if it passes, solo at C = 4; Wager, Dare, Strongroom, boxed lurker and Twin Coffer placement; offer pacing; the "Got away" line; held candidates Blocked Hairline and Chained Key if the clock allows |
+| **M4** | Ebb (forking only) and the exploration Truant (agreed, Q3); remaining Truant skins (Silverfish, Rent Snail) and Ebb skins; the width-2 offer lever; the Void-exit Ebb at Peril tier; the Inverted Cathedral family. **No F1 teaching Ebb** (agreed, Q4) |
+| **Later** | Trove, Crannies, Tip-offs, Tattler, Shepherded, Herald wait, Lost Property, Tribute, Grapnel, Doorstop; duo Windfalls (held, Q2); F1/F5 Windfall skins only if a new client decision opens those floors |
 
 ---
 
@@ -1426,12 +1427,12 @@ Split like V13 and run at the shared assertion point (AP2) after V13g and `V16g.
 |---|---|
 | **7c** | The source taxonomy; SocketPlan and the role table; LootBind binding and remaps; the channel landings; signposting rules, Proprietor tags and the Treasure field wording (cross-document comparison 2026-11-23, CC-115); the click table, auto-close and Glean; the container count and cap; the 7c clock line; container art grammar and the per-theme catalogue; the Windfall (all of it); V15 and the 7c reports |
 | **7a (approved)** | Budgets, decks, tiers, ledgers, coin. Hooks: step 8, filters (f1), (f2) and (g), the new rows (the `windfall` socket row and LE 6.10 item 1's draw-table row), the generation order (LE 6.10 item 4), and the latent step-6 issue for secrets and the quota (LP-1) |
-| **7b (approved)** | Identities and bundles. Hooks: the Bedside Stand as IR 4.18's second named exception (LP-14); Proprietor data on `theme.loot` (LP-13) |
+| **7b (approved)** | Identities and bundles. Hooks: the Washstand as IR 4.18's second named exception (LP-14); Proprietor data on `theme.loot` (LP-13) |
 | **Enemies owner** | The Windfall unit row; the Later runner pulled forward; Steal on a Truant; the combat-end condition and its per-sub-step check; the Engaged wake trigger; the Uncorked state; LP-21 |
 | **Hazards owner** | Sub-step 3b and the clock list (LP-4) |
 | **Traps owner** | Auto-close and Glean summary wording; the Hour-lock SR reading; fewer locks as a design-time tuning lever when caps bind; LP-17 to LP-20 |
 | **Items owner** | `gotAway`; the `windfall(unitId)` location and its transitions (ITEMS 18.1, 19.2); auto-close; confirm the action cost of a Plain open in combat; the "guarded" greyed reason |
-| **FL owner** | Confirm the Viaticum room; inset sockets; the walker re-baseline |
+| **FL owner** | Confirm the Parting Fare room; inset sockets; the walker re-baseline |
 | **Segment 3 (ROOM)** | Alcove set pieces |
 | **Segment 5 (TL)** | Fewer locks (design-time lever) |
 | **RS owner** | RC1, RC2, RC5 and RC7 entries, the Windfall timbre row and the role-ID gate rows; the Heart container notes; skin vetting |
@@ -1470,13 +1471,13 @@ Applied on 2026-11-22, when the client approved this document. **This document e
 
 **Readings recorded inside this design (no approved text changes; each goes to its owner for confirmation):**
 - Gb carriers are SR1 (LE 6.9 item 1; LE owner).
-- The Viaticum sits in the F5 lair room: LE 6.11 item 5's fallback is the real rule, because nothing lies between L and F on F5 (FL and ENM owners; LE 18.2).
+- The Parting Fare sits in the F5 lair room: LE 6.11 item 5's fallback is the real rule, because nothing lies between L and F on F5 (FL and ENM owners; LE 18.2).
 - The Gaol Hour-lock cell cache is SR2, not SR3 (TL and LE owners).
 - "Nothing timed in M2" holds: the Windfall is M3 (ROOM 0.1 item 5, ROOM Q5, TR-27, HZ-12; cross-document comparison 2026-11-23, CC-113).
 - The latent step-6 shuffle issue for secret filter (b) and the quota card is pre-existing (LE 6.9 item 2; LE owner).
 - "Lair cache" in LE 6.9 item 1 and LE 6.14 means the *elite room's* SR4 cache; the main-path lair's SR0 container is `lairContainer` (told plainly).
 - **(Added after the check.)** "The lair of every boss" in IR 4.13 and 4.18 means the boss's **arena**, not FL 6.5's L room, which 7c uses for `lairContainer` (IR owner and segment 9; confirmed by segment 9, boss rooms design 4.11.1; BR-27).
-- **(Added after the check.)** The bait cache and its placement are M2, with the Mousetrap (EP 6.8.1, LE 6.9 item 6, LE-20); the proposal's M3 wave was an error, not a change.
+- **(Added after the check.)** The bait cache and its placement are M2, with the Baited Room (EP 6.8.1, LE 6.9 item 6, LE-20); the proposal's M3 wave was an error, not a change.
 
 | # | Document / section (current status) | Change | Flag | Approval | Wave |
 |---|---|---|---|---|---|
@@ -1486,28 +1487,28 @@ Applied on 2026-11-22, when the client approved this document. **This document e
 | **LP-4** | HZ 6.2.2 clock list; HZ 6.3 sub-step order (3b) and the slip precedent extended (slip once; HZ 6.3 Turn and 6.3.4 `holdSlip`); C 5.4. Reads **ROOM 0.1 item 5, ROOM Q5, TR-27 (agreed)** and HZ-12 (no reopening) (cross-document comparison 2026-11-23, CC-113) | Windfall clock and hop; early arrival waits (4.7.4) | ⚑ **Settled** (HZ 6.2.2 "never waived", read and kept: the Windfall is the room's one clock); ⚑ **Agreed** (ROOM Q5, read) | Lead's call; HZ owner applies | M3 |
 | **LP-5** | MAIN 4.3 combat-end sentence (as changed by M-3); ENM 14.6 end-of-fight rule; ENM 15.8 (a live Windfall in the fight's room is nabbed at combat end); ENM 15.6 "Party flees" bullet (it gets away) | Fight-end and flee rules; end ordering, with the combat-end check after each Dream sub-step (4.7.4) **(new lead's call:** exact sections named; the proposal said "ENM combat-end condition" and "party-flee paragraph"**)** | ⚑ **Decided** (MAIN 4.3, read: a Windfall is never a hostile, so the sentence holds as written); ⚑ **Agreed** (ENM 15.6 "drop on death, rout or yield", ENM 15.8 "one per fight") (added after the check) | Lead's call; enemies owner applies | M3 |
 | **LP-6** | ENM 15.5 / S-5 (agreed); STAT 7.1 Stealth row; LE-16; LE 8.3 `StealCoinShare`; TL 6.22 (keyed hash with its `die` index); ITEMS 18.1 (the Steal transition from `windfall`) | Steal on a Dormant Truant: card only, coin spills and is guarded until the group resolves, the room's one try (`stealTryUsed`), fixed passive (4.7.8) | ⚑ **Agreed** (ENM 15.5, S-5); ⚑ **Settled** (STAT 7.1, LE-16); **Q1** | **Client (Q1, agreed 2026-11-22: "Shade Steal while Dormant")**, with this document; enemies and items owners apply | M3 |
-| **LP-7** | RS 7.4 RC1 (the Truant's closed act table), RC2 (Truant grammar: faced small animal, one cross-theme sackcloth bundle, no faction motif), RC3 (read), RC5 (Windfall mark, scurry trail, next-hop outline, Rathole form and floor decal, countdown ring and held badge, with shapes, slots and tiers), RC7 (a Windfall timbre row and 6 reserved cues; LE 6.15 sentence); RS 7.4 role-ID gate rows (extended after the check) | Windfall readability (4.7.1, 4.7.3, 6) | ⚑ **Agreed** (RS 7.4, RS Q3); **Q4** | **Client (Q4, agreed 2026-11-22)** for the skins; RS owner applies the charter entries (RC7 cues a **request**) | M3 |
+| **LP-7** | RS 7.4 RC1 (the Truant's closed act table), RC2 (Truant grammar: faced small animal, one cross-theme sackcloth bundle, no faction motif), RC3 (read), RC5 (Windfall mark, scurry trail, next-hop outline, Rathole form and floor decal, countdown ring and paused badge, with shapes, slots and tiers), RC7 (a Windfall timbre row and 6 reserved cues; LE 6.15 sentence); RS 7.4 role-ID gate rows (extended after the check) | Windfall readability (4.7.1, 4.7.3, 6) | ⚑ **Agreed** (RS 7.4, RS Q3); **Q4** | **Client (Q4, agreed 2026-11-22)** for the skins; RS owner applies the charter entries (RC7 cues a **request**) | M3 |
 | LP-8 | FL 11.4 and CMP 7.4 ("N clicks by type"); ITEMS 7, 8.1; TL 6.13 summary wording | Click table; auto-close quiet summaries, with party-wide fit, pause on focus and the settings toggle (4.6) | ⚑ **Agreed** (CMP 7.4, CMP Q2); ⚑ **Settled** (ITEMS 8.1) (added after the check) | Lead's call; items, traps owners apply | M2 |
 | LP-9 | TL 6.13 "Opening gives one loot summary"; ITEMS 8.1 (one screen kept) | Glean, optional, with the no-leak rule (4.6) | ⚑ **Settled** (ITEMS 8.1, TL 6.13) (added after the check) | Lead's call; traps, items owners apply | M2 |
 | LP-10 | FL 6.10 (new line beside TL-38, EP-33, HZ-27); reads **CMP 7.4 (agreed, CMP Q2)** | 7c clock line net ≤ 0; walker re-baseline; cut order (4.6) | ⚑ **Agreed** (CMP 7.4, read) | Lead's call; FL owner applies | M2 / M3 |
 | LP-11 | LE 0.1 click contract (read); FL 13 container sockets; FL `EmptyDeadEndRate` (Alcove set-piece default, segment 3 ask) | One card container per room (`cardEligible`), ≤ 1 coin-only, the two-phase cap and merges, the role table as data, the walk-line definition and binding, preview (4.2) | — | Lead's call; FL owner; segment 3 (request) | M2 |
 | LP-12 | FL 11.1 container sockets; TL 6.13 host forms; RC5 base mark (the wall-set mark). **Reaffirms** ROOM 6.3.4 and 13 "Furnishings never hold loot" (no change) | Inset containers (4.3) | ⚑ **Settled** (ROOM, read) | Lead's call; FL, traps and RS owners apply | M2 |
 | LP-13 | IR 5.1 `theme.loot` (proprietors); IR 5.3; reads IR 4.18, IR-15, RC9 | Proprietor tags; selection order; the noun from the skin; noun ban; lurker parity (4.5) | ⚑ **Agreed** (IR 5.1 `theme.loot`, IR Q4) (added after the check) | Lead's call; IR owner applies | M2 |
-| **LP-14** | IR 4.18 (second named exception); IR 4.10; LE 6.15 (Viaticum line); RC5 registry. **Reading only** of **LE 6.11 item 5 (agreed, LE Q1)** for the room | Bedside Stand Viaticum host; its silhouette hosts nothing else (4.10) | ⚑ **Agreed** (LE 6.11 item 5, read; IR 4.18 "one named exception", from IR Q5); **Q5** | **Client (Q5, agreed 2026-11-22)**, with this document; IR owner applies; FL and ENM owners confirm the room | M2 |
+| **LP-14** | IR 4.18 (second named exception); IR 4.10; LE 6.15 (Parting Fare line); RC5 registry. **Reading only** of **LE 6.11 item 5 (agreed, LE Q1)** for the room | Washstand Parting Fare host; its silhouette hosts nothing else (4.10) | ⚑ **Agreed** (LE 6.11 item 5, read; IR 4.18 "one named exception", from IR Q5); **Q5** | **Client (Q5, agreed 2026-11-22)**, with this document; IR owner applies; FL and ENM owners confirm the room | M2 |
 | LP-15 | ROOM 8.1 kit silhouettes; TL 8 and V7; EP 6.8.1 (generalised); RS 7.4 role-ID gate rows; IR 4.18 (read); LE 6.15 (no world rarity read) | CT1 `ContainerFamilyDistinct` (with the rows added after the check); CT2 `ContainerArtBlind`; CT15 insets never read as Portals (5.1) | ⚑ **Agreed** (RS 7.4 gates, RS Q3) | Lead's call; RS owner applies the gate rows | M2 |
-| LP-16 | EP 7.6 (S3 Mousetrap), EP 7.9 (GU4), EP 6.8.1 | Bait re-skins: Silk document case, Gut sewing basket (5.3) | — | Lead's call; EP owner applies (request) | M2 |
+| LP-16 | EP 7.6 (S3 Baited Room), EP 7.9 (GU4), EP 6.8.1 | Bait re-skins: Archive document case, Gut sewing basket (5.3) | — | Lead's call; EP owner applies (request) | M2 |
 | LP-17 | TL 7.7 Jack-in-the-Box row | Host is a prize hamper (5.3) | — | Lead's call; TL owner applies (request) | M2 |
-| LP-18 | TL 7.4 opening paragraph; ROOM 7.4 | Wake grave-goods caskets; full coffins never loot (5.3) | — | Lead's call; TL owner applies (request) | M2 cond. |
+| LP-18 | TL 7.4 opening paragraph; ROOM 7.4 | Wake burial caskets; full coffins never loot (5.3) | — | Lead's call; TL owner applies (request) | M2 cond. |
 | LP-19 | TL 7.8 Taster's Plate row (reading) | Tell on a canteen's fork (5.3) | — | Lead's call; TL owner applies (request) | M2 |
-| LP-20 | TL 7.9 Reserved list and Lip Catch row (reading) | Pale dry rim on Plain sphincter caches (5.3) | — | Lead's call; TL owner applies (request) | M2 |
+| LP-20 | TL 7.9 Reserved list and Lip Clamp row (reading) | Pale dry rim on Plain sphincter caches (5.3) | — | Lead's call; TL owner applies (request) | M2 |
 | LP-21 | ENM 15.2 Leader row ("the banner or horn may be the item"), narrowed; reads **RS 8.4 (agreed, RS Q4 catalogue)** | Kennel horn never the notable (5.3) | ⚑ **Agreed** (RS 8.4, read) | Lead's call; enemies owner applies | M2 |
 | LP-22 | FL 7.4 (Wake precedent extended), FL 9.2 Hairline (read) | Per-theme Hairline dressing (CT13) | — | Lead's call | M2 optional art |
 | LP-23 | IR 6.3 (read); LE 6.15 audio; TL 8 theme-tail precedent | Global open cue plus theme foley tail (CT12) | — | Lead's call | M2 |
-| LP-24 | RS 9.3; RC1 | Keepsakes never use container, bait, Windfall or Bedside Stand silhouettes (5.1) | ⚑ **Agreed** (RS 7.4 RC1, read) | Lead's call; RS owner applies | M2 |
+| LP-24 | RS 9.3; RC1 | Souvenirs never use container, bait, Windfall or Washstand silhouettes (5.1) | ⚑ **Agreed** (RS 7.4 RC1, read) | Lead's call; RS owner applies | M2 |
 | LP-25 | New 7c rule; reads **RS 8.6 (agreed, RS Q4 catalogue)** | Containers and Truants on plain walkable squares only (CT14, 4.3) | ⚑ **Agreed** (RS 8.6, read) | Lead's call | M2 |
 | LP-26 | TL 6.13 Twin Coffer row; LE 8.4; RC5 | Twin-lid kind mark (CT8) | — | Lead's call; traps owner applies | M3 |
 | LP-27 | ENM 15.2, 15.4; RC5 | Uncorked glint state (7) | — | Lead's call; enemies owner applies (request) | M2 (if agreed) |
-| LP-28 | LE 8.2, 6.15 | Treasure strip by source (counts on hover) (4.5) | — | Lead's call; LE owner applies | M2 |
+| LP-28 | LE 8.2, 6.15 | Treasure field by source (counts on hover) (4.5) | — | Lead's call; LE owner applies | M2 |
 | LP-29 | LE 8.2 Grave Goods; IR 4.8 (read) | "Got away" run-record line; "Windfalls nabbed k of m" (7) | — | Lead's call | M3 |
 | LP-30 | TL 6.15, LE 8.4, LE 6.11; LE 6.9 item 7 (the Twin Coffer and Wager reverts used by the trim) | Offer pacing ≤ 2 per floor, with a draw-free trim (7) | — | Lead's call | M3 |
 | LP-31 | RS 11.2 validator table; LE 10.2 (beside V13, V14) | V15 `LootSources` (9.2) | — | Lead's call; RS owner applies | M1–M3 |
@@ -1532,8 +1533,8 @@ The client approved this document as a whole on 2026-11-22, including every lead
 - **Q1, fleeting loot form and budget (LP-1 to LP-7):** option A. The Windfall Truant in M3, in combat, F2–F4, about 1.2–1.4 per run, holding a real card from the fixed deck (from its host fight's carried allotment), lost visibly if it gets away, nabbed by any action or by winning the fight; pre-placed and visible at reveal (never spawned); C = 3; route outlined a turn ahead; slip once when blocked; Shade Steal while Dormant (4.7). Rejected: B, coin and sundry only; C, extra value; D, none.
 - **Q2, party size (LP-3):** option A. Pilot at party ≥ 3; solo opens on its own simulator arm (C = 4) if greed downs ≤ +2 pp; duo held (4.7.2). Rejected: B, all sizes.
 - **Q3, exploration form (LP-34):** option A. The Ebb (forking geometry only) and the exploration Truant in M4 (4.7.11). Rejected: B, the Ebb in M3.
-- **Q4, skins (LP-7):** option A. Rabbit (Carnival), Crumb Mouse (Supper) and Alms Crab (Choir) are the Truant pilot; balloon, plate and bauble kept as M4 Ebbs; Gaol prisoner, Supper trolley, Heart toy and Silk page contested and excluded; F1 and F5 themes excluded (5). Rejected: B, an F1 coin-only teaching Ebb.
-- **Q5, the Bedside Stand (LP-14):** option A. Accepted as a second named exception to "container art never implies contents" because it opens a different UI (4.10, 5.3). Rejected: B, an ordinary biscuit tin.
+- **Q4, skins (LP-7):** option A. Rabbit (Carnival), Crumb Mouse (Supper) and Pew Crab (Choir) are the Truant pilot; balloon, dish and bauble kept as M4 Ebbs; Gaol prisoner, Supper trolley, Heart toy and Archive page contested and excluded; F1 and F5 themes excluded (5). Rejected: B, an F1 coin-only teaching Ebb.
+- **Q5, the Washstand (LP-14):** option A. Accepted as a second named exception to "container art never implies contents" because it opens a different UI (4.10, 5.3). Rejected: B, an ordinary biscuit tin.
 
 **New lead's calls (made while writing; confirmed by the client on 2026-11-22, with this document):**
 1. **Document shape:** the proposal's section numbers 0–13 are kept so every cross-reference holds; intent, goals and anti-goals sit in 0 as 0.4 (non-goals added); the client questions become 14 (open items); the closing parts follow as 15 (risks), 16 (left to the builders), 17 (depends on) and Appendix B (sources), as in IR.
@@ -1546,8 +1547,8 @@ The client approved this document as a whole on 2026-11-22, including every lead
 8. **Early arrival waits:** a Truant that reaches its Rathole front square while C > 0 waits there, still a target, and gets away only when C reaches 0 (4.7.4). Without this, the Surprised C = 4 and the solo C = 4 would be shorter, not longer, than shown. (After the check, extra steps are held steps and the route is exactly L long, so this is kept only as a safety.)
 9. **No out-of-combat free nab:** while its host group is unresolved, the only verb on a Dormant Truant is Steal; Grab and attacks are greyed "guarded" (ITEMS 7.3) (4.7.5). Otherwise sneaking adjacent and attacking would nab it outside the fight the clock belongs to.
 10. **Party ineligibility sets no carry:** a floor below the allowed party sizes consumes its 4 draws, hosts no Windfall and sets no `windfallCarry` (4.7.2, 4.7.10).
-11. **Client keys, not tuning:** C = 3 and Surprised C = 4 (Q1); `loot.windfallParties` = {3, 4} with solo added only on the solo arm's pass, and `loot.windfallCSolo` = 4 (Q2), replacing the draft's single `windfallMinParty`; the waves (Q3); the pilot skins (Q4); the Bedside Stand host (Q5) (9.1). A gate miss that would move them returns to the client (14.2).
-12. **The Bedside Stand silhouette hosts only the Viaticum** (V15s `BedsideStandOnly`), so the second exception never leaks (4.10, 5.1, LP-24).
+11. **Client keys, not tuning:** C = 3 and Surprised C = 4 (Q1); `loot.windfallParties` = {3, 4} with solo added only on the solo arm's pass, and `loot.windfallCSolo` = 4 (Q2), replacing the draft's single `windfallMinParty`; the waves (Q3); the pilot skins (Q4); the Washstand host (Q5) (9.1). A gate miss that would move them returns to the client (14.2).
+12. **The Washstand silhouette hosts only the Parting Fare** (V15s `BedsideStandOnly`), so the second exception never leaks (4.10, 5.1, LP-24).
 13. **Flags in 13** also mark reads of agreed, decided or settled text (LE, TL, EP and IR precedent): LP-7, LP-10, LP-12, LP-14, LP-15, LP-21, LP-24, LP-25 and LP-34 are flagged; LP-1 names MAIN 4.6 (decided, read) and LP-5 names MAIN 4.3 (13).
 14. **`ProprietorFallbackRate`** (≤ 10%, from the risk list) joins the reports (9.3).
 15. **Owner-refusal fallbacks** in 14.2, each stated so a refusal never blocks M2 or the M3 pilot.
@@ -1565,7 +1566,7 @@ The client approved this document as a whole on 2026-11-22, including every lead
 10. **Dormant means untouched** except by Steal; an area that opens combat resolves after the wake (4.7.4, 4.7.5).
 11. **It wakes when any host-group member becomes Engaged,** or a fight starts in its room, so pulling the group out still starts the count (4.7.4).
 12. **The count never rises on screen:** the digit starts at 3, and Surprised or solo extra steps are held steps with a reason badge; **the solo Surprised count of 5** extends the Stir precedent (4.7.4).
-13. **Hops are checked square by square;** a partial hop is a block; the Truant never enters a unit or a harmful or obstacle square; a used slip shows as "held · slip used" (4.7.4).
+13. **Hops are checked square by square;** a partial hop is a block; the Truant never enters a unit or a harmful or obstacle square; a used slip shows as "paused · slip used" (4.7.4).
 14. **The combat-end check runs after each Dream sub-step** (4.7.4, LP-5).
 15. **Steal:** a host-group `stealTryUsed` flag; a `die` index for advantage; a failed Steal wakes it at the party's starting count after the live-size check; a `stolen` state and `WindfallStolen`; spilled coin is guarded until the group resolves (4.7.8).
 16. **Carry lifetime** defined (4.7.10).
@@ -1574,44 +1575,44 @@ The client approved this document as a whole on 2026-11-22, including every lead
 19. **`WindfallCatchable`'s algorithm** is stated; the party-start clause is dropped (4.7.8).
 20. **The greed and chase-death gates are defined** on paired seeds under the section 8 policy mix, with a confidence rule (4.7.9).
 21. **The 7c clock line's baseline is defined,** and the cut order now trims containers before touching the Windfall; any Windfall cut returns to the client (4.6).
-22. **Offer pacing has a draw-free trim;** the Viaticum is unranked (boss channel), replaces `lairContainer` on F5 and is excluded from Glean (4.1, 4.10, 7).
+22. **Offer pacing has a draw-free trim;** the Parting Fare is unranked (boss channel), replaces `lairContainer` on F5 and is excluded from Glean (4.1, 4.10, 7).
 23. **Auto-close** uses party-wide fit, pauses on focus, has a settings toggle and duration, and logs a reopenable line (4.6).
 24. **Getaway causes** share one event and one treatment; the strip's "windfall" count moves on nab, Steal or getaway (4.5, 4.7.7).
 25. **Live party size** defined; `WindfallInstance` gains its missing fields (4.7.2, 9.1).
 26. **A `windfall(unitId)` item location** and four ITEMS 18.1 transitions (4.7.7, LP-2).
 27. **LP-33 recast:** the Truant is a suggestion and simulator-policy target only; no "Nab it" order (4.7.8).
 28. **The lowest-tier card source stays;** a highest-eligible-tier arm and the width-2 offer run as report-only M3 arms (4.7.6).
-29. **Truant art grammar:** one cross-theme sackcloth bundle; no faction motif; the Alms Crab re-specified (bell-clapper shell, limbs always out); the Rabbit's bundle unstriped and its Rathole a sawdust-rimmed opening, not a tent flap; the Mouse's napkin and place-card string dropped (4.7.1, 5.3).
+29. **Truant art grammar:** one cross-theme sackcloth bundle; no faction motif; the Pew Crab re-specified (bell-clapper shell, limbs always out); the Rabbit's bundle unstriped and its Rathole a sawdust-rimmed opening, not a tent flap; the Mouse's napkin and place-card string dropped (4.7.1, 5.3).
 30. **The Rathole has one arched cross-theme form** and a front-square floor decal for the cutaway; `WindfallSkinLegal` bans Portal skins and Hairline dressing (4.7.3).
 31. **Insets:** a cutaway floor bracket, meshes below stub height, a per-theme inset form table, and CT15 (insets never read as Portals) (4.3, 5.1, 5.2).
 32. **Marks have shapes, slots and tiers;** the countdown uses a hollow or solid ring so state never depends on hue (6).
 33. **A Windfall timbre row and 6 cues** replace the proposal's 4 (6).
 34. **A closed act table of 9 acts;** a loss always takes the bundle, a gain always leaves a pile; the cower plays only while awake (6).
-35. **The Bedside Stand** is unit-scale, with a defined open act; the Heart's drawer-slide Latch is banned from F5 lair rooms (4.10).
+35. **The Washstand** is unit-scale, with a defined open act; the Heart's drawer-slide Latch is banned from F5 lair rooms (4.10).
 36. **Signature loot moments** get a deliverable table, with M2 moments for the Choir and the Supper (5.2).
 37. **Proprietor selection** is defined, and the noun is always the skin's (4.5).
 38. **Uncorked** is a shape sub-state of the glint, never a hue (7).
 39. **The art budget** has asset counts per wave and a cut order (6).
 40. **Corrections:** the bait cache is M2 (as EP and LE already say); "by family" becomes "by source"; the "Got away" line shows the tier word only; the signature cache's "lair" is read as the arena (13); missed flags added to LP-3, LP-5, LP-8, LP-9, LP-13, LP-32 and LP-33; four catalogue names added to A.5.
 
-**Q6, the Windfall frequency (raised by the check; agreed, 2026-11-22, with the approval of this document):** option A. Q1 agreed "about 1.2–1.4 per run". That figure came from a toy at party 4 on every floor with every theme skinned. Under Q2 (party ≥ 3, duo held), the companion ladder (party at most 1 / 2 / 3 / 4 / 4) and Q4 (M3 skins only for the Choir, the Carnival and the Supper), F2 is never eligible without the solo arm, and Silk and Gut floors never host a Truant. Even with presence raised to 1000‰ on F3 and F4, the lead's estimate is **about 0.6–0.9 per run for an always-hiring party** *(illustr.)*, lower for a player who declines a hire; under RS Cut 2 only F3 can host one.
+**Q6, the Windfall frequency (raised by the check; agreed, 2026-11-22, with the approval of this document):** option A. Q1 agreed "about 1.2–1.4 per run". That figure came from a toy at party 4 on every floor with every theme skinned. Under Q2 (party ≥ 3, duo held), the companion ladder (party at most 1 / 2 / 3 / 4 / 4) and Q4 (M3 skins only for the Choir, the Carnival and the Supper), F2 is never eligible without the solo arm, and Archive and Gut floors never host a Truant. Even with presence raised to 1000‰ on F3 and F4, the lead's estimate is **about 0.6–0.9 per run for an always-hiring party** *(illustr.)*, lower for a player who declines a hire; under RS Cut 2 only F3 can host one.
 - **A (agreed).** Accept about 0.6–0.9 per run *(illustr.)* for the M3 pilot, with 1000‰ on F3–F4; the simulator owns the figure and reports `WindfallsPerRun`, and the pilot's gates decide whether to widen it in M4.
-- Rejected: **B**, bring the Silverfish (Silk) and the Rent Snail (Gut) into the M3 pilot (changes Q4; +2 skins and their role-ID passes); about 0.9–1.3 per run *(illustr.)*. **C**, open a duo arm in M3 at C = 4 like solo (changes Q2), so F2 can host; only if it passes ≤ +1 pp.
+- Rejected: **B**, bring the Silverfish (Archive) and the Rent Snail (Gut) into the M3 pilot (changes Q4; +2 skins and their role-ID passes); about 0.9–1.3 per run *(illustr.)*. **C**, open a duo arm in M3 at C = 4 like solo (changes Q2), so F2 can host; only if it passes ≤ +1 pp.
 
 **Told plainly after the check (confirmed by the client on 2026-11-22):**
-- The agreed "about 1.2–1.4 per run" is out of reach under Q2, Q4 and the companion ladder; F2 is never eligible without the solo arm; Silk and Gut floors host no Truant in M3; under RS Cut 2 F4 never hosts one (0.1, 4.7.2); the client accepted about 0.6–0.9 for the M3 pilot (agreed, Q6).
+- The agreed "about 1.2–1.4 per run" is out of reach under Q2, Q4 and the companion ladder; F2 is never eligible without the solo arm; Archive and Gut floors host no Truant in M3; under RS Cut 2 F4 never hosts one (0.1, 4.7.2); the client accepted about 0.6–0.9 for the M3 pilot (agreed, Q6).
 - The proposal's cut order turned the Windfall off before trimming containers; that is not the lead's call, so containers are cut first and any Windfall cut returns to the client (4.6).
 - The lowest-tier card rule makes the visible stake usually a Common; the lead keeps it (the client accepted the Windfall as written) and runs richer variants as report-only arms (4.7.6).
 - Companions never chase the Truant by themselves: the player controls every unit (MAIN 4.2), so the proposal's "Nab it" order and autonomous rule are dropped (4.7.8).
-- Two pilot skins borrowed their faction's motif and the Alms Crab's cup read as a moving container; the Rabbit's tent flap was the Carnival's Drape Portal and the Crab's crack a decoy Hairline. All are re-specified inside Q4's choice of animals (5.3).
-- The bait cache was mis-staged as M3; it is M2 with the Mousetrap, as approved (4.1, 10).
+- Two pilot skins borrowed their faction's motif and the Pew Crab's cup read as a moving container; the Rabbit's tent flap was the Carnival's Drape Portal and the Crab's crack a decoy Hairline. All are re-specified inside Q4's choice of animals (5.3).
+- The bait cache was mis-staged as M3; it is M2 with the Baited Room, as approved (4.1, 10).
 
 **Told plainly (gathered from where they stand; confirmed by the client on 2026-11-22):**
 - The Windfall never "appears": RC1, EP 13 and determinism require it to be pre-placed and visible at reveal; the dream logic is in how it wakes and leaves (0.1).
 - No extra value: its card comes out of the fixed deck; extra value would break Ledger A, MAIN 4.6 and "harder is not richer" (0.1, 4.7.6).
 - In M3 a solo-hero or duo run never sees fleeting loot unless the solo arm passes; duo is held (0.1, 4.7.2).
 - The client's "during exploration" case has no M3 form (4.7.11).
-- The Gaol prisoner, Supper trolley, Heart toy and Silk page are declined as skins: they read as the Escapee, a rules piece, a toy piece and the lurker's rest tell (0.1, 5.3).
+- The Gaol prisoner, Supper trolley, Heart toy and Archive page are declined as skins: they read as the Escapee, a rules piece, a toy piece and the lurker's rest tell (0.1, 5.3).
 - The Truant is honestly a small tempo choice: the toy nab rate is 0.97, so `FightEndNabShare` is dropped as a gate and kept as a report (4.7.9).
 - The carried-card source was not simulated; it is the first M3 arm (4.7.6, 8).
 - Furnishing stashes are rejected; inset containers answer the brief (0.1, 4.3, 7).
@@ -1624,7 +1625,7 @@ The client approved this document as a whole on 2026-11-22, including every lead
 - The Stratum suffix "one may get away" primes the hunt, by design (4.5).
 - The Cow payoff fires on under about 5% of hosts and is not advertised as a Herald payoff (4.7.8).
 - The RC7 cues are clock telegraphs, not reward stings, and need the RS owner (6).
-- CT6 contests the brief's Due shrine; CT11 contests a per-theme Treasure strip (5.1).
+- CT6 contests the brief's Due shrine; CT11 contests a per-theme Treasure field (5.1).
 - "Proprietor tag" replaces the draft's "Whose line", because "line" is IR's rolled-line term (3.3).
 - Pips instead of a digit would be a lying exception (2.3 PX3).
 
@@ -1648,8 +1649,8 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 | **Enemies owner refuses** the non-combatant row or the runner pull-forward | — | The Windfall stays M4 with the Ebb; M3 ships no fleeting loot (new lead's call) | Enemies owner; client told |
 | **HZ owner refuses** sub-step 3b | — | The hop runs as a Remnant-like countdown inside sub-step 3, same order relative to announcements (new lead's call) | HZ owner |
 | **RS owner refuses** the RC7 cues | — | The telegraph relies on visuals and the global UI timbre; the audio blind-ID gate is not run for Windfalls (new lead's call) | RS owner |
-| **IR owner refuses** the Bedside Stand exception | — | Returns to the client (Q5 was agreed); meanwhile a biscuit tin with the offer UI and a hover line "Provisions: choose one" (new lead's call) | IR owner; client |
-| **FL or ENM owner refuses** the Viaticum room reading | — | LE 6.11 item 5's primary rule stands and segment 2 adds a post-lair main-path container on F5 (new lead's call) | FL, ENM owners |
+| **IR owner refuses** the Washstand exception | — | Returns to the client (Q5 was agreed); meanwhile a biscuit tin with the offer UI and a hover line "Provisions: choose one" (new lead's call) | IR owner; client |
+| **FL or ENM owner refuses** the Parting Fare room reading | — | LE 6.11 item 5's primary rule stands and segment 2 adds a post-lair main-path container on F5 (new lead's call) | FL, ENM owners |
 | **EP or TL owner refuses** LP-16 to LP-20 | — | The approved skin stays; V15s logs the collision as a role-ID gate row (new lead's call) | EP, TL owners |
 | **CMP owner refuses** the Truant as a suggestion target | — | No suggestion ever points at a Truant; the player still controls every unit, and the simulator's companion policy targets it only in its own arm (changed after the check) | CMP owner |
 | **Class owners refuse** `ignoresWindfall` | — | The Windfall pilot waits for the owning class; `WindfallNabByClass` reported (new lead's call) | Class owners |
@@ -1668,14 +1669,14 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 | 1 | **The Truant is a small tempo tax more than a decision** (nab rate 0.97). The stake is real but rarely lost, and the lowest-tier rule makes it usually a Common. It is the most expensive part of 7c per appearance | Route geometry; the highest-tier and width-2 report arms in M3 (4.7.6); any richer stake or cut returns to the client |
 | 2 | **The carried-card source is unsimulated.** It may thin a fight's visible carried loot or interact with the Steal-target count | The first M3 arm; V15 ≥ 1 Steal target after step 8 |
 | 3 | **Clicks are unmeasured.** Loot takes about 19–21 of the 40-click budget in the toy, and CMP 7.4 already fails the lean case. The walker re-baseline may force deeper container cuts | Walker first; net ≤ 0 line; cut order |
-| 4 | **Party-size and skin limits** leave solo and duo players without the feature in M3, make F2 ineligible for everyone, and leave Silk and Gut floors without it: about 0.6–0.9 Windfalls per run against Q1's 1.2–1.4 | The solo arm (agreed, Q2); presence 1000‰ on F3–F4; the client accepted about 0.6–0.9 for the M3 pilot (agreed, Q6), and the simulator owns the figure |
+| 4 | **Party-size and skin limits** leave solo and duo players without the feature in M3, make F2 ineligible for everyone, and leave Archive and Gut floors without it: about 0.6–0.9 Windfalls per run against Q1's 1.2–1.4 | The solo arm (agreed, Q2); presence 1000‰ on F3–F4; the client accepted about 0.6–0.9 for the M3 pilot (agreed, Q6), and the simulator owns the figure |
 | 5 | **The Dream card gets busier** | A glance-test row; one clock per room keeps each room readable |
 | 6 | **RC7 cues** need the RS owner. Until then the telegraph relies on visuals | Request; fallback in 14.2 |
 | 7 | **The Alcove set-piece default** depends on segment 3 supplying set pieces. If none exist, the cap is logged, not enforced | Request; fallback in 14.2 |
 | 8 | **Proprietor tags** cost writing across 9 themes. Fallback rates may be high on small themes | `ProprietorFallbackRate` ≤ 10% |
 | 9 | **Glean** may feel like it "tricked" players when a lurker springs | Watch `ContainersOpened`; Glean optional |
 | 10 | **Art:** 3 faced Truant skins (about 17 assets each) for under 1 appearance per run | The pilot limits this (agreed, Q4); the asset table and cut order (6) |
-| 11 | **Owner dependencies:** LE (step 8, the draw-table row), ENM (unit row, runner, Engaged wake), HZ (3b), RS (cues, timbre row, charter), IR (Bedside Stand, the arena reading), ITEMS (the `windfall` location), FL and ENM (Viaticum room), EP and TL (skins), CMP (suggestion target), class owners | Each has a fallback in 14.2 |
+| 11 | **Owner dependencies:** LE (step 8, the draw-table row), ENM (unit row, runner, Engaged wake), HZ (3b), RS (cues, timbre row, charter), IR (Washstand, the arena reading), ITEMS (the `windfall` location), FL and ENM (Parting Fare room), EP and TL (skins), CMP (suggestion target), class owners | Each has a fallback in 14.2 |
 
 ---
 
@@ -1685,9 +1686,9 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 
 - Every *(illustr.)* value: the role-table counts; `containerCap`; `detourMax`; `summaryAutoCloseMs`; the click table until the walker measures it; `windfallPermille`; the hop length; the Truant passive; the Ebb's C; every report target other than the stated gates.
 - Proprietor writing per theme within the noun ban; container variants within CT1–CT15; theme foley tails; Hairline dressing.
-- Godot scene structure for containers, inset kits, the Truant plate, the scurry trail, the next-hop outline, the Rathole decal and the Bedside Stand, with no physics.
+- Godot scene structure for containers, inset kits, the Truant plate, the scurry trail, the next-hop outline, the Rathole decal and the Washstand, with no physics.
 - Names, until the naming pass.
-- **Not tuning:** the role table's ranks and "never" column; one card-bearing container per room (`cardEligible`); the walk-line definition; LootBind legality and its numbered draw-free order after `trapsResolve`; traps-bound sockets keep their square; step 8 and filters (f) and (g), asserted after step 8; the 4 draws on every floor; no runtime draws but the keyed-hash Steal; the Windfall pre-placed and visible at reveal, never spawned; C = 3 and Surprised C = 4 **(agreed, Q1)**; party sizes {3, 4} with solo only by its arm **(agreed, Q2)**; the Windfall in M3 and the Ebb in M4 **(agreed, Q3)**; the pilot skins and the exclusions **(agreed, Q4)**; the Bedside Stand as the only Viaticum host **(agreed, Q5)**; slip once; held steps, never a rising digit; Dormant untouched but by Steal; a nab is not a hit, damage or a kill; no free-interaction nab; the room's one Steal try; card only on Steal; the one named escape exception (LP-2).
+- **Not tuning:** the role table's ranks and "never" column; one card-bearing container per room (`cardEligible`); the walk-line definition; LootBind legality and its numbered draw-free order after `trapsResolve`; traps-bound sockets keep their square; step 8 and filters (f) and (g), asserted after step 8; the 4 draws on every floor; no runtime draws but the keyed-hash Steal; the Windfall pre-placed and visible at reveal, never spawned; C = 3 and Surprised C = 4 **(agreed, Q1)**; party sizes {3, 4} with solo only by its arm **(agreed, Q2)**; the Windfall in M3 and the Ebb in M4 **(agreed, Q3)**; the pilot skins and the exclusions **(agreed, Q4)**; the Washstand as the only Parting Fare host **(agreed, Q5)**; slip once; held steps, never a rising digit; Dormant untouched but by Steal; a nab is not a hit, damage or a kill; no free-interaction nab; the room's one Steal try; card only on Steal; the one named escape exception (LP-2).
 
 ---
 
@@ -1695,11 +1696,11 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 
 The owed rows are the single list in 13; by owner:
 
-- **The enemies owner:** LP-1 (15.3 step 1), LP-2 (15.6), LP-3 (7.1, 14.5, 21), LP-5 (14.6, 15.6, 15.8), LP-6 (15.5), LP-21 (15.2), LP-27 (15.2, 15.4); the Viaticum room confirmation.
+- **The enemies owner:** LP-1 (15.3 step 1), LP-2 (15.6), LP-3 (7.1, 14.5, 21), LP-5 (14.6, 15.6, 15.8), LP-6 (15.5), LP-21 (15.2), LP-27 (15.2, 15.4); the Parting Fare room confirmation.
 - **The items owner:** LP-2 (18.1 location and transitions, 18.3, 19.2), LP-3 (7.3 "guarded"), LP-6, LP-8 (7, 8.1), LP-9 (8.1); the in-combat Plain open cost.
 - **The traps owner:** LP-2 (6.13, TL-27), LP-8, LP-9 (6.13), LP-12, LP-17 to LP-20, LP-26, LP-34; the Hour-lock reading; fewer locks.
 - **The hazards owner:** LP-2 (13), LP-4 (6.2.2, 6.3).
-- **The FL owner:** LP-8 (11.4), LP-10 (6.10), LP-11 (13), LP-12 (11.1), LP-22, LP-32 (11.3); the walker re-baseline; the Viaticum room.
+- **The FL owner:** LP-8 (11.4), LP-10 (6.10), LP-11 (13), LP-12 (11.1), LP-22, LP-32 (11.3); the walker re-baseline; the Parting Fare room.
 - **The room terrain owner (segment 3):** Alcove set pieces (LP-11).
 - **The EP owner:** LP-16.
 - **The RS owner:** LP-7, LP-15, LP-24, LP-31, LP-34; the RC7 cue request and the Windfall timbre row; skin vetting.
@@ -1710,7 +1711,7 @@ The owed rows are the single list in 13; by owner:
 - **Segment 8 (events), segment 9 (bosses), segment 10 (UI) and audio:** 4.12, 4.13, 6; segment 8's no-clock-Landmark rule in Windfall rooms; segment 9's arena reading. Segment 8 is now designed (events design, approved 2026-11-22): its EV-2, EV-7, EV-15, EV-21, EV-25, EV-35 and EV-42 rows touch 7c (4.13); `stepFunded` and F-CACHE are pending requests to 7c. Segment 9 is now designed (boss rooms design, approved 2026-11-22): its BR-27 and BR-37 rows touch 7c (4.4, 4.10, 4.13). Segment 10 is now designed (exploration and information design, approved 2026-11-23): its XI-19, XI-23 and XI-27 rows touch 7c (4.2, 4.12, 4.13, 7), and XI-10 and XI-18 read 4.2 and 4.7.3; `SideRoomPayoffMix` is a pending request to 7c.
 - **Segment 11 (seeds):** the `windfall` grandchild (LE 6.10 item 1's new row), SocketPlan, step 8 and LootBind's sub-order in the frozen generation order (LE 6.10 item 4). **Answered** by the seeds and validation design (approved 2026-11-23; its 4.3 and 4.4): `loot/lootPlan/{N}/windfall/0`, fixed 4, attempt-invariant (M3); SocketPlan at GS9, step 8's Windfall draws at the start of step 8 inside 3a (GS10), LootBind at GS14 in 4.3's numbered order; its SV-1, SV-2, SV-6, SV-9 and SV-31 rows touch 7c (2.1, 4.2, 4.3, 4.7.8, 4.7.10, 4.11, 5.1 CT2).
 - **Segment 12 (validation):** V15 and the 7c reports. **Answered** by the seeds and validation design (approved 2026-11-23; its 5.1, 5.2, 5.4, 5.5, 6.2, 6.10): V15's qualified phases and failure classes, V15g at AP2 after `V16g.SlotLegal`, `LootBindDegrade` at LR4, the report-registry rows and the qualified arms; its SV-10, SV-18, SV-20, SV-22 and SV-24 rows touch 7c (4.3, 9.2–9.4, 10). Pending requests to 7c (not rules until ruled; fallbacks in its 14.2): the V15 M1 rows, the HE/Due binding proof, the default `LootPolicy`, and the merge-or-coin rule of `LootBindDegrade`.
-- **The camp and hub design:** Lost Property; the Hawker's Hour with segment 8 (Later; events design EV-42). **Answered** by the camp and hub design (segment 13, approved 2026-11-23; its 2.2 row 19, 5.4 and 10): Lost Property is held Later, only if greed gates miss (14.2 unchanged); the Hawker's Hour stays a floor event (EV-42), not camp. None of its CH rows touches 7c; it reads LP-24 (its 4.7 trophy pole is never a container, Windfall or Bedside Stand silhouette), CF10 (its 4.11 Milestones page) and the Windfall pluck as reserved (its 4.14 AN9 and 6 blind-ID gate).
+- **The camp and hub design:** Lost Property; the Hawker's Hour with segment 8 (Later; events design EV-42). **Answered** by the camp and hub design (segment 13, approved 2026-11-23; its 2.2 row 19, 5.4 and 10): Lost Property is held Later, only if greed gates miss (14.2 unchanged); the Hawker's Hour stays a floor event (EV-42), not camp. None of its CH rows touches 7c; it reads LP-24 (its 4.7 ribbon post is never a container, Windfall or Washstand silhouette), CF10 (its 4.11 Milestones page) and the Windfall pluck as reserved (its 4.14 AN9 and 6 blind-ID gate).
 - **The simulator:** every report of 9.3 and every arm of 9.4.
 - **Art, audio and writing:** 5, 6; Proprietor tags.
 - **Naming pass:** every placeholder name here.
@@ -1747,7 +1748,7 @@ The owed rows are the single list in 13; by owner:
 | CB7 | Whole-sack Steal; stream shift | Card only; keyed-hash roll |
 | CB8 | Party size changes mid-run | Live-size check at combat start; Dormant plain Take if below 3 |
 | CB9 | "No container opens in combat" removes a lifeline | Rule dropped |
-| CB10 | Viaticum in a fight host | Lair room exit side; lean band in every arm; owners confirm |
+| CB10 | Viaticum (renamed Parting Fare, naming pass NP-22) in a fight host | Lair room exit side; lean band in every arm; owners confirm |
 | CB11 | Cow loop on broken groups | Neutral rule kept; exclusion lever if `CowRate` on Windfall rooms is high |
 | CB12 | Width-2 offer creep | Held to M4 on its own keyed grandchild |
 | CB13 | Coin accounting on escape | Pre-escape carve; never re-carved |
@@ -1774,7 +1775,7 @@ The owed rows are the single list in 13; by owner:
 | CK15 | Clock math hides a deficit | Net ≤ 0 line |
 | CK16 | Herald payoff stale | Struck |
 | CK17 | Gb SR1 and socketId order readings | Gb reading to the LE owner; square-index default kept |
-| CK18 | Viaticum is a reading; Bedside Stand is a change | As stated (LP-14, 13) |
+| CK18 | Viaticum is a reading; Bedside Stand is a change (renamed Parting Fare and the Washstand, naming pass NP-22) | As stated (LP-14, 13) |
 | CK19 | Bolt-hole echoes Bolt | **Rathole** |
 | CK20 | Action-economy scope | Only actions target it; areas from any source |
 | CK21 | Mislabelled wave reopening | Corrected: the runner Later→M3 is the real flag (LP-3); its sections corrected while writing to ENM 14.5 and 21 |
@@ -1803,6 +1804,7 @@ Re-run while writing this document (2026-11-22).
   - Bolt and Bolt-hole (Bolt renamed Latch in FL; hence Rathole).
   - "Dozing" (replaced by the approved Dormant).
   - **While writing:** "footprints" for the route (Stir and Keg footprints, 50 hits) → scurry trail; `heldBy` (VG data predicate, 1 hit) → `onWindfall`; "inset" for the RC5 mark ("inset dashed", the harm-square rim, 3 hits) → wall-set mark (the noun phrase "inset container" has 0 hits and is kept); "sting" for a loot cue (RC7 boss and Stir term) → got-away cue; `windfallMinParty` (draft key) → `windfallParties`.
+- **Renamed since this check (naming pass NP-22, 2026-11-24):** Bedside Stand → the Washstand (`BedsideStandOnly` stays an id), Alms Crab → Pew Crab, Offertory Plate → Offertory Dish, Prize Balloon → Fairground Balloon, grave-goods casket → burial casket, Treasure strip → Treasure field; the list above is kept as checked on 2026-11-22.
 
 ### A.6 LP cross-reference (source drafts → this register)
 

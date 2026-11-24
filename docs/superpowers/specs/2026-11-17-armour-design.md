@@ -2,6 +2,7 @@
 
 Date: 2026-11-17
 Status: Approved, 2026-11-17
+Names updated by the naming pass (naming pass design, approved 2026-11-24; NP-2, NP-13; NP-7 needed no change here).
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model),
@@ -362,10 +363,10 @@ M2 and *(illustr.)*. **(lead's call)**
 
 | Location | Domain | Examples (one location verb each) |
 |---|---|---|
-| Head | Senses, mind, critical hits | **Visored Helm:** a critical hit against you attempts no rider; also, once per fight (`fight` minor), the first hit from an attacker you could not see that would attempt a rider attempts none (trinkets design 13.1). **Warden's Coif — Unshaken:** Frighten attempts against you have disadvantage, and you have advantage on saves against Frightened (moved here from armour). **Barred Helm:** advantage on saves against Dazed. |
+| Head | Senses, mind, critical hits | **Visored Helm:** a critical hit against you attempts no rider; also, once per fight (`fight` minor), the first hit from an attacker you could not see that would attempt a rider attempts none (trinkets design 13.1). **Warden's Coif — Unflinching:** Frighten attempts against you have disadvantage, and you have advantage on saves against Frightened (moved here from armour). **Barred Helm:** advantage on saves against Dazed. |
 | Hands | Grapple, handling, giving | **Grappler's Gauntlets:** escaping Grappled or Restrained costs a bonus action. **Deft Gloves:** Administer costs a bonus action instead of an action. |
 | Feet | Movement, Prone, hazards | **Strider's Boots:** standing from Prone costs 1 square. **Ledgewalker's Boots:** advantage on hazard-edge and landing saves. **Runner's Boots:** once per fight (`fight` pool, minor; AR-6), Disengage as a bonus action. |
-| Back | Elements, stealth | **Weathered Cloak:** advantage on saves against one element's rider: Burning or Chilled in M2, under the rider-ownership rule (trinkets design 5.7) (moved here from armour). **Grey Mantle:** your Hide checks against a unit that has not seen you this fight have advantage. |
+| Back | Elements, stealth | **Fleece-Lined Cloak:** advantage on saves against one element's rider: Burning or Chilled in M2, under the rider-ownership rule (trinkets design 5.7) (moved here from armour). **Grey Mantle:** your Hide checks against a unit that has not seen you this fight have advantage. |
 | Neck | Life and the body | Trinkets design 5.5 |
 | Finger | Your strike | Trinkets design 5.5 |
 | None | Stored moments (charm); carrying (capacity) | Trinkets design 5.5; charms (charm abilities design 4.2, 4.3) |
@@ -585,7 +586,7 @@ Corrected for F9; monster hit chance against the enemies 6.2 table attack.
 - A monster's gear line shows its current AC only. **(lead's call)** A
   monster armour verb that cannot fire (a minion's inert verb, or a verb
   whose trigger does not exist yet in the current wave, such as Ringed
-  against an M1 party with no Bleed riders) is left off the gear line, so
+  against an M1 party with no Bleeding riders) is left off the gear line, so
   it never takes one of the four things to read; Lore shows it greyed.
 
 ## 7. Requirements and costs
@@ -738,7 +739,7 @@ Corrected for F9; monster hit chance against the enemies 6.2 table attack.
 10. **Role-answer rule (validation):** nothing a monster type can wear or
     carry may negate an entry in its role's "Party's answer" column
     (enemies 17.1). Every armour verb, property and verb signature declares
-    `negates[]` answer tags (for example, Sure-Footed and Deep Stance negate
+    `negates[]` answer tags (for example, Sure-Footed and Low Stance negate
     `shove` and `prone`, Unbowed negates `prone`, Stalwart and Immovable
     negate `shove`). The union of the issued verb with every property and
     signature the type may carry or roll must not meet its role's tags, and
@@ -875,7 +876,7 @@ shield { kind: shield|buckler|reliquary|tower,
 |---|---|---|---|
 | **Shield** (round, heater and kite are skins) | **M1** | +2 | **Bash:** 1d4 B, Push, riderFlag false. Replaces one attack, like Shove; not an off-hand attack. Strength + proficiency to hit, Strength to damage, so it never qualifies for Exploit. The Push is verb-sourced (weapons 7.2 rule 4); Push signatures apply. Blocks the versatile die. |
 | **Buckler** | M2 | +1 | No bash, no Parry. **Grip rule:** see below. It counts as holding the off hand for every other rule (staff focus off; no light + light). **For versatile wielders** (longsword, battleaxe, warhammer, war pick, spear, trident); with mace, flail, sabre or rapier the shield is better, and the card says so. |
-| **Reliquary Shield** | M2 | +1 | **Notable only** (Uncommon and up; built on `item.shield`; never sold or in kits), so the mundane holy symbol is never dominated. `focus{tradition: divine, hands: off, focusVerb: fverb.spare}` plus the standard focus improvised bash, 1d4 B with no verb (weapons 21.1 rule 9); no shield bash. Rolls `props.shield_minor` only, never focus or `fverb` tables. Shield training gives the AC and the properties; the divine tradition gives Spare. This is the one exception to weapons 14's rule that an untrained focus's properties are inert (AR-44). Notched can suppress Spare, never the AC. Rod + Reliquary is legal (weapons 11.1). Counts under the `shield` family cap. |
+| **Reliquary Shield** | M2 | +1 | **Notable only** (Uncommon and up; built on `item.shield`; never sold or in kits), so the mundane holy symbol is never dominated. `focus{tradition: divine, hands: off, focusVerb: fverb.spare}` plus the standard focus improvised bash, 1d4 B with no verb (weapons 21.1 rule 9); no shield bash. Rolls `props.shield_minor` only, never focus or `fverb` tables. Shield training gives the AC and the properties; the divine tradition gives Withhold. This is the one exception to weapons 14's rule that an untrained focus's properties are inert (AR-44). Notched can suppress Spare, never the AC. Rod + Reliquary is legal (weapons 11.1). Counts under the `shield` family cap. |
 | **Tower shield** | Later | +2 | Grants **Interpose**. Soft Strength +1 (Strained: speed −2, Interpose off). No bash. Falls back to +1 AC if it dominates the shield for Strength users. |
 
 **Buckler grip rule (lead's call; AR-43, AR-48).** The grip is declared,
@@ -913,12 +914,12 @@ As enemies 17.1 defines it **(settled; party wording lead's call)**:
 - **Candidate order:**
   0. **step 0, window fills** (Vanguard design 7.7; VG-4): a reaction AC
      bonus from a camp-pool ability that applies without a reaction being spent
-     (Stand Fast, Step In II), or the Shade's Blade Dance (a Vanish-pool
+     (Stand Fast, Step In II), or the Shade's Steel Waltz (a Vanish-pool
      option; Shade design 8.3; SH-9). Several fills on one roll are ordered by
      source unit order, then by creation order; they come ahead of the
      target's own candidates;
   0b. **step 0b, carried ward** (Shade design 8.3; SH-9): a ward carried
-     forward from a reaction already spent (Held Guard: Sworn Guard's +2
+     forward from a reaction already spent (Closed Guard: Sworn Guard's +2
      against that hostile's later melee rolls this turn), after the step-0
      fills and before step 1. It spends nothing;
   1. the target's own pool-free reactions (Parry);
@@ -1070,11 +1071,11 @@ they are its native level plus `levelShift`. **(lead's call)**
 |---|---|---|---|---|
 | Claw brute | Natural, offset −2 | `other` 0 | 11 at L0–4 (band 9–11 / 10–12 / 11–13): in band | — |
 | Greatclub brute (alt) | Natural (furs), offset −2 | `other` 0 | 11 at L0–4: in band | — (not leather: Supple would negate "opportunity-attack zones") |
-| Warhammer-and-shield soldier | Chain shirt + shield | `other` +1 | 16 at L1–4 (bands 14–16 at L1–2, 15–17 at L3–4): in band; legal at L1–4 only (16 is above the L0 band 13–15) | Ringed (left off the M1 gear line: no Bleed riders yet, 6.4) |
+| Warhammer-and-shield soldier | Chain shirt + shield | `other` +1 | 16 at L1–4 (bands 14–16 at L1–2, 15–17 at L3–4): in band; legal at L1–4 only (16 is above the L0 band 13–15) | Ringed (left off the M1 gear line: no Bleeding riders yet, 6.4) |
 | Levy soldier (M2; a separate L0 type, not one of M1's three) | Leather + shield | `other` +1 | 15 at L0 (13–15): in band | Supple |
 | Pike soldier (room level 2+) | Chain mail, Strength +2 (main) | — (heavy ignores it) | 16 at L1–4: in band; legal at L1–4 only; authored speed 6, derived 5 (Weighty) | Ringed (left off the M1 gear line) |
-| Sling artillery | Unarmoured | `main` (+2 at L0–2, +3 at L3–4) | 12 at L0–2, 13 at L3–4 (bands 10–12, 11–13, 12–14): in band | — |
-| Minions | Leather | `other` +1 | 13 at L0–2: in band | Supple, inert (left off the gear line) |
+| Sling marksman | Unarmoured | `main` (+2 at L0–2, +3 at L3–4) | 12 at L0–2, 13 at L3–4 (bands 10–12, 11–13, 12–14): in band | — |
+| Swarmers | Leather | `other` +1 | 13 at L0–2: in band | Supple, inert (left off the gear line) |
 
 ### 12.4 M2 patterns (checked)
 
@@ -1091,7 +1092,7 @@ they are its native level plus `levelShift`. **(lead's call)**
   soldiers in heavy armour without a shield (the pike pattern, 16 at L1–4,
   `CountsAsHeavy`, R 2), and shield soldiers carry the acid (Corroded)
   answer. The enemies 17.1 answer "piercing or acid" is unchanged;
-- artillery: unarmoured to about L6, light from L5 with Dexterity +3;
+- marksmen: unarmoured to about L6, light from L5 with Dexterity +3;
 - lurkers: light from L1, Dexterity `main` (F10); never hide.
 
 ### 12.5 AI
@@ -1142,14 +1143,14 @@ call)**
 | **Leather** | L | **M1** | 12 + Dexterity | Full | — | — | **Supple:** opportunity attacks against you have disadvantage. | — |
 | Gambeson | L | M2 | 12 + Dexterity | Full | — | — | **Weave:** if you moved at least 3 squares on your last own turn (the weapons 7.6 movement count), the first ranged weapon attack against you each round has disadvantage, unless you are Prone or Grappled. | — |
 | Brigandine (studded leather skin) | L | M2 | 12 + Dexterity | Full | — | — | **Studded:** grapple attempts against you have disadvantage. | metal |
-| **Hide** | M | **M1** | 13/14/15 + Dexterity | +2 | — | St | **Sure-Footed:** Shove attempts against you have disadvantage, and you have advantage on saves against falling Prone. | — |
+| **Hide** (shown as "Hide armour") | M | **M1** | 13/14/15 + Dexterity | +2 | — | St | **Sure-Footed:** Shove attempts against you have disadvantage, and you have advantage on saves against falling Prone. | — |
 | **Chain shirt** | M | **M1** | 13/14/15 + Dexterity | +2 | — | St | **Ringed:** the first time each fight that Bleeding would land on you, it does not. | metal |
 | Scale | M | M2 | 13/14/15 + Dexterity | +2 | — | St | **Overlap:** once per round, the first attack against you with advantage is rolled normally. | metal |
 | Breastplate | M | M2 | 13/14/15 + Dexterity | +2 | — | St | **Shoulder:** your Shove attempts have advantage. | metal |
 | Half plate | M | Later (optional) | 13/14/15 + Dexterity | +2 | — | St | **Enclosed:** advantage on Reflex saves against area effects. | metal |
 | **Chain mail** | H | **M1** | 16/17/18 | None | +1 | St, Cl, W | **Ringed** (shared on purpose) | metal |
 | Splint (lamellar) | H | M2 | 16/17/18 | None | +2 | St, Cl, W | **Stalwart:** forced movement against you is 1 square shorter (after the 3-square sum), and you cannot be shifted. | metal |
-| Plate | H | M2 | 16/17/18 | None | +2 | St, Cl, W | **Proof:** the first critical hit against you each fight is a normal hit instead. | metal |
+| Plate (shown as "Plate armour") | H | M2 | 16/17/18 | None | +2 | St, Cl, W | **Proof:** the first critical hit against you each fight is a normal hit instead. | metal |
 | Natural (monsters only) | counts as M | M1 | Medium band + offset | +2 | — | — | None (traits carry the identity) | metal only with `metal: true` (12.1) |
 
 ### 13.2 Identity
@@ -1158,9 +1159,9 @@ Best at / worst at / monster use:
 
 - **Leather.** Best: Dexterity skirmishers moving through zones;
   rustproof. Worst: standing fights; companions without ability
-  increases (all of them; companions design 8.1). Monsters: minions
+  increases (all of them; companions design 8.1). Monsters: swarmers
   (inert); never brutes or skirmishers (role-answer rule).
-- **Gambeson.** Best: kiters crossing open ground on artillery floors;
+- **Gambeson.** Best: kiters crossing open ground on marksman floors;
   rustproof. Worst: holding a chokepoint; Prone and Grappled shut it off.
   Monsters: skirmishers and raiders.
 - **Brigandine.** Best: mobile fighters against grabbers. Worst: rust
@@ -1168,10 +1169,10 @@ Best at / worst at / monster use:
   skirmishers (the Grapple answer).
 - **Hide.** Best: frontliners against Shove, Topple and trips; the
   rustproof medium. Worst: Bleeding claws; Dexterity +3 or more.
-  Monsters: leaders and controllers; never soldiers, brutes or lurkers.
+  Monsters: leaders and hinderers; never soldiers, brutes or lurkers.
 - **Chain shirt.** Best: claw and blade floors. Worst: Prone-heavy enemies,
   rust. Monsters: soldiers (with a shield), brutes from L4. Teaches that a
-  Bleed can fail, from M2.
+  Bleeding rider can fail, from M2.
 - **Scale.** Best: the flanked frontliner. Worst: lone attackers, rust.
   Monsters: elite soldiers and leaders; forces the party to stack
   advantage.
@@ -1195,7 +1196,7 @@ Best at / worst at / monster use:
 |---|---|---|---|---|---|---|---|
 | **Shield** | **M1** | +2 | — | 1d4 B, Push | The pusher's wall | Best: the highest one-handed AC, doorway Push. Worst: damage (−35% against a two-hander, weapons 6.4), the versatile die, Pry. | M1 soldier (tall-shield skin), raider |
 | Buckler | M2 | +1 (grip rule) | — | — | The duellist's hand-guard | Best: versatile wielders declaring the two-hand grip or +1 AC on each attack. Worst: control, maximum AC, non-versatile weapons. | Leader (longsword Parry + buckler) |
-| Reliquary Shield | M2, notable only | +1 | — | — (1d4 B improvised focus bash) | The priest's shield and holy symbol (Spare) | Best: divine front-liners (mace + Reliquary). Worst: focus depth, control. | Cult priests; carried only by same-kind carriers |
+| Reliquary Shield | M2, notable only | +1 | — | — (1d4 B improvised focus bash) | The priest's shield and holy symbol (Withhold) | Best: divine front-liners (mace + Reliquary). Worst: focus depth, control. | Cult priests; carried only by same-kind carriers |
 | Tower shield | Later | +2 | +1 soft | — | The guardian's wall: Interpose | Best: guarding a caster in a corridor. Worst: alone, against Pry, Staggered, low Strength; no opportunity attack that round. | Soldier signature |
 
 ### 13.4 Worn pieces (trinket kinds; M2; never AC)
@@ -1231,9 +1232,9 @@ unchanged (charm abilities design 4.3 rule 6).
 | Vestments (Composed) | Copied the staff's Steady Casting (weapons 18.1); its signature Serene was dead (Prone never ends Concentration); "Composed" is an enemies term. Robes are an unarmoured skin. |
 | Turning (+2 AC reaction on armour) | A strictly better Parry; drove the 24-AC stack |
 | Cushioned | Reduced damage, against agreed stat model 6 |
-| Lined (armour), Steadfast (armour) | Moved to the back and head tables as Weathered and Unshaken |
+| Lined (armour), Steadfast (armour) | Moved to the back and head tables as Fleece-Lined and Unflinching (renamed from Weathered and Unshaken, naming pass NP-13) |
 | Windcloak | Copied Weave |
-| Swapper's, Thrower's and Sure Grip gloves | Copied Quickdraw, Far-flight and Sure Grip |
+| Swapper's, Thrower's and Sure Grip gloves | Copied Quickdraw, Far-flight and Fast Grip (the weapon property, renamed from Sure Grip, naming pass NP-13) |
 | Punch Buckler | Widened the buckler's free value |
 | Lookout Rim | No buff-test tag fits; cut against surprise |
 | Spiked shield | The Spiked Boss property |
@@ -1245,7 +1246,7 @@ unchanged (charm abilities design 4.3 rule 6).
 ### 13.6 M1 selection and starting kits
 
 M1 is one class, levels 1–3, one floor, three enemy types: Kennel Mastiff
-(claw brute), Huntsman (warhammer soldier), Poacher (sling artillery); RS
+(claw brute), Huntsman (warhammer soldier), Poacher (sling marksman); RS
 8.4. The RS 8.4 kits are dressed onto these 12.3 chassis (a hunting maul
 and boar-board shield, a hunting sling); a boar spear only on a promoted
 or F2+ pike variant, never at room level 1 (cross-document comparison
@@ -1254,7 +1255,7 @@ or F2+ pike variant, never at room level 1 (cross-document comparison
 - **M1 families:** leather, hide, chain shirt, chain mail, shield,
   unarmoured, natural.
 - **M1 verbs:** Supple, Sure-Footed, Ringed. Supple fires against soldier
-  and minion zones; Sure-Footed against the brute's Shove; Ringed against
+  and swarmer zones; Sure-Footed against the brute's Shove; Ringed against
   the claw brute's Bleeding.
 - **Monster-side teaching** of armour verbs starts in M2, once riders
   exist. Weapon verbs carry M1's monster teaching.
@@ -1325,7 +1326,7 @@ or F2+ pike variant, never at room level 1 (cross-document comparison
 | Property | Tags | Effect | Wave |
 |---|---|---|---|
 | Muffled | prevent | Heavy only: no Clatter (passive or checks). Never on the same item as Fitted. | M1 |
-| Resistant (element) | type | Fire, cold, lightning, acid, radiant or necrotic; never physical or psychic. On M1 notables only if the floor's theme deals that element. The theme read and its parent draw serve **authored** Resistant only (the parent draw's position is now the keyed `resistant` block of loot step 3, `loot/floor/{N}/resistant/{entry}`, order kept; position read, IR confirms the owning entry; seeds and validation design 4.3, SV-5); a **rolled** Resistant line takes its element from d2 of its identity's `lineRoll` entry, theme-blind (reading; IR-14, IR-15; item rolls design 4.4, 4.17). | M1 |
+| <element>-proof (e.g. Fireproof; renamed from Resistant (element), naming pass NP-13) | type | Fire, cold, lightning, acid, radiant or necrotic; never physical or psychic. On M1 notables only if the floor's theme deals that element. The theme read and its parent draw serve **authored** <element>-proof lines only (the parent draw's position is now the keyed `resistant` block of loot step 3, `loot/floor/{N}/resistant/{entry}`, order kept; position read, IR confirms the owning entry; seeds and validation design 4.3, SV-5); a **rolled** <element>-proof line takes its element from d2 of its identity's `lineRoll` entry, theme-blind (reading; IR-14, IR-15; item rolls design 4.4, 4.17). | M1 |
 | Reprisal (element) | charge | 1 / 1 / 2 per rest, reaction when a melee attack hits you: the attacker takes 1d6 / 2d6 / 3d6 of the element (counts under the reaction cap) | M2 |
 
 **Last Ward (retired; change CN-23 superseded by DH-45):** removed from
@@ -1337,13 +1338,13 @@ for a drop-prevention effect (`RetiredDropPrevention`).
 
 | Verb | Signature |
 |---|---|
-| Supple | **Ghost Step:** Set attacks against you also have disadvantage |
+| Supple | **Ghost Step:** Receive attacks against you also have disadvantage |
 | Weave | **Far Weave:** needs 2 squares |
 | Studded | **Barbed Studs:** you also have advantage on checks to escape a grapple |
-| Sure-Footed | **Deep Stance:** a Shove can never push you |
+| Sure-Footed | **Low Stance:** a Shove can never push you |
 | Ringed | **Double Ring:** twice per fight (b3: three times) |
 | Overlap | **Tight Overlap:** the first two such attacks each round |
-| Shoulder | **Bull Rush:** once per turn, a Shove that pushes moves the target 2 squares (verb-sourced under weapons 7.2 rule 4 as amended by AR-49, so the verb-sourced once-per-round rule and the 3-square cap apply) |
+| Shoulder | **Bowl Over:** once per turn, a Shove that pushes moves the target 2 squares (verb-sourced under weapons 7.2 rule 4 as amended by AR-49, so the verb-sourced once-per-round rule and the 3-square cap apply) |
 | Stalwart | **Immovable:** 2 squares shorter (b3: verb-sourced movement cannot move you) |
 | Proof | **Twice-Proof:** the first two critical hits each fight (inside the crit cap) |
 | Enclosed | **Sealed:** Poisoned never lingers on you (blocks the lingering form; trinkets design F2) (Later) |
@@ -1355,7 +1356,7 @@ for a drop-prevention effect (`RetiredDropPrevention`).
 | Spiked Boss | type | shield | The bash deals piercing (never with Quickdraw on one item; a set holding both suppresses Quickdraw, `QuickdrawTypeConflict`) | M1 |
 | Raise | charge, prevent | any | 1 / 1 / 2 per rest, bonus action: +2 AC until the start of your next turn (`raiseActiveUntilOwnTurnStart`, 16.3; never a condition); part of the shield part (Pry ignores it); does not stack with Fortified (6.1) | M1 |
 | Hailguard | charge | shield, tower | 1 / 1 / 2 per rest, automatic at weapons 7.5 step 2 (no reaction; policy `always` with the target filter `nonMinion`, which the player may change like a reaction policy, ability model 7.3): a ranged weapon attack roll against you whose net mode would not already be disadvantage has disadvantage. Inside the roll-mode cap, where it has the lowest priority and is not spent when suppressed (8.1 rule 6) | M1 |
-| Guarding | charge | shield, buckler, reliquary | 1 / 1 / 2 per rest: Interpose (illegal on a tower shield or on a carrier that already has Interpose or a Guard verb; "has Interpose" reads a **learned** class Interpose, such as Shieldwall, learned exactly when it is the Vanguard's stance pick, whether or not it is used; classes design 8.3, CL-7). The stance may be re-picked once per camp, never in combat: a Guarding shield carried by a Vanguard who re-picks Shieldwall becomes **runtime-inert**, with a warning on the camp screen before the re-pick is confirmed, and wakes again if the stance returns to Hold the Line (Vanguard design 7.5; VG-17) | M2 |
+| Guarding | charge | shield, buckler, reliquary | 1 / 1 / 2 per rest: Interpose (illegal on a tower shield or on a carrier that already has Interpose or a Guard verb; "has Interpose" reads a **learned** class Interpose, such as Shieldwall, learned exactly when it is the Vanguard's stance pick, whether or not it is used; classes design 8.3, CL-7). The stance may be re-picked once per camp, never in combat: a Guarding shield carried by a Vanguard who re-picks Shieldwall becomes **runtime-inert**, with a warning on the camp screen before the re-pick is confirmed, and wakes again if the stance returns to Bar the Way (Vanguard design 7.5; VG-17) | M2 |
 | Bashing Rim | rider | shield | The bash carries the Stagger rider (settled source) | M2 |
 | Shelter | charge | shield, tower | 1 / 1 / 2 per rest, reaction: a ranged weapon attack against an adjacent ally targets you instead (arrow-catching-shaped, renamed). It resolves at weapons 7.5 step 1, after declaration and before step 2, so the new target's roll mode, AC and reaction window apply; it spends your reaction and counts under the reaction cap (5.5) | M2 |
 | Bulwark Stance | tower signature | tower | If you did not move on your last own turn, Interpose may instead give an adjacent ally advantage on one Reflex save against an area | Later |
@@ -1374,25 +1375,25 @@ Rider-free; M1 conditions and families only. *(illustr.)*
 |---|---|---|---|
 | Duskleather Jerkin | leather | Common | Shadowed |
 | Tumbler's Leathers | leather | Uncommon | Ghost Step, Forewarned |
-| Boar-hide Coat | hide | Common | Deep Stance |
-| Ironbark Hide | hide | Uncommon | Adamant, Forewarned |
-| Ringwarden's Shirt | chain shirt | Uncommon | Double Ring, Unbowed |
+| Boar-hide Coat | hide | Common | Low Stance |
+| Ironwood Vest | hide | Uncommon | Adamant, Forewarned |
+| Linkmender's Shirt | chain shirt | Uncommon | Double Ring, Unbowed |
 | Kneeguard Mail | chain mail | Common | Unbowed |
-| Hushmail Hauberk | chain mail | Uncommon | Muffled (major) |
-| Gatewarden's Shield | shield | Common | Heavy Push |
-| Pass-Keeper's Shield | shield | Common | Raise |
-| Hailward Shield | shield | Uncommon | Hailguard, Spiked Boss |
-| **Bellwarden's Mail** (floor-1 boss signature) | chain mail | Floor-1 top tier (budget 2) + one authored property | Adamant, Forewarned, + authored Unbowed |
+| Muffled Hauberk | chain mail | Uncommon | Muffled (major) |
+| Wicket Shield | shield | Common | Heavy Push |
+| Toll-Taker's Shield | shield | Common | Raise |
+| Hailstruck Shield | shield | Uncommon | Hailguard, Spiked Boss |
+| **Hound-Collar Mail** (floor-1 boss signature) | chain mail | Floor-1 top tier (budget 2) + one authored property | Adamant, Forewarned, + authored Unbowed |
 
-Bellwarden's Mail is **guarded**, not worn: Old Ragged keeps it in its
-den's signature cache and its plate reads "Guards: Bellwarden's Mail"; the
+Hound-Collar Mail is **guarded**, not worn: Old Ragged keeps it in its
+den's signature cache and its plate reads "Guards: Hound-Collar Mail"; the
 authored Unbowed is grandfathered from the signature echo check, and a
 second form is required in M2 (change IR-13; client-approved 2026-11-22,
 Q5; item rolls design 4.13). Worn or lodged signatures remain an M3 option
 that would need a further change to 12.6.
 
 **M2 examples:** Gale Gambeson (gambeson, Uncommon): Far Weave,
-Forewarned. Knight's Plate (plate, Rare): Twice-Proof, Muffled. Pilgrim's
+Forewarned. Tourney Plate (plate, Rare): Twice-Proof, Muffled. Pilgrim's
 Reliquary (Reliquary Shield, Uncommon): Raise, Guarding.
 
 ## 15. Licensing
@@ -1493,9 +1494,9 @@ CC-52).
 | `bucklerOffUntilOwnTurnStart` | bool | Start of the unit's own turn | Buckler grip rule (10.2) |
 | `weaveSpent` | bool | Round start | Weave |
 | `overlapCount` | integer 0–2 | Round start | Overlap, Tight Overlap |
-| `bullRushSpent` | bool | Start of the unit's own turn | Bull Rush |
+| `bullRushSpent` | bool | Start of the unit's own turn | Bowl Over |
 | `critDowngradesThisFight` | integer 0–2 | Fight start | Crit cap (8.1 rule 7) |
-| `fightUses` | integer per property or verb (Ringed 1, Double Ring 2, or 3 at b3; Proof 1, Twice-Proof 2; Shadowed, Warding Lining 1; trinket `fight` properties Visor's unseen branch, Runner, Oilskin, Duskhem, Lifeline, Aid and Tally 1, keyed by (unit, property id); trinkets design 17.3) | Fight start | `fight` uses |
+| `fightUses` | integer per property or verb (Ringed 1, Double Ring 2, or 3 at b3; Proof 1, Twice-Proof 2; Shadowed, Warding Lining 1; trinket `fight` properties Visor's unseen branch, Runner, Oilskin, Duskhem, Lifeline, Helping and Tally 1, keyed by (unit, property id); trinkets design 17.3) | Fight start | `fight` uses |
 | `forewarnedOpen` | bool | Set at fight start, cleared at the unit's first own turn | Forewarned |
 | `trinketPreventionReceivedThisRound` | bool | Round start | One received trinket prevention per round (trinkets design 7.3) |
 | `trinketHelpedThisRound` | bool | Round start | One trinket Helped per round (trinkets design 7.1) |
@@ -1576,9 +1577,11 @@ The build fails when **(lead's call)**:
 13. A `prop.*` or `averb.*` display name matches a condition, affix,
     awareness state, behaviour profile, universal action, verb or
     property. Charm names and charm shape words are registered under the
-    same pattern (V23s); the design word "Catch" is flagged until the
-    naming pass rules and is never printed (change CA-12; charm abilities
-    design 9.3; M2 text).
+    same pattern (V23s); the design word "Catch" is never a keyword or a
+    name and is never printed (ruled by the naming pass: naming pass design
+    4.8, NP-2; change CA-12; charm abilities design 9.3; M2 text). The
+    naming pass N-rules
+    (naming pass design 4) apply to these names by reference (NP-2).
 14. A property or signature does not bind a declared `hook` to an engine
     event or query, or has no property test showing an outcome change (a
     dead property). A simulator trigger rate of zero (17.3) is reported as
@@ -1791,10 +1794,10 @@ the client and is applied only if the lead switches E+ on through the
 | AR-12 | 18.5, Corroded | "+1 against heavy armour or armoured traits" reads `CountsAsHeavy`; outside the reduction cap | Lead |
 | AR-13 | 18.7, Hushed | "Ignores the heavy armour stealth penalty, passive and checks (Clatter)" | Lead |
 | AR-14 | 18.9, Fortified | Does not stack with the Raise shield property: the bonus is max(Fortified 2, Raise 2 unless Pry), so Fortified applies against Pry (armour design 6.1); its crit downgrade comes first and spends nothing (armour design 8.1 rule 7) | Lead |
-| AR-15 | 18.10, Notched | A Reliquary Shield is a focus: Notched may land through it and suppresses Spare only, never the AC | Lead |
+| AR-15 | 18.10, Notched | A Reliquary Shield is a focus: Notched may land through it and suppresses Spare only, never the AC (Spare, the focus verb, renamed Withhold, naming pass register 5.3.43) | Lead |
 | AR-16 | 25 | Dependency pointer | Lead |
 | AR-51 | 9.2, application pipeline | New gear-prevention step between step 3 (contest) and step 4 (ward): Ringed, Double Ring and Unbowed stop the condition after a failed contest or an automatic landing, before a ward is spent; emits `ConditionResisted{reason: ArmourVerb}` (armour design 14.1) | Lead |
-| AR-52 | 10.1, "One move per hit" bullet | Pointer: armour verb signatures that move a target (Bull Rush) are verb-sourced (weapons 7.2 rule 4, AR-49) | Lead |
+| AR-52 | 10.1, "One move per hit" bullet | Pointer: armour verb signatures that move a target (Bull Rush) are verb-sourced (weapons 7.2 rule 4, AR-49) (Bull Rush renamed Bowl Over, naming pass NP-13) | Lead |
 
 **Enemies design (2026-11-16):**
 
@@ -1803,7 +1806,7 @@ the client and is applied only if the lead switches E+ on through the
 | AR-17 | 5.1, `armour` row | Natural armour is `{natural: offset, metal?}`: medium band + offset; armed types may use it for display-only issue hides | Lead |
 | AR-53 | 5.1, `abilities` and `speed` rows | `abilities`: the type declares Dexterity's spread slot (main, secondary or other), which armour validation reads at every shift (armour design 12.2). `speed`: authored before armour penalties; the derived speed stays within 3–8 (armour design 7.3) | Lead |
 | AR-18 | 5.2, AC bullet | "Counts as medium … except that the armoured trait or Plated makes `CountsAsHeavy` true for Corroded, piercing and Clatter; the AC formula is unchanged." The band is checked at every legal shift. Issued armour verbs obey the role-answer rule. | Lead |
-| AR-19 | 5.6, gear-line example | "Pike: piercing, reach 2, Set · Chain mail: heavy, Ringed" (fixes "Hide: light", F2) | Lead |
+| AR-19 | 5.6, gear-line example | "Pike: piercing, reach 2, Set · Chain mail: heavy, Ringed" (fixes "Hide: light", F2) (Set, the pike verb, renamed Receive, naming pass register 5.3.42; hide shows as "Hide armour", NP-13) | Lead |
 | AR-20 | 6.4, guards table and notes | Guards are also evaluated at the lowest legal party AC as armour design 11 item 2 defines it (build fails), and from M2 per attacker with its piercing R; new AC envelope rows in hit chance (sustained ≥ 35%, charged ≥ 15%, sustained with one gear roll-mode effect ≥ 10%, levels 1–10) | Lead |
 | AR-21 | 6.5, Offence and Defence | Armour verbs price the defence term through `verbDefencePermille` (provisional), later measured per theme. Piercing offence is computed at the reference AC − R. Reaction non-stacking applies when pricing leader-and-soldier pairs. | Lead |
 | AR-22 | 7.3, level shift bullet "AC moves by the table's AC change" | "AC is recomputed from the loadout; a shift whose AC leaves the band is illegal" (F4) | Lead |
@@ -1841,7 +1844,7 @@ the client and is applied only if the lead switches E+ on through the
 | AR-43 | 11.2, Versatile | "Uses `versatileDice` when the set's off hand is empty, or holds a buckler and the declared grip is `twoHand` (armour design 10.2). Any other shield, or a focus, blocks it." | Lead |
 | AR-44 | 14, "Untrained in the tradition" bullet; 17.8, holy symbol notes; 17.9; 26 | 14: "except a Reliquary Shield, whose properties follow shield training (armour design 10.2)". The Reliquary Shield is notable-only; rod + Reliquary is legal; 17.9 and 26 point here | Lead |
 | AR-48 | 7.5, step 1 | Declaration gains a `grip` input (`oneHand` or `twoHand`), legal only for a versatile weapon in a set whose off hand is empty or holds a buckler; default `oneHand` with a buckler; the AI picks it by the scorer. `twoHand` with a buckler sets `bucklerOffUntilOwnTurnStart` at declaration, hit or miss, reactions and opportunity attacks included (armour design 10.2) | Lead |
-| AR-49 | 7.2, rule 4, verb-sourced list | Add armour verb signatures that move a target (Bull Rush, armour design 14.4) | Lead |
+| AR-49 | 7.2, rule 4, verb-sourced list | Add armour verb signatures that move a target (Bull Rush, armour design 14.4; renamed Bowl Over, naming pass NP-13) | Lead |
 | AR-50 | 18.2, Quickdraw eligibility | Also eligible on shields (it acts on the set); a shield may also roll `props.verb.push` through its bash's Push (armour design 14.5) | Lead |
 
 **Main design (2026-11-15):**
@@ -1901,7 +1904,7 @@ Stat model 6's AC formula and "Armour is hit or miss" and stat model 8.1
   The item rolls design (`2026-11-22-item-rolls-design.md`) sets how 14's
   properties are rolled on generated armour, shields and pieces (14.1;
   IR-4, M2), adds foci and shields to signature categories (5.5; IR-13)
-  and keeps 14.3's theme read for Resistant on authored records (IR-14,
+  and keeps 14.3's theme read for <element>-proof on authored records (IR-14,
   IR-15; item rolls design 4.4, 4.6, 4.13, 4.17).
 - **Enemy content:** rust, acid and ooze types as Pitted sources (Later);
   M2 grapplers for Studded; piercing-weak and armoured types.
@@ -1934,7 +1937,7 @@ pick-rate reports trigger them:
 | Duplicate "first ranged attack" and other duplicate effects | One-table rule; Windcloak cut; one Hailguard; Lined and Steadfast moved; Forewarned replaces Vigilant; the roll-mode cap |
 | Reliquary dominance and focus-rule breaks | Notable only; standard focus improvised bash; rod + Reliquary legal; Notched and property rules stated |
 | Buckler dominated, or a free +1 | Grip rule; "versatile wielders only" stated; Punch Buckler cut |
-| Roster and name conflicts | One roster (13.1); renamed Supple, Ringed, Studded, Stalwart, Unshaken, Barred, Forewarned, Shelter, Double Ring, Deep Stance; validation rule 13 |
+| Roster and name conflicts | One roster (13.1); renamed Supple, Ringed, Studded, Stalwart, Unshaken, Barred, Forewarned, Shelter, Double Ring, Deep Stance (Unshaken renamed Unflinching and Deep Stance renamed Low Stance, naming pass NP-13); validation rule 13 |
 | E presented as no change | AR-30 went to the client (Q1, agreed); E+ pre-approved lever with a stated gate; `LocationOccupied` report |
 | Inconsistent AC rules for pieces | Strict no-AC rule for any effect kind; Turn the Blow cut; reaction cap |
 | Fight-dependent or unclear verbs | Studded staged with M2 grapplers; Enclosed Later and optional; Overlap text shortened; `squaresMovedLastOwnTurn` |

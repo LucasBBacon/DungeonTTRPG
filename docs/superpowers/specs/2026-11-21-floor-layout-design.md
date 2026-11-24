@@ -2,6 +2,7 @@
 
 Date: 2026-11-21
 Status: Approved, 2026-11-21
+Names updated by the naming pass (naming pass design `2026-11-24-naming-pass-design.md`, approved 2026-11-24; NP rows listed: NP-18, with the 13.1 cites of agreed Q1, Q2, Q3, Q5 and Q6, and the section 5 register rows read for this document: Keepsakes → Souvenirs, Antechamber Catch-up → Forecourt Top-up, the trap and DC grade words (Found, Mild, clasp) and Nightmare tiers → Peril tiers (agreed Q4)). Historical records (the front-matter grep list and Appendix A) keep the old names with a rename note.
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model),
 `2026-11-16-ability-resource-model-design.md` (ability model),
@@ -73,7 +74,7 @@ The lead's answers, which the client accepted (Q1–Q3, **agreed**), are
 in section 0: **floors are built from authored Blueprints rewritten by a
 cyclic grammar and proven at build time, so the runtime cannot fail; open
 themes are partitioned into ordinary rooms (Q1); every boss stands behind
-a Forecourt antechamber with a Stairhead beyond the arena, near-safe only
+a Forecourt antechamber with the Downstair beyond the arena, near-safe only
 on floor 1 (Q2); and fair Hairline secrets appear from floor 1 in two
 themes (Q3).**
 
@@ -91,10 +92,10 @@ Appendix A findings **FF** (fun), **FB** (balance) and **FC**
 **Names are placeholders** until the client naming pass. Every new name
 was grep-checked as a whole word against the 18 approved documents and
 has 0 hits: Blueprint, Site, Portal, Arch, Circuit, Forecourt, Sanctum,
-Stairhead, Bossgate, Grille, Drape, Squeeze, Latch, Hairline, Alcove,
+Stairhead (renamed the Downstair, naming pass NP-18), Bossgate, Grille, Drape, Squeeze, Latch, Hairline, Alcove,
 Landmark, Precinct, Hinge, Postern, Nexus, Bypass (capitalised; "Stealth
 bypass" stays the enemies word), Last Turning, near pair, Overlook,
-Chute, Strongroom, Drop-bar, Way Back, `SkippablePool`, `topologyClass`,
+Chute, Strongroom, Drop-bar (renamed Slam doors, naming pass NP-18), Way Back (renamed Return Latch, naming pass NP-18), `SkippablePool`, `topologyClass`,
 `layoutGrammar`, `LayoutGrammar` (V8), `HearingGap`, `PortalMinimums`,
 `LayoutDistinct` and every report and record name in 11.
 
@@ -105,8 +106,8 @@ Chute, Strongroom, Drop-bar, Way Back, `SkippablePool`, `topologyClass`,
 | Opening (a Portal kind) | The Shade's **Opening** precision feature (classes 8.4; Shade design) | **Arch**: any open doorway, whatever its skin **(new lead's call)** |
 | Fork | Arcanist Spellcraft option **Fork** (RS 8.0 already avoided it) | "split" in prose |
 | Curtain | "Curtain of Flame" | Drape |
-| Descent | "Short Descent"; the items `descent` event | Stairhead |
-| Search | Ability 7.2 action | Sound the wall |
+| Descent | "Short Descent"; the items `descent` event | the Downstair |
+| Search | Ability 7.2 action | Tap the wall |
 | Spur (as a name) | Herald | lower-case "spur" in prose only |
 | Spine, Threshold, Kit, Zone, Lane, Hub | Approved names or RS's avoided list | Blueprint, Forecourt, Precinct, `hubRim` as a class tag only |
 | Bolt | Lantern, Lightning Bolt | Latch |
@@ -185,7 +186,7 @@ and the Carnival.
 **3. Every boss stands behind a Forecourt (agreed, Q2; change FL-5,
 FL-6).** Every floor ends in the same **Sanctum**: a Forecourt
 antechamber that every path to the arena passes through and that both
-arena entrances open from, the arena, and a **Stairhead** behind the
+arena entrances open from, the arena, and **the Downstair** behind the
 arena through a **Bossgate** that opens on `BossDefeated`.
 - **Floor 1:** empty and near-safe, as RS 9.4 approved.
 - **Floors 2–5:** always on the patrol **Circuit**, never guaranteed
@@ -204,7 +205,7 @@ arena through a **Bossgate** that opens on `BossDefeated`.
 0–1, in the Gaol and the Wake only (the Kennel has none); floors 2–3 1;
 floors 4–5 1–2 *(illustr.)*. Optional content only
 (`SecretNeverCritical`); one universal tell and no decoys; untrained
-parties **Sound the wall**. *Rejected:* B, no secrets on floor 1; C,
+parties **Tap the wall**. *Rejected:* B, no secrets on floor 1; C,
 exactly 1 on every floor-1 theme.
 
 **5. Floor size by depth** *(illustr.)*. n counts `mainPathIndex` 0
@@ -240,7 +241,7 @@ exactly 1 on every floor-1 theme.
 - **New low-cost mechanics:** M1: the party open verb. M2: Grille,
   Squeeze, Latch, Drape, Hairline secrets, Listen, the party close verb,
   Last Turning, the floor count line. M3: Overlook, Chute, Strongroom,
-  Drop-bar doors, Way Back. Rejected: Spyhole/Peer, collapsing routes,
+  Slam doors, Return Latch. Rejected: Spyhole/Peer, collapsing routes,
   floor alarms, shifting rooms, camp-exit choice, split levels.
 
 **Told plainly** (19.1): floor 3 runs over its target at heavy
@@ -262,7 +263,7 @@ fight; and the rest of the list in 19.1.
 | 3 | Layout runs as enemies 10.5 step 1a and outputs slot hosts | M1 | lead's call; FL-3 |
 | 4 | n counts entry through arena; floor-1 antechamber extra; "room k" means `mainPathIndex` k (except enemies 10.2's room level) | M1 | lead's call; FL-4 |
 | 5 | A Forecourt antechamber on every floor; Arches into the arena; on the Circuit on floors 2–5; near-safe on floor 1 | M1 / M2 | **agreed, Q2**; FL-5 |
-| 6 | A Stairhead behind the arena through a Bossgate | M1 | **agreed, Q2**; FL-6 |
+| 6 | The Downstair behind the arena through a Bossgate | M1 | **agreed, Q2**; FL-6 |
 | 7 | Portal kinds; hearing and movement graphs | M1 / M2 | lead's call; FL-7 |
 | 8 | Party door verbs: open in M1, close in M2 | M1 / M2 | lead's call; FL-8 |
 | 9 | One avoidable fight (a guard post); lair a cut vertex; `SkippablePool`; Last Turning | M1 / M2 | lead's call; FL-9 |
@@ -273,7 +274,7 @@ fight; and the rest of the list in 19.1.
 | 14 | `layoutGrammar` record, V8 `LayoutGrammar`, `topologyClass`, `LayoutDistinct` | M1 / M2 | lead's call; FL-14 |
 | 15 | Runtime asserts only when proven at build time; HE-7 retry shared | M1 | lead's call; FL-15 |
 | 16 | Clock commitments and reports; no lever | M2 | lead's call; FL-16 |
-| 17 | Hairline secrets and Sound the wall | M2 | **agreed, Q3**; FL-17 |
+| 17 | Hairline secrets and Tap the wall | M2 | **agreed, Q3**; FL-17 |
 | 18 | Listen at a closed door | M2 | lead's call; FL-18 |
 | 19 | Latch and the return-Portal principle | M2 | lead's call; FL-19 |
 | 20 | Floor count line | M2 | lead's call; FL-20 |
@@ -414,7 +415,7 @@ stealth and cover, and each hit was read in context.
   - pursuit 0–3 rounds.
 - **Enemies 14.5:** Routed units Dash to generation-marked anchors.
 - **Enemies 17.5 (settled):** an arena with at least 2 entrances; exits
-  never sealed; the boss Wary and leashed to its room.
+  never sealed; the boss Watchful and leashed to its room.
 - **RS 6.6 (enemies 20.1 band 110–135%):** baseline 710; 610 after one
   guard-post bypass; pre-boss 510 on floor 5 (410 after one bypass).
 - **DH:**
@@ -444,7 +445,7 @@ Each is met in section 14:
 - at least 3 Acrobatics choices (shared with segment 3);
 - DEP-S1's 2 closed unlocked doors from floor 2;
 - secrets and unexplored rooms (enemies 14.6 facts);
-- Keepsake slot numbering;
+- Souvenir slot numbering;
 - the Wake and Heart `placementRules` inputs;
 - the trader side-room tag (Later);
 - room identity for leftovers.
@@ -458,7 +459,7 @@ Each is met in section 14:
 | LT3 | Floor-1 "short safe walk" against "no guaranteed safe spot" (agreed) and ability 5 | Floor 1 is the approved exception, told plainly. Floors 2–5 put the antechamber on the Circuit every time (FL-5) **(agreed, Q2)** |
 | LT4 | "Visible before commitment" against first sight being a noticing trigger (12.2; symmetric line of sight decided) | A sight-only Grille vantage at ≥ 7 squares, behind an opt-in vantage Door; the Champion holds its room (FL-7; FL-21 request, with a layout fallback) |
 | LT5 | DEP-S1 needs 2 closed doors; Carnival, Gut and Heart are door-poor | Every theme authors door skins; `PortalMinimums` |
-| LT6 | Stairs owed but placed nowhere | Stairhead behind the arena (FL-6) **(agreed, Q2)** |
+| LT6 | Stairs owed but placed nowhere | The Downstair behind the arena (FL-6) **(agreed, Q2)** |
 | LT7 | Patrol "loops" has no geometry | The Circuit, counted in Room nodes (FL-10); on floors 2–5 it lives in the post-lair tail (told plainly) |
 | LT8 | A bypassed lair fails 20.1 (570, 106%) | The lair is a cut vertex; only guard posts are route-avoidable; `SkippablePool` (FL-9) |
 | LT9 | Den and Sleeper lairs are "Stealth-bypass candidates", so they can be sneaked past in-room | Layout closes only the route case; flagged to the enemies owner (FL-21, told plainly) |
@@ -479,7 +480,7 @@ Each is met in section 14:
 |---|---|
 | **Blueprint** | An authored macro graph on 12-square cells: main chain, Sites, node footprints, role orders, signature room (6.1) |
 | **Site** | A typed hole in a Blueprint, rewritten by one `SiteRule` draw (6.1) |
-| **Room node** | A room in the graph: the entry, a main-path room, a side room, the antechamber, the arena or the Stairhead. Corridors, Alcoves and the Bypass arm are not Room nodes. Room nodes = n + k + the Stairhead; the elite room and Circuit side rooms count among the k side rooms (6.3) |
+| **Room node** | A room in the graph: the entry, a main-path room, a side room, the antechamber, the arena or the Downstair. Corridors, Alcoves and the Bypass arm are not Room nodes. Room nodes = n + k + the Downstair; the elite room and Circuit side rooms count among the k side rooms (6.3) |
 | **Portal** | Any connection between Room nodes or a Room node and an Alcove: Arch, corridor, Door, Locked, Bossgate, Drape, Grille, Squeeze, Latch, Hairline secret (9.2) |
 | **Arch** | An open doorway of any skin (archway, gap, tent mouth); hearing and line of sight pass |
 | **Door kind** | Door, Locked, Latch, Hairline secret and Drape. A **non-door** Portal is an Arch or a corridor; Squeezes, Grilles and the Bossgate are neither and are never flee exits (9.2) **(lead's call, after the check)** |
@@ -491,9 +492,9 @@ Each is met in section 14:
 | **Socket** | (cell, side, offset, width): offsets 3, 6 or 9, width 1–3, covering offset to offset + width − 1 along the cell side (SK1, 6.4) |
 | **Template class** | (role, size class, socket mask); V8 checks the worst case over its member templates (11.2) |
 | **Forecourt** | The antechamber: main-path room n−2, which every path to the arena passes through (6.11) |
-| **Sanctum** | The Forecourt, the arena and the Stairhead together (6.11) |
-| **Stairhead** | A small room behind the arena holding the stairs; none on floor 5 (6.11) |
-| **Bossgate** | The Portal between arena and Stairhead; impassable until `BossDefeated`, then an Arch (6.11) |
+| **Sanctum** | The Forecourt, the arena and the Downstair together (6.11) |
+| **The Downstair** | A small room behind the arena holding the stairs; none on floor 5 (6.11) |
+| **Bossgate** | The Portal between arena and the Downstair; impassable until `BossDefeated`, then an Arch (6.11) |
 | **Circuit** | The patrol's cycle of 2–4 Room nodes (6.7) |
 | **Bypass** | The one cycle that lets a party route around one guard post (6.8) |
 | **Near pair** | A fight host and a neighbouring group at effective hearing path 9–10 (6.6) |
@@ -626,9 +627,9 @@ lead's calls after the check):**
   unused slot, as LS5 does for forced-`None` Sites.
 - **Canonical node order (lead's call, after the check):** the main
   chain by `mainPathIndex`; then Site nodes by (Site index, the rule's
-  node index); then the Stairhead; then Alcoves by (parent `roomId`,
+  node index); then the Downstair; then Alcoves by (parent `roomId`,
   socket index). `roomId` is the position in that order, and every draw,
-  tie-break and Keepsake number uses it.
+  tie-break and Souvenir number uses it.
 - Generation runs at camp step 11 for floor N+1 (RS 6.8); its
   `GenInputs` are frozen there, at Travel on, from the camp-exit state
   (SV-14, read; seeds and validation design 4.4, 4.8.2).
@@ -654,7 +655,7 @@ rule is needed to forbid it.
 | LS10 Structure | `roomId`, `mainPathIndex`, `effectiveIndex`, `branchIndex`, Portal and square ownership (FL-13), role tags, slot hosts, `equivalentHosts`, each fight host's `fleeExit` | 0 |
 | LS11 Reserve | HE-7 first-half socket, HE-7 second socket, HE-4 supply socket: one draw each over a candidate list sorted by (`effectiveIndex`, `roomId`, socket index) (6.5) | 3 |
 | LS12 Hearing repair | For each `HearingGap` shortfall, in pair order (slot-home `roomId` pairs ascending), upgrade the first repairable Portal on the shortest hearing path to a forced-closed Door; ties broken by (path length, `portalId`). **Repairable:** an Arch or Drape that is not an arena entrance, a fight host's `fleeExit`, a Bypass-arm Portal or the Bossgate. Each Portal at most once; bounded by the Portal count | 0 |
-| LS13 Annotate | The final hearing and movement graphs and static matrices; Circuit waypoints and phase; the sight checks (`PartyEscape`, the Grille vantage, the Bypass sight window, `AntechamberScreened`); anchor rankings; door share; Landmarks; Keepsake slots; minimap nodes; `protectedSquares` and `protectedSightLines`; `layoutDigest` | 0 |
+| LS13 Annotate | The final hearing and movement graphs and static matrices; Circuit waypoints and phase; the sight checks (`PartyEscape`, the Grille vantage, the Bypass sight window, `AntechamberScreened`); anchor rankings; door share; Landmarks; Souvenir slots; minimap nodes; `protectedSquares` and `protectedSightLines`; `layoutDigest` | 0 |
 
 **Side budget in LS5 (lead's call, after the check):**
 - Each Blueprint Site is `mandatory` or optional, with a `priority`.
@@ -729,12 +730,12 @@ at runtime at AP1 (6.1, 11.2; SV-9).
 | # | Invariant | Source |
 |---|---|---|
 | LG1† | Main chain 0..n−1, designated in the Blueprint, not a computed shortest path. 0 = entry, n−2 = antechamber (Forecourt), n−1 = arena | enemies 6.3; FL-4 |
-| LG2† | Connected; every walkable square reachable from the entry. Required content (main path, HE-7 and HE-4 sockets, elite room, anchors, Stairhead after the boss) is reachable without Locked, unfound secret, Squeeze or unlifted Latch Portals. Nothing in walls. No lock, check or trap gates it (`LockNeverCritical`, `TrapNeverSeals`; TL-20, traps and locks design 6.1 CC5, 6.20) | main 4.6, 7 |
-| LG3† | **`AntechamberDominatesArena` on every floor**, judged on the pre-boss graph. No walkable square of another room lies within 3 squares across a wall of the arena or Stairhead; no crossable hazard bridges them (no Void or crossable hazard region between the antechamber and the Sanctum; V10 `NoSanctumBridge`, HZ-3, hazards design 6.2.2) | RS 9.4 extended (FL-5) |
+| LG2† | Connected; every walkable square reachable from the entry. Required content (main path, HE-7 and HE-4 sockets, elite room, anchors, the Downstair after the boss) is reachable without Locked, unfound secret, Squeeze or unlifted Latch Portals. Nothing in walls. No lock, check or trap gates it (`LockNeverCritical`, `TrapNeverSeals`; TL-20, traps and locks design 6.1 CC5, 6.20) | main 4.6, 7 |
+| LG3† | **`AntechamberDominatesArena` on every floor**, judged on the pre-boss graph. No walkable square of another room lies within 3 squares across a wall of the arena or the Downstair; no crossable hazard bridges them (no Void or crossable hazard region between the antechamber and the Sanctum; V10 `NoSanctumBridge`, HZ-3, hazards design 6.2.2) | RS 9.4 extended (FL-5) |
 | LG4† | Both arena entrances open from the antechamber, ≥ 5 apart, and are **dog-leg Arches, never Doors**, screened both ways (`AntechamberScreened`, 6.11). The arena's only other Portal is the Bossgate; on floor 5 there is none **(new lead's call; the dog-leg is a lead's call after the check)** | enemies 17.5; FL-5, FL-6 |
 | LG5 | Floor 1: the antechamber has exactly 1 inbound Portal and the 2 arena Portals; no side room, no Alcove, not on the Circuit. Floors 2–5: 1–2 inbound main Portals (a Bypass arm landing in the Forecourt counts as one); **always a Circuit waypoint**; at most **two** Circuit side rooms attach, and neither touches the arena **(two: lead's call, after the check)** | RS 9.4; FL-5 |
 | LG6 | The lair is a cut vertex between the entry and the antechamber; lair index in [FloorDiv(n−1, 2) + 1, n−3] | enemies 10.4; FL-9 |
-| LG7† | Exactly one route-avoidable fight host per floor, a guard post (`SkippablePool`, structural form in 6.8). The optional elite room and the patrol's Circuit are excluded by definition. Bypass and Circuit traps are alarms at Easy detect or `alwaysKnown` (TP7 `BypassClean`; TL-20, traps and locks design 6.20) | enemies 10.4, 20.1; FL-9 |
+| LG7† | Exactly one route-avoidable fight host per floor, a guard post (`SkippablePool`, structural form in 6.8). The optional elite room and the patrol's Circuit are excluded by definition. Bypass and Circuit traps are alarms at Mild detect or `alwaysKnown` (TP7 `BypassClean`; TL-20, traps and locks design 6.20) | enemies 10.4, 20.1; FL-9 |
 | LG8† | The Circuit (6.7) | enemies 10.4; FL-10 |
 | LG9 | Circuit isolation and `HearingGap` (6.6), proven with worst-case interior path bounds per socket pair | FL-10, FL-11 |
 | LG10 | Branches: side rooms at depth ≤ 2; at most 1 depth-2 spur (none in M1), which ends in a Latch back toward the chain. At least ⌈k / 2⌉ loop-back side rooms, filled first by the side budget (6.1). Leaf dead ends 1–3 (Alcoves excluded); no empty leaf | numbers pass; fun critique |
@@ -769,7 +770,7 @@ caps; fight rooms and arenas also meet the projected screen-fit bound of
 Arena column (read; BR-1, M1/M2; boss rooms design 4.1.1).
 
 **Counting (lead's call, after the check):** Room nodes = n + k (side
-rooms) + the Stairhead. The elite room and Circuit side rooms count as
+rooms) + the Downstair. The elite room and Circuit side rooms count as
 side rooms; the Bypass arm is Portals only, never a Room node; Alcoves
 and corridors are not rooms (FL-4).
 
@@ -779,7 +780,7 @@ and corridors are not rooms (FL-4).
 | F2 (duo) | 8 | 2–4 | 1–3 | 11–13 | 1,300–1,600 | 6×6 | 110–150 | 10×10–12×13, ≥ 10 deep | 15×17 |
 | F3 (trio) | 8–9 (8 trimmed) | 2–4 (trimmed: 2 + a visible Alcove reward) | 2–4 | 11–14 (trimmed 11) | 1,450–1,800 (1,350–1,650) | 6×7 | 115–160 (105–140) | ≥ 11×11, up to 13×15 | 15×17 |
 | F4 (3–4) | 8 (7 trimmed) | 2–4 (trimmed: 2 + a visible Alcove reward) | 2–3 | 11–13 (trimmed 10) | 1,550–1,850 (1,400–1,650) | 6×7 | 120–160 (100–130) | 11×13–13×16 | 17×19–21×21 |
-| F5 (3–4) | 7 | 2–3 (trimmed: 2 + a visible Alcove reward) | 1–3 | 9–10 (no Stairhead) | 1,450–1,800 | 6×6 | 110–150 (90–125) | 11×13–13×16 | the bed, about 17×19 |
+| F5 (3–4) | 7 | 2–3 (trimmed: 2 + a visible Alcove reward) | 1–3 | 9–10 (no Downstair) | 1,450–1,800 | 6×6 | 110–150 (90–125) | 11×13–13×16 | the bed, about 17×19 |
 
 The trimmed floor-3 row serves RS 10.2's floor-3 extension
 (`pacing.trimmedFloors` [3, 4, 5]) **(lead's call, after the check)**.
@@ -794,7 +795,7 @@ The trimmed floor-3 row serves RS 10.2's floor-3 extension
 | Alcove | ≤ 5×5 |
 | Antechamber (Forecourt), floor 1 | 5×9–7×11 |
 | Antechamber (Forecourt), floors 2–5 | The floor's fight-room size, because it is the patrol's fight host (6.11) **(lead's call, after the check)** |
-| Stairhead | about 5×5 |
+| The Downstair | about 5×5 |
 | Elite room | 10×10–13×15, ≥ 10 deep |
 | Dare room (M3; HZ-21) | ≤ 9×9; a side-room Site on floors 2–5, ≤ 1 Dare-or-Wager per floor (the slot shared with segment 5's Wager rooms; TL-29, M3; traps and locks design 6.15), never critical, signposted on its Portal (hazards design 6.10) |
 
@@ -805,7 +806,7 @@ Forecourt. Every terrain piece square is non-free (TR-19; room terrain
 design 6.2.1, V9 `FreeSpaceAfterClutter`).
 
 **Other bounds:**
-- Corridors ≤ 30% of walkable squares (35–40% in the Silk and the Gut).
+- Corridors ≤ 30% of walkable squares (35–40% in the Archive and the Gut).
 - Floor area scales with depth. The party band picks only the template
   size class. Hazards never scale with party size (count, footprint,
   band or period); their footprints scale with room size only, and
@@ -870,7 +871,7 @@ takes the floor's top card, which goes on the elite or lair carrier.
   fight hosts **(lead's call, after the check)**. Segment 5 fills them
   (TP12: from floor 2, ≥ 2 main-path traps, ≥ 1 before the first fight,
   ≥ 1 within 6 of a fight host); the 0→1 Portal socket takes a Door
-  catch or a threshold wire outside the Portal square (TP1; TL-20, M2;
+  clasp or a threshold wire outside the Portal square (TP1; TL-20, M2;
   traps and locks design 6.20).
 
 ### 6.5 Slot placement (enemies 10.4 settled; realised by layout under FL-3)
@@ -910,14 +911,14 @@ target, which LS5 draws from the Blueprint's `bypassTargets[]` (6.8).
 |---|---|
 | Patrol | The Circuit (6.7). Floor 1's cowable Scavengers (CL-10) sit on main-path Q room 3. On floors 2–5 the patrol's homeRoom is the Forecourt, since enemies 6.3 homes a patrol in its route room with the highest `expectedTenths` and Circuit side rooms inherit the Forecourt's; the patrol is levelled and paid at room n−2 **(told plainly, after the check)** |
 | Guard posts | Chokepoint rooms: one forward Portal that is a door kind or ≤ 2 wide, plus an entry side of at most a flank pair |
-| Lair | The L position, a cut vertex. May be `deadEndAllowed` only for a Den or Sleeper template, where Cornered is the intended payoff. **Reading to confirm (LP-14, M2; loot sources design 4.10; LE 18.2):** on floor 5 the L room's host socket holds the Viaticum (Bedside Stand host, agreed loot sources Q5) on its exit side toward the Forecourt, outside the start zone, on the walk line, because nothing lies between L and F on floor 5; the FL and enemies owners confirm. If refused, segment 2 adds a post-lair main-path container on floor 5 (loot sources design 14.2) |
+| Lair | The L position, a cut vertex. May be `deadEndAllowed` only for a Den or Sleeper template, where Cornered is the intended payoff. **Reading to confirm (LP-14, M2; loot sources design 4.10; LE 18.2):** on floor 5 the L room's host socket holds the Parting Fare (the Washstand host, agreed loot sources Q5) on its exit side toward the Forecourt, outside the start zone, on the walk line, because nothing lies between L and F on floor 5; the FL and enemies owners confirm. If refused, segment 2 adds a post-lair main-path container on floor 5 (loot sources design 14.2) |
 | Elite room | A depth-1 spur from a main-path room with index ≥ FloorDiv(n−1, 2), not the antechamber or arena (floor 1: second half, enemies 17.4). Entered by a Door. Its **Grille vantage** sits in a vantage Alcove of the parent room, behind a Door the party opens only when it wants to look, so a peek is always a choice; from it the party sees ≥ half of the elite start zone at distance ≥ 7, and the two sides are walkably joined within ≤ 12 (`GrilleReach`). No square on the parent's main walk line sees the start zone. **If the enemies owner refuses FL-21 (b),** a noticed Champion may come, so the hearing outline marks the vantage Door as a noticing risk before the party opens it; the opt-in Door is the layout fallback and needs no enemies rule **(vantage Alcove and fallback: lead's calls, after the check)**. Templates also fit the floor-3+ Rival Party (2–3 units, enemies 18.1). Inherits `expectedTenths` through `branchIndex` |
 | Boss | Arena socket: the Blueprint's 2×2-cell `arenaCell`, sized to contain the boss's authored arena at its floor band, into which segment 9 stamps its `ArenaTemplate` Guise draw-free, rotated to face the Forecourt (BR-1, BR-2; M1/M2; boss rooms design 4.1.1, 4.1.3); two dog-leg Forecourt Arches; the Bossgate on the far wall (none on floor 5). Arena start zones sit ≥ 9 path squares from both entrances (segment 9 hook). A guarded boss's signature cache sits in the arena, never the L room (a reading of IR 4.13 and 4.18; loot sources design 4.4) |
 | Empty or special | Q positions, and the antechamber on floors 2–5, which is also the patrol's fight host and homeRoom (RS 6.6's "empty or special" reads it as special; told plainly, FL-5). Segment 8 fills Q rooms; floors 2–5 antechambers may host non-encounter micro-events. **Segment 8's hosts (EV-2, M2; events design 0.1, 4.2):** about one Curiosity per floor on floors 1–3 (floor 4: a Glimpse in M2; M3 one if segment 8's clock line holds), in rooms layout already rations, never an added room; on floors 2–4 a Q room hosts it, on floor 3 the Q room the tie-break picks, the other Q a Glimpse; a floors 2–5 Forecourt micro-event is a 1-click Interlude when drawn; floor-1 hosts as in 6.9, with main-path Q room 3 carrying a wall Glimpse only (it keeps the CL-10 Circuit and its one lesson); never an arena, the Sanctum, the Annex, a Dare or Wager room, the elite room, a boxed-lurker host or floor-1 main-path rooms 0–2, never on a walkable square, at most one per room. **Tie-break:** wherever several hosts qualify, the lowest main-path index, then the lowest room id (side rooms take the index of the room they hang from); no draw |
 | Side rewards | Loop-back Sites first, then spurs and Alcoves. Off-path potions (600‰ lean) and secret caches |
 | HE-7 / HE-4 | Socket 1: a no-check socket in a traversed room with index < FloorDiv(n−1, 2), not in the Gb room. Socket 2: a traversed room with FloorDiv(n−1, 2) ≤ index ≤ n−2 (the antechamber allowed; on floor 1 "empty" means no encounter, so a container is legal). HE-4: a traversed no-check socket before the arena, not in the Gb room and not in a Circuit room (the floors 2–5 Forecourt included), so no optional fight stands in front of it. Entry templates, every Q template and **every Forecourt template** carry ≥ 1 no-check socket, so reservation is constructive on every role order, floor 5 included (V8 `HE7Sockets`). DH 12.5 step 4 draws the supply among these HE-4-eligible containers only (FL-3) **(lead's calls, after the check)** |
 | Trader (Later), Pledge (Later) | A `traderEligible` / `pledgeEligible` loop-back side room on floors 2–4, not on the Circuit, not the elite room |
-| Keepsake slots | Numbered from 0: main path by index, then side rooms by `branchIndex` (3.4), then `roomId` (RS 9.3) |
+| Souvenir slots | Numbered from 0: main path by index, then side rooms by `branchIndex` (3.4), then `roomId` (RS 9.3) |
 | Signature room | Each Blueprint authors one theme set piece unique to that Blueprint (e.g. the Gaol's Cell Zero door, the Heart's music-box clearing). It can host any role. `SignatureRoomRepeatRate` report. A signature room tagged `curiosityHost` is **always** the floor's Curiosity host when the floor has one, instead of the Q or leaf host, never an extra one (EV-2, M2; events design 4.2) |
 
 ### 6.6 Hearing (change FL-11)
@@ -968,7 +969,7 @@ target, which LS5 draws from the Blueprint's `bypassTargets[]` (6.8).
 
 **Near pairs:**
 - The theme's authored joiner set pieces (the Kennel horn, the Carnival
-  plaza, the Silk stacks, the Gut's resonance).
+  plaza, the Archive stacks, the Gut's resonance).
 - A fight host and a neighbouring group at **effective** path **9–10**
   under the proof state: outside combat radius 8, inside the loud-trap /
   shattered-door radius 10 (enemies 12.3).
@@ -978,13 +979,13 @@ target, which LS5 draws from the Blueprint's `bypassTargets[]` (6.8).
   design 4.8.4).
 - Legal under the cluster budget as written; no change.
 - Caps: floor 1 ≤ 1 and none at index ≤ 3 (`nearPairMinIndex[1]` = 4);
-  floor 2 ≤ 1; floors 3–5 ≤ 2; the Silk and the Carnival +1. Each
+  floor 2 ≤ 1; floors 3–5 ≤ 2; the Archive and the Carnival +1. Each
   grammar's `nearPairsMax[floor]` lies inside `layout.nearPairsMax[floor]`
   (V8).
 - **Pending requests (EP-22, M2; encounter placement design 6.12):**
   near-pair partners at the far end (10) of the 9–10 band, behind a
   closed door where layout allows; and, only if `ChainPullRate` still
-  misses after segment 6's own levers, dropping the Silk and Carnival
+  misses after segment 6's own levers, dropping the Archive and Carnival
   +1 on floors 2–3 or the floors 3–5 cap (encounter placement design
   6.12 lever 4; cross-document comparison 2026-11-23, CC-89). Not rules
   until the FL owner rules.
@@ -1026,7 +1027,7 @@ zero. Joiners stay a real, player-caused experience.
   action: the next Circuit side room, else the floor is logged and the
   patrol is a Picket); not a layout rule until the FL owner rules.
 - Floor 1: includes main-path Q room 3 (CL-10).
-- The F5 Viaticum is never in a Circuit room (LE-5, read; loot economy
+- The F5 Parting Fare is never in a Circuit room (LE-5, read; loot economy
   design 6.11; 6.11 here).
 - **Floors 2–5: the Circuit lives in the post-lair tail (told plainly,
   after the check).** It must hold the Forecourt and no other fight host,
@@ -1112,7 +1113,7 @@ zero. Joiners stay a real, player-caused experience.
   patrol reaches 540 counting the boss (100%), below the 20.1 band.
   `MultiBypassRate` is reported and flagged to the enemies owner
   (FL-21). **Pending request (EP-23, M2; encounter placement design
-  6.10):** segment 6's Sleeping Ward sneak line answers FL-21 (d)'s
+  6.10):** segment 6's Heap sneak line answers FL-21 (d)'s
   in-room sneak case (Den, Sleeper and Dormant lairs; `LairSneakRate`);
   not a rule until the enemies owner rules (cross-document comparison
   2026-11-23, CC-89).
@@ -1199,7 +1200,7 @@ zero. Joiners stay a real, player-caused experience.
   - The **full-clear tour** is the walker's deterministic
     nearest-unvisited-room tour (11.4) visiting every Room node and
     Alcove reachable without Locked or unfound secret Portals, ending at
-    the arena Arch. The Stairhead is excluded (it follows the boss).
+    the arena Arch. The Downstair is excluded (it follows the boss).
 - `BacktrackBound`: full-clear tour ≤ 1.7 × critical path as the
   *target* median, computed over the V8 enumeration per (theme, floor,
   party band). The build fails at a median of 1.9 or a p90 of 2.2.
@@ -1240,7 +1241,7 @@ zero. Joiners stay a real, player-caused experience.
   exploration and information design 4.7):** travel to Seen or
   Remembered squares and to Chalked squares inside entered spaces (with
   the step check), the noticing pre-stop, Next loose end and Back to
-  Stairhead; no auto-explore.
+  the Downstair; no auto-explore.
 - **Pending request (XI-9, M2; exploration and information design
   4.7):** "stopping on any sighting" becomes "on any **new** sighting or
   **changed** state" (a new group or member, a changed square, awareness
@@ -1250,7 +1251,7 @@ zero. Joiners stay a real, player-caused experience.
   refusal segment 10 applies its cut steps (exploration and information
   design 9.5). Until the FL owner rules, segment 10's `stopOnResight`
   defaults to true (cross-document comparison 2026-11-23, CC-124).
-- The post-boss walk is 60–97 squares (11–17 s) on the toy. The Way Back
+- The post-boss walk is 60–97 squares (11–17 s) on the toy. The Return
   Latch is built in M3 and off by default (`PostBossBacktrack`
   decides).
 - **Pending request (HZ-23; M3):** Plunge, a one-way out-of-combat link
@@ -1333,7 +1334,7 @@ zero. Joiners stay a real, player-caused experience.
   rest. Not a rule until the FL and ability 7.2 owners rule.
 - **Auto-walk and traps (TL-7, M2; traps and locks design 6.4):**
   detection runs after every square of party movement, and a new
-  Revealed or Hunch result interrupts auto-walk. Auto-walk stops on the
+  Found or Hunch result interrupts auto-walk. Auto-walk stops on the
   last square before a new Hunch zone; out of combat it auto-Probes at 0
   clicks unless the patrol forecast shows a crossing within 2 ticks
   (read as a **known** patrol due in the Probe's hearing reach, through
@@ -1360,10 +1361,10 @@ or a slot rule above.
 | Floors 2–5 Forecourt | Counted as an empty or special room; 1–2 inbound main Portals; **always a Circuit waypoint** and the patrol's homeRoom and fight host, never guaranteed safe while the patrol lives; at most two Circuit side rooms attach, never touching the arena; the floor's fight-room size, with the free-space rule, LG12 flee exits and LG20 entry rules; may host a segment-8 micro-event, a 1-click Interlude with arena-facing facts only, `AntechamberScreened` kept (EV-2, EV-23; events design 4.1, 4.7) **(size and fight-host rules: lead's calls, after the check)** | 2–5 |
 | **Arena entrances** | Two **dog-leg** Arches from the Forecourt, ≥ 5 apart, never Doors; arena start zones ≥ 9 path squares from both. **`AntechamberScreened`, symmetric:** no Forecourt square more than 2 beyond an entrance has line of sight to any arena square more than 2 beyond that entrance, in either direction; a baffle or bend inside each Arch does it. The boss can therefore be shot from the Forecourt only while it stands in its own doorway band, where its reach covers the Arch **(symmetric form: lead's call, after the check)**. Segment 9 authors each Arch socket's baffle and reads the screen for Take Places (BR-1, BR-4; boss rooms design 4.1.1, 4.2.2) | All |
 | **Bossgate** | On the arena's far wall; blocks movement and sight and is not a hearing path until `BossDefeated` (canonical; LP's `BossResolved` is its alias, BR-37, M2; boss rooms design 4.2.4), then an Arch. Not an entrance: "the exits are never sealed" refers to the entrances (enemies 17.5, clarified) | 1–4 |
-| **Stairhead** | About 5×5 behind the Bossgate; the stairs, the left-behind warning and Scrap (items 9, 24); the floor fact "path to the stairs" means the Stairhead (enemies 14.6) | 1–4 |
-| Floor 5 | No Stairhead and no Bossgate: the run ends; a waking-light window dresses the far wall (display only, M3 seams). The floor fact "path to the stairs" reads as the main path to the arena | 5 |
+| **The Downstair** | About 5×5 behind the Bossgate; the stairs, the left-behind warning and Scrap (items 9, 24); the floor fact "path to the stairs" means the Downstair (enemies 14.6) | 1–4 |
+| Floor 5 | No Downstair and no Bossgate: the run ends; a waking-light window dresses the far wall (display only, M3 seams). The floor fact "path to the stairs" reads as the main path to the arena | 5 |
 
-**Catch-up trigger, read with FL-13 (new lead's call):** RS 9.4's
+**Forecourt Top-up trigger, read with FL-13 (new lead's call):** RS 9.4's
 trigger (a) fires on squares whose `roomId` is the Forecourt; the inbound
 Portal's squares belong to room n−3 and the arena-adjacent doorway
 squares belong to the arena, so trigger (b) ("any attempt to enter an
@@ -1375,12 +1376,12 @@ arena square") covers the arena doorways. RS 3.4's glossary wording
 wording (the data id `arenaSeal` stays an alias; display never says
 "seal"); it fires when a party unit enters an arena square, doorway
 squares included (FL-13), or the boss group notices one, after the
-floor-1 Catch-up on the same tick. The Arches stay open throughout.
+floor-1 Forecourt Top-up on the same tick. The Arches stay open throughout.
 
 **The Sanctum rest rule (BR-31; agreed, boss rooms Q2, 2026-11-22; M2;
 boss rooms design 4.2.5):** from the first `ArenaEngaged` until
 `BossDefeated`, no short rest is taken while the boss lives and any party
-unit stands on a Sanctum square (Forecourt, arena, Stairhead). It
+unit stands on a Sanctum square (Forecourt, arena, the Downstair). It
 narrows the client reading of 2026-11-21 (6.8): a floors 2–5 Forecourt
 cleared of its patrol is restable only before first engagement, and
 rests before it stay legal (`PreBossRestSafety`). Rests elsewhere on the
@@ -1398,7 +1399,7 @@ until the FL owner (Core events) rules, with the IR and CMP owners;
 fallback if refused: weapon and focus R2 keyed to the killing blow only,
 no shield or armour R2 at M3 (heirlooms and curses design 14.2).
 
-**The Viaticum (F5; LE-5, M2; read; loot economy design 6.11, agreed
+**The Parting Fare (F5; LE-5, M2; read; loot economy design 6.11, agreed
 Q1):** the F5 boss share sits in a main-path Plain container after the
 lair that is not in a Circuit room, not in a fight host (HE-4's
 exclusion) and not in the Forecourt; else a container in the lair room.
@@ -1436,7 +1437,7 @@ to every theme:**
 | Kennel (F1; M1 subset) | beads | 0.10–0.20 | 50% | 8 | 2 | 1 horn | The painted moon over the lodge; shadows point to it |
 | Wake (F1, conditional) | courtyard | 0.45–0.60 incl. Drapes | 20% | 4 | 2 | 0 | Sconces lit along the main path |
 | Choir (F2–3) | comb | 0.33–0.43 | 30% | 1 | 2–3 | 1 | The water line rises toward the quire |
-| Silk (F2–3) | lattice | 0.20–0.30 | 15% | 8 (aisles) | 3–5 | 1–2 (+1) | Lamp-gold main aisle |
+| Archive (F2–3) | lattice | 0.20–0.30 | 15% | 8 (aisles) | 3–5 | 1–2 (+1) | Lamp-gold main aisle |
 | Carnival (F2–3) | hubRim | 0.20–0.30 + flap Drapes | 50% | 3 | 2–3 | 1 (+1) | Lantern strings converge on the big top |
 | Supper (F4; F3 from M3) | axis | 0.45–0.50 | 5% | 3 | 2–3 | 0 | Place-card numbers count down to the empty chair |
 | Gut (F4) | braid | 0.25–0.35 | 35% | 7 | 3–5 | 1 | Wall ridges lean with the flow; the heartbeat quickens |
@@ -1469,7 +1470,7 @@ boxes; V8 checks that share.
 
 **Macro shape.** A prison tower lying on its side: parallel cell-block
 wings joined through junction guard rooms. Blueprints:
-- Two Wings (H)
+- Split Block (H)
 - Three Wings (E)
 - The Yard
 - The Stairwell Tube
@@ -1487,7 +1488,7 @@ wings joined through junction guard rooms. Blueprints:
   **(lead's call, after the check)**.
 - Junction guard rooms (9×9–11×11, chokepoints).
 - At most 1 yard (13×13–15×15, lair or elite).
-- Records or chapel (Q); the Last Hour (Forecourt).
+- Records or chapel (Q); the Sentence Corridor (Forecourt).
 
 **Law in layout (Lockdown):**
 - Consecutive fight rooms are usually 2 closed doors apart (−6). Short
@@ -1497,7 +1498,7 @@ wings joined through junction guard rooms. Blueprints:
   delays; it does not cut a path unless locked (segment 5). **On
   hooded-cot seeds (EP-13, M2; told plainly; encounter placement design
   6.17)** the floor has no shut-door pair, and the Law shows through the
-  door network and the bell tripwires.
+  door network and the keyring tripwires.
 - The keyring cell cache sits within 1 room of the Turnkey's homeRoom;
   it never gates the main path.
 - Tripwire-eligible thresholds on the Circuit and the Bypass go to
@@ -1541,7 +1542,7 @@ long axis ≤ 18) strung on trails around an impassable,
 line-of-sight-blocking thicket. Partitioned into rooms in the rules, read
 as one wood on screen **(agreed, Q1)**. The lodge interior is the
 Forecourt cluster. Blueprints:
-- Hunting Ring (M1)
+- Hunting Circle (M1)
 - Lodge Grounds (M1)
 - The Ride
 - Twin Coverts
@@ -1591,7 +1592,7 @@ material on a flat floor, 8.1). Blueprints:
 - No niche within hearing of rooms 0–2: layout emits `nearStart`, which
   makes the RS 8.5 placement rule geometric.
 - Coffin tells are visible at ≥ 7 on approach.
-- Drapes are the drawn curtains.
+- Drapes are the drawn arras.
 - The servants' passage is the Bypass; the gallery ring is the Circuit
   (floor 1).
 - Secrets: 0–1 on floor 1 **(agreed, Q3)**. The theme dressing beside
@@ -1622,7 +1623,7 @@ restated after the check, 6.7)**. Blueprints:
 - Per-room wetness bands (dry / wet edge / flooded) for segment 3.
 - Every fight room's party entry opens from a dry edge, which supports
   RS 8.6's entry-square and dry-island caps.
-- Sluice gates are Door skins between wet and dry (segment 5 owns the
+- Sluice doors are Door skins between wet and dry (segment 5 owns the
   Soak). A sluice *wheel* is a hazard piece (a Cord), not this Door skin
   **(told plainly; HZ-1, hazards design 6.1)**.
 
@@ -1631,7 +1632,7 @@ restated after the check, 6.7)**. Blueprints:
 - Dais lips are floor material and value only, never a step (8.1), and
   sit outside fight footprints.
 
-### 7.6 The Silk Archive (F2–3): `lattice`
+### 7.6 The Cobweb Archive (F2–3): `lattice`
 
 **Macro shape.** Full-height stack blocks carved by axis-aligned 1–2-wide
 aisles; reading rooms (9×11–13×15) are the fight hosts. The Circuit is
@@ -1670,7 +1671,7 @@ and reads as one fairground on screen **(agreed, Q1)**. Blueprints:
 - The Midway
 - The Ring
 - Two Rings
-- Fairground Gate
+- Fairground Turnstile
 - Under the Big Top (deep set)
 
 **Law in layout (oil and fire both ways):**
@@ -1704,7 +1705,7 @@ servery ring: the Forecourt and one or two pantries behind it.
 Blueprints:
 - The Horseshoe (default)
 - Two Sittings (default)
-- The Long Table
+- The Groaning Board
 - The Cellar Run
 - High Table
 - each with a trimmed variant
@@ -1768,7 +1769,7 @@ into ordinary rooms by full-height giant furniture (wardrobes, toy
 forts, blanket hills with near-vertical faces, 8.1) **(agreed, Q1)**. The
 main path spirals inward to the bed arena. The Forecourt is the hem of
 the blanket with two dog-leg gaps into the bed clearing. There is no
-Stairhead: the run ends, and a waking-light window dresses the far wall
+Downstair: the run ends, and a waking-light window dresses the far wall
 (M3 seams, display only). Blueprints:
 - The Spiral
 - Four Posts
@@ -1831,7 +1832,7 @@ greybox code are binding.
 - Partitions (thicket, wagon rows, giant furniture, blanket hills) have
   near-vertical faces at least full-wall height, so they never read as
   walkable slopes (RC1).
-- The Stairhead's stairs are a non-walkable backdrop piece: a descent
+- The Downstair's stairs are a non-walkable backdrop piece: a descent
   into a void beyond the room edge, used through an interact square.
 - Height lives in walls, backdrop and skybox (RS 7.6, RC1, RC6).
 
@@ -1884,7 +1885,7 @@ the check):**
 - Floor art runs continuously across Arches, with one subtle universal
   threshold seam on the floor at Arch squares, so rules rooms can be
   found without breaking the one-place read. The minimap and a rules
-  overlay outline rooms (morale by room, the Catch-up trigger, Listen's
+  overlay outline rooms (morale by room, the Forecourt Top-up trigger, Listen's
   "room beyond" and the elite's "visible before commitment" all depend
   on room membership).
 - Recipes: the Kennel splits glades by thicket bands; the Carnival
@@ -1919,14 +1920,14 @@ used", checked by V8 `PortalSkinMatrix`)*:
 | Theme | Arch | Door | Drape | Grille | Squeeze fill | Latch | Bossgate |
 |---|---|---|---|---|---|---|---|
 | Gaol | archway | clock-face cell door, ward door | not used | cell bars over glass | drain crawl | hatch | iron leaf |
-| Kennel | thicket gap | boarded hurdle, lodge door | not used | kennel mesh | deer-run | trap hatch | lodge doors |
-| Wake | gallery arch | panelled door | drawn curtain | crypt lattice | servants' crawl | hatch | crypt slab |
+| Kennel | thicket gap | boarded hurdle, lodge door | not used | kennel mesh | deer-run | trap hatch | great-hall doors |
+| Wake | gallery arch | panelled door | drawn arras | crypt lattice | servants' crawl | hatch | crypt slab |
 | Choir | bay arch | sluice door | not used | choir-screen mesh | flooded culvert | hatch | quire doors |
-| Silk | aisle mouth | reading-room door | not used | catalogue mesh | shelf gap | book-lift | archive leaf |
-| Carnival | tent mouth | wagon door, booth door | tent flap | ticket-window mesh | under-stage crawl | trap hatch | big-top curtain wall |
+| Archive | aisle mouth | reading-room door | not used | catalogue mesh | shelf gap | book-lift | archive leaf |
+| Carnival | tent mouth | wagon door, booth door | tent flap | ticket-window mesh | under-stage crawl | trap hatch | big-top canvas wall |
 | Supper | bay arch | service-screen door | not used | serving-hatch mesh | under-table crawl | dumbwaiter | dining-hall doors |
 | Gut | tube mouth | sphincter | not used | villus mesh | fold crawl | valve | pylorus |
-| Heart | furniture gap | wardrobe door | bed hanging | crib bars over glass | toy-fort tunnel | drawer slide | not used (floor 5) |
+| Heart | furniture gap | wardrobe door | canopy valance | rail bars over glass | toy-fort tunnel | drawer slide | not used (floor 5) |
 
 The Hairline tell is one universal glyph in every theme. No Latch skin
 shares a word or silhouette with a Door or Drape skin.
@@ -1937,7 +1938,7 @@ shares a word or silhouette with a Door or Drape skin.
   RC3).
 - Each theme's set holds at least the largest Room-node count of any of
   its Blueprints, plus its aisle-end and set-piece extras (about 18 for
-  the Silk, the Choir and the Carnival) *(illustr.)*; V8 checks the
+  the Archive, the Choir and the Carnival) *(illustr.)*; V8 checks the
   size.
 - Precinct-family Blueprints add a Precinct tint.
 - The boss Landmark is backdrop visible from about half the floor.
@@ -1956,7 +1957,7 @@ frame: XI-7, M1; exploration and information design 4.3.1):
   rooms' outlines drawn over it;
 - Portal glyphs by kind and state (one global set, in the RC5/RC7
   spirit);
-- Landmark icons, Precinct tints, the Stairhead glyph;
+- Landmark icons, Precinct tints, the Downstair glyph;
 - never Unknown rooms; Traced and Chalked rooms in their own styles
   (XI-4, M2, shipping with F-ROOM; exploration and information design
   4.1.5);
@@ -1977,7 +1978,7 @@ socket classes. Budgets count templates, then size classes.
 |---|---|
 | Socket standard | A shared 12-square cell with per-cell sockets at offsets 3/6/9 and widths 1–3; an openable edge always supports its centre socket (**SK1**) |
 | Guard-post and lair templates | 12–16, covering the toy's 16–37 socket classes through superset sockets and orientations, each in the 1–2 size classes of the theme's party bands |
-| Other room templates | Entry 2, elite 3, Q 5, side 6, Alcove 5, Forecourt 3, Stairhead 1–2, signature 1 per Blueprint (4–8) |
+| Other room templates | Entry 2, elite 3, Q 5, side 6, Alcove 5, Forecourt 3, Downstair 1–2, signature 1 per Blueprint (4–8) |
 | Total room templates | About 41–50 per theme; about 370–450 across nine themes |
 | Mask variants (organic themes) | 3–4 pre-baked per organic template, validated like templates |
 | Edge tiles (organic themes) | One marching-squares edge set covering exactly the configurations the mask rules allow (no single-square notches) |
@@ -1987,7 +1988,7 @@ socket classes. Budgets count templates, then size classes.
 | Other | Compass dressing; dressing sets per floor on the display stream |
 
 - **M1 Kennel budget:** 2 Blueprints; about 18 room templates (entry 2,
-  guard post and lair 6, Q 2, side 2, Alcove 2, Forecourt 1, Stairhead 1,
+  guard post and lair 6, Q 2, side 2, Alcove 2, Forecourt 1, Downstair 1,
   signature 2), 3 mask variants each for glades, the edge tile set,
   about 8 corridor pieces, Arch, Door, Locked and Bossgate skins, and 12
   Landmarks.
@@ -2014,19 +2015,19 @@ socket classes. Budgets count templates, then size classes.
 | Party door verbs (open, close) | Passing closed Doors (the M1 Bypass has one); the Gaol `signatureFeature`; line-of-sight control | **M1** open, **M2** close (FL-8) |
 | Grille (sight only) | Elite vantage; Gaol bars | **M2** (FL-7) |
 | Squeeze | Armour 7.3; Bypass; a party escape route | **M2** (FL-7) |
-| Drape | Wake curtains, tent flaps, bed hangings | **M2** (FL-7) |
+| Drape | Wake arras, tent flaps, canopy valances | **M2** (FL-7) |
 | Latch (one-way backward) | Loops instead of backtracking | **M2** (FL-19) |
-| Hairline secrets + Sound the wall | Fair secrets; a Mechanics payoff | **M2** (FL-17) **(agreed, Q3)** |
+| Hairline secrets + Tap the wall | Fair secrets; a Mechanics payoff | **M2** (FL-17) **(agreed, Q3)** |
 | Listen at a door | Peeking without breaking symmetric line of sight | **M2** (FL-18) |
 | Last Turning | Route choice before the boss | **M2** (FL-9) |
 | Floor count line | Pacing information | **M2** (FL-20) |
 | Overlook (mapped layer) | A planning aid | **M3** (needs segment 10's mapped layer; Yield prefers unmapped rooms; unmapped = not entered and interior not Chalked, a reading, XI-1, exploration and information design 4.1.1). **Pending request (XI-27; M3; exploration and information design 4.5.2):** Overlook writes Chalked: the vantage Chalks every room with a square in its line of sight (the footprint, Voids as plain chalk; stubs still by sight); not a rule until the FL owner rules; fallback: Overlook Traces only |
 | Chute (directed edge) | Spurs with no walk back | **M3** (pathfinder testing cost). **Pending request (HZ-23):** Plunge as a Chute skin (hazards design 6.10). **Pending request (TL-41; M3):** segment 5's relocation traps (in combat, same room only; the Supper's Dumbwaiter Drop out of combat to its linked scullery) wait for the ability model's teleport rule (ABL 8); fallback Prone in place (traps and locks design 6.3, 7.8). **Recorded (EV-36, M3 if HZ-23; events design 4.4.1):** segment 8's bypass routes come only as Curiosity skins of FL-generated Chutes, never a new edge (`GraphUnchanged`, `XpBandAfterEvents`); waits on HZ-23 and the FL and enemies owners |
 | Strongroom spur | Fight, steal or pick for one reward | **M3**, floors 2–3 only. Its reward socket is rank SR4 (LE-10, M3; loot economy design 6.9). **Pending (TL-29; M3):** segment 5's Wager room may take this Site (traps and locks design 6.15); the FL owner's call, not yet ruled |
-| Drop-bar doors (the party bars a door; locked for monsters) | Real joiner cuts | **M3**, Gaol only, after SH-18 and the Shade owner. They create safe rest cells against ability 15.1, so they return to the client before they ship **(new lead's call)**. If adopted, segment 5 recommends M3 with the anti-rest guard: monsters force it at 10 + the dropper's Athletics (loud 6), a patrol whose Circuit hits it forces it, and it never satisfies a short rest's "no aware hostile" by itself (TL-33; traps and locks design 6.12) |
-| Way Back (Stairhead Latch) | A cheap post-boss return | **M3**, built off by default |
+| Slam doors (the party bars a door; locked for monsters) | Real joiner cuts | **M3**, Gaol only, after SH-18 and the Shade owner. They create safe rest cells against ability 15.1, so they return to the client before they ship **(new lead's call)**. If adopted, segment 5 recommends M3 with the anti-rest guard: monsters force it at 10 + the dropper's Athletics (loud 6), a patrol whose Circuit hits it forces it, and it never satisfies a short rest's "no aware hostile" by itself (TL-33; traps and locks design 6.12) |
+| Return Latch (the Downstair Latch) | A cheap post-boss return | **M3**, built off by default |
 | Spyhole / Peer | Unit information without line of sight | **Rejected:** strains decided symmetric fog; Grille + Listen cover it |
-| Collapsing routes; floor-wide alarm; shifting rooms | — | **Rejected** (RS 7.6, conditions 11.1, joiner caps). An "On Watch" Omen is possible Later. Hazard Moods (M3, Omen and Nightmare only) are not a floor-wide alarm: they change hazard states only, never awareness, joiners, hearing, Portals or monster stats (HZ-20; hazards design 6.9) |
+| Collapsing routes; floor-wide alarm; shifting rooms | — | **Rejected** (RS 7.6, conditions 11.1, joiner caps). An "On Watch" Omen is possible Later. Hazard Moods (M3, Omen and Peril only) are not a floor-wide alarm: they change hazard states only, never awareness, joiners, hearing, Portals or monster stats (HZ-20; hazards design 6.9) |
 | Camp-exit choice | — | **Rejected** (main 4.1 decided; Two Doors owns it) |
 | Split-level sub-grids | — | **Rejected** (main 6.8 decided); the client may refuse it explicitly Later |
 
@@ -2048,14 +2049,14 @@ socket classes. Budgets count templates, then size classes.
 - Monster door rules are unchanged **(settled, enemies 12.4)**.
 - **Stuck doors (TL-33; traps and locks design 6.12):** rejected as a
   generic type. The **Swollen door** (M3, Choir and Wake, optional
-  content only) is a no-roll threshold: if passive Athletics ≥ Easy it
+  content only) is a no-roll threshold: if passive Athletics ≥ Mild it
   opens quietly; otherwise noise 6 and +2 ticks.
 - **Landmark ticks (M3; HZ-19; told plainly):** the Gaol's Small Hour
   Strikes is a flagged non-party Portal source: every 4 rounds it swings
   shut every open, unoccupied, unlocked cell door in its room; never
   locked, never the `fleeExit`, held while occupied. Landmark ticks are
   not hazards (no damage, condition or unit movement) and are legal on
-  floor 1. The Lockdown Lever and the Mourning Cord stay party-only;
+  floor 1. The Lockdown Crank and the Mourning Ribbon stay party-only;
   monsters changing Portals remains an FL-8 change (hazards design 7.2,
   7.4).
 - The rule is owned by segment 5; layout consumes it.
@@ -2068,7 +2069,7 @@ socket classes. Budgets count templates, then size classes.
 | Corridor (width 1–3, length 1–12) | yes | yes | passes | path length | M1 |
 | Door (opaque solid panel; skins in 8.1) | open 1 square; verbs above | open, never close | closed blocks | closed −3 | M1 |
 | Locked (optional content only; a Door with the padlock decal) | pick (Mechanics, quiet) or force (Athletics, loud 6 per try); DCs on segment 5's ladder, force DC = lock DC + 2 (TL-2, TL-21; traps and locks design 6.2, 6.11) | blocked | blocks | −3 | M1 |
-| Bossgate (arena to Stairhead only) | none until `BossDefeated`, then an Arch | — | blocks | not a path | M1 |
+| Bossgate (arena to the Downstair only) | none until `BossDefeated`, then an Arch | — | blocks | not a path | M1 |
 | Drape | out of combat free to draw or open; in combat, drawing costs the unit's action, once per Drape per round, never while a hostile is adjacent to it or threatens it with reach **(lead's call, after the check)** | pass, leave open | drawn blocks | 0 | M2 |
 | Grille | impassable | impassable | **sight and noticing pass; nothing else does:** no attack, ability, spell, skill action, aura or other effect may target, originate or extend through it (symmetric, so main 4.3 is kept) | not a path | M2 |
 | Squeeze | Acrobatics (below) | never | 90° bend: no line of sight end to end | path, 0 | M2 |
@@ -2163,7 +2164,7 @@ after the check):**
     line of sight to the wall face sees it and reveals the secret
     automatically;
   - any party unit adjacent to the wall face sees the tell.
-- **Sound the wall** targets only a wall square showing the tell (or
+- **Tap the wall** targets only a wall square showing the tell (or
   8-adjacent to the Portal's squares) and opens it: out of combat, 6
   ticks, no roll. There is nothing to sound anywhere else, so wall
   combing is never a strategy.
@@ -2174,13 +2175,13 @@ after the check):**
   Kennel none); floors 2–3 1; floors 4–5 1–2.
 - Optional content only (`SecretNeverCritical`). Secret caches count as
   containers in the "containers and secrets" channel.
-- The Lucid Key secret (Later) reuses a reserved floor-4 Site.
+- The Clear Key secret (Later) reuses a reserved floor-4 Site.
 - Check variants belong to segment 5; detection display to segment 10;
-  Sound the wall goes into ability 7.2's table (FL-17).
+  Tap the wall goes into ability 7.2's table (FL-17).
 - **M3 variants (TL-33; traps and locks design 6.12):** a locked
   Hairline cache (Plain or Crier only) and a trapped Hairline cache (a
-  catch); the agreed no-roll rules are kept. **Open item (M3):** the
-  Lore-inscription reveal in the Silk and the Choir widens agreed Q3 and
+  clasp); the agreed no-roll rules are kept. **Open item (M3):** the
+  Lore-inscription reveal in the Archive and the Choir widens agreed Q3 and
   goes to the client at M3; not a rule until then (19.2).
 
 **Latch (FL-19):**
@@ -2205,7 +2206,7 @@ proposed; Q3 kept it). From floor 2 segment 5 adds "traps found: k ·
 open Hunch zones: h", with no total (TL-9, M2; traps and locks design
 6.4). **The line gains a Treasure count field (LE-15, M2; loot economy
 design 8.2):** "treasures: k / n", field notables found of field
-notables (containers, secret caches, carried; plus the Viaticum on
+notables (containers, secret caches, carried; plus the Parting Fare on
 floor 5); counts only, never locations. On floor 1 the secret cache is
 excluded, so a found floor-1 secret-cache notable raises neither k nor
 n and shows as "+1 secret". **The party-bar tally (XI-11, M2;
@@ -2243,7 +2244,7 @@ simulator rerun before it settles.
 | Elite vantage | 69–100% | Elite template rule: start zone ≥ 7 from the Grille wall |
 | Screen fit on floors 4–5 | 0% with 12-square cells | Per-cell sockets; long-axis cap 18; the projected bound (8.1) |
 | Floor-3 crowding | < 6 free squares per unit with a joiner | Fight rooms ≥ 11×11 |
-| Post-boss walk | 60–97 squares (11–17 s) | Way Back off by default |
+| Post-boss walk | 60–97 squares (11–17 s) | Return Latch off by default |
 | Legal role orders | F1 2, F5 untrimmed 1 | Told plainly; variety from topology, signature rooms, templates |
 | Model B repetition | 86% of Heart rooms already seen by run 5 at 48 pieces | Model A plus orientation, terrain layers, dressing |
 
@@ -2346,7 +2347,7 @@ Events: GenerationRetried (existing; the LR3 floor retry, beside StageRetried,
 - **Index fields (FL-13):** `mainPathIndex` is null off the main chain.
   `effectiveIndex` is defined for every square (3.4). The Surprise rule
   reads `mainPathIndex` (null means "not 0–1"); `expectedTenths`,
-  Keepsake order and leftovers read `effectiveIndex`.
+  Souvenir order and leftovers read `effectiveIndex`.
 - **Inset container sockets (LP-12, M2; loot sources design 4.3):** a
   `containerSockets[]` entry may name a wall `face`; segment 7c prefers
   such an inset host for SR0, Alcove and secret sockets. An inset
@@ -2504,7 +2505,7 @@ companions 7.4).
    - Seconds per tick and a cost table per action *(illustr., the
      companions owner calibrates)*: a step 1 tick; open a door 1 click;
      a container N clicks by type (below); Listen 1 click and 2 ticks (0 ticks
-     when passive); Sound the wall 1 click and 6 ticks; a Squeeze 1
+     when passive); Tap the wall 1 click and 6 ticks; a Squeeze 1
      click, +4 ticks on a failure; a Latch 1 click and 1 tick; a reveal
      1 click; each auto-walk stop 1 click; a travel command 1 click and
      1 tick per step, each noticing pre-stop 1 click (XI-8, M2;
@@ -2514,10 +2515,10 @@ companions 7.4).
      with a quiet summary (coin and non-healing sundries only, which
      auto-closes) 1 click; a Plain container with a notable or a
      healing sundry 2; a lock card +1 click and +1 tick plus hand work
-     (TL 6.21); a key walk-in or an Easy Plain auto-pick 0; a
-     consequence lock 3; a Twin Coffer 2; a secret, Sound the wall plus
+     (TL 6.21); a key walk-in or a Mild Plain auto-pick 0; a
+     consequence lock 3; a Twin Coffer 2; a secret, Tap the wall plus
      open, 1 + 1–2; Glean (optional) 1, +1 per notable decision; Steal
-     2; the Windfall (M3) 0 extra; the Viaticum or a boss card offer 2. The
+     2; the Windfall (M3) 0 extra; the Parting Fare or a boss card offer 2. The
      7c clock line re-runs this walker with these clicks explicit
      (6.10; LP-10).
    - Statistic: the median over the release seed set at party 4, per
@@ -2562,11 +2563,11 @@ companions 7.4).
 
 | Wave | Content |
 |---|---|
-| **M1** | Kennel subset: 2 Blueprints, a small rule library, the M1 kit budget and the 8.0 kit metrics. Graph rules LG1–LG10 (LG3 and LG5 in their floor-1 form; LG10 with no depth-2 spur, since the Latch is M2), LG12 (non-door flee exits, FL-12's M1 clause), LG15–LG16, LG18–LG20. Portal kinds Arch, Door, Locked, Bossgate; the party **open** verb (FL-8). Corridors and the socket router; `mainPathIndex`, `effectiveIndex` and the index rules (FL-13); the `expectedTenths` order; slot hosts (FL-3). The Bypass as a quiet corridor with a Door; the Circuit with a cover room and isolation; hearing graph and matrices. HE-7 and HE-4 reservation at AP1 with the floor retry (LR3, `attempt/{a}`; SV-4, SV-9, M1; seeds and validation design 5.4, 5.5). The arena socket with dog-leg Forecourt Arches (`AntechamberScreened`). The Stairhead with plain stairs, warning and Scrap (items 24 is M1). Minimap data (8.1; XI-7, M1) (cross-document comparison 2026-11-23, CC-88). V8 core sub-checks; runtime assertions; template and Blueprint editor tools. Enemies 25 M1 rows; DH-32 |
+| **M1** | Kennel subset: 2 Blueprints, a small rule library, the M1 kit budget and the 8.0 kit metrics. Graph rules LG1–LG10 (LG3 and LG5 in their floor-1 form; LG10 with no depth-2 spur, since the Latch is M2), LG12 (non-door flee exits, FL-12's M1 clause), LG15–LG16, LG18–LG20. Portal kinds Arch, Door, Locked, Bossgate; the party **open** verb (FL-8). Corridors and the socket router; `mainPathIndex`, `effectiveIndex` and the index rules (FL-13); the `expectedTenths` order; slot hosts (FL-3). The Bypass as a quiet corridor with a Door; the Circuit with a cover room and isolation; hearing graph and matrices. HE-7 and HE-4 reservation at AP1 with the floor retry (LR3, `attempt/{a}`; SV-4, SV-9, M1; seeds and validation design 5.4, 5.5). The arena socket with dog-leg Forecourt Arches (`AntechamberScreened`). The Downstair with plain stairs, warning and Scrap (items 24 is M1). Minimap data (8.1; XI-7, M1) (cross-document comparison 2026-11-23, CC-88). V8 core sub-checks; runtime assertions; template and Blueprint editor tools. Enemies 25 M1 rows; DH-32 |
 | **M2** | All 8 core grammars plus the Wake if it passes; 4–6 Blueprints per theme (6–8 for floor-1 themes and the Heart); the Precinct family; the Portal skin matrix. Grille, Drape, Squeeze, Latch, Hairline (Q3 counts). The party close verb; Listen; the floor count line. Elite vantage; the antechamber on every floor (floors 2–5 on the Circuit, Q2); retreat anchors (enemies 25 M2 row). Near pairs; Gaol shut-door pairs (if the owner agrees). Last Turning; Landmarks, compass and tints; trimmed Blueprints; signature rooms. Full V8; all reports and arms; travel auto-walk (segment 10) |
-| **M3** | More Blueprints per unlock; seams at the Stairhead; Nightmare-tier layout variants (to be designed); Overlook; Chute; Strongroom (floors 2–3); Drop-bar doors (Gaol, gated, back to the client); Way Back (off by default); the Supper on floor 3 (`LayoutDistinct` already applies to the Choir–Supper pair from M2) |
+| **M3** | More Blueprints per unlock; seams at the Downstair; Peril-tier layout variants (to be designed); Overlook; Chute; Strongroom (floors 2–3); Slam doors (Gaol, gated, back to the client); Return Latch (off by default); the Supper on floor 3 (`LayoutDistinct` already applies to the Choir–Supper pair from M2) |
 | **M4** | Breadth: rules and templates |
-| **Later** | The Lucid Key secret door (reserved Site); trader and Pledge rooms (tags reserved from M2). Split levels: not recommended; listed only so the client can refuse them explicitly |
+| **Later** | The Clear Key secret door (reserved Site); trader and Pledge rooms (tags reserved from M2). Split levels: not recommended; listed only so the client can refuse them explicitly |
 
 ---
 
@@ -2580,9 +2581,9 @@ companions 7.4).
 - `mainPathIndex`, `branchIndex`, room identity;
 - slot hosts, the Circuit, the Bypass, flank entries, near pairs;
 - hearing and movement graphs, static matrices; anchor rankings;
-- HE-7 and HE-4 reservations; the Forecourt, arena socket, Stairhead and
+- HE-7 and HE-4 reservations; the Forecourt, arena socket, the Downstair and
   Bossgate; `AntechamberDominatesArena`;
-- Landmark sockets, compass, minimap data, Keepsake numbering, signature
+- Landmark sockets, compass, minimap data, Souvenir numbering, signature
   rooms;
 - the 8.0 kit metrics, the Portal grammar and the skin matrix (with
   the art team);
@@ -2594,11 +2595,11 @@ companions 7.4).
 |---|---|---|
 | 3 Room shapes and terrain | Template footprints, start zones, `partyEntrySquares`, the `coverRoom` tag, wet/dry/web/slick/bile region tags, `lessonTag`, `protectedSquares` and `protectedSightLines`; the terrain step's place in the order (after LS13, before enemies 10.5 step 2; 6.1) | The room-terrain system and the knock-into system (TR-1; room terrain design 13): interiors, in-room terrain squares and placement, cover props and **the weapons 9.5 cover decision** (with the per-grammar range-band arm, including cover through Grilles if sight-only is reopened), DEP-A1, Wrecker walls and edges, narrow ground toward armour 7.3's ≥ 3, the Choir and Carnival entry caps |
 | 4 Hazards | Region tags; "no hazard" Hinge and Postern squares (radius filled: no hazard on the square or its 8 neighbours, no Void within 2; V10 `HingePosternClear`; HZ-3, hazards design 6.2.2); no crossable bridge into the Sanctum (no Void or crossable hazard region; V10 `NoSanctumBridge`; HZ-3) | Floor-scale hazard density (inside segment 3's caps), bile, drop hazards, Teetering counting, vents (TR-1; room terrain design 13); the hazard / trap / terrain line: an open trapdoor is a Void, a closed one that springs is a trap; a horn post is a Cord, a horn tripwire a trap; the sprung twins stay segment 5's and boss counterplay segment 9's (HZ-1; hazards design 6.1) |
-| 5 Traps, locks, checks | Locked, Hairline, Squeeze, Latch and Door slots; `PortalMinimums`; trap sockets within 6 of fight hosts, and from floor 2 one before the first fight (room 0 or the 0→1 Portal, Shade DEP-S1(a)), the 0→1 Portal socket filled by a Door catch or a threshold wire outside the Portal square (TL-20; traps and locks design 6.20) | DCs (the ladder, TL-2); traps and trap records (DEP-S1; TR-1; taxonomy, tells and records, TL-10; traps and locks design 6.2, 6.3, 11.1); keyring and cell caches; sphincters; **the party door verbs as rules (FL-8)**; the Squeeze check on the keyed `checks` stream (TL-3) and its failure cost; Drop-bar (M3); Wedge (SH-18); Hairline check variants |
+| 5 Traps, locks, checks | Locked, Hairline, Squeeze, Latch and Door slots; `PortalMinimums`; trap sockets within 6 of fight hosts, and from floor 2 one before the first fight (room 0 or the 0→1 Portal, Shade DEP-S1(a)), the 0→1 Portal socket filled by a Door clasp or a threshold wire outside the Portal square (TL-20; traps and locks design 6.20) | DCs (the ladder, TL-2); traps and trap records (DEP-S1; TR-1; taxonomy, tells and records, TL-10; traps and locks design 6.2, 6.3, 11.1); keyring and cell caches; sphincters; **the party door verbs as rules (FL-8)**; the Squeeze check on the keyed `checks` stream (TL-3) and its failure cost; Slam doors (M3); Wedge (SH-18); Hairline check variants |
 | 6 Encounter placement | Slot hosts, `equivalentHosts`, the Circuit with phase, the Bypass, near pairs, matrices, start zones, `nearStart`, `skittishShape` / `ledShape` | Enemies 10.5 steps 2–11 (step 9 moves only within a host or to an equivalent host, 6.1), `placementRules`, the reinforcement and Dormant partners for near pairs (encounter placement design 6.12), Rival Party fit in elite templates (a Later stub, EP-34; encounter placement design 6.14) |
 | 7 Loot | Container, Alcove and secret-cache sockets (inset faces, LP-12); HE-7 and HE-4 reservations; room roles (6.5) | Contents and channel counts; **SocketPlan (LP-11, M2; loot sources design 4.2)** selects from `containerSockets[]` by a role table held as data and never creates a container square: one card-bearing container per room (`cardEligible`), ≤ 1 coin-only container per room, `containerCap` in two phases with merges, the binding definition of the walk line, side-room and Alcove containers previewed from the threshold |
-| 8 Non-combat rooms | Q rooms, the floors 2–5 antechamber micro-event socket, trader and Pledge tags, signature rooms (the `curiosityHost` tag), floor-1 Alcove set pieces and free leaf side rooms as Curiosity hosts (EV-2; events design 4.2) | Fills (Curiosities, Interludes and Glimpses; events design 11), trader, shrines, Dream Fragments. Segment 8 places no Landmarks: layout owns the sockets, segment 4 the ticks (EV-35; events design 4.2) |
-| 9 Boss rooms | The 2×2-cell socket, two dog-leg Forecourt Arches ≥ 5 apart, the Bossgate, start-zone depth ≥ 9, the symmetric `AntechamberScreened` (6.11), the arena pull-back zoom bound (8.1) | Interior, counterplay feature, phases, Keepsake arena dressing; boss tuning with a patrol joiner (FL-21 (e); answered by the BR-13 proposal, pending); the authored arena stamped draw-free into an `arenaCell` sized to contain it (BR-1, BR-2; boss rooms design 4.1); `ArenaEngaged` and the Sanctum rest rule (BR-3, BR-31; boss rooms design 4.2) |
+| 8 Non-combat rooms | Q rooms, the floors 2–5 antechamber micro-event socket, trader and Pledge tags, signature rooms (the `curiosityHost` tag), floor-1 Alcove set pieces and free leaf side rooms as Curiosity hosts (EV-2; events design 4.2) | Fills (Curiosities, Interludes and Glimpses; events design 11), trader, shrines, Fragments. Segment 8 places no Landmarks: layout owns the sockets, segment 4 the ticks (EV-35; events design 4.2) |
+| 9 Boss rooms | The 2×2-cell socket, two dog-leg Forecourt Arches ≥ 5 apart, the Bossgate, start-zone depth ≥ 9, the symmetric `AntechamberScreened` (6.11), the arena pull-back zoom bound (8.1) | Interior, counterplay feature, phases, Souvenir arena dressing; boss tuning with a patrol joiner (FL-21 (e); answered by the BR-13 proposal, pending); the authored arena stamped draw-free into an `arenaCell` sized to contain it (BR-1, BR-2; boss rooms design 4.1); `ArenaEngaged` and the Sanctum rest rule (BR-3, BR-31; boss rooms design 4.2) |
 | 10 Exploration and information | Minimap nodes and explored-room outlines, Portal glyph kinds, Landmarks, tints, travel paths, count-line data, the patrol waypoint schedule (Listen's "passing") | Fog, minimap UI and the rules-room overlay, Listen UI (occupancy, 9.2), Hairline display, the hearing outline (including the self-teaching shut-door prompt and the elite vantage risk), interrogation facts, auto-walk (pausing at doors, 6.10), Overlook (M3), the Stratum Card line. Answered by the exploration and information design (XI-7; 4.1–4.3, 4.3.6, 4.7, 4.8.4, 4.9.8) |
 | 11–12 Seeds and validation | The `layout` and `dressing` children and their derivation, draw counts, V8 and its enumeration, the assertion list and the shared floor assertion points AP1 and AP2 (cross-document comparison 2026-11-23, CC-89) | The stream tree, release seed set, retry logging. Answered by the seeds and validation design (4.3 the stream tree, `layout` and `dressing` under `attempt/{a}`; 4.4 the pipeline; 4.11 the release seed set; 5.4 the assertion list at AP1 and AP2; 5.5 and 5.7 retry logging) |
 
@@ -2612,8 +2613,8 @@ companions 7.4).
 | Room counts; 1–3 empty or special | RS 6.6 | FL-4 counting; role orders (6.5) |
 | Floor-1 antechamber, cut vertex | RS 9.4 | LG3, LG5; extended to every floor (FL-5, **agreed Q2**) |
 | Layout archetype per theme; dressing sets | RS 13, 8.0 | `layoutGrammar` (7); the display stream |
-| Stairs, left-behind warning, Scrap | RS 14; items 9, 24 | The Stairhead (FL-6, **agreed Q2**), M1 |
-| Keepsake numbering | RS 9.3 | 6.5 |
+| Stairs, left-behind warning, Scrap | RS 14; items 9, 24 | The Downstair (FL-6, **agreed Q2**), M1 |
+| Souvenir numbering | RS 9.3 | 6.5 |
 | `mainPathIndex`; corridors take the lower index | DH 17.1 **(agreed Q9)**, DH-32 | FL-13: `mainPathIndex` where defined, `effectiveIndex` on every square |
 | HE-7 containers with retry | DH 12.4 | LS11; LG16; FL-15; AP1 and the LR3 floor retry (SV-9, SV-10; seeds and validation design 5.4, 5.5) |
 | `expectedTenths`; off-path inheritance | enemies 6.3 | Main-chain order; `branchIndex` |
@@ -2666,7 +2667,7 @@ companions 7.4).
 | 12 | Cutaway failures in tall themes | `CutawayPockets` | The stub kit |
 | 13 | Authoring and tooling cost | M2 schedule review | A shared socket standard; editor tooling from M1; the eager art team is the enabling assumption |
 | 14 | Partitioned open themes read as boxes | Playtest notes | Continuous floor art across Arches; full-height partitions; organic masks **(agreed Q1)** **(new lead's call: row added)** |
-| 15 | Floor-1 secrets go unfound or feel like a chore | `SecretFoundRate`; `SecretSearchSeconds` | Universal tell; the dead-end stub cue; Sound the wall only at a tell; the floor-1 count line omits secrets **(new lead's call: row added)** |
+| 15 | Floor-1 secrets go unfound or feel like a chore | `SecretFoundRate`; `SecretSearchSeconds` | Universal tell; the dead-end stub cue; Tap the wall only at a tell; the floor-1 count line omits secrets **(new lead's call: row added)** |
 | 16 | Parties dodge the Forecourt patrol and meet it in the boss fight | `BossFightJoinRate` | Waypoints on the far side of the Forecourt; dog-leg Arches; the boss arm; FL-21 (e) **(lead's call, after the check: row added)** |
 | 17 | Patrol-free mid-floor rests; the cleared Forecourt used as a pre-boss camp | Median rests; `PreBossRestSafety` (gated) | The DH 5.7 lever order; the 19.2 options for the Forecourt **(lead's call, after the check: row added)** |
 | 18 | The kit contract slips during blockout | `TemplateReadability` failures | The 8.0 kit metrics fixed before M1 blockout; greybox colour code **(lead's call, after the check: row added)** |
@@ -2719,7 +2720,7 @@ FL-21 is a set of requests to the enemies owner, recorded as requests;
 it changes nothing until that owner rules. Conditional rows are
 recorded now and apply only when their condition is met: FL-11's Gaol
 `pairDoor` reading only if the enemies owner accepts it. M3 items are
-recorded as M3 items and apply at M3: FL-6's Way Back (built off by
+recorded as M3 items and apply at M3: FL-6's Return Latch (built off by
 default) and the Supper's floor-3 window (RS 8.9).
 
 **Narrowings recorded inside this design (no approved text changes):**
@@ -2737,25 +2738,25 @@ default) and the Supper's floor-3 window (RS 8.9).
 | **FL-1** | Main 4.6 bullet 1, "Each floor is generated from the run seed as rooms and corridors, with a guaranteed path from entrance to boss." (**decided**); RS 13 Floor-layout row; RS 8.4, 8.8, 8.11 hooks (**agreed**, RS Q4) | Add: "Rooms are joined by Portals (doorways, doors, Arches, flaps and corridors of length 0 or more); open-plan themes are partitioned into ordinary rooms that read as one place on screen (floor layout design 6, 7)" | **Decided** (main 4.6); **Agreed** (RS Q4, hooks filled) | **Client (agreed 2026-11-21, Q1)** |
 | **FL-2** | Main 6.3 bullet "Separate random streams ..." (**decided**, as extended by CMP-3 and RT-3); RS 6.4 R-SEED-1, R-SEED-3; RS 6.8 reading (told plainly) | Add: "a `layout` child of each floor's dungeon substream, drawn with fixed counts per Blueprint; dressing draws from a display-side stream the core never reads (floor layout design 6.1)". The party-agnostic graph is drawn first; the party band picks only size classes | **Decided** (main 6.3; an addition consistent with its text) | **Client, with this document**; told plainly |
 | FL-3 | Enemies 10.5 steps 1–2 and step 9; enemies 10.4 Placement column (placements unchanged); DH 12.4 HE-7 wording "(enemies 10.5 step 2)" → "(enemies 10.5 step 1a)"; DH 12.5 step 4 | Layout runs as enemies 10.5 step 1a and outputs slot hosts and `equivalentHosts`; step 2 keeps the homeRoom and trader draws; step 9 moves a group only within its slot host or to an equivalent host **(after the check)**; DH 12.5 step 4 draws the guaranteed supply only among HE-4-eligible containers (never in the Gb room or a Circuit room), so G2's "no optional fight" holds on every seed **(after the check)** | — (DH 12.4's placement detail is a lead's call inside the agreed DH Q3 package; wording only; the step-4 restriction narrows a draw inside agreed G2, which it serves) | Lead; enemies and DH owners apply |
-| **FL-4** | RS 6.6 table and last bullet; enemies 6.3; enemies 10.3 floor-1 caps; DH 12.5 first half; DH 3.3 PF9, 17.1 Scope and 23 ("lair in room 2" read as an example) | n counts entry (0) through arena (n−1); the floor-1 antechamber is extra; the floors 2–5 antechamber counts as an empty or special room; the elite room and Circuit side rooms count as side rooms; the Bypass arm, Alcoves, corridors and the Stairhead are not counted rooms; the Circuit counts Room nodes; "room k" means `mainPathIndex` k everywhere **except enemies 10.2, whose "Room N" stays room level as defined there**; the DH 17.1 Scope and PF9 rows are read with the 10.2 lair at room level 2, not index 2 **(narrowed after the check)** | **Agreed** (DH 17.1, Q9: a reading only, no text narrowed) | Lead; enemies and DH owners apply |
-| **FL-5** | RS 9.4 trigger definition and last bullets (new lead's call there); RS 3.4 glossary "Antechamber" row ("room or corridor" → "room"); RS 13 Floor-layout row; RS 6.6 last bullet (**reading flagged, told plainly**); enemies 17.5 arena bullets (**settled; kept**); ability 15.1 (**agreed; kept**); ability 5 (kept, now met while the patrol lives) | A Forecourt antechamber on every floor; `AntechamberDominatesArena` on every floor on the pre-boss graph; arena entrances are dog-leg Arches ≥ 5 apart with the symmetric `AntechamberScreened`; floor 1 stays empty, single-inbound, off the Circuit; floors 2–5 always a Circuit waypoint, the patrol's homeRoom and fight host at the floor's fight-room size, with at most two Circuit side rooms; RS 6.6's "empty or special" reads that Forecourt as special, so untrimmed floor 5 has no empty room; the Catch-up stays floor 1 only (6.11) | **Agreed** (ability 15.1, kept and stated beside it; the cleared-Forecourt case told plainly) | **Client (agreed 2026-11-21, Q2)**; the after-check details with this document |
-| FL-6 | Items 9, 24; RS 14 stairs row; RS 6.2 seams; enemies 17.5 "exits are never sealed" (**settled; clarification**); enemies 14.6 | A Stairhead behind the arena via a Bossgate that opens on `BossDefeated`; none on floor 5; "exits are never sealed" refers to the entrances; the floor fact "path to the stairs" means the Stairhead (on floor 5, the main path to the arena); Way Back built off by default (M3) | — (settled text clarified, not changed) | **Client (agreed 2026-11-21, Q2)**; lead; enemies and items owners apply |
+| **FL-4** | RS 6.6 table and last bullet; enemies 6.3; enemies 10.3 floor-1 caps; DH 12.5 first half; DH 3.3 PF9, 17.1 Scope and 23 ("lair in room 2" read as an example) | n counts entry (0) through arena (n−1); the floor-1 antechamber is extra; the floors 2–5 antechamber counts as an empty or special room; the elite room and Circuit side rooms count as side rooms; the Bypass arm, Alcoves, corridors and the Downstair are not counted rooms; the Circuit counts Room nodes; "room k" means `mainPathIndex` k everywhere **except enemies 10.2, whose "Room N" stays room level as defined there**; the DH 17.1 Scope and PF9 rows are read with the 10.2 lair at room level 2, not index 2 **(narrowed after the check)** | **Agreed** (DH 17.1, Q9: a reading only, no text narrowed) | Lead; enemies and DH owners apply |
+| **FL-5** | RS 9.4 trigger definition and last bullets (new lead's call there); RS 3.4 glossary "Antechamber" row ("room or corridor" → "room"); RS 13 Floor-layout row; RS 6.6 last bullet (**reading flagged, told plainly**); enemies 17.5 arena bullets (**settled; kept**); ability 15.1 (**agreed; kept**); ability 5 (kept, now met while the patrol lives) | A Forecourt antechamber on every floor; `AntechamberDominatesArena` on every floor on the pre-boss graph; arena entrances are dog-leg Arches ≥ 5 apart with the symmetric `AntechamberScreened`; floor 1 stays empty, single-inbound, off the Circuit; floors 2–5 always a Circuit waypoint, the patrol's homeRoom and fight host at the floor's fight-room size, with at most two Circuit side rooms; RS 6.6's "empty or special" reads that Forecourt as special, so untrimmed floor 5 has no empty room; the Forecourt Top-up stays floor 1 only (6.11) | **Agreed** (ability 15.1, kept and stated beside it; the cleared-Forecourt case told plainly) | **Client (agreed 2026-11-21, Q2)**; the after-check details with this document |
+| FL-6 | Items 9, 24; RS 14 stairs row; RS 6.2 seams; enemies 17.5 "exits are never sealed" (**settled; clarification**); enemies 14.6 | The Downstair behind the arena via a Bossgate that opens on `BossDefeated`; none on floor 5; "exits are never sealed" refers to the entrances; the floor fact "path to the stairs" means the Downstair (on floor 5, the main path to the arena); Return Latch built off by default (M3) | — (settled text clarified, not changed) | **Client (agreed 2026-11-21, Q2)**; lead; enemies and items owners apply |
 | **FL-7** | Enemies 12.3 modifiers; 12.4 Doors paragraph; 10.4 elite row; 17.4 Champion "visible from the approach"; ability 8.1 targeting (clarification); ability 7.2 universal actions table (Squeeze, Drape in combat); stat model 7.1 Acrobatics and Mechanics rows; armour 7.3; RS 8.3 ("locks are padlocks and bars" → "locks are padlocks; bars appear only on Grilles") and RS 8.5 (**agreed**, RS Q4); RS 7.4 RC3 parenthesis "(locks read as padlocks and bars)" → "(locks read as padlocks)" (**agreed**, RS Q3; told plainly); main 4.3 symmetric line of sight (**decided; kept**) | The Portal kinds table (9.2) and the Portal grammar (8.1); the hearing graph and the monster movement graph; the Grille passes sight and noticing only: no attack, ability, spell, skill action, aura or other effect targets, originates or extends through it; drawing a Drape in combat costs the action; monsters never use Squeeze, unfound secret or unlifted Latch; the Squeeze resolution (9.2) | **Decided** (main 4.3, kept); **Agreed** (RS Q4, hooks filled; RS Q3 charter, one parenthesis narrowed, told plainly) | Lead + enemies owner; ability owner (7.2, 8.1); **client, with this document** |
 | **FL-8** | Ability 7.2 universal actions table; enemies 12.4 Doors paragraph; RS 8.3 Gaol `signatureFeature` text ("doors segment, existing door rules" → "the party close action, FL-8; shutting mutes and delays") (**agreed**, RS Q4); RS 13 Traps-and-locks row | The party verbs (9.2): **open in M1** (the M1 Bypass needs it), **close in M2** **(split after the check)** | **Agreed** (RS Q4: one clause re-pointed; told plainly) | Segment 5 owner via the lead; **client, with this document** |
 | FL-9 | Enemies 10.4 Stealth guarantee and Placement column; enemies 20.1; enemies 25 "second route" row; the Shade second route; CL-10 | Exactly one route-avoidable fight (a guard post); the lair a cut vertex; `SkippablePool` in its structural form (every other main-chain fight host a cut vertex), read as ≥ preBossPool − 100 with the patrol counted present; Bypass forms by floor; Last Turning drawn in LS5 over `bypassTargets[]` with a per-grammar weight (300‰ on floors 2–4; 0 on floor 1 and the Heart), never around the Heart's highest-index guard post; the "Gb before the lair" order rule dropped | — | Lead + enemies owner |
 | FL-10 | Enemies 10.4 Patrol row (DH-28 reading) and cover guarantee; enemies 25 rows; CL-10 | The Circuit (Room nodes 2–4; never rooms 0–2, the entry, the arena or the floor-1 antechamber; always the floors 2–5 antechamber, where it lives in the post-lair tail; a cover room; the CL-10 host on floor 1) and Circuit isolation under `hearingState(k)`, with the sight clause and the narrowed near-pass rule (6.7) | — | Lead |
 | FL-11 | Enemies 10.4 Cluster budget (kept; the `pairDoor` reading is a loosening, told plainly); enemies 10.5 step 9 (kept as backstop, moves restricted, FL-3); enemies 12.3 (consumer); RS 8.3–8.11 joiner hooks; DH 6.4 (unaffected, stated) | Static conventions (`hearingState(k)` with every non-forced door counted open in proofs, Circuit-open, generated-state and all-open reports); the live graphs at runtime; `HearingGap` > 8 between slot homes; near pairs at effective path 9–10 with `nearPairMinIndex`; the Gaol `pairDoor` reading (if the owner accepts); LS12 draw-free repair with its repairable set; the `ChainPullRate` band | — | Enemies owner |
 | **FL-12** | Enemies 14.5 (Routed: "the nearest retreat anchor" replaced by the ranking; Cornered unchanged); enemies 25 retreat-anchor row (M2); RS 7.4 RC3 (**agreed**, RS Q3 charter; reading told plainly, text unchanged) | Anchor ranking (non-door paths first; un-engaged homeRooms excluded); the runtime unexplored filter and fallbacks; a non-door flee exit (an Arch or a corridor) per fight host, recorded as `fleeExit` and never repaired into a Door; `PartyEscape`; the entry landing; RC3 kept literal, "door" read as door kinds (3.4) | **Agreed** (RC3, RS Q3; reading only) | Lead + enemies owner; **client, with this document** |
-| **FL-13** | DH 17.1 `mainPathIndex` bullet (**agreed**, Q9); items 9 `leftoversScope: room`; enemies 6.3; enemies 25 `mainPathIndex` row | A Portal takes a `mainPathIndex` only if it joins consecutive main-path rooms (taking the lower); other Portals have none (so the floor-1 Bypass arm has none, and its squares belong to room Gb−1); a main-chain room's Alcoves share its id and index; Portal squares belong to the lower-index adjacent room (off-path: the room with the lower `branchIndex`), except arena-adjacent squares, which take the arena's id and index; every square carries an `effectiveIndex`, which `expectedTenths`, Keepsakes and leftovers read, while the Surprise rule reads `mainPathIndex` (null = not 0–1) | **Agreed** (DH 17.1, Q9: the corridor reading narrowed for the Bypass arm and the arena doorways, and widened to Alcoves of rooms 0–1; told plainly) | Lead + DH owner; **client, with this document** |
+| **FL-13** | DH 17.1 `mainPathIndex` bullet (**agreed**, Q9); items 9 `leftoversScope: room`; enemies 6.3; enemies 25 `mainPathIndex` row | A Portal takes a `mainPathIndex` only if it joins consecutive main-path rooms (taking the lower); other Portals have none (so the floor-1 Bypass arm has none, and its squares belong to room Gb−1); a main-chain room's Alcoves share its id and index; Portal squares belong to the lower-index adjacent room (off-path: the room with the lower `branchIndex`), except arena-adjacent squares, which take the arena's id and index; every square carries an `effectiveIndex`, which `expectedTenths`, Souvenirs and leftovers read, while the Surprise rule reads `mainPathIndex` (null = not 0–1) | **Agreed** (DH 17.1, Q9: the corridor reading narrowed for the Bypass arm and the arena doorways, and widened to Alcoves of rooms 0–1; told plainly) | Lead + DH owner; **client, with this document** |
 | **FL-14** | RS 8.0 record field list (RT-4) `layoutArchetype` (**agreed**, RS Q4); RS 11.1 Configuration snapshot field list; RS 6.4 R-SEED-5 configuration snapshot; RS 11.2; RS 11.4; RS 13 | `layoutArchetype` → `layoutGrammar` (11.1); the snapshot gains `layout.mainPathRooms`, `layout.mainPathRoomsTrimmed`, `layout.sideRooms`, `layout.sideRoomsTrimmed`, `layout.secrets`, `layout.hearingGapMin`, `layout.nearPairsMax`, `layout.lastTurningWeight` and `layout.wayBack`, all hashed into the reproducibility key; RS 11.2 adds one validator, V8 `LayoutGrammar`, with sub-checks; `topologyClass`; `LayoutDistinct` into `DistinctnessCheck` | **Agreed** (RS Q4: a field renamed and filled) | Lead |
 | FL-15 | DH 12.4 HE-7 (lead's call; the trigger list widened, the policy unchanged) | Layout runtime assertions run with HE-7's check at one floor assertion point before the loot step and share its single retry; the retry re-derives every child stream; only structurally proven assertions may trigger it; no new retry policy | — | DH owner |
 | **FL-16** | Companions 7.4 time model (lever order **agreed**, Q2, untouched); RS 10.1, 11.4 reports | Layout commitments (`ExploreSeconds` ≤ 3.5 min, `ExploreClicks` ≤ 40 at party 4 on floors 4–5, as medians of the 11.4 walker's lean policy; Circuit isolation); the walker's terms and cost table in the time model; reports; **no** layout lever | **Agreed** (companions Q2; untouched) | Lead; companions owner adds the terms |
-| **FL-17** | Stat model 7.1 Mechanics row; ability 7.2 universal actions table (Sound the wall); enemies 14.6, 15.3; items 10.4 channels; RS 7.4 RC1, RC5 (**agreed**, RS Q3; consistent); RS 13 Traps-and-locks and Exploration rows | Hairline secrets and Sound the wall (only at a tell); counts by depth (floor 1 0–1 in the Gaol and the Wake only; floors 2–3 1; floors 4–5 1–2); `SecretNeverCritical`; `HairlineCue`; one universal tell, no decoys; secret caches as containers | **Agreed** (RS Q3 charter, consistent) | **Client (agreed 2026-11-21, Q3)**; segments 5 and 10; ability owner (7.2) |
+| **FL-17** | Stat model 7.1 Mechanics row; ability 7.2 universal actions table (Tap the wall); enemies 14.6, 15.3; items 10.4 channels; RS 7.4 RC1, RC5 (**agreed**, RS Q3; consistent); RS 13 Traps-and-locks and Exploration rows | Hairline secrets and Tap the wall (only at a tell); counts by depth (floor 1 0–1 in the Gaol and the Wake only; floors 2–3 1; floors 4–5 1–2); `SecretNeverCritical`; `HairlineCue`; one universal tell, no decoys; secret caches as containers | **Agreed** (RS Q3 charter, consistent) | **Client (agreed 2026-11-21, Q3)**; segments 5 and 10; ability owner (7.2) |
 | **FL-18** | Stat model 7.1 Perception row; ability 7.2 universal actions table (Listen); enemies 12.4 step 6 (consumer); main 4.3 (**decided; untouched**); RS 13 Exploration row | Listen at a closed door (9.2), reporting the groups in the room beyond at that moment | **Decided** (main 4.3, untouched) | Segment 10 via the lead; ability owner (7.2) |
 | **FL-19** | Enemies 12.4; enemies 20.1 (protected); ability 7.2 universal actions table (lifting a Latch); RS 7.4 RC5 (**agreed**, RS Q3; consistent) | The Latch (with `barSideRoomId`) and the return-Portal principle; `PortalKindsLegal` | **Agreed** (RC5, consistent) | Lead; ability owner (7.2) |
 | FL-20 | DH 17.12; the DH 5.5 G6 pattern; RS 6.9; RS Stratum Card (Exploration row) | The floor count line (9.2) | — | Lead; segment 10; DH owner applies 17.12 |
 | FL-21 | Enemies Boss and Sentinel profile rows (17.3); 17.4; 17.5; 11.1 scorer terms; 16; 20.1; Den and Sleeper template rows | Requests (flags, not decisions): (a) a Boss-profile Provoked analogue extending the leash to the Sanctum when damaged from outside reach; (b) the Champion's elite uses a Sentinel-style hold, so noticing through a Grille leaves it Alerted but holding; (c) a doorway-hold AI term; (d) the 540 multi-bypass case and Den/Sleeper in-room sneaks against 20.1 (options: drop "Stealth-bypass candidate" from lair templates, re-read 20.1 as "one guard post or one Dormant lair", or rely on the camp catch-up measured by `MultiBypassRate`); (e) boss tuning (5–7 rounds at half camp resources) that includes the floors 2–5 patrol arriving as an ordinary joiner, measured by `BossFightJoinRate` **(after the check)**. Layout no longer depends on (a) (the symmetric screen) or (b) (the opt-in vantage Door) | — (requests) | Enemies owner (M1 for (a), M2 for the rest) |
-| FL-22 | RS 13 table | RS 13 rows amended: layout supplies sockets and minimum counts; Traps and locks keeps door, lock and secret rules (including FL-8); Room shapes keeps the ≥ 3 Acrobatics total (layout supplies 2 Squeezes); Encounter placement keeps the Wake dormant rule (reads `nearStart`) and Keepsake dressing; Exploration keeps the Stratum Card and the Lucid Key (layout reserves the Site) | — | Lead |
+| FL-22 | RS 13 table | RS 13 rows amended: layout supplies sockets and minimum counts; Traps and locks keeps door, lock and secret rules (including FL-8); Room shapes keeps the ≥ 3 Acrobatics total (layout supplies 2 Squeezes); Encounter placement keeps the Wake dormant rule (reads `nearStart`) and Souvenir dressing; Exploration keeps the Stratum Card and the Clear Key (layout reserves the Site) | — | Lead |
 
 Waves: FL-1 to FL-4, FL-6, FL-10, FL-13, FL-15 and FL-22 in M1; FL-5 in
 M1 (floor 1) and M2 (floors 2–5); FL-7, FL-9, FL-11 and FL-14 in M1 and
@@ -2792,7 +2793,7 @@ The owed rows are the single list in 17; by owner:
   FL-17 (items 10.4 channels).
 - **The stat model and ability owners:** FL-7, FL-17, FL-18 (stat model
   7.1 rows); ability 7.2's universal actions table for FL-8 (door verbs),
-  FL-7 (Squeeze, Drape in combat), FL-17 (Sound the wall), FL-18
+  FL-7 (Squeeze, Drape in combat), FL-17 (Tap the wall), FL-18
   (Listen) and FL-19 (Latch); FL-7's ability 8.1 targeting clause.
 - **Dungeon generation segments 3–12:** every hook in 13, including
   segment 5's door verbs (FL-8) and Hairline checks, segment 9's arena
@@ -2832,7 +2833,7 @@ option:**
   only the Kennel and the Carnival.
 - **Q2, the antechamber:** option A. A Forecourt antechamber before
   every boss; every path to the arena passes through it; both arena
-  entrances open from it; a Stairhead behind the arena through a
+  entrances open from it; the Downstair behind the arena through a
   Bossgate that opens on `BossDefeated`. On floor 1 empty and near-safe
   (as RS 9.4 approved); on floors 2–5 always on the patrol Circuit,
   never guaranteed safe, keeping the ability model's rejection of a
@@ -2842,7 +2843,7 @@ option:**
 - **Q3, secrets:** option A. Hairline secrets on floor 1: 0–1, in the
   Gaol and the Wake only (the Kennel none); floors 2–3 1; floors 4–5
   1–2 *(illustr.)*; optional content only (`SecretNeverCritical`); one
-  universal tell, no decoys; Sound the wall (FL-17). Rejected: B, none on
+  universal tell, no decoys; Tap the wall (FL-17). Rejected: B, none on
   floor 1; C, exactly 1 on every floor-1 theme.
 
 The client also said everything else in the proposal stands as written
@@ -2881,7 +2882,7 @@ The client also said everything else in the proposal stands as written
 - the Supper misses DEP-A1 on floor 4; the Kennel's open glades raise
   ranged dominance until the cover decision; the Gut's "choose your
   fights" is mainly choosing your approach (7);
-- the Silk's near pairs sit at the top of the band: loud parties pay
+- the Archive's near pairs sit at the top of the band: loud parties pay
   (7.6).
 
 **New lead's calls made while writing this document** (beyond the
@@ -2896,7 +2897,7 @@ document):
    (front matter).
 3. **The Forecourt is always a Room node, never a corridor;** RS 3.4's
    glossary "room or corridor" becomes "room" (6.11, FL-5).
-4. **The Catch-up trigger read with FL-13:** RS 9.4 (a) fires on
+4. **The Forecourt Top-up trigger read with FL-13:** RS 9.4 (a) fires on
    Forecourt squares; the arena-owned doorway squares fall under (b)
    (6.11).
 5. **Floor 5's Bypass** goes around a guard post other than the
@@ -2908,10 +2909,10 @@ document):
    `layoutGrammar`, inside the global `layout.secrets[floor]`; this is
    how the Kennel's floor-1 0 is expressed (7, 11.1).
 7. **A `SecretFoundRate` report** by floor and Mechanics training (11.3).
-8. **Drop-bar doors return to the client** before they ship in M3,
+8. **Slam doors return to the client** before they ship in M3,
    because barred cells are safe rest spots against agreed ability 15.1
    (9.1, 19.2).
-9. **The Bossgate and Stairhead are absent on floor 5,** so the floor-5
+9. **The Bossgate and the Downstair are absent on floor 5,** so the floor-5
    arena has only its two Arches (LG4, 6.11).
 10. **Flags on RS catalogue and charter rows** (FL-1, FL-7, FL-8, FL-12,
     FL-14, FL-17, FL-19), although each only fills a hook, renames a
@@ -2967,7 +2968,7 @@ these; none overrides a client answer); confirmed by the client on
 - **Kennel chokepoint mouths are kept but priced:** at most 2 deep, with
   a flank pair behind, so backing into a 1-wide mouth is not free every
   fight (7.3).
-- **Secrets are cued by a dead-end stub, never by minimap gaps;** Sound
+- **Secrets are cued by a dead-end stub, never by minimap gaps;** Tap
   the wall works only on a tell, so wall-combing is never a strategy
   (9.2).
 - **A failed out-of-combat Squeeze costs time, not a retry loop** (+4
@@ -3053,16 +3054,16 @@ triggers them:
 - `PreBossRestSafety` showing parties camping in a cleared Forecourt on
   floors 2–5 (before first engagement only, under the Sanctum rest rule;
   BR-31, boss rooms design 4.2.5): the options are (a) a rest preview warning that the
-  Forecourt is within hearing of a Wary boss, (b) the DH lever order, or
+  Forecourt is within hearing of a Watchful boss, (b) the DH lever order, or
   (c) a second pressure that survives the patrol's death (for example
   the boss's reserve group arriving on a Forecourt rest), which needs
   the enemies owner;
 - the enemies owner refusing FL-21 (b) (the opt-in vantage Door
   stands; the client is told);
-- Drop-bar doors (M3) and turning Way Back on;
+- Slam doors (M3) and turning the Return Latch on;
 - `SecretFoundRate` showing floor-1 secrets unused or resented (option
   B of Q3 is the fallback);
-- the Lore-inscription Hairline reveal in the Silk and the Choir, which
+- the Lore-inscription Hairline reveal in the Archive and the Choir, which
   widens agreed Q3 (M3; TL-33, traps and locks design 6.12);
 - split-level sub-grids, listed only so the client can refuse them
   explicitly;
@@ -3085,10 +3086,10 @@ FB-1 to FB-15; consistency 1–22 → FC-1 to FC-22.
 | FF-4 | Backtracking | Reserved loop-back Sites; a Latch at the deep spur; no empty leaves; auto-walk in M2; target 1.7 with fail at 1.9 (6.9) |
 | FF-5 | Floor-1 teaching overload | `F1LessonLadder`; a self-teaching shut-door pair; a practice Squeeze on floor 1. "Q at index 2" rejected: the Circuit must touch a Q at index ≥ 3 for CL-10 and LG8. Room 2 is the *optional* bypassed guard post, which softens the back-to-back start (7.2) |
 | FF-6 | Five identical antechambers | A themed Forecourt per Blueprint; the boss Landmark seen as backdrop; floors 2–5 segment-8 micro-events. Full line-of-sight preview into the arena rejected: it conflicts with FB-1, so `AntechamberScreened` applies |
-| FF-7 | Theme traversal monotony | The Supper ≤ 5 bays with interleaving; Silk maze spacing and aisle-end Landmarks; Gaol auto-open; the Heart path cap (7) |
+| FF-7 | Theme traversal monotony | The Supper ≤ 5 bays with interleaving; Silk (renamed the Cobweb Archive, naming pass NP-18) maze spacing and aisle-end Landmarks; Gaol auto-open; the Heart path cap (7) |
 | FF-8 | Elite peek forces the fight | FL-21 (b) Sentinel-style hold; the Grille sight-only; after the check, the opt-in vantage Door as the layout fallback (6.5) |
 | FF-9 | Listen busywork | Once per door; passive when trained; counted in `ExploreClicks` |
-| FF-10 | Secrets too easy | Near-range Hairline tell for trained parties; the dead-end stub cue and Sound the wall at the tell for untrained ones (revised after the check) |
+| FF-10 | Secrets too easy | Near-range Hairline tell for trained parties; the dead-end stub cue and Sound the wall (renamed Tap the wall, naming pass NP-18) at the tell for untrained ones (revised after the check) |
 | FF-11 | Squeeze at party 4 | A single leading check, followers pass; mouths ≥ 8 from fights |
 | FF-12 | Trimmed floors lose discovery | Rewards kept as visible Alcoves within the 6.6 bands |
 | FF-13 | Organic themes look boxy | `TraversalFeel`; non-rectangular footprints ≥ 50% |
@@ -3098,7 +3099,7 @@ FB-1 to FB-15; consistency 1–22 → FC-1 to FC-22.
 | # | Finding | Resolution |
 |---|---|---|
 | FB-1 | Boss shooting gallery | Arena-owned doorways (FL-13); dog-leg Arches only (LG4); the symmetric `AntechamberScreened` (after the check, so it holds without FL-21 (a)); FL-21 (a) Provoked analogue; the `BossDamageFromOutsideLeash` arm |
-| FB-2 | Rests effectively guaranteed safe | Floors 2–5 antechamber always on the Circuit (FL-5, **agreed Q2**); `RestSpotPatrolCoverage` and median rests handed to the DH owner with the DH 5.7 lever order and, after the check, a forecast that the gate will likely fire; `NoSealedPocket`; Drop-bar deferred to M3. A RestPressure *build rule* was not adopted, because patrols interrupt rests by sight, not by hearing; the report covers it |
+| FB-2 | Rests effectively guaranteed safe | Floors 2–5 antechamber always on the Circuit (FL-5, **agreed Q2**); `RestSpotPatrolCoverage` and median rests handed to the DH owner with the DH 5.7 lever order and, after the check, a forecast that the gate will likely fire; `NoSealedPocket`; Drop-bar (renamed Slam doors, naming pass NP-18) deferred to M3. A RestPressure *build rule* was not adopted, because patrols interrupt rests by sight, not by hearing; the report covers it |
 | FB-3 | Last Turning against the floor-1 antechamber rule | Weight 0 on floor 1 (6.8); LG5 states one inbound Portal |
 | FB-4 | Patrol undercounted; the 540 case | The patrol counted present in `SkippablePool`; the Bypass meets the Circuit on Last Turning floors; `MultiBypassRate`; FL-21 (d) |
 | FB-5 | Door dancing | Close costs an action in combat, once per round, barred when a hostile is adjacent (FL-8) |
@@ -3124,8 +3125,8 @@ FB-1 to FB-15; consistency 1–22 → FC-1 to FC-22.
 | FC-5 | "LairNotBypassable" overclaims | Told plainly: route case only; FL-21 (d) |
 | FC-6 | Several FL and V registers | One FL-1–22 register; one V8 with sub-checks |
 | FC-7 | Ownership taken without amending RS 13; no party door action exists | FL-22; FL-8 written on ability 7.2 and enemies 12.4, owned by segment 5; RS 8.3 text corrected |
-| FC-8 | Name collisions | Drape, Stairhead, Sound the wall, Site, Drop-bar, Bossgate; no "gate" Door skin after the check (8.1); Arch for Opening (new lead's call) |
-| FC-9 | Wave errors | The Stairhead in M1; LG3's every-floor form in M2 (the floor-1 form M1) |
+| FC-8 | Name collisions | Drape, Stairhead (renamed the Downstair, naming pass NP-18), Sound the wall (renamed Tap the wall, naming pass NP-18), Site, Drop-bar (renamed Slam doors, naming pass NP-18), Bossgate; no "gate" Door skin after the check (8.1); Arch for Opening (new lead's call) |
+| FC-9 | Wave errors | The Stairhead (renamed the Downstair, naming pass NP-18) in M1; LG3's every-floor form in M2 (the floor-1 form M1) |
 | FC-10 | Portal semantics conflict | One table (9.2) and one Portal grammar (8.1): Doors are opaque panels; the Grille is not a hearing path; the Squeeze is a hearing path but off the monster graph; Alcoves share parent identity; corridors owned by the lower-index room |
 | FC-11 | RC3 against flee through doors | Non-door flee exits; RC3 text unchanged; the Cornered rate reported |
 | FC-12 | The Circuit counted corridors as rooms | Room nodes only (FL-4, FL-10) |

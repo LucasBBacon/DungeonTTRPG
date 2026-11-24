@@ -2,6 +2,17 @@
 
 Date: 2026-11-16
 Status: Approved, 2026-11-16
+Names updated by the naming pass (naming pass design,
+`2026-11-24-naming-pass-design.md`, approved 2026-11-24; NP rows listed):
+NP-8 and its 13.1 cites (Rooted → Tangled; Raging → Frenzied; Reckless →
+Heedless; Lame → Limping; Ill-Starred → Star-Crossed; Leaden → Plodding;
+Sight-blight → Sight-rot; Ill-Slept → Heavy-Eyed; Commanded words Come,
+Run, Crouch, Wait; Resisting → Resistant (type); "bloodied" → "hurt";
+Antitoxin → Bitter Draught; Sigil of Aid → Helping Sigil; Bodyguard →
+Challenger; Sure Grip → Fast Grip; Slot Recovery → Slot Renewal; Bull Rush
+→ Bowl Over; Dreamfall → Freefall; Nightmare tier → Peril tier; bile square
+→ gall square; "slows movement" printed as Chilled). Internal ids are
+unchanged.
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model) and
 `2026-11-16-ability-resource-model-design.md` (ability model)
@@ -265,7 +276,7 @@ sub-steps, in order:
 1. Acts: each Stir due to act, in `stirId` order: per unit on the
    footprint, in fixed square order, the save, damage through the
    pipeline (9.2, 9.3), then non-damage parts; then forced movement
-   (Lurch, M3) and Dreamfall placements (10.2); then a zero-hit-point
+   (Lurch, M3) and Freefall placements (10.2); then a zero-hit-point
    sweep; then the Stir countdowns.
 2. Combos it triggers (never Conduct, 11.2); then (2b) the morale
    checkpoint and experience credit.
@@ -550,10 +561,10 @@ morale states (Emboldened, Demoralised, Routed, Cowed; enemies design
 | `heal` | Any hit point gain | Bleeding, Condemned |
 | `treat` | **Medicine Treat (change C4):** an action, adjacent. One Medicine roll is compared with each curable instance's recorded difficulty, and every instance the roll meets ends. The action is spent either way. | Every `poison` condition, Bleeding, Withered, Hobbled, Condemned, Calcifying at stages 1–2; Diseased and Scarred during a rest, except a `treatProof` Scarred (change CN-14, DH-16) |
 | `rally` | Rally: a bonus action, once per ally per fight **(settled)** | The `fear` tag |
-| `escape` | An action: Athletics or Acrobatics against 10 + the holder's Fortitude, or against the binding's difficulty | Grappled, Restrained, Rooted, Engulfed |
+| `escape` | An action: Athletics or Acrobatics against 10 + the holder's Fortitude, or against the binding's difficulty | Grappled, Restrained, Tangled, Engulfed |
 | `stand` | Half the current effective speed, minimum 1 (6.7). **At speed 0, standing costs the action.** | Prone |
 | `shakeOff` | Half speed (the action at speed 0). One use ends every shake-off condition on the unit. | Burning, Smouldering, Corroded (rinse), Oiled (wipe), Mired |
-| `damageType:X` | Damage of type X, at least 1 | Fire ends Chilled, Frozen, Soaked and Oiled; cold ends Burning and Smouldering; bludgeoning ends Frozen; a binding's breaker type ends Restrained or Rooted |
+| `damageType:X` | Damage of type X, at least 1 | Fire ends Chilled, Frozen, Soaked and Oiled; cold ends Burning and Smouldering; bludgeoning ends Frozen; a binding's breaker type ends Restrained or Tangled |
 | `damage` | Any damage | Asleep |
 | `tonic` | A consumable (items design). As a bonus action it ends one minor condition; drunk as an action it ends one major. Thrown at an ally (action, range `throwAllyRange`): minor only **(change CN-17; consumables design 11)**. Given to an adjacent ally (action): minor only (items design 7.1). Never hard or lingering. A `cureImmune` list lets a condition opt out. | By tier |
 | `cleanse` | Spells that declare the tiers and tags they end | By content |
@@ -772,11 +783,11 @@ on an attack that already has disadvantage from another source.
   TR-10; room terrain design 6.5.2)**. A collision never applies Prone
   unless the ability says so.
 - It never provokes opportunity attacks.
-- Rooted, Restrained and Anchored units are not moved.
+- Tangled, Restrained and Anchored units are not moved.
 - **Shift (change W-8):** a third kind beside push and pull. The unit steps
   along the ring of squares adjacent to the source, each step to a ring
   square 8-adjacent to the current one; never through the source's square.
-  It stops at units and walls, is blocked by Rooted, Restrained and
+  It stops at units and walls, is blocked by Tangled, Restrained and
   Anchored, never provokes, and in M1 stops before hazards (weapons design
   7.6).
 - **One move per hit (change W-8):** all forced movement one hit causes
@@ -787,7 +798,7 @@ on an attack that already has disadvantage from another source.
   only if a non-verb source contributed to the move (Battering Force is
   the one verb-only exception, Vanguard design 8.3); verb-sourced movement
   moves a unit at most once per round (weapons design 7.2 rule 4). Armour
-  verb signatures that move a target (Bull Rush) are verb-sourced
+  verb signatures that move a target (Bowl Over) are verb-sourced
   **(change AR-52; armour design 14.4)**. The Arcanist's Gust and Reel
   count as verb-sourced for collisions, but use the source-held
   per-target round count `movedByYou` instead of the shared verb mark, so
@@ -798,7 +809,7 @@ on an attack that already has disadvantage from another source.
   ally this is 1 square of forced movement, not a teleport or a speed
   change. It never provokes, never collides and never enters a hazard
   square or a square adjacent to one; it is illegal while either unit is
-  Grappled, Grappling, Restrained, Rooted or Anchored, or if the size
+  Grappled, Grappling, Restrained, Tangled or Anchored, or if the size
   does not fit. Not in force until the ruling (Vanguard design 8.2, Step
   In).
 - **Drags:** a holder dragging a Grappled unit (18.4) is forced movement
@@ -813,11 +824,11 @@ on an attack that already has disadvantage from another source.
   named exception class beside Battering Force and verb pushes: soft
   stops only (no collision damage); a benign form that stops before
   hazards and a hazardous form that makes the full hazard-edge save at
-  EnvDC; the area cap counted in downstream-first order; Rooted,
+  EnvDC; the area cap counted in downstream-first order; Tangled,
   Restrained, Hidden and Handhold-adjacent units, and Anchored units
   once Anchored ships, hold fast. Requested of the conditions owner;
   not yet ruled, nothing changes until it is. If ruled, Lurch also runs
-  on floor 1 at Nightmare tier 2+ for the packages that name it **(change
+  on floor 1 at Peril tier 2+ for the packages that name it **(change
   HZ-25; hazards design 6.19; agreed by the client 2026-11-21, Q4; M3)**.
 
 ### 10.2 Hazard edge
@@ -866,7 +877,7 @@ stops on the last safe square and gains Teetering.
   once per fight (the contact band, Prone, Teetering, holding on) and
   cannot fall until it has taken a turn after the Clutch; another
   monster falls (removed and defeated, `voidFall` paid as a kill,
-  `causedBy` the pusher); a party unit Dreamfalls: it takes the fall
+  `causedBy` the pusher); a party unit Freefalls: it takes the fall
   band (never below 1 hit point, 10.4), leaves the grid at once, is
   placed Prone on the room's Snag at the end of the use (an entry, but
   Snags are never hazards; grapples end), is Groggy until the end of
@@ -979,7 +990,7 @@ Illustrative set:
 | Web | Restrained (the web is the binding; breakers fire and slashing) | Restrained | M2 |
 | Fire | Burning | Burning | M2 |
 | Oil slick | Oiled | Oiled | M2 |
-| Bile | Corroded (Fortitude negates, once per entry; on forced entry, after a failed edge save) | — | M2 **(change RT-13; run structure design 8.10; save and density: change HZ-4, hazards design 6.5)** |
+| Gall | Corroded (Fortitude negates, once per entry; on forced entry, after a failed edge save) | — | M2 **(change RT-13; run structure design 8.10; save and density: change HZ-4, hazards design 6.5)** |
 
 - A square's data names the condition, its trigger (`onEnter`,
   `onTurnEnd` or both), its contest (a save type and difficulty, or
@@ -1103,13 +1114,13 @@ that it exists; the outcome is the lead's call)**
 
 - **M1:** no condition terrain. Pushes and drags stop before hazard
   squares.
-- **M2:** water, web, fire, oil-slick and bile squares; their condition
+- **M2:** water, web, fire, oil-slick and gall squares; their condition
   data; Oiled and the burn-away rule; the hazard-edge, landing and
-  drag-into-hazard rules. **(agreed; bile squares added by change RT-13,
+  drag-into-hazard rules. **(agreed; gall squares added by change RT-13,
   approved by the client 2026-11-21; run structure design 8.10)** Also
   harm squares (change TR-11) and the obstacle-hazard branch for contact
   hazards (10.2; change TR-10) **(agreed, extended by the room terrain
-  design, approved by the client 2026-11-21)**. Bile density and its
+  design, approved by the client 2026-11-21)**. Gall density and its
   Fortitude save: hazards design 6.5 **(change HZ-4)**.
 
 ### 11.6 Sources, and traps
@@ -1172,7 +1183,7 @@ that it exists; the outcome is the lead's call)**
 | `mind` | Yes | Yes | Asleep, Charmed, Thralled, Confused, Enraged, Commanded, Frightened, Shaken, Panicked, Unfocused, Tormented |
 | `fear` | Yes | Yes | Shaken, Frightened, Panicked, Tormented, Cowed |
 | `sleep` | Yes | Yes | Asleep |
-| `restraint` | Yes | Yes | Grappled, Restrained, Rooted, Mired, Engulfed |
+| `restraint` | Yes | Yes | Grappled, Restrained, Tangled, Mired, Engulfed |
 | `sight` | Yes | Yes | Blinded, Squinting |
 | `sound` | Yes | Yes | Sonic effects |
 | `goad` | Yes | Yes | Challenged, Enraged |
@@ -1202,8 +1213,8 @@ immunity (the `morale` tag allows none). `mindless` implies `fearless`
   immunity allowed outside bosses" is reworded to mean damage types.
 - **Condition ladder shifts are not traits or layers (change C7).** Every
   ladder shift that comes from a condition (Soaked, Oiled, Exposed,
-  Resisting, Shredded, Sapped, Shielded, Raging, Petrified, Ill-Starred,
-  Frozen's ice shell) is outside the two-resistance budget.
+  Resistant (type), Shredded, Sapped, Shielded, Frenzied, Petrified,
+  Star-Crossed, Frozen's ice shell) is outside the two-resistance budget.
 - **Revealing immunities:** they are hidden until Lore reveals them or play
   shows them. The first "Immune" result reveals the immunity for the rest of
   the run. **(settled principle, stat model 7.2)**
@@ -1356,7 +1367,7 @@ immunity (the `morale` tag allows none). `mindless` implies `fearless`
 - Links draw as lines: Grappling, Concentrating, source-tied conditions.
 - Steeled, Unyielding and Vigilant draw as rings.
 - Bolstered is a segment of the hit point bar.
-- Party plates show a "bloodied" mark at 50% of maximum hit points and a
+- Party plates show a "hurt" mark at 50% of maximum hit points and a
   "low" mark at 25% (not "critical", which reads as a crit). The Downed
   marker reads "gets up if you win, or at a rest". Armed saves
   (Death-warded, Reprieve) are shown **(change DH-20; death and healing
@@ -1526,7 +1537,7 @@ ruled; nothing changes until ruled.
   level or stage), `remaining`, `appliedPhase`, `sourceUnitId?` (or
   `environment`), `recordedDifficulty?`, `sustainedBy?`, `markedHard`
   (lockout), `binding?` with its breakers, `damageType?` and `amount?`
-  (Condemned, Exposed, Resisting), `hazardId?` (Teetering), `charges?`,
+  (Condemned, Exposed, Resistant (type)), `hazardId?` (Teetering), `charges?`,
   `pendingBurst?`, `extraSaveUsedThisRound`, `origin?` (`prime`: set by
   the Alembic's Prime and read by its inert rule) **(change ALM-4;
   Arcanist design 9.2)**.
@@ -1608,7 +1619,7 @@ always added by the formula.
 | Nauseated | 70 |
 | Dazed | 50 |
 | Frightened | 40 vs melee, 25 vs ranged |
-| Rooted, Restrained | 30 vs melee, 0 vs ranged |
+| Tangled, Restrained | 30 vs melee, 0 vs ranged |
 | Grappled | 30 vs melee, 10 vs ranged |
 | Challenged | 30 |
 | Distracted | 20 |
@@ -1732,7 +1743,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     in M1, stops before hazards. Release is free. Willing or downed allies
     are grabbed with no check.
   - Duration: ends with the link.
-  - Interactions: a Rooted, Restrained or Anchored held unit cannot be
+  - Interactions: a Tangled, Restrained or Anchored held unit cannot be
     dragged.
 - **Steeled** — beneficial state · **M1**
   - Effect: immune to the hard tier; transforms that would produce a hard
@@ -1760,7 +1771,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     | Hard condition | Downgrade |
     |---|---|
     | Stunned | Dazed |
-    | Held | Rooted |
+    | Held | Tangled |
     | Asleep | No effect |
     | Frozen | Chilled |
     | Petrified | Restrained |
@@ -1796,7 +1807,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Sources: a Hold-Person-shaped tier 2 spell (SRD); a ghoul-like claw
     (cooldown 3).
   - Interactions: breaking the caster's concentration frees the target;
-    downgrades to Rooted.
+    downgrades to Tangled.
 - **Asleep** — hard · Later
   - Effect: implies Incapacitated; onApply Prone; attacks against it have
     advantage.
@@ -1822,12 +1833,13 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Interactions: a rescue tool for an ally (an ally's Banish costs no turn
     start for the cap, 5.7); downgrades to Dazed.
 - **Commanded** — hard, agency, enemy-only · Later
-  - Effect: one word for its next turn: Approach, Flee, Grovel (falls
-    Prone) or Halt. Commanded movement never enters a hazard.
+  - Effect: one word for its next turn: Come, Run, Crouch (falls
+    Prone) or Wait, each printed after "Commanded:". Commanded movement
+    never enters a hazard.
   - Intensity: binary.
   - Duration: `turns:1`, one Will save on application.
   - Sources: Command-shaped spell (SRD); Presence class abilities.
-  - Interactions: Flee draws opportunity attacks; Grovel's Prone outlives
+  - Interactions: Run draws opportunity attacks; Crouch's Prone outlives
     it; not used in suggestions; downgrades to Dazed.
 - **Engulfed** — hard · Later (depth 3+)
   - Effect: inside the engulfer; can only attack the engulfer, at
@@ -1956,7 +1968,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     abilities **(change W-9)**.
   - Interactions: Distracted prevents recovery. Only the main hand drops;
     shields are never Disarmed. A Disarmed focus loses only its verb and
-    properties; casting continues. Sure Grip and Clinging are immune
+    properties; casting continues. Fast Grip and Clinging are immune
     **(change W-9; weapons design 16)**.
 - **Harried** — minor · Later
   - Effect: its ranged attacks, and abilities aimed more than 1 square
@@ -1992,7 +2004,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Duration: trigger until it stands (self-ended, no cap, 5.3);
     combatOnly.
   - Sources, tagged `shove`, `trip`, `collision` or `onApply`: Shove, trip
-    Techniques, the Topple verb (tagged `trip`), Asleep, Downed, Grovel;
+    Techniques, the Topple verb (tagged `trip`), Asleep, Downed, Crouch;
     kit riders (Barge), tagged `trip` **(change CMP-32; companions design
     8.3)**. Topple applies at most once per round per target; condition
     verbs never fire on reactions **(change W-10; weapons design 7.2)**.
@@ -2016,7 +2028,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     movement and, in M1, stops before hazards; from M2, a drag into a
     hazard gives the hazard-edge save (10.1).
 - **Restrained** — major · **M2**
-  - Effect: implies Rooted's flags (speed 0, not moved by forced movement);
+  - Effect: implies Tangled's flags (speed 0, not moved by forced movement);
     attacks against it have advantage; its attacks and Reflex saves have
     disadvantage. Each application names a binding and its breaker types.
   - Intensity: binary.
@@ -2033,9 +2045,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     consumable, consumables design 16.2) **(change CN-16)**, constrictor
     coils; Arcanist spells Snaring, Shackle and Cordon **(change ARC-23;
     Arcanist design 8.2, 8.5, 9.1)**.
-  - Interactions: overrides a stored Rooted; Reflex disadvantage sets up
+  - Interactions: overrides a stored Tangled; Reflex disadvantage sets up
     areas; speed 0 gained mid-move ends the move (11.2).
-- **Rooted** — major · Later
+- **Tangled** — major · Later
   - Effect: speed 0; no Dash or Jump; not moved by forced movement; a
     flying unit hovers in place.
   - Intensity: binary.
@@ -2050,7 +2062,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Duration: `turns:2`. Ends on fire damage of at least 1, a tonic, or
     Unfettered; cancels with Burning, Smouldering or Hasted.
   - Sources: cold rider; automatic on cold-weak or Soaked targets. This is
-    the stat model's "slows movement" (8.1).
+    the stat model's "slows movement" (8.1), printed as Chilled (naming
+    pass NP-8).
   - Interactions: `freezing` cold turns it into Frozen (fallback: no
     effect).
 - **Mired** — minor · Later
@@ -2090,7 +2103,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     on its last safe square, Prone and Teetering, the fall band floored
     at 1 hit point (10.2; change HZ-9; hazards design 6.4 item 4)
     (cross-document comparison 2026-11-23, CC-27).
-  - Interactions: Rooted and Anchored make the edge safe.
+  - Interactions: Tangled and Anchored make the edge safe.
 - **Hobbled** — minor · Later
   - Effect: the first time each turn it moves 3+ squares by its own
     movement, it takes N untyped damage.
@@ -2321,7 +2334,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     weak to bludgeoning; attacks against it get no advantage.
   - Intensity: binary.
   - Duration: `turns:1` (own-turn rule). Ends on fire, on bludgeoning (a
-    shatter: the shell's weakness step, applied once, so the hit takes
+    Fracturing: the shell's weakness step, applied once, so the hit takes
     +half and no more; Stagger lands automatically) or when Corroded is
     applied. Steeled follows.
   - Sources: transform only, from a limited `freezing` cold ability on a
@@ -2585,7 +2598,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Duration: `turns:2`, combatOnly. Ends when the challenger is downed,
     incapacitated, dead or more than 6 squares away, or targets another
     unit with a harmful effect; tonic.
-  - Sources: tank challenges; bodyguard elites.
+  - Sources: tank challenges; Challenger elites.
   - Interactions: Unyielding's composure window; the boss shed action can
     remove it.
 - **Tormented** — minor · Later
@@ -2629,7 +2642,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Sources: the Help action **(settled, ability model 7.2)**; the Vex verb
     **(change W-7; weapons design 7.1)**; trinkets (Trophy Tally, fallback
     `untilSourceTurnEnd` with the wearer as source; Help made cheaper by
-    Sigil of Aid counts under the trinket limit) **(change TK-22; trinkets
+    Helping Sigil counts under the trinket limit) **(change TK-22; trinkets
     design 7.1, 13.7)**.
     **Open item, pending ruling (request CA-23; charm abilities design
     5.1, 13; M3):** list the approved charm families as sources (Trophy
@@ -2684,7 +2697,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     (armour design 8.1 rule 7) **(change AR-14)**.
   - Duration: up to 10 turns.
   - Sources: Shield-of-Faith-shaped spell (SRD); stances.
-- **Resisting (type)** — beneficial · Later
+- **Resistant (type)** — beneficial · Later
   - Effect: resistant to one type; advantage on saves against that type's
     rider.
   - Duration: up to 10 turns.
@@ -2766,14 +2779,14 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Duration: up to 10 turns, sourceTied.
   - Sources: Protect Technique.
   - Interactions: a Staggered guardian cannot redirect.
-- **Raging** — beneficial · Later (class content)
+- **Frenzied** — beneficial · Later (class content)
   - Effect: resistant to slashing, piercing and bludgeoning; +2 damage on
     Strength hits; advantage on Athletics and Fortitude; cannot cast or
     concentrate.
   - Duration: sustained up to 10 turns; ends if it neither attacked nor was
     damaged since its last turn.
   - Sources: Rage (SRD).
-- **Reckless** — mixed · Later (self toggle)
+- **Heedless** — mixed · Later (self toggle)
   - Effect: advantage on its Strength melee attacks; after a turn in which
     it attacked, attacks against it have advantage until its next turn.
   - Sources: Reckless Attack (SRD).
@@ -2781,7 +2794,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Effect: advantage on saves against `poison` conditions; Envenomed ticks
     of 2 or less do nothing.
   - Duration: up to 10 turns.
-  - Sources: antitoxin potions.
+  - Sources: Bitter Draughts.
 
 ### 18.10 I. Exploration-scale (lingering)
 
@@ -2796,7 +2809,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Effect: maximum hit points reduced by floor(maximum / 10), minimum 1,
     applied last as a modifier. Current hit points above the new maximum
     drop to it. **(lead's call)**
-  - Intensity: binary. A Lame variant (−1 speed) is a later flavour.
+  - Intensity: binary. A Limping variant (−1 speed) is a later flavour.
   - Duration: `untilCamp`. Medicine Treat during a short rest removes it:
     one attempt per Scarred unit per short rest, by one healer, against a
     fixed difficulty in the rest data (illustrative 10 + floor). Treat
@@ -2821,7 +2834,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     turn-counted conditions are suppressed.
 - **Diseased (strain)** — minor · Later
   - Effect: a 3-stage list per strain (for example Grave Fever, Shaking
-    Rot, Sight-blight). Stages cost numbers, Recovery or one disadvantage,
+    Rot, Sight-rot). Stages cost numbers, Recovery or one disadvantage,
     never a turn part.
   - Intensity: worsens one stage at each short rest without treatment.
   - Duration: `untilCamp`; Treat during a rest cures it.
@@ -2830,8 +2843,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   client, Q5; moved from Later; the 16 budget reading pending)**
   - Variants:
     - Ill-Omened: its first d20 test each fight has disadvantage;
-    - Leaden: one named pool's maximum −1;
-    - Ill-Starred (type): weak to one damage type;
+    - Plodding: one named pool's maximum −1;
+    - Star-Crossed (type): weak to one damage type;
     - Clinging: a cursed item cannot be unequipped (needs the items
       design).
     - **Maladies (M4; change HL-17):** nine named presets with
@@ -2856,13 +2869,13 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
   - Interactions: an item curse's cost is a `whileEquipped` item property,
     not a lingering condition. Clinging from an item is exempt from the cap
     of 2 harmful lingering conditions, as Scarred is (items design 13).
-    Item cost lines (M4; Eyebitten and Ill-Slept Later, with Conspicuous
+    Item cost lines (M4; Eyebitten and Heavy-Eyed Later, with Conspicuous
     and Restless) apply no condition that is the input of a transform into
     a hard condition (19) **(change HL-16; heirlooms and curses design
     4.2)**. A Malady sits in its own slot, at most 1 per unit, outside the
     cap of 2 (14; change HL-17).
 - **Restless** — minor · Later
-  - Effect: its next short rest gives half Recovery and no Slot Recovery.
+  - Effect: its next short rest gives half Recovery and no Slot Renewal.
   - Duration: until that rest.
   - Sources: haunted floors.
 - **Conspicuous** — minor · Later
@@ -2903,13 +2916,13 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     landed roll their dice one size smaller (minimum d4) and lose their
     verb. On a focus it suppresses only the focus verb. Shields and natural
     weapons are unaffected, except that a Reliquary Shield is a focus:
-    Notched may land through it and suppresses Spare only, never the AC
+    Notched may land through it and suppresses Withhold only, never the AC
     **(change AR-15; armour design 10.2)**.
   - Intensity: binary. The instance records the instanceIds of the items
     in that set when it lands (as Teetering records its hazard), not the
     set's slot. It applies only if the active set holds at least one weapon
     or focus it would affect (not a shield other than a Reliquary Shield,
-    a natural weapon or a Sure Grip weapon; change AR-15; cross-document
+    a natural weapon or a Fast Grip weapon; change AR-15; cross-document
     comparison 2026-11-23, CC-30); otherwise it does not apply, takes no
     lingering slot, and the
     rider or effect counts as not attempted. A unit that already has
@@ -2923,7 +2936,7 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     type's 2 conditions (enemies design 9.2). Party-facing only.
   - Interactions: counts toward the cap of 2 harmful lingering conditions
     (14); swapping to the spare set (a bonus action) escapes it, as does
-    handing a recorded weapon to an ally; the Sure Grip property makes a
+    handing a recorded weapon to an ally; the Fast Grip property makes a
     weapon immune. A condition on the unit, never item state.
 
 ### 18.11 Merged or cut
@@ -2953,7 +2966,7 @@ Record of the catalogue's shaping. **(lead's call)**
 | Hexed | Folded into Baned |
 | Elusive | Folded into Fleet |
 | Keen | Folded into Empowered |
-| Lame | A Scarred variant |
+| Lame (renamed Limping, naming pass NP-8) | A Scarred variant |
 | Noisy, Reeking | Merged as Conspicuous |
 | Entranced | Asleep with the `noProne` flag |
 | Delayed, Off-Balance, Slick, Focused, Siphoning, Jinxed | Cut: no niche, or the scorer cannot value them |
@@ -2969,8 +2982,8 @@ Record of the catalogue's shaping. **(lead's call)**
 | Kind | Condition | With | Result |
 |---|---|---|---|
 | implies | Stunned, Held, Asleep, Frozen, Petrified, Banished, Downed | Incapacitated | No action, bonus action, reaction or own movement; ends concentration, Hidden, held grapples and imposed Challenged |
-| implies | Restrained | Rooted flags | Speed 0, not moved by forced movement |
-| onApply | Asleep, Downed, Commanded (Grovel) | Prone | A separate Prone that outlives the parent |
+| implies | Restrained | Tangled flags | Speed 0, not moved by forced movement |
+| onApply | Asleep, Downed, Commanded (Crouch) | Prone | A separate Prone that outlives the parent |
 | onApply | Grappled | Grappling on the holder | A linked pair |
 | engine | Any hard instance (lockouts included), Surprised | Steeled | 1-turn immunity to the hard tier; an engine rule (7.2), not data |
 | engine | Downed (got up, first downing this floor) | Scarred | Maximum hit points −10% (minimum 1) until camp |
@@ -2986,7 +2999,7 @@ Record of the catalogue's shaping. **(lead's call)**
 | override | Burning | Smouldering | Replaced |
 | override | Frightened | Shaken | Escalation |
 | override | Blinded | Squinting | Replaced |
-| override | Restrained | Rooted | Replaced |
+| override | Restrained | Tangled | Replaced |
 | override | Soaked | Corroded, Conspicuous | Washed off |
 | override | Charmed | Frightened (same source) | Replaced |
 | override | Engulfed | Grappled | Replaced |
@@ -3026,13 +3039,13 @@ Record of the catalogue's shaping. **(lead's call)**
 | damage end | Fire ≥1 | Chilled, Frozen, Soaked, Oiled | Ends; on Oiled the hit takes +half and applies Burning one band higher; on Soaked the hit attempts no Burning rider. A ring-shifted fire part (trinkets design 9.4) does not pay out or end Oiled (Burning lands at its normal band) but ends Soaked as any fire hit **(change TK-25)** |
 | damage end | Cold ≥1 | Burning, Smouldering | Ends |
 | tick | Any harmful tick | Oiled, oil squares | Never: ticks are not hits (6.8) |
-| damage end | Bludgeoning ≥1 | Frozen | Shatter: the shell's weakness (+half, once) and automatic Stagger |
-| damage end | Breaker type | Restrained, Rooted | Ends (the unit's condition, never a web square; only fire burns a web square away, 11.4, change TR-25) |
+| damage end | Bludgeoning ≥1 | Frozen | Fracturing: the shell's weakness (+half, once) and automatic Stagger |
+| damage end | Breaker type | Restrained, Tangled | Ends (the unit's condition, never a web square; only fire burns a web square away, 11.4, change TR-25) |
 | damage end | Any damage | Asleep | Wakes after the damage resolves |
 | apply end | Corroded applied | Frozen | Ends; also strips one layer |
 | ladder | Soaked | Cold, lightning weak; fire resistant | Cold and lightning riders automatic; lightning arcs to all adjacent (at-will arcs skip allies; a selective cast leaves allies out; never the caster) **(change ARC-8)** |
 | ladder | Soaked + Oiled | Fire | Normal: no automatic Burning |
-| ladder | Exposed or Brittle + Resisting or Shielded | | Net normal |
+| ladder | Exposed or Brittle + Resistant (type) or Shielded | | Net normal |
 | ladder | Empowered + Shielded | | Net normal |
 | terrain | Water square | Soaked | On enter and turn end; a Burning unit entering loses both (cancel) |
 | terrain | Web square | Restrained | On enter and turn end; the square is never destroyed except by fire burn-away (11.4) **(change TR-25)** |
@@ -3180,7 +3193,7 @@ Each tied to a risk:
   condition terrain.
 - **M2:** the 22 M2 conditions and Downed, Flying and Jumping; riders;
   Treat and tonics; Scarred and its rest-screen support; water, web, fire,
-  oil-slick and bile squares with the burn-away rule; harm squares and the
+  oil-slick and gall squares with the burn-away rule; harm squares and the
   contact-hazard obstacle branch (11.5; cross-document comparison
   2026-11-23, CC-26); hazard edges, landing and drags into hazards; boss
   shed actions; lingering conditions and rest
@@ -3269,7 +3282,7 @@ the exact section it touches.
 | C4 | New Medicine use in a fight: Treat, an action, adjacent; one roll against each instance's recorded difficulty; ends poison conditions, Bleeding, Withered, Hobbled, Condemned and Calcifying (stages 1–2). At a short rest: Diseased and Scarred (fixed difficulty, one attempt per Scarred unit per rest). | Stat model 7.1, Medicine row, "In a fight" and "In the dungeon" columns; ability model 7.2, new table row |
 | C5 | Event boons (shrines, floor and camp events) and the starting boon may last until rest or camp without concentration; self-only toggles are exempt from the 10-round rule; one lingering boon per unit. | Ability model 9.6, last bullet; ability model 14.5, bullet "a beneficial effect longer than 10 rounds lacks concentration" |
 | C6 | Condition-tag immunity budget (2 per non-boss trait set, at most 1 control tag; theme rule); Mindless also grants `mind`; "the one immunity allowed outside bosses" means damage types. | Stat model 8.4, "mindless" bullet and budget bullets |
-| C7 | Every ladder shift that comes from a condition (including Soaked, Oiled, Exposed, Resisting, Shredded, Sapped, Shielded, Raging, Petrified, Ill-Starred and Frozen's shell) is not a trait or layer and does not count toward the two-resistance budget. | Stat model 8.4, budget bullet; stat model 8.5, last bullet |
+| C7 | Every ladder shift that comes from a condition (including Soaked, Oiled, Exposed, Resisting (renamed Resistant (type), naming pass NP-8), Shredded, Sapped, Shielded, Raging (renamed Frenzied, naming pass NP-8), Petrified, Ill-Starred (renamed Star-Crossed, naming pass NP-8) and Frozen's shell) is not a trait or layer and does not count toward the two-resistance budget. | Stat model 8.4, budget bullet; stat model 8.5, last bullet |
 | C8 | The psychic rider also applies Unfocused for 1 turn, and is attempted on a concentrating target or one not already Unfocused. | Stat model 8.1, Psychic row; ability model 9.3, bullet "A rider is not attempted on a target that already has that condition" (add the psychic exception and `worsen`) |
 | C9 | Clarifies riders: Stagger means no reactions until the end of the target's next turn; the radiant rider applies Revealed to a hidden or invisible target and Blinded otherwise. | Stat model 8.1, Bludgeoning and Radiant rows |
 | C10 | All turn-start ticks together are one damage event for concentration. | Ability model 9.5, bullet "One check per damage event" |

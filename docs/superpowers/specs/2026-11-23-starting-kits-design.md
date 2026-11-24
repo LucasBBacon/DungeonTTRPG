@@ -2,6 +2,7 @@
 
 Date: 2026-11-23
 Status: Approved, 2026-11-23
+Names updated by the naming pass (naming pass design `2026-11-24-naming-pass-design.md`, approved 2026-11-24; NP rows listed: NP-27, with its 13.1 cites under the agreed Q2–Q5, and the register rows of naming pass 5 whose sites include this document: 5.1.33, 5.1.46, 5.2.3, 5.2.5, 5.2.6, 5.6.5, 5.6.8, 5.7.3, 5.7.5, 5.7.7, 5.8.3, 5.8.27–5.8.40, 5.9.6). Only player-facing names changed; code identifiers, field names, change ids and file names are unchanged, and history rows keep the old name with a "renamed" note. "Starting gear" is final (SK-13 closed).
 Parents (immediate): `2026-11-23-camp-hub-design.md` (camp and hub design, "CH", segment 13, approved 2026-11-23, **the most recent template**), `2026-11-23-seeds-validation-design.md` (seeds and validation design, "SV", segments 11–12), `2026-11-23-exploration-information-design.md` ("XI", segment 10), the loot designs `2026-11-22-loot-economy-design.md` ("LE", segment 7a), `2026-11-22-item-rolls-design.md` ("IR", segment 7b) and `2026-11-22-loot-sources-design.md` ("LP", segment 7c), `2026-11-22-events-design.md` ("EV", segment 8), `2026-11-22-boss-rooms-design.md` ("BR", segment 9), and `2026-11-23-cross-document-comparison.md` (reviews, "CC").
 Other parents: `2026-11-15-dungeon-rpg-design.md` (main design, "MAIN"),
 `2026-11-16-character-stat-model-design.md` (stat model, "STAT"),
@@ -53,7 +54,7 @@ Items marked **(lead's call)** were filled in by the design lead inside approved
 
 ## 0. At a glance
 
-- **A kit is the class's starting gear, one per class creation pick.** There are six: Vanguard; Shade Blades and Shade Launcher; Arcanist; Herald Shield and Herald Totem. Contents are the approved class kits, with two corrections: SK-1 exact coin and SK-2 the Herald's illegal "2 javelins" (told plainly).
+- **A kit is the class's starting gear, one per class creation pick.** There are six: Vanguard; Shade Twin Blades and Shade Bow and Blade; Arcanist; Herald Shield hand and Herald Focus hand. Contents are the approved class kits, with two corrections: SK-1 exact coin and SK-2 the Herald's illegal "2 javelins" (told plainly).
 - **Kits do not get stronger** (told plainly). The approved package already carries a fresh solo hero through floor 1 to camp 1: mundane gear (0 VP), 2 belt potions, 1 guaranteed main-path potion, supply 2 plus 1 main-path supply, coin 15 plus the 17-coin floor (exactly the 32 coin camp 1 needs), and the F1 Dream's Due (an Uncommon weapon or focus for the hero). The kit is **meant to be outgrown on floor 1**, and the Due is that moment.
 - **Every kit has the same budget:** VP 0, no trinket, an empty pack, 2 potions in one belt slot with **the second belt slot left empty on purpose**, coin exactly 15, supply 2 (a party counter).
 - **Lore rides on three display-only layers, none in the rules or the seed key:**
@@ -82,12 +83,12 @@ Items marked **(lead's call)** were filled in by the design lead inside approved
 
    This matches the best roguelikes. Slay the Spire's Strikes and Dead Cells' rusty sword are weak on purpose, and the identity lives in one piece. So the design effort goes into **identity, theme and lore, not amount**.
 
-2. **Do kits match their source? Yes, by class.** Kits are per class and per creation pick (Shade Blades or Launcher, Herald Shield or Totem). Each has a silhouette, two physical damage types, a weapon verb per set, a named piece, kit lines and an Oddment pool written for that kit. Class-free "background" kits are **rejected as gear** (told plainly):
+2. **Do kits match their source? Yes, by class.** Kits are per class and per creation pick (Shade Twin Blades or Bow and Blade, Herald Shield hand or Focus hand). Each has a silhouette, two physical damage types, a weapon verb per set, a named piece, kit lines and an Oddment pool written for that kit. Class-free "background" kits are **rejected as gear** (told plainly):
    - weapon training differs per class (W 10, AR), so a class-free kit is illegal for some class or shrinks to coin and potions;
    - it would be a second level-1 decision (CL 7.4; VG row 12; SH and ARC row 14);
    - it doubles the floor-1 balance matrix.
 
-   MAIN 4.7's "background perk" survives as a boon (M3/M4) that carries its own Oddment pool. A background carries lore through what is in its pocket, not through gear.
+   MAIN 4.7's "Calling perk" survives as a boon (M3/M4) that carries its own Oddment pool. A Calling perk carries lore through what is in its pocket, not through gear.
 
 3. **Client question 1: a note, or a small weightless item that hints at lore and can be thrown away? Yes, but as a display object called the Oddment (placeholder), not as an inventory item and not as a letter** (told plainly).
    - **Why not an item:**
@@ -96,7 +97,7 @@ Items marked **(lead's call)** were filled in by the design lead inside approved
      - An inert object among real gear gets read as a secret. Dark Souls' starting Pendant is the classic case, and it breaks RC1 ("no lying UI").
      - Once it is an item it can be sold, stolen, offered as an EV Curiosity price or scored by the Due, which makes it rules state. CH Q2 (agreed) forbids even "lucky tokens" and tiny effects.
    - **Why not a note or letter:** "Letter" and "Note" are taken (the CH Letter Rack, EV's Sealed Letter Strand, EV D1 "The Letter Addressed to You", the Ferryman's Note hook). A letter also implies someone writing to the hero, which commits a hero backstory that RS 7.5 and 19.2 leave open.
-   - **What it is:** one Oddment per hero per run, such as "A porter's armband, mended with thread from another coat." It belonged to a resident of the dream with a trade, never to the hero.
+   - **What it is:** one Oddment per hero per run, such as "A lamp-trimmer's armband, mended with thread from another coat." It belonged to a resident of the dream with a trade, never to the hero.
      - It takes no slot, has no price and no effect. The rules core cannot see it, and it is outside the seed key.
      - Its card says plainly: **"Weighs nothing. Does nothing."**
      - It is shown on the creation card and in the hero's inspect header, and listed in Grave Goods.
@@ -117,8 +118,8 @@ Items marked **(lead's call)** were filled in by the design lead inside approved
 5. **Both, layered: recommended and taken.** The named piece goes into every fight with you. The Oddment is the hint. The Deed byname is the reward. None of the three has a rules effect or touches the seed.
 
 6. **Kit variants unlocked over runs: yes, at M3, as boon options** (CH-24 respected; agreed, Q1).
-   - Each variant is a different mundane kit for one creation pick, plus one skill training. The skill training is MAIN 4.7's "background perk" in practice, and STAT 7.2 already lets the starting boon add skills.
-   - I expect variants to lose often to an Uncommon heirloom, Old Friend or the Wayfarer's Pack (told plainly). A per-offer pick-rate report decides whether the client should revisit CH-24 (4.4).
+   - Each variant is a different mundane kit for one creation pick, plus one skill training. The skill training is MAIN 4.7's "Calling perk" in practice, and STAT 7.2 already lets the starting boon add skills.
+   - I expect variants to lose often to an Uncommon heirloom, Old Friend or the Wayfarer's Belt (told plainly). A per-offer pick-rate report decides whether the client should revisit CH-24 (4.4).
 
 ### 0.2 The client's four decisions (agreed, 2026-11-23)
 
@@ -142,7 +143,7 @@ Items marked **(lead's call)** were filled in by the design lead inside approved
 | 5 | Kit variants as boon options with one skill; parity, risk band, roster, milestones, Heirloom-shelf bundle, pick rate, level-3 hint (4.4) | M3 | lead's call; **agreed, Q1**; SK-7 ⚑ |
 | 6 | The named piece and its given name; kit lines; name rules (4.5.1) | M2 | lead's call; **agreed, Q2**; SK-5 ⚑ |
 | 7 | The Oddment: record, issue, display key, memory, surfaces, Leave it by the fire, after the run, lore engine, codex, writing rules (4.5.2) | M2 / M3 | lead's call; **agreed, Q3**; SK-6 ⚑, SK-14 (request) |
-| 8 | Creation, launcher and onboarding: kit strip, Oddment callout, creation warnings, Arcanist pack pressure (4.6) | M2 | lead's call; SK-9 ⚑ |
+| 8 | Creation, launcher and onboarding: gear strip, Oddment callout, creation warnings, Arcanist pack pressure (4.6) | M2 | lead's call; SK-9 ⚑ |
 | 9 | Determinism: kit inside the key, display outside it; seeded runs read only; shared-seed request; run-modifier request (4.7) | M1–Later | lead's call; SK-6 ⚑, SK-15 and SK-16 (requests) |
 | 10 | The catalogue: six default kits, eight companion named pieces, eight variants, display text (5) | M1–M3 | lead's call |
 | 11 | Data and V21 `StartingKits`, reports, tooling (9) | M1–M3 | lead's call; SK-10 ⚑ |
@@ -218,11 +219,11 @@ Research covered videogames, tabletop systems and lore-object practice. Lessons,
 | Kit | Source | Armour | Set A | Set B | Belt | Coin |
 |---|---|---|---|---|---|---|
 | Vanguard | VG 7.10, VG row 12, VG-21 | chain mail (heavy, AC 16; Str +1; Ringed) | warhammer (1d8 B, v1d10, Push) + shield (+2; bash 1d4 B Push) → AC 18 | greataxe (1d12 S, two-handed, heavy, Cleave) → AC 16 | 2 potions | "about 15" |
-| Shade Blades (default) | SH 7.10, SH row 14, SH 7.14 | leather (12 + Dex: AC 15 at Dex +3; Supple) | shortsword (1d6 P, light, Vex) + dagger (1d4 P, light, thrown 5, Nick) | sabre (1d6 S, light, Flourish) + dagger | 2 potions | "about 15" |
-| Shade Launcher (creation pick) | SH 7.10 | leather | longbow (1d8 P, two-handed, range 14, Aim; Str 0) | sabre + dagger | 2 potions | "about 15" |
+| Shade Twin Blades (default) | SH 7.10, SH row 14, SH 7.14 | leather (12 + Dex: AC 15 at Dex +3; Supple) | shortsword (1d6 P, light, Vex) + dagger (1d4 P, light, thrown 5, Nick) | sabre (1d6 S, light, Flourish) + dagger | 2 potions | "about 15" |
+| Shade Bow and Blade (creation pick) | SH 7.10 | leather | longbow (1d8 P, two-handed, range 14, Aim; Str 0) | sabre + dagger | 2 potions | "about 15" |
 | Arcanist | ARC 7.11, ARC row 14 | leather (AC 14 at Dex +2) | staff held two-handed (1d6 / v1d8 B; Parry pool-free +2 against melee; Steady Casting) | dagger (thrown, piercing fallback) | 2 potions | "about 15" |
-| Herald Shield (default) | HR 7.7, 7.11, HR row 10, HR-36 | chain shirt (medium, 13 + Dex; Ringed) | longsword (1d8 / v1d10 S, Parry) + shield → AC 16 at Dex +1 | "2 javelins" | 2 potions | "about 15" |
-| Herald Totem (creation pick) | HR 7.7, 7.11 | chain shirt | longsword + Totem (Loom) → AC 14, with a creation warning | "2 javelins" | 2 potions | "about 15" |
+| Herald Shield hand (default) | HR 7.7, 7.11, HR row 10, HR-36 | chain shirt (medium, 13 + Dex; Ringed) | longsword (1d8 / v1d10 S, Parry) + shield → AC 16 at Dex +1 | "2 javelins" | 2 potions | "about 15" |
+| Herald Focus hand (creation pick) | HR 7.7, 7.11 | chain shirt | longsword + Tipstaff (Loom) → AC 14, with a creation warning | "2 javelins" | 2 potions | "about 15" |
 
 - "No kit presets at creation": VG 7.10 and VG row 12; SH 7.10 "no other presets"; ARC row 14. A second level-1 pick breaks "one choice per level" (CL 7.4, ABL 10.3) (settled).
 - VG 7.10: at level 3 the camp screen suggests a one-handed spare with a borrowable verb (sabre or sickle; M2) (settled).
@@ -259,7 +260,7 @@ Research covered videogames, tabletop systems and lore-object practice. Lessons,
 - The run starts with 2 supply, a party counter (ABL 15.3).
 
 **Boons and the hub:**
-- MAIN 4.7 (decided): one starting boon, "such as an heirloom item or a background perk"; boons do not stack; no permanent stat boosts (MAIN 2, 4.7).
+- MAIN 4.7 (decided): one starting boon, "such as an heirloom item or a Calling perk"; boons do not stack; no permanent stat boosts (MAIN 2, 4.7).
 - CH-24 (in MAIN 4.7): "Starting kits get no hub peg: kit variants ship only as boon options."
 - CH 4.9: "Starting kits are fixed per class … any alternative kit may only ship as a boon option."
 - Heirlooms (ITEMS 14, M3): Uncommon, banded, `unsellable`, `noSteal`, `oncePerRun`, 0 VP for budget, counted as owned for the Due; picked at the hub's Heirloom shelf with exact text shown.
@@ -304,7 +305,7 @@ Research covered videogames, tabletop systems and lore-object practice. Lessons,
 | CL 6.3 ForbiddenClassGrant | V21 (k) on variants and bundled skills |
 | VG 7.10 level-3 spare suggestion | `KitRecord.level3SpareHintKey` (SK-7), 5.1 |
 | HR 7.11/7.12 creation warning; HR-10b per-pick arrays | 4.6 creation warnings; SK-2 rerun |
-| SH 7.14 Blades default and ladder preview | 4.6 |
+| SH 7.14 Twin Blades default and ladder preview | 4.6 |
 | CMP 8.3/8.4/8.7/11.1 | 5.2; given names on companion kits (SK-5) |
 | CMP 12 Old Friend issue | SK-3 issue row covers boon issue |
 | MAIN 4.7 / CH-24 | 4.4 variants as boons (SK-7) |
@@ -330,12 +331,12 @@ Research covered videogames, tabletop systems and lore-object practice. Lessons,
 - **F3. CH 4.9 says "fixed per class",** but the Shade and the Herald choose their kit as their creation pick. CH-24 and its sentence in MAIN 4.7 do not say it ("Starting kits get no hub peg: kit variants ship only as boon options") and need no change. Fix: SK-8, CH 4.9 wording only. The meaning of CH-24 is unchanged **(corrected after the check)**.
 - **F4. ITEMS 18.1 has no row for the hero's kit issue at run start** (only recruit hire). Fix: SK-3.
 - **F5. The F1 Due and an heirloom weapon conflict.** A U heirloom weapon (M3 boon) ties the mundane kit weapon at 0 VP in the fixed deal, with no tie-break stated. Then either no strict U upgrade exists on F1 (the deck has no R card), or the Due lands as a U upgrade over a mundane item the hero no longer uses. Fix: SK-4, widened to armour and shield heirlooms by HL-3 (heirlooms and curses design 4.1.4).
-- **F6. Stat rearrangement can make a kit illegal at tick 0.** STAT 5.1 lets the player rearrange the suggested array. A Vanguard at Str −1 Strains the greataxe (heavy needs Str +1) and chain mail; a Shade below Str 0 Strains the longbow; low Dex drops leather AC below what the kit strip prints. Fix: SK-9 creation warnings and V21 checks over legal arrangements.
+- **F6. Stat rearrangement can make a kit illegal at tick 0.** STAT 5.1 lets the player rearrange the suggested array. A Vanguard at Str −1 Strains the greataxe (heavy needs Str +1) and chain mail; a Shade below Str 0 Strains the longbow; low Dex drops leather AC below what the gear strip prints. Fix: SK-9 creation warnings and V21 checks over legal arrangements.
 - **F7. Mundane bases have no basePrice in any approved document**, although ITEMS prices them "by basePrice" (10.5) and the vendor stocks them. This is a data gap. Fix: SK-11 (request to ITEMS and LE).
-- **F8. "Kit" is overloaded.** CMP and CL 7.8 use "kit" for a companion's ability package (Gatekeeper kit, kit upgrades); CH-17 says "Accept kit defaults". A "Kit" chip on a hero's mundane sabre would also look like kitBound gear, which sells for 0 ("Unsellable: kit"). Fix: SK-13; the player-facing word goes to the naming pass. "Issued" has 26 hits and is rejected as the chip; the placeholder chip is "Starting gear" (0 hits).
+- **F8. "Kit" is overloaded.** CMP and CL 7.8 use "kit" for a companion's ability package (Gatekeeper kit, kit upgrades); CH-17 says "Accept kit defaults". A "Kit" chip on a hero's mundane sabre would also look like kitBound gear, which sells for 0 ("Unsellable: kit"). Fix: SK-13; the player-facing word goes to the naming pass. "Issued" has 26 hits and is rejected as the chip; the placeholder chip is "Starting gear" (0 hits). **"Starting gear" is final: SK-13 closed by the naming pass (NP-27).**
 - **F9. Stale text:** LE 3.1 Sell 400‰ against the approved 250‰; ABL 20 and STAT 10 still say kits "move to the category designs". Fix: SK-17.
-- **F10 (new lead's call; corrected after the check). The proposal's "an on-hit verb in each set" fails approved kits.** The Arcanist's staff carries Parry (a guard verb) and the Launcher's longbow Aim (a planted-shot verb); neither is on-hit. VG 7.10's "on-hit, payable line in each set" is a Vanguard requirement, read by Practised Hand. The Arcanist's set B holds the dagger **alone**, where Nick does nothing: Nick only moves an off-hand attack into the Attack action (W 6, W 11.3). That set is the class's declared piercing fallback (ARC 7.11), not a verb set. Fix: V21 (d) checks a usable weapon or focus verb in each set **in the set's actual layout** (Nick counts only in an off hand beside a light main hand), on-hit only where a class feature reads it, and exempts a set its class design declares fallback-only, which `KitHasFallbackDamage` checks instead (4.2) **(lead's call, after the check;** the draft counted Nick as usable in that set**)**.
-- **F11 (new lead's call; corrected after the check). The survivor-piece rule as drafted ("not the main hand, not a focus") does not hold.** The F1 hero-arms Due is dealt by slot (main hand, off hand), never by weapon set, and its card is the lowest U weapon or focus a tier above the dealt item, which the player equips wherever they like (LE 6.6, IR 4.9). So a U sabre, dagger, javelin or shortbow Due can replace a same-family kit weapon in set B. Writing first read the rule as "not the set-A main hand"; the check showed that fails for the Shade's sabre, the Arcanist's dagger, the Totem's javelin and the Throwhand's shortbow, and the Farcaster's and Bookhand's proposed named staff is a focus. Fix: the named piece is **the shield where the kit has one, otherwise the armour**, because the F1 Due is always a weapon or focus (4.5.1, 5.1, 5.3) **(lead's call, after the check)**.
+- **F10 (new lead's call; corrected after the check). The proposal's "an on-hit verb in each set" fails approved kits.** The Arcanist's staff carries Parry (a guard verb) and the Bow and Blade's longbow Aim (a planted-shot verb); neither is on-hit. VG 7.10's "on-hit, payable line in each set" is a Vanguard requirement, read by Practised Hand. The Arcanist's set B holds the dagger **alone**, where Nick does nothing: Nick only moves an off-hand attack into the Attack action (W 6, W 11.3). That set is the class's declared piercing fallback (ARC 7.11), not a verb set. Fix: V21 (d) checks a usable weapon or focus verb in each set **in the set's actual layout** (Nick counts only in an off hand beside a light main hand), on-hit only where a class feature reads it, and exempts a set its class design declares fallback-only, which `KitHasFallbackDamage` checks instead (4.2) **(lead's call, after the check;** the draft counted Nick as usable in that set**)**.
+- **F11 (new lead's call; corrected after the check). The survivor-piece rule as drafted ("not the main hand, not a focus") does not hold.** The F1 hero-arms Due is dealt by slot (main hand, off hand), never by weapon set, and its card is the lowest U weapon or focus a tier above the dealt item, which the player equips wherever they like (LE 6.6, IR 4.9). So a U sabre, dagger, javelin or shortbow Due can replace a same-family kit weapon in set B. Writing first read the rule as "not the set-A main hand"; the check showed that fails for the Shade's sabre, the Arcanist's dagger, the Focus hand's javelin and the Throwhand's shortbow, and the Farcaster's and Bookhand's proposed named staff is a focus. Fix: the named piece is **the shield where the kit has one, otherwise the armour**, because the F1 Due is always a weapon or focus (4.5.1, 5.1, 5.3) **(lead's call, after the check)**.
 - **F12 (new lead's call). Four variant skills collide with class creation defaults** (Maulhand Athletics with the Vanguard's Athletics; Throwhand "Stealth or Perception" with the Shade's defaults; Bookhand and Spearhand Medicine with the Arcanist's and Herald's). Fix: the skill rule and corrected illustrative skills (4.4, 5.3).
 
 ---
@@ -380,7 +381,7 @@ Three judges scored each model 1–10 on fit with approved rules, balance, theme
   - tiered milestones;
   - the Arcanist pack-pressure UI fix;
   - companion trims.
-- **From Model B:** the "what was left in its pocket" voice, the background-perk boon carrying an Oddment pool, and cloth-overlay art for variants.
+- **From Model B:** the "what was left in its pocket" voice, the Calling-perk boon carrying an Oddment pool, and cloth-overlay art for variants.
 - **From Model C:** the empty second belt slot as a teaching invitation. Tonic, water and oil are held only as a lever behind floor-1 death reports, never as a pre-run choice.
 
 The critics changed seventeen points; Appendix A.1 lists every finding and its resolution. Liveries and Haversacks are rejected (told plainly); the names "Livery" and "Haversack" (0 hits) are retired with their models.
@@ -396,8 +397,8 @@ The critics changed seventeen points; Appendix A.1 lists every finding and its r
   - **Default kit:** one per class creation pick. M1 ships the Vanguard; M2 ships all six.
   - **Kit variant:** M3, a boon option that replaces the default kit of one creation pick (4.4).
   - **Companion kit:** CMP 8.3, unchanged in gear.
-- **Not kits:** heirlooms (boons, ITEMS 14), supply (a party counter), the Oddment (display, 4.5.2), background perks (boons).
-- A kit never changes the hero's level-1 choice. Shade and Herald keep Blades/Launcher and Shield/Totem as their creation pick; Vanguard and Arcanist have no kit choice (settled).
+- **Not kits:** heirlooms (boons, ITEMS 14), supply (a party counter), the Oddment (display, 4.5.2), Calling perks (boons).
+- A kit never changes the hero's level-1 choice. Shade and Herald keep Twin Blades or Bow and Blade, and Shield hand or Focus hand, as their creation pick; Vanguard and Arcanist have no kit choice (settled).
 - **Issue** (SK-3; **lead's call, after the check:** the draft's "placed by ITEMS 6.2" would have put the whole kit in the pack). At run start, inside WO1 and **before F1 generation**, so that the F1 party snapshot the Due and the LootPlan read already holds the kit (GS0.1):
   - each kit instance goes straight to its `KitRecord` slot: set A to `weaponSet(hero, active, main|off)`, set B to `weaponSet(hero, spare, main|off)`, the armour to `armour(hero)`, the potions to `belt(hero, 0)`. Events: `ItemCreated{kit}`, then `ItemEquipped`. ITEMS 6.2's pack placement applies only to a piece that SK-12 displaces (7 item 2);
   - **creation order**, which fixes `instanceId` (a run-state counter that also keys IR's `itemPart` display hash and 6.2's tie-breaks): set A main, set A off, set B main, set B off, armour, then the potions one by one into belt 0. The 2 potions are 2 instances merged into one stack. A piece SK-12 does not issue is never created and consumes no `instanceId`;
@@ -417,7 +418,7 @@ Every hero kit and every variant spends exactly this:
 | Trinket | none | CMP 8.4 logic extended to heroes (SK-3) |
 | Belt | 2 Healing Potions in **one** slot (stackMax 3); the second belt slot **empty on purpose** | DH-37 (client numbers) |
 | Coin | **exactly 15** (`kit.coinStart`, hero kits only; issued as `CoinChanged{source: kit}`, 4.1) | SK-1 |
-| Supply | 2, a party counter, not in the record; the kit strip's supply text is generated from the ABL constant, never written as a literal **(lead's call, after the check)** | ABL 15.3 (settled) |
+| Supply | 2, a party counter, not in the record; the gear strip's supply text is generated from the ABL constant, never written as a literal **(lead's call, after the check)** | ABL 15.3 (settled) |
 | Pack | empty | lead's call |
 | Gear rules | trained, never Strained at the suggested array; legal under W 11.1 (no stacked gear); ≥ 2 physical damage types across the sets; a usable weapon or focus verb in each set **in the set's actual layout** (Nick counts only in an off hand beside a light main hand), **on-hit where a class feature reads it** (the Vanguard's Practised Hand, VG 7.10) **(new lead's call, F10)**; a set its class design declares fallback-only (the Arcanist's set-B dagger, ARC 7.11) is exempt from the verb test and checked by the fallback rule instead **(lead's call, after the check)**; a fallback damage type | V21 (d) |
 | AC | **`kit.acFloor`**, one number per class and creation pick, in data: the kit's highest sustained set AC at the suggested array minus 2 *(illustr.)*, never below the AR-20 lowest legal party AC (11). It drives the creation warnings (4.6) and variant parity (4.4). Over every **legal arrangement** (all permutations of that pick's suggested array, HR-10b; plus species modifiers once species ship, M4), sustained AC stays ≥ 11 **(lead's call, after the check:** the draft's "the class's AR-20 contribution" was not defined anywhere**)** | V21 (e) |
@@ -445,8 +446,8 @@ Every hero kit and every variant spends exactly this:
 - **Form.** A variant is a `KitVariantBoon`: a full mundane `KitRecord` that replaces the default kit of **one creation pick** (`replacesKit`), plus **one skill training**.
   - It sits in `boons[]` and `configHash` (SV-12), is `oncePerRun`, and is offered on the **Heirloom shelf** with its exact contents shown before the pick (the ITEMS 14 rule).
   - It applies only when its class and creation pick match. "Boons do not stack", so a variant never coexists with an heirloom.
-  - **Pick order (lead's call, after the check).** The Heirloom shelf comes before class pick (CH 4.8), so the shelf shows every unlocked variant, each labelled with its class and the creation pick it replaces. Taking a variant pre-selects that class and creation pick at creation. If the player then changes the class or the creation pick, the strip shows one non-blocking line, for example "Your boon replaces Launcher gear. Choosing Blades returns the boon." (one whole-string key per variant). Confirming creation with a class or pick that no longer matches clears the variant and reopens the boon picker inline, on CH 4.10's "no longer valid" path. "Begin again" re-validates a carried variant the same way. V21t `VariantPickConsistent`: no run starts with a variant whose class and creation pick do not match.
-- **Why a skill.** A 0-VP sidegrade alone loses to an Uncommon heirloom, Old Friend or the Wayfarer's Pack. The skill is MAIN 4.7's "background perk" in practice, and STAT 7.2 (agreed) lets the starting boon add skills.
+  - **Pick order (lead's call, after the check).** The Heirloom shelf comes before class pick (CH 4.8), so the shelf shows every unlocked variant, each labelled with its class and the creation pick it replaces. Taking a variant pre-selects that class and creation pick at creation. If the player then changes the class or the creation pick, the strip shows one non-blocking line, for example "Your boon replaces Bow and Blade gear. Choosing Twin Blades returns the boon." (one whole-string key per variant). Confirming creation with a class or pick that no longer matches clears the variant and reopens the boon picker inline, on CH 4.10's "no longer valid" path. "Begin again" re-validates a carried variant the same way. V21t `VariantPickConsistent`: no run starts with a variant whose class and creation pick do not match.
+- **Why a skill.** A 0-VP sidegrade alone loses to an Uncommon heirloom, Old Friend or the Wayfarer's Belt. The skill is MAIN 4.7's "Calling perk" in practice, and STAT 7.2 (agreed) lets the starting boon add skills.
   - The skill is never one the class already has. **(new lead's call, F12)** "Already has" means the class's recommended creation default skills (VG Athletics, Medicine; SH 7.14 Stealth, Medicine, Perception; ARC Medicine, Lore; HR Intimidation, Medicine). Each variant also names one **alternate** skill, outside those defaults; if the player's own picks already include the variant's skill, the boon grants the alternate. **(lead's call, after the check)** The skill is resolved at creation confirm, after the skill picks: the variant's skill if untrained, else the alternate, else a third skill listed in data (`skillFallback`, outside the defaults, under the same bounds). The shelf card shows the conditional form ("Perception (Lore if you already are)"); the creation card shows the resolved skill live.
   - It is never Leadership (price effects).
   - It is never Mechanics at M3, because Mechanics changes F1 Locked and trapped container access, which feeds the loot budget. Mechanics is held as a lever.
@@ -470,7 +471,7 @@ Every hero kit and every variant spends exactly this:
 
   **Heirloom R1 (reading, change HL-10; M3).** The heirloom class milestone "Fell the floor-3 boss as a <class>" is ordered after these by difficulty only, with no prerequisite; one run may fire all three. One WO6 writes, and the hub reveals, in a fixed order: these variant milestones, then R1, the R2 offer, R3 (heirlooms and curses design 4.1.2).
 - **Hub object (`UnlockHasHubObject`).** One bundle per class on the **Heirloom shelf**, where boons already live. It is tied in cloth and marked with the class glyph and a pattern, never colour alone.
-  - There is **no coat tag on the Coat rack**: CH-24 says "starting kits get no hub peg" (told plainly; corrects Model A and the catalogue).
+  - There is **no coat tag on the Newel**: CH-24 says "starting kits get no hub peg" (told plainly; corrects Model A and the catalogue).
   - **(new lead's call)** CH 4.11's "kit tag in the Veteran book" stays the companion-kit unlock object; it is never used for a hero kit variant.
   - "New in the dream" names the variant.
 - **Pick rate (report, per offer).** For each variant: the share of runs in which it was offered and taken, against a fair share of 1/N for the N options shown. An **offer** is a Heirloom-shelf view in which the variant was eligible (its class and the variant unlocked) **(lead's call, after the check)**.
@@ -488,10 +489,10 @@ Every hero kit and every variant spends exactly this:
   - The display layer updates it only by reacting to Core events: `ItemMoved`, `ItemEquipped`, `ItemTaken` and `ItemReturned` keep the entry; `ItemSold`, `ItemDestroyed` (any reason) and `ItemLeft` followed by `ItemScrapped` or `ItemDestroyed{lost}` close it.
   - It is display-tagged runtime state, outside the key; it is **not** in `displayHash`, which hashes content (the keys it points to are content and are hashed there). Core assemblies cannot reference the sidecar type (V21 (h)).
 - **Survivor-piece rule (lead's call, after the check).** The named piece is **the shield where the kit has one, otherwise the armour**. The F1 hero-arms Due is always a weapon or focus (LE 6.6), dealt by slot, never by weapon set, and the player equips it wherever they like, so any kit weapon can meet a same-family U Due; a shield or armour never can. V21 `KitNamedPieceNotF1Target` is computed over the F1 deck: for each class × creation pick (and variant), no card in the F1 hero-arms candidate set (U, usable, trained) has the named piece's family; by construction it holds for every shield and armour. Companion kits are exempt **(new lead's call:** companions never face the F1 Due; their named piece may be any piece, and an F2 or F4 Due that replaces it follows the event table below**)**.
-  - Picks: Vanguard, the shield; Shade Blades and Shade Launcher, the leather (one shared name: the same coat, carried by the same trade); Arcanist, the leather; Herald Shield, the shield; Herald Totem, the chain shirt (5.1).
-  - The draft's set-B picks (the Shade's sabre, the Arcanist's dagger, the Totem's javelin) are retired: a U sabre, dagger or javelin Due could replace each of them.
+  - Picks: Vanguard, the shield; Shade Twin Blades and Shade Bow and Blade, the leather (one shared name: the same coat, carried by the same trade); Arcanist, the leather; Herald Shield hand, the shield; Herald Focus hand, the chain shirt (5.1).
+  - The draft's set-B picks (the Shade's sabre, the Arcanist's dagger, the Focus hand's javelin) are retired: a U sabre, dagger or javelin Due could replace each of them.
   - The report `NamedPieceHeldAtF3` reviews the picks after 2 playtest rounds; "held" means owned by the party at F3 entry, in any location. The armour is never an F1 target; on a shield kit it is the stated fallback.
-- **Where it shows.** The card's name line stays the family word ("Shield") with a small "Starting gear" chip (placeholder, SK-13), so a kit item is never more prominent than a notable or a byname.
+- **Where it shows.** The card's name line stays the family word ("Shield") with a small "Starting gear" chip (final; SK-13 closed by the naming pass, NP-27), so a kit item is never more prominent than a notable or a byname.
   - The given name is the item's **one flavour line in the Whence pane**: *Called Nine Rivets*. It shows on inspect, in Grave Goods and in the codex.
   - It never shows on the loot summary, compare and verdict rows, the carried-use floater, the HUD, the combat log, the vendor, the Swap/Leave and Curiosity pickers, or the Due announcement. Those use the family word; the Sell, Swap/Leave and Curiosity rows carry the chip and, for the named piece, the inline consequence line (4.3).
   - Accessible label, one whole-string key with a named placeholder and a translator note: "{family}, starting gear, called {givenName}". Quotes are never the only marker; where a locale uses quote marks, they are in the key, never added by code.
@@ -520,7 +521,7 @@ Every hero kit and every variant spends exactly this:
   - no idioms or puns that depend on the family word or English (critic: "Short Notice" on a shortsword dies in translation);
   - **(lead's call, after the check)** no word that names damage or a defect on a full-stat piece ("split", "bent", "broken", "cracked"), and no two given names sharing a head word (V21 (g) machine rows);
   - ≤ 18 characters *(illustr.)*;
-  - collision-free by whole word and substring against record names, notables, epithets, Reveries, bynames, Patina captions, theme, Hollowfolk, Hollowfolk verbs ("Hear") and Proprietor names (V14 (f) pattern; V21 (g));
+  - collision-free by whole word and substring against record names, notables, epithets, Reveries, bynames, Patina captions, theme, the Fireside, Fireside verbs ("Hear") and Proprietor names (V14 (f) pattern; V21 (g));
   - **(new lead's call)** each word of a name is also checked against property, verb, rank-word, party-counter and system-term names; a hit is not a build failure but is flagged to the naming pass (A.2 lists the current flags);
   - "no proper noun" is an authored tag (`properNoun: false`) that the tone review confirms; a linter cannot tell it from Title Case (V21 (g)).
 - **Rejected:** Q2-B (the name on the sword); Q2-C (a title rename).
@@ -529,7 +530,7 @@ Every hero kit and every variant spends exactly this:
 
 - **Record.** `OddmentRecord` is display-domain data, never an ITEMS record. It has no price, size, slot, stack, unit, command or effect field. Core assemblies cannot reference the type (the `AmbientCoreBlind` / `CoreNoProfileRef` pattern).
   - **Records are never deleted (lead's call, after the check).** A patch may only mark one `retired`. A retired id still renders from a save, from Grave Goods and from the codex, and is never selected for a new run. Changing a pool's order is allowed and changes only new runs. V21t `OddmentRetiredLoads` loads a save that holds a retired id.
-- **Pools (lead's call, after the check).** Each default kit has a pool of 6 (Q3). Each variant boon and each background-perk boon (M3) has its own pool of 3 (`oddmentPoolId` on its record). A hero draws from an **effective pool**: the held boon's pool, if any, followed by the default kit's pool for the creation pick, so a variant or background hero draws from 9 and the boon's own entries come first. An heirloom has no `oddmentPoolId`, so an heirloom hero draws the default kit's pool (reading; heirlooms and curses design 4.1.4). The Bobbin charm boon (M3) carries no pool of its own either, so a Bobbin run draws the default kit's pool (reading; CA-26; charm abilities design 4.11).
+- **Pools (lead's call, after the check).** Each default kit has a pool of 6 (Q3). Each variant boon and each Calling-perk boon (M3) has its own pool of 3 (`oddmentPoolId` on its record). A hero draws from an **effective pool**: the held boon's pool, if any, followed by the default kit's pool for the creation pick, so a variant or Calling-perk hero draws from 9 and the boon's own entries come first. An heirloom has no `oddmentPoolId`, so an heirloom hero draws the default kit's pool (reading; heirlooms and curses design 4.1.4). The Bobbin charm boon (M3) carries no pool of its own either, so a Bobbin run draws the default kit's pool (reading; CA-26; charm abilities design 4.11).
 - **Issue.** One per hero per run, by **one formula (lead's call, after the check;** the draft gave two derivations**)**:
   - **Order:** each part of the effective pool is permuted by H(`DisplayKey(run)` / `lore` / (campIndex 0, visitIndex 0, speaker "oddment", heroIndex, poolId)), the boon's part first, then the default kit's. **No `nightId`** enters it, because `nightId` is profile-scoped and two players of one code must see the same Oddment.
   - **Fresh seeded or shared runs** take the first entry of the order and write nothing. **Told plainly:** the same seed shows the same Oddment, but a text patch can change it (display content is outside the key).
@@ -539,7 +540,7 @@ Every hero kit and every variant spends exactly this:
   - Selection never reads the forecast or the run's themes (R-SEED-2).
 - **Display key (change SK-6 to CH-8 and SV 4.3).** The `lore` domain's camp root is camp-scoped, so the Oddment gets an explicit run-start row under it: `DisplayKey(run)` / `lore` / (campIndex 0, visitIndex 0, speaker "oddment", heroIndex, poolId), with no `nightId`. This is a flagged change, not a read.
 - **Memory write (SK-6; lead's call, after the check:** the draft's "CH's write points: camp 1 reached, or run end" described writes CH and SV do not have**).** The mark is appended to `run.save`'s `pendingProfile` as a `loreSeen`-kind entry **on the first camp-1 entry (WO4)**, or at WO6 if the run ends before camp 1; **never at WO1**. It is flushed to `loreMemory.oddmentsSeen[]` only by SV's existing flushes (WO6, WO7 load, abandon), for personal runs only. So a start, quit, reload and abandon on F1 writes nothing, and abandoning cannot be used to roll through Oddments. `AbandonWritesNoLore` gains that case: "start, quit, reload, abandon on F1 → `oddmentsSeen` unchanged".
-- **Where it shows (lead's call, after the check:** layouts and keys made localisable**):** the Oddment's name is a standalone label with no article ("Porter's armband"), shown in list layouts with a heading, never inserted into a sentence:
+- **Where it shows (lead's call, after the check:** layouts and keys made localisable**):** the Oddment's name is a standalone label with no article ("Lamp-trimmer's armband"), shown in list layouts with a heading, never inserted into a sentence:
   - creation card: the heading "Also carried", the name below it (from run 2; 4.6);
   - **hero inspect header**: an Oddment line away from the belt, pack and equipment grids, non-draggable, with no hover target over slots, flat paper or string art and no item frame or glint. Its card shows the art, the caption, an alt-text string and "Weighs nothing. Does nothing.";
   - Grave Goods (DH 17.12, LE 8.2): the states below;
@@ -560,11 +561,11 @@ Every hero kit and every variant spends exactly this:
   The Book of Nights caption uses the same per-camp key. AN11's no-counts rule holds: no surface counts fires.
 - **After the run.**
   - Death: the Grave Goods line for its state.
-  - Win (M3): the Framer pins the **carried** Oddment's tag to the corner of the Memento frame, captioned "carried out of the Heart". This costs no figure line. It is **the first cut** if CH's `OneWinOwnerPerNight` budget refuses it.
+  - Win (M3): the Gilder pins the **carried** Oddment's tag to the corner of the Memento frame, captioned "carried out of the Heart". This costs no figure line. It is **the first cut** if CH's `OneWinOwnerPerNight` budget refuses it.
   - Nothing ever returns as a boon or an item (ITEMS 15). Read as "no instance returns": an authored heirloom template unlocking is content, which ITEMS 15 allows (reading; heirlooms and curses design 4.1.2).
 - **Lore engine (M3; CH owner).**
   - LoreContext (CH 4.15.1) gains display booleans `oddmentCarried` and `oddmentLeftThisNight`, plus a hidden `strataTag` key (never shown in a caption).
-  - A Lingerer of the matching stratum may have one T2 line under AN3, AN5 and AN7 caps and `factOncePerRun`. Never on a death Night.
+  - A Straggler of the matching stratum may have one T2 line under AN3, AN5 and AN7 caps and `factOncePerRun`. Never on a death Night.
   - No figure ever asks for, takes or returns it (AN1). It never gates (AN2).
   - These lines are the second cut.
 - **Codex (M3; agreed, Q3).** An "Oddments" page in the Library (CH 4.15.8 hosts; RS owns), filled on sight and write-only from the run's view. One illustrated plate per completed kit pool, behind "a win as <class>".
@@ -574,7 +575,7 @@ Every hero kit and every variant spends exactly this:
   - **Banned content:**
     - DreamerLine and AN5 words ("down", "went down", "back", "kept going", "wake");
     - RC7 reserved cues (bells, clocks, winding);
-    - Hollowfolk signature props or voice textures (chalk and slates, pencils, placards, playing cards, library slips, guest lists, banner ribbons, hymn sheets);
+    - Fireside signature props or voice textures (chalk and slates, pencils, placards, playing cards, library slips, guest lists, banner ribbons, hymn sheets);
     - **(lead's call, after the check)** named content from other designs: EV card titles and props, Strand names, RS faction motifs and role props, boss signatures, trinket and property names, trinket kind words (charm, knot, token), and level-up reward terms (Spell card, Offer, Talent);
     - theme names;
     - doors, routes and distances; numerals and number words in the `oddment.numberBlocklist` *(illustr.: 2, 3, 6, 12, 15, 17, 20, 32)*;
@@ -584,19 +585,19 @@ Every hero kit and every variant spends exactly this:
   - **Pool rules (lead's call, after the check):** no two items in one pool share an object noun; no Oddment repeats a frame or verb of a kit line in the same kit.
   - **Machine rows and authored tags.** Word lists, the blocklists, collisions, lengths, required fields and required author tags are machine rows of V21 (i) and fail the build. Implication bans cannot be linted, so each record carries authored tags the tone review confirms: `noUsableLook`, `noImpliedSense`, `countsReviewed`, `noKitEcho`.
   - **Shape:** a question, not an answer (the Sage's letter lesson). Caption ≤ 14 words; codex paragraph ≤ 60 words; dry register; CardFit at 150%.
-  - **(new lead's call; updated after the check)** The tone review gives a named second look to the ribbon rosette (Herald Totem, next to "banner ribbons") and to every new sample of 5.1. **The check re-authored** the samples that broke these rules: the gatehouse rota and the scored strip (the Gaol's rota and tally texture), the tally of crows ("tally" is taken), the spell card (a level-up reward term), the blotting sheet and spectacle lens (RS's ink-and-spectacles motif), the list of toasts (the Supper's Toast), the usher's glove (the Receiving Line), the chair label (a place card), the cue card and blank speech (the Prompter's Cue), the cork (a bottle, next to "vials"), the rivet and the receipt (kit echoes and money), the filed thimble (the shortsword line's verb), the archery accessories, the string of knots (a trinket kind word), and the repeated glove, chair and "admits" items. Each pool stays at 6.
+  - **(new lead's call; updated after the check)** The tone review gives a named second look to the ribbon rosette (Herald Focus hand, next to "banner ribbons") and to every new sample of 5.1. **The check re-authored** the samples that broke these rules: the gatehouse rota and the scored strip (the Gaol's rota and tally texture), the tally of crows ("tally" is taken), the spell card (a level-up reward term), the blotting sheet and spectacle lens (RS's ink-and-spectacles motif), the list of toasts (the Supper's Toast), the usher's glove (the Receiving Line), the chair label (a place card), the cue card and blank speech (the Prompter's Cue), the cork (a bottle, next to "vials"), the rivet and the receipt (kit echoes and money), the filed thimble (the shortsword line's verb), the archery accessories, the string of knots (a trinket kind word), and the repeated glove, chair and "admits" items. Each pool stays at 6.
 - **Premise row (SK-14, request to RS):** "Kits? The dream issues what its residents set aside." It is additive and commits nothing about the hero. The kit cards never depend on it: their provenance line is neutral (4.5.1).
 - **Rejected:** Q3-B (everything in M3); a real weightless inventory item; a letter or note (told plainly).
 
 ### 4.6 Creation, launcher and onboarding (lead's call; change SK-9 ⚑)
 
-- **Run 1 (CH 4.12: straight to creation).** The class card shows a simplified **kit strip**: the kit silhouette, a role word and AC, plus the hand-off line "Enough for the first stair. The dream owes you the rest." (placeholder; it ties the kit to the announced Due without naming the item, LE 6.15).
-  - Shade and Herald show two strips with the default pre-selected (Blades, Shield). The Totem keeps its AC warning.
+- **Run 1 (CH 4.12: straight to creation).** The class card shows a simplified **gear strip**: the kit silhouette, a role word and AC, plus the hand-off line "Enough for the first stair. The dream owes you the rest." (placeholder; it ties the kit to the announced Due without naming the item, LE 6.15).
+  - Shade and Herald show two strips with the default pre-selected (Twin Blades, Shield hand). The Focus hand pick keeps its AC warning.
   - No variant row and no new decision.
   - Verbs, coin, supply, the given name and the Oddment line appear on inspect.
 - **From run 2 (`uiMemory`).** The full strip shows: set icons with their verb text (never icon-only), armour and AC, "2 potions · 15 coin · supply 2" (the numbers generated from data and the ABL constant), and the "Also carried" heading with the Oddment's name below it.
 - **The Oddment callout:** one-time and non-modal, the first time the hero inspect is opened at camp 1. Never at F1 entry, and never part of XI's vocabulary load.
-- **Creation warnings (SK-9, extends the Totem precedent and ARC 7.14's warnings).** When the player rearranges the array so that a kit item is Strained or AC falls below the pick's `kit.acFloor` (4.2), the card says so in one line of shape plus text, never hue: "Greataxe: Strained at Str −1. Its verb is off."
+- **Creation warnings (SK-9, extends the Focus hand precedent and ARC 7.14's warnings).** When the player rearranges the array so that a kit item is Strained or AC falls below the pick's `kit.acFloor` (4.2), the card says so in one line of shape plus text, never hue: "Greataxe: Strained at Str −1. Its verb is off."
   - Warnings never block (the ARC 7.14 rule). No auto-swap of gear (that would be a second kit axis).
   - Floor1ClassSpread adds a "worst legal rearrangement" arm, reported outside the mean.
 - **M3:** variant boons appear on the Heirloom shelf with exact contents and skill (and its alternate). Taking one pre-selects its class and creation pick; a later change follows the pick-order rule of 4.4. "Begin again" carries the boon forward and re-validates it (CH 4.10).
@@ -606,7 +607,7 @@ Every hero kit and every variant spends exactly this:
 ### 4.7 Determinism (lead's call; changes SK-6 ⚑, SK-16 request)
 
 - **Inside the key:** default kit and creation pick are F1 `GenInputs` (GS0.1, read). A variant travels in `boons[]` and `configHash` (SV-12, read).
-- **Outside the key:** given names, kit lines, Oddments, kit strip text and art. All are display-tagged and outside `manifestHash`, so a text edit never moves a seed: their content (records and keys) is in `displayHash`, and the per-run sidecars sit in `run.save`'s display section (4.5.1, 9.1).
+- **Outside the key:** given names, kit lines, Oddments, gear strip text and art. All are display-tagged and outside `manifestHash`, so a text edit never moves a seed: their content (records and keys) is in `displayHash`, and the per-run sidecars sit in `run.save`'s display section (4.5.1, 9.1).
 - **Seeded runs:** read `loreMemory` and write nothing; milestone progress is not advanced (SV Q1; told plainly).
 - **Shared seeds and variant boons (SK-16, request to SV).** Undecided, told plainly. Options:
   - (a) on shared seeds, variant boons are replaced by the default kit for the chosen creation pick; other boons follow SV's existing canonical-grant rule (recommended);
@@ -625,7 +626,7 @@ Every hero kit and every variant spends exactly this:
 
 ### 5.1 Default hero kits
 
-**(lead's call, after the check)** The gear of every kit is unchanged (the client confirmed the six kits). What changed: the named piece moved to the armour for the Shade, the Arcanist and the Herald Totem (4.5.1); the kit lines moved with it; and the Oddment samples and kit lines that broke 4.5.2's rules were re-authored in place (pools stay at 6). `acFloor` values are *(illustr.)*.
+**(lead's call, after the check)** The gear of every kit is unchanged (the client confirmed the six kits). What changed: the named piece moved to the armour for the Shade, the Arcanist and the Herald Focus hand (4.5.1); the kit lines moved with it; and the Oddment samples and kit lines that broke 4.5.2's rules were re-authored in place (pools stay at 6). `acFloor` values are *(illustr.)*.
 
 **Vanguard (M1)**
 - Armour: chain mail (heavy, AC 16, Str +1, Ringed).
@@ -640,18 +641,18 @@ Every hero kit and every variant spends exactly this:
 - Level-3 hint: sabre or sickle (M2), per VG 7.10.
 - Oddment pool (6):
   1. "A stable-hand's hoof pick, the hook straightened."
-  2. "A porter's armband, mended with thread from another coat."
+  2. "A lamp-trimmer's armband, mended with thread from another coat."
   3. "A wool cap with the strap sewn on twice."
   4. "A cobbler's shoe-last, too narrow for any foot."
   5. "A sleeve garter, let out as far as it goes."
   6. "A cart-wheel spoke, planed flat along one face."
 
-**Shade Blades (M2, default)**
+**Shade Twin Blades (M2, default)**
 - Armour: **leather** (12 + Dex: AC 15 at Dex +3, Supple).
 - Set A: shortsword (1d6 P, light, Vex) + dagger (1d4 P, light, thrown 5, Nick).
 - Set B: sabre (1d6 S, light, Flourish) + dagger (a second instance).
 - Types P and S. Belt, coin and supply as above. Pack empty (3). `acFloor` 13.
-- **Named piece:** leather, called **Grey Lacing**.
+- **Named piece:** leather, called **Hemp Lacing**.
 - Kit lines:
   - shortsword: "The guard filed short where it caught a sleeve."
   - dagger (A): "The grip wrapped by someone left-handed."
@@ -666,15 +667,15 @@ Every hero kit and every variant spends exactly this:
   5. "A sleeve button, the thread still tied to it."
   6. "A rag that smells faintly of oil and someone else's soap."
 
-**Shade Launcher (M2, creation pick)**
+**Shade Bow and Blade (M2, creation pick)**
 - Armour: **leather**.
 - Set A: longbow (1d8 P, two-handed, range 14, Aim; Str 0).
 - Set B: sabre + dagger.
 - Types P and S. Belt, coin and supply as above. Pack empty (3). `acFloor` 13.
-- **Named piece:** leather, called **Grey Lacing** (shared with Blades: the same coat, carried by the same trade).
+- **Named piece:** leather, called **Hemp Lacing** (shared with Twin Blades: the same coat, carried by the same trade).
 - Kit lines:
   - longbow: "Restrung so often the nocks are worn smooth."
-  - sabre: as Shade Blades.
+  - sabre: as Shade Twin Blades.
   - dagger: "Used mostly for cutting string."
 - Oddment pool (6):
   1. "A grey feather labelled 'not this one' in a careful hand."
@@ -701,16 +702,16 @@ Every hero kit and every variant spends exactly this:
   5. "A moth's wing, kept in a folded paper."
   6. "A pressed leaf between two squares of glass."
 
-**Herald Shield (M2, default)**
+**Herald Shield hand (M2, default)**
 - Armour: chain shirt (medium, 13 + Dex (max +2), Ringed).
 - Set A: longsword (1d8 S, Parry; versatile 1d10 only with the off hand empty) + **shield** (+2; bash 1d4 B Push) → AC 16 at Dex +1.
 - Set B: 1 javelin (1d6 P, one-handed, thrown 8, Pry) (SK-2).
 - Types S and P. Belt, coin and supply as above. Pack empty (3). `acFloor` 14.
-- **Named piece:** shield, called **Patched Twice**.
+- **Named piece:** shield, called **Leather Facing**.
 - Kit lines:
   - longsword: "Polished where a hand rests during long speeches."
   - javelin: "The shaft is newer than the head."
-  - chain shirt: "Mended at the collar with an usher's thread."
+  - chain shirt: "Mended at the collar with a carter's thread."
 - Oddment pool (6):
   1. "A footman's buckle, its prong missing."
   2. "A cracked wax seal pressed with a thumb, not a crest."
@@ -719,16 +720,16 @@ Every hero kit and every variant spends exactly this:
   5. "A collar stud, filed thin."
   6. "A boot-black tin, scraped to the bare metal."
 
-**Herald Totem (M2, creation pick)**
+**Herald Focus hand (M2, creation pick)**
 - Armour: **chain shirt**.
-- Set A: longsword + Totem (off-hand focus, Loom) → AC 14 at Dex +1, with the existing creation warning.
+- Set A: longsword + Tipstaff (off-hand focus, Loom) → AC 14 at Dex +1, with the existing creation warning.
 - Set B: 1 javelin (SK-2).
 - Types S and P. Belt, coin and supply as above. Pack empty (3). `acFloor` 12.
-- **Named piece:** chain shirt, called **Copper Links** (the Totem is a focus and the javelin a weapon; the F1 Due may replace either).
+- **Named piece:** chain shirt, called **Copper Gorget** (the Tipstaff is a focus and the javelin a weapon; the F1 Due may replace either).
 - Kit lines:
-  - Totem: "Carved by someone who never finished the base."
-  - longsword: as Herald Shield.
-  - javelin: as Herald Shield.
+  - Tipstaff: "Carved by someone who never finished the base."
+  - longsword: as Herald Shield hand.
+  - javelin: as Herald Shield hand.
 - Oddment pool (6):
   1. "A wooden peg, worn smooth on one side."
   2. "A water glass, dry at the bottom."
@@ -737,20 +738,20 @@ Every hero kit and every variant spends exactly this:
   5. "A twist of paper holding loose tea leaves."
   6. "A ribbon rosette, its centre unpicked."
 
-**(new lead's call)** The proposal's Herald kit line read "a usher's thread"; it is corrected to "an usher's thread" (grammar only).
+**(new lead's call)** The proposal's Herald kit line read "a usher's thread"; it is corrected to "an usher's thread" (grammar only) (renamed "a carter's thread", naming pass NP-27).
 
 ### 5.2 Companion kits (M2; gear unchanged, CMP 8.3)
 
 | Kit | Gear (settled) | Named piece (given name) | Trim note |
 |---|---|---|---|
-| Gatekeeper | chain mail, shield, warhammer | shield "Iron Rim" | Trim apart from the Vanguard |
+| Gatekeeper | chain mail, shield, warhammer | shield "Banded Face" | Trim apart from the Vanguard |
 | Brawler | chain mail, maul | maul "Birch Handle" | Apart from the Maulhand variant |
-| Scout | leather, shortbow, dagger | shortbow "Waxed String" | |
-| Outrider | leather, short sword, darts (dagger skin) | short sword "Worn Scabbard" | Apart from the Shade |
+| Scout | leather, shortbow, dagger | shortbow "Linen Whipping" | |
+| Outrider | leather, short sword, darts (dagger skin) | short sword "Old Scabbard" | Apart from the Shade |
 | Tinker | leather, dagger | dagger "Brass Pommel" | |
-| Hedgemage | leather, staff | staff "Green Bark" | |
+| Hedgemage | leather, staff | staff "Green Wood" | |
 | Drummer | hide (Sure-Footed), spear | spear "Ochre Daub" | |
-| Shieldbearer | chain shirt, shield, mace | shield "Boss Nail" | Apart from the Herald Shield |
+| Shieldbearer | chain shirt, shield, mace | shield "Domed Nail" | Apart from the Herald Shield hand |
 
 - **(lead's call, after the check)** Three placeholder names were renamed: "Split Haft" and "Bent Tip" named damage on full-stat pieces (RC9), and "Painted Shaft" shared a head word with the retired "Straight Shaft". The quotes in this table are document notation only; the game shows the name with the "called" word (4.5.1).
 - Companions get no Oddment until Later (AN13 holds companion voice).
@@ -763,12 +764,12 @@ Every hero kit and every variant spends exactly this:
 |---|---|---|---|---|---|---|---|---|
 | Vanguard | **Swordhand** | chain mail | sabre (1d6 S, light, Flourish) + shield, AC 18 | warhammer (1d8 / v1d10 B, Push), AC 16 | Borrowable verb beside the shield (closes VG 7.10's Weaponmaster gap) | d12 and Cleave; main die d8 → d6 | Perception / Lore | shield |
 | Vanguard | **Maulhand** | chain mail | maul (2d6 B, two-handed, heavy, Topple), AC 16 | handaxe (1d6 S, light, thrown 5, Cleave) + shield, AC 18 | Topple; a thrown option | d8 and Push on the shield set; versatile *(corrected after the check: it opens every fight at AC 18 if it likes, ITEMS 7.1)* | **Intimidation** / Lore *(new lead's call; was Athletics)* | shield |
-| Shade (Launcher) | **Close Shot** | leather | hand crossbow (1d6 P, light, loading, pointBlank, range 6, Lunge) + dagger | sabre + dagger | Shooting from melee range | Range 14 and the d8 | Acrobatics / Arcana | **leather** *(after the check; was the sabre)* |
-| Shade (Blades) | **Throwhand** | leather | handaxe (1d6 S, light, thrown 5, Cleave) + dagger (thrown 5) | shortbow (1d6 P, two-handed, range 10, Vex) | A ranged set inside a melee kit | Melee Vex (the shortsword); Flourish | **Athletics** / Acrobatics *(new lead's call; was "Stealth or Perception")* | **leather** *(after the check; was the shortbow)* |
-| Arcanist (gated) | **Farcaster** | leather | dagger (P) + orb (Reach Out) | sling (1d4 B, one-handed, range 8, Push) *(after the check; was the staff)* | Artillery range; a ranged Push | Parry and Steady Casting (no staff); the staff's two-handed d8 | Perception / Arcana | **leather** *(new lead's call; was the staff, a focus)* |
+| Shade (Bow and Blade) | **Close Shot** | leather | hand crossbow (1d6 P, light, loading, pointBlank, range 6, Lunge) + dagger | sabre + dagger | Shooting from melee range | Range 14 and the d8 | Acrobatics / Arcana | **leather** *(after the check; was the sabre)* |
+| Shade (Twin Blades) | **Throwhand** | leather | handaxe (1d6 S, light, thrown 5, Cleave) + dagger (thrown 5) | shortbow (1d6 P, two-handed, range 10, Vex) | A ranged set inside a melee kit | Melee Vex (the shortsword); Flourish | **Athletics** / Acrobatics *(new lead's call; was "Stealth or Perception")* | **leather** *(after the check; was the shortbow)* |
+| Arcanist (gated) | **Farcaster** | leather | dagger (P) + orb (Reach Out) | sling (1d4 B, one-handed, range 8, Push) *(after the check; was the staff)* | Marksman range; a ranged Push | Parry and Steady Casting (no staff); the staff's two-handed d8 | Perception / Arcana | **leather** *(new lead's call; was the staff, a focus)* |
 | Arcanist (gated) | **Bookhand** | leather | dagger + tome (Annotate) | sling *(after the check; was the staff)* | Planning flexibility; a ranged Push | As Farcaster | **Arcana** / Perception *(new lead's call; was Medicine)* | **leather** *(new lead's call; was the staff)* |
-| Herald (Shield) | **Macehand** | chain shirt | mace (1d6 B, one-handed, Topple) + shield, AC 16 | javelin (P, Pry) | Topple for escorts (HR 7.16) | Parry (the HR-36 trade, stated on the card); d8 → d6 | Perception / Lore | shield |
-| Herald (Shield) | **Spearhand** | chain shirt | spear (1d6 P, thrown 5, Skewer) + shield, AC 16 | sling (1d4 B, one-handed, range 8, Push) | A ranged Push | Parry; d8 → d6; the javelin's Pry *(new lead's call; the proposal's "set B AC" is not a loss: both set Bs are AC 14)* | **Lore** / Perception *(new lead's call; was Medicine)* | shield |
+| Herald (Shield hand) | **Macehand** | chain shirt | mace (1d6 B, one-handed, Topple) + shield, AC 16 | javelin (P, Pry) | Topple for escorts (HR 7.16) | Parry (the HR-36 trade, stated on the card); d8 → d6 | Perception / Lore | shield |
+| Herald (Shield hand) | **Spearhand** | chain shirt | spear (1d6 P, thrown 5, Skewer) + shield, AC 16 | sling (1d4 B, one-handed, range 8, Push) | A ranged Push | Parry; d8 → d6; the javelin's Pry *(new lead's call; the proposal's "set B AC" is not a loss: both set Bs are AC 14)* | **Lore** / Perception *(new lead's call; was Medicine)* | shield |
 
 - Every variant: 2 potions, coin 15, supply 2, VP 0, no trinket, an empty pack, its own kit lines and its own pool of **3 Oddments**, drawn ahead of the default kit's 6 (an effective pool of 9; 4.5.2), and a cloth overlay (scarf, sash, binding; never a role prop, RC2). Its named piece follows 4.5.1: the shield where it has one, else the leather or chain shirt.
 - **(lead's call, after the check)** Farcaster and Bookhand were re-dressed. With the staff in set B they were the default Arcanist kit plus an orb or tome, a strict gear superset like the rejected "Bramble", because the opening set is never a cost (ITEMS 7.1 free swap; `KitNoDominance` compares the union). With a sling in set B they give up the staff, and with it Parry and Steady Casting, keep P and B damage, and gain a verb per set (Reach Out or Annotate; Push). `VariantRiskBand` judges the Arcanist's lower EHP; failing rows are cut. "In the opener" losses are struck from the table for the same reason, and Maulhand is re-checked against the Vanguard band (4.4).
@@ -786,32 +787,32 @@ Every hero kit and every variant spends exactly this:
 
 **(lead's call, after the check)** Every string below is one whole-string key; braces mark named placeholders with translator notes; nothing is assembled from fragments in code (8.8).
 
-- Kit strip, run 2+: "Warhammer + shield · Push | Greataxe · Cleave — Chain mail AC 18 — 2 potions · 15 coin · supply 2", then the heading "Also carried" with "Porter's armband" below it.
+- Gear strip, run 2+: "Warhammer + shield · Push | Greataxe · Cleave — Chain mail AC 18 — 2 potions · 15 coin · supply 2", then the heading "Also carried" with "Lamp-trimmer's armband" below it.
 - Inspect, Whence pane: "Carried from the start." then "Called Nine Rivets." (key "Called {givenName}.").
-- After a Deed: "**Gatesplitter** (placeholder byname). Felled the Gaoler, floor 1." then "Once called Nine Rivets." (key "Once called {givenName}.").
-- Oddment card: "A porter's armband, mended with thread from another coat." — "Weighs nothing. Does nothing."
+- After a Deed: "**The Ironbiter** (sample byname). Felled the Gaoler, floor 1." then "Once called Nine Rivets." (key "Once called {givenName}.").
+- Oddment card: "A lamp-trimmer's armband, mended with thread from another coat." — "Weighs nothing. Does nothing."
 - Leave confirm: "It stays by this fire. It does nothing either way." [Leave it] [Keep it]
 - After a Leave: the camp's own `leftCaptionKey` caption in the inspect header and the Book of Nights.
-- Grave Goods, carried: heading "Still carried when the dream closed:", then "Shield, called Nine Rivets" (key "{family}, called {givenName}") and "Porter's armband".
+- Grave Goods, carried: heading "Still carried when the dream closed:", then "Shield, called Nine Rivets" (key "{family}, called {givenName}") and "Lamp-trimmer's armband".
 - Grave Goods, the named piece gone earlier: "Shield, called Nine Rivets: sold on floor 2" (one key per fate: sold, left, offered, lost).
-- Grave Goods, Oddment left: heading "Left by a fire:", then "Porter's armband".
+- Grave Goods, Oddment left: heading "Left by a fire:", then "Lamp-trimmer's armband".
 - Sell row, named piece: "[Starting gear] Shield · 2 coin", and on selection "Sold as plain gear. Its name goes with it."
 - Heirloom shelf variant card: "Swordhand (Vanguard). Replaces your starting gear: sabre + shield / warhammer, chain mail. Trained in Perception (Lore if you already are). Loses: the greataxe."
-- Creation, pick changed after taking a variant: "Your boon replaces Launcher gear. Choosing Blades returns the boon."
+- Creation, pick changed after taking a variant: "Your boon replaces Bow and Blade gear. Choosing Twin Blades returns the boon."
 
 ## 6. Art and audio (lead's call)
 
 - **No new weapon silhouettes or inventory icons** (IR 6.2: silhouette = family; icons global and untinted).
 - **Named-piece trims** go through the Patina trim-mask path: 5 hero (the two Shade kits share one named leather) and 8 companion at M2 (13), 8 at M3. Field `accentId`, not `charmId`: accents use cloth, wrap or binding, never a hanging token or pendant that reads as an equipped charm trinket (RC9).
-- **Companion separation:** one trim per kit so the Vanguard reads apart from the Gatekeeper, the Herald Shield from the Shieldbearer, the Shade from the Outrider, and Maulhand from the Brawler (CMP 8.7).
+- **Companion separation:** one trim per kit so the Vanguard reads apart from the Gatekeeper, the Herald Shield hand from the Shieldbearer, the Shade from the Outrider, and Maulhand from the Brawler (CMP 8.7).
 - **Kit-strip dioramas** on the class card: 6 at M2, 8 at M3. This is a good outlet for the art team.
-- **Oddments:** a flat paper-or-string icon outside the loot frame, no rarity glint, plus an illustrated inspect card: 36 icons and 36 cards at M2; 24 and 24 at M3, plus 3 and 3 per background-perk boon. Each ships an alt-text string.
+- **Oddments:** a flat paper-or-string icon outside the loot frame, no rarity glint, plus an illustrated inspect card: 36 icons and 36 cards at M2; 24 and 24 at M3, plus 3 and 3 per Calling-perk boon. Each ships an alt-text string.
 - **Fire props:** 6 generic wrap families *(illustr.)* rather than one per Oddment: cloth bundle, paper twist, small hard object on cloth, coiled string, soft fabric fold, flat card under a stone. Every `OddmentRecord` maps to one through a required `firePropId`, checked by V21 (i), so a left glove never appears as an unrelated shape **(lead's call, after the check)**.
 - **Codex plates:** one per completed kit pool: 14 at M3 (6 default and 8 variant pools).
 - **Variant cloth overlays** on the hero model: 8 at M3.
 - **Heirloom-shelf bundles:** one per class, with glyph and pattern.
 - **Audio:** no new cues. The Oddment and Leave-it-by-the-fire actions use the generic soft UI sound. No bell, winding or clock sounds (RC7).
-- **Later:** an Oddment carried into F5 appears as one Keepsake prop (RS 9.3); cost is one prop per Oddment.
+- **Later:** an Oddment carried into F5 appears as one Souvenir prop (RS 9.3); cost is one prop per Oddment.
 
 ---
 
@@ -853,7 +854,7 @@ Toy script kept in the design lead's scratch area (Appendix B). Assumptions: lev
 |---|---|
 | Vanguard warhammer + shield | 5.1 (~5.8 versatile without the shield) |
 | Vanguard greataxe | 6.5 |
-| Shade Blades shortsword + dagger (Nick) | **6.2** (4.4 + 1.75; the draft's 8.1 was wrong) |
+| Shade Twin Blades shortsword + dagger (Nick) | **6.2** (4.4 + 1.75; the draft's 8.1 was wrong) |
 | Shade longbow | 5.1 |
 | Arcanist staff | 4.1 (the cantrip is the real damage, ~3.9) |
 | Herald longsword | 5.1 with the shield (~5.8 two-handed) |
@@ -862,7 +863,7 @@ Toy script kept in the design lead's scratch area (Appendix B). Assumptions: lev
 | Maulhand maul | 6.85 (its shield set is the handaxe's 4.4) |
 | Close Shot hand crossbow + dagger | ~6.2 |
 | Throwhand handaxe + dagger | ~6.2 |
-| Duellist rapier (cut) | 5.1 (≈ −17% against Blades, not −37%) |
+| Duellist rapier (cut) | 5.1 (≈ −17% against Twin Blades, not −37%) |
 | Macehand mace | 4.4 |
 
 **(corrected after the check)** The draft printed the d8 warhammer and longsword rows at the d6 figure. With the corrected rows, the Swordhand's and Macehand's "main die d8 → d6" loss reads as it should: 5.1 → 4.4, about −14%.
@@ -870,7 +871,7 @@ Toy script kept in the design lead's scratch area (Appendix B). Assumptions: lev
 ### 8.3 Effective HP (illustrative and understated)
 
 - The toy gives every class the same 18 HP plus 2 potions × 7 (Recovery at level 1, Con +1). Class hit dice differ, so the spread is **understated**.
-- Raw HP divided by enemy hit chance (32 effective HP; enemy +4): Vanguard AC 18 (35% hit) ≈ 91; Vanguard set B and Herald Shield, AC 16 (45%) ≈ 71; Shade, AC 15 (50%) ≈ 64; Arcanist and Herald Totem, AC 14 (55%) ≈ 58. Vanguard-to-Arcanist is about 1.6×, and more once hit dice differ **(corrected after the check:** the draft printed 111 and 87 and 1.9×, which the toy's own inputs do not give**)**.
+- Raw HP divided by enemy hit chance (32 effective HP; enemy +4): Vanguard AC 18 (35% hit) ≈ 91; Vanguard set B and Herald Shield hand, AC 16 (45%) ≈ 71; Shade, AC 15 (50%) ≈ 64; Arcanist and Herald Focus hand, AC 14 (55%) ≈ 58. Vanguard-to-Arcanist is about 1.6×, and more once hit dice differ **(corrected after the check:** the draft printed 111 and 87 and 1.9×, which the toy's own inputs do not give**)**.
 - Losing a shield (+2 AC) raises incoming damage by ~29%; losing pool-free Parry by ~10–15%.
 - The potion count is a client number, so **the kit is not the lever for this spread.**
 
@@ -888,7 +889,7 @@ Toy script kept in the design lead's scratch area (Appendix B). Assumptions: lev
 
 **(new lead's call)** The proposal's scale had no row for the mace (simple, one-handed, not light) or for one-handed launchers; the mace joins the simple light row and the sling and hand crossbow join the launcher row, so every kit family in 5 has a price.
 
-Whole-kit resale (FloorDiv per instance): Vanguard 13, Shade (Blades and Launcher) 8, Arcanist 6, Herald (Shield and Totem) 9. Variants: Swordhand 12, Maulhand 12, Close Shot 9, Throwhand 7, Farcaster 8, Bookhand 8, Macehand 8, Spearhand 10. A realistic spare sells for 1 to 3. `KitResaleBand`: within ±4 of the class default (all eight variants pass).
+Whole-kit resale (FloorDiv per instance): Vanguard 13, Shade (Twin Blades and Bow and Blade) 8, Arcanist 6, Herald (Shield hand and Focus hand) 9. Variants: Swordhand 12, Maulhand 12, Close Shot 9, Throwhand 7, Farcaster 8, Bookhand 8, Macehand 8, Spearhand 10. A realistic spare sells for 1 to 3. `KitResaleBand`: within ±4 of the class default (all eight variants pass).
 
 ### 8.5 Kit lifetime
 
@@ -904,7 +905,7 @@ Whole-kit resale (FloorDiv per instance): Vanguard 13, Shade (Blades and Launche
 
 - A pool of 3, unseen-first, with 60% of runs on one class, repeats by about run 5.
 - **6 per kit holds novelty to about run 10–12 per class** (the reason for Q3's 6). Repeats after that are acceptable; when every entry has been seen, the least recently seen comes back first (4.5.2).
-- A variant or background-boon hero draws from an effective pool of 9 (the boon's 3, then the kit's 6).
+- A variant or Calling-perk hero draws from an effective pool of 9 (the boon's 3, then the kit's 6).
 - Report `OddmentRepeatRun`.
 
 ### 8.8 Volume
@@ -914,7 +915,7 @@ Whole-kit resale (FloorDiv per instance): Vanguard 13, Shade (Blades and Launche
 | Wave | Writing | Art |
 |---|---|---|
 | M2 | 13 given names (5 hero, the Shade's two kits sharing one; 8 companion); ~30 kit lines; 36 Oddments × (name, caption, alt text) = 108 strings; ~25 UI strings, including the per-camp left captions and the Grave Goods fate keys. ≈ 1.7k words | 13 trims; 36 Oddment icons and 36 cards; 6 dioramas; 6 fire-prop wrap families |
-| M3 | 8 variant names, 8 given names, kit lines; 24 variant Oddments × 3 strings; background-perk boon pools (3 each); ~60 codex paragraphs ≤ 60 words (one per M2 and M3 Oddment); ~10 Lingerer lines; milestone cards; pick-order lines. ≈ 4.5k words | 8 trims; 8 overlays; 24 Oddment icons and 24 cards (plus 3 and 3 per background boon); 8 dioramas; 14 codex plates; 4 shelf bundles |
+| M3 | 8 variant names, 8 given names, kit lines; 24 variant Oddments × 3 strings; Calling-perk boon pools (3 each); ~60 codex paragraphs ≤ 60 words (one per M2 and M3 Oddment); ~10 Straggler lines; milestone cards; pick-order lines. ≈ 4.5k words | 8 trims; 8 overlays; 24 Oddment icons and 24 cards (plus 3 and 3 per Calling-perk boon); 8 dioramas; 14 codex plates; 4 shelf bundles |
 | Per new unlock class | 1–2 kits, 2 variants, 6 + 6 Oddments with names, captions, alt texts and codex paragraphs, given names, lines, V21 rows. ≈ 1.1k words | ≈ 30 pieces (icons, cards, trims, dioramas, plates) |
 
 All text goes through the RS tone review, the EV premise test and the localisation budget (CH risk 13): whole-string keys with named placeholders and translator notes, locale quote marks inside the keys, no sentence built from fragments, +35% length, CardFit at 150%.
@@ -973,9 +974,9 @@ Every display field is tagged `display` and sits outside `manifestHash`. Content
 - (d) `KitSetLegal` (W 11.1, no stacked gear), `KitTrained` (no Strain at the suggested array), `KitTwoTypes`, `KitVerbPerSet` (a usable weapon or focus verb in each set **in its actual layout**, Nick counting only in an off hand beside a light main hand; on-hit where a class feature reads it; a `fallbackOnly` set exempt; applied to every variant set too), `KitHasFallbackDamage` (M1; would have caught F2).
 - (e) `KitAcFloor`: `acFloor` ≥ 11 (AR-20); the suggested array reaches `acFloor`; over every legal arrangement (4.2), sustained AC ≥ 11 (M1).
 - (f) `KitDueStrictUpgrade`: the F1 deck holds a legal U arms card for every kit (M1 if the slice includes the Due; else M2).
-- (g) Names, given names, kit lines and the provenance line. **Machine rows** (fail the build): the word lists (possessive, "of", Scion rank words, theme, Bell*, idiom tag, damage and defect words on full-stat pieces); no two given names sharing a head word; ≤ 18 chars; collisions by whole word and substring (the V14 (f) pool plus Hollowfolk verbs), run on display strings and fallbacks as well as names, with the pool shared with the heirloom and curse names and the Grip-mark byname choice (M2; HL-13, NR6, heirlooms and curses design 5.3); required fields. **Flags** to the naming pass: the per-word list (property, verb, rank-word, party-counter and system-term names). **Authored tags** the tone review confirms: `properNoun: false` (M2).
+- (g) Names, given names, kit lines and the provenance line. **Machine rows** (fail the build): the word lists (possessive, "of", Scion rank words, theme, Bell*, idiom tag, damage and defect words on full-stat pieces); no two given names sharing a head word; ≤ 18 chars; collisions by whole word and substring (the V14 (f) pool plus Fireside verbs), run on display strings and fallbacks as well as names, with the pool shared with the heirloom and curse names and the Grip-mark byname choice (M2; HL-13, NR6, heirlooms and curses design 5.3); required fields. **Flags** to the naming pass: the per-word list (property, verb, rank-word, party-counter and system-term names). **Authored tags** the tone review confirms: `properNoun: false` (M2).
 - (h) `KitDisplayCoreBlind`: Core assemblies cannot reference the `displayOverlay`, `namedPieceLog` or `OddmentRecord` types. `KitDisplayInert` test: strip or randomise the display section and the content keys, and the core state hash is unchanged (M2).
-- (i) `OddmentInert` (no rules fields) and text checks over Oddments, kit lines and the provenance line. **Machine rows:** premise author is a resident trade; required tags `noDreamer`, `noHeroMotive`, `noSecondPerson`, `noFallenHero`; DreamerLine and AN5 words; RC7 cues; Hollowfolk props and textures; EV card titles and props, Strand names, RS faction motifs and role props, boss signatures, trinket and property names, trinket kind words, level-up reward terms; theme names; door, route and distance words; `numberBlocklist`; money words; the kit's own families and named piece; effect verbs; no shared object noun inside a pool; the "Does nothing" line present; `firePropId` present; `OddmentPoolMin` 6 per default kit, 3 per variant or background boon. **Authored tags** the tone review confirms: `noUsableLook`, `noImpliedSense`, `countsReviewed`, `noKitEcho` (M2).
+- (i) `OddmentInert` (no rules fields) and text checks over Oddments, kit lines and the provenance line. **Machine rows:** premise author is a resident trade; required tags `noDreamer`, `noHeroMotive`, `noSecondPerson`, `noFallenHero`; DreamerLine and AN5 words; RC7 cues; Fireside props and textures; EV card titles and props, Strand names, RS faction motifs and role props, boss signatures, trinket and property names, trinket kind words, level-up reward terms; theme names; door, route and distance words; `numberBlocklist`; money words; the kit's own families and named piece; effect verbs; no shared object noun inside a pool; the "Does nothing" line present; `firePropId` present; `OddmentPoolMin` 6 per default kit, 3 per variant or Calling-perk boon. **Authored tags** the tone review confirms: `noUsableLook`, `noImpliedSense`, `countsReviewed`, `noKitEcho` (M2).
 - (j) `KitNamedPieceNotF1Target` (hero kits and variants, computed over the F1 deck: for each class × creation pick × variant, no card in the F1 hero-arms candidate set (U, usable, trained) has the named piece's family; holds for every shield and armour), `KitResaleBand` (reads prices from data; a missing basePrice on any kit family fails the build), `KitLegalOverArrangements` (a warning exists for every Strain case and every AC below `acFloor`) (M2).
 - (k) Variants: `KitNoDominance` (gear only, over the union of both sets), `KitVariantParity` (AC at the suggested array ≥ the replaced pick's `acFloor`), CL 6.3 ForbiddenClassGrant on the skill, skill, alternate and fallback not in the class's creation defaults and not Leadership or Mechanics, `level3SpareHintFamilies` disjoint from the kit's families and the hint text generated from them, `UnlockHasHubObject` on the Heirloom shelf (M3).
 - (l) `HeirloomKitFits` (after SK-12's placement: ≥ 1 free pack slot, every unissued piece listed on the card; Arcanist staff and leather heirlooms as named rows); SK-4 heirloom cases in V13g (g), one per slot class (HL-3) (M3). **Pending request (HL-26, TK owner rules; M4):** amulet heirlooms would need an SK-12 worn-slot row and a `KitNoTrinket` waiver for the heirloom piece only (heirlooms and curses design 4.6).
@@ -1004,11 +1005,11 @@ Every display field is tagged `display` and sits outside `manifestHash`. Content
 
 | Wave | Content |
 |---|---|
-| **M1** | Vanguard default kit (approved contents); coin exactly 15 (SK-1); hero kit-issue row with the creation order and `KitIssueStable` (SK-3); V21 (a)–(e), plus (f) if the Due is in the slice, registered by SK-10; display fields reserved and unused; kit strip for the one class if creation exists in the slice |
-| **M2** | All six default kits; SK-2 javelin fix and HR 7.12 rerun; given names and kit lines on hero and companion kits, with the display sidecar and the named-piece log; trims; Oddments (36, 6 per kit; agreed, Q3) with `oddmentsSeen` and the display tuple; Leave it by the fire; Grave Goods line; kit strip, run-1 form and callout; creation warnings; Arcanist pack-pressure UI; V21 (g)–(j); `KitSoldAtCamp1` (agreed, Q4); SK-11 decision by LE |
-| **M3** | 8 variant boons (Arcanist pair gated) with skills and alternates (agreed, Q1), milestones and Heirloom-shelf bundles; per-offer pick-rate report; SK-4 (with HL-3's any-slot waiver) and SK-12 before heirlooms ship; the `BossFelled` credit for kit pieces (HL-31); Deed bynames on kit items; codex Oddments page and plates (agreed, Q3); LoreContext facts and Lingerer lines; Memento frame tag; background-perk boons with Oddment pools (3 each); V21 (k)–(l); the Bobbin charm boon's worn-slot row and `KitNoTrinket` waiver if the SK owner agrees (CA-26, pending) |
+| **M1** | Vanguard default kit (approved contents); coin exactly 15 (SK-1); hero kit-issue row with the creation order and `KitIssueStable` (SK-3); V21 (a)–(e), plus (f) if the Due is in the slice, registered by SK-10; display fields reserved and unused; gear strip for the one class if creation exists in the slice |
+| **M2** | All six default kits; SK-2 javelin fix and HR 7.12 rerun; given names and kit lines on hero and companion kits, with the display sidecar and the named-piece log; trims; Oddments (36, 6 per kit; agreed, Q3) with `oddmentsSeen` and the display tuple; Leave it by the fire; Grave Goods line; gear strip, run-1 form and callout; creation warnings; Arcanist pack-pressure UI; V21 (g)–(j); `KitSoldAtCamp1` (agreed, Q4); SK-11 decision by LE |
+| **M3** | 8 variant boons (Arcanist pair gated) with skills and alternates (agreed, Q1), milestones and Heirloom-shelf bundles; per-offer pick-rate report; SK-4 (with HL-3's any-slot waiver) and SK-12 before heirlooms ship; the `BossFelled` credit for kit pieces (HL-31); Deed bynames on kit items; codex Oddments page and plates (agreed, Q3); LoreContext facts and Straggler lines; Memento frame tag; Calling-perk boons with Oddment pools (3 each); V21 (k)–(l); the Bobbin charm boon's worn-slot row and `KitNoTrinket` waiver if the SK owner agrees (CA-26, pending) |
 | **M4** | Third variant per class (F4-boss milestone); Arcanist variants if delayed; Vanguard "Long Arm"; species-flavoured Oddments; unlock-class kit packages; an SK-12 worn-slot row for amulet heirlooms if the TK owner agrees (HL-26, pending) |
-| **Later** | Companion Oddments; F5 Keepsake prop; player-chosen labels (UI only); daily seeds that fix the kit; `kitDelta` modifiers (Oaths, HL-21, pending) |
+| **Later** | Companion Oddments; F5 Souvenir prop; player-chosen labels (UI only); daily seeds that fix the kit; `kitDelta` modifiers (Oaths, HL-21, pending) |
 
 ---
 
@@ -1026,7 +1027,7 @@ Every display field is tagged `display` and sits outside `manifestHash`. Content
 | RS | SK-10 suite row; SK-14 premise row; tone review; codex hosting of the Oddments page |
 | MAIN/RS | SK-15 `kitDelta` (MAIN 4.7 is read only, by SK-7; no wording change) |
 | ABL, STAT | SK-17 stale wording; STAT signs off bundled skills (SK-7) |
-| XI / segment 10 | SK-9 kit strip, callout, `uiMemory`, accessibility |
+| XI / segment 10 | SK-9 gear strip, callout, `uiMemory`, accessibility |
 | W | Hand crossbow two-light; mundane orb and tome bases (requests) |
 | Naming pass | SK-13 "kit", "Oddment", "Leave it by the fire" and every placeholder; the A.2 flags |
 
@@ -1078,12 +1079,12 @@ Applied on 2026-11-23, when the client approved this document. **This document e
 | SK-5 | ITEMS 12.3 `display` (settled); **IR 6.1 Whence (lead's call, read and extended)**; V14 (f) | Given name as the named piece's Whence line (the shield, else the armour); kit lines and the neutral "Carried from the start" provenance; a byname displaces a given name ("Once called"); name pool extended; companion kit named pieces; the per-instance overlay and the named-piece log as display sidecars in `run.save`'s display section (SV 4.8.3 `run.save` row, read), with no field added to the Core `ItemInstance` (4.5.1) (after the check) | ⚑ Settled (IR 6.1 Deed-only rule kept, read flag added, new lead's call) | **Client (Q2, with this document)**; ITEMS, IR and CMP owners apply | M2 |
 | SK-6 | CH 4.15.1, 4.15.8, 4.16, 9.1 `loreMemory`, `AbandonWritesNoLore`, Memento wall (CH 4.10); **CH-8 and SV 4.3 display table (agreed)**; DH 17.12, LE 8.2 Grave Goods | The Oddment: record, pools, the run-start display tuple `DisplayKey(run)` / `lore` / (campIndex 0, visitIndex 0, "oddment", heroIndex, poolId) with no `nightId`, selection from the creation-screen run key frozen at WO1, the mark queued as a `loreSeen` entry at camp-1 entry or WO6 and flushed at WO6, WO7, abandon, Leave it by the fire and its states, Grave Goods lines, per-camp left captions, LoreContext facts, codex page, frame tag (4.5.2) (tuple and write timing restated after the check) | ⚑ **Agreed** (CH-8 determinism, extended); ⚑ Settled (DH 17.12, LE 8.2) | **Client (Q3, with this document)**; CH, SV, DH, LE owners apply | M2 / M3 |
 | SK-7 | **MAIN 4.7 (decided, read)**; **STAT 7.2 (agreed, read)**; ITEMS 14 (parallel); SV-12 (read); CL 5.6 rows; CH 4.11; VG 7.10 level-3 suggestion | Variant boons with a bundled skill, alternate and `skillFallback`, resolved at creation confirm; the pick-order rule; Heirloom-shelf hub object; per-offer pick-rate trigger; `level3SpareHint` per kit with structured families (4.4) | ⚑ **Decided** (read); ⚑ **Agreed** (read) — read flags added (new lead's call) | **Client (Q1, with this document)**; STAT owner signs off skills; CH, CL, VG owners apply | M3 |
-| SK-8 | **CH 4.9 (settled; told plainly)** | "Fixed per class" → "one default kit per class creation pick (Shade Blades or Launcher, Herald Shield or Totem); no other presets; variants ship only as boon options". Meaning unchanged. MAIN 4.7 and CH-24 already read correctly and are not touched (2.3 F3; corrected after the check) | ⚑ **Settled** (CH 4.9; told plainly) | Lead's call; CH owner applies | M2 |
-| SK-9 | CH 4.12 (settled); XI 4.10 `uiMemory` (settled); STAT 5.1 (agreed, read) | Kit strip (run-1 and full forms), Oddment callout, creation warnings for Strain and AC below `kit.acFloor` (never blocking), worst-arrangement arm, the variant pick-order line (4.4, 4.6) | ⚑ Settled; ⚑ Agreed (STAT 5.1, read) — read flags added (new lead's call) | Lead's call; CH, XI owners apply; class owners inform | M2 |
+| SK-8 | **CH 4.9 (settled; told plainly)** | "Fixed per class" → "one default kit per class creation pick (Shade Twin Blades or Bow and Blade, Herald Shield hand or Focus hand); no other presets; variants ship only as boon options". Meaning unchanged. MAIN 4.7 and CH-24 already read correctly and are not touched (2.3 F3; corrected after the check) | ⚑ **Settled** (CH 4.9; told plainly) | Lead's call; CH owner applies | M2 |
+| SK-9 | CH 4.12 (settled); XI 4.10 `uiMemory` (settled); STAT 5.1 (agreed, read) | Gear strip (run-1 and full forms), Oddment callout, creation warnings for Strain and AC below `kit.acFloor` (never blocking), worst-arrangement arm, the variant pick-order line (4.4, 4.6) | ⚑ Settled; ⚑ Agreed (STAT 5.1, read) — read flags added (new lead's call) | Lead's call; CH, XI owners apply; class owners inform | M2 |
 | SK-10 | **RS 11.2 validator suite table (settled)**; **SV 5.2 consolidated suite and build dependency graph (settled)** | RS 11.2 gains a V21 `StartingKits` row (s/t/r split; M1 (a)–(f), M2 (g)–(j), M3 (k)–(l)); SV 5.2's consolidated suite becomes V1–V21; static and display-only parts as V20 | ⚑ Settled (read flag added, new lead's call) | Lead's call; RS and SV owners apply | M1 |
 | SK-11 | ITEMS 10.5 (settled); LE 7 ledger (request) | Mundane basePrice scale (8.4), with a coverage rerun at 250‰ and 200‰; adoption by owners | — | Request; ITEMS and LE owners rule | M2 |
 | SK-12 | ITEMS 14, 18.1 (settled) | Heirloom placement at issue: the heirloom's slot class in set A (a two-hander takes main and off); displaced pieces to the pack in issue order only while ≥ 1 slot stays free; the given name moves by `fallbackOrder` only when the named piece is not issued, suppressing the receiver's kit line; `HeirloomKitFits` after placement (7) (rewritten after the check) | ⚑ Settled (read flag added, new lead's call) | Lead's call; ITEMS owner applies | M3 |
-| SK-13 | Naming pass (request) | Player-facing term for hero starting gear distinct from the companion "kit"; chip never matches kitBound's "Unsellable: kit" label (2.3 F8) | — | Request; naming pass | M2 |
+| SK-13 | Naming pass (request) | Player-facing term for hero starting gear distinct from the companion "kit"; chip never matches kitBound's "Unsellable: kit" label (2.3 F8). **Closed by the naming pass (NP-27): "Starting gear" is final; "kit" is the companion word only** | — | Request; naming pass (closed 2026-11-24) | M2 |
 | SK-14 | RS 7.5 premise table (request) | Additive row: "Kits? The dream issues what its residents set aside." | ⚑ Agreed (RS Q3, read) | Request; RS owner rules | M2 |
 | SK-15 | MAIN 4.7 run-modifier slot (request) | `kitDelta` declaration rule; reserved V21 (m) (4.7) | ⚑ Decided (read) | Request; main design and RS owners rule | Later |
 | SK-16 | SV 4.7 (request); **SV Q1 (agreed, read)**; LE 6.12 | Shared seeds and variant boons; recommended: variant boons are replaced by the default kit for the chosen creation pick; other boons follow SV's existing canonical-grant rule (4.7) | ⚑ Agreed (read flag added, new lead's call) | Request; SV owner rules | M3 |
@@ -1112,14 +1113,14 @@ The client approved this document as a whole on 2026-11-23, including the lead's
 **Told plainly (confirmed by the client on 2026-11-23, with this document):**
 1. Kits are not made stronger: no extra potions, no kit trinket, no non-mundane item, no extra coin, no free dose (0.1 item 1).
 2. The client's sword example is contested: the given name goes on the piece the F1 Due cannot replace, because the sword is usually replaced within 15 to 25 minutes (0.1 item 4; agreed, Q2). After the check, that piece is the shield where the kit has one, otherwise the armour (14.3, T1).
-3. Class-free background kits, Liveries (Model B) and Haversacks (Model C) are rejected; the background perk survives as a boon with its own Oddment pool (0.1 item 2, 3).
+3. Class-free background kits, Liveries (Model B) and Haversacks (Model C) are rejected; the Calling perk survives as a boon with its own Oddment pool (0.1 item 2, 3).
 4. There is no real weightless inventory item and no letter or note; the Oddment is a display object (0.1 item 3).
 5. The same seed shows the same Oddment, but a text patch can change it (4.5.2).
 6. Seeded runs never advance milestones (4.4, 4.7; SV Q1).
 7. Coin is exactly 15, not "about 15": the camp-1 margin is 0 (2.3 F1; SK-1).
 8. The Herald's set B is 1 javelin; "2 javelins" is illegal under W 11.1 and the no-stack rule (2.3 F2; SK-2).
 9. Hero kit gear stays sellable, an asymmetry with kitBound recruit gear kept on purpose (agreed, Q4).
-10. Variants are expected to lose often to an Uncommon heirloom, Old Friend or the Wayfarer's Pack (0.1 item 6).
+10. Variants are expected to lose often to an Uncommon heirloom, Old Friend or the Wayfarer's Belt (0.1 item 6).
 11. Starting kits get no hub peg and no coat tag; the variant's hub object is the Heirloom-shelf bundle (4.4).
 12. "Set it down" is rejected (AN5); the action is Leave it by the fire (4.5.2).
 13. The Vanguard's named shield may go at the F2 or F4 Due; Grave Goods records what became of it, from the named-piece log (8.5, 4.5.1).
@@ -1127,7 +1128,7 @@ The client approved this document as a whole on 2026-11-23, including the lead's
 15. The research is partly from recall and must be checked before any claim is quoted (1; Appendix B).
 
 **New lead's calls (made while writing; confirmed by the client on 2026-11-23, with this document):**
-1. **The verb-per-set rule (F10).** V21 (d) checks a usable weapon or focus verb in each set, and an on-hit verb only where a class feature reads it (the Vanguard's Practised Hand). The proposal's "an on-hit verb in each set" would fail the approved Arcanist (Parry) and Launcher (Aim) kits (4.2, 9.2). *Corrected after the check:* Nick does nothing on the Arcanist's lone set-B dagger; that set is exempt as a declared fallback (14.3 item 7).
+1. **The verb-per-set rule (F10).** V21 (d) checks a usable weapon or focus verb in each set, and an on-hit verb only where a class feature reads it (the Vanguard's Practised Hand). The proposal's "an on-hit verb in each set" would fail the approved Arcanist (Parry) and Bow and Blade (Aim) kits (4.2, 9.2). *Corrected after the check:* Nick does nothing on the Arcanist's lone set-B dagger; that set is exempt as a declared fallback (14.3 item 7).
 2. **The survivor-piece slot (F11).** *Superseded after the check (14.3 item 1):* the writing-time reading "not the set-A main hand" did not hold; the named piece is the shield, else the armour. Kept from writing: the check applies to hero kits and variants; companion kits are exempt (4.5.1).
 3. **The Arcanist variants name their leather (F11).** Farcaster's and Bookhand's proposed named staff is a focus, which the survivor rule forbids; they have no shield, so the leather is named. *After the check* this is simply the general rule (14.3 item 1), and their set B is now a sling (14.3 item 10) (5.3).
 4. **The variant skill rule and four corrected skills (F12).** "Already has" means the class's creation default skills; each variant names an alternate, granted if the player already trained the skill. Illustrative skills corrected: Maulhand Athletics → Intimidation; Throwhand "Stealth or Perception" → Athletics; Bookhand Medicine → Arcana; Spearhand Medicine → Lore. Alternates are listed in 5.3 (4.4, 5.3, 9.1 `skillAlternate`).
@@ -1135,7 +1136,7 @@ The client approved this document as a whole on 2026-11-23, including the lead's
 6. **Price-scale rows completed.** The mace joins the simple row and one-handed launchers join the launcher row in SK-11's proposed scale; whole-kit and variant resale computed; all variants within `KitResaleBand` (8.4).
 7. **Name near-collisions flagged to the naming pass,** with a per-word check added to V21 (g) as a flag, not a failure (4.5.1; A.2). The names stand as placeholders.
 8. **Four Oddment samples got a named tone-review look** (the cork, the list of toasts, the cue card and blank speech, the ribbon rosette). *After the check,* three of them were re-authored with the other failing samples; the ribbon rosette keeps its second look (14.3 item 19).
-9. **The usher's thread** kit line corrected to "an usher's thread" (grammar only) (5.1).
+9. **The usher's thread** kit line corrected to "an usher's thread" (grammar only) (5.1) (renamed "a carter's thread", naming pass NP-27).
 10. **Selling kit gear cannot steer the Due:** LE 6.6's "sold at this camp counts as still dealt" covers kit pieces (a reading, 4.3, 13).
 11. **The Veteran book's kit tag** stays the companion-kit unlock object; hero variants use the Heirloom-shelf bundle only (4.4).
 12. **Fields made explicit:** `namedPiece.fallbackOrder[]` (SK-12's fixed order) and `KitVariantBoon.skillAlternate` (9.1).
@@ -1166,15 +1167,15 @@ These come back to the client only if a report, an owner's refusal, a wave or a 
 | Hand crossbow | W owner confirms loading and two-light legality | Fallback: Close Shot's set A becomes hand crossbow alone; re-run `KitNoDominance` | W owner |
 | Display sidecars, creation-screen run key | SV owner declines the `run.save` display sidecars or a run key before WO1 (SK-5, SK-6) | The overlay and log ride CH-9's `loreRunState` record instead; the creation card omits the Oddment line and the Oddment is selected at WO1 | Lead; SV owner |
 | Bundled skills | STAT owner signs off (SK-7) | Fallback: variants ship without a skill only if the client agrees (they would likely fail the pick-rate trigger) | STAT owner; client |
-| Memento frame tag, Lingerer lines | CH's `OneWinOwnerPerNight` or AN7 budgets refuse them | First cut: the frame tag; second: the Lingerer lines | Lead; CH owner |
-| Naming pass | Scheduled | Every placeholder, incl. the A.2 flags and SK-13 | Naming pass |
+| Memento frame tag, Straggler lines | CH's `OneWinOwnerPerNight` or AN7 budgets refuse them | First cut: the frame tag; second: the Straggler lines | Lead; CH owner |
+| Naming pass | Scheduled; done 2026-11-24 (naming pass approved; NP-27) | Every placeholder, incl. the A.2 flags and SK-13 | Naming pass |
 
 ### 14.3 After the design check
 
 The design check (builder, consistency, balance and narrative-art lenses) found that the named piece for half the kits could be replaced by the F1 Due, that kit issue would have filled the pack, that the display data sat on the Core instance, and a set of gaps in which this design broke its own rules. Every fix below sits inside the four agreed answers and the proposal the client confirmed; **none overrides a client decision**: kits are not made stronger, the given name goes on the piece the F1 Due cannot replace (Q2), Oddments ship in M2 with 6 per kit (Q3), and hero kit gear stays sellable at the Sell rate (Q4). The check raised **no client question**.
 
 **Lead's calls after the check (confirmed by the client on 2026-11-23, with this document):**
-1. **The named piece is the shield where the kit has one, otherwise the armour.** The F1 Due is dealt by slot, never by weapon set, and is always a weapon or focus, so only shields and armour are out of its reach (LE 6.6). The Shade (both picks), the Arcanist, the Herald Totem, Close Shot and Throwhand now name their armour: placeholders Grey Lacing (the Shade's shared leather), Felt Elbows, Copper Links. Thin Edge, String Cutter and Straight Shaft are retired and their pieces get kit lines. `KitNamedPieceNotF1Target` is computed over the F1 deck (4.5.1, 5.1, 5.3; V21 (j)).
+1. **The named piece is the shield where the kit has one, otherwise the armour.** The F1 Due is dealt by slot, never by weapon set, and is always a weapon or focus, so only shields and armour are out of its reach (LE 6.6). The Shade (both picks), the Arcanist, the Herald Focus hand, Close Shot and Throwhand now name their armour: placeholders Grey Lacing (the Shade's shared leather; renamed Hemp Lacing, naming pass NP-27), Felt Elbows, Copper Links (renamed Copper Gorget, naming pass NP-27). Thin Edge, String Cutter and Straight Shaft are retired and their pieces get kit lines. `KitNamedPieceNotF1Target` is computed over the F1 deck (4.5.1, 5.1, 5.3; V21 (j)).
 2. **Kit issue defined:** straight to the `KitRecord` slots at WO1, before F1 generation; a fixed creation order; 2 potion instances in one stack; `origin = {kit, floor 0}`, `everHeld = true`; kit coin as `CoinChanged{source: kit}`; `KitIssueStable` (4.1, 7; SK-3).
 3. **One hero-kit predicate,** `origin.channel == kit && boundToUnitId == null`, for every instance issued from a `KitRecord` (variants and Old Friend included); the chip, the reports and the Arcanist pack-pressure option use it (4.1).
 4. **The display sidecar:** the given name, kit line, accent and byname keys live in `run.save.display.displayOverlay[instanceId]`, updated only by reacting to Core events; the Core `ItemInstance` is unchanged; V21 (h) restated (4.5.1, 9.1; SK-5).
@@ -1192,7 +1193,7 @@ The design check (builder, consistency, balance and narrative-art lenses) found 
 16. **Localisable strings:** Oddment names are standalone labels without articles, shown in list layouts; every surface is one whole-string key with named placeholders; quote marks live in the keys; the given name is shown with the "called" word (4.5.1, 4.5.2, 5.4, 8.8).
 17. **The provenance line** is the neutral "Carried from the start", replacing "Issued at the Stairtop" (4.5.1).
 18. **Writing rules widened** to kit lines and the provenance line, and to named content from other designs (EV cards and props, Strands, RS motifs and role props, boss signatures, trinket and property names, trinket kind words, level-up reward terms); a number blocklist; money, receipts and kit echoes banned; pool rules; machine rows split from authored tags (4.5.2; V21 (g), (i)).
-19. **Samples re-authored in place,** pools kept at 6: Vanguard 1, 3, 4, 5, 6 (the tin tag, the scored strip, the receipt, the rivet, the gatehouse rota); Shade Blades 2, 3, 4, 5; Shade Launcher 2–6; Arcanist 1, 3, 4, 5; Herald Shield 1, 4, 5, 6; Herald Totem 1, 2, 4, 5. Kit lines: the Shade shortsword ("filed short"), the Vanguard chain mail, the Launcher longbow (no "knot"). Companion names: Split Haft → Birch Handle, Bent Tip → Brass Pommel, Painted Shaft → Ochre Daub. The running example is now the porter's armband (5.1, 5.2).
+19. **Samples re-authored in place,** pools kept at 6: Vanguard 1, 3, 4, 5, 6 (the tin tag, the scored strip, the receipt, the rivet, the gatehouse rota); Shade Twin Blades 2, 3, 4, 5; Shade Bow and Blade 2–6; Arcanist 1, 3, 4, 5; Herald Shield hand 1, 4, 5, 6; Herald Focus hand 1, 2, 4, 5. Kit lines: the Shade shortsword ("filed short"), the Vanguard chain mail, the Bow and Blade longbow (no "knot"). Companion names: Split Haft → Birch Handle, Bent Tip → Brass Pommel, Painted Shaft → Ochre Daub. The running example is now the lamp-trimmer's armband (5.1, 5.2).
 20. **Name rules:** no damage or defect words on full-stat pieces; no two given names sharing a head word; "no proper noun" is an authored tag (4.5.1).
 21. **Structured level-3 hint families** beside the key (4.4, 9.1).
 22. **`coinStart` is hero-only;** the strip's supply text comes from the ABL constant (4.2, 9.1; V21 (c)).
@@ -1202,16 +1203,16 @@ The design check (builder, consistency, balance and narrative-art lenses) found 
 26. **Register and bookkeeping:** SK-2, SK-3, SK-5, SK-6, SK-7, SK-8, SK-9, SK-12 and SK-16 restated; 11 and 17 regenerated from 13; a 14.2 row for the SV sidecars; new names checked (A.2).
 
 **Told plainly after the check** (none overrides a client answer; confirmed by the client on 2026-11-23, all as written):
-- **T1.** **Half the draft's named pieces did not meet Q2.** The F1 Due could replace the Shade's sabre, the Arcanist's dagger and the Herald Totem's javelin. Those kits now name their armour, so Q2's "the piece the F1 Due cannot replace" is true by rule. Armour usually lasts to the F2 or F3 Due, so those names may leave sooner than a shield's.
+- **T1.** **Half the draft's named pieces did not meet Q2.** The F1 Due could replace the Shade's sabre, the Arcanist's dagger and the Herald Focus hand's javelin. Those kits now name their armour, so Q2's "the piece the F1 Due cannot replace" is true by rule. Armour usually lasts to the F2 or F3 Due, so those names may leave sooner than a shield's.
 - **T2.** **Farcaster and Bookhand were stronger than the default Arcanist kit,** because the set a hero opens with is never a cost (sets swap free outside combat). They now give up the staff, and with it Parry and Steady Casting, for a sling. They may fail the risk band and be cut.
 - **T3.** **The approved Arcanist's set-B dagger has no working verb:** Nick needs an off hand. The kit is unchanged; that set is exempt as the class's declared fallback.
 - **T4.** **Quitting at camp right after Leave it by the fire can undo the Leave,** because SV has no write on quitting. On reload the Oddment is carried again. Once written, leaving is final for the run.
-- **T5.** **About a third of the confirmed Oddment samples, three kit lines and three companion names broke this design's own rules** and were rewritten. The running example "a rivet wrapped in cloth" is now "a porter's armband". Pools stay at 6.
+- **T5.** **About a third of the confirmed Oddment samples, three kit lines and three companion names broke this design's own rules** and were rewritten. The running example "a rivet wrapped in cloth" is now "a lamp-trimmer's armband". Pools stay at 6.
 - **T6.** **"Issued at the Stairtop" is replaced by "Carried from the start".** The old line asserted a premise the RS owner has not ruled on.
 - **T7.** **Several draft numbers were wrong:** the d8 DPR rows (4.4 → 5.1), the Vanguard EHP (111 and 87 → 91 and 71; 1.9× → 1.6×) and the writing volume (M3 ≈ 3.5k → ≈ 4.5k words; about 6k in all).
 - **T8.** **Some checks the draft promised cannot be automated** ("no proper noun", "counts that match game numbers", "usable-looking", implied senses). They are now authored tags confirmed by the tone review, with explicit blocklists for what a machine can check.
 - **T9.** **Hero kit gear stays sellable (Q4).** The Sell row now shows the "Starting gear" chip and, for the named piece, a line saying its name goes with it.
-- **T10.** **A variant or background-boon hero draws its Oddment from 9** (the boon's 3 first, then the kit's 6), not from 3.
+- **T10.** **A variant or Calling-perk hero draws its Oddment from 9** (the boon's 3 first, then the kit's 6), not from 3.
 - **T11.** **The F3 finding misquoted CH-24.** Only CH 4.9 says "fixed per class"; MAIN 4.7 needs no change.
 - **T12.** **Two requests are still pending:** the W owner's confirmation of the hand crossbow and of mundane orb and tome bases. The draft called the first confirmed; it is not.
 
@@ -1221,18 +1222,18 @@ The design check (builder, consistency, balance and narrative-art lenses) found 
 
 | # | Risk | Mitigation |
 |---|---|---|
-| 1 | Variant boons rarely picked against heirlooms, Old Friend and the Wayfarer's Pack, even with a skill | Per-offer reporting and the Q1 trigger |
+| 1 | Variant boons rarely picked against heirlooms, Old Friend and the Wayfarer's Belt, even with a skill | Per-offer reporting and the Q1 trigger |
 | 2 | Bundled skills are power-adjacent | Mechanics and Leadership excluded; class defaults excluded with an alternate; CL 6.3 applies; boon value compared with a heirloom's; STAT owner signs off |
 | 3 | Variants that drop a shield or Parry may fail F1 gates (Maulhand, Farcaster and Bookhand, which give up the staff after the check, Macehand, Spearhand) | The risk band; failing rows are cut |
 | 4 | The named piece may not survive play (the Vanguard shield at the F2/F4 Due; named armour at the F2 or F3 Due) | `NamedPieceHeldAtF3`, the armour fallback on shield kits, and the named-piece log in Grave Goods |
 | 5 | Players read the Oddment as a hidden buff (the Pendant effect) | "Does nothing" line, placement off the grids, `OddmentMisuseRate`, the playtest question |
-| 6 | Writing drift into hero biography, fallen heroes, the Dreamer, hints or Hollowfolk props | V21 text bans and tone review; bans cannot catch implication |
+| 6 | Writing drift into hero biography, fallen heroes, the Dreamer, hints or Fireside props | V21 text bans and tone review; bans cannot catch implication |
 | 7 | Name collisions with the pending naming pass | V21 (g) by whole word and substring, plus the per-word flags (A.2) |
 | 8 | Localisation load: about 6k words across M2 and M3 (8.8), against CH risk 13 | Text budgets; whole-string keys with named placeholders; list layouts for Oddment names; CardFit at 150% |
 | 9 | SK-4 crosses owners (LE, DH, IR) | If refused, the tie-break gap remains and heirloom heroes may get a hollow upgrade (14.2) |
 | 10 | The SK-11 price scale moves vendor prices and the zero camp-1 margin | Owner rerun at 250‰ and 200‰ before adoption |
 | 11 | Arcanist variants depend on mundane focus bases that no record confirms yet | Gated; fallback M4 |
-| 12 | The Memento frame tag and Lingerer lines compete for CH's tight budgets | They are the first and second cuts |
+| 12 | The Memento frame tag and Straggler lines compete for CH's tight budgets | They are the first and second cuts |
 | 13 | The SK-16 decision may disappoint players who expect to share a variant run | Stated on the seeded entry screen |
 | 14 | Hero kit gear sold for small coin teaches "sell the spare" as a camp-1 chore (Q4) | Resale is noise (1–3 coin); `KitSoldAtCamp1`; LE 6.6's still-dealt rule; the held lever |
 | 15 | The named piece is sold, left or offered without the player knowing it carries a name (Q4) | The "Starting gear" chip and the inline "Its name goes with it" line on Sell, Swap/Leave and Curiosity rows (4.3) |
@@ -1245,7 +1246,7 @@ The design check (builder, consistency, balance and narrative-art lenses) found 
 **(lead's call)**
 
 - Every *(illustr.)* value: the risk band width, pick-rate thresholds and offer minimums, the 18-character name cap, the fire-prop count, the price scale until SK-11 is ruled, the DPR and EHP toys, the unlock pacing, art and writing counts, the Due timing estimate.
-- Godot scene structure for the kit strip, the hero inspect header's Oddment line and the fire prop, with no rules state.
+- Godot scene structure for the gear strip, the hero inspect header's Oddment line and the fire prop, with no rules state.
 - The Oddment selection hash details inside the `lore` domain and the stated tuple (4.5.2).
 - Line text beyond the samples, inside the writing rules and tone review.
 - Names, until the naming pass.
@@ -1263,7 +1264,7 @@ The owed rows are the single list in 13; by owner:
 - **The DH owner:** SK-4 (confirm), SK-6 (DH 17.12); LE 6.6's still-dealt item.
 - **The IR owner:** SK-4 (confirm), SK-5.
 - **The CMP owner:** SK-3 (CMP 12), SK-5 (companion named pieces; upgrades never swap them).
-- **The CH owner:** SK-6, SK-7 (CH 4.11), SK-8 (CH 4.9), SK-9; the Memento frame tag and Lingerer lines (M3).
+- **The CH owner:** SK-6, SK-7 (CH 4.11), SK-8 (CH 4.9), SK-9; the Memento frame tag and Straggler lines (M3).
 - **The SV owner:** SK-5 and SK-6 (the `run.save` display sidecars; SV 4.3; the creation-screen run key), SK-10 (SV 5.2), SK-16 (request).
 - **The RS owner:** SK-10 (RS 11.2), SK-14 (request), SK-15 (request, with MAIN); codex hosting of the Oddments page; the tone review.
 - **The main design owner:** SK-7 (MAIN 4.7, read only), SK-15 (request).
@@ -1304,7 +1305,7 @@ The owed rows are the single list in 13; by owner:
 | Stat rearrangement makes kits illegal (coverage, high) | Creation warnings, checks over arrangements, worst-arrangement arm (SK-9) |
 | Heirloom placement undefined (coverage, high) | SK-12; `fallbackOrder` field (new lead's call) |
 | Idiom and pun names (coverage, medium) | Plain descriptive samples; idiom ban; "Hear" stem in the collision list |
-| Oddments reuse Hollowfolk props (coverage, medium) | Samples re-authored; V21 ban (5.1); four samples given a named tone-review look (new lead's call) |
+| Oddments reuse Hollowfolk props (coverage, medium) (Hollowfolk renamed the Fireside, naming pass NP-27) | Samples re-authored; V21 ban (5.1); four samples given a named tone-review look (new lead's call) |
 | Run-modifier hook missing (coverage, medium) | SK-15 |
 | Level-3 hint duplicates variant gear (coverage, medium) | `level3SpareHint` per kit (4.4) |
 | "Charm" field collides with the trinket kind (coverage, medium) | `accentId`; cloth and binding only (6) |
@@ -1317,25 +1318,25 @@ The owed rows are the single list in 13; by owner:
 
 ### A.2 Names checked (case-insensitive, whole word and substring, the 31 approved documents and the reviews; re-run while writing)
 
-- **0 hits, used:** the SK-n prefix, V21, Oddment(s), Leave it by the fire, given name, kit line, kit strip, `accentId`, Starting gear, Also carried, Weighs nothing, Once called, Swordhand, Maulhand, Close Shot, Throwhand, Farcaster, Bookhand, Macehand, Spearhand, Nine Rivets, Patched Twice, Iron Rim, Waxed String, Worn Scabbard, Green Bark, Boss Nail, Gatesplitter, `KitRecord`, `KitVariantBoon`, `OddmentRecord`, `StartingKits`, `kitIssue`, `KitSoldAtCamp1`, `level3SpareHint`, `kitDelta`, `oddmentsSeen`, `givenNameKey`, `kitLineKey`, `coinStart`, and every V21 row and report name in 9.2. **Added while writing (new lead's call), 0 hits:** `KitVerbPerSet`, `skillAlternate`, `fallbackOrder`. **Added after the check, 0 hits:** Grey Lacing, Felt Elbows, Copper Links, Birch Handle, Brass Pommel, Ochre Daub, Carried from the start, `displayOverlay`, `namedPieceLog`, `skillFallback`, `fallbackOnly`, `level3SpareHintFamilies`, `leftCaptionKey`, `OddmentLeftCaption`, `numberBlocklist`, `BackgroundPerkBoon` (this design's label for the M3 background-perk boon record), `KitIssueStable`, `VariantPickConsistent`, `OddmentRetiredLoads`. `kit.acFloor` is a `KitRecord` field, distinct from CMP's check `CompanionAcFloor` (CMP 8.1). Every Oddment object noun in 5.1 was grepped; the draft-stage candidates lectern, napkin, apron, plumb line, sealing wax, marble, clasp, ferrule, badge, straw, rope and seed were dropped for hits on theme props, boss attacks, trinkets, room rulings or system terms.
+- **0 hits, used:** the SK-n prefix, V21, Oddment(s), Leave it by the fire, given name, kit line, kit strip (now gear strip; naming pass NP-27), `accentId`, Starting gear, Also carried, Weighs nothing, Once called, Swordhand, Maulhand, Close Shot, Throwhand, Farcaster, Bookhand, Macehand, Spearhand, Nine Rivets, Patched Twice (now Leather Facing; naming pass NP-27), Iron Rim (now Banded Face; naming pass NP-27), Waxed String (now Linen Whipping; naming pass NP-27), Worn Scabbard (now Old Scabbard; naming pass NP-27), Green Bark (now Green Wood; naming pass NP-27), Boss Nail (now Domed Nail; naming pass NP-27), Gatesplitter (now the Ironbiter; naming pass NP-27), `KitRecord`, `KitVariantBoon`, `OddmentRecord`, `StartingKits`, `kitIssue`, `KitSoldAtCamp1`, `level3SpareHint`, `kitDelta`, `oddmentsSeen`, `givenNameKey`, `kitLineKey`, `coinStart`, and every V21 row and report name in 9.2. **Added while writing (new lead's call), 0 hits:** `KitVerbPerSet`, `skillAlternate`, `fallbackOrder`. **Added after the check, 0 hits:** Grey Lacing (now Hemp Lacing; naming pass NP-27), Felt Elbows, Copper Links (now Copper Gorget; naming pass NP-27), Birch Handle, Brass Pommel, Ochre Daub, Carried from the start, `displayOverlay`, `namedPieceLog`, `skillFallback`, `fallbackOnly`, `level3SpareHintFamilies`, `leftCaptionKey`, `OddmentLeftCaption`, `numberBlocklist`, `BackgroundPerkBoon` (this design's label for the M3 Calling-perk boon record), `KitIssueStable`, `VariantPickConsistent`, `OddmentRetiredLoads`. `kit.acFloor` is a `KitRecord` field, distinct from CMP's check `CompanionAcFloor` (CMP 8.1). Every Oddment object noun in 5.1 was grepped; the draft-stage candidates lectern, napkin, apron, plumb line, sealing wax, marble, clasp, ferrule, badge, straw, rope and seed were dropped for hits on theme props, boss attacks, trinkets, room rulings or system terms.
 - **Retired after the check:** Issued at the Stairtop (premise), Thin Edge (also W 18.2's "Edge (element)" property), String Cutter, Straight Shaft (innuendo; shared head word), Split Haft and Bent Tip (damage words), Painted Shaft (shared head word); each had 0 hits and is no longer used.
-- **Existing terms used as defined:** Heirloom shelf (CH), Stairtop (CH), Book of Nights (CH), Old Friend and Wayfarer's Pack (CMP), `kitBound` (CMP-21), "Does nothing" (17 hits, plain prose, used as card text), Dream's Due (LE), Whence, byname, Deed (IR, CMP).
+- **Existing terms used as defined:** Heirloom shelf (CH), Stairtop (CH), Book of Nights (CH), Old Friend and Wayfarer's Pack (CMP; renamed Wayfarer's Belt, naming pass), `kitBound` (CMP-21), "Does nothing" (17 hits, plain prose, used as card text), Dream's Due (LE), Whence, byname, Deed (IR, CMP).
 - **Taken (rejected):**
-  - Keepsake (RS 9.3), Letter, Note, Token, Memento, Tally, Curios, Relic, Bundle, Pocket (54);
+  - Keepsake (RS 9.3; renamed Souvenir, naming pass), Letter, Note, Token, Memento, Tally, Curios, Relic, Bundle, Pocket (54);
   - Issued (26, as a chip), Breaker (34), Margin (67), Warden (27), Crier (85), Knifework (SH Knife Work);
   - Bell-ringer (RS 1558), Lamplighter (RS enemy), Plain Speech (HR), Errata, Open Floor;
   - Set it down (AN5 "down");
-  - **Duellist** (13 hits, incl. CL, W, IR "Duellist's Rapier"): retired with the cut variant (new lead's call).
+  - **Duellist** (13 hits, incl. CL, W, IR "Duellist's Rapier", renamed Courtier's Rapier, naming pass NP-27): retired with the cut variant (new lead's call).
 - **Retired with their models:** Haversack and Livery (0 hits each).
 - **Near-collisions kept, flagged to the naming pass (new lead's call; per-word check):**
-  - **Iron Rim** (Gatekeeper shield): "Rim" is in the shield property **Bashing Rim** (AR, W 17.9), a real RC9 risk on a shield;
-  - **Patched Twice** (Herald Shield shield): "Twice" is in the Scion rank word "Twice-Sworn" (IR 4.6), the armour property Twice-Proof and EV's Twice-Told card;
-  - **Waxed String** (Scout shortbow): "string" is a substring of the party counter **Lodestring** (XI);
-  - **Copper Links** (Herald Totem chain shirt): "links" is used for XI's Plunge links (a UI word, not a record name);
-  - **Green Bark** (Hedgemage staff): "bark" is the RC8 system term (CH flagged Barker for the same reason);
-  - **Boss Nail** (Shieldbearer shield): "Boss" is the game's boss term (a shield boss is meant);
-  - **usher** in a Herald kit line: next to EV's resident the **Night Usher** (CH bars it as an ambient figure); an usher's trade is allowed by the premise test, so it stays a flag;
-  - **Gatesplitter** (sample byname): next to the notable Gatebreaker (0.1 item 4), deliberately as a byname sample only.
+  - **Iron Rim** (Gatekeeper shield): "Rim" is in the shield property **Bashing Rim** (AR, W 17.9), a real RC9 risk on a shield (renamed **Banded Face**, naming pass NP-27);
+  - **Patched Twice** (Herald Shield hand shield): "Twice" is in the Scion rank word "Twice-Sworn" (IR 4.6), the armour property Twice-Proof and EV's Twice-Told card (renamed **Leather Facing**, naming pass NP-27);
+  - **Waxed String** (Scout shortbow): "string" is a substring of the party counter **Lodestring** (XI) (renamed **Linen Whipping**, naming pass NP-27);
+  - **Copper Links** (Herald Focus hand chain shirt): "links" is used for XI's Plunge links (a UI word, not a record name) (renamed **Copper Gorget**, naming pass NP-27);
+  - **Green Bark** (Hedgemage staff): "bark" is the RC8 system term (CH flagged Barker, now Showcaller, for the same reason) (renamed **Green Wood**, naming pass NP-27);
+  - **Boss Nail** (Shieldbearer shield): "Boss" is the game's boss term (a shield boss is meant) (renamed **Domed Nail**, naming pass NP-27);
+  - **usher** in a Herald kit line: next to EV's resident the **Night Usher** (CH bars it as an ambient figure); an usher's trade is allowed by the premise test, so it stays a flag (replaced by "a carter's thread", naming pass NP-27);
+  - **Gatesplitter** (sample byname): next to the notable Gatebreaker (0.1 item 4), deliberately as a byname sample only (renamed **the Ironbiter**, naming pass NP-27).
 - **Prefixes:** `\bSK-[0-9]` 0 hits; `\bV21` 0 hits (specs and reviews).
 
 ### A.3 SK cross-reference

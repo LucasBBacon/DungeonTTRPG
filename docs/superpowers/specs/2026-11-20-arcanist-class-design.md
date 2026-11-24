@@ -2,6 +2,11 @@
 
 Date: 2026-11-20
 Status: Approved, 2026-11-20
+Names updated by the naming pass (naming pass design,
+`2026-11-24-naming-pass-design.md`, approved 2026-11-24; NP rows
+listed: NP-32, with its 13.1 cites of the agreed Q1, Q2 and Q5 renames,
+and the register rows of naming pass section 5 whose sites name this
+document). Internal ids, field names and change ids are unchanged.
 Parents: `2026-11-17-classes-concepts-design.md` (classes stage 1,
 approved; the direct parent), `2026-11-18-vanguard-class-design.md` and
 `2026-11-18-shade-class-design.md` (the approved stage-2 templates;
@@ -91,16 +96,20 @@ Slipped, Rebind, Reel, Catalyse, Prime, Splash, Tincture, Wide Mix,
 Runoff, Reagent Surge, Dissect, Field Notes, Unpick, Weak Point,
 Cross-Reference, Crux, Purity, Deepen, Unmake, Aftershock, Tempest,
 Ruin, Flux, Scour, Etch, Opposed, Seal, Converge.
+The list records the original check; the naming pass (approved
+2026-11-24, NP-32) renamed Sculpt → Whittle (its Charge mode → Load),
+Skyfall → Highfall, Gout → Deluge, Coffle → Lashed Pair, Dissect → Lay
+Bare and Tempest → Weatherwork, and the text below uses the new names.
 
 Names avoided because they collide **(lead's call)**:
 
 | Avoided name | Why |
 |---|---|
-| Shape (the stage-1 Weft option) | The rod's focus verb **Shape** (weapons 17.8); forced rename to Sculpt (ARC-1) |
+| Shape (the stage-1 Weft option) | The rod's focus verb **Shape** (weapons 17.8); forced rename to Sculpt (ARC-1) (renamed Whittle, naming pass NP-32) |
 | Bend | Prose hits only, but "Sculpt" has none |
 | Linger, Lingering | The conditions 5.1 duration model "Lingering"; three drafts used "Linger" for three things (now Afterhold) |
 | Knot (any Binder name) | The trinket kind word (Ward-Knot, trinkets kind-word rule) |
-| Hold, Held, Holdfast | A Later condition; Hold the Line; a Vanguard unlock |
+| Hold, Held, Holdfast | A Later condition; Hold the Line (renamed Bar the Way, naming pass); a Vanguard unlock |
 | Storm (as a label or template) | The Storm Ring |
 | Gale | The Gale Gambeson |
 | Volatile, Brittle | Existing hits |
@@ -108,7 +117,7 @@ Names avoided because they collide **(lead's call)**:
 | Mantle, Spark | Withdrawn in stage 1 |
 | Darts, Burst, Line, Beam | A dagger skin; ability 8.1 shape terms; the Mote's "two beams" |
 | Exploit, Empower, Twin, Hasten | Weapons verb; weapon verb and Technique; Twin Verb; too close to Hasted |
-| Attune, Scatter, Loom, Tether | The Attuned property; the Herald capstone; the Totem's focus verb; a spell-list candidate |
+| Attune, Scatter, Loom, Tether | The Attuned property; the Herald capstone; the Tipstaff's focus verb; a spell-list candidate |
 | Overflow (the Elementalist's level-6 alternative) | Prose hits in DH; the draft's "name reserved" slot is filled by **Aftershock** (9.4) |
 
 "Fan" shares a head word with the weapons property Fan Throw;
@@ -116,7 +125,7 @@ Names avoided because they collide **(lead's call)**:
 
 **SRD check (settled principle, classes stage 1; lead's call to repeat
 it here).** The SRD-shaped mechanisms used here are spell slots, an
-Arcane Recovery-like Slot Recovery, Eldritch Blast-like at-will scaling,
+Arcane Recovery-like Slot Renewal, Eldritch Blast-like at-will scaling,
 Sculpt Spells- and Careful Spell-like selective areas, and spells shaped
 on Burning Hands, Ice Knife, Chromatic Orb, Magic Missile, Thunderwave,
 Entangle, Faerie Fire, Scorching Ray, Blindness, Hold Person, Gust of
@@ -138,7 +147,7 @@ milestone names. **(settled, main design 9)**
 ## 1. Intent
 
 Stage 1 fixed what the Arcanist *is*: an Intelligence full arcane caster
-and the controller of the launch four, whose verb is the element pair
+and the Hinderer of the launch four, whose verb is the element pair
 ("I shape where damage goes and what it leaves behind"), with area
 damage and control as primary leans, damage types and terrain
 combinations as secondary, slots and Weft as its pools, Overchannel as
@@ -165,7 +174,7 @@ higher; the ceiling is the highest. **(agreed, Q1)**
 
 - **"Get by with some basic casting"** (the client's brief): the Mote,
   `defaultRotation` (Knit at half HP among its steps), an automatic
-  Flare, pre-ticked selective Sculpt and a recommended starter build
+  Flare, pre-ticked selective Whittle and a recommended starter build
   clear solo floor 1 close to the other classes.
 - **"Interesting and creative uses of the kit"** (the brief): depth from
   systemic interactions anyone can see in the preview, never from
@@ -178,7 +187,7 @@ higher; the ceiling is the highest. **(agreed, Q1)**
 - **Three things to read at every level** (settled, ability 11.4;
   classes 7.6), with one spare row.
 - **The element pair as a run-long identity**, both families in use.
-- **Two M2 subclasses that are roles:** the reliable controller (Binder)
+- **Two M2 subclasses that are roles:** the reliable Hinderer (Binder)
   and the party chemist (Alembic).
 
 ### Non-goals
@@ -219,7 +228,7 @@ All **(settled)**:
 
 | Source | Binding text | What it means here |
 |---|---|---|
-| Classes 8.5 | Chassis: Intelligence / Dexterity; Slight 6; Reflex; light ceiling **(agreed, stage 1 Q5)**, shield never; simple weapons, arcane foci and the staff never required; 2 of Arcana, Lore, Mechanics, Medicine, Perception; Complex; the element pair fixed for the run; slots and Weft; Knit the `restDefensiveTool`; Binder and Alembic M2, Loremaster and Elementalist unlocks; Overchannel *(illustr.)* | 7.1 |
+| Classes 8.5 | Chassis: Intelligence / Dexterity; Slight 6; Reflex; light ceiling **(agreed, stage 1 Q5)**, shield never; simple weapons, arcane foci and the staff never required; 2 of Arcana, Lore, Mechanics, Medicine, Perception; Intricate; the element pair fixed for the run; slots and Weft; Knit the `restDefensiveTool`; Binder and Alembic M2, Loremaster and Elementalist unlocks; Overchannel *(illustr.)* | 7.1 |
 | Classes 3.4, 8.5 | Alembic priming **once per round**, through a Weft option | 9.2 |
 | Classes 5.6 | `Floor1ClassSpread` ≤ 10 points (client number), every pick and subclass, read as an M2 release gate (confirmed by the client); about 60% of limited power after level 1; `SeedHasTarget`; the per-round boss breakdown | 5, 11, 14.2, 14.3 |
 | Classes 6.3 | Forbidden grants | 13 |
@@ -227,7 +236,7 @@ All **(settled)**:
 | Classes 7.5, 7.6, 7.7 | The cap of eight; at most four things to read; dip guards | 7.1, 11.11 |
 | Classes 8.2 | One `restDefensiveTool`, half Recovery, 1 per rest, 2 from 6; 2 kit potions | 7.5 |
 | Ability 6.3, 6.4 | Rest and camp pools, 40–60% camp; one camp spend per turn | 7.4, 11.8 |
-| Ability 6.5 | Four slot tiers; the full-caster table; Slot Recovery; spells known, one camp swap; upcasts only where data declares them | 7.4 |
+| Ability 6.5 | Four slot tiers; the full-caster table; Slot Renewal; spells known, one camp swap; upcasts only where data declares them | 7.4 |
 | Ability 6.7 | Capstone: a camp pool of 1 at level 9 | 7.9 |
 | Ability 7.2, 7.3 | Spell attacks take no adjacent-hostile disadvantage; a policy on every reaction | 7.2, 7.14 |
 | Ability 8.1, 8.2, 8.4 | Areas ≤ 25 squares at levels 1–6; friendly fire unless selective; at-wills never hit allies; no ground zones **(agreed)** | 7.5, 8.1 |
@@ -259,7 +268,7 @@ table.
 
 | # | Finding | Where it is resolved |
 |---|---|---|
-| F1 | The stage-1 Weft option "Shape" collides with the rod's focus verb Shape (weapons 17.8) | Sculpt (ARC-1) |
+| F1 | The stage-1 Weft option "Shape" collides with the rod's focus verb Shape (weapons 17.8) | Sculpt (ARC-1) (renamed Whittle, naming pass NP-32) |
 | F2 | SH-5's generalised `CampOptionBound` catches every slot spell, and every area and hard-control spell fails it (Overchannel Detonation 3274‰ against 1200 *(illustr.)*) | `SpellTierBound`, `SlotlessCastBound`, `PayoffBound` (ARC-2) |
 | F3 | The gate arm of `Floor1ClassSpread` (DH 19.3 plus the ability 13 scorer) is a competent player; it cannot see a novice | The novice arm of `SkillExpressionReport` (5.4; ARC-29) |
 | F4 | The stage-1 kit (bolt 1d10 with no ability bonus, Weft 2) clears solo floor 1 27.7 points behind the Vanguard *(illustr.)* | Mote with Int to damage; Weft 3 (7.2, 7.5) |
@@ -271,7 +280,7 @@ table.
 | F10 | Restrained's `controlRank` is unset against Dazed | ARC-17 |
 | F11 | Gust as a verb-sourced push would consume an ally's verb mark | `movedByYou` (ARC-7) |
 | F12 | The rest-tool reserve cannot be built from `whilePoolAtLeastHalf`, a policy that cannot sit beside `ifItChangesOutcome` | `reserveForRestTool` (ARC-6) |
-| F13 | Levels 1–2 camp share is 26% and 35%: rest-timed Slot Recovery dominates early | Accepted miss (ARC-4, **agreed** Q2) |
+| F13 | Levels 1–2 camp share is 26% and 35%: rest-timed Slot Renewal dominates early | Accepted miss (ARC-4, **agreed** Q2) |
 | F14 | AR-20 is already 11 (armour 11 item 2), the Shade's worst Dexterity; the Arcanist at Dex −1 also reads 11 | No new burden (7.12) |
 
 ### 3.4 Terms
@@ -308,13 +317,13 @@ client said stand and confirmed with the document on 2026-11-20.
 |---|---|---|---|
 | 1 | Floor/ceiling principle (Q1) | **"Easy to cast, hard to master: equal survival floor, higher reading floor, highest ceiling."** The novice floor-1 row of `SkillExpressionReport` is a **required report** with an escalation threshold (more than 8 points behind basic after the defaults and previews → the lead applies the levers in order → if they run out, back to the client); no new gate (5; ARC-29) **(agreed)** | B: the novice row as a release gate in classes 5.6 (stricter; forces levers early; agreed gate text changed). C: accept a higher survival floor (needs `Floor1ClassSpread` widened and DH 18.2 relaxed) |
 | 2 | Base model | **Simple core, deep options**, with grafts (6) **(lead's call)** | Element engine (a new mark, a new validator, new AI pricing; its floor-1 edge comes from a starter, not the engine). Spellcraft (7–8 options on one row by L7; Quickcast dominance) |
-| 3 | Signature verb | **The element pair**, fixed for the run; default **cold + lightning ("Tempest")**, Mote key cold; the brief's "camp swap" read as the settled one-spell swap inside the pair (7.3) **(settled; defaults lead's call)** | Re-choosing the pair at camp (contradicts stage 1 8.5) |
-| 4 | Pools | Slots per ability 6.5 **(settled)**; **Slot Recovery 2 at level 9**; **Weft 3 / 4 / 5 / 6 at levels 1 / 5 / 7 / 9** (7.4, 7.5; ARC-11, ARC-12) **(lead's call)** | Stage-1 Weft 2 / 3 / 4 (fails floor 1; 71% camp share at L10). Slot Recovery 2 at L6 (fails the 60% rule increments) |
+| 3 | Signature verb | **The element pair**, fixed for the run; default **cold + lightning ("Weatherwork")**, Mote key cold; the brief's "camp swap" read as the settled one-spell swap inside the pair (7.3) **(settled; defaults lead's call)** | Re-choosing the pair at camp (contradicts stage 1 8.5) |
+| 4 | Pools | Slots per ability 6.5 **(settled)**; **Slot Renewal 2 at level 9**; **Weft 3 / 4 / 5 / 6 at levels 1 / 5 / 7 / 9** (7.4, 7.5; ARC-11, ARC-12) **(lead's call)** | Stage-1 Weft 2 / 3 / 4 (fails floor 1; 71% camp share at L10). Slot Renewal 2 at L6 (fails the 60% rule increments) |
 | 5 | Camp share (Q2) | **Accept the level 1–2 miss** (26% and 35% against the 40% floor) as VG-13 and SH-28 did (ARC-4) **(agreed)** | Weft 2 at levels 1–2 (about 32% at L1; costs about 2 floor-1 clear points) |
 | 6 | Alembic self-payout (Q3) | **"Your mix needs a spark":** a condition instance with `origin: prime` and `source: you` is treated as absent by every damage part of your own at-wills; your slot spells and allies read it normally (9.2; ALM-1) **(agreed; told plainly that it re-reads agreed stat 8.2 and 8.3 for one subclass's own at-wills)** | The reagent restriction (Prime may only apply a reagent your Mote key does not read): narrows the subclass's choices |
-| 7 | Capstone | **Overchannel as approved text:** a known slot spell of tier ≤ 3 (not an at-will) without a slot, one free Sculpt mode, still the turn's camp spend; plus Fused (7.9) **(settled; Fused lead's call)** | The computed brief's "tier 1 or 2" (narrower than approved text). Two free modes (nova) |
-| 8 | Parity reading | **VG-12** with **`SetupAttribution`** (ARC-16) and Slot Recovery read as rest power in both measures (ARC-3) **(lead's call; told plainly, accepted with Q1)** | Capping at-will riders at band 1 (kept as a fallback lever only) |
-| 9 | Slot-spell bounds | **`SpellTierBound`** (≤ 2000‰ single target, ≤ 1250‰ per target for areas), **`SlotlessCastBound`**, **`PayoffBound`** (ARC-2) **(lead's call)** | `CampOptionBound` read literally (every area and hard spell fails). 1200‰ for areas (the approved Fireball scroll fails) |
+| 7 | Capstone | **Overchannel as approved text:** a known slot spell of tier ≤ 3 (not an at-will) without a slot, one free Whittle mode, still the turn's camp spend; plus Fused (7.9) **(settled; Fused lead's call)** | The computed brief's "tier 1 or 2" (narrower than approved text). Two free modes (nova) |
+| 8 | Parity reading | **VG-12** with **`SetupAttribution`** (ARC-16) and Slot Renewal read as rest power in both measures (ARC-3) **(lead's call; told plainly, accepted with Q1)** | Capping at-will riders at band 1 (kept as a fallback lever only) |
+| 9 | Slot-spell bounds | **`SpellTierBound`** (≤ 2000‰ single target, ≤ 1250‰ per target for areas), **`SlotlessCastBound`**, **`PayoffBound`** (ARC-2) **(lead's call)** | `CampOptionBound` read literally (every area and hard spell fails). 1200‰ for areas (the approved Detonation (fire) scroll fails) |
 | 10 | Creation pick for the gate | **Pair × Mote key × level-3 subclass**, starters held at `pairDefaults`, every legal starter combination printed; `StarterDefaultsHaveAnswer` and the starter rule (7.7; ARC-15) **(lead's call; told plainly, accepted with Q1)** | Starters as picks (multiplies rows without a decision behind them) |
 | 11 | Hero defaults | **Cast-option defaults** (`castDefaults`): visible, shown ticked, the player can untick them; static predicates; the last-slot confirmation; the pip glint (7.14; ARC-6, ARC-13) **(lead's call; told plainly as a reading of agreed 11.3, accepted with Q1)** | A hero coach (reverses agreed 11.3; not proposed) |
 | 12 | Level-3 default | **Alembic** in `pairDefaults` until the per-subclass rows land (9.1); a creation default for players, which does not move the unweighted class-mean rows (5.4) **(lead's call)** | Binder as default now (novice 69–72% against 81–82% *(illustr.)*) |
@@ -334,12 +343,12 @@ against SRD 5.2.1 before any record is written **(settled, classes stage
 
 | Game / feature | What it does | We take | We avoid |
 |---|---|---|---|
-| **5E wizard (SRD)** | Slots; prepared spells; Arcane Recovery on a short rest; cantrips scale; Sculpt Spells; Potent Cantrip | Slot Recovery **(settled)**; Mote scaling at 5; selective Sculpt | Daily preparation (ability 2 non-goal); rituals |
+| **5E wizard (SRD)** | Slots; prepared spells; Arcane Recovery on a short rest; cantrips scale; Sculpt Spells; Potent Cantrip | Slot Renewal **(settled)**; Mote scaling at 5; selective Whittle | Daily preparation (ability 2 non-goal); rituals |
 | **5E warlock** | Few slots; an at-will blast with ability to damage and extra beams | **The Mote**: Int to damage, two beams at 5. The clearest "simple caster" | Pact slots refreshed per short rest (a second recovery) |
 | **5E sorcerer** | A point pool; metamagic (careful, twinned) | Careful-like selective, paid from Weft | A metamagic point pool (a new pool and reading row) |
 | **PF2e wizard** | Drain a bonded item (recast one spell per day); theses | Overchannel as a once-per-floor slotless recast | Thesis sprawl |
 | **PF2e kineticist** | At-will impulses carry the class; optional taxed overflow; two-element composites | "The at-will carries; burst is optional"; two keys are enough | Gather/dismiss aura state |
-| **4e wizard** | At-will / encounter / daily; the controller role; an orb that worsens saves | The controller role; the orb idea → the Binder's Cinch | Per-encounter pools (ability 6.2: no major per-fight power) |
+| **4e wizard** | At-will / encounter / daily; the controller role; an orb that worsens saves | The controller role (our Hinderer); the orb idea → the Binder's Cinch | Per-encounter pools (ability 6.2: no major per-fight power) |
 | **13th Age wizard** | An escalation die rewards late rounds | Nothing; noted for long boss fights | A round counter |
 | **Shadow of the Demon Lord** | Traditions; castings by power | Nothing | Breadth reward (cap and reading) |
 | **Lancer** | Heat and overcharge with escalating self-cost | The idea of a taxed spike | A new resource row |
@@ -366,7 +375,8 @@ and creative uses; the skill floor will likely be higher than the
 Vanguard's, supplemented by a larger ceiling.
 
 **The lead's answer (agreed, Q1):**
-- **Agree:** "complex" (the creation label, more interactions, three
+- **Agree:** "complex" (the creation label, printed "Intricate" since
+  the naming pass, 5.9.9; more interactions, three
   rows that hold more options than the Vanguard's) and "higher ceiling"
   (the expert-over-basic floor-averaged damage gap grows from about 25%
   at level 1 to 34–49% at level 10 *(illustr.)*, 11.5).
@@ -404,8 +414,8 @@ call):**
 | Choice | Default | Why |
 |---|---|---|
 | Array | Int +3, Dex +2, Con +1, Wis +1, Pre 0, Str −1 | Creation warns below Dex +2 (AC 13 or less; Dex −1 costs 19–23 clear points *(illustr.)*) and below Con +1 |
-| Pair, key | cold + lightning ("Tempest"), Mote key cold | No self-cancel; Soaked makes both weak; Chilled slows melee; minors never spend boss pips |
-| Starters | **Shard (lightning)** + **Shockwave** | One ranged group hit in the off-key family (sets an Interplay mark for the cold Mote), one "get off me". **In a party both can hit allies** (Shard's r1 burst lands on a foe in melee with an ally; Shockwave's r1 burst and push of 2 catch adjacent allies): the selective pre-tick protects them (7.14) and `defaultRotation` checks for allies (below) **(lead's call)**. Simulator A/B owed against Frost Shard and Fan (lightning) |
+| Pair, key | cold + lightning ("Weatherwork"), Mote key cold | No self-cancel; Soaked makes both weak; Chilled slows melee; minors never spend boss pips |
+| Starters | **Shard (lightning)** + **Upheaval** | One ranged group hit in the off-key family (sets an Interplay mark for the cold Mote), one "get off me". **In a party both can hit allies** (Shard's r1 burst lands on a foe in melee with an ally; Upheaval's r1 burst and push of 2 catch adjacent allies): the selective pre-tick protects them (7.14) and `defaultRotation` checks for allies (below) **(lead's call)**. Simulator A/B owed against Frost Shard and Fan (lightning) |
 | Skills | Medicine + Lore | Medicine is close to compulsory solo (DH 8); Lore feeds the resistance preview |
 | Kit | Leather, staff two-handed, dagger, 2 potions | Parry is pool-free; Steady Casting about 84% on DC-10 concentration checks *(illustr.)* |
 | Level 3 | Alembic (9.1 says when this may change) | Minors always land on bosses |
@@ -441,16 +451,16 @@ checked before the action rules each turn and does not stop them
   means the arm ignores `slotTiers`.
 
 **Ladder-preview lines:** "Mote every turn. Spend a spell when two or
-more are close, or on the boss." "Shockwave when they reach you."
+more are close, or on the boss." "Upheaval when they reach you."
 "Lightning spell, then cold bolt: the bolt's chill lands." "Allies in
-your area? Sculpt makes it miss them." "Your areas and pushes hurt
+your area? Whittle makes it miss them." "Your areas and pushes hurt
 allies; your bolt never does." "Soaked foes are weak to cold and
 lightning; fire dries them." "Bind the guard, not the boss." Plus the
 pair's line (7.3).
 
 **Why this clears floor 1:** the Mote alone (1d10 + Int, range 12, about
 2–3 hits for a 12–18 HP standard); two tier-1 slots at the door, three
-from level 2, refilled by Slot Recovery; Parry and Flare on automatic
+from level 2, refilled by Slot Renewal; Parry and Flare on automatic
 policies and Knit at half HP; the tier-2 slot held for the boss from
 level 3.
 Basic-arm class mean 92.9% against the Vanguard's 98.3% *(illustr.)*, a
@@ -467,7 +477,7 @@ told plainly, accepted with Q1):
   (d) it has not fired yet this rest; (e) the player has not muted it
   for the run ("don't ask again"). The message is generated from data:
   "Last tier-{T} slot. {n} slot(s) of tier 2 or lower return on a short
-  rest" for T = 2 (n = Slot Recovery's count at your level); "Last
+  rest" for T = 2 (n = Slot Renewal's count at your level); "Last
   tier-{T} slot. It returns only at camp" for T ≥ 3. Conditions (b) to
   (e) keep it rare, so it is read rather than clicked through.
 - **The pip trap.** `castDefaults` never pre-tick a major-control spell,
@@ -486,14 +496,14 @@ All systemic; nothing authored per spell.
 | # | Pattern | Mechanism (existing rule unless marked) | Where |
 |---|---|---|---|
 | E1 | Soak, then strike | Drench, Undertow, Prime, water squares → Soaked: cold and lightning weak, riders automatic, lightning arcs to every adjacent unit | Floor 1+ |
-| E2 | Freeze, then shatter | Chilled or Soaked + a limited `freezing` cold source → Frozen (hard; Steeled, resolve, Unyielding); bludgeoning shatters (+half, automatic Staggered) | L3+ (Rime Lance), L7 (Deep Freeze); a party combo |
+| E2 | Freeze, then Fracturing | Chilled or Soaked + a limited `freezing` cold source → Frozen (hard; Steeled, resolve, Unyielding); bludgeoning shatters (+half, automatic Staggered) | L3+ (Rime Lance), L7 (Deep Freeze); a party combo |
 | E3 | Oil, then burn | Oiled + fire → +half, Burning one band higher; every fire area burns oil squares to plain floor (settled terrain row) | Fire pairs |
-| E4 | Push into terrain | Gust (1), Shockwave (2), Squall (3), Reel (2): water, fire, oil, web squares; hazard edges give Teetering | Wherever terrain exists (risk table, 16) |
+| E4 | Push into terrain | Gust (1), Upheaval (2), Squall (3), Reel (2): water, fire, oil, web squares; hazard edges give Teetering | Wherever terrain exists (risk table, 16) |
 | E5 | Restrain, then area | Restrained gives Reflex disadvantage; Stunned auto-fails Reflex | L2+ |
-| E6 | Thread the party | Sculpt selective, widen, Sculpt II (both) | Floor 2+ |
+| E6 | Thread the party | Whittle selective, widen, Whittle II (both) | Floor 2+ |
 | E7 | Deliberate friendly fire | **Temper** (new trigger): fire thaws a Frozen ally, cold puts out a Burning one, with no damage | Floor 2+ |
 | E8 | Concentration management | One effect at a time; **Afterhold** (new trigger) bridges a swap; staff Steady Casting; **Fray** against enemy casters | L2+ |
-| E9 | Slot timing | Slot Recovery returns the highest spent tier ≤ 2: spend the tier-2 slot just before a rest; Overchannel reuses the best tier-3 spell | L3+ |
+| E9 | Slot timing | Slot Renewal returns the highest spent tier ≤ 2: spend the tier-2 slot just before a rest; Overchannel reuses the best tier-3 spell | L3+ |
 | E10 | Pips economy | Minors never spend pips; majors on the escort; Cinch strips pips faster for the party | Every boss |
 | E11 | Party setups | The conditions 17.3 `setup` term already prices Soaked and Oiled for payers | Floor 2+ (the Alembic's lens) |
 | E12 | Interplay ordering | A mark from one family, cashed by the other family's hit before the end of your next turn (new, 10.3) | L1+ |
@@ -510,7 +520,7 @@ some of it by accident.
 
 | Arm | Definition | Status |
 |---|---|---|
-| **Novice** | Scripted: `defaultRotation` with greedy slot spend (ignores `slotTiers`); Sculpt only through pre-ticks; default reaction policies; aim seeded at random among the top 3 scored aims; no deliberate hazard pushes; the novice responses below | **Required report**; the floor-1 row has the escalation threshold below **(agreed, Q1)** |
+| **Novice** | Scripted: `defaultRotation` with greedy slot spend (ignores `slotTiers`); Whittle only through pre-ticks; default reaction policies; aim seeded at random among the top 3 scored aims; no deliberate hazard pushes; the novice responses below | **Required report**; the floor-1 row has the escalation threshold below **(agreed, Q1)** |
 | **Basic** | `defaultRotation` + `castDefaults`, slots held (`slotTiers`), the best scored aim, no lookahead | Required report |
 | **Reference** | DH 19.3 + the ability 13 scorer: the arm `Floor1ClassSpread` gates **(settled)** | Gate (classes 5.6, unchanged) |
 | **Expert** | The scorer + a 2-ply lookahead over the party's turn order (mark → cash; prime → payout; push → area; Restrain → area; concentration swap), `setup` term on | Simulator only; never an AI behaviour or a suggestion |
@@ -564,7 +574,7 @@ call)**.
   (expert win rate > 8 points above the class mean) and a **trap-card
   flag** (novice pick-to-clear delta below −5 points);
 - diagnostics under every arm: setup payout rate (paid out against
-  expired with no effect), friendly-fire share, Weft split (Sculpt /
+  expired with no effect), friendly-fire share, Weft split (Whittle /
   Flare / Knit / subclass option), freeze rate, concentration drops by
   cause, pips stripped, turn starts denied, Interplay rider rate,
   off-pair scroll-read share, realised camp share.
@@ -585,7 +595,7 @@ call)**.
    each; the lead stops at the first that meets the threshold **(new
    lead's call)**.
 4. **If the levers run out:** back to the client. Lever 5, the
-   floor-pacing request, is already in force (the Antechamber Catch-up,
+   floor-pacing request, is already in force (the Forecourt Top-up,
    run structure design 9.4, RT-8), so the levers count as run out after
    levers 1–4 (cross-document comparison 2026-11-23, CC-72).
 5. **No new gate:** classes 5.6 is agreed text and stays as written.
@@ -607,18 +617,18 @@ proficiency + Int; spell difficulty = 8 + proficiency + Int.
 
 | L | Floor | HP / Rec / Knit | AC | Prof / spell atk / DC | Slots t1/t2/t3/t4 | SR | Weft (Knit) | Mote | Known | Automatic | Choice |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | 1 | 18 / 7 / 3 | 14 | +2 / +5 / 13 | 2 | 1 | 3 (1) | 1d10+3 | 2 | Kit; Mote, Gust; Sculpt I, Flare, Knit ×1; Interplay | **Pair + Mote key + 2 starter tier-1 spells** (the starter rule, 7.7) |
+| 1 | 1 | 18 / 7 / 3 | 14 | +2 / +5 / 13 | 2 | 1 | 3 (1) | 1d10+3 | 2 | Kit; Mote, Gust; Whittle I, Flare, Knit ×1; Interplay | **Pair + Mote key + 2 starter tier-1 spells** (the starter rule, 7.7) |
 | 2 | 1 | 25 / 9 / 4 | 14 | +2 / +5 / 13 | 3 | 1 | 3 (1) | same | 3 | Slots 3 | **Spell card** (1 of 3; Expert cards excluded) |
 | 3 | 1→2 | 32 / 11 / 5 | 14 | +2 / +5 / 13 | 3/1 | 1 | 3 (1) | same | 4 | Tier 2; subclass level-3 features; signature rank I | **Subclass**; its tier-2 spell is the level-3 known spell |
 | 4 | 2 | 39 / 13 / 6 | 14 | +2 / +6 / 14 | 3/2 | 1 | 3 (1) | 1d10+4 | 4 | — | **+1 ability**, the only choice **(settled)** |
-| 5 | 2→3 | 46 / 15 / 7 | 14 | +3 / +7 / 15 | 3/2/1 | 1 | 4 (1) | 2 × 1d10+4 | 5 | Tier 3; Mote two beams; Sculpt II; signature rank II; subclass Art I | **Spell card** |
+| 5 | 2→3 | 46 / 15 / 7 | 14 | +3 / +7 / 15 | 3/2/1 | 1 | 4 (1) | 2 × 1d10+4 | 5 | Tier 3; Mote two beams; Whittle II; signature rank II; subclass Art I | **Spell card** |
 | 6 | 3 | 53 / 17 / 8 | 14 | +3 / +7 / 15 | 3/2/2 | 1 | 4 (2) | same | 5 | Knit ×2 **(settled)** | **Subclass feature** (1 of 2; changes a verb) |
 | 7 | 3→4 | 60 / 19 / 9 | 14 | +3 / +7 / 15 | 3/2/2/1 | 1 | 5 (2) | same | 6 (5) | Tier 4; area ceiling 49 (ARC-9); signature rank III | **Spell card** (the draw holds a trigger option, settled) |
 | 8 | 4 | 67 / 21 / 10 | 14 | +3 / +8 / 16 | 3/3/2/1 | 1 | 5 (2) | 2 × 1d10+5 | 6 (5) | **Flare II** | **+1 ability** |
-| 9 | 4→5 | 74 / 23 / 11 | 14 | +4 / +9 / 17 | 3/3/2/2 | **2** | 6 (2) | same | 6 (5) | **Overchannel** and its subclass rider (Art II); **Slot Recovery 2** | **Offer** (1 of 3) |
+| 9 | 4→5 | 74 / 23 / 11 | 14 | +4 / +9 / 17 | 3/3/2/2 | **2** | 6 (2) | same | 6 (5) | **Overchannel** and its subclass rider (Art II); **Slot Renewal 2** | **Offer** (1 of 3) |
 | 10 | 5 | 81 / 25 / 12 | 14 | +4 / +9 / 17 | 3/3/3/2 | 2 | 6 (2) | same | 7 (6 or 5) | — | **Spell card** (the draw holds one tier-4 signature card of the pair while one is unknown, 7.7) **or** offer |
 
-- "SR" is Slot Recovery's slots per short rest. "Known" counts spells
+- "SR" is Slot Renewal's slots per short rest. "Known" counts spells
   known, the subclass spell included; the brackets show one less from
   level 7 if the level-7 trigger option is taken, and one less again at
   level 10 if the offer is taken.
@@ -632,7 +642,7 @@ proficiency + Int; spell difficulty = 8 + proficiency + Int.
 
 | Model | Core idea | Strength | Weakness |
 |---|---|---|---|
-| **Simple core, deep options (SC)** | Sculpt (selective, widen, charge), Flare, Knit, a strong Mote, defaults and previews; depth from the existing interaction table and terrain | Keeps every approved rule; adds nothing to count or read | Thin floor-1 depth by design; the fire + acid parity reading; the L10 camp share |
+| **Simple core, deep options (SC)** | Whittle (selective, widen, load), Flare, Knit, a strong Mote, defaults and previews; depth from the existing interaction table and terrain | Keeps every approved rule; adds nothing to count or read | Thin floor-1 depth by design; the fire + acid parity reading; the L10 camp share |
 | **Element engine (EE)** | Residues per family (Burning, Chilled, Corroded, and a new source-held Ionised mark for lightning); **Conflux** (the other family's hit on a residue lands its rider free); **Detonate** (a slot cast consumes one residue for +half) | The richest ceiling | A new mark, a new validator (ComboBound), new AI pricing; party composition becomes a balance input; Detonate can consume the Chilled that keeps a melee foe off a basic player |
 | **Spellcraft (SP)** | A metamagic menu on Weft: Sculpt, Lace (rider), Linger (extend), Fork (twin), Quickcast (bonus-action cast), arriving in waves | Familiar; many decisions | 7–8 options on one row by L7; Quickcast dominance; Fork near the lockout line; Linger lengthens Dazed |
 
@@ -677,11 +687,11 @@ core on floor 1 and costs a crowded row.
 | `drawRequires: offFamily`; alternating `recommendedPickOrder`; off-key default starter | Element engine | 7.3, 7.7 |
 | The fire + cold pair as "Opposed, for experts", with a safe key | Element engine | 7.3 |
 | Fused (Overchannel counts as both families for Interplay) | Element engine | 7.9 |
-| Global cast rules: one free Sculpt mode per cast; ≤ 3 Weft per cast; refund on refusal | Spellcraft | 7.5 |
+| Global cast rules: one free Whittle mode per cast; ≤ 3 Weft per cast; refund on refusal | Spellcraft | 7.5 |
 | Greyed tray toggles with a reason; live preview per toggle | Spellcraft | 7.5 |
 | Novice and modifiers-off arms as required reports | Spellcraft, package | 5.4 |
 | Temper, Fray, Afterhold as trigger offers; Insulate folded into Flare II | Package | 7.13, 10 |
-| Slot Recovery 2 at L9; `PayoffBound` widened; `SetupAttribution` | Numbers check, critics | 7.4, 11 |
+| Slot Renewal 2 at L9; `PayoffBound` widened; `SetupAttribution` | Numbers check, critics | 7.4, 11 |
 
 - **Held as Later levers:** the element engine (Conflux, Detonate,
   Ionised, ComboBound), used if the expert-minus-basic win-rate gap is
@@ -704,19 +714,19 @@ core on floor 1 and costs a crowded row.
 | Armour, shield | Light ceiling **(agreed, stage 1 Q5)**; shield never |
 | `weaponTraining` | `{simple: all, martial: none}`; arcane foci (orb, rod, tome) and the staff, never required |
 | Skills | 2 of Arcana, Lore, Mechanics, Medicine, Perception **(settled)**; default Medicine + Lore |
-| Complexity | Complex, shown at creation **(settled)** |
+| Complexity | Intricate, shown at creation **(settled)** |
 | Concentrator | 1 of 2 (Stillmind, Later) **(settled)** |
 | Things to read | **3 at every level**: at-wills; spellbook (all tiers + Overchannel); Weft. Glints count 0. One spare row |
 | Limited abilities | Tiers 1–4 (4) + Weft + Overchannel = **6 of 8** |
-| Not counted | Knit sub-limit **(settled)**; Gust's and Reel's `movedByYou` round count; the at-will rider bound (engine); Sculpt's one-per-cast rule; the Interplay mark; subclass turn allowances (VG-10) |
-| `fallbackDamageTypes` | bludgeoning (staff, Shockwave), piercing (dagger, Shard's primary) |
+| Not counted | Knit sub-limit **(settled)**; Gust's and Reel's `movedByYou` round count; the at-will rider bound (engine); Whittle's one-per-cast rule; the Interplay mark; subclass turn allowances (VG-10) |
+| `fallbackDamageTypes` | bludgeoning (staff, Upheaval), piercing (dagger, Shard's primary) |
 | `level1MechanicIds` | `elementPair`, `mote`, `gust`, `weft`, `sculpt`, `flare`, `knitHalf`, `slotSpellbook`, `interplay` |
 | `signatureVerb` | the slot pools + `elementPair` (dip guard 2) |
-| `signatureEvents` | a damage part typed from the pair dealt by any ability; a Sculpt used (ARC-1); an Interplay rider landed |
+| `signatureEvents` | a damage part typed from the pair dealt by any ability; a Whittle used (ARC-1); an Interplay rider landed |
 | `seedTarget` | `twoEnemiesWithinRadius1` **(settled)** |
 | `leans[]` | Area damage **P**, control **P**, damage types and riders **s**, terrain combinations **s**; knowledge and initiative ribbons **(settled)** |
 | Tools, not leans (SH-27 pattern) | Gust's push and Reel (the forced-movement row stays the Wrecker's lens); Flare (ward); Temper and Tincture (cleanse-like, no cleanse row) |
-| Dip-guard fields | `chassisOnly` on Knit, armour, save, skill count, kit; `minClassLevel 9` on Overchannel and Slot Recovery 2; `scalesBy: classLevel` on Weft, Mote beams, Knit sub-limit |
+| Dip-guard fields | `chassisOnly` on Knit, armour, save, skill count, kit; `minClassLevel 9` on Overchannel and Slot Renewal 2; `scalesBy: classLevel` on Weft, Mote beams, Knit sub-limit |
 
 - **The Interplay flag and the validators (new lead's call):** validators
   read data, never the tuning flag. With `interplay.enabled` off,
@@ -746,10 +756,10 @@ uses `moteKey`) **(change ARC-10)**:
 - **Resolution order (new lead's call):** the player declares both
   beams' targets and their order (the scorer orders them for
   companions); the beams then resolve **fully in sequence**: beam 1
-  attack → damage → rider attempt (weak-target automatic, crit, charge or
+  attack → damage → rider attempt (weak-target automatic, crit, load or
   Interplay cash-in) → Interplay mark set → Prime (Alembic), then beam 2
   the same way. "First" in any once-per-turn rule (the at-will rider,
-  the Soaked arc spread, Fray, Sculpt charge, the Prime pre-tick) means
+  the Soaked arc spread, Fray, Whittle load, the Prime pre-tick) means
   the first beam in that order that qualifies.
 - **The once-per-turn rider bound counts every at-will rider attempt,**
   weak-target automatic ones included; the arc-spread sentence above
@@ -811,13 +821,13 @@ uses `moteKey`) **(change ARC-10)**:
    {fire, cold, lightning, acid, physical}), scoped to class records
    (ARC-27). The pair itself is known only at runtime, so the runtime
    invariant **`KnownVariantInPair`** holds instead: every known
-   variant, and the family of Catalyse, Crux and Dissect, is in
+   variant, and the family of Catalyse, Crux and Lay Bare, is in
    `elementPair`; asserted on creation, draw, swap and subclass gain,
    with a property test. The only exempt path is a gear shift (the Ember
    and Frost Rings, Attuned; item 6) **(new lead's call)**.
 5. **Scrolls and wands** are in class when the spell is anywhere on the
    Arcanist list, off-pair variants included ("known or not",
-   consumables 13.1). A Fireball scroll is in class for a Tempest
+   consumables 13.1). A Detonation (fire) scroll is in class for a Weatherwork
    Arcanist. This is the one sanctioned off-pair route: a one-shot, the
    turn's camp spend (CN-11), never a key switch. Stated on the scroll
    card; off-pair read share reported.
@@ -833,7 +843,7 @@ cancels; the display shows them) **(lead's call)**:
 
 | Pair | Label | Line | Default key |
 |---|---|---|---|
-| **cold + lightning (default)** | Tempest | "Soak, then strike: both weak on Soaked; no self-cancel" | cold |
+| **cold + lightning (default)** | Weatherwork | "Soak, then strike: both weak on Soaked; no self-cancel" | cold |
 | fire + acid | Ruin | "Burn, then strip armour; fire pays out Oiled" | fire |
 | fire + lightning | Flux | "Oil for fire, Soak for lightning; Soaked resists fire, so the setups fight" | fire |
 | acid + cold | Scour | "Corrode, then chill; acid ends Frozen; Soaked washes Corroded" | cold |
@@ -849,7 +859,7 @@ list of `{templateId, family: key | offKey | none}`, where template
 variants alternate between `offKey` and `key` in pick order, starting
 with `offKey` at level 1.
 
-### 7.4 Slots and Slot Recovery
+### 7.4 Slots and Slot Renewal
 
 | L | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -862,52 +872,52 @@ with `offKey` at level 1.
   Wellspring. Stated on the card.
 - **Upcasts** only where the spell's data declares them, as options of
   the higher pool, checked at the higher tier's arrival level (SP-2).
-- **Slot Recovery (settled):** when a short rest completes, regain one
+- **Slot Renewal (settled):** when a short rest completes, regain one
   spent slot of tier ≤ 2, the highest such tier spent. Automatic.
-- **Slot Recovery 2 (change ARC-12; class feature, `minClassLevel 9`):**
+- **Slot Renewal 2 (change ARC-12; class feature, `minClassLevel 9`):**
   from class level 9, two slots per short rest, one at a time by the
   same rule. Ability 6.5's "an offer may raise it to two" is excluded
   for the Arcanist (`offerExcludes: slotRecovery+1`). Level 9, not 6: at
   L6 the 60%-rule increments sit at 499–506‰ *(illustr.)*.
-- **Reading (change ARC-3; lead's call):** Slot Recovery counts as
+- **Reading (change ARC-3; lead's call):** Slot Renewal counts as
   **rest** power, in the camp share **and** in VG-12 parity
   (floor-averaged), never one without the other.
 
-### 7.5 Weft (`pool.weft`, rest): "sculpt, guard or mend?"
+### 7.5 Weft (`pool.weft`, rest): "whittle, guard or mend?"
 
 **Size (change ARC-11):** **3 at L1–4, 4 at L5–6, 5 at L7–8, 6 at
 L9–10** *(illustr.)*. This replaces stage 1's illustrative 2 / 3 / 4.
 
 `rankSchedule {core: [1, 5], other: [1, 8], signature: [3, 5, 7]}` (the
-Vanguard's schedule). Sculpt II at 5 is the core rank II; Flare II at 8
+Vanguard's schedule). Whittle II at 5 is the core rank II; Flare II at 8
 is the other rank II.
 
 **Global cast rules (lead's call):**
 1. Each option costs 1 Weft unless stated.
-2. **One Sculpt mode per cast at rank I**; rank II allows two
+2. **One Whittle mode per cast at rank I**; rank II allows two
    *different* modes, 1 Weft each. **Temper and selective are mutually
    exclusive** on one cast (Temper replaces selective, 10.3).
 3. **At most one radius or length step per cast from any source**
-   (`RadiusStepsPerCast ≤ 1`): Sculpt widen, the Shaping property and a
+   (`RadiusStepsPerCast ≤ 1`): Whittle widen, the Shaping property and a
    `shape` offer never stack. No area exceeds `AreaCapByLevel`.
-4. **At most one free Sculpt mode per cast** (from Overchannel); **it
-   counts toward rule 2's mode limit**, so with Sculpt II one more,
+4. **At most one free Whittle mode per cast** (from Overchannel); **it
+   counts toward rule 2's mode limit**, so with Whittle II one more,
    different mode may be paid (two modes in all) **(new lead's call;
    matches 7.9 and 11.6)**.
 5. **At most 3 Weft on one cast.** "Weft on one cast" is every Weft
-   spend declared with or triggered by that cast: Sculpt modes, Cinch
+   spend declared with or triggered by that cast: Whittle modes, Cinch
    (a), Prime riding it (Wide Mix, `primeOnSpellAttack`, `primeOnGust`)
    and Deepen **(new lead's call)**.
 6. An option on a cast that is then refused (greyed, blocked) refunds.
-7. Sculpt shapes only your class casts (slot spells, Overchannel, the
-   Mote for charge), never scroll or wand reads unless you own
+7. Whittle shapes only your class casts (slot spells, Overchannel, the
+   Mote for load), never scroll or wand reads unless you own
    `sculptOnScroll`.
 8. The tray shows each eligible toggle with its cost, greys the rest
    with a reason ("r2 is at the cap", "already flagged", "strips a pip
    only"), and updates the core preview live. It never highlights a
    recommendation (ability 11.3).
 9. **Rest-tool reserve:** automatic spends (the Flare and Flare II
-   policies, pre-ticked Sculpt, pre-ticked Prime) never take Weft below
+   policies, pre-ticked Whittle, pre-ticked Prime) never take Weft below
    the reserve, **reserve = 1 Weft while at least one Knit use is left
    this rest, else 0** (filter `reserveForRestTool`, ARC-6) **(new lead's
    call: one Weft, not one per remaining use, so the larger L6 sub-limit
@@ -917,8 +927,8 @@ is the other rank II.
 
 | Option | Wave, level | Cost | Rules text |
 |---|---|---|---|
-| **Sculpt** (rank I) | M2, 1 | 1 Weft, declared with the cast; no action | "Choose one mode. **Selective:** allies are left out of this cast, every effect included (damage, conditions, riders, arcs, forks, forced movement); it may be taken on an area cast, or on any slot cast whose preview shows an arc or fork reaching an ally **(new lead's call; ARC-8, told plainly and confirmed by the client on 2026-11-20)**. **Widen:** +1 radius on a burst or aura, or +1 length on a cone or line, never past the area cap for your level (at L1–6 only an r1 burst, a cone up to L3 or a line can widen). **Charge:** this Mote cast's damage part is rider-flagged; the at-will rider is still attempted at most once per turn; greyed if the part is already flagged." |
-| **Sculpt II** | M2, 5 | 1 Weft per mode | "Choose two different Sculpt modes on one cast." Adds no dice (`RankAddsNoDice`) |
+| **Whittle** (rank I) | M2, 1 | 1 Weft, declared with the cast; no action | "Choose one mode. **Selective:** allies are left out of this cast, every effect included (damage, conditions, riders, arcs, forks, forced movement); it may be taken on an area cast, or on any slot cast whose preview shows an arc or fork reaching an ally **(new lead's call; ARC-8, told plainly and confirmed by the client on 2026-11-20)**. **Widen:** +1 radius on a burst or aura, or +1 length on a cone or line, never past the area cap for your level (at L1–6 only an r1 burst, a cone up to L3 or a line can widen). **Load:** this Mote cast's damage part is rider-flagged; the at-will rider is still attempted at most once per turn; greyed if the part is already flagged." |
+| **Whittle II** | M2, 5 | 1 Weft per mode | "Choose two different Whittle modes on one cast." Adds no dice (`RankAddsNoDice`) |
 | **Flare** (rank I) | M2, 1 | Reaction, 1 Weft | "When an attack roll is made against you, before its result applies, gain +2 AC against that attack." Joins the armour 10.4 window at **step 3a** as the target's own class-pool-paid ward (ARC-5; `countsAsParry: false`), before step 3b (the Parrying property). Staff Parry (step 1, pool-free) is evaluated first. One reaction AC bonus per attack. Skipped after a gear-sourced disadvantage (Supple) |
 | **Flare II** | M2, 8 | Reaction, 1 Weft | "Flare may instead be taken when you roll an **initial save** against a hostile ability, with the roll known: +2 to that save." Same reaction. Not on repeat saves, hazard-edge saves or concentration checks. At most one reaction save bonus per save. Needs the reaction trigger kind `ownSave` (ARC-19). The package's Insulate folded into a rank, so there is one save ward |
 | **Knit** | M2, 1 | Bonus action, 1 Weft + its sub-limit | "Heal yourself FloorDiv(Recovery, 2). Your Medicine bonus does not apply." `restDefensiveTool`, `chassisOnly`, excluded from every offer. Sub-limit 1 per rest, 2 from L6 **(settled)** |
@@ -939,8 +949,8 @@ offer that adds a row (ARC-21) **(lead's call)**.
   *(illustr.)*.
 - Ends when you are Downed, Incapacitated, Unfocused (psychic rider), or
   its duration ends. Flare and Knit never end it.
-- **Only sustained control concentrates** on this list: Grasping Roots,
-  Slowing, Cordon (`ConcentrationOnlyControl`) **(lead's call)**. No
+- **Only sustained control concentrates** on this list: Grasping Weeds,
+  Dragfoot, Cordon (`ConcentrationOnlyControl`) **(lead's call)**. No
   damage spell concentrates.
 - Proficiency on the check comes only from an offer (concentration
   training, `spellcraft` lane). No class feature at launch, which keeps
@@ -948,7 +958,7 @@ offer that adds a row (ARC-21) **(lead's call)**.
 - **Afterhold** (a trigger offer, 10.3) is the only handoff in the base
   class; the Binder has Belay instead and is barred from Afterhold.
 - The preview shows your concentration odds on every hit against you and
-  "ends your Grasping Roots" on any cast that would start another.
+  "ends your Grasping Weeds" on any cast that would start another.
 
 ### 7.7 Creation picks and the published ladder (classes 7.4, caster column)
 
@@ -1017,16 +1027,16 @@ generalised).**
 > it never shares a turn with a slot cast, a scroll read, a wand charge
 > or Wellspring. It
 > casts at the spell's minimum tier (no upcast) and its own action cost.
-> It takes **one Sculpt mode free** (no Weft), still inside the area
-> cap; the free mode counts toward Sculpt's mode limit, so a second,
-> different mode may be paid under Sculpt II. Your subclass's
+> It takes **one Whittle mode free** (no Weft), still inside the area
+> cap; the free mode counts toward Whittle's mode limit, so a second,
+> different mode may be paid under Whittle II. Your subclass's
 > Overchannel rider applies. **Fused:** while Interplay is enabled, the
 > cast's pair-family damage parts count as both pair families for
 > Interplay: a Fused cast cashes a held mark of either family and never
 > sets a mark. Family-free parts and family-free spells gain nothing.
 
 - **Stage-1 text kept (settled, stage 1 8.5, R-19):** tier ≤ 3, one free
-  Sculpt. The computed brief's "tier 1 or 2" is narrower than the
+  Whittle. The computed brief's "tier 1 or 2" is narrower than the
   approved text and nothing needs it; drafts that gave two free modes
   are rejected (nova, 11.6).
 - **Acceptance criterion (classes 14):** it changes how the primary
@@ -1034,7 +1044,7 @@ generalised).**
   L7 under ARC-9) is one free shaping decision instead of a
   friendly-fire trade; Fused makes the pair "one hand" for a cast.
 - **Bounds:** `SlotlessCastBound` (every slot spell record of tier 1–3,
-  evaluated by `boundModel` at L9 with the best free Sculpt mode plus
+  evaluated by `boundModel` at L9 with the best free Whittle mode plus
   one paid mode under `AreaCapByLevel`, against the `SpellTierBound`
   lines; no upcast; the camp spend; exempt from `CampOptionBound`'s
   damage clause). Nova ≤ 2.0 × p95 non-capstone turn; the p95
@@ -1049,12 +1059,12 @@ generalised).**
 | Pool | L1 | L2 | L3 | L4 | L5 | L6 | L7 | L8 | L9 | L10 |
 |---|---|---|---|---|---|---|---|---|---|---|
 | Slots (camp) | 2 | 3 | 3/1 | 3/2 | 3/2/1 | 3/2/2 | 3/2/2/1 | 3/3/2/1 | 3/3/2/2 | 3/3/3/2 |
-| Slot Recovery (per short rest) | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | **2** | 2 |
+| Slot Renewal (per short rest) | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | **2** | 2 |
 | Weft (rest) | 3 | 3 | 3 | 3 | 4 | 4 | 5 | 5 | 6 | 6 |
 | Knit sub-limit **(settled)** | 1 | 1 | 1 | 1 | 1 | 2 | 2 | 2 | 2 | 2 |
 | Overchannel (camp) | — | — | — | — | — | — | — | — | 1 | 1 |
 | Mote | 1d10+Int | | | | 2 beams | | | | | |
-| Sculpt / Flare rank | I / I | | | | II / I | | | II / II | | |
+| Whittle / Flare rank | I / I | | | | II / I | | | II / II | | |
 
 ### 7.11 Starting kit *(illustr.; 2 potions settled)*
 
@@ -1106,7 +1116,7 @@ L8–10, armour 11 item 1; the reference steps at L5 and L9):
 
 | Lane | Weight | Carries |
 |---|---|---|
-| `sculpt` | 1500‰ | `shape` offers on a named spell (permanent +1 radius or `selective` tag; 7.5 rule 3 applies); `capacity:weft` (at most 1 per run); Sculpt and Flare triggers |
+| `sculpt` | 1500‰ | `shape` offers on a named spell (permanent +1 radius or `selective` tag; 7.5 rule 3 applies); `capacity:weft` (at most 1 per run); Whittle and Flare triggers |
 | `spellcraft` | 1300‰ | Concentration training; `cost` (a tier-1 spell becomes a bonus action once per rest; still a camp spend); `rider` offers on a spell's damage part; spellbook and Overchannel triggers; ignore resistance in one pair family, once per run (EL-1) |
 | `scholar` | 1200‰ | Arcana, Lore, Perception and Mechanics mastery (Tactician reachable as the Perception mastery, never copied); Medicine training |
 
@@ -1114,7 +1124,7 @@ L8–10, armour 11 item 1; the reference steps at L5 and L9):
   `sculpt`; Loremaster on `scholar`; Elementalist on `spellcraft`.
 - **`offerExcludes`:** capacity and cost on Knit and its sub-limit;
   `capacity:overchannel`, `timescale:overchannel`; `timescale:slots.*`
-  (a rest-refilled tier would be a second Slot Recovery);
+  (a rest-refilled tier would be a second Slot Renewal);
   `slotRecovery+1` (ARC-12); capacity and timescale on any turn
   allowance (ARC-26); the ignore-resistance offer while the Elementalist
   owns Purity; armour training past light; shield training; if the Knit
@@ -1128,8 +1138,8 @@ carry `requires`):
 | mote | `moteFray` | **Fray.** When your Mote hits a concentrating hostile, that hit's concentration check is made with disadvantage. Once per turn |
 | mote | `moteVsHeld` | Your Mote's damage part is rider-flagged against a Restrained or Prone target (the at-will rider bound applies) |
 | gust | `gustPull` | Gust may pull 1 toward you instead of pushing |
-| sculpt | `sculptOnScroll` | Sculpt may shape your in-class scroll and wand reads |
-| sculpt | `sculptTemper` | **Temper**, a Sculpt mode (10.3) |
+| sculpt | `sculptOnScroll` | Whittle may shape your in-class scroll and wand reads |
+| sculpt | `sculptTemper` | **Temper**, a Whittle mode (10.3) |
 | spellbook | `afterhold` | **Afterhold** (10.3); `requires: not subclass:binder` |
 | spellbook | `riderOnUpcast` | A spell cast above its minimum tier has its first damage event rider-flagged |
 | Binder, Alembic | 9.1, 9.2 | Subclass entries |
@@ -1150,7 +1160,9 @@ off-turn Weft spend, any trigger that lengthens a stop or hard instance.
 
 `reserveForRestTool` is the one new filter: `whilePoolAtLeastHalf` is a
 policy and cannot sit beside `ifItChangesOutcome`, so it cannot do this
-job. Its reserve is defined in 7.5 rule 9.
+job. Its reserve is defined in 7.5 rule 9. On screen the policies print
+their labels (naming pass 5.9.14: Always / Only if it matters / While
+half full / Never / Ask me); the ids above never show.
 
 **Knit has no automatic policy for the hero** (a bonus action on your
 own turn is not a reaction, and an auto-cast would act for the player);
@@ -1164,7 +1176,7 @@ shown ticked (the player can untick any of them), computed from
 **static data only** (target rank, pips, an ally affected by the cast,
 Weft above the reserve, party kit types and known spells), never from
 scorer terms:
-- Sculpt selective is pre-ticked whenever the preview shows an ally
+- Whittle selective is pre-ticked whenever the preview shows an ally
   affected by the cast: inside its area, reached by an arc or fork, or
   moved by it. It ignores the reserve in that case (7.5
   rule 9).
@@ -1187,13 +1199,13 @@ data) **(lead's call)**:
 
 | Choice | Default |
 |---|---|
-| Pair / key | Tempest / cold; other pairs per 7.3 |
-| Starters | the pair's off-key Shard + Shockwave (Opposed: **Needles (fire)** + Shockwave, key cold: Needles sets the Interplay mark without leaving Burning, so the cold Mote's Chilled lands instead of cancelling) **(new lead's call)** |
-| L2 card order | Snaring → Brand (key) → Needles (off-key) → Grasping Roots → Fan (key); Opposed: Snaring → Brand (key) → Shard (off-key) → Grasping Roots → Fan (key) |
+| Pair / key | Weatherwork / cold; other pairs per 7.3 |
+| Starters | the pair's off-key Shard + Upheaval (Opposed: **Needles (fire)** + Upheaval, key cold: Needles sets the Interplay mark without leaving Burning, so the cold Mote's Chilled lands instead of cancelling) **(new lead's call)** |
+| L2 card order | Snaring → Brand (key) → Needles (off-key) → Grasping Weeds → Fan (key); Opposed: Snaring → Brand (key) → Shard (off-key) → Grasping Weeds → Fan (key) |
 | L3 | Alembic (9.1 says when this may change) |
 | L5 | the pair's Detonation in the next family of the alternation (pairs with lightning: Streak (lightning)) |
 | L6 | Binder Rebind; Alembic Wide Mix |
-| L7 | Skyfall or Slowing; Expert badge on the pair's signature |
+| L7 | Highfall or Dragfoot; Expert badge on the pair's signature |
 | L9 | the offer draw (the scorer's offer value is already shown, settled) |
 | L10 | the tier-4 signature card |
 
@@ -1211,11 +1223,11 @@ in one line, never blocking (starting kits design 4.6, SK-9).
 | Mote | `damage.spell.family`, `rider.weakOrCrit`, `scales.beams` | target / spell attack |
 | Gust | `forcedMovement.push{verbSourced, sourceCount}` | first hostile in line / Fortitude save |
 | Interplay | `rider.flag.next` (source-held mark) | marked hostile / the other family's hit |
-| Sculpt | `area.selective`, `area.radius+1`, `rider.flag.cantrip` | own cast / declared with it |
+| Whittle | `area.selective`, `area.radius+1`, `rider.flag.cantrip` | own cast / declared with it |
 | Temper | `area.allyEndsOnly` | allies in your area / cast |
 | Flare / Flare II | `reactionAc.self+2`, `reactionSave.self+2` | self / attack roll (step 3a), own initial save |
 | Knit | `heal.recovery.half` | self / bonus action |
-| Slot Recovery 2 | `slotRecovery.count` | self / rest completed |
+| Slot Renewal 2 | `slotRecovery.count` | self / rest completed |
 | Overchannel | `cast.slotless.camp`, `area.selective` / `area.radius+1` (one free) | self / camp spend |
 | Fray | `check.disadvantage:concentration` | hit hostile / Mote hit |
 | Afterhold | `condition.linger.onSwap` | own sustained instances / voluntary swap |
@@ -1233,15 +1245,15 @@ slot and no class pool. Same effect kind, different trigger, cost and
 subject; **passes**. Both may be used in one turn (a flask is not a
 Weft spend); Prime's rider gate keeps a target from taking a reagent it
 already holds. The dead-slot watch (the flasks' payout in Alembic
-parties, 9.2 reports) stays. Then: Sculpt widen against Shaping
+parties, 9.2 reports) stays. Then: Whittle widen against Shaping
 (`focus_minor`; never stack, 7.5 rule 3) and the rod's Shape (no overlap
-after the rename); Sculpt charge against Conduit (greyed when flagged);
+after the rename); Whittle load against Conduit (greyed when flagged);
 Temper against the tonic and the Water Flask (different trigger and
 subject); Flare against Parry, Interpose, Guarding, Sworn Guard, Raise,
 Stand Fast (window order); Flare II against Enclosed and Tumble Clear;
-Knit against Second Wind, Catch Breath, Rekindle, Hungering, Stubborn
+Knit against Patch Up, Respite, Take Comfort, Hungering, Stubborn
 Breath; Overchannel against Wellspring; Mote against the Ember and Frost
-Rings and Attuned; Gust against Shove, Bull Rush and Thunderstone
+Rings and Attuned; Gust against Shove, Bowl Over and Blowback Jar
 (Later); Fray against the psychic rider (stronger; the Herald lane keeps
 it).
 
@@ -1255,15 +1267,15 @@ it).
   turn's camp spend. Tradition **arcane** for every entry; the
   consumables 16 [primal] and [divine] notes are hints only (CL-12a).
 - **Areas:** ≤ 25 squares at L1–6 **(settled, ability 8.1)**; ≤ 49 at
-  L7–10 (ARC-9). Not selective unless Sculpted. Chosen-target spells
-  (Slowing, Cordon, Rays, Needles, forks) never choose allies; an arc
+  L7–10 (ARC-9). Not selective unless Whittled. Chosen-target spells
+  (Dragfoot, Cordon, Rays, Needles, forks) never choose allies; an arc
   from any slot spell's hit on a Soaked target still reaches adjacent
-  allies unless the cast is selective (Sculpt allows selective on such a
+  allies unless the cast is selective (Whittle allows selective on such a
   cast, 7.5).
 - **You and your own casts (new lead's call; part of ARC-8, told
   plainly and confirmed by the client on 2026-11-20, 20.1):** you are never affected
   by your own casts' areas, arcs and forks (damage, conditions, riders,
-  forced movement), as Shockwave already states; Tincture is the one way
+  forced movement), as Upheaval already states; Tincture is the one way
   to Soak yourself. The preview and the friendly-fire lines count you as
   unaffected.
 - **Never:** ground zones (terrain changes only through the one
@@ -1317,7 +1329,7 @@ it).
   item's resolve data exactly in the compared fields: base-tier damage
   dice, shape and size, range, save, rider flag, conditions applied and
   the `freezing` gate. Not compared: `upcasts[]`, the attack and
-  difficulty source (the caster's, not the item's), Sculpt
+  difficulty source (the caster's, not the item's), Whittle
   eligibility (SP-7) **(new lead's call)**, the `faltering` field and
   whether the caster may be a target (HR-25; Herald design 8.1, 8.8).
 - **Durations** ≤ 10 turns. **Conditions used:** Burning, Smouldering,
@@ -1358,7 +1370,7 @@ the L2 draw); W = `drawWeight` *(illustr.)*.
   roll, no save, no rider flag; each its own damage event (breaks
   concentration); a weak target still takes one automatic rider. Upcast
   +1 needle per tier. Lightning = **Sparks** (the wand). 1329‰. W 1100.
-- **Shockwave** ★ (Thunderwave shape; family-free; the scroll). Burst r1
+- **Upheaval** ★ (Thunderwave shape; family-free; the scroll). Burst r1
   on you (you unaffected), not selective. Fortitude: 2d8 bludgeoning,
   half on success; on a failure pushed 2 away (non-verb: collisions,
   hazard edges, Teetering; each target its own hit for the 3-square sum,
@@ -1366,16 +1378,16 @@ the L2 draw); W = `drawWeight` *(illustr.)*.
 - **Snaring** ★ (family-free; the wand's spell). One enemy within 8,
   Reflex or Restrained (cords; breakers slashing and fire) `turns:2`; no
   concentration. Upcast tier 2: one more enemy within 8. W 1000.
-- **Grasping Roots** (Entangle on units; family-free; the scroll;
+- **Grasping Weeds** (Entangle on units; family-free; the scroll;
   **concentration**). Burst r1 within 8, not selective. Reflex or
-  Restrained (roots; breakers slashing and fire; Escape at the recorded
+  Restrained (weeds; breakers slashing and fire; Escape at the recorded
   difficulty), sustained max 3. W 800.
 - **Drench** **Exp** (family-free; new). Burst r1 within 8, not
   selective. Reflex: **2d4 bludgeoning**, half on success; on a failure
   Soaked `turns:3`. A willing ally may skip the save (Soaked, no
   damage), which puts out Burning and Smouldering. The bludgeoning part
   gives it standalone value. About 500‰ *(illustr.)*. W 600 (×2 for
-  Tempest, ×0.5 with fire in the pair). Registry: against the Water
+  Weatherwork, ×0.5 with fire in the pair). Registry: against the Water
   Flask (a slot area, not a throw; passes).
 - **Outlining** **Exp** (Faerie Fire shape; family-free; the wand's
   spell). Burst r1 within 12, not selective. Reflex or Revealed 2 turns
@@ -1391,7 +1403,7 @@ the L2 draw); W = `drawWeight` *(illustr.)*.
 - **Rays [F]** (Scorching Ray shape). Three spell attacks within 8, 2d6
   family each, each its own damage event; one rider attempt per target
   per use; the first damage event on an Oiled target pays it out. Upcast
-  +1 ray per tier. Fire = **Scorching Rays**. 1861‰. W 1000.
+  +1 ray per tier. Fire = **Rays (fire)**: the template name, no override (naming pass N13). 1861‰. W 1000.
 - **Lance [F]** (the Rime Lance wand shape). Spell attack range 10: 3d8
   family, rider-flagged. Cold = **Rime Lance**: `freezing` only on a
   Soaked target (Soaked + Chilled → Frozen, fallback Chilled; Steeled
@@ -1416,7 +1428,7 @@ the L2 draw); W = `drawWeight` *(illustr.)*.
 ### 8.4 Tier 3 (from L5; reference 17.3)
 
 - **Detonation [F]** ★ (Fireball shape). Burst r2 within 12, 25 squares.
-  Reflex: 8d6 family, half; rider-flagged. Fire = **Fireball** (like
+  Reflex: 8d6 family, half; rider-flagged. Fire = **Detonation (fire)**: the template name, no override (naming pass N13) (like
   every fire area, it clears oil squares, 8.1). No upcast; no widen
   before L7. 1214‰. W 1300.
 - **Streak [F]** ★ (Lightning Bolt shape; a full template,
@@ -1425,7 +1437,7 @@ the L2 draw); W = `drawWeight` *(illustr.)*.
   **Not rider-flagged** in any variant (as the scroll, SP-7); weak
   targets take their automatic rider. Lightning = **Lightning Line**
   (the `variantOverrides` name). 1214‰. W 1000.
-- **Slowing** (Slow shape; family-free; the scroll; **concentration**).
+- **Dragfoot** (Slow shape; family-free; the scroll; **concentration**).
   Up to 3 enemies you choose in a burst r2 within 12. Will or Slowed
   (Chilled + Dazed, each `[{sustained: {max 3}}, {saveEnds: {Will, cap
   3}}]`). W 1000.
@@ -1438,10 +1450,10 @@ the L2 draw); W = `drawWeight` *(illustr.)*.
 
 ### 8.5 Tier 4 (from L7; reference 17.3)
 
-- **Skyfall [F]** ★ (Ice Storm shape). Burst r2 within 12. Reflex: 2d8
+- **Highfall [F]** ★ (Ice Storm shape). Burst r2 within 12. Reflex: 2d8
   bludgeoning + 4d6 family, half; the family part rider-flagged; the
   bludgeoning shatters Frozen. Cold = **Icefall**. 997‰. W 1200.
-- **Gout [F]** (Cone of Cold shape). Cone L4 from you, 24 squares.
+- **Deluge [F]** (Cone of Cold shape). Cone L4 from you, 24 squares.
   Reflex: 6d8 family, half; rider-flagged. 1171‰. W 1000.
 - **Family signatures** (one record per family; the draw offers the
   pair's two; the L10 draw guarantees one):
@@ -1469,10 +1481,10 @@ the L2 draw); W = `drawWeight` *(illustr.)*.
 
 | Tier | Templates | Family-free | Cards per pair | Concentration | Hard |
 |---|---|---|---|---|---|
-| 1 | Fan, Shard, Brand, Needles | Shockwave, Snaring, Grasping Roots, Drench, Outlining | 9 | Grasping Roots | — |
+| 1 | Fan, Shard, Brand, Needles | Upheaval, Snaring, Grasping Weeds, Drench, Outlining | 9 | Grasping Weeds | — |
 | 2 | Spatter, Rays, Lance | Blinding Flash, Arrest, Squall (+ subclass spell) | 6 | — | Arrest; Rime Lance (conditional) |
-| 3 | Detonation, Streak | Slowing, Unweaving, Undertow | 5 | Slowing | — |
-| 4 | Skyfall, Gout, 2 pair signatures | Cordon | 5 | Cordon | Deep Freeze (conditional) |
+| 3 | Detonation, Streak | Dragfoot, Unweaving, Undertow | 5 | Dragfoot | — |
+| 4 | Highfall, Deluge, 2 pair signatures | Cordon | 5 | Cordon | Deep Freeze (conditional) |
 
 Data: about 60 records generated at build time from templates
 (`spellTemplate.families[]`, `variantOverrides` for scroll and wand
@@ -1487,19 +1499,19 @@ cards, checked by `DrawSatisfiable` (7.7).
 | Setup | Payoff | Notes |
 |---|---|---|
 | Drench, Undertow (Soaked) | Streak, Spatter, Needles, a Mote in cold or lightning | Weak: +half, automatic rider; lightning arcs to every adjacent unit (selective spares allies) |
-| Soaked or Chilled | Rime Lance, Deep Freeze, then an ally's bludgeoning | Shatter: +half, automatic Staggered. A party combo (one camp spend per turn) |
-| Snaring, Grasping Roots, Cordon | Any Reflex area | Fire frees roots and cords; acid frees Cordon's chains (the preview says so) |
+| Soaked or Chilled | Rime Lance, Deep Freeze, then an ally's bludgeoning | Fracturing: +half, automatic Staggered. A party combo (one camp spend per turn) |
+| Snaring, Grasping Weeds, Cordon | Any Reflex area | Fire frees weeds and cords; acid frees Cordon's chains (the preview says so) |
 | Arrest (Stunned) | Detonation, Spatter | Stunned auto-fails Reflex |
-| Shockwave, Squall, Gust next to fixed squares | Water, web, fire, oil | Hazard-edge save; Teetering → next save at disadvantage |
-| Oil squares, flasks | Rays (first event), Pyre, Fireball | Every fire area clears oil squares (the settled terrain row) |
+| Upheaval, Squall, Gust next to fixed squares | Water, web, fire, oil | Hazard-edge save; Teetering → next save at disadvantage |
+| Oil squares, flasks | Rays (first event), Pyre, Detonation (fire) | Every fire area clears oil squares (the settled terrain row) |
 | Fire or cold on allies, through Temper | Thaw a Frozen ally; put out a Burning one | No damage, no payout (10.3) |
 | Interplay | "Spell, then Mote" lands both families' riders | 10.3 |
 
 ### 8.8 Later reserves
 
-Slumber (Asleep), Hushing (Silenced), Holding (Held, the Binder's
-natural deepener), Banishing (Banished), Flicker Step and Far Step (a
-teleport rule), Elemental Endurance (Resisting), a brittle hex
+Drowse (Asleep), Hushing (Silenced), Arrest's Held form (the Binder's natural
+deepener; Holding merged into Arrest), Cast Out (Banished), Flicker Step and Far Step (a
+teleport rule), Elemental Endurance (Resistant (type)), a brittle hex
 (Exposed), a Shocked lightning spell (Shocked), a self aura (the ability
 8.4 aura ruling and consumables 16.7 wording; AM-6), Quench (a
 cleanse-lean ruling), readied casts (non-goal).
@@ -1518,14 +1530,14 @@ information design 14.2). Not decided here until the owner rules.
 
 ### 8.9 Concentration, control and lockout audit
 
-- Concentration: Grasping Roots, Slowing, Cordon. A three-way choice.
+- Concentration: Grasping Weeds, Dragfoot, Cordon. A three-way choice.
 - No combination of Arcanist spells completes a composite lockout (Dazed
   is `oneOf`; Restrained and Blinded deny nothing).
-- **Tests owed:** Slowing's Dazed + an ally's Later Distracted or
-  Nauseated; Arrest + Slowing (hard exclusivity); Arrest + Cinch or Weak
+- **Tests owed:** Dragfoot's Dazed + an ally's Later Distracted or
+  Nauseated; Arrest + Dragfoot (hard exclusivity); Arrest + Cinch or Weak
   Point against the per-fight cap (1.75 expected lost turn starts
   against 2 *(illustr.)*); Rime Lance or Deep Freeze on a Steeled
-  target; a Belayed Restrained + Slowing on the same target.
+  target; a Belayed Restrained + Dragfoot on the same target.
 - Bosses: Restrained, Blinded, Dazed, Stunned, Frozen spend pips (ARC-17
   puts Restrained at or above Dazed's rank); Chilled, Burning, Corroded,
   Soaked, Prone, Revealed land normally. Intended play: minors and Brand
@@ -1536,26 +1548,26 @@ information design 14.2). Not decided here until the owner rules.
 | Item | Tier | classTags | Arcanist record or reason |
 |---|---|---|---|
 | Fan of Cinders | 1 | arcanist | Fan (fire) |
-| Shockwave | 1 | arcanist | Shockwave |
-| Grasping Roots | 1 | arcanist | Grasping Roots ([primal] is a hint) |
+| Upheaval | 1 | arcanist | Upheaval |
+| Grasping Weeds | 1 | arcanist | Grasping Weeds ([primal] is a hint) |
 | Frost Shard | 1 | arcanist | Shard (cold) |
 | Trembling Word | 1 | **herald** (claimed, HR-24) | Fear is the Herald's primary lean; the [arcane] hint moving to a presence class is legal (CL-12a) and stated |
-| Jarring Whispers | 1 | **herald** (claimed, HR-24) | Psychic would be a third key |
-| Guiding Radiance | 1 | **Later** (declined, HR-24; Votary or Hexer) | Radiant third key |
+| Grating Murmur | 1 | **herald** (claimed, HR-24) | Psychic would be a third key |
+| Marking Light | 1 | **Later** (declined, HR-24; Votary or Hexer) | Radiant third key |
 | Withering Touch | 1 | **Later** (declined, HR-24; Votary or Hexer) | Necrotic third key |
 | Mending Word | 1 | herald | Stage 1 8.6 binds it |
-| Scorching Rays | 2 | arcanist | Rays (fire) |
+| Rays (fire) | 2 | arcanist | Rays (fire) |
 | Blinding Flash | 2 | arcanist (Herald declined, HR-24) | Blinding Flash |
-| Fireball | 3 | arcanist | Detonation (fire) |
+| Detonation (fire) | 3 | arcanist | Detonation (fire) |
 | Lightning Line | 3 | arcanist | Streak (lightning) |
 | Terror | 3 | **herald** (claimed, HR-24; enemies only for every reader) | Fear |
-| Slowing | 3 | arcanist | Slowing |
+| Dragfoot | 3 | arcanist | Dragfoot |
 | Unweaving | 3 | **arcanist + herald** (one shared record, HR-24) | Unweaving |
-| Icefall | 4 | arcanist | Skyfall (cold) |
-| Blight | 4 | **Later** (Rootwarden; HR-24) | Necrotic third key |
+| Icefall | 4 | arcanist | Highfall (cold) |
+| Wilt | 4 | **Later** (Rootwarden; HR-24) | Necrotic third key |
 | Wand of Sparks | 1 | arcanist | Needles (lightning) |
 | Wand of Outlining | 1 | arcanist (Herald declined, HR-24) | Outlining |
-| Wand of Snaring | 1 | arcanist | Snaring. Its "never on floor-1 carriers" restriction is read as a loot rule only; the consumables owner confirms |
+| Wand of Fetters | 1 | arcanist | Snaring. Its "never on floor-1 carriers" restriction is read as a loot rule only; the consumables owner confirms |
 | Wand of Rime Lance | 2 | arcanist | Lance (cold). Consumables 16.5 / 19's "only repeatable hard-capable item, floor 3+" note is updated: the class Rime Lance exists from L3. The wand's "Steeled, depth gates and resolve apply" is amended to "Steeled and resolve apply" (the conditions 7.2 depth gates are monster-against-party; 8.1), so the wand and the class variant agree under `VariantIsScroll` (ARC-24) **(new lead's call)** |
 
 **The audit closes now:** every item is mapped, or defaults to Later
@@ -1583,7 +1595,7 @@ of 8; reading 3. **(lead's call)**
 ### 9.1 BINDER (M2): "it stays where I put it"
 
 **Identity.** Woven-force cords and sigil-shackles. The reliable
-controller: it keeps the *group* tied up, passing control from foe to
+Hinderer: it keeps the *group* tied up, passing control from foe to
 foe, and never locks one foe forever. Deepens the control primary lean
 through `controlDuration` **(settled card: "longer and more reliable
 control, never chained on one target")**.
@@ -1600,7 +1612,7 @@ movement as a lean (Reel is a tool).
   reads unless `cinch.onScroll`). Instance fields `binderControl`,
   `sourceUnitId`.
 - **Fetter:** Binder control whose condition denies no turn part and is
-  not hard: Restrained and Blinded at M2 (Rooted and Grounded join when
+  not hard: Restrained and Blinded at M2 (Tangled and Grounded join when
   they ship). Tag `fetter`.
 - **Stop:** Binder control that is a turn-part major (Dazed and Later
   ones) or hard. **Stops gain reliability only, never duration.**
@@ -1611,7 +1623,7 @@ movement as a lean (Reel is a tool).
   > Action. One creature within 10. **Will** save. On a failure,
   > Restrained (binding `arcaneShackle`; breaker acid; escape difficulty
   > your spell difficulty), `turns:2`. No concentration, no damage, no
-  > rider. **Upcast tier 3, Coffle (L5):** two creatures within 10 of
+  > rider. **Upcast tier 3, Lashed Pair (L5):** two creatures within 10 of
   > you and within 4 of each other, each saving separately.
   - Will punishes brutes and makes Cinch useful (a Restrained target's
     Reflex is already at disadvantage). Acid pairs break their own
@@ -1650,7 +1662,7 @@ movement as a lean (Reel is a tool).
     or `slippedFrom` set is excluded from the cast's major and hard
     `condition.apply` parts **before saves are rolled**. It still takes
     the cast's damage and minor parts, and still saves if the spell has
-    other effects on a failure. For a bundle (Slowing's Chilled + Dazed)
+    other effects on a failure. For a bundle (Dragfoot's Chilled + Dazed)
     only the major and hard components are dropped; the Chilled still
     applies on a failed save. The preview greys the dropped part with
     its reason ("already bound by you"); Cinch (a) and `castDefaults`
@@ -1660,7 +1672,7 @@ movement as a lean (Reel is a tool).
 (b) also covers Escape checks against your Restrained. **Cinch III
 (L7):** the limit becomes a per-target round count; once per rest one
 Cinch on a **fetter** costs no Weft (a cost waiver, SH-4; never on hard
-control, classes 6.1 item 2). **Art I, Coffle (L5)**; **Art II, the
+control, classes 6.1 item 2). **Art I, Lashed Pair (L5)**; **Art II, the
 Overchannel rider (L9):** an Overchannelled spell that applies Binder
 control makes every target's initial save at disadvantage (no Weft,
 outside the allowance, no damage).
@@ -1718,13 +1730,13 @@ answered by its own lever (11.8 lever 1) and its per-row changes.
 with 1 / 2 / 3 slots: base 17 / 34 / 50%, Binder 21 / 41 / 52%, Binder +
 Cinch 34 / 64 / 71%; Slipped caps near 75%. Pips: 2 pips take 4.0
 qualifying casts, 2.7 with Cinch. Camp share at L10 about 60% with Slot
-Recovery 2. No Binder record carries `damage.*`.
+Renewal 2. No Binder record carries `damage.*`.
 
 **`effectKinds` (registry; classes 14) (new lead's call):**
 
 | Feature | effectKinds | Subject / trigger |
 |---|---|---|
-| Shackle / Coffle | `condition.apply:restrained{binderControl}` | one (Coffle: two) hostile(s) / Will save failed |
+| Shackle / Lashed Pair | `condition.apply:restrained{binderControl}` | one (Lashed Pair: two) hostile(s) / Will save failed |
 | Cinch (a) / (b), II, III | `save.disadvantage:initial`, `save.disadvantage:repeat`, `check.disadvantage:escape` (II), `cost.waiver.perRest` (III) | target of your Binder control / declared with the cast; own turn on a bound foe |
 | Fastness | `condition.duration.override{graceTurns}` | your fetter on a non-Unyielding hostile / on application |
 | Belay | `condition.linger.onConcentrationEnd` | fetters your concentration sustains / concentration ends |
@@ -1785,7 +1797,7 @@ second prime per round.
     (from any source).
   - **Rider slot (ALM-5):** Prime is that hit's rider on its target (a
     weak-target automatic rider greys it; on a crit, Prime **or** the
-    crit rider; a Sculpt charge competes for the slot), but it does not
+    crit rider; a Whittle load competes for the slot), but it does not
     count toward the at-will once-per-turn rider bound.
   - **One Alembic effect per hit:** at most one of Prime, Splash,
     Reagent Surge's free prime or a Runoff leap on a target per hit.
@@ -1835,7 +1847,7 @@ second prime per round.
     returns to the client **(new lead's call)**.
 - **Catalyse** (tier 2, always known):
   > Action. Burst r1 within 8. 3d6 family (variant fixed when gained),
-  > Reflex half, rider-flagged, not selective unless Sculpted. Each
+  > Reflex half, rider-flagged, not selective unless Whittled. Each
   > target holding Soaked or Oiled from any source saves with
   > **disadvantage** and takes this cast's family rider
   > **automatically** (one rider per target) **where the conditions 19
@@ -1862,8 +1874,8 @@ second prime per round.
   lead's call): Prime is pre-ticked on a Mote hit when **all** hold:
   1. it is the first Prime opportunity this round and the target is a
      non-minion;
-  2. the hit lands no rider of its own: no Interplay cash-in, Sculpt
-     charge, crit rider or weak-target automatic rider (Prime would
+  2. the hit lands no rider of its own: no Interplay cash-in, Whittle
+     load, crit rider or weak-target automatic rider (Prime would
      displace it);
   3. **a payer is available:** the reagent's payer count is at least 1,
      where payer count = your known slot spells whose rider the reagent
@@ -1879,7 +1891,7 @@ second prime per round.
      or Corroded).
 
   **Default reagent:** the one with the higher payer count; on a tie,
-  the pair's entry in `pairDefaults`: Tempest Soak; Ruin Oil; Flux Oil
+  the pair's entry in `pairDefaults`: Weatherwork Soak; Ruin Oil; Flux Oil
   with the fire key, Soak with the lightning key; Scour Soak; Etch Soak;
   Opposed Oil. A reagent with payer count 0 is never pre-ticked.
 
@@ -1995,7 +2007,7 @@ choice of 2; an L9 Overchannel rider).
 
 - **The one rule:** your damage Studies the enemy. Picks the information
   ribbon as a lean; an information reliance report is owed.
-- **L3:** **Dissect** (tier 2 [F]; spell attack range 10, 4d8,
+- **L3:** **Lay Bare** (tier 2 [F]; spell attack range 10, 4d8,
   rider-flagged; on a hit the type is Studied with no roll; 1595‰).
   **Field Notes** (`studyRider`; turn allowance once per round): a
   damaging hit on an enemy of a type not yet Studied this fight makes a
@@ -2034,7 +2046,7 @@ choice of 2; an L9 Overchannel rider).
   use the kind):** "ignores resistance" applies after the ladder and the
   cancel rule: a final Resistant reads Normal, never Weak; covers trait
   and layer resistance (the layer stays unbroken); never condition-based
-  shifts (Soaked's fire resistance, Frozen's shell, Resisting,
+  shifts (Soaked's fire resistance, Frozen's shell, Resistant (type),
   Shielded); never immunity; `IgnoreResistanceSources ≤ 1` per hero.
 - **L3:** **Crux** (tier 2, heart family only; spell attack range 10;
   fire, lightning, acid 4d8 ≈ 1600‰; cold 3d6 + the freeze branch ≈
@@ -2101,15 +2113,15 @@ unrevealed traits marked uncertain):
    affected unit, allies included ("ends Burning on Bram (ally)";
    "dries Soaked: no Burning");
 2. payouts ("Oiled: +half, Burning band 2"; "Soaked: cold weak,
-   automatic Chilled"; "Frozen: shatter +half, Staggered");
+   automatic Chilled"; "Frozen: Fracturing +half, Staggered");
 3. transforms with fallback and gates ("Will Freeze"; "Steeled: falls
    back to Chilled"; "Boss: spends a pip");
 4. every unit an arc or fork reaches;
 5. forced movement: destination, tie-break, collisions, hazard-edge
    odds, "Teetering on success", destination square conditions;
-6. concentration: "ends your Grasping Roots"; the target's break odds;
+6. concentration: "ends your Grasping Weeds"; the target's break odds;
 7. spellbook: "a short rest returns {n} slot(s) of tier 2 or lower" when
-   Slot Recovery covers a spend (n from data);
+   Slot Renewal covers a spend (n from data);
 8. Interplay: "Interplay: Chilled lands" on a marked target (suppressed
    while `interplay.enabled` is off);
 9. the Alembic's inert rule: "your at-wills (bolt and weapon attacks)
@@ -2142,9 +2154,9 @@ change ARC-18):
 
 **Data rules (new lead's call):**
 1. **Only pair-family damage parts set or cash.** A physical part
-   (Shard's piercing primary, Skyfall's bludgeoning) and family-free
+   (Shard's piercing primary, Highfall's bludgeoning) and family-free
    spells never do; in a mixed spell the family part is the one that
-   counts (Shard: the burst; Skyfall: the family part).
+   counts (Shard: the burst; Highfall: the family part).
 2. **A target counts** when it takes more than 0 damage from such a
    part, by attack or by save (save-for-half damage counts).
 3. **Within one cast, cashing resolves before setting.** A cast that
@@ -2178,7 +2190,7 @@ change ARC-18):
   no ceiling gain, or if parity drifts; Fused then has no effect and the
   ladder line is dropped. It is not a client question.
 
-**Temper** (Sculpt mode via `sculptTemper`; 1 Weft; replaces selective
+**Temper** (Whittle mode via `sculptTemper`; 1 Weft; replaces selective
 for that cast):
 > Allies in the area take no damage and gain no condition, rider or
 > payout from this cast, and are left out of its forced movement, arcs
@@ -2186,7 +2198,7 @@ for that cast):
 > would trigger still applies to them: fire ends Chilled, Frozen and
 > Soaked, and ends Oiled with **no** payout; cold ends Burning and
 > Smouldering.
-> Shatter never applies under Temper.
+> Fracturing never applies under Temper.
 
 A tool, not a lean. No healing. Per-fight lost-turn cap and Steeled
 unchanged.
@@ -2213,14 +2225,14 @@ value.
 
 **All illustrative; scratch models; simulator owed.**
 
-### 11.1 Parity (weapons 6.4 ≤ 110%; VG-12; worst legal build: fire key, spare Weft on damage, `capacity:weft` at L9–10, Slot Recovery floor-averaged as rest power)
+### 11.1 Parity (weapons 6.4 ≤ 110%; VG-12; worst legal build: fire key, spare Weft on damage, `capacity:weft` at L9–10, Slot Renewal floor-averaged as rest power)
 
 | Row | L1 | L3 | L5 | L7 | L9 | L10 |
 |---|---|---|---|---|---|---|
 | Greatsword reference (dpr) | 7.9 | 7.9 | 17.3 | 17.3 | 19.2 | 19.2 |
 | Mote | 73 | 73 | 75 | 75 | 74 | 74 |
 | Mote + crit riders | 75 | 75 | 77 | 77 | 78 | 78 |
-| Core worst (charge) | 84 | 90 | 85 | 85 | 102 | 102 |
+| Core worst (load) | 84 | 90 | 85 | 85 | 102 | 102 |
 | Core + Interplay (upper bound, marks counted free) | 87 | 95 | 93 | 95 | 102 | 102 |
 | Fire + acid, free-setup reading | 85 | 93 | 92 | 94 | **117** | **118** |
 | Fire + acid under `SetupAttribution` | 85 | 93 | ≤ 92 | ≤ 94 | ≈ 102 | ≈ 102 |
@@ -2245,7 +2257,7 @@ adds no row here (7.2; cross-document comparison 2026-11-23, CC-76).
 
 All pass `SpellTierBound` except three drafts, now fixed: Spatter at 3d8
 (1282‰ → 3d6, 997‰); Rime Lance under a literal hard clause (1196‰ → the
-SP-1 reading); a tier-4 Fireball upcast (1366‰ → no flat-tier area
+SP-1 reading); a tier-4 Detonation (fire) upcast (1366‰ → no flat-tier area
 upcasts, now the validator `AreaUpcastSkipsFlatTier`, which also moved
 Shard's burst upcast to tier 3 and removed Fan's and Spatter's tier-4
 rows). Under `CampOptionBound` read literally, every area and hard
@@ -2271,7 +2283,7 @@ call):**
   included (Soaked's weakness, Oiled's payout), the conditions 19
   precedence applied (8.1).
 - **`SlotlessCastBound`** evaluates every tier-1–3 slot spell record at
-  L9 with the best free Sculpt mode plus one paid mode, under
+  L9 with the best free Whittle mode plus one paid mode, under
   `AreaCapByLevel`.
 
 `PayoffBound` (≤ 1.5 × the `SpellTierBound` line, **one setup step per
@@ -2283,7 +2295,7 @@ turn and are read as multi-turn combos, bounded by the nova row.
 
 **The 1250‰ area line** is a deliberate departure from enemies 6.2's
 120% **(lead's call)**: at 1200‰ the class variant of the approved
-Fireball scroll (8d6, 1214‰) and Streak fail.
+Detonation (fire) scroll (8d6, 1214‰) and Streak fail.
 
 ### 11.3 Caster AC and sustain
 
@@ -2342,7 +2354,7 @@ recalibration shows its Arcanist impact first (16).
 | Core, Loremaster / Elementalist | 26% | 28–29% | 26% | 27% | 33–34% | 37–38% |
 
 The Binder's gap is control (11.10), not damage. Slot timing is real
-skill: holding tier 2 makes Slot Recovery return a tier-1 slot (3.7
+skill: holding tier 2 makes Slot Renewal return a tier-1 slot (3.7
 against 8.9 per recovery at L3). The gap grows with level, matching
 "depth on floors 2–5".
 
@@ -2357,7 +2369,7 @@ against 8.9 per recovery at L3). The gap grows with level, matching
 
 **Fix:** rerun with the denominator computed under the same setup
 reading as the numerator, and with `PayoffBound` widened; one free
-Sculpt (not two). `SlotlessCastBound` passes.
+Whittle (not two). `SlotlessCastBound` passes.
 
 ### 11.7 Guard sensitivity (reports only; AR-20 stays 11)
 
@@ -2370,11 +2382,11 @@ reports; the binding guards already run at AC 11.
 
 | L | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Core + Slot Recovery 2 at L9 (half-Knit measure) | 26 | 35 | 40 | 47 | 46 | 55 | 52 | 55 | ≈ 55 | ≈ 57 |
+| Core + Slot Renewal 2 at L9 (half-Knit measure) | 26 | 35 | 40 | 47 | 46 | 55 | 52 | 55 | ≈ 55 | ≈ 57 |
 
 - L3–10 in band (with subclasses: Binder about 60%, Alembic about 59% at
   L10). **L1–2 miss low, accepted (ARC-4; agreed, Q2)**, because
-  rest-timed Slot Recovery dominates early. Stage 1's Weft 2 / 3 / 4
+  rest-timed Slot Renewal dominates early. Stage 1's Weft 2 / 3 / 4
   gives 71% at L10.
 - 60% rule: L1 ≈ 197‰ of L10 (≤ 400); increments at 3 + 5 + 9 ≈ 591‰ (≥
   500). Pass. Rerun in the offer value unit owed.
@@ -2397,7 +2409,7 @@ them):**
    only through the basic arm's ceiling near 93–98%.
 4. Flare policy `always` while solo. Moves both arms, as lever 3.
 5. The shared floor-pacing request (boss door at level 3). Moves both
-   arms, as lever 3. **In force:** answered by the Antechamber Catch-up
+   arms, as lever 3. **In force:** answered by the Forecourt Top-up
    (run structure design 9.4, RT-8), so it is already in every run and
    the levers are run out after 1–4 (cross-document comparison
    2026-11-23, CC-72).
@@ -2412,7 +2424,7 @@ or the reagent restriction (rejected, Q3).
 
 ### 11.9 Slots per floor
 
-Casts per floor (camp fill + 2 Slot Recoveries + Overchannel): 4 / 6 / 8
+Casts per floor (camp fill + 2 Slot Renewals + Overchannel): 4 / 6 / 8
 / 10 / 15 / 16 *(illustr.)* at L1 / 3 / 5 / 7 / 9 / 10 (L9 and L10
 corrected, cross-document comparison 2026-11-23, CC-77), about 19% of rounds at L1
 rising to 67% at L10. The Mote carries floor 1; late on, composition
@@ -2438,7 +2450,7 @@ engine work below is on the M1 path.
 
 **The M2 Arcanist, levels 1–10:**
 - the whole core: chassis, Mote, Gust, the element pair and pair cards,
-  slots and Slot Recovery (Slot Recovery 2 at 9), Weft (Sculpt, Sculpt
+  slots and Slot Renewal (Slot Renewal 2 at 9), Weft (Whittle, Whittle
   II, Flare, Flare II, Knit), concentration as settled, Overchannel with
   Fused, offers, lanes and `triggerMenu`;
 - the full spell list (8.2–8.5) and the `classTags` mapping (8.10);
@@ -2460,15 +2472,15 @@ Staggered, Steeled and Concentrating. No new condition.
 
 | Requirement (source) | How met | Status |
 |---|---|---|
-| A rest and a camp pool; 40–60% from camp (ability 6.3; classes 8.2) | Weft, Slot Recovery (rest); slots, Overchannel (camp); 11.8 | L3–10 in band; L1–2 miss accepted (ARC-4, **agreed** Q2) |
+| A rest and a camp pool; 40–60% from camp (ability 6.3; classes 8.2) | Weft, Slot Renewal (rest); slots, Overchannel (camp); 11.8 | L3–10 in band; L1–2 miss accepted (ARC-4, **agreed** Q2) |
 | Exactly one `restDefensiveTool`, ≤ half Recovery, sub-limit 1 / 2 (classes 8.2; DH 21.2) | Knit | Met |
 | ≥ 2 at-wills, one damaging; at-wills never hit allies (ability 6.1, 8.2) | Mote, Gust; ARC-8 for arcs | Met |
-| Slots and Slot Recovery as settled; one camp swap (ability 6.5) | 7.4, 7.3; Slot Recovery 2 (ARC-12) | Met (change) |
+| Slots and Slot Renewal as settled; one camp swap (ability 6.5) | 7.4, 7.3; Slot Renewal 2 (ARC-12) | Met (change) |
 | One camp spend per turn, scrolls included (ability 6.4; CN-11 **agreed**) | Slot casts and Overchannel | Met |
 | Cap of eight; reading ≤ 4 (classes 7.5, 7.6) | 6 / 8; reading 3 | Met |
 | Published ladder (classes 7.4) | 5.5, 7.7; 9 | Met |
 | About 60% of limited power after L1 (classes 5.6) | 197‰ / 591‰ | Met (rerun in offer units owed) |
-| Areas ≤ 25 squares at L1–6; friendly fire unless selective; no ground zones (ability 8.1, 8.2, 8.4 **agreed**) | `AreaCapByLevel`, `SculptCap`, Sculpt selective | Met (+ ARC-9) |
+| Areas ≤ 25 squares at L1–6; friendly fire unless selective; no ground zones (ability 8.1, 8.2, 8.4 **agreed**) | `AreaCapByLevel`, `SculptCap`, Whittle selective | Met (+ ARC-9) |
 | A policy on every reaction; one reaction AC bonus per attack (ability 7.3; armour 10.4, 11) | 7.14; step 3a (ARC-5) | Met |
 | Hard control only from limited abilities; M1/M2 conditions only; no Shocked; budget 32 (conditions 7.1, 16, 18.5) | 8.1 | Met |
 | No teleport, summons, item AC, refills outside rests, second camp spend, healing beyond the rest tool (classes 6.3) | `ForbiddenClassGrant` passes; cost waivers are per rest (SH-4) | Met |
@@ -2514,7 +2526,7 @@ Staggered, Steeled and Concentrating. No new condition.
   changes a pre-tick).
 - The last-slot confirmation fires exactly under 5.2's predicate (a) to
   (e), upcasts included, with the per-tier message from data (Slot
-  Recovery 1 and 2).
+  Renewal 1 and 2).
 - Mote beams: the 7.2 resolution order; a weak-target automatic rider
   uses the once-per-turn bound; Prime offered only after a hit.
 - Interplay data rules (10.3): a physical part never sets or cashes; a
@@ -2522,23 +2534,23 @@ Staggered, Steeled and Concentrating. No new condition.
   cast; the multi-target default mark; the flag off makes the 7.1
   mechanic inert.
 - Selective on a single-target lightning slot spell: Brand (lightning)
-  on a Soaked foe adjacent to an ally, with and without Sculpt.
+  on a Soaked foe adjacent to an ally, with and without Whittle.
 - You are never affected by your own burst (Shard, Catalyse, Grasping
-  Roots cast on an adjacent foe).
+  Weeds cast on an adjacent foe).
 - Temper leaves allies out of forced movement, arcs and forks.
 - The Alembic additions: an own at-will rider against own inert Soaked
   (Burning cancel, Corroded wash: not attempted, attempt not spent); a
   lightning-key crit arc on own Soaked; an Edge (fire) weapon attack on
-  own Oiled; fire and acid Catalyse on Soaked; the default Tempest
+  own Oiled; fire and acid Catalyse on Soaked; the default Weatherwork
   Alembic with an Interplay mark and the Prime pre-tick (no pre-tick);
   no Alembic trigger spends Weft off-turn; Reagent Surge with the
   allowance spent; Splash to an adjacent hostile.
-- The Binder additions: Slowing over your Shackled target (Dazed
+- The Binder additions: Dragfoot over your Shackled target (Dazed
   dropped before the save, Chilled kept); Rebind from a Fastness
   `saveEnds` instance and from a `sustained` one.
 - `DrawSatisfiable` and `AreaUpcastSkipsFlatTier` over the generated
   records; `KnownVariantInPair` as a property test.
-- Dip guards: Overchannel and Slot Recovery 2 absent below class level
+- Dip guards: Overchannel and Slot Renewal 2 absent below class level
   9; Weft, Mote beams and the Knit sub-limit scale by class level.
 
 ## 14. Data, validation and simulator
@@ -2633,7 +2645,7 @@ names feed; `SeedHasTarget` (classes owner) is executed in V12g
 |---|---|
 | **M1** | Nothing. No M1 rule is needed for the Arcanist |
 | **M2** | Section 12: the whole core kit; the full spell list; the Binder and the Alembic; Interplay (behind its lever); Temper, Fray, Afterhold, Flare II; AM-1, AM-2; `SkillExpressionReport`; all validators; the `classTags` mapping |
-| **M2 prerequisites owed by other owners** | EL-1 (the meaning of "ignores resistance"); LM-0 (Study persistence); the arc ruling (ARC-14, written: stat 8.1); ARC-17 (Restrained's rank, written: conditions 12.3); the M2 hazard-edge rules (Reel, Gust, Shockwave; written: conditions 10.1–10.3) (cross-document comparison 2026-11-23, CC-77); the per-theme terrain-presence report (DEP-A1) |
+| **M2 prerequisites owed by other owners** | EL-1 (the meaning of "ignores resistance"); LM-0 (Study persistence); the arc ruling (ARC-14, written: stat 8.1); ARC-17 (Restrained's rank, written: conditions 12.3); the M2 hazard-edge rules (Reel, Gust, Upheaval; written: conditions 10.1–10.3) (cross-document comparison 2026-11-23, CC-77); the per-theme terrain-presence report (DEP-A1) |
 | **M2 cut fallbacks** | Runoff waits on the payout-event hook (Wide Mix alone ships); Interplay can be cut by its lever; if `graceTurns` slips, Fastness lengthens `saveEnds` caps only |
 | **M3** | The Loremaster and Elementalist unlock aspects (the Elementalist first if the resistance-share report is clean) |
 | **M4** | The dip report for Weft 3 at class level 1 (multiclass envelope) |
@@ -2650,7 +2662,7 @@ names feed; `SeedHasTarget` (classes owner) is executed in V12g
 | **Ceiling invisible on run 1.** Floor 1 is mostly Mote turns | The ladder preview and Interplay sell the later depth |
 | **Interplay unproven.** It may mostly fire cancels in the Opposed pair, or drift parity | Modifiers-off rows; the lever (10.3) |
 | **Nova thin cases** (1.89, 1.95) | Rerun under the same-reading denominator (11.6) |
-| **Reading load.** The Weft row holds Sculpt (3 modes), Flare, Knit and a subclass option | Tray greying and waves; the "Complex" label's price |
+| **Reading load.** The Weft row holds Whittle (3 modes), Flare, Knit and a subclass option | Tray greying and waves; the "Intricate" label's price |
 | **The inert rule feels like a bug** | Card text up front; greyed payoff line with its reason; Catalyse as the taught solo combo; ALM-1 tests (13.1) |
 | **Off-pair scrolls** dilute the pair identity | Bounded as consumables; reported |
 | **Dependencies on other owners:** EL-1, LM-0, the arc ruling and ARC-17 (both written; cross-document comparison 2026-11-23, CC-77), the Herald's stage 2 for `classTags` (answered by the Herald design 8.8, HR-24; cross-document comparison 2026-11-23, CC-75), the payout-event hook for Runoff, the ability 8.4 aura ruling | 19; M2 cut fallbacks (15) |
@@ -2674,8 +2686,8 @@ names feed; `SeedHasTarget` (classes owner) is executed in V12g
   until the naming pass.
 - **Not tuning:** the simple-core spine; three things to read; the
   element pair fixed for the run and the Mote key; one camp spend per
-  turn; slot tiers as settled; Slot Recovery 2 as a class feature at 9;
-  Overchannel's approved text (tier ≤ 3, one free Sculpt); priming once
+  turn; slot tiers as settled; Slot Renewal 2 as a class feature at 9;
+  Overchannel's approved text (tier ≤ 3, one free Whittle); priming once
   per round; the inert rule **(agreed, Q3)**; the novice row as a
   required report with its 8-point escalation and no new gate **(agreed,
   Q1)**; the accepted level 1–2 camp miss **(agreed, Q2)**;
@@ -2700,7 +2712,7 @@ the rest were confirmed with the document on 2026-11-20.
 **Narrowings recorded inside this design (no approved text changes;
 recorded in classes 18):**
 - priming stays once per round; Overchannel stays tier ≤ 3 with one free
-  Sculpt;
+  Whittle;
 - the pair is never re-chosen; the camp swap is one spell inside the
   pair;
 - Shocked stays Later; the arc is the lightning rider;
@@ -2712,9 +2724,9 @@ recorded in classes 18):**
 
 | # | Document / section (current status) | Change | Approved by |
 |---|---|---|---|
-| ARC-1 | Classes 8.2 rest-tool table ("Shape, guard or mend?"), 8.5 Arcanist card (Weft bullet, Overchannel example, signature event "a Shape used", and the "Weft report and lever" bullet: "Shape, Flare, Knit"; "leaving Weft for Shape and Flare"), 10 rename table ("Shaping → Weft: Shape") (lead's calls) | Weft "Shape" → **Sculpt**, forced by `NameCollision` with weapons 17.8's rod verb; passed to the naming pass | Lead |
-| ARC-2 | Classes 6.4, single-target damage cap cell and area row; classes 12.2, validator list; weapons 6.4, parity targets, "Any build ≤ 110%" row (the VG-12 text); Shade design 7.5, Arts bullet (SH-5); Vanguard design 7.3 (lead's calls) | Add **`SpellTierBound`** (slot pools: ≤ 2000‰ single target, ≤ 1250‰ per target for areas, a stated departure from enemies 6.2's 120% for the Fireball scroll; hard clause on unconditional hard control only, SP-1), **`SlotlessCastBound`** (Overchannel) and **`PayoffBound`** (one setup step per target, save penalties included; ALM-3); scope `CampOptionBound` to non-slot, non-slotless camp pools; the parity text reads "the nova bound and `CampOptionBound`, or for slot pools `SpellTierBound` and for slotless casts `SlotlessCastBound`" | Lead (required) |
-| ARC-3 | Ability 6.3 (reading); weapons 6.4 parity row; Vanguard design 10.1 (the VG-12 reading); classes 6.4 single-target cap cell | Slot Recovery counts as rest power in the camp share and in VG-12 parity alike (read beside ARC-16) | Lead |
+| ARC-1 | Classes 8.2 rest-tool table ("Shape, guard or mend?"), 8.5 Arcanist card (Weft bullet, Overchannel example, signature event "a Shape used", and the "Weft report and lever" bullet: "Shape, Flare, Knit"; "leaving Weft for Shape and Flare"), 10 rename table ("Shaping → Weft: Shape") (lead's calls) | Weft "Shape" → **Sculpt**, forced by `NameCollision` with weapons 17.8's rod verb; passed to the naming pass (renamed **Whittle**, naming pass NP-32) | Lead |
+| ARC-2 | Classes 6.4, single-target damage cap cell and area row; classes 12.2, validator list; weapons 6.4, parity targets, "Any build ≤ 110%" row (the VG-12 text); Shade design 7.5, Arts bullet (SH-5); Vanguard design 7.3 (lead's calls) | Add **`SpellTierBound`** (slot pools: ≤ 2000‰ single target, ≤ 1250‰ per target for areas, a stated departure from enemies 6.2's 120% for the Detonation (fire) scroll; hard clause on unconditional hard control only, SP-1), **`SlotlessCastBound`** (Overchannel) and **`PayoffBound`** (one setup step per target, save penalties included; ALM-3); scope `CampOptionBound` to non-slot, non-slotless camp pools; the parity text reads "the nova bound and `CampOptionBound`, or for slot pools `SpellTierBound` and for slotless casts `SlotlessCastBound`" | Lead (required) |
+| ARC-3 | Ability 6.3 (reading); weapons 6.4 parity row; Vanguard design 10.1 (the VG-12 reading); classes 6.4 single-target cap cell | Slot Renewal counts as rest power in the camp share and in VG-12 parity alike (read beside ARC-16) | Lead |
 | ARC-4 | Classes 8.2, camp-pool chassis bullet; classes 11.B, camp-share row; ability 6.3; Vanguard design 10.4 (VG-13); Shade design SH-28 | The accepted camp-share miss extended to Arcanist levels 1–2 (26% and 35%). **Widens an agreed reading** | **Client (agreed 2026-11-20, Q2)** |
 | ARC-5 | Armour 10.4, "Candidate order" step 3a; Shade design 8.3 (the SH-9 definition) | Step 3a becomes "the target's own class-pool-paid wards" (Sworn Guard, `countsAsParry: true`; Flare, `countsAsParry: false`), both before step 3b | Lead |
 | ARC-6 | Ability 7.3, policy filters and policy classes; ability 11.3 (**agreed**, reading only) | New filter `reserveForRestTool` (reserve 1 Weft while a Knit use is left; a pre-tick that protects an ally ignores it); a new policy class **cast-option defaults** (visible, shown ticked, the player can untick them; static predicates only); the reading that these are not suggestions under 11.3 | Lead; **told plainly, accepted with Q1 (2026-11-20)** |
@@ -2722,8 +2734,8 @@ recorded in classes 18):**
 | ARC-8 | Ability 8.2 (at-wills never hit allies); stat 8.3 ladder (**agreed**); conditions 18.6 Soaked "Effect" line and 19 "ladder" Soaked row | At-will arcs never reach allies (8.2 wins); a selective cast leaves allies out of all its effects, arcs, forks and forced movement included (SP-6), and selective may be taken on any slot cast whose arcs or forks reach an ally; you are never affected by your own casts' areas, arcs and forks | Lead; **told plainly with the approval request (20.1); confirmed by the client 2026-11-20** |
 | ARC-9 | Ability 8.1, area cap | Area ceiling 49 squares at L7–10 | Lead |
 | ARC-10 | Classes 8.5, "At-wills" bullet | Mote = 1d10 + Int, two beams from L5; Gust a line L4 push 1 | Lead |
-| ARC-11 | Classes 8.5, Pools bullet, Weft sub-bullet (*illustr.*) | Weft 3 / 4 / 5 / 6 at L1 / 5 / 7 / 9; Sculpt II at 5; Flare II at 8 | Lead |
-| ARC-12 | Ability 6.5, Slot Recovery bullet; the Arcanist `offerExcludes` | Slot Recovery 2 as an Arcanist class feature at L9; the offer excluded; `timescale:slots.*`, capacity and timescale on Overchannel excluded | Lead |
+| ARC-11 | Classes 8.5, Pools bullet, Weft sub-bullet (*illustr.*) | Weft 3 / 4 / 5 / 6 at L1 / 5 / 7 / 9; Whittle II at 5; Flare II at 8 | Lead |
+| ARC-12 | Ability 6.5, Slot Renewal bullet; the Arcanist `offerExcludes` | Slot Renewal 2 as an Arcanist class feature at L9; the offer excluded; `timescale:slots.*`, capacity and timescale on Overchannel excluded | Lead |
 | ARC-13 | Classes 7.4 (creation defaults, badges); classes 12.1 (record fields); DH 17.7 (confirmation pattern) | `castDefaults`, `defaultRotation` (schema, 5.2), `pairDefaults`, `recommendedPickOrder`, creation warnings, the starter rule, the last-slot confirmation (predicate (a)–(e) and per-tier message, 5.2), the pip glint, the default target filter if lever 1 is used | Lead; **told plainly, accepted with Q1 (2026-11-20)** |
 | ARC-14 | Stat 8.1, lightning rider; ability 9.3; trinkets (Storm Ring arc ruling) | Arc damage = the rider strength band, one damage event per arced unit, no crit, flag or re-arc; an at-will's Soaked arc spread at most once per turn across beams | Lead |
 | ARC-15 | Classes 5.6, `Floor1ClassSpread` "Input" sub-bullet; classes 7.4, row 1 | For the Arcanist, a creation pick is pair × Mote key (12 picks), crossed with the level-3 subclass as classes 5.6 already does; starters held at `pairDefaults`, every legal starter combination printed; the class mean unweighted; content check `StarterDefaultsHaveAnswer` and the starter rule | Lead; **told plainly, accepted with Q1 (2026-11-20)** |
@@ -2767,7 +2779,7 @@ the 32-condition budget.
 
 **Check after applying (lead's call):** a grep for "a Shape used" in
 classes 8.5 finds only history; a grep for "Shape, guard or mend" in
-classes 8.2 finds "Sculpt"; a grep for `CampOptionBound` in weapons 6.4,
+classes 8.2 finds "Whittle" (Sculpt until the naming pass, NP-32); a grep for `CampOptionBound` in weapons 6.4,
 classes 6.4 and 12.2, the Vanguard design and the Shade design finds the
 scope note beside `SpellTierBound`; a grep for "Oiled-plus-fire chain
 needs a slot" in classes 8.5 points to the inert rule; a grep for "Weft
@@ -2801,7 +2813,7 @@ may raise it to two" in ability 6.5 finds the Arcanist exclusion.
 - **The stat-model owner:** EL-1, owed at M2 whatever ships.
 - **The armour owner:** the step-3a wording (ARC-5) with the Shade's
   SH-9.
-- **The consumables owner:** the Wand of Snaring loot reading; the Rime
+- **The consumables owner:** the Wand of Fetters loot reading; the Rime
   Lance note and the wand's "depth gates" words (ARC-24).
 - **The registry owner (trinkets 11):** the remaining rulings named in
   7.15 and Tincture against the Water Flask (ALM-7); Prime against the
@@ -2811,7 +2823,7 @@ may raise it to two" in ability 6.5 finds the Arcanist exclusion.
   Herald design 8.8 (HR-24); the 8.10 values are final (cross-document
   comparison 2026-11-23, CC-75).
 - **The floor-pacing owner:** lever 5 (boss door at level 3), shared
-  with the Shade's request. Answered by the Antechamber Catch-up (run
+  with the Shade's request. Answered by the Forecourt Top-up (run
   structure design 9.4, RT-8): lever 5 is in force, so the levers are
   run out after 1–4 (11.8; cross-document comparison 2026-11-23, CC-72).
 - **Exploration and information (segment 10):** **pending request
@@ -2841,7 +2853,8 @@ may raise it to two" in ability 6.5 finds the Arcanist exclusion.
   sustain sensitivity. The arms become the `Skill` axis of the seeds
   and validation design (6.2; **pending request SV-22**, 5.4).
 - **The ability 8.4 aura ruling:** AM-6 and the self-aura reserve.
-- **Naming pass:** every placeholder name here.
+- **Naming pass:** every placeholder name here. Done: the naming pass
+  design (approved 2026-11-24; NP-32) renamed this document's names.
 - **Lead's checks before data:** every SRD shape in this document
   against SRD 5.2.1 (Ice Knife, Chromatic Orb and Chain Lightning
   first); `NameCollision` over the final names.
@@ -2969,6 +2982,11 @@ triggers them:
 - the naming pass.
 
 ## Appendix A: how the critique findings were resolved
+
+*Names in this appendix are kept as written at approval; the naming
+pass (approved 2026-11-24, NP-32) has since renamed Sculpt (Whittle),
+Tempest (Weatherwork) and Slot Recovery (Slot Renewal), among others
+(front matter).*
 
 **Research conflicts (computed brief against approved text):**
 

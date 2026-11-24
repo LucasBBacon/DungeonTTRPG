@@ -2,6 +2,7 @@
 
 Date: 2026-11-22
 Status: Approved, 2026-11-22
+Names updated by the naming pass (naming pass design `2026-11-24-naming-pass-design.md`, approved 2026-11-24; NP rows listed: NP-36, with its 13.1 cites and the section 5 register rows that name this document).
 Parents (immediate): `2026-11-22-loot-sources-design.md` (loot sources design, "LP" in change ids, "7c" in prose, approved 2026-11-22, **the most recent template**), `2026-11-22-loot-economy-design.md` (loot economy design, "LE", segment 7a, approved 2026-11-22) and `2026-11-22-item-rolls-design.md` (item rolls design, "IR", segment 7b, approved 2026-11-22).
 Other parents: `2026-11-15-dungeon-rpg-design.md` (main design, "MAIN"),
 `2026-11-16-character-stat-model-design.md` (stat model, "STAT"),
@@ -63,7 +64,7 @@ The client's four answers (Q1–Q4, **agreed**, 2026-11-22) are in 0.2: **M2 cro
 
 This document's client questions **Q1–Q4** are local, as in every parent.
 
-**Names are placeholders** until the client naming pass. Every new name was grep-checked case-insensitively as a whole word across the 26 approved documents. Twenty-six collisions forced renames in the proposal (A.5). The check was re-run while writing: the only whole-word hits among the new names are "Seating Chart" and "Last Page", which echo the Long Supper's and the Silk Archive's own approved Obsession prose (RS) and are kept on purpose as theme callbacks, and "strands" as an ordinary verb in two parents, which names no rules piece **(new lead's call)**.
+**Names are placeholders** until the client naming pass. Every new name was grep-checked case-insensitively as a whole word across the 26 approved documents. Twenty-six collisions forced renames in the proposal (A.5). The check was re-run while writing: the only whole-word hits among the new names are "Seating Chart" and "Last Page", which echo the Long Supper's and the Cobweb Archive's own approved Obsession prose (RS) and are kept on purpose as theme callbacks, and "strands" as an ordinary verb in two parents, which names no rules piece **(new lead's call)**.
 
 **Numbers in this document are illustrative** unless a rule says otherwise, and are marked *(illustr.)* where they first appear. Every rate and share comes from the segment 8 toy (8, Appendix B); the simulator owns every published figure. **One exception (new lead's call):** the Fallow window **K = 3** and its restriction to the F1 Curiosity are the client's agreed values (Q1) and are not tuning; a gate miss that would move them returns to the client (14.2).
 
@@ -150,7 +151,7 @@ This document's client questions **Q1–Q4** are local, as in every parent.
   - each F1 theme: 6 standard Curiosities, 2 tool cards and 1 rare (the Wake at parity, authored in M2, agreed, Q2);
   - the shared Shallows pool: 6 F1-eligible cards;
   - each band theme: 4 standard, 2 tool cards, 1 rare and 2 Forecourt Interludes;
-  - the shared Middle pool: 4;
+  - the shared Midwater pool: 4;
   - Supper and Gut: 3 Interludes each;
   - the Heart: 5 Interludes plus the Coat Hooks;
   - shared Interludes: 4;
@@ -270,7 +271,7 @@ Every Curiosity is written into its theme's Law and Obsession. The Dreamer is ne
 | 19 | **Tone guards:** premise tags and the premise test; a cap on domestic props in the Heart; reserved silhouettes and cues; no Portal or container reads; staging (4.5.6, 4.11) | M2 | lead's call (test, reads and staging: lead's call, after the check); EV-25 ⚑ |
 | 20 | **Losing moves the dream:** Afterword lines (M2 lean); Sequels advancing on sight (M3); the Unwoken Roll (M3); never cumulative counts (4.5.8, 4.5.10) | M2 lean / M3 | **agreed, Q1** (Sequels on sight); EV-26 ⚑, EV-27 ⚑ |
 | 21 | **Ripening:** M3-late or M4, under SuccessorParity (4.5.9) | M3-late / M4 | **agreed, Q1**; EV-28 ⚑ |
-| 22 | **M3 meta:** Fragments folded into F-BOSS options; Readings; Omen Retellings; Nightmare Provisos (costs only); Overtures; Easing (4.9) | M3 | lead's call; EV-29 to EV-33 |
+| 22 | **M3 meta:** Fragments folded into F-BOSS options; Readings; Omen Retellings; Peril Provisos (costs only); Overtures; Easing (4.9) | M3 | lead's call; EV-29 to EV-33 |
 | 23 | **Floor-1 variety in parallel:** the Wake at F1PoolParity when its gate passes; F1 Blueprint and boss variety as a production priority (0.1, 5.3) | M2 | **agreed, Q2**; EV-44 ⚑ |
 | 24 | **No mercy:** novelty and memory relief only (4.4.7, 4.4.8) | All | **agreed, Q4**; EV-10 ⚑ |
 | 25 | **Later:** Pledge sources and Testimony; the Hawker's Hour (4.8, 10). Curse cures and bargains **moved to M4** (EV-43; agreed, heirlooms and curses Q5; HL-29; heirlooms and curses design 4.2, 10) | Later; M4 (EV-43) | lead's call; EV-41 to EV-43 |
@@ -343,7 +344,7 @@ Details are from memory unless sourced (Appendix B). "Unsure" marks uncertain re
   - F5 trimmed: 1.
 - FL 13 row 8 hands over Q rooms, the Forecourt micro socket, trader and Pledge tags, and signature rooms.
 - F1 Q room 3 hosts the CL-10 cowable Scavengers on the Circuit and, in the Gaol, a F1LessonLadder lesson.
-- The F1 Forecourt is empty, near-safe, single-inbound, has no Alcove (LG5) and hosts the Catch-up (RS 9.4; FL 6.11 **(agreed)**).
+- The F1 Forecourt is empty, near-safe, single-inbound, has no Alcove (LG5) and hosts the Forecourt Top-up (RS 9.4; FL 6.11 **(agreed)**).
 - LT16: side-room claimants already exceed F1's 2–3 side rooms.
 - LP-11 (pending): an Alcove's default occupant is a set piece where segment 3 offers one.
 
@@ -385,7 +386,7 @@ Details are from memory unless sourced (Appendix B). "Unsure" marks uncertain re
 - RC2: chairs only tucked into tables. RC3: no lock glyph uses a clock face. RC5: the hourglass is the Hour lock's. RC7: horns, alarm bells and the Choir's struck-bronze cue are reserved.
 - RS 7.5: never show or imply the Dreamer, including age. RS 7.6 watch-list. RS risk 14: story by accretion.
 - Theme "wrong details": the Kennel's painted moon never moves; every Wake portrait's eyes are closed; every Wake clock is stopped at the moment of death (RS 8.5).
-- The Bedside Stand is a reserved Viaticum silhouette (LP-14, LP-24).
+- The Washstand is a reserved Parting Fare silhouette (LP-14, LP-24).
 
 **Seeds**
 - Key = (seed, manifest, configuration, unlock snapshot). Shared and daily seeds use the canonical set (R-SEED-5).
@@ -395,7 +396,7 @@ Details are from memory unless sourced (Appendix B). "Unsure" marks uncertain re
 **Clock**
 - The CMP 7.4 gate (party 4, F4–5 median ≤ 20 min) gets no new lever **(agreed)**.
 - Each segment funds its own line: FL-16, TL-38, HZ-27, EP-33, LP-10.
-- Dream Fragments moved to M3 for the clock (CF-M6).
+- Fragments moved to M3 for the clock (CF-M6).
 
 **Saving**
 - MAIN 6.6 **(decided)**: the run save is a snapshot written at safe points; the profile save holds "unlocks, boons and difficulty tier".
@@ -514,7 +515,7 @@ All three judges independently chose the same winner:
   - on a walkable square (RC1+);
   - a clock Landmark anywhere (EV-35).
 - **One Curiosity per room.** **Closed while combat is active anywhere** (the ITEMS 10.9 NotInCombat precedent). **Gone after it resolves:** the prop goes to its inert state, for example a dust sheet over it above head height, never a Portal skin (the residue rule; 4.11) **(lead's call, after the check:** "the Drape is drawn" reused the Drape Portal's skin**)**.
-- **Pools:** each theme's `curiosityKit`, plus shared pools by tier, reusing RS 8.0's tier names: Shallows (F1–2 eligible), Middle (F2–3), Deep (F4) and Forecourt (shared Interludes).
+- **Pools:** each theme's `curiosityKit`, plus shared pools by tier, reusing RS 8.0's tier names: Shallows (F1–2 eligible), Midwater (F2–3), Deep (F4) and Forecourt (shared Interludes).
   - The shared share is the **per-slot probability that the shared pool is chosen over the theme pool**: **min(400‰, shared ÷ (shared + theme))** for Curiosity slots *(illustr.)*, which fixes NF1, and **at most 200‰** for Interlude slots (NF3). The pool roll is defined in 4.10 **(lead's call, after the check)**.
   - Each shared Interlude is legal on at most 2 floors, with at most 1 shared Interlude per run (NF3).
   - Every theme drawable on F2–5 has its own Forecourt Interludes: 2 per band theme (added after the check), 3 for the Supper and the Gut, 5 for the Heart. V16s `PoolCoverage(interlude, floor)` fails while any theme drawable on that floor has an empty Interlude pool **(lead's call, after the check)**.
@@ -550,7 +551,7 @@ All three judges independently chose the same winner:
 - **No-roll thresholds by default** (CC1). This accepts TL-34's threshold principle for options. Passive = 10 + modifier (STAT 6).
 - **Threshold ladder** (TL 6.2's middle rung, *illustr.*): F1 12, F2–3 13, F4 14, F5 15. DCs never scale with party size (CC6).
   - **F1 teaching rung 9 (new lead's call; illustr.).** The proposal's "9 for MECH lit lines" is corrected: MECH cards carry one priced option and no lit option (KR3), so the rung 9 is instead allowed on **at most one lit option per F1 theme pool**, as a teaching rung. In M2 it is the Kennel's K2 only.
-  - **Shared pools read the ladder of the floor they are drawn on (new lead's call).** A Shallows or Middle card's catalogue number is its lowest eligible floor's value; `thresholdByFloor[]` carries the rest (D2 and D5 read 12 on F1 and 13 on F2).
+  - **Shared pools read the ladder of the floor they are drawn on (new lead's call).** A Shallows or Midwater card's catalogue number is its lowest eligible floor's value; `thresholdByFloor[]` carries the rest (D2 and D5 read 12 on F1 and 13 on F2).
 - **Who:**
   - dungeon skills (Arcana, Lore, Mechanics, Athletics, Acrobatics, Perception, Medicine) use the best eligible member, companions included (CC8);
   - **party-movement** Stealth ("slip past", "tiptoe") uses the **worst** member (STAT 5.4);
@@ -574,10 +575,10 @@ All three judges independently chose the same winner:
 - **One rules gain per option (lead's call, after the check).** An option gives exactly one of: a fact, a Grace, a route, or a Strand. In M3 it may add one codex page beside that gain. A Strand is a gain in its own right and is never stacked on another (`OptionShape`). The proposal's double-gain rows (G1, G9, W6, C7, Su4) are split in 5.3.
 - **Facts.** The ENM 14.6 five: F-TRAP, F-SECRET, F-BOSS, F-ROOM, F-KEY. Plus **F-LISTEN** (one room's Listen result, as if listened at its door now) and **F-CACHE** (the contents of one optional, unstepped, non-HE, non-Due container; counted as exposure under LE 6.9; respects CT2 `ContainerArtBlind` and the `known` field; LE and 7c owners).
   - One fact per option, naming its **target** by a selector: the option's referent, the next unvisited room by main-path index, the player's choice, the arena path, or the arena (4.4.2).
-  - **`GainMix` (restated after the check):** a **deck** is a theme's `curiosityKit` Curiosity cards (standard, MECH and rare), or one shared Curiosity pool (Shallows, Middle). Its options are every priced, lit and rolled option; Leave is excluded, and so are Interludes, which are fact-only by definition. An option is fact-only when its one rules gain is a fact (an M3 codex page does not count). Fact-only options are **at most 40%** of a deck's options *(illustr.)*. On the **Graces-off fallback deck** (4.4.3) the ceiling is **50%** *(illustr.)*, a separate threshold **(lead's call, after the check;** told plainly in 14.1**)**. 5.2 lists the per-pool counts, so V16s and the catalogue agree.
+  - **`GainMix` (restated after the check):** a **deck** is a theme's `curiosityKit` Curiosity cards (standard, MECH and rare), or one shared Curiosity pool (Shallows, Midwater). Its options are every priced, lit and rolled option; Leave is excluded, and so are Interludes, which are fact-only by definition. An option is fact-only when its one rules gain is a fact (an M3 codex page does not count). Fact-only options are **at most 40%** of a deck's options *(illustr.)*. On the **Graces-off fallback deck** (4.4.3) the ceiling is **50%** *(illustr.)*, a separate threshold **(lead's call, after the check;** told plainly in 14.1**)**. 5.2 lists the per-pool counts, so V16s and the catalogue agree.
   - **F-BOSS is run-specific** where segment 9 exposes 2–3 seeded boss variables (phase variant, move order, escort, arena hazard placement). Otherwise it is the boss's Lore entry (hook). A veteran still gains something, and it is information, not power.
-  - **Answered by segment 9 (BR-29; M2):** two seeded values per boss, the **Rendition** and the **mirror** (where the Rendition leaves it open), yield three run-specific fact lines: the Rendition and its phase change, the **Guise** (Device and reserve-socket side, worded relative to the entrance) and the **formation**, all draw-free from `BossVariantKey`; each boss authors ≥ 4 facts plus mirror-aware variants (boss rooms design 4.12, 4.10.1).
-  - **F-TREASURE (XI-22; agreed, exploration and information Q5, for the exclusion; M3):** an eighth fact category, one instance `{F-TREASURE, socketId}` in the FactLedger: an unfound field notable at a container socket on the current floor, chosen by its own role-blind selector (tier descending, then the room's macro-grid position, then the container's square; never room role, `roomId`, `portalId` or `socketId`). **Never a secret cache (agreed, exploration and information Q5; cross-document comparison 2026-11-23, CC-120)**, a carried notable, a boxed-lurker container, a Windfall, the Viaticum, the signature cache or an HE reservation, and never on F1; fact channels (Yield, a Curiosity gain) on F2–F5. Output: the room Traced if Unknown, the tier word and the qualifier "plain cache" or "behind risk" from the container's socket class, with the fixed line "says nothing about traps, lurkers, patrols or hazards". At most 2 instances per floor across all channels *(illustr.)*; an empty set reads "Nothing the string can find" and spends nothing. LE owns the selector (exploration and information design 4.6.1).
+  - **Answered by segment 9 (BR-29; M2):** two seeded values per boss, the **Rendition** and the **mirror** (where the Rendition leaves it open), yield three run-specific fact lines: the Rendition and its phase change, the **Guise** (Counterpiece and reserve-socket side, worded relative to the entrance) and the **formation**, all draw-free from `BossVariantKey`; each boss authors ≥ 4 facts plus mirror-aware variants (boss rooms design 4.12, 4.10.1).
+  - **F-TREASURE (XI-22; agreed, exploration and information Q5, for the exclusion; M3):** an eighth fact category, one instance `{F-TREASURE, socketId}` in the FactLedger: an unfound field notable at a container socket on the current floor, chosen by its own role-blind selector (tier descending, then the room's macro-grid position, then the container's square; never room role, `roomId`, `portalId` or `socketId`). **Never a secret cache (agreed, exploration and information Q5; cross-document comparison 2026-11-23, CC-120)**, a carried notable, a boxed-lurker container, a Windfall, the Parting Fare, the signature cache or an HE reservation, and never on F1; fact channels (Yield, a Curiosity gain) on F2–F5. Output: the room Traced if Unknown, the tier word and the qualifier "plain cache" or "behind risk" from the container's socket class, with the fixed line "says nothing about traps, lurkers, patrols or hazards". At most 2 instances per floor across all channels *(illustr.)*; an empty set reads "Nothing the string can find" and spends nothing. LE owns the selector (exploration and information design 4.6.1).
   - **Pending request (XI-23; M3):** a Curiosity option gain of a **Lodestring** (the run-scoped `party.lodestrings` counter, cap 1) as one of its sources; not adopted until the EV owner rules (exploration and information design 4.6.2).
   - **Pending request (XI-27; M2):** `SideRoomPayoffMix` (FL, LP and EV owners): at most 60% *(illustr.)* of side rooms pay loot only; the rest also pay a fact, a shortcut, XP or a pointer (exploration and information design 4.4.6).
 - **Route.** Reveal an existing Hairline or a Latch's far side. A priced extra route to an existing lock (4.4.5). M3: skin an FL-generated Chute (EV-36).
@@ -587,7 +588,7 @@ All three judges independently chose the same winner:
 #### 4.4.2 The FactLedger (change EV-8)
 - One **per-floor, in-run** ledger shared by Yield interrogation, the elite intel line (LE-18), Curiosities, Fragments, Parting Words and the Tithe Bowl.
 - **It records fact instances, not categories (lead's call, after the check):** `known[{category, targetId}]` plus the floor's `bossQueue[]`. Learning one room's Listen never blocks another room's.
-- **`bossQueue` order per floor (BR-29; M2):** no repeats, information only: (1) the signature card (the elite intel line, LE-18, unchanged, first); (2) the Rendition fact; (3) the Guise fact; (4) the formation fact; (5) fixed Lore facts (Rhythm, Device rule, weakness). The Playbill is their home (boss rooms design 4.12).
+- **`bossQueue` order per floor (BR-29; M2):** no repeats, information only: (1) the signature card (the elite intel line, LE-18, unchanged, first); (2) the Rendition fact; (3) the Guise fact; (4) the formation fact; (5) fixed Lore facts (Rhythm, Counterpiece rule, weakness). The Playbill is their home (boss rooms design 4.12).
 - **Fall-through.** Each fact gain carries `fallThrough: [category…]`, by default its own category followed by F-ROOM, F-SECRET, F-TRAP. When the named target is already known, the option takes the next **unknown instance**: first other targets of the same category under the same selector (by main-path index, then room id), then the next category in the list. The preview shows which. If nothing is left, the option shows "Nothing left to learn" and is disabled (honest).
 - **F-TREASURE in the ledger (XI-22; M3):** deduplicated with fall-through like every category; a later instance excludes sockets already pointed at this floor; the mark clears when the target container is opened. Its `TreasureTarget()` output for a paid or earned act is the one listed `KnowledgeLeak` exemption, limited to {room node, tier word, qualifier} (exploration and information design 4.6.1).
 - **Targets are draw-free.** "The next unvisited room" is the lowest main-path index not yet entered (reading, XI-1: "entered" and "unvisited" mean the room's `entered` flag; Chalked or Traced never counts; exploration and information design 4.1.1); a referent comes from EventPlace (4.5.5); "of your choice" lets the player pick among unknown instances at resolve time.
@@ -608,8 +609,9 @@ All three judges independently chose the same winner:
 - **Carrier.** A Grace is the unit's C5 lingering event boon, carried by a new duration form (EV-11, flagged to conditions 13 and 17), specified after the check **(lead's call, after the check)**:
   `eventBoon{payload, trigger: nextCombatStart | nextAttackOrCheck | nextCheck | nextHarm, endsOn: [fired, shortRest, floorExit, arenaSeal]}`. G-Help uses `nextAttackOrCheck`.
 - **Order at the arena.** The arena seal is processed **before** the arena's combat start, so a Grace never fires in the arena: a G-Spur or G-Steady carried to the boss door expires there.
-  - **The arena seal is `ArenaEngaged` (BR-3; M1/M2):** it fires once per floor, at the first of a party unit entering an arena square (doorway squares included) or the boss group noticing a party unit; order on the tick: Antechamber Catch-up (F1, M2+) → `ArenaEngaged` (Graces and event riders end) → Take Places → combat start. A re-engagement fires no new `ArenaEngaged`, but **every arena combat start while `sanctumEngaged` is set processes `endsOn: arenaSeal` again**, so a Grace or rider taken elsewhere on the floor between engagements still ends before the arena fight; Graces cannot be regained in the Sanctum. `arenaSeal` stays as the data id in `endsOn` (an alias); display never says "seal" (boss rooms design 4.2.1).
+  - **The arena seal is `ArenaEngaged` (BR-3; M1/M2):** it fires once per floor, at the first of a party unit entering an arena square (doorway squares included) or the boss group noticing a party unit; order on the tick: Forecourt Top-up (F1, M2+) → `ArenaEngaged` (Graces and event riders end) → Take Places → combat start. A re-engagement fires no new `ArenaEngaged`, but **every arena combat start while `sanctumEngaged` is set processes `endsOn: arenaSeal` again**, so a Grace or rider taken elsewhere on the floor between engagements still ends before the arena fight; Graces cannot be regained in the Sanctum. `arenaSeal` stays as the data id in `endsOn` (an alias); display never says "seal" (boss rooms design 4.2.1).
 - **Target.** Each Grace option names `graceTarget: player | hero | worstStealth`; "player" lets the player pick the unit at resolve time, defaulting to a unit with an empty boon slot (KC4).
+- **Display (naming pass NP-36).** The Grace ids (G-Ward, G-Help, G-Spur, G-Steady) are internal and never printed (naming pass design 4.8); the HUD and card chip shows "Grace: <condition>" (for example "Grace: Warded"), one whole-string key with a named placeholder (naming pass design 7.2).
 - **Replacement.** Per C5, a new boon **replaces** the old. The card names what it would replace ("replaces: <starting boon>").
 - **Telemetry.** `GraceGranted{id, unit, replaced}` and `GraceEnded{id, reason: fired | shortRest | floorExit | arenaSeal | replaced}`.
 - **Cap.** At most 1 Grace per party per floor. Once the cap is reached, a card's Grace option **converts** to its authored `graceFallbackGain` instead of greying out (FC13). The fallback prefers a route or a Strand wherever a fact would push the deck past its fallback `GainMix` ceiling; 5.3 prints every fallback as "[fb: …]".
@@ -627,7 +629,7 @@ All three judges independently chose the same winner:
 | Noise | **Here only**, at the card's square. Generic ENM 12.3 noise resolved by the hearing rules; joining caps hold. Plays only the generic noise cue (6). Never a Lure and never sets the group flag `luredThisFloor` | ≤ 4; `F1NoiseClearOfCircuit`: the printed radius may not reach a Circuit square |
 | HP | **The hero pays by default.** Companions pay only on options that print "any member". **`PaymentFeasibility`:** payable only by a unit whose current HP exceeds the cost. DH 10.4's floor still covers incidental damage (BC3) | ≤ 2 (hero) |
 | Weary 1 | Lingering. Unavailable if the cap of 2 would block it. Universal use needs EV-34 | One card per F1 theme |
-| Theme condition | Lingering Poisoned (Silk, Supper, Gut) or the theme's own riders (4.4.6). Only from the theme's declared `harmfulConditions[]`. Never Scarred | No |
+| Theme condition | Lingering Poisoned (Archive, Supper, Gut) or the theme's own riders (4.4.6). Only from the theme's declared `harmfulConditions[]`. Never Scarred | No |
 | Item offered | The player picks any unequipped carried item meeting a printed family ("a scroll", "any consumable"). Never healing items, the HE-3/4 items, the Due, quest items, curses or **heirlooms** (an heirloom is never a price; HL-4, M3; heirlooms and curses design 4.1.6). New reason **`ItemDestroyed{offered}`**, not LE-4's `dreamedAway` (KC21) | Non-healing consumable only |
 | Malady (**pending request, HL-19; M4**) | Not adopted until the EV owner rules (agreed, heirlooms and curses Q4; heirlooms and curses design 4.3.3): F2–F4 only; a named Malady drawn StateBlind from `event/{floor}/{site}/malady`, its rule and Cast-off deed printed; **the hero pays by default**, a companion only on an option that prints "any member" (priced higher in `curiosityValueTable`), the cost row carrying `payer`; payable only by a unit with no Malady for which the preset is eligible, else greyed with its reason; never on Leave or the free option; never stacked with a Proviso on F2; `registerLock: sincere`; F2 Malady costs inside the `EventDeathShareDelta` gate, else they start on F3 | No |
 | Supply | **Not used in M2.** Options priced in supply were dead (below 50‰) and moved healing supply into buffs (NF8) | No |
@@ -708,7 +710,7 @@ So a second meeting shows R2 in full, as the toy assumed when it counted R2 as f
   1. a price now unaffordable (payment feasibility);
   2. a lit option newly met or newly missed;
   3. the option's referent or seeded target differs from last time ("the hatch now opens onto the guard post");
-  4. what a Grace option would replace now differs from last time ("replaces: your Spur");
+  4. what a Grace option would replace now differs from last time ("replaces: Grace: Spurred"; the chip wording, 4.4.3, naming pass NP-36);
   5. a Strand-setting option now disabled (2 Strands carried).
 - **An authored delta source on every standard F1 card.** Each has at least one option whose target is a referent or a seeded target (4.4.2), or a Grace option, so a delta of kind 3 or 4 is usually available; V16s `F1DeltaSource` checks it **(lead's call, after the check)**.
 - **Footer:** "Last time: you signed." It is pre-highlighted only when no delta exists and **never pre-committed**.
@@ -760,7 +762,7 @@ A MECH card, and any option marked as tied, is tied at generation to a named **r
 - An option may set one Strand. At most 2 are carried at a time, and at most 1 is cashed per floor. While 2 are carried, every option that would set a Strand is disabled under payment feasibility, with the reason shown.
 - **Where a Strand cashes (lead's call, after the check).** The proposal cashed Strands as overlays on the next Forecourt Interlude. The Forecourt is main-path room n−2 (FL LG1), so a fact about the floor arrived just before the arena, about rooms already passed, and often fell through to "Nothing left to learn". Strands now cash in one of two places, recorded as `cashAt`:
   - **`floorEntry` (the default):** on entering the next floor, as a 0-click line on the floor-entry display, with the fact drawn on the map at once. This was already D1's rule (KC13). It adds no stop and no click.
-  - **`coatHooks`:** on F5 at the Heart's **Coat Hooks by the Door**, for payoffs about the final arena (F-BOSS, arena-path F-TRAP). The Coat Hooks **replace** the drawn F5 Interlude whenever a Strand can be cashed there, and are never shown beside it.
+  - **`coatHooks`:** on F5 at the Heart's **Coat Hooks**, for payoffs about the final arena (F-BOSS, arena-path F-TRAP). The Coat Hooks **replace** the drawn F5 Interlude whenever a Strand can be cashed there, and are never shown beside it.
 - **Generation stays run-blind** (KC12, BC12): the cash reads committed run state at floor entry or at offer time, and picks its target draw-free (4.4.2).
 - **Order.** When two Strands could cash, the oldest cashes first; the other waits for the next cash point. A `floorEntry` cash counts toward the 1-per-floor cap.
 - **Every F1 Strand pays off on entering F2** (FC6b).
@@ -804,8 +806,8 @@ A MECH card, and any option marked as tied, is tied at generation to a named **r
   - marks, never a count;
   - forward-looking, never cumulative;
   - a setting to hide memorials (FC11).
-  - **Hub home (CH-14; M3):** the Roll is a hub object at the Stairtop with the **Sitter**, who owns the hub death reaction as the Roll's caption, from a small sincere pool; every limit above is kept, and no figure names the fallen (camp and hub design 4.10, 5.1). The Sitter's selector calls this section's Afterword selector and excludes that line's key family (`AfterwordNoEcho`; camp and hub design 4.15.6).
-- **The Afterword stays on the run-start card, unchanged** (CH-14; `AfterwordExhaustion` untouched); at most one figure reacts to a death per Night: none in M2, the Sitter in M3 (camp and hub design 4.15.6).
+  - **Hub home (CH-14; M3):** the Roll is a hub object at the Stairtop with the **Roll-Reader**, who owns the hub death reaction as the Roll's caption, from a small sincere pool; every limit above is kept, and no figure names the fallen (camp and hub design 4.10, 5.1). The Roll-Reader's selector calls this section's Afterword selector and excludes that line's key family (`AfterwordNoEcho`; camp and hub design 4.15.6).
+- **The Afterword stays on the run-start card, unchanged** (CH-14; `AfterwordExhaustion` untouched); at most one figure reacts to a death per Night: none in M2, the Roll-Reader in M3 (camp and hub design 4.15.6).
 - Never humour on death (pillar 2). Never the Dreamer.
 - Afterword lines never change what is drawn or offered (agreed, Q4).
 
@@ -823,7 +825,7 @@ A MECH card, and any option marked as tied, is tied at generation to a named **r
 - **Never on F1:** supply, theme conditions, riders, curses, rolled options, companions or Pledges, hazards, Landmark ticks.
 - **Lesson axis** (RS 8.2(f)): the Gaol teaches doors, noise and keys; the Kennel teaches the leader, morale and positioning; the Wake teaches tells.
 - **Comic register,** with punchlines in Retellings and Glimpse art.
-- **Nightmare tier 2+ (M3)** may add a cost, never a gain.
+- **Peril tier 2+ (M3)** may add a cost, never a gain.
 - **Gate:** F1 hero deaths stay under 5%. `EventDeathShareDelta` (F1, party 1) ≤ +0.5 pp on the novice arm. `Floor1BossSustain` is unchanged.
 - **Floor-1 variety in parallel (agreed, Q2).** The Endless Wake joins the M2 F1 pool when its RS 8.2 gate passes, at `F1PoolParity`; its catalogue (5.3) is authored to parity in M2 so promotion costs no event work late. F1 Blueprint and boss variety are a production priority flagged to the RS, FL and segment 9 owners (EV-44); segment 8 changes none of their text. **Told plainly after the check:** RS 12's pre-authorised Cut 1 **(agreed, RS Q4)** drops the extra bosses of the Gaol and the Kennel first, which is floor-1 boss variety. If the schedule slips, that cut still applies first unless the client reorders the RS cut lines, and any reorder is an RS change that returns to the client (14.1, 14.2). The client did not reorder the cut lines when it approved this document: the F1-boss cut-order question is carried to segment 9 (boss rooms) as a future item for the client, with no RS change now (14.2). **Answered (agreed, boss rooms Q1, 2026-11-22; BR-26, RS owner applies; M2):** Cut 1 is graded (1a, 1b, Cut 2 with Cut 2R, 1c client-only; boss rooms design 4.10.4), so the question is closed (cross-document comparison 2026-11-23, CC-116).
 
@@ -853,7 +855,7 @@ A MECH card, and any option marked as tied, is tied at generation to a named **r
 3. The F2 Forecourt Interlude becomes a Glimpse.
 4. M3 F4 Curiosities are dropped.
 
-Floor-entry Strand cashes are untouched by every step, and the Coat Hooks survive step 1 (4.5.7). Dream Fragments **replace** F-BOSS options; they never add stops (EV-29).
+Floor-entry Strand cashes are untouched by every step, and the Coat Hooks survive step 1 (4.5.7). Fragments **replace** F-BOSS options; they never add stops (EV-29).
 
 **Told plainly after the check: the repeat cost.** The toy priced every repeat at about 6 s, the Twice-Told card. Under the presentation sequence (4.5.2) a second meeting reads R2 in full, so each card costs one more full read per profile before its repeats get cheap. On the first-10-runs arm, where most meetings are first sights anyway, the lead judges the F1–2 lines still hold (a full R2 read costs what a first sight costs, and the runs 1–3 column already sits at the line), but the toy was not re-run and the simulator must confirm it.
 
@@ -879,13 +881,13 @@ Floor-entry Strand cashes are untouched by every step, and the Coat Hooks surviv
   - A freed captive may offer **Testimony** (one boss fact through the FactLedger) beside Meet and Send home. Flagged to CMP.
   - Model C's M3 Parting-Word Captive is declined. Pledges stay one Later package (told plainly).
 
-### 4.9 M3 meta: codex, Fragments, Readings, Omens, Nightmare
+### 4.9 M3 meta: codex, Fragments, Readings, Omens, Peril
 
 - **Codex (EV-37):** segment 8 co-owns "Curiosities" pages: Retellings collected and options seen, with the exact outcomes already printed on the card. Never power, never gating rule text. Write-only from the run's view. Proposed: RS owns the codex and segment 10 hosts it. **Answered by segment 10 (XI-29; M3):** segment 10 hosts the codex, RS owns it (exploration and information design 4.13, 7).
-- **Dream Fragments (EV-29):** folded into F-BOSS options on Lore thresholds. 0 VP and 0 coin. One boss-fact queue in the FactLedger. Recovers most of the 0.5–1 min per floor.
+- **Fragments (EV-29):** folded into F-BOSS options on Lore thresholds. 0 VP and 0 coin. One boss-fact queue in the FactLedger. Recovers most of the 0.5–1 min per floor.
 - **Readings (EV-30):** TL-34 accepted. One Reading per room, a no-roll threshold, a floor fact. The second F3 Q room's M3 use.
 - **Omens and Moods (EV-31):** an Omen floor may swap a card for its Omen Retelling (kind, not stats). A cost may be the named, visible event that advances a Mood, within HZ 6.9's cap.
-- **Nightmare tiers** (read field: the profile's `nightmareTier`, M3; it drives kind additions only and never changes ladder%, which `difficulty.tier` drives; RS 11.1, MAIN 4.7 (decided)) (cross-document comparison 2026-11-23, CC-84) add **Provisos:** extra printed costs, never better gains ("harder is not richer", LE 6.12). Never on the free option. Ticks or noise only on F1.
+- **Peril tiers** (read field: the profile's `nightmareTier`, M3; it drives kind additions only and never changes ladder%, which `difficulty.tier` drives; RS 11.1, MAIN 4.7 (decided)) (cross-document comparison 2026-11-23, CC-84) add **Provisos:** extra printed costs, never better gains ("harder is not richer", LE 6.12). Never on the free option. Ticks or noise only on F1.
 - **Overtures (EV-32):** a priced option may apply Soaked, Oiled or Revealed to the tied group at its fight's first round.
   - Never on the elite, the Annex, the boss, or a lurker host (for Revealed).
   - F1: Revealed only.
@@ -946,7 +948,7 @@ Floor-entry Strand cashes are untouched by every step, and the Coat Hooks surviv
   - **Checkable after the check (lead's call, after the check):** every Curiosity and Glimpse record carries `domesticProp: bool`, and each Heart card is tagged in 5.3. `HeartBedroomCap` counts the Interlude (or the Coat Hooks, which replace it), and the Glimpses, together for each visit. F5 Glimpses are never domestic props, and the Coat Hooks are re-skinned as giant pegs on a tower-sized wall rail, with no door shown (non-domestic).
   - **No winding, no music box (lead's call, after the check).** Winding is the Lullaby Glyph's reserved cue (TL: "the mobile's dry wind-up click"), so no Heart card or Glimpse uses a wind-up or winding prop, and none is played by the player (the lullaby is heard, never seen played). The proposal's H1 "The Turning Key" is replaced (5.3); `ReservedCues` and KR8 carry the ban.
 - **Figures.**
-  - M2 figures are implied only: hands with a plain cuff at a speaking slot, a lamp and a glove at a booth window above head height, a back in a class-neutral coat seen in a high window, empty hats and coats on a wall rail. No face (RC3). **No faction motif or minion palette** on an implied figure (the LP Truant rule): no striped cuff (the Inmates' cloth) and no queue of guests (the Black-Crepe Guest) **(lead's call, after the check)**. M2 implied figures pass the role-ID gate as "implied figure, not unit".
+  - M2 figures are implied only: hands with a plain cuff at a speaking slot, a lamp and a glove at a booth window above head height, a back in a class-neutral coat seen in a high window, empty hats and coats on a wall rail. No face (RC3). **No faction motif or swarmer palette** on an implied figure (the LP Truant rule): no striped cuff (the Inmates' cloth) and no queue of guests (the Black-Crepe Guest) **(lead's call, after the check)**. M2 implied figures pass the role-ID gate as "implied figure, not unit".
   - M3 brings the **figure frame:** a non-unit map object in a niche, booth or behind glass, never behind a Drape; never on a walkable square; no roster silhouette. It has its **own grammar**, distinct from RC3's faceless mindless units: a flat, paper-cut figure below unit value tier, cropped at the shoulders by its niche, so it shows neither a face nor the keyhole tell. It passes the role-ID gate as "figure frame, not mindless unit" (EV-45) **(lead's call, after the check)**.
 - **Reserved items, never used on Curiosities:**
   - no horns and no bells (RC7, RC9: a silent bell would lie);
@@ -954,12 +956,12 @@ Floor-entry Strand cashes are untouched by every step, and the Coat Hooks surviv
   - no clock-dial object that opens locks (RC3, RC5);
   - no moving painted moon (the Kennel's wrong detail);
   - no open-eyed Wake portrait and no running Wake clock (the Wake's wrong details; see W5 in 5.3) **(new lead's call** for the clock**)**;
-  - no Bedside Stand, container, bait-cache or Windfall silhouette (LP-14, LP-24; `ReservedSilhouette`). A prop that is a container by name (a jar, luggage, a slot, a trough, a bowl) is drawn so it does not read as one: fused into a wall bracket, a rack, or a wall slot with no box body; a purse never appears (RC9: it reads as coin) **(lead's call, after the check)**;
+  - no Washstand, container, bait-cache or Windfall silhouette (LP-14, LP-24; `ReservedSilhouette`). A prop that is a container by name (a jar, luggage, a slot, a trough, a bowl) is drawn so it does not read as one: fused into a wall bracket, a rack, or a wall slot with no box body; a purse never appears (RC9: it reads as coin) **(lead's call, after the check)**;
   - **no Portal kind's silhouette or skin** (Door, Grille, Drape, Latch, Squeeze, Hairline) on any Curiosity prop, Glimpse or resolved state (RC1, RC2) **(lead's call, after the check)**. A door may appear only inside a card's diorama;
   - no wind-up or winding prop on the Heart, and no running hands or ticking on any clock or watch act on any floor: the act is the price chip only (the W5 treatment) **(lead's call, after the check)**.
 - **Staging (RC1, RC1+, RC4; lead's call, after the check).** Every physical act in 5.3 is staged in-world as wall-mounted, dry or lidded, and leaves no residue. Any wet, oily, spilled, shattered or burning moment appears only in the card's diorama. Nothing in the world shows water off its squares, the Oil material, or the fire hue off fire squares, Hot pieces and attacks. KR16 and V16s `StagingRC1` carry this.
 - **Register (told plainly).** The drafts called F1–2 "deadpan" a reading. By RS 7.3's definitions (dry = "deadpan sincerity, no punchline"), that would be a change. **We keep the comic register.** Punchlines live in Retellings and Glimpse art: a full body's punchline is displayed in full at most once per profile, and Twice-Told lines never carry one (4.5.2). Chips and the Twice-Told card use the global skin (RC7).
-  - **Cards that straddle registers (lead's call, after the check).** RS 7.3 sets the register by floor; comic is *allowed* on F1–2, so a dry text is legal on F2 but a comic one is not legal on F3. A card drawable on floors of two registers (every band and Middle card, and the F2–3, F3–4 and F4–5 shared and band Interludes) is written **register-neutral**, in the driest register of its floors (dry for F2–3, absent for F4–5), with no punchline. Its F2 comic beat lives in the theme's F2 Glimpse art. The record carries `registerNeutral: bool`, so `RegisterByFloor` can be checked. The F1 pools and the Shallows (F1–2) keep the comic register in their Retellings. Told plainly: F2 band cards are dry in text.
+  - **Cards that straddle registers (lead's call, after the check).** RS 7.3 sets the register by floor; comic is *allowed* on F1–2, so a dry text is legal on F2 but a comic one is not legal on F3. A card drawable on floors of two registers (every band and Midwater card, and the F2–3, F3–4 and F4–5 shared and band Interludes) is written **register-neutral**, in the driest register of its floors (dry for F2–3, absent for F4–5), with no punchline. Its F2 comic beat lives in the theme's F2 Glimpse art. The record carries `registerNeutral: bool`, so `RegisterByFloor` can be checked. The F1 pools and the Shallows (F1–2) keep the comic register in their Retellings. Told plainly: F2 band cards are dry in text.
 - **Watch-list (RS 7.6).** Death imagery is never suicide imagery; the Wake rare is rewritten (FC12). Invented liturgies only. The church cap is unaffected. Tone review signs off every rare, every Sequel and every Heart card.
 
 ### 4.12 UI hooks (segment 10)
@@ -991,9 +993,9 @@ Floor-entry Strand cashes are untouched by every step, and the Coat Hooks surviv
 - **Camp and hub:**
   - Afterword and keeper lines; Strand display (answered: the Afterword unchanged on the run-start card; keeper M2 service strings, M3 Strand lines only; Strands as cords over the camp fire, M3; CH-14; camp and hub design 2.2, 4.15.6, 5.1);
   - Pledges, Testimony and the Hawker's Hour (Later) (answered: Pledges and Testimony on Muster cards only, never ambient; the Hawker's Hour stays a floor event; Lost Property held; camp and hub design 2.2);
-  - Tithe Bowl fact dedup through the FactLedger (answered: at the Keeper's Cart, dedup unchanged; M3; camp and hub design 2.2, 4.3);
+  - Tithe Bowl fact dedup through the FactLedger (answered: at the Pedlar's Cart, dedup unchanged; M3; camp and hub design 2.2, 4.3);
   - coin owed (held, off) (answered: stays off; camp and hub design 2.2);
-  - the Unwoken Roll and Sequel beats (answered: the Roll's hub home with the Sitter, all limits kept, CH-14, M3; Sequel beats on the run-start card, unchanged; camp and hub design 2.2, 4.10).
+  - the Unwoken Roll and Sequel beats (answered: the Roll's hub home with the Roll-Reader, all limits kept, CH-14, M3; Sequel beats on the run-start card, unchanged; camp and hub design 2.2, 4.10).
 
 **Hooks the parents hand to segment 8, answered (lead's call, after the check).** One row per parent hook (2.2):
 
@@ -1004,7 +1006,7 @@ Floor-entry Strand cashes are untouched by every step, and the Coat Hooks surviv
 | TL-34 Readings; TL 6.12 | Accepted; the second F3 Q room's M3 use (4.9; EV-30) | Segment 8; TL owner; M3 |
 | TL 13 Riddle-lock clues (Hymn, Index, Place-Setting, Story) | **A guaranteed, check-free clue placement whenever the Riddle lock exists on the floor**: a fixed clue host (a wall Glimpse or a clue prop that any party can read, as TL's Hymn rule says a Lore-trained party reads at once), placed by EventPlace by the 4.2 tie-break and never a Curiosity option. Covers all four, the Place-Setting clue included. The proposal's lit-option clues on C1, S4 and H6 are withdrawn | Segment 8 places; TL owns the locks; M3 |
 | TL 13 Hour locks on Landmark ticks | Not segment 8's: TL and HZ own them; segment 8 places no Landmark (EV-35) | TL, HZ |
-| TL 13 Dream Fragments read the threshold rule | Folded into F-BOSS options on Lore thresholds (4.9; EV-29) | Segment 8; M3 |
+| TL 13 Fragments read the threshold rule | Folded into F-BOSS options on Lore thresholds (4.9; EV-29) | Segment 8; M3 |
 | HZ 13 unguarded Dare forms | Not Curiosities: HZ owns Dare rooms, and no Curiosity is placed in one (4.2) | HZ |
 | HZ 13 Moods on the Stratum Card | None in M2 (4.12); handed to segment 10 and HZ; M3 Omen costs may advance a named Mood (EV-31) | Segment 10, HZ; M3 |
 | HZ 13 empty Tide naves as non-combat puzzles | Not M2 Curiosities: HZ owns them; an empty nave may be an M3 Curiosity host if HZ offers it | HZ; M3 option |
@@ -1054,13 +1056,13 @@ Floor-entry Strand cashes are untouched by every step, and the Coat Hooks surviv
 | Kennel Wood | F1 | 6 / 2 / 1 | — | 6 / 16 / 8 / 16 | + successors | none |
 | Endless Wake | F1 (authored in M2; drawn when its gate passes; agreed, Q2) | 6 / 2 / 1 (parity) | — | 6 / 16 / 8 / 16 | + successors | The Wake for You |
 | Drowned Choir | F2–3 | 4 / 2 / 1 | 2 | 4 / 12 (33%) / 6 / 12 (50%) | 6 | none |
-| Silk Archive | F2–3 | 4 / 2 / 1 | 2 | 4 / 12 / 6 / 12 | 6 | The Missing Last Page |
+| Cobweb Archive | F2–3 | 4 / 2 / 1 | 2 | 4 / 12 / 6 / 12 | 6 | The Missing Last Page |
 | Carnival of the Last Evening | F2–3 | 4 / 2 / 1 (1 MECH if EV-11 is not ruled, 4.4.6) | 2 | 4 / 12 / 5 / 12 (4 / 11 / 5 / 11 without Ca4) | 6 | Curtain Call |
 | Long Supper | F4 (F3–4 from M3) | — | 3 | — | + 4 Curiosities | none |
 | Gut of the World | F4 | — | 3 | — | + 3 Curiosities | none |
-| Dreamer's Heart | F5 | — | 5 + the Coat Hooks | — | (the Printed Itinerary moves to the Middle pool as D-R) | none |
+| Dreamer's Heart | F5 | — | 5 + the Coat Hooks | — | (the Printed Itinerary moves to the Midwater pool as D-R) | none |
 | Shallows shared | F1–2 | 6 | — | 4 / 12 (33%) / 6 / 12 (50%) | 10 | Letter, Coat (2) |
-| Middle shared | F2–3 | 4 | — | 3 / 8 (37.5%) / 4 / 8 (50%) | 6 + the Printed Itinerary (rare) | none |
+| Midwater shared | F2–3 | 4 | — | 3 / 8 (37.5%) / 4 / 8 (50%) | 6 + the Printed Itinerary (rare) | none |
 | Forecourt shared Interludes | F2–5 (≤ 2 floors each) | — | 4 | — | 6 | none |
 | Inverted Cathedral | F3–4 | — | — | — | M4: 5 | — |
 
@@ -1076,8 +1078,8 @@ Counts follow 4.4.1's definition of a deck; V16s `GainMix` and `GraceFallbackDec
 | G2 | The Visitors' Slot | Curiosity · residentWant | (a) Pass a non-healing consumable through (offered) → G-Help (your choice of unit) [fb: reveal a Hairline]. (b) Intimidation 12 (hero), 2 ticks: demand the right answer → F-ROOM (next unvisited) | Hands with a plain cuff at a speaking slot, no bars, no face. *R3*: chalk marks on the cell wall, uncounted. Renamed from "the Visitors' Grille" (Grille is a Portal kind) |
 | G3 | The Tally Board | MECH · mechanism | "CHALK OFF A DAY? 6 ticks, noise 2" → the tied unstepped cell padlock opens {fb: F-SECRET} | Replaces Time Served (no clock dial) |
 | G4 | The Slop Hatch | MECH · mechanism | "LIFT THE FLAP? noise 2" → F-LISTEN on the tied adjacent room {fb: F-LISTEN, next unvisited} | A wall-mounted food flap with no opening into the next room |
-| G5 | The Petitions Slot | Curiosity · ritual | (a) Post a non-healing consumable (offered) → Strand *Petitioned* (on entering F2: F-SECRET). (b) Perception 12, 2 ticks: read the petitions through the slot → F-BOSS (run-specific) | Inmates petition against crimes not yet done. A wall slot with no box body |
-| G6 | The Borrowed Hour | Curiosity · lostObject | (a) Wind the backwards watch: Weary 1 (hero) → G-Ward (hero) [fb: reveal a Hairline]. (b) Medicine 12, 2 ticks: time your pulse against it → F-SECRET | The Gaol's one Weary option. Silent: no running hands, no ticking; the act is the chip |
+| G5 | The Petitions Box | Curiosity · ritual | (a) Post a non-healing consumable (offered) → Strand *Petitioned* (on entering F2: F-SECRET). (b) Perception 12, 2 ticks: read the petitions through the slot → F-BOSS (run-specific) | Inmates petition against crimes not yet done. A wall slot with no box body |
+| G6 | The Borrowed Pardon | Curiosity · lostObject | (a) Wind the backwards watch: Weary 1 (hero) → G-Ward (hero) [fb: reveal a Hairline]. (b) Medicine 12, 2 ticks: time your pulse against it → F-SECRET | The Gaol's one Weary option. Silent: no running hands, no ticking; the act is the chip |
 | G7 | The Warders' Rota | Curiosity · place | (a) Rattle the rota board: noise 4 here → Strand *Off the Rota* (on entering F2: F-TRAP). (b) Medicine 12, 2 ticks: read the sick list → F-LISTEN on two Circuit rooms | Every hour on the rota is 3 a.m. |
 | G8 | The Yard Wall | Curiosity · place | (a) Reach over the spikes: hero 2 HP → reveal a Hairline {fb: F-SECRET}. (b) Athletics 12, noise 4 here: vault it → G-Spur (hero) [fb: F-ROOM] | Renamed from "the Exercise Yard Line" (a line on the floor would be a walkable square) |
 | G9 | Your Name on the Charge Sheet | Rare · **selfReference** | (a) Serve the sentence: 8 ticks + noise 2 → Strand *Time Already Served* (on entering F2: F-KEY [payoff added]). (b) Lore 12, hero 1 HP: read the charge sheet → G-Ward (hero) + codex page (M3) [fb: F-BOSS] | A charge-sheet board, not a cell door. Per-class aged gear in the diorama (first to cut: a class-neutral bundle). *R3*: the gear is gone. Renamed from "The Cell With Your Name" |
@@ -1090,13 +1092,13 @@ Gaol Glimpses: chalk calendars counting down to tomorrow; wanted posters dated t
 |---|---|---|---|---|
 | K1 | The Fallen Portrait | Curiosity · residentWant | (a) Straighten the frame: hero 1 HP (splinters) → G-Help (hero) [fb: reveal a Hairline]. (b) Perception 12, 2 ticks: read the claw marks under it → F-LISTEN on the leader-led group's room | A wall frame, empty or turned to the wall, so the master's portrait stays the leader's cue; never the portrait-pole (RC2). No Cow Grace |
 | K2 | The Collar With No Dog | Curiosity · lostObject | (a) Write a name on the tag: hero 1 HP (the buckle bites) → Strand *Collared* (on entering F2: F-TRAP). (b) Lore 9, 2 ticks: copy a name off the kennel nameplates → F-LISTEN on one Pack room | Not your name. The Kennel's pilot Strand. The Kennel's one F1 teaching rung, priced (4.3.2) |
-| K3 | The Kennel Book | MECH · mechanism | "READ THE LAST PAGE? 4 ticks, noise 2" → F-LISTEN on the tied room {fb: F-LISTEN, next unvisited} | — |
+| K3 | The Kennel Book | MECH · mechanism | "READ THE END? 4 ticks, noise 2" → F-LISTEN on the tied room {fb: F-LISTEN, next unvisited} | — |
 | K4 | The Lodge Weathervane | MECH · mechanism | "TURN THE VANE? 4 ticks, noise 2" → reveal the tied Hairline {fb: F-SECRET} | Replaces the Moon Crank. The moon never moves |
 | K5 | The Hunt Card | Curiosity · residentWant | (a) Sign on as a beater: noise 4 here → G-Spur (your choice of unit; choose your ground) [fb: reveal a Hairline]. (b) Intimidation 12 (hero), 2 ticks: strike out the Houndmaster's name → F-BOSS | The quarry is "the one that got away", not you |
 | K6 | The Gamekeeper's Board | Curiosity · place | (a) Pin on a rosette: offer a non-healing consumable → G-Ward [fb: F-TRAP]. (b) Medicine 12, 2 ticks: follow the blood trail drawn on the board → reveal a Hairline {fb: F-ROOM} | — |
 | K7 | The Unfinished Pedigree | Curiosity · ritual | (a) Add a line: 6 ticks + noise 2 → Strand *Pedigreed* (on entering F2: F-ROOM). (b) Athletics 12, hero 1 HP: drag the stud book off the high shelf → the tied Latch's far side {fb: F-ROOM} | — |
 | K8 | The Feeding Trough | Curiosity · place | (a) Tip it into the wall drain: noise 4 here → G-Help (your choice of unit) [fb: reveal a Hairline]. (b) Medicine 12, 2 ticks: smell what is off → F-TRAP (next unvisited) | Wall-mounted; it tips into a wall drain, no spill |
-| K9 | The Last Hound | Rare · residentWant | (a) Kneel by the coat: hero 2 HP → F-BOSS + codex page (M3). (b) Mechanics 12, noise 4 here: read the brass tag → G-Ward (hero) [fb: F-ROOM] | A coat on a hook and a still shadow, no face, no bowl; never Old Ragged's surcoat (IR-13); fiddle drone, no horns |
+| K9 | The Last Hound | Rare · residentWant | (a) Lower your head by the coat: hero 2 HP → F-BOSS + codex page (M3). (b) Mechanics 12, noise 4 here: read the brass tag → G-Ward (hero) [fb: F-ROOM] | A coat on a hook and a still shadow, no face, no bowl; never Old Ragged's surcoat (IR-13); fiddle drone, no horns |
 
 Kennel Glimpses: antlers and empty frames (no portraits); leashes coiled and hanging, never pulled taut into a wall (the Horn Post Cord); rain only in the backdrop; muddy pawprints climbing toward the painted moon. The "Horn Left Hanging" is cut (RC7).
 
@@ -1130,11 +1132,11 @@ Wake Glimpses: portraits with closed eyes; clocks stopped at the hour; empty hat
 | C-I1 | The Damp Order of Service | Interlude, F2–3 | "Read the last verse? 2 ticks" → arena-path F-TRAP |
 | C-I2 | The Drip Count | Interlude, F2–3 | "Count the drips? 2 ticks" → F-LISTEN on the arena |
 
-**The Silk Archive** (F2–3, M2; register-neutral, dry). Law: webs and silence; fire is the key. Obsession: finish the book; overdue borrowers are shelved.
+**The Cobweb Archive** (F2–3, M2; register-neutral, dry). Law: webs and silence; fire is the key. Obsession: finish the book; overdue borrowers are shelved.
 
 | # | Card | Form · tag | Options |
 |---|---|---|---|
-| S1 | Second Notice | Curiosity · residentWant | (a) Return a scroll (offered) → F-BOSS. (b) Stealth 13, worst member (movement), 2 ticks: tiptoe past the desk → reveal a Hairline {fb: F-ROOM}. Renamed from "Overdue Notice" (Silk Mood) |
+| S1 | Second Notice | Curiosity · residentWant | (a) Return a scroll (offered) → F-BOSS. (b) Stealth 13, worst member (movement), 2 ticks: tiptoe past the desk → reveal a Hairline {fb: F-ROOM}. Renamed from "Overdue Notice" (Archive Mood) |
 | S2 | The Card Catalogue | MECH · mechanism | "PULL ONE CARD? 4 ticks, noise 2" → F-CACHE (else F-ROOM until the LE and 7c owners rule) |
 | S3 | Silence, Please | MECH · ritual | "OBEY? Weary 1 (hero)" → G-Help (`graceTarget: worstStealth`) [fb: reveal a Hairline] |
 | S4 | Finish the Sentence | Curiosity · ritual | (a) Write anything: 4 ticks + noise 2 → Strand *In the Book* (on entering the next floor: F-ROOM [payoff added]). (b) Lore 13, offer a scroll: complete it properly → F-SECRET. The proposal's "(c) Burn the page" is cut (the fire hue, RC4), and the Index Riddle clue is no longer an option here (4.13) |
@@ -1152,9 +1154,9 @@ Wake Glimpses: portraits with closed eyes; clocks stopped at the hour; empty hat
 | Ca2 | Ring Toss | MECH · rolled | "ONE THROW. noise 4 here. Acrobatics vs 13: n% (shown)" → success G-Help; failure nothing more [fb: reveal a Hairline] |
 | Ca3 | The High Mirror | Curiosity · place | The mirror clouds and never shatters. (a) Rap on the glass: noise 4 here → reveal a Hairline (a reflected route) {fb: F-ROOM}. (b) Leadership 13 (hero), Weary 1: take a bow → G-Steady (hero) [fb: the tied Latch's far side {fb: F-SECRET}]. The proposal's "the mirror was a door" is withdrawn (the prop would lie about a passage) |
 | Ca4 | The Fire-Eater's Tip Jar | MECH · ritual | A sealed wall dispenser fused into a bracket; the oil is shown only in the diorama. "OIL YOUR HANDS FOR LUCK?" The hero starts the next fight Oiled (rider; EV-11) → G-Ward (hero) [fb: reveal a Hairline]. M3 if EV-11 is not ruled |
-| Ca5 | The Applause Machine | Curiosity · mechanism | (a) Take a bow: noise 4 here (the generic noise cue, no applause foley) → Strand *Took a Bow* (on entering the next floor: F-LISTEN, next unvisited). (b) Perception 13, 2 ticks: see who is cranking it → F-LISTEN on the next room |
+| Ca5 | The Applause Machine | Curiosity · mechanism | (a) Wave to the crowd: noise 4 here (the generic noise cue, no applause foley) → Strand *Took a Bow* (on entering the next floor: F-LISTEN, next unvisited). (b) Perception 13, 2 ticks: see who is cranking it → F-LISTEN on the next room |
 | Ca6 | The Fortune Machine | Curiosity · mechanism | (a) Feed it a consumable → F-BOSS. (b) Arcana 13, 2 ticks → F-TRAP |
-| Ca7 | Curtain Call | Rare · **selfReference** | A stub with your name. (a) Stand in the spotlight: 8 ticks + noise 2 → F-BOSS + codex page (M3); the poster, a silhouette, appears as an arena Glimpse (hook, segment 9). (b) Leadership 13 (hero), offer an item as your prop: refuse the role with style → G-Steady (hero) [fb: F-ROOM]. Renamed from "The Last Act" (Wager room) |
+| Ca7 | Curtain Call | Rare · **selfReference** | A stub with your name. (a) Stand in the spotlight: 8 ticks + noise 2 → F-BOSS + codex page (M3); the poster, a silhouette, appears as an arena Glimpse (hook, segment 9). (b) Leadership 13 (hero), offer an item as your prop: refuse the role with style → G-Steady (hero) [fb: F-ROOM]. Renamed from "The Last Act" (the Wager room's name, since renamed The Prop Room, naming pass NP-36) |
 | Ca-I1 | The Running Order | Interlude, F2–3 | "Read the bill? 2 ticks" → F-BOSS |
 | Ca-I2 | The Prompter's Cue | Interlude, F2–3 | "Peek at the cue? 2 ticks" → F-LISTEN on the arena |
 
@@ -1177,7 +1179,7 @@ Wake Glimpses: portraits with closed eyes; clocks stopped at the hour; empty hat
 | Gu-I1 | Noise Complaint | Interlude, substitutive | "KEEP IT DOWN. Knock anyway? noise 4" (the generic noise cue, no knock foley) → F-LISTEN on the arena |
 | Gu-I2 | The To-Let Sign | Interlude, substitutive | "Read the particulars? 2 ticks" → arena F-ROOM |
 | Gu-I3 | Undigested Letters | Interlude, substitutive | 4 ticks → arena-path F-TRAP; or Lore 14, noise 2 → F-LISTEN on the arena. The proposal's F-BOSS is withdrawn (not substitutive, 4.7) |
-| Gu1 (M3) | Rent Due | Curiosity | (a) Pay in kind (offered item) → F-KEY. (b) Intimidation 14 (hero), noise 4 here → G-Ward (hero) [fb: F-ROOM]. Supply price removed |
+| Gu1 (M3) | Rent in Arrears | Curiosity | (a) Pay in kind (offered item) → F-KEY. (b) Intimidation 14 (hero), noise 4 here → G-Ward (hero) [fb: F-ROOM]. Supply price removed |
 | Gu2 (M3) | The Knitted Scar | Curiosity | A purse-shaped scar in the flesh wall. (a) Reach in: hero 4 HP → the tied unstepped strongbox opens early {fb: F-SECRET}. Never HE, the Due or a boxed Gutworm. Renamed from "The Swallowed Purse" (a purse reads as coin, RC9) |
 | Gu3 (M3) | The Chapel Being Digested | Rare | (a) Call into it: noise 6 here → G-Steady [fb: F-ROOM]. (b) Athletics 14, hero 2 HP: climb in → F-SECRET + codex page. No bell rope |
 
@@ -1188,11 +1190,11 @@ Wake Glimpses: portraits with closed eyes; clocks stopped at the hour; empty hat
 | H1 | The Skirting Board | "Ear to it?" 2 ticks | F-LISTEN on the arena. Architectural; the generic UI cue, no click, no melody. Replaces "The Turning Key" (a winding prop: the Lullaby Glyph's reserved cue, a lullaby played, and an implied prior winder) | Substitutive · no |
 | H2 | The High Window | "Look out?" 2 ticks | Arena-path F-TRAP. A giant window seen above head height, no curtain (the Drape skin). Renamed from "The Curtain Gap" | Substitutive · no |
 | H3 | The Bedpost Ladder | "Climb?" 4 ticks | Arena F-ROOM (the arena's layout) | Substitutive · **yes** |
-| H4 | The Coat Hooks by the Door | "Your things, from earlier." | Cash one carried Strand for its named payoff. Shown only when a Strand can be cashed here, and then **instead of** the drawn Interlude. Re-skinned as giant pegs on a tower-sized wall rail, no door shown. Replaces the "Bedside Shelf" (Bedside Stand silhouette) | Exempt (Strand cash; replaces the Interlude, adds no stop) · no |
+| H4 | The Coat Hooks | "Your things, from earlier." | Cash one carried Strand for its named payoff. Shown only when a Strand can be cashed here, and then **instead of** the drawn Interlude. Re-skinned as giant pegs on a tower-sized wall rail, no door shown. Replaces the "Bedside Shelf" (Washstand silhouette) | Exempt (Strand cash; replaces the Interlude, adds no stop) · no |
 | H5 | The Wall That Keeps Its Distance | "Walk toward it?" 4 ticks | Arena-path F-TRAP (a second trap; dedup falls through to arena F-ROOM). The proposal's F-BOSS is withdrawn (not substitutive, 4.7) | Substitutive · no |
 | H6 | The Pinned Notice | "Read it?" 2 ticks | Arena F-ROOM (dedup falls through to arena-path F-TRAP). A giant notice pinned to a bedpost: no book, no story, no fire. Renamed from "The Unread Page" (a bedtime story implies a reader); its lit path is dropped (a pure cost waiver) | Substitutive · **yes** |
 
-Cut: the Glass of Water and the Turned-Down Corner (RS 7.5; FC5, KC19). Moved: the Printed Itinerary (H-R) leaves the Heart for the Middle pool (below).
+Cut: the Glass of Water and the Turned-Down Corner (RS 7.5; FC5, KC19). Moved: the Printed Itinerary (H-R) leaves the Heart for the Midwater pool (below).
 
 **Shared pools**
 
@@ -1202,16 +1204,16 @@ Cut: the Glass of Water and the Turned-Down Corner (RS 7.5; FC5, KC19). Moved: t
 | D2 | Someone Wearing Your Coat | Shallows · **selfReference** | A back in a class-neutral coat, seen in a high window. (a) Follow: 6 ticks → reveal a Hairline (where it went) {fb: F-SECRET}. (b) Leadership 12 on F1, 13 on F2 (hero), noise 4 here: call out → G-Help (hero) [fb: F-ROOM] |
 | D3 | The Stopped Mantel | Shallows · mechanism | (a) Wind it: hero 1 HP (the key bites) → G-Spur (your choice of unit) [fb: F-ROOM]. (b) Mechanics 12, 2 ticks: find the false back → reveal a Hairline {fb: F-SECRET}. Silent; the hands shudder and settle back (the W5 treatment), so it is legal on a Wake or Gaol floor |
 | D4 | The Spare Key on a String | Shallows · lostObject | (a) Take it: noise 4 here → F-KEY. (b) Stealth 12 (acting unit; single-actor manipulation), 2 ticks: lift it off its string → the tied unstepped ordinary lock opens {fb: F-SECRET} |
-| D5 | The Night Usher | Shallows · residentWant | A lamp and a glove at a booth window above head height. (a) Leave him luggage (an offered non-healing consumable) → G-Ward (your choice of unit) [fb: reveal a Hairline]. (b) Leadership 12 (hero), 2 ticks: ask which floor → F-ROOM (next main path). M3: Sequel stage 1. Later: the wanderer Pledge source |
+| D5 | The Usher's Lamp | Shallows · residentWant | A lamp and a glove at a booth window above head height. (a) Leave him luggage (an offered non-healing consumable) → G-Ward (your choice of unit) [fb: reveal a Hairline]. (b) Leadership 12 (hero), 2 ticks: ask which floor → F-ROOM (next main path). M3: Sequel stage 1. Later: the wanderer Pledge source |
 | D6 | The Lantern Left Burning | Shallows · lostObject | (a) Take the light: hero 1 HP → F-LISTEN on the next lurker room. (b) Perception 12, 2 ticks: spot the draught → reveal a Hairline {fb: F-SECRET} |
-| D7 | The Door You Already Opened | Middle · place | A knocker and a nameplate in the last floor's theme on a wall panel; the full door appears only in the diorama. (a) Knock: noise 4 here → F-SECRET. (b) Lore 13, 2 ticks: read the old floor's plate → Strand *Shut Behind You* (on entering the next floor: F-TRAP [payoff added]). M3: Chute skin only per EV-36 |
-| D8 | The Umbrella Stand | Middle · lostObject | No drip. (a) Take an umbrella: noise 4 here (the stand rattles) → G-Ward [fb: reveal a Hairline]. (b) Perception 13, 2 ticks: find the dry one → F-ROOM |
-| D9 | Left Luggage | Middle · lostObject | A left-luggage ticket rack, not a case. (a) Hand in an item (offered) → Strand *Left Luggage* (on entering the next floor: F-ROOM). (b) Leadership 13 (hero), noise 4 here: call the attendant → G-Help [fb: F-SECRET] |
-| D10 | The Wrong Floor Sign | Middle · place | (a) Follow it: 6 ticks → the tied Latch's far side {fb: F-ROOM}. (b) Lore 13, noise 2 here: read the small print → F-SECRET |
-| D-R (M3) | The Printed Itinerary | Middle · rare | Printed type, no hand; it lists the floors of this run by theme, never the player's choices. (a) Read it through: 6 ticks + noise 2 → F-BOSS + codex page. Moved from the Heart (it implied a watcher at the sleeper's bedside) |
+| D7 | The Door You Already Opened | Midwater · place | A knocker and a nameplate in the last floor's theme on a wall panel; the full door appears only in the diorama. (a) Knock: noise 4 here → F-SECRET. (b) Lore 13, 2 ticks: read the old floor's plate → Strand *Shut Behind You* (on entering the next floor: F-TRAP [payoff added]). M3: Chute skin only per EV-36 |
+| D8 | The Umbrella Stand | Midwater · lostObject | No drip. (a) Take an umbrella: noise 4 here (the stand rattles) → G-Ward [fb: reveal a Hairline]. (b) Perception 13, 2 ticks: find the dry one → F-ROOM |
+| D9 | Left Luggage | Midwater · lostObject | A left-luggage ticket rack, not a case. (a) Hand in an item (offered) → Strand *Unclaimed* (on entering the next floor: F-ROOM). (b) Leadership 13 (hero), noise 4 here: call the attendant → G-Help [fb: F-SECRET] |
+| D10 | The Wrong Floor Sign | Midwater · place | (a) Follow it: 6 ticks → the tied Latch's far side {fb: F-ROOM}. (b) Lore 13, noise 2 here: read the small print → F-SECRET |
+| D-R (M3) | The Printed Itinerary | Midwater · rare | Printed type, no hand; it lists the floors of this run by theme, never the player's choices. (a) Read it through: 6 ticks + noise 2 → F-BOSS + codex page. Moved from the Heart (it implied a watcher at the sleeper's bedside) |
 | I-1 | The Clock With No Hands | Interlude, F2–3 | "Study the face? 4 ticks" → arena F-ROOM. No ticking |
-| I-2 | The Late Mirror | Interlude, F2–3 | "Look? 2 ticks" → arena-path F-TRAP |
-| I-3 | The Lost Glove | Interlude, F3–4 (substitutive on F4) | "Take it down from the hook? 2 ticks" → F-LISTEN on the arena |
+| I-2 | The Late Portrait | Interlude, F2–3 | "Look? 2 ticks" → arena-path F-TRAP |
+| I-3 | The Odd Glove | Interlude, F3–4 (substitutive on F4) | "Take it down from the hook? 2 ticks" → F-LISTEN on the arena |
 | I-4 | The Stair Count | Interlude, F4–5 (substitutive) | "Count them? 2 ticks" → arena-path F-TRAP |
 
 **M3 and M4 themes.** Mirror Court, Ossuary Opera, Moth Wedding, the Ministry of Small Mercies and Tallow Abbey each ship at unlock with at least 4 standard, 2 MECH and 1 rare, plus 2 Forecourt Interludes for each theme drawable on F2–5. Ministry and Tallow are F1-eligible and need the F1 counts (6 / 2 / 1, under `F1PoolParity`). The Inverted Cathedral (M4) gets 5 under the church cap, avoiding the censer-rope Cord and the Collection Plate trap.
@@ -1235,7 +1237,7 @@ Cut: the Glass of Water and the Turned-Down Corner (RS 7.5; FC5, KC19). Moved: t
   | **Total** | | **about 11–12k** |
 
 - About 17k in M3 with R3; about 27k with Ripening *(illustr.; re-estimated after the check)*.
-- Comic Retellings carry the punchlines on F1–2 (the F1 pools and the Shallows); band, Middle and straddling cards are register-neutral (4.11).
+- Comic Retellings carry the punchlines on F1–2 (the F1 pools and the Shallows); band, Midwater and straddling cards are register-neutral (4.11).
 - Tone review for every rare, Sequel and Heart card and every Afterword line, against RS 7.5 and 7.6 and the premise test (4.11).
 - **Briefs before M2 content lock (lead's call, after the check).** The catalogue in 5.3 is a rules sheet, not a writing brief. Before content lock, each text card gets a brief: the premise in one line; the R1 hook; the R2 twist, which changes the image and not just the wording; where the punchline sits (an R2 line or Glimpse art); a Twice-Told line per Retelling; the register for each eligible floor; banned motifs. Each theme gets a Glimpse brief: 8 motifs, its wrong detail or dream device, banned motifs, and a caption register. These are writing deliverables, owned by segment 8 and listed in 16.
 
@@ -1253,7 +1255,7 @@ Cut: the Glass of Water and the Turned-Down Corner (RS 7.5; FC5, KC19). Moved: t
 
 - **Cut order when capacity runs short:** per-class and per-theme variants first (G9 shows a class-neutral bundle; D2 already uses a class-neutral coat; Ca7's poster is a silhouette), then Glimpse rotation variants, then band rares; never F1 or Shallows depth or their R2 (0.1).
 - The figure frame (M3), and Unwoken Roll skins per theme except the Heart (M3).
-- Every new figure or prop passes the M2 readability gates: greyscale, silhouette lineup, tone by depth, and the role-ID rows, which add **"Curiosity prop or Portal"**, **"Curiosity prop or container"**, **"Curiosity prop or bait-cache"**, **"implied figure or unit"** (M2), **"figure frame or mindless unit"** (M3) and, for the Kennel, **"Glimpse or Cord"** **(lead's call, after the check)**. **Camp and hub (CH-12; M3):** a role-ID row "hub coat display vs the Coat Hooks and implied-figure silhouettes"; the hub's coat rack hangs each mantle on its own newel peg, never hooks by a door (camp and hub design 4.8, 6).
+- Every new figure or prop passes the M2 readability gates: greyscale, silhouette lineup, tone by depth, and the role-ID rows, which add **"Curiosity prop or Portal"**, **"Curiosity prop or container"**, **"Curiosity prop or bait-cache"**, **"implied figure or unit"** (M2), **"figure frame or mindless unit"** (M3) and, for the Kennel, **"Glimpse or Cord"** **(lead's call, after the check)**. **Camp and hub (CH-12; M3):** a role-ID row "hub coat display vs the Coat Hooks and implied-figure silhouettes"; the hub's Newel hangs each mantle on its own peg, never hooks by a door (camp and hub design 4.8, 6).
 
 **Audio (restated after the check)**
 - **Card open and First Telling:** the RC7 global UI timbre, a soft "paper turn" on open and a "soft swell" on a First Telling. Neither is a chime (the floor-1 small-hour chime is a reserved RC7 cue) nor a sting (stings are reserved for bosses, Stir announcements and the pending Choir Ritual). Both join the audio blind-ID test at ≥ 85% *(illustr.)*. Twice-Told cards are silent.
@@ -1282,7 +1284,7 @@ Cut: the Glass of Water and the Turned-Down Corner (RS 7.5; FC5, KC19). Moved: t
 | Late Leaves (by runs started) | A | **Rejected**: farmable by abandoning runs | — |
 | Afterword lines | NM | **Adopted** (4.5.10) | M2 lean / M3 |
 | Memorial plaque / Unwoken Roll | NM, lead | **Merged** into one device | M3 |
-| Omen Retellings and Nightmare Provisos | NM, A | **Adopted** (4.9) | M3 |
+| Omen Retellings and Peril Provisos | NM, A | **Adopted** (4.9) | M3 |
 | The Usher / figure frame | NM, C | **Adopted** as the Night Usher in the figure frame | M3 |
 | Testimony | NM | **Adopted Later** with Pledges | Later |
 | Salience engine with Stakes | B | **Rejected as engine**; parity kept as a check | — |
@@ -1306,8 +1308,8 @@ Cut: the Glass of Water and the Turned-Down Corner (RS 7.5; FC5, KC19). Moved: t
 
 Slots as in 4.2; shared share 400‰ unless capped; rares at 30‰. Pools:
 - **LEAD_M2:** the first catalogue as written.
-- **REC_M2:** F1 6 / 2 / 1 per theme; Shallows 6; band 4 / 2 / 1; Middle 4; Interludes 4 shared + 3 per deep theme + 6 Heart; R2. (The band Interludes added after the check are not in the toy; Interludes are not text-card meetings, so txtNew, txtFresh and near3 do not move, but `SharedInterludeMostSeen` will.)
-- **REC_M3:** F1 7 / 2 / 1; Shallows 8 + 1 rare; band 5 / 2 / 1; Middle 6 + 1; R3; Ripening at the 4th sighting. **Told plainly after the check:** these pool sizes differ from 5.2's M3 targets (Shallows 10, band 6, Middle 6 + the Printed Itinerary); 5.2's targets are larger, so the M3 rows below are, if anything, a floor.
+- **REC_M2:** F1 6 / 2 / 1 per theme; Shallows 6; band 4 / 2 / 1; Midwater 4; Interludes 4 shared + 3 per deep theme + 6 Heart; R2. (The band Interludes added after the check are not in the toy; Interludes are not text-card meetings, so txtNew, txtFresh and near3 do not move, but `SharedInterludeMostSeen` will.)
+- **REC_M3:** F1 7 / 2 / 1; Shallows 8 + 1 rare; band 5 / 2 / 1; Midwater 6 + 1; R3; Ripening at the 4th sighting. **Told plainly after the check:** these pool sizes differ from 5.2's M3 targets (Shallows 10, band 6, Midwater 6 + the Printed Itinerary); 5.2's targets are larger, so the M3 rows below are, if anything, a floor.
 
 **Table A. Streak arm** (txtNew / txtFresh / near3; "most" = most sightings of one card)
 
@@ -1428,7 +1430,7 @@ Run save   += curiosityDigest[floor] = {slot → (curiosityId, referentRef, opti
 Profile (MAIN 6.6 change) curiosityMemory {
   version, checksum,
   shownCount[id], fullShown[id] (bitmask of Retellings displayed in full; bit 1 = First Telling),
-  recentRuns: ring[K]{runId, seedMode, shownIds[], f1BossId, f1ThemeId},   // f1BossId: BR-25, M2 (boss rooms design 4.10.3); f1ThemeId: R-SEED-6, M2 (cross-document comparison 2026-11-23, CC-6); seedMode here is not the seeded-run mark (runHistory[], seeds and validation design 4.7; SV-16)
+  recentRuns: ring[K]{runId, seedMode, shownIds[], f1BossId, f1ThemeId},   // f1BossId: BR-25, M2 (boss rooms design 4.10.3); f1ThemeId: R-SEED-6, M2 (cross-document comparison 2026-11-23, CC-6); seedMode here is not the "run code" mark (runHistory[], seeds and validation design 4.7; SV-16)
   last[id]{optionId|left, targetRole, replacedBoon, litMet[], unaffordable[], runId},
   autoAnswer[id], afterwordSeen[], genericAfterwordLastRun[], pendingClosure[strandId],
   chainStage[]  // chainStage enters the unlock snapshot in M3 only
@@ -1463,7 +1465,7 @@ Config (tuning): curiosity.rarePermille; curiosityValueTable (4.4.9)
 - `GraceShape` (C5, the `eventBoon` fields and the buff test); `GracePriceNotFree` (never free, never ticks alone, lit options included; replaces `GracePriceNotTicksOnly`); `GraceFallbackDeck` (the M2 deck with every Grace replaced by its fallback still passes `MechanicalDifference`, `LitIsSidegrade`, and `GainMix` at the fallback ceiling; new lead's call, ceiling after the check).
 - `GainMix` (4.4.1's deck definition); `TextCaps`; `RegisterByFloor` (with `registerNeutral`).
 - `DreamerLine` (with the premise test, 4.11); `HeartBedroomCap` (with `domesticProp`); `PremiseTagCap`.
-- `ReservedCues` (no horn or bell props, no winding props on the Heart, and an audio-tag check against the RC7 and TL timbre tables); `ReservedSilhouette` (container, bait-cache, Windfall and Bedside Stand reads, container framing under `CuriosityLootBlind`, and Portal silhouettes and skins); `ThemeWrongDetail` (no running hands or ticking on any clock or watch act on any floor (4.11; cross-document comparison 2026-11-23, CC-120); the Kennel's painted moon; new lead's call, widened after the check); `StagingRC1` (KR16).
+- `ReservedCues` (no horn or bell props, no winding props on the Heart, and an audio-tag check against the RC7 and TL timbre tables); `ReservedSilhouette` (container, bait-cache, Windfall and Washstand reads, container framing under `CuriosityLootBlind`, and Portal silhouettes and skins); `ThemeWrongDetail` (no running hands or ticking on any clock or watch act on any floor (4.11; cross-document comparison 2026-11-23, CC-120); the Kennel's painted moon; new lead's call, widened after the check); `StagingRC1` (KR16).
 - `EventConditionsInThemeSix`; `F1Rules`; `HostAgnosticF1`; `F1HostAlways` (every F1 Blueprint offers a legal host for every F1 Curiosity pool, so a retried F1 keeps its forecast Curiosity; SV-30; M2); `TeachingRungCap` (≤ 1 rung-9 lit option per F1 theme pool; new lead's call).
 - `RetellingParity`; `SuccessorParity` and `DeckValueParity` (against `curiosityValueTable`); `SequelGraphAcyclic` (M3).
 - `PoolCoverage` per (floor, slot class), counted over eligible entries under the canonical snapshot; in M3 also under each Sequel and Ripening unlock snapshot. `PoolCoverage(interlude, F2|F3)` fails while any theme drawable there has an empty Interlude pool.
@@ -1555,7 +1557,7 @@ Config (tuning): curiosity.rarePermille; curiosityValueTable (4.4.9)
 | **M2** | Curiosities F1–3; arena-facing Interludes F2–3 (band and shared) and substitutive Interludes F4–5; Glimpses; the catalogue of 5 as re-authored after the check, with the Wake's kit authored at parity and drawn when its gate passes (agreed, Q2); priced lit thresholds; the FactLedger of fact instances; costs; the skin rule and priced unstepped lock routes; the presentation sequence, Twice-Told and First Telling; R2; `curiosityMemory`; Launcher Fallow (K = 3, F1 only; agreed, Q1); Referents with fallback gains; the M2 lean Strands cashed at floor entry and the Coat Hooks, with the three pilot Strands gated (4.5.7); the Afterword run-start line and closure line with the generic tier; V16s, V16g and V16t; reports. Graces and carried riders **only if** EV-11 is ruled and the gates pass (agreed, Q3); otherwise the fallback deck |
 | **M3** | R3 everywhere (agreed, Q1); full Strands; Sequels advancing on sight (the Night Usher first; agreed, Q1); the Unwoken Roll; keeper lines; codex pages; Fragments folded into F-BOSS; Readings; F4 Curiosities in Twice-Told format if the line holds; Omen Retellings and Provisos; Overtures; Easing; the figure frame; Chute skins (if EV-36); M3 theme kits; Graces and riders if they missed M2; heirlooms never an "Item offered" price (HL-4; heirlooms and curses design 4.1.6) |
 | **M3-late / M4** | Ripening (agreed, Q1); the Inverted Cathedral deck (M4) |
-| **M4** (HL-29) | EV-43's shrine curse cures and curse bargains and the desecrated-shrine source ("Kneel / Pass by", the Malady printed), moved from Later (agreed, heirlooms and curses Q5); cure text generated from the hosts in the build; the Strand "a curse ended". Pending request (HL-19): the Curiosity "Malady" cost row and its V16s rows (heirlooms and curses design 4.2, 4.3.2, 4.3.3, 10) |
+| **M4** (HL-29) | EV-43's shrine curse cures and curse bargains and the desecrated-shrine source ("Lower your head / Walk on", the Malady printed), moved from Later (agreed, heirlooms and curses Q5); cure text generated from the hosts in the build; the Strand "a curse ended". Pending request (HL-19): the Curiosity "Malady" cost row and its V16s rows (heirlooms and curses design 4.2, 4.3.2, 4.3.3, 10) |
 | **Later** | Pledge sources (Night Usher, shrines) and Testimony; the Hawker's Hour; coin owed (held, off). Curse cures and bargains moved to M4 (HL-29) |
 
 No wave carries a least-seen draw inside the key (rejected, Q1).
@@ -1570,7 +1572,7 @@ No wave carries a least-seen draw inside the key (rejected, Q1).
 | **Segment 9** | Seeded boss variables; the arena seal; the F-BOSS queue; poster Glimpses; floor-1 boss variety as a production priority (agreed, Q2); the RS Cut 1 question once carried for the client (14.2), now answered as graded (BR-26) (cross-document comparison 2026-11-23, CC-116). **Answered by the boss rooms design (segment 9, approved 2026-11-22; BR-3, BR-23 to BR-26, BR-29):** the seal is `ArenaEngaged`; F-BOSS facts from the Rendition and mirror in the `bossQueue` order; 3 Renditions per F1 boss and the graded RS Cut 1 (agreed, boss rooms Q1); the Ca7 poster Glimpse on a Carnival wall slot, Interludes keeping `AntechamberScreened` and the F5 Coat Hooks (boss rooms design 4.1, 4.2, 4.12) (cross-document comparison 2026-11-23, CC-120) |
 | **Segment 10** | 4.12. **Answered by the exploration and information design (segment 10, approved 2026-11-23; XI-4, XI-6, XI-22, XI-27, XI-29):** facts and F-ROOM drawn per 4.3.6; chips read `PatrolForecast` (agreed, exploration and information Q2; cross-document comparison 2026-11-23, CC-120); `CardFit`; codex hosted (M3); F-TREASURE (M3) and beckoning Glimpses (request) |
 | **Segments 11–12** | The stream, its draw map, pass order, safe point, memory field, launcher, V16 and arms. **Answered by the seeds and validation design (segments 11–12, approved 2026-11-23; SV-1, SV-2, SV-4, SV-6, SV-8, SV-9, SV-13, SV-16, SV-20 to SV-23, SV-25, SV-30, SV-31):** the `curiosities` `vector` key and draw map (4.10); keyed checks `h:curiosity` (4.3.2); the pipeline and AP2 (4.10); WO3 for the resolve write; seeded and simulator writes (9.1); V16 phases and classes (9.2); report classes (9.3); qualified arms and 200 streak profiles (9.4); pending request to this design's owner: walker equivalences (9.4) |
-| **Camp and hub** | Afterword and keeper lines; Pledges; Testimony; the Hawker's Hour; Tithe Bowl dedup; coin owed. **Answered by the camp and hub design (segment 13, approved 2026-11-23; CH-12, CH-14):** the Afterword unchanged on the run-start card; keeper M2 service strings, M3 Strand lines only; the Unwoken Roll's hub home with the Sitter and `AfterwordNoEcho` (M3); Pledges and Testimony on Muster cards only; the Hawker's Hour a floor event; Tithe Bowl dedup unchanged; coin owed off; camp box and coat-display gates (6) (camp and hub design 2.2, 4.10, 4.15.6, 5.1, 6) |
+| **Camp and hub** | Afterword and keeper lines; Pledges; Testimony; the Hawker's Hour; Tithe Bowl dedup; coin owed. **Answered by the camp and hub design (segment 13, approved 2026-11-23; CH-12, CH-14):** the Afterword unchanged on the run-start card; keeper M2 service strings, M3 Strand lines only; the Unwoken Roll's hub home with the Roll-Reader and `AfterwordNoEcho` (M3); Pledges and Testimony on Muster cards only; the Hawker's Hour a floor event; Tithe Bowl dedup unchanged; coin owed off; camp box and coat-display gates (6) (camp and hub design 2.2, 4.10, 4.15.6, 5.1, 6) |
 | **Heirlooms and curses** | EV-43; the Strand "a curse ended"; "Item offered" exclusions. **Taken up by the heirlooms and curses design (segment 15, approved 2026-11-23; HL-4, HL-19, HL-29):** heirlooms never an "Item offered" price (M3); EV-43's shrine curse cures and bargains, the desecrated-shrine source and the Strand "a curse ended" moved to M4 (agreed, heirlooms and curses Q5); pending requests to this design's owner: the Curiosity Malady cost row with `payer`, its V16s rows and the shrine Malady sources (HL-19; agreed, heirlooms and curses Q4; M4) (heirlooms and curses design 4.1.6, 4.2, 4.3.2, 4.3.3, 10) |
 | **Conditions owner** | The `eventBoon` form (agreed, Q3 makes M2 Graces depend on it), Weary's universality, Easing |
 | **Enemies owner** | The noise reading, the FactLedger, Overtures |
@@ -1645,7 +1647,7 @@ Applied on 2026-11-22, when the client approved this document. **This document e
 | **EV-28** | As EV-27 | Ripening, same reading and parity (4.5.9) | ⚑ As EV-27; **Q1** | **Client (Q1, agreed 2026-11-22: M3-late)**; RS owner | M3-late / M4 |
 | EV-29 | RS 9.1 Fragments row; CF-M6; LE 6.12; LE-18 | Fragments folded into F-BOSS options (4.9) | — | Lead's call; RS owner | M3 |
 | EV-30 | TL 6.12; STAT 6 | Readings content (TL-34 accepted) (4.9) | — | Lead's call; TL owner | M3 |
-| EV-31 | HZ 6.9; LE 6.12; RS 9.1 | Omen Retellings; Nightmare Provisos; Mood steps (4.9) | — | Lead's call; HZ, RS owners | M3 |
+| EV-31 | HZ 6.9; LE 6.12; RS 9.1 | Omen Retellings; Peril Provisos (renamed from Nightmare Provisos, naming pass NP-36); Mood steps (4.9) | — | Lead's call; HZ, RS owners | M3 |
 | EV-32 | EP 13 (reading); conditions entries | Overtures with exclusions (4.9) | — | Lead's call; enemies owner (request) | M3 |
 | EV-33 | DH 5.7, 12.1; C14; HZ-30 precedent | Easing (priced Weary or rest-tick relief) (4.9) | — | Lead's call; DH, conditions owners (request) | M3 |
 | EV-34 | Conditions 16 (beside RT-16) | Event-sourced conditions count toward the theme's 6; Weary universal or not; optional "kept through the next short rest" Weary (4.4.3, 4.4.4) | — | Conditions owner rules (request) | M2 ruling |
@@ -1682,7 +1684,7 @@ The client approved this document as a whole on 2026-11-22, including every lead
 
 **New lead's calls (made while writing; confirmed by the client on 2026-11-22, with this document):**
 1. **Document shape:** the proposal's section numbers 0–13 are kept so every cross-reference holds; intent, goals, non-goals and anti-goals sit in 0 as 0.4; the client questions become 14 (open items); the closing parts follow as 15 (risks), 16 (left to the builders), 17 (depends on) and Appendix B (sources), as in LP.
-2. **Name re-check:** "Seating Chart" and "Last Page" hit the Supper's and the Silk Archive's own Obsession prose and are kept as theme callbacks; "strands" hits only as an ordinary verb (header).
+2. **Name re-check:** "Seating Chart" and "Last Page" hit the Supper's and the Cobweb Archive's own Obsession prose and are kept as theme callbacks; "strands" hits only as an ordinary verb (header).
 3. **K = 3 and F1-only Fallow are client keys, not tuning** (`curiosity.fallowK`, `curiosity.fallowFloors`); a gate miss that would move them returns to the client (header, 9.1, 14.2).
 4. **"M2 lean" is defined** for Strands and the Afterword (4.5.7, 4.5.10).
 5. **The F1 teaching rung 9** replaces the proposal's "9 for MECH lit lines", which contradicted KR3; at most one rung-9 lit option per F1 theme pool, the Kennel's K2 in M2 (`TeachingRungCap`) (4.3.2, 5.3).
@@ -1745,9 +1747,9 @@ The client approved this document as a whole on 2026-11-22, including every lead
 23. **Lure re-grounded:** Lure is a universal exploration action and `luredThisFloor` a group flag; the Shade-lit Lure variant is dropped (2.1, 4.8; EV-14).
 24. **Afterword selection and budget:** keyed lines in priority, a recurring generic tier, at most one Afterword and one closure line, never silence; `AfterwordExhaustion` (4.5.10).
 25. **Lit spread on creation defaults** (Medicine is every class's default); `LitSpreadPerPool`: every class meets at least 3 of 6 standard F1 cards (4.3.2, 5.3).
-26. **Register-neutral straddling cards:** band, Middle and straddling Interludes are written in the driest register of their floors; the F2 comic beat lives in F2 Glimpse art (4.11).
+26. **Register-neutral straddling cards:** band, Midwater and straddling Interludes are written in the driest register of their floors; the F2 comic beat lives in F2 Glimpse art (4.11).
 27. **Tone and readability rules:** the premise test; `domesticProp`; no winding props on the Heart; no Portal silhouettes or skins; container-type props drawn not to read as containers; implied figures without faction motifs; the figure frame's own grammar; staging (KR16); the chip layout budget (4.3.1, 4.11).
-28. **Catalogue re-skins and renames:** H1 The Skirting Board (for The Turning Key), H2 The High Window, H6 The Pinned Notice, the Printed Itinerary moved to the Middle pool, D1 franked by the Night Usher, G2 The Visitors' Slot, G8 The Yard Wall, G9 Your Name on the Charge Sheet, Gu2 The Knitted Scar; staging notes on C2, C3, C6, K8, Ca3, Ca4, D8; K1's portrait empty; Kennel and Wake Glimpses (5.3). The art finding's suggested "Keyhole-less Wardrobe" was not used: the wardrobe door is the Heart's Door Portal skin (FL).
+28. **Catalogue re-skins and renames:** H1 The Skirting Board (for The Turning Key), H2 The High Window, H6 The Pinned Notice, the Printed Itinerary moved to the Midwater pool, D1 franked by the Night Usher, G2 The Visitors' Slot, G8 The Yard Wall, G9 Your Name on the Charge Sheet, Gu2 The Knitted Scar; staging notes on C2, C3, C6, K8, Ca3, Ca4, D8; K1's portrait empty; Kennel and Wake Glimpses (5.3). The art finding's suggested "Keyhole-less Wardrobe" was not used: the wardrobe door is the Heart's Door Portal skin (FL).
 29. **Audio:** the card-open and First Telling sounds use the RC7 global UI timbre, not a chime or a sting; noise options play only the generic noise cue; `ReservedCues` becomes an audio-tag check (6).
 30. **The content budget and asset table restated** with the Wake, the band Interludes and every string and asset kind; writing and Glimpse briefs before M2 content lock; KR9 says MECH cards and Interludes have one presentation (0.1, 6, 8, KR9).
 31. **Riddle clues** are guaranteed, check-free placements whenever the Riddle lock exists, the Place-Setting clue included, never lit options; a hook-answer table answers every parent hook (4.13).
@@ -1907,7 +1909,7 @@ The owed rows are the single list in 13; by owner:
 | Id | Finding | Resolution |
 |---|---|---|
 | KC1 | Name collisions | Renamed (A.5) |
-| KC2 | Bedside Shelf vs the Bedside Stand | Coat Hooks by the Door; ReservedSilhouette |
+| KC2 | Bedside Shelf vs the Bedside Stand (renamed the Washstand, naming pass NP-36) | Coat Hooks by the Door (now The Coat Hooks, naming pass NP-36); ReservedSilhouette |
 | KC3 | Moving moon, open eyes, clock-dial lock object | Weathervane, Uncovered Mirror, Tally Board |
 | KC4 | C5 replacement; durations | Replacement named; `eventBoon` form (EV-11) |
 | KC5 | Show of Force and Lure giveaways | EV-13, EV-14 |
@@ -1951,15 +1953,15 @@ All three judges' grafts are taken except where a critic or the client supersede
 | Draft name | Taken by | Now |
 |---|---|---|
 | Known card | Known traps | Twice-Told card |
-| Lucid frame | Lucid Key | Figure frame |
+| Lucid frame | Lucid Key (renamed the Clear Key, naming pass NP-36) | Figure frame |
 | Turnkey's Ledger | LE Ledgers | The Turnkey's Daybook |
-| Overdue Notice | Silk Mood | Second Notice |
+| Overdue Notice | Silk Mood (now the Archive Mood: The Cobweb Archive, naming pass NP-36) | Second Notice |
 | Ticket Booth | Ticket lock | Admission: One Memory |
-| The Last Act | Wager room | Curtain Call |
+| The Last Act | Wager room (renamed The Prop Room, naming pass NP-36) | Curtain Call |
 | The Toast | Supper boss signature | Every Glass Rises |
 | Appeal Hearing | Appeals trapdoor | Cut |
 | Remedy | Vendor consumable | Easing |
-| Bedside Shelf | Bedside Stand silhouette | Coat Hooks by the Door |
+| Bedside Shelf | Bedside Stand silhouette (renamed the Washstand, naming pass NP-36) | Coat Hooks by the Door (now The Coat Hooks, naming pass NP-36) |
 | The Will | Executor of the Will | The Codicil |
 | The Font | Dry font Snag | The Black Basin |
 | Brazier's Due | Brazier piece; Dues | The Warming Dish |
@@ -1968,8 +1970,8 @@ All three judges' grafts are taken except where a critic or the client supersede
 | Collection Plate | TL trap | The Unsung Verse |
 | Stopped Clocks | ROOM, LP | Start the Clocks |
 | Wind-Up Key | Wind-Up | The Turning Key |
-| Night Porter | Porter's Satchel | The Night Usher |
-| Paid In, Seated, Received, Kin, Checked In | Various prose | Settled Debt, Sat Down, Shook Hands, Pedigreed, Left Luggage |
+| Night Porter | Porter's Satchel | The Night Usher (the D5 card now The Usher's Lamp; the resident keeps the name; naming pass NP-36) |
+| Paid In, Seated, Received, Kin, Checked In | Various prose | Settled Debt, Sat Down, Shook Hands, Pedigreed, Left Luggage (the D9 Strand now Unclaimed, naming pass NP-36) |
 | Mourners' Chairs | Herald feature; RC2 | Cut |
 | Visiting Hour | EP G5 | The Visitors' Grille, renamed the Visitors' Slot after the check |
 | The Far Wall | Layout term | The Wall That Keeps Its Distance |

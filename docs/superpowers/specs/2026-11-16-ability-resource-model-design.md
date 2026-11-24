@@ -5,6 +5,22 @@ Status: approved by client, 2026-11-16
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design) and
 `2026-11-16-character-stat-model-design.md` (stat model)
 
+Names updated by the naming pass (naming pass design, approved 2026-11-24;
+NP rows listed): NP-4 (6.1, 6.2, 6.6 Surge → Onslaught, `pool.surge` id
+kept; 6.2, 6.6 Second Wind → Patch Up; 6.3, 6.5, 15.2 Slot Recovery →
+Slot Renewal, `slotRecovery` ids kept; 6.1 reckless → heedless; 7.2
+Dreamfall → Freefall; 7.3 reaction-policy labels; 10.3 Ember Burst →
+Cinder Spray; 12.2 Wary → Watchful; 15.1 Stairhead → the Downstair);
+register rows 5.1.1 (9.2 fireball → fire Detonation), 5.3.22 (7.2
+Revealed → Found), 5.3.25 and 5.3.26 (7.2 DC tiers Easy → Mild, Standard
+→ Middling), 5.3.27 and 5.3.28 (7.2 trap triggers: pressure slab, clasp),
+5.3.40 and 5.3.41 (7.2 Cord verbs Kick → Knock, Hold → Sustain), 5.3.42
+(7.2 pike verb Set → Receive), 5.3.44 (7.2 Sound the wall → Tap the
+wall), 5.3.45 (8.2 Conduct → Charged Water), 5.5.31 (7.2 Iced padlock →
+Frost-seized padlock), 5.6.16 (15.1 Drop-bar → Slam door), 5.8.40 (20 kit
+strip → Gear strip, noted) and 5.8.49 (7.2 talisman → failsafe). Sanctum
+kept (W-8).
+
 Items marked **(agreed)** were agreed with the client, either directly or by
 approving the lead's proposal. Items marked **(lead's call)** were filled in
 by the design lead and are confirmed when this document is approved. Items
@@ -183,9 +199,9 @@ upgrades written as data patches instead of effects.
 | Kind | Limited by | Examples |
 |---|---|---|
 | At-will | Action cost only | Weapon attack, cantrip, Shove, Hide |
-| Limited | One pool: a slot tier, a named charge pool or an item stack | A tier 2 spell, Surge, a potion |
+| Limited | One pool: a slot tier, a named charge pool or an item stack | A tier 2 spell, Onslaught, a potion |
 | Passive | Nothing: a modifier or trigger in the effects system | Extra Attack; once-per-turn bonus damage |
-| Toggle | Switched on or off once per turn, without using the turn's free interaction; stays on across turns and fights until switched off | A reckless stance |
+| Toggle | Switched on or off once per turn, without using the turn's free interaction; stays on across turns and fights until switched off | A heedless stance |
 | Sustained | Concentration, or its own stated end (short effects only, 9.6) | A restraining spell; a rage-style buff |
 | Reaction | The round's reaction, plus any pool cost | Opportunity attack, a protective ward |
 
@@ -215,8 +231,8 @@ of consumables.
 |---|---|---|
 | `turn` | The unit's turn start | Once-per-turn passives; the reaction |
 | `fight` | Combat start | Minor uses only, such as Rally once per ally. Every armour, shield and piece `fight` use is a minor use: cancelling one event per fight (Ringed, Double Ring, Proof, Twice-Proof), Shadowed, Warding Lining, Runner's Boots and Forewarned's fight-start window **(change AR-6, armour design 8.1 rule 5)**, and every trinket `fight` use (trinkets design 9.3) **(change TK-18)**; a charm Catch is a `fight` 1 minor, and an automatic ally-Warded charm is a major on `rest` 1/1/1 (charm abilities design 4.2, 4.5) **(change CA-7, read; M3)**. No major power is per-fight. |
-| `rest` | A completed short rest, and camp | Martial charges, Second Wind, caster rest recovery |
-| `camp` | Camp only. *Later:* one named exception, a wandering trader's paid **Recharge**, which resets one wand's `camp` pool, once per trader, priced in coin; the simulator reports wand charges per floor with and without it (change I-16, items design 10.9, 19.1, 19.3) | Spell slots, Surge, signature abilities, wand charges |
+| `rest` | A completed short rest, and camp | Martial charges, Patch Up, caster rest recovery |
+| `camp` | Camp only. *Later:* one named exception, a wandering trader's paid **Recharge**, which resets one wand's `camp` pool, once per trader, priced in coin; the simulator reports wand charges per floor with and without it (change I-16, items design 10.9, 19.1, 19.3) | Spell slots, Onslaught, signature abilities, wand charges |
 | `never` | Never | Consumables |
 
 - There are no player cooldowns. Exploration ticks never refill a pool,
@@ -256,13 +272,13 @@ then moves every class, not half of them.
   **(agreed; change HR-31, Herald design 11.10)**. The Shade's miss at
   levels 1–4 (32–37%) is accepted too **(agreed; change SH-28, Shade
   design 10.5)** (cross-document comparison 2026-11-23, CC-20). Slot
-  Recovery counts as `rest` power, in the camp share and in the VG-12
+  Renewal counts as `rest` power, in the camp share and in the VG-12
   parity reading alike, never one without the other **(change ARC-3,
   Arcanist design 7.4)**.
 - The examples in 6.5 and 6.6 show which pools exist, not the split. As
   written the fighter is mostly rest-powered and the caster mostly
   camp-powered; builders tune the counts into the band. Casters will need
-  `rest` features beyond Slot Recovery to get there.
+  `rest` features beyond Slot Renewal to get there.
 - The rule and the band apply to class data. Companions must have at least
   one `rest` and one `camp` pool (11.1), but the band does not apply to
   them.
@@ -299,15 +315,15 @@ spend.
 
   Values are illustrative; the shape is a new tier on each odd level from 3.
 - Slots are `camp` pools, one pool per tier.
-- **Slot Recovery:** when a short rest completes, a caster regains one spent
+- **Slot Renewal:** when a short rest completes, a caster regains one spent
   slot of tier 2 or lower, the highest such tier spent. It is automatic, not
   a pool, and there is no choice to make. An offer may raise it to two
   slots, regained one at a time by the same rule. The Arcanist instead
   gains two slots per short rest as a class feature from class level 9
-  (Slot Recovery 2), and that offer is excluded for it
+  (Slot Renewal 2), and that offer is excluded for it
   (`offerExcludes: slotRecovery+1`), as are `timescale:slots.*` and
   capacity and timescale on Overchannel **(change ARC-12, Arcanist
-  design 7.4, 7.9)**. The Herald has no Slot Recovery 2 and the offer is
+  design 7.4, 7.9)**. The Herald has no Slot Renewal 2 and the offer is
   excluded for it from the start (`offerExcludes: slotRecovery+1`)
   **(change HR-35, Herald design 7.5)**. The name keeps it apart
   from the stat model's Recovery, which is hit points.
@@ -332,7 +348,7 @@ spend.
 
 A Strength fighter:
 
-- **Second Wind:** bonus action, regain your Recovery (the Medicine bonus
+- **Patch Up:** bonus action, regain your Recovery (the Medicine bonus
   excluded). `rest` pool of 1, 2 from level 6. **(change DH-10, death and
   healing design 8, 12.1)**
 - **Techniques:** `rest` pool of 2, 3 at level 5. One is spent
@@ -341,7 +357,7 @@ A Strength fighter:
   square, add 1d4 damage (1d6 from level 5), or empower the weapon's verb
   (for example Push 2, Topple with disadvantage on the save). **(change
   W-3, weapons design 7.3; change VG-6, Vanguard design 7.8)**
-- **Surge:** `camp` pool of 1, 2 at level 5. One extra action this turn.
+- **Onslaught:** `camp` pool of 1, 2 at level 5. One extra action this turn.
   **(change VG-6)**
 
 A martial class has at most three named pools, not counting its capstone
@@ -353,7 +369,7 @@ option of a named pool (the Hew-use cap) is not a named pool and is not
 counted, like the `restDefensiveTool` sub-limit. **(change VG-10,
 Vanguard design 3.4, 7.9)**
 
-Full Recovery as a self-heal is for the fighter-type Second Wind only.
+Full Recovery as a self-heal is for the fighter-type Patch Up only.
 Every other class's `rest` defensive tool (at most half Recovery, or a
 defensive or prevention effect) is a requirement on the classes design,
 inside 6.3's band. **(change DH-10, death and healing design 12.1)**
@@ -432,11 +448,11 @@ Every ability declares exactly one cost **(lead's call)**:
 | Disarm or re-arm a trap: Mechanics, trained only **(settled)**; Arcana disarms glyphs. Disarm is an object check on the keyed `checks` stream under the Margin rule: one roll per object per hand verb per floor; a Jam (fail by 1–4) is noise 4 and ends hand work on that object to the end of the floor; a Botch (fail by 5 or more) springs it with no hard part **(change TL-4, traps and locks design 6.6; M2)**. Re-arm: adjacent; the trap fires at 500‰ with no hard part, never stacking; once per trap per floor (`rearmUsedThisFloor`); not while any group the trap has hit is Alerted or in combat **(change TL-15, traps and locks design 6.6; M2)** | Out of combat 2 ticks; in combat, action |
 | Trigger a known trap against enemies: Mechanics, untrained allowed. A known armed trap is a hazard for forced movement (conditions design 10, 11.3; the rules of 10.1 and 10.2 unchanged) **(change SH-15, Shade design 9.1)**. Universal; an object check on `checks` under the Margin rule (a Jam or Botch is noise 4 and a Jam); a mechanism tagged `handle` springs with an action and no check **(change TL-13, traps and locks design 6.6, 6.7; M2)** | Action (out of combat 1 tick) |
 | Trigger Shot: a thrown or launcher attack against AC 10 + 2 × tier at a known trigger square or mechanism; a hit springs it, a miss is noise 4. Out of combat an object check on `checks`, one try per trap per floor. *Pending request (TL-42, weapons owner):* an improvised throw of a held weapon or item for Trigger Shot alone (range 4, no damage); if refused, it needs a thrown weapon or a launcher **(change TL-13, traps and locks design 6.7; M2)** | Replaces one attack |
-| Pole it: a unit with a reach weapon springs a known plate, wire or catch host within 2 squares; no roll; the trap's noise **(change TL-13, traps and locks design 6.7; M2)** | Out of combat 1 tick; in combat, action |
+| Pole it: a unit with a reach weapon springs a known pressure slab, wire or clasp host within 2 squares; no roll; the trap's noise **(change TL-13, traps and locks design 6.7; M2)** | Out of combat 1 tick; in combat, action |
 | Probe: any unit, from a square inside a shown Hunch zone or orthogonally adjacent to it; offered only at a Hunch zone; no roll, noise 0; reveals every trap whose trigger squares lie in the zone **(change TL-7, traps and locks design 6.4; M2)** | Out of combat 2 ticks; in combat, action |
 | Pick a lock: Mechanics, trained only; an object check on `checks` under the Margin rule, one roll per lock per floor; a Jam is noise 4 and closes picking this floor; a Botch adds the lock's consequence **(change TL-21, traps and locks design 6.6, 6.11; M1)** | Out of combat 1 tick; in combat, action |
 | Force a lock: Athletics, anyone, against the lock's DC + 2; noise 6 per try (or the kind's); each failure lowers the DC by 2 and the third try opens with no roll; from F2 a force Botch on a Door Splinters it and opens it **(change TL-21, traps and locks design 6.6, 6.11; M1)** | Out of combat 1 tick; in combat, action |
-| Take time: out of combat only; no roll, the result is 10 + bonus; offered only when it succeeds, on Easy or Standard devices and Plain locks; never on Hard, a consequence lock, a `noTakeTime` object, a Squeeze or a Plank; a channelled act (interrupted, it has no result and spends nothing) **(change TL-5, traps and locks design 6.6; M1, traps' part M2)** | Exploration action (8 ticks *(illustr.)*) |
+| Take time: out of combat only; no roll, the result is 10 + bonus; offered only when it succeeds, on Mild or Middling devices and Plain locks; never on Hard, a consequence lock, a `noTakeTime` object, a Squeeze or a Plank; a channelled act (interrupted, it has no result and spends nothing) **(change TL-5, traps and locks design 6.6; M1, traps' part M2)** | Exploration action (8 ticks *(illustr.)*) |
 | Lure: choose a square you can see within 6; it emits noise radius 4 (enemies design 12.3). A group with no member in line of sight to you becomes Alerted toward it with no roll; a group that can see you makes its noticing roll. Once per group per floor (`luredThisFloor`). Only if the enemies owner accepts **(change SH-21, Shade design 9.1)** | Exploration action (1 tick) |
 | Hold the Hide: *pending request (EP-17, encounter placement design 6.9; M2), not a rule until the ability model owner rules.* Legal when every party unit is Hidden or out of sight of the drawn patrol route, inside a room the route enters; once per floor, in the floor's cover-room window only. Ticks pass with no clicks until a patrol unit enters a party unit's line of sight, any noticing roll, any group turns Alerted, or 20 ticks *(illustr.)*; noticing is normal, and if the patrol fails, the party's first attack Surprises it. The ticks count toward the clock, not as a rest. If refused, the party times the patrol with ordinary waits | Exploration action (1 click) |
 | Open an unlocked door: move into it, as monsters do **(change FL-8, floor layout design 9.2; M1)** | 1 square of movement |
@@ -445,23 +461,23 @@ Every ability declares exactly one cost **(lead's call)**:
 | Squeeze (1–3 narrow squares): Acrobatics on the keyed `checks` stream, keyed by the object's `traversalIndex` (traps and locks design 6.12, 6.22; change TL-3). Out of combat the leading unit makes one check, no retry; on a pass the party goes through, on a failure it still goes through after +4 ticks *(illustr.)* with noise 4 at the mouth nearest the party. In combat each unit checks as it enters: a pass moves it in and ends its movement there (it continues next turn with no new check); a failure ends its movement at the mouth, no retry that round. Monsters never use a Squeeze **(change FL-7, floor layout design 9.2; M2)** | Out of combat one party check; in combat part of movement |
 | Lift a Latch, from the bar side only: no check, silent; it then becomes a Door. Monsters never lift it **(change FL-19, floor layout design 9.2; M2)** | Out of combat 1 tick; in combat 1 square of movement |
 | Listen at a closed door: out of combat; no roll, no stream draw, noise 0; reports each non-Hidden group in the room beyond at that moment (trained Perception adds the size band and "passing"); once per door per floor. Information only **(change FL-18, floor layout design 9.2; M2; owned by dungeon generation segment 10)**. *Pending request (EP-9, encounter placement design 6.7, 6.20; M2), not a rule until the ability model owner rules:* trained Perception also adds the group's activity word ("dice", "snoring", "chanting") beside the size band; if refused, the activity shows only on sight | Exploration action (2 ticks); passive and free for a party with a member trained in Perception when auto-walk pauses at the door. M3, conditional on the `SoloListenClickShare` report missing: also passive at those pauses while the party holds an Ear Trumpet and no living party unit is Perception-trained; the untrained result only, never the size band, "passing" or the activity word **(agreed, Q3; change XI-26, exploration and information design 4.5.2)** |
-| Sound the wall: only at a wall square showing the Hairline tell (or 8-adjacent to the secret Portal's squares); opens it, no roll; out of combat only **(change FL-17, floor layout design 9.2; M2)** | Exploration action (6 ticks) |
+| Tap the wall: only at a wall square showing the Hairline tell (or 8-adjacent to the secret Portal's squares); opens it, no roll; out of combat only **(change FL-17, floor layout design 9.2; M2)** | Exploration action (6 ticks) |
 | Move Shunt: an adjacent light, non-sturdy Furnishing moves 1 square straight away from the user; no check; never collides (not choosable if that square holds a unit). Once per piece per round across both Shunt modes; combat only; noise 4; does not end Hidden; never onto a square `FurnishingNeverSeals` forbids **(change TR-6, room terrain design 6.3.2, 6.3.6; M2)** | 2 movement *(illustr.)* |
 | Attack Shunt: an adjacent non-sturdy Furnishing (light automatic; heavy Athletics against heft) moves 1 square straight away; into a unit, the piece stops, the unit takes the collision band once, is not moved, and makes a Reflex save against 8 + the Shunter's Athletics bonus *(illustr.)* or falls Prone (size rule applied to the piece); a light piece breaks on the hit. Once per piece per round; combat only; noise 4; ends Hidden like an attack **(change TR-6, room terrain design 6.3.2; M2)** | Replaces one attack |
 | Kick: an adjacent `round`, non-sturdy Furnishing (light automatic; heavy Athletics against heft) travels straight away up to 4 squares *(illustr.)*, stopping before blocking squares or at the first unit (collision band, Reflex or Prone, as Attack Shunt); never ends on a square 6.3.6 forbids. Noise 4; ends Hidden **(change TR-6, room terrain design 6.3.3; M2)** | Replaces one attack |
-| Smash: an adjacent Furnishing or Keg (light breaks automatically; heavy, sturdy included, Athletics against heft); a broken light piece is gone, a heavy one becomes Rough debris; a Smashed Keg bursts, the Smasher outside its burst. Noise 6 *(illustr.)*; ends Hidden **(change TR-6, room terrain design 6.3.4, 6.3.5; M2)**. The Supper's Iced padlock: a bludgeoning Smash shatters it at Athletics Easy, noise 6, one roll on the `checks` stream (a Botch is a Jam), out of combat 1 tick; it opens its host like a force, with no Splinter **(change TL-32, traps and locks design 7.8; M2)** | Replaces one attack |
+| Smash: an adjacent Furnishing or Keg (light breaks automatically; heavy, sturdy included, Athletics against heft); a broken light piece is gone, a heavy one becomes Rough debris; a Smashed Keg bursts, the Smasher outside its burst. Noise 6 *(illustr.)*; ends Hidden **(change TR-6, room terrain design 6.3.4, 6.3.5; M2)**. The Supper's Frost-seized padlock: a bludgeoning Smash shatters it at Athletics Mild, noise 6, one roll on the `checks` stream (a Botch is a Jam), out of combat 1 tick; it opens its host like a force, with no Splinter **(change TL-32, traps and locks design 7.8; M2)** | Replaces one attack |
 | Overturn: orthogonally adjacent to a `tippable` Tall Furnishing, Athletics against heft 15 *(illustr.)*; it falls into the 1×2 strip straight away from the user (Reflex: failure 2× collision band plus Prone, success half), then becomes debris and opens sight **(change TR-6, room terrain design 6.3.7; M3)** | Action |
 | Haul: drag an adjacent light Furnishing into the square you left; provokes as normal movement **(change TR-6, room terrain design 6.3.7; M3)** | 2 movement per square |
 | Cross a Plank (narrow ground): in combat, entering the first Plank square needs Acrobatics against the segment-5 ladder (DC 12, *illustr.*); a failure ends movement on the square before, no retry that round, no fall and no damage. Out of combat one check by the leading unit, with the Squeeze row's failure cost. Stiff gives disadvantage; forced movement onto a Plank needs no check **(change TR-12, room terrain design 6.2.6; M2)**. The check is on the keyed `checks` stream, keyed by the Plank's `traversalIndex`; per-traversal rolls kept (traps and locks design 6.12, 6.22; change TL-3) | In combat part of movement; out of combat one party check |
-| Operate a Cord (a Low piece face or wall socket; each Cord has exactly one verb): from an adjacent square, no check, noise 4 *(illustr.)*. A bound Cord re-times one Stir (Now, Hold); Reverse, Flip and Kick, and standalone Cords, are M3. An act set by an Operated Cord credits the operator for experience and morale; on-kill hooks never fire from a Dream-step act **(change HZ-15, hazards design 6.3.4; re-time verbs with the Stirs: M2 (gated), else M3)**. *Pending request (HZ-15), not a rule until the ability model owner rules:* a unit that starts its turn adjacent to a Cord may Operate it as its bonus action | Action |
+| Operate a Cord (a Low piece face or wall socket; each Cord has exactly one verb): from an adjacent square, no check, noise 4 *(illustr.)*. A bound Cord re-times one Stir (Now, Sustain); Reverse, Flip and Knock, and standalone Cords, are M3. An act set by an Operated Cord credits the operator for experience and morale; on-kill hooks never fire from a Dream-step act **(change HZ-15, hazards design 6.3.4; re-time verbs with the Stirs: M2 (gated), else M3)**. *Pending request (HZ-15), not a rule until the ability model owner rules:* a unit that starts its turn adjacent to a Cord may Operate it as its bonus action | Action |
 | Use a scroll or wand outside your class: Arcana, trained only, against 10 + tier; in class, no slot is spent **(settled; change CN-12, consumables design 13.2)** | Action. A failed check uses the scroll or charge up: no free retries **(settled)**. |
 | Drink a potion (a potion on your own belt) **(change I-5, items design 7.1)** | Bonus action |
 | Administer a belt potion or tonic to an adjacent ally: tonics minor only; a potion does not lift Downed; not a potion or healing scroll on a Downed unit (a trinket reach step may extend 'adjacent' to 2 squares; trinkets design 6.1) **(change I-5, items design 7.1; change TK-19; change CN-12, consumables design 11)** | Action (the giver's); the receiver spends nothing |
 | Throw a belt potion at an ally: range 5, line of sight, no roll, `thrownPotionPermille`; never lifts Downed; not on a Downed unit **(agreed; change CN-12, consumables design 11)** | Action |
 | Throw a belt flask: range 5, no attack roll; at most one offensive flask per turn **(change CN-12, consumables design 12)** | Action |
-| Hand over to an adjacent ally, from the belt or the weapon sets only, never the pack; never a talisman in combat (a trinket reach step may extend 'adjacent' to 2 squares; trinkets design 6.1) **(change I-5, items design 7.1; change TK-19; change CN-12, consumables design 14; change DH-11)** | The giver's free interaction |
-| Take from a Downed adjacent ally, belt or weapon-set items only; never a talisman in combat **(change I-5, items design 7.1; change CN-12, consumables design 14; change DH-11)** | Free interaction |
-| Retrieve: pack to belt or to an empty spare set; never a talisman in combat **(change I-5, items design 7.1; change CN-12, consumables design 14; change DH-11)** | Action (`packInCombat` flag) |
+| Hand over to an adjacent ally, from the belt or the weapon sets only, never the pack; never a failsafe in combat (a trinket reach step may extend 'adjacent' to 2 squares; trinkets design 6.1) **(change I-5, items design 7.1; change TK-19; change CN-12, consumables design 14; change DH-11)** | The giver's free interaction |
+| Take from a Downed adjacent ally, belt or weapon-set items only; never a failsafe in combat **(change I-5, items design 7.1; change CN-12, consumables design 14; change DH-11)** | Free interaction |
+| Retrieve: pack to belt or to an empty spare set; never a failsafe in combat **(change I-5, items design 7.1; change CN-12, consumables design 14; change DH-11)** | Action (`packInCombat` flag) |
 | Pick up or seize an item in or next to your square: to a free belt slot or matching stack, an empty spare set, or else `claimed` (unusable this fight) **(change I-5, items design 7.1)** | Free interaction |
 | Swap weapon sets (active and spare, shield included) **(change I-5, items design 5.2)** | Bonus action |
 | Shield bash (the Shield kind, in the active set; bucklers, Reliquary and tower shields have none): 1d4 bludgeoning, Push; Strength + proficiency to hit, Strength to damage; not an off-hand attack **(change AR-7, armour design 10.2)** | Replaces one attack |
@@ -469,9 +485,9 @@ Every ability declares exactly one cost **(lead's call)**:
 | Strained: below a worn armour's or active shield's Strength threshold, speed −2, once per unit however many items are Strained **(change AR-7, armour design 7.1)** | None; a derived penalty, never a condition |
 | Stiff: worn medium or heavy armour gives disadvantage on Acrobatics checks (slip past, escape a grapple by Acrobatics, narrow ground) **(change AR-7, armour design 7.3)** | None; a standing modifier |
 | Opportunity attack | Reaction |
-| Snatch: on a failed Void save (the edge-save Void branch), a party unit or a monster leader adjacent to the faller's last safe square at that moment, and not Prone, Restrained, Grappled or Groggy; the faller stops on that square, Prone and Teetering, with no damage, and the rest of the forced move ends. A Snatched failure is not a Dreamfall. For a monster leader, Snatching an elite whose hold has expired counts as that elite's Clutch for the fight **(change HZ-22, hazards design 6.4; M3)** | Reaction |
+| Snatch: on a failed Void save (the edge-save Void branch), a party unit or a monster leader adjacent to the faller's last safe square at that moment, and not Prone, Restrained, Grappled or Groggy; the faller stops on that square, Prone and Teetering, with no damage, and the rest of the forced move ends. A Snatched failure is not a Freefall. For a monster leader, Snatching an elite whose hold has expired counts as that elite's Clutch for the fight **(change HZ-22, hazards design 6.4; M3)** | Reaction |
 | Off-hand attack with a light weapon, after at least one Attack-action attack this turn; Nick moves it into the Attack action, once per turn **(change W-2, weapons design 11.3)** | Bonus action, once per turn |
-| Threatened zone: an opportunity attack when a hostile leaves it by its own movement, Set when a hostile enters it from outside; they share the round's one reaction, and Disengage stops both. Movement resolves square by square, with the trigger timing of weapons design 8 **(change W-2)**. A slip-past trigger (`slipPast`) resolves after a successful slip-past check and before the step that moves the hostile through or past the square, as an opportunity attack. A separate trigger kind, `attackAgainstOther`, is a **reaction attack**, not an opportunity attack: it hooks after weapons design 7.5 step 15 for a weapon attack, or after 14.3 step 6 for each attack roll of a non-weapon attack, and its legality is re-checked then **(change VG-20, Vanguard design 7.4, 8.2)**. A third, `missedBy`, is also a reaction attack: it hooks after weapons design 7.5 step 6 / 6a, in the order the miss → Graze → `answeredBy[]` written → step 6a → the hook, where legality is re-checked. With `sameReactionFollowUp`, a follow-up on `onParrySuccess` (a Parry or a `countsAsParry` ward was applied and the roll missed) runs in the same reaction when the ward spent or carried the reaction, and spends the reaction after a step-0 fill. One reaction makes one attack: with the Riposte signature (weapons design 18.4) the player picks it or the follow-up **(change SH-8, Shade design 8.3)** | Reaction |
+| Threatened zone: an opportunity attack when a hostile leaves it by its own movement, Receive when a hostile enters it from outside; they share the round's one reaction, and Disengage stops both. Movement resolves square by square, with the trigger timing of weapons design 8 **(change W-2)**. A slip-past trigger (`slipPast`) resolves after a successful slip-past check and before the step that moves the hostile through or past the square, as an opportunity attack. A separate trigger kind, `attackAgainstOther`, is a **reaction attack**, not an opportunity attack: it hooks after weapons design 7.5 step 15 for a weapon attack, or after 14.3 step 6 for each attack roll of a non-weapon attack, and its legality is re-checked then **(change VG-20, Vanguard design 7.4, 8.2)**. A third, `missedBy`, is also a reaction attack: it hooks after weapons design 7.5 step 6 / 6a, in the order the miss → Graze → `answeredBy[]` written → step 6a → the hook, where legality is re-checked. With `sameReactionFollowUp`, a follow-up on `onParrySuccess` (a Parry or a `countsAsParry` ward was applied and the roll missed) runs in the same reaction when the ward spent or carried the reaction, and spends the reaction after a step-0 fill. One reaction makes one attack: with the Riposte signature (weapons design 18.4) the player picks it or the follow-up **(change SH-8, Shade design 8.3)** | Reaction |
 | Ranged or thrown **weapon** attack with a hostile adjacent: disadvantage (spell attacks unaffected) **(change W-2, weapons design 9.2)** | Replaces one attack |
 | Loading weapon: at most one attack with it per action, bonus action or reaction **(change W-2, weapons design 9.3)** | Replaces one attack |
 | Throw: an attack mode of a thrown-capable melee weapon; it stays with the thrower, no pickup **(change W-2, weapons design 9.3)** | Replaces one attack |
@@ -491,7 +507,7 @@ rows above from M2 **(changes TL-13, TL-15, traps and locks design 6.6,
 Traps and movement **(change TL-7, TL-12, traps and locks design 6.4,
 6.7; M2)**:
 - Trap detection runs after every square of party movement; a new
-  Revealed or Hunch result interrupts the move (manual or auto-walk) and
+  Found or Hunch result interrupts the move (manual or auto-walk) and
   the unit keeps its remaining movement.
 - Known triggers are hazards for pathing, auto-walk and followers; walk
   round is the default. Moving through a known wire square steps over
@@ -522,6 +538,10 @@ each use costs a Technique. **(change VG-19, Vanguard design 8.1)**
   - `whilePoolAtLeastHalf`, so that automatic reactions cannot quietly
     drain a pool;
   - `never`, for reactions only worth taking by choice.
+
+  On screen the policies read **Always**, **Only if it matters**, **While
+  half full** and **Never**, and the manual setting reads **Ask me**; the
+  ids never show (naming pass 5.9.14, NP-4).
 - The player can change any reaction to "ask me". **(settled)** The player
   can also switch it to any of the automatic policies above. **(lead's
   call)**
@@ -632,8 +652,8 @@ by its own casts' areas, arcs and forks, except presence call or cure
 areas whose record names the caster (Rouse, Hearthsong). **(change ARC-8,
 Arcanist design 8.1, 8.2; change HR-13, Herald design 8.1)**
 
-Conduct through connected water (combo K3) follows this rule unchanged:
-an at-will's or a selective cast's Conduct skips the caster's allies,
+Charged Water (combo K3, lightning through connected water) follows this
+rule unchanged: an at-will's or a selective cast's Charged Water skips the caster's allies,
 and it never reaches the caster **(change TR-26, room terrain design
 6.8; read, not changed)**.
 
@@ -718,7 +738,7 @@ exception. Never from party abilities, monster at-wills or flasks
 - A rider's save uses the save the builders assign to that rider type,
   against the attacker's ability difficulty. **(settled)**
 - It is a separate roll from the ability's own save. Failing an ability's
-  Reflex save against a fireball does not decide whether the target catches
+  Reflex save against a fire Detonation does not decide whether the target catches
   fire. **(lead's call)**
 
 ### 9.3 Bounds on save noise
@@ -891,7 +911,7 @@ that when setting numbers.
 **(agreed)**
 
 Each option shows what changes, computed by the core: "Cleave: 2 → 3 uses",
-"Ember Burst: radius 1 → 2". The player never has to work it out.
+"Cinder Spray: radius 1 → 2". The player never has to work it out.
 Automatic gains at that level (a new slot tier, Extra Attack, proficiency)
 are listed on the same screen above the choice. **(lead's call)**
 
@@ -1019,7 +1039,7 @@ are listed on the same screen above the choice. **(lead's call)**
   cancels only that condition. **(change C2, conditions design 12.3)**
 - Pips spent, phases passed and uses belong to the boss's **life**, not the
   fight; cooldowns reset at combat end as for every monster. On a reset the
-  boss returns Wary and leashed, with hit points raised to the top of its
+  boss returns Watchful and leashed, with hit points raised to the top of its
   current phase band. **(change A-4, enemies design 17.5)**
 - Unyielding: every boss has it. Hard conditions downgrade once the pips
   are gone, a composure window follows some conditions, and it resists
@@ -1247,11 +1267,11 @@ The build fails when:
   Forecourt is near-safe only by RS 9.4's approved exception, told
   plainly. **(change FL-5, floor layout design 6.11; agreed rule kept)**
 - There is no party relock verb, so a lock never makes a safe spot;
-  Wedge stays the Trapwright's, and a Drop-bar, if the client adopts it
+  Wedge stays the Trapwright's, and a Slam door, if the client adopts it
   (M3), never satisfies "no hostile aware" by itself (traps and locks
   design 6.11, 6.12). **(change TL-33)**
 - No short rest while `sanctumEngaged` is set, the boss lives and any
-  party unit stands on a Sanctum square (Forecourt, arena, Stairhead).
+  party unit stands on a Sanctum square (Forecourt, arena, the Downstair).
   It is a location ban, not an awareness reading; rests before the first
   `ArenaEngaged` stay legal. The Rest button shows it as its reason
   (15.4): "The Sanctum will not let you sleep." (boss rooms design
@@ -1269,7 +1289,7 @@ The build fails when:
 - The party spends 1 supply.
 - Order: Downed companions get up on 1 hit point → Treat attempts →
   each unit regains its Recovery in hit points **(settled)** plus the
-  Medicine bonus → `rest` pools reset → each caster's Slot Recovery (6.5).
+  Medicine bonus → `rest` pools reset → each caster's Slot Renewal (6.5).
   **(change DH-12, death and healing design 11.3)**
 - The best trained Medicine member adds Wisdom + proficiency to every
   unit's Recovery. Medicine mastery's signature use is the builders' to
@@ -1404,7 +1424,8 @@ Applied on 2026-11-16:
   resolution in 16 (`2026-11-16-enemies-design.md`). **(change A-7)**
 - **Floor layout:** settled in `2026-11-21-floor-layout-design.md`
   (floor layout design, 2026-11-21). It adds the door, Drape, Squeeze,
-  Latch, Listen and Sound the wall rows to 7.2 and the Grille clause to
+  Latch, Listen and Sound the wall (renamed Tap the wall, naming pass
+  5.3.44) rows to 7.2 and the Grille clause to
   8.1. **(changes FL-7, FL-8, FL-17, FL-18, FL-19)**
 - **Room terrain:** settled in `2026-11-21-room-terrain-design.md` (room
   terrain design, 2026-11-21). It adds the Shunt, Kick, Smash, Plank
@@ -1464,8 +1485,8 @@ Applied on 2026-11-16:
   change here is the items wording above (SK-17); it reads 10.3 (one
   choice per level: no new level-1 pick), 11.2 (kit upgrades at levels
   3, 6 and 9) and 15.3 (the run starts with 2 supply; the kit strip's
-  supply text comes from that constant) unchanged (starting kits design
-  2.1, 4.2). **(change SK-17)**
+  supply text comes from that constant; the strip is renamed Gear strip,
+  naming pass 5.8.40) unchanged (starting kits design 2.1, 4.2). **(change SK-17)**
 - **Heirlooms and curses:** settled in
   `2026-11-23-heirlooms-curses-design.md` (heirlooms and curses design,
   segment 15, approved 2026-11-23). It changes no rule here. It reads
@@ -1485,7 +1506,9 @@ Applied on 2026-11-16:
   (item abilities exempt; ButtonCap 1) and 14.3 step 6 (catches resolve
   after the use) unchanged. Its rename leaves 7.2's "never a talisman
   in combat" unchanged: "talisman" stays the consumables category and
-  leaves charm cards (CA-12; M2 text). Pending with the ability model
+  leaves charm cards (CA-12; M2 text). (The category's display word is
+  renamed failsafe, naming pass 5.8.49; the id stays; 7.2 now reads
+  "never a failsafe in combat".) Pending with the ability model
   owner: the party scorer values expected catches (11.3, 13; CA-22,
   M3). Pending with the classes owner and the lead: the charm read
   rulings (11.4; CA-10, before M2 UI). **(changes CA-7, CA-12, read;

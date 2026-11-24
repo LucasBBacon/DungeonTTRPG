@@ -2,6 +2,7 @@
 
 Date: 2026-11-23
 Status: Approved, 2026-11-23
+Names updated by the naming pass (naming pass design `2026-11-24-naming-pass-design.md`, approved 2026-11-24; NP rows listed): NP-25 (this document's row, covering every register rename whose sites include XI), NP-6 (Upended → Sprawled restated). Change ids, code identifiers, field names and history rows are unchanged; history rows carry "(renamed …, naming pass NP-n)" notes.
 Parents (immediate): `2026-11-22-boss-rooms-design.md` (boss rooms design, "BR", segment 9, approved 2026-11-22, **the most recent template**), `2026-11-22-events-design.md` (events design, "EV", segment 8), `2026-11-21-floor-layout-design.md` ("FL", segment 2; FL 13 hands most hooks to segment 10), `2026-11-21-run-structure-themes-design.md` ("RS", segment 1; its change ids are RT-n), `2026-11-21-room-terrain-design.md` ("ROOM", segment 3; "RT" in section numbers such as RT 6.12; its change ids are TR-n), `2026-11-21-hazards-design.md` ("HZ", segment 4), `2026-11-21-traps-locks-design.md` ("TL", segment 5), `2026-11-21-encounter-placement-design.md` ("EP", segment 6), and the loot designs `2026-11-22-loot-economy-design.md` ("LE", segment 7a), `2026-11-22-item-rolls-design.md` ("IR", segment 7b) and `2026-11-22-loot-sources-design.md` ("LP", segment 7c).
 Other parents: `2026-11-15-dungeon-rpg-design.md` (main design, "MAIN"),
 `2026-11-16-character-stat-model-design.md` (stat model, "STAT"),
@@ -21,7 +22,7 @@ the stage-2 class designs `2026-11-18-vanguard-class-design.md` ("VG"),
 and `2026-11-20-herald-class-design.md` ("HR"),
 and `2026-11-20-companions-design.md` (companions design, "CMP").
 
-Items marked **(agreed)** are the client's answers of 2026-11-23 to the five questions this design raised (Q1–Q5; sections 0.2 and 14.1), each answered with the lead's recommendation (option A), or restate a client answer recorded in an approved document. The client also said that everything else in the lead's proposal stands as written: the composite "R" (Model A's chassis, Model C's Chalk on entry and Trace on glimpse, the UI catalogue's surface rules, the numbers pass's fixes; the Dream map as an M3 skin); `PartyKnowledge` in the core, `CanSee`, explored = entered, Downed units contributing no knowledge; remembered state with Afterimages and fades; the map (minimap M1, full map M2, layers, marks, Waymarks, click-to-travel, accessibility); the incentives (loose ends on the map only, the Detour quote, the Behind-you line, no completion reward); the reveal items and requests (Lodestring, F-TREASURE at M3, Surveyor's Sketch, Tithe Bowl, Ear Trumpet, Walls Have Ears, Cased, Overlook writing chalk); the counts-only narrowing for paid pointers; travel and Next loose end, no auto-explore, stopping before known noticing triggers; stealth, hearing and patrols; the surface slot model, priority stack, regions, card queue, budgets, combat suppression, board digits for room clocks only, Inspect parity and staged disclosure; accessibility and input; determinism; save integrity; the full UI surface catalogue with every hook placed; art and audio; the new mechanics adopted, held and rejected; the numbers and fixes (the toy, XN1–XN15); data, V18 `Information`, reports and arms; staging; ownership and hooks; the binding requirements; XI-1 to XI-32; the told-plainly items; the Later client questions (units blocking line of sight, Scout Ahead, the Dream map skin); the risks; and the appendix resolutions and names. The client approved this document as a whole on 2026-11-23.
+Items marked **(agreed)** are the client's answers of 2026-11-23 to the five questions this design raised (Q1–Q5; sections 0.2 and 14.1), each answered with the lead's recommendation (option A), or restate a client answer recorded in an approved document. The client also said that everything else in the lead's proposal stands as written: the composite "R" (Model A's chassis, Model C's Chalk on entry and Trace on sight, the UI catalogue's surface rules, the numbers pass's fixes; the Dream map as an M3 skin); `PartyKnowledge` in the core, `CanSee`, explored = entered, Downed units contributing no knowledge; remembered state with Afterimages and fades; the map (minimap M1, full map M2, layers, marks, Waymarks, click-to-travel, accessibility); the incentives (loose ends on the map only, the Detour quote, the Behind-you line, no completion reward); the reveal items and requests (Lodestring, F-TREASURE at M3, Surveyor's Sketch, Tithe Bowl, Ear Trumpet, Walls Have Ears, Cased, Overlook writing chalk); the counts-only narrowing for paid pointers; travel and Next loose end, no auto-explore, stopping before known noticing triggers; stealth, hearing and patrols; the surface slot model, priority stack, regions, card queue, budgets, combat suppression, board digits for room clocks only, Inspect parity and staged disclosure; accessibility and input; determinism; save integrity; the full UI surface catalogue with every hook placed; art and audio; the new mechanics adopted, held and rejected; the numbers and fixes (the toy, XN1–XN15); data, V18 `Information`, reports and arms; staging; ownership and hooks; the binding requirements; XI-1 to XI-32; the told-plainly items; the Later client questions (units blocking line of sight, Scout Ahead, the Dream map skin); the risks; and the appendix resolutions and names. The client approved this document as a whole on 2026-11-23.
 
 **The lead's six answers to the brief (0.1)** were accepted by the client by proceeding to the five questions. They are recorded here as the lead's answers; the client confirmed them on 2026-11-23, when it approved this document as a whole, **including their contested parts**: no "Shell on sight" and no one-square Pocket rule; no trap or secret reveal items; no completion reward and no off-path loot lean; no bought map; no separate special-treasure class.
 
@@ -52,7 +53,7 @@ The client asked six questions (0.1): (1) should distant points or small gaps in
 
 Standing guidance: not an exact 5E port; design is not limited by quantity; the art team is eager; combat is key; contest the client or approved views where warranted.
 
-The client's five answers (Q1–Q5, **agreed**, 2026-11-23) are in 0.2: **quitting mid-floor writes a single suspend slot that is deleted on load, and party knowledge is written forward-only (Q1). A known patrol's forecast is earned by watching, shown as a window, 20 ticks by default and one lap with a trained watcher or Cased, withdrawn by events, and protected by a `PatrolFightRate` gate (Q2). The Ear Trumpet is allowed at M3, stocked only for parties with no Perception-trained member, and only if the solo Listen click share misses (Q3). The Easy Plain auto-pick and auto-Probe read only known patrols and stand down when their hearing reach crosses unexplored squares (Q4). The Lodestring never points at secret caches (Q5).**
+The client's five answers (Q1–Q5, **agreed**, 2026-11-23) are in 0.2: **quitting mid-floor writes a single suspend slot that is deleted on load, and party knowledge is written forward-only (Q1). A known patrol's forecast is earned by watching, shown as a window, 20 ticks by default and one lap with a trained watcher or Cased, withdrawn by events, and protected by a `PatrolFightRate` gate (Q2). The Ear Trumpet is allowed at M3, stocked only for parties with no Perception-trained member, and only if the solo Listen click share misses (Q3). The Mild Plain auto-pick and auto-Probe read only known patrols and stand down when their hearing reach crosses unexplored squares (Q4). The Lodestring never points at secret caches (Q5).**
 
 **Change prefix.** This design uses **XI-n**. A case-insensitive grep for `\bXI-[0-9]` across the 28 approved documents finds **0 hits** (re-run while writing). The research drafts, the three models, the UI catalogue and the incentives layer each used colliding local XI numbers (XI-1..26 three times, XI-24..30, XI-30..49). This document issues **one register, XI-1 to XI-32** (13), and no id has two meanings (A.6).
 
@@ -101,12 +102,12 @@ Rejected schemes: XT (20 hits), XF (35), XK (19), IT (32), IF (21). This documen
 #### Brief question 2: should an item, ability, trait or spell reveal specific things in the fog?
 **Answer: yes, but narrow, located and single-instance, and only in categories no skill lane owns** (XI-14, XI-22 to XI-27).
 - The rule: *sight is symmetric; everything else is hearing, a located FactLedger fact, or chalk.* An item may point at one treasure room (the **Lodestring**), sell an outline of the room graph at camp (the **Surveyor's Sketch**), batch an existing verb (**Walls Have Ears**, Arcanist), stand in for a **missing** skill lane on the Wax Key precedent (the **Ear Trumpet**, only when nobody is Perception-trained; agreed, Q3), or reward watching (**Cased**, Shade).
-- **Never (told plainly; confirmed by the client on 2026-11-23):** trap reveals or a trap total (Mechanics lane; TL KF7; Hidden traps are floored anyway); secret radar (FL-17, FL 19.1; the toy showed a stub-drawing map item identifies the secret on 100% of floors); telepathy, Clairvoyance, Arcane Eye or a Spyhole (MAIN 4.3, **decided**; FL 9.1); Detect Magic or Identify (CN 16.7); light or lamp items (no light model, RS 7.6); anything on a scroll (CN 13.7). The Wand of Outlining stays the only unit reveal.
+- **Never (told plainly; confirmed by the client on 2026-11-23):** trap reveals or a trap total (Mechanics lane; TL KF7; Unfound traps are floored anyway); secret radar (FL-17, FL 19.1; the toy showed a stub-drawing map item identifies the secret on 100% of floors); telepathy, Clairvoyance, Arcane Eye or a Spyhole (MAIN 4.3, **decided**; FL 9.1); Detect Magic or Identify (CN 16.7); light or lamp items (no light model, RS 7.6); anything on a scroll (CN 13.7). The Wand of Outlining stays the only unit reveal.
 
 #### Brief question 3: how do we properly incentivise exploring beyond the main path?
 **Answer: the reasons already exist; make the decision legible, the trip cheap and the stopping point clean. Never reward completion** (XI-10, XI-11, XI-27).
 - Already approved and well budgeted: side-room containers previewed from the threshold (LP 4.2), the 600‰ off-path healing lean, secret caches, Curiosities and Glimpses, the optional elite (+160 XP, intel line), Latch shortcuts, the Treasure count with "best remaining", `EmptyDeadEndRate` 0 **(settled)**.
-- Segment 10 adds: **loose ends** marked on the map (no count anywhere, so it never becomes a completion meter); a 0-click **Detour quote** built only from party knowledge; **travel** and a **Next loose end** key that stops before crossing; one **Behind-you line** on the existing arena-entry confirm (the last cheap decision point); a **spent field** when nothing worth chasing remains; one paid or earned **treasure pointer**; and information paid by combat (F-TREASURE through Yield).
+- Segment 10 adds: **loose ends** marked on the map (no count anywhere, so it never becomes a completion meter); a 0-click **Detour quote** built only from party knowledge; **travel** and a **Next loose end** key that stops before crossing; one **Behind-you line** on the existing arena-entry confirm (the last cheap decision point); an **emptied field** when nothing worth chasing remains; one paid or earned **treasure pointer**; and information paid by combat (F-TREASURE through Yield).
 - **Never (told plainly; confirmed by the client on 2026-11-23):** exploration XP; a completion percentage, badge or map-coverage stat (LP-29; Grave Goods "never a score"); a visible floor timer or alarm (STAT 7.2 "exploration has no clock", **agreed**; FL 9.1); a trap total; more off-path loot. **Contested:** Model B's 600‰ off-path loot-rank lean costs lean players 0.22 VP and the worst VP per minute in the toy; it is a push, not a pull. Rejected.
 
 #### Brief question 4: should the players have an easily accessible map?
@@ -118,14 +119,14 @@ Rejected schemes: XT (20 hits), XF (35), XK (19), IT (32), IF (21). This documen
 #### Brief question 5: an item that hints at special treasure, bought or found?
 **Answer: yes, the Lodestring, pointing at existing treasure only. A separate "special treasure" class is contested and rejected** (XI-22 to XI-25).
 - A run-scoped party counter (cap 1, Wax Key model, never a scroll or a deck card), used out of combat on F2–F4 for 1 click, 0 ticks. It marks **one room** with a tier word and "plain cache" or "behind risk" (the cache's own socket class, never the room's traps or guards; 4.6.1), and a string runs along known walls toward it. Never the square, family or identity.
-- Its target is the floor's best unfound container notable. **Secret caches are excluded (agreed, Q5)**, as are carried notables, boxed lurkers, Windfalls, the Viaticum, the signature cache and all of F1.
+- Its target is the floor's best unfound container notable. **Secret caches are excluded (agreed, Q5)**, as are carried notables, boxed lurkers, Windfalls, the Parting Fare, the signature cache and all of F1.
 - Sources: the Tithe Bowl at camp (one per camp), a Curiosity gain, or the fact itself through Yield's Pick the Question once per floor. "Nothing the string can find" does not spend it.
 - Why not "special treasure" (told plainly; confirmed by the client on 2026-11-23): a treasure only the hint reveals would break the fixed deck and LootDoorInvariant (RS 6.4), be a CL 6.3 forbidden grant ("more loot"), and make the hint a must-buy tax. The *feeling* of special comes from presentation: a "the string ends here" frame on the loot card.
 - It needs a flagged narrowing of "counts only, never locations" (FL-20, LE-15, DH 5.5 G6, RS 6.9, LP 4.12): free surfaces stay counts-only; a paid or earned pointer may name one room (XI-23 ⚑).
 
 #### Brief question 6: how detailed should already-explored areas, out of vision, be kept?
 **Answer: exact for what cannot change unseen; "as last seen" for what can, with the age in hover text; projected only from a public deterministic clock; never extrapolated** (XI-5).
-- Walls, Portal kinds, open doors (monsters never close them, ENM 12.4), the party's own container and trap acts, Revealed traps and Hunch zones (monotonic), tells and facts: exact. Closed doors: drawn closed in the Remembered style with the hover "closed 14 ticks ago; monsters open doors".
+- Walls, Portal kinds, open doors (monsters never close them, ENM 12.4), the party's own container and trap acts, Found traps and Hunch zones (monotonic), tells and facts: exact. Closed doors: drawn closed in the Remembered style with the hover "closed 14 ticks ago; monsters open doors".
 - Last-seen monsters become **Afterimages**: flat role-glyph paper cut-outs (never models), never moved, keyed to what the unit was doing. A patrol leaves only a "last seen" pip on its drawn route (a patrol plate is 100% stale after one tick); Searching units are removed after about 5 ticks; Stationary and Dormant units persist until their square is seen empty or a disturbance is heard, and turn to a hollow "old" style after about one lap length. **Contested (told plainly):** a uniform 20-tick fade (every draft) fits no activity in the toy.
 - Remembered squares are a "faded photograph" (value compression plus a seen-edge line), never a hatch (Rough hatching owns the hatch) and never a board digit (a digit on the board always means a room's clock, HZ 6).
 
@@ -136,25 +137,25 @@ Rejected schemes: XT (20 hits), XF (35), XK (19), IT (32), IF (21). This documen
 | Q1 | Save integrity: can a seeded floor be scouted by reloading? | **A.** Quitting mid-floor writes a single suspend slot of the current core state; loading it deletes the slot; `PartyKnowledge` is written forward-only; paid knowledge acts are atomic writes (4.12) | B: keep safe-point saves and accept reload-scouting | XI-28 ⚑ |
 | Q2 | Patrol forecast strength | **A.** Earned by watching, shown as a window, 20 ticks by default and one lap with a Perception-trained watcher or Cased, withdrawn by events, protected by a `PatrolFightRate` gate (4.8.1) | B: route and last-seen memory only, no forecast. C: an uncapped forecast (cuts patrol contact about 6×) | XI-6 ⚑ |
 | Q3 | The Ear Trumpet, which edits the agreed basic-vendor row (TL-25) | **A.** Allowed at M3, stocked only for parties with no Perception-trained member, and only if the solo Listen click share misses (4.5.2) | B: no Listen lane-gap item | XI-26 ⚑ |
-| Q4 | Auto-actions and agreed TL-5 | **A.** The Easy Plain auto-pick and auto-Probe read only known patrols and stand down when their hearing reach crosses unexplored squares; closes a measured leak at a cost of at most 1 click in partly explored areas (4.8.2) | B: keep reading true state and accept the leak (0.13 per floor) | XI-6 ⚑ |
+| Q4 | Auto-actions and agreed TL-5 | **A.** The Mild Plain auto-pick and auto-Probe read only known patrols and stand down when their hearing reach crosses unexplored squares; closes a measured leak at a cost of at most 1 click in partly explored areas (4.8.2) | B: keep reading true state and accept the leak (0.13 per floor) | XI-6 ⚑ |
 | Q5 | The Lodestring and secret caches | **A.** The Lodestring (and every F-TREASURE channel) never points at secret caches (4.6.1) | B: it may, but only while a living party member is Mechanics-trained | XI-22 |
 
 ### 0.3 Decisions in brief
 
 | # | Decision | Wave | Marking |
 |---|---|---|---|
-| 1 | Composite "R": Model A's chassis, Model C's Chalk on entry and Trace on glimpse, the UI catalogue's surface rules, the numbers pass's fixes; the Dream map as an M3 skin over a plain default (3, 6) | M1–M3 | lead's call; new lead's call for the M3/Later split of the skin (6) |
+| 1 | Composite "R": Model A's chassis, Model C's Chalk on entry and Trace on sight, the UI catalogue's surface rules, the numbers pass's fixes; the Dream map as an M3 skin over a plain default (3, 6) | M1–M3 | lead's call; new lead's call for the M3/Later split of the skin (6) |
 | 2 | `PartyKnowledge` in the core (Unknown, Chalked, Seen, Remembered; room flags `entered`, `traced`, `interiorChalked`); explored = entered; unmapped defined (4.1.1) | M1/M2 | lead's call; XI-1 ⚑ |
 | 3 | One integer symmetric-shadowcasting `CanSee`; no range cap; units never block; the stated corner rule; Downed units contribute no knowledge (4.1.2) | M1 | lead's call; XI-2 ⚑ |
 | 4 | Chalk on entry (the wall-bounded footprint, kinds never drawn); stubs by sight only; the sight-shadow reading (4.1.4) | M1 | lead's call; XI-3 ⚑ |
-| 5 | Trace on glimpse, map only; F-ROOM drawn as Chalked; the FL 8.1 amendment in M2 (4.1.5) | M2 | lead's call; XI-4 |
+| 5 | Trace on sight, map only; F-ROOM drawn as Chalked; the FL 8.1 amendment in M2 (4.1.5) | M2 | lead's call; XI-4 |
 | 6 | Remembered state; activity-keyed Afterimages; projected Stirs (4.2) | M1/M2 | lead's call; XI-5 ⚑ |
 | 7 | Minimap (M1); full map, layers, auto-marks, Waymarks, Listen bubbles, fact drawings (M2) (4.3) | M1/M2 | lead's call; XI-7 ⚑ |
-| 8 | Incentive charter IN1–IN6; loose ends on the map only; Detour quote; Behind-you line; rooms tally; spent field (4.4) | M2 | lead's call; XI-10, XI-11 ⚑, XI-14 ⚑ |
+| 8 | Incentive charter IN1–IN6; loose ends on the map only; Detour quote; Behind-you line; rooms tally; emptied field (4.4) | M2 | lead's call; XI-10, XI-11 ⚑, XI-14 ⚑ |
 | 9 | Information charter IP1–IP10; adopted and rejected reveal sources (4.5) | M2/M3 | lead's call; XI-14 ⚑, XI-32 ⚑ |
 | 10 | F-TREASURE, the Lodestring, the Tithe Bowl merged, F-TREASURE through Yield; never a secret cache (4.6) | M3 | lead's call; **agreed, Q5**; XI-22 to XI-25 (XI-23 ⚑) |
 | 11 | The Ear Trumpet (4.5.2) | M3, conditional | **agreed, Q3**; XI-26 ⚑ |
-| 12 | Travel, Next loose end, Back to Stairhead, the noticing pre-stop, re-sight narrowing; no auto-explore (4.7) | M2 | lead's call; XI-8, XI-9 |
+| 12 | Travel, Next loose end, To the Downstair, the noticing pre-stop, re-sight narrowing; no auto-explore (4.7) | M2 | lead's call; XI-8, XI-9 |
 | 13 | Routes on known squares; `PatrolForecast` earned, windowed, event-withdrawn, gated (4.8.1) | M2 | **agreed, Q2**; XI-6 ⚑ |
 | 14 | Auto-actions read known patrols and the never-Seen-crossing gate (4.8.2) | M2 | **agreed, Q4**; XI-6 ⚑ |
 | 15 | In-sight and hidden-from pips, noticing bands (M2); watch lines and step tag (M3, conditional); hearing and noise preview (4.8.3, 4.8.4) | M2/M3 | lead's call; XI-12, XI-13 ⚑ |
@@ -257,9 +258,9 @@ Lessons:
 
 **Listen:** out of combat, no roll, noise 0, once per door per floor, never Hidden lurkers, passive with a trained member at an auto-walk pause (FL-18).
 
-**Secrets:** one universal tell, no decoys, Sound the wall only at a tell, a dead-end stub of 3 squares or fewer that is always a secret (`HairlineCue`), "never by minimap gaps" (FL-17, FL 19.1).
+**Secrets:** one universal tell, no decoys, Tap the wall only at a tell, a dead-end stub of 3 squares or fewer that is always a secret (`HairlineCue`), "never by minimap gaps" (FL-17, FL 19.1).
 
-**Traps:** Revealed, Hunch, Hidden; no search-for-traps verb; no trap total (TL 6.4, KF7); Probe never makes a trap less safe (KB1).
+**Traps:** Found, Hunch, Unfound; no search-for-traps verb; no trap total (TL 6.4, KF7); Probe never makes a trap less safe (KB1).
 
 **Hazards:** visible from reveal, act by a rule, never found by a check; a digit on the map always means the room's clock (HZ 6, 6.18).
 
@@ -295,7 +296,7 @@ Lessons:
 | HZ 6.18 | Footprints, due overlay and digit, Dream card, rule cards | 4.9.6, 5 |
 | RT 6.12 | Verb and cover previews, `PreviewExactness` | 5, 9.2 |
 | DH 17 | Danger band, warnings, lethal tags, death recap, floor-entry card | 5 |
-| LE 6.15 | Stratum Card order, floor strip, tier marks, plate loot badges, the Viaticum offer UI, ledgers, stings | 4.9, 5 |
+| LE 6.15 | Stratum Card order, floor strip, tier marks, plate loot badges, the Parting Fare offer UI, ledgers, stings | 4.9, 5 |
 | LP 4.12 | Container hover, quiet summaries, wall-set mark, Windfall set | 5 |
 | IR 6.1 | Item card, verdict, offer frames | 5 |
 | EV 4.12 | Curiosity card, facts on the map, chips, Grace chip, codex; the worst-case card fit as a segment 10 acceptance item | 4.3.6, 4.10, 5 |
@@ -353,7 +354,7 @@ Lessons:
 
 ### 3.3 Verdict (lead's call; all three judges)
 
-- **Composite "R" is the design.** Model A's chassis (knowledge model, `CanSee`, charter, surface register, V18 harness), Model C's Chalk on entry and Trace on glimpse, the UI catalogue's surface rules, and the numbers pass's fixes.
+- **Composite "R" is the design.** Model A's chassis (knowledge model, `CanSee`, charter, surface register, V18 harness), Model C's Chalk on entry and Trace on sight, the UI catalogue's surface rules, and the numbers pass's fixes.
 - R is the only configuration that passes the binding F4–5 clock line on the lean arm (8.2), keeps explore clutter inside the gate (5.5% over 12), has the lowest test cost (0.9×) and the fewest flags.
 - **Told plainly (after the check):** R **fails the combat clutter gate in the toy** (8.9% over 12 against the 5% gate; BASE 2.6%). The combat suppression of 4.9.4 is the fix, but it was not re-measured (8.6). The combat gate is a **pre-M2 sign-off check**, and the levers of 8.4 apply in order on a miss.
 - C's paper-and-chalk grammar is kept in one style. The Dream map is an M3 skin over a plain default, gated (6).
@@ -440,7 +441,7 @@ Both functions are in the `KnowledgeLeak` harness (9.2): changing an unseen wall
 - **The sight-shadow reading.** A Chalked square nobody currently sees is exactly a square from which no unit can see the party (symmetric line of sight). Its hover reads **"out of sight (not out of hearing)"**. It is never called "safe" or "unwatched", because noise still alerts and a Hidden lurker may stand there (told plainly). It is drawn by the Chalked style itself, never by a new floor hatch.
 - **Rejected:** corridor gap fill between two seen squares (the fill-or-not decision would leak hidden branches); radius or distance infill; display-side gap fill.
 
-#### 4.1.5 Trace on glimpse (change XI-4; lead's call; M2)
+#### 4.1.5 Trace on sight (change XI-4; lead's call; M2)
 
 - When any square of a Room node becomes Seen from outside it (through an Arch, open Door, Grille or drawn-back Drape), the room becomes **Traced**: its macro-grid node contour is drawn **on the map and minimap only**, never on the board.
 - The contour is one style (6, line-style registry): a **solid chalk stroke with gaps at every wall-run end**, like an unfinished chalk sketch, never dotted, so it never reads as a sealed room. The gaps never correspond to real Portals. Hover: "shape only; exits unknown".
@@ -457,7 +458,7 @@ Both functions are in the `KnowledgeLeak` harness (9.2): changing an unseen wall
 | Portal **open** | Exact (monsters never close, ENM 12.4) | — |
 | Portal **closed**, latched, drawn | Drawn as last seen in the Remembered style | Hover: "closed 14 ticks ago; monsters open doors". No "?" reachability logic (computing it from partial knowledge invites misreads) |
 | Containers, locks, disarms | Exact for party acts; tier word only if hovered when seen | Windfall bundles: as last seen |
-| Revealed traps, Hunch zones | Exact grade (monotonic, TL 6.4) | Spring state only if seen or heard by the reserved cue |
+| Found traps, Hunch zones | Exact grade (monotonic, TL 6.4) | Spring state only if seen or heard by the reserved cue |
 | Stir phase and its digit | **Projected** as a **solid** numeral in the Remembered grade with a "projected" pip as its only marker (never hollow: among segment 10's marks hollow means aged memory only, and on room-clock digits the approved Windfall count digit is hollow while Dormant), only when `projectable`; else "?". `projectable` is set at reveal from the hazard record alone: true when the schedule was announced at reveal and the room has no Cord or Stoke input (M3), whatever monsters are present (lead's call, after the check) | It stays the room's clock, so HZ 6's digit rule holds. Travel treats a Remembered hazard showing "?" as avoid-or-stop (4.7) |
 | Units and groups | **Afterimage** (below) | Never moved by core or display |
 | Patrol routes | Seen route segments on known squares, "continues" ends where they leave known space | Forecast per 4.8 |
@@ -499,12 +500,12 @@ Both functions are in the `KnowledgeLeak` harness (9.2): changing an unseen wall
 #### 4.3.1 Minimap (M1)
 - HUD top-right, about 18% of screen width *(illustr.)*, north-up with the camera wedge (FL 8.1); a setting rotates it with the camera. Landmark icons, not words, so it reads at all rotations.
 - **Form (lead's call, after the check):** FL 8.1's north-up **schematic room-node graph**, not a square-level plan (the plan is the full map's centre view, 4.3.2). Each node is filled by its room knowledge in one of three value fills: **entered** (solid), **interior Chalked** (chalk fill), **Traced** (the gapped contour only, M2).
-- **Reduced mark set:** Portal state glyphs at loose ends only, the Stairhead, the party, loose-end marks, Listen bubbles (as a door-side dot), Waymark tacks, fact marks (no told pips) and the Lodestring mark (M3); Precinct fill tints.
+- **Reduced mark set:** Portal state glyphs at loose ends only, the Downstair, the party, loose-end marks, Listen bubbles (as a door-side dot), Waymark tacks, fact marks (no told pips) and the Lodestring mark (M3); Precinct fill tints.
 - **Glyph floor:** no minimap glyph below 10–12 px at 720p *(illustr.)*; the glance test and a `CardFit`-equivalent check run on the minimap at 720p and 1280×800.
 - Never: Unknown rooms, unfound Hairlines (a wall leaves no gap), non-party units, **Afterimages in any state** (they live on the board and the full map).
 - **No count of anything on its frame** (told plainly; contests the UI catalogue and Model A). A north arrow only.
 - In combat it collapses to a one-room thumbnail; in arenas it hides behind the pull-back zoom (BR 4.16).
-- **Duty:** it must answer "where next?" by itself (loose ends, Stairhead, marks), so the full map is optional by design.
+- **Duty:** it must answer "where next?" by itself (loose ends, the Downstair, marks), so the full map is optional by design.
 
 #### 4.3.2 Full map (M2)
 - One remappable action (default M; controller View, Later). 0 ticks, 0 draws: exploration is turn-stepped and nothing advances while it is open. The board dims behind it.
@@ -515,7 +516,7 @@ Both functions are in the `KnowledgeLeak` harness (9.2): changing an unseen wall
 - Interactions: click a known square, room or mark to travel (4.7); right-click places a Waymark; scroll zooms; controller D-pad jumps room to room, bumpers cycle layers (in map mode Inspect moves to the held left trigger; the binding table in 4.10).
 
 #### 4.3.3 Auto-marks (core-derived)
-Loose end; heard door (bubble); seen unopened container; leftovers and flee piles (ENM 15.8); the trader (ITEMS 10.9); Revealed trap; Hunch zone; found Hairline tell; padlock kind; F-KEY carrier and lock; a Curiosity left open; Landmarks; Stairhead; Forecourt; every fact (4.3.6).
+Loose end; heard door (bubble); seen unopened container; leftovers and flee piles (ENM 15.8); the trader (ITEMS 10.9); Found trap; Hunch zone; found Hairline tell; padlock kind; F-KEY carrier and lock; a Curiosity left open; Landmarks; the Downstair; Forecourt; every fact (4.3.6).
 
 #### 4.3.4 Waymarks (player marks)
 - Up to 8 per floor *(illustr.)*, optional 12-character label. **Look (lead's call, after the check):** every Waymark stands on one reserved player **tack** base (a round-headed tack used by nothing else); on the board it shows as the bare tack, and its inner shape shows on the map and in hover. The 6 inner shapes are chosen by art from outside the pattern registry (V18s `WaymarkGlyphDistinct`; greyscale gate row). The drafts' star, cross, question mark, eye, skull and arrow are withdrawn: each already carries a rule (the notable's star, Hunch "?" ticks, the marked tell's eye tick, lethal tags, arrival and fall arrows).
@@ -530,7 +531,7 @@ Loose end; heard door (bubble); seen unopened container; leftovers and flee pile
 
 | Fact | Drawn as |
 |---|---|
-| F-TRAP | The Revealed trap glyph, as if seen |
+| F-TRAP | The Found trap glyph, as if seen |
 | F-SECRET | The tell glyph on its wall face, plus a Portal glyph on the map |
 | F-ROOM | Interior Chalked (the footprint, Voids included as plain chalk; stubs still need sight) |
 | F-KEY | Keybearer pip on the carrier's plate, Afterimage or route pip, plus the lock's padlock badge |
@@ -563,7 +564,7 @@ One core query `DetourQuote(target)` over party knowledge, for any loose end, Tr
 2. **Sound:** the Listen bubble ("heard: 2 still · 14 ticks ago") or "not listened"; "will Listen on arrival" if a trained member is present.
 3. **Sight:** containers seen from the threshold or through a Grille (count and silhouettes; tier word if hovered), a Curiosity prop, the elite seen through its vantage; a Lodestring mark if any.
 4. **Patrol** (Inspect): a known patrol's window from `PatrolForecast` (4.8.1), or nothing. (Already Inspect-only; the 9.5 cut order no longer lists it.)
-5. **Route obstacles** (Inspect): known padlocks, Hunch zones, Revealed traps, known groups and hazard footprints on the route; a known Latch lever side.
+5. **Route obstacles** (Inspect): known padlocks, Hunch zones, Found traps, known groups and hazard footprints on the route; a known Latch lever side.
 
 Unknown is always "?", never "none" (RC1). Never shown: anything implying room role.
 
@@ -573,12 +574,12 @@ Unknown is always "?", never "none" (RC1). Never shown: anything implying room r
 - **One line on the existing BR 4.16 arena-entry confirm** (the last cheap point to detour before the 60–97-square post-boss walk): "Behind you: 2 rooms not entered · Treasures 5 / 7 · best remaining: Uncommon". 0 added clicks.
 - Only approved fields: rooms not entered, the Treasure field, "best remaining" under its approved k ≥ n/2 rule. **No secrets found/total** (the approved count line shows only "secrets: s"; told plainly) and **no loose-end count**.
 - **"Rooms not entered" (lead's call, after the check)** = t − e, less the arena and every room reachable only through the arena (none of them is behind the party). A full clear shows 0 at the confirm (V18t `BehindYouFullClearZero`).
-- Hidden entirely in the spent state (4.4.5).
+- Hidden entirely in the emptied state (4.4.5).
 - **If the player has turned the confirm off** (BR 4.2 allows it; lead's call, after the check): the same line shows once, as a non-modal status-ribbon toast, the first time a party unit enters the arena's doorway band.
-- **No Stairhead banner and no new Stairhead confirm** (told plainly; contests N6 and the lead's draft: after the boss, going back is at its most expensive).
+- **No Downstair banner and no new Downstair confirm** (told plainly; contests N6 and the lead's draft: after the boss, going back is at its most expensive).
 - **The rooms tally** (FL-20's "party-bar tally", undefined in FL; LE 6.15's floor-strip rooms cell; lead's call, told plainly): the floor strip's rooms cell reads **"rooms e / t"**, where t = n + k, the sum of the count line's "Main path: n rooms" and "side rooms: k" **(new lead's call: notation fixed)**, and **e counts Room nodes with `entered == true` from that same node set** (Alcoves and corridor segments never count; definition after the check). It is **never split by role**, because a role-split tally would mark each entered room as main path or side and leak the route to the boss. **Told plainly (after the check):** this tally is a room-coverage figure; it is kept only because FL-20 and LE 6.15 already fixed a rooms tally in the strip, and it is the one named exception to IN6 (4.4.1).
 
-#### 4.4.5 The spent field (change XI-11 ⚑; lead's call; M2)
+#### 4.4.5 The emptied field (change XI-11 ⚑; lead's call; M2)
 When "best remaining" is Common or nothing countable is left, the Treasure field drops one RC6 value step and reads "nothing worth chasing" or "nothing countable left": a clean, honest signal to stop. (Renamed from the drafts' "quiet states" to avoid LP's "quiet summaries".) **Respecting LE's threshold (lead's call, after the check):** while k < n/2, "best remaining" is hidden, so the field can fire only on "nothing countable left"; "nothing worth chasing" fires only once "best remaining" is visible (V18t `SpentFieldRespectsBestRemaining`).
 
 #### 4.4.6 Owner requests (hook; XI-27)
@@ -641,7 +642,7 @@ When "best remaining" is Common or nothing countable is left, the Treasure field
   - **secret caches (agreed, Q5)**: a pointer naming the room holding a ≤ 3-square stub, which `HairlineCue` guarantees is a secret and which any adjacent unit can find the tell of, would turn the Mechanics lane into "walk to the short stub";
   - carried notables (they would locate a group, IP5);
   - boxed-lurker containers (TL 6.14 "never a free detector");
-  - Windfalls; the Viaticum; the signature cache; HE reservations;
+  - Windfalls; the Parting Fare; the signature cache; HE reservations;
   - all of F1 (FL-20: F1 teaches the floor).
 - **Floors (new lead's call):** the fact channels (Yield, a Curiosity gain) are eligible on F2–F5; the Lodestring item is used on F2–F4 only (4.6.2).
 - **Ranking (lead's call, after the check; the draft's "off-path before main path" is dropped):** tier descending, then the target room's macro-grid position (y, then x, in floor coordinates), then the container's square (y, then x) inside the room. Integer, draw-free and **role-blind**: neither room role nor `roomId`, `portalId` or `socketId` (which follow FL's main-chain order) ever orders candidates, so a pointed room says nothing about whether it is off the main path (XQ16). V18t `RoleBlindOrder`: permuting `roomId`s with geometry fixed gives identical targets.
@@ -663,12 +664,12 @@ When "best remaining" is Common or nothing countable is left, the Treasure field
 #### 4.6.3 The Tithe Bowl merged (change XI-24; lead's call; M3; LE owner)
 - LE 8.1's "coin buys one Stratum fact" becomes one camp service, one purchase per camp, with two options:
   - **A Lodestring** (the carried counter; the player chooses when to use it);
-  - **Surveyor's Sketch:** at the next floor's entry, every non-secret Room node and Alcove is outlined on the macro grid, with node-to-node edges and the Stairhead. **Never** corridor squares, dead-end stubs, Portal-only fragments with no far node, interiors, square kinds, pieces, units, containers, traps, hazards, or any node reachable only through an unfound Hairline (V18r `ChalkNeverStub`, V18g `SketchNeverSecretNode`; cross-document comparison 2026-11-23, CC-122). Outlined rooms stay unmapped.
+  - **Surveyor's Sketch:** at the next floor's entry, every non-secret Room node and Alcove is outlined on the macro grid, with node-to-node edges and the Downstair. **Never** corridor squares, dead-end stubs, Portal-only fragments with no far node, interiors, square kinds, pieces, units, containers, traps, hazards, or any node reachable only through an unfound Hairline (V18r `ChalkNeverStub`, V18g `SketchNeverSecretNode`; cross-document comparison 2026-11-23, CC-122). Outlined rooms stay unmapped.
 - Prices *(illustr.)*: Sketch 15 coin, Lodestring per 4.6.2.
 - **Option availability (new lead's call):** the Lodestring option is shown greyed with its reason ("you already carry one") while the party holds one (cap 1), and is not offered at the camp before F5 (the fourth camp), where only the Sketch is offered, because the Lodestring is used on F2–F4 only.
 - **Resolution timing:** both resolve at the entered floor's entry or use, never on camp or Two Doors cards (V18t `PointerNeverPreDoor`). The camp card says only "Bought: Surveyor's Sketch".
 - The approved guards stay: never "behind a lock" wording; FactLedger dedup.
-- **Request:** the LE owner relaxes "unavailable while holding a Wax Key" for both options; parties without Mechanics need routing most, and neither option is the lock card. Fallback in 14.2. Until the LE owner rules, the Bowl sits at the Keeper's Cart shown greyed with its reason while a Wax Key is held (camp and hub design 4.3).
+- **Request:** the LE owner relaxes "unavailable while holding a Wax Key" for both options; parties without Mechanics need routing most, and neither option is the lock card. Fallback in 14.2. Until the LE owner rules, the Bowl sits at the Pedlar's Cart shown greyed with its reason while a Wax Key is held (camp and hub design 4.3).
 
 #### 4.6.4 F-TREASURE through Yield (change XI-25; lead's call; M3; enemies owner for ENM 14.6, Herald owner for HX-6)
 - F-TREASURE joins the interrogation categories after F-KEY (default priority unchanged), choosable through Pick the Question, **at most once per floor through Yield** (told plainly; balance fix so the paid pointer is not dead content), inside the shared cap of 2.
@@ -696,14 +697,14 @@ When "best remaining" is Common or nothing countable is left, the Treasure field
   - **Passability:** loose ends the party cannot currently pass (Locked with no key, Wax Key or Mechanics-trained member; a Latch's blind face; a Squeeze the party cannot use) rank after every passable one.
   - **Dismiss:** a "skip this loose end" action hides one from the key (not from the map) for the floor; it is display state in the UI annex (4.3.4), never read by rules.
   - Walker rows: standing on a loose end, a Locked loose end without Mechanics, a dismissed loose end.
-- **Back to Stairhead** (once the Stairhead has been Seen). There is **no "return to main path"** (it would reveal which rooms are main path; Model C's version rejected).
+- **To the Downstair** (once the Downstair has been Seen). There is **no "return to main path"** (it would reveal which rooms are main path; Model C's version rejected).
 - **No auto-explore (told plainly; contests the DCSS default).** Floors have 9–14 Room nodes, and the decisions are at doors. In the toy, auto-explore pushed balanced players to full clears (side share 1.0, regret 0.81), added 0.85 unplanned engagements per floor and 5× the patrol exposure, and saved no more clicks than travel. Revisit only as a Later accessibility option if `ExploreClicks` misses with travel on.
 
 ### 4.8 Stealth, hearing and patrols (changes XI-6, XI-12, XI-13)
 
 #### 4.8.1 Patrol routes and `PatrolForecast` (change XI-6 ⚑; agreed, Q2; M2)
 - **Routes** are drawn only over known (Seen, Remembered, Chalked) squares, with an open "continues" end (a three-dot ellipsis; 6) where they leave known space. ⚑ Reading of ENM 12.1 (**settled**: "once seen, the route is drawn"); otherwise the drawing would leak unexplored Circuit rooms.
-- **One query, `PatrolForecast(groupId, square, predicate)`, over known patrols only** (seen, or heard through Listen "passing" or F-LISTEN). **The core chooses the horizon** from the group's `routeSeen` record; no consumer passes one (after the check). `predicate` is the consumer's crossing test: `noticing` (the group within its first line of sight, by `KnownCanSee` optimistic, or its 6 band of the square) for the Patrols layer, the Detour quote, the rest preview and EV chips; `hearingReach` (the square inside the act's reach, 4.8.2) for the TL lock card, the Easy Plain auto-pick gate and auto-Probe suppression. It serves the Patrols layer, the Detour quote, the rest preview (ABL 15.1; EP-16 if ruled), the TL lock card, the Easy Plain auto-pick gate, auto-Probe suppression and EV 4.12 chips.
+- **One query, `PatrolForecast(groupId, square, predicate)`, over known patrols only** (seen, or heard through Listen "passing" or F-LISTEN). **The core chooses the horizon** from the group's `routeSeen` record; no consumer passes one (after the check). `predicate` is the consumer's crossing test: `noticing` (the group within its first line of sight, by `KnownCanSee` optimistic, or its 6 band of the square) for the Patrols layer, the Detour quote, the rest preview and EV chips; `hearingReach` (the square inside the act's reach, 4.8.2) for the TL lock card, the Mild Plain auto-pick gate and auto-Probe suppression. It serves the Patrols layer, the Detour quote, the rest preview (ABL 15.1; EP-16 if ruled), the TL lock card, the Mild Plain auto-pick gate, auto-Probe suppression and EV 4.12 chips.
 - **Earned (agreed, Q2; defined in observable terms after the check).** FL waypoints are hidden schedule data, so "earned" never refers to them. A forecast is earned when the party has **continuously watched** the group move at least 4 squares *(illustr.; `forecast.earnWatchSquares`)* of its route, or across one observed turn or Portal crossing; or the group is Cased. A single glimpse gives only the route pip.
 - **Heard-only patrols (lead's call, after the check).** Listen "passing", F-LISTEN or Walls Have Ears with trained detail earns only the heard Portal's own window, worded as Listen's approved claim ("passing this door within 20 ticks"), and nothing else. A square-by-square window needs a watched segment or Cased. A `KnowledgeLeak` case.
 - **Shown as a window, honestly (agreed, Q2):** "in this square's band from +4 to +8 ticks, if undisturbed": the interval during which the known patrol would meet the `noticing` predicate for the hovered square. **Windows are computed only over route squares the party has seen the group traverse with timing** (`observedTiming[]`). Beyond a "continues" end, no window is shown, and no return time out of unknown space is predicted, until the party has watched a **full timed lap**; otherwise the forecast would leak the unexplored route's length. Patrols layer only, never board pips by default. The look is in 6.
@@ -713,8 +714,8 @@ When "best remaining" is Common or nothing countable is left, the Treasure field
 - **The baseline (new lead's call; floors corrected after the check):** the BASE arm (8) in the same simulator build, on **F1–5**, at party 4, with party 1 and 2 reported; the gate is read at M2 sign-off and on every balance pass after. Floor 1 has a Circuit: the settled Scavenger patrol on the Circuit through Q room 3 (EP 6.9, CL-10; EP's table "F1 | 1 (Circuit)"; ENM `F1NoiseClearOfCircuit`), so the draft's "Circuits start on F2" was false. The three cut steps are covered by Q2 and apply without a new question; a miss after step (3) returns to the client (14.2).
 
 #### 4.8.2 Auto-actions read party knowledge (change XI-6 ⚑; agreed, Q4; TL-5 agreed row, TL 6.4 lead's call)
-- The Easy Plain auto-pick gate (TL 6.6, TL-5: "only with no patrol due") and auto-Probe suppression (TL 6.4: "unless a patrol is due") read `PatrolForecast` over **known** patrols. Today's wording could read true state, and the toy measured the resulting leak at 0.13 events per floor (silent suppression reveals an unseen patrol).
-- **The act's hearing reach (lead's call, after the check; makes Q4 computable).** Probe is a noise-0 act (TL glossary), so its own noise reach is empty and a noise-only reading would never fire. An act's **hearing reach** is therefore the union of its noise reach (`KnownNoiseReach`, pessimistic; empty for noise 0) and the worker's noticing reach at the act's square: its 6 band and every square that `KnownCanSee` (pessimistic) links to it. **Duration:** 2 ticks for auto-Probe (TL 6.4), the Take time ticks for an Easy Plain pick (TL 6.6).
+- The Mild Plain auto-pick gate (TL 6.6, TL-5: "only with no patrol due") and auto-Probe suppression (TL 6.4: "unless a patrol is due") read `PatrolForecast` over **known** patrols. Today's wording could read true state, and the toy measured the resulting leak at 0.13 events per floor (silent suppression reveals an unseen patrol).
+- **The act's hearing reach (lead's call, after the check; makes Q4 computable).** Probe is a noise-0 act (TL glossary), so its own noise reach is empty and a noise-only reading would never fire. An act's **hearing reach** is therefore the union of its noise reach (`KnownNoiseReach`, pessimistic; empty for noise 0) and the worker's noticing reach at the act's square: its 6 band and every square that `KnownCanSee` (pessimistic) links to it. **Duration:** 2 ticks for auto-Probe (TL 6.4), the Take time ticks for an Mild Plain pick (TL 6.6).
 - **When a patrol is "due":** a known patrol is due when its window under the `hearingReach` predicate overlaps [now, now + duration] (this maps TL's "crosses the hearing outline within N ticks"). **A known patrol with no earned or current forecast** (a single glimpse, a withdrawn forecast) is due whenever its drawn route or last-seen pip lies in the reach.
 - **Stand down (agreed, Q4):** each auto-action is also suppressed when its hearing reach crosses any **never-Seen** square (Unknown or Chalked; 4.1.1 reading of Q4's "unexplored", changed after the check). Cost: the normal card or stop appears, at most 1 click per act; the per-floor cost in partly explored areas is re-measured with the never-Seen reading before M2 sign-off (8.6).
 - **Told plainly:** an auto-action can still meet an unseen patrol arriving from known-empty space; Take time is channelled and ends with no result if combat interrupts (TL 6.6).
@@ -762,7 +763,7 @@ The centre is reserved for one modal card.
 #### 4.9.5 Budgets (lead's call; *illustr.*; gated by V18 and the glance test)
 - At most 7 HUD regions.
 - Enemy plates unchanged (ENM 5.6: ≤ 2 marks plus the formation chip, ≤ 1 glint).
-- **Pending request (charm abilities design CA-27; read; M2 for Trophy Tally's pips, M3):** a party unit's charms are **one** plate mark, a pair of pips, so they spend one of `plateMarks: 2` (which party plates already spend on the Bloodied and low marks, DH-20); no budget change. Not a rule until this owner rules (charm abilities design 4.7, 6).
+- **Pending request (charm abilities design CA-27; read; M2 for Trophy Tally's pips, M3):** a party unit's charms are **one** plate mark, a pair of pips, so they spend one of `plateMarks: 2` (which party plates already spend on the "hurt" and "low" marks, DH-20); no budget change. Not a rule until this owner rules (charm abilities design 4.7, 6).
 - `MarksPerScreen` ≤ 12 at default zoom, with gate targets P(> 12) ≤ 10% in explore and ≤ 5% in combat. **Defined (after the check)** as the count of visible records with `countsAsMark` in the viewport at default zoom; the 6 registry table sets the flag (Afterimages, glints, Listen badges and told pips count; knowledge-state fills and the seen-edge line do not).
 - ≤ 3 telegraph layers; 1 board information layer.
 - 1 modal plus ≤ 1 floating and ≤ 2 kept inspect cards.
@@ -780,7 +781,7 @@ Modal only, one at a time, in this order:
 2. the arena-entry confirm with the Behind-you line;
 3. the boss phase card;
 4. the Hunch stop card (TL 6.4) and the lock card (TL 6.23);
-5. reward, Viaticum, loot summary;
+5. reward, Parting Fare, loot summary;
 6. Curiosity and Twice-Told;
 7. TL's first-entry prompt (cross-document comparison 2026-11-23, CC-59);
 8. the floor-entry card: one card, headed by the Stratum Card, that carries the DH floor-entry card (DH 17.12) (cross-document comparison 2026-11-23, CC-59) (dismissed by the first move command, 0 clicks; ≤ 4 body rows; overflow — Lore roster, F-BOSS lines, elite intel, Strand line — to the pause **Floor-info panel**).
@@ -818,18 +819,18 @@ Inspect cards never queue. On a profile's first two runs, a one-line ribbon "Mor
 | Place Waymark | Shift-click (world); right-click (map) | Y on the focused square | Explore, map |
 | Next loose end | N | Right stick click (L3) | Explore |
 | Skip this loose end | Shift-N | Hold L3 | Explore |
-| Back to Stairhead | B (shown once the Stairhead is Seen) | Hold Y in the map | Explore, map |
+| To the Downstair | B (shown once the Downstair is Seen) | Hold Y in the map | Explore, map |
 | Declutter (hold) | Z | Hold right trigger with no tool open | All |
 | Floor-info panel (cross-document comparison 2026-11-23, CC-125) | F | Menu (Start) | All |
 
   The M1 rebinding work adds a conflict check against operating-system-reserved chords (Alt+Tab, Alt+F4, the Windows key and its chords). Controller defaults are for the M2 focus model; controller polish stays Later.
-- **Camp rows (camp and hub CH-22 ⚑; agreed there, Q3; M2):** the **Camp List**, a left-side list mirroring every camp station, on the bumpers (stations only) for controller and keyboard; ambient figures are never on the station ring but on a separate **Hear-out sub-list** on one face button ("Hear out" is the ambient verb, distinct from the floor Listen action); **Hold captions** (captions persist until the next input or focus change; the setting pins the last line in a corner tray, default on above 100% text scale; no timed text); **Plain text for speakers** (one legible font, default on above 125% text scale); **controller Travel on** is a dedicated hold (0.6 s *(illustr.)*) reachable from any station, the door never default-focused, and the hold prompt shows any confirm lines, so **the hold is the confirm**. Inspect parity and `NoHoverOnly` apply at camp and hub (camp and hub design 4.1, 4.2, 4.13).
+- **Camp rows (camp and hub CH-22 ⚑; agreed there, Q3; M2):** the **Camp List**, a left-side list mirroring every camp station, on the bumpers (stations only) for controller and keyboard; ambient figures are never on the station ring but on a separate **Hear-out sub-list** on one face button ("Hear out" is the ambient verb, distinct from the floor Listen action); **Hold captions** (captions persist until the next input or focus change; the setting pins the last line in a corner tray, default on above 100% text scale; no timed text); **Legible captions** (one legible font, default on above 125% text scale); **controller Travel on** is a dedicated hold (0.6 s *(illustr.)*) reachable from any station, the door never default-focused, and the hold prompt shows any confirm lines, so **the hold is the confirm**. Inspect parity and `NoHoverOnly` apply at camp and hub (camp and hub design 4.1, 4.2, 4.13).
 - **M1:** full rebinding; text scale to 150% with `CardFit` re-run (including EV's worst-case card, an acceptance item); glyph scale; hold-or-toggle for every overlay; reduced motion (no ink-in, static string, no veil drift, Afterimages never animate).
 - **M2:** high-contrast overlay; sticky tooltips. **Later:** controller polish (the focus model is built in M2 so nothing is redesigned); screen-reader card text.
 - **Audio:** no new gameplay cue; map, Waymark, travel and fact sounds use the global UI timbre (RC7); a travel stop is never a tick (the Dream tick is reserved).
 - **Progressive disclosure (change XI-21 ⚑; lead's call; M2):**
   - `uiMemory`, a display-only profile field outside the reproducibility key (flagged addition to MAIN 6.6, EV-19 precedent): one-line first-sight callouts per mark family.
-  - **Starting kits (starting kits SK-9 ⚑; settled; M2; M3 where marked):** on run 1 the class card shows the simplified **kit strip** (kit silhouette, role word, AC and the hand-off line; Shade and Herald show two strips with the default pre-selected; verbs, coin, supply, the given name and the Oddment line on inspect); from run 2 `uiMemory` shows the full strip (set icons with their verb text, never icon-only; armour and AC; potions, coin and supply generated from data; the "Also carried" heading with the Oddment's name). The **Oddment callout** is one-time and non-modal, the first time the hero inspect is opened at camp 1, never at F1 entry and never part of this section's staged vocabulary. **Creation warnings** for a kit item Strained or AC below the pick's `kit.acFloor` are one line of shape plus text, never hue, and never block. **M3:** the variant pick-order line on the Heirloom shelf and creation card. Text chips and labels, alt text, glyph and pattern, controller parity, whole-string keys; Inspect parity and `NoHoverOnly` apply (starting kits design 4.4, 4.6, 5.4).
+  - **Starting kits (starting kits SK-9 ⚑; settled; M2; M3 where marked):** on run 1 the class card shows the simplified **gear strip** (kit silhouette, role word, AC and the hand-off line; Shade and Herald show two strips with the default pre-selected; verbs, coin, supply, the given name and the Oddment line on inspect); from run 2 `uiMemory` shows the full strip (set icons with their verb text, never icon-only; armour and AC; potions, coin and supply generated from data; the "Also carried" heading with the Oddment's name). The **Oddment callout** is one-time and non-modal, the first time the hero inspect is opened at camp 1, never at F1 entry and never part of this section's staged vocabulary. **Creation warnings** for a kit item Strained or AC below the pick's `kit.acFloor` are one line of shape plus text, never hue, and never block. **M3:** the variant pick-order line on the Heirloom shelf and creation card. Text chips and labels, alt text, glyph and pattern, controller parity, whole-string keys; Inspect parity and `NoHoverOnly` apply (starting kits design 4.4, 4.6, 5.4).
   - **Staged by floor:** on a profile's first run, F1 shows Seen, Remembered, Chalked, Afterimages, Listen bubbles and loose-end marks on the map by default; the hearing outline first appears with the first shut-door prompt (as the prompt, never as a standing layer); patrol lines with the first known Circuit, on F1 the settled Scavenger Circuit (the cowable-group lesson); told and projected pips when a fact or Stir first appears. One information layer at a time, per 4.9.4 (aligned after the check). Every layer stays available by toggle and Inspect, so content is unchanged (IP9).
   - Density setting **Guided / Regular / Compact** moves items between always-on and hover only ("Regular" renamed after the check from "Standard", ENM's rank and TL's device grade).
   - **Veterans:** compact density, remembered layer toggles, Next loose end on by default.
@@ -864,9 +865,9 @@ Inspect cards never queue. On a profile's first two runs, a one-line ribbon "Mor
   - **Pending request (segments 11–12; SV-22; M2):** walker equivalences, for example whether `XI.Completionist` equals `FL.Hunt` plus optional fights, are an owner question for the XI, FL and EV owners, not a silent mapping. Not a rule until they rule; if they do not, there is no mapping and each gate reads its own owner's arm (seeds and validation design 6.2, 14.2).
 - **Camp:** the Tithe Bowl (Lodestring or Surveyor's Sketch); the conditional Ear Trumpet stock row (agreed, Q3); the next-floor card unchanged (RS 6.9); the Lore roster preview (RS, M3); the previous floor's Atlas page on the dream track (M3).
 - **Hub and profile:** `uiMemory`; codex hosting (RS owns, segment 10 hosts, EV-37); the Floor Atlas in the run record (M3).
-- **Answered** by the starting kits design (segment 14, approved 2026-11-23; its 4.6, 11, 13): the kit strip, the Oddment callout and the creation warnings under `uiMemory` (SK-9 ⚑, applied in 4.10; M2); codex hosting includes the Oddments page (RS owns, segment 10 hosts, with camp and hub design 4.15.8; M2).
+- **Answered** by the starting kits design (segment 14, approved 2026-11-23; its 4.6, 11, 13): the gear strip, the Oddment callout and the creation warnings under `uiMemory` (SK-9 ⚑, applied in 4.10; M2); codex hosting includes the Oddments page (RS owns, segment 10 hosts, with camp and hub design 4.15.8; M2).
 - **Taken up** by the charm abilities design (segment 16, the TK 24.2 pass, approved 2026-11-24; its 4.7, 6, 11, 13): charm `forecastHint` computed only through `IKnowledgeQuery` and party knowledge, with its `KnowledgeLeak` cases (pending with this owner); `plateHint` never on a hostile's intent telegraph; plate states with Inspect text (`NoHoverOnly`); `uiMemory` callouts on the first charm pickup, first catch fire and first Keep fill (4.10, read). **Pending request (CA-27; M2 for Trophy Tally's pips, M3):** the charm pip pair, forecast line and fire beat as `SurfaceRecord` rows, the `plateMarks` read, the pip patterns and the output cues in the blind-ID gate (4.9.5, 5, 6). Not a rule until this owner rules.
-- **Answered** by the camp and hub design (segment 13, approved 2026-11-23; its 2.2, 4.3, 5.2, 11): the Tithe Bowl at the Keeper's Cart, camps 1–4, the Sketch only at camp 4, shown greyed with its reason while a Wax Key is held until the LE owner rules on 4.6.3's request (M3); the Ear Trumpet row in the vendor panel (M3, conditional); the next-floor card trimmed and unchanged at the door station, with the Lore roster preview in its detail tier and the previous floor's Atlas page pinned to the dream-track ribbon above the door (M3); camp chalk is pictorial, never this document's chalk grammar (its 4.7); `uiMemory` stages the hub stations and the ambient first-focus tooltip (its 4.12); codex hosting includes the "Residents of the Hollows" pages (M3; its 4.15.8); the Floor Atlas and fatal-room map in the Book of Nights and the recap (M3); the camp input rows in 4.10 (camp and hub CH-22 ⚑).
+- **Answered** by the camp and hub design (segment 13, approved 2026-11-23; its 2.2, 4.3, 5.2, 11): the Tithe Bowl at the Pedlar's Cart, camps 1–4, the Sketch only at camp 4, shown greyed with its reason while a Wax Key is held until the LE owner rules on 4.6.3's request (M3); the Ear Trumpet row in the vendor panel (M3, conditional); the next-floor card trimmed and unchanged at the door station, with the Lore roster preview in its detail tier and the previous floor's Atlas page pinned to the dream-track ribbon above the door (M3); camp chalk is pictorial, never this document's chalk grammar (its 4.7); `uiMemory` stages the hub stations and the ambient first-focus tooltip (its 4.12); codex hosting includes the "Residents of the Hollows" pages (M3; its 4.15.8); the Floor Atlas and fatal-room map in the Book of Nights and the recap (M3); the camp input rows in 4.10 (camp and hub CH-22 ⚑).
 
 ---
 ## 5. The UI surface catalogue (lead's call; every hook placed)
@@ -884,7 +885,7 @@ Tier codes as 4.9.2 (U = unit plate). Placement: **A** always on, **H** HUD, **V
 | Hearing outline, arrival arrows, shut-door prompt, vantage risk (ENM 12.4, EP-22, FL 6.5, 7.2, FL-21) | I layer; lock-card row; chip | I / W | Double contour, ear badge, arrival arrow, sight-risk mark | Noise preview borrows the slot while aiming |
 | Patrol routes, forecasts (ENM 12.1, FL 6.7, EP 6.9, EV 4.12 chips) | I layer, M, rest screen, lock card | I / M | Thin line with arrowheads every 3 squares *(illustr.)*, "continues" three-dot ellipsis, forecast band (6) | Vs LP scurry trail, EP fall-back and the loose-end tuft: distinct shape families; the route end sits outward of a tuft on the same Portal |
 | Travel path, auto-walk stops (FL 6.9, 6.10, TL-7) | A while hovering, I while walking; status ribbon | A / I | Footprint-dot centre line, destination ring (never a flag or tack) | Hunch stop card replaces the toast |
-| Landmarks, compass, Precinct tints, Stairhead (FL 8.1) | Art, minimap | — | As approved | Tints never on walkable fill |
+| Landmarks, compass, Precinct tints, the Downstair (FL 8.1) | Art, minimap | — | As approved | Tints never on walkable fill |
 | Overlook (FL 9.1, M3) | Produces Chalked | N | Chalk | — |
 | Stratum Card, Stratum strip, dream track, Lore roster (RS 6.9, 9.5, ENM 10.6) | C at entry → H strip; P overflow | Card / H | LE 6.15 order, ≤ 4 rows | Overflow to P |
 | Camp card, Two Doors cards, road not taken (RS 6.9) | Meta | — | As approved | No pointer result on door cards |
@@ -899,7 +900,7 @@ Tier codes as 4.9.2 (U = unit plate). Placement: **A** always on, **H** HUD, **V
 | Intent read (ENM 13.3, 13.5) | V plate | T | Text | EP-28 hold squares if ruled: same tier |
 | Cowable glyph, morale overlay, pip bar (ENM 14.8, 14.10, HR 10.3) | Plate; toggle | U / T | As approved | Glints-per-screen gate |
 | Loot summary, floor-fact slot, leftovers marker, Floor-info panel (ENM 15.8, LE 6.15; cross-document comparison 2026-11-23, CC-126) | C; W; P | — | As approved | Card queue |
-| Formation chip, Line broken, Keystone, "Caught facing the door" (EP 6.20) | A plate once all noticed | U | Icons | ≤ 2 plate marks plus chip |
+| Formation chip, Line broken, Keystone, "Facing the door" (EP 6.20) | A plate once all noticed | U | Icons | ≤ 2 plate marks plus chip |
 | Hold squares, fall-back (EP-28) | V from Read card | T | Brackets; chevron with dashed tether | Vs "continues" ellipsis and the loose-end tuft: different shape families |
 | Marked tell, seen-tell band (EP 6.8.4) | A | W | Ring with eye tick; hollow ring | Vs sight-risk mark: distinct |
 | Encounter Read card (EP 6.20) | C inspect | Card | As approved | One floating inspect card |
@@ -923,17 +924,17 @@ Tier codes as 4.9.2 (U = unit plate). Placement: **A** always on, **H** HUD, **V
 | Danger band (DH 17.3) | Portraits, combat only | H | Band + word | In-sight pip is not a band |
 | End-turn warning, lethal tags, cracked heart, move/heal/get-up previews, rest screen (DH 17.4–17.11) | C; K; aim | K / A / Card | As approved | Top of queue |
 | Death recap, Grave Goods, floor-entry card (DH 17.12) | Meta; C | — | Adds a fatal-room map thumbnail (M3) | — |
-| Floor strip, Treasure field, best remaining, by-source hover, spent field (LE 6.15, LE-15, LP-28) | H party bar; V | H | Icon counts | Order unchanged; no new field |
+| Floor strip, Treasure field, best remaining, by-source hover, emptied field (LE 6.15, LE-15, LP-28) | H party bar; V | H | Icon counts | Order unchanged; no new field |
 | Due line, tag, "paid" (LE 6.15) | C; H; summary | — | As approved | — |
 | Tier marks (LE 6.15) | Container hover and map container hover only | Card | Diamonds + tier word | Never a board decal |
-| Loot badges, Steal preview, salvage, elite intel, Viaticum offer, camp ledger, camp-4 warning, Memento, Perilous badge (LE 6.15, 8.2) | Plate; aim; C; Meta | U / A | As approved | — |
+| Loot badges, Steal preview, salvage, elite intel, Parting Fare offer, camp ledger, camp-4 warning, Memento, Perilous badge (LE 6.15, 8.2) | Plate; aim; C; Meta | U / A | As approved | — |
 | Due and dissolve stings (LE 12) | Audio | — | Global UI timbre | — |
 | Threshold preview (LP 4.2) | Art | — | Silhouettes | CT2 art-blind |
 | Container hover, Proprietor tags (LP 4.12) | V | Card | As approved | — |
 | "Got away" log, quiet summaries, Glean (LP 4.12) | L; non-modal toast | — | — | Never blocks the queue |
 | Wall-set mark, Rathole (LP RC5) | A wall + projection | W | Bracket | Precedent for XI-18 |
 | Windfall set (LP 4.12, M3) | A, plate, H | U / D | As approved | Digit ring = room clock |
-| Uncorked glint, twin-lid mark, Bedside Stand (LP 4.12) | Plate; container | U / W | As approved | — |
+| Uncorked glint, twin-lid mark, the Washstand (LP 4.12) | Plate; container | U / W | As approved | — |
 | Item card, verdict, mark line, Whence, offer frames, codex badge (IR 6.1, ITEMS 8.2, TK 15) | C | Card | As approved; "the string ends here" frame (M3) | `CardFit` at 150% |
 | Carried-use floater, "Guards:" line, signature cache decal (IR 4.13, 4.19) | Floater; V; W | — | — | Never the banner slot |
 | Over-capacity hatched slots (ITEMS) | Inventory only | Meta | Hatch | Never on board |
@@ -943,8 +944,8 @@ Tier codes as 4.9.2 (U = unit plate). Placement: **A** always on, **H** HUD, **V
 | Grace chip, Strands (EV 4.12, 4.5.7) | Party bar; P overflow | H | — | — |
 | Afterword, codex, Unwoken Roll (EV 4.12) | Meta | — | — | — |
 | Glimpses, beckoning Glimpses (EV 4.11) | Art | — | Never a Portal or container silhouette | — |
-| Two-tier boss plate, Rhythm strip, phase icons, Upended (renamed Sprawled by boss rooms design 4.7.2; this restatement's rename is pending with this owner; cross-document comparison 2026-11-23, CC-65), Resolve Broken (BR 4.16) | Plate; initiative bar | U / H | As approved | Gates on plate |
-| Banner, phase card, threshold preview, Playbill, Take Places, Device previews, reserves and wake chip, Gambit squares (BR 4.16) | As approved | D / T / Card | — | Phase card above reward |
+| Two-tier boss plate, Rhythm strip, phase icons, Sprawled (renamed from Upended by boss rooms design 4.7.2; cross-document comparison 2026-11-23, CC-65; restated here by naming pass NP-6), Resolve Spent (BR 4.16) | Plate; initiative bar | U / H | As approved | Gates on plate |
+| Banner, phase card, threshold preview, Playbill, Take Places, Counterpiece previews, reserves and wake chip, Gambit squares (BR 4.16) | As approved | D / T / Card | — | Phase card above reward |
 | Leash ring, reward card, Memento, Boss Ledger and Grudge, Phase Score (BR 4.16, 4.17) | T; C; Meta | — | — | — |
 | Pull-back zoom, intro card, Sanctum refusal, arena-entry confirm (BR 4.16) | Camera; C | Card | Confirm gains the Behind-you line | "Seal" never used |
 | Conditions row, greyed reasons, Revealed outline (C 15.1, 15.3, 18.7) | Plate; action bar | U / H | As approved | Revealed is a live unit; Afterimage is a cut-out |
@@ -956,9 +957,9 @@ Tier codes as 4.9.2 (U = unit plate). Placement: **A** always on, **H** HUD, **V
 | Trap Eye re-scope (TL-6, pending) | Per Shade owner | — | — | Cased conditional on it |
 | Lore-inscription Hairline reveal (M3, pending client) | F-SECRET drawing | W | — | — |
 | CMP companion card, next-camp preview, Recruiter's Eye, coverage strip (CMP 7.x, 8.6, 9.2) | C; M footer; party bar | — | As approved; the coverage strip gains no Ear Trumpet line (CMP 7.3 `gapOrder` has no Perception need; 4.5.2) | — |
-| Seams (RS 9.1, M3), Lucid Key (Later) | Art; per owner | — | — | Display only |
+| Seams (RS 9.1, M3), the Clear Key (Later) | Art; per owner | — | — | Display only |
 | Afterimage vs EV figure frame (EV 4.11, M3) | — | M | Afterimage: role glyph, dashed cut line, on a walkable square; figure frame: cropped figure in a niche, never on a walkable square | Role-ID and greyscale gate pair (4.2) |
-| **Segment 10's own:** Afterimages, loose ends, Listen bubbles, Detour quote (floating inspect card on the board, room inspector on the map; 4.4.3), Behind-you line, spent field, status ribbon, Waymarks, in-sight and hidden-from pips, noise preview, noticing bands (M2), watch lines and step tag (M3), Lodestring string and mark (M3), Declutter | Per 4.2–4.9 | M / W / I / H / C | Registry rows and line styles in 6 | Budgets 4.9.5 |
+| **Segment 10's own:** Afterimages, loose ends, Listen bubbles, Detour quote (floating inspect card on the board, room inspector on the map; 4.4.3), Behind-you line, emptied field, status ribbon, Waymarks, in-sight and hidden-from pips, noise preview, noticing bands (M2), watch lines and step tag (M3), Lodestring string and mark (M3), Declutter | Per 4.2–4.9 | M / W / I / H / C | Registry rows and line styles in 6 | Budgets 4.9.5 |
 
 ---
 
@@ -995,7 +996,7 @@ Tier codes as 4.9.2 (U = unit plate). Placement: **A** always on, **H** HUD, **V
 | Hearing contour, noise contour | line | I | No | Prompt; aiming (borrow) | — |
 | Travel path | line | A | No | While hovering or walking | — |
 
-- **Pending request (charm abilities design CA-27; M2 for Trophy Tally's pips, M3):** the charm pip pair (one plate mark on a plain rounded backing, no sack, knot or spool outline) joins this registry as a non-segment-10 row, its five states (ready, spent, waiting, kept, dormant) in the RC5 pattern registry, greyscale-gated against the Windfall knotted-sack mark and the Lodestring spool. Not a rule until this owner and the RS owner rule (charm abilities design 6).
+- **Pending request (charm abilities design CA-27; M2 for Trophy Tally's pips, M3):** the charm pip pair (one plate mark on a plain rounded backing, no sack, knot or spool outline) joins this registry as a non-segment-10 row, its five states (ready, used, waiting, stored, idle) in the RC5 pattern registry, greyscale-gated against the Windfall knotted-sack mark and the Lodestring spool. Not a rule until this owner and the RS owner rule (charm abilities design 6).
 
 **Line-style registry (lead's call, after the check).** No two families differ only by hue or only by dot spacing; each is checked by the glance test (9.3).
 
@@ -1053,7 +1054,7 @@ Tier codes as 4.9.2 (U = unit plate). Placement: **A** always on, **H** HUD, **V
 | Mechanic | Source | Verdict | Where |
 |---|---|---|---|
 | Chalk on entry (room shell) | C, N1 | **Adopt** M1 | 4.1.4 |
-| Trace on glimpse | C | **Adopt** M2, map only | 4.1.5 |
+| Trace on sight | C | **Adopt** M2, map only | 4.1.5 |
 | Shell on sight | A | Reject (told plainly) | 0.1 brief question 1 |
 | One-square Pocket | B | Reject (told plainly) | 8 |
 | Sight-shadow reading | C, N1 | **Adopt**, worded "out of sight (not out of hearing)" | 4.1.4 |
@@ -1066,7 +1067,7 @@ Tier codes as 4.9.2 (U = unit plate). Placement: **A** always on, **H** HUD, **V
 | Re-sight stop narrowing | Drafts | **Adopt** M2 with the pre-stop | 4.7 |
 | Detour quote | N5, incentives | **Adopt** M2 | 4.4.3 |
 | Behind-you line | N6, incentives | **Adopt** M2, arena confirm only | 4.4.4 |
-| Spent field; totals principle | Incentives | **Adopt** M2 | 4.4.5, 4.4.1 |
+| Emptied field; totals principle | Incentives | **Adopt** M2 | 4.4.5, 4.4.1 |
 | Lodestring and F-TREASURE | A, B, C, N7, incentives | **Adopt** M3; never a secret cache (agreed, Q5) | 4.6 |
 | Tithe Bowl: Lodestring or Surveyor's Sketch | N8 | **Adopt** M3 | 4.6.3 |
 | F-TREASURE through Yield | Incentives | **Adopt** M3, once per floor | 4.6.4 |
@@ -1120,7 +1121,7 @@ Toy scripts (scratch, not project files): `seg10sim.py`, `ablate.py`, `analysis2
 ### 8.3 Patrols
 - P(collision per crossing): blind 0.418; route plus memory 0.312; forecast capped at 20 ticks 0.254; uncapped 0.050.
 - Afterimage staleness at 20 ticks: Patrolling 100%, Searching 100%, Stationary 3%, Dormant 2%.
-- Auto-Probe / Easy Plain leak under the true-state reading: 0.126 per floor.
+- Auto-Probe / Mild Plain leak under the true-state reading: 0.126 per floor.
 
 ### 8.4 Clutter, P(> 12 marks)
 - Combat: BASE 2.6%, A 8.7%, B 12.3%, C 14.2%, R 8.9%. **R fails the 5% combat gate in the toy** (told plainly, after the check); the combat suppression (XN5) is unmeasured. Levers on a miss at the pre-M2 sign-off check, in order: told pips and Listen badges hover-only in every density; Short Afterimages only for units that left sight this round; arrival arrows only for known groups' next round; then the 14.2 clutter row.
@@ -1141,7 +1142,7 @@ Toy scripts (scratch, not project files): `seg10sim.py`, `ablate.py`, `analysis2
 | XN9 | Folded Floorplan is a 100% secret radar | Charts are node-only; `ChalkNeverStub`; vendor chart items cut |
 | XN10 | Layout charts show no measurable value | Only the Surveyor's Sketch survives, as a camp option |
 | XN11 | Auto-explore forces full clears and 5× patrol exposure | Rejected |
-| XN12 | Treasure count: passes (moderate pull, not completionism) | Kept; spent field added |
+| XN12 | Treasure count: passes (moderate pull, not completionism) | Kept; emptied field added |
 | XN13 | Pointer: secrets found unchanged in the toy, but the toy did not model stub-plus-room inference | Secret caches excluded from F-TREASURE (agreed, Q5) |
 | XN14 | Side-room band 55–85% is reachable only on a player mix (lean 0.08–0.12) | `SideRoomVisitRate` per policy, banded on human sessions only |
 | XN15 | Detour quote value inconclusive in the toy | Measure `DetourRegret` and `DetourQuoteHoverRate` in playtest; 3 lines by default |
@@ -1189,7 +1190,7 @@ FactCategory{ F-TREASURE, selector, rank:[tierDesc, roomMacroYX, containerYX], q
 - **V18t (tests):**
   - `LosSymmetric` (every pair of **transparent** squares, every template, 4 rotations, Portal states); `LosVsLineAgree`;
   - `FogEqualsRules`: every replay tick, the Seen squares equal the union over living, non-Downed party units u of {s : `CanSee`(u.square, s)} (plus blockers lit by the 4.1.2 rule), and a group's first-line-of-sight noticing trigger fires if and only if one of its member squares is in that set (restated after the check);
-  - **`KnowledgeLeak`**: two states differing only in what the party does not know — a lurker's square, an unseen group, an unseen patrol's position, container contents, an unfound secret, a stub before sight, a boxed lurker, a Hidden member of a Cased group, an unseen wall, open door or piece, a glimpsed-only or heard-only patrol, a withdrawn forecast — give byte-identical view models and previews, including auto-Probe, Easy Plain, travel stops, the noticing pre-stop, `KnownCanSee` and `KnownNoiseReach`. **One listed exemption:** `TreasureTarget()` for a paid or earned act, limited to {room node, tier word, qualifier} (4.6.1);
+  - **`KnowledgeLeak`**: two states differing only in what the party does not know — a lurker's square, an unseen group, an unseen patrol's position, container contents, an unfound secret, a stub before sight, a boxed lurker, a Hidden member of a Cased group, an unseen wall, open door or piece, a glimpsed-only or heard-only patrol, a withdrawn forecast — give byte-identical view models and previews, including auto-Probe, Mild Plain, travel stops, the noticing pre-stop, `KnownCanSee` and `KnownNoiseReach`. **One listed exemption:** `TreasureTarget()` for a paid or earned act, limited to {room node, tier word, qualifier} (4.6.1);
   - `AfterimageHonesty` (no Afterimage changes while unseen); `ReplayView` (follower and monster steps, monster-opened doors, a mid-pass Hairline find, combat starting in the pass); `ProfileBlind`;
   - `SaveReloadKnowledge`; `KnowledgeReloadMonotone` and `DeathNotRewindable` (process kills after a Lodestring use, a Yield fact, a Tithe Bowl purchase, a look through a door, a death and a Down; 4.12); `WaymarksOutsideKey`;
   - `PointerNeverPreDoor`; `LodestringDoorBlind`; `RoleBlindOrder` (permuting `roomId`s with geometry fixed gives identical Next loose end, points-of-interest and F-TREASURE choices);
@@ -1230,7 +1231,7 @@ The FL 11.4 walker (lean = gate arm, balanced, completionist) plus a human-sessi
 | Wave | Contents |
 |---|---|
 | **M1** | XI-1 states (Unknown, Chalked, Seen, Remembered), the entered rule and readings; XI-2 `CanSee`, `KnownCanSee`, `KnownNoiseReach`, `LosSymmetric`, `LosVsLineAgree`; the 4.1.3 `KnowledgePass`; XI-3 Chalk on entry; XI-5 static memory rows and basic Afterimages; XI-7 minimap; Threat layer; XI-16 digits; XI-17 base grammar and fog bank; XI-20 accessibility base; the `KnowledgeLeak` and `FogEqualsRules` harness |
-| **M2** | XI-4 Trace and the FL 8.1 amendment with F-ROOM; full Afterimages; XI-6 routes, `PatrolForecast`, auto-action gates, `PatrolFightRate` (agreed, Q2 and Q4); XI-7 full map, layers, marks, Waymarks, Listen bubbles, fact drawings; XI-8 travel, Next loose end, Back to Stairhead, noticing pre-stop; XI-9 re-sight narrowing; XI-10 loose ends, Detour quote; XI-11 Behind-you line, rooms tally, spent field; XI-12 pips and bands; XI-13 hearing; XI-14 charters; XI-15–XI-19 surfaces; XI-20 Inspect parity; XI-21 disclosure; XI-27 owner requests (beckoning Glimpses, payoff mix, False Trail shape); XI-28 suspend-save with the continuous slot (agreed, Q1; per-command writes after the check); XI-30 V18; XI-31 reports and clock line |
+| **M2** | XI-4 Trace and the FL 8.1 amendment with F-ROOM; full Afterimages; XI-6 routes, `PatrolForecast`, auto-action gates, `PatrolFightRate` (agreed, Q2 and Q4); XI-7 full map, layers, marks, Waymarks, Listen bubbles, fact drawings; XI-8 travel, Next loose end, To the Downstair, noticing pre-stop; XI-9 re-sight narrowing; XI-10 loose ends, Detour quote; XI-11 Behind-you line, rooms tally, emptied field; XI-12 pips and bands; XI-13 hearing; XI-14 charters; XI-15–XI-19 surfaces; XI-20 Inspect parity; XI-21 disclosure; XI-27 owner requests (beckoning Glimpses, payoff mix, False Trail shape); XI-28 suspend-save with the continuous slot (agreed, Q1; per-command writes after the check); XI-30 V18; XI-31 reports and clock line |
 | **M3** | XI-22–XI-25 F-TREASURE, Lodestring, Tithe Bowl, Yield (secret caches never, agreed Q5); XI-26 Ear Trumpet (conditional on `SoloListenClickShare`, agreed Q3); XI-27 Walls Have Ears, Cased (conditional on TL-6), Overlook writes Chalked; watch lines and the step tag (conditional on EP-41); XI-29 Floor Atlas, death-recap map, codex hosting; the Dream map skin (map paper, pencil-to-ink), gated |
 | **Later** | The full Dream treatment (veils, wobble, frontier motifs) (client question); units blocking line of sight (client question); Scout Ahead (client question); auto-explore accessibility option; layout item only if `LostTime` misses; Dreambook pages; Omen "Drawn in Chalk"; controller polish; screen-reader text; DH 17.13 undo reading |
 
@@ -1240,7 +1241,7 @@ The FL 11.4 walker (lean = gate arm, balanced, completionist) plus a human-sessi
 
 | Owner | What |
 |---|---|
-| **Segment 10** | `PartyKnowledge` and `CanSee`; chalk, trace and memory rules; Afterimages; `PatrolForecast` and its consumers' reading; the minimap and full map; travel, Next loose end, stops; loose ends, the Detour quote, the Behind-you line, the spent field; the stealth and hearing surfaces; the surface register, regions, priority, slot model, budgets, card queue, naming; Inspect parity and accessibility; progressive disclosure; F-TREASURE's drawing and the Lodestring's display; the suspend-save rules; V18 and the segment 10 reports; the clock line |
+| **Segment 10** | `PartyKnowledge` and `CanSee`; chalk, trace and memory rules; Afterimages; `PatrolForecast` and its consumers' reading; the minimap and full map; travel, Next loose end, stops; loose ends, the Detour quote, the Behind-you line, the emptied field; the stealth and hearing surfaces; the surface register, regions, priority, slot model, budgets, card queue, naming; Inspect parity and accessibility; progressive disclosure; F-TREASURE's drawing and the Lodestring's display; the suspend-save rules; V18 and the segment 10 reports; the clock line |
 | **FL owner** | 8.1 amendment (XI-4), 6.9 stops (XI-9), the corner rule reading (XI-2), the rooms tally (XI-11), Overlook writes Chalked (XI-27), `SideRoomPayoffMix` |
 | **Enemies owner** | 12.1 route reading (XI-6), 12.2 lurker-band candidates exclude Downed units (XI-2), 12.4 wording (XI-13), 13 Lore and odds (XI-12, and Cased's odds band, XI-27), 14.6 F-TREASURE (XI-25), the "explored" and "unmapped" readings (XI-1) |
 | **EP owner** | EP-41 (via the client), EP-28, `PatrolFightRate` (XI-6), Spoor projection (XI-18) |
@@ -1339,14 +1340,14 @@ Applied on 2026-11-23, when the client approved this document. **This document e
 | XI-1 | MAIN 2, 6.2 (read); **MAIN 6.6 (decided, read)**; FL 6.8, FL 9.1, ENM 14.5, 14.6, EV 4.4.2, DH 17.13, TL 6.4 `seenByParty` (readings) | `PartyKnowledge` in the core (never Seen; the `ChalkOutline` exception; extended records and sources); the entered rule; explored = entered (flee anchors, EV 4.4.2); unmapped defined (the F-ROOM target); Q4's "unexplored" = never Seen; DH 17.13 reading (Later) (4.1.1) | ⚑ **Decided** (MAIN 6.6, read) | Lead's call; FL, ENM, EV, DH owners confirm | M1/M2 |
 | **XI-2** | **MAIN 4.3 (decided; implemented and read, not changed)**; FL 3.1 `CornerCut`, RT 6.2.1 / TR-5 (reading: stated difference); FL 9.2, FL-7; **ENM 12.2 lurker-band sentence (change EP-3): changed, Downed units excluded** (precedents ENM 11.4 Quarry and TL 6.4 / TL-6; citation corrected after the check); C 18.7 | `CanSee`: symmetric shadowcasting over transparent squares, the blocker-visibility rule, blockers, no range, units never block, corner rule (sight blocked by two orthogonal blockers; movement by one), non-Downed knowledge; `KnownCanSee` and `KnownNoiseReach` (4.1.2) | ⚑ **Decided** (MAIN 4.3, read); ⚑ ENM 12.2 / EP-3 text changed (treated as agreed or settled for flagging) | Lead's call (Downed units contributing no knowledge stood as written with the client's answers); told plainly; FL and RT owners confirm; main design owner confirms the reading; enemies owner applies the ENM 12.2 change | M1 |
 | XI-3 | FL 8.1 `CutawayPockets`, FL 19.1, `HairlineCue` (read); **FL-17 secrets via RS RC1, RC5 (agreed, read)**; HZ "visible from reveal" (read; HZ owner informed); ABL 8.3; RC1 | Chalk on entry (the wall-bounded footprint, kinds never drawn; the entered rule); stubs by sight with `ChalkOutline`; the sight-shadow wording (4.1.4) | ⚑ **Agreed** (RC1, RC5, read) | Lead's call; told plainly | M1 |
-| XI-4 | FL 8.1 minimap data bullet "never unexplored rooms"; ENM 14.6 F-ROOM; EV 4.4.1, 4.12 | Trace on glimpse (map only); F-ROOM drawn as Chalked; FL 8.1 → "never Unknown rooms; Traced and Chalked rooms in their own styles" (4.1.5) | — | Lead's call; told plainly (M2, not M3); FL owner applies | M2 |
+| XI-4 | FL 8.1 minimap data bullet "never unexplored rooms"; ENM 14.6 F-ROOM; EV 4.4.1, 4.12 | Trace on glimpse (renamed Trace on sight, naming pass NP-25) (map only); F-ROOM drawn as Chalked; FL 8.1 → "never Unknown rooms; Traced and Chalked rooms in their own styles" (4.1.5) | — | Lead's call; told plainly (M2, not M3); FL owner applies | M2 |
 | XI-5 | **ENM 12.1, 12.4 (settled, read)**; TL 6.4; HZ 6.18, HZ 6 digit rule; **RC1, RC5, RC6 (agreed; registry rows added by RS)** | Remembered table; activity-keyed Afterimages with the Fresh, Persisting, Old and Short states, no numerals, and the combat rule; projected Stirs (solid numeral, `projectable` from the hazard record); F-KEY on route pips (4.2) | ⚑ **Settled** (ENM 12.1, 12.4, read); ⚑ **Agreed** (RC rows) | Lead's call; RS owner adds rows | M1/M2 |
-| **XI-6** | **ENM 12.1 "once seen, the route is drawn" (settled)**; **TL 6.6 auto-pick gate / TL-5 (agreed row)**; TL 6.6 lock card; TL 6.4 auto-Probe / TL-7 (lead's call); EV 4.12 chips; ABL 15.1, DH 17.11, EP-16; FL-18 "passing" (read) | Routes on known squares only with "continues" ends; `PatrolForecast` over known patrols, earned in observable terms, windowed over timed squares, heard-only patrols limited to the Portal window, event-withdrawn, 20 ticks / one lap; Easy Plain and auto-Probe read it plus the never-Seen-crossing gate, with the act's hearing reach and "due" defined; EV chips read it; the `PatrolFightRate` gate and its cut order (4.8.1, 4.8.2) | ⚑ **Settled** (ENM 12.1); ⚑ **Agreed** (TL-5); **Q2, Q4** | **Client (Q2, Q4, agreed 2026-11-23)**; enemies, TL, EV, EP owners apply | M2 |
+| **XI-6** | **ENM 12.1 "once seen, the route is drawn" (settled)**; **TL 6.6 auto-pick gate / TL-5 (agreed row)**; TL 6.6 lock card; TL 6.4 auto-Probe / TL-7 (lead's call); EV 4.12 chips; ABL 15.1, DH 17.11, EP-16; FL-18 "passing" (read) | Routes on known squares only with "continues" ends; `PatrolForecast` over known patrols, earned in observable terms, windowed over timed squares, heard-only patrols limited to the Portal window, event-withdrawn, 20 ticks / one lap; Easy Plain (Easy renamed Mild, naming pass NP-25) and auto-Probe read it plus the never-Seen-crossing gate, with the act's hearing reach and "due" defined; EV chips read it; the `PatrolFightRate` gate and its cut order (4.8.1, 4.8.2) | ⚑ **Settled** (ENM 12.1); ⚑ **Agreed** (TL-5); **Q2, Q4** | **Client (Q2, Q4, agreed 2026-11-23)**; enemies, TL, EV, EP owners apply | M2 |
 | XI-7 | FL 8.1, FL 13; **MAIN 6.6 (decided): flagged addition of a run-save UI annex**; ITEMS 10.9; ENM 15.8; LE 6.15 tier marks (reading) | Minimap (FL 8.1's schematic graph with knowledge fills, reduced mark set, glyph floor) and full map, layers, auto-marks, Waymarks (tack base, modifier-click) in a run-save UI annex, Listen bubbles with the EP, TL and HZ contents, fact drawings, told pip, tier word on map container hover (4.3) | ⚑ **Decided** (MAIN 6.6, an addition) | Lead's call; told plainly; main design owner applies; LE owner confirms | M1/M2 |
-| XI-8 | FL 6.9 request answered; FL 6.10, TL-7, EP-17, HZ pathing (read); FL 11.4 cost table | Travel (incl. Chalked squares in entered spaces, with the step check), noticing pre-stop with re-evaluation and release, Next loose end (nearest by known path length, ties by threshold position, never by id or main-path order; cycling, passability, dismissal), Back to Stairhead; no auto-explore (4.7) | — | Lead's call; told plainly | M2 |
+| XI-8 | FL 6.9 request answered; FL 6.10, TL-7, EP-17, HZ pathing (read); FL 11.4 cost table | Travel (incl. Chalked squares in entered spaces, with the step check), noticing pre-stop with re-evaluation and release, Next loose end (nearest by known path length, ties by threshold position, never by id or main-path order; cycling, passability, dismissal), Back to Stairhead (renamed To the Downstair, naming pass NP-25); no auto-explore (4.7) | — | Lead's call; told plainly | M2 |
 | XI-9 | FL 6.9 "stopping on any sighting" | Travel stops on new or changed sightings only (ships with the pre-stop) (4.7) | — | Lead's call; FL owner (request) | M2 |
 | XI-10 | FL 6.9 "detours are legible before commitment" (extends); LP 4.2 item 3 (read) | Loose ends map-only, no count; Detour quote (4.4.2, 4.4.3) | — | Lead's call; told plainly | M2 |
-| XI-11 | BR 4.16 arena-entry confirm (one line; BR 4.2's turned-off confirm gets a one-time toast); FL-20 party-bar tally and count line (**lead's call in FL, approved**; its F1 secret omission kept under FL Q3, read): tally defined; LE 6.15 floor-strip rooms cell and Treasure field (extends the Treasure field state) | Behind-you line on the arena confirm, rooms not entered excluding the arena side; rooms tally "rooms e / t" (Room nodes only), unsplit by role, the named IN6 exception; spent field gated by LE's k ≥ n/2 (4.4.4, 4.4.5) | ⚑ **Agreed** (FL Q3's F1 omission, read) | Lead's call; told plainly; BR, FL, LE owners apply | M2 |
+| XI-11 | BR 4.16 arena-entry confirm (one line; BR 4.2's turned-off confirm gets a one-time toast); FL-20 party-bar tally and count line (**lead's call in FL, approved**; its F1 secret omission kept under FL Q3, read): tally defined; LE 6.15 floor-strip rooms cell and Treasure field (extends the Treasure field state) | Behind-you line on the arena confirm, rooms not entered excluding the arena side; rooms tally "rooms e / t" (Room nodes only), unsplit by role, the named IN6 exception; spent field (renamed emptied field, naming pass NP-25) gated by LE's k ≥ n/2 (4.4.4, 4.4.5) | ⚑ **Agreed** (FL Q3's F1 omission, read) | Lead's call; told plainly; BR, FL, LE owners apply | M2 |
 | XI-12 | ENM 12.2, 13.5, 13.6, ENM 13 (Lore and Perception bonuses, flag); ABL 8.3; DH 17.2, 17.3 (DH owner informed); **EP-41 (pending client)** | In-sight and hidden-from pips; bands (M2); watch lines and noticing step tag (M3, conditional) (4.8.3) | — | Lead's call; enemies owner; client via EP-41 | M2/M3 |
 | XI-13 | **ENM 12.3, 12.4 step 6 (settled; wording reading)**; FL 6.6; EP-22 | Noise preview; "known groups only" wording (4.8.4) | ⚑ **Settled** (ENM 12.4, read) | Lead's call; enemies owner confirms | M2 |
 | XI-14 | RC1, RC9; EV BC2; CL 6.3; CN 16.7; FL 9.1; **TL CC1 (agreed; read)**; **STAT 7.2 (agreed; read)** | Information charter IP1–IP10 and incentive charter IN1–IN6 (4.4.1, 4.5.1) | ⚑ **Agreed** (TL CC1, STAT 7.2, read) | Lead's call | M2 |
@@ -1369,7 +1370,7 @@ Applied on 2026-11-23, when the client approved this document. **This document e
 | XI-31 | **CMP 7.4 (agreed gate kept; levers untouched)**; FL 6.10, FL-16 | Reports, the segment 10 clock line, the self-cut order (9.3, 9.5) | ⚑ **Agreed** (CMP 7.4, read) | Lead's call | M2 |
 | XI-32 | **MAIN 4.3 (decided, kept)**, CN 13.7, 16.7, **TL KF7 (agreed, kept)**, FL 19.1, RS 7.6 | Rejections register (4.5.3, 4.7, 7) | ⚑ **Decided**, **Agreed** (read, all kept) | Lead's call; told plainly | — |
 
-**Told plainly (no question; confirmed by the client on 2026-11-23):** XI-2 (corner rule difference; Downed units see nothing, which changes ENM 12.2's lurker band), XI-3 (chalk narrower than Models A and C; the sight-shadow wording), XI-4 (M2, not M3), XI-7 (the UI annex is an addition to MAIN 6.6), XI-8 (no auto-explore; Chalked travel allowed), XI-10 (no loose-end count), XI-11 (no secrets found/total, no Stairhead banner, the rooms tally unsplit), XI-23 (the Lodestring can raise realised value), XI-25 (once per floor through Yield), XI-32 (every rejection).
+**Told plainly (no question; confirmed by the client on 2026-11-23):** XI-2 (corner rule difference; Downed units see nothing, which changes ENM 12.2's lurker band), XI-3 (chalk narrower than Models A and C; the sight-shadow wording), XI-4 (M2, not M3), XI-7 (the UI annex is an addition to MAIN 6.6), XI-8 (no auto-explore; Chalked travel allowed), XI-10 (no loose-end count), XI-11 (no secrets found/total, no Downstair banner, the rooms tally unsplit), XI-23 (the Lodestring can raise realised value), XI-25 (once per floor through Yield), XI-32 (every rejection).
 
 ---
 ## 14. Open items for the client
@@ -1384,11 +1385,11 @@ The client approved this document as a whole on 2026-11-23, including the six an
 - **Q1, save integrity (XI-28):** option A. Quitting mid-floor writes a single suspend slot that is deleted on load; knowledge is forward-only; paid knowledge acts are atomic writes. Rejected: B, safe-point saves with reload scouting.
 - **Q2, patrol forecast strength (XI-6):** option A. Earned by watching, shown as a window, 20 ticks by default and one lap with a trained watcher or Cased, withdrawn by events, protected by a `PatrolFightRate` gate. Rejected: B, route and last-seen only; C, an uncapped forecast.
 - **Q3, the Ear Trumpet (XI-26; edits the agreed TL-25 vendor row):** option A. Allowed at M3, stocked only for parties with no Perception-trained member, and only if the solo Listen click share misses. Rejected: B, no Listen lane-gap item.
-- **Q4, auto-actions and agreed TL-5 (XI-6):** option A. The Easy Plain auto-pick and auto-Probe read only known patrols and stand down when their hearing reach crosses unexplored squares. Rejected: B, keep reading true state.
+- **Q4, auto-actions and agreed TL-5 (XI-6):** option A. The Mild Plain auto-pick and auto-Probe read only known patrols and stand down when their hearing reach crosses unexplored squares. Rejected: B, keep reading true state.
 - **Q5, the Lodestring and secret caches (XI-22):** option A. The Lodestring never points at secret caches. Rejected: B, it may while a Mechanics-trained member lives.
 
 **The six answers to the brief (lead's calls, accepted by the client by proceeding; confirmed by the client on 2026-11-23, with this document), with their contested parts:**
-1. Fog gaps: Chalk on entry and Trace on glimpse; **no Shell on sight and no one-square Pocket rule** (told plainly).
+1. Fog gaps: Chalk on entry and Trace on sight; **no Shell on sight and no one-square Pocket rule** (told plainly).
 2. Reveal items: narrow, located, single-instance, lane-safe; **no trap or secret reveal items** (told plainly).
 3. Incentives: legible, cheap, clean stopping points; **no completion reward and no off-path loot lean** (told plainly).
 4. The map: always free, 0 ticks; **no bought map** (told plainly).
@@ -1428,7 +1429,7 @@ The client approved this document as a whole on 2026-11-23, including the six an
 12. **Travel's step check:** never onto a square not Seen at that moment; re-plan round newly Seen hazards, Voids, traps and pieces; avoid-or-stop for "?" hazards (4.7).
 13. **The noticing pre-stop re-evaluated each step,** with a one-step confirm and no re-raise until the group's known state changes (4.7).
 14. **Behind-you line:** excludes the arena side; a one-time toast if the confirm is turned off (4.4.4).
-15. **The spent field** respects LE's k ≥ n/2 rule (4.4.5).
+15. **The emptied field** respects LE's k ≥ n/2 rule (4.4.5).
 16. **The Ear Trumpet's stock** read on the camp-entry snapshot, its effect suspended while the lane is present, no coverage-strip line (4.5.2).
 17. **Cased:** counts seen, non-Hidden members, restarts on a new member; its odds band also waits for EP-41 and the ENM 13 flag; "exact activity" withdrawn (4.2, 4.5.2).
 18. **Afterimages:** Fresh, Persisting, Old and Short states; removal, not fading, for Searching units; stacked cut-outs, no numerals; dashed cut line, distinct from the EV figure frame (4.2).
@@ -1454,7 +1455,7 @@ The client approved this document as a whole on 2026-11-23, including the six an
 6. A uniform 20-tick fade fits no activity (4.2).
 7. The UI annex for Waymarks is an addition to MAIN 6.6, not a reading (4.3.4).
 8. No count on the minimap; no loose-end count anywhere (4.3.1, 4.4.2).
-9. No secrets found/total and no Stairhead banner on the Behind-you line; the rooms tally is unsplit (4.4.4).
+9. No secrets found/total and no Downstair banner on the Behind-you line; the rooms tally is unsplit (4.4.4).
 10. No auto-explore; Chalked squares in entered spaces are valid travel targets (4.7).
 11. Stopping "on noticing" alone comes too late; hence the pre-stop (4.7).
 12. An uncapped forecast cuts patrol contact about 6×; hence the gate (4.8.1).
@@ -1607,7 +1608,7 @@ The owed rows are the single list in 13; by owner:
 | XP1 | Travel and re-sight narrowing walk into noticing rolls | Noticing pre-stop; XI-9 ships only with it (4.7) |
 | XP2 | Combat Afterimage suppression hides in-room combatants | Reversed: in-room Short kept, out-of-room dropped (4.2) |
 | XP3 | Uncapped forecast removes patrol tension | Earned, windowed, gated by `PatrolFightRate` (4.8.1; agreed, Q2) |
-| XP4 | Unfinished Business invents a secrets found/total; post-boss FOMO | Arena confirm only; approved fields only; no Stairhead banner (4.4.4) |
+| XP4 | Unfinished Business invents a secrets found/total; post-boss FOMO | Arena confirm only; approved fields only; no Stairhead banner (4.4.4; Stairhead renamed the Downstair, naming pass NP-25) |
 | XP5 | Loose-end count is a completion meter | No count anywhere; report only (4.4.2) |
 | XP6 | Pointer set up to trip its own tax alarm | Price pegged to healing; earned routes; decision-quality alarm (4.6.2, 15) |
 | XP7 | "Behind risk" too vague | Detour quote lists known route obstacles (4.6.1) |
@@ -1639,7 +1640,7 @@ The owed rows are the single list in 13; by owner:
 | XB10 (M6) | Sight-shadow overclaims safety | "Out of sight (not out of hearing)" |
 | XB11 (M7) | Three definitions of unmapped | One definition (4.1.1) |
 | XB12 (M8) | Small parties pay the lane-gap tax; Downed split | `InfoCoinByPartySize`, party-1 checks; Downed do not see (an ENM 12.2 change, XI-2) |
-| XB13 (M9) | Easy Plain walks blind into unseen patrols | Never-Seen-crossing gate on auto-actions (agreed, Q4) |
+| XB13 (M9) | Easy Plain (Easy renamed Mild, naming pass NP-25) walks blind into unseen patrols | Never-Seen-crossing gate on auto-actions (agreed, Q4) |
 | XB14 (L1) | Batched Listen wastes trained Listen | Trained detail when a trained member is present |
 | XB15 (L2) | Shell vs square kinds and Voids | Chalk draws no square kind; a Void's square is plain chalk, known as a Void only by sight (after the check) |
 | XB16 (L3) | Wand of Outlining on chalk nooks | Not new (52% either way); after the check, chalk draws the whole footprint, so nooks no longer show as holes; `WaylaySurpriseRate` read (9.3) |
@@ -1658,7 +1659,7 @@ The owed rows are the single list in 13; by owner:
 | XS6 | Behaviour changes labelled "readings" | ENM 12.1, TL-5, TL 6.4, EV 4.12, MAIN 6.6 annex, FL 6.9 listed as changes with sections; ⚑ where settled, decided or agreed |
 | XS7 | Counts-only narrowing missing homes | RS 6.9, LP 4.12, Tip-offs added to XI-23 |
 | XS8 | Name collisions | A.5 |
-| XS9 | Hooks not placed (Readings, Trap Eye, Lore inscription, Hold the Hide, coverage strip, Seams, Lucid Key) | Rows in 5; Cased conditional on Trap Eye |
+| XS9 | Hooks not placed (Readings, Trap Eye, Lore inscription, Hold the Hide, coverage strip, Seams, Lucid Key (renamed the Clear Key, naming pass NP-25)) | Rows in 5; Cased conditional on Trap Eye |
 | XS10 | Floor strip location | Party bar (4.9.1) |
 | XS11 | Stratum strip vs folded card | Strip in M2; fold an M3 option |
 | XS12 | Shell content inconsistent | Walls, the wall-bounded footprint, Portal kinds only |
@@ -1688,21 +1689,21 @@ The owed rows are the single list in 13; by owner:
 
 **Amended by SV-31 (M2):** "28 approved documents" is the count at writing; from M2 the name check is `V7.NameRegistry`, manifest-driven, which every segment feeds, so no document count is kept here (seeds and validation design 5.2).
 
-**0 hits:** the `XI-` prefix; `V18`; Lodestring, F-TREASURE, Afterimage(s), Chalked, Traced, Waymark(s), Walls Have Ears, Cased, Ear Trumpet, Surveyor's Sketch, Behind-you, Detour quote, Keep card, Back to Stairhead, loose end(s), Next loose end, Listen bubble, spent field, Floor Atlas, `PartyKnowledge`, `CanSee`, `PatrolForecast`, `IKnowledgeQuery`, `uiMemory`, seen-edge, fog bank, Declutter, status ribbon, Stratum strip, Treasure field, told pip, sight shadow, noticing pre-stop, watch lines, Guided, Compact, frayed (now unused after the check); the events `SquaresSeen`, `SpaceEntered`, `SpaceTraced`, `SpaceChalked`, `AfterimageSet`, `HeardRecorded`, `FactDrawn`, `InstrumentUsed`; the queries `DetourQuote`, `NoticingPreStop`, `TreasureTarget`, `SketchGraph`, `LooseEnds`, `NoisePreview`, `InSightOf`; the checks and reports `LosSymmetric`, `FogEqualsRules`, `KnowledgeLeak`, `ProfileBlind`, `NoHoverOnly`, `ChalkNeverStub`, `SketchNeverSecretNode`, `BubbleNeverPositioned`, `LodestringDoorBlind`, `PointerNeverPreDoor`, `WaymarksOutsideKey`, `KnowledgeReloadMonotone`, `PatrolFightRate`, `MapSecondsPerFloor`, `Seg10ClickDelta`, `MarksPerScreen`, `CardFit`, `LostTime`, `YieldCategoryMix`, `SecretFindRate`, `SideRoomVisitRate`, `BeckonFollowRate`, `SideRoomPayoffMix`; "the string ends here"; "Dream map". Local prefixes XQ, XN, IP, IN, XP, XB, XS: 0 hits.
+**0 hits:** the `XI-` prefix; `V18`; Lodestring, F-TREASURE, Afterimage(s), Chalked, Traced, Waymark(s), Walls Have Ears, Cased, Ear Trumpet, Surveyor's Sketch, Behind-you, Detour quote, Keep card, Back to Stairhead (renamed To the Downstair, naming pass NP-25), loose end(s), Next loose end, Listen bubble, spent field (renamed emptied field, naming pass NP-25), Floor Atlas, `PartyKnowledge`, `CanSee`, `PatrolForecast`, `IKnowledgeQuery`, `uiMemory`, seen-edge, fog bank, Declutter, status ribbon, Stratum strip, Treasure field, told pip, sight shadow, noticing pre-stop, watch lines, Guided, Compact, frayed (now unused after the check); the events `SquaresSeen`, `SpaceEntered`, `SpaceTraced`, `SpaceChalked`, `AfterimageSet`, `HeardRecorded`, `FactDrawn`, `InstrumentUsed`; the queries `DetourQuote`, `NoticingPreStop`, `TreasureTarget`, `SketchGraph`, `LooseEnds`, `NoisePreview`, `InSightOf`; the checks and reports `LosSymmetric`, `FogEqualsRules`, `KnowledgeLeak`, `ProfileBlind`, `NoHoverOnly`, `ChalkNeverStub`, `SketchNeverSecretNode`, `BubbleNeverPositioned`, `LodestringDoorBlind`, `PointerNeverPreDoor`, `WaymarksOutsideKey`, `KnowledgeReloadMonotone`, `PatrolFightRate`, `MapSecondsPerFloor`, `Seg10ClickDelta`, `MarksPerScreen`, `CardFit`, `LostTime`, `YieldCategoryMix`, `SecretFindRate`, `SideRoomVisitRate`, `BeckonFollowRate`, `SideRoomPayoffMix`; "the string ends here"; "Dream map". Local prefixes XQ, XN, IP, IN, XP, XB, XS: 0 hits.
 
 **Added while writing (0 hits, grep re-run):** `SoloListenClickShare`, `WaylaySurpriseRate`, the suspend slot (`suspendSlots`). (`knowledgeJournal` withdrawn after the check.)
 
 **Added after the check (0 hits, grep re-run):** `KnownCanSee`, `KnownNoiseReach`, `KnowledgePass`, `ChalkOutline`, `DeathNotRewindable`, `TravelNeverEntersKnownHazard`, `WaymarkGlyphDistinct`, `SpentFieldRespectsBestRemaining`, `RoleBlindOrder`, `BehindYouFullClearZero`, Tool mode, Regular (as a density label), "plain cache", spool, tack, tuft, ellipsis, "outline ends".
 
 - **Kept on purpose:** "Tithe Bowl" (11 hits, LE's own camp hook, the thing this design fills); "count line" and "floor strip" (approved FL and LE terms, reconciled in 4.9.9); "Floor-info panel" (3 hits, LE and ENM's own term); `TallyChaseSeconds`, `ExploreClicks`, `ExploreSeconds`, `PreviewExactness` (approved reports and checks, read); Pick the Question and the Wand of Outlining (approved, read); "Overlook" (FL's own M3 mechanic).
-- **Descriptive only, not names:** "chalk" (3 hits: EV's Gaol dressing and Tally Board text; the state is **Chalked**, 0 hits); "Trace" (2 hits, the SRD spell name Pass without Trace; the state is **Traced**, 0 hits); "inspect" (9 hits as a lowercase verb; **Inspect** here is the UI action's name); "Standard" (*after the check:* withdrawn as the density label, because it is ENM's rank and TL's device grade; renamed **Regular**, 0 hits); "Aim" (*after the check:* the weapons rule's Aim attack; the mode is renamed **Tool mode**, 0 hits); "Shell" (capitalised 0; lowercase 14: Frozen's shell, Alms Crab; used only descriptively); "Pocket" (1 lowercase hit in RT; the rejected rule is named only descriptively); "in sight of" and "hidden from" (common phrases; the pips are named by their captions).
-- **Rejected after collision:** "Aim" and "Standard" as UI labels (after the check); the knot motif for the Lodestring mark (the Windfall knotted-sack, after the check); pennant for the Waymark base (Herald, after the check); star for a Waymark shape (the notable's star, after the check); Targeting (65 hits); Sleepwalker (enemy, IR skin, BR reserves); Thread (Arcanist, EV avoided list, BR lanes); Twine, Clew, Lodestone (retired with the drafts); F-HOARD (0 hits but LE's "hoard" vocabulary); Echo (41, EV avoided); Stake (EV avoided); Rumour (EP rejected meter); Last Turning (FL term); ghost (IR draws, SH False Trail); lens (CL term); Pull (11); Shape (42); Seek (11); pin (13); Field Notes; Marginalia; "quiet states" (LP quiet summaries; renamed **spent field**). Rejected local schemes: XT (20), XF (35), XK (19), IT (32), IF (21), ET (EV-rejected).
+- **Descriptive only, not names:** "chalk" (3 hits: EV's Gaol dressing and Tally Board text; the state is **Chalked**, 0 hits); "Trace" (2 hits, the SRD spell name Pass without Trace; the state is **Traced**, 0 hits); "inspect" (9 hits as a lowercase verb; **Inspect** here is the UI action's name); "Standard" (*after the check:* withdrawn as the density label, because it is ENM's rank and TL's device grade; renamed **Regular**, 0 hits); "Aim" (*after the check:* the weapons rule's Aim attack; the mode is renamed **Tool mode**, 0 hits); "Shell" (capitalised 0; lowercase 14: Frozen's shell, Alms Crab (renamed Pew Crab, naming pass NP-25); used only descriptively); "Pocket" (1 lowercase hit in RT; the rejected rule is named only descriptively); "in sight of" and "hidden from" (common phrases; the pips are named by their captions).
+- **Rejected after collision:** "Aim" and "Standard" as UI labels (after the check); the knot motif for the Lodestring mark (the Windfall knotted-sack, after the check); pennant for the Waymark base (Herald, after the check); star for a Waymark shape (the notable's star, after the check); Targeting (65 hits); Sleepwalker (enemy, IR skin, BR reserves); Thread (Arcanist, EV avoided list, BR lanes); Twine, Clew, Lodestone (retired with the drafts); F-HOARD (0 hits but LE's "hoard" vocabulary); Echo (41, EV avoided); Stake (EV avoided); Rumour (EP rejected meter); Last Turning (FL term); ghost (IR draws, SH False Trail); lens (CL term); Pull (11); Shape (42); Seek (11); pin (13); Field Notes; Marginalia; "quiet states" (LP quiet summaries; renamed **spent field**; renamed again **emptied field** by naming pass NP-25). Rejected local schemes: XT (20), XF (35), XK (19), IT (32), IF (21), ET (EV-rejected).
 
 ### A.6 XI cross-reference
 
 The research drafts, the three models, the UI catalogue and the incentives layer each numbered from XI-1 with different contents. All are renumbered into this register by topic:
-- knowledge model → XI-1; `CanSee` → XI-2; Chalk on entry → XI-3; Trace on glimpse → XI-4; remembered state → XI-5;
-- patrols and auto-actions → XI-6; the map → XI-7; travel → XI-8; re-sight narrowing → XI-9; loose ends and the Detour quote → XI-10; the Behind-you line, rooms tally and spent field → XI-11;
+- knowledge model → XI-1; `CanSee` → XI-2; Chalk on entry → XI-3; Trace on sight → XI-4; remembered state → XI-5;
+- patrols and auto-actions → XI-6; the map → XI-7; travel → XI-8; re-sight narrowing → XI-9; loose ends and the Detour quote → XI-10; the Behind-you line, rooms tally and emptied field → XI-11;
 - party-side stealth pips → XI-12; hearing → XI-13; charters → XI-14;
 - slot model → XI-15; digits → XI-16; knowledge grammar → XI-17; wall projection → XI-18; regions, queue and naming → XI-19; Inspect parity → XI-20; disclosure → XI-21;
 - F-TREASURE → XI-22; the Lodestring → XI-23; the Tithe Bowl → XI-24; Yield → XI-25; the Ear Trumpet → XI-26; owner requests → XI-27;

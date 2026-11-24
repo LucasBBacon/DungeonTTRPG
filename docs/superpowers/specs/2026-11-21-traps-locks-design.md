@@ -2,6 +2,24 @@
 
 Date: 2026-11-21
 Status: Approved, 2026-11-21
+Names updated by the naming pass (naming pass design,
+`2026-11-24-naming-pass-design.md`, approved 2026-11-24; NP rows
+listed): **NP-17** (this document, with its 13.1 cites under the
+naming pass's agreed Q1, Q2, Q3 and Q5) and **NP-9** (Second Nature →
+Old Hand). Applied: trap grades Found / Hunch / Unfound; check grades
+Smooth / Jam / Botch; DC tiers Mild / Middling / Hard; the Clasp family
+and the "clasp" trigger kind (ids such as `catchTrapId` stay); Hunch
+badge; Lip Clamp; pressure slabs; the first-spring rule; Wire Loop;
+Scent Sack; keyring tripwire; Swing Blade; Frost-seized padlock;
+Ringmaster's Key; Rood Screen door; the Wager rooms the Chained Shelves,
+the Prop Room, the Craw, the Airing Cupboard and the Tracery Loft; the
+Chief Archivist; the Pedlar's Cart; the lock state "dangling"; Freefall;
+Parting Fare; Fragments; the Cobweb Archive (short form: the Archive);
+the roles marksman and swarmer; Old Hand. Darning Volley, the Lullaby
+Glyph and the Carnival of the Last Evening stay (naming pass 5.1.16,
+W-DREAM-1, 5.5.39). Historical renames and the Appendix A records keep
+their old names, with a "(renamed …, naming pass NP-n)" note where an
+old name read as current.
 Parents: `2026-11-15-dungeon-rpg-design.md` (main design),
 `2026-11-16-character-stat-model-design.md` (stat model, "STAT"),
 `2026-11-16-ability-resource-model-design.md` (ability model, "ABL"),
@@ -144,7 +162,7 @@ the check:** seven more renames clear collisions the check found (A.5):
 Mourners' Veil → **Crepe Veil**, Overdue cage → **Closed-Stack cage**,
 Silence Glyph → **Shush Glyph**, Pincushion Volley → **Darning Volley**,
 Censer Tripwire → **Thurible Wire**, Paper-Cut Drawer → **Paper-Cut
-Tray**, Spinning Target → **Blade Wheel**; and the Kennel's horn
+Tray**, Spinning Target → **Blade Wheel** (renamed Swing Blade, naming pass NP-17); and the Kennel's horn
 tripwire is re-told as the **tin-can tripwire** (8; TL-43).
 
 **Numbers in this document are illustrative** unless a rule says
@@ -189,11 +207,11 @@ with exact odds.
 **BQ1. Should traps trigger on a failed disarm? Yes, but only on a bad
 failure (lead's answer; change TL-4).** Every device check (disarm,
 pick, hand-trigger) uses one graded result, the **Margin rule**:
-- **Open**: the check meets the DC. The device is disarmed or opened
+- **Smooth**: the check meets the DC. The device is disarmed or opened
   silently.
 - **Jam**: the check fails by 1–4. Noise 4. The device stays armed and
   live, but no hands can work it again this floor. Walking round, Bear
-  it, Trigger Shot, Pole it and weighted plates all remain.
+  it, Trigger Shot, Pole it and pressure slabs all remain.
 - **Botch**: the check fails by 5 or more. Jam, plus the device's own
   consequence: a trap springs.
 
@@ -214,7 +232,7 @@ Reasons:
   65% · Jam 20% · Botch 15%: springs, hits you, floored."*
 
 **Told plainly:** out of combat, a trained member can **Take time** on
-an Easy or Standard trap (no roll, 8 ticks of patrol movement). So for a
+a Mild or Middling trap (no roll, 8 ticks of patrol movement). So for a
 skilled party, BQ1 mostly bites on Hard devices, in combat, on
 consequence locks and in Wager rooms. That is deliberate: risk sits
 where the decisions are. To keep real rolls on every floor, from F2 at
@@ -227,7 +245,7 @@ damage and its normal save, with no hidden half-damage band (lead's
 answer).** There are two carve-outs:
 1. A Botch never fires a set-piece **hard part**.
 2. **Where it lands follows the trap's geometry** (`botchHits`). A plate
-   or catch hits the person working it. A wall-mounted device (a
+   or clasp hits the person working it. A wall-mounted device (a
    chandelier cleat, a portcullis winch) hits its area, and the worker
    may be standing outside that area. The rule card and the preview say
    which.
@@ -266,7 +284,7 @@ Bear-it preview shows "HP after: X, until next rest".
 
 Every party also gets ways to spring a trap from a distance in M2:
 Trigger Shot (replaces one attack), the hand-trigger (an action), **Pole
-it** (a reach weapon within 2) and weighted plates (Shunt or Kick a
+it** (a reach weapon within 2) and pressure slabs (Shunt or Kick a
 piece onto it).
 
 **Told plainly:** in this ruleset, "a character with a high enough stat
@@ -291,10 +309,10 @@ chandelier while they are under it. Details:
 Three fairness rules close the exploits:
 1. **Once Bitten.** A group hurt by a device spring stops trusting
    *every* known device area for the rest of the floor.
-2. **The opener rule.** A spring on an unaware group starts combat and
+2. **The first-spring rule.** A spring on an unaware group starts combat and
    *is* the springer's surprise action. It never adds a free round.
-3. **Revealed-only scoring.** The AI scores only traps the party has
-   Revealed when it pushes party units, so it never weaponises
+3. **Found-only scoring.** The AI scores only traps the party has
+   Found when it pushes party units, so it never weaponises
    information the party lacks.
 
 Traps the party re-arms out of a group's sight, unknown to that group
@@ -367,7 +385,7 @@ change TL-28).**
   the check; 6.14)**.
 
 The mimic is the theme's **own lurker in container form**, the **boxed
-lurker** (the Silk's Margin-Crawler in a catalogue drawer, the Gut's
+lurker** (the Archive's Margin-Crawler in a catalogue drawer, the Gut's
 Gutworm in a swallowed strongbox) **(agreed, Q2)**. It is not a
 keyhole-wearing new type. Its tell is that lurker's own at-rest tell,
 which the player has already learned (RC2), re-authored at container
@@ -458,7 +476,7 @@ are final.
 | # | Question | Answer **(agreed)** | Rejected | Change |
 |---|---|---|---|---|
 | Q1 | Warned or floored for traps (narrows the agreed DH 10.4 / DH Q6 floor) | **A.** A shown Hunch zone counts as a warning. Out of combat, or when pushed in, it stays floored. Walking in by choice in combat, the preview shows the floor's worst trap with the lethal tag (6.5) | B: Hunch zones fully floored like hidden traps (an anti-detection incentive). C: no Hunch zones, traps only Revealed or Hidden (20–57% of traps unseen for no-Mechanics parties) | TL-8 ⚑ |
-| Q2 | Mimic route | **A.** The boxed lurker: each theme's own lurker in container form (Silk Margin-Crawler drawer, Gut Gutworm strongbox) in M3, more themes as they gain lurkers, at most 1 per floor, F2–5; no roster exception (6.14) | B: a cross-theme mindless keyhole mimic (needs an exception to RE9, V1 and the roster records) | TL-28 ⚑ |
+| Q2 | Mimic route | **A.** The boxed lurker: each theme's own lurker in container form (Archive Margin-Crawler drawer, Gut Gutworm strongbox) in M3, more themes as they gain lurkers, at most 1 per floor, F2–5; no roster exception (6.14) | B: a cross-theme mindless keyhole mimic (needs an exception to RE9, V1 and the roster records) | TL-28 ⚑ |
 | Q3 | Wax Key at the basic vendor (changes the agreed ITEMS 10.3 list) | **A.** The basic vendor stocks 1 Wax Key only when the party has no Mechanics-trained member, merged with the companions gap card (6.11) | B: Wax Keys from loot and the camp notables slot only | TL-25 ⚑ |
 
 ### 0.3 Decisions in brief
@@ -466,15 +484,15 @@ are final.
 | # | Decision | Wave | Marking |
 |---|---|---|---|
 | 1 | Check charter CC1–CC8. Three check families: object checks, unit contests, thresholds | M1 | lead's call; TL-1 |
-| 2 | One DC ladder: Standard = EnvDC, F1 Standard = Plank 12; Easy −3, Hard +4, no Hard on F1; force = DC +2 | M1 | lead's call; TL-2 |
+| 2 | One DC ladder: Middling = EnvDC, F1 Middling = Plank 12; Mild −3, Hard +4, no Hard on F1; force = DC +2 | M1 | lead's call; TL-2 |
 | 3 | `traps` generation stream; keyed `checks` stream for object checks and out-of-combat trap saves | M1 | lead's call; TL-3 ⚑ (ABL 14.4 settled, main 6.3 decided, extended) |
-| 4 | Margin rule (Open / Jam / Botch), one roll per object per hand verb per floor; force retries; Squeeze and Plank per traversal | M1 locks, M2 traps | lead's answer, BQ1/BQ2; TL-4 |
-| 5 | Take time: Easy and Standard only, out of combat, 8 ticks; not on consequence locks, Squeeze or Plank | M1 locks, M2 traps | lead's call; TL-5 |
-| 6 | Detection by trap sense with Mechanics proficiency; Revealed / Hunch (−5) / Hidden; Probe from inside or beside a Hunch zone; no search verb | M2 | lead's call; TL-6 ⚑ (STAT 6, agreed), TL-7 |
+| 4 | Margin rule (Smooth / Jam / Botch), one roll per object per hand verb per floor; force retries; Squeeze and Plank per traversal | M1 locks, M2 traps | lead's answer, BQ1/BQ2; TL-4 |
+| 5 | Take time: Mild and Middling only, out of combat, 8 ticks; not on consequence locks, Squeeze or Plank | M1 locks, M2 traps | lead's call; TL-5 |
+| 6 | Detection by trap sense with Mechanics proficiency; Found / Hunch (−5) / Unfound; Probe from inside or beside a Hunch zone; no search verb | M2 | lead's call; TL-6 ⚑ (STAT 6, agreed), TL-7 |
 | 7 | Warned or floored for traps: a shown Hunch zone is a warning | M2 | **agreed, Q1**; TL-8 ⚑ (narrows DH 10.4, agreed) |
-| 8 | Three families: Devices (body always visible, always rigged), Snares, Catches | M2 | lead's call; TL-10 |
-| 9 | Bear it, step over, walk-round default; universal spring rows; weighted plates; Pole it; handles | M2 | lead's answer, BQ3; TL-12 to TL-14 |
-| 10 | Knowledge model M2: natives avoid triggers and trust areas; Once Bitten; mindless blunder; Revealed-only AI pushes | M2 | lead's answer, BQ4; TL-16 (enemies owner) |
+| 8 | Three families: Devices (body always visible, always rigged), Snares, Clasps | M2 | lead's call; TL-10 |
+| 9 | Bear it, step over, walk-round default; universal spring rows; pressure slabs; Pole it; handles | M2 | lead's answer, BQ3; TL-12 to TL-14 |
+| 10 | Knowledge model M2: natives avoid triggers and trust areas; Once Bitten; mindless blunder; Found-only AI pushes | M2 | lead's answer, BQ4; TL-16 (enemies owner) |
 | 11 | Damage bounds: hideable traps ≤ 20%, devices and set pieces ≤ `CapRound`; traps inside EnvRound except self-caused | M2 | lead's call; TL-18 |
 | 12 | Floor-1 package: lesson trap first; nothing fight-adjacent; no push edges; conditions end at combat start | M1/M2 | lead's call; TL-19 |
 | 13 | Locks: retryable force with a guarantee; Splinter from F2; consequence kinds; Keybearers; Wax Key; no lockpicks | M1–M3 | lead's answers, BQ5, BQ6, BQ8; TL-21 to TL-26 |
@@ -697,7 +715,7 @@ Each is met in section 14.
 | Id | Tension | Resolution |
 |---|---|---|
 | KT1 | FL's "existing check stream" does not exist; main 6.3 conflicts with ABL 14.4 | Keyed `checks` stream (TL-3), flagged |
-| KT2 | Trap sense carries no proficiency, so Mechanics training is inert for detection; 40–63% of traps stay Hidden | Proficiency when Mechanics-trained (TL-6) |
+| KT2 | Trap sense carries no proficiency, so Mechanics training is inert for detection; 40–63% of traps stay Unfound | Proficiency when Mechanics-trained (TL-6) |
 | KT3 | DH 10.4 against "risk the whole party" | Wager risk runs through combat (TL-29), told plainly |
 | KT4 | C 10.4 against lethal detected traps; traps escape every cap | Traps inside EnvRound, `TrapLethalityBound` ≤ `CapRound` (TL-18) |
 | KT5 | Lockpicks against ITEMS 2 | No picks (TL-26) |
@@ -713,8 +731,8 @@ Each is met in section 14.
 | KT15 | Model C's "Trapwright places traps" against SH 8.2 | Rejected |
 | KT16 | A Hunch counted as undetected rewards not detecting | Warned or floored (TL-8) **(agreed, Q1)** |
 | KT17 | The EnvRound cap could launder deliberate springs | Self-caused damage is counted outside the cap (TL-18) |
-| KT18 | Area trust plus universal re-arm farms unaware groups | Once Bitten, the opener rule, re-arm once per floor (TL-15, TL-16) |
-| KT19 | Hidden noise traps start lethal fights | `NoiseTrapVisible` (TP8) |
+| KT18 | Area trust plus universal re-arm farms unaware groups | Once Bitten, the first-spring rule, re-arm once per floor (TL-15, TL-16) |
+| KT19 | Unfound noise traps start lethal fights | `NoiseTrapVisible` (TP8) |
 | KT20 | Out-of-combat trap saves on the combat stream break main 6.3 | Those saves go on `checks` (TL-3) |
 | KT21 | Jams that end with the fight give a free second roll | Universal Jams last to floor end (TL-4) |
 | KT22 | Take time erases Sure Hands and BQ5 | Not on consequence locks or Hard; Sure Hands cuts its ticks (TL-5); Shade owner told |
@@ -730,22 +748,22 @@ Each is met in section 14.
 | **Trap** | Room content that is hidden until detected, or a known armed device, sprung by a trigger, and detectable, disarmable and re-armable (HZ-1; 6.3) |
 | **Device** | A trap whose `area` is separate from its trigger; its body and `mechanismSquare` are always visible, and every body over walkable squares is rigged (6.3) |
 | **Snare** | A point trap: the effect lands on the trigger square (6.3) |
-| **Catch** | A trap on a lock, lid or Door (6.3) |
+| **Clasp** | A trap on a lock, lid or Door (6.3) |
 | **Set piece** | A known device of up to 9 squares, at most 1 per F2–5 floor; the only home of a trap's hard part (6.3) |
 | **Handle** | A mechanism that springs its device with an action and no check (6.7) |
-| **Margin rule** | The graded result of every object check: **Open** (meets the DC), **Jam** (fails by 1–4), **Botch** (fails by 5+) (6.6) |
-| **Take time** | A no-roll, out-of-combat, channelled threshold on Easy and Standard devices and Plain locks: 10 + bonus, 8 ticks; never on `noTakeTime` objects (6.6) |
+| **Margin rule** | The graded result of every object check: **Smooth** (meets the DC), **Jam** (fails by 1–4), **Botch** (fails by 5+) (6.6) |
+| **Take time** | A no-roll, out-of-combat, channelled threshold on Mild and Middling devices and Plain locks: 10 + bonus, 8 ticks; never on `noTakeTime` objects (6.6) |
 | **Trap sense** | The best 10 + Int among living, non-Downed party units, plus proficiency for a Mechanics-trained unit (6.4) |
-| **Revealed / Hunch / Hidden** | The three detection grades; they never drop (6.4) |
+| **Found / Hunch / Unfound** | The three detection grades; they never drop (6.4) |
 | **Hunch zone** | A true zone, with a seeded offset drawn at generation, that contains every trigger square of a Hunch-grade trap and no other trap's trigger; never a decoy (6.4) |
 | **Probe** | A no-roll, noise-0 act, from inside or orthogonally beside a Hunch zone, that reveals every trap whose trigger lies in the zone (6.4) |
 | **Hunch stop** | Auto-walk's stop on the last square before a new Hunch zone: Probe, Walk round or Push through; out of combat it auto-Probes unless a patrol is due (6.4) |
 | **Wide berth** | A native step in party sight whose shortest path crossed an armed trigger it avoided; raises that trap to at least Hunch (6.4) |
 | **Bear it** | Entering a known trigger by your own movement, as an explicit choice: the trap springs with advantage on its save (6.7) |
-| **Pole it** | A reach-weapon user springs a known plate, wire or catch host within 2 (6.7) |
-| **Weighted plate** | A Furnishing whose Shunt, Kick or Overturn ends on a plate or trapdoor springs it (6.7) |
+| **Pole it** | A reach-weapon user springs a known plate, wire or clasp host within 2 (6.7) |
+| **Pressure slab** | A Furnishing whose Shunt, Kick or Overturn ends on a plate or trapdoor springs it (6.7) |
 | **Once Bitten** | A group with any member inside the area of a resolved device spring treats every known device area as a hazard for the rest of the floor (`bitten`) (6.8) |
-| **Opener rule** | A spring that affects an unaware group is the springer's surprise action; it never adds a round (6.8) |
+| **First-spring rule** | A spring that affects an unaware group is the springer's surprise action; it never adds a round (6.8) |
 | **Consequence lock** | A Crier, Barb, Tattle or Runed lock; its glyph and rule card show the consequence (6.11) |
 | **Splinter** | From F2, a force Botch on a Door breaks its panel and opens the lock: noise 10, it never closes again; the Portal stands (6.11) |
 | **Keybearer** | The one unit per floor that carries the floor key, shown by a key pip on its plate (6.11) |
@@ -776,7 +794,7 @@ treated as such.
 | Pillars of Eternity | One Mechanics skill; optional picks bridge a gap | One skill; consumables that bypass, not gate | Scouting-mode tax |
 | Darkest Dungeon | Curio and provision pairing; failed disarm springs | Keys as optional shortcuts | Must-pack checklists |
 | Dark Souls, Gungeon, Isaac | Mimic tells (chain, wiggle, spikes); attack-to-test | A learnable tell that never lies; tests have a price | Tell-less gotchas |
-| Spelunky, Grimrock | Anything triggers; a crate on the plate; the greed trigger | Weighted plates; the greed trigger | — |
+| Spelunky, Grimrock | Anything triggers; a crate on the plate; the greed trigger | Pressure slabs; the greed trigger | — |
 | Gloomhaven (fan rules site) | Monsters avoid traps unless no path exists; push and pull | Natives avoid triggers; forced movement | — |
 | Hades, Brogue, Isaac | Stakes shown before entry; choose-one vaults | Wager room signposting; cages | Hidden stakes |
 | Invisible Inc., Thief, Dishonored | Consequence known before acting; noise as the cost | Consequence glyphs; noise as failure currency | — |
@@ -810,7 +828,7 @@ treated as such.
 - **Layer L, locks, keys and checks.** Margin rule, Take time, keyed
   stream, consequence locks, Wax Key, Keybearers.
 - **Hybrid M (new mechanics M-1 to M-16).** The cleanest grammar:
-  Open/Jam/Botch, band −5, Careful work, `containerForm` mimic.
+  Smooth/Jam/Botch, band −5, Careful work, `containerForm` mimic.
 
 ### 5.2 Judges' scores (1–10)
 
@@ -848,7 +866,7 @@ ideas, and corrected by the numbers pass and the three critiques.**
 Corrections applied to C:
 - drop `unitId` from the checks key;
 - defer per-group belief to M3;
-- AI pushes score only Revealed traps;
+- AI pushes score only Found traps;
 - `NoCheapKill` covers traps;
 - no rigged devices on F1;
 - device bands at about 0.9 × `CapRound`;
@@ -909,41 +927,41 @@ Int detection).
 
 ### 6.2 The DC ladder (lead's call; change TL-2) *(illustr.)*
 
-| Floor | Easy (−3) | **Standard** | Hard (+4) | Notes |
+| Floor | Mild (−3) | **Middling** | Hard (+4) | Notes |
 |---|---|---|---|---|
-| F1 | 9 | **12** | — | Standard = RT Plank 12 |
-| F2–3 | 10 | **13** | 17 | Standard = EnvDC 13 (HZ 6.3.5) |
+| F1 | 9 | **12** | — | Middling = RT Plank 12 |
+| F2–3 | 10 | **13** | 17 | Middling = EnvDC 13 (HZ 6.3.5) |
 | F4 | 11 | **14** | 18 | EnvDC 14 |
 | F5 | 12 | **15** | 19 | EnvDC 15 |
 
 - `detectDifficulty`, `disarmDifficulty`, the pick DC and a trap's save
-  DC all read this table. The trap's save DC is Standard for its floor.
+  DC all read this table. The trap's save DC is Middling for its floor.
 - **Force DC = lock DC + 2.**
-- Tier: Easy = tier 1, Standard = 2, Hard = 3. Trigger Shot AC stays 10
+- Tier: Mild = tier 1, Middling = 2, Hard = 3. Trigger Shot AC stays 10
   + 2 × tier **(settled)**.
 - **Flat rows keep their approved values:** Plank and Squeeze 12 on
   every floor, heft 8/12, Overturn 15, Pitted repair 13, Wedge 10 +
   Mechanics.
 - There is no Hard tier on F1.
 - **Curiosity thresholds (events design 4.3.2; change EV-5; M2):**
-  Standard for the floor (F1 12, F2–3 13, F4 14, F5 15), never scaled
+  Middling for the floor (F1 12, F2–3 13, F4 14, F5 15), never scaled
   by party size (CC6); a shared pool reads the floor it is drawn on. An
   F1 **teaching rung** of 9 is allowed on at most one lit option per F1
   theme pool (the Kennel's K2 only in M2).
 
-Fit with the stat model (trained Int +3 specialist; Open / Jam / Botch):
+Fit with the stat model (trained Int +3 specialist; Smooth / Jam / Botch):
 
 | Case | Bonus | DC | Odds |
 |---|---|---|---|
-| F1 Standard, L1 | +5 | 12 | 70 / 20 / 10 |
-| F2 Standard, L3 | +5 | 13 | 65 / 20 / 15 |
-| F3 Standard, L5 | +7 | 13 | 75 / 20 / 5 |
-| F4 Standard, L7 | +7 | 14 | 70 / 20 / 10 |
-| F5 Standard, L9 | +9 | 15 | 75 / 20 / 5 |
+| F1 Middling, L1 | +5 | 12 | 70 / 20 / 10 |
+| F2 Middling, L3 | +5 | 13 | 65 / 20 / 15 |
+| F3 Middling, L5 | +7 | 13 | 75 / 20 / 5 |
+| F4 Middling, L7 | +7 | 14 | 70 / 20 / 10 |
+| F5 Middling, L9 | +9 | 15 | 75 / 20 / 5 |
 | F5 Hard, L9 | +9 | 19 | 55 / 20 / 25 |
 | F5 Hard, mastery | +13 | 19 | 75 / 20 / 5 |
 
-A side-trained Int +1 member sits at 55–60 / 20 / 20–25 on Standard,
+A side-trained Int +1 member sits at 55–60 / 20 / 20–25 on Middling,
 which is why the best-member rule picks the specialist.
 
 ### 6.3 Taxonomy (lead's call; change TL-10)
@@ -953,8 +971,8 @@ which is why the best-member rule picks the specialist.
 | Family | What it is | How it is seen |
 |---|---|---|
 | **Device** | A body whose `area` is separate from its trigger. Its `mechanismSquare` (cleat, winch, pawl, lever) sits by the body | Body and mechanism are **always visible**, and **every such body over walkable squares is rigged**: there are no decoys (RC1; the FL 7.8 chandelier precedent). Its trigger may be hidden |
-| **Snare** | A point trap: the effect lands on the trigger square | Hidden until detected |
-| **Catch** | A trap on a lock, lid or Door | Its padlock glyph or lid tell; hidden catches are detected like snares |
+| **Snare** | A point trap: the effect lands on the trigger square | Unfound until detected |
+| **Clasp** | A trap on a lock, lid or Door | Its padlock glyph or lid tell; hidden clasps are detected like snares |
 
 **Triggers (`triggerKind`):**
 - **plate:** 1 square; any unit entering, or a weighted piece (TL-14).
@@ -962,7 +980,7 @@ which is why the best-member rule picks the specialist.
   (TL-12); forced movement across it always springs it.
 - **trapdoor:** 1–4 squares. Units on it take its `drop` damage plus
   Prone and are placed on the nearest walkable non-trigger square; **no
-  unit ever falls as part of a spring**, so no fall band, Dreamfall or
+  unit ever falls as part of a spring**, so no fall band, Freefall or
   `FallFloor` joins the spring (**lead's call, after the check**). Then:
   - on F1, and in any room that is not a V10-proven Void room with its
     theme's Void skin, it **recloses**;
@@ -970,15 +988,15 @@ which is why the best-member rule picks the specialist.
     Void skin, its squares become an open **Void** (TL-31). That Void
     counts toward HZ's Void-room quotas (HZ 6.4), and from then on it
     is an ordinary HZ Void: anything later pushed in resolves HZ's Void
-    branch (the C 10.2 edge save; a party unit Dreamfalls to the Snag; a
+    branch (the C 10.2 edge save; a party unit Freefalls to the Snag; a
     monster's `voidFall` pays out and counts as a loss under ENM 14.3
     and ENM 16 as written).
   - A Botch that hits the worker (`botchHits: worker`) applies the
     effect where the worker stands, never as a fall.
 - **glyph** (rune): any unit entering; detected and disarmed by Arcana
   or Mechanics.
-- **catch:** springs on Open, Pick or Force of its host, in the order of
-  6.13; key and Wax Key routes never spring it. A catch on a Door is
+- **clasp:** springs on Open, Pick or Force of its host, in the order of
+  6.13; key and Wax Key routes never spring it. A clasp on a Door is
   legal: its host is not a trigger square (TP1).
 - **M3 only (TL-41):** `room` (a loud act in the room) and `scent`
   (hound families).
@@ -986,7 +1004,7 @@ which is why the best-member rule picks the specialist.
 **Effects (`effect`, each with a `loud` flag):**
 - **strike:** damage, Reflex half.
 - **drop:** damage plus Prone.
-- **snare:** Grappled, escape at the floor's Standard.
+- **snare:** Grappled, escape at the floor's Middling.
 - **spray:** a condition from the theme's 6 with a Fortitude save, under
   RT-16.
 - **alarm:** noise 10 only.
@@ -1003,11 +1021,11 @@ which is why the best-member rule picks the specialist.
 check).** Every trap carries a diegetic tell: on a wall, above head
 height, or on the device body. Never on a fake floor tile (RC1+). This
 is the art team's main canvas.
-- **A snare's or catch's tell renders only once the trap is
-  Revealed.** It appears through a Reveal transition that reads as the
+- **A snare's or clasp's tell renders only once the trap is
+  Found.** It appears through a Reveal transition that reads as the
   object settling (dust falls, the object "settles"), never as a spawn.
-  Hunch shows only the zone (6.4); Hidden shows nothing. So a player who
-  learns the tells still cannot find a Hidden trap without trap sense,
+  Hunch shows only the zone (6.4); Unfound shows nothing. So a player who
+  learns the tells still cannot find an Unfound trap without trap sense,
   and the Int lane holds.
 - **Device bodies and mechanisms are always shown** (they are the
   device's tell); the device's trigger follows its grade.
@@ -1054,7 +1072,7 @@ as `seenByParty`. Every seen trap is re-evaluated on any rise in trap
 sense. It draws nothing.
 - **Per square (lead's call, after the check).** Detection runs after
   every square of any party movement, before the next square is
-  entered. A new Revealed or Hunch result **interrupts** the move,
+  entered. A new Found or Hunch result **interrupts** the move,
   manual or auto-walk, and the unit keeps its remaining movement. So no
   unit steps onto a trap it learned of mid-move without a chance to
   re-plan.
@@ -1064,9 +1082,9 @@ sense. It draws nothing.
 
 | Grade | Condition | Shown |
 |---|---|---|
-| **Revealed** | trap sense ≥ `detectDifficulty` | Trigger squares, area, mechanism mark, rule card, and the tell (6.3) |
-| **Hunch** | trap sense ≥ `detectDifficulty` − 5 | A true zone (below) that contains every trigger square. Never a decoy (`HunchTrue`). For a catch, a Hunch badge on its host container or Door instead of a zone |
-| **Hidden** | below that | Nothing. Floored (DH 10.4) |
+| **Found** | trap sense ≥ `detectDifficulty` | Trigger squares, area, mechanism mark, rule card, and the tell (6.3) |
+| **Hunch** | trap sense ≥ `detectDifficulty` − 5 | A true zone (below) that contains every trigger square. Never a decoy (`HunchTrue`). For a clasp, a Hunch badge on its host container or Door instead of a zone |
+| **Unfound** | below that | Nothing. Floored (DH 10.4) |
 
 **Hunch zone geometry (lead's call, after the check).** `hunchZone` is
 the trigger's bounding box padded to at least 3×3 (2 wide in corridors)
@@ -1082,7 +1100,7 @@ inside it.
   it, without entering further; no roll, noise 0;
 - 2 ticks out of combat; in combat an action from such a square;
 - reveals **every trap whose trigger squares lie in the probed zone**
-  (`HunchZoneExclusive` makes that the zone's own trap; a Hidden trap
+  (`HunchZoneExclusive` makes that the zone's own trap; an Unfound trap
   there would be revealed too);
 - offered **only** at a Hunch zone (the Hairline grammar). So Probe
   never makes a trap less safe.
@@ -1106,7 +1124,7 @@ dominated, so the stop was a click, not a decision**)**. **Told
 plainly (XI-6):** an auto-Probe can still meet an unseen patrol
 arriving from known-empty space.
 
-**Other ways a trap is Revealed, all deterministic:**
+**Other ways a trap is Found, all deterministic:**
 - it springs in the party's sight;
 - Yield interrogation or Pick the Question;
 - a reading (6.12).
@@ -1125,12 +1143,12 @@ floor-sweeping for traps that are floored anyway (KF7; kept by the
 exploration and information design 4.5.3, XI-32).
 
 **Fit.**
-- A solo Vanguard (Int 0, sense 10) Reveals F1 Easy traps, gets Hunches
-  on Standard traps on F1–F5, and misses Hard ones (floored). The clock
+- A solo Vanguard (Int 0, sense 10) Reveals F1 Mild traps, gets Hunches
+  on Middling traps on F1–F5, and misses Hard ones (floored). The clock
   toy for this arm is owed (11.5).
-- A trained Int +3 member at L3 (sense 15) Reveals every Standard trap.
+- A trained Int +3 member at L3 (sense 15) Reveals every Middling trap.
 - A late Arcanist (sense 19) Reveals everything.
-- In the toy, mixed parties Reveal 75–90%. Hidden traps for no-Mechanics
+- In the toy, mixed parties Reveal 75–90%. Unfound traps for no-Mechanics
   parties fall to 2–13%, all Hard.
 - **Lever:** the Hard share of non-fight traps on F4–5 is 15% or less.
 
@@ -1150,17 +1168,17 @@ entered is floored only when:
 
 A unit that enters a shown zone by its own movement in combat sees a
 preview with the floor's worst trap and the lethal tag, and the damage
-is then ordinary. Hidden traps stay floored in and out of combat (DH
+is then ordinary. Unfound traps stay floored in and out of combat (DH
 10.4 kept).
 
 **The trap's own grade decides (lead's call, after the check).** The
 floor is decided by each trap's own grade at fire time, never by which
 zone a square lies in:
-- a **Hidden** trap is always floored, even inside another trap's zone
+- an **Unfound** trap is always floored, even inside another trap's zone
   (`HunchZoneExclusive` keeps that case out of generation in any
   event);
 - a **Hunch** trap follows (a), (b) and (c);
-- a **Revealed** trap follows DH 10.4 as written (lethal and tagged in
+- a **Found** trap follows DH 10.4 as written (lethal and tagged in
   combat);
 - a trap whose grade changed during the current move or action counts
   as undetected for that action (6.4).
@@ -1181,7 +1199,7 @@ EnvRound remainder.
 
 **"The floor's worst trap" (new lead's call).** The preview shows the
 highest maximum, after this unit's weakness (the HZ 6.11.5 method),
-among the floor's traps the party has not Revealed, as "up to X". It is
+among the floor's traps the party has not Found, as "up to X". It is
 a floor-level figure computed from the floor's own records, so it tells
 the player nothing about which trap, if any, sits under that square. It
 never exceeds `CapRound` (TL-18). The lethal tag (DH 17.5, 17.6) shows
@@ -1206,7 +1224,7 @@ zones (20–57% of traps go unseen for parties without Mechanics).
 
 ### 6.6 Hand work: the Margin rule, Take time, re-arm (lead's answer, BQ1; changes TL-4, TL-5, TL-11, TL-15)
 
-| Use | Training | Time | Open | Jam (−1 to −4) | Botch (−5 or worse) |
+| Use | Training | Time | Smooth | Jam (−1 to −4) | Botch (−5 or worse) |
 |---|---|---|---|---|---|
 | **Disarm** (at a trigger or mechanism) | Mechanics, trained only **(settled)**; Arcana for glyphs | 2 ticks out; action in | Disarmed, silent; `disarmedBy` | Noise 4; no hand work this floor; trigger stays live | Springs: full effect and its save, no hard part, lands by `botchHits` |
 | **Pick** (6.11) | Mechanics, trained only | 1 tick out; action in | Opens, silent | Noise 4; picking closed this floor | Jam plus the lock's consequence |
@@ -1229,7 +1247,7 @@ zones (20–57% of traps go unseen for parties without Mechanics).
 - **Take time** (TL-5):
   - out of combat only; no roll; the result is 10 + bonus;
   - costs **8 ticks** *(illustr.)*;
-  - offered only when it succeeds and only on **Easy or Standard**
+  - offered only when it succeeds and only on **Mild or Middling**
     devices and Plain locks;
   - **never** on Hard, never on a consequence lock (a spent Crier
     included), never on an object tagged `noTakeTime`, never on the
@@ -1245,7 +1263,7 @@ zones (20–57% of traps go unseen for parties without Mechanics).
 - **Sure Hands** (SH 7.11) keeps its d20 floor on rolls and also cuts
   Take time to 3 ticks. The Shade owner is told that Take time otherwise
   removes most of its value (toy: about +0).
-- **Easy Plain locks** are picked automatically on walk-in by a party
+- **Mild Plain locks** are picked automatically on walk-in by a party
   with a trained member (Take time, its full ticks, no card, 0 extra
   clicks), **only when no known patrol is due in the pick's hearing
   reach within those ticks** (`PatrolForecast` over known patrols only)
@@ -1318,12 +1336,12 @@ Botch (a hidden second rule).
    kept; KK4). **Handles:** a mechanism tagged `handle` (a cleat, a
    protruding book, a winch pawl) springs with an action and no check.
 6. **Pole it:** a unit with a reach weapon springs a known plate, wire
-   or catch host within 2 squares **(catches added: lead's call, after
+   or clasp host within 2 squares **(clasps added: lead's call, after
    the check)**. An action in combat, 1 tick out of combat, no roll, the
-   trap's noise. On a catch, the effect lands on the host's square with
+   trap's noise. On a clasp, the effect lands on the host's square with
    no hand on it, so nobody is hit unless a unit stands there. The
    Vanguard's ten-foot pole.
-7. **Weighted plates (lead's call, after the check, on the ordering):**
+7. **Pressure slabs (lead's call, after the check, on the ordering):**
    - a Furnishing whose Shunt, Kick or Overturn **ends** on a plate or
      trapdoor springs it, with the mover as causer; squares the piece
      only passes over spring nothing;
@@ -1335,8 +1353,8 @@ Botch (a hidden second rule).
      springs, both go through EnvRound in a fixed order: collision
      first, then the spring.
 8. **Shove** a monster onto a known trigger (C 10.2 edge save).
-9. **Probe**, the **Wax Key** (on a lock with a catch, the key opens the
-   lock without springing the catch; 6.13), a companion acting as best
+9. **Probe**, the **Wax Key** (on a lock with a clasp, the key opens the
+   lock without springing the clasp; 6.13), a companion acting as best
    member, or **leave it**: every trap is optional off the main path.
 
 ### 6.8 Enemies and traps (lead's answer, BQ4; change TL-16 in M2, TL-17 in M3; enemies owner)
@@ -1358,7 +1376,7 @@ Botch (a hidden second rule).
   leave it on their first move, and every unit that later joins that
   group inherits the bit **(precise trigger: lead's call, after the
   check)**. Rule card: "The house trusts its traps until one bites."
-- **Opener rule (order: lead's call, after the check):**
+- **First-spring rule (order: lead's call, after the check):**
   1. the spring resolves fully as an out-of-combat event, its saves on
      the `checks` stream;
   2. if it affected (damaged or conditioned) any member of an unaware
@@ -1371,13 +1389,13 @@ Botch (a hidden second rule).
   3. if no unit was affected (a snare or alarm, or the group outside the
      area), the result is only the spring's noise.
 - **AI fairness:**
-  - monster pushes and Shunts score only traps the party has Revealed;
+  - monster pushes and Shunts score only traps the party has Found;
   - `NoCheapKill` (**agreed**, RT Q3) extends to trap springs a monster
     causes;
   - a monster with no path while under attack breaks line of sight and
     reroutes, or returns home, rather than standing still (an ENM 11.3
     behaviour request).
-- **Fallback if the enemies owner refuses the Revealed-only scoring:**
+- **Fallback if the enemies owner refuses the Found-only scoring:**
   rigged-fight density drops until rigged share × party-hit probability
   ≤ 0.03 (NF-e).
 
@@ -1390,7 +1408,7 @@ Monster trap use, chained springs and summons' knowledge stay **Later**.
 **Lure play:**
 - spring a device whose area holds natives (the first spring on a
   group);
-- push or Drag onto a Revealed trigger;
+- push or Drag onto a Found trigger;
 - draw a mindless type across a plate;
 - ring an alarm tripwire to pull a group to prepared ground (6.18
   limits).
@@ -1416,7 +1434,7 @@ it as a control, 11.5).
   Shot (one attack) nets +0.5 to +0.9. Risk: if the simulator shows the
   hand-trigger is never used, it may replace one attack, sent to the
   Shade owner first (19.2).
-- **A Revealed trap in combat is lethal for everyone.** Party units sit
+- **A Found trap in combat is lethal for everyone.** Party units sit
   inside the EnvRound cap; monsters do not.
 - **Hard parts:** F3+, plus F2 set pieces after M2. At most once per
   fight. Never on a Botch, a re-arm or a reaction.
@@ -1432,7 +1450,7 @@ it as a control, 11.5).
 Values are *(illustr.)*. Lowest legal hero HP at floor entry is 16 / 26
 / 36 / 46 / 56.
 
-| Floor | `CapRound` (30%) | `HiddenTrapBound` (20%): snares and catches, max | Device and set piece: fixed band ≤ Cap |
+| Floor | `CapRound` (30%) | `HiddenTrapBound` (20%): snares and clasps, max | Device and set piece: fixed band ≤ Cap |
 |---|---|---|---|
 | F1 | 4 | 3 (1d3) | no fight devices; one off-path device ≤ 4 |
 | F2 | 7 | 5 (1d4+1) | 7 |
@@ -1460,7 +1478,7 @@ Values are *(illustr.)*. Lowest legal hero HP at floor entry is 16 / 26
   rolled, and a chosen in-combat entry into a shown Hunch zone, 6.5) is
   counted in full outside the cap and does not fill it. Without that
   rule, a full cap would make walking onto traps free (KB2).
-- **Floors:** Hidden traps, Hunch traps out of combat, by forced
+- **Floors:** Unfound traps, Hunch traps out of combat, by forced
   movement or in their zone's first round, a trap whose grade changed
   during the current action, and party-caused springs that start combat
   are all floored (DH 10.4; TL-8). The floor follows each trap's own
@@ -1482,7 +1500,7 @@ always Plain).
 | Route | Who | Cost | Result |
 |---|---|---|---|
 | **Pick** | Mechanics, trained only | 1 tick out, action in, quiet | Margin rule; one roll per lock per floor |
-| **Take time (pick)** | trained | 8 ticks | Easy and Standard Plain locks only |
+| **Take time (pick)** | trained | 8 ticks | Mild and Middling Plain locks only |
 | **Force** | Athletics, anyone | 1 tick (action in), **noise 6 per try** | DC = lock DC + 2. **Retryable:** each failure lowers the DC by 2, and **the third try always opens**, with no roll (6.6 Force row) |
 | **Floor key** | holder | 0 ticks, silent | Used automatically on walk-in |
 | **Wax Key** | anyone | 1 tick, silent | Opens it; no consequence; clears a Jam |
@@ -1628,7 +1646,7 @@ per room). The full glyph set is in 8.
   If no placed unit fits, the key goes to a container within 2 rooms
   (`carrier: containerId`), else the lock is downgraded to Plain (6.22).
   Segment 6 writes only each group's ordered `keybearerCandidates[]`
-  (leader > soldier > artillery > other non-minion, by path to the lock;
+  (leader > soldier > marksman > other non-swarmer, by path to the lock;
   never a ward behind two fronts on F1–2, never a nook) and guarantees a
   Keybearer-capable candidate within 2 rooms of each lock (the Gaol
   Turnkey within 1 room of its lock and of the keyring cache); this pass
@@ -1708,7 +1726,7 @@ on 2026-11-21; the fallback, if the client ever reopens it: a size-0
   - monsters never close or lock.
 - **Stuck doors are rejected as a generic type:** a tax with no
   decision. The **Swollen door** (M3, Choir and Wake, optional content
-  only) is a no-roll threshold: if passive Athletics ≥ Easy it opens
+  only) is a no-roll threshold: if passive Athletics ≥ Mild it opens
   quietly; otherwise noise 6 and +2 ticks.
 - **Barred doors** are FL's Latches.
 - **Drop-bar** is with the client (FL). If adopted, the recommendation
@@ -1718,12 +1736,12 @@ on 2026-11-21; the fallback, if the client ever reopens it: a size-0
   itself.
 - **Hairline:** the agreed no-roll rules are kept. M3 variants:
   - a **locked Hairline** cache (Plain or Crier only);
-  - a **trapped Hairline** cache (a catch);
-  - the Lore-inscription reveal in Silk and Choir, which widens the
+  - a **trapped Hairline** cache (a clasp);
+  - the Lore-inscription reveal in the Archive and Choir, which widens the
     agreed FL Q3 rule and goes to the client at M3 (19.2).
 - **Readings** (one-off room checks): thresholds with no roll. Arcana
   reads runes and shrines, Lore reads inscriptions, Mechanics reads
-  mechanisms. Each yields a floor fact (a trap Revealed, the Keybearer,
+  mechanisms. Each yields a floor fact (a trap Found, the Keybearer,
   a lock kind). Segment 8 owns the content (M3). **Accepted by segment
   8** (events design 4.9; changes EV-5, EV-30; M3): one Reading per
   room, a no-roll threshold, a floor fact; the second F3 Q room's M3
@@ -1742,7 +1760,7 @@ on 2026-11-21; the fallback, if the client ever reopens it: a size-0
 |---|---|
 | **Plain** | No check. **Every HE-3/4/7 container is Plain** (`HeNoLock`) |
 | **Padlocked** | A lock kind from 6.11. Gaol caches sit behind Grille-fronted cells (FL 7.2 lesson room 3) |
-| **Catch** | A trap on the lid: detected like a snare (a Hunch shows as a badge on the host); disarm, Bear it, Pole it (springs it with no hand on the lid) |
+| **Clasp** | A trap on the lid: detected like a snare (a Hunch shows as a badge on the host); disarm, Bear it, Pole it (springs it with no hand on the lid) |
 | **Keyed** | A floor key, or the general routes |
 | **Boxed lurker** | M3 (6.14) |
 | **Twin Coffer** | M3 (loot economy design 8.4; change LE-21): 2 pre-rolled notables of the same card tier and different categories; taking one dissolves the other ("it was only a dream") inside the loot summary; counts 1. At most 1 per floor, F2+, off-path, never an HE socket. Its RC5 base mark is the **twin-lid kind mark** (loot sources design 5.1 CT8, 6; change LP-26; M3) |
@@ -1757,7 +1775,7 @@ on 2026-11-21; the fallback, if the client ever reopens it: a size-0
   dreamed option, not contents (loot economy design 8.4).
 - **Socket ranks (loot economy design 6.9 item 1; change LE-10; M2):**
   segment 7c tags every socket: a consequence-lock cache is SR3;
-  Padlocked, Catch and Keyed caches, the Keybearer cache and the boxed
+  Padlocked, Clasp and Keyed caches, the Keybearer cache and the boxed
   lurker are SR2.
 - Locked containers show a padlock base decal on the hasp, with the
   kind glyph (8), and never a keyhole. Unlocked containers show no
@@ -1774,16 +1792,16 @@ on 2026-11-21; the fallback, if the client ever reopens it: a size-0
   check):** opening any container, real or not, routes to the best
   Mechanics member, otherwise to the highest-HP member. The same rule
   for every container means routing never leaks a boxed lurker.
-- **Host-catch resolution order (lead's call, after the check):**
-  1. **Key and Wax Key routes never spring a catch.** This is a general
+- **Host-clasp resolution order (lead's call, after the check):**
+  1. **Key and Wax Key routes never spring a clasp.** This is a general
      rule; the Confession Box's "honest key" (7.2) is an instance of it,
      not an exception.
-  2. **Pick, Force or Open** on a host with an armed catch: the lock
-     check resolves first. On Open, the catch springs unless it is
-     Revealed (a Revealed catch must be dealt with first, or the card
+  2. **Pick, Force or Open** on a host with an armed clasp: the lock
+     check resolves first. On Open, the clasp springs unless it is
+     Found (a Found clasp must be dealt with first, or the card
      says it will spring). On a Botch, the lock's consequence fires
-     first, then the catch springs. A Jam springs nothing.
-  3. The lock card shows "the catch will spring" whenever it would.
+     first, then the clasp springs. A Jam springs nothing.
+  3. The lock card shows "the clasp will spring" whenever it would.
      `LockRecord.catchTrapId` links the two.
 - Opening gives one loot summary (ITEMS 8.1). **Out of combat, a quiet
   summary auto-closes** (loot sources design 4.6; change LP-8; M2): a
@@ -1796,7 +1814,7 @@ on 2026-11-21; the fallback, if the client ever reopens it: a size-0
   of combat, with no awake un-Cowed hostile in sight, one click opens
   every visible Plain unlocked container in the room in `socketId`
   order into one merged summary (still one screen, ITEMS 8.1), each
-  open routed as above. Locked, Catch and consequence containers, bait
+  open routed as above. Locked, Clasp and consequence containers, bait
   caches, Twin Coffers, Wager and Dare prizes, Windfalls and
   offer-UI containers are excluded. An unmarked boxed-lurker host is
   included and springs as a single open would, stopping the Glean;
@@ -1807,15 +1825,15 @@ on 2026-11-21; the fallback, if the client ever reopens it: a size-0
 - **What it is:** a `containerForm` placement of a theme's **existing
   lurker**. It is ENM 17.4's Ambush bait container with the bait *being*
   the lurker.
-  - **Silk:** the Margin-Crawler in a catalogue drawer; rest tell "a
+  - **Archive:** the Margin-Crawler in a catalogue drawer; rest tell "a
     page that turns by itself" (RS 8.7).
   - **Gut:** the Gutworm in a swallowed strongbox; rest tell "a pulsing
     bulge" (RS 8.10).
   - Both rest tells are re-authored at container scale and readable from
     6 squares (an art ask). The Gutworm's strongbox is organ-swollen and
     has no padlock hasp, so it never shares a form with the Tenant's
-    Keyed strongbox (7.9); the Silk's drawer never shares a host with a
-    catch (the Paper-Cut Tray moved to a catalogue tray lid, 7.6).
+    Keyed strongbox (7.9); the Archive's drawer never shares a host with a
+    clasp (the Paper-Cut Tray moved to a catalogue tray lid, 7.6).
   - It adds no roster type, no mindless count (RE9) and no keyhole (RC3,
     V7). Its revealed form shows a face (RC3, skittish).
 - **Presentation (lead's call, after the check):** a boxed-lurker socket
@@ -1893,7 +1911,7 @@ under RC3 by giving a minded, hungry thing the mindless mark).
   Card line, and the prize visible through a Grille.
 - **On entry:** "traps: n" is shown, and every trap inside is **raised
   to at least Hunch**, whatever the party's trap sense (a grade override,
-  `WagerNoHidden`; lead's call, after the check). There are no Hidden
+  `WagerNoHidden`; lead's call, after the check). There are no Unfound
   traps inside.
 - **Unguarded form:**
   - 3–5 traps of mixed families, laid as a route that wants several
@@ -1904,8 +1922,8 @@ under RC3 by giving a minded, hungry thing the mindless mark).
     line to the plinth** (`WagerWalkRoundRate` must report 0). The
     visible non-skill line (KF5) is proven by V11 `WagerNonSkillLine`:
     at least one route to the plinth that a no-Mechanics party clears
-    for at most 1 pip, using only step-over wires, Pole it or weighted
-    plates;
+    for at most 1 pip, using only step-over wires, Pole it or pressure
+    slabs;
   - **the Disturbance track (one rule; lead's call, after the check):**
     3 pips, one pip per resolved event, never more than one per act:
     - a spring, a Jam or a Botch (a Botch is one pip, not three);
@@ -1914,7 +1932,7 @@ under RC3 by giving a minded, hungry thing the mindless mark).
     - other careful work (a rolled disarm, a Probe, a re-arm) adds its
       ticks to `tickAccumulator`, one pip per 8 ticks;
     - lifting the prize (`prizeLifted`);
-  - Second Nature's Take time is not offered inside a Wager room (9.2);
+  - Old Hand's Take time is not offered inside a Wager room (9.2);
   - **the grade is snapshotted when the prize is lifted, before the
     lift's own pip** (`gradeAtLift`). The lift pip then counts toward
     the wake and arms the greed plates;
@@ -1964,7 +1982,7 @@ under RC3 by giving a minded, hungry thing the mindless mark).
     on the offer card, never beside the Disturbance meter (6.15).
   - **Offer pacing (loot sources design 7; change LP-30; M3):** at
     most 2 offer-form field sources per floor among Wager, Twin Coffer
-    and Viaticum. LootBind's draw-free trim never drops the Viaticum,
+    and Parting Fare. LootBind's draw-free trim never drops the Parting Fare,
     drops a Twin Coffer first (it reverts to a plain container), then a
     Wager (the Site reverts as above).
 - **Exits are never sealed.** No short rest inside.
@@ -1987,7 +2005,7 @@ told plainly after the check).
 The Trapwright's identity at M3:
 - Jury-Rig as a bonus action at range 2, then 6;
 - Killing Ground reactions;
-- Drag Line, Caught and Wedge;
+- Drag Line, Trapped and Wedge;
 - jam-free springs;
 - the per-fight Jury-Rig jam scope;
 - Trap Eye re-scoped;
@@ -2000,7 +2018,7 @@ Before M3, level-3 parity is rerun with the universal rows present (SH
 
 | Who | Traps | Locks |
 |---|---|---|
-| **Shade** | Quiet hands; Sure Hands cuts Take time to 3 ticks; Stealth to a mechanism before a fight (the opener rule); Lockside Listen; Steal the keyring; Trapwright M3 | Pick; consequence locks by roll |
+| **Shade** | Quiet hands; Sure Hands cuts Take time to 3 ticks; Stealth to a mechanism before a fight (the first-spring rule); Lockside Listen; Steal the keyring; Trapwright M3 | Pick; consequence locks by roll |
 | **Arcanist** | The eyes (best Int trap sense); Mechanics option; rune traps by Arcana; Gust onto triggers | Pick if trained; Runed locks (M3); Unbolting |
 | **Vanguard** | Force; Pole it; Bear it with high HP; Shove onto triggers; Kick or Shunt pieces; Trigger Shot with thrown weapons; Medicine smells poison | Force, the loud lock class; the High-Striker |
 | **Herald** | Perception marks boxed lurkers; Medicine smells poison and treats Barb poison; Pick the Question; Yield and Cow for keys | Unbolting; Leadership discount on the Wax Key |
@@ -2028,7 +2046,7 @@ change LE-10; M2).
 
 | Act | Noise |
 |---|---|
-| Open pick or disarm, Take time (pick or disarm), key, Wax Key, Probe | 0 |
+| Smooth pick or disarm, Take time (pick or disarm), key, Wax Key, Probe | 0 |
 | Jam; hand-trigger failure; Trigger Shot miss; quiet spring | 4 |
 | Force try; attack-to-test | 6 |
 | Loud spring; alarm effect; Crier; Splinter (F2+); Unbolting | 10 |
@@ -2041,7 +2059,7 @@ change LE-10; M2).
   arrive **Alerted and cannot be Surprised that fight**. A lure buys
   position, not surprise.
 - **`NoiseTrapVisible` (TP8):** any trap whose effect makes noise ≥ 4
-  has `detectDifficulty` ≤ Easy or is `alwaysKnown`, and is never within
+  has `detectDifficulty` ≤ Mild or is `alwaysKnown`, and is never within
   hearing of a group whose join would exceed the floor's joiner cap (the
   hearing part is checked in the `trapsResolve` pass; a failing trap is
   dropped; 6.22). Hidden information never starts a lethal fight. A
@@ -2051,7 +2069,7 @@ change LE-10; M2).
 ### 6.19 Floor 1 (lead's call; change TL-19)
 
 - 1–2 traps, including the **lesson trap**: the first trap on the main
-  path, `alwaysKnown`, labelled, noise only (Gaol bell tripwire, Kennel
+  path, `alwaysKnown`, labelled, noise only (Gaol keyring tripwire, Kennel
   tin-can tripwire, Wake creaking board). The lesson trap is excluded
   from the out-of-combat trap count and from TP5 `TrapHasStake`: its
   stake is the lesson **(lead's call, after the check)**.
@@ -2067,7 +2085,7 @@ change LE-10; M2).
   as "traps are devices, not terrain hazards".
 - **Trap conditions on F1 end when combat starts** (a Grappled solo hero
   never enters a fight snared).
-- Detect DC ≤ F1 Standard. Damage ≤ 3 for snares and catches; one
+- Detect DC ≤ F1 Middling. Damage ≤ 3 for snares and clasps; one
   off-path device ≤ 4 (`CapRound` F1; the Gaol's Clock-Weight). No hard
   control (C 11.6).
 - Locks: Plain, plus at most 1 consequence lock after room 2: the Gaol's
@@ -2088,7 +2106,7 @@ change LE-10; M2).
 | Locks | 1–2 | 1–3 | 1–2 |
 | Consequence locks | ≤ 1 (Gaol Crier or Wake Viewing Door) | ≤ 1 | ≤ 2 |
 | Keybearer | ≤ 1 (the Gaol's guaranteed; Kennel and Wake may place theirs) | ≤ 1 | ≤ 1 |
-| Boxed lurker (M3) | 0 | ≤ 1 (Silk) | ≤ 1 (Gut) |
+| Boxed lurker (M3) | 0 | ≤ 1 (Archive) | ≤ 1 (Gut) |
 | Dare-or-Wager (M3) | 0 | ≤ 1 | ≤ 1 |
 
 Lock counts are read with one quota card per floor: at most one locked
@@ -2109,8 +2127,8 @@ generation-time request.)*
     `fleeExit` path;
   - inside another trap's `hunchZone` (`HunchZoneExclusive`; lead's
     call, after the check).
-  - A catch on a Door is allowed: its host is not a trigger square, so
-    FL 13's "0→1 Portal" socket may be filled by a Door catch or by a
+  - A clasp on a Door is allowed: its host is not a trigger square, so
+    FL 13's "0→1 Portal" socket may be filled by a Door clasp or by a
     threshold wire outside the Portal square (lead's call, after the
     check).
 - **TP2 Start squares.** No group starts on a trigger square (checked in
@@ -2128,7 +2146,7 @@ generation-time request.)*
 - **TP4 Device areas.** ≤ 4 squares (set pieces ≤ 9); never cover a
   `fleeExit`.
 - **TP5 `TrapHasStake`.** Every out-of-combat trap guards something:
-  - a cache (as a catch);
+  - a cache (as a clasp);
   - a shortcut saving ≥ 6 squares or bypassing a Circuit;
   - a Keybearer approach;
   - a Wager room;
@@ -2141,14 +2159,14 @@ generation-time request.)*
   segment-9 TrapRecord instance of kind `arenaDevice` in TL-40 format
   for data and preview only, is not a trap under this section: no
   trigger plate, no hiding, no Botch, never armed by monsters.*)*
-- **TP7 `BypassClean`.** Bypass and Circuit traps are alarms at Easy
+- **TP7 `BypassClean`.** Bypass and Circuit traps are alarms at Mild
   detect or `alwaysKnown`.
 - **TP8 `NoiseTrapVisible`** (6.18).
 - **TP9 `LockNeverCritical`, `KeyReachable`, `HeNoLock`.**
 - **TP10** Force-point distance (6.11).
 - **TP11** The floor-1 package (6.19).
 - **TP12** `PortalMinimums` sockets are filled. From F2: ≥ 2 main-path
-  traps, ≥ 1 before the first fight (Revealed or Easy), ≥ 1 within 6 of
+  traps, ≥ 1 before the first fight (Found or Mild), ≥ 1 within 6 of
   a fight host; and ≥ 1 out-of-combat trap or lock object tagged
   `noTakeTime` (Hard, a consequence lock, or a tagged showcase) **(the
   last clause: lead's call, after the check; 6.6)**.
@@ -2163,7 +2181,7 @@ distance and guard, and the boxed-lurker budget.
 **Room roles:**
 - corridors and thresholds: wires and plates;
 - fight hosts: devices;
-- side rooms: catches;
+- side rooms: clasps;
 - the Sanctum, antechamber, arena, Alcoves and rest spots: none.
 
 ### 6.21 The floor clock (lead's call, told plainly; change TL-38)
@@ -2189,7 +2207,7 @@ distance and guard, and the boxed-lurker budget.
   - Probe folded into the single Hunch stop, auto-Probed out of combat
     unless a patrol is due (6.4);
   - the lock card preselects the best route (1 click, 1.5 s read);
-  - key walk-ins and Easy Plain auto-picks cost 0 clicks;
+  - key walk-ins and Mild Plain auto-picks cost 0 clicks;
   - auto-walk defaults to walk-round;
   - ≤ 2 Hard-detect traps and ≤ 2 locks on F4–5.
 - **Fallback switch:** F4–5 out-of-combat traps drop to 1 (the first
@@ -2258,7 +2276,7 @@ distance and guard, and the boxed-lurker budget.
     fails, the failing traps are removed and failing locks become Plain,
     keeping fixed draw counts, and V11 runs again. If it still fails,
     the floor ships with the segment-5 minimum (TP12's sockets filled
-    with `alwaysKnown` Easy alarms) and the `V11Fallback` report counts
+    with `alwaysKnown` Mild alarms) and the `V11Fallback` report counts
     it.
   - **On the one ladder (seeds and validation design 5.5; change
     SV-10; M1):** the per-rule failure actions above are LR1 in-stage
@@ -2283,7 +2301,7 @@ distance and guard, and the boxed-lurker budget.
   - Squeeze and Plank: the object's `traversalIndex`, incremented on
     every check in and out of combat (6.12);
   - out-of-combat Trigger Shot (6.7): always 0, kind `triggerShot`;
-  - the Iced padlock's Smash (7.8): always 0;
+  - the Frost-seized padlock's Smash (7.8): always 0;
   - Steal on a Dormant Truant: `H(floorSeed, windfallId,
     "windfallSteal", 0, die)`, `die` 0, and 0 and 1 for advantage
     (loot sources design 4.7.8; change LP-6; M3).
@@ -2304,7 +2322,7 @@ distance and guard, and the boxed-lurker budget.
   firings), so a re-armed trap's second spring draws a fresh die, and
   Bear it's advantage uses `die` 0 and 1. In-combat saves and in-combat
   attack rolls (Trigger Shot included) stay on the combat stream. An
-  out-of-combat attack against an object (Trigger Shot, the Iced
+  out-of-combat attack against an object (Trigger Shot, the Frost-seized
   padlock's Smash) is on `checks`, so a device shot between fights never
   moves the next fight's rolls (main 6.3). Attack-to-test on a container
   makes no roll.
@@ -2325,7 +2343,7 @@ distance and guard, and the boxed-lurker budget.
 
 - **Glyphs** (the RC5+ rows, pattern registry and timbres are in 8;
   revised after the check):
-  - one cross-theme trap glyph on Revealed triggers, with a
+  - one cross-theme trap glyph on Found triggers, with a
     `triggerKind` sub-mark; the device area outline in the trap rim on
     hover (always shown for Devices); a gear mark on the mechanism;
   - the trap link: a dashed tether from trigger to mechanism to area, on
@@ -2341,7 +2359,7 @@ distance and guard, and the boxed-lurker budget.
 - **Hunch entry in combat (Q1):** *"Hunch zone: up to 9 if a trap is
   here · not floored"* with the lethal tag (6.5); the cracked-heart
   shape when it would take the unit to 0.
-- **Botch preview with a catch:** the lock card adds "the catch will
+- **Botch preview with a clasp:** the lock card adds "the clasp will
   spring" whenever it would (6.13).
 - **Lock card:**
   - kind glyph and rule card;
@@ -2364,7 +2382,7 @@ distance and guard, and the boxed-lurker budget.
 - **Plates:** the Keybearer pip.
 - **Camp:** the vendor's Wax Key line and the gap card's coverage-strip
   line (Q3; 6.11); at M3, if it ships, the vendor's Ear Trumpet row (no
-  coverage-strip line; XI-26; 6.11). Placed at the Keeper's Cart, the
+  coverage-strip line; XI-26; 6.11). Placed at the Pedlar's Cart, the
   notables-slot key on its Notables panel (camp and hub design 4.3, 7.1;
   CH-15).
 - **Codex pages:**
@@ -2397,16 +2415,16 @@ and device bodies, listed per theme below as "Reserved".
 
 | Theme (floors) | Traps | Locks and keys | Boxed lurker | Wager room |
 |---|---|---|---|---|
-| Gaol (F1) | bell tripwire (lesson), Appeals trapdoor, Clock-Weight (off-path on F1), Confession Box, portcullis (damage only) | Plain cell padlocks (M1), 1 Crier, Jailer's keyring, Hour lock (M3) | — | — (F1) |
-| Kennel (F1; M1 subset) | Snare (M1 record), tin-can tripwire (lesson), Gin Jaw; Scent Bladder, Deadfall (M3) | Plain pen padlock (M1), Huntsman's chest (Keyed) | — | — |
+| Gaol (F1) | keyring tripwire (lesson), Appeals trapdoor, Clock-Weight (off-path on F1), Confession Box, portcullis (damage only) | Plain cell padlocks (M1), 1 Crier, Jailer's keyring, Hour lock (M3) | — | — (F1) |
+| Kennel (F1; M1 subset) | Wire Loop (M1 record), tin-can tripwire (lesson), Gin Jaw; Scent Sack, Deadfall (M3) | Plain pen padlock (M1), Huntsman's chest (Keyed) | — | — |
 | Wake (F1, conditional) | creaking board (lesson), Closing Coffin, Crepe Veil (rune), Gramophone, Lid Rack | Plain, the Will-Box (Keyed), Viewing Door (Tattle, after room 2), Hour lock (M3) | — | — |
 | Choir (F2–3) | Sluice, Drowning Grate, Belfry Wire, Responsory (rune), Drowned Chandelier (set piece) | Plain, Barb, Vestry door (Keyed), Hymn Riddle lock (M3) | — | the Loft of Responses |
-| Silk (F2–3) | Shelf-Pull, Ink-Pot Plate, Paper-Cut Tray, Whispering Catalogue; Shush Glyph (M3) | Plain, Crier, web seal (fire), Closed-Stack cage (Keyed), Index Riddle lock (M3) | Margin-Crawler drawer | the Restricted Section |
-| Carnival (F2–3) | Stage Trapdoor, Blade Wheel, Jack-in-the-Box, Oil Bucket; Mirror Glyph (M3) | Plain, Crier, High-Striker, Ticket lock (M3), Ring key (Keyed) | — | the Last Act (guarded) |
-| Supper (F4) | Icicle Chandelier (set piece), Dumbwaiter Drop, Taster's Plate, Cold Seat | Plain, Barb, Tattle, Iced padlock, cellar door (Keyed), Place-Setting Riddle lock (M3) | — | the Top Table |
-| Gut (F4) | Lip Catch, Acid Gland, House Keys on Strings, Spore Bladder | Plain/Barb sphincter caches, Fed sphincter (M3), Tenant's strongbox (Keyed) | Gutworm strongbox | the Stomach |
-| Heart (F5) | Lullaby Glyph (rune), Hand Under the Bed, Rattle Wire, Darning Volley | Plain diary lock, Nursery door (Keyed + Tattle), Runed (M3), Story Riddle lock (M3) | — | the Night Nursery |
-| Cathedral (M4) | Rose Pane, Thurible Wire, Collection Plate, Pew Rack (damage-only until its 6 exists) | Rood Screen gate | — | the Rose Window |
+| Archive (F2–3) | Shelf-Pull, Ink-Pot Plate, Paper-Cut Tray, Whispering Catalogue; Shush Glyph (M3) | Plain, Crier, web seal (fire), Closed-Stack cage (Keyed), Index Riddle lock (M3) | Margin-Crawler drawer | the Chained Shelves |
+| Carnival (F2–3) | Stage Trapdoor, Swing Blade, Jack-in-the-Box, Oil Bucket; Mirror Glyph (M3) | Plain, Crier, High-Striker, Ticket lock (M3), Ringmaster's Key (Keyed) | — | the Prop Room (guarded) |
+| Supper (F4) | Icicle Chandelier (set piece), Dumbwaiter Drop, Taster's Plate, Cold Seat | Plain, Barb, Tattle, Frost-seized padlock, cellar door (Keyed), Place-Setting Riddle lock (M3) | — | the Top Table |
+| Gut (F4) | Lip Clamp, Acid Gland, House Keys on Strings, Spore Bladder | Plain/Barb sphincter caches, Fed sphincter (M3), Tenant's strongbox (Keyed) | Gutworm strongbox | the Craw |
+| Heart (F5) | Lullaby Glyph (rune), Hand Under the Bed, Rattle Wire, Darning Volley | Plain diary lock, Nursery door (Keyed + Tattle), Runed (M3), Story Riddle lock (M3) | — | the Airing Cupboard |
+| Cathedral (M4) | Rose Pane, Thurible Wire, Collection Plate, Pew Rack (damage-only until its 6 exists) | Rood Screen door | — | the Tracery Loft |
 
 ### 7.2 The Gaol of Small Hours (F1; M2 core)
 
@@ -2414,17 +2432,17 @@ and device bodies, listed per theme below as "Reserved".
 Grappled, Dazed (boss only), Prone, Frightened. Traps never apply Dazed.
 Mindless types: 0.
 
-- **Bell tripwire** (wire; lesson trap):
+- **Keyring tripwire** (wire; lesson trap):
   - Tell: a brass hand-bell on a wall bracket, its cord running down the
     wall.
-  - Detect Easy; disarm Easy (snip it, 1 tick).
+  - Detect Mild; disarm Mild (snip it, 1 tick).
   - Step over once known, or ring it as a lure. The noise 10 comes
     **from the bracket**, which may hang a room away, and the hearing
     outline shows who comes.
   - `oneShot` alarm (TL-30). RC7 alarm cue under a dull "tock".
 - **Appeals trapdoor** (trapdoor):
   - Tell: a brass APPEALS plaque, and a hinge-rod cover above it.
-  - Detect Standard. Drops and **recloses**: Prone plus 2 bludgeoning.
+  - Detect Middling. Drops and **recloses**: Prone plus 2 bludgeoning.
   - Shunt filing crates onto it. Shove an Inmate onto it (from F2
     equivalents only; no push edges on F1).
 - **Clock-Weight** (device, `handle`):
@@ -2438,18 +2456,18 @@ Mindless types: 0.
     6.19). The proposal's "every clock shows the same hour for one
     frame" VFX is cut: a single frame is unreadable, and a room holds
     one clock (HF11) **(lead's call, after the check)**.
-- **Confession Box** (catch on a cache):
+- **Confession Box** (clasp on a cache):
   - Tell: a pin-pricked speaking grille.
   - Damage 2 piercing plus Bleeding. `oneShot`.
   - The Jailer's keyring opens it cleanly ("the confessor's key is
     honest"): an instance of 6.13's rule that keys never spring a
-    catch.
+    clasp.
 - **Lockdown portcullis** (device on an Arch on optional content or the
   Circuit):
   - Tell: a spiked drop frame in the lintel slot (FL 8.1).
   - **Damage only in M2** (RS 8.3).
   - The Arch-to-Grille "Bar" effect is M3, flagged against RS 8.3 and RS
-    7.6. If adopted, it is lifted by "Winch up" (Athletics Standard,
+    7.6. If adopted, it is lifted by "Winch up" (Athletics Middling,
     loud 6), which monsters may also do.
 - **Locks:**
   - cell padlocks: Plain, M1; force is the solo Vanguard's route;
@@ -2469,9 +2487,9 @@ Mindless types: 0.
 **6:** Bleeding, Grappled, Dazed, Prone, Frightened. Traps never apply
 Dazed.
 
-- **Snare** (plate):
+- **Wire Loop** (plate):
   - Tell: a bent sapling above head height.
-  - Effect: Grappled (escape at Standard; an adjacent ally cuts it free
+  - Effect: Grappled (escape at Middling; an adjacent ally cuts it free
     with an action and no check). No damage.
   - Ends at combat start on F1.
   - **M1 known-armed DH-32 record.**
@@ -2489,7 +2507,7 @@ Dazed.
     Later).
   - Kick a feed barrel onto it, or Shunt a hay bale onto it.
 - **M3:**
-  - **Scent Bladder:** `scent` trigger, noise 8 heard by hound families
+  - **Scent Sack:** `scent` trigger, noise 8 heard by hound families
     only.
   - **Deadfall:** device; leaves a Low cover log; F2+ grammar only.
 - **Locks:** pen padlock (Plain, M1); the Huntsman's lodge chest (Keyed;
@@ -2505,13 +2523,13 @@ coffins show a pulley cord, cache coffins show the container marker, and
 a coffin never shows two of these at once. Coffin lids stay horizontal
 (RC2).
 *Pending request (loot sources design 5.3; change LP-18; M2 cond.):*
-Wake loot sits in knee-high grave-goods caskets, and full coffins never
+Wake loot sits in knee-high burial caskets, and full coffins never
 hold loot, which removes the three-way coffin read (cover, lurker tell,
 loot).
 
 - **Creaking board** (plate; lesson trap): a rucked runner rug. Noise 6;
   Dormant guests hear at half radius.
-- **Closing Coffin** (catch): a counterweight wire (thin, taut, with a
+- **Closing Coffin** (clasp): a counterweight wire (thin, taut, with a
   brass eye; never the rope-with-handle read of an HZ Cord) to a ceiling
   pulley. Damage 3 plus Staggered. Pole it (6.7).
 - **Crepe Veil** (glyph; renamed from "Mourners' Veil", a Herald word,
@@ -2587,7 +2605,7 @@ effect within 2 of a Void edge.
   sconces only), and non-device bells over walkable squares (they sit
   only in the non-walkable belfry backdrop).
 
-### 7.6 The Silk Archive (F2–3)
+### 7.6 The Cobweb Archive (F2–3)
 
 **Law:** fire is the key. **6:** Restrained, Poisoned, Unfocused,
 Grappled, Prone, Frightened.
@@ -2600,17 +2618,17 @@ Grappled, Prone, Frightened.
   - Distinct from the Leaning Stacks Stir (HZ).
 - **Ink-Pot Plate** (plate, `poison`, `paper`): Poisoned, silent.
   Medicine smells it. **Fire disarms it** (TL-32).
-- **Paper-Cut Tray** (catch, `paper`; moved after the check from a
+- **Paper-Cut Tray** (clasp, `paper`; moved after the check from a
   drawer to a card-catalogue tray lid, so it never shares a host with
   the Margin-Crawler drawer):
   - Tell: one blank tray label.
   - Grappled; while held, it whispers at noise 4 per tick.
   - Fire disarms it with the contents untouched.
 - **Whispering Catalogue** (plate, `paper`): reads your name aloud at
-  noise 10. Detect Easy (`NoiseTrapVisible`). Burn it (noise 4), or
+  noise 10. Detect Mild (`NoiseTrapVisible`). Burn it (noise 4), or
   spring it as a lure.
 - **Shush Glyph** (M3, `room` trigger; renamed after the check from
-  "Silence Glyph", which echoed the Silk Mood's "Silence Kept"):
+  "Silence Glyph", which echoed the Archive Mood's "Silence Kept"):
   - A room rule, **always known on entry**: a SHUSH plaque and candles
     that never flicker.
   - The first loud act in the room hurts the actor with psychic damage
@@ -2621,12 +2639,12 @@ Grappled, Prone, Frightened.
   - Crier;
   - **web seal** (webbing over a padlock base): any fire opens it (noise
     4), or pick or force it;
-  - the Closed-Stack cage (Keyed; the Keybearer is the Head Archivist;
-    renamed after the check from "Overdue cage", a Silk Mood name; a
+  - the Closed-Stack cage (Keyed; the Keybearer is the Chief Archivist;
+    renamed after the check from "Overdue cage", an Archive Mood name; a
     padlocked cage, unlike the padlock-free Wager cages);
   - the **Index Riddle lock** (M3).
 - **Boxed lurker:** the Margin-Crawler in a catalogue drawer.
-- **Wager room:** the Restricted Section. Slow hands, or burning through
+- **Wager room:** the Chained Shelves. Slow hands, or burning through
   (fast, but each burn is noise 4 and fills a pip).
 - **Reserved:** protruding books at head height, blank tray labels,
   SHUSH plaques. Ordinary shelves keep their books flush.
@@ -2639,18 +2657,19 @@ Staggered, Prone, Frightened.
 - **Stage Trapdoor** (trapdoor):
   - Tell: a painted star under a spotlight rig.
   - M2: Prone in place, and it **recloses**: the Carnival has no Void
-    skin in M2 (HZ's M2 art budget has the Choir's and the Silk's), so
+    skin in M2 (HZ's M2 art budget has the Choir's and the Archive's), so
     no Carnival trapdoor leaves a Void until it has one and a V10-proven
     Void room (6.3; lead's call, after the check).
   - M3: relocation to the wings, same room, ≤ 6 squares, in combat
     (TL-41), once the ability model's teleport rule exists (ABL 8);
     otherwise Prone in place.
-- **Blade Wheel** (device, `handle`; re-bodied and renamed after the
-  check from "Spinning Target", whose flat round knife board echoed the
+- **Swing Blade** (device, `handle`; re-bodied and renamed after the
+  check from "Spinning Target" (as Blade Wheel, renamed Swing Blade by
+  naming pass NP-17), whose flat round knife board echoed the
   Knife-Thrower's target board, an RT RC2 piece ban): a wall-bracket
   rack of blades that spins out along the wall. Damage to the first unit
   in a line of 4.
-- **Jack-in-the-Box** (catch on a prize trunk):
+- **Jack-in-the-Box** (clasp on a prize trunk):
   - Tell: a crank wound to its stop with a paper "DO NOT" tag. It never
     moves at rest (idle motion is the lurker's grammar; 6.3). Never a
     keyhole.
@@ -2658,7 +2677,7 @@ Staggered, Prone, Frightened.
   - *Pending request (loot sources design 5.3; change LP-17; M2):* the
     host is a prize hamper (the Carnival Plain family), not a costume
     trunk (a Furnishing).
-- **Oil Bucket** (catch on a Door):
+- **Oil Bucket** (clasp on a Door):
   - Tell: a bucket rim over the lintel.
   - Oiled to the opener and the square behind.
   - Natives path round that Door. A party that re-hangs it over a
@@ -2671,16 +2690,16 @@ Staggered, Prone, Frightened.
   - Plain;
   - Crier;
   - the **High-Striker** (a no-roll Strength threshold: passive
-    Athletics ≥ Standard opens a padlocked prize cage, and it sounds the
+    Athletics ≥ Middling opens a padlocked prize cage, and it sounds the
     reserved alarm cue at noise 10; the Vanguard's lock);
   - the Ticket lock ("Admit One", M3: coin buys access, never loot;
     coin may be spent only at camp, at a Ticket lock (M3) and, Later, at
     a wandering trader, with ITEMS 10.1 amended to match **(agreed
     2026-11-23, cross-document comparison Q-1)**; cross-document
     comparison 2026-11-23, CC-8);
-  - the Ring key (Keyed; the Keybearer is the Ringmaster).
-- **Wager room:** the Last Act (guarded). A garrison stands in the ring
-  among revealed trapdoors, buckets, the Blade Wheel and braziers.
+  - the Ringmaster's Key (Keyed; the Keybearer is the Ringmaster).
+- **Wager room:** the Prop Room (guarded). A garrison stands in the ring
+  among revealed trapdoors, buckets, the Swing Blade and braziers.
 - **Reserved:** painted stars under spotlight rigs, buckets over
   lintels, wound cranks with tags, wall blade racks.
 
@@ -2702,7 +2721,7 @@ Poisoned, Prone, Frightened.
     within the same room (the HZ in-combat Swallow rejection holds).
     It waits for the ability model's teleport rule (ABL 8; TL-41);
     otherwise it stays Prone in place.
-- **Taster's Plate** (catch, `poison`): silver tarnished black round one
+- **Taster's Plate** (clasp, `poison`): silver tarnished black round one
   fork. Medicine smells it. *Pending request (loot sources design 5.3;
   change LP-19; M2):* read as one tarnished fork in a silver canteen's
   velvet (the Supper Plain family).
@@ -2712,16 +2731,16 @@ Poisoned, Prone, Frightened.
   - Plain;
   - Barb;
   - Tattle;
-  - the **Iced padlock** (a frosted skin on the padlock base; picking
+  - the **Frost-seized padlock** (a frosted skin on the padlock base; picking
     it has disadvantage; any fire thaws it
-    to normal; a bludgeoning Smash shatters it at Athletics Easy, noise
+    to normal; a bludgeoning Smash shatters it at Athletics Mild, noise
     6);
   - the cellar door (Keyed; the Keybearer is the Sommelier);
   - the **Place-Setting Riddle lock** (M3).
-- **New lead's call:** the Iced padlock's Smash is RT's existing Smash
+- **New lead's call:** the Frost-seized padlock's Smash is RT's existing Smash
   verb (ABL 7.2 row) extended to that one padlock: out of combat 1 tick,
   in combat it replaces one attack; one roll on the `checks` stream (a
-  Botch is a Jam); a shattered Iced padlock opens its host like a force,
+  Botch is a Jam); a shattered Frost-seized padlock opens its host like a force,
   with no Splinter.
 - **Wager room:** the **Top Table** (renamed; A.5).
   - Lifting the cloche is the lift pip; its greed plates are two place
@@ -2742,13 +2761,13 @@ Poisoned, Prone, Frightened.
 **Law:** attrition. **6:** Corroded, Withered, Poisoned, Grappled,
 Prone, Frightened.
 
-- **Lip Catch** (catch on a sphincter Door; renamed from "Swallow", an
+- **Lip Clamp** (clasp on a sphincter Door; renamed from "Swallow", an
   HZ name):
   - Tell: stained lips and a bile drip line. No twitch: idle motion is
     the lurker's grammar (6.3; lead's call, after the check).
   - *Pending request (loot sources design 5.3; change LP-20; M2):*
     Plain sphincter caches carry a pale dry rim, so lips and drip lines
-    stay the Lip Catch's alone.
+    stay the Lip Clamp's alone.
   - Acid damage plus Grappled. While a unit is clamped, the Portal is
     blocked and counts as closed for hearing.
   - Shove a monster in to plug the doorway.
@@ -2777,7 +2796,7 @@ Prone, Frightened.
   - the Landlord's ledger lock (Keybearer).
 - **Boxed lurker:** the Gutworm in a swallowed strongbox, organ-swollen
   and with no hasp (6.14).
-- **Wager room:** the Stomach. A gland field to a central island. The
+- **Wager room:** the Craw. A gland field to a central island. The
   Disturbance track is the cross-theme meter (6.15), with a one-shot
   cue per pip outside the Gut Stirs' gurgle-pop family; the Peristalsis
   motion is never used for it (lead's call, after the check). The
@@ -2819,7 +2838,7 @@ Frightened. No hard control.
   - the Nursery door (Keyed by the Mother-Shape, plus Tattle);
   - Runed (M3);
   - the **Story Riddle lock** (M3).
-- **Wager room:** the Night Nursery. Dreaming cot groups wake and break
+- **Wager room:** the Airing Cupboard. Dreaming cot groups wake and break
   early (the Law).
 - **Reserved:** wind-up mobiles over walkable squares, a shoe facing a
   bed, slit valances, darning needles in a frame.
@@ -2835,7 +2854,7 @@ Damage-only until its 6 is authored:
 - **Collection Plate** (pay 5 coin, or it bites);
 - **Pew Rack** (leaves Low cover).
 
-Lock: the Rood Screen gate. Wager room: the Rose Window.
+Lock: the Rood Screen door. Wager room: the Tracery Loft.
 
 ---
 
@@ -2849,10 +2868,10 @@ format)**
   - device bodies are always rigged;
   - Hunch zones always contain a trap;
   - no fake plates, empty "trapped" chests or lying hovers;
-  - a forced lock shows a hanging padlock, and a Splinter shows an empty
+  - a forced lock shows a dangling padlock, and a Splinter shows an empty
     frame with a jagged edge on the frame itself (true states; no floor
     debris, no loose panel; 6.11);
-  - **snare and catch tells render only from Revealed**, through a
+  - **snare and clasp tells render only from Found**, through a
     Reveal transition that reads as the object settling, never as a
     spawn (6.3);
   - **no trap tell moves at idle**; idle motion on containers and
@@ -2867,7 +2886,7 @@ format)**
     scale, and show a face when revealed;
   - **device bodies follow RT's RC2 piece bans** (no chair, tray, door,
     upright coffin lid, shield, tall staff, forward-pointing tube,
-    orbiting element or roster prop). The Blade Wheel, the Sluice hatch
+    orbiting element or roster prop). The Swing Blade, the Sluice hatch
     and the hornless Gramophone were re-bodied to meet them (7);
   - every lock is read as a **padlock base decal plus a kind glyph**;
     theme locks are skins on that base (webbing over a padlock, a
@@ -2877,7 +2896,7 @@ format)**
   - V7 adds "no keyhole on any container".
   - **Container families (loot sources design 5.1 CT1, CT2, CT15;
     change LP-15; M2):** V15 `ContainerFamilyDistinct` (with V7) keeps
-    loot containers, catch hosts, bait caches, Truants and the
+    loot containers, clasp hosts, bait caches, Truants and the
     cross-theme variants in distinct silhouette families within a
     theme, and insets never share a silhouette with the theme's Latch,
     Door or Hairline skins; `ContainerArtBlind` gives two variants per
@@ -2896,14 +2915,14 @@ HZ's RC5+ rows):
 
 | Record | Base mark | Motion mark | Danger mark | Cover mark |
 |---|---|---|---|---|
-| Trap trigger (Revealed) | Cross-theme trap glyph with a `triggerKind` sub-mark: plate dot, wire bar spanning both squares, trapdoor hinge edge, glyph sigil (no ring) | — | Hazard tier, in the new **trap rim** | — |
+| Trap trigger (Found) | Cross-theme trap glyph with a `triggerKind` sub-mark: plate dot, wire bar spanning both squares, trapdoor hinge edge, glyph sigil (no ring) | — | Hazard tier, in the new **trap rim** | — |
 | Device area | — | Push arrows for `shove` effects | Thin outline in the trap rim at hazard tier, plus the damage-type icon; the RC4 hue on the icon only, never as a fill | — |
 | Mechanism | Gear mark on the mechanism square; a handle sub-mark for `handle` | — | — | — |
 | Trap link | Dashed tether, trigger → mechanism → area, on hover (always for the lesson trap); its dash and end cap differ from HZ's Snag link glyph | — | — | — |
 | Hunch zone | — | — | Dotted perimeter rim with question-mark corner ticks, no fill, at hazard tier minus one | — |
-| Hunch catch | Hunch badge on the host container or Door | — | — | — |
+| Hunch badge | Hunch badge on the host container or Door | — | — | — |
 | State badges | Corner badge set: armed, jammed, sprung, disarmed, party-armed (M3) | — | — | — |
-| Lock | Padlock base decal plus kind glyph (below); a Hunch catch badge where it applies | — | — | — |
+| Lock | Padlock base decal plus kind glyph (below); a Hunch badge where it applies | — | — | — |
 | Wager Portal | Wager glyph plus the 3-pip Disturbance meter | — | — | — |
 
 **Lock glyph set:** Plain (none); Crier (sound-wave arcs); Barb (a
@@ -2911,7 +2930,7 @@ barb); Tattle (a door with an exclamation bar); Runed (an angular sigil
 in a square frame); Hour (an hourglass); Keyed (a key-tooth notch, shown
 matched after pickup); Riddle (a text-line glyph, with "no Wax Key" on
 its card); Fed and Ticket (a supply or coin glyph); High-Striker (a
-threshold glyph). States: intact, hanging (forced), Jammed, splintered
+threshold glyph). States: intact, dangling (forced), Jammed, splintered
 (Doors).
 
 **RC6+ order:** revealed trap triggers and device areas sit at hazard
@@ -2929,7 +2948,7 @@ lethal tag changes shape (a cracked heart) as well as turning red.
 latent footprint" and "Hunch against Rough" join the greyscale and
 colour-blind gates; device bodies against dressing join the 85%
 role-ID gate ("device or dressing"); "boxed lurker or container"
-screenshots (the Silk drawer against the Paper-Cut Tray, the Gutworm
+screenshots (the Archive drawer against the Paper-Cut Tray, the Gutworm
 strongbox against the Tenant's) join it too. Interior trapdoor Voids are
 tested at 4 rotations in `TemplateReadability`.
 
@@ -2966,8 +2985,8 @@ body if a Device, spring VFX, sprung state, disarmed state).
 
 | Wave | Items |
 |---|---|
-| **M2 shared** | 6 effect-family spring VFX (strike, drop, snare, spray, alarm, shove); 1 hand-work animation set (open, jam, botch); Probe; the Reveal transition; the wide-berth path-bend cue; the trap link; the RC5+ marks above; lock base decal, the M2 kind glyphs (Plain, Crier, Barb, Tattle, Keyed) and states; the Splinter VFX and frame state; Wax Key use and refusal; a Keybearer keyring prop (small, hip-mounted, inside RC2); the Botch landing showing `botchHits`; the trapdoor-to-Void transition (hinged leaves drop, the shaft mesh spawns under the floor plane, the lip glyph and drop rim appear on every edge); the vendor's Wax Key icon and the gap card's coverage line (Q3); the Once Bitten idle glance |
-| **M2 per theme** | The M2 catalogue's tells and bodies (7). **First blockout set:** the Gaol M2 core: bell tripwire, Appeals trapdoor, Clock-Weight, Confession Box, Plain and Crier padlocks, the Jailer's keyring |
+| **M2 shared** | 6 effect-family spring VFX (strike, drop, snare, spray, alarm, shove); 1 hand-work animation set (smooth, jam, botch); Probe; the Reveal transition; the wide-berth path-bend cue; the trap link; the RC5+ marks above; lock base decal, the M2 kind glyphs (Plain, Crier, Barb, Tattle, Keyed) and states; the Splinter VFX and frame state; Wax Key use and refusal; a Keybearer keyring prop (small, hip-mounted, inside RC2); the Botch landing showing `botchHits`; the trapdoor-to-Void transition (hinged leaves drop, the shaft mesh spawns under the floor plane, the lip glyph and drop rim appear on every edge); the vendor's Wax Key icon and the gap card's coverage line (Q3); the Once Bitten idle glance |
+| **M2 per theme** | The M2 catalogue's tells and bodies (7). **First blockout set:** the Gaol M2 core: keyring tripwire, Appeals trapdoor, Clock-Weight, Confession Box, Plain and Crier padlocks, the Jailer's keyring |
 | **M3** | Runed, Hour, Riddle, Fed and Ticket glyphs; the boxed-lurker reveal and "wax will not take a shape" (2 themes, Q2); the Wager kit (Portal glyph, Grille, plinth, 3 cages, the track meter, pip cues); prize cage open; relocation VFX (if the teleport rule lands); debris leave-behinds |
 
 No lidded Furnishing needs renaming under the `containerForm` route (the
@@ -2990,8 +3009,8 @@ M2, so its trapdoors reclose (7.7).
 | Take time / Careful work (B, L, M) | Adopted with limits (TL-5) | M1/M2 |
 | Medicine smells poison; Arcana for runes | Adopted (TL-6) | M2 |
 | Bear it / Eyes Open | Adopted (TL-12) | M2 |
-| Pole it; handles; weighted plates | Adopted (TL-13, TL-14) | M2 |
-| Once Bitten; opener rule | Adopted (TL-16), from the fun and balance critiques | M2 |
+| Pole it; handles; pressure slabs | Adopted (TL-13, TL-14) | M2 |
+| Once Bitten; first-spring rule | Adopted (TL-16), from the fun and balance critiques | M2 |
 | Per-group belief | Deferred (TL-17) | M3 |
 | Consequence locks | Adopted (TL-22) | M2/M3 |
 | Wax Key | Adopted (TL-24); at the basic vendor when no Mechanics member **(agreed, Q3; TL-25)** | M2 |
@@ -3005,14 +3024,14 @@ M2, so its trapdoors reclose (7.7).
 | Paper burns; High-Striker; Riddle locks; Fed sphincter; Ticket lock | Adopted (TL-32) | M2/M3 |
 | Relocation traps and the Mirror Glyph; scent and room triggers | Adopted (TL-41); relocation and the swap wait for the ability model's teleport rule (ABL 8), else Prone in place and the Mirror Glyph cut (lead's call, after the check) | M3 |
 | Read the Maker (reveal on disarm success by 5+) | Rejected: overlaps Hunch and wide berth | — |
-| Second Nature mastery signature | Proposed to the builders (TL-36) | M2+ |
+| Old Hand mastery signature | Proposed to the builders (TL-36) | M2+ |
 | Unbolting scroll | Adopted (TL-35; needs a CN 16.4 `classTags` entry, lead's call, after the check) | M3 |
 | Stuck doors | Rejected; Swollen door M3 | M3 |
 | Summoning locks, half-damage Botch, loot-destroying traps, trap salvage | Rejected | — |
 
 ### 9.2 Adopted in full (those not already in section 6)
 
-- **Second Nature (TL-36):** the Mechanics mastery signature (proposed
+- **Old Hand (TL-36):** the Mechanics mastery signature (proposed
   to the builders, who own the slot under STAT 7.2). Take time costs 2
   ticks and reaches Hard devices, and once per fight it can be used in
   combat as an action on an adjacent device. **It is not offered inside
@@ -3033,10 +3052,10 @@ M2, so its trapdoors reclose (7.7).
 
 | # | Finding | Fix |
 |---|---|---|
-| NF-a | Approved trap sense leaves 40–63% Hidden; +4–6 pp floor deaths through chip | Proficiency when trained; Hunch band (TL-6, TL-7) |
+| NF-a | Approved trap sense leaves 40–63% Unfound; +4–6 pp floor deaths through chip | Proficiency when trained; Hunch band (TL-6, TL-7) |
 | NF-b | max(Perception, trap sense) detects 87–100%, so Search has no content | Int-only detection |
-| NF-c | Band −4 leaves 20% Hidden for no-Mechanics parties on F5 | Band −5 (13%); Hard ≤ 15% |
-| NF-d | Rigged share 0.6 × party-hit 0.2 breaks `TrapHeroDeaths` ≤ 2% and F1 < 5% | Revealed-only AI pushes, `NoCheapKill`, no F1 rigged fights, budget charge |
+| NF-c | Band −4 leaves 20% Unfound for no-Mechanics parties on F5 | Band −5 (13%); Hard ≤ 15% |
+| NF-d | Rigged share 0.6 × party-hit 0.2 breaks `TrapHeroDeaths` ≤ 2% and F1 < 5% | Found-only AI pushes, `NoCheapKill`, no F1 rigged fights, budget charge |
 | NF-e | Safe product: rigged share × party-hit ≤ 0.03 | Fallback if the enemies owner refuses |
 | NF-f | Device springs are worth less than an attack from L5 | ≈ 0.9 × `CapRound` bands, riders, Trigger Shot replaces one attack |
 | NF-g | Strict one-try force blocks 36–66% of optional locks | Retryable force; third try opens |
@@ -3052,13 +3071,13 @@ Further toy results:
 - Margin rule against "any failure springs": 8–16% against 28–36%
   springs.
 - Take time makes out-of-combat disarm 92–100% safe. **Told plainly
-  after the check:** for trained parties that puts nearly all Easy and
-  Standard out-of-combat hand work under Take time; `TakeTimeShare` is
+  after the check:** for trained parties that puts nearly all Mild and
+  Middling out-of-combat hand work under Take time; `TakeTimeShare` is
   therefore a target band (11.4), and from F2 at least one object per
   floor is `noTakeTime` (TP12).
 - Wager rooms with Take time inside: specialists wake the guard 0% of
   the time. That is why each Take time use costs a pip there (per use,
-  not per tick, after the check: Sure Hands and Second Nature would
+  not per tick, after the check: Sure Hands and Old Hand would
   otherwise bring the 0% back).
 - A −30% guard is safer than an ordinary fight. That is why the guard is
   full-strength (re-read as a patrol-band group, the Annex; encounter
@@ -3268,7 +3287,7 @@ catalogue.
 - hidden-heavy (40% Hard);
 - no-Mechanics parties (solo Vanguard; Vanguard + Herald), with the Q3
   vendor key on and off **(new lead's call)**, and with the clock toy
-  run for this arm (the Hunch stop at nearly every Standard trap;
+  run for this arm (the Hunch stop at nearly every Middling trap;
   lead's call, after the check);
 - flat-fail disarm;
 - natives-avoid-areas (the value of the lure);
@@ -3282,9 +3301,9 @@ catalogue.
 
 | Wave | Contents |
 |---|---|
-| **M1** | Check charter; ladder; `traps`, `trapsResolve` and `checks` streams; Margin rule for locks; Take time for locks; Plain Locked Portals with retryable force (no Splinter on F1); TrapRecord skeleton with DH-32 ids and `detectionAtFire`; optionally the Kennel tin-can tripwire lesson trap, and optionally the Snare as the M1 known-armed DH-32 record off the main path (each known, armed; a hazard for pathing and previews under TL-19); V11 skeleton (`LockNeverCritical`, `HeNoLock`, `KeyReachable`). The solo Vanguard forces; nothing is gated |
-| **M2** | Detection (trap sense with proficiency, Hunch −5, Probe stop, count line, Medicine, Arcana); Warned or floored (Q1); Margin rule for traps; Take time for traps; Bear it; universal hand-trigger, Trigger Shot (with the improvised throw if TL-42 is accepted), handles, Pole it, weighted plates, re-arm; K1/K2 knowledge with Once Bitten and the opener rule; caps and bounds; floor-1 package; density and placement; Crier, Barb and Tattle locks; Splinter from F2; Keybearers; Lockside Listen; Wax Key, with the vendor stock when no Mechanics member (Q3); containers; alarm limits; trapdoor Voids in V10-proven Void rooms of themes with a Void skin (Choir, Silk); paper burns; High-Striker; door close verb; the catalogue for the M2 themes; clock allowance; RT-16 ruling; reports (Trapwright reports included) |
-| **M3** | Boxed lurker (Q2: Silk and Gut); Wager rooms; Runed and Hour locks; Unbolting; Riddle locks; Fed sphincter; Ticket lock; locked and trapped Hairline; readings; Swollen door; relocation traps and the Mirror Glyph (with the ability model's teleport rule); scent and room triggers; debris leave-behinds; portcullis Bar (if adopted); Oil the Works; per-group belief and witness secrecy; **the Trapwright** with its density gate; Drop-bar if the client agrees |
+| **M1** | Check charter; ladder; `traps`, `trapsResolve` and `checks` streams; Margin rule for locks; Take time for locks; Plain Locked Portals with retryable force (no Splinter on F1); TrapRecord skeleton with DH-32 ids and `detectionAtFire`; optionally the Kennel tin-can tripwire lesson trap, and optionally the Wire Loop as the M1 known-armed DH-32 record off the main path (each known, armed; a hazard for pathing and previews under TL-19); V11 skeleton (`LockNeverCritical`, `HeNoLock`, `KeyReachable`). The solo Vanguard forces; nothing is gated |
+| **M2** | Detection (trap sense with proficiency, Hunch −5, Probe stop, count line, Medicine, Arcana); Warned or floored (Q1); Margin rule for traps; Take time for traps; Bear it; universal hand-trigger, Trigger Shot (with the improvised throw if TL-42 is accepted), handles, Pole it, pressure slabs, re-arm; K1/K2 knowledge with Once Bitten and the first-spring rule; caps and bounds; floor-1 package; density and placement; Crier, Barb and Tattle locks; Splinter from F2; Keybearers; Lockside Listen; Wax Key, with the vendor stock when no Mechanics member (Q3); containers; alarm limits; trapdoor Voids in V10-proven Void rooms of themes with a Void skin (Choir, Archive); paper burns; High-Striker; door close verb; the catalogue for the M2 themes; clock allowance; RT-16 ruling; reports (Trapwright reports included) |
+| **M3** | Boxed lurker (Q2: Archive and Gut); Wager rooms; Runed and Hour locks; Unbolting; Riddle locks; Fed sphincter; Ticket lock; locked and trapped Hairline; readings; Swollen door; relocation traps and the Mirror Glyph (with the ability model's teleport rule); scent and room triggers; debris leave-behinds; portcullis Bar (if adopted); Oil the Works; per-group belief and witness secrecy; **the Trapwright** with its density gate; Drop-bar if the client agrees |
 | **M4** | Inverted Cathedral traps |
 | **Later** | Monster trap use; chained springs; summon and wanderer knowledge; party-placed traps (Sapper); party relock (only after a safe-rest ruling); boxed lurkers for themes that gain a lurker (Q2) |
 
@@ -3314,9 +3333,9 @@ catalogue.
 |---|---|
 | **6 Encounters** | The `trapsResolve` pass runs after segment 6's placement and may ask it to re-place a group (TP2); groups never start on triggers; areas allowed; Keybearer tag; Tattle Dormant group (the Annex); boxed-lurker budget (the Annex); Wager guards (the Annex, one extra patrol-band budget, 0 XP; M3); rigged-fight trap damage charged to the budget; alarm and Crier arrivals Alerted (answered in encounter placement design 6.13; EP-25, EP-26) |
 | **7 Loot** | Container kinds; `lockable` sockets; +1 rarity step behind consequence locks and in Wagers; graded cages; Wax Key draws; boxed-lurker drops. **Filled in part by the loot economy design (6.9, 6.4 item 9; changes LE-10, LE-11, LE-12, LE-20):** the one step rule and socket ranks, the two identities of a consequence cache, the K2 / K2b pegs, the cage set and boxed-lurker contents (6.11, 6.13–6.15 here). **Taken up by the loot sources design (segment 7c, approved 2026-11-22; its 4.4, 5, 11):** container hosts and kinds (inset hosts, LP-12; the twin-lid mark, LP-26, M3; the Ebb, LP-34, M4), auto-close and Glean (LP-8, LP-9), offer pacing (LP-30, M3) and the Windfall's sole exception to "contents never destroyed" (LP-2, M3); LP-17 to LP-20 are pending requests |
-| **8 Events** | Readings; Riddle-lock clues; Hour locks on Landmark ticks; Dream Fragments read the threshold rule. **Taken up by the events design (segment 8, approved 2026-11-22; its 4.9, 4.13):** Readings accepted (TL-34; EV-30; M3); each Riddle lock (Hymn, Index, Place-Setting, Story) gets a guaranteed, check-free clue host (a wall Glimpse or clue prop), placed by EventPlace whenever the lock exists on the floor and never a Curiosity option (M3); Hour locks on Landmark ticks stay with TL and HZ, and segment 8 places no Landmark (EV-35); Dream Fragments fold into F-BOSS options on Lore thresholds (EV-29; M3); Curiosity checks follow 6.1 and 6.2 (EV-4, EV-5); the priced lock route (6.11; EV-15); the shared FactLedger (6.11; EV-8) |
+| **8 Events** | Readings; Riddle-lock clues; Hour locks on Landmark ticks; Fragments read the threshold rule. **Taken up by the events design (segment 8, approved 2026-11-22; its 4.9, 4.13):** Readings accepted (TL-34; EV-30; M3); each Riddle lock (Hymn, Index, Place-Setting, Story) gets a guaranteed, check-free clue host (a wall Glimpse or clue prop), placed by EventPlace whenever the lock exists on the floor and never a Curiosity option (M3); Hour locks on Landmark ticks stay with TL and HZ, and segment 8 places no Landmark (EV-35); Fragments fold into F-BOSS options on Lore thresholds (EV-29; M3); Curiosity checks follow 6.1 and 6.2 (EV-4, EV-5); the priced lock route (6.11; EV-15); the shared FactLedger (6.11; EV-8) |
 | **9 Boss arenas** | No guaranteed boss-room traps; arena devices use the TrapRecord format (the Supper chandelier); Clearways stay clear; the Bossgate never opens by Wax Key or Unbolting. **Taken up by the boss rooms design (segment 9, approved 2026-11-22; its 4.7.1, 6, 11; change BR-16; M2, the Den's Device M1):** one Device per boss (F5: plus the Heavy Thing), each a segment-9 TrapRecord instance of kind `arenaDevice` in TL-40 format for data and preview only; *pending reading for 6.20 (TL owner confirms):* an `arenaDevice` is not a trap (no trigger plate, no hiding, no Botch, never armed by monsters); fallback: Devices are authored as segment-9 pieces with their own preview record, same rules; Device bodies obey RC2 and TL-43; no trap in the Sanctum; the Bossgate never by Wax Key **(settled)** |
-| **10 Information** | Every display in 6.23; Listen "a mechanism"; Lockside Listen; the codex pages; the camp's Wax Key line (Q3). **Taken up by the exploration and information design (segment 10, approved 2026-11-23; its 4.1, 4.2, 4.8.2, 4.9.8, 5):** trap grades held in `PartyKnowledge` and drawn exact while Remembered (XI-1, XI-5); the Easy Plain auto-pick and auto-Probe read known patrols only and stand down when their hearing reach crosses a never-Seen square (XI-6; agreed, Q4; M2); TL cards and prompts in the card queue (XI-19; M2); the Ear Trumpet in the basic-vendor row (XI-26; agreed, Q3; M3, conditional); no trap total kept (XI-32). **Taken up by the camp and hub design (segment 13, approved 2026-11-23; its 2.2, 4.3, 7.1):** the camp's Wax Key row with its reason line and the gap card's coverage-strip line at the Keeper's Cart (M2); the Ear Trumpet row there (M3, conditional); the 6.11 notables-slot Wax Key as a shop-only third entry on the Notables panel (CH-15, read; M2); the TL codex pages in the Library station (M3) |
+| **10 Information** | Every display in 6.23; Listen "a mechanism"; Lockside Listen; the codex pages; the camp's Wax Key line (Q3). **Taken up by the exploration and information design (segment 10, approved 2026-11-23; its 4.1, 4.2, 4.8.2, 4.9.8, 5):** trap grades held in `PartyKnowledge` and drawn exact while Remembered (XI-1, XI-5); the Mild Plain auto-pick and auto-Probe read known patrols only and stand down when their hearing reach crosses a never-Seen square (XI-6; agreed, Q4; M2); TL cards and prompts in the card queue (XI-19; M2); the Ear Trumpet in the basic-vendor row (XI-26; agreed, Q3; M3, conditional); no trap total kept (XI-32). **Taken up by the camp and hub design (segment 13, approved 2026-11-23; its 2.2, 4.3, 7.1):** the camp's Wax Key row with its reason line and the gap card's coverage-strip line at the Pedlar's Cart (M2); the Ear Trumpet row there (M3, conditional); the 6.11 notables-slot Wax Key as a shop-only third entry on the Notables panel (CH-15, read; M2); the TL codex pages in the Library station (M3) |
 | **11–12 Seeds and validation** | The streams, V11, `trapDigest`, save fields, the reports, `FloorTimeByTheme` with segment-5 rows. **Taken up by the seeds and validation design (segments 11–12, approved 2026-11-23; its 4.3, 5.2, 6.10):** the `traps` and `trapsResolve` keys under the floor's `attempt/{a}` node, with keyed `retry1` children in place of "seed + 1" (SV-4; M1); `checks` attempt-invariant under the floor key, its form kept, its domains `h:object` and `h:save` (SV-6); the builders' salt withdrawn (SV-7); V11's phases, V11g1 at AP1 and V11g2 at AP2, on the one LR0–LR5 ladder (SV-10, SV-20); `trapDigest` and the save fields in the run save beside the stored `FloorStatic` (SV-14, read); the reports' budgets and classes, `RoundsPerFightDelta{TL}` and `FloorTimeByTheme{arm, feature}` (SV-11, SV-24, SV-25); the arms `TL.Baseline` and `TL.NoTraps` (SV-22). *Pending request:* the `traps` and `trapsResolve` count formulas (11.2; M1) |
 
 ---
@@ -3328,7 +3347,7 @@ catalogue.
 | O1–O13 (3.2) | FL, RT, HZ, SH, RS, DH, CMP | 6.2 (O1), 11.1 (O2), 12 M1 (O3, O4), 6.12 (O5, O6, O8, O9), 7 (O7, O10), TL-39 (O11), 6.21 (O12), 6.6–6.7 (O13) |
 | No free retries | STAT 7.2 **(agreed)** | Margin rule; one roll per object; force pays noise each try; Take time pays ticks |
 | Pick, disarm, re-arm trained-only | STAT 7.2 (lead's call) | Kept; untrained routes elsewhere |
-| Hidden information never kills; a known trap is never safe | DH 10.4 **(agreed, Q6)** | Hidden floored by each trap's own grade; Warned or floored **(agreed, Q1)**; per-square detection with move interrupts; `NoiseTrapVisible`; lethal tags |
+| Hidden information never kills; a known trap is never safe | DH 10.4 **(agreed, Q6)** | Unfound floored by each trap's own grade; Warned or floored **(agreed, Q1)**; per-square detection with move interrupts; `NoiseTrapVisible`; lethal tags |
 | Trap ids and snapshot in M1 | DH-32 | M1 record skeleton |
 | No trap hard control on F1; F2 set pieces only | C 11.6 | Kept; F2 hard parts null in M2 |
 | Known traps are hazards from M2 | C 11.3, SH-15 | Kept, except F1 pushes stop before triggers (TL-19) |
@@ -3356,11 +3375,11 @@ catalogue.
 | # | Risk | Signal | Response |
 |---|---|---|---|
 | 1 | **Clock.** The F4–5 party-4 gate passes only narrowly, and segment 5 asks for +0.3 min | `TrapLockSeconds`; `ExploreClicksDelta` | The binding cut order of 6.21: the fallback switch (out-of-combat traps on F4–5 drop to 1), ≤ 1 Hunch-tier trap, ≤ 1 lock on F4–5 |
-| 2 | **The enemies owner may refuse TL-16** (Revealed-only scoring, area trust, Once Bitten) | The owner's ruling | Rigged share × party-hit ≤ 0.03 (NF-e) |
+| 2 | **The enemies owner may refuse TL-16** (Found-only scoring, area trust, Once Bitten) | The owner's ruling | Rigged share × party-hit ≤ 0.03 (NF-e) |
 | 3 | **"Natives stand in areas" may read as AI stupidity** | Playtest notes; `NativeAreaCatchRate` | Once Bitten, the codex card, the idle glance animation |
 | 4 | **TL-3 narrows a settled ABL line** | The ABL owner | The all-threshold fallback is the only alternative that keeps main 6.3 |
 | 5 | **TL-8 narrows agreed DH text** | — | Agreed with Q1; `HunchEntriesInCombat` watched |
-| 6 | **Take time makes specialists routine** on Easy and Standard | `TakeTimeShare` against its 50–75% band | The `noTakeTime` object per floor from F2 (TP12); more `noTakeTime` tags if the band is missed |
+| 6 | **Take time makes specialists routine** on Mild and Middling | `TakeTimeShare` against its 50–75% band | The `noTakeTime` object per floor from F2 (TP12); more `noTakeTime` tags if the band is missed |
 | 7 | **Sure Hands and Trap Eye** both need the Shade owner's re-scope | The owner's ruling | TL-5, TL-6 rows |
 | 8 | **Device value is thin** at the `CapRound` bound | `NativeAreaCatchRate`; `RouteChoiceMix` | Riders; the hand-trigger-as-attack future item (19.2) |
 | 9 | **RT-16 is unruled** | The conditions owner | Barb and spray effects fall back to damage-only |
@@ -3381,7 +3400,7 @@ catalogue.
   zone sizes, bands, `CapRound` and `HiddenTrapBound` percentages,
   density counts, noise values, Wax Key prices, the mimic marking
   threshold, report thresholds other than the stated gates.
-- The Mechanics mastery signature (Second Nature is the lead's proposal;
+- The Mechanics mastery signature (Old Hand is the lead's proposal;
   STAT 7.2 leaves the slot to the builders).
 - Trap and lock sockets themselves, within 6.20 and V11.
 - Skins and tells inside each theme's catalogue.
@@ -3445,22 +3464,22 @@ effect at the M2 gate.
 | TL-2 | HZ 6.3.5 (cited); RT 6.2.6 Plank (kept); FL 9.2 Locked row "DCs to segment 5" | DC ladder; force +2 (6.2) | — | Lead's call |
 | **TL-3** | **Main 6.3 streams (decided; extended like FL-2 / TR-17)**; ABL 14.4 (settled; narrowed to "unit attacks, saves in combat and contests"); FL 9.2 and ABL 7.2 Squeeze row "existing check stream"; RT 6.2.6 Plank (per-traversal rolls kept); HZ limit 2 (reading) | `traps` and `trapsResolve` streams (two passes, after the check); keyed `checks` stream without unit, `attemptIndex` per kind; out-of-combat trap and lock saves on `checks`, keyed by `springIndex`; out-of-combat attacks on objects on `checks` (after the check) (6.22) | **Decided** (main 6.3, extended); told plainly | Client, with this document; ABL owner applies |
 | TL-4 | STAT 7.2 (**agreed**; reading); ABL 7.2 disarm, trigger and Locked rows; FL 9.2 Locked row; SH 8.2 / 13.1 `jammedUntil` | Margin rule; one roll per object per hand verb per floor (force, Squeeze and Plank by their own rules); universal Jam to floor end; Jam blocks hands only; the Force row (after the check) (6.6) | **Agreed** (read, not changed) | Lead's answer, BQ1/BQ2, with this document |
-| TL-5 | STAT 7.2 threshold clause (**agreed**; reading); ABL 7.2 (new row); SH 7.11 Sure Hands | Take time (Easy/Standard, 8 ticks, channelled, not consequence locks, `noTakeTime` objects, Squeeze or Plank; one pip per use in a Wager); Sure Hands cuts it to 3; Easy Plain auto-pick only with no patrol due (6.6; the last three after the check) | **Agreed** (read, not changed) | Lead's call; Shade owner applies |
+| TL-5 | STAT 7.2 threshold clause (**agreed**; reading); ABL 7.2 (new row); SH 7.11 Sure Hands | Take time (Mild/Middling, 8 ticks, channelled, not consequence locks, `noTakeTime` objects, Squeeze or Plank; one pip per use in a Wager); Sure Hands cuts it to 3; Mild Plain auto-pick only with no patrol due (6.6; the last three after the check) | **Agreed** (read, not changed) | Lead's call; Shade owner applies |
 | **TL-6** | **STAT 6 trap-sense row (agreed: "All rows (agreed)"; changed)**; STAT 7.1 Arcana and Medicine rows (reading); SH-19 Trap Eye | Proficiency when Mechanics-trained; Arcana for runes; Medicine for poison; living, non-Downed units only; monotonic grades; Trap Eye re-scoped (6.4) | **Agreed** (STAT 6, changed; corrected after the check) | **Client, with this document**; stat model owner applies; Shade owner re-scopes Trap Eye |
-| TL-7 | ABL 7.2 (new Probe row; Search row unchanged); ABL movement (the detection interrupt); FL 6.10 auto-walk | Revealed / Hunch / Hidden; per-square detection with move interrupts; Probe from inside or beside a zone; the Hunch stop (auto-Probe out of combat); wide berth with a defined trigger; no search-for-traps verb (6.4; the interrupt, Probe position, auto-Probe and wide-berth trigger after the check) | — | Lead's call |
+| TL-7 | ABL 7.2 (new Probe row; Search row unchanged); ABL movement (the detection interrupt); FL 6.10 auto-walk | Found / Hunch / Unfound; per-square detection with move interrupts; Probe from inside or beside a zone; the Hunch stop (auto-Probe out of combat); wide berth with a defined trigger; no search-for-traps verb (6.4; the interrupt, Probe position, auto-Probe and wide-berth trigger after the check) | — | Lead's call |
 | **TL-8** | **DH 10.4 (agreed, DH Q6; narrowed: a new trap row; its "Trap provenance" bullet widened)**; **DH-32 (the `detectedAtFire` snapshot becomes the enum `detectionAtFire`)**; DH 17.5, 17.6 (the lethal tag on a Hunch entry); HZ "Warned or floored" (precedent) | A shown Hunch zone is a warning; floored only out of combat or by forced movement (agreed), and in its first round (new lead's call); the floor follows each trap's own grade; a chosen in-combat Hunch entry is self-caused; the floor's-worst-trap preview; party-caused combat-starting springs floored for the party (6.5; the enum, own-grade and self-caused rules after the check) | **Agreed** (DH Q6 narrowed); **Q1** | **Client (agreed 2026-11-21, Q1)**, with this document; DH owner applies |
 | TL-9 | FL-20 count line | "traps found: k · open Hunch zones: h", no total (6.4) | — | FL owner |
 | TL-10 | RS 13 "Traps and locks" hook (**agreed** hook text, filled); HZ 13; FL 13; SH 8.2; RC1+ | Taxonomy; device bodies always rigged; diegetic tells; record superset (6.3, 11.1) | **Agreed** (RS hook, filled as a reading) | Lead's call |
 | TL-11 | C 11.6 (reading) | Botch lands by `botchHits`; never the hard part (6.6) | — | Lead's call |
 | TL-12 | DH 17.6 / 17.7 (extended to own movement); C 10.4; C 11.3 / 5.5 (kept); ABL movement | Bear it; every damaging trap has a save; step over wires by default (Bear it on a wire only by explicit choice; after the check); walk-round default; HP preview and warning (6.7) | — | DH owner applies |
-| TL-13 | SH-15 / NM-1 staging; ABL 7.2 note "The Trapwright's trap rows … apply when the Trapwright ships" and new rows (hand-trigger kept an Action) | Universal hand-trigger, Trigger Shot (one attack, mechanisms included; out of combat a one-try object check on `checks`, after the check), handles, Pole it (plates, wires and catch hosts; 1 tick out of combat; after the check) (6.7) | — | Lead's call; Shade owner told |
-| TL-14 | RT 6.3.6 and the RT 13 row "a Furnishing never springs a trap" (a lead's call; invited narrowing); RT 6.4 | Weighted plates (the end square only, after the check); one act springs at most one trap; collision then spring through EnvRound, the trap outside the one-instance cap (6.7) | — | Lead's call |
+| TL-13 | SH-15 / NM-1 staging; ABL 7.2 note "The Trapwright's trap rows … apply when the Trapwright ships" and new rows (hand-trigger kept an Action) | Universal hand-trigger, Trigger Shot (one attack, mechanisms included; out of combat a one-try object check on `checks`, after the check), handles, Pole it (plates, wires and clasp hosts; 1 tick out of combat; after the check) (6.7) | — | Lead's call; Shade owner told |
+| TL-14 | RT 6.3.6 and the RT 13 row "a Furnishing never springs a trap" (a lead's call; invited narrowing); RT 6.4 | Pressure slabs (the end square only, after the check); one act springs at most one trap; collision then spring through EnvRound, the trap outside the one-instance cap (6.7) | — | Lead's call |
 | TL-15 | C 11.6 "the rest of SH-15 … when the Trapwright ships"; ABL 7.2 note; SH 14; **SH 8.2 Jury-Rig Re-arm bullet "the universal action route stays unlimited at its action cost"** (new lead's call: named here) | Universal 500‰ re-arm, no hard part, once per trap per floor, not while a hit group is Alerted; Jury-Rig keeps its own counter (6.6) | — | Lead's call; Shade owner applies |
-| TL-16 | ENM 11.2 (A-5); ENM 11.3 behaviour rows (invariant 7 kept); C 17.3; **RT `NoCheapKill` (agreed, RT Q3; extended, TR-15)**; the Automaton card; the SH card "monsters avoid known traps" | Natives avoid triggers and trust areas; Once Bitten; opener rule; mindless blunder; Revealed-only AI push scoring; no-path reroute (6.8) | **Agreed** (RT Q3, extended) | Request; **enemies owner** rules |
+| TL-16 | ENM 11.2 (A-5); ENM 11.3 behaviour rows (invariant 7 kept); C 17.3; **RT `NoCheapKill` (agreed, RT Q3; extended, TR-15)**; the Automaton card; the SH card "monsters avoid known traps" | Natives avoid triggers and trust areas; Once Bitten; first-spring rule; mindless blunder; Found-only AI push scoring; no-path reroute (6.8) | **Agreed** (RT Q3, extended) | Request; **enemies owner** rules |
 | TL-17 | ENM 11.2 | Per-group belief; witness-only secrecy (6.8) | — | Request; enemies owner; M3 |
 | TL-18 | HZ 6.11 item 2 / HZ-7; RT 6.4 (exclusion kept); C 10.4; C 11.6 (reading) | Bands (printed after weakness, after the check); `HiddenTrapBound` 20%; `TrapLethalityBound` ≤ `CapRound`; traps in EnvRound except self-caused (a chosen in-combat Hunch entry added after the check); budget charge; F2 hard parts null in M2 (6.9, 6.10) | — | Lead's call; HZ and conditions owners apply |
 | TL-19 | C 11.3 / SH-15 (narrowed on F1); RT-20 (reading); TR-29 (kept true); DH 17.1; ENM invariant 6; RS 8.2(d)(f) | The floor-1 package, with the Wake's Viewing Door as the one F1 Tattle (6.19, 7.4) | — | Lead's call |
-| TL-20 | FL LG2, LG14, LG7 `SkippablePool`, `PortalMinimums`; FL 13 trap-socket hook (the 0→1 Portal socket filled by a Door catch or a threshold wire, after the check); FL 7.2 tripwire request (the Gaol's Circuit takes no trap on F1; Bypass alarms only; told to the FL owner after the check); HZ VP rules; RS 11.2 validator list | TP1–TP12; density; V11 in two passes; the retry and terminal fallback (6.20, 6.22, 11) | — | Lead's call; FL owner |
+| TL-20 | FL LG2, LG14, LG7 `SkippablePool`, `PortalMinimums`; FL 13 trap-socket hook (the 0→1 Portal socket filled by a Door clasp or a threshold wire, after the check); FL 7.2 tripwire request (the Gaol's Circuit takes no trap on F1; Bypass alarms only; told to the FL owner after the check); HZ VP rules; RS 11.2 validator list | TP1–TP12; density; V11 in two passes; the retry and terminal fallback (6.20, 6.22, 11) | — | Lead's call; FL owner |
 | TL-21 | FL 9.2 Locked row; STAT 7.1 Athletics and Mechanics rows; ABL 7.2 (new rows); RT 6.3.4 and **RS 7.6 "Portals never break" (agreed; reading; told plainly)**; ENM 12.3 | Pick; retryable force with the guarantee; Splinter from F2 (option B ready); no relock; TP10 (6.11) | **Agreed** (RS 7.6, read); told plainly | Lead's answer, BQ5, with this document |
 | TL-22 | FL 8.1 decal kit; **RC3 / RC5 / RC7 (agreed, RS Q3 charter; extended)**; RT-16; HZ-19; RS 8.3 | Crier, Barb, Tattle (Portal hosts only); Runed, Hour; set off a Crier; rarity step; glyphs redrawn without face parts, rings or clock faces, and the padlock-base-plus-glyph read (after the check) (6.11, 8) | **Agreed** (RC charter, extended) | Lead's answer, BQ5; art |
 | **TL-23** | ITEMS 5.3 (kept); RS 8.3 / 8.10; **ENM 14.6 category list (agreed; adds a category)**; **ENM 14.6 Yield drop bullet and ENM 14.8 Cowed success ("keeps its notable item") (named after the check; a new outcome: the floor key is handed over)**; ENM 15.5; FL-18 | Keybearers; automatic keys; `KeyReachable` (bound in `trapsResolve`); the interrogation category; the key on Yield and Cow (fallback: Cow does not yield it); Lockside Listen (6.11) | **Agreed** (ENM 14.6; 14.8 as its status stands) | Client, with this document; enemies and FL owners apply |
@@ -3472,11 +3491,11 @@ effect at the M2 gate.
 | TL-29 | HZ 6.10 / HZ-21 cap; HZ HF11 (one clock per room; read); FL Strongroom row (lead's call); DH 10.4 Dare bullet (kept); DH 18 reports | Wager rooms; after the check: the TP3 exception and `WagerNonSkillLine`, the one-rule Disturbance track, `gradeAtLift`, distinct caged notables, the Hunch override, greed plates on pips (6.15) | — | Lead's answer, BQ9; HZ and FL owners; M3 |
 | TL-30 | ENM 12.3 / 12.5 (reading); ENM 14.3 (a new morale trigger, added after the check) | Alarm traps one-shot; alarm and Crier arrivals Alerted, not Surprisable (Crier added after the check); the Rattle Wire's "rudely woken" morale rider (fallback: noise 10 only) (6.18, 6.11, 7.10) | — | Request; enemies owner; the rider M2 or M3 as the owner rules |
 | **TL-31** | HZ 6.1; **HZ 6.4 and the HZ Void gates (agreed, HZ Q2)**: V10 `SnagProven` and HZ's Void-room quotas (a runtime Void inside a proven Void room, counted in the quotas: flagged); C 10.2 edge save; ENM 14.3 and ENM 16 (`voidFall`, read as written); RT-20; RS 8.3; **RS 7.6 (agreed)** | Trapdoor Voids from F2 only in V10-proven Void rooms of themes with a Void skin; no fall at the spring (units placed on the nearest square); F1 and elsewhere reclose; debris (M3); portcullis damage-only in M2, Bar in M3 (6.3, 7; revised after the check) | **Agreed** (HZ Q2 gates: a runtime Void flagged; RS 7.6: read) | Lead's call, with this document; HZ owner applies |
-| TL-32 | RS 8.x Laws; ITEMS 2; **ABL 7.2 Smash row** (new lead's call: the Iced padlock) | Paper burns; High-Striker; Ticket lock; Fed sphincter; Riddle locks; Smash on the Iced padlock (7) | — | RS owner; ABL owner applies the Smash note |
+| TL-32 | RS 8.x Laws; ITEMS 2; **ABL 7.2 Smash row** (new lead's call: the Frost-seized padlock) | Paper burns; High-Striker; Ticket lock; Fed sphincter; Riddle locks; Smash on the Frost-seized padlock (7) | — | RS owner; ABL owner applies the Smash note |
 | **TL-33** | FL-8; FL 9.2; **FL-17 (agreed, FL Q3; the Lore widening goes to the client at M3)**; ABL 15.1 | Door verbs; stuck doors rejected; Swollen door; no relock; the Drop-bar guard; Hairline variants (6.12) | **Agreed** (FL Q3) | Lead's call; FL owner; client at M3 |
 | TL-34 | STAT 6 passives; RS 9.1 | Readings as thresholds (6.12) | — | Request; segment 8; M3 |
 | TL-35 | CN 16.4 tier-2 reserves; CN 16.4 `classTags` (the closed coverage-or-cut audit, ARC-24, HR-24); ARC 8.10; HR 8.8 (the last three named after the check) | Unbolting with a `classTags` entry; Unweaving against Runed (9.2) | — | Request; consumables, Arcanist and Herald owners; M3 |
-| TL-36 | STAT 7.2 builders' slot | Second Nature (a proposal) (9.2) | — | Builders |
+| TL-36 | STAT 7.2 builders' slot | Old Hand (a proposal) (9.2) | — | Builders |
 | **TL-37** | **SH 14 (agreed, SH Q2; applied)**; CL 13 rows | DEP-S1 fallback; records M2; reports M2, gates M3; "places traps" rejected (6.16) | **Agreed** (SH Q2, applied); told plainly | Client, with this document |
 | TL-38 | FL 6.10 and **FL-16** (`ExploreSeconds` ≤ 3.5 min, `ExploreClicks` ≤ 40 at party 4 on F4–5: raised to 3.8 min and 45 for segment-5 content only, named after the check); CMP 7.4 time model; HZ-27 envelope; C 5.5 | Segment-5 allowance as a new budget line on top of FL's commitment; mandatory levers; the binding cut order (6.21) | — (told plainly) | Lead's call; FL and CMP owners |
 | TL-39 | C 11.6; RS 8.0 (RT-16) | Ruling request: the theme's 6, otherwise damage only (7) | — (request) | Conditions owner, before M2 rosters freeze |
@@ -3573,7 +3592,7 @@ later design triggers them, and the naming pass remain future items.
   It narrows agreed DH 10.4 / DH Q6 (6.5; TL-8). Rejected: B, Hunch
   zones fully floored; C, no Hunch zones.
 - **Q2, the mimic route:** option A. The boxed lurker: each theme's own
-  lurker in container form (the Silk's Margin-Crawler drawer, the Gut's
+  lurker in container form (the Archive's Margin-Crawler drawer, the Gut's
   Gutworm strongbox) in M3, more themes as they gain lurkers, at most 1
   per floor on F2–5; no roster exception (6.14; TL-28). Rejected: B, a
   cross-theme keyhole mimic.
@@ -3593,8 +3612,8 @@ confirmed by the client on 2026-11-21, with this document):**
   confirmed once, with advantage on the save (Bear it); walk-round is
   the default (0.1, 6.7).
 - **BQ4:** natives path around triggers and stand in device areas;
-  mindless types blunder into non-lethal traps; Once Bitten, the opener
-  rule and Revealed-only scoring close the exploits (0.1, 6.8).
+  mindless types blunder into non-lethal traps; Once Bitten, the first-spring
+  rule and Found-only scoring close the exploits (0.1, 6.8).
 - **BQ5:** consequence locks (Crier, Barb, Tattle in M2; Runed, Hour in
   M3), each with a glyph and a rule card (0.1, 6.11).
 - **BQ6 (contested by the lead):** no consumable lockpicks; the
@@ -3644,7 +3663,7 @@ document):
    "the Head of the Table" is the Supper boss, RS 8.9, and HZ 6.17's
    final course) (7.8, A.5).
 3. **"The floor's worst trap" in Q1's preview** is the highest maximum,
-   after the unit's weakness, among the floor's traps not yet Revealed,
+   after the unit's weakness, among the floor's traps not yet Found,
    shown as "up to X" with the lethal tag (red when X would take the
    unit to 0); it is a floor-level figure that reveals nothing about the
    zone (6.5, 6.23).
@@ -3667,7 +3686,7 @@ document):
    the Wake's Viewing Door) (7.4, 6.19, 6.20). A Tattle is a Crier until
    the Annex (M3), and always a Crier on F1 (6.11; cross-document
    comparison 2026-11-23, CC-99).
-8. **The Iced padlock's Smash** is RT's Smash verb extended to that
+8. **The Frost-seized padlock's Smash** is RT's Smash verb extended to that
    padlock: 1 tick out of combat, replaces one attack in combat, one
    `checks` roll, opens like a force with no Splinter (7.8; TL-32).
 9. **The Flag column marks readings of agreed text** (TL-1, TL-4, TL-5,
@@ -3712,7 +3731,7 @@ this document):
   showed trained parties would otherwise Take time on nearly everything
   (6.6, 11.4).
 - **Trapdoor Voids are rarer than the proposal implied:** only in
-  proven Void rooms of themes with a Void skin (the Choir and the Silk
+  proven Void rooms of themes with a Void skin (the Choir and the Archive
   in M2), and a spring never drops anyone into one. The Carnival's
   trapdoors reclose in M2 (6.3, 7.7).
 - **The M3 relocation traps and the Mirror Glyph wait for a teleport
@@ -3750,61 +3769,61 @@ none overrides a client answer):
    forcing; a Door Botch from F2 Splinters and opens; a container Botch
    is an ordinary failure; the third try opens with no roll and still
    fires per-try consequences (6.6, 6.11). "Take time force" is deleted.
-9. **The host-catch order:** keys and Wax Keys never spring a catch;
+9. **The host-clasp order:** keys and Wax Keys never spring a clasp;
    the lock resolves first; a Botch fires the lock's consequence, then
-   the catch (6.13).
+   the clasp (6.13).
 10. **Boxed-lurker presentation:** unlocked or a real Plain padlock,
     drawn at generation; the Wax Key judged on the presented state;
     open routing for every container; marking timing; the
     unmarked-attack row; "feels teeth" as a callout (6.13, 6.14).
-11. **Weighted plates spring only on the square a piece ends on;**
+11. **Pressure slabs spring only on the square a piece ends on;**
     collision, then spring, through EnvRound (6.7).
 12. **Probe from inside or beside a zone; the zone geometry; the Hunch
-    badge for catches; auto-Probe out of combat unless a patrol is
+    badge for clasps; auto-Probe out of combat unless a patrol is
     due** (6.4).
 13. **Trap-sense eligibility** (living, non-Downed roster units),
     alternatives per tag, monotonic grades (6.4).
-14. **The opener rule's order and Once Bitten's trigger** (6.8).
+14. **The first-spring rule's order and Once Bitten's trigger** (6.8).
 15. **TrapState, LockRecord, container and WagerRecord fields** and the
     `TrapResolved` event; the `TrapHeroDeaths` and `UndetectedChipShare`
     definitions (11).
-16. **Take time is channelled;** Easy Plain auto-pick only with no
+16. **Take time is channelled;** Mild Plain auto-pick only with no
     patrol due (6.6).
 17. **Step over is the default on a known wire;** Bear it on a wire is
     an explicit choice (6.7).
 18. **Out-of-combat Trigger Shot is a one-try object check on
-    `checks`;** the improvised throw (TL-42); Pole it reaches catch
+    `checks`;** the improvised throw (TL-42); Pole it reaches clasp
     hosts and costs 1 tick out of combat (6.7).
 19. **Wager rooms:** every trap raised to at least Hunch; the TP3
     exception with `WagerNonSkillLine`; one Disturbance rule (one pip
     per event, per Take time use); `gradeAtLift`; 3 distinct caged
-    notables; greed plates arm on the next pip; Second Nature not
+    notables; greed plates arm on the next pip; Old Hand not
     offered inside (6.15, 9.2).
 20. **From F2, one `noTakeTime` object per floor;** House Keys on
     Strings tagged; `TakeTimeShare` as a band (6.6, 6.20, 7.9, 11.4).
 21. **Crier arrivals are Alerted and not Surprisable;** a spent Crier
     stays barred from Take time (6.11, 6.18).
-22. **F1 fixes:** snares and catches ≤ 3, one off-path device ≤ 4; the
+22. **F1 fixes:** snares and clasps ≤ 3, one off-path device ≤ 4; the
     lesson trap exempt from the out-of-combat count and TP5; the F1
     Keybearer cell ≤ 1 (6.19, 6.20).
 23. **Tattle on Portal hosts only;** the wide-berth trigger and cue; the
-    FL 13 Door-catch socket (6.4, 6.11, 6.20).
+    FL 13 Door-clasp socket (6.4, 6.11, 6.20).
 24. **The key on Yield and Cow is asked of the enemies owner** with a
     fallback (6.11; TL-23); the Rattle Wire rider joins TL-30.
 25. **Readability:** the RC5+ table, pattern registry, gates, timbre
-    table and art budget; tells render from Revealed; reserved tell
+    table and art budget; tells render from Found; reserved tell
     silhouettes; no idle motion in tells; device bodies under RT's
     piece bans; the redrawn lock glyphs and padlock base; the Hunch
     zone's dotted rim; the cracked-heart lethal tag; the Splinter state;
     the Disturbance meter as the room's one clock (6.3, 6.11, 6.23, 8).
 26. **Re-tells and re-bodies:** the tin-can tripwire (TL-43); the
-    Sluice hatch; the hornless Gramophone; the Blade Wheel; the static
-    tells of the Jack-in-the-Box, the Lip Catch and Hand Under the Bed;
+    Sluice hatch; the hornless Gramophone; the Swing Blade; the static
+    tells of the Jack-in-the-Box, the Lip Clamp and Hand Under the Bed;
     the Paper-Cut Tray; the Gutworm's hasp-free strongbox; the Acid
     Gland's valve-knot; the Clock-Weight VFX and clock-faced doors cut;
     the Top Table's course order cut (7).
 27. **Renames:** Crepe Veil, Closed-Stack cage, Shush Glyph, Darning
-    Volley, Thurible Wire, Paper-Cut Tray, Blade Wheel; "acid geyser →
+    Volley, Thurible Wire, Paper-Cut Tray, Blade Wheel (renamed the Swing Blade, naming pass NP-17); "acid geyser →
     Acid Gland" recorded (A.5).
 28. **The clock line on top of FL-16, with a binding cut order** (6.21;
     TL-38).
@@ -3817,7 +3836,7 @@ none overrides a client answer):
 These come back to the client only if a report, an owner's refusal or a
 later design triggers them:
 - **At M3:** should a Lore-trained member also reveal Hairline tells in
-  the Silk and Choir (widens agreed FL Q3)? Recommended: yes, M3.
+  the Archive and Choir (widens agreed FL Q3)? Recommended: yes, M3.
 - **Drop-bar** (already with the client from FL). Recommended: M3 with
   the anti-rest guard (6.12).
 - **If `RouteChoiceMix` shows the hand-trigger is never used:** allow it
@@ -3866,8 +3885,8 @@ later design triggers them:
 
 | # | Finding | Resolution |
 |---|---|---|
-| KF1 | The device lure is a dominant, repeatable opener | Once Bitten; opener rule; re-arm once per floor and not while a hit group is Alerted; `OpeningSpringRate` report (TL-15, TL-16) |
-| KF2 | Take time plus auto-routing make BQ1/BQ5 ceremony | Take time not on Hard or consequence locks; patrol forecast; Sure Hands cuts ticks; Easy Plain auto-pick (TL-5) |
+| KF1 | The device lure is a dominant, repeatable opener | Once Bitten; opener rule (renamed the first-spring rule, naming pass NP-17); re-arm once per floor and not while a hit group is Alerted; `OpeningSpringRate` report (TL-15, TL-16) |
+| KF2 | Take time plus auto-routing make BQ1/BQ5 ceremony | Take time not on Hard or consequence locks; patrol forecast; Sure Hands cuts ticks; Easy (renamed Mild, naming pass NP-17) Plain auto-pick (TL-5) |
 | KF3 | Out-of-combat traps are detour chores | `TrapHasStake` (TP5) |
 | KF4 | Repeatable alarm lures | Alarm traps one-shot; arrivals Alerted and not Surprisable; Crier spent once sounded (TL-30, TL-22) |
 | KF5 | Wager rooms binary; Take time ban arbitrary | Take time costs a pip per use; graded cages; visible non-skill line, proven by `WagerNonSkillLine` after the check; containment ≥ 9 (TL-29) |
@@ -3884,8 +3903,8 @@ later design triggers them:
 |---|---|---|
 | KB1 | Hunch-as-undetected rewards not detecting | Warned or floored (TL-8) **(agreed, Q1)** |
 | KB2 | EnvRound cap laundering | Self-caused damage outside the cap (TL-18) |
-| KB3 | Farming unaware groups | Opener rule; Once Bitten; re-arm once per floor (TL-15, TL-16) |
-| KB4 | Hidden noise traps start lethal fights | `NoiseTrapVisible` (TP8); Shush Glyph (then the Silence Glyph) made a known room rule |
+| KB3 | Farming unaware groups | Opener rule (renamed the first-spring rule, naming pass NP-17); Once Bitten; re-arm once per floor (TL-15, TL-16) |
+| KB4 | Hidden (renamed Unfound, naming pass NP-17) noise traps start lethal fights | `NoiseTrapVisible` (TP8); Shush Glyph (then the Silence Glyph) made a known room rule |
 | KB5 | Fight-end Jams give a second try | Universal Jams to floor end (TL-4) |
 | KB6 | Wager XP faucet, retry scouting, joiners | Guard from the budget; pips persist; no retry after a wake; guard takes the joiner slot |
 | KB7 | Bear it oversold | Walk-round default; HP preview and warning; BQ3 wording |
@@ -3895,7 +3914,7 @@ later design triggers them:
 | KB11 | Conflicting bounds; F2 hard parts at party 2 | One bound set (TL-18); F2 hard parts null in M2 |
 | KB12 | One act, two traps | One spring per act (TL-14) |
 | KB13 | No-path pockets; portcullis stranding | Reroute behaviour request; portcullis damage-only in M2 |
-| KB14 | Take time erases the Shade edge | 8 ticks; Sure Hands cut; Second Nature reaches Hard |
+| KB14 | Take time erases the Shade edge | 8 ticks; Sure Hands cut; Second Nature (renamed Old Hand, naming pass NP-9) reaches Hard |
 | KB15 | Clock may fail the first gate | Mandatory levers; fallback switch |
 | KB16 | Validator ignores Circuits; loot targets disagree | TP10 includes Circuit rooms; one loot target (6.17) |
 | KB17 | Shared seeds known in advance | Builders' option: salt with run id (withdrawn: one key gives one run; seeds and validation design 4.7; SV-7) |
@@ -3909,11 +3928,11 @@ later design triggers them:
 |---|---|---|
 | KK1 | Keyhole mimic breaks RE9/RC3 | `containerForm` (TL-28) **(agreed, Q2)**; the catalogue's TL-44 dropped |
 | KK2 | TL id collisions | One register TL-1..41; TL-42 and TL-43 added after the check |
-| KK3 | Catch and Barb saves on the combat stream | `checks` stream out of combat |
+| KK3 | Catch (renamed Clasp, naming pass NP-17) and Barb saves on the combat stream | `checks` stream out of combat |
 | KK4 | Hand-trigger "one attack" changes a settled row | Kept an Action; future item 19.2 |
-| KK5 | Revealed-only scoring is a change | Flagged TL-16 with fallback |
+| KK5 | Revealed-only (renamed Found-only, naming pass NP-17) scoring is a change | Flagged TL-16 with fallback |
 | KK6 | F1 traps against RT-20/TR-29 | TL-19 as written; the catalogue's "TR-29 amended" deleted |
-| KK7 | Name collisions | Bell→Crier, Sleeper→Tattle, Slip→Jam, Cunning→Hard, Burst→Splinter, Seal→Riddle lock, Passing Bell→Belfry Wire, Sure Hands→Second Nature, Needle→Barb, Swallow→Lip Catch, Waking Bell→Rattle Wire, Music Box→Gramophone, Empty Chair→Cold Seat, Lidmaw/Lidmouth unused, Rigged room→Wager room; and, while writing, Head of the Table→Top Table; after the check, acid geyser→Acid Gland, Mourners' Veil→Crepe Veil, Overdue cage→Closed-Stack cage, Silence Glyph→Shush Glyph, Pincushion Volley→Darning Volley, Censer Tripwire→Thurible Wire, Paper-Cut Drawer→Paper-Cut Tray, Spinning Target→Blade Wheel, horn tripwire→tin-can tripwire (A.5) |
+| KK7 | Name collisions | Bell→Crier, Sleeper→Tattle, Slip→Jam, Cunning→Hard, Burst→Splinter, Seal→Riddle lock, Passing Bell→Belfry Wire, Sure Hands→Second Nature (renamed Old Hand, naming pass NP-9), Needle→Barb, Swallow→Lip Catch (renamed Lip Clamp, naming pass NP-17), Waking Bell→Rattle Wire, Music Box→Gramophone, Empty Chair→Cold Seat, Lidmaw/Lidmouth unused, Rigged room→Wager room; and, while writing, Head of the Table→Top Table; after the check, acid geyser→Acid Gland, Mourners' Veil→Crepe Veil, Overdue cage→Closed-Stack cage, Silence Glyph→Shush Glyph, Pincushion Volley→Darning Volley, Censer Tripwire→Thurible Wire, Paper-Cut Drawer→Paper-Cut Tray, Spinning Target→Blade Wheel (renamed Swing Blade, naming pass NP-17), horn tripwire→tin-can tripwire (A.5) |
 | KK8 | Three spring bounds | One set (TL-18); band P and 40% deleted |
 | KK9 | Ladder variants; Narrow row | One ladder; Plank and Squeeze stay 12 |
 | KK10 | Force retry rules mixed | One rule; Splinter flagged; hearing reported |
@@ -3951,23 +3970,23 @@ word, same meaning), Botch, Hunch, Hunch zone, Probe, Take time, Bear
 it, Pole it, Walk round, Push through, Step over, wide berth, Crier,
 Barb lock, Tattle, Runed, Hour lock, Riddle lock, Splinter, Keybearer,
 Lockside Listen, Wax Key, Unbolting, Oil the Works, Swollen door,
-High-Striker, Wager room, Disturbance track, Once Bitten, Second Nature,
+High-Striker, Wager room, Disturbance track, Once Bitten, Second Nature (renamed Old Hand, naming pass NP-9),
 Margin rule, boxed lurker, Lesson trap, Belfry Wire, Rattle Wire, Cold
-Seat, Lip Catch, Gramophone, Clock-Weight, Confession Box, Gin Jaw,
-Scent Bladder, Deadfall, Closing Coffin, Lid Rack,
+Seat, Lip Catch (renamed Lip Clamp, naming pass NP-17), Gramophone, Clock-Weight, Confession Box, Gin Jaw,
+Scent Bladder (renamed Scent Sack, naming pass NP-17), Deadfall, Closing Coffin, Lid Rack,
 Drowning Grate, Responsory, Drowned Chandelier, Shelf-Pull, Stage
 Trapdoor, Jack-in-the-Box,
 Oil Bucket, Mirror Glyph, Taster's Plate, Acid Gland, Spore Bladder,
 Lullaby Glyph, Hand Under the Bed, Rose Pane,
 Collection Plate, Pew Rack, Rood Screen, Will-Box, Viewing
-Door, Vestry door, Ring key, Ticket lock, Iced padlock,
+Door, Vestry door, Ring key (renamed Ringmaster's Key, naming pass NP-17), Ticket lock, Iced padlock (renamed Frost-seized padlock, naming pass NP-17),
 Fed sphincter, web seal, Hymn, Index, Place-Setting and Story Riddle
-locks, Loft of Responses, Restricted Section, Last Act, **Top Table**,
-the Stomach, Night Nursery, Rose Window, Winch up, `containerForm`,
+locks, Loft of Responses, Restricted Section (renamed the Chained Shelves, naming pass NP-17), Last Act (renamed the Prop Room, naming pass NP-17), **Top Table**,
+the Stomach (renamed the Craw, naming pass NP-17), Night Nursery (renamed the Airing Cupboard, naming pass NP-17), Rose Window (renamed the Tracery Loft, naming pass NP-17), Winch up, `containerForm`,
 and, re-checked after the check (the proposal's names that the check
 found colliding in context are replaced; see "Renamed after the
 check"), Crepe Veil, Closed-Stack cage, Shush Glyph,
-Darning Volley, Thurible Wire, Paper-Cut Tray, Blade Wheel, tin-can
+Darning Volley, Thurible Wire, Paper-Cut Tray, Blade Wheel (renamed Swing Blade, naming pass NP-17), tin-can
 tripwire, valve-knot, trap rim, trap link, cracked heart,
 `trapsResolve`, `TrapResolved`, `detectionAtFire`, `noTakeTime`,
 `HunchZoneExclusive`, `WagerNonSkillLine`, `WagerNoHidden`,
@@ -3989,12 +4008,14 @@ TL- (TL-1 to TL-43), BQ1–BQ9, CC1–CC8, TP1–TP12, KT1–KT26, NF-a, KF, KB,
 - "Jammed" and `jammedUntil`: STAT prose and SH 8.2 / 13.1, same
   meaning.
 - "Iced": RS adjectives ("iced decanter"); kept for the Supper padlock,
-  flagged to the naming pass.
+  flagged to the naming pass (renamed Frost-seized padlock, naming pass NP-17).
 - "Catch" as a family word: "Antechamber Catch-up" (RS) and the class
   ability Catch Breath are different words in context; kept, flagged to
-  the naming pass.
+  the naming pass (the family renamed Clasp, naming pass NP-17;
+  Antechamber Catch-up renamed Forecourt Top-up, NP-20; Catch Breath
+  renamed Respite, NP-34).
 - "Smash": RT's verb (ABL 7.2), reused, not renamed, for the Iced
-  padlock.
+  padlock (renamed Frost-seized padlock, naming pass NP-17).
 - "Lore roster": RS's term for the Lore roster reveal (STAT 7.1, ENM
   10.6), used as written.
 - "Sluice": the HZ 6.1 sprung twin ("the sluice one-shot Soak"), kept as
@@ -4003,18 +4024,19 @@ TL- (TL-1 to TL-43), BQ1–BQ9, CC1–CC8, TP1–TP12, KT1–KT26, NF-a, KF, KB,
   geyser" (RS 8.10, HZ 6.1's sprung twin) → **Acid Gland**, a rename,
   not a use as written; "Mourners' Veil" (a Herald word) → Crepe Veil;
   "Overdue cage" and "Silence Glyph" (the Silk Mood's "Overdue" and
-  "Silence Kept") → Closed-Stack cage and Shush Glyph; "Pincushion
+  "Silence Kept"; the Silk Archive renamed the Cobweb Archive, naming
+  pass NP-17) → Closed-Stack cage and Shush Glyph; "Pincushion
   Volley" (RT's pincushion face) → Darning Volley; "Censer Tripwire"
   (HZ's censer-rope Cord in the same theme) → Thurible Wire; "Paper-Cut
   Drawer" → Paper-Cut Tray (moved off the drawer, 7.6); "Spinning
-  Target" → Blade Wheel (re-bodied, 7.7); RS 8.4's "horn tripwire" →
+  Target" → Blade Wheel (re-bodied, 7.7; renamed Swing Blade, naming pass NP-17); RS 8.4's "horn tripwire" →
   the tin-can tripwire (re-told, TL-43). "Hush" (5 hits) and "Hatpin"
   (2 hits) were avoided.
-- Theme trap flavours already named in RS (the bell tripwire, the
+- Theme trap flavours already named in RS (the bell tripwire (renamed keyring tripwire, naming pass NP-17), the
   Appeals trapdoor, the Dumbwaiter Drop, the Icicle
   Chandelier, the Whispering Catalogue, the Ink-Pot Plate, House Keys on
   Strings) and keyholders already in RS rosters (the Turnkey, the
-  Jailer, the Huntsman, the Undertaker, the Deacon, the Head Archivist,
+  Jailer, the Huntsman, the Undertaker, the Deacon, the Head Archivist (renamed Chief Archivist, naming pass NP-17),
   the Ringmaster, the Sommelier, the Landlord, the Tenant, the
   Mother-Shape): used as written.
 - Trigger Shot, the hand-trigger, Trap Eye, Sure Hands, Unweaving,
@@ -4032,7 +4054,7 @@ TL- (TL-1 to TL-43), BQ1–BQ9, CC1–CC8, TP1–TP12, KT1–KT26, NF-a, KF, KB,
   tagline); Strongroom and Dare room (taken, reused only by reference);
   the Head of the Table (the Supper boss, RS 8.9; HZ 6.17);
 - "trap room" (Herald/DH report); Lockbreaker (CMP); Mimic (SRD name; RS
-  V7 prefers original names); Patient; Lucid; Key alone (the Lucid Key).
+  V7 prefers original names); Patient; Lucid; Key alone (the Lucid Key, renamed the Clear Key, naming pass NP-17).
 
 ---
 
