@@ -1,0 +1,145 @@
+# DungeonTTRPG
+
+A turn-based RPG played in runs through a randomly generated dungeon. The goal is tabletop-style
+character building (species, class, multiclassing, a meaningful choice at almost every level) with a
+different build and a different dungeon every run. A run takes 1–2 hours, death ends it, and some
+progress carries over between runs.
+
+The hard part is the rules, not the rendering. The project is set up so the rules stay cheap to test,
+simulate and change: they live in a plain C# library with no Godot dependency, and Godot only draws
+what that library says happened.
+
+> **Status:** milestone **M0 (Skeleton)**. The rules core, its tests and a placeholder isometric
+> scene that moves one unit are in place. Most of the game exists so far as approved design documents
+> in [`docs/superpowers/specs`](docs/superpowers/specs).
+
+## Quick start
+
+Requirements:
+
+- [.NET SDK 8](https://dotnet.microsoft.com/download) (pinned in [`global.json`](global.json))
+- [Godot 4.7, .NET build](https://godotengine.org/download) (to run the game scene)
+
+Build and test the rules core:
+
+```powershell
+dotnet test Dungeon.sln
+```
+
+Build the Godot project (it is not part of `Dungeon.sln`):
+
+```powershell
+dotnet build dungeon-ttrpg/DungeonTTRPG.csproj
+```
+
+Run the game: open [`dungeon-ttrpg/project.godot`](dungeon-ttrpg/project.godot) in Godot 4.7 (.NET)
+and press Play. The main scene is [`Main.tscn`](dungeon-ttrpg/Main.tscn).
+
+### Controls (M0 demo)
+
+| Input | Action |
+|---|---|
+| Left click | Move the unit to a square |
+| Q / E | Rotate the camera |
+| 1 / 2 / 3 | Choose an option in a pending decision |
+
+All inputs are Godot input actions, so they can be remapped in the project settings.
+
+## Repository layout
+
+```
+Dungeon.sln                 Core library + tests
+Directory.Build.props       Shared settings: net8.0, nullable, warnings as errors
+src/Core/                   Dungeon.Core: the rules engine (no Godot)
+  Engine/                   Commands, events, Engine.Apply
+  State/                    Immutable GameState
+  Grid/                     GridPos, GridMap
+  Queries/                  Read-only questions, e.g. pathfinding
+  Random/                   Seeded PCG32 generator
+  Persistence/              Versioned snapshots, command logs, replay
+tests/Core.Tests/           xUnit tests, including architecture rules
+dungeon-ttrpg/              Godot 4.7 C# project (display layer)
+  scripts/                  GameController, BoardView, UnitView, IsoCamera, DecisionPanel
+  addons/godot_ai/          Third-party Godot AI (MCP) editor plugin, MIT
+docs/superpowers/
+  specs/                    Approved design documents
+  plans/                    Implementation plans per milestone
+  reviews/                  Cross-document reviews
+```
+
+## Architecture
+
+```
+ input ──► GameController ──► Command ──► Engine.Apply(state, command) ──► (new state, events)
+                ▲                                                                │
+                └──────────── plays events as animation, one at a time ◄─────────┘
+```
+
+- **`src/Core` is the only place game rules live.** `Engine.Apply` is a pure function: it takes an
+  immutable `GameState` and a command and returns a new state plus a list of events.
+- **The Godot project never changes game state.** It turns clicks into commands and plays back the
+  events it gets. What is legal comes from `Engine.Apply` and the query functions.
+- **Runs are deterministic.** The same seed and the same commands always produce the same run, so a
+  run can be saved as a command log and replayed exactly.
+- **Pending decisions.** When the rules need a choice, a decision is raised and the only valid command
+  is an answer to it.
+
+### Rules for the core
+
+These are enforced by tests and CI, not just convention:
+
+- No Godot references in `Dungeon.Core` (`ArchitectureTests`).
+- Integer arithmetic only: no `float` or `double`.
+- No `System.Random`; all randomness comes from seeded PCG32 streams stored in the state, with
+  separate streams for dungeon generation, combat and loot.
+- No iteration over unordered collections (`Dictionary`, `HashSet`).
+- Saves carry a version number; a corrupt or newer save fails with a typed error and never
+  half-loads.
+- CI fails if rule checks (`IsWalkable`, `CheckStep`, `.Step(`) show up in `dungeon-ttrpg/scripts`.
+
+Grid convention: square grid, 8 directions, diagonals cost the same as orthogonal steps, no corner
+cutting past walls. `X` grows east, `Y` grows south.
+
+## Continuous integration
+
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs on every push and pull request, on
+Ubuntu and Windows:
+
+1. `dotnet test Dungeon.sln`
+2. `dotnet build dungeon-ttrpg/DungeonTTRPG.csproj`, so a core change cannot silently break the
+   Godot project
+3. A check that the display layer contains no rule logic
+
+## Roadmap
+
+| Milestone | Contents |
+|---|---|
+| **M0 Skeleton** (current) | Solution, tests, command and event loop, placeholder isometric grid, one moving unit |
+| M1 Vertical slice | One class, levels 1–3, one generated floor, three enemy types, one boss, basic loot, permadeath |
+| M2 Full run | Four classes, companions, five floors, level 10, pick-one-of-three offers, save and resume |
+| M3 Between runs | Profile, Stairtop hub, unlocks, starting boons, difficulty ladder |
+| M4 Breadth | Species, multiclassing, more content, balance passes with the simulator |
+
+The full plan is in section 9 of the
+[main design document](docs/superpowers/specs/2026-11-15-dungeon-rpg-design.md).
+
+## Design documents
+
+The design is written before the code and approved section by section. Start with the
+[main design](docs/superpowers/specs/2026-11-15-dungeon-rpg-design.md); the other files in
+[`docs/superpowers/specs`](docs/superpowers/specs) go into detail on characters and classes, items,
+combat, dungeon generation, the camp and hub, and naming. Each change to an approved document is
+recorded with an ID (for example `NP-12` or `CH-7`) so it can be traced back to the design that
+made it.
+
+## Contributing
+
+- Put every game rule in `src/Core` and cover it with a test in `tests/Core.Tests`.
+- Keep the Godot scripts to input and presentation.
+- Run `dotnet test Dungeon.sln` and build the Godot project before opening a pull request.
+- Warnings are errors; fix them rather than suppressing them.
+
+## Licence
+
+No licence has been chosen for this project yet. The bundled `godot_ai` addon is MIT-licensed; see
+[`dungeon-ttrpg/godot-ai-LICENSE.txt`](dungeon-ttrpg/godot-ai-LICENSE.txt).
