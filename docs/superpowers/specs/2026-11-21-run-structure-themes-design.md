@@ -229,7 +229,7 @@ fallback is the likely outcome. Theme selection cannot fix the clock.
 | 5 | Two Doors at camps 1–2 and the Last Hollow choice at camp 4: built in M2, switched on only if the gates pass; otherwise random, doors in M3 | M2 or M3 | **agreed, Q2**; RT-10, RT-11 (decided text) |
 | 6 | Grim Surreal tone, charter RC1–RC9 with M2 gates, Tone Sheets, uncommitted Dreamer premise | M2 | **agreed, Q3**; RT-17 |
 | 7 | M2 themes: Gaol, Kennel Wood (F1); Drowned Choir, Cobweb Archive, Carnival (F2–3); Long Supper, Gut (F4); Dreamer's Heart (F5). Endless Wake if it passes its floor-1 test. Cut 1 and Cut 2 pre-authorised. Build order Heart and Gut first | M2 | **agreed, Q4**; RT-5 |
-| 8 | Forecourt Top-up to level 3 before the floor-1 boss | M2 | lead's call; RT-8 |
+| 8 | Forecourt Top-up to level 3 before the floor-1 boss | M1 | lead's call; RT-8; restaged M2 → M1 (agreed 2026-11-24, roadmap D-03; client told plainly) |
 | 9 | Lever 3: floors 4–5 at 2 guard posts; floor-4 boss experience 300, floor-5 lair experience 240; only in the companions 7.4 lever order | M2 | lead's call; RT-7 (told plainly) |
 | 10 | Step-5 theme overlay stays in M2 as per-theme legal overlays; the floor-5 deep overlay retires to Peril tier 3 (M3) | M2 / M3 | lead's call; RT-5, RT-6 |
 
@@ -538,6 +538,13 @@ count.
 A run is **exactly 5 floors** **(agreed, Q1)**. Main 4.1's "4–5 floors"
 is **decided** text; RT-1 amends it.
 
+**Victory is data (agreed 2026-11-24, roadmap D-08).** The floor count
+is `route.floorCount` in the configuration snapshot (11.1): 1 in M1, 5
+from M2. Descending the Downstair of floor `route.floorCount` ends the
+run in victory (`RunEnded{cause: victory}`). From M2 that floor has no
+Downstair (floor layout design 6.11), so the rule is dormant and victory
+stays at the last keeper's `BossDefeated`.
+
 | Option | Verdict | Why |
 |---|---|---|
 | Fixed 5 | **Adopted (agreed, Q1)** | Every approved table assumes it; camp 4 exists; level 10 lands on floor 5 |
@@ -657,11 +664,17 @@ more theme to build); C, variable 4–5 floors.
   encounter placement design 6.1, 6.19; segment 11 owns the tree). So
   does the `lootPlan` child of the loot stream, one per floor keyed by
   floor index, each consumer on its own keyed grandchild with a
-  reserved draw count (9 per identity draw) consumed even when unused,
+  reserved draw count (9 per identity draw) consumed even when unused
+  by live kinds (a registry row whose wave is later than the build's
+  wave is inert: the DrawLedger expects 0 draws on it until its wave,
+  as `loot/lootPlan/{N}/bossCard/*` in M1; agreed 2026-11-24, roadmap
+  D-08),
   and the approved enemies 10.5 step 3 order kept as the order of keyed
   per-floor, per-entry blocks, the dummy and ghost draws retired (change
   SV-5; M1; seeds and validation design 4.3); floor N+1's generation is committed with the camp-exit
-  save (change LE-14; M1; loot economy design 6.10). So does the
+  save (change LE-14; one floor-commit routine, called at WO1 for F1 in
+  M1 and at the camp exit from M2; loot economy design 6.10; agreed
+  2026-11-24, roadmap D-08). So does the
   `curiosities` child of each floor's dungeon substream: a fixed 12
   draws per floor *(illustr.)* in a fixed draw map, every draw consumed
   whatever the floor hosts; EventDraw runs after layout and before
@@ -745,7 +758,8 @@ more theme to build); C, variable 4–5 floors.
     separate `displayHash` outside the key; `cutState` and `shipStatus`
     sit inside the manifest); the per-floor generation identity is the
     key plus that floor's `GenInputs` digest. The
-    **configuration snapshot** holds `route.twoDoorsEnabled`,
+    **configuration snapshot** holds `route.floorCount` (11.1; agreed
+    2026-11-24, roadmap D-08), `route.twoDoorsEnabled`,
     `route.lastHollowChoiceEnabled`, `route.doorCamps[]`,
     `pacing.trimmedFloors[]` and `recruitSchedule.companionCap` (11.1;
     cross-document comparison 2026-11-23, CC-83), the `layout.*`
@@ -2535,7 +2549,7 @@ Unlockable themes and final bosses are main 4.7 content, never power
 | Mechanic | Adds | Time cost | Verdict |
 |---|---|---|---|
 | **Strata Draw** (route pre-roll, bands, pool rules, enumerator) | Deterministic variety, shareable seeds | 0 | **Adopted, M2** |
-| **Forecourt Top-up** | Level 3 before the floor-1 boss | 0 | **Adopted, M2** |
+| **Forecourt Top-up** | Level 3 before the floor-1 boss | 0 | **Adopted, M1** (agreed 2026-11-24, roadmap D-03) |
 | **Stratum Card, camp card, dream track** | Theme readability; the act moment; the road not taken | 0 | **Adopted, M2** |
 | **Souvenirs** (finale dressing plus one prop) | A personal finale | 0 | **Adopted, M2** (echo *types* M4) |
 | **Two Doors** (camps 1–2) | One real decision per camp | about 15 s per camp | **Built M2; on only if the gates pass; else M3 (agreed, Q2)** |
@@ -2595,7 +2609,13 @@ compliant floor-1 bosses; determinism.
 - M4 adds echo types (at most 1 per encounter, at most 2 encounters,
   curated to the Heart's 6).
 
-### 9.4 Adopted in full: Forecourt Top-up (M2; RT-8)
+### 9.4 Adopted in full: Forecourt Top-up (M1; RT-8)
+
+(Agreed 2026-11-24, roadmap D-03: the floor-1 Top-up,
+`antechamberCatchUpApplied`, `AntechamberCatchUp` and the BR-3 F1 guard
+are staged M1, so the M1 hero always meets Old Ragged at level 3. Take
+Places, the Sanctum rest rule, Glimpses, the per-class reports and camp
+catch-up keep their own waves. Client told plainly.)
 
 - **Trigger (lead's call on the details, after the check):** the event
   `AntechamberCatchUp` fires on the earlier of (a) the hero's first
@@ -2607,16 +2627,46 @@ compliant floor-1 bosses; determinism.
   6.11). The
   hero's experience becomes max(current, 540). It is **idempotent**: the
   floor-1 run state holds `antechamberCatchUpApplied`, and it never
-  fires twice.
+  fires twice. The flag is set by the committed command that fires the
+  event, saved in the run save and rebuilt by replaying the command log
+  (the suspend slot is M2). The event and its level-up screens draw from
+  no stream. A hero already at 540 or more still fires it: the flag is
+  set, the overflow is recorded, and no level-up is raised. In M1, (a)
+  applies to out-of-combat moves only: a move path entering a Forecourt
+  square ends on the first such square. This is a rule of the M1 move
+  command itself, not one of the M2 noticing pre-stops: the command runs
+  its `KnowledgePass` for that step first, and if the pass does not
+  start combat the event fires at the end of the same committed command.
+  Because the arena is reachable out of combat only through the
+  Forecourt (floor layout LG4, LG5), (a) always fires first in M1 and (b)
+  is a refusal at no cost: nothing commits, no action or draw is spent,
+  nothing is logged, and it never fires the event (agreed 2026-11-24,
+  roadmap D-03).
 - **If combat is active, it defers** to the combat-end level-up screen
   (ability 6.9: never during combat), including when a fight that began
   elsewhere ends with the hero already in the antechamber. The arena
-  cannot be entered until it resolves.
+  cannot be entered until it resolves. At combat end, banked kill shares
+  are paid first, each scaled at the hero's pre-Top-up level (enemies
+  16); then the Top-up applies if the flag is still false and the hero
+  stands on a Forecourt square; then one level-up screen resolves every
+  level gained, in level order. A hero not on a Forecourt square at
+  combat end carries nothing over: the lock holds and the next Forecourt
+  square fires (a). Until the flag is set and its level-up resolves, an
+  attempt to move into an arena square (doorways included) is refused,
+  and forced movement of a party unit stops short before an arena square
+  exactly as before a hazard square (conditions 10.1), with no collision and
+  no collision damage; forced movement of enemies is unchanged. The move
+  preview greys only the arena squares the party already knows and shows
+  the Forecourt Top-up line as the reason. A level-up raised out of
+  combat opens the same pending-decision screen at once, and nothing else
+  commits until it resolves (agreed 2026-11-24, roadmap D-03; ability
+  6.9).
 - The level-up resolves as an ordinary one, including the level-3
   subclass pick (classes 7.3). The antechamber gives a short safe walk to
   read the new kit before the boss.
-- **Overflow** on a full clear is shown on the level-up screen ("ahead
-  of the dream"), so carry-over feels earned.
+- **Overflow** on a full clear is shown on the level-up screen as a
+  plain number on the Forecourt Top-up line (naming pass 5.3.32; display
+  only; agreed 2026-11-24, roadmap D-03), so carry-over feels earned.
 - **Every floor-1 layout has an antechamber that dominates the arena**
   (`AntechamberDominatesArena`, a generation assertion owned by the
   layout segment) **(new lead's call; strengthened after the check)**:
@@ -2637,26 +2687,40 @@ compliant floor-1 bosses; determinism.
   host at the floor's fight-room size, with at most two Circuit side
   rooms; it is never guaranteed safe while the patrol lives (told
   plainly). The Top-up stays floor 1 only.
-- **Reports:** `AntechamberCatchUpRate` per class *(illustr.: about 100%
+- **Reports:** `AntechamberCatchUpRate` per class (M1: the Vanguard,
+  split bypass and full clear, report only, with F1 `BossDeathShare` as
+  a baseline for the M2 gate; per class from M2; agreed 2026-11-24,
+  roadmap D-03) *(illustr.: about 100%
   of bypass runs, about 5% of full clears)*; the camp catch-up's "under
   20%" target (enemies 16) applies to **camps 2–4**.
 - **Reruns at level 3:** the enemies 6.4 floor-1 boss guards and
   `Floor1ClassSpread`. `Floor1BossSustain` is already at level 3 (DH 21.1
-  step 6), so DH needs no recalibration.
+  step 6), so DH needs no recalibration. From M1, the reference hero and
+  the lowest legal hero (its definition kept: tier 6, Con −1, at the
+  AR-20 lowest legal AC) are taken at level 3 for the floor-1 boss term
+  only; non-boss encounter slots, including their share of the floor-1
+  cumulative round-1 budget, stay at their earliest legal room level.
+  `Floor1ClassSpread` stays M2 (agreed 2026-11-24, roadmap D-03).
 - **Told plainly:** in effect the first boss always meets a level-3
   hero.
-- **Boss rooms (read, not changed; change BR-3, BR-4; M2; boss rooms
-  design 4.2.1, 4.2.2):** from M2, while the Top-up is enabled and
+- **Boss rooms (read, not changed; change BR-3 M1 (agreed 2026-11-24,
+  roadmap D-03), BR-4 M2; boss rooms design 4.2.1, 4.2.2):** from M1,
+  while the Top-up is enabled and
   `antechamberCatchUpApplied` is false, the boss and escort cannot
-  notice the party, so the hero meets the F1 boss at level 3 (M1 has
-  no guard); the Top-up resolves before `ArenaEngaged` on the same
-  tick. A party unit entering an arena square counts as noticed, so
+  notice the party, ignore noise and cannot join a fight (enemies 12.4),
+  and stay inside the arena, so the hero meets the F1 boss at level 3;
+  the Top-up resolves before `ArenaEngaged` on the same
+  tick (from M2; in M1 the two never fall on the same tick, and the
+  command log holds `AntechamberCatchUp`, then `ArenaEngaged` on a later
+  command). A party unit entering an arena square counts as noticed, so
   the boss fight starts as a notice, with Take Places as its placement
-  step. The floor-1 Forecourt is near-safe only before engagement: from
+  step (M2; in M1 that step is skipped, not stubbed, and the ordinary
+  combat start follows). The floor-1 Forecourt is near-safe only before engagement: from
   the first `ArenaEngaged` until the boss falls, no short rest is taken
   while any party unit stands in the Sanctum (Forecourt, arena,
-  the Downstair) (change BR-31; agreed, boss rooms Q2; boss rooms design
-  4.2.5).
+  the Downstair) (change BR-31; agreed, boss rooms Q2; M2, and in M1 a
+  Forecourt rest follows the settled "no aware hostile" rule, agreed
+  2026-11-24, roadmap D-03; boss rooms design 4.2.5).
 
 ### 9.5 Adopted in full: camp card, Stratum Card and dream track (M2; RT-10, RT-12)
 
@@ -2738,7 +2802,9 @@ All model numbers are *(illustr.)*. They come from toy scripts
 
 **Floor 1:** a full clear reaches 539–557 at the door (level 3 in 95% of
 room orders); a bypass reaches 455–482 (level 3 never); the Forecourt
-Top-up covers it.
+Top-up covers it (M1 and later; agreed 2026-11-24, roadmap D-03): the
+door level is 3 in every run, and level scaling changes only the
+overflow.
 
 **Carry-over:** full clears run about 1 level ahead of the enemies 6.3
 table from floor 2. Trimming floors 4–5 pulls the hero back toward the
@@ -2878,7 +2944,9 @@ still need condition squares, which the Supper never has.
   (M3) drives the Peril kind additions only and never changes
   ladder% (main 4.7 **(decided)**, "kind, not stats"; RT-21)
   (cross-document comparison 2026-11-23, CC-84)):
-  `route.twoDoorsEnabled`, `route.lastHollowChoiceEnabled` (both false
+  `route.floorCount` (integer; 1 in M1, 5 from M2; 6.1; the route
+  pre-roll's draw count does not depend on it; agreed 2026-11-24,
+  roadmap D-08), `route.twoDoorsEnabled`, `route.lastHollowChoiceEnabled` (both false
   by default; 6.11), `route.doorCamps[]` (M2: [1, 2]),
   `pacing.trimmedFloors[]` (default empty; lever 3: [4, 5]; 10.2
   response: [3, 4, 5]), `recruitSchedule.companionCap` (3, or 2 under
@@ -3057,9 +3125,9 @@ Two Doors switch agreed, Q2)**
 
 | Wave | Content | Structure |
 |---|---|---|
-| **M1** | Kennel Wood subset: Kennel Mastiff (the settled Bleeding-claw brute), Huntsman (the M1 warhammer-and-shield soldier), Poacher (the M1 sling marksman), and Old Ragged (the approved M1 boss kit) (change RT-22; cross-document comparison 2026-11-23, CC-2). Terrain: Tall and Low pieces as blockers only, per room terrain design 12 M1 (change TR-31; cross-document comparison 2026-11-23, CC-86); Old Ragged's architectural root-columns are template walls that are not terrain pieces, the Den's line-of-sight blockers (change BR-1, told plainly; boss rooms design 4.1, 5.3) | One floor. The route pre-roll code ships returning the single theme, so determinism tests start early. The M1 art and kit carry into M2 |
+| **M1** | Kennel Wood subset: Kennel Mastiff (the settled Bleeding-claw brute), Huntsman (the M1 warhammer-and-shield soldier), Poacher (the M1 sling marksman), and Old Ragged (the approved M1 boss kit) (change RT-22; cross-document comparison 2026-11-23, CC-2). Terrain: Tall and Low pieces as blockers only, per room terrain design 12 M1 (change TR-31; cross-document comparison 2026-11-23, CC-86); Old Ragged's architectural root-columns are template walls that are not terrain pieces, the Den's line-of-sight blockers (change BR-1, told plainly; boss rooms design 4.1, 5.3) | One floor, with the floor-1 Forecourt Top-up and its F1 guard (9.4; `antechamberCatchUpApplied`; agreed 2026-11-24, roadmap D-03). Descending the floor-1 Downstair ends the run in victory (`route.floorCount` 1; 6.1; agreed 2026-11-24, roadmap D-08). The route pre-roll code ships returning the single theme, so determinism tests start early. The M1 art and kit carry into M2 |
 | **M2, first** | Build order: **the Heart and the Gut first** (they carry the companions "M2 first" floors 4–5 slice), then Kennel, Gaol, the Midwater themes, the Supper. The Wake only if gated in (8.2) | The floor-time slice (companions 7.4) runs on the Heart and the slowest floor-4 theme |
-| **M2** | 8 themes (8.1) **(agreed, Q4)** | Strata Draw; Forecourt Top-up; cards and dream track; Souvenirs; the RT-7 lever form (only in lever order); V1–V7; ThemeParity, ClassThemeSpread, FloorTimeByTheme, LevelAtDoorByFloor; readability gates; **Two Doors and the Last Hollow choice built, switched on only if their gates pass (agreed, Q2)** |
+| **M2** | 8 themes (8.1) **(agreed, Q4)** | Strata Draw; per-class `AntechamberCatchUpRate` (the Top-up itself moves to M1; agreed 2026-11-24, roadmap D-03); cards and dream track; Souvenirs; the RT-7 lever form (only in lever order); V1–V7; ThemeParity, ClassThemeSpread, FloorTimeByTheme, LevelAtDoorByFloor; readability gates; **Two Doors and the Last Hollow choice built, switched on only if their gates pass (agreed, Q2)** |
 | **M2 prerequisites owed by other owners, before rosters freeze** | RT-3 (enemies 10.5 steps 1 and 6), RT-4, RT-6, RT-7, RT-8 (enemies 16), the RT-9 rows in enemies 17.5 and 20.1, RT-17's enemies rows (enemies owner); RT-8 (classes 7.3: classes owner; companions 7.1 and 7.11: companions owner); RT-9's Herald 7.16 sentence (Herald owner); RT-13, RT-14, RT-16 (conditions owner); RT-12 and the DH 19.3 row of RT-10 (DH owner); RT-20 (trinkets owner). **Applied by their owners:** every row listed here except RT-14 and RT-16, which stay pending rulings (cross-document comparison 2026-11-23, CC-87) | — |
 | **M2 cut lines** | **Cut 1, graded (change BR-26; agreed, boss rooms Q1; M2; boss rooms design 4.10.4), in this order:** **1a** drops the Appetite **only if it is not yet built** at that review (a no-op otherwise); **1b** drops the Thing in Cell Zero, folded into the Jailer as the Rendition "Cell Zero Opens". **Cut 2:** 1a and 1b, and drop the Supper (floor 4 fixed Gut), **with the Cut 2R rider: Cut 2 never drops a built Appetite**. 1a, 1b and Cut 2 are **pre-authorised (agreed, Q4; graded, boss rooms Q1)**. **1c** drops the Master in the Frame, folded into Old Ragged as the Lord's Gallery Guise; it sits below Cut 2 and is **client-only**. The applied cuts are stamped as `cutState` into the content version (boss rooms design 9.1). Below Cut 2, the approved-scope floor (Gaol and Kennel on F1, Choir and Archive on F2–3, Gut on F4, floor 5 as a step-5 deep overlay of the floor-4 theme not drawn, re-passing its 6) needs the client | Under Cut 2, floor 4 has no choice anyway; under the approved-scope floor, random draws only |
 | **M3** | Unlocks in 8.12's order; the Supper's F3–4 band and its F3 boss; a second boss for every M2 (theme, floor) cell that has only one; the third final boss; the Lore roster preview at camp; Fragments plus codex (Fragments folded into Curiosity F-BOSS options; change EV-29; events design 4.9). **Pending request (change EV-37; RS owner; M3; events design 4.9):** segment 8 co-owns the codex's Curiosity pages (Retellings collected and options seen, never power or gating rule text, write-only from the run's view); the RS owner owns the codex and segment 10 hosts it. **Exploration and information (change XI-29; M3; exploration and information design 6, 7):** segment 10 hosts the codex (the RS owner owns it); the **Floor Atlas** (each floor's final map in the run record, with "Treasures found k of n" and no rooms-entered fraction, never a score), whose previous-floor page shows on the camp dream track; the death-recap map; and the Dream map skin, an option over the plain map gated by the greyscale, colour-blind and glance gates (7.4). **Camp and hub (M3; camp and hub design 4.15.8):** the codex gains a "Residents of the Hollows" page per ambient figure, filling as its chain beats are heard (Straggler pages under their theme; a completed chain adds a plate), write-only from the run's view and never gating; the RS owner owns it and segment 10 hosts it. **Starting kits (M3; agreed, starting kits Q3; starting kits design 4.5.2, 10):** the codex gains an "Oddments" page in the Library (camp and hub design 4.15.8), filled on sight, write-only from the run's view, one plate per completed kit pool behind "a win as <class>"; the RS owner owns it | Two Doors (if its gates failed in M2) and at camp 3 once the floor-4 pool is 3 or more; Omens; Peril tiers 1–3; Perilous Door; Seams; profile-side anti-streak outside seeded runs (Launcher Fallow on the F1 Curiosity is pulled into M2: change EV-20; agreed, events Q1; 6.4 R-SEED-6; the launcher F1-boss streak rule is pulled into M2: change BR-25; agreed, boss rooms Q1; 6.4 R-SEED-6) |

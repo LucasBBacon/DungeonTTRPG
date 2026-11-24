@@ -371,7 +371,7 @@ Each source is one `LootSocketRecord` with exactly one `kind` and one `rank`, or
 | `activity` | Dice pot, feast plate, etc. | unranked | coin and sundries | M2 | EP 13 |
 | `purse` | Heavy Purse tag on a carrier | unranked (carrier tag) | coin | M2 | LE 8.3 chain. A tag on a carrier socket, not a socket of its own, and outside the deal. Never on the elite or a Windfall |
 | `signatureCache` | The guarded signature | unranked | boss | M1 | IR 4.13 |
-| `bossCard` | Reward screen | unranked | boss | M1 | A ledger kind with no world object and no square; LootBind skips it |
+| `bossCard` | Reward screen | unranked | boss | M1 (kind enumerated; empty field, 0 ledger line, inert stream); M2 (entries and offer, LE-3) | A ledger kind with no world object and no square; LootBind skips it. In M1, LootPlan builds no entries and draws nothing on its block (agreed 2026-11-24, roadmap D-08) |
 | `viaticum` | F5 provisions container, in the lair room's host socket | unranked (boss channel; `leanRoute` flag) | boss share | M2 | A boss-channel offer, not a container draw (LE 6.11 item 5): outside the deal and the within-rank shuffles. Opens the width-3 offer UI (lead's call, after the check: the proposal ranked it SR0) |
 
 **Not world objects:** salvage, the camp channel (hook; its content set by the camp and hub design 7.1, change CH-15), the Memento (victory screen) and `bossCard`'s screen have no square. Of these, only `bossCard` is a kind, kept in the ledger so the 25 kinds cover every channel. **The Annex has no socket**: its prize is what it serves (settled, LE 6.9 item 1).
@@ -878,7 +878,7 @@ The open square is walkable, safe, and reachable from the walk line (4.2) withou
   - **The Washstand silhouette hosts only the Parting Fare** **(new lead's call)**: no other container, Furnishing, piece or Souvenir on any floor uses it (V15s `BedsideStandOnly`), so the exception never leaks.
   - The lean band is computed with the Parting Fare counted in every arm, stealth or fight (CB10).
 - **Signature cache.** One per guarded-form boss, in its arena, per 4.4. Unranked, never locked or trapped, holds nothing else, opens on `BossDefeated` (boss rooms design 4.2.4; BR-37, M2).
-- **Armed boss:** carries its signature. Segment 9 authors each boss's `armed` flag and issue gear so a carried form is the piece the boss visibly uses, chassis only; no second form is chosen on F5 (boss rooms design 4.11.1; BR-27, M2). **Boss card:** C/U/R/R on F1–F4, separate screen. **Memento:** victory screen.
+- **Armed boss:** carries its signature. Segment 9 authors each boss's `armed` flag and issue gear so a carried form is the piece the boss visibly uses, chassis only; no second form is chosen on F5 (boss rooms design 4.11.1; BR-27, M2). **Boss card:** C/U/R/R on F1–F4, separate screen (change LE-3; M2; none in M1, agreed 2026-11-24, roadmap D-08). **Memento:** victory screen.
 
 ### 4.11 Determinism (lead's call; LE 6.10, RS 6.4)
 
@@ -1516,7 +1516,7 @@ Applied on 2026-11-22, when the client approved this document. **This document e
 | LP-33 | CMP 8.6 (the closed `targetRule` enum and the suggestion scorer; the simulator's companion policy); reads **MAIN 4.2 (decided)** | The Truant as a legal suggestion and simulator-policy target, never an autonomous act; no "Nab it" order (4.7.8; recast after the check) | ⚑ **Decided** (MAIN 4.2, read); ⚑ **Agreed** (CMP 8.6, ability 11.3 suggestion status) | Lead's call; CMP owner (request) | M3 |
 | LP-34 | TL 6.13 kinds (Ebb); RS 7.4 RC1 closed motion list (fade act); C 5.5 and HZ 6.10 (readings) | Ebb container kind (4.7.11) | ⚑ **Agreed** (RS 7.4 RC1); **Q3** | **Client (Q3, agreed 2026-11-22: held to M4)**; traps and RS owners | M4 |
 
-Waves: LP-31 (V15 M1 rows) and the M1 subsets of 4.2 to 4.4 in M1; LP-8 to LP-28 except LP-26 in M2; LP-1 to LP-7, LP-26, LP-29, LP-30 and LP-33 in M3; LP-34 in M4.
+Waves: LP-31 (V15 M1 rows), the M1 subsets of 4.2 to 4.4 and the `bossCard` kind's enumeration in 4.1 (inert until M2; agreed 2026-11-24, roadmap D-08) in M1; LP-8 to LP-28 except LP-26 in M2; LP-1 to LP-7, LP-26, LP-29, LP-30 and LP-33 in M3; LP-34 in M4.
 
 ---
 

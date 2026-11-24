@@ -315,7 +315,7 @@ the death curve.*
 | 12 | A Wax-Keyed consequence cache yields its ordinary identity; the opening history selects (6.9 item 4) | M2 | **agreed, Q2**; LE-11 ⚑ |
 | 13 | K2 made computable on a rule-derived expected Wax-Key value per floor; K2b band | M2 | lead's call; LE-12 |
 | 14 | The Dream's Due, alternating hero / lowest member | M1 (F1 hero arms), M2 | lead's call, told plainly (DH 5.4 reading); LE-13 |
-| 15 | Determinism: the LootPlan step on a keyed child stream, unchanged approved order, the draw-free LootBind pass after `trapsResolve`, atomic camp-exit commit, `LootLedger` | M1 | lead's call; LootPlan and LootBind: lead's call, after the check; LE-14 ⚑ |
+| 15 | Determinism: the LootPlan step on a keyed child stream, unchanged approved order, the draw-free LootBind pass after `trapsResolve`, atomic floor commit (M1: WO1 for F1; M2: the WO5 camp-exit commit; agreed 2026-11-24, roadmap D-08), `LootLedger` | M1 | lead's call; LootPlan and LootBind: lead's call, after the check; LE-14 ⚑ |
 | 16 | Treasure count and Grave Goods (run record) | M2 | lead's call; LE-15 |
 | 17 | Heavy Purse on F2–F4 | M2 | lead's call; LE-16 ⚑ |
 | 18 | Category weights by depth; F5 tactical cap; `foundSupplyPerFloor` pre-wired | M2 | lead's call; LE-17 |
@@ -707,7 +707,10 @@ C as a base: it overpowers through selection (F3 party gear 18.7 against
    base + 2: that shortfall is the agreed price of the safe route (Q2)
    **(lead's call, after the check)**.
 4. **Ledger C (coin)** = the floor's coin pool (6.4), plus any logged
-   fallback coin (6.4 item 8).
+   fallback coin (6.4 item 8). Kit coin (changes SK-1, SK-3; starting kits design 4.1, 4.2)
+   is recorded in `LootLedger` on its own `kit` source line, outside
+   Ledger C; V13g (i) "pools sum exactly" compares the floor pool against
+   floor sources only **(agreed 2026-11-24, roadmap D-08)**.
 5. **Reporting views.** Gold-equivalent = VP × 20; sundries in
    VP-equivalent (price ÷ 20); `HealSupplyPerFloor` (DH). None is
    budgeted against notables.
@@ -811,13 +814,19 @@ floor has a binding **base variant** and, where the gates allow, an
 **alternate variant** of exactly the same VP; one fixed draw on
 `lootPlan` picks between them (1:1 *(illustr.)*).
 
-| Floor | Base variant (binding shape) | Alternate variant *(illustr.)* | Field VP | Signature (M2) | Boss card | Ledger A | Floor VP |
+| Floor | Base variant (binding shape) | Alternate variant *(illustr.)* | Field VP | Signature (F1 M1; F2–F4 M2) | Boss card (M2) | Ledger A | Floor VP |
 |---|---|---|---|---|---|---|---|
 | F1 | C C U U U | none: one variant | 8 | U + authored ≈ 3 | C (a tier-1 scroll), 1 of 3 | 6 | 12 |
 | F2 | C U U U U U | **fit variant:** the same cards, one U a fit premium | 11 | U + authored ≈ 3 | U, 1 of 3 | 7 | 16 |
 | F3 | U U U R R R | **spiky:** C U R R R R | 15 | R + authored ≈ 4 | R, 1 of 3 | 7 | 22 |
 | F4 | U R R R R VR (the run's first VR beside a U) | **fit variant:** the same cards, one R a fit premium | 18 | R + authored ≈ 4 (VR + authored ≈ 5 once VR gear records exist) | R, 1 of 3 | 7 | 25 |
 | F5 | U R R R R R | **spiky:** C R R R R VR | 17 | none (the Memento, 0 VP); the Parting Fare at R ≈ 3 | none | 7 (6 field + the Parting Fare) | 20 |
+
+F1's signature (Old Ragged guarding Hound-Collar Mail, with its
+"Guards:" line, change IR-13) ships in M1. The boss card ships in M2
+(change LE-3). In M1, F1 Floor VP is 11 (field 8 + signature 3) and
+Ledger A is 6; the F1 row's Floor VP of 12 applies from M2 **(agreed
+2026-11-24, roadmap D-08)**.
 
 **Variant rule (new lead's call; told plainly).** "Spiky" means the same
 VP concentrated into fewer, higher cards **where the depth gates allow
@@ -888,7 +897,12 @@ premium and is logged; its VP is unchanged.
   toward family caps once taken; outside Ledger A and the
   3-per-encounter cap (ENM 15.1, kept). No final-boss card (6.11).
   Offered in the arena after `BossDefeated`, beside the opened cache
-  (read unchanged by the boss rooms design 4.11.2; change BR-28).
+  (read unchanged by the boss rooms design 4.11.2; change BR-28). M2.
+  In M1 there is no card: the LootPlan `bossCard` field is serialised
+  empty (`options: []`, `taken: none`, `fallback: none`), `LootLedger`
+  carries a `bossCard` line fixed at 0, and the `bossCard` kind is
+  registered reserved and inert, drawing 0 (6.10) **(agreed 2026-11-24,
+  roadmap D-08)**.
   - **Usability (lead's call, after the check).** "Usable" reads the
     party snapshot at generation (camp exit), the only party state any
     draw may read; a death on the floor does not re-roll the card. Outside
@@ -1735,7 +1749,11 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    so adding a consumer (an M3 feature, a fallback) never shifts another
    consumer's draws. Every identity draw reserves **9 draws** (1 + the 8
    approved rerolls), consumed even when unused, so counts never depend
-   on data (R-SEED-3; V13 (m) test).
+   on data (R-SEED-3; V13 (m) test). Reserved counts are consumed by
+   live kinds; a registered row whose registry wave is later than the
+   build's wave is **inert** and consumes 0 draws until its wave (the
+   `lineRoll` precedent; R-SEED-3 as amended in RS 6.4) **(agreed
+   2026-11-24, roadmap D-08)**.
 
    | Kind | Draws per entry | Entries |
    |---|---|---|
@@ -1746,8 +1764,8 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    | `armsFloor` | 9 | 1 (F2; consumed on every floor, used only when constrained) |
    | `fitPremium` | 9 | per fit-premium entry |
    | `waxKeyIdentity` | 9 | per consequence cache with a card |
-   | `bossCard` | 9 | 4 options (3 shown, the fourth a dreamed option) |
-   | `bossCardFallback` | 9 | 5: entry = option index 0–3, plus entry 4, the hero-guarantee redraw (change IR-14; M2) |
+   | `bossCard` | 9 | 4 options (3 shown, the fourth a dreamed option); registered in M1 with `wave: M2`, so reserved and inert in M1, live from M2 **(agreed 2026-11-24, roadmap D-08)** |
+   | `bossCardFallback` | 9 | 5: entry = option index 0–3, plus entry 4, the hero-guarantee redraw (change IR-14; M2; not registered until M2, agreed 2026-11-24, roadmap D-08) |
    | `viaticum` | 9 | 4 options (F5) |
    | `viaticumFallback` | 9 | 5 (F5): as `bossCardFallback` (change IR-14; M2) |
    | `wager` | 9 | 4 options (M3) |
@@ -1839,7 +1857,16 @@ sidegrades (ITEMS 2 goal) and never break +5 (STAT 2).
    resolves at camp entry on its own keyed `recruit/camp/{k}/gap`
    (CMP 7.3; text fix, change SV-31). The commit is write order WO5 at
    Travel on, F(N+1)'s own first safe point (read by change SV-14;
-   seeds and validation design 4.8.3).
+   seeds and validation design 4.8.3). **Staging (agreed 2026-11-24,
+   roadmap D-08):** LE-14 is one GS17 floor-commit routine with two call
+   sites, in the seeds and validation design 4.8.3 order: stage digests
+   closed; the floor's static file written and flushed; then `run.save`
+   replaced atomically. A run exists only once that `run.save`
+   lands; an orphan static file is deleted on load by the `runId` and
+   `seq` rule (seeds and validation design 4.8.1). M1 calls it at WO1 for
+   F1 (no `pendingProfile`, no profile write). M2 calls the same routine
+   unchanged at WO5, with `GenInputs` frozen from the camp-exit state. M1
+   has no camp-exit event and builds no camp-exit stub.
 7. **Inputs from outside the stream:** the party's `requires` tags and
    owned bases (**settled**), plus, for the Due, fit premiums and the
    usability fallbacks, the same party snapshot at generation (owned
@@ -2242,8 +2269,8 @@ no more loot-bearing containers than fillers (6.4 item 5).
 | Alternate variant | — | fit variant | C U R R R R | fit variant | C R R R R VR |
 | Field VP | 8 | 11 | 15 | 18 | 17 |
 | Signature / Parting Fare VP | 3 | 3 | 4 | 4 (M2) | Parting Fare 3 |
-| Boss card | C (1) | U (2) | R (3) | R (3) | none |
-| Floor VP (base) | 12 | 16 | 22 | 25 | 20 |
+| Boss card | C (1) from M2; none in M1 **(agreed 2026-11-24, roadmap D-08)** | U (2) | R (3) | R (3) | none |
+| Floor VP (base) | 12 from M2; 11 in M1 **(agreed 2026-11-24, roadmap D-08)** | 16 | 22 | 25 | 20 |
 | Step allowance | ≤ 2 | ≤ 2 | ≤ 2 | ≤ 2 | ≤ 2 |
 | Coin pool, cap 3 (salvage 12% inside) | 35 | 50 | 70 | 90 | 0 |
 | Coin pool, cap 2 | 35 | 50 | 70 | 75 | 0 |
@@ -2710,7 +2737,9 @@ each with its named action:
   lock; loot-bearing containers ≤ fillers. *Action:* 7c removes the
   extra containers or locks in fixed order (highest socketId first),
   logged. The camp-4 coin warning is present (a UI presence check).
-- (i) Coin: pools sum exactly (fallback and withheld coin excluded);
+- (i) Coin: pools sum exactly (fallback and withheld coin excluded; kit
+  coin sits on its own `kit` line and is compared against no floor pool,
+  6.1 item 4, agreed 2026-11-24, roadmap D-08);
   lumps integer ≥ minimum; the carve ≤ 60% of found coin; F1 main-path
   coin ≥ 17; the Heavy Purse ≤ 20% of found coin, absent on F1 and F5;
   non-healing doses ≥ coin-only locks beyond the carve cap. *Action:*
@@ -2724,9 +2753,15 @@ each with its named action:
   entry consumes its declared count and perturbing one block's entry
   count moves no other block (V19t block independence; the ghost and
   dummy count draws are retired, change SV-5); `loot/run` always 3
-  draws; every `lootPlan` grandchild consumes its reserved count; the fourth
+  draws; every `lootPlan` grandchild consumes its reserved count (a
+  reserved and inert kind, such as `bossCard` in M1, consumes 0 until its
+  wave); the fourth
   dreamed option drawn on every width-3 offer from M2, door or no door;
-  generation committed with the camp-exit save (WO5). The V19g
+  generation committed in order with its save: in M1, F1's static file
+  then `run.save` seq 1 at WO1, where a crash injected before `run.save`
+  lands leaves no run, only an orphan static file that load deletes; from
+  M2, floor N+1 with the camp-exit save (WO5) **(agreed 2026-11-24,
+  roadmap D-08)**. The V19g
   DrawLedger calls (m) at every stage end; this row stays its citation
   (change SV-19; seeds and validation design 5.2).
 
@@ -2799,8 +2834,8 @@ other names keep their meaning under their qualified ids.
 
 | Wave | Contents |
 |---|---|
-| **M1** | The F1 deck (single variant, inside M1's own split; at most 1 carried weapon or armour); the hero-arms Due on F1; the coin counter (F1 pool 35, main-path floor 17, the salvage share of 4 per fight then per unit, LE-7, LE-8); the LootPlan step on the keyed `lootPlan` stream and the LootBind pass; `LootLedger`; the atomic commit; V13s (a), (c); V13g (g), (i) on F1; the (m) integration test |
-| **M2** | Decks F1–F5 with variants; boss card counting; the camp channel of 2 graded for N+1; the coin pool, salvage share, Sell 250‰; K2 / K2b; the full Due with the fixed-deal scorer; the Risk Ledger for consequence locks, locks, secrets, the elite and the bait cache; Wax-Key identities and the mixed-route rule; the fourth dreamed option drawn (not shown); the usability fallbacks; the elite intel line; the F5 reshape (Parting Fare, Memento, the camp-4 warning); Treasure count and Grave Goods; the Heavy Purse; category weights and the F5 cap; V13 in full; all reports, kPC first; the camp reward card's content and party-keyed vendor potion stock (camp and hub owner; changes CH-15, CH-16; camp and hub design 7.1, 7.2) |
+| **M1** | The F1 deck (single variant, inside M1's own split; at most 1 carried weapon or armour); the hero-arms Due on F1; the coin counter (F1 pool 35, main-path floor 17, the salvage share of 4 per fight then per unit, LE-7, LE-8); the LootPlan step on the keyed `lootPlan` stream and the LootBind pass; `LootLedger`; the atomic floor commit in its WO1 form (6.10 item 6); the reserved, empty `bossCard` LootPlan field, its 0 ledger line and its inert stream kind (no card offered); the `kit` coin line in `LootLedger` (agreed 2026-11-24, roadmap D-08); V13s (a), (c); V13g (g), (i) on F1; the (m) integration test |
+| **M2** | Decks F1–F5 with variants; boss card counting; the boss card offer and its live draws; the WO5 camp-exit call of the floor commit (agreed 2026-11-24, roadmap D-08); the camp channel of 2 graded for N+1; the coin pool, salvage share, Sell 250‰; K2 / K2b; the full Due with the fixed-deal scorer; the Risk Ledger for consequence locks, locks, secrets, the elite and the bait cache; Wax-Key identities and the mixed-route rule; the fourth dreamed option drawn (not shown); the usability fallbacks; the elite intel line; the F5 reshape (Parting Fare, Memento, the camp-4 warning); Treasure count and Grave Goods; the Heavy Purse; category weights and the F5 cap; V13 in full; all reports, kPC first; the camp reward card's content and party-keyed vendor potion stock (camp and hub owner; changes CH-15, CH-16; camp and hub design 7.1, 7.2) |
 | **M3** | Wager, Dare, boxed lurker and Strongroom ranks (the Annex has no rank of its own); the Twin Coffer; the Perilous Door reveal (Q5; shown only, the option drawn since M2); unlock normalisation; the memento wall (the Memento wall station in the hub; camp and hub design 5.2); camp hooks if the camp owner takes them (the camp and hub design takes the Tithe Bowl in M3, promotes the Ferryman's Note, then Blood Price, only on `TonicShareOfSpend`, and holds The Long Shot Later; its 5.4); the Perilous toggle at the camp's door station (change CH-20; camp and hub design 7.6) |
 | **M4** | Curses at a discount (8.5; moved from Later by change HL-29 ⚑; agreed, heirlooms and curses Q5; *CON budget reading pending*, else Later unchanged; heirlooms and curses design 10) |
 | **Later** | The trader carve (ITEMS 10.9, I-14); daily seeds fixing class; arena-keyed Parting Fare tools; the Burdened twin, Redeemed and the Crooked Road rule (8.5; changes HL-23, HL-24, HL-21 as a request) |
@@ -2998,7 +3033,7 @@ and take effect at that wave.
 | **LE-11** | **TL 6.11 consequence-lock bullet and the BQ5 line "roll it, force it, Wax-Key it, or leave it" (the lead's answer accepted by the client)**; TL 6.11 Wax Key route row (read: no consequence, kept); TL 6.11 Unbolting row and Runed row's Unweaving (read: no consequence, so they pay the Wax-Key identity); TL 6.11 Crier sounding (`crierSpent`, read as exposure) | A consequence cache holds a stepped and a Wax-Key identity; `consequenceExposed` selects across mixed routes; Portal locks apply it to one socket beyond (6.9) | **Agreed** (BQ5, accepted); **Q2** | **Client (agreed 2026-11-22, Q2)**, with this document; TL owner applies |
 | LE-12 | CN 9.3 K2 bullet (defined; K2b added); TL 6.11 Wax Key bullet (peg wording); DH 12.5 step 7(c) (lock and overflow sundries re-placed by LootBind; the draws still consumed) | K2 on a rule-derived expected Wax-Key value, undiscounted; K2b discounted; the lock contents rule and coin-only consequence locks; F5 K2 (6.4) | — | Lead's call; CN, TL and DH owners apply |
 | **LE-13** | ENM 15.3 step 2 (a constrained first container slot, the ghost draw); DH 2 anti-goals and DH 5.4 (f) "pity timers" (reading, lead's call); **DH 5.5 package and 12.4 HE-7 (agreed, DH Q3; read: socket shared, package untouched)**; CMP 7.3 G3 (read); RS 6.9 Stratum Card row (the Due line) | The Dream's Due, scored on the fixed deal of party-owned items (6.6) | **Agreed** (DH package, read, untouched) | Lead's call; DH owner confirms the reading; enemies and RS owners apply |
-| **LE-14** | ENM 10.5 step 3 (its sentence "The loot stream is consumed only in this step" becomes "only in steps 3a and 3"; a new step 3a, LootPlan) and its last paragraph; EP 6.1 and TL 6.22 (read: the generation order, with LootBind after `trapsResolve`); **MAIN 6.3 streams (decided; extended by a child stream as FL-2, TR-17, TL-3 and EP-1 did)**; ITEMS 10.4 "Floor N+1 is generated when the party leaves camp" (the atomic commit); ITEMS 18.4; RS 6.4 R-SEED-3 seed tree | The keyed `lootPlan` child stream and its draw table; step 3a; the approved order unchanged, with dummy count draws; the ghost draw; LootBind; the atomic camp-exit commit; `LootLedger` (6.10) | **Decided** (MAIN 6.3, extended) | Client, with this document; RS and segment-11 owners apply |
+| **LE-14** | ENM 10.5 step 3 (its sentence "The loot stream is consumed only in this step" becomes "only in steps 3a and 3"; a new step 3a, LootPlan) and its last paragraph; EP 6.1 and TL 6.22 (read: the generation order, with LootBind after `trapsResolve`); **MAIN 6.3 streams (decided; extended by a child stream as FL-2, TR-17, TL-3 and EP-1 did)**; ITEMS 10.4 "Floor N+1 is generated when the party leaves camp" (the atomic commit); ITEMS 18.4; RS 6.4 R-SEED-3 seed tree | The keyed `lootPlan` child stream and its draw table; step 3a; the approved order unchanged, with dummy count draws; the ghost draw; LootBind; the atomic camp-exit commit; `LootLedger` (6.10) | **Decided** (MAIN 6.3, extended) | Client, with this document; RS and segment-11 owners apply; M1 (LootPlan, LootBind, `LootLedger`, the floor commit at WO1); M2 (the WO5 camp-exit call) (agreed 2026-11-24, roadmap D-08) |
 | LE-15 | FL 9.2 (the FL-20 count line gains a field); RS 6.9 Stratum Card row; DH 17.12 header and its unspent line (Grave Goods becomes its run-record form, in DH's neutral voice) | Treasure count, Grave Goods, the Memento card (8.2, 6.11) | — | Lead's call; FL, RS and DH owners apply |
 | **LE-16** | ITEMS 10.2 (found coin gains carriers); ENM 15.2 (coin only); **ENM 15.5 Steal (agreed; change S-5)**: "one of {notable, purse, key}"; TL 6.11 / TL-23 Keybearer; ENM 5.6 loot-mark slot and the glints-per-screen gate; RS 6.9 Stratum Card row ("A heavy purse walks this floor") | The Heavy Purse, bound in LootBind; Steal takes one of three, with a preview; one merged loot badge (8.3, 6.15) | **Agreed** (ENM 15.5, one-try spirit kept) | Lead's call; enemies owner applies |
 | LE-17 | ENM 15.3 step 2 (a category multiplier); CN 10 (ranges unchanged); DH 5.7 lever 1 (pre-wired); FL 6.8 forecast (read) | Category weights by depth and the weight composition; the per-run arms floor; the F5 tactical cap; Wax Key sundries outside doses; `foundSupplyPerFloor` (6.2) | — | Lead's call; enemies owner applies |
@@ -3011,8 +3046,9 @@ and take effect at that wave.
 | **LE-24** | ITEMS 19.3; CN 19.3; **DH 18.2 lever order (agreed, DH Q11 targets; the lever list extended, targets unchanged)**; DH 21.5 | Reports; "loot last" in the DH lever order, the trip-wire following it; kPC first, with its measurement (6.5, 10.3) | **Agreed** (DH 18.2 lineage) | Lead's call; DH, items and CN owners apply |
 
 Waves: LE-1, LE-2 (F1), LE-7 (F1 pool, main-path floor), LE-8 (the F1
-salvage share), LE-13 (F1 hero arms), LE-14 and LE-23 (V13s, the F1
-V13g parts and the (m) test) in M1; LE-2 to LE-13, LE-15 to LE-18, LE-20 (bait cache), LE-23
+salvage share), LE-13 (F1 hero arms), LE-14 (WO1 form) and LE-23 (V13s, the F1
+V13g parts and the (m) test) in M1; LE-2 to LE-13, LE-14 (WO5 camp-exit
+form; split by roadmap D-08, agreed 2026-11-24), LE-15 to LE-18, LE-20 (bait cache), LE-23
 and LE-24 in M2; LE-19, LE-20 (boxed lurker) and LE-21 in M3; LE-22
 Later.
 

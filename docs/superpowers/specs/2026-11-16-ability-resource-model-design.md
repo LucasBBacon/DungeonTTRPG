@@ -401,6 +401,14 @@ Experience earned in a fight is banked. Level-ups, and companion choices at
 their key levels, are resolved when combat ends, never during it. They are
 presented together on one screen, hero first.
 
+Level-ups raised out of combat (in M1 only the floor-1 Forecourt Top-up,
+run structure design 9.4; from M2 also the camp catch-up, enemies design
+16) open the same pending-decision screen at once; nothing else commits
+until it resolves. Several levels gained at once resolve in level order.
+None is raised during combat: if combat is active, the Top-up waits for
+combat end, after banked kill shares are paid, and its levels resolve on
+the same combat-end screen. **(agreed 2026-11-24, roadmap D-03)**
+
 ## 7. Action costs
 
 ### 7.1 Declared cost

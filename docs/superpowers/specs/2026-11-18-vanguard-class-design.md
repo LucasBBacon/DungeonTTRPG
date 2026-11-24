@@ -367,7 +367,7 @@ protection to the line, with a rider in the subclass's own voice.
 |---|---|---|---|---|---|---|
 | 1 | 1 | Kit; at-wills; Patch Up 1; Techniques 2 (Press I, Hew I 1d4, Empower I); Onslaught 1; Momentum | Stance: M1 Bar the Way; M2 Bar the Way or Shieldwall | 21 / 8 | 18 / 16 | +2 / +5 / 13 |
 | 2 | 1 | — | Talent (7.6) | 31 / 10 | 18 / 16 | +2 / +5 / 13 |
-| 3 | 1→2 | — | Subclass (M1: Weaponmaster; M2: 1 of 3): signature rank I and subclass clauses | 41 / 12 | 18 / 16 | +2 / +5 / 13 |
+| 3 | 1, Forecourt at the latest (agreed 2026-11-24, roadmap D-03) | — | Subclass (M1: Weaponmaster; M2: 1 of 3): signature rank I and subclass clauses | 41 / 12 | 18 / 16 | +2 / +5 / 13 |
 | 4 | 2 | — | +1 ability, alone (settled) | 51 / 14 | 18 / 16 | +2 / +6 / 14 |
 | 5 | 2→3 | Extra Attack; Techniques 3; **Onslaught 2**; rank II for Press, Hew (1d6), Empower and the signature; **Onslaught Art**; armour band +1 | Offer (1 of 3) | 61 / 16 | 19 / 17 | +3 / +7 / 15 |
 | 6 | 3 | Patch Up 2 (settled) | Subclass feature (1 of 2), changing a verb | 71 / 18 | 19 / 17 | +3 / +7 / 15 |
@@ -376,8 +376,11 @@ protection to the line, with a rider in the subclass's own voice.
 | 9 | 4→5 | **Stand Fast** with its subclass rider; Art rank II; armour band +1 | Offer (1 of 3) (agreed, CL-4) | 101 / 24 | 20 / 18 | +4 / +9 / 17 |
 | 10 | 5 | — | Talent or offer | 111 / 26 | 20 / 18 | +4 / +9 / 17 |
 
-- **No pool steps up before level 5 (lead's call).** Level 3 often lands
-  at the floor-1 boss, and a level-up delivers its gain ready to use
+- **No pool steps up before level 5 (lead's call).** Level 3 lands by the
+  floor-1 Forecourt at the latest (Forecourt Top-up, run structure design
+  9.4; from M1) (agreed 2026-11-24, roadmap D-03), so the floor-1 boss
+  always meets a Vanguard of level 3 or higher, and a level-up delivers
+  its gain ready to use
   (ability 6.2). The class is already favoured on floor 1 (10.3), so this
   is deliberate.
 - **Level 4 stands alone (settled, lead's call there).** Level 8 gains an
@@ -2000,7 +2003,7 @@ of 2.0. Pass.
 |---|---|
 | `Floor1BossSustain` (DH 21.1), level 3, Con +2 | 28 + 36 + 12 = **76** against a need of 48. Pass |
 | Same, level 3, Con −1 | 58. Pass |
-| Same, level 2, Con −1 | 45 against 48: **fail**. Not Vanguard-specific. **The check reads level 3, the boss-door level (lead's call; VG-24)** |
+| Same, level 2, Con −1 | 45 against 48: **fail**. Not Vanguard-specific. Unreachable at the floor-1 door from M1 (Forecourt Top-up) (agreed 2026-11-24, roadmap D-03). **The check reads level 3, the boss-door level (lead's call; VG-24)** |
 | Solo floor-1 boss, P(death) | Vanguard 1–15% against a featureless AC 15 hero at 21–51%. The Vanguard is structurally favoured, and its own levers move the result about 2–4 points |
 
 The design does not widen the spread:

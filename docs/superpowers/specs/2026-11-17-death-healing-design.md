@@ -128,7 +128,7 @@ All **(settled)**:
 
 | Source | Binding text | What it means here |
 |---|---|---|
-| Main design 4.1, 4.2 (decided) | The run ends when the hero dies; one save slot per run, deleted on death. A companion at 0 is downed and gets up on 1 HP if the party wins; a morale win counts; the first downing per floor Scars. Items that prevent a drop to 0 do not change this rule | The hero has no downed state (section 10); companions are Downed (11) |
+| Main design 4.1, 4.2 (decided) | The run ends when the hero dies; one save slot per run, deleted on death (extended, not changed: deleted when the run ends, by death or victory; 10.1; agreed 2026-11-24, roadmap D-08). A companion at 0 is downed and gets up on 1 HP if the party wins; a morale win counts; the first downing per floor Scars. Items that prevent a drop to 0 do not change this rule | The hero has no downed state (section 10); companions are Downed (11) |
 | Main design 4.4 (decided) | No full rest inside a floor; camp is the full rest; short rests are limited by supply | HP wears down per floor, not per run (5.2) |
 | Stat model 6 (agreed) | HP: fixed class amount per level + Con per level, never rolled, at least 1 per level. Recovery: HP per short rest, grows with level and Con. Natural 20 and 1 on attack rolls only | The HP formula (7), Recovery (8), crits (9) |
 | Stat model 7.2 | Getting a downed companion up is trained-only Medicine | Medicine get-up (11.2) |
@@ -671,6 +671,20 @@ bookkeeping, emits `RunEnded{cause: heroDeath, killingEventId}` as its last
 event and rejects every later command (20.3 step 7). The **host**, not the
 core, deletes the save slot when it receives that event **(decided, main
 4.1; mechanics lead's call)**.
+
+`RunEnded` is `RunEnded{cause, killingEventId?}`, cause one of
+`heroDeath | victory | unravelled`. `killingEventId` is present only for
+`heroDeath`. `victory` is emitted as the last event when the run's victory
+is recorded: in M1 on Descend from the Downstair of floor
+`route.floorCount`, and from M2 at the last keeper's `BossDefeated` (boss
+rooms design 4.13). `unravelled` is reserved for SV-10's release clean end
+(M2); `RunUnravelled` precedes it (order confirmed by the SV owner). The
+host runs the end of run (WO6) on every cause; its M1 form first replaces
+`run.save` atomically with a copy carrying the result record, then shows
+the death or victory screen and the run record, and only then removes
+`run.save` and the floor's static file. MAIN 4.1's "the save is deleted
+on death" is extended, not changed, to "deleted when the run ends, by
+death or victory" (agreed 2026-11-24, roadmap D-08).
 
 ### 10.2 One death path
 
@@ -1999,11 +2013,16 @@ saved stack's dose count (change SV-15) (cross-document comparison
 6. Lower HP.
 7. At 0: a companion → Downed (engine grant); a monster → dead or a
    disposition. **The hero → the core finishes this event's bookkeeping
-   (concentration, logging), emits `RunEnded{heroDeath, killingEventId}`
-   as its final event, and rejects every later command.** No later
+   (concentration, logging), emits `RunEnded{cause: heroDeath,
+   killingEventId}` as its final event, and rejects every later
+   command.** (`RunEnded{cause, killingEventId?}`, 10.1; agreed
+   2026-11-24, roadmap D-08.) No later
    target of an area, rider, phase change (conditions 9.3), XP or
    combat-end step is processed. `killingEventId` is the damage event's
-   sequence id. The host deletes the save slot on that event.
+   sequence id. The host deletes the save slot on that event, in the
+   WO6 order of 10.1 (the result record is written into `run.save`
+   first and the files are removed after the death screen and run
+   record; agreed 2026-11-24, roadmap D-08).
 8. Otherwise the event continues (riders, on-damage triggers);
    concentration uses step 3a's value.
 
@@ -2103,13 +2122,19 @@ for tick batches, whose chain already ran where the damage landed.
      share of runs; this row can. The simulator computes it, as it already
      computes the round-1 row.
 
-   These rows go into 6.4 (DH-26).
+   These rows go into 6.4 (DH-26). From M1 their floor-1 boss terms take
+   the reference and the lowest legal hero at level 3; non-boss slots,
+   including their share of the cumulative budget, stay at their
+   earliest legal room level (enemies 6.4) (agreed 2026-11-24, roadmap
+   D-03).
 6. **Floor-1 boss sustain check (`Floor1BossSustain`; new lead's call).**
    It reads party consumables, so it is **not** a 6.4 guard: it is a
    content-validation code (21.2) and leaves consumables 14.9 untouched.
    For every launch class, at hero level 3, the floor-1 boss-door level
-   (lead's call; Vanguard design 10.3, VG-24), at the reference and the
-   lowest legal Con:
+   (lead's call; Vanguard design 10.3, VG-24), guaranteed from M1 by the
+   floor-1 Forecourt Top-up and its F1 guard (run structure design 9.4;
+   boss rooms design 4.2.1) (agreed 2026-11-24, roadmap D-03), at the
+   reference and the lowest legal Con:
 
    `bossExpectedPerRound × guard.floor1BossRounds ≤
    FloorDiv(maxHp × guard.floor1BossDoorHpPermille, 1000) +
@@ -2278,6 +2303,11 @@ parties on floors 2–5.
   are reported in their own arm (18.2). Fallback: the run-modifier slot
   stays unlit until the MAIN/RS difficulty decision (heirlooms and
   curses design 4.5).
+- M1: rows that need a camp, companions or a party are not printed
+  (camp-1 coin, LE-24; camp potions and top-ups; companion downings and
+  Medicine; the healer win-rate split). The M1 win rate is Descend from
+  F1, reported as cleared (no placed group has a living member at
+  Descend) and left early (agreed 2026-11-24, roadmap D-08).
 
 ## 22. Staging
 
@@ -2285,7 +2315,7 @@ parties on floors 2–5.
 
 | Wave | Content |
 |---|---|
-| **M1** | HP formula and bonus; Recovery; the S-3 crit rule; the hero death path and `RunEnded`; the out-of-combat and undetected-trap floors; potions at Recovery; hero kit 2 potions; rests and supply; 1 guaranteed floor-1 main-path potion, `supplyMainPathMin` 1 on floor 1 and HE-7; `combatActive` and the combat-end order; the floor-1 surprise rule; the guard rows, the floor-1 rows and `Floor1BossSustain` (after the surprise reconciliation); lethal tags; the danger band and end-turn warning; plates; a basic death recap |
+| **M1** | HP formula and bonus; Recovery; the S-3 crit rule; the hero death path and `RunEnded` (cause `heroDeath`; cause `victory` at the floor-1 descent; agreed 2026-11-24, roadmap D-08); the out-of-combat and undetected-trap floors; potions at Recovery; hero kit 2 potions; rests and supply; 1 guaranteed floor-1 main-path potion, `supplyMainPathMin` 1 on floor 1 and HE-7; `combatActive` and the combat-end order; the floor-1 surprise rule; the guard rows, the floor-1 rows and `Floor1BossSustain` (after the surprise reconciliation); lethal tags; the danger band and end-turn warning; plates; a basic death recap |
 | **M2** | Downed rules (inert, allied drag, occupancy, rest and camp get-up, once-per-fight Medicine); companions' HP; recruit kits; sundries with `healingSundryMin` (12.5) and `supplyMainPathMin` on floors 2–5; the camp top-up and its record; the floor-entry card; heal spells at Recovery; the rest-tool requirement; the Reprieve Phial at 334 **if this design is approved before M2 content lock** (consumables 14.10) |
 | **M3** | The legacy hook, answered as the Deed bequest (5.8 item 9; change HL-7, re-staged from Later; heirlooms and curses design 4.1.2, 10); the boon calibration arms (18.2; change HL-12) |
 | **M4** | The curse layer (item curses and Maladies) on in both calibration arms (18.2; change HL-12); *pending request (change HL-20; the DH owner rules):* the recap's curse annotation and the Grave Goods curse lines (17.12) |

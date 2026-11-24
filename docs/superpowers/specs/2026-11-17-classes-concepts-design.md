@@ -744,7 +744,8 @@ All **(lead's call)** except the level, which is **(settled, ability
 10.1)**.
 
 - **At level 3,** as approved. The subclass lands at the floor-1
-  Forecourt, before the boss **(change RT-8; Forecourt Top-up, run
+  Forecourt, before the boss, from M1 **(agreed 2026-11-24, roadmap
+  D-03)** **(change RT-8; Forecourt Top-up, run
   structure design 9.4)**: the player has played the verb alone and now
   picks the lens for the party game.
 - **Two per class at M2.** The Vanguard has a third, because the
@@ -795,7 +796,7 @@ above the level's single choice (ability 10.3).
 |---|---|---|---|---|
 | 1 | 1 | Full class kit (8) | Creation pick, 1 of 2–3 from M2 (stance, kit style); at M1 the Vanguard's stance pick has one option | Creation picks: Arcanist, the element pair and its Mote key (one choice, pair × key; ARC-15, Arcanist design 7.3); Herald, the Focus hand or Shield hand pick (no tradition lean); each plus 2 starter spells |
 | 2 | 1 | Pool steps per table | **Class talent**, 1 of 3, reshaping the signature verb | **Spell card**, 1 of 3, from the class list |
-| 3 | 1→2 | Tier 2 (casters) | **Subclass** (1 of 2) | **Subclass** (1 of 2); it grants its own tier-2 spell, which is the level-3 known spell |
+| 3 | 1 (Forecourt; agreed 2026-11-24, roadmap D-03) | Tier 2 (casters) | **Subclass** (1 of 2) | **Subclass** (1 of 2); it grants its own tier-2 spell, which is the level-3 known spell |
 | 4 | 2 | — | **+1 ability**, the only choice **(settled, stat 5.1; lead's call that it stands alone)** | same |
 | 5 | 2→3 | Extra Attack (martial); tier 3 and stronger cantrips (caster); signature scaling step | **Offer**, 1 of 3, class-weighted | **Spell card** |
 | 6 | 3 | Patch Up 2 (Vanguard, ability 6.6, lead's call); the other rest tools' per-rest sub-limit 2 (8.2); pool steps | **Subclass feature** (1 of 2), changing a verb | same |

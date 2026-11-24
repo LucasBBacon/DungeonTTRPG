@@ -154,7 +154,9 @@ These would make the game a failure even if everything works.
   Quick Restock (`BuyBatch`) and Accept kit defaults are in camp and
   hub design 4.2 and 7 (changes CH-1, CH-15 to CH-18, M2).
 - A run can be saved and resumed, but there is one save slot per run and it
-  is deleted on death. **(decided)**
+  is deleted on death. **(decided)** Extended: the save is deleted when
+  the run ends, by death or victory (M1 form of WO6). **(agreed
+  2026-11-24, roadmap D-08)**
 
 ### 4.2 Party
 
@@ -447,11 +449,15 @@ editor tool or C's adapter can be added later without touching the core.
 | `src/Core` | C# class library, no Godot references | All rules and state |
 | `src/Sim` | C# console app | Runs headless fights and runs for balance |
 | `tests/Core.Tests` | C# test project | Unit, property and replay tests |
-| `game/` | Godot project | Rendering, input, audio, UI |
+| `dungeon-ttrpg/` | Godot project (`DungeonTTRPG.csproj`) | Rendering, input, audio, UI |
 | `content/` | JSON data files | Classes, species, feats, items, monsters, tables |
 
 `Core` targets the .NET version required by the Godot 4 release the team
-picks. `game/` references `Core` as a project reference.
+picks (Godot 4.7, .NET 8). `dungeon-ttrpg/` references `Core` as a
+project reference and is not part of `Dungeon.sln`; CI builds it
+separately. `src/Sim` and `content/` are created by roadmap step M1-01.
+(Agreed 2026-11-24, roadmap D-01: the design follows the repository's
+existing folder name, which earlier drafts called `game/`.)
 
 ### 6.2 The core loop
 
@@ -558,7 +564,9 @@ queries over `PartyKnowledge` (exploration and information design 4.1.1,
   (cross-document comparison 2026-11-23, CC-12). A draw-free LootBind
   step runs after `trapsResolve`, and floor N+1's generation and the
   camp-exit save are one write (loot economy design 6.10; change
-  LE-14, M1).
+  LE-14, M1). LE-14 is one floor-commit routine: M1 calls it at WO1 for
+  floor 1, M2 calls it unchanged at the camp exit (WO5); M1 builds no
+  camp-exit stub (agreed 2026-11-24, roadmap D-08).
   A `curiosities` child of each floor's dungeon substream, a fixed 12
   draws per floor *(illustr.)* in a fixed draw map, is drawn by
   EventDraw after layout and before hazards; the draw-free EventPlace
@@ -798,7 +806,7 @@ monster in data.
 | Milestone | Contents | Question it answers |
 |---|---|---|
 | M0 Skeleton | Solution, automated tests, command and event loop, Godot draws a placeholder 3D isometric grid and moves a unit | Does the core and display split work? |
-| M1 Vertical slice | One class, levels 1–3, one generated floor, three enemy types, one boss, basic loot, permadeath | Is the loop fun? Does the effects system hold? |
+| M1 Vertical slice | One class, levels 1–3 (level 3 guaranteed before the floor-1 boss by the floor-1 Forecourt Top-up and its F1 guard; agreed 2026-11-24, roadmap D-03), one generated floor, three enemy types, one boss, basic loot, permadeath | Is the loop fun? Does the effects system hold? |
 | M2 Full run | Four classes, companions, 5 floors (change RT-1), level 10, pick-one-of-three offers, save and resume | Does a 1–2 hour run hold together? |
 | M3 Between runs | Profile (the profile file and its `curiosityMemory`, `recentRuns[].f1BossId`, `runHistory[]`, `uiMemory` and `loreMemory` fields arrive in M2: section 6.6; events design 9.1; change EV-19, agreed events Q1; cross-document comparison 2026-11-23, CC-11; camp and hub design 9.1, change CH-7), the menu-room Stairtop hub (the M2 hub is the simple screen of section 4.7; camp and hub design 4.8, 10; change CH-6), unlocks, starting boons, difficulty ladder; in-run content: Two Doors at camp 3, Omens, Seams, Peril tiers (run structure design 12; change RT-19, M3) | Do players come back? |
 | M4 Breadth | Species, multiclassing, more content, balance passes with the simulator | Is every run different? |

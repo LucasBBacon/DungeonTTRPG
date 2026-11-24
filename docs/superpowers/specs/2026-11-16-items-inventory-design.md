@@ -687,7 +687,11 @@ sources design 4.6) **(change LP-9; M2)**.
   opens it; floor 5 has none (the run ends) (change FL-6; floor layout
   design 6.11). **M3:** a Return Latch from the Downstair, built off by
   default (floor layout design 6.9). A warning lists what is left
-  behind. On descending, leftovers and flee piles are **scrapped** to
+  behind: the party's leftovers markers and flee piles, and the names of
+  containers the party has seen but not opened, never what an unopened
+  container or a living monster holds (`KnowledgeLeak` case). It offers
+  Descend or Stay; Stay closes the warning with no state change and no
+  event **(agreed 2026-11-24, roadmap D-08)**. On descending, leftovers and flee piles are **scrapped** to
   coin at the scrap rate *(illustr. 10% of price)* (10.6). A marker's `supplyCount` and keys are
   simply lost. **An heirloom is lost, never scrapped.** **(agreed: Scrap)**
   Every other floor-scoped instance (in an unopened container, carried by
@@ -819,8 +823,9 @@ at each camp between:
 - a **reward card**.
 
 **(lead's call)** The **camp reward card** is a separate screen from the
-enemies 17.5 boss reward card, which is shown before camp and is
-unchanged. What the camp reward card offers is set by the camp and hub
+enemies 17.5 boss reward card, which is shown before camp (M2; none in
+M1, where Old Ragged's prize is the signature cache only: agreed
+2026-11-24, roadmap D-08) and is unchanged. What the camp reward card offers is set by the camp and hub
 design (7.1) **(change CH-15; M2)**: the reward is a pick of 1 of {entry
 0, entry 1, the Reprieve Phial at a `campReward` phial camp}, and the
 others are dreamed; the phial is never on the shop panel, and a declined
@@ -884,7 +889,9 @@ Floor N+1 is generated when the party
 leaves camp for it (it already reads owned bases, enemies 10.5 step 3),
 after every purchase on floor N and at its camp is known, so this stays
 deterministic; that generation and the camp-exit save are one atomic
-write (loot economy design 6.10) **(change LE-14; M1)**: its inputs are
+write (loot economy design 6.10) **(change LE-14; the floor-commit
+routine is M1 at WO1, this camp-exit WO5 form is M2; agreed 2026-11-24,
+roadmap D-08)**: its inputs are
 frozen at Travel on from the camp-exit state and committed with the
 camp-exit save (WO5; seeds and validation design 4.4, 4.8.3). The run state keeps the per-family count.
 
@@ -939,7 +946,11 @@ camp-exit save (WO5; seeds and validation design 4.4, 4.8.3). The run state keep
   mail 8 / 12 / 16 / 24 *(illustr.)*, with a camp-1 coverage rerun at
   250‰ and 200‰. It is not adopted until the ITEMS and loot economy
   owners rule. Until then the scale sits in data labelled `placeholder`,
-  and from M2 a missing `basePrice` on any kit family fails the build;
+  and from M2 a missing `basePrice` on any kit family fails the build
+  (from M1, every family that can be scrapped carries a `basePrice`
+  above 0 from this `placeholder` scale, and a missing one fails content
+  validation, with no Scrap-0 fallback **(agreed 2026-11-24, roadmap
+  D-08)**);
   fallback: the owners' own prices, with `KitResaleBand` re-run (starting
   kits design 4.3, 14.2).
 
@@ -1747,6 +1758,9 @@ Later unchanged (heirlooms and curses design 4.2, 10, 14.2).
   CMP-21)**.
 - **Run end:** every item, all coin and all supply are gone. Only heirloom
   *templates* persist (section 14).
+- **M1 (one floor):** descending the floor-1 stairs runs section 9 in
+  full, then ends the run in victory (`RunEnded{cause: victory}`). Coin is
+  lost and is not shown as a score. **(agreed 2026-11-24, roadmap D-08)**
 
 ## 16. Answers to enemies 15.9
 
@@ -1960,7 +1974,8 @@ comparison 2026-11-23, CC-40), `ItemRecharged` (camp, and Later
   and the camp-exit save are one atomic write (10.4; WO5, seeds and
   validation design 4.8.3); a `LootLedger` per
   floor is saved for reports and V13 (loot economy design 6.10, 10.1).
-  **(change LE-14; M1)**
+  **(change LE-14; the floor-commit routine is M1 at WO1, this camp-exit
+  WO5 form is M2; agreed 2026-11-24, roadmap D-08)**
 
 ## 19. Validation, testing and simulator
 
@@ -2204,6 +2219,15 @@ Consumable, scroll, wand and failsafe reports: see consumables design
   - the starting kit (the Vanguard kit at M1; all six default kits at M2;
     starting kits design 10); value and k = 1;
   - the coin line as a counter with nothing to spend.
+  - the Downstair stairs transition (section 9): the left-behind warning
+    with Descend or Stay, Scrap of leftovers and flee piles, and
+    `ItemDestroyed{lost}` for other floor-scoped instances; the base price
+    (10.5 steps 1–2 and 6: `coinPerValue`, `categoryPermille`,
+    `scrapPermille`) for Scrap only, with mundane `basePrice` from the SK
+    8.4 `placeholder` data, where a missing price fails content
+    validation; in M1, Descend on floor `route.floorCount` (1) ends the
+    run in victory (section 15; floor layout design 6.11; change FL-6)
+    **(agreed 2026-11-24, roadmap D-08)**.
   - **M1 measures the swap rate and forced Leaves for a solo hero.** M1 has
     no Sell, so its pack-fill data is not used for tuning: pack fill and
     the kill switch (4.2, 19.3) are tuned on M2 data with Sell enabled.
@@ -2220,11 +2244,12 @@ Consumable, scroll, wand and failsafe reports: see consumables design
     death and healing design 22 stage it **(change CN-9; change DH-35)**;
   - rarity tiers and banded properties;
   - untold properties and Arcana identification;
-  - coin, the basic vendor, the notables shop or reward card, Sell;
+  - coin spending (camp), the basic vendor, the notables shop or reward card, Sell;
     the reward card's content, potion stock by party and Quick Restock
     (`BuyBatch`) (camp and hub design 7.1–7.3; changes CH-15, CH-16,
     CH-18);
-  - stairs Scrap; rest-gated trinket changes;
+  - rest-gated trinket changes (stairs Scrap moved to M1: agreed
+    2026-11-24, roadmap D-08);
   - simulator reports.
 - **M3:** heirlooms as profile templates; heirloom placement at kit issue
   and kit variant boons (starting kits design 4.4, 7; changes SK-7,

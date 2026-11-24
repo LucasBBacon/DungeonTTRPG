@@ -2263,8 +2263,9 @@ distance and guard, and the boxed-lurker budget.
     Site reverts to an ordinary side room. Boxed lurker over budget: the
     socket becomes a real container.
   - **Loot (loot economy design 6.9 item 7, 6.10 item 4; changes LE-10,
-    LE-14; M1):** LootPlan (ENM 10.5 step 3a) reads the `traps` pass's
-    provisional sockets; the draw-free **LootBind** pass runs after
+    LE-14; M1, with LE-14 called at WO1 and its WO5 camp-exit call M2
+    (agreed 2026-11-24, roadmap D-08)):** LootPlan (ENM 10.5 step 3a)
+    reads the `traps` pass's provisional sockets; the draw-free **LootBind** pass runs after
     `trapsResolve` and applies a named remap for each failure action
     above (a lock made Plain keeps its card, a consequence cache paying
     its Wax-Key identity; a Tattle resolved to a Crier changes nothing),

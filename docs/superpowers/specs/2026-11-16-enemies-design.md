@@ -467,7 +467,14 @@ CMP-6; companions design 7.7)**.
 
 **(lead's call)** Validation computes these against the reference hero at
 the unit's **earliest legal room level**. The simulator computes the
-round-1 row.
+round-1 row. Exception (from M1; run structure design 9.4): for the
+floor-1 boss term only, the reference hero and the lowest legal hero
+(lowest HP, tier 6, Con −1, at the AR-20 lowest legal AC) are both taken
+at level 3, the level the floor-1 Forecourt Top-up guarantees. Only the
+level changes. Non-boss encounter slots, including their share of the
+floor-1 cumulative round-1 budget, stay at their earliest legal room
+level, and the 6.3 room level still sets the floor-1 boss's own level
+and the experience scaling **(agreed 2026-11-24, roadmap D-03)**.
 
 | Guard | Limit |
 |---|---|
@@ -1197,7 +1204,9 @@ Deterministic:
    step 3a fixes the counts, so the count draws are not drawn; channel slot *i* draws its
    ordinary identity on the *i*-th socket of that channel in allocation
    order, filtered to that socket's tier; the boss channel draws only the
-   signature (the reward card's options are drawn in step 3a). The Due's
+   signature (the reward card's options are drawn in step 3a; in M1 the
+   `bossCard` row is registered with `wave: M2`, so it is inert and takes
+   no draw **(agreed 2026-11-24, roadmap D-08)**). The Due's
    slot takes no ghost draw: the count dummies and the Due and arms-floor
    ghost draws are retired, since keyed blocks have no positions to hold
    **(change SV-5; seeds and validation design 4.3 Loot; M1)**. The party snapshot at generation
@@ -1792,6 +1801,9 @@ radius reads the live hearing graph, each Portal in its current state
    already active when `ArenaEngaged` fires (a floors 2–5 Forecourt patrol
    fight), the boss group joins it as joiners under this item and Take
    Places is skipped; not yet ruled.
+   On floor 1, while the Forecourt Top-up has not applied, the boss
+   group ignores noise and cannot join a fight (F1 guard; boss rooms
+   design 4.2.1) **(agreed 2026-11-24, roadmap D-03)**.
 5. **Other groups during a fight:** while combat is active, every group not
    in it (patrols, Alerted and Searching groups) advances one tick per
    round, at round start, after the joiner checks. **(lead's call)**
@@ -2588,7 +2600,7 @@ economy design 6.1 item 2, 6.3; M2)**.
 | Standard | Yes | Only from the enemy-carried quota, and only when no elite or leader in the encounter can take it |
 | Leader | Yes, with a banner, horn or staff prop | Second priority. The banner may *be* the item; a horn never is, because horns are reserved for joiners (the Kennel Houndmaster's horn included) **(change LP-21; loot sources design 5.3; M2)**. |
 | Elite | Yes | First priority for the quota. **Guaranteed only in the optional elite room**, met by allocation: the elite-room carrier takes the floor's highest carrier-legal **gear** card (weapon or focus, armour or shield, trinket), never a consumable; a consumable top card goes to the elite room's lair cache **(change LE-10, LE-18; loot economy design 6.9 items 2, 6; M2)**. The elite's gear card is filtered to records whose lines show in use (`showsInUse`) when that set is non-empty, so the prize is presented in use **(change IR-12; item rolls design 4.12; M2)**. An unarmed elite there guards a **lair cache** instead ("Guards: cache"). Other elites without a quota item show nothing. Resolving the elite (killed, Yielded or Routed; cross-document comparison 2026-11-23, CC-38) or stealing its notable, whichever comes first, gives the **elite intel line** (15.8) **(change LE-18; M2)**. |
-| Boss | Yes, if armed | **Guaranteed** boss's prize, visibly carried by an armed boss, plus the boss reward card (17.5). An **unarmed** boss **guards** its signature in a **signature cache** in its lair (the "Guards: cache" precedent of the elite row; not a ranked socket, not the elite lair cache), and its plate reads **"Guards: <signature name>"**; M1: Old Ragged guards Hound-Collar Mail in its den **(agreed, Q5; change IR-13; item rolls design 4.13; M1)**. The signature is the boss's authored form for the top tier of the floor's drawn deck variant (one form per top tier its floors can need), with at most 2 base lines plus one authored value-1 line echoing the boss's fight or kit (≤ 3 lines; M1 records grandfathered); a boss that carries one form guards any second form, and "Carries: …" and "Guards: …" always name the chosen form; a draw-free second form in another lane is required for specialist chassis in M2 and every boss in M3; a Very rare signature consumes the floor's VR slot, pending the ITEMS owner **(change LE-3; loot economy design 6.3; change IR-13; item rolls design 4.13; M1 / M2 / M3)**. **Floor 5:** no reward card; the final boss still carries and uses its signature, which drops as a **Memento** (a run-record item card, 0 value, shown on the victory screen and run record only) **(agreed, Q1; change LE-5; loot economy design 6.11; M2)**; an unarmed final boss (none in M2) guards it in its cache and it drops as the Memento at victory **(change IR-13; item rolls design 4.13)**. |
+| Boss | Yes, if armed | **Guaranteed** boss's prize, visibly carried by an armed boss, plus the boss reward card (17.5; M2, none in M1 **(agreed 2026-11-24, roadmap D-08)**). An **unarmed** boss **guards** its signature in a **signature cache** in its lair (the "Guards: cache" precedent of the elite row; not a ranked socket, not the elite lair cache), and its plate reads **"Guards: <signature name>"**; M1: Old Ragged guards Hound-Collar Mail in its den **(agreed, Q5; change IR-13; item rolls design 4.13; M1)**. The signature is the boss's authored form for the top tier of the floor's drawn deck variant (one form per top tier its floors can need), with at most 2 base lines plus one authored value-1 line echoing the boss's fight or kit (≤ 3 lines; M1 records grandfathered); a boss that carries one form guards any second form, and "Carries: …" and "Guards: …" always name the chosen form; a draw-free second form in another lane is required for specialist chassis in M2 and every boss in M3; a Very rare signature consumes the floor's VR slot, pending the ITEMS owner **(change LE-3; loot economy design 6.3; change IR-13; item rolls design 4.13; M1 / M2 / M3)**. **Floor 5:** no reward card; the final boss still carries and uses its signature, which drops as a **Memento** (a run-record item card, 0 value, shown on the victory screen and run record only) **(agreed, Q1; change LE-5; loot economy design 6.11; M2)**; an unarmed final boss (none in M2) guards it in its cache and it drops as the Memento at victory **(change IR-13; item rolls design 4.13)**. |
 
 **Heavy Purse (change LE-16; loot economy design 8.3; M2):** on floors
 2–4, about 20% of the floor's found coin *(illustr.)* is carried as coin
@@ -3131,9 +3143,17 @@ lair" skippable; not yet ruled.
   floor's entry level, and companions with it, before the camp restore
   and the Muster (companions design 7.11) **(change CMP-17)**. Target: this fires in under 20% of runs at camps 2–4
   **(change RT-8)**; the floor-1 Forecourt Top-up raises the hero to level 3 before the floor-1 boss
-  **(change RT-8; run structure design 9.4)**.
+  **(change RT-8; run structure design 9.4)**; the floor-1 Top-up ships
+  in M1 and the camp catch-up keeps its wave **(agreed 2026-11-24, roadmap
+  D-03)**.
 - **Banking:** experience is banked and resolved at combat end
-  **(settled)**.
+  **(settled)**. The floor-1 Forecourt Top-up resolves out of combat at
+  once (run structure design 9.4; abilities design 6.9); if it is
+  deferred to combat end, banked kill shares are paid first, each scaled
+  at the hero's pre-Top-up level, then the Top-up (if the hero still
+  stands on a Forecourt square), then one level-up
+  screen resolves every level gained, in level order **(agreed
+  2026-11-24, roadmap D-03)**.
 
 ## 17. Catalogue
 
@@ -3498,7 +3518,10 @@ guarded in its lair's signature cache by an unarmed one ("Guards:
 <signature name>", 15.2; agreed, Q5; change IR-13; item rolls design
 4.13), plus a pick-one-of-three
 reward card that reuses the offer UI. **(change LE-3; loot economy design
-6.3; M2)** The signature is the boss's authored form for the top tier of
+6.3; M2)** In M1, `BossDefeated` opens the signature cache and the
+Bossgate only; there is no pick-one-of-three screen, and the LootPlan
+`bossCard` field is reserved and empty **(agreed 2026-11-24, roadmap
+D-08)**. The signature is the boss's authored form for the top tier of
 the floor's drawn deck variant, plus its authored echo line (15.2;
 change IR-13). The card is one offer set at
 C / U / R / R on floors 1–4 *(illustr.)*, **never Very rare**; it is
@@ -3894,7 +3917,9 @@ The build fails when:
     fallback; room levels and homeRooms (6.3); the computed-threat
     validator (6.5).
   - **Rewards and rules:** experience on kill with shares and level
-    scaling; issue gear, shared records, the one-die rule; the boss's
+    scaling; the floor-1 Forecourt Top-up and its F1 guard (run
+    structure design 9.4; boss rooms design 4.2.1) **(agreed 2026-11-24,
+    roadmap D-03)**; issue gear, shared records, the one-die rule; the boss's
     prize and at most 1 carried weapon or armour notable on the
     floor (M1's own channel split, 15.3); basic loot summary; the floor
     loot budget; `readyAt`, `turnsTaken` and kit caps; the morale **data

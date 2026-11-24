@@ -659,7 +659,7 @@ of grafts only.**
 `terrain` → `hazards` → `traps` (segment 5, pass 1) → **segment 6
 `encounters`** → `trapsResolve` (segment 5, pass 2) → the shared floor
 assertion point (V8–V12). The loot draw (ENM 10.5 step 3) keeps the loot
-stream. **Read (change LE-14; M1):** loot is now steps 3a (LootPlan, on
+stream. **Read (change LE-14; M1 at WO1, its WO5 camp-exit commit M2; agreed 2026-11-24, roadmap D-08):** loot is now steps 3a (LootPlan, on
 the keyed `lootPlan` child stream) and 3, and the draw-free LootBind
 pass runs after `trapsResolve`, before the V13g checks at the shared
 assertion point; this order is unchanged (loot economy design 6.10).
