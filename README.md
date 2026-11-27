@@ -101,6 +101,8 @@ These are enforced by tests and CI, not just convention:
   of the draw-stability rules in section 4.5 of the
   [seeds and validation design](docs/superpowers/specs/2026-11-23-seeds-validation-design.md) ("SV").
   See `src/Analyzers/Rules.cs`. The no-Godot-in-Core rule is also covered by `ArchitectureTests`.
+- All randomness comes from keys derived from the 60-bit run seed (SplitMix64 key algebra, SV 4.1);
+  a stream is a key and a counter, and every rule draws a fixed number of values.
 - Saves carry a version number; a corrupt or newer save fails with a typed error and never
   half-loads.
 - CI fails if rule checks (`IsWalkable`, `CheckStep`, `.Step(`) show up in `dungeon-ttrpg/scripts`.
