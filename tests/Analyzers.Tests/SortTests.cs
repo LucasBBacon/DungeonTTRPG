@@ -14,6 +14,9 @@ public class SortTests
     [InlineData("names.OrderBy(n => n)")]
     [InlineData("items.OrderBy(i => i.Name)")]
     [InlineData("new SortedSet<string>()")]
+    [InlineData("SortedSet<string> s = []")]
+    [InlineData("SortedSet<string> s = [\"b\", \"a\"]")]
+    [InlineData("SortedDictionary<string, int> d = []")]
     [InlineData("list.Sort(new UnmarkedComparer())")]
     public void Unregistered_sorts_are_reported(string statement) =>
         Assert.Equal(new[] { "DUN007" }, Harness.Ids(Harness.Run(Fixture(statement))));

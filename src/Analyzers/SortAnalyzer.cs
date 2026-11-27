@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
 
@@ -12,7 +14,7 @@ namespace Dungeon.Analyzers;
 /// DUN007: sorts without a registered total comparer (DS11). Covers <c>Sort</c> on
 /// <c>List&lt;T&gt;</c>, <c>Array</c>, <c>ImmutableArray&lt;T&gt;</c> and <c>MemoryExtensions</c>;
 /// <c>Enumerable.Order*</c>/<c>ThenBy*</c>; and the <c>SortedSet</c>, <c>SortedDictionary</c> and
-/// <c>SortedList</c> constructors. A comparer is registered when its static type carries
+/// <c>SortedList</c> constructors, including collection expressions that build one. A comparer is registered when its static type carries
 /// <c>[Dungeon.Core.Determinism.TotalComparer]</c> or it is <c>StringComparer.Ordinal</c>. With no
 /// comparer, <c>Order*</c>/<c>ThenBy*</c> pass only for an integral primitive or enum key.
 /// </summary>
@@ -75,6 +77,9 @@ public sealed class SortAnalyzer : DiagnosticAnalyzer
             start.RegisterOperationAction(
                 c => AnalyzeCreation(c, (IObjectCreationOperation)c.Operation, known),
                 OperationKind.ObjectCreation);
+            start.RegisterSyntaxNodeAction(
+                c => AnalyzeCollectionExpression(c, (CollectionExpressionSyntax)c.Node, known),
+                SyntaxKind.CollectionExpression);
         });
     }
 
@@ -115,6 +120,20 @@ public sealed class SortAnalyzer : DiagnosticAnalyzer
             && !HasRegisteredComparer(creation.Arguments, known))
         {
             Report(context, creation.Syntax.GetLocation(), "new " + type.Name + " without a registered comparer");
+        }
+    }
+
+    /// <summary>
+    /// A collection expression (<c>SortedSet&lt;string&gt; s = [];</c>) always calls the parameterless
+    /// constructor, so it can never pass a comparer: every one that builds a sorted collection is reported.
+    /// </summary>
+    private static void AnalyzeCollectionExpression(SyntaxNodeAnalysisContext context, CollectionExpressionSyntax node, KnownTypes known)
+    {
+        var type = context.SemanticModel.GetTypeInfo(node, context.CancellationToken).ConvertedType?.OriginalDefinition;
+        if (type is INamedTypeSymbol named && known.SortedCollections.Contains(named))
+        {
+            context.ReportDiagnostic(Diagnostic.Create(
+                Rules.Sort, node.GetLocation(), "collection expression of " + named.Name + " (it cannot take a comparer)", Advice));
         }
     }
 
