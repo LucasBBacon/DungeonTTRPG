@@ -292,11 +292,18 @@ public sealed class CanonicalWriter
     private void WriteElement<T>(T item, Action<CanonicalWriter, T> writeItem)
     {
         int depth = _frames.Count;
+        int start = _buffer.WrittenCount;
         _frames.Add(new Frame(1));
         writeItem(this, item);
         if (_frames.Count != depth + 1 || _frames[depth].Next != 1)
         {
             throw new InvalidOperationException("A collection element must write exactly one value, with ordinal 0.");
+        }
+
+        // The reader bounds a count by the bytes left, which needs every element to take a byte.
+        if (_buffer.WrittenCount == start)
+        {
+            throw new InvalidOperationException("A collection element must not be empty (a record with no fields).");
         }
 
         _frames.RemoveAt(depth);

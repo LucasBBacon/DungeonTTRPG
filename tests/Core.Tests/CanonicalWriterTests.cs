@@ -3,54 +3,6 @@ using Xunit;
 
 namespace Dungeon.Core.Tests;
 
-/// <summary>The 2-field record nested in <see cref="Sample"/>.</summary>
-internal sealed record Inner(byte Flags, ulong Count) : ICanonical
-{
-    public void WriteCanonical(CanonicalWriter w)
-    {
-        w.BeginRecord(2);
-        w.UInt8(0, Flags);
-        w.UInt64(1, Count);
-        w.EndRecord();
-    }
-}
-
-/// <summary>A test-only schema that exercises every value kind of the canonical format once.</summary>
-internal sealed record Sample(
-    ulong Seed,
-    int Tick,
-    string Id,
-    int? Absent,
-    int? Present,
-    IReadOnlyList<string> Tags,
-    IReadOnlyList<long> Values,
-    bool Flag,
-    Inner Inner) : ICanonical
-{
-    /// <summary>The pinned sample; its bytes were computed by an independent Python model of the format.</summary>
-    public static Sample Pinned => new(
-        0x0123456789ABCDEFUL, -2, "unit.hero", null, 7, ["b", "a"], [3L, -1L], true, new Inner(255, 1));
-
-    public const string PinnedHex =
-        "efcdab8967452301feffffff09000000756e69742e6865726f0001070000000200000001000000610100000062"
-        + "020000000300000000000000ffffffffffffffff01ff0100000000000000";
-
-    public void WriteCanonical(CanonicalWriter w)
-    {
-        w.BeginRecord(9);
-        w.UInt64(0, Seed);
-        w.Int32(1, Tick);
-        w.String(2, Id);
-        w.OptionalInt32(3, Absent);
-        w.OptionalInt32(4, Present);
-        w.SetById(5, Tags, t => t, (e, t) => e.String(0, t));
-        w.List(6, Values, (e, v) => e.Int64(0, v));
-        w.Bool(7, Flag);
-        w.Record(8, Inner);
-        w.EndRecord();
-    }
-}
-
 public class CanonicalWriterTests
 {
     private static string Hex(byte[] bytes) => Convert.ToHexString(bytes).ToLowerInvariant();
@@ -129,6 +81,21 @@ public class CanonicalWriterTests
         Assert.Throws<InvalidOperationException>(
             () => One(w => w.List(0, new[] { 1 }, (e, v) => { e.Int32(0, v); e.Int32(0, v); })));
     }
+
+    private sealed class Empty : ICanonical
+    {
+        public void WriteCanonical(CanonicalWriter w)
+        {
+            w.BeginRecord(0);
+            w.EndRecord();
+        }
+    }
+
+    // The reader rejects a count larger than the bytes left, which is only sound if no element is empty.
+    [Fact]
+    public void Collection_element_must_not_be_empty() =>
+        Assert.Throws<InvalidOperationException>(
+            () => One(w => w.List(0, new[] { new Empty() }, (e, v) => e.Record(0, v))));
 
     [Fact]
     public void Strings_must_be_ascii()
