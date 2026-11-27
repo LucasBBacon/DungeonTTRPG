@@ -14,9 +14,13 @@ namespace Dungeon.Analyzers;
 /// <c>HashSet&lt;&gt;</c>, the dictionary's nested <c>KeyCollection</c>/<c>ValueCollection</c>,
 /// <c>ImmutableDictionary&lt;,&gt;</c>, <c>ImmutableHashSet&lt;&gt;</c>, <c>ConcurrentDictionary&lt;,&gt;</c>, or a
 /// type derived from one. Reported: <c>foreach</c> over one; any conversion of one to
-/// <c>IEnumerable</c>/<c>IEnumerable&lt;T&gt;</c> (LINQ, parameters); a collection-expression spread of
-/// one; and calls of its <c>GetEnumerator</c> or <c>CopyTo</c>. Lookups (<c>TryGetValue</c>, indexers,
-/// <c>Contains</c>, <c>Count</c>) stay legal.
+/// <c>IEnumerable</c>/<c>IEnumerable&lt;T&gt;</c> or to an interface that extends it (<c>ICollection&lt;T&gt;</c>,
+/// <c>ISet&lt;T&gt;</c>, <c>IReadOnlyDictionary&lt;,&gt;</c>, ...), because enumeration through the interface
+/// can no longer be traced (LINQ, parameters, returns, assignments); a collection-expression spread of one;
+/// calls of its <c>GetEnumerator</c> or <c>CopyTo</c>; and reading the <c>Keys</c>/<c>Values</c> views of one
+/// when the view is typed as an interface (<c>ImmutableDictionary</c>, <c>ConcurrentDictionary</c>). Lookups
+/// (<c>TryGetValue</c>, indexers, <c>Contains</c>, <c>Count</c>, and the <c>CollectionExtensions</c> lookups
+/// <c>GetValueOrDefault</c>/<c>TryAdd</c>/<c>Remove</c>) stay legal.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class UnorderedEnumerationAnalyzer : DiagnosticAnalyzer
@@ -79,6 +83,9 @@ public sealed class UnorderedEnumerationAnalyzer : DiagnosticAnalyzer
             start.RegisterOperationAction(
                 c => AnalyzeInvocation(c, (IInvocationOperation)c.Operation, unordered),
                 OperationKind.Invocation);
+            start.RegisterOperationAction(
+                c => AnalyzeView(c, (IPropertyReferenceOperation)c.Operation, unordered),
+                OperationKind.PropertyReference);
         });
     }
 
@@ -105,10 +112,46 @@ public sealed class UnorderedEnumerationAnalyzer : DiagnosticAnalyzer
         }
 
         if (conversion.Type is INamedTypeSymbol target
-            && enumerables.Contains(target.OriginalDefinition)
-            && UnorderedName(conversion.Operand.Type, unordered) is { } name)
+            && IsEnumerableInterface(target, enumerables)
+            && UnorderedName(conversion.Operand.Type, unordered) is { } name
+            && !IsLookupExtensionReceiver(conversion))
         {
             Report(context, conversion.Operand.Syntax.GetLocation(), "converting " + name + " to " + target.Name);
+        }
+    }
+
+    /// <summary>True for <c>IEnumerable</c>, <c>IEnumerable&lt;T&gt;</c>, or any interface that extends either.</summary>
+    private static bool IsEnumerableInterface(INamedTypeSymbol target, ImmutableHashSet<INamedTypeSymbol> enumerables) =>
+        enumerables.Contains(target.OriginalDefinition)
+        || (target.TypeKind == TypeKind.Interface
+            && target.AllInterfaces.Any(i => enumerables.Contains(i.OriginalDefinition)));
+
+    /// <summary>
+    /// The <c>this</c> argument of a <c>CollectionExtensions</c> lookup (<c>dict.GetValueOrDefault(k)</c>):
+    /// the conversion to <c>IReadOnlyDictionary</c>/<c>IDictionary</c> only feeds a keyed lookup.
+    /// </summary>
+    private static bool IsLookupExtensionReceiver(IConversionOperation conversion) =>
+        conversion.Parent is IArgumentOperation { Parameter.Ordinal: 0 } argument
+        && argument.Parent is IInvocationOperation { TargetMethod: { IsExtensionMethod: true } method }
+        && method.Name is "GetValueOrDefault" or "TryAdd" or "Remove"
+        && method.ContainingType.ToDisplayString() == "System.Collections.Generic.CollectionExtensions";
+
+    /// <summary>
+    /// <c>Keys</c>/<c>Values</c> of an unordered dictionary whose view type is not itself unordered
+    /// (<c>ImmutableDictionary</c> returns <c>IEnumerable&lt;T&gt;</c>, <c>ConcurrentDictionary</c>
+    /// <c>ICollection&lt;T&gt;</c>), so no later conversion or <c>foreach</c> would see an unordered type.
+    /// <c>Dictionary</c>'s views are <c>KeyCollection</c>/<c>ValueCollection</c> and are reported where enumerated.
+    /// </summary>
+    private static void AnalyzeView(
+        OperationAnalysisContext context, IPropertyReferenceOperation reference, ImmutableHashSet<INamedTypeSymbol> unordered)
+    {
+        var property = reference.Property;
+        if (property.Name is "Keys" or "Values"
+            && !property.IsStatic
+            && UnorderedName(reference.Instance?.Type ?? property.ContainingType, unordered) is { } name
+            && UnorderedName(property.Type, unordered) is null)
+        {
+            Report(context, reference.Syntax.GetLocation(), name + "." + property.Name);
         }
     }
 
