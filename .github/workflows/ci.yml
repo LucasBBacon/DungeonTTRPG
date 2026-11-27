@@ -18,6 +18,19 @@ jobs:
       - run: dotnet test Dungeon.sln
       # The Godot project is not in Dungeon.sln; compile it so a Core change cannot break it unseen.
       - run: dotnet build dungeon-ttrpg/DungeonTTRPG.csproj
+      # The smoke project holds a double field; if it builds, Core is not guarded by the analyzer.
+      - name: Analyzer is wired into the build
+        shell: bash
+        run: |
+          set +e
+          output=$(dotnet build tests/AnalyzerSmoke/AnalyzerSmoke.csproj 2>&1)
+          status=$?
+          set -e
+          echo "$output"
+          if [ "$status" -eq 0 ] || ! grep -q "error DUN001" <<< "$output"; then
+            echo "Analyzer is not wired into the build."
+            exit 1
+          fi
       - name: Display layer decides no rule
         shell: bash
         run: |

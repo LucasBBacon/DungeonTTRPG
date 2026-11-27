@@ -1,0 +1,6 @@
+<!-- DS11 build guards for Dungeon.Core: the one place the determinism analyzer is configured. -->
+<Project>
+  <ItemGroup>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)../src/Analyzers/Analyzers.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../build/Determinism.props" />
   <PropertyGroup>
     <AssemblyName>Dungeon.Core</AssemblyName>
     <RootNamespace>Dungeon.Core</RootNamespace>

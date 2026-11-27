@@ -34,6 +34,8 @@ public class LayoutTests
             "src/Core/Core.csproj",
             "src/Sim/Sim.csproj",
             "tests/Core.Tests/Core.Tests.csproj",
+            "src/Analyzers/Analyzers.csproj",
+            "tests/Analyzers.Tests/Analyzers.Tests.csproj",
             "dungeon-ttrpg/DungeonTTRPG.csproj",
         })
         {
