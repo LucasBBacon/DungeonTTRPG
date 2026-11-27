@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Text.Json.Serialization;
+using Dungeon.Core.Effects;
 
 namespace Dungeon.Core;
 
 /// <summary>
-/// The run seed and every command applied so far. Together they reproduce a run exactly.
+/// The run seed and every command applied so far. Together, under the rules the run was played with, they reproduce a
+/// run exactly.
 /// Saved as single-line JSON in the same versioned style as <see cref="Snapshot"/>;
 /// <see cref="Load"/> reports problems with the same exceptions, and refuses a seed of 2^60
 /// or more, which no run can have (and <see cref="Save"/> refuses to write one). Two logs with the same
@@ -165,21 +167,31 @@ public sealed class ReplayException : Exception
 public static class Replay
 {
     /// <summary>
-    /// Applies <paramref name="commands"/> in order and returns the final state. Throws
-    /// <see cref="ReplayException"/> at the first command the rules reject. It applies them with
-    /// <see cref="Engine.Apply(GameState, Command)"/>, which has no effect rules, so a command that raises a rule event
-    /// while the state holds effect instances throws <see cref="ArgumentException"/>.
+    /// <see cref="Run(GameState, IEnumerable{Command}, RulesContext)"/> with <see cref="RulesContext.Empty"/>, which
+    /// holds no effect definitions and no pools. It reproduces a run only when the run was played with no rules: a
+    /// command that raises a rule event while the state holds effect instances throws <see cref="ArgumentException"/>,
+    /// and a state with pool spent counts never refills them, so the replay diverges from the live run with no error.
+    /// Such a state needs the overload that takes the rules.
     /// </summary>
-    public static GameState Run(GameState initial, IEnumerable<Command> commands)
+    public static GameState Run(GameState initial, IEnumerable<Command> commands) =>
+        Run(initial, commands, RulesContext.Empty);
+
+    /// <summary>
+    /// Applies <paramref name="commands"/> in order with <see cref="Engine.Apply(GameState, Command, RulesContext)"/>
+    /// and returns the final state. Throws <see cref="ReplayException"/> at the first command the rules reject. A
+    /// command log reproduces a run only under the rules it was played with.
+    /// </summary>
+    public static GameState Run(GameState initial, IEnumerable<Command> commands, RulesContext rules)
     {
         ArgumentNullException.ThrowIfNull(initial);
         ArgumentNullException.ThrowIfNull(commands);
+        ArgumentNullException.ThrowIfNull(rules);
 
         var state = initial;
         int index = 0;
         foreach (var command in commands)
         {
-            var result = Engine.Apply(state, command);
+            var result = Engine.Apply(state, command, rules);
             if (!result.Ok)
             {
                 throw new ReplayException(index, result.Error);

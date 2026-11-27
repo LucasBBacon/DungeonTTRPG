@@ -140,6 +140,84 @@ public class DeathTests
         Assert.Equal(C, next.Combat.CurrentUnit);
     }
 
+    // A second death while the turn is vacated: the dead unit held the vacated slot's successor, so the index stays on
+    // the slot (now past the end) and the turn stays vacated; resuming wraps to a new round.
+    [Fact]
+    public void A_second_death_in_the_vacated_slot_keeps_the_turn_vacated()
+    {
+        var (_, vacated) = Harm.Deal(Rules, ThreeInCombat(1), B, Lethal);
+        Assert.Equal((1, true), (vacated.Combat!.Current, vacated.Combat.TurnVacated));
+
+        var (result, next) = Harm.Deal(Rules, vacated, C, Lethal);
+
+        Assert.DoesNotContain(result.Events, e => e is TurnStarted or TurnEnded);
+        Assert.True(next.Combat!.Order.SequenceEqual([A]));
+        Assert.Equal((1, 3L, true), (next.Combat.Current, next.Combat.Round, next.Combat.TurnVacated));
+
+        var (resumed, after) = Turns.ResumeIfVacated(Rules, next);
+        Assert.Equal<GameEvent>([new TurnStarted(A, 4)], resumed.ToArray());
+        Assert.Equal((0, 4L, false), (after.Combat!.Current, after.Combat.Round, after.Combat.TurnVacated));
+    }
+
+    // A second death in an earlier slot while the turn is vacated moves the index back and keeps the flag, so resuming
+    // starts the vacated slot's successor in the same round.
+    [Fact]
+    public void A_second_death_in_an_earlier_slot_keeps_the_turn_vacated()
+    {
+        var (_, vacated) = Harm.Deal(Rules, ThreeInCombat(1), B, Lethal);
+
+        var (_, next) = Harm.Deal(Rules, vacated, A, Lethal);
+
+        Assert.True(next.Combat!.Order.SequenceEqual([C]));
+        Assert.Equal((0, 3L, true), (next.Combat.Current, next.Combat.Round, next.Combat.TurnVacated));
+
+        var (resumed, after) = Turns.ResumeIfVacated(Rules, next);
+        Assert.Equal<GameEvent>([new TurnStarted(C, 3)], resumed.ToArray());
+        Assert.Equal((0, 3L, false), (after.Combat!.Current, after.Combat.Round, after.Combat.TurnVacated));
+    }
+
+    // The sole unit in the order dies: the order is empty, the turn vacated, and there is no turn to resume.
+    [Fact]
+    public void The_sole_unit_in_the_order_dying_empties_it()
+    {
+        var s = ThreeInCombat(0) with { Combat = new CombatState([B], 0, 3) };
+
+        var (_, next) = Harm.Deal(Rules, s, B, Lethal);
+
+        Assert.Empty(next.Combat!.Order);
+        Assert.Equal((0, 3L, true), (next.Combat.Current, next.Combat.Round, next.Combat.TurnVacated));
+
+        var (resumed, after) = Turns.ResumeIfVacated(Rules, next);
+        Assert.Empty(resumed);
+        Assert.Same(next, after);
+    }
+
+    // A unit that dies holding the pending decision takes it with it: its boon choice is moot and the shrine draw has
+    // happened. Left pending, no command could succeed again and the save could not be loaded.
+    [Fact]
+    public void A_unit_that_dies_holding_the_pending_decision_takes_it_with_it()
+    {
+        var s = GameState.Create(
+            GridMap.Parse(".*..."),
+            [
+                new Unit(Hero, new GridPos(4, 0), Faction.Party, [], Fixtures.Stats, FullHp),
+                new Unit(Foe, new GridPos(0, 0), Faction.Enemy, [], EnemyStats, 12),
+            ],
+            7,
+            hero: Hero);
+        var moved = Engine.Apply(s, new MoveCommand(Foe, Direction.E), Rules);
+        Assert.True(moved.Ok);
+        Assert.Equal(Foe, moved.State.Pending!.Unit);
+
+        var (_, next) = Harm.Deal(Rules, moved.State, Foe, Lethal);
+
+        Assert.Null(next.FindUnit(Foe));
+        Assert.Null(next.Pending);
+        Assert.True(Engine.Apply(next, new MoveCommand(Hero, Direction.W), Rules).Ok);
+        string json = Snapshot.Save(next);
+        Assert.Equal(json, Snapshot.Save(Snapshot.Load(json)));
+    }
+
     [Fact]
     public void Damage_to_a_unit_already_on_zero_has_no_consequence()
     {

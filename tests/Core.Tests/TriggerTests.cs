@@ -255,6 +255,7 @@ public class TriggerTests
     [Theory]
     [InlineData("""{"on": "unitMoved", "scope": "holder", "do": [{"hook": "test.mark"}, {"hook": "test.nope"}]}""", "$.effects[1].triggers[0].do[1].hook")]
     [InlineData("""{"on": "test.nope", "scope": "holder", "do": [{"hook": "test.mark"}]}""", "$.effects[1].triggers[0].on")]
+    [InlineData("""{"on": "unitDied", "scope": "any", "do": [{"hook": "test.mark"}, {"applyEffect": "ok", "to": "subject"}]}""", "$.effects[1].triggers[0].do[1].to")]
     public void An_unknown_hook_or_event_fails_with_the_file_and_field(string trigger, string field)
     {
         var ex = Assert.Throws<ContentLoadException>(() => RulesContext.Create(

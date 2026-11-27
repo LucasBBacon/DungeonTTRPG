@@ -53,8 +53,9 @@ public static class Engine
     /// Applies <paramref name="command"/> with no effect rules: <see cref="Apply(GameState, Command, RulesContext)"/>
     /// with <see cref="RulesContext.Empty"/> (M1-07 plan call 6), so a state without effects behaves as it always has.
     /// <see cref="RulesContext.Empty"/> holds no effect definitions, so on a state that holds effect instances a
-    /// command that raises a rule event (a move raises <c>unitMoved</c>) throws <see cref="ArgumentException"/>; such
-    /// a state needs the overload that takes the rules.
+    /// command that raises a rule event (a move raises <c>unitMoved</c>) throws <see cref="ArgumentException"/>. It holds
+    /// no pools either, so on a state with pool spent counts a tick or a turn start refills nothing, and the result
+    /// differs from the live run's with no error. Such states need the overload that takes the rules.
     /// </summary>
     public static StepResult Apply(GameState state, Command command) => Apply(state, command, RulesContext.Empty);
 
@@ -103,7 +104,8 @@ public static class Engine
 
     /// <summary>
     /// A one-square move. Out of combat it advances <see cref="GameState.Tick"/> and, as each tick does (AB 6.8; M1-10
-    /// plan call 6), gives every unit a fresh turn budget and refills every <see cref="RefillTag.Turn"/> pool. In combat
+    /// plan call 6), first gives every unit a fresh turn budget and refills every <see cref="RefillTag.Turn"/> pool, then
+    /// makes the move (the tick's start steps come first, CO 5.5). In combat
     /// (plan call 8) only the current unit may move, and only with movement left (checked before the square); the move
     /// spends 1 movement and does not tick.
     /// </summary>
@@ -159,12 +161,12 @@ public static class Engine
         {
             // Checked: at the limit the step fails loudly rather than wrap to a state no save can hold.
             long tick = checked(state.Tick + 1);
-            next = state with
+            next = TickResets(rules, state);
+            next = next with
             {
-                Units = state.Units.SetItem(index, unit with { Pos = to }),
+                Units = next.Units.SetItem(index, next.Units[index] with { Pos = to }),
                 Tick = tick,
             };
-            next = TickResets(rules, next);
             events.Add(new TickAdvanced(tick));
         }
 
@@ -185,21 +187,10 @@ public static class Engine
         return new StepResult(next, events.ToImmutable(), CommandError.None);
     }
 
-    // AB 6.8, after the tick advances: every unit's turn budget becomes fresh (the camp flag included) and every
-    // turn pool refills.
-    private static GameState TickResets(RulesContext rules, GameState s)
-    {
-        var units = s.Units.ToBuilder();
-        for (int i = 0; i < units.Count; i++)
-        {
-            if (units[i].Budget != default)
-            {
-                units[i] = units[i] with { Budget = default };
-            }
-        }
-
-        return Pools.RefillAll(rules, s with { Units = units.ToImmutable() }, RefillTag.Turn);
-    }
+    // AB 6.8, at the start of each tick, before the command's own step: every unit's turn budget becomes fresh (the
+    // camp flag included) and every turn pool refills.
+    private static GameState TickResets(RulesContext rules, GameState s) =>
+        Pools.RefillAll(rules, Turns.FreshBudgets(s), RefillTag.Turn);
 
     /// <summary>
     /// Ends the current unit's turn (M1-10 plan call 9): refused out of combat, for an unknown unit, and out of turn

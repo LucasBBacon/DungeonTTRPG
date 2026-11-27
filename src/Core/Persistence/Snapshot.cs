@@ -315,7 +315,7 @@ public static class Snapshot
             : null;
 
         // The same rules the core holds these fields to; a breach surfaces as a format error.
-        GameState.CheckRunState(state.Units, combat, ended, nextEventSeq);
+        GameState.CheckRunState(state.Units, state.Hero, combat, ended, nextEventSeq);
 
         return state with
         {

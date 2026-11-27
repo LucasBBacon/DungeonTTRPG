@@ -53,6 +53,21 @@ public class CombatEndTests
         Assert.Equal(FullHp, next.FindUnit(Hero)!.Hp);
     }
 
+    // AB 6.8: out of combat each tick gives a fresh budget, so no combat budget survives combat end.
+    [Fact]
+    public void Combat_end_gives_every_unit_a_fresh_budget()
+    {
+        var used = new TurnBudget(3, 1, true, true, true, true);
+        var s = In(0);
+        s = s with { Units = [.. s.Units.Select(u => u with { Budget = used })] };
+        var (_, killed) = Harm.Deal(Rules, s, Foe, Lethal);
+
+        var (_, next) = CombatEnd.EndIfWon(Rules, killed);
+
+        Assert.Null(next.Combat);
+        Assert.All(next.Units, u => Assert.Equal(default, u.Budget));
+    }
+
     [Fact]
     public void Combat_does_not_end_while_an_enemy_remains()
     {

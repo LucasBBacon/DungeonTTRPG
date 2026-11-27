@@ -300,7 +300,9 @@ DH-15, DH-18; TL-8.
   `camp`/`never`; one camp spend per unit per turn.
 - `combatActive`; combat-start resets; combat-end order (turn end →
   `combatOnly` ends → get-ups → XP and level-ups → flag false).
-- Level-ups banked to combat end; level-ups never refill.
+- The combat-end level-up seam (step 4 of the combat-end order) and
+  `HitPoints.RaiseLevel`, which adds the HP increase and never refills;
+  M1-21 banks XP and fills the seam.
 - `RunEnded{cause, killingEventId?}`, cause `heroDeath` (with
   `killingEventId`), `victory`, or `unravelled` (reserved, M2); every
   command rejected after it (DH 10.1 as amended by D-08).
@@ -374,7 +376,8 @@ pipeline.
 
 **Implements:** CO 10.1, 18.1–18.9, 21; W-8, VG-8.
 
-**Depends on:** M1-12; decision D-09 (collision damage).
+**Depends on:** M1-12; decisions D-09 (collision damage) and D-18
+(movement left after a mid-turn speed change).
 
 **Delivers:**
 - Surprised, Prone, Grappled, Frightened, Hidden, Dodging, Stunned,
@@ -803,8 +806,9 @@ hazard draws reserved.
 HZ 11.2, 12; SV-3; TL 6.1, 6.2, 6.6, 6.11, 6.19, 6.22, 7.3, 12; TL-1 to
 TL-5, TL-19 to TL-21; DH-32.
 
-**Depends on:** M1-29; decisions D-06 (floor-1 traps and keys) and D-10
-(`hzTagMax`, traps formulas).
+**Depends on:** M1-29; decisions D-06 (floor-1 traps and keys), D-10
+(`hzTagMax`, traps formulas) and D-19 (trap conditions at combat start;
+initiative and the opening strike).
 
 **Delivers:**
 - Tall and Low pieces as blockers; Clearway; clutter bands; reservation
@@ -990,7 +994,8 @@ describe, and back out again.
 (static parts); DH 17.1 (DH-2); SV-6; RS 9.4 and BR 4.2.1 (Forecourt
 Top-up trigger and F1 guard, M1 by D-03); BR-3.
 
-**Depends on:** M1-34.
+**Depends on:** M1-34; decision D-19 (trap conditions at combat start;
+initiative and the opening strike).
 
 **Delivers:**
 - Group awareness records; noticing triggers; out-of-combat `h:notice`

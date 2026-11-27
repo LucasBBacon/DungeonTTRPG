@@ -79,7 +79,9 @@ public static class Harm
     /// order. A slot before the current one moves the current index back by 1. The current slot itself leaves the index
     /// on its successor (or on the order's length when it was the last slot) and sets
     /// <see cref="CombatState.TurnVacated"/>, with no <see cref="TurnEnded"/> (a dead unit has no turn-end step, CO 5.4)
-    /// and no <see cref="TurnStarted"/>. A later slot changes nothing. Out of combat there is no order to change.
+    /// and no <see cref="TurnStarted"/>. A later slot changes nothing. Out of combat there is no order to change. A
+    /// pending decision the dead unit holds is cleared: its choice is moot and the draw behind it has happened, and left
+    /// pending it would refuse every command and make the state unloadable.
     /// </summary>
     private static GameState Remove(GameState s, UnitId dead)
     {
@@ -108,6 +110,10 @@ public static class Harm
         }
 
         s = s with { Units = s.Units.RemoveAt(index) };
+        if (s.Pending?.Unit == dead)
+        {
+            s = s with { Pending = null };
+        }
 
         if (s.Combat is { } combat)
         {

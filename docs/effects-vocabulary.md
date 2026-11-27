@@ -295,8 +295,9 @@ its holder and `"to": "subject"` gives an effect to.
 | `unitMoved` | `UnitMoved` (a unit finished a one-square move) | The unit that moved |
 
 `unitDied` is raised after its subject has been removed, together with every effect instance it held or was the
-source of. So the dead unit's own triggers never answer it, and a trigger may not give it an effect: `"to": "subject"`
-on a `unitDied` trigger would fail, since the subject is gone. Only other units' triggers can answer it, with
+source of. So the dead unit's own triggers never answer it, and a trigger may not give it an effect: building the
+rules context refuses `"to": "subject"` on a `unitDied` trigger, naming the file and field, since the subject is
+gone. Only other units' triggers can answer it, with
 `"to": "holder"` or a hook. `combatEnded` has no rule event: a rule event needs a subject unit and combat end has none,
 so it waits for a subject-less rule event.
 

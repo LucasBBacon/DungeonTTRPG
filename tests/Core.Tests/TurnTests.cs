@@ -318,10 +318,31 @@ public class TurnTests
         Assert.Equal(commands, loaded.Commands);
         Assert.Equal(json, loaded.Save());
 
-        // The replay of an end turn reaches the same state as applying it.
+        // The replay of an end turn under the same rules reaches the same state as applying it, the next unit's turn
+        // pool refilled included.
         var s = InCombat();
+        s = Spend(s, OrderOf(s)[1], "pool.turn");
         var end = new EndTurnCommand(OrderOf(s)[0]);
-        Assert.Equal(Snapshot.Save(Engine.Apply(s, end).State), Snapshot.Save(Replay.Run(s, [end])));
+        var live = Apply(s, end).State;
+        Assert.Equal(0, Pools.Spent(live, OrderOf(s)[1], "pool.turn"));
+        Assert.Equal(Snapshot.Save(live), Snapshot.Save(Replay.Run(s, [end], Rules)));
+    }
+
+    // A command log reproduces a run only under the rules it was played with: without them a turn pool never refills,
+    // and the replay diverges with no error.
+    [Fact]
+    public void A_replay_matches_the_live_run_only_under_its_rules()
+    {
+        var s = Spend(Open(), Hero, "pool.turn");
+        var move = new MoveCommand(Hero, Direction.E);
+
+        var live = Apply(s, move).State;
+        Assert.Equal(0, Pools.Spent(live, Hero, "pool.turn"));
+        Assert.Equal(Snapshot.Save(live), Snapshot.Save(Replay.Run(s, [move], Rules)));
+
+        var bare = Replay.Run(s, [move]);
+        Assert.Equal(1, Pools.Spent(bare, Hero, "pool.turn"));
+        Assert.NotEqual(Snapshot.Save(live), Snapshot.Save(bare));
     }
 
     [Theory]

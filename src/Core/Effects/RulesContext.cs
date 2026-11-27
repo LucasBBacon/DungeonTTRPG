@@ -64,7 +64,8 @@ public sealed class RulesContext
     /// <c>zero</c> target names no derived number, a <c>halve</c> or <c>zero</c> targets a number whose rule is not
     /// <see cref="NumberRule.Speed"/>, a <c>rollMode</c> target names no roll target, a <c>flag</c> target is not one of
     /// <see cref="Flags.Targets"/> or its flag names no registered flag, a trigger's <c>on</c> names no event, or an
-    /// action names no registered hook. Throws <see cref="ArgumentException"/> if a registry repeats an id, or a derived
+    /// action names no registered hook, or a <c>unitDied</c> trigger gives an effect <c>"to": "subject"</c> (the subject
+    /// has been removed). Throws <see cref="ArgumentException"/> if a registry repeats an id, or a derived
     /// number has no base, has a cap but is not an <see cref="NumberRule.AbilityScore"/> number, or has a floor but is an
     /// <see cref="NumberRule.AbilityScore"/> or <see cref="NumberRule.Speed"/> number, or a pool is null, has an id
     /// that is not a content id, an undefined refill tag or no maximum, or repeats an id.
@@ -204,10 +205,21 @@ public sealed class RulesContext
 
             for (int a = 0; a < trigger.Do.Length; a++)
             {
-                if (trigger.Do[a].Hook is { } hook && !Hooks.Contains(hook))
+                var action = trigger.Do[a];
+                if (action.Hook is { } hook && !Hooks.Contains(hook))
                 {
                     throw new ContentLoadException(
                         definition.File, Member(Item(Member(field, "do"), a), "hook"), $"\"{hook}\" names no hook.");
+                }
+
+                // unitDied is raised after its subject has been removed, so no effect can be given to it.
+                if (action.ApplyEffect is not null && action.To == TriggerTarget.Subject
+                    && string.Equals(trigger.On, "unitDied", StringComparison.Ordinal))
+                {
+                    throw new ContentLoadException(
+                        definition.File,
+                        Member(Item(Member(field, "do"), a), "to"),
+                        "a unitDied trigger cannot give an effect to its subject, which has been removed.");
                 }
             }
         }

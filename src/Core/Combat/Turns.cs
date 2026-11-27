@@ -44,11 +44,7 @@ public static class Turns
         // Who joins a fight is M1-35's; until then every unit in the state does, in id order.
         var (order, next) = Initiative.Roll(rules, s, s.Units.Select(u => u.Id));
 
-        next = next with
-        {
-            Units = next.Units.Select(u => u.Budget == default ? u : u with { Budget = default }).ToImmutableArray(),
-        };
-        next = Pools.RefillAll(rules, next, RefillTag.Fight);
+        next = Pools.RefillAll(rules, FreshBudgets(next), RefillTag.Fight);
 
         // TL-19's combat-start seam (D-19, M1-30) goes here.
         next = next with { Combat = new CombatState(order.Select(e => e.Unit).ToImmutableArray(), 0, 1) };
@@ -87,18 +83,17 @@ public static class Turns
     }
 
     /// <summary>
-    /// Ends the current unit's turn and starts the next (plan call 9): emits <see cref="TurnEnded"/>, runs the turn-end
-    /// step (empty until M1-12), moves to the next slot (passing the last slot wraps to slot 0 and round + 1), then
-    /// <see cref="StartTurn"/>. Throws <see cref="InvalidOperationException"/> out of combat, on an ended run, or while
-    /// the turn is vacated.
+    /// Ends the current unit's turn and starts the next (plan call 9): <see cref="EndCurrentTurn"/>
+    /// (<see cref="TurnEnded"/>, then the turn-end step), then moves to the next slot (passing the last slot wraps to
+    /// slot 0 and round + 1), then <see cref="StartTurn"/>. Throws <see cref="InvalidOperationException"/> out of combat,
+    /// on an ended run, or while the turn is vacated.
     /// </summary>
     public static (ImmutableArray<GameEvent> Events, GameState Next) Advance(RulesContext rules, GameState s)
     {
         ArgumentNullException.ThrowIfNull(rules);
         var combat = LiveTurn(s);
-        var ended = new TurnEnded(combat.CurrentUnit);
+        var (ended, afterEnd) = EndCurrentTurn(rules, s);
 
-        // CO 5.4's turn-end step goes here: M1-12.
         int current = combat.Current + 1;
         long round = combat.Round;
         if (current == combat.Order.Length)
@@ -107,9 +102,27 @@ public static class Turns
             round = checked(round + 1);
         }
 
-        var (turn, next) = StartTurn(rules, s with { Combat = combat with { Current = current, Round = round } });
-        return ([ended, .. turn], next);
+        var (turn, next) = StartTurn(rules, afterEnd with { Combat = combat with { Current = current, Round = round } });
+        return ([.. ended, .. turn], next);
     }
+
+    /// <summary>
+    /// The current unit's turn end, shared by <see cref="Advance"/> and <c>CombatEnd.EndIfWon</c> so both give the same
+    /// order: <see cref="TurnEnded"/>, then the turn-end step (CO 5.4; empty until M1-12, whose events then follow
+    /// <see cref="TurnEnded"/> in both paths). The caller has checked that a live, unvacated turn exists.
+    /// </summary>
+    internal static (ImmutableArray<GameEvent> Events, GameState Next) EndCurrentTurn(RulesContext rules, GameState s)
+    {
+        ArgumentNullException.ThrowIfNull(rules);
+        var events = ImmutableArray.Create<GameEvent>(new TurnEnded(s.Combat!.CurrentUnit));
+
+        // CO 5.4's turn-end step goes here, after TurnEnded: M1-12.
+        return (events, s);
+    }
+
+    /// <summary>Every unit's turn budget made fresh, the camp flag included (combat start, combat end, each tick).</summary>
+    internal static GameState FreshBudgets(GameState s) =>
+        s with { Units = s.Units.Select(u => u.Budget == default ? u : u with { Budget = default }).ToImmutableArray() };
 
     /// <summary>
     /// Starts the turn a dead unit vacated (plan call 11; callers run it after <c>CombatEnd.EndIfWon</c>, once the

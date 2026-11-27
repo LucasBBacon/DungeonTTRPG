@@ -169,11 +169,11 @@ public sealed record GameState(
     /// applies it (M1-10 task 1). <paramref name="nextEventSeq"/> is at least 1. A combat state has an initialised order
     /// of distinct units in the state, a round of at least 1, and <c>Current</c> in [0, order length), or equal to the
     /// order length only when its turn is vacated. A run end has a defined cause and a killing event id exactly when the
-    /// cause is <see cref="RunEndCause.HeroDeath"/>, from 1 to below <paramref name="nextEventSeq"/>. Throws
-    /// <see cref="ArgumentException"/> naming the problem.
+    /// cause is <see cref="RunEndCause.HeroDeath"/>, from 1 to below <paramref name="nextEventSeq"/>; a hero death also
+    /// needs a <paramref name="hero"/>, on 0 HP. Throws <see cref="ArgumentException"/> naming the problem.
     /// </summary>
     internal static void CheckRunState(
-        ImmutableArray<Unit> units, CombatState? combat, RunEnd? ended, long nextEventSeq)
+        ImmutableArray<Unit> units, UnitId? hero, CombatState? combat, RunEnd? ended, long nextEventSeq)
     {
         if (nextEventSeq < 1)
         {
@@ -200,6 +200,19 @@ public sealed record GameState(
                 {
                     throw new ArgumentException(
                         $"Invalid run end: killingEventId {id} was never issued (nextEventSeq is {nextEventSeq}).",
+                        nameof(ended));
+                }
+
+                var heroUnit = hero is { } h ? units.FirstOrDefault(u => u.Id == h) : null;
+                if (heroUnit is null)
+                {
+                    throw new ArgumentException("Invalid run end: a hero death needs a hero.", nameof(ended));
+                }
+
+                if (heroUnit.Hp != 0)
+                {
+                    throw new ArgumentException(
+                        $"Invalid run end: a hero death needs the hero on 0 HP, but unit {heroUnit.Id.Value} has {heroUnit.Hp}.",
                         nameof(ended));
                 }
             }

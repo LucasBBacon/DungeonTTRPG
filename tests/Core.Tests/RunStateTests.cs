@@ -85,7 +85,7 @@ public class RunStateTests
     }
 
     private static GameState Ended() =>
-        Build(Hero, U(1, 0, 0), Foe(2, 1, 0)) with { Ended = new RunEnd(RunEndCause.HeroDeath, 4), NextEventSeq = 5 };
+        Build(Hero, U(1, 0, 0) with { Hp = 0 }, Foe(2, 1, 0)) with { Ended = new RunEnd(RunEndCause.HeroDeath, 4), NextEventSeq = 5 };
 
     private static GameState Vacated() =>
         InCombat() with { Combat = new CombatState([new(3), new(1), new(2)], 3, 2, TurnVacated: true) };
@@ -143,6 +143,8 @@ public class RunStateTests
     [InlineData("\"killingEventId\":4", "\"killingEventId\":-1")]
     [InlineData("\"killingEventId\":4", "\"killingEventId\":5")]
     [InlineData("\"cause\":\"HeroDeath\"", "\"cause\":\"heroDeath\"")]
+    [InlineData("\"hero\":1", "\"hero\":null")]
+    [InlineData("\"hp\":0", "\"hp\":12")]
     public void A_load_with_a_bad_run_end_is_a_format_error(string from, string to)
     {
         var good = Snapshot.Save(Ended());
