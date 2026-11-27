@@ -39,6 +39,9 @@ public static class Engine
     /// <summary>
     /// Applies <paramref name="command"/> with no effect rules: <see cref="Apply(GameState, Command, RulesContext)"/>
     /// with <see cref="RulesContext.Empty"/> (M1-07 plan call 6), so a state without effects behaves as it always has.
+    /// <see cref="RulesContext.Empty"/> holds no effect definitions, so on a state that holds effect instances a
+    /// command that raises a rule event (a move raises <c>unitMoved</c>) throws <see cref="ArgumentException"/>; such
+    /// a state needs the overload that takes the rules.
     /// </summary>
     public static StepResult Apply(GameState state, Command command) => Apply(state, command, RulesContext.Empty);
 

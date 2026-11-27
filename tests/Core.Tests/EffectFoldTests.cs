@@ -21,13 +21,17 @@ public class EffectFoldTests
 
     private static readonly UnitId Ally = new(2);
 
-    // The fixture numbers: a stacking number and a capped ability score, plus the core speed.
+    // The fixture numbers: a stacking number, a capped stacking number and a capped ability score, plus the core speed.
     private static readonly ImmutableArray<DerivedNumber> Numbers =
         [
             new DerivedNumber("test.stack", NumberRule.Stack, 10, null),
+            new DerivedNumber("test.capped", NumberRule.Stack, 10, 12),
             new DerivedNumber("test.ability", NumberRule.AbilityScore, 4, 5),
             .. DerivedNumbers.Core,
         ];
+
+    // The fixture flag names.
+    private static readonly ImmutableArray<string> Flags = ["dodging", "hidden"];
 
     private static readonly RulesContext Rules = RulesContext.Create(
         LoadEffects(
@@ -53,8 +57,12 @@ public class EffectFoldTests
             Def("adv", "condition", """{"target": "attackRoll", "rollMode": "advantage"}"""),
             Def("adv2", "ability", """{"target": "attackRoll", "rollMode": "advantage"}"""),
             Def("dis", "condition", """{"target": "attackRoll", "rollMode": "disadvantage"}"""),
-            Def("hidden", "ability", """{"target": "unit", "flag": "hidden"}""")),
-        Numbers);
+            Def("hidden", "ability", """{"target": "unit", "flag": "hidden"}"""),
+            Def("cap.gear.plus2", "gear", Add("test.capped", 2)),
+            Def("cap.gear.plus2b", "gear", Add("test.capped", 2)),
+            Def("cap.cond.minus3", "condition", Add("test.capped", -3))),
+        Numbers,
+        flags: Flags);
 
     // --- Review Focus 1: stacking per source kind ---
 
@@ -87,6 +95,14 @@ public class EffectFoldTests
     [InlineData(4)]
     public void An_ability_score_takes_the_best_bonus_and_worst_penalty_then_the_cap(long expected, params string[] effects) =>
         Assert.Equal(expected, Effects.Number(Rules, With(effects), Hero, "test.ability"));
+
+    // The cap applies last for every number rule, after the bonuses and the penalties.
+    [Theory]
+    [InlineData(12, "cap.gear.plus2", "cap.gear.plus2b")]                     // 10 + 4 = 14, capped at 12
+    [InlineData(11, "cap.gear.plus2", "cap.gear.plus2b", "cap.cond.minus3")]  // cap after the penalty: min(10 + 4 - 3, 12)
+    [InlineData(10)]
+    public void A_capped_stack_number_applies_the_cap_last(long expected, params string[] effects) =>
+        Assert.Equal(expected, Effects.Number(Rules, With(effects), Hero, "test.capped"));
 
     // --- Review Focus 3: speed ---
 
@@ -127,6 +143,14 @@ public class EffectFoldTests
         Assert.False(Effects.Flag(Rules, s, Hero, "unit", "dodging"));
         Assert.False(Effects.Flag(Rules, s, Ally, "unit", "hidden"));
         Assert.False(Effects.Flag(Rules, Start(), Hero, "unit", "hidden"));
+    }
+
+    [Fact]
+    public void A_flag_query_refuses_an_unknown_target_or_name()
+    {
+        var s = With("hidden");
+        Assert.Throws<ArgumentException>(() => Effects.Flag(Rules, s, Hero, "unti", "hidden"));
+        Assert.Throws<ArgumentException>(() => Effects.Flag(Rules, s, Hero, "unit", "hiden"));
     }
 
     [Fact]
@@ -236,10 +260,13 @@ public class EffectFoldTests
     [InlineData("""{"target": "speed", "rollMode": "advantage"}""", "$.effects[1].modifiers[0].target")]
     [InlineData("""{"target": "test.stack", "halve": true}""", "$.effects[1].modifiers[0].halve")]
     [InlineData("""{"target": "test.stack", "zero": true}""", "$.effects[1].modifiers[0].zero")]
+    [InlineData("""{"target": "unti", "flag": "hidden"}""", "$.effects[1].modifiers[0].target")]
+    [InlineData("""{"target": "speed", "flag": "hidden"}""", "$.effects[1].modifiers[0].target")]
+    [InlineData("""{"target": "unit", "flag": "hiden"}""", "$.effects[1].modifiers[0].flag")]
     public void A_bad_modifier_target_fails_with_the_file_and_field(string modifier, string field)
     {
         var ex = Assert.Throws<ContentLoadException>(() => RulesContext.Create(
-            LoadEffects(Def("ok", "gear", Add("speed", 1)), Def("x.bad", "gear", modifier)), Numbers));
+            LoadEffects(Def("ok", "gear", Add("speed", 1)), Def("x.bad", "gear", modifier)), Numbers, flags: Flags));
         Assert.Equal((EffectsFile, field), (ex.File, ex.Field));
     }
 
@@ -290,7 +317,6 @@ public class EffectFoldTests
             s with { NextEffectSeq = 2 },
             s with { Effects = [e[0], e[1] with { Holder = new UnitId(9) }] },                  // unknown holder
             s with { Effects = [e[0] with { Source = new EffectSource(new UnitId(9)) }, e[1]] }, // unknown source
-            s with { Effects = [e[1], e[0]] },                                                  // unsorted
             s with { Effects = [e[0] with { EffectId = "Not An Id" }, e[1]] },                  // not a content id
             s with { Effects = [], NextEffectSeq = 0 },                                         // counter below 1
         };
@@ -301,6 +327,27 @@ public class EffectFoldTests
                 Record.Exception(() => Snapshot.Load(json)) is SnapshotFormatException,
                 $"Bad state {i} loaded.");
         }
+    }
+
+    [Fact]
+    public void Save_writes_the_effects_in_seq_order_whatever_the_stored_order()
+    {
+        var s = With("gear.plus2", "cond.halve", "adv");
+        var shuffled = s with { Effects = [s.Effects[2], s.Effects[0], s.Effects[1]] };
+        var json = Snapshot.Save(shuffled);
+        Assert.Equal(Snapshot.Save(s), json);
+        Assert.Equal(s.Effects.AsEnumerable(), Snapshot.Load(json).Effects);
+    }
+
+    [Fact]
+    public void Load_rejects_effects_out_of_seq_order()
+    {
+        var s = Effects.Apply(Effects.Apply(Start(), "gear.plus2", Hero, new EffectSource(Ally)), "cond.halve", Ally, EffectSource.Environment);
+        const string First = "{\"seq\":1,\"effect\":\"gear.plus2\",\"holder\":1,\"source\":2}";
+        const string Second = "{\"seq\":2,\"effect\":\"cond.halve\",\"holder\":2,\"source\":null}";
+        var good = Snapshot.Save(s);
+        Assert.Contains(First + "," + Second, good);
+        Assert.Throws<SnapshotFormatException>(() => Snapshot.Load(good.Replace(First + "," + Second, Second + "," + First)));
     }
 
     [Theory]

@@ -51,6 +51,22 @@ public static class RollTargets
 }
 
 /// <summary>
+/// The production flag tables: the targets and names a <c>flag</c> modifier may give (plan call 5). A flag is a
+/// boolean a unit's active effects set on it, read with <see cref="Effects.Flag"/>.
+/// </summary>
+public static class Flags
+{
+    /// <summary>The flag targets, ordinal: <c>unit</c> (the effect's holder). Fixed in code; not a registry parameter.</summary>
+    public static ImmutableArray<string> Targets { get; } = ["unit"];
+
+    /// <summary>
+    /// The M1-07 flag names: none. The steps that read a flag (M1-13 Incapacitated, M1-14 Dodge and Hide, M1-17
+    /// Raise) add their rows; tests pass their own table.
+    /// </summary>
+    public static ImmutableArray<string> Core { get; } = [];
+}
+
+/// <summary>
 /// A rule event a trigger's <c>on</c> may name: its id, the <see cref="GameEvent"/> type that raises it, and its
 /// subject, the unit a <c>holder</c>-scope trigger compares with its holder and <c>"to": "subject"</c> gives an effect
 /// to. Built with <see cref="Of{T}"/>.

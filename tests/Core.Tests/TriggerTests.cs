@@ -192,16 +192,39 @@ public class TriggerTests
         Assert.Equal(StateDigest.Of(without.State with { Effects = s.Effects }), StateDigest.Of(with.State));
     }
 
+    // Engine.Apply(state, command) on a state without effects does what M0 did: the move, the tick and the shrine
+    // decision, with no trigger events and the effect counter untouched.
     [Fact]
-    public void Apply_without_rules_is_apply_with_the_empty_context()
+    public void Apply_without_rules_on_a_state_without_effects_is_the_m0_move()
     {
         var s = ShrineState();
-        var cmd = new MoveCommand(Hero, Direction.E);
-        var plain = Engine.Apply(s, cmd);
-        var empty = Engine.Apply(s, cmd, RulesContext.Empty);
-        Assert.Equal(plain.Events.Select(Comparable), empty.Events.Select(Comparable));
-        Assert.Equal(StateDigest.Of(plain.State), StateDigest.Of(empty.State));
-        Assert.Equal(plain.Error, empty.Error);
+        var r = Engine.Apply(s, new MoveCommand(Hero, Direction.E));
+        Assert.True(r.Ok);
+        var pending = Assert.IsType<PendingDecision>(r.State.Pending);
+        Assert.Equal(
+            (new DecisionId(1), Hero, DecisionKind.ShrineBoon, new GridPos(1, 0)),
+            (pending.Id, pending.Unit, pending.Kind, pending.Source));
+        Assert.Equal(3, pending.Options.Distinct().Count());
+        Assert.Equal<GameEvent>(
+            [new UnitMoved(Hero, new GridPos(0, 0), new GridPos(1, 0)), new TickAdvanced(1), new DecisionRequested(pending)],
+            r.Events.ToArray());
+        Assert.Equal(new GridPos(1, 0), r.State.Units[0].Pos);
+        Assert.Equal(1, r.State.Tick);
+        Assert.Equal(s.Rng.Combat, r.State.Rng.Combat);
+        Assert.Equal(s.Rng.Shrine.Skip(3), r.State.Rng.Shrine);
+        Assert.Empty(r.State.Effects);
+        Assert.Equal(1, r.State.NextEffectSeq);
+    }
+
+    // The old overload has no effect definitions, so a state holding instances cannot answer a rule event with it:
+    // replaying such a state needs Engine.Apply(state, command, rules). Pinned until replay is effect-aware.
+    [Fact]
+    public void Apply_without_rules_throws_when_a_rule_event_meets_an_effect_instance()
+    {
+        var s = Effects.Apply(Start(), "t.plain", Hero, EffectSource.Environment);
+        Assert.Throws<ArgumentException>(() => Engine.Apply(s, HeroEast));
+        Assert.Throws<ArgumentException>(() => Replay.Run(s, [HeroEast]));
+        Assert.True(Engine.Apply(s, HeroEast, Rules).Ok);
     }
 
     [Fact]
@@ -273,9 +296,6 @@ public class TriggerTests
     }
 
     // An event with value equality: a decision's options are an ImmutableArray, which compares by reference.
-    private static object Comparable(GameEvent e) =>
-        e is DecisionRequested d ? (d.Decision with { Options = [] }, string.Join(",", d.Decision.Options)) : e;
-
     private static long[] FiredSeqs(StepResult r) => r.Events.OfType<HookFired>().Select(h => h.Seq).ToArray();
 
     // Re-raises the holder's move until it has fired args[0] + 1 times, keeping count with t.plain instances.

@@ -156,7 +156,9 @@ public static class Replay
 {
     /// <summary>
     /// Applies <paramref name="commands"/> in order and returns the final state. Throws
-    /// <see cref="ReplayException"/> at the first command the rules reject.
+    /// <see cref="ReplayException"/> at the first command the rules reject. It applies them with
+    /// <see cref="Engine.Apply(GameState, Command)"/>, which has no effect rules, so a command that raises a rule event
+    /// while the state holds effect instances throws <see cref="ArgumentException"/>.
     /// </summary>
     public static GameState Run(GameState initial, IEnumerable<Command> commands)
     {

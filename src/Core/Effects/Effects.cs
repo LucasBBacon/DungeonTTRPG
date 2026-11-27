@@ -120,13 +120,19 @@ public static class Effects
 
     /// <summary>
     /// True if one of <paramref name="unit"/>'s active effects sets the flag <paramref name="name"/> on
-    /// <paramref name="target"/>. Throws <see cref="ArgumentException"/> for an unknown unit or effect definition.
+    /// <paramref name="target"/>. Throws <see cref="ArgumentException"/> for an unknown flag target or flag name, unit
+    /// or effect definition.
     /// </summary>
     public static bool Flag(RulesContext rules, GameState s, UnitId unit, string target, string name)
     {
         ArgumentNullException.ThrowIfNull(rules);
         ArgumentNullException.ThrowIfNull(target);
         ArgumentNullException.ThrowIfNull(name);
+        if (!rules.IsFlag(target, name))
+        {
+            throw new ArgumentException($"No flag \"{name}\" on target \"{target}\".", nameof(name));
+        }
+
         foreach (var definition in Held(rules, s, unit))
         {
             foreach (var m in definition.Modifiers)

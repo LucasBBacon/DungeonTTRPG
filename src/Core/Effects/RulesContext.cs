@@ -8,7 +8,7 @@ namespace Dungeon.Core.Effects;
 
 /// <summary>
 /// What the fold queries and the engine read the effect rules from: the effect definitions of the content, and the code
-/// registries (derived numbers, roll targets, rule events and hooks; M1-07 plan call 5). Building one checks every
+/// registries (derived numbers, roll targets, flags, rule events and hooks; M1-07 plan call 5). Building one checks every
 /// reference the content makes into the registries, so a misspelt id fails at startup with the file and field named
 /// (MAIN 6.5), never in play.
 /// </summary>
@@ -18,18 +18,23 @@ public sealed class RulesContext
     private readonly ImmutableArray<EffectDefinition> _definitions;
     private readonly ImmutableArray<DerivedNumber> _numbers;
     private readonly ImmutableArray<string> _rollTargets;
+    private readonly ImmutableArray<string> _flagTargets;
+    private readonly ImmutableArray<string> _flags;
     private readonly ImmutableArray<RuleEvent> _events;
 
     private RulesContext(
         ImmutableArray<EffectDefinition> definitions,
         ImmutableArray<DerivedNumber> numbers,
         ImmutableArray<string> rollTargets,
+        ImmutableArray<string> flags,
         ImmutableArray<RuleEvent> events,
         HookRegistry hooks)
     {
         _definitions = definitions;
         _numbers = numbers;
         _rollTargets = rollTargets;
+        _flagTargets = SortedIds(Flags.Targets, nameof(Flags.Targets));
+        _flags = flags;
         _events = events;
         Hooks = hooks;
     }
@@ -39,31 +44,34 @@ public sealed class RulesContext
         ImmutableArray<EffectDefinition>.Empty,
         SortedNumbers(DerivedNumbers.Core),
         SortedIds(RollTargets.Core, "rollTargets"),
+        SortedIds(Flags.Core, "flags"),
         SortedEvents(RuleEvents.Core),
         HookRegistry.Core);
 
     /// <summary>
     /// Builds the context for <paramref name="content"/>'s effect definitions. Each registry defaults to its core
     /// table (<see cref="DerivedNumbers.Core"/>, <see cref="RollTargets.Core"/>, <see cref="RuleEvents.Core"/>,
-    /// <see cref="HookRegistry.Core"/>); tests pass their own. Throws <see cref="ContentLoadException"/> naming the
-    /// definition's file and path when an <c>add</c>, <c>halve</c> or <c>zero</c> target names no derived number, a
-    /// <c>halve</c> or <c>zero</c> targets a number whose rule is not <see cref="NumberRule.Speed"/>, a <c>rollMode</c>
-    /// target names no roll target, a trigger's <c>on</c> names no event, or an action names no registered hook.
-    /// <c>flag</c> targets are not checked: there is no flag-target registry. Throws <see cref="ArgumentException"/> if
-    /// a registry repeats an id.
+    /// <see cref="HookRegistry.Core"/>, <see cref="Flags.Core"/>); tests pass their own. Throws
+    /// <see cref="ContentLoadException"/> naming the definition's file and path when an <c>add</c>, <c>halve</c> or
+    /// <c>zero</c> target names no derived number, a <c>halve</c> or <c>zero</c> targets a number whose rule is not
+    /// <see cref="NumberRule.Speed"/>, a <c>rollMode</c> target names no roll target, a <c>flag</c> target is not one of
+    /// <see cref="Flags.Targets"/> or its flag names no registered flag, a trigger's <c>on</c> names no event, or an
+    /// action names no registered hook. Throws <see cref="ArgumentException"/> if a registry repeats an id.
     /// </summary>
     public static RulesContext Create(
         ContentSet content,
         ImmutableArray<DerivedNumber>? numbers = null,
         ImmutableArray<string>? rollTargets = null,
         ImmutableArray<RuleEvent>? events = null,
-        HookRegistry? hooks = null)
+        HookRegistry? hooks = null,
+        ImmutableArray<string>? flags = null)
     {
         ArgumentNullException.ThrowIfNull(content);
         var context = new RulesContext(
             content.All<EffectDefinition>(),
             SortedNumbers(numbers ?? DerivedNumbers.Core),
             SortedIds(rollTargets ?? RollTargets.Core, nameof(rollTargets)),
+            SortedIds(flags ?? Flags.Core, nameof(flags)),
             SortedEvents(events ?? RuleEvents.Core),
             hooks ?? HookRegistry.Core);
         context.Validate(content);
@@ -80,6 +88,9 @@ public sealed class RulesContext
 
     /// <summary>True if <paramref name="id"/> is a registered roll target.</summary>
     public bool IsRollTarget(string id) => Contains(_rollTargets, id);
+
+    /// <summary>True if <paramref name="target"/> is a flag target and <paramref name="name"/> a registered flag.</summary>
+    public bool IsFlag(string target, string name) => Contains(_flagTargets, target) && Contains(_flags, name);
 
     /// <summary>The hooks content may name.</summary>
     internal HookRegistry Hooks { get; }
@@ -139,6 +150,20 @@ public sealed class RulesContext
                     {
                         throw new ContentLoadException(
                             definition.File, Member(field, "target"), $"\"{m.Target}\" names no roll target.");
+                    }
+
+                    break;
+                case ModifierOp.Flag:
+                    if (!Contains(_flagTargets, m.Target))
+                    {
+                        throw new ContentLoadException(
+                            definition.File, Member(field, "target"), $"\"{m.Target}\" is not a flag target (\"unit\").");
+                    }
+
+                    if (m.FlagName is not { } flag || !Contains(_flags, flag))
+                    {
+                        throw new ContentLoadException(
+                            definition.File, Member(field, "flag"), $"\"{m.FlagName}\" names no flag.");
                     }
 
                     break;

@@ -48,10 +48,10 @@ a flag target. It has **exactly one** operation key; none or two is a load error
 | Operation | Example | Meaning |
 |---|---|---|
 | `add` | `{"target": "speed", "add": 2}` | Adds a signed integer to the number. `-2` is a penalty. |
-| `halve` | `{"target": "speed", "halve": true}` | Halves the number after the flat changes, rounding down. At most one halving applies, however many there are. The value is always `true`. |
-| `zero` | `{"target": "speed", "zero": true}` | Sets the number to 0, overriding every other modifier. The value is always `true`. |
+| `halve` | `{"target": "speed", "halve": true}` | Halves the number after the flat changes, rounding down. At most one halving applies, however many there are. The value is always `true`. Only a `Speed`-rule number (section 5.1) takes it. |
+| `zero` | `{"target": "speed", "zero": true}` | Sets the number to 0, overriding every other modifier. The value is always `true`. Only a `Speed`-rule number takes it. |
 | `rollMode` | `{"target": "attacksAgainst", "rollMode": "advantage"}` | Gives a roll `advantage` or `disadvantage`, folded by D-15 (section 5.4). `normal` is not written: it is only ever a fold result. |
-| `flag` | `{"target": "unit", "flag": "hidden"}` | Sets the named boolean flag while the effect is active. |
+| `flag` | `{"target": "unit", "flag": "hidden"}` | Sets the named boolean flag on the holder while the effect is active. The target is always `unit`. |
 
 A disadvantage on the holder's own attacks:
 
@@ -63,11 +63,18 @@ The roll targets in M1-07 are `attackRoll` (attack rolls the holder makes) and `
 against the holder).
 
 Targets are checked against the code registries when the rules context is built (MAIN 6.5), so a misspelt target
-fails at startup with the file and field named, never in play.
+fails at startup with the file and field named, never in play:
+
+- `add`, `halve` and `zero` must name a derived number (`DerivedNumbers.Core`). `halve` or `zero` on a number whose
+  rule is not `Speed` is a load error at `$.effects[i].modifiers[j].halve` (or `.zero`).
+- `rollMode` must name a roll target (`RollTargets.Core`).
+- `flag` must have the target `unit` (`Flags.Targets`), and its flag must name a registered flag (`Flags.Core` in
+  `src/Core/Effects/Registries.cs`), or it fails at `.target` or `.flag`. M1-07 registers no flag names, so every
+  `flag` modifier fails at load until the step that reads the flag registers it (section 9).
 
 ## 4. Source kinds and stacking
 
-The effect's `kind` sets how its modifiers stack on a number (plan call 1).
+The effect's `kind` sets how its modifiers stack on a number.
 
 | Kind | Used for | Stacking on a number |
 |---|---|---|
@@ -94,6 +101,10 @@ Worked examples, all on `speed`:
 
 A derived number is a row in a code table (`DerivedNumbers.Core` in `src/Core/Effects/Registries.cs`): an id, a
 **number rule**, a base value and an optional cap. All arithmetic is integer, rounding down (SM 3).
+
+The cap, when a number has one, applies **last, whatever the rule**: after the bonuses and the penalties, and for
+`Speed` after the halving and `zero`. A `Stack` number with base 10 and cap 12 is 12 with gear +2 and gear +2
+(14, capped), and 11 with a condition -3 as well (min(10 + 4 - 3, 12)).
 
 ### 5.1 Number rules
 

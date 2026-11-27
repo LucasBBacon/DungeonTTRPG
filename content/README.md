@@ -6,7 +6,7 @@ JSON data files for the game: classes, species, feats, items, monsters and table
 
 | File | Holds |
 |---|---|
-| `effects/effects.json` | `{"effects": [...]}`: the effect definitions, one `EffectDefinition` per effect, `{id, kind, modifiers?, triggers?}` with content ids; the vocabulary (modifier operations, trigger forms, source kinds and their stacking) is [`docs/effects-vocabulary.md`](../docs/effects-vocabulary.md). Each `applyEffect` must name an effect of this file; modifier targets, trigger events and hook ids are checked against the code registries when the rules context is built |
+| `effects/effects.json` | `{"effects": [...]}`: the effect definitions, one `EffectDefinition` per effect, `{id, kind, modifiers?, triggers?}` with content ids; the vocabulary (modifier operations, trigger forms, source kinds and their stacking) is [`docs/effects-vocabulary.md`](../docs/effects-vocabulary.md). Each `applyEffect` must name an effect of this file; modifier targets (numbers, roll targets, and the flag target `unit` with a registered flag name), trigger events and hook ids are checked against the code registries when the rules context is built |
 | `registry/checks.json` | `{"checks": [...]}`: the check registry, one `CheckRow` per registered check (SV 9.1) |
 | `registry/reports.json` | `{"reports": [...]}`: the report registry, one `ReportRow` per report (SV 9.1) |
 | `registry/arms.json` | `{"arms": [...]}`: the simulator-arm registry, one `ArmRow` per arm (SV 9.1) |

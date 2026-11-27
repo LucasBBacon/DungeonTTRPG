@@ -59,7 +59,8 @@ public static class Snapshot
     /// <summary>
     /// Writes <paramref name="s"/>. Only the run seed and the stream counters are stored, so a state whose
     /// run seed is not below 2^60, or whose stream keys are not the ones that seed derives, cannot be saved
-    /// (it would load as a different run); both throw <see cref="InvalidOperationException"/>.
+    /// (it would load as a different run); both throw <see cref="InvalidOperationException"/>. Active effects are
+    /// written in seq order whatever order the state holds them in, so equal contents give equal text.
     /// </summary>
     public static string Save(GameState s)
     {
@@ -114,7 +115,7 @@ public static class Snapshot
             },
             Tick = s.Tick,
             NextDecisionId = s.NextDecisionId,
-            Effects = s.Effects.Select(e => new EffectDto
+            Effects = s.Effects.OrderBy(e => e.Seq).Select(e => new EffectDto
             {
                 Seq = e.Seq,
                 Effect = e.EffectId,
