@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using Dungeon.Core.Canonical;
 using Dungeon.Core.Content;
 using Dungeon.Core.Effects;
+using Dungeon.Core.Stats;
 
 namespace Dungeon.Core;
 
@@ -50,11 +51,12 @@ public static class Snapshot
 {
     /// <summary>
     /// The only version this build reads and writes, shared with <see cref="CommandLog"/>.
-    /// Version 4 (M1-07) adds the active effects and the next effect seq;
+    /// Version 5 (M1-08) adds each unit's stat block;
+    /// version 4 (M1-07) added the active effects and the next effect seq;
     /// version 3 (M1-06) added the reproducibility-key header and the run configuration and unlock
     /// snapshots; version 2 (M1-02) stored the run seed and stream counters; version 1 held PCG32 states.
     /// </summary>
-    public const int CurrentVersion = 4;
+    public const int CurrentVersion = 5;
 
     /// <summary>
     /// Writes <paramref name="s"/>. Only the run seed and the stream counters are stored, so a state whose
@@ -98,6 +100,7 @@ public static class Snapshot
                 Y = u.Pos.Y,
                 Faction = u.Faction.ToString(),
                 Boons = u.Boons.ToArray(),
+                Stats = StatsDto.From(u.Stats),
             }).ToArray(),
             Rng = new RngStreamsDto
             {
@@ -155,7 +158,8 @@ public static class Snapshot
                 new UnitId(PersistenceJson.Need(u.Id, "unit id")),
                 new GridPos(PersistenceJson.Need(u.X, "unit x"), PersistenceJson.Need(u.Y, "unit y")),
                 PersistenceJson.ParseEnum<Faction>(u.Faction, "faction"),
-                [.. PersistenceJson.Need(u.Boons, "unit boons")]);
+                [.. PersistenceJson.Need(u.Boons, "unit boons")],
+                PersistenceJson.Need(u.Stats, "unit stats").ToStats());
             NeedBoonIds(unit.Boons, $"unit {unit.Id.Value} boons");
             units.Add(unit);
         }
@@ -439,6 +443,62 @@ public static class Snapshot
         [JsonPropertyName("y"), JsonPropertyOrder(2)] public int? Y { get; set; }
         [JsonPropertyName("faction"), JsonPropertyOrder(3)] public string? Faction { get; set; }
         [JsonPropertyName("boons"), JsonPropertyOrder(4)] public int[]? Boons { get; set; }
+        [JsonPropertyName("stats"), JsonPropertyOrder(5), JsonRequired] public StatsDto? Stats { get; set; }
+    }
+
+    /// <summary>A unit's stat block; enums are written by name, trained skills in skill order.</summary>
+    private sealed class StatsDto
+    {
+        [JsonPropertyName("level"), JsonPropertyOrder(0), JsonRequired] public int? Level { get; set; }
+        [JsonPropertyName("abilities"), JsonPropertyOrder(1), JsonRequired] public AbilitiesDto? Abilities { get; set; }
+        [JsonPropertyName("mainAbility"), JsonPropertyOrder(2), JsonRequired] public string? MainAbility { get; set; }
+        [JsonPropertyName("trainedSave"), JsonPropertyOrder(3), JsonRequired] public string? TrainedSave { get; set; }
+        [JsonPropertyName("trainedSkills"), JsonPropertyOrder(4), JsonRequired] public string?[]? TrainedSkills { get; set; }
+
+        public static StatsDto From(UnitStats s) => new()
+        {
+            Level = s.Level,
+            Abilities = new AbilitiesDto
+            {
+                Strength = s.Abilities.Strength,
+                Dexterity = s.Abilities.Dexterity,
+                Constitution = s.Abilities.Constitution,
+                Intelligence = s.Abilities.Intelligence,
+                Wisdom = s.Abilities.Wisdom,
+                Presence = s.Abilities.Presence,
+            },
+            MainAbility = s.MainAbility.ToString(),
+            TrainedSave = s.TrainedSave.ToString(),
+            TrainedSkills = s.TrainedSkills.Select(k => (string?)k.ToString()).ToArray(),
+        };
+
+        public UnitStats ToStats()
+        {
+            var a = PersistenceJson.Need(Abilities, "stats abilities");
+            return new UnitStats(
+                PersistenceJson.Need(Level, "stats level"),
+                new Dungeon.Core.Stats.Abilities(
+                    PersistenceJson.Need(a.Strength, "stats strength"),
+                    PersistenceJson.Need(a.Dexterity, "stats dexterity"),
+                    PersistenceJson.Need(a.Constitution, "stats constitution"),
+                    PersistenceJson.Need(a.Intelligence, "stats intelligence"),
+                    PersistenceJson.Need(a.Wisdom, "stats wisdom"),
+                    PersistenceJson.Need(a.Presence, "stats presence")),
+                PersistenceJson.ParseEnum<Ability>(MainAbility, "main ability"),
+                PersistenceJson.ParseEnum<Save>(TrainedSave, "trained save"),
+                [.. PersistenceJson.Need(TrainedSkills, "stats trainedSkills")
+                    .Select(k => PersistenceJson.ParseEnum<Skill>(k, "trained skill"))]);
+        }
+    }
+
+    private sealed class AbilitiesDto
+    {
+        [JsonPropertyName("strength"), JsonPropertyOrder(0), JsonRequired] public int? Strength { get; set; }
+        [JsonPropertyName("dexterity"), JsonPropertyOrder(1), JsonRequired] public int? Dexterity { get; set; }
+        [JsonPropertyName("constitution"), JsonPropertyOrder(2), JsonRequired] public int? Constitution { get; set; }
+        [JsonPropertyName("intelligence"), JsonPropertyOrder(3), JsonRequired] public int? Intelligence { get; set; }
+        [JsonPropertyName("wisdom"), JsonPropertyOrder(4), JsonRequired] public int? Wisdom { get; set; }
+        [JsonPropertyName("presence"), JsonPropertyOrder(5), JsonRequired] public int? Presence { get; set; }
     }
 
     /// <summary>The stream counters (the next draw index of each stream); keys are not stored.</summary>

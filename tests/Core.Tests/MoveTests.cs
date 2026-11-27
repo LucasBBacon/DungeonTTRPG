@@ -34,13 +34,13 @@ public class MoveTests
 
     [Fact] public void Move_off_map_is_rejected()
     {
-        var s = GameState.Create(GridMap.Parse("."), new[] { new Unit(Hero, new(0, 0), Faction.Party, []) }, 7);
+        var s = GameState.Create(GridMap.Parse("."), new[] { new Unit(Hero, new(0, 0), Faction.Party, [], Fixtures.Stats) }, 7);
         AssertRejected(s, new MoveCommand(Hero, Direction.W), CommandError.OutOfBounds);
     }
 
     [Fact] public void Move_onto_another_unit_is_rejected()
     {
-        var s = State(extra: new Unit(new UnitId(2), new(2, 1), Faction.Enemy, []));
+        var s = State(extra: new Unit(new UnitId(2), new(2, 1), Faction.Enemy, [], Fixtures.Stats));
         AssertRejected(s, new MoveCommand(Hero, Direction.E), CommandError.Occupied);
     }
 
@@ -61,7 +61,7 @@ public class MoveTests
 
     [Fact] public void Create_rejects_a_unit_with_uninitialised_boons() =>
         Assert.Contains("unit 1", Assert.Throws<ArgumentException>(
-            () => GameState.Create(GridMap.Parse("."), new[] { new Unit(Hero, new(0, 0), Faction.Party, default) }, 7)).Message);
+            () => GameState.Create(GridMap.Parse("."), new[] { new Unit(Hero, new(0, 0), Faction.Party, default, Fixtures.Stats) }, 7)).Message);
 
     [Fact] public void Diagonal_past_the_other_wall_corner_is_rejected()
     {

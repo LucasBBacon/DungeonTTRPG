@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using Dungeon.Core;
+using Dungeon.Core.Stats;
 using CoreGridMap = Dungeon.Core.GridMap;
 
 namespace DungeonTTRPG;
@@ -26,10 +27,13 @@ public static class DemoLevel
         "############",
     ];
 
+    private static readonly UnitStats HeroStats =
+        new(1, new Abilities(0, 0, 0, 0, 0, 0), Ability.Strength, Save.Fortitude, ImmutableArray<Skill>.Empty);
+
     /// <summary>The starting state of the demo run. Always the same.</summary>
     public static GameState CreateState() =>
         GameState.Create(
             CoreGridMap.Parse(Rows),
-            [new Unit(Hero, HeroStart, Faction.Party, ImmutableArray<int>.Empty)],
+            [new Unit(Hero, HeroStart, Faction.Party, ImmutableArray<int>.Empty, HeroStats)],
             Seed);
 }

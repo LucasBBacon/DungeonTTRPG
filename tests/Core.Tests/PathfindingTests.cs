@@ -43,10 +43,10 @@ public class PathfindingTests
 
     [Fact] public void No_path_for_unknown_unit() => Assert.Null(Queries.FindPath(State(), new UnitId(99), new(3, 3)));
     [Fact] public void No_path_to_occupied_square() =>
-        Assert.Null(Queries.FindPath(State(extra: new Unit(new UnitId(2), new(3, 3), Faction.Enemy, [])), Hero, new(3, 3)));
+        Assert.Null(Queries.FindPath(State(extra: new Unit(new UnitId(2), new(3, 3), Faction.Enemy, [], Fixtures.Stats)), Hero, new(3, 3)));
     [Fact] public void No_path_to_sealed_room()
     {
-        var s = GameState.Create(GridMap.Parse(".#."), new[] { new Unit(Hero, new(0, 0), Faction.Party, []) }, 7);
+        var s = GameState.Create(GridMap.Parse(".#."), new[] { new Unit(Hero, new(0, 0), Faction.Party, [], Fixtures.Stats) }, 7);
         Assert.Null(Queries.FindPath(s, Hero, new(2, 0)));
     }
 }
