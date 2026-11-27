@@ -1,5 +1,6 @@
 using Dungeon.Core.Canonical;
 using Dungeon.Core.Effects;
+using Dungeon.Core.Stats;
 using Xunit;
 using static Dungeon.Core.Tests.Fixtures;
 
@@ -93,6 +94,16 @@ public class StateDigestTests
             atShrine with { Units = [hero with { Pos = new GridPos(0, 0) }] },
             atShrine with { Units = [hero with { Faction = Faction.Enemy }] },
             atShrine with { Units = [hero with { Boons = [3] }] },
+            atShrine with { Units = [hero with { Stats = hero.Stats with { Level = 2 } }] },
+            atShrine with { Units = [hero with { Stats = hero.Stats with { Abilities = hero.Stats.Abilities with { Strength = 1 } } }] },
+            atShrine with { Units = [hero with { Stats = hero.Stats with { Abilities = hero.Stats.Abilities with { Dexterity = 1 } } }] },
+            atShrine with { Units = [hero with { Stats = hero.Stats with { Abilities = hero.Stats.Abilities with { Constitution = 1 } } }] },
+            atShrine with { Units = [hero with { Stats = hero.Stats with { Abilities = hero.Stats.Abilities with { Intelligence = 1 } } }] },
+            atShrine with { Units = [hero with { Stats = hero.Stats with { Abilities = hero.Stats.Abilities with { Wisdom = 1 } } }] },
+            atShrine with { Units = [hero with { Stats = hero.Stats with { Abilities = hero.Stats.Abilities with { Presence = 1 } } }] },
+            atShrine with { Units = [hero with { Stats = hero.Stats with { MainAbility = Ability.Wisdom } }] },
+            atShrine with { Units = [hero with { Stats = hero.Stats with { TrainedSave = Save.Will } }] },
+            atShrine with { Units = [hero with { Stats = hero.Stats with { TrainedSkills = [Skill.Lore] } }] },
             atShrine with { Rng = atShrine.Rng with { Combat = atShrine.Rng.Combat.Skip(1) } },
             atShrine with { Rng = atShrine.Rng with { Shrine = atShrine.Rng.Shrine.Skip(1) } },
             atShrine with { Pending = null },

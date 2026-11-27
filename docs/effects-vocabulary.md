@@ -132,15 +132,28 @@ penalty shows.
 3. Speed 0 overrides everything: if any `zero` is active, the result is 0, whatever else applies, including an
    `add` applied later.
 
-### 5.3 The M1-07 rows
+### 5.3 The rows
+
+`DerivedNumbers.Core` is `speed` plus `StatNumbers.Rows` (`src/Core/Stats/StatNumbers.cs`). Every read of another
+number goes through `NumberBaseArgs.Number`, so effects on an ability flow into the saves, skills and passives that
+read it. The floors some numbers have (Recovery minimum 1, DH 612) are M1-09's to shape; no row has a floor field.
 
 | Id | Rule | Base | Cap | Source |
 |---|---|---|---|---|
 | `speed` | `Speed` | 6 | none | SM 6 |
+| `strength`, `dexterity`, `constitution`, `intelligence`, `wisdom`, `presence` | `AbilityScore` | the unit's stored ability | 5 | SM 5.1 |
+| `proficiency` | `Stack` | by level: 0-4 gives 2, 5-8 gives 3, 9-12 gives 4 | none | SM 6 |
+| `fortitude`, `reflex`, `will` | `Stack` | the better of the two folded abilities (Str/Con, Dex/Int, Wis/Presence), plus `proficiency` if it is the unit's trained save | none | SM 6 |
+| `abilityDifficulty` | `Stack` | 8 + `proficiency` + the folded main ability | none | SM 6 |
+| `athletics`, `acrobatics`, `stealth`, `mechanics`, `perception`, `intimidation`, `leadership`, `medicine`, `lore` | `Stack` | the folded skill ability (SM 7.1), plus `proficiency` if trained | none | SM 6, 7.1 |
+| `passivePerception`, `passiveStealth` | `Stack` | 10 + the folded skill number, so effects on the skill count | none | SM 6 |
+| `armourClass` | `Stack` | 10 + folded Dexterity (unarmoured; M1-17 adds armour) | none | SM 6 |
+| `initiative` | `Stack` | folded Intelligence | none | SM 6 |
+| `attack` | `Stack` | 0: flat bonuses to every attack the unit makes; the contest adds the attack's ability and proficiency | none | SM 6 |
+| `medicineRestBonus` | `Stack` | folded Wisdom + `proficiency` if trained in Medicine, else 0 | none | DH 8 |
 
-M1-08 adds the six abilities (`AbilityScore`, cap 5, base the unit's stored modifier) and the other SM 6 numbers,
-whose bases read the abilities and proficiency through `NumberBaseArgs.Number`. The floors some of them have
-(Recovery minimum 1, DH 612) are M1-08's and M1-09's to shape; this step adds no floor field.
+The cap binds the stored ability plus the best bonus and the worst penalty applies after it, so a stored +5 with a
+trait +2 and a condition -2 reads 3, and a save that reads it sees 3.
 
 ### 5.4 Roll mode and D-15
 
@@ -156,6 +169,20 @@ disadvantage sources give disadvantage, and one of each cancels to a normal roll
 
 Weapons 7.5 used to say "net them (one cancels one)"; it now says "fold them (conditions 6.7: any advantage and any
 disadvantage cancel)", and Overlap and Vex read the folded mode. The roll mode does not depend on source kind.
+
+**Roll targets.** `RollTargets.Core` is `attackRoll`, `attacksAgainst`, then `saveRoll` (every save), `fortitudeSave`,
+`reflexSave`, `willSave`, `skillCheck` (every skill check), and one per skill: `athleticsCheck`, `acrobaticsCheck`,
+`stealthCheck`, `mechanicsCheck`, `perceptionCheck`, `intimidationCheck`, `leadershipCheck`, `medicineCheck`,
+`loreCheck`. A condition names the kind it affects (CO: "disadvantage on attack rolls and skill checks").
+
+**Several sources, one fold.** A roll can be borne on by several (unit, target) pairs: an attack reads the attacker's
+`attackRoll` and the defender's `attacksAgainst`. `Effects.RollModeOf(rules, s, sources)` takes any advantage and any
+disadvantage over all the pairs, then applies D-15 once. Folding each pair first and combining the results would be
+wrong: an attacker with both advantage and disadvantage cancels to normal, and a defender's disadvantage would then
+win alone, where the single fold of all three cancels to normal.
+
+**Ties succeed.** A total that meets the target succeeds (TL "meets the DC"; W "total meets its AC"). Natural 1 and
+natural 20 rules (AR 8.1) are the contest's, not the fold's.
 
 ## 6. Triggers
 
@@ -261,7 +288,7 @@ These keys and ideas are named now so content does not invent its own, and are r
 
 | Step | Vocabulary rows it uses |
 |---|---|
-| M1-08 Stats and contests | `add` on new numbers; the `AbilityScore` rule and its cap for the six abilities; the `Stack` rule for the other SM 6 numbers, with per-unit bases that read the abilities; `rollMode` on `attackRoll` and `attacksAgainst`, folded by D-15; new roll targets for saves and skills. |
+| M1-08 Stats and contests | `add` on the new numbers (section 5.3); the `AbilityScore` rule and its cap for the six abilities; the `Stack` rule for the other SM 6 numbers, with per-unit bases that read the abilities and proficiency; `rollMode` on `attackRoll` and `attacksAgainst`, folded over several sources by D-15; the save and skill roll targets. Guile moved to M1-22 and HP numbers to M1-09. |
 | M1-09 Damage and HP | `add` on HP numbers (max HP, Recovery); the reserved `diceBonus` becomes live; resistances and weaknesses as `flag` or new numbers. |
 | M1-10 Turns, lifecycle and death | New rule events (turn start, turn end, combat start and end); durations (section 8). |
 | M1-11 Abilities, reactions and areas | `ability`-kind effects; `applyEffect` actions; hooks for reactions; new events for ability use steps. |

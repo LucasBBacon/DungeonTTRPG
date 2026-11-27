@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+using Dungeon.Core.Stats;
 using Xunit;
 
 namespace Dungeon.Core.Tests;
@@ -7,7 +9,11 @@ internal static class Fixtures
 {
     public static readonly UnitId Hero = new(1);
 
-    public static Unit U(int id, int x, int y) => new(new UnitId(id), new(x, y), Faction.Party, []);
+    /// <summary>Level 1, all abilities 0, main Strength, trained Fortitude, no skills.</summary>
+    public static readonly UnitStats Stats =
+        new(1, new Abilities(0, 0, 0, 0, 0, 0), Ability.Strength, Save.Fortitude, ImmutableArray<Skill>.Empty);
+
+    public static Unit U(int id, int x, int y) => new(new UnitId(id), new(x, y), Faction.Party, [], Stats);
 
     /// <summary>A one-row map with a shrine east of the hero: <c>.*.</c>, hero at (0,0), seed 7 unless given.</summary>
     public static GameState ShrineState(ulong seed = 7) =>

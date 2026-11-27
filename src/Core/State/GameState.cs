@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Dungeon.Core.Effects;
+using Dungeon.Core.Stats;
 
 namespace Dungeon.Core;
 
@@ -10,8 +11,10 @@ public readonly record struct UnitId(int Value);
 
 public enum Faction { Party, Enemy }
 
-/// <summary>A unit on the grid. <see cref="Boons"/> holds the boon ids the unit has taken.</summary>
-public sealed record Unit(UnitId Id, GridPos Pos, Faction Faction, ImmutableArray<int> Boons);
+/// <summary>
+/// A unit on the grid. <see cref="Boons"/> holds the boon ids the unit has taken; <see cref="Stats"/> is its stat block.
+/// </summary>
+public sealed record Unit(UnitId Id, GridPos Pos, Faction Faction, ImmutableArray<int> Boons, UnitStats Stats);
 
 public readonly record struct DecisionId(int Value);
 
@@ -48,7 +51,9 @@ public sealed record GameState(
     /// Builds the starting state of a run. Units are sorted by id. Throws an
     /// <see cref="ArgumentException"/> naming the problem if two units share an id, a unit
     /// stands on a square that is not walkable, two units share a square, or a unit's
-    /// <see cref="Unit.Boons"/> is an uninitialised array, and an
+    /// <see cref="Unit.Boons"/> is an uninitialised array, or a unit's <see cref="Unit.Stats"/> is missing or
+    /// outside the stat block's bounds (level 0 to 12, abilities -3 to +5, defined enum values, trained skills sorted and
+    /// distinct), and an
     /// <see cref="ArgumentOutOfRangeException"/> if <paramref name="seed"/> is at least 2^60. The run
     /// configuration defaults to <see cref="RunConfig.M1"/> and the unlocks to <see cref="UnlockSnapshot.None"/>;
     /// both are validated. The run starts with no active effects and <see cref="NextEffectSeq"/> 1.
@@ -83,6 +88,8 @@ public sealed record GameState(
                     nameof(units));
             }
 
+            CheckStats(unit, nameof(units));
+
             if (!map.IsWalkable(unit.Pos))
             {
                 throw new ArgumentException(
@@ -102,6 +109,57 @@ public sealed record GameState(
         }
 
         return new GameState(map, sorted, seed, config, unlocks, ImmutableArray<EffectInstance>.Empty, 1, streams, null, 0, 1);
+    }
+
+    private static void CheckStats(Unit unit, string units)
+    {
+        string who = $"Invalid units: unit {unit.Id.Value} ";
+        var st = unit.Stats ?? throw new ArgumentException(who + "has no stat block.", units);
+        if (st.Level < UnitStats.MinLevel || st.Level > UnitStats.MaxLevel)
+        {
+            throw new ArgumentException(
+                $"{who}has level {st.Level}; it must be {UnitStats.MinLevel} to {UnitStats.MaxLevel}.", units);
+        }
+
+        foreach (var a in Enum.GetValues<Ability>())
+        {
+            int bonus = st.Abilities[a];
+            if (bonus < UnitStats.MinAbility || bonus > UnitStats.MaxAbility)
+            {
+                throw new ArgumentException(
+                    $"{who}has {a} {bonus}; abilities must be {UnitStats.MinAbility} to {UnitStats.MaxAbility}.", units);
+            }
+        }
+
+        if (!Enum.IsDefined(st.MainAbility))
+        {
+            throw new ArgumentException($"{who}has an unknown main ability.", units);
+        }
+
+        if (!Enum.IsDefined(st.TrainedSave))
+        {
+            throw new ArgumentException($"{who}has an unknown trained save.", units);
+        }
+
+        if (st.TrainedSkills.IsDefault)
+        {
+            throw new ArgumentException($"{who}has uninitialised trained skills; use an empty array.", units);
+        }
+
+        for (int k = 0; k < st.TrainedSkills.Length; k++)
+        {
+            var skill = st.TrainedSkills[k];
+            if (!Enum.IsDefined(skill))
+            {
+                throw new ArgumentException($"{who}trains an unknown skill.", units);
+            }
+
+            if (k > 0 && st.TrainedSkills[k - 1] >= skill)
+            {
+                throw new ArgumentException(
+                    $"{who}must list trained skills in order, each once ({st.TrainedSkills[k - 1]} then {skill}).", units);
+            }
+        }
     }
 
     /// <summary>

@@ -225,12 +225,26 @@ public class EffectsKindTests
     }
 
     [Fact]
-    public void The_core_registries_hold_the_m1_07_rows()
+    public void The_core_registries_hold_the_core_rows()
     {
-        var speed = Assert.Single(DerivedNumbers.Core);
+        var speed = DerivedNumbers.Core[0];
         Assert.Equal(("speed", NumberRule.Speed, (long?)null), (speed.Id, speed.Rule, speed.Cap));
         Assert.Equal(6, Dungeon.Core.Effects.Effects.Number(RulesContext.Empty, Fixtures.RingState(), Fixtures.Hero, "speed"));
-        Assert.Equal<string>(["attackRoll", "attacksAgainst"], RollTargets.Core.ToArray());
+        Assert.Equal<string>(
+            [
+                "speed", "strength", "dexterity", "constitution", "intelligence", "wisdom", "presence", "proficiency",
+                "fortitude", "reflex", "will", "abilityDifficulty", "athletics", "acrobatics", "stealth", "mechanics",
+                "perception", "intimidation", "leadership", "medicine", "lore", "passivePerception", "passiveStealth",
+                "armourClass", "initiative", "attack", "medicineRestBonus",
+            ],
+            DerivedNumbers.Core.Select(n => n.Id).ToArray());
+        Assert.Equal<string>(
+            [
+                "attackRoll", "attacksAgainst", "saveRoll", "fortitudeSave", "reflexSave", "willSave", "skillCheck",
+                "athleticsCheck", "acrobaticsCheck", "stealthCheck", "mechanicsCheck", "perceptionCheck",
+                "intimidationCheck", "leadershipCheck", "medicineCheck", "loreCheck",
+            ],
+            RollTargets.Core.ToArray());
         Assert.Equal<string>(["unitMoved"], RuleEvents.Core.Select(e => e.Id).ToArray());
         Assert.Equal(typeof(UnitMoved), RuleEvents.Core[0].EventType);
     }

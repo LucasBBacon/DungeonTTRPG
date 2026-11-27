@@ -1,6 +1,7 @@
 using System;
 using Dungeon.Core.Canonical;
 using Dungeon.Core.Effects;
+using Dungeon.Core.Stats;
 
 namespace Dungeon.Core;
 
@@ -62,12 +63,32 @@ public static class StateDigest
     {
         public void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(5);
+            w.BeginRecord(6);
             w.Int32(0, u.Id.Value);
             w.Int32(1, u.Pos.X);
             w.Int32(2, u.Pos.Y);
             w.Enum(3, u.Faction);
             w.List(4, u.Boons, (e, boon) => e.Int32(0, boon));
+            w.Record(5, new StatsRecord(u.Stats));
+            w.EndRecord();
+        }
+    }
+
+    private sealed class StatsRecord(UnitStats st) : ICanonical
+    {
+        public void WriteCanonical(CanonicalWriter w)
+        {
+            w.BeginRecord(10);
+            w.Int32(0, st.Level);
+            w.Int32(1, st.Abilities.Strength);
+            w.Int32(2, st.Abilities.Dexterity);
+            w.Int32(3, st.Abilities.Constitution);
+            w.Int32(4, st.Abilities.Intelligence);
+            w.Int32(5, st.Abilities.Wisdom);
+            w.Int32(6, st.Abilities.Presence);
+            w.Enum(7, st.MainAbility);
+            w.Enum(8, st.TrainedSave);
+            w.List(9, st.TrainedSkills, (e, skill) => e.Enum(0, skill));
             w.EndRecord();
         }
     }
