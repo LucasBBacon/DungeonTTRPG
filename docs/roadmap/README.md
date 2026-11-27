@@ -212,4 +212,4 @@ M3-END. See [m3-between-runs.md](m3-between-runs.md).
 Maladies · M4-04 Content breadth · M4-END. See
 [m4-breadth.md](m4-breadth.md).
 
-**Next step to start:** M1-09, once M1-08 is merged (precondition D-02).
+**Next step to start:** M1-10, once M1-09 is merged.

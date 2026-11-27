@@ -309,7 +309,7 @@ These keys and ideas are named now so content does not invent its own, and are r
 
 | Item | Status | Arrives |
 |---|---|---|
-| `diceBonus` modifier | Refused at load (`$.effects[i].modifiers[j].diceBonus`). Its fold will be "only the highest dice bonus applies to a given roll" (CO 6.7). | M1-09 or later, when dice exist |
+| `diceBonus` modifier | Refused at load (`$.effects[i].modifiers[j].diceBonus`). Its fold will be "only the highest dice bonus applies to a given roll" (CO 6.7). | The first step whose content gives a dice bonus (M1-09 has dice but no rule or content that gives one) |
 | Durations and clocks (turn start and end, `combatOnly`, refill tags) | Not in the schema: an instance lasts until it is removed. | M1-10 (clocks), M1-12 (condition durations) |
 | Condition application pipeline, relations and exclusivity | Not in the schema; conditions are plain `condition`-kind effects for now. | M1-12, M1-13 |
 | Damage riders (AB 9.1) | Not in the schema. | M2 |

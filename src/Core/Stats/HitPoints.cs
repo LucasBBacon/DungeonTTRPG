@@ -1,3 +1,4 @@
+using System;
 using Dungeon.Core.Effects;
 
 namespace Dungeon.Core.Stats;
@@ -54,4 +55,58 @@ public static class HitPoints
     /// </summary>
     public static long Recovery(RulesContext rules, GameState s, UnitId unit) =>
         Effects.Effects.Number(rules, s, unit, RecoveryId);
+
+    /// <summary>
+    /// Heals <paramref name="target"/> by <paramref name="amount"/> up to its current maximum (DH 7.3; M1-09 plan call 10)
+    /// and reports the overheal. HP above a lowered maximum counts as the maximum, so such a unit heals nothing. It does
+    /// not check Downed (none in M1) or the necrotic heal block (M2), and it does not refuse a unit at 0 HP: M1-10 owns
+    /// death. Throws <see cref="ArgumentOutOfRangeException"/> for a negative amount and <see cref="ArgumentException"/>
+    /// for an unknown unit.
+    /// </summary>
+    public static (HealOutcome Outcome, GameState Next) Heal(RulesContext rules, GameState s, UnitId target, long amount)
+    {
+        if (amount < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(amount), amount, "A heal amount is never negative.");
+        }
+
+        var unit = Find(s, target);
+        long max = Max(rules, s, target);
+        long from = Math.Min(unit.Hp, max);
+        long to = Math.Min(max, checked(from + amount));
+        int hpAfter = ToHp(to);
+        return (new HealOutcome(target, amount, to - from, amount - (to - from), hpAfter), WithHp(s, unit, hpAfter));
+    }
+
+    /// <summary>
+    /// Lowers <paramref name="target"/>'s HP to its current maximum if it is above it (DH 7.3: "Every other change to
+    /// the maximum only clamps current HP"); otherwise returns <paramref name="s"/> itself. The M1-12 application
+    /// pipeline calls it when an effect lowers the maximum. Throws <see cref="ArgumentException"/> for an unknown unit.
+    /// </summary>
+    public static GameState ClampToMax(RulesContext rules, GameState s, UnitId target)
+    {
+        var unit = Find(s, target);
+        long max = Max(rules, s, target);
+        return unit.Hp > max ? WithHp(s, unit, ToHp(max)) : s;
+    }
+
+    /// <summary>The unit, or <see cref="ArgumentException"/> as the contests and fold queries report one.</summary>
+    internal static Unit Find(GameState s, UnitId id) =>
+        s.FindUnit(id) ?? throw new ArgumentException($"Unit {id.Value} is not in the state.", nameof(id));
+
+    /// <summary>
+    /// The one place a derived HP number narrows to the stored <see cref="Unit.Hp"/>: the maximum is a <c>long</c> fold,
+    /// current HP an <c>int</c>. A value out of range throws rather than wraps.
+    /// </summary>
+    internal static int ToHp(long value) => checked((int)value);
+
+    /// <summary><paramref name="s"/> with <paramref name="unit"/>'s HP set to <paramref name="hp"/>, nothing else changed.</summary>
+    internal static GameState WithHp(GameState s, Unit unit, int hp) =>
+        s with { Units = s.Units.SetItem(s.Units.IndexOf(unit), unit with { Hp = hp }) };
 }
+
+/// <summary>
+/// A heal's outcome (M1-09 plan call 10): the amount offered, the HP gained, the overheal (the amount past the maximum)
+/// and the HP after. <c>Healed + Overheal == Amount</c>.
+/// </summary>
+public readonly record struct HealOutcome(UnitId Target, long Amount, long Healed, long Overheal, int HpAfter);
