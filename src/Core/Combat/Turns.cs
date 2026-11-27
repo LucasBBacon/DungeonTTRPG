@@ -42,13 +42,15 @@ public static class Turns
         }
 
         // Who joins a fight is M1-35's; until then every unit in the state does, in id order.
+        // CO 5.5 combat-start condition step (M1-12); TL-19's clause is M2 (D-19(a)); order per the M1-10 rulings
+        // record section 5.
         var (order, next) = Initiative.Roll(rules, s, s.Units.Select(u => u.Id));
 
         next = Pools.RefillAll(rules, FreshBudgets(next), RefillTag.Fight);
 
-        // TL-19's combat-start seam (D-19, M1-30) goes here.
         next = next with { Combat = new CombatState(order.Select(e => e.Unit).ToImmutableArray(), 0, 1) };
 
+        // M1-11 splits this off: the before-round-1 marker and opener first (D-19(b)).
         var (turn, started) = StartTurn(rules, next);
         return ([new CombatStarted(order), .. turn], started);
     }
@@ -148,7 +150,8 @@ public static class Turns
     }
 
     /// <summary>
-    /// <paramref name="unit"/>'s movement left this turn (plan call 5): its folded <c>speed</c> minus its
+    /// <paramref name="unit"/>'s movement left this turn (plan call 5; D-18, subtract, not rescale: M1-10 rulings
+    /// record 2.1): its folded <c>speed</c> minus its
     /// <see cref="TurnBudget.MovementUsed"/>, never below 0. Throws <see cref="ArgumentException"/> for an unknown unit.
     /// </summary>
     public static long MovementLeft(RulesContext rules, GameState s, UnitId unit)

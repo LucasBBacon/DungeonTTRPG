@@ -109,7 +109,8 @@ public static class Damage
         // DH 20.3, in order (M1-09 plan call 1):
         // 1. Downed: discard the damage. M2 (no Downed or companions in M1).
         // 2. Each part through the target's ladder step for its type (SM 8.3, 9; owner ruling 1). Shells and layers,
-        //    transforms and temporary HP: M2 or later.
+        //    transforms: M2 or later. Temporary HP: Later (Bolstered, DH 14; test owed by roadmap D-17; order per
+        //    DH 15.2 / 20.3).
         var parts = ImmutableArray.CreateBuilder<PartOutcome>(roll.Parts.Length);
         foreach (var part in roll.Parts)
         {
@@ -173,6 +174,8 @@ public static class Damage
             }
         }
 
+        // D-17: once temporary HP absorbs per part, rule whether `others` counts before or after absorption, whether
+        // part order may decide life or death (DH 10.4 vs CO 9.3), and what the log shows (M1-10 rulings record 1.1).
         return trapped && others < from;
     }
 
