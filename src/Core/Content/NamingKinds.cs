@@ -319,13 +319,14 @@ public sealed record StringEntry(string File, string Key, string Text, StringFie
 internal static class NamingIds
 {
     /// <summary>
-    /// A name-list or retired-name id: non-empty ASCII with no control characters. These ids carry the
+    /// A name-list or retired-name id: non-empty ASCII with no control characters (emptiness is
+    /// already refused by <see cref="ContentJson.RuleString"/>). These ids carry the
     /// source's document names, so they do not use the content-id rule.
     /// </summary>
     public static string Id(ContentFile file, string field, string? s)
     {
         string value = RuleString(file, field, s);
-        if (value.Length == 0 || HasControl(value))
+        if (HasControl(value))
         {
             throw new ContentLoadException(file.Name, field, $"\"{value}\" is not a name-list id (non-empty, no control characters).");
         }
@@ -368,6 +369,12 @@ internal static class NamingIds
             {
                 throw new ContentLoadException(file.Name, field, $"\"{value}\" is not a label ([A-Za-z0-9_.:-]).");
             }
+        }
+
+        // A label becomes the last part of a strings key; an empty dot-part could never match one.
+        if (value[0] == '.' || value[value.Length - 1] == '.' || value.Contains("..", StringComparison.Ordinal))
+        {
+            throw new ContentLoadException(file.Name, field, $"\"{value}\" has a leading, trailing or doubled dot.");
         }
 
         return value;

@@ -25,3 +25,5 @@ Every file belongs to exactly one content kind (`ContentKinds.All` in `src/Core/
 - Every record has a stable string id, unique within its kind. Registry ids follow their own grammars: checks `Vn.Name` or `content.Part.Part`, arms `Axis.Value`, reports a letter then letters, digits and dots. Other content ids are `[a-z0-9_.:-]` (SV 4.1 K-rule 3).
 - References (a check's `deps[]`, `uses[]` and `proofRef`; a report's `arms[]`) are resolved after every file has loaded.
 - Every error names the file and the field as a JSON path, such as `registry/checks.json` at `$.checks[1].phase`.
+
+Every present rules string is non-empty: a blanked value is as missing as an absent one. A field with nothing to say is left out where the schema makes it optional; a required field that can mean "no change" (an arm's `configDelta`, for a baseline arm) writes `"none"` until its schema arrives with M1-06.

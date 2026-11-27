@@ -176,10 +176,23 @@ public class NamingChecksTests
             Strings(Str("ITEMS.greyed.NotInCombat", "Not in combat"))));
     }
 
+    [Fact]
+    public void A_greyed_reason_id_may_use_label_punctuation()
+    {
+        Assert.Empty(Run(
+            new GreyedReasonKeysCheck(),
+            Greyed("{\"id\": \"Not.In:Combat-1\", \"doc\": \"ITEMS\"}"),
+            Strings(Str("ITEMS.greyed.Not.In:Combat-1", "Not in combat"))));
+    }
+
+    // "a+b" is ASCII outside the label set; the dotted cases would give a key with an empty part,
+    // which no strings entry could match, so they are named at the id itself.
     [Theory]
+    [InlineData("a+b")]
     [InlineData("Not In Combat")]
-    [InlineData("a/b")]
-    [InlineData("Né")]
+    [InlineData(".NotInCombat")]
+    [InlineData("NotInCombat.")]
+    [InlineData("Not..InCombat")]
     public void A_greyed_reason_id_outside_the_label_rule_is_rejected(string id)
     {
         var ex = Assert.Throws<ContentLoadException>(

@@ -74,6 +74,7 @@ public class ContentLoaderTests
         var ex = LoadFails(Checks(Check("V19.ClassDeclared", owner: "\"\"")));
         Assert.Equal(ChecksFile, ex.File);
         Assert.Equal("$.checks[0].owner", ex.Field);
+        Assert.Contains("empty", ex.Message);
     }
 
     [Fact]
@@ -81,6 +82,7 @@ public class ContentLoaderTests
     {
         var ex = LoadFails(Checks(Check("V19.ClassDeclared", extra: ", \"point\": \"\"")));
         Assert.Equal("$.checks[0].point", ex.Field);
+        Assert.Contains("empty", ex.Message);
     }
 
     [Fact]
@@ -89,6 +91,7 @@ public class ContentLoaderTests
         var ex = LoadFails(Reports(Report("HealerGap", keys: "[\"class\", \"\"]")));
         Assert.Equal("registry/reports.json", ex.File);
         Assert.Equal("$.reports[0].keys[1]", ex.Field);
+        Assert.Contains("empty", ex.Message);
     }
 
     [Fact]
