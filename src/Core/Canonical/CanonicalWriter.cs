@@ -18,6 +18,8 @@ namespace Dungeon.Core.Canonical;
 /// </summary>
 public sealed class CanonicalWriter
 {
+    private static readonly System.Text.UTF8Encoding StrictUtf8 = new(false, throwOnInvalidBytes: true);
+
     private readonly ArrayBufferWriter<byte> _buffer = new();
     private readonly List<Frame> _frames = new();
     private bool _recordSlotOpen;
@@ -141,6 +143,20 @@ public sealed class CanonicalWriter
         RequireAscii(value);
         Field(ordinal);
         RawString(value);
+    }
+
+    /// <summary>
+    /// Writes a <c>UInt32</c> byte length then the UTF-8 bytes, for display fields only (plan call 8);
+    /// rules fields use <see cref="String"/>. A lone surrogate throws <see cref="ArgumentException"/>.
+    /// </summary>
+    public void Text(int ordinal, string value)
+    {
+        ArgumentNullException.ThrowIfNull(value);
+        byte[] bytes = StrictUtf8.GetBytes(value);
+        Field(ordinal);
+        RawUInt32(checked((uint)bytes.Length));
+        bytes.CopyTo(_buffer.GetSpan(bytes.Length));
+        _buffer.Advance(bytes.Length);
     }
 
     /// <summary>Writes an enum member by its name, so reordering members does not change bytes.</summary>

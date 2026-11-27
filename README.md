@@ -58,13 +58,18 @@ src/Core/                   Dungeon.Core: the rules engine (no Godot)
   Random/                   Key algebra (SplitMix64) and run streams
   Persistence/              Versioned snapshots, command logs, replay
   Canonical/                CanonicalWriter, CanonicalReader, SHA-256 Digest (SV 4.5)
-src/Sim/                    Dungeon.Sim: console app for headless simulations (balance)
+  Content/                  Content loader (strict JSON, integers and p/q rationals, ASCII rule strings), ContentSet, the three content hashes (ContentHashes.g.cs is generated)
+  Validation/               Validator framework: CheckRow/ReportRow/ArmRow registries, phases, failure classes, build tiers 0-6, read-set cache; Checks/ holds V19.ClassDeclared, V7.NameRegistry, V24 r1/r2/r6 and the content load check
+src/Sim/                    Dungeon.Sim: console app for headless simulations (balance) and the two content generators below
 src/Analyzers/              Dungeon.Analyzers: Roslyn analyzer enforcing the determinism rules on Core
 tests/Core.Tests/           xUnit tests, including architecture rules
 tests/Analyzers.Tests/      xUnit tests for the analyzer, one fixture per rule
 tests/AnalyzerSmoke/        Must fail to build with DUN001; proves the analyzer is wired (not in Dungeon.sln)
 build/Determinism.props     Wires the analyzer and checked arithmetic into Core
 content/                    JSON data files: classes, species, feats, items, monsters, tables
+  registry/                 Check, report and simulator-arm registries (SV 9.1)
+  naming/                   Name list and retired names (generated from the naming-pass appendix), greyed-reason registry
+  strings/                  English strings table
 dungeon-ttrpg/              Godot 4.7 C# project (display layer)
   scripts/                  GameController, BoardView, UnitView, IsoCamera, DecisionPanel
   addons/godot_ai/          Third-party Godot AI (MCP) editor plugin, MIT
@@ -73,6 +78,21 @@ docs/superpowers/
   plans/                    Implementation plans per milestone
   reviews/                  Cross-document reviews
 ```
+
+## Content pipeline
+
+Content is JSON under [`content/`](content/README.md), loaded by `src/Core/Content` and checked by
+`src/Core/Validation`. A bad reference, a missing field or a duplicate id fails with the file and the
+field named. The validators run as part of `dotnet test`.
+
+Two generated outputs are committed, and a test fails if either is stale:
+
+```powershell
+dotnet run --project src/Sim -- name-list        # content/naming/name_list.json and retired_names.json, from the naming-pass appendix
+dotnet run --project src/Sim -- content-hashes   # src/Core/Content/ContentHashes.g.cs (manifestHash, displayHash, genContentHash)
+```
+
+Run `name-list` after editing the appendix, and `content-hashes` after any change under `content/`.
 
 ## Architecture
 
