@@ -124,6 +124,11 @@ public sealed class FloatingPointAnalyzer : DiagnosticAnalyzer
                 {
                     Report(FindFloating(@interface), location);
                 }
+                // A delegate's implicitly declared Invoke never reaches the method case.
+                if (type.DelegateInvokeMethod is { } invoke)
+                {
+                    AnalyzeSignature(invoke, Report);
+                }
                 break;
         }
     }

@@ -48,6 +48,15 @@ public class FloatingPointTests
     }
 
     [Fact]
+    public void Delegate_signature_is_reported()
+    {
+        var returns = Harness.Run("public delegate double D1();");
+        Assert.Equal(new[] { "DUN001" }, Harness.Ids(returns));
+        var takes = Harness.Run("public delegate void D2(float f);");
+        Assert.Equal(new[] { "DUN001" }, Harness.Ids(takes));
+    }
+
+    [Fact]
     public void Message_names_DS11_and_the_type()
     {
         var d = Harness.Run("class C { double _x; public double X => _x; }");
