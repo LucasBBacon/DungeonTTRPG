@@ -32,6 +32,9 @@ public class BannedApiTests
     [InlineData("class C { public static int M() { int x = 1; return x.GetHashCode(); } }")]
     [InlineData("class C { public static int M() => System.HashCode.Combine(1, 2); }")]
     [InlineData("class C { public static object M() => new System.HashCode(); }")]
+    [InlineData("class C { public static int M() => \"a\".GetHashCode(System.StringComparison.Ordinal); }")]
+    [InlineData("class C { public static int M() => System.StringComparer.Ordinal.GetHashCode(\"a\"); }")]
+    [InlineData("class C { public static int M() => System.Collections.Generic.EqualityComparer<int>.Default.GetHashCode(1); }")]
     public void Hashing_is_reported(string source) =>
         Assert.Equal(new[] { "DUN004" }, Harness.Ids(Harness.Run(source)));
 

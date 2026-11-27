@@ -97,7 +97,7 @@ public sealed class BannedApiAnalyzer : DiagnosticAnalyzer
         {
             case IInvocationOperation invocation:
                 Check(invocation.TargetMethod, location);
-                if (invocation.TargetMethod is { Name: "GetHashCode", Parameters.Length: 0 })
+                if (invocation.TargetMethod.Name == "GetHashCode")
                 {
                     checker.Report(Rules.Hashing, "GetHashCode", "use an explicit stable hash", location, context.ReportDiagnostic);
                 }
