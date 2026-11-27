@@ -1,6 +1,12 @@
 <!-- DS11 build guards for Dungeon.Core: the one place the determinism analyzer is configured. -->
 <Project>
+  <PropertyGroup>
+    <!-- DS11: overflow throws in Debug and CI; only the named file's unchecked blocks may wrap (DUN011). -->
+    <CheckForOverflowUnderflow Condition="'$(Configuration)' == 'Debug' or '$(CI)' == 'true'">true</CheckForOverflowUnderflow>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="$(MSBuildThisFileDirectory)../src/Analyzers/Analyzers.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
+    <!-- DUN011: the one file (relative to the project folder) whose unchecked blocks may wrap. -->
+    <CompilerVisibleProperty Include="DungeonWrappingArithmeticFile" />
   </ItemGroup>
 </Project>

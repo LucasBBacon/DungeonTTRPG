@@ -47,4 +47,10 @@ public static class IntMath
         var r = a % b;
         return r != 0 && (r < 0) != (b < 0) ? r + b : r;
     }
+
+    /// <summary>
+    /// Plain <c>a + b</c> with no <c>checked</c> keyword: throws <see cref="OverflowException"/> only when
+    /// Core is built with <c>CheckForOverflowUnderflow</c>, which the tests assert (DS11).
+    /// </summary>
+    internal static int CheckedProbe(int a, int b) => a + b;
 }
