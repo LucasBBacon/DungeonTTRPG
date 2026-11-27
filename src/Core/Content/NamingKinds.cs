@@ -112,7 +112,7 @@ public sealed class RetiredNamesKind : ContentKind
 
 /// <summary>
 /// The greyed-reason registry, <c>naming/greyed_reasons.json</c>: records <c>{id, doc}</c>, both rules
-/// fields; <c>doc</c> is one strings-key part. Each reason's string is <c>&lt;doc&gt;.greyed.&lt;id&gt;</c> in <c>strings/en.json</c>
+/// fields; <c>id</c> is a label (<see cref="NamingIds.Label"/>), written as the designs write it; <c>doc</c> is one strings-key part. Each reason's string is <c>&lt;doc&gt;.greyed.&lt;id&gt;</c> in <c>strings/en.json</c>
 /// (<c>V24.GreyedReasonKeys</c>). The owning steps add the reasons (owner ruling 3).
 /// </summary>
 public sealed class GreyedReasonKind : ContentKind
@@ -134,7 +134,7 @@ public sealed class GreyedReasonKind : ContentKind
             var r = Need(file, at, rows[i]);
             result.Add(new GreyedReason(
                 file.Name,
-                Id(file, Member(at, "id"), r.Id).Value,
+                NamingIds.Label(file, Member(at, "id"), r.Id),
                 NamingIds.KeyPart(file, Member(at, "doc"), r.Doc)));
         }
 
@@ -350,6 +350,27 @@ internal static class NamingIds
         return valid
             ? value
             : throw new ContentLoadException(file.Name, field, $"\"{value}\" is not a strings key (<doc>.<registry>.<id>).");
+    }
+
+    /// <summary>
+    /// A code-facing label, such as a greyed-reason id (items 7.3: <c>NotInCombat</c>): non-empty ASCII
+    /// <c>[A-Za-z0-9_.:-]</c>, the label rule of SV 4.1 K-rule 3 (agreed 2026-11-28, roadmap D-12). Content
+    /// record ids keep the stricter lowercase rule (<see cref="ContentId"/>).
+    /// </summary>
+    public static string Label(ContentFile file, string field, string? s)
+    {
+        string value = RuleString(file, field, s);
+        foreach (var c in value)
+        {
+            bool ok = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')
+                || c == '_' || c == '.' || c == ':' || c == '-';
+            if (!ok)
+            {
+                throw new ContentLoadException(file.Name, field, $"\"{value}\" is not a label ([A-Za-z0-9_.:-]).");
+            }
+        }
+
+        return value;
     }
 
     /// <summary>

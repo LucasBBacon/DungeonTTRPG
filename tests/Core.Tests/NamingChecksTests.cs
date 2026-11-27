@@ -165,6 +165,29 @@ public class NamingChecksTests
             Strings(Str("ITEMS.greyed.notincombat", "Not in combat"))));
     }
 
+    // Greyed-reason ids are code-facing labels, written as the designs write them (items 7.3:
+    // NotInCombat), so they follow the D-12 label rule [A-Za-z0-9_.:-], not the content-id rule.
+    [Fact]
+    public void A_PascalCase_greyed_reason_id_loads_and_keys_as_written()
+    {
+        Assert.Empty(Run(
+            new GreyedReasonKeysCheck(),
+            Greyed("{\"id\": \"NotInCombat\", \"doc\": \"ITEMS\"}"),
+            Strings(Str("ITEMS.greyed.NotInCombat", "Not in combat"))));
+    }
+
+    [Theory]
+    [InlineData("Not In Combat")]
+    [InlineData("a/b")]
+    [InlineData("Né")]
+    public void A_greyed_reason_id_outside_the_label_rule_is_rejected(string id)
+    {
+        var ex = Assert.Throws<ContentLoadException>(
+            () => ContentLoader.Load([Greyed($"{{\"id\": \"{id}\", \"doc\": \"ITEMS\"}}")]));
+        Assert.Equal("naming/greyed_reasons.json", ex.File);
+        Assert.Equal("$.reasons[0].id", ex.Field);
+    }
+
     // --- The naming kinds ---
 
     [Fact]
