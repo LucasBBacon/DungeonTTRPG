@@ -129,6 +129,10 @@ These are enforced by tests and CI, not just convention:
   rule is also covered by `ArchitectureTests`.
 - All randomness comes from keys derived from the 60-bit run seed (SplitMix64 key algebra, SV 4.1);
   a stream is a key and a counter, and every rule draws a fixed number of values.
+- Core opens streams only through the generated `StreamHandles` (DS1, SV 4.2). DUN012 reports a call
+  to, or method group of, `KeyAlgebra.Derive`, `KeyAlgebra.H` or `DrawStream.Open` in any file not
+  named by the `DungeonKeyDerivationFiles` property (Core names `Random/KeyAlgebra.cs`,
+  `Random/KeyedSort.cs`, `Random/StreamRegistry.cs` and `Random/StreamHandles.g.cs`).
 - Saves carry a version number; a corrupt or newer save fails with a typed error and never
   half-loads.
 - CI fails if rule checks (`IsWalkable`, `CheckStep`, `.Step(`) show up in `dungeon-ttrpg/scripts`.

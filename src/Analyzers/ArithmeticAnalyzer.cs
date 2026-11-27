@@ -43,44 +43,12 @@ public sealed class ArithmeticAnalyzer : DiagnosticAnalyzer
                 "build_property." + WrappingArithmeticFileProperty,
                 out var allowedFile);
             start.Options.AnalyzerConfigOptionsProvider.GlobalOptions.TryGetValue("build_property.ProjectDir", out var projectDir);
-            var allowed = AllowedFile(allowedFile, projectDir);
+            var allowed = ProjectPath.Allowed(allowedFile, projectDir);
             start.RegisterSyntaxNodeAction(
                 c => AnalyzeUnchecked(c, allowed),
                 SyntaxKind.UncheckedExpression,
                 SyntaxKind.UncheckedStatement);
         });
-    }
-
-    /// <summary>
-    /// The normalised path the exempt file must have, or null when none is named. The property is relative to the
-    /// project folder: separators become <c>/</c> and leading <c>./</c> segments are dropped. When the SDK supplies
-    /// <c>ProjectDir</c> (every real build does) the path is anchored there and must match in full, so a deeper file
-    /// with the same tail is not exempt; without it (bare compilations) the path must match a whole-segment suffix.
-    /// </summary>
-    private static AllowedPath? AllowedFile(string? property, string? projectDir)
-    {
-        if (string.IsNullOrWhiteSpace(property))
-        {
-            return null;
-        }
-
-        var relative = Normalize(property!.Trim());
-        while (relative.StartsWith("./", System.StringComparison.Ordinal))
-        {
-            relative = relative.Substring(2);
-        }
-        relative = relative.TrimStart('/');
-        if (relative.Length == 0)
-        {
-            return null;
-        }
-
-        if (string.IsNullOrWhiteSpace(projectDir))
-        {
-            return new AllowedPath("/" + relative, anchored: false);
-        }
-        var root = Normalize(projectDir!.Trim()).TrimEnd('/');
-        return new AllowedPath(root + "/" + relative, anchored: true);
     }
 
     private static void AnalyzeBinary(OperationAnalysisContext context)
@@ -129,9 +97,9 @@ public sealed class ArithmeticAnalyzer : DiagnosticAnalyzer
         Report(context, owner.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat) + ".DivRem", method.Parameters[0].Type);
     }
 
-    private static void AnalyzeUnchecked(SyntaxNodeAnalysisContext context, AllowedPath? allowed)
+    private static void AnalyzeUnchecked(SyntaxNodeAnalysisContext context, ProjectPath? allowed)
     {
-        if (allowed is not null && allowed.Matches(Normalize(context.Node.SyntaxTree.FilePath)))
+        if (allowed is not null && allowed.Matches(context.Node.SyntaxTree.FilePath))
         {
             return;
         }
@@ -181,29 +149,5 @@ public sealed class ArithmeticAnalyzer : DiagnosticAnalyzer
             }
         }
         return false;
-    }
-
-    private static string Normalize(string path) => path.Replace('\\', '/');
-
-    /// <summary>The exempt file: a full path anchored at the project folder, or a <c>/</c>-led suffix.</summary>
-    private sealed class AllowedPath
-    {
-        private readonly string _path;
-        private readonly bool _anchored;
-
-        internal AllowedPath(string path, bool anchored)
-        {
-            _path = path;
-            _anchored = anchored;
-        }
-
-        /// <summary>
-        /// An anchored path is compared ignoring case: MSBuild hands the same project folder to both
-        /// properties, and a case-only difference on a case-insensitive file system names the same file.
-        /// </summary>
-        internal bool Matches(string normalizedFilePath) =>
-            _anchored
-                ? string.Equals(normalizedFilePath, _path, System.StringComparison.OrdinalIgnoreCase)
-                : normalizedFilePath.EndsWith(_path, System.StringComparison.Ordinal);
     }
 }

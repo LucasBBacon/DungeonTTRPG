@@ -8,5 +8,17 @@
     <ProjectReference Include="$(MSBuildThisFileDirectory)../src/Analyzers/Analyzers.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
     <!-- DUN011: the one file (relative to the project folder) whose unchecked blocks may wrap. -->
     <CompilerVisibleProperty Include="DungeonWrappingArithmeticFile" />
+    <!-- DUN012: the files (;-separated, relative to the project folder) that may call Derive, H and DrawStream.Open. -->
+    <CompilerVisibleProperty Include="DungeonKeyDerivationFiles" />
   </ItemGroup>
+  <!--
+    The analyzer reads build properties from a generated .editorconfig, where ';' starts an inline comment and would
+    cut the list after its first file. Just before that file is written, the separators become '|', which DUN012
+    also accepts.
+  -->
+  <Target Name="DungeonEncodeKeyDerivationFiles" BeforeTargets="GenerateMSBuildEditorConfigFileCore">
+    <PropertyGroup>
+      <DungeonKeyDerivationFiles>$(DungeonKeyDerivationFiles.Replace(';', '|'))</DungeonKeyDerivationFiles>
+    </PropertyGroup>
+  </Target>
 </Project>
