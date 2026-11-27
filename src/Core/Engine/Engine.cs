@@ -91,12 +91,12 @@ public static class Engine
 
         if (state.Map[to] == Tile.Shrine)
         {
-            var (options, loot) = DrawBoons(state.Rng.Loot);
+            var (options, shrine) = DrawBoons(state.Rng.Shrine);
             var decision = new PendingDecision(
                 new DecisionId(state.NextDecisionId), unit.Id, DecisionKind.ShrineBoon, options, to);
             next = next with
             {
-                Rng = state.Rng with { Loot = loot },
+                Rng = state.Rng with { Shrine = shrine },
                 Pending = decision,
                 NextDecisionId = checked(state.NextDecisionId + 1),
             };
@@ -192,20 +192,27 @@ public static class Engine
             CommandError.None);
     }
 
-    /// <summary>Draws distinct boon ids from the loot stream, in draw order, skipping repeats.</summary>
-    private static (ImmutableArray<int> Options, RngState Next) DrawBoons(RngState loot)
+    /// <summary>
+    /// Draws <see cref="ShrineBoonChoices"/> distinct boon ids from the shrine stream: a partial
+    /// Fisher-Yates shuffle of <c>[0, BoonCount)</c> that makes exactly one draw per option, so the
+    /// stream advances by the same count under every seed.
+    /// </summary>
+    private static (ImmutableArray<int> Options, DrawStream Next) DrawBoons(DrawStream shrine)
     {
-        var options = ImmutableArray.CreateBuilder<int>(ShrineBoonChoices);
-        while (options.Count < ShrineBoonChoices)
+        var boons = new int[BoonCount];
+        for (int i = 0; i < BoonCount; i++)
         {
-            (int boon, loot) = Pcg32.NextInt(loot, BoonCount);
-            if (!options.Contains(boon))
-            {
-                options.Add(boon);
-            }
+            boons[i] = i;
         }
 
-        return (options.MoveToImmutable(), loot);
+        for (int i = 0; i < ShrineBoonChoices; i++)
+        {
+            (ulong offset, shrine) = shrine.NextBelow(checked((ulong)(BoonCount - i)));
+            int j = checked(i + (int)offset);
+            (boons[i], boons[j]) = (boons[j], boons[i]);
+        }
+
+        return (ImmutableArray.Create(boons, 0, ShrineBoonChoices), shrine);
     }
 
     private static int IndexOfUnit(GameState state, UnitId id)

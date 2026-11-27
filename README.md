@@ -55,7 +55,7 @@ src/Core/                   Dungeon.Core: the rules engine (no Godot)
   State/                    Immutable GameState
   Grid/                     GridPos, GridMap
   Queries/                  Read-only questions, e.g. pathfinding
-  Random/                   Seeded PCG32 generator
+  Random/                   Key algebra (SplitMix64) and run streams
   Persistence/              Versioned snapshots, command logs, replay
 src/Sim/                    Dungeon.Sim: console app for headless simulations (balance)
 src/Analyzers/              Dungeon.Analyzers: Roslyn analyzer enforcing the determinism rules on Core

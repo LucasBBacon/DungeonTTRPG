@@ -24,7 +24,7 @@ public sealed class BannedApiAnalyzer : DiagnosticAnalyzer
 
     private static readonly Entry[] Table =
     {
-        new("System.Random", null, Rules.SystemRandom, "use the seeded Dungeon.Core PCG stream"),
+        new("System.Random", null, Rules.SystemRandom, "use Dungeon.Core.KeyAlgebra streams"),
         new("System.DateTime", new[] { "Now", "UtcNow", "Today" }, Rules.Clock, "take time as an explicit input"),
         new("System.DateTimeOffset", new[] { "Now", "UtcNow" }, Rules.Clock, "take time as an explicit input"),
         new("System.Environment", new[] { "TickCount", "TickCount64" }, Rules.Clock, "take time as an explicit input"),

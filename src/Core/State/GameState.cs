@@ -21,7 +21,9 @@ public sealed record PendingDecision(
     DecisionId Id, UnitId Unit, DecisionKind Kind, ImmutableArray<int> Options, GridPos Source);
 
 /// <summary>
-/// The complete immutable state of a run. <see cref="Units"/> is kept sorted by id so that
+/// The complete immutable state of a run. <see cref="RunSeed"/> is the 60-bit seed every
+/// random stream is derived from; <see cref="Rng"/> holds the streams' positions.
+/// <see cref="Units"/> is kept sorted by id so that
 /// every walk over it is in a fixed order. Two states with the same contents are not equal
 /// with <c>==</c> or <c>Equals</c> (the map and the arrays compare by reference); compare
 /// their <see cref="Snapshot.Save"/> text instead.
@@ -29,7 +31,8 @@ public sealed record PendingDecision(
 public sealed record GameState(
     GridMap Map,
     ImmutableArray<Unit> Units,
-    RngStreams Rng,
+    ulong RunSeed,
+    RunStreams Rng,
     PendingDecision? Pending,
     long Tick,
     int NextDecisionId)
@@ -38,12 +41,14 @@ public sealed record GameState(
     /// Builds the starting state of a run. Units are sorted by id. Throws an
     /// <see cref="ArgumentException"/> naming the problem if two units share an id, a unit
     /// stands on a square that is not walkable, two units share a square, or a unit's
-    /// <see cref="Unit.Boons"/> is an uninitialised array.
+    /// <see cref="Unit.Boons"/> is an uninitialised array, and an
+    /// <see cref="ArgumentOutOfRangeException"/> if <paramref name="seed"/> is at least 2^60.
     /// </summary>
     public static GameState Create(GridMap map, IEnumerable<Unit> units, ulong seed)
     {
         ArgumentNullException.ThrowIfNull(map);
         ArgumentNullException.ThrowIfNull(units);
+        var streams = RunStreams.FromSeed(Dungeon.Core.RunSeed.Validate(seed, nameof(seed)));
 
         var sorted = units
             .Select(u => u ?? throw new ArgumentException("Invalid units: a unit is null.", nameof(units)))
@@ -84,7 +89,7 @@ public sealed record GameState(
             }
         }
 
-        return new GameState(map, sorted, RngStreams.FromSeed(seed), null, 0, 1);
+        return new GameState(map, sorted, seed, streams, null, 0, 1);
     }
 
     /// <summary>The unit with this id, or null if there is none.</summary>

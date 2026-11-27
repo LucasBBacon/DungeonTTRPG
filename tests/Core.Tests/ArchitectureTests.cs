@@ -26,6 +26,29 @@ public class ArchitectureTests
     }
 
     /// <summary>
+    /// The determinism analyzer holds in Core without exceptions: no file switches a DUN rule off
+    /// or suppresses a Determinism diagnostic (plan call 6; the last one went with PCG32).
+    /// </summary>
+    [Fact]
+    public void Core_has_no_analyzer_suppressions()
+    {
+        var core = Path.Combine(RepoRoot.Find(), "src", "Core");
+        var sep = Path.DirectorySeparatorChar;
+        var offenders = Directory.EnumerateFiles(core, "*.cs", SearchOption.AllDirectories)
+            .Where(f => !f.Contains($"{sep}obj{sep}", StringComparison.Ordinal)
+                && !f.Contains($"{sep}bin{sep}", StringComparison.Ordinal))
+            .Where(f =>
+            {
+                var text = File.ReadAllText(f);
+                return text.Contains("#pragma warning disable DUN", StringComparison.Ordinal)
+                    || text.Contains("SuppressMessage(\"Determinism\"", StringComparison.Ordinal);
+            })
+            .Select(f => Path.GetRelativePath(core, f))
+            .ToList();
+        Assert.Empty(offenders);
+    }
+
+    /// <summary>
     /// Global Constraints: integer rules only, the core's own random source, no unordered
     /// collections. Looks at every field, property, method signature and local variable in Core.
     /// </summary>

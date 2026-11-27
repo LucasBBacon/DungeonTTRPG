@@ -20,8 +20,7 @@ public class DecisionTests
         Assert.Equal(3, d.Options.Distinct().Count());
         Assert.All(d.Options, o => Assert.InRange(o, 0, 9));
         Assert.Equal(State().Rng.Combat, r.State.Rng.Combat);
-        Assert.Equal(State().Rng.Generation, r.State.Rng.Generation);
-        Assert.NotEqual(State().Rng.Loot, r.State.Rng.Loot);
+        Assert.Equal(State().Rng.Shrine.Skip(3), r.State.Rng.Shrine);
     }
 
     [Fact] public void Same_seed_offers_same_options() =>
@@ -57,12 +56,36 @@ public class DecisionTests
     public void Shrine_step_for_seed_7_is_pinned()
     {
         var r = Engine.Apply(State(), new MoveCommand(Hero, Direction.E));
-        Assert.Equal(new[] { 1, 8, 2 }, r.State.Pending!.Options);
+        Assert.Equal(new[] { 5, 9, 4 }, r.State.Pending!.Options);
         Assert.Equal(2, r.State.NextDecisionId);
         Assert.Equal(new GameEvent[] {
             new UnitMoved(Hero, new(0, 0), new(1, 0)),
             new TickAdvanced(1),
             new DecisionRequested(r.State.Pending) }, r.Events);
+    }
+
+    /// <summary>The Godot demo seed (<c>DemoLevel.Seed</c>): the shrine stream does not depend on the map.</summary>
+    [Fact]
+    public void Shrine_step_for_seed_12345_is_pinned()
+    {
+        var r = Engine.Apply(ShrineState(12345), new MoveCommand(Hero, Direction.E));
+        Assert.Equal(new[] { 7, 5, 6 }, r.State.Pending!.Options);
+    }
+
+    /// <summary>Review Focus 5: a shrine step makes exactly three shrine draws and no combat draw, under every seed.</summary>
+    [Fact]
+    public void Shrine_draws_a_fixed_count_for_every_seed()
+    {
+        var seeds = Enumerable.Range(0, 10_000).Select(i => (ulong)i).Append(RunSeed.Limit - 1);
+        foreach (var seed in seeds)
+        {
+            var r = Engine.Apply(ShrineState(seed), new MoveCommand(Hero, Direction.E)).State;
+            Assert.Equal(3UL, r.Rng.Shrine.Counter);
+            Assert.Equal(0UL, r.Rng.Combat.Counter);
+            var options = r.Pending!.Options;
+            Assert.Equal(3, options.Distinct().Count());
+            Assert.All(options, o => Assert.InRange(o, 0, 9));
+        }
     }
 
     [Fact]
