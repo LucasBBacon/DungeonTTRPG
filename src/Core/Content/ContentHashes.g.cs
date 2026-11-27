@@ -7,11 +7,11 @@ namespace Dungeon.Core.Content;
 public static class ContentHashes
 {
     /// <summary><c>manifestHash</c>: every record's rules fields.</summary>
-    public const string Manifest = "ad43d50ddfafc9c5a725395d3126af7dbffdc8d729c36a4b35bb5e74f336254f";
+    public const string Manifest = "2615325e9db59b04ed0723f7a7a5e642ce1d63b4c71594aeb389713848695c2e";
 
     /// <summary><c>displayHash</c>: the display-tagged fields.</summary>
-    public const string Display = "5514a33903d7533d435bf790560ce38d097289ba40ed45ae1ac5282eccb8464c";
+    public const string Display = "a4860e4302e29c61698762a1f5564d6093096a5622515bdac6fc5a8a46141ca7";
 
     /// <summary><c>genContentHash</c>: the subset of the manifest that generation reads.</summary>
-    public const string GenContent = "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119";
+    public const string GenContent = "16efef3083e5729c9d439db5f18b71ca71a70e1e4d4a446a1e53e60afc759a7c";
 }

@@ -5,5 +5,7 @@
     <RootNamespace>Dungeon.Core</RootNamespace>
     <!-- DUN011: the key-algebra file is the one file whose unchecked blocks may wrap (DS11). -->
     <DungeonWrappingArithmeticFile>Random/KeyAlgebra.cs</DungeonWrappingArithmeticFile>
+    <!-- DUN012: only the key algebra, the keyed sort, the reference derivation and the generated handles derive raw. -->
+    <DungeonKeyDerivationFiles>Random/KeyAlgebra.cs;Random/KeyedSort.cs;Random/StreamRegistry.cs;Random/StreamHandles.g.cs</DungeonKeyDerivationFiles>
   </PropertyGroup>
 </Project>

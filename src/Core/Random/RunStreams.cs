@@ -3,13 +3,13 @@ using System;
 namespace Dungeon.Core;
 
 /// <summary>
-/// The sequential-saved draw streams of a run (SV 4.3). Both keys come from the run seed alone,
-/// so a save stores the seed and the two counters and re-derives the keys on load.
+/// The sequential-saved draw streams of a run (SV 4.3), opened through the generated stream handles. Both keys
+/// come from the run seed alone, so a save stores the seed and the two counters and re-derives the keys on load.
 /// </summary>
-/// <param name="Combat">Combat rolls, <c>Derive(runSeed, "combat")</c>.</param>
+/// <param name="Combat">Combat rolls, the <c>combat</c> row: <c>Derive(runSeed, "combat")</c>.</param>
 /// <param name="Shrine">
-/// The M0 shrine boons, <c>Derive(Derive(runSeed, "loot"), "shrine")</c>; it has no row in the SV 4.3
-/// table and lives until real loot replaces shrines (M1-33).
+/// The M0 shrine boons, the <c>loot/shrine</c> row (plan call 6): <c>Derive(Derive(runSeed, "loot"), "shrine")</c>;
+/// it lives until real loot replaces shrines (M1-33).
 /// </param>
 public sealed record RunStreams(DrawStream Combat, DrawStream Shrine)
 {
@@ -19,7 +19,7 @@ public sealed record RunStreams(DrawStream Combat, DrawStream Shrine)
     {
         RunSeed.Validate(runSeed, nameof(runSeed));
         return new RunStreams(
-            DrawStream.Open(KeyAlgebra.Derive(runSeed, "combat")),
-            DrawStream.Open(KeyAlgebra.Derive(KeyAlgebra.Derive(runSeed, "loot"), "shrine")));
+            Streams.Combat(runSeed).Open(),
+            Streams.Loot(runSeed).Shrine.Open());
     }
 }

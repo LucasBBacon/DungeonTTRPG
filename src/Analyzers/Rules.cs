@@ -3,8 +3,8 @@ using Microsoft.CodeAnalysis;
 namespace Dungeon.Analyzers;
 
 /// <summary>
-/// One descriptor per DS11 clause. Every rule is an error in category <c>Determinism</c>;
-/// its message names the banned construct (<c>{0}</c>) and what to use instead (<c>{1}</c>).
+/// One descriptor per DS11 clause, plus DUN012 for raw key derivation. Every rule is an error in category
+/// <c>Determinism</c>; a DS11 message names the banned construct (<c>{0}</c>) and what to use instead (<c>{1}</c>).
 /// </summary>
 public static class Rules
 {
@@ -43,11 +43,24 @@ public static class Rules
     /// <summary>DUN011: wrapping arithmetic outside the key-algebra file.</summary>
     public static readonly DiagnosticDescriptor Unchecked = Create("DUN011", "Wrapping arithmetic is banned in Core");
 
+    /// <summary>
+    /// DUN012: raw <c>KeyAlgebra.Derive</c>, <c>KeyAlgebra.H</c>, <c>KeyAlgebra.Absorb</c> and <c>DrawStream.Open</c>, and a
+    /// hand-built <c>DrawStream</c> (<c>new</c>, explicit <c>default</c>, <c>with</c>), outside the stream handle
+    /// files (DS1, SV 4.2). Its message names the banned member or construct (<c>{0}</c>).
+    /// </summary>
+    public static readonly DiagnosticDescriptor KeyDerivation = Create(
+        "DUN012",
+        "Raw key derivation is banned in Core",
+        "DUN012 (DS1, SV 4.2): open streams only through StreamHandles; '{0}' is banned here");
+
     private static DiagnosticDescriptor Create(string id, string title) =>
+        Create(id, title, id + " (DS11): {0} is banned in Dungeon.Core; {1}");
+
+    private static DiagnosticDescriptor Create(string id, string title, string message) =>
         new(
             id,
             title,
-            id + " (DS11): {0} is banned in Dungeon.Core; {1}",
+            message,
             Category,
             DiagnosticSeverity.Error,
             isEnabledByDefault: true);
