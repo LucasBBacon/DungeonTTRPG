@@ -52,10 +52,11 @@ Dungeon.sln                 Core, Sim, the analyzer and their tests (not the God
 Directory.Build.props       Shared settings: net8.0, nullable, warnings as errors
 src/Core/                   Dungeon.Core: the rules engine (no Godot)
   Engine/                   Commands, events, Engine.Apply
-  State/                    Immutable GameState and its core-state digest
+  State/                    Immutable GameState (with its run key) and its core-state digest
   Grid/                     GridPos, GridMap
   Queries/                  Read-only questions, e.g. pathfinding
   Random/                   Key algebra (SplitMix64) and run streams
+  Run/                      Reproducibility key, run configuration and unlock snapshots (SV 4.6)
   Persistence/              Versioned snapshots, command logs, replay
   Canonical/                CanonicalWriter, CanonicalReader, SHA-256 Digest (SV 4.5)
   Content/                  Content loader (strict JSON, integers and p/q rationals, ASCII rule strings), ContentSet, the three content hashes (ContentHashes.g.cs is generated)
