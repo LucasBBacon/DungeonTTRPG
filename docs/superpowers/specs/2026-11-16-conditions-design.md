@@ -315,6 +315,16 @@ sub-steps, in order:
   monster behaviour "asleep" of main design 4.3 is a behaviour, not this
   condition, and is renamed "dormant" **(change C15)**.
   `hardTurnsLostThisFight` resets.
+  - **One combat-start condition step.** Everything in this bullet, and
+    from M2 the end of floor-1 trap conditions (11.6), is a single step.
+    It runs before the surprise grant and before initiative, and draws no
+    randomness. Asleep is removed before Surprised is granted, or hard
+    exclusivity (6.6) would block the Surprised. Its state changes happen
+    in the step; its messages (`ConditionEnded{reason: combatStart}` and
+    the rest) are held and emitted after `CombatStarted` and before the
+    first `TurnStarted`, listed by unit and then in the order the
+    conditions were applied. **(agreed 2026-11-27, roadmap D-19; M1-10
+    rulings 3.2, 5)**
 - **Combat end:** the current unit's turn-end step completes, then
   `combatOnly` instances end (reason `combatEnd`). A downed companion gets
   up only when the party wins **(settled, main design 4.2)**; after any
@@ -457,6 +467,34 @@ For modifiers that come from conditions **(change C3)**:
 - crawling while Prone and dragging a held unit are movement-cost
   multipliers, applied after the single halving; standing costs half the
   current effective speed, minimum 1. **(lead's call)**
+- **Movement left: subtract, not rescale.** Movement is counted in
+  points: most squares cost 1, crawling and Rough cost 2.
+  **(agreed 2026-11-27, roadmap D-18; M1-10 rulings 2.1)**
+  - Movement left = max(0, current speed + granted movement − movement
+    used). Current speed is the speed worked out above; granted movement
+    is extra movement an effect adds this turn, such as Dash. The game
+    records movement used, never movement left.
+  - It is rechecked before every step, never worked out in advance for a
+    whole path. A speed change up or down applies from the next step.
+  - A move cut short by a reaction keeps its unspent movement for a later
+    move this turn (weapons design 8).
+  - Movement used counts points, not squares: crawling and Rough cost 2
+    per square, never more than 2 (18.4); standing costs half the current
+    effective speed, minimum 1.
+  - Forced movement, a free stand (Escape's, 18.4) and any move a design
+    marks free never add to movement used.
+- **Speed 0 stops movement.** While current speed is 0, movement left is
+  0 whatever movement has been granted. Granted movement is not lost: if
+  speed returns in the same turn, the unit may move its speed plus any
+  granted movement, minus the movement it has already used. **(lead's
+  call, confirmed by the client 2026-11-27; M1-10 rulings 8 item 1)**
+- **The stand gap.** If a Prone unit's movement left is less than the
+  stand cost, standing costs its action instead; when movement left
+  covers the cost, the unit pays it in movement. Speed 0 is one case of
+  this: movement left is 0. **(agreed 2026-11-27, roadmap D-18; M1-10
+  rulings 2.3)** Standing by the action spends no movement; if the action
+  is already used, the unit cannot stand this turn. **(lead's call,
+  confirmed by the client 2026-11-27; M1-10 rulings 8 item 2)**
 
 Gear and traits still stack as the stat model says.
 
@@ -562,13 +600,13 @@ morale states (Emboldened, Demoralised, Routed, Cowed; enemies design
 | `treat` | **Medicine Treat (change C4):** an action, adjacent. One Medicine roll is compared with each curable instance's recorded difficulty, and every instance the roll meets ends. The action is spent either way. | Every `poison` condition, Bleeding, Withered, Hobbled, Condemned, Calcifying at stages 1–2; Diseased and Scarred during a rest, except a `treatProof` Scarred (change CN-14, DH-16) |
 | `rally` | Rally: a bonus action, once per ally per fight **(settled)** | The `fear` tag |
 | `escape` | An action: Athletics or Acrobatics against 10 + the holder's Fortitude, or against the binding's difficulty | Grappled, Restrained, Tangled, Engulfed |
-| `stand` | Half the current effective speed, minimum 1 (6.7). **At speed 0, standing costs the action.** | Prone |
+| `stand` | Half the current effective speed, minimum 1 (6.7). **At speed 0, or when movement left is less than the stand cost, standing costs the action** **(agreed 2026-11-27, roadmap D-18; M1-10 rulings 2.3)**. | Prone |
 | `shakeOff` | Half speed (the action at speed 0). One use ends every shake-off condition on the unit. | Burning, Smouldering, Corroded (rinse), Oiled (wipe), Mired |
 | `damageType:X` | Damage of type X, at least 1 | Fire ends Chilled, Frozen, Soaked and Oiled; cold ends Burning and Smouldering; bludgeoning ends Frozen; a binding's breaker type ends Restrained or Tangled |
 | `damage` | Any damage | Asleep |
 | `tonic` | A consumable (items design). As a bonus action it ends one minor condition; drunk as an action it ends one major. Thrown at an ally (action, range `throwAllyRange`): minor only **(change CN-17; consumables design 11)**. Given to an adjacent ally (action): minor only (items design 7.1). Never hard or lingering. A `cureImmune` list lets a condition opt out. | By tier |
 | `cleanse` | Spells that declare the tiers and tags they end | By content |
-| `sourceGone`, `combatEnd`, `rest`, `camp` | Automatic | By flag |
+| `sourceGone`, `combatStart`, `combatEnd`, `rest`, `camp` | Automatic | By flag. `combatStart` ends Asleep (5.5) and, from M2, floor-1 trap conditions (11.6) **(agreed 2026-11-27, roadmap D-19; M1-10 rulings 3.2)** |
 | `bossShed` | Boss action (M2) | One condition of the boss's choice |
 
 - **Difficulty without a source:** an instance with no source (Scarred,
@@ -1017,7 +1055,9 @@ Illustrative set:
   the square is not tagged as crossable by that state. **(settled
   principle, main design 4.3; detail lead's call)**
 - A unit that gains speed 0 mid-move (a web's Restrained) stops there and
-  loses the rest of its movement. **(lead's call)**
+  loses the rest of its movement. **(lead's call)** This covers terrain
+  only, and terrain is M2; in M2 it is fitted to the subtract rule of 6.7
+  **(agreed 2026-11-27, roadmap D-18; M1-10 rulings 2.1)**.
 - `onTurnEnd` applications run last in the turn-end step (5.4). Under the
   counting test (5.2), a condition gained there is not counted down or
   saved against in the same turn end. **(lead's call)**
@@ -1062,7 +1102,9 @@ are hazards for the same rules. The rules of 10.1 and 10.2 are not
 changed; known traps simply become hazards they apply to. **On floor 1,
 pushes and drags stop before trap trigger squares** (the M1 rule kept on
 F1), narrowing this and SH-15 on floor 1 **(change TL-19; traps and
-locks design 6.19; M2)**.
+locks design 6.19)**. This F1 push stop is M1, built by M1-30; TL-19's
+other half, the end of floor-1 trap conditions at combat start (11.6),
+is M2 **(agreed 2026-11-27, roadmap D-19; M1-10 rulings 3.1)**.
 
 **Contact hazards and harm squares (change TR-10; room terrain design
 6.5; M2):** contact hazards (hazard pieces and hazard faces) and harm
@@ -1154,7 +1196,32 @@ that it exists; the outcome is the lead's call)**
   until the death report clears (a reading; traps and locks design 6.3;
   TL-18).
 - **Trap conditions on floor 1 end when combat starts** **(change TL-19;
-  traps and locks design 6.19; M2)**.
+  traps and locks design 6.19; M2)**. M1 ships no trap that can apply a
+  condition. The M2 behaviour, recorded now **(agreed 2026-11-27, roadmap
+  D-19; M1-10 rulings 3.2)**:
+  - Every condition a trap applies stores the trap's DH-32 id and
+    `detectionAtFire` (whether the trap was detected when it fired).
+    Trap and terrain conditions share the source `environment`, so the
+    source alone cannot tell them apart.
+  - The end is one clause of the combat-start condition step (5.5),
+    which runs before the surprise grant and before initiative.
+  - It ends only condition instances on floor 1 that carry a trap id.
+    Conditions from terrain, units, abilities or the hero's own actions
+    are never touched.
+  - It draws no randomness: the combat dice and initiative rolls are the
+    same whether or not it ends anything.
+  - Each end emits `ConditionEnded{reason: combatStart}` after
+    `CombatStarted` and before the first `TurnStarted`, one message per
+    ended condition, listed by unit and then in the order the conditions
+    were applied.
+  - A trap whose spring starts the fight never leaves its condition on
+    the hero: normally the spring resolves first and combat starts
+    after it, so the combat-start step removes the condition **(lead's
+    call, confirmed by the client 2026-11-27; M1-10 rulings 8 item 8)**.
+  - If some path ever starts the fight before the spring's condition
+    lands, that condition is not applied to a party unit on floor 1
+    **(lead's call, confirmed by the client 2026-11-27; M1-10 rulings 8
+    item 9)**.
 - The rest of SH-15 applies to every party from M2, whatever the
   Trapwright's wave **(change TL-15; traps and locks design 6.6, 6.7;
   M2)**: the universal hand-trigger and Trigger Shot, and re-arm by a
@@ -1997,7 +2064,8 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
       never multiply, so a square never costs more than 2 movement
       **(change TR-11; room terrain design 6.2.1)**;
     - standing costs half its current effective speed, minimum 1, or the
-      action at speed 0 (6.7);
+      action at speed 0 or when movement left is less than that cost
+      (6.7) **(agreed 2026-11-27, roadmap D-18; M1-10 rulings 2.3)**;
     - applying it ends Flying and Jumping (landing rule);
     - dropping prone deliberately is free.
   - Intensity: binary.
@@ -2023,7 +2091,9 @@ model and the step 7 re-check, so that the whole pipeline is proven in M1
     - Unfettered.
   - Sources: the grapple universal action **(settled)**; monster grabs.
     Grabs that also knock Prone must be on cooldown.
-  - Interactions: with Prone it can still stand by spending the action; on
+  - Interactions: with Prone it can still stand by spending the action,
+    as the stand-gap rule of 6.7 gives (movement left 0 is less than any
+    stand cost) **(agreed 2026-11-27, roadmap D-18; M1-10 rulings 2.3)**; on
     bosses, resolve covers the skill-check route; a drag is forced
     movement and, in M1, stops before hazards; from M2, a drag into a
     hazard gives the hazard-edge save (10.1).

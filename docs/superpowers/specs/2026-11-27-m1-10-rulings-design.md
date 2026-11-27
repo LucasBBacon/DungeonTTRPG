@@ -1,9 +1,7 @@
 # M1-10 Rulings: Design (roadmap decisions D-17, D-18, D-19)
 
 Date: 2026-11-27
-Status: Draft, awaiting client approval. On 2026-11-27 the client
-answered the five questions Q1 to Q5 (see 0), choosing option A each
-time.
+Status: Approved, 2026-11-27. The client answered Q1 to Q5 (option A each time) and approved this record as a whole on 2026-11-27, including every lead call in 8.
 Parents: the open decisions D-17, D-18 and D-19 that step M1-10 raised
 (`docs/roadmap/README.md` on the M1-10 branch), the M1-10 plan
 (`docs/superpowers/plans/2026-11-27-m1-10-turns-combat-and-death.md`),
@@ -26,7 +24,8 @@ Solasta, XCOM, Divinity) and the SRD 5.2.1 wording on speed changes and
 Dash were made from memory and not checked against those texts. The
 client then answered five questions, Q1 to Q5, and chose option A each
 time. The lead's own calls that fill gaps the answers leave are marked
-**(lead's call)** and listed in 8.
+**(lead's call)** and listed in 8; the client confirmed them all on
+2026-11-27.
 
 Where to look: sections 1 to 5, 7 and 8 cite designs by section. Line
 numbers are in the change rows (6). Design line numbers refer to this
@@ -327,8 +326,8 @@ shape now so neither step invents its own way of tracking movement.
   fight; it runs the combat-start step "before it pays its cost and
   resolves" (DH 10.4; DH 20.5). The unit that makes it is the
   **striker**.
-- **The opener is checked when it is declared, before combat start
-  runs.** A refused opener starts no fight and costs nothing (AB 14.3:
+- **The opener is checked when it is declared, at step 0 of the
+  combat-start order (5), before anything else in it runs.** A refused opener starts no fight and costs nothing (AB 14.3:
   declared, then validated, then the cost is paid) **(lead's call)**.
 - **Declaring an opener runs combat start in full**, in the order of
   section 5: who is in the fight, the condition step, surprise, fresh
@@ -462,12 +461,14 @@ everyone takes part.
 ## 6. Change rows
 
 Rows MR-1 to MR-46 (MR = M1-10 rulings change row) list every document
-edit. 6.1 edits the design specs on this branch once you approve. 6.2
-edits the roadmap, plans and code comments on the M1-10 branch. Rows
-marked **(lead's call)** carry a lead's call from 8; MR-24 and the
-matching parts of MR-44 apply only if the client approves lead call 3.
+edit. 6.1 edits the design specs on this branch; it was applied on
+2026-11-27. 6.2 edits the roadmap, plans and code comments on the M1-10
+branch and is still to apply there; 6.3 lists the tests later steps
+must add. Rows marked **(lead's call)** carry a lead's call from 8,
+confirmed by the client 2026-11-27; this includes lead call 3, so MR-24
+and the matching parts of MR-44 apply.
 
-### 6.1 Specs, edited on this branch on approval
+### 6.1 Specs, edited on this branch (applied 2026-11-27)
 
 | Row | Target | Change | Ruling |
 |---|---|---|---|
@@ -494,7 +495,7 @@ matching parts of MR-44 apply only if the client approves lead call 3.
 | MR-21 | TL 6.8, first-spring rule (lines 1384-1388) | Define "surprise action" as the opener charged to the striker's round-1 turn; "other party units" means none in M1 (**lead's call**) | D-19(b) |
 | MR-22 | EP 6.8.2 (lines 1630-1634) | Add: the triggering action's result never re-picks membership or Surprised; the full order is this record's section 5 | D-19(b) |
 | MR-23 | AB 6.8 (lines 387-392) | Add: the command that declares an opener runs combat start first and takes no out-of-combat tick; a move that leads to noticing keeps its tick, which runs before the knowledge pass and combat start (8 item 4) (**lead's call**) | D-19(b) |
-| MR-24 | M1 scope rulings 2.1 item 5, F1 guard (lines 98-100) | Add: while `antechamberCatchUpApplied` is false or its level-up is pending, an attack, ability or shove that targets or includes a boss-group unit is refused at no cost, with a reason code (8 item 3) (**lead's call; on client approval**) | D-19(b) |
+| MR-24 | M1 scope rulings 2.1 item 5, F1 guard (lines 98-100) | Add: while `antechamberCatchUpApplied` is false or its level-up is pending, an attack, ability or shove that targets or includes a boss-group unit is refused at no cost, with a reason code (8 item 3) (**lead's call; confirmed by the client 2026-11-27**) | D-19(b) |
 
 ### 6.2 Roadmap, plans and code comments, on the M1-10 branch
 
@@ -522,7 +523,7 @@ some of the files also exist on main.
 | MR-41 | `m1-vertical-slice.md`, M1-12 (lines 347-371) | Delivers: the CO 5.5 combat-start condition step (section 5, step 2), placed before the surprise grant and before initiative. Done-when: the M1-12 tests of 6.3 | D-19 |
 | MR-42 | `m1-vertical-slice.md`, M1-25 (lines 667-692) | Delivers: the initiative bar's spent-action pip on an opener's striker (4.1). Done-when: the M1-25 test of 6.3 | D-19(b) |
 | MR-43 | `m1-vertical-slice.md`, M1-30 (lines 800-830) | Implements: TL-19 → "TL-19 (M1 part: pushes stop before F1 trigger squares)". Depends on: drop D-19. Done-when: replace "`F1TrapRules` passes" with the guard check (`F1TrapRules` is M2: RS V11, line 3001) (**lead's call**) | D-19(a) |
-| MR-44 | `m1-vertical-slice.md`, M1-35 (lines 988-1033) | Depends on: D-19 resolved. Delivers: membership from the declared action (section 5, step 1); combat start and the win check narrowed to participants; hostile targeting of the boss group refused before the catch-up (8 item 3, **lead's call; on client approval**). Done-when: the M1-35 tests of 6.3 | D-19(b) |
+| MR-44 | `m1-vertical-slice.md`, M1-35 (lines 988-1033) | Depends on: D-19 resolved. Delivers: membership from the declared action (section 5, step 1); combat start and the win check narrowed to participants; hostile targeting of the boss group refused before the catch-up (8 item 3, **lead's call; confirmed by the client 2026-11-27**). Done-when: the M1-35 tests of 6.3 | D-19(b) |
 | MR-45 | M1-10 plan, line 45 | "`detectionAtFire` stored on condition instances a trap applied" moves from M1-13 to M2, and the instance also stores the trap's DH-32 id | D-19(a) |
 | MR-46 | `src/Core/Combat/Turns.cs:44-53` | Re-point the line 49 comment and move it above `Initiative.Roll` (line 45): "CO 5.5 combat-start condition step (M1-12); TL-19's clause is M2 (D-19(a)); order per the M1-10 rulings record section 5". Add a comment at line 52: "M1-11 splits this off: the before-round-1 marker and opener first (D-19(b))" | D-19 |
 
@@ -595,7 +596,7 @@ some of the files also exist on main.
 - The win check counts participants only: a fight ends while a monster
   lives elsewhere on the floor.
 - Hostile targeting of the boss group is refused, with a reason, before
-  the catch-up (**lead's call; on client approval**).
+  the catch-up (**lead's call; confirmed by the client 2026-11-27**).
 
 **Bolstered (Later)**
 - The D-17 Done-when (1.1), with the combat log the DH owner rules
@@ -653,7 +654,8 @@ five questions.
    item 5), yet an attack on a group "is noticed automatically" (ENM
    12.2), and nothing stops a shot from the Forecourt through the
    Arches. That would start the boss fight before the catch-up and break
-   the V17t row. The lead recommends a refusal (8 item 3).
+   the V17t row. The lead called for a refusal (8 item 3), and the
+   client approved it on 2026-11-27.
 7. **Silent kill against combat start (M2).** A silent kill still runs
    combat start, with its initiative dice, and EP 6.8.2 item 3 would
    mark the group Surprised. SH 8.1 says the target's group does not
@@ -703,10 +705,11 @@ five questions.
 ## 8. Lead calls
 
 Each fills a gap the client's answers leave, and each is marked in its
-section. Rulings that come from the answers (Dash fixed at the Dash,
-Q2; messages after `CombatStarted` and trap ids on conditions, Q4) or
-from the cross-check (the new "before round 1" marker) are not lead
-calls.
+section **(lead's call)**. All twelve were confirmed by the client
+2026-11-27, when the client approved this record as a whole. Rulings
+that come from the answers (Dash fixed at the Dash, Q2; messages after
+`CombatStarted` and trap ids on conditions, Q4) or from the cross-check
+(the new "before round 1" marker) are not lead calls.
 
 1. **Speed 0 overrides granted movement** (2.1 item 3). While current
    speed is 0, movement left is 0; granted movement counts again if
@@ -718,8 +721,8 @@ calls.
    catch-up** (7 item 6): an attack, ability or shove that targets or
    includes a boss-group unit is refused at no cost, with a reason code,
    while `antechamberCatchUpApplied` is false or its level-up is
-   pending. A recommendation: MR-24 and its part of MR-44 apply only if
-   the client approves it.
+   pending. Confirmed by the client 2026-11-27, so MR-24 and its part
+   of MR-44 apply.
 4. **The command that declares an opener runs combat start first and
    takes no out-of-combat tick** (7 item 9), so no patrol step or
    condition tick can change who is in the fight or wipe the opener's

@@ -1632,6 +1632,10 @@ treated as having noticed").
   apply; (3) each monster group is Surprised iff the party noticed it
   and it is unaware (ENM 12.2); (4) at most one surprise opener per side
   is applied, by trigger order (6.8.7).
+- **fixed at declaration:** membership and Surprised are settled when
+  the triggering action is declared. Its result never re-picks either;
+  a kill only removes the killed unit. The full combat-start order is
+  M1-10 rulings section 5. **(agreed 2026-11-27, roadmap D-19; M1-10 rulings 4.1)**
 
 Consequences, told plainly:
 - With a standard bait in sight, a Cuckoo never costs the party its

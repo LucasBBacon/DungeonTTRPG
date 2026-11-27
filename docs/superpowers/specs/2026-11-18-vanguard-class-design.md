@@ -838,7 +838,14 @@ the claim is checked, not assumed (6.4 rule 8).
 
 - **Text.** When a reaction attack keyed to one of these triggers hits
   (an opportunity attack on `leaveZone` or `slipPast`, or your Receive on
-  `setHit`), that hostile's remaining movement this turn becomes 0:
+  `setHit`), that hostile is stopped for the rest of its turn: a
+  per-turn stopped marker on the mover, not "all movement used".
+  Raising its speed later in the turn does not undo the stop, and
+  movement granted after the stop still adds **(agreed 2026-11-27,
+  roadmap D-18; M1-10 rulings 2.2)**. A stopped unit's movement left is
+  the movement granted after the stop minus the movement it uses after
+  the stop **(lead's call, confirmed by the client 2026-11-27; M1-10
+  rulings 8 item 6)**. Keyed triggers:
   `{leaveZone, slipPast, setHit}`, where `slipPast` needs the Redoubt
   clause or `slipPastProvokes`, and `setHit` needs the Redoubt clause or
   `onSetHit`. The keying is a clarification **(lead's call)**:

@@ -1187,7 +1187,14 @@ saves.
     afterwards by Dash (whatever its action cost) or by Spurred is added
     as normal; forced movement is unaffected. So escaping costs the mover
     an action or a granted move, and the composite goad-plus-move-stop
-    lock stays out of reach. **Keyed to `{leaveZone, slipPast, setHit}`**
+    lock stays out of reach. The stop is a per-turn stopped marker on
+    the mover, not "all movement used": raising its speed later in the
+    turn does not undo it, and movement granted after the stop still
+    adds **(agreed 2026-11-27, roadmap D-18; M1-10 rulings 2.2)**. A
+    stopped unit's movement left is the movement granted after the stop
+    minus the movement it uses after the stop **(lead's call, confirmed
+    by the client 2026-11-27; M1-10 rulings 8 item 6)**.
+    **Keyed to `{leaveZone, slipPast, setHit}`**
     (VG-2): an opportunity attack on a hostile leaving your zone or
     slipping past you (`slipPast` needs the Redoubt clause or
     `slipPastProvokes`), or your Receive hit (`setHit` needs the Redoubt
