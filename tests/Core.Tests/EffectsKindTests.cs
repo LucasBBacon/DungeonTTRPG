@@ -229,7 +229,8 @@ public class EffectsKindTests
     {
         Assert.Equal<DerivedNumber>([new DerivedNumber("speed", NumberRule.Speed, 6, null)], DerivedNumbers.Core.ToArray());
         Assert.Equal<string>(["attackRoll", "attacksAgainst"], RollTargets.Core.ToArray());
-        Assert.Equal<string>(["unitMoved"], RuleEvents.Core.ToArray());
+        Assert.Equal<string>(["unitMoved"], RuleEvents.Core.Select(e => e.Id).ToArray());
+        Assert.Equal(typeof(UnitMoved), RuleEvents.Core[0].EventType);
     }
 
     // --- Helpers ---

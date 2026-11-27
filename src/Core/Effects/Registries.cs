@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Immutable;
 
 namespace Dungeon.Core.Effects;
@@ -49,9 +50,48 @@ public static class RollTargets
     public static ImmutableArray<string> Core { get; } = ["attackRoll", "attacksAgainst"];
 }
 
+/// <summary>
+/// A rule event a trigger's <c>on</c> may name: its id, the <see cref="GameEvent"/> type that raises it, and its
+/// subject, the unit a <c>holder</c>-scope trigger compares with its holder and <c>"to": "subject"</c> gives an effect
+/// to. Built with <see cref="Of{T}"/>.
+/// </summary>
+public sealed record RuleEvent
+{
+    private RuleEvent(string id, Type eventType, Func<GameEvent, UnitId> subject)
+    {
+        Id = id;
+        EventType = eventType;
+        Subject = subject;
+    }
+
+    /// <summary>The id content names in a trigger's <c>on</c>.</summary>
+    public string Id { get; }
+
+    /// <summary>The event type that raises it: an event raises it when its runtime type is exactly this.</summary>
+    public Type EventType { get; }
+
+    /// <summary>The event's subject unit.</summary>
+    public Func<GameEvent, UnitId> Subject { get; }
+
+    /// <summary>The rule event <paramref name="id"/>, raised by each <typeparamref name="T"/>, with the given subject.</summary>
+    public static RuleEvent Of<T>(string id, Func<T, UnitId> subject)
+        where T : GameEvent
+    {
+        ArgumentNullException.ThrowIfNull(id);
+        ArgumentNullException.ThrowIfNull(subject);
+        return new RuleEvent(id, typeof(T), e => subject((T)e));
+    }
+}
+
 /// <summary>The production rule-event table: the events a trigger's <c>on</c> may name (plan call 5).</summary>
 public static class RuleEvents
 {
-    /// <summary>The M1-07 rows, ordinal: <c>unitMoved</c> (a unit finished a move; the subject is that unit).</summary>
-    public static ImmutableArray<string> Core { get; } = ["unitMoved"];
+    /// <summary>
+    /// The M1-07 rows, ordinal by id: <c>unitMoved</c>, raised by <see cref="UnitMoved"/> (a unit finished a move;
+    /// the subject is that unit). <c>docs/effects-vocabulary.md</c> section 6 keeps the same table.
+    /// </summary>
+    public static ImmutableArray<RuleEvent> Core { get; } =
+        [
+            RuleEvent.Of<UnitMoved>("unitMoved", e => e.Unit),
+        ];
 }

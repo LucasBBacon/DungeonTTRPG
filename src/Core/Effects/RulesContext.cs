@@ -18,18 +18,20 @@ public sealed class RulesContext
     private readonly ImmutableArray<EffectDefinition> _definitions;
     private readonly ImmutableArray<DerivedNumber> _numbers;
     private readonly ImmutableArray<string> _rollTargets;
-    private readonly ImmutableArray<string> _events;
+    private readonly ImmutableArray<RuleEvent> _events;
 
     private RulesContext(
         ImmutableArray<EffectDefinition> definitions,
         ImmutableArray<DerivedNumber> numbers,
         ImmutableArray<string> rollTargets,
-        ImmutableArray<string> events)
+        ImmutableArray<RuleEvent> events,
+        HookRegistry hooks)
     {
         _definitions = definitions;
         _numbers = numbers;
         _rollTargets = rollTargets;
         _events = events;
+        Hooks = hooks;
     }
 
     /// <summary>No effect definitions, and the core registries. The engine runs with it when no rules are given.</summary>
@@ -37,32 +39,34 @@ public sealed class RulesContext
         ImmutableArray<EffectDefinition>.Empty,
         SortedNumbers(DerivedNumbers.Core),
         SortedIds(RollTargets.Core, "rollTargets"),
-        SortedIds(RuleEvents.Core, "events"));
+        SortedEvents(RuleEvents.Core),
+        HookRegistry.Core);
 
     /// <summary>
     /// Builds the context for <paramref name="content"/>'s effect definitions. Each registry defaults to its core
-    /// table (<see cref="DerivedNumbers.Core"/>, <see cref="RollTargets.Core"/>, <see cref="RuleEvents.Core"/>); tests
-    /// pass their own. Throws <see cref="ContentLoadException"/> naming the definition's file and path when an
-    /// <c>add</c>, <c>halve</c> or <c>zero</c> target names no derived number, a <c>halve</c> or <c>zero</c> targets a
-    /// number whose rule is not <see cref="NumberRule.Speed"/>, a <c>rollMode</c> target names no roll target, a
-    /// trigger's <c>on</c> names no event, or an action names a hook (no hooks are registered yet: Task 3 brings the
-    /// hook registry and replaces <paramref name="hooks"/>). <c>flag</c> targets are not checked: there is no
-    /// flag-target registry. Throws <see cref="ArgumentException"/> if a registry repeats an id.
+    /// table (<see cref="DerivedNumbers.Core"/>, <see cref="RollTargets.Core"/>, <see cref="RuleEvents.Core"/>,
+    /// <see cref="HookRegistry.Core"/>); tests pass their own. Throws <see cref="ContentLoadException"/> naming the
+    /// definition's file and path when an <c>add</c>, <c>halve</c> or <c>zero</c> target names no derived number, a
+    /// <c>halve</c> or <c>zero</c> targets a number whose rule is not <see cref="NumberRule.Speed"/>, a <c>rollMode</c>
+    /// target names no roll target, a trigger's <c>on</c> names no event, or an action names no registered hook.
+    /// <c>flag</c> targets are not checked: there is no flag-target registry. Throws <see cref="ArgumentException"/> if
+    /// a registry repeats an id.
     /// </summary>
     public static RulesContext Create(
         ContentSet content,
         ImmutableArray<DerivedNumber>? numbers = null,
         ImmutableArray<string>? rollTargets = null,
-        ImmutableArray<string>? events = null,
-        object? hooks = null)
+        ImmutableArray<RuleEvent>? events = null,
+        HookRegistry? hooks = null)
     {
         ArgumentNullException.ThrowIfNull(content);
         var context = new RulesContext(
             content.All<EffectDefinition>(),
             SortedNumbers(numbers ?? DerivedNumbers.Core),
             SortedIds(rollTargets ?? RollTargets.Core, nameof(rollTargets)),
-            SortedIds(events ?? RuleEvents.Core, nameof(events)));
-        context.Validate(content, hooks);
+            SortedEvents(events ?? RuleEvents.Core),
+            hooks ?? HookRegistry.Core);
+        context.Validate(content);
         return context;
     }
 
@@ -77,10 +81,26 @@ public sealed class RulesContext
     /// <summary>True if <paramref name="id"/> is a registered roll target.</summary>
     public bool IsRollTarget(string id) => Contains(_rollTargets, id);
 
-    private void Validate(ContentSet content, object? hooks)
+    /// <summary>The hooks content may name.</summary>
+    internal HookRegistry Hooks { get; }
+
+    /// <summary>The registered rule events <paramref name="e"/> raises, ordinal by id (most often none or one).</summary>
+    internal ImmutableArray<RuleEvent> EventsRaisedBy(GameEvent e)
     {
-        // Task 2 has no hook registry: every hook id is unknown until Task 3 replaces this parameter.
-        _ = hooks;
+        var raised = ImmutableArray<RuleEvent>.Empty;
+        foreach (var ruleEvent in _events)
+        {
+            if (ruleEvent.EventType == e.GetType())
+            {
+                raised = raised.Add(ruleEvent);
+            }
+        }
+
+        return raised;
+    }
+
+    private void Validate(ContentSet content)
+    {
         foreach (string file in content.KindFiles)
         {
             var records = content.RecordsIn(file);
@@ -129,14 +149,14 @@ public sealed class RulesContext
         {
             var trigger = definition.Triggers[t];
             string field = Item(Member(at, "triggers"), t);
-            if (!Contains(_events, trigger.On))
+            if (Find(_events, trigger.On, e => e.Id) is null)
             {
                 throw new ContentLoadException(definition.File, Member(field, "on"), $"\"{trigger.On}\" names no rule event.");
             }
 
             for (int a = 0; a < trigger.Do.Length; a++)
             {
-                if (trigger.Do[a].Hook is { } hook)
+                if (trigger.Do[a].Hook is { } hook && !Hooks.Contains(hook))
                 {
                     throw new ContentLoadException(
                         definition.File, Member(Item(Member(field, "do"), a), "hook"), $"\"{hook}\" names no hook.");
@@ -156,6 +176,23 @@ public sealed class RulesContext
             if (string.Equals(sorted[i - 1].Id, sorted[i].Id, StringComparison.Ordinal))
             {
                 throw new ArgumentException($"Derived number \"{sorted[i].Id}\" is registered twice.", nameof(numbers));
+            }
+        }
+
+        return sorted;
+    }
+
+    private static ImmutableArray<RuleEvent> SortedEvents(ImmutableArray<RuleEvent> events)
+    {
+        var sorted = events
+            .Select(e => e ?? throw new ArgumentException("A rule event is null.", nameof(events)))
+            .OrderBy(e => e.Id, StringComparer.Ordinal)
+            .ToImmutableArray();
+        for (int i = 1; i < sorted.Length; i++)
+        {
+            if (string.Equals(sorted[i - 1].Id, sorted[i].Id, StringComparison.Ordinal))
+            {
+                throw new ArgumentException($"Rule event \"{sorted[i].Id}\" is registered twice.", nameof(events));
             }
         }
 

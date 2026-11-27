@@ -144,7 +144,7 @@ A trigger reacts to a rule event (MAIN 6.4):
 
 | Key | Required | Value |
 |---|---|---|
-| `on` | yes | A registered rule-event id. M1-07 registers `unitMoved` (a unit finished a move; the subject is that unit). |
+| `on` | yes | A registered rule-event id (section 6.4). M1-07 registers `unitMoved` (a unit finished a move; the subject is that unit). |
 | `priority` | no | An integer, default 0. **Lower fires first.** |
 | `scope` | yes | `holder`: fires only when the event's subject is the effect's holder. `any`: fires for every subject. |
 | `do` | yes | A non-empty list of actions, run in order. |
@@ -170,6 +170,11 @@ Call a C# hook, with optional string arguments:
 
 `to` belongs only to the first form and `args` only to the second; either on the wrong form is a load error.
 
+Each action reports itself as an event. `applyEffect` gives the effect to its target with the triggering effect's
+holder as the source and raises `EffectApplied(seq, effectId, holder, source)`, where `seq` is the new instance's
+creation number. `hook` raises `HookFired(hookId, seq)`, where `seq` is the triggering instance's, and then calls
+the hook; the events the hook raises follow `HookFired`.
+
 ### 6.2 Trigger order (AB 14.4)
 
 When several triggers answer one event they fire in this order:
@@ -179,7 +184,11 @@ When several triggers answer one event they fire in this order:
    Environment sources have no unit and fire **after** every unit source.
 3. **Creation order**: the instance's creation number, which starts at 1 and is never reused.
 
-Together these are a total order, so the firing order never depends on how instances happen to be stored.
+Together these are a total order, so the firing order never depends on how instances happen to be stored. (If
+one definition has two triggers on the same event, they fire in file order.)
+
+The triggers that answer an event are the instances active when the event is reached in the queue; an instance
+applied while that event is being answered first answers the events after it.
 
 ### 6.3 Chains and their bound
 
@@ -188,12 +197,30 @@ events are processed first in, first out: an action's events join the end of the
 **64** triggers (`Effects.MaxTriggerFirings`); past that the engine throws `TriggerLoopException`, a defect, so a
 trigger that re-fires itself is caught by tests rather than hanging the game.
 
+A command's result lists its own events first, then the trigger-produced events in firing order. A rejected
+command fires nothing.
+
+### 6.4 Rule events and their subjects
+
+A rule event is a row in a code table (`RuleEvents.Core` in `src/Core/Effects/Registries.cs`): the id a trigger's
+`on` names, the engine event that raises it, and its **subject**, the unit a `holder`-scope trigger compares with
+its holder and `"to": "subject"` gives an effect to.
+
+| Event id | Raised by | Subject |
+|---|---|---|
+| `unitMoved` | `UnitMoved` (a unit finished a one-square move) | The unit that moved |
+
+`EffectApplied` and `HookFired` are engine events but not rule events in M1-07: no trigger can name them. Later
+steps add rows (section 9).
+
 ## 7. Hooks
 
-What data cannot express is a C# hook (MAIN 6.5; AB 14.4), registered in a code table (`Hooks.Core`) under a
-string id and named from data with `{"hook": "<id>", "args": [...]}`. The engine calls it with the event and the
-args when its trigger fires, in the trigger order of section 6.2, and any events it raises join the queue of
-section 6.3. An unknown hook id fails when the rules context is built, naming the file and field. M1-07 ships no
+What data cannot express is a C# hook (MAIN 6.5; AB 14.4), registered in a code table (`HookRegistry.Core`) under
+a content id and named from data with `{"hook": "<id>", "args": [...]}`. A hook is a function from a
+`HookContext` (the rules, the current state, the event, the triggering instance, the args and an `Emit` callback)
+to the next state. It is pure: it may not draw except through a stream it threads into the state it returns. The
+engine calls it when its trigger fires, in the trigger order of section 6.2, and any events it emits join the queue
+of section 6.3. An unknown hook id fails when the rules context is built, naming the file and field. M1-07 ships no
 production hooks; later steps add them, and tests register their own.
 
 ## 8. Reserved

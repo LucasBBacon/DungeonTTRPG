@@ -14,6 +14,12 @@ namespace Dungeon.Core.Effects;
 public static class Effects
 {
     /// <summary>
+    /// The most triggers one command may fire (M1-07 plan call 7). Firing one more throws
+    /// <see cref="TriggerLoopException"/>, so a trigger chain that does not end is a defect caught by tests.
+    /// </summary>
+    public const int MaxTriggerFirings = 64;
+
+    /// <summary>
     /// The value of the derived number <paramref name="numberId"/> for <paramref name="unit"/> (<c>docs/effects-vocabulary.md</c>
     /// sections 4 and 5). <see cref="NumberRule.Stack"/> and <see cref="NumberRule.Speed"/> add to the base the sum of
     /// every non-condition <c>add</c>, plus the best condition bonus and the worst condition penalty (CO 6.7).
