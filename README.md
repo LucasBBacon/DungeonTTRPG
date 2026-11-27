@@ -85,14 +85,15 @@ Content is JSON under [`content/`](content/README.md), loaded by `src/Core/Conte
 `src/Core/Validation`. A bad reference, a missing field or a duplicate id fails with the file and the
 field named. The validators run as part of `dotnet test`.
 
-Two generated outputs are committed, and a test fails if either is stale:
+Three generated outputs are committed, and a test fails if any is stale:
 
 ```powershell
 dotnet run --project src/Sim -- name-list        # content/naming/name_list.json and retired_names.json, from the naming-pass appendix
 dotnet run --project src/Sim -- content-hashes   # src/Core/Content/ContentHashes.g.cs (manifestHash, displayHash, genContentHash)
+dotnet run --project src/Sim -- stream-handles   # src/Core/Random/StreamHandles.g.cs, the typed stream handles, from registry/streams.json
 ```
 
-Run `name-list` after editing the appendix, and `content-hashes` after any change under `content/`.
+Run `name-list` after editing the appendix, `content-hashes` after any change under `content/`, and `stream-handles` after any change to `registry/streams.json`.
 
 ## Architecture
 
@@ -136,6 +137,12 @@ These are enforced by tests and CI, not just convention:
   `Random/KeyedSort.cs`, `Random/StreamRegistry.cs` and `Random/StreamHandles.g.cs`). It cannot see an
   implicitly zeroed `DrawStream` (array element, unassigned field) or `Draw`/`Mix` on a key computed by
   hand; review covers those.
+- Every stream is a row of `content/registry/streams.json` (SV 4.3, 9.1), and its key is the derivation the row's
+  `label` and `indices` name. `dotnet run --project src/Sim -- stream-handles` generates `StreamHandles.g.cs`
+  (the `Streams` entry point and one key struct per row) with the Core loader, and a test fails if it is stale.
+  A generation stage opens streams through `StageRun`, which gives each a fresh counter at 0 and closes its
+  `DrawLedger` at the stage end: a row that drew other than its count class allows raises `DrawLedgerMismatch`
+  (a defect, in every build), and a row of a later wave than `Wave.Build` is inert and expects 0 draws.
 - Saves carry a version number; a corrupt or newer save fails with a typed error and never
   half-loads.
 - CI fails if rule checks (`IsWalkable`, `CheckStep`, `.Step(`) show up in `dungeon-ttrpg/scripts`.

@@ -121,6 +121,17 @@
       "action": "LR5",
       "wave": "M1",
       "ciTier": "pr"
+    },
+    {
+      "id": "V19.StreamIndependence",
+      "owner": "the lead",
+      "phase": "t",
+      "deps": [],
+      "uses": [],
+      "class": "build",
+      "action": "fail the build",
+      "wave": "M1",
+      "ciTier": "pr"
     }
   ]
 }

@@ -152,7 +152,7 @@ handle, with its draw count checked.
   `dressing` (display side), `terrain` (with `hzTagMax` reserved), `traps`
   (+`retry1`), `encounters/plan`, `encounters/place` (+`retry1`),
   `trapsResolve` (+`retry1`), `checks` (`h:object`, `h:save`, `h:notice`,
-  `h:steal` reserved, `h:lurkStealth` reserved and inert), `combat`,
+  `h:steal`, `h:lurkStealth` reserved and inert), `combat`,
   `loot/floor` blocks, `lootPlan` (`lineRoll` reserved and inert;
   `bossCard` registered with `wave: M2`, inert, per D-08), `loot/run`.
 - Inert rows: a row whose registry wave is later than the build's wave

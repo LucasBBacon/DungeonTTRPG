@@ -9,7 +9,7 @@ JSON data files for the game: classes, species, feats, items, monsters and table
 | `registry/checks.json` | `{"checks": [...]}`: the check registry, one `CheckRow` per registered check (SV 9.1) |
 | `registry/reports.json` | `{"reports": [...]}`: the report registry, one `ReportRow` per report (SV 9.1) |
 | `registry/arms.json` | `{"arms": [...]}`: the simulator-arm registry, one `ArmRow` per arm (SV 9.1) |
-| `registry/streams.json` | `{"streams": [...]}`: the stream registry, one `StreamRow` per draw stream, keyed node or keyed-hash domain (SV 9.1); generation reads it, so it is part of `genContentHash` |
+| `registry/streams.json` | `{"streams": [...]}`: the stream registry, one `StreamRow` per draw stream, keyed node or keyed-hash domain (SV 9.1); generation reads it, so it is part of `genContentHash`; `dotnet run --project src/Sim -- stream-handles` generates the typed stream handles (`src/Core/Random/StreamHandles.g.cs`) from it, and analyzer rule DUN012 keeps `Derive`, `H` and `DrawStream.Open` inside the handle files |
 | `naming/name_list.json` | `{"entries": [...]}`: the naming-pass name list, generated from its appendix by `dotnet run --project src/Sim -- name-list`; do not edit by hand |
 | `naming/retired_names.json` | `{"retired": [...]}`: the retired (name, category) pairs, generated with the name list |
 | `naming/greyed_reasons.json` | `{"reasons": [...]}`: the greyed-reason registry, `{id, doc}`; each reason needs the string `<doc>.greyed.<id>` |
