@@ -16,5 +16,8 @@ public static class StaticChecks
             new R2RetiredReusedCheck(),
             new R6InternalByKeyCheck(),
             new GreyedReasonKeysCheck(),
+            new StreamRowsCheck(),
+            new DomainDisjointCheck(),
+            new LabelCollisionCheck(),
         ];
 }

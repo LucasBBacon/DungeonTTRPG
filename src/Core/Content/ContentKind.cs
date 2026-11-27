@@ -21,6 +21,12 @@ public abstract class ContentKind
     /// <summary>True if generation reads this kind, so it is part of <c>genContentHash</c> (SV 4.6).</summary>
     public virtual bool ReadByGeneration => false;
 
+    /// <summary>
+    /// True if this kind's record ids follow the content-id grammar (<see cref="ContentId"/>, K-rule 3), so they may
+    /// enter a key as <c>LabelId(id)</c> and <c>V19.LabelCollision</c> scans them; registry and naming ids keep their own grammars.
+    /// </summary>
+    public virtual bool IdsAreContentIds => false;
+
     /// <summary>Reads the file's records in file order. Throws <see cref="ContentLoadException"/> naming the field.</summary>
     public abstract ImmutableArray<ContentRecord> Read(ContentFile file);
 
