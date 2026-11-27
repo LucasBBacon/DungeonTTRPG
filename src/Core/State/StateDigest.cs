@@ -1,13 +1,14 @@
 using System;
 using Dungeon.Core.Canonical;
+using Dungeon.Core.Effects;
 
 namespace Dungeon.Core;
 
 /// <summary>
 /// The replay core-state hash (SV 4.5): the <see cref="Digest"/> of a <see cref="GameState"/>'s
 /// canonical bytes. Units are a set keyed by id, so their stored order does not matter; boons and
-/// decision options are lists, because their order is data. Stream keys are derived from the run
-/// seed and are not written; a state whose keys disagree with its seed is refused.
+/// decision options are lists, because their order is data. Active effects are a set keyed by seq.
+/// Stream keys are derived from the run seed and are not written; a state whose keys disagree with its seed is refused.
 /// </summary>
 public static class StateDigest
 {
@@ -33,11 +34,15 @@ public static class StateDigest
     // Maps every int id, negative ones included, to a ulong in the same order.
     private static ulong IdKey(UnitId id) => (ulong)((long)id.Value - int.MinValue);
 
+    // Seqs are positive in every state the rules produce; any other is refused rather than wrapped.
+    private static ulong EffectKey(EffectInstance e) =>
+        e.Seq > 0 ? (ulong)e.Seq : throw new ArgumentException($"Effect seq {e.Seq} is not positive.", nameof(e));
+
     private sealed class StateRecord(GameState s) : ICanonical
     {
         public void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(9);
+            w.BeginRecord(11);
             w.UInt64(0, s.RunSeed);
             w.List(1, s.Map.ToRows(), (e, row) => e.String(0, row));
             w.SetByKey(2, s.Units, u => IdKey(u.Id), (e, u) => e.Record(0, new UnitRecord(u)));
@@ -47,6 +52,8 @@ public static class StateDigest
             w.Int32(6, s.NextDecisionId);
             w.Record(7, s.Config);
             w.Record(8, s.Unlocks);
+            w.SetByKey(9, s.Effects, EffectKey, (e, effect) => e.Record(0, effect));
+            w.Int64(10, s.NextEffectSeq);
             w.EndRecord();
         }
     }

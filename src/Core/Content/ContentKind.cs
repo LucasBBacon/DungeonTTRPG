@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using Dungeon.Core.Effects;
 using Dungeon.Core.Validation;
 
 namespace Dungeon.Core.Content;
@@ -45,6 +46,7 @@ public static class ContentKinds
     /// <summary>Every kind the loader knows, in ordinal file-name order.</summary>
     public static ImmutableArray<ContentKind> All { get; } =
         [
+            new EffectsKind(),
             new GreyedReasonKind(),
             new NameListKind(),
             new RetiredNamesKind(),

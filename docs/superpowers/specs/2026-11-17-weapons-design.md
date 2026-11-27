@@ -473,10 +473,10 @@ only on a critical hit, against a weak target, or when something flags it
   alike (15.1). **(agreed)**
 - **Bands (lead's call):** the proficiency bands; levels 0, 11 and 12 are
   monster-only.
-- **Advantage is the net roll mode (lead's call):** outside Aim, Exploit
-  needs net advantage after one advantage cancels one disadvantage
-  (conditions design); an attack with both is a normal roll and does not
-  qualify unless it is an Aim attack.
+- **Advantage is the folded roll mode (lead's call):** Exploit needs
+  advantage in the folded roll mode (conditions 6.7; D-15: any advantage
+  and any disadvantage cancel); an attack with both is a normal roll and
+  does not qualify unless it is an Aim attack.
 - **Which die (lead's call):** each Exploit die is the attack's actual
   damage die after every size change (versatile grip, Notched; 6.6), or a
   monster's one-die-rule die (15.1), dealing the weapon's damage type. It
@@ -796,17 +796,18 @@ these steps, in this order:
    `bucklerOffUntilOwnTurnStart` at declaration, hit or miss, reactions
    and opportunity attacks included.
 2. **Fix the roll mode:** collect advantage and disadvantage from every
-   source, net them (one cancels one), and consume Helped if it applies
+   source, fold them (conditions 6.7: any advantage and any disadvantage
+   cancel; D-15), and consume Helped if it applies
    (a reading recorded in the charm abilities design 13, not a change
    here, the weapons owner confirms: a roll that already has advantage
    does not use it, so Helped carries over).
-   Exploit (6.3) and Vex read this net mode; Aim (7.6) is recorded here
+   Exploit (6.3) and Vex read this folded mode; Aim (7.6) is recorded here
    as a separate flag that qualifies the attack for Exploit and does not
    change the mode. **Gear roll-mode cap (change AR-40; armour design 8.1
    rule 6):** at most one gear-sourced roll-mode effect applies to an
    attack against a unit, chosen by priority (unlimited passives, then
    once-per-round, then charges; ties by slot order); suppressed effects
-   are not spent; Overlap qualifies only on net advantage; gear roll-mode
+   are not spent; Overlap qualifies only on folded advantage; gear roll-mode
    effects are suppressed while the target has Raise or Fortified.
    Hailguard is fixed here, never after the roll.
    - **2b. Cover (M2):** right after the net mode is fixed, cover is

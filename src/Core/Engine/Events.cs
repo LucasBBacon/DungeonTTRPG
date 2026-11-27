@@ -1,3 +1,5 @@
+using Dungeon.Core.Effects;
+
 namespace Dungeon.Core;
 
 /// <summary>Something that happened while applying a command, in the order it happened.</summary>
@@ -16,3 +18,12 @@ public sealed record DecisionResolved(DecisionId Decision, UnitId Unit, int Chos
 
 /// <summary>The square at <paramref name="Pos"/> became <paramref name="Tile"/>.</summary>
 public sealed record TileChanged(GridPos Pos, Tile Tile) : GameEvent;
+
+/// <summary>
+/// A trigger's <c>applyEffect</c> gave <paramref name="Holder"/> a new instance <paramref name="Seq"/> of
+/// <paramref name="EffectId"/>, from <paramref name="Source"/> (the triggering effect's holder).
+/// </summary>
+public sealed record EffectApplied(long Seq, string EffectId, UnitId Holder, EffectSource Source) : GameEvent;
+
+/// <summary>A trigger of the instance <paramref name="Seq"/> called the C# hook <paramref name="HookId"/>; the events the hook raises follow.</summary>
+public sealed record HookFired(string HookId, long Seq) : GameEvent;

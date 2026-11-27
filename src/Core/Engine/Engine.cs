@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Immutable;
+using Dungeon.Core.Effects;
 
 namespace Dungeon.Core;
 
@@ -35,10 +36,26 @@ public static class Engine
     /// <summary>Boon ids run from 0 to one below this.</summary>
     internal const int BoonCount = 10;
 
-    public static StepResult Apply(GameState state, Command command)
+    /// <summary>
+    /// Applies <paramref name="command"/> with no effect rules: <see cref="Apply(GameState, Command, RulesContext)"/>
+    /// with <see cref="RulesContext.Empty"/> (M1-07 plan call 6), so a state without effects behaves as it always has.
+    /// <see cref="RulesContext.Empty"/> holds no effect definitions, so on a state that holds effect instances a
+    /// command that raises a rule event (a move raises <c>unitMoved</c>) throws <see cref="ArgumentException"/>; such
+    /// a state needs the overload that takes the rules.
+    /// </summary>
+    public static StepResult Apply(GameState state, Command command) => Apply(state, command, RulesContext.Empty);
+
+    /// <summary>
+    /// Applies <paramref name="command"/>, then fires the triggers of the active effects that answer its events
+    /// (MAIN 6.4; AB 14.4). <see cref="StepResult.Events"/> holds the command's own events, then the trigger-produced
+    /// events in firing order. A rejected command fires nothing. Throws <see cref="TriggerLoopException"/> if the
+    /// command fires more than <see cref="Effects.Effects.MaxTriggerFirings"/> triggers.
+    /// </summary>
+    public static StepResult Apply(GameState state, Command command, RulesContext rules)
     {
         ArgumentNullException.ThrowIfNull(state);
         ArgumentNullException.ThrowIfNull(command);
+        ArgumentNullException.ThrowIfNull(rules);
 
         // While a decision is pending, the only valid command is an answer to it.
         if (state.Pending is not null && command is not AnswerDecisionCommand)
@@ -46,12 +63,22 @@ public static class Engine
             return Reject(state, CommandError.DecisionPending);
         }
 
-        return command switch
+        var result = command switch
         {
             MoveCommand move => ApplyMove(state, move),
             AnswerDecisionCommand answer => ApplyAnswer(state, answer),
             _ => throw new NotSupportedException($"Unsupported command type {command.GetType().Name}."),
         };
+        if (!result.Ok)
+        {
+            return result;
+        }
+
+        // With nothing fired the result is returned as the handler made it, so M0 behaviour is unchanged.
+        var (next, events) = TriggerDispatch.Run(rules, result.State, result.Events);
+        return ReferenceEquals(next, result.State) && events == result.Events
+            ? result
+            : new StepResult(next, events, CommandError.None);
     }
 
     private static StepResult ApplyMove(GameState state, MoveCommand move)
