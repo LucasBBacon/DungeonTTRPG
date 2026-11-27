@@ -47,5 +47,6 @@ public static class DemoLevel
         GameState.Create(
             CoreGridMap.Parse(Rows),
             [new Unit(Hero, HeroStart, Faction.Party, ImmutableArray<int>.Empty, HeroStats, heroHp)],
-            Seed);
+            Seed,
+            hero: Hero);
 }

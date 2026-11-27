@@ -133,6 +133,17 @@
       "ciTier": "pr"
     },
     {
+      "id": "content.DH21.PartyInstantDeath",
+      "owner": "death and healing",
+      "phase": "s",
+      "deps": [],
+      "uses": [],
+      "class": "build",
+      "action": "fail the build",
+      "wave": "M1",
+      "ciTier": "pr"
+    },
+    {
       "id": "V19.DrawLedger",
       "owner": "the lead",
       "phase": "g",

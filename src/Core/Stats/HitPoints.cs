@@ -90,6 +90,39 @@ public static class HitPoints
         return unit.Hp > max ? WithHp(s, unit, ToHp(max)) : s;
     }
 
+    /// <summary>
+    /// Raises <paramref name="target"/> to <paramref name="newLevel"/> (M1-10 plan call 13; DH 7.3): current HP gains
+    /// Δ = maximum after − maximum before, both folded with the unit's current effects. Should Δ ever be negative (no
+    /// HP rule lowers the maximum on a level-up), the change only clamps current HP, as every other change to the
+    /// maximum does. Spent counts and the turn budget are left alone (AB 6.2: "A level-up never refills anything").
+    /// The same level is allowed and changes nothing. Throws <see cref="ArgumentOutOfRangeException"/> for a level
+    /// outside <see cref="UnitStats.MinLevel"/> to <see cref="UnitStats.MaxLevel"/> or below the unit's level, and
+    /// <see cref="ArgumentException"/> for an unknown unit.
+    /// </summary>
+    public static GameState RaiseLevel(RulesContext rules, GameState s, UnitId target, int newLevel)
+    {
+        ArgumentNullException.ThrowIfNull(rules);
+        ArgumentNullException.ThrowIfNull(s);
+        if (newLevel < UnitStats.MinLevel || newLevel > UnitStats.MaxLevel)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(newLevel), newLevel, $"A level is {UnitStats.MinLevel} to {UnitStats.MaxLevel}.");
+        }
+
+        var unit = Find(s, target);
+        if (newLevel < unit.Stats.Level)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(newLevel), newLevel, $"Unit {target.Value} is level {unit.Stats.Level}; a level-up never lowers it.");
+        }
+
+        long before = Max(rules, s, target);
+        var raised = unit with { Stats = unit.Stats with { Level = newLevel } };
+        var next = s with { Units = s.Units.SetItem(s.Units.IndexOf(unit), raised) };
+        long delta = checked(Max(rules, next, target) - before);
+        return delta > 0 ? WithHp(next, raised, ToHp(checked(raised.Hp + delta))) : ClampToMax(rules, next, target);
+    }
+
     /// <summary>The unit, or <see cref="ArgumentException"/> as the contests and fold queries report one.</summary>
     internal static Unit Find(GameState s, UnitId id) =>
         s.FindUnit(id) ?? throw new ArgumentException($"Unit {id.Value} is not in the state.", nameof(id));

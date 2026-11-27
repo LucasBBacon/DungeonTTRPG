@@ -87,9 +87,29 @@ public static class DamageIds
 }
 
 /// <summary>
+/// How far a trap had been detected when it fired (TL 6.5's <c>detectionAtFire</c>). The undetected-trap floor (DH 10.4)
+/// covers <see cref="Hidden"/> and <see cref="HunchFloored"/>; <see cref="HunchWarned"/> and <see cref="Revealed"/> deal
+/// ordinary damage. M1 produces no Hunch grades (M2).
+/// </summary>
+public enum Detection
+{
+    Hidden,
+    HunchFloored,
+    HunchWarned,
+    Revealed,
+}
+
+/// <summary>
+/// The trap a damage part comes from (M1-10 plan call 10): its content id and its <see cref="Detection"/> when it fired,
+/// so the mixed-event rule of DH 10.4 can tell the trap's parts from the rest.
+/// </summary>
+public sealed record TrapSource(string TrapId, Detection DetectionAtFire);
+
+/// <summary>
 /// One typed part of a hit's damage (SM 9: "Damage travels as a list of typed parts"; AB 9.1): <paramref name="Dice"/>
 /// dice of <paramref name="Sides"/> sides plus a signed <paramref name="Flat"/> amount. <c>Dice</c> must be at least 0,
 /// and <c>Sides</c> at least 1 when <c>Dice</c> is above 0; the damage function refuses a part that breaks this,
-/// naming its index. M1 parts carry no rider (AB 9.1; M1-09 plan call 9).
+/// naming its index. <paramref name="Trap"/> names the trap the part comes from, or null (M1-10 plan call 10). M1 parts
+/// carry no rider (AB 9.1; M1-09 plan call 9).
 /// </summary>
-public readonly record struct DamagePart(DamageType Type, int Dice, int Sides, int Flat);
+public readonly record struct DamagePart(DamageType Type, int Dice, int Sides, int Flat, TrapSource? Trap = null);

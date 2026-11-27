@@ -157,11 +157,20 @@ public sealed record RuleEvent
 public static class RuleEvents
 {
     /// <summary>
-    /// The M1-07 rows, ordinal by id: <c>unitMoved</c>, raised by <see cref="UnitMoved"/> (a unit finished a move;
-    /// the subject is that unit). <c>docs/effects-vocabulary.md</c> section 6 keeps the same table.
+    /// The rows, ordinal by id: <c>combatStarted</c>, raised by <see cref="CombatStarted"/> (the subject is the first
+    /// unit in the order); <c>turnEnded</c> and <c>turnStarted</c>, raised by <see cref="TurnEnded"/> and
+    /// <see cref="TurnStarted"/> (the subject is the turn's unit; M1-10 plan call 14); <c>unitDied</c>, raised by
+    /// <see cref="UnitDied"/> (the subject is the dead unit, whose effects are already gone, so only other units'
+    /// triggers answer it; plan call 14); <c>unitMoved</c>, raised by
+    /// <see cref="UnitMoved"/> (a unit finished a move; the subject is that unit). <c>docs/effects-vocabulary.md</c>
+    /// section 6 keeps the same table.
     /// </summary>
     public static ImmutableArray<RuleEvent> Core { get; } =
         [
+            RuleEvent.Of<CombatStarted>("combatStarted", e => e.Order[0].Unit),
+            RuleEvent.Of<TurnEnded>("turnEnded", e => e.Unit),
+            RuleEvent.Of<TurnStarted>("turnStarted", e => e.Unit),
+            RuleEvent.Of<UnitDied>("unitDied", e => e.Unit),
             RuleEvent.Of<UnitMoved>("unitMoved", e => e.Unit),
         ];
 }

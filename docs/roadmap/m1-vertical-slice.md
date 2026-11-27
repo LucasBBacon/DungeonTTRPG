@@ -291,12 +291,18 @@ DH-15, DH-18; TL-8.
 **Depends on:** M1-09.
 
 **Delivers:**
+- The turn loop: the initiative order stored at combat start, the
+  current turn and the round, End Turn, and moves in combat that spend
+  the mover's movement and are refused out of turn; the turn-start and
+  turn-end steps stay empty for M1-12 (owner rulings 2026-11-27).
 - Turn budget: move, action, bonus, reaction, free interaction.
 - Pools store spent count only; refill tags `turn`/`fight`/`rest`/
   `camp`/`never`; one camp spend per unit per turn.
 - `combatActive`; combat-start resets; combat-end order (turn end →
   `combatOnly` ends → get-ups → XP and level-ups → flag false).
-- Level-ups banked to combat end; level-ups never refill.
+- The combat-end level-up seam (step 4 of the combat-end order) and
+  `HitPoints.RaiseLevel`, which adds the HP increase and never refills;
+  M1-21 banks XP and fills the seam.
 - `RunEnded{cause, killingEventId?}`, cause `heroDeath` (with
   `killingEventId`), `victory`, or `unravelled` (reserved, M2); every
   command rejected after it (DH 10.1 as amended by D-08).
@@ -306,7 +312,9 @@ DH-15, DH-18; TL-8.
 **Done when:**
 - [ ] AB 16 tests for each refill tag and the camp-spend rule pass.
 - [ ] DH 21.4 property tests pass (floors before the save chain; HP 5 +
-  temp 3 + undetected trap 10 → HP 1).
+  undetected trap 10 → HP 1, `DamageClamped{undetectedTrap}`, the save
+  chain never reached; the temporary-HP half is D-17) (owner rulings
+  2026-11-27).
 - [ ] Scenario "hero dies alongside the last enemy" ends the run (test).
 - [ ] An opening ambush strike counts as in-combat damage (test).
 
@@ -368,7 +376,8 @@ pipeline.
 
 **Implements:** CO 10.1, 18.1–18.9, 21; W-8, VG-8.
 
-**Depends on:** M1-12; decision D-09 (collision damage).
+**Depends on:** M1-12; decisions D-09 (collision damage) and D-18
+(movement left after a mid-turn speed change).
 
 **Delivers:**
 - Surprised, Prone, Grappled, Frightened, Hidden, Dodging, Stunned,
@@ -797,8 +806,9 @@ hazard draws reserved.
 HZ 11.2, 12; SV-3; TL 6.1, 6.2, 6.6, 6.11, 6.19, 6.22, 7.3, 12; TL-1 to
 TL-5, TL-19 to TL-21; DH-32.
 
-**Depends on:** M1-29; decisions D-06 (floor-1 traps and keys) and D-10
-(`hzTagMax`, traps formulas).
+**Depends on:** M1-29; decisions D-06 (floor-1 traps and keys), D-10
+(`hzTagMax`, traps formulas) and D-19 (trap conditions at combat start;
+initiative and the opening strike).
 
 **Delivers:**
 - Tall and Low pieces as blockers; Clearway; clutter bands; reservation
@@ -984,7 +994,8 @@ describe, and back out again.
 (static parts); DH 17.1 (DH-2); SV-6; RS 9.4 and BR 4.2.1 (Forecourt
 Top-up trigger and F1 guard, M1 by D-03); BR-3.
 
-**Depends on:** M1-34.
+**Depends on:** M1-34; decision D-19 (trap conditions at combat start;
+initiative and the opening strike).
 
 **Delivers:**
 - Group awareness records; noticing triggers; out-of-combat `h:notice`

@@ -16,6 +16,9 @@ public static class GenVersion
 /// </summary>
 public static class RulesVersion
 {
-    /// <summary>The rules version this build implements.</summary>
-    public const int Current = 1;
+    /// <summary>
+    /// The rules version this build implements. Version 2 (M1-10): commands are refused after a run end, and moves in
+    /// combat change.
+    /// </summary>
+    public const int Current = 2;
 }
