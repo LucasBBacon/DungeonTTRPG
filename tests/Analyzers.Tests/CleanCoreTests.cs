@@ -26,4 +26,19 @@ public class CleanCoreTests
             """);
         Assert.Empty(d);
     }
+
+    [Fact]
+    public void Record_declarations_are_clean()
+    {
+        var d = Harness.Run("""
+            public record Point(int X, int Y);
+            public readonly record struct Cell(int Row, int Col);
+            public class Keyed
+            {
+                public override int GetHashCode() => 0;
+                public override bool Equals(object? obj) => obj is Keyed;
+            }
+            """);
+        Assert.Empty(d);
+    }
 }
