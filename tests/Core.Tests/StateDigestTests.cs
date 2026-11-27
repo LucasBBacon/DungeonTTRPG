@@ -104,6 +104,8 @@ public class StateDigestTests
             atShrine with { Units = [hero with { Stats = hero.Stats with { MainAbility = Ability.Wisdom } }] },
             atShrine with { Units = [hero with { Stats = hero.Stats with { TrainedSave = Save.Will } }] },
             atShrine with { Units = [hero with { Stats = hero.Stats with { TrainedSkills = [Skill.Lore] } }] },
+            atShrine with { Units = [hero with { Stats = hero.Stats with { HpTier = HpTier.Sound } }] },
+            atShrine with { Units = [hero with { Hp = hero.Hp - 1 }] },
             atShrine with { Rng = atShrine.Rng with { Combat = atShrine.Rng.Combat.Skip(1) } },
             atShrine with { Rng = atShrine.Rng with { Shrine = atShrine.Rng.Shrine.Skip(1) } },
             atShrine with { Pending = null },
@@ -123,5 +125,20 @@ public class StateDigestTests
         {
             Assert.True(baseline != StateDigest.Of(changed[i]), $"Change {i} did not reach the digest.");
         }
+    }
+
+    // M1-09: a unit's HP, its HP tier and its table HP each reach the digest (Create rejects table HP on a party unit
+    // and a tier on an enemy, so the table HP is changed on an enemy).
+    [Fact]
+    public void Hp_and_the_hp_basis_reach_the_digest()
+    {
+        var s = RingState(new Unit(new UnitId(2), new(3, 3), Faction.Enemy, [], EnemyStats, 12));
+        var hero = s.Units[0];
+        var foe = s.Units[1];
+        var baseline = StateDigest.Of(s);
+        Assert.NotEqual(baseline, StateDigest.Of(s with { Units = [hero with { Hp = 16 }, foe] }));
+        Assert.NotEqual(baseline, StateDigest.Of(s with { Units = [hero with { Stats = hero.Stats with { HpTier = HpTier.Sound } }, foe] }));
+        Assert.NotEqual(baseline, StateDigest.Of(s with { Units = [hero, foe with { Stats = foe.Stats with { TableHp = 13 } }] }));
+        Assert.NotEqual(baseline, StateDigest.Of(s with { Units = [hero, foe with { Hp = 11 }] }));
     }
 }

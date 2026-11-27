@@ -33,7 +33,7 @@ internal static class ContestKit
             Def("gear.perception.plus5", "gear", Add("perception", 5))));
 
     public static UnitStats Block(Abilities abilities, int level = 1, Save trained = Save.Fortitude, params Skill[] skills) =>
-        new(level, abilities, Ability.Strength, trained, [.. skills.OrderBy(x => x)]);
+        new(level, abilities, Ability.Strength, trained, [.. skills.OrderBy(x => x)], HpTier.Slight, 0);
 
     /// <summary>The hero (1) and the foe (2) with the given stat blocks on <paramref name="seed"/>; effects land on the unit named.</summary>
     public static GameState StateOf(
@@ -41,8 +41,8 @@ internal static class ContestKit
     {
         var units = new List<Unit>
         {
-            new(Hero, new GridPos(1, 1), Faction.Party, [], hero),
-            new(Foe, new GridPos(3, 3), Faction.Party, [], foe),
+            new(Hero, new GridPos(1, 1), Faction.Party, [], hero, FullHp),
+            new(Foe, new GridPos(3, 3), Faction.Party, [], foe, FullHp),
         };
         var s = GameState.Create(GridMap.Parse("#####", "#...#", "#.#.#", "#...#", "#####"), units, seed);
         foreach (var (unit, effect) in effects)

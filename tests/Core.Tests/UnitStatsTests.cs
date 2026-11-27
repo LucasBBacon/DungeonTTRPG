@@ -83,7 +83,8 @@ public class UnitStatsTests
     }
 
     private static GameState Detailed() => WithStats(new UnitStats(
-        5, new Abilities(3, 2, 1, 1, 0, -1), Ability.Dexterity, Save.Reflex, [Skill.Acrobatics, Skill.Stealth]));
+        5, new Abilities(3, 2, 1, 1, 0, -1), Ability.Dexterity, Save.Reflex, [Skill.Acrobatics, Skill.Stealth],
+        HpTier.Slight, 0));
 
     [Fact]
     public void Stats_round_trip_through_a_save()
@@ -93,7 +94,7 @@ public class UnitStatsTests
         Assert.Contains(
             "\"stats\":{\"level\":5,\"abilities\":{\"strength\":3,\"dexterity\":2,\"constitution\":1,\"intelligence\":1,"
             + "\"wisdom\":0,\"presence\":-1},\"mainAbility\":\"Dexterity\",\"trainedSave\":\"Reflex\","
-            + "\"trainedSkills\":[\"Acrobatics\",\"Stealth\"]}",
+            + "\"trainedSkills\":[\"Acrobatics\",\"Stealth\"],\"hpTier\":\"Slight\",\"tableHp\":0}",
             json);
         var loaded = Snapshot.Load(json);
         Assert.Equal(json, Snapshot.Save(loaded));

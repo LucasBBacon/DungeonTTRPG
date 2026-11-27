@@ -247,8 +247,9 @@ public class DerivedNumberTests
         string[]? effects = null,
         bool foe = false)
     {
-        var stats = new UnitStats(level, abilities, main, trainedSave, [.. (trained ?? []).OrderBy(x => x)]);
-        var units = new List<Unit> { new(Hero, new GridPos(1, 1), Faction.Party, [], stats) };
+        var stats = new UnitStats(
+            level, abilities, main, trainedSave, [.. (trained ?? []).OrderBy(x => x)], HpTier.Slight, 0);
+        var units = new List<Unit> { new(Hero, new GridPos(1, 1), Faction.Party, [], stats, FullHp) };
         if (foe)
         {
             units.Add(U(2, 3, 3));
