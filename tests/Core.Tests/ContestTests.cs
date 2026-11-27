@@ -24,6 +24,9 @@ internal static class ContestKit
             Def("dis.against", "condition", Roll("attacksAgainst", "disadvantage")),
             Def("save.adv", "condition", Roll("saveRoll", "advantage")),
             Def("will.dis", "condition", Roll("willSave", "disadvantage")),
+            Def("skill.adv", "condition", Roll("skillCheck", "advantage")),
+            Def("athletics.dis", "condition", Roll("athleticsCheck", "disadvantage")),
+            Def("athletics.adv", "condition", Roll("athleticsCheck", "advantage")),
             Def("gear.attack.plus1", "gear", Add("attack", 1)),
             Def("gear.attack.plus5", "gear", Add("attack", 5)),
             Def("gear.attack.minus5", "gear", Add("attack", -5)),
@@ -168,6 +171,33 @@ public class ContestTests
         var hero = ContestKit.Block(ContestKit.Zero.With(Ability.Strength, 2), level: 5, skills: Skill.Athletics);
         var s = ContestKit.StateOf(hero, ContestKit.Block(ContestKit.Zero));
         Assert.Equal(new ContestSetup(5, 14, RollMode.Normal), Contests.PrepareSkill(ContestKit.Rules, s, Hero, Skill.Athletics, 14));
+    }
+
+    [Fact]
+    public void Prepare_skill_reads_the_general_and_the_skill_roll_targets()
+    {
+        var s = Plain();
+        var general = Effects.Apply(s, "skill.adv", Hero, new EffectSource(Hero));
+        Assert.Equal(RollMode.Advantage, Contests.PrepareSkill(ContestKit.Rules, general, Hero, Skill.Athletics, 10).Mode);
+
+        var both = Effects.Apply(general, "athletics.dis", Hero, new EffectSource(Hero));
+        Assert.Equal(RollMode.Normal, Contests.PrepareSkill(ContestKit.Rules, both, Hero, Skill.Athletics, 10).Mode);
+
+        var athleticsOnly = Effects.Apply(s, "athletics.adv", Hero, new EffectSource(Hero));
+        Assert.Equal(RollMode.Advantage, Contests.PrepareSkill(ContestKit.Rules, athleticsOnly, Hero, Skill.Athletics, 10).Mode);
+        Assert.Equal(RollMode.Normal, Contests.PrepareSkill(ContestKit.Rules, athleticsOnly, Hero, Skill.Lore, 10).Mode);
+    }
+
+    [Fact]
+    public void Skill_checks_draw_two_dice_with_a_mode()
+    {
+        var plain = Plain();
+        var adv = Effects.Apply(plain, "skill.adv", Hero, new EffectSource(Hero));
+
+        Assert.Equal(plain.Rng.Combat.Counter + 1, Contests.SkillCheck(ContestKit.Rules, plain, Hero, Skill.Athletics, 10).Next.Rng.Combat.Counter);
+        Assert.Equal(plain.Rng.Combat.Counter + 1, Contests.SkillVsUnit(ContestKit.Rules, plain, Hero, Skill.Athletics, Foe, Defence.Reflex).Next.Rng.Combat.Counter);
+        Assert.Equal(adv.Rng.Combat.Counter + 2, Contests.SkillCheck(ContestKit.Rules, adv, Hero, Skill.Athletics, 10).Next.Rng.Combat.Counter);
+        Assert.Equal(adv.Rng.Combat.Counter + 2, Contests.SkillVsUnit(ContestKit.Rules, adv, Hero, Skill.Athletics, Foe, Defence.Reflex).Next.Rng.Combat.Counter);
     }
 
     [Fact]

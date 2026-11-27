@@ -10,7 +10,7 @@ public class NaturalRollTests
 {
     private static readonly UnitId Foe = ContestKit.Foe;
 
-    // Seeds whose combat stream gives these first d20 dice, found once by Discover (first match in seeds 1..10000).
+    // Seeds whose combat stream gives these first d20 dice, the first match in seeds 1..10000; the guard test below re-derives them.
     private const ulong Natural20Seed = 6; // first d20 = 20
     private const ulong Natural1Seed = 15;  // first d20 = 1
     private const ulong TenSeed = 13;       // first d20 = 10
@@ -32,16 +32,34 @@ public class NaturalRollTests
         throw new InvalidOperationException($"no seed in 1..10000 gives {die}");
     }
 
-    [Fact(Skip = "Discovery: run once to find the pinned seeds, then pin them above.")]
-    public void Discover() =>
-        Assert.Fail($"20:{SeedFor(20)} 1:{SeedFor(1)} 10:{SeedFor(10)}");
-
     [Fact]
     public void The_pinned_seeds_still_give_their_dice()
     {
         Assert.Equal(20, FirstDie(Natural20Seed));
         Assert.Equal(1, FirstDie(Natural1Seed));
         Assert.Equal(10, FirstDie(TenSeed));
+        Assert.Equal(Natural20Seed, SeedFor(20));
+        Assert.Equal(Natural1Seed, SeedFor(1));
+        Assert.Equal(TenSeed, SeedFor(10));
+    }
+
+    [Fact]
+    public void The_kept_die_decides_naturals_not_the_discarded_one()
+    {
+        // A discarded natural 20 under disadvantage does not hit or crit.
+        var miss = Contests.ResolveAttack(new ContestSetup(0, 30, RollMode.Disadvantage), new D20Roll(RollMode.Disadvantage, 20, 5));
+        Assert.False(miss.Hit);
+        Assert.False(miss.Crit);
+
+        // A discarded natural 1 under advantage is not an automatic miss.
+        var hit = Contests.ResolveAttack(new ContestSetup(0, 5, RollMode.Advantage), new D20Roll(RollMode.Advantage, 1, 12));
+        Assert.True(hit.Hit);
+        Assert.False(hit.Crit);
+
+        // A kept natural 20 under advantage hits and crits whatever the target.
+        var crit = Contests.ResolveAttack(new ContestSetup(0, 30, RollMode.Advantage), new D20Roll(RollMode.Advantage, 3, 20));
+        Assert.True(crit.Hit);
+        Assert.True(crit.Crit);
     }
 
     private static GameState Duel(ulong seed, Abilities hero, Abilities foe, params (UnitId, string)[] effects) =>
