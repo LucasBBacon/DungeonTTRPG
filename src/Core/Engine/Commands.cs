@@ -12,3 +12,9 @@ public sealed record MoveCommand(UnitId Unit, Direction Dir) : Command;
 
 /// <summary>Answer the pending decision by picking one of its options.</summary>
 public sealed record AnswerDecisionCommand(DecisionId Decision, int OptionIndex) : Command;
+
+/// <summary>
+/// End <see cref="Unit"/>'s turn in combat (M1-10 plan call 9): refused out of combat, out of turn, and while the turn
+/// is vacated (no unit holds it).
+/// </summary>
+public sealed record EndTurnCommand(UnitId Unit) : Command;

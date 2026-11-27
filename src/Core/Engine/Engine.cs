@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Immutable;
+using Dungeon.Core.Combat;
 using Dungeon.Core.Effects;
 
 namespace Dungeon.Core;
@@ -83,7 +84,8 @@ public static class Engine
 
         var result = command switch
         {
-            MoveCommand move => ApplyMove(state, move),
+            MoveCommand move => ApplyMove(state, move, rules),
+            EndTurnCommand end => ApplyEndTurn(state, end, rules),
             AnswerDecisionCommand answer => ApplyAnswer(state, answer),
             _ => throw new NotSupportedException($"Unsupported command type {command.GetType().Name}."),
         };
@@ -99,7 +101,13 @@ public static class Engine
             : new StepResult(next, events, CommandError.None);
     }
 
-    private static StepResult ApplyMove(GameState state, MoveCommand move)
+    /// <summary>
+    /// A one-square move. Out of combat it advances <see cref="GameState.Tick"/> and, as each tick does (AB 6.8; M1-10
+    /// plan call 6), gives every unit a fresh turn budget and refills every <see cref="RefillTag.Turn"/> pool. In combat
+    /// (plan call 8) only the current unit may move, and only with movement left (checked before the square); the move
+    /// spends 1 movement and does not tick.
+    /// </summary>
+    private static StepResult ApplyMove(GameState state, MoveCommand move, RulesContext rules)
     {
         // Checked before anything else so the outcome does not depend on the rest of the command.
         if (!Enum.IsDefined(move.Dir))
@@ -114,6 +122,21 @@ public static class Engine
         }
 
         var unit = state.Units[index];
+        var combat = state.Combat;
+        if (combat is not null)
+        {
+            // A vacated turn is held by no one until it resumes.
+            if (combat.TurnVacated || combat.CurrentUnit != unit.Id)
+            {
+                return Reject(state, CommandError.NotYourTurn);
+            }
+
+            if (Turns.MovementLeft(rules, state, unit.Id) < 1)
+            {
+                return Reject(state, CommandError.NoMovementLeft);
+            }
+        }
+
         var error = CheckStep(state, unit, move.Dir);
         if (error != CommandError.None)
         {
@@ -123,16 +146,27 @@ public static class Engine
         var from = unit.Pos;
         var to = from.Step(move.Dir);
 
-        // Checked: at the limit the step fails loudly rather than wrap to a state no save can hold.
-        long tick = checked(state.Tick + 1);
-        var next = state with
-        {
-            Units = state.Units.SetItem(index, unit with { Pos = to }),
-            Tick = tick,
-        };
         var events = ImmutableArray.CreateBuilder<GameEvent>();
         events.Add(new UnitMoved(unit.Id, from, to));
-        events.Add(new TickAdvanced(tick));
+        GameState next;
+        if (combat is not null)
+        {
+            // In combat the move spends movement; ticks are out-of-combat time (CO 5.5).
+            var budget = unit.Budget with { MovementUsed = checked(unit.Budget.MovementUsed + 1) };
+            next = state with { Units = state.Units.SetItem(index, unit with { Pos = to, Budget = budget }) };
+        }
+        else
+        {
+            // Checked: at the limit the step fails loudly rather than wrap to a state no save can hold.
+            long tick = checked(state.Tick + 1);
+            next = state with
+            {
+                Units = state.Units.SetItem(index, unit with { Pos = to }),
+                Tick = tick,
+            };
+            next = TickResets(rules, next);
+            events.Add(new TickAdvanced(tick));
+        }
 
         if (state.Map[to] == Tile.Shrine)
         {
@@ -149,6 +183,48 @@ public static class Engine
         }
 
         return new StepResult(next, events.ToImmutable(), CommandError.None);
+    }
+
+    // AB 6.8, after the tick advances: every unit's turn budget becomes fresh (the camp flag included) and every
+    // turn pool refills.
+    private static GameState TickResets(RulesContext rules, GameState s)
+    {
+        var units = s.Units.ToBuilder();
+        for (int i = 0; i < units.Count; i++)
+        {
+            if (units[i].Budget != default)
+            {
+                units[i] = units[i] with { Budget = default };
+            }
+        }
+
+        return Pools.RefillAll(rules, s with { Units = units.ToImmutable() }, RefillTag.Turn);
+    }
+
+    /// <summary>
+    /// Ends the current unit's turn (M1-10 plan call 9): refused out of combat, for an unknown unit, and out of turn
+    /// (a vacated turn included); otherwise <see cref="Turns.Advance"/>.
+    /// </summary>
+    private static StepResult ApplyEndTurn(GameState state, EndTurnCommand end, RulesContext rules)
+    {
+        var combat = state.Combat;
+        if (combat is null)
+        {
+            return Reject(state, CommandError.NotInCombat);
+        }
+
+        if (IndexOfUnit(state, end.Unit) < 0)
+        {
+            return Reject(state, CommandError.UnknownUnit);
+        }
+
+        if (combat.TurnVacated || combat.CurrentUnit != end.Unit)
+        {
+            return Reject(state, CommandError.NotYourTurn);
+        }
+
+        var (events, next) = Turns.Advance(rules, state);
+        return new StepResult(next, events, CommandError.None);
     }
 
     /// <summary>

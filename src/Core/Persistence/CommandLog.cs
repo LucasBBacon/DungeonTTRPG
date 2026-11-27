@@ -18,6 +18,7 @@ public sealed record CommandLog(ulong Seed, ImmutableArray<Command> Commands)
 {
     private const string MoveType = "move";
     private const string AnswerType = "answer";
+    private const string EndTurnType = "endTurn";
 
     public string Save()
     {
@@ -71,6 +72,7 @@ public sealed record CommandLog(ulong Seed, ImmutableArray<Command> Commands)
             Decision = a.Decision.Value,
             Option = a.OptionIndex,
         },
+        EndTurnCommand e => new CommandDto { Type = EndTurnType, Unit = e.Unit.Value },
         null => throw new InvalidOperationException("Cannot save a null command."),
         _ => throw new NotSupportedException($"Unsupported command type {command.GetType().Name}."),
     };
@@ -99,6 +101,14 @@ public sealed record CommandLog(ulong Seed, ImmutableArray<Command> Commands)
                 return new AnswerDecisionCommand(
                     new DecisionId(PersistenceJson.Need(c.Decision, "answer decision")),
                     PersistenceJson.Need(c.Option, "answer option"));
+
+            case EndTurnType:
+                if (c.Dir is not null || c.Decision is not null || c.Option is not null)
+                {
+                    throw new SnapshotFormatException("Invalid save: an endTurn command carries move or answer fields.");
+                }
+
+                return new EndTurnCommand(new UnitId(PersistenceJson.Need(c.Unit, "endTurn unit")));
 
             default:
                 throw new SnapshotFormatException($"Invalid save: unknown command type '{type}'.");

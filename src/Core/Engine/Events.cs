@@ -1,4 +1,6 @@
+using System.Collections.Immutable;
 using Dungeon.Core.Effects;
+using Dungeon.Core.Stats;
 
 namespace Dungeon.Core;
 
@@ -27,3 +29,15 @@ public sealed record EffectApplied(long Seq, string EffectId, UnitId Holder, Eff
 
 /// <summary>A trigger of the instance <paramref name="Seq"/> called the C# hook <paramref name="HookId"/>; the events the hook raises follow.</summary>
 public sealed record HookFired(string HookId, long Seq) : GameEvent;
+
+/// <summary>
+/// A fight began (M1-10 plan call 6): <paramref name="Order"/> is the initiative rolled for it, in turn order. The record
+/// compares <paramref name="Order"/> by reference; compare it with <c>SequenceEqual</c>.
+/// </summary>
+public sealed record CombatStarted(ImmutableArray<InitiativeEntry> Order) : GameEvent;
+
+/// <summary><paramref name="Unit"/>'s turn began, in round <paramref name="Round"/> (M1-10 plan call 6).</summary>
+public sealed record TurnStarted(UnitId Unit, long Round) : GameEvent;
+
+/// <summary><paramref name="Unit"/>'s turn ended (M1-10 plan call 9).</summary>
+public sealed record TurnEnded(UnitId Unit) : GameEvent;
