@@ -8,5 +8,13 @@ public static class StaticChecks
 {
     /// <summary>Every registered static check.</summary>
     public static ImmutableArray<IStaticCheck> All { get; } =
-        [new ContentLoadCheck(), new ClassDeclaredCheck()];
+        [
+            new ContentLoadCheck(),
+            new ClassDeclaredCheck(),
+            new NameRegistryCheck(),
+            new R1ExactEqualityCheck(),
+            new R2RetiredReusedCheck(),
+            new R6InternalByKeyCheck(),
+            new GreyedReasonKeysCheck(),
+        ];
 }

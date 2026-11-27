@@ -21,6 +21,61 @@
       "action": "fail the build",
       "wave": "M1",
       "ciTier": "pr"
+    },
+    {
+      "id": "V7.NameRegistry",
+      "owner": "RS",
+      "phase": "s",
+      "deps": [],
+      "uses": [],
+      "class": "build",
+      "action": "fail the build",
+      "wave": "M1",
+      "ciTier": "pr"
+    },
+    {
+      "id": "V24.R1ExactEquality",
+      "owner": "the lead",
+      "phase": "s",
+      "deps": [],
+      "uses": ["V7.NameRegistry"],
+      "class": "build",
+      "action": "fail the build",
+      "wave": "M1",
+      "ciTier": "pr"
+    },
+    {
+      "id": "V24.R2RetiredReused",
+      "owner": "the lead",
+      "phase": "s",
+      "deps": [],
+      "uses": ["V7.NameRegistry"],
+      "class": "build",
+      "action": "fail the build",
+      "wave": "M1",
+      "ciTier": "pr"
+    },
+    {
+      "id": "V24.R6InternalByKey",
+      "owner": "the lead",
+      "phase": "s",
+      "deps": [],
+      "uses": ["V7.NameRegistry"],
+      "class": "build",
+      "action": "fail the build",
+      "wave": "M1",
+      "ciTier": "pr"
+    },
+    {
+      "id": "V24.GreyedReasonKeys",
+      "owner": "the lead",
+      "phase": "s",
+      "deps": [],
+      "uses": ["V7.NameRegistry"],
+      "class": "build",
+      "action": "fail the build",
+      "wave": "M1",
+      "ciTier": "pr"
     }
   ]
 }

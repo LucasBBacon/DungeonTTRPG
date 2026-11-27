@@ -15,6 +15,9 @@ public abstract class ContentKind
     /// <summary>The name of the file's top-level record array, used in error paths such as <c>$.checks[1].id</c>.</summary>
     public abstract string ArrayName { get; }
 
+    /// <summary>The name of the property that holds a record's id, used when a repeated id is named; <c>id</c> by default.</summary>
+    public virtual string IdField => "id";
+
     /// <summary>True if generation reads this kind, so it is part of <c>genContentHash</c> (SV 4.6).</summary>
     public virtual bool ReadByGeneration => false;
 
@@ -35,5 +38,13 @@ public static class ContentKinds
 {
     /// <summary>Every kind the loader knows, in ordinal file-name order.</summary>
     public static ImmutableArray<ContentKind> All { get; } =
-        [new ArmKind(), new CheckKind(), new ReportKind()];
+        [
+            new GreyedReasonKind(),
+            new NameListKind(),
+            new RetiredNamesKind(),
+            new ArmKind(),
+            new CheckKind(),
+            new ReportKind(),
+            new StringsKind(),
+        ];
 }

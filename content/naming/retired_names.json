@@ -1,0 +1,2468 @@
+{
+  "retired": [
+    {
+      "id": "r0000",
+      "name": "\"? dormant · Arcana\" (card text)",
+      "category": "UI surface",
+      "doc": "charm-abilities",
+      "outcome": "renamed → \"? untold · Arcana\" (client)"
+    },
+    {
+      "id": "r0001",
+      "name": "\"Weak: Will\"",
+      "category": "UI surface",
+      "doc": "enemies",
+      "outcome": "renamed → \"Poor save: Will\""
+    },
+    {
+      "id": "r0002",
+      "name": "\"ask me\"",
+      "category": "report or setting",
+      "doc": "ability-resource-model",
+      "outcome": "renamed → Always / Only if it matters / While half full / Never / Ask me (ids internal; 5.9.14)"
+    },
+    {
+      "id": "r0003",
+      "name": "\"bloodied\" plate mark (50%)",
+      "category": "UI surface",
+      "doc": "death-healing",
+      "outcome": "renamed → \"hurt\" plate mark (client; agreed, Q5)"
+    },
+    {
+      "id": "r0004",
+      "name": "\"seed (will play differently for others)\"",
+      "category": "UI surface",
+      "doc": "seeds-validation",
+      "outcome": "renamed → \"Copy run code (plays differently for others)\""
+    },
+    {
+      "id": "r0005",
+      "name": "\"the Hollow ahead sells rare\"",
+      "category": "UI surface",
+      "doc": "loot-economy",
+      "outcome": "renamed → \"the next camp sells rare\" (agreed, Q3; 5.6.6); the tag and ledger final as written"
+    },
+    {
+      "id": "r0006",
+      "name": "\"this code cannot be dreamed on this build\"",
+      "category": "UI surface",
+      "doc": "seeds-validation",
+      "outcome": "renamed → \"This run code can't be played on this build.\" (5.9.30)"
+    },
+    {
+      "id": "r0007",
+      "name": "\"unused since floor N\" tag",
+      "category": "UI surface",
+      "doc": "loot-economy",
+      "outcome": "renamed → \"the next camp sells rare\" (agreed, Q3; 5.6.6); the tag and ledger final as written"
+    },
+    {
+      "id": "r0008",
+      "name": "'Hang it?'",
+      "category": "UI surface",
+      "doc": "heirlooms-curses",
+      "outcome": "renamed → Shelve it?"
+    },
+    {
+      "id": "r0009",
+      "name": "? dormant · Arcana 13 vs 14 (dormant line readout)",
+      "category": "UI surface",
+      "doc": "trinkets",
+      "outcome": "renamed → \"? untold · Arcana 13 vs 14\" (client)"
+    },
+    {
+      "id": "r0010",
+      "name": "? dormant · Arcana 13 vs 15",
+      "category": "UI surface",
+      "doc": "items-inventory",
+      "outcome": "renamed → \"? untold · Arcana 13 vs 15\" (client)"
+    },
+    {
+      "id": "r0011",
+      "name": "Adept",
+      "category": "class",
+      "doc": "classes-concepts",
+      "outcome": "renamed → Ascetic (client)"
+    },
+    {
+      "id": "r0012",
+      "name": "Aid",
+      "category": "weapon or armour property",
+      "doc": "trinkets",
+      "outcome": "renamed → of the Helper (epithet); Helping Sigil (family)"
+    },
+    {
+      "id": "r0013",
+      "name": "Alms Crab",
+      "category": "enemy type",
+      "doc": "loot-sources",
+      "outcome": "renamed → Pew Crab"
+    },
+    {
+      "id": "r0014",
+      "name": "Answer",
+      "category": "weapon or armour property",
+      "doc": "heirlooms-curses",
+      "outcome": "renamed → Rejoinder"
+    },
+    {
+      "id": "r0015",
+      "name": "Answers here",
+      "category": "UI surface",
+      "doc": "item-rolls",
+      "outcome": "renamed → Shines here"
+    },
+    {
+      "id": "r0016",
+      "name": "Antechamber",
+      "category": "room or terrain",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Forecourt (on screen; antechamber stays an id)"
+    },
+    {
+      "id": "r0017",
+      "name": "Antechamber Catch-up",
+      "category": "system term",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Forecourt Top-up"
+    },
+    {
+      "id": "r0018",
+      "name": "Antitoxin",
+      "category": "consumable",
+      "doc": "consumables",
+      "outcome": "renamed → Bitter Draught"
+    },
+    {
+      "id": "r0019",
+      "name": "Approach",
+      "category": "verb or action",
+      "doc": "conditions",
+      "outcome": "renamed → Come / Run / Crouch / Wait (client)"
+    },
+    {
+      "id": "r0020",
+      "name": "Arcana readout \"? dormant · Arcana 13 vs 15\"",
+      "category": "UI surface",
+      "doc": "item-rolls",
+      "outcome": "renamed → \"? untold · Arcana 13 vs 15\" (client)"
+    },
+    {
+      "id": "r0021",
+      "name": "Artillery",
+      "category": "class",
+      "doc": "enemies",
+      "outcome": "renamed → Marksman (client)"
+    },
+    {
+      "id": "r0022",
+      "name": "Ashen Knot",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (renamed or rejected in CA T5, CA 4.2, A.2): Widow's Knot → Minder's Pebble; Second's Knot → Second's Hairpin; Swaddle Knot → Walnut; Ashen Knot → Ashen Bead; Calm Stone → Shy Stone; Pointing Bone → Acorn Cap; Hand-me-down Knot → Relay Thread (now Relay Ribbon, 5.8.20); Cradle Knot → Stay Thread (now Anchor Bead, 5.8.21); Lodestone, Crooked Finger, Duck Knot, Spite Knot and Scab Knot avoided"
+    },
+    {
+      "id": "r0023",
+      "name": "Augur's Knot",
+      "category": "item",
+      "doc": "exploration-information",
+      "outcome": "retired (rejected in XI; never shipped)"
+    },
+    {
+      "id": "r0024",
+      "name": "Back to Stairhead",
+      "category": "verb or action",
+      "doc": "exploration-information",
+      "outcome": "renamed → To the Downstair"
+    },
+    {
+      "id": "r0025",
+      "name": "Banishing",
+      "category": "spell",
+      "doc": "consumables",
+      "outcome": "renamed → Cast Out"
+    },
+    {
+      "id": "r0026",
+      "name": "Barker",
+      "category": "NPC",
+      "doc": "camp-hub",
+      "outcome": "renamed → Showcaller"
+    },
+    {
+      "id": "r0027",
+      "name": "Bastion",
+      "category": "subclass",
+      "doc": "classes-concepts",
+      "outcome": "renamed → Redoubt (client; agreed 2026-11-24, W-28 (a); Rampart, the Q6 answer, renamed: a 1990 Atari Games title)"
+    },
+    {
+      "id": "r0028",
+      "name": "Bedside Stand",
+      "category": "item",
+      "doc": "loot-sources",
+      "outcome": "renamed → the Washstand (client)"
+    },
+    {
+      "id": "r0029",
+      "name": "Bellwarden's Mail",
+      "category": "heirloom",
+      "doc": "armour",
+      "outcome": "renamed → Hound-Collar Mail (client)"
+    },
+    {
+      "id": "r0030",
+      "name": "Berserker",
+      "category": "class",
+      "doc": "classes-concepts",
+      "outcome": "renamed → Ravager"
+    },
+    {
+      "id": "r0031",
+      "name": "Bier-Knot",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (rejected candidates, CA 5.3)"
+    },
+    {
+      "id": "r0032",
+      "name": "Bile Ooze",
+      "category": "enemy type",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Gall Slick"
+    },
+    {
+      "id": "r0033",
+      "name": "Bile Spit",
+      "category": "ability",
+      "doc": "boss-rooms",
+      "outcome": "renamed → Sour Spit"
+    },
+    {
+      "id": "r0034",
+      "name": "Blade Dance",
+      "category": "ability",
+      "doc": "shade-class",
+      "outcome": "renamed → Steel Waltz"
+    },
+    {
+      "id": "r0035",
+      "name": "Blade Wheel",
+      "category": "trap or lock",
+      "doc": "traps-locks",
+      "outcome": "renamed → Swing Blade"
+    },
+    {
+      "id": "r0036",
+      "name": "Blades (kit)",
+      "category": "item family",
+      "doc": "shade-class",
+      "outcome": "renamed → Twin Blades"
+    },
+    {
+      "id": "r0037",
+      "name": "Blessing",
+      "category": "spell",
+      "doc": "consumables",
+      "outcome": "renamed → Warm Word"
+    },
+    {
+      "id": "r0038",
+      "name": "Blight",
+      "category": "spell",
+      "doc": "consumables",
+      "outcome": "renamed → Wilt"
+    },
+    {
+      "id": "r0039",
+      "name": "Blink Bone",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (rejected candidates, CA 5.3)"
+    },
+    {
+      "id": "r0040",
+      "name": "Bloodletter",
+      "category": "weapon or armour property",
+      "doc": "weapons",
+      "outcome": "renamed → Gashing (client)"
+    },
+    {
+      "id": "r0041",
+      "name": "Bodyguard",
+      "category": "enemy affix",
+      "doc": "enemies",
+      "outcome": "renamed → Challenger (after the check)"
+    },
+    {
+      "id": "r0042",
+      "name": "Boss Nail",
+      "category": "item",
+      "doc": "starting-kits",
+      "outcome": "renamed → Domed Nail"
+    },
+    {
+      "id": "r0043",
+      "name": "Brennan",
+      "category": "NPC",
+      "doc": "herald-class",
+      "outcome": "renamed → Brask"
+    },
+    {
+      "id": "r0044",
+      "name": "Bull Rush",
+      "category": "weapon or armour property",
+      "doc": "armour",
+      "outcome": "renamed → Bowl Over (client)"
+    },
+    {
+      "id": "r0045",
+      "name": "Calm Minds",
+      "category": "spell",
+      "doc": "herald-class",
+      "outcome": "renamed → Quiet Minds"
+    },
+    {
+      "id": "r0046",
+      "name": "Calm Stone",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (renamed or rejected in CA T5, CA 4.2, A.2): Widow's Knot → Minder's Pebble; Second's Knot → Second's Hairpin; Swaddle Knot → Walnut; Ashen Knot → Ashen Bead; Calm Stone → Shy Stone; Pointing Bone → Acorn Cap; Hand-me-down Knot → Relay Thread (now Relay Ribbon, 5.8.20); Cradle Knot → Stay Thread (now Anchor Bead, 5.8.21); Lodestone, Crooked Finger, Duck Knot, Spite Knot and Scab Knot avoided"
+    },
+    {
+      "id": "r0047",
+      "name": "Carried hire",
+      "category": "system term",
+      "doc": "companions",
+      "outcome": "renamed → Returning hire (after the check)"
+    },
+    {
+      "id": "r0048",
+      "name": "Carried to the night's end",
+      "category": "UI surface",
+      "doc": "heirlooms-curses",
+      "outcome": "renamed → Carried to the end"
+    },
+    {
+      "id": "r0049",
+      "name": "Cartographer's Loupe",
+      "category": "item",
+      "doc": "exploration-information",
+      "outcome": "retired (rejected in XI; never shipped)"
+    },
+    {
+      "id": "r0050",
+      "name": "Cartouche set piece",
+      "category": "item",
+      "doc": "exploration-information",
+      "outcome": "retired (rejected in XI; never shipped)"
+    },
+    {
+      "id": "r0051",
+      "name": "Catch Breath",
+      "category": "ability",
+      "doc": "classes-concepts",
+      "outcome": "renamed → Respite"
+    },
+    {
+      "id": "r0052",
+      "name": "Catcher",
+      "category": "weapon or armour property",
+      "doc": "trinkets",
+      "outcome": "renamed → Courier"
+    },
+    {
+      "id": "r0053",
+      "name": "Catcher's Bracers",
+      "category": "item family",
+      "doc": "trinkets",
+      "outcome": "renamed → Courier's Bracers"
+    },
+    {
+      "id": "r0054",
+      "name": "Caught",
+      "category": "ability",
+      "doc": "shade-class",
+      "outcome": "renamed → Trapped"
+    },
+    {
+      "id": "r0055",
+      "name": "Caught",
+      "category": "system term",
+      "doc": "classes-concepts",
+      "outcome": "renamed → Trapped"
+    },
+    {
+      "id": "r0056",
+      "name": "Caught Out",
+      "category": "ability",
+      "doc": "shade-class",
+      "outcome": "renamed → Unbraced"
+    },
+    {
+      "id": "r0057",
+      "name": "Caught facing the door",
+      "category": "UI surface",
+      "doc": "encounter-placement",
+      "outcome": "renamed → Facing the door"
+    },
+    {
+      "id": "r0058",
+      "name": "Chalkwright",
+      "category": "NPC",
+      "doc": "camp-hub",
+      "outcome": "renamed → Slate-Sketcher"
+    },
+    {
+      "id": "r0059",
+      "name": "Chilled Pour",
+      "category": "ability",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Cold Pour"
+    },
+    {
+      "id": "r0060",
+      "name": "Clench",
+      "category": "weapon or armour property",
+      "doc": "trinkets",
+      "outcome": "renamed → Vicelike (after the check)"
+    },
+    {
+      "id": "r0061",
+      "name": "Clenching Gauntlets",
+      "category": "item family",
+      "doc": "trinkets",
+      "outcome": "renamed → Vicelike Gauntlets (after the check)"
+    },
+    {
+      "id": "r0062",
+      "name": "Coat rack",
+      "category": "UI surface",
+      "doc": "camp-hub",
+      "outcome": "renamed → the Newel"
+    },
+    {
+      "id": "r0063",
+      "name": "Coffle",
+      "category": "ability",
+      "doc": "arcanist-class",
+      "outcome": "renamed → Lashed Pair"
+    },
+    {
+      "id": "r0064",
+      "name": "Cold Ring",
+      "category": "ability",
+      "doc": "boss-rooms",
+      "outcome": "renamed → Frost Tone"
+    },
+    {
+      "id": "r0065",
+      "name": "Commanding",
+      "category": "enemy affix",
+      "doc": "enemies",
+      "outcome": "renamed → Exhorting (after the check)"
+    },
+    {
+      "id": "r0066",
+      "name": "Complexity (Simple / Medium / Complex)",
+      "category": "UI surface",
+      "doc": "classes-concepts",
+      "outcome": "renamed → Straightforward / Involved / Intricate"
+    },
+    {
+      "id": "r0067",
+      "name": "Conduct",
+      "category": "verb or action",
+      "doc": "room-terrain",
+      "outcome": "renamed → Charged Water"
+    },
+    {
+      "id": "r0068",
+      "name": "Controller",
+      "category": "class",
+      "doc": "enemies",
+      "outcome": "renamed → Hinderer (client)"
+    },
+    {
+      "id": "r0069",
+      "name": "Copper Links",
+      "category": "item",
+      "doc": "starting-kits",
+      "outcome": "renamed → Copper Gorget"
+    },
+    {
+      "id": "r0070",
+      "name": "Corridor Warden",
+      "category": "item",
+      "doc": "weapons",
+      "outcome": "renamed → Corridor Crossbow (client)"
+    },
+    {
+      "id": "r0071",
+      "name": "Cradle Knot",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (renamed or rejected in CA T5, CA 4.2, A.2): Widow's Knot → Minder's Pebble; Second's Knot → Second's Hairpin; Swaddle Knot → Walnut; Ashen Knot → Ashen Bead; Calm Stone → Shy Stone; Pointing Bone → Acorn Cap; Hand-me-down Knot → Relay Thread (now Relay Ribbon, 5.8.20); Cradle Knot → Stay Thread (now Anchor Bead, 5.8.21); Lodestone, Crooked Finger, Duck Knot, Spite Knot and Scab Knot avoided"
+    },
+    {
+      "id": "r0072",
+      "name": "Crooked Finger",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (renamed or rejected in CA T5, CA 4.2, A.2): Widow's Knot → Minder's Pebble; Second's Knot → Second's Hairpin; Swaddle Knot → Walnut; Ashen Knot → Ashen Bead; Calm Stone → Shy Stone; Pointing Bone → Acorn Cap; Hand-me-down Knot → Relay Thread (now Relay Ribbon, 5.8.20); Cradle Knot → Stay Thread (now Anchor Bead, 5.8.21); Lodestone, Crooked Finger, Duck Knot, Spite Knot and Scab Knot avoided"
+    },
+    {
+      "id": "r0073",
+      "name": "Cross-Reference",
+      "category": "ability",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Footnote (the boss's; the Loremaster keeps Cross-Reference)"
+    },
+    {
+      "id": "r0074",
+      "name": "Deep Reserves",
+      "category": "ability",
+      "doc": "vanguard-class",
+      "outcome": "renamed → Fresh Reserves"
+    },
+    {
+      "id": "r0075",
+      "name": "Deep Stance",
+      "category": "weapon or armour property",
+      "doc": "armour",
+      "outcome": "renamed → Low Stance (client)"
+    },
+    {
+      "id": "r0076",
+      "name": "Deja Vu",
+      "category": "item",
+      "doc": "exploration-information",
+      "outcome": "retired (rejected in XI; never shipped)"
+    },
+    {
+      "id": "r0077",
+      "name": "Device (arena Device)",
+      "category": "system term",
+      "doc": "boss-rooms",
+      "outcome": "renamed → Counterpiece"
+    },
+    {
+      "id": "r0078",
+      "name": "Dissect",
+      "category": "spell",
+      "doc": "arcanist-class",
+      "outcome": "renamed → Lay Bare"
+    },
+    {
+      "id": "r0079",
+      "name": "Doppel (Mirror Court opener)",
+      "category": "enemy type",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Reflection"
+    },
+    {
+      "id": "r0080",
+      "name": "Dormant",
+      "category": "UI surface",
+      "doc": "charm-abilities",
+      "outcome": "renamed → Ready, Used, Waiting, Stored, Idle"
+    },
+    {
+      "id": "r0081",
+      "name": "Draw the Sting",
+      "category": "ability",
+      "doc": "herald-class",
+      "outcome": "renamed → Ease the Pain"
+    },
+    {
+      "id": "r0082",
+      "name": "Dream Fragments",
+      "category": "system term",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Fragments (after the check)"
+    },
+    {
+      "id": "r0083",
+      "name": "Dream Survey",
+      "category": "item",
+      "doc": "exploration-information",
+      "outcome": "retired (rejected in XI; never shipped)"
+    },
+    {
+      "id": "r0084",
+      "name": "Dreamfall",
+      "category": "verb or action",
+      "doc": "hazards",
+      "outcome": "renamed → Freefall"
+    },
+    {
+      "id": "r0085",
+      "name": "Drop-bar doors",
+      "category": "room or terrain",
+      "doc": "floor-layout",
+      "outcome": "renamed → Slam doors"
+    },
+    {
+      "id": "r0086",
+      "name": "Duck Knot",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (renamed or rejected in CA T5, CA 4.2, A.2): Widow's Knot → Minder's Pebble; Second's Knot → Second's Hairpin; Swaddle Knot → Walnut; Ashen Knot → Ashen Bead; Calm Stone → Shy Stone; Pointing Bone → Acorn Cap; Hand-me-down Knot → Relay Thread (now Relay Ribbon, 5.8.20); Cradle Knot → Stay Thread (now Anchor Bead, 5.8.21); Lodestone, Crooked Finger, Duck Knot, Spite Knot and Scab Knot avoided"
+    },
+    {
+      "id": "r0087",
+      "name": "Duellist's Rapier",
+      "category": "item",
+      "doc": "weapons",
+      "outcome": "renamed → Courtier's Rapier (client)"
+    },
+    {
+      "id": "r0088",
+      "name": "Earned Spur",
+      "category": "ability",
+      "doc": "herald-class",
+      "outcome": "renamed → Earned Urge"
+    },
+    {
+      "id": "r0089",
+      "name": "Ember Burst",
+      "category": "spell",
+      "doc": "ability-resource-model",
+      "outcome": "renamed → Cinder Spray"
+    },
+    {
+      "id": "r0090",
+      "name": "Embercleaver of ?",
+      "category": "item",
+      "doc": "items-inventory",
+      "outcome": "renamed → Ember Longsword of ? (5.1.34)"
+    },
+    {
+      "id": "r0091",
+      "name": "Fairground Gate",
+      "category": "place",
+      "doc": "floor-layout",
+      "outcome": "renamed → Fairground Turnstile"
+    },
+    {
+      "id": "r0092",
+      "name": "Familiar Halls",
+      "category": "item",
+      "doc": "exploration-information",
+      "outcome": "retired (rejected in XI; never shipped)"
+    },
+    {
+      "id": "r0093",
+      "name": "Figment",
+      "category": "enemy type",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Shadow-Puppet"
+    },
+    {
+      "id": "r0094",
+      "name": "Figment (herd, sheep)",
+      "category": "other",
+      "doc": "hazards",
+      "outcome": "renamed → Shadow-Puppet"
+    },
+    {
+      "id": "r0095",
+      "name": "Final Word",
+      "category": "spell",
+      "doc": "herald-class",
+      "outcome": "renamed → Pronouncement"
+    },
+    {
+      "id": "r0096",
+      "name": "Fireball",
+      "category": "spell",
+      "doc": "consumables",
+      "outcome": "renamed → Detonation (fire)"
+    },
+    {
+      "id": "r0097",
+      "name": "First Cut",
+      "category": "weapon or armour property",
+      "doc": "heirlooms-curses",
+      "outcome": "renamed → Quick Blood"
+    },
+    {
+      "id": "r0098",
+      "name": "Flee",
+      "category": "verb or action",
+      "doc": "conditions",
+      "outcome": "renamed → Come / Run / Crouch / Wait (client)"
+    },
+    {
+      "id": "r0099",
+      "name": "Floor Rubbing",
+      "category": "item",
+      "doc": "exploration-information",
+      "outcome": "retired (rejected in XI; never shipped)"
+    },
+    {
+      "id": "r0100",
+      "name": "Folded Floorplan",
+      "category": "item",
+      "doc": "exploration-information",
+      "outcome": "retired (rejected in XI; never shipped)"
+    },
+    {
+      "id": "r0101",
+      "name": "Framer",
+      "category": "NPC",
+      "doc": "camp-hub",
+      "outcome": "renamed → Gilder"
+    },
+    {
+      "id": "r0102",
+      "name": "Frozen Footman",
+      "category": "enemy type",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Still Footman"
+    },
+    {
+      "id": "r0103",
+      "name": "Gallows Penny",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (rejected candidates, CA 5.3)"
+    },
+    {
+      "id": "r0104",
+      "name": "Gatesplitter",
+      "category": "item",
+      "doc": "starting-kits",
+      "outcome": "renamed → the Ironbiter (sample byname)"
+    },
+    {
+      "id": "r0105",
+      "name": "Gatewarden's Shield",
+      "category": "item",
+      "doc": "armour",
+      "outcome": "renamed → Wicket Shield"
+    },
+    {
+      "id": "r0106",
+      "name": "Gout",
+      "category": "spell",
+      "doc": "arcanist-class",
+      "outcome": "renamed → Deluge"
+    },
+    {
+      "id": "r0107",
+      "name": "Grasping Roots",
+      "category": "spell",
+      "doc": "consumables",
+      "outcome": "renamed → Grasping Weeds"
+    },
+    {
+      "id": "r0108",
+      "name": "Grave-goods casket",
+      "category": "item family",
+      "doc": "loot-sources",
+      "outcome": "renamed → Burial casket"
+    },
+    {
+      "id": "r0109",
+      "name": "Green Bark",
+      "category": "item",
+      "doc": "starting-kits",
+      "outcome": "renamed → Green Wood"
+    },
+    {
+      "id": "r0110",
+      "name": "Grey Lacing",
+      "category": "item",
+      "doc": "starting-kits",
+      "outcome": "renamed → Hemp Lacing"
+    },
+    {
+      "id": "r0111",
+      "name": "Grovel",
+      "category": "verb or action",
+      "doc": "conditions",
+      "outcome": "renamed → Come / Run / Crouch / Wait (client)"
+    },
+    {
+      "id": "r0112",
+      "name": "Guiding Radiance",
+      "category": "spell",
+      "doc": "consumables",
+      "outcome": "renamed → Marking Light"
+    },
+    {
+      "id": "r0113",
+      "name": "Gut spore-bloat",
+      "category": "enemy type",
+      "doc": "room-terrain",
+      "outcome": "deleted in part: the Heart sleeping-draught nurse example is deleted (A.1; NP-10, NP-19); the rest final as written"
+    },
+    {
+      "id": "r0114",
+      "name": "Hailward Shield",
+      "category": "item",
+      "doc": "armour",
+      "outcome": "renamed → Hailstruck Shield"
+    },
+    {
+      "id": "r0115",
+      "name": "Halt",
+      "category": "verb or action",
+      "doc": "conditions",
+      "outcome": "renamed → Come / Run / Crouch / Wait (client)"
+    },
+    {
+      "id": "r0116",
+      "name": "Hand-me-down Knot",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (renamed or rejected in CA T5, CA 4.2, A.2): Widow's Knot → Minder's Pebble; Second's Knot → Second's Hairpin; Swaddle Knot → Walnut; Ashen Knot → Ashen Bead; Calm Stone → Shy Stone; Pointing Bone → Acorn Cap; Hand-me-down Knot → Relay Thread (now Relay Ribbon, 5.8.20); Cradle Knot → Stay Thread (now Anchor Bead, 5.8.21); Lodestone, Crooked Finger, Duck Knot, Spite Knot and Scab Knot avoided"
+    },
+    {
+      "id": "r0117",
+      "name": "Hang it",
+      "category": "UI surface",
+      "doc": "heirlooms-curses",
+      "outcome": "renamed → Shelve it?"
+    },
+    {
+      "id": "r0118",
+      "name": "Head Archivist",
+      "category": "enemy type",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Chief Archivist"
+    },
+    {
+      "id": "r0119",
+      "name": "Head of the Hall",
+      "category": "place",
+      "doc": "boss-rooms",
+      "outcome": "renamed → the Dais"
+    },
+    {
+      "id": "r0120",
+      "name": "Heart sleeping-draught nurse",
+      "category": "enemy type",
+      "doc": "room-terrain",
+      "outcome": "deleted in part: the Heart sleeping-draught nurse example is deleted (A.1; NP-10, NP-19); the rest final as written"
+    },
+    {
+      "id": "r0121",
+      "name": "Hedge Bestiary",
+      "category": "item",
+      "doc": "exploration-information",
+      "outcome": "retired (rejected in XI; never shipped)"
+    },
+    {
+      "id": "r0122",
+      "name": "Held Ground",
+      "category": "weapon or armour property",
+      "doc": "heirlooms-curses",
+      "outcome": "renamed → Footsure"
+    },
+    {
+      "id": "r0123",
+      "name": "Held Guard",
+      "category": "ability",
+      "doc": "shade-class",
+      "outcome": "renamed → Closed Guard"
+    },
+    {
+      "id": "r0124",
+      "name": "Held-Breath Knot",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (rejected candidates, CA 5.3)"
+    },
+    {
+      "id": "r0125",
+      "name": "Hold (Cord verb)",
+      "category": "verb or action",
+      "doc": "hazards",
+      "outcome": "renamed → Sustain"
+    },
+    {
+      "id": "r0126",
+      "name": "Hold the Line",
+      "category": "ability",
+      "doc": "classes-concepts",
+      "outcome": "renamed → Bar the Way"
+    },
+    {
+      "id": "r0127",
+      "name": "Hold the Note",
+      "category": "ability",
+      "doc": "boss-rooms",
+      "outcome": "renamed → Long Note"
+    },
+    {
+      "id": "r0128",
+      "name": "Holding",
+      "category": "spell",
+      "doc": "consumables",
+      "outcome": "renamed → Arrest (merged)"
+    },
+    {
+      "id": "r0129",
+      "name": "Hollowfolk",
+      "category": "faction",
+      "doc": "camp-hub",
+      "outcome": "renamed → the Fireside (client)"
+    },
+    {
+      "id": "r0130",
+      "name": "Holy Water",
+      "category": "consumable",
+      "doc": "consumables",
+      "outcome": "renamed → Lamp Water"
+    },
+    {
+      "id": "r0131",
+      "name": "Homecoming",
+      "category": "ability",
+      "doc": "herald-class",
+      "outcome": "renamed → Gather In"
+    },
+    {
+      "id": "r0132",
+      "name": "Honed",
+      "category": "enemy affix",
+      "doc": "enemies",
+      "outcome": "renamed → Razored"
+    },
+    {
+      "id": "r0133",
+      "name": "Hunter",
+      "category": "enemy affix",
+      "doc": "enemies",
+      "outcome": "renamed → Fixated"
+    },
+    {
+      "id": "r0134",
+      "name": "Hunter's Longbow",
+      "category": "item",
+      "doc": "weapons",
+      "outcome": "renamed → Fowler's Longbow (client)"
+    },
+    {
+      "id": "r0135",
+      "name": "Hunting Ring",
+      "category": "place",
+      "doc": "floor-layout",
+      "outcome": "renamed → Hunting Circle"
+    },
+    {
+      "id": "r0136",
+      "name": "Hushmail Hauberk",
+      "category": "item",
+      "doc": "armour",
+      "outcome": "renamed → Muffled Hauberk"
+    },
+    {
+      "id": "r0137",
+      "name": "Iced padlock",
+      "category": "trap or lock",
+      "doc": "traps-locks",
+      "outcome": "renamed → Frost-seized padlock"
+    },
+    {
+      "id": "r0138",
+      "name": "Ill-Slept",
+      "category": "curse",
+      "doc": "heirlooms-curses",
+      "outcome": "renamed → Heavy-Eyed"
+    },
+    {
+      "id": "r0139",
+      "name": "Ill-Starred (type)",
+      "category": "curse",
+      "doc": "conditions",
+      "outcome": "renamed → Star-Crossed (client)"
+    },
+    {
+      "id": "r0140",
+      "name": "Ill-Wished",
+      "category": "curse",
+      "doc": "heirlooms-curses",
+      "outcome": "renamed → Begrudged"
+    },
+    {
+      "id": "r0141",
+      "name": "Indexer",
+      "category": "NPC",
+      "doc": "camp-hub",
+      "outcome": "renamed → Shelver"
+    },
+    {
+      "id": "r0142",
+      "name": "Interject",
+      "category": "ability",
+      "doc": "herald-class",
+      "outcome": "renamed → Speak Over"
+    },
+    {
+      "id": "r0143",
+      "name": "Iron Rim",
+      "category": "item",
+      "doc": "starting-kits",
+      "outcome": "renamed → Banded Face"
+    },
+    {
+      "id": "r0144",
+      "name": "Ironbark Hide",
+      "category": "item",
+      "doc": "armour",
+      "outcome": "renamed → Ironwood Vest"
+    },
+    {
+      "id": "r0145",
+      "name": "Jarring Whispers",
+      "category": "spell",
+      "doc": "consumables",
+      "outcome": "renamed → Grating Murmur"
+    },
+    {
+      "id": "r0146",
+      "name": "Keeper",
+      "category": "NPC",
+      "doc": "camp-hub",
+      "outcome": "renamed → the Pedlar"
+    },
+    {
+      "id": "r0147",
+      "name": "Keeper's Cart",
+      "category": "UI surface",
+      "doc": "camp-hub",
+      "outcome": "renamed → the Pedlar's Cart"
+    },
+    {
+      "id": "r0148",
+      "name": "Keepsakes",
+      "category": "system term",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Souvenirs"
+    },
+    {
+      "id": "r0149",
+      "name": "Kept",
+      "category": "UI surface",
+      "doc": "charm-abilities",
+      "outcome": "renamed → Ready, Used, Waiting, Stored, Idle"
+    },
+    {
+      "id": "r0150",
+      "name": "Kick (Cord verb)",
+      "category": "verb or action",
+      "doc": "hazards",
+      "outcome": "renamed → Knock"
+    },
+    {
+      "id": "r0151",
+      "name": "Kindler",
+      "category": "NPC",
+      "doc": "camp-hub",
+      "outcome": "renamed → Log-Carrier"
+    },
+    {
+      "id": "r0152",
+      "name": "Kinstone",
+      "category": "charm",
+      "doc": "trinkets",
+      "outcome": "renamed → Kin Pebble"
+    },
+    {
+      "id": "r0153",
+      "name": "Kit strip",
+      "category": "UI surface",
+      "doc": "starting-kits",
+      "outcome": "renamed → Gear strip"
+    },
+    {
+      "id": "r0154",
+      "name": "Kneel",
+      "category": "verb or action",
+      "doc": "heirlooms-curses",
+      "outcome": "renamed → Lower your head / Walk on"
+    },
+    {
+      "id": "r0155",
+      "name": "Knight's Plate",
+      "category": "item",
+      "doc": "armour",
+      "outcome": "renamed → Tourney Plate"
+    },
+    {
+      "id": "r0156",
+      "name": "Lame",
+      "category": "condition",
+      "doc": "conditions",
+      "outcome": "renamed → Limping"
+    },
+    {
+      "id": "r0157",
+      "name": "Last Act",
+      "category": "room or terrain",
+      "doc": "traps-locks",
+      "outcome": "renamed → The Prop Room"
+    },
+    {
+      "id": "r0158",
+      "name": "Last Rites",
+      "category": "ability",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Final Respects"
+    },
+    {
+      "id": "r0159",
+      "name": "Launcher (kit)",
+      "category": "item family",
+      "doc": "shade-class",
+      "outcome": "renamed → Bow and Blade"
+    },
+    {
+      "id": "r0160",
+      "name": "Lay Down Arms",
+      "category": "spell",
+      "doc": "herald-class",
+      "outcome": "renamed → Yield Arms"
+    },
+    {
+      "id": "r0161",
+      "name": "Lead by Example",
+      "category": "ability",
+      "doc": "herald-class",
+      "outcome": "renamed → Show the Way"
+    },
+    {
+      "id": "r0162",
+      "name": "Leaden",
+      "category": "curse",
+      "doc": "conditions",
+      "outcome": "renamed → Plodding (client)"
+    },
+    {
+      "id": "r0163",
+      "name": "Lingerer",
+      "category": "NPC",
+      "doc": "camp-hub",
+      "outcome": "renamed → Straggler(s)"
+    },
+    {
+      "id": "r0164",
+      "name": "Lingerers",
+      "category": "NPC",
+      "doc": "camp-hub",
+      "outcome": "renamed → Straggler(s)"
+    },
+    {
+      "id": "r0165",
+      "name": "Lip Catch",
+      "category": "trap or lock",
+      "doc": "traps-locks",
+      "outcome": "renamed → Lip Clamp"
+    },
+    {
+      "id": "r0166",
+      "name": "Lockjaw",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "renamed → Jawbone"
+    },
+    {
+      "id": "r0167",
+      "name": "Lodestone",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (renamed or rejected in CA T5, CA 4.2, A.2): Widow's Knot → Minder's Pebble; Second's Knot → Second's Hairpin; Swaddle Knot → Walnut; Ashen Knot → Ashen Bead; Calm Stone → Shy Stone; Pointing Bone → Acorn Cap; Hand-me-down Knot → Relay Thread (now Relay Ribbon, 5.8.20); Cradle Knot → Stay Thread (now Anchor Bead, 5.8.21); Lodestone, Crooked Finger, Duck Knot, Spite Knot and Scab Knot avoided"
+    },
+    {
+      "id": "r0168",
+      "name": "Lucid Key",
+      "category": "item",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → the Clear Key"
+    },
+    {
+      "id": "r0169",
+      "name": "Lullaby (ability)",
+      "category": "ability",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Soft Song (Lullabist ability only)"
+    },
+    {
+      "id": "r0170",
+      "name": "Middle Dream",
+      "category": "theme or floor",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Midwater"
+    },
+    {
+      "id": "r0171",
+      "name": "Milk-tooth",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (rejected candidates, CA 5.3)"
+    },
+    {
+      "id": "r0172",
+      "name": "Minion",
+      "category": "class",
+      "doc": "enemies",
+      "outcome": "renamed → Swarmer (role); Minion stays the rank (client)"
+    },
+    {
+      "id": "r0173",
+      "name": "Mist",
+      "category": "hazard",
+      "doc": "room-terrain",
+      "outcome": "renamed → Fog (if revived)"
+    },
+    {
+      "id": "r0174",
+      "name": "Mourner's Embrace",
+      "category": "ability",
+      "doc": "boss-rooms",
+      "outcome": "renamed → Black-Crepe Embrace"
+    },
+    {
+      "id": "r0175",
+      "name": "Mourning Curtains",
+      "category": "trap or lock",
+      "doc": "boss-rooms",
+      "outcome": "renamed → Mourning Blinds"
+    },
+    {
+      "id": "r0176",
+      "name": "Mousetrap",
+      "category": "system term",
+      "doc": "encounter-placement",
+      "outcome": "renamed → Baited Room"
+    },
+    {
+      "id": "r0177",
+      "name": "Muse's Token",
+      "category": "charm",
+      "doc": "trinkets",
+      "outcome": "renamed → Muse's Fob"
+    },
+    {
+      "id": "r0178",
+      "name": "Near-Miss",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (rejected candidates, CA 5.3)"
+    },
+    {
+      "id": "r0179",
+      "name": "Night Market",
+      "category": "theme or floor",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Lantern Market"
+    },
+    {
+      "id": "r0180",
+      "name": "Night Nursery",
+      "category": "room or terrain",
+      "doc": "traps-locks",
+      "outcome": "renamed → The Airing Cupboard"
+    },
+    {
+      "id": "r0181",
+      "name": "Night-Mare",
+      "category": "enemy type",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Pale Mare"
+    },
+    {
+      "id": "r0182",
+      "name": "Nightmare Rendition",
+      "category": "system term",
+      "doc": "boss-rooms",
+      "outcome": "renamed → Peril Rendition (client)"
+    },
+    {
+      "id": "r0183",
+      "name": "Nightmare tiers",
+      "category": "system term",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Peril tiers (client)"
+    },
+    {
+      "id": "r0184",
+      "name": "Oath of the Iron Sleep",
+      "category": "oath",
+      "doc": "heirlooms-curses",
+      "outcome": "renamed → Oath of the Cold Iron"
+    },
+    {
+      "id": "r0185",
+      "name": "Offertory Plate",
+      "category": "item",
+      "doc": "loot-sources",
+      "outcome": "renamed → Offertory Dish"
+    },
+    {
+      "id": "r0186",
+      "name": "Opener",
+      "category": "weapon or armour property",
+      "doc": "weapons",
+      "outcome": "renamed → Forestroke (client)"
+    },
+    {
+      "id": "r0187",
+      "name": "Opener rule",
+      "category": "system term",
+      "doc": "traps-locks",
+      "outcome": "renamed → First-spring rule"
+    },
+    {
+      "id": "r0188",
+      "name": "Opening Cry",
+      "category": "ability",
+      "doc": "herald-class",
+      "outcome": "renamed → Clarion"
+    },
+    {
+      "id": "r0189",
+      "name": "Other Dreamers",
+      "category": "event or curiosity",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Strangers"
+    },
+    {
+      "id": "r0190",
+      "name": "Overwatch",
+      "category": "weapon or armour property",
+      "doc": "weapons",
+      "outcome": "renamed → Ready Shot (client)"
+    },
+    {
+      "id": "r0191",
+      "name": "Oxblood Brigandine",
+      "category": "item",
+      "doc": "item-rolls",
+      "outcome": "renamed → Damask Brigandine"
+    },
+    {
+      "id": "r0192",
+      "name": "Pass by",
+      "category": "verb or action",
+      "doc": "heirlooms-curses",
+      "outcome": "renamed → Lower your head / Walk on"
+    },
+    {
+      "id": "r0193",
+      "name": "Pass-Keeper's Shield",
+      "category": "item",
+      "doc": "armour",
+      "outcome": "renamed → Toll-Taker's Shield (after the check)"
+    },
+    {
+      "id": "r0194",
+      "name": "Patched Twice",
+      "category": "item",
+      "doc": "starting-kits",
+      "outcome": "renamed → Leather Facing"
+    },
+    {
+      "id": "r0195",
+      "name": "Plain text for speakers",
+      "category": "report or setting",
+      "doc": "camp-hub",
+      "outcome": "renamed → Legible captions"
+    },
+    {
+      "id": "r0196",
+      "name": "Plumb Line",
+      "category": "item",
+      "doc": "exploration-information",
+      "outcome": "retired (rejected in XI; never shipped)"
+    },
+    {
+      "id": "r0197",
+      "name": "Plumb the Halls",
+      "category": "item",
+      "doc": "exploration-information",
+      "outcome": "retired (rejected in XI; never shipped)"
+    },
+    {
+      "id": "r0198",
+      "name": "Pointing Bone",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (renamed or rejected in CA T5, CA 4.2, A.2): Widow's Knot → Minder's Pebble; Second's Knot → Second's Hairpin; Swaddle Knot → Walnut; Ashen Knot → Ashen Bead; Calm Stone → Shy Stone; Pointing Bone → Acorn Cap; Hand-me-down Knot → Relay Thread (now Relay Ribbon, 5.8.20); Cradle Knot → Stay Thread (now Anchor Bead, 5.8.21); Lodestone, Crooked Finger, Duck Knot, Spite Knot and Scab Knot avoided"
+    },
+    {
+      "id": "r0199",
+      "name": "Porter's armband",
+      "category": "item",
+      "doc": "starting-kits",
+      "outcome": "renamed → Lamp-trimmer's armband"
+    },
+    {
+      "id": "r0200",
+      "name": "Press-Stone",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (rejected candidates, CA 5.3)"
+    },
+    {
+      "id": "r0201",
+      "name": "Prize Balloon",
+      "category": "item",
+      "doc": "loot-sources",
+      "outcome": "renamed → Fairground Balloon"
+    },
+    {
+      "id": "r0202",
+      "name": "Prompts (Prompts on boss actions)",
+      "category": "system term",
+      "doc": "boss-rooms",
+      "outcome": "renamed → Boss-action warnings"
+    },
+    {
+      "id": "r0203",
+      "name": "Protector (affix)",
+      "category": "enemy affix",
+      "doc": "enemies",
+      "outcome": "renamed → Guardian"
+    },
+    {
+      "id": "r0204",
+      "name": "Quiet camp",
+      "category": "report or setting",
+      "doc": "camp-hub",
+      "outcome": "renamed → No idle chatter"
+    },
+    {
+      "id": "r0205",
+      "name": "Quietus Knot",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "renamed → Snuffed Wick"
+    },
+    {
+      "id": "r0206",
+      "name": "Raging",
+      "category": "condition",
+      "doc": "conditions",
+      "outcome": "renamed → Frenzied (client)"
+    },
+    {
+      "id": "r0207",
+      "name": "Raise the Pennant",
+      "category": "spell",
+      "doc": "herald-class",
+      "outcome": "renamed → Hoist the Pennant"
+    },
+    {
+      "id": "r0208",
+      "name": "Read the Will",
+      "category": "ability",
+      "doc": "boss-rooms",
+      "outcome": "renamed → Read the Testament"
+    },
+    {
+      "id": "r0209",
+      "name": "Reading Hall",
+      "category": "place",
+      "doc": "boss-rooms",
+      "outcome": "renamed → the Lectern Hall"
+    },
+    {
+      "id": "r0210",
+      "name": "Ready",
+      "category": "UI surface",
+      "doc": "charm-abilities",
+      "outcome": "renamed → Ready, Used, Waiting, Stored, Idle"
+    },
+    {
+      "id": "r0211",
+      "name": "Reckless",
+      "category": "condition",
+      "doc": "conditions",
+      "outcome": "renamed → Heedless (client)"
+    },
+    {
+      "id": "r0212",
+      "name": "Rekindle",
+      "category": "ability",
+      "doc": "classes-concepts",
+      "outcome": "renamed → Take Comfort (after the check)"
+    },
+    {
+      "id": "r0213",
+      "name": "Relay Thread",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "renamed → Relay Ribbon"
+    },
+    {
+      "id": "r0214",
+      "name": "Relentless",
+      "category": "enemy affix",
+      "doc": "enemies",
+      "outcome": "renamed → Undying"
+    },
+    {
+      "id": "r0215",
+      "name": "Resistance Draught",
+      "category": "consumable",
+      "doc": "consumables",
+      "outcome": "renamed → Tempering Draught"
+    },
+    {
+      "id": "r0216",
+      "name": "Resistant (element)",
+      "category": "weapon or armour property",
+      "doc": "armour",
+      "outcome": "renamed → <element>-proof (e.g. Fireproof) (client)"
+    },
+    {
+      "id": "r0217",
+      "name": "Resisting (type)",
+      "category": "condition",
+      "doc": "conditions",
+      "outcome": "renamed → Resistant (type) on screen (client)"
+    },
+    {
+      "id": "r0218",
+      "name": "Resolve Broken",
+      "category": "UI surface",
+      "doc": "boss-rooms",
+      "outcome": "renamed → Resolve Spent"
+    },
+    {
+      "id": "r0219",
+      "name": "Restricted Section",
+      "category": "room or terrain",
+      "doc": "traps-locks",
+      "outcome": "renamed → The Chained Shelves"
+    },
+    {
+      "id": "r0220",
+      "name": "Returns Bell",
+      "category": "trap or lock",
+      "doc": "boss-rooms",
+      "outcome": "renamed → Returns Stamp"
+    },
+    {
+      "id": "r0221",
+      "name": "Ring key",
+      "category": "item",
+      "doc": "traps-locks",
+      "outcome": "renamed → Ringmaster's Key"
+    },
+    {
+      "id": "r0222",
+      "name": "Ringwarden's Shirt",
+      "category": "item",
+      "doc": "armour",
+      "outcome": "renamed → Linkmender's Shirt"
+    },
+    {
+      "id": "r0223",
+      "name": "Rood Screen gate",
+      "category": "trap or lock",
+      "doc": "traps-locks",
+      "outcome": "renamed → Rood Screen door"
+    },
+    {
+      "id": "r0224",
+      "name": "Rooted",
+      "category": "condition",
+      "doc": "conditions",
+      "outcome": "renamed → Tangled (client)"
+    },
+    {
+      "id": "r0225",
+      "name": "Rose Window",
+      "category": "room or terrain",
+      "doc": "traps-locks",
+      "outcome": "renamed → The Tracery Loft"
+    },
+    {
+      "id": "r0226",
+      "name": "Scab Knot",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (renamed or rejected in CA T5, CA 4.2, A.2): Widow's Knot → Minder's Pebble; Second's Knot → Second's Hairpin; Swaddle Knot → Walnut; Ashen Knot → Ashen Bead; Calm Stone → Shy Stone; Pointing Bone → Acorn Cap; Hand-me-down Knot → Relay Thread (now Relay Ribbon, 5.8.20); Cradle Knot → Stay Thread (now Anchor Bead, 5.8.21); Lodestone, Crooked Finger, Duck Knot, Spite Knot and Scab Knot avoided"
+    },
+    {
+      "id": "r0227",
+      "name": "Scorching Rays",
+      "category": "spell",
+      "doc": "consumables",
+      "outcome": "renamed → Rays (fire)"
+    },
+    {
+      "id": "r0228",
+      "name": "Scrollwright's Token",
+      "category": "trinket",
+      "doc": "trinkets",
+      "outcome": "renamed → Scrollwright's Fob"
+    },
+    {
+      "id": "r0229",
+      "name": "Sculpt",
+      "category": "ability",
+      "doc": "classes-concepts",
+      "outcome": "renamed → Whittle"
+    },
+    {
+      "id": "r0230",
+      "name": "Sculpt II",
+      "category": "ability",
+      "doc": "arcanist-class",
+      "outcome": "renamed → Whittle II (N-J)"
+    },
+    {
+      "id": "r0231",
+      "name": "Second Nature",
+      "category": "ability",
+      "doc": "character-stat-model",
+      "outcome": "renamed → Old Hand"
+    },
+    {
+      "id": "r0232",
+      "name": "Second Wind",
+      "category": "ability",
+      "doc": "ability-resource-model",
+      "outcome": "renamed → Patch Up (after the check)"
+    },
+    {
+      "id": "r0233",
+      "name": "Second Wind (fighter-type rest tool)",
+      "category": "ability",
+      "doc": "death-healing",
+      "outcome": "renamed → Patch Up (after the check)"
+    },
+    {
+      "id": "r0234",
+      "name": "Second's Knot",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (renamed or rejected in CA T5, CA 4.2, A.2): Widow's Knot → Minder's Pebble; Second's Knot → Second's Hairpin; Swaddle Knot → Walnut; Ashen Knot → Ashen Bead; Calm Stone → Shy Stone; Pointing Bone → Acorn Cap; Hand-me-down Knot → Relay Thread (now Relay Ribbon, 5.8.20); Cradle Knot → Stay Thread (now Anchor Bead, 5.8.21); Lodestone, Crooked Finger, Duck Knot, Spite Knot and Scab Knot avoided"
+    },
+    {
+      "id": "r0235",
+      "name": "Seeded night",
+      "category": "UI surface",
+      "doc": "camp-hub",
+      "outcome": "renamed → Play a run code (hub row)"
+    },
+    {
+      "id": "r0236",
+      "name": "Seeded run (launcher field and entry screen)",
+      "category": "UI surface",
+      "doc": "seeds-validation",
+      "outcome": "renamed → Run code (launcher: 'Play a run code')"
+    },
+    {
+      "id": "r0237",
+      "name": "Set",
+      "category": "verb or action",
+      "doc": "weapons",
+      "outcome": "renamed → Receive (client)"
+    },
+    {
+      "id": "r0238",
+      "name": "Set aside",
+      "category": "UI surface",
+      "doc": "heirlooms-curses",
+      "outcome": "renamed → Not this time"
+    },
+    {
+      "id": "r0239",
+      "name": "Shatter",
+      "category": "weapon or armour property",
+      "doc": "weapons",
+      "outcome": "renamed → Fracturing (client)"
+    },
+    {
+      "id": "r0240",
+      "name": "Shield kit",
+      "category": "UI surface",
+      "doc": "herald-class",
+      "outcome": "renamed → Shield hand / Focus hand (Totem kit; agreed, Q2)"
+    },
+    {
+      "id": "r0241",
+      "name": "Shockwave",
+      "category": "spell",
+      "doc": "consumables",
+      "outcome": "renamed → Upheaval (after the check)"
+    },
+    {
+      "id": "r0242",
+      "name": "Sight-blight",
+      "category": "malady",
+      "doc": "conditions",
+      "outcome": "renamed → Sight-rot"
+    },
+    {
+      "id": "r0243",
+      "name": "Signature item",
+      "category": "item family",
+      "doc": "items-inventory",
+      "outcome": "renamed → the boss's prize (display) (client)"
+    },
+    {
+      "id": "r0244",
+      "name": "Silk mildew moth",
+      "category": "enemy type",
+      "doc": "room-terrain",
+      "outcome": "deleted in part: the Heart sleeping-draught nurse example is deleted (A.1; NP-10, NP-19); the rest final as written"
+    },
+    {
+      "id": "r0245",
+      "name": "Sitter",
+      "category": "NPC",
+      "doc": "camp-hub",
+      "outcome": "renamed → Roll-Reader"
+    },
+    {
+      "id": "r0246",
+      "name": "Skirmisher's Spear",
+      "category": "item",
+      "doc": "weapons",
+      "outcome": "renamed → Forager's Spear (client)"
+    },
+    {
+      "id": "r0247",
+      "name": "Skyfall",
+      "category": "spell",
+      "doc": "arcanist-class",
+      "outcome": "renamed → Highfall"
+    },
+    {
+      "id": "r0248",
+      "name": "Sleeping Ward",
+      "category": "system term",
+      "doc": "encounter-placement",
+      "outcome": "renamed → the Heap"
+    },
+    {
+      "id": "r0249",
+      "name": "Slot Recovery",
+      "category": "ability",
+      "doc": "ability-resource-model",
+      "outcome": "renamed → Slot Renewal (client)"
+    },
+    {
+      "id": "r0250",
+      "name": "Slot Recovery 2",
+      "category": "ability",
+      "doc": "ability-resource-model",
+      "outcome": "renamed → Slot Renewal 2 (client; agreed, Q5; upgrades keep their name, N-J)"
+    },
+    {
+      "id": "r0251",
+      "name": "Slowing",
+      "category": "spell",
+      "doc": "consumables",
+      "outcome": "renamed → Dragfoot"
+    },
+    {
+      "id": "r0252",
+      "name": "Sluice gates",
+      "category": "room or terrain",
+      "doc": "floor-layout",
+      "outcome": "renamed → sluice doors"
+    },
+    {
+      "id": "r0253",
+      "name": "Slumber",
+      "category": "spell",
+      "doc": "consumables",
+      "outcome": "renamed → Drowse"
+    },
+    {
+      "id": "r0254",
+      "name": "Smother",
+      "category": "ability",
+      "doc": "boss-rooms",
+      "outcome": "renamed → Tuck In stays; fallback Tuck Tight (after the check)"
+    },
+    {
+      "id": "r0255",
+      "name": "Snare (Kennel trap)",
+      "category": "trap or lock",
+      "doc": "traps-locks",
+      "outcome": "renamed → Wire Loop"
+    },
+    {
+      "id": "r0256",
+      "name": "Sound the wall",
+      "category": "verb or action",
+      "doc": "floor-layout",
+      "outcome": "renamed → Tap the wall"
+    },
+    {
+      "id": "r0257",
+      "name": "Spare",
+      "category": "ability",
+      "doc": "weapons",
+      "outcome": "renamed → Withhold (client)"
+    },
+    {
+      "id": "r0258",
+      "name": "Spear Lunge",
+      "category": "ability",
+      "doc": "boss-rooms",
+      "outcome": "renamed → Spear Through (after the check)"
+    },
+    {
+      "id": "r0259",
+      "name": "Spent",
+      "category": "UI surface",
+      "doc": "charm-abilities",
+      "outcome": "renamed → Ready, Used, Waiting, Stored, Idle"
+    },
+    {
+      "id": "r0260",
+      "name": "Spite Knot",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (renamed or rejected in CA T5, CA 4.2, A.2): Widow's Knot → Minder's Pebble; Second's Knot → Second's Hairpin; Swaddle Knot → Walnut; Ashen Knot → Ashen Bead; Calm Stone → Shy Stone; Pointing Bone → Acorn Cap; Hand-me-down Knot → Relay Thread (now Relay Ribbon, 5.8.20); Cradle Knot → Stay Thread (now Anchor Bead, 5.8.21); Lodestone, Crooked Finger, Duck Knot, Spite Knot and Scab Knot avoided"
+    },
+    {
+      "id": "r0261",
+      "name": "Spring Tide (Choir Omen)",
+      "category": "system term",
+      "doc": "hazards",
+      "outcome": "renamed → King Tide"
+    },
+    {
+      "id": "r0262",
+      "name": "Spur",
+      "category": "ability",
+      "doc": "classes-concepts",
+      "outcome": "renamed → Urge"
+    },
+    {
+      "id": "r0263",
+      "name": "Stair-Worn Byrnie",
+      "category": "heirloom",
+      "doc": "heirlooms-curses",
+      "outcome": "renamed → Road-Scuffed Mail"
+    },
+    {
+      "id": "r0264",
+      "name": "Stairhead",
+      "category": "room or terrain",
+      "doc": "floor-layout",
+      "outcome": "renamed → the Downstair"
+    },
+    {
+      "id": "r0265",
+      "name": "Stay Thread",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "renamed → Anchor Bead"
+    },
+    {
+      "id": "r0266",
+      "name": "Steadfast",
+      "category": "enemy affix",
+      "doc": "enemies",
+      "outcome": "renamed → Dauntless"
+    },
+    {
+      "id": "r0267",
+      "name": "Steady Aim",
+      "category": "weapon or armour property",
+      "doc": "weapons",
+      "outcome": "renamed → Settled Aim (client)"
+    },
+    {
+      "id": "r0268",
+      "name": "Stoneskin Draught",
+      "category": "consumable",
+      "doc": "consumables",
+      "outcome": "renamed → Slate Draught"
+    },
+    {
+      "id": "r0269",
+      "name": "Strongman",
+      "category": "enemy type",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → Weightlifter"
+    },
+    {
+      "id": "r0270",
+      "name": "Strongman's Ring",
+      "category": "place",
+      "doc": "boss-rooms",
+      "outcome": "renamed → the Lifting Stage"
+    },
+    {
+      "id": "r0271",
+      "name": "Sure Grip",
+      "category": "weapon or armour property",
+      "doc": "weapons",
+      "outcome": "renamed → Fast Grip (client)"
+    },
+    {
+      "id": "r0272",
+      "name": "Surge",
+      "category": "ability",
+      "doc": "ability-resource-model",
+      "outcome": "renamed → Onslaught (client)"
+    },
+    {
+      "id": "r0273",
+      "name": "Swaddle Knot",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (renamed or rejected in CA T5, CA 4.2, A.2): Widow's Knot → Minder's Pebble; Second's Knot → Second's Hairpin; Swaddle Knot → Walnut; Ashen Knot → Ashen Bead; Calm Stone → Shy Stone; Pointing Bone → Acorn Cap; Hand-me-down Knot → Relay Thread (now Relay Ribbon, 5.8.20); Cradle Knot → Stay Thread (now Anchor Bead, 5.8.21); Lodestone, Crooked Finger, Duck Knot, Spite Knot and Scab Knot avoided"
+    },
+    {
+      "id": "r0274",
+      "name": "Swallowed bauble",
+      "category": "item",
+      "doc": "loot-sources",
+      "outcome": "renamed → Gut-Lodged bauble"
+    },
+    {
+      "id": "r0275",
+      "name": "Tally-stick",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (rejected candidates, CA 5.3)"
+    },
+    {
+      "id": "r0276",
+      "name": "Tempest",
+      "category": "system term",
+      "doc": "arcanist-class",
+      "outcome": "renamed → Weatherwork"
+    },
+    {
+      "id": "r0277",
+      "name": "The Bile Low (Gut tableau)",
+      "category": "hazard",
+      "doc": "hazards",
+      "outcome": "renamed → The Gall Low (after the check)"
+    },
+    {
+      "id": "r0278",
+      "name": "The Dreamer Turns Over",
+      "category": "hazard",
+      "doc": "hazards",
+      "outcome": "renamed → The Bed Turns Over (client)"
+    },
+    {
+      "id": "r0279",
+      "name": "The Last Evening (Carnival Mood display line)",
+      "category": "system term",
+      "doc": "hazards",
+      "outcome": "renamed → Last Show"
+    },
+    {
+      "id": "r0280",
+      "name": "The Last Hour",
+      "category": "room or terrain",
+      "doc": "floor-layout",
+      "outcome": "renamed → The Sentence Corridor"
+    },
+    {
+      "id": "r0281",
+      "name": "The Lockdown Lever",
+      "category": "hazard",
+      "doc": "hazards",
+      "outcome": "renamed → The Lockdown Crank"
+    },
+    {
+      "id": "r0282",
+      "name": "The Long Table",
+      "category": "place",
+      "doc": "floor-layout",
+      "outcome": "renamed → The Groaning Board (after the check)"
+    },
+    {
+      "id": "r0283",
+      "name": "The Mourning Cord",
+      "category": "hazard",
+      "doc": "hazards",
+      "outcome": "renamed → The Mourning Ribbon"
+    },
+    {
+      "id": "r0284",
+      "name": "The Silk Archive (the Silk)",
+      "category": "theme or floor",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → The Cobweb Archive (short form: the Archive) (client)"
+    },
+    {
+      "id": "r0285",
+      "name": "The Stomach",
+      "category": "room or terrain",
+      "doc": "traps-locks",
+      "outcome": "renamed → The Craw"
+    },
+    {
+      "id": "r0286",
+      "name": "Thorned",
+      "category": "enemy affix",
+      "doc": "enemies",
+      "outcome": "renamed → Retaliating"
+    },
+    {
+      "id": "r0287",
+      "name": "Thumb-Worn Totem",
+      "category": "heirloom",
+      "doc": "heirlooms-curses",
+      "outcome": "renamed → Thumb-Worn Tipstaff (client)"
+    },
+    {
+      "id": "r0288",
+      "name": "Thunderclap Greatclub",
+      "category": "item",
+      "doc": "weapons",
+      "outcome": "renamed → Thudding Greatclub (client)"
+    },
+    {
+      "id": "r0289",
+      "name": "Thunderstone",
+      "category": "consumable",
+      "doc": "consumables",
+      "outcome": "renamed → Blowback Jar"
+    },
+    {
+      "id": "r0290",
+      "name": "Tide High",
+      "category": "hazard",
+      "doc": "hazards",
+      "outcome": "renamed → Flood Stage"
+    },
+    {
+      "id": "r0291",
+      "name": "Token (charm display word)",
+      "category": "system term",
+      "doc": "trinkets",
+      "outcome": "dropped as a display word; object noun shown; ◈ spoken \"stored moment\"; \"Fob\" in two item names"
+    },
+    {
+      "id": "r0292",
+      "name": "Torc of Seasons",
+      "category": "item family",
+      "doc": "trinkets",
+      "outcome": "renamed → Seasonal Torc"
+    },
+    {
+      "id": "r0293",
+      "name": "Totem",
+      "category": "item family",
+      "doc": "weapons",
+      "outcome": "renamed → Tipstaff (focus kind) (client)"
+    },
+    {
+      "id": "r0294",
+      "name": "Totem kit",
+      "category": "UI surface",
+      "doc": "herald-class",
+      "outcome": "renamed → Shield hand / Focus hand (Totem kit; agreed, Q2)"
+    },
+    {
+      "id": "r0295",
+      "name": "Trace on glimpse",
+      "category": "system term",
+      "doc": "exploration-information",
+      "outcome": "renamed → Trace on sight"
+    },
+    {
+      "id": "r0296",
+      "name": "Trick Shot",
+      "category": "ability",
+      "doc": "shade-class",
+      "outcome": "renamed → Foul Play (after the check)"
+    },
+    {
+      "id": "r0297",
+      "name": "Trinkets (slot row)",
+      "category": "UI surface",
+      "doc": "items-inventory",
+      "outcome": "renamed → Worn items"
+    },
+    {
+      "id": "r0298",
+      "name": "Two Wings (H)",
+      "category": "place",
+      "doc": "floor-layout",
+      "outcome": "renamed → Split Block"
+    },
+    {
+      "id": "r0299",
+      "name": "Unbreakable",
+      "category": "enemy affix",
+      "doc": "enemies",
+      "outcome": "renamed → Unbending"
+    },
+    {
+      "id": "r0300",
+      "name": "Underpillow",
+      "category": "heirloom",
+      "doc": "charm-abilities",
+      "outcome": "retired (renamed the Bobbin in CA T4)"
+    },
+    {
+      "id": "r0301",
+      "name": "Undertone",
+      "category": "ability",
+      "doc": "herald-class",
+      "outcome": "renamed → Ache"
+    },
+    {
+      "id": "r0302",
+      "name": "Undertone",
+      "category": "system term",
+      "doc": "classes-concepts",
+      "outcome": "renamed → Ache"
+    },
+    {
+      "id": "r0303",
+      "name": "Unshaken",
+      "category": "weapon or armour property",
+      "doc": "armour",
+      "outcome": "renamed → Unflinching (client)"
+    },
+    {
+      "id": "r0304",
+      "name": "Upended (former name)",
+      "category": "condition",
+      "doc": "boss-rooms",
+      "outcome": "renamed → Sprawled"
+    },
+    {
+      "id": "r0305",
+      "name": "Vampiric",
+      "category": "enemy affix",
+      "doc": "enemies",
+      "outcome": "renamed → Leeching"
+    },
+    {
+      "id": "r0306",
+      "name": "Vendor Chalk",
+      "category": "item",
+      "doc": "exploration-information",
+      "outcome": "retired (rejected in XI; never shipped)"
+    },
+    {
+      "id": "r0307",
+      "name": "Venom Arrows",
+      "category": "consumable",
+      "doc": "consumables",
+      "outcome": "renamed → Poison Oil / Poison Arrows"
+    },
+    {
+      "id": "r0308",
+      "name": "Venom Oil",
+      "category": "consumable",
+      "doc": "consumables",
+      "outcome": "renamed → Poison Oil / Poison Arrows"
+    },
+    {
+      "id": "r0309",
+      "name": "Viaticum",
+      "category": "system term",
+      "doc": "loot-economy",
+      "outcome": "renamed → Parting Fare (client)"
+    },
+    {
+      "id": "r0310",
+      "name": "Volley",
+      "category": "weapon or armour property",
+      "doc": "weapons",
+      "outcome": "renamed → Arrowfall (client)"
+    },
+    {
+      "id": "r0311",
+      "name": "Waiting",
+      "category": "UI surface",
+      "doc": "charm-abilities",
+      "outcome": "renamed → Ready, Used, Waiting, Stored, Idle"
+    },
+    {
+      "id": "r0312",
+      "name": "Wake Order",
+      "category": "system term",
+      "doc": "encounter-placement",
+      "outcome": "renamed → Alarm Order"
+    },
+    {
+      "id": "r0313",
+      "name": "Wakes at 33% (reserve wake chip)",
+      "category": "UI surface",
+      "doc": "boss-rooms",
+      "outcome": "renamed → Joins at 33%"
+    },
+    {
+      "id": "r0314",
+      "name": "Wand of Snaring",
+      "category": "item",
+      "doc": "consumables",
+      "outcome": "renamed → Wand of Fetters"
+    },
+    {
+      "id": "r0315",
+      "name": "Wardwood Staff",
+      "category": "item",
+      "doc": "weapons",
+      "outcome": "renamed → Rowan Staff (client)"
+    },
+    {
+      "id": "r0316",
+      "name": "Wary",
+      "category": "system term",
+      "doc": "enemies",
+      "outcome": "renamed → Watchful (client)"
+    },
+    {
+      "id": "r0317",
+      "name": "Waxed String",
+      "category": "item",
+      "doc": "starting-kits",
+      "outcome": "renamed → Linen Whipping"
+    },
+    {
+      "id": "r0318",
+      "name": "Way Back",
+      "category": "room or terrain",
+      "doc": "floor-layout",
+      "outcome": "renamed → Return Latch"
+    },
+    {
+      "id": "r0319",
+      "name": "Wayfarer's Pack",
+      "category": "other",
+      "doc": "companions",
+      "outcome": "renamed → Wayfarer's Belt"
+    },
+    {
+      "id": "r0320",
+      "name": "Wayward",
+      "category": "system term",
+      "doc": "item-rolls",
+      "outcome": "renamed → Windblown"
+    },
+    {
+      "id": "r0321",
+      "name": "Weathered",
+      "category": "weapon or armour property",
+      "doc": "trinkets",
+      "outcome": "renamed → Fleece-Lined (client)"
+    },
+    {
+      "id": "r0322",
+      "name": "Weathered Cloak",
+      "category": "item family",
+      "doc": "trinkets",
+      "outcome": "renamed → Fleece-Lined Cloak (client)"
+    },
+    {
+      "id": "r0323",
+      "name": "Weathered Cloak",
+      "category": "trinket",
+      "doc": "armour",
+      "outcome": "renamed → Fleece-Lined Cloak (client)"
+    },
+    {
+      "id": "r0324",
+      "name": "Weighted plate",
+      "category": "system term",
+      "doc": "traps-locks",
+      "outcome": "renamed → pressure slab"
+    },
+    {
+      "id": "r0325",
+      "name": "Widow's Knot",
+      "category": "charm",
+      "doc": "charm-abilities",
+      "outcome": "retired (renamed or rejected in CA T5, CA 4.2, A.2): Widow's Knot → Minder's Pebble; Second's Knot → Second's Hairpin; Swaddle Knot → Walnut; Ashen Knot → Ashen Bead; Calm Stone → Shy Stone; Pointing Bone → Acorn Cap; Hand-me-down Knot → Relay Thread (now Relay Ribbon, 5.8.20); Cradle Knot → Stay Thread (now Anchor Bead, 5.8.21); Lodestone, Crooked Finger, Duck Knot, Spite Knot and Scab Knot avoided"
+    },
+    {
+      "id": "r0326",
+      "name": "Worn Scabbard",
+      "category": "item",
+      "doc": "starting-kits",
+      "outcome": "renamed → Old Scabbard"
+    },
+    {
+      "id": "r0327",
+      "name": "a token earned from a named moment in the fight",
+      "category": "system term",
+      "doc": "charm-abilities",
+      "outcome": "renamed → \"Charms hold moments: …\" (client)"
+    },
+    {
+      "id": "r0328",
+      "name": "ahead of the dream",
+      "category": "UI surface",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → the Forecourt Top-up line (5.3.32)"
+    },
+    {
+      "id": "r0329",
+      "name": "always",
+      "category": "report or setting",
+      "doc": "ability-resource-model",
+      "outcome": "renamed → Always / Only if it matters / While half full / Never / Ask me (ids internal; 5.9.14)"
+    },
+    {
+      "id": "r0330",
+      "name": "background perk",
+      "category": "system term",
+      "doc": "dungeon-rpg",
+      "outcome": "renamed → Calling perk (client)"
+    },
+    {
+      "id": "r0331",
+      "name": "bell tripwire",
+      "category": "trap or lock",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → keyring tripwire"
+    },
+    {
+      "id": "r0332",
+      "name": "bellpull (Cord)",
+      "category": "hazard",
+      "doc": "hazards",
+      "outcome": "renamed → service pull"
+    },
+    {
+      "id": "r0333",
+      "name": "bile square",
+      "category": "room or terrain",
+      "doc": "run-structure-themes",
+      "outcome": "renamed → gall square (after the check)"
+    },
+    {
+      "id": "r0334",
+      "name": "coin ledger",
+      "category": "UI surface",
+      "doc": "loot-economy",
+      "outcome": "renamed → \"the next camp sells rare\" (agreed, Q3; 5.6.6); the tag and ledger final as written"
+    },
+    {
+      "id": "r0335",
+      "name": "dormant (property)",
+      "category": "system term",
+      "doc": "items-inventory",
+      "outcome": "renamed → untold (client)"
+    },
+    {
+      "id": "r0336",
+      "name": "ifItChangesOutcome",
+      "category": "report or setting",
+      "doc": "ability-resource-model",
+      "outcome": "renamed → Always / Only if it matters / While half full / Never / Ask me (ids internal; 5.9.14)"
+    },
+    {
+      "id": "r0337",
+      "name": "never",
+      "category": "report or setting",
+      "doc": "ability-resource-model",
+      "outcome": "renamed → Always / Only if it matters / While half full / Never / Ask me (ids internal; 5.9.14)"
+    },
+    {
+      "id": "r0338",
+      "name": "or one button you spend",
+      "category": "system term",
+      "doc": "charm-abilities",
+      "outcome": "renamed → \"Charms hold moments: …\" (client)"
+    },
+    {
+      "id": "r0339",
+      "name": "ragged (tint)",
+      "category": "UI surface",
+      "doc": "enemies",
+      "outcome": "renamed → (no word: tint plus arrow; tooltip 'weaker than usual')"
+    },
+    {
+      "id": "r0340",
+      "name": "seeded (run-history mark)",
+      "category": "UI surface",
+      "doc": "seeds-validation",
+      "outcome": "renamed → run code (mark)"
+    },
+    {
+      "id": "r0341",
+      "name": "spent field",
+      "category": "UI surface",
+      "doc": "exploration-information",
+      "outcome": "renamed → emptied field (after the check)"
+    },
+    {
+      "id": "r0342",
+      "name": "talisman",
+      "category": "item family",
+      "doc": "consumables",
+      "outcome": "renamed → failsafe (display; the id `talisman` stays) (after the check)"
+    },
+    {
+      "id": "r0343",
+      "name": "talisman (dropped charm display word)",
+      "category": "system term",
+      "doc": "trinkets",
+      "outcome": "retired as a charm display word (CA-12); the CN item family shows failsafe (after the check)"
+    },
+    {
+      "id": "r0344",
+      "name": "the Frets",
+      "category": "malady",
+      "doc": "heirlooms-curses",
+      "outcome": "retired / held: (retired spare)"
+    },
+    {
+      "id": "r0345",
+      "name": "the Stair",
+      "category": "UI surface",
+      "doc": "camp-hub",
+      "outcome": "renamed → the Banister"
+    },
+    {
+      "id": "r0346",
+      "name": "the keeper",
+      "category": "NPC",
+      "doc": "camp-hub",
+      "outcome": "renamed → the Pedlar"
+    },
+    {
+      "id": "r0347",
+      "name": "the pen bar",
+      "category": "trap or lock",
+      "doc": "boss-rooms",
+      "outcome": "renamed → the pen board"
+    },
+    {
+      "id": "r0348",
+      "name": "trophy pole",
+      "category": "other",
+      "doc": "camp-hub",
+      "outcome": "renamed → ribbon post"
+    },
+    {
+      "id": "r0349",
+      "name": "version-crossed mark",
+      "category": "UI surface",
+      "doc": "seeds-validation",
+      "outcome": "renamed → older build"
+    },
+    {
+      "id": "r0350",
+      "name": "veteran (tint)",
+      "category": "UI surface",
+      "doc": "enemies",
+      "outcome": "renamed → (no word: tint plus arrow; tooltip 'stronger than usual')"
+    },
+    {
+      "id": "r0351",
+      "name": "whilePoolAtLeastHalf",
+      "category": "report or setting",
+      "doc": "ability-resource-model",
+      "outcome": "renamed → Always / Only if it matters / While half full / Never / Ask me (ids internal; 5.9.14)"
+    }
+  ]
+}

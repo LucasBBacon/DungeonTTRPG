@@ -92,7 +92,7 @@ public static class ContentLoader
             {
                 throw new ContentLoadException(
                     fileName,
-                    ContentJson.Member(ContentJson.Item("$." + kind.ArrayName, i), "id"),
+                    ContentJson.Member(ContentJson.Item("$." + kind.ArrayName, i), kind.IdField),
                     $"id \"{records[i].Id}\" is used twice.");
             }
 

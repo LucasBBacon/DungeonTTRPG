@@ -100,6 +100,12 @@ internal static class ContentJson
         return value;
     }
 
+    /// <summary>
+    /// A required display string: any UTF-8 text, not limited to ASCII, and excluded from
+    /// <c>manifestHash</c> (SV 4.6). NFC is checked outside Core, which cannot normalise (plan call 8).
+    /// </summary>
+    public static string Display(ContentFile file, string field, string? s) => Need(file, field, s);
+
     /// <summary>An optional rules string: absent or null gives null, otherwise as <see cref="RuleString"/>.</summary>
     public static string? OptionalRuleString(ContentFile file, string field, string? s) =>
         s is null ? null : RuleString(file, field, s);
