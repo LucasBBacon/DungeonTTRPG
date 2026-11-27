@@ -3,7 +3,8 @@ using Dungeon.Core.Content;
 using Dungeon.Sim.Tools;
 
 // Commands: `name-list` exports the naming-pass appendix to content/naming (owner ruling 2);
-// `content-hashes` writes src/Core/Content/ContentHashes.g.cs from content/ (owner ruling 4).
+// `content-hashes` writes src/Core/Content/ContentHashes.g.cs from content/ (owner ruling 4);
+// `stream-handles` writes src/Core/Random/StreamHandles.g.cs from content/registry/streams.json (M1-05 owner ruling).
 if (args.Length == 1 && args[0] == "name-list")
 {
     string root = FindRepoRoot();
@@ -33,9 +34,19 @@ if (args.Length == 1 && args[0] == "content-hashes")
     return 0;
 }
 
+if (args.Length == 1 && args[0] == "stream-handles")
+{
+    string root = FindRepoRoot();
+    var set = ContentLoader.Load(ContentDirectory.Read(Path.Combine(root, "content")));
+    var utf8 = new UTF8Encoding(false, throwOnInvalidBytes: true);
+    File.WriteAllBytes(Path.Combine(root, "src", "Core", "Random", "StreamHandles.g.cs"), utf8.GetBytes(StreamHandlesWriter.Write(set)));
+    Console.WriteLine($"Wrote StreamHandles.g.cs from {set.All<Dungeon.Core.StreamRow>().Length} stream rows.");
+    return 0;
+}
+
 if (args.Length > 0)
 {
-    Console.Error.WriteLine($"Unknown command: {string.Join(' ', args)}. Commands: name-list, content-hashes.");
+    Console.Error.WriteLine($"Unknown command: {string.Join(' ', args)}. Commands: name-list, content-hashes, stream-handles.");
     return 1;
 }
 

@@ -90,10 +90,7 @@ public sealed class StreamRowsCheck : IStaticCheck
     /// True if <paramref name="row"/> is a keyed-hash domain: a <c>keyed</c> row whose parent is a <c>keyed</c> node
     /// (plan call 3), such as <c>h:object</c> under <c>checks</c>.
     /// </summary>
-    internal static bool IsDomain(StreamRow row, ContentSet content) =>
-        row.Class == CountClass.Keyed
-        && row.Parent is { } parent
-        && content.Find<StreamRow>(parent) is { Class: CountClass.Keyed };
+    internal static bool IsDomain(StreamRow row, ContentSet content) => StreamRegistry.IsDomain(content, row);
 
     // The id plan call 2 gives a row: the parent's id, the label, then one {name} or {name:} segment per index.
     private static string ExpectedId(StreamRow row)
