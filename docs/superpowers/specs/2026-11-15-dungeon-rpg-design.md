@@ -448,14 +448,16 @@ editor tool or C's adapter can be added later without touching the core.
 |---|---|---|
 | `src/Core` | C# class library, no Godot references | All rules and state |
 | `src/Sim` | C# console app | Runs headless fights and runs for balance |
+| `src/Analyzers` | C# Roslyn analyzer, `netstandard2.0` | Enforces the determinism rules on Core at compile time (SV DS11, 9.5) |
 | `tests/Core.Tests` | C# test project | Unit, property and replay tests |
+| `tests/Analyzers.Tests` | C# test project | Analyzer fixtures |
 | `dungeon-ttrpg/` | Godot project (`DungeonTTRPG.csproj`) | Rendering, input, audio, UI |
 | `content/` | JSON data files | Classes, species, feats, items, monsters, tables |
 
 `Core` targets the .NET version required by the Godot 4 release the team
 picks (Godot 4.7, .NET 8). `dungeon-ttrpg/` references `Core` as a
 project reference and is not part of `Dungeon.sln`; CI builds it
-separately. `src/Sim` and `content/` are created by roadmap step M1-01.
+separately. `src/Sim` and `content/` are created by roadmap step M1-01. `src/Analyzers` and `tests/Analyzers.Tests` are added by roadmap step M1-01.
 (Agreed 2026-11-24, roadmap D-01: the design follows the repository's
 existing folder name, which earlier drafts called `game/`.)
 

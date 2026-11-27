@@ -57,7 +57,9 @@ src/Core/                   Dungeon.Core: the rules engine (no Godot)
   Queries/                  Read-only questions, e.g. pathfinding
   Random/                   Seeded PCG32 generator
   Persistence/              Versioned snapshots, command logs, replay
+src/Sim/                    Dungeon.Sim: console app for headless simulations (balance)
 tests/Core.Tests/           xUnit tests, including architecture rules
+content/                    JSON data files: classes, species, feats, items, monsters, tables
 dungeon-ttrpg/              Godot 4.7 C# project (display layer)
   scripts/                  GameController, BoardView, UnitView, IsoCamera, DecisionPanel
   addons/godot_ai/          Third-party Godot AI (MCP) editor plugin, MIT
