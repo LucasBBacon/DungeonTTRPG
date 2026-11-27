@@ -38,6 +38,14 @@ public class ArithmeticTests
     [InlineData("long", "_ = a / 2;")]
     [InlineData("int", "_ = System.Math.DivRem(a, b);")]
     [InlineData("long", "_ = System.Math.DivRem(a, b);")]
+    [InlineData("int?", "_ = a / b;")]
+    [InlineData("int?", "_ = a % b;")]
+    [InlineData("int?", "a /= b;")]
+    [InlineData("int?", "a %= b;")]
+    [InlineData("long?", "_ = a / b;")]
+    [InlineData("long?", "_ = a % b;")]
+    [InlineData("long?", "a /= b;")]
+    [InlineData("long?", "a %= b;")]
     public void Signed_division_is_reported(string type, string statement)
     {
         var d = Harness.Run($"public static class C {{ public static void M({type} a, {type} b) {{ {statement} }} }}");
@@ -47,6 +55,7 @@ public class ArithmeticTests
     [Theory]
     [InlineData("uint", "_ = a / b; _ = a % b; a /= b; a %= b;")]
     [InlineData("ulong", "_ = a / b; _ = a % b; a /= b; a %= b;")]
+    [InlineData("uint?", "_ = a / b; _ = a % b; a /= b; a %= b;")]
     [InlineData("uint", "_ = a / 2; _ = a % 2; a /= 2; a %= 2;")]
     [InlineData("int", "const int x = -7 / 2; const int y = -7 % 2; _ = x + y;")]
     [InlineData("int", "_ = Dungeon.Core.IntMath.FloorDiv(a, b); _ = Dungeon.Core.IntMath.FloorMod(a, b);")]

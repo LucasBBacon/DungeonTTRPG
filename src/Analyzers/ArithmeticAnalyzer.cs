@@ -121,12 +121,18 @@ public sealed class ArithmeticAnalyzer : DiagnosticAnalyzer
     private static string OperatorText(BinaryOperatorKind kind, bool compound) =>
         (kind == BinaryOperatorKind.Divide ? "'/" : "'%") + (compound ? "='" : "'");
 
+    /// <summary>True for sbyte, short, int, long and nint, and for their lifted <c>Nullable&lt;T&gt;</c> forms.</summary>
     private static bool IsSignedIntegral(ITypeSymbol? type) =>
-        type?.SpecialType is SpecialType.System_SByte
+        UnwrapNullable(type)?.SpecialType is SpecialType.System_SByte
             or SpecialType.System_Int16
             or SpecialType.System_Int32
             or SpecialType.System_Int64
             or SpecialType.System_IntPtr;
+
+    private static ITypeSymbol? UnwrapNullable(ITypeSymbol? type) =>
+        type is INamedTypeSymbol { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T } nullable
+            ? nullable.TypeArguments[0]
+            : type;
 
     private static bool IsInsideIntMath(ISymbol? symbol)
     {
