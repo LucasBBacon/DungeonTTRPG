@@ -45,11 +45,17 @@ public class DrawStreamTests
     public void NextBelow_zero_throws()
         => Assert.Throws<ArgumentOutOfRangeException>(() => DrawStream.Open(K).NextBelow(0));
 
+    /// <summary>The counter is explicitly checked, so it throws in every build, not only Debug and CI.</summary>
     [Fact]
     public void Counter_overflow_throws()
-    {
-#if DEBUG
-        Assert.Throws<OverflowException>(() => new DrawStream(K, ulong.MaxValue).Next());
-#endif
-    }
+        => Assert.Throws<OverflowException>(() => new DrawStream(K, ulong.MaxValue).Next());
+
+    /// <summary>Skip is how a save restores a counter, so it must not wrap either.</summary>
+    [Fact]
+    public void Skip_overflow_throws()
+        => Assert.Throws<OverflowException>(() => new DrawStream(K, ulong.MaxValue).Skip(1));
+
+    [Fact]
+    public void Skip_zero_leaves_the_stream_unchanged()
+        => Assert.Equal(new DrawStream(K, 5), new DrawStream(K, 5).Skip(0));
 }

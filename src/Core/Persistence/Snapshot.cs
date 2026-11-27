@@ -51,9 +51,26 @@ public static class Snapshot
     /// </summary>
     public const int CurrentVersion = 2;
 
+    /// <summary>
+    /// Writes <paramref name="s"/>. Only the run seed and the stream counters are stored, so a state whose
+    /// run seed is not below 2^60, or whose stream keys are not the ones that seed derives, cannot be saved
+    /// (it would load as a different run); both throw <see cref="InvalidOperationException"/>.
+    /// </summary>
     public static string Save(GameState s)
     {
         ArgumentNullException.ThrowIfNull(s);
+        ArgumentNullException.ThrowIfNull(s.Rng);
+        if (s.RunSeed >= RunSeed.Limit)
+        {
+            throw new InvalidOperationException($"Cannot save a state whose run seed {s.RunSeed} is not below 2^60.");
+        }
+
+        var keys = RunStreams.FromSeed(s.RunSeed);
+        if (s.Rng.Combat.Key != keys.Combat.Key || s.Rng.Shrine.Key != keys.Shrine.Key)
+        {
+            throw new InvalidOperationException(
+                $"Cannot save a state whose stream keys are not derived from its run seed {s.RunSeed}.");
+        }
 
         return PersistenceJson.Write(new StateDto
         {
@@ -124,8 +141,8 @@ public static class Snapshot
 
         var rngDto = PersistenceJson.Need(dto.Rng, "rng");
         var rng = new RunStreams(
-            state.Rng.Combat.Skip(PersistenceJson.Need(rngDto.Combat, "rng combat")),
-            state.Rng.Shrine.Skip(PersistenceJson.Need(rngDto.Shrine, "rng shrine")));
+            state.Rng.Combat.Skip(NeedCounter(rngDto.Combat, "rng combat")),
+            state.Rng.Shrine.Skip(NeedCounter(rngDto.Shrine, "rng shrine")));
 
         long tick = PersistenceJson.Need(dto.Tick, "tick");
         if (tick < 0)
@@ -197,6 +214,18 @@ public static class Snapshot
         }
 
         return state with { Rng = rng, Pending = pending, Tick = tick, NextDecisionId = nextDecisionId };
+    }
+
+    /// <summary>A saved stream counter. A stream at 2^64 - 1 can never draw again, so that value is refused here, at load.</summary>
+    private static ulong NeedCounter(ulong? value, string name)
+    {
+        ulong counter = PersistenceJson.Need(value, name);
+        if (counter == ulong.MaxValue)
+        {
+            throw new SnapshotFormatException($"Invalid save: {name} {counter} leaves the stream no draws.");
+        }
+
+        return counter;
     }
 
     private static void NeedBoonIds(ImmutableArray<int> boons, string name)

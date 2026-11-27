@@ -6,7 +6,7 @@ namespace Dungeon.Core;
 /// The key algebra of SV 4.1: SplitMix64 mixing, FNV-1a-64 label ids, and the pure
 /// <see cref="Derive"/> / <see cref="Draw"/> / <see cref="H"/> functions every random decision is built from.
 /// All key arithmetic is unsigned 64-bit modulo 2^64. This is the only file allowed wrapping
-/// arithmetic (DS11, DUN011); every expression below sits inside an explicit <c>unchecked</c> block.
+/// arithmetic (DS11, DUN011); all wrapping arithmetic below sits inside an explicit <c>unchecked</c> block.
 /// </summary>
 public static class KeyAlgebra
 {
@@ -117,7 +117,8 @@ public static class KeyAlgebra
 
 /// <summary>
 /// A stream of draws: a key and a counter (SV 4.1). Immutable; every step returns the value and the next stream.
-/// Counter arithmetic is deliberately checked (outside any <c>unchecked</c> block), so an overflow throws in Debug and CI.
+/// Counter arithmetic is explicitly <c>checked</c>, so an overflow throws <see cref="OverflowException"/> in every
+/// build configuration instead of wrapping back to draw 0.
 /// </summary>
 /// <param name="Key">The stream's key.</param>
 /// <param name="Counter">The 0-based index of the next draw.</param>
@@ -128,7 +129,7 @@ public readonly record struct DrawStream(ulong Key, ulong Counter)
 
     /// <summary>The next draw, <c>Draw(Key, Counter)</c>, and the stream advanced by one.</summary>
     public (ulong Value, DrawStream Next) Next()
-        => (KeyAlgebra.Draw(Key, Counter), new DrawStream(Key, Counter + 1));
+        => (KeyAlgebra.Draw(Key, Counter), new DrawStream(Key, checked(Counter + 1)));
 
     /// <summary>The next draw mapped onto <c>[0, n)</c> by <see cref="KeyAlgebra.Bound"/>.</summary>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="n"/> is 0.</exception>
@@ -139,5 +140,6 @@ public readonly record struct DrawStream(ulong Key, ulong Counter)
     }
 
     /// <summary>The stream advanced by <paramref name="n"/> draws without consuming values.</summary>
-    public DrawStream Skip(ulong n) => new(Key, Counter + n);
+    /// <exception cref="OverflowException">The counter would pass 2^64 - 1.</exception>
+    public DrawStream Skip(ulong n) => new(Key, checked(Counter + n));
 }

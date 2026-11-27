@@ -298,6 +298,39 @@ public class PersistenceTests
         Assert.Equal(3, Assert.Throws<SnapshotVersionException>(
             () => CommandLog.Load("{\"version\":3,\"seed\":7,\"commands\":[]}")).Found);
 
+    /// <summary>A stream at counter 2^64 - 1 can never draw again, so such a save is refused at load (A1).</summary>
+    [Fact]
+    public void Load_rejects_an_exhausted_stream_counter()
+    {
+        var json = Snapshot.Save(Engine.Apply(State(), Script[0]).State);
+        Assert.Contains("\"rng\":{\"combat\":0,\"shrine\":3}", json);
+        Assert.Throws<SnapshotFormatException>(() => Snapshot.Load(
+            json.Replace("\"combat\":0,", "\"combat\":18446744073709551615,")));
+        Assert.Throws<SnapshotFormatException>(() => Snapshot.Load(
+            json.Replace("\"shrine\":3}", "\"shrine\":18446744073709551615}")));
+        var last = Snapshot.Load(json.Replace("\"shrine\":3}", "\"shrine\":18446744073709551614}"));
+        Assert.Equal(18446744073709551614UL, last.Rng.Shrine.Counter);
+    }
+
+    /// <summary>Saves store the seed, not keys (plan call 3), so streams that disagree with the seed cannot be saved (B1).</summary>
+    [Fact]
+    public void Snapshot_save_refuses_streams_that_do_not_belong_to_the_run_seed()
+    {
+        var s = State();
+        Assert.Contains("stream", Assert.Throws<InvalidOperationException>(
+            () => Snapshot.Save(s with { RunSeed = 8 })).Message);
+        Assert.Contains("stream", Assert.Throws<InvalidOperationException>(
+            () => Snapshot.Save(s with { Rng = RunStreams.FromSeed(8) })).Message);
+        Assert.Contains("2^60", Assert.Throws<InvalidOperationException>(
+            () => Snapshot.Save(s with { RunSeed = RunSeed.Limit })).Message);
+    }
+
+    /// <summary>A log whose seed its own Load would refuse cannot be written (B2).</summary>
+    [Fact]
+    public void Command_log_save_refuses_an_out_of_range_seed()
+        => Assert.Contains("2^60", Assert.Throws<InvalidOperationException>(
+            () => new CommandLog(RunSeed.Limit, ImmutableArray<Command>.Empty).Save()).Message);
+
     [Fact]
     public void Command_log_keeps_the_largest_run_seed()
     {
