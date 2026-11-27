@@ -90,11 +90,8 @@ docs/superpowers/
 
 These are enforced by tests and CI, not just convention:
 
-- No Godot references in `Dungeon.Core` (`ArchitectureTests`).
-- Integer arithmetic only: no `float` or `double`.
-- No `System.Random`; all randomness comes from seeded PCG32 streams stored in the state, with
-  separate streams for dungeon generation, combat and loot.
-- No iteration over unordered collections (`Dictionary`, `HashSet`).
+- Enforced at compile time by the determinism analyzer (`src/Analyzers`, rules DUN001–DUN011, SV DS11); see
+  `src/Analyzers/Rules.cs`. The no-Godot-in-Core rule is also covered by `ArchitectureTests`.
 - Saves carry a version number; a corrupt or newer save fails with a typed error and never
   half-loads.
 - CI fails if rule checks (`IsWalkable`, `CheckStep`, `.Step(`) show up in `dungeon-ttrpg/scripts`.
