@@ -4,7 +4,8 @@ namespace Dungeon.Analyzers.Tests;
 
 /// <summary>
 /// DUN012: <c>KeyAlgebra.Derive</c>, <c>KeyAlgebra.H</c> and <c>DrawStream.Open</c> are banned outside the files named by
-/// <c>DungeonKeyDerivationFiles</c> (DS1, SV 4.2); streams are opened through the generated <c>StreamHandles</c>.
+/// <c>DungeonKeyDerivationFiles</c> (DS1, SV 4.2), as is building a <c>DrawStream</c>, a <c>StreamHandle</c> or a
+/// generated <c>[StreamKey]</c> struct by hand; streams are opened through the generated <c>StreamHandles</c>.
 /// </summary>
 public class KeyDerivationTests
 {
@@ -87,6 +88,76 @@ public class KeyDerivationTests
         Assert.Equal(
             "DUN012 (DS1, SV 4.2): open streams only through StreamHandles; 'DrawStream with' is banned here",
             diagnostic.GetMessage(System.Globalization.CultureInfo.InvariantCulture));
+    }
+
+    // The generated key structs and StreamHandle have internal constructors, so these fixtures compile as Core.Tests
+    // (Core's InternalsVisibleTo name) to reach them, the way a Core file would.
+    [Theory]
+    [InlineData("_ = new LootShrineKey(1).Open();", "new LootShrineKey")]
+    [InlineData("LootShrineKey k = new(1);", "new LootShrineKey")]
+    [InlineData("_ = new LootShrineKey();", "new LootShrineKey")]
+    [InlineData("_ = new CombatKey(Streams.Dungeon(1).Value).Open();", "new CombatKey")]
+    [InlineData("_ = default(LootShrineKey);", "default(LootShrineKey)")]
+    [InlineData("LootShrineKey k = default;", "default(LootShrineKey)")]
+    [InlineData("_ = Streams.Combat(1) with { };", "CombatKey with")]
+    [InlineData("_ = new StreamHandle(\"loot/run\", 1);", "new StreamHandle")]
+    [InlineData("StreamHandle h = new(\"dungeon/floor/{N}/attempt/{a}/layout\", 999);", "new StreamHandle")]
+    [InlineData("_ = default(StreamHandle);", "default(StreamHandle)")]
+    [InlineData("_ = Streams.Combat(1).Handle with { };", "StreamHandle with")]
+    public void Forging_a_key_or_handle_is_reported(string statement, string member)
+    {
+        var d = Harness.Run(
+            "using Dungeon.Core;\npublic static class C { public static void M() { " + statement + " } }",
+            path: "src/Core/Other.cs",
+            buildProperties: Properties(),
+            assemblyName: "Core.Tests");
+        Assert.Equal(new[] { "DUN012" }, Harness.Ids(d));
+        var diagnostic = Assert.Single(d);
+        Assert.Equal(
+            "DUN012 (DS1, SV 4.2): open streams only through StreamHandles; '" + member + "' is banned here",
+            diagnostic.GetMessage(System.Globalization.CultureInfo.InvariantCulture));
+    }
+
+    [Fact]
+    public void Keys_and_handles_from_the_generated_chain_are_clean()
+    {
+        var d = Harness.Run(
+            """
+            using Dungeon.Core;
+
+            public static class C
+            {
+                public static ulong M()
+                {
+                    var shrine = Streams.Loot(1).Shrine;
+                    var (u, _) = shrine.Open().Next();
+                    StreamHandle h = shrine.Handle;
+                    return u ^ h.Key ^ Streams.Dungeon(1).Floor(2).Checks.HObject("a.b", "c.d", 0, 0);
+                }
+            }
+            """,
+            path: "src/Core/Other.cs",
+            buildProperties: Properties(),
+            assemblyName: "Core.Tests");
+        Assert.Empty(d);
+    }
+
+    [Fact]
+    public void Forged_keys_and_handles_are_clean_in_the_handle_file()
+    {
+        var d = Harness.Run(
+            """
+            using Dungeon.Core;
+
+            public static class C
+            {
+                public static StreamHandle M() => new LootShrineKey(1).Handle with { } is var h ? new StreamHandle(h.RowId, 2) : default;
+            }
+            """,
+            path: "/repo/src/Core/Random/StreamHandles.g.cs",
+            buildProperties: Properties(),
+            assemblyName: "Core.Tests");
+        Assert.Empty(d);
     }
 
     [Fact]

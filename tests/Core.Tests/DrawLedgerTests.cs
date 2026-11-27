@@ -221,7 +221,21 @@ public class DrawLedgerTests
     {
         var (run, _) = OpenFixed();
 
-        Assert.Throws<InvalidOperationException>(() => run.Open(new StreamHandle("f", 1)));
+        var ex = Assert.Throws<InvalidOperationException>(() => run.Open(new StreamHandle("f", 1)));
+
+        Assert.Contains("\"f\" is already open in this run with the same key", ex.Message, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Opening_two_rows_on_the_same_key_throws()
+    {
+        var set = Load(Row("a", cls: "fixed", count: "1"), Row("b", cls: "fixed", count: "1"));
+        var run = new StageRun(set, FixtureStage, NoParameters);
+        run.Open(new StreamHandle("a", 5));
+
+        var ex = Assert.Throws<InvalidOperationException>(() => run.Open(new StreamHandle("b", 5)));
+
+        Assert.Contains("\"b\" is already open in this run with the same key", ex.Message, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -229,8 +243,11 @@ public class DrawLedgerTests
     {
         var run = new StageRun(Repository.Value, "GS7", NoParameters);
 
-        Assert.Throws<InvalidOperationException>(() => run.Open(Streams.Loot(Rs).LootPlan(1).BossCard(0).Handle));
-        Assert.Throws<InvalidOperationException>(() => run.ReadVector(Streams.Loot(Rs).Run.Handle, 0));
+        var open = Assert.Throws<InvalidOperationException>(() => run.Open(Streams.Loot(Rs).LootPlan(1).BossCard(0).Handle));
+        var read = Assert.Throws<InvalidOperationException>(() => run.ReadVector(Streams.Loot(Rs).Run.Handle, 0));
+
+        Assert.Contains("belongs to stage GS10, not GS7", open.Message, StringComparison.Ordinal);
+        Assert.Contains("belongs to stage GS0.4, not GS7", read.Message, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -238,7 +255,9 @@ public class DrawLedgerTests
     {
         var (run, _) = OpenFixed();
 
-        Assert.Throws<InvalidOperationException>(() => run.Open(new StreamHandle("nope", 1)));
+        var ex = Assert.Throws<InvalidOperationException>(() => run.Open(new StreamHandle("nope", 1)));
+
+        Assert.Contains("\"nope\" names no stream row", ex.Message, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -259,7 +278,9 @@ public class DrawLedgerTests
         var set = Load(Row("x", cls: cls, keyType: keyType));
         var run = new StageRun(set, FixtureStage, NoParameters);
 
-        Assert.Throws<InvalidOperationException>(() => run.Open(new StreamHandle("x", 1)));
+        var ex = Assert.Throws<InvalidOperationException>(() => run.Open(new StreamHandle("x", 1)));
+
+        Assert.Contains("\"x\" is not ledgered per stage", ex.Message, StringComparison.Ordinal);
     }
 
     [Fact]

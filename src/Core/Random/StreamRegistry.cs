@@ -5,10 +5,36 @@ using Dungeon.Core.Content;
 
 namespace Dungeon.Core;
 
-/// <summary>A drawable stream: its registry row id (lookup and display only) and its key (SV 4.2).</summary>
-/// <param name="RowId">The <see cref="StreamRow"/> id, the path with index placeholders (plan call 2).</param>
-/// <param name="Key">The stream's key.</param>
-public readonly record struct StreamHandle(string RowId, ulong Key);
+/// <summary>
+/// A drawable stream: its registry row id (lookup and display only) and its key (SV 4.2). Only the generated handles
+/// build one (<c>XKey.Handle</c>): the constructor is internal and the properties are get-only, and DUN012 reports a
+/// <c>new</c>, an explicit <c>default</c> or a <c>with</c> of it outside the key-derivation files, so a Core file
+/// cannot put a key the registry never derived behind a row id.
+/// </summary>
+public readonly record struct StreamHandle
+{
+    internal StreamHandle(string rowId, ulong key)
+    {
+        RowId = rowId;
+        Key = key;
+    }
+
+    /// <summary>The <see cref="StreamRow"/> id, the path with index placeholders (plan call 2).</summary>
+    public string RowId { get; }
+
+    /// <summary>The stream's key.</summary>
+    public ulong Key { get; }
+}
+
+/// <summary>
+/// Marks a generated stream key struct of <c>StreamHandles.g.cs</c>. DUN012 reports a <c>new</c>, an explicit
+/// <c>default</c> or a <c>with</c> of a marked type outside the key-derivation files, so its key comes only from the
+/// generated derivation chain.
+/// </summary>
+[AttributeUsage(AttributeTargets.Struct, Inherited = false)]
+public sealed class StreamKeyAttribute : Attribute
+{
+}
 
 /// <summary>One index value given to <see cref="StreamRegistry.KeyOf"/>: a number, or the text of a <c>labelId</c> index.</summary>
 /// <param name="Number">The value of a <c>ulong</c> or <c>uint</c> index; ignored for a <c>labelId</c> index.</param>

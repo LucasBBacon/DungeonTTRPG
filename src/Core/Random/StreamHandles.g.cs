@@ -22,9 +22,14 @@ public static class Streams
 }
 
 /// <summary>The key of <c>combat</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct CombatKey(ulong Value)
+[StreamKey]
+public readonly record struct CombatKey
 {
+    internal CombatKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>combat</c>.</summary>
     public StreamHandle Handle => new("combat", Value);
 
@@ -33,9 +38,14 @@ public readonly record struct CombatKey(ulong Value)
 }
 
 /// <summary>The key of <c>dungeon</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonKey(ulong Value)
+[StreamKey]
+public readonly record struct DungeonKey
 {
+    internal DungeonKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The key of <c>dungeon/floor/{N}</c>.</summary>
     public DungeonFloorKey Floor(ulong n) => new(KeyAlgebra.Derive(Value, "floor", n));
 
@@ -44,9 +54,14 @@ public readonly record struct DungeonKey(ulong Value)
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonFloorKey(ulong Value)
+[StreamKey]
+public readonly record struct DungeonFloorKey
 {
+    internal DungeonFloorKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}</c>.</summary>
     public DungeonFloorAttemptKey Attempt(ulong a) => new(KeyAlgebra.Derive(Value, "attempt", a));
 
@@ -55,9 +70,14 @@ public readonly record struct DungeonFloorKey(ulong Value)
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonFloorAttemptKey(ulong Value)
+[StreamKey]
+public readonly record struct DungeonFloorAttemptKey
 {
+    internal DungeonFloorAttemptKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/dressing</c>.</summary>
     public DungeonFloorAttemptDressingKey Dressing => new(KeyAlgebra.Derive(Value, "dressing"));
 
@@ -78,9 +98,14 @@ public readonly record struct DungeonFloorAttemptKey(ulong Value)
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/dressing</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonFloorAttemptDressingKey(ulong Value)
+[StreamKey]
+public readonly record struct DungeonFloorAttemptDressingKey
 {
+    internal DungeonFloorAttemptDressingKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/dressing</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/dressing", Value);
 
@@ -89,9 +114,14 @@ public readonly record struct DungeonFloorAttemptDressingKey(ulong Value)
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/encounters</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonFloorAttemptEncountersKey(ulong Value)
+[StreamKey]
+public readonly record struct DungeonFloorAttemptEncountersKey
 {
+    internal DungeonFloorAttemptEncountersKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/encounters/place</c>.</summary>
     public DungeonFloorAttemptEncountersPlaceKey Place => new(KeyAlgebra.Derive(Value, "place"));
 
@@ -103,9 +133,14 @@ public readonly record struct DungeonFloorAttemptEncountersKey(ulong Value)
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/encounters/place</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonFloorAttemptEncountersPlaceKey(ulong Value)
+[StreamKey]
+public readonly record struct DungeonFloorAttemptEncountersPlaceKey
 {
+    internal DungeonFloorAttemptEncountersPlaceKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/encounters/place</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/encounters/place", Value);
 
@@ -114,9 +149,14 @@ public readonly record struct DungeonFloorAttemptEncountersPlaceKey(ulong Value)
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/encounters/plan</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonFloorAttemptEncountersPlanKey(ulong Value)
+[StreamKey]
+public readonly record struct DungeonFloorAttemptEncountersPlanKey
 {
+    internal DungeonFloorAttemptEncountersPlanKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/encounters/plan</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/encounters/plan", Value);
 
@@ -125,9 +165,14 @@ public readonly record struct DungeonFloorAttemptEncountersPlanKey(ulong Value)
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/encounters/retry1</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonFloorAttemptEncountersRetry1Key(ulong Value)
+[StreamKey]
+public readonly record struct DungeonFloorAttemptEncountersRetry1Key
 {
+    internal DungeonFloorAttemptEncountersRetry1Key(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/encounters/retry1/place</c>.</summary>
     public DungeonFloorAttemptEncountersRetry1PlaceKey Place => new(KeyAlgebra.Derive(Value, "place"));
 
@@ -136,9 +181,14 @@ public readonly record struct DungeonFloorAttemptEncountersRetry1Key(ulong Value
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/encounters/retry1/place</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonFloorAttemptEncountersRetry1PlaceKey(ulong Value)
+[StreamKey]
+public readonly record struct DungeonFloorAttemptEncountersRetry1PlaceKey
 {
+    internal DungeonFloorAttemptEncountersRetry1PlaceKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/encounters/retry1/place</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/encounters/retry1/place", Value);
 
@@ -147,9 +197,14 @@ public readonly record struct DungeonFloorAttemptEncountersRetry1PlaceKey(ulong 
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/encounters/retry1/plan</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonFloorAttemptEncountersRetry1PlanKey(ulong Value)
+[StreamKey]
+public readonly record struct DungeonFloorAttemptEncountersRetry1PlanKey
 {
+    internal DungeonFloorAttemptEncountersRetry1PlanKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/encounters/retry1/plan</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/encounters/retry1/plan", Value);
 
@@ -158,9 +213,14 @@ public readonly record struct DungeonFloorAttemptEncountersRetry1PlanKey(ulong V
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/layout</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonFloorAttemptLayoutKey(ulong Value)
+[StreamKey]
+public readonly record struct DungeonFloorAttemptLayoutKey
 {
+    internal DungeonFloorAttemptLayoutKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/layout</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/layout", Value);
 
@@ -169,9 +229,14 @@ public readonly record struct DungeonFloorAttemptLayoutKey(ulong Value)
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/terrain</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonFloorAttemptTerrainKey(ulong Value)
+[StreamKey]
+public readonly record struct DungeonFloorAttemptTerrainKey
 {
+    internal DungeonFloorAttemptTerrainKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/terrain</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/terrain", Value);
 
@@ -180,9 +245,14 @@ public readonly record struct DungeonFloorAttemptTerrainKey(ulong Value)
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/traps</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonFloorAttemptTrapsKey(ulong Value)
+[StreamKey]
+public readonly record struct DungeonFloorAttemptTrapsKey
 {
+    internal DungeonFloorAttemptTrapsKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/traps</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/traps", Value);
 
@@ -194,9 +264,14 @@ public readonly record struct DungeonFloorAttemptTrapsKey(ulong Value)
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/traps/retry1</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonFloorAttemptTrapsRetry1Key(ulong Value)
+[StreamKey]
+public readonly record struct DungeonFloorAttemptTrapsRetry1Key
 {
+    internal DungeonFloorAttemptTrapsRetry1Key(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/traps/retry1</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/traps/retry1", Value);
 
@@ -205,9 +280,14 @@ public readonly record struct DungeonFloorAttemptTrapsRetry1Key(ulong Value)
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/trapsResolve</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonFloorAttemptTrapsResolveKey(ulong Value)
+[StreamKey]
+public readonly record struct DungeonFloorAttemptTrapsResolveKey
 {
+    internal DungeonFloorAttemptTrapsResolveKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/trapsResolve</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/trapsResolve", Value);
 
@@ -219,9 +299,14 @@ public readonly record struct DungeonFloorAttemptTrapsResolveKey(ulong Value)
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/trapsResolve/retry1</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonFloorAttemptTrapsResolveRetry1Key(ulong Value)
+[StreamKey]
+public readonly record struct DungeonFloorAttemptTrapsResolveRetry1Key
 {
+    internal DungeonFloorAttemptTrapsResolveRetry1Key(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/trapsResolve/retry1</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/trapsResolve/retry1", Value);
 
@@ -230,9 +315,14 @@ public readonly record struct DungeonFloorAttemptTrapsResolveRetry1Key(ulong Val
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/checks</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonFloorChecksKey(ulong Value)
+[StreamKey]
+public readonly record struct DungeonFloorChecksKey
 {
+    internal DungeonFloorChecksKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The keyed hash <c>dungeon/floor/{N}/checks/h:lurkStealth/{groupId:}/{positionIndex}/{band:}/{die}</c>.</summary>
     /// <remarks>Inert until M2 (D-08): the DrawLedger expects 0 draws on it.</remarks>
     public ulong HLurkStealth(string groupId, ulong positionIndex, string band, ulong die) => KeyAlgebra.H(Value, "h:lurkStealth", KeyAlgebra.LabelId(groupId), positionIndex, KeyAlgebra.LabelId(band), die);
@@ -251,9 +341,14 @@ public readonly record struct DungeonFloorChecksKey(ulong Value)
 }
 
 /// <summary>The key of <c>dungeon/route</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct DungeonRouteKey(ulong Value)
+[StreamKey]
+public readonly record struct DungeonRouteKey
 {
+    internal DungeonRouteKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The keyed hash <c>dungeon/route/bossOrder/{themeId:}/{floor}/{bossId:}</c>.</summary>
     public ulong BossOrder(string themeId, ulong floor, string bossId) => KeyAlgebra.H(Value, "bossOrder", KeyAlgebra.LabelId(themeId), floor, KeyAlgebra.LabelId(bossId));
 
@@ -269,9 +364,14 @@ public readonly record struct DungeonRouteKey(ulong Value)
 }
 
 /// <summary>The key of <c>loot</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct LootKey(ulong Value)
+[StreamKey]
+public readonly record struct LootKey
 {
+    internal LootKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The key of <c>loot/floor/{N}</c>.</summary>
     public LootFloorKey Floor(ulong n) => new(KeyAlgebra.Derive(Value, "floor", n));
 
@@ -286,9 +386,14 @@ public readonly record struct LootKey(ulong Value)
 }
 
 /// <summary>The key of <c>loot/floor/{N}</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct LootFloorKey(ulong Value)
+[StreamKey]
+public readonly record struct LootFloorKey
 {
+    internal LootFloorKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The key of <c>loot/floor/{N}/camp/{entry}</c>.</summary>
     public LootFloorCampKey Camp(ulong entry) => new(KeyAlgebra.Derive(Value, "camp", entry));
 
@@ -312,9 +417,14 @@ public readonly record struct LootFloorKey(ulong Value)
 }
 
 /// <summary>The key of <c>loot/floor/{N}/camp/{entry}</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct LootFloorCampKey(ulong Value)
+[StreamKey]
+public readonly record struct LootFloorCampKey
 {
+    internal LootFloorCampKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>loot/floor/{N}/camp/{entry}</c>.</summary>
     public StreamHandle Handle => new("loot/floor/{N}/camp/{entry}", Value);
 
@@ -323,9 +433,14 @@ public readonly record struct LootFloorCampKey(ulong Value)
 }
 
 /// <summary>The key of <c>loot/floor/{N}/carried/{entry}</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct LootFloorCarriedKey(ulong Value)
+[StreamKey]
+public readonly record struct LootFloorCarriedKey
 {
+    internal LootFloorCarriedKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>loot/floor/{N}/carried/{entry}</c>.</summary>
     public StreamHandle Handle => new("loot/floor/{N}/carried/{entry}", Value);
 
@@ -334,9 +449,14 @@ public readonly record struct LootFloorCarriedKey(ulong Value)
 }
 
 /// <summary>The key of <c>loot/floor/{N}/containers/{entry}</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct LootFloorContainersKey(ulong Value)
+[StreamKey]
+public readonly record struct LootFloorContainersKey
 {
+    internal LootFloorContainersKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>loot/floor/{N}/containers/{entry}</c>.</summary>
     public StreamHandle Handle => new("loot/floor/{N}/containers/{entry}", Value);
 
@@ -345,9 +465,14 @@ public readonly record struct LootFloorContainersKey(ulong Value)
 }
 
 /// <summary>The key of <c>loot/floor/{N}/dhBlock/{entry}</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct LootFloorDhBlockKey(ulong Value)
+[StreamKey]
+public readonly record struct LootFloorDhBlockKey
 {
+    internal LootFloorDhBlockKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>loot/floor/{N}/dhBlock/{entry}</c>.</summary>
     public StreamHandle Handle => new("loot/floor/{N}/dhBlock/{entry}", Value);
 
@@ -356,9 +481,14 @@ public readonly record struct LootFloorDhBlockKey(ulong Value)
 }
 
 /// <summary>The key of <c>loot/floor/{N}/resistant/{entry}</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct LootFloorResistantKey(ulong Value)
+[StreamKey]
+public readonly record struct LootFloorResistantKey
 {
+    internal LootFloorResistantKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>loot/floor/{N}/resistant/{entry}</c>.</summary>
     public StreamHandle Handle => new("loot/floor/{N}/resistant/{entry}", Value);
 
@@ -367,9 +497,14 @@ public readonly record struct LootFloorResistantKey(ulong Value)
 }
 
 /// <summary>The key of <c>loot/floor/{N}/vendorPotions/{entry}</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct LootFloorVendorPotionsKey(ulong Value)
+[StreamKey]
+public readonly record struct LootFloorVendorPotionsKey
 {
+    internal LootFloorVendorPotionsKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>loot/floor/{N}/vendorPotions/{entry}</c>.</summary>
     public StreamHandle Handle => new("loot/floor/{N}/vendorPotions/{entry}", Value);
 
@@ -378,9 +513,14 @@ public readonly record struct LootFloorVendorPotionsKey(ulong Value)
 }
 
 /// <summary>The key of <c>loot/floor/{N}/wandCharges/{entry}</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct LootFloorWandChargesKey(ulong Value)
+[StreamKey]
+public readonly record struct LootFloorWandChargesKey
 {
+    internal LootFloorWandChargesKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>loot/floor/{N}/wandCharges/{entry}</c>.</summary>
     public StreamHandle Handle => new("loot/floor/{N}/wandCharges/{entry}", Value);
 
@@ -389,9 +529,14 @@ public readonly record struct LootFloorWandChargesKey(ulong Value)
 }
 
 /// <summary>The key of <c>loot/lootPlan/{N}</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct LootLootPlanKey(ulong Value)
+[StreamKey]
+public readonly record struct LootLootPlanKey
 {
+    internal LootLootPlanKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The key of <c>loot/lootPlan/{N}/bossCard/{entryIndex}</c>.</summary>
     /// <remarks>Inert until M2 (D-08): the DrawLedger expects 0 draws on it.</remarks>
     public LootLootPlanBossCardKey BossCard(ulong entryIndex) => new(KeyAlgebra.Derive(Value, "bossCard", entryIndex));
@@ -399,9 +544,14 @@ public readonly record struct LootLootPlanKey(ulong Value)
 
 /// <summary>The key of <c>loot/lootPlan/{N}/bossCard/{entryIndex}</c>.</summary>
 /// <remarks>Inert until M2 (D-08): the DrawLedger expects 0 draws on it.</remarks>
-/// <param name="Value">The key.</param>
-public readonly record struct LootLootPlanBossCardKey(ulong Value)
+[StreamKey]
+public readonly record struct LootLootPlanBossCardKey
 {
+    internal LootLootPlanBossCardKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>loot/lootPlan/{N}/bossCard/{entryIndex}</c>.</summary>
     public StreamHandle Handle => new("loot/lootPlan/{N}/bossCard/{entryIndex}", Value);
 
@@ -410,9 +560,14 @@ public readonly record struct LootLootPlanBossCardKey(ulong Value)
 }
 
 /// <summary>The key of <c>loot/run</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct LootRunKey(ulong Value)
+[StreamKey]
+public readonly record struct LootRunKey
 {
+    internal LootRunKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>loot/run</c>.</summary>
     public StreamHandle Handle => new("loot/run", Value);
 
@@ -421,9 +576,14 @@ public readonly record struct LootRunKey(ulong Value)
 }
 
 /// <summary>The key of <c>loot/shrine</c>.</summary>
-/// <param name="Value">The key.</param>
-public readonly record struct LootShrineKey(ulong Value)
+[StreamKey]
+public readonly record struct LootShrineKey
 {
+    internal LootShrineKey(ulong value) => Value = value;
+
+    /// <summary>The key.</summary>
+    public ulong Value { get; }
+
     /// <summary>The stream <c>loot/shrine</c>.</summary>
     public StreamHandle Handle => new("loot/shrine", Value);
 
@@ -472,5 +632,22 @@ internal static class StreamHandleIndex
         ("loot/lootPlan/{N}/bossCard/{entryIndex}", (rs, u, t) => Streams.Loot(rs).LootPlan(u[0]).BossCard(u[1]).Value),
         ("loot/run", (rs, u, t) => Streams.Loot(rs).Run.Value),
         ("loot/shrine", (rs, u, t) => Streams.Loot(rs).Shrine.Value),
+    ];
+
+    /// <summary>
+    /// One entry per keyed domain, in ordinal row-id order: the row id and its <c>H</c> for a run seed, the numeric
+    /// indices and the <c>labelId</c> texts along the chain, each in order.
+    /// </summary>
+    public static readonly ImmutableArray<(string RowId, Func<ulong, ulong[], string[], ulong> H)> Domains =
+    [
+        ("dungeon/floor/{N}/checks/h:lurkStealth/{groupId:}/{positionIndex}/{band:}/{die}", (rs, u, t) => Streams.Dungeon(rs).Floor(u[0]).Checks.HLurkStealth(t[0], u[1], t[1], u[2])),
+        ("dungeon/floor/{N}/checks/h:notice/{noticerId:}/{targetId:}/{noticeIndex}/{die}", (rs, u, t) => Streams.Dungeon(rs).Floor(u[0]).Checks.HNotice(t[0], t[1], u[1], u[2])),
+        ("dungeon/floor/{N}/checks/h:object/{objectId:}/{checkKind:}/{attemptIndex}/{die}", (rs, u, t) => Streams.Dungeon(rs).Floor(u[0]).Checks.HObject(t[0], t[1], u[1], u[2])),
+        ("dungeon/floor/{N}/checks/h:save/{objectId:}/{unitId:}/{springIndex}/{die}", (rs, u, t) => Streams.Dungeon(rs).Floor(u[0]).Checks.HSave(t[0], t[1], u[1], u[2])),
+        ("dungeon/floor/{N}/checks/h:steal/{unitId:}/{stealIndex}/{die}", (rs, u, t) => Streams.Dungeon(rs).Floor(u[0]).Checks.HSteal(t[0], u[1], u[2])),
+        ("dungeon/route/bossOrder/{themeId:}/{floor}/{bossId:}", (rs, u, t) => Streams.Dungeon(rs).Route.BossOrder(t[0], u[0], t[1])),
+        ("dungeon/route/finalOrder/{bossId:}", (rs, u, t) => Streams.Dungeon(rs).Route.FinalOrder(t[0])),
+        ("dungeon/route/omen/{themeId:}", (rs, u, t) => Streams.Dungeon(rs).Route.Omen(t[0])),
+        ("dungeon/route/themePerm/{themeId:}", (rs, u, t) => Streams.Dungeon(rs).Route.ThemePerm(t[0])),
     ];
 }

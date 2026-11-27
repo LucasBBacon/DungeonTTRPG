@@ -176,12 +176,14 @@ public class StreamChecksTests
     {
         var set = Load(
             Row("p", cls: "keyed"),
-            Row("p/foo", parent: "p", label: "foo", cls: "fixed", count: "1"),
-            Row("p/foo/{u:}", parent: "p", label: "foo", indices: Idx(("u", "labelId")), cls: "keyed"));
+            Row("p/h:foo", parent: "p", label: "h:foo", cls: "fixed", count: "1"),
+            Row("p/h:foo/{u:}", parent: "p", label: "h:foo", indices: Idx(("u", "labelId")), cls: "keyed"));
 
-        var failures = new DomainDisjointCheck().Run(set);
-        Assert.Contains(failures, f => f.Field == "$.streams[2].label" && f.Problem.Contains("stream child", StringComparison.Ordinal));
-        Assert.All(failures, f => Assert.Equal(new CheckId("V19.DomainDisjoint"), f.Check));
+        // Both labels carry the h: prefix, so the only failure is the shared label (K-rule 6), not the prefix rule.
+        var failure = Assert.Single(new DomainDisjointCheck().Run(set));
+        Assert.Equal("$.streams[2].label", failure.Field);
+        Assert.Contains("is both a stream child and a keyed domain", failure.Problem, StringComparison.Ordinal);
+        Assert.Equal(new CheckId("V19.DomainDisjoint"), failure.Check);
     }
 
     [Fact]

@@ -16,20 +16,22 @@ internal static class Harness
     /// <summary>
     /// Compiles <paramref name="source"/> as C# 12 with nullable on, asserts it has no compiler errors,
     /// and returns the analyzer diagnostics only. <paramref name="buildProperties"/> keys are bare
-    /// names, surfaced to analyzers as <c>build_property.&lt;name&gt;</c>.
+    /// names, surfaced to analyzers as <c>build_property.&lt;name&gt;</c>. <paramref name="assemblyName"/> names the
+    /// fixture assembly; <c>"Core.Tests"</c> is the name <c>Dungeon.Core</c> grants its internals to.
     /// </summary>
     internal static ImmutableArray<Diagnostic> Run(
         string source,
         string path = "Test.cs",
         IReadOnlyDictionary<string, string>? buildProperties = null,
-        IEnumerable<MetadataReference>? extraReferences = null)
+        IEnumerable<MetadataReference>? extraReferences = null,
+        string assemblyName = "Fixture")
     {
         var tree = CSharpSyntaxTree.ParseText(
             source,
             new CSharpParseOptions(LanguageVersion.CSharp12),
             path);
         var compilation = CSharpCompilation.Create(
-            "Fixture",
+            assemblyName,
             new[] { tree },
             References.Value.AddRange(extraReferences ?? Enumerable.Empty<MetadataReference>()),
             new CSharpCompilationOptions(

@@ -33,6 +33,9 @@ public class StreamIndependenceTests
 
         Assert.NotNull(checks);
         Assert.Equal(Phase.T, checks.Phase);
+        Assert.Equal("build", checks.Class);
+        Assert.Equal("pr", checks.CiTier);
+        Assert.Equal("M1", checks.Wave);
     }
 
     [Fact]

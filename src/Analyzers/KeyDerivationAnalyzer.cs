@@ -12,9 +12,9 @@ namespace Dungeon.Analyzers;
 /// <c>DungeonKeyDerivationFiles</c> build property (<c>;</c>- or <c>|</c>-separated paths relative to the project folder,
 /// matched as the DUN011 file is). Reported: an invocation of, or method-group reference to,
 /// <c>Dungeon.Core.KeyAlgebra.Derive</c>, <c>KeyAlgebra.H</c>, <c>KeyAlgebra.Absorb</c> or <c>Dungeon.Core.DrawStream.Open</c>;
-/// a <c>new DrawStream(...)</c> (any constructor, target-typed or not); an explicit <c>default</c> of
-/// <c>DrawStream</c>; and a <c>with</c> expression on a <c>DrawStream</c>. Matching is by symbol, so <c>using static</c>
-/// and aliases do not hide a call. <c>LabelId</c>, <c>Draw</c>, <c>Bound</c> and <c>Mix</c> stay allowed; a stream's own
+/// and a <c>new</c> (any constructor, target-typed or not), an explicit <c>default</c> or a <c>with</c> expression of a
+/// forgeable type: <c>DrawStream</c>, <c>Dungeon.Core.StreamHandle</c>, or a generated key struct (marked
+/// <c>[Dungeon.Core.StreamKey]</c>). Matching is by symbol, so <c>using static</c> and aliases do not hide a call. <c>LabelId</c>, <c>Draw</c>, <c>Bound</c> and <c>Mix</c> stay allowed; a stream's own
 /// <c>Next</c>, <c>NextBelow</c> and <c>Skip</c> advance a stream that was opened through a handle.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -46,13 +46,13 @@ public sealed class KeyDerivationAnalyzer : DiagnosticAnalyzer
                 c => Analyze(c, ((IMethodReferenceOperation)c.Operation).Method, allowed),
                 OperationKind.MethodReference);
             start.RegisterOperationAction(
-                c => Report(c, IsDrawStream(c.Operation.Type) ? "new DrawStream" : null, allowed),
+                c => Report(c, Forgeable(c.Operation.Type) is { } name ? "new " + name : null, allowed),
                 OperationKind.ObjectCreation);
             start.RegisterOperationAction(
-                c => Report(c, IsDrawStream(c.Operation.Type) ? "default(DrawStream)" : null, allowed),
+                c => Report(c, Forgeable(c.Operation.Type) is { } name ? "default(" + name + ")" : null, allowed),
                 OperationKind.DefaultValue);
             start.RegisterOperationAction(
-                c => Report(c, IsDrawStream(((IWithOperation)c.Operation).Operand.Type) ? "DrawStream with" : null, allowed),
+                c => Report(c, Forgeable(((IWithOperation)c.Operation).Operand.Type) is { } name ? name + " with" : null, allowed),
                 OperationKind.With);
         });
     }
@@ -60,8 +60,33 @@ public sealed class KeyDerivationAnalyzer : DiagnosticAnalyzer
     private static void Analyze(OperationAnalysisContext context, IMethodSymbol method, IReadOnlyList<ProjectPath> allowed)
         => Report(context, BannedMember(method), allowed);
 
-    private static bool IsDrawStream(ITypeSymbol? type)
-        => type?.OriginalDefinition.ToDisplayString() == "Dungeon.Core.DrawStream";
+    /// <summary>
+    /// The type's name when building it by hand would carry a key no handle derived: <c>DrawStream</c>,
+    /// <c>StreamHandle</c> or a <c>[StreamKey]</c> struct; otherwise null.
+    /// </summary>
+    private static string? Forgeable(ITypeSymbol? type)
+    {
+        if (type is null)
+        {
+            return null;
+        }
+
+        var name = type.OriginalDefinition.ToDisplayString();
+        if (name is "Dungeon.Core.DrawStream" or "Dungeon.Core.StreamHandle")
+        {
+            return type.Name;
+        }
+
+        foreach (var attribute in type.GetAttributes())
+        {
+            if (attribute.AttributeClass?.ToDisplayString() == "Dungeon.Core.StreamKeyAttribute")
+            {
+                return type.Name;
+            }
+        }
+
+        return null;
+    }
 
     private static void Report(OperationAnalysisContext context, string? member, IReadOnlyList<ProjectPath> allowed)
     {

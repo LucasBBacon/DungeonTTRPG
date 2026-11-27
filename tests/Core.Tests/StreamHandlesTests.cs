@@ -101,8 +101,59 @@ public class StreamHandlesTests
             KeyAlgebra.H(route.Value, "bossOrder", KeyAlgebra.LabelId("theme.crypt"), 2, KeyAlgebra.LabelId("boss.warden")),
             route.BossOrder("theme.crypt", 2, "boss.warden"));
 
+        Assert.Equal(KeyAlgebra.H(route.Value, "finalOrder", KeyAlgebra.LabelId("boss.warden")), route.FinalOrder("boss.warden"));
+        Assert.Equal(KeyAlgebra.H(route.Value, "omen", KeyAlgebra.LabelId("theme.crypt")), route.Omen("theme.crypt"));
+
         var checks = Streams.Dungeon(Rs).Floor(1).Checks;
+        Assert.Equal(StreamRegistry.KeyOf(set, "dungeon/floor/{N}/checks", Rs, [new(1, null)]), checks.Value);
         Assert.Equal(KeyAlgebra.H(checks.Value, "h:steal", KeyAlgebra.LabelId("unit.hero"), 3, 1), checks.HSteal("unit.hero", 3, 1));
+        Assert.Equal(
+            KeyAlgebra.H(checks.Value, "h:object", KeyAlgebra.LabelId("object.chest"), KeyAlgebra.LabelId("check.lock"), 2, 1),
+            checks.HObject("object.chest", "check.lock", 2, 1));
+        Assert.Equal(
+            KeyAlgebra.H(checks.Value, "h:save", KeyAlgebra.LabelId("object.spring"), KeyAlgebra.LabelId("unit.hero"), 4, 0),
+            checks.HSave("object.spring", "unit.hero", 4, 0));
+        Assert.Equal(
+            KeyAlgebra.H(checks.Value, "h:lurkStealth", KeyAlgebra.LabelId("group.lurkers"), 5, KeyAlgebra.LabelId("band.6"), 1),
+            checks.HLurkStealth("group.lurkers", 5, "band.6", 1));
+    }
+
+    [Fact]
+    public void Every_domain_equals_the_registry_derivation()
+    {
+        var set = Repository.Value;
+        var domains = set.All<StreamRow>()
+            .Where(r => StreamRegistry.IsDomain(set, r))
+            .Select(r => r.Id)
+            .Order(StringComparer.Ordinal)
+            .ToArray();
+        Assert.NotEmpty(domains);
+        Assert.Equal(domains, StreamHandleIndex.Domains.Select(e => e.RowId).ToArray());
+
+        foreach (var (rowId, h) in StreamHandleIndex.Domains)
+        {
+            var (values, numbers, texts) = SampleIndices(set, rowId);
+            Assert.True(
+                KeyAlgebra.Draw(StreamRegistry.KeyOf(set, rowId, Rs, values), 0) == h(Rs, numbers, texts),
+                $"{rowId}: the handle's H differs from Draw(StreamRegistry.KeyOf, 0).");
+        }
+    }
+
+    [Fact]
+    public void Keys_and_handles_cannot_be_built_or_rekeyed_from_outside_the_generated_chain()
+    {
+        var keys = KeyTypes();
+        Assert.NotEmpty(keys);
+        foreach (var type in keys.Append(typeof(StreamHandle)))
+        {
+            Assert.True(
+                type.GetConstructors().All(c => c.GetParameters().Length == 0),
+                $"{type.Name} has a public constructor taking a key.");
+            foreach (var property in type.GetProperties())
+            {
+                Assert.True(property.SetMethod is null, $"{type.Name}.{property.Name} can be set or init (a with expression could rekey it).");
+            }
+        }
     }
 
     // --- Review Focus 2: arity and index type ---
@@ -174,10 +225,7 @@ public class StreamHandlesTests
     [Fact]
     public void Exactly_the_drawn_from_keys_have_open_and_it_opens_their_key_at_counter_0()
     {
-        var keys = typeof(Streams).Assembly.GetTypes()
-            .Where(t => t.IsValueType && t.Namespace == "Dungeon.Core" && t.Name.EndsWith("Key", StringComparison.Ordinal)
-                && t.GetProperty("Value")?.PropertyType == typeof(ulong) && t.GetConstructor([typeof(ulong)]) is not null)
-            .ToList();
+        var keys = KeyTypes();
         Assert.NotEmpty(keys);
         int drawn = 0;
         foreach (var type in keys)
@@ -192,7 +240,7 @@ public class StreamHandlesTests
 
             drawn++;
             Assert.Equal(typeof(DrawStream), open.ReturnType);
-            object key = Activator.CreateInstance(type, 0x5EEDUL)!;
+            object key = KeyConstructor(type).Invoke([0x5EEDUL]);
             Assert.Equal(new DrawStream(0x5EEDUL, 0), (DrawStream)open.Invoke(key, null)!);
         }
 
@@ -201,9 +249,20 @@ public class StreamHandlesTests
         Assert.Equal(expected, drawn);
     }
 
+    /// <summary>The generated key structs: value types in <c>Dungeon.Core</c> named <c>*Key</c> with a <c>ulong Value</c>.</summary>
+    private static List<Type> KeyTypes() =>
+        typeof(Streams).Assembly.GetTypes()
+            .Where(t => t.IsValueType && t.Namespace == "Dungeon.Core" && t.Name.EndsWith("Key", StringComparison.Ordinal)
+                && t.GetProperty("Value")?.PropertyType == typeof(ulong))
+            .ToList();
+
+    private static System.Reflection.ConstructorInfo KeyConstructor(Type type) =>
+        type.GetConstructor(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic, [typeof(ulong)])
+            ?? throw new InvalidOperationException($"{type.Name} has no internal (ulong) constructor.");
+
     /// <summary>
     /// Sample indices for every index along <paramref name="rowId"/>'s parent chain, root first: numbers 1, 2, 3…
-    /// and the text <c>"a.b"</c> for a <c>labelId</c>.
+    /// and a distinct text <c>"text.0"</c>, <c>"text.1"</c>… for each <c>labelId</c>, so a swapped part order shows.
     /// </summary>
     private static (StreamIndexValue[] Values, ulong[] Numbers, string[] Texts) SampleIndices(ContentSet set, string rowId)
     {
@@ -221,8 +280,9 @@ public class StreamHandlesTests
         {
             if (index.Type == IndexType.LabelId)
             {
-                values.Add(new StreamIndexValue(0, "a.b"));
-                texts.Add("a.b");
+                string text = "text." + texts.Count.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                values.Add(new StreamIndexValue(0, text));
+                texts.Add(text);
             }
             else
             {

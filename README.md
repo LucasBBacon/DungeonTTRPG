@@ -130,13 +130,17 @@ These are enforced by tests and CI, not just convention:
   rule is also covered by `ArchitectureTests`.
 - All randomness comes from keys derived from the 60-bit run seed (SplitMix64 key algebra, SV 4.1);
   a stream is a key and a counter, and every rule draws a fixed number of values.
-- Core opens streams only through the generated `StreamHandles` (DS1, SV 4.2). DUN012 reports a call
-  to, or method group of, `KeyAlgebra.Derive`, `KeyAlgebra.H`, `KeyAlgebra.Absorb` or `DrawStream.Open`,
-  a `new DrawStream(...)`, an explicit `default` of `DrawStream`, and a `with` on a `DrawStream`, in any
-  file not named by the `DungeonKeyDerivationFiles` property (Core names `Random/KeyAlgebra.cs`,
-  `Random/KeyedSort.cs`, `Random/StreamRegistry.cs` and `Random/StreamHandles.g.cs`). It cannot see an
-  implicitly zeroed `DrawStream` (array element, unassigned field) or `Draw`/`Mix` on a key computed by
-  hand; review covers those.
+- Core is meant to open streams only through the generated `StreamHandles` (DS1, SV 4.2): a key comes
+  from the generated derivation chain (`Streams.Dungeon(runSeed).Floor(n)...`), and a stream from that
+  key's `Open()` or its `Handle` given to a `StageRun`. DUN012 reports, in any file not named by the
+  `DungeonKeyDerivationFiles` property (Core names `Random/KeyAlgebra.cs`, `Random/KeyedSort.cs`,
+  `Random/StreamRegistry.cs` and `Random/StreamHandles.g.cs`): a call to, or method group of,
+  `KeyAlgebra.Derive`, `KeyAlgebra.H`, `KeyAlgebra.Absorb` or `DrawStream.Open`; and a `new`, an explicit
+  `default` or a `with` of a `DrawStream`, a `StreamHandle` or a generated `[StreamKey]` key struct (whose
+  constructors are internal and whose properties are get-only). It does not see an implicitly zeroed
+  `DrawStream`, `StreamHandle` or key struct (array element, unassigned field), or `Draw`/`Mix` on a key
+  computed by hand; review covers those. A handle's `Open()` returns a plain `DrawStream` that no ledger
+  counts; only a `StageRun` ledgers draws.
 - Every stream is a row of `content/registry/streams.json` (SV 4.3, 9.1), and its key is the derivation the row's
   `label` and `indices` name. `dotnet run --project src/Sim -- stream-handles` generates `StreamHandles.g.cs`
   (the `Streams` entry point and one key struct per row) with the Core loader, and a test fails if it is stale.

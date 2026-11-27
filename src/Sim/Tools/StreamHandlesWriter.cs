@@ -14,11 +14,14 @@ namespace Dungeon.Sim.Tools;
 /// <remarks>
 /// One <c>readonly record struct</c> per non-domain row, named by the PascalCase concatenation of its chain's labels
 /// plus <c>Key</c> (<c>h:</c> written <c>H</c>; <c>:</c>, <c>.</c> and <c>-</c> dropped, the next letter capitalized).
-/// Each holds the row's key in <c>Value</c>, a drawn-from row (any class but <c>node</c> and <c>keyed</c>) also has a
+/// Each is marked <c>[StreamKey]</c> and holds the row's key in a get-only <c>Value</c> set by an internal constructor,
+/// so only this file builds one (DUN012 reports any <c>new</c>, explicit <c>default</c> or <c>with</c> of it elsewhere
+/// in Core). A drawn-from row (any class but <c>node</c> and <c>keyed</c>) also has a
 /// <c>Handle</c> and an <c>Open()</c> that opens it at counter 0 (so no file outside this one calls
 /// <c>DrawStream.Open</c>, DUN012), and each child row is one member: a single <c>KeyAlgebra.Derive</c> call, or for a keyed domain a
 /// single <c>KeyAlgebra.H</c> call returning <c>ulong</c>. <c>Streams</c> holds the root rows, and
-/// <c>StreamHandleIndex.All</c> calls every non-domain row through the chain for the cross-check test. Everything is
+/// <c>StreamHandleIndex.All</c> and <c>StreamHandleIndex.Domains</c> call every non-domain row and every keyed domain
+/// through the chain for the cross-check tests. Everything is
 /// emitted in ordinal row-id order.
 /// </remarks>
 public static class StreamHandlesWriter
@@ -71,9 +74,14 @@ public static class StreamHandlesWriter
             Line(sb, "");
             Line(sb, $"/// <summary>The key of <c>{row.Id}</c>.</summary>");
             Inert(sb, row, "");
-            Line(sb, "/// <param name=\"Value\">The key.</param>");
-            Line(sb, $"public readonly record struct {stems[row.Id]}Key(ulong Value)");
+            Line(sb, "[StreamKey]");
+            Line(sb, $"public readonly record struct {stems[row.Id]}Key");
             Line(sb, "{");
+            Line(sb, $"    internal {stems[row.Id]}Key(ulong value) => Value = value;");
+            Line(sb, "");
+            Line(sb, "    /// <summary>The key.</summary>");
+            Line(sb, "    public ulong Value { get; }");
+            Line(sb, "");
             var children = rows.Where(r => string.Equals(r.Parent, row.Id, StringComparison.Ordinal)).ToImmutableArray();
             var names = new HashSet<string>(StringComparer.Ordinal) { "Value" };
             bool drawn = row.Class is not (CountClass.Node or CountClass.Keyed);
@@ -101,6 +109,12 @@ public static class StreamHandlesWriter
                 Line(sb, "");
             }
 
+            if (!drawn && children.Length == 0)
+            {
+                // A node or keyed row with no children: drop the blank line after Value.
+                sb.Length -= 1;
+            }
+
             Members(sb, set, children, stems, "Value", root: false);
             Line(sb, "}");
         }
@@ -118,6 +132,19 @@ public static class StreamHandlesWriter
         foreach (var row in nonDomain)
         {
             Line(sb, $"        (\"{row.Id}\", (rs, u, t) => {Call(row, byId)}.Value),");
+        }
+
+        Line(sb, "    ];");
+        Line(sb, "");
+        Line(sb, "    /// <summary>");
+        Line(sb, "    /// One entry per keyed domain, in ordinal row-id order: the row id and its <c>H</c> for a run seed, the numeric");
+        Line(sb, "    /// indices and the <c>labelId</c> texts along the chain, each in order.");
+        Line(sb, "    /// </summary>");
+        Line(sb, "    public static readonly ImmutableArray<(string RowId, Func<ulong, ulong[], string[], ulong> H)> Domains =");
+        Line(sb, "    [");
+        foreach (var row in rows.Where(r => StreamRegistry.IsDomain(set, r)))
+        {
+            Line(sb, $"        (\"{row.Id}\", (rs, u, t) => {Call(row, byId, domain: true)}),");
         }
 
         Line(sb, "    ];");
@@ -178,8 +205,9 @@ public static class StreamHandlesWriter
         }
     }
 
-    // The handle chain from Streams to `row`, with `u[i]` for the numeric and `t[i]` for the text indices.
-    private static string Call(StreamRow row, IReadOnlyDictionary<string, StreamRow> byId)
+    // The handle chain from Streams to `row`, with `u[i]` for the numeric and `t[i]` for the text indices; a domain's
+    // last member is a method, so it is always called.
+    private static string Call(StreamRow row, IReadOnlyDictionary<string, StreamRow> byId, bool domain = false)
     {
         var chain = new List<StreamRow>();
         for (StreamRow? r = row; r is not null; r = r.Parent is { } p ? byId[p] : null)
@@ -210,7 +238,7 @@ public static class StreamHandlesWriter
             }
 
             sb.Append('.').Append(Pascal(r.Label));
-            if (arguments.Count > 0)
+            if (arguments.Count > 0 || (domain && ReferenceEquals(r, row)))
             {
                 sb.Append('(').Append(string.Join(", ", arguments)).Append(')');
             }
