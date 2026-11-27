@@ -43,13 +43,22 @@ public class RunStateTests
     public void Create_rejects_unsorted_repeated_negative_or_zero_spent_counts()
     {
         AssertRejected(4, "spent", null, U(4, 0, 0) with { Spent = [new("pool.b", 1), new("pool.a", 1)] });
-        // Ordinal order: 'B' (66) sorts before 'a' (97), whatever the culture says.
-        AssertRejected(4, "spent", null, U(4, 0, 0) with { Spent = [new("a", 1), new("B", 1)] });
+        // Ordinal order: '.' (46) sorts before '_' (95), though a culture comparison puts '_' first.
+        AssertRejected(4, "spent", null, U(4, 0, 0) with { Spent = [new("pool_a", 1), new("pool.z", 1)] });
         AssertRejected(4, "spent", null, U(4, 0, 0) with { Spent = [new("pool.a", 1), new("pool.a", 2)] });
         AssertRejected(4, "spent", null, U(4, 0, 0) with { Spent = [new("pool.a", 0)] });
         AssertRejected(4, "spent", null, U(4, 0, 0) with { Spent = [new("pool.a", -1)] });
-        Build(null, U(4, 0, 0) with { Spent = [new("B", 1), new("a", 2)] });
+        Build(null, U(4, 0, 0) with { Spent = [new("pool.z", 1), new("pool_a", 2)] });
     }
+
+    // Pool ids are content ids ([a-z0-9_.:-]), so a bad one is a validation error, not a digest crash.
+    [Theory]
+    [InlineData("Pool.A")]
+    [InlineData("pool a")]
+    [InlineData("")]
+    [InlineData(null)]
+    public void Create_rejects_a_spent_count_whose_pool_id_is_not_a_content_id(string? pool) =>
+        AssertRejected(4, "pool", null, U(4, 0, 0) with { Spent = [new(pool!, 1)] });
 
     [Fact]
     public void A_new_run_is_out_of_combat_and_not_ended()
@@ -172,6 +181,8 @@ public class RunStateTests
     [InlineData("\"movementUsed\":2", "\"movementUsed\":-1")]
     [InlineData("[{\"pool\":\"pool.a\",\"spent\":1},{\"pool\":\"pool.b\",\"spent\":3}]", "[{\"pool\":\"pool.b\",\"spent\":3},{\"pool\":\"pool.a\",\"spent\":1}]")]
     [InlineData("{\"pool\":\"pool.a\",\"spent\":1}", "{\"pool\":\"pool.a\",\"spent\":0}")]
+    [InlineData("{\"pool\":\"pool.a\",", "{\"pool\":\"Pool.A\",")]
+    [InlineData("{\"pool\":\"pool.a\",", "{\"pool\":\"\",")]
     [InlineData(",\"nextEventSeq\":5", "")]
     public void A_load_with_a_bad_hero_budget_or_spent_count_is_a_format_error(string from, string to)
     {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
+using Dungeon.Core.Combat;
 using Dungeon.Core.Content;
 using static Dungeon.Core.Content.ContentJson;
 
@@ -21,6 +22,7 @@ public sealed class RulesContext
     private readonly ImmutableArray<string> _flagTargets;
     private readonly ImmutableArray<string> _flags;
     private readonly ImmutableArray<RuleEvent> _events;
+    private readonly ImmutableArray<PoolDefinition> _pools;
 
     private RulesContext(
         ImmutableArray<EffectDefinition> definitions,
@@ -28,7 +30,8 @@ public sealed class RulesContext
         ImmutableArray<string> rollTargets,
         ImmutableArray<string> flags,
         ImmutableArray<RuleEvent> events,
-        HookRegistry hooks)
+        HookRegistry hooks,
+        ImmutableArray<PoolDefinition> pools)
     {
         _definitions = definitions;
         _numbers = numbers;
@@ -37,28 +40,34 @@ public sealed class RulesContext
         _flags = flags;
         _events = events;
         Hooks = hooks;
+        _pools = pools;
     }
 
-    /// <summary>No effect definitions, and the core registries. The engine runs with it when no rules are given.</summary>
+    /// <summary>
+    /// No effect definitions, the core registries and no pools. The engine runs with it when no rules are given.
+    /// </summary>
     public static RulesContext Empty { get; } = new(
         ImmutableArray<EffectDefinition>.Empty,
         SortedNumbers(DerivedNumbers.Core),
         SortedIds(RollTargets.Core, "rollTargets"),
         SortedIds(Flags.Core, "flags"),
         SortedEvents(RuleEvents.Core),
-        HookRegistry.Core);
+        HookRegistry.Core,
+        ImmutableArray<PoolDefinition>.Empty);
 
     /// <summary>
     /// Builds the context for <paramref name="content"/>'s effect definitions. Each registry defaults to its core
     /// table (<see cref="DerivedNumbers.Core"/>, <see cref="RollTargets.Core"/>, <see cref="RuleEvents.Core"/>,
-    /// <see cref="HookRegistry.Core"/>, <see cref="Flags.Core"/>); tests pass their own. Throws
+    /// <see cref="HookRegistry.Core"/>, <see cref="Flags.Core"/>); tests pass their own. The pool table (M1-10 plan
+    /// call 7) defaults to none until the pool content records arrive (M1-19). Throws
     /// <see cref="ContentLoadException"/> naming the definition's file and path when an <c>add</c>, <c>halve</c> or
     /// <c>zero</c> target names no derived number, a <c>halve</c> or <c>zero</c> targets a number whose rule is not
     /// <see cref="NumberRule.Speed"/>, a <c>rollMode</c> target names no roll target, a <c>flag</c> target is not one of
     /// <see cref="Flags.Targets"/> or its flag names no registered flag, a trigger's <c>on</c> names no event, or an
     /// action names no registered hook. Throws <see cref="ArgumentException"/> if a registry repeats an id, or a derived
     /// number has no base, has a cap but is not an <see cref="NumberRule.AbilityScore"/> number, or has a floor but is an
-    /// <see cref="NumberRule.AbilityScore"/> or <see cref="NumberRule.Speed"/> number.
+    /// <see cref="NumberRule.AbilityScore"/> or <see cref="NumberRule.Speed"/> number, or a pool is null, has an id
+    /// that is not a content id, an undefined refill tag or no maximum, or repeats an id.
     /// </summary>
     public static RulesContext Create(
         ContentSet content,
@@ -66,7 +75,8 @@ public sealed class RulesContext
         ImmutableArray<string>? rollTargets = null,
         ImmutableArray<RuleEvent>? events = null,
         HookRegistry? hooks = null,
-        ImmutableArray<string>? flags = null)
+        ImmutableArray<string>? flags = null,
+        ImmutableArray<PoolDefinition>? pools = null)
     {
         ArgumentNullException.ThrowIfNull(content);
         var context = new RulesContext(
@@ -75,7 +85,8 @@ public sealed class RulesContext
             SortedIds(rollTargets ?? RollTargets.Core, nameof(rollTargets)),
             SortedIds(flags ?? Flags.Core, nameof(flags)),
             SortedEvents(events ?? RuleEvents.Core),
-            hooks ?? HookRegistry.Core);
+            hooks ?? HookRegistry.Core,
+            SortedPools(pools ?? ImmutableArray<PoolDefinition>.Empty));
         context.Validate(content);
         return context;
     }
@@ -88,11 +99,21 @@ public sealed class RulesContext
     public DerivedNumber Number(string id) =>
         Find(_numbers, id, n => n.Id) ?? throw new ArgumentException($"No derived number \"{id}\".", nameof(id));
 
+    /// <summary>The pool <paramref name="id"/>. Throws <see cref="ArgumentException"/> if there is none.</summary>
+    public PoolDefinition Pool(string id) =>
+        FindPool(id) ?? throw new ArgumentException($"No pool \"{id}\".", nameof(id));
+
+    /// <summary>The pool table, ordinal by id.</summary>
+    public ImmutableArray<PoolDefinition> Pools => _pools;
+
     /// <summary>True if <paramref name="id"/> is a registered roll target.</summary>
     public bool IsRollTarget(string id) => Contains(_rollTargets, id);
 
     /// <summary>True if <paramref name="target"/> is a flag target and <paramref name="name"/> a registered flag.</summary>
     public bool IsFlag(string target, string name) => Contains(_flagTargets, target) && Contains(_flags, name);
+
+    /// <summary>The pool <paramref name="id"/>, or null if there is none.</summary>
+    internal PoolDefinition? FindPool(string id) => Find(_pools, id, p => p.Id);
 
     /// <summary>The hooks content may name.</summary>
     internal HookRegistry Hooks { get; }
@@ -216,6 +237,32 @@ public sealed class RulesContext
             if (string.Equals(sorted[i - 1].Id, sorted[i].Id, StringComparison.Ordinal))
             {
                 throw new ArgumentException($"Derived number \"{sorted[i].Id}\" is registered twice.", nameof(numbers));
+            }
+        }
+
+        return sorted;
+    }
+
+    private static ImmutableArray<PoolDefinition> SortedPools(ImmutableArray<PoolDefinition> pools)
+    {
+        var sorted = pools
+            .Select(p => p ?? throw new ArgumentException("A pool is null.", nameof(pools)))
+            .Select(p => ContentId.IsValid(p.Id)
+                ? p
+                : throw new ArgumentException($"Pool id \"{p.Id}\" is not a content id ([a-z0-9_.:-]).", nameof(pools)))
+            .Select(p => Enum.IsDefined(p.Refill)
+                ? p
+                : throw new ArgumentException($"Pool \"{p.Id}\" has an undefined refill tag.", nameof(pools)))
+            .Select(p => p.Max is not null
+                ? p
+                : throw new ArgumentException($"Pool \"{p.Id}\" has no maximum.", nameof(pools)))
+            .OrderBy(p => p.Id, StringComparer.Ordinal)
+            .ToImmutableArray();
+        for (int i = 1; i < sorted.Length; i++)
+        {
+            if (string.Equals(sorted[i - 1].Id, sorted[i].Id, StringComparison.Ordinal))
+            {
+                throw new ArgumentException($"Pool \"{sorted[i].Id}\" is registered twice.", nameof(pools));
             }
         }
 

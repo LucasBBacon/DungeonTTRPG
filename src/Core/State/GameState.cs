@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Dungeon.Core.Combat;
+using Dungeon.Core.Content;
 using Dungeon.Core.Effects;
 using Dungeon.Core.Stats;
 
@@ -93,8 +94,8 @@ public sealed record GameState(
     /// configuration defaults to <see cref="RunConfig.M1"/> and the unlocks to <see cref="UnlockSnapshot.None"/>;
     /// both are validated. The run starts with no active effects and <see cref="NextEffectSeq"/> 1. HP is not checked
     /// against the maximum (M1-09 plan call 2): a save loads through here before its effects are back, and an effect
-    /// may raise the maximum. A unit's turn budget counts must not be negative, and its spent counts must be sorted by
-    /// pool id in ordinal order, each pool once, each count at least 1. <paramref name="hero"/>, when given, must name a
+    /// may raise the maximum. A unit's turn budget counts must not be negative, and its spent counts must name pools by
+    /// content id, sorted in ordinal order, each pool once, each count at least 1. <paramref name="hero"/>, when given, must name a
     /// party unit in the state. The run starts out of combat, not ended, with <see cref="NextEventSeq"/> 1.
     /// </summary>
     public static GameState Create(
@@ -271,6 +272,12 @@ public sealed record GameState(
             if (pool.PoolId is null)
             {
                 throw new ArgumentException($"{who}has a spent count with no pool id.", units);
+            }
+
+            if (!ContentId.IsValid(pool.PoolId))
+            {
+                throw new ArgumentException(
+                    $"{who}has a spent count for pool '{pool.PoolId}', which is not a content id ([a-z0-9_.:-]).", units);
             }
 
             if (pool.Spent < 1)
