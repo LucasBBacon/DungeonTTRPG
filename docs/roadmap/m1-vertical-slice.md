@@ -157,6 +157,9 @@ handle, with its draw count checked.
   `bossCard` registered with `wave: M2`, inert, per D-08), `loot/run`.
 - Inert rows: a row whose registry wave is later than the build's wave
   is expected to draw 0 (R-SEED-3 as amended by D-08).
+- The M0 shrine stream `loot/shrine` (sequential-saved, added by M1-02 for
+  the demo boons and not in SV 4.3) is either registered or removed with
+  the shrine; it must not stay an unregistered path.
 
 **Done when:**
 - [ ] V19s stream-row completeness, `DomainDisjoint` and the 64-bit
