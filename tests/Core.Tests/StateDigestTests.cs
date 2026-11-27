@@ -101,6 +101,8 @@ public class StateDigestTests
             atShrine with { Pending = pending with { Source = new GridPos(0, 0) } },
             atShrine with { Tick = atShrine.Tick + 1 },
             atShrine with { NextDecisionId = atShrine.NextDecisionId + 1 },
+            atShrine with { Config = RunConfig.M1 with { DifficultyTier = 1 } },
+            atShrine with { Unlocks = new UnlockSnapshot(["unlock.a"]) },
         ];
         var baseline = StateDigest.Of(atShrine);
         for (int i = 0; i < changed.Length; i++)

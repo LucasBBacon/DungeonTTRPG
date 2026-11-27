@@ -165,6 +165,7 @@ here.
 | D-11 | M1-34 | Which Afterimage states (Fresh, Persisting, Old, Short) are "basic" in M1. | XI 4.2 |
 | ~~D-12~~ | ~~M1-04~~ | **Resolved 2026-11-28 (client):** content record ids are `[a-z0-9_.:-]`; stream and domain labels (code constants passed to `LabelId`) may also use capitals, `[A-Za-z0-9_.:-]`, so every SV 4.1 vector stays valid. Recorded in SV 4.1 K-rule 3. | SV 4.1 K-rule 3, 4.3 |
 | D-13 | M1-33 | The `lineRoll:{source}` source kinds (IR) and the `loot/floor` boss-channel block label (LE) are not named; M1-05 registers neither. | SV 4.3; IR; LE |
+| D-14 | M2-23 | V19s `CoreNoProfileRef` (SV 4.6): an analyzer rule that Core cannot reference Profile types. M1-06 builds no rule because no Profile type exists yet; the step that introduces the profile adds it. | SV 4.6, 5.2 V19s |
 | D-20 | M2-02 | Rulings RT-14 / HZ-6 (Teetering in the theme six), RT-16 / TL-39 (trap conditions from the theme six), EV-11 (Grace durations). | CO; RS; EV |
 | D-21 | M2-10 | Rulings EP-6 (Billets), BR-6 (Rhythm), BR-7, TR-15, TL-16 (AI terms). | ENM; EP; BR |
 | D-30 | M3-06 | How many class and aspect unlocks ship in M3. | CL 9.4 |

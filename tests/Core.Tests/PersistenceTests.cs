@@ -64,17 +64,17 @@ public class PersistenceTests
         Assert.Equal(1, ex.CommandIndex); Assert.Equal(CommandError.DecisionPending, ex.Error);
     }
 
-    [Theory] [InlineData("")] [InlineData("not json")] [InlineData("{}")] [InlineData("{\"version\":2}")]
+    [Theory] [InlineData("")] [InlineData("not json")] [InlineData("{}")] [InlineData("{\"version\":3}")]
     public void Load_rejects_malformed_input(string json) =>
         Assert.Throws<SnapshotFormatException>(() => Snapshot.Load(json));
 
     [Fact]
     public void Load_rejects_newer_version()
     {
-        var json = Snapshot.Save(State()).Replace("\"version\":2", "\"version\":3");
+        var json = Snapshot.Save(State()).Replace("\"version\":3", "\"version\":4");
         var ex = Assert.Throws<SnapshotVersionException>(() => Snapshot.Load(json));
-        Assert.Equal(3, ex.Found);
-        Assert.Contains("this build reads up to version 2", ex.Message);
+        Assert.Equal(4, ex.Found);
+        Assert.Contains("this build reads up to version 3", ex.Message);
     }
 
     /// <summary>Review Focus 3: real M0 saves are refused as an old version, not half loaded.</summary>
@@ -83,7 +83,7 @@ public class PersistenceTests
     {
         var snapshot = Assert.Throws<SnapshotVersionException>(() => Snapshot.Load(M0SnapshotV1));
         Assert.Equal(1, snapshot.Found);
-        Assert.Contains("this build no longer reads it (it reads version 2)", snapshot.Message);
+        Assert.Contains("this build no longer reads it (it reads version 3)", snapshot.Message);
         Assert.Equal(1, Assert.Throws<SnapshotVersionException>(() => CommandLog.Load(M0LogV1)).Found);
     }
 
@@ -100,7 +100,7 @@ public class PersistenceTests
         Assert.Throws<SnapshotFormatException>(
             () => Snapshot.Load(good.Replace("\"runSeed\":7,", "\"runSeed\":1152921504606846976,")));
         Assert.Throws<SnapshotFormatException>(
-            () => CommandLog.Load("{\"version\":2,\"seed\":1152921504606846976,\"commands\":[]}"));
+            () => CommandLog.Load("{\"version\":3,\"seed\":1152921504606846976,\"commands\":[]}"));
     }
 
     /// <summary>Saves hold the run seed and the counters; keys are re-derived on load (plan call 3).</summary>
@@ -130,16 +130,16 @@ public class PersistenceTests
     public void Save_is_single_line_json_with_version_first_and_plain_map_rows()
     {
         var json = Snapshot.Save(State());
-        Assert.StartsWith("{\"version\":2,", json);
+        Assert.StartsWith("{\"version\":3,", json);
         Assert.DoesNotContain('\n', json);
         Assert.Contains("\"map\":[\".*.\"]", json);
-        Assert.StartsWith("{\"version\":2,\"seed\":7,", new CommandLog(7, [.. Script]).Save());
+        Assert.StartsWith("{\"version\":3,\"seed\":7,", new CommandLog(7, [.. Script]).Save());
     }
 
     [Fact]
     public void Newer_version_is_reported_before_content_is_validated() =>
-        Assert.Equal(3, Assert.Throws<SnapshotVersionException>(
-            () => Snapshot.Load("{\"version\":3,\"map\":42}")).Found);
+        Assert.Equal(4, Assert.Throws<SnapshotVersionException>(
+            () => Snapshot.Load("{\"version\":4,\"map\":42}")).Found);
 
     [Fact]
     public void Numbers_do_not_depend_on_the_current_culture()
@@ -246,7 +246,7 @@ public class PersistenceTests
     }
 
     [Theory]
-    [InlineData("\"version\":2", "\"version\":3,\"version\":2")]
+    [InlineData("\"version\":3", "\"version\":4,\"version\":3")]
     [InlineData("\"tick\":0", "\"tick\":5,\"tick\":0")]
     [InlineData("\"x\":0", "\"x\":2,\"x\":0")]                        // inside a unit
     [InlineData("\"pending\":null,", "")]                               // a field Save always writes
@@ -260,12 +260,12 @@ public class PersistenceTests
     [Fact]
     public void Command_log_load_rejects_duplicate_properties() =>
         Assert.Throws<SnapshotFormatException>(
-            () => CommandLog.Load("{\"version\":2,\"seed\":1,\"seed\":2,\"commands\":[]}"));
+            () => CommandLog.Load("{\"version\":3,\"seed\":1,\"seed\":2,\"commands\":[]}"));
 
     [Theory] [InlineData("2147483648")] [InlineData("3000000000")]
     public void Version_too_large_for_an_int_is_still_a_newer_version(string version)
     {
-        var json = Snapshot.Save(State()).Replace("\"version\":2", "\"version\":" + version);
+        var json = Snapshot.Save(State()).Replace("\"version\":3", "\"version\":" + version);
         Assert.Equal(int.MaxValue, Assert.Throws<SnapshotVersionException>(() => Snapshot.Load(json)).Found);
     }
 
@@ -281,22 +281,22 @@ public class PersistenceTests
     [Theory]
     [InlineData("")]
     [InlineData("{}")]
-    [InlineData("{\"version\":2}")]
-    [InlineData("{\"version\":2,\"seed\":7}")]
-    [InlineData("{\"version\":2,\"seed\":-1,\"commands\":[]}")]
-    [InlineData("{\"version\":2,\"seed\":7,\"commands\":[null]}")]
-    [InlineData("{\"version\":2,\"seed\":7,\"commands\":[{\"type\":\"jump\"}]}")]
-    [InlineData("{\"version\":2,\"seed\":7,\"commands\":[{\"type\":\"move\",\"unit\":1}]}")]
-    [InlineData("{\"version\":2,\"seed\":7,\"commands\":[{\"type\":\"move\",\"unit\":1,\"dir\":\"Up\"}]}")]
-    [InlineData("{\"version\":2,\"seed\":7,\"commands\":[{\"type\":\"move\",\"unit\":1,\"dir\":\"E\",\"option\":0}]}")]
-    [InlineData("{\"version\":2,\"seed\":7,\"commands\":[{\"type\":\"answer\",\"decision\":1}]}")]
+    [InlineData("{\"version\":3}")]
+    [InlineData("{\"version\":3,\"seed\":7}")]
+    [InlineData("{\"version\":3,\"seed\":-1,\"commands\":[]}")]
+    [InlineData("{\"version\":3,\"seed\":7,\"commands\":[null]}")]
+    [InlineData("{\"version\":3,\"seed\":7,\"commands\":[{\"type\":\"jump\"}]}")]
+    [InlineData("{\"version\":3,\"seed\":7,\"commands\":[{\"type\":\"move\",\"unit\":1}]}")]
+    [InlineData("{\"version\":3,\"seed\":7,\"commands\":[{\"type\":\"move\",\"unit\":1,\"dir\":\"Up\"}]}")]
+    [InlineData("{\"version\":3,\"seed\":7,\"commands\":[{\"type\":\"move\",\"unit\":1,\"dir\":\"E\",\"option\":0}]}")]
+    [InlineData("{\"version\":3,\"seed\":7,\"commands\":[{\"type\":\"answer\",\"decision\":1}]}")]
     public void Command_log_load_rejects_malformed_input(string json) =>
         Assert.Throws<SnapshotFormatException>(() => CommandLog.Load(json));
 
     [Fact]
     public void Command_log_load_rejects_newer_version() =>
-        Assert.Equal(3, Assert.Throws<SnapshotVersionException>(
-            () => CommandLog.Load("{\"version\":3,\"seed\":7,\"commands\":[]}")).Found);
+        Assert.Equal(4, Assert.Throws<SnapshotVersionException>(
+            () => CommandLog.Load("{\"version\":4,\"seed\":7,\"commands\":[]}")).Found);
 
     /// <summary>A stream at counter 2^64 - 1 can never draw again, so such a save is refused at load (A1).</summary>
     [Fact]
@@ -336,5 +336,95 @@ public class PersistenceTests
     {
         var log = new CommandLog(RunSeed.Limit - 1, ImmutableArray<Command>.Empty);
         Assert.Equal(RunSeed.Limit - 1, CommandLog.Load(log.Save()).Seed);
+    }
+
+    // --- Save version 3: the reproducibility key header (M1-06) ---
+
+    [Fact]
+    public void A_version_2_save_is_a_version_error()
+    {
+        var v2 = Snapshot.Save(State()).Replace("\"version\":3", "\"version\":2");
+        Assert.Equal(2, Assert.Throws<SnapshotVersionException>(() => Snapshot.Load(v2)).Found);
+    }
+
+    [Fact]
+    public void Config_and_unlocks_round_trip_byte_for_byte()
+    {
+        var config = RunConfig.M1 with { DifficultyTier = 1, Boons = ["boon.b", "boon.a"], RunModifierId = "oath.a" };
+        var s = GameState.Create(GridMap.Parse(".*."), [Fixtures.U(1, 0, 0)], 7, config, new UnlockSnapshot(["unlock.a"]));
+        var json = Snapshot.Save(s);
+        var loaded = Snapshot.Load(json);
+        Assert.Equal(json, Snapshot.Save(loaded));
+        Assert.Equal(s.Key, loaded.Key);
+        Assert.Contains("\"boons\":[\"boon.a\",\"boon.b\"]", json);
+    }
+
+    [Fact]
+    public void The_header_reads_without_loading_the_state()
+    {
+        var s = State();
+        var header = SaveHeader.Read(Snapshot.Save(s));
+        Assert.Equal(3, header.SaveVersion);
+        Assert.Equal(RulesVersion.Current, header.RulesVersion);
+        Assert.Equal(GenVersion.Current, header.GenVersion);
+        Assert.Equal(s.Key.ManifestHash, header.ManifestHash);
+        Assert.Equal(s.Key.ConfigHash, header.ConfigHash);
+        Assert.Equal(s.Key.UnlockHash, header.UnlockHash);
+        Assert.Equal(s.RunSeed, header.RunSeed);
+    }
+
+    // Review Focus 3: the stored hashes must match the stored snapshots.
+    [Fact]
+    public void An_edited_config_hash_is_refused()
+    {
+        var json = Snapshot.Save(State());
+        var hash = RunConfig.M1.ConfigHash.ToHex();
+        var edited = json.Replace(hash, new string('0', 64));
+        Assert.NotEqual(json, edited);
+        Assert.Throws<SnapshotFormatException>(() => Snapshot.Load(edited));
+    }
+
+    [Fact]
+    public void An_edited_config_without_its_hash_is_refused()
+    {
+        var edited = Snapshot.Save(State()).Replace("\"routeFloorCount\":1", "\"routeFloorCount\":2");
+        Assert.Contains("configHash", Assert.Throws<SnapshotFormatException>(() => Snapshot.Load(edited)).Message);
+    }
+
+    [Fact]
+    public void An_edited_unlock_set_without_its_hash_is_refused()
+    {
+        var edited = Snapshot.Save(State()).Replace("\"unlocks\":{\"ids\":[]}", "\"unlocks\":{\"ids\":[\"unlock.a\"]}");
+        Assert.Contains("unlockHash", Assert.Throws<SnapshotFormatException>(() => Snapshot.Load(edited)).Message);
+    }
+
+    // Plan call 6: build identity is stored and exposed, not enforced, in M1.
+    [Fact]
+    public void A_save_from_another_gen_version_or_manifest_still_loads()
+    {
+        var json = Snapshot.Save(State());
+        var otherGen = json.Replace($"\"genVersion\":{GenVersion.Current}", "\"genVersion\":99");
+        Assert.NotNull(Snapshot.Load(otherGen));
+        Assert.Equal(99, SaveHeader.Read(otherGen).GenVersion);
+        var otherManifest = json.Replace(Dungeon.Core.Content.ContentHashes.Manifest, new string('a', 64));
+        Assert.NotNull(Snapshot.Load(otherManifest));
+    }
+
+    // Ruling (M1-06 final review A3/B1/C4): the file keeps its origin identity and SaveHeader.Read reports
+    // it, but a run loaded and saved again on this build is stamped with this build's identity. Keeping the
+    // origin across a re-save is the replay header's (M1-27) and comparability's (M2) job.
+    [Fact]
+    public void Saving_a_loaded_run_again_stamps_this_builds_identity()
+    {
+        var otherGen = Snapshot.Save(State()).Replace($"\"genVersion\":{GenVersion.Current}", "\"genVersion\":99");
+        Assert.Equal(99, SaveHeader.Read(otherGen).GenVersion);
+        Assert.Equal(GenVersion.Current, SaveHeader.Read(Snapshot.Save(Snapshot.Load(otherGen))).GenVersion);
+    }
+
+    [Fact]
+    public void A_save_with_the_last_hollow_choice_but_no_two_doors_is_refused()
+    {
+        var json = Snapshot.Save(State()).Replace("\"routeLastHollowChoiceEnabled\":false", "\"routeLastHollowChoiceEnabled\":true");
+        Assert.Throws<SnapshotFormatException>(() => Snapshot.Load(json));
     }
 }

@@ -37,7 +37,7 @@ public static class StateDigest
     {
         public void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(7);
+            w.BeginRecord(9);
             w.UInt64(0, s.RunSeed);
             w.List(1, s.Map.ToRows(), (e, row) => e.String(0, row));
             w.SetByKey(2, s.Units, u => IdKey(u.Id), (e, u) => e.Record(0, new UnitRecord(u)));
@@ -45,6 +45,8 @@ public static class StateDigest
             w.OptionalRecord(4, s.Pending is null ? null : new PendingRecord(s.Pending));
             w.Int64(5, s.Tick);
             w.Int32(6, s.NextDecisionId);
+            w.Record(7, s.Config);
+            w.Record(8, s.Unlocks);
             w.EndRecord();
         }
     }

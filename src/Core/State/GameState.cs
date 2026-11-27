@@ -32,6 +32,8 @@ public sealed record GameState(
     GridMap Map,
     ImmutableArray<Unit> Units,
     ulong RunSeed,
+    RunConfig Config,
+    UnlockSnapshot Unlocks,
     RunStreams Rng,
     PendingDecision? Pending,
     long Tick,
@@ -42,12 +44,17 @@ public sealed record GameState(
     /// <see cref="ArgumentException"/> naming the problem if two units share an id, a unit
     /// stands on a square that is not walkable, two units share a square, or a unit's
     /// <see cref="Unit.Boons"/> is an uninitialised array, and an
-    /// <see cref="ArgumentOutOfRangeException"/> if <paramref name="seed"/> is at least 2^60.
+    /// <see cref="ArgumentOutOfRangeException"/> if <paramref name="seed"/> is at least 2^60. The run
+    /// configuration defaults to <see cref="RunConfig.M1"/> and the unlocks to <see cref="UnlockSnapshot.None"/>;
+    /// both are validated.
     /// </summary>
-    public static GameState Create(GridMap map, IEnumerable<Unit> units, ulong seed)
+    public static GameState Create(
+        GridMap map, IEnumerable<Unit> units, ulong seed, RunConfig? config = null, UnlockSnapshot? unlocks = null)
     {
         ArgumentNullException.ThrowIfNull(map);
         ArgumentNullException.ThrowIfNull(units);
+        config = RunConfig.Validate(config ?? RunConfig.M1);
+        unlocks = UnlockSnapshot.Validate(unlocks ?? UnlockSnapshot.None);
         var streams = RunStreams.FromSeed(Dungeon.Core.RunSeed.Validate(seed, nameof(seed)));
 
         var sorted = units
@@ -89,8 +96,14 @@ public sealed record GameState(
             }
         }
 
-        return new GameState(map, sorted, seed, streams, null, 0, 1);
+        return new GameState(map, sorted, seed, config, unlocks, streams, null, 0, 1);
     }
+
+    /// <summary>
+    /// The run's reproducibility key (SV 4.6): its seed, this build's generator version and manifest hash,
+    /// and the hashes of its configuration and unlock snapshots.
+    /// </summary>
+    public RunKey Key => RunKey.For(RunSeed, Config, Unlocks);
 
     /// <summary>The unit with this id, or null if there is none.</summary>
     public Unit? FindUnit(UnitId id)

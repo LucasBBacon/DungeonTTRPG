@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Dungeon.Core.Canonical;
 
 namespace Dungeon.Core;
 
@@ -47,9 +48,10 @@ public static class Snapshot
 {
     /// <summary>
     /// The only version this build reads and writes, shared with <see cref="CommandLog"/>.
-    /// Version 2 (M1-02) stores the run seed and stream counters; version 1 held PCG32 states.
+    /// Version 3 (M1-06) adds the reproducibility-key header and the run configuration and unlock
+    /// snapshots; version 2 (M1-02) stored the run seed and stream counters; version 1 held PCG32 states.
     /// </summary>
-    public const int CurrentVersion = 2;
+    public const int CurrentVersion = 3;
 
     /// <summary>
     /// Writes <paramref name="s"/>. Only the run seed and the stream counters are stored, so a state whose
@@ -72,10 +74,18 @@ public static class Snapshot
                 $"Cannot save a state whose stream keys are not derived from its run seed {s.RunSeed}.");
         }
 
+        var key = s.Key;
         return PersistenceJson.Write(new StateDto
         {
             Version = CurrentVersion,
+            RulesVersion = Dungeon.Core.RulesVersion.Current,
+            GenVersion = key.GenVersion,
+            ManifestHash = key.ManifestHash.ToHex(),
+            ConfigHash = key.ConfigHash.ToHex(),
+            UnlockHash = key.UnlockHash.ToHex(),
             RunSeed = s.RunSeed,
+            Config = ConfigDto.From(s.Config),
+            Unlocks = new UnlocksDto { Ids = s.Unlocks.Ids.OrderBy(id => id, StringComparer.Ordinal).ToArray() },
             Map = s.Map.ToRows().ToArray(),
             Units = s.Units.Select(u => new UnitDto
             {
@@ -113,6 +123,8 @@ public static class Snapshot
     /// </summary>
     public static GameState Load(string json) => PersistenceJson.Read<StateDto, GameState>(json, FromDto);
 
+    internal static SaveHeader ReadHeader(string json) => PersistenceJson.Read<StateDto, SaveHeader>(json, dto => dto.ToHeader());
+
     private static GameState FromDto(StateDto dto)
     {
         var rows = PersistenceJson.Need(dto.Map, "map");
@@ -135,9 +147,30 @@ public static class Snapshot
             units.Add(unit);
         }
 
+        // The snapshots must be the ones the stored hashes were taken over (SV 4.6). The build identity
+        // (rulesVersion, genVersion, manifestHash) is checked for form but not compared with this build in M1:
+        // comparability is M2 and the replay rule is M1-27 (M1-06 plan call 6). It stays readable in the file
+        // through SaveHeader.Read; a loaded run saved again is stamped with this build's identity, because the
+        // run now continues on this build (M1-06 final-review ruling).
+        PersistenceJson.Need(dto.RulesVersion, "rulesVersion");
+        PersistenceJson.Need(dto.GenVersion, "genVersion");
+        Digest.Parse(PersistenceJson.Need(dto.ManifestHash, "manifestHash"));
+        var config = RunConfig.Validate(PersistenceJson.Need(dto.Config, "config").ToConfig());
+        var unlocks = UnlockSnapshot.Validate(
+            new UnlockSnapshot([.. PersistenceJson.Need(PersistenceJson.Need(dto.Unlocks, "unlocks").Ids, "unlock ids")]));
+        if (Digest.Parse(PersistenceJson.Need(dto.ConfigHash, "configHash")) != config.ConfigHash)
+        {
+            throw new SnapshotFormatException("Invalid save: configHash does not match the stored config.");
+        }
+
+        if (Digest.Parse(PersistenceJson.Need(dto.UnlockHash, "unlockHash")) != unlocks.UnlockHash)
+        {
+            throw new SnapshotFormatException("Invalid save: unlockHash does not match the stored unlocks.");
+        }
+
         // Create applies the same rules as a new run: a run seed below 2^60, unique ids, walkable
         // squares, one unit per square. Its streams have the right keys; the saved counters are put back below.
-        var state = GameState.Create(map, units, PersistenceJson.Need(dto.RunSeed, "runSeed"));
+        var state = GameState.Create(map, units, PersistenceJson.Need(dto.RunSeed, "runSeed"), config, unlocks);
 
         var rngDto = PersistenceJson.Need(dto.Rng, "rng");
         var rng = new RunStreams(
@@ -245,14 +278,78 @@ public static class Snapshot
     private sealed class StateDto
     {
         [JsonPropertyName("version"), JsonPropertyOrder(0)] public int? Version { get; set; }
-        [JsonPropertyName("runSeed"), JsonPropertyOrder(1)] public ulong? RunSeed { get; set; }
-        [JsonPropertyName("map"), JsonPropertyOrder(2)] public string[]? Map { get; set; }
-        [JsonPropertyName("units"), JsonPropertyOrder(3)] public UnitDto?[]? Units { get; set; }
-        [JsonPropertyName("rng"), JsonPropertyOrder(4)] public RngStreamsDto? Rng { get; set; }
+        [JsonPropertyName("rulesVersion"), JsonPropertyOrder(1)] public int? RulesVersion { get; set; }
+        [JsonPropertyName("genVersion"), JsonPropertyOrder(2)] public int? GenVersion { get; set; }
+        [JsonPropertyName("manifestHash"), JsonPropertyOrder(3)] public string? ManifestHash { get; set; }
+        [JsonPropertyName("configHash"), JsonPropertyOrder(4)] public string? ConfigHash { get; set; }
+        [JsonPropertyName("unlockHash"), JsonPropertyOrder(5)] public string? UnlockHash { get; set; }
+        [JsonPropertyName("runSeed"), JsonPropertyOrder(6)] public ulong? RunSeed { get; set; }
+        [JsonPropertyName("config"), JsonPropertyOrder(7)] public ConfigDto? Config { get; set; }
+        [JsonPropertyName("unlocks"), JsonPropertyOrder(8)] public UnlocksDto? Unlocks { get; set; }
+        [JsonPropertyName("map"), JsonPropertyOrder(9)] public string[]? Map { get; set; }
+        [JsonPropertyName("units"), JsonPropertyOrder(10)] public UnitDto?[]? Units { get; set; }
+        [JsonPropertyName("rng"), JsonPropertyOrder(11)] public RngStreamsDto? Rng { get; set; }
         // Required: Save always writes it (as null when nothing is pending), so its absence means a damaged file.
-        [JsonPropertyName("pending"), JsonPropertyOrder(5), JsonRequired] public PendingDto? Pending { get; set; }
-        [JsonPropertyName("tick"), JsonPropertyOrder(6)] public long? Tick { get; set; }
-        [JsonPropertyName("nextDecisionId"), JsonPropertyOrder(7)] public int? NextDecisionId { get; set; }
+        [JsonPropertyName("pending"), JsonPropertyOrder(12), JsonRequired] public PendingDto? Pending { get; set; }
+        [JsonPropertyName("tick"), JsonPropertyOrder(13)] public long? Tick { get; set; }
+        [JsonPropertyName("nextDecisionId"), JsonPropertyOrder(14)] public int? NextDecisionId { get; set; }
+
+        public SaveHeader ToHeader() => new(
+            PersistenceJson.Need(Version, "version"),
+            PersistenceJson.Need(RulesVersion, "rulesVersion"),
+            PersistenceJson.Need(GenVersion, "genVersion"),
+            Digest.Parse(PersistenceJson.Need(ManifestHash, "manifestHash")),
+            Digest.Parse(PersistenceJson.Need(ConfigHash, "configHash")),
+            Digest.Parse(PersistenceJson.Need(UnlockHash, "unlockHash")),
+            PersistenceJson.Need(RunSeed, "runSeed"));
+    }
+
+    /// <summary>The run configuration snapshot (RS 11.1, SV-12); sets are written sorted.</summary>
+    private sealed class ConfigDto
+    {
+        [JsonPropertyName("routeFloorCount"), JsonPropertyOrder(0)] public int? RouteFloorCount { get; set; }
+        [JsonPropertyName("routeTwoDoorsEnabled"), JsonPropertyOrder(1)] public bool? RouteTwoDoorsEnabled { get; set; }
+        [JsonPropertyName("routeLastHollowChoiceEnabled"), JsonPropertyOrder(2)] public bool? RouteLastHollowChoiceEnabled { get; set; }
+        [JsonPropertyName("routeDoorCamps"), JsonPropertyOrder(3)] public int[]? RouteDoorCamps { get; set; }
+        [JsonPropertyName("pacingTrimmedFloors"), JsonPropertyOrder(4)] public int[]? PacingTrimmedFloors { get; set; }
+        [JsonPropertyName("recruitCompanionCap"), JsonPropertyOrder(5)] public int? RecruitCompanionCap { get; set; }
+        [JsonPropertyName("difficultyTier"), JsonPropertyOrder(6)] public int? DifficultyTier { get; set; }
+        [JsonPropertyName("boons"), JsonPropertyOrder(7)] public string?[]? Boons { get; set; }
+        [JsonPropertyName("nightmareTier"), JsonPropertyOrder(8)] public int? NightmareTier { get; set; }
+        // Required: Save always writes it (as null when there is no run modifier).
+        [JsonPropertyName("runModifierId"), JsonPropertyOrder(9), JsonRequired] public string? RunModifierId { get; set; }
+
+        public static ConfigDto From(RunConfig c) => new()
+        {
+            RouteFloorCount = c.RouteFloorCount,
+            RouteTwoDoorsEnabled = c.RouteTwoDoorsEnabled,
+            RouteLastHollowChoiceEnabled = c.RouteLastHollowChoiceEnabled,
+            RouteDoorCamps = c.RouteDoorCamps.OrderBy(n => n).ToArray(),
+            PacingTrimmedFloors = c.PacingTrimmedFloors.OrderBy(n => n).ToArray(),
+            RecruitCompanionCap = c.RecruitCompanionCap,
+            DifficultyTier = c.DifficultyTier,
+            Boons = c.Boons.OrderBy(b => b, StringComparer.Ordinal).ToArray(),
+            NightmareTier = c.NightmareTier,
+            RunModifierId = c.RunModifierId,
+        };
+
+        public RunConfig ToConfig() => new(
+            PersistenceJson.Need(RouteFloorCount, "config routeFloorCount"),
+            PersistenceJson.Need(RouteTwoDoorsEnabled, "config routeTwoDoorsEnabled"),
+            PersistenceJson.Need(RouteLastHollowChoiceEnabled, "config routeLastHollowChoiceEnabled"),
+            [.. PersistenceJson.Need(RouteDoorCamps, "config routeDoorCamps")],
+            [.. PersistenceJson.Need(PacingTrimmedFloors, "config pacingTrimmedFloors")],
+            PersistenceJson.Need(RecruitCompanionCap, "config recruitCompanionCap"),
+            PersistenceJson.Need(DifficultyTier, "config difficultyTier"),
+            [.. PersistenceJson.Need(Boons, "config boons").Select(b => PersistenceJson.Need(b, "config boon"))],
+            PersistenceJson.Need(NightmareTier, "config nightmareTier"),
+            RunModifierId);
+    }
+
+    /// <summary>The unlock snapshot: its ids, sorted.</summary>
+    private sealed class UnlocksDto
+    {
+        [JsonPropertyName("ids"), JsonPropertyOrder(0)] public string[]? Ids { get; set; }
     }
 
     private sealed class UnitDto
@@ -280,6 +377,20 @@ public static class Snapshot
         [JsonPropertyName("x"), JsonPropertyOrder(4)] public int? X { get; set; }
         [JsonPropertyName("y"), JsonPropertyOrder(5)] public int? Y { get; set; }
     }
+}
+
+/// <summary>
+/// The key header of a save (the M1 subset of SV 9.2 <c>SaveHeader</c>; <c>runId</c>, <c>seq</c> and the
+/// comparability fields arrive with M1-27 and M2).
+/// </summary>
+public sealed record SaveHeader(
+    int SaveVersion, int RulesVersion, int GenVersion, Digest ManifestHash, Digest ConfigHash, Digest UnlockHash, ulong RunSeed)
+{
+    /// <summary>
+    /// Reads the header of a <see cref="Snapshot.Save"/> output without loading the state. Throws as
+    /// <see cref="Snapshot.Load"/> does for an unread version or a malformed document.
+    /// </summary>
+    public static SaveHeader Read(string json) => Snapshot.ReadHeader(json);
 }
 
 /// <summary>JSON plumbing shared by <see cref="Snapshot"/> and <see cref="CommandLog"/>.</summary>

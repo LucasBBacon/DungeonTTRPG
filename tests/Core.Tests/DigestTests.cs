@@ -6,6 +6,21 @@ namespace Dungeon.Core.Tests;
 public class DigestTests
 {
     [Fact]
+    public void Parse_round_trips_ToHex()
+    {
+        var d = Digest.Of(Sample.Pinned);
+        Assert.Equal(d, Digest.Parse(d.ToHex()));
+    }
+
+    [Theory]
+    [InlineData("A31903EEE094899EBDEEB4F11FB564A983884CEC9BE5E1DBC3D5FB0F1BC1348E")]
+    [InlineData("a31903eee094899ebdeeb4f11fb564a983884cec9be5e1dbc3d5fb0f1bc1348")]
+    [InlineData("z31903eee094899ebdeeb4f11fb564a983884cec9be5e1dbc3d5fb0f1bc1348e")]
+    [InlineData("")]
+    public void Parse_rejects_anything_but_64_lowercase_hex(string hex) =>
+        Assert.Throws<FormatException>(() => Digest.Parse(hex));
+
+    [Fact]
     public void Empty_input_is_the_sha256_of_nothing() =>
         Assert.Equal(
             "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
