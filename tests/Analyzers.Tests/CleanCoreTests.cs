@@ -41,4 +41,47 @@ public class CleanCoreTests
             """);
         Assert.Empty(d);
     }
+
+    [Fact]
+    public void Ordinal_and_invariant_calls_are_clean()
+    {
+        var d = Harness.Run("""
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
+            using Dungeon.Core.Determinism;
+
+            public enum Kind { A, B }
+            public sealed class Unit
+            {
+                public int Id { get; init; }
+                public Kind Kind { get; init; }
+                public string Name { get; init; } = "";
+            }
+
+            [TotalComparer]
+            public sealed class MarkedComparer : IComparer<string>
+            {
+                public int Compare(string? x, string? y) => string.CompareOrdinal(x, y);
+            }
+
+            public static class C
+            {
+                public static object M(string a, string b, List<string> list, List<Unit> units)
+                {
+                    bool equal = string.Equals(a, b, StringComparison.Ordinal);
+                    bool starts = a.StartsWith("x", StringComparison.Ordinal);
+                    int ordinal = string.CompareOrdinal(a, b);
+                    string upper = a.ToUpperInvariant();
+                    int index = a.IndexOf('x');
+                    list.Sort(new MarkedComparer());
+                    list.Sort(StringComparer.Ordinal);
+                    var byId = units.OrderBy(u => u.Id).ToList();
+                    var byKind = units.OrderBy(u => u.Kind).ThenBy(u => u.Name, new MarkedComparer()).ToList();
+                    return (equal, starts, ordinal, upper, index, byId, byKind);
+                }
+            }
+            """);
+        Assert.Empty(d);
+    }
 }
