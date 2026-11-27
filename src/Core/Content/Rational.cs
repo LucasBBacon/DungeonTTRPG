@@ -1,4 +1,5 @@
 using System;
+using Dungeon.Core.Canonical;
 
 namespace Dungeon.Core.Content;
 
@@ -6,7 +7,7 @@ namespace Dungeon.Core.Content;
 /// A rational in canonical form: reduced <c>P/Q</c> with <c>Q &gt; 0</c> (DS13). Zero is <c>0/1</c>.
 /// Build one with <see cref="Of"/> or <see cref="TryParse"/>; both reject any other form.
 /// </summary>
-public readonly record struct Rational(long P, long Q)
+public readonly record struct Rational(long P, long Q) : ICanonical
 {
     /// <summary>Makes a rational, throwing <see cref="ArgumentException"/> unless <c>q &gt; 0</c> and <c>gcd(|p|, q) = 1</c>.</summary>
     public static Rational Of(long p, long q)
@@ -85,6 +86,16 @@ public readonly record struct Rational(long P, long Q)
 
         r = new Rational(p, (long)qMag);
         return true;
+    }
+
+    /// <summary>Writes a record of two <c>Int64</c> fields: 0 is <see cref="P"/>, 1 is <see cref="Q"/>.</summary>
+    public void WriteCanonical(CanonicalWriter w)
+    {
+        ArgumentNullException.ThrowIfNull(w);
+        w.BeginRecord(2);
+        w.Int64(0, P);
+        w.Int64(1, Q);
+        w.EndRecord();
     }
 
     /// <summary>Gives <c>"p/q"</c>, or <c>"p"</c> when q is 1.</summary>

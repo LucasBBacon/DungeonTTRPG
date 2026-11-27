@@ -366,33 +366,10 @@ internal static class PersistenceJson
             throw new SnapshotVersionException(found);
         }
 
-        RejectDuplicateProperties(doc.RootElement);
-    }
-
-    // The JSON reader keeps the last of two properties with the same name. A save never
-    // repeats one, so a repeat means the file was altered and must not be half understood.
-    private static void RejectDuplicateProperties(JsonElement element)
-    {
-        if (element.ValueKind == JsonValueKind.Object)
+        // A save never repeats a property, so a repeat means the file was altered (JsonStrict).
+        if (JsonStrict.FirstDuplicate(doc.RootElement, out string? repeated) is not null)
         {
-            var seen = new List<string>();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (seen.Contains(property.Name))
-                {
-                    throw new SnapshotFormatException($"Invalid save: property '{property.Name}' appears twice.");
-                }
-
-                seen.Add(property.Name);
-                RejectDuplicateProperties(property.Value);
-            }
-        }
-        else if (element.ValueKind == JsonValueKind.Array)
-        {
-            foreach (var item in element.EnumerateArray())
-            {
-                RejectDuplicateProperties(item);
-            }
+            throw new SnapshotFormatException($"Invalid save: property '{repeated}' appears twice.");
         }
     }
 }
