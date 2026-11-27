@@ -199,7 +199,7 @@ public class StreamHandlesTests
     {
         var signed = new[] { typeof(sbyte), typeof(short), typeof(int), typeof(long), typeof(nint) };
         var generated = typeof(Streams).Assembly.GetTypes()
-            .Where(t => t == typeof(Streams) || (t.IsValueType && t.Namespace == "Dungeon.Core" && t.Name.EndsWith("Key", StringComparison.Ordinal)));
+            .Where(t => t == typeof(Streams) || t.IsDefined(typeof(StreamKeyAttribute), inherit: false));
         foreach (var type in generated)
         {
             foreach (var method in type.GetMethods(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.DeclaredOnly))
