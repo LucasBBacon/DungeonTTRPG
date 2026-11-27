@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Immutable;
+using System.Linq;
 using Dungeon.Core.Canonical;
 
 namespace Dungeon.Core;
@@ -16,12 +17,13 @@ public sealed record UnlockSnapshot(ImmutableArray<string> Ids) : ICanonical
     /// <summary>SHA-256 over this snapshot's canonical bytes (SV 4.6). Validates the snapshot first.</summary>
     public Digest UnlockHash => Digest.Of(Validate(this));
 
-    /// <summary>Returns <paramref name="u"/> if its ids are distinct content ids; otherwise throws.</summary>
+    /// <summary>Returns <paramref name="u"/>, its ids in ordinal order, if they are distinct content ids; otherwise throws.</summary>
     public static UnlockSnapshot Validate(UnlockSnapshot u)
     {
         ArgumentNullException.ThrowIfNull(u);
         RunConfig.RequireIdSet(u.Ids, nameof(Ids));
-        return u;
+        var sorted = RunConfig.SortedIds(u.Ids);
+        return sorted.SequenceEqual(u.Ids, StringComparer.Ordinal) ? u : new UnlockSnapshot(sorted);
     }
 
     /// <inheritdoc />

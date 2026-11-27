@@ -148,8 +148,10 @@ public static class Snapshot
         }
 
         // The snapshots must be the ones the stored hashes were taken over (SV 4.6). The build identity
-        // (rulesVersion, genVersion, manifestHash) is kept but not compared with this build in M1:
-        // comparability is M2 and the replay rule is M1-27 (M1-06 plan call 6).
+        // (rulesVersion, genVersion, manifestHash) is checked for form but not compared with this build in M1:
+        // comparability is M2 and the replay rule is M1-27 (M1-06 plan call 6). It stays readable in the file
+        // through SaveHeader.Read; a loaded run saved again is stamped with this build's identity, because the
+        // run now continues on this build (M1-06 final-review ruling).
         PersistenceJson.Need(dto.RulesVersion, "rulesVersion");
         PersistenceJson.Need(dto.GenVersion, "genVersion");
         Digest.Parse(PersistenceJson.Need(dto.ManifestHash, "manifestHash"));

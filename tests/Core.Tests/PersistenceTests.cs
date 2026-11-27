@@ -410,6 +410,17 @@ public class PersistenceTests
         Assert.NotNull(Snapshot.Load(otherManifest));
     }
 
+    // Ruling (M1-06 final review A3/B1/C4): the file keeps its origin identity and SaveHeader.Read reports
+    // it, but a run loaded and saved again on this build is stamped with this build's identity. Keeping the
+    // origin across a re-save is the replay header's (M1-27) and comparability's (M2) job.
+    [Fact]
+    public void Saving_a_loaded_run_again_stamps_this_builds_identity()
+    {
+        var otherGen = Snapshot.Save(State()).Replace($"\"genVersion\":{GenVersion.Current}", "\"genVersion\":99");
+        Assert.Equal(99, SaveHeader.Read(otherGen).GenVersion);
+        Assert.Equal(GenVersion.Current, SaveHeader.Read(Snapshot.Save(Snapshot.Load(otherGen))).GenVersion);
+    }
+
     [Fact]
     public void A_save_with_the_last_hollow_choice_but_no_two_doors_is_refused()
     {

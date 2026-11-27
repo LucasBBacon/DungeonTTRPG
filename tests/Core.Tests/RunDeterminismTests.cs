@@ -23,6 +23,20 @@ public class RunDeterminismTests
         Assert.Equal(Snapshot.Save(a), Snapshot.Save(b));
     }
 
+    // Equal keys from inputs that are equal but not identical: separately built configs, sets in different
+    // orders, a fresh map. The state must still be byte-identical, in memory as well as in its bytes (B2, B5).
+    [Fact]
+    public void Equal_keys_from_differently_ordered_inputs_give_byte_identical_state()
+    {
+        var a = Play(RunConfig.M1 with { RouteFloorCount = 3, Boons = ["boon.b", "boon.a"], RouteDoorCamps = [3, 1] });
+        var b = Play(new RunConfig(3, false, false, [1, 3], [], 3, 0, ["boon.a", "boon.b"], 0, null));
+        Assert.Equal(a.Key, b.Key);
+        Assert.Equal(a.Config.Boons.ToArray(), b.Config.Boons.ToArray());
+        Assert.Equal(a.Config.RouteDoorCamps.ToArray(), b.Config.RouteDoorCamps.ToArray());
+        Assert.Equal(StateDigest.Bytes(a), StateDigest.Bytes(b));
+        Assert.Equal(Snapshot.Save(a), Snapshot.Save(b));
+    }
+
     [Fact]
     public void A_different_run_modifier_is_a_different_key_and_state()
     {

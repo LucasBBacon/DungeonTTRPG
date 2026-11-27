@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Immutable;
+using System.Linq;
 using Dungeon.Core.Canonical;
 using Dungeon.Core.Content;
 
@@ -58,7 +59,11 @@ public sealed record RunConfig(
     /// <summary>SHA-256 over this snapshot's canonical bytes (SV 4.6). Validates the snapshot first.</summary>
     public Digest ConfigHash => Digest.Of(Validate(this));
 
-    /// <summary>Returns <paramref name="c"/> if it is a valid snapshot; otherwise throws naming the field.</summary>
+    /// <summary>
+    /// Returns <paramref name="c"/> with its sets in canonical order (ids ordinal, numbers ascending) if it is a
+    /// valid snapshot; otherwise throws naming the field. An already canonical snapshot is returned as is, so
+    /// two runs with equal keys hold their sets in the same order in memory too.
+    /// </summary>
     /// <exception cref="ArgumentException">A field is out of range or malformed; <c>ParamName</c> is the field.</exception>
     public static RunConfig Validate(RunConfig c)
     {
@@ -96,7 +101,13 @@ public sealed record RunConfig(
             throw new ArgumentException($"\"{c.RunModifierId}\" is not a content id.", nameof(RunModifierId));
         }
 
-        return c;
+        var camps = SortedNumbers(c.RouteDoorCamps);
+        var trimmed = SortedNumbers(c.PacingTrimmedFloors);
+        var boons = SortedIds(c.Boons);
+        return camps.SequenceEqual(c.RouteDoorCamps) && trimmed.SequenceEqual(c.PacingTrimmedFloors)
+            && boons.SequenceEqual(c.Boons, StringComparer.Ordinal)
+            ? c
+            : c with { RouteDoorCamps = camps, PacingTrimmedFloors = trimmed, Boons = boons };
     }
 
     /// <inheritdoc />
@@ -115,6 +126,10 @@ public sealed record RunConfig(
         w.OptionalString(9, RunModifierId);
         w.EndRecord();
     }
+
+    private static ImmutableArray<int> SortedNumbers(ImmutableArray<int> numbers) => [.. numbers.OrderBy(n => n)];
+
+    internal static ImmutableArray<string> SortedIds(ImmutableArray<string> ids) => [.. ids.OrderBy(s => s, StringComparer.Ordinal)];
 
     // A set of floor or camp numbers: each in 1..floorCount, no repeats.
     private static void RequireNumberSet(ImmutableArray<int> numbers, int floorCount, string field)
