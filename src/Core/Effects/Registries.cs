@@ -77,10 +77,14 @@ public sealed record DerivedNumber(string Id, NumberRule Rule, NumberBase Base, 
 /// <summary>The production derived-number table (plan call 5). Later steps add rows; tests pass their own tables.</summary>
 public static class DerivedNumbers
 {
-    /// <summary>The M1-07 rows, ordinal by id: <c>speed</c> (SM 6, base 6 squares).</summary>
+    /// <summary>
+    /// <c>speed</c> (SM 6, base 6 squares), then the M1-08 stat rows (<see cref="Dungeon.Core.Stats.StatNumbers.Rows"/>).
+    /// The context sorts them by id.
+    /// </summary>
     public static ImmutableArray<DerivedNumber> Core { get; } =
         [
             new DerivedNumber("speed", NumberRule.Speed, 6, null),
+            .. Dungeon.Core.Stats.StatNumbers.Rows,
         ];
 }
 
@@ -88,10 +92,11 @@ public static class DerivedNumbers
 public static class RollTargets
 {
     /// <summary>
-    /// The M1-07 rows, ordinal: <c>attackRoll</c> (the holder's own attack rolls) and <c>attacksAgainst</c>
-    /// (attack rolls made against the holder).
+    /// <c>attackRoll</c> (the holder's own attack rolls) and <c>attacksAgainst</c> (attack rolls made against the
+    /// holder), then the M1-08 save and skill targets (<see cref="Dungeon.Core.Stats.StatNumbers.RollTargets"/>).
     /// </summary>
-    public static ImmutableArray<string> Core { get; } = ["attackRoll", "attacksAgainst"];
+    public static ImmutableArray<string> Core { get; } =
+        ["attackRoll", "attacksAgainst", .. Dungeon.Core.Stats.StatNumbers.RollTargets];
 }
 
 /// <summary>

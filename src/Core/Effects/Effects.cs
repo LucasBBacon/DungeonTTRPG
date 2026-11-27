@@ -121,16 +121,45 @@ public static class Effects
             throw new ArgumentException($"No roll target \"{rollTarget}\".", nameof(rollTarget));
         }
 
+        return RollModeOf(rules, s, [(unit, rollTarget)]);
+    }
+
+    /// <summary>
+    /// The mode of one roll that several (unit, roll target) pairs bear on, such as an attack, which reads the
+    /// attacker's <c>attackRoll</c> and the defender's <c>attacksAgainst</c>: any advantage and any disadvantage over
+    /// all the pairs, then D-15 once. Folding each pair first would be wrong, as the attacker's cancelled mode and the
+    /// defender's disadvantage would then no longer cancel. Throws <see cref="ArgumentException"/> for no sources, an
+    /// unknown roll target, unit or effect definition.
+    /// </summary>
+    public static RollMode RollModeOf(RulesContext rules, GameState s, IEnumerable<(UnitId Unit, string Target)> sources)
+    {
+        ArgumentNullException.ThrowIfNull(rules);
+        ArgumentNullException.ThrowIfNull(s);
+        ArgumentNullException.ThrowIfNull(sources);
+        var pairs = sources.ToList();
+        if (pairs.Count == 0)
+        {
+            throw new ArgumentException("A roll mode needs at least one source.", nameof(sources));
+        }
+
         bool advantage = false;
         bool disadvantage = false;
-        foreach (var definition in Held(rules, s, unit))
+        foreach (var (unit, rollTarget) in pairs)
         {
-            foreach (var m in definition.Modifiers)
+            if (rollTarget is null || !rules.IsRollTarget(rollTarget))
             {
-                if (m.Op == ModifierOp.RollMode && string.Equals(m.Target, rollTarget, StringComparison.Ordinal))
+                throw new ArgumentException($"No roll target \"{rollTarget}\".", nameof(sources));
+            }
+
+            foreach (var definition in Held(rules, s, unit))
+            {
+                foreach (var m in definition.Modifiers)
                 {
-                    advantage |= m.Mode == RollMode.Advantage;
-                    disadvantage |= m.Mode == RollMode.Disadvantage;
+                    if (m.Op == ModifierOp.RollMode && string.Equals(m.Target, rollTarget, StringComparison.Ordinal))
+                    {
+                        advantage |= m.Mode == RollMode.Advantage;
+                        disadvantage |= m.Mode == RollMode.Disadvantage;
+                    }
                 }
             }
         }
