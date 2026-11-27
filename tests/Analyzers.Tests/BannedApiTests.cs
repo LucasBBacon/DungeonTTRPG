@@ -22,6 +22,8 @@ public class BannedApiTests
     [InlineData("System.Environment.TickCount64")]
     [InlineData("System.Guid.NewGuid()")]
     [InlineData("System.Diagnostics.Stopwatch.StartNew()")]
+    [InlineData("System.TimeProvider.System.GetUtcNow()")]
+    [InlineData("System.TimeProvider.System.GetTimestamp()")]
     public void Clocks_and_ambient_entropy_are_reported(string expression) =>
         Assert.Equal(
             new[] { "DUN003" },
@@ -42,6 +44,8 @@ public class BannedApiTests
     [InlineData("class C { public static void M() { System.Threading.Tasks.Parallel.For(0, 2, _ => { }); } }")]
     [InlineData("class C { public static object M() => System.Linq.ParallelEnumerable.AsParallel(new[] { 1 }); }")]
     [InlineData("using System.Linq; class C { public static object M() => new[] { 1 }.AsParallel(); }")]
+    [InlineData("class C { public static object M() => System.Linq.ParallelEnumerable.Range(0, 2); }")]
+    [InlineData("class C { public static object M() => System.Linq.ParallelEnumerable.Repeat(1, 2); }")]
     public void Parallelism_is_reported(string source) =>
         Assert.Equal(new[] { "DUN008" }, Harness.Ids(Harness.Run(source)));
 

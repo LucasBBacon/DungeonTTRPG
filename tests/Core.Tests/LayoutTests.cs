@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Xunit;
 
 namespace Dungeon.Core.Tests;
@@ -44,7 +45,31 @@ public class LayoutTests
         Assert.True(Directory.Exists(Path.Combine(root, "content")), "content/ is missing");
 
         var sln = File.ReadAllText(Path.Combine(root, "Dungeon.sln"));
-        Assert.Contains(@"src\Sim\Sim.csproj", sln);
         Assert.DoesNotContain("DungeonTTRPG.csproj", sln);
+    }
+
+    /// <summary>
+    /// Every MAIN 6.1 project except the Godot one is in <c>Dungeon.sln</c>, under its solution folder, so
+    /// <c>dotnet test Dungeon.sln</c> (CI) builds the analyzer and runs its tests.
+    /// </summary>
+    [Theory]
+    [InlineData(@"src\Core\Core.csproj", "src")]
+    [InlineData(@"src\Sim\Sim.csproj", "src")]
+    [InlineData(@"src\Analyzers\Analyzers.csproj", "src")]
+    [InlineData(@"tests\Core.Tests\Core.Tests.csproj", "tests")]
+    [InlineData(@"tests\Analyzers.Tests\Analyzers.Tests.csproj", "tests")]
+    public void Solution_holds_project_under_its_folder(string projectPath, string folder)
+    {
+        var sln = File.ReadAllText(Path.Combine(RepoRoot.Find(), "Dungeon.sln"));
+        var projects = Regex.Matches(sln, "^Project\\(\"\\{[^}]+\\}\"\\) = \"([^\"]+)\", \"([^\"]+)\", \"(\\{[^}]+\\})\"", RegexOptions.Multiline)
+            .Select(m => (Name: m.Groups[1].Value, Path: m.Groups[2].Value, Guid: m.Groups[3].Value))
+            .ToList();
+
+        var project = projects.SingleOrDefault(p => p.Path == projectPath);
+        Assert.True(project.Guid is not null, projectPath + " is not in Dungeon.sln");
+        var solutionFolder = Assert.Single(projects, p => p.Name == folder && p.Path == folder);
+        Assert.Matches(
+            new Regex("^\\s*" + Regex.Escape(project.Guid) + " = " + Regex.Escape(solutionFolder.Guid) + "\\s*$", RegexOptions.Multiline),
+            sln);
     }
 }

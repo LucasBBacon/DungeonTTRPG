@@ -12,7 +12,9 @@ namespace Dungeon.Analyzers;
 /// <summary>
 /// DUN002, DUN003, DUN004, DUN008 and DUN009: banned library APIs (DS11). Banned types and members
 /// are resolved once per compilation from a table of metadata names and matched by symbol identity.
-/// DUN009 also reports the compilation once if it references an assembly named <c>GodotSharp</c>.
+/// DUN009 is reported at each source location that references a symbol in namespace <c>Godot</c>, and
+/// additionally once per compilation, at no location, if the compilation references an assembly named
+/// <c>GodotSharp</c> (even when no symbol from it is used).
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class BannedApiAnalyzer : DiagnosticAnalyzer
@@ -28,9 +30,10 @@ public sealed class BannedApiAnalyzer : DiagnosticAnalyzer
         new("System.Environment", new[] { "TickCount", "TickCount64" }, Rules.Clock, "take time as an explicit input"),
         new("System.Guid", new[] { "NewGuid" }, Rules.Clock, "derive ids from the seeded stream"),
         new("System.Diagnostics.Stopwatch", null, Rules.Clock, "take time as an explicit input"),
+        new("System.TimeProvider", null, Rules.Clock, "take time as an explicit input"),
         new("System.HashCode", null, Rules.Hashing, "use an explicit stable hash"),
         new("System.Threading.Tasks.Parallel", null, Rules.Parallel, "run sequentially"),
-        new("System.Linq.ParallelEnumerable", new[] { "AsParallel" }, Rules.Parallel, "run sequentially"),
+        new("System.Linq.ParallelEnumerable", null, Rules.Parallel, "run sequentially"),
     };
 
     private static readonly ImmutableArray<OperationKind> OperationKinds = ImmutableArray.Create(

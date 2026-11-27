@@ -9,10 +9,11 @@ using Microsoft.CodeAnalysis.Operations;
 namespace Dungeon.Analyzers;
 
 /// <summary>
-/// DUN010: <c>/</c>, <c>%</c>, <c>/=</c>, <c>%=</c> and <c>Math.DivRem</c> on signed integral types,
-/// unless the result is a compile-time constant or the code is inside <c>Dungeon.Core.IntMath</c>.
+/// DUN010: <c>/</c>, <c>%</c>, <c>/=</c>, <c>%=</c>, <c>Math.DivRem</c> and the <c>DivRem</c> statics of the
+/// signed integral types (<c>int.DivRem</c>, <c>long.DivRem</c>, ...) on signed integral types, unless the result
+/// is a compile-time constant or the code is inside <c>Dungeon.Core.IntMath</c> (matched by type, not by path).
 /// DUN011: an <c>unchecked</c> expression or statement in any file but the one named by the
-/// <c>DungeonWrappingArithmeticFile</c> build property (DS11).
+/// <c>DungeonWrappingArithmeticFile</c> build property, a path relative to the project folder (DS11).
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class ArithmeticAnalyzer : DiagnosticAnalyzer
@@ -40,12 +41,45 @@ public sealed class ArithmeticAnalyzer : DiagnosticAnalyzer
             start.Options.AnalyzerConfigOptionsProvider.GlobalOptions.TryGetValue(
                 "build_property." + WrappingArithmeticFileProperty,
                 out var allowedFile);
-            var suffix = string.IsNullOrWhiteSpace(allowedFile) ? null : "/" + Normalize(allowedFile!.Trim());
+            start.Options.AnalyzerConfigOptionsProvider.GlobalOptions.TryGetValue("build_property.ProjectDir", out var projectDir);
+            var allowed = AllowedFile(allowedFile, projectDir);
             start.RegisterSyntaxNodeAction(
-                c => AnalyzeUnchecked(c, suffix),
+                c => AnalyzeUnchecked(c, allowed),
                 SyntaxKind.UncheckedExpression,
                 SyntaxKind.UncheckedStatement);
         });
+    }
+
+    /// <summary>
+    /// The normalised path the exempt file must have, or null when none is named. The property is relative to the
+    /// project folder: separators become <c>/</c> and leading <c>./</c> segments are dropped. When the SDK supplies
+    /// <c>ProjectDir</c> (every real build does) the path is anchored there and must match in full, so a deeper file
+    /// with the same tail is not exempt; without it (bare compilations) the path must match a whole-segment suffix.
+    /// </summary>
+    private static AllowedPath? AllowedFile(string? property, string? projectDir)
+    {
+        if (string.IsNullOrWhiteSpace(property))
+        {
+            return null;
+        }
+
+        var relative = Normalize(property!.Trim());
+        while (relative.StartsWith("./", System.StringComparison.Ordinal))
+        {
+            relative = relative.Substring(2);
+        }
+        relative = relative.TrimStart('/');
+        if (relative.Length == 0)
+        {
+            return null;
+        }
+
+        if (string.IsNullOrWhiteSpace(projectDir))
+        {
+            return new AllowedPath("/" + relative, anchored: false);
+        }
+        var root = Normalize(projectDir!.Trim()).TrimEnd('/');
+        return new AllowedPath(root + "/" + relative, anchored: true);
     }
 
     private static void AnalyzeBinary(OperationAnalysisContext context)
@@ -79,8 +113,11 @@ public sealed class ArithmeticAnalyzer : DiagnosticAnalyzer
     {
         var invocation = (IInvocationOperation)context.Operation;
         var method = invocation.TargetMethod;
+        // Math.DivRem and the .NET 8 INumber statics int.DivRem, long.DivRem, ... are the same truncating division.
+        var owner = method.ContainingType;
         if (method.Name != "DivRem"
-            || method.ContainingType?.ToDisplayString() != "System.Math"
+            || owner is null
+            || !(owner.ToDisplayString() == "System.Math" || IsSignedIntegral(owner))
             || method.Parameters.Length == 0
             || !IsSignedIntegral(method.Parameters[0].Type)
             || invocation.Arguments.Take(2).All(a => a.Value.ConstantValue.HasValue)
@@ -88,13 +125,12 @@ public sealed class ArithmeticAnalyzer : DiagnosticAnalyzer
         {
             return;
         }
-        Report(context, "Math.DivRem", method.Parameters[0].Type);
+        Report(context, owner.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat) + ".DivRem", method.Parameters[0].Type);
     }
 
-    private static void AnalyzeUnchecked(SyntaxNodeAnalysisContext context, string? allowedSuffix)
+    private static void AnalyzeUnchecked(SyntaxNodeAnalysisContext context, AllowedPath? allowed)
     {
-        if (allowedSuffix is not null
-            && Normalize(context.Node.SyntaxTree.FilePath).EndsWith(allowedSuffix, System.StringComparison.Ordinal))
+        if (allowed is not null && allowed.Matches(Normalize(context.Node.SyntaxTree.FilePath)))
         {
             return;
         }
@@ -105,7 +141,7 @@ public sealed class ArithmeticAnalyzer : DiagnosticAnalyzer
             CheckedStatementSyntax statement => statement.Keyword,
             _ => default,
         };
-        var advice = allowedSuffix is null
+        var advice = allowed is null
             ? "no file is named by " + WrappingArithmeticFileProperty + ", so wrapping arithmetic is not allowed anywhere"
             : "wrapping arithmetic belongs only in the file named by " + WrappingArithmeticFileProperty;
         context.ReportDiagnostic(Diagnostic.Create(Rules.Unchecked, keyword.GetLocation(), "unchecked", advice));
@@ -147,4 +183,26 @@ public sealed class ArithmeticAnalyzer : DiagnosticAnalyzer
     }
 
     private static string Normalize(string path) => path.Replace('\\', '/');
+
+    /// <summary>The exempt file: a full path anchored at the project folder, or a <c>/</c>-led suffix.</summary>
+    private sealed class AllowedPath
+    {
+        private readonly string _path;
+        private readonly bool _anchored;
+
+        internal AllowedPath(string path, bool anchored)
+        {
+            _path = path;
+            _anchored = anchored;
+        }
+
+        /// <summary>
+        /// An anchored path is compared ignoring case: MSBuild hands the same project folder to both
+        /// properties, and a case-only difference on a case-insensitive file system names the same file.
+        /// </summary>
+        internal bool Matches(string normalizedFilePath) =>
+            _anchored
+                ? string.Equals(normalizedFilePath, _path, System.StringComparison.OrdinalIgnoreCase)
+                : normalizedFilePath.EndsWith(_path, System.StringComparison.Ordinal);
+    }
 }

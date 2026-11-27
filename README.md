@@ -48,7 +48,7 @@ All inputs are Godot input actions, so they can be remapped in the project setti
 ## Repository layout
 
 ```
-Dungeon.sln                 Core library + tests
+Dungeon.sln                 Core, Sim, the analyzer and their tests (not the Godot project)
 Directory.Build.props       Shared settings: net8.0, nullable, warnings as errors
 src/Core/                   Dungeon.Core: the rules engine (no Godot)
   Engine/                   Commands, events, Engine.Apply
@@ -58,7 +58,11 @@ src/Core/                   Dungeon.Core: the rules engine (no Godot)
   Random/                   Seeded PCG32 generator
   Persistence/              Versioned snapshots, command logs, replay
 src/Sim/                    Dungeon.Sim: console app for headless simulations (balance)
+src/Analyzers/              Dungeon.Analyzers: Roslyn analyzer enforcing the determinism rules on Core
 tests/Core.Tests/           xUnit tests, including architecture rules
+tests/Analyzers.Tests/      xUnit tests for the analyzer, one fixture per rule
+tests/AnalyzerSmoke/        Must fail to build with DUN001; proves the analyzer is wired (not in Dungeon.sln)
+build/Determinism.props     Wires the analyzer and checked arithmetic into Core
 content/                    JSON data files: classes, species, feats, items, monsters, tables
 dungeon-ttrpg/              Godot 4.7 C# project (display layer)
   scripts/                  GameController, BoardView, UnitView, IsoCamera, DecisionPanel
@@ -90,8 +94,13 @@ docs/superpowers/
 
 These are enforced by tests and CI, not just convention:
 
-- Enforced at compile time by the determinism analyzer (`src/Analyzers`, rules DUN001–DUN011, SV DS11); see
-  `src/Analyzers/Rules.cs`. The no-Godot-in-Core rule is also covered by `ArchitectureTests`.
+- Core has no floating point, `System.Random`, clocks, runtime hashing, culture-sensitive string
+  operations, hash-ordered enumeration, sorts without a registered total comparer, parallelism, Godot,
+  signed `/` and `%` outside `IntMath`, or wrapping arithmetic outside one named file. The determinism
+  analyzer (`src/Analyzers`, rules DUN001–DUN011) enforces this at compile time; it implements DS11, rule 11
+  of the draw-stability rules in section 4.5 of the
+  [seeds and validation design](docs/superpowers/specs/2026-11-23-seeds-validation-design.md) ("SV").
+  See `src/Analyzers/Rules.cs`. The no-Godot-in-Core rule is also covered by `ArchitectureTests`.
 - Saves carry a version number; a corrupt or newer save fails with a typed error and never
   half-loads.
 - CI fails if rule checks (`IsWalkable`, `CheckStep`, `.Step(`) show up in `dungeon-ttrpg/scripts`.

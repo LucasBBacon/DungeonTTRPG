@@ -12,15 +12,20 @@ namespace Dungeon.Analyzers;
 /// <summary>
 /// DUN006: enumeration of unordered collections (DS11). An unordered type is <c>Dictionary&lt;,&gt;</c>,
 /// <c>HashSet&lt;&gt;</c>, the dictionary's nested <c>KeyCollection</c>/<c>ValueCollection</c>,
-/// <c>ImmutableDictionary&lt;,&gt;</c>, <c>ImmutableHashSet&lt;&gt;</c>, <c>ConcurrentDictionary&lt;,&gt;</c>, or a
-/// type derived from one. Reported: <c>foreach</c> over one; any conversion of one to
+/// <c>ImmutableDictionary&lt;,&gt;</c>, <c>ImmutableHashSet&lt;&gt;</c> and their <c>Builder</c>s,
+/// <c>FrozenDictionary&lt;,&gt;</c>, <c>FrozenSet&lt;&gt;</c>, <c>ConcurrentDictionary&lt;,&gt;</c>, a type derived
+/// from one, or one of the interfaces <c>IDictionary&lt;,&gt;</c>, <c>IReadOnlyDictionary&lt;,&gt;</c>,
+/// <c>ISet&lt;&gt;</c> and <c>IReadOnlySet&lt;&gt;</c>: a value typed as one of those interfaces may hold a
+/// hash-ordered instance made outside Core source (for example by <c>System.Text.Json</c>), so a sorted
+/// implementation must be held by its concrete type. Reported: <c>foreach</c> over one; any conversion of one to
 /// <c>IEnumerable</c>/<c>IEnumerable&lt;T&gt;</c> or to an interface that extends it (<c>ICollection&lt;T&gt;</c>,
 /// <c>ISet&lt;T&gt;</c>, <c>IReadOnlyDictionary&lt;,&gt;</c>, ...), because enumeration through the interface
 /// can no longer be traced (LINQ, parameters, returns, assignments); a collection-expression spread of one;
 /// calls of its <c>GetEnumerator</c> or <c>CopyTo</c>; and reading the <c>Keys</c>/<c>Values</c> views of one
-/// when the view is typed as an interface (<c>ImmutableDictionary</c>, <c>ConcurrentDictionary</c>). Lookups
-/// (<c>TryGetValue</c>, indexers, <c>Contains</c>, <c>Count</c>, and the <c>CollectionExtensions</c> lookups
-/// <c>GetValueOrDefault</c>/<c>TryAdd</c>/<c>Remove</c>) stay legal.
+/// when the view is not itself an unordered type (<c>ImmutableDictionary</c> and the interfaces return
+/// <c>IEnumerable&lt;T&gt;</c>/<c>ICollection&lt;T&gt;</c>, <c>FrozenDictionary</c> an <c>ImmutableArray&lt;T&gt;</c>
+/// in hash order). Lookups (<c>TryGetValue</c>, indexers, <c>Contains</c>, <c>Count</c>, and the
+/// <c>CollectionExtensions</c> lookups <c>GetValueOrDefault</c>/<c>TryAdd</c>/<c>Remove</c>) stay legal.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class UnorderedEnumerationAnalyzer : DiagnosticAnalyzer
@@ -35,8 +40,16 @@ public sealed class UnorderedEnumerationAnalyzer : DiagnosticAnalyzer
         "System.Collections.Generic.Dictionary`2+ValueCollection",
         "System.Collections.Generic.HashSet`1",
         "System.Collections.Immutable.ImmutableDictionary`2",
+        "System.Collections.Immutable.ImmutableDictionary`2+Builder",
         "System.Collections.Immutable.ImmutableHashSet`1",
+        "System.Collections.Immutable.ImmutableHashSet`1+Builder",
+        "System.Collections.Frozen.FrozenDictionary`2",
+        "System.Collections.Frozen.FrozenSet`1",
         "System.Collections.Concurrent.ConcurrentDictionary`2",
+        "System.Collections.Generic.IDictionary`2",
+        "System.Collections.Generic.IReadOnlyDictionary`2",
+        "System.Collections.Generic.ISet`1",
+        "System.Collections.Generic.IReadOnlySet`1",
     };
 
     /// <inheritdoc />
@@ -139,7 +152,8 @@ public sealed class UnorderedEnumerationAnalyzer : DiagnosticAnalyzer
     /// <summary>
     /// <c>Keys</c>/<c>Values</c> of an unordered dictionary whose view type is not itself unordered
     /// (<c>ImmutableDictionary</c> returns <c>IEnumerable&lt;T&gt;</c>, <c>ConcurrentDictionary</c>
-    /// <c>ICollection&lt;T&gt;</c>), so no later conversion or <c>foreach</c> would see an unordered type.
+    /// <c>ICollection&lt;T&gt;</c>, <c>FrozenDictionary</c> <c>ImmutableArray&lt;T&gt;</c>), so no later
+    /// conversion or <c>foreach</c> would see an unordered type.
     /// <c>Dictionary</c>'s views are <c>KeyCollection</c>/<c>ValueCollection</c> and are reported where enumerated.
     /// </summary>
     private static void AnalyzeView(
@@ -187,7 +201,10 @@ public sealed class UnorderedEnumerationAnalyzer : DiagnosticAnalyzer
         return operation;
     }
 
-    /// <summary>The unordered type <paramref name="type"/> is or derives from, by name; null when there is none.</summary>
+    /// <summary>
+    /// The unordered type <paramref name="type"/> is or derives from, by name; null when there is none. Only base
+    /// classes are walked, not implemented interfaces, so a concrete sorted collection is never unordered.
+    /// </summary>
     private static string? UnorderedName(ITypeSymbol? type, ImmutableHashSet<INamedTypeSymbol> unordered)
     {
         for (var current = type as INamedTypeSymbol; current is not null; current = current.BaseType)

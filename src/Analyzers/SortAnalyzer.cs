@@ -12,9 +12,13 @@ namespace Dungeon.Analyzers;
 
 /// <summary>
 /// DUN007: sorts without a registered total comparer (DS11). Covers <c>Sort</c> on
-/// <c>List&lt;T&gt;</c>, <c>Array</c>, <c>ImmutableArray&lt;T&gt;</c> and <c>MemoryExtensions</c>;
-/// <c>Enumerable.Order*</c>/<c>ThenBy*</c>; and the <c>SortedSet</c>, <c>SortedDictionary</c> and
-/// <c>SortedList</c> constructors, including collection expressions that build one. A comparer is registered when its static type carries
+/// <c>List&lt;T&gt;</c>, <c>Array</c>, <c>ImmutableArray&lt;T&gt;</c> and its <c>Builder</c>,
+/// <c>ImmutableList&lt;T&gt;</c> and its <c>Builder</c>, and <c>MemoryExtensions</c>;
+/// <c>Enumerable.Order*</c>/<c>ThenBy*</c>; the <c>SortedSet</c>, <c>SortedDictionary</c> and
+/// <c>SortedList</c> constructors, including collection expressions that build one; and the
+/// <c>ImmutableSortedDictionary</c>/<c>ImmutableSortedSet</c> factories (<c>Create</c>, <c>CreateRange</c>,
+/// <c>CreateBuilder</c>, <c>ToImmutableSorted*</c>, collection expressions) and their static <c>Empty</c>
+/// (which always uses the default comparer). A comparer is registered when its static type carries
 /// <c>[Dungeon.Core.Determinism.TotalComparer]</c> or it is <c>StringComparer.Ordinal</c>. With no
 /// comparer, <c>Order*</c>/<c>ThenBy*</c> pass only for an integral primitive or enum key.
 /// </summary>
@@ -29,8 +33,33 @@ public sealed class SortAnalyzer : DiagnosticAnalyzer
         "System.Collections.Generic.List`1",
         "System.Array",
         "System.Collections.Immutable.ImmutableArray`1",
+        "System.Collections.Immutable.ImmutableArray`1+Builder",
+        "System.Collections.Immutable.ImmutableList`1",
+        "System.Collections.Immutable.ImmutableList`1+Builder",
         "System.MemoryExtensions",
     };
+
+    /// <summary>Static factory classes whose methods build an immutable sorted collection.</summary>
+    private static readonly string[] SortedFactories =
+    {
+        "System.Collections.Immutable.ImmutableSortedDictionary",
+        "System.Collections.Immutable.ImmutableSortedSet",
+    };
+
+    /// <summary>Immutable sorted collections: their static <c>Empty</c> uses the default comparer.</summary>
+    private static readonly string[] ImmutableSortedCollections =
+    {
+        "System.Collections.Immutable.ImmutableSortedDictionary`2",
+        "System.Collections.Immutable.ImmutableSortedSet`1",
+    };
+
+    private static readonly ImmutableHashSet<string> FactoryMethods = ImmutableHashSet.Create(
+        StringComparer.Ordinal,
+        "Create",
+        "CreateRange",
+        "CreateBuilder",
+        "ToImmutableSortedDictionary",
+        "ToImmutableSortedSet");
 
     private static readonly string[] SortedCollections =
     {
@@ -61,6 +90,8 @@ public sealed class SortAnalyzer : DiagnosticAnalyzer
             var known = new KnownTypes(
                 Resolve(compilation, SortOwners),
                 Resolve(compilation, SortedCollections),
+                Resolve(compilation, SortedFactories),
+                Resolve(compilation, ImmutableSortedCollections),
                 compilation.GetTypeByMetadataName("System.Linq.Enumerable"),
                 compilation.GetTypeByMetadataName(AttributeName),
                 compilation.GetTypeByMetadataName("System.StringComparer"),
@@ -77,6 +108,10 @@ public sealed class SortAnalyzer : DiagnosticAnalyzer
             start.RegisterOperationAction(
                 c => AnalyzeCreation(c, (IObjectCreationOperation)c.Operation, known),
                 OperationKind.ObjectCreation);
+            start.RegisterOperationAction(
+                c => AnalyzeEmpty(c, (IMemberReferenceOperation)c.Operation, known),
+                OperationKind.FieldReference,
+                OperationKind.PropertyReference);
             start.RegisterSyntaxNodeAction(
                 c => AnalyzeCollectionExpression(c, (CollectionExpressionSyntax)c.Node, known),
                 SyntaxKind.CollectionExpression);
@@ -97,6 +132,13 @@ public sealed class SortAnalyzer : DiagnosticAnalyzer
             if (!HasRegisteredComparer(invocation.Arguments, known))
             {
                 Report(context, invocation.Syntax.GetLocation(), owner.Name + ".Sort without a registered comparer");
+            }
+        }
+        else if (FactoryMethods.Contains(method.Name) && known.SortedFactories.Contains(owner))
+        {
+            if (!HasRegisteredComparer(invocation.Arguments, known))
+            {
+                Report(context, invocation.Syntax.GetLocation(), owner.Name + "." + method.Name + " without a registered comparer");
             }
         }
         else if (SymbolEqualityComparer.Default.Equals(owner, known.Enumerable) && LinqSorts.Contains(method.Name))
@@ -124,13 +166,31 @@ public sealed class SortAnalyzer : DiagnosticAnalyzer
     }
 
     /// <summary>
+    /// <c>ImmutableSortedDictionary&lt;K, V&gt;.Empty</c> and <c>ImmutableSortedSet&lt;T&gt;.Empty</c> are built
+    /// with the default comparer, so every read is reported; build with a factory that takes a comparer instead.
+    /// </summary>
+    private static void AnalyzeEmpty(OperationAnalysisContext context, IMemberReferenceOperation reference, KnownTypes known)
+    {
+        var member = reference.Member;
+        if (member.IsStatic
+            && member.Name == "Empty"
+            && member.ContainingType?.OriginalDefinition is { } owner
+            && known.ImmutableSortedCollections.Contains(owner))
+        {
+            Report(context, reference.Syntax.GetLocation(), owner.Name + ".Empty (it uses the default comparer)");
+        }
+    }
+
+    /// <summary>
     /// A collection expression (<c>SortedSet&lt;string&gt; s = [];</c>) always calls the parameterless
-    /// constructor, so it can never pass a comparer: every one that builds a sorted collection is reported.
+    /// constructor or the comparer-less <c>Create</c>, so it can never pass a comparer: every one that builds a
+    /// sorted collection is reported.
     /// </summary>
     private static void AnalyzeCollectionExpression(SyntaxNodeAnalysisContext context, CollectionExpressionSyntax node, KnownTypes known)
     {
         var type = context.SemanticModel.GetTypeInfo(node, context.CancellationToken).ConvertedType?.OriginalDefinition;
-        if (type is INamedTypeSymbol named && known.SortedCollections.Contains(named))
+        if (type is INamedTypeSymbol named
+            && (known.SortedCollections.Contains(named) || known.ImmutableSortedCollections.Contains(named)))
         {
             context.ReportDiagnostic(Diagnostic.Create(
                 Rules.Sort, node.GetLocation(), "collection expression of " + named.Name + " (it cannot take a comparer)", Advice));
@@ -209,6 +269,8 @@ public sealed class SortAnalyzer : DiagnosticAnalyzer
         internal KnownTypes(
             ImmutableHashSet<INamedTypeSymbol> sortOwners,
             ImmutableHashSet<INamedTypeSymbol> sortedCollections,
+            ImmutableHashSet<INamedTypeSymbol> sortedFactories,
+            ImmutableHashSet<INamedTypeSymbol> immutableSortedCollections,
             INamedTypeSymbol? enumerable,
             INamedTypeSymbol? attribute,
             INamedTypeSymbol? stringComparer,
@@ -216,6 +278,8 @@ public sealed class SortAnalyzer : DiagnosticAnalyzer
         {
             SortOwners = sortOwners;
             SortedCollections = sortedCollections;
+            SortedFactories = sortedFactories;
+            ImmutableSortedCollections = immutableSortedCollections;
             Enumerable = enumerable;
             Attribute = attribute;
             StringComparer = stringComparer;
@@ -225,6 +289,10 @@ public sealed class SortAnalyzer : DiagnosticAnalyzer
         internal ImmutableHashSet<INamedTypeSymbol> SortOwners { get; }
 
         internal ImmutableHashSet<INamedTypeSymbol> SortedCollections { get; }
+
+        internal ImmutableHashSet<INamedTypeSymbol> SortedFactories { get; }
+
+        internal ImmutableHashSet<INamedTypeSymbol> ImmutableSortedCollections { get; }
 
         internal INamedTypeSymbol? Enumerable { get; }
 

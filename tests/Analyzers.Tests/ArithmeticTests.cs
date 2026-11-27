@@ -38,6 +38,8 @@ public class ArithmeticTests
     [InlineData("long", "_ = a / 2;")]
     [InlineData("int", "_ = System.Math.DivRem(a, b);")]
     [InlineData("long", "_ = System.Math.DivRem(a, b);")]
+    [InlineData("int", "_ = int.DivRem(a, b);")]
+    [InlineData("long", "_ = long.DivRem(a, b);")]
     [InlineData("int?", "_ = a / b;")]
     [InlineData("int?", "_ = a % b;")]
     [InlineData("int?", "a /= b;")]
@@ -57,6 +59,8 @@ public class ArithmeticTests
     [InlineData("ulong", "_ = a / b; _ = a % b; a /= b; a %= b;")]
     [InlineData("uint?", "_ = a / b; _ = a % b; a /= b; a %= b;")]
     [InlineData("uint", "_ = a / 2; _ = a % 2; a /= 2; a %= 2;")]
+    [InlineData("uint", "_ = uint.DivRem(a, b); _ = System.Math.DivRem(a, b);")]
+    [InlineData("int", "_ = int.DivRem(7, 2);")]
     [InlineData("int", "const int x = -7 / 2; const int y = -7 % 2; _ = x + y;")]
     [InlineData("int", "_ = Dungeon.Core.IntMath.FloorDiv(a, b); _ = Dungeon.Core.IntMath.FloorMod(a, b);")]
     [InlineData("long", "_ = Dungeon.Core.IntMath.FloorDiv(a, b); _ = Dungeon.Core.IntMath.FloorMod(a, b);")]
@@ -72,6 +76,15 @@ public class ArithmeticTests
         var source = File.ReadAllText(Path.Combine(RepoRoot(), "src", "Core", "IntMath.cs"));
         var d = Harness.Run(source, path: "src/Core/IntMath.cs");
         Assert.Empty(d);
+    }
+
+    [Fact]
+    public void Signed_division_in_another_type_at_the_IntMath_path_is_reported()
+    {
+        var d = Harness.Run(
+            "public static class C { public static int M(int a, int b) => a / b; }",
+            path: "src/Core/IntMath.cs");
+        Assert.Equal(new[] { "DUN010" }, Harness.Ids(d));
     }
 
     [Fact]
@@ -114,6 +127,44 @@ public class ArithmeticTests
             path: path,
             buildProperties: new Dictionary<string, string> { [PropertyName] = property });
         Assert.Empty(d);
+    }
+
+    [Theory]
+    [InlineData(@"C:\repo\src\Core\Random\Pcg32.cs", "./Random/Pcg32.cs")]
+    [InlineData(@"C:\repo\src\Core\Random\Pcg32.cs", @".\Random\Pcg32.cs")]
+    [InlineData("/repo/src/Core/Random/Pcg32.cs", " ./Random/Pcg32.cs ")]
+    public void Unchecked_allowed_in_named_file_with_a_leading_dot_segment(string path, string property)
+    {
+        var d = Harness.Run(
+            UncheckedSource,
+            path: path,
+            buildProperties: new Dictionary<string, string> { [PropertyName] = property });
+        Assert.Empty(d);
+    }
+
+    [Theory]
+    [InlineData("/repo/src/Core/Random/Pcg32.cs", "/repo/src/Core/")]
+    [InlineData(@"C:\repo\src\Core\Random\Pcg32.cs", @"C:\repo\src\Core\")]
+    [InlineData(@"C:\repo\src\Core\Random\Pcg32.cs", @"C:\repo\src\Core")]
+    public void Unchecked_allowed_in_named_file_under_the_project_folder(string path, string projectDir)
+    {
+        var d = Harness.Run(
+            UncheckedSource,
+            path: path,
+            buildProperties: new Dictionary<string, string> { [PropertyName] = "Random/Pcg32.cs", ["ProjectDir"] = projectDir });
+        Assert.Empty(d);
+    }
+
+    [Theory]
+    [InlineData("/repo/src/Core/Other/Random/Pcg32.cs", "/repo/src/Core/")]
+    [InlineData(@"C:\repo\src\Core\Other\Random\Pcg32.cs", @"C:\repo\src\Core\")]
+    public void Unchecked_in_a_deeper_file_with_the_same_suffix_is_reported(string path, string projectDir)
+    {
+        var d = Harness.Run(
+            UncheckedSource,
+            path: path,
+            buildProperties: new Dictionary<string, string> { [PropertyName] = "Random/Pcg32.cs", ["ProjectDir"] = projectDir });
+        Assert.Equal(new[] { "DUN011" }, Harness.Ids(d));
     }
 
     [Fact]
