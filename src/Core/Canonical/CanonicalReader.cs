@@ -13,6 +13,8 @@ namespace Dungeon.Core.Canonical;
 /// </summary>
 public sealed class CanonicalReader
 {
+    private static readonly System.Text.UTF8Encoding StrictUtf8 = new(false, throwOnInvalidBytes: true);
+
     private readonly ReadOnlyMemory<byte> _bytes;
     private readonly List<Frame> _frames = new();
     private int _position;
@@ -121,6 +123,31 @@ public sealed class CanonicalReader
     {
         Field(ordinal);
         return RawString();
+    }
+
+    /// <summary>
+    /// Reads display text written by <see cref="CanonicalWriter.Text"/>: a <c>UInt32</c> byte length then
+    /// UTF-8. Bytes that are not valid UTF-8 throw <see cref="CanonicalFormatException"/>.
+    /// </summary>
+    public string ReadText(int ordinal)
+    {
+        Field(ordinal);
+        int at = _position;
+        uint length = RawUInt32();
+        if (length > (uint)(_bytes.Length - _position))
+        {
+            throw new CanonicalFormatException(at, $"text length {length} exceeds the {_bytes.Length - _position} bytes left.");
+        }
+
+        var span = Take((int)length);
+        try
+        {
+            return StrictUtf8.GetString(span);
+        }
+        catch (System.Text.DecoderFallbackException)
+        {
+            throw new CanonicalFormatException(at + 4, "text is not valid UTF-8.");
+        }
     }
 
     /// <summary>Reads an enum written by name. Only an exact member name is accepted, never a number.</summary>

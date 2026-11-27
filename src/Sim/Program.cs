@@ -1,7 +1,9 @@
 using System.Text;
+using Dungeon.Core.Content;
 using Dungeon.Sim.Tools;
 
-// Commands: `name-list` exports the naming-pass appendix to content/naming (owner ruling 2).
+// Commands: `name-list` exports the naming-pass appendix to content/naming (owner ruling 2);
+// `content-hashes` writes src/Core/Content/ContentHashes.g.cs from content/ (owner ruling 4).
 if (args.Length == 1 && args[0] == "name-list")
 {
     string root = FindRepoRoot();
@@ -18,9 +20,25 @@ if (args.Length == 1 && args[0] == "name-list")
     return 0;
 }
 
+if (args.Length == 1 && args[0] == "content-hashes")
+{
+    string root = FindRepoRoot();
+    string content = Path.Combine(root, "content");
+    var files = Directory.EnumerateFiles(content, "*.json", SearchOption.AllDirectories)
+        .Select(path => new ContentFile(Path.GetRelativePath(content, path).Replace('\\', '/'), File.ReadAllText(path)))
+        .OrderBy(f => f.Name, StringComparer.Ordinal)
+        .ToArray();
+    var hashes = ContentHashing.Compute(ContentLoader.Load(files));
+    var utf8 = new UTF8Encoding(false, throwOnInvalidBytes: true);
+    File.WriteAllBytes(
+        Path.Combine(root, "src", "Core", "Content", "ContentHashes.g.cs"), utf8.GetBytes(ContentHashesWriter.Write(hashes)));
+    Console.WriteLine($"Wrote ContentHashes.g.cs: manifest {hashes.Manifest}, display {hashes.Display}, genContent {hashes.GenContent}.");
+    return 0;
+}
+
 if (args.Length > 0)
 {
-    Console.Error.WriteLine($"Unknown command: {string.Join(' ', args)}. Commands: name-list.");
+    Console.Error.WriteLine($"Unknown command: {string.Join(' ', args)}. Commands: name-list, content-hashes.");
     return 1;
 }
 

@@ -122,6 +122,7 @@ public class CanonicalWriterTests
         Assert.Equal("06000000c39c6e646572", One(w => w.Text(0, "Ünder")));
         Assert.Equal("00000000", One(w => w.Text(0, "")));
         Assert.ThrowsAny<ArgumentException>(() => One(w => w.Text(0, "\uD800")));
+        Assert.ThrowsAny<ArgumentException>(() => One(w => w.Text(0, "a\uDC00b")));
         Assert.Throws<ArgumentNullException>(() => One(w => w.Text(0, null!)));
     }
 

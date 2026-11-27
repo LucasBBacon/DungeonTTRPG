@@ -123,6 +123,41 @@ public class CanonicalReaderTests
     }
 
     [Fact]
+    public void Text_round_trips()
+    {
+        var w = new CanonicalWriter();
+        w.BeginRecord(1);
+        w.Text(0, "Ünder");
+        w.EndRecord();
+        var bytes = w.ToArray();
+        Assert.Equal("06000000c39c6e646572", Convert.ToHexString(bytes).ToLowerInvariant());
+
+        Assert.Equal("Ünder", CanonicalReader.Deserialize(bytes, r =>
+        {
+            r.BeginRecord(1);
+            var text = r.ReadText(0);
+            r.EndRecord();
+            return text;
+        }));
+    }
+
+    [Theory]
+    [InlineData("01000000ff")] // not UTF-8
+    [InlineData("02000000c3")] // length beyond the input
+    [InlineData("01000000c3")] // truncated sequence
+    public void Invalid_text_is_rejected(string hex)
+    {
+        var bytes = Convert.FromHexString(hex);
+        Assert.Throws<CanonicalFormatException>(() => CanonicalReader.Deserialize(bytes, r =>
+        {
+            r.BeginRecord(1);
+            var text = r.ReadText(0);
+            r.EndRecord();
+            return text;
+        }));
+    }
+
+    [Fact]
     public void Reader_ordinal_errors_throw()
     {
         var r = new CanonicalReader(Sample.PinnedBytes);
