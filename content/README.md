@@ -1,6 +1,6 @@
 # content/
 
-JSON data files for the game: classes, species, feats, items, monsters and tables (MAIN 6.1), and the validation registries. Content is loaded and validated at startup; a bad reference or a missing field fails loudly with the file and field named (MAIN 6.5).
+JSON data files for the game: classes, species, feats, items, monsters and tables (MAIN 6.1), and the validation registries. Content is loaded and validated by `dotnet test` (`RepositoryContentTests`) and by the `dotnet run --project src/Sim -- content-hashes` command; MAIN 6.5's load at game startup arrives when the game first reads content. A bad reference or a missing field fails loudly with the file and field named (MAIN 6.5).
 
 ## Layout
 
