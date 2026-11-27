@@ -13,7 +13,7 @@ public static class StateDigest
 {
     /// <summary>The digest of <paramref name="s"/>.</summary>
     /// <exception cref="ArgumentException">
-    /// A unit id is negative, or the streams do not belong to <see cref="GameState.RunSeed"/>.
+    /// The streams do not belong to <see cref="GameState.RunSeed"/>.
     /// </exception>
     public static Digest Of(GameState s) => Digest.Of(Bytes(s));
 
@@ -27,16 +27,11 @@ public static class StateDigest
             throw new ArgumentException("The state's streams were not derived from its run seed.", nameof(s));
         }
 
-        foreach (var unit in s.Units)
-        {
-            if (unit.Id.Value < 0)
-            {
-                throw new ArgumentException($"Unit id {unit.Id.Value} is negative.", nameof(s));
-            }
-        }
-
         return CanonicalWriter.Serialize(new StateRecord(s));
     }
+
+    // Maps every int id, negative ones included, to a ulong in the same order.
+    private static ulong IdKey(UnitId id) => (ulong)((long)id.Value - int.MinValue);
 
     private sealed class StateRecord(GameState s) : ICanonical
     {
@@ -45,7 +40,7 @@ public static class StateDigest
             w.BeginRecord(7);
             w.UInt64(0, s.RunSeed);
             w.List(1, s.Map.ToRows(), (e, row) => e.String(0, row));
-            w.SetByKey(2, s.Units, u => (ulong)u.Id.Value, (e, u) => e.Record(0, new UnitRecord(u)));
+            w.SetByKey(2, s.Units, u => IdKey(u.Id), (e, u) => e.Record(0, new UnitRecord(u)));
             w.Record(3, new StreamsRecord(s.Rng));
             w.OptionalRecord(4, s.Pending is null ? null : new PendingRecord(s.Pending));
             w.Int64(5, s.Tick);

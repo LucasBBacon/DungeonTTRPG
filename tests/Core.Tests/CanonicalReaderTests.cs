@@ -105,6 +105,23 @@ public class CanonicalReaderTests
         }));
     }
 
+    // The writer refuses empty collection elements, so the reader must too (final review B1).
+    [Fact]
+    public void Empty_collection_element_is_rejected()
+    {
+        // Root record of 2 fields: a list of 2 zero-field records, then a UInt64. The 8 tail bytes
+        // keep the count (2) within the bytes left, so only the empty-element rule can reject it.
+        byte[] bytes = [0x02, 0x00, 0x00, 0x00, 0x2A, 0, 0, 0, 0, 0, 0, 0];
+        Assert.Throws<CanonicalFormatException>(() => CanonicalReader.Deserialize(bytes, r =>
+        {
+            r.BeginRecord(2);
+            var list = r.ReadList(0, e => e.ReadRecord(0, n => { n.BeginRecord(0); n.EndRecord(); return 0; }));
+            var tail = r.ReadUInt64(1);
+            r.EndRecord();
+            return (list, tail);
+        }));
+    }
+
     [Fact]
     public void Reader_ordinal_errors_throw()
     {

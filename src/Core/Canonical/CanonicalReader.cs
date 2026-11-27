@@ -243,11 +243,18 @@ public sealed class CanonicalReader
     private T ReadElement<T>(Func<CanonicalReader, T> readItem)
     {
         int depth = _frames.Count;
+        int start = _position;
         _frames.Add(new Frame(1));
         var item = readItem(this);
         if (_frames.Count != depth + 1 || _frames[depth].Next != 1)
         {
             throw new InvalidOperationException("A collection element must read exactly one value, with ordinal 0.");
+        }
+
+        // The writer refuses empty elements, so bytes holding one were not written by it.
+        if (_position == start)
+        {
+            throw new CanonicalFormatException(start, "a collection element is empty.");
         }
 
         _frames.RemoveAt(depth);

@@ -23,8 +23,16 @@ public sealed class CanonicalWriter
     private bool _recordSlotOpen;
     private bool _rootDone;
 
-    /// <summary>The bytes written so far.</summary>
-    public byte[] ToArray() => _buffer.WrittenSpan.ToArray();
+    /// <summary>The bytes of the complete root record. Throws until that record has been ended.</summary>
+    public byte[] ToArray()
+    {
+        if (_frames.Count != 0 || !_rootDone)
+        {
+            throw new InvalidOperationException("The root record is not complete.");
+        }
+
+        return _buffer.WrittenSpan.ToArray();
+    }
 
     /// <summary>The canonical bytes of <paramref name="value"/>, written as one root record.</summary>
     public static byte[] Serialize(ICanonical value)
@@ -37,7 +45,7 @@ public sealed class CanonicalWriter
             throw new InvalidOperationException("Canonical value did not write exactly one complete record.");
         }
 
-        return w.ToArray();
+        return w._buffer.WrittenSpan.ToArray();
     }
 
     /// <summary>

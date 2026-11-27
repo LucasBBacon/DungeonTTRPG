@@ -91,6 +91,17 @@ public class CanonicalWriterTests
         }
     }
 
+    // ToArray must not hand out the bytes of an incomplete record (final review A2).
+    [Fact]
+    public void ToArray_requires_a_complete_root_record()
+    {
+        Assert.Throws<InvalidOperationException>(() => new CanonicalWriter().ToArray());
+        var open = new CanonicalWriter();
+        open.BeginRecord(2);
+        open.Int32(0, 1);
+        Assert.Throws<InvalidOperationException>(() => open.ToArray());
+    }
+
     // The reader rejects a count larger than the bytes left, which is only sound if no element is empty.
     [Fact]
     public void Collection_element_must_not_be_empty() =>
