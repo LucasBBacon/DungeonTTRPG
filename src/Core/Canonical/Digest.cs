@@ -26,6 +26,36 @@ public readonly record struct Digest(ulong W0, ulong W1, ulong W2, ulong W3)
     /// <summary>The SHA-256 of <paramref name="value"/>'s canonical bytes.</summary>
     public static Digest Of(ICanonical value) => Of(CanonicalWriter.Serialize(value));
 
+    /// <summary>The digest whose <see cref="ToHex"/> is <paramref name="hex"/>: exactly 64 lowercase hex digits.</summary>
+    /// <exception cref="FormatException"><paramref name="hex"/> is not 64 lowercase hex digits.</exception>
+    public static Digest Parse(string hex)
+    {
+        ArgumentNullException.ThrowIfNull(hex);
+        if (hex.Length != 64)
+        {
+            throw new FormatException($"A digest is 64 hex digits; got {hex.Length}.");
+        }
+
+        Span<byte> bytes = stackalloc byte[32];
+        for (int i = 0; i < 32; i++)
+        {
+            bytes[i] = (byte)((Nibble(hex[2 * i]) << 4) | Nibble(hex[(2 * i) + 1]));
+        }
+
+        return new Digest(
+            BinaryPrimitives.ReadUInt64BigEndian(bytes[..8]),
+            BinaryPrimitives.ReadUInt64BigEndian(bytes[8..16]),
+            BinaryPrimitives.ReadUInt64BigEndian(bytes[16..24]),
+            BinaryPrimitives.ReadUInt64BigEndian(bytes[24..]));
+    }
+
+    private static int Nibble(char c) => c switch
+    {
+        >= '0' and <= '9' => c - '0',
+        >= 'a' and <= 'f' => c - 'a' + 10,
+        _ => throw new FormatException($"'{c}' is not a lowercase hex digit."),
+    };
+
     /// <summary>All 256 bits as 64 lowercase hex digits.</summary>
     public string ToHex() => Hex(4);
 
