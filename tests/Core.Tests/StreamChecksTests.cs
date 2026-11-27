@@ -79,7 +79,9 @@ public class StreamChecksTests
         string? extra = cls == "per-entry" ? "\"cap\": \"4\"" : null;
         var set = Load(Row("a", cls: cls, count: null, extra: extra));
 
-        Assert.Equal("$.streams[0].countFormula", Assert.Single(new StreamRowsCheck().Run(set)).Field);
+        var failure = Assert.Single(new StreamRowsCheck().Run(set));
+        Assert.Equal("$.streams[0].countFormula", failure.Field);
+        Assert.Contains($"a {cls} row needs", failure.Problem, StringComparison.Ordinal);
     }
 
     [Theory]
@@ -93,7 +95,9 @@ public class StreamChecksTests
         string? extra = cls == "vector" ? "\"length\": 3" : null;
         var set = Load(Row("a", cls: cls, count: "1", keyType: keyType ?? "core", extra: extra));
 
-        Assert.Equal("$.streams[0].countFormula", Assert.Single(new StreamRowsCheck().Run(set)).Field);
+        var failure = Assert.Single(new StreamRowsCheck().Run(set));
+        Assert.Equal("$.streams[0].countFormula", failure.Field);
+        Assert.Contains($"a {cls} row takes no", failure.Problem, StringComparison.Ordinal);
     }
 
     [Fact]

@@ -49,7 +49,7 @@ public sealed class StreamRowsCheck : IStaticCheck
 
             if (TakesCount(row.Class) is { } takes && takes != (row.Count is not null))
             {
-                Fail("countFormula", takes ? $"a {Token(row.Class)} row needs a countFormula." : $"a {Token(row.Class)} row takes no countFormula.");
+                Fail("countFormula", takes ? $"a {StreamKind.ClassToken(row.Class)} row needs a countFormula." : $"a {StreamKind.ClassToken(row.Class)} row takes no countFormula.");
             }
 
             if (row.Class == CountClass.Vector && row.Length is null)
@@ -119,20 +119,6 @@ public sealed class StreamRowsCheck : IStaticCheck
         CountClass.Fixed or CountClass.FixedPerData or CountClass.LeafFormula or CountClass.PerEntry => true,
         CountClass.Node or CountClass.Vector or CountClass.Keyed or CountClass.SequentialSaved or CountClass.Display => false,
         _ => null,
-    };
-
-    private static string Token(CountClass cls) => cls switch
-    {
-        CountClass.Node => "node",
-        CountClass.Fixed => "fixed",
-        CountClass.FixedPerData => "fixed-per-data",
-        CountClass.LeafFormula => "leaf-formula",
-        CountClass.PerEntry => "per-entry",
-        CountClass.Vector => "vector",
-        CountClass.Keyed => "keyed",
-        CountClass.SequentialSaved => "sequential-saved",
-        CountClass.Display => "display",
-        _ => "sim",
     };
 
     // The id of the row's root, following parents; a parent cycle stops at the row count.

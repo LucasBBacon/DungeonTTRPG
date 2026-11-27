@@ -48,6 +48,21 @@ public sealed class StreamKind : ContentKind
     /// <inheritdoc />
     public override bool ReadByGeneration => true;
 
+    /// <summary>The <c>class</c> token <paramref name="cls"/> is spelled as in <c>registry/streams.json</c>.</summary>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="cls"/> is not a <see cref="CountClass"/> member.</exception>
+    internal static string ClassToken(CountClass cls)
+    {
+        foreach (var (token, value) in Classes)
+        {
+            if (value == cls)
+            {
+                return token;
+            }
+        }
+
+        throw new ArgumentOutOfRangeException(nameof(cls), cls, "no class token.");
+    }
+
     /// <summary>True if <paramref name="s"/> is a label: one or more of <c>[A-Za-z0-9_.:-]</c>.</summary>
     public static bool IsLabel(string s)
     {
