@@ -114,3 +114,30 @@ public static class KeyAlgebra
         }
     }
 }
+
+/// <summary>
+/// A stream of draws: a key and a counter (SV 4.1). Immutable; every step returns the value and the next stream.
+/// Counter arithmetic is deliberately checked (outside any <c>unchecked</c> block), so an overflow throws in Debug and CI.
+/// </summary>
+/// <param name="Key">The stream's key.</param>
+/// <param name="Counter">The 0-based index of the next draw.</param>
+public readonly record struct DrawStream(ulong Key, ulong Counter)
+{
+    /// <summary>A fresh stream at counter 0.</summary>
+    public static DrawStream Open(ulong key) => new(key, 0);
+
+    /// <summary>The next draw, <c>Draw(Key, Counter)</c>, and the stream advanced by one.</summary>
+    public (ulong Value, DrawStream Next) Next()
+        => (KeyAlgebra.Draw(Key, Counter), new DrawStream(Key, Counter + 1));
+
+    /// <summary>The next draw mapped onto <c>[0, n)</c> by <see cref="KeyAlgebra.Bound"/>.</summary>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="n"/> is 0.</exception>
+    public (ulong Value, DrawStream Next) NextBelow(ulong n)
+    {
+        var (u, next) = Next();
+        return (KeyAlgebra.Bound(u, n), next);
+    }
+
+    /// <summary>The stream advanced by <paramref name="n"/> draws without consuming values.</summary>
+    public DrawStream Skip(ulong n) => new(Key, Counter + n);
+}
