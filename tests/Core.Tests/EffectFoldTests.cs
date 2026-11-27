@@ -120,7 +120,57 @@ public class EffectFoldTests
         Assert.Contains("test.capped", ex.Message, StringComparison.Ordinal);
     }
 
+    [Fact]
+    public void A_derived_number_with_no_id_or_no_base_is_rejected()
+    {
+        Assert.Throws<ArgumentException>(() => RulesContext.Create(
+            LoadEffects(), [new DerivedNumber("test.x", NumberRule.Stack, (NumberBase)null!, null)]));
+        Assert.Throws<ArgumentException>(() => RulesContext.Create(
+            LoadEffects(), [new DerivedNumber(null!, NumberRule.Stack, 1, null)]));
+    }
+
+    // An ability with no cap still takes only the best bonus and the worst penalty: 4 + 2 - 2, not the Stack sum.
+    [Fact]
+    public void An_uncapped_ability_score_takes_the_best_bonus_and_the_worst_penalty()
+    {
+        var rules = RulesContext.Create(
+            LoadEffects(
+                Def("t.plus2", "trait", Add("test.free", 2)),
+                Def("g.plus1", "gear", Add("test.free", 1)),
+                Def("g.minus1", "gear", Add("test.free", -1)),
+                Def("g.minus2", "gear", Add("test.free", -2))),
+            [new DerivedNumber("test.free", NumberRule.AbilityScore, 4, null)]);
+        GameState Holding(params string[] effects)
+        {
+            var s = Start();
+            foreach (var id in effects)
+            {
+                s = Effects.Apply(s, id, Hero, new EffectSource(Hero));
+            }
+
+            return s;
+        }
+
+        Assert.Equal(6, Effects.Number(rules, Holding("t.plus2", "g.plus1"), Hero, "test.free"));                         // not 7
+        Assert.Equal(4, Effects.Number(rules, Holding("t.plus2", "g.plus1", "g.minus1", "g.minus2"), Hero, "test.free")); // 4 + 2 - 2
+    }
+
     // --- Per-unit bases ---
+
+    // Two bases reading the same number is not a cycle (a save reads two abilities; max HP and Recovery both read Con).
+    [Fact]
+    public void Two_bases_may_read_the_same_number()
+    {
+        var rules = RulesContext.Create(
+            LoadEffects(),
+            [
+                new DerivedNumber("d.leaf", NumberRule.Stack, 3, null),
+                new DerivedNumber("d.left", NumberRule.Stack, a => a.Number("d.leaf") + 1, null),
+                new DerivedNumber("d.right", NumberRule.Stack, a => a.Number("d.leaf") + 2, null),
+                new DerivedNumber("d.top", NumberRule.Stack, a => a.Number("d.left") + a.Number("d.right") + a.Number("d.leaf"), null),
+            ]);
+        Assert.Equal(12, Effects.Number(rules, Start(), Hero, "d.top"));
+    }
 
     [Fact]
     public void A_base_can_differ_per_unit() =>
