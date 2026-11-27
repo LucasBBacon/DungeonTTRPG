@@ -15,7 +15,8 @@ namespace Dungeon.Sim.Tools;
 /// One <c>readonly record struct</c> per non-domain row, named by the PascalCase concatenation of its chain's labels
 /// plus <c>Key</c> (<c>h:</c> written <c>H</c>; <c>:</c>, <c>.</c> and <c>-</c> dropped, the next letter capitalized).
 /// Each holds the row's key in <c>Value</c>, a drawn-from row (any class but <c>node</c> and <c>keyed</c>) also has a
-/// <c>Handle</c>, and each child row is one member: a single <c>KeyAlgebra.Derive</c> call, or for a keyed domain a
+/// <c>Handle</c> and an <c>Open()</c> that opens it at counter 0 (so no file outside this one calls
+/// <c>DrawStream.Open</c>, DUN012), and each child row is one member: a single <c>KeyAlgebra.Derive</c> call, or for a keyed domain a
 /// single <c>KeyAlgebra.H</c> call returning <c>ulong</c>. <c>Streams</c> holds the root rows, and
 /// <c>StreamHandleIndex.All</c> calls every non-domain row through the chain for the cross-check test. Everything is
 /// emitted in ordinal row-id order.
@@ -79,8 +80,12 @@ public static class StreamHandlesWriter
             if (drawn)
             {
                 names.Add("Handle");
+                names.Add("Open");
                 Line(sb, $"    /// <summary>The stream <c>{row.Id}</c>.</summary>");
                 Line(sb, $"    public StreamHandle Handle => new(\"{row.Id}\", Value);");
+                Line(sb, "");
+                Line(sb, $"    /// <summary>Opens <c>{row.Id}</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>");
+                Line(sb, "    public DrawStream Open() => DrawStream.Open(Value);");
             }
 
             foreach (var child in children)

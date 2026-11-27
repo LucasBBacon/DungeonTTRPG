@@ -19,7 +19,7 @@ public sealed record RunStreams(DrawStream Combat, DrawStream Shrine)
     {
         RunSeed.Validate(runSeed, nameof(runSeed));
         return new RunStreams(
-            DrawStream.Open(Streams.Combat(runSeed).Value),
-            DrawStream.Open(Streams.Loot(runSeed).Shrine.Value));
+            Streams.Combat(runSeed).Open(),
+            Streams.Loot(runSeed).Shrine.Open());
     }
 }

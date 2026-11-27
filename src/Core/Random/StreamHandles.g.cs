@@ -27,6 +27,9 @@ public readonly record struct CombatKey(ulong Value)
 {
     /// <summary>The stream <c>combat</c>.</summary>
     public StreamHandle Handle => new("combat", Value);
+
+    /// <summary>Opens <c>combat</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>dungeon</c>.</summary>
@@ -80,6 +83,9 @@ public readonly record struct DungeonFloorAttemptDressingKey(ulong Value)
 {
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/dressing</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/dressing", Value);
+
+    /// <summary>Opens <c>dungeon/floor/{N}/attempt/{a}/dressing</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/encounters</c>.</summary>
@@ -102,6 +108,9 @@ public readonly record struct DungeonFloorAttemptEncountersPlaceKey(ulong Value)
 {
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/encounters/place</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/encounters/place", Value);
+
+    /// <summary>Opens <c>dungeon/floor/{N}/attempt/{a}/encounters/place</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/encounters/plan</c>.</summary>
@@ -110,6 +119,9 @@ public readonly record struct DungeonFloorAttemptEncountersPlanKey(ulong Value)
 {
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/encounters/plan</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/encounters/plan", Value);
+
+    /// <summary>Opens <c>dungeon/floor/{N}/attempt/{a}/encounters/plan</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/encounters/retry1</c>.</summary>
@@ -129,6 +141,9 @@ public readonly record struct DungeonFloorAttemptEncountersRetry1PlaceKey(ulong 
 {
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/encounters/retry1/place</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/encounters/retry1/place", Value);
+
+    /// <summary>Opens <c>dungeon/floor/{N}/attempt/{a}/encounters/retry1/place</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/encounters/retry1/plan</c>.</summary>
@@ -137,6 +152,9 @@ public readonly record struct DungeonFloorAttemptEncountersRetry1PlanKey(ulong V
 {
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/encounters/retry1/plan</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/encounters/retry1/plan", Value);
+
+    /// <summary>Opens <c>dungeon/floor/{N}/attempt/{a}/encounters/retry1/plan</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/layout</c>.</summary>
@@ -145,6 +163,9 @@ public readonly record struct DungeonFloorAttemptLayoutKey(ulong Value)
 {
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/layout</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/layout", Value);
+
+    /// <summary>Opens <c>dungeon/floor/{N}/attempt/{a}/layout</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/terrain</c>.</summary>
@@ -153,6 +174,9 @@ public readonly record struct DungeonFloorAttemptTerrainKey(ulong Value)
 {
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/terrain</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/terrain", Value);
+
+    /// <summary>Opens <c>dungeon/floor/{N}/attempt/{a}/terrain</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/traps</c>.</summary>
@@ -161,6 +185,9 @@ public readonly record struct DungeonFloorAttemptTrapsKey(ulong Value)
 {
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/traps</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/traps", Value);
+
+    /// <summary>Opens <c>dungeon/floor/{N}/attempt/{a}/traps</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 
     /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/traps/retry1</c>.</summary>
     public DungeonFloorAttemptTrapsRetry1Key Retry1 => new(KeyAlgebra.Derive(Value, "retry1"));
@@ -172,6 +199,9 @@ public readonly record struct DungeonFloorAttemptTrapsRetry1Key(ulong Value)
 {
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/traps/retry1</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/traps/retry1", Value);
+
+    /// <summary>Opens <c>dungeon/floor/{N}/attempt/{a}/traps/retry1</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/trapsResolve</c>.</summary>
@@ -180,6 +210,9 @@ public readonly record struct DungeonFloorAttemptTrapsResolveKey(ulong Value)
 {
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/trapsResolve</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/trapsResolve", Value);
+
+    /// <summary>Opens <c>dungeon/floor/{N}/attempt/{a}/trapsResolve</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 
     /// <summary>The key of <c>dungeon/floor/{N}/attempt/{a}/trapsResolve/retry1</c>.</summary>
     public DungeonFloorAttemptTrapsResolveRetry1Key Retry1 => new(KeyAlgebra.Derive(Value, "retry1"));
@@ -191,6 +224,9 @@ public readonly record struct DungeonFloorAttemptTrapsResolveRetry1Key(ulong Val
 {
     /// <summary>The stream <c>dungeon/floor/{N}/attempt/{a}/trapsResolve/retry1</c>.</summary>
     public StreamHandle Handle => new("dungeon/floor/{N}/attempt/{a}/trapsResolve/retry1", Value);
+
+    /// <summary>Opens <c>dungeon/floor/{N}/attempt/{a}/trapsResolve/retry1</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>dungeon/floor/{N}/checks</c>.</summary>
@@ -281,6 +317,9 @@ public readonly record struct LootFloorCampKey(ulong Value)
 {
     /// <summary>The stream <c>loot/floor/{N}/camp/{entry}</c>.</summary>
     public StreamHandle Handle => new("loot/floor/{N}/camp/{entry}", Value);
+
+    /// <summary>Opens <c>loot/floor/{N}/camp/{entry}</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>loot/floor/{N}/carried/{entry}</c>.</summary>
@@ -289,6 +328,9 @@ public readonly record struct LootFloorCarriedKey(ulong Value)
 {
     /// <summary>The stream <c>loot/floor/{N}/carried/{entry}</c>.</summary>
     public StreamHandle Handle => new("loot/floor/{N}/carried/{entry}", Value);
+
+    /// <summary>Opens <c>loot/floor/{N}/carried/{entry}</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>loot/floor/{N}/containers/{entry}</c>.</summary>
@@ -297,6 +339,9 @@ public readonly record struct LootFloorContainersKey(ulong Value)
 {
     /// <summary>The stream <c>loot/floor/{N}/containers/{entry}</c>.</summary>
     public StreamHandle Handle => new("loot/floor/{N}/containers/{entry}", Value);
+
+    /// <summary>Opens <c>loot/floor/{N}/containers/{entry}</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>loot/floor/{N}/dhBlock/{entry}</c>.</summary>
@@ -305,6 +350,9 @@ public readonly record struct LootFloorDhBlockKey(ulong Value)
 {
     /// <summary>The stream <c>loot/floor/{N}/dhBlock/{entry}</c>.</summary>
     public StreamHandle Handle => new("loot/floor/{N}/dhBlock/{entry}", Value);
+
+    /// <summary>Opens <c>loot/floor/{N}/dhBlock/{entry}</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>loot/floor/{N}/resistant/{entry}</c>.</summary>
@@ -313,6 +361,9 @@ public readonly record struct LootFloorResistantKey(ulong Value)
 {
     /// <summary>The stream <c>loot/floor/{N}/resistant/{entry}</c>.</summary>
     public StreamHandle Handle => new("loot/floor/{N}/resistant/{entry}", Value);
+
+    /// <summary>Opens <c>loot/floor/{N}/resistant/{entry}</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>loot/floor/{N}/vendorPotions/{entry}</c>.</summary>
@@ -321,6 +372,9 @@ public readonly record struct LootFloorVendorPotionsKey(ulong Value)
 {
     /// <summary>The stream <c>loot/floor/{N}/vendorPotions/{entry}</c>.</summary>
     public StreamHandle Handle => new("loot/floor/{N}/vendorPotions/{entry}", Value);
+
+    /// <summary>Opens <c>loot/floor/{N}/vendorPotions/{entry}</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>loot/floor/{N}/wandCharges/{entry}</c>.</summary>
@@ -329,6 +383,9 @@ public readonly record struct LootFloorWandChargesKey(ulong Value)
 {
     /// <summary>The stream <c>loot/floor/{N}/wandCharges/{entry}</c>.</summary>
     public StreamHandle Handle => new("loot/floor/{N}/wandCharges/{entry}", Value);
+
+    /// <summary>Opens <c>loot/floor/{N}/wandCharges/{entry}</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>loot/lootPlan/{N}</c>.</summary>
@@ -347,6 +404,9 @@ public readonly record struct LootLootPlanBossCardKey(ulong Value)
 {
     /// <summary>The stream <c>loot/lootPlan/{N}/bossCard/{entryIndex}</c>.</summary>
     public StreamHandle Handle => new("loot/lootPlan/{N}/bossCard/{entryIndex}", Value);
+
+    /// <summary>Opens <c>loot/lootPlan/{N}/bossCard/{entryIndex}</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>loot/run</c>.</summary>
@@ -355,6 +415,9 @@ public readonly record struct LootRunKey(ulong Value)
 {
     /// <summary>The stream <c>loot/run</c>.</summary>
     public StreamHandle Handle => new("loot/run", Value);
+
+    /// <summary>Opens <c>loot/run</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>The key of <c>loot/shrine</c>.</summary>
@@ -363,6 +426,9 @@ public readonly record struct LootShrineKey(ulong Value)
 {
     /// <summary>The stream <c>loot/shrine</c>.</summary>
     public StreamHandle Handle => new("loot/shrine", Value);
+
+    /// <summary>Opens <c>loot/shrine</c> at counter 0 (DS15); the only way outside this file to open it (DUN012).</summary>
+    public DrawStream Open() => DrawStream.Open(Value);
 }
 
 /// <summary>Every non-domain stream row called through its handle chain, for the <c>StreamRegistry.KeyOf</c> cross-check.</summary>

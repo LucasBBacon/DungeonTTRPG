@@ -161,6 +161,46 @@ public class StreamHandlesTests
         }
     }
 
+    [Fact]
+    public void Run_streams_open_through_the_handles_at_counter_0()
+    {
+        var streams = RunStreams.FromSeed(7);
+        Assert.Equal(new DrawStream(Streams.Combat(7).Value, 0), streams.Combat);
+        Assert.Equal(new DrawStream(Streams.Loot(7).Shrine.Value, 0), streams.Shrine);
+        Assert.Equal(Streams.Combat(7).Open(), streams.Combat);
+        Assert.Equal(Streams.Loot(7).Shrine.Open(), streams.Shrine);
+    }
+
+    [Fact]
+    public void Exactly_the_drawn_from_keys_have_open_and_it_opens_their_key_at_counter_0()
+    {
+        var keys = typeof(Streams).Assembly.GetTypes()
+            .Where(t => t.IsValueType && t.Namespace == "Dungeon.Core" && t.Name.EndsWith("Key", StringComparison.Ordinal)
+                && t.GetProperty("Value")?.PropertyType == typeof(ulong) && t.GetConstructor([typeof(ulong)]) is not null)
+            .ToList();
+        Assert.NotEmpty(keys);
+        int drawn = 0;
+        foreach (var type in keys)
+        {
+            var handle = type.GetProperty("Handle");
+            var open = type.GetMethod("Open", Type.EmptyTypes);
+            Assert.True((handle is null) == (open is null), $"{type.Name}: Handle and Open() must come together.");
+            if (open is null)
+            {
+                continue;
+            }
+
+            drawn++;
+            Assert.Equal(typeof(DrawStream), open.ReturnType);
+            object key = Activator.CreateInstance(type, 0x5EEDUL)!;
+            Assert.Equal(new DrawStream(0x5EEDUL, 0), (DrawStream)open.Invoke(key, null)!);
+        }
+
+        int expected = Repository.Value.All<StreamRow>()
+            .Count(r => !StreamRegistry.IsDomain(Repository.Value, r) && r.Class is not (CountClass.Node or CountClass.Keyed));
+        Assert.Equal(expected, drawn);
+    }
+
     /// <summary>
     /// Sample indices for every index along <paramref name="rowId"/>'s parent chain, root first: numbers 1, 2, 3…
     /// and the text <c>"a.b"</c> for a <c>labelId</c>.
