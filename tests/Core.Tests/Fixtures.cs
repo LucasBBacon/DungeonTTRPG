@@ -9,11 +9,20 @@ internal static class Fixtures
 {
     public static readonly UnitId Hero = new(1);
 
-    /// <summary>Level 1, all abilities 0, main Strength, trained Fortitude, no skills.</summary>
+    /// <summary>
+    /// Level 1, all abilities 0, main Strength, trained Fortitude, no skills, HP tier Slight (maximum 11 + 1 × 6 = 17).
+    /// </summary>
     public static readonly UnitStats Stats =
-        new(1, new Abilities(0, 0, 0, 0, 0, 0), Ability.Strength, Save.Fortitude, ImmutableArray<Skill>.Empty);
+        new(1, new Abilities(0, 0, 0, 0, 0, 0), Ability.Strength, Save.Fortitude, ImmutableArray<Skill>.Empty, HpTier.Slight, 0);
 
-    public static Unit U(int id, int x, int y) => new(new UnitId(id), new(x, y), Faction.Party, [], Stats);
+    /// <summary>The maximum HP of a unit on <see cref="Stats"/>: 11 + 1 × max(1, 6 + 0) = 17 (DH 7.1).</summary>
+    public const int FullHp = 17;
+
+    /// <summary>As <see cref="Stats"/>, but a monster's HP basis: HP tier Table, table HP 12.</summary>
+    public static readonly UnitStats EnemyStats = Stats with { HpTier = HpTier.Table, TableHp = 12 };
+
+    /// <summary>A party unit on <see cref="Stats"/> and full HP.</summary>
+    public static Unit U(int id, int x, int y) => new(new UnitId(id), new(x, y), Faction.Party, [], Stats, FullHp);
 
     /// <summary>A one-row map with a shrine east of the hero: <c>.*.</c>, hero at (0,0), seed 7 unless given.</summary>
     public static GameState ShrineState(ulong seed = 7) =>

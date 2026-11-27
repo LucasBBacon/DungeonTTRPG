@@ -51,12 +51,13 @@ public static class Snapshot
 {
     /// <summary>
     /// The only version this build reads and writes, shared with <see cref="CommandLog"/>.
-    /// Version 5 (M1-08) adds each unit's stat block;
+    /// Version 6 (M1-09) adds current HP and the HP basis;
+    /// version 5 (M1-08) added each unit's stat block;
     /// version 4 (M1-07) added the active effects and the next effect seq;
     /// version 3 (M1-06) added the reproducibility-key header and the run configuration and unlock
     /// snapshots; version 2 (M1-02) stored the run seed and stream counters; version 1 held PCG32 states.
     /// </summary>
-    public const int CurrentVersion = 5;
+    public const int CurrentVersion = 6;
 
     /// <summary>
     /// Writes <paramref name="s"/>. Only the run seed and the stream counters are stored, so a state whose
@@ -101,6 +102,7 @@ public static class Snapshot
                 Faction = u.Faction.ToString(),
                 Boons = u.Boons.ToArray(),
                 Stats = StatsDto.From(u.Stats),
+                Hp = u.Hp,
             }).ToArray(),
             Rng = new RngStreamsDto
             {
@@ -159,7 +161,8 @@ public static class Snapshot
                 new GridPos(PersistenceJson.Need(u.X, "unit x"), PersistenceJson.Need(u.Y, "unit y")),
                 PersistenceJson.ParseEnum<Faction>(u.Faction, "faction"),
                 [.. PersistenceJson.Need(u.Boons, "unit boons")],
-                PersistenceJson.Need(u.Stats, "unit stats").ToStats());
+                PersistenceJson.Need(u.Stats, "unit stats").ToStats(),
+                PersistenceJson.Need(u.Hp, "unit hp"));
             NeedBoonIds(unit.Boons, $"unit {unit.Id.Value} boons");
             units.Add(unit);
         }
@@ -444,6 +447,7 @@ public static class Snapshot
         [JsonPropertyName("faction"), JsonPropertyOrder(3)] public string? Faction { get; set; }
         [JsonPropertyName("boons"), JsonPropertyOrder(4)] public int[]? Boons { get; set; }
         [JsonPropertyName("stats"), JsonPropertyOrder(5), JsonRequired] public StatsDto? Stats { get; set; }
+        [JsonPropertyName("hp"), JsonPropertyOrder(6), JsonRequired] public int? Hp { get; set; }
     }
 
     /// <summary>A unit's stat block; enums are written by name, trained skills in skill order.</summary>
@@ -454,6 +458,8 @@ public static class Snapshot
         [JsonPropertyName("mainAbility"), JsonPropertyOrder(2), JsonRequired] public string? MainAbility { get; set; }
         [JsonPropertyName("trainedSave"), JsonPropertyOrder(3), JsonRequired] public string? TrainedSave { get; set; }
         [JsonPropertyName("trainedSkills"), JsonPropertyOrder(4), JsonRequired] public string?[]? TrainedSkills { get; set; }
+        [JsonPropertyName("hpTier"), JsonPropertyOrder(5), JsonRequired] public string? HpTier { get; set; }
+        [JsonPropertyName("tableHp"), JsonPropertyOrder(6), JsonRequired] public int? TableHp { get; set; }
 
         public static StatsDto From(UnitStats s) => new()
         {
@@ -470,6 +476,8 @@ public static class Snapshot
             MainAbility = s.MainAbility.ToString(),
             TrainedSave = s.TrainedSave.ToString(),
             TrainedSkills = s.TrainedSkills.Select(k => (string?)k.ToString()).ToArray(),
+            HpTier = s.HpTier.ToString(),
+            TableHp = s.TableHp,
         };
 
         public UnitStats ToStats()
@@ -487,7 +495,9 @@ public static class Snapshot
                 PersistenceJson.ParseEnum<Ability>(MainAbility, "main ability"),
                 PersistenceJson.ParseEnum<Save>(TrainedSave, "trained save"),
                 [.. PersistenceJson.Need(TrainedSkills, "stats trainedSkills")
-                    .Select(k => PersistenceJson.ParseEnum<Skill>(k, "trained skill"))]);
+                    .Select(k => PersistenceJson.ParseEnum<Skill>(k, "trained skill"))],
+                PersistenceJson.ParseEnum<HpTier>(HpTier, "hp tier"),
+                PersistenceJson.Need(TableHp, "stats tableHp"));
         }
     }
 

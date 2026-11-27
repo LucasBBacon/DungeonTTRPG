@@ -18,9 +18,27 @@ public readonly record struct D20Roll(RollMode Mode, int First, int? Second)
     };
 }
 
-/// <summary>The d20 draw: one die normally, two with advantage or disadvantage, the first drawn being the plain die.</summary>
+/// <summary>
+/// The d20 draw: one die normally, two with advantage or disadvantage, the first drawn being the plain die. And one die
+/// of any size, for damage (M1-09 plan call 8).
+/// </summary>
 public static class Dice
 {
+    /// <summary>
+    /// One die of <paramref name="sides"/> sides: one draw from <paramref name="stream"/>, <c>Bound(u, sides) + 1</c>.
+    /// </summary>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="sides"/> is below 1.</exception>
+    public static (int Face, DrawStream Next) Die(DrawStream stream, int sides)
+    {
+        if (sides < 1)
+        {
+            throw new ArgumentOutOfRangeException(nameof(sides), sides, "A die needs at least one side.");
+        }
+
+        var (u, next) = stream.Next();
+        return ((int)KeyAlgebra.Bound(u, (ulong)sides) + 1, next);
+    }
+
     /// <summary>Draws the roll for <paramref name="mode"/> from <paramref name="stream"/> and returns the advanced stream.</summary>
     public static (D20Roll Roll, DrawStream Next) D20(DrawStream stream, RollMode mode)
     {

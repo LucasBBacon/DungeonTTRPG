@@ -30,10 +30,18 @@ public readonly record struct Abilities(
 
 /// <summary>
 /// A unit's stat block (SM 5.1, 5.5): level 0 to 12, six ability bonuses, the main ability, the one trained save
-/// and the trained skills. <see cref="TrainedSkills"/> is sorted by skill, each at most once.
+/// and the trained skills. <see cref="TrainedSkills"/> is sorted by skill, each at most once. The HP basis (DH 7.1):
+/// a party unit has an <see cref="HpTier"/> other than <see cref="Stats.HpTier.Table"/> and <see cref="TableHp"/> 0;
+/// an enemy has <see cref="Stats.HpTier.Table"/> and its table HP (enemies 6.2), at least 1.
 /// </summary>
 public sealed record UnitStats(
-    int Level, Abilities Abilities, Ability MainAbility, Save TrainedSave, ImmutableArray<Skill> TrainedSkills)
+    int Level,
+    Abilities Abilities,
+    Ability MainAbility,
+    Save TrainedSave,
+    ImmutableArray<Skill> TrainedSkills,
+    HpTier HpTier,
+    int TableHp)
 {
     public const int MinLevel = 0;
     public const int MaxLevel = 12;

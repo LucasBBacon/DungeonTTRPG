@@ -13,8 +13,9 @@ public enum Faction { Party, Enemy }
 
 /// <summary>
 /// A unit on the grid. <see cref="Boons"/> holds the boon ids the unit has taken; <see cref="Stats"/> is its stat block.
+/// <see cref="Hp"/> is its current HP (DH 7.3: "Each unit stores current HP; the maximum is derived on demand").
 /// </summary>
-public sealed record Unit(UnitId Id, GridPos Pos, Faction Faction, ImmutableArray<int> Boons, UnitStats Stats);
+public sealed record Unit(UnitId Id, GridPos Pos, Faction Faction, ImmutableArray<int> Boons, UnitStats Stats, int Hp);
 
 public readonly record struct DecisionId(int Value);
 
@@ -53,10 +54,14 @@ public sealed record GameState(
     /// stands on a square that is not walkable, two units share a square, or a unit's
     /// <see cref="Unit.Boons"/> is an uninitialised array, or a unit's <see cref="Unit.Stats"/> is missing or
     /// outside the stat block's bounds (level 0 to 12, abilities -3 to +5, defined enum values, trained skills sorted and
-    /// distinct), and an
+    /// distinct), or a unit's HP basis or HP is invalid (a party unit needs an HP tier other than
+    /// <see cref="HpTier.Table"/> and table HP 0, an enemy the <see cref="HpTier.Table"/> tier and table HP of at least 1;
+    /// HP is never negative), and an
     /// <see cref="ArgumentOutOfRangeException"/> if <paramref name="seed"/> is at least 2^60. The run
     /// configuration defaults to <see cref="RunConfig.M1"/> and the unlocks to <see cref="UnlockSnapshot.None"/>;
-    /// both are validated. The run starts with no active effects and <see cref="NextEffectSeq"/> 1.
+    /// both are validated. The run starts with no active effects and <see cref="NextEffectSeq"/> 1. HP is not checked
+    /// against the maximum (M1-09 plan call 2): a save loads through here before its effects are back, and an effect
+    /// may raise the maximum.
     /// </summary>
     public static GameState Create(
         GridMap map, IEnumerable<Unit> units, ulong seed, RunConfig? config = null, UnlockSnapshot? unlocks = null)
@@ -159,6 +164,42 @@ public sealed record GameState(
                 throw new ArgumentException(
                     $"{who}must list trained skills in order, each once ({st.TrainedSkills[k - 1]} then {skill}).", units);
             }
+        }
+
+        CheckHp(unit, st, who, units);
+    }
+
+    // M1-09 plan call 2: the HP basis matches the faction, and current HP is not negative.
+    private static void CheckHp(Unit unit, UnitStats st, string who, string units)
+    {
+        if (!Enum.IsDefined(st.HpTier))
+        {
+            throw new ArgumentException($"{who}has an unknown HP tier.", units);
+        }
+
+        if (unit.Faction == Faction.Party && st.HpTier == HpTier.Table)
+        {
+            throw new ArgumentException($"{who}is a party unit on HP tier Table; it needs a class HP tier.", units);
+        }
+
+        if (unit.Faction != Faction.Party && st.HpTier != HpTier.Table)
+        {
+            throw new ArgumentException($"{who}is an enemy on HP tier {st.HpTier}; it must use HP tier Table.", units);
+        }
+
+        if (st.HpTier != HpTier.Table && st.TableHp != 0)
+        {
+            throw new ArgumentException($"{who}has table HP {st.TableHp} beside HP tier {st.HpTier}; it must be 0.", units);
+        }
+
+        if (st.HpTier == HpTier.Table && st.TableHp < 1)
+        {
+            throw new ArgumentException($"{who}has table HP {st.TableHp}; it must be at least 1.", units);
+        }
+
+        if (unit.Hp < 0)
+        {
+            throw new ArgumentException($"{who}has HP {unit.Hp}; it must not be negative.", units);
         }
     }
 

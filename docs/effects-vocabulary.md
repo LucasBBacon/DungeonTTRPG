@@ -69,8 +69,29 @@ fails at startup with the file and field named, never in play:
   rule is not `Speed` is a load error at `$.effects[i].modifiers[j].halve` (or `.zero`).
 - `rollMode` must name a roll target (`RollTargets.Core`).
 - `flag` must have the target `unit` (`Flags.Targets`), and its flag must name a registered flag (`Flags.Core` in
-  `src/Core/Effects/Registries.cs`), or it fails at `.target` or `.flag`. M1-07 registers no flag names, so every
-  `flag` modifier fails at load until the step that reads the flag registers it (section 9).
+  `src/Core/Effects/Registries.cs`), or it fails at `.target` or `.flag`. A flag name is registered by the step that
+  reads it (section 9); a `flag` modifier naming any other name fails at load. The registered names are in
+  section 3.1.
+
+### 3.1 Flag names
+
+| Names | Read by | Meaning |
+|---|---|---|
+| `resistant.<type>`, `weak.<type>`, `immune.<type>`, for each of the ten damage types `slashing`, `piercing`, `bludgeoning`, `fire`, `cold`, `lightning`, `acid`, `psychic`, `radiant`, `necrotic` (30 names; `DamageIds` in `src/Core/Damage/DamageTypes.cs`) | M1-09 `Ladder.StepFor` | The holder's ladder step for that type (SM 8.3). |
+
+The ladder step for a type (M1-09 plan call 6): `immune` set gives Immune, which **wins over a weakness**; else
+`resistant` and `weak` both set cancel to Normal; else `resistant` gives Resistant; else `weak` gives Weak; else
+Normal. Flags are booleans, so two sources of the same resistance count once (SM 8.3). A part then deals: Weak raw +
+half, Resistant half (both rounding down), Normal raw, Immune 0, where raw is the part's dice plus its flat amount; a
+part that is not immune deals at least 1 (M1-09 plan call 7, owner ruling 1).
+
+A trait's damage profile is a `trait`-kind effect carrying these flags (SM 9: "A trait is a named bundle of
+effects"), such as a skeletal trait resistant to piercing and weak to bludgeoning:
+
+```json
+{"id": "trait.skeletal", "kind": "trait", "modifiers": [
+  {"target": "unit", "flag": "resistant.piercing"}, {"target": "unit", "flag": "weak.bludgeoning"}]}
+```
 
 ## 4. Source kinds and stacking
 
@@ -100,8 +121,8 @@ Worked examples, all on `speed`:
 ## 5. Derived numbers
 
 A derived number is a row in a code table (`DerivedNumbers.Core` in `src/Core/Effects/Registries.cs`): an id, a
-**number rule**, a **base** per unit and, for an `AbilityScore` number only, a cap. All arithmetic is integer,
-rounding down (SM 3).
+**number rule**, a **base** per unit, for an `AbilityScore` number only a cap, and for a `Stack` number only a floor.
+All arithmetic is integer, rounding down (SM 3).
 
 The base is a pure function of the unit (`NumberBase` in `Registries.cs`), not one constant: nothing derived is
 stored (SM 9), and most SM 6 numbers start from other numbers. A base reads what the unit stores and may read the
@@ -115,6 +136,11 @@ registry rejects a cap on a `Stack` or `Speed` number at startup. The cap binds 
 penalty applies after it (SM 5.1: "The hard cap is +5 after all bonuses"; "A bonus and a penalty both apply"). With
 base 5, a +2 bonus and a -2 penalty, the result is min(5 + 2, 5) - 2 = 3: the bonus at the cap is wasted, and the
 penalty shows.
+
+A number may have a **floor** (M1-09 plan call 5): it binds after the rule's whole result, cap included, so the value
+is max(result, floor). Recovery has floor 1 (DH 8: "minimum 1"): base 2 with a -5 gear penalty reads 1, not -3. The
+registry rejects a floor on an `AbilityScore` number (SM 12 leaves open how far an effect can push an ability) and on
+a `Speed` number (speed 0 overrides everything, CO 6.7) at startup, naming the number.
 
 ### 5.1 Number rules
 
@@ -136,21 +162,25 @@ penalty shows.
 
 `DerivedNumbers.Core` is `speed` plus `StatNumbers.Rows` (`src/Core/Stats/StatNumbers.cs`). Every read of another
 number goes through `NumberBaseArgs.Number`, so effects on an ability flow into the saves, skills and passives that
-read it. The floors some numbers have (Recovery minimum 1, DH 612) are M1-09's to shape; no row has a floor field.
+read it. M1-09 adds `maxHp` and `recovery` (`HitPoints.Max` and `HitPoints.Recovery` read them), so effects on
+Constitution move both. The HP numbers themselves (11, 4, 2 and the tiers) are `DeathNumbers` and `HpTier` in
+`src/Core/Stats/HitPoints.cs` (M1-09 owner ruling 2).
 
-| Id | Rule | Base | Cap | Source |
-|---|---|---|---|---|
-| `speed` | `Speed` | 6 | none | SM 6 |
-| `strength`, `dexterity`, `constitution`, `intelligence`, `wisdom`, `presence` | `AbilityScore` | the unit's stored ability | 5 | SM 5.1 |
-| `proficiency` | `Stack` | by level: 0-4 gives 2, 5-8 gives 3, 9-12 gives 4 | none | SM 6 |
-| `fortitude`, `reflex`, `will` | `Stack` | the better of the two folded abilities (Str/Con, Dex/Int, Wis/Presence), plus `proficiency` if it is the unit's trained save | none | SM 6 |
-| `abilityDifficulty` | `Stack` | 8 + `proficiency` + the folded main ability | none | SM 6 |
-| `athletics`, `acrobatics`, `stealth`, `mechanics`, `perception`, `intimidation`, `leadership`, `medicine`, `lore` | `Stack` | the folded skill ability (SM 7.1), plus `proficiency` if trained | none | SM 6, 7.1 |
-| `passivePerception`, `passiveStealth` | `Stack` | 10 + the folded skill number, so effects on the skill count | none | SM 6 |
-| `armourClass` | `Stack` | 10 + folded Dexterity (unarmoured; M1-17 adds armour) | none | SM 6 |
-| `initiative` | `Stack` | folded Intelligence | none | SM 6 |
-| `attack` | `Stack` | 0: flat bonuses to every attack the unit makes; the contest adds the attack's ability and proficiency | none | SM 6 |
-| `medicineRestBonus` | `Stack` | folded Wisdom + `proficiency` if trained in Medicine, else 0 | none | DH 8 |
+| Id | Rule | Base | Cap | Floor | Source |
+|---|---|---|---|---|---|
+| `speed` | `Speed` | 6 | none | none | SM 6 |
+| `strength`, `dexterity`, `constitution`, `intelligence`, `wisdom`, `presence` | `AbilityScore` | the unit's stored ability | 5 | none | SM 5.1 |
+| `proficiency` | `Stack` | by level: 0-4 gives 2, 5-8 gives 3, 9-12 gives 4 | none | none | SM 6 |
+| `fortitude`, `reflex`, `will` | `Stack` | the better of the two folded abilities (Str/Con, Dex/Int, Wis/Presence), plus `proficiency` if it is the unit's trained save | none | none | SM 6 |
+| `abilityDifficulty` | `Stack` | 8 + `proficiency` + the folded main ability | none | none | SM 6 |
+| `athletics`, `acrobatics`, `stealth`, `mechanics`, `perception`, `intimidation`, `leadership`, `medicine`, `lore` | `Stack` | the folded skill ability (SM 7.1), plus `proficiency` if trained | none | none | SM 6, 7.1 |
+| `passivePerception`, `passiveStealth` | `Stack` | 10 + the folded skill number, so effects on the skill count | none | none | SM 6 |
+| `armourClass` | `Stack` | 10 + folded Dexterity (unarmoured; M1-17 adds armour) | none | none | SM 6 |
+| `initiative` | `Stack` | folded Intelligence | none | none | SM 6 |
+| `attack` | `Stack` | 0: flat bonuses to every attack the unit makes; the contest adds the attack's ability and proficiency | none | none | SM 6 |
+| `medicineRestBonus` | `Stack` | folded Wisdom + `proficiency` if trained in Medicine, else 0 | none | none | DH 8 |
+| `maxHp` | `Stack` | with an HP tier, 11 + level × max(1, tier + folded Constitution), so the per-level minimum reads Constitution after its effects; with `Table`, the unit's table HP (no bonus, no level, no Constitution) | none | 1 | DH 7.1 |
+| `recovery` | `Stack` | 4 + 2 × level + folded Constitution, for every unit; it reads no HP tier | none | 1 | DH 8 |
 
 The cap binds the stored ability plus the best bonus and the worst penalty applies after it, so a stored +5 with a
 trait +2 and a condition -2 reads 3, and a save that reads it sees 3.
@@ -279,7 +309,7 @@ These keys and ideas are named now so content does not invent its own, and are r
 
 | Item | Status | Arrives |
 |---|---|---|
-| `diceBonus` modifier | Refused at load (`$.effects[i].modifiers[j].diceBonus`). Its fold will be "only the highest dice bonus applies to a given roll" (CO 6.7). | M1-09 or later, when dice exist |
+| `diceBonus` modifier | Refused at load (`$.effects[i].modifiers[j].diceBonus`). Its fold will be "only the highest dice bonus applies to a given roll" (CO 6.7). | The first step whose content gives a dice bonus (M1-09 has dice but no rule or content that gives one) |
 | Durations and clocks (turn start and end, `combatOnly`, refill tags) | Not in the schema: an instance lasts until it is removed. | M1-10 (clocks), M1-12 (condition durations) |
 | Condition application pipeline, relations and exclusivity | Not in the schema; conditions are plain `condition`-kind effects for now. | M1-12, M1-13 |
 | Damage riders (AB 9.1) | Not in the schema. | M2 |
@@ -289,7 +319,7 @@ These keys and ideas are named now so content does not invent its own, and are r
 | Step | Vocabulary rows it uses |
 |---|---|
 | M1-08 Stats and contests | `add` on the new numbers (section 5.3); the `AbilityScore` rule and its cap for the six abilities; the `Stack` rule for the other SM 6 numbers, with per-unit bases that read the abilities and proficiency; `rollMode` on `attackRoll` and `attacksAgainst`, folded over several sources by D-15; the save and skill roll targets. Guile moved to M1-22 and HP numbers to M1-09. |
-| M1-09 Damage and HP | `add` on HP numbers (max HP, Recovery); the reserved `diceBonus` becomes live; resistances and weaknesses as `flag` or new numbers. |
+| M1-09 Damage and HP | `add` on `maxHp` and `recovery` (section 5.3), and on `constitution`, which both bases read after its effects; the derived-number floor (section 5), on both rows; resistances and weaknesses: the 30 ladder flags `resistant.<type>`, `weak.<type>` and `immune.<type>` (`flag` modifiers on `unit`, section 3.1), which a trait sets as a `trait`-kind effect carrying them. |
 | M1-10 Turns, lifecycle and death | New rule events (turn start, turn end, combat start and end); durations (section 8). |
 | M1-11 Abilities, reactions and areas | `ability`-kind effects; `applyEffect` actions; hooks for reactions; new events for ability use steps. |
 | M1-12 Conditions core | `condition`-kind effects and the same-number rule; `applyEffect` to `subject`; trigger order and the chain bound. |

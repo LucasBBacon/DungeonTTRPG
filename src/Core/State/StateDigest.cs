@@ -63,13 +63,14 @@ public static class StateDigest
     {
         public void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(6);
+            w.BeginRecord(7);
             w.Int32(0, u.Id.Value);
             w.Int32(1, u.Pos.X);
             w.Int32(2, u.Pos.Y);
             w.Enum(3, u.Faction);
             w.List(4, u.Boons, (e, boon) => e.Int32(0, boon));
             w.Record(5, new StatsRecord(u.Stats));
+            w.Int32(6, u.Hp);
             w.EndRecord();
         }
     }
@@ -78,7 +79,7 @@ public static class StateDigest
     {
         public void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(10);
+            w.BeginRecord(12);
             w.Int32(0, st.Level);
             w.Int32(1, st.Abilities.Strength);
             w.Int32(2, st.Abilities.Dexterity);
@@ -89,6 +90,8 @@ public static class StateDigest
             w.Enum(7, st.MainAbility);
             w.Enum(8, st.TrainedSave);
             w.List(9, st.TrainedSkills, (e, skill) => e.Enum(0, skill));
+            w.Enum(10, st.HpTier);
+            w.Int32(11, st.TableHp);
             w.EndRecord();
         }
     }

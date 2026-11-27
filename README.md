@@ -58,7 +58,8 @@ src/Core/                   Dungeon.Core: the rules engine (no Godot)
   Random/                   Key algebra (SplitMix64) and run streams
   Run/                      Reproducibility key, run configuration and unlock snapshots (SV 4.6)
   Effects/                  Effects system: definitions, fold queries, triggers, C# hooks (see docs/effects-vocabulary.md)
-  Stats/                    Unit stat block (SM 9), the SM 6 derived numbers, d20 dice, contests and initiative on the combat stream
+  Stats/                    Unit stat block (SM 9), the SM 6 derived numbers, d20 dice, contests and initiative on the combat stream; HP numbers and healing
+  Damage/                   Damage types, the ladder (SM 8.3) and the damage function in DH 20.3 order, rolled on the combat stream
   Persistence/              Versioned snapshots, command logs, replay
   Canonical/                CanonicalWriter, CanonicalReader, SHA-256 Digest (SV 4.5)
   Content/                  Content loader (strict JSON, integers and p/q rationals, ASCII rule strings), ContentSet, the three content hashes (ContentHashes.g.cs is generated)
