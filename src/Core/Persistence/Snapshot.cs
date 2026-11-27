@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dungeon.Core.Canonical;
+using Dungeon.Core.Combat;
 using Dungeon.Core.Content;
 using Dungeon.Core.Effects;
 using Dungeon.Core.Stats;
@@ -51,13 +52,14 @@ public static class Snapshot
 {
     /// <summary>
     /// The only version this build reads and writes, shared with <see cref="CommandLog"/>.
-    /// Version 6 (M1-09) adds current HP and the HP basis;
+    /// Version 7 (M1-10) adds the run, combat and turn state;
+    /// version 6 (M1-09) added current HP and the HP basis;
     /// version 5 (M1-08) added each unit's stat block;
     /// version 4 (M1-07) added the active effects and the next effect seq;
     /// version 3 (M1-06) added the reproducibility-key header and the run configuration and unlock
     /// snapshots; version 2 (M1-02) stored the run seed and stream counters; version 1 held PCG32 states.
     /// </summary>
-    public const int CurrentVersion = 6;
+    public const int CurrentVersion = 7;
 
     /// <summary>
     /// Writes <paramref name="s"/>. Only the run seed and the stream counters are stored, so a state whose
@@ -103,6 +105,8 @@ public static class Snapshot
                 Boons = u.Boons.ToArray(),
                 Stats = StatsDto.From(u.Stats),
                 Hp = u.Hp,
+                Budget = BudgetDto.From(u.Budget),
+                Spent = u.Spent.Select(p => new PoolSpendDto { Pool = p.PoolId, Spent = p.Spent }).ToArray(),
             }).ToArray(),
             Rng = new RngStreamsDto
             {
@@ -128,6 +132,20 @@ public static class Snapshot
                 Source = e.Source.Unit?.Value,
             }).ToArray(),
             NextEffectSeq = s.NextEffectSeq,
+            Hero = s.Hero?.Value,
+            Combat = s.Combat is null ? null : new CombatDto
+            {
+                Order = s.Combat.Order.Select(id => id.Value).ToArray(),
+                Current = s.Combat.Current,
+                Round = s.Combat.Round,
+                TurnVacated = s.Combat.TurnVacated,
+            },
+            Ended = s.Ended is null ? null : new RunEndDto
+            {
+                Cause = s.Ended.Cause.ToString(),
+                KillingEventId = s.Ended.KillingEventId,
+            },
+            NextEventSeq = s.NextEventSeq,
         });
     }
 
@@ -138,6 +156,8 @@ public static class Snapshot
     /// of 2^60 or more; it never returns a partly loaded state. Stream keys are re-derived from the
     /// run seed, so only the counters come from the file. Active effects must be sorted by seq, with positive,
     /// distinct seqs below <c>nextEffectSeq</c>, content ids, and holder and source units that are in the state.
+    /// The hero, each unit's budget and spent counts are checked by <see cref="GameState.Create"/>, and the combat state,
+    /// the run end and <c>nextEventSeq</c> by the same rules the core holds them to (M1-10 task 1).
     /// </summary>
     public static GameState Load(string json) => PersistenceJson.Read<StateDto, GameState>(json, FromDto);
 
@@ -162,7 +182,9 @@ public static class Snapshot
                 PersistenceJson.ParseEnum<Faction>(u.Faction, "faction"),
                 [.. PersistenceJson.Need(u.Boons, "unit boons")],
                 PersistenceJson.Need(u.Stats, "unit stats").ToStats(),
-                PersistenceJson.Need(u.Hp, "unit hp"));
+                PersistenceJson.Need(u.Hp, "unit hp"),
+                PersistenceJson.Need(u.Budget, "unit budget").ToBudget(),
+                [.. PersistenceJson.Need(u.Spent, "unit spent").Select(p => PersistenceJson.Need(p, "unit spent count").ToSpend())]);
             NeedBoonIds(unit.Boons, $"unit {unit.Id.Value} boons");
             units.Add(unit);
         }
@@ -190,7 +212,13 @@ public static class Snapshot
 
         // Create applies the same rules as a new run: a run seed below 2^60, unique ids, walkable
         // squares, one unit per square. Its streams have the right keys; the saved counters are put back below.
-        var state = GameState.Create(map, units, PersistenceJson.Need(dto.RunSeed, "runSeed"), config, unlocks);
+        var state = GameState.Create(
+            map,
+            units,
+            PersistenceJson.Need(dto.RunSeed, "runSeed"),
+            config,
+            unlocks,
+            dto.Hero is { } hero ? new UnitId(hero) : null);
 
         var rngDto = PersistenceJson.Need(dto.Rng, "rng");
         var rng = new RunStreams(
@@ -274,8 +302,26 @@ public static class Snapshot
 
         var effects = ReadEffects(PersistenceJson.Need(dto.Effects, "effects"), state, nextEffectSeq);
 
+        long nextEventSeq = PersistenceJson.Need(dto.NextEventSeq, "nextEventSeq");
+        var combat = dto.Combat is { } c
+            ? new CombatState(
+                [.. PersistenceJson.Need(c.Order, "combat order").Select(id => new UnitId(id))],
+                PersistenceJson.Need(c.Current, "combat current"),
+                PersistenceJson.Need(c.Round, "combat round"),
+                PersistenceJson.Need(c.TurnVacated, "combat turnVacated"))
+            : null;
+        var ended = dto.Ended is { } e
+            ? new RunEnd(PersistenceJson.ParseEnum<RunEndCause>(e.Cause, "run end cause"), e.KillingEventId)
+            : null;
+
+        // The same rules the core holds these fields to; a breach surfaces as a format error.
+        GameState.CheckRunState(state.Units, combat, ended, nextEventSeq);
+
         return state with
         {
+            Combat = combat,
+            Ended = ended,
+            NextEventSeq = nextEventSeq,
             Effects = effects,
             NextEffectSeq = nextEffectSeq,
             Rng = rng,
@@ -380,6 +426,11 @@ public static class Snapshot
         [JsonPropertyName("nextDecisionId"), JsonPropertyOrder(14)] public int? NextDecisionId { get; set; }
         [JsonPropertyName("effects"), JsonPropertyOrder(15)] public EffectDto?[]? Effects { get; set; }
         [JsonPropertyName("nextEffectSeq"), JsonPropertyOrder(16)] public long? NextEffectSeq { get; set; }
+        // Required: Save always writes these (hero, combat and ended as null when absent).
+        [JsonPropertyName("hero"), JsonPropertyOrder(17), JsonRequired] public int? Hero { get; set; }
+        [JsonPropertyName("combat"), JsonPropertyOrder(18), JsonRequired] public CombatDto? Combat { get; set; }
+        [JsonPropertyName("ended"), JsonPropertyOrder(19), JsonRequired] public RunEndDto? Ended { get; set; }
+        [JsonPropertyName("nextEventSeq"), JsonPropertyOrder(20), JsonRequired] public long? NextEventSeq { get; set; }
 
         public SaveHeader ToHeader() => new(
             PersistenceJson.Need(Version, "version"),
@@ -448,6 +499,64 @@ public static class Snapshot
         [JsonPropertyName("boons"), JsonPropertyOrder(4)] public int[]? Boons { get; set; }
         [JsonPropertyName("stats"), JsonPropertyOrder(5), JsonRequired] public StatsDto? Stats { get; set; }
         [JsonPropertyName("hp"), JsonPropertyOrder(6), JsonRequired] public int? Hp { get; set; }
+        [JsonPropertyName("budget"), JsonPropertyOrder(7), JsonRequired] public BudgetDto? Budget { get; set; }
+        [JsonPropertyName("spent"), JsonPropertyOrder(8), JsonRequired] public PoolSpendDto?[]? Spent { get; set; }
+    }
+
+    /// <summary>A unit's turn budget (AB 14.2), as used counts and flags.</summary>
+    private sealed class BudgetDto
+    {
+        [JsonPropertyName("movementUsed"), JsonPropertyOrder(0), JsonRequired] public int? MovementUsed { get; set; }
+        [JsonPropertyName("actionsUsed"), JsonPropertyOrder(1), JsonRequired] public int? ActionsUsed { get; set; }
+        [JsonPropertyName("bonusUsed"), JsonPropertyOrder(2), JsonRequired] public bool? BonusUsed { get; set; }
+        [JsonPropertyName("reactionUsed"), JsonPropertyOrder(3), JsonRequired] public bool? ReactionUsed { get; set; }
+        [JsonPropertyName("freeUsed"), JsonPropertyOrder(4), JsonRequired] public bool? FreeUsed { get; set; }
+        [JsonPropertyName("campSpent"), JsonPropertyOrder(5), JsonRequired] public bool? CampSpent { get; set; }
+
+        public static BudgetDto From(TurnBudget b) => new()
+        {
+            MovementUsed = b.MovementUsed,
+            ActionsUsed = b.ActionsUsed,
+            BonusUsed = b.BonusUsed,
+            ReactionUsed = b.ReactionUsed,
+            FreeUsed = b.FreeUsed,
+            CampSpent = b.CampSpent,
+        };
+
+        public TurnBudget ToBudget() => new(
+            PersistenceJson.Need(MovementUsed, "budget movementUsed"),
+            PersistenceJson.Need(ActionsUsed, "budget actionsUsed"),
+            PersistenceJson.Need(BonusUsed, "budget bonusUsed"),
+            PersistenceJson.Need(ReactionUsed, "budget reactionUsed"),
+            PersistenceJson.Need(FreeUsed, "budget freeUsed"),
+            PersistenceJson.Need(CampSpent, "budget campSpent"));
+    }
+
+    /// <summary>How much of one pool a unit has spent; the list is written in stored (pool id) order.</summary>
+    private sealed class PoolSpendDto
+    {
+        [JsonPropertyName("pool"), JsonPropertyOrder(0), JsonRequired] public string? Pool { get; set; }
+        [JsonPropertyName("spent"), JsonPropertyOrder(1), JsonRequired] public int? Spent { get; set; }
+
+        public PoolSpend ToSpend() => new(
+            PersistenceJson.Need(Pool, "spent pool"), PersistenceJson.Need(Spent, "spent count"));
+    }
+
+    /// <summary>The fight in progress: the initiative order as unit ids, the current slot, the round.</summary>
+    private sealed class CombatDto
+    {
+        [JsonPropertyName("order"), JsonPropertyOrder(0), JsonRequired] public int[]? Order { get; set; }
+        [JsonPropertyName("current"), JsonPropertyOrder(1), JsonRequired] public int? Current { get; set; }
+        [JsonPropertyName("round"), JsonPropertyOrder(2), JsonRequired] public long? Round { get; set; }
+        [JsonPropertyName("turnVacated"), JsonPropertyOrder(3), JsonRequired] public bool? TurnVacated { get; set; }
+    }
+
+    /// <summary>The run end; the cause by name, the killing event id null unless the hero died.</summary>
+    private sealed class RunEndDto
+    {
+        [JsonPropertyName("cause"), JsonPropertyOrder(0), JsonRequired] public string? Cause { get; set; }
+        // Required: Save always writes it (as null when the cause is not a hero death).
+        [JsonPropertyName("killingEventId"), JsonPropertyOrder(1), JsonRequired] public long? KillingEventId { get; set; }
     }
 
     /// <summary>A unit's stat block; enums are written by name, trained skills in skill order.</summary>

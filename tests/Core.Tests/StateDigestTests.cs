@@ -1,4 +1,5 @@
 using Dungeon.Core.Canonical;
+using Dungeon.Core.Combat;
 using Dungeon.Core.Effects;
 using Dungeon.Core.Stats;
 using Xunit;
@@ -125,6 +126,65 @@ public class StateDigestTests
         {
             Assert.True(baseline != StateDigest.Of(changed[i]), $"Change {i} did not reach the digest.");
         }
+    }
+
+    // M1-10: the hero, the combat state, the run end, the event seq, and each unit's budget and spent counts.
+    [Fact]
+    public void Run_state_and_turn_fields_reach_the_digest()
+    {
+        var hero = Fixtures.U(1, 1, 1) with
+        {
+            Budget = new TurnBudget(2, 1, false, false, false, false),
+            Spent = [new PoolSpend("pool.a", 1), new PoolSpend("pool.b", 2)],
+        };
+        var foe = new Unit(new UnitId(2), new(3, 3), Faction.Enemy, [], EnemyStats, 12);
+        var s = GameState.Create(GridMap.Parse("#####", "#...#", "#.#.#", "#...#", "#####"), [hero, foe], 7, hero: Hero) with
+        {
+            Combat = new CombatState([new(2), new(1)], 1, 2),
+            Ended = new RunEnd(RunEndCause.HeroDeath, 3),
+            NextEventSeq = 5,
+        };
+        var combat = s.Combat!;
+        var budget = hero.Budget;
+        GameState WithHero(Unit h) => s with { Units = [h, foe] };
+        GameState[] changed =
+        [
+            s with { Hero = null },
+            s with { Hero = new UnitId(2) },
+            s with { Combat = null },
+            s with { Combat = combat with { Order = [new(1), new(2)] } },
+            s with { Combat = combat with { Order = [new(2)] } },
+            s with { Combat = combat with { Current = 0 } },
+            s with { Combat = combat with { Round = 3 } },
+            s with { Combat = combat with { TurnVacated = true } },
+            s with { Ended = null },
+            s with { Ended = new RunEnd(RunEndCause.Victory, 3) },
+            s with { Ended = new RunEnd(RunEndCause.HeroDeath, 4) },
+            s with { Ended = new RunEnd(RunEndCause.HeroDeath, null) },
+            s with { NextEventSeq = 6 },
+            WithHero(hero with { Budget = budget with { MovementUsed = 3 } }),
+            WithHero(hero with { Budget = budget with { ActionsUsed = 0 } }),
+            WithHero(hero with { Budget = budget with { BonusUsed = true } }),
+            WithHero(hero with { Budget = budget with { ReactionUsed = true } }),
+            WithHero(hero with { Budget = budget with { FreeUsed = true } }),
+            WithHero(hero with { Budget = budget with { CampSpent = true } }),
+            WithHero(hero with { Spent = [new PoolSpend("pool.a", 1)] }),
+            WithHero(hero with { Spent = [new PoolSpend("pool.a", 1), new PoolSpend("pool.c", 2)] }),
+            WithHero(hero with { Spent = [new PoolSpend("pool.a", 2), new PoolSpend("pool.b", 2)] }),
+        ];
+        var baseline = StateDigest.Of(s);
+        for (int i = 0; i < changed.Length; i++)
+        {
+            Assert.True(baseline != StateDigest.Of(changed[i]), $"Change {i} did not reach the digest.");
+        }
+    }
+
+    // The killing event id is a sequence id, positive in every state the rules produce; any other is refused.
+    [Fact]
+    public void A_non_positive_killing_event_id_is_refused()
+    {
+        var s = ShrineState() with { Ended = new RunEnd(RunEndCause.HeroDeath, 0) };
+        Assert.Throws<ArgumentException>(() => StateDigest.Of(s));
     }
 
     // M1-09: a unit's HP, its HP tier and its table HP each reach the digest (Create rejects table HP on a party unit

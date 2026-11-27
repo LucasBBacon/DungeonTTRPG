@@ -1,5 +1,6 @@
 using System;
 using Dungeon.Core.Canonical;
+using Dungeon.Core.Combat;
 using Dungeon.Core.Effects;
 using Dungeon.Core.Stats;
 
@@ -8,7 +9,8 @@ namespace Dungeon.Core;
 /// <summary>
 /// The replay core-state hash (SV 4.5): the <see cref="Digest"/> of a <see cref="GameState"/>'s
 /// canonical bytes. Units are a set keyed by id, so their stored order does not matter; boons and
-/// decision options are lists, because their order is data. Active effects are a set keyed by seq.
+/// decision options are lists, because their order is data. Active effects are a set keyed by seq. The initiative order
+/// and a unit's spent counts are lists in stored order.
 /// Stream keys are derived from the run seed and are not written; a state whose keys disagree with its seed is refused.
 /// </summary>
 public static class StateDigest
@@ -39,11 +41,19 @@ public static class StateDigest
     private static ulong EffectKey(EffectInstance e) =>
         e.Seq > 0 ? (ulong)e.Seq : throw new ArgumentException($"Effect seq {e.Seq} is not positive.", nameof(e));
 
+    // Event sequence ids are positive in every state the rules produce; any other is refused rather than wrapped.
+    private static ulong? EventKey(long? seq) => seq switch
+    {
+        null => null,
+        > 0 => (ulong)seq.Value,
+        _ => throw new ArgumentException($"Killing event id {seq} is not positive.", nameof(seq)),
+    };
+
     private sealed class StateRecord(GameState s) : ICanonical
     {
         public void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(11);
+            w.BeginRecord(15);
             w.UInt64(0, s.RunSeed);
             w.List(1, s.Map.ToRows(), (e, row) => e.String(0, row));
             w.SetByKey(2, s.Units, u => IdKey(u.Id), (e, u) => e.Record(0, new UnitRecord(u)));
@@ -55,6 +65,10 @@ public static class StateDigest
             w.Record(8, s.Unlocks);
             w.SetByKey(9, s.Effects, EffectKey, (e, effect) => e.Record(0, effect));
             w.Int64(10, s.NextEffectSeq);
+            w.OptionalInt32(11, s.Hero?.Value);
+            w.OptionalRecord(12, s.Combat is null ? null : new CombatRecord(s.Combat));
+            w.OptionalRecord(13, s.Ended is null ? null : new RunEndRecord(s.Ended));
+            w.Int64(14, s.NextEventSeq);
             w.EndRecord();
         }
     }
@@ -63,7 +77,7 @@ public static class StateDigest
     {
         public void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(7);
+            w.BeginRecord(9);
             w.Int32(0, u.Id.Value);
             w.Int32(1, u.Pos.X);
             w.Int32(2, u.Pos.Y);
@@ -71,6 +85,58 @@ public static class StateDigest
             w.List(4, u.Boons, (e, boon) => e.Int32(0, boon));
             w.Record(5, new StatsRecord(u.Stats));
             w.Int32(6, u.Hp);
+            w.Record(7, new BudgetRecord(u.Budget));
+            w.List(8, u.Spent, (e, spend) => e.Record(0, new SpendRecord(spend)));
+            w.EndRecord();
+        }
+    }
+
+    private sealed class BudgetRecord(TurnBudget b) : ICanonical
+    {
+        public void WriteCanonical(CanonicalWriter w)
+        {
+            w.BeginRecord(6);
+            w.Int32(0, b.MovementUsed);
+            w.Int32(1, b.ActionsUsed);
+            w.Bool(2, b.BonusUsed);
+            w.Bool(3, b.ReactionUsed);
+            w.Bool(4, b.FreeUsed);
+            w.Bool(5, b.CampSpent);
+            w.EndRecord();
+        }
+    }
+
+    private sealed class SpendRecord(PoolSpend p) : ICanonical
+    {
+        public void WriteCanonical(CanonicalWriter w)
+        {
+            w.BeginRecord(2);
+            w.String(0, p.PoolId);
+            w.Int32(1, p.Spent);
+            w.EndRecord();
+        }
+    }
+
+    private sealed class CombatRecord(CombatState c) : ICanonical
+    {
+        public void WriteCanonical(CanonicalWriter w)
+        {
+            w.BeginRecord(4);
+            w.List(0, c.Order, (e, id) => e.Int32(0, id.Value));
+            w.Int32(1, c.Current);
+            w.Int64(2, c.Round);
+            w.Bool(3, c.TurnVacated);
+            w.EndRecord();
+        }
+    }
+
+    private sealed class RunEndRecord(RunEnd r) : ICanonical
+    {
+        public void WriteCanonical(CanonicalWriter w)
+        {
+            w.BeginRecord(2);
+            w.Enum(0, r.Cause);
+            w.OptionalUInt64(1, EventKey(r.KillingEventId));
             w.EndRecord();
         }
     }

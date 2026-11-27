@@ -16,6 +16,18 @@ public enum CommandError
     NoDecisionPending,
     WrongDecision,
     InvalidOption,
+
+    /// <summary>The run has ended (DH 10.1, D-08); every command is refused.</summary>
+    RunEnded,
+
+    /// <summary>In combat, the command names a unit whose turn it is not.</summary>
+    NotYourTurn,
+
+    /// <summary>In combat, the moving unit has no movement left this turn.</summary>
+    NoMovementLeft,
+
+    /// <summary>The command is valid only in combat.</summary>
+    NotInCombat,
 }
 
 /// <summary>
@@ -56,6 +68,12 @@ public static class Engine
         ArgumentNullException.ThrowIfNull(state);
         ArgumentNullException.ThrowIfNull(command);
         ArgumentNullException.ThrowIfNull(rules);
+
+        // After the run ends the core refuses every command (DH 10.1), checked before anything else (M1-10 plan call 3).
+        if (state.Ended is not null)
+        {
+            return Reject(state, CommandError.RunEnded);
+        }
 
         // While a decision is pending, the only valid command is an answer to it.
         if (state.Pending is not null && command is not AnswerDecisionCommand)
