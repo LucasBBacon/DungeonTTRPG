@@ -9,9 +9,9 @@ internal static class Fixtures
 
     public static Unit U(int id, int x, int y) => new(new UnitId(id), new(x, y), Faction.Party, []);
 
-    /// <summary>A one-row map with a shrine east of the hero: <c>.*.</c>, hero at (0,0), seed 7.</summary>
-    public static GameState ShrineState() =>
-        GameState.Create(GridMap.Parse(".*."), new[] { U(1, 0, 0) }, 7);
+    /// <summary>A one-row map with a shrine east of the hero: <c>.*.</c>, hero at (0,0), seed 7 unless given.</summary>
+    public static GameState ShrineState(ulong seed = 7) =>
+        GameState.Create(GridMap.Parse(".*."), new[] { U(1, 0, 0) }, seed);
 
     /// <summary>
     /// A 5x5 walled room with a pillar in the middle, hero at (1,1), seed 7, plus an optional extra unit.

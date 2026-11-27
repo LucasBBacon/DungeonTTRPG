@@ -9,7 +9,8 @@ namespace Dungeon.Core;
 /// <summary>
 /// The run seed and every command applied so far. Together they reproduce a run exactly.
 /// Saved as single-line JSON in the same versioned style as <see cref="Snapshot"/>;
-/// <see cref="Load"/> reports problems with the same exceptions. Two logs with the same
+/// <see cref="Load"/> reports problems with the same exceptions, and refuses a seed of 2^60
+/// or more, which no run can have (and <see cref="Save"/> refuses to write one). Two logs with the same
 /// contents are not equal with <c>==</c> (the array compares by reference); compare their
 /// <see cref="Save"/> text instead.
 /// </summary>
@@ -25,6 +26,12 @@ public sealed record CommandLog(ulong Seed, ImmutableArray<Command> Commands)
             throw new InvalidOperationException("Cannot save a log whose Commands array is uninitialised.");
         }
 
+        // Load refuses such a seed, so writing it would give a log that cannot be read back.
+        if (Seed >= RunSeed.Limit)
+        {
+            throw new InvalidOperationException($"Cannot save a log whose seed {Seed} is not below 2^60.");
+        }
+
         return PersistenceJson.Write(new LogDto
         {
             Version = Snapshot.CurrentVersion,
@@ -37,7 +44,7 @@ public sealed record CommandLog(ulong Seed, ImmutableArray<Command> Commands)
 
     private static CommandLog FromDto(LogDto dto)
     {
-        ulong seed = PersistenceJson.Need(dto.Seed, "seed");
+        ulong seed = RunSeed.Validate(PersistenceJson.Need(dto.Seed, "seed"), "seed");
         var commands = ImmutableArray.CreateBuilder<Command>();
         foreach (var c in PersistenceJson.Need(dto.Commands, "commands"))
         {
