@@ -85,6 +85,42 @@ public class DamageFunctionTests
         Assert.Equal(normal.Parts[0].Faces[0], faces[0]);   // same draw order
     }
 
+    // Plan call 8 makes the draw order a contract: parts in list order, each part's dice in order, one combat draw per die.
+    // The expected faces come from drawing Dice.Die straight off the combat stream, independent of Damage.Roll.
+    private static (int[][] Faces, DrawStream End) DrawExpected(DrawStream stream, params (int Sides, int Count)[] perPart)
+    {
+        var all = new int[perPart.Length][];
+        for (int p = 0; p < perPart.Length; p++)
+        {
+            all[p] = new int[perPart[p].Count];
+            for (int d = 0; d < perPart[p].Count; d++)
+            {
+                var (face, next) = Dice.Die(stream, perPart[p].Sides);
+                all[p][d] = face;
+                stream = next;
+            }
+        }
+
+        return (all, stream);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void Parts_draw_in_list_order_with_the_negative_flat_kept(bool crit)
+    {
+        var s = RingState();
+        int m = crit ? 2 : 1;
+        var (roll, next) = Damage.Roll(s, [Part(DamageType.Slashing, 1, 6, 3), Part(DamageType.Fire, 1, 4, -5)], crit);
+        var (expected, end) = DrawExpected(s.Rng.Combat, (6, m), (4, m));
+
+        Assert.Equal(expected[0], roll.Parts[0].Faces.ToArray());
+        Assert.Equal(expected[1], roll.Parts[1].Faces.ToArray());
+        Assert.Equal(expected[0].Sum() + 3, roll.Parts[0].Raw);
+        Assert.Equal(expected[1].Sum() - 5, roll.Parts[1].Raw);
+        Assert.Equal(end, next.Rng.Combat);
+    }
+
     [Fact]
     public void A_part_with_no_dice_draws_nothing()
     {
