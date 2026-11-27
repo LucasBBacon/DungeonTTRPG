@@ -63,3 +63,9 @@ public sealed record UnitDied(UnitId Unit, GridPos At) : GameEvent;
 /// only for <see cref="RunEndCause.HeroDeath"/>. It is the last event of its command.
 /// </summary>
 public sealed record RunEnded(RunEndCause Cause, long? KillingEventId) : GameEvent;
+
+/// <summary>
+/// The fight ended (DH 20.5 step 5; M1-10 plan call 12): <c>combatActive</c> is now false. It has no rule event (plan
+/// call 14): a rule event needs a subject unit, and combat end has none.
+/// </summary>
+public sealed record CombatEnded(CombatEndReason Reason) : GameEvent;
