@@ -163,7 +163,7 @@
       "class": "sequential-saved",
       "stage": "play",
       "readers": [],
-      "consumers": [],
+      "consumers": ["attack rolls", "saves", "skill contests", "initiative"],
       "retryScope": "never",
       "rules": [],
       "keyType": "core",
