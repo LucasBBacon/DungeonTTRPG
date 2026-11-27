@@ -8,11 +8,14 @@ using Microsoft.CodeAnalysis.Operations;
 namespace Dungeon.Analyzers;
 
 /// <summary>
-/// DUN012 (DS1, SV 4.2): an invocation of, or method-group reference to, <c>Dungeon.Core.KeyAlgebra.Derive</c>,
-/// <c>Dungeon.Core.KeyAlgebra.H</c> or <c>Dungeon.Core.DrawStream.Open</c> in any file not named by the
-/// <c>DungeonKeyDerivationFiles</c> build property: <c>;</c>- (or <c>|</c>-) separated paths relative to the project folder, matched
-/// as the DUN011 file is. Matching is by symbol, so <c>using static</c> and aliases do not hide a call.
-/// <c>LabelId</c>, <c>Draw</c>, <c>Bound</c> and <c>Mix</c> stay allowed.
+/// DUN012 (DS1, SV 4.2): every way of opening a stream or deriving a key by hand, in any file not named by the
+/// <c>DungeonKeyDerivationFiles</c> build property (<c>;</c>- or <c>|</c>-separated paths relative to the project folder,
+/// matched as the DUN011 file is). Reported: an invocation of, or method-group reference to,
+/// <c>Dungeon.Core.KeyAlgebra.Derive</c>, <c>KeyAlgebra.H</c>, <c>KeyAlgebra.Absorb</c> or <c>Dungeon.Core.DrawStream.Open</c>;
+/// a <c>new DrawStream(...)</c> (any constructor, target-typed or not); an explicit <c>default</c> of
+/// <c>DrawStream</c>; and a <c>with</c> expression on a <c>DrawStream</c>. Matching is by symbol, so <c>using static</c>
+/// and aliases do not hide a call. <c>LabelId</c>, <c>Draw</c>, <c>Bound</c> and <c>Mix</c> stay allowed; a stream's own
+/// <c>Next</c>, <c>NextBelow</c> and <c>Skip</c> advance a stream that was opened through a handle.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class KeyDerivationAnalyzer : DiagnosticAnalyzer
@@ -42,12 +45,26 @@ public sealed class KeyDerivationAnalyzer : DiagnosticAnalyzer
             start.RegisterOperationAction(
                 c => Analyze(c, ((IMethodReferenceOperation)c.Operation).Method, allowed),
                 OperationKind.MethodReference);
+            start.RegisterOperationAction(
+                c => Report(c, IsDrawStream(c.Operation.Type) ? "new DrawStream" : null, allowed),
+                OperationKind.ObjectCreation);
+            start.RegisterOperationAction(
+                c => Report(c, IsDrawStream(c.Operation.Type) ? "default(DrawStream)" : null, allowed),
+                OperationKind.DefaultValue);
+            start.RegisterOperationAction(
+                c => Report(c, IsDrawStream(((IWithOperation)c.Operation).Operand.Type) ? "DrawStream with" : null, allowed),
+                OperationKind.With);
         });
     }
 
     private static void Analyze(OperationAnalysisContext context, IMethodSymbol method, IReadOnlyList<ProjectPath> allowed)
+        => Report(context, BannedMember(method), allowed);
+
+    private static bool IsDrawStream(ITypeSymbol? type)
+        => type?.OriginalDefinition.ToDisplayString() == "Dungeon.Core.DrawStream";
+
+    private static void Report(OperationAnalysisContext context, string? member, IReadOnlyList<ProjectPath> allowed)
     {
-        var member = BannedMember(method);
         if (member is null)
         {
             return;
@@ -69,6 +86,7 @@ public sealed class KeyDerivationAnalyzer : DiagnosticAnalyzer
         {
             ("Dungeon.Core.KeyAlgebra", "Derive") => "KeyAlgebra.Derive",
             ("Dungeon.Core.KeyAlgebra", "H") => "KeyAlgebra.H",
+            ("Dungeon.Core.KeyAlgebra", "Absorb") => "KeyAlgebra.Absorb",
             ("Dungeon.Core.DrawStream", "Open") => "DrawStream.Open",
             _ => null,
         };

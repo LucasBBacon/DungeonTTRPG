@@ -44,8 +44,9 @@ public static class Rules
     public static readonly DiagnosticDescriptor Unchecked = Create("DUN011", "Wrapping arithmetic is banned in Core");
 
     /// <summary>
-    /// DUN012: raw <c>KeyAlgebra.Derive</c>, <c>KeyAlgebra.H</c> and <c>DrawStream.Open</c> outside the stream handle
-    /// files (DS1, SV 4.2). Its message names the banned member (<c>{0}</c>).
+    /// DUN012: raw <c>KeyAlgebra.Derive</c>, <c>KeyAlgebra.H</c>, <c>KeyAlgebra.Absorb</c> and <c>DrawStream.Open</c>, and a
+    /// hand-built <c>DrawStream</c> (<c>new</c>, explicit <c>default</c>, <c>with</c>), outside the stream handle
+    /// files (DS1, SV 4.2). Its message names the banned member or construct (<c>{0}</c>).
     /// </summary>
     public static readonly DiagnosticDescriptor KeyDerivation = Create(
         "DUN012",

@@ -46,6 +46,94 @@ public class KeyDerivationTests
             diagnostic.GetMessage(System.Globalization.CultureInfo.InvariantCulture));
     }
 
+    [Theory]
+    [InlineData("_ = new DrawStream(1, 0);", "new DrawStream")]
+    [InlineData("DrawStream s = new(1, 0);", "new DrawStream")]
+    [InlineData("_ = new DrawStream();", "new DrawStream")]
+    [InlineData("_ = new DrawStream { Key = 1 };", "new DrawStream")]
+    [InlineData("_ = default(DrawStream);", "default(DrawStream)")]
+    [InlineData("DrawStream s = default;", "default(DrawStream)")]
+    [InlineData("_ = KeyAlgebra.Absorb(1, 42);", "KeyAlgebra.Absorb")]
+    [InlineData("System.Func<ulong, ulong, ulong> f = KeyAlgebra.Absorb;", "KeyAlgebra.Absorb")]
+    public void Building_a_stream_or_key_by_hand_is_reported(string statement, string member)
+    {
+        var d = Harness.Run(
+            "using Dungeon.Core;\npublic static class C { public static void M() { " + statement + " } }",
+            path: "src/Core/Other.cs",
+            buildProperties: Properties());
+        Assert.Equal(new[] { "DUN012" }, Harness.Ids(d));
+        var diagnostic = Assert.Single(d);
+        Assert.Equal(
+            "DUN012 (DS1, SV 4.2): open streams only through StreamHandles; '" + member + "' is banned here",
+            diagnostic.GetMessage(System.Globalization.CultureInfo.InvariantCulture));
+    }
+
+    [Fact]
+    public void Rekeying_a_stream_with_a_with_expression_is_reported()
+    {
+        var d = Harness.Run(
+            """
+            using Dungeon.Core;
+
+            public static class C
+            {
+                public static DrawStream M(DrawStream s) => s with { Key = 7 };
+            }
+            """,
+            path: "src/Core/Other.cs",
+            buildProperties: Properties());
+        var diagnostic = Assert.Single(d);
+        Assert.Equal("DUN012", diagnostic.Id);
+        Assert.Equal(
+            "DUN012 (DS1, SV 4.2): open streams only through StreamHandles; 'DrawStream with' is banned here",
+            diagnostic.GetMessage(System.Globalization.CultureInfo.InvariantCulture));
+    }
+
+    [Fact]
+    public void Hand_built_streams_are_clean_in_the_key_algebra_file()
+    {
+        var d = Harness.Run(
+            """
+            using Dungeon.Core;
+
+            public static class C
+            {
+                public static DrawStream A() => new DrawStream(KeyAlgebra.Absorb(1, 2), 0);
+                public static DrawStream B(DrawStream s) => s with { Counter = 3 };
+                public static DrawStream D() => default;
+            }
+            """,
+            path: "/repo/src/Core/Random/KeyAlgebra.cs",
+            buildProperties: Properties());
+        Assert.Empty(d);
+    }
+
+    [Fact]
+    public void Other_records_with_and_default_are_clean()
+    {
+        var d = Harness.Run(
+            """
+            using Dungeon.Core;
+
+            public readonly record struct P(int X);
+
+            public static class C
+            {
+                public static P M(P p, DrawStream s)
+                {
+                    var q = p with { X = 1 };
+                    P r = default;
+                    var (_, next) = s.Next();
+                    _ = next.Skip(2);
+                    return new P(q.X + r.X);
+                }
+            }
+            """,
+            path: "src/Core/Other.cs",
+            buildProperties: Properties());
+        Assert.Empty(d);
+    }
+
     [Fact]
     public void A_using_static_call_is_reported()
     {
@@ -104,7 +192,7 @@ public class KeyDerivationTests
     [InlineData("/repo/src/Core/Random/StreamHandles.g.cs", ExemptFiles)]
     [InlineData(@"C:\repo\src\Core\Random\StreamHandles.g.cs", @"Random\KeyAlgebra.cs;Random\StreamHandles.g.cs")]
     [InlineData("/repo/src/Core/Random/StreamHandles.g.cs", @"Random\KeyAlgebra.cs; .\Random\StreamHandles.g.cs ")]
-    [InlineData(@"C:epo\src\Core\Random\StreamHandles.g.cs", "Random/KeyAlgebra.cs|Random/StreamHandles.g.cs")]
+    [InlineData(@"C:\repo\src\Core\Random\StreamHandles.g.cs", "Random/KeyAlgebra.cs|Random/StreamHandles.g.cs")]
     [InlineData("/repo/src/Core/Random/KeyAlgebra.cs", ExemptFiles)]
     [InlineData("/repo/src/Core/Random/KeyedSort.cs", ExemptFiles)]
     [InlineData("/repo/src/Core/Random/StreamRegistry.cs", ExemptFiles)]
