@@ -16,6 +16,16 @@ public class ArchitectureTests
     }
 
     /// <summary>
+    /// DS11: <c>CheckForOverflowUnderflow</c> is on in Debug and CI. Tests run in Debug locally and in CI,
+    /// so this fails if <c>build/Determinism.props</c> stops applying it to Core.
+    /// </summary>
+    [Fact]
+    public void Core_is_built_with_checked_arithmetic()
+    {
+        Assert.Throws<OverflowException>(() => Dungeon.Core.IntMath.CheckedProbe(int.MaxValue, 1));
+    }
+
+    /// <summary>
     /// Global Constraints: integer rules only, the core's own random source, no unordered
     /// collections. Looks at every field, property, method signature and local variable in Core.
     /// </summary>

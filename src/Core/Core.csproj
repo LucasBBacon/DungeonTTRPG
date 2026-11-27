@@ -1,6 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../build/Determinism.props" />
   <PropertyGroup>
     <AssemblyName>Dungeon.Core</AssemblyName>
     <RootNamespace>Dungeon.Core</RootNamespace>
+    <!-- DUN011 exemption until M1-02 repoints it to the key-algebra file. -->
+    <DungeonWrappingArithmeticFile>Random/Pcg32.cs</DungeonWrappingArithmeticFile>
   </PropertyGroup>
 </Project>

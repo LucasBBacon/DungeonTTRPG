@@ -1,0 +1,9 @@
+<!-- Must fail to build with DUN001: proves the analyzer is wired into real builds. Not in Dungeon.sln. -->
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../build/Determinism.props" />
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Dungeon.AnalyzerSmoke</AssemblyName>
+    <RootNamespace>Dungeon.AnalyzerSmoke</RootNamespace>
+  </PropertyGroup>
+</Project>
