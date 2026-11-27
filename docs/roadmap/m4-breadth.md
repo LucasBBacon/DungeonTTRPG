@@ -78,3 +78,26 @@ Recorded so nobody builds them early: daily seeds; the trader; `pledge`;
 leaderboards; Oaths; share codes with heirlooms; multi-square bosses;
 the Rival Party; Peril 4–5; the Clear Key; units blocking sight; the 69
 Later conditions. Sources: SV 7 "Later" and each design's staging table.
+
+A Later item that owns a test or an open decision gets an entry below,
+so the obligation has an owner when the item is scheduled. Each entry
+gives its name, what it owns, and its Done-when.
+
+### Bolstered (temporary HP; DH 14)
+
+**Owns:** [D-17](README.md#open-decisions) (see the
+[M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 1).
+
+**Precondition:** the DH owner has ruled on the three D-17 questions:
+(a) whether the mixed-event check should be independent of part order;
+(b) whether it counts temporary HP; (c) what the combat log shows for an
+absorbed and clamped hit.
+
+**Done when:**
+- [ ] HP 5, temporary HP 3, an undetected trap deals 10: temporary HP
+  absorbs 3, so the total after absorption is 7; the floor clamps it to
+  temporary HP 0 and HP 1; `DamageClamped{undetectedTrap}` is emitted;
+  the save chain is not reached; the combat log reads as the DH owner
+  ruled under (c).
+- [ ] The danger band counts temporary HP: death chance and Deadly are
+  judged against current HP + temporary HP (DH 17.3).

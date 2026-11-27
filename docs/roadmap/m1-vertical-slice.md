@@ -313,8 +313,9 @@ DH-15, DH-18; TL-8.
 - [ ] AB 16 tests for each refill tag and the camp-spend rule pass.
 - [ ] DH 21.4 property tests pass (floors before the save chain; HP 5 +
   undetected trap 10 → HP 1, `DamageClamped{undetectedTrap}`, the save
-  chain never reached; the temporary-HP half is D-17) (owner rulings
-  2026-11-27).
+  chain never reached; the temporary-HP half is owned by the Later entry
+  [Bolstered](m4-breadth.md#bolstered-temporary-hp-dh-14) (D-17)) (owner
+  rulings 2026-11-27).
 - [ ] Scenario "hero dies alongside the last enemy" ends the run (test).
 - [ ] An opening ambush strike counts as in-combat damage (test).
 
@@ -325,7 +326,8 @@ reactions and area targeting.
 
 **Implements:** AB 7.3, 8.1–8.2, 14.3, 14.6, 15.4; DH 20.5.
 
-**Depends on:** M1-10.
+**Depends on:** M1-10; decision D-19(b) (resolved 2026-11-27, [M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 4
+and 5).
 
 **Delivers:**
 - Declared → validated (one reason code) → cost paid → targets locked →
@@ -336,6 +338,17 @@ reactions and area targeting.
   row-by-row square order, area-origin line of sight, friendly fire
   unless `selective`, 25-square cap at levels 1–6).
 - Preview query that shares the resolution code.
+- Combat start steps 6 to 9 of the [M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) section 5: a "before
+  round 1" marker (not `TurnVacated`); `CombatStarted`, then the held
+  condition and surprise messages; an opener validated at declaration
+  (a refused opener starts no fight and costs nothing), charged to the
+  striker's round-1 turn (action and once-per-round spends charged;
+  movement and bonus action kept), resolved, then `EndIfWon`; the
+  per-unit "opener charged, first turn not yet started" mark and the
+  first-turn rule. The command that declares an opener takes no
+  out-of-combat tick (record 8 item 4).
+- Snapshot v8, the state digest shape and `GameState` validation for the
+  marker and the mark; RulesVersion 3.
 
 **Done when:**
 - [ ] Property test: preview equals resolution (AB 16).
@@ -343,6 +356,8 @@ reactions and area targeting.
 - [ ] The AB 14.5 validator "reaction has no automatic policy" passes,
   and an area over 25 squares at level ≤ 6 fails content validation
   (fixture).
+- [ ] The M1-11 opener tests of the [M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 6.3 pass, and
+  `CombatScenarioTests` goes through the new path.
 
 ### M1-12 Conditions core
 
@@ -363,12 +378,15 @@ pipeline.
   composite lockout, depth gates, party composure, hard exclusivity.
 - Test-only fixture conditions covering every relation kind and duration
   model (CO 18.1).
+- The CO 5.5 combat-start condition step ([M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 5, step 2),
+  placed before the surprise grant and before initiative.
 
 **Done when:**
 - [ ] CO 20.2 clock edge-case and pipeline-order tests pass.
 - [ ] Each entry point skips exactly its listed steps (test).
 - [ ] Property tests: no party unit loses more than 1 consecutive turn
   start; no unit loses more than 2 per fight.
+- [ ] The M1-12 combat-start tests of the [M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 6.3 pass.
 
 ### M1-13 M1 conditions and forced movement
 
@@ -376,8 +394,7 @@ pipeline.
 
 **Implements:** CO 10.1, 18.1–18.9, 21; W-8, VG-8.
 
-**Depends on:** M1-12; decisions D-09 (collision damage) and D-18
-(movement left after a mid-turn speed change).
+**Depends on:** M1-12; decision D-09 (collision damage).
 
 **Delivers:**
 - Surprised, Prone, Grappled, Frightened, Hidden, Dodging, Stunned,
@@ -389,12 +406,19 @@ pipeline.
 - A generic "stop-short square" predicate, used by hazards now and by
   the Forecourt lock in M1-35 (D-03): the moved unit stops before it
   with no collision and no collision damage.
+- The per-step movement cost (crawl and Rough 2, standing half the
+  current speed, minimum 1), replacing the flat 1 per step; the stand
+  gap (movement left below the stand cost: standing costs the action,
+  refused if the action is spent) (D-18, [M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 2).
+- The Surprised grant at combat start (record 5, step 3).
 
 **Done when:**
 - [ ] Tick batch tests pass (seq order, cap, one concentration event).
 - [ ] CO 20.1 validator list passes on the M1 data.
 - [ ] "M1 pushes and drags stop before hazard squares" (CO 20.2) passes.
 - [ ] A collision deals exactly the D-09 value (test).
+- [ ] The M1-13 movement, stand-gap and Surprised tests of the
+  [M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 6.3 pass.
 
 ### M1-14 Universal and skill actions
 
@@ -407,11 +431,15 @@ attacks).
 
 **Delivers:** Attack, Dash, Disengage, Dodge, Help, Shove and grapple,
 Escape, Hide, Search, Frighten, Rally; opportunity attacks and threatened
-zones; trained-only skill uses.
+zones; trained-only skill uses. Dash adds granted movement equal to the
+current speed at the Dash (D-18, [M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 2.2); the snapshot version,
+state digest shape, `GameState` validation and RulesVersion rise after
+M1-11's.
 
 **Done when:**
 - [ ] Grapple and shove size-rule tests pass.
 - [ ] Each action has a test for success, failure and its greyed reason.
+- [ ] The M1-14 Escape and Dash tests of the [M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 6.3 pass.
 
 ---
 
@@ -552,7 +580,10 @@ VG-16, VG-23; CL-6.
 
 **Delivers:** Patch Up; Techniques (Press I, Hew I, Empower I on the M1
 verb lines); Onslaught; Momentum; Bar the Way stance;
-`conditions.equiv.json`.
+`conditions.equiv.json`. Bar the Way sets a per-turn stopped marker that
+a later speed raise cannot undo (D-18, [M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 2.2); the
+snapshot version, state digest shape, `GameState` validation and
+RulesVersion rise after M1-11's.
 
 **Done when:**
 - [ ] `HewCeiling` and `TechniquePickerSize` pass.
@@ -560,6 +591,8 @@ verb lines); Onslaught; Momentum; Bar the Way stance;
   passes.
 - [ ] Onslaught cannot be combined with another camp spend (test).
 - [ ] The composite-lockout invariant holds (VG 12.1).
+- [ ] A fixture speed raise after a Bar the Way stop gives back no
+  movement (test).
 
 ### M1-21 Experience and levels 2–3
 
@@ -681,6 +714,8 @@ Old Ragged in a hand-built room.
   hover, HP plates, combat log.
 - Decision panels for reactions ("ask me"), Techniques and level-ups.
 - Danger band, lethal tags, end-turn warning, basic death recap.
+- The initiative bar shows a spent-action pip on an opener's striker
+  ([M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 4.1).
 - Death screen.
 
 **Done when:**
@@ -688,6 +723,8 @@ Old Ragged in a hand-built room.
   on Windows and Linux, noted in the issue.
 - [ ] Hovering changes no state and draws no random number (test).
 - [ ] The CI display-layer rule grep passes.
+- [ ] The striker's spent-action pip shows after an opener (noted in the
+  issue).
 
 ---
 
@@ -804,11 +841,11 @@ hazard draws reserved.
 
 **Implements:** ROOM 6.2.1–6.2.5, 7.3, 12; TR-3, TR-5, TR-17, TR-19;
 HZ 11.2, 12; SV-3; TL 6.1, 6.2, 6.6, 6.11, 6.19, 6.22, 7.3, 12; TL-1 to
-TL-5, TL-19 to TL-21; DH-32.
+TL-5, TL-19 (M1 part: pushes stop before F1 trigger squares; the
+condition end is M2), TL-20, TL-21; DH-32.
 
-**Depends on:** M1-29; decisions D-06 (floor-1 traps and keys), D-10
-(`hzTagMax`, traps formulas) and D-19 (trap conditions at combat start;
-initiative and the opening strike).
+**Depends on:** M1-29; decisions D-06 (floor-1 traps and keys) and D-10
+(`hzTagMax`, traps formulas).
 
 **Delivers:**
 - Tall and Low pieces as blockers; Clearway; clutter bands; reservation
@@ -818,6 +855,8 @@ initiative and the opening strike).
   party door open-by-moving.
 - Trap records with `detectionAtFire`; `traps` and `trapsResolve` passes
   with fallbacks.
+- Pushes stop before F1 trigger squares, using M1-13's stop-short
+  check; no M1 F1 trap applies a condition ([M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 3).
 
 **Done when:**
 - [ ] V9 M1 rows pass: `ClearwayConnected`, `ProtectedIntact`,
@@ -825,7 +864,9 @@ initiative and the opening strike).
   `ReservationCapacity`, `WayRound`, `CutawayWithTall`,
   `TerrainDrawCount`.
 - [ ] V11 skeleton passes (`LockNeverCritical`, `HeNoLock`,
-  `KeyReachable`); `F1TrapRules` passes.
+  `KeyReachable`). (`F1TrapRules` is M2, RS V11.)
+- [ ] Guard check: no M1 F1 trap record applies a condition.
+- [ ] A push toward an F1 trigger square stops before it (test).
 - [ ] Swapping party members gives the same check roll (test).
 - [ ] The solo Vanguard can always force every lock (test).
 
@@ -994,8 +1035,8 @@ describe, and back out again.
 (static parts); DH 17.1 (DH-2); SV-6; RS 9.4 and BR 4.2.1 (Forecourt
 Top-up trigger and F1 guard, M1 by D-03); BR-3.
 
-**Depends on:** M1-34; decision D-19 (trap conditions at combat start;
-initiative and the opening strike).
+**Depends on:** M1-34; decision D-19 (resolved 2026-11-27, [M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md)
+4 and 5).
 
 **Delivers:**
 - Group awareness records; noticing triggers; out-of-combat `h:notice`
@@ -1009,6 +1050,11 @@ initiative and the opening strike).
   forced movement stops short before arena squares.
 - F1 guard (BR-3): while the flag is false the boss group cannot notice
   the party, ignores noise, cannot join a fight and stays in the arena.
+  While `antechamberCatchUpApplied` is false or its level-up is pending,
+  an attack, ability or shove that targets or includes a boss-group unit
+  is refused at no cost, with a reason code ([M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 8 item 3).
+- Fight membership fixed from the declaring or noticing action (record
+  5, step 1); combat start and the win check count participants only.
 
 **Done when:**
 - [ ] V19t `ExplorationCombatIsolation` passes.
@@ -1027,6 +1073,10 @@ initiative and the opening strike).
 - [ ] "No party surprise on floor-1 squares 0–1" passes.
 - [ ] Scenario tests: a joining group's footsteps marker appears at least
   1 round before it arrives, in each joining case of ENM 12.4.
+- [ ] The M1-35 tests of the [M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 6.3 pass: membership
+  fixed at declaration; a fight ends while a monster lives elsewhere on
+  the floor; hostile targeting of the boss group is refused before the
+  catch-up.
 
 ---
 

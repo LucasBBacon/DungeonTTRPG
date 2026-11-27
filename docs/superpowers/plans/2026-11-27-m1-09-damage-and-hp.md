@@ -48,7 +48,8 @@ SRD 5.2.1 (CC-BY-4.0, May 2025), page 16, "Critical Hits": a crit rolls the atta
   - **M1-16, M1-20:** weapon and ability damage parts (Precision, exploit dice); they build `DamagePart` lists.
   - **M1-18:** potions, rests and the Medicine bonus's use; `HealApplied` and its sources.
   - **M1-22:** the trait budget and immunity checks (SM 8.4, ENM 20.1) with monster records.
-  - **M2 or later:** riders, layers and shells, transforms, temporary HP, Duck (DH 20.3 step 3a, Shade), the save chain (Death-warded, the phial; step 5), Downed and companions (step 1; no companions in M1), "ignores resistance", the necrotic heal block, Scarred.
+  - **M2 or later:** riders, layers and shells, transforms, Duck (DH 20.3 step 3a, Shade), the save chain (Death-warded, the phial; step 5), Downed and companions (step 1; no companions in M1), "ignores resistance", the necrotic heal block, Scarred.
+  - **Later (Bolstered):** temporary HP (roadmap D-17, [M1-10 rulings record](../specs/2026-11-27-m1-10-rulings-design.md) 1).
 
 ## Plan-level calls (mine, flagged for review)
 
@@ -199,7 +200,7 @@ SRD 5.2.1 (CC-BY-4.0, May 2025), page 16, "Critical Hits": a crit rolls the atta
     - `Heal_with_Recovery_heals_DH_8_amounts`: a level-1 reference hero (Con +1) on 5 HP healed by `HitPoints.Recovery` reaches 12.
   - `DamageReplayTests.A_scripted_attack_and_damage_sequence_replays_identically`: seed 7, the M1-08 `ContestKit` units, three rounds of `Contests.Attack` then, on a hit, `Damage.Deal` with 1d8 + 2 slashing (`crit` from the attack result). Run twice: the same save text. Run with a save and load after round 1: the same save text. Pin the final HP values as a golden after the first green run, and say so in the test's comment.
 - [ ] **Step 2: Run** `dotnet test tests/Core.Tests --filter "DamageFunctionTests|HealingTests|DamageReplayTests"`. Expected: build fails.
-- [ ] **Step 3: Implement** `Dice.Die`, the damage function, and healing. In `Resolve`, write the DH 20.3 steps as numbered comments, the later ones naming M1-10 (step 4, and step 7's consequences) and M2 (steps 1, 3a, 5, the per-part shells and temporary HP).
+- [ ] **Step 3: Implement** `Dice.Die`, the damage function, and healing. In `Resolve`, write the DH 20.3 steps as numbered comments, the later ones naming M1-10 (step 4, and step 7's consequences) M2 (steps 1, 3a, 5, the per-part shells) and Later (Bolstered: temporary HP).
 - [ ] **Step 4: Content and docs.** Add `"damage rolls"` to the `combat` row's `consumers`; run the `content-hashes` and `stream-handles` generators (the stream-handles output must not change). Update the vocabulary doc's `diceBonus` row (plan call 11), the README layout line, and the roadmap README next-step line.
 - [ ] **Step 5: Run** `dotnet test Dungeon.sln`, `dotnet build dungeon-ttrpg/DungeonTTRPG.csproj`, and the analyzer smoke build. Expected: all pass, 0 warnings, the smoke build still reports DUN001, no generator drift.
 - [ ] **Step 6: Commit** `M1-09: the damage function in DH 20.3 order; crits roll dice twice; healing clamps to the maximum`.
