@@ -719,6 +719,21 @@ SV-4, SV-9, SV-10, SV-11, SV-20; RT-3.
   `GenerationFallback`, `GenerationDefect`.
 - Route code returning the single Kennel Wood theme; route drawn after
   hero creation; `RouteDrawn` event.
+- Draw-ledger gaps handed over from M1-05 (PR #93; the owner deferred
+  them here, 2026-11-28):
+  - The generated `Open()` on every drawn key bypasses the ledger.
+    Emit it only for `sequential-saved` rows (`combat`, `loot/shrine`),
+    so counted, inert, vector and display rows open only through
+    `StageRun`.
+  - A draw on an inert row (D-08) fails only at `Close`; it should fail
+    at the draw.
+  - `leaf-formula` rows must be checked on their recorded choice (SV 4.2,
+    DS3): `StageRun` fixes parameters at construction, so a stage needs
+    a way to record a choice (layout's `#Sites`) before `Close`.
+  - `Close` checks only the rows a stage opened. With stage rows
+    (`StageRow.streams[]`), every live counted row a stage owns must be
+    checked, even if never opened ("fixed count" means the counter equals
+    its declared count when the stage ends, SV 4.2).
 
 **Done when:**
 - [ ] V19t `RetryIsolation` passes.
