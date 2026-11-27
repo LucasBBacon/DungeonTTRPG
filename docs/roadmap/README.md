@@ -167,6 +167,7 @@ here.
 | D-13 | M1-33 | The `lineRoll:{source}` source kinds (IR) and the `loot/floor` boss-channel block label (LE) are not named; M1-05 registers neither. | SV 4.3; IR; LE |
 | D-14 | M2-23 | V19s `CoreNoProfileRef` (SV 4.6): an analyzer rule that Core cannot reference Profile types. M1-06 builds no rule because no Profile type exists yet; the step that introduces the profile adds it. | SV 4.6, 5.2 V19s |
 | ~~D-15~~ | ~~M1-07~~ | **Resolved 2026-11-28 (client):** advantage netting follows the 5E rule: any number of advantage sources give advantage, any number of disadvantage sources give disadvantage, and one of each cancels to a normal roll, whatever the counts. Weapons 7.5 ("net them (one cancels one)") is amended to fold them as conditions 6.7 does, and Overlap and Vex read the folded mode. Recorded in [`docs/effects-vocabulary.md`](../effects-vocabulary.md). | CO 6.7; W 7.5 |
+| D-16 | M1-14 | Leadership and Rally: does Rally roll Leadership against a difficulty, need training in Leadership, or neither? No design gives Rally a roll (CO 18.1: "In M1, Rally applies the `rally` cure directly"; AB: "Rally: Leadership"). M1-08 adds Leadership as a skill only. | SM 7.1; CO 18.1; AB |
 | D-20 | M2-02 | Rulings RT-14 / HZ-6 (Teetering in the theme six), RT-16 / TL-39 (trap conditions from the theme six), EV-11 (Grace durations). | CO; RS; EV |
 | D-21 | M2-10 | Rulings EP-6 (Billets), BR-6 (Rhythm), BR-7, TR-15, TL-16 (AI terms). | ENM; EP; BR |
 | D-30 | M3-06 | How many class and aspect unlocks ship in M3. | CL 9.4 |
@@ -211,4 +212,4 @@ M3-END. See [m3-between-runs.md](m3-between-runs.md).
 Maladies · M4-04 Content breadth · M4-END. See
 [m4-breadth.md](m4-breadth.md).
 
-**Next step to start:** M1-01 (unblocked).
+**Next step to start:** M1-09, once M1-08 is merged (precondition D-02).

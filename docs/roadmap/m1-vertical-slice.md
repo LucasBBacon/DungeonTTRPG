@@ -242,13 +242,15 @@ every contest is one d20 roll on the combat stream.
 
 **Delivers:**
 - Six abilities as single modifiers; every SM 6 derived number except
-  trap sense.
+  trap sense, max HP and Recovery (M1-09), carrying capacity (M1-15),
+  guile (M1-22), and armour class beyond the unarmoured row (M1-17)
+  (owner ruling 2026-11-27).
 - Three saves; attack, save and skill-vs-unit contests.
 - Natural 20 and natural 1 on attack rolls only.
 - Initiative d20 + Int, ties by Int then unit order.
 - M1 skills: Athletics, Acrobatics, Stealth, Mechanics, Perception,
-  Intimidation, Leadership (`rally` cure only), Medicine (rest bonus
-  only), Lore.
+  Intimidation, Leadership (the skill only; whether Rally rolls it is
+  D-16), Medicine (rest bonus only), Lore.
 - `combat` stream as a saved sequential counter.
 
 **Done when:**
@@ -392,7 +394,7 @@ pipeline.
 **Implements:** AB 7.2; SM 7.1–7.2; W 8 (threatened zone, opportunity
 attacks).
 
-**Depends on:** M1-13.
+**Depends on:** M1-13; decision D-16 (Leadership and Rally).
 
 **Delivers:** Attack, Dash, Disengage, Dodge, Help, Shove and grapple,
 Escape, Hide, Search, Frighten, Rally; opportunity attacks and threatened
@@ -601,7 +603,8 @@ three Kennel types plus the minion exist.
 
 **Depends on:** M1-21; decision D-04 (minion base type).
 
-**Delivers:** monster record and derived values; ranks; `readyAt`;
+**Delivers:** monster record and derived values, including guile (SM 6;
+moved here from M1-08); ranks; `readyAt`;
 guard checks against the reference hero; Kennel Mastiff, Huntsman,
 Poacher and the minion template as content.
 
