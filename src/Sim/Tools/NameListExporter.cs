@@ -34,7 +34,11 @@ public static class NameListExporter
     private static readonly ImmutableArray<string> Kinds =
         ["final", "renamed", "internal", "retired", "held", "deleted", "dropped", "never"];
 
-    private static readonly ImmutableArray<string> RetiringPrefixes = ["retired", "deleted", "dropped", "renamed →"];
+    private const string RenamedTo = "renamed →";
+
+    private const string DeletedInPart = "deleted in part";
+
+    private static readonly ImmutableArray<string> RetiringPrefixes = ["retired", "deleted", "dropped", RenamedTo];
 
     private static readonly JsonWriterOptions WriterOptions = new()
     {
@@ -103,21 +107,48 @@ public static class NameListExporter
     }
 
     /// <summary>
-    /// The retired pairs (plan call 7): entries whose outcome starts <c>retired</c>, <c>deleted</c> or
-    /// <c>dropped</c>, and whole renames (<c>renamed →</c>). A grouped name splits into one pair per part;
-    /// the first entry of a repeated pair is kept. Ordinal by (name, category).
+    /// The entries plan call 7 selects: outcomes that start <c>retired</c>, <c>deleted</c> or
+    /// <c>dropped</c>, and whole renames (<c>renamed →</c>; <c>renamed in part</c> is not selected).
+    /// </summary>
+    public static ImmutableArray<NameListEntry> RetiringEntries(ImmutableArray<NameListEntry> entries) =>
+        entries.Where(e => RetiringPrefixes.Any(p => e.Outcome.StartsWith(p, StringComparison.Ordinal))).ToImmutableArray();
+
+    /// <summary>
+    /// The parts of a selected entry that are retired: each part of the grouped name, except that
+    /// for <c>renamed →</c> a part that is also a part of the rename target (ordinal, also against the
+    /// target part without a trailing parenthetical) keeps its name, and for <c>deleted in part</c> only
+    /// the parts the outcome names (ordinal substring) are retired, since the rest stay as written.
+    /// </summary>
+    public static ImmutableArray<string> RetiredParts(NameListEntry entry)
+    {
+        ArgumentNullException.ThrowIfNull(entry);
+        var parts = SplitGroup(entry.Name);
+        if (entry.Outcome.StartsWith(DeletedInPart, StringComparison.Ordinal))
+        {
+            string said = entry.Outcome.Substring(DeletedInPart.Length);
+            return parts.Where(p => said.Contains(p, StringComparison.Ordinal)).ToImmutableArray();
+        }
+
+        if (entry.Outcome.StartsWith(RenamedTo, StringComparison.Ordinal))
+        {
+            var target = Split(entry.Outcome.Substring(RenamedTo.Length), [", ", " / ", "; "]);
+            var survivors = target.Concat(target.Select(StripTrailingParenthetical)).ToHashSet(StringComparer.Ordinal);
+            return parts.Where(p => !survivors.Contains(p)).ToImmutableArray();
+        }
+
+        return parts;
+    }
+
+    /// <summary>
+    /// The retired pairs (plan call 7): one pair per <see cref="RetiredParts"/> part of each of the
+    /// <see cref="RetiringEntries"/>; the first entry of a repeated pair is kept. Ordinal by (name, category).
     /// </summary>
     public static ImmutableArray<RetiredName> Retired(ImmutableArray<NameListEntry> entries)
     {
         var kept = new List<RetiredName>();
-        foreach (var e in entries)
+        foreach (var e in RetiringEntries(entries))
         {
-            if (!RetiringPrefixes.Any(p => e.Outcome.StartsWith(p, StringComparison.Ordinal)))
-            {
-                continue;
-            }
-
-            foreach (var name in SplitGroup(e.Name))
+            foreach (var name in RetiredParts(e))
             {
                 if (!kept.Any(r => r.Name == name && r.Category == e.Category))
                 {
@@ -236,6 +267,13 @@ public static class NameListExporter
 
             start = next + found!.Length;
         }
+    }
+
+    // "Focus hand (Totem kit; agreed, Q2)" gives "Focus hand"; a part without a trailing parenthetical is unchanged.
+    private static string StripTrailingParenthetical(string part)
+    {
+        int open = part.LastIndexOf(" (", StringComparison.Ordinal);
+        return part.EndsWith(')') && open > 0 ? part.Substring(0, open) : part;
     }
 
     // The first index of sep at or after start that is outside parentheses and double quotes, or -1.

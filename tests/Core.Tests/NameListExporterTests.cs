@@ -95,6 +95,68 @@ public class NameListExporterTests
     }
 
     [Fact]
+    public void Plan_call_7_selects_311_entries_giving_348_retired_records()
+    {
+        // The selection, counted here from the four prefixes rather than through the exporter.
+        int Starting(string prefix) => Entries.Value.Count(e => e.Outcome.StartsWith(prefix, StringComparison.Ordinal));
+        Assert.Equal(303, Starting("renamed →"));
+        Assert.Equal(6, Starting("retired"));
+        Assert.Equal(1, Starting("dropped"));
+        Assert.Equal(1, Starting("deleted"));
+
+        var selected = NameListExporter.RetiringEntries(Entries.Value);
+        Assert.Equal(311, selected.Length);
+        Assert.Equal(
+            Entries.Value.Where(e => new[] { "renamed →", "retired", "dropped", "deleted" }
+                .Any(p => e.Outcome.StartsWith(p, StringComparison.Ordinal))),
+            selected);
+
+        // Splitting every part literally gives 352 distinct pairs; the 4 the source keeps (Ready and
+        // Waiting in the rename target, Gut spore-bloat and Silk mildew moth "final as written") are not retired.
+        Assert.Equal(348, NameListExporter.Retired(Entries.Value).Length);
+    }
+
+    [Fact]
+    public void A_rename_does_not_retire_a_part_the_target_keeps()
+    {
+        var retired = NameListExporter.Retired(Entries.Value);
+
+        // "Plate pip states: Ready, Spent, Waiting, Kept, Dormant" renamed → "Ready, Used, Waiting, Stored, Idle".
+        Assert.DoesNotContain(retired, r => r.Name == "Ready" && r.Category == "UI surface");
+        Assert.DoesNotContain(retired, r => r.Name == "Waiting" && r.Category == "UI surface");
+        Assert.Contains(retired, r => r.Name == "Spent" && r.Category == "UI surface");
+        Assert.Contains(retired, r => r.Name == "Kept" && r.Category == "UI surface");
+        Assert.Contains(retired, r => r.Name == "Dormant" && r.Category == "UI surface");
+
+        // "Shield kit / Totem kit" renamed → "Shield hand / Focus hand (Totem kit; agreed, Q2)": the
+        // parenthetical records that Totem kit became Focus hand (herald-class 89), so both old names retire.
+        Assert.Contains(retired, r => r.Name == "Totem kit" && r.Category == "UI surface");
+        Assert.Contains(retired, r => r.Name == "Shield kit" && r.Category == "UI surface");
+    }
+
+    [Fact]
+    public void Deleted_in_part_retires_only_the_named_part()
+    {
+        var retired = NameListExporter.Retired(Entries.Value);
+
+        Assert.Contains(retired, r => r.Name == "Heart sleeping-draught nurse" && r.Category == "enemy type");
+        Assert.DoesNotContain(retired, r => r.Name == "Gut spore-bloat" && r.Category == "enemy type");
+        Assert.DoesNotContain(retired, r => r.Name == "Silk mildew moth" && r.Category == "enemy type");
+    }
+
+    [Fact]
+    public void Retired_parts_follow_the_outcome_wording()
+    {
+        static NameListEntry E(string name, string outcome) => new("d", name, "c", "unclear", outcome, "x", null);
+        static string[] Parts(NameListEntry e) => NameListExporter.RetiredParts(e).ToArray();
+
+        Assert.Equal(["A", "C"], Parts(E("L: A, B, C", "renamed → B, D")));
+        Assert.Equal(["A"], Parts(E("A / B", "renamed → X / B (A; agreed)")));
+        Assert.Equal(["B"], Parts(E("L: A, B", "deleted in part: B is deleted; the rest final")));
+        Assert.Equal(["A", "B"], Parts(E("A / B", "retired (rejected)")));
+    }
+
+    [Fact]
     public void A_section_whose_count_disagrees_throws()
     {
         const string text = "#### B.1 doc-a (2)\n\n- run · system term · unclear · **final as written**\n";

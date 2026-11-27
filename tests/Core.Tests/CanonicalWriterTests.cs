@@ -117,6 +117,15 @@ public class CanonicalWriterTests
     }
 
     [Fact]
+    public void Text_is_utf8_with_a_byte_length()
+    {
+        Assert.Equal("06000000c39c6e646572", One(w => w.Text(0, "Ünder")));
+        Assert.Equal("00000000", One(w => w.Text(0, "")));
+        Assert.ThrowsAny<ArgumentException>(() => One(w => w.Text(0, "\uD800")));
+        Assert.Throws<ArgumentNullException>(() => One(w => w.Text(0, null!)));
+    }
+
+    [Fact]
     public void Enums_are_written_by_name()
     {
         Assert.Equal(One(w => w.String(0, "Enemy")), One(w => w.Enum(0, Faction.Enemy)));

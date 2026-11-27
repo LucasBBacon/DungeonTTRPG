@@ -199,9 +199,91 @@ public class NamingChecksTests
         Assert.All(set.All<StringEntry>(), s => Assert.True(s.Text.IsNormalized(NormalizationForm.FormC), s.Id));
     }
 
+    // --- The read-set cache sees display fields (SV 5.3, Review Focus 5) ---
+
+    [Fact]
+    public void Editing_a_retired_name_reruns_r2()
+    {
+        var cache = new CheckCache();
+        IStaticCheck[] checks = [new R2RetiredReusedCheck(Kinds)];
+        var named = Named(Rec("a", "Underpillow", category: "heirloom", key: "T.n.a"));
+
+        var first = ValidationRunner.Run(Load(ChecksJson(), named, RetiredFile("Underpillow", "heirloom")), checks, cache);
+        Assert.Single(first.Failures);
+
+        var second = ValidationRunner.Run(Load(ChecksJson(), named, RetiredFile("Overpillow", "heirloom")), checks, cache);
+        Assert.Equal(2, cache.Runs);
+        Assert.Equal(0, cache.Hits);
+        Assert.Empty(second.Failures);
+
+        ValidationRunner.Run(Load(ChecksJson(), named, RetiredFile("Overpillow", "heirloom")), checks, cache);
+        Assert.Equal(2, cache.Runs);
+        Assert.Equal(1, cache.Hits);
+    }
+
+    [Fact]
+    public void Editing_a_retired_category_reruns_r2()
+    {
+        var cache = new CheckCache();
+        IStaticCheck[] checks = [new R2RetiredReusedCheck(Kinds)];
+        var named = Named(Rec("a", "Underpillow", category: "heirloom", key: "T.n.a"));
+
+        ValidationRunner.Run(Load(ChecksJson(), named, RetiredFile("Underpillow", "heirloom")), checks, cache);
+        var second = ValidationRunner.Run(Load(ChecksJson(), named, RetiredFile("Underpillow", "place")), checks, cache);
+
+        Assert.Equal(2, cache.Runs);
+        Assert.Empty(second.Failures);
+    }
+
+    [Fact]
+    public void Editing_a_name_list_category_reruns_the_name_registry()
+    {
+        var cache = new CheckCache();
+        IStaticCheck[] checks = [new NameRegistryCheck(Kinds)];
+        var named = Named(Rec("a", "Bobbin", category: "gizmo", key: "T.n.a"));
+
+        var first = ValidationRunner.Run(Load(ChecksJson(), named, NameList("boss")), checks, cache);
+        Assert.Single(first.Failures);
+
+        var second = ValidationRunner.Run(Load(ChecksJson(), named, NameList("gizmo")), checks, cache);
+        Assert.Equal(2, cache.Runs);
+        Assert.Empty(second.Failures);
+    }
+
+    [Fact]
+    public void Editing_a_display_name_reruns_r1()
+    {
+        var cache = new CheckCache();
+        IStaticCheck[] checks = [new R1ExactEqualityCheck(Kinds)];
+
+        var first = ValidationRunner.Run(
+            Load(ChecksJson(), Named(Rec("a", "Old Ragged", key: "T.n.a"), Rec("b", "Old Ragged", key: "T.n.b"))), checks, cache);
+        Assert.Single(first.Failures);
+
+        var second = ValidationRunner.Run(
+            Load(ChecksJson(), Named(Rec("a", "Old Ragged", key: "T.n.a"), Rec("b", "Bobbin", key: "T.n.b"))), checks, cache);
+        Assert.Equal(2, cache.Runs);
+        Assert.Empty(second.Failures);
+    }
+
+    [Fact]
+    public void Editing_strings_text_changes_the_digest()
+    {
+        var a = Load(Strings(Str("T.n.a", "Old Ragged")));
+        var b = Load(Strings(Str("T.n.a", "Old Raggéd")));
+        Assert.NotEqual(a.DigestOf(["strings/en.json"]), b.DigestOf(["strings/en.json"]));
+        Assert.Equal(a.DigestOf(["strings/en.json"]), Load(Strings(Str("T.n.a", "Old Ragged"))).DigestOf(["strings/en.json"]));
+    }
+
     // --- Helpers ---
 
-    private static ImmutableArray<CheckFailure> Run(IStaticCheck check, params ContentFile[] files)
+    private static ImmutableArray<CheckFailure> Run(IStaticCheck check, params ContentFile[] files) =>
+        check.Run(Load(files));
+
+    private static ContentSet Load(params ContentFile[] files) => ContentLoader.Load(WithNamingFiles(files), Kinds);
+
+    // The given files plus the default name list and retired names, unless the caller gives its own.
+    private static List<ContentFile> WithNamingFiles(ContentFile[] files)
     {
         var all = new List<ContentFile>(files);
         if (!files.Any(f => f.Name == "naming/name_list.json"))
@@ -219,8 +301,20 @@ public class NamingChecksTests
                 + "\"doc\": \"heirlooms-curses\", \"outcome\": \"retired (renamed the Bobbin in CA T4)\"}]}"));
         }
 
-        return check.Run(ContentLoader.Load(all, Kinds));
+        return all;
     }
+
+    private static ContentFile NameList(params string[] categories) =>
+        new("naming/name_list.json", "{\"entries\": [" + string.Join(", ", categories.Select((c, i) => Entry("a:" + i, c))) + "]}");
+
+    private static ContentFile RetiredFile(string name, string category) =>
+        new("naming/retired_names.json",
+            $"{{\"retired\": [{{\"id\": \"r0000\", \"name\": \"{name}\", \"category\": \"{category}\", "
+            + "\"doc\": \"heirlooms-curses\", \"outcome\": \"retired (renamed the Bobbin in CA T4)\"}]}");
+
+    // The repository's checks.json, so ValidationRunner finds the rows of the real checks.
+    private static ContentFile ChecksJson() =>
+        new("registry/checks.json", File.ReadAllText(Path.Combine(RepoRoot.Find(), "content", "registry", "checks.json")));
 
     private static string Entry(string id, string category) =>
         $"{{\"id\": \"{id}\", \"doc\": \"a\", \"name\": \"n\", \"category\": \"{category}\", \"status\": \"unclear\", "
@@ -303,12 +397,25 @@ public class NamingChecksTests
 
     private sealed record NamedFixture(
         string File, string Id, int Index, string Name, string Category, string? MeaningId, bool Internal, string? Key)
-        : ContentRecord(File, Id)
+        : ContentRecord(File, Id), IDisplayCanonical
     {
         public override void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(1);
+            w.BeginRecord(6);
             w.String(0, Id);
+            w.String(1, Category);
+            w.OptionalString(2, MeaningId);
+            w.Bool(3, Internal);
+            w.OptionalString(4, Key);
+            w.Int32(5, Index);
+            w.EndRecord();
+        }
+
+        public void WriteDisplay(CanonicalWriter w)
+        {
+            w.BeginRecord(2);
+            w.String(0, Id);
+            w.Text(1, Name);
             w.EndRecord();
         }
     }

@@ -208,7 +208,7 @@ public sealed class StringsKind : ContentKind
 /// </summary>
 public sealed record NameListRecord(
     string File, string Id, string Doc, string Name, string Category, string Status, string Outcome, string OutcomeKind, string? Note)
-    : ContentRecord(File, Id)
+    : ContentRecord(File, Id), IDisplayCanonical
 {
     /// <inheritdoc />
     public override void WriteCanonical(CanonicalWriter w)
@@ -217,17 +217,45 @@ public sealed record NameListRecord(
         w.String(0, Id);
         w.EndRecord();
     }
+
+    /// <inheritdoc />
+    public void WriteDisplay(CanonicalWriter w)
+    {
+        w.BeginRecord(9);
+        w.String(0, Id);
+        w.Text(1, Doc);
+        w.Text(2, Name);
+        w.Text(3, Category);
+        w.Text(4, Status);
+        w.Text(5, Outcome);
+        w.Text(6, OutcomeKind);
+        w.Bool(7, Note is not null);
+        w.Text(8, Note ?? "");
+        w.EndRecord();
+    }
 }
 
 /// <summary>A retired (name, category) pair (plan call 7). Only <see cref="ContentRecord.Id"/> is a rules field.</summary>
 public sealed record RetiredNameRecord(string File, string Id, string Name, string Category, string Doc, string Outcome)
-    : ContentRecord(File, Id)
+    : ContentRecord(File, Id), IDisplayCanonical
 {
     /// <inheritdoc />
     public override void WriteCanonical(CanonicalWriter w)
     {
         w.BeginRecord(1);
         w.String(0, Id);
+        w.EndRecord();
+    }
+
+    /// <inheritdoc />
+    public void WriteDisplay(CanonicalWriter w)
+    {
+        w.BeginRecord(5);
+        w.String(0, Id);
+        w.Text(1, Name);
+        w.Text(2, Category);
+        w.Text(3, Doc);
+        w.Text(4, Outcome);
         w.EndRecord();
     }
 }
@@ -265,7 +293,8 @@ public enum StringField
 }
 
 /// <summary>One entry of the strings table; its id is its key. <see cref="Text"/> is display-tagged.</summary>
-public sealed record StringEntry(string File, string Key, string Text, StringField Field) : ContentRecord(File, Key)
+public sealed record StringEntry(string File, string Key, string Text, StringField Field)
+    : ContentRecord(File, Key), IDisplayCanonical
 {
     /// <inheritdoc />
     public override void WriteCanonical(CanonicalWriter w)
@@ -273,6 +302,15 @@ public sealed record StringEntry(string File, string Key, string Text, StringFie
         w.BeginRecord(2);
         w.String(0, Id);
         w.Enum(1, Field);
+        w.EndRecord();
+    }
+
+    /// <inheritdoc />
+    public void WriteDisplay(CanonicalWriter w)
+    {
+        w.BeginRecord(2);
+        w.String(0, Id);
+        w.Text(1, Text);
         w.EndRecord();
     }
 }

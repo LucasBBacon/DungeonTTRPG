@@ -87,8 +87,11 @@ public sealed class ContentSet
 
     /// <summary>
     /// SHA-256 over the canonical bytes of the named files' records: the distinct names in ordinal
-    /// order, each with its records ordinal by id. An absent file counts as one with no records, so
-    /// the digest depends on the records alone, never on JSON layout, line endings or file order.
+    /// order, each with its records ordinal by id. Each record contributes its rules bytes
+    /// (<see cref="ContentRecord.WriteCanonical"/>) and, when it is <see cref="IDisplayCanonical"/>, its
+    /// display bytes, so editing any field a check can read changes the digest (SV 5.3 cache). An absent
+    /// file counts as one with no records, so the digest depends on the records alone, never on JSON
+    /// layout, line endings or file order.
     /// </summary>
     public Digest DigestOf(IEnumerable<string> fileNames)
     {
@@ -108,9 +111,26 @@ public sealed class ContentSet
         {
             w.BeginRecord(2);
             w.String(0, Name);
-            w.SetById(1, Records, r => r.Id, (iw, r) => iw.Record(0, r));
+            w.SetById(1, Records, r => r.Id, (iw, r) => iw.Record(0, new RecordBytes(r)));
             w.EndRecord();
         }
+    }
+
+    // A record's rules bytes, then its display bytes when it has display fields.
+    private sealed record RecordBytes(ContentRecord Record) : ICanonical
+    {
+        public void WriteCanonical(CanonicalWriter w)
+        {
+            w.BeginRecord(2);
+            w.Record(0, Record);
+            w.OptionalRecord(1, Record is IDisplayCanonical display ? new DisplayBytes(display) : null);
+            w.EndRecord();
+        }
+    }
+
+    private sealed record DisplayBytes(IDisplayCanonical Display) : ICanonical
+    {
+        public void WriteCanonical(CanonicalWriter w) => Display.WriteDisplay(w);
     }
 
     private sealed record Manifest(ImmutableArray<FileRecords> Files) : ICanonical
