@@ -796,7 +796,8 @@ these steps, in this order:
    `bucklerOffUntilOwnTurnStart` at declaration, hit or miss, reactions
    and opportunity attacks included.
 2. **Fix the roll mode:** collect advantage and disadvantage from every
-   source, net them (one cancels one), and consume Helped if it applies
+   source, fold them (conditions 6.7: any advantage and any disadvantage
+   cancel; D-15), and consume Helped if it applies
    (a reading recorded in the charm abilities design 13, not a change
    here, the weapons owner confirms: a roll that already has advantage
    does not use it, so Helped carries over).
