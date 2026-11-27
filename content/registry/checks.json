@@ -109,6 +109,18 @@
       "action": "fail the build",
       "wave": "M1",
       "ciTier": "pr"
+    },
+    {
+      "id": "V19.DrawLedger",
+      "owner": "the lead",
+      "phase": "g",
+      "point": "stage end",
+      "deps": [],
+      "uses": [],
+      "class": "defect",
+      "action": "LR5",
+      "wave": "M1",
+      "ciTier": "pr"
     }
   ]
 }
