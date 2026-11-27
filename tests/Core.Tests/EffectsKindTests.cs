@@ -248,6 +248,11 @@ public class EffectsKindTests
                 "intimidationCheck", "leadershipCheck", "medicineCheck", "loreCheck",
             ],
             RollTargets.Core.ToArray());
+        Assert.Equal<string>(["unit"], Flags.Targets.ToArray());
+        Assert.Equal<string>(Dungeon.Core.Damage.DamageIds.LadderFlags.AsEnumerable(), Flags.Core.AsEnumerable());
+        Assert.Equal(30, Flags.Core.Length);
+        Assert.Equal("acid", Dungeon.Core.Damage.DamageIds.Of(Dungeon.Core.Damage.DamageType.Acid));
+        Assert.Contains("immune.necrotic", Flags.Core);
         Assert.Equal<string>(["unitMoved"], RuleEvents.Core.Select(e => e.Id).ToArray());
         Assert.Equal(typeof(UnitMoved), RuleEvents.Core[0].EventType);
     }

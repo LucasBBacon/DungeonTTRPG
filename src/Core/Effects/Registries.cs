@@ -112,10 +112,12 @@ public static class Flags
     public static ImmutableArray<string> Targets { get; } = ["unit"];
 
     /// <summary>
-    /// The M1-07 flag names: none. The steps that read a flag (M1-13 Incapacitated, M1-14 Dodge and Hide, M1-17
-    /// Raise) add their rows; tests pass their own table.
+    /// The flag names: the 30 M1-09 ladder flags (<see cref="Dungeon.Core.Damage.DamageIds.LadderFlags"/>:
+    /// <c>resistant.&lt;type&gt;</c>, <c>weak.&lt;type&gt;</c> and <c>immune.&lt;type&gt;</c> per damage type; M1-09
+    /// plan call 6). The other steps that read a flag (M1-13 Incapacitated, M1-14 Dodge and Hide, M1-17 Raise) add
+    /// their rows; tests pass their own table. The context sorts them.
     /// </summary>
-    public static ImmutableArray<string> Core { get; } = [];
+    public static ImmutableArray<string> Core { get; } = [.. Dungeon.Core.Damage.DamageIds.LadderFlags];
 }
 
 /// <summary>

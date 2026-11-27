@@ -69,8 +69,29 @@ fails at startup with the file and field named, never in play:
   rule is not `Speed` is a load error at `$.effects[i].modifiers[j].halve` (or `.zero`).
 - `rollMode` must name a roll target (`RollTargets.Core`).
 - `flag` must have the target `unit` (`Flags.Targets`), and its flag must name a registered flag (`Flags.Core` in
-  `src/Core/Effects/Registries.cs`), or it fails at `.target` or `.flag`. M1-07 registers no flag names, so every
-  `flag` modifier fails at load until the step that reads the flag registers it (section 9).
+  `src/Core/Effects/Registries.cs`), or it fails at `.target` or `.flag`. A flag name is registered by the step that
+  reads it (section 9); a `flag` modifier naming any other name fails at load. The registered names are in
+  section 3.1.
+
+### 3.1 Flag names
+
+| Names | Read by | Meaning |
+|---|---|---|
+| `resistant.<type>`, `weak.<type>`, `immune.<type>`, for each of the ten damage types `slashing`, `piercing`, `bludgeoning`, `fire`, `cold`, `lightning`, `acid`, `psychic`, `radiant`, `necrotic` (30 names; `DamageIds` in `src/Core/Damage/DamageTypes.cs`) | M1-09 `Ladder.StepFor` | The holder's ladder step for that type (SM 8.3). |
+
+The ladder step for a type (M1-09 plan call 6): `immune` set gives Immune, which **wins over a weakness**; else
+`resistant` and `weak` both set cancel to Normal; else `resistant` gives Resistant; else `weak` gives Weak; else
+Normal. Flags are booleans, so two sources of the same resistance count once (SM 8.3). A part then deals: Weak raw +
+half, Resistant half (both rounding down), Normal raw, Immune 0, where raw is the part's dice plus its flat amount; a
+part that is not immune deals at least 1 (M1-09 plan call 7, owner ruling 1).
+
+A trait's damage profile is a `trait`-kind effect carrying these flags (SM 9: "A trait is a named bundle of
+effects"), such as a skeletal trait resistant to piercing and weak to bludgeoning:
+
+```json
+{"id": "trait.skeletal", "kind": "trait", "modifiers": [
+  {"target": "unit", "flag": "resistant.piercing"}, {"target": "unit", "flag": "weak.bludgeoning"}]}
+```
 
 ## 4. Source kinds and stacking
 
@@ -298,7 +319,7 @@ These keys and ideas are named now so content does not invent its own, and are r
 | Step | Vocabulary rows it uses |
 |---|---|
 | M1-08 Stats and contests | `add` on the new numbers (section 5.3); the `AbilityScore` rule and its cap for the six abilities; the `Stack` rule for the other SM 6 numbers, with per-unit bases that read the abilities and proficiency; `rollMode` on `attackRoll` and `attacksAgainst`, folded over several sources by D-15; the save and skill roll targets. Guile moved to M1-22 and HP numbers to M1-09. |
-| M1-09 Damage and HP | `add` on `maxHp` and `recovery` (section 5.3), and on `constitution`, which both bases read after its effects; the derived-number floor (section 5), on both rows. |
+| M1-09 Damage and HP | `add` on `maxHp` and `recovery` (section 5.3), and on `constitution`, which both bases read after its effects; the derived-number floor (section 5), on both rows; resistances and weaknesses: the 30 ladder flags `resistant.<type>`, `weak.<type>` and `immune.<type>` (`flag` modifiers on `unit`, section 3.1), which a trait sets as a `trait`-kind effect carrying them. |
 | M1-10 Turns, lifecycle and death | New rule events (turn start, turn end, combat start and end); durations (section 8). |
 | M1-11 Abilities, reactions and areas | `ability`-kind effects; `applyEffect` actions; hooks for reactions; new events for ability use steps. |
 | M1-12 Conditions core | `condition`-kind effects and the same-number rule; `applyEffect` to `subject`; trigger order and the chain bound. |
