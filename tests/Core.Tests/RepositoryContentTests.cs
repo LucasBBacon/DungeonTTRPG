@@ -1,5 +1,6 @@
 using Dungeon.Core.Content;
 using Dungeon.Core.Validation;
+using Dungeon.Sim.Tools;
 using Xunit;
 
 namespace Dungeon.Core.Tests;
@@ -25,13 +26,6 @@ public class RepositoryContentTests
         Assert.Equal(rowIds, codeIds);
     }
 
-    /// <summary>Every <c>*.json</c> under <c>content/</c>, named relative to it with <c>/</c>, in ordinal order.</summary>
-    private static IEnumerable<ContentFile> ReadContent()
-    {
-        string root = Path.Combine(RepoRoot.Find(), "content");
-        return Directory.EnumerateFiles(root, "*.json", SearchOption.AllDirectories)
-            .Select(path => new ContentFile(Path.GetRelativePath(root, path).Replace('\\', '/'), File.ReadAllText(path)))
-            .OrderBy(f => f.Name, StringComparer.Ordinal)
-            .ToArray();
-    }
+    /// <summary>The repository's <c>content/</c>, read exactly as the content-hashes command reads it.</summary>
+    private static ContentFile[] ReadContent() => ContentDirectory.Read(Path.Combine(RepoRoot.Find(), "content"));
 }

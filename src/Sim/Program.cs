@@ -24,10 +24,7 @@ if (args.Length == 1 && args[0] == "content-hashes")
 {
     string root = FindRepoRoot();
     string content = Path.Combine(root, "content");
-    var files = Directory.EnumerateFiles(content, "*.json", SearchOption.AllDirectories)
-        .Select(path => new ContentFile(Path.GetRelativePath(content, path).Replace('\\', '/'), File.ReadAllText(path)))
-        .OrderBy(f => f.Name, StringComparer.Ordinal)
-        .ToArray();
+    var files = ContentDirectory.Read(content);
     var hashes = ContentHashing.Compute(ContentLoader.Load(files));
     var utf8 = new UTF8Encoding(false, throwOnInvalidBytes: true);
     File.WriteAllBytes(
