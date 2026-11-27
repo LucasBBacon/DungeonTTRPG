@@ -45,6 +45,7 @@ public static class ContentKinds
             new ArmKind(),
             new CheckKind(),
             new ReportKind(),
+            new StreamKind(),
             new StringsKind(),
         ];
 }

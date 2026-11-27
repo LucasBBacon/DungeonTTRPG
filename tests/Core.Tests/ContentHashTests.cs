@@ -73,14 +73,18 @@ public class ContentHashTests
     }
 
     [Fact]
-    public void No_kind_is_read_by_generation_yet()
+    public void Exactly_the_stream_registry_is_read_by_generation()
     {
-        Assert.DoesNotContain(ContentKinds.All, k => k.ReadByGeneration);
+        // Plan call 9: genContentHash covers registry/streams.json and nothing else.
+        Assert.Equal(["registry/streams.json"], ContentKinds.All.Where(k => k.ReadByGeneration).Select(k => k.FileName));
 
-        // Plan call 6: the digest of the empty manifest, whatever the content.
-        Assert.Equal(
-            ContentHashing.Compute(ContentLoader.Load([])).GenContent,
-            ContentHashing.Compute(ContentLoader.Load(ReadRepositoryContent())).GenContent);
+        // So a rules edit anywhere else leaves genContentHash unchanged...
+        Assert.Equal(ContentHashing.Compute(Fixture()).GenContent, ContentHashing.Compute(Fixture(owner: "RS")).GenContent);
+
+        // ...and a stream-row edit changes it.
+        Assert.NotEqual(
+            ContentHashing.Compute(ContentLoader.Load([Streams("MAIN")])).GenContent,
+            ContentHashing.Compute(ContentLoader.Load([Streams("RS")])).GenContent);
     }
 
     // --- Drift guard ---
@@ -156,6 +160,15 @@ public class ContentHashTests
 
         return ContentLoader.Load(files);
     }
+
+    /// <summary>A one-row stream registry whose owner is <paramref name="owner"/>.</summary>
+    private static ContentFile Streams(string owner) => new(
+        "registry/streams.json",
+        $$"""
+        {"streams": [{"path": "dungeon", "alias": [], "parent": null, "label": "dungeon", "indices": [], "class": "node",
+          "countFormula": "0", "stage": null, "readers": [], "consumers": [], "retryScope": "never", "rules": [],
+          "keyType": "core", "owner": "{{owner}}", "source": [], "wave": "M1"}]}
+        """);
 
     /// <summary>The repository's <c>content/</c>, read exactly as the content-hashes command reads it.</summary>
     private static ContentFile[] ReadRepositoryContent() => ContentDirectory.Read(Path.Combine(RepoRoot.Find(), "content"));

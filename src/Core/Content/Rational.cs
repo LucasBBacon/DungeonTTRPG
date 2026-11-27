@@ -94,6 +94,15 @@ public readonly record struct Rational(long P, long Q) : ICanonical
         return true;
     }
 
+    /// <summary>The reduced sum. Throws <see cref="OverflowException"/> if an intermediate product leaves <c>Int64</c>.</summary>
+    public Rational Add(Rational other) => Reduced(checked((P * other.Q) + (other.P * Q)), checked(Q * other.Q));
+
+    /// <summary>The reduced product. Throws <see cref="OverflowException"/> if an intermediate product leaves <c>Int64</c>.</summary>
+    public Rational Multiply(Rational other) => Reduced(checked(P * other.P), checked(Q * other.Q));
+
+    /// <summary>The greatest integer not above this value.</summary>
+    public long Floor() => IntMath.FloorDiv(P, Q);
+
     /// <summary>Writes a record of two <c>Int64</c> fields: 0 is <see cref="P"/>, 1 is <see cref="Q"/>.</summary>
     public void WriteCanonical(CanonicalWriter w)
     {
@@ -108,6 +117,13 @@ public readonly record struct Rational(long P, long Q) : ICanonical
     public override string ToString() =>
         Q == 1 ? P.ToString(System.Globalization.CultureInfo.InvariantCulture)
                : P.ToString(System.Globalization.CultureInfo.InvariantCulture) + "/" + Q.ToString(System.Globalization.CultureInfo.InvariantCulture);
+
+    // p/q with q > 0 in lowest terms. The divisions are exact, so floor division gives the quotient.
+    private static Rational Reduced(long p, long q)
+    {
+        var g = (long)Gcd(Magnitude(p), (ulong)q);
+        return new Rational(IntMath.FloorDiv(p, g), IntMath.FloorDiv(q, g));
+    }
 
     private static ulong Magnitude(long p) =>
         p == long.MinValue ? (ulong)long.MaxValue + 1 : p < 0 ? (ulong)(-p) : (ulong)p;
