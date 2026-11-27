@@ -235,9 +235,12 @@ public class EffectsKindTests
                 "speed", "strength", "dexterity", "constitution", "intelligence", "wisdom", "presence", "proficiency",
                 "fortitude", "reflex", "will", "abilityDifficulty", "athletics", "acrobatics", "stealth", "mechanics",
                 "perception", "intimidation", "leadership", "medicine", "lore", "passivePerception", "passiveStealth",
-                "armourClass", "initiative", "attack", "medicineRestBonus",
+                "armourClass", "initiative", "attack", "medicineRestBonus", "maxHp", "recovery",
             ],
             DerivedNumbers.Core.Select(n => n.Id).ToArray());
+        Assert.All(
+            DerivedNumbers.Core,
+            n => Assert.Equal(n.Id is "maxHp" or "recovery" ? (long?)1 : null, n.Floor));
         Assert.Equal<string>(
             [
                 "attackRoll", "attacksAgainst", "saveRoll", "fortitudeSave", "reflexSave", "willSave", "skillCheck",

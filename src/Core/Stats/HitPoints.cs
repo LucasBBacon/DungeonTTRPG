@@ -1,3 +1,5 @@
+using Dungeon.Core.Effects;
+
 namespace Dungeon.Core.Stats;
 
 /// <summary>
@@ -26,4 +28,30 @@ public static class DeathNumbers
 
     /// <summary><c>recovery.perLevel</c> (DH 8): Recovery = 4 + 2 × level + Con, minimum 1.</summary>
     public const int RecoveryPerLevel = 2;
+}
+
+/// <summary>
+/// A unit's HP numbers as fold queries (M1-09 plan call 4): the maximum and Recovery are rows of the derived-number
+/// table (<c>docs/effects-vocabulary.md</c> 5.3), so effects on Constitution flow into both. Nothing here is stored.
+/// </summary>
+public static class HitPoints
+{
+    /// <summary>The derived-number id of the maximum HP.</summary>
+    public const string MaxHpId = "maxHp";
+
+    /// <summary>The derived-number id of Recovery.</summary>
+    public const string RecoveryId = "recovery";
+
+    /// <summary>
+    /// <paramref name="unit"/>'s maximum HP (DH 7.1): with a tier, 11 + level × max(1, tier + folded Constitution);
+    /// with <see cref="HpTier.Table"/>, its table HP; then its effects; at least 1.
+    /// </summary>
+    public static long Max(RulesContext rules, GameState s, UnitId unit) => Effects.Effects.Number(rules, s, unit, MaxHpId);
+
+    /// <summary>
+    /// <paramref name="unit"/>'s Recovery (DH 8): 4 + 2 × level + folded Constitution, then its effects; at least 1.
+    /// It reads no HP tier.
+    /// </summary>
+    public static long Recovery(RulesContext rules, GameState s, UnitId unit) =>
+        Effects.Effects.Number(rules, s, unit, RecoveryId);
 }

@@ -27,7 +27,8 @@ public static class Effects
     /// <c>add</c>, plus the best condition bonus and the worst condition penalty (CO 6.7).
     /// <see cref="NumberRule.AbilityScore"/> adds the best bonus across all sources, caps that, then adds the worst
     /// penalty across all sources (SM 5.1). <see cref="NumberRule.Speed"/> then halves once, rounding down, if any
-    /// <c>halve</c> is active, is 0 if any <c>zero</c> is active, and is never below 0. Throws
+    /// <c>halve</c> is active, is 0 if any <c>zero</c> is active, and is never below 0. A number with a
+    /// <see cref="DerivedNumber.Floor"/> is then never below it. Throws
     /// <see cref="ArgumentException"/> for an unknown number, unit or effect definition, and
     /// <see cref="InvalidOperationException"/> naming the path if the number's base reads itself through other bases.
     /// </summary>
@@ -91,19 +92,23 @@ public static class Effects
             }
         }
 
+        long value;
         if (number.Rule == NumberRule.AbilityScore)
         {
             long raised = numberBase + bonus;
-            return (number.Cap is { } cap ? Math.Min(raised, cap) : raised) + penalty;
+            value = (number.Cap is { } cap ? Math.Min(raised, cap) : raised) + penalty;
         }
-
-        long value = numberBase + stackSum + conditionBonus + conditionPenalty;
-        if (number.Rule == NumberRule.Speed)
+        else
         {
-            value = zero ? 0 : Math.Max(0, halve ? IntMath.FloorDiv(value, 2) : value);
+            value = numberBase + stackSum + conditionBonus + conditionPenalty;
+            if (number.Rule == NumberRule.Speed)
+            {
+                value = zero ? 0 : Math.Max(0, halve ? IntMath.FloorDiv(value, 2) : value);
+            }
         }
 
-        return value;
+        // The floor binds after the rule's whole result, cap included (M1-09 plan call 5).
+        return number.Floor is { } floor ? Math.Max(value, floor) : value;
     }
 
     /// <summary>

@@ -57,7 +57,8 @@ public sealed class RulesContext
     /// <see cref="NumberRule.Speed"/>, a <c>rollMode</c> target names no roll target, a <c>flag</c> target is not one of
     /// <see cref="Flags.Targets"/> or its flag names no registered flag, a trigger's <c>on</c> names no event, or an
     /// action names no registered hook. Throws <see cref="ArgumentException"/> if a registry repeats an id, or a derived
-    /// number has no base or has a cap but is not an <see cref="NumberRule.AbilityScore"/> number.
+    /// number has no base, has a cap but is not an <see cref="NumberRule.AbilityScore"/> number, or has a floor but is an
+    /// <see cref="NumberRule.AbilityScore"/> or <see cref="NumberRule.Speed"/> number.
     /// </summary>
     public static RulesContext Create(
         ContentSet content,
@@ -202,6 +203,11 @@ public sealed class RulesContext
                 ? n
                 : throw new ArgumentException(
                     $"Derived number \"{n.Id}\" has a cap, but only an {nameof(NumberRule.AbilityScore)} number may have one.",
+                    nameof(numbers)))
+            .Select(n => n.Floor is null || n.Rule == NumberRule.Stack
+                ? n
+                : throw new ArgumentException(
+                    $"Derived number \"{n.Id}\" has a floor, but an {n.Rule} number may not have one.",
                     nameof(numbers)))
             .OrderBy(n => n.Id, StringComparer.Ordinal)
             .ToImmutableArray();

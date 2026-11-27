@@ -120,6 +120,33 @@ public class EffectFoldTests
         Assert.Contains("test.capped", ex.Message, StringComparison.Ordinal);
     }
 
+    // M1-09 plan call 5: the floor binds after the rule's whole result (Recovery "minimum 1", DH 8).
+    [Fact]
+    public void A_floor_binds_after_every_modifier()
+    {
+        var rules = RulesContext.Create(
+            LoadEffects(
+                Def("g.minus5", "gear", Add("test.floored", -5)),
+                Def("g.plus3", "gear", Add("test.floored", 3))),
+            [new DerivedNumber("test.floored", NumberRule.Stack, 2, null, 1)]);
+        var s = Start();
+        Assert.Equal(2, Effects.Number(rules, s, Hero, "test.floored"));
+        Assert.Equal(1, Effects.Number(rules, Effects.Apply(s, "g.minus5", Hero, new EffectSource(Hero)), Hero, "test.floored"));
+        Assert.Equal(5, Effects.Number(rules, Effects.Apply(s, "g.plus3", Hero, new EffectSource(Hero)), Hero, "test.floored"));
+        Assert.Equal(1L, new DerivedNumber("test.f", NumberRule.Stack, a => 0, null, 1).Floor);
+    }
+
+    // M1-09 plan call 5: SM 12 leaves ability floors open, and speed 0 must override everything (CO 6.7).
+    [Theory]
+    [InlineData(NumberRule.AbilityScore)]
+    [InlineData(NumberRule.Speed)]
+    public void A_floor_on_an_ability_score_or_speed_number_is_rejected(NumberRule rule)
+    {
+        var ex = Assert.Throws<ArgumentException>(() => RulesContext.Create(
+            LoadEffects(), [new DerivedNumber("test.floored", rule, 10, null, 1)]));
+        Assert.Contains("test.floored", ex.Message, StringComparison.Ordinal);
+    }
+
     [Fact]
     public void A_derived_number_with_no_id_or_no_base_is_rejected()
     {

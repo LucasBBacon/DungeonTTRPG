@@ -61,15 +61,18 @@ public sealed class NumberBaseArgs
 }
 
 /// <summary>
-/// A derived number effects can change: its id (a modifier's <c>target</c>), its fold rule, its base per unit, and a
-/// cap. Only an <see cref="NumberRule.AbilityScore"/> number may have a cap (SM 5.1, the only cap the designs give);
-/// <see cref="RulesContext"/> rejects a cap on any other rule. Numbers are integers (SM 3).
+/// A derived number effects can change: its id (a modifier's <c>target</c>), its fold rule, its base per unit, a cap
+/// and a floor. Only an <see cref="NumberRule.AbilityScore"/> number may have a cap (SM 5.1, the only cap the designs
+/// give); <see cref="RulesContext"/> rejects a cap on any other rule. The floor binds after the rule's whole result,
+/// cap included: the value is max(result, floor) (M1-09 plan call 5; Recovery "minimum 1", DH 8). The context rejects a
+/// floor on an <see cref="NumberRule.AbilityScore"/> number (SM 12 leaves ability floors open) and on a
+/// <see cref="NumberRule.Speed"/> number (speed 0 overrides everything, CO 6.7). Numbers are integers (SM 3).
 /// </summary>
-public sealed record DerivedNumber(string Id, NumberRule Rule, NumberBase Base, long? Cap)
+public sealed record DerivedNumber(string Id, NumberRule Rule, NumberBase Base, long? Cap, long? Floor = null)
 {
     /// <summary>A number whose base is the same constant for every unit.</summary>
-    public DerivedNumber(string id, NumberRule rule, long constantBase, long? cap)
-        : this(id, rule, _ => constantBase, cap)
+    public DerivedNumber(string id, NumberRule rule, long constantBase, long? cap, long? floor = null)
+        : this(id, rule, _ => constantBase, cap, floor)
     {
     }
 }

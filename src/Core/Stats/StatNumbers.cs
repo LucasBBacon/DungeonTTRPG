@@ -13,7 +13,7 @@ public static class StatNumbers
 {
     private const string Proficiency = "proficiency";
 
-    /// <summary>The rows: six abilities, proficiency, three saves, ability difficulty, nine skills, two passives, AC, initiative, attack, Medicine rest bonus.</summary>
+    /// <summary>The rows: six abilities, proficiency, three saves, ability difficulty, nine skills, two passives, AC, initiative, attack, Medicine rest bonus, max HP, Recovery.</summary>
     public static ImmutableArray<DerivedNumber> Rows { get; } = BuildRows();
 
     /// <summary>The roll targets: <c>saveRoll</c>, one per save, <c>skillCheck</c>, one per skill.</summary>
@@ -76,6 +76,28 @@ public static class StatNumbers
                 ? a.Number(StatIds.Number(Ability.Wisdom)) + a.Number(Proficiency)
                 : 0,
             null));
+
+        // DH 7.1: 11 + level × max(1, classHp + Con) with a tier, the table HP without; floor 1 (plan call 4).
+        rows.Add(new DerivedNumber(
+            HitPoints.MaxHpId,
+            NumberRule.Stack,
+            a => a.Unit.Stats.HpTier == HpTier.Table
+                ? a.Unit.Stats.TableHp
+                : DeathNumbers.AdventurerBonus
+                    + (a.Unit.Stats.Level
+                        * Math.Max(1, (int)a.Unit.Stats.HpTier + a.Number(StatIds.Number(Ability.Constitution)))),
+            null,
+            1));
+
+        // DH 8: 4 + 2 × level + Con, minimum 1, for every unit; it reads no HP tier.
+        rows.Add(new DerivedNumber(
+            HitPoints.RecoveryId,
+            NumberRule.Stack,
+            a => DeathNumbers.RecoveryBase
+                + (DeathNumbers.RecoveryPerLevel * a.Unit.Stats.Level)
+                + a.Number(StatIds.Number(Ability.Constitution)),
+            null,
+            1));
         return rows.ToImmutable();
     }
 
