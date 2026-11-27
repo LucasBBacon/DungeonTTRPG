@@ -82,10 +82,19 @@ internal static class ContentJson
         where T : class =>
         value ?? throw Missing(file, field);
 
-    /// <summary>A required rules string, which must be ASCII (SV 4.6).</summary>
+    /// <summary>
+    /// A required rules string, which must be non-empty ASCII (SV 4.6). An empty string is a blanked
+    /// field, as missing as an absent one (MAIN 6.5). Optional fields and list items go through here
+    /// too, so a present value is never empty.
+    /// </summary>
     public static string RuleString(ContentFile file, string field, string? s)
     {
         string value = Need(file, field, s);
+        if (value.Length == 0)
+        {
+            throw new ContentLoadException(file.Name, field, "the value is empty.");
+        }
+
         for (int i = 0; i < value.Length; i++)
         {
             if (value[i] > '\u007F')

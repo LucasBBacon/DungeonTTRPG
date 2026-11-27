@@ -67,6 +67,30 @@ public class ContentLoaderTests
         Assert.Equal("$.checks[0].owner", ex.Field);
     }
 
+    // A blanked required field is as missing as an absent one (MAIN 6.5).
+    [Fact]
+    public void An_empty_required_rule_string_is_rejected()
+    {
+        var ex = LoadFails(Checks(Check("V19.ClassDeclared", owner: "\"\"")));
+        Assert.Equal(ChecksFile, ex.File);
+        Assert.Equal("$.checks[0].owner", ex.Field);
+    }
+
+    [Fact]
+    public void An_empty_optional_rule_string_is_rejected()
+    {
+        var ex = LoadFails(Checks(Check("V19.ClassDeclared", extra: ", \"point\": \"\"")));
+        Assert.Equal("$.checks[0].point", ex.Field);
+    }
+
+    [Fact]
+    public void An_empty_list_item_is_rejected()
+    {
+        var ex = LoadFails(Reports(Report("HealerGap", keys: "[\"class\", \"\"]")));
+        Assert.Equal("registry/reports.json", ex.File);
+        Assert.Equal("$.reports[0].keys[1]", ex.Field);
+    }
+
     [Fact]
     public void An_unknown_property_is_rejected()
     {
@@ -347,10 +371,11 @@ public class ContentLoaderTests
         string threshold = "\"3/4\"",
         string instrument = "S",
         string thresholdStatus = "illustr",
-        string sided = "one") =>
+        string sided = "one",
+        string keys = "[\"class\"]") =>
         "{" + string.Join(", ",
             $"\"id\": \"{id}\"",
-            "\"keys\": [\"class\"]",
+            $"\"keys\": {keys}",
             "\"owner\": \"the lead\"",
             "\"definition\": \"healer gap\"",
             "\"unit\": \"percent\"",
