@@ -32,7 +32,7 @@ public sealed class CheckKind : ContentKind
                 file.Name,
                 RegistryIds.Check(file, Member(at, "id"), c.Id),
                 RuleString(file, Member(at, "owner"), c.Owner),
-                RuleString(file, Member(at, "phase"), c.Phase),
+                ParseLowerEnum<Phase>(file, Member(at, "phase"), c.Phase),
                 OptionalRuleString(file, Member(at, "point"), c.Point),
                 RuleStrings(file, Member(at, "deps"), c.Deps),
                 RuleStrings(file, Member(at, "uses"), c.Uses),

@@ -49,6 +49,16 @@ public class ContentLoaderTests
         Assert.Equal("$.checks[0].budgetMs", ex.Field);
     }
 
+    [Theory]
+    [InlineData("\"x\"")]
+    [InlineData("\"S\"")]
+    public void An_unknown_phase_names_the_phase_field(string phase)
+    {
+        var ex = LoadFails(Checks(Check("V19.ClassDeclared", phase: phase)));
+        Assert.Equal(ChecksFile, ex.File);
+        Assert.Equal("$.checks[0].phase", ex.Field);
+    }
+
     [Fact]
     public void A_non_ascii_rule_string_is_rejected()
     {

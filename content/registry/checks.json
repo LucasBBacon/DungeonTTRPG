@@ -1,1 +1,26 @@
-{"checks": []}
+{
+  "checks": [
+    {
+      "id": "content.MAIN65.Load",
+      "owner": "MAIN",
+      "phase": "s",
+      "deps": [],
+      "uses": [],
+      "class": "build",
+      "action": "fail the build",
+      "wave": "M1",
+      "ciTier": "pr"
+    },
+    {
+      "id": "V19.ClassDeclared",
+      "owner": "the lead",
+      "phase": "s",
+      "deps": [],
+      "uses": [],
+      "class": "build",
+      "action": "fail the build",
+      "wave": "M1",
+      "ciTier": "pr"
+    }
+  ]
+}
