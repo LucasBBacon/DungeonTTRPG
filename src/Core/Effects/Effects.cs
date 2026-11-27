@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Dungeon.Core.Content;
 
@@ -21,17 +22,33 @@ public static class Effects
 
     /// <summary>
     /// The value of the derived number <paramref name="numberId"/> for <paramref name="unit"/> (<c>docs/effects-vocabulary.md</c>
-    /// sections 4 and 5). <see cref="NumberRule.Stack"/> and <see cref="NumberRule.Speed"/> add to the base the sum of
-    /// every non-condition <c>add</c>, plus the best condition bonus and the worst condition penalty (CO 6.7).
-    /// <see cref="NumberRule.AbilityScore"/> adds the best bonus and the worst penalty across all sources (SM 5.1).
-    /// <see cref="NumberRule.Speed"/> then halves once, rounding down, if any <c>halve</c> is active, is 0 if any
-    /// <c>zero</c> is active, and is never below 0. A cap applies last. Throws <see cref="ArgumentException"/> for an
-    /// unknown number, unit or effect definition.
+    /// sections 4 and 5), from the number's base for that unit (<see cref="DerivedNumber.Base"/>).
+    /// <see cref="NumberRule.Stack"/> and <see cref="NumberRule.Speed"/> add to the base the sum of every non-condition
+    /// <c>add</c>, plus the best condition bonus and the worst condition penalty (CO 6.7).
+    /// <see cref="NumberRule.AbilityScore"/> adds the best bonus across all sources, caps that, then adds the worst
+    /// penalty across all sources (SM 5.1). <see cref="NumberRule.Speed"/> then halves once, rounding down, if any
+    /// <c>halve</c> is active, is 0 if any <c>zero</c> is active, and is never below 0. Throws
+    /// <see cref="ArgumentException"/> for an unknown number, unit or effect definition, and
+    /// <see cref="InvalidOperationException"/> naming the path if the number's base reads itself through other bases.
     /// </summary>
-    public static long Number(RulesContext rules, GameState s, UnitId unit, string numberId)
+    public static long Number(RulesContext rules, GameState s, UnitId unit, string numberId) =>
+        Fold(rules, s, unit, numberId, ImmutableArray<string>.Empty);
+
+    // Number, with the ids of the numbers whose bases are being computed, outermost first, to catch a cycle.
+    internal static long Fold(RulesContext rules, GameState s, UnitId unit, string numberId, ImmutableArray<string> path)
     {
         ArgumentNullException.ThrowIfNull(rules);
+        ArgumentNullException.ThrowIfNull(s);
         var number = rules.Number(numberId);
+        var holder = s.FindUnit(unit) ?? throw new ArgumentException($"Unit {unit.Value} is not in the state.", nameof(unit));
+        var inner = path.Add(number.Id);
+        if (path.Contains(number.Id, StringComparer.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"The bases of the derived numbers read each other in a cycle: {string.Join(" -> ", inner)}.");
+        }
+
+        long numberBase = number.Base(new NumberBaseArgs(rules, s, holder, inner));
         long stackSum = 0;
         long conditionBonus = 0;
         long conditionPenalty = 0;
@@ -74,16 +91,19 @@ public static class Effects
             }
         }
 
-        long value = number.Rule == NumberRule.AbilityScore
-            ? number.Base + bonus + penalty
-            : number.Base + stackSum + conditionBonus + conditionPenalty;
+        if (number.Rule == NumberRule.AbilityScore)
+        {
+            long raised = numberBase + bonus;
+            return (number.Cap is { } cap ? Math.Min(raised, cap) : raised) + penalty;
+        }
 
+        long value = numberBase + stackSum + conditionBonus + conditionPenalty;
         if (number.Rule == NumberRule.Speed)
         {
             value = zero ? 0 : Math.Max(0, halve ? IntMath.FloorDiv(value, 2) : value);
         }
 
-        return number.Cap is { } cap ? Math.Min(value, cap) : value;
+        return value;
     }
 
     /// <summary>

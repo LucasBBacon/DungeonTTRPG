@@ -227,7 +227,9 @@ public class EffectsKindTests
     [Fact]
     public void The_core_registries_hold_the_m1_07_rows()
     {
-        Assert.Equal<DerivedNumber>([new DerivedNumber("speed", NumberRule.Speed, 6, null)], DerivedNumbers.Core.ToArray());
+        var speed = Assert.Single(DerivedNumbers.Core);
+        Assert.Equal(("speed", NumberRule.Speed, (long?)null), (speed.Id, speed.Rule, speed.Cap));
+        Assert.Equal(6, Dungeon.Core.Effects.Effects.Number(RulesContext.Empty, Fixtures.RingState(), Fixtures.Hero, "speed"));
         Assert.Equal<string>(["attackRoll", "attacksAgainst"], RollTargets.Core.ToArray());
         Assert.Equal<string>(["unitMoved"], RuleEvents.Core.Select(e => e.Id).ToArray());
         Assert.Equal(typeof(UnitMoved), RuleEvents.Core[0].EventType);

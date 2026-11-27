@@ -25,6 +25,12 @@
 
 **D-15, advantage netting: the 5E rule.** Any number of advantage sources give advantage, any number of disadvantage sources give disadvantage, and one of each cancels to a normal roll, whatever the counts (CO 6.7). Weapons 7.5 ("net them (one cancels one)") is amended to "fold them (conditions 6.7: any advantage and any disadvantage cancel)", and Overlap and Vex read the folded mode. Task 1 records this.
 
+> **Amended after the final review (2026-11-28, owner's call on PR #95).** Two plan calls changed. (1) The ability cap
+> binds the base plus the best bonus, and the worst penalty applies after it: min(base + bonus, cap) + penalty (SM 5.1),
+> not the cap last; only an `AbilityScore` number may have a cap. (2) `DerivedNumber.Base` is a per-unit `NumberBase`
+> that may read the unit's other derived numbers, with cycle detection; a constant constructor remains. See
+> `docs/effects-vocabulary.md` section 5. The formulas below are kept as written at planning time.
+
 ## Global Constraints
 
 - MAIN 6.4: modifiers "change a number or a flag"; triggers "react to a rule event"; "The rules engine raises events at fixed points … and asks all active effects to modify or respond. New content should need new data, and only rarely new code."

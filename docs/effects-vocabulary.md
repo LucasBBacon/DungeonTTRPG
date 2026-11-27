@@ -100,18 +100,28 @@ Worked examples, all on `speed`:
 ## 5. Derived numbers
 
 A derived number is a row in a code table (`DerivedNumbers.Core` in `src/Core/Effects/Registries.cs`): an id, a
-**number rule**, a base value and an optional cap. All arithmetic is integer, rounding down (SM 3).
+**number rule**, a **base** per unit and, for an `AbilityScore` number only, a cap. All arithmetic is integer,
+rounding down (SM 3).
 
-The cap, when a number has one, applies **last, whatever the rule**: after the bonuses and the penalties, and for
-`Speed` after the halving and `zero`. A `Stack` number with base 10 and cap 12 is 12 with gear +2 and gear +2
-(14, capped), and 11 with a condition -3 as well (min(10 + 4 - 3, 12)).
+The base is a pure function of the unit (`NumberBase` in `Registries.cs`), not one constant: nothing derived is
+stored (SM 9), and most SM 6 numbers start from other numbers. A base reads what the unit stores and may read the
+same unit's other derived numbers, already folded with their effects (max HP reads Constitution; a save reads two
+abilities). A number whose base is the same for every unit, such as `speed`, uses a constant. A base that reads
+itself, directly or through other bases, throws with the path (`a -> b -> a`); it is a defect in the table, caught by
+tests.
+
+Only an `AbilityScore` number may have a cap: the ability +5 is the only cap the designs give (SM 5.1, 5.5). The
+registry rejects a cap on a `Stack` or `Speed` number at startup. The cap binds the base plus the bonus, and the
+penalty applies after it (SM 5.1: "The hard cap is +5 after all bonuses"; "A bonus and a penalty both apply"). With
+base 5, a +2 bonus and a -2 penalty, the result is min(5 + 2, 5) - 2 = 3: the bonus at the cap is wasted, and the
+penalty shows.
 
 ### 5.1 Number rules
 
 | Rule | Fold |
 |---|---|
 | `Stack` | The source-kind regime of section 4, added to the base. Most numbers (SM 9: "Other derived numbers stack normally unless a rule above says otherwise"). |
-| `AbilityScore` | Overrides the kind regime for this number: **across all sources**, the highest bonus plus the worst penalty, then the cap (SM 5.1). A trait +2 and a gear +1 give +2; penalties -1 and -2 give -2. With base 4, a +3 bonus and cap 5, the result is 5, not 7. |
+| `AbilityScore` | Overrides the kind regime for this number: **across all sources**, the base plus the highest bonus, capped, plus the worst penalty: min(base + bonus, cap) + penalty (SM 5.1). A trait +2 and a gear +1 give +2; penalties -1 and -2 give -2. With base 4, a +3 bonus and cap 5, the result is 5, not 7; add a -1 penalty and it is 4. No floor: SM 12 leaves open how far an effect can push an ability below -1. |
 | `Speed` | The `Stack` fold for the flat changes, then the speed fold below. |
 
 ### 5.2 The speed fold (CO 6.7)
@@ -128,7 +138,9 @@ The cap, when a number has one, applies **last, whatever the rule**: after the b
 |---|---|---|---|---|
 | `speed` | `Speed` | 6 | none | SM 6 |
 
-M1-08 adds the six abilities (`AbilityScore`, capped) and the other SM 6 numbers.
+M1-08 adds the six abilities (`AbilityScore`, cap 5, base the unit's stored modifier) and the other SM 6 numbers,
+whose bases read the abilities and proficiency through `NumberBaseArgs.Number`. The floors some of them have
+(Recovery minimum 1, DH 612) are M1-08's and M1-09's to shape; this step adds no floor field.
 
 ### 5.4 Roll mode and D-15
 
@@ -249,7 +261,7 @@ These keys and ideas are named now so content does not invent its own, and are r
 
 | Step | Vocabulary rows it uses |
 |---|---|
-| M1-08 Stats and contests | `add` on new numbers; the `AbilityScore` rule and its cap for the six abilities; the `Stack` rule for the other SM 6 numbers; `rollMode` on `attackRoll` and `attacksAgainst`, folded by D-15; new roll targets for saves and skills. |
+| M1-08 Stats and contests | `add` on new numbers; the `AbilityScore` rule and its cap for the six abilities; the `Stack` rule for the other SM 6 numbers, with per-unit bases that read the abilities; `rollMode` on `attackRoll` and `attacksAgainst`, folded by D-15; new roll targets for saves and skills. |
 | M1-09 Damage and HP | `add` on HP numbers (max HP, Recovery); the reserved `diceBonus` becomes live; resistances and weaknesses as `flag` or new numbers. |
 | M1-10 Turns, lifecycle and death | New rule events (turn start, turn end, combat start and end); durations (section 8). |
 | M1-11 Abilities, reactions and areas | `ability`-kind effects; `applyEffect` actions; hooks for reactions; new events for ability use steps. |

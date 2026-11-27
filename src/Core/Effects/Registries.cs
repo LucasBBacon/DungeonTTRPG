@@ -13,7 +13,8 @@ public enum NumberRule
     Stack,
 
     /// <summary>
-    /// The ability rule, whatever the source kind: the highest bonus plus the worst penalty, then the cap (SM 5.1).
+    /// The ability rule, whatever the source kind: the base plus the highest bonus, capped, plus the worst penalty
+    /// (SM 5.1: "+5 after all bonuses"; "a bonus and a penalty both apply").
     /// </summary>
     AbilityScore,
 
@@ -25,10 +26,53 @@ public enum NumberRule
 }
 
 /// <summary>
-/// A derived number effects can change: its id (a modifier's <c>target</c>), its fold rule, its base value and an
-/// optional cap applied last. Numbers are integers (SM 3).
+/// A derived number's base for one unit, before the unit's effects fold in. Nothing derived is stored (SM 9): the base
+/// reads what the unit stores and, through <see cref="NumberBaseArgs.Number"/>, other derived numbers of the same unit
+/// after their effects (max HP reads Constitution, a save reads two abilities). It must be pure and make no draws.
 /// </summary>
-public sealed record DerivedNumber(string Id, NumberRule Rule, long Base, long? Cap);
+public delegate long NumberBase(NumberBaseArgs args);
+
+/// <summary>What a <see cref="NumberBase"/> reads: the state, the unit, and the unit's other derived numbers.</summary>
+public sealed class NumberBaseArgs
+{
+    private readonly RulesContext _rules;
+    private readonly ImmutableArray<string> _path;
+
+    internal NumberBaseArgs(RulesContext rules, GameState state, Unit unit, ImmutableArray<string> path)
+    {
+        _rules = rules;
+        _path = path;
+        State = state;
+        Unit = unit;
+    }
+
+    /// <summary>The state the number is folded on.</summary>
+    public GameState State { get; }
+
+    /// <summary>The unit whose number it is.</summary>
+    public Unit Unit { get; }
+
+    /// <summary>
+    /// The unit's derived number <paramref name="numberId"/>, folded with its effects, as
+    /// <see cref="Effects.Number"/> gives it. Throws <see cref="ArgumentException"/> for an unknown number, and
+    /// <see cref="InvalidOperationException"/> naming the path if the read closes a cycle of bases.
+    /// </summary>
+    public long Number(string numberId) => Effects.Fold(_rules, State, Unit.Id, numberId, _path);
+}
+
+/// <summary>
+/// A derived number effects can change: its id (a modifier's <c>target</c>), its fold rule, its base per unit, and a
+/// cap. Only an <see cref="NumberRule.AbilityScore"/> number may have a cap (SM 5.1, the only cap the designs give);
+/// <see cref="RulesContext"/> rejects a cap on any other rule. Numbers are integers (SM 3).
+/// </summary>
+public sealed record DerivedNumber(string Id, NumberRule Rule, NumberBase Base, long? Cap)
+{
+    /// <summary>A number whose base is the same constant for every unit.</summary>
+    public DerivedNumber(string id, NumberRule rule, long constantBase, long? cap)
+        : this(id, rule, _ => constantBase, cap)
+    {
+    }
+}
 
 /// <summary>The production derived-number table (plan call 5). Later steps add rows; tests pass their own tables.</summary>
 public static class DerivedNumbers

@@ -56,7 +56,8 @@ public sealed class RulesContext
     /// <c>zero</c> target names no derived number, a <c>halve</c> or <c>zero</c> targets a number whose rule is not
     /// <see cref="NumberRule.Speed"/>, a <c>rollMode</c> target names no roll target, a <c>flag</c> target is not one of
     /// <see cref="Flags.Targets"/> or its flag names no registered flag, a trigger's <c>on</c> names no event, or an
-    /// action names no registered hook. Throws <see cref="ArgumentException"/> if a registry repeats an id.
+    /// action names no registered hook. Throws <see cref="ArgumentException"/> if a registry repeats an id, or a derived
+    /// number has no base or has a cap but is not an <see cref="NumberRule.AbilityScore"/> number.
     /// </summary>
     public static RulesContext Create(
         ContentSet content,
@@ -194,6 +195,14 @@ public sealed class RulesContext
     {
         var sorted = numbers
             .Select(n => n ?? throw new ArgumentException("A derived number is null.", nameof(numbers)))
+            .Select(n => n.Base is not null && n.Id is not null
+                ? n
+                : throw new ArgumentException("A derived number has no id or no base.", nameof(numbers)))
+            .Select(n => n.Cap is null || n.Rule == NumberRule.AbilityScore
+                ? n
+                : throw new ArgumentException(
+                    $"Derived number \"{n.Id}\" has a cap, but only an {nameof(NumberRule.AbilityScore)} number may have one.",
+                    nameof(numbers)))
             .OrderBy(n => n.Id, StringComparer.Ordinal)
             .ToImmutableArray();
         for (int i = 1; i < sorted.Length; i++)

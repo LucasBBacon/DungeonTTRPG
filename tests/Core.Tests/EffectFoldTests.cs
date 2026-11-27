@@ -21,12 +21,15 @@ public class EffectFoldTests
 
     private static readonly UnitId Ally = new(2);
 
-    // The fixture numbers: a stacking number, a capped stacking number and a capped ability score, plus the core speed.
+    // The fixture numbers: a stacking number, two capped ability scores (base 4 and base 5), a number whose base is
+    // per unit, and a number whose base reads another number, plus the core speed.
     private static readonly ImmutableArray<DerivedNumber> Numbers =
         [
             new DerivedNumber("test.stack", NumberRule.Stack, 10, null),
-            new DerivedNumber("test.capped", NumberRule.Stack, 10, 12),
             new DerivedNumber("test.ability", NumberRule.AbilityScore, 4, 5),
+            new DerivedNumber("test.ability5", NumberRule.AbilityScore, 5, 5),
+            new DerivedNumber("test.perUnit", NumberRule.Stack, a => a.Unit.Id.Value * 10, null),
+            new DerivedNumber("test.reads", NumberRule.Stack, a => a.Number("test.ability") + 10, null),
             .. DerivedNumbers.Core,
         ];
 
@@ -58,9 +61,9 @@ public class EffectFoldTests
             Def("adv2", "ability", """{"target": "attackRoll", "rollMode": "advantage"}"""),
             Def("dis", "condition", """{"target": "attackRoll", "rollMode": "disadvantage"}"""),
             Def("hidden", "ability", """{"target": "unit", "flag": "hidden"}"""),
-            Def("cap.gear.plus2", "gear", Add("test.capped", 2)),
-            Def("cap.gear.plus2b", "gear", Add("test.capped", 2)),
-            Def("cap.cond.minus3", "condition", Add("test.capped", -3))),
+            Def("ab5.trait.plus2", "trait", Add("test.ability5", 2)),
+            Def("ab5.gear.minus2", "gear", Add("test.ability5", -2)),
+            Def("reads.gear.plus1", "gear", Add("test.reads", 1))),
         Numbers,
         flags: Flags);
 
@@ -86,23 +89,84 @@ public class EffectFoldTests
 
     // --- Review Focus 2: the ability rule and the cap ---
 
+    // SM 5.1: the cap binds the base plus the best bonus ("+5 after all bonuses"); the worst penalty applies after it
+    // ("a bonus and a penalty both apply"): min(base + bonus, cap) + penalty.
     [Theory]
-    [InlineData(3, "ab.trait.plus2", "ab.gear.plus1", "ab.gear.minus3")]   // highest bonus only (+2), not +3
+    [InlineData(2, "ab.trait.plus2", "ab.gear.plus1", "ab.gear.minus3")]   // highest bonus only (+2): min(4 + 2, 5) - 3
     [InlineData(2, "ab.cond.minus1", "ab.gear.minus2")]                    // worst penalty only (-2), not -3
     [InlineData(2, "ab.trait.minus1", "ab.gear.minus2")]                   // across stacking kinds too
     [InlineData(5, "ab.trait.plus3")]                                      // 4 + 3 = 7, capped at 5
-    [InlineData(5, "ab.trait.plus3", "ab.cond.minus1")]                    // cap after both: min(4 + 3 - 1, 5)
+    [InlineData(4, "ab.trait.plus3", "ab.cond.minus1")]                    // the penalty after the cap: min(7, 5) - 1
     [InlineData(4)]
-    public void An_ability_score_takes_the_best_bonus_and_worst_penalty_then_the_cap(long expected, params string[] effects) =>
+    public void An_ability_score_caps_the_best_bonus_then_takes_the_worst_penalty(long expected, params string[] effects) =>
         Assert.Equal(expected, Effects.Number(Rules, With(effects), Hero, "test.ability"));
 
-    // The cap applies last for every number rule, after the bonuses and the penalties.
     [Theory]
-    [InlineData(12, "cap.gear.plus2", "cap.gear.plus2b")]                     // 10 + 4 = 14, capped at 12
-    [InlineData(11, "cap.gear.plus2", "cap.gear.plus2b", "cap.cond.minus3")]  // cap after the penalty: min(10 + 4 - 3, 12)
-    [InlineData(10)]
-    public void A_capped_stack_number_applies_the_cap_last(long expected, params string[] effects) =>
-        Assert.Equal(expected, Effects.Number(Rules, With(effects), Hero, "test.capped"));
+    [InlineData(3, "ab5.trait.plus2", "ab5.gear.minus2")]                 // min(5 + 2, 5) - 2: the penalty shows
+    [InlineData(5, "ab5.trait.plus2")]                                    // a bonus at the cap is wasted
+    [InlineData(3, "ab5.gear.minus2")]
+    [InlineData(5)]
+    public void An_ability_at_the_cap_still_loses_its_penalty(long expected, params string[] effects) =>
+        Assert.Equal(expected, Effects.Number(Rules, With(effects), Hero, "test.ability5"));
+
+    // Only the ability rule has a spec'd cap (SM 5.1); a cap on any other rule is a registry defect, caught at startup.
+    [Theory]
+    [InlineData(NumberRule.Stack)]
+    [InlineData(NumberRule.Speed)]
+    public void A_cap_on_a_number_that_is_not_an_ability_is_rejected(NumberRule rule)
+    {
+        var ex = Assert.Throws<ArgumentException>(() => RulesContext.Create(
+            LoadEffects(), [new DerivedNumber("test.capped", rule, 10, 12)]));
+        Assert.Contains("test.capped", ex.Message, StringComparison.Ordinal);
+    }
+
+    // --- Per-unit bases ---
+
+    [Fact]
+    public void A_base_can_differ_per_unit() =>
+        Assert.Equal(
+            (10L, 20L),
+            (Effects.Number(Rules, Start(), Hero, "test.perUnit"), Effects.Number(Rules, Start(), Ally, "test.perUnit")));
+
+    [Theory]
+    [InlineData(14)]                                                          // 4 + 10
+    [InlineData(15, "ab.trait.plus2")]                                        // the read number's effects and cap count: 5 + 10
+    [InlineData(16, "ab.trait.plus2", "reads.gear.plus1")]                    // and the number's own effects add on top
+    [InlineData(15, "ab.trait.plus3", "ab.cond.minus1", "reads.gear.plus1")]  // the read number after its fold: 4 + 10 + 1
+    public void A_base_reads_another_number_after_its_effects(long expected, params string[] effects) =>
+        Assert.Equal(expected, Effects.Number(Rules, With(effects), Hero, "test.reads"));
+
+    [Fact]
+    public void A_base_reads_the_numbers_of_its_own_unit()
+    {
+        var s = Effects.Apply(Start(), "ab.trait.plus2", Ally, new EffectSource(Ally));
+        Assert.Equal((14L, 15L), (Effects.Number(Rules, s, Hero, "test.reads"), Effects.Number(Rules, s, Ally, "test.reads")));
+    }
+
+    [Theory]
+    [InlineData("cycle.a", "cycle.a -> cycle.b -> cycle.a")]
+    [InlineData("cycle.b", "cycle.b -> cycle.a -> cycle.b")]
+    [InlineData("cycle.self", "cycle.self -> cycle.self")]
+    public void A_base_that_reads_itself_through_a_cycle_throws_with_the_path(string number, string path)
+    {
+        var rules = RulesContext.Create(
+            LoadEffects(),
+            [
+                new DerivedNumber("cycle.a", NumberRule.Stack, a => a.Number("cycle.b"), null),
+                new DerivedNumber("cycle.b", NumberRule.Stack, a => a.Number("cycle.a"), null),
+                new DerivedNumber("cycle.self", NumberRule.Stack, a => a.Number("cycle.self") + 1, null),
+            ]);
+        var ex = Assert.Throws<InvalidOperationException>(() => Effects.Number(rules, Start(), Hero, number));
+        Assert.Contains(path, ex.Message, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void A_base_that_reads_an_unknown_number_throws()
+    {
+        var rules = RulesContext.Create(
+            LoadEffects(), [new DerivedNumber("test.bad", NumberRule.Stack, a => a.Number("nope"), null)]);
+        Assert.Throws<ArgumentException>(() => Effects.Number(rules, Start(), Hero, "test.bad"));
+    }
 
     // --- Review Focus 3: speed ---
 
@@ -241,7 +305,7 @@ public class EffectFoldTests
     [Fact]
     public void The_empty_context_has_the_core_tables_and_no_definitions()
     {
-        Assert.Equal(6, RulesContext.Empty.Number("speed").Base);
+        Assert.Equal(NumberRule.Speed, RulesContext.Empty.Number("speed").Rule);
         Assert.Equal(6, Effects.Number(RulesContext.Empty, Start(), Hero, "speed"));
         Assert.Throws<ArgumentException>(() => RulesContext.Empty.Definition("gear.plus2"));
         Assert.Throws<ArgumentException>(() => RulesContext.Empty.Number("test.stack"));
