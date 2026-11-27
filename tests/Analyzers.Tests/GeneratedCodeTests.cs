@@ -31,15 +31,38 @@ public class GeneratedCodeTests
         Assert.Equal(new[] { id }, Harness.Ids(d));
     }
 
+    public static TheoryData<string, string, string> BannedInGeneratedFileNames
+    {
+        get
+        {
+            var data = new TheoryData<string, string, string>();
+            foreach (var row in BannedInGeneratedCode)
+            {
+                foreach (var path in new[] { "src/Core/Handles.g.cs", "src/Core/Handles.designer.cs", "src/Core/Handles.generated.cs" })
+                {
+                    data.Add((string)row[0], (string)row[1], path);
+                }
+            }
+
+            return data;
+        }
+    }
+
+    [Theory]
+    [MemberData(nameof(BannedInGeneratedFileNames))]
+    public void Banned_construct_is_reported_in_a_generated_file_name(string id, string source, string path)
+    {
+        var d = Harness.Run(source, path);
+        Assert.Equal(new[] { id }, Harness.Ids(d));
+    }
+
     [Theory]
     [MemberData(nameof(BannedInGeneratedCode))]
-    public void Banned_construct_is_reported_in_a_generated_file_name(string id, string source)
+    public void Banned_construct_is_reported_in_a_type_marked_GeneratedCode(string id, string source)
     {
-        foreach (var path in new[] { "src/Core/Handles.g.cs", "src/Core/Handles.designer.cs", "src/Core/Handles.generated.cs" })
-        {
-            var d = Harness.Run(source, path);
-            Assert.Equal(new[] { id }, Harness.Ids(d));
-        }
+        var marked = "[System.CodeDom.Compiler.GeneratedCode(\"gen\", \"1\")]\n" + source;
+        var d = Harness.Run(marked, "src/Core/Handles.cs");
+        Assert.Equal(new[] { id }, Harness.Ids(d));
     }
 
     [Fact]
