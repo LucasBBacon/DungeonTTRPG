@@ -1013,7 +1013,15 @@ attack of the same Attack action, a Nick attack included.
     turn to 0; its speed is unchanged and it keeps its action and bonus
     action. Movement granted afterwards by Dash (whatever its action cost)
     or by Spurred is added as normal; forced movement is unaffected
-    (classes design 8.3, Bar the Way) **(change CL-6)**.
+    (classes design 8.3, Bar the Way) **(change CL-6)**. The stop is a
+    per-turn stopped marker on the mover, not "all movement used":
+    raising its speed later in the turn does not undo it, and movement
+    granted after the stop still adds. Dash adds granted movement equal
+    to the unit's current speed at the moment of the Dash, fixed then
+    **(agreed 2026-11-27, roadmap D-18; M1-10 rulings 2.2)**. A stopped
+    unit's movement left is the movement granted after the stop minus
+    the movement it uses after the stop **(lead's call, confirmed by the
+    client 2026-11-27; M1-10 rulings 8 item 6)**.
   - **Slip past:** where a feature makes a slip-past provoke (the
     `slipPast` trigger), it resolves after a successful slip-past check
     (ability model 7.2), before the step that moves the hostile through

@@ -1802,15 +1802,19 @@ Every floor-1 theme meets all of these:
   Kennel's staked pits with the Painted Hunt, the Stampede replacing the
   Painted Hunt at tier 3; the Wake's Open Grave Void), in at most 2
   rooms per floor at main-path index 3 or more, on floor 1's own bands.
-- **Floor-1 traps and locks (change TL-19; M2; traps and locks design
-  6.19, 7.2–7.4):** 1–2 traps, the first on the main path being the
-  `alwaysKnown`, labelled, noise-only **lesson trap** (Gaol keyring
+- **Floor-1 traps and locks (change TL-19; M2, except the F1 push stop,
+  which is M1 (M1-30); traps and locks design 6.19, 7.2–7.4):** 1–2
+  traps, the first on the main path being the `alwaysKnown`,
+  labelled, noise-only **lesson trap** (Gaol keyring
   tripwire, Kennel tin-can tripwire (pending TL-43, 8.4), Wake creaking
   board), which
   teaches each theme's lesson axis (f); no trap in main-path rooms 0–1
   and no damaging trap in rooms 0–2, as (d); no trap trigger on a patrol
   Circuit or within 6 of a fight host; pushes stop before F1 trigger
-  squares; trap conditions end when combat starts; detect DC ≤ F1
+  squares (M1, built by M1-30 with M1-13's stop-short check)
+  **(agreed 2026-11-27, roadmap D-19; M1-10 rulings 3.1)**; trap
+  conditions end when combat starts (M2, with the rest of the package);
+  detect DC ≤ F1
   Middling; damage ≤ 3, with one off-path device ≤ 4 (the Gaol's
   Clock-Weight); no hard control. Locks: Plain, plus at most 1
   consequence lock after room 2 (the Gaol's Crier, or the Wake's Viewing

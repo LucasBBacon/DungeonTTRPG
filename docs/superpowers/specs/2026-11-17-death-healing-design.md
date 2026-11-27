@@ -724,6 +724,19 @@ traps and locks Q2)**
   of combat that includes no hostile unit and is not noticed (one opening
   a door, say) starts nothing: its damage to a party unit is floored. This
   closes the free-damage loophole.
+- **Openers.** An ability use that starts a fight this way is an
+  **opener**; the unit that makes it is the **striker**.
+  - The opener is validated when it is declared, before the combat-start
+    step runs; a refused opener starts no fight and costs nothing
+    **(lead's call, confirmed by the client 2026-11-27; M1-10 rulings 8
+    item 10)**.
+  - Initiative is rolled in the combat-start step (20.5), so it comes
+    before the opener resolves. The opener then resolves before any turn
+    starts and is charged to the striker's round-1 turn: its action and
+    any once-per-round use it spent stay spent; its movement and bonus
+    action are kept; once-per-turn flags clear normally. At most one
+    opener per side **(agreed 2026-11-27, roadmap D-19; M1-10 rulings
+    4.1, 5)**.
 - **Undetected traps:** damage from a trap the party had not detected when
   it fired cannot take a party unit below 1 HP, **in or out of combat**. A
   trap that starts combat counts here. "Undetected" means an Unfound trap,
@@ -766,6 +779,17 @@ traps and locks Q2)**
   undetected-trap parts and other parts, the floor protects against the
   trap parts only. If the other parts alone would take the unit to 0, the
   event is not clamped; otherwise it is clamped so HP stays ≥ 1.
+  - **Open for the DH owner, before Bolstered is built (agreed
+    2026-11-27, roadmap D-17; M1-10 rulings 1.1).** Temporary HP is
+    Later (14), so these questions do not matter in M1. Before
+    Bolstered is built, the DH owner rules: (a) whether this check should be independent of
+    part order, since temporary HP absorbs per part in the order the
+    content lists the parts (conditions 9.3; 15.2), and that order can
+    then decide life or death; (b) whether the other-parts check counts
+    temporary HP (today it compares the other parts against HP alone);
+    (c) what the combat log shows for a hit that is absorbed and then
+    clamped (the total before the floor, the total after absorption, or
+    both with the absorbed amount).
 - **Detected traps in combat** (Found traps; change TL-8) are ordinary
   damage: lethal, and shown with a lethal tag on the move preview (17.6). Hidden information never kills,
   and a known trap is never a safe tool.
@@ -2055,6 +2079,12 @@ for tick batches, whose chain already ran where the damage landed.
   becomes false only after the whole combat-end procedure below has run
   (conditions 5.5). Every floor test (20.3 step 4), the band (17.3) and
   `medicineGetUpsThisFight` read this flag.
+- **Openers (10.4).** An opener is validated at declaration; a refused
+  opener starts no fight **(lead's call, confirmed by the client
+  2026-11-27; M1-10 rulings 8 item 10)**. Initiative is rolled in the
+  combat-start step. The opener resolves after the combat-start step and
+  before any turn starts, and is charged to the striker's round-1 turn
+  **(agreed 2026-11-27, roadmap D-19; M1-10 rulings 4.1)**.
 - **At combat start:** `medicineGetUpsThisFight` and
   `dropPreventionFiredThisFight` reset; carried bodies are placed (11.4).
   `medicineGetUpsThisFight` does not reset in the Sanctum under 11.2's

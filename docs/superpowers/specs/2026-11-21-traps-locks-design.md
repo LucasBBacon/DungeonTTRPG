@@ -494,7 +494,7 @@ are final.
 | 9 | Bear it, step over, walk-round default; universal spring rows; pressure slabs; Pole it; handles | M2 | lead's answer, BQ3; TL-12 to TL-14 |
 | 10 | Knowledge model M2: natives avoid triggers and trust areas; Once Bitten; mindless blunder; Found-only AI pushes | M2 | lead's answer, BQ4; TL-16 (enemies owner) |
 | 11 | Damage bounds: hideable traps ≤ 20%, devices and set pieces ≤ `CapRound`; traps inside EnvRound except self-caused | M2 | lead's call; TL-18 |
-| 12 | Floor-1 package: lesson trap first; nothing fight-adjacent; no push edges; conditions end at combat start | M1/M2 | lead's call; TL-19 |
+| 12 | Floor-1 package: lesson trap first; nothing fight-adjacent; no push edges; conditions end at combat start | M1/M2: pushes stop before F1 trigger squares in M1 (M1-30); trap conditions ending at combat start is M2 **(agreed 2026-11-27, roadmap D-19; M1-10 rulings 3.1)** | lead's call; TL-19 |
 | 13 | Locks: retryable force with a guarantee; Splinter from F2; consequence kinds; Keybearers; Wax Key; no lockpicks | M1–M3 | lead's answers, BQ5, BQ6, BQ8; TL-21 to TL-26 |
 | 14 | Wax Key at the basic vendor when no Mechanics member, merged with the gap card | M2 | **agreed, Q3**; TL-25 ⚑ |
 | 15 | Boxed lurker (the mimic) | M3 | lead's answer, BQ7; **agreed, Q2**; TL-28 ⚑ |
@@ -1381,8 +1381,14 @@ Botch (a hidden second rule).
      the `checks` stream;
   2. if it affected (damaged or conditioned) any member of an unaware
      group, combat starts with that group, and the spring *was* the
-     springing unit's surprise action. Other party units take surprise
-     actions only if their own ABL conditions hold. It never adds a
+     springing unit's surprise action. That surprise action is the
+     opener of DH 10.4, charged to the springing unit's round-1 turn: its
+     action is spent, its movement and bonus action are kept, and its
+     first turn neither resets nor refills what it spent **(agreed
+     2026-11-27, roadmap D-19; M1-10 rulings 4.1)**. Other party units
+     take surprise actions only if their own ABL conditions hold; in M1,
+     with a solo hero, that means none **(lead's call, confirmed by the
+     client 2026-11-27; M1-10 rulings 8 item 11)**. It never adds a
      round, and it never stacks with Ambush, read as **at most one
      surprise opener per side per combat** (encounter placement design
      6.8.7, 6.8.8; a reading recorded there for this owner);
@@ -2082,9 +2088,20 @@ change LE-10; M2).
   after the check)**.
 - **Pushes stop before F1 trigger squares** (the M1 rule kept on F1).
   This narrows C 11.3 and SH-15 on F1, keeps TR-29 true and reads RT-20
-  as "traps are devices, not terrain hazards".
+  as "traps are devices, not terrain hazards". This rule is M1 (M1-30)
+  **(agreed 2026-11-27, roadmap D-19; M1-10 rulings 3.1)**.
 - **Trap conditions on F1 end when combat starts** (a Grappled solo hero
-  never enters a fight snared).
+  never enters a fight snared). This is M2: M1 ships no trap that can
+  apply a condition **(agreed 2026-11-27, roadmap D-19; M1-10 rulings
+  3.1)**. From M2:
+  - a trap whose spring starts the fight never leaves its condition on
+    the hero: normally the spring resolves first and combat starts
+    after it, so the combat-start step ends the condition **(lead's
+    call, confirmed by the client 2026-11-27; M1-10 rulings 8 item
+    8)**;
+  - if a fight ever starts before a spring's condition lands, that
+    condition is not applied to a party unit on F1 **(lead's call,
+    confirmed by the client 2026-11-27; M1-10 rulings 8 item 9)**.
 - Detect DC ≤ F1 Middling. Damage ≤ 3 for snares and clasps; one
   off-path device ≤ 4 (`CapRound` F1; the Gaol's Clock-Weight). No hard
   control (C 11.6).
@@ -2492,8 +2509,10 @@ Dazed.
   - Tell: a bent sapling above head height.
   - Effect: Grappled (escape at Middling; an adjacent ally cuts it free
     with an action and no check). No damage.
-  - Ends at combat start on F1.
-  - **M1 known-armed DH-32 record.**
+  - Ends at combat start on F1 (M2).
+  - **M1 known-armed DH-32 record**, if D-06 keeps it: shipped in M1
+    without its Grappled effect; the grab and its end at combat start
+    arrive in M2 **(agreed 2026-11-27, roadmap D-19; M1-10 rulings 3.1)**.
 - **Tin-can tripwire** (wire; lesson trap; re-told from RS 8.4's "horn
   tripwire", **lead's call, after the check**; TL-43):
   - Tell: a string of tin cans on a branch above head height.
@@ -3302,7 +3321,7 @@ catalogue.
 
 | Wave | Contents |
 |---|---|
-| **M1** | Check charter; ladder; `traps`, `trapsResolve` and `checks` streams; Margin rule for locks; Take time for locks; Plain Locked Portals with retryable force (no Splinter on F1); TrapRecord skeleton with DH-32 ids and `detectionAtFire`; optionally the Kennel tin-can tripwire lesson trap, and optionally the Wire Loop as the M1 known-armed DH-32 record off the main path (each known, armed; a hazard for pathing and previews under TL-19); V11 skeleton (`LockNeverCritical`, `HeNoLock`, `KeyReachable`). The solo Vanguard forces; nothing is gated |
+| **M1** | Check charter; ladder; `traps`, `trapsResolve` and `checks` streams; Margin rule for locks; Take time for locks; Plain Locked Portals with retryable force (no Splinter on F1); TrapRecord skeleton with DH-32 ids and `detectionAtFire`; optionally the Kennel tin-can tripwire lesson trap, and optionally the Wire Loop as the M1 known-armed DH-32 record off the main path (each known, armed; a hazard for pathing and previews under TL-19); if D-06 keeps the Wire Loop, it ships in M1 as a known, armed DH-32 record and pathing hazard without its Grappled effect **(agreed 2026-11-27, roadmap D-19; M1-10 rulings 3.1)**; V11 skeleton (`LockNeverCritical`, `HeNoLock`, `KeyReachable`). The solo Vanguard forces; nothing is gated |
 | **M2** | Detection (trap sense with proficiency, Hunch −5, Probe stop, count line, Medicine, Arcana); Warned or floored (Q1); Margin rule for traps; Take time for traps; Bear it; universal hand-trigger, Trigger Shot (with the improvised throw if TL-42 is accepted), handles, Pole it, pressure slabs, re-arm; K1/K2 knowledge with Once Bitten and the first-spring rule; caps and bounds; floor-1 package; density and placement; Crier, Barb and Tattle locks; Splinter from F2; Keybearers; Lockside Listen; Wax Key, with the vendor stock when no Mechanics member (Q3); containers; alarm limits; trapdoor Voids in V10-proven Void rooms of themes with a Void skin (Choir, Archive); paper burns; High-Striker; door close verb; the catalogue for the M2 themes; clock allowance; RT-16 ruling; reports (Trapwright reports included) |
 | **M3** | Boxed lurker (Q2: Archive and Gut); Wager rooms; Runed and Hour locks; Unbolting; Riddle locks; Fed sphincter; Ticket lock; locked and trapped Hairline; readings; Swollen door; relocation traps and the Mirror Glyph (with the ability model's teleport rule); scent and room triggers; debris leave-behinds; portcullis Bar (if adopted); Oil the Works; per-group belief and witness secrecy; **the Trapwright** with its density gate; Drop-bar if the client agrees |
 | **M4** | Inverted Cathedral traps |
@@ -3479,7 +3498,7 @@ effect at the M2 gate.
 | TL-16 | ENM 11.2 (A-5); ENM 11.3 behaviour rows (invariant 7 kept); C 17.3; **RT `NoCheapKill` (agreed, RT Q3; extended, TR-15)**; the Automaton card; the SH card "monsters avoid known traps" | Natives avoid triggers and trust areas; Once Bitten; first-spring rule; mindless blunder; Found-only AI push scoring; no-path reroute (6.8) | **Agreed** (RT Q3, extended) | Request; **enemies owner** rules |
 | TL-17 | ENM 11.2 | Per-group belief; witness-only secrecy (6.8) | — | Request; enemies owner; M3 |
 | TL-18 | HZ 6.11 item 2 / HZ-7; RT 6.4 (exclusion kept); C 10.4; C 11.6 (reading) | Bands (printed after weakness, after the check); `HiddenTrapBound` 20%; `TrapLethalityBound` ≤ `CapRound`; traps in EnvRound except self-caused (a chosen in-combat Hunch entry added after the check); budget charge; F2 hard parts null in M2 (6.9, 6.10) | — | Lead's call; HZ and conditions owners apply |
-| TL-19 | C 11.3 / SH-15 (narrowed on F1); RT-20 (reading); TR-29 (kept true); DH 17.1; ENM invariant 6; RS 8.2(d)(f) | The floor-1 package, with the Wake's Viewing Door as the one F1 Tattle (6.19, 7.4) | — | Lead's call |
+| TL-19 | C 11.3 / SH-15 (narrowed on F1); RT-20 (reading); TR-29 (kept true); DH 17.1; ENM invariant 6; RS 8.2(d)(f) | The floor-1 package, with the Wake's Viewing Door as the one F1 Tattle (6.19, 7.4) | — | Lead's call; M1 push stop and pathing record; M2 package and condition end **(agreed 2026-11-27, roadmap D-19; M1-10 rulings 3.1)** |
 | TL-20 | FL LG2, LG14, LG7 `SkippablePool`, `PortalMinimums`; FL 13 trap-socket hook (the 0→1 Portal socket filled by a Door clasp or a threshold wire, after the check); FL 7.2 tripwire request (the Gaol's Circuit takes no trap on F1; Bypass alarms only; told to the FL owner after the check); HZ VP rules; RS 11.2 validator list | TP1–TP12; density; V11 in two passes; the retry and terminal fallback (6.20, 6.22, 11) | — | Lead's call; FL owner |
 | TL-21 | FL 9.2 Locked row; STAT 7.1 Athletics and Mechanics rows; ABL 7.2 (new rows); RT 6.3.4 and **RS 7.6 "Portals never break" (agreed; reading; told plainly)**; ENM 12.3 | Pick; retryable force with the guarantee; Splinter from F2 (option B ready); no relock; TP10 (6.11) | **Agreed** (RS 7.6, read); told plainly | Lead's answer, BQ5, with this document |
 | TL-22 | FL 8.1 decal kit; **RC3 / RC5 / RC7 (agreed, RS Q3 charter; extended)**; RT-16; HZ-19; RS 8.3 | Crier, Barb, Tattle (Portal hosts only); Runed, Hour; set off a Crier; rarity step; glyphs redrawn without face parts, rings or clock faces, and the padlock-base-plus-glyph read (after the check) (6.11, 8) | **Agreed** (RC charter, extended) | Lead's answer, BQ5; art |
@@ -3506,7 +3525,8 @@ effect at the M2 gate.
 | TL-43 | RS 8.4 Kennel trap flavour "horn tripwire" (re-told as the tin-can tripwire); RS 8.x theme dressing and RT 8.1 kit silhouettes (the per-theme reserved tell and device-body families); RS 7.4 RC7 (one alarm cue, no longer pitched per theme; read) | The tin-can tripwire; reserved tell silhouettes; device bodies under RT's RC2 piece bans; trap tells never idle and never reuse HZ prop families (6.3, 7, 8) | — (request) | Lead's call, after the check; RS owner and art; M2 |
 
 Waves: TL-1 to TL-5 and TL-21 in M1 (traps' parts of TL-4 and TL-5 in
-M2); TL-6 to TL-16, TL-18 to TL-20, TL-22 (Crier, Barb, Tattle), TL-23
+M2); TL-6 to TL-16, TL-18 to TL-20 (TL-19's F1 push stop in M1; M1-10
+rulings 3.1), TL-22 (Crier, Barb, Tattle), TL-23
 to TL-27, TL-30, TL-31 (Voids in proven Void rooms), TL-32 (M2 parts),
 TL-33 (close verb), TL-36, TL-38, TL-39, TL-42 and TL-43 in M2; TL-17, TL-22 (Runed, Hour),
 TL-28, TL-29, TL-34, TL-35 and TL-41 in M3; TL-37 at the M2 gate; TL-40

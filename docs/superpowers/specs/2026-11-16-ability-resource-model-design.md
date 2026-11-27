@@ -392,6 +392,13 @@ level choice from the class table or an offer. **(lead's call)**
   four units buffing takes four ticks.
 - Pre-buffing before a fight is a legitimate tactic, bounded by the
   concentration rule in 9.6.
+- The command that declares an opener (a hostile action taken out of
+  combat that starts a fight, DH 10.4, DH 20.5) runs combat start first
+  and takes no out-of-combat tick, so no tick can change who is in the
+  fight or reset the opener's charge. A move that leads to noticing keeps
+  its tick, which runs before the knowledge pass and combat start.
+  **(lead's call, confirmed by the client 2026-11-27; M1-10 rulings 8
+  item 4)**
 
 ### 6.9 When a level-up happens
 
@@ -441,7 +448,7 @@ Every ability declares exactly one cost **(lead's call)**:
 | Use | Cost |
 |---|---|
 | Attack (Extra Attack at level 5 for martial classes) | Action |
-| Dash, Disengage, Dodge, Help | Action |
+| Dash, Disengage, Dodge, Help. Dash adds granted movement equal to the unit's current speed at the moment of the Dash, fixed then; a later speed change does not alter it **(agreed 2026-11-27, roadmap D-18; M1-10 rulings 2.2)** | Action |
 | Shove or grapple: Athletics against 10 + Fortitude **(settled)**; cannot target a unit more than one size larger than the user **(change A-10, enemies design 5.1)**. A successful Shove: push 1 or Prone **(change VG-9, Vanguard design 7.1)** | Replaces one attack |
 | Slip past an enemy: Acrobatics against 10 + Reflex **(settled)** | Part of movement, once per turn |
 | Escape a grapple | Action |
@@ -1151,9 +1158,13 @@ Illustrative:
 ### 14.2 Unit state
 
 - Spent counts in a list sorted by pool ID.
-- The turn budget: movement left, action used, bonus used, reaction used,
+- The turn budget: movement used, action used, bonus used, reaction used,
   free interaction used, and the camp-spend flag, which clears at every
-  unit's turn start (6.4).
+  unit's turn start (6.4). Movement left is not stored: movement left =
+  max(0, current speed + granted movement − movement used), and 0 while
+  current speed is 0. Outside its own turn, a unit reads only its
+  reaction and its use limits. **(agreed 2026-11-27, roadmap D-18; M1-10
+  rulings 2.1)**
 - A concentration link to the effect it sustains.
 - Active toggles.
 - Monster cooldowns and uses, keyed by ability ID.

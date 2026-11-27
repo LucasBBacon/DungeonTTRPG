@@ -98,8 +98,14 @@ or boss kit changes.
 5. **F1 guard (BR-3, from M1).** While `antechamberCatchUpApplied` is
    false, the boss group (Old Ragged; M1 has no escort) cannot notice the
    party (`ArenaEngaged` trigger (b) suppressed, CS5), **ignores noise and
-   cannot join a fight** (ENM 12.4), and stays inside the arena. Item 2
-   makes `ArenaEngaged` trigger (a) impossible before the flag is set.
+   cannot join a fight** (ENM 12.4), and stays inside the arena. While
+   `antechamberCatchUpApplied` is false or its level-up is pending
+   (item 4), an attack, ability or shove that targets or includes a
+   boss-group unit is refused at no cost, with a reason code, so no shot
+   from the Forecourt can start the boss fight before the catch-up
+   **(lead's call, confirmed by the client 2026-11-27; M1-10 rulings 8
+   item 3)**. Item 2 makes `ArenaEngaged` trigger (a) impossible before
+   the flag is set.
    Take Places (BR-4), the Sanctum rest rule (BR-31), Glimpses (EV-2) and
    the Behind-you line stay M2; in M1 each of these steps is skipped, not
    stubbed, and an ordinary M1 combat start follows `ArenaEngaged`.
