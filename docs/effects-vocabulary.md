@@ -294,6 +294,12 @@ its holder and `"to": "subject"` gives an effect to.
 | `unitDied` | `UnitDied` (a unit reached 0 and was removed, its effects with it) | The unit that died |
 | `unitMoved` | `UnitMoved` (a unit finished a one-square move) | The unit that moved |
 
+`unitDied` is raised after its subject has been removed, together with every effect instance it held or was the
+source of. So the dead unit's own triggers never answer it, and a trigger may not give it an effect: `"to": "subject"`
+on a `unitDied` trigger would fail, since the subject is gone. Only other units' triggers can answer it, with
+`"to": "holder"` or a hook. `combatEnded` has no rule event: a rule event needs a subject unit and combat end has none,
+so it waits for a subject-less rule event.
+
 `EffectApplied` and `HookFired` are engine events but not rule events in M1-07: no trigger can name them. Later
 steps add rows (section 9).
 
@@ -314,7 +320,8 @@ These keys and ideas are named now so content does not invent its own, and are r
 | Item | Status | Arrives |
 |---|---|---|
 | `diceBonus` modifier | Refused at load (`$.effects[i].modifiers[j].diceBonus`). Its fold will be "only the highest dice bonus applies to a given roll" (CO 6.7). | The first step whose content gives a dice bonus (M1-09 has dice but no rule or content that gives one) |
-| Durations and clocks (turn start and end, `combatOnly`, refill tags) | Not in the schema: an instance lasts until it is removed. | M1-10 (clocks), M1-12 (condition durations) |
+| Durations and clocks (turn start and end, `combatOnly`, refill tags) | Not in the schema: an instance lasts until it is removed. M1-10 added the clocks in code: turn start and turn end (`TurnStarted`, `TurnEnded`), combat start (`CombatStarted`), the turn budget's resets, and the pools' refill tags (`RefillTag`: `turn`, `fight`, `rest`, `camp`, `never`). Condition durations, `combatOnly` among them, are still absent. | M1-12 (condition durations) |
+| Instant death, save-or-die, set-HP-to-0 | No operation sets or zeroes current HP; such an operation is refused for party targets (DH 10.2). `content.DH21.PartyInstantDeath` fails if `ModifierOp` gains an unreviewed value or `maxHp` loses its floor of 1. | The step that adds such an operation, with its party refusal |
 | Condition application pipeline, relations and exclusivity | Not in the schema; conditions are plain `condition`-kind effects for now. | M1-12, M1-13 |
 | Damage riders (AB 9.1) | Not in the schema. | M2 |
 
@@ -324,7 +331,7 @@ These keys and ideas are named now so content does not invent its own, and are r
 |---|---|
 | M1-08 Stats and contests | `add` on the new numbers (section 5.3); the `AbilityScore` rule and its cap for the six abilities; the `Stack` rule for the other SM 6 numbers, with per-unit bases that read the abilities and proficiency; `rollMode` on `attackRoll` and `attacksAgainst`, folded over several sources by D-15; the save and skill roll targets. Guile moved to M1-22 and HP numbers to M1-09. |
 | M1-09 Damage and HP | `add` on `maxHp` and `recovery` (section 5.3), and on `constitution`, which both bases read after its effects; the derived-number floor (section 5), on both rows; resistances and weaknesses: the 30 ladder flags `resistant.<type>`, `weak.<type>` and `immune.<type>` (`flag` modifiers on `unit`, section 3.1), which a trait sets as a `trait`-kind effect carrying them. |
-| M1-10 Turns, lifecycle and death | New rule events (turn start, turn end, combat start and end); durations (section 8). |
+| M1-10 Turns, lifecycle and death | The rule events `combatStarted`, `turnStarted`, `turnEnded` and `unitDied` (section 6.4; no `combatEnded`, which needs a subject-less rule event); the folded `speed` for movement left in combat; the `maxHp` floor of 1, which `content.DH21.PartyInstantDeath` guards (section 8). The turn and combat clocks and the refill tags are code (`RefillTag`), not vocabulary; condition durations stay with M1-12. |
 | M1-11 Abilities, reactions and areas | `ability`-kind effects; `applyEffect` actions; hooks for reactions; new events for ability use steps. |
 | M1-12 Conditions core | `condition`-kind effects and the same-number rule; `applyEffect` to `subject`; trigger order and the chain bound. |
 | M1-13 M1 conditions, forced movement | `zero` and `halve` on `speed` (Grappled, Prone); `rollMode` (Prone, Frightened, Hidden, Dodging); `flag` (Incapacitated); hooks for push, pull and shift; `unitMoved` triggers. |

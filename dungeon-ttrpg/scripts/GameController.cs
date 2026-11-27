@@ -45,8 +45,11 @@ public partial class GameController : Node3D
         }
     }
 
-    /// <summary>True while input must be ignored: events are still playing or a decision is pending.</summary>
-    private bool Busy => Animating || _state.Pending is not null;
+    /// <summary>
+    /// True while input must be ignored: the run has ended (the core refuses every command after it), events are still
+    /// playing, or a decision is pending.
+    /// </summary>
+    private bool Busy => _state.Ended is not null || Animating || _state.Pending is not null;
 
     /// <summary>True while events from an accepted command are still being shown.</summary>
     private bool Animating => _playing || _events.Count > 0;
@@ -91,7 +94,7 @@ public partial class GameController : Node3D
 
     private void Answer(int optionIndex)
     {
-        if (Animating || _state.Pending is not { } pending)
+        if (_state.Ended is not null || Animating || _state.Pending is not { } pending)
         {
             return;
         }

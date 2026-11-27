@@ -19,5 +19,6 @@ public static class StaticChecks
             new StreamRowsCheck(),
             new DomainDisjointCheck(),
             new LabelCollisionCheck(),
+            new PartyInstantDeathCheck(),
         ];
 }

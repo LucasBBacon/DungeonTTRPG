@@ -291,6 +291,10 @@ DH-15, DH-18; TL-8.
 **Depends on:** M1-09.
 
 **Delivers:**
+- The turn loop: the initiative order stored at combat start, the
+  current turn and the round, End Turn, and moves in combat that spend
+  the mover's movement and are refused out of turn; the turn-start and
+  turn-end steps stay empty for M1-12 (owner rulings 2026-11-27).
 - Turn budget: move, action, bonus, reaction, free interaction.
 - Pools store spent count only; refill tags `turn`/`fight`/`rest`/
   `camp`/`never`; one camp spend per unit per turn.
@@ -306,7 +310,9 @@ DH-15, DH-18; TL-8.
 **Done when:**
 - [ ] AB 16 tests for each refill tag and the camp-spend rule pass.
 - [ ] DH 21.4 property tests pass (floors before the save chain; HP 5 +
-  temp 3 + undetected trap 10 → HP 1).
+  undetected trap 10 → HP 1, `DamageClamped{undetectedTrap}`, the save
+  chain never reached; the temporary-HP half is D-17) (owner rulings
+  2026-11-27).
 - [ ] Scenario "hero dies alongside the last enemy" ends the run (test).
 - [ ] An opening ambush strike counts as in-combat damage (test).
 
