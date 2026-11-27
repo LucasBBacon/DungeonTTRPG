@@ -163,6 +163,7 @@ here.
 | D-09 | M1-13 | Base collision damage for M1 (the 2/3/3 band is the M2 Wrecker's). | VG 11; CO 10.1 |
 | D-10 | M1-30, M1-33, M1-39 | Owner deliverables before M1 goldens: HZ `hzTagMax`; TL `traps` and `trapsResolve` draw formulas; LP V15 M1 rows; phial pre-roll 3 draws confirmed; IR filter-first; DH reshuffle; SV-5 and SV-8 applied. Each has a fallback in SV 14.2 except as noted there. | SV 4.5, 7, 14.2 |
 | D-11 | M1-34 | Which Afterimage states (Fresh, Persisting, Old, Short) are "basic" in M1. | XI 4.2 |
+| D-12 | M1-04 | The content validator's id rule. K-rule 3 allows `[a-z0-9_.:-]`, but SV 4.3 labels `lootPlan`, `themePerm`, `bossOrder`, `finalOrder` use capitals; `LabelId` accepts `[A-Za-z0-9_.:-]` until ruled. | SV 4.1 K-rule 3, 4.3 |
 | D-20 | M2-02 | Rulings RT-14 / HZ-6 (Teetering in the theme six), RT-16 / TL-39 (trap conditions from the theme six), EV-11 (Grace durations). | CO; RS; EV |
 | D-21 | M2-10 | Rulings EP-6 (Billets), BR-6 (Rhythm), BR-7, TR-15, TL-16 (AI terms). | ENM; EP; BR |
 | D-30 | M3-06 | How many class and aspect unlocks ship in M3. | CL 9.4 |

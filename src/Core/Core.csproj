@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>Dungeon.Core</AssemblyName>
     <RootNamespace>Dungeon.Core</RootNamespace>
-    <!-- DUN011 exemption until M1-02 repoints it to the key-algebra file. -->
-    <DungeonWrappingArithmeticFile>Random/Pcg32.cs</DungeonWrappingArithmeticFile>
+    <!-- DUN011: the key-algebra file is the one file whose unchecked blocks may wrap (DS11). -->
+    <DungeonWrappingArithmeticFile>Random/KeyAlgebra.cs</DungeonWrappingArithmeticFile>
   </PropertyGroup>
 </Project>
