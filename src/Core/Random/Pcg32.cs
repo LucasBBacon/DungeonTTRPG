@@ -1,3 +1,5 @@
+// Removed by M1-02 Task 3 together with this file: it still uses wrapping arithmetic until then.
+#pragma warning disable DUN011
 using System;
 
 namespace Dungeon.Core;
