@@ -21,11 +21,31 @@ public sealed record DamageRoll(ImmutableArray<PartRoll> Parts, bool Crit);
 public readonly record struct PartOutcome(DamageType Type, LadderStep Step, long Raw, long Dealt);
 
 /// <summary>
+/// Why a floor stopped a party unit on 1 HP (DH 20.3 step 4's <c>DamageClamped</c> reasons). M1-10 produces only
+/// <see cref="OutOfCombat"/> and <see cref="UndetectedTrap"/>; the fall, Stir and lurker floors are M2 or later.
+/// </summary>
+public enum ClampReason
+{
+    OutOfCombat,
+    UndetectedTrap,
+    FallFloor,
+    UnwarnedStir,
+    LurkerOpener,
+}
+
+/// <summary>
 /// A hit's damage as resolved against a unit: each part's outcome, the total dealt, the stored HP before, the HP after
-/// (never below 0), and whether HP reached 0 (DH 20.3 step 7; what follows is M1-10's).
+/// (never below 0), whether HP reached 0 (DH 20.3 step 7; <c>Combat.Harm.Deal</c> applies the consequences), and the
+/// floor that stopped it on 1, or null (step 4; M1-10 plan call 10).
 /// </summary>
 public sealed record DamageOutcome(
-    UnitId Target, ImmutableArray<PartOutcome> Parts, long Total, int HpBefore, int HpAfter, bool ReachedZero);
+    UnitId Target,
+    ImmutableArray<PartOutcome> Parts,
+    long Total,
+    int HpBefore,
+    int HpAfter,
+    bool ReachedZero,
+    ClampReason? Clamp);
 
 /// <summary>
 /// The damage function (SM 9, AB 9.1, DH 20.3), like the M1-08 contests in three steps: <see cref="Roll"/> draws the
@@ -79,7 +99,8 @@ public static class Damage
 
     /// <summary>
     /// What <paramref name="roll"/> does to <paramref name="target"/>, in the DH 20.3 order, without changing anything.
-    /// HP after = max(0, min(HP, maximum) - total). Throws <see cref="ArgumentException"/> for an unknown unit.
+    /// HP after = max(0, min(HP, maximum) - total), unless a floor binds (step 4, party units only): then 1. Throws
+    /// <see cref="ArgumentException"/> for an unknown unit.
     /// </summary>
     public static DamageOutcome Resolve(RulesContext rules, GameState s, UnitId target, DamageRoll roll)
     {
@@ -104,15 +125,55 @@ public static class Damage
         }
 
         // 3a. Duck (Shade): M2.
-        // 4. The out-of-combat and trap floors: M1-10.
-        // 5. The save chain (Death-warded, the phial): M2.
-        // 6. Lower HP, never below 0. HP above a lowered maximum counts as the maximum.
+        // 4. The floors (DH 10.4; M1-10 plan call 10), for a party target only. HP above a lowered maximum counts as
+        //    the maximum. A floor applies out of combat (OutOfCombat, checked first), or when a part comes from a
+        //    Hidden or HunchFloored trap and the other parts alone deal less than that HP (UndetectedTrap: the floor
+        //    protects against the trap parts only). An applying floor binds only on a hit that would take the unit
+        //    from 1 or more to below 1, and then HP stops on 1. So a floor never raises HP, never fires on a hit that
+        //    leaves 1 or more, and leaves a unit already on 0 on 0, unclamped.
         long from = Math.Min(unit.Hp, HitPoints.Max(rules, s, target));
-        int hpAfter = HitPoints.ToHp(Math.Max(0, from - total));
+        ClampReason? clamp = null;
+        if (unit.Faction == Faction.Party && from >= 1 && from - total < 1)
+        {
+            if (!s.CombatActive)
+            {
+                clamp = ClampReason.OutOfCombat;
+            }
+            else if (FloorsTrap(roll, parts, from))
+            {
+                clamp = ClampReason.UndetectedTrap;
+            }
+        }
 
-        // 7. At 0: report it. The consequences (death, RunEnded, removing a dead monster) are M1-10's.
+        // 5. The save chain (Death-warded, the phial): M2. It runs only on a total that still reaches 0, so a floored
+        //    hit never reaches it (DH 21.4).
+        // 6. Lower HP, never below 0; a bound floor stops it on 1.
+        int hpAfter = clamp is null ? HitPoints.ToHp(Math.Max(0, from - total)) : 1;
+
+        // 7. At 0: report it. Combat.Harm.Deal applies the consequences (death, RunEnded, removing a dead monster).
         // 8. Riders and on-damage triggers: M2. PartOutcome is the rider's place (plan call 9).
-        return new DamageOutcome(target, parts.MoveToImmutable(), total, unit.Hp, hpAfter, hpAfter == 0);
+        return new DamageOutcome(target, parts.MoveToImmutable(), total, unit.Hp, hpAfter, hpAfter == 0, clamp);
+    }
+
+    // The undetected-trap floor applies (DH 10.4; TL 6.5): some part comes from a Hidden or HunchFloored trap, and the
+    // parts that do not deal less than from.
+    private static bool FloorsTrap(DamageRoll roll, ImmutableArray<PartOutcome>.Builder parts, long from)
+    {
+        bool trapped = false;
+        long others = 0;
+        for (int i = 0; i < roll.Parts.Length; i++)
+        {
+            if (roll.Parts[i].Part.Trap?.DetectionAtFire is Detection.Hidden or Detection.HunchFloored)
+            {
+                trapped = true;
+            }
+            else
+            {
+                others = checked(others + parts[i].Dealt);
+            }
+        }
+
+        return trapped && others < from;
     }
 
     /// <summary><see cref="Resolve"/>, then writes the target's HP after; nothing else in the state changes.</summary>

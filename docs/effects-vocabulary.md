@@ -224,7 +224,7 @@ A trigger reacts to a rule event (MAIN 6.4):
 
 | Key | Required | Value |
 |---|---|---|
-| `on` | yes | A registered rule-event id (section 6.4). M1-07 registers `unitMoved` (a unit finished a move; the subject is that unit); M1-10 adds `combatStarted`, `turnStarted` and `turnEnded`. |
+| `on` | yes | A registered rule-event id (section 6.4). M1-07 registers `unitMoved` (a unit finished a move; the subject is that unit); M1-10 adds `combatStarted`, `turnStarted`, `turnEnded` and `unitDied`. |
 | `priority` | no | An integer, default 0. **Lower fires first.** |
 | `scope` | yes | `holder`: fires only when the event's subject is the effect's holder. `any`: fires for every subject. |
 | `do` | yes | A non-empty list of actions, run in order. |
@@ -291,6 +291,7 @@ its holder and `"to": "subject"` gives an effect to.
 | `combatStarted` | `CombatStarted` (a fight began; initiative is rolled and the order stored) | The first unit in the initiative order |
 | `turnEnded` | `TurnEnded` (a unit's turn ended) | The unit whose turn ended |
 | `turnStarted` | `TurnStarted` (a unit's turn began) | The unit whose turn began |
+| `unitDied` | `UnitDied` (a unit reached 0 and was removed, its effects with it) | The unit that died |
 | `unitMoved` | `UnitMoved` (a unit finished a one-square move) | The unit that moved |
 
 `EffectApplied` and `HookFired` are engine events but not rule events in M1-07: no trigger can name them. Later

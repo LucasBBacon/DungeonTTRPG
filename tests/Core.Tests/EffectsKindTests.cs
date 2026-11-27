@@ -254,10 +254,11 @@ public class EffectsKindTests
         Assert.Equal("acid", Dungeon.Core.Damage.DamageIds.Of(Dungeon.Core.Damage.DamageType.Acid));
         Assert.Contains("immune.necrotic", Flags.Core);
         Assert.Equal<string>(
-            ["combatStarted", "turnEnded", "turnStarted", "unitMoved"], RuleEvents.Core.Select(e => e.Id).ToArray());
+            ["combatStarted", "turnEnded", "turnStarted", "unitDied", "unitMoved"], RuleEvents.Core.Select(e => e.Id).ToArray());
         Assert.Equal(typeof(CombatStarted), RuleEvents.Core.Single(e => e.Id == "combatStarted").EventType);
         Assert.Equal(typeof(TurnEnded), RuleEvents.Core.Single(e => e.Id == "turnEnded").EventType);
         Assert.Equal(typeof(TurnStarted), RuleEvents.Core.Single(e => e.Id == "turnStarted").EventType);
+        Assert.Equal(typeof(UnitDied), RuleEvents.Core.Single(e => e.Id == "unitDied").EventType);
         Assert.Equal(typeof(UnitMoved), RuleEvents.Core.Single(e => e.Id == "unitMoved").EventType);
     }
 

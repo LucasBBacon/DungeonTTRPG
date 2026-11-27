@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using Dungeon.Core.Combat;
 using Dungeon.Core.Damage;
 using Dungeon.Core.Effects;
 using Dungeon.Core.Stats;
@@ -21,12 +22,16 @@ public class DamageReplayTests
     private static readonly ImmutableArray<DamagePart> Longsword = [new DamagePart(DamageType.Slashing, 1, 8, 2)];
 
     // The M1-08 replay units (the hero level 3 with Strength +3, the foe level 2), without the M1-08 roll-mode effects:
-    // with them the foe never hits on seed 7, and this sequence should land damage on both sides.
+    // with them the foe never hits on seed 7, and this sequence should land damage on both sides. Both are party units,
+    // so the sequence runs in combat (M1-10): out of combat the floor of DH 10.4 would stop either on 1. Starting combat
+    // rolls initiative on combat first.
     private static GameState Start() =>
-        ContestKit.StateOf(
-            ContestKit.Block(ContestKit.Zero.With(Ability.Strength, 3).With(Ability.Intelligence, 2).With(Ability.Wisdom, 1), 3, Save.Will, Skill.Athletics),
-            ContestKit.Block(ContestKit.Zero.With(Ability.Dexterity, 1).With(Ability.Intelligence, 1), 2, Save.Reflex),
-            7);
+        Turns.StartCombat(
+            Rules,
+            ContestKit.StateOf(
+                ContestKit.Block(ContestKit.Zero.With(Ability.Strength, 3).With(Ability.Intelligence, 2).With(Ability.Wisdom, 1), 3, Save.Will, Skill.Athletics),
+                ContestKit.Block(ContestKit.Zero.With(Ability.Dexterity, 1).With(Ability.Intelligence, 1), 2, Save.Reflex),
+                7)).Next;
 
     // One round: the hero attacks the foe, then the foe attacks the hero; a hit deals 1d8 + 2 slashing, a crit doubling
     // the die.
@@ -53,9 +58,10 @@ public class DamageReplayTests
     }
 
     // Pinned from the first green run on seed 7 (a golden, not a hand-derived value): the hero's and the foe's HP after
-    // three rounds. A change here means the draw order or the damage arithmetic moved. (HP reaching 0 has no
-    // consequence until M1-10, so a unit at 0 keeps attacking here.)
-    private static readonly (int Hero, int Foe) Seed7FinalHp = (0, 10);
+    // three rounds. A change here means the draw order or the damage arithmetic moved. Re-pinned in M1-10 Task 4 from
+    // its first green run, because the sequence now starts combat (two initiative draws on combat) before the first
+    // attack. (Damage.Deal carries no consequences; Harm.Deal does. So a unit at 0 keeps attacking here.)
+    private static readonly (int Hero, int Foe) Seed7FinalHp = (6, 0);
 
     [Fact]
     public void A_scripted_attack_and_damage_sequence_replays_identically()
