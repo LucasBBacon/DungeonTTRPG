@@ -42,6 +42,26 @@ public class ContentHashTests
     }
 
     [Fact]
+    public void Editing_a_name_list_name_changes_only_the_display_hash()
+    {
+        // name_list.json is the largest display kind, and V7 and V24 read its names and categories, so a
+        // name edit must leave manifestHash (the future M1-06 seed key) unchanged.
+        var files = ReadRepositoryContent();
+        const string first = "\"name\": \"run\",";
+        var edited = files
+            .Select(f => f.Name != "naming/name_list.json" ? f : f with { Text = ReplaceFirst(f.Text, first, "\"name\": \"Run\",") })
+            .ToArray();
+        Assert.NotEqual(files.Single(f => f.Name == "naming/name_list.json").Text, edited.Single(f => f.Name == "naming/name_list.json").Text);
+
+        var before = ContentHashing.Compute(ContentLoader.Load(files));
+        var after = ContentHashing.Compute(ContentLoader.Load(edited));
+
+        Assert.NotEqual(before.Display, after.Display);
+        Assert.Equal(before.Manifest, after.Manifest);
+        Assert.Equal(before.GenContent, after.GenContent);
+    }
+
+    [Fact]
     public void Editing_a_rules_field_changes_only_the_manifest_hash()
     {
         var before = ContentHashing.Compute(Fixture());
@@ -139,4 +159,11 @@ public class ContentHashTests
 
     /// <summary>The repository's <c>content/</c>, read exactly as the content-hashes command reads it.</summary>
     private static ContentFile[] ReadRepositoryContent() => ContentDirectory.Read(Path.Combine(RepoRoot.Find(), "content"));
+
+    private static string ReplaceFirst(string text, string old, string replacement)
+    {
+        int at = text.IndexOf(old, StringComparison.Ordinal);
+        Assert.True(at >= 0, $"{old} not found.");
+        return text.Substring(0, at) + replacement + text.Substring(at + old.Length);
+    }
 }

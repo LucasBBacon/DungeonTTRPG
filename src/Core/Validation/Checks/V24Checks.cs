@@ -32,13 +32,16 @@ public abstract class NamedRecordCheck : IStaticCheck
     {
         ArgumentNullException.ThrowIfNull(content);
         var failures = ImmutableArray.CreateBuilder<CheckFailure>();
-        Check(content, NamedRecords.Collect(content, _kinds), (record, problem) =>
-            failures.Add(new CheckFailure(Id, record.File, record.Field, problem)));
+        Check(content, NamedRecords.Collect(content, _kinds), (record, field, problem) =>
+            failures.Add(new CheckFailure(Id, record.File, field, problem)));
         return failures.ToImmutable();
     }
 
-    /// <summary>Checks <paramref name="records"/>, calling <paramref name="fail"/> for each failure.</summary>
-    protected abstract void Check(ContentSet content, ImmutableArray<NamedRecord> records, Action<NamedRecord, string> fail);
+    /// <summary>
+    /// Checks <paramref name="records"/>, calling <paramref name="fail"/> with the record, the field the
+    /// failure is at (<see cref="NamedRecord.Field"/>, <see cref="NamedRecord.KeyField"/>, ...) and the problem.
+    /// </summary>
+    protected abstract void Check(ContentSet content, ImmutableArray<NamedRecord> records, Action<NamedRecord, string, string> fail);
 }
 
 /// <summary>
@@ -60,7 +63,7 @@ public sealed class R1ExactEqualityCheck : NamedRecordCheck
     }
 
     /// <inheritdoc />
-    protected override void Check(ContentSet content, ImmutableArray<NamedRecord> records, Action<NamedRecord, string> fail)
+    protected override void Check(ContentSet content, ImmutableArray<NamedRecord> records, Action<NamedRecord, string, string> fail)
     {
         // The first record of each name, kept ordinal by name for lookup.
         var firstNames = new List<string>();
@@ -80,7 +83,7 @@ public sealed class R1ExactEqualityCheck : NamedRecordCheck
                 && string.Equals(first.MeaningId, record.MeaningId, StringComparison.Ordinal);
             if (!sameMeaning)
             {
-                fail(record, $"\"{record.DisplayName}\" is already the name at {first.File} {first.Field}, and the two do not share a meaningId.");
+                fail(record, record.Field, $"\"{record.DisplayName}\" is already the name at {first.File} {first.Field}, and the two do not share a meaningId.");
             }
         }
     }
@@ -102,7 +105,7 @@ public sealed class R2RetiredReusedCheck : NamedRecordCheck
     }
 
     /// <inheritdoc />
-    protected override void Check(ContentSet content, ImmutableArray<NamedRecord> records, Action<NamedRecord, string> fail)
+    protected override void Check(ContentSet content, ImmutableArray<NamedRecord> records, Action<NamedRecord, string, string> fail)
     {
         var retired = content.All<RetiredNameRecord>();
         foreach (var record in records)
@@ -112,7 +115,7 @@ public sealed class R2RetiredReusedCheck : NamedRecordCheck
                 && string.Equals(r.Category, record.Category, StringComparison.Ordinal));
             if (reused)
             {
-                fail(record, $"\"{record.DisplayName}\" is a retired {record.Category} name (naming/retired_names.json).");
+                fail(record, record.Field, $"\"{record.DisplayName}\" is a retired {record.Category} name (naming/retired_names.json).");
             }
         }
     }
@@ -137,7 +140,7 @@ public sealed class R6InternalByKeyCheck : NamedRecordCheck
     }
 
     /// <inheritdoc />
-    protected override void Check(ContentSet content, ImmutableArray<NamedRecord> records, Action<NamedRecord, string> fail)
+    protected override void Check(ContentSet content, ImmutableArray<NamedRecord> records, Action<NamedRecord, string, string> fail)
     {
         foreach (var record in records)
         {
@@ -145,16 +148,16 @@ public sealed class R6InternalByKeyCheck : NamedRecordCheck
             {
                 if (record.DisplayKey is not null)
                 {
-                    fail(record, $"an internal record is never printed, so it has no display key, not \"{record.DisplayKey}\".");
+                    fail(record, record.KeyField, $"an internal record is never printed, so it has no display key, not \"{record.DisplayKey}\".");
                 }
             }
             else if (record.DisplayKey is null)
             {
-                fail(record, "a record shown on screen needs a display key.");
+                fail(record, record.KeyField, "a record shown on screen needs a display key.");
             }
             else if (content.Find<StringEntry>(record.DisplayKey) is null)
             {
-                fail(record, $"display key \"{record.DisplayKey}\" is not in strings/en.json.");
+                fail(record, record.KeyField, $"display key \"{record.DisplayKey}\" is not in strings/en.json.");
             }
         }
     }

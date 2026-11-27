@@ -112,7 +112,7 @@ public sealed class RetiredNamesKind : ContentKind
 
 /// <summary>
 /// The greyed-reason registry, <c>naming/greyed_reasons.json</c>: records <c>{id, doc}</c>, both rules
-/// fields. Each reason's string is <c>&lt;doc&gt;.greyed.&lt;id&gt;</c> in <c>strings/en.json</c>
+/// fields; <c>doc</c> is one strings-key part. Each reason's string is <c>&lt;doc&gt;.greyed.&lt;id&gt;</c> in <c>strings/en.json</c>
 /// (<c>V24.GreyedReasonKeys</c>). The owning steps add the reasons (owner ruling 3).
 /// </summary>
 public sealed class GreyedReasonKind : ContentKind
@@ -135,7 +135,7 @@ public sealed class GreyedReasonKind : ContentKind
             result.Add(new GreyedReason(
                 file.Name,
                 Id(file, Member(at, "id"), r.Id).Value,
-                RuleString(file, Member(at, "doc"), r.Doc)));
+                NamingIds.KeyPart(file, Member(at, "doc"), r.Doc)));
         }
 
         return result.MoveToImmutable();
@@ -350,6 +350,18 @@ internal static class NamingIds
         return valid
             ? value
             : throw new ContentLoadException(file.Name, field, $"\"{value}\" is not a strings key (<doc>.<registry>.<id>).");
+    }
+
+    /// <summary>
+    /// One part of a strings key (a greyed reason's <c>doc</c>): non-empty <c>[A-Za-z0-9_:-]</c>, no dots,
+    /// so a bad doc is named at its own field, not later as a missing key.
+    /// </summary>
+    public static string KeyPart(ContentFile file, string field, string? s)
+    {
+        string value = RuleString(file, field, s);
+        return value.Length > 0 && IsKeyPart(value)
+            ? value
+            : throw new ContentLoadException(file.Name, field, $"\"{value}\" is not one strings-key part ([A-Za-z0-9_:-], no dots).");
     }
 
     /// <summary>True if <paramref name="s"/> holds a control character.</summary>

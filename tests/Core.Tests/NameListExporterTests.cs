@@ -95,9 +95,9 @@ public class NameListExporterTests
     }
 
     [Fact]
-    public void Plan_call_7_selects_311_entries_giving_348_retired_records()
+    public void Plan_call_7_selects_312_entries_giving_344_retired_records()
     {
-        // The selection, counted here from the four prefixes rather than through the exporter.
+        // The selection, counted here from the four prefixes and the one "X retired" clause rather than through the exporter.
         int Starting(string prefix) => Entries.Value.Count(e => e.Outcome.StartsWith(prefix, StringComparison.Ordinal));
         Assert.Equal(303, Starting("renamed →"));
         Assert.Equal(6, Starting("retired"));
@@ -105,15 +105,19 @@ public class NameListExporterTests
         Assert.Equal(1, Starting("deleted"));
 
         var selected = NameListExporter.RetiringEntries(Entries.Value);
-        Assert.Equal(311, selected.Length);
+        Assert.Equal(312, selected.Length);
         Assert.Equal(
             Entries.Value.Where(e => new[] { "renamed →", "retired", "dropped", "deleted" }
-                .Any(p => e.Outcome.StartsWith(p, StringComparison.Ordinal))),
+                    .Any(p => e.Outcome.StartsWith(p, StringComparison.Ordinal))
+                || e.Outcome == "Sprawled final; Upended retired (NP-6)"),
             selected);
 
-        // Splitting every part literally gives 352 distinct pairs; the 4 the source keeps (Ready and
-        // Waiting in the rename target, Gut spore-bloat and Silk mildew moth "final as written") are not retired.
-        Assert.Equal(348, NameListExporter.Retired(Entries.Value).Length);
+        // Before the annotation fixes there were 348: less the two fragments of the charm-abilities
+        // sentence (now one record), less the "unused since floor N" tag and coin ledger the outcome
+        // keeps final, less "Second Wind (fighter-type rest tool)", whose bare name repeats a record,
+        // gives 344; Upended from the clause repeats "Upended (former name)". Ready and Waiting (in the
+        // rename target) and Gut spore-bloat and Silk mildew moth ("final as written") stay unretired.
+        Assert.Equal(344, NameListExporter.Retired(Entries.Value).Length);
     }
 
     [Fact]
@@ -154,6 +158,76 @@ public class NameListExporterTests
         Assert.Equal(["A"], Parts(E("A / B", "renamed → X / B (A; agreed)")));
         Assert.Equal(["B"], Parts(E("L: A, B", "deleted in part: B is deleted; the rest final")));
         Assert.Equal(["A", "B"], Parts(E("A / B", "retired (rejected)")));
+    }
+
+    [Fact]
+    public void Retired_names_are_the_bare_names_without_annotations()
+    {
+        var retired = NameListExporter.Retired(Entries.Value);
+
+        // NP 9.1 and 14.2 item 5: the old names themselves, so V24 r2 blocks their return.
+        Assert.Contains(retired, r => r.Name == "Upended" && r.Category == "condition");
+        Assert.Contains(retired, r => r.Name == "Snare" && r.Category == "trap or lock");
+        Assert.Contains(retired, r => r.Name == "Token" && r.Category == "system term");
+        Assert.Contains(retired, r => r.Name == "talisman" && r.Category == "system term");
+        Assert.Contains(retired, r => r.Name == "Doppel" && r.Category == "enemy type");
+        Assert.Contains(retired, r => r.Name == "Hold" && r.Category == "verb or action");
+        Assert.Contains(retired, r => r.Name == "Protector" && r.Category == "enemy affix");
+        Assert.Contains(retired, r => r.Name == "ask me" && r.Category == "report or setting");
+        Assert.Contains(retired, r => r.Name == "Weak: Will" && r.Category == "UI surface");
+
+        // A parenthetical that is part of the name is kept: an option list or a (type)/(element) slot.
+        Assert.Contains(retired, r => r.Name == "Complexity (Simple / Medium / Complex)" && r.Category == "UI surface");
+        Assert.Contains(retired, r => r.Name == "Resisting (type)" && r.Category == "condition");
+        Assert.Contains(retired, r => r.Name == "Resistant (element)" && r.Category == "weapon or armour property");
+
+        Assert.DoesNotContain(retired, r => r.Name.EndsWith(" (former name)", StringComparison.Ordinal));
+        Assert.DoesNotContain(retired, r => r.Name.StartsWith('"') && r.Name.EndsWith('"'));
+    }
+
+    [Fact]
+    public void A_sentence_after_a_colon_is_one_retired_record_not_fragments()
+    {
+        var retired = NameListExporter.Retired(Entries.Value);
+
+        Assert.Contains(retired, r => r.Name == "Charms catch moments: a token earned from a named moment in the fight, or one button you spend");
+        Assert.DoesNotContain(retired, r => r.Name == "or one button you spend");
+        Assert.DoesNotContain(retired, r => r.Name == "a token earned from a named moment in the fight");
+    }
+
+    [Fact]
+    public void A_rename_that_keeps_named_parts_final_does_not_retire_them()
+    {
+        var retired = NameListExporter.Retired(Entries.Value);
+
+        // "... / \"unused since floor N\" tag / coin ledger" renamed → "..."; the tag and ledger final as written.
+        Assert.Contains(retired, r => r.Name == "the Hollow ahead sells rare" && r.Category == "UI surface");
+        Assert.DoesNotContain(retired, r => r.Name.Contains("unused since floor N", StringComparison.Ordinal));
+        Assert.DoesNotContain(retired, r => r.Name == "coin ledger" && r.Category == "UI surface");
+    }
+
+    [Fact]
+    public void Annotations_are_stripped_from_retired_parts()
+    {
+        static NameListEntry E(string name, string outcome) => new("d", name, "c", "unclear", outcome, "x", null);
+        static string[] Parts(NameListEntry e) => NameListExporter.RetiredParts(e).ToArray();
+
+        Assert.Equal(["Upended"], Parts(E("Upended (former name)", "renamed → Sprawled")));
+        Assert.Equal(["always", "ask me"], Parts(E("L: always / \"ask me\"", "renamed → Always / Ask me (ids internal)")));
+        Assert.Equal(["seed (plays on)"], Parts(E("\"seed (plays on)\"", "renamed → Run code")));
+        Assert.Equal(["Resisting (type)"], Parts(E("Resisting (type)", "renamed → Resistant (type) on screen")));
+        Assert.Equal(["Pick (A / B)"], Parts(E("Pick (A / B)", "renamed → X / Y")));
+        Assert.Equal(["L: a thing, or another"], Parts(E("L: a thing, or another", "renamed → M")));
+        Assert.Equal(["\"a\" b"], Parts(E("\"a\" b / c tag / d ledger", "renamed → e; the tag and ledger final as written")));
+        Assert.Equal(["Upended"], Parts(E("Upended / Sprawled", "Sprawled final; Upended retired (NP-6)")));
+    }
+
+    [Fact]
+    public void A_retired_clause_inside_another_outcome_selects_the_entry()
+    {
+        var selected = NameListExporter.RetiringEntries(Entries.Value);
+        Assert.Contains(selected, e => e.Name == "Upended / Sprawled" && e.Category == "condition");
+        Assert.DoesNotContain(selected, e => e.OutcomeKind == "other" && !e.Name.StartsWith("Upended", StringComparison.Ordinal));
     }
 
     [Fact]

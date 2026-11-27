@@ -58,7 +58,7 @@ public static class ContentLoader
             byFile.Add((file.Name, records));
         }
 
-        var set = new ContentSet(sortedFiles, byFile.MoveToImmutable());
+        var set = new ContentSet(sortedFiles, byFile.MoveToImmutable(), sortedKinds.Select(k => k.FileName).ToImmutableArray());
         foreach (var kind in sortedKinds)
         {
             kind.Resolve(set);

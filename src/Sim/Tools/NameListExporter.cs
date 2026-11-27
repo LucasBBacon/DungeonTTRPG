@@ -40,6 +40,14 @@ public static class NameListExporter
 
     private static readonly ImmutableArray<string> RetiringPrefixes = ["retired", "deleted", "dropped", RenamedTo];
 
+    private static readonly ImmutableArray<string> NameSlots = ["type", "element"];
+
+    private static readonly ImmutableArray<string> Conjunctions = [", or ", ", and "];
+
+    private static readonly Regex RetiredClause = new(@"^(.+?) retired(?: |$)", RegexOptions.CultureInvariant);
+
+    private static readonly Regex KeptFinal = new(@"; the ([^;]+) final as written$", RegexOptions.CultureInvariant);
+
     private static readonly JsonWriterOptions WriterOptions = new()
     {
         Indented = true,
@@ -108,21 +116,30 @@ public static class NameListExporter
 
     /// <summary>
     /// The entries plan call 7 selects: outcomes that start <c>retired</c>, <c>deleted</c> or
-    /// <c>dropped</c>, and whole renames (<c>renamed →</c>; <c>renamed in part</c> is not selected).
+    /// <c>dropped</c>, whole renames (<c>renamed →</c>; <c>renamed in part</c> is not selected), and any
+    /// other outcome with a <c>"; "</c>-separated clause <c>X retired …</c> where X is a part of the name
+    /// (<c>Sprawled final; Upended retired (NP-6)</c>).
     /// </summary>
     public static ImmutableArray<NameListEntry> RetiringEntries(ImmutableArray<NameListEntry> entries) =>
-        entries.Where(e => RetiringPrefixes.Any(p => e.Outcome.StartsWith(p, StringComparison.Ordinal))).ToImmutableArray();
+        entries.Where(e => StartsRetiring(e) || RetiredByClause(e).Length > 0).ToImmutableArray();
 
     /// <summary>
-    /// The parts of a selected entry that are retired: each part of the grouped name, except that
-    /// for <c>renamed →</c> a part that is also a part of the rename target (ordinal, also against the
-    /// target part without a trailing parenthetical) keeps its name, and for <c>deleted in part</c> only
-    /// the parts the outcome names (ordinal substring) are retired, since the rest stay as written.
+    /// The parts of a selected entry that are retired: each part of the grouped name, cleaned (see
+    /// <see cref="Clean"/>), except that for <c>renamed →</c> a part that is also a part of the rename
+    /// target (ordinal, also against the target part cleaned or without a trailing parenthetical) keeps
+    /// its name, as does a part whose last word a closing <c>; the A and B final as written</c> clause
+    /// names; for <c>deleted in part</c> only the parts the outcome names (ordinal substring) are retired,
+    /// since the rest stay as written; and for an <c>X retired</c> clause only X is retired.
     /// </summary>
     public static ImmutableArray<string> RetiredParts(NameListEntry entry)
     {
         ArgumentNullException.ThrowIfNull(entry);
-        var parts = SplitGroup(entry.Name);
+        if (!StartsRetiring(entry))
+        {
+            return RetiredByClause(entry);
+        }
+
+        var parts = SplitGroup(entry.Name).Select(Clean).ToImmutableArray();
         if (entry.Outcome.StartsWith(DeletedInPart, StringComparison.Ordinal))
         {
             string said = entry.Outcome.Substring(DeletedInPart.Length);
@@ -132,12 +149,63 @@ public static class NameListExporter
         if (entry.Outcome.StartsWith(RenamedTo, StringComparison.Ordinal))
         {
             var target = Split(entry.Outcome.Substring(RenamedTo.Length), [", ", " / ", "; "]);
-            var survivors = target.Concat(target.Select(StripTrailingParenthetical)).ToHashSet(StringComparer.Ordinal);
-            return parts.Where(p => !survivors.Contains(p)).ToImmutableArray();
+            var survivors = target
+                .Concat(target.Select(StripTrailingParenthetical))
+                .Concat(target.Select(Clean))
+                .ToHashSet(StringComparer.Ordinal);
+            var kept = KeptFinal.Match(entry.Outcome);
+            var keptWords = kept.Success
+                ? Split(kept.Groups[1].Value, [", ", " and "]).ToHashSet(StringComparer.Ordinal)
+                : new HashSet<string>(StringComparer.Ordinal);
+            return parts.Where(p => !survivors.Contains(p) && !keptWords.Contains(LastWord(p))).ToImmutableArray();
         }
 
         return parts;
     }
+
+    /// <summary>
+    /// A retired part as the bare name: a trailing descriptive parenthetical is dropped
+    /// (<c>Upended (former name)</c> gives <c>Upended</c>), then double quotes around the whole part
+    /// (<c>"ask me"</c> gives <c>ask me</c>). A parenthetical that is part of the name stays: an option
+    /// list holding <c>" / "</c> (<c>Complexity (Simple / Medium / Complex)</c>) or a slot,
+    /// <c>(type)</c> or <c>(element)</c> (<c>Resisting (type)</c>).
+    /// </summary>
+    internal static string Clean(string part)
+    {
+        int open = part.LastIndexOf(" (", StringComparison.Ordinal);
+        if (part.EndsWith(')') && open > 0)
+        {
+            string inner = part.Substring(open + 2, part.Length - open - 3);
+            if (!inner.Contains(" / ", StringComparison.Ordinal) && !NameSlots.Contains(inner))
+            {
+                part = part.Substring(0, open);
+            }
+        }
+
+        bool quoted = part.Length >= 2 && part[0] == '"' && part.IndexOf('"', 1) == part.Length - 1;
+        return quoted ? part.Substring(1, part.Length - 2) : part;
+    }
+
+    private static bool StartsRetiring(NameListEntry e) =>
+        RetiringPrefixes.Any(p => e.Outcome.StartsWith(p, StringComparison.Ordinal));
+
+    // The cleaned parts named by an "X retired ..." clause of an outcome that does not start retiring.
+    private static ImmutableArray<string> RetiredByClause(NameListEntry e)
+    {
+        if (StartsRetiring(e))
+        {
+            return [];
+        }
+
+        var named = Split(e.Outcome, ["; "])
+            .Select(c => RetiredClause.Match(c))
+            .Where(m => m.Success)
+            .Select(m => m.Groups[1].Value)
+            .ToHashSet(StringComparer.Ordinal);
+        return SplitGroup(e.Name).Select(Clean).Where(named.Contains).ToImmutableArray();
+    }
+
+    private static string LastWord(string part) => part.Substring(part.LastIndexOf(' ') + 1);
 
     /// <summary>
     /// The retired pairs (plan call 7): one pair per <see cref="RetiredParts"/> part of each of the
@@ -218,6 +286,8 @@ public static class NameListExporter
     /// <summary>
     /// The parts of a grouped name. A label before <c>": "</c> followed by a list (<c>Label: A, B</c>) is
     /// dropped and the list split on <c>", "</c> and <c>" / "</c>; otherwise the name splits on <c>" / "</c>.
+    /// Text after the colon holding <c>", or "</c> or <c>", and "</c> is a sentence, not a list, so it
+    /// does not split there.
     /// Separators inside parentheses or double quotes do not split, so <c>Complexity (Simple / Medium)</c>
     /// and <c>"Weak: Will"</c> stay whole.
     /// </summary>
@@ -227,7 +297,8 @@ public static class NameListExporter
         if (colon >= 0)
         {
             string list = name.Substring(colon + 2);
-            if (IndexAtTop(list, ", ", 0) >= 0 || IndexAtTop(list, " / ", 0) >= 0)
+            bool sentence = Conjunctions.Any(c => IndexAtTop(list, c, 0) >= 0);
+            if (!sentence && (IndexAtTop(list, ", ", 0) >= 0 || IndexAtTop(list, " / ", 0) >= 0))
             {
                 return Split(list, [", ", " / "]);
             }

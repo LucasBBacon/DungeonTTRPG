@@ -116,11 +116,76 @@ public class ContentLoaderTests
     }
 
     [Fact]
+    public void A_check_whose_uses_name_a_missing_check_names_the_reference()
+    {
+        var ex = LoadFails(Checks(Check("V19.ClassDeclared", uses: "[\"V99.Missing\"]")));
+        Assert.Equal(ChecksFile, ex.File);
+        Assert.Equal("$.checks[0].uses[0]", ex.Field);
+    }
+
+    [Fact]
+    public void A_check_whose_proof_ref_names_a_missing_check_names_the_reference()
+    {
+        var ex = LoadFails(Checks(Check("V19.ClassDeclared", extra: ", \"proofRef\": \"V99.Missing\"")));
+        Assert.Equal(ChecksFile, ex.File);
+        Assert.Equal("$.checks[0].proofRef", ex.Field);
+    }
+
+    [Theory]
+    [InlineData("s", "agreed", "two", "instrument")]
+    [InlineData("S", "Agreed", "two", "thresholdStatus")]
+    [InlineData("S", "agreed", "both", "sided")]
+    public void A_bad_report_enum_names_its_field(string instrument, string thresholdStatus, string sided, string field)
+    {
+        var ex = LoadFails(Reports(Report("HealerGap", instrument: instrument, thresholdStatus: thresholdStatus, sided: sided)));
+        Assert.Equal(ReportsFile, ex.File);
+        Assert.Equal("$.reports[0]." + field, ex.Field);
+    }
+
+    [Theory]
+    [InlineData("Party")]
+    [InlineData("Party.Solo.Duo")]
+    [InlineData("1Party.Solo")]
+    public void An_arm_id_outside_its_grammar_is_rejected(string id)
+    {
+        var ex = LoadFails(Arms(Arm(id)));
+        Assert.Equal(ArmsFile, ex.File);
+        Assert.Equal("$.arms[0].id", ex.Field);
+    }
+
+    [Theory]
+    [InlineData("1Gap")]
+    [InlineData("Healer_Gap")]
+    [InlineData("")]
+    public void A_report_id_outside_its_grammar_is_rejected(string id)
+    {
+        var ex = LoadFails(Reports(Report(id)));
+        Assert.Equal(ReportsFile, ex.File);
+        Assert.Equal("$.reports[0].id", ex.Field);
+    }
+
+    [Fact]
+    public void A_null_record_names_its_item()
+    {
+        var ex = LoadFails(new ContentFile(ChecksFile, "{\"checks\": [null]}"));
+        Assert.Equal(ChecksFile, ex.File);
+        Assert.Equal("$.checks[0]", ex.Field);
+    }
+
+    [Fact]
+    public void A_null_reference_names_its_item()
+    {
+        var ex = LoadFails(Checks(Check("V19.ClassDeclared", deps: "[null]")));
+        Assert.Equal(ChecksFile, ex.File);
+        Assert.Equal("$.checks[0].deps[0]", ex.Field);
+    }
+
+    [Fact]
     public void Comments_are_rejected()
     {
         var ex = LoadFails(new ContentFile(ChecksFile, "{\"checks\": [] // none yet\n}"));
         Assert.Equal(ChecksFile, ex.File);
-        Assert.StartsWith("$", ex.Field, StringComparison.Ordinal);
+        Assert.Equal("$", ex.Field);
     }
 
     // --- File-level errors ---
@@ -215,6 +280,19 @@ public class ContentLoaderTests
         Assert.Equal(a.DigestOf([ArmsFile]), b.DigestOf([ArmsFile]));
     }
 
+    [Fact]
+    public void The_digest_rejects_a_file_name_no_kind_reads()
+    {
+        var set = ContentLoader.Load([Checks(Check("V19.ClassDeclared"))]);
+
+        // A typo would otherwise digest as an empty file whatever checks.json holds, so a cache keyed on it never invalidates.
+        var ex = Assert.Throws<ArgumentException>(() => set.DigestOf(["registry/check.json"]));
+        Assert.Contains("registry/check.json", ex.Message, StringComparison.Ordinal);
+
+        // A file some kind reads but that is absent is still an empty file.
+        _ = set.DigestOf([ArmsFile]);
+    }
+
     // --- Builders ---
 
     private static ContentLoadException LoadFails(params ContentFile[] files) =>
@@ -234,6 +312,7 @@ public class ContentLoaderTests
         string id,
         string deps = "[]",
         string? phase = "\"s\"",
+        string uses = "[]",
         string owner = "\"the lead\"",
         string? budgetMs = null,
         string extra = "")
@@ -249,7 +328,7 @@ public class ContentLoaderTests
         }
 
         parts.Add($"\"deps\": {deps}");
-        parts.Add("\"uses\": []");
+        parts.Add($"\"uses\": {uses}");
         parts.Add("\"class\": \"build\"");
         parts.Add("\"action\": \"fail the build\"");
         parts.Add("\"wave\": \"M1\"");
@@ -262,19 +341,25 @@ public class ContentLoaderTests
         return "{" + string.Join(", ", parts) + extra + "}";
     }
 
-    private static string Report(string id, string arms = "[]", string threshold = "\"3/4\"") =>
+    private static string Report(
+        string id,
+        string arms = "[]",
+        string threshold = "\"3/4\"",
+        string instrument = "S",
+        string thresholdStatus = "illustr",
+        string sided = "one") =>
         "{" + string.Join(", ",
             $"\"id\": \"{id}\"",
             "\"keys\": [\"class\"]",
             "\"owner\": \"the lead\"",
             "\"definition\": \"healer gap\"",
             "\"unit\": \"percent\"",
-            "\"instrument\": \"S\"",
+            $"\"instrument\": \"{instrument}\"",
             $"\"arms\": {arms}",
             "\"class\": \"REL\"",
             $"\"threshold\": {threshold}",
-            "\"thresholdStatus\": \"illustr\"",
-            "\"sided\": \"one\"",
+            $"\"thresholdStatus\": \"{thresholdStatus}\"",
+            $"\"sided\": \"{sided}\"",
             "\"z\": \"49/25\"",
             "\"stat\": \"mean\"",
             "\"N\": 4300",

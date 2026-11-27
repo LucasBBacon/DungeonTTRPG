@@ -27,7 +27,8 @@ public readonly record struct Rational(long P, long Q) : ICanonical
 
     /// <summary>
     /// Parses exactly <c>-?[0-9]+</c> (denominator 1) or <c>-?[0-9]+/[0-9]+</c> in reduced form with
-    /// a positive denominator. A denominator of 1 is written as a plain integer, so <c>1/1</c> is rejected.
+    /// a positive denominator. A denominator of 1 is written as a plain integer, so <c>1/1</c> is rejected,
+    /// and no number has a leading zero or is <c>-0</c>, so <see cref="ToString"/> round-trips every accepted input.
     /// </summary>
     public static bool TryParse(string s, out Rational r)
     {
@@ -42,6 +43,12 @@ public readonly record struct Rational(long P, long Q) : ICanonical
 
         var negative = left.Length > 0 && left[0] == '-';
         if (!TryDigits(negative ? left.Substring(1) : left, out var mag))
+        {
+            return false;
+        }
+
+        // "-0" is not canonical: zero is written "0".
+        if (negative && mag == 0)
         {
             return false;
         }
@@ -66,7 +73,6 @@ public readonly record struct Rational(long P, long Q) : ICanonical
         {
             p = -(long)mag;
         }
-
 
         if (slash < 0)
         {
@@ -119,11 +125,14 @@ public readonly record struct Rational(long P, long Q) : ICanonical
         return a;
     }
 
-    /// <summary>Reads one or more ASCII digits into an unsigned value; false on any other character or overflow.</summary>
+    /// <summary>
+    /// Reads one or more ASCII digits into an unsigned value; false on any other character, a leading
+    /// zero (<c>"007"</c>, <c>"00"</c>; only <c>"0"</c> itself starts with one) or overflow.
+    /// </summary>
     private static bool TryDigits(string s, out ulong value)
     {
         value = 0;
-        if (s.Length == 0)
+        if (s.Length == 0 || (s.Length > 1 && s[0] == '0'))
         {
             return false;
         }

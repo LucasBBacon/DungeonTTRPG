@@ -14,7 +14,8 @@ public static class ValidationRunner
 {
     /// <summary>
     /// Runs <paramref name="checks"/> over <paramref name="content"/>. Every check must have a
-    /// <see cref="CheckRow"/> with phase <c>s</c>, or <see cref="InvalidOperationException"/> names it.
+    /// <see cref="CheckRow"/> with phase <c>s</c> and a read set of files the content's kinds read, or
+    /// <see cref="InvalidOperationException"/> names it.
     /// </summary>
     public static ValidationReport Run(ContentSet content, IReadOnlyList<IStaticCheck> checks, CheckCache cache)
     {
@@ -41,6 +42,14 @@ public static class ValidationRunner
             if (row.Phase != Phase.S)
             {
                 throw new InvalidOperationException($"{id} is a static check, but its row has phase {row.PhaseText}, not s.");
+            }
+
+            foreach (var read in ordered[i].Reads)
+            {
+                if (!content.IsKindFile(read))
+                {
+                    throw new InvalidOperationException($"{id} declares that it reads {read}, which no content kind reads.");
+                }
             }
         }
 

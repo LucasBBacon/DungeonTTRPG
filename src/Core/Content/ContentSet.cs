@@ -18,9 +18,13 @@ public sealed class ContentSet
     // Every record, ordinal by id then file.
     private readonly ImmutableArray<ContentRecord> _all;
 
-    internal ContentSet(ImmutableArray<ContentFile> files, ImmutableArray<(string File, ImmutableArray<ContentRecord> Records)> byFile)
+    internal ContentSet(
+        ImmutableArray<ContentFile> files,
+        ImmutableArray<(string File, ImmutableArray<ContentRecord> Records)> byFile,
+        ImmutableArray<string> kindFiles)
     {
         Files = files;
+        KindFiles = kindFiles;
         _byFile = byFile;
         _all = byFile
             .SelectMany(f => f.Records)
@@ -31,6 +35,13 @@ public sealed class ContentSet
 
     /// <summary>The loaded files, ordinal by name.</summary>
     public ImmutableArray<ContentFile> Files { get; }
+
+    /// <summary>The file names the set's content kinds read, ordinal: every name <see cref="DigestOf"/> accepts.</summary>
+    public ImmutableArray<string> KindFiles { get; }
+
+    /// <summary>True if one of the set's content kinds reads <paramref name="fileName"/>.</summary>
+    public bool IsKindFile(string fileName) =>
+        ImmutableArray.BinarySearch(KindFiles, fileName, StringComparer.Ordinal) >= 0;
 
     /// <summary>Every record of type <typeparamref name="T"/>, ordinal by id.</summary>
     public ImmutableArray<T> All<T>()
@@ -91,13 +102,15 @@ public sealed class ContentSet
     /// (<see cref="ContentRecord.WriteCanonical"/>) and, when it is <see cref="IDisplayCanonical"/>, its
     /// display bytes, so editing any field a check can read changes the digest (SV 5.3 cache). An absent
     /// file counts as one with no records, so the digest depends on the records alone, never on JSON
-    /// layout, line endings or file order.
+    /// layout, line endings or file order. A name no kind of the set reads throws
+    /// <see cref="ArgumentException"/>: as an always-empty file it would give a digest that never changes.
     /// </summary>
     public Digest DigestOf(IEnumerable<string> fileNames)
     {
         ArgumentNullException.ThrowIfNull(fileNames);
         var names = fileNames
             .Select(n => n ?? throw new ArgumentException("A file name is null.", nameof(fileNames)))
+            .Select(n => IsKindFile(n) ? n : throw new ArgumentException($"No content kind reads {n}.", nameof(fileNames)))
             .Distinct(StringComparer.Ordinal)
             .OrderBy(n => n, StringComparer.Ordinal)
             .Select(n => new FileRecords(n, RecordsIn(n)))

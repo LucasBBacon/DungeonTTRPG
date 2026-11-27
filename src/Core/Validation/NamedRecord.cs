@@ -8,12 +8,22 @@ namespace Dungeon.Core.Validation;
 
 /// <summary>
 /// A record whose name reaches the screen, as the naming checks see it. <see cref="File"/> and
-/// <see cref="Field"/> locate its name (a JSON path such as <c>$.items[3].name</c>); failures are named there.
+/// <see cref="Field"/> locate its name (a JSON path such as <c>$.items[3].name</c>); name failures are
+/// named there. <see cref="CategoryField"/> locates its category (<c>V7.NameRegistry</c> category failures)
+/// and <see cref="KeyField"/> its display key, or where the key belongs when it has none (V24 r6).
 /// <see cref="MeaningId"/> is the meaning it shares with other records of the same name (V24 r1), and
 /// <see cref="DisplayKey"/> is its key in <c>strings/en.json</c>, which an internal record does not have (V24 r6).
 /// </summary>
 public sealed record NamedRecord(
-    string File, string Field, string DisplayName, string Category, string? MeaningId, bool Internal, string? DisplayKey);
+    string File,
+    string Field,
+    string DisplayName,
+    string Category,
+    string? MeaningId,
+    bool Internal,
+    string? DisplayKey,
+    string CategoryField,
+    string KeyField);
 
 /// <summary>Collects the named records of the content kinds that are <see cref="INamedRecordSource"/>s.</summary>
 internal static class NamedRecords

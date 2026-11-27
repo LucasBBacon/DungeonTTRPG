@@ -54,7 +54,8 @@ public sealed class NameRegistryCheck : IStaticCheck
 
             if (!NamedRecords.Contains(categories, record.Category))
             {
-                failures.Add(Fail(record, $"category \"{record.Category}\" is not a category of naming/name_list.json."));
+                failures.Add(new CheckFailure(
+                    Id, record.File, record.CategoryField, $"category \"{record.Category}\" is not a category of naming/name_list.json."));
             }
         }
 

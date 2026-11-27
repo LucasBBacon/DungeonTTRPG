@@ -47,7 +47,7 @@ public class NamingChecksTests
         var failure = Assert.Single(Run(
             new NameRegistryCheck(Kinds),
             Named(Rec("a", "Old Ragged", key: "T.n.a"), Rec("b", "Bobbin", category: "gizmo", key: "T.n.b"))));
-        Assert.Equal("$.named[1].name", failure.Field);
+        Assert.Equal("$.named[1].category", failure.Field);
     }
 
     // --- V24 r1 ---
@@ -113,14 +113,14 @@ public class NamingChecksTests
             Named(Rec("a", "fx_ragged", isInternal: true, key: "T.n.a")),
             Strings(Str("T.n.a", "Ragged"))));
         Assert.Equal(new CheckId("V24.R6InternalByKey"), failure.Check);
-        Assert.Equal("$.named[0].name", failure.Field);
+        Assert.Equal("$.named[0].key", failure.Field);
     }
 
     [Fact]
     public void R6_fails_a_shown_record_without_a_key()
     {
         var failure = Assert.Single(Run(new R6InternalByKeyCheck(Kinds), Named(Rec("a", "Old Ragged"))));
-        Assert.Equal("$.named[0].name", failure.Field);
+        Assert.Equal("$.named[0].key", failure.Field);
     }
 
     [Fact]
@@ -130,7 +130,7 @@ public class NamingChecksTests
             new R6InternalByKeyCheck(Kinds),
             Named(Rec("a", "Old Ragged", key: "T.n.a")),
             Strings(Str("T.n.b", "Bobbin"))));
-        Assert.Equal("$.named[0].name", failure.Field);
+        Assert.Equal("$.named[0].key", failure.Field);
     }
 
     [Fact]
@@ -188,6 +188,19 @@ public class NamingChecksTests
     {
         var ex = Assert.Throws<ContentLoadException>(
             () => ContentLoader.Load([Greyed("{\"id\": \"x\", \"doc\": \"É\"}")]));
+        Assert.Equal("$.reasons[0].doc", ex.Field);
+    }
+
+    [Theory]
+    [InlineData("a b")]
+    [InlineData("")]
+    [InlineData("IT.EMS")]
+    [InlineData("ITEMS/x")]
+    public void A_greyed_doc_that_is_not_one_key_part_is_rejected_at_doc(string doc)
+    {
+        var ex = Assert.Throws<ContentLoadException>(
+            () => ContentLoader.Load([Greyed("{\"id\": \"x\", \"doc\": \"" + doc + "\"}")]));
+        Assert.Equal("naming/greyed_reasons.json", ex.File);
         Assert.Equal("$.reasons[0].doc", ex.Field);
     }
 
@@ -376,7 +389,15 @@ public class NamingChecksTests
             set.RecordsIn(FileName)
                 .Cast<NamedFixture>()
                 .Select(r => new NamedRecord(
-                    r.File, Member(Item("$.named", r.Index), "name"), r.Name, r.Category, r.MeaningId, r.Internal, r.Key))
+                    r.File,
+                    Member(Item("$.named", r.Index), "name"),
+                    r.Name,
+                    r.Category,
+                    r.MeaningId,
+                    r.Internal,
+                    r.Key,
+                    Member(Item("$.named", r.Index), "category"),
+                    Member(Item("$.named", r.Index), "key")))
                 .ToImmutableArray();
 
         private sealed class NamedDto

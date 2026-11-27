@@ -41,6 +41,12 @@ public class RationalTests
     [InlineData("3/")]
     [InlineData("1.5")]
     [InlineData("٣/4")]
+    [InlineData("-0")]
+    [InlineData("007")]
+    [InlineData("00")]
+    [InlineData("03/4")]
+    [InlineData("3/04")]
+    [InlineData("-03/4")]
     public void Rejected_inputs_fail(string s)
     {
         Assert.False(Rational.TryParse(s, out var r));

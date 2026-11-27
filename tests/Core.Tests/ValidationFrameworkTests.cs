@@ -85,13 +85,21 @@ public class ValidationFrameworkTests
     [Fact]
     public void Checks_run_in_tier_order()
     {
-        var content = Load(Checks(Row("V24.Probe"), Row("V19.Probe")));
+        // Ordinal order alone gives V19, V24, V7, content.X.Load. Tier order (plan call 5) gives
+        // V19 and content.X.Load at tier 0 (ordinal within the tier), then V7 at 2, then V24 at 3.
+        var content = Load(Checks(Row("V24.Probe"), Row("V7.Probe"), Row("V19.Probe"), Row("content.X.Load")));
         var order = new List<string>();
-        var checks = new IStaticCheck[] { new Probe("V24.Probe", order), new Probe("V19.Probe", order) };
+        var checks = new IStaticCheck[]
+        {
+            new Probe("V24.Probe", order),
+            new Probe("V7.Probe", order),
+            new Probe("V19.Probe", order),
+            new Probe("content.X.Load", order),
+        };
 
         var report = ValidationRunner.Run(content, checks, new CheckCache());
 
-        Assert.Equal(["V19.Probe", "V24.Probe"], order);
+        Assert.Equal(["V19.Probe", "content.X.Load", "V7.Probe", "V24.Probe"], order);
         Assert.True(report.Passed);
     }
 
@@ -176,6 +184,25 @@ public class ValidationFrameworkTests
         Assert.Equal(1, cache.Runs);
         Assert.Equal(1, cache.Hits);
         Assert.Equal(1, check.Calls);
+    }
+
+    [Fact]
+    public void A_read_set_naming_a_file_no_kind_reads_throws()
+    {
+        var check = new Probe("V19.Probe", []) { Reads = ["registry/check.json"] };
+
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => ValidationRunner.Run(Load(Checks(Row("V19.Probe"))), [check], new CheckCache()));
+        Assert.Contains("V19.Probe", ex.Message, StringComparison.Ordinal);
+        Assert.Contains("registry/check.json", ex.Message, StringComparison.Ordinal);
+        Assert.Equal(0, check.Calls);
+    }
+
+    [Fact]
+    public void Every_static_check_reads_only_files_a_kind_reads()
+    {
+        var files = ContentKinds.All.Select(k => k.FileName).ToHashSet(StringComparer.Ordinal);
+        Assert.All(StaticChecks.All, c => Assert.All(c.Reads, r => Assert.Contains(r, files)));
     }
 
     // --- Tiers (SV 5.3, plan call 5) ---
