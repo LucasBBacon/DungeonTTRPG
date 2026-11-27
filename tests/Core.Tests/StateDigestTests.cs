@@ -1,4 +1,5 @@
 using Dungeon.Core.Canonical;
+using Dungeon.Core.Effects;
 using Xunit;
 using static Dungeon.Core.Tests.Fixtures;
 
@@ -103,6 +104,8 @@ public class StateDigestTests
             atShrine with { NextDecisionId = atShrine.NextDecisionId + 1 },
             atShrine with { Config = RunConfig.M1 with { DifficultyTier = 1 } },
             atShrine with { Unlocks = new UnlockSnapshot(["unlock.a"]) },
+            atShrine with { Effects = [new EffectInstance(1, "test.effect", Hero, EffectSource.Environment)] },
+            atShrine with { NextEffectSeq = atShrine.NextEffectSeq + 1 },
         ];
         var baseline = StateDigest.Of(atShrine);
         for (int i = 0; i < changed.Length; i++)

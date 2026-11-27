@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Dungeon.Core.Effects;
 
 namespace Dungeon.Core;
 
@@ -24,7 +25,9 @@ public sealed record PendingDecision(
 /// The complete immutable state of a run. <see cref="RunSeed"/> is the 60-bit seed every
 /// random stream is derived from; <see cref="Rng"/> holds the streams' positions.
 /// <see cref="Units"/> is kept sorted by id so that
-/// every walk over it is in a fixed order. Two states with the same contents are not equal
+/// every walk over it is in a fixed order. <see cref="Effects"/> holds the active effect instances, sorted by
+/// <see cref="EffectInstance.Seq"/>; <see cref="NextEffectSeq"/> is the seq the next one gets (never reused).
+/// Two states with the same contents are not equal
 /// with <c>==</c> or <c>Equals</c> (the map and the arrays compare by reference); compare
 /// their <see cref="Snapshot.Save"/> text instead.
 /// </summary>
@@ -34,6 +37,8 @@ public sealed record GameState(
     ulong RunSeed,
     RunConfig Config,
     UnlockSnapshot Unlocks,
+    ImmutableArray<EffectInstance> Effects,
+    long NextEffectSeq,
     RunStreams Rng,
     PendingDecision? Pending,
     long Tick,
@@ -46,7 +51,7 @@ public sealed record GameState(
     /// <see cref="Unit.Boons"/> is an uninitialised array, and an
     /// <see cref="ArgumentOutOfRangeException"/> if <paramref name="seed"/> is at least 2^60. The run
     /// configuration defaults to <see cref="RunConfig.M1"/> and the unlocks to <see cref="UnlockSnapshot.None"/>;
-    /// both are validated.
+    /// both are validated. The run starts with no active effects and <see cref="NextEffectSeq"/> 1.
     /// </summary>
     public static GameState Create(
         GridMap map, IEnumerable<Unit> units, ulong seed, RunConfig? config = null, UnlockSnapshot? unlocks = null)
@@ -96,7 +101,7 @@ public sealed record GameState(
             }
         }
 
-        return new GameState(map, sorted, seed, config, unlocks, streams, null, 0, 1);
+        return new GameState(map, sorted, seed, config, unlocks, ImmutableArray<EffectInstance>.Empty, 1, streams, null, 0, 1);
     }
 
     /// <summary>

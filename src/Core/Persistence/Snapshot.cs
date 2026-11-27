@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dungeon.Core.Canonical;
+using Dungeon.Core.Content;
+using Dungeon.Core.Effects;
 
 namespace Dungeon.Core;
 
@@ -48,10 +50,11 @@ public static class Snapshot
 {
     /// <summary>
     /// The only version this build reads and writes, shared with <see cref="CommandLog"/>.
-    /// Version 3 (M1-06) adds the reproducibility-key header and the run configuration and unlock
+    /// Version 4 (M1-07) adds the active effects and the next effect seq;
+    /// version 3 (M1-06) added the reproducibility-key header and the run configuration and unlock
     /// snapshots; version 2 (M1-02) stored the run seed and stream counters; version 1 held PCG32 states.
     /// </summary>
-    public const int CurrentVersion = 3;
+    public const int CurrentVersion = 4;
 
     /// <summary>
     /// Writes <paramref name="s"/>. Only the run seed and the stream counters are stored, so a state whose
@@ -111,6 +114,14 @@ public static class Snapshot
             },
             Tick = s.Tick,
             NextDecisionId = s.NextDecisionId,
+            Effects = s.Effects.Select(e => new EffectDto
+            {
+                Seq = e.Seq,
+                Effect = e.EffectId,
+                Holder = e.Holder.Value,
+                Source = e.Source.Unit?.Value,
+            }).ToArray(),
+            NextEffectSeq = s.NextEffectSeq,
         });
     }
 
@@ -119,7 +130,8 @@ public static class Snapshot
     /// for a save of any version other than <see cref="CurrentVersion"/> and
     /// <see cref="SnapshotFormatException"/> for anything else that is wrong, including a run seed
     /// of 2^60 or more; it never returns a partly loaded state. Stream keys are re-derived from the
-    /// run seed, so only the counters come from the file.
+    /// run seed, so only the counters come from the file. Active effects must be sorted by seq, with positive,
+    /// distinct seqs below <c>nextEffectSeq</c>, content ids, and holder and source units that are in the state.
     /// </summary>
     public static GameState Load(string json) => PersistenceJson.Read<StateDto, GameState>(json, FromDto);
 
@@ -246,7 +258,72 @@ public static class Snapshot
             }
         }
 
-        return state with { Rng = rng, Pending = pending, Tick = tick, NextDecisionId = nextDecisionId };
+        long nextEffectSeq = PersistenceJson.Need(dto.NextEffectSeq, "nextEffectSeq");
+        if (nextEffectSeq < 1)
+        {
+            throw new SnapshotFormatException($"Invalid save: nextEffectSeq {nextEffectSeq} is below 1.");
+        }
+
+        var effects = ReadEffects(PersistenceJson.Need(dto.Effects, "effects"), state, nextEffectSeq);
+
+        return state with
+        {
+            Effects = effects,
+            NextEffectSeq = nextEffectSeq,
+            Rng = rng,
+            Pending = pending,
+            Tick = tick,
+            NextDecisionId = nextDecisionId,
+        };
+    }
+
+    /// <summary>The active effects, checked against the rules: Apply hands out seqs in order and never reuses one.</summary>
+    private static ImmutableArray<EffectInstance> ReadEffects(EffectDto?[] dtos, GameState state, long nextEffectSeq)
+    {
+        var effects = ImmutableArray.CreateBuilder<EffectInstance>(dtos.Length);
+        foreach (var e in dtos)
+        {
+            if (e is null)
+            {
+                throw new SnapshotFormatException("Invalid save: an effect is null.");
+            }
+
+            long seq = PersistenceJson.Need(e.Seq, "effect seq");
+            string id = PersistenceJson.Need(e.Effect, "effect id");
+            var holder = new UnitId(PersistenceJson.Need(e.Holder, "effect holder"));
+            var source = new EffectSource(e.Source is { } unit ? new UnitId(unit) : null);
+            if (seq < 1 || seq >= nextEffectSeq)
+            {
+                throw new SnapshotFormatException(
+                    $"Invalid save: effect seq {seq} was never issued (nextEffectSeq is {nextEffectSeq}).");
+            }
+
+            if (effects.Count > 0 && effects[^1].Seq >= seq)
+            {
+                throw new SnapshotFormatException(effects[^1].Seq == seq
+                    ? $"Invalid save: two effects have seq {seq}."
+                    : $"Invalid save: effect seq {seq} follows seq {effects[^1].Seq}; effects are sorted by seq.");
+            }
+
+            if (!ContentId.IsValid(id))
+            {
+                throw new SnapshotFormatException($"Invalid save: effect {seq} id '{id}' is not a content id.");
+            }
+
+            if (state.FindUnit(holder) is null)
+            {
+                throw new SnapshotFormatException($"Invalid save: effect {seq} is held by unknown unit {holder.Value}.");
+            }
+
+            if (source.Unit is { } from && state.FindUnit(from) is null)
+            {
+                throw new SnapshotFormatException($"Invalid save: effect {seq} comes from unknown unit {from.Value}.");
+            }
+
+            effects.Add(new EffectInstance(seq, id, holder, source));
+        }
+
+        return effects.MoveToImmutable();
     }
 
     /// <summary>A saved stream counter. A stream at 2^64 - 1 can never draw again, so that value is refused here, at load.</summary>
@@ -293,6 +370,8 @@ public static class Snapshot
         [JsonPropertyName("pending"), JsonPropertyOrder(12), JsonRequired] public PendingDto? Pending { get; set; }
         [JsonPropertyName("tick"), JsonPropertyOrder(13)] public long? Tick { get; set; }
         [JsonPropertyName("nextDecisionId"), JsonPropertyOrder(14)] public int? NextDecisionId { get; set; }
+        [JsonPropertyName("effects"), JsonPropertyOrder(15)] public EffectDto?[]? Effects { get; set; }
+        [JsonPropertyName("nextEffectSeq"), JsonPropertyOrder(16)] public long? NextEffectSeq { get; set; }
 
         public SaveHeader ToHeader() => new(
             PersistenceJson.Need(Version, "version"),
@@ -366,6 +445,16 @@ public static class Snapshot
     {
         [JsonPropertyName("combat"), JsonPropertyOrder(0)] public ulong? Combat { get; set; }
         [JsonPropertyName("shrine"), JsonPropertyOrder(1)] public ulong? Shrine { get; set; }
+    }
+
+    /// <summary>An active effect; <c>source</c> is the source unit's id, or null for the environment.</summary>
+    private sealed class EffectDto
+    {
+        [JsonPropertyName("seq"), JsonPropertyOrder(0)] public long? Seq { get; set; }
+        [JsonPropertyName("effect"), JsonPropertyOrder(1)] public string? Effect { get; set; }
+        [JsonPropertyName("holder"), JsonPropertyOrder(2)] public int? Holder { get; set; }
+        // Required: Save always writes it (as null for the environment).
+        [JsonPropertyName("source"), JsonPropertyOrder(3), JsonRequired] public int? Source { get; set; }
     }
 
     private sealed class PendingDto
