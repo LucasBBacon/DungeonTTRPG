@@ -112,8 +112,9 @@ public static partial class AbilityUse
     /// eight directions. Then the range (<see cref="CommandError.OutOfRange"/>: Chebyshev from the user to each unit or
     /// to the point) and the sight (<see cref="CommandError.NoLineOfSight"/>: <see cref="Sight.CanSee"/> from the user's
     /// square). Last, out of combat: a use that is not an opener (it affects no unit of another faction) and draws (it
-    /// has a <c>resolve</c>, or dice in its damage) is <see cref="CommandError.NotInCombat"/> (plan call 5; D-23); an
-    /// opener draws on the combat stream once combat has started. Out of combat it reads the step-4 view for an opener
+    /// has a <c>resolve</c>, or dice in its damage) is <see cref="CommandError.NotInCombat"/> (plan call 5; D-23 ruled
+    /// 2026-11-28: the refusal stays in M1; the D-23 wave uses <c>h:roll</c> (M1-11 rulings record 2)); an opener draws on
+    /// the combat stream once combat has started. Out of combat it reads the step-4 view for an opener
     /// and the tick-reset view otherwise. The command refuses with this code.
     /// </summary>
     public static CommandError CheckTarget(
@@ -258,7 +259,9 @@ public static partial class AbilityUse
             }
         }
 
-        // Plan call 5: out of combat only an opener may draw, on the combat stream once its fight has started.
+        // Plan call 5: out of combat only an opener may draw, on the combat stream once its fight has started. D-23 ruled
+        // 2026-11-28: the refusal stays in M1; the D-23 wave uses h:roll (M1-11 rulings record 2). The refusal is
+        // decided before any noticing roll (record 2.3).
         if (!s.CombatActive && Draws(ability) && !Opens(rules, s, user, abilityId, target))
         {
             return CommandError.NotInCombat;
@@ -269,7 +272,8 @@ public static partial class AbilityUse
 
     /// <summary>
     /// Whether resolving <paramref name="ability"/> draws: it has a <c>resolve</c> (an attack roll or a save) or dice in
-    /// its damage. Out of combat such a use has no stream (plan call 5; D-23).
+    /// its damage. Out of combat such a use has no stream (plan call 5; D-23 ruled 2026-11-28: the refusal stays in M1;
+    /// the D-23 wave uses <c>h:roll</c> (M1-11 rulings record 2)).
     /// </summary>
     internal static bool Draws(AbilityDefinition ability)
     {

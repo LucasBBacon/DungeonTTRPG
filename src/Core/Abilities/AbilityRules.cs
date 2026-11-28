@@ -18,7 +18,8 @@ namespace Dungeon.Core.AbilityModel;
 /// <item>a single target has range at least 0, count at least 1 and no size; a burst has radius at least 1, range at
 /// least 0 and no count; a cone or line has length at least 1 and no range or count;</item>
 /// <item>a resolve is an attack or a save with <c>onSuccess: "none"</c> (the only save form a
-/// <see cref="SaveResolve"/> can express);</item>
+/// <see cref="SaveResolve"/> can express; <c>onSuccess: half</c> is ruled (D-22, M1-11 rulings record 1) and built in
+/// the D-22 step, written to the canonical form only when not <c>none</c> (lead's call));</item>
 /// <item>the damage and effects lists are not default; a damage part has dice and sides both at least 1 or both 0.</item>
 /// </list>
 /// Pool and effect references, the preview bound and the AB 14.5 static checks are separate.

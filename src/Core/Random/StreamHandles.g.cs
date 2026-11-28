@@ -333,6 +333,10 @@ public readonly record struct DungeonFloorChecksKey
     /// <summary>The keyed hash <c>dungeon/floor/{N}/checks/h:object/{objectId:}/{checkKind:}/{attemptIndex}/{die}</c>.</summary>
     public ulong HObject(string objectId, string checkKind, ulong attemptIndex, ulong die) => KeyAlgebra.H(Value, "h:object", KeyAlgebra.LabelId(objectId), KeyAlgebra.LabelId(checkKind), attemptIndex, die);
 
+    /// <summary>The keyed hash <c>dungeon/floor/{N}/checks/h:roll/{sourceId:}/{verb:}/{targetId:}/{attemptIndex}/{die}</c>.</summary>
+    /// <remarks>Inert until M2 (D-08): the DrawLedger expects 0 draws on it.</remarks>
+    public ulong HRoll(string sourceId, string verb, string targetId, ulong attemptIndex, ulong die) => KeyAlgebra.H(Value, "h:roll", KeyAlgebra.LabelId(sourceId), KeyAlgebra.LabelId(verb), KeyAlgebra.LabelId(targetId), attemptIndex, die);
+
     /// <summary>The keyed hash <c>dungeon/floor/{N}/checks/h:save/{objectId:}/{unitId:}/{springIndex}/{die}</c>.</summary>
     public ulong HSave(string objectId, string unitId, ulong springIndex, ulong die) => KeyAlgebra.H(Value, "h:save", KeyAlgebra.LabelId(objectId), KeyAlgebra.LabelId(unitId), springIndex, die);
 
@@ -643,6 +647,7 @@ internal static class StreamHandleIndex
         ("dungeon/floor/{N}/checks/h:lurkStealth/{groupId:}/{positionIndex}/{band:}/{die}", (rs, u, t) => Streams.Dungeon(rs).Floor(u[0]).Checks.HLurkStealth(t[0], u[1], t[1], u[2])),
         ("dungeon/floor/{N}/checks/h:notice/{noticerId:}/{targetId:}/{noticeIndex}/{die}", (rs, u, t) => Streams.Dungeon(rs).Floor(u[0]).Checks.HNotice(t[0], t[1], u[1], u[2])),
         ("dungeon/floor/{N}/checks/h:object/{objectId:}/{checkKind:}/{attemptIndex}/{die}", (rs, u, t) => Streams.Dungeon(rs).Floor(u[0]).Checks.HObject(t[0], t[1], u[1], u[2])),
+        ("dungeon/floor/{N}/checks/h:roll/{sourceId:}/{verb:}/{targetId:}/{attemptIndex}/{die}", (rs, u, t) => Streams.Dungeon(rs).Floor(u[0]).Checks.HRoll(t[0], t[1], t[2], u[1], u[2])),
         ("dungeon/floor/{N}/checks/h:save/{objectId:}/{unitId:}/{springIndex}/{die}", (rs, u, t) => Streams.Dungeon(rs).Floor(u[0]).Checks.HSave(t[0], t[1], u[1], u[2])),
         ("dungeon/floor/{N}/checks/h:steal/{unitId:}/{stealIndex}/{die}", (rs, u, t) => Streams.Dungeon(rs).Floor(u[0]).Checks.HSteal(t[0], u[1], u[2])),
         ("dungeon/route/bossOrder/{themeId:}/{floor}/{bossId:}", (rs, u, t) => Streams.Dungeon(rs).Route.BossOrder(t[0], u[0], t[1])),

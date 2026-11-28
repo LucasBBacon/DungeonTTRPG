@@ -61,11 +61,24 @@ CN 7.3–7.4, 11–16; IR-4; TK-11 to TK-17; DH-41, DH-44.
 
 **Depends on:** M2-02.
 
+**Delivers:** the D-22 step ([M1-11 rulings record](../superpowers/specs/2026-11-28-m1-11-rulings-design.md) 1, 6.2 MS-42):
+- D-22's halving in the shared damage function (DH 20.3 step 2), lifting
+  the load refusal of `half`.
+- The per-part save shape (AB 14.1) and Frost Shard (CN 16.4).
+- The single D-22 and D-23 refactor of the damage function, and the
+  D-23 lift too if this step's consumables can be used out of combat
+  without starting a fight (**lead's call**; record 8 items 12 and 17).
+
+**Preconditions:** the AB owner answers whether an area rolls damage
+once or per target (record 7 item 14), and whether a Minion that
+succeeds attempts a flagged rider (record 7 item 15).
+
 **Done when:**
 - [ ] ITEMS 19.1 rules 14–31, AR 17.2 M2 tests, TK 18.2,
   CN 19.1–19.2 pass.
 - [ ] Identification tests pass.
 - [ ] Reprieve Phial tests pass.
+- [ ] The D-22 tests of the [M1-11 rulings record](../superpowers/specs/2026-11-28-m1-11-rulings-design.md) 6.3 pass.
 
 ### M2-04 Offers and levels 4–10
 
@@ -105,6 +118,9 @@ VG-4, VG-12, VG-17, VG-19, VG-20; SM 7.2.
 **Done when:**
 - [ ] SH 12.1 named tests pass; `OpeningCeiling`, `HideLimit`,
   `TricksPickerSize` pass.
+- [ ] The Shade tests of the [M1-11 rulings record](../superpowers/specs/2026-11-28-m1-11-rulings-design.md) 6.3 pass: Tumble Clear halves
+  per part; Duck III never applies to damage halved by a save (**lead's
+  call**).
 
 ### M2-07 The Arcanist
 
@@ -117,6 +133,8 @@ VG-4, VG-12, VG-17, VG-19, VG-20; SM 7.2.
 **Done when:**
 - [ ] ARC 14.2 validators and 13.1 tests pass.
 - [ ] `KnownVariantInPair` property test passes.
+- [ ] The Arcanist marks count the halved parts (ARC 10.3; D-22,
+  [M1-11 rulings record](../superpowers/specs/2026-11-28-m1-11-rulings-design.md) 1.4).
 
 ### M2-08 The Herald
 
@@ -130,6 +148,8 @@ HR-21, HR-22, HR-24.
 **Done when:**
 - [ ] HR 14.2 validators and HR 8.9 spell tests pass.
 - [ ] `NoHealInDefaults` passes.
+- [ ] Toll shows its "on any outcome" marker; Pronouncement (8d8) passes
+  the per-record preview check (D-22, [M1-11 rulings record](../superpowers/specs/2026-11-28-m1-11-rulings-design.md) 1.3, 1.6).
 
 ### M2-09 Starting kits for every class
 
@@ -160,6 +180,8 @@ exist.
 **Done when:**
 - [ ] ENM 20.2 morale and guile tests pass.
 - [ ] Banned affix pairs fail content validation (fixtures).
+- [ ] Volatile's death burst halves per part on a success (ENM 17.2;
+  D-22, [M1-11 rulings record](../superpowers/specs/2026-11-28-m1-11-rulings-design.md) 1.1).
 
 ### M2-11 Themes, grammars and rosters
 
@@ -190,6 +212,8 @@ sockets).
 - [ ] V8 full passes, including `LayoutDistinct`, `NoSealedPocket`,
   `HairlineCue`, `SecretNeverCritical`.
 - [ ] V9 full passes.
+- [ ] Keg `reflexHalf` uses the shared halving routine: 4/6/8 → 2/3/4 on
+  a success (ROOM 11.1; D-22, [M1-11 rulings record](../superpowers/specs/2026-11-28-m1-11-rulings-design.md) 1.2).
 
 ### M2-13 Condition terrain and hazards
 
@@ -209,6 +233,8 @@ TR-13, TR-25, TR-26; HZ-1, HZ-28; SV-31.
   held).
 - [ ] Gated items (Void and Dream packages) are recorded with their gate
   state.
+- [ ] A hazard Strike halves per part in combat (HZ 6.3; D-22,
+  [M1-11 rulings record](../superpowers/specs/2026-11-28-m1-11-rulings-design.md) 1.1); its Dare room form is M3.
 
 ### M2-14 Traps and locks, full
 
@@ -220,6 +246,10 @@ TR-13, TR-25, TR-26; HZ-1, HZ-28; SV-31.
 
 **Done when:**
 - [ ] V11 full passes; `trapDigest` recorded.
+- [ ] The Barb halves per part, with its condition on a failure only
+  (TL 6.11). A trap's damage dice, and a Botch's, come from the combat
+  stream in combat and from `h:roll` out of combat once the D-23 wave
+  has lit it (TL 6.22, 6.23; [M1-11 rulings record](../superpowers/specs/2026-11-28-m1-11-rulings-design.md) 1.1, 2.2).
 
 ### M2-15 Curiosities
 

@@ -301,8 +301,42 @@ public class StreamChecksTests
 
         var inert = set.All<StreamRow>().Where(r => r.IsInert).Select(r => r.Id).Order(StringComparer.Ordinal);
         Assert.Equal(
-            ["dungeon/floor/{N}/checks/h:lurkStealth/{groupId:}/{positionIndex}/{band:}/{die}", "dungeon/route/omen/{themeId:}", "loot/lootPlan/{N}/bossCard/{entryIndex}"],
+            [
+                "dungeon/floor/{N}/checks/h:lurkStealth/{groupId:}/{positionIndex}/{band:}/{die}",
+                "dungeon/floor/{N}/checks/h:roll/{sourceId:}/{verb:}/{targetId:}/{attemptIndex}/{die}",
+                "dungeon/route/omen/{themeId:}",
+                "loot/lootPlan/{N}/bossCard/{entryIndex}",
+            ],
             inert);
+    }
+
+    // M1-11 rulings record 2.1 and 6.3 (MS-51): h:roll is registered in M1 reserved and inert, before the M1 goldens.
+    // Its index types and the placeholder wave M2 are provisional (record 8 item 16); the D-23 wave lights it.
+    [Fact]
+    public void The_repository_reserves_h_roll_inert_with_no_consumers()
+    {
+        var set = ContentLoader.Load(ContentDirectory.Read(Path.Combine(RepoRoot.Find(), "content")));
+
+        var roll = Assert.Single(set.All<StreamRow>(), r => r.Label == "h:roll");
+        Assert.Equal("dungeon/floor/{N}/checks/h:roll/{sourceId:}/{verb:}/{targetId:}/{attemptIndex}/{die}", roll.Id);
+        Assert.Equal("dungeon/floor/{N}/checks", roll.Parent);
+        Assert.Equal(
+            [IndexType.LabelId, IndexType.LabelId, IndexType.LabelId, IndexType.ULong, IndexType.ULong],
+            roll.Indices.Select(x => x.Type));
+        Assert.Equal(CountClass.Keyed, roll.Class);
+        Assert.Equal(Wave.M2, roll.Wave);
+        Assert.True(roll.IsInert);
+        Assert.Equal("SV", roll.Owner);
+        Assert.Empty(roll.Readers);
+        Assert.Empty(roll.Consumers);
+
+        // No code draws it: the generated handle is the only place src/ names it.
+        var src = Path.Combine(RepoRoot.Find(), "src");
+        var callers = Directory.EnumerateFiles(src, "*.cs", SearchOption.AllDirectories)
+            .Where(f => !f.Contains($"{Path.DirectorySeparatorChar}obj{Path.DirectorySeparatorChar}", StringComparison.Ordinal))
+            .Where(f => !f.EndsWith("StreamHandles.g.cs", StringComparison.Ordinal))
+            .Where(f => File.ReadAllText(f).Contains("HRoll(", StringComparison.Ordinal));
+        Assert.Empty(callers);
     }
 
     // --- Helpers ---

@@ -152,7 +152,8 @@ handle, with its draw count checked.
   `dressing` (display side), `terrain` (with `hzTagMax` reserved), `traps`
   (+`retry1`), `encounters/plan`, `encounters/place` (+`retry1`),
   `trapsResolve` (+`retry1`), `checks` (`h:object`, `h:save`, `h:notice`,
-  `h:steal`, `h:lurkStealth` reserved and inert), `combat`,
+  `h:steal`, `h:lurkStealth` reserved and inert; `h:roll` reserved and
+  inert ([M1-11 rulings record](../superpowers/specs/2026-11-28-m1-11-rulings-design.md) 2.1; **lead's call**)), `combat`,
   `loot/floor` blocks, `lootPlan` (`lineRoll` reserved and inert;
   `bossCard` registered with `wave: M2`, inert, per D-08), `loot/run`.
 - Inert rows: a row whose registry wave is later than the build's wave
@@ -456,11 +457,19 @@ M1-11's.
   ability use's earlier events until the use completes, so a pending
   "ask me" frame stays valid and the reaction policy alone cannot change
   the outcome.
+- Every M1-14 contest or check that does not start a fight (out-of-combat
+  Hide, Search, Shove, grapple, Escape, Frighten; Rally if D-16 gives it a
+  roll) uses `checks` or is refused; none draws the combat stream out of
+  combat. `Contests.cs:102` and `:123` are the routes to change (**lead's
+  call**, extending AB 14.4's pattern; [M1-11 rulings record](../superpowers/specs/2026-11-28-m1-11-rulings-design.md) 2.4).
 
 **Done when:**
 - [ ] Grapple and shove size-rule tests pass.
 - [ ] Each action has a test for success, failure and its greyed reason.
 - [ ] The M1-14 Escape and Dash tests of the [M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 6.3 pass.
+- [ ] The M1-14 test of the [M1-11 rulings record](../superpowers/specs/2026-11-28-m1-11-rulings-design.md) 6.3 passes:
+  out of combat, each contest or check that does not start a fight leaves
+  the combat counter unchanged.
 
 ---
 
@@ -736,7 +745,9 @@ Old Ragged in a hand-built room.
 - Decision panels for reactions ("ask me"), Techniques and level-ups.
 - The decision panel answers `DecisionKind.Reaction` (decline / take);
   the M0 demo panel shows only shrine boons.
-- Danger band, lethal tags, end-turn warning, basic death recap.
+- Danger band, lethal tags, end-turn warning, basic death recap. Until
+  the D-22 step the danger band prices only a failure, because no M1
+  content is half on a success (DH 17.3 item 3; [M1-11 rulings record](../superpowers/specs/2026-11-28-m1-11-rulings-design.md) 1.6).
 - The initiative bar shows a spent-action pip on an opener's striker
   ([M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 4.1).
 - Death screen.
@@ -867,7 +878,8 @@ HZ 11.2, 12; SV-3; TL 6.1, 6.2, 6.6, 6.11, 6.19, 6.22, 7.3, 12; TL-1 to
 TL-5, TL-19 (M1 part: pushes stop before F1 trigger squares; the
 condition end is M2), TL-20, TL-21; DH-32.
 
-**Depends on:** M1-29; decisions D-06 (floor-1 traps and keys) and D-10
+**Depends on:** M1-29; decisions D-06 (with D-22 and D-23 for any
+damaging F1 trap; none under TL 12; **lead's call**, [M1-11 rulings record](../superpowers/specs/2026-11-28-m1-11-rulings-design.md) 8 item 3) and D-10
 (`hzTagMax`, traps formulas).
 
 **Delivers:**
@@ -1078,6 +1090,9 @@ Top-up trigger and F1 guard, M1 by D-03); BR-3.
   is refused at no cost, with a reason code ([M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 8 item 3).
 - Fight membership fixed from the declaring or noticing action (record
   5, step 1); combat start and the win check count participants only.
+- Whether a use is refused out of combat is decided before and
+  independently of any noticing roll; V19t counts an opener as the first
+  command of its fight ([M1-11 rulings record](../superpowers/specs/2026-11-28-m1-11-rulings-design.md) 2.3).
 
 **Done when:**
 - [ ] V19t `ExplorationCombatIsolation` passes.
@@ -1100,6 +1115,9 @@ Top-up trigger and F1 guard, M1 by D-03); BR-3.
   fixed at declaration; a fight ends while a monster lives elsewhere on
   the floor; hostile targeting of the boss group is refused before the
   catch-up.
+- [ ] The M1-35 tests of the [M1-11 rulings record](../superpowers/specs/2026-11-28-m1-11-rulings-design.md) 6.3 pass:
+  V19t `ExplorationCombatIsolation` with the opener clause; a drawing
+  non-opener out of combat is refused before any noticing roll.
 
 ---
 

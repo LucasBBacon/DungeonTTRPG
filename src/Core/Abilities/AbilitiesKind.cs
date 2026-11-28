@@ -16,7 +16,7 @@ namespace Dungeon.Core.AbilityModel;
 /// <item><c>cost</c>: <c>action</c>, <c>bonus</c>, <c>free</c>, <c>none</c>, <c>reaction</c> or <c>move:N</c> (N at least 1); <c>attack</c> (M1-14), <c>onHit</c> (M1-16) and <c>onEvent:&lt;id&gt;</c> (M1-20) are reserved.</item>
 /// <item><c>pool</c>: <c>{id, count}</c>, count at least 1.</item>
 /// <item><c>target</c>: <c>{shape: single, range, count?}</c>, <c>{shape: burst, radius, range?}</c>, <c>{shape: cone, length}</c> or <c>{shape: line, length}</c>, each with <c>selective?</c>; required unless the kind is <c>reaction</c>, and absent for one.</item>
-/// <item><c>resolve</c>: <c>{attack, trained}</c> or <c>{save, onSuccess: "none"}</c> (<c>half</c> is refused, D-22).</item>
+/// <item><c>resolve</c>: <c>{attack, trained}</c> or <c>{save, onSuccess: "none"}</c> (<c>half</c> is ruled (D-22) but not yet built).</item>
 /// <item><c>damage</c>: <c>[{type, dice?: "NdS", flat?}]</c>; <c>effects</c>: effect ids.</item>
 /// <item><c>reaction</c>: <c>{trigger, bonus, policy?: {kind, filter?: "none"}}</c>, present exactly when the kind and the cost are <c>reaction</c>.</item>
 /// </list>
@@ -161,10 +161,12 @@ public sealed class AbilitiesKind : ContentKind
             throw Fail(file, Member(at, "trained"), "trained belongs to an attack.");
         }
 
+        // onSuccess: half is ruled (D-22, M1-11 rulings record 1) and built in the D-22 step; written to the canonical
+        // form only when not none (lead's call).
         string onSuccess = RuleString(file, Member(at, "onSuccess"), r.OnSuccess);
         if (onSuccess == "half")
         {
-            throw Fail(file, Member(at, "onSuccess"), "\"half\" is not supported; a save supports onSuccess \"none\" only (D-22).");
+            throw Fail(file, Member(at, "onSuccess"), "\"half\" is ruled (D-22) but not yet built; a save supports onSuccess \"none\" only.");
         }
 
         return onSuccess == "none"

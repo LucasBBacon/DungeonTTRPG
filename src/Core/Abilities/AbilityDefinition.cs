@@ -147,7 +147,10 @@ public sealed record AttackResolve(AttackSpec Attack) : ResolveSpec
     }
 }
 
-/// <summary>A save by the target. A success means no effect (owner ruling 4; <c>onSuccess: half</c> is D-22).</summary>
+/// <summary>
+/// A save by the target. A success means no effect (owner ruling 4). <c>onSuccess: half</c> is ruled (D-22, M1-11 rulings
+/// record 1) and built in the D-22 step; written to the canonical form only when not <c>none</c> (lead's call).
+/// </summary>
 public sealed record SaveResolve(Save Save) : ResolveSpec
 {
     /// <inheritdoc />

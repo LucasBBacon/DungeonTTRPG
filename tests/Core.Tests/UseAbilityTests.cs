@@ -111,7 +111,8 @@ public class UseAbilityTests
             case CommandError.NoLineOfSight:
                 return (Fight(), Use(Hero, SaveBurst, new PointTarget(Far)));
             case CommandError.NotInCombat:
-                // A drawing ability on an ally, out of combat: the last check (plan call 5, D-23).
+                // A drawing ability on an ally, out of combat: the last check (plan call 5; D-23 ruled 2026-11-28: the
+                // refusal stays in M1; the D-23 wave uses h:roll (M1-11 rulings record 2)).
                 return (GameState.Create(Walled, [Party(1, 2, 2), Party(4, 2, 4)], 7, hero: Hero), Use(Hero, SaveBurst, new PointTarget(new GridPos(2, 4))));
             default:
                 throw new ArgumentOutOfRangeException(nameof(code));

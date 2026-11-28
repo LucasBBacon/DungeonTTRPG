@@ -343,6 +343,9 @@ internal static class Resolution
 
             case SaveResolve:
             {
+                // A save never crits (lead's call). With onSuccess: half, a success rolls the same dice on the same
+                // stream (lead's call) and deals the halved parts; effects only on a failure unless marked (D-22, M1-11
+                // rulings record 1.3, 1.5).
                 var result = Contests.ResolveCheck(setup, roll);
                 events.Add(new SaveRolled(target, result));
                 return result.Success ? s : Land(rules, s, use, target, crit: false, events);

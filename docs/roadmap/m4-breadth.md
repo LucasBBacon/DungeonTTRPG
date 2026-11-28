@@ -89,7 +89,9 @@ gives its name, what it owns, and its Done-when.
 [M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 1).
 
 **Precondition:** the DH owner has ruled on the three D-17 questions:
-(a) whether the mixed-event check should be independent of part order;
+(a) whether the mixed-event check should be independent of part order,
+where temporary HP absorbs the parts after any halving by a save (D-22,
+[M1-11 rulings record](../superpowers/specs/2026-11-28-m1-11-rulings-design.md) 1.6);
 (b) whether it counts temporary HP; (c) what the combat log shows for an
 absorbed and clamped hit.
 

@@ -140,6 +140,10 @@ public static partial class AbilityUse
     /// lies in 0..A with A = Σ (2 · (|flat| + 2 · n · s) + 1), so its numerator is at most A · Q. The list is accepted
     /// when A · Q &lt;= <see cref="long.MaxValue"/>.
     /// </para>
+    /// <para>
+    /// With <c>onSuccess: half</c>, the bound gains a halved term, checked per record at load; the largest approved
+    /// records are 8d8 (D-22, M1-11 rulings record 1.6).
+    /// </para>
     /// </summary>
     public static (int Part, string Field, string Problem)? CheckPreviewable(ImmutableArray<DamagePart> parts)
     {
