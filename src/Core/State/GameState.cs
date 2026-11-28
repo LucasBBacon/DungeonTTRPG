@@ -496,7 +496,7 @@ public sealed record GameState(
     /// 2); the save loader applies it. The phase is not negative and the step is defined. Each condition part has a value,
     /// turn count and charge count that are not negative, an applied phase from 0 to <paramref name="phase"/>, initialised
     /// terms in strictly ascending canonical order (<see cref="DurationTermOrder"/>), a defined source faction, and a
-    /// sustainer seq from 1 to below <paramref name="nextEffectSeq"/> other than its own; no holder has two instances with
+    /// sustainer that is another live instance; no holder has two instances with
     /// a condition part of one id (a bare carrier may repeat). Whether the id names a condition, and the own-turn mark's
     /// hard tier, need the rules (<c>Conditions.Read</c>). Throws <see cref="ArgumentException"/> naming the problem.
     /// </summary>
@@ -549,9 +549,9 @@ public sealed record GameState(
                 throw new ArgumentException($"{who}unknown source faction.", nameof(effects));
             }
 
-            if (c.SustainedBy is { } sustainer && (sustainer < 1 || sustainer >= nextEffectSeq || sustainer == e.Seq))
+            if (c.SustainedBy is { } sustainer && (sustainer == e.Seq || !effects.Any(other => other.Seq == sustainer)))
             {
-                throw new ArgumentException($"{who}sustainer {sustainer} was never issued, or is the instance itself.", nameof(effects));
+                throw new ArgumentException($"{who}sustainer {sustainer} is not another live instance.", nameof(effects));
             }
 
             for (int j = 0; j < i; j++)

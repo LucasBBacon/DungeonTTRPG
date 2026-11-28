@@ -57,7 +57,7 @@ public static class Conditions
     /// for valued, decay and accumulating), a sustainer that is no live instance, or an override that is empty, malformed,
     /// names an unknown rule event, or breaks the CO 5.3 band for the holder's side; and
     /// <see cref="InvalidOperationException"/> if the holder already holds an instance of the condition (6.1 handling is
-    /// M1-12b's).
+    /// M1-12b's), or, with no override, the record's in-combat duration breaks the party-facing band on a party holder.
     /// </summary>
     internal static (ImmutableArray<GameEvent> Events, GameState Next) Insert(
         RulesContext rules, GameState s, string conditionId, UnitId holder, EffectSource source, ConditionInsert options)
@@ -102,9 +102,22 @@ public static class Conditions
             CheckOverride(rules, definition, given, wearer.Faction == Faction.Party);
             terms = given;
         }
+        else if (s.Combat is null && !definition.OutOfCombat.IsEmpty)
+        {
+            terms = definition.OutOfCombat;
+        }
         else
         {
-            terms = s.Combat is null && !definition.OutOfCombat.IsEmpty ? definition.OutOfCombat : definition.Duration;
+            // The record's own duration was checked enemy-facing at load; on a party holder it meets the party-facing band
+            // too (CO 5.3: party-facing hard control is turns:1, or a trigger with cap 1).
+            terms = definition.Duration;
+            if (wearer.Faction == Faction.Party
+                && ConditionRules.CheckBand(definition, terms, "duration", "condition", partyFacing: true) is { } broken)
+            {
+                throw new InvalidOperationException(
+                    $"{definition.Id} cannot be placed on party unit {holder.Value} without a duration override: "
+                    + $"{broken.Field}: {broken.Message}");
+            }
         }
 
         var sorted = new List<DurationTerm>(terms);

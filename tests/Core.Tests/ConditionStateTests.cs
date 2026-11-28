@@ -117,6 +117,21 @@ public class ConditionStateTests
     }
 
     [Fact]
+    public void A_record_duration_is_checked_against_the_party_band_on_a_party_holder()
+    {
+        // Held is hard saveEnds cap 2: enemy-facing only (CO 5.3).
+        var ex = Assert.Throws<InvalidOperationException>(() => Insert(Fight(), Held, P, E));
+        Assert.Contains(Held, ex.Message);
+        Assert.Contains("party-facing hard", ex.Message);
+        Assert.Equal<DurationTerm>(
+            [new DurationTerm.SaveEnds(Save.Will, 2, 1)], Only(Insert(Fight(), Held, E, P).Next, Held).Condition!.Terms.ToArray());
+
+        // A party-facing record duration passes, and an override that fits the party band is accepted.
+        Only(Insert(Fight(), Stun, P, E).Next, Stun);
+        Only(Insert(Fight(), Held, P, E, new ConditionInsert(Duration: [new DurationTerm.Turns(1)])).Next, Held);
+    }
+
+    [Fact]
     public void With_no_fight_the_terms_are_the_out_of_combat_list()
     {
         Assert.Equal<DurationTerm>([new DurationTerm.Turns(10)], Only(Insert(Calm(), Asleep, P, E).Next, Asleep).Condition!.Terms.ToArray());
@@ -299,6 +314,34 @@ public class ConditionStateTests
     }
 
     [Fact]
+    public void A_sustainers_death_ends_what_it_sustains_in_one_pass_with_the_source_tied_ends()
+    {
+        // 1: E concentrates; 2: Tied on P from E; 3: Sustained on Q from P, sustained by 1; 4: Stun on Q from P, sustained by 1.
+        var s = Effects.Apply(Fight(current: 1), Concentrating, E, new EffectSource(E));
+        (_, s) = Insert(s, Tied, P, E);
+        (_, s) = Insert(s, Sustained, Q, P, new ConditionInsert(SustainedBy: 1));
+        (_, s) = Insert(s, Stun, Q, P, new ConditionInsert(SustainedBy: 1));
+        Assert.Equal(5, s.NextEffectSeq);
+        var at = s.FindUnit(E)!.Pos;
+
+        var (result, next) = Harm.Deal(Rules, s, E, Lethal);
+
+        Assert.Equal<GameEvent>(
+            [
+                new DamageDealt(1, E, 30, 0),
+                new UnitDied(E, at),
+                new ConditionEnded(2, Tied, P, ConditionEndReason.SourceGone),
+                new ConditionApplied(5, Conditions.SteeledId, P, new EffectSource(P), 1, true),
+                new ConditionEnded(3, Sustained, Q, ConditionEndReason.Ended),
+                new ConditionEnded(4, Stun, Q, ConditionEndReason.Ended),
+                new ConditionApplied(6, Conditions.SteeledId, Q, new EffectSource(Q), 1, true),
+            ],
+            result.Events.ToArray());
+        Assert.All(next.Effects, e => Assert.Equal(Conditions.SteeledId, e.EffectId));
+        Snapshot.Load(Snapshot.Save(next));
+    }
+
+    [Fact]
     public void A_dead_holders_conditions_go_with_no_event()
     {
         var (_, s) = Insert(Fight(current: 1), Stun, E, P);
@@ -429,6 +472,11 @@ public class ConditionStateTests
             NextEffectSeq = s.NextEffectSeq + 1,
         };
         Assert.Throws<SnapshotFormatException>(() => Snapshot.Load(Snapshot.Save(twice)));
+
+        // A sustainer removed outside End leaves a dangling SustainedBy, which does not load.
+        var gone = s with { Effects = s.Effects.RemoveAt(0) };
+        Assert.Equal(1, Only(gone, Token).Condition!.SustainedBy);
+        Assert.Throws<SnapshotFormatException>(() => Snapshot.Load(Snapshot.Save(gone)));
 
         // A bare carrier of one id may still repeat.
         var carriers = Effects.Apply(Effects.Apply(Fight(), Plain, P, new EffectSource(P)), Plain, P, new EffectSource(P));

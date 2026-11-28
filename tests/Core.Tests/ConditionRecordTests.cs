@@ -233,6 +233,11 @@ public class ConditionRecordTests
         var core = Assert.Throws<ContentLoadException>(() => RulesContext.Create(Load(
             [], [$$"""{"id": "{{Conditions.SteeledId}}", "polarity": "beneficial", "duration": [{"turns": 1}]}"""])));
         Assert.Equal((File, "$.conditions[0].id"), (core.File, core.Field));
+
+        // An effect may not take a core condition's id either.
+        var effect = Assert.Throws<ContentLoadException>(() => RulesContext.Create(Load(
+            [.. EffectRecords, $$"""{"id": "{{Conditions.SteeledId}}", "kind": "trait"}"""], [])));
+        Assert.Equal(("effects/effects.json", "$.effects[2].id"), (effect.File, effect.Field));
     }
 
     [Fact]

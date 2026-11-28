@@ -292,7 +292,8 @@ public sealed class RulesContext
         }
     }
 
-    // Ids are unique across effects and conditions, and no record takes a core definition's id (M1-12a plan calls 3, 5).
+    // Ids are unique across effects and conditions, and no effect or condition record takes a core definition's id (M1-12a
+    // plan calls 3, 5).
     private static void CheckConditionIds(ContentSet content)
     {
         foreach (string file in content.KindFiles)
@@ -300,6 +301,13 @@ public sealed class RulesContext
             var records = content.RecordsIn(file);
             for (int i = 0; i < records.Length; i++)
             {
+                // An effect may not take a core condition's id either: the definition table would hold it twice.
+                if (records[i] is EffectDefinition named && CoreConditions.IsCoreId(named.Id))
+                {
+                    throw new ContentLoadException(
+                        named.File, Member(Item("$.effects", i), "id"), $"\"{named.Id}\" is a core condition definition's id.");
+                }
+
                 if (records[i] is not ConditionDefinition condition)
                 {
                     continue;

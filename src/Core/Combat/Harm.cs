@@ -83,9 +83,11 @@ public static class Harm
     /// <see cref="UnitDied"/>. First every effect instance it holds goes, with no event (a dead holder's conditions go
     /// with it: <see cref="UnitDied"/> covers them), and every non-condition instance it is the source of, in seq order
     /// through <see cref="Effects.Remove"/>; then the unit, which frees its square; then its slot in the turn order;
-    /// then each <c>sourceTied</c> condition instance it was the source of, held by a living unit, ends through
-    /// <c>Conditions.End</c> with <see cref="ConditionEndReason.SourceGone"/>, in seq order, Steeled following a hard
-    /// one. Every other condition instance keeps its source id and recorded faction. In the turn order, a slot before
+    /// then one pass in seq order over the living holders' condition instances: each <c>sourceTied</c> one it was the
+    /// source of ends through <c>Conditions.End</c> with <see cref="ConditionEndReason.SourceGone"/>, and each one
+    /// sustained by an instance removed with it (CO 5.1: a sustained condition ends with its sustainer) with
+    /// <see cref="ConditionEndReason.Ended"/>, Steeled following a hard one. Every other condition instance keeps its
+    /// source id and recorded faction. In the turn order, a slot before
     /// the current one moves the current index back by 1. The current slot itself leaves the index on its successor
     /// (or on the order's length when it was the last slot) and sets <see cref="CombatState.TurnVacated"/>, with no <see cref="TurnEnded"/> (a dead unit has no turn-end step, CO 5.4)
     /// and no <see cref="TurnStarted"/>. A later slot changes nothing. Under the <see cref="CombatState.BeforeRound1"/>
@@ -98,16 +100,30 @@ public static class Harm
     {
         // s.Effects is kept sorted by seq, so these walks are in seq order.
         var seqs = ImmutableArray.CreateBuilder<long>();
-        var tied = ImmutableArray.CreateBuilder<long>();
         foreach (var instance in s.Effects)
         {
             if (instance.Holder == dead || (instance.Source.Unit == dead && instance.Condition is null))
             {
                 seqs.Add(instance.Seq);
             }
-            else if (instance.Source.Unit == dead && rules.FindCondition(instance.EffectId) is { Flags.SourceTied: true })
+        }
+
+        // The living holders' condition instances to end after UnitDied, in seq order, each with its reason.
+        var ends = ImmutableArray.CreateBuilder<(long Seq, ConditionEndReason Reason)>();
+        foreach (var instance in s.Effects)
+        {
+            if (instance.Holder == dead || instance.Condition is not { } condition)
             {
-                tied.Add(instance.Seq);
+                continue;
+            }
+
+            if (instance.Source.Unit == dead && rules.FindCondition(instance.EffectId) is { Flags.SourceTied: true })
+            {
+                ends.Add((instance.Seq, ConditionEndReason.SourceGone));
+            }
+            else if (condition.SustainedBy is { } sustainer && seqs.Contains(sustainer))
+            {
+                ends.Add((instance.Seq, ConditionEndReason.Ended));
             }
         }
 
@@ -152,11 +168,11 @@ public static class Harm
 
         // Each may already be gone, ended by an earlier one's sustained cascade.
         var events = ImmutableArray.CreateBuilder<GameEvent>();
-        foreach (long seq in tied)
+        foreach (var (seq, reason) in ends)
         {
             if (s.Effects.Any(e => e.Seq == seq))
             {
-                var (ended, next) = Conditions.End(rules, s, seq, ConditionEndReason.SourceGone);
+                var (ended, next) = Conditions.End(rules, s, seq, reason);
                 events.AddRange(ended);
                 s = next;
             }
