@@ -115,7 +115,7 @@ public static class Damage
         foreach (var part in roll.Parts)
         {
             var step = Ladder.StepFor(rules, s, target, part.Part.Type);
-            parts.Add(new PartOutcome(part.Part.Type, step, part.Raw, Ladder.Apply(step, part.Raw)));
+            parts.Add(new PartOutcome(part.Part.Type, step, part.Raw, DealtByPart(rules, s, target, part.Part, part.Raw)));
         }
 
         // 3. Sum the parts.
@@ -155,6 +155,14 @@ public static class Damage
         // 8. Riders and on-damage triggers: M2. PartOutcome is the rider's place (plan call 9).
         return new DamageOutcome(target, parts.MoveToImmutable(), total, unit.Hp, hpAfter, hpAfter == 0, clamp);
     }
+
+    /// <summary>
+    /// What one part of <paramref name="raw"/> deals to <paramref name="target"/>: the target's ladder step for the
+    /// part's type applied to the raw amount (DH 20.3 step 2). <see cref="Resolve"/> sums these; the preview weighs them
+    /// (M1-11 plan call 14). Throws <see cref="ArgumentException"/> for an unknown unit.
+    /// </summary>
+    public static long DealtByPart(RulesContext rules, GameState s, UnitId target, DamagePart part, long raw) =>
+        Ladder.Apply(Ladder.StepFor(rules, s, target, part.Type), raw);
 
     // The undetected-trap floor applies (DH 10.4; TL 6.5): some part comes from a Hidden or HunchFloored trap, and the
     // parts that do not deal less than from.

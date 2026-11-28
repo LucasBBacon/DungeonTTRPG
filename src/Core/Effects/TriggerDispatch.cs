@@ -10,7 +10,8 @@ namespace Dungeon.Core.Effects;
 /// events are queued in order; each queued event with a registered rule-event id fires the triggers listening for it,
 /// in order of priority (lower first), then source unit order (environment last), then creation order. Events the
 /// actions raise join the end of the queue, which is also the command's event list. A command fires at most
-/// <see cref="Effects.MaxTriggerFirings"/> triggers.
+/// <see cref="Effects.MaxTriggerFirings"/> triggers, across all its dispatch phases (M1-11 plan call 8). Nothing fires
+/// once the run has ended.
 /// </summary>
 internal static class TriggerDispatch
 {
@@ -22,11 +23,24 @@ internal static class TriggerDispatch
     public static (GameState State, ImmutableArray<GameEvent> Events) Run(
         RulesContext rules, GameState state, ImmutableArray<GameEvent> events)
     {
+        int firings = 0;
+        return Run(rules, state, events, ref firings);
+    }
+
+    /// <summary>
+    /// <see cref="Run(RulesContext, GameState, ImmutableArray{GameEvent})"/> with a firing counter shared by every
+    /// dispatch phase of one command (M1-11 plan call 8), so <see cref="Effects.MaxTriggerFirings"/> stays a bound per
+    /// command. Once <see cref="GameState.Ended"/> is set, dispatch stops: before the next queued event, before the next
+    /// firing, and before the next action of the firing in progress (DH 20.3 step 7: nothing later is processed).
+    /// </summary>
+    internal static (GameState State, ImmutableArray<GameEvent> Events) Run(
+        RulesContext rules, GameState state, ImmutableArray<GameEvent> events, ref int firings)
+    {
         var queue = new List<GameEvent>(events);
         void Emit(GameEvent e) => queue.Add(e ?? throw new ArgumentNullException(nameof(e), "A hook emitted a null event."));
 
-        int firings = 0;
-        for (int i = 0; i < queue.Count; i++)
+        bool fired = false;
+        for (int i = 0; i < queue.Count && state.Ended is null; i++)
         {
             var e = queue[i];
             foreach (var ruleEvent in rules.EventsRaisedBy(e))
@@ -34,18 +48,24 @@ internal static class TriggerDispatch
                 UnitId subject = ruleEvent.Subject(e);
                 foreach (var firing in Due(rules, state, ruleEvent.Id, subject))
                 {
+                    if (state.Ended is not null)
+                    {
+                        break;
+                    }
+
                     if (firings == Effects.MaxTriggerFirings)
                     {
                         throw new TriggerLoopException(i, firings);
                     }
 
                     firings++;
+                    fired = true;
                     state = Fire(rules, state, e, subject, firing, Emit);
                 }
             }
         }
 
-        return firings == 0 ? (state, events) : (state, queue.ToImmutableArray());
+        return fired ? (state, queue.ToImmutableArray()) : (state, events);
     }
 
     // The triggers listening for eventId whose scope admits subject, in firing order.
@@ -96,6 +116,12 @@ internal static class TriggerDispatch
         var instance = firing.Instance;
         foreach (var action in firing.Trigger.Do)
         {
+            // A run end stops the firing between its actions.
+            if (state.Ended is not null)
+            {
+                break;
+            }
+
             if (action.ApplyEffect is { } effectId)
             {
                 var holder = action.To == TriggerTarget.Holder ? instance.Holder : subject;

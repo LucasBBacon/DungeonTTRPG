@@ -77,7 +77,7 @@ public static class StateDigest
     {
         public void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(10);
+            w.BeginRecord(11);
             w.Int32(0, u.Id.Value);
             w.Int32(1, u.Pos.X);
             w.Int32(2, u.Pos.Y);
@@ -88,6 +88,7 @@ public static class StateDigest
             w.Record(7, new BudgetRecord(u.Budget));
             w.List(8, u.Spent, (e, spend) => e.Record(0, new SpendRecord(spend)));
             w.OptionalRecord(9, u.Opener is null ? null : new OpenerRecord(u.Opener));
+            w.List(10, u.Abilities, (e, id) => e.String(0, id));
             w.EndRecord();
         }
     }

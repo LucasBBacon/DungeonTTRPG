@@ -1,0 +1,128 @@
+using System.Collections.Immutable;
+using Dungeon.Core.AbilityModel;
+using Dungeon.Core.Combat;
+using Dungeon.Core.Damage;
+using Dungeon.Core.Effects;
+using Dungeon.Core.Stats;
+using static Dungeon.Core.Tests.Fixtures;
+
+namespace Dungeon.Core.Tests;
+
+/// <summary>
+/// The ability fixtures shared by the M1-11 tests (Tasks 4 to 8 and <c>CombatScenarioTests</c>): code-built definitions,
+/// the pools they spend, a few effects that fix a contest's outcome, and builders for units that hold every fixture
+/// ability.
+/// </summary>
+public static class AbilityFixtures
+{
+    /// <summary>The file name code-built fixture definitions carry.</summary>
+    public const string File = "test/abilities";
+
+    /// <summary>A melee strike: single, range 1, a Strength attack, 1d6 slashing.</summary>
+    public const string Strike = "test.strike";
+
+    /// <summary>A sure strike: single, range 1, no roll, 1d4+1 bludgeoning (always at least 2).</summary>
+    public const string Sure = "test.sure";
+
+    /// <summary>A bonus-action jab: single, range 1, no roll, a flat 1.</summary>
+    public const string Jab = "test.jab";
+
+    /// <summary>A <c>move:2</c> dash-strike: single, range 1, no roll, a flat 1.</summary>
+    public const string Dash = "test.dash";
+
+    /// <summary>A free poke: single, range 1, no roll, a flat 1.</summary>
+    public const string Poke = "test.poke";
+
+    /// <summary>A camp-pool burst: burst range 2, radius 1, no roll, a flat 3 fire; spends 1 of <see cref="CampPool"/>.</summary>
+    public const string CampBurst = "test.camp_burst";
+
+    /// <summary>A save burst: burst range 6, radius 1, a reflex save, 1d6 fire.</summary>
+    public const string SaveBurst = "test.save_burst";
+
+    /// <summary>As <see cref="SaveBurst"/>, tagged <c>selective</c>.</summary>
+    public const string SelectiveBurst = "test.selective_burst";
+
+    /// <summary>An at-will cone: length 2, a reflex save, 1d4 cold.</summary>
+    public const string AtWillCone = "test.cone";
+
+    /// <summary>A line: length 4, a reflex save, 1d4 lightning.</summary>
+    public const string SaveLine = "test.line";
+
+    /// <summary>A ward: a reaction on the holder's own save, +2, always.</summary>
+    public const string Ward = "test.ward";
+
+    /// <summary>A camp pool with 3 uses, so a second spend in a turn meets the camp rule, not an empty pool.</summary>
+    public const string CampPool = "pool.camp";
+
+    /// <summary>Reflex −50: every reflex save fails.</summary>
+    public const string Clumsy = "test.clumsy";
+
+    /// <summary>Reflex +50: every reflex save succeeds.</summary>
+    public const string Nimble = "test.nimble";
+
+    /// <summary>Armour class −50: every attack hits but a natural 1.</summary>
+    public const string Exposed = "test.exposed";
+
+    /// <summary>The fixture pools: <see cref="CampPool"/> (3), <c>pool.fight</c> (1) and <c>pool.turn</c> (1).</summary>
+    public static readonly ImmutableArray<PoolDefinition> PoolTable =
+    [
+        new(CampPool, RefillTag.Camp, _ => 3),
+        new("pool.fight", RefillTag.Fight, _ => 1),
+        new("pool.turn", RefillTag.Turn, _ => 1),
+    ];
+
+    /// <summary>Every fixture definition.</summary>
+    public static readonly ImmutableArray<AbilityDefinition> Definitions =
+    [
+        Single(Strike, AbilityKind.AtWill, new AbilityCost(CostKind.Action), new AttackResolve(new AttackSpec(Ability.Strength, true)), Part(DamageType.Slashing, 1, 6, 0)),
+        Single(Sure, AbilityKind.AtWill, new AbilityCost(CostKind.Action), null, Part(DamageType.Bludgeoning, 1, 4, 1)),
+        Single(Jab, AbilityKind.AtWill, new AbilityCost(CostKind.Bonus), null, Part(DamageType.Bludgeoning, 0, 0, 1)),
+        Single(Dash, AbilityKind.AtWill, new AbilityCost(CostKind.Move, 2), null, Part(DamageType.Bludgeoning, 0, 0, 1)),
+        Single(Poke, AbilityKind.AtWill, new AbilityCost(CostKind.Free), null, Part(DamageType.Bludgeoning, 0, 0, 1)),
+        Area(CampBurst, AbilityKind.Limited, new PoolUse(CampPool, 1), new TargetSpec(TargetShape.Burst, 2, 0, 1, false), null, Part(DamageType.Fire, 0, 0, 3)),
+        Area(SaveBurst, AbilityKind.Limited, null, new TargetSpec(TargetShape.Burst, 6, 0, 1, false), new SaveResolve(Save.Reflex), Part(DamageType.Fire, 1, 6, 0)),
+        Area(SelectiveBurst, AbilityKind.Limited, null, new TargetSpec(TargetShape.Burst, 6, 0, 1, true), new SaveResolve(Save.Reflex), Part(DamageType.Fire, 1, 6, 0)),
+        Area(AtWillCone, AbilityKind.AtWill, null, new TargetSpec(TargetShape.Cone, 0, 0, 2, false), new SaveResolve(Save.Reflex), Part(DamageType.Cold, 1, 4, 0)),
+        Area(SaveLine, AbilityKind.Limited, null, new TargetSpec(TargetShape.Line, 0, 0, 4, false), new SaveResolve(Save.Reflex), Part(DamageType.Lightning, 1, 4, 0)),
+        new AbilityDefinition(
+            File, Ward, AbilityKind.Reaction, new AbilityCost(CostKind.Reaction), null, null, null, [], [],
+            new ReactionSpec(ReactionTrigger.OwnSave, 2, ReactionMode.Always)),
+    ];
+
+    /// <summary>Every fixture ability id, ordinal: what <see cref="Party"/> and <see cref="Foe"/> units hold.</summary>
+    public static readonly ImmutableArray<string> AllIds =
+        [.. Definitions.Select(d => d.Id).OrderBy(id => id, StringComparer.Ordinal)];
+
+    /// <summary>The fixture effects, the core registries, <see cref="Pools"/> and <see cref="Definitions"/>.</summary>
+    public static readonly RulesContext Rules = RulesContext.Create(
+        ContestKit.LoadEffects(
+            ContestKit.Def(Clumsy, "condition", ContestKit.Add("reflex", -50)),
+            ContestKit.Def(Exposed, "condition", ContestKit.Add("armourClass", -50)),
+            ContestKit.Def(Nimble, "condition", ContestKit.Add("reflex", 50))),
+        pools: PoolTable,
+        abilities: Definitions);
+
+    /// <summary>A party unit on <see cref="Fixtures.Stats"/>, full HP, holding every fixture ability.</summary>
+    public static Unit Party(int id, int x, int y, int hp = FullHp) => U(id, x, y) with { Hp = hp, Abilities = AllIds };
+
+    /// <summary>An enemy on <see cref="Fixtures.EnemyStats"/> (table HP 12), holding every fixture ability.</summary>
+    public static Unit Foe(int id, int x, int y, int hp = 12) =>
+        new(new UnitId(id), new GridPos(x, y), Faction.Enemy, [], EnemyStats, hp) { Abilities = AllIds };
+
+    /// <summary><paramref name="s"/> in round 1 of a fight in the given order, slot 0 holding the turn.</summary>
+    public static GameState InCombat(GameState s, params int[] order) =>
+        s with { Combat = new CombatState([.. order.Select(i => new UnitId(i))], 0, 1) };
+
+    /// <summary><paramref name="s"/> with <paramref name="effect"/> on <paramref name="unit"/>, from itself.</summary>
+    public static GameState With(GameState s, int unit, string effect) =>
+        Dungeon.Core.Effects.Effects.Apply(s, effect, new UnitId(unit), new EffectSource(new UnitId(unit)));
+
+    private static DamagePart Part(DamageType type, int dice, int sides, int flat) => new(type, dice, sides, flat);
+
+    private static AbilityDefinition Single(string id, AbilityKind kind, AbilityCost cost, ResolveSpec? resolve, DamagePart damage) =>
+        new(File, id, kind, cost, null, new TargetSpec(TargetShape.Single, 1, 1, 0, false), resolve, [damage], [], null);
+
+    private static AbilityDefinition Area(
+        string id, AbilityKind kind, PoolUse? pool, TargetSpec target, ResolveSpec? resolve, DamagePart damage) =>
+        new(File, id, kind, new AbilityCost(CostKind.Action), pool, target, resolve, [damage], [], null);
+}

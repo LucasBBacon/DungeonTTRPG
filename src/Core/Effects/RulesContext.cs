@@ -130,6 +130,9 @@ public sealed class RulesContext
     /// <summary>True if <paramref name="target"/> is a flag target and <paramref name="name"/> a registered flag.</summary>
     public bool IsFlag(string target, string name) => Contains(_flagTargets, target) && Contains(_flags, name);
 
+    /// <summary>The ability <paramref name="id"/>, or null if there is none.</summary>
+    internal AbilityDefinition? FindAbility(string id) => Find(_abilities, id, a => a.Id);
+
     /// <summary>The pool <paramref name="id"/>, or null if there is none.</summary>
     internal PoolDefinition? FindPool(string id) => Find(_pools, id, p => p.Id);
 

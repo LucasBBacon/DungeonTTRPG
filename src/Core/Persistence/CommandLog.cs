@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Text.Json.Serialization;
+using Dungeon.Core.AbilityModel;
 using Dungeon.Core.Effects;
 
 namespace Dungeon.Core;
@@ -21,6 +22,7 @@ public sealed record CommandLog(ulong Seed, ImmutableArray<Command> Commands)
     private const string MoveType = "move";
     private const string AnswerType = "answer";
     private const string EndTurnType = "endTurn";
+    private const string UseAbilityType = "useAbility";
 
     public string Save()
     {
@@ -75,13 +77,46 @@ public sealed record CommandLog(ulong Seed, ImmutableArray<Command> Commands)
             Option = a.OptionIndex,
         },
         EndTurnCommand e => new CommandDto { Type = EndTurnType, Unit = e.Unit.Value },
+        UseAbilityCommand u => UseDto(u),
         null => throw new InvalidOperationException("Cannot save a null command."),
         _ => throw new NotSupportedException($"Unsupported command type {command.GetType().Name}."),
     };
 
+    // A use's target is written as exactly one of targets (units), point or dir (an aim).
+    private static CommandDto UseDto(UseAbilityCommand u)
+    {
+        if (u.AbilityId is null)
+        {
+            throw new InvalidOperationException("Cannot save an ability use with no ability id.");
+        }
+
+        var dto = new CommandDto { Type = UseAbilityType, Unit = u.User.Value, Ability = u.AbilityId };
+        switch (u.Target)
+        {
+            case UnitsTarget { Units.IsDefault: false } units:
+                dto.Targets = units.Units.Select(id => id.Value).ToArray();
+                break;
+            case PointTarget point:
+                dto.Point = new PointDto { X = point.Point.X, Y = point.Point.Y };
+                break;
+            case AimTarget aim when Enum.IsDefined(aim.Aim):
+                dto.Dir = aim.Aim.ToString();
+                break;
+            default:
+                throw new InvalidOperationException("Cannot save an ability use whose target cannot be read back.");
+        }
+
+        return dto;
+    }
+
     private static Command FromDto(CommandDto c)
     {
         string type = PersistenceJson.Need(c.Type, "command type");
+        if (type != UseAbilityType && (c.Ability is not null || c.Targets is not null || c.Point is not null))
+        {
+            throw new SnapshotFormatException($"Invalid save: a {type} command carries ability-use fields.");
+        }
+
         switch (type)
         {
             case MoveType:
@@ -112,9 +147,36 @@ public sealed record CommandLog(ulong Seed, ImmutableArray<Command> Commands)
 
                 return new EndTurnCommand(new UnitId(PersistenceJson.Need(c.Unit, "endTurn unit")));
 
+            case UseAbilityType:
+                return UseFromDto(c);
+
             default:
                 throw new SnapshotFormatException($"Invalid save: unknown command type '{type}'.");
         }
+    }
+
+    private static UseAbilityCommand UseFromDto(CommandDto c)
+    {
+        if (c.Decision is not null || c.Option is not null)
+        {
+            throw new SnapshotFormatException("Invalid save: a useAbility command carries answer fields.");
+        }
+
+        int given = (c.Targets is null ? 0 : 1) + (c.Point is null ? 0 : 1) + (c.Dir is null ? 0 : 1);
+        if (given != 1)
+        {
+            throw new SnapshotFormatException("Invalid save: a useAbility command needs exactly one of targets, point and dir.");
+        }
+
+        AbilityTarget target = c.Targets is { } targets
+            ? new UnitsTarget([.. targets.Select(id => new UnitId(id))])
+            : c.Point is { } point
+                ? new PointTarget(new GridPos(PersistenceJson.Need(point.X, "useAbility point x"), PersistenceJson.Need(point.Y, "useAbility point y")))
+                : new AimTarget(PersistenceJson.ParseEnum<Direction>(c.Dir, "useAbility dir"));
+        return new UseAbilityCommand(
+            new UnitId(PersistenceJson.Need(c.Unit, "useAbility unit")),
+            PersistenceJson.Need(c.Ability, "useAbility ability"),
+            target);
     }
 
     private sealed class LogDto
@@ -144,6 +206,25 @@ public sealed record CommandLog(ulong Seed, ImmutableArray<Command> Commands)
         [JsonPropertyName("option"), JsonPropertyOrder(4)]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public int? Option { get; set; }
+
+        [JsonPropertyName("ability"), JsonPropertyOrder(5)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Ability { get; set; }
+
+        [JsonPropertyName("targets"), JsonPropertyOrder(6)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int[]? Targets { get; set; }
+
+        [JsonPropertyName("point"), JsonPropertyOrder(7)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public PointDto? Point { get; set; }
+    }
+
+    /// <summary>A burst's point.</summary>
+    private sealed class PointDto
+    {
+        [JsonPropertyName("x"), JsonPropertyOrder(0), JsonRequired] public int? X { get; set; }
+        [JsonPropertyName("y"), JsonPropertyOrder(1), JsonRequired] public int? Y { get; set; }
     }
 }
 

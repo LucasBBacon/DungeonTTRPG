@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Immutable;
+using Dungeon.Core.AbilityModel;
 using Dungeon.Core.Combat;
 using Dungeon.Core.Effects;
 
@@ -27,8 +28,46 @@ public enum CommandError
     /// <summary>In combat, the moving unit has no movement left this turn.</summary>
     NoMovementLeft,
 
-    /// <summary>The command is valid only in combat.</summary>
+    /// <summary>
+    /// The command is valid only in combat; for an ability, a use out of combat that would draw (M1-11 plan call 5; D-23).
+    /// </summary>
     NotInCombat,
+
+    // M1-11 plan call 3: the ability reason codes, named as their greyed-reason ids. AB 14.3's order is user, ability,
+    // turn, cost, pools, camp spend, target shape, range, line of sight, then NotInCombat.
+
+    /// <summary>The user does not hold the ability, or the rules have no such ability.</summary>
+    UnknownAbility,
+
+    /// <summary>The ability is a reaction, used only at its trigger, never by command.</summary>
+    ReactionOnly,
+
+    /// <summary>The ability costs the action, and the action is spent.</summary>
+    NoActionLeft,
+
+    /// <summary>The ability costs the bonus action, and it is spent.</summary>
+    NoBonusActionLeft,
+
+    /// <summary>The ability costs the free interaction, and it is spent.</summary>
+    NoFreeInteraction,
+
+    /// <summary>The ability's pool has fewer uses left than it spends.</summary>
+    NoUsesLeft,
+
+    /// <summary>The ability spends a camp pool, and the unit has already spent one this turn (AB 6.4).</summary>
+    CampSpendUsed,
+
+    /// <summary>
+    /// The target does not fit the ability's shape, or (until openers, M1-11 Task 6) the use affects another faction out
+    /// of combat.
+    /// </summary>
+    InvalidTarget,
+
+    /// <summary>A target unit or point is beyond the ability's range.</summary>
+    OutOfRange,
+
+    /// <summary>The user cannot see a target unit or point.</summary>
+    NoLineOfSight,
 }
 
 /// <summary>
@@ -87,6 +126,7 @@ public static class Engine
         {
             MoveCommand move => ApplyMove(state, move, rules),
             EndTurnCommand end => ApplyEndTurn(state, end, rules),
+            UseAbilityCommand use => ApplyUseAbility(state, use, rules),
             AnswerDecisionCommand answer => ApplyAnswer(state, answer),
             _ => throw new NotSupportedException($"Unsupported command type {command.GetType().Name}."),
         };
@@ -95,11 +135,75 @@ public static class Engine
             return result;
         }
 
-        // With nothing fired the result is returned as the handler made it, so M0 behaviour is unchanged.
-        var (next, events) = TriggerDispatch.Run(rules, result.State, result.Events);
+        // One firing counter for every dispatch phase of the command (M1-11 plan call 8). With nothing fired and nothing
+        // settled, the result is returned as the handler made it, so M0 behaviour is unchanged.
+        int firings = 0;
+        var (next, events) = TriggerDispatch.Run(rules, result.State, result.Events, ref firings);
+        (next, events) = Settle(rules, next, events, ref firings);
         return ReferenceEquals(next, result.State) && events == result.Events
             ? result
             : new StepResult(next, events, CommandError.None);
+    }
+
+    /// <summary>
+    /// The settle loop (M1-11 plan call 8), run after an accepted command's events and their triggers: while the run has
+    /// not ended and no decision is pending, end a won fight (<see cref="CombatEnd.EndIfWon"/>); otherwise start round 1
+    /// when the fight is held before it (<see cref="Turns.BeginRound1"/>); otherwise start a vacated turn
+    /// (<see cref="Turns.ResumeIfVacated"/>). Each pass's events are dispatched in turn, on the command's firing counter;
+    /// the loop stops at the first pass that emits nothing.
+    /// </summary>
+    private static (GameState State, ImmutableArray<GameEvent> Events) Settle(
+        RulesContext rules, GameState s, ImmutableArray<GameEvent> events, ref int firings)
+    {
+        while (s.Ended is null && s.Pending is null)
+        {
+            var (pass, next) = CombatEnd.EndIfWon(rules, s);
+            if (pass.IsEmpty)
+            {
+                (pass, next) = s.Combat is { BeforeRound1: true }
+                    ? Turns.BeginRound1(rules, s)
+                    : Turns.ResumeIfVacated(rules, s);
+            }
+
+            if (pass.IsEmpty)
+            {
+                break;
+            }
+
+            var (dispatched, all) = TriggerDispatch.Run(rules, next, pass, ref firings);
+            s = dispatched;
+            events = events.AddRange(all);
+        }
+
+        return (s, events);
+    }
+
+    /// <summary>
+    /// An ability use (AB 14.3; M1-11 plan calls 3 to 5 and 10). In combat it is validated and resolved on the stored
+    /// state and takes no tick. Out of combat (a use that affects no other faction) it runs as a step does: the tick's
+    /// resets first (every budget fresh, every turn pool refilled; AB 6.8), then validation and resolution on that view,
+    /// then <see cref="GameState.Tick"/> + 1 and <see cref="TickAdvanced"/> last. A refusal returns the state it was given,
+    /// with no events: no reset, no tick, no draw.
+    /// </summary>
+    private static StepResult ApplyUseAbility(GameState state, UseAbilityCommand use, RulesContext rules)
+    {
+        var view = AbilityUse.View(rules, state);
+        var error = AbilityUse.Targetable(rules, view, use.User, use.AbilityId, use.Target);
+        if (error != CommandError.None)
+        {
+            return Reject(state, error);
+        }
+
+        var (events, next) = Resolution.Use(rules, view, use.User, rules.Ability(use.AbilityId), use.Target);
+        if (state.Combat is null && next.Ended is null)
+        {
+            // Checked: at the limit the use fails loudly rather than wrap to a state no save can hold.
+            long tick = checked(state.Tick + 1);
+            next = next with { Tick = tick };
+            events = events.Add(new TickAdvanced(tick));
+        }
+
+        return new StepResult(next, events, CommandError.None);
     }
 
     /// <summary>
@@ -190,7 +294,7 @@ public static class Engine
 
     // AB 6.8, at the start of each tick, before the command's own step: every unit's turn budget becomes fresh (the
     // camp flag included) and every turn pool refills.
-    private static GameState TickResets(RulesContext rules, GameState s) =>
+    internal static GameState TickResets(RulesContext rules, GameState s) =>
         Pools.RefillAll(rules, Turns.FreshBudgets(s), RefillTag.Turn);
 
     /// <summary>

@@ -114,6 +114,7 @@ public static class Snapshot
                     Charged = BudgetDto.From(u.Opener.Charged),
                     TurnPools = PoolSpendDto.From(u.Opener.TurnPools),
                 },
+                Abilities = u.Abilities.ToArray(),
             }).ToArray(),
             Rng = new RngStreamsDto
             {
@@ -164,7 +165,7 @@ public static class Snapshot
     /// of 2^60 or more; it never returns a partly loaded state. Stream keys are re-derived from the
     /// run seed, so only the counters come from the file. Active effects must be sorted by seq, with positive,
     /// distinct seqs below <c>nextEffectSeq</c>, content ids, and holder and source units that are in the state.
-    /// The hero, each unit's budget, spent counts and opener charge are checked by <see cref="GameState.Create"/>, and the
+    /// The hero, each unit's budget, spent counts, opener charge and abilities are checked by <see cref="GameState.Create"/>, and the
     /// combat state (the before-round-1 marker included), the opener marks, the run end and <c>nextEventSeq</c> by the
     /// same rules the core holds them to (M1-10 task 1; M1-11 task 1).
     /// </summary>
@@ -194,7 +195,8 @@ public static class Snapshot
                 PersistenceJson.Need(u.Hp, "unit hp"),
                 PersistenceJson.Need(u.Budget, "unit budget").ToBudget(),
                 PoolSpendDto.ToSpends(PersistenceJson.Need(u.Spent, "unit spent"), "unit spent count"),
-                u.Opener?.ToCharge());
+                u.Opener?.ToCharge(),
+                [.. PersistenceJson.Need(u.Abilities, "unit abilities")]);
             NeedBoonIds(unit.Boons, $"unit {unit.Id.Value} boons");
             units.Add(unit);
         }
@@ -514,6 +516,9 @@ public static class Snapshot
         [JsonPropertyName("spent"), JsonPropertyOrder(8), JsonRequired] public PoolSpendDto?[]? Spent { get; set; }
         // Required: Save always writes it (as null when the unit holds no opener mark).
         [JsonPropertyName("opener"), JsonPropertyOrder(9), JsonRequired] public OpenerDto? Opener { get; set; }
+
+        // The ids of the abilities the unit holds (M1-11 plan call 2), in stored (ordinal) order.
+        [JsonPropertyName("abilities"), JsonPropertyOrder(10), JsonRequired] public string[]? Abilities { get; set; }
     }
 
     /// <summary>An opener's charge to its striker's round-1 turn (M1-11 plan call 6).</summary>

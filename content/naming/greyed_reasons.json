@@ -1,1 +1,18 @@
-{"reasons": []}
+{
+  "reasons": [
+    {"id": "UnknownUnit", "doc": "ab"},
+    {"id": "UnknownAbility", "doc": "ab"},
+    {"id": "ReactionOnly", "doc": "ab"},
+    {"id": "NotYourTurn", "doc": "ab"},
+    {"id": "NoActionLeft", "doc": "ab"},
+    {"id": "NoBonusActionLeft", "doc": "ab"},
+    {"id": "NoFreeInteraction", "doc": "ab"},
+    {"id": "NoMovementLeft", "doc": "ab"},
+    {"id": "NoUsesLeft", "doc": "ab"},
+    {"id": "CampSpendUsed", "doc": "ab"},
+    {"id": "InvalidTarget", "doc": "ab"},
+    {"id": "OutOfRange", "doc": "ab"},
+    {"id": "NoLineOfSight", "doc": "ab"},
+    {"id": "NotInCombat", "doc": "ab"}
+  ]
+}

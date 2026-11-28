@@ -1,1 +1,18 @@
-{"strings": []}
+{
+  "strings": [
+    {"key": "ab.greyed.UnknownUnit", "text": "No such unit", "field": "label"},
+    {"key": "ab.greyed.UnknownAbility", "text": "Ability not known", "field": "label"},
+    {"key": "ab.greyed.ReactionOnly", "text": "Reaction only", "field": "label"},
+    {"key": "ab.greyed.NotYourTurn", "text": "Not your turn", "field": "label"},
+    {"key": "ab.greyed.NoActionLeft", "text": "No action left", "field": "label"},
+    {"key": "ab.greyed.NoBonusActionLeft", "text": "No bonus action left", "field": "label"},
+    {"key": "ab.greyed.NoFreeInteraction", "text": "Free interaction used", "field": "label"},
+    {"key": "ab.greyed.NoMovementLeft", "text": "No movement left", "field": "label"},
+    {"key": "ab.greyed.NoUsesLeft", "text": "No uses left", "field": "label"},
+    {"key": "ab.greyed.CampSpendUsed", "text": "Camp spend already used this turn", "field": "label"},
+    {"key": "ab.greyed.InvalidTarget", "text": "Invalid target", "field": "label"},
+    {"key": "ab.greyed.OutOfRange", "text": "Out of range", "field": "label"},
+    {"key": "ab.greyed.NoLineOfSight", "text": "No line of sight", "field": "label"},
+    {"key": "ab.greyed.NotInCombat", "text": "Only in combat", "field": "label"}
+  ]
+}

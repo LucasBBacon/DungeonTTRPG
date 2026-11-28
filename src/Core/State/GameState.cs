@@ -19,7 +19,9 @@ public enum Faction { Party, Enemy }
 /// <see cref="Budget"/> is its turn budget (AB 14.2) and <see cref="Spent"/> its pool spent counts (AB 6.2), sorted by
 /// pool id in ordinal order, each pool once and each count at least 1. An uninitialised <see cref="Spent"/> is held as
 /// an empty array, so every unit, however built, holds a real one. <see cref="Opener"/> is the "opener charged, first
-/// turn not yet started" mark (M1-11 plan call 6), or null.
+/// turn not yet started" mark (M1-11 plan call 6), or null. <see cref="Abilities"/> holds the ids of the abilities the
+/// unit may use and react with (M1-11 plan call 2), ordinal-sorted and distinct; an uninitialised array is held as an
+/// empty one, as for <see cref="Spent"/>.
 /// </summary>
 public sealed record Unit(
     UnitId Id,
@@ -30,15 +32,24 @@ public sealed record Unit(
     int Hp,
     TurnBudget Budget = default,
     ImmutableArray<PoolSpend> Spent = default,
-    OpenerCharge? Opener = null)
+    OpenerCharge? Opener = null,
+    ImmutableArray<string> Abilities = default)
 {
     private readonly ImmutableArray<PoolSpend> _spent = Spent.IsDefault ? [] : Spent;
+    private readonly ImmutableArray<string> _abilities = Abilities.IsDefault ? [] : Abilities;
 
     /// <summary>The unit's pool spent counts; never an uninitialised array.</summary>
     public ImmutableArray<PoolSpend> Spent
     {
         get => _spent;
         init => _spent = value.IsDefault ? [] : value;
+    }
+
+    /// <summary>The ids of the abilities the unit holds; never an uninitialised array.</summary>
+    public ImmutableArray<string> Abilities
+    {
+        get => _abilities;
+        init => _abilities = value.IsDefault ? [] : value;
     }
 }
 
@@ -97,7 +108,8 @@ public sealed record GameState(
     /// both are validated. The run starts with no active effects and <see cref="NextEffectSeq"/> 1. HP is not checked
     /// against the maximum (M1-09 plan call 2): a save loads through here before its effects are back, and an effect
     /// may raise the maximum. A unit's turn budget counts must not be negative, and its spent counts must name pools by
-    /// content id, sorted in ordinal order, each pool once, each count at least 1. <paramref name="hero"/>, when given, must name a
+    /// content id, sorted in ordinal order, each pool once, each count at least 1; its abilities must be content ids, sorted
+    /// in ordinal order, each once. <paramref name="hero"/>, when given, must name a
     /// party unit in the state. The run starts out of combat, not ended, with <see cref="NextEventSeq"/> 1.
     /// </summary>
     public static GameState Create(
@@ -382,6 +394,22 @@ public sealed record GameState(
         if (unit.Opener is { } opener)
         {
             CheckOpener(unit, opener, who, units);
+        }
+
+        // M1-11 plan call 2: the abilities the unit holds are content ids, ordinal-sorted and distinct.
+        var abilities = unit.Abilities;
+        for (int k = 0; k < abilities.Length; k++)
+        {
+            if (abilities[k] is not { } id || !ContentId.IsValid(id))
+            {
+                throw new ArgumentException($"{who}holds ability '{abilities[k]}', which is not a content id ([a-z0-9_.:-]).", units);
+            }
+
+            if (k > 0 && string.CompareOrdinal(abilities[k - 1], id) >= 0)
+            {
+                throw new ArgumentException(
+                    $"{who}must list its abilities in ordinal order, each once ('{abilities[k - 1]}' then '{id}').", units);
+            }
         }
     }
 

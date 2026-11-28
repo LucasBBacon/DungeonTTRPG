@@ -18,3 +18,11 @@ public sealed record AnswerDecisionCommand(DecisionId Decision, int OptionIndex)
 /// is vacated (no unit holds it).
 /// </summary>
 public sealed record EndTurnCommand(UnitId Unit) : Command;
+
+/// <summary>
+/// <see cref="User"/> uses the ability <see cref="AbilityId"/> on <see cref="Target"/> (AB 14.3; M1-11 plan calls 3 to 5
+/// and 10). In combat only the unit holding a live turn may use one; out of combat a use that affects no unit of another
+/// faction takes one tick, as a step does (AB 6.8). The first failing check, in AB 14.3's order, is the refusal's
+/// <see cref="CommandError"/> (<see cref="AbilityModel.AbilityUse.CheckTarget"/>).
+/// </summary>
+public sealed record UseAbilityCommand(UnitId User, string AbilityId, AbilityModel.AbilityTarget Target) : Command;

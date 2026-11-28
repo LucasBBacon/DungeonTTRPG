@@ -69,3 +69,37 @@ public sealed record RunEnded(RunEndCause Cause, long? KillingEventId) : GameEve
 /// call 14): a rule event needs a subject unit, and combat end has none.
 /// </summary>
 public sealed record CombatEnded(CombatEndReason Reason) : GameEvent;
+
+/// <summary><paramref name="User"/> declared a use of <paramref name="AbilityId"/> and it passed validation (AB 14.3; M1-11 plan call 9).</summary>
+public sealed record AbilityUsed(UnitId User, string AbilityId) : GameEvent;
+
+/// <summary>
+/// The use's cost was paid (AB 7.1): <paramref name="Charged"/> holds only the cost's own bits (an action, the bonus
+/// action, the free interaction or movement), and <paramref name="Pools"/> the pool spend, if any, separate from the cost.
+/// The record compares <paramref name="Pools"/> by reference; compare it with <c>SequenceEqual</c>.
+/// </summary>
+public sealed record AbilityCostPaid(UnitId User, string AbilityId, TurnBudget Charged, ImmutableArray<PoolSpend> Pools) : GameEvent;
+
+/// <summary>
+/// The units the use affects, locked in unit order (AB 14.3); an empty list is a legal use that resolves no target.
+/// The record compares <paramref name="Targets"/> by reference; compare it with <c>SequenceEqual</c>.
+/// </summary>
+public sealed record TargetsLocked(UnitId User, ImmutableArray<UnitId> Targets) : GameEvent;
+
+/// <summary><paramref name="Attacker"/>'s attack roll against <paramref name="Target"/> and its outcome.</summary>
+public sealed record AttackRolled(UnitId Attacker, UnitId Target, AttackResult Result) : GameEvent;
+
+/// <summary><paramref name="Target"/>'s save against an ability and its outcome.</summary>
+public sealed record SaveRolled(UnitId Target, CheckResult Result) : GameEvent;
+
+/// <summary>The damage dice rolled against <paramref name="Target"/>, before the ladder and the floors.</summary>
+public sealed record DamageRolled(UnitId Target, DamageRoll Roll) : GameEvent;
+
+/// <summary><paramref name="Reactor"/> took the reaction <paramref name="AbilityId"/> (AB 7.3).</summary>
+public sealed record ReactionTaken(UnitId Reactor, string AbilityId) : GameEvent;
+
+/// <summary>
+/// The use of <paramref name="AbilityId"/> by <paramref name="User"/> has resolved every target (AB 14.3). It raises the
+/// rule event <c>abilityResolved</c>, whose subject is the user. A use stopped by a run end has none.
+/// </summary>
+public sealed record AbilityResolved(UnitId User, string AbilityId) : GameEvent;
