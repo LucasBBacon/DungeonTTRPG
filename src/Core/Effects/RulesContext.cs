@@ -179,6 +179,13 @@ public sealed class RulesContext
     {
         int index = IndexIn(content, ability);
         string at = index >= 0 ? Item("$.abilities", index) : $"$.abilities[{ability.Id}]";
+
+        // The loader's structural rules, for code-built definitions too (M1-11 final review C5).
+        if (AbilityRules.Check(ability, at) is { } broken)
+        {
+            throw new ContentLoadException(ability.File, broken.Field, broken.Problem);
+        }
+
         if (ability.Pool is { } use && FindPool(use.PoolId) is null)
         {
             throw new ContentLoadException(ability.File, Member(Member(at, "pool"), "id"), $"\"{use.PoolId}\" names no pool.");

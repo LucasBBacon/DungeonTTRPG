@@ -278,7 +278,7 @@ public static partial class AbilityUse
             return true;
         }
 
-        foreach (var part in ability.Damage)
+        foreach (var part in ability.Damage.IsDefault ? [] : ability.Damage)
         {
             if (part.Dice > 0)
             {

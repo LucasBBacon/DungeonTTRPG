@@ -20,7 +20,8 @@ namespace Dungeon.Core.AbilityModel;
 /// <item><c>damage</c>: <c>[{type, dice?: "NdS", flat?}]</c>; <c>effects</c>: effect ids.</item>
 /// <item><c>reaction</c>: <c>{trigger, bonus, policy?: {kind, filter?: "none"}}</c>, present exactly when the kind and the cost are <c>reaction</c>.</item>
 /// </list>
-/// Pool and effect references are checked when the rules context is built (<c>RulesContext.Create</c>).
+/// The structural rules are <see cref="AbilityRules"/>, shared with code-built definitions. Pool and effect references
+/// are checked when the rules context is built (<c>RulesContext.Create</c>).
 /// </summary>
 public sealed class AbilitiesKind : ContentKind
 {
@@ -50,43 +51,8 @@ public sealed class AbilitiesKind : ContentKind
     {
         string id = Id(file, Member(at, "id"), a.Id).Value;
         var kind = ParseLowerEnum<AbilityKind>(file, Member(at, "kind"), a.Kind);
-        if (kind is AbilityKind.Passive or AbilityKind.Toggle or AbilityKind.Sustained)
-        {
-            throw Fail(file, Member(at, "kind"), $"\"{a.Kind}\" is reserved; M1 abilities are atWill, limited or reaction.");
-        }
-
         var cost = Cost(file, Member(at, "cost"), a.Cost);
-        if ((kind == AbilityKind.Reaction) != (cost.Kind == CostKind.Reaction))
-        {
-            throw Fail(file, Member(at, "cost"), "a reaction ability, and only one, has the cost \"reaction\".");
-        }
-
-        if (kind == AbilityKind.Reaction)
-        {
-            if (a.Reaction is null)
-            {
-                throw Fail(file, Member(at, "reaction"), "a reaction ability has a reaction block.");
-            }
-
-            if (a.Target is not null)
-            {
-                throw Fail(file, Member(at, "target"), "a reaction ability has no target.");
-            }
-        }
-        else
-        {
-            if (a.Reaction is not null)
-            {
-                throw Fail(file, Member(at, "reaction"), "only a reaction ability has a reaction block.");
-            }
-
-            if (a.Target is null)
-            {
-                throw Fail(file, Member(at, "target"), "the field is missing.");
-            }
-        }
-
-        return new AbilityDefinition(
+        var ability = new AbilityDefinition(
             file.Name,
             id,
             kind,
@@ -97,6 +63,10 @@ public sealed class AbilitiesKind : ContentKind
             Damage(file, Member(at, "damage"), a.Damage),
             Effects(file, Member(at, "effects"), a.Effects),
             a.Reaction is null ? null : Reaction(file, Member(at, "reaction"), a.Reaction));
+
+        // The structural rules (reserved kinds and costs, kind/cost/reaction-block agreement, the target's sizes) are
+        // shared with code-built definitions, which RulesContext.Create checks the same way.
+        return AbilityRules.Check(ability, at) is { } broken ? throw Fail(file, broken.Field, broken.Problem) : ability;
     }
 
     private static AbilityCost Cost(ContentFile file, string field, string? text)
@@ -109,8 +79,8 @@ public sealed class AbilitiesKind : ContentKind
             case "reaction": return new AbilityCost(CostKind.Reaction);
             case "free": return new AbilityCost(CostKind.Free);
             case "none": return new AbilityCost(CostKind.None);
-            case "attack": throw Fail(file, field, "the \"attack\" cost is reserved to M1-14.");
-            case "onHit": throw Fail(file, field, "the \"onHit\" cost is reserved to M1-16.");
+            case "attack": return new AbilityCost(CostKind.Attack); // reserved to M1-14; refused by AbilityRules
+            case "onHit": return new AbilityCost(CostKind.OnHit); // reserved to M1-16; refused by AbilityRules
         }
 
         if (s.StartsWith("move:", StringComparison.Ordinal))
@@ -126,7 +96,7 @@ public sealed class AbilitiesKind : ContentKind
 
         if (s.StartsWith("onEvent:", StringComparison.Ordinal) && s.Length > "onEvent:".Length)
         {
-            throw Fail(file, field, "the \"onEvent:<id>\" cost is reserved to M1-20.");
+            return new AbilityCost(CostKind.OnEvent, 0, s.Substring("onEvent:".Length)); // reserved to M1-20; refused by AbilityRules
         }
 
         throw Fail(file, field, $"unknown cost \"{s}\"; the costs are action, bonus, reaction, free, none and move:N.");
@@ -136,7 +106,7 @@ public sealed class AbilitiesKind : ContentKind
     {
         string id = Id(file, Member(at, "id"), p.Id).Value;
         int count = Need(file, Member(at, "count"), p.Count);
-        return count >= 1 ? new PoolUse(id, count) : throw Fail(file, Member(at, "count"), "a pool use spends at least 1.");
+        return new PoolUse(id, count); // a count below 1 is refused by AbilityRules
     }
 
     private static TargetSpec Target(ContentFile file, string at, TargetDto t)

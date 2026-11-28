@@ -401,6 +401,90 @@ public class AbilityRecordTests
         Assert.Equal("$.abilities[0].damage", LoadFails(Abilities(Record("""{"type": "fire", "dice": "6d3"}, {"type": "cold", "dice": "6d3"}"""))).Field);
     }
 
+    // --- Code-built definitions meet the loader's structural rules (M1-11 final review C5) ---
+
+    private static readonly AbilityDefinition Built = new(
+        "code", "test.built", AbilityKind.AtWill, new AbilityCost(CostKind.Action), null,
+        new TargetSpec(TargetShape.Single, 1, 1, 0, false), null, [new DamagePart(DamageType.Fire, 0, 0, 1)], [], null);
+
+    private static readonly ReactionSpec BuiltReaction = new(ReactionTrigger.AttackRoll, 2, ReactionMode.Always);
+
+    private static readonly AbilityDefinition BuiltWard = new(
+        "code", "test.built", AbilityKind.Reaction, new AbilityCost(CostKind.Reaction), null, null, null, [], [], BuiltReaction);
+
+    public static TheoryData<string, AbilityDefinition, string> BrokenBuilds() => new()
+    {
+        // Reserved kinds and costs.
+        { "passive", Built with { Kind = AbilityKind.Passive }, "kind" },
+        { "undefined kind", Built with { Kind = (AbilityKind)99 }, "kind" },
+        { "attack cost", Built with { Cost = new AbilityCost(CostKind.Attack) }, "cost" },
+        { "onHit cost", Built with { Cost = new AbilityCost(CostKind.OnHit) }, "cost" },
+        { "onEvent cost", Built with { Cost = new AbilityCost(CostKind.OnEvent, 0, "ally.fell") }, "cost" },
+        { "move:0", Built with { Cost = new AbilityCost(CostKind.Move, 0) }, "cost" },
+        { "action with a move count", Built with { Cost = new AbilityCost(CostKind.Action, 2) }, "cost" },
+        { "undefined cost", Built with { Cost = new AbilityCost((CostKind)99) }, "cost" },
+
+        // Kind, cost and reaction block agree; a target exactly when not a reaction.
+        { "atWill with the reaction cost", Built with { Cost = new AbilityCost(CostKind.Reaction) }, "cost" },
+        { "reaction with the action cost", BuiltWard with { Cost = new AbilityCost(CostKind.Action) }, "cost" },
+        { "reaction without a block", BuiltWard with { Reaction = null }, "reaction" },
+        { "atWill with a block", Built with { Reaction = BuiltReaction }, "reaction" },
+        { "reaction with a target", BuiltWard with { Target = Built.Target }, "target" },
+        { "atWill without a target", Built with { Target = null }, "target" },
+
+        // Pool, shape sizes, counts and ranges.
+        { "pool count 0", Built with { Pool = new PoolUse("pool.a", 0) }, "pool.count" },
+        { "single range -1", Built with { Target = new TargetSpec(TargetShape.Single, -1, 1, 0, false) }, "target.range" },
+        { "single count 0", Built with { Target = new TargetSpec(TargetShape.Single, 1, 0, 0, false) }, "target.count" },
+        { "single with a size", Built with { Target = new TargetSpec(TargetShape.Single, 1, 1, 2, false) }, "target.radius" },
+        { "burst radius 0", Built with { Target = new TargetSpec(TargetShape.Burst, 2, 0, 0, false) }, "target.radius" },
+        { "burst range -1", Built with { Target = new TargetSpec(TargetShape.Burst, -1, 0, 1, false) }, "target.range" },
+        { "burst with a count", Built with { Target = new TargetSpec(TargetShape.Burst, 2, 2, 1, false) }, "target.count" },
+        { "cone length 0", Built with { Target = new TargetSpec(TargetShape.Cone, 0, 0, 0, false) }, "target.length" },
+        { "line with a range", Built with { Target = new TargetSpec(TargetShape.Line, 3, 0, 2, false) }, "target.range" },
+        { "line with a count", Built with { Target = new TargetSpec(TargetShape.Line, 0, 1, 2, false) }, "target.count" },
+        { "undefined shape", Built with { Target = new TargetSpec((TargetShape)99, 0, 0, 1, false) }, "target.shape" },
+
+        // Resolve, damage and effects.
+        { "foreign resolve", Built with { Resolve = new ForeignResolve() }, "resolve" },
+        { "default damage", Built with { Damage = default }, "damage" },
+        { "default effects", Built with { Effects = default }, "effects" },
+        { "dice without sides", Built with { Damage = [new DamagePart(DamageType.Fire, 1, 0, 0)] }, "damage[0].dice" },
+    };
+
+    private sealed record ForeignResolve : ResolveSpec
+    {
+        public override void WriteCanonical(CanonicalWriter w)
+        {
+            w.BeginRecord(0);
+            w.EndRecord();
+        }
+    }
+
+    [Theory]
+    [MemberData(nameof(BrokenBuilds))]
+    public void A_code_built_definition_breaking_a_structural_rule_is_refused(string name, AbilityDefinition built, string field)
+    {
+        var pools = ImmutableArray.Create(new PoolDefinition("pool.a", RefillTag.Rest, _ => 1));
+        var ex = Assert.Throws<ContentLoadException>(() => RulesContext.Create(Load(), pools: pools, abilities: [built]));
+        Assert.Equal("code", ex.File);
+        Assert.True($"$.abilities[test.built].{field}" == ex.Field, $"{name}: {ex.Field}");
+    }
+
+    [Fact]
+    public void The_code_built_controls_are_accepted()
+    {
+        Assert.NotNull(RulesContext.Create(Load(), abilities: [Built]));
+        Assert.NotNull(RulesContext.Create(Load(), abilities: [BuiltWard]));
+    }
+
+    [Fact]
+    public void Draws_reads_a_default_damage_list_as_empty()
+    {
+        Assert.False(AbilityUse.Draws(Built with { Damage = default }));
+        Assert.True(AbilityUse.Draws(Built with { Damage = default, Resolve = new SaveResolve(Save.Reflex) }));
+    }
+
     [Theory]
     [InlineData(21, 6, 0, "$.abilities[test.built].damage[0].dice")]
     [InlineData(1, 101, 0, "$.abilities[test.built].damage[0].dice")]
