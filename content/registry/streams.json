@@ -291,6 +291,23 @@
       "wave": "M2"
     },
     {
+      "path": "dungeon/floor/{N}/checks/h:roll/{sourceId:}/{verb:}/{targetId:}/{attemptIndex}/{die}",
+      "alias": [],
+      "parent": "dungeon/floor/{N}/checks",
+      "label": "h:roll",
+      "indices": [{"name": "sourceId", "type": "labelId"}, {"name": "verb", "type": "labelId"}, {"name": "targetId", "type": "labelId"}, {"name": "attemptIndex", "type": "ulong"}, {"name": "die", "type": "ulong"}],
+      "class": "keyed",
+      "stage": "play",
+      "readers": [],
+      "consumers": [],
+      "retryScope": "floorKey",
+      "rules": [],
+      "keyType": "core",
+      "owner": "SV",
+      "source": ["SV 4.3"],
+      "wave": "M2"
+    },
+    {
       "path": "dungeon/floor/{N}/attempt/{a}",
       "alias": [],
       "parent": "dungeon/floor/{N}",

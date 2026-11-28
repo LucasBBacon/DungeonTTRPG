@@ -78,4 +78,16 @@ public class DamageReplayTests
         Assert.Equal(Start().Rng.Shrine, a.Rng.Shrine);
         Assert.Equal(Seed7FinalHp, (a.FindUnit(Hero)!.Hp, a.FindUnit(Foe)!.Hp));
     }
+
+    // M1-11 rulings record 6.3: registering the reserved h:roll row moves no draw. Pinned from a run before the row was
+    // added: the combat counter after the three seed-7 rounds, beside the HP golden above.
+    private const ulong Seed7CombatCounter = 13;
+
+    [Fact]
+    public void Reserving_h_roll_moves_no_combat_draw()
+    {
+        var a = Rounds(Start(), 3);
+        Assert.Equal(Seed7CombatCounter, a.Rng.Combat.Counter);
+        Assert.Equal(Seed7FinalHp, (a.FindUnit(Hero)!.Hp, a.FindUnit(Foe)!.Hp));
+    }
 }

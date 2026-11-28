@@ -76,6 +76,8 @@ public static class Damage
             }
         }
 
+        // The combat stream; out of combat h:roll, added with D-22's halved input as one refactor (lead's call; M1-11
+        // rulings record 8 item 12).
         var stream = s.Rng.Combat;
         var rolled = ImmutableArray.CreateBuilder<PartRoll>(parts.Length);
         foreach (var part in parts)
@@ -110,7 +112,7 @@ public static class Damage
         // 1. Downed: discard the damage. M2 (no Downed or companions in M1).
         // 2. Each part through the target's ladder step for its type (SM 8.3, 9; owner ruling 1). Shells and layers,
         //    transforms: M2 or later. Temporary HP: Later (Bolstered, DH 14; test owed by roadmap D-17; order per
-        //    DH 15.2 / 20.3).
+        //    DH 15.2 / 20.3). Halving by a save: FloorDiv per part before the ladder (D-22), in the D-22 step.
         var parts = ImmutableArray.CreateBuilder<PartOutcome>(roll.Parts.Length);
         foreach (var part in roll.Parts)
         {
@@ -125,7 +127,7 @@ public static class Damage
             total = checked(total + part.Dealt);
         }
 
-        // 3a. Duck (Shade): M2.
+        // 3a. Duck (Shade): M2; never on damage halved by a save or by Tumble Clear (D-22; lead's call).
         // 4. The floors (DH 10.4; M1-10 plan call 10), for a party target only. HP above a lowered maximum counts as
         //    the maximum. A floor applies out of combat (OutOfCombat, checked first), or when a part comes from a
         //    Hidden or HunchFloored trap and the other parts alone deal less than that HP (UndetectedTrap: the floor
@@ -184,6 +186,7 @@ public static class Damage
 
         // D-17: once temporary HP absorbs per part, rule whether `others` counts before or after absorption, whether
         // part order may decide life or death (DH 10.4 vs CO 9.3), and what the log shows (M1-10 rulings record 1.1).
+        // The question now covers parts halved by a save too: `others` sums the halved parts (M1-11 rulings record 1.6).
         return trapped && others < from;
     }
 

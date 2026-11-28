@@ -29,7 +29,8 @@ public enum CommandError
     NoMovementLeft,
 
     /// <summary>
-    /// The command is valid only in combat; for an ability, a use out of combat that would draw (M1-11 plan call 5; D-23).
+    /// The command is valid only in combat; for an ability, a use out of combat that would draw (M1-11 plan call 5; D-23
+    /// ruled 2026-11-28: the refusal stays in M1; the D-23 wave uses <c>h:roll</c> (M1-11 rulings record 2)).
     /// </summary>
     NotInCombat,
 

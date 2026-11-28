@@ -333,8 +333,8 @@ These keys and ideas are named now so content does not invent its own, and are r
 | Condition application pipeline, relations and exclusivity | Not in the schema; conditions are plain `condition`-kind effects for now. | M1-12, M1-13 |
 | Damage riders (AB 9.1) | Not in the schema. | M2 |
 | Ability costs `attack`, `onHit` and `onEvent:<id>` | Parse, but are load errors naming their step (plan call 1 of M1-11). | M1-14 (`attack`), M1-16 (`onHit`), M1-20 (`onEvent`) |
-| Save `onSuccess: half` | Refused at load. Open decision D-22: halve each part or the summed total, and how to round. | D-22 |
-| Out-of-combat ability rolls by a non-opener | Refused with `NotInCombat`; flat-damage and effect-only abilities still work. No stream is ruled for them (drawing `combat` breaks V19t `ExplorationCombatIsolation`). Open decision D-23. | D-23 (blocks M1-35) |
+| Save `onSuccess: half` | Refused at load until the D-22 step; ruled (D-22, [M1-11 rulings record](superpowers/specs/2026-11-28-m1-11-rulings-design.md) 1). | M2-03 |
+| Out-of-combat ability rolls by a non-opener | Refused with `NotInCombat`; flat-damage and effect-only abilities still work. Ruled (D-23, [record](superpowers/specs/2026-11-28-m1-11-rulings-design.md) 2): kept in M1; the reserved `h:roll` set (**lead's call**) from the D-23 wave (drawing `combat` would break V19t `ExplorationCombatIsolation`). | the D-23 wave |
 | Reaction filters other than `none` | Not in the schema (`nonMinion` needs ranks). | M1-22 |
 | The AR 10.4 AC window across allies | Not built; M1-11 reactions are the defender's own bonus wards. | M1-17 |
 

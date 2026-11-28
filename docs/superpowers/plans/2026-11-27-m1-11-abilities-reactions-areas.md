@@ -26,7 +26,7 @@
 1. **`CanSee` is built in M1-11.** It is the real symmetric function over walls only, with its symmetry and corner tests. M1-34 keeps `KnownCanSee`, `KnownNoiseReach` and the party-knowledge layer. Task 9 amends M1-34's Delivers.
 2. **An opener is validated against a fresh budget and the pools as they stand after the `fight` refill.** That is the state record step 4 produces before the charge. `turn` pools are not refilled at combat start.
 3. **Any faction may be a striker.** No M1 content or AI declares an enemy opener, but the core allows one; the design is symmetric. `CombatScenarioTests`' ambush becomes a Foe opener against the hero.
-4. **Saves support only `onSuccess: none`.** `"half"` is refused at load and recorded as **D-22** for the DH owner (Task 9). No M1 content uses it.
+4. **Saves support only `onSuccess: none`.** `"half"` is refused at load and recorded as **D-22** for the DH owner (Task 9). No M1 content uses it. D-22 resolved 2026-11-28 ([M1-11 rulings record](../specs/2026-11-28-m1-11-rulings-design.md) 1); the refusal stays until the D-22 step.
 
 ## Global Constraints
 
@@ -43,7 +43,7 @@
 - DH 20.3 step 7: after the hero reaches 0, "No later target of an area ... or combat-end step is processed."
 - Rulings record 5, steps 6–9: record the fight with a "before round 1" marker that is not `TurnVacated`. `CombatStarted` comes first, then the held messages. The opener is charged ("the action and any once-per-round use limits it spent, not once-per-turn flags"), its targets are locked and it resolves, then the win check; "If the fight is won, no `TurnStarted` or `TurnEnded` follows". Then the marker clears and slot 0 starts. At the striker's first turn, "turn start neither resets nor refills what the opener spent"; "once-per-turn flags and the camp-spend flag clear". "The mark lives on the unit". Save version 8, rules version 3.
 - XI 4.1.2: "integer symmetric shadowcasting (Albert Ford's formulation), square centre to square centre"; "Sight is blocked on a diagonal only when both orthogonal neighbours of that diagonal block sight"; "defined, and symmetric, between transparent squares"; "Units never block sight".
-- SV 4.3 / AB 14.4: rolls in combat, openers included, draw `combat`. Out-of-combat rolls are D-23 (plan call 5): V19t `ExplorationCombatIsolation` (SV 1001) forbids exploration drawing `combat`. SM 3: integer arithmetic only. The determinism analyzers (DUN001–DUN012) stay green. Previews draw nothing.
+- SV 4.3 / AB 14.4: rolls in combat, openers included, draw `combat`. Out-of-combat rolls are D-23, resolved 2026-11-28 ([record](../specs/2026-11-28-m1-11-rulings-design.md) 2; plan call 5): V19t `ExplorationCombatIsolation` (SV 1002) forbids exploration drawing `combat`. SM 3: integer arithmetic only. The determinism analyzers (DUN001–DUN012) stay green. Previews draw nothing.
 - Out of scope:
   - **M1-12:** condition contents of combat-start step 2; the turn-start and turn-end step contents.
   - **M1-13:** Surprised (step 3), per-step movement costs.
@@ -77,7 +77,7 @@
    - **Exception:** a reaction-cost ability is never usable by command (`ReactionOnly`).
 5. **Openers.** Out of combat, a use is an opener when its affected units include one of another faction. The affected units are computed by Task 4's `Abilities.Affected`, the same function preview and resolution use. Noticing is M1-35's.
    - **Non-opener out of combat:** tick resets first, then the pipeline, then `Tick + 1` and `TickAdvanced` last, as `ApplyMove` does.
-   - **A non-opener out of combat may not draw.** An ability with a `resolve` or with dice in its damage is refused with `NotInCombat`, because no stream is ruled for it: drawing `combat` would break V19t, and SV 4.3 names no other. This is recorded as **D-23** (Task 9). Flat-damage and effect-only abilities work, which is enough for DH 10.4's party-area floor. Since reaction windows open only on rolls, no out-of-combat use can suspend on "ask me".
+   - **A non-opener out of combat may not draw.** An ability with a `resolve` or with dice in its damage is refused with `NotInCombat`, because no stream is ruled for it: drawing `combat` would break V19t, and SV 4.3 names no other. This is recorded as **D-23** (Task 9). Flat-damage and effect-only abilities work, which is enough for DH 10.4's party-area floor. Since reaction windows open only on rolls, no out-of-combat use can suspend on "ask me". D-23 ruled 2026-11-28 ([record](../specs/2026-11-28-m1-11-rulings-design.md) 2): kept in M1; `h:roll` from the D-23 wave.
    - **Opener:** no tick at all (owner ruling 2; AB 6.8).
 6. **The opener's charge.** `OpenerCharge(TurnBudget Charged, ImmutableArray<PoolSpend> TurnPools)` lives on `Unit.Opener`.
    - `Charged` holds only the opener's own cost bits (action, bonus, free or movement); its `ReactionUsed` and `CampSpent` are never set.
@@ -248,7 +248,7 @@
 - `sealed record AbilityDefinition(string File, string Id, AbilityKind Kind, AbilityCost Cost, PoolUse? Pool, TargetSpec? Target, ResolveSpec? Resolve, ImmutableArray<DamagePart> Damage, ImmutableArray<string> Effects, ReactionSpec? Reaction) : ContentRecord`, with `WriteCanonical`. `Target` is required unless the kind is `Reaction`, and must be null for one.
 - **JSON** (strict, lower-camel enum names):
   - `{"id","kind","cost","pool":{"id","count"},"target":{"shape","range","count","radius"|"length","selective"},"resolve":{"attack":"strength","trained":true}|{"save":"reflex","onSuccess":"none"},"damage":[{"type","dice":"2d6","flat"}],"effects":[ids],"reaction":{"trigger","bonus","policy":{"kind","filter":"none"}}}`.
-  - A filter other than `none` is a load error (M1-22). `onSuccess: half` is a load error citing D-22.
+  - A filter other than `none` is a load error (M1-22). `onSuccess: half` is a load error citing D-22. D-22 ruled; refused until the D-22 step.
 - `RulesContext.Create` builds `ImmutableArray<AbilityDefinition> Abilities` (sorted by ordinal id) and exposes `AbilityDefinition Ability(string id)`, which throws `ArgumentException` for an unknown id. Unknown pool or effect references are refused in `Validate`, naming the file and path. An optional `abilities` parameter takes code-built definitions (merged with content; duplicate ids refused).
 - `public static int AreaCap(int level)`: 25 for 1–6, 49 for 7–10; throws otherwise.
 - **The checks** (registered, with `checks.json` rows: owner "ability model", phase `s`, class `build`, wave `M1`, ciTier `pr`):
@@ -480,7 +480,7 @@
 
 - [ ] **Step 1: The effects vocabulary:**
   - section 6.4: the `abilityResolved` row;
-  - section 8: reserved rows for the costs `attack`, `onHit` and `onEvent` (M1-14, M1-16, M1-20), `onSuccess: half` (D-22), out-of-combat rolls by non-openers (D-23), reaction filters other than `none` (M1-22), and the M1-17 AC window across allies;
+  - section 8: reserved rows for the costs `attack`, `onHit` and `onEvent` (M1-14, M1-16, M1-20), `onSuccess: half` (D-22, ruled 2026-11-28), out-of-combat rolls by non-openers (D-23, ruled 2026-11-28), reaction filters other than `none` (M1-22), and the M1-17 AC window across allies;
   - section 9: the M1-11 row restated as built.
 - [ ] **Step 2: The roadmap:**
   - **M1-11's Delivers:**
@@ -488,7 +488,7 @@
     - add "`CanSee` (integer symmetric shadowcasting, walls only) (owner ruling 2026-11-27)".
   - **M1-34's Delivers:** "`CanSee` (integer symmetric shadowcasting), `KnownCanSee`, `KnownNoiseReach`" → "`KnownCanSee`, `KnownNoiseReach` (`CanSee` is built in M1-11; M1-34 extends its blockers to doors and pieces)". `LosSymmetric` stays in M1-34's Done-when as the registered V18t row.
   - **README:** add the row **D-22** (blocks the first content with a half-on-success save; owner: DH): "A successful save against `onSuccess: half`: halve each part, or the summed total, and how to round? M1-11 refuses `half` at load (owner ruling 2026-11-27)." Source: AB 14.1; DH 20.3.
-  - **README:** add the row **D-23** (blocks M1-35; owner: SV): "Out-of-combat ability rolls: an ability used out of combat that is not an opener and rolls (a save, an attack or damage dice): which stream? Drawing `combat` breaks V19t `ExplorationCombatIsolation` (SV 1001), and SV 4.3 names no other. M1-11 refuses such uses with `NotInCombat`, and flat-damage abilities still work (M1-11 plan call 5)." Source: SV 4.3, V19t; AB 6.8; DH 10.4.
+  - **README:** add the row **D-23** (owner: SV): "Out-of-combat ability rolls: an ability used out of combat that is not an opener and rolls (a save, an attack or damage dice): which stream? Drawing `combat` breaks V19t `ExplorationCombatIsolation` (SV 1002), and SV 4.3 names no other. M1-11 refuses such uses with `NotInCombat`, and flat-damage abilities still work (M1-11 plan call 5)." Source: SV 4.3, V19t; AB 6.8; DH 10.4.
   - **Owner notes in the README's M1-11 row or the PR**, recorded as plan calls, not decisions:
     - an opener that costs a bonus action or movement charges that cost, not the action (plan call 6; record 4.1 covers only action openers);
     - "a hostile ability" for the own-save window means a user of another faction (plan call 10);
