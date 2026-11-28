@@ -11,8 +11,16 @@ using Effects = Dungeon.Core.Effects.Effects;
 
 /// <summary>
 /// An ability use after validation (AB 14.3; M1-11 plan call 10): the cost is paid, the targets are locked in unit order,
-/// and each target resolves in turn. Triggers run only after it returns (the exception: a use suspended on an "ask me" decision has its earlier events dispatched by the suspending command; see the M1-14 roadmap note), so nothing between two targets but the
-/// resolution itself changes the state. A reaction window that reaches an "ask me" candidate suspends the use on a
+/// and each target resolves in turn. Triggers run only after it returns, so nothing between two targets but the
+/// resolution itself changes the state, with one exception: a use suspended on an "ask me" decision. The suspending
+/// command dispatches every event the use has raised so far, which are <see cref="AbilityUsed"/>,
+/// <see cref="AbilityCostPaid"/> and <see cref="TargetsLocked"/> (when it is the first suspension), the complete events of
+/// each target resolved before the window (its <see cref="ReactionTaken"/>, roll, <see cref="DamageRolled"/>,
+/// <see cref="Harm.Deal"/>'s events and <see cref="EffectApplied"/>), and <see cref="DecisionRequested"/>; an answer
+/// that suspends again dispatches the events raised since the last suspension. Their triggers (on <c>unitDied</c>, for
+/// one) fire before the use completes, so with "ask me" a trigger can change what the rest of the use reads, which
+/// under an automatic policy it could not. The M1-12 roadmap note binds the fix: hold those events until the use
+/// completes. A reaction window that reaches an "ask me" candidate suspends the use on a
 /// <see cref="DecisionKind.Reaction"/> decision, holding it in <see cref="GameState.Resolution"/>, and
 /// <see cref="Continue"/> takes it up again from there (plan call 12).
 /// </summary>

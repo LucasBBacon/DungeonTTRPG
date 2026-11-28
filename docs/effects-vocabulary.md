@@ -224,7 +224,7 @@ A trigger reacts to a rule event (MAIN 6.4):
 
 | Key | Required | Value |
 |---|---|---|
-| `on` | yes | A registered rule-event id (section 6.4). M1-07 registers `unitMoved` (a unit finished a move; the subject is that unit); M1-10 adds `combatStarted`, `turnStarted`, `turnEnded` and `unitDied`. |
+| `on` | yes | A registered rule-event id (section 6.4). M1-07 registers `unitMoved` (a unit finished a move; the subject is that unit); M1-10 adds `combatStarted`, `turnStarted`, `turnEnded` and `unitDied`; M1-11 adds `abilityResolved`. |
 | `priority` | no | An integer, default 0. **Lower fires first.** |
 | `scope` | yes | `holder`: fires only when the event's subject is the effect's holder. `any`: fires for every subject. |
 | `do` | yes | A non-empty list of actions, run in order. |
@@ -277,8 +277,14 @@ events are processed first in, first out: an action's events join the end of the
 **64** triggers (`Effects.MaxTriggerFirings`); past that the engine throws `TriggerLoopException`, a defect, so a
 trigger that re-fires itself is caught by tests rather than hanging the game.
 
-A command's result lists its own events first, then the trigger-produced events in firing order. A rejected
-command fires nothing.
+A command's result lists its events in dispatch phases, each phase followed by the trigger-produced events it
+fires, in firing order. For an ordinary command the phases are its own events, then each pass of the settle loop
+(a won fight's end, round 1's start, or a vacated turn's resumption; M1-11). For an opener (a use out of combat
+that affects another faction) they are combat start (`CombatStarted` and the held messages), then the use, then
+the settle passes. Dispatch stops once the run ends, and the settle loop does not run while a decision is pending.
+All phases share one firing counter, so the 64-firing bound applies to the whole command. A consumer that needs
+phase boundaries reads the marker events (`CombatStarted`, `AbilityUsed`, `TurnStarted`, `CombatEnded`), not
+positions. A rejected command fires nothing.
 
 ### 6.4 Rule events and their subjects
 
@@ -339,7 +345,7 @@ These keys and ideas are named now so content does not invent its own, and are r
 | M1-08 Stats and contests | `add` on the new numbers (section 5.3); the `AbilityScore` rule and its cap for the six abilities; the `Stack` rule for the other SM 6 numbers, with per-unit bases that read the abilities and proficiency; `rollMode` on `attackRoll` and `attacksAgainst`, folded over several sources by D-15; the save and skill roll targets. Guile moved to M1-22 and HP numbers to M1-09. |
 | M1-09 Damage and HP | `add` on `maxHp` and `recovery` (section 5.3), and on `constitution`, which both bases read after its effects; the derived-number floor (section 5), on both rows; resistances and weaknesses: the 30 ladder flags `resistant.<type>`, `weak.<type>` and `immune.<type>` (`flag` modifiers on `unit`, section 3.1), which a trait sets as a `trait`-kind effect carrying them. |
 | M1-10 Turns, lifecycle and death | The rule events `combatStarted`, `turnStarted`, `turnEnded` and `unitDied` (section 6.4; no `combatEnded`, which needs a subject-less rule event); the folded `speed` for movement left in combat; the `maxHp` floor of 1, which `content.DH21.PartyInstantDeath` guards (section 8). The turn and combat clocks and the refill tags are code (`RefillTag`), not vocabulary; condition durations stay with M1-12. |
-| M1-11 Abilities, reactions and areas | The rule event `abilityResolved` (section 6.4); `applyEffect` actions, applied to each target with the user as the source; the engine events `AbilityUsed`, `AbilityCostPaid`, `TargetsLocked`, `AttackRolled`, `SaveRolled`, `DamageRolled`, `ReactionTaken` and `AbilityResolved`. Abilities and reactions are their own content kind (`abilities/abilities.json`, `AbilitiesKind`), not `ability`-kind effects, and reactions are bonus wards, not hooks. |
+| M1-11 Abilities, reactions and areas | The rule event `abilityResolved` (section 6.4); an ability record's `effects` (ids in `effects/effects.json`), applied to each target still standing after damage, with the user as the source and an `EffectApplied` event each (not an `applyEffect` trigger action, whose source stays the triggering effect's holder, section 6.1); the engine events `AbilityUsed`, `AbilityCostPaid`, `TargetsLocked`, `AttackRolled`, `SaveRolled`, `DamageRolled`, `ReactionTaken`, `EffectApplied` and `AbilityResolved`. Abilities and reactions are their own content kind (`abilities/abilities.json`, `AbilitiesKind`), not `ability`-kind effects, and reactions are bonus wards, not hooks. |
 | M1-12 Conditions core | `condition`-kind effects and the same-number rule; `applyEffect` to `subject`; trigger order and the chain bound. |
 | M1-13 M1 conditions, forced movement | `zero` and `halve` on `speed` (Grappled, Prone); `rollMode` (Prone, Frightened, Hidden, Dodging); `flag` (Incapacitated); hooks for push, pull and shift; `unitMoved` triggers. |
 | M1-14 Universal and skill actions | `rollMode` from Help; `flag` from Dodge and Hide; `unitMoved` with `scope: any` for opportunity attacks. |

@@ -383,6 +383,20 @@ pipeline.
   model (CO 18.1).
 - The CO 5.5 combat-start condition step ([M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 5, step 2),
   placed before the surprise grant and before initiative.
+- Hold a suspended ability use's earlier events until the use completes,
+  before any trigger can change state a resumed resolution reads (effects
+  and flags, HP, position, pools, reactions), whatever the trigger's
+  action (`applyEffect` included, not only damage or a reaction spend).
+  Today an "ask me" suspension dispatches the use's events so far in the
+  suspending command, so their triggers fire mid-use; the reaction policy
+  alone then changes the outcome ("never" and "ask me" resolve the same
+  use differently), not only the frame's validity. Dispatch the held
+  events, then the resumed ones, in the command that completes the use,
+  both in `Engine.Apply` and in the opener path (snapshot and digest gain
+  the held list). M1-12 is the first step whose content can do this
+  (M1-11 final review C1).
+- Preview an opener on the state after combat start (or document the gap)
+  once combat-start conditions exist (M1-11 final review).
 
 **Done when:**
 - [ ] CO 20.2 clock edge-case and pipeline-order tests pass.
@@ -438,10 +452,10 @@ zones; trained-only skill uses. Dash adds granted movement equal to the
 current speed at the Dash (D-18, [M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 2.2); the snapshot version,
 state digest shape, `GameState` validation and RulesVersion rise after
 M1-11's.
-- Before any trigger can deal damage or spend a reaction, hold a
-  suspended ability use's earlier events until the use completes, so a
-  pending "ask me" frame stays valid (M1-11: triggers currently dispatch
-  on a suspending command's events).
+- If not already done in M1-12 (see its Delivers): hold a suspended
+  ability use's earlier events until the use completes, so a pending
+  "ask me" frame stays valid and the reaction policy alone cannot change
+  the outcome.
 
 **Done when:**
 - [ ] Grapple and shove size-rule tests pass.

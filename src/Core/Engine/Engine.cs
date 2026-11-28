@@ -106,9 +106,20 @@ public static class Engine
 
     /// <summary>
     /// Applies <paramref name="command"/>, then fires the triggers of the active effects that answer its events
-    /// (MAIN 6.4; AB 14.4). <see cref="StepResult.Events"/> holds the command's own events, then the trigger-produced
-    /// events in firing order. A rejected command fires nothing. Throws <see cref="TriggerLoopException"/> if the
-    /// command fires more than <see cref="Effects.Effects.MaxTriggerFirings"/> triggers.
+    /// (MAIN 6.4; AB 14.4). <see cref="StepResult.Events"/> lists the events in dispatch phases, each phase followed by
+    /// the trigger-produced events it fires, in firing order (M1-11 plan call 8):
+    /// <list type="bullet">
+    /// <item>an ordinary command: its own events, then each pass of the settle loop (a won fight's end, round 1's start,
+    /// or a vacated turn's resumption);</item>
+    /// <item>an opener (a use out of combat that affects another faction): combat start (<see cref="CombatStarted"/> and
+    /// the held messages), then the use, then the settle passes.</item>
+    /// </list>
+    /// Dispatch stops once the run ends; the settle loop does not run while the run has ended or a decision is pending.
+    /// All phases share one firing counter, so the bound applies to the whole command. A consumer that needs phase
+    /// boundaries reads the marker events (<see cref="CombatStarted"/>, <see cref="AbilityUsed"/>,
+    /// <see cref="TurnStarted"/>, <see cref="CombatEnded"/>) rather than positions. A rejected command fires nothing.
+    /// Throws <see cref="TriggerLoopException"/> if the command fires more than
+    /// <see cref="Effects.Effects.MaxTriggerFirings"/> triggers.
     /// </summary>
     public static StepResult Apply(GameState state, Command command, RulesContext rules)
     {

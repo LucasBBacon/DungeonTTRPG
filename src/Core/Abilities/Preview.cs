@@ -77,6 +77,12 @@ public static partial class AbilityUse
     /// Reactions are left out; every target is previewed on the locked state, so damage dealt to an earlier target in
     /// the same use is not reflected.
     /// </summary>
+    /// <remarks>
+    /// For an opener the preview reads combat start's step-4 view (<see cref="View"/>), while the opener itself resolves
+    /// after <see cref="Turns.BeginCombat"/> and its <c>combatStarted</c> dispatch. So <c>combatStarted</c> triggers and
+    /// (from M1-12 and M1-13) combat-start conditions are not reflected in an opener's preview; the M1-12 roadmap entry
+    /// records the follow-up (M1-11 final review S1).
+    /// </remarks>
     public static AbilityPreview Preview(
         RulesContext rules, GameState s, UnitId user, string abilityId, AbilityTarget target)
     {
