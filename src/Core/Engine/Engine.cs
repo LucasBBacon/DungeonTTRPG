@@ -116,6 +116,11 @@ public static class Engine
     /// the held messages), then the use, then the settle passes.</item>
     /// </list>
     /// Dispatch stops once the run ends; the settle loop does not run while the run has ended or a decision is pending.
+    /// A command that leaves an ability use suspended on an "ask me" decision dispatches nothing (M1-12a plan call 12;
+    /// review finding C1): its events that can fire triggers (<see cref="Dispatchable"/>) join the frame's
+    /// <see cref="AbilityFrame.Held"/>. The command that completes the use dispatches the held events, then its own, in
+    /// one pass, and reports only its own events and what the pass fires; so a trigger answering a held event (an
+    /// on-death trigger, say) shows its events in the answer's result, as an automatic policy would after the use.
     /// All phases share one firing counter, so the bound applies to the whole command. A consumer that needs phase
     /// boundaries reads the marker events (<see cref="CombatStarted"/>, <see cref="AbilityUsed"/>,
     /// <see cref="TurnStarted"/>, <see cref="CombatEnded"/>) rather than positions. A rejected command fires nothing.
@@ -160,14 +165,49 @@ public static class Engine
             return result;
         }
 
-        // One firing counter for every dispatch phase of the command (M1-11 plan call 8). With nothing fired and nothing
-        // settled, the result is returned as the handler made it, so M0 behaviour is unchanged.
+        // A use still suspended holds what can fire triggers and dispatches nothing (M1-12a plan call 12). The held list is
+        // the stored frame's (non-empty only when answering a suspended use) plus this command's.
+        var held = state.Resolution?.Held ?? [];
+        if (result.State.Resolution is { } frame)
+        {
+            var hold = result.State with { Resolution = frame with { Held = held.AddRange(Dispatchable(rules, result.Events)) } };
+            return new StepResult(hold, result.Events, CommandError.None);
+        }
+
+        // One firing counter for every dispatch phase of the command (M1-11 plan call 8). A completed use dispatches its
+        // held events first, then the command's own; the held events were reported when raised, so they are left out of
+        // the result. With nothing held, fired or settled, the result is returned as the handler made it, so M0 behaviour
+        // is unchanged.
         int firings = 0;
-        var (next, events) = TriggerDispatch.Run(rules, result.State, result.Events, ref firings);
+        var (next, events) = TriggerDispatch.Run(rules, result.State, held.IsEmpty ? result.Events : [.. held, .. result.Events], ref firings);
+        if (!held.IsEmpty)
+        {
+            events = ImmutableArray.Create(events, held.Length, events.Length - held.Length);
+        }
+
         (next, events) = Settle(rules, next, events, ref firings);
         return ReferenceEquals(next, result.State) && events == result.Events
             ? result
             : new StepResult(next, events, CommandError.None);
+    }
+
+    /// <summary>
+    /// The events of <paramref name="events"/> that raise at least one rule event under <paramref name="rules"/>
+    /// (<see cref="RulesContext.EventsRaisedBy"/>), in order: the only ones that can fire triggers, and so what a suspended
+    /// use holds (M1-12a plan call 12).
+    /// </summary>
+    internal static ImmutableArray<GameEvent> Dispatchable(RulesContext rules, ImmutableArray<GameEvent> events)
+    {
+        var dispatchable = ImmutableArray.CreateBuilder<GameEvent>();
+        foreach (var e in events)
+        {
+            if (!rules.EventsRaisedBy(e).IsEmpty)
+            {
+                dispatchable.Add(e);
+            }
+        }
+
+        return dispatchable.ToImmutable();
     }
 
     /// <summary>
@@ -215,8 +255,9 @@ public static class Engine
     /// (<see cref="AbilityUse.Payable"/>), the opener is dropped: no <see cref="AbilityUsed"/>, no cost, no mark.</item>
     /// <item>Otherwise the opener resolves (<see cref="Resolution.Use"/>): the cost is paid on the step-4 budget, the
     /// striker is marked with it, the targets lock and resolve; then dispatched. A window that asks the party (plan call
-    /// 12) suspends it on a reaction decision: the marker stays set, the settle loop does nothing, and the answer
-    /// resolves the rest and then starts round 1.</item>
+    /// 12) suspends it on a reaction decision: its events are held in <see cref="AbilityFrame.Held"/> and not dispatched
+    /// (M1-12a plan call 12), the marker stays set, the settle loop does nothing, and the answer resolves the rest,
+    /// dispatches the held events and its own, and then starts round 1. Combat start's phase is never held.</item>
     /// <item>The settle loop: the win check (<see cref="CombatEnded"/>, and no turn event), else round 1 starts with
     /// slot 0's <see cref="TurnStarted"/>.</item>
     /// </list>
@@ -243,9 +284,18 @@ public static class Engine
         if (s.FindUnit(use.User) is not null && AbilityUse.Payable(rules, s, use.User, ability) == CommandError.None)
         {
             var (used, resolved) = Resolution.Use(rules, s, use.User, ability, use.Target, opener: true);
-            var (dispatched, all) = TriggerDispatch.Run(rules, resolved, used, ref firings);
-            s = dispatched;
-            events = events.AddRange(all);
+            if (resolved.Resolution is { } frame)
+            {
+                // Suspended: the use's events are held, not dispatched (M1-12a plan call 12); combat start's were above.
+                s = resolved with { Resolution = frame with { Held = Dispatchable(rules, used) } };
+                events = events.AddRange(used);
+            }
+            else
+            {
+                var (dispatched, all) = TriggerDispatch.Run(rules, resolved, used, ref firings);
+                s = dispatched;
+                events = events.AddRange(all);
+            }
         }
 
         (s, events) = Settle(rules, s, events, ref firings);

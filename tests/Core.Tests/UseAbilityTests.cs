@@ -493,7 +493,7 @@ public class UseAbilityTests
     [InlineData("{\"type\":\"answer\",\"decision\":1,\"option\":0,\"point\":{\"x\":1,\"y\":1}}")]
     [InlineData("{\"type\":\"endTurn\",\"unit\":1,\"ability\":\"test.strike\"}")]
     public void Each_log_tag_rejects_foreign_fields(string command) =>
-        Assert.Throws<SnapshotFormatException>(() => CommandLog.Load("{\"version\":8,\"seed\":7,\"commands\":[" + command + "]}"));
+        Assert.Throws<SnapshotFormatException>(() => CommandLog.Load("{\"version\":9,\"seed\":7,\"commands\":[" + command + "]}"));
 
     private static void AssertSameRoll(DamageRoll expected, DamageRolled actual, UnitId target)
     {

@@ -333,8 +333,11 @@ public sealed record GameState(
     /// order, each once, and <see cref="AbilityFrame.Index"/> is within them; the window is defined, and a save difficulty
     /// is held exactly for the own-save window; the roll is well formed (faces 1 to 20, a second die exactly when the
     /// mode is not normal) in the setup's mode; the reactor <c>Locked[Index]</c> is a party unit in the state (AB 7.3:
-    /// only the party is asked), its reaction unused, holding the candidate; and the decision names the reactor, on its
-    /// square. Throws <see cref="ArgumentException"/> naming the problem.
+    /// only the party is asked), its reaction unused, holding the candidate; the decision names the reactor, on its
+    /// square; and the held events (M1-12a plan call 12) are initialised, each one of the closed set a suspended use can
+    /// hold (<see cref="UnitDied"/>, <see cref="UnitMoved"/>, <see cref="AbilityResolved"/> with a content id), whose
+    /// units need not be in the state (a held <see cref="UnitDied"/>'s unit is gone). Throws
+    /// <see cref="ArgumentException"/> naming the problem.
     /// </summary>
     private static void CheckResolution(
         ImmutableArray<Unit> units, CombatState? combat, PendingDecision? pending, AbilityFrame? resolution)
@@ -453,6 +456,26 @@ public sealed record GameState(
         {
             throw new ArgumentException(
                 $"Invalid frame: the reaction decision must name the reactor {reactorId.Value} on its square ({reactor.Pos.X}, {reactor.Pos.Y}).", param);
+        }
+
+        if (f.Held.IsDefault)
+        {
+            throw new ArgumentException("Invalid frame: the held events are uninitialised.", param);
+        }
+
+        foreach (var held in f.Held)
+        {
+            switch (held)
+            {
+                case UnitDied:
+                case UnitMoved:
+                case AbilityResolved { AbilityId: { } id } when ContentId.IsValid(id):
+                    break;
+                case null:
+                    throw new ArgumentException("Invalid frame: a held event is null.", param);
+                default:
+                    throw new ArgumentException($"Invalid frame: a suspended use does not hold a {held.GetType().Name} event like this one.", param);
+            }
         }
     }
 

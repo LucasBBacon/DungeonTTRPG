@@ -53,7 +53,9 @@ public static class Snapshot
 {
     /// <summary>
     /// The only version this build reads and writes, shared with <see cref="CommandLog"/>.
-    /// Version 8 (M1-11) adds the before-round-1 marker, the opener mark, each unit's abilities and reaction settings,
+    /// v9 (M1-12a) adds held events, the phase clock and condition state (the held events of a suspended use are
+    /// <c>resolution.held</c>);
+    /// version 8 (M1-11) added the before-round-1 marker, the opener mark, each unit's abilities and reaction settings,
     /// the reaction decision kind and the suspended ability use (<c>resolution</c>);
     /// version 7 (M1-10) added the run, combat and turn state;
     /// version 6 (M1-09) added current HP and the HP basis;
@@ -62,7 +64,7 @@ public static class Snapshot
     /// version 3 (M1-06) added the reproducibility-key header and the run configuration and unlock
     /// snapshots; version 2 (M1-02) stored the run seed and stream counters; version 1 held PCG32 states.
     /// </summary>
-    public const int CurrentVersion = 8;
+    public const int CurrentVersion = 9;
 
     /// <summary>
     /// Writes <paramref name="s"/>. Only the run seed and the stream counters are stored, so a state whose
@@ -172,7 +174,8 @@ public static class Snapshot
     /// combat state (the before-round-1 marker included), the opener marks, the run end and <c>nextEventSeq</c> by the
     /// same rules the core holds them to (M1-10 task 1; M1-11 task 1). A pending decision is checked by its kind: a shrine
     /// boon against the shrine it stands on, a reaction decision with its suspended use (M1-11 plan call 12), whose
-    /// structure only is checked here; the rules-dependent part waits for the answer.
+    /// structure only is checked here, its held events (M1-12a plan call 12) included; the rules-dependent part waits for
+    /// the answer.
     /// </summary>
     public static GameState Load(string json) => PersistenceJson.Read<StateDto, GameState>(json, FromDto);
 
@@ -729,9 +732,16 @@ public static class Snapshot
         [JsonPropertyName("candidate"), JsonPropertyOrder(10), JsonRequired] public string? Candidate { get; set; }
         // Null for an attack: only a save carries a difficulty.
         [JsonPropertyName("saveDifficulty"), JsonPropertyOrder(11), JsonRequired] public long? SaveDifficulty { get; set; }
+        // The held events (M1-12a plan call 12), in held order.
+        [JsonPropertyName("held"), JsonPropertyOrder(12), JsonRequired] public HeldEventDto?[]? Held { get; set; }
 
         public static FrameDto From(AbilityFrame f)
         {
+            if (f.Held.IsDefault)
+            {
+                throw new InvalidOperationException("Cannot save a suspended ability use whose held events are uninitialised.");
+            }
+
             var dto = new FrameDto
             {
                 User = f.User.Value,
@@ -743,6 +753,7 @@ public static class Snapshot
                 Roll = new RollDto { Mode = f.Roll.Mode.ToString(), First = f.Roll.First, Second = f.Roll.Second },
                 Candidate = f.Candidate,
                 SaveDifficulty = f.SaveDifficulty,
+                Held = f.Held.Select(HeldEventDto.Of).ToArray(),
             };
             switch (f.Target)
             {
@@ -793,7 +804,82 @@ public static class Snapshot
                     PersistenceJson.Need(roll.First, "resolution roll first"),
                     roll.Second),
                 PersistenceJson.Need(Candidate, "resolution candidate"),
-                SaveDifficulty);
+                SaveDifficulty,
+                [.. PersistenceJson.Need(Held, "resolution held").Select(e => PersistenceJson.Need(e, "resolution held event").ToEvent())]);
+        }
+    }
+
+    /// <summary>
+    /// A held event of a suspended use (M1-12a plan call 12), tagged by <see cref="Type"/>, its rule-event id. The held
+    /// types are a closed set: <c>unitDied</c> (<c>unit</c>, <c>at</c>), <c>unitMoved</c> (<c>unit</c>, <c>from</c>,
+    /// <c>to</c>) and <c>abilityResolved</c> (<c>unit</c> is the user, <c>ability</c>). Fields the type does not use are
+    /// left out, and a file that carries one is refused. Saving any other event type throws
+    /// <see cref="InvalidOperationException"/>.
+    /// </summary>
+    private sealed class HeldEventDto
+    {
+        private const string UnitDiedType = "unitDied";
+        private const string UnitMovedType = "unitMoved";
+        private const string AbilityResolvedType = "abilityResolved";
+
+        [JsonPropertyName("type"), JsonPropertyOrder(0), JsonRequired] public string? Type { get; set; }
+        [JsonPropertyName("unit"), JsonPropertyOrder(1), JsonRequired] public int? Unit { get; set; }
+
+        [JsonPropertyName("ability"), JsonPropertyOrder(2)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Ability { get; set; }
+
+        [JsonPropertyName("at"), JsonPropertyOrder(3)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public FramePointDto? At { get; set; }
+
+        [JsonPropertyName("from"), JsonPropertyOrder(4)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public FramePointDto? From { get; set; }
+
+        [JsonPropertyName("to"), JsonPropertyOrder(5)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public FramePointDto? To { get; set; }
+
+        public static HeldEventDto Of(GameEvent e) => e switch
+        {
+            UnitDied d => new HeldEventDto { Type = UnitDiedType, Unit = d.Unit.Value, At = Point(d.At) },
+            UnitMoved m => new HeldEventDto { Type = UnitMovedType, Unit = m.Unit.Value, From = Point(m.From), To = Point(m.To) },
+            AbilityResolved r => new HeldEventDto { Type = AbilityResolvedType, Unit = r.User.Value, Ability = r.AbilityId },
+            _ => throw new InvalidOperationException(
+                $"Cannot save a suspended ability use holding a {e?.GetType().Name ?? "null"} event; a held event is one of unitDied, unitMoved and abilityResolved."),
+        };
+
+        public GameEvent ToEvent()
+        {
+            string type = PersistenceJson.Need(Type, "held event type");
+            var unit = new UnitId(PersistenceJson.Need(Unit, "held event unit"));
+            bool fits = type switch
+            {
+                UnitDiedType => Ability is null && From is null && To is null,
+                UnitMovedType => Ability is null && At is null,
+                AbilityResolvedType => At is null && From is null && To is null,
+                _ => throw new SnapshotFormatException($"Invalid save: unknown held event type '{type}'."),
+            };
+            if (!fits)
+            {
+                throw new SnapshotFormatException($"Invalid save: a held {type} event carries a field its type does not use.");
+            }
+
+            return type switch
+            {
+                UnitDiedType => new UnitDied(unit, Read(At, "held unitDied at")),
+                UnitMovedType => new UnitMoved(unit, Read(From, "held unitMoved from"), Read(To, "held unitMoved to")),
+                _ => new AbilityResolved(unit, PersistenceJson.Need(Ability, "held abilityResolved ability")),
+            };
+        }
+
+        private static FramePointDto Point(GridPos p) => new() { X = p.X, Y = p.Y };
+
+        private static GridPos Read(FramePointDto? p, string name)
+        {
+            var point = PersistenceJson.Need(p, name);
+            return new GridPos(PersistenceJson.Need(point.X, $"{name} x"), PersistenceJson.Need(point.Y, $"{name} y"));
         }
     }
 

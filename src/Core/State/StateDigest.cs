@@ -13,7 +13,8 @@ namespace Dungeon.Core;
 /// canonical bytes. Units are a set keyed by id, so their stored order does not matter; boons and
 /// decision options are lists, because their order is data. Active effects are a set keyed by seq. The initiative order,
 /// a unit's spent counts, its opener mark's turn-pool counts, its abilities and its reaction settings are lists in stored
-/// order. The suspended use (M1-11 plan call 12) writes its locked units as a list in lock order.
+/// order. The suspended use (M1-11 plan call 12) writes its locked units as a list in lock order, and its held events
+/// (M1-12a plan call 12) as a list in held order.
 /// Stream keys are derived from the run seed and are not written; a state whose keys disagree with its seed is refused.
 /// </summary>
 public static class StateDigest
@@ -225,7 +226,7 @@ public static class StateDigest
     {
         public void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(18);
+            w.BeginRecord(19);
             w.Int32(0, f.User.Value);
             w.String(1, f.AbilityId);
             var (tag, units, point, aim) = f.Target switch
@@ -251,6 +252,34 @@ public static class StateDigest
             w.OptionalInt32(15, f.Roll.Second);
             w.String(16, f.Candidate);
             w.OptionalRecord(17, f.SaveDifficulty is { } dc ? new DifficultyRecord(dc) : null);
+            w.List(18, f.Held.IsDefault ? throw new ArgumentException("The held events are uninitialised.", nameof(f)) : f.Held,
+                (e, held) => e.Record(0, new HeldRecord(held)));
+            w.EndRecord();
+        }
+    }
+
+    // A held event of a suspended use (M1-12a plan call 12), a tagged union over the closed set: the tag (the rule-event
+    // id), the unit (a user for abilityResolved), then each type's fields, absent for the other types. Squares are
+    // written x then y: unitDied's at is the first square, unitMoved's from and to the first and second.
+    private sealed class HeldRecord(GameEvent e) : ICanonical
+    {
+        public void WriteCanonical(CanonicalWriter w)
+        {
+            var (tag, unit, ability, first, second) = e switch
+            {
+                UnitDied d => ("unitDied", d.Unit, (string?)null, (GridPos?)d.At, (GridPos?)null),
+                UnitMoved m => ("unitMoved", m.Unit, null, m.From, m.To),
+                AbilityResolved r => ("abilityResolved", r.User, r.AbilityId, null, null),
+                _ => throw new ArgumentException($"A suspended use does not hold a {e?.GetType().Name ?? "null"} event.", nameof(e)),
+            };
+            w.BeginRecord(7);
+            w.String(0, tag);
+            w.Int32(1, unit.Value);
+            w.OptionalString(2, ability);
+            w.OptionalInt32(3, first?.X);
+            w.OptionalInt32(4, first?.Y);
+            w.OptionalInt32(5, second?.X);
+            w.OptionalInt32(6, second?.Y);
             w.EndRecord();
         }
     }
