@@ -11,7 +11,7 @@ using Effects = Dungeon.Core.Effects.Effects;
 
 /// <summary>
 /// An ability use after validation (AB 14.3; M1-11 plan call 10): the cost is paid, the targets are locked in unit order,
-/// and each target resolves in turn. Triggers run only after it returns, so nothing between two targets but the
+/// and each target resolves in turn. Triggers run only after it returns (the exception: a use suspended on an "ask me" decision has its earlier events dispatched by the suspending command; see the M1-14 roadmap note), so nothing between two targets but the
 /// resolution itself changes the state. A reaction window that reaches an "ask me" candidate suspends the use on a
 /// <see cref="DecisionKind.Reaction"/> decision, holding it in <see cref="GameState.Resolution"/>, and
 /// <see cref="Continue"/> takes it up again from there (plan call 12).

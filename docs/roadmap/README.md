@@ -173,8 +173,22 @@ here.
 | ~~D-19~~ | ~~M1-11, M1-35~~ | **Resolved 2026-11-27 (client).** (a) TL-19's condition end is M2; M1 ships no trap that can apply a condition, and M1-30 builds only the push stop before F1 trigger squares plus a guard check, so it no longer waits on D-19 ([record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 3). (b) Declaring an opener runs the full combat start first, initiative included; the opener resolves before any turn starts and is charged to the striker's round-1 turn (action and once-per-round spends charged; movement and bonus action kept); its command takes no out-of-combat tick. Built in M1-11; M1-35 adds membership ([record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 4 and 5). | CO 5.5, 11.6; TL-19; DH 10.4, 20.5; EP 6.8.2 |
 | D-20 | M2-02 | Rulings RT-14 / HZ-6 (Teetering in the theme six), RT-16 / TL-39 (trap conditions from the theme six), EV-11 (Grace durations). | CO; RS; EV |
 | D-21 | M2-10 | Rulings EP-6 (Billets), BR-6 (Rhythm), BR-7, TR-15, TL-16 (AI terms). | ENM; EP; BR |
+| D-22 | The first content with a half-on-success save | **Owner: DH.** A successful save against `onSuccess: half`: halve each part, or the summed total, and how to round? M1-11 refuses `half` at load (owner ruling 2026-11-27). | AB 14.1; DH 20.3 |
+| D-23 | M1-35 | **Owner: SV.** Out-of-combat ability rolls: an ability used out of combat that is not an opener and rolls (a save, an attack or damage dice): which stream? Drawing `combat` breaks V19t `ExplorationCombatIsolation` (SV 1001), and SV 4.3 names no other. M1-11 refuses such uses with `NotInCombat`, and flat-damage abilities still work (M1-11 plan call 5). | SV 4.3, V19t; AB 6.8; DH 10.4 |
 | D-30 | M3-06 | How many class and aspect unlocks ship in M3. | CL 9.4 |
 | D-40 | M4-02 | Multiclass model: (a) level split or (b) cross-training card. | CL 7.7 |
+
+### M1-11 notes for owners
+
+Plan calls, not decisions; none needs a ruling before its step.
+
+- An opener that costs a bonus action or movement charges that cost, not the action (plan call 6; record 4.1 covers only action openers).
+- "A hostile ability" for the own-save window means a user of another faction (plan call 10).
+- The Vanguard's `ifKills` option policy (VG 6.4 rule 5) is not one of AB 7.3's four (for M1-20).
+- The M1 Mastiff's bleeding claw must be an applied effect, not an AB 9 rider (for M1-22).
+- Damage-part bound: each damage part is at most 20 dice, 1 to 100 sides and |flat| at most 9999, plus an exactness bound on the whole damage list. It is a content limit chosen so the exact preview never overflows; the largest design dice are 8d8.
+- The greyed-reason English strings in `content/strings/en.json` are placeholder wording for the owner and naming pass.
+- Out of combat, the action bar's `CheckUsable` accepts an ability usable on either the tick view or the opener view.
 
 ## All steps in order
 

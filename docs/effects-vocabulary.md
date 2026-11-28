@@ -293,6 +293,7 @@ its holder and `"to": "subject"` gives an effect to.
 | `turnStarted` | `TurnStarted` (a unit's turn began) | The unit whose turn began |
 | `unitDied` | `UnitDied` (a unit reached 0 and was removed, its effects with it) | The unit that died |
 | `unitMoved` | `UnitMoved` (a unit finished a one-square move) | The unit that moved |
+| `abilityResolved` | `AbilityResolved` (an ability use finished its last step; AB's `ownActionResolved`, for M1-20) | The unit that used the ability |
 
 `unitDied` is raised after its subject has been removed, together with every effect instance it held or was the
 source of. So the dead unit's own triggers never answer it, and a trigger may not give it an effect: building the
@@ -325,6 +326,11 @@ These keys and ideas are named now so content does not invent its own, and are r
 | Instant death, save-or-die, set-HP-to-0 | No operation sets or zeroes current HP; such an operation is refused for party targets (DH 10.2). `content.DH21.PartyInstantDeath` fails if `ModifierOp` gains an unreviewed value or `maxHp` loses its floor of 1. | The step that adds such an operation, with its party refusal |
 | Condition application pipeline, relations and exclusivity | Not in the schema; conditions are plain `condition`-kind effects for now. | M1-12, M1-13 |
 | Damage riders (AB 9.1) | Not in the schema. | M2 |
+| Ability costs `attack`, `onHit` and `onEvent:<id>` | Parse, but are load errors naming their step (plan call 1 of M1-11). | M1-14 (`attack`), M1-16 (`onHit`), M1-20 (`onEvent`) |
+| Save `onSuccess: half` | Refused at load. Open decision D-22: halve each part or the summed total, and how to round. | D-22 |
+| Out-of-combat ability rolls by a non-opener | Refused with `NotInCombat`; flat-damage and effect-only abilities still work. No stream is ruled for them (drawing `combat` breaks V19t `ExplorationCombatIsolation`). Open decision D-23. | D-23 (blocks M1-35) |
+| Reaction filters other than `none` | Not in the schema (`nonMinion` needs ranks). | M1-22 |
+| The AR 10.4 AC window across allies | Not built; M1-11 reactions are the defender's own bonus wards. | M1-17 |
 
 ## 9. Which later step uses what
 
@@ -333,7 +339,7 @@ These keys and ideas are named now so content does not invent its own, and are r
 | M1-08 Stats and contests | `add` on the new numbers (section 5.3); the `AbilityScore` rule and its cap for the six abilities; the `Stack` rule for the other SM 6 numbers, with per-unit bases that read the abilities and proficiency; `rollMode` on `attackRoll` and `attacksAgainst`, folded over several sources by D-15; the save and skill roll targets. Guile moved to M1-22 and HP numbers to M1-09. |
 | M1-09 Damage and HP | `add` on `maxHp` and `recovery` (section 5.3), and on `constitution`, which both bases read after its effects; the derived-number floor (section 5), on both rows; resistances and weaknesses: the 30 ladder flags `resistant.<type>`, `weak.<type>` and `immune.<type>` (`flag` modifiers on `unit`, section 3.1), which a trait sets as a `trait`-kind effect carrying them. |
 | M1-10 Turns, lifecycle and death | The rule events `combatStarted`, `turnStarted`, `turnEnded` and `unitDied` (section 6.4; no `combatEnded`, which needs a subject-less rule event); the folded `speed` for movement left in combat; the `maxHp` floor of 1, which `content.DH21.PartyInstantDeath` guards (section 8). The turn and combat clocks and the refill tags are code (`RefillTag`), not vocabulary; condition durations stay with M1-12. |
-| M1-11 Abilities, reactions and areas | `ability`-kind effects; `applyEffect` actions; hooks for reactions; new events for ability use steps. |
+| M1-11 Abilities, reactions and areas | The rule event `abilityResolved` (section 6.4); `applyEffect` actions, applied to each target with the user as the source; the engine events `AbilityUsed`, `AbilityCostPaid`, `TargetsLocked`, `AttackRolled`, `SaveRolled`, `DamageRolled`, `ReactionTaken` and `AbilityResolved`. Abilities and reactions are their own content kind (`abilities/abilities.json`, `AbilitiesKind`), not `ability`-kind effects, and reactions are bonus wards, not hooks. |
 | M1-12 Conditions core | `condition`-kind effects and the same-number rule; `applyEffect` to `subject`; trigger order and the chain bound. |
 | M1-13 M1 conditions, forced movement | `zero` and `halve` on `speed` (Grappled, Prone); `rollMode` (Prone, Frightened, Hidden, Dodging); `flag` (Incapacitated); hooks for push, pull and shift; `unitMoved` triggers. |
 | M1-14 Universal and skill actions | `rollMode` from Help; `flag` from Dodge and Hide; `unitMoved` with `scope: any` for opportunity attacks. |

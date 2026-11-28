@@ -348,7 +348,10 @@ and 5).
   first-turn rule. The command that declares an opener takes no
   out-of-combat tick (record 8 item 4).
 - Snapshot v8, the state digest shape and `GameState` validation for the
-  marker and the mark; RulesVersion 3.
+  marker and the mark, unit abilities, reaction settings and the
+  suspended-resolution frame; RulesVersion 3.
+- `CanSee` (integer symmetric shadowcasting, walls only) (owner ruling
+  2026-11-27).
 
 **Done when:**
 - [ ] Property test: preview equals resolution (AB 16).
@@ -435,6 +438,10 @@ zones; trained-only skill uses. Dash adds granted movement equal to the
 current speed at the Dash (D-18, [M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 2.2); the snapshot version,
 state digest shape, `GameState` validation and RulesVersion rise after
 M1-11's.
+- Before any trigger can deal damage or spend a reaction, hold a
+  suspended ability use's earlier events until the use completes, so a
+  pending "ask me" frame stays valid (M1-11: triggers currently dispatch
+  on a suspending command's events).
 
 **Done when:**
 - [ ] Grapple and shove size-rule tests pass.
@@ -713,6 +720,8 @@ Old Ragged in a hand-built room.
 - Turn order, action bar with greyed reasons, previews, threat reach on
   hover, HP plates, combat log.
 - Decision panels for reactions ("ask me"), Techniques and level-ups.
+- The decision panel answers `DecisionKind.Reaction` (decline / take);
+  the M0 demo panel shows only shrine boons.
 - Danger band, lethal tags, end-turn warning, basic death recap.
 - The initiative bar shows a spent-action pip on an opener's striker
   ([M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 4.1).
@@ -1009,8 +1018,8 @@ only from what it has seen and entered.
 **Depends on:** M1-33; decision D-11 (M1 Afterimage states).
 
 **Delivers:**
-- `CanSee` (integer symmetric shadowcasting), `KnownCanSee`,
-  `KnownNoiseReach`.
+- `KnownCanSee`, `KnownNoiseReach` (`CanSee` is built in M1-11; M1-34
+  extends its blockers to doors and pieces).
 - `PartyKnowledge`: Unknown, Chalked, Remembered, Seen; `entered`.
 - `KnowledgePass` in fixed order (Hairline step stubbed).
 - Chalk on entry; remembered rows; the D-11 Afterimage states.
