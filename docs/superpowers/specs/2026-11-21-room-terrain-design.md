@@ -587,7 +587,7 @@ Each is met in section 14.
 | **Phase socket** | An arena socket that changes state on a boss phase (e), proven in both states (6.11) |
 | **Interactive feature** | For DEP-A1: a condition square, a contact hazard, a harm square or a Keg (TR-21). **Pending request (segment 4 asks; change HZ-31; M2; hazards design 6.15, O13, 18):** segment 4's Stirs, Cords, Voids and vents also count as interactive features for DEP-A1 and KP2. This document owns the definition; nothing changes until this owner rules (cross-document comparison 2026-11-23, CC-7) |
 | **Environment damage** | Damage from a collision, a contact hazard, a harm square, a Keg burst, Charged Water or (M3) an ignition; source `environment`; rider-free (6.5.2) |
-| **Collision band / contact band / harm band / Keg band** | The flat damage values of 11.1: collision 2/3/3 by the pusher's level band (the Vanguard design's indexing, kept); contact 3/4/4 and harm 2/3/3 by the level band of the floor's lowest expected level; Keg 4/6/8 by floor (3.4 indexing is a lead's call after the check) |
+| **Collision band / contact band / harm band / Keg band** | The flat damage values of 11.1: collision 2/3/3 by the pusher's level band (the Vanguard design's indexing, kept); contact 3/4/4 and harm 2/3/3 by the level band of the floor's lowest expected level; Keg 4/6/8 by floor (3.4 indexing is a lead's call after the check). A band halved by a successful save (Reflex for half, the Keg's `reflexHalf`) is halved per part, rounding down, with a minimum of 1 unless immune (death and healing design 20.3 step 2): harm 2/3/3 → 1/1/1, Keg 4/6/8 → 2/3/4. If the low bands then feel too strong, the band values are retuned, not the rounding **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.2)** |
 | **Hazard-edge save** | Any Reflex save against forced movement into a hazard: the 10.2 save, the contact save and the harm-square save (6.5.2). Every rule that reads "hazard-edge save" reads all three |
 | **Heft** | A Furnishing's Athletics difficulty: light 8, heavy 12 *(illustr.)* |
 | **Remnant** | An M3 environment cloud with a fixed footprint and a countdown; Miasma is the only kind (6.6) |
@@ -1349,8 +1349,8 @@ core cost.
 
 | Keg | Broken without fire | Ignited by fire |
 |---|---|---|
-| Carnival lamp-oil keg | No damage; Reflex or Oiled | Fire, Keg band *(illustr. F2–3 4, F4 6, F5 8)*, Reflex for half; Oiled units in it take Oiled's own payout. It also burns away oil squares under 11.4 unchanged; never a fire square |
-| Gut swollen sac | Acid, Keg band, Reflex for half; Poisoned on a failure | Same |
+| Carnival lamp-oil keg | No damage; Reflex or Oiled | Fire, Keg band *(illustr. F2–3 4, F4 6, F5 8)*, Reflex for half (per part, death and healing design 20.3 step 2) **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.1)**; Oiled units in it take Oiled's own payout. That payout is Oiled's own rule, not a Keg effect; whether it applies to a unit that succeeds on the Keg's save is open for this design's owner (M1-11 rulings 7 item 2). It also burns away oil squares under 11.4 unchanged; never a fire square |
+| Gut swollen sac | Acid, Keg band, Reflex for half (per part, death and healing design 20.3 step 2) **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.1)**; Poisoned on a failure | Same |
 
 - **Caps:**
   - **a burst never triggers another burst in M2**;
@@ -1796,7 +1796,7 @@ report holds Remnants back and the client is told.
 | Footprint | Fixed at creation, ≤ radius 1 (9 squares), **clipped** off walls, pieces, condition squares, harm squares, Portal squares, the Clearway, `fleeExit` and in-room chokes. **Never drifts, spreads or grows** |
 | Duration | Integer countdown: `roundsLeft` = 2 at creation *(illustr.)*. A new **round-end environment step** (from M2 (gated) for Stirs only, HZ-12) runs after the last turn's turn-end step (conditions 5.4) and before the next round starts; it decrements every Remnant in `createdSeq` order, skips Remnants created this round, and removes any at 0. Shown as a number on the glyph. All Remnants end when combat ends **(lead's call, after the check)** |
 | Stacking | ≤ 1 per room. A new one from a **different** `sourceId` fails if one exists, and the preview says so; one from the **same** `sourceId` refreshes `roundsLeft` to full and never past it |
-| Ignition (the headline) | A fire area overlapping it, or a fire part dealt to a unit inside, turns the whole cloud into **one** fire damage event (Keg band, Reflex for half) on every unit on its squares; then it ends. No fire squares; Burning only where it is in the theme's 6. The preview shows "Ignite: N damage to M units" whenever a fire area touches Miasma |
+| Ignition (the headline) | A fire area overlapping it, or a fire part dealt to a unit inside, turns the whole cloud into **one** fire damage event (Keg band, Reflex for half; per part, death and healing design 20.3 step 2) **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.1)** on every unit on its squares; then it ends. No fire squares; Burning only where it is in the theme's 6. The preview shows "Ignite: N damage to M units" whenever a fire area touches Miasma |
 | Status | A hazard (11.3) for pathing and stupidity floors. **Routed units treat a non-lethal Remnant as passable** |
 | Credit | `RemnantState.causedBy` is the unit whose action created it, used only for the condition cap: a party-triggered Remnant counts as party-sourced for the per-fight condition cap, which changes conditions 11.6 (TR-27). Ignition damage's `causedBy` is the unit whose action dealt the igniting fire (9.2). **Told plainly:** a party-triggered cloud is player-made ground effect in substance |
 | Readability | A low translucent volume ≤ 35% opacity *(illustr.)* under units, in its own RC4 hue and pattern (a desaturated violet with a stipple, never bile green), edged by a hazard-tier rim; harm-square and Rough rims draw above it. RC1 amended for Remnant volumes only (TR-20, TR-27) |
@@ -2610,6 +2610,9 @@ PieceKind      { id, class: tall|low|furnishing|keg|hazardPiece,
                  crossable[], givesCover, noise: {shunt, kick, smash},
                  contact?: {type, band: "contact", save: "hazardEdge"}, typedCollision?: type,   // F1 typed Low pieces
                  keg?: {radius:1, save:"reflexHalf", damage:{type, band:"keg"}, unlitEffect?, condition?},
+                 // reflexHalf: the D-22 halving (death and healing design 20.3 step 2), the same rule as
+                 // ability onSuccess "half"; Keg 4/6/8 -> 2/3/4 on a success (agreed 2026-11-28, roadmap D-22;
+                 // M1-11 rulings 1.1, 1.2)
                  rulesKey,                                   // derived: matched by Socket.rulesKey (6.2.5)
                  glyph, kitHeight }
 HazardFace     { hostSide: N|E|S|W, type, band: "contact", save: "hazardEdge" }

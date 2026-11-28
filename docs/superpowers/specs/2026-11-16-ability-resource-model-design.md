@@ -481,7 +481,7 @@ Every ability declares exactly one cost **(lead's call)**:
 | Attack Shunt: an adjacent non-sturdy Furnishing (light automatic; heavy Athletics against heft) moves 1 square straight away; into a unit, the piece stops, the unit takes the collision band once, is not moved, and makes a Reflex save against 8 + the Shunter's Athletics bonus *(illustr.)* or falls Prone (size rule applied to the piece); a light piece breaks on the hit. Once per piece per round; combat only; noise 4; ends Hidden like an attack **(change TR-6, room terrain design 6.3.2; M2)** | Replaces one attack |
 | Kick: an adjacent `round`, non-sturdy Furnishing (light automatic; heavy Athletics against heft) travels straight away up to 4 squares *(illustr.)*, stopping before blocking squares or at the first unit (collision band, Reflex or Prone, as Attack Shunt); never ends on a square 6.3.6 forbids. Noise 4; ends Hidden **(change TR-6, room terrain design 6.3.3; M2)** | Replaces one attack |
 | Smash: an adjacent Furnishing or Keg (light breaks automatically; heavy, sturdy included, Athletics against heft); a broken light piece is gone, a heavy one becomes Rough debris; a Smashed Keg bursts, the Smasher outside its burst. Noise 6 *(illustr.)*; ends Hidden **(change TR-6, room terrain design 6.3.4, 6.3.5; M2)**. The Supper's Frost-seized padlock: a bludgeoning Smash shatters it at Athletics Mild, noise 6, one roll on the `checks` stream (a Botch is a Jam), out of combat 1 tick; it opens its host like a force, with no Splinter **(change TL-32, traps and locks design 7.8; M2)** | Replaces one attack |
-| Overturn: orthogonally adjacent to a `tippable` Tall Furnishing, Athletics against heft 15 *(illustr.)*; it falls into the 1×2 strip straight away from the user (Reflex: failure 2× collision band plus Prone, success half), then becomes debris and opens sight **(change TR-6, room terrain design 6.3.7; M3)** | Action |
+| Overturn: orthogonally adjacent to a `tippable` Tall Furnishing, Athletics against heft 15 *(illustr.)*; it falls into the 1×2 strip straight away from the user (Reflex: failure 2× collision band plus Prone, success half of the failure amount (the 2× applies first; death and healing design 20.3 step 2), which is the band **(lead's call, confirmed by the client 2026-11-28; M1-11 rulings 8 item 9)**), then becomes debris and opens sight **(change TR-6, room terrain design 6.3.7; M3)** | Action |
 | Haul: drag an adjacent light Furnishing into the square you left; provokes as normal movement **(change TR-6, room terrain design 6.3.7; M3)** | 2 movement per square |
 | Cross a Plank (narrow ground): in combat, entering the first Plank square needs Acrobatics against the segment-5 ladder (DC 12, *illustr.*); a failure ends movement on the square before, no retry that round, no fall and no damage. Out of combat one check by the leading unit, with the Squeeze row's failure cost. Stiff gives disadvantage; forced movement onto a Plank needs no check **(change TR-12, room terrain design 6.2.6; M2)**. The check is on the keyed `checks` stream, keyed by the Plank's `traversalIndex`; per-traversal rolls kept (traps and locks design 6.12, 6.22; change TL-3) | In combat part of movement; out of combat one party check |
 | Operate a Cord (a Low piece face or wall socket; each Cord has exactly one verb): from an adjacent square, no check, noise 4 *(illustr.)*. A bound Cord re-times one Stir (Now, Sustain); Reverse, Flip and Knock, and standalone Cords, are M3. An act set by an Operated Cord credits the operator for experience and morale; on-kill hooks never fire from a Dream-step act **(change HZ-15, hazards design 6.3.4; re-time verbs with the Stirs: M2 (gated), else M3)**. *Pending request (HZ-15), not a rule until the ability model owner rules:* a unit that starts its turn adjacent to a Cord may Operate it as its bonus action | Action |
@@ -678,6 +678,13 @@ The core answers "what would this do?" for any ability and target: which
 units are affected, the odds for each, expected damage, and any rider
 chance. The display computes nothing. **(settled principle)**
 
+With `onSuccess: half` (14.1), expected damage weighs the full parts by
+the chance the target fails and the halved parts by the chance it
+succeeds. The rider chance includes a success, because a halved part
+still attempts its rider (9.2). An effect marked "on any outcome" shows
+its marker. **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.3, 1.4,
+1.6)**
+
 **(lead's call)**
 
 - The preview uses only what the party knows. A trait, resistance or
@@ -805,8 +812,11 @@ exception. Never from party abilities, monster at-wills or flasks
 - The check is d20 + Constitution **(settled)**, against the higher of 10
   and half the damage taken **(lead's call)**.
 - One check per damage event. The parts of one hit are summed first.
-  **(lead's call)** All turn-start ticks together are one damage event
-  (conditions design 6.8). **(change C10)**
+  **(lead's call)** They are summed after any halving by a save, so the
+  check reads the halved total (death and healing design 20.3 step 3a).
+  **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.6)** All
+  turn-start ticks together are one damage event (conditions design
+  6.8). **(change C10)**
 - Proficiency is added only from a feature or an offer. **(lead's call)**
 - A unit concentrates on one effect at a time. Starting another ends the
   first. **(lead's call)**
@@ -1155,6 +1165,28 @@ Illustrative:
   "ai": { "minTargets": 2 } }
 ```
 
+- `resolve.onSuccess` is `none` (the default) or `half`. `half` is the
+  halving of death and healing design 20.3 step 2: on a successful save,
+  each damage part is halved on its own, rounding down, before the ladder
+  and its minimum of 1. **(agreed 2026-11-28, roadmap D-22; M1-11 rulings
+  1.1)** `onSuccess` is written to a record's canonical form only when it
+  is not `none`, so records that do not use it keep their content hashes.
+  **(lead's call, confirmed by the client 2026-11-28; M1-11 rulings 8
+  item 11)**
+- An effect's non-damage effects apply on a failed save only, by
+  default. A record may mark an effect "on any outcome" (Toll's
+  Faltering, Herald design 9.1); it then applies on a success as well,
+  and the tooltip shows the marker. Where the marker sits in the data is
+  this design's choice; records without it read as failure only, so no
+  existing record changes. **(agreed 2026-11-28, roadmap D-22; M1-11
+  rulings 1.3)**
+- Partial halving uses a per-part save shape: the halved part is a
+  secondary area with its own `resolve` and its own `onSuccess`. Frost
+  Shard (consumables design 16.4) is an attack part plus a cold burst,
+  Reflex half; only the burst is halved, never the attack part.
+  **(lead's call, confirmed by the client 2026-11-28; M1-11 rulings 8
+  item 10)**
+
 ### 14.2 Unit state
 
 - Spent counts in a list sorted by pool ID.
@@ -1222,6 +1254,17 @@ when the Warcaller ships (M3) **(change HR-29, Herald design 14.1, 9.3)**.
   use `checks`, each in its registered domain; in combat they stay on the
   combat stream (seeds and validation design 4.3; change SV-6, read;
   M1 / M2 / M3).
+- Out of combat, a roll that does not start a fight and has no `checks`
+  domain of its own (such as an ability's save, attack roll or damage
+  dice, a rider save or a concentration check) is refused in M1 with
+  `NotInCombat`, at no cost; from the D-23 wave it uses the keyed
+  `h:roll` domain (seeds and validation design 4.3). **(agreed
+  2026-11-28, roadmap D-23; M1-11 rulings 2.1, 2.2)** Out of combat,
+  M1-14's contests and checks (Hide, Search, Shove, grapple, Escape and
+  Frighten, and Rally if D-16 gives it a roll; Help rolls nothing) never
+  draw the combat stream either: each uses a `checks` domain or is
+  refused. This extends the pattern above. **(lead's call, confirmed by
+  the client 2026-11-28; M1-11 rulings 8 item 2)**
 - Effects that data cannot express, including reaction policies and AI
   terms, are C# hooks referenced from data by ID. **(settled)**
 

@@ -1002,7 +1002,10 @@ which is why the best-member rule picks the specialist.
   (hound families).
 
 **Effects (`effect`, each with a `loud` flag):**
-- **strike:** damage, Reflex half.
+- **strike:** damage, Reflex half. On a success each damage part is
+  halved on its own, rounding down, before the ladder and its minimum of
+  1 (death and healing design 20.3 step 2) **(agreed 2026-11-28, roadmap
+  D-22; M1-11 rulings 1.1, 1.2)**.
 - **drop:** damage plus Prone.
 - **snare:** Grappled, escape at the floor's Middling.
 - **spray:** a condition from the theme's 6 with a Fortitude save, under
@@ -1241,7 +1244,7 @@ zones (20–57% of traps go unseen for parties without Mechanics).
 
 | `botchHits` | Resolution |
 |---|---|
-| `worker` | The effect resolves on the worker as if it stood on the trigger square (`botchOrigin`, recorded). A push follows the trap's fixed line from where the worker stands. No relocation and no fall. The damage is self-caused (6.10). No other unit is hit |
+| `worker` | The effect resolves on the worker as if it stood on the trigger square (`botchOrigin`, recorded). A push follows the trap's fixed line from where the worker stands. No relocation and no fall. The damage is self-caused (6.10). The trap's save is on `h:save` and its damage dice follow 6.22: out of combat from `h:roll` from the D-23 wave, in combat from the combat stream, on a success from the same stream as on a failure (the 6.23 preview's "1d4+1 piercing, Reflex half") **(agreed 2026-11-28, roadmap D-22, D-23; M1-11 rulings 2.2; lead's call, confirmed by the client 2026-11-28; M1-11 rulings 8 item 4)**. No other unit is hit |
 | `area` | Resolves exactly like a normal spring. The worker's own damage is self-caused; every other party unit in the area (followers included) takes involuntary damage, inside EnvRound |
 
 - **Take time** (TL-5):
@@ -1562,7 +1565,7 @@ always Plain).
 |---|---|---|---|---|---|
 | **Plain** | none | F1 | Jam only | normal | M1 |
 | **Crier** | sound-wave arcs | F2 (the Gaol may place 1 on F1, after room 2) | Noise 10 at the lock (RC7 alarm cue); the hearing outline previews who comes; joiner caps hold | every try is noise 10 | M2 |
-| **Barb** | a barb | F2 | Picker takes the harm band (2/3/3) plus the theme's poison condition (RT-16, else damage only), Fortitude half; floored out of combat | never fires | M2 |
+| **Barb** | a barb | F2 | Picker takes the harm band (2/3/3) plus the theme's poison condition (RT-16, else damage only), Fortitude half (per part, death and healing design 20.3 step 2: 2/3/3 → 1/1/1 on a success); the poison condition applies on a failure only, unless this design marks it "on any outcome" **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.1 to 1.3)**; floored out of combat | never fires | M2 |
 | **Tattle** | a door with an exclamation bar ("the room beyond hears") | F3 (the Wake's Viewing Door on F1, after room 2; 7.4) | The pre-placed Dormant group in the room beyond becomes Alerted. Listen reports it first. Never spawns. **Portal hosts only** (V11). Bound in the `trapsResolve` pass: a candidate with no group beyond resolves to a Crier with no extra draw. The group beyond is the floor's **Annex** (F2–5; M3), and no slot host lies beyond a Tattle, so every F1 Tattle (the Wake's Viewing Door included) and every Tattle before the Annex ships in M3 is a Crier, told plainly (encounter placement design 6.13; change EP-26; agreed, Q2) | any try wakes it | M2 |
 | **Runed** | one angular sigil in a square frame (no ring) | F4 | Pick with Mechanics or Arcana; Botch is a harm-band sting plus Jam; Unweaving turns it Plain | each try stings | M3 |
 | **Hour** | an hourglass (no clock hands or digits) | Gaol, Wake | Plain behaviour; also opens itself on the floor's Landmark tick (HZ-19) | normal | M3 |
@@ -2338,7 +2341,15 @@ distance and guard, and the boxed-lurker budget.
   `H(floorSeed, objectId, 'save', unitId, springIndex, die)`, where
   `springIndex` counts the trap's springs (or the lock's consequence
   firings), so a re-armed trap's second spring draws a fresh die, and
-  Bear it's advantage uses `die` 0 and 1. In-combat saves and in-combat
+  Bear it's advantage uses `die` 0 and 1. The save stays on `h:save`;
+  the trap's damage dice, on a failure or on a successful save against
+  its half, come from the keyed `h:roll` domain out of combat from the
+  D-23 wave (seeds and validation design 4.3) and from the combat
+  stream in combat **(agreed 2026-11-28, roadmap D-22, D-23; M1-11
+  rulings 2.2)**; under the staging in 12, M1 ships no such trap. A
+  success rolls its damage dice on the same stream a failure would
+  **(lead's call, confirmed by the client 2026-11-28; M1-11 rulings 8
+  item 4)**. In-combat saves and in-combat
   attack rolls (Trigger Shot included) stay on the combat stream. An
   out-of-combat attack against an object (Trigger Shot, the Frost-seized
   padlock's Smash) is on `checks`, so a device shot between fights never
@@ -3321,7 +3332,7 @@ catalogue.
 
 | Wave | Contents |
 |---|---|
-| **M1** | Check charter; ladder; `traps`, `trapsResolve` and `checks` streams; Margin rule for locks; Take time for locks; Plain Locked Portals with retryable force (no Splinter on F1); TrapRecord skeleton with DH-32 ids and `detectionAtFire`; optionally the Kennel tin-can tripwire lesson trap, and optionally the Wire Loop as the M1 known-armed DH-32 record off the main path (each known, armed; a hazard for pathing and previews under TL-19); if D-06 keeps the Wire Loop, it ships in M1 as a known, armed DH-32 record and pathing hazard without its Grappled effect **(agreed 2026-11-27, roadmap D-19; M1-10 rulings 3.1)**; V11 skeleton (`LockNeverCritical`, `HeNoLock`, `KeyReachable`). The solo Vanguard forces; nothing is gated |
+| **M1** | Check charter; ladder; `traps`, `trapsResolve` and `checks` streams; Margin rule for locks; Take time for locks; Plain Locked Portals with retryable force (no Splinter on F1); TrapRecord skeleton with DH-32 ids and `detectionAtFire`; optionally the Kennel tin-can tripwire lesson trap, and optionally the Wire Loop as the M1 known-armed DH-32 record off the main path (each known, armed; a hazard for pathing and previews under TL-19); if D-06 keeps the Wire Loop, it ships in M1 as a known, armed DH-32 record and pathing hazard without its Grappled effect **(agreed 2026-11-27, roadmap D-19; M1-10 rulings 3.1)**; any damaging F1 trap needs D-06, D-22 and D-23 decided together, and under this row M1 ships none **(lead's call, confirmed by the client 2026-11-28; M1-11 rulings 8 item 3)**; V11 skeleton (`LockNeverCritical`, `HeNoLock`, `KeyReachable`). The solo Vanguard forces; nothing is gated |
 | **M2** | Detection (trap sense with proficiency, Hunch −5, Probe stop, count line, Medicine, Arcana); Warned or floored (Q1); Margin rule for traps; Take time for traps; Bear it; universal hand-trigger, Trigger Shot (with the improvised throw if TL-42 is accepted), handles, Pole it, pressure slabs, re-arm; K1/K2 knowledge with Once Bitten and the first-spring rule; caps and bounds; floor-1 package; density and placement; Crier, Barb and Tattle locks; Splinter from F2; Keybearers; Lockside Listen; Wax Key, with the vendor stock when no Mechanics member (Q3); containers; alarm limits; trapdoor Voids in V10-proven Void rooms of themes with a Void skin (Choir, Archive); paper burns; High-Striker; door close verb; the catalogue for the M2 themes; clock allowance; RT-16 ruling; reports (Trapwright reports included) |
 | **M3** | Boxed lurker (Q2: Archive and Gut); Wager rooms; Runed and Hour locks; Unbolting; Riddle locks; Fed sphincter; Ticket lock; locked and trapped Hairline; readings; Swollen door; relocation traps and the Mirror Glyph (with the ability model's teleport rule); scent and room triggers; debris leave-behinds; portcullis Bar (if adopted); Oil the Works; per-group belief and witness secrecy; **the Trapwright** with its density gate; Drop-bar if the client agrees |
 | **M4** | Inverted Cathedral traps |
