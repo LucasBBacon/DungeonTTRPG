@@ -357,13 +357,6 @@ public class UseAbilityTests
         AssertRefused(s, Use(Hero, Sure, Units(Two)), CommandError.NotInCombat);
     }
 
-    [Fact]
-    public void An_out_of_combat_use_on_another_faction_is_refused_until_openers_arrive()
-    {
-        var s = GameState.Create(Open, [Party(1, 1, 1), Foe(2, 2, 1)], 7, hero: Hero);
-        AssertRefused(s, Use(Hero, Jab, Units(Two)), CommandError.InvalidTarget);
-    }
-
     // --- Review Focus 1, 2, 3 and 5 ---
 
     [Fact]

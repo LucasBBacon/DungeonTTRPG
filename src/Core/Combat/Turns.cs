@@ -61,7 +61,7 @@ public static class Turns
         var held = ImmutableArray<GameEvent>.Empty;
 
         // 4. Fresh turn budgets, then the per-fight use limits refill. 5. Initiative (draw-neutral after step 4).
-        var next = Pools.RefillAll(rules, FreshBudgets(s), RefillTag.Fight);
+        var next = FightReady(rules, s);
         var (order, rolled) = Initiative.Roll(rules, next, next.Units.Select(u => u.Id));
 
         // 6. Record the fight with the before-round-1 marker.
@@ -98,26 +98,37 @@ public static class Turns
     }
 
     /// <summary>
+    /// Combat start's step 4 (M1-10 rulings record 5): every unit's turn budget made fresh, then every
+    /// <see cref="RefillTag.Fight"/> pool refilled; <see cref="RefillTag.Turn"/> pools are not refilled (M1-11 owner
+    /// ruling 2). <see cref="BeginCombat"/> runs it, and an opener is validated on it (plan call 4).
+    /// </summary>
+    internal static GameState FightReady(RulesContext rules, GameState s) =>
+        Pools.RefillAll(rules, FreshBudgets(s), RefillTag.Fight);
+
+    /// <summary>
     /// Marks <paramref name="striker"/> as "opener charged, first turn not yet started" (M1-11 plan call 6). It sets only
-    /// the mark: the cost itself is paid beforehand. Throws <see cref="InvalidOperationException"/> unless the fight is
-    /// held before round 1, the run has not ended, the striker's budget already includes
-    /// <see cref="OpenerCharge.Charged"/>, its spent counts include <see cref="OpenerCharge.TurnPools"/>, and no unit of
-    /// its faction is marked; <see cref="ArgumentException"/> for an unknown unit or a malformed charge.
+    /// the mark: the cost itself is paid beforehand. It enforces what loading a state checks of a mark, so a marked state
+    /// always loads. Throws <see cref="ArgumentException"/> for an unknown unit or a malformed charge (the load check's
+    /// <c>GameState.CheckOpenerCharge</c>: a negative count, the reaction or camp-spend flag, turn pools uninitialised,
+    /// unsorted, repeated, with a bad pool id or a count below 1), and <see cref="InvalidOperationException"/> unless the
+    /// fight is held before round 1, the run has not ended, the striker is in the turn order, its budget already
+    /// includes <see cref="OpenerCharge.Charged"/>, its spent counts include <see cref="OpenerCharge.TurnPools"/>, and no
+    /// unit of its faction is marked.
     /// </summary>
     internal static GameState MarkOpener(GameState s, UnitId striker, OpenerCharge charge)
     {
         ArgumentNullException.ThrowIfNull(s);
         ArgumentNullException.ThrowIfNull(charge);
-        if (s.Ended is not null || s.Combat is not { BeforeRound1: true })
+        if (s.Ended is not null || s.Combat is not { BeforeRound1: true } combat)
         {
             throw new InvalidOperationException("An opener is marked only while the fight is held before round 1.");
         }
 
         var unit = s.FindUnit(striker) ?? throw new ArgumentException($"Unknown unit {striker.Value}.", nameof(striker));
-        if (charge.Charged.ReactionUsed || charge.Charged.CampSpent || charge.TurnPools.IsDefault)
+        GameState.CheckOpenerCharge(charge, $"Unit {striker.Value} ", nameof(charge));
+        if (!combat.Order.Contains(striker))
         {
-            throw new ArgumentException(
-                "An opener charge sets no reaction or camp-spend flag and has initialised turn pools.", nameof(charge));
+            throw new InvalidOperationException($"Unit {striker.Value} is not in the turn order.");
         }
 
         if (!GameState.Includes(unit.Budget, charge.Charged))

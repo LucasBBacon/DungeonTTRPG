@@ -8,9 +8,11 @@ namespace Dungeon.Core.AbilityModel;
 
 /// <summary>
 /// Ability use outside resolution (M1-11 plan calls 2 to 5): the units an ability affects, and the two validation
-/// stages of AB 14.3. Every check reads the <em>view</em> the command acts on: in combat the stored state; out of combat
-/// the tick-reset view (every budget fresh, every <see cref="RefillTag.Turn"/> pool refilled; AB 6.8), because a use
-/// out of combat runs on a new tick as a step does.
+/// stages of AB 14.3. Every check reads the <em>view</em> the command acts on (plan call 4): in combat the stored state;
+/// out of combat, for an opener (a use that affects a unit of another faction, plan call 5), combat start's step-4 view
+/// (every budget fresh, every <see cref="RefillTag.Fight"/> pool refilled; owner ruling 2), because the opener is paid
+/// after combat start; for any other use, the tick-reset view (every budget fresh, every <see cref="RefillTag.Turn"/>
+/// pool refilled; AB 6.8), because it runs on a new tick as a step does.
 /// </summary>
 public static partial class AbilityUse
 {
@@ -82,14 +84,23 @@ public static partial class AbilityUse
     /// (<see cref="CommandError.NoActionLeft"/>, <see cref="CommandError.NoBonusActionLeft"/>,
     /// <see cref="CommandError.NoFreeInteraction"/>, <see cref="CommandError.NoMovementLeft"/>); then the pool spend
     /// (<see cref="Pools.CheckSpend"/>: <see cref="CommandError.NoUsesLeft"/>, then
-    /// <see cref="CommandError.CampSpendUsed"/>). Otherwise <see cref="CommandError.None"/>. Out of combat it reads the
-    /// tick-reset view.
+    /// <see cref="CommandError.CampSpendUsed"/>). Otherwise <see cref="CommandError.None"/>. Out of combat, whether a use
+    /// opens a fight depends on its target, so the bar reads both views: the ability is usable when it is usable on the
+    /// tick-reset view or on the step-4 view, and otherwise the tick-reset view's code is returned.
     /// </summary>
     public static CommandError CheckUsable(RulesContext rules, GameState s, UnitId user, string abilityId)
     {
         ArgumentNullException.ThrowIfNull(rules);
         ArgumentNullException.ThrowIfNull(s);
-        return Usable(rules, View(rules, s), user, abilityId);
+        if (s.CombatActive)
+        {
+            return Usable(rules, s, user, abilityId);
+        }
+
+        var error = Usable(rules, Engine.TickResets(rules, s), user, abilityId);
+        return error != CommandError.None && Usable(rules, Turns.FightReady(rules, s), user, abilityId) == CommandError.None
+            ? CommandError.None
+            : error;
     }
 
     /// <summary>
@@ -100,21 +111,59 @@ public static partial class AbilityUse
     /// <see cref="AimTarget"/> only for <see cref="TargetShape.Cone"/> and <see cref="TargetShape.Line"/>, one of the
     /// eight directions. Then the range (<see cref="CommandError.OutOfRange"/>: Chebyshev from the user to each unit or
     /// to the point) and the sight (<see cref="CommandError.NoLineOfSight"/>: <see cref="Sight.CanSee"/> from the user's
-    /// square). Last, out of combat: a use that affects a unit of another faction is
-    /// <see cref="CommandError.InvalidTarget"/> until openers arrive (M1-11 Task 6), and a use that draws (it has a
-    /// <c>resolve</c>, or dice in its damage) is <see cref="CommandError.NotInCombat"/> (plan call 5; D-23). The command
-    /// refuses with this code.
+    /// square). Last, out of combat: a use that is not an opener (it affects no unit of another faction) and draws (it
+    /// has a <c>resolve</c>, or dice in its damage) is <see cref="CommandError.NotInCombat"/> (plan call 5; D-23); an
+    /// opener draws on the combat stream once combat has started. Out of combat it reads the step-4 view for an opener
+    /// and the tick-reset view otherwise. The command refuses with this code.
     /// </summary>
     public static CommandError CheckTarget(
         RulesContext rules, GameState s, UnitId user, string abilityId, AbilityTarget target)
     {
         ArgumentNullException.ThrowIfNull(rules);
         ArgumentNullException.ThrowIfNull(s);
-        return Targetable(rules, View(rules, s), user, abilityId, target);
+        return Targetable(rules, View(rules, s, user, abilityId, target), user, abilityId, target);
     }
 
-    /// <summary>The state a use is validated and resolved on: <paramref name="s"/> in combat, the tick-reset view out of it.</summary>
-    internal static GameState View(RulesContext rules, GameState s) => s.CombatActive ? s : Engine.TickResets(rules, s);
+    /// <summary>
+    /// The state a use is validated and resolved on (plan call 4): <paramref name="s"/> in combat; out of combat,
+    /// combat start's step-4 view (<see cref="Turns.FightReady"/>) when the use <see cref="Opens"/> a fight, and the
+    /// tick-reset view otherwise.
+    /// </summary>
+    internal static GameState View(RulesContext rules, GameState s, UnitId user, string abilityId, AbilityTarget target)
+    {
+        if (s.CombatActive)
+        {
+            return s;
+        }
+
+        return Opens(rules, s, user, abilityId, target) ? Turns.FightReady(rules, s) : Engine.TickResets(rules, s);
+    }
+
+    /// <summary>
+    /// Whether the use is an opener (plan call 5): out of combat, by a unit that holds the ability, on a target that fits
+    /// its shape, affecting at least one unit of another faction (<see cref="Affected"/>). Budgets and pools play no
+    /// part, so the answer is the same on <paramref name="s"/> and on either view of it. Noticing is M1-35's.
+    /// </summary>
+    internal static bool Opens(RulesContext rules, GameState s, UnitId user, string abilityId, AbilityTarget target)
+    {
+        if (s.CombatActive || s.FindUnit(user) is not { } holder || abilityId is null
+            || !holder.Abilities.Contains(abilityId, StringComparer.Ordinal)
+            || rules.FindAbility(abilityId) is not { Target: { } spec } ability
+            || !ShapeFits(s, holder, spec, target))
+        {
+            return false;
+        }
+
+        foreach (var id in Affected(rules, s, user, ability, target).Units)
+        {
+            if (s.FindUnit(id)!.Faction != holder.Faction)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     /// <summary><see cref="CheckUsable"/> on a view already taken.</summary>
     internal static CommandError Usable(RulesContext rules, GameState s, UnitId user, string abilityId)
@@ -143,7 +192,17 @@ public static partial class AbilityUse
             return CommandError.NotYourTurn;
         }
 
-        var budget = unit.Budget;
+        return Payable(rules, s, user, ability);
+    }
+
+    /// <summary>
+    /// The cost and pool stages alone (AB 14.3): whether <paramref name="user"/>, which must exist, can pay
+    /// <paramref name="ability"/> on <paramref name="s"/> as it stands. The opener rechecks it after the
+    /// <c>combatStarted</c> triggers, while no unit holds the turn (plan call 8).
+    /// </summary>
+    internal static CommandError Payable(RulesContext rules, GameState s, UnitId user, AbilityDefinition ability)
+    {
+        var budget = s.FindUnit(user)!.Budget;
         var cost = ability.Cost;
         var error = cost.Kind switch
         {
@@ -199,21 +258,10 @@ public static partial class AbilityUse
             }
         }
 
-        if (!s.CombatActive)
+        // Plan call 5: out of combat only an opener may draw, on the combat stream once its fight has started.
+        if (!s.CombatActive && Draws(ability) && !Opens(rules, s, user, abilityId, target))
         {
-            // Plan call 5: a use that affects another faction is an opener; Task 6 starts combat for it.
-            foreach (var id in Affected(rules, s, user, ability, target).Units)
-            {
-                if (s.FindUnit(id)!.Faction != holder.Faction)
-                {
-                    return CommandError.InvalidTarget;
-                }
-            }
-
-            if (Draws(ability))
-            {
-                return CommandError.NotInCombat;
-            }
+            return CommandError.NotInCombat;
         }
 
         return CommandError.None;

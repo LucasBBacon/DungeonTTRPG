@@ -57,10 +57,7 @@ public enum CommandError
     /// <summary>The ability spends a camp pool, and the unit has already spent one this turn (AB 6.4).</summary>
     CampSpendUsed,
 
-    /// <summary>
-    /// The target does not fit the ability's shape, or (until openers, M1-11 Task 6) the use affects another faction out
-    /// of combat.
-    /// </summary>
+    /// <summary>The target does not fit the ability's shape.</summary>
     InvalidTarget,
 
     /// <summary>A target unit or point is beyond the ability's range.</summary>
@@ -122,6 +119,12 @@ public static class Engine
             return Reject(state, CommandError.DecisionPending);
         }
 
+        // An opener dispatches in phases of its own (M1-11 plan call 8).
+        if (command is UseAbilityCommand opener && AbilityUse.Opens(rules, state, opener.User, opener.AbilityId, opener.Target))
+        {
+            return ApplyOpener(state, opener, rules);
+        }
+
         var result = command switch
         {
             MoveCommand move => ApplyMove(state, move, rules),
@@ -179,15 +182,62 @@ public static class Engine
     }
 
     /// <summary>
-    /// An ability use (AB 14.3; M1-11 plan calls 3 to 5 and 10). In combat it is validated and resolved on the stored
-    /// state and takes no tick. Out of combat (a use that affects no other faction) it runs as a step does: the tick's
-    /// resets first (every budget fresh, every turn pool refilled; AB 6.8), then validation and resolution on that view,
-    /// then <see cref="GameState.Tick"/> + 1 and <see cref="TickAdvanced"/> last. A refusal returns the state it was given,
-    /// with no events: no reset, no tick, no draw.
+    /// An opener (M1-11 plan calls 4 to 8; owner ruling 2; M1-10 rulings record 4.1 and 5): a use out of combat that
+    /// affects a unit of another faction. It is validated on combat start's step-4 view, and a refusal returns the state
+    /// it was given with no events: no fight, no tick, no draw. Then, in phases, each dispatched on the command's one
+    /// firing counter:
+    /// <list type="number">
+    /// <item><see cref="Turns.BeginCombat"/> (<see cref="CombatStarted"/>, then the held messages), dispatched, so
+    /// <c>combatStarted</c> triggers see the state before the opener. If the run ended there, the events so far are
+    /// returned (<see cref="RunEnded"/> last). If the striker is gone or can no longer pay the cost
+    /// (<see cref="AbilityUse.Payable"/>), the opener is dropped: no <see cref="AbilityUsed"/>, no cost, no mark.</item>
+    /// <item>Otherwise the opener resolves (<see cref="Resolution.Use"/>): the cost is paid on the step-4 budget, the
+    /// striker is marked with it, the targets lock and resolve; then dispatched.</item>
+    /// <item>The settle loop: the win check (<see cref="CombatEnded"/>, and no turn event), else round 1 starts with
+    /// slot 0's <see cref="TurnStarted"/>.</item>
+    /// </list>
+    /// There is no tick and no tick reset (AB 6.8).
+    /// </summary>
+    private static StepResult ApplyOpener(GameState state, UseAbilityCommand use, RulesContext rules)
+    {
+        var view = AbilityUse.View(rules, state, use.User, use.AbilityId, use.Target);
+        var error = AbilityUse.Targetable(rules, view, use.User, use.AbilityId, use.Target);
+        if (error != CommandError.None)
+        {
+            return Reject(state, error);
+        }
+
+        int firings = 0;
+        var ability = rules.Ability(use.AbilityId);
+        var (begun, started) = Turns.BeginCombat(rules, state);
+        var (s, events) = TriggerDispatch.Run(rules, started, begun, ref firings);
+        if (s.Ended is not null)
+        {
+            return new StepResult(s, events, CommandError.None);
+        }
+
+        if (s.FindUnit(use.User) is not null && AbilityUse.Payable(rules, s, use.User, ability) == CommandError.None)
+        {
+            var (used, resolved) = Resolution.Use(rules, s, use.User, ability, use.Target, opener: true);
+            var (dispatched, all) = TriggerDispatch.Run(rules, resolved, used, ref firings);
+            s = dispatched;
+            events = events.AddRange(all);
+        }
+
+        (s, events) = Settle(rules, s, events, ref firings);
+        return new StepResult(s, events, CommandError.None);
+    }
+
+    /// <summary>
+    /// An ability use that is not an opener (AB 14.3; M1-11 plan calls 3 to 5 and 10). In combat it is validated and
+    /// resolved on the stored state and takes no tick. Out of combat (a use that affects no other faction) it runs as a
+    /// step does: the tick's resets first (every budget fresh, every turn pool refilled; AB 6.8), then validation and
+    /// resolution on that view, then <see cref="GameState.Tick"/> + 1 and <see cref="TickAdvanced"/> last. A refusal
+    /// returns the state it was given, with no events: no reset, no tick, no draw.
     /// </summary>
     private static StepResult ApplyUseAbility(GameState state, UseAbilityCommand use, RulesContext rules)
     {
-        var view = AbilityUse.View(rules, state);
+        var view = AbilityUse.View(rules, state, use.User, use.AbilityId, use.Target);
         var error = AbilityUse.Targetable(rules, view, use.User, use.AbilityId, use.Target);
         if (error != CommandError.None)
         {

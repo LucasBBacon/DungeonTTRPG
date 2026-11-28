@@ -82,7 +82,7 @@ public static partial class AbilityUse
     {
         ArgumentNullException.ThrowIfNull(rules);
         ArgumentNullException.ThrowIfNull(s);
-        var view = View(rules, s);
+        var view = View(rules, s, user, abilityId, target);
         var error = Targetable(rules, view, user, abilityId, target);
         if (error != CommandError.None)
         {

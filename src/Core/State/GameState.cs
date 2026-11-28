@@ -413,31 +413,51 @@ public sealed record GameState(
         }
     }
 
-    // M1-11 plan call 6: the charge holds only the opener's own cost bits, the budget includes it, and its turn-pool
-    // counts are sorted by pool id, each pool once, each count at least 1 and within the unit's spent count.
+    // M1-11 plan call 6: the charge is well formed (CheckOpenerCharge), the budget includes it, and each turn-pool count is
+    // within the unit's spent count.
     private static void CheckOpener(Unit unit, OpenerCharge opener, string who, string units)
     {
+        CheckOpenerCharge(opener, who, units);
+        if (!Includes(unit.Budget, opener.Charged))
+        {
+            throw new ArgumentException($"{who}has a turn budget that does not include its opener charge.", units);
+        }
+
+        foreach (var pool in opener.TurnPools)
+        {
+            int spent = SpentCount(unit.Spent, pool.PoolId);
+            if (spent < pool.Spent)
+            {
+                throw new ArgumentException(
+                    $"{who}charges {pool.Spent} of pool '{pool.PoolId}' to its opener, but its spent count is {spent}.", units);
+            }
+        }
+    }
+
+    /// <summary>
+    /// The shape of an opener charge, the part of the load check that needs no unit (M1-11 plan call 6): no negative
+    /// count; no reaction or camp-spend flag; initialised turn pools, sorted by pool id in ordinal order, each pool once,
+    /// each id a content id and each count at least 1. Throws <see cref="ArgumentException"/> naming
+    /// <paramref name="param"/>, its message starting with <paramref name="who"/>. <c>Turns.MarkOpener</c> runs the same
+    /// check, so a marked state always loads.
+    /// </summary>
+    internal static void CheckOpenerCharge(OpenerCharge opener, string who, string param)
+    {
         var charged = opener.Charged;
-        var budget = unit.Budget;
         if (charged.MovementUsed < 0 || charged.ActionsUsed < 0)
         {
-            throw new ArgumentException($"{who}has an opener charge with a negative count.", units);
+            throw new ArgumentException($"{who}has an opener charge with a negative count.", param);
         }
 
         if (charged.ReactionUsed || charged.CampSpent)
         {
-            throw new ArgumentException($"{who}has an opener charge that sets the reaction or camp-spend flag.", units);
-        }
-
-        if (!Includes(budget, charged))
-        {
-            throw new ArgumentException($"{who}has a turn budget that does not include its opener charge.", units);
+            throw new ArgumentException($"{who}has an opener charge that sets the reaction or camp-spend flag.", param);
         }
 
         var pools = opener.TurnPools;
         if (pools.IsDefault)
         {
-            throw new ArgumentException($"{who}has uninitialised opener turn pools; use an empty array.", units);
+            throw new ArgumentException($"{who}has uninitialised opener turn pools; use an empty array.", param);
         }
 
         for (int k = 0; k < pools.Length; k++)
@@ -446,27 +466,20 @@ public sealed record GameState(
             if (pool.PoolId is null || !ContentId.IsValid(pool.PoolId))
             {
                 throw new ArgumentException(
-                    $"{who}has an opener turn pool '{pool.PoolId}', which is not a content id ([a-z0-9_.:-]).", units);
+                    $"{who}has an opener turn pool '{pool.PoolId}', which is not a content id ([a-z0-9_.:-]).", param);
             }
 
             if (pool.Spent < 1)
             {
                 throw new ArgumentException(
-                    $"{who}has an opener turn pool '{pool.PoolId}' count of {pool.Spent}; it must be at least 1.", units);
+                    $"{who}has an opener turn pool '{pool.PoolId}' count of {pool.Spent}; it must be at least 1.", param);
             }
 
             if (k > 0 && string.CompareOrdinal(pools[k - 1].PoolId, pool.PoolId) >= 0)
             {
                 throw new ArgumentException(
                     $"{who}must list opener turn pools by pool id in ordinal order, each pool once ('{pools[k - 1].PoolId}' then '{pool.PoolId}').",
-                    units);
-            }
-
-            int spent = SpentCount(unit.Spent, pool.PoolId);
-            if (spent < pool.Spent)
-            {
-                throw new ArgumentException(
-                    $"{who}charges {pool.Spent} of pool '{pool.PoolId}' to its opener, but its spent count is {spent}.", units);
+                    param);
             }
         }
     }

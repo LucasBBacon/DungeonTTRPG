@@ -29,16 +29,22 @@ internal static class Resolution
     /// ends, resolution stops at once: <see cref="RunEnded"/> is the last event and there is no
     /// <see cref="AbilityResolved"/>. If the user itself is removed, the remaining targets are skipped and
     /// <see cref="AbilityResolved"/> still closes the use.
+    /// <para>
+    /// For an <paramref name="opener"/> (plan calls 6 and 8; M1-10 rulings record 5, step 8), <paramref name="s"/> is the
+    /// fight held before round 1, and once the cost is paid the user is marked (<see cref="Turns.MarkOpener"/>) with what
+    /// was paid: <see cref="OpenerCharge.Charged"/> is the cost's own bits, and <see cref="OpenerCharge.TurnPools"/> the
+    /// spend if its pool is a <see cref="RefillTag.Turn"/> pool. The mark adds no event.
+    /// </para>
     /// </summary>
     public static (ImmutableArray<GameEvent> Events, GameState Next) Use(
-        RulesContext rules, GameState s, UnitId user, AbilityDefinition ability, AbilityTarget target)
+        RulesContext rules, GameState s, UnitId user, AbilityDefinition ability, AbilityTarget target, bool opener = false)
     {
         var events = ImmutableArray.CreateBuilder<GameEvent>();
         events.Add(new AbilityUsed(user, ability.Id));
 
         var (charged, pools, paid) = Pay(rules, s, user, ability);
         events.Add(new AbilityCostPaid(user, ability.Id, charged, pools));
-        s = paid;
+        s = opener ? Turns.MarkOpener(paid, user, new OpenerCharge(charged, TurnPools(rules, pools))) : paid;
 
         var locked = AbilityUse.Affected(rules, s, user, ability, target).Units;
         long difficulty = Difficulty(rules, s, user, ability);
@@ -66,6 +72,21 @@ internal static class Resolution
 
         events.Add(new AbilityResolved(user, ability.Id));
         return (events.ToImmutable(), s);
+    }
+
+    // The spends from turn pools, in the paid order (one pool at most, so already sorted by pool id).
+    private static ImmutableArray<PoolSpend> TurnPools(RulesContext rules, ImmutableArray<PoolSpend> pools)
+    {
+        var turn = ImmutableArray.CreateBuilder<PoolSpend>(pools.Length);
+        foreach (var spend in pools)
+        {
+            if (rules.Pool(spend.PoolId).Refill == RefillTag.Turn)
+            {
+                turn.Add(spend);
+            }
+        }
+
+        return turn.ToImmutable();
     }
 
     /// <summary>

@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using Dungeon.Core.AbilityModel;
 using Dungeon.Core.Combat;
 using Dungeon.Core.Damage;
 using Dungeon.Core.Effects;
@@ -70,25 +71,34 @@ public class CombatScenarioTests
         Assert.Same(final, refused.State);
     }
 
-    // DH 10.4 (Done-when): the fixture opener starts combat before its strike, so the strike is in-combat damage: no
-    // floor, and a lethal strike ends the run.
+    // The ambush (owner ruling 3): the hero (1,1) on 1 HP, and the foe beside it (2,1) holding the fixture sure strike.
+    private static GameState Ambush() =>
+        GameState.Create(
+            GridMap.Parse(".....", ".....", "....."),
+            [
+                new Unit(Hero, new GridPos(1, 1), Faction.Party, [], Fixtures.Stats, 1),
+                AbilityFixtures.Foe(2, 2, 1),
+            ],
+            7,
+            hero: Hero);
+
+    // DH 10.4 (Done-when): the foe's opener runs combat start before its strike (M1-11 Task 6), so the strike is
+    // in-combat damage: no floor, and the lethal strike ends the run before any turn starts.
     [Fact]
     public void An_opening_ambush_strike_is_in_combat_damage()
     {
-        var (started, s) = Turns.StartCombat(Rules, Exploring());
-        Assert.IsType<CombatStarted>(started[0]);
-        Assert.True(s.CombatActive);
+        var r = Engine.Apply(
+            Ambush(), new UseAbilityCommand(Foe, AbilityFixtures.Sure, new UnitsTarget([Hero])), AbilityFixtures.Rules);
 
-        var (glancing, _) = Harm.Deal(Rules, s, Hero, Fixed(Plain(DamageType.Piercing, 5)));
-        Assert.Equal<GameEvent>([new DamageDealt(1, Hero, 5, FullHp - 5)], glancing.Events.ToArray());
-
-        var (strike, next) = Harm.Deal(Rules, s, Hero, Fixed(Trap(Detection.Revealed, 30)));
-
-        Assert.Null(strike.Outcome.Clamp);
-        Assert.DoesNotContain(strike.Events, e => e is DamageClamped);
-        Assert.Equal<GameEvent>(
-            [new DamageDealt(1, Hero, 30, 0), new RunEnded(RunEndCause.HeroDeath, 1)], strike.Events.ToArray());
-        Assert.Equal(new RunEnd(RunEndCause.HeroDeath, 1), next.Ended);
+        Assert.True(r.Ok, r.Error.ToString());
+        Assert.IsType<CombatStarted>(r.Events[0]);
+        var dealt = Assert.Single(r.Events.OfType<DamageDealt>());
+        Assert.Equal((Hero, 0), (dealt.Target, dealt.HpAfter));
+        Assert.DoesNotContain(r.Events, e => e is DamageClamped);
+        Assert.Equal(new RunEnded(RunEndCause.HeroDeath, dealt.Seq), r.Events[^1]);
+        Assert.DoesNotContain(r.Events, e => e is TurnStarted);
+        Assert.Equal(new RunEnd(RunEndCause.HeroDeath, dealt.Seq), r.State.Ended);
+        Assert.True(r.State.CombatActive);
     }
 
     // The control case: the same strike with no combat start is out-of-combat damage, and the floor holds.
