@@ -71,6 +71,9 @@ public enum CommandError
 
     /// <summary>"Ask me" is set on a unit that is not a party unit (AB 7.3: monsters have no "ask me").</summary>
     AskMeIsPartyOnly,
+
+    /// <summary>"While the pool is at least half" is set on a reaction that has no pool, so it could never fire.</summary>
+    PolicyNeedsPool,
 }
 
 /// <summary>

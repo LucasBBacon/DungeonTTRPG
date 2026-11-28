@@ -15,6 +15,7 @@
     {"id": "NoLineOfSight", "doc": "ab"},
     {"id": "NotInCombat", "doc": "ab"},
     {"id": "NotAReaction", "doc": "ab"},
-    {"id": "AskMeIsPartyOnly", "doc": "ab"}
+    {"id": "AskMeIsPartyOnly", "doc": "ab"},
+    {"id": "PolicyNeedsPool", "doc": "ab"}
   ]
 }

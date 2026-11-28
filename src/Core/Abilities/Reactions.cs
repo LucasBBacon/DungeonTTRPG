@@ -226,7 +226,9 @@ public static class Reactions
     /// 13): <see cref="CommandError.UnknownUnit"/>, <see cref="CommandError.UnknownAbility"/> (the unit does not hold it,
     /// or the rules have no such ability), <see cref="CommandError.NotAReaction"/>, and
     /// <see cref="CommandError.AskMeIsPartyOnly"/> for <see cref="ReactionMode.AskMe"/> on a non-party unit (AB 7.3:
-    /// monsters have no "ask me"), in that order.
+    /// monsters have no "ask me"), and <see cref="CommandError.PolicyNeedsPool"/> for
+    /// <see cref="ReactionMode.WhilePoolAtLeastHalf"/> on a reaction with no pool (it could never fire), in that order.
+    /// A snapshot cannot refuse that last pair on load, since it does not know an ability's pool without the rules.
     /// </summary>
     internal static CommandError CheckSetting(RulesContext rules, GameState s, UnitId unit, string abilityId, ReactionMode mode)
     {
@@ -245,6 +247,11 @@ public static class Reactions
             return CommandError.NotAReaction;
         }
 
-        return mode == ReactionMode.AskMe && holder.Faction != Faction.Party ? CommandError.AskMeIsPartyOnly : CommandError.None;
+        if (mode == ReactionMode.AskMe && holder.Faction != Faction.Party)
+        {
+            return CommandError.AskMeIsPartyOnly;
+        }
+
+        return mode == ReactionMode.WhilePoolAtLeastHalf && ability.Pool is null ? CommandError.PolicyNeedsPool : CommandError.None;
     }
 }

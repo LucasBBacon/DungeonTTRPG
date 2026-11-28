@@ -15,6 +15,7 @@
     {"key": "ab.greyed.NoLineOfSight", "text": "No line of sight", "field": "label"},
     {"key": "ab.greyed.NotInCombat", "text": "Only in combat", "field": "label"},
     {"key": "ab.greyed.NotAReaction", "text": "Not a reaction", "field": "label"},
-    {"key": "ab.greyed.AskMeIsPartyOnly", "text": "Only party members can be asked", "field": "label"}
+    {"key": "ab.greyed.AskMeIsPartyOnly", "text": "Only party members can be asked", "field": "label"},
+    {"key": "ab.greyed.PolicyNeedsPool", "text": "Needs a uses pool", "field": "label"}
   ]
 }

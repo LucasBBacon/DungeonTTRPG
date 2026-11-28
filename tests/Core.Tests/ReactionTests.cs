@@ -375,7 +375,7 @@ public class ReactionTests
 
         // Setting a value replaces it; settings stay sorted by ability id.
         var both = Ok(set.State, new SetReactionPolicyCommand(Hero, SaveWard, ReactionMode.IfItChangesOutcome)).State;
-        both = Ok(both, new SetReactionPolicyCommand(Hero, ShieldWard, ReactionMode.WhilePoolAtLeastHalf)).State;
+        both = Ok(both, new SetReactionPolicyCommand(Hero, ShieldWard, ReactionMode.IfItChangesOutcome)).State;
         both = Ok(both, new SetReactionPolicyCommand(Hero, ShieldWard, ReactionMode.Never)).State;
         Assert.Equal(
             [new ReactionSetting(SaveWard, ReactionMode.IfItChangesOutcome), new ReactionSetting(ShieldWard, ReactionMode.Never)],
@@ -439,6 +439,18 @@ public class ReactionTests
         // A save holding "ask me" on a non-party unit does not load.
         var bad = Edit(s, Two, u => u with { Reactions = [new ReactionSetting(ShieldWard, ReactionMode.AskMe)] });
         Assert.Throws<SnapshotFormatException>(() => Snapshot.Load(Snapshot.Save(bad)));
+    }
+
+    [Fact]
+    public void WhilePoolAtLeastHalf_needs_a_pool()
+    {
+        // The shield ward has no pool, so "while the pool is at least half" could never fire.
+        var s = Duel(7, ShieldWard, TurnWard);
+        AssertRefused(s, new SetReactionPolicyCommand(Hero, ShieldWard, ReactionMode.WhilePoolAtLeastHalf), CommandError.PolicyNeedsPool);
+
+        // Control: a pooled ward takes it.
+        var r = Ok(s, new SetReactionPolicyCommand(Hero, TurnWard, ReactionMode.WhilePoolAtLeastHalf));
+        Assert.Equal(ReactionMode.WhilePoolAtLeastHalf, Reactions.Mode(Rules, r.State, Hero, TurnWard));
     }
 
     [Fact]
