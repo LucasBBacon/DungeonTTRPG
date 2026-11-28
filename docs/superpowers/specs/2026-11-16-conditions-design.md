@@ -3368,6 +3368,7 @@ the exact section it touches.
 | C13 | The conditions list no longer depends on an undesigned system. | Ability model 20, "Conditions" bullet; stat model 10, "Conditions" bullet (both point to this document) |
 | C14 | A condition's control value is computed (this document's 17.3): `denyPct` is set in the condition's data and the rest is computed; resolve no longer reads the scorer. | Ability model 13, "Units" bullet ("A condition's control value per round is set in the condition's data") |
 | C15 | The out-of-combat monster behaviour "asleep" is renamed "dormant", so it is not confused with the Asleep condition. | Main design 4.3, bullet "Enemies outside combat are asleep, stationary or patrolling" |
+| C16 **(agreed 2026-11-28 (owner); M1-12 owner ruling 2)** | A hard instance already held when Unyielding is granted does not run its course: it ends at the end of the turn in which Unyielding is granted, and Steeled follows. | This document, 5.7 (the sentence that a held hard instance runs its course) |
 
 ## 25. Depends on systems not yet designed
 

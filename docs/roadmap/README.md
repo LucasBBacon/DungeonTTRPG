@@ -190,6 +190,27 @@ Plan calls, not decisions; none needs a ruling before its step.
 - The greyed-reason English strings in `content/strings/en.json` are placeholder wording for the owner and naming pass.
 - Out of combat, the action bar's `CheckUsable` accepts an ability usable on either the tick view or the opener view.
 
+### M1-12a notes for owners
+
+Owner rulings of 2026-11-28 and plan calls, for the owners to read; the plan is
+`docs/superpowers/plans/2026-11-28-m1-12a-condition-clock.md`.
+
+- Ruling 2: a hard instance already held when Unyielding lands ends at the end of the turn in which Unyielding is granted, and Steeled follows (a change to CO 5.7's "runs its course"; CO 24 change row).
+- Ruling 3: an ability's own hit, or the target's failed save, is the contest for a non-rider condition it carries; no extra roll (built in M1-12b).
+- Ruling 4: a data trigger's `applyEffect` may apply a condition, entering the CO 9.2 pipeline at step 2; a hard condition on a `combatStarted` trigger is refused at load; CO 9.2 gains a "Trigger action" row (M1-12b). CO 5.4 item 7 is read as including data `turnStarted` triggers, which fire inside the turn-start step before the lost-turn check (built in M1-12a).
+- Out of combat, no `TurnStarted` is emitted and the lost-turn check is skipped.
+- The 3-per-tick phase reading (plan call 1): out of combat each tick advances the phase counter three times, shared by every unit. The out-of-combat Steeled extra-tick reading (call 5) is also a plan call.
+- CO 8's "every end emits" excludes a dead holder's own instances (call 7).
+- New data terms: the `combatStartEnds` flag (CO 8's "by flag" `combatStart` end) and the `engineState` tag. M1-13's Surprised and Asleep must carry them.
+- The monster out-of-combat tick floor reuses `ClampReason.OutOfCombat`.
+- A combat-start end (and anything its sustained cascade ends in that step) takes reason `CombatStart`, so no Steeled follows (CO 7.2's `combatStart` exception).
+- Repeat saves emit the existing `SaveRolled` event.
+- The duration switch at combat start compares effective ends, with windows counted as 1 turn, decay as its value and charges as their fallback.
+- Environment-sourced windows end `SourceGone` at the round end in combat and at the tick end out of combat.
+- CO 5.3 band readings: an uncapped trigger is allowed except on hard; the sustained maximum equals the tier cap; a party-facing hard allows more than "turns:1 or a trigger with cap 1" (sustained max 1, windows, charges, decay), **flagged for the CO owner**; a record's band is checked enemy-facing at load and party-facing at insert on a party holder.
+- Steeled's source is the holder itself; Unyielding is granted when the lost-turn count reaches exactly 2.
+- Carried to M1-12b (also in M1-12's roadmap entry): a fight won by a trigger answering a round-end event is not yet stopped before the next `TurnStarted`; the party band of an out-of-combat list on a party holder; the condition events raise no rule event yet.
+
 ## All steps in order
 
 **M0 Skeleton** (complete): M0-01, M0-END.
