@@ -7,9 +7,10 @@ namespace Dungeon.Core;
 /// Line of sight (XI 4.1.2, plan call 15). <see cref="CanSee"/> is the conjunction of two symmetric
 /// conditions, so it is symmetric:
 /// (a) Albert Ford's integer symmetric shadowcasting from <c>a</c> lights <c>b</c>;
-/// (b) the segment from <c>a</c>'s centre to <c>b</c>'s centre passes through no square corner whose
-/// two orthogonal neighbours across the crossing are both walls (the corner-crack rule: sight is
-/// blocked on a diagonal only when both orthogonal neighbours block sight).
+/// (b) the segment from <c>a</c>'s centre to <c>b</c>'s centre meets no sealed crack: a crack is two
+/// walls touching only at a corner, sealed by the closed segment joining their centres (so sight is
+/// blocked on a diagonal when both orthogonal neighbours block sight, and a ray cannot slip through
+/// the crack off its exact corner either; one wall alone is no crack).
 /// Only walls block sight in M1; squares off the map count as walls. Units never block sight.
 /// Integer arithmetic only: Ford's slopes are kept as fractions.
 /// </summary>
@@ -137,43 +138,54 @@ public static class Sight
     /// <summary>n/d rounded to the nearest integer, ties down: ceil((2n − d) / 2d). d is positive.</summary>
     private static long RoundTiesDown(long n, long d) => -IntMath.FloorDiv(d - 2 * n, 2 * d);
 
-    // ---- (b) the corner-crack rule over the centre-to-centre segment ----
+    // ---- (b) the crack-seal rule over the centre-to-centre segment ----
 
     /// <summary>
-    /// In doubled coordinates square centres are even and square corners are odd on both axes. The
-    /// lattice points on the segment from 2a to 2b are 2a + k·(D / g), k = 0..g, with D = 2(b − a)
-    /// and g = gcd(|Dx|, |Dy|); the corners among them are those odd on both axes. At a corner the
-    /// segment crosses diagonally from one square to the opposite one, and the other two squares
-    /// touching the corner are the orthogonal neighbours across the crossing. The pair is the same
-    /// in both directions, so the rule is symmetric.
+    /// A crack is two blocking squares p and q that touch only at a corner, q = p + (±1, ±1); the
+    /// closed segment joining their centres seals it. In doubled coordinates (square centres even,
+    /// corners odd) the segment from 2a to 2b is blocked when it meets the closed segment 2p→2q of
+    /// any crack. Every such crack lies in the bounding box of a..b expanded by 1 (any point of 2p→2q
+    /// is within one square of p and of q on each axis), so only that box is scanned. Segment
+    /// intersection does not depend on the order of a and b, so the rule is symmetric; it includes the
+    /// exact-corner case because 2p→2q passes through the shared corner. One wall alone is no crack,
+    /// so sight still glances past a single corner.
     /// </summary>
     private static bool CrossesCrack(GridMap map, GridPos a, GridPos b)
     {
-        long dx = 2 * ((long)b.X - a.X);
-        long dy = 2 * ((long)b.Y - a.Y);
-        if (dx == 0 || dy == 0)
+        long ax = 2L * a.X;
+        long ay = 2L * a.Y;
+        long bx = 2L * b.X;
+        long by = 2L * b.Y;
+        long minX = Math.Min(a.X, b.X) - 1L;
+        long maxX = Math.Max(a.X, b.X) + 1L;
+        long minY = Math.Min(a.Y, b.Y) - 1L;
+        long maxY = Math.Max(a.Y, b.Y) + 1L;
+        for (long py = minY; py < maxY; py++)
         {
-            return false; // an axis-aligned segment between centres never meets a corner
-        }
-
-        long g = Gcd(Math.Abs(dx), Math.Abs(dy));
-        long stepX = IntMath.FloorDiv(dx, g);
-        long stepY = IntMath.FloorDiv(dy, g);
-        long sx = Math.Sign(dx);
-        long sy = Math.Sign(dy);
-        for (long k = 1; k < g; k++)
-        {
-            long cx = 2L * a.X + k * stepX;
-            long cy = 2L * a.Y + k * stepY;
-            if (IntMath.FloorMod(cx, 2) == 1 && IntMath.FloorMod(cy, 2) == 1)
+            for (long px = minX; px <= maxX; px++)
             {
-                var side1 = new GridPos(
-                    checked((int)IntMath.FloorDiv(cx + sx, 2)), checked((int)IntMath.FloorDiv(cy - sy, 2)));
-                var side2 = new GridPos(
-                    checked((int)IntMath.FloorDiv(cx - sx, 2)), checked((int)IntMath.FloorDiv(cy + sy, 2)));
-                if (Opaque(map, side1) && Opaque(map, side2))
+                var p = new GridPos(checked((int)px), checked((int)py));
+                if (!Opaque(map, p))
                 {
-                    return true;
+                    continue;
+                }
+
+                // q one row below p, one column either side: each crack is visited once, from its
+                // upper square.
+                for (long sx = -1; sx <= 1; sx += 2)
+                {
+                    long qx = px + sx;
+                    if (qx < minX || qx > maxX)
+                    {
+                        continue;
+                    }
+
+                    var q = new GridPos(checked((int)qx), checked((int)(py + 1)));
+                    if (Opaque(map, q)
+                        && SegmentsMeet(ax, ay, bx, by, 2 * px, 2 * py, 2 * qx, 2 * (py + 1)))
+                    {
+                        return true;
+                    }
                 }
             }
         }
@@ -181,15 +193,29 @@ public static class Sight
         return false;
     }
 
-    private static long Gcd(long x, long y)
+    /// <summary>Closed segments p1→p2 and q1→q2 share a point (touching and collinear cases included).</summary>
+    private static bool SegmentsMeet(long p1x, long p1y, long p2x, long p2y, long q1x, long q1y, long q2x, long q2y)
     {
-        while (y != 0)
+        int d1 = Orientation(q1x, q1y, q2x, q2y, p1x, p1y);
+        int d2 = Orientation(q1x, q1y, q2x, q2y, p2x, p2y);
+        int d3 = Orientation(p1x, p1y, p2x, p2y, q1x, q1y);
+        int d4 = Orientation(p1x, p1y, p2x, p2y, q2x, q2y);
+        if (d1 != d2 && d3 != d4 && d1 != 0 && d2 != 0 && d3 != 0 && d4 != 0)
         {
-            long t = IntMath.FloorMod(x, y);
-            x = y;
-            y = t;
+            return true;
         }
 
-        return x;
+        return (d1 == 0 && OnSegment(q1x, q1y, q2x, q2y, p1x, p1y))
+            || (d2 == 0 && OnSegment(q1x, q1y, q2x, q2y, p2x, p2y))
+            || (d3 == 0 && OnSegment(p1x, p1y, p2x, p2y, q1x, q1y))
+            || (d4 == 0 && OnSegment(p1x, p1y, p2x, p2y, q2x, q2y));
     }
+
+    /// <summary>Sign of the cross product (b − a) × (c − a).</summary>
+    private static int Orientation(long ax, long ay, long bx, long by, long cx, long cy) =>
+        Math.Sign(((bx - ax) * (cy - ay)) - ((by - ay) * (cx - ax)));
+
+    /// <summary>c, known collinear with a→b, lies within the segment's bounding box.</summary>
+    private static bool OnSegment(long ax, long ay, long bx, long by, long cx, long cy) =>
+        cx >= Math.Min(ax, bx) && cx <= Math.Max(ax, bx) && cy >= Math.Min(ay, by) && cy <= Math.Max(ay, by);
 }

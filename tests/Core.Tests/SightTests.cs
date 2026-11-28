@@ -70,6 +70,45 @@ public class SightTests
     }
 
     [Fact]
+    public void A_sealed_crack_hides_the_wedge_beyond_it()
+    {
+        // A room's NE inner corner with the corner square open: walls along the north row (x <= 6,
+        // y = 5) and the east column (x = 7, y >= 6). (6, 6) meets (7, 5) only across the crack
+        // between (6, 5) and (7, 6), so nothing past that crack is visible.
+        var map = Room();
+        for (int x = 0; x <= 6; x++) map = map.With(new GridPos(x, 5), Tile.Wall);
+        for (int y = 6; y < 13; y++) map = map.With(new GridPos(7, y), Tile.Wall);
+
+        Assert.False(Sight.CanSee(map, O, new GridPos(7, 5)));
+        Assert.False(Sight.CanSee(map, O, new GridPos(8, 5)));
+        Assert.False(Sight.CanSee(map, O, new GridPos(9, 4)));
+        for (int y = 0; y <= 5; y++)
+            for (int x = 7; x < 13; x++)
+                Assert.False(Sight.CanSee(map, O, new GridPos(x, y)), $"({x}, {y}) is past the sealed crack");
+
+        Assert.True(Sight.CanSee(map, O, new GridPos(2, 8))); // control: the room side stays visible
+    }
+
+    [Fact]
+    public void A_diagonal_wall_line_of_corner_touching_walls_hides_its_far_side()
+    {
+        // Walls on x − y = 1 across a 13×13 map: movement and lines cannot cross, nor can sight.
+        var map = Room();
+        for (int x = 1; x < 13; x++) map = map.With(new GridPos(x, x - 1), Tile.Wall);
+
+        for (int y = 0; y < 13; y++)
+        {
+            for (int x = 0; x < 13; x++)
+            {
+                if (x - y >= 2)
+                    Assert.False(Sight.CanSee(map, O, new GridPos(x, y)), $"({x}, {y}) is on the far side");
+            }
+        }
+
+        Assert.True(Sight.CanSee(map, O, new GridPos(0, 12))); // control: the near side stays visible
+    }
+
+    [Fact]
     public void CanSee_is_symmetric()
     {
         var rng = new System.Random(20261127);
