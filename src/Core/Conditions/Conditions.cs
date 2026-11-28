@@ -151,11 +151,12 @@ public static class Conditions
     /// <summary>
     /// Ends the condition instance <paramref name="seq"/> for <paramref name="reason"/> (plan call 7): removes it and emits
     /// <see cref="ConditionEnded"/>; then, at once, ends every instance it sustains (<see cref="ConditionState.SustainedBy"/>)
-    /// with <see cref="ConditionEndReason.Ended"/>, in seq order, each through this method; then, if the ended instance
+    /// with <see cref="ConditionEndReason.Ended"/> (with <see cref="ConditionEndReason.CombatStart"/> when this end is a
+    /// combat-start end, so the whole cascade is), in seq order, each through this method; then, if the ended instance
     /// was hard or carries <see cref="EngineStateTag"/>, grants Steeled to its holder (CO 7.2), from the holder itself,
-    /// unless the reason is <see cref="ConditionEndReason.CombatStart"/> (so a combat-start end grants no Steeled, CO 5.5,
-    /// 7.2, but still ends what the instance sustains). Every end except a dead holder's own instances comes through here;
-    /// the holder must be in the state. Throws
+    /// unless the reason is <see cref="ConditionEndReason.CombatStart"/>. So no Steeled follows any end inside the
+    /// combat-start step, the cascade included (CO 5.5, 7.2). Every end except a dead holder's own instances comes
+    /// through here; the holder must be in the state. Throws
     /// <see cref="ArgumentException"/> if no instance has the seq or it has no condition part, and
     /// <see cref="InvalidOperationException"/> as <see cref="Read"/> does.
     /// </summary>
@@ -186,7 +187,9 @@ public static class Conditions
         {
             if (Find(s, dependent) is not null)
             {
-                var (more, next) = End(rules, s, dependent, ConditionEndReason.Ended);
+                // A combat-start end carries its reason down the cascade, so no dependent grants Steeled (CO 7.2).
+                var cascade = reason == ConditionEndReason.CombatStart ? ConditionEndReason.CombatStart : ConditionEndReason.Ended;
+                var (more, next) = End(rules, s, dependent, cascade);
                 events.AddRange(more);
                 s = next;
             }
@@ -208,8 +211,9 @@ public static class Conditions
     /// condition instances in seq order:
     /// <list type="bullet">
     /// <item>an instance whose definition is flagged <c>combatStartEnds</c> ends with
-    /// <see cref="ConditionEndReason.CombatStart"/> (<see cref="End"/>, which grants no Steeled for that reason, CO 7.2;
-    /// what it sustains ends with it);</item>
+    /// <see cref="ConditionEndReason.CombatStart"/> through <see cref="End"/>; what it sustains ends with it, also with
+    /// <see cref="ConditionEndReason.CombatStart"/>, and no Steeled follows any of these ends (CO 7.2 excepts
+    /// <c>combatStart</c>);</item>
     /// <item>an instance running on its record's out-of-combat terms switches to the record's in-combat
     /// <see cref="ConditionDefinition.Duration"/>, counted from now, when that list's effective end comes sooner than what
     /// it has left (CO 5.5, 6.3): its <see cref="ConditionState.Terms"/> are replaced, its

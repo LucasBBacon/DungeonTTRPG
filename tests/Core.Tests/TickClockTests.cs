@@ -33,7 +33,8 @@ public class TickClockTests
 
     private static readonly HookRegistry Hooks = HookRegistry.Core
         .With("test.insert", InsertOnce)
-        .With("test.mark", ctx => ctx.State);
+        .With("test.mark", ctx => ctx.State)
+        .With("test.wall", WallEast);
 
     // One-shot trigger effects on unitMoved (the step phase): each inserts a condition (args: id, holder, source).
     private static readonly string[] TriggerEffects =
@@ -43,10 +44,12 @@ public class TickClockTests
         Trigger("t.move.mark_end", "unitMoved", "holder", "test.insert", MarkEnd, "3", "holder"),
         Trigger("t.move.mark_start", "unitMoved", "holder", "test.insert", MarkStart, "3", "holder"),
         Trigger("t.start.mark", "turnStarted", "any", "test.mark"),
+        Trigger("t.hurt.wall", "test.damageDealt", "holder", "test.wall"),
     ];
 
     private static readonly RulesContext TickRules = RulesContext.Create(
         Load([.. EffectRecords, .. TriggerEffects], Records),
+        events: [.. RuleEvents.Core, RuleEvent.Of<DamageDealt>("test.damageDealt", e => e.Target)],
         hooks: Hooks,
         pools: AbilityFixtures.PoolTable,
         abilities: AbilityFixtures.Definitions);
@@ -304,6 +307,21 @@ public class TickClockTests
         Assert.Empty(drawing.Events);
     }
 
+    [Fact]
+    public void A_command_the_turn_start_steps_make_invalid_is_refused_after_all_and_their_effects_are_discarded()
+    {
+        // P1's Burn ticks in its turn-start step; a trigger answering that DamageDealt walls (1, 1), the square P1 steps
+        // onto. The move passes the first check on the stored state and is refused at the step phase.
+        var s = Give(Insert(Calm(), Burn, P1, null), P1, "t.hurt.wall");
+        Assert.Equal(CommandError.None, Engine.CheckStep(s, s.FindUnit(P1)!, Direction.E));
+
+        var r = Engine.Apply(s, East, TickRules);
+
+        Assert.Equal(CommandError.Blocked, r.Error);
+        Assert.Same(s, r.State);
+        Assert.Empty(r.Events);
+    }
+
     // --- The counting test out of combat (CO 5.2: the step phase is the Act phase) ---
 
     [Fact]
@@ -344,6 +362,14 @@ public class TickClockTests
     // A trait with one trigger on `on` (scope `scope`) running `hook` with `args`.
     private static string Trigger(string id, string on, string scope, string hook, params string[] args) =>
         $$"""{"id": "{{id}}", "kind": "trait", "triggers": [{"on": "{{on}}", "scope": "{{scope}}", "do": [{"hook": "{{hook}}", "args": [{{string.Join(", ", args.Select(a => "\"" + a + "\""))}}]}]}]}""";
+
+    // test.wall: the square east of the holder becomes a wall.
+    private static GameState WallEast(HookContext ctx)
+    {
+        var at = ctx.State.FindUnit(ctx.Instance.Holder)!.Pos.Step(Direction.E);
+        ctx.Emit(new TileChanged(at, Tile.Wall));
+        return ctx.State with { Map = ctx.State.Map.With(at, Tile.Wall) };
+    }
 
     // test.insert: args (condition, holder, source), each unit "holder" or an id; then the trigger's own instance goes, so
     // it fires once.

@@ -156,6 +156,29 @@ public class CombatStartConditionTests
     }
 
     [Fact]
+    public void A_combatStart_end_ends_what_it_sustains_with_combatStart_and_no_Steeled()
+    {
+        // Asleep (combatStartEnds) on U1 sustains a hard Stun on U3: both end with CombatStart, and neither grants Steeled.
+        var s = Insert(Calm(), Asleep, U1, U3);
+        long sustainer = Seq(s, Asleep, U1);
+        s = Insert(s, Stun, U3, U1, new ConditionInsert(SustainedBy: sustainer));
+        long dependent = Seq(s, Stun, U3);
+
+        var (events, next) = Turns.BeginCombat(StartRules, s);
+
+        Assert.Equal<GameEvent>(
+            [
+                new ConditionEnded(sustainer, Asleep, U1, ConditionEndReason.CombatStart),
+                new ConditionEnded(dependent, Stun, U3, ConditionEndReason.CombatStart),
+            ],
+            events.Skip(1).ToArray());
+        Assert.IsType<CombatStarted>(events[0]);
+        Assert.DoesNotContain(events, e => e is ConditionApplied);
+        Assert.Empty(next.Effects);
+        Assert.Empty(Turns.CombatStartView(StartRules, s).Effects);
+    }
+
+    [Fact]
     public void Out_of_combat_durations_switch_when_shorter()
     {
         // Both land out of combat on their out-of-combat terms, and one tick counts a turn on each.
