@@ -230,7 +230,14 @@ public sealed class AbilitiesKind : ContentKind
             result.Add(new DamagePart(type, dice, sides, d.Flat ?? 0));
         }
 
-        return result.MoveToImmutable();
+        // The preview's exactness bound (plan call 14): a part past it names its field, the whole list names the list.
+        var parts = result.MoveToImmutable();
+        if (AbilityUse.CheckPreviewable(parts) is { } bad)
+        {
+            throw Fail(file, bad.Part < 0 ? field : Member(Item(field, bad.Part), bad.Field), bad.Problem);
+        }
+
+        return parts;
     }
 
     // "NdS": two whole numbers of at least 1 around a lower-case d.

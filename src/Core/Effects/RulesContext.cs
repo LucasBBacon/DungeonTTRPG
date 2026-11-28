@@ -184,6 +184,14 @@ public sealed class RulesContext
             throw new ContentLoadException(ability.File, Member(Member(at, "pool"), "id"), $"\"{use.PoolId}\" names no pool.");
         }
 
+        // The preview's exactness bound (plan call 14), for code-built definitions too.
+        if (AbilityUse.CheckPreviewable(ability.Damage) is { } bad)
+        {
+            string damage = Member(at, "damage");
+            throw new ContentLoadException(
+                ability.File, bad.Part < 0 ? damage : Member(Item(damage, bad.Part), bad.Field), bad.Problem);
+        }
+
         for (int e = 0; e < ability.Effects.Length; e++)
         {
             if (Find(_definitions, ability.Effects[e], d => d.Id) is null)

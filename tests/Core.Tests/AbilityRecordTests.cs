@@ -272,6 +272,10 @@ public class AbilityRecordTests
     [InlineData("""{"type": "fire", "dice": "2D6"}""", "$.abilities[0].damage[0].dice")]
     [InlineData("""{"type": "fire", "dice": "-2d6"}""", "$.abilities[0].damage[0].dice")]
     [InlineData("""{"type": "fire", "dice": "99999999999d6"}""", "$.abilities[0].damage[0].dice")]
+    [InlineData("""{"type": "fire", "dice": "21d6"}""", "$.abilities[0].damage[0].dice")]
+    [InlineData("""{"type": "fire", "dice": "1d101"}""", "$.abilities[0].damage[0].dice")]
+    [InlineData("""{"type": "fire", "flat": 10000}""", "$.abilities[0].damage[0].flat")]
+    [InlineData("""{"type": "fire", "dice": "1d6", "flat": -10000}""", "$.abilities[0].damage[0].flat")]
     public void A_malformed_damage_part_is_refused(string part, string path)
     {
         var ex = LoadFails(Abilities($$"""
@@ -380,6 +384,38 @@ public class AbilityRecordTests
         Assert.Throws<ArgumentException>(() => RulesContext.Create(set, abilities: [built]));
         Assert.Throws<ArgumentException>(() => RulesContext.Create(set, abilities: [built with { Id = "test.x" }, built with { Id = "test.x" }]));
         Assert.Throws<ArgumentException>(() => RulesContext.Create(set, abilities: [null!]));
+    }
+
+    [Fact]
+    public void A_damage_list_past_the_preview_bound_is_refused()
+    {
+        // The preview's exactness bound (M1-11 Task 5 fix): 9d3 fits, 10d3 does not; 20d100+9999 is the largest part.
+        string Record(string damage) =>
+            $$"""{"id": "test.a", "kind": "atWill", "cost": "action", "target": {"shape": "single", "range": 1}, "damage": [{{damage}}]}""";
+
+        Assert.NotNull(Load(Abilities(Record("""{"type": "fire", "dice": "9d3"}"""))).Find<AbilityDefinition>("test.a"));
+        Assert.NotNull(Load(Abilities(Record("""{"type": "fire", "dice": "20d100", "flat": 9999}"""))).Find<AbilityDefinition>("test.a"));
+        var ex = LoadFails(Abilities(Record("""{"type": "fire", "dice": "10d3"}""")));
+        Assert.Equal(AbilitiesFile, ex.File);
+        Assert.Equal("$.abilities[0].damage", ex.Field);
+        Assert.Equal("$.abilities[0].damage", LoadFails(Abilities(Record("""{"type": "fire", "dice": "6d3"}, {"type": "cold", "dice": "6d3"}"""))).Field);
+    }
+
+    [Theory]
+    [InlineData(21, 6, 0, "$.abilities[test.built].damage[0].dice")]
+    [InlineData(1, 101, 0, "$.abilities[test.built].damage[0].dice")]
+    [InlineData(0, 0, -10000, "$.abilities[test.built].damage[0].flat")]
+    [InlineData(10, 3, 0, "$.abilities[test.built].damage")]
+    public void A_code_built_damage_list_past_the_preview_bound_is_refused(int dice, int sides, int flat, string path)
+    {
+        var built = new AbilityDefinition(
+            "code", "test.built", AbilityKind.Limited, new AbilityCost(CostKind.Action), null,
+            new TargetSpec(TargetShape.Single, 1, 1, 0, false), null, [new DamagePart(DamageType.Fire, dice, sides, flat)], [], null);
+
+        var ex = Assert.Throws<ContentLoadException>(() => RulesContext.Create(Load(), abilities: [built]));
+        Assert.Equal("code", ex.File);
+        Assert.Equal(path, ex.Field);
+        Assert.NotNull(RulesContext.Create(Load(), abilities: [built with { Damage = [new DamagePart(DamageType.Fire, 9, 3, 0)] }]));
     }
 
     [Fact]

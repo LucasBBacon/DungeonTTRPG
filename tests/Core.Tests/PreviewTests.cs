@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Numerics;
 using Dungeon.Core.AbilityModel;
 using Dungeon.Core.Content;
 using Dungeon.Core.Damage;
@@ -34,6 +35,12 @@ public class PreviewTests
     /// <summary>No roll, single, range 2: 2d6−3 lightning, so the per-part minimum of 1 binds.</summary>
     private const string Zap = "test.pv.zap";
 
+    /// <summary>The largest even-sided attack the bound allows: 20d100+9999 slashing, 20d100 fire, 20d2 cold.</summary>
+    private const string Huge = "test.pv.huge";
+
+    /// <summary>An odd-sided attack on the exactness bound: 9d3 lightning (10d3 is refused at load).</summary>
+    private const string Edge = "test.pv.edge";
+
     private const string AttackAdv = "pv.attack.adv";
     private const string AttackDis = "pv.attack.dis";
     private const string AgainstDis = "pv.against.dis";
@@ -53,6 +60,11 @@ public class PreviewTests
             new SaveResolve(Save.Reflex), [new(DamageType.Fire, 1, 6, 0), new(DamageType.Cold, 2, 4, 0)], [], null),
         new(AbilityFixtures.File, Zap, AbilityKind.Limited, new AbilityCost(CostKind.Action), null, new TargetSpec(TargetShape.Single, 2, 1, 0, false),
             null, [new(DamageType.Lightning, 2, 6, -3)], [], null),
+        new(AbilityFixtures.File, Huge, AbilityKind.Limited, new AbilityCost(CostKind.Action), null, new TargetSpec(TargetShape.Single, 1, 1, 0, false),
+            new AttackResolve(new AttackSpec(Ability.Strength, true)),
+            [new(DamageType.Slashing, 20, 100, 9999), new(DamageType.Fire, 20, 100, 0), new(DamageType.Cold, 20, 2, 0)], [], null),
+        new(AbilityFixtures.File, Edge, AbilityKind.Limited, new AbilityCost(CostKind.Action), null, new TargetSpec(TargetShape.Single, 1, 1, 0, false),
+            new AttackResolve(new AttackSpec(Ability.Strength, true)), [new(DamageType.Lightning, 9, 3, 0)], [], null),
     ];
 
     // Every fixture ability but the ward: reactions are off (AB 8.3).
@@ -73,6 +85,7 @@ public class PreviewTests
             {
                 ContestKit.Def("pv." + DamageIds.Resistant(t), "trait", Flag(DamageIds.Resistant(t))),
                 ContestKit.Def("pv." + DamageIds.Weak(t), "trait", Flag(DamageIds.Weak(t))),
+                ContestKit.Def("pv." + DamageIds.Immune(t), "trait", Flag(DamageIds.Immune(t))),
             }),
             .. Enumerable.Range(-30, 61).Where(n => n != 0).SelectMany(n => new[]
             {
@@ -180,6 +193,187 @@ public class PreviewTests
 
     private static long BaseBonus(GameState s) =>
         Contests.PrepareAttack(Rules, s, Hero, Two, new AttackSpec(Ability.Strength, true)).Bonus;
+
+    // --- The exactness bound (review fix 1) ---
+
+    public static TheoryData<string, string, string> WorstCases()
+    {
+        var data = new TheoryData<string, string, string>();
+        foreach (var ability in new[] { Huge, Edge })
+        {
+            foreach (var step in new[] { "", "resistant.", "weak.", "immune." })
+            {
+                foreach (var mode in new[] { "", AttackAdv, AttackDis })
+                {
+                    data.Add(ability, step, mode);
+                }
+            }
+        }
+
+        return data;
+    }
+
+    [Theory]
+    [MemberData(nameof(WorstCases))]
+    public void The_largest_allowed_parts_preview_exactly(string abilityId, string step, string mode)
+    {
+        // Bonus 9 against 20: normal hits on 11-19 (or their pairs), a crit on 20.
+        var s = Set(Set(Duel(), Hero, "attack", 9 - BaseBonus(Duel())), Two, "armourClass", 20);
+        if (step.Length > 0)
+        {
+            foreach (var type in Types)
+            {
+                s = On(s, Two, "pv." + step + type.ToString().ToLowerInvariant());
+            }
+        }
+
+        if (mode.Length > 0)
+        {
+            s = On(s, Hero, mode);
+        }
+
+        Assert.Null(AbilityUse.CheckPreviewable(Rules.Ability(abilityId).Damage));
+        var t = Assert.Single(AbilityUse.Preview(Rules, s, Hero, abilityId, new UnitsTarget([Two])).Targets);
+        var (normal, crits, den) = Faces(t);
+        Assert.True(crits > 0 && normal > 0);
+
+        // An independent oracle, in BigInteger: per part, the naive dice-sum distribution and Damage.Resolve on a
+        // one-part roll for each sum; for the even-sided Huge, whose crit has 40d100, the closed form of the bound's proof.
+        var (nNum, nDen) = abilityId == Huge ? ClosedForm(s, t, false) : Naive(s, t, false);
+        var (cNum, cDen) = abilityId == Huge ? ClosedForm(s, t, true) : Naive(s, t, true);
+        var num = (normal * nNum * cDen) + (crits * cNum * nDen);
+        var q = den * nDen * cDen;
+        Assert.Equal(num * t.ExpectedDamage.Q, q * t.ExpectedDamage.P);
+    }
+
+    [Fact]
+    public void The_bound_sits_where_the_proof_puts_it()
+    {
+        static ImmutableArray<DamagePart> One(int dice, int sides, int flat) => [new(DamageType.Fire, dice, sides, flat)];
+
+        Assert.Null(AbilityUse.CheckPreviewable(One(9, 3, 0)));
+        Assert.Equal((-1, ""), Where(AbilityUse.CheckPreviewable(One(10, 3, 0))));
+        Assert.Null(AbilityUse.CheckPreviewable(One(20, 100, 9999)));
+        Assert.Null(AbilityUse.CheckPreviewable(One(8, 8, 0)));
+        Assert.Equal((0, "dice"), Where(AbilityUse.CheckPreviewable(One(21, 6, 0))));
+        Assert.Equal((0, "dice"), Where(AbilityUse.CheckPreviewable(One(1, 101, 0))));
+        Assert.Equal((0, "flat"), Where(AbilityUse.CheckPreviewable(One(0, 0, 10000))));
+        Assert.Equal((0, "flat"), Where(AbilityUse.CheckPreviewable(One(0, 0, -10000))));
+
+        // A negative flat that can take even-sided dice below 2 counts sides^dice: 8d8-10 does so only without a crit
+        // (8^8 · 4) and fits; 8d8-20 does so with one too (8^8 · 8^16) and is past the bound.
+        Assert.Null(AbilityUse.CheckPreviewable(One(8, 8, -10)));
+        Assert.Equal((-1, ""), Where(AbilityUse.CheckPreviewable(One(8, 8, -20))));
+
+        // The proof's lemma, by brute force on small parts at every step: the reduced denominator of a part's mean
+        // divides L(m).
+        foreach (var lstep in Enum.GetValues<LadderStep>())
+        {
+            for (int sides = 1; sides <= 6; sides++)
+            {
+                for (int m = 0; m <= 4; m++)
+                {
+                    for (int flat = -6; flat <= 3; flat++)
+                    {
+                        long total = 0, outcomes = 0;
+                        foreach (var faces in Outcomes(m, sides))
+                        {
+                            total += Ladder.Apply(lstep, flat + faces.Sum());
+                            outcomes++;
+                        }
+
+                        var mean = Ratio(total, outcomes);
+                        long bound = 1;
+                        if (m > 0 && sides > 1)
+                        {
+                            bound = sides % 2 == 0 && flat + m >= 2 ? 4 : (long)BigInteger.Pow(sides, m);
+                        }
+
+                        Assert.True(bound % mean.Q == 0, $"{lstep} {m}d{sides} {flat}: {mean}");
+                    }
+                }
+            }
+        }
+    }
+
+    private static (int Part, string Field) Where((int Part, string Field, string Problem)? bad) =>
+        (bad!.Value.Part, bad.Value.Field);
+
+    // The mean dealt total over one case, as an unreduced BigInteger fraction: per part, the naive convolution of its
+    // dice, and Damage.Resolve on a one-part roll whose faces reach each sum.
+    private static (BigInteger Num, BigInteger Den) Naive(GameState s, TargetPreview t, bool crit)
+    {
+        (BigInteger Num, BigInteger Den) sum = (0, 1);
+        foreach (var part in t.Parts)
+        {
+            int m = crit ? 2 * part.Dice : part.Dice;
+            var counts = new BigInteger[(m * part.Sides) + 1];
+            counts[0] = 1;
+            for (int d = 0; d < m; d++)
+            {
+                var next = new BigInteger[counts.Length];
+                for (int k = 0; k < counts.Length; k++)
+                {
+                    for (int f = 1; f <= part.Sides && k + f < counts.Length; f++)
+                    {
+                        next[k + f] += counts[k];
+                    }
+                }
+
+                counts = next;
+            }
+
+            BigInteger num = 0, den = 0;
+            for (int k = m; k < counts.Length; k++)
+            {
+                if (counts[k].IsZero)
+                {
+                    continue;
+                }
+
+                // m faces summing to k: all ones, then raise each in turn up to its sides.
+                var faces = Enumerable.Repeat(1, m).ToArray();
+                int left = k - m;
+                for (int i = 0; i < m && left > 0; i++)
+                {
+                    int add = Math.Min(left, part.Sides - 1);
+                    faces[i] += add;
+                    left -= add;
+                }
+
+                var roll = new DamageRoll([new PartRoll(part, [.. faces], part.Flat + k)], crit);
+                num += counts[k] * Damage.Resolve(Rules, s, t.Target, roll).Total;
+                den += counts[k];
+            }
+
+            sum = ((sum.Num * den) + (num * sum.Den), sum.Den * den);
+        }
+
+        return sum;
+    }
+
+    // The closed form for even-sided parts whose raw amount is always at least 2: E[raw] = flat + m(s + 1) / 2 and
+    // P(raw odd) = 1/2, through the target's step; over a denominator of 4.
+    private static (BigInteger Num, BigInteger Den) ClosedForm(GameState s, TargetPreview t, bool crit)
+    {
+        BigInteger quarter = 0;
+        foreach (var part in t.Parts)
+        {
+            int m = crit ? 2 * part.Dice : part.Dice;
+            Assert.True(part.Sides % 2 == 0 && part.Flat + m >= 2);
+            BigInteger raw4 = (4L * part.Flat) + (2L * m * (part.Sides + 1)); // 4 E[raw]
+            BigInteger half4 = (raw4 - 2) / 2;                                 // 4 E[floor(raw / 2)] = 4 (E[raw] - 1/2) / 2
+            quarter += Ladder.StepFor(Rules, s, t.Target, part.Type) switch
+            {
+                LadderStep.Normal => raw4,
+                LadderStep.Resistant => half4,
+                LadderStep.Weak => raw4 + half4,
+                _ => BigInteger.Zero,
+            };
+        }
+
+        return (quarter, 4);
+    }
 
     // --- The property (AB 16) ---
 
