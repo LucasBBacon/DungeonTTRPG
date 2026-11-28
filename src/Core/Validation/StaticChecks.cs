@@ -20,5 +20,7 @@ public static class StaticChecks
             new DomainDisjointCheck(),
             new LabelCollisionCheck(),
             new PartyInstantDeathCheck(),
+            new ReactionHasPolicyCheck(),
+            new AreaCapByLevelCheck(),
         ];
 }

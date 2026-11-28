@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
+using Dungeon.Core.AbilityModel;
 using Dungeon.Core.Combat;
 using Dungeon.Core.Content;
 using static Dungeon.Core.Content.ContentJson;
@@ -23,6 +24,7 @@ public sealed class RulesContext
     private readonly ImmutableArray<string> _flags;
     private readonly ImmutableArray<RuleEvent> _events;
     private readonly ImmutableArray<PoolDefinition> _pools;
+    private readonly ImmutableArray<AbilityDefinition> _abilities;
 
     private RulesContext(
         ImmutableArray<EffectDefinition> definitions,
@@ -31,7 +33,8 @@ public sealed class RulesContext
         ImmutableArray<string> flags,
         ImmutableArray<RuleEvent> events,
         HookRegistry hooks,
-        ImmutableArray<PoolDefinition> pools)
+        ImmutableArray<PoolDefinition> pools,
+        ImmutableArray<AbilityDefinition> abilities)
     {
         _definitions = definitions;
         _numbers = numbers;
@@ -41,6 +44,7 @@ public sealed class RulesContext
         _events = events;
         Hooks = hooks;
         _pools = pools;
+        _abilities = abilities;
     }
 
     /// <summary>
@@ -53,7 +57,8 @@ public sealed class RulesContext
         SortedIds(Flags.Core, "flags"),
         SortedEvents(RuleEvents.Core),
         HookRegistry.Core,
-        ImmutableArray<PoolDefinition>.Empty);
+        ImmutableArray<PoolDefinition>.Empty,
+        ImmutableArray<AbilityDefinition>.Empty);
 
     /// <summary>
     /// Builds the context for <paramref name="content"/>'s effect definitions. Each registry defaults to its core
@@ -69,6 +74,9 @@ public sealed class RulesContext
     /// number has no base, has a cap but is not an <see cref="NumberRule.AbilityScore"/> number, or has a floor but is an
     /// <see cref="NumberRule.AbilityScore"/> or <see cref="NumberRule.Speed"/> number, or a pool is null, has an id
     /// that is not a content id, an undefined refill tag or no maximum, or repeats an id.
+    /// The ability table (M1-11 Task 3) is the content's ability records plus the code-built <paramref name="abilities"/>,
+    /// ordinal by id; <see cref="ArgumentException"/> if a definition is null or an id repeats, and
+    /// <see cref="ContentLoadException"/> naming the definition's file and path when a pool or an effect it names does not exist.
     /// </summary>
     public static RulesContext Create(
         ContentSet content,
@@ -77,7 +85,8 @@ public sealed class RulesContext
         ImmutableArray<RuleEvent>? events = null,
         HookRegistry? hooks = null,
         ImmutableArray<string>? flags = null,
-        ImmutableArray<PoolDefinition>? pools = null)
+        ImmutableArray<PoolDefinition>? pools = null,
+        ImmutableArray<AbilityDefinition>? abilities = null)
     {
         ArgumentNullException.ThrowIfNull(content);
         var context = new RulesContext(
@@ -87,7 +96,8 @@ public sealed class RulesContext
             SortedIds(flags ?? Flags.Core, nameof(flags)),
             SortedEvents(events ?? RuleEvents.Core),
             hooks ?? HookRegistry.Core,
-            SortedPools(pools ?? ImmutableArray<PoolDefinition>.Empty));
+            SortedPools(pools ?? ImmutableArray<PoolDefinition>.Empty),
+            SortedAbilities(content.All<AbilityDefinition>(), abilities ?? ImmutableArray<AbilityDefinition>.Empty));
         context.Validate(content);
         return context;
     }
@@ -95,6 +105,13 @@ public sealed class RulesContext
     /// <summary>The effect definition <paramref name="id"/>. Throws <see cref="ArgumentException"/> if there is none.</summary>
     public EffectDefinition Definition(string id) =>
         Find(_definitions, id, d => d.Id) ?? throw new ArgumentException($"No effect definition \"{id}\".", nameof(id));
+
+    /// <summary>The ability <paramref name="id"/>. Throws <see cref="ArgumentException"/> if there is none.</summary>
+    public AbilityDefinition Ability(string id) =>
+        Find(_abilities, id, a => a.Id) ?? throw new ArgumentException($"No ability \"{id}\".", nameof(id));
+
+    /// <summary>The ability table, ordinal by id.</summary>
+    public ImmutableArray<AbilityDefinition> Abilities => _abilities;
 
     /// <summary>The derived number <paramref name="id"/>. Throws <see cref="ArgumentException"/> if there is none.</summary>
     public DerivedNumber Number(string id) =>
@@ -147,6 +164,46 @@ public sealed class RulesContext
                 }
             }
         }
+
+        // Content abilities name their JSON path by file position; code-built ones by id.
+        foreach (var ability in _abilities)
+        {
+            ValidateAbility(content, ability);
+        }
+    }
+
+    private void ValidateAbility(ContentSet content, AbilityDefinition ability)
+    {
+        int index = IndexIn(content, ability);
+        string at = index >= 0 ? Item("$.abilities", index) : $"$.abilities[{ability.Id}]";
+        if (ability.Pool is { } use && FindPool(use.PoolId) is null)
+        {
+            throw new ContentLoadException(ability.File, Member(Member(at, "pool"), "id"), $"\"{use.PoolId}\" names no pool.");
+        }
+
+        for (int e = 0; e < ability.Effects.Length; e++)
+        {
+            if (Find(_definitions, ability.Effects[e], d => d.Id) is null)
+            {
+                throw new ContentLoadException(
+                    ability.File, Item(Member(at, "effects"), e), $"\"{ability.Effects[e]}\" names no effect.");
+            }
+        }
+    }
+
+    // The record's position in its own file, or -1 for a code-built definition, whose path then names the id.
+    private static int IndexIn(ContentSet content, AbilityDefinition ability)
+    {
+        var records = content.RecordsIn(ability.File);
+        for (int i = 0; i < records.Length; i++)
+        {
+            if (ReferenceEquals(records[i], ability))
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     private void ValidateDefinition(EffectDefinition definition, string at)
@@ -275,6 +332,24 @@ public sealed class RulesContext
             if (string.Equals(sorted[i - 1].Id, sorted[i].Id, StringComparison.Ordinal))
             {
                 throw new ArgumentException($"Pool \"{sorted[i].Id}\" is registered twice.", nameof(pools));
+            }
+        }
+
+        return sorted;
+    }
+
+    private static ImmutableArray<AbilityDefinition> SortedAbilities(
+        ImmutableArray<AbilityDefinition> fromContent, ImmutableArray<AbilityDefinition> built)
+    {
+        var sorted = fromContent
+            .Concat(built.Select(a => a ?? throw new ArgumentException("An ability is null.", nameof(built))))
+            .OrderBy(a => a.Id, StringComparer.Ordinal)
+            .ToImmutableArray();
+        for (int i = 1; i < sorted.Length; i++)
+        {
+            if (string.Equals(sorted[i - 1].Id, sorted[i].Id, StringComparison.Ordinal))
+            {
+                throw new ArgumentException($"Ability \"{sorted[i].Id}\" is registered twice.", nameof(built));
             }
         }
 
