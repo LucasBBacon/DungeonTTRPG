@@ -52,14 +52,16 @@ public static class Snapshot
 {
     /// <summary>
     /// The only version this build reads and writes, shared with <see cref="CommandLog"/>.
-    /// Version 7 (M1-10) adds the run, combat and turn state;
+    /// Version 8 (M1-11) adds the before-round-1 marker and the opener mark; later M1-11 tasks add abilities, reaction
+    /// settings and the resolution frame;
+    /// version 7 (M1-10) added the run, combat and turn state;
     /// version 6 (M1-09) added current HP and the HP basis;
     /// version 5 (M1-08) added each unit's stat block;
     /// version 4 (M1-07) added the active effects and the next effect seq;
     /// version 3 (M1-06) added the reproducibility-key header and the run configuration and unlock
     /// snapshots; version 2 (M1-02) stored the run seed and stream counters; version 1 held PCG32 states.
     /// </summary>
-    public const int CurrentVersion = 7;
+    public const int CurrentVersion = 8;
 
     /// <summary>
     /// Writes <paramref name="s"/>. Only the run seed and the stream counters are stored, so a state whose
@@ -106,7 +108,12 @@ public static class Snapshot
                 Stats = StatsDto.From(u.Stats),
                 Hp = u.Hp,
                 Budget = BudgetDto.From(u.Budget),
-                Spent = u.Spent.Select(p => new PoolSpendDto { Pool = p.PoolId, Spent = p.Spent }).ToArray(),
+                Spent = PoolSpendDto.From(u.Spent),
+                Opener = u.Opener is null ? null : new OpenerDto
+                {
+                    Charged = BudgetDto.From(u.Opener.Charged),
+                    TurnPools = PoolSpendDto.From(u.Opener.TurnPools),
+                },
             }).ToArray(),
             Rng = new RngStreamsDto
             {
@@ -139,6 +146,7 @@ public static class Snapshot
                 Current = s.Combat.Current,
                 Round = s.Combat.Round,
                 TurnVacated = s.Combat.TurnVacated,
+                BeforeRound1 = s.Combat.BeforeRound1,
             },
             Ended = s.Ended is null ? null : new RunEndDto
             {
@@ -156,8 +164,9 @@ public static class Snapshot
     /// of 2^60 or more; it never returns a partly loaded state. Stream keys are re-derived from the
     /// run seed, so only the counters come from the file. Active effects must be sorted by seq, with positive,
     /// distinct seqs below <c>nextEffectSeq</c>, content ids, and holder and source units that are in the state.
-    /// The hero, each unit's budget and spent counts are checked by <see cref="GameState.Create"/>, and the combat state,
-    /// the run end and <c>nextEventSeq</c> by the same rules the core holds them to (M1-10 task 1).
+    /// The hero, each unit's budget, spent counts and opener charge are checked by <see cref="GameState.Create"/>, and the
+    /// combat state (the before-round-1 marker included), the opener marks, the run end and <c>nextEventSeq</c> by the
+    /// same rules the core holds them to (M1-10 task 1; M1-11 task 1).
     /// </summary>
     public static GameState Load(string json) => PersistenceJson.Read<StateDto, GameState>(json, FromDto);
 
@@ -184,7 +193,8 @@ public static class Snapshot
                 PersistenceJson.Need(u.Stats, "unit stats").ToStats(),
                 PersistenceJson.Need(u.Hp, "unit hp"),
                 PersistenceJson.Need(u.Budget, "unit budget").ToBudget(),
-                [.. PersistenceJson.Need(u.Spent, "unit spent").Select(p => PersistenceJson.Need(p, "unit spent count").ToSpend())]);
+                PoolSpendDto.ToSpends(PersistenceJson.Need(u.Spent, "unit spent"), "unit spent count"),
+                u.Opener?.ToCharge());
             NeedBoonIds(unit.Boons, $"unit {unit.Id.Value} boons");
             units.Add(unit);
         }
@@ -308,14 +318,15 @@ public static class Snapshot
                 [.. PersistenceJson.Need(c.Order, "combat order").Select(id => new UnitId(id))],
                 PersistenceJson.Need(c.Current, "combat current"),
                 PersistenceJson.Need(c.Round, "combat round"),
-                PersistenceJson.Need(c.TurnVacated, "combat turnVacated"))
+                PersistenceJson.Need(c.TurnVacated, "combat turnVacated"),
+                PersistenceJson.Need(c.BeforeRound1, "combat beforeRound1"))
             : null;
         var ended = dto.Ended is { } e
             ? new RunEnd(PersistenceJson.ParseEnum<RunEndCause>(e.Cause, "run end cause"), e.KillingEventId)
             : null;
 
         // The same rules the core holds these fields to; a breach surfaces as a format error.
-        GameState.CheckRunState(state.Units, state.Hero, combat, ended, nextEventSeq);
+        GameState.CheckRunState(state.Units, state.Hero, combat, ended, nextEventSeq, pending);
 
         return state with
         {
@@ -501,6 +512,19 @@ public static class Snapshot
         [JsonPropertyName("hp"), JsonPropertyOrder(6), JsonRequired] public int? Hp { get; set; }
         [JsonPropertyName("budget"), JsonPropertyOrder(7), JsonRequired] public BudgetDto? Budget { get; set; }
         [JsonPropertyName("spent"), JsonPropertyOrder(8), JsonRequired] public PoolSpendDto?[]? Spent { get; set; }
+        // Required: Save always writes it (as null when the unit holds no opener mark).
+        [JsonPropertyName("opener"), JsonPropertyOrder(9), JsonRequired] public OpenerDto? Opener { get; set; }
+    }
+
+    /// <summary>An opener's charge to its striker's round-1 turn (M1-11 plan call 6).</summary>
+    private sealed class OpenerDto
+    {
+        [JsonPropertyName("charged"), JsonPropertyOrder(0), JsonRequired] public BudgetDto? Charged { get; set; }
+        [JsonPropertyName("turnPools"), JsonPropertyOrder(1), JsonRequired] public PoolSpendDto?[]? TurnPools { get; set; }
+
+        public OpenerCharge ToCharge() => new(
+            PersistenceJson.Need(Charged, "opener charged").ToBudget(),
+            PoolSpendDto.ToSpends(PersistenceJson.Need(TurnPools, "opener turnPools"), "opener turn pool"));
     }
 
     /// <summary>A unit's turn budget (AB 14.2), as used counts and flags.</summary>
@@ -538,17 +562,27 @@ public static class Snapshot
         [JsonPropertyName("pool"), JsonPropertyOrder(0), JsonRequired] public string? Pool { get; set; }
         [JsonPropertyName("spent"), JsonPropertyOrder(1), JsonRequired] public int? Spent { get; set; }
 
+        public static PoolSpendDto[] From(ImmutableArray<PoolSpend> spends) =>
+            spends.Select(p => new PoolSpendDto { Pool = p.PoolId, Spent = p.Spent }).ToArray();
+
+        public static ImmutableArray<PoolSpend> ToSpends(PoolSpendDto?[] dtos, string name) =>
+            [.. dtos.Select(p => PersistenceJson.Need(p, name).ToSpend())];
+
         public PoolSpend ToSpend() => new(
             PersistenceJson.Need(Pool, "spent pool"), PersistenceJson.Need(Spent, "spent count"));
     }
 
-    /// <summary>The fight in progress: the initiative order as unit ids, the current slot, the round.</summary>
+    /// <summary>
+    /// The fight in progress: the initiative order as unit ids, the current slot, the round, and the vacated-turn and
+    /// before-round-1 markers.
+    /// </summary>
     private sealed class CombatDto
     {
         [JsonPropertyName("order"), JsonPropertyOrder(0), JsonRequired] public int[]? Order { get; set; }
         [JsonPropertyName("current"), JsonPropertyOrder(1), JsonRequired] public int? Current { get; set; }
         [JsonPropertyName("round"), JsonPropertyOrder(2), JsonRequired] public long? Round { get; set; }
         [JsonPropertyName("turnVacated"), JsonPropertyOrder(3), JsonRequired] public bool? TurnVacated { get; set; }
+        [JsonPropertyName("beforeRound1"), JsonPropertyOrder(4), JsonRequired] public bool? BeforeRound1 { get; set; }
     }
 
     /// <summary>The run end; the cause by name, the killing event id null unless the hero died.</summary>

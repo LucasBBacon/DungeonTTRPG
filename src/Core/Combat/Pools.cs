@@ -113,6 +113,30 @@ public static class Pools
     }
 
     /// <summary>
+    /// <see cref="Refill"/>, then <paramref name="kept"/>'s counts written back (M1-11 plan call 6: an opener's charge to
+    /// its striker's first turn survives that turn's refill): each kept pool's spent count becomes at least its kept
+    /// count. Throws as <see cref="Refill"/> does.
+    /// </summary>
+    internal static GameState RefillKeeping(
+        RulesContext rules, GameState s, UnitId unit, RefillTag tag, ImmutableArray<PoolSpend> kept)
+    {
+        var next = Refill(rules, s, unit, tag);
+        var refilled = Find(next, unit);
+        var holder = refilled;
+        foreach (var keep in kept)
+        {
+            if (keep.Spent > SpentOf(holder, keep.PoolId))
+            {
+                holder = holder with { Spent = WithSpent(holder.Spent, keep.PoolId, keep.Spent) };
+            }
+        }
+
+        return ReferenceEquals(holder, refilled)
+            ? next
+            : next with { Units = next.Units.SetItem(next.Units.IndexOf(refilled), holder) };
+    }
+
+    /// <summary>
     /// <see cref="Refill"/> for every unit in the state, in id order. Throws as <see cref="Refill"/> does for the tag.
     /// </summary>
     public static GameState RefillAll(RulesContext rules, GameState s, RefillTag tag)

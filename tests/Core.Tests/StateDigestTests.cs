@@ -179,6 +179,41 @@ public class StateDigestTests
         }
     }
 
+    // M1-11: the before-round-1 marker and each field of a unit's opener mark.
+    [Fact]
+    public void The_marker_and_the_opener_mark_reach_the_digest()
+    {
+        var charge = new OpenerCharge(new TurnBudget(0, 1, false, false, false, false), [new PoolSpend("pool.a", 1)]);
+        var hero = Fixtures.U(1, 1, 1) with { Budget = charge.Charged, Spent = charge.TurnPools, Opener = charge };
+        var foe = new Unit(new UnitId(2), new(3, 3), Faction.Enemy, [], EnemyStats, 12);
+        var s = GameState.Create(GridMap.Parse("#####", "#...#", "#.#.#", "#...#", "#####"), [hero, foe], 7) with
+        {
+            Combat = new CombatState([new(2), new(1)], 0, 1, BeforeRound1: true),
+        };
+        var charged = charge.Charged;
+        GameState WithCharge(OpenerCharge? c) => s with { Units = [hero with { Opener = c }, foe] };
+        GameState[] changed =
+        [
+            s with { Combat = s.Combat! with { BeforeRound1 = false } },
+            WithCharge(null),
+            WithCharge(charge with { Charged = charged with { MovementUsed = 1 } }),
+            WithCharge(charge with { Charged = charged with { ActionsUsed = 2 } }),
+            WithCharge(charge with { Charged = charged with { BonusUsed = true } }),
+            WithCharge(charge with { Charged = charged with { ReactionUsed = true } }),
+            WithCharge(charge with { Charged = charged with { FreeUsed = true } }),
+            WithCharge(charge with { Charged = charged with { CampSpent = true } }),
+            WithCharge(charge with { TurnPools = [] }),
+            WithCharge(charge with { TurnPools = [new PoolSpend("pool.b", 1)] }),
+            WithCharge(charge with { TurnPools = [new PoolSpend("pool.a", 2)] }),
+            WithCharge(charge with { TurnPools = [new PoolSpend("pool.a", 1), new PoolSpend("pool.b", 1)] }),
+        ];
+        var baseline = StateDigest.Of(s);
+        for (int i = 0; i < changed.Length; i++)
+        {
+            Assert.True(baseline != StateDigest.Of(changed[i]), $"Change {i} did not reach the digest.");
+        }
+    }
+
     // The killing event id is a sequence id, positive in every state the rules produce; any other is refused.
     [Fact]
     public void A_non_positive_killing_event_id_is_refused()

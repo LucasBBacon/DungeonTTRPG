@@ -9,8 +9,8 @@ namespace Dungeon.Core;
 /// <summary>
 /// The replay core-state hash (SV 4.5): the <see cref="Digest"/> of a <see cref="GameState"/>'s
 /// canonical bytes. Units are a set keyed by id, so their stored order does not matter; boons and
-/// decision options are lists, because their order is data. Active effects are a set keyed by seq. The initiative order
-/// and a unit's spent counts are lists in stored order.
+/// decision options are lists, because their order is data. Active effects are a set keyed by seq. The initiative order,
+/// a unit's spent counts and its opener mark's turn-pool counts are lists in stored order.
 /// Stream keys are derived from the run seed and are not written; a state whose keys disagree with its seed is refused.
 /// </summary>
 public static class StateDigest
@@ -77,7 +77,7 @@ public static class StateDigest
     {
         public void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(9);
+            w.BeginRecord(10);
             w.Int32(0, u.Id.Value);
             w.Int32(1, u.Pos.X);
             w.Int32(2, u.Pos.Y);
@@ -87,6 +87,18 @@ public static class StateDigest
             w.Int32(6, u.Hp);
             w.Record(7, new BudgetRecord(u.Budget));
             w.List(8, u.Spent, (e, spend) => e.Record(0, new SpendRecord(spend)));
+            w.OptionalRecord(9, u.Opener is null ? null : new OpenerRecord(u.Opener));
+            w.EndRecord();
+        }
+    }
+
+    private sealed class OpenerRecord(OpenerCharge o) : ICanonical
+    {
+        public void WriteCanonical(CanonicalWriter w)
+        {
+            w.BeginRecord(2);
+            w.Record(0, new BudgetRecord(o.Charged));
+            w.List(1, o.TurnPools, (e, spend) => e.Record(0, new SpendRecord(spend)));
             w.EndRecord();
         }
     }
@@ -121,11 +133,12 @@ public static class StateDigest
     {
         public void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(4);
+            w.BeginRecord(5);
             w.List(0, c.Order, (e, id) => e.Int32(0, id.Value));
             w.Int32(1, c.Current);
             w.Int64(2, c.Round);
             w.Bool(3, c.TurnVacated);
+            w.Bool(4, c.BeforeRound1);
             w.EndRecord();
         }
     }

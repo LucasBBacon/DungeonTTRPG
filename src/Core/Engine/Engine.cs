@@ -106,8 +106,9 @@ public static class Engine
     /// A one-square move. Out of combat it advances <see cref="GameState.Tick"/> and, as each tick does (AB 6.8; M1-10
     /// plan call 6), first gives every unit a fresh turn budget and refills every <see cref="RefillTag.Turn"/> pool, then
     /// makes the move (the tick's start steps come first, CO 5.5). In combat
-    /// (plan call 8) only the current unit may move, and only with movement left (checked before the square); the move
-    /// spends 1 movement and does not tick.
+    /// (plan call 8) only the current unit may move (no unit while the turn is vacated or the fight is held before round
+    /// 1, M1-11 plan call 7), and only with movement left (checked before the square); the move spends 1 movement and
+    /// does not tick.
     /// </summary>
     private static StepResult ApplyMove(GameState state, MoveCommand move, RulesContext rules)
     {
@@ -127,8 +128,8 @@ public static class Engine
         var combat = state.Combat;
         if (combat is not null)
         {
-            // A vacated turn is held by no one until it resumes.
-            if (combat.TurnVacated || combat.CurrentUnit != unit.Id)
+            // A vacated turn is held by no one until it resumes, and before round 1 no one holds the turn.
+            if (combat.TurnVacated || combat.BeforeRound1 || combat.CurrentUnit != unit.Id)
             {
                 return Reject(state, CommandError.NotYourTurn);
             }
@@ -194,7 +195,7 @@ public static class Engine
 
     /// <summary>
     /// Ends the current unit's turn (M1-10 plan call 9): refused out of combat, for an unknown unit, and out of turn
-    /// (a vacated turn included); otherwise <see cref="Turns.Advance"/>.
+    /// (a vacated turn and a fight held before round 1 included); otherwise <see cref="Turns.Advance"/>.
     /// </summary>
     private static StepResult ApplyEndTurn(GameState state, EndTurnCommand end, RulesContext rules)
     {
@@ -209,7 +210,7 @@ public static class Engine
             return Reject(state, CommandError.UnknownUnit);
         }
 
-        if (combat.TurnVacated || combat.CurrentUnit != end.Unit)
+        if (combat.TurnVacated || combat.BeforeRound1 || combat.CurrentUnit != end.Unit)
         {
             return Reject(state, CommandError.NotYourTurn);
         }

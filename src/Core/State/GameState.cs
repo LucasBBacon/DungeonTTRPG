@@ -18,7 +18,8 @@ public enum Faction { Party, Enemy }
 /// <see cref="Hp"/> is its current HP (DH 7.3: "Each unit stores current HP; the maximum is derived on demand").
 /// <see cref="Budget"/> is its turn budget (AB 14.2) and <see cref="Spent"/> its pool spent counts (AB 6.2), sorted by
 /// pool id in ordinal order, each pool once and each count at least 1. An uninitialised <see cref="Spent"/> is held as
-/// an empty array, so every unit, however built, holds a real one.
+/// an empty array, so every unit, however built, holds a real one. <see cref="Opener"/> is the "opener charged, first
+/// turn not yet started" mark (M1-11 plan call 6), or null.
 /// </summary>
 public sealed record Unit(
     UnitId Id,
@@ -28,7 +29,8 @@ public sealed record Unit(
     UnitStats Stats,
     int Hp,
     TurnBudget Budget = default,
-    ImmutableArray<PoolSpend> Spent = default)
+    ImmutableArray<PoolSpend> Spent = default,
+    OpenerCharge? Opener = null)
 {
     private readonly ImmutableArray<PoolSpend> _spent = Spent.IsDefault ? [] : Spent;
 
@@ -168,12 +170,18 @@ public sealed record GameState(
     /// Checks the run fields <see cref="Create"/> does not receive, against <paramref name="units"/>; the save loader
     /// applies it (M1-10 task 1). <paramref name="nextEventSeq"/> is at least 1. A combat state has an initialised order
     /// of distinct units in the state, a round of at least 1, and <c>Current</c> in [0, order length), or equal to the
-    /// order length only when its turn is vacated. A run end has a defined cause and a killing event id exactly when the
-    /// cause is <see cref="RunEndCause.HeroDeath"/>, from 1 to below <paramref name="nextEventSeq"/>; a hero death also
-    /// needs a <paramref name="hero"/>, on 0 HP. Throws <see cref="ArgumentException"/> naming the problem.
+    /// order length only when its turn is vacated. The before-round-1 marker (M1-11 plan call 7) needs round 1, current
+    /// 0, no vacated turn and a non-empty order, and a <paramref name="pending"/> decision or a run end (with neither,
+    /// round 1 would already have started). An opener mark (plan call 6) needs combat in round 1, its unit in the order
+    /// and that unit's round-1 turn not yet started (the marker is set, its slot is after the current one, or its slot is
+    /// the current one and vacated); each faction has at most one. A run end has a defined cause and a killing event id
+    /// exactly when the cause is <see cref="RunEndCause.HeroDeath"/>, from 1 to below <paramref name="nextEventSeq"/>; a
+    /// hero death also needs a <paramref name="hero"/>, on 0 HP. Throws <see cref="ArgumentException"/> naming the
+    /// problem.
     /// </summary>
     internal static void CheckRunState(
-        ImmutableArray<Unit> units, UnitId? hero, CombatState? combat, RunEnd? ended, long nextEventSeq)
+        ImmutableArray<Unit> units, UnitId? hero, CombatState? combat, RunEnd? ended, long nextEventSeq,
+        PendingDecision? pending)
     {
         if (nextEventSeq < 1)
         {
@@ -183,7 +191,15 @@ public sealed record GameState(
         if (combat is not null)
         {
             CheckCombat(units, combat);
+            if (combat.BeforeRound1 && pending is null && ended is null)
+            {
+                throw new ArgumentException(
+                    "Invalid combat: the before-round-1 marker is set with no pending decision and no run end.",
+                    nameof(combat));
+            }
         }
+
+        CheckOpenerMarks(units, combat);
 
         if (ended is not null)
         {
@@ -263,6 +279,62 @@ public sealed record GameState(
                 + (combat.Current == length ? " and the turn is not vacated." : "."),
                 nameof(combat));
         }
+
+        if (combat.BeforeRound1 && (combat.Round != 1 || combat.Current != 0 || combat.TurnVacated || length == 0))
+        {
+            throw new ArgumentException(
+                "Invalid combat: the before-round-1 marker needs round 1, current 0, no vacated turn and a non-empty "
+                + $"order (round {combat.Round}, current {combat.Current}, turnVacated {combat.TurnVacated}, order of {length}).",
+                nameof(combat));
+        }
+    }
+
+    // M1-11 plan call 6: a mark lives only on a unit whose round-1 turn has not started, one per faction.
+    private static void CheckOpenerMarks(ImmutableArray<Unit> units, CombatState? combat)
+    {
+        for (int i = 0; i < units.Length; i++)
+        {
+            var unit = units[i];
+            if (unit.Opener is null)
+            {
+                continue;
+            }
+
+            string who = $"Invalid units: unit {unit.Id.Value} has an opener mark";
+            if (combat is null)
+            {
+                throw new ArgumentException($"{who} out of combat.", nameof(units));
+            }
+
+            if (combat.Round != 1)
+            {
+                throw new ArgumentException($"{who} in round {combat.Round}; a mark lasts only until round 1.", nameof(units));
+            }
+
+            int index = combat.Order.IndexOf(unit.Id);
+            if (index < 0)
+            {
+                throw new ArgumentException($"{who} but is not in the turn order.", nameof(units));
+            }
+
+            bool unstarted = combat.BeforeRound1
+                || index > combat.Current
+                || (index == combat.Current && combat.TurnVacated);
+            if (!unstarted)
+            {
+                throw new ArgumentException($"{who} but its round-1 turn has already started.", nameof(units));
+            }
+
+            for (int j = 0; j < i; j++)
+            {
+                if (units[j].Opener is not null && units[j].Faction == unit.Faction)
+                {
+                    throw new ArgumentException(
+                        $"{who}, and so does unit {units[j].Id.Value}; a {unit.Faction} side has at most one opener.",
+                        nameof(units));
+                }
+            }
+        }
     }
 
     // M1-10 plan calls 5 and 7: the budget stores used counts; spent counts are sorted by pool id, positive, each pool once.
@@ -306,6 +378,95 @@ public sealed record GameState(
                     units);
             }
         }
+
+        if (unit.Opener is { } opener)
+        {
+            CheckOpener(unit, opener, who, units);
+        }
+    }
+
+    // M1-11 plan call 6: the charge holds only the opener's own cost bits, the budget includes it, and its turn-pool
+    // counts are sorted by pool id, each pool once, each count at least 1 and within the unit's spent count.
+    private static void CheckOpener(Unit unit, OpenerCharge opener, string who, string units)
+    {
+        var charged = opener.Charged;
+        var budget = unit.Budget;
+        if (charged.MovementUsed < 0 || charged.ActionsUsed < 0)
+        {
+            throw new ArgumentException($"{who}has an opener charge with a negative count.", units);
+        }
+
+        if (charged.ReactionUsed || charged.CampSpent)
+        {
+            throw new ArgumentException($"{who}has an opener charge that sets the reaction or camp-spend flag.", units);
+        }
+
+        if (!Includes(budget, charged))
+        {
+            throw new ArgumentException($"{who}has a turn budget that does not include its opener charge.", units);
+        }
+
+        var pools = opener.TurnPools;
+        if (pools.IsDefault)
+        {
+            throw new ArgumentException($"{who}has uninitialised opener turn pools; use an empty array.", units);
+        }
+
+        for (int k = 0; k < pools.Length; k++)
+        {
+            var pool = pools[k];
+            if (pool.PoolId is null || !ContentId.IsValid(pool.PoolId))
+            {
+                throw new ArgumentException(
+                    $"{who}has an opener turn pool '{pool.PoolId}', which is not a content id ([a-z0-9_.:-]).", units);
+            }
+
+            if (pool.Spent < 1)
+            {
+                throw new ArgumentException(
+                    $"{who}has an opener turn pool '{pool.PoolId}' count of {pool.Spent}; it must be at least 1.", units);
+            }
+
+            if (k > 0 && string.CompareOrdinal(pools[k - 1].PoolId, pool.PoolId) >= 0)
+            {
+                throw new ArgumentException(
+                    $"{who}must list opener turn pools by pool id in ordinal order, each pool once ('{pools[k - 1].PoolId}' then '{pool.PoolId}').",
+                    units);
+            }
+
+            int spent = SpentCount(unit.Spent, pool.PoolId);
+            if (spent < pool.Spent)
+            {
+                throw new ArgumentException(
+                    $"{who}charges {pool.Spent} of pool '{pool.PoolId}' to its opener, but its spent count is {spent}.", units);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Whether <paramref name="budget"/> includes <paramref name="charged"/>: at least its movement and actions used, and
+    /// every flag it sets.
+    /// </summary>
+    internal static bool Includes(TurnBudget budget, TurnBudget charged) =>
+        budget.MovementUsed >= charged.MovementUsed
+        && budget.ActionsUsed >= charged.ActionsUsed
+        && (!charged.BonusUsed || budget.BonusUsed)
+        && (!charged.ReactionUsed || budget.ReactionUsed)
+        && (!charged.FreeUsed || budget.FreeUsed)
+        && (!charged.CampSpent || budget.CampSpent);
+
+    /// <summary>The count of <paramref name="poolId"/> in <paramref name="spent"/>, or 0.</summary>
+    internal static int SpentCount(ImmutableArray<PoolSpend> spent, string poolId)
+    {
+        foreach (var s in spent)
+        {
+            if (string.Equals(s.PoolId, poolId, StringComparison.Ordinal))
+            {
+                return s.Spent;
+            }
+        }
+
+        return 0;
     }
 
     private static void CheckStats(Unit unit, string units)

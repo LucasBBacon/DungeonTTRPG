@@ -79,7 +79,9 @@ public static class Harm
     /// order. A slot before the current one moves the current index back by 1. The current slot itself leaves the index
     /// on its successor (or on the order's length when it was the last slot) and sets
     /// <see cref="CombatState.TurnVacated"/>, with no <see cref="TurnEnded"/> (a dead unit has no turn-end step, CO 5.4)
-    /// and no <see cref="TurnStarted"/>. A later slot changes nothing. Out of combat there is no order to change. A
+    /// and no <see cref="TurnStarted"/>. A later slot changes nothing. Under the <see cref="CombatState.BeforeRound1"/>
+    /// marker no unit holds the turn: removing slot 0 leaves the index at 0, on the next unit, and vacates nothing
+    /// (M1-11 plan call 7). Out of combat there is no order to change. A
     /// pending decision the dead unit holds is cleared: its choice is moot and the draw behind it has happened, and left
     /// pending it would refuse every command and make the state unloadable.
     /// </summary>
@@ -120,12 +122,16 @@ public static class Harm
             int d = combat.Order.IndexOf(dead);
             if (d >= 0)
             {
+                // Under the before-round-1 marker no unit holds the turn, so slot 0 leaves the index on its successor
+                // without vacating anything (M1-11 plan call 7).
                 var order = combat.Order.RemoveAt(d);
-                combat = d < combat.Current
-                    ? combat with { Order = order, Current = combat.Current - 1 }
-                    : d == combat.Current
-                        ? combat with { Order = order, TurnVacated = true }
-                        : combat with { Order = order };
+                combat = combat.BeforeRound1
+                    ? combat with { Order = order }
+                    : d < combat.Current
+                        ? combat with { Order = order, Current = combat.Current - 1 }
+                        : d == combat.Current
+                            ? combat with { Order = order, TurnVacated = true }
+                            : combat with { Order = order };
                 s = s with { Combat = combat };
             }
         }
