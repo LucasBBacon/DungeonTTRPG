@@ -644,7 +644,7 @@ gates read the **source unit's rank at the moment a condition is applied**.
 
 | Rank | Definition | Cost multiplier | Wave |
 |---|---|---|---|
-| **Minion** | HP 1. Any damage kills it, including ticks. It takes no damage from a miss, and none on a successful save against "half on success" effects. This is a rank rule, not a resistance. Damage is 50% of the row; it rolls the 5.4 die one size smaller, minimum d4, with the flat set to keep that band (level 0: d4, flat 0, the stated exception) **(change W-17)**. Two at-wills; no limited abilities, no harmful conditions, no reaction beyond the opportunity attack, no bonus-action ability. **Same-type minions in one group share one initiative slot** and act in unit order. Never an elite, an item carrier, affixed or a concentrator. Morale profile `normal` by default. **At most 2 minions in a solo encounter.** | max(2, `FloorDiv(levelCost, 3)`) + costAdd (always 0) | M1 |
+| **Minion** | HP 1. Any damage kills it, including ticks. It takes no damage from a miss, and none on a successful save against "half on success" effects. This is a rank rule, not a resistance; it is checked before the halving (death and healing design 20.3 step 2): a Minion that succeeds takes 0, with no minimum of 1 **(lead's call, confirmed by the client 2026-11-28; M1-11 rulings 8 item 7)**. Damage is 50% of the row; it rolls the 5.4 die one size smaller, minimum d4, with the flat set to keep that band (level 0: d4, flat 0, the stated exception) **(change W-17)**. Two at-wills; no limited abilities, no harmful conditions, no reaction beyond the opportunity attack, no bonus-action ability. **Same-type minions in one group share one initiative slot** and act in unit order. Never an elite, an item carrier, affixed or a concentrator. Morale profile `normal` by default. **At most 2 minions in a solo encounter.** | max(2, `FloorDiv(levelCost, 3)`) + costAdd (always 0) | M1 |
 | **Standard** | The table row, shaped by its role | ×1 | M1 |
 | **Elite** | The template in 7.2 | ×2, including the first affix; a second affix ×1.2 | M2 |
 | **Boss** | Hand-designed, from a pool per floor **(settled)** (17.5) | Authored budget | M1 |
@@ -3195,7 +3195,7 @@ affix costs ×1.2. **Gentle** means legal on floor 1.
 | Sustain | **Leeching** | On a melee at-will hit, regains half the damage. Withered counters it. | 2+ | Brute, skirmisher | M2 |
 | Sustain | Undying | Death-warded, `oncePerLife` | 2+ | Not minions | Later |
 | Sustain | Regenerating | Regains 10% of max HP at turn start; Withered suppresses it | 3+ | Brute, soldier | Later |
-| Punish | **Volatile** | Death burst, radius 1, theme damage (the theme's `themeDamage` = its `primaryDamageType`; **change RT-4**), Reflex for half. The kill preview shows it. Counted in the guards with its turn maximum (6.4). | 2+ | Brute, leader | M2 |
+| Punish | **Volatile** | Death burst, radius 1, theme damage (the theme's `themeDamage` = its `primaryDamageType`; **change RT-4**), Reflex for half (per part, death and healing design 20.3 step 2) **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.1)**. The kill preview shows it. Counted in the guards with its turn maximum (6.4). | 2+ | Brute, leader | M2 |
 | Punish | Retaliating | Retaliating | 3+ | Soldier, brute | Later |
 | Punish | Riposting | Riposting while its reaction is unused | 3+ | Soldier, skirmisher | Later |
 | Command | **Exhorting** | Becomes its group's leader: Command (cooldown 3) and the Emboldened aura. Never in a group that already has a leader (8.3). | 2+ | Soldier, hinderer | M2 |

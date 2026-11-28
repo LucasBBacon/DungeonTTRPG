@@ -650,6 +650,11 @@ A further reserve if the Con-is-a-tax report fires: `+ Con × (prof − 1)`.
 - A natural 20 on an **attack roll** always hits and crits; a natural 1
   always misses. Saves and skill checks have no automatic results
   **(settled, stat model 6)**.
+- **A save never crits**; only an attack roll does **(lead's call,
+  confirmed by the client 2026-11-28; M1-11 rulings 8 item 5)**. A
+  success against a half-on-a-success effect rolls the same damage dice,
+  on the same stream, that a failure would (20.3 step 2) **(lead's call,
+  confirmed by the client 2026-11-28; M1-11 rulings 8 item 4)**.
 - **A crit rolls all damage dice twice, for every unit, party and monsters
   alike.** Exploit dice double with the weapon dice; flat terms and
   Precision do not (weapons 15.1). A flagged rider is attempted on a crit
@@ -723,7 +728,11 @@ traps and locks Q2)**
   in-combat damage, covered by the 6.4 round-1 rows. A party area used out
   of combat that includes no hostile unit and is not noticed (one opening
   a door, say) starts nothing: its damage to a party unit is floored. This
-  closes the free-damage loophole.
+  closes the free-damage loophole. Such a use that rolls (a save, an
+  attack or damage dice) is refused in M1 (`NotInCombat`); from the D-23
+  wave its rolls use `h:roll` (seeds and validation design 4.3). Whether
+  it is refused is decided before any noticing roll **(agreed
+  2026-11-28, roadmap D-23; M1-11 rulings 2.1 to 2.3)**.
 - **Openers.** An ability use that starts a fight this way is an
   **opener**; the unit that makes it is the **striker**.
   - The opener is validated when it is declared, before the combat-start
@@ -1288,7 +1297,16 @@ order: death and healing design". **(lead's call)**
 1. **Before the chain** (not links), in this order, which is the
    damage function's (20.3) and is normative:
    1. a Downed target discards the event (11.4);
-   2. the per-part steps, temporary HP included (14);
+   2. the per-part steps, as 20.3 step 2: on a successful save against
+      an effect that is half on a success, each part's raw amount, after
+      flat changes **(lead's call, confirmed by the client 2026-11-28;
+      M1-11 rulings 8 item 13)**, first becomes FloorDiv(raw, 2)
+      **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.1)**, with any
+      failure multiplier applied first **(lead's call, confirmed by the
+      client 2026-11-28; M1-11 rulings 8 item 9)** and the Minion rank
+      rule checked first (enemies 7.1) **(lead's call, confirmed by the
+      client 2026-11-28; M1-11 rulings 8 item 7)**; then the ladder with
+      its minimum of 1, the other per-part steps and temporary HP (14);
    3. the event's total is summed;
    3a. if Ducked, total = max(1, FloorDiv(total, 2)) (Shade design 7.4,
       SH-6; cross-document comparison 2026-11-23, CC-29);
@@ -1311,7 +1329,10 @@ order: death and healing design". **(lead's call)**
    **(lead's call)**.
 3. **Reprieve Phial** (16), `recharging: false`.
 
-The concentration difficulty uses the pre-save total **(settled)**: the
+The concentration difficulty uses the pre-save total **(settled)**.
+"Pre-save" means before the save chain, not before a saving throw: the
+total already reflects any halving by a save (step 1.2) **(agreed
+2026-11-28, roadmap D-22; M1-11 rulings 1.6)**. It is the
 summed total after the per-part steps and the Duck halving, and
 **before** the floor clamp and the chain (step 1.3a's value, 20.3 step 3a;
 cross-document comparison 2026-11-23, CC-29) **(lead's call)**. With Last Ward retired, no
@@ -1541,9 +1562,11 @@ XI-12, M2; DH owner informed; exploration and information design
    the next advantage). Attack: hit chance from d20 + bonus against the
    hero's current AC, with advantage or disadvantage from the current
    state, natural 20 a crit (double dice, 9), natural 1 a miss. Area or
-   save: the save chance from the hero's current save bonus, with half or
-   none per record. Per-part steps (resistances, shells) apply as the
-   damage function would apply them now.
+   save: the save chance from the hero's current save bonus, with half
+   (per part, before the ladder; 20.3 step 2) or none per record
+   **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.6)**. Per-part
+   steps (resistances, shells) apply as the damage function would apply
+   them now.
 4. **Convolution:** the per-threat damage distributions are convolved
    into one. **Death chance** = the probability that the summed damage is
    ≥ current HP + temporary HP.
@@ -2018,12 +2041,43 @@ saved stack's dose count (change SV-15) (cross-document comparison
 1. If the target is Downed: discard, `DamageDiscarded{downedInert}`, stop.
 2. Per-part steps: ladder shifts and shells, type ends and layer breaks,
    transforms, temporary HP **(settled steps)**.
+   **Halving by a save, first.** On a successful save against an effect
+   that is half on a success, each part is halved on its own before the
+   ladder **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.1, 1.2)**:
+   - The part's raw amount (its dice plus its flat amount), after any
+     flat changes **(lead's call, confirmed by the client 2026-11-28;
+     M1-11 rulings 8 item 13)**, becomes FloorDiv(raw, 2). The ladder,
+     with its minimum of 1 unless immune, then applies unchanged, and the
+     other per-part steps and temporary HP follow.
+   - Any multiplier the effect applies to its failure amount is applied
+     before the halving (Overturn: FloorDiv(2 × band, 2), the band)
+     **(lead's call, confirmed by the client 2026-11-28; M1-11 rulings 8
+     item 9)**.
+   - The Minion rank rule (enemies 7.1) is checked before the halving: a
+     Minion that succeeds takes 0, with no minimum of 1 **(lead's call,
+     confirmed by the client 2026-11-28; M1-11 rulings 8 item 7)**.
+   - Tumble Clear's half on a failure (Shade design 7.6) uses the same
+     routine; its success takes 0 **(lead's call, confirmed by the client
+     2026-11-28; M1-11 rulings 8 item 8)**.
+   - Halving draws nothing: it is arithmetic on dice already rolled.
+   - It is one routine for abilities, traps, consequence locks, hazards,
+     terrain Kegs (`save: "reflexHalf"`), death bursts, terrain clouds
+     and sacs, and boss-room strikes; `onSuccess: "half"` and `save:
+     "reflexHalf"` both mean this rule.
+   - Each part's outcome records that it was halved, so the combat log
+     can show it **(lead's call, confirmed by the client 2026-11-28;
+     M1-11 rulings 8 item 14)**.
 3. Sum the event's total. Duck (a reaction) is offered here, with this
    total known, if the event is Duck-eligible and the total is above 0
-   (Shade design 7.4, SH-6).
+   (Shade design 7.4, SH-6). A successful save is never Duck-eligible:
+   Duck III (Shade design 7.3, L8) applies only after a failed save,
+   never to damage halved by a save or by Tumble Clear **(lead's call,
+   confirmed by the client 2026-11-28; M1-11 rulings 8 item 6)**.
    3a. If Ducked: total = max(1, FloorDiv(total, 2)). This step-3a value
    is the **pre-save total** that concentration uses; steps 4 onward read
-   it.
+   it. "Pre-save" means before the save chain (step 5), not before a
+   saving throw: the value already reflects any halving by a save (step
+   2) **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.6)**.
 4. Floors, on the post-absorption total of step 3a: for a party unit,
    clamp so HP stays ≥ 1 when any 10.4 floor applies: `combatActive` is
    false (20.5); the event carries undetected-trap parts (with the

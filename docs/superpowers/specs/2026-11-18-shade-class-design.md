@@ -784,7 +784,7 @@ defined if the values change. Test in 12.1.
 | Option | Source | Wave | Cost | Tag | Rank I | II | III |
 |---|---|---|---|---|---|---|---|
 | **Fade** | core, 1 | M2 | bonus action, 1 Trick | Hide mode: `strike` | Hide, Disengage or Dash | L5: Hide has advantage on the Stealth roll against observers more than 3 squares away (two d20s are always drawn for a Fade II Hide; observers more than 3 squares away read the higher, the others the first drawn, so random-number use never depends on position); Disengage gives advantage on this turn's slip-past check | L8: one use may combine Disengage and Dash (never with Hide) |
-| **Duck** | core, 1 | M2 | reaction, 1 Trick | — | Halve one hit's damage; sets Answer | L5: cancels that hit's rider or critical-rider attempt | L8: may instead halve area damage after a failed Reflex save (no Answer; not on damage Tumble Clear already halved) |
+| **Duck** | core, 1 | M2 | reaction, 1 Trick | — | Halve one hit's damage; sets Answer | L5: cancels that hit's rider or critical-rider attempt | L8: may instead halve area damage after a failed Reflex save (no Answer; not on damage Tumble Clear already halved; never on damage halved by a save (DH 20.3 step 3a) **(lead's call, confirmed by the client 2026-11-28; M1-11 rulings 8 item 6)**) |
 | **Respite** | core, 1 | M2 | bonus action, 1 Trick | `restDefensiveTool`, `chassisOnly` | Heal FloorDiv(Recovery, 2); sub-limit 1 per rest, 2 from level 6 **(settled)** | — | — |
 | **Draw Out** | L7 talent, or `precision` offer from L5 | M2 | bonus action, 1 Trick | not `strike` | Acrobatics against an adjacent hostile's guile; on a success it counts as Beset for your melee attacks this turn (`drawnOut`, 13.1); on a failure the Trick is spent | L8: reach +1 | — |
 | No Witnesses | Cutthroat 3 | M2 | on a kill, 1 Trick | Hide modes `strike`; carry-only mode untagged | 8.1 | 8.1 | 8.1 |
@@ -957,7 +957,9 @@ two are honest utility, as the Vanguard's Grim Resolve was.
   it cannot pay a `strike` option.
 - **Tumble Clear** (adds; the Evasion shape): against area damage that
   allows a Reflex save, a success takes none and a failure takes half.
-  Registry: Enclosed.
+  The half on a failure is the per-part halving of DH 20.3 step 2,
+  minimum of 1 per part; a success takes 0 **(lead's call, confirmed by
+  the client 2026-11-28; M1-11 rulings 8 item 8)**. Registry: Enclosed.
 - Sure Hands moves to the `delve` offer lane (7.11).
 
 ### 7.7 Capstone: From Nowhere
