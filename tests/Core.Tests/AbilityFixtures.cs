@@ -152,6 +152,56 @@ public static class AbilityFixtures
         new(File, id, AbilityKind.Reaction, new AbilityCost(CostKind.Reaction), pool, null, null, [], [],
             new ReactionSpec(trigger, bonus, policy));
 
+    // --- M1-12a Task 1: the held events of a suspended use ---
+
+    /// <summary>A two-target strike: single, range 1, up to 2 units, a Strength attack, 1d6 slashing.</summary>
+    public const string TwoStrike = "test.two_strike";
+
+    /// <summary>An attack-roll ward, +2, that the held-events tests set to "ask me", "never" or "always".</summary>
+    public const string AskWard = "ward.ask";
+
+    /// <summary>A second attack-roll ward, after <see cref="AskWard"/> by id, for a re-ask.</summary>
+    public const string AskWard2 = "ward.ask_2";
+
+    /// <summary>A trait whose <c>unitDied</c> trigger (scope any) applies <see cref="ResistSlashing"/> to its holder.</summary>
+    public const string Vengeful = "test.vengeful";
+
+    /// <summary>A trait with the <c>resistant.slashing</c> flag.</summary>
+    public const string ResistSlashing = "test.resist_slashing";
+
+    /// <summary>A trait whose <c>combatStarted</c> trigger (scope any) applies <see cref="Rallied"/> to its holder.</summary>
+    public const string Rally = "test.rally";
+
+    /// <summary>A plain trait, the output of <see cref="Rally"/>.</summary>
+    public const string Rallied = "test.rallied";
+
+    /// <summary>
+    /// The held-events rules: <see cref="Rules"/>'s effects with <see cref="Vengeful"/>, <see cref="ResistSlashing"/>,
+    /// <see cref="Rally"/> and <see cref="Rallied"/>; its pools and abilities with <see cref="TwoStrike"/>,
+    /// <see cref="AskWard"/> and <see cref="AskWard2"/>.
+    /// </summary>
+    public static readonly RulesContext HeldRules = RulesContext.Create(
+        ContestKit.LoadEffects(
+            ContestKit.Def(Clumsy, "condition", ContestKit.Add("reflex", -50)),
+            ContestKit.Def(Exposed, "condition", ContestKit.Add("armourClass", -50)),
+            ContestKit.Def(Nimble, "condition", ContestKit.Add("reflex", 50)),
+            ContestKit.Def(ResistSlashing, "trait", """{"target": "unit", "flag": "resistant.slashing"}"""),
+            ContestKit.Def(Rallied, "trait"),
+            $$"""{"id": "{{Vengeful}}", "kind": "trait", "triggers": [{"on": "unitDied", "scope": "any", "do": [{"applyEffect": "{{ResistSlashing}}", "to": "holder"}]}]}""",
+            $$"""{"id": "{{Rally}}", "kind": "trait", "triggers": [{"on": "combatStarted", "scope": "any", "do": [{"applyEffect": "{{Rallied}}", "to": "holder"}]}]}"""),
+        pools: PoolTable,
+        abilities:
+        [
+            .. Definitions,
+            .. Wards,
+            Reaction(AskWard, ReactionTrigger.AttackRoll, null),
+            Reaction(AskWard2, ReactionTrigger.AttackRoll, null),
+            new AbilityDefinition(
+                File, TwoStrike, AbilityKind.AtWill, new AbilityCost(CostKind.Action), null,
+                new TargetSpec(TargetShape.Single, 1, 2, 0, false), new AttackResolve(new AttackSpec(Ability.Strength, true)),
+                [Part(DamageType.Slashing, 1, 6, 0)], [], null),
+        ]);
+
     private static DamagePart Part(DamageType type, int dice, int sides, int flat) => new(type, dice, sides, flat);
 
     private static AbilityDefinition Single(string id, AbilityKind kind, AbilityCost cost, ResolveSpec? resolve, DamagePart damage) =>

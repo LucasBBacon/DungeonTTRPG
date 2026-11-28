@@ -61,6 +61,7 @@ src/Core/                   Dungeon.Core: the rules engine (no Godot)
   Effects/                  Effects system: definitions, fold queries, triggers, C# hooks (see docs/effects-vocabulary.md)
   Stats/                    Unit stat block (SM 9), the SM 6 derived numbers, d20 dice, contests and initiative on the combat stream; HP numbers and healing
   Damage/                   Damage types, the ladder (SM 8.3) and the damage function in DH 20.3 order, rolled on the combat stream
+  Conditions/               Condition records and the content kind, instance state, insert and end, and the phase clock (turn start and end, round end, tick, combat start and end)
   Combat/                   Run, combat and turn state; the turn loop and End Turn; pools on their refill tags and the turn budget; Harm.Deal (floors, deaths, the run end) and the DH 20.5 combat end
   Persistence/              Versioned snapshots, command logs, replay
   Canonical/                CanonicalWriter, CanonicalReader, SHA-256 Digest (SV 4.5)

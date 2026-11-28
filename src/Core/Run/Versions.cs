@@ -17,9 +17,10 @@ public static class GenVersion
 public static class RulesVersion
 {
     /// <summary>
-    /// The rules version this build implements. Version 3 (M1-11): abilities run through UseAbility; combat start holds
+    /// The rules version this build implements. Version 4 (M1-12a): suspended uses hold their events; the condition clock
+    /// runs in the turn steps and ticks. Version 3 (M1-11): abilities run through UseAbility; combat start holds
     /// round 1 for an opener; an opener is charged to its striker's round-1 turn and takes no tick. Version 2 (M1-10):
     /// commands are refused after a run end, and moves in combat change.
     /// </summary>
-    public const int Current = 3;
+    public const int Current = 4;
 }

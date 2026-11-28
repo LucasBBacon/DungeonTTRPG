@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using Dungeon.Core.Combat;
+using Dungeon.Core.Conditions;
 using Dungeon.Core.Damage;
 using Dungeon.Core.Effects;
 using Dungeon.Core.Stats;
@@ -103,3 +104,22 @@ public sealed record ReactionTaken(UnitId Reactor, string AbilityId) : GameEvent
 /// rule event <c>abilityResolved</c>, whose subject is the user. A use stopped by a run end has none.
 /// </summary>
 public sealed record AbilityResolved(UnitId User, string AbilityId) : GameEvent;
+
+/// <summary>
+/// A condition instance <paramref name="Seq"/> of <paramref name="ConditionId"/> was placed on <paramref name="Holder"/>
+/// from <paramref name="Source"/> with <paramref name="Value"/> (M1-12a plan call 7). <paramref name="New"/> is false when
+/// a second grant of a core definition (Steeled, Unyielding) re-stamped the existing instance instead (plan call 5).
+/// </summary>
+public sealed record ConditionApplied(long Seq, string ConditionId, UnitId Holder, EffectSource Source, int Value, bool New) : GameEvent;
+
+/// <summary>
+/// The condition instance <paramref name="Seq"/> of <paramref name="ConditionId"/> on <paramref name="Holder"/> ended for
+/// <paramref name="Reason"/> (CO 8: every end on a living holder emits one; M1-12a plan call 7).
+/// </summary>
+public sealed record ConditionEnded(long Seq, string ConditionId, UnitId Holder, ConditionEndReason Reason) : GameEvent;
+
+/// <summary>
+/// <paramref name="Unit"/> lost its turn start to a hard condition (CO 5.7); <paramref name="ThisFight"/> is its count of
+/// lost turn starts in this fight, this one included.
+/// </summary>
+public sealed record TurnStartLost(UnitId Unit, int ThisFight) : GameEvent;

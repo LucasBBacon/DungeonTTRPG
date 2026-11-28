@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using Dungeon.Core.AbilityModel;
+using Dungeon.Core.Conditions;
 using Dungeon.Core.Effects;
 using Dungeon.Core.Validation;
 
@@ -48,6 +49,7 @@ public static class ContentKinds
     public static ImmutableArray<ContentKind> All { get; } =
         [
             new AbilitiesKind(),
+            new ConditionsKind(),
             new EffectsKind(),
             new GreyedReasonKind(),
             new NameListKind(),

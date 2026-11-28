@@ -372,6 +372,9 @@ pipeline.
 
 **Depends on:** M1-11.
 
+Planned as two PRs: M1-12a (clock and carry-overs) and M1-12b (pipeline,
+relations, guards, property tests) (owner ruling 2026-11-28).
+
 **Delivers:**
 - Global phase counter, `appliedPhase`, the wearer clock (C1), own-turn
   rule, turn-start and turn-end step order (CO 5.4).
@@ -384,7 +387,7 @@ pipeline.
   model (CO 18.1).
 - The CO 5.5 combat-start condition step ([M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 5, step 2),
   placed before the surprise grant and before initiative.
-- Hold a suspended ability use's earlier events until the use completes,
+- **Done in M1-12a:** Hold a suspended ability use's earlier events until the use completes,
   before any trigger can change state a resumed resolution reads (effects
   and flags, HP, position, pools, reactions), whatever the trigger's
   action (`applyEffect` included, not only damage or a reaction spend).
@@ -396,8 +399,13 @@ pipeline.
   both in `Engine.Apply` and in the opener path (snapshot and digest gain
   the held list). M1-12 is the first step whose content can do this
   (M1-11 final review C1).
-- Preview an opener on the state after combat start (or document the gap)
+- **Done in M1-12a:** Preview an opener on the state after combat start (or document the gap)
   once combat-start conditions exist (M1-11 final review).
+- **Carried to M1-12b** (found in M1-12a): a fight won by a trigger
+  answering a round-end event is not yet stopped before the next
+  `TurnStarted` (latent until condition events raise rule events); the
+  party band of an out-of-combat list on a party holder; the condition
+  events raise no rule event yet.
 
 **Done when:**
 - [ ] CO 20.2 clock edge-case and pipeline-order tests pass.
@@ -419,6 +427,9 @@ pipeline.
   Steeled, Dazed, Bleeding; engine states Incapacitated, Grappling,
   Unyielding.
 - Bleeding ends on any HP gain; tick batches capped at 1/4 max HP.
+- The tick batch's 1/4-max-HP cap, the concentration event and Bleeding
+  on M1-12a's uncapped batch; Steeled and Unyielding are core definitions
+  (M1-12a), so M1-13 ships their display and tests, not their records.
 - Push, pull, shift: at most 3 squares per hit, collision damage at the
   D-09 value, never provokes, stops before hazard squares, grapple drags.
 - A generic "stop-short square" predicate, used by hazards now and by
@@ -453,7 +464,7 @@ zones; trained-only skill uses. Dash adds granted movement equal to the
 current speed at the Dash (D-18, [M1-10 rulings record](../superpowers/specs/2026-11-27-m1-10-rulings-design.md) 2.2); the snapshot version,
 state digest shape, `GameState` validation and RulesVersion rise after
 M1-11's.
-- If not already done in M1-12 (see its Delivers): hold a suspended
+- **Done in M1-12a (see its Delivers):** hold a suspended
   ability use's earlier events until the use completes, so a pending
   "ask me" frame stays valid and the reaction policy alone cannot change
   the outcome.

@@ -33,15 +33,15 @@ public class EffectsEndToEndTests
         Assert.Equal<GameEvent>(
             [
                 new UnitMoved(Hero, new GridPos(1, 1), new GridPos(2, 1)),
-                new TickAdvanced(1),
                 new EffectApplied(2, "test.haste", Hero, new EffectSource(Hero)),
+                new TickAdvanced(1),
             ],
             r.Events.ToArray());
         Assert.Equal(8, Effects.Number(rules, r.State, Hero, "speed"));
 
         // Traits stack, so a second move gives a second haste.
         r = Engine.Apply(r.State, new MoveCommand(Hero, Direction.E), rules);
-        Assert.Equal(new EffectApplied(3, "test.haste", Hero, new EffectSource(Hero)), r.Events[^1]);
+        Assert.Equal(new EffectApplied(3, "test.haste", Hero, new EffectSource(Hero)), r.Events[^2]);
         Assert.Equal(10, Effects.Number(rules, r.State, Hero, "speed"));
     }
 }

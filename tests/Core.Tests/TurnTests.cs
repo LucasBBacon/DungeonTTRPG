@@ -347,10 +347,10 @@ public class TurnTests
     }
 
     [Theory]
-    [InlineData("{\"version\":8,\"seed\":7,\"commands\":[{\"type\":\"endTurn\"}]}")]
-    [InlineData("{\"version\":8,\"seed\":7,\"commands\":[{\"type\":\"endTurn\",\"unit\":1,\"dir\":\"E\"}]}")]
-    [InlineData("{\"version\":8,\"seed\":7,\"commands\":[{\"type\":\"endTurn\",\"unit\":1,\"decision\":1}]}")]
-    [InlineData("{\"version\":8,\"seed\":7,\"commands\":[{\"type\":\"endTurn\",\"unit\":1,\"option\":0}]}")]
+    [InlineData("{\"version\":9,\"seed\":7,\"commands\":[{\"type\":\"endTurn\"}]}")]
+    [InlineData("{\"version\":9,\"seed\":7,\"commands\":[{\"type\":\"endTurn\",\"unit\":1,\"dir\":\"E\"}]}")]
+    [InlineData("{\"version\":9,\"seed\":7,\"commands\":[{\"type\":\"endTurn\",\"unit\":1,\"decision\":1}]}")]
+    [InlineData("{\"version\":9,\"seed\":7,\"commands\":[{\"type\":\"endTurn\",\"unit\":1,\"option\":0}]}")]
     public void An_end_turn_with_missing_or_foreign_fields_is_refused(string json) =>
         Assert.Throws<SnapshotFormatException>(() => CommandLog.Load(json));
 

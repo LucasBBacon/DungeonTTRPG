@@ -426,7 +426,7 @@ public class AskMeTests
         Assert.Null(r.State.Resolution);
 
         var json = Snapshot.Save(r.State);
-        Assert.StartsWith("{\"version\":8,", json);
+        Assert.StartsWith("{\"version\":9,", json);
         Assert.Contains("\"kind\":\"ShrineBoon\"", json);
         Assert.Contains("\"resolution\":null", json);
         var loaded = Snapshot.Load(json);

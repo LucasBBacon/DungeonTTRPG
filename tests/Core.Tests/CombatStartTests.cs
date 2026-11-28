@@ -292,7 +292,7 @@ public class CombatStartTests
         var decision = new PendingDecision(new DecisionId(1), A, DecisionKind.Reaction, [0, 1], new GridPos(1, 0));
         var frame = new AbilityModel.AbilityFrame(
             B, "test.strike", new AbilityModel.UnitsTarget([A]), [A], 0, AbilityModel.ReactionTrigger.AttackRoll,
-            new ContestSetup(5, 12, RollMode.Normal), new D20Roll(RollMode.Normal, 10, null), "test.ward", null);
+            new ContestSetup(5, 12, RollMode.Normal), new D20Roll(RollMode.Normal, 10, null), "test.ward", null, []);
         var held = open with
         {
             Pending = decision,
@@ -308,7 +308,7 @@ public class CombatStartTests
     {
         var s = Saved();
         var json = Snapshot.Save(s);
-        Assert.StartsWith("{\"version\":8,", json);
+        Assert.StartsWith("{\"version\":9,", json);
         Assert.Contains("\"turnVacated\":false,\"beforeRound1\":true}", json);
         Assert.Contains(
             "\"opener\":{\"charged\":{\"movementUsed\":0,\"actionsUsed\":1,\"bonusUsed\":false,\"reactionUsed\":false,"
@@ -329,7 +329,7 @@ public class CombatStartTests
     [Fact]
     public void A_v7_save_is_refused()
     {
-        var v7 = Snapshot.Save(ShrineState()).Replace("\"version\":8", "\"version\":7");
+        var v7 = Snapshot.Save(ShrineState()).Replace("\"version\":9", "\"version\":7");
         Assert.Equal(7, Assert.Throws<SnapshotVersionException>(() => Snapshot.Load(v7)).Found);
     }
 

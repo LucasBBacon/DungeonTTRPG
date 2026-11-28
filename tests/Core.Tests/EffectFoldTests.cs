@@ -433,8 +433,8 @@ public class EffectFoldTests
         s = Effects.Remove(s, 3);
         var json = Snapshot.Save(s);
         Assert.Contains(
-            "\"effects\":[{\"seq\":1,\"effect\":\"gear.plus2\",\"holder\":1,\"source\":2},"
-            + "{\"seq\":2,\"effect\":\"cond.halve\",\"holder\":2,\"source\":null}],\"nextEffectSeq\":4",
+            "\"effects\":[{\"seq\":1,\"effect\":\"gear.plus2\",\"holder\":1,\"source\":2,\"condition\":null},"
+            + "{\"seq\":2,\"effect\":\"cond.halve\",\"holder\":2,\"source\":null,\"condition\":null}],\"nextEffectSeq\":4",
             json);
         var loaded = Snapshot.Load(json);
         Assert.Equal(json, Snapshot.Save(loaded));
@@ -484,8 +484,8 @@ public class EffectFoldTests
     public void Load_rejects_effects_out_of_seq_order()
     {
         var s = Effects.Apply(Effects.Apply(Start(), "gear.plus2", Hero, new EffectSource(Ally)), "cond.halve", Ally, EffectSource.Environment);
-        const string First = "{\"seq\":1,\"effect\":\"gear.plus2\",\"holder\":1,\"source\":2}";
-        const string Second = "{\"seq\":2,\"effect\":\"cond.halve\",\"holder\":2,\"source\":null}";
+        const string First = "{\"seq\":1,\"effect\":\"gear.plus2\",\"holder\":1,\"source\":2,\"condition\":null}";
+        const string Second = "{\"seq\":2,\"effect\":\"cond.halve\",\"holder\":2,\"source\":null,\"condition\":null}";
         var good = Snapshot.Save(s);
         Assert.Contains(First + "," + Second, good);
         Assert.Throws<SnapshotFormatException>(() => Snapshot.Load(good.Replace(First + "," + Second, Second + "," + First)));

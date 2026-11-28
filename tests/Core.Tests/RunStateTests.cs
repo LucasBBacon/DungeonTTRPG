@@ -96,7 +96,7 @@ public class RunStateTests
         foreach (var s in new[] { InCombat(), Ended(), Vacated() })
         {
             var json = Snapshot.Save(s);
-            Assert.StartsWith("{\"version\":8,", json);
+            Assert.StartsWith("{\"version\":9,", json);
             var loaded = Snapshot.Load(json);
             Assert.Equal(json, Snapshot.Save(loaded));
             Assert.Equal(StateDigest.Of(s), StateDigest.Of(loaded));
@@ -197,7 +197,7 @@ public class RunStateTests
     [Fact]
     public void A_v6_save_is_refused()
     {
-        var v6 = Snapshot.Save(ShrineState()).Replace("\"version\":8", "\"version\":6");
+        var v6 = Snapshot.Save(ShrineState()).Replace("\"version\":9", "\"version\":6");
         Assert.Equal(6, Assert.Throws<SnapshotVersionException>(() => Snapshot.Load(v6)).Found);
     }
 

@@ -421,7 +421,7 @@ public class ReactionTests
     [InlineData("{\"type\":\"endTurn\",\"unit\":1,\"mode\":\"Never\"}")]
     [InlineData("{\"type\":\"move\",\"unit\":1,\"dir\":\"E\",\"ability\":\"ward.shield\"}")]
     public void The_policy_log_tag_has_only_its_fields(string command) =>
-        Assert.Throws<SnapshotFormatException>(() => CommandLog.Load("{\"version\":8,\"seed\":7,\"commands\":[" + command + "]}"));
+        Assert.Throws<SnapshotFormatException>(() => CommandLog.Load("{\"version\":9,\"seed\":7,\"commands\":[" + command + "]}"));
 
     [Fact]
     public void AskMe_is_party_only()

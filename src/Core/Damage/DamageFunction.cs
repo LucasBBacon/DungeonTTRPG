@@ -101,10 +101,12 @@ public static class Damage
 
     /// <summary>
     /// What <paramref name="roll"/> does to <paramref name="target"/>, in the DH 20.3 order, without changing anything.
-    /// HP after = max(0, min(HP, maximum) - total), unless a floor binds (step 4, party units only): then 1. Throws
+    /// HP after = max(0, min(HP, maximum) - total), unless a floor binds (step 4): then 1. The floors are the party's,
+    /// plus, for a condition's <paramref name="tick"/> while no fight is on, the CO 5.5 tick floor for every unit, a
+    /// monster included (<see cref="ClampReason.OutOfCombat"/>; M1-12a plan call 13). Throws
     /// <see cref="ArgumentException"/> for an unknown unit.
     /// </summary>
-    public static DamageOutcome Resolve(RulesContext rules, GameState s, UnitId target, DamageRoll roll)
+    public static DamageOutcome Resolve(RulesContext rules, GameState s, UnitId target, DamageRoll roll, bool tick = false)
     {
         var unit = HitPoints.Find(s, target);
 
@@ -128,21 +130,22 @@ public static class Damage
         }
 
         // 3a. Duck (Shade): M2; never on damage halved by a save or by Tumble Clear (D-22; lead's call).
-        // 4. The floors (DH 10.4; M1-10 plan call 10), for a party target only. HP above a lowered maximum counts as
-        //    the maximum. A floor applies out of combat (OutOfCombat, checked first), or when a part comes from a
-        //    Hidden or HunchFloored trap and the other parts alone deal less than that HP (UndetectedTrap: the floor
-        //    protects against the trap parts only). An applying floor binds only on a hit that would take the unit
-        //    from 1 or more to below 1, and then HP stops on 1. So a floor never raises HP, never fires on a hit that
-        //    leaves 1 or more, and leaves a unit already on 0 on 0, unclamped.
+        // 4. The floors (DH 10.4; M1-10 plan call 10), for a party target. HP above a lowered maximum counts as the
+        //    maximum. A floor applies out of combat (OutOfCombat, checked first), or when a part comes from a Hidden or
+        //    HunchFloored trap and the other parts alone deal less than that HP (UndetectedTrap: the floor protects
+        //    against the trap parts only). A monster keeps only the CO 5.5 tick rule: a condition's tick out of combat
+        //    cannot take it below 1 either (OutOfCombat; M1-12a plan call 13). An applying floor binds only on a hit
+        //    that would take the unit from 1 or more to below 1, and then HP stops on 1. So a floor never raises HP,
+        //    never fires on a hit that leaves 1 or more, and leaves a unit already on 0 on 0, unclamped.
         long from = Math.Min(unit.Hp, HitPoints.Max(rules, s, target));
         ClampReason? clamp = null;
-        if (unit.Faction == Faction.Party && from >= 1 && from - total < 1)
+        if (from >= 1 && from - total < 1)
         {
-            if (!s.CombatActive)
+            if (!s.CombatActive && (unit.Faction == Faction.Party || tick))
             {
                 clamp = ClampReason.OutOfCombat;
             }
-            else if (FloorsTrap(roll, parts, from))
+            else if (unit.Faction == Faction.Party && FloorsTrap(roll, parts, from))
             {
                 clamp = ClampReason.UndetectedTrap;
             }
@@ -190,10 +193,13 @@ public static class Damage
         return trapped && others < from;
     }
 
-    /// <summary><see cref="Resolve"/>, then writes the target's HP after; nothing else in the state changes.</summary>
-    public static (DamageOutcome Outcome, GameState Next) Apply(RulesContext rules, GameState s, UnitId target, DamageRoll roll)
+    /// <summary>
+    /// <see cref="Resolve"/> (a condition's <paramref name="tick"/> included), then writes the target's HP after; nothing
+    /// else in the state changes.
+    /// </summary>
+    public static (DamageOutcome Outcome, GameState Next) Apply(RulesContext rules, GameState s, UnitId target, DamageRoll roll, bool tick = false)
     {
-        var outcome = Resolve(rules, s, target, roll);
+        var outcome = Resolve(rules, s, target, roll, tick);
         return (outcome, HitPoints.WithHp(s, HitPoints.Find(s, target), outcome.HpAfter));
     }
 
