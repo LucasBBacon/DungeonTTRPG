@@ -39,54 +39,99 @@ public static class Reactions
 
     /// <summary>
     /// The window for <paramref name="trigger"/> on <paramref name="defender"/>, opened after the d20 is drawn and before
-    /// the outcome is decided (plan calls 10 and 11). Candidates are the abilities the defender holds that are reactions
-    /// with that trigger, in ability-id order. Each is checked for legality first: the reaction unused this turn, and its
-    /// pool, if any, spendable (<see cref="Pools.CheckSpend"/>: enough left, and the camp rule); an illegal candidate is
-    /// skipped, not judged and not spent. A legal one fires by its policy (<see cref="Mode"/>): <c>always</c>;
-    /// <c>never</c> does not; <c>whilePoolAtLeastHalf</c> while the pool's current is at least <c>ceil(max / 2)</c>;
-    /// <c>ifItChangesOutcome</c> when the bonus, judged on <paramref name="roll"/> already drawn, turns a hit into a miss
-    /// or a failed save into a success. Firing sets <see cref="TurnBudget.ReactionUsed"/>, pays the pool through
-    /// <see cref="Pools.Spend"/> (which sets <see cref="TurnBudget.CampSpent"/> for a camp pool), adds the bonus to the
-    /// setup (the attack's target, or the save's bonus) and closes the window. Draws nothing and raises no event: the
-    /// caller raises <see cref="ReactionTaken"/> for the fired id.
+    /// the outcome is decided (plan calls 10 to 12). Candidates are the abilities the defender holds that are reactions
+    /// with that trigger, in ability-id order, starting after <paramref name="after"/> when it is given (the candidate an
+    /// "ask me" answer declined). Each is checked for legality first: the reaction unused this turn, and its pool, if
+    /// any, spendable (<see cref="Pools.CheckSpend"/>: enough left, and the camp rule); an illegal candidate is skipped,
+    /// not judged and not spent. A legal one on <c>askMe</c> (a party unit's only; AB 7.3) stops the walk and is returned
+    /// as <c>Ask</c>, with the state and setup untouched: the caller suspends the use on it. Otherwise it fires by its
+    /// policy (<see cref="Mode"/>): <c>always</c>; <c>never</c> does not; <c>whilePoolAtLeastHalf</c> while the pool's
+    /// current is at least <c>ceil(max / 2)</c>; <c>ifItChangesOutcome</c> when the bonus, judged on
+    /// <paramref name="roll"/> already drawn, turns a hit into a miss or a failed save into a success. Firing is
+    /// <see cref="Take"/> and closes the window. Draws nothing and raises no event: the caller raises
+    /// <see cref="ReactionTaken"/> for the fired id, or the decision for the asked one.
     /// </summary>
-    internal static (string? Fired, ContestSetup Setup, GameState Next) Window(
-        RulesContext rules, GameState s, UnitId defender, ReactionTrigger trigger, ContestSetup setup, D20Roll roll)
+    internal static (string? Fired, string? Ask, ContestSetup Setup, GameState Next) Window(
+        RulesContext rules, GameState s, UnitId defender, ReactionTrigger trigger, ContestSetup setup, D20Roll roll,
+        string? after = null)
     {
         var holder = s.FindUnit(defender)
             ?? throw new InvalidOperationException($"Unit {defender.Value} is not in the state; no window can open on it.");
         foreach (var id in holder.Abilities)
         {
+            if (after is not null && string.CompareOrdinal(id, after) <= 0)
+            {
+                continue;
+            }
+
             if (rules.FindAbility(id) is not { Reaction: { } spec } ability || spec.Trigger != trigger)
             {
                 continue;
             }
 
-            if (!Legal(rules, s, holder, ability) || !Fires(rules, s, holder, ability, spec, setup, roll))
+            if (!Legal(rules, s, holder, ability))
             {
                 continue;
             }
 
-            var unit = s.FindUnit(defender)!;
-            s = s with
+            if (ModeOf(holder, id, spec) == ReactionMode.AskMe && holder.Faction == Faction.Party)
             {
-                Units = s.Units.SetItem(s.Units.IndexOf(unit), unit with { Budget = unit.Budget with { ReactionUsed = true } }),
-            };
-            if (ability.Pool is { } pool)
-            {
-                var (ok, spent) = Pools.Spend(rules, s, defender, pool.PoolId, pool.Count);
-                if (!ok)
-                {
-                    throw new InvalidOperationException($"Unit {defender.Value} cannot pay the pool of \"{id}\"; legality should have skipped it.");
-                }
-
-                s = spent;
+                return (null, id, setup, s);
             }
 
-            return (id, WithBonus(setup, trigger, spec.Bonus), s);
+            if (!Fires(rules, s, holder, ability, spec, setup, roll))
+            {
+                continue;
+            }
+
+            var (fired, next) = Take(rules, s, defender, id, trigger, setup);
+            return (id, null, fired, next);
         }
 
-        return (null, setup, s);
+        return (null, null, setup, s);
+    }
+
+    /// <summary>
+    /// Fires <paramref name="defender"/>'s reaction <paramref name="abilityId"/> at the <paramref name="trigger"/> window
+    /// (plan calls 11 and 12): sets <see cref="TurnBudget.ReactionUsed"/>, pays the pool through <see cref="Pools.Spend"/>
+    /// (which sets <see cref="TurnBudget.CampSpent"/> for a camp pool) and adds the bonus to <paramref name="setup"/> (the
+    /// attack's target, or the save's bonus). Throws <see cref="InvalidOperationException"/> when the defender is gone,
+    /// does not hold the ability, the ability is not a reaction with that trigger, or it is not legal now. Draws nothing
+    /// and raises no event.
+    /// </summary>
+    internal static (ContestSetup Setup, GameState Next) Take(
+        RulesContext rules, GameState s, UnitId defender, string abilityId, ReactionTrigger trigger, ContestSetup setup)
+    {
+        var unit = s.FindUnit(defender)
+            ?? throw new InvalidOperationException($"Unit {defender.Value} is not in the state; it cannot react.");
+        if (unit.Abilities.IndexOf(abilityId, StringComparer.Ordinal) < 0
+            || rules.FindAbility(abilityId) is not { Reaction: { } spec } ability
+            || spec.Trigger != trigger)
+        {
+            throw new InvalidOperationException($"Unit {defender.Value} holds no {trigger} reaction \"{abilityId}\".");
+        }
+
+        if (!Legal(rules, s, unit, ability))
+        {
+            throw new InvalidOperationException($"Unit {defender.Value} cannot take \"{abilityId}\" now: it is used or its pool cannot pay.");
+        }
+
+        s = s with
+        {
+            Units = s.Units.SetItem(s.Units.IndexOf(unit), unit with { Budget = unit.Budget with { ReactionUsed = true } }),
+        };
+        if (ability.Pool is { } pool)
+        {
+            var (ok, spent) = Pools.Spend(rules, s, defender, pool.PoolId, pool.Count);
+            if (!ok)
+            {
+                throw new InvalidOperationException($"Unit {defender.Value} cannot pay the pool of \"{abilityId}\"; legality should have skipped it.");
+            }
+
+            s = spent;
+        }
+
+        return (WithBonus(setup, trigger, spec.Bonus), s);
     }
 
     // AB 7.3 and armour 10.4: the reaction unused, and its pool spendable under the camp rule.
@@ -117,7 +162,7 @@ public static class Reactions
                     ? Contests.ResolveAttack(setup, roll).Hit && !Contests.ResolveAttack(with, roll).Hit
                     : !Contests.ResolveCheck(setup, roll).Success && Contests.ResolveCheck(with, roll).Success;
 
-            // TODO(Task 8): "ask me" suspends on a Reaction decision; until then it does not fire.
+            // "Ask me" never fires on its own: Window asks a party unit first, and a non-party unit has no prompt.
             case ReactionMode.AskMe:
             case ReactionMode.Never:
             default:

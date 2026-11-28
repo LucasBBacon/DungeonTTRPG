@@ -280,17 +280,26 @@ public class CombatStartTests
 
     // --- Save version 8 ---
 
-    // A (party) stepped onto the shrine at (1,0) and holds its decision; B (party) and C (enemy) stand by. The fight is
-    // held before round 1 with order [C, A, B], and B struck the opener.
+    // B (party) struck the opener and A (party) is asked whether to take its ward against it (Task 8: only a reaction
+    // decision holds the fight before round 1); C (enemy) stands by. The fight is held before round 1 with order
+    // [C, A, B]. The frame is built by hand: loading checks its structure only.
     private static GameState Saved()
     {
         var open = GameState.Create(
-            GridMap.Parse(".*.......", ".........", "........."),
-            [U(1, 0, 0), U(2, 4, 1), Foe(3, 8, 1)],
+            GridMap.Parse(".........", ".........", "........."),
+            [U(1, 1, 0) with { Abilities = ["test.ward"] }, U(2, 4, 1), Foe(3, 8, 1)],
             7);
-        var atShrine = Engine.Apply(open, new MoveCommand(A, Direction.E), Rules).State;
-        Assert.NotNull(atShrine.Pending);
-        var held = atShrine with { Combat = new CombatState([C, A, B], 0, 1, BeforeRound1: true) };
+        var decision = new PendingDecision(new DecisionId(1), A, DecisionKind.Reaction, [0, 1], new GridPos(1, 0));
+        var frame = new AbilityModel.AbilityFrame(
+            B, "test.strike", new AbilityModel.UnitsTarget([A]), [A], 0, AbilityModel.ReactionTrigger.AttackRoll,
+            new ContestSetup(5, 12, RollMode.Normal), new D20Roll(RollMode.Normal, 10, null), "test.ward", null);
+        var held = open with
+        {
+            Pending = decision,
+            NextDecisionId = 2,
+            Resolution = frame,
+            Combat = new CombatState([C, A, B], 0, 1, BeforeRound1: true),
+        };
         return Struck(held, B);
     }
 
@@ -361,7 +370,7 @@ public class CombatStartTests
             "marker in round 2" => s with { Combat = combat with { Round = 2 } },
             "marker with current 1" => s with { Combat = combat with { Current = 1 } },
             "marker with a vacated turn" => s with { Combat = combat with { TurnVacated = true } },
-            "marker with nothing pending and no run end" => s with { Pending = null },
+            "marker with nothing pending and no run end" => s with { Pending = null, Resolution = null },
             "two marks on one faction" => WithUnit(s, a with { Budget = Charge.Charged, Spent = Charge.TurnPools, Opener = Charge }),
             "a mark on a unit whose turn started" =>
                 s with { Combat = new CombatState([B, A, C], 1, 1) },

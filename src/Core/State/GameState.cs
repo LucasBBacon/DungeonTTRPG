@@ -66,7 +66,12 @@ public sealed record Unit(
 
 public readonly record struct DecisionId(int Value);
 
-public enum DecisionKind { ShrineBoon }
+/// <summary>
+/// What a pending decision asks: <see cref="ShrineBoon"/>, a boon from a shrine; <see cref="Reaction"/>, whether to take
+/// an "ask me" reaction (M1-11 plan call 12; options <c>[0 = decline, 1 = take]</c>), with the suspended use held in
+/// <see cref="GameState.Resolution"/>.
+/// </summary>
+public enum DecisionKind { ShrineBoon, Reaction }
 
 /// <summary>A choice the game is waiting on. While one is pending, only an answer to it is valid.</summary>
 public sealed record PendingDecision(
@@ -80,7 +85,9 @@ public sealed record PendingDecision(
 /// <see cref="EffectInstance.Seq"/>; <see cref="NextEffectSeq"/> is the seq the next one gets (never reused).
 /// <see cref="Hero"/> is the unit whose death ends the run, or null; <see cref="Combat"/> is the fight in progress, null
 /// out of combat; <see cref="Ended"/> is the run end, after which every command is refused; <see cref="NextEventSeq"/> is
-/// the sequence id the next sequenced event gets (M1-10 plan call 1).
+/// the sequence id the next sequenced event gets (M1-10 plan call 1); <see cref="Resolution"/> is the ability use
+/// suspended on an "ask me" reaction, set exactly while a <see cref="DecisionKind.Reaction"/> decision is pending (M1-11
+/// plan call 12).
 /// Two states with the same contents are not equal
 /// with <c>==</c> or <c>Equals</c> (the map and the arrays compare by reference); compare
 /// their <see cref="Snapshot.Save"/> text instead.
@@ -100,7 +107,8 @@ public sealed record GameState(
     UnitId? Hero,
     CombatState? Combat,
     RunEnd? Ended,
-    long NextEventSeq)
+    long NextEventSeq,
+    AbilityFrame? Resolution)
 {
     /// <summary>True while a fight is in progress (DH 10.3's <c>combatActive</c>).</summary>
     public bool CombatActive => Combat is not null;
@@ -187,7 +195,7 @@ public sealed record GameState(
         }
 
         return new GameState(
-            map, sorted, seed, config, unlocks, ImmutableArray<EffectInstance>.Empty, 1, streams, null, 0, 1, hero, null, null, 1);
+            map, sorted, seed, config, unlocks, ImmutableArray<EffectInstance>.Empty, 1, streams, null, 0, 1, hero, null, null, 1, null);
     }
 
     /// <summary>
@@ -195,8 +203,9 @@ public sealed record GameState(
     /// applies it (M1-10 task 1). <paramref name="nextEventSeq"/> is at least 1. A combat state has an initialised order
     /// of distinct units in the state, a round of at least 1, and <c>Current</c> in [0, order length), or equal to the
     /// order length only when its turn is vacated. The before-round-1 marker (M1-11 plan call 7) needs round 1, current
-    /// 0, no vacated turn and a non-empty order, and a <paramref name="pending"/> decision or a run end (with neither,
-    /// round 1 would already have started). An opener mark (plan call 6) needs combat in round 1, its unit in the order
+    /// 0, no vacated turn and a non-empty order, and a pending <see cref="DecisionKind.Reaction"/> decision (an opener's
+    /// suspended use, M1-11 plan call 12) or a run end (with neither, round 1 would already have started). The suspended
+    /// use <paramref name="resolution"/> is checked for structure only, as <see cref="CheckResolution"/> says. An opener mark (plan call 6) needs combat in round 1, its unit in the order
     /// and that unit's round-1 turn not yet started (the marker is set, its slot is after the current one, or its slot is
     /// the current one and vacated); each faction has at most one. A run end has a defined cause and a killing event id
     /// exactly when the cause is <see cref="RunEndCause.HeroDeath"/>, from 1 to below <paramref name="nextEventSeq"/>; a
@@ -205,7 +214,7 @@ public sealed record GameState(
     /// </summary>
     internal static void CheckRunState(
         ImmutableArray<Unit> units, UnitId? hero, CombatState? combat, RunEnd? ended, long nextEventSeq,
-        PendingDecision? pending)
+        PendingDecision? pending, AbilityFrame? resolution)
     {
         if (nextEventSeq < 1)
         {
@@ -215,15 +224,18 @@ public sealed record GameState(
         if (combat is not null)
         {
             CheckCombat(units, combat);
-            if (combat.BeforeRound1 && pending is null && ended is null)
+
+            // Only a reaction an opener triggered can hold the fight before round 1 (M1-11 plan call 12; record 5 step 8).
+            if (combat.BeforeRound1 && pending?.Kind != DecisionKind.Reaction && ended is null)
             {
                 throw new ArgumentException(
-                    "Invalid combat: the before-round-1 marker is set with no pending decision and no run end.",
+                    "Invalid combat: the before-round-1 marker is set with no pending reaction decision and no run end.",
                     nameof(combat));
             }
         }
 
         CheckOpenerMarks(units, combat);
+        CheckResolution(units, combat, pending, resolution);
 
         if (ended is not null)
         {
@@ -310,6 +322,137 @@ public sealed record GameState(
                 "Invalid combat: the before-round-1 marker needs round 1, current 0, no vacated turn and a non-empty "
                 + $"order (round {combat.Round}, current {combat.Current}, turnVacated {combat.TurnVacated}, order of {length}).",
                 nameof(combat));
+        }
+    }
+
+    /// <summary>
+    /// The structure of a suspended use (M1-11 plan call 12), the part of the check that needs no rules (the rest is
+    /// <c>Resolution.Continue</c>'s): <paramref name="resolution"/> is set exactly when a <see cref="DecisionKind.Reaction"/>
+    /// decision is pending, whose options are <c>[0, 1]</c>; a frame needs combat; its ability and candidate are content
+    /// ids; its target is one of the three shapes, well formed; its user is in the state; its locked units are in unit
+    /// order, each once, and <see cref="AbilityFrame.Index"/> is within them; the window is defined, and a save difficulty
+    /// is held exactly for the own-save window; the roll is well formed (faces 1 to 20, a second die exactly when the
+    /// mode is not normal) in the setup's mode; the reactor <c>Locked[Index]</c> is a party unit in the state (AB 7.3:
+    /// only the party is asked), its reaction unused, holding the candidate; and the decision names the reactor, on its
+    /// square. Throws <see cref="ArgumentException"/> naming the problem.
+    /// </summary>
+    private static void CheckResolution(
+        ImmutableArray<Unit> units, CombatState? combat, PendingDecision? pending, AbilityFrame? resolution)
+    {
+        const string param = "resolution";
+        bool asking = pending?.Kind == DecisionKind.Reaction;
+        if (asking && (pending!.Options.IsDefault || pending.Options.Length != 2 || pending.Options[0] != 0 || pending.Options[1] != 1))
+        {
+            throw new ArgumentException("Invalid pending decision: a reaction decision's options are [0, 1] (decline, take).", nameof(pending));
+        }
+
+        if (resolution is null)
+        {
+            if (asking)
+            {
+                throw new ArgumentException("Invalid run: a reaction decision is pending with no suspended ability use.", param);
+            }
+
+            return;
+        }
+
+        if (!asking)
+        {
+            throw new ArgumentException("Invalid run: an ability use is suspended with no reaction decision pending.", param);
+        }
+
+        if (combat is null)
+        {
+            throw new ArgumentException("Invalid run: an ability use is suspended out of combat; only a combat roll can ask.", param);
+        }
+
+        var f = resolution;
+        if (f.AbilityId is null || !ContentId.IsValid(f.AbilityId))
+        {
+            throw new ArgumentException($"Invalid frame: ability '{f.AbilityId}' is not a content id ([a-z0-9_.:-]).", param);
+        }
+
+        if (f.Candidate is null || !ContentId.IsValid(f.Candidate))
+        {
+            throw new ArgumentException($"Invalid frame: candidate '{f.Candidate}' is not a content id ([a-z0-9_.:-]).", param);
+        }
+
+        switch (f.Target)
+        {
+            case UnitsTarget { Units.IsDefault: false }:
+            case PointTarget:
+            case AimTarget aim when Enum.IsDefined(aim.Aim):
+                break;
+            default:
+                throw new ArgumentException("Invalid frame: the target is missing or malformed.", param);
+        }
+
+        if (!units.Any(u => u.Id == f.User))
+        {
+            throw new ArgumentException($"Invalid frame: the user {f.User.Value} is not in the state.", param);
+        }
+
+        if (f.Locked.IsDefault)
+        {
+            throw new ArgumentException("Invalid frame: the locked units are uninitialised.", param);
+        }
+
+        for (int k = 1; k < f.Locked.Length; k++)
+        {
+            if (f.Locked[k - 1].Value >= f.Locked[k].Value)
+            {
+                throw new ArgumentException(
+                    $"Invalid frame: locked units must be in unit order, each once ({f.Locked[k - 1].Value} then {f.Locked[k].Value}).", param);
+            }
+        }
+
+        if (f.Index < 0 || f.Index >= f.Locked.Length)
+        {
+            throw new ArgumentException($"Invalid frame: index {f.Index} is outside the {f.Locked.Length} locked units.", param);
+        }
+
+        if (!Enum.IsDefined(f.Window))
+        {
+            throw new ArgumentException("Invalid frame: unknown reaction window.", param);
+        }
+
+        if ((f.Window == ReactionTrigger.OwnSave) != f.SaveDifficulty.HasValue)
+        {
+            throw new ArgumentException("Invalid frame: a save difficulty is held exactly for an own-save window.", param);
+        }
+
+        var roll = f.Roll;
+        static bool Face(int n) => n >= 1 && n <= 20;
+        if (!Enum.IsDefined(roll.Mode) || !Enum.IsDefined(f.Setup.Mode) || roll.Mode != f.Setup.Mode
+            || !Face(roll.First)
+            || (roll.Mode == RollMode.Normal) != (roll.Second is null)
+            || (roll.Second is { } second && !Face(second)))
+        {
+            throw new ArgumentException("Invalid frame: the roll is malformed or not in the setup's mode.", param);
+        }
+
+        var reactorId = f.Locked[f.Index];
+        var reactor = units.FirstOrDefault(u => u.Id == reactorId)
+            ?? throw new ArgumentException($"Invalid frame: the reactor {reactorId.Value} is not in the state.", param);
+        if (reactor.Faction != Faction.Party)
+        {
+            throw new ArgumentException($"Invalid frame: the reactor {reactorId.Value} is a {reactor.Faction} unit; only the party is asked.", param);
+        }
+
+        if (reactor.Budget.ReactionUsed)
+        {
+            throw new ArgumentException($"Invalid frame: the reactor {reactorId.Value} has used its reaction.", param);
+        }
+
+        if (reactor.Abilities.IndexOf(f.Candidate, StringComparer.Ordinal) < 0)
+        {
+            throw new ArgumentException($"Invalid frame: the reactor {reactorId.Value} does not hold '{f.Candidate}'.", param);
+        }
+
+        if (pending!.Unit != reactorId || pending.Source != reactor.Pos)
+        {
+            throw new ArgumentException(
+                $"Invalid frame: the reaction decision must name the reactor {reactorId.Value} on its square ({reactor.Pos.X}, {reactor.Pos.Y}).", param);
         }
     }
 

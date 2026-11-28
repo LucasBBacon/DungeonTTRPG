@@ -137,7 +137,7 @@ public static class Engine
             EndTurnCommand end => ApplyEndTurn(state, end, rules),
             UseAbilityCommand use => ApplyUseAbility(state, use, rules),
             SetReactionPolicyCommand policy => ApplySetReactionPolicy(state, policy, rules),
-            AnswerDecisionCommand answer => ApplyAnswer(state, answer),
+            AnswerDecisionCommand answer => ApplyAnswer(state, answer, rules),
             _ => throw new NotSupportedException($"Unsupported command type {command.GetType().Name}."),
         };
         if (!result.Ok)
@@ -199,7 +199,9 @@ public static class Engine
     /// returned (<see cref="RunEnded"/> last). If the striker is gone or can no longer pay the cost
     /// (<see cref="AbilityUse.Payable"/>), the opener is dropped: no <see cref="AbilityUsed"/>, no cost, no mark.</item>
     /// <item>Otherwise the opener resolves (<see cref="Resolution.Use"/>): the cost is paid on the step-4 budget, the
-    /// striker is marked with it, the targets lock and resolve; then dispatched.</item>
+    /// striker is marked with it, the targets lock and resolve; then dispatched. A window that asks the party (plan call
+    /// 12) suspends it on a reaction decision: the marker stays set, the settle loop does nothing, and the answer
+    /// resolves the rest and then starts round 1.</item>
     /// <item>The settle loop: the win check (<see cref="CombatEnded"/>, and no turn event), else round 1 starts with
     /// slot 0's <see cref="TurnStarted"/>.</item>
     /// </list>
@@ -442,7 +444,7 @@ public static class Engine
         return CommandError.None;
     }
 
-    private static StepResult ApplyAnswer(GameState state, AnswerDecisionCommand answer)
+    private static StepResult ApplyAnswer(GameState state, AnswerDecisionCommand answer, RulesContext rules)
     {
         var pending = state.Pending;
         if (pending is null)
@@ -469,8 +471,25 @@ public static class Engine
         return pending.Kind switch
         {
             DecisionKind.ShrineBoon => ResolveShrineBoon(state, pending, index, answer.OptionIndex),
+            DecisionKind.Reaction => ResolveReaction(state, pending, answer.OptionIndex, rules),
             _ => throw new NotSupportedException($"Unsupported decision kind {pending.Kind}."),
         };
+    }
+
+    /// <summary>
+    /// Answers an "ask me" reaction (M1-11 plan call 12): <see cref="DecisionResolved"/> with the chosen option, then the
+    /// suspended use continues (<see cref="Resolution.Continue"/>): take fires the reaction, decline walks on to the next
+    /// candidate, which may ask again. Nothing is drawn before the window closes and no tick passes; the caller then
+    /// dispatches the events and runs the settle loop, which starts round 1 for a suspended opener.
+    /// </summary>
+    private static StepResult ResolveReaction(GameState state, PendingDecision pending, int optionIndex, RulesContext rules)
+    {
+        int option = pending.Options[optionIndex];
+        var (events, next) = Resolution.Continue(rules, state, option == Resolution.Take);
+        return new StepResult(
+            next,
+            [new DecisionResolved(pending.Id, pending.Unit, option), .. events],
+            CommandError.None);
     }
 
     /// <summary>The unit takes the chosen boon and the shrine it stood on becomes plain floor.</summary>
