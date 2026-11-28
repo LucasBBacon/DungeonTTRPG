@@ -14,7 +14,8 @@ namespace Dungeon.Core;
 /// decision options are lists, because their order is data. Active effects are a set keyed by seq. The initiative order,
 /// a unit's spent counts, its opener mark's turn-pool counts, its abilities and its reaction settings are lists in stored
 /// order. The suspended use (M1-11 plan call 12) writes its locked units as a list in lock order, and its held events
-/// (M1-12a plan call 12) as a list in held order.
+/// (M1-12a plan call 12) as a list in held order. The phase clock, each unit's lost turn starts and each instance's
+/// condition part (M1-12a plan calls 1 and 2, its terms a list in stored order) are written too.
 /// Stream keys are derived from the run seed and are not written; a state whose keys disagree with its seed is refused.
 /// </summary>
 public static class StateDigest
@@ -57,7 +58,7 @@ public static class StateDigest
     {
         public void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(16);
+            w.BeginRecord(18);
             w.UInt64(0, s.RunSeed);
             w.List(1, s.Map.ToRows(), (e, row) => e.String(0, row));
             w.SetByKey(2, s.Units, u => IdKey(u.Id), (e, u) => e.Record(0, new UnitRecord(u)));
@@ -74,6 +75,8 @@ public static class StateDigest
             w.OptionalRecord(13, s.Ended is null ? null : new RunEndRecord(s.Ended));
             w.Int64(14, s.NextEventSeq);
             w.OptionalRecord(15, s.Resolution is null ? null : new FrameRecord(s.Resolution));
+            w.Int64(16, s.Phase);
+            w.Enum(17, s.Step);
             w.EndRecord();
         }
     }
@@ -82,7 +85,7 @@ public static class StateDigest
     {
         public void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(12);
+            w.BeginRecord(13);
             w.Int32(0, u.Id.Value);
             w.Int32(1, u.Pos.X);
             w.Int32(2, u.Pos.Y);
@@ -95,6 +98,7 @@ public static class StateDigest
             w.OptionalRecord(9, u.Opener is null ? null : new OpenerRecord(u.Opener));
             w.List(10, u.Abilities, (e, id) => e.String(0, id));
             w.List(11, u.Reactions, (e, r) => e.Record(0, new ReactionRecord(r)));
+            w.Int32(12, u.HardTurnsLostThisFight);
             w.EndRecord();
         }
     }
@@ -259,8 +263,11 @@ public static class StateDigest
     }
 
     // A held event of a suspended use (M1-12a plan call 12), a tagged union over the closed set: the tag (the rule-event
-    // id), the unit (a user for abilityResolved), then each type's fields, absent for the other types. Squares are
-    // written x then y: unitDied's at is the first square, unitMoved's from and to the first and second.
+    // id, or the event name in lower camel case), the unit (a user for abilityResolved, a holder for the condition
+    // events), then each type's fields, absent for the other types. Squares are written x then y: unitDied's at is the
+    // first square, unitMoved's from and to the first and second. The condition events (Task 3) add the seq, the
+    // condition id, the source (a record whose unit is absent for the environment), the value, the new flag, the reason
+    // and the lost-turn count.
     private sealed class HeldRecord(GameEvent e) : ICanonical
     {
         public void WriteCanonical(CanonicalWriter w)
@@ -270,9 +277,19 @@ public static class StateDigest
                 UnitDied d => ("unitDied", d.Unit, (string?)null, (GridPos?)d.At, (GridPos?)null),
                 UnitMoved m => ("unitMoved", m.Unit, null, m.From, m.To),
                 AbilityResolved r => ("abilityResolved", r.User, r.AbilityId, null, null),
+                ConditionApplied a => ("conditionApplied", a.Holder, null, null, null),
+                ConditionEnded c => ("conditionEnded", c.Holder, null, null, null),
+                TurnStartLost l => ("turnStartLost", l.Unit, null, null, null),
                 _ => throw new ArgumentException($"A suspended use does not hold a {e?.GetType().Name ?? "null"} event.", nameof(e)),
             };
-            w.BeginRecord(7);
+            var (seq, condition, source, value, isNew, reason, thisFight) = e switch
+            {
+                ConditionApplied a => ((ulong?)Positive(a.Seq), a.ConditionId, new SourceRecord(a.Source), (int?)a.Value, (bool?)a.New, (string?)null, (int?)null),
+                ConditionEnded c => (Positive(c.Seq), c.ConditionId, null, null, null, Enum.GetName(c.Reason) ?? throw new ArgumentException("Unknown end reason.", nameof(e)), null),
+                TurnStartLost l => (null, null, null, null, null, null, l.ThisFight),
+                _ => ((ulong?)null, (string?)null, (SourceRecord?)null, (int?)null, (bool?)null, (string?)null, (int?)null),
+            };
+            w.BeginRecord(14);
             w.String(0, tag);
             w.Int32(1, unit.Value);
             w.OptionalString(2, ability);
@@ -280,6 +297,28 @@ public static class StateDigest
             w.OptionalInt32(4, first?.Y);
             w.OptionalInt32(5, second?.X);
             w.OptionalInt32(6, second?.Y);
+            w.OptionalUInt64(7, seq);
+            w.OptionalString(8, condition);
+            w.OptionalRecord(9, source);
+            w.OptionalInt32(10, value);
+            w.OptionalInt32(11, isNew is { } n ? (n ? 1 : 0) : null);
+            w.OptionalString(12, reason);
+            w.OptionalInt32(13, thisFight);
+            w.EndRecord();
+        }
+
+        // Event seqs are positive in every state the rules produce; any other is refused rather than wrapped.
+        private static ulong Positive(long seq) =>
+            seq > 0 ? (ulong)seq : throw new ArgumentException($"Held event seq {seq} is not positive.", nameof(seq));
+    }
+
+    // A held condition event's source: the source unit, absent for the environment.
+    private sealed class SourceRecord(EffectSource source) : ICanonical
+    {
+        public void WriteCanonical(CanonicalWriter w)
+        {
+            w.BeginRecord(1);
+            w.OptionalInt32(0, source.Unit?.Value);
             w.EndRecord();
         }
     }

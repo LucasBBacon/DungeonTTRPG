@@ -95,7 +95,7 @@ internal static class TriggerDispatch
                 if (string.Equals(trigger.On, eventId, StringComparison.Ordinal)
                     && (trigger.Scope == TriggerScope.Any || instance.Holder == subject))
                 {
-                    due.Add(new Firing(trigger.Priority, SourceRank(state, instance.Source), instance.Seq, t, trigger));
+                    due.Add(new Firing(trigger.Priority, SourceRank(state, instance), instance.Seq, t, trigger));
                 }
             }
         }
@@ -104,10 +104,11 @@ internal static class TriggerDispatch
         return due;
     }
 
-    // The source unit's position in the unit list (sorted by id); the environment after every unit.
-    private static int SourceRank(GameState state, EffectSource source)
+    // The source unit's position in the unit list (sorted by id); the environment after every unit. A condition instance
+    // whose source unit is gone ranks with the environment (M1-12a plan call 8); any other effect's source must be present.
+    private static int SourceRank(GameState state, EffectInstance instance)
     {
-        if (source.Unit is not { } unit)
+        if (instance.Source.Unit is not { } unit)
         {
             return state.Units.Length;
         }
@@ -120,7 +121,9 @@ internal static class TriggerDispatch
             }
         }
 
-        throw new InvalidOperationException($"An effect's source unit {unit.Value} is not in the state.");
+        return instance.Condition is not null
+            ? state.Units.Length
+            : throw new InvalidOperationException($"An effect's source unit {unit.Value} is not in the state.");
     }
 
     // The instance with this seq in the state, or null when it is gone. A linear walk: it assumes nothing of the order.

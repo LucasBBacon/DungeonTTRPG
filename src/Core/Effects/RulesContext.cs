@@ -3,21 +3,32 @@ using System.Collections.Immutable;
 using System.Linq;
 using Dungeon.Core.AbilityModel;
 using Dungeon.Core.Combat;
+using Dungeon.Core.Conditions;
 using Dungeon.Core.Content;
 using static Dungeon.Core.Content.ContentJson;
 
 namespace Dungeon.Core.Effects;
 
+// The class shares its name with its namespace, and this class has a member of that name.
+using CoreConditions = Dungeon.Core.Conditions.Conditions;
+
 /// <summary>
 /// What the fold queries and the engine read the effect rules from: the effect definitions of the content, and the code
 /// registries (derived numbers, roll targets, flags, rule events and hooks; M1-07 plan call 5). Building one checks every
 /// reference the content makes into the registries, so a misspelt id fails at startup with the file and field named
-/// (MAIN 6.5), never in play.
+/// (MAIN 6.5), never in play. The condition table (M1-12a plan calls 3 and 5) is the content's condition records plus
+/// the core definitions (<see cref="CoreConditions.CoreDefinitions"/>); each condition contributes a synthesised
+/// <see cref="EffectSourceKind.Condition"/> effect definition with its id, modifiers and triggers, so the folds and the
+/// trigger dispatch read a condition instance as any other.
 /// </summary>
 public sealed class RulesContext
 {
+    // The message for a condition named where only the pipeline may apply one (M1-12a plan call 3).
+    private const string ThroughPipeline = "conditions are applied through the pipeline (M1-12b).";
+
     // Every array is ordinal by id, for binary search (DS4).
     private readonly ImmutableArray<EffectDefinition> _definitions;
+    private readonly ImmutableArray<ConditionDefinition> _conditions;
     private readonly ImmutableArray<DerivedNumber> _numbers;
     private readonly ImmutableArray<string> _rollTargets;
     private readonly ImmutableArray<string> _flagTargets;
@@ -28,6 +39,7 @@ public sealed class RulesContext
 
     private RulesContext(
         ImmutableArray<EffectDefinition> definitions,
+        ImmutableArray<ConditionDefinition> conditions,
         ImmutableArray<DerivedNumber> numbers,
         ImmutableArray<string> rollTargets,
         ImmutableArray<string> flags,
@@ -36,7 +48,8 @@ public sealed class RulesContext
         ImmutableArray<PoolDefinition> pools,
         ImmutableArray<AbilityDefinition> abilities)
     {
-        _definitions = definitions;
+        _conditions = conditions;
+        _definitions = SortedDefinitions(definitions, conditions);
         _numbers = numbers;
         _rollTargets = rollTargets;
         _flagTargets = SortedIds(Flags.Targets, nameof(Flags.Targets));
@@ -48,10 +61,12 @@ public sealed class RulesContext
     }
 
     /// <summary>
-    /// No effect definitions, the core registries and no pools. The engine runs with it when no rules are given.
+    /// No effect definitions, the core condition definitions, the core registries and no pools. The engine runs with it
+    /// when no rules are given.
     /// </summary>
     public static RulesContext Empty { get; } = new(
         ImmutableArray<EffectDefinition>.Empty,
+        CoreConditions.CoreDefinitions,
         SortedNumbers(DerivedNumbers.Core),
         SortedIds(RollTargets.Core, "rollTargets"),
         SortedIds(Flags.Core, "flags"),
@@ -77,6 +92,10 @@ public sealed class RulesContext
     /// The ability table (M1-11 Task 3) is the content's ability records plus the code-built <paramref name="abilities"/>,
     /// ordinal by id; <see cref="ArgumentException"/> if a definition is null or an id repeats, and
     /// <see cref="ContentLoadException"/> naming the definition's file and path when a pool or an effect it names does not exist.
+    /// Conditions (M1-12a plan call 3): <see cref="ContentLoadException"/> naming the file and path when a condition's id is
+    /// also an effect's or a core definition's, its modifiers or triggers break the rules above, or a <c>charges.on</c> or
+    /// <c>trigger.event</c> of its terms names no rule event; and when an ability's <c>effects</c> entry or any trigger's
+    /// <c>applyEffect</c> names a condition ("conditions are applied through the pipeline (M1-12b)").
     /// </summary>
     public static RulesContext Create(
         ContentSet content,
@@ -89,8 +108,10 @@ public sealed class RulesContext
         ImmutableArray<AbilityDefinition>? abilities = null)
     {
         ArgumentNullException.ThrowIfNull(content);
+        CheckConditionIds(content);
         var context = new RulesContext(
             content.All<EffectDefinition>(),
+            SortedConditions(content.All<ConditionDefinition>()),
             SortedNumbers(numbers ?? DerivedNumbers.Core),
             SortedIds(rollTargets ?? RollTargets.Core, nameof(rollTargets)),
             SortedIds(flags ?? Flags.Core, nameof(flags)),
@@ -105,6 +126,13 @@ public sealed class RulesContext
     /// <summary>The effect definition <paramref name="id"/>. Throws <see cref="ArgumentException"/> if there is none.</summary>
     public EffectDefinition Definition(string id) =>
         Find(_definitions, id, d => d.Id) ?? throw new ArgumentException($"No effect definition \"{id}\".", nameof(id));
+
+    /// <summary>The condition <paramref name="id"/>. Throws <see cref="ArgumentException"/> if there is none.</summary>
+    public ConditionDefinition Condition(string id) =>
+        FindCondition(id) ?? throw new ArgumentException($"No condition definition \"{id}\".", nameof(id));
+
+    /// <summary>The condition table: the content's condition records and the core definitions, ordinal by id.</summary>
+    public ImmutableArray<ConditionDefinition> Conditions => _conditions;
 
     /// <summary>The ability <paramref name="id"/>. Throws <see cref="ArgumentException"/> if there is none.</summary>
     public AbilityDefinition Ability(string id) =>
@@ -129,6 +157,39 @@ public sealed class RulesContext
 
     /// <summary>True if <paramref name="target"/> is a flag target and <paramref name="name"/> a registered flag.</summary>
     public bool IsFlag(string target, string name) => Contains(_flagTargets, target) && Contains(_flags, name);
+
+    /// <summary>The condition <paramref name="id"/>, or null if there is none.</summary>
+    internal ConditionDefinition? FindCondition(string id) => Find(_conditions, id, c => c.Id);
+
+    /// <summary>
+    /// The first term of <paramref name="terms"/> (a fallback included) whose <c>charges.on</c> or <c>trigger.event</c>
+    /// names no registered rule event, as a problem at its path under <paramref name="at"/>; null if there is none.
+    /// </summary>
+    internal ConditionProblem? CheckTermEvents(ImmutableArray<DurationTerm> terms, string at)
+    {
+        for (int k = 0; k < terms.Length; k++)
+        {
+            string termAt = Item(at, k);
+            var term = terms[k];
+            if (term is DurationTerm.Charges charges)
+            {
+                if (Find(_events, charges.On, e => e.Id) is null)
+                {
+                    return new(Member(Member(termAt, "charges"), "on"), $"\"{charges.On}\" names no rule event.");
+                }
+
+                term = charges.Fallback;
+                termAt = Member(Member(termAt, "charges"), "fallback");
+            }
+
+            if (term is DurationTerm.TriggerEnd trigger && Find(_events, trigger.Event, e => e.Id) is null)
+            {
+                return new(Member(Member(termAt, "trigger"), "event"), $"\"{trigger.Event}\" names no rule event.");
+            }
+        }
+
+        return null;
+    }
 
     /// <summary>The ability <paramref name="id"/>, or null if there is none.</summary>
     internal AbilityDefinition? FindAbility(string id) => Find(_abilities, id, a => a.Id);
@@ -164,6 +225,10 @@ public sealed class RulesContext
                 if (records[i] is EffectDefinition definition)
                 {
                     ValidateDefinition(definition, Item("$.effects", i));
+                }
+                else if (records[i] is ConditionDefinition condition)
+                {
+                    ValidateCondition(condition, Item("$.conditions", i));
                 }
             }
         }
@@ -201,10 +266,56 @@ public sealed class RulesContext
 
         for (int e = 0; e < ability.Effects.Length; e++)
         {
+            if (FindCondition(ability.Effects[e]) is not null)
+            {
+                throw new ContentLoadException(
+                    ability.File, Item(Member(at, "effects"), e), $"\"{ability.Effects[e]}\" is a condition; {ThroughPipeline}");
+            }
+
             if (Find(_definitions, ability.Effects[e], d => d.Id) is null)
             {
                 throw new ContentLoadException(
                     ability.File, Item(Member(at, "effects"), e), $"\"{ability.Effects[e]}\" names no effect.");
+            }
+        }
+    }
+
+    // A condition record: its synthesised effect definition's modifiers and triggers, then its terms' rule events.
+    private void ValidateCondition(ConditionDefinition condition, string at)
+    {
+        ValidateDefinition(Definition(condition.Id), at);
+        var broken = CheckTermEvents(condition.Duration, Member(at, "duration"))
+            ?? CheckTermEvents(condition.OutOfCombat, Member(at, "outOfCombat"));
+        if (broken is { } problem)
+        {
+            throw new ContentLoadException(condition.File, problem.Field, problem.Message);
+        }
+    }
+
+    // Ids are unique across effects and conditions, and no record takes a core definition's id (M1-12a plan calls 3, 5).
+    private static void CheckConditionIds(ContentSet content)
+    {
+        foreach (string file in content.KindFiles)
+        {
+            var records = content.RecordsIn(file);
+            for (int i = 0; i < records.Length; i++)
+            {
+                if (records[i] is not ConditionDefinition condition)
+                {
+                    continue;
+                }
+
+                string field = Member(Item("$.conditions", i), "id");
+                if (CoreConditions.IsCoreId(condition.Id))
+                {
+                    throw new ContentLoadException(condition.File, field, $"\"{condition.Id}\" is a core condition definition's id.");
+                }
+
+                if (content.Find<EffectDefinition>(condition.Id) is { } effect)
+                {
+                    throw new ContentLoadException(
+                        condition.File, field, $"\"{condition.Id}\" is also an effect id in {effect.File}; ids are unique across effects and conditions.");
+                }
             }
         }
     }
@@ -281,6 +392,14 @@ public sealed class RulesContext
             for (int a = 0; a < trigger.Do.Length; a++)
             {
                 var action = trigger.Do[a];
+                if (action.ApplyEffect is { } applied && FindCondition(applied) is not null)
+                {
+                    throw new ContentLoadException(
+                        definition.File,
+                        Member(Item(Member(field, "do"), a), "applyEffect"),
+                        $"\"{applied}\" is a condition; {ThroughPipeline}");
+                }
+
                 if (action.Hook is { } hook && !Hooks.Contains(hook))
                 {
                     throw new ContentLoadException(
@@ -299,6 +418,19 @@ public sealed class RulesContext
             }
         }
     }
+
+    // The content's effect definitions and one synthesised condition-kind definition per condition, ordinal by id. The
+    // ids are distinct: CheckConditionIds has refused a clash.
+    private static ImmutableArray<EffectDefinition> SortedDefinitions(
+        ImmutableArray<EffectDefinition> effects, ImmutableArray<ConditionDefinition> conditions) =>
+        effects
+            .Concat(conditions.Select(c => new EffectDefinition(c.File, c.Id, EffectSourceKind.Condition, c.Modifiers, c.Triggers)))
+            .OrderBy(d => d.Id, StringComparer.Ordinal)
+            .ToImmutableArray();
+
+    // The content's condition records and the core definitions, ordinal by id.
+    private static ImmutableArray<ConditionDefinition> SortedConditions(ImmutableArray<ConditionDefinition> fromContent) =>
+        fromContent.Concat(CoreConditions.CoreDefinitions).OrderBy(c => c.Id, StringComparer.Ordinal).ToImmutableArray();
 
     private static ImmutableArray<DerivedNumber> SortedNumbers(ImmutableArray<DerivedNumber> numbers)
     {

@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using Dungeon.Core.AbilityModel;
 using Dungeon.Core.Canonical;
 using Dungeon.Core.Combat;
+using Dungeon.Core.Conditions;
 using Dungeon.Core.Content;
 using Dungeon.Core.Effects;
 using Dungeon.Core.Stats;
@@ -54,7 +55,8 @@ public static class Snapshot
     /// <summary>
     /// The only version this build reads and writes, shared with <see cref="CommandLog"/>.
     /// v9 (M1-12a) adds held events, the phase clock and condition state (the held events of a suspended use are
-    /// <c>resolution.held</c>);
+    /// <c>resolution.held</c>; the clock is <c>phase</c> and <c>step</c>; an effect's condition part is
+    /// <c>effects[].condition</c>, and a unit's lost turn starts <c>hardTurnsLostThisFight</c>);
     /// version 8 (M1-11) added the before-round-1 marker, the opener mark, each unit's abilities and reaction settings,
     /// the reaction decision kind and the suspended ability use (<c>resolution</c>);
     /// version 7 (M1-10) added the run, combat and turn state;
@@ -119,6 +121,7 @@ public static class Snapshot
                 },
                 Abilities = u.Abilities.ToArray(),
                 Reactions = u.Reactions.Select(r => new ReactionSettingDto { Ability = r.AbilityId, Mode = r.Mode.ToString() }).ToArray(),
+                HardTurnsLostThisFight = u.HardTurnsLostThisFight,
             }).ToArray(),
             Rng = new RngStreamsDto
             {
@@ -142,6 +145,7 @@ public static class Snapshot
                 Effect = e.EffectId,
                 Holder = e.Holder.Value,
                 Source = e.Source.Unit?.Value,
+                Condition = e.Condition is null ? null : ConditionDto.From(e.Condition),
             }).ToArray(),
             NextEffectSeq = s.NextEffectSeq,
             Hero = s.Hero?.Value,
@@ -160,6 +164,8 @@ public static class Snapshot
             },
             NextEventSeq = s.NextEventSeq,
             Resolution = s.Resolution is null ? null : FrameDto.From(s.Resolution),
+            Phase = s.Phase,
+            Step = s.Step.ToString(),
         });
     }
 
@@ -169,7 +175,9 @@ public static class Snapshot
     /// <see cref="SnapshotFormatException"/> for anything else that is wrong, including a run seed
     /// of 2^60 or more; it never returns a partly loaded state. Stream keys are re-derived from the
     /// run seed, so only the counters come from the file. Active effects must be sorted by seq, with positive,
-    /// distinct seqs below <c>nextEffectSeq</c>, content ids, and holder and source units that are in the state.
+    /// distinct seqs below <c>nextEffectSeq</c>, content ids, and holder and source units that are in the state; a
+    /// condition instance's source may be gone (M1-12a plan call 8). The phase clock and the condition parts are checked
+    /// for structure by <c>GameState.CheckClock</c>.
     /// The hero, each unit's budget, spent counts, opener charge, abilities and reaction settings are checked by <see cref="GameState.Create"/>, and the
     /// combat state (the before-round-1 marker included), the opener marks, the run end and <c>nextEventSeq</c> by the
     /// same rules the core holds them to (M1-10 task 1; M1-11 task 1). A pending decision is checked by its kind: a shrine
@@ -205,7 +213,8 @@ public static class Snapshot
                 PoolSpendDto.ToSpends(PersistenceJson.Need(u.Spent, "unit spent"), "unit spent count"),
                 u.Opener?.ToCharge(),
                 [.. PersistenceJson.Need(u.Abilities, "unit abilities")],
-                [.. PersistenceJson.Need(u.Reactions, "unit reactions").Select(r => PersistenceJson.Need(r, "unit reaction").ToSetting())]);
+                [.. PersistenceJson.Need(u.Reactions, "unit reactions").Select(r => PersistenceJson.Need(r, "unit reaction").ToSetting())],
+                PersistenceJson.Need(u.HardTurnsLostThisFight, "unit hardTurnsLostThisFight"));
             NeedBoonIds(unit.Boons, $"unit {unit.Id.Value} boons");
             units.Add(unit);
         }
@@ -322,9 +331,12 @@ public static class Snapshot
             : null;
 
         var resolution = dto.Resolution?.ToFrame();
+        long phase = PersistenceJson.Need(dto.Phase, "phase");
+        var step = PersistenceJson.ParseEnum<ClockStep>(dto.Step, "step");
 
         // The same rules the core holds these fields to; a breach surfaces as a format error.
         GameState.CheckRunState(state.Units, state.Hero, combat, ended, nextEventSeq, pending, resolution);
+        GameState.CheckClock(phase, step, effects, nextEffectSeq);
 
         return state with
         {
@@ -338,6 +350,8 @@ public static class Snapshot
             Tick = tick,
             NextDecisionId = nextDecisionId,
             Resolution = resolution,
+            Phase = phase,
+            Step = step,
         };
     }
 
@@ -380,6 +394,7 @@ public static class Snapshot
             string id = PersistenceJson.Need(e.Effect, "effect id");
             var holder = new UnitId(PersistenceJson.Need(e.Holder, "effect holder"));
             var source = new EffectSource(e.Source is { } unit ? new UnitId(unit) : null);
+            var condition = e.Condition?.ToState();
             if (seq < 1 || seq >= nextEffectSeq)
             {
                 throw new SnapshotFormatException(
@@ -403,12 +418,13 @@ public static class Snapshot
                 throw new SnapshotFormatException($"Invalid save: effect {seq} is held by unknown unit {holder.Value}.");
             }
 
-            if (source.Unit is { } from && state.FindUnit(from) is null)
+            // A condition instance keeps a source that has died (M1-12a plan call 8); any other effect's source is present.
+            if (source.Unit is { } from && condition is null && state.FindUnit(from) is null)
             {
                 throw new SnapshotFormatException($"Invalid save: effect {seq} comes from unknown unit {from.Value}.");
             }
 
-            effects.Add(new EffectInstance(seq, id, holder, source));
+            effects.Add(new EffectInstance(seq, id, holder, source, condition));
         }
 
         return effects.MoveToImmutable();
@@ -467,6 +483,9 @@ public static class Snapshot
         [JsonPropertyName("nextEventSeq"), JsonPropertyOrder(20), JsonRequired] public long? NextEventSeq { get; set; }
         // Required: Save always writes it (as null when no ability use is suspended).
         [JsonPropertyName("resolution"), JsonPropertyOrder(21), JsonRequired] public FrameDto? Resolution { get; set; }
+        // The phase clock (M1-12a plan call 1): the counter and the step by name.
+        [JsonPropertyName("phase"), JsonPropertyOrder(22), JsonRequired] public long? Phase { get; set; }
+        [JsonPropertyName("step"), JsonPropertyOrder(23), JsonRequired] public string? Step { get; set; }
 
         public SaveHeader ToHeader() => new(
             PersistenceJson.Need(Version, "version"),
@@ -545,6 +564,9 @@ public static class Snapshot
 
         // The unit's reaction policy overrides (M1-11 plan call 13), in stored (ability id) order.
         [JsonPropertyName("reactions"), JsonPropertyOrder(11), JsonRequired] public ReactionSettingDto?[]? Reactions { get; set; }
+
+        // The turn starts lost to hard conditions in this fight (CO 5.7; M1-12a).
+        [JsonPropertyName("hardTurnsLostThisFight"), JsonPropertyOrder(12), JsonRequired] public int? HardTurnsLostThisFight { get; set; }
     }
 
     /// <summary>A reaction policy override: the ability id and the mode by name.</summary>
@@ -703,7 +725,10 @@ public static class Snapshot
         [JsonPropertyName("shrine"), JsonPropertyOrder(1)] public ulong? Shrine { get; set; }
     }
 
-    /// <summary>An active effect; <c>source</c> is the source unit's id, or null for the environment.</summary>
+    /// <summary>
+    /// An active effect; <c>source</c> is the source unit's id, or null for the environment; <c>condition</c> is the
+    /// condition part (M1-12a plan call 2), or null.
+    /// </summary>
     private sealed class EffectDto
     {
         [JsonPropertyName("seq"), JsonPropertyOrder(0)] public long? Seq { get; set; }
@@ -711,6 +736,178 @@ public static class Snapshot
         [JsonPropertyName("holder"), JsonPropertyOrder(2)] public int? Holder { get; set; }
         // Required: Save always writes it (as null for the environment).
         [JsonPropertyName("source"), JsonPropertyOrder(3), JsonRequired] public int? Source { get; set; }
+        // Required: Save always writes it (as null for an instance with no condition part).
+        [JsonPropertyName("condition"), JsonPropertyOrder(4), JsonRequired] public ConditionDto? Condition { get; set; }
+    }
+
+    /// <summary>
+    /// A condition part (M1-12a plan call 2): the terms in stored (canonical) order; the source faction by name, or null
+    /// for the environment; every optional field written, as null when absent.
+    /// </summary>
+    private sealed class ConditionDto
+    {
+        [JsonPropertyName("value"), JsonPropertyOrder(0), JsonRequired] public int? Value { get; set; }
+        [JsonPropertyName("appliedPhase"), JsonPropertyOrder(1), JsonRequired] public long? AppliedPhase { get; set; }
+        [JsonPropertyName("turnsCounted"), JsonPropertyOrder(2), JsonRequired] public int? TurnsCounted { get; set; }
+        [JsonPropertyName("terms"), JsonPropertyOrder(3), JsonRequired] public TermDto?[]? Terms { get; set; }
+        [JsonPropertyName("charges"), JsonPropertyOrder(4), JsonRequired] public int? Charges { get; set; }
+        [JsonPropertyName("recordedDifficulty"), JsonPropertyOrder(5), JsonRequired] public long? RecordedDifficulty { get; set; }
+        [JsonPropertyName("sourceFaction"), JsonPropertyOrder(6), JsonRequired] public string? SourceFaction { get; set; }
+        [JsonPropertyName("sustainedBy"), JsonPropertyOrder(7), JsonRequired] public long? SustainedBy { get; set; }
+        [JsonPropertyName("ownTurn"), JsonPropertyOrder(8), JsonRequired] public bool? OwnTurn { get; set; }
+
+        public static ConditionDto From(ConditionState c)
+        {
+            if (c.Terms.IsDefault)
+            {
+                throw new InvalidOperationException("Cannot save a condition whose terms are uninitialised.");
+            }
+
+            return new ConditionDto
+            {
+                Value = c.Value,
+                AppliedPhase = c.AppliedPhase,
+                TurnsCounted = c.TurnsCounted,
+                Terms = c.Terms.Select(TermDto.Of).ToArray(),
+                Charges = c.Charges,
+                RecordedDifficulty = c.RecordedDifficulty,
+                SourceFaction = c.SourceFaction?.ToString(),
+                SustainedBy = c.SustainedBy,
+                OwnTurn = c.OwnTurn,
+            };
+        }
+
+        public ConditionState ToState() => new(
+            PersistenceJson.Need(Value, "condition value"),
+            PersistenceJson.Need(AppliedPhase, "condition appliedPhase"),
+            PersistenceJson.Need(TurnsCounted, "condition turnsCounted"),
+            [.. PersistenceJson.Need(Terms, "condition terms").Select(t => PersistenceJson.Need(t, "condition term").ToTerm())],
+            Charges,
+            RecordedDifficulty,
+            SourceFaction is null ? null : PersistenceJson.ParseEnum<Faction>(SourceFaction, "condition sourceFaction"),
+            SustainedBy,
+            PersistenceJson.Need(OwnTurn, "condition ownTurn"));
+    }
+
+    /// <summary>
+    /// A duration term (M1-12a plan call 2), tagged by <see cref="Type"/>, the term's JSON key: <c>turns</c> (<c>n</c>),
+    /// <c>saveEnds</c> (<c>save</c>, <c>cap</c>, <c>graceTurns</c>), <c>charges</c> (<c>n</c>, <c>on</c>,
+    /// <c>fallback</c>), <c>trigger</c> (<c>event</c>, <c>cap</c> when capped), <c>sustained</c> (<c>max</c>),
+    /// <c>staged</c> (<c>stages</c>, <c>save</c>, <c>cap</c>, <c>then</c> when given), and the windows, <c>decay</c> and
+    /// the lingering terms with no field. Saves are written by name. Fields the type does not use are left out, and a
+    /// file that carries one, or lacks one the type needs, is refused.
+    /// </summary>
+    private sealed class TermDto
+    {
+        [JsonPropertyName("type"), JsonPropertyOrder(0), JsonRequired] public string? Type { get; set; }
+
+        [JsonPropertyName("n"), JsonPropertyOrder(1), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? N { get; set; }
+
+        [JsonPropertyName("save"), JsonPropertyOrder(2), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Save { get; set; }
+
+        [JsonPropertyName("cap"), JsonPropertyOrder(3), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? Cap { get; set; }
+
+        [JsonPropertyName("graceTurns"), JsonPropertyOrder(4), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? GraceTurns { get; set; }
+
+        [JsonPropertyName("on"), JsonPropertyOrder(5), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? On { get; set; }
+
+        [JsonPropertyName("fallback"), JsonPropertyOrder(6), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public TermDto? Fallback { get; set; }
+
+        [JsonPropertyName("event"), JsonPropertyOrder(7), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Event { get; set; }
+
+        [JsonPropertyName("max"), JsonPropertyOrder(8), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? Max { get; set; }
+
+        [JsonPropertyName("stages"), JsonPropertyOrder(9), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? Stages { get; set; }
+
+        [JsonPropertyName("then"), JsonPropertyOrder(10), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Then { get; set; }
+
+        public static TermDto Of(DurationTerm term)
+        {
+            var dto = new TermDto { Type = term?.Tag ?? throw new InvalidOperationException("Cannot save a null duration term.") };
+            switch (term)
+            {
+                case DurationTerm.Turns t:
+                    dto.N = t.N;
+                    break;
+                case DurationTerm.SaveEnds t:
+                    (dto.Save, dto.Cap, dto.GraceTurns) = (t.Save.ToString(), t.Cap, t.GraceTurns);
+                    break;
+                case DurationTerm.Charges t:
+                    (dto.N, dto.On, dto.Fallback) = (t.N, t.On, Of(t.Fallback));
+                    break;
+                case DurationTerm.TriggerEnd t:
+                    (dto.Event, dto.Cap) = (t.Event, t.Cap);
+                    break;
+                case DurationTerm.Sustained t:
+                    dto.Max = t.Max;
+                    break;
+                case DurationTerm.Staged t:
+                    (dto.Stages, dto.Save, dto.Cap, dto.Then) = (t.Stages, t.Save.ToString(), t.Cap, t.Then);
+                    break;
+            }
+
+            return dto;
+        }
+
+        public DurationTerm ToTerm()
+        {
+            string type = PersistenceJson.Need(Type, "condition term type");
+            // The fields each type may carry, as a mask over n, save, cap, graceTurns, on, fallback, event, max, stages, then.
+            int carried = (N is null ? 0 : 1) | (Save is null ? 0 : 2) | (Cap is null ? 0 : 4) | (GraceTurns is null ? 0 : 8)
+                | (On is null ? 0 : 16) | (Fallback is null ? 0 : 32) | (Event is null ? 0 : 64) | (Max is null ? 0 : 128)
+                | (Stages is null ? 0 : 256) | (Then is null ? 0 : 512);
+            int allowed = type switch
+            {
+                "turns" => 1,
+                "saveEnds" => 2 | 4 | 8,
+                "charges" => 1 | 16 | 32,
+                "trigger" => 64 | 4,
+                "sustained" => 128,
+                "staged" => 256 | 2 | 4 | 512,
+                "untilSourceTurnStart" or "untilSourceTurnEnd" or "decay" or "untilRest" or "untilCamp" => 0,
+                _ => throw new SnapshotFormatException($"Invalid save: unknown condition term type '{type}'."),
+            };
+            if ((carried & ~allowed) != 0)
+            {
+                throw new SnapshotFormatException($"Invalid save: a {type} term carries a field its type does not use.");
+            }
+
+            string name = $"condition {type} term";
+            return type switch
+            {
+                "turns" => new DurationTerm.Turns(PersistenceJson.Need(N, $"{name} n")),
+                "untilSourceTurnStart" => new DurationTerm.UntilSourceTurnStart(),
+                "untilSourceTurnEnd" => new DurationTerm.UntilSourceTurnEnd(),
+                "saveEnds" => new DurationTerm.SaveEnds(
+                    PersistenceJson.ParseEnum<Save>(Save, $"{name} save"),
+                    PersistenceJson.Need(Cap, $"{name} cap"),
+                    PersistenceJson.Need(GraceTurns, $"{name} graceTurns")),
+                "charges" => new DurationTerm.Charges(
+                    PersistenceJson.Need(N, $"{name} n"),
+                    PersistenceJson.Need(On, $"{name} on"),
+                    PersistenceJson.Need(Fallback, $"{name} fallback").ToTerm()),
+                "decay" => new DurationTerm.Decay(),
+                "trigger" => new DurationTerm.TriggerEnd(PersistenceJson.Need(Event, $"{name} event"), Cap),
+                "sustained" => new DurationTerm.Sustained(PersistenceJson.Need(Max, $"{name} max")),
+                "staged" => new DurationTerm.Staged(
+                    PersistenceJson.Need(Stages, $"{name} stages"),
+                    PersistenceJson.ParseEnum<Save>(Save, $"{name} save"),
+                    PersistenceJson.Need(Cap, $"{name} cap"),
+                    Then),
+                "untilRest" => new DurationTerm.UntilRest(),
+                _ => new DurationTerm.UntilCamp(),
+            };
+        }
     }
 
     /// <summary>
@@ -810,9 +1007,13 @@ public static class Snapshot
     }
 
     /// <summary>
-    /// A held event of a suspended use (M1-12a plan call 12), tagged by <see cref="Type"/>, its rule-event id. The held
-    /// types are a closed set: <c>unitDied</c> (<c>unit</c>, <c>at</c>), <c>unitMoved</c> (<c>unit</c>, <c>from</c>,
-    /// <c>to</c>) and <c>abilityResolved</c> (<c>unit</c> is the user, <c>ability</c>). Fields the type does not use are
+    /// A held event of a suspended use (M1-12a plan call 12), tagged by <see cref="Type"/>, its rule-event id (the
+    /// event name in lower camel case for the condition events). The held types are a closed set: <c>unitDied</c>
+    /// (<c>unit</c>, <c>at</c>), <c>unitMoved</c> (<c>unit</c>, <c>from</c>, <c>to</c>), <c>abilityResolved</c>
+    /// (<c>unit</c> is the user, <c>ability</c>), and the condition events of Task 3: <c>conditionApplied</c> (<c>unit</c>
+    /// is the holder, <c>seq</c>, <c>condition</c>, <c>source</c> as <c>{unit}</c> with null for the environment,
+    /// <c>value</c>, <c>new</c>), <c>conditionEnded</c> (<c>unit</c> is the holder, <c>seq</c>, <c>condition</c>,
+    /// <c>reason</c> by name) and <c>turnStartLost</c> (<c>unit</c>, <c>thisFight</c>). Fields the type does not use are
     /// left out, and a file that carries one is refused. Saving any other event type throws
     /// <see cref="InvalidOperationException"/>.
     /// </summary>
@@ -821,6 +1022,9 @@ public static class Snapshot
         private const string UnitDiedType = "unitDied";
         private const string UnitMovedType = "unitMoved";
         private const string AbilityResolvedType = "abilityResolved";
+        private const string ConditionAppliedType = "conditionApplied";
+        private const string ConditionEndedType = "conditionEnded";
+        private const string TurnStartLostType = "turnStartLost";
 
         [JsonPropertyName("type"), JsonPropertyOrder(0), JsonRequired] public string? Type { get; set; }
         [JsonPropertyName("unit"), JsonPropertyOrder(1), JsonRequired] public int? Unit { get; set; }
@@ -841,24 +1045,73 @@ public static class Snapshot
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FramePointDto? To { get; set; }
 
+        [JsonPropertyName("seq"), JsonPropertyOrder(6)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public long? Seq { get; set; }
+
+        [JsonPropertyName("condition"), JsonPropertyOrder(7)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Condition { get; set; }
+
+        [JsonPropertyName("source"), JsonPropertyOrder(8)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public HeldSourceDto? Source { get; set; }
+
+        [JsonPropertyName("value"), JsonPropertyOrder(9)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? Value { get; set; }
+
+        [JsonPropertyName("new"), JsonPropertyOrder(10)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? New { get; set; }
+
+        [JsonPropertyName("reason"), JsonPropertyOrder(11)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Reason { get; set; }
+
+        [JsonPropertyName("thisFight"), JsonPropertyOrder(12)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? ThisFight { get; set; }
+
         public static HeldEventDto Of(GameEvent e) => e switch
         {
             UnitDied d => new HeldEventDto { Type = UnitDiedType, Unit = d.Unit.Value, At = Point(d.At) },
             UnitMoved m => new HeldEventDto { Type = UnitMovedType, Unit = m.Unit.Value, From = Point(m.From), To = Point(m.To) },
             AbilityResolved r => new HeldEventDto { Type = AbilityResolvedType, Unit = r.User.Value, Ability = r.AbilityId },
+            ConditionApplied a => new HeldEventDto
+            {
+                Type = ConditionAppliedType,
+                Unit = a.Holder.Value,
+                Seq = a.Seq,
+                Condition = a.ConditionId,
+                Source = new HeldSourceDto { Unit = a.Source.Unit?.Value },
+                Value = a.Value,
+                New = a.New,
+            },
+            ConditionEnded c => new HeldEventDto
+            {
+                Type = ConditionEndedType, Unit = c.Holder.Value, Seq = c.Seq, Condition = c.ConditionId, Reason = c.Reason.ToString(),
+            },
+            TurnStartLost l => new HeldEventDto { Type = TurnStartLostType, Unit = l.Unit.Value, ThisFight = l.ThisFight },
             _ => throw new InvalidOperationException(
-                $"Cannot save a suspended ability use holding a {e?.GetType().Name ?? "null"} event; a held event is one of unitDied, unitMoved and abilityResolved."),
+                $"Cannot save a suspended ability use holding a {e?.GetType().Name ?? "null"} event; a held event is one of unitDied, "
+                + "unitMoved, abilityResolved, conditionApplied, conditionEnded and turnStartLost."),
         };
 
         public GameEvent ToEvent()
         {
             string type = PersistenceJson.Need(Type, "held event type");
             var unit = new UnitId(PersistenceJson.Need(Unit, "held event unit"));
+            bool noMove = At is null && From is null && To is null;
+            bool noCondition = Seq is null && Condition is null && Source is null && Value is null && New is null && Reason is null;
             bool fits = type switch
             {
-                UnitDiedType => Ability is null && From is null && To is null,
-                UnitMovedType => Ability is null && At is null,
-                AbilityResolvedType => At is null && From is null && To is null,
+                UnitDiedType => Ability is null && From is null && To is null && noCondition && ThisFight is null,
+                UnitMovedType => Ability is null && At is null && noCondition && ThisFight is null,
+                AbilityResolvedType => noMove && noCondition && ThisFight is null,
+                ConditionAppliedType => Ability is null && noMove && Reason is null && ThisFight is null,
+                ConditionEndedType => Ability is null && noMove && Source is null && Value is null && New is null && ThisFight is null,
+                TurnStartLostType => Ability is null && noMove && noCondition,
                 _ => throw new SnapshotFormatException($"Invalid save: unknown held event type '{type}'."),
             };
             if (!fits)
@@ -870,7 +1123,20 @@ public static class Snapshot
             {
                 UnitDiedType => new UnitDied(unit, Read(At, "held unitDied at")),
                 UnitMovedType => new UnitMoved(unit, Read(From, "held unitMoved from"), Read(To, "held unitMoved to")),
-                _ => new AbilityResolved(unit, PersistenceJson.Need(Ability, "held abilityResolved ability")),
+                AbilityResolvedType => new AbilityResolved(unit, PersistenceJson.Need(Ability, "held abilityResolved ability")),
+                ConditionAppliedType => new ConditionApplied(
+                    PersistenceJson.Need(Seq, "held conditionApplied seq"),
+                    PersistenceJson.Need(Condition, "held conditionApplied condition"),
+                    unit,
+                    new EffectSource(PersistenceJson.Need(Source, "held conditionApplied source").Unit is { } from ? new UnitId(from) : null),
+                    PersistenceJson.Need(Value, "held conditionApplied value"),
+                    PersistenceJson.Need(New, "held conditionApplied new")),
+                ConditionEndedType => new ConditionEnded(
+                    PersistenceJson.Need(Seq, "held conditionEnded seq"),
+                    PersistenceJson.Need(Condition, "held conditionEnded condition"),
+                    unit,
+                    PersistenceJson.ParseEnum<ConditionEndReason>(Reason, "held conditionEnded reason")),
+                _ => new TurnStartLost(unit, PersistenceJson.Need(ThisFight, "held turnStartLost thisFight")),
             };
         }
 
@@ -881,6 +1147,12 @@ public static class Snapshot
             var point = PersistenceJson.Need(p, name);
             return new GridPos(PersistenceJson.Need(point.X, $"{name} x"), PersistenceJson.Need(point.Y, $"{name} y"));
         }
+    }
+
+    /// <summary>A held condition event's source: the source unit's id, or null for the environment.</summary>
+    private sealed class HeldSourceDto
+    {
+        [JsonPropertyName("unit"), JsonPropertyOrder(0), JsonRequired] public int? Unit { get; set; }
     }
 
     /// <summary>A burst's point in a suspended use.</summary>

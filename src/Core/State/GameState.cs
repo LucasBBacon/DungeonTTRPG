@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Dungeon.Core.AbilityModel;
 using Dungeon.Core.Combat;
+using Dungeon.Core.Conditions;
 using Dungeon.Core.Content;
 using Dungeon.Core.Effects;
 using Dungeon.Core.Stats;
@@ -24,6 +25,8 @@ public enum Faction { Party, Enemy }
 /// unit may use and react with (M1-11 plan call 2), ordinal-sorted and distinct; an uninitialised array is held as an
 /// empty one, as for <see cref="Spent"/>. <see cref="Reactions"/> holds the unit's reaction policy overrides (M1-11 plan
 /// call 13), sorted by ability id in ordinal order, each once; an uninitialised array is held as an empty one.
+/// <see cref="HardTurnsLostThisFight"/> counts the turn starts the unit has lost to hard conditions in this fight (CO 5.7,
+/// 17.2; M1-12a), never negative; combat start resets it.
 /// </summary>
 public sealed record Unit(
     UnitId Id,
@@ -36,7 +39,8 @@ public sealed record Unit(
     ImmutableArray<PoolSpend> Spent = default,
     OpenerCharge? Opener = null,
     ImmutableArray<string> Abilities = default,
-    ImmutableArray<ReactionSetting> Reactions = default)
+    ImmutableArray<ReactionSetting> Reactions = default,
+    int HardTurnsLostThisFight = 0)
 {
     private readonly ImmutableArray<PoolSpend> _spent = Spent.IsDefault ? [] : Spent;
     private readonly ImmutableArray<string> _abilities = Abilities.IsDefault ? [] : Abilities;
@@ -87,7 +91,8 @@ public sealed record PendingDecision(
 /// out of combat; <see cref="Ended"/> is the run end, after which every command is refused; <see cref="NextEventSeq"/> is
 /// the sequence id the next sequenced event gets (M1-10 plan call 1); <see cref="Resolution"/> is the ability use
 /// suspended on an "ask me" reaction, set exactly while a <see cref="DecisionKind.Reaction"/> decision is pending (M1-11
-/// plan call 12).
+/// plan call 12). <see cref="Phase"/> is the global phase counter (CO 5.2; M1-12a plan call 1), from 0, and
+/// <see cref="Step"/> the turn step the clock is in.
 /// Two states with the same contents are not equal
 /// with <c>==</c> or <c>Equals</c> (the map and the arrays compare by reference); compare
 /// their <see cref="Snapshot.Save"/> text instead.
@@ -108,7 +113,9 @@ public sealed record GameState(
     CombatState? Combat,
     RunEnd? Ended,
     long NextEventSeq,
-    AbilityFrame? Resolution)
+    AbilityFrame? Resolution,
+    long Phase = 0,
+    ClockStep Step = ClockStep.None)
 {
     /// <summary>True while a fight is in progress (DH 10.3's <c>combatActive</c>).</summary>
     public bool CombatActive => Combat is not null;
@@ -335,8 +342,10 @@ public sealed record GameState(
     /// mode is not normal) in the setup's mode; the reactor <c>Locked[Index]</c> is a party unit in the state (AB 7.3:
     /// only the party is asked), its reaction unused, holding the candidate; the decision names the reactor, on its
     /// square; and the held events (M1-12a plan call 12) are initialised, each one of the closed set a suspended use can
-    /// hold (<see cref="UnitDied"/>, <see cref="UnitMoved"/>, <see cref="AbilityResolved"/> with a content id), whose
-    /// units need not be in the state (a held <see cref="UnitDied"/>'s unit is gone). Throws
+    /// hold (<see cref="UnitDied"/>, <see cref="UnitMoved"/>, <see cref="AbilityResolved"/> with a content id,
+    /// <see cref="ConditionApplied"/> and <see cref="ConditionEnded"/> with a positive seq, a content id and, for an end, a
+    /// defined reason, and <see cref="TurnStartLost"/> with a count of at least 1), whose units need not be in the state (a
+    /// held <see cref="UnitDied"/>'s unit is gone). Throws
     /// <see cref="ArgumentException"/> naming the problem.
     /// </summary>
     private static void CheckResolution(
@@ -470,11 +479,90 @@ public sealed record GameState(
                 case UnitDied:
                 case UnitMoved:
                 case AbilityResolved { AbilityId: { } id } when ContentId.IsValid(id):
+                case ConditionApplied { Seq: > 0, ConditionId: { } applied } when ContentId.IsValid(applied):
+                case ConditionEnded { Seq: > 0, ConditionId: { } ended, Reason: var reason } when ContentId.IsValid(ended) && Enum.IsDefined(reason):
+                case TurnStartLost { ThisFight: >= 1 }:
                     break;
                 case null:
                     throw new ArgumentException("Invalid frame: a held event is null.", param);
                 default:
                     throw new ArgumentException($"Invalid frame: a suspended use does not hold a {held.GetType().Name} event like this one.", param);
+            }
+        }
+    }
+
+    /// <summary>
+    /// The phase clock and the condition parts of <paramref name="effects"/>, for structure only (M1-12a plan calls 1 and
+    /// 2); the save loader applies it. The phase is not negative and the step is defined. Each condition part has a value,
+    /// turn count and charge count that are not negative, an applied phase from 0 to <paramref name="phase"/>, initialised
+    /// terms in strictly ascending canonical order (<see cref="DurationTermOrder"/>), a defined source faction, and a
+    /// sustainer seq from 1 to below <paramref name="nextEffectSeq"/> other than its own; no holder has two instances with
+    /// a condition part of one id (a bare carrier may repeat). Whether the id names a condition, and the own-turn mark's
+    /// hard tier, need the rules (<c>Conditions.Read</c>). Throws <see cref="ArgumentException"/> naming the problem.
+    /// </summary>
+    internal static void CheckClock(long phase, ClockStep step, ImmutableArray<EffectInstance> effects, long nextEffectSeq)
+    {
+        if (phase < 0)
+        {
+            throw new ArgumentException($"Invalid run: phase {phase} is negative.", nameof(phase));
+        }
+
+        if (!Enum.IsDefined(step))
+        {
+            throw new ArgumentException("Invalid run: unknown clock step.", nameof(step));
+        }
+
+        for (int i = 0; i < effects.Length; i++)
+        {
+            var e = effects[i];
+            if (e.Condition is not { } c)
+            {
+                continue;
+            }
+
+            string who = $"Invalid effect {e.Seq}: ";
+            if (c.Value < 0 || c.TurnsCounted < 0 || c.Charges < 0)
+            {
+                throw new ArgumentException($"{who}a condition's value, turn count and charges are not negative.", nameof(effects));
+            }
+
+            if (c.AppliedPhase < 0 || c.AppliedPhase > phase)
+            {
+                throw new ArgumentException($"{who}applied phase {c.AppliedPhase} is outside 0 to the clock's {phase}.", nameof(effects));
+            }
+
+            if (c.Terms.IsDefault)
+            {
+                throw new ArgumentException($"{who}the terms are uninitialised.", nameof(effects));
+            }
+
+            for (int k = 0; k < c.Terms.Length; k++)
+            {
+                if (c.Terms[k] is null || (k > 0 && DurationTermOrder.Instance.Compare(c.Terms[k - 1], c.Terms[k]) >= 0))
+                {
+                    throw new ArgumentException($"{who}the terms must be in canonical order, each once.", nameof(effects));
+                }
+            }
+
+            if (c.SourceFaction is { } faction && !Enum.IsDefined(faction))
+            {
+                throw new ArgumentException($"{who}unknown source faction.", nameof(effects));
+            }
+
+            if (c.SustainedBy is { } sustainer && (sustainer < 1 || sustainer >= nextEffectSeq || sustainer == e.Seq))
+            {
+                throw new ArgumentException($"{who}sustainer {sustainer} was never issued, or is the instance itself.", nameof(effects));
+            }
+
+            for (int j = 0; j < i; j++)
+            {
+                var other = effects[j];
+                if (other.Condition is not null && other.Holder == e.Holder && string.Equals(other.EffectId, e.EffectId, StringComparison.Ordinal))
+                {
+                    throw new ArgumentException(
+                        $"{who}unit {e.Holder.Value} already holds {e.EffectId} (effect {other.Seq}); one instance per condition per holder.",
+                        nameof(effects));
+                }
             }
         }
     }
@@ -572,6 +660,13 @@ public sealed record GameState(
         if (unit.Opener is { } opener)
         {
             CheckOpener(unit, opener, who, units);
+        }
+
+        // M1-12a plan call 1: the per-fight lost-turn count is never negative.
+        if (unit.HardTurnsLostThisFight < 0)
+        {
+            throw new ArgumentException(
+                $"{who}has lost {unit.HardTurnsLostThisFight} turn starts this fight; the count must not be negative.", units);
         }
 
         // M1-11 plan call 2: the abilities the unit holds are content ids, ordinal-sorted and distinct.

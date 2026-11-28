@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using Dungeon.Core.AbilityModel;
 using Dungeon.Core.Combat;
+using Dungeon.Core.Conditions;
 using Dungeon.Core.Effects;
 using Xunit;
 using static Dungeon.Core.Tests.AbilityFixtures;
@@ -359,5 +360,68 @@ public class HeldEventsTests
         Assert.Throws<InvalidOperationException>(
             () => Snapshot.Save(asked with { Resolution = frame with { Held = [new TileChanged(new GridPos(0, 0), Tile.Wall)] } }));
         Assert.Throws<InvalidOperationException>(() => Snapshot.Save(asked with { Resolution = frame with { Held = default } }));
+    }
+
+    // M1-12a Task 3 (plan call 12): the condition events join the held set.
+    [Fact]
+    public void A_held_condition_event_round_trips()
+    {
+        var asked = Ok(AskFight(), StrikeBoth).State;
+        var frame = asked.Resolution!;
+        ImmutableArray<GameEvent> held =
+        [
+            new ConditionApplied(4, "test.cond.x", A, new EffectSource(Two), 2, true),
+            new ConditionApplied(5, "cond.steeled", B, EffectSource.Environment, 1, false),
+            new ConditionEnded(4, "test.cond.x", A, ConditionEndReason.SourceGone),
+            new TurnStartLost(B, 2),
+        ];
+        var s = asked with { Resolution = frame with { Held = held } };
+
+        var json = Snapshot.Save(s);
+        Assert.Contains(
+            "\"held\":[{\"type\":\"conditionApplied\",\"unit\":1,\"seq\":4,\"condition\":\"test.cond.x\",\"source\":{\"unit\":2},\"value\":2,\"new\":true},"
+            + "{\"type\":\"conditionApplied\",\"unit\":3,\"seq\":5,\"condition\":\"cond.steeled\",\"source\":{\"unit\":null},\"value\":1,\"new\":false},"
+            + "{\"type\":\"conditionEnded\",\"unit\":1,\"seq\":4,\"condition\":\"test.cond.x\",\"reason\":\"SourceGone\"},"
+            + "{\"type\":\"turnStartLost\",\"unit\":3,\"thisFight\":2}]",
+            json);
+        var loaded = Snapshot.Load(json);
+        Assert.Equal(held.ToArray(), loaded.Resolution!.Held.ToArray());
+        Assert.Equal(json, Snapshot.Save(loaded));
+        Assert.Equal(StateDigest.Of(s), StateDigest.Of(loaded));
+
+        // Every field reaches the digest.
+        var changed = new (int Index, GameEvent Event)[]
+        {
+            (0, new ConditionApplied(6, "test.cond.x", A, new EffectSource(Two), 2, true)),
+            (0, new ConditionApplied(4, "test.cond.y", A, new EffectSource(Two), 2, true)),
+            (0, new ConditionApplied(4, "test.cond.x", B, new EffectSource(Two), 2, true)),
+            (0, new ConditionApplied(4, "test.cond.x", A, EffectSource.Environment, 2, true)),
+            (0, new ConditionApplied(4, "test.cond.x", A, new EffectSource(Two), 3, true)),
+            (0, new ConditionApplied(4, "test.cond.x", A, new EffectSource(Two), 2, false)),
+            (2, new ConditionEnded(4, "test.cond.x", A, ConditionEndReason.Expired)),
+            (2, new ConditionEnded(7, "test.cond.x", A, ConditionEndReason.SourceGone)),
+            (3, new TurnStartLost(B, 1)),
+            (3, new TurnStartLost(A, 2)),
+        };
+        foreach (var (index, e) in changed)
+        {
+            Assert.NotEqual(StateDigest.Of(s), StateDigest.Of(asked with { Resolution = frame with { Held = held.SetItem(index, e) } }));
+        }
+
+        var bad = new (string Why, string From, string To)[]
+        {
+            ("an unknown reason", "\"reason\":\"SourceGone\"", "\"reason\":\"Bored\""),
+            ("a lost-turn count below 1", "\"thisFight\":2", "\"thisFight\":0"),
+            ("a condition id that is not a content id", "\"condition\":\"cond.steeled\"", "\"condition\":\"Not An Id\""),
+            ("a seq below 1", "\"seq\":5", "\"seq\":0"),
+            ("a missing source", "\"source\":{\"unit\":null},", ""),
+            ("a field the type does not use", "\"thisFight\":2", "\"thisFight\":2,\"value\":1"),
+        };
+        foreach (var (why, from, to) in bad)
+        {
+            Assert.True(json.Contains(from, StringComparison.Ordinal), $"{why}: the save has no {from}");
+            var ex = Record.Exception(() => Snapshot.Load(json.Replace(from, to)));
+            Assert.True(ex is SnapshotFormatException, $"{why}: {ex?.GetType().Name ?? "loaded"}");
+        }
     }
 }

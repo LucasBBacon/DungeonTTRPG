@@ -11,7 +11,8 @@ namespace Dungeon.Core.Effects;
 /// <c>{id, kind, modifiers?, triggers?}</c> with content ids. A modifier is <c>{target}</c> plus exactly one operation key
 /// (<c>add</c>, <c>halve</c>, <c>zero</c>, <c>rollMode</c> or <c>flag</c>); <c>diceBonus</c> is reserved and refused. A
 /// trigger is <c>{on, priority?, scope, do[]}</c>, and each action is <c>{applyEffect, to}</c> or <c>{hook, args?}</c>.
-/// <see cref="Resolve"/> checks that every <c>applyEffect</c> names an effect of this file; number, roll-target, event
+/// <see cref="Resolve"/> checks that every <c>applyEffect</c> names an effect of this file or a condition (which the rules
+/// context then refuses until M1-12b routes conditions through the pipeline); number, roll-target, event
 /// and hook ids are checked against the code registries when the rules context is built.
 /// </summary>
 public sealed class EffectsKind : ContentKind
@@ -58,7 +59,8 @@ public sealed class EffectsKind : ContentKind
                 string field = Member(Item(Member(Item("$.effects", i), "triggers"), t), "do");
                 for (int a = 0; a < actions.Length; a++)
                 {
-                    if (actions[a].ApplyEffect is { } id && set.Find<EffectDefinition>(id) is null)
+                    // A condition id passes here; the rules context refuses it until M1-12b (M1-12a plan call 3).
+                    if (actions[a].ApplyEffect is { } id && !NamesEffectOrCondition(set, id))
                     {
                         throw new ContentLoadException(FileName, Member(Item(field, a), "applyEffect"), $"\"{id}\" names no effect.");
                     }
@@ -67,7 +69,17 @@ public sealed class EffectsKind : ContentKind
         }
     }
 
-    private static ImmutableArray<Modifier> Modifiers(ContentFile file, string field, ModifierDto?[]? items)
+    /// <summary>
+    /// True if <paramref name="id"/> names an effect of <paramref name="set"/>, a condition record or a core condition
+    /// definition.
+    /// </summary>
+    internal static bool NamesEffectOrCondition(ContentSet set, string id) =>
+        set.Find<EffectDefinition>(id) is not null
+        || set.Find<Dungeon.Core.Conditions.ConditionDefinition>(id) is not null
+        || Dungeon.Core.Conditions.Conditions.IsCoreId(id);
+
+    /// <summary>The modifiers at <paramref name="field"/>, in file order; shared with the condition records (M1-12a plan call 4).</summary>
+    internal static ImmutableArray<Modifier> Modifiers(ContentFile file, string field, ModifierDto?[]? items)
     {
         if (items is null)
         {
@@ -120,7 +132,8 @@ public sealed class EffectsKind : ContentKind
             : throw new ContentLoadException(file.Name, field, "a modifier gives \"advantage\" or \"disadvantage\".");
     }
 
-    private static ImmutableArray<Trigger> Triggers(ContentFile file, string field, TriggerDto?[]? items)
+    /// <summary>The triggers at <paramref name="field"/>, in file order; shared with the condition records (M1-12a plan call 4).</summary>
+    internal static ImmutableArray<Trigger> Triggers(ContentFile file, string field, TriggerDto?[]? items)
     {
         if (items is null)
         {
@@ -204,7 +217,7 @@ public sealed class EffectsKind : ContentKind
         [JsonPropertyName("triggers")] public TriggerDto?[]? Triggers { get; set; }
     }
 
-    private sealed class ModifierDto
+    internal sealed class ModifierDto
     {
         [JsonPropertyName("target")] public string? Target { get; set; }
         [JsonPropertyName("add")] public long? Add { get; set; }
@@ -217,7 +230,7 @@ public sealed class EffectsKind : ContentKind
         [JsonPropertyName("diceBonus")] public JsonElement DiceBonus { get; set; }
     }
 
-    private sealed class TriggerDto
+    internal sealed class TriggerDto
     {
         [JsonPropertyName("on")] public string? On { get; set; }
         [JsonPropertyName("priority")] public int? Priority { get; set; }
@@ -225,7 +238,7 @@ public sealed class EffectsKind : ContentKind
         [JsonPropertyName("do")] public ActionDto?[]? Do { get; set; }
     }
 
-    private sealed class ActionDto
+    internal sealed class ActionDto
     {
         [JsonPropertyName("applyEffect")] public string? ApplyEffect { get; set; }
         [JsonPropertyName("to")] public string? To { get; set; }

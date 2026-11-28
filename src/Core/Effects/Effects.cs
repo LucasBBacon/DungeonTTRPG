@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Dungeon.Core.Conditions;
 using Dungeon.Core.Content;
 
 namespace Dungeon.Core.Effects;
@@ -209,7 +210,15 @@ public static class Effects
     /// <see cref="ArgumentException"/> if <paramref name="effectId"/> is not a content id or the holder or source unit
     /// is not in the state. The definition is not looked up: a state does not carry the content.
     /// </summary>
-    public static GameState Apply(GameState s, string effectId, UnitId holder, EffectSource source)
+    public static GameState Apply(GameState s, string effectId, UnitId holder, EffectSource source) =>
+        Apply(s, effectId, holder, source, null);
+
+    /// <summary>
+    /// <see cref="Apply(GameState, string, UnitId, EffectSource)"/> with a condition part (M1-12a plan call 2), which only
+    /// <c>Conditions.Insert</c> gives. A condition instance may come from a source unit that is no longer in the state
+    /// (plan call 8); any other must not.
+    /// </summary>
+    internal static GameState Apply(GameState s, string effectId, UnitId holder, EffectSource source, ConditionState? condition)
     {
         ArgumentNullException.ThrowIfNull(s);
         ArgumentNullException.ThrowIfNull(effectId);
@@ -223,7 +232,7 @@ public static class Effects
             throw new ArgumentException($"Holder unit {holder.Value} is not in the state.", nameof(holder));
         }
 
-        if (source.Unit is { } from && s.FindUnit(from) is null)
+        if (source.Unit is { } from && condition is null && s.FindUnit(from) is null)
         {
             throw new ArgumentException($"Source unit {from.Value} is not in the state.", nameof(source));
         }
@@ -231,7 +240,7 @@ public static class Effects
         long seq = s.NextEffectSeq;
         return s with
         {
-            Effects = s.Effects.Add(new EffectInstance(seq, effectId, holder, source)),
+            Effects = s.Effects.Add(new EffectInstance(seq, effectId, holder, source, condition)),
             NextEffectSeq = checked(seq + 1),
         };
     }
