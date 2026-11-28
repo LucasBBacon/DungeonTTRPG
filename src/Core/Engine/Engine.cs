@@ -214,8 +214,10 @@ public static class Engine
     /// The settle loop (M1-11 plan call 8), run after an accepted command's events and their triggers: while the run has
     /// not ended and no decision is pending, end a won fight (<see cref="CombatEnd.EndIfWon"/>); otherwise start round 1
     /// when the fight is held before it (<see cref="Turns.BeginRound1"/>); otherwise start a vacated turn
-    /// (<see cref="Turns.ResumeIfVacated"/>). Each pass's events are dispatched in turn, on the command's firing counter;
-    /// the loop stops at the first pass that emits nothing.
+    /// (<see cref="Turns.ResumeIfVacated(RulesContext, GameState)"/>). All share the command's firing counter. A won
+    /// fight's pass is dispatched here; a turn start dispatches inside its own step (M1-12a plan call 9; owner ruling 4),
+    /// so its pass comes back already dispatched and is not dispatched again. The loop stops at the first pass that
+    /// emits nothing.
     /// </summary>
     private static (GameState State, ImmutableArray<GameEvent> Events) Settle(
         RulesContext rules, GameState s, ImmutableArray<GameEvent> events, ref int firings)
@@ -223,21 +225,23 @@ public static class Engine
         while (s.Ended is null && s.Pending is null)
         {
             var (pass, next) = CombatEnd.EndIfWon(rules, s);
-            if (pass.IsEmpty)
+            if (!pass.IsEmpty)
             {
-                (pass, next) = s.Combat is { BeforeRound1: true }
-                    ? Turns.BeginRound1(rules, s)
-                    : Turns.ResumeIfVacated(rules, s);
+                (s, pass) = TriggerDispatch.Run(rules, next, pass, ref firings);
+                events = events.AddRange(pass);
+                continue;
             }
 
+            (pass, next) = s.Combat is { BeforeRound1: true }
+                ? Turns.BeginRound1(rules, s, ref firings)
+                : Turns.ResumeIfVacated(rules, s, ref firings);
             if (pass.IsEmpty)
             {
                 break;
             }
 
-            var (dispatched, all) = TriggerDispatch.Run(rules, next, pass, ref firings);
-            s = dispatched;
-            events = events.AddRange(all);
+            s = next;
+            events = events.AddRange(pass);
         }
 
         return (s, events);

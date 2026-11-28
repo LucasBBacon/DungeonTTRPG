@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
+using Dungeon.Core.Conditions;
 using Dungeon.Core.Effects;
 
 namespace Dungeon.Core.Combat;
@@ -22,7 +23,8 @@ public static class CombatEnd
     /// <see cref="CombatState.BeforeRound1"/> marker (no turn has started: "If the fight is won, no <c>TurnStarted</c> or
     /// <c>TurnEnded</c> follows", M1-10 rulings record 5, step 8); 2, <c>combatOnly</c> instances end; 3, Downed
     /// companions get up; 4, XP and level-ups; 5, the combat state is cleared, every unit gets a fresh turn budget
-    /// (out-of-combat time, AB 6.8) and loses any opener mark (M1-11 plan call 7), and <see cref="CombatEnded"/>
+    /// (out-of-combat time, AB 6.8), loses any opener mark (M1-11 plan call 7), the clock leaves its turn step
+    /// (<see cref="ClockStep.None"/>), and <see cref="CombatEnded"/>
     /// (<see cref="CombatEndReason.Win"/>) is emitted. Steps 2 to 4 are empty seams in M1-10.
     /// </summary>
     public static (ImmutableArray<GameEvent> Events, GameState Next) EndIfWon(RulesContext rules, GameState s)
@@ -46,9 +48,9 @@ public static class CombatEnd
         var events = ImmutableArray.CreateBuilder<GameEvent>();
         var next = s;
 
-        // 1. The current unit's turn ends as in Turns.EndTurn: TurnEnded, then the turn-end step (CO 5.4's contents:
-        //    M1-12). A vacated turn's holder is dead and has no turn-end step, or its turn has already ended (Turns.EndTurn);
-        //    before round 1 no turn has started.
+        // 1. The current unit's turn ends as in Turns.EndTurn: TurnEnded, then the turn-end step (CO 5.4; not dispatched
+        //    here: the settle loop dispatches this pass). A vacated turn's holder is dead and has no turn-end step, or its
+        //    turn has already ended (Turns.EndTurn); before round 1 no turn has started.
         if (!combat.TurnVacated && !combat.BeforeRound1)
         {
             var (ended, afterEnd) = Turns.EndCurrentTurn(rules, next);
@@ -62,10 +64,13 @@ public static class CombatEnd
 
         // 4. XP and level-ups: M1-21. Each levelled unit goes through HitPoints.RaiseLevel, which adds Δ (DH 7.3).
 
-        // 5. combatActive becomes false, and no combat budget or opener mark survives into out-of-combat time (AB 6.8).
+        // 5. combatActive becomes false, and no combat budget, opener mark or turn step survives into out-of-combat time
+        //    (AB 6.8; M1-12a plan call 1: out of combat between ticks the clock is in no step, so nothing applied now is
+        //    own-turn).
         next = Turns.FreshBudgets(next with
         {
             Combat = null,
+            Step = ClockStep.None,
             Units = next.Units.Select(u => u.Opener is null ? u : u with { Opener = null }).ToImmutableArray(),
         });
         events.Add(new CombatEnded(CombatEndReason.Win));
