@@ -1,7 +1,7 @@
 # M1-11 Rulings: Design (roadmap decisions D-22, D-23)
 
 Date: 2026-11-28
-Status: Draft, 2026-11-28. The client answered Q1 to Q5 (option A each time); this record and its lead calls (8) await approval.
+Status: Approved, 2026-11-28. The client answered Q1 to Q5 (option A each time) and approved this record as a whole on 2026-11-28, including every lead call in 8.
 Parents: the open decisions D-22 and D-23 that step M1-11 raised
 (`docs/roadmap/README.md` on the M1-11 branch), the M1-11 plan
 (`docs/superpowers/plans/2026-11-27-m1-11-abilities-reactions-areas.md`),
@@ -26,8 +26,8 @@ community reports and not checked against those texts. The client then
 answered five questions, Q1 to Q5, and chose option A each time. For Q4
 the client kept AB 9.2 against the brief's recommendation; see 7 item 1.
 The lead's own calls that fill gaps the answers leave are marked
-**(lead's call)** and listed in 8; they await the client's approval of
-this record.
+**(lead's call)** and listed in 8; the client approved them with this
+record on 2026-11-28.
 
 Where to look: sections 1, 2, 7 and 8 cite designs by section. Line
 numbers and code paths are in the change rows (6). Design line numbers
@@ -452,15 +452,15 @@ These follow from Q1 and Q2, or from the cross-check.
 ## 6. Change rows
 
 Rows MS-1 to MS-57 (MS = M1-11 rulings change row) list every document
-edit. 6.1 edits the design specs on this branch, once the client
-approves this record. 6.2 edits the roadmap, plans, vocabulary, registry,
+edit. 6.1 edits the design specs on this branch; the client approved
+this record on 2026-11-28 and those edits were applied that day. 6.2 edits the roadmap, plans, vocabulary, registry,
 tests and code comments, which live on the M1-11 branch; apply them
 there or on a follow-up branch. 6.3 lists the tests later steps must
 add, and 6.4 the code each owning step changes. A row marked **(lead's
-call)** puts into the designs a call listed in 8, and waits on its
-approval.
+call)** puts into the designs a call listed in 8, approved with this
+record.
 
-### 6.1 Specs, edited on this branch on approval
+### 6.1 Specs, edited on this branch (applied 2026-11-28)
 
 | Row | Target | Change | Ruling |
 |---|---|---|---|
@@ -726,7 +726,7 @@ five questions.
 Each of the seventeen calls below fills a gap the client's answers
 leave, and each is marked in its section **(lead's call)**. Items 1 to
 12 were set out with the client's answers; items 13 to 17 were found in
-review. All await the client's approval of this record. Rulings that
+review. The client approved all of them with this record on 2026-11-28. Rulings that
 come straight from the client's answers or from the cross-check are not
 lead calls: per part before the ladder (Q1); round down (Q2); the "on any
 outcome" marker (Q3); riders kept (Q4); the keyed roll set, its key, the
