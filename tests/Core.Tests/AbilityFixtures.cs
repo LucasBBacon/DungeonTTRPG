@@ -48,8 +48,24 @@ public static class AbilityFixtures
     /// <summary>A line: length 4, a reflex save, 1d4 lightning.</summary>
     public const string SaveLine = "test.line";
 
-    /// <summary>A ward: a reaction on the holder's own save, +2, always.</summary>
+    /// <summary>
+    /// A ward: a reaction on the holder's own save, +2, policy <c>never</c>. Every <see cref="Party"/> and
+    /// <see cref="Foe"/> unit holds it, so it never fires by default and resolution stays reaction-free unless a test
+    /// sets a policy or gives a unit one of the <see cref="Wards"/>.
+    /// </summary>
     public const string Ward = "test.ward";
+
+    /// <summary>A shield ward (Task 7): a reaction on an attack roll against the holder, +2 to the target, always.</summary>
+    public const string ShieldWard = "ward.shield";
+
+    /// <summary>As <see cref="ShieldWard"/>, spending 1 of <c>pool.turn</c>.</summary>
+    public const string TurnWard = "ward.turn";
+
+    /// <summary>As <see cref="ShieldWard"/>, spending 1 of <see cref="CampPool"/>.</summary>
+    public const string CampWard = "ward.camp";
+
+    /// <summary>A save ward (Task 7): a reaction on the holder's own save, +2 to the bonus, always.</summary>
+    public const string SaveWard = "ward.save";
 
     /// <summary>A camp pool with 3 uses, so a second spend in a turn meets the camp rule, not an empty pool.</summary>
     public const string CampPool = "pool.camp";
@@ -86,21 +102,34 @@ public static class AbilityFixtures
         Area(SaveLine, AbilityKind.Limited, null, new TargetSpec(TargetShape.Line, 0, 0, 4, false), new SaveResolve(Save.Reflex), Part(DamageType.Lightning, 1, 4, 0)),
         new AbilityDefinition(
             File, Ward, AbilityKind.Reaction, new AbilityCost(CostKind.Reaction), null, null, null, [], [],
-            new ReactionSpec(ReactionTrigger.OwnSave, 2, ReactionMode.Always)),
+            new ReactionSpec(ReactionTrigger.OwnSave, 2, ReactionMode.Never)),
+    ];
+
+    /// <summary>
+    /// The Task 7 wards: <see cref="ShieldWard"/>, <see cref="TurnWard"/>, <see cref="CampWard"/> and
+    /// <see cref="SaveWard"/>. They are in <see cref="Rules"/> but not in <see cref="Definitions"/>, so no
+    /// <see cref="Party"/> or <see cref="Foe"/> unit holds one unless a test gives it.
+    /// </summary>
+    public static readonly ImmutableArray<AbilityDefinition> Wards =
+    [
+        Reaction(ShieldWard, ReactionTrigger.AttackRoll, null),
+        Reaction(TurnWard, ReactionTrigger.AttackRoll, new PoolUse("pool.turn", 1)),
+        Reaction(CampWard, ReactionTrigger.AttackRoll, new PoolUse(CampPool, 1)),
+        Reaction(SaveWard, ReactionTrigger.OwnSave, null),
     ];
 
     /// <summary>Every fixture ability id, ordinal: what <see cref="Party"/> and <see cref="Foe"/> units hold.</summary>
     public static readonly ImmutableArray<string> AllIds =
         [.. Definitions.Select(d => d.Id).OrderBy(id => id, StringComparer.Ordinal)];
 
-    /// <summary>The fixture effects, the core registries, <see cref="Pools"/> and <see cref="Definitions"/>.</summary>
+    /// <summary>The fixture effects, the core registries, <see cref="Pools"/>, <see cref="Definitions"/> and <see cref="Wards"/>.</summary>
     public static readonly RulesContext Rules = RulesContext.Create(
         ContestKit.LoadEffects(
             ContestKit.Def(Clumsy, "condition", ContestKit.Add("reflex", -50)),
             ContestKit.Def(Exposed, "condition", ContestKit.Add("armourClass", -50)),
             ContestKit.Def(Nimble, "condition", ContestKit.Add("reflex", 50))),
         pools: PoolTable,
-        abilities: Definitions);
+        abilities: [.. Definitions, .. Wards]);
 
     /// <summary>A party unit on <see cref="Fixtures.Stats"/>, full HP, holding every fixture ability.</summary>
     public static Unit Party(int id, int x, int y, int hp = FullHp) => U(id, x, y) with { Hp = hp, Abilities = AllIds };
@@ -116,6 +145,12 @@ public static class AbilityFixtures
     /// <summary><paramref name="s"/> with <paramref name="effect"/> on <paramref name="unit"/>, from itself.</summary>
     public static GameState With(GameState s, int unit, string effect) =>
         Dungeon.Core.Effects.Effects.Apply(s, effect, new UnitId(unit), new EffectSource(new UnitId(unit)));
+
+    /// <summary>A reaction: cost <c>reaction</c>, no target, +2 on <paramref name="trigger"/>, <paramref name="policy"/> by default.</summary>
+    public static AbilityDefinition Reaction(
+        string id, ReactionTrigger trigger, PoolUse? pool, ReactionMode policy = ReactionMode.Always, int bonus = 2) =>
+        new(File, id, AbilityKind.Reaction, new AbilityCost(CostKind.Reaction), pool, null, null, [], [],
+            new ReactionSpec(trigger, bonus, policy));
 
     private static DamagePart Part(DamageType type, int dice, int sides, int flat) => new(type, dice, sides, flat);
 

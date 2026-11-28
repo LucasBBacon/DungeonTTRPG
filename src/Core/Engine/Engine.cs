@@ -65,6 +65,12 @@ public enum CommandError
 
     /// <summary>The user cannot see a target unit or point.</summary>
     NoLineOfSight,
+
+    /// <summary>A reaction policy names an ability that is not a reaction (M1-11 plan call 13).</summary>
+    NotAReaction,
+
+    /// <summary>"Ask me" is set on a unit that is not a party unit (AB 7.3: monsters have no "ask me").</summary>
+    AskMeIsPartyOnly,
 }
 
 /// <summary>
@@ -130,6 +136,7 @@ public static class Engine
             MoveCommand move => ApplyMove(state, move, rules),
             EndTurnCommand end => ApplyEndTurn(state, end, rules),
             UseAbilityCommand use => ApplyUseAbility(state, use, rules),
+            SetReactionPolicyCommand policy => ApplySetReactionPolicy(state, policy, rules),
             AnswerDecisionCommand answer => ApplyAnswer(state, answer),
             _ => throw new NotSupportedException($"Unsupported command type {command.GetType().Name}."),
         };
@@ -254,6 +261,32 @@ public static class Engine
         }
 
         return new StepResult(next, events, CommandError.None);
+    }
+
+    /// <summary>
+    /// Stores a reaction policy override (M1-11 plan call 13; <see cref="Reactions.CheckSetting"/>): no tick, no budget,
+    /// no event, in or out of combat and on any unit's turn.
+    /// </summary>
+    private static StepResult ApplySetReactionPolicy(GameState state, SetReactionPolicyCommand set, RulesContext rules)
+    {
+        if (!Enum.IsDefined(set.Mode))
+        {
+            throw new ArgumentOutOfRangeException(nameof(set), set.Mode, "Unknown reaction mode.");
+        }
+
+        var error = Reactions.CheckSetting(rules, state, set.Unit, set.AbilityId, set.Mode);
+        if (error != CommandError.None)
+        {
+            return Reject(state, error);
+        }
+
+        int index = IndexOfUnit(state, set.Unit);
+        var unit = state.Units[index];
+        var next = state with
+        {
+            Units = state.Units.SetItem(index, unit with { Reactions = Reactions.With(unit.Reactions, set.AbilityId, set.Mode) }),
+        };
+        return new StepResult(next, ImmutableArray<GameEvent>.Empty, CommandError.None);
     }
 
     /// <summary>

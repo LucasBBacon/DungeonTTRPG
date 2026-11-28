@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Dungeon.Core.AbilityModel;
 using Dungeon.Core.Canonical;
 using Dungeon.Core.Combat;
 using Dungeon.Core.Content;
@@ -52,8 +53,8 @@ public static class Snapshot
 {
     /// <summary>
     /// The only version this build reads and writes, shared with <see cref="CommandLog"/>.
-    /// Version 8 (M1-11) adds the before-round-1 marker and the opener mark; later M1-11 tasks add abilities, reaction
-    /// settings and the resolution frame;
+    /// Version 8 (M1-11) adds the before-round-1 marker, the opener mark, each unit's abilities and reaction settings;
+    /// a later M1-11 task adds the resolution frame;
     /// version 7 (M1-10) added the run, combat and turn state;
     /// version 6 (M1-09) added current HP and the HP basis;
     /// version 5 (M1-08) added each unit's stat block;
@@ -115,6 +116,7 @@ public static class Snapshot
                     TurnPools = PoolSpendDto.From(u.Opener.TurnPools),
                 },
                 Abilities = u.Abilities.ToArray(),
+                Reactions = u.Reactions.Select(r => new ReactionSettingDto { Ability = r.AbilityId, Mode = r.Mode.ToString() }).ToArray(),
             }).ToArray(),
             Rng = new RngStreamsDto
             {
@@ -165,7 +167,7 @@ public static class Snapshot
     /// of 2^60 or more; it never returns a partly loaded state. Stream keys are re-derived from the
     /// run seed, so only the counters come from the file. Active effects must be sorted by seq, with positive,
     /// distinct seqs below <c>nextEffectSeq</c>, content ids, and holder and source units that are in the state.
-    /// The hero, each unit's budget, spent counts, opener charge and abilities are checked by <see cref="GameState.Create"/>, and the
+    /// The hero, each unit's budget, spent counts, opener charge, abilities and reaction settings are checked by <see cref="GameState.Create"/>, and the
     /// combat state (the before-round-1 marker included), the opener marks, the run end and <c>nextEventSeq</c> by the
     /// same rules the core holds them to (M1-10 task 1; M1-11 task 1).
     /// </summary>
@@ -196,7 +198,8 @@ public static class Snapshot
                 PersistenceJson.Need(u.Budget, "unit budget").ToBudget(),
                 PoolSpendDto.ToSpends(PersistenceJson.Need(u.Spent, "unit spent"), "unit spent count"),
                 u.Opener?.ToCharge(),
-                [.. PersistenceJson.Need(u.Abilities, "unit abilities")]);
+                [.. PersistenceJson.Need(u.Abilities, "unit abilities")],
+                [.. PersistenceJson.Need(u.Reactions, "unit reactions").Select(r => PersistenceJson.Need(r, "unit reaction").ToSetting())]);
             NeedBoonIds(unit.Boons, $"unit {unit.Id.Value} boons");
             units.Add(unit);
         }
@@ -519,6 +522,20 @@ public static class Snapshot
 
         // The ids of the abilities the unit holds (M1-11 plan call 2), in stored (ordinal) order.
         [JsonPropertyName("abilities"), JsonPropertyOrder(10), JsonRequired] public string[]? Abilities { get; set; }
+
+        // The unit's reaction policy overrides (M1-11 plan call 13), in stored (ability id) order.
+        [JsonPropertyName("reactions"), JsonPropertyOrder(11), JsonRequired] public ReactionSettingDto?[]? Reactions { get; set; }
+    }
+
+    /// <summary>A reaction policy override: the ability id and the mode by name.</summary>
+    private sealed class ReactionSettingDto
+    {
+        [JsonPropertyName("ability"), JsonPropertyOrder(0), JsonRequired] public string? Ability { get; set; }
+        [JsonPropertyName("mode"), JsonPropertyOrder(1), JsonRequired] public string? Mode { get; set; }
+
+        public ReactionSetting ToSetting() => new(
+            PersistenceJson.Need(Ability, "reaction ability"),
+            PersistenceJson.ParseEnum<ReactionMode>(Mode, "reaction mode"));
     }
 
     /// <summary>An opener's charge to its striker's round-1 turn (M1-11 plan call 6).</summary>

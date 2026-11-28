@@ -23,6 +23,7 @@ public sealed record CommandLog(ulong Seed, ImmutableArray<Command> Commands)
     private const string AnswerType = "answer";
     private const string EndTurnType = "endTurn";
     private const string UseAbilityType = "useAbility";
+    private const string SetReactionPolicyType = "setReactionPolicy";
 
     public string Save()
     {
@@ -78,6 +79,17 @@ public sealed record CommandLog(ulong Seed, ImmutableArray<Command> Commands)
         },
         EndTurnCommand e => new CommandDto { Type = EndTurnType, Unit = e.Unit.Value },
         UseAbilityCommand u => UseDto(u),
+        SetReactionPolicyCommand p when p.AbilityId is null =>
+            throw new InvalidOperationException("Cannot save a reaction policy with no ability id."),
+        SetReactionPolicyCommand p when !Enum.IsDefined(p.Mode) =>
+            throw new InvalidOperationException($"Cannot save a reaction policy with undefined mode {(int)p.Mode}."),
+        SetReactionPolicyCommand p => new CommandDto
+        {
+            Type = SetReactionPolicyType,
+            Unit = p.Unit.Value,
+            Ability = p.AbilityId,
+            Mode = p.Mode.ToString(),
+        },
         null => throw new InvalidOperationException("Cannot save a null command."),
         _ => throw new NotSupportedException($"Unsupported command type {command.GetType().Name}."),
     };
@@ -112,9 +124,19 @@ public sealed record CommandLog(ulong Seed, ImmutableArray<Command> Commands)
     private static Command FromDto(CommandDto c)
     {
         string type = PersistenceJson.Need(c.Type, "command type");
-        if (type != UseAbilityType && (c.Ability is not null || c.Targets is not null || c.Point is not null))
+        if (type != UseAbilityType && (c.Targets is not null || c.Point is not null))
         {
             throw new SnapshotFormatException($"Invalid save: a {type} command carries ability-use fields.");
+        }
+
+        if (type != UseAbilityType && type != SetReactionPolicyType && c.Ability is not null)
+        {
+            throw new SnapshotFormatException($"Invalid save: a {type} command carries an ability.");
+        }
+
+        if (type != SetReactionPolicyType && c.Mode is not null)
+        {
+            throw new SnapshotFormatException($"Invalid save: a {type} command carries a reaction mode.");
         }
 
         switch (type)
@@ -149,6 +171,17 @@ public sealed record CommandLog(ulong Seed, ImmutableArray<Command> Commands)
 
             case UseAbilityType:
                 return UseFromDto(c);
+
+            case SetReactionPolicyType:
+                if (c.Dir is not null || c.Decision is not null || c.Option is not null)
+                {
+                    throw new SnapshotFormatException("Invalid save: a setReactionPolicy command carries move or answer fields.");
+                }
+
+                return new SetReactionPolicyCommand(
+                    new UnitId(PersistenceJson.Need(c.Unit, "setReactionPolicy unit")),
+                    PersistenceJson.Need(c.Ability, "setReactionPolicy ability"),
+                    PersistenceJson.ParseEnum<ReactionMode>(c.Mode, "setReactionPolicy mode"));
 
             default:
                 throw new SnapshotFormatException($"Invalid save: unknown command type '{type}'.");
@@ -218,6 +251,10 @@ public sealed record CommandLog(ulong Seed, ImmutableArray<Command> Commands)
         [JsonPropertyName("point"), JsonPropertyOrder(7)]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public PointDto? Point { get; set; }
+
+        [JsonPropertyName("mode"), JsonPropertyOrder(8)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Mode { get; set; }
     }
 
     /// <summary>A burst's point.</summary>

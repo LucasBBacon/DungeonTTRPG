@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Dungeon.Core.AbilityModel;
 using Dungeon.Core.Combat;
 using Dungeon.Core.Content;
 using Dungeon.Core.Effects;
@@ -21,7 +22,8 @@ public enum Faction { Party, Enemy }
 /// an empty array, so every unit, however built, holds a real one. <see cref="Opener"/> is the "opener charged, first
 /// turn not yet started" mark (M1-11 plan call 6), or null. <see cref="Abilities"/> holds the ids of the abilities the
 /// unit may use and react with (M1-11 plan call 2), ordinal-sorted and distinct; an uninitialised array is held as an
-/// empty one, as for <see cref="Spent"/>.
+/// empty one, as for <see cref="Spent"/>. <see cref="Reactions"/> holds the unit's reaction policy overrides (M1-11 plan
+/// call 13), sorted by ability id in ordinal order, each once; an uninitialised array is held as an empty one.
 /// </summary>
 public sealed record Unit(
     UnitId Id,
@@ -33,10 +35,12 @@ public sealed record Unit(
     TurnBudget Budget = default,
     ImmutableArray<PoolSpend> Spent = default,
     OpenerCharge? Opener = null,
-    ImmutableArray<string> Abilities = default)
+    ImmutableArray<string> Abilities = default,
+    ImmutableArray<ReactionSetting> Reactions = default)
 {
     private readonly ImmutableArray<PoolSpend> _spent = Spent.IsDefault ? [] : Spent;
     private readonly ImmutableArray<string> _abilities = Abilities.IsDefault ? [] : Abilities;
+    private readonly ImmutableArray<ReactionSetting> _reactions = Reactions.IsDefault ? [] : Reactions;
 
     /// <summary>The unit's pool spent counts; never an uninitialised array.</summary>
     public ImmutableArray<PoolSpend> Spent
@@ -50,6 +54,13 @@ public sealed record Unit(
     {
         get => _abilities;
         init => _abilities = value.IsDefault ? [] : value;
+    }
+
+    /// <summary>The unit's reaction policy overrides; never an uninitialised array.</summary>
+    public ImmutableArray<ReactionSetting> Reactions
+    {
+        get => _reactions;
+        init => _reactions = value.IsDefault ? [] : value;
     }
 }
 
@@ -109,7 +120,8 @@ public sealed record GameState(
     /// against the maximum (M1-09 plan call 2): a save loads through here before its effects are back, and an effect
     /// may raise the maximum. A unit's turn budget counts must not be negative, and its spent counts must name pools by
     /// content id, sorted in ordinal order, each pool once, each count at least 1; its abilities must be content ids, sorted
-    /// in ordinal order, each once. <paramref name="hero"/>, when given, must name a
+    /// in ordinal order, each once; its reaction settings must name content ids in ordinal order, each once, with a defined
+    /// mode, and "ask me" only on a party unit. <paramref name="hero"/>, when given, must name a
     /// party unit in the state. The run starts out of combat, not ended, with <see cref="NextEventSeq"/> 1.
     /// </summary>
     public static GameState Create(
@@ -409,6 +421,36 @@ public sealed record GameState(
             {
                 throw new ArgumentException(
                     $"{who}must list its abilities in ordinal order, each once ('{abilities[k - 1]}' then '{id}').", units);
+            }
+        }
+
+        // M1-11 plan call 13: reaction settings name content ids, ordinal-sorted and distinct, with a defined mode; "ask
+        // me" only on a party unit (AB 7.3: monsters have no "ask me").
+        var reactions = unit.Reactions;
+        for (int k = 0; k < reactions.Length; k++)
+        {
+            var setting = reactions[k] ?? throw new ArgumentException($"{who}has a null reaction setting.", units);
+            if (setting.AbilityId is not { } id || !ContentId.IsValid(id))
+            {
+                throw new ArgumentException(
+                    $"{who}has a reaction setting for '{setting.AbilityId}', which is not a content id ([a-z0-9_.:-]).", units);
+            }
+
+            if (!Enum.IsDefined(setting.Mode))
+            {
+                throw new ArgumentException($"{who}has an unknown reaction mode for '{id}'.", units);
+            }
+
+            if (setting.Mode == ReactionMode.AskMe && unit.Faction != Faction.Party)
+            {
+                throw new ArgumentException($"{who}is a {unit.Faction} unit with \"ask me\" on '{id}'; only a party unit may be asked.", units);
+            }
+
+            if (k > 0 && string.CompareOrdinal(reactions[k - 1].AbilityId, id) >= 0)
+            {
+                throw new ArgumentException(
+                    $"{who}must list its reaction settings by ability id in ordinal order, each once ('{reactions[k - 1].AbilityId}' then '{id}').",
+                    units);
             }
         }
     }

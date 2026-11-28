@@ -13,6 +13,8 @@
     {"id": "InvalidTarget", "doc": "ab"},
     {"id": "OutOfRange", "doc": "ab"},
     {"id": "NoLineOfSight", "doc": "ab"},
-    {"id": "NotInCombat", "doc": "ab"}
+    {"id": "NotInCombat", "doc": "ab"},
+    {"id": "NotAReaction", "doc": "ab"},
+    {"id": "AskMeIsPartyOnly", "doc": "ab"}
   ]
 }

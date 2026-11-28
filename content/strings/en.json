@@ -13,6 +13,8 @@
     {"key": "ab.greyed.InvalidTarget", "text": "Invalid target", "field": "label"},
     {"key": "ab.greyed.OutOfRange", "text": "Out of range", "field": "label"},
     {"key": "ab.greyed.NoLineOfSight", "text": "No line of sight", "field": "label"},
-    {"key": "ab.greyed.NotInCombat", "text": "Only in combat", "field": "label"}
+    {"key": "ab.greyed.NotInCombat", "text": "Only in combat", "field": "label"},
+    {"key": "ab.greyed.NotAReaction", "text": "Not a reaction", "field": "label"},
+    {"key": "ab.greyed.AskMeIsPartyOnly", "text": "Only party members can be asked", "field": "label"}
   ]
 }

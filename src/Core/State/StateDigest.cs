@@ -1,4 +1,5 @@
 using System;
+using Dungeon.Core.AbilityModel;
 using Dungeon.Core.Canonical;
 using Dungeon.Core.Combat;
 using Dungeon.Core.Effects;
@@ -10,7 +11,8 @@ namespace Dungeon.Core;
 /// The replay core-state hash (SV 4.5): the <see cref="Digest"/> of a <see cref="GameState"/>'s
 /// canonical bytes. Units are a set keyed by id, so their stored order does not matter; boons and
 /// decision options are lists, because their order is data. Active effects are a set keyed by seq. The initiative order,
-/// a unit's spent counts and its opener mark's turn-pool counts are lists in stored order.
+/// a unit's spent counts, its opener mark's turn-pool counts, its abilities and its reaction settings are lists in stored
+/// order.
 /// Stream keys are derived from the run seed and are not written; a state whose keys disagree with its seed is refused.
 /// </summary>
 public static class StateDigest
@@ -77,7 +79,7 @@ public static class StateDigest
     {
         public void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(11);
+            w.BeginRecord(12);
             w.Int32(0, u.Id.Value);
             w.Int32(1, u.Pos.X);
             w.Int32(2, u.Pos.Y);
@@ -89,6 +91,18 @@ public static class StateDigest
             w.List(8, u.Spent, (e, spend) => e.Record(0, new SpendRecord(spend)));
             w.OptionalRecord(9, u.Opener is null ? null : new OpenerRecord(u.Opener));
             w.List(10, u.Abilities, (e, id) => e.String(0, id));
+            w.List(11, u.Reactions, (e, r) => e.Record(0, new ReactionRecord(r)));
+            w.EndRecord();
+        }
+    }
+
+    private sealed class ReactionRecord(ReactionSetting r) : ICanonical
+    {
+        public void WriteCanonical(CanonicalWriter w)
+        {
+            w.BeginRecord(2);
+            w.String(0, r.AbilityId);
+            w.Enum(1, r.Mode);
             w.EndRecord();
         }
     }

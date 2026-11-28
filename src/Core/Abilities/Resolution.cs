@@ -22,8 +22,10 @@ internal static class Resolution
     /// <see cref="AbilityCostPaid"/> (the cost's bits on the budget, then the pool spend through
     /// <see cref="Pools.Spend"/>); <see cref="TargetsLocked"/> (<see cref="AbilityUse.Affected"/>, in unit order; a save's
     /// DC is the user's <c>abilityDifficulty</c>, captured here); then per target, skipping units removed earlier in the
-    /// same use: an attack (<see cref="AttackRolled"/>, and on a hit the damage, a crit doubling the dice), a save
-    /// (<see cref="SaveRolled"/>, and on a failure the damage), or with no <c>resolve</c> the damage alone; the damage is
+    /// same use: an attack (the attack-roll reaction window, then <see cref="AttackRolled"/>, and on a hit the damage, a
+    /// crit doubling the dice), a save (the own-save window when the user is of another faction from the saver, then
+    /// <see cref="SaveRolled"/>, and on a failure the damage); a fired reaction raises <see cref="ReactionTaken"/>
+    /// before the roll's event (<see cref="Reactions.Window"/>); or with no <c>resolve</c> the damage alone; the damage is
     /// <see cref="DamageRolled"/> then <see cref="Harm.Deal"/>'s events, and the ability's effects follow on a target
     /// that still stands (<see cref="EffectApplied"/>, from the user). Last, <see cref="AbilityResolved"/>. When the run
     /// ends, resolution stops at once: <see cref="RunEnded"/> is the last event and there is no
@@ -154,7 +156,21 @@ internal static class Resolution
         return (charged, [new PoolSpend(use.PoolId, use.Count)], spent);
     }
 
-    // One target: the roll, if any, then the damage and the effects.
+    // A reaction window on the target (Reactions.Window); a fired reaction raises ReactionTaken.
+    private static (ContestSetup Setup, GameState Next) Window(
+        RulesContext rules, GameState s, UnitId target, ReactionTrigger trigger, ContestSetup setup, D20Roll roll,
+        ImmutableArray<GameEvent>.Builder events)
+    {
+        var (fired, next, after) = Reactions.Window(rules, s, target, trigger, setup, roll);
+        if (fired is not null)
+        {
+            events.Add(new ReactionTaken(target, fired));
+        }
+
+        return (next, after);
+    }
+
+    // One target: the roll, if any, then the attack-roll or own-save window, then the damage and the effects.
     private static GameState ResolveTarget(
         RulesContext rules, GameState s, UnitId user, AbilityDefinition ability, UnitId target, long difficulty,
         ImmutableArray<GameEvent>.Builder events)
@@ -168,7 +184,8 @@ internal static class Resolution
                 var (roll, stream) = Dice.D20(s.Rng.Combat, setup.Mode);
                 s = s with { Rng = s.Rng with { Combat = stream } };
 
-                // The attack-roll reaction window opens here (M1-11 Task 7).
+                // The attack-roll window (plan call 11): the defender's wards, judged on the roll already drawn.
+                (setup, s) = Window(rules, s, target, ReactionTrigger.AttackRoll, setup, roll, events);
                 var result = Contests.ResolveAttack(setup, roll);
                 events.Add(new AttackRolled(user, target, result));
                 if (!result.Hit)
@@ -186,7 +203,12 @@ internal static class Resolution
                 var (roll, stream) = Dice.D20(s.Rng.Combat, setup.Mode);
                 s = s with { Rng = s.Rng with { Combat = stream } };
 
-                // The own-save reaction window opens here (M1-11 Task 7).
+                // The own-save window opens only against a user of another faction (plan call 10: a hostile ability).
+                if (s.FindUnit(user)!.Faction != s.FindUnit(target)!.Faction)
+                {
+                    (setup, s) = Window(rules, s, target, ReactionTrigger.OwnSave, setup, roll, events);
+                }
+
                 var result = Contests.ResolveCheck(setup, roll);
                 events.Add(new SaveRolled(target, result));
                 if (result.Success)

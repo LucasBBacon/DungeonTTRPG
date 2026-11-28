@@ -26,3 +26,13 @@ public sealed record EndTurnCommand(UnitId Unit) : Command;
 /// <see cref="CommandError"/> (<see cref="AbilityModel.AbilityUse.CheckTarget"/>).
 /// </summary>
 public sealed record UseAbilityCommand(UnitId User, string AbilityId, AbilityModel.AbilityTarget Target) : Command;
+
+/// <summary>
+/// Sets <see cref="Unit"/>'s policy for its reaction <see cref="AbilityId"/> to <see cref="Mode"/> (AB 7.3; M1-11 plan
+/// call 13), replacing any earlier setting. It takes no tick and no budget, raises no event, and works in or out of
+/// combat. Refused for an unknown unit (<see cref="CommandError.UnknownUnit"/>), an ability the unit does not hold
+/// (<see cref="CommandError.UnknownAbility"/>), a non-reaction (<see cref="CommandError.NotAReaction"/>), and "ask me" on
+/// a non-party unit (<see cref="CommandError.AskMeIsPartyOnly"/>). An undefined <see cref="Mode"/> is a programming error
+/// and <see cref="Engine.Apply(GameState, Command)"/> throws <see cref="System.ArgumentOutOfRangeException"/>.
+/// </summary>
+public sealed record SetReactionPolicyCommand(UnitId Unit, string AbilityId, AbilityModel.ReactionMode Mode) : Command;
