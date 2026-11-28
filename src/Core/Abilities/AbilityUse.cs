@@ -12,7 +12,7 @@ namespace Dungeon.Core.AbilityModel;
 /// the tick-reset view (every budget fresh, every <see cref="RefillTag.Turn"/> pool refilled; AB 6.8), because a use
 /// out of combat runs on a new tick as a step does.
 /// </summary>
-public static class AbilityUse
+public static partial class AbilityUse
 {
     // AB 14.2: one action a turn.
     private const int ActionsPerTurn = 1;

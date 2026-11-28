@@ -41,7 +41,7 @@ internal static class Resolution
         s = paid;
 
         var locked = AbilityUse.Affected(rules, s, user, ability, target).Units;
-        long difficulty = ability.Resolve is SaveResolve ? Effects.Number(rules, s, user, "abilityDifficulty") : 0;
+        long difficulty = Difficulty(rules, s, user, ability);
         events.Add(new TargetsLocked(user, locked));
 
         foreach (var unit in locked)
@@ -68,8 +68,33 @@ internal static class Resolution
         return (events.ToImmutable(), s);
     }
 
-    // The cost's own bits on the user's budget, then the pool spend, separate from the cost (AB 7.1).
-    private static (TurnBudget Charged, ImmutableArray<PoolSpend> Pools, GameState Next) Pay(
+    /// <summary>
+    /// The save DC a use carries, captured when its targets lock: the user's <c>abilityDifficulty</c> for a save, 0
+    /// otherwise (plan call 10). Resolution and the preview read it on the same paid state.
+    /// </summary>
+    internal static long Difficulty(RulesContext rules, GameState s, UnitId user, AbilityDefinition ability) =>
+        ability.Resolve is SaveResolve ? Effects.Number(rules, s, user, "abilityDifficulty") : 0;
+
+    /// <summary>
+    /// The contest <paramref name="target"/> meets: <see cref="Contests.PrepareAttack"/> for an attack,
+    /// <see cref="Contests.PrepareSave"/> against <paramref name="difficulty"/> for a save, null with no <c>resolve</c>.
+    /// Resolution and the preview (plan call 14) both build their setups here.
+    /// </summary>
+    internal static ContestSetup? Prepare(
+        RulesContext rules, GameState s, UnitId user, AbilityDefinition ability, UnitId target, long difficulty) =>
+        ability.Resolve switch
+        {
+            AttackResolve attack => Contests.PrepareAttack(rules, s, user, target, attack.Attack),
+            SaveResolve save => Contests.PrepareSave(rules, s, target, save.Save, difficulty),
+            null => null,
+            _ => throw new InvalidOperationException($"Ability \"{ability.Id}\" has an unknown resolve."),
+        };
+
+    /// <summary>
+    /// The cost's own bits on the user's budget, then the pool spend, separate from the cost (AB 7.1). Pure: the preview
+    /// reads the paid state the targets lock on.
+    /// </summary>
+    internal static (TurnBudget Charged, ImmutableArray<PoolSpend> Pools, GameState Next) Pay(
         RulesContext rules, GameState s, UnitId user, AbilityDefinition ability)
     {
         var cost = ability.Cost;
@@ -116,9 +141,9 @@ internal static class Resolution
         bool crit = false;
         switch (ability.Resolve)
         {
-            case AttackResolve attack:
+            case AttackResolve:
             {
-                var setup = Contests.PrepareAttack(rules, s, user, target, attack.Attack);
+                var setup = Prepare(rules, s, user, ability, target, difficulty)!.Value;
                 var (roll, stream) = Dice.D20(s.Rng.Combat, setup.Mode);
                 s = s with { Rng = s.Rng with { Combat = stream } };
 
@@ -134,9 +159,9 @@ internal static class Resolution
                 break;
             }
 
-            case SaveResolve save:
+            case SaveResolve:
             {
-                var setup = Contests.PrepareSave(rules, s, target, save.Save, difficulty);
+                var setup = Prepare(rules, s, user, ability, target, difficulty)!.Value;
                 var (roll, stream) = Dice.D20(s.Rng.Combat, setup.Mode);
                 s = s with { Rng = s.Rng with { Combat = stream } };
 
