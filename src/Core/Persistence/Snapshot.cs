@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Dungeon.Core.AbilityModel;
 using Dungeon.Core.Canonical;
 using Dungeon.Core.Combat;
 using Dungeon.Core.Content;
@@ -52,14 +53,16 @@ public static class Snapshot
 {
     /// <summary>
     /// The only version this build reads and writes, shared with <see cref="CommandLog"/>.
-    /// Version 7 (M1-10) adds the run, combat and turn state;
+    /// Version 8 (M1-11) adds the before-round-1 marker, the opener mark, each unit's abilities and reaction settings,
+    /// the reaction decision kind and the suspended ability use (<c>resolution</c>);
+    /// version 7 (M1-10) added the run, combat and turn state;
     /// version 6 (M1-09) added current HP and the HP basis;
     /// version 5 (M1-08) added each unit's stat block;
     /// version 4 (M1-07) added the active effects and the next effect seq;
     /// version 3 (M1-06) added the reproducibility-key header and the run configuration and unlock
     /// snapshots; version 2 (M1-02) stored the run seed and stream counters; version 1 held PCG32 states.
     /// </summary>
-    public const int CurrentVersion = 7;
+    public const int CurrentVersion = 8;
 
     /// <summary>
     /// Writes <paramref name="s"/>. Only the run seed and the stream counters are stored, so a state whose
@@ -106,7 +109,14 @@ public static class Snapshot
                 Stats = StatsDto.From(u.Stats),
                 Hp = u.Hp,
                 Budget = BudgetDto.From(u.Budget),
-                Spent = u.Spent.Select(p => new PoolSpendDto { Pool = p.PoolId, Spent = p.Spent }).ToArray(),
+                Spent = PoolSpendDto.From(u.Spent),
+                Opener = u.Opener is null ? null : new OpenerDto
+                {
+                    Charged = BudgetDto.From(u.Opener.Charged),
+                    TurnPools = PoolSpendDto.From(u.Opener.TurnPools),
+                },
+                Abilities = u.Abilities.ToArray(),
+                Reactions = u.Reactions.Select(r => new ReactionSettingDto { Ability = r.AbilityId, Mode = r.Mode.ToString() }).ToArray(),
             }).ToArray(),
             Rng = new RngStreamsDto
             {
@@ -139,6 +149,7 @@ public static class Snapshot
                 Current = s.Combat.Current,
                 Round = s.Combat.Round,
                 TurnVacated = s.Combat.TurnVacated,
+                BeforeRound1 = s.Combat.BeforeRound1,
             },
             Ended = s.Ended is null ? null : new RunEndDto
             {
@@ -146,6 +157,7 @@ public static class Snapshot
                 KillingEventId = s.Ended.KillingEventId,
             },
             NextEventSeq = s.NextEventSeq,
+            Resolution = s.Resolution is null ? null : FrameDto.From(s.Resolution),
         });
     }
 
@@ -156,8 +168,11 @@ public static class Snapshot
     /// of 2^60 or more; it never returns a partly loaded state. Stream keys are re-derived from the
     /// run seed, so only the counters come from the file. Active effects must be sorted by seq, with positive,
     /// distinct seqs below <c>nextEffectSeq</c>, content ids, and holder and source units that are in the state.
-    /// The hero, each unit's budget and spent counts are checked by <see cref="GameState.Create"/>, and the combat state,
-    /// the run end and <c>nextEventSeq</c> by the same rules the core holds them to (M1-10 task 1).
+    /// The hero, each unit's budget, spent counts, opener charge, abilities and reaction settings are checked by <see cref="GameState.Create"/>, and the
+    /// combat state (the before-round-1 marker included), the opener marks, the run end and <c>nextEventSeq</c> by the
+    /// same rules the core holds them to (M1-10 task 1; M1-11 task 1). A pending decision is checked by its kind: a shrine
+    /// boon against the shrine it stands on, a reaction decision with its suspended use (M1-11 plan call 12), whose
+    /// structure only is checked here; the rules-dependent part waits for the answer.
     /// </summary>
     public static GameState Load(string json) => PersistenceJson.Read<StateDto, GameState>(json, FromDto);
 
@@ -184,7 +199,10 @@ public static class Snapshot
                 PersistenceJson.Need(u.Stats, "unit stats").ToStats(),
                 PersistenceJson.Need(u.Hp, "unit hp"),
                 PersistenceJson.Need(u.Budget, "unit budget").ToBudget(),
-                [.. PersistenceJson.Need(u.Spent, "unit spent").Select(p => PersistenceJson.Need(p, "unit spent count").ToSpend())]);
+                PoolSpendDto.ToSpends(PersistenceJson.Need(u.Spent, "unit spent"), "unit spent count"),
+                u.Opener?.ToCharge(),
+                [.. PersistenceJson.Need(u.Abilities, "unit abilities")],
+                [.. PersistenceJson.Need(u.Reactions, "unit reactions").Select(r => PersistenceJson.Need(r, "unit reaction").ToSetting())]);
             NeedBoonIds(unit.Boons, $"unit {unit.Id.Value} boons");
             units.Add(unit);
         }
@@ -270,27 +288,12 @@ public static class Snapshot
                     $"Invalid save: pending decision source ({pending.Source.X}, {pending.Source.Y}) is outside the map.");
             }
 
-            // DecisionKind has one value, so ParseEnum above has already limited this to a
-            // shrine boon. Only a decision the rules can produce may be loaded, because
-            // answering it changes the source square and the unit.
-            if (map[pending.Source] != Tile.Shrine)
+            // Only a decision the rules can produce may be loaded. A shrine boon is checked here, because answering it
+            // changes the source square and the unit; a reaction decision is checked with its suspended use by
+            // GameState.CheckRunState below (M1-11 plan call 12).
+            if (pending.Kind == DecisionKind.ShrineBoon)
             {
-                throw new SnapshotFormatException(
-                    $"Invalid save: pending decision source ({pending.Source.X}, {pending.Source.Y}) is not a shrine.");
-            }
-
-            if (state.FindUnit(pending.Unit)!.Pos != pending.Source)
-            {
-                throw new SnapshotFormatException(
-                    $"Invalid save: unit {pending.Unit.Value} is not standing on the pending decision's source.");
-            }
-
-            NeedBoonIds(pending.Options, "pending options");
-            if (pending.Options.Length != Engine.ShrineBoonChoices
-                || pending.Options.Distinct().Count() != pending.Options.Length)
-            {
-                throw new SnapshotFormatException(
-                    $"Invalid save: pending options must be {Engine.ShrineBoonChoices} different boons.");
+                CheckShrineDecision(pending, state, map);
             }
         }
 
@@ -308,14 +311,17 @@ public static class Snapshot
                 [.. PersistenceJson.Need(c.Order, "combat order").Select(id => new UnitId(id))],
                 PersistenceJson.Need(c.Current, "combat current"),
                 PersistenceJson.Need(c.Round, "combat round"),
-                PersistenceJson.Need(c.TurnVacated, "combat turnVacated"))
+                PersistenceJson.Need(c.TurnVacated, "combat turnVacated"),
+                PersistenceJson.Need(c.BeforeRound1, "combat beforeRound1"))
             : null;
         var ended = dto.Ended is { } e
             ? new RunEnd(PersistenceJson.ParseEnum<RunEndCause>(e.Cause, "run end cause"), e.KillingEventId)
             : null;
 
+        var resolution = dto.Resolution?.ToFrame();
+
         // The same rules the core holds these fields to; a breach surfaces as a format error.
-        GameState.CheckRunState(state.Units, state.Hero, combat, ended, nextEventSeq);
+        GameState.CheckRunState(state.Units, state.Hero, combat, ended, nextEventSeq, pending, resolution);
 
         return state with
         {
@@ -328,7 +334,32 @@ public static class Snapshot
             Pending = pending,
             Tick = tick,
             NextDecisionId = nextDecisionId,
+            Resolution = resolution,
         };
+    }
+
+    // A shrine boon decision: the unit stands on the shrine it offers, and the options are distinct boons.
+    private static void CheckShrineDecision(PendingDecision pending, GameState state, GridMap map)
+    {
+        if (map[pending.Source] != Tile.Shrine)
+        {
+            throw new SnapshotFormatException(
+                $"Invalid save: pending decision source ({pending.Source.X}, {pending.Source.Y}) is not a shrine.");
+        }
+
+        if (state.FindUnit(pending.Unit)!.Pos != pending.Source)
+        {
+            throw new SnapshotFormatException(
+                $"Invalid save: unit {pending.Unit.Value} is not standing on the pending decision's source.");
+        }
+
+        NeedBoonIds(pending.Options, "pending options");
+        if (pending.Options.Length != Engine.ShrineBoonChoices
+            || pending.Options.Distinct().Count() != pending.Options.Length)
+        {
+            throw new SnapshotFormatException(
+                $"Invalid save: pending options must be {Engine.ShrineBoonChoices} different boons.");
+        }
     }
 
     /// <summary>The active effects, checked against the rules: Apply hands out seqs in order and never reuses one.</summary>
@@ -431,6 +462,8 @@ public static class Snapshot
         [JsonPropertyName("combat"), JsonPropertyOrder(18), JsonRequired] public CombatDto? Combat { get; set; }
         [JsonPropertyName("ended"), JsonPropertyOrder(19), JsonRequired] public RunEndDto? Ended { get; set; }
         [JsonPropertyName("nextEventSeq"), JsonPropertyOrder(20), JsonRequired] public long? NextEventSeq { get; set; }
+        // Required: Save always writes it (as null when no ability use is suspended).
+        [JsonPropertyName("resolution"), JsonPropertyOrder(21), JsonRequired] public FrameDto? Resolution { get; set; }
 
         public SaveHeader ToHeader() => new(
             PersistenceJson.Need(Version, "version"),
@@ -501,6 +534,36 @@ public static class Snapshot
         [JsonPropertyName("hp"), JsonPropertyOrder(6), JsonRequired] public int? Hp { get; set; }
         [JsonPropertyName("budget"), JsonPropertyOrder(7), JsonRequired] public BudgetDto? Budget { get; set; }
         [JsonPropertyName("spent"), JsonPropertyOrder(8), JsonRequired] public PoolSpendDto?[]? Spent { get; set; }
+        // Required: Save always writes it (as null when the unit holds no opener mark).
+        [JsonPropertyName("opener"), JsonPropertyOrder(9), JsonRequired] public OpenerDto? Opener { get; set; }
+
+        // The ids of the abilities the unit holds (M1-11 plan call 2), in stored (ordinal) order.
+        [JsonPropertyName("abilities"), JsonPropertyOrder(10), JsonRequired] public string[]? Abilities { get; set; }
+
+        // The unit's reaction policy overrides (M1-11 plan call 13), in stored (ability id) order.
+        [JsonPropertyName("reactions"), JsonPropertyOrder(11), JsonRequired] public ReactionSettingDto?[]? Reactions { get; set; }
+    }
+
+    /// <summary>A reaction policy override: the ability id and the mode by name.</summary>
+    private sealed class ReactionSettingDto
+    {
+        [JsonPropertyName("ability"), JsonPropertyOrder(0), JsonRequired] public string? Ability { get; set; }
+        [JsonPropertyName("mode"), JsonPropertyOrder(1), JsonRequired] public string? Mode { get; set; }
+
+        public ReactionSetting ToSetting() => new(
+            PersistenceJson.Need(Ability, "reaction ability"),
+            PersistenceJson.ParseEnum<ReactionMode>(Mode, "reaction mode"));
+    }
+
+    /// <summary>An opener's charge to its striker's round-1 turn (M1-11 plan call 6).</summary>
+    private sealed class OpenerDto
+    {
+        [JsonPropertyName("charged"), JsonPropertyOrder(0), JsonRequired] public BudgetDto? Charged { get; set; }
+        [JsonPropertyName("turnPools"), JsonPropertyOrder(1), JsonRequired] public PoolSpendDto?[]? TurnPools { get; set; }
+
+        public OpenerCharge ToCharge() => new(
+            PersistenceJson.Need(Charged, "opener charged").ToBudget(),
+            PoolSpendDto.ToSpends(PersistenceJson.Need(TurnPools, "opener turnPools"), "opener turn pool"));
     }
 
     /// <summary>A unit's turn budget (AB 14.2), as used counts and flags.</summary>
@@ -538,17 +601,27 @@ public static class Snapshot
         [JsonPropertyName("pool"), JsonPropertyOrder(0), JsonRequired] public string? Pool { get; set; }
         [JsonPropertyName("spent"), JsonPropertyOrder(1), JsonRequired] public int? Spent { get; set; }
 
+        public static PoolSpendDto[] From(ImmutableArray<PoolSpend> spends) =>
+            spends.Select(p => new PoolSpendDto { Pool = p.PoolId, Spent = p.Spent }).ToArray();
+
+        public static ImmutableArray<PoolSpend> ToSpends(PoolSpendDto?[] dtos, string name) =>
+            [.. dtos.Select(p => PersistenceJson.Need(p, name).ToSpend())];
+
         public PoolSpend ToSpend() => new(
             PersistenceJson.Need(Pool, "spent pool"), PersistenceJson.Need(Spent, "spent count"));
     }
 
-    /// <summary>The fight in progress: the initiative order as unit ids, the current slot, the round.</summary>
+    /// <summary>
+    /// The fight in progress: the initiative order as unit ids, the current slot, the round, and the vacated-turn and
+    /// before-round-1 markers.
+    /// </summary>
     private sealed class CombatDto
     {
         [JsonPropertyName("order"), JsonPropertyOrder(0), JsonRequired] public int[]? Order { get; set; }
         [JsonPropertyName("current"), JsonPropertyOrder(1), JsonRequired] public int? Current { get; set; }
         [JsonPropertyName("round"), JsonPropertyOrder(2), JsonRequired] public long? Round { get; set; }
         [JsonPropertyName("turnVacated"), JsonPropertyOrder(3), JsonRequired] public bool? TurnVacated { get; set; }
+        [JsonPropertyName("beforeRound1"), JsonPropertyOrder(4), JsonRequired] public bool? BeforeRound1 { get; set; }
     }
 
     /// <summary>The run end; the cause by name, the killing event id null unless the hero died.</summary>
@@ -635,6 +708,116 @@ public static class Snapshot
         [JsonPropertyName("holder"), JsonPropertyOrder(2)] public int? Holder { get; set; }
         // Required: Save always writes it (as null for the environment).
         [JsonPropertyName("source"), JsonPropertyOrder(3), JsonRequired] public int? Source { get; set; }
+    }
+
+    /// <summary>
+    /// An ability use suspended on an "ask me" reaction (M1-11 plan call 12). The target writes exactly one of
+    /// <c>targets</c>, <c>point</c> and <c>dir</c>, as the command log does; enums are written by name.
+    /// </summary>
+    private sealed class FrameDto
+    {
+        [JsonPropertyName("user"), JsonPropertyOrder(0), JsonRequired] public int? User { get; set; }
+        [JsonPropertyName("ability"), JsonPropertyOrder(1), JsonRequired] public string? Ability { get; set; }
+        [JsonPropertyName("targets"), JsonPropertyOrder(2), JsonRequired] public int[]? Targets { get; set; }
+        [JsonPropertyName("point"), JsonPropertyOrder(3), JsonRequired] public FramePointDto? Point { get; set; }
+        [JsonPropertyName("dir"), JsonPropertyOrder(4), JsonRequired] public string? Dir { get; set; }
+        [JsonPropertyName("locked"), JsonPropertyOrder(5), JsonRequired] public int[]? Locked { get; set; }
+        [JsonPropertyName("index"), JsonPropertyOrder(6), JsonRequired] public int? Index { get; set; }
+        [JsonPropertyName("window"), JsonPropertyOrder(7), JsonRequired] public string? Window { get; set; }
+        [JsonPropertyName("setup"), JsonPropertyOrder(8), JsonRequired] public SetupDto? Setup { get; set; }
+        [JsonPropertyName("roll"), JsonPropertyOrder(9), JsonRequired] public RollDto? Roll { get; set; }
+        [JsonPropertyName("candidate"), JsonPropertyOrder(10), JsonRequired] public string? Candidate { get; set; }
+        // Null for an attack: only a save carries a difficulty.
+        [JsonPropertyName("saveDifficulty"), JsonPropertyOrder(11), JsonRequired] public long? SaveDifficulty { get; set; }
+
+        public static FrameDto From(AbilityFrame f)
+        {
+            var dto = new FrameDto
+            {
+                User = f.User.Value,
+                Ability = f.AbilityId,
+                Locked = f.Locked.Select(id => id.Value).ToArray(),
+                Index = f.Index,
+                Window = f.Window.ToString(),
+                Setup = new SetupDto { Bonus = f.Setup.Bonus, Target = f.Setup.Target, Mode = f.Setup.Mode.ToString() },
+                Roll = new RollDto { Mode = f.Roll.Mode.ToString(), First = f.Roll.First, Second = f.Roll.Second },
+                Candidate = f.Candidate,
+                SaveDifficulty = f.SaveDifficulty,
+            };
+            switch (f.Target)
+            {
+                case UnitsTarget { Units.IsDefault: false } units:
+                    dto.Targets = units.Units.Select(id => id.Value).ToArray();
+                    break;
+                case PointTarget point:
+                    dto.Point = new FramePointDto { X = point.Point.X, Y = point.Point.Y };
+                    break;
+                case AimTarget aim when Enum.IsDefined(aim.Aim):
+                    dto.Dir = aim.Aim.ToString();
+                    break;
+                default:
+                    throw new InvalidOperationException("Cannot save a suspended ability use whose target cannot be read back.");
+            }
+
+            return dto;
+        }
+
+        public AbilityFrame ToFrame()
+        {
+            int given = (Targets is null ? 0 : 1) + (Point is null ? 0 : 1) + (Dir is null ? 0 : 1);
+            if (given != 1)
+            {
+                throw new SnapshotFormatException("Invalid save: a suspended ability use needs exactly one of targets, point and dir.");
+            }
+
+            AbilityTarget target = Targets is { } targets
+                ? new UnitsTarget([.. targets.Select(id => new UnitId(id))])
+                : Point is { } point
+                    ? new PointTarget(new GridPos(PersistenceJson.Need(point.X, "resolution point x"), PersistenceJson.Need(point.Y, "resolution point y")))
+                    : new AimTarget(PersistenceJson.ParseEnum<Direction>(Dir, "resolution dir"));
+            var setup = PersistenceJson.Need(Setup, "resolution setup");
+            var roll = PersistenceJson.Need(Roll, "resolution roll");
+            return new AbilityFrame(
+                new UnitId(PersistenceJson.Need(User, "resolution user")),
+                PersistenceJson.Need(Ability, "resolution ability"),
+                target,
+                [.. PersistenceJson.Need(Locked, "resolution locked").Select(id => new UnitId(id))],
+                PersistenceJson.Need(Index, "resolution index"),
+                PersistenceJson.ParseEnum<ReactionTrigger>(Window, "resolution window"),
+                new ContestSetup(
+                    PersistenceJson.Need(setup.Bonus, "resolution setup bonus"),
+                    PersistenceJson.Need(setup.Target, "resolution setup target"),
+                    PersistenceJson.ParseEnum<RollMode>(setup.Mode, "resolution setup mode")),
+                new D20Roll(
+                    PersistenceJson.ParseEnum<RollMode>(roll.Mode, "resolution roll mode"),
+                    PersistenceJson.Need(roll.First, "resolution roll first"),
+                    roll.Second),
+                PersistenceJson.Need(Candidate, "resolution candidate"),
+                SaveDifficulty);
+        }
+    }
+
+    /// <summary>A burst's point in a suspended use.</summary>
+    private sealed class FramePointDto
+    {
+        [JsonPropertyName("x"), JsonPropertyOrder(0), JsonRequired] public int? X { get; set; }
+        [JsonPropertyName("y"), JsonPropertyOrder(1), JsonRequired] public int? Y { get; set; }
+    }
+
+    /// <summary>A contest setup: the bonus, the target and the roll mode by name.</summary>
+    private sealed class SetupDto
+    {
+        [JsonPropertyName("bonus"), JsonPropertyOrder(0), JsonRequired] public long? Bonus { get; set; }
+        [JsonPropertyName("target"), JsonPropertyOrder(1), JsonRequired] public long? Target { get; set; }
+        [JsonPropertyName("mode"), JsonPropertyOrder(2), JsonRequired] public string? Mode { get; set; }
+    }
+
+    /// <summary>A drawn d20: the mode by name, the first die and the second (null for a normal roll).</summary>
+    private sealed class RollDto
+    {
+        [JsonPropertyName("mode"), JsonPropertyOrder(0), JsonRequired] public string? Mode { get; set; }
+        [JsonPropertyName("first"), JsonPropertyOrder(1), JsonRequired] public int? First { get; set; }
+        [JsonPropertyName("second"), JsonPropertyOrder(2), JsonRequired] public int? Second { get; set; }
     }
 
     private sealed class PendingDto

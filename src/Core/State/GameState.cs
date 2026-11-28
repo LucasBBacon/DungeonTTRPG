@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Dungeon.Core.AbilityModel;
 using Dungeon.Core.Combat;
 using Dungeon.Core.Content;
 using Dungeon.Core.Effects;
@@ -18,7 +19,11 @@ public enum Faction { Party, Enemy }
 /// <see cref="Hp"/> is its current HP (DH 7.3: "Each unit stores current HP; the maximum is derived on demand").
 /// <see cref="Budget"/> is its turn budget (AB 14.2) and <see cref="Spent"/> its pool spent counts (AB 6.2), sorted by
 /// pool id in ordinal order, each pool once and each count at least 1. An uninitialised <see cref="Spent"/> is held as
-/// an empty array, so every unit, however built, holds a real one.
+/// an empty array, so every unit, however built, holds a real one. <see cref="Opener"/> is the "opener charged, first
+/// turn not yet started" mark (M1-11 plan call 6), or null. <see cref="Abilities"/> holds the ids of the abilities the
+/// unit may use and react with (M1-11 plan call 2), ordinal-sorted and distinct; an uninitialised array is held as an
+/// empty one, as for <see cref="Spent"/>. <see cref="Reactions"/> holds the unit's reaction policy overrides (M1-11 plan
+/// call 13), sorted by ability id in ordinal order, each once; an uninitialised array is held as an empty one.
 /// </summary>
 public sealed record Unit(
     UnitId Id,
@@ -28,9 +33,14 @@ public sealed record Unit(
     UnitStats Stats,
     int Hp,
     TurnBudget Budget = default,
-    ImmutableArray<PoolSpend> Spent = default)
+    ImmutableArray<PoolSpend> Spent = default,
+    OpenerCharge? Opener = null,
+    ImmutableArray<string> Abilities = default,
+    ImmutableArray<ReactionSetting> Reactions = default)
 {
     private readonly ImmutableArray<PoolSpend> _spent = Spent.IsDefault ? [] : Spent;
+    private readonly ImmutableArray<string> _abilities = Abilities.IsDefault ? [] : Abilities;
+    private readonly ImmutableArray<ReactionSetting> _reactions = Reactions.IsDefault ? [] : Reactions;
 
     /// <summary>The unit's pool spent counts; never an uninitialised array.</summary>
     public ImmutableArray<PoolSpend> Spent
@@ -38,11 +48,30 @@ public sealed record Unit(
         get => _spent;
         init => _spent = value.IsDefault ? [] : value;
     }
+
+    /// <summary>The ids of the abilities the unit holds; never an uninitialised array.</summary>
+    public ImmutableArray<string> Abilities
+    {
+        get => _abilities;
+        init => _abilities = value.IsDefault ? [] : value;
+    }
+
+    /// <summary>The unit's reaction policy overrides; never an uninitialised array.</summary>
+    public ImmutableArray<ReactionSetting> Reactions
+    {
+        get => _reactions;
+        init => _reactions = value.IsDefault ? [] : value;
+    }
 }
 
 public readonly record struct DecisionId(int Value);
 
-public enum DecisionKind { ShrineBoon }
+/// <summary>
+/// What a pending decision asks: <see cref="ShrineBoon"/>, a boon from a shrine; <see cref="Reaction"/>, whether to take
+/// an "ask me" reaction (M1-11 plan call 12; options <c>[0 = decline, 1 = take]</c>), with the suspended use held in
+/// <see cref="GameState.Resolution"/>.
+/// </summary>
+public enum DecisionKind { ShrineBoon, Reaction }
 
 /// <summary>A choice the game is waiting on. While one is pending, only an answer to it is valid.</summary>
 public sealed record PendingDecision(
@@ -56,7 +85,9 @@ public sealed record PendingDecision(
 /// <see cref="EffectInstance.Seq"/>; <see cref="NextEffectSeq"/> is the seq the next one gets (never reused).
 /// <see cref="Hero"/> is the unit whose death ends the run, or null; <see cref="Combat"/> is the fight in progress, null
 /// out of combat; <see cref="Ended"/> is the run end, after which every command is refused; <see cref="NextEventSeq"/> is
-/// the sequence id the next sequenced event gets (M1-10 plan call 1).
+/// the sequence id the next sequenced event gets (M1-10 plan call 1); <see cref="Resolution"/> is the ability use
+/// suspended on an "ask me" reaction, set exactly while a <see cref="DecisionKind.Reaction"/> decision is pending (M1-11
+/// plan call 12).
 /// Two states with the same contents are not equal
 /// with <c>==</c> or <c>Equals</c> (the map and the arrays compare by reference); compare
 /// their <see cref="Snapshot.Save"/> text instead.
@@ -76,7 +107,8 @@ public sealed record GameState(
     UnitId? Hero,
     CombatState? Combat,
     RunEnd? Ended,
-    long NextEventSeq)
+    long NextEventSeq,
+    AbilityFrame? Resolution)
 {
     /// <summary>True while a fight is in progress (DH 10.3's <c>combatActive</c>).</summary>
     public bool CombatActive => Combat is not null;
@@ -95,7 +127,9 @@ public sealed record GameState(
     /// both are validated. The run starts with no active effects and <see cref="NextEffectSeq"/> 1. HP is not checked
     /// against the maximum (M1-09 plan call 2): a save loads through here before its effects are back, and an effect
     /// may raise the maximum. A unit's turn budget counts must not be negative, and its spent counts must name pools by
-    /// content id, sorted in ordinal order, each pool once, each count at least 1. <paramref name="hero"/>, when given, must name a
+    /// content id, sorted in ordinal order, each pool once, each count at least 1; its abilities must be content ids, sorted
+    /// in ordinal order, each once; its reaction settings must name content ids in ordinal order, each once, with a defined
+    /// mode, and "ask me" only on a party unit. <paramref name="hero"/>, when given, must name a
     /// party unit in the state. The run starts out of combat, not ended, with <see cref="NextEventSeq"/> 1.
     /// </summary>
     public static GameState Create(
@@ -161,19 +195,26 @@ public sealed record GameState(
         }
 
         return new GameState(
-            map, sorted, seed, config, unlocks, ImmutableArray<EffectInstance>.Empty, 1, streams, null, 0, 1, hero, null, null, 1);
+            map, sorted, seed, config, unlocks, ImmutableArray<EffectInstance>.Empty, 1, streams, null, 0, 1, hero, null, null, 1, null);
     }
 
     /// <summary>
     /// Checks the run fields <see cref="Create"/> does not receive, against <paramref name="units"/>; the save loader
     /// applies it (M1-10 task 1). <paramref name="nextEventSeq"/> is at least 1. A combat state has an initialised order
     /// of distinct units in the state, a round of at least 1, and <c>Current</c> in [0, order length), or equal to the
-    /// order length only when its turn is vacated. A run end has a defined cause and a killing event id exactly when the
-    /// cause is <see cref="RunEndCause.HeroDeath"/>, from 1 to below <paramref name="nextEventSeq"/>; a hero death also
-    /// needs a <paramref name="hero"/>, on 0 HP. Throws <see cref="ArgumentException"/> naming the problem.
+    /// order length only when its turn is vacated. The before-round-1 marker (M1-11 plan call 7) needs round 1, current
+    /// 0, no vacated turn and a non-empty order, and a pending <see cref="DecisionKind.Reaction"/> decision (an opener's
+    /// suspended use, M1-11 plan call 12) or a run end (with neither, round 1 would already have started). The suspended
+    /// use <paramref name="resolution"/> is checked for structure only, as <see cref="CheckResolution"/> says. An opener mark (plan call 6) needs combat in round 1, its unit in the order
+    /// and that unit's round-1 turn not yet started (the marker is set, its slot is after the current one, or its slot is
+    /// the current one and vacated); each faction has at most one. A run end has a defined cause and a killing event id
+    /// exactly when the cause is <see cref="RunEndCause.HeroDeath"/>, from 1 to below <paramref name="nextEventSeq"/>; a
+    /// hero death also needs a <paramref name="hero"/>, on 0 HP. Throws <see cref="ArgumentException"/> naming the
+    /// problem.
     /// </summary>
     internal static void CheckRunState(
-        ImmutableArray<Unit> units, UnitId? hero, CombatState? combat, RunEnd? ended, long nextEventSeq)
+        ImmutableArray<Unit> units, UnitId? hero, CombatState? combat, RunEnd? ended, long nextEventSeq,
+        PendingDecision? pending, AbilityFrame? resolution)
     {
         if (nextEventSeq < 1)
         {
@@ -183,7 +224,18 @@ public sealed record GameState(
         if (combat is not null)
         {
             CheckCombat(units, combat);
+
+            // Only a reaction an opener triggered can hold the fight before round 1 (M1-11 plan call 12; record 5 step 8).
+            if (combat.BeforeRound1 && pending?.Kind != DecisionKind.Reaction && ended is null)
+            {
+                throw new ArgumentException(
+                    "Invalid combat: the before-round-1 marker is set with no pending reaction decision and no run end.",
+                    nameof(combat));
+            }
         }
+
+        CheckOpenerMarks(units, combat);
+        CheckResolution(units, combat, pending, resolution);
 
         if (ended is not null)
         {
@@ -263,6 +315,193 @@ public sealed record GameState(
                 + (combat.Current == length ? " and the turn is not vacated." : "."),
                 nameof(combat));
         }
+
+        if (combat.BeforeRound1 && (combat.Round != 1 || combat.Current != 0 || combat.TurnVacated || length == 0))
+        {
+            throw new ArgumentException(
+                "Invalid combat: the before-round-1 marker needs round 1, current 0, no vacated turn and a non-empty "
+                + $"order (round {combat.Round}, current {combat.Current}, turnVacated {combat.TurnVacated}, order of {length}).",
+                nameof(combat));
+        }
+    }
+
+    /// <summary>
+    /// The structure of a suspended use (M1-11 plan call 12), the part of the check that needs no rules (the rest is
+    /// <c>Resolution.Continue</c>'s): <paramref name="resolution"/> is set exactly when a <see cref="DecisionKind.Reaction"/>
+    /// decision is pending, whose options are <c>[0, 1]</c>; a frame needs combat; its ability and candidate are content
+    /// ids; its target is one of the three shapes, well formed; its user is in the state; its locked units are in unit
+    /// order, each once, and <see cref="AbilityFrame.Index"/> is within them; the window is defined, and a save difficulty
+    /// is held exactly for the own-save window; the roll is well formed (faces 1 to 20, a second die exactly when the
+    /// mode is not normal) in the setup's mode; the reactor <c>Locked[Index]</c> is a party unit in the state (AB 7.3:
+    /// only the party is asked), its reaction unused, holding the candidate; and the decision names the reactor, on its
+    /// square. Throws <see cref="ArgumentException"/> naming the problem.
+    /// </summary>
+    private static void CheckResolution(
+        ImmutableArray<Unit> units, CombatState? combat, PendingDecision? pending, AbilityFrame? resolution)
+    {
+        const string param = "resolution";
+        bool asking = pending?.Kind == DecisionKind.Reaction;
+        if (asking && (pending!.Options.IsDefault || pending.Options.Length != 2 || pending.Options[0] != 0 || pending.Options[1] != 1))
+        {
+            throw new ArgumentException("Invalid pending decision: a reaction decision's options are [0, 1] (decline, take).", nameof(pending));
+        }
+
+        if (resolution is null)
+        {
+            if (asking)
+            {
+                throw new ArgumentException("Invalid run: a reaction decision is pending with no suspended ability use.", param);
+            }
+
+            return;
+        }
+
+        if (!asking)
+        {
+            throw new ArgumentException("Invalid run: an ability use is suspended with no reaction decision pending.", param);
+        }
+
+        if (combat is null)
+        {
+            throw new ArgumentException("Invalid run: an ability use is suspended out of combat; only a combat roll can ask.", param);
+        }
+
+        var f = resolution;
+        if (f.AbilityId is null || !ContentId.IsValid(f.AbilityId))
+        {
+            throw new ArgumentException($"Invalid frame: ability '{f.AbilityId}' is not a content id ([a-z0-9_.:-]).", param);
+        }
+
+        if (f.Candidate is null || !ContentId.IsValid(f.Candidate))
+        {
+            throw new ArgumentException($"Invalid frame: candidate '{f.Candidate}' is not a content id ([a-z0-9_.:-]).", param);
+        }
+
+        switch (f.Target)
+        {
+            case UnitsTarget { Units.IsDefault: false }:
+            case PointTarget:
+            case AimTarget aim when Enum.IsDefined(aim.Aim):
+                break;
+            default:
+                throw new ArgumentException("Invalid frame: the target is missing or malformed.", param);
+        }
+
+        if (!units.Any(u => u.Id == f.User))
+        {
+            throw new ArgumentException($"Invalid frame: the user {f.User.Value} is not in the state.", param);
+        }
+
+        if (f.Locked.IsDefault)
+        {
+            throw new ArgumentException("Invalid frame: the locked units are uninitialised.", param);
+        }
+
+        for (int k = 1; k < f.Locked.Length; k++)
+        {
+            if (f.Locked[k - 1].Value >= f.Locked[k].Value)
+            {
+                throw new ArgumentException(
+                    $"Invalid frame: locked units must be in unit order, each once ({f.Locked[k - 1].Value} then {f.Locked[k].Value}).", param);
+            }
+        }
+
+        if (f.Index < 0 || f.Index >= f.Locked.Length)
+        {
+            throw new ArgumentException($"Invalid frame: index {f.Index} is outside the {f.Locked.Length} locked units.", param);
+        }
+
+        if (!Enum.IsDefined(f.Window))
+        {
+            throw new ArgumentException("Invalid frame: unknown reaction window.", param);
+        }
+
+        if ((f.Window == ReactionTrigger.OwnSave) != f.SaveDifficulty.HasValue)
+        {
+            throw new ArgumentException("Invalid frame: a save difficulty is held exactly for an own-save window.", param);
+        }
+
+        var roll = f.Roll;
+        static bool Face(int n) => n >= 1 && n <= 20;
+        if (!Enum.IsDefined(roll.Mode) || !Enum.IsDefined(f.Setup.Mode) || roll.Mode != f.Setup.Mode
+            || !Face(roll.First)
+            || (roll.Mode == RollMode.Normal) != (roll.Second is null)
+            || (roll.Second is { } second && !Face(second)))
+        {
+            throw new ArgumentException("Invalid frame: the roll is malformed or not in the setup's mode.", param);
+        }
+
+        var reactorId = f.Locked[f.Index];
+        var reactor = units.FirstOrDefault(u => u.Id == reactorId)
+            ?? throw new ArgumentException($"Invalid frame: the reactor {reactorId.Value} is not in the state.", param);
+        if (reactor.Faction != Faction.Party)
+        {
+            throw new ArgumentException($"Invalid frame: the reactor {reactorId.Value} is a {reactor.Faction} unit; only the party is asked.", param);
+        }
+
+        if (reactor.Budget.ReactionUsed)
+        {
+            throw new ArgumentException($"Invalid frame: the reactor {reactorId.Value} has used its reaction.", param);
+        }
+
+        if (reactor.Abilities.IndexOf(f.Candidate, StringComparer.Ordinal) < 0)
+        {
+            throw new ArgumentException($"Invalid frame: the reactor {reactorId.Value} does not hold '{f.Candidate}'.", param);
+        }
+
+        if (pending!.Unit != reactorId || pending.Source != reactor.Pos)
+        {
+            throw new ArgumentException(
+                $"Invalid frame: the reaction decision must name the reactor {reactorId.Value} on its square ({reactor.Pos.X}, {reactor.Pos.Y}).", param);
+        }
+    }
+
+    // M1-11 plan call 6: a mark lives only on a unit whose round-1 turn has not started, one per faction.
+    private static void CheckOpenerMarks(ImmutableArray<Unit> units, CombatState? combat)
+    {
+        for (int i = 0; i < units.Length; i++)
+        {
+            var unit = units[i];
+            if (unit.Opener is null)
+            {
+                continue;
+            }
+
+            string who = $"Invalid units: unit {unit.Id.Value} has an opener mark";
+            if (combat is null)
+            {
+                throw new ArgumentException($"{who} out of combat.", nameof(units));
+            }
+
+            if (combat.Round != 1)
+            {
+                throw new ArgumentException($"{who} in round {combat.Round}; a mark lasts only until round 1.", nameof(units));
+            }
+
+            int index = combat.Order.IndexOf(unit.Id);
+            if (index < 0)
+            {
+                throw new ArgumentException($"{who} but is not in the turn order.", nameof(units));
+            }
+
+            bool unstarted = combat.BeforeRound1
+                || index > combat.Current
+                || (index == combat.Current && combat.TurnVacated);
+            if (!unstarted)
+            {
+                throw new ArgumentException($"{who} but its round-1 turn has already started.", nameof(units));
+            }
+
+            for (int j = 0; j < i; j++)
+            {
+                if (units[j].Opener is not null && units[j].Faction == unit.Faction)
+                {
+                    throw new ArgumentException(
+                        $"{who}, and so does unit {units[j].Id.Value}; a {unit.Faction} side has at most one opener.",
+                        nameof(units));
+                }
+            }
+        }
     }
 
     // M1-10 plan calls 5 and 7: the budget stores used counts; spent counts are sorted by pool id, positive, each pool once.
@@ -306,6 +545,154 @@ public sealed record GameState(
                     units);
             }
         }
+
+        if (unit.Opener is { } opener)
+        {
+            CheckOpener(unit, opener, who, units);
+        }
+
+        // M1-11 plan call 2: the abilities the unit holds are content ids, ordinal-sorted and distinct.
+        var abilities = unit.Abilities;
+        for (int k = 0; k < abilities.Length; k++)
+        {
+            if (abilities[k] is not { } id || !ContentId.IsValid(id))
+            {
+                throw new ArgumentException($"{who}holds ability '{abilities[k]}', which is not a content id ([a-z0-9_.:-]).", units);
+            }
+
+            if (k > 0 && string.CompareOrdinal(abilities[k - 1], id) >= 0)
+            {
+                throw new ArgumentException(
+                    $"{who}must list its abilities in ordinal order, each once ('{abilities[k - 1]}' then '{id}').", units);
+            }
+        }
+
+        // M1-11 plan call 13: reaction settings name content ids, ordinal-sorted and distinct, with a defined mode; "ask
+        // me" only on a party unit (AB 7.3: monsters have no "ask me").
+        var reactions = unit.Reactions;
+        for (int k = 0; k < reactions.Length; k++)
+        {
+            var setting = reactions[k] ?? throw new ArgumentException($"{who}has a null reaction setting.", units);
+            if (setting.AbilityId is not { } id || !ContentId.IsValid(id))
+            {
+                throw new ArgumentException(
+                    $"{who}has a reaction setting for '{setting.AbilityId}', which is not a content id ([a-z0-9_.:-]).", units);
+            }
+
+            if (!Enum.IsDefined(setting.Mode))
+            {
+                throw new ArgumentException($"{who}has an unknown reaction mode for '{id}'.", units);
+            }
+
+            if (setting.Mode == ReactionMode.AskMe && unit.Faction != Faction.Party)
+            {
+                throw new ArgumentException($"{who}is a {unit.Faction} unit with \"ask me\" on '{id}'; only a party unit may be asked.", units);
+            }
+
+            if (k > 0 && string.CompareOrdinal(reactions[k - 1].AbilityId, id) >= 0)
+            {
+                throw new ArgumentException(
+                    $"{who}must list its reaction settings by ability id in ordinal order, each once ('{reactions[k - 1].AbilityId}' then '{id}').",
+                    units);
+            }
+        }
+    }
+
+    // M1-11 plan call 6: the charge is well formed (CheckOpenerCharge), the budget includes it, and each turn-pool count is
+    // within the unit's spent count.
+    private static void CheckOpener(Unit unit, OpenerCharge opener, string who, string units)
+    {
+        CheckOpenerCharge(opener, who, units);
+        if (!Includes(unit.Budget, opener.Charged))
+        {
+            throw new ArgumentException($"{who}has a turn budget that does not include its opener charge.", units);
+        }
+
+        foreach (var pool in opener.TurnPools)
+        {
+            int spent = SpentCount(unit.Spent, pool.PoolId);
+            if (spent < pool.Spent)
+            {
+                throw new ArgumentException(
+                    $"{who}charges {pool.Spent} of pool '{pool.PoolId}' to its opener, but its spent count is {spent}.", units);
+            }
+        }
+    }
+
+    /// <summary>
+    /// The shape of an opener charge, the part of the load check that needs no unit (M1-11 plan call 6): no negative
+    /// count; no reaction or camp-spend flag; initialised turn pools, sorted by pool id in ordinal order, each pool once,
+    /// each id a content id and each count at least 1. Throws <see cref="ArgumentException"/> naming
+    /// <paramref name="param"/>, its message starting with <paramref name="who"/>. <c>Turns.MarkOpener</c> runs the same
+    /// check, so a marked state always loads.
+    /// </summary>
+    internal static void CheckOpenerCharge(OpenerCharge opener, string who, string param)
+    {
+        var charged = opener.Charged;
+        if (charged.MovementUsed < 0 || charged.ActionsUsed < 0)
+        {
+            throw new ArgumentException($"{who}has an opener charge with a negative count.", param);
+        }
+
+        if (charged.ReactionUsed || charged.CampSpent)
+        {
+            throw new ArgumentException($"{who}has an opener charge that sets the reaction or camp-spend flag.", param);
+        }
+
+        var pools = opener.TurnPools;
+        if (pools.IsDefault)
+        {
+            throw new ArgumentException($"{who}has uninitialised opener turn pools; use an empty array.", param);
+        }
+
+        for (int k = 0; k < pools.Length; k++)
+        {
+            var pool = pools[k];
+            if (pool.PoolId is null || !ContentId.IsValid(pool.PoolId))
+            {
+                throw new ArgumentException(
+                    $"{who}has an opener turn pool '{pool.PoolId}', which is not a content id ([a-z0-9_.:-]).", param);
+            }
+
+            if (pool.Spent < 1)
+            {
+                throw new ArgumentException(
+                    $"{who}has an opener turn pool '{pool.PoolId}' count of {pool.Spent}; it must be at least 1.", param);
+            }
+
+            if (k > 0 && string.CompareOrdinal(pools[k - 1].PoolId, pool.PoolId) >= 0)
+            {
+                throw new ArgumentException(
+                    $"{who}must list opener turn pools by pool id in ordinal order, each pool once ('{pools[k - 1].PoolId}' then '{pool.PoolId}').",
+                    param);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Whether <paramref name="budget"/> includes <paramref name="charged"/>: at least its movement and actions used, and
+    /// every flag it sets.
+    /// </summary>
+    internal static bool Includes(TurnBudget budget, TurnBudget charged) =>
+        budget.MovementUsed >= charged.MovementUsed
+        && budget.ActionsUsed >= charged.ActionsUsed
+        && (!charged.BonusUsed || budget.BonusUsed)
+        && (!charged.ReactionUsed || budget.ReactionUsed)
+        && (!charged.FreeUsed || budget.FreeUsed)
+        && (!charged.CampSpent || budget.CampSpent);
+
+    /// <summary>The count of <paramref name="poolId"/> in <paramref name="spent"/>, or 0.</summary>
+    internal static int SpentCount(ImmutableArray<PoolSpend> spent, string poolId)
+    {
+        foreach (var s in spent)
+        {
+            if (string.Equals(s.PoolId, poolId, StringComparison.Ordinal))
+            {
+                return s.Spent;
+            }
+        }
+
+        return 0;
     }
 
     private static void CheckStats(Unit unit, string units)

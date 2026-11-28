@@ -62,14 +62,13 @@ public static class Pools
     }
 
     /// <summary>
-    /// <paramref name="unit"/> spends <paramref name="count"/> of <paramref name="poolId"/>. Refused, with
-    /// <paramref name="s"/> itself as the state, when the current count is below <paramref name="count"/>, or when the
-    /// pool is a <see cref="RefillTag.Camp"/> pool and the unit's <see cref="TurnBudget.CampSpent"/> is set (AB 6.4: "at
-    /// most once per turn", on any unit's turn). A camp spend sets the flag. Throws
-    /// <see cref="ArgumentOutOfRangeException"/> for a count below 1 and <see cref="ArgumentException"/> for an unknown
-    /// pool or unit.
+    /// Whether <paramref name="unit"/> may spend <paramref name="count"/> of <paramref name="poolId"/> (AB 14.3's pool and
+    /// camp-spend checks, in that order; M1-11 plan call 3): <see cref="CommandError.NoUsesLeft"/> when the current count
+    /// is below <paramref name="count"/>, else <see cref="CommandError.CampSpendUsed"/> when the pool is a
+    /// <see cref="RefillTag.Camp"/> pool and the unit's <see cref="TurnBudget.CampSpent"/> is set, else
+    /// <see cref="CommandError.None"/>. Throws as <see cref="Spend"/> does.
     /// </summary>
-    public static (bool Ok, GameState Next) Spend(RulesContext rules, GameState s, UnitId unit, string poolId, int count)
+    public static CommandError CheckSpend(RulesContext rules, GameState s, UnitId unit, string poolId, int count)
     {
         ArgumentNullException.ThrowIfNull(rules);
         ArgumentNullException.ThrowIfNull(s);
@@ -80,11 +79,32 @@ public static class Pools
 
         var pool = rules.Pool(poolId);
         var holder = Find(s, unit);
-        bool camp = pool.Refill == RefillTag.Camp;
-        if ((camp && holder.Budget.CampSpent) || CurrentOf(rules, s, holder, pool) < count)
+        if (CurrentOf(rules, s, holder, pool) < count)
+        {
+            return CommandError.NoUsesLeft;
+        }
+
+        return pool.Refill == RefillTag.Camp && holder.Budget.CampSpent ? CommandError.CampSpendUsed : CommandError.None;
+    }
+
+    /// <summary>
+    /// <paramref name="unit"/> spends <paramref name="count"/> of <paramref name="poolId"/>. Refused, with
+    /// <paramref name="s"/> itself as the state, when the current count is below <paramref name="count"/>, or when the
+    /// pool is a <see cref="RefillTag.Camp"/> pool and the unit's <see cref="TurnBudget.CampSpent"/> is set (AB 6.4: "at
+    /// most once per turn", on any unit's turn): whenever <see cref="CheckSpend"/> refuses. A camp spend sets the flag. Throws
+    /// <see cref="ArgumentOutOfRangeException"/> for a count below 1 and <see cref="ArgumentException"/> for an unknown
+    /// pool or unit.
+    /// </summary>
+    public static (bool Ok, GameState Next) Spend(RulesContext rules, GameState s, UnitId unit, string poolId, int count)
+    {
+        if (CheckSpend(rules, s, unit, poolId, count) != CommandError.None)
         {
             return (false, s);
         }
+
+        var pool = rules.Pool(poolId);
+        var holder = Find(s, unit);
+        bool camp = pool.Refill == RefillTag.Camp;
 
         var spent = WithSpent(holder.Spent, pool.Id, checked(SpentOf(holder, pool.Id) + count));
         var next = holder with
@@ -110,6 +130,30 @@ public static class Pools
         var holder = Find(s, unit);
         var refilled = Refilled(rules, holder, tag);
         return ReferenceEquals(refilled, holder) ? s : s with { Units = s.Units.SetItem(s.Units.IndexOf(holder), refilled) };
+    }
+
+    /// <summary>
+    /// <see cref="Refill"/>, then <paramref name="kept"/>'s counts written back (M1-11 plan call 6: an opener's charge to
+    /// its striker's first turn survives that turn's refill): each kept pool's spent count becomes at least its kept
+    /// count. Throws as <see cref="Refill"/> does.
+    /// </summary>
+    internal static GameState RefillKeeping(
+        RulesContext rules, GameState s, UnitId unit, RefillTag tag, ImmutableArray<PoolSpend> kept)
+    {
+        var next = Refill(rules, s, unit, tag);
+        var refilled = Find(next, unit);
+        var holder = refilled;
+        foreach (var keep in kept)
+        {
+            if (keep.Spent > SpentOf(holder, keep.PoolId))
+            {
+                holder = holder with { Spent = WithSpent(holder.Spent, keep.PoolId, keep.Spent) };
+            }
+        }
+
+        return ReferenceEquals(holder, refilled)
+            ? next
+            : next with { Units = next.Units.SetItem(next.Units.IndexOf(refilled), holder) };
     }
 
     /// <summary>

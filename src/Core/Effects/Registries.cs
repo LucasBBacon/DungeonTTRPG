@@ -157,7 +157,9 @@ public sealed record RuleEvent
 public static class RuleEvents
 {
     /// <summary>
-    /// The rows, ordinal by id: <c>combatStarted</c>, raised by <see cref="CombatStarted"/> (the subject is the first
+    /// The rows, ordinal by id: <c>abilityResolved</c>, raised by <see cref="AbilityResolved"/> (an ability use has
+    /// resolved every target; the subject is the user; M1-11 plan call 9, AB's <c>ownActionResolved</c>);
+    /// <c>combatStarted</c>, raised by <see cref="CombatStarted"/> (the subject is the first
     /// unit in the order); <c>turnEnded</c> and <c>turnStarted</c>, raised by <see cref="TurnEnded"/> and
     /// <see cref="TurnStarted"/> (the subject is the turn's unit; M1-10 plan call 14); <c>unitDied</c>, raised by
     /// <see cref="UnitDied"/> (the subject is the dead unit, whose effects are already gone, so only other units'
@@ -167,6 +169,7 @@ public static class RuleEvents
     /// </summary>
     public static ImmutableArray<RuleEvent> Core { get; } =
         [
+            RuleEvent.Of<AbilityResolved>("abilityResolved", e => e.User),
             RuleEvent.Of<CombatStarted>("combatStarted", e => e.Order[0].Unit),
             RuleEvent.Of<TurnEnded>("turnEnded", e => e.Unit),
             RuleEvent.Of<TurnStarted>("turnStarted", e => e.Unit),

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Immutable;
+using Dungeon.Core.AbilityModel;
 using Dungeon.Core.Canonical;
 using Dungeon.Core.Combat;
 using Dungeon.Core.Effects;
@@ -9,8 +11,9 @@ namespace Dungeon.Core;
 /// <summary>
 /// The replay core-state hash (SV 4.5): the <see cref="Digest"/> of a <see cref="GameState"/>'s
 /// canonical bytes. Units are a set keyed by id, so their stored order does not matter; boons and
-/// decision options are lists, because their order is data. Active effects are a set keyed by seq. The initiative order
-/// and a unit's spent counts are lists in stored order.
+/// decision options are lists, because their order is data. Active effects are a set keyed by seq. The initiative order,
+/// a unit's spent counts, its opener mark's turn-pool counts, its abilities and its reaction settings are lists in stored
+/// order. The suspended use (M1-11 plan call 12) writes its locked units as a list in lock order.
 /// Stream keys are derived from the run seed and are not written; a state whose keys disagree with its seed is refused.
 /// </summary>
 public static class StateDigest
@@ -53,7 +56,7 @@ public static class StateDigest
     {
         public void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(15);
+            w.BeginRecord(16);
             w.UInt64(0, s.RunSeed);
             w.List(1, s.Map.ToRows(), (e, row) => e.String(0, row));
             w.SetByKey(2, s.Units, u => IdKey(u.Id), (e, u) => e.Record(0, new UnitRecord(u)));
@@ -69,6 +72,7 @@ public static class StateDigest
             w.OptionalRecord(12, s.Combat is null ? null : new CombatRecord(s.Combat));
             w.OptionalRecord(13, s.Ended is null ? null : new RunEndRecord(s.Ended));
             w.Int64(14, s.NextEventSeq);
+            w.OptionalRecord(15, s.Resolution is null ? null : new FrameRecord(s.Resolution));
             w.EndRecord();
         }
     }
@@ -77,7 +81,7 @@ public static class StateDigest
     {
         public void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(9);
+            w.BeginRecord(12);
             w.Int32(0, u.Id.Value);
             w.Int32(1, u.Pos.X);
             w.Int32(2, u.Pos.Y);
@@ -87,6 +91,31 @@ public static class StateDigest
             w.Int32(6, u.Hp);
             w.Record(7, new BudgetRecord(u.Budget));
             w.List(8, u.Spent, (e, spend) => e.Record(0, new SpendRecord(spend)));
+            w.OptionalRecord(9, u.Opener is null ? null : new OpenerRecord(u.Opener));
+            w.List(10, u.Abilities, (e, id) => e.String(0, id));
+            w.List(11, u.Reactions, (e, r) => e.Record(0, new ReactionRecord(r)));
+            w.EndRecord();
+        }
+    }
+
+    private sealed class ReactionRecord(ReactionSetting r) : ICanonical
+    {
+        public void WriteCanonical(CanonicalWriter w)
+        {
+            w.BeginRecord(2);
+            w.String(0, r.AbilityId);
+            w.Enum(1, r.Mode);
+            w.EndRecord();
+        }
+    }
+
+    private sealed class OpenerRecord(OpenerCharge o) : ICanonical
+    {
+        public void WriteCanonical(CanonicalWriter w)
+        {
+            w.BeginRecord(2);
+            w.Record(0, new BudgetRecord(o.Charged));
+            w.List(1, o.TurnPools, (e, spend) => e.Record(0, new SpendRecord(spend)));
             w.EndRecord();
         }
     }
@@ -121,11 +150,12 @@ public static class StateDigest
     {
         public void WriteCanonical(CanonicalWriter w)
         {
-            w.BeginRecord(4);
+            w.BeginRecord(5);
             w.List(0, c.Order, (e, id) => e.Int32(0, id.Value));
             w.Int32(1, c.Current);
             w.Int64(2, c.Round);
             w.Bool(3, c.TurnVacated);
+            w.Bool(4, c.BeforeRound1);
             w.EndRecord();
         }
     }
@@ -184,6 +214,54 @@ public static class StateDigest
             w.List(3, p.Options, (e, option) => e.Int32(0, option));
             w.Int32(4, p.Source.X);
             w.Int32(5, p.Source.Y);
+            w.EndRecord();
+        }
+    }
+
+    // The suspended use (M1-11 plan call 12). The target is a tagged union: the tag, then each shape's fields (absent or
+    // empty for the other shapes). The setup and roll are written field by field; a save difficulty is present only for
+    // a save.
+    private sealed class FrameRecord(AbilityFrame f) : ICanonical
+    {
+        public void WriteCanonical(CanonicalWriter w)
+        {
+            w.BeginRecord(18);
+            w.Int32(0, f.User.Value);
+            w.String(1, f.AbilityId);
+            var (tag, units, point, aim) = f.Target switch
+            {
+                UnitsTarget t => ("units", t.Units, (GridPos?)null, (Direction?)null),
+                PointTarget t => ("point", ImmutableArray<UnitId>.Empty, t.Point, null),
+                AimTarget t => ("aim", ImmutableArray<UnitId>.Empty, null, t.Aim),
+                _ => throw new ArgumentException("The suspended use has an unknown target.", nameof(f)),
+            };
+            w.String(2, tag);
+            w.List(3, units, (e, id) => e.Int32(0, id.Value));
+            w.OptionalInt32(4, point?.X);
+            w.OptionalInt32(5, point?.Y);
+            w.OptionalString(6, aim is { } d ? Enum.GetName(d) ?? throw new ArgumentException($"Unknown aim {d}.", nameof(f)) : null);
+            w.List(7, f.Locked, (e, id) => e.Int32(0, id.Value));
+            w.Int32(8, f.Index);
+            w.Enum(9, f.Window);
+            w.Int64(10, f.Setup.Bonus);
+            w.Int64(11, f.Setup.Target);
+            w.Enum(12, f.Setup.Mode);
+            w.Enum(13, f.Roll.Mode);
+            w.Int32(14, f.Roll.First);
+            w.OptionalInt32(15, f.Roll.Second);
+            w.String(16, f.Candidate);
+            w.OptionalRecord(17, f.SaveDifficulty is { } dc ? new DifficultyRecord(dc) : null);
+            w.EndRecord();
+        }
+    }
+
+    // A save difficulty (the writer has no optional Int64).
+    private sealed class DifficultyRecord(long difficulty) : ICanonical
+    {
+        public void WriteCanonical(CanonicalWriter w)
+        {
+            w.BeginRecord(1);
+            w.Int64(0, difficulty);
             w.EndRecord();
         }
     }

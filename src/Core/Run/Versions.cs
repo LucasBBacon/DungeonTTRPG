@@ -17,8 +17,9 @@ public static class GenVersion
 public static class RulesVersion
 {
     /// <summary>
-    /// The rules version this build implements. Version 2 (M1-10): commands are refused after a run end, and moves in
-    /// combat change.
+    /// The rules version this build implements. Version 3 (M1-11): abilities run through UseAbility; combat start holds
+    /// round 1 for an opener; an opener is charged to its striker's round-1 turn and takes no tick. Version 2 (M1-10):
+    /// commands are refused after a run end, and moves in combat change.
     /// </summary>
-    public const int Current = 2;
+    public const int Current = 3;
 }

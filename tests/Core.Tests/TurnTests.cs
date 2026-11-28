@@ -19,11 +19,12 @@ public class TurnTests
         ContestKit.LoadEffects(ContestKit.Def("cond.slow", "condition", ContestKit.Add("speed", -2))),
         pools: PoolTests.FixturePools);
 
-    // Three party units on an open 9x3 map, seed 7, out of combat.
+    // Two party units and an enemy (unit 3, table HP 12) on an open 9x3 map, seed 7, out of combat. The enemy keeps a
+    // fight running past the settle loop's win check (M1-11 plan call 8).
     private static GameState Open() =>
         GameState.Create(
             GridMap.Parse(".........", ".........", "........."),
-            [U(1, 0, 1), U(2, 4, 1), U(3, 8, 1)],
+            [U(1, 0, 1), U(2, 4, 1), new Unit(new UnitId(3), new GridPos(8, 1), Faction.Enemy, [], EnemyStats, 12)],
             7);
 
     private static GameState InCombat() => Turns.StartCombat(Rules, Open()).Next;
@@ -346,10 +347,10 @@ public class TurnTests
     }
 
     [Theory]
-    [InlineData("{\"version\":7,\"seed\":7,\"commands\":[{\"type\":\"endTurn\"}]}")]
-    [InlineData("{\"version\":7,\"seed\":7,\"commands\":[{\"type\":\"endTurn\",\"unit\":1,\"dir\":\"E\"}]}")]
-    [InlineData("{\"version\":7,\"seed\":7,\"commands\":[{\"type\":\"endTurn\",\"unit\":1,\"decision\":1}]}")]
-    [InlineData("{\"version\":7,\"seed\":7,\"commands\":[{\"type\":\"endTurn\",\"unit\":1,\"option\":0}]}")]
+    [InlineData("{\"version\":8,\"seed\":7,\"commands\":[{\"type\":\"endTurn\"}]}")]
+    [InlineData("{\"version\":8,\"seed\":7,\"commands\":[{\"type\":\"endTurn\",\"unit\":1,\"dir\":\"E\"}]}")]
+    [InlineData("{\"version\":8,\"seed\":7,\"commands\":[{\"type\":\"endTurn\",\"unit\":1,\"decision\":1}]}")]
+    [InlineData("{\"version\":8,\"seed\":7,\"commands\":[{\"type\":\"endTurn\",\"unit\":1,\"option\":0}]}")]
     public void An_end_turn_with_missing_or_foreign_fields_is_refused(string json) =>
         Assert.Throws<SnapshotFormatException>(() => CommandLog.Load(json));
 

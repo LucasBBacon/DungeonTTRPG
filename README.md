@@ -53,7 +53,8 @@ Directory.Build.props       Shared settings: net8.0, nullable, warnings as error
 src/Core/                   Dungeon.Core: the rules engine (no Godot)
   Engine/                   Commands, events, Engine.Apply
   State/                    Immutable GameState (with its run key) and its core-state digest
-  Grid/                     GridPos, GridMap
+  Grid/                     GridPos, GridMap; Sight.CanSee (symmetric shadowcasting) and the burst, cone and line areas
+  Abilities/                Ability records and the UseAbility pipeline (Dungeon.Core.AbilityModel): validation, previews, resolution, reactions and the suspended "ask me" frame
   Queries/                  Read-only questions, e.g. pathfinding
   Random/                   Key algebra (SplitMix64) and run streams
   Run/                      Reproducibility key, run configuration and unlock snapshots (SV 4.6)

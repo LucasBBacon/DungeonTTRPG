@@ -7,7 +7,7 @@ namespace Dungeon.Core.Tests;
 
 /// <summary>
 /// The run, combat and turn state (M1-10 task 1): the hero, the combat state, the run end, the event seq, each unit's
-/// turn budget and pool spent counts; their validation, the save (version 7) and the run-end gate.
+/// turn budget and pool spent counts; their validation, the save (version 7; version 8 from M1-11) and the run-end gate.
 /// </summary>
 public class RunStateTests
 {
@@ -96,7 +96,7 @@ public class RunStateTests
         foreach (var s in new[] { InCombat(), Ended(), Vacated() })
         {
             var json = Snapshot.Save(s);
-            Assert.StartsWith("{\"version\":7,", json);
+            Assert.StartsWith("{\"version\":8,", json);
             var loaded = Snapshot.Load(json);
             Assert.Equal(json, Snapshot.Save(loaded));
             Assert.Equal(StateDigest.Of(s), StateDigest.Of(loaded));
@@ -197,7 +197,7 @@ public class RunStateTests
     [Fact]
     public void A_v6_save_is_refused()
     {
-        var v6 = Snapshot.Save(ShrineState()).Replace("\"version\":7", "\"version\":6");
+        var v6 = Snapshot.Save(ShrineState()).Replace("\"version\":8", "\"version\":6");
         Assert.Equal(6, Assert.Throws<SnapshotVersionException>(() => Snapshot.Load(v6)).Found);
     }
 

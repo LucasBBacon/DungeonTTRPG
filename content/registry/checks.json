@@ -144,6 +144,28 @@
       "ciTier": "pr"
     },
     {
+      "id": "content.ABL145.ReactionHasPolicy",
+      "owner": "ability model",
+      "phase": "s",
+      "deps": [],
+      "uses": [],
+      "class": "build",
+      "action": "fail the build",
+      "wave": "M1",
+      "ciTier": "pr"
+    },
+    {
+      "id": "content.ABL145.AreaCapByLevel",
+      "owner": "ability model",
+      "phase": "s",
+      "deps": [],
+      "uses": [],
+      "class": "build",
+      "action": "fail the build",
+      "wave": "M1",
+      "ciTier": "pr"
+    },
+    {
       "id": "V19.DrawLedger",
       "owner": "the lead",
       "phase": "g",

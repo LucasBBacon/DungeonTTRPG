@@ -64,7 +64,7 @@ public class HitPointStateTests
             U(4, 0, 0) with { Stats = Fixtures.Stats with { HpTier = HpTier.Sturdy }, Hp = 9 },
             Foe(5, 2, 0, hp: 5));
         var json = Snapshot.Save(s);
-        Assert.StartsWith("{\"version\":7,", json);
+        Assert.StartsWith("{\"version\":8,", json);
         Assert.Contains("\"hp\":9", json);
         Assert.Contains("\"hpTier\":\"Sturdy\"", json);
         Assert.Contains("\"hpTier\":\"Table\",\"tableHp\":12", json);
@@ -78,7 +78,7 @@ public class HitPointStateTests
     [Fact]
     public void A_v5_save_is_refused()
     {
-        var v5 = Snapshot.Save(ShrineState()).Replace("\"version\":7", "\"version\":5");
+        var v5 = Snapshot.Save(ShrineState()).Replace("\"version\":8", "\"version\":5");
         Assert.Equal(5, Assert.Throws<SnapshotVersionException>(() => Snapshot.Load(v5)).Found);
     }
 

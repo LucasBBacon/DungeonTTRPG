@@ -192,9 +192,9 @@ public class RunConfigTests
     }
 
     [Fact]
-    public void Gen_version_is_one_and_rules_version_is_two()
+    public void Gen_version_is_one_and_rules_version_is_three()
     {
         Assert.Equal(1, GenVersion.Current);
-        Assert.Equal(2, RulesVersion.Current);
+        Assert.Equal(3, RulesVersion.Current);
     }
 }
