@@ -7,8 +7,9 @@ namespace Dungeon.Core.Validation.Checks;
 /// <summary>
 /// <c>content.ABL145.ReactionHasPolicy</c> (AB 14.5: "a reaction has no automatic policy"; AB 7.3): a reaction record
 /// needs one of the automatic policies. It fails a reaction whose policy is missing or <c>askMe</c> (the party's prompt,
-/// not an automatic policy), a <c>whilePoolAtLeastHalf</c> reaction with no <c>pool</c> to measure, and an
-/// <c>ifItChangesOutcome</c> reaction with a zero bonus, which could never change an outcome. It reads
+/// not an automatic policy), a <c>whilePoolAtLeastHalf</c> reaction with no <c>pool</c> to measure, and, under any
+/// policy, a reaction whose bonus is below 1: a reaction is a bonus ward (plan call 11), so a zero bonus never changes
+/// an outcome and a negative one hurts its holder. It reads
 /// <c>abilities/abilities.json</c>; every reaction there counts, whatever its unit.
 /// </summary>
 public sealed class ReactionHasPolicyCheck : IStaticCheck
@@ -35,6 +36,12 @@ public sealed class ReactionHasPolicyCheck : IStaticCheck
 
             string at = ContentJson.Item("$.abilities", i);
             string policy = ContentJson.Member(ContentJson.Member(at, "reaction"), "policy");
+            if (reaction.Bonus <= 0)
+            {
+                failures.Add(new CheckFailure(
+                    Id, File, ContentJson.Member(ContentJson.Member(at, "reaction"), "bonus"), $"Reaction \"{ability.Id}\" has a bonus of {reaction.Bonus}; a reaction is a bonus ward and needs a bonus of at least 1 (M1-11 plan call 11; AB 7.3)."));
+            }
+
             switch (reaction.Policy)
             {
                 case null or ReactionMode.AskMe:
@@ -44,10 +51,6 @@ public sealed class ReactionHasPolicyCheck : IStaticCheck
                 case ReactionMode.WhilePoolAtLeastHalf when ability.Pool is null:
                     failures.Add(new CheckFailure(
                         Id, File, ContentJson.Member(at, "pool"), $"Reaction \"{ability.Id}\" uses whilePoolAtLeastHalf and spends no pool, so it has nothing to measure (AB 7.3)."));
-                    break;
-                case ReactionMode.IfItChangesOutcome when reaction.Bonus == 0:
-                    failures.Add(new CheckFailure(
-                        Id, File, ContentJson.Member(ContentJson.Member(at, "reaction"), "bonus"), $"Reaction \"{ability.Id}\" uses ifItChangesOutcome with a zero bonus, which never changes an outcome (AB 7.3)."));
                     break;
             }
         }

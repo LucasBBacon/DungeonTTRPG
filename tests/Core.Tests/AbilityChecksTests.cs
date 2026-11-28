@@ -38,13 +38,13 @@ public class AbilityChecksTests
     [Fact]
     public void Never_passes()
     {
-        Assert.Empty(new ReactionHasPolicyCheck().Run(Load(Reaction("test.r", 0, """, "policy": {"kind": "never"}"""))));
+        Assert.Empty(new ReactionHasPolicyCheck().Run(Load(Reaction("test.r", 2, """, "policy": {"kind": "never"}"""))));
     }
 
     [Fact]
     public void Always_passes()
     {
-        Assert.Empty(new ReactionHasPolicyCheck().Run(Load(Reaction("test.r", 0, """, "policy": {"kind": "always"}"""))));
+        Assert.Empty(new ReactionHasPolicyCheck().Run(Load(Reaction("test.r", 2, """, "policy": {"kind": "always"}"""))));
     }
 
     [Fact]
@@ -57,14 +57,21 @@ public class AbilityChecksTests
         Assert.Empty(new ReactionHasPolicyCheck().Run(Load(Reaction("test.r", 1, Policy, """, "pool": {"id": "pool.a", "count": 1}"""))));
     }
 
-    [Fact]
-    public void If_it_changes_the_outcome_needs_a_bonus()
+    [Theory]
+    [InlineData("ifItChangesOutcome", 0)]
+    [InlineData("ifItChangesOutcome", -1)]
+    [InlineData("always", 0)]
+    [InlineData("always", -1)]
+    [InlineData("never", 0)]
+    [InlineData("never", -1)]
+    public void A_reaction_needs_a_bonus_of_at_least_one(string kind, int bonus)
     {
-        const string Policy = """, "policy": {"kind": "ifItChangesOutcome"}""";
-        var failure = Assert.Single(new ReactionHasPolicyCheck().Run(Load(Reaction("test.r", 0, Policy))));
+        // M1-11 reactions are bonus wards (plan call 11): a bonus below 1 never helps, and under "always" it hurts.
+        string policy = $$""", "policy": {"kind": "{{kind}}"}""";
+        var failure = Assert.Single(new ReactionHasPolicyCheck().Run(Load(Reaction("test.r", bonus, policy))));
         Assert.Equal("$.abilities[0].reaction.bonus", failure.Field);
 
-        Assert.Empty(new ReactionHasPolicyCheck().Run(Load(Reaction("test.r", 2, Policy))));
+        Assert.Empty(new ReactionHasPolicyCheck().Run(Load(Reaction("test.r", 1, policy))));
     }
 
     [Fact]
