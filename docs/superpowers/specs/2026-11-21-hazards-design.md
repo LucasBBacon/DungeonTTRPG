@@ -1053,7 +1053,7 @@ next act:
 
 | Part | Rule | Wave |
 |---|---|---|
-| **Strike** | Typed damage on the footprint. Area footprints use the harm band; a line or face strike of ≤ 3 squares, and the floor's signature Stir, may use the contact band, always under the EnvRound cap and only if it passes `ContactLethalityBound` after weakness (6.11 item 5). Save for half. Rider-free, never arcs. The damage-end row and setup payouts apply | M2 (gated) |
+| **Strike** | Typed damage on the footprint. Area footprints use the harm band; a line or face strike of ≤ 3 squares, and the floor's signature Stir, may use the contact band, always under the EnvRound cap and only if it passes `ContactLethalityBound` after weakness (6.11 item 5). Save for half (per part, death and healing design 20.3 step 2): in combat at the round-end step and, in M3 Dare rooms, per out-of-combat tick on `h:envSave`; the band is flat, so the halving draws no dice **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.1)**. Rider-free, never arcs. The damage-end row and setup payouts apply | M2 (gated) |
 | **Taint** | One minor or major condition from the theme's 6. Save negates. Source `environment`; counts in the per-fight cap (C 5.7, 11.6) | M3 |
 | **Lurch** | Environment forced movement (6.3.3) | M3 |
 | **Portal** | Unoccupied, unlocked doors or drapes in the room close or open. Never locks. Never the `fleeExit`. Held while occupied | M3 |
@@ -2129,7 +2129,7 @@ a dry causeway Plank, storm-glass faces as Charged Water bait, RS 8.6 islands.
   every unit it hits stands in water and is Soaked, so the Soaked
   weakness lifts the harm band to about the contact band, and the
   contact band would break `ContactLethalityBound` after weakness, 6.11
-  item 5), Reflex for half. **Never starts Charged Water.**
+  item 5), Reflex for half (per part, death and healing design 20.3 step 2) **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.1)**. **Never starts Charged Water.**
 - **Payoff (SC14):** with no unit on the footprint it discharges
   harmlessly. Emptying it defuses it; holding an enemy there charges
   it.
@@ -2188,13 +2188,13 @@ lamp-sconce face for K2).
 
 **M3:**
 - **Lamplighting.** Period 3. A lamp-sconce flares 3 squares forward:
-  fire at the harm band, Reflex for half; K2 burns the webs and frees
+  fire at the harm band, Reflex for half (per part, death and healing design 20.3 step 2) **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.1)**; K2 burns the webs and frees
   the Restrained. "Fire is the key" becomes timing. Cord: the lamp
   chain (Now).
 - **The Leaning Stacks.** A tippable Tall Furnishing with a lean meter
   of 3; loud events in the room lower it. At 0 the strip becomes due,
   and the stack overturns at that round's end: the contact band, Reflex
-  for half, Prone on a failure. It leaves Rough debris and opens the
+  for half (per part, death and healing design 20.3 step 2) **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.1)**, Prone on a failure. It leaves Rough debris and opens the
   sight line (rides RT's M3 Overturn).
   - At least half the strip lies within 3 of enemy starts.
   - The hidden shelf tripwire stays a trap.
@@ -2212,7 +2212,7 @@ Weightlifter shove lanes).
 
 **M2 (gated, Q1, the alternative): Pit Breathes.**
 - Period 3. Fire on the ring of 1 around the pit squares at the harm
-  band, Reflex for half, the Oiled payout. K1 burns ring oil.
+  band, Reflex for half (per part, death and healing design 20.3 step 2) **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.1)**, the Oiled payout. K1 burns ring oil.
 - **No Keg in the ring on F2–3.** Kegs at distance 2 are party bait.
 - Counted in the RT 7.7 flask-then-breath spike guard.
 - Cord: the Ringmaster's damper (Sustain). **Cues (8):** announcement, a
@@ -2233,7 +2233,7 @@ Weightlifter shove lanes).
 - **The Wheel of Knives.** RT's existing Carnival piece gains a
   standalone Cord whose line strike resolves as Now (6.3.4): the line
   is announced at this round's end and struck at the end of the next,
-  at the harm band, Reflex for half; recharge 3 (pips). The
+  at the harm band, Reflex for half (per part, death and healing design 20.3 step 2) **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.1)**; recharge 3 (pips). The
   Knife-Thrower Operates it, as a telegraphed intent. It is the room's
   clock, so never in a Turning Ring or Pit room.
 - **The High Wire.** A 2-wide Void under a Plank wire, fall band

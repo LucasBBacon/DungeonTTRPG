@@ -734,13 +734,20 @@ change CN-28) (cross-document comparison
 
 For each damage part, in data order:
 
+On a successful save against an effect that is half on a success, the
+part's raw amount is halved first: FloorDiv(raw, 2), before the steps
+below (death and healing design 20.3 step 2) **(agreed 2026-11-28,
+roadmap D-22; M1-11 rulings 1.1)**.
+
 1. Ladder shifts and shells apply during the damage step.
 2. `damageType` ends and layer breaks run.
 3. Damage-triggered transforms run.
 
 **Save chain (change CN-15, DH-17; consumables design 14.3, 14.4; death
 and healing design 15.2, 20.3):** in order, before hit points are lowered:
-a Downed target discards the event → these per-part steps, temporary hit
+a Downed target discards the event → these per-part steps, on the
+halved parts after a successful save against a half-on-a-success effect
+**(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.1)**, temporary hit
 points included → the event's damage is summed over all its parts → if
 the target Ducks, the total is halved (death and healing design 20.3 step
 3a: max(1, FloorDiv(total, 2)); Shade design 7.4, SH-6) → the

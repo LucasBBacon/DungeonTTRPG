@@ -452,6 +452,10 @@ Poison is a condition, not a damage type. **(agreed)**
 - A resistance and a weakness to the same type cancel to normal. **(agreed)**
 - Order of operations: flat changes first, then the ladder step, rounded
   down. **(agreed)**
+  A halving by a successful save (death and healing design 20.3 step 2)
+  applies to the raw amount after flat changes and before the ladder
+  step. **(lead's call, confirmed by the client 2026-11-28; M1-11
+  rulings 8 item 13)**
 - Damage that is not immune is at least 1. **(lead's call)**
 - Mixed damage resolves each part separately: a flaming sword's slashing
   and fire portions each meet their own step. **(agreed)**

@@ -1869,7 +1869,8 @@ flight breaks the rest."
   - The preview shows both odds ("flees 91% / Emboldened 49%").
 - **Toll** (tier-2 spell, always known; `spell.toll`):
   > **Action.** One hostile within 8 (11): Will save; **3d8 psychic**,
-  > half on a success; Faltering applies.
+  > half on a success; Faltering applies on any outcome (marker,
+  > AB 14.1) **(agreed 2026-11-28, roadmap D-22; M1-11 rulings 1.3)**.
   > - **Fear only for the Demoralised:** against a Demoralised,
   >   non-Emboldened target Toll is also a limited fear effect, and a
   >   failed save Routs it (T6). Otherwise Toll never Frightens its
