@@ -2,6 +2,7 @@ using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Dungeon.Core.Combat;
+using Dungeon.Core.Conditions;
 using Dungeon.Core.Effects;
 
 namespace Dungeon.Core.AbilityModel;
@@ -9,10 +10,11 @@ namespace Dungeon.Core.AbilityModel;
 /// <summary>
 /// Ability use outside resolution (M1-11 plan calls 2 to 5): the units an ability affects, and the two validation
 /// stages of AB 14.3. Every check reads the <em>view</em> the command acts on (plan call 4): in combat the stored state;
-/// out of combat, for an opener (a use that affects a unit of another faction, plan call 5), combat start's step-4 view
-/// (every budget fresh, every <see cref="RefillTag.Fight"/> pool refilled; owner ruling 2), because the opener is paid
-/// after combat start; for any other use, the tick-reset view (every budget fresh, every <see cref="RefillTag.Turn"/>
-/// pool refilled; AB 6.8), because it runs on a new tick as a step does.
+/// out of combat, for an opener (a use that affects a unit of another faction, plan call 5), the combat-start view (the
+/// combat-start condition step, then every budget fresh and every <see cref="RefillTag.Fight"/> pool refilled; owner
+/// ruling 2; M1-12a plan call 14), because the opener is paid after combat start; for any other use, the tick view
+/// (every budget fresh, every <see cref="RefillTag.Turn"/> pool refilled; AB 6.8), because it runs on a new tick as a
+/// step does.
 /// </summary>
 public static partial class AbilityUse
 {
@@ -86,7 +88,8 @@ public static partial class AbilityUse
     /// (<see cref="Pools.CheckSpend"/>: <see cref="CommandError.NoUsesLeft"/>, then
     /// <see cref="CommandError.CampSpendUsed"/>). Otherwise <see cref="CommandError.None"/>. Out of combat, whether a use
     /// opens a fight depends on its target, so the bar reads both views: the ability is usable when it is usable on the
-    /// tick-reset view or on the step-4 view, and otherwise the tick-reset view's code is returned.
+    /// tick view or on the combat-start view (<see cref="Turns.CombatStartView"/>), and otherwise the tick view's code is
+    /// returned.
     /// </summary>
     public static CommandError CheckUsable(RulesContext rules, GameState s, UnitId user, string abilityId)
     {
@@ -97,8 +100,8 @@ public static partial class AbilityUse
             return Usable(rules, s, user, abilityId);
         }
 
-        var error = Usable(rules, Engine.TickResets(rules, s), user, abilityId);
-        return error != CommandError.None && Usable(rules, Turns.FightReady(rules, s), user, abilityId) == CommandError.None
+        var error = Usable(rules, TickView(rules, s), user, abilityId);
+        return error != CommandError.None && Usable(rules, Turns.CombatStartView(rules, s), user, abilityId) == CommandError.None
             ? CommandError.None
             : error;
     }
@@ -114,8 +117,8 @@ public static partial class AbilityUse
     /// square). Last, out of combat: a use that is not an opener (it affects no unit of another faction) and draws (it
     /// has a <c>resolve</c>, or dice in its damage) is <see cref="CommandError.NotInCombat"/> (plan call 5; D-23 ruled
     /// 2026-11-28: the refusal stays in M1; the D-23 wave uses <c>h:roll</c> (M1-11 rulings record 2)); an opener draws on
-    /// the combat stream once combat has started. Out of combat it reads the step-4 view for an opener
-    /// and the tick-reset view otherwise. The command refuses with this code.
+    /// the combat stream once combat has started. Out of combat it reads the combat-start view for an opener and the
+    /// tick view otherwise (<see cref="View"/>). The command refuses with this code.
     /// </summary>
     public static CommandError CheckTarget(
         RulesContext rules, GameState s, UnitId user, string abilityId, AbilityTarget target)
@@ -126,9 +129,10 @@ public static partial class AbilityUse
     }
 
     /// <summary>
-    /// The state a use is validated and resolved on (plan call 4): <paramref name="s"/> in combat; out of combat,
-    /// combat start's step-4 view (<see cref="Turns.FightReady"/>) when the use <see cref="Opens"/> a fight, and the
-    /// tick-reset view otherwise.
+    /// The state a use is validated and resolved on (plan call 4; M1-12a plan calls 13 and 14): <paramref name="s"/> in
+    /// combat; out of combat, the combat-start view (<see cref="Turns.CombatStartView"/>: the combat-start condition
+    /// step, then step 4) when the use <see cref="Opens"/> a fight, and the tick view otherwise
+    /// (<see cref="TickView"/>).
     /// </summary>
     internal static GameState View(RulesContext rules, GameState s, UnitId user, string abilityId, AbilityTarget target)
     {
@@ -137,8 +141,18 @@ public static partial class AbilityUse
             return s;
         }
 
-        return Opens(rules, s, user, abilityId, target) ? Turns.FightReady(rules, s) : Engine.TickResets(rules, s);
+        return Opens(rules, s, user, abilityId, target) ? Turns.CombatStartView(rules, s) : TickView(rules, s);
     }
+
+    /// <summary>
+    /// The state a use that opens no fight is validated on out of combat (M1-12a plan call 13). Inside a tick's step
+    /// phase (<see cref="ClockStep.Act"/>), where the engine validates and resolves the command after every unit's
+    /// turn-start step, it is <paramref name="s"/> itself. Between ticks (the action bar, the preview, the engine's first
+    /// check on the stored state) it is the tick's resets (<see cref="Engine.TickResets"/>: fresh budgets, turn pools
+    /// refilled); the turn-start condition steps (ticks, window ends) are not run there, since they dispatch triggers.
+    /// </summary>
+    internal static GameState TickView(RulesContext rules, GameState s) =>
+        s.Step == ClockStep.Act ? s : Engine.TickResets(rules, s);
 
     /// <summary>
     /// Whether the use is an opener (plan call 5): out of combat, by a unit that holds the ability, on a target that fits

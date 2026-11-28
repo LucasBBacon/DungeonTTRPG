@@ -7,7 +7,8 @@ using Dungeon.Core.Stats;
 
 namespace Dungeon.Core.Combat;
 
-// The class shares its name with its namespace, so name it explicitly inside this namespace.
+// These classes share their names with their namespaces, so name them explicitly inside this namespace.
+using Conditions = Dungeon.Core.Conditions.Conditions;
 using Effects = Dungeon.Core.Effects.Effects;
 
 /// <summary>
@@ -36,12 +37,15 @@ public static class Turns
 
     /// <summary>
     /// The combat-start step up to recording the fight (M1-11 plan call 7; M1-10 rulings record 5, steps 0 to 7): the
-    /// checks; every unit joins, in id order; the held messages (none until M1-12 and M1-13); every unit gets a fresh
-    /// turn budget and every <see cref="RefillTag.Fight"/> pool refills (step 4); initiative
+    /// checks; every unit joins, in id order; the combat-start condition step (<see cref="Conditions.CombatStart"/>; step
+    /// 2, M1-12a plan call 14), whose messages are held; every unit gets a fresh turn budget and every
+    /// <see cref="RefillTag.Fight"/> pool refills (step 4); initiative
     /// (<see cref="Initiative.Roll"/>, one d20 per unit on <c>Rng.Combat</c>; step 5); the fight is recorded with round 1,
     /// slot 0 and the <see cref="CombatState.BeforeRound1"/> marker, so no unit holds the turn yet; and
-    /// <see cref="CombatStarted"/>, then the held messages. Throws <see cref="InvalidOperationException"/> when already
-    /// in combat or the run has ended, and <see cref="ArgumentException"/> when the state has no units.
+    /// <see cref="CombatStarted"/>, then the held messages, by holder and then by the order the conditions were applied
+    /// (<see cref="Conditions.SortHeld"/>). Steps 2 to 4 draw nothing, so the initiative dice are as before. Throws
+    /// <see cref="InvalidOperationException"/> when already in combat or the run has ended, and
+    /// <see cref="ArgumentException"/> when the state has no units.
     /// </summary>
     public static (ImmutableArray<GameEvent> Events, GameState Next) BeginCombat(RulesContext rules, GameState s)
     {
@@ -63,12 +67,9 @@ public static class Turns
         }
 
         // 1. Who joins a fight is M1-35's; until then every unit in the state does, in id order.
-        // 2. CO 5.5's combat-start condition step: M1-12; TL-19's clause is M2 (D-19(a)). 3. Surprise: M1-13, M1-35.
-        //    Their messages are held for step 7.
-        var held = ImmutableArray<GameEvent>.Empty;
-
-        // 4. Fresh turn budgets, then the per-fight use limits refill. 5. Initiative (draw-neutral after step 4).
-        var next = FightReady(rules, s);
+        // 2 to 4. The combat-start condition step, surprise (M1-13, M1-35), then fresh budgets and the per-fight use
+        //    limits; the messages of steps 2 and 3 are held for step 7. 5. Initiative (draw-neutral after step 4).
+        var (held, next) = BeforeInitiative(rules, s);
         var (order, rolled) = Initiative.Roll(rules, next, next.Units.Select(u => u.Id));
 
         // 6. Record the fight with the before-round-1 marker.
@@ -77,8 +78,17 @@ public static class Turns
             Combat = new CombatState(order.Select(e => e.Unit).ToImmutableArray(), 0, 1, BeforeRound1: true),
         };
 
-        // 7. CombatStarted, then the held messages.
-        return ([new CombatStarted(order), .. held], rolled);
+        // 7. CombatStarted, then the held messages, by unit and then in the order the conditions were applied.
+        return ([new CombatStarted(order), .. Conditions.SortHeld(held)], rolled);
+    }
+
+    // Combat start's steps 2 to 4 (M1-10 rulings record 5), which draw nothing: the CO 5.5 combat-start condition step
+    // (TL-19's clause is M2, D-19(a)); 3, surprise (M1-13, M1-35), whose messages join the held ones; 4, fresh turn
+    // budgets, then the per-fight use limits refill.
+    private static (ImmutableArray<GameEvent> Held, GameState Next) BeforeInitiative(RulesContext rules, GameState s)
+    {
+        var (held, next) = Conditions.CombatStart(rules, s);
+        return (held, FightReady(rules, next));
     }
 
     /// <summary>
@@ -114,9 +124,19 @@ public static class Turns
     }
 
     /// <summary>
+    /// The state an opener is validated, previewed and paid on (M1-12a plan call 14; M1-11 final review S1): combat
+    /// start's draw-free steps before initiative, its messages discarded: step 2, the combat-start condition step
+    /// (<see cref="Conditions.CombatStart"/>), step 3 (surprise) once M1-13 adds it, then step 4
+    /// (<see cref="FightReady"/>). <see cref="BeginCombat"/> runs the same steps, so the view and the state the opener
+    /// resolves on differ only by initiative and by <c>combatStarted</c> triggers. It draws nothing.
+    /// </summary>
+    internal static GameState CombatStartView(RulesContext rules, GameState s) => BeforeInitiative(rules, s).Next;
+
+    /// <summary>
     /// Combat start's step 4 (M1-10 rulings record 5): every unit's turn budget made fresh, then every
     /// <see cref="RefillTag.Fight"/> pool refilled; <see cref="RefillTag.Turn"/> pools are not refilled (M1-11 owner
-    /// ruling 2). <see cref="BeginCombat"/> runs it, and an opener is validated on it (plan call 4).
+    /// ruling 2). <see cref="BeginCombat"/> runs it, after the combat-start condition step; an opener is validated on
+    /// <see cref="CombatStartView"/>, which ends with it.
     /// </summary>
     internal static GameState FightReady(RulesContext rules, GameState s) =>
         Pools.RefillAll(rules, FreshBudgets(s), RefillTag.Fight);

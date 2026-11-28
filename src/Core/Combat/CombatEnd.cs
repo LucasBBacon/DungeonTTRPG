@@ -21,11 +21,13 @@ public static class CombatEnd
     /// when the turn is vacated (its holder is dead and has no turn-end step, CO 5.4, or its turn has already ended,
     /// M1-12a plan call 10) and under the
     /// <see cref="CombatState.BeforeRound1"/> marker (no turn has started: "If the fight is won, no <c>TurnStarted</c> or
-    /// <c>TurnEnded</c> follows", M1-10 rulings record 5, step 8); 2, <c>combatOnly</c> instances end; 3, Downed
-    /// companions get up; 4, XP and level-ups; 5, the combat state is cleared, every unit gets a fresh turn budget
-    /// (out-of-combat time, AB 6.8), loses any opener mark (M1-11 plan call 7), the clock leaves its turn step
-    /// (<see cref="ClockStep.None"/>), and <see cref="CombatEnded"/>
-    /// (<see cref="CombatEndReason.Win"/>) is emitted. Steps 2 to 4 are empty seams in M1-10.
+    /// <c>TurnEnded</c> follows", M1-10 rulings record 5, step 8); 2, <c>combatOnly</c> instances and windows whose
+    /// source is gone end (<see cref="Clock.CombatEnd"/>; M1-12a plan call 15: reasons
+    /// <see cref="ConditionEndReason.CombatEnd"/> and <see cref="ConditionEndReason.SourceGone"/>, and a Steeled an end
+    /// grants ends at once, so nothing <c>combatOnly</c> survives the fight); 3, Downed companions get up; 4, XP and
+    /// level-ups; 5, the combat state is cleared, every unit gets a fresh turn budget (out-of-combat time, AB 6.8), loses
+    /// any opener mark (M1-11 plan call 7), the clock leaves its turn step (<see cref="ClockStep.None"/>), and
+    /// <see cref="CombatEnded"/> (<see cref="CombatEndReason.Win"/>) is emitted. Steps 3 and 4 are empty seams.
     /// </summary>
     public static (ImmutableArray<GameEvent> Events, GameState Next) EndIfWon(RulesContext rules, GameState s)
     {
@@ -58,7 +60,11 @@ public static class CombatEnd
             next = afterEnd;
         }
 
-        // 2. combatOnly instances end: M1-12.
+        // 2. combatOnly instances end, with every window whose source is gone; a Steeled an end grants ends at once
+        //    (M1-12a plan call 15; CO 5.5).
+        var (ended2, afterOnly) = Clock.CombatEnd(rules, next);
+        events.AddRange(ended2);
+        next = afterOnly;
 
         // 3. On a win, Downed companions get up: M2 (no Downed in M1).
 

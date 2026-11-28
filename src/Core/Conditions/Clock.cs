@@ -9,8 +9,9 @@ using Dungeon.Core.Stats;
 namespace Dungeon.Core.Conditions;
 
 /// <summary>
-/// The wearer clock (M1-12a plan calls 1, 5 and 9; owner rulings 2 and 4; CO 5.2 to 5.7, 7.2): the counting test, a
-/// unit's turn-start and turn-end condition items, and the round end's window ends. The caller advances
+/// The wearer clock (M1-12a plan calls 1, 5, 9, 13 and 15; owner rulings 2 and 4; CO 5.2 to 5.7, 7.2): the counting test,
+/// a unit's turn-start and turn-end condition items (in combat, and for every unit in an out-of-combat tick), the round
+/// end's and the tick end's window ends, and combat end's ends. The caller advances
 /// <see cref="GameState.Phase"/> and sets <see cref="GameState.Step"/> before each step, so at a turn-start step the
 /// phase is that step's own, and at a turn-end step the turn's Act phase is <c>Phase - 1</c> and its turn-start phase
 /// <c>Phase - 2</c>. Each numbered item runs over instances in seq order (CO 5.4); every end goes through
@@ -47,7 +48,9 @@ internal static class Clock
     /// <see cref="Unit.HardTurnsLostThisFight"/> + 1; when that reaches 2, Unyielding is granted at once, from the
     /// unit itself (CO 5.7). Its events are dispatched before the step returns.</item>
     /// </list>
-    /// The result's events are already dispatched, with what they fired.
+    /// The result's events are already dispatched, with what they fired. Out of combat (a tick's turn-start step, plan
+    /// call 13; CO 5.5) there is no <see cref="TurnStarted"/>, so no <c>turnStarted</c> trigger fires, item 8 (a per-fight
+    /// count) is skipped, and the tick batch cannot take any unit, a monster included, below 1 hit point.
     /// </summary>
     internal static (ImmutableArray<GameEvent> Events, GameState Next) TurnStart(
         RulesContext rules, GameState s, UnitId unit, ref int firings)
@@ -77,7 +80,7 @@ internal static class Clock
             var instance = Find(s, seq)!;
             var (definition, state) = Conditions.Read(rules, instance);
             var part = new DamagePart(definition.Tick!.DamageType, 0, 0, state.Value);
-            var (harm, next) = Harm.Deal(rules, s, unit, new DamageRoll([new PartRoll(part, [], state.Value)], false));
+            var (harm, next) = Harm.Deal(rules, s, unit, new DamageRoll([new PartRoll(part, [], state.Value)], false), tick: true);
             events.AddRange(harm.Events);
             s = next;
             if (Gone(s, unit, seq))
@@ -265,11 +268,83 @@ internal static class Clock
     {
         ArgumentNullException.ThrowIfNull(rules);
         ArgumentNullException.ThrowIfNull(s);
-        var order = s.Combat?.Order ?? ImmutableArray<UnitId>.Empty;
+        return EndGoneWindows(rules, s);
+    }
+
+    /// <summary>
+    /// The end of an out-of-combat tick (plan call 13; CO 5.6: out of combat a window lasts until the next tick), after
+    /// every unit's turn-end step: every window whose source is gone (the environment, or no longer in the state) ends
+    /// with <see cref="ConditionEndReason.SourceGone"/>, in seq order. It does not dispatch.
+    /// </summary>
+    internal static (ImmutableArray<GameEvent> Events, GameState Next) TickEnd(RulesContext rules, GameState s)
+    {
+        ArgumentNullException.ThrowIfNull(rules);
+        ArgumentNullException.ThrowIfNull(s);
+        return EndGoneWindows(rules, s);
+    }
+
+    /// <summary>
+    /// Combat end's step 2 (plan call 15; CO 5.5, 7.2), after the current unit's turn-end step. The instances to end are
+    /// collected first, holders in id order and each holder's in seq order: every window whose source is gone (as at a
+    /// round end) with <see cref="ConditionEndReason.SourceGone"/>, and every other <c>combatOnly</c> instance with
+    /// <see cref="ConditionEndReason.CombatEnd"/>. Each ends through <see cref="Conditions.End"/>. A <c>combatOnly</c>
+    /// instance an end creates (the Steeled a hard instance grants) never joins the collected list: it ends at once, with
+    /// <see cref="ConditionEndReason.CombatEnd"/>, before the next collected instance. So nothing <c>combatOnly</c>
+    /// survives the fight. It does not dispatch.
+    /// </summary>
+    internal static (ImmutableArray<GameEvent> Events, GameState Next) CombatEnd(RulesContext rules, GameState s)
+    {
+        ArgumentNullException.ThrowIfNull(rules);
+        ArgumentNullException.ThrowIfNull(s);
+        var due = new List<(long Seq, ConditionEndReason Reason)>();
+        foreach (var unit in s.Units)
+        {
+            foreach (var e in s.Effects)
+            {
+                if (e.Holder != unit.Id || e.Condition is not { } c)
+                {
+                    continue;
+                }
+
+                if (IsWindow(c.Terms) && SourceGone(s, e))
+                {
+                    due.Add((e.Seq, ConditionEndReason.SourceGone));
+                }
+                else if (Conditions.Read(rules, e).Definition.Flags.CombatOnly)
+                {
+                    due.Add((e.Seq, ConditionEndReason.CombatEnd));
+                }
+            }
+        }
+
+        long fresh = s.NextEffectSeq;
+        var events = ImmutableArray.CreateBuilder<GameEvent>();
+        foreach (var (seq, reason) in due)
+        {
+            if (Find(s, seq) is null)
+            {
+                continue;
+            }
+
+            s = End(rules, s, events, seq, reason);
+
+            // A combatOnly instance the end created ends at once, before the next collected one.
+            while (FirstFreshCombatOnly(rules, s, fresh) is { } created)
+            {
+                s = End(rules, s, events, created, ConditionEndReason.CombatEnd);
+            }
+        }
+
+        return (events.ToImmutable(), s);
+    }
+
+    // Every window whose source is gone ends with SourceGone, in seq order (a round end, a tick end).
+    private static (ImmutableArray<GameEvent> Events, GameState Next) EndGoneWindows(RulesContext rules, GameState s)
+    {
         var gone = new List<long>();
         foreach (var e in s.Effects)
         {
-            if (e.Condition is { } c && IsWindow(c.Terms) && (e.Source.Unit is not { } source || !order.Contains(source)))
+            if (e.Condition is { } c && IsWindow(c.Terms) && SourceGone(s, e))
             {
                 gone.Add(e.Seq);
             }
@@ -285,6 +360,26 @@ internal static class Clock
         }
 
         return (events.ToImmutable(), s);
+    }
+
+    // CO 5.6: the window's source is the environment; or, in combat, it is not in the initiative order (dead, gone or
+    // never in it); or, out of combat, it is no longer in the state.
+    private static bool SourceGone(GameState s, EffectInstance e) =>
+        e.Source.Unit is not { } source
+        || (s.Combat is { } combat ? !combat.Order.Contains(source) : s.FindUnit(source) is null);
+
+    // The first combatOnly condition instance created at or after the seq `fresh`, or null.
+    private static long? FirstFreshCombatOnly(RulesContext rules, GameState s, long fresh)
+    {
+        foreach (var e in s.Effects)
+        {
+            if (e.Seq >= fresh && e.Condition is not null && Conditions.Read(rules, e).Definition.Flags.CombatOnly)
+            {
+                return e.Seq;
+            }
+        }
+
+        return null;
     }
 
     // Item 1 for one counted instance: each save term in canonical order, a charges fallback included, until one ends it.

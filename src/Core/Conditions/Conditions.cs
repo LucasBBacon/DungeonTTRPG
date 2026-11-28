@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Dungeon.Core.Determinism;
 using Dungeon.Core.Effects;
 
 namespace Dungeon.Core.Conditions;
@@ -152,8 +153,9 @@ public static class Conditions
     /// <see cref="ConditionEnded"/>; then, at once, ends every instance it sustains (<see cref="ConditionState.SustainedBy"/>)
     /// with <see cref="ConditionEndReason.Ended"/>, in seq order, each through this method; then, if the ended instance
     /// was hard or carries <see cref="EngineStateTag"/>, grants Steeled to its holder (CO 7.2), from the holder itself,
-    /// unless the reason is <see cref="ConditionEndReason.CombatStart"/>. Every end except a combat-start end and a dead
-    /// holder's own instances comes through here; the holder must be in the state. Throws
+    /// unless the reason is <see cref="ConditionEndReason.CombatStart"/> (so a combat-start end grants no Steeled, CO 5.5,
+    /// 7.2, but still ends what the instance sustains). Every end except a dead holder's own instances comes through here;
+    /// the holder must be in the state. Throws
     /// <see cref="ArgumentException"/> if no instance has the seq or it has no condition part, and
     /// <see cref="InvalidOperationException"/> as <see cref="Read"/> does.
     /// </summary>
@@ -198,6 +200,183 @@ public static class Conditions
         }
 
         return (events.ToImmutable(), s);
+    }
+
+    /// <summary>
+    /// The CO 5.5 combat-start condition step (plan call 14; M1-10 rulings record 5, step 2), run between combat start's
+    /// checks and its step 4 (<see cref="Dungeon.Core.Combat.Turns.FightReady"/>). It draws nothing and advances no phase. Over the
+    /// condition instances in seq order:
+    /// <list type="bullet">
+    /// <item>an instance whose definition is flagged <c>combatStartEnds</c> ends with
+    /// <see cref="ConditionEndReason.CombatStart"/> (<see cref="End"/>, which grants no Steeled for that reason, CO 7.2;
+    /// what it sustains ends with it);</item>
+    /// <item>an instance running on its record's out-of-combat terms switches to the record's in-combat
+    /// <see cref="ConditionDefinition.Duration"/>, counted from now, when that list's effective end comes sooner than what
+    /// it has left (CO 5.5, 6.3): its <see cref="ConditionState.Terms"/> are replaced, its
+    /// <see cref="ConditionState.TurnsCounted"/> goes to 0 and its charges follow the new terms, with no event. An
+    /// instance that does not switch keeps its terms and count.</item>
+    /// </list>
+    /// Then every unit's <see cref="Unit.HardTurnsLostThisFight"/> resets to 0 (CO 5.7). The messages are returned to
+    /// be held; combat start sorts them (<see cref="SortHeld"/>) and emits them after <see cref="CombatStarted"/>. Throws
+    /// <see cref="InvalidOperationException"/> as <see cref="Read"/> does, or when a switch would put a record's in-combat
+    /// duration that breaks the party-facing band on a party holder (as <see cref="Insert"/> does).
+    /// </summary>
+    internal static (ImmutableArray<GameEvent> Held, GameState Next) CombatStart(RulesContext rules, GameState s)
+    {
+        ArgumentNullException.ThrowIfNull(rules);
+        ArgumentNullException.ThrowIfNull(s);
+        var held = ImmutableArray.CreateBuilder<GameEvent>();
+        var seqs = s.Effects.Where(e => e.Condition is not null).Select(e => e.Seq).ToList();
+        foreach (long seq in seqs)
+        {
+            if (Find(s, seq) is not { } instance)
+            {
+                continue;
+            }
+
+            var (definition, state) = Read(rules, instance);
+            if (definition.Flags.CombatStartEnds)
+            {
+                var (ended, next) = End(rules, s, seq, ConditionEndReason.CombatStart);
+                held.AddRange(ended);
+                s = next;
+                continue;
+            }
+
+            if (Switches(definition, state) is not { } terms)
+            {
+                continue;
+            }
+
+            if (s.FindUnit(instance.Holder)!.Faction == Faction.Party
+                && ConditionRules.CheckBand(definition, terms, "duration", "condition", partyFacing: true) is { } broken)
+            {
+                throw new InvalidOperationException(
+                    $"{definition.Id} (instance {seq}) cannot switch to its in-combat duration on party unit "
+                    + $"{instance.Holder.Value}: {broken.Field}: {broken.Message}");
+            }
+
+            var switched = state with { Terms = terms, TurnsCounted = 0, Charges = ChargesOf(terms) };
+            s = s with { Effects = s.Effects.SetItem(s.Effects.IndexOf(instance), instance with { Condition = switched }) };
+        }
+
+        s = s with
+        {
+            Units = s.Units.Select(u => u.HardTurnsLostThisFight == 0 ? u : u with { HardTurnsLostThisFight = 0 }).ToImmutableArray(),
+        };
+        return (held.ToImmutable(), s);
+    }
+
+    /// <summary>
+    /// Combat start's held condition messages in their CO 5.5 order (plan call 14; M1-10 rulings record 5, step 7):
+    /// listed by holder, by unit id, then in the order the conditions were applied (the seq of the instance each message
+    /// is about), then in emission order. Throws <see cref="ArgumentException"/> for a message that is not a
+    /// <see cref="ConditionEnded"/> or <see cref="ConditionApplied"/>.
+    /// </summary>
+    internal static ImmutableArray<GameEvent> SortHeld(ImmutableArray<GameEvent> held)
+    {
+        var keyed = new List<HeldMessage>(held.Length);
+        for (int i = 0; i < held.Length; i++)
+        {
+            var (holder, seq) = held[i] switch
+            {
+                ConditionEnded e => (e.Holder, e.Seq),
+                ConditionApplied a => (a.Holder, a.Seq),
+                _ => throw new ArgumentException($"{held[i].GetType().Name} is not a held condition message.", nameof(held)),
+            };
+            keyed.Add(new HeldMessage(holder.Value, seq, i, held[i]));
+        }
+
+        keyed.Sort(HeldOrder.Instance);
+        return [.. keyed.Select(k => k.Message)];
+    }
+
+    // The in-combat terms an instance on its record's out-of-combat terms switches to, or null when it keeps its own
+    // (CO 5.5: "if that is shorter"; plan call 14).
+    private static ImmutableArray<DurationTerm>? Switches(ConditionDefinition d, ConditionState c)
+    {
+        if (d.OutOfCombat.IsEmpty || d.Duration.IsEmpty || !c.Terms.SequenceEqual(Sorted(d.OutOfCombat)))
+        {
+            return null;
+        }
+
+        var terms = Sorted(d.Duration);
+        long? left = Left(c.Terms, c);
+        long? fresh = Left(terms, c with { TurnsCounted = 0 });
+        return fresh is { } shorter && (left is null || shorter < left) ? terms : null;
+    }
+
+    // The counted turns an instance on `terms` has left before its first terminator's effective end (CO 6.3): turns for
+    // turns; the cap for saveEnds, trigger, staged and sustained; a charges term's fallback; the value for decay; 1 for
+    // a window (it ends by the source's next turn); null (never) for untilRest, untilCamp and a trigger without a cap.
+    private static long? Left(ImmutableArray<DurationTerm> terms, ConditionState c)
+    {
+        long? least = null;
+        foreach (var term in terms)
+        {
+            long? left = term is DurationTerm.Decay ? c.Value : EffectiveEnd(term) is { } end ? Math.Max(0, end - c.TurnsCounted) : null;
+            if (left is { } l && (least is null || l < least))
+            {
+                least = l;
+            }
+        }
+
+        return least;
+    }
+
+    private static long? EffectiveEnd(DurationTerm term) => term switch
+    {
+        DurationTerm.Turns t => t.N,
+        DurationTerm.SaveEnds t => t.Cap,
+        DurationTerm.TriggerEnd t => t.Cap,
+        DurationTerm.Sustained t => t.Max,
+        DurationTerm.Staged t => t.Cap,
+        DurationTerm.Charges t => EffectiveEnd(t.Fallback),
+        DurationTerm.UntilSourceTurnStart or DurationTerm.UntilSourceTurnEnd => 1,
+        _ => null,
+    };
+
+    private static ImmutableArray<DurationTerm> Sorted(ImmutableArray<DurationTerm> terms)
+    {
+        var sorted = new List<DurationTerm>(terms);
+        sorted.Sort(DurationTermOrder.Instance);
+        return [.. sorted];
+    }
+
+    private static int? ChargesOf(ImmutableArray<DurationTerm> terms)
+    {
+        foreach (var term in terms)
+        {
+            if (term is DurationTerm.Charges c)
+            {
+                return c.N;
+            }
+        }
+
+        return null;
+    }
+
+    // One held message with its sort key: holder id, the seq it is about, its emission index.
+    private sealed record HeldMessage(int Holder, long Seq, int Index, GameEvent Message);
+
+    // Holder, then seq, then emission index: a total order, since emission indexes are unique.
+    [TotalComparer]
+    private sealed class HeldOrder : IComparer<HeldMessage>
+    {
+        public static readonly HeldOrder Instance = new();
+
+        public int Compare(HeldMessage? x, HeldMessage? y)
+        {
+            ArgumentNullException.ThrowIfNull(x);
+            ArgumentNullException.ThrowIfNull(y);
+            int c = x.Holder.CompareTo(y.Holder);
+            if (c == 0)
+            {
+                c = x.Seq.CompareTo(y.Seq);
+            }
+
+            return c != 0 ? c : x.Index.CompareTo(y.Index);
+        }
     }
 
     /// <summary>

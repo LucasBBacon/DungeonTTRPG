@@ -106,9 +106,9 @@ public class TriggerTests
         Assert.Equal<GameEvent>(
             [
                 new UnitMoved(Hero, new GridPos(1, 1), new GridPos(2, 1)),
-                new TickAdvanced(1),
                 new EffectApplied(3, "t.plain", Hero, new EffectSource(Ally)),
                 new EffectApplied(4, "t.plain", Ally, new EffectSource(Ally)),
+                new TickAdvanced(1),
             ],
             r.Events.ToArray());
         Assert.Equal(new EffectInstance(3, "t.plain", Hero, new EffectSource(Ally)), r.State.Effects[2]);
@@ -129,9 +129,9 @@ public class TriggerTests
         Assert.Equal<GameEvent>(
             [
                 new UnitMoved(Hero, new GridPos(1, 1), new GridPos(2, 1)),
-                new TickAdvanced(1),
                 new HookFired("test.args", 1),
                 new TileChanged(new GridPos(0, 0), Tile.Wall),
+                new TickAdvanced(1),
             ],
             r.Events.ToArray());
         Assert.Equal(new EffectInstance(2, "t.plain", Hero, EffectSource.Environment), r.State.Effects[1]);
@@ -146,9 +146,9 @@ public class TriggerTests
         Assert.Equal<GameEvent>(
             [
                 new UnitMoved(Hero, new GridPos(1, 1), new GridPos(2, 1)),
-                new TickAdvanced(1),
                 new EffectApplied(3, "t.plain", Hero, new EffectSource(Ally)),
                 new HookFired("test.mark", 2),
+                new TickAdvanced(1),
             ],
             r.Events.ToArray());
     }
@@ -174,9 +174,10 @@ public class TriggerTests
             () => Engine.Apply(Effects.Apply(Start(), "t.chain64", Hero, new EffectSource(Hero)), HeroEast, Rules));
         Assert.Equal(64, ex.Firings);
 
-        // The move raises 2 events; firing k then adds HookFired at 2k and its re-raised UnitMoved at 2k + 1. The 65th
-        // firing would answer the UnitMoved the 64th raised, at 129.
-        Assert.Equal(129, ex.EventIndex);
+        // The move's step-phase dispatch queues 1 event (the tick's TickAdvanced comes after it, M1-12a plan call 13);
+        // firing k then adds HookFired at 2k - 1 and its re-raised UnitMoved at 2k. The 65th firing would answer the
+        // UnitMoved the 64th raised, at 128.
+        Assert.Equal(128, ex.EventIndex);
     }
 
     // --- No listener, no rules ---

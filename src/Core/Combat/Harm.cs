@@ -34,10 +34,12 @@ public static class Harm
     /// <c>sourceTied</c> conditions it was the source of follow (M1-12a plan call 8). Damage to a unit already on 0
     /// emits <see cref="DamageDealt"/> and nothing else. It never starts a turn and never ends combat: once the
     /// command's queue has drained, callers run <c>CombatEnd.EndIfWon</c> and then <see cref="Turns.ResumeIfVacated"/>.
+    /// A condition's <paramref name="tick"/> is floored at 1 HP for every unit while no fight is on (CO 5.5; M1-12a plan
+    /// call 13; <see cref="Damage.Resolve"/>).
     /// Throws <see cref="InvalidOperationException"/> on an ended run and <see cref="ArgumentException"/> for an
     /// unknown unit.
     /// </summary>
-    public static (HarmResult Result, GameState Next) Deal(RulesContext rules, GameState s, UnitId target, DamageRoll roll)
+    public static (HarmResult Result, GameState Next) Deal(RulesContext rules, GameState s, UnitId target, DamageRoll roll, bool tick = false)
     {
         ArgumentNullException.ThrowIfNull(rules);
         ArgumentNullException.ThrowIfNull(s);
@@ -47,7 +49,7 @@ public static class Harm
             throw new InvalidOperationException("Cannot deal damage: the run has ended.");
         }
 
-        var (outcome, next) = Damage.Apply(rules, s, target, roll);
+        var (outcome, next) = Damage.Apply(rules, s, target, roll, tick);
         long seq = s.NextEventSeq;
         next = next with { NextEventSeq = checked(seq + 1) };
 

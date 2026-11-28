@@ -78,10 +78,13 @@ public static partial class AbilityUse
     /// the same use is not reflected.
     /// </summary>
     /// <remarks>
-    /// For an opener the preview reads combat start's step-4 view (<see cref="View"/>), while the opener itself resolves
-    /// after <see cref="Turns.BeginCombat"/> and its <c>combatStarted</c> dispatch. So <c>combatStarted</c> triggers and
-    /// (from M1-12 and M1-13) combat-start conditions are not reflected in an opener's preview; the M1-12 roadmap entry
-    /// records the follow-up (M1-11 final review S1).
+    /// For an opener the preview reads the combat-start view (<see cref="View"/>, <see cref="Turns.CombatStartView"/>:
+    /// the combat-start condition step, surprise once M1-13 adds it, then step 4; M1-12a plan call 14), the state
+    /// <see cref="Turns.BeginCombat"/> rolls initiative on. So a condition that combat start ends or switches is reflected
+    /// (M1-11 final review S1). The remaining gap is <c>combatStarted</c> triggers: the opener resolves after their
+    /// dispatch, and their subject is the first unit in initiative order, so previewing them would need the hidden roll.
+    /// For any other use out of combat the preview reads the tick view (<see cref="TickView"/>): the tick's resets, but
+    /// not the turn-start condition steps (tick damage, windows ending) that run before the use resolves.
     /// </remarks>
     public static AbilityPreview Preview(
         RulesContext rules, GameState s, UnitId user, string abilityId, AbilityTarget target)

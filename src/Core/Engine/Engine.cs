@@ -2,6 +2,7 @@ using System;
 using System.Collections.Immutable;
 using Dungeon.Core.AbilityModel;
 using Dungeon.Core.Combat;
+using Dungeon.Core.Conditions;
 using Dungeon.Core.Effects;
 
 namespace Dungeon.Core;
@@ -112,6 +113,8 @@ public static class Engine
     /// <list type="bullet">
     /// <item>an ordinary command: its own events, then each pass of the settle loop (a won fight's end, round 1's start,
     /// or a vacated turn's resumption);</item>
+    /// <item>a move or a use out of combat that is not an opener: a tick (<see cref="ApplyTick"/>), each step dispatched
+    /// in turn, then the settle passes;</item>
     /// <item>an opener (a use out of combat that affects another faction): combat start (<see cref="CombatStarted"/> and
     /// the held messages), then the use, then the settle passes.</item>
     /// </list>
@@ -149,6 +152,12 @@ public static class Engine
         if (command is UseAbilityCommand opener && AbilityUse.Opens(rules, state, opener.User, opener.AbilityId, opener.Target))
         {
             return ApplyOpener(state, opener, rules);
+        }
+
+        // Out of combat, any other move or use is a tick, which dispatches step by step (M1-12a plan call 13).
+        if (state.Combat is null && command is MoveCommand or UseAbilityCommand)
+        {
+            return ApplyTick(state, command, rules);
         }
 
         var result = command switch
@@ -249,11 +258,12 @@ public static class Engine
 
     /// <summary>
     /// An opener (M1-11 plan calls 4 to 8; owner ruling 2; M1-10 rulings record 4.1 and 5): a use out of combat that
-    /// affects a unit of another faction. It is validated on combat start's step-4 view, and a refusal returns the state
-    /// it was given with no events: no fight, no tick, no draw. Then, in phases, each dispatched on the command's one
+    /// affects a unit of another faction. It is validated on the combat-start view (<see cref="Turns.CombatStartView"/>:
+    /// the combat-start condition step, then step 4; M1-12a plan call 14), and a refusal returns the state it was given
+    /// with no events: no fight, no tick, no draw. Then, in phases, each dispatched on the command's one
     /// firing counter:
     /// <list type="number">
-    /// <item><see cref="Turns.BeginCombat"/> (<see cref="CombatStarted"/>, then the held messages), dispatched, so
+    /// <item><see cref="Turns.BeginCombat"/> (<see cref="CombatStarted"/>, then the held condition messages), dispatched, so
     /// <c>combatStarted</c> triggers see the state before the opener. If the run ended there, the events so far are
     /// returned (<see cref="RunEnded"/> last). If the striker is gone or can no longer pay the cost
     /// (<see cref="AbilityUse.Payable"/>), the opener is dropped: no <see cref="AbilityUsed"/>, no cost, no mark.</item>
@@ -307,31 +317,179 @@ public static class Engine
     }
 
     /// <summary>
-    /// An ability use that is not an opener (AB 14.3; M1-11 plan calls 3 to 5 and 10). In combat it is validated and
-    /// resolved on the stored state and takes no tick. Out of combat (a use that affects no other faction) it runs as a
-    /// step does: the tick's resets first (every budget fresh, every turn pool refilled; AB 6.8), then validation and
-    /// resolution on that view, then <see cref="GameState.Tick"/> + 1 and <see cref="TickAdvanced"/> last. A refusal
-    /// returns the state it was given, with no events: no reset, no tick, no draw.
+    /// An ability use in combat (AB 14.3; M1-11 plan calls 3 to 5 and 10): validated and resolved on the stored state,
+    /// with no tick. A refusal returns the state it was given, with no events. Out of combat a use is an opener
+    /// (<see cref="ApplyOpener"/>) or a tick (<see cref="ApplyTick"/>).
     /// </summary>
     private static StepResult ApplyUseAbility(GameState state, UseAbilityCommand use, RulesContext rules)
     {
-        var view = AbilityUse.View(rules, state, use.User, use.AbilityId, use.Target);
-        var error = AbilityUse.Targetable(rules, view, use.User, use.AbilityId, use.Target);
+        var error = CheckUse(rules, state, use);
         if (error != CommandError.None)
         {
             return Reject(state, error);
         }
 
-        var (events, next) = Resolution.Use(rules, view, use.User, rules.Ability(use.AbilityId), use.Target);
-        if (state.Combat is null && next.Ended is null)
+        var (events, next) = Resolution.Use(rules, state, use.User, rules.Ability(use.AbilityId), use.Target);
+        return new StepResult(next, events, CommandError.None);
+    }
+
+    /// <summary>
+    /// An out-of-combat tick (AB 6.8; CO 5.5; M1-12a plan call 13): a move, or a use that opens no fight, takes one tick,
+    /// on one firing counter, in this order:
+    /// <list type="number">
+    /// <item>the command is validated on the stored state (a use on its tick view, <see cref="AbilityUse.TickView"/>); a
+    /// refusal returns the state it was given, with no events: no tick step, no reset, no draw;</item>
+    /// <item><see cref="GameState.Phase"/> + 1 into the shared turn-start step; item 1 is the tick's resets
+    /// (<see cref="TickResets"/>: every budget fresh, every turn pool refilled); then every unit's turn-start step in id
+    /// order (<see cref="Clock.TurnStart"/>: no <see cref="TurnStarted"/>, no lost-turn check, the tick batch floored at
+    /// 1 HP for every unit), each dispatching its own events;</item>
+    /// <item><see cref="GameState.Phase"/> + 1 into the step phase, every unit's Act phase (CO 5.2); the command is
+    /// validated again on that state, and refused after all (the stored state returned, with no events) if that fails;
+    /// then it resolves there;</item>
+    /// <item>the command's events are dispatched;</item>
+    /// <item><see cref="GameState.Phase"/> + 1 into the shared turn-end step; every unit's turn-end step in id order
+    /// (<see cref="Clock.TurnEnd"/>), each dispatched, then the windows whose source is gone end
+    /// (<see cref="Clock.TickEnd"/>), dispatched;</item>
+    /// <item><see cref="GameState.Tick"/> + 1, the clock leaves its step (<see cref="ClockStep.None"/>), and
+    /// <see cref="TickAdvanced"/>;</item>
+    /// <item>a step onto a shrine raises its <see cref="DecisionRequested"/> (three shrine draws) after
+    /// <see cref="TickAdvanced"/>; these last events are dispatched too;</item>
+    /// <item>the settle loop.</item>
+    /// </list>
+    /// Once the run ends, nothing later runs. A command whose dispatch starts a fight skips steps 5 to 7 (none can in
+    /// M1).
+    /// </summary>
+    private static StepResult ApplyTick(GameState state, Command command, RulesContext rules)
+    {
+        var error = CheckTick(rules, state, command);
+        if (error != CommandError.None)
         {
-            // Checked: at the limit the use fails loudly rather than wrap to a state no save can hold.
-            long tick = checked(state.Tick + 1);
-            next = next with { Tick = tick };
-            events = events.Add(new TickAdvanced(tick));
+            return Reject(state, error);
         }
 
-        return new StepResult(next, events, CommandError.None);
+        // 2. Every unit's turn-start step, after the tick's resets (item 1).
+        int firings = 0;
+        var events = ImmutableArray.CreateBuilder<GameEvent>();
+        var s = TickResets(rules, state with { Phase = checked(state.Phase + 1), Step = ClockStep.TurnStart });
+        foreach (var id in UnitIds(s))
+        {
+            if (s.Ended is null && s.FindUnit(id) is not null)
+            {
+                var (started, next) = Clock.TurnStart(rules, s, id, ref firings);
+                events.AddRange(started);
+                s = next;
+            }
+        }
+
+        if (s.Ended is not null)
+        {
+            return new StepResult(s, events.ToImmutable(), CommandError.None);
+        }
+
+        // 3. The step phase: validated again on the state after the turn-start steps, then resolved there.
+        s = s with { Phase = checked(s.Phase + 1), Step = ClockStep.Act };
+        error = CheckTick(rules, s, command);
+        if (error != CommandError.None)
+        {
+            return Reject(state, error);
+        }
+
+        GridPos? shrine = null;
+        ImmutableArray<GameEvent> own;
+        if (command is MoveCommand move)
+        {
+            int index = IndexOfUnit(s, move.Unit);
+            var unit = s.Units[index];
+            var to = unit.Pos.Step(move.Dir);
+            own = [new UnitMoved(unit.Id, unit.Pos, to)];
+            s = s with { Units = s.Units.SetItem(index, unit with { Pos = to }) };
+            shrine = s.Map[to] == Tile.Shrine ? to : null;
+        }
+        else
+        {
+            var use = (UseAbilityCommand)command;
+            (own, s) = Resolution.Use(rules, s, use.User, rules.Ability(use.AbilityId), use.Target);
+            if (s.Resolution is not null)
+            {
+                // A use out of combat draws nothing (it is refused NotInCombat if it would), so no reaction window opens.
+                throw new InvalidOperationException("An out-of-combat use was suspended on a reaction decision.");
+            }
+        }
+
+        // 4. The command's events.
+        var (afterCommand, dispatched) = TriggerDispatch.Run(rules, s, own, ref firings);
+        s = afterCommand;
+        events.AddRange(dispatched);
+
+        // 5. Every unit's turn-end step, then the windows whose source is gone.
+        if (s.Ended is null && s.Combat is null)
+        {
+            s = s with { Phase = checked(s.Phase + 1), Step = ClockStep.TurnEnd };
+            foreach (var id in UnitIds(s))
+            {
+                if (s.Ended is null && s.FindUnit(id) is not null)
+                {
+                    var (ended, next) = Clock.TurnEnd(rules, s, id);
+                    (s, ended) = TriggerDispatch.Run(rules, next, ended, ref firings);
+                    events.AddRange(ended);
+                }
+            }
+
+            if (s.Ended is null)
+            {
+                var (gone, next) = Clock.TickEnd(rules, s);
+                (s, gone) = TriggerDispatch.Run(rules, next, gone, ref firings);
+                events.AddRange(gone);
+            }
+
+            // 6. The tick advances; 7. a shrine's decision follows it.
+            if (s.Ended is null)
+            {
+                // Checked: at the limit the command fails loudly rather than wrap to a state no save can hold.
+                long tick = checked(state.Tick + 1);
+                s = s with { Tick = tick, Step = ClockStep.None };
+                var tail = ImmutableArray.CreateBuilder<GameEvent>();
+                tail.Add(new TickAdvanced(tick));
+                if (shrine is { } source && s.FindUnit(((MoveCommand)command).Unit) is { } mover)
+                {
+                    var (decision, next) = RequestShrine(s, mover.Id, source);
+                    s = next;
+                    tail.Add(new DecisionRequested(decision));
+                }
+
+                var (afterTail, raised) = TriggerDispatch.Run(rules, s, tail.ToImmutable(), ref firings);
+                s = afterTail;
+                events.AddRange(raised);
+            }
+        }
+
+        // 8. The settle loop.
+        var (settled, all) = Settle(rules, s, events.ToImmutable(), ref firings);
+        return new StepResult(settled, all, CommandError.None);
+    }
+
+    // A tick's command check (plan call 13): a move's checks, or a use's on its view (the tick view, or, should the use
+    // open a fight, the combat-start view).
+    private static CommandError CheckTick(RulesContext rules, GameState s, Command command) => command switch
+    {
+        MoveCommand move => CheckMove(rules, s, move),
+        UseAbilityCommand use => CheckUse(rules, s, use),
+        _ => throw new NotSupportedException($"Unsupported tick command type {command.GetType().Name}."),
+    };
+
+    private static CommandError CheckUse(RulesContext rules, GameState s, UseAbilityCommand use) =>
+        AbilityUse.Targetable(rules, AbilityUse.View(rules, s, use.User, use.AbilityId, use.Target), use.User, use.AbilityId, use.Target);
+
+    // Every unit's id, in id order (the units are kept sorted by id).
+    private static ImmutableArray<UnitId> UnitIds(GameState s)
+    {
+        var ids = ImmutableArray.CreateBuilder<UnitId>(s.Units.Length);
+        foreach (var u in s.Units)
+        {
+            ids.Add(u.Id);
+        }
+
+        return ids.MoveToImmutable();
     }
 
     /// <summary>
@@ -361,16 +519,46 @@ public static class Engine
     }
 
     /// <summary>
-    /// A one-square move. Out of combat it advances <see cref="GameState.Tick"/> and, as each tick does (AB 6.8; M1-10
-    /// plan call 6), first gives every unit a fresh turn budget and refills every <see cref="RefillTag.Turn"/> pool, then
-    /// makes the move (the tick's start steps come first, CO 5.5). In combat
-    /// (plan call 8) only the current unit may move (no unit while the turn is vacated or the fight is held before round
-    /// 1, M1-11 plan call 7), and only with movement left (checked before the square); the move spends 1 movement and
-    /// does not tick.
+    /// A one-square move in combat (plan call 8): only the current unit may move (no unit while the turn is vacated or
+    /// the fight is held before round 1, M1-11 plan call 7), and only with movement left (checked before the square); the
+    /// move spends 1 movement and does not tick (ticks are out-of-combat time, CO 5.5). A step onto a shrine raises its
+    /// decision. Out of combat a move is a tick (<see cref="ApplyTick"/>).
     /// </summary>
     private static StepResult ApplyMove(GameState state, MoveCommand move, RulesContext rules)
     {
-        // Checked before anything else so the outcome does not depend on the rest of the command.
+        var error = CheckMove(rules, state, move);
+        if (error != CommandError.None)
+        {
+            return Reject(state, error);
+        }
+
+        int index = IndexOfUnit(state, move.Unit);
+        var unit = state.Units[index];
+        var from = unit.Pos;
+        var to = from.Step(move.Dir);
+
+        var events = ImmutableArray.CreateBuilder<GameEvent>();
+        events.Add(new UnitMoved(unit.Id, from, to));
+        var budget = unit.Budget with { MovementUsed = checked(unit.Budget.MovementUsed + 1) };
+        var next = state with { Units = state.Units.SetItem(index, unit with { Pos = to, Budget = budget }) };
+        if (state.Map[to] == Tile.Shrine)
+        {
+            var (decision, requested) = RequestShrine(next, unit.Id, to);
+            next = requested;
+            events.Add(new DecisionRequested(decision));
+        }
+
+        return new StepResult(next, events.ToImmutable(), CommandError.None);
+    }
+
+    /// <summary>
+    /// A move's checks, in order: the direction (an undefined one throws <see cref="ArgumentOutOfRangeException"/>,
+    /// before anything else so the outcome does not depend on the rest of the command); the unit
+    /// (<see cref="CommandError.UnknownUnit"/>); in combat, the turn (<see cref="CommandError.NotYourTurn"/>) and the
+    /// movement left (<see cref="CommandError.NoMovementLeft"/>); then the square (<see cref="CheckStep"/>).
+    /// </summary>
+    private static CommandError CheckMove(RulesContext rules, GameState state, MoveCommand move)
+    {
         if (!Enum.IsDefined(move.Dir))
         {
             throw new ArgumentOutOfRangeException(nameof(move), move.Dir, "Unknown direction.");
@@ -379,75 +567,42 @@ public static class Engine
         int index = IndexOfUnit(state, move.Unit);
         if (index < 0)
         {
-            return Reject(state, CommandError.UnknownUnit);
+            return CommandError.UnknownUnit;
         }
 
         var unit = state.Units[index];
-        var combat = state.Combat;
-        if (combat is not null)
+        if (state.Combat is { } combat)
         {
             // A vacated turn is held by no one until it resumes, and before round 1 no one holds the turn.
             if (combat.TurnVacated || combat.BeforeRound1 || combat.CurrentUnit != unit.Id)
             {
-                return Reject(state, CommandError.NotYourTurn);
+                return CommandError.NotYourTurn;
             }
 
             if (Turns.MovementLeft(rules, state, unit.Id) < 1)
             {
-                return Reject(state, CommandError.NoMovementLeft);
+                return CommandError.NoMovementLeft;
             }
         }
 
-        var error = CheckStep(state, unit, move.Dir);
-        if (error != CommandError.None)
-        {
-            return Reject(state, error);
-        }
-
-        var from = unit.Pos;
-        var to = from.Step(move.Dir);
-
-        var events = ImmutableArray.CreateBuilder<GameEvent>();
-        events.Add(new UnitMoved(unit.Id, from, to));
-        GameState next;
-        if (combat is not null)
-        {
-            // In combat the move spends movement; ticks are out-of-combat time (CO 5.5).
-            var budget = unit.Budget with { MovementUsed = checked(unit.Budget.MovementUsed + 1) };
-            next = state with { Units = state.Units.SetItem(index, unit with { Pos = to, Budget = budget }) };
-        }
-        else
-        {
-            // Checked: at the limit the step fails loudly rather than wrap to a state no save can hold.
-            long tick = checked(state.Tick + 1);
-            next = TickResets(rules, state);
-            next = next with
-            {
-                Units = next.Units.SetItem(index, next.Units[index] with { Pos = to }),
-                Tick = tick,
-            };
-            events.Add(new TickAdvanced(tick));
-        }
-
-        if (state.Map[to] == Tile.Shrine)
-        {
-            var (options, shrine) = DrawBoons(state.Rng.Shrine);
-            var decision = new PendingDecision(
-                new DecisionId(state.NextDecisionId), unit.Id, DecisionKind.ShrineBoon, options, to);
-            next = next with
-            {
-                Rng = state.Rng with { Shrine = shrine },
-                Pending = decision,
-                NextDecisionId = checked(state.NextDecisionId + 1),
-            };
-            events.Add(new DecisionRequested(decision));
-        }
-
-        return new StepResult(next, events.ToImmutable(), CommandError.None);
+        return CheckStep(state, unit, move.Dir);
     }
 
-    // AB 6.8, at the start of each tick, before the command's own step: every unit's turn budget becomes fresh (the
-    // camp flag included) and every turn pool refills.
+    // A shrine at `source` offers `unit` its boons: three draws on the shrine stream, and the decision pending.
+    private static (PendingDecision Decision, GameState Next) RequestShrine(GameState s, UnitId unit, GridPos source)
+    {
+        var (options, shrine) = DrawBoons(s.Rng.Shrine);
+        var decision = new PendingDecision(new DecisionId(s.NextDecisionId), unit, DecisionKind.ShrineBoon, options, source);
+        return (decision, s with
+        {
+            Rng = s.Rng with { Shrine = shrine },
+            Pending = decision,
+            NextDecisionId = checked(s.NextDecisionId + 1),
+        });
+    }
+
+    // AB 6.8, at the start of each tick, as its turn-start item 1 (M1-12a plan call 13): every unit's turn budget becomes
+    // fresh (the camp flag included) and every turn pool refills.
     internal static GameState TickResets(RulesContext rules, GameState s) =>
         Pools.RefillAll(rules, Turns.FreshBudgets(s), RefillTag.Turn);
 
