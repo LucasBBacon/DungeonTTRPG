@@ -5,6 +5,7 @@ using Dungeon.Core.Combat;
 using Dungeon.Core.Conditions;
 using Dungeon.Core.Damage;
 using Dungeon.Core.Effects;
+using Dungeon.Core.Stats;
 using Xunit;
 using static Dungeon.Core.Tests.ConditionFixtures;
 using static Dungeon.Core.Tests.Fixtures;
@@ -355,6 +356,32 @@ public class TickClockTests
         var applied = Assert.Single(r.Events.OfType<ConditionApplied>(), a => a.ConditionId == Stun);
         Assert.Contains(r.Events, e => e is ConditionEnded { ConditionId: Stun, Reason: ConditionEndReason.Expired } c && c.Seq == applied.Seq);
         Assert.Contains(r.Events, e => e is ConditionApplied { ConditionId: Conditions.SteeledId } a && a.Holder == P1);
+    }
+
+    // --- D-23: no repeat save out of combat (final review C3, C6, C8) ---
+
+    [Fact]
+    public void A_repeat_save_condition_inserted_with_no_fight_on_is_refused()
+    {
+        // Held is combatOnly saveEnds with no out-of-combat list: out of combat it would roll on the combat stream.
+        var ex = Assert.Throws<InvalidOperationException>(() => Insert(Calm(), Held, E3, P1, new ConditionInsert(RecordedDifficulty: 10)));
+        Assert.Contains("D-23", ex.Message);
+
+        // An override with a repeat save, a charges fallback included, is refused the same way.
+        ImmutableArray<DurationTerm> charges = [new DurationTerm.Charges(1, "unitMoved", new DurationTerm.SaveEnds(Save.Will, 2, 0))];
+        ex = Assert.Throws<InvalidOperationException>(
+            () => Insert(Calm(), Combined, E3, P1, new ConditionInsert(RecordedDifficulty: 10, Duration: charges)));
+        Assert.Contains("D-23", ex.Message);
+    }
+
+    [Fact]
+    public void A_crafted_repeat_save_held_out_of_combat_throws_at_the_tick_before_any_roll()
+    {
+        // Placed in a fight, then the fight is stripped: the tick's turn end would roll its save on Rng.Combat.
+        var fight = Calm() with { Combat = new CombatState([P1, P2, E3], 0, 1, BeforeRound1: true) };
+        var s = Insert(fight, Held, E3, P1, new ConditionInsert(RecordedDifficulty: 10)) with { Combat = null };
+        var ex = Assert.Throws<InvalidOperationException>(() => Engine.Apply(s, East, TickRules));
+        Assert.Contains("D-23", ex.Message);
     }
 
     // --- Helpers ---

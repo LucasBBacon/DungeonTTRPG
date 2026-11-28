@@ -186,7 +186,7 @@ internal static class Clock
         // Item 2: decay drops.
         foreach (long seq in counted)
         {
-            if (Find(s, seq) is { Condition: { } c } && Has<DurationTerm.Decay>(c.Terms) && c.Value > 0)
+            if (Find(s, seq) is { Condition: { } c } && Has<DurationTerm.Decay>(Flatten(c.Terms)) && c.Value > 0)
             {
                 s = Update(s, seq, d => d with { Value = d.Value - 1 });
             }
@@ -223,7 +223,7 @@ internal static class Clock
                     DurationTerm.Sustained t => t.Max,
                     _ => null,
                 }))
-                || (Has<DurationTerm.Decay>(c.Terms) && c.Value == 0);
+                || (Has<DurationTerm.Decay>(Flatten(c.Terms)) && c.Value == 0);
             if (expired)
             {
                 s = End(rules, s, events, seq, ConditionEndReason.Expired);
@@ -417,6 +417,13 @@ internal static class Clock
                 }
 
                 continue;
+            }
+
+            // D-23: Conditions.Insert refuses a repeat save with no fight on, so none can roll out of combat here.
+            if (s.Combat is null)
+            {
+                throw new InvalidOperationException(
+                    $"Instance {seq} ({instance.EffectId}) would roll a repeat save with no fight on; out-of-combat repeat saves are not built (D-23).");
             }
 
             long difficulty = c.RecordedDifficulty

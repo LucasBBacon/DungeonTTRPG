@@ -99,7 +99,7 @@ public class ConditionStateTests
 
         // Hard save-ends with cap 2 is enemy-facing only: refused on a party unit, accepted on an enemy.
         ImmutableArray<DurationTerm> saveEnds = [new DurationTerm.SaveEnds(Save.Will, 2, 0)];
-        var held = new ConditionInsert(Duration: saveEnds);
+        var held = new ConditionInsert(RecordedDifficulty: 10, Duration: saveEnds);
         Assert.Throws<ArgumentException>(() => Insert(Fight(), Held, P, E, held));
         Assert.Equal(saveEnds.ToArray(), Only(Insert(Fight(), Held, E, P, held).Next, Held).Condition!.Terms.ToArray());
 
@@ -124,7 +124,8 @@ public class ConditionStateTests
         Assert.Contains(Held, ex.Message);
         Assert.Contains("party-facing hard", ex.Message);
         Assert.Equal<DurationTerm>(
-            [new DurationTerm.SaveEnds(Save.Will, 2, 1)], Only(Insert(Fight(), Held, E, P).Next, Held).Condition!.Terms.ToArray());
+            [new DurationTerm.SaveEnds(Save.Will, 2, 1)],
+            Only(Insert(Fight(), Held, E, P, new ConditionInsert(RecordedDifficulty: 10)).Next, Held).Condition!.Terms.ToArray());
 
         // A party-facing record duration passes, and an override that fits the party band is accepted.
         Only(Insert(Fight(), Stun, P, E).Next, Stun);
@@ -139,6 +140,22 @@ public class ConditionStateTests
 
         // A record with no out-of-combat list uses its duration out of combat too.
         Assert.Equal<DurationTerm>([new DurationTerm.Turns(3)], Only(Insert(Calm(), Slow, P, E).Next, Slow).Condition!.Terms.ToArray());
+    }
+
+    [Fact]
+    public void A_repeat_save_term_needs_a_recorded_difficulty()
+    {
+        // Final review C4: refused at the insert, not at the first repeat save several turns later.
+        var ex = Assert.Throws<ArgumentException>(() => Insert(Fight(), Held, E, P));
+        Assert.Equal("options", ex.ParamName);
+
+        // A repeat save in a charges fallback counts too.
+        ImmutableArray<DurationTerm> charges = [new DurationTerm.Charges(1, "unitMoved", new DurationTerm.SaveEnds(Save.Will, 2, 0))];
+        ex = Assert.Throws<ArgumentException>(() => Insert(Fight(), Combined, E, P, new ConditionInsert(Duration: charges)));
+        Assert.Equal("options", ex.ParamName);
+
+        Only(Insert(Fight(), Held, E, P, new ConditionInsert(RecordedDifficulty: 10)).Next, Held);
+        Only(Insert(Fight(), Combined, E, P, new ConditionInsert(RecordedDifficulty: 10, Duration: charges)).Next, Combined);
     }
 
     [Fact]
@@ -196,7 +213,7 @@ public class ConditionStateTests
     public void End_emits_the_end_cascades_to_sustained_instances_and_grants_steeled_after_a_hard_one()
     {
         var s = Effects.Apply(Fight(), Concentrating, E, new EffectSource(E));
-        (_, s) = Insert(s, Combined, P, E);
+        (_, s) = Insert(s, Combined, P, E, new ConditionInsert(RecordedDifficulty: 10));
         long combined = Only(s, Combined).Seq;
         (_, s) = Insert(s, Sustained, P, E, new ConditionInsert(SustainedBy: combined));
         (_, s) = Insert(s, Stun, Q, E, new ConditionInsert(SustainedBy: combined));
@@ -372,10 +389,13 @@ public class ConditionStateTests
                 Terms = [new DurationTerm.Turns(1), new DurationTerm.SaveEnds(Save.Reflex, 2, 1), new DurationTerm.Charges(2, "unitMoved", new DurationTerm.TriggerEnd("turnEnded", null)), new DurationTerm.Staged(3, Save.Will, 3, Stun)],
             },
         };
+        var stun = Only(s, Stun);
         var p = s.FindUnit(P)!;
         return s with
         {
-            Effects = s.Effects.SetItem(s.Effects.IndexOf(token), rich),
+            Effects = s.Effects
+                .SetItem(s.Effects.IndexOf(token), rich)
+                .SetItem(s.Effects.IndexOf(stun), stun with { Condition = stun.Condition! with { OnOutOfCombatTerms = true } }),
             Units = s.Units.SetItem(s.Units.IndexOf(p), p with { HardTurnsLostThisFight = 1 }),
         };
     }
@@ -426,6 +446,7 @@ public class ConditionStateTests
             With(c0 with { SourceFaction = Faction.Party }),
             With(c0 with { SustainedBy = null }),
             With(c0 with { OwnTurn = true }),
+            With(c0 with { OnOutOfCombatTerms = true }),
             s with { Effects = s.Effects.SetItem(s.Effects.IndexOf(token), token with { Condition = null }) },
         };
         foreach (var v in variants)
@@ -481,5 +502,40 @@ public class ConditionStateTests
         // A bare carrier of one id may still repeat.
         var carriers = Effects.Apply(Effects.Apply(Fight(), Plain, P, new EffectSource(P)), Plain, P, new EffectSource(P));
         Snapshot.Load(Snapshot.Save(carriers));
+    }
+
+    [Fact]
+    public void A_saved_repeat_save_term_with_no_recorded_difficulty_is_a_format_error()
+    {
+        // Final review C4: such an instance would throw at its first repeat save.
+        var json = Snapshot.Save(Rich());
+        Assert.Contains("\"recordedDifficulty\":14", json);
+        var ex = Record.Exception(() => Snapshot.Load(json.Replace("\"recordedDifficulty\":14", "\"recordedDifficulty\":null")));
+        Assert.IsType<SnapshotFormatException>(ex);
+        Assert.Contains("a repeat-save term needs a recorded difficulty", ex.Message);
+    }
+
+    // Final review C2: the definition-free term shape rules hold on load as they do in content.
+    [Theory]
+    [InlineData("turns n 0", "{\"type\":\"turns\",\"n\":1}", "{\"type\":\"turns\",\"n\":0}")]
+    [InlineData("saveEnds cap 0", "\"save\":\"Reflex\",\"cap\":2,\"graceTurns\":1", "\"save\":\"Reflex\",\"cap\":0,\"graceTurns\":0")]
+    [InlineData("saveEnds grace over the cap", "\"save\":\"Reflex\",\"cap\":2,\"graceTurns\":1", "\"save\":\"Reflex\",\"cap\":2,\"graceTurns\":3")]
+    [InlineData("saveEnds grace negative", "\"save\":\"Reflex\",\"cap\":2,\"graceTurns\":1", "\"save\":\"Reflex\",\"cap\":2,\"graceTurns\":-1")]
+    [InlineData("charges n 0", "{\"type\":\"charges\",\"n\":2", "{\"type\":\"charges\",\"n\":0")]
+    [InlineData("charges with an empty on", "\"on\":\"unitMoved\"", "\"on\":\"\"")]
+    [InlineData("a charges fallback", "\"fallback\":{\"type\":\"trigger\",\"event\":\"turnEnded\"}", "\"fallback\":{\"type\":\"charges\",\"n\":1,\"on\":\"unitMoved\",\"fallback\":{\"type\":\"turns\",\"n\":1}}")]
+    [InlineData("a fallback of a bad shape", "\"fallback\":{\"type\":\"trigger\",\"event\":\"turnEnded\"}", "\"fallback\":{\"type\":\"turns\",\"n\":0}")]
+    [InlineData("trigger with an empty event", "\"event\":\"turnEnded\"", "\"event\":\"\"")]
+    [InlineData("trigger cap 0", "{\"type\":\"trigger\",\"event\":\"turnEnded\"}", "{\"type\":\"trigger\",\"event\":\"turnEnded\",\"cap\":0}")]
+    [InlineData("sustained max 0", "\"fallback\":{\"type\":\"trigger\",\"event\":\"turnEnded\"}", "\"fallback\":{\"type\":\"sustained\",\"max\":0}")]
+    [InlineData("staged stages 0", "\"save\":\"Will\",\"cap\":3,\"stages\":3", "\"save\":\"Will\",\"cap\":3,\"stages\":0")]
+    [InlineData("staged cap 0", "\"save\":\"Will\",\"cap\":3,\"stages\":3", "\"save\":\"Will\",\"cap\":0,\"stages\":3")]
+    [InlineData("a repeat save on out-of-combat terms", "\"sustainedBy\":1,\"ownTurn\":false,\"onOutOfCombatTerms\":false", "\"sustainedBy\":1,\"ownTurn\":false,\"onOutOfCombatTerms\":true")]
+    public void A_saved_term_of_a_bad_shape_is_a_format_error(string why, string from, string to)
+    {
+        var json = Snapshot.Save(Rich());
+        Assert.True(json.Contains(from, StringComparison.Ordinal), $"{why}: the save has no {from}");
+        var ex = Record.Exception(() => Snapshot.Load(json.Replace(from, to)));
+        Assert.True(ex is SnapshotFormatException, $"{why}: {ex?.GetType().Name ?? "loaded"}");
     }
 }

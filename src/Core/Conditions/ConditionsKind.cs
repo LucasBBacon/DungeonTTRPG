@@ -471,98 +471,27 @@ internal static class ConditionRules
         return null;
     }
 
-    private static ConditionProblem? CheckTerm(ConditionDefinition d, DurationTerm term, string termAt, string recordAt, bool fallback)
+    // A term's shape (DurationTerm.CheckShape), then its agreement with the record.
+    private static ConditionProblem? CheckTerm(ConditionDefinition d, DurationTerm term, string termAt, string recordAt, bool fallback) =>
+        DurationTerm.CheckShape(term, termAt, fallback) ?? CheckAgreement(d, term, termAt, recordAt);
+
+    // The record-dependent half of a term's rules, a charges fallback included: a decay term needs a decay intensity, a
+    // staged term a staged one with the same stages, and a repeat save combatOnly.
+    private static ConditionProblem? CheckAgreement(ConditionDefinition d, DurationTerm term, string termAt, string recordAt)
     {
         string key = Member(termAt, term.Tag);
         switch (term)
         {
-            case DurationTerm.Turns { N: < 1 }:
-                return new(key, "turns is at least 1.");
-            case DurationTerm.SaveEnds s:
-                if (!Enum.IsDefined(s.Save))
-                {
-                    return new(Member(key, "save"), "unknown save.");
-                }
-
-                if (s.Cap < 1)
-                {
-                    return new(Member(key, "cap"), "the cap is at least 1.");
-                }
-
-                if (s.GraceTurns < 0 || s.GraceTurns > s.Cap)
-                {
-                    return new(Member(key, "graceTurns"), $"graceTurns is from 1 to the cap ({s.Cap}).");
-                }
-
-                break;
             case DurationTerm.Charges c:
-                if (fallback)
-                {
-                    return new(key, "a fallback is any duration but charges (CO 5.1).");
-                }
-
-                if (c.N < 1)
-                {
-                    return new(Member(key, "count"), "the count is at least 1.");
-                }
-
-                if (string.IsNullOrEmpty(c.On))
-                {
-                    return new(Member(key, "on"), "the event is missing.");
-                }
-
-                if (c.Fallback is null)
-                {
-                    return new(Member(key, "fallback"), "the fallback is missing; it is mandatory (CO 5.1).");
-                }
-
-                if (CheckTerm(d, c.Fallback, Member(key, "fallback"), recordAt, fallback: true) is { } inner)
-                {
-                    return inner;
-                }
-
-                break;
+                return CheckAgreement(d, c.Fallback, Member(key, "fallback"), recordAt);
             case DurationTerm.Decay when d.Intensity.Kind != IntensityKind.Decay:
                 return new(key, "a decay duration needs intensity kind decay.");
-            case DurationTerm.TriggerEnd t:
-                if (string.IsNullOrEmpty(t.Event))
-                {
-                    return new(Member(key, "event"), "the event is missing.");
-                }
-
-                if (t.Cap is < 1)
-                {
-                    return new(Member(key, "cap"), "the cap is at least 1.");
-                }
-
-                break;
-            case DurationTerm.Sustained { Max: < 1 }:
-                return new(Member(key, "max"), "max is at least 1.");
-            case DurationTerm.Staged st:
-                if (!Enum.IsDefined(st.Save))
-                {
-                    return new(Member(key, "save"), "unknown save.");
-                }
-
-                if (st.Stages < 1 || st.Cap < 1)
-                {
-                    return new(Member(key, st.Stages < 1 ? "stages" : "cap"), "stages and the cap are at least 1.");
-                }
-
-                if (st.Then is { } then && !ContentId.IsValid(then))
-                {
-                    return new(Member(key, "then"), $"\"{then}\" is not a content id.");
-                }
-
-                if (d.Intensity.Kind != IntensityKind.Staged || d.Intensity.Stages != st.Stages)
-                {
-                    return new(Member(key, "stages"), "a staged duration needs intensity kind staged with the same stages.");
-                }
-
-                break;
+            case DurationTerm.Staged st when d.Intensity.Kind != IntensityKind.Staged || d.Intensity.Stages != st.Stages:
+                return new(Member(key, "stages"), "a staged duration needs intensity kind staged with the same stages.");
         }
 
-        // Out-of-combat repeat saves are D-23's, so a repeat save lives only on a combatOnly condition.
+        // Out-of-combat repeat saves are D-23's: a repeat save lives only on a combatOnly condition, and
+        // Conditions.Insert refuses to place one with no fight on.
         if (term is DurationTerm.SaveEnds or DurationTerm.Staged && !d.Flags.CombatOnly)
         {
             return new(key, "a saveEnds or staged duration needs combatOnly: out-of-combat repeat saves are not built (D-23).");

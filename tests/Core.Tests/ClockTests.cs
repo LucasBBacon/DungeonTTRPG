@@ -57,8 +57,14 @@ public class ClockTests
         Trigger("t.watch_death", "unitDied", "any", "test.mark"),
     ];
 
+    /// <summary>A token, intensity decay (value cap 2), <c>charges:1 {on: unitMoved, fallback: decay}</c>.</summary>
+    private const string Fading = "test.clock.fading";
+
     private static readonly RulesContext ClockRules = RulesContext.Create(
-        Load([.. EffectRecords, .. TriggerEffects], Records), hooks: Hooks);
+        Load(
+            [.. EffectRecords, .. TriggerEffects],
+            [.. Records, $$$$"""{"id": "{{{{Fading}}}}", "polarity": "token", "intensity": {"kind": "decay", "valueCap": 2}, "duration": [{"charges": {"count": 1, "on": "unitMoved", "fallback": {"decay": true}}}]}"""]),
+        hooks: Hooks);
 
     // --- The driver ---
 
@@ -161,6 +167,21 @@ public class ClockTests
     }
 
     private static int Draws(GameState s) => (int)s.Rng.Combat.Counter;
+
+    [Fact]
+    public void A_charges_term_with_a_decay_fallback_decays_and_ends_at_0()
+    {
+        // Final review C5: no move is made, so the charge is never used; the decay fallback runs the instance down.
+        var play = new Play(Held([P1, E3]));
+        play.Insert(Fading, E3, P1, new ConditionInsert(Value: 2));
+        long seq = play.Seq(Fading, E3);
+        play.End().End();
+        Assert.Equal(1, play.State(Fading, E3).Value);
+        play.End().End();
+        Assert.False(play.Holds(Fading, E3));
+        Assert.Contains(new ConditionEnded(seq, Fading, E3, ConditionEndReason.Expired), play.Log);
+        Assert.Equal(2, EndsOnTurnEnd(play, E3, seq));
+    }
 
     // --- Phase mechanics (plan call 1) ---
 

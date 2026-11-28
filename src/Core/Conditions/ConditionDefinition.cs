@@ -109,6 +109,116 @@ public abstract record DurationTerm : ICanonical
         w.EndRecord();
     }
 
+    /// <summary>
+    /// The definition-free shape of <paramref name="term"/> at <paramref name="termAt"/> (final review C2), shared by the
+    /// content rules and the save loader: <c>turns</c> at least 1; a <c>saveEnds</c> with a known save, a cap at least 1
+    /// and a grace from 0 to the cap; a <c>charges</c> count at least 1, a rule event and a fallback that is not
+    /// <c>charges</c> (<paramref name="fallback"/>: this term is one), itself of a good shape; a <c>trigger</c> event and
+    /// a cap, when given, at least 1; a <c>sustained</c> max at least 1; a <c>staged</c> term with a known save, stages
+    /// and a cap at least 1 and a <c>then</c> that is a content id. Null when the shape is good. Paths are
+    /// <c>termAt.key</c> and <c>termAt.key.field</c>, a fallback's <c>termAt.charges.fallback.key</c>.
+    /// </summary>
+    internal static ConditionProblem? CheckShape(DurationTerm term, string termAt, bool fallback)
+    {
+        ArgumentNullException.ThrowIfNull(term);
+        string key = ContentJson.Member(termAt, term.Tag);
+        switch (term)
+        {
+            case Turns { N: < 1 }:
+                return new(key, "turns is at least 1.");
+            case SaveEnds s:
+                if (!Enum.IsDefined(s.Save))
+                {
+                    return new(ContentJson.Member(key, "save"), "unknown save.");
+                }
+
+                if (s.Cap < 1)
+                {
+                    return new(ContentJson.Member(key, "cap"), "the cap is at least 1.");
+                }
+
+                if (s.GraceTurns < 0 || s.GraceTurns > s.Cap)
+                {
+                    return new(ContentJson.Member(key, "graceTurns"), $"graceTurns is from 0 to the cap ({s.Cap}).");
+                }
+
+                break;
+            case Charges c:
+                if (fallback)
+                {
+                    return new(key, "a fallback is any duration but charges (CO 5.1).");
+                }
+
+                if (c.N < 1)
+                {
+                    return new(ContentJson.Member(key, "count"), "the count is at least 1.");
+                }
+
+                if (string.IsNullOrEmpty(c.On))
+                {
+                    return new(ContentJson.Member(key, "on"), "the event is missing.");
+                }
+
+                if (c.Fallback is null)
+                {
+                    return new(ContentJson.Member(key, "fallback"), "the fallback is missing; it is mandatory (CO 5.1).");
+                }
+
+                return CheckShape(c.Fallback, ContentJson.Member(key, "fallback"), fallback: true);
+            case TriggerEnd t:
+                if (string.IsNullOrEmpty(t.Event))
+                {
+                    return new(ContentJson.Member(key, "event"), "the event is missing.");
+                }
+
+                if (t.Cap is < 1)
+                {
+                    return new(ContentJson.Member(key, "cap"), "the cap is at least 1.");
+                }
+
+                break;
+            case Sustained { Max: < 1 }:
+                return new(ContentJson.Member(key, "max"), "max is at least 1.");
+            case Staged st:
+                if (!Enum.IsDefined(st.Save))
+                {
+                    return new(ContentJson.Member(key, "save"), "unknown save.");
+                }
+
+                if (st.Stages < 1 || st.Cap < 1)
+                {
+                    return new(ContentJson.Member(key, st.Stages < 1 ? "stages" : "cap"), "stages and the cap are at least 1.");
+                }
+
+                if (st.Then is { } then && !ContentId.IsValid(then))
+                {
+                    return new(ContentJson.Member(key, "then"), $"\"{then}\" is not a content id.");
+                }
+
+                break;
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// True if <paramref name="terms"/> roll a repeat save: a <c>saveEnds</c> or <c>staged</c> term, a <c>charges</c>
+    /// fallback included.
+    /// </summary>
+    internal static bool HasRepeatSave(IEnumerable<DurationTerm> terms)
+    {
+        ArgumentNullException.ThrowIfNull(terms);
+        foreach (var term in terms)
+        {
+            if (term is SaveEnds or Staged or Charges { Fallback: SaveEnds or Staged })
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /// <summary><c>turns:N</c>: N counted wearer turns.</summary>
     public sealed record Turns(int N) : DurationTerm
     {

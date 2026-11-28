@@ -49,16 +49,19 @@ public static class Conditions
     /// (plan call 6), emitting <see cref="ConditionApplied"/> with <c>New: true</c>. It stamps
     /// <see cref="ConditionState.AppliedPhase"/> with <see cref="GameState.Phase"/>; resolves the terms from the first of
     /// the options' duration override, the record's out-of-combat list when no fight is on and the list is not empty, and
-    /// the record's duration, in canonical order; takes the charges from a <c>charges</c> term; records the source's
+    /// the record's duration, in canonical order, marking <see cref="ConditionState.OnOutOfCombatTerms"/> when the
+    /// out-of-combat list was chosen; takes the charges from a <c>charges</c> term; records the source's
     /// faction; and sets <see cref="ConditionState.OwnTurn"/> for a hard condition inserted in the wearer's own-turn
     /// window (the Act phase of its own turn in combat, the step phase out of combat; CO 5.2). A second grant of a core
     /// definition re-stamps the existing instance's applied phase instead, keeping its seq and source, and emits
     /// <see cref="ConditionApplied"/> with <c>New: false</c>. Throws <see cref="ArgumentException"/> for an unknown
     /// condition, holder or source unit, a value outside the intensity (1 for binary, charges and staged; up to the cap
     /// for valued, decay and accumulating), a sustainer that is no live instance, or an override that is empty, malformed,
-    /// names an unknown rule event, or breaks the CO 5.3 band for the holder's side; and
-    /// <see cref="InvalidOperationException"/> if the holder already holds an instance of the condition (6.1 handling is
-    /// M1-12b's), or, with no override, the record's in-combat duration breaks the party-facing band on a party holder.
+    /// names an unknown rule event, or breaks the CO 5.3 band for the holder's side, and for terms that roll a repeat save
+    /// (a <c>charges</c> fallback included) with no recorded difficulty; and <see cref="InvalidOperationException"/> if the
+    /// holder already holds an instance of the condition (6.1 handling is M1-12b's), if, with no override, the record's
+    /// in-combat duration breaks the party-facing band on a party holder (in a fight or out of one), or if the terms roll
+    /// a repeat save with no fight on (D-23).
     /// </summary>
     internal static (ImmutableArray<GameEvent> Events, GameState Next) Insert(
         RulesContext rules, GameState s, string conditionId, UnitId holder, EffectSource source, ConditionInsert options)
@@ -98,31 +101,48 @@ public static class Conditions
         }
 
         ImmutableArray<DurationTerm> terms;
+        bool onOutOfCombat = false;
         if (options.Duration is { } given)
         {
             CheckOverride(rules, definition, given, wearer.Faction == Faction.Party);
             terms = given;
         }
-        else if (s.Combat is null && !definition.OutOfCombat.IsEmpty)
-        {
-            terms = definition.OutOfCombat;
-        }
         else
         {
             // The record's own duration was checked enemy-facing at load; on a party holder it meets the party-facing band
-            // too (CO 5.3: party-facing hard control is turns:1, or a trigger with cap 1).
-            terms = definition.Duration;
+            // too (CO 5.3: party-facing hard control is turns:1, or a trigger with cap 1). Out of combat as well: it is
+            // what the combat-start step switches an instance on the out-of-combat list to.
             if (wearer.Faction == Faction.Party
-                && ConditionRules.CheckBand(definition, terms, "duration", "condition", partyFacing: true) is { } broken)
+                && ConditionRules.CheckBand(definition, definition.Duration, "duration", "condition", partyFacing: true) is { } broken)
             {
                 throw new InvalidOperationException(
                     $"{definition.Id} cannot be placed on party unit {holder.Value} without a duration override: "
                     + $"{broken.Field}: {broken.Message}");
             }
+
+            onOutOfCombat = s.Combat is null && !definition.OutOfCombat.IsEmpty;
+            terms = onOutOfCombat ? definition.OutOfCombat : definition.Duration;
         }
 
         var sorted = new List<DurationTerm>(terms);
         sorted.Sort(DurationTermOrder.Instance);
+        if (DurationTerm.HasRepeatSave(sorted))
+        {
+            // D-23: out-of-combat repeat saves are not built in M1; they would draw on the combat stream.
+            if (s.Combat is null)
+            {
+                throw new InvalidOperationException(
+                    $"{definition.Id} cannot be placed on unit {holder.Value} with no fight on: its terms roll a repeat save, "
+                    + "and out-of-combat repeat saves are not built (D-23). It needs an out-of-combat list, or an override with no repeat save.");
+            }
+
+            if (options.RecordedDifficulty is null)
+            {
+                throw new ArgumentException(
+                    $"{definition.Id}'s terms roll a repeat save, which needs a recorded difficulty.", nameof(options));
+            }
+        }
+
         int? charges = null;
         foreach (var term in sorted)
         {
@@ -142,7 +162,8 @@ public static class Conditions
             options.RecordedDifficulty,
             faction,
             options.SustainedBy,
-            definition.IsHard && InOwnTurnWindow(s, holder));
+            definition.IsHard && InOwnTurnWindow(s, holder),
+            onOutOfCombat);
         long seq = s.NextEffectSeq;
         var next = Effects.Apply(s, conditionId, holder, source, state);
         return ([new ConditionApplied(seq, conditionId, holder, source, value, true)], next);
@@ -214,16 +235,18 @@ public static class Conditions
     /// <see cref="ConditionEndReason.CombatStart"/> through <see cref="End"/>; what it sustains ends with it, also with
     /// <see cref="ConditionEndReason.CombatStart"/>, and no Steeled follows any of these ends (CO 7.2 excepts
     /// <c>combatStart</c>);</item>
-    /// <item>an instance running on its record's out-of-combat terms switches to the record's in-combat
+    /// <item>an instance running on its record's out-of-combat terms (<see cref="ConditionState.OnOutOfCombatTerms"/>; an
+    /// override equal to the list is not) switches to the record's in-combat
     /// <see cref="ConditionDefinition.Duration"/>, counted from now, when that list's effective end comes sooner than what
     /// it has left (CO 5.5, 6.3): its <see cref="ConditionState.Terms"/> are replaced, its
     /// <see cref="ConditionState.TurnsCounted"/> goes to 0 and its charges follow the new terms, with no event. An
-    /// instance that does not switch keeps its terms and count.</item>
+    /// instance that does not switch keeps its terms, count and mark.</item>
     /// </list>
     /// Then every unit's <see cref="Unit.HardTurnsLostThisFight"/> resets to 0 (CO 5.7). The messages are returned to
     /// be held; combat start sorts them (<see cref="SortHeld"/>) and emits them after <see cref="CombatStarted"/>. Throws
     /// <see cref="InvalidOperationException"/> as <see cref="Read"/> does, or when a switch would put a record's in-combat
-    /// duration that breaks the party-facing band on a party holder (as <see cref="Insert"/> does).
+    /// duration that breaks the party-facing band on a party holder: an assertion, since <see cref="Insert"/> refuses
+    /// such a record on a party holder without an override.
     /// </summary>
     internal static (ImmutableArray<GameEvent> Held, GameState Next) CombatStart(RulesContext rules, GameState s)
     {
@@ -260,7 +283,7 @@ public static class Conditions
                     + $"{instance.Holder.Value}: {broken.Field}: {broken.Message}");
             }
 
-            var switched = state with { Terms = terms, TurnsCounted = 0, Charges = ChargesOf(terms) };
+            var switched = state with { Terms = terms, TurnsCounted = 0, Charges = ChargesOf(terms), OnOutOfCombatTerms = false };
             s = s with { Effects = s.Effects.SetItem(s.Effects.IndexOf(instance), instance with { Condition = switched }) };
         }
 
@@ -299,7 +322,7 @@ public static class Conditions
     // (CO 5.5: "if that is shorter"; plan call 14).
     private static ImmutableArray<DurationTerm>? Switches(ConditionDefinition d, ConditionState c)
     {
-        if (d.OutOfCombat.IsEmpty || d.Duration.IsEmpty || !c.Terms.SequenceEqual(Sorted(d.OutOfCombat)))
+        if (!c.OnOutOfCombatTerms || d.Duration.IsEmpty)
         {
             return null;
         }
@@ -311,14 +334,17 @@ public static class Conditions
     }
 
     // The counted turns an instance on `terms` has left before its first terminator's effective end (CO 6.3): turns for
-    // turns; the cap for saveEnds, trigger, staged and sustained; a charges term's fallback; the value for decay; 1 for
+    // turns; the cap for saveEnds, trigger, staged and sustained; a charges term's fallback; the value for decay (a
+    // charges term's decay fallback included); 1 for
     // a window (it ends by the source's next turn); null (never) for untilRest, untilCamp and a trigger without a cap.
     private static long? Left(ImmutableArray<DurationTerm> terms, ConditionState c)
     {
         long? least = null;
         foreach (var term in terms)
         {
-            long? left = term is DurationTerm.Decay ? c.Value : EffectiveEnd(term) is { } end ? Math.Max(0, end - c.TurnsCounted) : null;
+            long? left = term is DurationTerm.Decay or DurationTerm.Charges { Fallback: DurationTerm.Decay }
+                ? c.Value
+                : EffectiveEnd(term) is { } end ? Math.Max(0, end - c.TurnsCounted) : null;
             if (left is { } l && (least is null || l < least))
             {
                 least = l;

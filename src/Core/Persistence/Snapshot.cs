@@ -755,6 +755,7 @@ public static class Snapshot
         [JsonPropertyName("sourceFaction"), JsonPropertyOrder(6), JsonRequired] public string? SourceFaction { get; set; }
         [JsonPropertyName("sustainedBy"), JsonPropertyOrder(7), JsonRequired] public long? SustainedBy { get; set; }
         [JsonPropertyName("ownTurn"), JsonPropertyOrder(8), JsonRequired] public bool? OwnTurn { get; set; }
+        [JsonPropertyName("onOutOfCombatTerms"), JsonPropertyOrder(9), JsonRequired] public bool? OnOutOfCombatTerms { get; set; }
 
         public static ConditionDto From(ConditionState c)
         {
@@ -774,6 +775,7 @@ public static class Snapshot
                 SourceFaction = c.SourceFaction?.ToString(),
                 SustainedBy = c.SustainedBy,
                 OwnTurn = c.OwnTurn,
+                OnOutOfCombatTerms = c.OnOutOfCombatTerms,
             };
         }
 
@@ -786,7 +788,8 @@ public static class Snapshot
             RecordedDifficulty,
             SourceFaction is null ? null : PersistenceJson.ParseEnum<Faction>(SourceFaction, "condition sourceFaction"),
             SustainedBy,
-            PersistenceJson.Need(OwnTurn, "condition ownTurn"));
+            PersistenceJson.Need(OwnTurn, "condition ownTurn"),
+            PersistenceJson.Need(OnOutOfCombatTerms, "condition onOutOfCombatTerms"));
     }
 
     /// <summary>

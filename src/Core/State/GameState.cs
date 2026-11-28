@@ -495,8 +495,9 @@ public sealed record GameState(
     /// The phase clock and the condition parts of <paramref name="effects"/>, for structure only (M1-12a plan calls 1 and
     /// 2); the save loader applies it. The phase is not negative and the step is defined. Each condition part has a value,
     /// turn count and charge count that are not negative, an applied phase from 0 to <paramref name="phase"/>, initialised
-    /// terms in strictly ascending canonical order (<see cref="DurationTermOrder"/>), a defined source faction, and a
-    /// sustainer that is another live instance; no holder has two instances with
+    /// terms in strictly ascending canonical order (<see cref="DurationTermOrder"/>), each of a good shape
+    /// (<see cref="DurationTerm.CheckShape"/>), a recorded difficulty and no out-of-combat mark when a term rolls a repeat
+    /// save, a defined source faction, and a sustainer that is another live instance; no holder has two instances with
     /// a condition part of one id (a bare carrier may repeat). Whether the id names a condition, and the own-turn mark's
     /// hard tier, need the rules (<c>Conditions.Read</c>). Throws <see cref="ArgumentException"/> naming the problem.
     /// </summary>
@@ -541,6 +542,24 @@ public sealed record GameState(
                 if (c.Terms[k] is null || (k > 0 && DurationTermOrder.Instance.Compare(c.Terms[k - 1], c.Terms[k]) >= 0))
                 {
                     throw new ArgumentException($"{who}the terms must be in canonical order, each once.", nameof(effects));
+                }
+
+                if (DurationTerm.CheckShape(c.Terms[k], ContentJson.Item("terms", k), fallback: false) is { } shape)
+                {
+                    throw new ArgumentException($"{who}{shape.Field}: {shape.Message}", nameof(effects));
+                }
+            }
+
+            if (DurationTerm.HasRepeatSave(c.Terms))
+            {
+                if (c.RecordedDifficulty is null)
+                {
+                    throw new ArgumentException($"{who}a repeat-save term needs a recorded difficulty.", nameof(effects));
+                }
+
+                if (c.OnOutOfCombatTerms)
+                {
+                    throw new ArgumentException($"{who}out-of-combat terms carry no repeat save (D-23).", nameof(effects));
                 }
             }
 

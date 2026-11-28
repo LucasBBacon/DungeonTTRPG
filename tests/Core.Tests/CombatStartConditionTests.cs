@@ -53,6 +53,12 @@ public class CombatStartConditionTests
     /// <summary>Minor, <c>turns:3</c>, <c>combatOnly</c>.</summary>
     private const string SoftFight = "test.cs.soft_fight";
 
+    /// <summary>Hard, <c>trigger {unitMoved, cap 2}</c> (enemy-facing only), out of combat <c>turns:5</c>.</summary>
+    private const string Snare = "test.cs.snare";
+
+    /// <summary>Minor, <c>turns:2</c>, out of combat <c>turns:3</c>.</summary>
+    private const string Lag = "test.cs.lag";
+
     private static readonly string[] Extra =
     [
         $$"""{"id": "{{Groggy}}", "polarity": "harmful", "tier": "minor", "flags": {"combatStartEnds": true}, "duration": [{"turns": 3}], "modifiers": [{"target": "initiative", "add": -50}]}""",
@@ -63,6 +69,8 @@ public class CombatStartConditionTests
         $$"""{"id": "{{Fumble}}", "polarity": "harmful", "tier": "minor", "flags": {"combatStartEnds": true}, "duration": [{"turns": 3}], "modifiers": [{"target": "attackRoll", "rollMode": "disadvantage"}]}""",
         $$"""{"id": "{{Clumsy}}", "polarity": "harmful", "tier": "minor", "duration": [{"turns": 3}], "modifiers": [{"target": "attackRoll", "rollMode": "disadvantage"}]}""",
         $$"""{"id": "{{HardFight}}", "polarity": "harmful", "tier": "hard", "flags": {"combatOnly": true}, "duration": [{"turns": 1}]}""",
+        $$$"""{"id": "{{{Snare}}}", "polarity": "harmful", "tier": "hard", "duration": [{"trigger": {"event": "unitMoved", "cap": 2}}], "outOfCombat": [{"turns": 5}]}""",
+        $$"""{"id": "{{Lag}}", "polarity": "harmful", "tier": "minor", "duration": [{"turns": 2}], "outOfCombat": [{"turns": 3}]}""",
         $$"""{"id": "{{SoftFight}}", "polarity": "harmful", "tier": "minor", "flags": {"combatOnly": true}, "duration": [{"turns": 3}]}""",
     ];
 
@@ -201,6 +209,43 @@ public class CombatStartConditionTests
 
         // A switch is no message.
         Assert.Single(events);
+    }
+
+    [Fact]
+    public void A_party_holder_is_refused_a_record_whose_in_combat_duration_breaks_the_party_band_out_of_combat_too()
+    {
+        // Final review C1/C7: the switch target would break the party band at the next fight start, so the insert is
+        // refused where it is caused, in either branch.
+        var ex = Assert.Throws<InvalidOperationException>(() => Insert(Calm(), Snare, U1, U3));
+        Assert.Contains("party-facing hard", ex.Message);
+        Assert.Throws<InvalidOperationException>(() => Insert(Turns.BeginCombat(StartRules, Calm()).Next, Snare, U1, U3));
+
+        // An enemy holder of the same record takes its out-of-combat terms and switches at the fight start.
+        var s = Insert(Calm(), Snare, U3, U1);
+        Assert.Equal([new DurationTerm.Turns(5)], State(s, Snare, U3).Terms.ToArray());
+        Assert.True(State(s, Snare, U3).OnOutOfCombatTerms);
+        var (_, next) = Turns.BeginCombat(StartRules, s);
+        Assert.Equal([new DurationTerm.TriggerEnd("unitMoved", 2)], State(next, Snare, U3).Terms.ToArray());
+    }
+
+    [Fact]
+    public void An_override_equal_to_the_out_of_combat_list_never_switches()
+    {
+        // Without an override, Lag runs on its out-of-combat turns:3 and switches to its shorter turns:2.
+        var plain = Insert(Calm(), Lag, U1, U3);
+        Assert.True(State(plain, Lag, U1).OnOutOfCombatTerms);
+        Assert.Equal([new DurationTerm.Turns(2)], State(Turns.BeginCombat(StartRules, plain).Next, Lag, U1).Terms.ToArray());
+
+        // An override that happens to equal the list is the caller's duration: it is kept.
+        var given = Insert(Calm(), Lag, U1, U3, new ConditionInsert(Duration: [new DurationTerm.Turns(3)]));
+        Assert.False(State(given, Lag, U1).OnOutOfCombatTerms);
+        var (_, next) = Turns.BeginCombat(StartRules, given);
+        Assert.Equal(State(given, Lag, U1), State(next, Lag, U1));
+        Assert.Equal([new DurationTerm.Turns(3)], State(next, Lag, U1).Terms.ToArray());
+
+        // In a fight the record's own duration is never on its out-of-combat terms.
+        var fight = Turns.BeginCombat(StartRules, Calm()).Next;
+        Assert.False(State(Insert(fight, Lag, U1, U3), Lag, U1).OnOutOfCombatTerms);
     }
 
     [Fact]

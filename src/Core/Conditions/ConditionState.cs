@@ -60,7 +60,9 @@ public enum ConditionEndReason
 /// <c>charges</c> term; <see cref="RecordedDifficulty"/> the difficulty recorded at application;
 /// <see cref="SourceFaction"/> the source's faction at insert (null: the environment), kept after the source dies;
 /// <see cref="SustainedBy"/> the seq of the instance that sustains it; <see cref="OwnTurn"/> set when a hard instance was
-/// inserted in its wearer's own-turn window. The record compares <see cref="Terms"/> by reference; compare terms with
+/// inserted in its wearer's own-turn window; <see cref="OnOutOfCombatTerms"/> set when <see cref="Conditions.Insert"/>
+/// chose the record's out-of-combat list (no override, no fight on), the one case the combat-start step may switch
+/// (CO 5.5). The record compares <see cref="Terms"/> by reference; compare terms with
 /// <c>SequenceEqual</c>.
 /// </summary>
 public sealed record ConditionState(
@@ -72,7 +74,8 @@ public sealed record ConditionState(
     long? RecordedDifficulty,
     Faction? SourceFaction,
     long? SustainedBy,
-    bool OwnTurn) : ICanonical
+    bool OwnTurn,
+    bool OnOutOfCombatTerms) : ICanonical
 {
     /// <inheritdoc />
     public void WriteCanonical(CanonicalWriter w)
@@ -82,7 +85,7 @@ public sealed record ConditionState(
             throw new ArgumentException("A condition's terms are uninitialised.");
         }
 
-        w.BeginRecord(9);
+        w.BeginRecord(10);
         w.Int32(0, Value);
         w.Int64(1, AppliedPhase);
         w.Int32(2, TurnsCounted);
@@ -92,6 +95,7 @@ public sealed record ConditionState(
         w.OptionalString(6, SourceFaction is { } f ? Enum.GetName(f) ?? throw new ArgumentException($"Unknown faction {f}.") : null);
         w.OptionalRecord(7, SustainedBy is { } seq ? new Long(seq) : null);
         w.Bool(8, OwnTurn);
+        w.Bool(9, OnOutOfCombatTerms);
         w.EndRecord();
     }
 

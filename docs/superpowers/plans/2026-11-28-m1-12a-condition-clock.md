@@ -78,13 +78,14 @@
    - CO 5.2's counting test decides which turn ends count for every count: `turns` countdowns, `saveEnds` and `staged` rolls and caps, `trigger` caps, `sustained` maxima, fallbacks and `decay` drops.
 2. **The instance part.** `EffectInstance` gains `ConditionState? Condition`:
 
-   `ConditionState(int Value, long AppliedPhase, int TurnsCounted, ImmutableArray<DurationTerm> Terms, int? Charges, long? RecordedDifficulty, Faction? SourceFaction, long? SustainedBy, bool OwnTurn)`.
+   `ConditionState(int Value, long AppliedPhase, int TurnsCounted, ImmutableArray<DurationTerm> Terms, int? Charges, long? RecordedDifficulty, Faction? SourceFaction, long? SustainedBy, bool OwnTurn, bool OnOutOfCombatTerms)`.
    - **`Terms`** is the active terminator list, resolved at insert from the first of: `ConditionInsert.Duration` (the CO 17.1 override), then the record's `OutOfCombat` when there is no fight and that list is not empty, then the record's `Duration`. Every clock item reads `Terms`, never the record or `s.Combat`.
    - **`TurnsCounted`** counts the wearer turn ends that passed the counting test. Every terminator's "remaining" is derived from it, standing in for CO 17.2's illustrative `remaining`.
    - **`Value`** holds the value, level or, for `staged`, the current stage (1 at insert).
    - **`SourceFaction`** is recorded at insert, so hostility (5.7) and "the source is dead" (5.6) still work after the source dies.
    - **`OwnTurn`** is set when a hard instance is inserted in its wearer's own-turn window.
-   - A load checks this part for structure only: a non-negative phase and counts, sorted terms, and one instance with a `Condition` per (holder, id). A bare carrier from `effects.json` may still repeat. Where rules are present (`Conditions.Insert`, the clock), an `OwnTurn` instance whose definition is not hard, or a `Condition` whose id names no condition definition, throws `InvalidOperationException`.
+   - **`OnOutOfCombatTerms`** (final review C1) is set when insert chose the record's `OutOfCombat` list; only such an instance switches at combat start (an override equal to the list does not).
+   - A load checks this part for structure only: a non-negative phase and counts, sorted terms of a good shape (`DurationTerm.CheckShape`, final review C2), a recorded difficulty and no `OnOutOfCombatTerms` when a term rolls a repeat save (C4, D-23), and one instance with a `Condition` per (holder, id). A bare carrier from `effects.json` may still repeat. Where rules are present (`Conditions.Insert`, the clock), an `OwnTurn` instance whose definition is not hard, or a `Condition` whose id names no condition definition, throws `InvalidOperationException`.
    - `markedHard`, `binding` and the M2 fields are M1-12b's or later.
 3. **Conditions are a content kind** (`ConditionsKind`, file `conditions/conditions.json`, `IdsAreContentIds`, not `ReadByGeneration`).
    - **No production file in M1-12a.** Registering the kind still changes the manifest and display hashes, so Task 3 regenerates `ContentHashes.g.cs` once. M1-13 adds the file.
