@@ -12,6 +12,13 @@ namespace Dungeon.Core.Effects;
 /// actions raise join the end of the queue, which is also the command's event list. A command fires at most
 /// <see cref="Effects.MaxTriggerFirings"/> triggers, across all its dispatch phases (M1-11 plan call 8). Nothing fires
 /// once the run has ended.
+/// <para>
+/// Stale firings (M1-12a plan call 11): the due list is computed once per queued event and rule event, so an instance a
+/// firing creates does not answer the event being processed; it answers later events in the queue, its own
+/// <see cref="EffectApplied"/> included. Before each firing its instance is looked up by seq in the current state: a
+/// removed instance is skipped (no count, no event), and a live one fires as it is now. An <c>applyEffect</c> whose
+/// recipient is no longer in the state is skipped.
+/// </para>
 /// </summary>
 internal static class TriggerDispatch
 {
@@ -53,6 +60,13 @@ internal static class TriggerDispatch
                         break;
                     }
 
+                    // An earlier firing may have removed or changed the instance (M1-12a plan call 11): a removed one is
+                    // skipped, uncounted; a live one fires as it is now.
+                    if (Current(state, firing.Seq) is not { } instance)
+                    {
+                        continue;
+                    }
+
                     if (firings == Effects.MaxTriggerFirings)
                     {
                         throw new TriggerLoopException(i, firings);
@@ -60,7 +74,7 @@ internal static class TriggerDispatch
 
                     firings++;
                     fired = true;
-                    state = Fire(rules, state, e, subject, firing, Emit);
+                    state = Fire(rules, state, e, subject, instance, firing.Trigger, Emit);
                 }
             }
         }
@@ -81,7 +95,7 @@ internal static class TriggerDispatch
                 if (string.Equals(trigger.On, eventId, StringComparison.Ordinal)
                     && (trigger.Scope == TriggerScope.Any || instance.Holder == subject))
                 {
-                    due.Add(new Firing(trigger.Priority, SourceRank(state, instance.Source), instance.Seq, t, instance, trigger));
+                    due.Add(new Firing(trigger.Priority, SourceRank(state, instance.Source), instance.Seq, t, trigger));
                 }
             }
         }
@@ -109,12 +123,26 @@ internal static class TriggerDispatch
         throw new InvalidOperationException($"An effect's source unit {unit.Value} is not in the state.");
     }
 
-    // Runs the trigger's actions in order.
-    private static GameState Fire(
-        RulesContext rules, GameState state, GameEvent e, UnitId subject, Firing firing, Action<GameEvent> emit)
+    // The instance with this seq in the state, or null when it is gone. A linear walk: it assumes nothing of the order.
+    private static EffectInstance? Current(GameState state, long seq)
     {
-        var instance = firing.Instance;
-        foreach (var action in firing.Trigger.Do)
+        foreach (var instance in state.Effects)
+        {
+            if (instance.Seq == seq)
+            {
+                return instance;
+            }
+        }
+
+        return null;
+    }
+
+    // Runs the trigger's actions in order, for the instance as it is in the state when the firing starts.
+    private static GameState Fire(
+        RulesContext rules, GameState state, GameEvent e, UnitId subject, EffectInstance instance, Trigger trigger,
+        Action<GameEvent> emit)
+    {
+        foreach (var action in trigger.Do)
         {
             // A run end stops the firing between its actions.
             if (state.Ended is not null)
@@ -124,7 +152,13 @@ internal static class TriggerDispatch
 
             if (action.ApplyEffect is { } effectId)
             {
+                // A recipient or source an earlier action removed gets nothing (plan call 11): the action is skipped.
                 var holder = action.To == TriggerTarget.Holder ? instance.Holder : subject;
+                if (state.FindUnit(holder) is null || state.FindUnit(instance.Holder) is null)
+                {
+                    continue;
+                }
+
                 var source = new EffectSource(instance.Holder);
                 long seq = state.NextEffectSeq;
                 state = Effects.Apply(state, effectId, holder, source);
@@ -144,7 +178,7 @@ internal static class TriggerDispatch
 
     // One trigger due to fire. Trigger is the trigger's index in its definition, so two triggers of one instance on
     // one event still have a total order.
-    private sealed record Firing(int Priority, int SourceRank, long Seq, int TriggerIndex, EffectInstance Instance, Trigger Trigger);
+    private sealed record Firing(int Priority, int SourceRank, long Seq, int TriggerIndex, Trigger Trigger);
 
     // Priority, then source rank, then seq, then trigger index: a total order, since seqs are unique.
     [TotalComparer]

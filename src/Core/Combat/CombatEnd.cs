@@ -16,8 +16,9 @@ public static class CombatEnd
     /// <see cref="Turns.ResumeIfVacated"/> (plan call 11), so a fight won on an enemy's turn starts no further turn. It
     /// does nothing, returning <paramref name="s"/> itself with no events, out of combat, on an ended run ("If the hero
     /// reached 0, none of this runs"), or while any <see cref="Faction.Enemy"/> unit remains. Otherwise: 1, the current
-    /// unit's turn ends as in <see cref="Turns.Advance"/> (<see cref="TurnEnded"/>, then the turn-end step), skipped
-    /// when the turn is vacated (its holder is dead and has no turn-end step, CO 5.4) and under the
+    /// unit's turn ends as in <see cref="Turns.EndTurn"/> (<see cref="TurnEnded"/>, then the turn-end step), skipped
+    /// when the turn is vacated (its holder is dead and has no turn-end step, CO 5.4, or its turn has already ended,
+    /// M1-12a plan call 10) and under the
     /// <see cref="CombatState.BeforeRound1"/> marker (no turn has started: "If the fight is won, no <c>TurnStarted</c> or
     /// <c>TurnEnded</c> follows", M1-10 rulings record 5, step 8); 2, <c>combatOnly</c> instances end; 3, Downed
     /// companions get up; 4, XP and level-ups; 5, the combat state is cleared, every unit gets a fresh turn budget
@@ -45,8 +46,9 @@ public static class CombatEnd
         var events = ImmutableArray.CreateBuilder<GameEvent>();
         var next = s;
 
-        // 1. The current unit's turn ends as in Turns.Advance: TurnEnded, then the turn-end step (CO 5.4's contents:
-        //    M1-12). A vacated turn's holder is dead and has no turn-end step; before round 1 no turn has started.
+        // 1. The current unit's turn ends as in Turns.EndTurn: TurnEnded, then the turn-end step (CO 5.4's contents:
+        //    M1-12). A vacated turn's holder is dead and has no turn-end step, or its turn has already ended (Turns.EndTurn);
+        //    before round 1 no turn has started.
         if (!combat.TurnVacated && !combat.BeforeRound1)
         {
             var (ended, afterEnd) = Turns.EndCurrentTurn(rules, next);

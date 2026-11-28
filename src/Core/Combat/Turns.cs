@@ -201,31 +201,44 @@ public static class Turns
     }
 
     /// <summary>
-    /// Ends the current unit's turn and starts the next (plan call 9): <see cref="EndCurrentTurn"/>
-    /// (<see cref="TurnEnded"/>, then the turn-end step), then moves to the next slot (passing the last slot wraps to
-    /// slot 0 and round + 1), then <see cref="StartTurn"/>. Throws <see cref="InvalidOperationException"/> out of combat,
-    /// on an ended run, or while the turn is vacated.
+    /// Ends the current unit's turn and starts the next (plan call 9): <see cref="EndTurn"/>, then
+    /// <see cref="ResumeIfVacated"/> (passing the last slot wraps to slot 0 and round + 1, then <see cref="StartTurn"/>),
+    /// with no dispatch between them. The engine dispatches the two halves separately (M1-12a plan call 10); this is for
+    /// direct callers. Throws <see cref="InvalidOperationException"/> out of combat, on an ended run, or while the turn is
+    /// vacated.
     /// </summary>
     public static (ImmutableArray<GameEvent> Events, GameState Next) Advance(RulesContext rules, GameState s)
     {
-        ArgumentNullException.ThrowIfNull(rules);
-        var combat = LiveTurn(s);
-        var (ended, afterEnd) = EndCurrentTurn(rules, s);
-
-        int current = combat.Current + 1;
-        long round = combat.Round;
-        if (current == combat.Order.Length)
-        {
-            current = 0;
-            round = checked(round + 1);
-        }
-
-        var (turn, next) = StartTurn(rules, afterEnd with { Combat = combat with { Current = current, Round = round } });
+        var (ended, afterEnd) = EndTurn(rules, s);
+        var (turn, next) = ResumeIfVacated(rules, afterEnd);
         return ([.. ended, .. turn], next);
     }
 
     /// <summary>
-    /// The current unit's turn end, shared by <see cref="Advance"/> and <c>CombatEnd.EndIfWon</c> so both give the same
+    /// Ends the current unit's turn without starting the next (M1-12a plan call 10): <see cref="EndCurrentTurn"/>
+    /// (<see cref="TurnEnded"/>, then the turn-end step), then <see cref="CombatState.Current"/> moves to the next slot
+    /// with <see cref="CombatState.TurnVacated"/> set. It does not wrap: past the last slot, <see cref="CombatState.Current"/>
+    /// equals the order's length, and <see cref="ResumeIfVacated"/> wraps to slot 0 and round + 1. Between the two, no
+    /// unit holds the turn: <c>turnEnded</c> triggers find the ending unit in <see cref="TurnEnded.Unit"/>, still in the
+    /// state, and must not read <see cref="CombatState.CurrentUnit"/>. If the turn-end step ends the run, ends the fight or
+    /// vacates the turn itself, the result is left as the step made it. Throws <see cref="InvalidOperationException"/> out
+    /// of combat, on an ended run, or while the turn is vacated or the fight is held before round 1.
+    /// </summary>
+    public static (ImmutableArray<GameEvent> Events, GameState Next) EndTurn(RulesContext rules, GameState s)
+    {
+        ArgumentNullException.ThrowIfNull(rules);
+        LiveTurn(s);
+        var (ended, afterEnd) = EndCurrentTurn(rules, s);
+        if (afterEnd.Ended is not null || afterEnd.Combat is not { TurnVacated: false } combat)
+        {
+            return (ended, afterEnd);
+        }
+
+        return (ended, afterEnd with { Combat = combat with { Current = combat.Current + 1, TurnVacated = true } });
+    }
+
+    /// <summary>
+    /// The current unit's turn end, shared by <see cref="EndTurn"/> and <c>CombatEnd.EndIfWon</c> so both give the same
     /// order: <see cref="TurnEnded"/>, then the turn-end step (CO 5.4; empty until M1-12, whose events then follow
     /// <see cref="TurnEnded"/> in both paths). The caller has checked that a live, unvacated turn exists.
     /// </summary>
@@ -243,9 +256,9 @@ public static class Turns
         s with { Units = s.Units.Select(u => u.Budget == default ? u : u with { Budget = default }).ToImmutableArray() };
 
     /// <summary>
-    /// Starts the turn a dead unit vacated (plan call 11; callers run it after <c>CombatEnd.EndIfWon</c>, once the
-    /// command's queue has drained). It does nothing, returning <paramref name="s"/> itself, unless combat is active, the
-    /// run has not ended, <see cref="CombatState.TurnVacated"/> is set and the order is non-empty. Otherwise it clears
+    /// Starts the turn a dead unit vacated (plan call 11), or the next turn after <see cref="EndTurn"/> (M1-12a plan
+    /// call 10); callers run it after <c>CombatEnd.EndIfWon</c>, once the command's queue has drained. It does nothing,
+    /// returning <paramref name="s"/> itself, unless combat is active, the run has not ended, <see cref="CombatState.TurnVacated"/> is set and the order is non-empty. Otherwise it clears
     /// the flag, wraps <see cref="CombatState.Current"/> equal to the order's length to slot 0 in round + 1, and calls
     /// <see cref="StartTurn"/>.
     /// </summary>

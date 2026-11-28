@@ -449,7 +449,8 @@ public static class Engine
 
     /// <summary>
     /// Ends the current unit's turn (M1-10 plan call 9): refused out of combat, for an unknown unit, and out of turn
-    /// (a vacated turn and a fight held before round 1 included); otherwise <see cref="Turns.Advance"/>.
+    /// (a vacated turn and a fight held before round 1 included); otherwise <see cref="Turns.EndTurn"/>, whose events
+    /// <see cref="Apply"/> dispatches before the settle loop starts the next turn (M1-12a plan call 10).
     /// </summary>
     private static StepResult ApplyEndTurn(GameState state, EndTurnCommand end, RulesContext rules)
     {
@@ -469,7 +470,9 @@ public static class Engine
             return Reject(state, CommandError.NotYourTurn);
         }
 
-        var (events, next) = Turns.Advance(rules, state);
+        // The turn ends here; Apply dispatches its events, then the settle loop ends a won fight or starts the next turn
+        // (M1-12a plan call 10).
+        var (events, next) = Turns.EndTurn(rules, state);
         return new StepResult(next, events, CommandError.None);
     }
 

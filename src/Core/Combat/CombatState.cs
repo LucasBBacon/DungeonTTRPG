@@ -4,9 +4,11 @@ namespace Dungeon.Core.Combat;
 
 /// <summary>
 /// A fight in progress (M1-10 plan call 4): the initiative order fixed at combat start, the index of the slot whose turn
-/// it is, and the round (from 1). <see cref="TurnVacated"/> is set when the unit holding the turn died: then
-/// <see cref="Current"/> is the index the next turn takes in the shrunk order, and <see cref="Current"/> equal to the
-/// order's length (an empty order included) means the next turn wraps to slot 0 in a new round.
+/// it is, and the round (from 1). <see cref="TurnVacated"/> is set when no unit holds the turn: its holder died, or its
+/// turn ended and the next has not started (<c>Turns.EndTurn</c>; M1-12a plan call 10, which widens the M1-10 meaning).
+/// Then <see cref="Current"/> is the index the next turn takes (in the shrunk order, after a death), and
+/// <see cref="Current"/> equal to the order's length (an empty order included) means the next turn wraps to slot 0 in a
+/// new round.
 /// <see cref="BeforeRound1"/> is the "before round 1" marker (M1-11 plan call 7; M1-10 rulings record 5, step 6): the
 /// fight is recorded but round 1 has not started, so no unit holds the turn; it is valid only with round 1, current 0,
 /// the turn not vacated and a non-empty order. The record compares <see cref="Order"/> by reference; compare orders
